@@ -161,3 +161,19 @@ The experimental surfacing branch extends the local inspect command to account
 for surfacing and feature counters in its dirty-state result. The combined
 local candidate still requires independent source, notice, provenance and
 runtime review before distribution or deployment.
+
+Vendored PNLTRI 2.1.1 is loaded by the application HTML. Its delivered
+`lib/pnltri.js` SHA-256 is pinned by the preparer; compared with
+`build/pnltri.js` in upstream `jahting/pnltri.js` commit
+`72f162d39da3a84c78ff16181940da79f3f50ba9`, its two differences are
+whitespace only. The packaged `PNLTRI-LICENSE.txt` is the exact upstream MIT
+license and copyright notice; the preparer verifies both hashes. Source:
+https://github.com/jahting/pnltri.js/tree/72f162d39da3a84c78ff16181940da79f3f50ba9
+
+This does not close the notice inventory. `index-webos.html` also loads
+vendored `lib/verb.js` and `lib/diff_match_patch.js`; their exact upstream
+version, modification history and notice/source requirements still need
+review. The webpack inventory flags, among others, regenerator-runtime 0.10.5,
+clipper-lib 6.2.1 and emitter-component 1.1.1 for review, and the OCCT and
+toolchain/transitive inputs remain separate review items. The package retains
+the local-only gate and makes no claim of legal or source completeness.

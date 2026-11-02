@@ -25,6 +25,11 @@ ENGINE_COMMIT = '5efaf53accb45bac475155fc4d5552642c19e91e'
 ENGINE_REPOSITORY = 'https://github.com/Autodrop3d/occt-interpreter.git'
 ENGINE_SHA256 = {'occt.wasm': 'fee4624786bb114de1d381340f05f0cdf47e6700b9fd62ef8a5dace82c8fda77',
                  'occt.js': '3c56e74e6e08411436a68fb930bab38aedd3137e4369af2bc67fd382e568787e'}
+# The shipped 2.1.1 build differs from upstream only by whitespace. Check
+# both assets so a future version cannot silently reuse an unrelated notice.
+PNLTRI_ASSET_SHA256 = '216d497c825d96a4c03ff387fa80feb0696b063ef8f3d76ab9521a5c6fcd129f'
+PNLTRI_NOTICE_SHA256 = '3898350fd0df396d2045f5cabb7c9b52859ca6ec274ff2f6e0d30b3ef97b3a75'
+PNLTRI_NOTICE = HERE / 'notices' / 'pnltri-MIT.txt'
 # A specific local research build, not an independently reproducible artifact.
 ENGINE_TREE = 'f820351dd52207a3ad757bdeaf5510f7b4ae01fc'
 ENGINE_SOURCE_NOTICES = {
@@ -336,6 +341,13 @@ def main():
         for name in ('occt.js', 'occt.wasm'):
             if sha256_file(staging / 'lib-assets/jsketcher-occ-engine' / name) != selected_engine[name]:
                 raise RuntimeError('Built OCCT artifact differs from selected input: ' + name)
+        if sha256_file(staging / 'lib/pnltri.js') != PNLTRI_ASSET_SHA256:
+            raise RuntimeError('Vendored PNLTRI differs from reviewed asset')
+        if PNLTRI_NOTICE.is_symlink() or sha256_file(PNLTRI_NOTICE) != PNLTRI_NOTICE_SHA256:
+            raise RuntimeError('PNLTRI upstream notice differs from reviewed text')
+        shutil.copyfile(PNLTRI_NOTICE, staging / 'PNLTRI-LICENSE.txt')
+        if sha256_file(staging / 'PNLTRI-LICENSE.txt') != PNLTRI_NOTICE_SHA256:
+            raise RuntimeError('Copied PNLTRI notice hash mismatch')
         shutil.copyfile(root / 'LICENSE', staging / 'JSKETCHER-LICENSE.txt')
         occ = root / 'node_modules' / 'jsketcher-occ-engine'
         for src, dst in [('license.md', 'OCCT-exception.txt'), ('LICENSE_LGPL_21.txt', 'OCCT-LGPL-2.1.txt'),
@@ -352,6 +364,7 @@ def main():
             'The npm occt.wasm SHA-256 is ' + ENGINE_SHA256['occt.wasm'] + '; occt.js SHA-256 is ' + ENGINE_SHA256['occt.js'] + '. '
             'numeric.js source commit ' + NUMERIC_COMMIT + ' has four concatenated inputs whose SHA-256 matches the pinned npm input ' + NUMERIC_INPUT_SHA256 + '; the embedded build transforms that input at build time. '
             'Manifold and Clipper2 source archives and a local build receipt are included; two builds used the same toolchain, which does not independently verify provenance. '
+            'PNLTRI-LICENSE.txt is the upstream notice for the separately shipped vendored PNLTRI script. The other vendored scripts and transitive inputs still require independent notice and source review. '
             'The provided archives and notices are not proof of complete corresponding source. '
             'Do not publish or distribute this runtime until the exact engine provenance, corresponding source, transitive dependency notices and license obligations are reviewed.\n', encoding='utf-8')
         run('git', '-C', str(root), 'archive', '--format=zip', '--output=' + str(staging / 'jsketcher-fork-source.zip'), FORK_COMMIT)
