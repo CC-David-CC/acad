@@ -259,3 +259,17 @@ fixture, `PUPPETEER_CORE_PATH` to the test dependency, and optionally
 creates two native boxes with explicit materials, opens them, exports a .3mf,
 and asserts that the ambiguous inset fails without a file. This is not a real
 account, gateway, server file, phone, or production-CSP qualification.
+
+The optional `tests/jsketcher-3mf-account.test.cjs` additionally needs an
+isolated local preview with signed gateway and a hand-staged research catalog;
+set `CODI_TEST_URL`, `PUPPETEER_CORE_PATH`, `CODI_3MF_BOX_FIXTURE`, and
+`CODI_ENCLOSURE_FIXTURE` to loopback/test-only values. `CODI_PHONE=1` emulates
+390×844 touch; `CODI_4K=1` uses a 3840×2160 viewport. It verifies browser and
+signed-gateway bytes match, a new browser session reads them, another account
+is denied, and the inset project is refused without an output file. If
+`CODI_3MF_OUTPUT` is set, `tests/validate-jsketcher-3mf.py` can inspect the
+result with the independent consortium lib3mf 2.5.0 strict reader. Test
+accounts and files must remain in the isolated preview and be removed after
+use. This local test does not qualify the currently unbuilt signed runtime
+manifest, physical phones, user-facing authoring, generic material contacts,
+or printing.
