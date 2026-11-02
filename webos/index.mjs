@@ -86,6 +86,35 @@ export function mount(host){
    if(!valid()||!c.valid()||frame!==active)return;writeStarted=true;const result=await c.files.write(p,content,expected);if(!valid()||!c.valid()||frame!==active)return;state.path=p;state.version=result.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';baseline=prior;setWatch(c,p,result.version);const earlier=!unchanged(frame,prior);tell(result.status==='conflict'?'Saved on this device with a conflict. Resolve it in Files.':earlier?'Saved an earlier model on this device; newer changes remain unsaved.':'Saved on this device; syncing with the server: '+p+'.');
   }catch(e){if(/review material assignments/i.test(e.message))review.hidden=false;tell('Could not finish saving: '+e.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));}finally{busy=false;}
  }
+ // Research-only, scoped to supported assigned models. The iframe never gets
+ // account credentials; this host owns file selection and version checks.
+ async function export3mf(){
+  if(busy||!valid()||!active)return;busy=true;let writeStarted=false;
+  try{
+   const frame=active,prior=snapshot(frame),manager=frame.contentWindow?.__CAD_APP?.projectManager;
+   if(typeof manager?.exportCore3mfResearch!=='function')throw Error('3MF export is unavailable.');
+   const chosen=await host.ui.prompt('Export the model to My files:',{title:'Export 3MF',value:'/Design.3mf',confirmLabel:'Export',signal:host.signal});
+   if(chosen===null||!valid())return;
+   if(!unchanged(frame,prior))throw Error('The model changed while choosing a file. Try again.');
+   const c=await mirrorFileContext();if(!valid()||!c.valid()||frame!==active)return;
+   const p=c.path(chosen);if(!/\.3mf$/i.test(p))throw Error('Use a .3mf filename.');let expected=null,old;
+   try{old=await c.files.stat(p);}catch(e){if(e.message!=='File not found.')throw e;}
+   if(old){
+    if(old.status==='conflict')throw Error('Resolve this file conflict in Files first.');
+    if(!await host.ui.confirm('Replace '+p+'?',{title:'Replace export?',confirmLabel:'Replace',cancelLabel:'Keep existing',danger:true,signal:host.signal}))return;
+    if(!valid()||!c.valid()||frame!==active)return;
+    const current=await c.files.stat(p);if(current.status==='conflict'||current.version!==old.version)throw Error('The file changed while confirming. Try again.');expected=old.version;
+   }
+   if(!unchanged(frame,prior))throw Error('The model changed while preparing export. Try again.');
+   tell('Preparing the 3MF model…');const bytes=await manager.exportCore3mfResearch();
+   if(!valid()||!c.valid()||frame!==active)return;
+   if(!(bytes instanceof frame.contentWindow.Uint8Array)||bytes.byteLength>128*1024*1024)throw Error('The 3MF export is invalid or too large.');
+   if(!unchanged(frame,prior))throw Error('The model changed during export. Try again.');
+   writeStarted=true;const result=await c.files.write(p,bytes,expected);
+   if(!valid()||!c.valid()||frame!==active)return;
+   tell(result.status==='conflict'?'Export saved with a conflict. Resolve it in Files.':!unchanged(frame,prior)?'Exported the earlier model; newer changes are not included.':'Exported to My files; syncing with the server: '+p+'.');
+  }catch(e){tell('Could not export 3MF: '+e.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));}finally{busy=false;}
+ }
  async function importDxf(){
   if(busy||!valid()||!active)return;busy=true;
   try{
@@ -105,7 +134,7 @@ export function mount(host){
    if(valid()&&frame===active)tell('Imported supported shapes from '+p+'. Save the project to keep them.');
   }catch(e){tell('Could not import DXF: '+e.message+' The existing sketch was kept where recovery was possible.');}finally{busy=false;}
  }
- function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(!data||data.type!=='file-action'||!['open','save','save-as','import-dxf'].includes(data.action))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='import-dxf')void importDxf();else void saveProject(data.action==='save-as');}
+ function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(!data||data.type!=='file-action'||!['open','save','save-as','import-dxf','export-3mf'].includes(data.action))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='import-dxf')void importDxf();else if(data.action==='export-3mf')void export3mf();else void saveProject(data.action==='save-as');}
  window.addEventListener('message',receive);
  const retry=textButton('Retry opening project',()=>{if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner)void openProject(w.launchContext.path,{initial:true});});retry.hidden=true;
  const review=textButton('Review material assignments',()=>void reviewManufacturing());review.hidden=true;
