@@ -231,3 +231,10 @@ fixture, and `PUPPETEER_CORE_PATH`. `CODI_PHONE=1` sets phone viewport/touch
 emulation. It creates disposable accounts only in the isolated preview, checks
 real mirror/server sync, fresh-session reopen, account isolation and stale edit
 refusal. It does not exercise a physical phone, confirm a rebind or export 3MF.
+
+The experimental stale-save recovery offers an explicit assignment review when
+all referenced operations resolve uniquely. A confirmation lists at most ten
+regions, their materials and appearances; larger lists are refused pending a
+full review interface. The warning states that this does not validate geometry
+or manufacturing safety. The proposal is invalidated if the model changes
+before confirmation. This is not an automatic topology-preservation guarantee.
