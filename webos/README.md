@@ -71,7 +71,7 @@ access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
 license review are release gates. Generated assets and `node_modules` are not
-committed. The current experimental pin is `bcab4a2fd1f02277e566dd62706248ebf49726fc`,
+committed. The current experimental pin is `7e9233b8beac533ee7847dd1dc642714ae5c9639`,
 including opt-in numeric and source-built Manifold changes. The local input
 directory must contain the pinned Manifold JS/Wasm, source archives and build
 receipt; hashes are checked before use. Two matching builds used the same R730
@@ -121,6 +121,13 @@ The surfacing patch toolbar, OCC tools, and separate Native Mesh Box and Native
 Mesh Boolean actions are present. A model-wide engine selector and complete
 native equivalents are not implemented; incompatible engine solids cannot be
 mixed.
+
+At UI candidate 7e9233b8, `tests/jsketcher-native-ui-account.test.mjs`
+passed at 1080p, 4K and emulated-phone viewport sizes against real isolated
+accounts. It clicks native and OCC toolbar actions, enters numeric fields,
+chooses native Boolean operands, saves, closes and reopens through Files.
+Phone dropdown choices use browser automation after a touch; a physical phone
+and the full range of 3D pointer interactions remain unqualified.
 
 The adapter refuses non-isolated state and injects the captured production CSP
 only into this preview process; it leaves the ordinary preview source alone.
