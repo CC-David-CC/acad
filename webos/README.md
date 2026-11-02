@@ -238,3 +238,24 @@ regions, their materials and appearances; larger lists are refused pending a
 full review interface. The warning states that this does not validate geometry
 or manufacturing safety. The proposal is invalidated if the model changes
 before confirmation. This is not an automatic topology-preservation guarantee.
+
+Research-only 3MF host bridge: `DesktopExport3MF` asks the embedding host to
+write supported, fully assigned native meshes to My files. It is experimental
+and not deployable: unassigned and unsupported bodies, stale revisions,
+surfacing data and unverified material-interface overlap fail closed. Native
+box and narrow Boolean research do not prove arbitrary mesh validity; no
+qualified verifier currently accepts the enclosure's inset material contact.
+The host checks account, frame, project snapshot, filename and existing file
+version around asynchronous work. The current synchronous mesh processing,
+8 MiB temporary manufacturing snapshot cap, output-size handling, model
+revision, signing, resource cancellation, real-account file synchronization
+and third-party source/license provenance still require release qualification.
+
+`tests/jsketcher-3mf-standin.test.mjs` uses a loopback Chromium in-memory file
+stand-in: set `CODI_JPROJECT` to the matching fork, `CODI_TEST_URL` to the
+locally staged host, `CODI_ENCLOSURE_FIXTURE` to the synthetic 7-feature
+fixture, `PUPPETEER_CORE_PATH` to the test dependency, and optionally
+`CODI_3MF_OUTPUT` / `CODI_3MF_BOX_FIXTURE` to write throwaway evidence. It
+creates two native boxes with explicit materials, opens them, exports a .3mf,
+and asserts that the ambiguous inset fails without a file. This is not a real
+account, gateway, server file, phone, or production-CSP qualification.

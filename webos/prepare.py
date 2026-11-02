@@ -19,7 +19,7 @@ import zipfile
 
 HERE = Path(__file__).resolve().parent
 # Update only after reviewing the fork commit and the generated manifest.
-FORK_COMMIT = '518a4666cfc5c94acb153f0cd315a2ca1625eb2f'
+FORK_COMMIT = 'ed2f02fe5ca6d337e7d5c847e1c39f2a7dc793d7'
 DEFAULT_REPOSITORY = 'example.invalid:/srv/data/git/JSKetcher.git'
 ENGINE_COMMIT = '5efaf53accb45bac475155fc4d5552642c19e91e'
 ENGINE_REPOSITORY = 'https://github.com/Autodrop3d/occt-interpreter.git'
