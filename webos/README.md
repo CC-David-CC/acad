@@ -51,6 +51,18 @@ Separate physical devices, physical touch, broad CAD fidelity, full app
 security and arbitrary hostile files remain unverified. Do not publish the app
 or relax the desktop CSP to accommodate it.
 
+The in-page `inspect` command reports the current path, dirty state, total
+operation count, up to 100 operation type names of at most 128 UTF-16 units
+each, and sketch count. It refuses an open sketch, unfinished operation,
+failed rebuild, rewound history, or ongoing file operation. It reads the
+workspace without calling the project-save or storage-write functions.
+Local registered-account desktop and emulated-phone tests covered those
+guards, bounded names, independent windows and registration cleanup; the
+processing flag was forced in the host test, with real pipeline behavior
+tested separately in the fork. The dirty comparison serializes the model and
+sketches locally, so memory use grows with project size. Inspection is not
+CAD or manufacturing validation, and it is not a remote-agent interface.
+
 ## Rebuilding and local testing
 
 `prepare.py` currently produces **local-only experimental output** using
@@ -59,7 +71,7 @@ access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
 license review are release gates. Generated assets and `node_modules` are not
-committed. The current experimental pin is `92b6a3ab6749f0a00fe669b383b67734eb9c72c7`,
+committed. The current experimental pin is `bb9648c750cda5e85c5d516fc28aa8fe76e2f569`,
 including the opt-in numeric change. Run the normal public app builder only
 after the preparer succeeds and its asset manifest is reviewed.
 
