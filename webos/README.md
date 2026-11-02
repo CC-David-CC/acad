@@ -170,10 +170,35 @@ whitespace only. The packaged `PNLTRI-LICENSE.txt` is the exact upstream MIT
 license and copyright notice; the preparer verifies both hashes. Source:
 https://github.com/jahting/pnltri.js/tree/72f162d39da3a84c78ff16181940da79f3f50ba9
 
-This does not close the notice inventory. `index-webos.html` also loads
-vendored `lib/verb.js` and `lib/diff_match_patch.js`; their exact upstream
-version, modification history and notice/source requirements still need
-review. The webpack inventory flags, among others, regenerator-runtime 0.10.5,
-clipper-lib 6.2.1 and emitter-component 1.1.1 for review, and the OCCT and
+`index-webos.html` also loads `verb.js` and `diff_match_patch.js` directly.
+The original jSketcher `verb.js` at commit `933f7ae4` is byte-identical to
+`build/js/verb.js` in upstream `pboyer/verb` commit
+`976e8bcf167ea115fb0d70584d575e4efd9c449c` (package version 2.0.1). The
+current fork includes later modifications. `VERB-LICENSE.txt` is that upstream
+commit's MIT license and copyright notice. The current `diff_match_patch.js`
+is byte-identical to `javascript/diff_match_patch.js` at upstream
+`google/diff-match-patch` commit `0ae308daa77aeddb089cd6b7b0a443fca026266e`.
+The archive supplies that commit's Apache 2.0 license and the copyright/license
+header from its uncompressed source, separately, since its minified file has no
+header. These matches do not prove the complete source or notice requirements
+of the generated libraries and their incorporated components. Exact delivered
+asset and notice hashes are enforced by the preparer.
+
+The webpack bundle includes `babel-polyfill/node_modules/regenerator-runtime`
+0.10.5. Its installed `runtime.js` matches upstream commit
+`74c76264bf3be1f2bf60082c2e03dec522c96816`, tag `runtime@0.10.5`.
+Although its npm metadata says MIT, that source file identifies the upstream
+Facebook BSD license and accompanying PATENTS grant. Both exact upstream texts
+are supplied, with the source file and notice bytes checked by the preparer.
+This evidence is retained for independent rights review.
+
+The separate JavaScript `clipper-lib` 6.2.1 dependency is also a webpack
+candidate. Its package source identifies Angus Johnson and Boost Software
+License 1.0; the preparer verifies its source hash and includes that copyright
+and attribution header and the Boost 1.0 license text. This dependency is
+separate from the C++ Clipper2 source archive supplied for Manifold.
+
+This does not close the notice inventory. The webpack inventory flags, among
+others, emitter-component 1.1.1 for review, and the OCCT and
 toolchain/transitive inputs remain separate review items. The package retains
 the local-only gate and makes no claim of legal or source completeness.

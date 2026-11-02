@@ -1,6 +1,10 @@
 {
   "assets": [
     "node_modules/jsketcher-build/BUILD-RECEIPT.json",
+    "node_modules/jsketcher-build/CLIPPER-LIB-BOOST-LICENSE.txt",
+    "node_modules/jsketcher-build/CLIPPER-LIB-COPYRIGHT.txt",
+    "node_modules/jsketcher-build/DIFF-MATCH-PATCH-COPYRIGHT.txt",
+    "node_modules/jsketcher-build/DIFF-MATCH-PATCH-LICENSE.txt",
     "node_modules/jsketcher-build/JSKETCHER-LICENSE.txt",
     "node_modules/jsketcher-build/NUMERIC-LICENSE.txt",
     "node_modules/jsketcher-build/NUMERIC-QUADPROG-LICENSE.txt",
@@ -10,6 +14,9 @@
     "node_modules/jsketcher-build/OCCT-upstream-info.txt",
     "node_modules/jsketcher-build/PNLTRI-LICENSE.txt",
     "node_modules/jsketcher-build/PROVENANCE-LOCAL-ONLY.txt",
+    "node_modules/jsketcher-build/REGENERATOR-RUNTIME-LICENSE.txt",
+    "node_modules/jsketcher-build/REGENERATOR-RUNTIME-PATENTS.txt",
+    "node_modules/jsketcher-build/VERB-LICENSE.txt",
     "node_modules/jsketcher-build/clipper2-source.zip",
     "node_modules/jsketcher-build/css/toolkit.css",
     "node_modules/jsketcher-build/dependency-notices.zip",

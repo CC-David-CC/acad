@@ -30,6 +30,27 @@ ENGINE_SHA256 = {'occt.wasm': 'fee4624786bb114de1d381340f05f0cdf47e6700b9fd62ef8
 PNLTRI_ASSET_SHA256 = '216d497c825d96a4c03ff387fa80feb0696b063ef8f3d76ab9521a5c6fcd129f'
 PNLTRI_NOTICE_SHA256 = '3898350fd0df396d2045f5cabb7c9b52859ca6ec274ff2f6e0d30b3ef97b3a75'
 PNLTRI_NOTICE = HERE / 'notices' / 'pnltri-MIT.txt'
+# Byte-pinned vendored library and separately supplied upstream notices.
+OTHER_VENDOR_INPUTS = {
+    'lib/verb.js': ('55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3', [
+        ('verb-MIT.txt', 'VERB-LICENSE.txt', 'ecb6d0b090a248f5e3845fad33da9ed29aa170fd624e107d16a95f0e18b81e01')]),
+    'lib/diff_match_patch.js': ('aac7655a215d8448d95d9871e8d8a40ac3d9aaf38d81ab2ccc43c1cd267b8fa3', [
+        ('diff-match-patch-APACHE.txt', 'DIFF-MATCH-PATCH-LICENSE.txt', 'cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30'),
+        ('diff-match-patch-header.txt', 'DIFF-MATCH-PATCH-COPYRIGHT.txt', '599ebff195998ef66252e80d07398d206e3c71f26e30a1676f86c2b19122a750')]),
+}
+CLIPPER_PACKAGE_SHA256 = '7b5f0993132342745915a54bebabaed842b7b5e13fb1f8f9fcbcefc5311c5845'
+CLIPPER_NOTICES = [
+    ('boost-1.0.txt', 'CLIPPER-LIB-BOOST-LICENSE.txt', 'c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566'),
+    ('clipper-lib-header.txt', 'CLIPPER-LIB-COPYRIGHT.txt', '1ea23a0f50d2885c7d9f71c9d5f22d8e021bbefff3084582078e0a7924a6603e'),
+]
+VENDOR_NOTICE_DIR = HERE / 'notices'
+REGENERATOR_PACKAGE_FILE = 'babel-polyfill/node_modules/regenerator-runtime/runtime.js'
+REGENERATOR_PACKAGE_SHA256 = 'c79f77316587802b9788b06f4b1a69caac03367a20ee27c984e3767082aaa9ca'
+REGENERATOR_NOTICES = [
+    ('regenerator-runtime-BSD.txt', 'REGENERATOR-RUNTIME-LICENSE.txt', 'acacd15e10610fc0aca63c3e09ba85910c302f17f4175ec3e5bb76ab5cba0de8'),
+    ('regenerator-runtime-PATENTS.txt', 'REGENERATOR-RUNTIME-PATENTS.txt', '5663cbf7746947ee91d02c6d45163694238bd07ceadcfc3f6dab2fbe23b85b86'),
+]
+
 # A specific local research build, not an independently reproducible artifact.
 ENGINE_TREE = 'f820351dd52207a3ad757bdeaf5510f7b4ae01fc'
 ENGINE_SOURCE_NOTICES = {
@@ -348,6 +369,34 @@ def main():
         shutil.copyfile(PNLTRI_NOTICE, staging / 'PNLTRI-LICENSE.txt')
         if sha256_file(staging / 'PNLTRI-LICENSE.txt') != PNLTRI_NOTICE_SHA256:
             raise RuntimeError('Copied PNLTRI notice hash mismatch')
+        for asset, (expected, notice_files) in OTHER_VENDOR_INPUTS.items():
+            if sha256_file(staging / asset) != expected:
+                raise RuntimeError('Vendored asset differs from reviewed input: ' + asset)
+            for source_name, output_name, notice_hash in notice_files:
+                notice = VENDOR_NOTICE_DIR / source_name
+                if notice.is_symlink() or sha256_file(notice) != notice_hash:
+                    raise RuntimeError('Vendored notice differs from reviewed text: ' + source_name)
+                shutil.copyfile(notice, staging / output_name)
+                if sha256_file(staging / output_name) != notice_hash:
+                    raise RuntimeError('Copied vendored notice hash mismatch: ' + output_name)
+        if sha256_file(root / 'node_modules' / REGENERATOR_PACKAGE_FILE) != REGENERATOR_PACKAGE_SHA256:
+            raise RuntimeError('Bundled regenerator runtime differs from reviewed input')
+        for source_name, output_name, notice_hash in REGENERATOR_NOTICES:
+            notice = VENDOR_NOTICE_DIR / source_name
+            if notice.is_symlink() or sha256_file(notice) != notice_hash:
+                raise RuntimeError('Regenerator notice differs from reviewed text: ' + source_name)
+            shutil.copyfile(notice, staging / output_name)
+            if sha256_file(staging / output_name) != notice_hash:
+                raise RuntimeError('Copied regenerator notice hash mismatch: ' + output_name)
+        if sha256_file(root / 'node_modules/clipper-lib/clipper.js') != CLIPPER_PACKAGE_SHA256:
+            raise RuntimeError('Bundled clipper-lib differs from reviewed input')
+        for source_name, output_name, notice_hash in CLIPPER_NOTICES:
+            notice = VENDOR_NOTICE_DIR / source_name
+            if notice.is_symlink() or sha256_file(notice) != notice_hash:
+                raise RuntimeError('Clipper-lib notice differs from reviewed text: ' + source_name)
+            shutil.copyfile(notice, staging / output_name)
+            if sha256_file(staging / output_name) != notice_hash:
+                raise RuntimeError('Copied clipper-lib notice hash mismatch: ' + output_name)
         shutil.copyfile(root / 'LICENSE', staging / 'JSKETCHER-LICENSE.txt')
         occ = root / 'node_modules' / 'jsketcher-occ-engine'
         for src, dst in [('license.md', 'OCCT-exception.txt'), ('LICENSE_LGPL_21.txt', 'OCCT-LGPL-2.1.txt'),
@@ -364,7 +413,7 @@ def main():
             'The npm occt.wasm SHA-256 is ' + ENGINE_SHA256['occt.wasm'] + '; occt.js SHA-256 is ' + ENGINE_SHA256['occt.js'] + '. '
             'numeric.js source commit ' + NUMERIC_COMMIT + ' has four concatenated inputs whose SHA-256 matches the pinned npm input ' + NUMERIC_INPUT_SHA256 + '; the embedded build transforms that input at build time. '
             'Manifold and Clipper2 source archives and a local build receipt are included; two builds used the same toolchain, which does not independently verify provenance. '
-            'PNLTRI-LICENSE.txt is the upstream notice for the separately shipped vendored PNLTRI script. The other vendored scripts and transitive inputs still require independent notice and source review. '
+            'Upstream notices are supplied for the separately shipped vendored PNLTRI, verb and diff-match-patch scripts and bundled regenerator runtime and clipper-lib. Their transitive inputs and complete corresponding source still require independent review. '
             'The provided archives and notices are not proof of complete corresponding source. '
             'Do not publish or distribute this runtime until the exact engine provenance, corresponding source, transitive dependency notices and license obligations are reviewed.\n', encoding='utf-8')
         run('git', '-C', str(root), 'archive', '--format=zip', '--output=' + str(staging / 'jsketcher-fork-source.zip'), FORK_COMMIT)
