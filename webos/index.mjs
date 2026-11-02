@@ -43,6 +43,16 @@ export function mount(host){
   });host.onDispose(unregister);
  }
  function setWatch(c,path,version){watch();watch=()=>{};const serial=++watchRevision;warning.hidden=true;warning.textContent='';const check=async()=>{const seq=++checkRevision;let message='';try{const entry=await c.files.stat(path);if(entry.status==='conflict')message='This project has conflicting copies. Resolve them in Files before saving.';else if(entry.version!==version)message='The saved project changed. Save a copy or open it again.';}catch{message='The saved project is unavailable. Your current model remains open.';}if(valid()&&c.valid()&&serial===watchRevision&&seq===checkRevision&&state.path===path&&state.version===version){warning.textContent=message;warning.hidden=!message;}};watch=c.files.subscribe(check);queueMicrotask(check);}
+ async function reviewManufacturing(){
+  if(busy||!valid()||!active)return;busy=true;const frame=active,manager=frame.contentWindow?.__CAD_APP?.projectManager;
+  try{
+   if(typeof manager?.proposeHostManufacturingRebind!=='function'||typeof manager?.confirmHostManufacturingRebind!=='function')throw Error('Assignment review is unavailable.');
+   const proposal=await manager.proposeHostManufacturingRebind();if(!valid()||frame!==active)return;
+   const accepted=await host.ui.confirm(`The model changed. ${proposal.regionCount} regions in ${proposal.objectCount} printable objects still have uniquely identified producing operations. Assignments: ${proposal.details.join('; ')}. Inspect the model and assignments before confirming. This does not verify geometry or manufacturing safety.`,{title:'Review material assignments',confirmLabel:'Keep these assignments',cancelLabel:'Keep editing',signal:host.signal});
+   if(!accepted||!valid()||frame!==active){manager.cancelHostManufacturingRebind?.();return;}
+   manager.confirmHostManufacturingRebind(proposal.token);review.hidden=true;tell('Assignments updated for this model. Save to keep the changes.');
+  }catch(e){manager?.cancelHostManufacturingRebind?.();tell('Could not update assignments: '+e.message);}finally{busy=false;}
+ }
  async function openProject(selected,{initial=false}={}){
   if(busy||!valid()||!active)return;tell('Preparing to open a project…');busy=true;let next=null;
   try{
@@ -52,7 +62,7 @@ export function mount(host){
    const c=await mirrorFileContext();if(!valid()||!c.valid())return;const p=c.path(chosen),file=await c.files.read(p);if(!valid()||!c.valid())return;if(file.status==='conflict')throw Error('Resolve this project conflict in Files first.');if(file.data.byteLength>128*1024*1024)throw Error('Project exceeds 128 MiB.');const json=new TextDecoder('utf-8',{fatal:true}).decode(file.data);
    if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');tell('Rebuilding the selected model…');next=createFrame(true);candidate=next;const ctx=await waitReady(next);if(!valid()||!c.valid())return;await ctx.projectManager.restoreSnapshotInEmptyWorkspace(json);if(!valid()||!c.valid())return;
    const restored=snapshot(next),now=await c.files.stat(p);if(!valid()||!c.valid())return;if(now.version!==file.version||now.status==='conflict')throw Error('The project changed while opening. Try again.');if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');
-   active=next;candidate=null;next=null;active.classList.remove('jsketcher-staging');detach(previous);baseline=restored;state.path=p;state.version=file.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';setWatch(c,p,file.version);retry.hidden=true;tell('Opened '+p+'.');
+   active=next;candidate=null;next=null;active.classList.remove('jsketcher-staging');detach(previous);baseline=restored;state.path=p;state.version=file.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';setWatch(c,p,file.version);retry.hidden=true;review.hidden=true;tell('Opened '+p+'.');
   }catch(e){tell('Could not open project: '+e.message+(initial?'':' The current model remains open.'));}finally{if(next)detach(next);if(candidate===next)candidate=null;busy=false;}
  }
  async function saveProject(asCopy=false){
@@ -74,7 +84,7 @@ export function mount(host){
    if(old){if(old.status==='conflict')throw Error('Resolve this project conflict in Files first.');if(p===state.path&&state.version){if(old.version!==state.version)throw Error('The saved project changed. Save a copy or reopen it.');}else{if(!await host.ui.confirm('Replace '+p+'?',{title:'Replace project?',confirmLabel:'Replace',cancelLabel:'Keep existing',danger:true,signal:host.signal}))return;if(!valid()||!c.valid()||frame!==active)return;const current=await c.files.stat(p);if(current.status==='conflict'||current.version!==old.version)throw Error('The project changed while confirming. Try again.');}expected=old.version;
    }else if(p===state.path&&state.version)throw Error('The saved project was removed. Save a copy or reopen it.');
    if(!valid()||!c.valid()||frame!==active)return;writeStarted=true;const result=await c.files.write(p,content,expected);if(!valid()||!c.valid()||frame!==active)return;state.path=p;state.version=result.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';baseline=prior;setWatch(c,p,result.version);const earlier=!unchanged(frame,prior);tell(result.status==='conflict'?'Saved on this device with a conflict. Resolve it in Files.':earlier?'Saved an earlier model on this device; newer changes remain unsaved.':'Saved on this device; syncing with the server: '+p+'.');
-  }catch(e){tell('Could not finish saving: '+e.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));}finally{busy=false;}
+  }catch(e){if(/review material assignments/i.test(e.message))review.hidden=false;tell('Could not finish saving: '+e.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));}finally{busy=false;}
  }
  async function importDxf(){
   if(busy||!valid()||!active)return;busy=true;
@@ -98,7 +108,8 @@ export function mount(host){
  function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(!data||data.type!=='file-action'||!['open','save','save-as','import-dxf'].includes(data.action))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='import-dxf')void importDxf();else void saveProject(data.action==='save-as');}
  window.addEventListener('message',receive);
  const retry=textButton('Retry opening project',()=>{if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner)void openProject(w.launchContext.path,{initial:true});});retry.hidden=true;
- body.append(warning,stage,status,retry);
+ const review=textButton('Review material assignments',()=>void reviewManufacturing());review.hidden=true;
+ body.append(warning,stage,status,retry,review);
  queueMicrotask(async()=>{if(!valid())return;try{active=createFrame(false);await waitReady(active);if(!valid())return;baseline=snapshot();tell('New model. Use File to open or save a project in My files.');if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner){await openProject(w.launchContext.path,{initial:true});if(valid()&&state.path!==w.launchContext.path)retry.hidden=false;}}catch(e){tell('Could not start jSketcher: '+e.message);}});
  return {element:body,dispose(){if(disposed)return;disposed=true;watchRevision++;checkRevision++;watch();delete state.hasChanges;window.removeEventListener('message',receive);for(const [id,reject] of timers){clearTimeout(id);reject(Error('Window closed.'));}timers.clear();for(const frame of [...frames])detach(frame);candidate=null;active=null;}};
 }
