@@ -1,0 +1,17 @@
+{
+  "bitwiseMatchesNpm": false,
+  "cmake": "3.28.3",
+  "emscripten": "2.0.30",
+  "evidenceCommit": "33805f927ca3fdb09d62a26910ab863509940ec1",
+  "independentRebuildsMatch": false,
+  "interpreterCommit": "5efaf53accb45bac475155fc4d5552642c19e91e",
+  "interpreterTree": "f820351dd52207a3ad757bdeaf5510f7b4ae01fc",
+  "jsSHA256": "3c56e74e6e08411436a68fb930bab38aedd3137e4369af2bc67fd382e568787e",
+  "licenseCleared": false,
+  "localOnly": true,
+  "node": "24.19.0",
+  "npmWasmSHA256": "fee4624786bb114de1d381340f05f0cdf47e6700b9fd62ef8a5dace82c8fda77",
+  "schema": "codi-occt-source-build/1",
+  "sourceArchiveSHA256": "86ccaa4d1974b15a1ee8a26e69db20e7c04f5000ffd4924008cebcd1a82fb9e4",
+  "wasmSHA256": "a2b2f7daf6a4eb98b975f8aec136f6cbaf2720295ea32e71edb13ff4c5ceaecb"
+}

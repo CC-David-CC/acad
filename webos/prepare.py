@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 import re
 import shutil
+import stat
 import subprocess
 import tempfile
 import zipfile
@@ -24,6 +25,16 @@ ENGINE_COMMIT = '5efaf53accb45bac475155fc4d5552642c19e91e'
 ENGINE_REPOSITORY = 'https://github.com/Autodrop3d/occt-interpreter.git'
 ENGINE_SHA256 = {'occt.wasm': 'fee4624786bb114de1d381340f05f0cdf47e6700b9fd62ef8a5dace82c8fda77',
                  'occt.js': '3c56e74e6e08411436a68fb930bab38aedd3137e4369af2bc67fd382e568787e'}
+# A specific local research build, not an independently reproducible artifact.
+ENGINE_TREE = 'f820351dd52207a3ad757bdeaf5510f7b4ae01fc'
+ENGINE_SOURCE_NOTICES = {
+    'LICENSE': ('OCCT-INTERPRETER-LICENSE.txt', 'edbdb645c995925144afe5aac6b405c58ede5ff03e7f50ed6e5edff5223ef679'),
+    'occt/LICENSE_LGPL_21.txt': ('OCCT-LGPL-2.1.txt', 'e237fa56668030e928551ddd60f05df5fe957f75eab874bbd017e085ed722e7c'),
+    'occt/OCCT_LGPL_EXCEPTION.txt': ('OCCT-exception.txt', '04580a884ea6cea294402649ff7b5cbb167d47462d1340a4ed33e550db10a81b'),
+}
+OCCT_SOURCE_INPUTS = {'occt.js': ENGINE_SHA256['occt.js'],
+                      'occt.wasm': 'a2b2f7daf6a4eb98b975f8aec136f6cbaf2720295ea32e71edb13ff4c5ceaecb',
+                      'build-receipt.json': 'c060fade266b5d33c8170f13c56f781be9493c3352e27715a3fc6804c27f0a00'}
 NUMERIC_REPOSITORY = 'https://github.com/sloisel/numeric.git'
 NUMERIC_COMMIT = '656fa1254be540f428710738ca9c1539625777f1'  # upstream tag v1.2.6
 NUMERIC_INPUT_SHA256 = '5dcaba2016fd237091e3a17b0dc272fb21f0e2b15d7628f95a0ad0cd4cdf4020'
@@ -60,6 +71,24 @@ def sha256_file(path):
             h.update(chunk)
     return h.hexdigest()
 
+
+
+def copy_checked_input(source, target, expected):
+    """Snapshot a regular, non-symlink input and hash the bytes actually copied."""
+    fd = os.open(source, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC | os.O_NONBLOCK)
+    try:
+        source_stat = os.fstat(fd)
+        if not stat.S_ISREG(source_stat.st_mode) or source_stat.st_size > 64 * 1024 * 1024:
+            raise RuntimeError('OCCT research input is not a suitably sized regular file: ' + source.name)
+        h = hashlib.sha256()
+        with os.fdopen(fd, 'rb', closefd=False) as src, target.open('xb') as dst:
+            for chunk in iter(lambda: src.read(1024 * 1024), b''):
+                h.update(chunk)
+                dst.write(chunk)
+        if h.hexdigest() != expected:
+            raise RuntimeError('OCCT research input differs from its pinned hash: ' + source.name)
+    finally:
+        os.close(fd)
 
 def notices(node_modules, destination, index_bundle=None):
     """Collect installed package metadata and supplied notices, not source.
@@ -206,6 +235,7 @@ def main():
     parser.add_argument('--engine-repo', default=ENGINE_REPOSITORY, help='Git source containing the pinned interpreter commit')
     parser.add_argument('--numeric-repo', default=NUMERIC_REPOSITORY, help='Git source containing the pinned numeric 1.2.6 commit')
     parser.add_argument('--manifold-research-input', type=Path, required=True, help='Hash-pinned local-only source-built Manifold artifacts and source archives')
+    parser.add_argument('--occt-source-research-input', type=Path, help='Optional exact local source-built OCCT candidate and receipt; experimental use only')
     parser.add_argument('--update-manifest', action='store_true', help='Write a reviewed candidate asset manifest')
     parser.add_argument('--experimental-local-only', action='store_true', help='Acknowledge this build is not cleared for public distribution')
     args = parser.parse_args()
@@ -226,6 +256,26 @@ def main():
     if 'new Function(' in code or re.search(r'\beval\s*\(', code):
         raise RuntimeError('Manifold research input contains dynamic evaluation')
     with tempfile.TemporaryDirectory(prefix='codi-jsketcher-prepare-') as scratch:
+        occt_input = None
+        occt_receipt = None
+        if args.occt_source_research_input is not None:
+            source_input = args.occt_source_research_input
+            if source_input.is_symlink() or not source_input.is_dir():
+                raise RuntimeError('OCCT research input must be a real directory')
+            occt_input = Path(scratch) / 'occt-input'
+            occt_input.mkdir()
+            for name, expected in OCCT_SOURCE_INPUTS.items():
+                copy_checked_input(source_input / name, occt_input / name, expected)
+            occt_receipt = json.loads((occt_input / 'build-receipt.json').read_text())
+            if (occt_receipt.get('interpreterCommit') != ENGINE_COMMIT or
+                    occt_receipt.get('interpreterTree') != ENGINE_TREE or
+                    occt_receipt.get('jsSHA256') != OCCT_SOURCE_INPUTS['occt.js'] or
+                    occt_receipt.get('wasmSHA256') != OCCT_SOURCE_INPUTS['occt.wasm'] or
+                    occt_receipt.get('npmWasmSHA256') != ENGINE_SHA256['occt.wasm'] or
+                    occt_receipt.get('bitwiseMatchesNpm') is not False or
+                    occt_receipt.get('independentRebuildsMatch') is not False or
+                    occt_receipt.get('licenseCleared') is not False or occt_receipt.get('localOnly') is not True):
+                raise RuntimeError('OCCT source-build receipt is inconsistent')
         root = Path(scratch) / 'source'
         root.mkdir()
         run('git', 'init', '--quiet', str(root))
@@ -239,6 +289,12 @@ def main():
             file = root / 'node_modules' / 'jsketcher-occ-engine' / name
             if hashlib.sha256(file.read_bytes()).hexdigest() != expected:
                 raise RuntimeError('jsketcher-occ-engine artifact hash differs: ' + name)
+        if occt_input is not None:
+            for name in ('occt.js', 'occt.wasm'):
+                out = root / 'node_modules' / 'jsketcher-occ-engine' / name
+                shutil.copyfile(occt_input / name, out)
+                if sha256_file(out) != OCCT_SOURCE_INPUTS[name]:
+                    raise RuntimeError('Copied OCCT artifact hash mismatch: ' + name)
         numeric_input = root / 'node_modules' / 'numeric' / 'numeric-1.2.6.js'
         if sha256_file(numeric_input) != NUMERIC_INPUT_SHA256:
             raise RuntimeError('numeric 1.2.6 package source differs from the reviewed input')
@@ -276,12 +332,19 @@ def main():
         for asset in ('index-webos.html', 'static/index.bundle.js', 'lib-assets/jsketcher-occ-engine/occt.js', 'lib-assets/jsketcher-occ-engine/occt.wasm'):
             if not (staging / asset).is_file():
                 raise RuntimeError('Required runtime asset is missing: ' + asset)
+        selected_engine = OCCT_SOURCE_INPUTS if occt_input is not None else ENGINE_SHA256
+        for name in ('occt.js', 'occt.wasm'):
+            if sha256_file(staging / 'lib-assets/jsketcher-occ-engine' / name) != selected_engine[name]:
+                raise RuntimeError('Built OCCT artifact differs from selected input: ' + name)
         shutil.copyfile(root / 'LICENSE', staging / 'JSKETCHER-LICENSE.txt')
         occ = root / 'node_modules' / 'jsketcher-occ-engine'
         for src, dst in [('license.md', 'OCCT-exception.txt'), ('LICENSE_LGPL_21.txt', 'OCCT-LGPL-2.1.txt'),
                          ('opencascade-info.txt', 'OCCT-upstream-info.txt')]:
             shutil.copyfile(occ / src, staging / dst)
         (staging / 'PROVENANCE-LOCAL-ONLY.txt').write_text(
+            ('Selected OCCT: source-built candidate ' + OCCT_SOURCE_INPUTS['occt.wasm'] +
+             '. It differs from npm and another independent build also differed; broad equivalence is unproven. '
+             if occt_input is not None else 'Selected OCCT: pinned npm artifact. ') +
             'Experimental local build only. jSketcher fork commit: ' + FORK_COMMIT + '\n'
             'This build uses Open CASCADE Technology through jsketcher-occ-engine. '
             'The engine source archive contains interpreter commit ' + ENGINE_COMMIT + ', whose publish script names that same commit in the npm package version. '
@@ -299,6 +362,14 @@ def main():
         actual_engine = subprocess.check_output(['git', '-C', str(engine), 'rev-parse', 'FETCH_HEAD'], text=True).strip()
         if actual_engine != ENGINE_COMMIT:
             raise RuntimeError('The fetched interpreter commit does not match the pin')
+        engine_tree = subprocess.check_output(['git', '-C', str(engine), 'rev-parse', 'FETCH_HEAD^{tree}'], text=True).strip()
+        if engine_tree != ENGINE_TREE:
+            raise RuntimeError('The fetched interpreter tree does not match the pin')
+        for path, (target, expected) in ENGINE_SOURCE_NOTICES.items():
+            contents = subprocess.check_output(['git', '-C', str(engine), 'show', ENGINE_COMMIT + ':' + path])
+            if hashlib.sha256(contents).hexdigest() != expected:
+                raise RuntimeError('Pinned interpreter license differs: ' + path)
+            (staging / target).write_bytes(contents)
         run('git', '-C', str(engine), 'archive', '--format=zip', '--output=' + str(staging / 'occt-interpreter-source.zip'), ENGINE_COMMIT)
         numeric = Path(scratch) / 'numeric-source'
         numeric.mkdir()
@@ -324,6 +395,8 @@ def main():
                     for f in sorted(staging.rglob('*')) if f.is_file()]
         receipt = {'forkCommit': FORK_COMMIT, 'interpreterCommit': ENGINE_COMMIT, 'numericCommit': NUMERIC_COMMIT,
                    'numericInputSHA256': NUMERIC_INPUT_SHA256,
+                   'occtSelection': 'source-research' if occt_input is not None else 'npm',
+                   'occtSourceResearchReceipt': occt_receipt,
                    'manifoldCommit': MANIFOLD_COMMIT, 'clipperCommit': CLIPPER_COMMIT,
                    'manifoldJsSHA256': MANIFOLD_INPUTS['manifold.js'], 'manifoldWasmSHA256': MANIFOLD_INPUTS['manifold.wasm'],
                    'packageLockSHA256': sha256_file(root / 'package-lock.json'),
