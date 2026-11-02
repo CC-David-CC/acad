@@ -62,7 +62,26 @@ export function mount(host){
    if(!valid()||!c.valid()||frame!==active)return;writeStarted=true;const result=await c.files.write(p,content,expected);if(!valid()||!c.valid()||frame!==active)return;state.path=p;state.version=result.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';baseline=content;setWatch(c,p,result.version);const earlier=!unchanged(frame,content);tell(result.status==='conflict'?'Saved on this device with a conflict. Resolve it in Files.':earlier?'Saved an earlier model on this device; newer changes remain unsaved.':'Saved on this device; syncing with the server: '+p+'.');
   }catch(e){tell('Could not finish saving: '+e.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));}finally{busy=false;}
  }
- function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(!data||data.type!=='file-action'||!['open','save','save-as'].includes(data.action))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else void saveProject(data.action==='save-as');}
+ async function importDxf(){
+  if(busy||!valid()||!active)return;busy=true;
+  try{
+   const frame=active,service=frame.contentWindow?.__CAD_APP?.services?.sketcher,editor=service?.inPlaceEditor,viewer=editor?.viewer;
+   if(!editor?.inEditMode||!viewer||typeof service.importDxfSketch!=='function')throw Error('Open a sketch before importing a DXF file.');
+   if(viewer.toolManager.tool!==viewer.toolManager.defaultTool)throw Error('Finish or cancel the current drawing tool first.');
+   const before=viewer.io.serializeSketch(undefined,{strict:true});
+   const selected=await host.storage.pickFile({extensions:['.dxf'],signal:host.signal});if(!selected||!valid())return;
+   if(frame!==active||service.inPlaceEditor.viewer!==viewer||viewer.io.serializeSketch(undefined,{strict:true})!==before)throw Error('The sketch changed while choosing a file. Try again.');
+   const c=await mirrorFileContext();if(!valid()||!c.valid())return;const p=c.path(selected),file=await c.files.read(p);
+   if(!valid()||!c.valid())return;if(file.status==='conflict')throw Error('Resolve this file conflict in Files first.');
+   if(file.data.byteLength>16*1024*1024)throw Error('DXF files must be 16 MiB or smaller.');
+   const text=new TextDecoder('utf-8',{fatal:true}).decode(file.data),now=await c.files.stat(p);
+   if(!valid()||!c.valid())return;if(now.version!==file.version||now.status==='conflict')throw Error('The file changed while opening. Try again.');
+   if(frame!==active||service.inPlaceEditor.viewer!==viewer||viewer.io.serializeSketch(undefined,{strict:true})!==before)throw Error('The sketch changed while opening the file. Try again.');
+   tell('Importing DXF shapes…');await service.importDxfSketch(viewer,text,before);
+   if(valid()&&frame===active)tell('Imported supported shapes from '+p+'. Save the project to keep them.');
+  }catch(e){tell('Could not import DXF: '+e.message+' The existing sketch was kept where recovery was possible.');}finally{busy=false;}
+ }
+ function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(!data||data.type!=='file-action'||!['open','save','save-as','import-dxf'].includes(data.action))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='import-dxf')void importDxf();else void saveProject(data.action==='save-as');}
  window.addEventListener('message',receive);
  const retry=textButton('Retry opening project',()=>{if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner)void openProject(w.launchContext.path,{initial:true});});retry.hidden=true;
  body.append(warning,stage,status,retry);
