@@ -71,7 +71,7 @@ access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
 license review are release gates. Generated assets and `node_modules` are not
-committed. The current experimental pin is `c162e17c687625911cb48f8b88e5a190ee36db53`,
+committed. The current experimental pin is `5713236d59480d8776bfa1406d961437dd3a61f5`,
 including opt-in numeric and source-built Manifold changes. The local input
 directory must contain the pinned Manifold JS/Wasm, source archives and build
 receipt; hashes are checked before use. Two matching builds used the same R730
@@ -122,11 +122,11 @@ Mesh Boolean actions are present. A model-wide engine selector and complete
 native equivalents are not implemented; incompatible engine solids cannot be
 mixed.
 
-At UI candidates 7e9233b8, dc6bd9d9, ab6a44e1 and c162e17c, `tests/jsketcher-native-ui-account.test.mjs`
+At UI candidates 7e9233b8, dc6bd9d9, ab6a44e1, c162e17c and 5713236d, `tests/jsketcher-native-ui-account.test.mjs`
 passed at 1080p, 4K and emulated-phone viewport sizes against real isolated
 accounts. It clicks native and OCC toolbar actions, enters numeric fields,
 chooses native Boolean operands, saves, closes and reopens through Files.
-The dc6bd9d9, ab6a44e1 and c162e17c runs also select an OCC body and rotate it through the wizard. The c162e17c test additionally scales the body and checks that its measured bounds double.
+The dc6bd9d9, ab6a44e1, c162e17c and 5713236d runs also select an OCC body and rotate it through the wizard. The c162e17c and 5713236d tests additionally scale the body and check that its measured bounds double. These account tests do not exercise the object explorer; see the fork’s separate real-sketch explorer tests.
 Phone dropdown choices use browser automation after a touch; a physical phone
 and the full range of 3D pointer interactions remain unqualified.
 
