@@ -71,7 +71,7 @@ access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
 license review are release gates. Generated assets and `node_modules` are not
-committed. The current experimental pin is `b63feabba5d3a13f718bb82329f82972d279773d`,
+committed. The current experimental pin is `7242e2d6f5778e1670ad30b1061bb79243bb637b`,
 including the opt-in numeric change. Run the normal public app builder only
 after the preparer succeeds and its asset manifest is reviewed.
 

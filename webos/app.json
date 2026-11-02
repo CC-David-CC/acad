@@ -116,6 +116,9 @@
     "node_modules/jsketcher-build/lib/verb.js",
     "node_modules/jsketcher-build/numeric-source.zip",
     "node_modules/jsketcher-build/occt-interpreter-source.zip",
-    "node_modules/jsketcher-build/static/index.bundle.js"
+    "node_modules/jsketcher-build/static/f54feaf85710162ea9f5.wasm",
+    "node_modules/jsketcher-build/static/index.bundle.js",
+    "node_modules/jsketcher-build/static/modules_brep_operations_mesh_browserNodeModuleStub_js.bundle.js",
+    "node_modules/jsketcher-build/static/vendors-node_modules_manifold-3d_manifold_js.bundle.js"
   ]
 }
