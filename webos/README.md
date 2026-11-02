@@ -66,13 +66,16 @@ CAD or manufacturing validation, and it is not a remote-agent interface.
 ## Rebuilding and local testing
 
 `prepare.py` currently produces **local-only experimental output** using
-`--experimental-local-only --update-manifest`. It needs Node, npm and Git
+`--experimental-local-only --update-manifest --manifold-research-input /path/to/staged-inputs`. It needs Node, npm and Git
 access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
 license review are release gates. Generated assets and `node_modules` are not
-committed. The current experimental pin is `7242e2d6f5778e1670ad30b1061bb79243bb637b`,
-including the opt-in numeric change. Run the normal public app builder only
+committed. The current experimental pin is `b9e57cdf72962dcc0fd626d71c8d2d61a9c3c63a`,
+including opt-in numeric and source-built Manifold changes. The local input
+directory must contain the pinned Manifold JS/Wasm, source archives and build
+receipt; hashes are checked before use. Two matching builds used the same R730
+toolchain, so this is repeatability rather than independent provenance. Run the normal public app builder only
 after the preparer succeeds and its asset manifest is reviewed.
 
 For the isolated host harness, stage a tested upstream build at
@@ -98,6 +101,15 @@ JSKETCHER_HELPER_PATH=/path/to/webosTest.bundle.js timeout 240s node tests/jsket
 CODI_PHONE=1 JSKETCHER_HELPER_PATH=/path/to/webosTest.bundle.js timeout 240s node tests/jsketcher-account-integration.test.mjs
 ```
 
+For the final local Manifold candidate, use
+`tests/jsketcher-final-account-integration.test.mjs` with the same environment.
+At b9e57cdf, desktop and emulated-phone registered-account runs passed: the
+product's own Manifold initialized and fetched its Wasm under captured CSP
+before the test helper loaded; the modeling icons loaded; DXF import, surfacing
+save, exact server sync, separate-window isolation and fresh-session reopen
+passed. This does not independently establish general native/OCC equivalence,
+physical-phone behavior, provenance or release clearance.
+
 The adapter refuses non-isolated state and injects the captured production CSP
 only into this preview process; it leaves the ordinary preview source alone.
 The browser test requires `puppeteer-core` and a Chrome DevTools endpoint
@@ -105,8 +117,7 @@ The browser test requires `puppeteer-core` and a Chrome DevTools endpoint
 the test session and does not add the helper to the public catalog. It creates
 disposable accounts in that isolated preview and removes its project file.
 
-The experimental surfacing research branch extends the local inspect command
-to account for surfacing and feature counters in its dirty-state result. The
-runtime and generated manifest in this checkout are not automatically updated
-by that change. The surfacing-enabled fork must be pinned, prepared and reviewed
-separately before distributing or deploying this host adaptation.
+The experimental surfacing branch extends the local inspect command to account
+for surfacing and feature counters in its dirty-state result. The combined
+local candidate still requires independent source, notice, provenance and
+runtime review before distribution or deployment.

@@ -18,7 +18,7 @@ import zipfile
 
 HERE = Path(__file__).resolve().parent
 # Update only after reviewing the fork commit and the generated manifest.
-FORK_COMMIT = '7242e2d6f5778e1670ad30b1061bb79243bb637b'
+FORK_COMMIT = 'b9e57cdf72962dcc0fd626d71c8d2d61a9c3c63a'
 DEFAULT_REPOSITORY = 'example.invalid:/srv/data/git/JSKetcher.git'
 ENGINE_COMMIT = '5efaf53accb45bac475155fc4d5552642c19e91e'
 ENGINE_REPOSITORY = 'https://github.com/Autodrop3d/occt-interpreter.git'
@@ -30,6 +30,16 @@ NUMERIC_INPUT_SHA256 = '5dcaba2016fd237091e3a17b0dc272fb21f0e2b15d7628f95a0ad0cd
 NUMERIC_NOTICE_SHA256 = {
     'license.txt': '0e94aada97f12dee6118064add9170484c55022f5d53206ee4407143cd36ddcd',
     'resources/LICENSE.quadprog': 'a96e914967c28cbfed070a5a94fa7c670205a657751fa7dd707df8e922d2d904',
+}
+# Research-only artifacts independently rebuilt twice on the same R730 toolchain.
+MANIFOLD_COMMIT = '31afd71d17c7a94cfaeada83f657d7b42628ead6'
+CLIPPER_COMMIT = '46f639177fe418f9689e8ddb74f08a870c71f5b4'
+MANIFOLD_INPUTS = {
+    'manifold.js': 'cd2031fd75cbbc812b550dd228f95b9fd666ae4da6557f840e3d3ed4cbed268b',
+    'manifold.wasm': '7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d',
+    'manifold-source.zip': 'bbbf63586ccdc4d7074597095b518a7f4b08d7e244cdbcb276279f2253657ea1',
+    'clipper2-source.zip': 'd33522abf638b382ecfdcc6f8cbe03e038b4142109b1d96fdc2a1a168d3f050c',
+    'build-receipt.json': 'ca18607ef22692fb56e43be41dd2e33431d108b4fc1a7618b0c3258f105afd8b',
 }
 DESTINATION = HERE / 'node_modules' / 'jsketcher-build'
 PREFIX = 'node_modules/jsketcher-build/'
@@ -195,11 +205,26 @@ def main():
     parser.add_argument('--repo', default=DEFAULT_REPOSITORY, help='Git source containing the pinned fork commit')
     parser.add_argument('--engine-repo', default=ENGINE_REPOSITORY, help='Git source containing the pinned interpreter commit')
     parser.add_argument('--numeric-repo', default=NUMERIC_REPOSITORY, help='Git source containing the pinned numeric 1.2.6 commit')
+    parser.add_argument('--manifold-research-input', type=Path, required=True, help='Hash-pinned local-only source-built Manifold artifacts and source archives')
     parser.add_argument('--update-manifest', action='store_true', help='Write a reviewed candidate asset manifest')
     parser.add_argument('--experimental-local-only', action='store_true', help='Acknowledge this build is not cleared for public distribution')
     args = parser.parse_args()
     if not args.experimental_local_only:
         parser.error('jSketcher runtime source/license review is incomplete; pass --experimental-local-only for local tests only')
+    manifold_input = args.manifold_research_input.resolve(strict=True)
+    for name, expected in MANIFOLD_INPUTS.items():
+        file = manifold_input / name
+        if file.is_symlink() or not file.is_file() or sha256_file(file) != expected:
+            raise RuntimeError('Manifold research input differs from its pinned hash: ' + name)
+    receipt = json.loads((manifold_input / 'build-receipt.json').read_text())
+    if (receipt.get('manifoldCommit') != MANIFOLD_COMMIT or receipt.get('clipperCommit') != CLIPPER_COMMIT
+            or receipt.get('jsSha256') != MANIFOLD_INPUTS['manifold.js']
+            or receipt.get('wasmSha256') != MANIFOLD_INPUTS['manifold.wasm']
+            or receipt.get('flags') != ['-sDYNAMIC_EXECUTION=0', '-sEMBIND_AOT=1']):
+        raise RuntimeError('Manifold source-build receipt is inconsistent')
+    code = (manifold_input / 'manifold.js').read_text()
+    if 'new Function(' in code or re.search(r'\beval\s*\(', code):
+        raise RuntimeError('Manifold research input contains dynamic evaluation')
     with tempfile.TemporaryDirectory(prefix='codi-jsketcher-prepare-') as scratch:
         root = Path(scratch) / 'source'
         root.mkdir()
@@ -218,13 +243,21 @@ def main():
         if sha256_file(numeric_input) != NUMERIC_INPUT_SHA256:
             raise RuntimeError('numeric 1.2.6 package source differs from the reviewed input')
         run('node', 'build/precompile-numeric.cjs', cwd=root)
-        env = dict(os.environ, CODI_EMBED_NUMERIC='1')
+        manifold_cache = root / 'node_modules' / '.cache' / 'codi-manifold'
+        manifold_cache.mkdir(parents=True)
+        for name in ('manifold.js', 'manifold.wasm'):
+            shutil.copyfile(manifold_input / name, manifold_cache / name)
+            if sha256_file(manifold_cache / name) != MANIFOLD_INPUTS[name]:
+                raise RuntimeError('Copied Manifold artifact hash mismatch: ' + name)
+        env = dict(os.environ, CODI_EMBED_NUMERIC='1', CODI_EMBED_MANIFOLD='1')
         run('npm', 'run', 'build', cwd=root, env=env)
         built = root / 'dist'
         if not (built / 'index-webos.html').is_file():
             raise RuntimeError('Pinned build did not produce index-webos.html')
         staging = Path(scratch) / 'jsketcher-build'
         staging.mkdir()
+        for name in ('manifold-source.zip', 'clipper2-source.zip', 'build-receipt.json'):
+            shutil.copyfile(manifold_input / name, staging / ('manifold-build-receipt.json' if name == 'build-receipt.json' else name))
         # Explicit public types only; skip development maps, standalone Sketcher,
         # upstream HTML with remote fonts, docs sources, and generated test code.
         for source in sorted(built.rglob('*')):
@@ -255,6 +288,7 @@ def main():
             'The exact binary has not been reproduced from this source and the publish script does not establish a clean build. '
             'The npm occt.wasm SHA-256 is ' + ENGINE_SHA256['occt.wasm'] + '; occt.js SHA-256 is ' + ENGINE_SHA256['occt.js'] + '. '
             'numeric.js source commit ' + NUMERIC_COMMIT + ' has four concatenated inputs whose SHA-256 matches the pinned npm input ' + NUMERIC_INPUT_SHA256 + '; the embedded build transforms that input at build time. '
+            'Manifold and Clipper2 source archives and a local build receipt are included; two builds used the same toolchain, which does not independently verify provenance. '
             'The provided archives and notices are not proof of complete corresponding source. '
             'Do not publish or distribute this runtime until the exact engine provenance, corresponding source, transitive dependency notices and license obligations are reviewed.\n', encoding='utf-8')
         run('git', '-C', str(root), 'archive', '--format=zip', '--output=' + str(staging / 'jsketcher-fork-source.zip'), FORK_COMMIT)
@@ -290,6 +324,8 @@ def main():
                     for f in sorted(staging.rglob('*')) if f.is_file()]
         receipt = {'forkCommit': FORK_COMMIT, 'interpreterCommit': ENGINE_COMMIT, 'numericCommit': NUMERIC_COMMIT,
                    'numericInputSHA256': NUMERIC_INPUT_SHA256,
+                   'manifoldCommit': MANIFOLD_COMMIT, 'clipperCommit': CLIPPER_COMMIT,
+                   'manifoldJsSHA256': MANIFOLD_INPUTS['manifold.js'], 'manifoldWasmSHA256': MANIFOLD_INPUTS['manifold.wasm'],
                    'packageLockSHA256': sha256_file(root / 'package-lock.json'),
                    'nodeVersion': subprocess.check_output(['node', '--version'], text=True).strip(),
                    'npmVersion': subprocess.check_output(['npm', '--version'], text=True).strip(),
