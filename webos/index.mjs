@@ -30,11 +30,13 @@ export function mount(host){
    if(!Array.isArray(history)||!Array.isArray(assembly)||assembly.length||(workbench&&!workbench.internal&&workbench.workbenchId!==ctx.workbenchService.defaultWorkbenchId))throw Error('This project uses an unsupported assembly or workbench.');
    const namespace=ctx.projectService.sketchStorageNamespace,keys=ctx.services.storage.getAllKeysFromNamespace(namespace).sort();
    const model={history,expressions:ctx.expressionService.script$.value,assembly};
+   if(ctx.projectService.counterGenerator)model.counters=ctx.projectService.counterGenerator.projectCounters;
    // Recreate the saved snapshot from read-only state; do not call the fork's
    // snapshotCurrentProject(), which writes its project to workspace storage.
    const savedModel=JSON.parse(JSON.stringify(model)),sketches=keys.map(key=>({id:key.substring(namespace.length),data:JSON.parse(ctx.services.storage.get(key))}));
+   const surfacing=ctx.surfacingService?.save();
    const operations=history.slice(0,100).map(op=>{if(!op||typeof op.type!=='string')throw Error('The operation history is unavailable.');return op.type.slice(0,128);});
-   return {path:state.path,dirty:JSON.stringify({model:savedModel,sketches})!==baseline,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
+   return {path:state.path,dirty:JSON.stringify({model:savedModel,sketches,...(surfacing?{surfacing}:{})})!==baseline,surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
   });host.onDispose(unregister);
  }
  function setWatch(c,path,version){watch();watch=()=>{};const serial=++watchRevision;warning.hidden=true;warning.textContent='';const check=async()=>{const seq=++checkRevision;let message='';try{const entry=await c.files.stat(path);if(entry.status==='conflict')message='This project has conflicting copies. Resolve them in Files before saving.';else if(entry.version!==version)message='The saved project changed. Save a copy or open it again.';}catch{message='The saved project is unavailable. Your current model remains open.';}if(valid()&&c.valid()&&serial===watchRevision&&seq===checkRevision&&state.path===path&&state.version===version){warning.textContent=message;warning.hidden=!message;}};watch=c.files.subscribe(check);queueMicrotask(check);}

@@ -104,3 +104,9 @@ The browser test requires `puppeteer-core` and a Chrome DevTools endpoint
 (default `http://127.0.0.1:19255`). It intercepts the helper request inside
 the test session and does not add the helper to the public catalog. It creates
 disposable accounts in that isolated preview and removes its project file.
+
+The experimental surfacing research branch extends the local inspect command
+to account for surfacing and feature counters in its dirty-state result. The
+runtime and generated manifest in this checkout are not automatically updated
+by that change. The surfacing-enabled fork must be pinned, prepared and reviewed
+separately before distributing or deploying this host adaptation.
