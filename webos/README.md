@@ -71,7 +71,7 @@ access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
 license review are release gates. Generated assets and `node_modules` are not
-committed. The current experimental pin is `b9e57cdf72962dcc0fd626d71c8d2d61a9c3c63a`,
+committed. The current experimental pin is `b1b818ad4c56f4c54aad5115b2fb6252dc7db4db`,
 including opt-in numeric and source-built Manifold changes. The local input
 directory must contain the pinned Manifold JS/Wasm, source archives and build
 receipt; hashes are checked before use. Two matching builds used the same R730
@@ -103,12 +103,17 @@ CODI_PHONE=1 JSKETCHER_HELPER_PATH=/path/to/webosTest.bundle.js timeout 240s nod
 
 For the final local Manifold candidate, use
 `tests/jsketcher-final-account-integration.test.mjs` with the same environment.
-At b9e57cdf, desktop and emulated-phone registered-account runs passed: the
+At b9e57cdf and b1b818ad, desktop and emulated-phone registered-account runs passed: the
 product's own Manifold initialized and fetched its Wasm under captured CSP
 before the test helper loaded; the modeling icons loaded; DXF import, surfacing
 save, exact server sync, separate-window isolation and fresh-session reopen
 passed. This does not independently establish general native/OCC equivalence,
 physical-phone behavior, provenance or release clearance.
+At b1b818ad, a separate strict-CSP test covered XYZ movement and history, and
+six bounded native/OCC box cases. A 0.000001-unit overlap was retained by the
+native path but treated as empty by OCC; this tolerance discrepancy remains.
+The surfacing patch toolbar and OCC modeling tools are present, but a general
+user-facing engine selector and complete native equivalents are not implemented.
 
 The adapter refuses non-isolated state and injects the captured production CSP
 only into this preview process; it leaves the ordinary preview source alone.
