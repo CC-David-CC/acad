@@ -78,6 +78,26 @@ receipt; hashes are checked before use. Two matching builds used the same R730
 toolchain, so this is repeatability rather than independent provenance. Run the normal public app builder only
 after the preparer succeeds and its asset manifest is reviewed.
 
+An optional `--occt-source-research-input /path/to/occt-input` selects one
+specific source-built interpreter for local research. Put the exact `occt.js`
+and `occt.wasm` in that directory, together with `build-receipt.json` copied
+from the checked-in `occt-source-build-receipt.json`. The preparer hashes the
+bytes it copies, checks the receipt and fetched source tree and notices, still
+verifies the installed npm artifacts first, then checks the final built files.
+The normal pinned npm engine remains the default. Both paths still require
+`--experimental-local-only` and the Manifold research inputs.
+
+The candidate was built from the source commit in the receipt, but its Wasm
+is not byte-identical to the published npm binary, and two independent builds
+also differed. The limited geometry tests do not establish equivalence. The
+interpreter root license is separately included as
+`OCCT-INTERPRETER-LICENSE.txt` alongside the OCCT LGPL and exception notices;
+the root license has distinct terms requiring independent review. The exact
+source archive and build evidence are described in the receipt and in the
+source-only `research/occt-source-provenance-20261102` branch. Neither this
+option nor its notices establish permission to publish, complete corresponding
+source, or independently reproducible binaries. Do not deploy the result.
+
 For the isolated host harness, stage a tested upstream build at
 `/tmp/codi-jsketcher-host-test/node_modules/jsketcher-build`, bundle `index.mjs`
 with esbuild (CSS may use the `empty` loader for this harness), copy
