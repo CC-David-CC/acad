@@ -214,3 +214,20 @@ selection and the replacement's MIT notice in the generated inventory. The
 old unlicensed emitter remains an installed build dependency but is absent
 from that main bundle. These checks do not close the wider source and license
 review or remove the local-only gate.
+
+### Manufacturing research only
+
+The isolated research host recognizes a versioned manufacturing envelope and
+requires the fork's asynchronous `snapshotForHostSave()` before writing it.
+This rejects stale geometry revisions and edits during preparation. It is not
+release-ready: the matching fork currently uses full-document hashing and an
+8 MiB temporary preparation cap, and has no rebind confirmation UI or complete
+manufacturing-digest verification. Do not deploy the experimental runtime.
+
+The loopback-only `tests/jsketcher-manufacturing-account.test.cjs` expects a
+separately staged desktop catalog, isolated issuer/gateway state, a CDP browser,
+`CODI_MANUFACTURING_FIXTURE` pointing to a generated seven-feature enclosure
+fixture, and `PUPPETEER_CORE_PATH`. `CODI_PHONE=1` sets phone viewport/touch
+emulation. It creates disposable accounts only in the isolated preview, checks
+real mirror/server sync, fresh-session reopen, account isolation and stale edit
+refusal. It does not exercise a physical phone, confirm a rebind or export 3MF.

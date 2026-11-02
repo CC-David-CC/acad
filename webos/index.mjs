@@ -58,13 +58,22 @@ export function mount(host){
  async function saveProject(asCopy=false){
   if(busy||!valid()||!active)return;busy=true;let writeStarted=false;
   try{
-   const frame=active,content=snapshot(frame);if(new Blob([content]).size>128*1024*1024)throw Error('Project exceeds 128 MiB.');
+   const frame=active,prior=snapshot(frame);let content=prior;
+   if(JSON.parse(prior)?.format==='codi-jsketcher-manufacturing'){
+    const manager=frame.contentWindow?.__CAD_APP?.projectManager;
+    if(typeof manager?.snapshotForHostSave!=='function')throw Error('Manufacturing save validation is unavailable.');
+    const prepared=await manager.snapshotForHostSave();
+    if(!valid()||frame!==active)return;
+    if(!unchanged(frame,prior))throw Error('The model changed while preparing the save. Try again.');
+    content=JSON.stringify(prepared);
+   }
+   if(new Blob([content]).size>128*1024*1024)throw Error('Project exceeds 128 MiB.');
    let chosen=state.path;if(asCopy||!chosen){const defaultName=chosen||'/Design.jsketcher.json';chosen=await host.ui.prompt('Save the project to My files:',{title:asCopy?'Save project as':'Save project',value:defaultName,confirmLabel:'Save',signal:host.signal});if(chosen===null||!valid())return;}
    const c=await mirrorFileContext();if(!valid()||!c.valid()||frame!==active)return;const p=c.path(chosen);if(!/\.jsketcher\.json$/i.test(p))throw Error('Use a .jsketcher.json filename.');let expected=null,old;
    try{old=await c.files.stat(p);}catch(e){if(e.message!=='File not found.')throw e;}
    if(old){if(old.status==='conflict')throw Error('Resolve this project conflict in Files first.');if(p===state.path&&state.version){if(old.version!==state.version)throw Error('The saved project changed. Save a copy or reopen it.');}else{if(!await host.ui.confirm('Replace '+p+'?',{title:'Replace project?',confirmLabel:'Replace',cancelLabel:'Keep existing',danger:true,signal:host.signal}))return;if(!valid()||!c.valid()||frame!==active)return;const current=await c.files.stat(p);if(current.status==='conflict'||current.version!==old.version)throw Error('The project changed while confirming. Try again.');}expected=old.version;
    }else if(p===state.path&&state.version)throw Error('The saved project was removed. Save a copy or reopen it.');
-   if(!valid()||!c.valid()||frame!==active)return;writeStarted=true;const result=await c.files.write(p,content,expected);if(!valid()||!c.valid()||frame!==active)return;state.path=p;state.version=result.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';baseline=content;setWatch(c,p,result.version);const earlier=!unchanged(frame,content);tell(result.status==='conflict'?'Saved on this device with a conflict. Resolve it in Files.':earlier?'Saved an earlier model on this device; newer changes remain unsaved.':'Saved on this device; syncing with the server: '+p+'.');
+   if(!valid()||!c.valid()||frame!==active)return;writeStarted=true;const result=await c.files.write(p,content,expected);if(!valid()||!c.valid()||frame!==active)return;state.path=p;state.version=result.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';baseline=prior;setWatch(c,p,result.version);const earlier=!unchanged(frame,prior);tell(result.status==='conflict'?'Saved on this device with a conflict. Resolve it in Files.':earlier?'Saved an earlier model on this device; newer changes remain unsaved.':'Saved on this device; syncing with the server: '+p+'.');
   }catch(e){tell('Could not finish saving: '+e.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));}finally{busy=false;}
  }
  async function importDxf(){
