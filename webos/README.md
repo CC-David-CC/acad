@@ -318,3 +318,25 @@ then run `python3 tests/jsketcher-rectangle-fixture.py --output NEW_DIR
 --cad-dist CAD_DIST`. Serve NEW_DIR with `tests/jsketcher-host-csp-server.py`
 and run `tests/jsketcher-rectangle-host-browser.test.mjs` against loopback
 Chromium. Its My files backend is an in-memory stand-in, not a signed service.
+
+A separate disposable signed test is `tests/jsketcher-rectangle-signed-account.test.mjs`.
+The 2026-11-04 run used desktop source `f032f8108`, CAD implementation
+`532352ac`, a test-only app override with bundle SHA-256
+`7a32da70625e8ecfee2493d29c389a15597d4e13f369e976ff5e81d5fcaf2475`, and
+helper SHA-256 `3fa2a90058047b32ac756965d4e73f856c43498bf5a0052cb4c35c1be86c03f8`.
+CAD output was built before the CAD commit, so its `.rev` is parent `ec2e0156`.
+The test used an isolated real issuer/gateway and two separate accounts; the
+fixture increases the request-rate limit and is not a production deployment.
+It checks server/local bytes and SHA-256 for both saves, account denial, closed
+command refusal, native reopen, a real driving-dimension edit and a second
+reopen. The existing extrusion wizard produced bounds 150×50×10 mm for that
+same sketch. This is not a volume, manufacturing, or broad CAD qualification;
+the host registry does not yet expose a validated extrusion command. The first
+fixture attempt omitted a test helper global and the next incorrectly assumed
+vertices were an Array; corrected tests passed with no product changes.
+
+`tests/jsketcher-rectangle-signed-override.py` can reconstruct this test-only
+override from a previously prepared public-app bundle and a separately built
+CAD output. Feed its output to `tests/files-desktop-signed-fixture.py` via
+`CODI_APPS_BUNDLE`; supply the matching helper through `JSKETCHER_HELPER_PATH`.
+This override reuses old source notices and does not qualify a release package.
