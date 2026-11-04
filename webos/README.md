@@ -10,6 +10,9 @@ server synchronization runs. The Linux guest filesystem is separate.
 
 The host checks the selected file version and stages an open in a separate
 window before replacing the current model. A failure keeps the existing model.
+Project and DXF reads require the file service's bounded snapshot interface;
+the host checks size/version before content access and again before use. See
+`docs/evidence/cad-file-read-boundary-20261103.md` for scoped regression evidence.
 Saving captures one model snapshot: changes made while saving remain unsaved.
 Finish an open sketch or operation and return to the newest history before
 saving. Assembly constraints and custom workbenches are not yet supported by

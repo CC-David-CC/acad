@@ -1,5 +1,6 @@
 import './style.css';
 import {inspectedProjectIsDirty} from './inspect-state.mjs';
+import {readVersionedBytes} from './file-read.mjs';
 
 // The embedded CAD app owns only its temporary model. The host owns account
 // storage, confirmation, version checks and the lifetime of every iframe.
@@ -59,7 +60,7 @@ export function mount(host){
    const previous=active,prior=snapshot(previous);
    if(baseline===null||prior!==baseline){const accepted=await host.ui.confirm('Discard the unsaved model and open a different project?',{title:'Unsaved changes',confirmLabel:'Discard and open',cancelLabel:'Keep editing',danger:true,signal:host.signal});if(!accepted||!valid())return;if(!unchanged(previous,prior))throw Error('The model changed during confirmation. Try again.');}
    const chosen=selected||await host.storage.pickFile({extensions:['.jsketcher.json'],signal:host.signal});if(!chosen||!valid())return;if(!unchanged(previous,prior))throw Error('The model changed while choosing a file. Try again.');
-   const c=await mirrorFileContext();if(!valid()||!c.valid())return;const p=c.path(chosen),file=await c.files.read(p);if(!valid()||!c.valid())return;if(file.status==='conflict')throw Error('Resolve this project conflict in Files first.');if(file.data.byteLength>128*1024*1024)throw Error('Project exceeds 128 MiB.');const json=new TextDecoder('utf-8',{fatal:true}).decode(file.data);
+   const c=await mirrorFileContext();if(!valid()||!c.valid())return;const p=c.path(chosen),file=await readVersionedBytes(c.files,p,{maximumBytes:128*1024*1024,valid:()=>valid()&&c.valid()&&previous===active,signal:host.signal});if(!valid()||!c.valid())return;const json=new TextDecoder('utf-8',{fatal:true}).decode(file.data);
    if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');tell('Rebuilding the selected model…');next=createFrame(true);candidate=next;const ctx=await waitReady(next);if(!valid()||!c.valid())return;await ctx.projectManager.restoreSnapshotInEmptyWorkspace(json);if(!valid()||!c.valid())return;
    const restored=snapshot(next),now=await c.files.stat(p);if(!valid()||!c.valid())return;if(now.version!==file.version||now.status==='conflict')throw Error('The project changed while opening. Try again.');if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');
    active=next;candidate=null;next=null;active.classList.remove('jsketcher-staging');detach(previous);baseline=restored;state.path=p;state.version=file.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';setWatch(c,p,file.version);retry.hidden=true;review.hidden=true;tell('Opened '+p+'.');
@@ -124,7 +125,7 @@ export function mount(host){
    const before=viewer.io.serializeSketch(undefined,{strict:true});
    const selected=await host.storage.pickFile({extensions:['.dxf'],signal:host.signal});if(!selected||!valid())return;
    if(frame!==active||service.inPlaceEditor.viewer!==viewer||viewer.io.serializeSketch(undefined,{strict:true})!==before)throw Error('The sketch changed while choosing a file. Try again.');
-   const c=await mirrorFileContext();if(!valid()||!c.valid())return;const p=c.path(selected),file=await c.files.read(p);
+   const c=await mirrorFileContext();if(!valid()||!c.valid())return;const p=c.path(selected),file=await readVersionedBytes(c.files,p,{maximumBytes:16*1024*1024,valid:()=>valid()&&c.valid()&&frame===active,signal:host.signal});
    if(!valid()||!c.valid())return;if(file.status==='conflict')throw Error('Resolve this file conflict in Files first.');
    if(file.data.byteLength>16*1024*1024)throw Error('DXF files must be 16 MiB or smaller.');
    const text=new TextDecoder('utf-8',{fatal:true}).decode(file.data),now=await c.files.stat(p);
