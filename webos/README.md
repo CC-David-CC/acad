@@ -92,6 +92,15 @@ worker-only npm modules refuse packaging pending review. This module-comment
 check is a review aid, not a complete runtime dependency graph. Test helpers
 are excluded from the app assets.
 
+For the recorded combined candidate, the exact eight OCCT/Manifold preparer
+inputs are backed up on R730 at
+`/mnt/data10tb/codi-cad-runtime-inputs-ced603b99f8d`. Its manifest SHA-256 is
+`ced603b99f8d27577ba43256e6c391627a7e52f7465784a28ebf63b6b01aa6a5`;
+verify its closed inventory and file hashes after copying, then select the
+`manifold/` and `occt/` subdirectories. See desktop
+`docs/evidence/cad-runtime-inputs-20261104.json`. These remain local research
+inputs, with the provenance limitations below.
+
 An optional `--occt-source-research-input /path/to/occt-input` selects one
 specific source-built interpreter for local research. Put the exact `occt.js`
 and `occt.wasm` in that directory, together with `build-receipt.json` copied
