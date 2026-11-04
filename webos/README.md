@@ -72,7 +72,7 @@ CAD or manufacturing validation, and it is not a remote-agent interface.
 ## Rebuilding and local testing
 
 `prepare.py` currently produces **local-only experimental output** using
-`--experimental-local-only --update-manifest --manifold-research-input /path/to/staged-inputs --worker-occt-input /path/to/clean-worker`. It needs Node, npm and Git
+`--experimental-local-only --update-manifest --manifold-research-input /path/to/staged-inputs --worker-occt-input /path/to/clean-worker --emscripten-runtime-source /path/to/emscripten-runtime-source.zip`. It needs Node, npm and Git
 access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
@@ -107,6 +107,7 @@ For example, on R730 with the retained inputs and Node/npm on `PATH`:
 python3 apps/system/jsketcher/prepare.py --repo /mnt/data10tb/git/JSKetcher.git \
   --worker-engine-repo /mnt/data10tb/git/occt-interpreter-codi.git \
   --worker-occt-input /mnt/data10tb/codi-occ-centered-clean-20261104/build \
+  --emscripten-runtime-source /mnt/data10tb/codi-occ-centered-clean-20261104/emscripten-runtime-source.zip \
   --manifold-research-input /mnt/data10tb/codi-cad-runtime-inputs-ced603b99f8d/manifold \
   --occt-source-research-input /mnt/data10tb/codi-cad-runtime-inputs-ced603b99f8d/occt \
   --experimental-local-only --update-manifest
@@ -114,6 +115,19 @@ python3 apps/system/jsketcher/prepare.py --repo /mnt/data10tb/git/JSKetcher.git 
 
 The legacy interpreter and numeric source repositories are fetched at their
 pinned commits; npm installs the fork's locked build dependencies.
+
+The pinned `emscripten-runtime-source.zip` has SHA-256
+`ad04773a4a30e37ece3b9ccbd3bb919d2ba531ad358ecb8623f4d6199f62c656`.
+`prepare-emscripten-runtime-source.py` reproduces its selected runtime-source
+subset from the retained Emscripten 2.0.30 SDK and preserves the matching license
+texts. The clean relink trace showed extracted libc, libc_rt_wasm, libc++,
+libc++abi, compiler-rt and dlmalloc members. The legacy link also supplied GL,
+al, html5 and sockets, but its member-level extraction was not captured. The
+source ZIP is a bounded subset, not a complete toolchain source distribution.
+The package's `SOURCE-INDEX.html` links its source ZIPs and notices using
+relative asset paths; a desktop host entry linking to that page is still needed
+for users to discover it. Availability through a signed deployed host has not
+been tested.
 
 The separate centered-hole OCC worker uses clean source-built JS/WASM from
 `/mnt/data10tb/codi-occ-centered-clean-20261104/build` on R730, or
@@ -370,7 +384,7 @@ CAD output. Feed its output to `tests/files-desktop-signed-fixture.py` via
 `CODI_APPS_BUNDLE`; supply the matching helper through `JSKETCHER_HELPER_PATH`.
 This override reuses old source notices and does not qualify a release package.
 
-The November 4 clean-worker candidate was actually prepared on R730 from
+The November 4 clean-worker candidate before runtime-notice additions was prepared on R730 from
 `5b1f4c63a12826c32b0403c51425ceb61f119744` with the source-built legacy
 interpreter and separate clean worker inputs. The resulting 151-file candidate
 is at `/mnt/data10tb/codi-clean-desktop-preparer-20261104/apps/system/jsketcher/node_modules/jsketcher-build`.
@@ -379,3 +393,14 @@ Its `app.json` SHA-256 is `8f392c63e7af5c80c6609e26f00ca531caf3b359feb23d6c800e8
 The exact fork/source/worker/notice package checks passed. This preparer receipt
 is not a signed-parent test or deployment authorization, and the separate
 source and toolchain notice and corresponding-source limitations above remain.
+
+The 5b1f4c63 runtime-source/notice candidate contains 156 app assets. Its
+manifest SHA-256 is `418106d4736c18a1aa24a79a8f8656cf08eba2e667217231cd726b799dc17e8b`
+and build-receipt SHA-256 is `32bd05e5189dae675ad70e9f313def39506001a4f8ae54d8b44f8b365c9e853f`.
+A signed local fixture's previous package returned 200 for both OCC source
+archives and the JSketcher license in a registered browser context. Anonymous
+HTTP returned 200 for those same public app assets too. Thus current static app
+asset delivery does **not** enforce the requested login boundary; a
+login-guarded menu alone does not provide server authorization. The fixture
+predated `SOURCE-INDEX.html`, so it did not test that new page. These are public
+source and notice files, not private account files.

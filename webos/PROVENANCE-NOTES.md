@@ -44,3 +44,13 @@ the npm binary is claimed. Author permissions for the jSketcher fork do not
 establish rights for independent dependencies, including the interpreter's
 separate license. No public distribution or deployment is authorized by this
 inventory.
+
+The bundled `stream` 0.0.2 entry and README match upstream tag v0.0.2 commit
+`3faf89f7b8770fe41b41b6f0bb1e08bb9367fc9f`; its README includes the full MIT
+notice and Julian Gruber copyright. The separately packaged exact README is
+`STREAM-UPSTREAM-README.txt`. The bundled `timers` 0.1.1 entry and README match
+upstream tag 0.1.1 commit `d400ce94b22686faf0b717259040e6b0615250e6`; its
+README, supplied as `TIMERS-UPSTREAM-README.txt`, and package metadata say MIT,
+but the tagged upstream tree supplies no full license grant or copyright
+notice. The exact upstream contents are preserved, not supplemented with an
+invented attribution; obtaining authoritative full notice remains open.

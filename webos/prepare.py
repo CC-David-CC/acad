@@ -7,6 +7,7 @@ runtime dependency obligations have been independently reviewed.
 """
 import argparse
 import hashlib
+from html.parser import HTMLParser
 import json
 import os
 from pathlib import Path
@@ -29,6 +30,15 @@ WORKER_ENGINE_TREE = '6064cd4335a3ccbbd23f52d8559990c6fb604d2f'
 WORKER_ENGINE_REPOSITORY = 'example.invalid:/srv/data/git/occt-interpreter-codi.git'
 WORKER_ENGINE_INPUTS = {'main.js': '89b3b85fb8afcfbdf343ec3f7f2ecf222067012d994cf9af6eb649ef30d9257b',
                         'main.wasm': 'c39793b8aff34dc548b57fee1d901219e372702a5005ef92dfdf94994c012897'}
+EMSCRIPTEN_RUNTIME_SOURCE_SHA256 = 'ad04773a4a30e37ece3b9ccbd3bb919d2ba531ad358ecb8623f4d6199f62c656'
+EMSCRIPTEN_LICENSES = {
+    'LICENSE': '620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86',
+    'system/lib/libc/musl/COPYRIGHT': '70ca142d257e2690a1f8eda8a296e64a6d1b16d8aee6784f8ddcf67f3163635d',
+    'system/lib/libcxx/LICENSE.TXT': '539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b',
+    'system/lib/libcxxabi/LICENSE.TXT': 'e2b35be49f7284a45b7baca8fc7b3ab7440e7902392b2528a457816b5bb2a15c',
+    'system/lib/compiler-rt/LICENSE.TXT': '1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d',
+    'system/lib/dlmalloc.c': '4f5295fef30e0f3fac91be204ec272f558a1bd0336e125591c19acfa584d77fc',
+}
 WORKER_PORTABLE_SHA256 = 'f74142622c9ced56b8f2e7955301ace5902f811734a71128767fb05de4159972'
 WORKER_BUNDLE_SHA256 = 'a06bcc6cb9ac87e335d4ff59d6d570c6dd7a8acf7adf90e903339b9a13832f04'
 ENGINE_SHA256 = {'occt.wasm': 'fee4624786bb114de1d381340f05f0cdf47e6700b9fd62ef8a5dace82c8fda77',
@@ -45,6 +55,12 @@ OTHER_VENDOR_INPUTS = {
     'lib/diff_match_patch.js': ('aac7655a215d8448d95d9871e8d8a40ac3d9aaf38d81ab2ccc43c1cd267b8fa3', [
         ('diff-match-patch-APACHE.txt', 'DIFF-MATCH-PATCH-LICENSE.txt', 'cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30'),
         ('diff-match-patch-header.txt', 'DIFF-MATCH-PATCH-COPYRIGHT.txt', '599ebff195998ef66252e80d07398d206e3c71f26e30a1676f86c2b19122a750')]),
+}
+# README is the upstream notice in both exact tagged packages. The timers
+# README says MIT but does not contain a full license grant or copyright text.
+SMALL_RUNTIME_PACKAGES = {
+    'stream': {'version': '0.0.2', 'readme': 'bf8da9e464b8fd963a591893bb290496de06bed507caa0cf306cca79bed83e68', 'entry': 'efc3877be3bfd5173024bff07b42dd1fa8a0bc1f4615e37f1d299c2dbb3bd044', 'package': '228375d2facb0945ba53ed9c230e3957cd8a56286b9fde71f030687821eb2353'},
+    'timers': {'version': '0.1.1', 'readme': 'e63cedfcf42d32ec13645dd54fb6b8a9c2f23a46499eddaad16ca10e79222e67', 'entry': '477d35ce3e5332afed82f83b597977317eb32c99e018e6a08053306bccb8ab71', 'package': '2e8ac6526eea40e2c41da7e963e45e05478969083e9a879ec5365d3938642756'},
 }
 CLIPPER_PACKAGE_SHA256 = '7b5f0993132342745915a54bebabaed842b7b5e13fb1f8f9fcbcefc5311c5845'
 CLIPPER_NOTICES = [
@@ -320,6 +336,7 @@ def main():
     parser.add_argument('--repo', default=DEFAULT_REPOSITORY, help='Git source containing the pinned fork commit')
     parser.add_argument('--engine-repo', default=ENGINE_REPOSITORY, help='Git source containing the pinned interpreter commit')
     parser.add_argument('--worker-engine-repo', default=WORKER_ENGINE_REPOSITORY, help='Git source for the clean worker OCC commit')
+    parser.add_argument('--emscripten-runtime-source', type=Path, required=True, help='Pinned curated Emscripten runtime source ZIP')
     parser.add_argument('--worker-occt-input', type=Path, required=True, help='Clean source-built worker OCC JS/WASM')
     parser.add_argument('--numeric-repo', default=NUMERIC_REPOSITORY, help='Git source containing the pinned numeric 1.2.6 commit')
     parser.add_argument('--manifold-research-input', type=Path, required=True, help='Hash-pinned local-only source-built Manifold artifacts and source archives')
@@ -364,6 +381,12 @@ def main():
                     occt_receipt.get('independentRebuildsMatch') is not False or
                     occt_receipt.get('licenseCleared') is not False or occt_receipt.get('localOnly') is not True):
                 raise RuntimeError('OCCT source-build receipt is inconsistent')
+        runtime_source = Path(scratch) / 'emscripten-runtime-source.zip'
+        copy_checked_input(args.emscripten_runtime_source, runtime_source, EMSCRIPTEN_RUNTIME_SOURCE_SHA256)
+        with zipfile.ZipFile(runtime_source) as runtime_zip:
+            for name, expected in EMSCRIPTEN_LICENSES.items():
+                if hashlib.sha256(runtime_zip.read(name)).hexdigest() != expected:
+                    raise RuntimeError('Emscripten runtime source/notice differs: ' + name)
         worker_input = Path(scratch) / 'worker-occt-input'
         worker_input.mkdir()
         for name, expected in WORKER_ENGINE_INPUTS.items():
@@ -410,6 +433,25 @@ def main():
             raise RuntimeError('Pinned build did not produce index-webos.html')
         staging = Path(scratch) / 'jsketcher-build'
         staging.mkdir()
+        shutil.copyfile(runtime_source, staging / 'emscripten-runtime-source.zip')
+        source_index = HERE / 'SOURCE-INDEX.html'
+        if source_index.is_symlink() or not source_index.is_file() or source_index.stat().st_size > 128 * 1024:
+            raise RuntimeError('Source index missing or unsafe')
+        shutil.copyfile(source_index, staging / 'SOURCE-INDEX.html')
+        with zipfile.ZipFile(runtime_source) as runtime_zip:
+            sections = []
+            for name in EMSCRIPTEN_LICENSES:
+                text = runtime_zip.read(name).decode('utf-8')
+                if name.endswith('dlmalloc.c'):
+                    text = text[:text.index(' * Version 2.8.6')]
+                sections.append('===== ' + name + ' =====\n' + text)
+        notice_intro = ('Emscripten 2.0.30, revision f782b50a7f8dded7cd0e2c7ee4fed41ab743f5c0. '
+                        'The clean OCC relink trace extracted libc, libc_rt_wasm, libc++, libc++abi, '
+                        'compiler-rt and dlmalloc members. The legacy link also supplied GL, al, html5 '
+                        'and sockets archives; its member-level extraction was not captured. '
+                        'The accompanying source ZIP is a bounded runtime subset, not the complete '
+                        'toolchain source; see SOURCE-PROVENANCE.txt and the build receipt.\n')
+        (staging / 'EMSCRIPTEN-RUNTIME-NOTICES.txt').write_text(notice_intro + '\n\n'.join(sections), encoding='utf-8')
         for name in ('manifold-source.zip', 'clipper2-source.zip', 'build-receipt.json'):
             shutil.copyfile(manifold_input / name, staging / ('manifold-build-receipt.json' if name == 'build-receipt.json' else name))
         # Explicit public types only; skip development maps, standalone Sketcher,
@@ -533,6 +575,16 @@ def main():
             if sha256_file(staging / output_name) != notice_hash:
                 raise RuntimeError('Copied clipper-lib notice hash mismatch: ' + output_name)
         shutil.copyfile(root / 'LICENSE', staging / 'JSKETCHER-LICENSE.txt')
+        for name, pins in SMALL_RUNTIME_PACKAGES.items():
+            package = root / 'node_modules' / name
+            for filename, key in [('README.md', 'readme'), ('index.js', 'entry'), ('package.json', 'package')]:
+                path = package / filename
+                if path.is_symlink() or not path.is_file() or sha256_file(path) != pins[key]:
+                    raise RuntimeError('Runtime package source/notice differs: ' + name + '/' + filename)
+            metadata = json.loads((package / 'package.json').read_text(encoding='utf-8'))
+            if metadata.get('name') != name or metadata.get('version') != pins['version'] or metadata.get('license') != 'MIT':
+                raise RuntimeError('Runtime package metadata differs: ' + name)
+            shutil.copyfile(package / 'README.md', staging / (name.upper() + '-UPSTREAM-README.txt'))
         occ = root / 'node_modules' / 'jsketcher-occ-engine'
         for src, dst in [('license.md', 'OCCT-exception.txt'), ('LICENSE_LGPL_21.txt', 'OCCT-LGPL-2.1.txt'),
                          ('opencascade-info.txt', 'OCCT-upstream-info.txt')]:
@@ -605,6 +657,20 @@ def main():
         if evidence.is_symlink() or not evidence.is_file() or evidence.stat().st_size > 128 * 1024:
             raise RuntimeError('Runtime provenance notes missing or unsafe')
         shutil.copyfile(evidence, staging / 'SOURCE-PROVENANCE.txt')
+        class SourceLinks(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.targets = []
+            def handle_starttag(self, tag, attrs):
+                if tag == 'a':
+                    self.targets.extend(value for name, value in attrs if name == 'href')
+        source_links = SourceLinks()
+        source_links.feed((staging / 'SOURCE-INDEX.html').read_text(encoding='utf-8'))
+        # The receipt is produced immediately afterward; all other links must
+        # already be present and stay within the packaged directory.
+        if not source_links.targets or any(not isinstance(name, str) or not SAFE.fullmatch(name) or
+                (name != 'BUILD-RECEIPT.json' and not (staging / name).is_file()) for name in source_links.targets):
+            raise RuntimeError('Source index has an unsafe or missing target')
         # This identifies what this build produced and supports a future
         # independent comparison. It does not claim reproducible binaries.
         contents = [{'path': f.relative_to(staging).as_posix(), 'bytes': f.stat().st_size, 'sha256': sha256_file(f)}
@@ -613,6 +679,7 @@ def main():
                    'numericInputSHA256': NUMERIC_INPUT_SHA256,
                    'workerInterpreterCommit': WORKER_ENGINE_COMMIT, 'workerInterpreterTree': WORKER_ENGINE_TREE,
                    'workerOcctInputs': WORKER_ENGINE_INPUTS,
+                   'emscriptenRuntimeSourceSHA256': EMSCRIPTEN_RUNTIME_SOURCE_SHA256,
                    **worker_receipts,
                    'occtSelection': 'source-research' if occt_input is not None else 'npm',
                    'occtSourceResearchReceipt': occt_receipt,
