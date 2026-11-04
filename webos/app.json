@@ -6,6 +6,7 @@
     "node_modules/jsketcher-build/DIFF-MATCH-PATCH-COPYRIGHT.txt",
     "node_modules/jsketcher-build/DIFF-MATCH-PATCH-LICENSE.txt",
     "node_modules/jsketcher-build/JSKETCHER-LICENSE.txt",
+    "node_modules/jsketcher-build/MDI-SVG-LICENSE.txt",
     "node_modules/jsketcher-build/NUMERIC-LICENSE.txt",
     "node_modules/jsketcher-build/NUMERIC-QUADPROG-LICENSE.txt",
     "node_modules/jsketcher-build/OCCT-INTERPRETER-LICENSE.txt",
@@ -16,6 +17,7 @@
     "node_modules/jsketcher-build/PROVENANCE-LOCAL-ONLY.txt",
     "node_modules/jsketcher-build/REGENERATOR-RUNTIME-LICENSE.txt",
     "node_modules/jsketcher-build/REGENERATOR-RUNTIME-PATENTS.txt",
+    "node_modules/jsketcher-build/SOURCE-PROVENANCE.txt",
     "node_modules/jsketcher-build/VERB-LICENSE.txt",
     "node_modules/jsketcher-build/clipper2-source.zip",
     "node_modules/jsketcher-build/css/toolkit.css",
@@ -131,10 +133,11 @@
     "node_modules/jsketcher-build/manifold-source.zip",
     "node_modules/jsketcher-build/numeric-source.zip",
     "node_modules/jsketcher-build/occt-interpreter-source.zip",
+    "node_modules/jsketcher-build/runtime-source-candidates.zip",
     "node_modules/jsketcher-build/static/7bb5f8ee10fcafdab787.wasm",
     "node_modules/jsketcher-build/static/index.bundle.js",
     "node_modules/jsketcher-build/static/modules_brep_operations_mesh_browserNodeModuleStub_js.bundle.js",
-    "node_modules/jsketcher-build/static/project-validator.e674b4c6232dd81ba8e1.js",
+    "node_modules/jsketcher-build/static/project-validator.aac5894b3e599312ceed.js",
     "node_modules/jsketcher-build/static/vendors-node_modules_cache_codi-manifold_manifold_js.bundle.js"
   ]
 }

@@ -4,7 +4,7 @@
 our LAN jSketcher fork at `example.invalid:/srv/data/git/JSKetcher.git` with an independent
 temporary CAD workspace per window. Its File menu asks the desktop host to open,
 save, or save a copy of a `.jsketcher.json` project in the signed-in account's
-My files. Projects use the version-one native envelope with explicit millimeter
+My files. Projects use the version-two native envelope with explicit millimeter
 units and contain the modeling history and sketches together. A save
 first writes the browser mirror; it can still be pending or conflicting while
 server synchronization runs. The Linux guest filesystem is separate.
@@ -77,7 +77,7 @@ access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
 license review are release gates. Generated assets and `node_modules` are not
-committed. The current experimental pin is `f36062ba409963ea1ed93e1985bb0a781abdf9b1`,
+committed. The current experimental pin is `794c14a36d706a86ac3d834a536f97c34cc99e2f`,
 including opt-in numeric and source-built Manifold changes. The local input
 directory must contain the pinned Manifold JS/Wasm, source archives and build
 receipt; hashes are checked before use. Two matching builds used the same R730
@@ -282,4 +282,8 @@ or printing.
 
 The project validator worker and manifest are part of the same packaged runtime. Project opens require the desktop host to supply bounded snapshot leases and release them on completion or cancellation; the native project codec uses explicit millimeter units. Large-model memory behavior, cancellation across the full host path, broad geometry fidelity, and complete corresponding source and notices remain release gates. This runtime remains experimental and local only.
 
-The revision-one native envelope is still a pre-release format: earlier experimental files may contain cylinder/cone datum conventions that differ from the current implementation. A schema/semantics gate that rejects those files is required before claiming stable native persistence; no compatibility importer is assumed.
+The native envelope is version 2. Revision-one experimental projects are rejected: their cylinder/cone datum conventions may differ, and there is no compatibility importer. Native persistence still needs broader geometry and recovery qualification before it can be called stable.
+
+See `PROVENANCE-NOTES.md` for the seven flagged runtime-candidate packages,
+the source-candidate archive, the pinned MDI notice, and exact unresolved
+wrapper/third-party notice and corresponding-source gaps.

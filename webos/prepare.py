@@ -16,10 +16,11 @@ import stat
 import subprocess
 import tempfile
 import zipfile
+import xml.etree.ElementTree as ET
 
 HERE = Path(__file__).resolve().parent
 # Update only after reviewing the fork commit and the generated manifest.
-FORK_COMMIT = 'f36062ba409963ea1ed93e1985bb0a781abdf9b1'
+FORK_COMMIT = '794c14a36d706a86ac3d834a536f97c34cc99e2f'
 DEFAULT_REPOSITORY = 'example.invalid:/srv/data/git/JSKetcher.git'
 ENGINE_COMMIT = '5efaf53accb45bac475155fc4d5552642c19e91e'
 ENGINE_REPOSITORY = 'https://github.com/Autodrop3d/occt-interpreter.git'
@@ -255,6 +256,58 @@ def notices(node_modules, destination, index_bundle=None):
         add('README.txt', 'Installed npm package metadata and supplied notices, including build-time packages. For packages without a separate notice, supplemental/ may contain their supplied README and entry point as evidence for review. This is not a complete corresponding-source archive. needs-review.json lists entries without a separate matched notice file or nonempty string version and license metadata; metadata-errors.json lists package roots whose metadata could not be inventoried. webpack-candidates.json heuristically maps development webpack module IDs from the main bundle; it is not a complete dependency graph, excludes standalone web/lib scripts and OCCT assets, and may miss loader or generated modules. Review all runtime dependencies and vendored web/lib scripts independently.\n')
 
 
+# Runtime candidates whose package archives lacked complete notice metadata.
+# Keep the exact installed package contents as evidence; this is not a claim
+# that generated npm packages contain all preferred source or license terms.
+MDI_LICENSE_SHA256 = '453b87202c008eac411015ddde3320dd93502e198d4d7e8a579eac8421ab4e81'
+MDI_SVG_SHA256 = {'check.svg': '55e1f855014f31e49e3375fb102409a5f350abc58451deb27ad2e7b60afbdf69',
+                   'unfold-more-horizontal.svg': '31ae0360f0e9896ad39fc8518cb8b8d86638210cb418aa96312920f58ac221c3'}
+MDI_COMPONENTS = {'CheckIcon.js', 'UnfoldMoreHorizontalIcon.js'}
+
+REVIEW_SOURCE_PACKAGES = {
+    'babel-polyfill/node_modules/regenerator-runtime': ('regenerator-runtime', '0.10.5'),
+    'clipper-lib': ('clipper-lib', '6.2.1'),
+    'component-emitter': ('component-emitter', '1.1.3'),
+    'numeric': ('numeric', '1.2.6'),
+    'react-color/node_modules/@icons/material': ('@icons/material', '0.2.4'),
+    'stream': ('stream', '0.0.2'),
+    'timers': ('timers', '0.1.1'),
+}
+
+def review_package_sources(node_modules, destination):
+    total = 0
+    with zipfile.ZipFile(destination, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
+        for relative, (name, version) in sorted(REVIEW_SOURCE_PACKAGES.items()):
+            package = node_modules / relative
+            if any(part.is_symlink() for part in (package, *package.parents) if part != node_modules.parent):
+                raise RuntimeError('Symlink in candidate source package: ' + relative)
+            data = json.loads((package / 'package.json').read_text(encoding='utf-8'))
+            if data.get('name') != name or data.get('version') != version:
+                raise RuntimeError('Candidate source package differs from reviewed version: ' + relative)
+            for item in sorted(package.rglob('*')):
+                if item.is_symlink():
+                    raise RuntimeError('Symlink in candidate source package: ' + str(item))
+                if not item.is_file():
+                    continue
+                # No nested dependencies; each independently reviewed package
+                # is listed explicitly above.
+                path = item.relative_to(package)
+                if 'node_modules' in path.parts:
+                    continue
+                if relative == 'react-color/node_modules/@icons/material' and path.as_posix() not in {
+                    'package.json', 'README.md', 'transform.js', 'CheckIcon.js', 'UnfoldMoreHorizontalIcon.js',
+                    'svg/check.svg', 'svg/unfold-more-horizontal.svg',
+                }:
+                    continue
+                size = item.stat().st_size
+                total += size
+                if size > 8 * 1024 * 1024 or total > 64 * 1024 * 1024:
+                    raise RuntimeError('Candidate source archive exceeds its size bound')
+                info = zipfile.ZipInfo(relative + '/' + path.as_posix(), date_time=(1980, 1, 1, 0, 0, 0))
+                info.compress_type = zipfile.ZIP_DEFLATED
+                info.external_attr = 0o100644 << 16
+                archive.writestr(info, item.read_bytes())
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--repo', default=DEFAULT_REPOSITORY, help='Git source containing the pinned fork commit')
@@ -373,6 +426,30 @@ def main():
         worker_modules = set(re.findall(module_pattern, worker_files[0].read_text(encoding='utf-8')))
         if worker_modules - main_modules:
             raise RuntimeError('Validator has worker-only npm modules requiring notice review')
+        # The two bundled @icons/material components originate in mdi-svg.
+        # Exact svg bytes and the upstream license are pinned independently.
+        icon_prefix = './node_modules/react-color/node_modules/@icons/material/'
+        icon_modules = {name for name in main_modules | worker_modules if name.startswith(icon_prefix)}
+        expected_icons = {icon_prefix + name for name in MDI_COMPONENTS}
+        if icon_modules != expected_icons:
+            raise RuntimeError('Material icon bundle differs from the reviewed icon set')
+        icon_svg = root / 'node_modules/react-color/node_modules/@icons/material/svg'
+        for name, digest in MDI_SVG_SHA256.items():
+            if sha256_file(icon_svg / name) != digest:
+                raise RuntimeError('Material icon SVG differs from reviewed mdi-svg input: ' + name)
+        icon_root = icon_svg.parent
+        for component, svg_name in [('CheckIcon.js', 'check.svg'), ('UnfoldMoreHorizontalIcon.js', 'unfold-more-horizontal.svg')]:
+            if component not in MDI_COMPONENTS:
+                continue  # Isolated fixture may supply an empty icon set.
+            source = (icon_root / component).read_text(encoding='utf-8')
+            values = re.findall(r"d:\s*['\"]([^'\"]+)", source)
+            paths = [element.get('d') for element in ET.fromstring((icon_svg / svg_name).read_bytes()).iter() if element.tag.endswith('path')]
+            if len(values) != 1 or values[0] not in paths:
+                raise RuntimeError('Material icon component does not match its reviewed SVG: ' + component)
+        mdi_license = VENDOR_NOTICE_DIR / 'mdi-svg-2.2.43-LICENSE.txt'
+        if mdi_license.is_symlink() or sha256_file(mdi_license) != MDI_LICENSE_SHA256:
+            raise RuntimeError('mdi-svg license differs from reviewed upstream input')
+        shutil.copyfile(mdi_license, staging / 'MDI-SVG-LICENSE.txt')
         selected_engine = OCCT_SOURCE_INPUTS if occt_input is not None else ENGINE_SHA256
         for name in ('occt.js', 'occt.wasm'):
             if sha256_file(staging / 'lib-assets/jsketcher-occ-engine' / name) != selected_engine[name]:
@@ -466,6 +543,11 @@ def main():
             (staging / target).write_bytes(contents)
         run('git', '-C', str(numeric), 'archive', '--format=zip', '--output=' + str(staging / 'numeric-source.zip'), NUMERIC_COMMIT)
         notices(root / 'node_modules', staging / 'dependency-notices.zip', staging / 'static/index.bundle.js')
+        review_package_sources(root / 'node_modules', staging / 'runtime-source-candidates.zip')
+        evidence = HERE / 'PROVENANCE-NOTES.md'
+        if evidence.is_symlink() or not evidence.is_file() or evidence.stat().st_size > 128 * 1024:
+            raise RuntimeError('Runtime provenance notes missing or unsafe')
+        shutil.copyfile(evidence, staging / 'SOURCE-PROVENANCE.txt')
         # This identifies what this build produced and supports a future
         # independent comparison. It does not claim reproducible binaries.
         contents = [{'path': f.relative_to(staging).as_posix(), 'bytes': f.stat().st_size, 'sha256': sha256_file(f)}
