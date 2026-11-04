@@ -20,10 +20,17 @@ import xml.etree.ElementTree as ET
 
 HERE = Path(__file__).resolve().parent
 # Update only after reviewing the fork commit and the generated manifest.
-FORK_COMMIT = 'd3d36bc5ee0876f22090be19d4861b68e5096421'
+FORK_COMMIT = '5b1f4c63a12826c32b0403c51425ceb61f119744'
 DEFAULT_REPOSITORY = 'example.invalid:/srv/data/git/JSKetcher.git'
 ENGINE_COMMIT = '5efaf53accb45bac475155fc4d5552642c19e91e'
 ENGINE_REPOSITORY = 'https://github.com/Autodrop3d/occt-interpreter.git'
+WORKER_ENGINE_COMMIT = 'c4dce453420fe31123a6be1e66161c388b46308c'
+WORKER_ENGINE_TREE = '6064cd4335a3ccbbd23f52d8559990c6fb604d2f'
+WORKER_ENGINE_REPOSITORY = 'example.invalid:/srv/data/git/occt-interpreter-codi.git'
+WORKER_ENGINE_INPUTS = {'main.js': '89b3b85fb8afcfbdf343ec3f7f2ecf222067012d994cf9af6eb649ef30d9257b',
+                        'main.wasm': 'c39793b8aff34dc548b57fee1d901219e372702a5005ef92dfdf94994c012897'}
+WORKER_PORTABLE_SHA256 = 'f74142622c9ced56b8f2e7955301ace5902f811734a71128767fb05de4159972'
+WORKER_BUNDLE_SHA256 = 'a06bcc6cb9ac87e335d4ff59d6d570c6dd7a8acf7adf90e903339b9a13832f04'
 ENGINE_SHA256 = {'occt.wasm': 'fee4624786bb114de1d381340f05f0cdf47e6700b9fd62ef8a5dace82c8fda77',
                  'occt.js': '3c56e74e6e08411436a68fb930bab38aedd3137e4369af2bc67fd382e568787e'}
 # The shipped 2.1.1 build differs from upstream only by whitespace. Check
@@ -81,7 +88,7 @@ MANIFOLD_INPUTS = {
 }
 DESTINATION = HERE / 'node_modules' / 'jsketcher-build'
 PREFIX = 'node_modules/jsketcher-build/'
-PUBLIC_SUFFIXES = {'.js', '.html', '.json', '.css', '.wasm', '.svg', '.png',
+PUBLIC_SUFFIXES = {'.js', '.mjs', '.html', '.json', '.css', '.wasm', '.svg', '.png',
                    '.jpg', '.jpeg', '.gif', '.ico', '.woff', '.woff2', '.ttf',
                    '.eot', '.txt'}
 SAFE = re.compile(r'^(?:[a-zA-Z0-9_@+-][a-zA-Z0-9_@+.-]*/)*[a-zA-Z0-9_@+-][a-zA-Z0-9_@+.-]*$')
@@ -312,6 +319,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--repo', default=DEFAULT_REPOSITORY, help='Git source containing the pinned fork commit')
     parser.add_argument('--engine-repo', default=ENGINE_REPOSITORY, help='Git source containing the pinned interpreter commit')
+    parser.add_argument('--worker-engine-repo', default=WORKER_ENGINE_REPOSITORY, help='Git source for the clean worker OCC commit')
+    parser.add_argument('--worker-occt-input', type=Path, required=True, help='Clean source-built worker OCC JS/WASM')
     parser.add_argument('--numeric-repo', default=NUMERIC_REPOSITORY, help='Git source containing the pinned numeric 1.2.6 commit')
     parser.add_argument('--manifold-research-input', type=Path, required=True, help='Hash-pinned local-only source-built Manifold artifacts and source archives')
     parser.add_argument('--occt-source-research-input', type=Path, help='Optional exact local source-built OCCT candidate and receipt; experimental use only')
@@ -355,6 +364,10 @@ def main():
                     occt_receipt.get('independentRebuildsMatch') is not False or
                     occt_receipt.get('licenseCleared') is not False or occt_receipt.get('localOnly') is not True):
                 raise RuntimeError('OCCT source-build receipt is inconsistent')
+        worker_input = Path(scratch) / 'worker-occt-input'
+        worker_input.mkdir()
+        for name, expected in WORKER_ENGINE_INPUTS.items():
+            copy_checked_input(args.worker_occt_input / name, worker_input / name, expected)
         root = Path(scratch) / 'source'
         root.mkdir()
         run('git', 'init', '--quiet', str(root))
@@ -384,6 +397,12 @@ def main():
             shutil.copyfile(manifold_input / name, manifold_cache / name)
             if sha256_file(manifold_cache / name) != MANIFOLD_INPUTS[name]:
                 raise RuntimeError('Copied Manifold artifact hash mismatch: ' + name)
+        worker_cache = root / 'node_modules' / '.cache' / 'codi-oci-clean'
+        worker_cache.mkdir(parents=True)
+        for name in WORKER_ENGINE_INPUTS:
+            shutil.copyfile(worker_input / name, worker_cache / name)
+            if sha256_file(worker_cache / name) != WORKER_ENGINE_INPUTS[name]:
+                raise RuntimeError('Copied worker OCC artifact hash mismatch: ' + name)
         env = dict(os.environ, CODI_EMBED_NUMERIC='1', CODI_EMBED_MANIFOLD='1')
         run('npm', 'run', 'build', cwd=root, env=env)
         built = root / 'dist'
@@ -422,7 +441,8 @@ def main():
         worker_modules = set()
         worker_receipts = {}
         for receipt_key, prefix in (('projectValidatorWorker', 'project-validator'),
-                                    ('sketchSolverWorker', 'sketch-solver')):
+                                    ('sketchSolverWorker', 'sketch-solver'),
+                                    ('prismSemanticWorker', 'prism-semantic')):
             files = list((staging / 'static').glob(prefix + '.*.js'))
             if len(files) != 1 or not re.fullmatch(re.escape(prefix) + r'\.[0-9a-f]{20}\.js', files[0].name):
                 raise RuntimeError('Expected exactly one content-addressed ' + prefix + ' worker')
@@ -435,6 +455,20 @@ def main():
             worker_modules.update(modules)
             worker_receipts[receipt_key] = {'path': worker.relative_to(staging).as_posix(),
                                             'sha256': sha256_file(worker)}
+        # Closed worker asset set: require exact pinned runtime and source helpers,
+        # all referenced by the emitted application bundle.
+        worker_assets = {'oci-verified-worker.js': WORKER_BUNDLE_SHA256,
+                         'occ-portable.js': WORKER_PORTABLE_SHA256,
+                         WORKER_ENGINE_INPUTS['main.wasm'][:20] + '.wasm': WORKER_ENGINE_INPUTS['main.wasm']}
+        for name in ('profile-topology.mjs', 'centeredHolePlan.mjs', 'centeredHoleTopology.mjs'):
+            worker_assets[name] = sha256_file(root / 'modules/engine/mount' / name)
+        for name in ('rectangleProfileRequest.mjs', 'authoredRegions.mjs', 'profilePlan.mjs'):
+            worker_assets[name] = sha256_file(root / 'modules/workbenches/modeler/features/extrude' / name)
+        for name, digest in worker_assets.items():
+            asset = staging / 'static' / name
+            if not asset.is_file() or sha256_file(asset) != digest or name not in main_code:
+                raise RuntimeError('Worker runtime asset missing, altered or unreferenced: ' + name)
+        worker_receipts['workerOccAssets'] = {name: digest for name, digest in sorted(worker_assets.items())}
         # The two bundled @icons/material components originate in mdi-svg.
         # Exact svg bytes and the upstream license are pinned independently.
         icon_prefix = './node_modules/react-color/node_modules/@icons/material/'
@@ -507,6 +541,7 @@ def main():
             ('Selected OCCT: source-built candidate ' + OCCT_SOURCE_INPUTS['occt.wasm'] +
              '. It differs from npm and another independent build also differed; broad equivalence is unproven. '
              if occt_input is not None else 'Selected OCCT: pinned npm artifact. ') +
+            'Clean worker OCC source commit ' + WORKER_ENGINE_COMMIT + ' and its root/OCCT notices are included separately. Independent clean rebuild parity and complete toolchain notices remain unproven. '
             'Experimental local build only. jSketcher fork commit: ' + FORK_COMMIT + '\n'
             'This build uses Open CASCADE Technology through jsketcher-occ-engine. '
             'The engine source archive contains interpreter commit ' + ENGINE_COMMIT + ', whose publish script names that same commit in the npm package version. '
@@ -534,6 +569,19 @@ def main():
                 raise RuntimeError('Pinned interpreter license differs: ' + path)
             (staging / target).write_bytes(contents)
         run('git', '-C', str(engine), 'archive', '--format=zip', '--output=' + str(staging / 'occt-interpreter-source.zip'), ENGINE_COMMIT)
+        worker_engine = Path(scratch) / 'worker-engine-source'
+        worker_engine.mkdir()
+        run('git', 'init', '--quiet', str(worker_engine))
+        run('git', '-C', str(worker_engine), 'fetch', '--quiet', '--depth=1', args.worker_engine_repo, WORKER_ENGINE_COMMIT)
+        if subprocess.check_output(['git', '-C', str(worker_engine), 'rev-parse', 'FETCH_HEAD'], text=True).strip() != WORKER_ENGINE_COMMIT:
+            raise RuntimeError('Worker interpreter commit differs from the pin')
+        if subprocess.check_output(['git', '-C', str(worker_engine), 'rev-parse', 'FETCH_HEAD^{tree}'], text=True).strip() != WORKER_ENGINE_TREE:
+            raise RuntimeError('Worker interpreter source tree differs from the pin')
+        for path, (_, expected) in ENGINE_SOURCE_NOTICES.items():
+            contents = subprocess.check_output(['git', '-C', str(worker_engine), 'show', WORKER_ENGINE_COMMIT + ':' + path])
+            if hashlib.sha256(contents).hexdigest() != expected:
+                raise RuntimeError('Worker interpreter notice differs: ' + path)
+        run('git', '-C', str(worker_engine), 'archive', '--format=zip', '--output=' + str(staging / 'occt-worker-interpreter-source.zip'), WORKER_ENGINE_COMMIT)
         numeric = Path(scratch) / 'numeric-source'
         numeric.mkdir()
         run('git', 'init', '--quiet', str(numeric))
@@ -563,6 +611,8 @@ def main():
                     for f in sorted(staging.rglob('*')) if f.is_file()]
         receipt = {'forkCommit': FORK_COMMIT, 'interpreterCommit': ENGINE_COMMIT, 'numericCommit': NUMERIC_COMMIT,
                    'numericInputSHA256': NUMERIC_INPUT_SHA256,
+                   'workerInterpreterCommit': WORKER_ENGINE_COMMIT, 'workerInterpreterTree': WORKER_ENGINE_TREE,
+                   'workerOcctInputs': WORKER_ENGINE_INPUTS,
                    **worker_receipts,
                    'occtSelection': 'source-research' if occt_input is not None else 'npm',
                    'occtSourceResearchReceipt': occt_receipt,

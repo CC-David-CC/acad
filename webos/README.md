@@ -72,12 +72,12 @@ CAD or manufacturing validation, and it is not a remote-agent interface.
 ## Rebuilding and local testing
 
 `prepare.py` currently produces **local-only experimental output** using
-`--experimental-local-only --update-manifest --manifold-research-input /path/to/staged-inputs`. It needs Node, npm and Git
+`--experimental-local-only --update-manifest --manifold-research-input /path/to/staged-inputs --worker-occt-input /path/to/clean-worker`. It needs Node, npm and Git
 access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
 license review are release gates. Generated assets and `node_modules` are not
-committed. The current experimental pin is `d3d36bc5ee0876f22090be19d4861b68e5096421`,
+committed. The current experimental pin is `5b1f4c63a12826c32b0403c51425ceb61f119744`,
 including guarded document replacement, private dependent-feature replay,
 headless sketch solving, and the bounded fillet fixes. The local input
 directory must contain the pinned Manifold JS/Wasm, source archives and build
@@ -85,8 +85,8 @@ receipt; hashes are checked before use. Two matching builds used the same R730
 toolchain, so this is repeatability rather than independent provenance. Run the normal public app builder only
 after the preparer succeeds and its asset manifest is reviewed.
 
-The preparer requires both content-addressed workers, `project-validator` and
-`sketch-solver`, checks the main bundle's references and records their hashes
+The preparer requires all three content-addressed workers, `project-validator`,
+`sketch-solver` and `prism-semantic`, checks the main bundle's references and records their hashes
 in `BUILD-RECEIPT.json`. Missing, duplicate, unreferenced or newly detected
 worker-only npm modules refuse packaging pending review. This module-comment
 check is a review aid, not a complete runtime dependency graph. Test helpers
@@ -100,6 +100,35 @@ verify its closed inventory and file hashes after copying, then select the
 `manifold/` and `occt/` subdirectories. See desktop
 `docs/evidence/cad-runtime-inputs-20261104.json`. These remain local research
 inputs, with the provenance limitations below.
+
+For example, on R730 with the retained inputs and Node/npm on `PATH`:
+
+```sh
+python3 apps/system/jsketcher/prepare.py --repo /mnt/data10tb/git/JSKetcher.git \
+  --worker-engine-repo /mnt/data10tb/git/occt-interpreter-codi.git \
+  --worker-occt-input /mnt/data10tb/codi-occ-centered-clean-20261104/build \
+  --manifold-research-input /mnt/data10tb/codi-cad-runtime-inputs-ced603b99f8d/manifold \
+  --occt-source-research-input /mnt/data10tb/codi-cad-runtime-inputs-ced603b99f8d/occt \
+  --experimental-local-only --update-manifest
+```
+
+The legacy interpreter and numeric source repositories are fetched at their
+pinned commits; npm installs the fork's locked build dependencies.
+
+The separate centered-hole OCC worker uses clean source-built JS/WASM from
+`/mnt/data10tb/codi-occ-centered-clean-20261104/build` on R730, or
+`/srv/data/codi-occt-centered-clean-20261104` on example.invalid. Copy only `main.js`
+and `main.wasm` to a local directory and pass it as `--worker-occt-input`.
+The preparer checks both exact hashes, archives the corresponding pinned
+`c4dce453420fe31123a6be1e66161c388b46308c` source separately as
+`occt-worker-interpreter-source.zip`, checks the wrapper root and OCCT notices,
+and verifies the emitted worker, wrapper, WASM and six worker helper modules.
+See the fork's `docs/research/CENTERED-HOLE-CLEAN-RUNTIME-20261104.md` for the
+clean build receipt and toolchain archive. One clean build and bounded tests do
+not establish independent byte reproducibility. The separate legacy and worker
+source archives and their notices must accompany any distributed artifacts;
+the LAN backup is not a public source offer. Use the legacy source-built option
+below for the candidate prepared here.
 
 An optional `--occt-source-research-input /path/to/occt-input` selects one
 specific source-built interpreter for local research. Put the exact `occt.js`
@@ -340,3 +369,13 @@ override from a previously prepared public-app bundle and a separately built
 CAD output. Feed its output to `tests/files-desktop-signed-fixture.py` via
 `CODI_APPS_BUNDLE`; supply the matching helper through `JSKETCHER_HELPER_PATH`.
 This override reuses old source notices and does not qualify a release package.
+
+The November 4 clean-worker candidate was actually prepared on R730 from
+`5b1f4c63a12826c32b0403c51425ceb61f119744` with the source-built legacy
+interpreter and separate clean worker inputs. The resulting 151-file candidate
+is at `/mnt/data10tb/codi-clean-desktop-preparer-20261104/apps/system/jsketcher/node_modules/jsketcher-build`.
+Its `app.json` SHA-256 is `8f392c63e7af5c80c6609e26f00ca531caf3b359feb23d6c800e833e27f58863` and
+`BUILD-RECEIPT.json` SHA-256 is `360d0f3a33704859016995a1deb32305be50aca5e2850736212d90e2383a76f6`.
+The exact fork/source/worker/notice package checks passed. This preparer receipt
+is not a signed-parent test or deployment authorization, and the separate
+source and toolchain notice and corresponding-source limitations above remain.
