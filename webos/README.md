@@ -304,3 +304,17 @@ The native envelope is version 2. Revision-one experimental projects are rejecte
 See `PROVENANCE-NOTES.md` for the seven flagged runtime-candidate packages,
 the source-candidate archive, the pinned MDI notice, and exact unresolved
 wrapper/third-party notice and corresponding-source gaps.
+
+The research rectangle integration registers `inspect-rectangle-creation` and
+`create-rectangle-sketch` in the app's account/window-scoped command registry.
+The WebOS-only CAD Add menu opens a dialog that calls the same core operation.
+Both paths use the inspected revision and a synchronous account/window guard;
+creation is volatile until the existing My files save completes. Older packaged
+CAD builds refuse the command instead of simulating it. This source change
+requires the matching CAD branch and has not changed any runtime pin or deploy.
+
+For isolated testing, build the matching CAD fork and its WebOS test helper,
+then run `python3 tests/jsketcher-rectangle-fixture.py --output NEW_DIR
+--cad-dist CAD_DIST`. Serve NEW_DIR with `tests/jsketcher-host-csp-server.py`
+and run `tests/jsketcher-rectangle-host-browser.test.mjs` against loopback
+Chromium. Its My files backend is an in-memory stand-in, not a signed service.

@@ -2,6 +2,7 @@ import './style.css';
 import {inspectedProjectIsDirty} from './inspect-state.mjs';
 import {readVersionedBytes,acquireVersionedSnapshot} from './file-read.mjs';
 import {registerSketchCommands} from './sketch-commands.mjs';
+import {createRectangleController} from './rectangle-commands.mjs';
 
 // The embedded CAD app owns only its temporary model. The host owns account
 // storage, confirmation, version checks and the lifetime of every iframe.
@@ -50,6 +51,35 @@ export function mount(host){
    if(!editor?.inEditMode||!context?.viewer||ctx.projectManager?.unit!=='millimeter'||ctx.craftService?.isProcessing)throw Error('Open a supported sketch before using sketch commands.');
    return {context,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&editor.inEditMode&&editor.sketcherAppContext===context&&!ctx.craftService.isProcessing};
   }));
+ }
+ const rectangle=createRectangleController(host,()=>{
+  if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
+  const frame=active,ctx=frame.contentWindow?.__CAD_APP;
+  return {craft:ctx?.craftService,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx};
+ });
+ if(host.commands)host.onDispose(rectangle.register());
+ let rectangleDialog=null;
+ function closeRectangleDialog(){if(rectangleDialog){clearInterval(rectangleDialog.timer);rectangleDialog.controller.abort();rectangleDialog.dialog.remove();rectangleDialog=null;}}
+ function openRectangleDialog(){
+  if(rectangleDialog)return;
+  let target,capability;try{target=rectangle.target();capability=target.craft.inspectRectangleCreation();if(!target.valid())throw Error('The window or account changed.');if(!capability.ready)throw Error(capability.reason||'Finish the current operation first.');}catch(e){tell(e.message);return;}
+  const dialog=document.createElement('dialog');dialog.className='jsketcher-rectangle-dialog';
+  const form=document.createElement('form');form.method='dialog';
+  const heading=document.createElement('h2');heading.textContent='Dimensioned rectangle';form.append(heading);
+  const help=document.createElement('p');help.textContent='XY plane · dimensions and position in millimeters';form.append(help);
+  const inputs={};for(const [key,label,value] of [['width','Width',100],['height','Height',50],['x','Origin X',0],['y','Origin Y',0],['depth','Plane depth',0]]){
+   const row=document.createElement('label'),field=document.createElement('input');row.textContent=label;field.type='number';field.step='any';field.required=true;field.value=String(value);field.name=key;row.append(field);form.append(row);inputs[key]=field;
+  }
+  const error=document.createElement('p');error.setAttribute('role','alert');form.append(error);
+  const actions=document.createElement('div'),cancel=document.createElement('button'),submit=document.createElement('button');cancel.type='button';cancel.textContent='Cancel';submit.type='submit';submit.textContent='Create';actions.append(cancel,submit);form.append(actions);dialog.append(form);body.append(dialog);
+  const controller=new AbortController(),timer=setInterval(()=>{if(!target.valid())closeRectangleDialog();},100);rectangleDialog={dialog,timer,controller};cancel.addEventListener('click',closeRectangleDialog);dialog.addEventListener('cancel',e=>{e.preventDefault();closeRectangleDialog();});
+  form.addEventListener('submit',async e=>{e.preventDefault();if(!target.valid()){closeRectangleDialog();return;}
+   const values=Object.fromEntries(Object.entries(inputs).map(([key,input])=>[key,Number(input.value)]));
+   if(Object.values(inputs).some(input=>!input.value.trim())||Object.values(values).some(n=>!Number.isFinite(n))){error.textContent='Enter finite numbers for all fields.';return;}
+   submit.disabled=true;error.textContent='';
+   try{await rectangle.create({revision:capability.revision,unit:'millimeter',origin:[values.x,values.y],width:values.width,height:values.height,depth:values.depth},target,controller.signal);closeRectangleDialog();tell('Rectangle created in the workspace. Save the project to My files to keep it.');}
+   catch(e){if(!target.valid()){closeRectangleDialog();return;}error.textContent=e?.message||'Could not create rectangle.';submit.disabled=false;}
+  });dialog.showModal();
  }
  function setWatch(c,path,version){watch();watch=()=>{};const serial=++watchRevision;warning.hidden=true;warning.textContent='';const check=async()=>{const seq=++checkRevision;let message='';try{const entry=await c.files.stat(path);if(entry.status==='conflict')message='This project has conflicting copies. Resolve them in Files before saving.';else if(entry.version!==version)message='The saved project changed. Save a copy or open it again.';}catch{message='The saved project is unavailable. Your current model remains open.';}if(valid()&&c.valid()&&serial===watchRevision&&seq===checkRevision&&state.path===path&&state.version===version){warning.textContent=message;warning.hidden=!message;}};watch=c.files.subscribe(check);queueMicrotask(check);}
  async function reviewManufacturing(){
@@ -145,11 +175,11 @@ export function mount(host){
    if(valid()&&frame===active)tell('Imported supported shapes from '+p+'. Save the project to keep them.');
   }catch(e){tell('Could not import DXF: '+e.message+' The existing sketch was kept where recovery was possible.');}finally{busy=false;}
  }
- function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(!data||data.type!=='file-action'||!['open','save','save-as','import-dxf','export-3mf'].includes(data.action))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='import-dxf')void importDxf();else if(data.action==='export-3mf')void export3mf();else void saveProject(data.action==='save-as');}
+ function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','import-dxf','export-3mf'].includes(data.action))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='import-dxf')void importDxf();else if(data.action==='export-3mf')void export3mf();else void saveProject(data.action==='save-as');}
  window.addEventListener('message',receive);
  const retry=textButton('Retry opening project',()=>{if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner)void openProject(w.launchContext.path,{initial:true});});retry.hidden=true;
  const review=textButton('Review material assignments',()=>void reviewManufacturing());review.hidden=true;
  body.append(warning,stage,status,retry,review);
  queueMicrotask(async()=>{if(!valid())return;try{active=createFrame(false);await waitReady(active);if(!valid())return;baseline=snapshot();tell('New model. Use File to open or save a project in My files.');if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner){await openProject(w.launchContext.path,{initial:true});if(valid()&&state.path!==w.launchContext.path)retry.hidden=false;}}catch(e){tell('Could not start jSketcher: '+e.message);}});
- return {element:body,dispose(){if(disposed)return;disposed=true;watchRevision++;checkRevision++;watch();delete state.hasChanges;window.removeEventListener('message',receive);for(const [id,reject] of timers){clearTimeout(id);reject(Error('Window closed.'));}timers.clear();for(const frame of [...frames])detach(frame);candidate=null;active=null;}};
+ return {element:body,dispose(){if(disposed)return;disposed=true;closeRectangleDialog();watchRevision++;checkRevision++;watch();delete state.hasChanges;window.removeEventListener('message',receive);for(const [id,reject] of timers){clearTimeout(id);reject(Error('Window closed.'));}timers.clear();for(const frame of [...frames])detach(frame);candidate=null;active=null;}};
 }
