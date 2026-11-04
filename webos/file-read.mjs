@@ -22,3 +22,28 @@ export async function readVersionedBytes(files,path,{maximumBytes,valid=()=>true
     (typeof file.sha256==='string'&&after.sha256!==file.sha256))throw Error('The file changed while opening. Try again.');
  return file;
 }
+
+// The caller owns release() until the CAD worker has finished consuming the
+// snapshot. Passing the original Blob avoids a host-side byte buffer and copy.
+export async function acquireVersionedSnapshot(files,path,{maximumBytes,valid=()=>true,signal}={}){
+ const check=()=>{if(signal?.aborted)throw signal.reason??new DOMException('Operation cancelled.','AbortError');if(!valid())throw Error('The window or account changed.');};
+ if(!files||typeof files.stat!=='function'||typeof files.acquireSnapshot!=='function')throw Error('Verified file snapshots are unavailable.');
+ if(!Number.isSafeInteger(maximumBytes)||maximumBytes<0||maximumBytes>128*1024*1024)throw Error('Invalid file size limit.');
+ const metadata=value=>{
+  if(!value||typeof value.version!=='string'||!value.version||!Number.isSafeInteger(value.bytes)||value.bytes<0)throw Error('File metadata is unavailable.');
+  if(value.status==='conflict')throw Error('Resolve this file conflict in Files first.');
+  if(value.bytes>maximumBytes)throw Error('This file exceeds the supported size.');
+  return value;
+ };
+ check();const before=metadata(await files.stat(path));check();
+ const lease=await files.acquireSnapshot(path,{signal,expected:before.version});
+ try{
+  check();if(!lease||typeof lease.release!=='function'||!['[object Blob]','[object File]'].includes(Object.prototype.toString.call(lease.data)))throw Error('Invalid file snapshot.');
+  if(lease.status==='conflict')throw Error('Resolve this file conflict in Files first.');
+  if(lease.data.size>maximumBytes)throw Error('This file exceeds the supported size.');
+  if(lease.version!==before.version||lease.data.size!==before.bytes||(typeof before.sha256==='string'&&lease.sha256!==before.sha256))throw Error('The file changed while opening. Try again.');
+  const after=metadata(await files.stat(path));check();
+  if(after.version!==lease.version||after.bytes!==lease.data.size||(typeof lease.sha256==='string'&&after.sha256!==lease.sha256))throw Error('The file changed while opening. Try again.');
+  return lease;
+ }catch(error){lease?.release?.();throw error;}
+}

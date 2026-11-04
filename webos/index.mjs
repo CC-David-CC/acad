@@ -1,6 +1,7 @@
 import './style.css';
 import {inspectedProjectIsDirty} from './inspect-state.mjs';
-import {readVersionedBytes} from './file-read.mjs';
+import {readVersionedBytes,acquireVersionedSnapshot} from './file-read.mjs';
+import {registerSketchCommands} from './sketch-commands.mjs';
 
 // The embedded CAD app owns only its temporary model. The host owns account
 // storage, confirmation, version checks and the lifetime of every iframe.
@@ -16,7 +17,8 @@ export function mount(host){
  function detach(frame){if(!frame)return;frames.delete(frame);try{frame.src='about:blank';}catch{}frame.remove();}
  function createFrame(hidden){const frame=document.createElement('iframe');frame.title='jSketcher CAD modeler';frame.sandbox='allow-scripts allow-same-origin allow-modals';frame.className='jsketcher-frame'+(hidden?' jsketcher-staging':'');frame.src=new URL('./node_modules/jsketcher-build/index-webos.html?DEFAULT&webos=1',import.meta.url).href;frames.add(frame);stage.append(frame);return frame;}
  async function waitReady(frame){const deadline=Date.now()+60000;while(valid()&&frames.has(frame)){try{const ctx=frame.contentWindow?.__CAD_APP;if(ctx?.streams?.lifecycle?.projectLoaded?.value&&ctx.projectManager?.snapshotCurrentProject&&ctx.projectManager?.restoreSnapshotInEmptyWorkspace)return ctx;}catch{}if(Date.now()>deadline)throw Error('jSketcher took too long to start.');await pause(50);}throw Error('The window or account changed.');}
- function snapshot(frame=active){if(!valid()||!frame||!frames.has(frame))throw Error('The modeling window is unavailable.');const ctx=frame.contentWindow?.__CAD_APP;if(!ctx?.projectManager)throw Error('The model is still loading.');return JSON.stringify(ctx.projectManager.snapshotCurrentProject());}
+ function supportedEnvelope(value){if(value?.format!=='codi-jsketcher-project'||value.version!==2||value.unit!=='millimeter'||!value.project||typeof value.project!=='object'||Array.isArray(value.project))throw Error('The CAD runtime returned an unsupported project format or units.');return value;}
+ function snapshot(frame=active){if(!valid()||!frame||!frames.has(frame))throw Error('The modeling window is unavailable.');const ctx=frame.contentWindow?.__CAD_APP;if(!ctx?.projectManager)throw Error('The model is still loading.');return JSON.stringify(supportedEnvelope(ctx.projectManager.snapshotCurrentProject()));}
  function unchanged(frame,previous){try{return frame===active&&snapshot(frame)===previous;}catch{return false;}}
  // The desktop must call this from its close guard; if the model is in an
  // unsupported intermediate state, prefer a confirmation to data loss.
@@ -40,8 +42,14 @@ export function mount(host){
    const operations=history.slice(0,100).map(op=>{if(!op||typeof op.type!=='string')throw Error('The operation history is unavailable.');return op.type.slice(0,128);});
    const project={model:savedModel,sketches,...(surfacing?{surfacing}:{})};
    const getter=typeof ctx.projectManager?.getManufacturingMetadata==='function'?()=>ctx.projectManager.getManufacturingMetadata():null;
-   return {path:state.path,dirty:inspectedProjectIsDirty(project,baseline,getter),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
+   return {path:state.path,dirty:inspectedProjectIsDirty(project,baseline,getter,ctx.projectManager.unit),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
   });host.onDispose(unregister);
+  host.onDispose(registerSketchCommands(host,()=>{
+   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
+   const frame=active,ctx=frame.contentWindow?.__CAD_APP,editor=ctx?.services?.sketcher?.inPlaceEditor,context=editor?.sketcherAppContext;
+   if(!editor?.inEditMode||!context?.viewer||ctx.projectManager?.unit!=='millimeter'||ctx.craftService?.isProcessing)throw Error('Open a supported sketch before using sketch commands.');
+   return {context,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&editor.inEditMode&&editor.sketcherAppContext===context&&!ctx.craftService.isProcessing};
+  }));
  }
  function setWatch(c,path,version){watch();watch=()=>{};const serial=++watchRevision;warning.hidden=true;warning.textContent='';const check=async()=>{const seq=++checkRevision;let message='';try{const entry=await c.files.stat(path);if(entry.status==='conflict')message='This project has conflicting copies. Resolve them in Files before saving.';else if(entry.version!==version)message='The saved project changed. Save a copy or open it again.';}catch{message='The saved project is unavailable. Your current model remains open.';}if(valid()&&c.valid()&&serial===watchRevision&&seq===checkRevision&&state.path===path&&state.version===version){warning.textContent=message;warning.hidden=!message;}};watch=c.files.subscribe(check);queueMicrotask(check);}
  async function reviewManufacturing(){
@@ -55,28 +63,30 @@ export function mount(host){
   }catch(e){manager?.cancelHostManufacturingRebind?.();tell('Could not update assignments: '+e.message);}finally{busy=false;}
  }
  async function openProject(selected,{initial=false}={}){
-  if(busy||!valid()||!active)return;tell('Preparing to open a project…');busy=true;let next=null;
+  if(busy||!valid()||!active)return;tell('Preparing to open a project…');busy=true;let next=null,file=null;
   try{
    const previous=active,prior=snapshot(previous);
    if(baseline===null||prior!==baseline){const accepted=await host.ui.confirm('Discard the unsaved model and open a different project?',{title:'Unsaved changes',confirmLabel:'Discard and open',cancelLabel:'Keep editing',danger:true,signal:host.signal});if(!accepted||!valid())return;if(!unchanged(previous,prior))throw Error('The model changed during confirmation. Try again.');}
    const chosen=selected||await host.storage.pickFile({extensions:['.jsketcher.json'],signal:host.signal});if(!chosen||!valid())return;if(!unchanged(previous,prior))throw Error('The model changed while choosing a file. Try again.');
-   const c=await mirrorFileContext();if(!valid()||!c.valid())return;const p=c.path(chosen),file=await readVersionedBytes(c.files,p,{maximumBytes:128*1024*1024,valid:()=>valid()&&c.valid()&&previous===active,signal:host.signal});if(!valid()||!c.valid())return;const json=new TextDecoder('utf-8',{fatal:true}).decode(file.data);
-   if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');tell('Rebuilding the selected model…');next=createFrame(true);candidate=next;const ctx=await waitReady(next);if(!valid()||!c.valid())return;await ctx.projectManager.restoreSnapshotInEmptyWorkspace(json);if(!valid()||!c.valid())return;
+   const c=await mirrorFileContext();if(!valid()||!c.valid())return;const p=c.path(chosen);file=await acquireVersionedSnapshot(c.files,p,{maximumBytes:128*1024*1024,valid:()=>valid()&&c.valid()&&previous===active,signal:host.signal});if(!valid()||!c.valid())return;
+   if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');tell('Rebuilding the selected model…');next=createFrame(true);candidate=next;const ctx=await waitReady(next);if(!valid()||!c.valid())return;
+   if(typeof ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace!=='function')throw Error('This CAD runtime cannot validate file snapshots in a worker.');
+   await ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace(file.data,{signal:host.signal,valid:()=>valid()&&c.valid()&&previous===active&&candidate===next&&frames.has(next)});if(!valid()||!c.valid())return;
    const restored=snapshot(next),now=await c.files.stat(p);if(!valid()||!c.valid())return;if(now.version!==file.version||now.status==='conflict')throw Error('The project changed while opening. Try again.');if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');
    active=next;candidate=null;next=null;active.classList.remove('jsketcher-staging');detach(previous);baseline=restored;state.path=p;state.version=file.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';setWatch(c,p,file.version);retry.hidden=true;review.hidden=true;tell('Opened '+p+'.');
-  }catch(e){tell('Could not open project: '+e.message+(initial?'':' The current model remains open.'));}finally{if(next)detach(next);if(candidate===next)candidate=null;busy=false;}
+  }catch(e){tell('Could not open project: '+e.message+(initial?'':' The current model remains open.'));}finally{file?.release();if(next)detach(next);if(candidate===next)candidate=null;busy=false;}
  }
  async function saveProject(asCopy=false){
   if(busy||!valid()||!active)return;busy=true;let writeStarted=false;
   try{
    const frame=active,prior=snapshot(frame);let content=prior;
-   if(JSON.parse(prior)?.format==='codi-jsketcher-manufacturing'){
+   {
     const manager=frame.contentWindow?.__CAD_APP?.projectManager;
     if(typeof manager?.snapshotForHostSave!=='function')throw Error('Manufacturing save validation is unavailable.');
     const prepared=await manager.snapshotForHostSave();
     if(!valid()||frame!==active)return;
     if(!unchanged(frame,prior))throw Error('The model changed while preparing the save. Try again.');
-    content=JSON.stringify(prepared);
+    content=JSON.stringify(supportedEnvelope(prepared));
    }
    if(new Blob([content]).size>128*1024*1024)throw Error('Project exceeds 128 MiB.');
    let chosen=state.path;if(asCopy||!chosen){const defaultName=chosen||'/Design.jsketcher.json';chosen=await host.ui.prompt('Save the project to My files:',{title:asCopy?'Save project as':'Save project',value:defaultName,confirmLabel:'Save',signal:host.signal});if(chosen===null||!valid())return;}
