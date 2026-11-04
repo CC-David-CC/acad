@@ -137,7 +137,8 @@
     "node_modules/jsketcher-build/static/7bb5f8ee10fcafdab787.wasm",
     "node_modules/jsketcher-build/static/index.bundle.js",
     "node_modules/jsketcher-build/static/modules_brep_operations_mesh_browserNodeModuleStub_js.bundle.js",
-    "node_modules/jsketcher-build/static/project-validator.aac5894b3e599312ceed.js",
+    "node_modules/jsketcher-build/static/project-validator.e864a2fb9fb650c35d33.js",
+    "node_modules/jsketcher-build/static/sketch-solver.6dcac4dfa7711efce893.js",
     "node_modules/jsketcher-build/static/vendors-node_modules_cache_codi-manifold_manifold_js.bundle.js"
   ]
 }

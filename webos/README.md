@@ -77,12 +77,20 @@ access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
 license review are release gates. Generated assets and `node_modules` are not
-committed. The current experimental pin is `794c14a36d706a86ac3d834a536f97c34cc99e2f`,
-including opt-in numeric and source-built Manifold changes. The local input
+committed. The current experimental pin is `d3d36bc5ee0876f22090be19d4861b68e5096421`,
+including guarded document replacement, private dependent-feature replay,
+headless sketch solving, and the bounded fillet fixes. The local input
 directory must contain the pinned Manifold JS/Wasm, source archives and build
 receipt; hashes are checked before use. Two matching builds used the same R730
 toolchain, so this is repeatability rather than independent provenance. Run the normal public app builder only
 after the preparer succeeds and its asset manifest is reviewed.
+
+The preparer requires both content-addressed workers, `project-validator` and
+`sketch-solver`, checks the main bundle's references and records their hashes
+in `BUILD-RECEIPT.json`. Missing, duplicate, unreferenced or newly detected
+worker-only npm modules refuse packaging pending review. This module-comment
+check is a review aid, not a complete runtime dependency graph. Test helpers
+are excluded from the app assets.
 
 An optional `--occt-source-research-input /path/to/occt-input` selects one
 specific source-built interpreter for local research. Put the exact `occt.js`

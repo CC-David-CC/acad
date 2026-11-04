@@ -12,7 +12,11 @@ npm candidates. The project validator's detected npm module IDs are a subset
 of the main bundle's IDs. Development-webpack comments are a review aid, not
 an authoritative dependency graph; vendored scripts, transformations, Wasm,
 and modules omitted from those comments require separate review. The build
-now refuses a detected worker-only npm module pending review.
+now refuses a detected worker-only npm module pending review. The combined
+runtime also packages the headless sketch-solver worker, with the same
+content-addressed reference and module-inventory checks as the validator.
+Each worker has its own path/hash in the build receipt. This adds no blanket
+source or license clearance for the engine or its dependencies.
 
 | Exact candidate | Evidence and outstanding work |
 | --- | --- |

@@ -20,7 +20,7 @@ import xml.etree.ElementTree as ET
 
 HERE = Path(__file__).resolve().parent
 # Update only after reviewing the fork commit and the generated manifest.
-FORK_COMMIT = '794c14a36d706a86ac3d834a536f97c34cc99e2f'
+FORK_COMMIT = 'd3d36bc5ee0876f22090be19d4861b68e5096421'
 DEFAULT_REPOSITORY = 'example.invalid:/srv/data/git/JSKetcher.git'
 ENGINE_COMMIT = '5efaf53accb45bac475155fc4d5552642c19e91e'
 ENGINE_REPOSITORY = 'https://github.com/Autodrop3d/occt-interpreter.git'
@@ -411,21 +411,30 @@ def main():
         for asset in ('index-webos.html', 'static/index.bundle.js', 'lib-assets/jsketcher-occ-engine/occt.js', 'lib-assets/jsketcher-occ-engine/occt.wasm'):
             if not (staging / asset).is_file():
                 raise RuntimeError('Required runtime asset is missing: ' + asset)
-        # The validator runs off the UI thread. Verify its closed-inventory
-        # bundle is present and is exactly the one referenced by the app.
-        worker_files = list((staging / 'static').glob('project-validator.*.js'))
-        if len(worker_files) != 1 or not re.fullmatch(r'project-validator\.[0-9a-f]{20}\.js', worker_files[0].name):
-            raise RuntimeError('Expected exactly one content-addressed project validator worker')
-        if worker_files[0].name.encode() not in (staging / 'static/index.bundle.js').read_bytes():
-            raise RuntimeError('Main bundle does not reference the packaged project validator worker')
-        # The notice archive's candidate mapping examines the main bundle.
-        # Fail for worker-only npm module IDs until that mapping is reviewed;
-        # this heuristic does not replace a full dependency/source audit.
+        # Both validation and dependent sketch solving run off the UI thread.
+        # Require the exact content-addressed assets referenced by this bundle.
+        # The notice archive's candidate mapping examines the main bundle, so
+        # refuse worker-only npm module IDs pending a separate notice review.
+        # This heuristic is not a complete dependency/source audit.
         module_pattern = r'/\*{3}/\s*"(\./node_modules/[^"?]+)":'
-        main_modules = set(re.findall(module_pattern, (staging / 'static/index.bundle.js').read_text(encoding='utf-8')))
-        worker_modules = set(re.findall(module_pattern, worker_files[0].read_text(encoding='utf-8')))
-        if worker_modules - main_modules:
-            raise RuntimeError('Validator has worker-only npm modules requiring notice review')
+        main_code = (staging / 'static/index.bundle.js').read_text(encoding='utf-8')
+        main_modules = set(re.findall(module_pattern, main_code))
+        worker_modules = set()
+        worker_receipts = {}
+        for receipt_key, prefix in (('projectValidatorWorker', 'project-validator'),
+                                    ('sketchSolverWorker', 'sketch-solver')):
+            files = list((staging / 'static').glob(prefix + '.*.js'))
+            if len(files) != 1 or not re.fullmatch(re.escape(prefix) + r'\.[0-9a-f]{20}\.js', files[0].name):
+                raise RuntimeError('Expected exactly one content-addressed ' + prefix + ' worker')
+            worker = files[0]
+            if worker.name not in main_code:
+                raise RuntimeError('Main bundle does not reference the packaged ' + prefix + ' worker')
+            modules = set(re.findall(module_pattern, worker.read_text(encoding='utf-8')))
+            if modules - main_modules:
+                raise RuntimeError(prefix + ' has worker-only npm modules requiring notice review')
+            worker_modules.update(modules)
+            worker_receipts[receipt_key] = {'path': worker.relative_to(staging).as_posix(),
+                                            'sha256': sha256_file(worker)}
         # The two bundled @icons/material components originate in mdi-svg.
         # Exact svg bytes and the upstream license are pinned independently.
         icon_prefix = './node_modules/react-color/node_modules/@icons/material/'
@@ -554,7 +563,7 @@ def main():
                     for f in sorted(staging.rglob('*')) if f.is_file()]
         receipt = {'forkCommit': FORK_COMMIT, 'interpreterCommit': ENGINE_COMMIT, 'numericCommit': NUMERIC_COMMIT,
                    'numericInputSHA256': NUMERIC_INPUT_SHA256,
-                   'projectValidatorWorker': {'path': worker_files[0].relative_to(staging).as_posix(), 'sha256': sha256_file(worker_files[0])},
+                   **worker_receipts,
                    'occtSelection': 'source-research' if occt_input is not None else 'npm',
                    'occtSourceResearchReceipt': occt_receipt,
                    'manifoldCommit': MANIFOLD_COMMIT, 'clipperCommit': CLIPPER_COMMIT,
