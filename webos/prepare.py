@@ -19,7 +19,7 @@ import zipfile
 
 HERE = Path(__file__).resolve().parent
 # Update only after reviewing the fork commit and the generated manifest.
-FORK_COMMIT = 'ed2f02fe5ca6d337e7d5c847e1c39f2a7dc793d7'
+FORK_COMMIT = 'f36062ba409963ea1ed93e1985bb0a781abdf9b1'
 DEFAULT_REPOSITORY = 'example.invalid:/srv/data/git/JSKetcher.git'
 ENGINE_COMMIT = '5efaf53accb45bac475155fc4d5552642c19e91e'
 ENGINE_REPOSITORY = 'https://github.com/Autodrop3d/occt-interpreter.git'
@@ -358,6 +358,21 @@ def main():
         for asset in ('index-webos.html', 'static/index.bundle.js', 'lib-assets/jsketcher-occ-engine/occt.js', 'lib-assets/jsketcher-occ-engine/occt.wasm'):
             if not (staging / asset).is_file():
                 raise RuntimeError('Required runtime asset is missing: ' + asset)
+        # The validator runs off the UI thread. Verify its closed-inventory
+        # bundle is present and is exactly the one referenced by the app.
+        worker_files = list((staging / 'static').glob('project-validator.*.js'))
+        if len(worker_files) != 1 or not re.fullmatch(r'project-validator\.[0-9a-f]{20}\.js', worker_files[0].name):
+            raise RuntimeError('Expected exactly one content-addressed project validator worker')
+        if worker_files[0].name.encode() not in (staging / 'static/index.bundle.js').read_bytes():
+            raise RuntimeError('Main bundle does not reference the packaged project validator worker')
+        # The notice archive's candidate mapping examines the main bundle.
+        # Fail for worker-only npm module IDs until that mapping is reviewed;
+        # this heuristic does not replace a full dependency/source audit.
+        module_pattern = r'/\*{3}/\s*"(\./node_modules/[^"?]+)":'
+        main_modules = set(re.findall(module_pattern, (staging / 'static/index.bundle.js').read_text(encoding='utf-8')))
+        worker_modules = set(re.findall(module_pattern, worker_files[0].read_text(encoding='utf-8')))
+        if worker_modules - main_modules:
+            raise RuntimeError('Validator has worker-only npm modules requiring notice review')
         selected_engine = OCCT_SOURCE_INPUTS if occt_input is not None else ENGINE_SHA256
         for name in ('occt.js', 'occt.wasm'):
             if sha256_file(staging / 'lib-assets/jsketcher-occ-engine' / name) != selected_engine[name]:
@@ -457,6 +472,7 @@ def main():
                     for f in sorted(staging.rglob('*')) if f.is_file()]
         receipt = {'forkCommit': FORK_COMMIT, 'interpreterCommit': ENGINE_COMMIT, 'numericCommit': NUMERIC_COMMIT,
                    'numericInputSHA256': NUMERIC_INPUT_SHA256,
+                   'projectValidatorWorker': {'path': worker_files[0].relative_to(staging).as_posix(), 'sha256': sha256_file(worker_files[0])},
                    'occtSelection': 'source-research' if occt_input is not None else 'npm',
                    'occtSourceResearchReceipt': occt_receipt,
                    'manifoldCommit': MANIFOLD_COMMIT, 'clipperCommit': CLIPPER_COMMIT,

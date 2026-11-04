@@ -1,17 +1,20 @@
 # jSketcher
 
 **In development; not available in the desktop yet.** This integration embeds
-our [jSketcher fork](https://github.com/CC-David-CC/jsketcher) with an independent
+our LAN jSketcher fork at `example.invalid:/srv/data/git/JSKetcher.git` with an independent
 temporary CAD workspace per window. Its File menu asks the desktop host to open,
 save, or save a copy of a `.jsketcher.json` project in the signed-in account's
-My files. Projects contain the modeling history and sketches together. A save
+My files. Projects use the version-one native envelope with explicit millimeter
+units and contain the modeling history and sketches together. A save
 first writes the browser mirror; it can still be pending or conflicting while
 server synchronization runs. The Linux guest filesystem is separate.
 
 The host checks the selected file version and stages an open in a separate
 window before replacing the current model. A failure keeps the existing model.
-Project and DXF reads require the file service's bounded snapshot interface;
-the host checks size/version before content access and again before use. See
+Project and DXF reads require the file service's bounded, leased snapshot
+interface. The host checks size and version before content access and again
+before use. Project validation runs in a packaged hashed worker; the host must
+preserve that worker and the lease lifecycle. See
 `docs/evidence/cad-file-read-boundary-20261103.md` for scoped regression evidence.
 Saving captures one model snapshot: changes made while saving remain unsaved.
 Finish an open sketch or operation and return to the newest history before
@@ -74,7 +77,7 @@ access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
 license review are release gates. Generated assets and `node_modules` are not
-committed. The current experimental pin is `518a4666cfc5c94acb153f0cd315a2ca1625eb2f`,
+committed. The current experimental pin is `f36062ba409963ea1ed93e1985bb0a781abdf9b1`,
 including opt-in numeric and source-built Manifold changes. The local input
 directory must contain the pinned Manifold JS/Wasm, source archives and build
 receipt; hashes are checked before use. Two matching builds used the same R730
@@ -87,7 +90,7 @@ and `occt.wasm` in that directory, together with `build-receipt.json` copied
 from the checked-in `occt-source-build-receipt.json`. The preparer hashes the
 bytes it copies, checks the receipt and fetched source tree and notices, still
 verifies the installed npm artifacts first, then checks the final built files.
-The normal pinned npm engine remains the default. Both paths still require
+The normal pinned npm engine remains the default; the combined-runtime candidate in this worktree was built with the source-built OCCT option. Both paths still require
 `--experimental-local-only` and the Manifold research inputs.
 
 The candidate was built from the source commit in the receipt, but its Wasm
@@ -276,3 +279,7 @@ accounts and files must remain in the isolated preview and be removed after
 use. This local test does not qualify the currently unbuilt signed runtime
 manifest, physical phones, user-facing authoring, generic material contacts,
 or printing.
+
+The project validator worker and manifest are part of the same packaged runtime. Project opens require the desktop host to supply bounded snapshot leases and release them on completion or cancellation; the native project codec uses explicit millimeter units. Large-model memory behavior, cancellation across the full host path, broad geometry fidelity, and complete corresponding source and notices remain release gates. This runtime remains experimental and local only.
+
+The revision-one native envelope is still a pre-release format: earlier experimental files may contain cylinder/cone datum conventions that differ from the current implementation. A schema/semantics gate that rejects those files is required before claiming stable native persistence; no compatibility importer is assumed.
