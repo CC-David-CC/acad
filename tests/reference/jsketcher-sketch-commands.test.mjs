@@ -26,3 +26,31 @@ test('the shared operation receives a guard that becomes false after a session c
  f.action.invokeByIds=async(ctx,ids,revision,options)=>{entered();await wait;if(!options.valid())throw Error('stale session');f.state.mutations++;};
  const pending=f.handlers.get('sketch-concentric')({ids:['a','b'],revision:'x'});await started;f.state.session={};finish();await assert.rejects(pending,/stale session/);assert.equal(f.state.mutations,0);f.dispose();
 });
+
+test('diameter discovery and edit use the same scoped sketch action',async()=>{
+ const f=fixture();let received;
+ f.context.actions.DiameterLength={inspect:f.action.inspect,async invokeById(ctx,id,diameter,revision,options){
+  assert.equal(ctx,f.context);assert.equal(options.valid(),true);received={id,diameter,revision};return {status:'accepted'};
+ }};
+ const inspection=await f.handlers.get('sketch-diameter-targets')({});
+ assert.deepEqual(await f.handlers.get('sketch-diameter')({objectId:'a',diameter:12,revision:inspection.revision}),{status:'accepted'});
+ assert.deepEqual(received,{id:'a',diameter:12,revision:'token'});f.dispose();assert.equal(f.handlers.size,0);
+});
+test('diameter rejects unavailable engines, invalid inputs and getters before mutation',async()=>{
+ const f=fixture(),run=args=>f.handlers.get('sketch-diameter')(args),good={objectId:'a',diameter:12,revision:'token'};
+ await assert.rejects(run(good),/authorized/);let calls=0;
+ f.context.actions.DiameterLength={invokeById(){calls++;}};
+ for(const diameter of [0,-1,Infinity,NaN,1000001,'12'])await assert.rejects(run({...good,diameter}));
+ const accessor={...good};Object.defineProperty(accessor,'diameter',{enumerable:true,get(){calls++;return 12}});
+ await assert.rejects(run(accessor),/data properties/);
+ await assert.rejects(run({...good,[Symbol('extra')]:true}));assert.equal(calls,0);f.dispose();
+});
+test('diameter async operation receives cancellation and changed-account guard',async()=>{
+ for(const mode of ['session','abort','window']){
+  const f=fixture();let release,entered;const ready=new Promise(r=>entered=r),wait=new Promise(r=>release=r);
+  f.context.actions.DiameterLength={async invokeById(ctx,id,diameter,revision,options){entered();await wait;if(!options.valid())throw Error('stale diameter');f.state.mutations++;}};
+  const pending=f.handlers.get('sketch-diameter')({objectId:'a',diameter:12,revision:'token'});await ready;
+  if(mode==='session')f.state.session={};else if(mode==='abort')f.controller.abort();else f.state.valid=false;
+  release();await assert.rejects(pending,/stale diameter/);assert.equal(f.state.mutations,0);f.dispose();
+ }
+});
