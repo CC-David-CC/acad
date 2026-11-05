@@ -77,3 +77,16 @@ test('length relationship propagates abort and account lifetime to the shared op
   release();await assert.rejects(pending,error=>mode==='abort'?error.name==='AbortError':error.name==='AbortError'||error.message==='stale relation');assert.equal(f.state.mutations,0);f.dispose();
  }
 });
+test('length role inspection and conversion share scoped operation',async()=>{
+ const f=fixture();let received;
+ f.context.actions.LengthMeasurementRole={inspect:f.action.inspect,invokeById(ctx,args,options){assert.equal(ctx,f.context);assert.equal(options.valid(),true);received=args;return {role:args.role}}};
+ const inspected=await f.handlers.get('sketch-length-measurements')({});
+ assert.deepEqual(await f.handlers.get('sketch-convert-length-role')({role:'driving',segmentId:'a',dimensionId:'d',revision:inspected.revision}),{role:'driving'});
+ assert.deepEqual(received,{role:'driving',segmentId:'a',dimensionId:'d',revision:'token'});
+ assert.deepEqual(await f.handlers.get('sketch-convert-length-role')({role:'reference',segmentId:'a',revision:'token'}),{role:'reference'});f.dispose();
+});
+test('length role command rejects malformed target, accessor and inactive session',async()=>{
+ const f=fixture();let calls=0;f.context.actions.LengthMeasurementRole={invokeById(){calls++}};
+ const run=f.handlers.get('sketch-convert-length-role');for(const args of [{role:'driving',segmentId:'a',revision:'x'},{role:'reference',segmentId:'a',dimensionId:'d',revision:'x'},{role:'other',segmentId:'a',revision:'x'}])await assert.rejects(run(args));
+ const bad={segmentId:'a',revision:'x'};Object.defineProperty(bad,'role',{enumerable:true,get(){calls++;return 'reference'}});await assert.rejects(run(bad));f.controller.abort();await assert.rejects(run({role:'reference',segmentId:'a',revision:'x'}));assert.equal(calls,0);f.dispose();
+});
