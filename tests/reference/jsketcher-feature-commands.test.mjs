@@ -4,7 +4,7 @@ const registered=new Map(),controller=new AbortController();let session={},curre
 const craft={inspectWorkerFeatureCommands(){return {ready:true,revision:'r1'}},inspectPublishedWorkerGeometry(){return {revision:'r1',bodies:[{bodyId:'body'}]}},inspectWorkerHistory(){return {revision:'r1',pointer:0,features:[{index:1,featureId:2,depth:20}]}},inspectAuthoredEdits(){return {revision:'r2',canUndo:true,canRedo:false}},async authoredEditTravel(args,opts){calls++;options=opts;return args},async editWorkerExtrusion(args,opts){calls++;options=opts;return args},async editWorkerCenteredHole(args,opts){calls++;options=opts;return args},async editWorkerFourCornerHoles(args,opts){calls++;options=opts;return args},async createWorkerEnclosure(args,opts){calls++;options=opts;return args},async createWorkerExtrusion(args,opts){calls++;options=opts;return args},async createWorkerCenteredHole(args,opts){calls++;options=opts;return args},async createWorkerFourCornerHoles(args,opts){calls++;options=opts;return args}};
 const host={signal:controller.signal,session:()=>session,commands:{register(def,run){registered.set(def.id,{def,run});return ()=>registered.delete(def.id)}}};
 const dispose=registerFeatureCommands(host,()=>({craft,valid:()=>current}));
-assert.equal(registered.size,12);
+assert.equal(registered.size,14);
 const run=(id,args)=>registered.get(id).run(args);
 assert.deepEqual(run('inspect-worker-features',{}),{ready:true,revision:'r1'});
 assert.throws(()=>run('inspect-worker-features',{extra:1}),/arguments/);
