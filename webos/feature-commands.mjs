@@ -41,7 +41,7 @@ export function registerFeatureCommands(host,getTarget){
   for(const [command,method,dimensions] of [['edit-worker-centered-hole','editWorkerCenteredHole',['diameter']],['edit-worker-four-corner-holes','editWorkerFourCornerHoles',['diameter','offsetX','offsetY']]]){
    const keys=['revision','index','featureId',...dimensions],properties={revision:id(256),index:{type:'integer',minimum:0,maximum:255},featureId:{type:'integer',minimum:1}};
    for(const key of dimensions)properties[key]=dimension;
-   stops.push(host.commands.register({id:command,description:'Edit the next rewound worker feature using its inspected feature ID and revision.',parameters:{type:'object',additionalProperties:false,required:keys,properties}},async args=>{exact(args,keys);const t=target(method);return await t.craft[method](args,{signal:host.signal,valid:t.valid});}));
+   stops.push(host.commands.register({id:command,description:'Edit an inspected worker hole feature using its feature ID and current revision.',parameters:{type:'object',additionalProperties:false,required:keys,properties}},async args=>{exact(args,keys);const t=target(method);return await t.craft[method](args,{signal:host.signal,valid:t.valid});}));
   }
   for(const [command,method,keys,properties,description] of [
    ['create-worker-extrusion','createWorkerExtrusion',['revision','faceId','regionId','depth'],{revision:id(256),faceId:id(1024),regionId:id(8192),depth:dimension},'Extrude an inspected supported region in millimeters. The result is unsaved until Save.'],
