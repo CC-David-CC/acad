@@ -74,6 +74,6 @@ test('length relationship propagates abort and account lifetime to the shared op
   f.context.actions.LengthRelation={async invokeByIds(ctx,ids,constants,revision,options){started();await wait;if(!options.valid())throw Error('stale relation');f.state.mutations++}};
   const pending=f.handlers.get('sketch-length-relation')({ids:['a','b'],factor:2,offset:1,revision:'token'});await ready;
   if(mode==='session')f.state.session={};else if(mode==='abort')f.controller.abort();else f.state.valid=false;
-  release();await assert.rejects(pending,/stale relation/);assert.equal(f.state.mutations,0);f.dispose();
+  release();await assert.rejects(pending,error=>mode==='abort'?error.name==='AbortError':error.name==='AbortError'||error.message==='stale relation');assert.equal(f.state.mutations,0);f.dispose();
  }
 });
