@@ -14,7 +14,21 @@ export function registerSketchCommands(host,getTarget){
   return {context:captured.context,action:captured.context.actions[actionName],options:{valid,signal:host.signal},valid};
  }
  const register=(descriptor,handler)=>registrations.push(host.commands.register(descriptor,handler));
+ const signedAction=axis=>axis==='x'?'SignedDistanceX':axis==='y'?'SignedDistanceY':axis==='projected'?'ProjectedDistance':null;
  try{
+  register({id:'sketch-signed-distance-targets',description:'Inspect points and direction segments for a driving signed X, Y or projected distance.',parameters:{type:'object',additionalProperties:false,required:['axis'],properties:{axis:{enum:['x','y','projected']}}}},async args=>{
+   exact(args,['axis']);const name=signedAction(args.axis);if(!name)throw Error('Choose x, y or projected distance.');
+   const t=target(name);if(typeof t.action.inspect!=='function')throw Error('Signed distance inspection is unavailable.');
+   return settleScopedCommand(t.action.inspect(t.context,t.options),{signal:host.signal,valid:t.valid});
+  });
+  register({id:'sketch-signed-distance',description:'Drive signed first-to-second point displacement in millimeters. Projected distance also requires an oriented live segment as the third ID.',parameters:{type:'object',additionalProperties:false,required:['axis','ids','distance','revision'],properties:{axis:{enum:['x','y','projected']},ids:{type:'array',minItems:2,maxItems:3,items:{type:'string',minLength:1,maxLength:256}},distance:{type:'number',minimum:-1000000,maximum:1000000},revision:{type:'string',minLength:1,maxLength:128}}}},async args=>{
+   exact(args,['axis','ids','distance','revision']);const {axis,ids,distance,revision}=args,name=signedAction(axis),count=axis==='projected'?3:2;
+   if(!name||!Array.isArray(ids)||ids.length!==count||Reflect.ownKeys(ids).length!==count+1||typeof distance!=='number'||!Number.isFinite(distance)||Math.abs(distance)>1e6||typeof revision!=='string'||!revision||revision.length>128)throw Error('Provide signed distance targets, a finite bounded distance and inspected revision.');
+   const copy=[];for(let i=0;i<count;i++){const d=Object.getOwnPropertyDescriptor(ids,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value')||typeof d.value!=='string'||!d.value||d.value.length>256)throw Error('Sketch target IDs must be data properties.');copy.push(d.value);}
+   if(copy[0]===copy[1])throw Error('Choose two distinct points.');
+   const t=target(name);if(typeof t.action.invokeByIds!=='function')throw Error('Signed distance editing is unavailable.');
+   return settleScopedCommand(t.action.invokeByIds(t.context,Object.freeze(copy),distance,revision,t.options),{signal:host.signal,valid:t.valid});
+  });
   register({id:'sketch-diameter-targets',description:'Inspect circles and arcs for driving diameter; returns IDs and a single-use revision.',parameters:{type:'object',additionalProperties:false}},async args=>{
    exact(args,[]);const t=target('DiameterLength');
    if(typeof t.action.inspect!=='function')throw Error('Diameter inspection is unavailable.');
@@ -31,7 +45,7 @@ export function registerSketchCommands(host,getTarget){
   register({id:'sketch-length-relation-targets',description:'Inspect reference segment-length measurements and driving length relations; returns IDs and a single-use revision.',parameters:{type:'object',additionalProperties:false}},async args=>{
    exact(args,[]);const t=target('LengthRelation');
    if(typeof t.action.inspect!=='function')throw Error('Length relation inspection is unavailable.');
-   const result=await t.action.inspect(t.context,t.options);
+   const result=await settleScopedCommand(t.action.inspect(t.context,t.options),{signal:host.signal,valid:t.valid});
    if(!t.valid())throw Error('The sketch window or account changed.');return result;
   });
   register({id:'sketch-length-relation',description:'Create a driving relation: first segment length equals factor times the second plus offset in millimeters.',parameters:{type:'object',additionalProperties:false,required:['ids','factor','offset','revision'],properties:{ids:{type:'array',minItems:2,maxItems:2,items:{type:'string',minLength:1,maxLength:256}},factor:{type:'number',minimum:0},offset:{type:'number'},revision:{type:'string',minLength:1,maxLength:128}}}},async args=>{
@@ -39,7 +53,7 @@ export function registerSketchCommands(host,getTarget){
    const slots=Array.isArray(ids)?[Object.getOwnPropertyDescriptor(ids,'0'),Object.getOwnPropertyDescriptor(ids,'1')]:[];
    if(!Array.isArray(ids)||ids.length!==2||slots.some(d=>!d||!Object.hasOwn(d,'value')||typeof d.value!=='string'||!d.value||d.value.length>256)||slots[0].value===slots[1].value||typeof factor!=='number'||!Number.isFinite(factor)||factor<0||typeof offset!=='number'||!Number.isFinite(offset)||typeof revision!=='string'||!revision||revision.length>128)throw Error('Provide two distinct segment IDs, finite relation values and the inspected revision.');
    const t=target('LengthRelation');if(typeof t.action.invokeByIds!=='function')throw Error('The length relation operation is unavailable.');
-   const result=await t.action.invokeByIds(t.context,slots.map(d=>d.value),{factor,offset},revision,t.options);
+   const result=await settleScopedCommand(t.action.invokeByIds(t.context,slots.map(d=>d.value),{factor,offset},revision,t.options),{signal:host.signal,valid:t.valid});
    if(!t.valid())throw Error('The sketch window or account changed; inspect it before continuing.');return result;
   });
   register({id:'sketch-circular-objects',description:'Inspect circles/arcs and concentric relationships in the active sketch; returns stable IDs and a single-use revision.',parameters:{type:'object',additionalProperties:false}},async args=>{
