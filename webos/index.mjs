@@ -112,7 +112,7 @@ export function mount(host){
  let rectangleDialog=null;
  function closeRectangleDialog(){if(rectangleDialog){clearInterval(rectangleDialog.timer);rectangleDialog.controller.abort();rectangleDialog.dialog.remove();rectangleDialog=null;}}
  function openRectangleDialog(){
-  if(rectangleDialog)return;
+  if(rectangleDialog)return;closeRectangleEditDialog();
   let target,capability;try{target=rectangle.target();capability=target.craft.inspectRectangleCreation();if(!target.valid())throw Error('The window or account changed.');if(!capability.ready)throw Error(capability.reason||'Finish the current operation first.');}catch(e){tell(e.message);return;}
   const dialog=document.createElement('dialog');dialog.className='jsketcher-rectangle-dialog';
   const form=document.createElement('form');form.method='dialog';
@@ -130,6 +130,27 @@ export function mount(host){
    submit.disabled=true;error.textContent='';
    try{await rectangle.create({revision:capability.revision,unit:'millimeter',origin:[values.x,values.y],width:values.width,height:values.height,depth:values.depth},target,controller.signal);closeRectangleDialog();tell('Rectangle created in the workspace. Save the project to My files to keep it.');}
    catch(e){if(!target.valid()){closeRectangleDialog();return;}error.textContent=e?.message||'Could not create rectangle.';submit.disabled=false;}
+  });dialog.showModal();
+ }
+ let rectangleEditDialog=null;
+ function closeRectangleEditDialog(){if(rectangleEditDialog){clearInterval(rectangleEditDialog.timer);rectangleEditDialog.controller.abort();rectangleEditDialog.dialog.remove();rectangleEditDialog=null;}}
+ function openRectangleEditDialog(){
+  if(rectangleEditDialog)return;closeRectangleDialog();
+  let target,capability;try{target=rectangle.target();capability=rectangle.inspectDimensions(target);if(!target.valid())throw Error('The window or account changed.');if(!capability.ready)throw Error(capability.reason||'Finish the current operation first.');if(!capability.candidates.length)throw Error('No supported authored rectangles are available.');}catch(e){tell(e.message);return;}
+  const dialog=document.createElement('dialog');dialog.className='jsketcher-rectangle-dialog';
+  const form=document.createElement('form');form.method='dialog';
+  const heading=document.createElement('h2');heading.textContent='Edit rectangle dimensions';form.append(heading);
+  const help=document.createElement('p');help.textContent='Dimensions in millimeters';form.append(help);
+  const choiceRow=document.createElement('label'),choice=document.createElement('select');choiceRow.textContent='Rectangle';
+  capability.candidates.forEach((candidate,index)=>{const option=document.createElement('option');option.value=String(index);option.textContent=`Rectangle ${index+1} (${candidate.width} × ${candidate.height} mm)`;choice.append(option);});choiceRow.append(choice);form.append(choiceRow);
+  const inputs={};for(const [key,label] of [['width','Width'],['height','Height']]){const row=document.createElement('label'),field=document.createElement('input');row.textContent=label;field.type='number';field.step='any';field.required=true;field.name=key;row.append(field);form.append(row);inputs[key]=field;}
+  const selectCandidate=()=>{const candidate=capability.candidates[Number(choice.value)];if(candidate){inputs.width.value=String(candidate.width);inputs.height.value=String(candidate.height);}};choice.addEventListener('change',selectCandidate);selectCandidate();
+  const error=document.createElement('p');error.setAttribute('role','alert');form.append(error);
+  const actions=document.createElement('div'),cancel=document.createElement('button'),submit=document.createElement('button');cancel.type='button';cancel.textContent='Cancel';submit.type='submit';submit.textContent='Update';actions.append(cancel,submit);form.append(actions);dialog.append(form);body.append(dialog);
+  const controller=new AbortController(),timer=setInterval(()=>{if(!target.valid())closeRectangleEditDialog();},100);rectangleEditDialog={dialog,timer,controller};cancel.addEventListener('click',closeRectangleEditDialog);dialog.addEventListener('cancel',e=>{e.preventDefault();closeRectangleEditDialog();});
+  form.addEventListener('submit',async e=>{e.preventDefault();if(!target.valid()){closeRectangleEditDialog();return;}const candidate=capability.candidates[Number(choice.value)],width=Number(inputs.width.value),height=Number(inputs.height.value);
+   if(!candidate||!inputs.width.value.trim()||!inputs.height.value.trim()||!Number.isFinite(width)||!Number.isFinite(height)||width<=0||height<=0){error.textContent='Enter positive finite dimensions.';return;}
+   submit.disabled=true;error.textContent='';try{await rectangle.edit({revision:capability.revision,faceId:candidate.faceId,width,height},target,controller.signal);closeRectangleEditDialog();tell('Rectangle updated in the workspace. Save the project to My files to keep it.');}catch(e){if(!target.valid()){closeRectangleEditDialog();return;}error.textContent=e?.message||'Could not edit rectangle.';submit.disabled=false;}
   });dialog.showModal();
  }
  function setWatch(c,path,version){watch();watch=()=>{};const serial=++watchRevision;warning.hidden=true;warning.textContent='';const check=async()=>{const seq=++checkRevision;let message='';try{const entry=await c.files.stat(path);if(entry.status==='conflict')message='This project has conflicting copies. Resolve them in Files before saving.';else if(entry.version!==version)message='The saved project changed. Save a copy or open it again.';}catch{message='The saved project is unavailable. Your current model remains open.';}if(valid()&&c.valid()&&serial===watchRevision&&seq===checkRevision&&state.path===path&&state.version===version){warning.textContent=message;warning.hidden=!message;}};watch=c.files.subscribe(check);queueMicrotask(check);}
@@ -230,12 +251,12 @@ export function mount(host){
    if(current(token)&&frame===active)tell('Imported supported shapes from '+p+'. Save the project to keep them.');
   }catch(e){tell('Could not import DXF: '+e.message+' The existing sketch was kept where recovery was possible.');}finally{token.finish();}
  }
- function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','import-dxf','export-3mf'].includes(data.action))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='import-dxf')void importDxf();else if(data.action==='export-3mf')void export3mf();else void saveProject(data.action==='save-as');}
+ function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(data?.type==='rectangle-edit-dialog'&&Object.keys(data).length===1){openRectangleEditDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','import-dxf','export-3mf'].includes(data.action))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='import-dxf')void importDxf();else if(data.action==='export-3mf')void export3mf();else void saveProject(data.action==='save-as');}
  window.addEventListener('message',receive);
  const retry=textButton('Retry opening project',()=>{if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner)void openProject(w.launchContext.path,{initial:true});});retry.hidden=true;
  const review=textButton('Review material assignments',()=>void reviewManufacturing());review.hidden=true;
  body.append(warning,stage,status,retry,review);
  const initialToken=begin('initial-load');
  queueMicrotask(async()=>{if(!initialToken)return;try{if(!current(initialToken))return;active=createFrame(false);const ctx=await waitReady(active);if(!current(initialToken))return;bindActions(ctx);baseline=snapshot();tell('New model. Use File to open or save a project in My files.');if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner){await openProject(w.launchContext.path,{initial:true,token:initialToken});if(valid()&&state.path!==w.launchContext.path)retry.hidden=false;}}catch(e){tell('Could not start jSketcher: '+e.message);}finally{initialToken.finish();}});
- return {element:body,dispose(){if(disposed)return;disposed=true;abortSources();sourceClose?.();sourceClose=null;host.signal.removeEventListener('abort',abortSources);unsubscribeOperations();actionCleanup();closeRectangleDialog();watchRevision++;checkRevision++;watch();delete state.hasChanges;window.removeEventListener('message',receive);for(const [id,reject] of timers){clearTimeout(id);reject(Error('Window closed.'));}timers.clear();for(const frame of [...frames])detach(frame);candidate=null;active=null;}};
+ return {element:body,dispose(){if(disposed)return;disposed=true;abortSources();sourceClose?.();sourceClose=null;host.signal.removeEventListener('abort',abortSources);unsubscribeOperations();actionCleanup();closeRectangleDialog();closeRectangleEditDialog();watchRevision++;checkRevision++;watch();delete state.hasChanges;window.removeEventListener('message',receive);for(const [id,reject] of timers){clearTimeout(id);reject(Error('Window closed.'));}timers.clear();for(const frame of [...frames])detach(frame);candidate=null;active=null;}};
 }
