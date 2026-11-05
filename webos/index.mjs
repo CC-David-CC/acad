@@ -189,7 +189,7 @@ export function mount(host){
     const latest=await c.files.stat(p);if(latest.status==='conflict'||latest.version!==old.version)throw Error('The file changed while confirming. Try again.');expected=old.version;
    }
    if(!unchanged(frame,prior))throw Error('The model changed while preparing export. Try again.');
-   tell('Preparing the 3MF model…');const bytes=await manager.exportCore3mfResearch();
+   tell('Preparing the 3MF model…');const bytes=await manager.exportCore3mfResearch({signal:token.signal,valid:()=>current(token)&&frame===active});
    if(!current(token)||!c.valid()||frame!==active)return;
    if(!(bytes instanceof frame.contentWindow.Uint8Array)||bytes.byteLength>128*1024*1024)throw Error('The 3MF export is invalid or too large.');
    if(!unchanged(frame,prior))throw Error('The model changed during export. Try again.');
