@@ -54,3 +54,26 @@ test('diameter async operation receives cancellation and changed-account guard',
   release();await assert.rejects(pending,e=>e.name==='AbortError'||/stale diameter/.test(e.message));assert.equal(f.state.mutations,0);f.dispose();
  }
 });
+test('length relationship uses the scoped shared sketch operation',async()=>{
+ const f=fixture();let received;
+ f.context.actions.LengthRelation={inspect:f.action.inspect,async invokeByIds(ctx,ids,constants,revision,options){assert.equal(ctx,f.context);assert.equal(options.valid(),true);received={ids,constants,revision};return {status:'accepted'}}};
+ const inspected=await f.handlers.get('sketch-length-relation-targets')({});
+ assert.deepEqual(await f.handlers.get('sketch-length-relation')({ids:['a','b'],factor:2,offset:-5,revision:inspected.revision}),{status:'accepted'});
+ assert.deepEqual(received,{ids:['a','b'],constants:{factor:2,offset:-5},revision:'token'});f.dispose();
+});
+test('length relationship refuses malformed values, sparse IDs and stale lifetime',async()=>{
+ const f=fixture();let calls=0;f.context.actions.LengthRelation={invokeByIds(){calls++}};
+ const run=f.handlers.get('sketch-length-relation'),good={ids:['a','b'],factor:2,offset:0,revision:'token'};
+ const accessor=['a','b'];Object.defineProperty(accessor,0,{get(){calls++;return 'a'}});
+ for(const bad of [{...good,ids:['a','a']},{...good,ids:Array(2)},{...good,ids:accessor},{...good,factor:-1},{...good,factor:Infinity},{...good,offset:NaN},{...good,extra:true}])await assert.rejects(run(bad));
+ f.controller.abort();await assert.rejects(run(good));assert.equal(calls,0);f.dispose();
+});
+test('length relationship propagates abort and account lifetime to the shared operation',async()=>{
+ for(const mode of ['session','abort','window']){
+  const f=fixture();let release,started;const ready=new Promise(r=>started=r),wait=new Promise(r=>release=r);
+  f.context.actions.LengthRelation={async invokeByIds(ctx,ids,constants,revision,options){started();await wait;if(!options.valid())throw Error('stale relation');f.state.mutations++}};
+  const pending=f.handlers.get('sketch-length-relation')({ids:['a','b'],factor:2,offset:1,revision:'token'});await ready;
+  if(mode==='session')f.state.session={};else if(mode==='abort')f.controller.abort();else f.state.valid=false;
+  release();await assert.rejects(pending,/stale relation/);assert.equal(f.state.mutations,0);f.dispose();
+ }
+});
