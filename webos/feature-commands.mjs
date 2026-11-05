@@ -18,6 +18,13 @@ export function registerFeatureCommands(host,getTarget){
    exact(args,[]);const t=target('inspectWorkerFeatureCommands'),result=t.craft.inspectWorkerFeatureCommands();
    if(!t.valid())throw Error('The window or account changed.');return result;
   }));
+  stops.push(host.commands.register({id:'inspect-worker-history',description:'Inspect authored worker extrusion IDs, dimensions, current history position and revision.',parameters:{type:'object',additionalProperties:false}},args=>{
+   exact(args,[]);const t=target('inspectWorkerHistory'),result=t.craft.inspectWorkerHistory();
+   if(!t.valid())throw Error('The window or account changed.');return result;
+  }));
+  stops.push(host.commands.register({id:'edit-worker-extrusion',description:'Edit the next rewound worker extrusion using its inspected feature ID and revision.',parameters:{type:'object',additionalProperties:false,required:['revision','index','featureId','depth'],properties:{revision:id(256),index:{type:'integer',minimum:0,maximum:255},featureId:{type:'integer',minimum:1},depth:dimension}}},async args=>{
+   exact(args,['revision','index','featureId','depth']);const t=target('editWorkerExtrusion');return await t.craft.editWorkerExtrusion(args,{signal:host.signal,valid:t.valid});
+  }));
   for(const [command,method,keys,properties,description] of [
    ['create-worker-extrusion','createWorkerExtrusion',['revision','faceId','regionId','depth'],{revision:id(256),faceId:id(1024),regionId:id(8192),depth:dimension},'Extrude an inspected supported region in millimeters. The result is unsaved until Save.'],
    ['create-worker-centered-hole','createWorkerCenteredHole',['revision','bodyId','lidFaceId','diameter'],{revision:id(256),bodyId:id(1024),lidFaceId:id(1024),diameter:dimension},'Create a centered through-hole in an inspected supported OCC body in millimeters. The result is unsaved until Save.'],
