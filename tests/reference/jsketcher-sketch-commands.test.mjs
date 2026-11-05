@@ -9,6 +9,17 @@ function fixture(){
  const dispose=registerSketchCommands(host,()=>({context,valid:()=>state.valid}));
  return {host,state,handlers,action,context,controller,dispose};
 }
+test('whole-entity fix shares the current inspected action',async()=>{
+ const f=fixture();f.context.actions.FixEntity={inspect:f.action.inspect,invokeById(ctx,id,revision,options){assert.equal(ctx,f.context);assert.equal(options.valid(),true);f.state.mutations++;return {objectId:id,status:'accepted'};}};
+ const info=await f.handlers.get('sketch-fix-entity-targets')({});assert.equal(info.revision,'token');assert.deepEqual(await f.handlers.get('sketch-fix-entity')({objectId:'a',revision:info.revision}),{objectId:'a',status:'accepted'});assert.equal(f.state.mutations,1);f.dispose();assert.equal(f.handlers.size,0);
+});
+test('whole-entity fix refuses malformed fields, accessors and stale sessions before authoring',async()=>{
+ const f=fixture();f.context.actions.FixEntity={invokeById(){f.state.mutations++;}};let reads=0;const accessor={revision:'r'};Object.defineProperty(accessor,'objectId',{enumerable:true,get(){reads++;return 'a';}});
+ for(const args of [accessor,{objectId:'',revision:'r'},{objectId:'a',revision:'r',other:true}])await assert.rejects(f.handlers.get('sketch-fix-entity')(args));f.state.session=null;await assert.rejects(f.handlers.get('sketch-fix-entity')({objectId:'a',revision:'r'}));assert.equal(reads,0);assert.equal(f.state.mutations,0);f.dispose();
+});
+test('whole-entity fix inspection and mutation settle on destroyed child realm',async()=>{
+ for(const inspect of [true,false]){const f=fixture();f.context.actions.FixEntity={[inspect?'inspect':'invokeById']:()=>new Promise(()=>{})};const job=inspect?f.handlers.get('sketch-fix-entity-targets')({}):f.handlers.get('sketch-fix-entity')({objectId:'a',revision:'r'});f.controller.abort();await assert.rejects(job,error=>error.name==='AbortError');f.dispose();}
+});
 test('discovered sketch commands call the shared operation using scoped IDs',async()=>{
  const f=fixture(),inspection=await f.handlers.get('sketch-circular-objects')({});
  const result=await f.handlers.get('sketch-concentric')({ids:inspection.objects.map(o=>o.id),revision:inspection.revision});
