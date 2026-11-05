@@ -1,5 +1,18 @@
 # jSketcher
 
+Current shared-save work: the desktop `inspect` command returns an opaque
+document revision, and `save` accepts that revision plus a My files path for an
+untitled project. Existing projects save to their open path; a new command path
+cannot overwrite a different file. The handler calls the same `saveProject`
+routine as File → Save, including file claims, version/conflict checks,
+validated snapshot capture and account/window cancellation. Its receipt proves
+a browser save only; server synchronization is checked separately. Never retry
+an uncertain write blindly. This requires the matching CAD runtime's
+`projectManager.inspectDocumentRevision()`, which includes materials and
+surfacing changes without hashing the whole document. Focused adapter tests
+pass; rebuilt signed-browser qualification is still pending. This is source
+work, not a new live activation or a full-agent-workflow completion claim.
+
 **In development; not available in the desktop yet.** This integration embeds
 our LAN jSketcher fork at `example.invalid:/srv/data/git/JSKetcher.git` with an independent
 temporary CAD workspace per window. Its File menu asks the desktop host to open,
