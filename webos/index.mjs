@@ -155,7 +155,7 @@ export function mount(host){
    {
     const manager=frame.contentWindow?.__CAD_APP?.projectManager;
     if(typeof manager?.snapshotForHostSave!=='function')throw Error('Manufacturing save validation is unavailable.');
-    const prepared=await manager.snapshotForHostSave();
+    const prepared=await manager.snapshotForHostSave({signal:token.signal,valid:()=>current(token)&&frame===active});
     if(!current(token)||frame!==active)return;
     if(!unchanged(frame,prior))throw Error('The model changed while preparing the save. Try again.');
     content=JSON.stringify(supportedEnvelope(prepared));
