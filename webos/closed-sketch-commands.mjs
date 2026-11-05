@@ -1,0 +1,34 @@
+import {settleScopedCommand} from './scoped-command.mjs';
+// Closed-sketch commands use the craft coordinator; no source bytes or handles cross this boundary.
+export function registerClosedSketchCommands(host,getTarget){
+ const stops=[];
+ const id=maxLength=>({type:'string',minLength:1,maxLength});
+ function copy(input,keys){
+  if(!input||typeof input!=='object'||Array.isArray(input)||Reflect.ownKeys(input).length!==keys.length||Reflect.ownKeys(input).some(k=>typeof k!=='string'||!keys.includes(k)))throw Error('Invalid closed-sketch command arguments.');
+  const result={};for(const key of keys){const d=Object.getOwnPropertyDescriptor(input,key);if(!d?.enumerable||!Object.hasOwn(d,'value'))throw Error('Invalid closed-sketch command arguments.');result[key]=d.value;}return result;
+ }
+ const validId=(x,max)=>typeof x==='string'&&x.length>0&&x.length<=max;
+ function target(method){
+  const captured=getTarget(),session=host.session();
+  const valid=()=>{try{return !!session&&!host.signal.aborted&&host.session()===session&&captured.valid()===true}catch{return false}};
+  if(!valid()||typeof captured.craft?.[method]!=='function')throw Error('This closed-sketch command is unavailable in this modeling window.');
+  return {craft:captured.craft,valid};
+ }
+ const spec=(keys,properties)=>({type:'object',additionalProperties:false,required:keys,properties});
+ try{
+  stops.push(host.commands.register({id:'inspect-closed-sketches',description:'Discover supported closed sketch targets and a current revision.',parameters:{type:'object',additionalProperties:false}},args=>{
+   copy(args,[]);const t=target('inspectSketchTransitions'),result=t.craft.inspectSketchTransitions();if(!t.valid())throw Error('The window or account changed.');return result;
+  }));
+  const inspect=['revision','faceId'];
+  stops.push(host.commands.register({id:'inspect-closed-sketch',description:'Inspect bounded authored objects and constraints in a current closed sketch.',parameters:spec(inspect,{revision:id(256),faceId:id(1024)})},async args=>{
+   const v=copy(args,inspect);if(!validId(v.revision,256)||!validId(v.faceId,1024))throw Error('Provide a current closed-sketch target.');const t=target('inspectClosedSketch');return settleScopedCommand(t.craft.inspectClosedSketch(Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
+  }));
+  const apply=['revision','faceId','ids','factor','offset'];
+  stops.push(host.commands.register({id:'apply-closed-sketch-length-relation',description:'Apply a driving length relation to two inspected segments in a closed sketch. Save separately.',parameters:spec(apply,{revision:id(256),faceId:id(1024),ids:{type:'array',minItems:2,maxItems:2,uniqueItems:true,items:id(256)},factor:{type:'number',minimum:0},offset:{type:'number'}})},async args=>{
+   const v=copy(args,apply);if(!validId(v.revision,256)||!validId(v.faceId,1024)||!Array.isArray(v.ids)||v.ids.length!==2||Reflect.ownKeys(v.ids).length!==3||typeof v.factor!=='number'||!Number.isFinite(v.factor)||v.factor<0||typeof v.offset!=='number'||!Number.isFinite(v.offset))throw Error('Provide current segment IDs and finite relation values.');
+   const ids=[0,1].map(i=>{const d=Object.getOwnPropertyDescriptor(v.ids,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value')||!validId(d.value,256))throw Error('Provide current segment IDs and finite relation values.');return d.value;});if(ids[0]===ids[1])throw Error('Provide two distinct segment IDs.');v.ids=Object.freeze(ids);
+   const t=target('applySketchLengthRelation');return settleScopedCommand(t.craft.applySketchLengthRelation(Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
+  }));
+ }catch(error){for(const stop of stops.reverse())stop();throw error;}
+ return ()=>{for(const stop of stops.splice(0).reverse())stop();};
+}
