@@ -151,14 +151,14 @@ export function mount(host){
  async function saveProject(asCopy=false){
   if(!valid()||!active)return;const token=begin(asCopy?'save-as':'save');if(!token)return;let writeStarted=false;
   try{
-   const frame=active,prior=snapshot(frame);let content=prior;
+   const frame=active;let capture,content;
    {
     const manager=frame.contentWindow?.__CAD_APP?.projectManager;
-    if(typeof manager?.snapshotForHostSave!=='function')throw Error('Manufacturing save validation is unavailable.');
-    const prepared=await manager.snapshotForHostSave({signal:token.signal,valid:()=>current(token)&&frame===active});
+    if(typeof manager?.prepareHostSave!=='function')throw Error('Manufacturing save validation is unavailable.');
+    capture=await manager.prepareHostSave({signal:token.signal,valid:()=>current(token)&&frame===active});
     if(!current(token)||frame!==active)return;
-    if(!unchanged(frame,prior))throw Error('The model changed while preparing the save. Try again.');
-    content=JSON.stringify(supportedEnvelope(prepared));
+    if(!capture.isCurrent())throw Error('The model changed while preparing the save. Try again.');
+    content=JSON.stringify(supportedEnvelope(capture.envelope));
    }
    if(new Blob([content]).size>128*1024*1024)throw Error('Project exceeds 128 MiB.');
    let chosen=state.path;if(asCopy||!chosen){const defaultName=chosen||'/Design.jsketcher.json';chosen=await host.ui.prompt('Save the project to My files:',{title:asCopy?'Save project as':'Save project',value:defaultName,confirmLabel:'Save',signal:token.signal});if(chosen===null||!current(token))return;}
@@ -166,7 +166,7 @@ export function mount(host){
    try{old=await c.files.stat(p);}catch(e){if(e.message!=='File not found.')throw e;}
    if(old){if(old.status==='conflict')throw Error('Resolve this project conflict in Files first.');if(p===state.path&&state.version){if(old.version!==state.version)throw Error('The saved project changed. Save a copy or reopen it.');}else{if(!await host.ui.confirm('Replace '+p+'?',{title:'Replace project?',confirmLabel:'Replace',cancelLabel:'Keep existing',danger:true,signal:token.signal}))return;if(!current(token)||!c.valid()||frame!==active)return;const latest=await c.files.stat(p);if(latest.status==='conflict'||latest.version!==old.version)throw Error('The project changed while confirming. Try again.');}expected=old.version;
    }else if(p===state.path&&state.version)throw Error('The saved project was removed. Save a copy or reopen it.');
-   if(!current(token)||!c.valid()||frame!==active)return;writeStarted=true;const result=await c.files.write(p,content,expected);if(!current(token)||!c.valid()||frame!==active)return;if(!token.setDocument('mirror:'+p)||!current(token))throw Error('The window or file changed after saving.');state.path=p;state.version=result.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';baseline=prior;setWatch(c,p,result.version);const earlier=!unchanged(frame,prior);tell(result.status==='conflict'?'Saved on this device with a conflict. Resolve it in Files.':earlier?'Saved an earlier model on this device; newer changes remain unsaved.':'Saved on this device; syncing with the server: '+p+'.');
+   if(!current(token)||!c.valid()||frame!==active)return;if(!capture.isCurrent())throw Error('The model changed while choosing where to save. Try again.');writeStarted=true;const result=await c.files.write(p,content,expected);if(!current(token)||!c.valid()||frame!==active)return;if(!token.setDocument('mirror:'+p)||!current(token))throw Error('The window or file changed after saving.');state.path=p;state.version=result.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';baseline=content;setWatch(c,p,result.version);const earlier=!capture.isCurrent();tell(result.status==='conflict'?'Saved on this device with a conflict. Resolve it in Files.':earlier?'Saved an earlier model on this device; newer changes remain unsaved.':'Saved on this device; syncing with the server: '+p+'.');
   }catch(e){if(/review material assignments/i.test(e.message))review.hidden=false;tell('Could not finish saving: '+e.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));}finally{token.finish();}
  }
  // Research-only, scoped to supported assigned models. The iframe never gets
