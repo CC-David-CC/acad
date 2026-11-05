@@ -13,14 +13,15 @@ export async function openCadSources({read,valid,signal,onClose=()=>{}}){
   const index=await read('SOURCE-INDEX.html',{signal:controller.signal});
   if(closed||!valid()||controller.signal.aborted)throw new DOMException('Cancelled','AbortError');
   if(!(index instanceof Blob)||index.size>131072)throw Error('Invalid source index.');
-  const parsed=new DOMParser().parseFromString(await index.text(),'text/html');
+  const raw=await index.text();
   if(closed||!valid()||controller.signal.aborted)throw new DOMException('Cancelled','AbortError');
-  const anchors=[...parsed.querySelectorAll('a[href]')];
-  if(!anchors.length||anchors.length>64||anchors.some(a=>!NAME.test(a.getAttribute('href'))||!a.textContent.trim()))throw Error('Invalid source index.');
+  // Parse only our deliberately simple index links; never instantiate remote HTML.
+  const anchors=[...raw.matchAll(/<a href="([A-Za-z0-9][A-Za-z0-9._-]{0,127})">([^<>]{1,200})<\/a>/g)].map(m=>({name:m[1],label:m[2].trim()}));
+  if(!anchors.length||anchors.length>64||anchors.some(a=>!NAME.test(a.name)||!a.label)||anchors.length!==(raw.match(/<a\b/gi)||[]).length)throw Error('Invalid source index.');
   dialog=document.createElement('dialog');dialog.className='codi-confirm-dialog codi-cad-sources-dialog';const heading=document.createElement('h2'),list=document.createElement('ul'),status=document.createElement('p'),close=document.createElement('button');
   heading.textContent='Sources and licenses';status.setAttribute('role','status');close.textContent='Close';close.type='button';dialog.append(heading,list,status,close);close.addEventListener('click',done);dialog.addEventListener('cancel',e=>{e.preventDefault();done()});
   for(const anchor of anchors){
-   const item=document.createElement('li'),button=document.createElement('button'),name=anchor.getAttribute('href');button.type='button';button.textContent=anchor.textContent.trim();
+   const item=document.createElement('li'),button=document.createElement('button'),name=anchor.name;button.type='button';button.textContent=anchor.label;
    button.addEventListener('click',async()=>{
     if(busy||closed||!valid()||controller.signal.aborted)return;busy=true;button.disabled=true;status.textContent='Preparing download…';
     try{
