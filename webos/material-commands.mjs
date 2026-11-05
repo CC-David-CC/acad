@@ -31,10 +31,10 @@ export function registerMaterialCommands(host,getTarget){
    fields(args,[]);const t=target('inspectEnclosureMaterialRoles'),result=t.manager.inspectEnclosureMaterialRoles();
    if(!t.valid())throw Error('The window or account changed.');return result;
   }));
-  stops.push(host.commands.register({id:'assign-enclosure-materials',description:'Assign separate body and lid materials through the same operation as the CAD UI. Use the inspected revision. Changes remain unsaved until Save.',parameters:{type:'object',additionalProperties:false,required:['featureId','revision','roles'],properties:{featureId:{type:'integer',minimum:1},revision:text(1024),roles:{type:'object',additionalProperties:false,required:['BODY','LID'],properties:{BODY:assignment,LID:assignment}}}}},async args=>{
-   fields(args,['featureId','revision','roles']);fields(args.roles,['BODY','LID']);
+  stops.push(host.commands.register({id:'assign-enclosure-materials',description:'Assign body, lid and optional inset-label materials through the same operation as the CAD UI. Use the inspected revision. Changes remain unsaved until Save.',parameters:{type:'object',additionalProperties:false,required:['featureId','revision','roles'],properties:{featureId:{type:'integer',minimum:1},revision:text(1024),roles:{type:'object',additionalProperties:false,required:['BODY','LID'],properties:{BODY:assignment,LID:assignment,LABEL:assignment}}}}},async args=>{
+   fields(args,['featureId','revision','roles']);const labeled=args.roles&&Object.hasOwn(args.roles,'LABEL');fields(args.roles,labeled?['BODY','LID','LABEL']:['BODY','LID']);
    if(!Number.isSafeInteger(args.featureId)||args.featureId<=0)throw Error('Invalid enclosure feature ID.');
-   const revision=bounded(args.revision,1024),roles={BODY:role(args.roles.BODY),LID:role(args.roles.LID)},featureId=args.featureId;
+   const revision=bounded(args.revision,1024),roles={BODY:role(args.roles.BODY),LID:role(args.roles.LID),...(labeled?{LABEL:role(args.roles.LABEL)}:{})},featureId=args.featureId;
    const t=target('assignEnclosureMaterialRoles');
    await t.manager.assignEnclosureMaterialRoles(featureId,roles,{revision,signal:host.signal,valid:t.valid});
    if(!t.valid())throw Error('The window or account changed.');
