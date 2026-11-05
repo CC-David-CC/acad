@@ -30,6 +30,17 @@ export function registerFeatureCommands(host,getTarget){
    exact(args,[]);const t=target('inspectWorkerHistory'),result=t.craft.inspectWorkerHistory();
    if(!t.valid())throw Error('The window or account changed.');return result;
   }));
+  for(const [command,method,repair,description] of [
+   ['begin-worker-centered-hole-parent-repair','beginWorkerCenteredParentRepair',false,'Prepare an inspected hole-parent repair view and return eligible semantic parent IDs. This changes the feature cursor; it does not commit a reference or save.'],
+   ['repair-worker-centered-hole-parent','repairWorkerCenteredHoleParent',true,'Commit one explicit eligible parent choice through the shared checked suffix replay. Preserve the hole identity and diameter; Save separately.']
+  ]){
+   const keys=['revision','index','featureId',...(repair?['faceId']:[])],properties={revision:id(256),index:{type:'integer',minimum:0,maximum:255},featureId:{type:'integer',minimum:1},...(repair?{faceId:id(1024)}:{})};
+   stops.push(host.commands.register({id:command,description,parameters:{type:'object',additionalProperties:false,required:keys,properties}},async args=>{
+    exact(args,keys);const copy=Object.fromEntries(keys.map(k=>[k,Object.getOwnPropertyDescriptor(args,k).value]));
+    if(typeof copy.revision!=='string'||!copy.revision||copy.revision.length>256||!Number.isSafeInteger(copy.index)||copy.index<0||copy.index>255||!Number.isSafeInteger(copy.featureId)||copy.featureId<1||(repair&&(typeof copy.faceId!=='string'||!copy.faceId||copy.faceId.length>1024)))throw Error('Provide a current inspected repair target.');
+    const t=target(method);return settleScopedCommand(t.craft[method](Object.freeze(copy),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
+   }));
+  }
   stops.push(host.commands.register({id:'inspect-authored-edits',description:'Inspect whether authored edits can be undone or redone and obtain the current revision.',parameters:{type:'object',additionalProperties:false}},args=>{
    exact(args,[]);const t=target('inspectAuthoredEdits'),result=t.craft.inspectAuthoredEdits();
    if(!t.valid())throw Error('The window or account changed.');return result;
