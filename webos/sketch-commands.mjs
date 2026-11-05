@@ -15,7 +15,21 @@ export function registerSketchCommands(host,getTarget){
  }
  const register=(descriptor,handler)=>registrations.push(host.commands.register(descriptor,handler));
  const signedAction=axis=>axis==='x'?'SignedDistanceX':axis==='y'?'SignedDistanceY':axis==='projected'?'ProjectedDistance':null;
+ const lineAction=kind=>kind==='collinear'?'Collinear':kind==='axis-symmetry'?'AxisSymmetry':null;
  try{
+  register({id:'sketch-line-relation-targets',description:'Inspect current point/segment IDs for collinear supporting lines or symmetry about an independent line.',parameters:{type:'object',additionalProperties:false,required:['kind'],properties:{kind:{enum:['collinear','axis-symmetry']}}}},async args=>{
+   exact(args,['kind']);const name=lineAction(args.kind);if(!name)throw Error('Choose collinear or axis-symmetry.');
+   const t=target(name);if(typeof t.action.inspect!=='function')throw Error('Line relation inspection is unavailable.');
+   return settleScopedCommand(t.action.inspect(t.context,t.options),{signal:host.signal,valid:t.valid});
+  });
+  register({id:'sketch-line-relation',description:'Relate two segments as collinear, or mirror two points about a third selected segment. The supporting line is infinite.',parameters:{type:'object',additionalProperties:false,required:['kind','ids','revision'],properties:{kind:{enum:['collinear','axis-symmetry']},ids:{type:'array',minItems:2,maxItems:3,items:{type:'string',minLength:1,maxLength:256}},revision:{type:'string',minLength:1,maxLength:128}}}},async args=>{
+   exact(args,['kind','ids','revision']);const {kind,ids,revision}=args,name=lineAction(kind),count=kind==='collinear'?2:3;
+   if(!name||!Array.isArray(ids)||ids.length!==count||Reflect.ownKeys(ids).length!==count+1||typeof revision!=='string'||!revision||revision.length>128)throw Error('Provide current line relation targets and inspected revision.');
+   const copy=[];for(let i=0;i<count;i++){const d=Object.getOwnPropertyDescriptor(ids,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value')||typeof d.value!=='string'||!d.value||d.value.length>256)throw Error('Sketch target IDs must be data properties.');copy.push(d.value);}
+   if(copy[0]===copy[1])throw Error('Choose distinct relation targets.');
+   const t=target(name);if(typeof t.action.invokeByIds!=='function')throw Error('Line relation editing is unavailable.');
+   return settleScopedCommand(t.action.invokeByIds(t.context,Object.freeze(copy),revision,t.options),{signal:host.signal,valid:t.valid});
+  });
   register({id:'sketch-signed-distance-targets',description:'Inspect points and direction segments for a driving signed X, Y or projected distance.',parameters:{type:'object',additionalProperties:false,required:['axis'],properties:{axis:{enum:['x','y','projected']}}}},async args=>{
    exact(args,['axis']);const name=signedAction(args.axis);if(!name)throw Error('Choose x, y or projected distance.');
    const t=target(name);if(typeof t.action.inspect!=='function')throw Error('Signed distance inspection is unavailable.');
