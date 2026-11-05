@@ -452,3 +452,13 @@ an explicit inspected engine and the existing authored undo/redo; they do not
 save automatically, convert between engines, or expose worker handles. They
 require the matching CAD runtime and its pinned same-origin worker/WASM assets.
 The current integration is experimental and is not a deployment claim.
+
+Experimental agent manufacturing commands share the existing core and file
+operation: `inspect-manufacturing`, `propose-material-rebind`,
+`confirm-material-rebind`, and `export-core-3mf`. Export requires an inspected
+revision and a new `.3mf` My files path; existing files are never replaced by
+this command. The receipt reports browser persistence separately from server
+synchronization. Rebinding uses the core's revision-bound proposal token and
+checks producing references; accepting it is not a geometry or printability
+certificate. This source addition has adapter fault tests; its full signed
+export workflow still requires a matching integrated fixture.

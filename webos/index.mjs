@@ -8,6 +8,7 @@ import {registerFeatureCommands} from './feature-commands.mjs';
 import {registerSolidCommands} from './solid-commands.mjs';
 import {registerParameterCommands} from './parameter-commands.mjs';
 import {registerMaterialCommands} from './material-commands.mjs';
+import {registerManufacturingCommands} from './manufacturing-commands.mjs';
 import {registerDocumentSaveCommand} from './document-commands.mjs';
 import {registerSketchDiagnosticCommands} from './diagnostic-commands.mjs';
 import {openCadSources} from './source-dialog.mjs';
@@ -118,6 +119,11 @@ export function mount(host){
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
   return {manager,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.projectManager===manager};
  }));
+ if(host.commands)host.onDispose(registerManufacturingCommands(host,{inspect:inspectSaveTarget,exportModel:args=>export3mf(args),getTarget:()=>{
+  if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
+  const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
+  return {manager,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.projectManager===manager};
+ }}));
  let rectangleDialog=null;
  function closeRectangleDialog(){if(rectangleDialog){clearInterval(rectangleDialog.timer);rectangleDialog.controller.abort();rectangleDialog.dialog.remove();rectangleDialog=null;}}
  function openRectangleDialog(){
@@ -214,18 +220,20 @@ export function mount(host){
  }
  // Research-only, scoped to supported assigned models. The iframe never gets
  // account credentials; this host owns file selection and version checks.
- async function export3mf(){
+ async function export3mf(command=null){
+  if(command&&inspectSaveTarget().revision!==command.revision)throw Error('The model changed; inspect it before exporting.');
   if(!valid()||!active)return;const token=begin('export-3mf');if(!token)return;let writeStarted=false;
   try{
    const frame=active,prior=snapshot(frame),manager=frame.contentWindow?.__CAD_APP?.projectManager;
    if(typeof manager?.exportCore3mfResearch!=='function')throw Error('3MF export is unavailable.');
-   const chosen=await host.ui.prompt('Export the model to My files:',{title:'Export 3MF',value:'/Design.3mf',confirmLabel:'Export',signal:token.signal});
+   const chosen=command?.path??await host.ui.prompt('Export the model to My files:',{title:'Export 3MF',value:'/Design.3mf',confirmLabel:'Export',signal:token.signal});
    if(chosen===null||!current(token))return;
    if(!unchanged(frame,prior))throw Error('The model changed while choosing a file. Try again.');
    const c=await mirrorFileContext();if(!current(token)||!c.valid()||frame!==active)return;
    const p=c.path(chosen);claim(token,p);if(!/\.3mf$/i.test(p))throw Error('Use a .3mf filename.');let expected=null,old;
    try{old=await c.files.stat(p);}catch(e){if(e.message!=='File not found.')throw e;}
    if(old){
+    if(command)throw Error('The export path already exists. Choose a new filename.');
     if(old.status==='conflict')throw Error('Resolve this file conflict in Files first.');
     if(!await host.ui.confirm('Replace '+p+'?',{title:'Replace export?',confirmLabel:'Replace',cancelLabel:'Keep existing',danger:true,signal:token.signal}))return;
     if(!current(token)||!c.valid()||frame!==active)return;
@@ -239,7 +247,8 @@ export function mount(host){
    writeStarted=true;const result=await c.files.write(p,bytes,expected);
    if(!current(token)||!c.valid()||frame!==active)return;
    tell(result.status==='conflict'?'Export saved with a conflict. Resolve it in Files.':!unchanged(frame,prior)?'Exported the earlier model; newer changes are not included.':'Exported to My files; syncing with the server: '+p+'.');
-  }catch(e){tell('Could not export 3MF: '+e.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));}finally{token.finish();}
+   return Object.freeze({path:p,version:result.version,status:result.status,sourceRevision:command?.revision??null,dirty:!unchanged(frame,prior),persistence:'browser',serverStatus:'not-verified'});
+  }catch(e){tell('Could not export 3MF: '+e.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));if(command){if(writeStarted)Object.defineProperty(e,'possiblyCommitted',{value:true,enumerable:true});throw e;}}finally{token.finish();}
  }
  async function importDxf(){
   if(!valid()||!active)return;const token=begin('import-dxf');if(!token)return;
