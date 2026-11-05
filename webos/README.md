@@ -412,3 +412,21 @@ and its receipt SHA-256 is `3f884e1476fde1dff4b55381d68ff7d7fe0aa286c86132cba31c
 A separately built public-app asset bundle exposed `SOURCE-INDEX.html` and all
 21 relative targets over a loopback HTTP server. That is an unsigned static
 asset check; the current server-side login boundary remains unimplemented.
+# Driving diameter command bridge — integration source
+
+`sketch-diameter-targets` discovers circles/arcs and returns a single-use sketch
+revision. `sketch-diameter` accepts that revision, an `objectId`, and a positive
+numeric `diameter` up to 1,000,000 in the current sketch units. It calls the
+same `DiameterLength.invokeById` operation as the checked CAD sketch action;
+it does not alter raw geometry or save automatically. The command checks the
+account/window lifetime before and after asynchronous work and passes the
+same live guard into the operation. Missing support in an older CAD package
+is an explicit refusal, not an alternate implementation.
+
+Seven sketch-command tests plus the existing feature-command test pass,
+including malformed/getter payloads and account/window cancellation. These
+are bridge tests with action fixtures; real solver/UI evidence lives in the
+CAD repository's `test/mechanical/DIAMETER-EVIDENCE.md`. The combined signed
+desktop browser test and deployment remain outstanding. The separately
+prepared 67d source-access package does not contain the diameter engine.
+
