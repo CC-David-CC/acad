@@ -21,15 +21,15 @@ import xml.etree.ElementTree as ET
 
 HERE = Path(__file__).resolve().parent
 # Update only after reviewing the fork commit and the generated manifest.
-FORK_COMMIT = '2bef632fbbc1c62c2c16c1bb06fa702ac121a506'
+FORK_COMMIT = '67d3432921f2aa4256893a618cd8f11ec732aa51'
 DEFAULT_REPOSITORY = 'example.invalid:/srv/data/git/JSKetcher.git'
 ENGINE_COMMIT = '5efaf53accb45bac475155fc4d5552642c19e91e'
 ENGINE_REPOSITORY = 'https://github.com/Autodrop3d/occt-interpreter.git'
-WORKER_ENGINE_COMMIT = 'c4dce453420fe31123a6be1e66161c388b46308c'
-WORKER_ENGINE_TREE = '6064cd4335a3ccbbd23f52d8559990c6fb604d2f'
+WORKER_ENGINE_COMMIT = '8c4f30048fe65d9205c310d164b45d00d3fe77c3'
+WORKER_ENGINE_TREE = 'ef3c43d624b587a7a43d78b01b2c51aa57d760a5'
 WORKER_ENGINE_REPOSITORY = 'example.invalid:/srv/data/git/occt-interpreter-codi.git'
-WORKER_ENGINE_INPUTS = {'main.js': '89b3b85fb8afcfbdf343ec3f7f2ecf222067012d994cf9af6eb649ef30d9257b',
-                        'main.wasm': 'c39793b8aff34dc548b57fee1d901219e372702a5005ef92dfdf94994c012897'}
+WORKER_ENGINE_INPUTS = {'main.js': '81996d394b9fd2fcd7b02a0448bf7968c2decc04969d2be7ace4512cbfc5620a',
+                        'main.wasm': '13617eda9a2118edfd1244b5d46523e7d9628a87ec995a0237b2b5cc58d532f2'}
 EMSCRIPTEN_RUNTIME_SOURCE_SHA256 = 'ad04773a4a30e37ece3b9ccbd3bb919d2ba531ad358ecb8623f4d6199f62c656'
 EMSCRIPTEN_LICENSES = {
     'LICENSE': '620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86',
@@ -39,8 +39,8 @@ EMSCRIPTEN_LICENSES = {
     'system/lib/compiler-rt/LICENSE.TXT': '1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d',
     'system/lib/dlmalloc.c': '4f5295fef30e0f3fac91be204ec272f558a1bd0336e125591c19acfa584d77fc',
 }
-WORKER_PORTABLE_SHA256 = 'f74142622c9ced56b8f2e7955301ace5902f811734a71128767fb05de4159972'
-WORKER_BUNDLE_SHA256 = 'a06bcc6cb9ac87e335d4ff59d6d570c6dd7a8acf7adf90e903339b9a13832f04'
+WORKER_PORTABLE_SHA256 = 'a8774acbbe3a90d7c82fe294c769096179eae351e5a8c854d4d0a31737a706ee'
+WORKER_BUNDLE_SHA256 = 'b0713d865ec90f3778f65118098138a86fc6dba707070374f9eb166d5e03a3ca'
 ENGINE_SHA256 = {'occt.wasm': 'fee4624786bb114de1d381340f05f0cdf47e6700b9fd62ef8a5dace82c8fda77',
                  'occt.js': '3c56e74e6e08411436a68fb930bab38aedd3137e4369af2bc67fd382e568787e'}
 # The shipped 2.1.1 build differs from upstream only by whitespace. Check
@@ -502,7 +502,7 @@ def main():
         worker_assets = {'oci-verified-worker.js': WORKER_BUNDLE_SHA256,
                          'occ-portable.js': WORKER_PORTABLE_SHA256,
                          WORKER_ENGINE_INPUTS['main.wasm'][:20] + '.wasm': WORKER_ENGINE_INPUTS['main.wasm']}
-        for name in ('profile-topology.mjs', 'centeredHolePlan.mjs', 'centeredHoleTopology.mjs'):
+        for name in ('profile-topology.mjs', 'centeredHolePlan.mjs', 'centeredHoleTopology.mjs', 'boundedPrismBoundary.mjs', 'fourCornerHolePlan.mjs', 'fourCornerHoleTopology.mjs', 'fourCornerHoleProvenance.mjs'):
             worker_assets[name] = sha256_file(root / 'modules/engine/mount' / name)
         for name in ('rectangleProfileRequest.mjs', 'authoredRegions.mjs', 'profilePlan.mjs'):
             worker_assets[name] = sha256_file(root / 'modules/workbenches/modeler/features/extrude' / name)
@@ -690,7 +690,12 @@ def main():
                    'npmVersion': subprocess.check_output(['npm', '--version'], text=True).strip(),
                    'files': contents, 'reproducibleBuildVerified': False}
         (staging / 'BUILD-RECEIPT.json').write_text(json.dumps(receipt, indent=2, sort_keys=True) + '\n', encoding='utf-8')
-        assets = sorted(PREFIX + f.relative_to(staging).as_posix() for f in staging.rglob('*') if f.is_file())
+        # Source and license materials are delivered only by the authenticated
+        # source registry; app bundling must not create public aliases.
+        def public_runtime_file(f):
+            rel=f.relative_to(staging)
+            return not (len(rel.parts)==1 and (rel.name.endswith(('.txt','.zip')) or rel.name in ('SOURCE-INDEX.html','BUILD-RECEIPT.json')))
+        assets = sorted(PREFIX + f.relative_to(staging).as_posix() for f in staging.rglob('*') if f.is_file() and public_runtime_file(f))
         manifest = {'assets': assets}
         manifest_path = HERE / 'app.json'
         if not args.update_manifest and (not manifest_path.exists() or json.loads(manifest_path.read_text(encoding='utf-8')) != manifest):

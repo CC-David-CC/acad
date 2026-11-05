@@ -25,7 +25,7 @@ source or license clearance for the engine or its dependencies.
 | `component-emitter` 1.1.3 | Package ships its MIT LICENSE, Copyright 2014 Component contributors; metadata omits a license field. The emitter test checks its exact license and the bundled replacement. |
 | `numeric` 1.2.6 | Four pinned source files reproduce the npm input hash. Numeric and quadprog licenses and a source archive are included; the numerical precompiler transforms the input. |
 | `stream` 0.0.2 | The installed README contains the full MIT text and Copyright 2012 Julian Gruber; it is included in the source-candidate archive and notice inventory supplemental files. `index.js` matches upstream tag v0.0.2 commit `3faf89f7b8770fe41b41b6f0bb1e08bb9367fc9f`. |
-| `timers` 0.1.1 | `index.js` matches upstream tag 0.1.1 commit `d400ce94b22686faf0b717259040e6b0615250e6`. Package metadata and README say MIT, but that exact upstream tag has no full MIT notice or copyright text. Do not invent one; obtain authoritative terms or replace the package before release. |
+| `timers` 0.1.1 | Historical source-candidate evidence retains this package and README. The current XML scheduling alias excludes its npm module from the runtime bundle; verify the final bundle and distributed source archive independently. Its metadata and README say MIT, but that upstream tag has no full MIT notice or copyright text; do not invent one. |
 | `@icons/material` 0.2.4 | Its exact upstream tag is `47a3170f27d1c1061e69b1b68f7dfd8d4d7845f3`; it declares MIT but does not ship a full license or copyright notice. It generates icons from `mdi-svg ^2.2.43`. The two detected bundled components, CheckIcon and UnfoldMoreHorizontalIcon, contain path data matching installed SVGs; these SVGs match published `mdi-svg` 2.2.43 byte for byte. The exact published MDI MIT license, Copyright 2017 Austin Andrews, is included and hash-pinned. Obtain authoritative wrapper license/copyright and verify provenance of other material before release. |
 
 `runtime-source-candidates.zip` is a deterministic archive of the exact
@@ -48,7 +48,7 @@ inventory.
 The bundled `stream` 0.0.2 entry and README match upstream tag v0.0.2 commit
 `3faf89f7b8770fe41b41b6f0bb1e08bb9367fc9f`; its README includes the full MIT
 notice and Julian Gruber copyright. The separately packaged exact README is
-`STREAM-UPSTREAM-README.txt`. The bundled `timers` 0.1.1 entry and README match
+`STREAM-UPSTREAM-README.txt`. The historical source-candidate `timers` 0.1.1 entry and README match
 upstream tag 0.1.1 commit `d400ce94b22686faf0b717259040e6b0615250e6`; its
 README, supplied as `TIMERS-UPSTREAM-README.txt`, and package metadata say MIT,
 but the tagged upstream tree supplies no full license grant or copyright

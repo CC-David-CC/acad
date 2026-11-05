@@ -4,6 +4,7 @@ import {readVersionedBytes,acquireVersionedSnapshot} from './file-read.mjs';
 import {registerSketchCommands} from './sketch-commands.mjs';
 import {createRectangleController} from './rectangle-commands.mjs';
 import {registerFeatureCommands} from './feature-commands.mjs';
+import {openCadSources} from './source-dialog.mjs';
 
 // The embedded CAD app owns only its temporary model. The host owns account
 // storage, confirmation, version checks and the lifetime of every iframe.
@@ -15,14 +16,14 @@ export function mount(host){
  const operations=host.documentOperations;if(!operations)throw Error('Document operation coordination is unavailable.');
  let disposed=false,busy=operations.busy,active=null,candidate=null,baseline=null,watch=()=>{},watchRevision=0,checkRevision=0;
  let actionCleanup=()=>{};
- const sourceMenus=new WeakSet();
+ const sourceMenus=new WeakSet();let sourceOpening=false,sourceClose=null;
  const unsubscribeOperations=operations.subscribe(state=>{busy=state.busy;if(active&&frames.has(active))syncCurrentActions();});
  let updateActions=()=>{};function syncCurrentActions(){updateActions();}
  function bindActions(ctx){
   if(!sourceMenus.has(ctx)){
    ctx.actionService.registerActions([{id:'DesktopSources',appearance:{label:'Sources & licenses'},invoke:()=>{
     if(!valid()||active?.contentWindow?.__CAD_APP!==ctx)return;
-    window.open(new URL('./node_modules/jsketcher-build/SOURCE-INDEX.html',import.meta.url).href,'_blank','noopener,noreferrer');
+    if(sourceOpening||sourceClose)return;sourceOpening=true;void openCadSources({read:(name,options)=>host.storage.readCadSource(owner,name,options),valid,signal:host.signal,onClose:()=>{sourceClose=null;}}).then(close=>{if(valid())sourceClose=close;else close();}).catch(()=>tell('Sources and licenses are unavailable.')).finally(()=>{sourceOpening=false;});
    }}]);
    ctx.streams.ui.menu.all.update(menus=>menus.map(menu=>menu.id==='file'?{...menu,actions:[...menu.actions,'-','DesktopSources']}:menu));
    sourceMenus.add(ctx);
