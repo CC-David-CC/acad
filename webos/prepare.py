@@ -331,6 +331,12 @@ def review_package_sources(node_modules, destination):
                 info.external_attr = 0o100644 << 16
                 archive.writestr(info, item.read_bytes())
 
+def checked_archive_member(archive, name):
+    entries = [item for item in archive.infolist() if item.filename == name]
+    if len(entries) != 1 or entries[0].is_dir() or entries[0].file_size > 8 * 1024 * 1024 or (entries[0].external_attr >> 16) & 0o170000 == 0o120000:
+        raise RuntimeError('Unsafe or missing archived source member: ' + name)
+    return archive.read(entries[0])
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--repo', default=DEFAULT_REPOSITORY, help='Git source containing the pinned fork commit')
@@ -339,6 +345,8 @@ def main():
     parser.add_argument('--emscripten-runtime-source', type=Path, required=True, help='Pinned curated Emscripten runtime source ZIP')
     parser.add_argument('--worker-occt-input', type=Path, required=True, help='Clean source-built worker OCC JS/WASM')
     parser.add_argument('--numeric-repo', default=NUMERIC_REPOSITORY, help='Git source containing the pinned numeric 1.2.6 commit')
+    parser.add_argument('--numeric-source-archive', type=Path, help='Previously verified exact numeric source ZIP')
+    parser.add_argument('--engine-source-archive', type=Path, help='Previously verified exact legacy interpreter source ZIP')
     parser.add_argument('--manifold-research-input', type=Path, required=True, help='Hash-pinned local-only source-built Manifold artifacts and source archives')
     parser.add_argument('--occt-source-research-input', type=Path, help='Optional exact local source-built OCCT candidate and receipt; experimental use only')
     parser.add_argument('--update-manifest', action='store_true', help='Write a reviewed candidate asset manifest')
@@ -605,22 +613,32 @@ def main():
             'The provided archives and notices are not proof of complete corresponding source. '
             'Do not publish or distribute this runtime until the exact engine provenance, corresponding source, transitive dependency notices and license obligations are reviewed.\n', encoding='utf-8')
         run('git', '-C', str(root), 'archive', '--format=zip', '--output=' + str(staging / 'jsketcher-fork-source.zip'), FORK_COMMIT)
-        engine = Path(scratch) / 'engine-source'
-        engine.mkdir()
-        run('git', 'init', '--quiet', str(engine))
-        run('git', '-C', str(engine), 'fetch', '--quiet', '--depth=1', args.engine_repo, ENGINE_COMMIT)
-        actual_engine = subprocess.check_output(['git', '-C', str(engine), 'rev-parse', 'FETCH_HEAD'], text=True).strip()
-        if actual_engine != ENGINE_COMMIT:
-            raise RuntimeError('The fetched interpreter commit does not match the pin')
-        engine_tree = subprocess.check_output(['git', '-C', str(engine), 'rev-parse', 'FETCH_HEAD^{tree}'], text=True).strip()
-        if engine_tree != ENGINE_TREE:
-            raise RuntimeError('The fetched interpreter tree does not match the pin')
-        for path, (target, expected) in ENGINE_SOURCE_NOTICES.items():
-            contents = subprocess.check_output(['git', '-C', str(engine), 'show', ENGINE_COMMIT + ':' + path])
-            if hashlib.sha256(contents).hexdigest() != expected:
-                raise RuntimeError('Pinned interpreter license differs: ' + path)
-            (staging / target).write_bytes(contents)
-        run('git', '-C', str(engine), 'archive', '--format=zip', '--output=' + str(staging / 'occt-interpreter-source.zip'), ENGINE_COMMIT)
+        if args.engine_source_archive:
+            engine_archive = staging / 'occt-interpreter-source.zip'
+            copy_checked_input(args.engine_source_archive, engine_archive, '5c7e9dfca8f9c5f01e1da0e672039ec0e19a78e78fb3ec41bbb330ae71febe39')
+            with zipfile.ZipFile(engine_archive) as archive:
+                for path, (target, expected) in ENGINE_SOURCE_NOTICES.items():
+                    contents = checked_archive_member(archive, path)
+                    if hashlib.sha256(contents).hexdigest() != expected:
+                        raise RuntimeError('Archived interpreter license differs: ' + path)
+                    (staging / target).write_bytes(contents)
+        else:
+            engine = Path(scratch) / 'engine-source'
+            engine.mkdir()
+            run('git', 'init', '--quiet', str(engine))
+            run('git', '-C', str(engine), 'fetch', '--quiet', '--depth=1', args.engine_repo, ENGINE_COMMIT)
+            actual_engine = subprocess.check_output(['git', '-C', str(engine), 'rev-parse', 'FETCH_HEAD'], text=True).strip()
+            if actual_engine != ENGINE_COMMIT:
+                raise RuntimeError('The fetched interpreter commit does not match the pin')
+            engine_tree = subprocess.check_output(['git', '-C', str(engine), 'rev-parse', 'FETCH_HEAD^{tree}'], text=True).strip()
+            if engine_tree != ENGINE_TREE:
+                raise RuntimeError('The fetched interpreter tree does not match the pin')
+            for path, (target, expected) in ENGINE_SOURCE_NOTICES.items():
+                contents = subprocess.check_output(['git', '-C', str(engine), 'show', ENGINE_COMMIT + ':' + path])
+                if hashlib.sha256(contents).hexdigest() != expected:
+                    raise RuntimeError('Pinned interpreter license differs: ' + path)
+                (staging / target).write_bytes(contents)
+            run('git', '-C', str(engine), 'archive', '--format=zip', '--output=' + str(staging / 'occt-interpreter-source.zip'), ENGINE_COMMIT)
         worker_engine = Path(scratch) / 'worker-engine-source'
         worker_engine.mkdir()
         run('git', 'init', '--quiet', str(worker_engine))
@@ -634,23 +652,34 @@ def main():
             if hashlib.sha256(contents).hexdigest() != expected:
                 raise RuntimeError('Worker interpreter notice differs: ' + path)
         run('git', '-C', str(worker_engine), 'archive', '--format=zip', '--output=' + str(staging / 'occt-worker-interpreter-source.zip'), WORKER_ENGINE_COMMIT)
-        numeric = Path(scratch) / 'numeric-source'
-        numeric.mkdir()
-        run('git', 'init', '--quiet', str(numeric))
-        run('git', '-C', str(numeric), 'fetch', '--quiet', '--depth=1', args.numeric_repo, NUMERIC_COMMIT)
-        if subprocess.check_output(['git', '-C', str(numeric), 'rev-parse', 'FETCH_HEAD'], text=True).strip() != NUMERIC_COMMIT:
-            raise RuntimeError('The fetched numeric source commit does not match the pin')
-        def numeric_file(name):
-            return subprocess.check_output(['git', '-C', str(numeric), 'show', NUMERIC_COMMIT + ':' + name])
-        inputs = b''.join(numeric_file(name) for name in ('src/numeric.js', 'src/seedrandom.js', 'src/quadprog.js', 'src/svd.js'))
-        if hashlib.sha256(inputs).hexdigest() != NUMERIC_INPUT_SHA256:
-            raise RuntimeError('Pinned numeric source files do not reproduce the npm package input')
-        for name, target in [('license.txt', 'NUMERIC-LICENSE.txt'), ('resources/LICENSE.quadprog', 'NUMERIC-QUADPROG-LICENSE.txt')]:
-            contents = numeric_file(name)
-            if hashlib.sha256(contents).hexdigest() != NUMERIC_NOTICE_SHA256[name]:
-                raise RuntimeError('Pinned numeric license differs: ' + name)
-            (staging / target).write_bytes(contents)
-        run('git', '-C', str(numeric), 'archive', '--format=zip', '--output=' + str(staging / 'numeric-source.zip'), NUMERIC_COMMIT)
+        if args.numeric_source_archive:
+            numeric_archive = staging / 'numeric-source.zip'
+            copy_checked_input(args.numeric_source_archive, numeric_archive, '00ec7f37fcb940cd55db1aa142ee27d8b2ca784edd1f02704693a37a0f63df0c')
+            archive = zipfile.ZipFile(numeric_archive)
+            def numeric_file(name):
+                return checked_archive_member(archive, name)
+        else:
+            numeric = Path(scratch) / 'numeric-source'
+            numeric.mkdir()
+            run('git', 'init', '--quiet', str(numeric))
+            run('git', '-C', str(numeric), 'fetch', '--quiet', '--depth=1', args.numeric_repo, NUMERIC_COMMIT)
+            if subprocess.check_output(['git', '-C', str(numeric), 'rev-parse', 'FETCH_HEAD'], text=True).strip() != NUMERIC_COMMIT:
+                raise RuntimeError('The fetched numeric source commit does not match the pin')
+            def numeric_file(name):
+                return subprocess.check_output(['git', '-C', str(numeric), 'show', NUMERIC_COMMIT + ':' + name])
+        try:
+            inputs = b''.join(numeric_file(name) for name in ('src/numeric.js', 'src/seedrandom.js', 'src/quadprog.js', 'src/svd.js'))
+            if hashlib.sha256(inputs).hexdigest() != NUMERIC_INPUT_SHA256:
+                raise RuntimeError('Pinned numeric source files do not reproduce the npm package input')
+            for name, target in [('license.txt', 'NUMERIC-LICENSE.txt'), ('resources/LICENSE.quadprog', 'NUMERIC-QUADPROG-LICENSE.txt')]:
+                contents = numeric_file(name)
+                if hashlib.sha256(contents).hexdigest() != NUMERIC_NOTICE_SHA256[name]:
+                    raise RuntimeError('Pinned numeric license differs: ' + name)
+                (staging / target).write_bytes(contents)
+        finally:
+            if args.numeric_source_archive:archive.close()
+        if not args.numeric_source_archive:
+            run('git', '-C', str(numeric), 'archive', '--format=zip', '--output=' + str(staging / 'numeric-source.zip'), NUMERIC_COMMIT)
         notices(root / 'node_modules', staging / 'dependency-notices.zip', staging / 'static/index.bundle.js')
         review_package_sources(root / 'node_modules', staging / 'runtime-source-candidates.zip')
         evidence = HERE / 'PROVENANCE-NOTES.md'
@@ -677,6 +706,8 @@ def main():
                     for f in sorted(staging.rglob('*')) if f.is_file()]
         receipt = {'forkCommit': FORK_COMMIT, 'interpreterCommit': ENGINE_COMMIT, 'numericCommit': NUMERIC_COMMIT,
                    'numericInputSHA256': NUMERIC_INPUT_SHA256,
+                   'numericSourceMode': 'verified-prior-archive' if args.numeric_source_archive else 'git',
+                   'legacyInterpreterSourceMode': 'verified-prior-archive' if args.engine_source_archive else 'git',
                    'workerInterpreterCommit': WORKER_ENGINE_COMMIT, 'workerInterpreterTree': WORKER_ENGINE_TREE,
                    'workerOcctInputs': WORKER_ENGINE_INPUTS,
                    'emscriptenRuntimeSourceSHA256': EMSCRIPTEN_RUNTIME_SOURCE_SHA256,
