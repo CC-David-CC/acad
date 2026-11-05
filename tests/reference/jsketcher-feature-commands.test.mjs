@@ -1,13 +1,15 @@
 import assert from 'node:assert/strict';
 import {registerFeatureCommands} from '../apps/system/jsketcher/feature-commands.mjs';
 const registered=new Map(),controller=new AbortController();let session={},current=true,calls=0,options;
-const craft={inspectWorkerFeatureCommands(){return {ready:true,revision:'r1'}},async createWorkerExtrusion(args,opts){calls++;options=opts;return args},async createWorkerCenteredHole(args,opts){calls++;options=opts;return args},async createWorkerFourCornerHoles(args,opts){calls++;options=opts;return args}};
+const craft={inspectWorkerFeatureCommands(){return {ready:true,revision:'r1'}},inspectWorkerHistory(){return {revision:'r1',pointer:0,features:[{index:1,featureId:2,depth:20}]}},async editWorkerExtrusion(args,opts){calls++;options=opts;return args},async createWorkerExtrusion(args,opts){calls++;options=opts;return args},async createWorkerCenteredHole(args,opts){calls++;options=opts;return args},async createWorkerFourCornerHoles(args,opts){calls++;options=opts;return args}};
 const host={signal:controller.signal,session:()=>session,commands:{register(def,run){registered.set(def.id,{def,run});return ()=>registered.delete(def.id)}}};
 const dispose=registerFeatureCommands(host,()=>({craft,valid:()=>current}));
-assert.equal(registered.size,4);
+assert.equal(registered.size,6);
 const run=(id,args)=>registered.get(id).run(args);
 assert.deepEqual(run('inspect-worker-features',{}),{ready:true,revision:'r1'});
 assert.throws(()=>run('inspect-worker-features',{extra:1}),/arguments/);
+assert.equal(run('inspect-worker-history',{}).features[0].featureId,2);
+assert.deepEqual(await run('edit-worker-extrusion',{revision:'r1',index:1,featureId:2,depth:35}),{revision:'r1',index:1,featureId:2,depth:35});
 const args={revision:'r1',faceId:'face',regionId:'region',depth:20};
 assert.deepEqual(await run('create-worker-extrusion',args),args);
 assert.equal(options.signal,controller.signal);assert.equal(options.valid(),true);
@@ -18,7 +20,7 @@ await assert.rejects(run('create-worker-four-corner-holes',bad),/arguments/);ass
 await assert.rejects(run('create-worker-four-corner-holes',{...four,sideIds:{...four.sideIds,extra:'x'}}),/arguments/);
 session={};assert.equal(options.valid(),false,'old session cannot authorize an in-flight operation');
 await assert.rejects(run('create-worker-centered-hole',{revision:'r1',bodyId:'body',lidFaceId:'lid',diameter:10,history:[]}),/arguments/);
-assert.equal(calls,2,'invalid shape must not reach the craft engine');
+assert.equal(calls,3,'invalid shape must not reach the craft engine');
 current=false;await assert.rejects(run('create-worker-extrusion',args),/unavailable/);current=true;
 controller.abort();await assert.rejects(run('create-worker-extrusion',args),/unavailable/);
 dispose();dispose();assert.equal(registered.size,0);
