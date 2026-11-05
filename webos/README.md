@@ -444,3 +444,11 @@ CAD repository's `test/mechanical/DIAMETER-EVIDENCE.md`. The combined signed
 desktop browser test and deployment remain outstanding. The separately
 prepared 67d source-access package does not contain the diameter engine.
 
+
+The source-only agent solid bridge registers `inspect-worker-solids`,
+`inspect-worker-solid-history`, `create-worker-solid-box`,
+`create-worker-solid-boolean`, and `edit-worker-solid-box`. These commands use
+an explicit inspected engine and the existing authored undo/redo; they do not
+save automatically, convert between engines, or expose worker handles. They
+require the matching CAD runtime and its pinned same-origin worker/WASM assets.
+The current integration is experimental and is not a deployment claim.

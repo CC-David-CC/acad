@@ -110,6 +110,7 @@
     "node_modules/jsketcher-build/manifold-build-receipt.json",
     "node_modules/jsketcher-build/static/13617eda9a2118edfd12.wasm",
     "node_modules/jsketcher-build/static/7bb5f8ee10fcafdab787.wasm",
+    "node_modules/jsketcher-build/static/a48a3283760c21337881.wasm",
     "node_modules/jsketcher-build/static/authoredRegions.mjs",
     "node_modules/jsketcher-build/static/boundedPrismBoundary.mjs",
     "node_modules/jsketcher-build/static/centeredHolePlan.mjs",
@@ -127,6 +128,7 @@
     "node_modules/jsketcher-build/static/project-validator.c371e0678de76f039721.js",
     "node_modules/jsketcher-build/static/rectangleProfileRequest.mjs",
     "node_modules/jsketcher-build/static/sketch-solver.5be6182425fd129502af.js",
+    "node_modules/jsketcher-build/static/smlib-worker.cd451ecc4cb60d308aa3.js",
     "node_modules/jsketcher-build/static/vendors-node_modules_cache_codi-manifold_manifold_js.bundle.js"
   ]
 }
