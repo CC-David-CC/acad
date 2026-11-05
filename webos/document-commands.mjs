@@ -1,3 +1,4 @@
+import {settleScopedCommand} from './scoped-command.mjs';
 // Saving uses the desktop's account/version-aware file operation. Neither
 // account credentials nor the file service are exposed to the CAD frame.
 export function registerDocumentSaveCommand(host, {inspect, save}) {
@@ -25,7 +26,7 @@ export function registerDocumentSaveCommand(host, {inspect, save}) {
     if (!current() || target.revision !== captured.revision) throw Error('The model changed; inspect it before saving.');
     if (target.path && Object.hasOwn(captured, 'path')) throw Error('Save uses the open project path. Use the UI to save a separate copy.');
     if (!target.path && !Object.hasOwn(captured, 'path')) throw Error('An untitled project needs a My files path.');
-    const result = await save(Object.freeze(captured));
+    const result = await settleScopedCommand(save(Object.freeze(captured)),{signal:host.signal,valid:current});
     // A missing receipt is not success. A write may already have committed
     // before a lifetime change, so the caller must reconcile rather than retry.
     if (!current() || !result) throw Error('The save outcome is unavailable; inspect My files before retrying.');

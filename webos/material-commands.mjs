@@ -1,3 +1,4 @@
+import {settleScopedCommand} from './scoped-command.mjs';
 // UI and agents share projectManager's transactional material assignment.
 // This adapter never edits history, geometry or files directly.
 export function registerMaterialCommands(host,getTarget){
@@ -36,7 +37,7 @@ export function registerMaterialCommands(host,getTarget){
    if(!Number.isSafeInteger(args.featureId)||args.featureId<=0)throw Error('Invalid enclosure feature ID.');
    const revision=bounded(args.revision,1024),roles={BODY:role(args.roles.BODY),LID:role(args.roles.LID),...(labeled?{LABEL:role(args.roles.LABEL)}:{})},featureId=args.featureId;
    const t=target('assignEnclosureMaterialRoles');
-   await t.manager.assignEnclosureMaterialRoles(featureId,roles,{revision,signal:host.signal,valid:t.valid});
+   await settleScopedCommand(t.manager.assignEnclosureMaterialRoles(featureId,roles,{revision,signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
    if(!t.valid())throw Error('The window or account changed.');
    return {status:'accepted',saved:false};
   }));

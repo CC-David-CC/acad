@@ -1,3 +1,4 @@
+import {settleScopedCommand} from './scoped-command.mjs';
 // Both desktop commands and the visible dialog use this same guarded core API.
 export function createRectangleController(host,getTarget){
  function target(){
@@ -8,10 +9,10 @@ export function createRectangleController(host,getTarget){
  }
  function inspect(){const t=target(),result=t.craft.inspectRectangleCreation();if(!t.valid())throw Error('The window or account changed.');return result;}
  function inspectDimensions(provided){const t=provided||target();if(!t.valid()||typeof t.craft.inspectRectangleDimensions!=='function'||typeof t.craft.editRectangleDimensions!=='function')throw Error('Rectangle dimension editing is unavailable in this version of jSketcher.');const result=t.craft.inspectRectangleDimensions();if(!t.valid())throw Error('The window or account changed.');return result;}
- async function edit(args,provided,signal=host.signal){const t=provided||target();inspectDimensions(t);if(!t.valid())throw Error('The window or account changed.');return await t.craft.editRectangleDimensions(args,{signal,valid:t.valid});}
+ async function edit(args,provided,signal=host.signal){const t=provided||target();inspectDimensions(t);if(!t.valid())throw Error('The window or account changed.');return await settleScopedCommand(t.craft.editRectangleDimensions(args,{signal,valid:t.valid}),{signal,valid:t.valid});}
  async function create(args,provided,signal=host.signal){
   const t=provided||target();if(!t.valid())throw Error('The window or account changed.');
-  return await t.craft.createRectangleSketch(args,{signal,valid:t.valid});
+  return await settleScopedCommand(t.craft.createRectangleSketch(args,{signal,valid:t.valid}),{signal,valid:t.valid});
  }
  function register(){
   const registrations=[];

@@ -1,4 +1,5 @@
 import './style.css';
+import {settleScopedCommand} from './scoped-command.mjs';
 import {inspectedProjectIsDirty} from './inspect-state.mjs';
 import {readVersionedBytes,acquireVersionedSnapshot} from './file-read.mjs';
 import {registerSketchCommands} from './sketch-commands.mjs';
@@ -158,7 +159,7 @@ export function mount(host){
   if(!valid()||!active)return;const token=begin('review');if(!token)return;const frame=active,manager=frame.contentWindow?.__CAD_APP?.projectManager;
   try{
    if(typeof manager?.proposeHostManufacturingRebind!=='function'||typeof manager?.confirmHostManufacturingRebind!=='function')throw Error('Assignment review is unavailable.');
-   const proposal=await manager.proposeHostManufacturingRebind();if(!current(token)||frame!==active)return;
+   const proposal=await settleScopedCommand(manager.proposeHostManufacturingRebind(),{signal:token.signal,valid:()=>current(token)&&frame===active});if(!current(token)||frame!==active)return;
    const accepted=await host.ui.confirm(`The model changed. ${proposal.regionCount} regions in ${proposal.objectCount} printable objects still have uniquely identified producing operations. Assignments: ${proposal.details.join('; ')}. Inspect the model and assignments before confirming. This does not verify geometry or manufacturing safety.`,{title:'Review material assignments',confirmLabel:'Keep these assignments',cancelLabel:'Keep editing',signal:token.signal});
    if(!accepted||!current(token)||frame!==active){manager.cancelHostManufacturingRebind?.();return;}
    manager.confirmHostManufacturingRebind(proposal.token);review.hidden=true;tell('Assignments updated for this model. Save to keep the changes.');
@@ -173,7 +174,7 @@ export function mount(host){
    const c=await mirrorFileContext();if(!current(token)||!c.valid())return;const p=c.path(chosen);claim(token,p);file=await acquireVersionedSnapshot(c.files,p,{maximumBytes:128*1024*1024,valid:()=>current(token)&&c.valid()&&previous===active,signal:token.signal});if(!current(token)||!c.valid())return;
    if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');tell('Rebuilding the selected model…');next=createFrame(true);candidate=next;const ctx=await waitReady(next);if(!current(token)||!c.valid())return;
    if(typeof ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace!=='function')throw Error('This CAD runtime cannot validate file snapshots in a worker.');
-   await ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace(file.data,{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)});if(!current(token)||!c.valid())return;
+   await settleScopedCommand(ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace(file.data,{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)});if(!current(token)||!c.valid())return;
    const restored=snapshot(next),now=await c.files.stat(p);if(!current(token)||!c.valid())return;if(now.version!==file.version||now.status==='conflict')throw Error('The project changed while opening. Try again.');if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');
    if(!token.setDocument('mirror:'+p)||!current(token))throw Error('The window or file changed.');
    active=next;candidate=null;next=null;bindActions(active.contentWindow?.__CAD_APP);active.classList.remove('jsketcher-staging');detach(previous);baseline=restored;state.path=p;state.version=file.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — jSketcher';setWatch(c,p,file.version);retry.hidden=true;review.hidden=true;tell('Opened '+p+'.');
@@ -188,7 +189,7 @@ export function mount(host){
     const manager=frame.contentWindow?.__CAD_APP?.projectManager;
     if(command&&frame.contentWindow?.__CAD_APP?.projectManager?.inspectDocumentRevision?.()!==command.revision)throw Error('The model changed before saving; inspect it again.');
     if(typeof manager?.prepareHostSave!=='function')throw Error('Manufacturing save validation is unavailable.');
-    capture=await manager.prepareHostSave({signal:token.signal,valid:()=>current(token)&&frame===active});
+    capture=await settleScopedCommand(manager.prepareHostSave({signal:token.signal,valid:()=>current(token)&&frame===active}),{signal:token.signal,valid:()=>current(token)&&frame===active});
     if(!current(token)||frame!==active)return;
     if(!capture.isCurrent())throw Error('The model changed while preparing the save. Try again.');
     content=JSON.stringify(supportedEnvelope(capture.envelope));
@@ -223,7 +224,7 @@ export function mount(host){
     const latest=await c.files.stat(p);if(latest.status==='conflict'||latest.version!==old.version)throw Error('The file changed while confirming. Try again.');expected=old.version;
    }
    if(!unchanged(frame,prior))throw Error('The model changed while preparing export. Try again.');
-   tell('Preparing the 3MF model…');const bytes=await manager.exportCore3mfResearch({signal:token.signal,valid:()=>current(token)&&frame===active});
+   tell('Preparing the 3MF model…');const bytes=await settleScopedCommand(manager.exportCore3mfResearch({signal:token.signal,valid:()=>current(token)&&frame===active}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&frame===active});
    if(!current(token)||!c.valid()||frame!==active)return;
    if(!(bytes instanceof frame.contentWindow.Uint8Array)||bytes.byteLength>128*1024*1024)throw Error('The 3MF export is invalid or too large.');
    if(!unchanged(frame,prior))throw Error('The model changed during export. Try again.');
@@ -247,7 +248,7 @@ export function mount(host){
    const text=new TextDecoder('utf-8',{fatal:true}).decode(file.data),now=await c.files.stat(p);
    if(!current(token)||!c.valid())return;if(now.version!==file.version||now.status==='conflict')throw Error('The file changed while opening. Try again.');
    if(frame!==active||service.inPlaceEditor.viewer!==viewer||viewer.io.serializeSketch(undefined,{strict:true})!==before)throw Error('The sketch changed while opening the file. Try again.');
-   tell('Importing DXF shapes…');await service.importDxfSketch(viewer,text,before);
+   tell('Importing DXF shapes…');await settleScopedCommand(service.importDxfSketch(viewer,text,before),{signal:token.signal,valid:()=>current(token)&&frame===active&&service.inPlaceEditor?.viewer===viewer});
    if(current(token)&&frame===active)tell('Imported supported shapes from '+p+'. Save the project to keep them.');
   }catch(e){tell('Could not import DXF: '+e.message+' The existing sketch was kept where recovery was possible.');}finally{token.finish();}
  }

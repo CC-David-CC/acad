@@ -1,3 +1,4 @@
+import {settleScopedCommand} from './scoped-command.mjs';
 // The desktop exposes the same validated craft operations used by CAD history.
 // No native handles, raw history writes, or implicit saves cross this boundary.
 export function registerFeatureCommands(host,getTarget){
@@ -33,15 +34,15 @@ export function registerFeatureCommands(host,getTarget){
   }));
   stops.push(host.commands.register({id:'travel-authored-edit',description:'Undo or redo the selected authored edit using the inspected revision.',parameters:{type:'object',additionalProperties:false,required:['revision','direction'],properties:{revision:id(256),direction:{type:'string',enum:['undo','redo']}}}},async args=>{
    exact(args,['revision','direction']);if(typeof args.revision!=='string'||!args.revision||!['undo','redo'].includes(args.direction))throw Error('Invalid authored history command.');
-   const t=target('authoredEditTravel');return await t.craft.authoredEditTravel(args,{signal:host.signal,valid:t.valid});
+   const t=target('authoredEditTravel');return await settleScopedCommand(t.craft.authoredEditTravel(args,{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
   }));
   stops.push(host.commands.register({id:'edit-worker-extrusion',description:'Edit an inspected worker extrusion using its feature ID and current revision.',parameters:{type:'object',additionalProperties:false,required:['revision','index','featureId','depth'],properties:{revision:id(256),index:{type:'integer',minimum:0,maximum:255},featureId:{type:'integer',minimum:1},depth:dimension}}},async args=>{
-   exact(args,['revision','index','featureId','depth']);const t=target('editWorkerExtrusion');return await t.craft.editWorkerExtrusion(args,{signal:host.signal,valid:t.valid});
+   exact(args,['revision','index','featureId','depth']);const t=target('editWorkerExtrusion');return await settleScopedCommand(t.craft.editWorkerExtrusion(args,{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
   }));
   for(const [command,method,dimensions] of [['edit-worker-centered-hole','editWorkerCenteredHole',['diameter']],['edit-worker-four-corner-holes','editWorkerFourCornerHoles',['diameter','offsetX','offsetY']]]){
    const keys=['revision','index','featureId',...dimensions],properties={revision:id(256),index:{type:'integer',minimum:0,maximum:255},featureId:{type:'integer',minimum:1}};
    for(const key of dimensions)properties[key]=dimension;
-   stops.push(host.commands.register({id:command,description:'Edit an inspected worker hole feature using its feature ID and current revision.',parameters:{type:'object',additionalProperties:false,required:keys,properties}},async args=>{exact(args,keys);const t=target(method);return await t.craft[method](args,{signal:host.signal,valid:t.valid});}));
+   stops.push(host.commands.register({id:command,description:'Edit an inspected worker hole feature using its feature ID and current revision.',parameters:{type:'object',additionalProperties:false,required:keys,properties}},async args=>{exact(args,keys);const t=target(method);return await settleScopedCommand(t.craft[method](args,{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});}));
   }
   for(const [command,method,keys,properties,description] of [
    ['create-worker-extrusion','createWorkerExtrusion',['revision','faceId','regionId','depth'],{revision:id(256),faceId:id(1024),regionId:id(8192),depth:dimension},'Extrude an inspected supported region in millimeters. The result is unsaved until Save.'],
@@ -55,7 +56,7 @@ export function registerFeatureCommands(host,getTarget){
     const sides=descriptor.value;exact(sides,['minX','maxX','minY','maxY']);
     for(const key of ['minX','maxX','minY','maxY']){const d=Object.getOwnPropertyDescriptor(sides,key);if(!d?.enumerable||!Object.hasOwn(d,'value')||typeof d.value!=='string'||!d.value||d.value.length>1024)throw Error('Invalid feature command arguments.');}
    }
-   const t=target(method);return await t.craft[method](args,{signal:host.signal,valid:t.valid});
+   const t=target(method);return await settleScopedCommand(t.craft[method](args,{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
   }));
  }catch(error){for(const stop of stops.reverse())stop();throw error;}
  return ()=>{for(const stop of stops.splice(0).reverse())stop();};
