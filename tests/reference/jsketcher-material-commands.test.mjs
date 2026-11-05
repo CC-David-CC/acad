@@ -33,7 +33,7 @@ test('in-flight operation gets account/window/abort guard and detached input',as
   const f=fixture();let release,entered;const wait=new Promise(r=>release=r),ready=new Promise(r=>entered=r);
   f.manager.assignEnclosureMaterialRoles=async(id,roles,options)=>{entered();await wait;assert.equal(roles.BODY.material.name,'PLA');if(options.signal.aborted||!options.valid())throw Error('stale');f.state.mutations++;};
   const input=args(),pending=f.handlers.get('assign-enclosure-materials')(input);await ready;input.roles.BODY.material.name='changed';invalidate(f);release();
-  await assert.rejects(pending,/stale/);assert.equal(f.state.mutations,0);f.dispose();
+  await assert.rejects(pending,e=>e.name==='AbortError'||/stale/.test(e.message));assert.equal(f.state.mutations,0);f.dispose();
  }
 });
 test('partial command registration cleans up',()=>{

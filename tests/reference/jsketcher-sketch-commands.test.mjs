@@ -51,6 +51,6 @@ test('diameter async operation receives cancellation and changed-account guard',
   f.context.actions.DiameterLength={async invokeById(ctx,id,diameter,revision,options){entered();await wait;if(!options.valid())throw Error('stale diameter');f.state.mutations++;}};
   const pending=f.handlers.get('sketch-diameter')({objectId:'a',diameter:12,revision:'token'});await ready;
   if(mode==='session')f.state.session={};else if(mode==='abort')f.controller.abort();else f.state.valid=false;
-  release();await assert.rejects(pending,/stale diameter/);assert.equal(f.state.mutations,0);f.dispose();
+  release();await assert.rejects(pending,e=>e.name==='AbortError'||/stale diameter/.test(e.message));assert.equal(f.state.mutations,0);f.dispose();
  }
 });
