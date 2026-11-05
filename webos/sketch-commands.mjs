@@ -58,14 +58,14 @@ export function registerSketchCommands(host,getTarget){
   });
   register({id:'sketch-length-measurements',description:'Inspect convertible reference measurements and driving segment lengths.',parameters:{type:'object',additionalProperties:false}},async args=>{
    exact(args,[]);const t=target('LengthMeasurementRole');if(typeof t.action.inspect!=='function')throw Error('Length measurement inspection is unavailable.');
-   const result=await t.action.inspect(t.context,t.options);if(!t.valid())throw Error('The sketch window or account changed.');return result;
+   const result=await settleScopedCommand(t.action.inspect(t.context,t.options),{signal:host.signal,valid:t.valid});if(!t.valid())throw Error('The sketch window or account changed.');return result;
   });
   register({id:'sketch-convert-length-role',description:'Convert one segment length without changing geometry; converting to reference removes its driving equation.',parameters:{type:'object',additionalProperties:false,required:['role','segmentId','revision'],properties:{role:{enum:['driving','reference']},segmentId:{type:'string',minLength:1,maxLength:256},dimensionId:{type:'string',minLength:1,maxLength:256},revision:{type:'string',minLength:1,maxLength:128}}}},async args=>{
    const role=args&&Object.getOwnPropertyDescriptor(args,'role');if(!role||!Object.hasOwn(role,'value')||!['driving','reference'].includes(role.value))throw Error('Provide a supported length role.');
    exact(args,role.value==='driving'?['role','segmentId','dimensionId','revision']:['role','segmentId','revision']);
    if(typeof args.segmentId!=='string'||!args.segmentId||args.segmentId.length>256||typeof args.revision!=='string'||!args.revision||args.revision.length>128||(args.role==='driving'&&(typeof args.dimensionId!=='string'||!args.dimensionId||args.dimensionId.length>256)))throw Error('Provide an inspected length target.');
    const t=target('LengthMeasurementRole');if(typeof t.action.invokeById!=='function')throw Error('Length role conversion is unavailable.');
-   const result=await t.action.invokeById(t.context,{...args},t.options);if(!t.valid())throw Error('The sketch window or account changed.');return result;
+   const result=await settleScopedCommand(t.action.invokeById(t.context,{...args},t.options),{signal:host.signal,valid:t.valid});if(!t.valid())throw Error('The sketch window or account changed.');return result;
   });
   register({id:'sketch-circular-objects',description:'Inspect circles/arcs and concentric relationships in the active sketch; returns stable IDs and a single-use revision.',parameters:{type:'object',additionalProperties:false}},async args=>{
    exact(args,[]);const t=target();
