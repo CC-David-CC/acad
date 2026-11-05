@@ -17,6 +17,28 @@ export function registerSketchCommands(host,getTarget){
  const signedAction=axis=>axis==='x'?'SignedDistanceX':axis==='y'?'SignedDistanceY':axis==='projected'?'ProjectedDistance':null;
  const lineAction=kind=>kind==='collinear'?'Collinear':kind==='axis-symmetry'?'AxisSymmetry':null;
  try{
+  register({id:'sketch-rigid-groups',description:'Inspect current segment and rigid-group IDs. Existing world constraints can restrict group motion.',parameters:{type:'object',additionalProperties:false}},async args=>{
+   exact(args,[]);const t=target('CreateRigidGroup');if(typeof t.action.inspect!=='function')throw Error('Rigid-group inspection is unavailable.');
+   return settleScopedCommand(t.action.inspect(t.context,t.options),{signal:host.signal,valid:t.valid});
+  });
+  register({id:'sketch-create-rigid-group',description:'Group 2–32 inspected noncollinear segments, preserving external constraints. Save separately.',parameters:{type:'object',additionalProperties:false,required:['ids','revision'],properties:{ids:{type:'array',minItems:2,maxItems:32,uniqueItems:true,items:{type:'string',minLength:1,maxLength:256}},revision:{type:'string',minLength:1,maxLength:128}}}},async args=>{
+   exact(args,['ids','revision']);const {ids,revision}=args;
+   if(!Array.isArray(ids)||ids.length<2||ids.length>32||Reflect.ownKeys(ids).length!==ids.length+1||typeof revision!=='string'||!revision||revision.length>128)throw Error('Provide inspected segment IDs and revision.');
+   const copy=[];for(let i=0;i<ids.length;i++){const d=Object.getOwnPropertyDescriptor(ids,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value')||typeof d.value!=='string'||!d.value||d.value.length>256)throw Error('Rigid member IDs must be data properties.');copy.push(d.value);}
+   if(new Set(copy).size!==copy.length)throw Error('Choose distinct rigid members.');const t=target('CreateRigidGroup');if(typeof t.action.invokeByIds!=='function')throw Error('Rigid-group creation is unavailable.');
+   return settleScopedCommand(t.action.invokeByIds(t.context,Object.freeze(copy),revision,t.options),{signal:host.signal,valid:t.valid});
+  });
+  register({id:'sketch-pose-rigid-group',description:'Set an inspected group absolute pose: x/y in sketch millimeters, angle in radians. Conflicting poses reject.',parameters:{type:'object',additionalProperties:false,required:['groupId','revision','pose'],properties:{groupId:{type:'string',minLength:1,maxLength:256},revision:{type:'string',minLength:1,maxLength:128},pose:{type:'object',additionalProperties:false,required:['x','y','angle'],properties:{x:{type:'number',minimum:-1000000,maximum:1000000},y:{type:'number',minimum:-1000000,maximum:1000000},angle:{type:'number',minimum:-1000000,maximum:1000000}}}}}},async args=>{
+   exact(args,['groupId','revision','pose']);exact(args.pose,['x','y','angle']);const {groupId,revision}=args,pose={x:args.pose.x,y:args.pose.y,angle:args.pose.angle};
+   if(typeof groupId!=='string'||!groupId||groupId.length>256||typeof revision!=='string'||!revision||revision.length>128||Object.values(pose).some(v=>typeof v!=='number'||!Number.isFinite(v)||Math.abs(v)>1e6))throw Error('Provide an inspected rigid group and finite bounded pose.');
+   const t=target('PoseRigidGroup');if(typeof t.action.invokeById!=='function')throw Error('Rigid-group pose editing is unavailable.');
+   return settleScopedCommand(t.action.invokeById(t.context,groupId,revision,Object.freeze(pose),t.options),{signal:host.signal,valid:t.valid});
+  });
+  register({id:'sketch-dissolve-rigid-group',description:'Remove an inspected group while retaining member geometry and external constraints. Save separately.',parameters:{type:'object',additionalProperties:false,required:['groupId','revision'],properties:{groupId:{type:'string',minLength:1,maxLength:256},revision:{type:'string',minLength:1,maxLength:128}}}},async args=>{
+   exact(args,['groupId','revision']);const {groupId,revision}=args;if(typeof groupId!=='string'||!groupId||groupId.length>256||typeof revision!=='string'||!revision||revision.length>128)throw Error('Provide an inspected rigid group and revision.');
+   const t=target('DissolveRigidGroup');if(typeof t.action.invokeById!=='function')throw Error('Rigid-group dissolve is unavailable.');
+   return settleScopedCommand(t.action.invokeById(t.context,groupId,revision,t.options),{signal:host.signal,valid:t.valid});
+  });
   register({id:'sketch-fix-entity-targets',description:'Inspect whole-entity fix targets: segments, circles and arcs.',parameters:{type:'object',additionalProperties:false}},async args=>{
    exact(args,[]);const t=target('FixEntity');if(typeof t.action.inspect!=='function')throw Error('Entity fix inspection is unavailable.');
    return settleScopedCommand(t.action.inspect(t.context,t.options),{signal:host.signal,valid:t.valid});
