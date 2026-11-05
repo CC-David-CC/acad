@@ -77,7 +77,7 @@ access to the pinned fork. The prepared OCCT source and dependency notices do
 not establish that the WebAssembly binary was built from that exact source;
 the build receipt explicitly leaves reproducibility unverified. Provenance and
 license review are release gates. Generated assets and `node_modules` are not
-committed. The current experimental pin is `5b1f4c63a12826c32b0403c51425ceb61f119744`,
+committed. The current experimental pin is `2bef632fbbc1c62c2c16c1bb06fa702ac121a506`,
 including guarded document replacement, private dependent-feature replay,
 headless sketch solving, and the bounded fillet fixes. The local input
 directory must contain the pinned Manifold JS/Wasm, source archives and build
@@ -404,3 +404,11 @@ asset delivery does **not** enforce the requested login boundary; a
 login-guarded menu alone does not provide server authorization. The fixture
 predated `SOURCE-INDEX.html`, so it did not test that new page. These are public
 source and notice files, not private account files.
+
+The subsequent `2bef632fbbc1c62c2c16c1bb06fa702ac121a506` local candidate
+also prepared 156 assets; its manifest SHA-256 remains
+`418106d4736c18a1aa24a79a8f8656cf08eba2e667217231cd726b799dc17e8b`
+and its receipt SHA-256 is `3f884e1476fde1dff4b55381d68ff7d7fe0aa286c86132cba31c22613b143b40`.
+A separately built public-app asset bundle exposed `SOURCE-INDEX.html` and all
+21 relative targets over a loopback HTTP server. That is an unsigned static
+asset check; the current server-side login boundary remains unimplemented.

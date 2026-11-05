@@ -21,7 +21,7 @@ import xml.etree.ElementTree as ET
 
 HERE = Path(__file__).resolve().parent
 # Update only after reviewing the fork commit and the generated manifest.
-FORK_COMMIT = '5b1f4c63a12826c32b0403c51425ceb61f119744'
+FORK_COMMIT = '2bef632fbbc1c62c2c16c1bb06fa702ac121a506'
 DEFAULT_REPOSITORY = 'example.invalid:/srv/data/git/JSKetcher.git'
 ENGINE_COMMIT = '5efaf53accb45bac475155fc4d5552642c19e91e'
 ENGINE_REPOSITORY = 'https://github.com/Autodrop3d/occt-interpreter.git'
