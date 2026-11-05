@@ -8,6 +8,7 @@ import {registerFeatureCommands} from './feature-commands.mjs';
 import {registerParameterCommands} from './parameter-commands.mjs';
 import {registerMaterialCommands} from './material-commands.mjs';
 import {registerDocumentSaveCommand} from './document-commands.mjs';
+import {registerSketchDiagnosticCommands} from './diagnostic-commands.mjs';
 import {openCadSources} from './source-dialog.mjs';
 
 // The embedded CAD app owns only its temporary model. The host owns account
@@ -106,6 +107,11 @@ export function mount(host){
   return {craft:ctx?.craftService,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx};
  });
  if(host.commands){host.onDispose(rectangle.register());host.onDispose(registerFeatureCommands(host,()=>rectangle.target()));host.onDispose(registerParameterCommands(host,()=>rectangle.target()));}
+ if(host.commands)host.onDispose(registerSketchDiagnosticCommands(host,()=>{
+  if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
+  const frame=active,ctx=frame.contentWindow?.__CAD_APP,diagnostics=ctx?.sketchDiagnosticService;
+  return {diagnostics,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.sketchDiagnosticService===diagnostics};
+ }));
  if(host.commands)host.onDispose(registerMaterialCommands(host,()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
