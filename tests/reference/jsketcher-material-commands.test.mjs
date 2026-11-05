@@ -13,6 +13,12 @@ test('material discovery and assignment use the shared operation without saving'
  assert.deepEqual(await f.handlers.get('assign-enclosure-materials')(args()),{status:'accepted',saved:false});
  assert.equal(f.state.mutations,1);f.dispose();f.dispose();assert.equal(f.handlers.size,0);
 });
+test('optional label uses the same detached CAD assignment operation',async()=>{
+ const f=fixture(),input=args();input.roles.LABEL={material:{id:'pla',name:'PLA'},appearance:{id:'white',name:'White',color:'#ffffff'}};
+ f.manager.assignEnclosureMaterialRoles=async(id,roles)=>{assert.equal(id,7);assert.deepEqual(roles.LABEL,input.roles.LABEL);assert.notEqual(roles.LABEL,input.roles.LABEL);assert.notEqual(roles.LABEL.material,input.roles.LABEL.material);f.state.mutations++;};
+ await f.handlers.get('assign-enclosure-materials')(input);assert.equal(f.state.mutations,1);
+ let reads=0;Object.defineProperty(input.roles.LABEL,'material',{enumerable:true,get(){reads++;return {id:'x',name:'x'}}});await assert.rejects(f.handlers.get('assign-enclosure-materials')(input));assert.equal(reads,0);f.dispose();
+});
 test('accessors, symbols and malformed nested fields do not reach CAD',async()=>{
  const f=fixture(),run=f.handlers.get('assign-enclosure-materials');let reads=0;
  const bad=args();Object.defineProperty(bad.roles.BODY.material,'name',{enumerable:true,get(){reads++;return 'PLA';}});
