@@ -17,6 +17,15 @@ export function registerSketchCommands(host,getTarget){
  const signedAction=axis=>axis==='x'?'SignedDistanceX':axis==='y'?'SignedDistanceY':axis==='projected'?'ProjectedDistance':null;
  const lineAction=kind=>kind==='collinear'?'Collinear':kind==='axis-symmetry'?'AxisSymmetry':null;
  try{
+  register({id:'sketch-fix-entity-targets',description:'Inspect whole-entity fix targets: segments, circles and arcs.',parameters:{type:'object',additionalProperties:false}},async args=>{
+   exact(args,[]);const t=target('FixEntity');if(typeof t.action.inspect!=='function')throw Error('Entity fix inspection is unavailable.');
+   return settleScopedCommand(t.action.inspect(t.context,t.options),{signal:host.signal,valid:t.valid});
+  });
+  register({id:'sketch-fix-entity',description:'Fix the full physical geometry of one inspected segment, circle or arc. Save separately.',parameters:{type:'object',additionalProperties:false,required:['objectId','revision'],properties:{objectId:{type:'string',minLength:1,maxLength:256},revision:{type:'string',minLength:1,maxLength:128}}}},async args=>{
+   exact(args,['objectId','revision']);const {objectId,revision}=args;if(typeof objectId!=='string'||!objectId||objectId.length>256||typeof revision!=='string'||!revision||revision.length>128)throw Error('Provide an inspected entity ID and revision.');
+   const t=target('FixEntity');if(typeof t.action.invokeById!=='function')throw Error('Whole-entity fixing is unavailable.');
+   return settleScopedCommand(t.action.invokeById(t.context,objectId,revision,t.options),{signal:host.signal,valid:t.valid});
+  });
   register({id:'sketch-line-relation-targets',description:'Inspect current point/segment IDs for collinear supporting lines or symmetry about an independent line.',parameters:{type:'object',additionalProperties:false,required:['kind'],properties:{kind:{enum:['collinear','axis-symmetry']}}}},async args=>{
    exact(args,['kind']);const name=lineAction(args.kind);if(!name)throw Error('Choose collinear or axis-symmetry.');
    const t=target(name);if(typeof t.action.inspect!=='function')throw Error('Line relation inspection is unavailable.');
