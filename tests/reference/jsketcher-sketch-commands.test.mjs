@@ -90,3 +90,7 @@ test('length role command rejects malformed target, accessor and inactive sessio
  const run=f.handlers.get('sketch-convert-length-role');for(const args of [{role:'driving',segmentId:'a',revision:'x'},{role:'reference',segmentId:'a',dimensionId:'d',revision:'x'},{role:'other',segmentId:'a',revision:'x'}])await assert.rejects(run(args));
  const bad={segmentId:'a',revision:'x'};Object.defineProperty(bad,'role',{enumerable:true,get(){calls++;return 'reference'}});await assert.rejects(run(bad));f.controller.abort();await assert.rejects(run({role:'reference',segmentId:'a',revision:'x'}));assert.equal(calls,0);f.dispose();
 });
+test('length role commands settle on window disposal even if the frame never responds',async()=>{
+ const f=fixture();f.context.actions.LengthMeasurementRole={inspect:()=>new Promise(()=>{}),invokeById:()=>new Promise(()=>{})};
+ const pending=f.handlers.get('sketch-convert-length-role')({role:'reference',segmentId:'a',revision:'token'});f.controller.abort();await assert.rejects(pending,{name:'AbortError'});f.dispose();
+});
