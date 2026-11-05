@@ -3,6 +3,7 @@ import {inspectedProjectIsDirty} from './inspect-state.mjs';
 import {readVersionedBytes,acquireVersionedSnapshot} from './file-read.mjs';
 import {registerSketchCommands} from './sketch-commands.mjs';
 import {createRectangleController} from './rectangle-commands.mjs';
+import {registerFeatureCommands} from './feature-commands.mjs';
 
 // The embedded CAD app owns only its temporary model. The host owns account
 // storage, confirmation, version checks and the lifetime of every iframe.
@@ -14,9 +15,18 @@ export function mount(host){
  const operations=host.documentOperations;if(!operations)throw Error('Document operation coordination is unavailable.');
  let disposed=false,busy=operations.busy,active=null,candidate=null,baseline=null,watch=()=>{},watchRevision=0,checkRevision=0;
  let actionCleanup=()=>{};
+ const sourceMenus=new WeakSet();
  const unsubscribeOperations=operations.subscribe(state=>{busy=state.busy;if(active&&frames.has(active))syncCurrentActions();});
  let updateActions=()=>{};function syncCurrentActions(){updateActions();}
  function bindActions(ctx){
+  if(!sourceMenus.has(ctx)){
+   ctx.actionService.registerActions([{id:'DesktopSources',appearance:{label:'Sources & licenses'},invoke:()=>{
+    if(!valid()||active?.contentWindow?.__CAD_APP!==ctx)return;
+    window.open(new URL('./node_modules/jsketcher-build/SOURCE-INDEX.html',import.meta.url).href,'_blank','noopener,noreferrer');
+   }}]);
+   ctx.streams.ui.menu.all.update(menus=>menus.map(menu=>menu.id==='file'?{...menu,actions:[...menu.actions,'-','DesktopSources']}:menu));
+   sourceMenus.add(ctx);
+  }
   actionCleanup();const cleanups=[],updates=[];
   for(const id of ['Save','DesktopSaveAs','DesktopExport3MF','NativeFormatImport']){
    const stream=ctx?.streams?.action?.state?.[id];if(!stream?.attach||!stream?.next)continue;
@@ -80,7 +90,7 @@ export function mount(host){
   const frame=active,ctx=frame.contentWindow?.__CAD_APP;
   return {craft:ctx?.craftService,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx};
  });
- if(host.commands)host.onDispose(rectangle.register());
+ if(host.commands){host.onDispose(rectangle.register());host.onDispose(registerFeatureCommands(host,()=>rectangle.target()));}
  let rectangleDialog=null;
  function closeRectangleDialog(){if(rectangleDialog){clearInterval(rectangleDialog.timer);rectangleDialog.controller.abort();rectangleDialog.dialog.remove();rectangleDialog=null;}}
  function openRectangleDialog(){
