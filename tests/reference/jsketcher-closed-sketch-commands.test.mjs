@@ -20,9 +20,21 @@ test('signed distances preserve signed data and live-direction identity; reject 
  f.craft.applySketchSignedDistance=()=>new Promise(()=>{});const held=f.run('apply-closed-sketch-signed-distance',{revision:'r',faceId:'f',axis:'x',ids:['a','b'],distance:1});f.state.valid=false;await assert.rejects(held,{name:'AbortError'});f.stop();assert.equal(f.handlers.size,0);
 });
 
-test('closed Collinear adapter preserves explicit kind and detached IDs; only qualified kinds dispatch',async()=>{
+test('closed Collinear adapter preserves explicit kind and detached IDs; wrong counts and kinds refuse',async()=>{
  const f=fixture();f.craft.applySketchLineRelation=async(args,options)=>{f.state.calls++;f.state.last={args,options};return args};
  const input={revision:'r',faceId:'f',kind:'collinear',ids:['a','b']},pending=f.run('apply-closed-sketch-line-relation',input);input.ids[0]='changed';const value=await pending;assert.deepEqual(value,{revision:'r',faceId:'f',kind:'collinear',ids:['a','b']});assert.ok(Object.isFrozen(value)&&Object.isFrozen(value.ids));assert.equal(f.state.last.options.signal,f.controller.signal);
  const before=f.state.calls;let gets=0;const ids=['a','b'];Object.defineProperty(ids,'1',{enumerable:true,get(){gets++;return 'b'}});for(const extra of [{kind:'axis-symmetry'},{kind:'parallel'},{ids:['a','a']},{ids:['a','b','c']},{ids:Array(2)},{ids},{faceId:''},{revision:''},{extra:true}])await assert.rejects(f.run('apply-closed-sketch-line-relation',{revision:'r',faceId:'f',kind:'collinear',ids:['a','b'],...extra}));assert.equal(gets,0);assert.equal(f.state.calls,before);
  f.craft.applySketchLineRelation=()=>new Promise(()=>{});const held=f.run('apply-closed-sketch-line-relation',{revision:'r',faceId:'f',kind:'collinear',ids:['a','b']});f.state.session={};await assert.rejects(held,{name:'AbortError'});f.stop();assert.equal(f.handlers.size,0);
+});
+
+
+test('axis symmetry keeps point-pair and live-axis IDs detached and enforces its own three-target boundary',async()=>{
+ const f=fixture();f.craft.applySketchLineRelation=async(args,options)=>{f.state.calls++;f.state.last={args,options};return args};
+ const args={revision:'r',faceId:'f',kind:'axis-symmetry',ids:['p','q','axis']},pending=f.run('apply-closed-sketch-line-relation',args);args.ids[2]='later';args.kind='collinear';
+ const result=await pending;assert.deepEqual(result,{revision:'r',faceId:'f',kind:'axis-symmetry',ids:['p','q','axis']});assert.ok(Object.isFrozen(result)&&Object.isFrozen(result.ids));assert.equal(f.state.last.options.signal,f.controller.signal);
+ const before=f.state.calls;let getters=0;const accessor=['p','q','axis'];Object.defineProperty(accessor,'2',{enumerable:true,get(){getters++;return 'axis'}});
+ const withExtra=['p','q','axis'];withExtra.extra=true;
+ for(const ids of [['p','q'],['p','q','axis','extra'],['p','p','axis'],['p','q','p'],['p',,'axis'],accessor,withExtra])await assert.rejects(f.run('apply-closed-sketch-line-relation',{revision:'r',faceId:'f',kind:'axis-symmetry',ids}));
+ assert.equal(getters,0);assert.equal(f.state.calls,before);
+ f.craft.applySketchLineRelation=()=>new Promise(()=>{});const held=f.run('apply-closed-sketch-line-relation',{revision:'r',faceId:'f',kind:'axis-symmetry',ids:['p','q','axis']});f.controller.abort();await assert.rejects(held,{name:'AbortError'});f.stop();assert.equal(f.handlers.size,0);
 });
