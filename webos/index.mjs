@@ -49,7 +49,7 @@ export function mount(host){
    }}]);
    ctx.streams.ui.menu.all.update(menus=>menus.map(menu=>menu.id==='file'?{...menu,actions:[...menu.actions,'-','DesktopSources']}:menu));
    ctx.services.menu.registerMenus([{id:'agent-tools',label:'Agent tools',actions:['DesktopAgentTools']}]);
-   ctx.streams.ui.controlBars.left.update(actions=>[...actions,'menu.agent-tools']);
+   ctx.streams.ui.controlBars.left.update(actions=>actions.flatMap(action=>action==='menu.file'?[action,'menu.agent-tools']:[action]));
    sourceMenus.add(ctx);
   }
   const cleanups=[],updates=[];
