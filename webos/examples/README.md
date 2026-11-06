@@ -128,7 +128,10 @@ console.log(await cad.exportSketchDxf('/My-bracket-sketch.dxf'));
 console.log(await cad.exportCore3mf('/Manufacturing-model.3mf'));
 ```
 
-DXF exports one saved sketch in sketch-local millimeters, not the 3D solid.
+The mounting-plate demo currently has no eligible DXF target, so that call
+refuses honestly. DXF exports a supported saved sketch in sketch-local
+millimeters, not the 3D solid. The standalone Circle example below is a
+qualified positive DXF workflow.
 With multiple candidates, use `inspect-sketch-dxf-exports` and
 `export-sketch-dxf` directly with an explicitly selected `faceId`.
 
@@ -138,6 +141,68 @@ alone does not establish eligibility; unsupported/stale assignments are
 refused. Exports need new paths and have separate browser/server outcomes.
 The native project is the editable source; exports are handoffs. These
 examples do not promise STEP, outside CAD import or slicer project support.
+
+## Positive DXF example: a standalone circle
+
+Use a build listing New/Open and the primitive commands. Stop if the user
+cancels New, rather than continuing in their existing project.
+
+```js
+if ((await cad.newProject()).status !== 'opened') throw Error('New cancelled.');
+const creation = await cad.execute('inspect-sketch-creation');
+const plane = await cad.execute('create-empty-sketch-plane', {
+  revision: creation.revision, unit: 'millimeter', plane: 'XY', depth: 0
+});
+const sketches = await cad.execute('inspect-closed-sketches');
+const sketch = await cad.execute('inspect-closed-sketch', {
+  revision: sketches.revision, faceId: plane.faceId
+});
+await cad.execute('append-sketch-primitive', {
+  revision: sketch.revision, faceId: plane.faceId, stage: 0,
+  kind: 'Circle', role: null, data: {c: {x: 3, y: 4}, r: 5}
+});
+await cad.exportSketchDxf('/Agent-circle.dxf');
+```
+
+The actual signed Agent tools workflow verified this circle's exported center
+(3,4) and radius5 in millimeters, in addition to honest plate-export refusal.
+
+## Positive core 3MF example: assigned enclosure
+
+This uses the same public creation and assignment commands as the qualified
+enclosure workflow. Material names are manufacturing identities; they do not
+assert physical properties or simulation validity.
+
+```js
+if ((await cad.newProject()).status !== 'opened') throw Error('New cancelled.');
+const features = await cad.execute('inspect-worker-features');
+const enclosure = await cad.execute('create-worker-enclosure', {
+  revision: features.revision, version: 2, unit: 'millimeter',
+  width: 100, length: 70, height: 30, wall: 2, clearance: 0.3,
+  lidThickness: 2, lipDepth: 3, labelWidth: 40, labelLength: 20, labelDepth: 1
+});
+const materials = await cad.execute('inspect-enclosure-materials');
+if (!materials.featureIds.includes(enclosure.featureId)) throw Error('Missing enclosure target.');
+await cad.execute('assign-enclosure-materials', {
+  revision: materials.revision, featureId: enclosure.featureId,
+  roles: {
+    BODY: {material: {id: 'pla', name: 'PLA'},
+      appearance: {id: 'body-blue', name: 'Blue', color: '#3366cc'}},
+    LID: {material: {id: 'pla', name: 'PLA'},
+      appearance: {id: 'lid-blue', name: 'Blue', color: '#3366cc'}},
+    LABEL: {material: {id: 'tpu', name: 'TPU'},
+      appearance: {id: 'label-white', name: 'White', color: '#ffffff'}}
+  }
+});
+await cad.save('/Agent-enclosure.jsketcher.json');
+await cad.exportCore3mf('/Agent-enclosure.3mf');
+```
+
+This recipe's exact chosen colors/IDs still need their own browser execution;
+the existing qualified enclosure tests prove the shared operations and native/
+material-aware export contract, not every example variation. Geometry edits
+can make assignments stale: inspect/propose/confirm their rebind explicitly
+before exporting a changed design. Native saves remain the editable source.
 
 ## Lifetime and evidence
 
