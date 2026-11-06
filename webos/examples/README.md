@@ -7,10 +7,11 @@ needed. `cad-agent.mjs` is the shared implementation for the Agent tools panel.
 
 ## Build availability
 
-Beta static `bbc429…` / CAD `6f01a09…` has bracket, edit, Save, sketch DXF and
-material-aware 3MF commands. The helper export, visible Agent tools panel and
-public New/Open commands are **source work, not deployed yet** at this
-2026-11-06 checkpoint. Always discover installed commands first.
+Beta static `337b69de…` now includes the helper export, visible **Agent tools**
+menu beside File and guarded public New/Open commands. The app is **CAD Modeler
+(JSketcher inspired)**. Actual public workflows pass create/edit/refuse/travel,
+normal native Save/Open and the scoped DXF/3MF recipes. Always discover installed
+commands first; this does not imply the full22-exercise gate is complete.
 
 ## Discover and choose a window
 
