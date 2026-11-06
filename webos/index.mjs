@@ -13,7 +13,7 @@ import {registerMaterialCommands} from './material-commands.mjs';
 import {registerManufacturingCommands} from './manufacturing-commands.mjs';
 import {registerDocumentSaveCommand} from './document-commands.mjs';
 import {registerSketchDiagnosticCommands} from './diagnostic-commands.mjs';
-import {registerSketchExportCommands} from './sketch-export-commands.mjs';
+import {registerSketchExportCommands,validateDxfBlob} from './sketch-export-commands.mjs';
 import {openCadSources} from './source-dialog.mjs';
 
 // The embedded CAD app owns only its temporary model. The host owns account
@@ -40,7 +40,7 @@ export function mount(host){
    sourceMenus.add(ctx);
   }
   actionCleanup();const cleanups=[],updates=[];
-  for(const id of ['Save','DesktopSaveAs','DesktopExport3MF','DesktopExportDXF','NativeFormatImport']){
+  for(const id of ['Save','DesktopSaveAs','DesktopExport3MF','DesktopExportDXF','ExportFaceToDXF','NativeFormatImport']){
    const stream=ctx?.streams?.action?.state?.[id];if(!stream?.attach||!stream?.next)continue;
    let writing=false,base=!!stream.value?.enabled;
    const update=()=>{
@@ -276,8 +276,8 @@ export function mount(host){
    if(!targetCurrent())throw Error('The sketch changed while preparing export. Try again.');
    tell('Preparing the DXF sketch…');const result=await settleScopedCommand(craft.exportSketchDXFBlob({revision,faceId},{signal:token.signal,valid:()=>c.valid()&&targetCurrent()}),{signal:token.signal,valid:()=>c.valid()&&targetCurrent()});
    if(!current(token)||!c.valid()||frame!==active)return;
-   let size;try{size=Object.getOwnPropertyDescriptor(frame.contentWindow.Blob.prototype,'size').get.call(result?.blob)}catch{throw Error('The DXF export is invalid.');}
-   if(!Number.isSafeInteger(size)||size<1||size>128*1024*1024||result.revision!==revision||result.faceId!==faceId||result.unit!=='millimeter'||result.coordinates!=='sketch-local')throw Error('The DXF export is invalid or too large.');
+   validateDxfBlob(result?.blob,frame.contentWindow.Blob.prototype);
+   if(result.revision!==revision||result.faceId!==faceId||result.unit!=='millimeter'||result.coordinates!=='sketch-local')throw Error('The DXF export is invalid.');
    const frameData=result.frame,keys=['origin','x','y','z'];if(!frameData||keys.some(key=>!Array.isArray(frameData[key])||frameData[key].length!==3||!frameData[key].every(Number.isFinite)))throw Error('The DXF export frame is invalid.');
    const exportedFrame=Object.freeze(Object.fromEntries(keys.map(key=>[key,Object.freeze(Array.from(frameData[key]))])));
    if(!targetCurrent())throw Error('The sketch changed during export. Try again.');

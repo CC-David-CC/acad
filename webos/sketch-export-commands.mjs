@@ -1,5 +1,12 @@
 import {settleScopedCommand} from './scoped-command.mjs';
 
+export function validateDxfBlob(blob,prototype){
+ let size,type;
+ try{size=Object.getOwnPropertyDescriptor(prototype,'size').get.call(blob);type=Object.getOwnPropertyDescriptor(prototype,'type').get.call(blob)}catch{throw Error('The DXF export is invalid.');}
+ if(!Number.isSafeInteger(size)||size<1||size>8*1024*1024||type!=='application/dxf')throw Error('The DXF export is invalid or too large.');
+ return size;
+}
+
 // The host export function owns file claims, version checks and the actual
 // write; this adapter never receives geometry bytes or account credentials.
 export function registerSketchExportCommands(host,{getTarget,exportDxf}) {
