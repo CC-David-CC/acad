@@ -75,3 +75,17 @@ test('new/open carry freshly inspected revision and preserve cancellation outcom
   assert.deepEqual(api.requests[1].args,{revision:'1'});
   assert.deepEqual(api.requests[3].args,{revision:'2',path:'/mine.jsketcher.json'});
 });
+
+test('log observers never receive mutable model inspection results', async () => {
+  const document={operationCount:1,sketchCount:1,dirty:true};
+  const api=registry({execute:()=>document});
+  const cad=createCadAgent({api,onStep:event=>{
+    if(event.phase==='accepted') {
+      assert.equal(Object.hasOwn(event,'result'),false);
+      if(event.result)Object.assign(event.result,{operationCount:0,sketchCount:0,dirty:false});
+    }
+  }});
+  await assert.rejects(cad.buildBracket(), /new, empty/);
+  assert.deepEqual(document,{operationCount:1,sketchCount:1,dirty:true});
+  assert.deepEqual(api.requests.map(r=>r.command),['inspect']);
+});
