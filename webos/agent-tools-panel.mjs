@@ -29,14 +29,11 @@ export function createAgentToolsPanel({host,valid,getFrame}){
    if(job||!alive())return;const controller=new AbortController(),frame=getFrame();job={controller};controls();state.textContent=label+'…';write(label);
    try{
     const api=globalThis.codiDesktopCommands,scoped={list:()=>controller.signal.aborted||(!replace&&getFrame()!==frame)?[]:api.list(),execute:request=>{if(controller.signal.aborted||(!replace&&getFrame()!==frame))throw new DOMException('The panel or model changed.','AbortError');return api.execute(request);}};
-    const agent=createCadAgent({api:scoped,windowId:String(host.w.id),signal:controller.signal,onStep:event=>{
-     const result=event.result,details={};for(const key of ['revision','faceId','regionId','featureId','bodyId','path','status','changed'])if(['string','number','boolean'].includes(typeof result?.[key]))details[key]=result[key];
-     write(event.command+': '+event.phase+(Object.keys(details).length?' '+JSON.stringify(details):'')+(event.error?' — '+event.error.message:''));
-    }});
+    const agent=createCadAgent({api:scoped,windowId:String(host.w.id),signal:controller.signal,onStep:event=>write(event.command+': '+event.phase+(event.error?' — '+event.error.message:''))});
     const result=await task(agent);
     if(dialog!==ui||!alive()||controller.signal.aborted)return;
     if(result?.status==='cancelled'){state.textContent='Cancelled. The current project was kept.';write('Cancelled; no project replacement.');}
-    else {write(label+' finished.');const d=await agent.inspect();if(dialog===ui&&alive())state.textContent=(d.path||'Unsaved project')+' · '+(d.dirty?'unsaved changes':d.path?'no new unsaved changes':'not saved yet')+' · '+d.operationCount+' operations, '+d.sketchCount+' sketches';}
+    else {write(label+' finished.');const d=await agent.inspect();if(dialog===ui&&alive()){write('Current revision: '+d.revision);state.textContent=(d.path||'Unsaved project')+' · '+(d.dirty?'unsaved changes':d.path?'no new unsaved changes':'not saved yet')+' · '+d.operationCount+' operations, '+d.sketchCount+' sketches';}}
    }catch(error){if(dialog===ui&&alive()){state.textContent=error?.name==='AbortError'?'Stopped. The current atomic command may already have completed.':String(error?.message||error);write((error?.committed||error?.possiblyCommitted?'Outcome may be committed; inspect the model and My files before retrying. ':'')+String(error?.message||error));}}
    finally{job=null;if(dialog===ui)controls();}
   }
