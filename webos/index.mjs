@@ -17,6 +17,8 @@ import {registerSketchDiagnosticCommands} from './diagnostic-commands.mjs';
 import {registerSketchExportCommands,validateDxfBlob} from './sketch-export-commands.mjs';
 import {registerSelectedProfileCommands} from './selected-profile-commands.mjs';
 import {openCadSources} from './source-dialog.mjs';
+import {createAgentToolsPanel} from './agent-tools-panel.mjs';
+export {createCadAgent} from './examples/cad-agent.mjs';
 
 const APP_NAME='CAD Modeler (JSketcher inspired)';
 
@@ -32,16 +34,22 @@ export function mount(host){
  let disposed=false,busy=operations.busy,active=null,candidate=null,baseline=null,watch=()=>{},watchRevision=0,checkRevision=0;
  let actionCleanup=()=>{};
  const sourceMenus=new WeakSet(),sourceLifetime=new AbortController();let sourceOpening=false,sourceClose=null;
+ let agentTools=null;
  const abortSources=()=>sourceLifetime.abort();if(host.signal.aborted)abortSources();else host.signal.addEventListener('abort',abortSources,{once:true});
  const unsubscribeOperations=operations.subscribe(state=>{busy=state.busy;if(active&&frames.has(active))syncCurrentActions();});
  let updateActions=()=>{};function syncCurrentActions(){updateActions();}
  function bindActions(ctx){
   if(!sourceMenus.has(ctx)){
-   ctx.actionService.registerActions([{id:'DesktopSources',appearance:{label:'Sources & licenses'},invoke:()=>{
+   ctx.actionService.registerActions([{id:'DesktopAgentTools',appearance:{label:'Open Agent tools',info:'Run local JavaScript command examples; no AI backend'},invoke:()=>{
+    if(!valid()||active?.contentWindow?.__CAD_APP!==ctx)return;
+    agentTools??=createAgentToolsPanel({host,valid,getFrame:()=>active});agentTools.open();
+   }},{id:'DesktopSources',appearance:{label:'Sources & licenses'},invoke:()=>{
     if(!valid()||active?.contentWindow?.__CAD_APP!==ctx)return;
     if(sourceOpening||sourceClose)return;sourceOpening=true;void openCadSources({read:(name,options)=>host.storage.readCadSource(owner,name,options),valid,signal:sourceLifetime.signal,onClose:()=>{sourceClose=null;}}).then(close=>{if(valid())sourceClose=close;else close();}).catch(()=>tell('Sources and licenses are unavailable.')).finally(()=>{sourceOpening=false;});
    }}]);
    ctx.streams.ui.menu.all.update(menus=>menus.map(menu=>menu.id==='file'?{...menu,actions:[...menu.actions,'-','DesktopSources']}:menu));
+   ctx.services.menu.registerMenus([{id:'agent-tools',label:'Agent tools',actions:['DesktopAgentTools']}]);
+   ctx.streams.ui.controlBars.left.update(actions=>[...actions,'menu.agent-tools']);
    sourceMenus.add(ctx);
   }
   actionCleanup();const cleanups=[],updates=[];
@@ -103,6 +111,15 @@ export function mount(host){
    const getter=typeof ctx.projectManager?.getManufacturingMetadata==='function'?()=>ctx.projectManager.getManufacturingMetadata():null;
    return {path:state.path,revision:inspectSaveTarget().revision,dirty:inspectedProjectIsDirty(project,baseline,getter,ctx.projectManager.unit),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
   });host.onDispose(unregister);
+  for(const opening of [false,true]){
+   const id=opening?'open-project':'new-project',keys=opening?['revision','path']:['revision'];
+   host.onDispose(host.commands.register({id,description:opening?'Open an inspected My files native project. Unsaved changes require confirmation; cancellation preserves the current project.':'Start a new empty project after inspected-revision and unsaved-change checks. Cancellation preserves the current project.',parameters:{type:'object',additionalProperties:false,required:keys,properties:{revision:{type:'string',minLength:1,maxLength:256},...(opening?{path:{type:'string',minLength:1,maxLength:1024}}:{})}}},args=>{
+    if(!args||typeof args!=='object'||Array.isArray(args)||Reflect.ownKeys(args).length!==keys.length||Reflect.ownKeys(args).some(k=>typeof k!=='string'||!keys.includes(k)))throw Error('Invalid project command arguments.');
+    const copy={};for(const k of keys){const d=Object.getOwnPropertyDescriptor(args,k);if(!d?.enumerable||!Object.hasOwn(d,'value')||typeof d.value!=='string'||!d.value||d.value.length>(k==='path'?1024:256))throw Error('Provide the inspected revision and native project path.');copy[k]=d.value;}
+    if(opening&&!/\.jsketcher\.json$/i.test(copy.path))throw Error('Choose a native .jsketcher.json project.');
+    return opening?openProject(copy.path,{command:Object.freeze(copy)}):newProject(Object.freeze(copy));
+   }));
+  }
   host.onDispose(registerDocumentSaveCommand(host,{inspect:inspectSaveTarget,save:args=>saveProject(false,args)}));
   host.onDispose(registerSketchCommands(host,()=>{
    if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
@@ -189,20 +206,40 @@ export function mount(host){
    manager.confirmHostManufacturingRebind(proposal.token);review.hidden=true;tell('Assignments updated for this model. Save to keep the changes.');
   }catch(e){manager?.cancelHostManufacturingRebind?.();tell('Could not update assignments: '+e.message);}finally{token.finish();}
  }
- async function openProject(selected,{initial=false,token:reserved=null}={}){
-  const token=reserved||begin('open');if(!token)return;if(!current(token)||!active){token.finish();return;}tell('Preparing to open a project…');let next=null,file=null;
+ async function newProject(command){
+  if(inspectSaveTarget().revision!==command.revision)throw Error('The model changed; inspect it before starting a new project.');
+  const token=begin('new');if(!token)throw Error('Wait for the current file operation to finish.');let next=null,published=false;
   try{
    const previous=active,prior=snapshot(previous);
-   if(baseline===null||prior!==baseline){const accepted=await host.ui.confirm('Discard the unsaved model and open a different project?',{title:'Unsaved changes',confirmLabel:'Discard and open',cancelLabel:'Keep editing',danger:true,signal:token.signal});if(!accepted||!current(token))return;if(!unchanged(previous,prior))throw Error('The model changed during confirmation. Try again.');}
-   const chosen=selected||await host.storage.pickFile({extensions:['.jsketcher.json'],signal:token.signal});if(!chosen||!current(token))return;if(!unchanged(previous,prior))throw Error('The model changed while choosing a file. Try again.');
-   const c=await mirrorFileContext();if(!current(token)||!c.valid())return;const p=c.path(chosen);claim(token,p);file=await acquireVersionedSnapshot(c.files,p,{maximumBytes:128*1024*1024,valid:()=>current(token)&&c.valid()&&previous===active,signal:token.signal});if(!current(token)||!c.valid())return;
-   if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');tell('Rebuilding the selected model…');next=createFrame(true);candidate=next;const ctx=await waitReady(next);if(!current(token)||!c.valid())return;
+   if(prior!==baseline){const accepted=await host.ui.confirm('Discard the unsaved model and start a new empty project?',{title:'Unsaved changes',confirmLabel:'Discard and start new',cancelLabel:'Keep editing',danger:true,signal:token.signal});if(!accepted&&current(token))return Object.freeze({status:'cancelled',path:state.path,revision:command.revision});if(!current(token))throw new DOMException('Project creation interrupted.','AbortError');if(!unchanged(previous,prior))throw Error('The model changed during confirmation. Try again.');}
+   if(!current(token)||!unchanged(previous,prior))throw Error('The model changed before starting a new project.');
+   next=createFrame(true);candidate=next;const ctx=await waitReady(next);
+   if(!current(token)||candidate!==next||!unchanged(previous,prior))throw new DOMException('Project creation interrupted.','AbortError');
+   if(ctx.craftService.modifications$.value.history.length||ctx.sketchStorageService.getAllSketches().length)throw Error('The new workspace is not empty; the existing project was preserved.');
+   const empty=snapshot(next);if(!token.setDocument(null)||!current(token))throw Error('The window or file changed.');
+   active=next;candidate=null;next=null;published=true;bindActions(ctx);active.classList.remove('jsketcher-staging');detach(previous);
+   watchRevision++;checkRevision++;watch();watch=()=>{};baseline=empty;state.path=null;state.version=null;delete w.launchContext;w.title=APP_NAME;retry.hidden=true;review.hidden=true;tell('New model. Use File to open or save a project in My files.');
+   return Object.freeze({status:'opened',path:null,revision:ctx.projectManager.inspectDocumentRevision(),saved:false});
+  }catch(error){if(published)Object.defineProperty(error,'committed',{value:true,enumerable:true});tell('Could not start a new project: '+error.message);throw error;}
+  finally{if(next)detach(next);if(candidate===next)candidate=null;token.finish();}
+ }
+ async function openProject(selected,{initial=false,token:reserved=null,command=null}={}){
+  if(command&&inspectSaveTarget().revision!==command.revision)throw Error('The model changed; inspect it before opening a project.');
+  const interrupted=()=>{if(command)throw new DOMException('Project opening interrupted.','AbortError');};
+  const token=reserved||begin('open');if(!token){if(command)throw Error('Wait for the current file operation to finish.');return;}if(!current(token)||!active){token.finish();if(command)throw new DOMException('Project opening interrupted.','AbortError');return;}tell('Preparing to open a project…');let next=null,file=null,published=false;
+  try{
+   const previous=active,prior=snapshot(previous);
+   if(baseline===null||prior!==baseline){const accepted=await host.ui.confirm('Discard the unsaved model and open a different project?',{title:'Unsaved changes',confirmLabel:'Discard and open',cancelLabel:'Keep editing',danger:true,signal:token.signal});if(!accepted||!current(token))return command?Object.freeze({status:'cancelled',path:state.path}):undefined;if(!unchanged(previous,prior))throw Error('The model changed during confirmation. Try again.');}
+   const chosen=selected||await host.storage.pickFile({extensions:['.jsketcher.json'],signal:token.signal});if(!chosen||!current(token))return command?Object.freeze({status:'cancelled',path:state.path}):undefined;if(!unchanged(previous,prior))throw Error('The model changed while choosing a file. Try again.');
+   const c=await mirrorFileContext();if(!current(token)||!c.valid())return interrupted();const p=c.path(chosen);claim(token,p);file=await acquireVersionedSnapshot(c.files,p,{maximumBytes:128*1024*1024,valid:()=>current(token)&&c.valid()&&previous===active,signal:token.signal});if(!current(token)||!c.valid())return interrupted();
+   if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');tell('Rebuilding the selected model…');next=createFrame(true);candidate=next;const ctx=await waitReady(next);if(!current(token)||!c.valid())return interrupted();
    if(typeof ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace!=='function')throw Error('This CAD runtime cannot validate file snapshots in a worker.');
-   await settleScopedCommand(ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace(file.data,{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)});if(!current(token)||!c.valid())return;
-   const restored=snapshot(next),now=await c.files.stat(p);if(!current(token)||!c.valid())return;if(now.version!==file.version||now.status==='conflict')throw Error('The project changed while opening. Try again.');if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');
+   await settleScopedCommand(ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace(file.data,{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)});if(!current(token)||!c.valid())return interrupted();
+   const restored=snapshot(next),now=await c.files.stat(p);if(!current(token)||!c.valid())return interrupted();if(now.version!==file.version||now.status==='conflict')throw Error('The project changed while opening. Try again.');if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');
    if(!token.setDocument('mirror:'+p)||!current(token))throw Error('The window or file changed.');
-   active=next;candidate=null;next=null;bindActions(active.contentWindow?.__CAD_APP);active.classList.remove('jsketcher-staging');detach(previous);baseline=restored;state.path=p;state.version=file.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — '+APP_NAME;setWatch(c,p,file.version);retry.hidden=true;review.hidden=true;tell('Opened '+p+'.');
-  }catch(e){tell('Could not open project: '+e.message+(initial?'':' The current model remains open.'));}finally{file?.release();if(next)detach(next);if(candidate===next)candidate=null;token.finish();}
+   active=next;candidate=null;next=null;published=true;bindActions(active.contentWindow?.__CAD_APP);active.classList.remove('jsketcher-staging');detach(previous);baseline=restored;state.path=p;state.version=file.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — '+APP_NAME;setWatch(c,p,file.version);retry.hidden=true;review.hidden=true;tell('Opened '+p+'.');
+   return Object.freeze({status:'opened',path:p,revision:ctx.projectManager.inspectDocumentRevision(),persistence:'browser'});
+  }catch(e){if(published)Object.defineProperty(e,'committed',{value:true,enumerable:true});tell('Could not open project: '+e.message+(initial?'':' The current model remains open.'));if(command)throw e;}finally{file?.release();if(next)detach(next);if(candidate===next)candidate=null;token.finish();}
  }
  async function saveProject(asCopy=false,command=null){
   if(command){const target=inspectSaveTarget();if(target.revision!==command.revision)throw Error('The model changed; inspect it before saving.');if(target.path&&Object.hasOwn(command,'path'))throw Error('Save uses the open project path.');}
@@ -299,5 +336,5 @@ export function mount(host){
  body.append(warning,stage,status,retry,review);
  const initialToken=begin('initial-load');
  queueMicrotask(async()=>{if(!initialToken)return;try{if(!current(initialToken))return;active=createFrame(false);const ctx=await waitReady(active);if(!current(initialToken))return;bindActions(ctx);baseline=snapshot();tell('New model. Use File to open or save a project in My files.');if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner){await openProject(w.launchContext.path,{initial:true,token:initialToken});if(valid()&&state.path!==w.launchContext.path)retry.hidden=false;}}catch(e){tell('Could not start '+APP_NAME+': '+e.message);}finally{initialToken.finish();}});
- return {element:body,dispose(){if(disposed)return;disposed=true;abortSources();sourceClose?.();sourceClose=null;host.signal.removeEventListener('abort',abortSources);unsubscribeOperations();actionCleanup();closeRectangleDialog();closeRectangleEditDialog();watchRevision++;checkRevision++;watch();delete state.hasChanges;window.removeEventListener('message',receive);for(const [id,reject] of timers){clearTimeout(id);reject(Error('Window closed.'));}timers.clear();for(const frame of [...frames])detach(frame);candidate=null;active=null;}};
+ return {element:body,dispose(){if(disposed)return;disposed=true;agentTools?.dispose();agentTools=null;abortSources();sourceClose?.();sourceClose=null;host.signal.removeEventListener('abort',abortSources);unsubscribeOperations();actionCleanup();closeRectangleDialog();closeRectangleEditDialog();watchRevision++;checkRevision++;watch();delete state.hasChanges;window.removeEventListener('message',receive);for(const [id,reject] of timers){clearTimeout(id);reject(Error('Window closed.'));}timers.clear();for(const frame of [...frames])detach(frame);candidate=null;active=null;}};
 }
