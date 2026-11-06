@@ -6,7 +6,7 @@ export function registerSelectedProfileCommands(host,getTarget){
  const stops=[],revisionPattern='^sha256:[a-f0-9]{64}:[a-f0-9]{64}$',revisionRE=new RegExp(revisionPattern);
  const text=maxLength=>({type:'string',minLength:1,maxLength});
  const depth={type:'number',exclusiveMinimum:0,maximum:1000000};
- const spec=(keys,properties)=>({type:'object',additionalProperties:false,required:keys,properties});
+ const spec=(keys,properties)=>({type:'object',additionalProperties:false,required:keys.slice(),properties});
  function copy(value,keys){
   const proto=value&&typeof value==='object'?Object.getPrototypeOf(value):undefined;
   if(!value||typeof value!=='object'||Array.isArray(value)||(proto!==null&&Object.getPrototypeOf(proto)!==null)||Reflect.ownKeys(value).length!==keys.length||Reflect.ownKeys(value).some(k=>typeof k!=='string'||!keys.includes(k)))throw Error('Expected exact selected-profile command fields.');
