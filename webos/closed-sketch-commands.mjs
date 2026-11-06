@@ -29,6 +29,14 @@ export function registerClosedSketchCommands(host,getTarget){
    const ids=[0,1].map(i=>{const d=Object.getOwnPropertyDescriptor(v.ids,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value')||!validId(d.value,256))throw Error('Provide current segment IDs and finite relation values.');return d.value;});if(ids[0]===ids[1])throw Error('Provide two distinct segment IDs.');v.ids=Object.freeze(ids);
    const t=target('applySketchLengthRelation');return settleScopedCommand(t.craft.applySketchLengthRelation(Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
   }));
+  const signedDistance=['revision','faceId','axis','ids','distance'];
+  stops.push(host.commands.register({id:'apply-closed-sketch-signed-distance',description:'Drive first-to-second point displacement in sketch millimeters through the validated Worker operation. X/Y use sketch coordinates; projected uses a third, live direction segment oriented start to end. Save separately.',parameters:spec(signedDistance,{revision:id(256),faceId:id(1024),axis:{enum:['x','y','projected']},ids:{type:'array',minItems:2,maxItems:3,items:id(256)},distance:{type:'number',minimum:-1000000,maximum:1000000}})},async args=>{
+   const v=copy(args,signedDistance),count=v.axis==='projected'?3:2;
+   if(!validId(v.revision,256)||!validId(v.faceId,1024)||!['x','y','projected'].includes(v.axis)||!Array.isArray(v.ids)||v.ids.length!==count||Reflect.ownKeys(v.ids).length!==count+1||typeof v.distance!=='number'||!Number.isFinite(v.distance)||Math.abs(v.distance)>1e6)throw Error('Provide current point IDs, a signed millimeter distance and a live direction segment for projection.');
+   v.ids=Object.freeze(Array.from({length:count},(_,i)=>{const d=Object.getOwnPropertyDescriptor(v.ids,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value')||!validId(d.value,256))throw Error('Provide current signed-distance IDs.');return d.value;}));
+   if(v.ids[0]===v.ids[1])throw Error('Provide two distinct point IDs.');
+   const t=target('applySketchSignedDistance');return settleScopedCommand(t.craft.applySketchSignedDistance(Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
+  }));
   const concentric=['revision','faceId','ids'];
   stops.push(host.commands.register({id:'apply-closed-sketch-concentric',description:'Make two inspected circles or arcs share a center using the validated CAD operation. Save separately.',parameters:spec(concentric,{revision:id(256),faceId:id(1024),ids:{type:'array',minItems:2,maxItems:2,uniqueItems:true,items:id(256)}})},async args=>{
    const v=copy(args,concentric);if(!validId(v.revision,256)||!validId(v.faceId,1024)||!Array.isArray(v.ids)||v.ids.length!==2||Reflect.ownKeys(v.ids).length!==3)throw Error('Provide current circle or arc IDs.');
