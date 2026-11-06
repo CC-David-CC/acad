@@ -1,6 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerSketchExportCommands} from '../apps/system/jsketcher/sketch-export-commands.mjs';
+import {registerSketchExportCommands,validateDxfBlob} from '../apps/system/jsketcher/sketch-export-commands.mjs';
+
+test('accepts only real nonempty DXF Blobs within the 8 MiB output limit',()=>{
+ const limit=8*1024*1024;
+ assert.equal(validateDxfBlob(new Blob([new Uint8Array(limit)],{type:'application/dxf'}),Blob.prototype),limit);
+ for(const value of [new Blob([],{type:'application/dxf'}),new Blob(['x'],{type:'text/plain'}),new Blob([new Uint8Array(limit+1)],{type:'application/dxf'}),{size:1,type:'application/dxf'}])assert.throws(()=>validateDxfBlob(value,Blob.prototype));
+});
 
 function fixture(){
  const handlers=new Map(),controller=new AbortController(),state={session:{},valid:true,calls:0,last:null};
