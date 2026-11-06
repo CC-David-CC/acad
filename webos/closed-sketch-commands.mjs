@@ -29,6 +29,12 @@ export function registerClosedSketchCommands(host,getTarget){
    const ids=[0,1].map(i=>{const d=Object.getOwnPropertyDescriptor(v.ids,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value')||!validId(d.value,256))throw Error('Provide current segment IDs and finite relation values.');return d.value;});if(ids[0]===ids[1])throw Error('Provide two distinct segment IDs.');v.ids=Object.freeze(ids);
    const t=target('applySketchLengthRelation');return settleScopedCommand(t.craft.applySketchLengthRelation(Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
   }));
+  const lineRelation=['revision','faceId','kind','ids'];
+  stops.push(host.commands.register({id:'apply-closed-sketch-line-relation',description:'Make two inspected nondegenerate segments share their infinite supporting line through the validated Worker operation. Exact existing pairs are no-ops; save new relations separately.',parameters:spec(lineRelation,{revision:id(256),faceId:id(1024),kind:{enum:['collinear']},ids:{type:'array',minItems:2,maxItems:2,uniqueItems:true,items:id(256)}})},async args=>{
+   const v=copy(args,lineRelation);if(!validId(v.revision,256)||!validId(v.faceId,1024)||v.kind!=='collinear'||!Array.isArray(v.ids)||v.ids.length!==2||Reflect.ownKeys(v.ids).length!==3)throw Error('Provide current distinct segment IDs for a collinear relation.');
+   v.ids=Object.freeze([0,1].map(i=>{const d=Object.getOwnPropertyDescriptor(v.ids,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value')||!validId(d.value,256))throw Error('Provide current segment IDs.');return d.value;}));if(v.ids[0]===v.ids[1])throw Error('Provide two distinct segment IDs.');
+   const t=target('applySketchLineRelation');return settleScopedCommand(t.craft.applySketchLineRelation(Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
+  }));
   const signedDistance=['revision','faceId','axis','ids','distance'];
   stops.push(host.commands.register({id:'apply-closed-sketch-signed-distance',description:'Drive first-to-second point displacement in sketch millimeters through the validated Worker operation. X/Y use sketch coordinates; projected uses a third, live direction segment oriented start to end. Save separately.',parameters:spec(signedDistance,{revision:id(256),faceId:id(1024),axis:{enum:['x','y','projected']},ids:{type:'array',minItems:2,maxItems:3,items:id(256)},distance:{type:'number',minimum:-1000000,maximum:1000000}})},async args=>{
    const v=copy(args,signedDistance),count=v.axis==='projected'?3:2;
