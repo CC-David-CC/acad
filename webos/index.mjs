@@ -8,6 +8,7 @@ import {registerPrimitiveCommands} from './primitive-commands.mjs';
 import {createRectangleController} from './rectangle-commands.mjs';
 import {registerFeatureCommands} from './feature-commands.mjs';
 import {registerSolidCommands} from './solid-commands.mjs';
+import {registerEdgeTreatmentCommands} from './edge-treatment-commands.mjs';
 import {registerParameterCommands} from './parameter-commands.mjs';
 import {registerLegacyExpressionCommands} from './legacy-expression-commands.mjs';
 import {registerMaterialCommands} from './material-commands.mjs';
@@ -139,6 +140,7 @@ export function mount(host){
  if(host.commands){host.onDispose(rectangle.register());host.onDispose(registerFeatureCommands(host,()=>rectangle.target()));host.onDispose(registerClosedSketchCommands(host,()=>rectangle.target()));host.onDispose(registerPrimitiveCommands(host,()=>rectangle.target()));host.onDispose(registerSolidCommands(host,()=>rectangle.target()));host.onDispose(registerParameterCommands(host,()=>rectangle.target()));host.onDispose(registerLegacyExpressionCommands(host,()=>rectangle.target()));}
  if(host.commands)host.onDispose(registerSketchExportCommands(host,{getTarget:()=>rectangle.target(),exportDxf:args=>exportDxf(args)}));
  if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSketchDiagnosticCommands(host,()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,diagnostics=ctx?.sketchDiagnosticService;
