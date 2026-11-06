@@ -38,7 +38,7 @@ export function mount(host){
  const abortSources=()=>sourceLifetime.abort();if(host.signal.aborted)abortSources();else host.signal.addEventListener('abort',abortSources,{once:true});
  const unsubscribeOperations=operations.subscribe(state=>{busy=state.busy;if(active&&frames.has(active))syncCurrentActions();});
  let updateActions=()=>{};function syncCurrentActions(){updateActions();}
- function bindActions(ctx){
+ function prepareActions(ctx){
   if(!sourceMenus.has(ctx)){
    ctx.actionService.registerActions([{id:'DesktopAgentTools',appearance:{label:'Open Agent tools',info:'Run local JavaScript command examples; no AI backend'},invoke:()=>{
     if(!valid()||active?.contentWindow?.__CAD_APP!==ctx)return;
@@ -52,7 +52,8 @@ export function mount(host){
    ctx.streams.ui.controlBars.left.update(actions=>[...actions,'menu.agent-tools']);
    sourceMenus.add(ctx);
   }
-  actionCleanup();const cleanups=[],updates=[];
+  const cleanups=[],updates=[];
+  try{
   for(const id of ['Save','DesktopSaveAs','DesktopExport3MF','DesktopExportDXF','ExportFaceToDXF','NativeFormatImport']){
    const stream=ctx?.streams?.action?.state?.[id];if(!stream?.attach||!stream?.next)continue;
    let writing=false,base=!!stream.value?.enabled;
@@ -63,9 +64,11 @@ export function mount(host){
    const stop=stream.attach(value=>{if(!writing){base=!!value?.enabled;update();}});
    cleanups.push(stop);updates.push(update);update();
   }
-  updateActions=()=>updates.forEach(fn=>fn());
-  actionCleanup=()=>{cleanups.forEach(fn=>fn());updateActions=()=>{};};
+  }catch(error){for(const stop of cleanups)try{stop();}catch{}throw error;}
+  return {update:()=>updates.forEach(fn=>fn()),cleanup:()=>cleanups.forEach(fn=>fn())};
  }
+ function installActions(prepared){const previous=actionCleanup;updateActions=prepared.update;actionCleanup=prepared.cleanup;previous();}
+ function bindActions(ctx){installActions(prepareActions(ctx));}
  function begin(kind){const token=operations.begin(kind);if(!token)tell('Wait for the current file operation to finish.');return token;}
  function current(token){return !!token?.current()&&valid();}
  function claim(token,path){if(!token.claimDocument('mirror:'+path)||!current(token))throw Error('This file is busy in another window.');}
@@ -195,7 +198,13 @@ export function mount(host){
    submit.disabled=true;error.textContent='';try{await rectangle.edit({revision:capability.revision,faceId:candidate.faceId,width,height},target,controller.signal);closeRectangleEditDialog();tell('Rectangle updated in the workspace. Save the project to My files to keep it.');}catch(e){if(!target.valid()){closeRectangleEditDialog();return;}error.textContent=e?.message||'Could not edit rectangle.';submit.disabled=false;}
   });dialog.showModal();
  }
- function setWatch(c,path,version){watch();watch=()=>{};const serial=++watchRevision;warning.hidden=true;warning.textContent='';const check=async()=>{const seq=++checkRevision;let message='';try{const entry=await c.files.stat(path);if(entry.status==='conflict')message='This project has conflicting copies. Resolve them in Files before saving.';else if(entry.version!==version)message='The saved project changed. Save a copy or open it again.';}catch{message='The saved project is unavailable. Your current model remains open.';}if(valid()&&c.valid()&&serial===watchRevision&&seq===checkRevision&&state.path===path&&state.version===version){warning.textContent=message;warning.hidden=!message;}};watch=c.files.subscribe(check);queueMicrotask(check);}
+ function prepareWatch(c,path,version){
+  let enabled=false,serial=null;
+  const check=async()=>{if(!enabled)return;const seq=++checkRevision;let message='';try{const entry=await c.files.stat(path);if(entry.status==='conflict')message='This project has conflicting copies. Resolve them in Files before saving.';else if(entry.version!==version)message='The saved project changed. Save a copy or open it again.';}catch{message='The saved project is unavailable. Your current model remains open.';}if(enabled&&valid()&&c.valid()&&serial===watchRevision&&seq===checkRevision&&state.path===path&&state.version===version){warning.textContent=message;warning.hidden=!message;}};
+  const stop=c.files.subscribe(check);
+  return {activate(){serial=++watchRevision;enabled=true;warning.hidden=true;warning.textContent='';queueMicrotask(check);},dispose(){enabled=false;stop();}};
+ }
+ function setWatch(c,path,version){const prepared=prepareWatch(c,path,version),previous=watch;watch=()=>prepared.dispose();prepared.activate();previous();}
  async function reviewManufacturing(){
   if(!valid()||!active)return;const token=begin('review');if(!token)return;const frame=active,manager=frame.contentWindow?.__CAD_APP?.projectManager;
   try{
@@ -208,7 +217,7 @@ export function mount(host){
  }
  async function newProject(command){
   if(inspectSaveTarget().revision!==command.revision)throw Error('The model changed; inspect it before starting a new project.');
-  const token=begin('new');if(!token)throw Error('Wait for the current file operation to finish.');let next=null,published=false;
+  const token=begin('new');if(!token)throw Error('Wait for the current file operation to finish.');let next=null,published=false,prepared=null;
   try{
    const previous=active,prior=snapshot(previous);
    if(prior!==baseline){const accepted=await host.ui.confirm('Discard the unsaved model and start a new empty project?',{title:'Unsaved changes',confirmLabel:'Discard and start new',cancelLabel:'Keep editing',danger:true,signal:token.signal});if(!accepted&&current(token))return Object.freeze({status:'cancelled',path:state.path,revision:command.revision});if(!current(token))throw new DOMException('Project creation interrupted.','AbortError');if(!unchanged(previous,prior))throw Error('The model changed during confirmation. Try again.');}
@@ -216,17 +225,19 @@ export function mount(host){
    next=createFrame(true);candidate=next;const ctx=await waitReady(next);
    if(!current(token)||candidate!==next||!unchanged(previous,prior))throw new DOMException('Project creation interrupted.','AbortError');
    if(ctx.craftService.modifications$.value.history.length||ctx.sketchStorageService.getAllSketches().length)throw Error('The new workspace is not empty; the existing project was preserved.');
-   const empty=snapshot(next);if(!token.setDocument(null)||!current(token))throw Error('The window or file changed.');
-   active=next;candidate=null;next=null;published=true;bindActions(ctx);active.classList.remove('jsketcher-staging');detach(previous);
-   watchRevision++;checkRevision++;watch();watch=()=>{};baseline=empty;state.path=null;state.version=null;delete w.launchContext;w.title=APP_NAME;retry.hidden=true;review.hidden=true;tell('New model. Use File to open or save a project in My files.');
-   return Object.freeze({status:'opened',path:null,revision:ctx.projectManager.inspectDocumentRevision(),saved:false});
+   const empty=snapshot(next);prepared=prepareActions(ctx);const revision=ctx.projectManager.inspectDocumentRevision();
+   if(!current(token)||!unchanged(previous,prior)||!token.setDocument(null)||!current(token))throw Error('The window or file changed.');
+   const priorWatch=watch;watchRevision++;checkRevision++;watch=()=>{};baseline=empty;state.path=null;state.version=null;delete w.launchContext;w.title=APP_NAME;warning.hidden=true;retry.hidden=true;review.hidden=true;
+   active=next;candidate=null;next=null;published=true;active.classList.remove('jsketcher-staging');
+   detach(previous);const binding=prepared;prepared=null;installActions(binding);priorWatch();tell('New model. Use File to open or save a project in My files.');
+   return Object.freeze({status:'opened',path:null,revision,saved:false,committed:true});
   }catch(error){if(published)Object.defineProperty(error,'committed',{value:true,enumerable:true});tell('Could not start a new project: '+error.message);throw error;}
-  finally{if(next)detach(next);if(candidate===next)candidate=null;token.finish();}
+  finally{prepared?.cleanup();if(next)detach(next);if(candidate===next)candidate=null;token.finish();if(published&&!valid())throw Object.assign(Error('The new project was published before the window or account changed.'),{committed:true});}
  }
  async function openProject(selected,{initial=false,token:reserved=null,command=null}={}){
   if(command&&inspectSaveTarget().revision!==command.revision)throw Error('The model changed; inspect it before opening a project.');
   const interrupted=()=>{if(command)throw new DOMException('Project opening interrupted.','AbortError');};
-  const token=reserved||begin('open');if(!token){if(command)throw Error('Wait for the current file operation to finish.');return;}if(!current(token)||!active){token.finish();if(command)throw new DOMException('Project opening interrupted.','AbortError');return;}tell('Preparing to open a project…');let next=null,file=null,published=false;
+  const token=reserved||begin('open');if(!token){if(command)throw Error('Wait for the current file operation to finish.');return;}if(!current(token)||!active){token.finish();if(command)throw new DOMException('Project opening interrupted.','AbortError');return;}tell('Preparing to open a project…');let next=null,file=null,published=false,prepared=null,watchBinding=null;
   try{
    const previous=active,prior=snapshot(previous);
    if(baseline===null||prior!==baseline){const accepted=await host.ui.confirm('Discard the unsaved model and open a different project?',{title:'Unsaved changes',confirmLabel:'Discard and open',cancelLabel:'Keep editing',danger:true,signal:token.signal});if(!accepted||!current(token))return command?Object.freeze({status:'cancelled',path:state.path}):undefined;if(!unchanged(previous,prior))throw Error('The model changed during confirmation. Try again.');}
@@ -236,10 +247,13 @@ export function mount(host){
    if(typeof ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace!=='function')throw Error('This CAD runtime cannot validate file snapshots in a worker.');
    await settleScopedCommand(ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace(file.data,{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)});if(!current(token)||!c.valid())return interrupted();
    const restored=snapshot(next),now=await c.files.stat(p);if(!current(token)||!c.valid())return interrupted();if(now.version!==file.version||now.status==='conflict')throw Error('The project changed while opening. Try again.');if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');
-   if(!token.setDocument('mirror:'+p)||!current(token))throw Error('The window or file changed.');
-   active=next;candidate=null;next=null;published=true;bindActions(active.contentWindow?.__CAD_APP);active.classList.remove('jsketcher-staging');detach(previous);baseline=restored;state.path=p;state.version=file.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — '+APP_NAME;setWatch(c,p,file.version);retry.hidden=true;review.hidden=true;tell('Opened '+p+'.');
-   return Object.freeze({status:'opened',path:p,revision:ctx.projectManager.inspectDocumentRevision(),persistence:'browser'});
-  }catch(e){if(published)Object.defineProperty(e,'committed',{value:true,enumerable:true});tell('Could not open project: '+e.message+(initial?'':' The current model remains open.'));if(command)throw e;}finally{file?.release();if(next)detach(next);if(candidate===next)candidate=null;token.finish();}
+   prepared=prepareActions(ctx);watchBinding=prepareWatch(c,p,file.version);const revision=ctx.projectManager.inspectDocumentRevision(),launch=Object.freeze({version:1,storage:'mirror',path:p,owner});
+   if(!unchanged(previous,prior)||!token.setDocument('mirror:'+p)||!current(token)||!c.valid())throw Error('The window or file changed.');
+   const priorWatch=watch,publishedWatch=watchBinding;watch=()=>publishedWatch.dispose();watchBinding=null;baseline=restored;state.path=p;state.version=file.version;w.launchContext=launch;w.title=p.split('/').pop()+' — '+APP_NAME;retry.hidden=true;review.hidden=true;
+   active=next;candidate=null;next=null;published=true;active.classList.remove('jsketcher-staging');publishedWatch.activate();detach(previous);
+   const binding=prepared;prepared=null;installActions(binding);priorWatch();tell('Opened '+p+'.');
+   return Object.freeze({status:'opened',path:p,revision,persistence:'browser',committed:true});
+  }catch(e){if(published)Object.defineProperty(e,'committed',{value:true,enumerable:true});tell('Could not open project: '+e.message+(initial?'':' The current model remains open.'));if(command)throw e;}finally{prepared?.cleanup();watchBinding?.dispose();file?.release();if(next)detach(next);if(candidate===next)candidate=null;token.finish();if(command&&published&&!valid())throw Object.assign(Error('The project was opened before the window or account changed.'),{committed:true});}
  }
  async function saveProject(asCopy=false,command=null){
   if(command){const target=inspectSaveTarget();if(target.revision!==command.revision)throw Error('The model changed; inspect it before saving.');if(target.path&&Object.hasOwn(command,'path'))throw Error('Save uses the open project path.');}
