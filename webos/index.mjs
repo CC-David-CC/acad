@@ -13,6 +13,7 @@ import {registerMaterialCommands} from './material-commands.mjs';
 import {registerManufacturingCommands} from './manufacturing-commands.mjs';
 import {registerDocumentSaveCommand} from './document-commands.mjs';
 import {registerSketchDiagnosticCommands} from './diagnostic-commands.mjs';
+import {registerSketchExportCommands} from './sketch-export-commands.mjs';
 import {openCadSources} from './source-dialog.mjs';
 
 // The embedded CAD app owns only its temporary model. The host owns account
@@ -39,7 +40,7 @@ export function mount(host){
    sourceMenus.add(ctx);
   }
   actionCleanup();const cleanups=[],updates=[];
-  for(const id of ['Save','DesktopSaveAs','DesktopExport3MF','NativeFormatImport']){
+  for(const id of ['Save','DesktopSaveAs','DesktopExport3MF','DesktopExportDXF','NativeFormatImport']){
    const stream=ctx?.streams?.action?.state?.[id];if(!stream?.attach||!stream?.next)continue;
    let writing=false,base=!!stream.value?.enabled;
    const update=()=>{
@@ -111,6 +112,7 @@ export function mount(host){
   return {craft:ctx?.craftService,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx};
  });
  if(host.commands){host.onDispose(rectangle.register());host.onDispose(registerFeatureCommands(host,()=>rectangle.target()));host.onDispose(registerClosedSketchCommands(host,()=>rectangle.target()));host.onDispose(registerPrimitiveCommands(host,()=>rectangle.target()));host.onDispose(registerSolidCommands(host,()=>rectangle.target()));host.onDispose(registerParameterCommands(host,()=>rectangle.target()));}
+ if(host.commands)host.onDispose(registerSketchExportCommands(host,{getTarget:()=>rectangle.target(),exportDxf:args=>exportDxf(args)}));
  if(host.commands)host.onDispose(registerSketchDiagnosticCommands(host,()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,diagnostics=ctx?.sketchDiagnosticService;
@@ -252,6 +254,38 @@ export function mount(host){
    return Object.freeze({path:p,version:result.version,status:result.status,sourceRevision:command?.revision??null,dirty:!unchanged(frame,prior),persistence:'browser',serverStatus:'not-verified'});
   }catch(e){tell('Could not export 3MF: '+e.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));if(command){if(writeStarted)Object.defineProperty(e,'possiblyCommitted',{value:true,enumerable:true});throw e;}}finally{token.finish();}
  }
+ async function exportDxf(command=null,selectedFaceId=null){
+  if(!valid()||!active){if(command)throw Error('The modeling window is unavailable.');return;}
+  const token=begin('export-dxf');if(!token){if(command)throw Error('Another file operation is in progress.');return;}let writeStarted=false;
+  try{
+   const frame=active,ctx=frame.contentWindow?.__CAD_APP,craft=ctx?.craftService,faceId=command?.faceId??selectedFaceId;
+   if(typeof faceId!=='string'||!faceId||faceId.length>1024||typeof craft?.inspectSketchDXFExports!=='function'||typeof craft?.exportSketchDXFBlob!=='function')throw Error('Select an available saved sketch for DXF export.');
+   const initial=craft.inspectSketchDXFExports(),revision=command?.revision??initial?.revision;
+   const targetCurrent=()=>{try{const next=craft.inspectSketchDXFExports();return current(token)&&frame===active&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx.craftService===craft&&next?.revision===revision&&Array.isArray(next.candidates)&&next.candidates.some(item=>item?.faceId===faceId)}catch{return false}};
+   if(!initial||initial.revision!==revision||!targetCurrent())throw Error('The sketch changed or is unavailable; inspect it again.');
+   const chosen=command?.path??await host.ui.prompt('Export the sketch to My files:',{title:'Export DXF',value:'/Sketch.dxf',confirmLabel:'Export',signal:token.signal});
+   if(chosen===null||!current(token))return;
+   if(!targetCurrent())throw Error('The sketch changed while choosing a file. Try again.');
+   const c=await mirrorFileContext();if(!current(token)||!c.valid()||frame!==active)return;
+   const path=c.path(chosen);claim(token,path);if(!/\.dxf$/i.test(path))throw Error('Use a .dxf filename.');let expected=null,old;
+   try{old=await c.files.stat(path)}catch(error){if(error.message!=='File not found.')throw error;}
+   if(old){if(command)throw Error('The export path already exists. Choose a new filename.');if(old.status==='conflict')throw Error('Resolve this file conflict in Files first.');
+    if(!await host.ui.confirm('Replace '+path+'?',{title:'Replace export?',confirmLabel:'Replace',cancelLabel:'Keep existing',danger:true,signal:token.signal}))return;
+    if(!current(token)||!c.valid()||frame!==active)return;const latest=await c.files.stat(path);if(latest.status==='conflict'||latest.version!==old.version)throw Error('The file changed while confirming. Try again.');expected=old.version;
+   }
+   if(!targetCurrent())throw Error('The sketch changed while preparing export. Try again.');
+   tell('Preparing the DXF sketch…');const result=await settleScopedCommand(craft.exportSketchDXFBlob({revision,faceId},{signal:token.signal,valid:()=>c.valid()&&targetCurrent()}),{signal:token.signal,valid:()=>c.valid()&&targetCurrent()});
+   if(!current(token)||!c.valid()||frame!==active)return;
+   let size;try{size=Object.getOwnPropertyDescriptor(frame.contentWindow.Blob.prototype,'size').get.call(result?.blob)}catch{throw Error('The DXF export is invalid.');}
+   if(!Number.isSafeInteger(size)||size<1||size>128*1024*1024||result.revision!==revision||result.faceId!==faceId||result.unit!=='millimeter'||result.coordinates!=='sketch-local')throw Error('The DXF export is invalid or too large.');
+   const frameData=result.frame,keys=['origin','x','y','z'];if(!frameData||keys.some(key=>!Array.isArray(frameData[key])||frameData[key].length!==3||!frameData[key].every(Number.isFinite)))throw Error('The DXF export frame is invalid.');
+   const exportedFrame=Object.freeze(Object.fromEntries(keys.map(key=>[key,Object.freeze(Array.from(frameData[key]))])));
+   if(!targetCurrent())throw Error('The sketch changed during export. Try again.');
+   writeStarted=true;const written=await c.files.write(path,result.blob,expected);if(!current(token)||!c.valid()||frame!==active)throw Error('The window or account changed while writing the export.');
+   const earlier=!targetCurrent();tell(written.status==='conflict'?'Export saved with a conflict. Resolve it in Files.':earlier?'Exported the earlier sketch; newer changes are not included.':'Exported to My files; syncing with the server: '+path+'.');
+   return Object.freeze({path,version:written.version,status:written.status,sourceRevision:revision,faceId,unit:'millimeter',coordinates:'sketch-local',frame:exportedFrame,dirty:earlier,persistence:'browser',serverStatus:'not-verified'});
+  }catch(error){tell('Could not export DXF: '+error.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));if(command){if(writeStarted)Object.defineProperty(error,'possiblyCommitted',{value:true,enumerable:true});throw error;}}finally{token.finish();}
+ }
  async function importDxf(){
   if(!valid()||!active)return;const token=begin('import-dxf');if(!token)return;
   try{
@@ -271,7 +305,7 @@ export function mount(host){
    if(current(token)&&frame===active)tell('Imported supported shapes from '+p+'. Save the project to keep them.');
   }catch(e){tell('Could not import DXF: '+e.message+' The existing sketch was kept where recovery was possible.');}finally{token.finish();}
  }
- function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(data?.type==='rectangle-edit-dialog'&&Object.keys(data).length===1){openRectangleEditDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','import-dxf','export-3mf'].includes(data.action))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='import-dxf')void importDxf();else if(data.action==='export-3mf')void export3mf();else void saveProject(data.action==='save-as');}
+ function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(data?.type==='rectangle-edit-dialog'&&Object.keys(data).length===1){openRectangleEditDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','import-dxf','export-3mf','export-dxf'].includes(data.action))return;if(data.action==='export-dxf'&&(Object.keys(data).sort().join(',')!=='action,faceId,type'||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>1024))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='import-dxf')void importDxf();else if(data.action==='export-3mf')void export3mf();else if(data.action==='export-dxf')void exportDxf(null,data.faceId);else void saveProject(data.action==='save-as');}
  window.addEventListener('message',receive);
  const retry=textButton('Retry opening project',()=>{if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner)void openProject(w.launchContext.path,{initial:true});});retry.hidden=true;
  const review=textButton('Review material assignments',()=>void reviewManufacturing());review.hidden=true;
