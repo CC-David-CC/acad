@@ -8,6 +8,7 @@ import {registerPrimitiveCommands} from './primitive-commands.mjs';
 import {createRectangleController} from './rectangle-commands.mjs';
 import {registerFeatureCommands} from './feature-commands.mjs';
 import {registerSolidCommands} from './solid-commands.mjs';
+import {registerThroughHoleCommands} from './through-hole-commands.mjs';
 import {registerEdgeTreatmentCommands} from './edge-treatment-commands.mjs';
 import {registerParameterCommands} from './parameter-commands.mjs';
 import {registerLegacyExpressionCommands} from './legacy-expression-commands.mjs';
@@ -141,6 +142,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerSketchExportCommands(host,{getTarget:()=>rectangle.target(),exportDxf:args=>exportDxf(args)}));
  if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerThroughHoleCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSketchDiagnosticCommands(host,()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,diagnostics=ctx?.sketchDiagnosticService;
