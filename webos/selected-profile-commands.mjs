@@ -38,6 +38,14 @@ export function registerSelectedProfileCommands(host,getTarget){
    // build and remains authoritative for source/region membership/currentness.
    const intent=Object.freeze(v),t=target('createSelectedProfileExtrusion'),scope=scoped(t);return settleScopedCommand(t.craft.createSelectedProfileExtrusion(intent,scope),scope);
   }));
+  stops.push(host.commands.register({id:'inspect-selected-profile-history',description:'Inspect selected-region feature identities, numeric depths and the current authored-edit revision. Typed depth bindings remain unsupported.',parameters:spec([],{})},args=>{
+   copy(args,[]);const t=target('inspectSelectedProfileHistory'),result=t.craft.inspectSelectedProfileHistory();if(!t.valid())throw Error('The window or account changed.');return result;
+  }));
+  const edit=['revision','index','featureId','depth'];
+  stops.push(host.commands.register({id:'edit-selected-profile-depth',description:'Edit an inspected numeric extrusion depth through the shared atomic history transaction. Use travel-authored-edit for undo/redo and save separately.',parameters:spec(edit,{revision:text(256),index:{type:'integer',minimum:0,maximum:255},featureId:{type:'integer',minimum:1},depth})},async args=>{
+   const v=copy(args,edit);if(!bounded(v.revision,256)||!Number.isSafeInteger(v.index)||v.index<0||v.index>255||!Number.isSafeInteger(v.featureId)||v.featureId<1||!positive(v.depth))throw Error('Provide a current selected feature identity and positive bounded numeric depth.');
+   const intent=Object.freeze(v),t=target('editSelectedProfileDepth'),scope=scoped(t);return settleScopedCommand(t.craft.editSelectedProfileDepth(intent,scope),scope);
+  }));
  }catch(error){for(const stop of stops.reverse())stop();throw error;}
  return()=>{for(const stop of stops.splice(0).reverse())stop();};
 }
