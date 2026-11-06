@@ -1,3 +1,11 @@
+# CAD Modeler (JSketcher inspired)
+
+[JavaScript examples and README](examples/README.md) document the shared public
+command registry, explicit window selection and current revision/geometry IDs.
+Agent tools/New/Open are source work being qualified; the earlier6f CAD build
+is active on beta. Consult the desktop work queue for deployed pins. Original
+integration notes below retain their historical scope.
+
 # jSketcher
 
 Current shared-save work: the desktop `inspect` command returns an opaque
