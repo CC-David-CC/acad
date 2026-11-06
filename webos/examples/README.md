@@ -198,10 +198,12 @@ await cad.save('/Agent-enclosure.jsketcher.json');
 await cad.exportCore3mf('/Agent-enclosure.3mf');
 ```
 
-This recipe's exact chosen colors/IDs still need their own browser execution;
-the existing qualified enclosure tests prove the shared operations and native/
-material-aware export contract, not every example variation. Geometry edits
-can make assignments stale: inspect/propose/confirm their rebind explicitly
+Both exact code fences passed in an actual signed browser on the R3 private
+candidate: these material IDs/colors, native Save/server sync and fresh Files
+reopen. Independent core 3MF checks verify two objects, three regions, winding
+and the intended interface. See [exact recipe proof](../../../../research/beta-cad-agent-recipes-20261106/README.md).
+Later phone-menu ordering does not change these commands or example bodies.
+Geometry edits can make assignments stale: inspect/propose/confirm their rebind explicitly
 before exporting a changed design. Native saves remain the editable source.
 
 ## Lifetime and evidence
