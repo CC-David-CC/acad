@@ -20,7 +20,7 @@ export function createCadAgent({api = globalThis.codiDesktopCommands, windowId, 
     notify({command, phase: 'started'});
     try {
       const result = await api.execute({windowId, command, args});
-      notify({command, phase: 'accepted', result});
+      notify({command, phase: 'accepted'});
       // The registry/handler own in-flight cancellation. Return their accepted
       // receipt; a subsequent call checks lifetime before starting another step.
       return result;
