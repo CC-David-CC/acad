@@ -1,0 +1,22 @@
+# Atomic existing source dimension and selected-region edit
+
+Source-only coherent implementation, not executed or type checked during implementation, per the user's whole-workflow cadence. Shared parent Craft and Desktop registration must be composed before the complete signed workflow runs. No E04/E05 or full Gate 1 pass follows from source completion.
+
+Core source checkpoint afc1cf3f7 changes only new selectedProfileSourceDimensionCommands.ts and the reserved authoredEditJournal additions. Parent owns Craft submitPreparedReplay and normal travel registration. Public host registration/example and complete driver live in Desktop feature/selected-profile-source-region-host-20261107, under apps/system/jsketcher and test/agent-cad-corpus/selected-profile-source-dimension.
+
+Public methods:
+
+- inspectSelectedProfileSourceDimensionRegions({revision,sourceRevision,index,featureId,constraintId,value}, options)
+- editSelectedProfileSourceDimensionRegion({...same,regionId,candidateSourceDigest}, options)
+
+The feature revision comes from inspectSelectedProfileHistory, independently of the source revision from inspectSketchTransitions/closed-sketch discovery. The dimension locator comes from actual closed-sketch dimensionTargets. Literal positive canonical millimeters only. The current recorded backend must explicitly support polygon selected-profile version3. Unsupported typed/project bindings, manufacturing-assigned parts, assembly, referenced boundaries, stale source/frame/history, unsupported region topology and absent independent source planes refuse.
+
+Inspection discards its private proposed source. Commit independently reconstructs the same one-dimension change using the actual existing Worker transition, independently verifies the entire candidate against the original source transition, performs two actual source solves and two actual semantic inspections, then checks caller-selected opaque supported region and Worker digest. No caller-provided source bytes or geometry, proposal map, ID parsing, fallback, fresh feature allocation or alternate model exists.
+
+The existing prepared replay stages one source override and actual source frame, while parent Craft changes only the same detached feature's regionId. One existing model/source/journal publication commits the result. Existing children replay unchanged or reject atomically. The accepted feature/output IDs, source IDs, unaffected raw parameters, unrelated geometry and counters stay exact. Source/service/stream/document/material/frame checks span all awaits and the expected own evaluation epoch. Candidate workspaces/resources are retired on cancellation/failure; genuine cancellation remains distinct from dependency failure.
+
+The same authored journal stores one bounded before/after source pair, original nine parameters, explicit target region and original dimension intent. No full history/model snapshot is retained. Existing chronology, branch truncation and64entry/8MiB budgets remain. Normal mixed UndoRedo privately verifies the actual source pair in a Worker, rediscovers the target region, and uses the same prepared full replay. Journal travel does not substitute a new feature or retarget unchanged children.
+
+Factory createSelectedProfileSourceDimensionCommands(ctx,submitPreparedReplay,cancelEpoch) exposes the two public methods and private travelSelectedProfileSourceDimension(args,options,actualPlan). The existing callback receives exact journalIntent {kind:'selected-profile-source-dimension',index,featureId,parameters,before,after,regionId,dimension,...optional direction}. Journal exports are captureSelectedProfileSourceDimensionEdit, recordSelectedProfileSourceDimensionEdit and planSelectedProfileSourceDimensionTravel. Parent's c507710d1 Craft splice was source-reviewed against these interfaces without finding a mismatch.
+
+The complete signed source fixture starts disjoint loops100×50 and x110..140/y10..40, then drives width150 and explicitly selects the newly nested annular region. It covers preflight/native refusal preservation, mixed depth/combined UndoRedo, Save/sync/fresh Open/reedit, unchanged compatible Boolean subtraction, and incompatible second source-region consumer refusal. Crossing arrangements, comprehensive human interaction, typed extension, circle winding and other Gate 1 gaps remain explicit. Do not replace a failing geometric expectation with an unsupported row or weaken the driver after observation.
