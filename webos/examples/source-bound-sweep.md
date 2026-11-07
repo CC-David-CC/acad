@@ -32,3 +32,12 @@ Every step is a normal separate accepted transaction. If a later step fails,
 earlier authored steps remain; inspect them rather than automatically retrying.
 Creation does not save. Native Save/Open uses My files and the shared mount;
 closing with unsaved work may lose it. The helper does not download to the PC.
+
+The one helper pins the authoritative document token across all internal steps,
+not a freshly inspected token for each call. A different caller's New/Open in the
+same window stops later recipe dispatches. Earlier accepted steps keep their
+actual outcomes; there is no automatic retry into the replacement document.
+The helper's explicit `open()` is an intentional transition: only its matching
+accepted receipt may rebind the helper. An older/unbound command service refuses
+helper construction. These source/transport controls still require the combined
+signed-browser acceptance before a working application claim.

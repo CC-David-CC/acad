@@ -17,6 +17,32 @@ They call `window.codiDesktopCommands`; a button, person or future agent uses
 this same API. No AI provider, injected geometry or private history writer is
 needed. `cad-agent.mjs` is the shared implementation for the Agent tools panel.
 
+## Document binding in the new source helper
+
+The current source helper requires every command for the chosen window to expose
+one current `documentToken`. Loading, detached, unbound or older command services
+without a token refuse before any helper command is sent. This new contract is
+pending combined-runtime qualification; it does not retag the historical public
+R4 result below.
+
+One helper pins that opaque token for its entire lifetime, including every
+`execute` in a multi-step recipe. External New/Open in the same window makes the
+helper stale. Create a new helper for the replacement document. The registry
+checks `expectedDocumentToken` synchronously immediately before dispatch, after
+argument JSON serialization; a preliminary inspection alone is not a guard.
+Earlier accepted transactions retain their actual outcomes. The helper's own
+explicit `newProject()`/`open()` may adopt only the accepted receipt's token when
+it still matches the current public list. A later replacement preserves that
+accepted receipt but leaves the helper stale. Saving or changing a path does not
+change the authoritative document signal or its token.
+
+The registry accepts at most64 KiB of UTF-8 JSON argument metadata per command,
+disclosed as `argumentMaxBytes` in command descriptors. This total bound includes
+all argument keys and strings; individual field limits also apply. It changes no
+file-size/storage limits and does not transport model snapshots. Direct registry
+calls without `expectedDocumentToken` remain supported; those callers do not get
+whole-recipe document binding automatically.
+
 ## Build availability
 
 Beta static `337b69de…` now includes the helper export, visible **Agent tools**
