@@ -41,11 +41,11 @@ export function registerFeatureCommands(host,getTarget){
     const t=target(method);return settleScopedCommand(t.craft[method](Object.freeze(copy),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
    }));
   }
-  stops.push(host.commands.register({id:'inspect-authored-edits',description:'Inspect whether authored edits can be undone or redone and obtain the current revision.',parameters:{type:'object',additionalProperties:false}},args=>{
+  stops.push(host.commands.register({id:'inspect-authored-edits',description:'Inspect supported authored edits and qualified feature-creation transactions, including current Undo/Redo targets and revision.',parameters:{type:'object',additionalProperties:false}},args=>{
    exact(args,[]);const t=target('inspectAuthoredEdits'),result=t.craft.inspectAuthoredEdits();
    if(!t.valid())throw Error('The window or account changed.');return result;
   }));
-  stops.push(host.commands.register({id:'travel-authored-edit',description:'Undo or redo the selected authored edit using the inspected revision.',parameters:{type:'object',additionalProperties:false,required:['revision','direction'],properties:{revision:id(256),direction:{type:'string',enum:['undo','redo']}}}},async args=>{
+  stops.push(host.commands.register({id:'travel-authored-edit',description:'Undo or redo the inspected supported authored transaction. Creation coverage is explicitly reported by its target kind.',parameters:{type:'object',additionalProperties:false,required:['revision','direction'],properties:{revision:id(256),direction:{type:'string',enum:['undo','redo']}}}},async args=>{
    exact(args,['revision','direction']);if(typeof args.revision!=='string'||!args.revision||!['undo','redo'].includes(args.direction))throw Error('Invalid authored history command.');
    const t=target('authoredEditTravel');return await settleScopedCommand(t.craft.authoredEditTravel(args,{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
   }));
