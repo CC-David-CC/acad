@@ -11,13 +11,14 @@ const copy = (source, name) => {
  let text=fs.readFileSync(path.join(root,source),'utf8');
  // This generated legacy directory is flat; canonical source stays separate.
  if(name==='authoredRegions.mjs')text=text.replace('../../../../engine/mount/polygonProfilePlan.mjs','./polygonProfilePlan.mjs');
- if(name==='polygonProfilePlan.mjs')text=text.replace('../extrusion/simplePolygon.mjs','./simplePolygon.mjs');
+ if(name==='polygonProfilePlan.mjs')text=text.replace('../extrusion/simplePolygon.mjs','./simplePolygon.mjs').replace('../extrusion/exactExternalVertexContact.mjs','./exactExternalVertexContact.mjs');
  fs.writeFileSync(path.join(out,name),text);
 };
 
 for (const name of ['exactMeshVolume.mjs','displayProjection.mjs','enclosureLabelContact.mjs','enclosureManufacturingMesh.mjs','enclosureMesh.mjs','enclosurePlan.mjs','profile-topology.mjs','centeredHolePlan.mjs','centeredHoleTopology.mjs','boundedPrismBoundary.mjs','fourCornerHolePlan.mjs','fourCornerHoleTopology.mjs','fourCornerHoleProvenance.mjs','selectedProfilePlan.mjs','polygonProfilePlan.mjs','ownedTopologyContract.mjs']) copy('modules/engine/mount/'+name,name);
 for (const name of ['rectangleProfileRequest.mjs','authoredRegions.mjs','profilePlan.mjs']) copy('modules/workbenches/modeler/features/extrude/'+name,name);
 copy('modules/engine/extrusion/simplePolygon.mjs','simplePolygon.mjs');
+copy('modules/engine/extrusion/exactExternalVertexContact.mjs','exactExternalVertexContact.mjs');
 // Resource modules are served verbatim: emit their complete static import
 // closure without evaluating a planner on the main thread.
 const regionModules=[];let regionBytes=0;

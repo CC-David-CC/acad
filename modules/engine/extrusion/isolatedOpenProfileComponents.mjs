@@ -1,6 +1,7 @@
 // Worker-only sufficient isolation proof. No proximity welding, arrangements,
 // source rewriting, Native allocation or inferred material/region identities.
 import {segmentRelation} from './simplePolygon.mjs';
+import {separateArticulatedRegionBlocks} from './articulatedRegionSegments.mjs';
 import {POLYGON_PROFILE_CLEARANCE_MM} from '../mount/polygonProfilePlan.mjs';
 const fail=message=>{throw Object.assign(Error(message),{code:'OPEN_OR_AMBIGUOUS_PROFILE'});};
 const pointKey=p=>JSON.stringify(p),same=(a,b)=>a[0]===b[0]&&a[1]===b[1];
@@ -26,7 +27,12 @@ function separated(a,b){
  // strict inequality encloses represented binary64 geometry plus clearance.
  return[0,1].some(i=>up(a.max[i]+POLYGON_PROFILE_CLEARANCE_MM)<b.min[i]||up(b.max[i]+POLYGON_PROFILE_CLEARANCE_MM)<a.min[i]);
 }
-export function partitionSelectedSegments(segments){
+export function partitionSelectedSegments(segments,{allowArticulatedRegions=false}={}){
+ if(allowArticulatedRegions){
+  const blocks=separateArticulatedRegionBlocks(segments),rest=partitionSelectedSegments(blocks.bridges);
+  if(rest.closed.length)fail('A bridge cannot become a hidden closed boundary.');
+  return{closed:blocks.closed,open:rest.open};
+ }
  if(!Array.isArray(segments)||segments.length>512)throw Object.assign(Error('At most512 source segments are qualified.'),{code:'UNSUPPORTED_PROFILE'});
  const endpoints=new Map();
  for(const c of segments)for(const p of[c.a,c.b]){const k=pointKey(p),rows=endpoints.get(k)||[];rows.push(c);endpoints.set(k,rows);}

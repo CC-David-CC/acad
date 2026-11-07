@@ -60,10 +60,11 @@ async function extractSource({r,frame,faceOnly=false},allowIsolatedOpen=false){
    const data=fields(object.data,['c','r']);loops.push([{kind:'circle',id,center:point(data.c),radius:data.r}]);
   }else fail('UNSUPPORTED_PROFILE',r.profileVersion===3?'Only ordinary polygon segments and full circles are qualified.':'Only ordinary rectangle segments and full circles are qualified.');
  }
- // Use exact endpoint identities, never proximity welding. Branches, gaps,
- // duplicate edges remain explicit refusals. Explicit V3 admits simple linear
+ // Use exact endpoint identities, never proximity welding. V3 separates
+ // simple articulation blocks; other branches/gaps/duplicates still refuse.
+ // Explicit V3 admits simple linear
  // polygons; unflagged requests retain the four-edge rectangle path.
- if(mixed){const parts=partitionSelectedSegments(segments);loops.push(...parts.closed);open=parts.open;}
+ if(r.profileVersion===3){const parts=partitionSelectedSegments(segments,{allowArticulatedRegions:true});loops.push(...parts.closed);if(mixed)open=parts.open;else if(parts.open.length)fail('OPEN_OR_AMBIGUOUS_PROFILE','Depth-free source faces require complete closed boundary blocks.');}
  else{
  const endpoints=new Map();
  for(const curve of segments)for(const p of [curve.a,curve.b]){const k=key(p),list=endpoints.get(k)||[];list.push(curve);endpoints.set(k,list);}

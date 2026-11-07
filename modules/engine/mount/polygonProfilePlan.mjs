@@ -2,6 +2,7 @@
 // kernel; this is ephemeral solved geometry for one explicitly selected cell.
 import {capturePolygonProfileRequest,capturePolygonProfileFaceRequest} from './selectedProfilePlan.mjs';
 import {analyzeSimplePolygon,classifyPolygonPoint,polygonRelation} from '../extrusion/simplePolygon.mjs';
+import {hasExactExternalVertexContact} from '../extrusion/exactExternalVertexContact.mjs';
 const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
 export const POLYGON_PROFILE_CLEARANCE_MM=0.0001;
 const tolerance=POLYGON_PROFILE_CLEARANCE_MM;
@@ -98,7 +99,9 @@ export function polygonProfileRegions(profiles){
  }
  const parent=profiles.map(()=>-1);
  for(let i=0;i<profiles.length;i++)for(let j=i+1;j<profiles.length;j++){
-  const r=relation(profiles[i],profiles[j]);
+  // Separate selected bodies may share isolated exterior vertices. This
+  // does not relax actual hole/face preparation or claim a manifold union.
+  const r=hasExactExternalVertexContact(profiles[i],profiles[j])?'separate':relation(profiles[i],profiles[j]);
   if(!['contains','inside','separate'].includes(r))fail('UNSUPPORTED_REGION_TOPOLOGY','Profiles intersect, touch or are too close; explicit arrangement is required.');
   if(r==='contains'&&(parent[j]===-1||profiles[i].area<profiles[parent[j]].area))parent[j]=i;
   if(r==='inside'&&(parent[i]===-1||profiles[j].area<profiles[parent[i]].area))parent[i]=j;
