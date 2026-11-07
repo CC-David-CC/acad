@@ -1,3 +1,4 @@
+import {captureConstraintGroupEnvelope} from './constraintGroupEnvelope.mjs';
 import {captureSourcePlaneReply} from './sourcePlaneDepthEnvelope.mjs';
 import {captureSignedDistanceEnvelope,captureSignedDistanceVerificationEnvelope} from './signedDistanceEnvelope.mjs';
 import {captureLineRelationEnvelope} from './lineRelationEnvelope.mjs';
@@ -113,6 +114,8 @@ export async function runSketchSolve(workerUrl: string, request: any, options: S
               }
               let result;try{result=captureWorkerReplyRecord(event.data);if(result.ok===false)result.error=captureSketchFailure(result.error);}catch{return finish(new Error('Invalid sketch Worker reply fields.'));}
               if(request.task==='sketch-source-plane-depth'||request.task==='sketch-source-plane-depth-verify'){try{return finish(null,captureSourcePlaneReply(result,request.revision));}catch(error){return finish(error);}}
+              if(request.task==='sketch-transition-constraint-group'){try{return finish(null,captureConstraintGroupEnvelope(result,request.revision,request.intent));}catch{return finish(new Error('Invalid constraint group response.'));}}
+              if(request.task==='sketch-transition-verify-constraint-group'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch{return finish(new Error('Invalid constraint group verification.'));}}
               if(request.task==='sketch-transition-driving-dimension'){try{return finish(null,captureDrivingDimensionReply(result,request.revision));}catch{return finish(new Error('Invalid driving dimension response.'));}}
               if(request.task==='sketch-transition-verify-driving-dimension'||request.task==='sketch-transition-verify-dimension-travel'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch{return finish(new Error('Invalid driving dimension verification response.'));}}
               if(request.task==='sketch-transition-verify-remove-primitive'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch{return finish(new Error('Invalid primitive removal verification response.'));}}
