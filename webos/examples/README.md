@@ -1,5 +1,12 @@
 # Browser CAD command examples
 
+The new [source-bound pattern recipe](source-bound-pattern.md) uses the generic
+owned part path, semantic holes and outer edge treatments. Its JavaScript lives
+in `source-bound-pattern.mjs`, exported as `createSourceBoundPatternExample` by
+the app entry. It is awaiting fresh signed-runtime qualification and is not
+included in the historical public R4 result below. Discover installed commands
+before attempting it; the old separate-mount bracket recipe is a different path.
+
 Use these JavaScript examples in the **outer signed-in desktop page**.
 They call `window.codiDesktopCommands`; a button, person or future agent uses
 this same API. No AI provider, injected geometry or private history writer is

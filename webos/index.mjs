@@ -23,6 +23,7 @@ import {registerSelectedProfileCommands} from './selected-profile-commands.mjs';
 import {openCadSources} from './source-dialog.mjs';
 import {createAgentToolsPanel} from './agent-tools-panel.mjs';
 export {createCadAgent} from './examples/cad-agent.mjs';
+export {createSourceBoundPatternExample} from './examples/source-bound-pattern.mjs';
 
 const APP_NAME='CAD Modeler (JSketcher inspired)';
 
