@@ -9,6 +9,7 @@ import {createRectangleController} from './rectangle-commands.mjs';
 import {registerFeatureCommands} from './feature-commands.mjs';
 import {registerSolidCommands} from './solid-commands.mjs';
 import {registerThroughHoleCommands} from './through-hole-commands.mjs';
+import {registerLinearHolePatternCommands} from './linear-hole-pattern-commands.mjs';
 import {registerEdgeTreatmentCommands} from './edge-treatment-commands.mjs';
 import {registerParameterCommands} from './parameter-commands.mjs';
 import {registerLegacyExpressionCommands} from './legacy-expression-commands.mjs';
@@ -152,6 +153,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerThroughHoleCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerLinearHolePatternCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerDisplayUnitCommands(host,()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading or saving.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
