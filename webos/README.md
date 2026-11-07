@@ -484,3 +484,25 @@ Six transport/admission controls pass; no native CAD or full authored history
 success follows from those controls. Core feature wiring, genuine native
 creation/travel and normal Save/Open must qualify before this feature is ready.
 There is no shutdown save, autosave or compensating rollback.
+
+
+## Experimental shared loft command adapter
+
+The host now registers `inspect-worker-lofts`, `inspect-worker-loft-regions`,
+`create-worker-loft` and `inspect-worker-loft-history` through the same window,
+account and document lifetime as sweep/revolve. Discovery requires an explicitly
+staged qualified native graph; unavailable builds must not be advertised.
+
+Select exactly two independently authored source planes in order. Inspect actual
+region/seam identities; polygon seams use source point IDs, circle seams use an
+explicit source circle ID, angle and direction. Geometry coordinates and native
+handles are never supplied by callers. Craft owns source reconstruction, native
+evaluation, transactions, authored history and cleanup. Save is a separate normal
+MyFiles operation. Loft source-plane placement edits must preserve the existing
+source identities; replacing the planes is not equivalent.
+
+Root transport regression:27 combined loft/sweep/revolve controls pass (8 loft,
+13 sweep,6 revolve). These are admission/lifetime tests, not successful fake
+geometry or a full app acceptance. CAD coordinator/factory components pass
+separately; complete signed application create/edit/UndoRedo/Save/Open remains
+unqualified. No deployment follows from adding these registrations.

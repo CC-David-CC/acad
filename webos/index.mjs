@@ -23,6 +23,7 @@ import {registerSelectedProfileCommands} from './selected-profile-commands.mjs';
 import {registerSelectedProfileRegionCommands} from './selected-profile-region-commands.mjs';
 import {registerRevolveCommands} from './revolve-commands.mjs';
 import {registerSweepCommands} from './sweep-commands.mjs';
+import {registerLoftCommands} from './loft-commands.mjs';
 import {registerSolidPointCommands} from './solid-point-commands.mjs';
 import {openCadSources} from './source-dialog.mjs';
 import {createAgentToolsPanel} from './agent-tools-panel.mjs';
@@ -167,6 +168,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerSelectedProfileRegionCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerRevolveCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSweepCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerLoftCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSolidPointCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerThroughHoleCommands(host,()=>rectangle.target()));
