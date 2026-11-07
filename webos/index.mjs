@@ -1,3 +1,4 @@
+import {registerReferenceCommands} from './reference-commands.mjs';
 import {registerDrawingExportCommand} from './drawing-export-command.mjs';
 import {settleCadFileExport,fileErrorData,safeFileErrorMessage} from './file-export-outcome.mjs';
 import './style.css';
@@ -183,6 +184,7 @@ export function mount(host){
  host.onDispose(stepExport.dispose);if(host.commands)host.onDispose(stepExport.register());
  if(host.commands){host.onDispose(rectangle.register());host.onDispose(registerFeatureCommands(host,()=>rectangle.target()));host.onDispose(registerClosedSketchCommands(host,()=>rectangle.target()));host.onDispose(registerPrimitiveCommands(host,()=>rectangle.target()));host.onDispose(registerSolidCommands(host,()=>rectangle.target()));host.onDispose(registerParameterCommands(host,()=>rectangle.target()));host.onDispose(registerLegacyExpressionCommands(host,()=>rectangle.target()));}
  if(host.commands)host.onDispose(registerSketchExportCommands(host,{getTarget:()=>rectangle.target(),exportDxf:args=>exportDxf(args)}));
+ if(host.commands)host.onDispose(registerReferenceCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileRegionCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerRevolveCommands(host,()=>rectangle.target()));
