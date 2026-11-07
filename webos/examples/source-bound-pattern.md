@@ -23,7 +23,10 @@ await example.save('/Source-bound-pattern.jsketcher.json');
 
 Every source/region/edge/seed/target ID is discovered from current registered
 commands. The opaque region ID is selected only when exactly one supported
-region exists. The returned `binding` contains public semantic receipts, not
+region exists. The four original line connectors are selected from their actual
+public records: one and its unique opposite (disjoint incident curve IDs) receive
+fillets, and the remaining two receive chamfers. No endpoint or qualified curve
+ID is constructed by the caller. The returned `binding` contains public semantic receipts, not
 native indices/handles or a second editable model. Reopened files can be
 reinspected with the public history commands; preserve the binding only for the
 same document and semantic feature identities.
