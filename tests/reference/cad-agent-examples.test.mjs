@@ -5,7 +5,7 @@ import {createCadAgent} from '../apps/system/jsketcher/examples/cad-agent.mjs';
 function registry({windows = ['cad-1'], execute} = {}) {
   const ids = ['inspect','inspect-rectangle-creation','create-rectangle-sketch','inspect-worker-features','create-worker-extrusion','create-worker-centered-hole','create-worker-four-corner-holes','inspect-published-worker-geometry','save','new-project','open-project'];
   const requests = [];
-  return {requests, list: () => windows.flatMap(windowId => ids.map(id => ({windowId,appId:'jsketcher',id}))), execute: async request => {requests.push(request);return execute?.(request);}};
+  return {requests, list: () => windows.flatMap(windowId => ids.map(id => ({windowId,appId:'jsketcher',id,documentToken:'fixture-document-token'}))), execute: async request => {requests.push(request);return execute?.(request);}};
 }
 
 test('ambiguous windows refuse; explicit window remains bound', async () => {
