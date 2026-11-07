@@ -1,0 +1,1 @@
+const path=require('path');const config=require('../../webpack.config');config.entry=path.join(__dirname,'headless-sketch-client-entry.js');config.output={path:'/tmp/codi-headless-web/static',filename:'client.js'};config.devtool=false;module.exports=config;

@@ -1,0 +1,12 @@
+{
+  "status": "FAIL",
+  "scope": "initial pure test run",
+  "tests": 53,
+  "pass": 52,
+  "fail": 1,
+  "testSourceSHA256": "783d3dccb672fb8b9bf8d03f354d652d8e9453035e73daab3e4e76f5b0396dda",
+  "test": "accounting only serializes small fragments even with sixteen maximum opaque IDs",
+  "error": "AssertionError: 'object' !== 'string'",
+  "cause": "The test's global JSON.stringify spy also intercepted the existing solidBodyId helper's two-element [featureId,body] array. This was a harness assumption, not a product accounting failure.",
+  "correction": "Construct input before installing the spy; allow the canonical two-element body ID array while continuing to reject large request/identity serialization. No product correction was made for this failure."
+}

@@ -1,0 +1,26 @@
+asset raw-smlib-worker.js 11.4 KiB [compared for emit] [minimized] (name: main)
+orphan modules 15.2 KiB [orphan] 2 modules
+./modules/engine/raw-smlib/rawWorker.js + 2 modules 20 KiB [built] [code generated]
+webpack 5.74.0 compiled successfully in 662 ms
+node:fs:3210
+  binding.copyFile(
+          ^
+
+Error: EACCES: permission denied, copyfile '/mnt/data10tb/codi-revolve-catalog-registration-20261106-r1/node_modules/.cache/codi-raw-smlib/raw-provider.wasm' -> '/mnt/data10tb/codi-revolve-catalog-registration-20261106-r1/.build/raw-smlib-worker/raw-provider.wasm'
+    at Object.copyFileSync (node:fs:3210:11)
+    at Object.<anonymous> (/mnt/data10tb/codi-revolve-catalog-registration-20261106-r1/build/prepare-raw-smlib-assets.cjs:14:4)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'copyfile',
+  path: '/mnt/data10tb/codi-revolve-catalog-registration-20261106-r1/node_modules/.cache/codi-raw-smlib/raw-provider.wasm',
+  dest: '/mnt/data10tb/codi-revolve-catalog-registration-20261106-r1/.build/raw-smlib-worker/raw-provider.wasm'
+}
+
+Node.js v24.22.1

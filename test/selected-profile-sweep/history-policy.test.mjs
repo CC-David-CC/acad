@@ -1,0 +1,13 @@
+// History ownership/budget controls; no backend capability or geometry claim.
+import test from 'node:test';import assert from 'node:assert/strict';
+import {AUTHORED_SOLID_KINDS} from '../../modules/engine/solid/authoredSolidKinds.mjs';
+import {genericHistoryBuild} from '../../modules/engine/mount/selectedProfileBuildSelection.mjs';
+import {selectedProfileHistoryBudget} from '../../modules/engine/mount/selectedProfileBudget.mjs';
+import {OCC_BOOLEAN_HISTORY_BUILD as OLD,OCC_REVOLVE_PROFILE_BUILD as R} from '../../modules/engine/mount/engineCatalog.mjs';
+import {hasOnlyUnconsumedSketchHistory} from '../../web/app/cad/craft/unconsumedSketchSave.mjs';
+const sweep=(revision=R.revision)=>({type:'WORKER_SELECTED_PROFILE_SWEEP_V1',params:{version:1,unit:'millimeter',engine:'occ',engineRevision:revision,featureId:3,faceId:'section',regionId:'sketch-region:opaque',pathFaceId:'path',pathCurves:[{curveId:'line',reversed:false}],transport:'corrected-frenet',bodyPolicy:'separate'}});
+test('one immutable solid vocabulary includes sweep exactly once',()=>{assert(Object.isFrozen(AUTHORED_SOLID_KINDS));assert.equal(AUTHORED_SOLID_KINDS.filter(x=>x==='WORKER_SELECTED_PROFILE_SWEEP_V1').length,1);assert.equal(new Set(AUTHORED_SOLID_KINDS).size,AUTHORED_SOLID_KINDS.length);});
+test('sweep ownership cannot be ignored in mixed history or unknown runtime',()=>{assert.equal(genericHistoryBuild([sweep()]),R);assert.throws(()=>genericHistoryBuild([sweep(),{type:'WORKER_SOLID_BOX_V1',params:{engine:'occ',engineRevision:OLD.revision}}]),{code:'ENGINE_REVISION_MISMATCH'});assert.throws(()=>genericHistoryBuild([sweep('sha256:'+'0'.repeat(64)+':'+'1'.repeat(64))]),{code:'ENGINE_REVISION_MISMATCH'});});
+test('sweep consumes one native-result budget even after visible results disappear',()=>{const result=selectedProfileHistoryBudget([sweep()],R.revision);assert.equal(result.plannedNativeResults,1);assert.equal(result.remainingNativeResults,31);assert.equal(result.withinLimit,true);assert.equal(selectedProfileHistoryBudget([sweep()],OLD.revision).reason,'INCOMPATIBLE_ENGINE_BUILD');});
+test('unqualified sweep build cannot permit a sketch fast-save',()=>{for(const face of ['section','path','unrelated'])assert.equal(hasOnlyUnconsumedSketchHistory([sweep()],face),false);});
+test('backend identity accessor refuses without executing it',()=>{let calls=0;const row=sweep();Object.defineProperty(row.params,'engineRevision',{enumerable:true,get(){calls++;return R.revision;}});assert.throws(()=>genericHistoryBuild([row]),{code:'INVALID_REQUEST'});assert.throws(()=>selectedProfileHistoryBudget([row],R.revision),{code:'INVALID_REQUEST'});assert.equal(calls,0);});

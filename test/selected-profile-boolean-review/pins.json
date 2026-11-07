@@ -1,0 +1,21 @@
+{
+  "status": "PASS bounded independent source/helper review and two actual public controls with six refusals",
+  "source": "32386643ab487de2ca40094549274b109822a6f4",
+  "fixture": "http://127.0.0.1:20683/",
+  "publicReceiptSHA256": "7a74f9cddbf1fbd4820b8940254ac33defa7cd30eb9e9867814bd4c6288f4d29",
+  "helperSHA256": "07e927d3e3395d8370db47f2951b97d524e75d8c076b32886035a387e7197939",
+  "commandsSHA256": "562a3486ddcec995d97ee6ba103c0819e38fa4dc313e39cec56eb321efdfea68",
+  "files": {
+    "README.md": "1cdd795ca8f41e87206ee71aa2c3beb62672e2f4f14e6b5ccf8b0a1d273c6bb3",
+    "check-public-receipt.py": "852486df99c19bd715a0c55fef093c8af66d150cadd8d3904da64393f42e3997",
+    "evidence/native-empty-measurement-assumption-before.json": "72c1c18c72b4d11762c799833b4d31a8e7edd8dfc40f151786847802adf8cb88",
+    "evidence/native-empty-measurement-assumption-before.log": "4c83aff857bf27af6c2cabb81e4182b6bf8d3b90002096d86c8648517e4a39b1",
+    "evidence/public-final.log": "aa898d2649d26185290515f58377479bc77197d49cb8ce6a8f5b645fed54268d",
+    "evidence/public-pin-check.log": "32a97e85d7e363c2e74ad2831f2bb229395a52dfbd1409fea4fbbf59319fb171",
+    "evidence/runtime-boundary.log": "c52513c7fa44142505e218119b185d6434a84b984908fbb0f06549f7b87ba5f0",
+    "public-controls.cjs": "351caefc3a19660064c7ed8e302aa07ed53a533bca215e9dbbaeb093be125f16",
+    "public-receipt.json": "7a74f9cddbf1fbd4820b8940254ac33defa7cd30eb9e9867814bd4c6288f4d29",
+    "runtime-boundary.test.mjs": "4ad6d1ee2b5ff605c2b5a426f136951af5288af43c437a8accb9ea461c6b69c8",
+    "runtime-pins.json": "a35032ac40f3a9ef8bcd2760b62b9398f16a376c51058f3bac944b2889df02aa"
+  }
+}

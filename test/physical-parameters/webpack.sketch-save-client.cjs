@@ -1,0 +1,1 @@
+const path=require('path');module.exports={mode:'development',entry:path.resolve(__dirname,'sketch-save-client-entry.ts'),output:{path:'/tmp/codi-sketch-save-client',filename:'client.js'},resolve:{extensions:['.ts','.js']},module:{rules:[{test:/\.ts$/,loader:'babel-loader',options:{presets:[['@babel/preset-env',{targets:'defaults'}],'@babel/preset-typescript']}}]},devtool:false};

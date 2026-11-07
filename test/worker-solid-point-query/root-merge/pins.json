@@ -1,0 +1,12 @@
+{
+  "scope": "Root merged core/admission/lease checks, not full signed geometry qualification",
+  "focusedControls": 11,
+  "typescriptOutputBytes": 0,
+  "sources": {
+    "web/app/cad/craft/craftBundle.ts": "f059e4e3f21dae626a94ae54df31d1732f6489701c5cc87269eb91f55b89a14f",
+    "web/app/cad/craft/workerSolidPointCommands.ts": "136e841f3c6881db71d5b6b8ae4b059465c2bd70fdd938f0cd471b8dc90de985",
+    "modules/engine/solid/solidLedger.mjs": "dc8e26f2a1c2b625125e2239f43c09558427e2f84621384a32c5704ea7e55b50",
+    "modules/engine/solid/solidLedger.d.mts": "a751504739f8717ed1cbef54cdee18d2836e2a78f95f0aff16c9360b1fc0ad24"
+  },
+  "normalRuntimeSource": "72bcb6754c8a4d1569f54077faa21e23004311bf"
+}

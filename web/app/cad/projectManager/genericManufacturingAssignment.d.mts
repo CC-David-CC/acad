@@ -1,0 +1,7 @@
+export interface GenericManufacturingRegion {readonly id:string;readonly bodyId:string;readonly featureId:number;readonly materialId:string|null;readonly appearanceId:string|null;}
+export interface GenericManufacturingRequest {readonly revision:string;readonly materials:readonly Readonly<{id:string;name:string}>[];readonly appearances:readonly Readonly<{id:string;name:string;color:string}>[];readonly parts:readonly Readonly<{id:string;name:string;regions:readonly GenericManufacturingRegion[]}>[];}
+export interface GenericManufacturingTarget {readonly bodyId:string;readonly featureId:number;readonly operationType:string|null;readonly engineRevision:string|null;readonly canAssign:boolean;readonly reason:string|null;}
+export interface GenericManufacturingSummary {readonly partCount:number;readonly regionCount:number;readonly unknownRegionCount:number;readonly alignedPartsUnqualified:number;readonly publication:'unavailable';readonly authoredUndo:'pending-shared-journal';readonly manufacturingMesh:'unqualified';}
+export const GENERIC_MANUFACTURING_LIMITS:Readonly<{parts:32;regions:32;definitions:128;metadataBytes:262144;inspectionBytes:65536}>;
+export function captureGenericManufacturingRequest(input:unknown):GenericManufacturingRequest;
+export function prepareGenericManufacturingMetadata(input:{request:unknown;metadata:unknown;geometryRevision:string;targets:readonly GenericManufacturingTarget[]}):Readonly<{metadata:Readonly<any>;summary:GenericManufacturingSummary}>;

@@ -1,0 +1,5 @@
+const path=require('path'),configs=require('../worker-rectangle-adapter/webpack.config.cjs');
+configs[0].entry=path.join(__dirname,'entry.js');
+configs[0].resolve={...configs[0].resolve,alias:{...configs[0].resolve.alias,'engine/mount/oci-verified-mount.mjs$':path.join(__dirname,'test-oci-mount.mjs')}};
+for(const c of configs)c.output={...c.output,path:'/tmp/codi-four-corner-adapter-build'};
+module.exports=configs;

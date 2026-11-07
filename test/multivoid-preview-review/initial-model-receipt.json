@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "root": "/tmp/codi-cad-mechanical-candidate-20261105",
+  "sourceHashes": {
+    "modules/engine/solid/SolidKernel.ts": "8149c0cc96e7a8d7b1db4442627c50c2bb357f3bf301180fab1e6d6d34a27f2f",
+    "modules/engine/solid/solidLedger.mjs": "a81987783d39f3b1983bfa3354dc7edf3f524d2e5bed69c3cfd94dd88057b97b",
+    "modules/engine/solid/solidMetrics.mjs": "4dd74a8c2ec580656c63528320fe411fa9db5676a6afe90b863d78ee2fc3b2b3",
+    "web/app/cad/model/mworkerSolid.ts": "b4576d3d986c6b8fadcb461bac4b66909c2aa757bb8789a27f4cf0dbdf19465b"
+  },
+  "scope": "Real model/capture methods with controlled evidence records; no kernel/browser/ledger runtime proof",
+  "records": [
+    {
+      "id": "qualified-reason-zero-preview-private-custody",
+      "status": "pass"
+    },
+    {
+      "id": "legacy-Float64-rejected",
+      "status": "pass"
+    },
+    {
+      "id": "available-preview-rejected",
+      "status": "pass"
+    },
+    {
+      "id": "precision-reason-cannot-replace-orientation",
+      "status": "pass"
+    },
+    {
+      "id": "nonzero-unavailable-buffer-rejected",
+      "status": "pass"
+    },
+    {
+      "id": "single-material-reason-refused",
+      "status": "pass"
+    },
+    {
+      "id": "no-void-reason-refused",
+      "status": "pass"
+    },
+    {
+      "id": "OCC-reason-refused",
+      "status": "pass"
+    },
+    {
+      "id": "Manifold-reason-refused",
+      "status": "pass"
+    },
+    {
+      "id": "legacy-unclassified-known-two-material-one-void",
+      "status": "observed",
+      "resultKind": "unclassified-nonempty",
+      "materialRegions": 2,
+      "voidRegions": 1,
+      "previewAvailable": true,
+      "scope": "Captured-metrics/model source boundary only; current raw mount separately requires explicit classified evidence"
+    }
+  ]
+}

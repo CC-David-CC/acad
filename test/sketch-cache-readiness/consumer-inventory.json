@@ -1,0 +1,607 @@
+{
+  "version": 1,
+  "source": "22d8a04e34dd96e99df298dc7bde3d1e7dd6e5e8",
+  "scope": "Legacy current cache consumers. Direct derived reads and selected mutation entries are separate; allConstraints alone is an authored graph read, not proof of prepared cache. Dynamic tool/action dispatch is manually reviewed in README.",
+  "groups": {
+    "derived_cache_reads": [
+      {
+        "file": "web/app/sketcher/actions/concentricAdmission.js",
+        "line": 17,
+        "source": "if(system.isConflicting(constraint)&&!system.redundant.has(constraint))throw Error('The concentric constraint conflicts with existing constraints.');"
+      },
+      {
+        "file": "web/app/sketcher/actions/concentricAdmission.js",
+        "line": 21,
+        "source": "const wasRejected=before.conflicting.has(current)&&!before.redundant.has(current);"
+      },
+      {
+        "file": "web/app/sketcher/actions/concentricAdmission.js",
+        "line": 22,
+        "source": "if(!wasRejected&&sys.conflicting.has(current)&&!sys.redundant.has(current))throw Error('The concentric constraint would invalidate an existing constraint.');"
+      },
+      {
+        "file": "web/app/sketcher/actions/concentricOperation.js",
+        "line": 38,
+        "source": "return {objects:objects.map(o=>o.id),status:stage.algNumSystem.redundant.has(relation)?'redundant':'accepted'};"
+      },
+      {
+        "file": "web/app/sketcher/actions/concentricOperation.js",
+        "line": 54,
+        "source": "relations.push({objects:constraint.objects.map(o=>o.id),status:stage.algNumSystem.redundant.has(constraint)?'redundant':stage.algNumSystem.isConflicting(constraint)?'conflicting':'accepted'});"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 55,
+        "source": "(system.isConflicting(constraint) && !system.redundant.has(constraint))) {"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 62,
+        "source": "const wasRejected = previous.conflicting.has(constraint) && !previous.redundant.has(constraint);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 63,
+        "source": "const nowRejected = system.conflicting.has(constraint) && !system.redundant.has(constraint);"
+      },
+      {
+        "file": "web/app/sketcher/actions/diameterOperation.js",
+        "line": 35,
+        "source": "if(system.isConflicting(constraint)&&!system.redundant.has(constraint))throw Error('The diameter conflicts with existing constraints.');"
+      },
+      {
+        "file": "web/app/sketcher/actions/diameterOperation.js",
+        "line": 37,
+        "source": "if(!(prev.conflicting.has(existing)&&!prev.redundant.has(existing))&&sys.conflicting.has(existing)&&!sys.redundant.has(existing))throw Error('The diameter would invalidate an existing constraint.');}"
+      },
+      {
+        "file": "web/app/sketcher/actions/diameterOperation.js",
+        "line": 41,
+        "source": "return {objectId:object.id,status:constraint.stage.algNumSystem.redundant.has(constraint)?'redundant':'accepted'};"
+      },
+      {
+        "file": "web/app/sketcher/actions/editExistingConstraint.js",
+        "line": 28,
+        "source": "runSketchTransaction(viewer,{mutate(){for(const key of Object.keys(next))if(!definitions[key].readOnly)constraint.updateConstant(key,next[key]);},rollbackExtra:restore,validate(current){if(current.length!==originalStages.length||current.some((s,i)=>s!==originalStages[i]))throw Error('Sketch stages changed during editin"
+      },
+      {
+        "file": "web/app/sketcher/actions/fixEntityOperation.js",
+        "line": 34,
+        "source": "if(c.schema.id!==captured.schema||c.objects[0]!==object||(s.algNumSystem.isConflicting(c)&&!s.algNumSystem.redundant.has(c)))return false;"
+      },
+      {
+        "file": "web/app/sketcher/actions/fixEntityOperation.js",
+        "line": 44,
+        "source": "if(system.isConflicting(relation)&&!system.redundant.has(relation))throw Error('The entity fix conflicts with existing constraints.');"
+      },
+      {
+        "file": "web/app/sketcher/actions/fixEntityOperation.js",
+        "line": 47,
+        "source": "if(!(prior.conflicting.has(c)&&!prior.redundant.has(c))&&sys.conflicting.has(c)&&!sys.redundant.has(c))throw Error('The entity fix would invalidate an existing constraint.');}"
+      },
+      {
+        "file": "web/app/sketcher/actions/fixEntityOperation.js",
+        "line": 51,
+        "source": "return {objectId:object.id,type:object.TYPE,status:relation.stage.algNumSystem.redundant.has(relation)?'redundant':'accepted'};"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthMeasurementRoles.js",
+        "line": 17,
+        "source": "function verifyStage(stages,added){for(const stage of stages){const sys=stage.algNumSystem,before=sys.transactionBefore;for(const c of sys.allConstraints){const was=before.conflicting.has(c)&&!before.redundant.has(c),now=sys.conflicting.has(c)&&!sys.redundant.has(c);if((c===added||!was)&&now)throw Error('The change con"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthMeasurementRoles.js",
+        "line": 28,
+        "source": "if(system.impliedByLockedEndpoints(constraint,system.allConstraints.filter(c=>!system.conflicting.has(c)||system.redundant.has(c))))throw Error('The length is already determined by fixed endpoints.');"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthMeasurementRoles.js",
+        "line": 31,
+        "source": "const found=driving(pm,segment);if(found.length!==1||found[0].stage.algNumSystem.isConflicting(found[0]))fail();constraint=found[0];"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthMeasurementRoles.js",
+        "line": 61,
+        "source": "const sys=segment.stage.algNumSystem,accepted=sys.allConstraints.filter(c=>!sys.conflicting.has(c)||sys.redundant.has(c));"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthMeasurementRoles.js",
+        "line": 62,
+        "source": "const fixed=value>0&&sys.impliedByLockedEndpoints({schema:ConstraintDefinitions.SegmentLength,objects:[segment],constants:{length:String(value)}},accepted);"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthMeasurementRoles.js",
+        "line": 64,
+        "source": "if(constraints.length===1)items.push({role:'driving',segmentId:segment.id,length:value,unit:'millimeter',convertible:refs.length===0&&!constraints[0].stage.algNumSystem.isConflicting(constraints[0])&&Number.isFinite(constraints[0].annotations[0]?.offset)});"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthRelationAdmission.js",
+        "line": 20,
+        "source": "const wasRejected=previous.conflicting.has(current)&&!previous.redundant.has(current);"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthRelationAdmission.js",
+        "line": 21,
+        "source": "const nowRejected=system.conflicting.has(current)&&!system.redundant.has(current);"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthRelationOperation.js",
+        "line": 14,
+        "source": "return {objects:objects.map(o=>o.id),status:stage.algNumSystem.redundant.has(constraint)?'redundant':'accepted'};"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthRelationOperation.js",
+        "line": 36,
+        "source": "relations.push({role:'driving',objects:c.objects.map(o=>o.id),constants:{...c.constants},status:stage.algNumSystem.redundant.has(c)?'redundant':stage.algNumSystem.isConflicting(c)?'conflicting':'accepted'});"
+      },
+      {
+        "file": "web/app/sketcher/actions/lineRelationOperation.js",
+        "line": 40,
+        "source": "const system=s.algNumSystem;if(c.schema.id!==schema.id||(system.isConflicting(c)&&!system.redundant.has(c)))return false;"
+      },
+      {
+        "file": "web/app/sketcher/actions/lineRelationOperation.js",
+        "line": 50,
+        "source": "if(system.isConflicting(relation)&&!system.redundant.has(relation))throw Error('The relation conflicts with existing constraints.');"
+      },
+      {
+        "file": "web/app/sketcher/actions/lineRelationOperation.js",
+        "line": 53,
+        "source": "if(!(prev.conflicting.has(c)&&!prev.redundant.has(c))&&sys.conflicting.has(c)&&!sys.redundant.has(c))throw Error('The relation would invalidate an existing constraint.');}"
+      },
+      {
+        "file": "web/app/sketcher/actions/lineRelationOperation.js",
+        "line": 57,
+        "source": "return {objects:objects.map(o=>o.id),kind,status:relation.stage.algNumSystem.redundant.has(relation)?'redundant':'accepted'};"
+      },
+      {
+        "file": "web/app/sketcher/actions/signedDistanceOperation.js",
+        "line": 46,
+        "source": "if(system.isConflicting(relation)&&!system.redundant.has(relation))throw Error('The signed distance conflicts with existing constraints.');"
+      },
+      {
+        "file": "web/app/sketcher/actions/signedDistanceOperation.js",
+        "line": 49,
+        "source": "if(!(prev.conflicting.has(c)&&!prev.redundant.has(c))&&sys.conflicting.has(c)&&!sys.redundant.has(c))throw Error('The distance would invalidate an existing constraint.');}"
+      },
+      {
+        "file": "web/app/sketcher/actions/signedDistanceOperation.js",
+        "line": 53,
+        "source": "return {objects:objects.map(o=>o.id),axis,status:relation.stage.algNumSystem.redundant.has(relation)?'redundant':'accepted'};"
+      },
+      {
+        "file": "web/app/sketcher/components/ConstraintExplorer.jsx",
+        "line": 77,
+        "source": "const conflicting = c.stage.algNumSystem.conflicting.has(c);"
+      },
+      {
+        "file": "web/app/sketcher/components/ConstraintExplorer.jsx",
+        "line": 78,
+        "source": "const redundant = c.stage.algNumSystem.redundant.has(c);"
+      },
+      {
+        "file": "web/app/sketcher/components/ConstraintExplorer.jsx",
+        "line": 82,
+        "source": "return <div key={c.id} className={cx(ls.objectItem, conflicting&&ls.conflicting, redundant&&ls.redundant)}"
+      },
+      {
+        "file": "web/app/sketcher/components/ConstraintExplorer.less",
+        "line": 12,
+        "source": "&.conflicting {"
+      },
+      {
+        "file": "web/app/sketcher/components/ConstraintExplorer.less",
+        "line": 16,
+        "source": "&.redundant {"
+      },
+      {
+        "file": "web/app/sketcher/rigid/rigidGroupDomain.mjs",
+        "line": 37,
+        "source": "if (system.conflicting.has(constraint) && !system.redundant.has(constraint)) {"
+      },
+      {
+        "file": "web/app/sketcher/shapes/sketch-object.ts",
+        "line": 20,
+        "source": "fullyConstrained: boolean = false;"
+      },
+      {
+        "file": "web/app/sketcher/shapes/sketch-object.ts",
+        "line": 159,
+        "source": "} else if (this.fullyConstrained) {"
+      }
+    ],
+    "numeric_or_authored_mutation_entries": [
+      {
+        "file": "web/app/sketcher/actions/concentricOperation.js",
+        "line": 34,
+        "source": "mutate:()=>pm._add(relation),"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 49,
+        "source": "pm.startTransaction();"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 50,
+        "source": "for (const constraint of constraints) pm._add(constraint);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 51,
+        "source": "pm.finishTransaction(stages => {"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 70,
+        "source": "try { pm.finishTransaction(() => { throw error; }); } catch (_) { /* preserve original failure */ }"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 214,
+        "source": "pm.add(constraint);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 319,
+        "source": "pm.add(new AlgNumConstraint(ConstraintDefinitions.PointOnLine, [pt, line]));"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 347,
+        "source": "pm.add(new AlgNumConstraint(ConstraintDefinitions.PointOnCircle, [pt, circle]));"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 375,
+        "source": "pm.add(new AlgNumConstraint(ConstraintDefinitions.PointOnBezier, [pt, curve]));"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 401,
+        "source": "viewer.parametricManager.add(new AlgNumConstraint(ConstraintDefinitions.PointInMiddle, matchedObjects));"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 427,
+        "source": "viewer.parametricManager.add(new AlgNumConstraint(ConstraintDefinitions.Symmetry, matchedObjects));"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 452,
+        "source": "pm._add(firstConstr);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 454,
+        "source": "pm._add(new AlgNumConstraint(ConstraintDefinitions.Angle, [matchedObjects[i]], {...firstConstr.constants}));"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 481,
+        "source": "pm._add(constr);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 507,
+        "source": "pm._add(constr);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 536,
+        "source": "pm._add(firstConstr);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 538,
+        "source": "pm._add(new AlgNumConstraint(ConstraintDefinitions.Angle,"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 567,
+        "source": "pm._add(constr);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 594,
+        "source": "pm._add(constr);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 623,
+        "source": "pm._add(firstConstr);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 625,
+        "source": "pm._add(new AlgNumConstraint(ConstraintDefinitions.SegmentLength, [other], {...firstConstr.constants}));"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 655,
+        "source": "pm._add(firstConstr);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 657,
+        "source": "pm._add(new AlgNumConstraint(ConstraintDefinitions.RadiusLength, [other], {...firstConstr.constants}));"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 713,
+        "source": "pm.add(constr);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 745,
+        "source": "pm.add(constr);"
+      },
+      {
+        "file": "web/app/sketcher/actions/constraintActions.js",
+        "line": 774,
+        "source": "editConstraint(ctx, constr, () => viewer.parametricManager.add(constr));"
+      },
+      {
+        "file": "web/app/sketcher/actions/diameterOperation.js",
+        "line": 31,
+        "source": "mutate:()=>pm._add(constraint),"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthMeasurementRoles.js",
+        "line": 39,
+        "source": "if(role==='driving'){pm._add(constraint);pm.transactionRemovedAnnotations.push({annotation:dimension,layer,stage:dimension.stage});}"
+      },
+      {
+        "file": "web/app/sketcher/actions/lengthRelationOperation.js",
+        "line": 12,
+        "source": "runSketchTransaction(viewer,{mutate:()=>pm._add(constraint),validate});"
+      },
+      {
+        "file": "web/app/sketcher/actions/objectActions.js",
+        "line": 76,
+        "source": "ctx.viewer.parametricManager.constraintUpdated(obj.constraint);"
+      },
+      {
+        "file": "web/app/sketcher/actions/operationActions.js",
+        "line": 22,
+        "source": "viewer.parametricManager.addGenerator(generator);"
+      },
+      {
+        "file": "web/app/sketcher/actions/signedDistanceOperation.js",
+        "line": 42,
+        "source": "mutate:()=>pm._add(relation),"
+      },
+      {
+        "file": "web/app/sketcher/actions/sketchTransaction.js",
+        "line": 15,
+        "source": "transactionAttempted=true;pm.startTransaction();mutate(pm);pm.finishTransaction(validate||null,false);"
+      },
+      {
+        "file": "web/app/sketcher/actions/sketchTransaction.js",
+        "line": 18,
+        "source": "if(transactionAttempted&&pm.inTransaction){try{pm.finishTransaction(()=>{throw error},false)}catch(_){/* An expected validation throw may follow a successful rollback. */}}"
+      },
+      {
+        "file": "web/app/sketcher/components/ConstraintExplorer.jsx",
+        "line": 55,
+        "source": "viewer.parametricManager.constraintUpdated(c);"
+      },
+      {
+        "file": "web/app/sketcher/components/ConstraintExplorer.jsx",
+        "line": 61,
+        "source": "try { viewer.parametricManager.remove(constr); viewer.refresh(); }"
+      },
+      {
+        "file": "web/app/sketcher/components/ConstraintExplorer.jsx",
+        "line": 105,
+        "source": "viewer.parametricManager.removeGenerator(c);"
+      },
+      {
+        "file": "web/app/sketcher/components/SketcherDimensionsView.jsx",
+        "line": 23,
+        "source": "try { viewer.parametricManager.applyConstantDefinition(draft); setError(''); }"
+      },
+      {
+        "file": "web/app/sketcher/components/StageControl.jsx",
+        "line": 16,
+        "source": "const createStage = () => viewer.parametricManager.newStage();"
+      },
+      {
+        "file": "web/app/sketcher/io.ts",
+        "line": 127,
+        "source": "this.viewer.parametricManager.startTransaction();"
+      },
+      {
+        "file": "web/app/sketcher/io.ts",
+        "line": 278,
+        "source": "this.viewer.parametricManager.finishTransaction();"
+      },
+      {
+        "file": "web/app/sketcher/tools/b-spline.js",
+        "line": 77,
+        "source": "this.viewer.parametricManager.finishTransaction();"
+      },
+      {
+        "file": "web/app/sketcher/tools/bezier-curve.js",
+        "line": 43,
+        "source": "this.viewer.parametricManager.startTransaction();"
+      },
+      {
+        "file": "web/app/sketcher/tools/bezier-curve.js",
+        "line": 48,
+        "source": "this.viewer.parametricManager.add(smoothingConstr);"
+      },
+      {
+        "file": "web/app/sketcher/tools/bezier-curve.js",
+        "line": 51,
+        "source": "this.viewer.parametricManager.finishTransaction();"
+      },
+      {
+        "file": "web/app/sketcher/tools/circle.js",
+        "line": 34,
+        "source": "this.viewer.parametricManager.solve(rough);"
+      },
+      {
+        "file": "web/app/sketcher/tools/circle.js",
+        "line": 53,
+        "source": "this.viewer.parametricManager.prepare([this.circle]);"
+      },
+      {
+        "file": "web/app/sketcher/tools/drag.js",
+        "line": 31,
+        "source": "// this.viewer.parametricManager.setConstantsFromGeometry(this.obj);"
+      },
+      {
+        "file": "web/app/sketcher/tools/drag.js",
+        "line": 33,
+        "source": "// this.viewer.parametricManager.prepare();"
+      },
+      {
+        "file": "web/app/sketcher/tools/drag.js",
+        "line": 34,
+        "source": "this.viewer.parametricManager.solve(true);"
+      },
+      {
+        "file": "web/app/sketcher/tools/drag.js",
+        "line": 49,
+        "source": "this.viewer.parametricManager.prepare([this.obj]);"
+      },
+      {
+        "file": "web/app/sketcher/tools/drag.js",
+        "line": 60,
+        "source": "this.viewer.parametricManager.solve(false);"
+      },
+      {
+        "file": "web/app/sketcher/tools/ellipse-edit.js",
+        "line": 64,
+        "source": "this.viewer.parametricManager.prepare([{"
+      },
+      {
+        "file": "web/app/sketcher/tools/ellipse-edit.js",
+        "line": 70,
+        "source": "this.viewer.parametricManager.solve(rough);"
+      },
+      {
+        "file": "web/app/sketcher/tools/fillet.js",
+        "line": 72,
+        "source": "pm.add(new AlgNumConstraint(ConstraintDefinitions.Fillet, [point1.parent, point2.parent, arc], {"
+      },
+      {
+        "file": "web/app/sketcher/tools/fillet.js",
+        "line": 77,
+        "source": "pm.add(new AlgNumConstraint(ConstraintDefinitions.PCoincident, [point1, arc.a]));"
+      },
+      {
+        "file": "web/app/sketcher/tools/fillet.js",
+        "line": 78,
+        "source": "pm.add(new AlgNumConstraint(ConstraintDefinitions.PCoincident, [point2, arc.b]));"
+      },
+      {
+        "file": "web/app/sketcher/tools/fillet.js",
+        "line": 88,
+        "source": "//pm._add(new Constraints.LockConvex(arc.c, arc.a, otherEnd(point1)));"
+      },
+      {
+        "file": "web/app/sketcher/tools/fillet.js",
+        "line": 89,
+        "source": "//pm._add(new Constraints.LockConvex(otherEnd(point2), arc.b, arc.c));"
+      },
+      {
+        "file": "web/app/sketcher/tools/fillet.js",
+        "line": 91,
+        "source": "// var solver = pm.solve();"
+      },
+      {
+        "file": "web/app/sketcher/tools/fillet.js",
+        "line": 92,
+        "source": "//  var solver = pm.solve([point1._x, point1._y, point2._x, point2._y]);"
+      },
+      {
+        "file": "web/app/sketcher/tools/fillet.js",
+        "line": 116,
+        "source": "pm.remove(coi);"
+      },
+      {
+        "file": "web/app/sketcher/tools/offset.js",
+        "line": 49,
+        "source": "pm._add(new Constraints.Parallel(origEdge, edge));"
+      },
+      {
+        "file": "web/app/sketcher/tools/offset.js",
+        "line": 50,
+        "source": "pm._add(new Constraints.P2LDistanceSigned(origEdge.a, inverse?edge.b:edge.a, inverse?edge.a:edge.b, offsetConstant));"
+      },
+      {
+        "file": "web/app/sketcher/tools/offset.js",
+        "line": 54,
+        "source": "pm._add(new Constraints.RadiusOffset(inverse?origEdge:edge, inverse?edge:origEdge, offsetConstant));"
+      },
+      {
+        "file": "web/app/sketcher/tools/offset.js",
+        "line": 70,
+        "source": "pm.solve(undefined, undefined, loopEdges);"
+      },
+      {
+        "file": "web/app/sketcher/tools/pan.js",
+        "line": 60,
+        "source": "this.viewer.parametricManager.constraintUpdated(obj.constraint);"
+      },
+      {
+        "file": "web/app/sketcher/tools/rectangle.js",
+        "line": 94,
+        "source": "pm.startTransaction();"
+      },
+      {
+        "file": "web/app/sketcher/tools/rectangle.js",
+        "line": 110,
+        "source": "pm.addAll(constraints);"
+      },
+      {
+        "file": "web/app/sketcher/tools/rectangle.js",
+        "line": 111,
+        "source": "pm.finishTransaction();"
+      },
+      {
+        "file": "web/app/sketcher/viewer2d.ts",
+        "line": 196,
+        "source": "this.parametricManager.removeObjects(objects);"
+      }
+    ]
+  },
+  "files": {
+    "web/app/sketcher/actions/concentricAdmission.js": "85cf2ae2ccce025af37d873ddd1591f48d07ca338cf744e420d3a619b7a03659",
+    "web/app/sketcher/actions/concentricOperation.js": "dfb2a8177d9f5d4939e2d2c469f84d8399760d819671bde268d8b33060199306",
+    "web/app/sketcher/actions/constraintActions.js": "c2eb6706e4952dd81d5a690af70a9cf65174baffca57f672b8edd0ec2377f238",
+    "web/app/sketcher/actions/diameterOperation.js": "703b4af644e669ee89123234224284357117649b5bcb54c01d2a49f62379c56e",
+    "web/app/sketcher/actions/editExistingConstraint.js": "92ad0352227adf2d335521fc04b1a2a57675888207ae2ed1eaca9eac7189d414",
+    "web/app/sketcher/actions/fixEntityOperation.js": "e65738fa202361d9301136aab5a70e24c1d6faaa52544205cab4b5e40542ae61",
+    "web/app/sketcher/actions/lengthMeasurementRoles.js": "9ddb9e4ccaad3151a9635d6b70183843a918269acf9363590e804fa911af42c7",
+    "web/app/sketcher/actions/lengthRelationAdmission.js": "e03ae01385e1a4559667c22f2101f43e838c18a824d4dc988ff43bf91386f68b",
+    "web/app/sketcher/actions/lengthRelationOperation.js": "eae239c531995a0d06ff2a194006cbd66df77342ffa381af4da2b7d3580d3a1a",
+    "web/app/sketcher/actions/lineRelationOperation.js": "46248a010bd5f2d760d076f395647ae740929964171632530f9c6d2cb7c00a85",
+    "web/app/sketcher/actions/objectActions.js": "e7065fbaa4562e3f0195d9e3ec4e0d85516fa1f67d960c855612245307e76331",
+    "web/app/sketcher/actions/operationActions.js": "59c8035e9d8bbc31253c40560cfccc9de13ef8b12033ef565b0a4185a7b9d51e",
+    "web/app/sketcher/actions/signedDistanceOperation.js": "cc1dd97b94b45dc07756ec8dbc897269690eefa9b7c44400a2cf515b789ec789",
+    "web/app/sketcher/actions/sketchTransaction.js": "b7a153f95c56b5a8bcac4c87602d0389cd34c5e254495cd8f6f6f62347d63a84",
+    "web/app/sketcher/components/ConstraintExplorer.jsx": "ea686d94c419a0b93542937cc078fad025b771d1be2a6d2d509b76ed4a20ced1",
+    "web/app/sketcher/components/ConstraintExplorer.less": "6afcd1afec7ba033e666e451e19bc570d72b69e444d43294219d0aaac66e90e1",
+    "web/app/sketcher/components/SketcherDimensionsView.jsx": "ac4f021995c30fc2aa93f0a057e3d55138b9aa750d78d4b2f51db5f4cf54119e",
+    "web/app/sketcher/components/StageControl.jsx": "0e6ae90a9e980951e44a535fc6a8a9f88d236b45db71fc0375f3029cd1e1e869",
+    "web/app/sketcher/constr/AlgNumSystem.ts": "f9cf7adb93cec86ed1ee0fcb8d7fdb5249bceac9a65f60ea7c096e047ae7a13d",
+    "web/app/sketcher/io.ts": "34df4c3f78e9a3cb1d1c12667f91de6df4f542db3db2e9999c3210559ffc8349",
+    "web/app/sketcher/parametric.ts": "abf4b240bfc32e512fe6b1d0ffb08ffe55cc28981b87ef6e575537cff9917fdf",
+    "web/app/sketcher/rigid/rigidGroupDomain.mjs": "c58ddb2a919a95f363b8f6f4e0bedc7124e4bd6b17555168ee3d123525c21d0e",
+    "web/app/sketcher/shapes/sketch-object.ts": "6dd8ede48320baa9db43ae97d477dbc61df3b17f3d024f4dff92fe544773bf72",
+    "web/app/sketcher/tools/b-spline.js": "832c41accc7da335ad7b90d05b0b7a81e49a57d057e2e9682274b3ce8a920bb0",
+    "web/app/sketcher/tools/bezier-curve.js": "928407b9caeb8babdbba04faf11a01c128bcc5e1fbeb35ca6ff6128d5c0b9a31",
+    "web/app/sketcher/tools/circle.js": "98fd512e874858af2678fd7547cefc5997474be7410d932cfae3f1a6cda41d0e",
+    "web/app/sketcher/tools/drag.js": "3d8851bc2dfbacdd58e3b72403fd9721556d7eb00426aa699dbb08f28cd0a0a8",
+    "web/app/sketcher/tools/ellipse-edit.js": "45090e67fb87ceb856b26cd0a5d3464c359280618afc33f79d02fcdcfa077162",
+    "web/app/sketcher/tools/fillet.js": "f1a718bb773a52faafa61e167b1b4d7d0520e817bd0f231398fb3572415a71a3",
+    "web/app/sketcher/tools/manager.js": "fa7c8857632d39a70d47bd559a3d40e46e256c1928abda4a50837de456a4672c",
+    "web/app/sketcher/tools/offset.js": "7fa1bee475abc7f9c6d8875724a64f05d486725dc381d3f3c8679dac1c7bddb9",
+    "web/app/sketcher/tools/pan.js": "fbc19bde0897f5f7d6474400c82ab5ded24576cbae5bb0ad22e0ed4752660282",
+    "web/app/sketcher/tools/rectangle.js": "50272c814535dd502654b82be063ed68d738a14fb4d5b18b403e5dbdc9a56837",
+    "web/app/sketcher/viewer2d.ts": "a6f4354a0cfd63f49c5e1ed2c6e649900cab3acd6850e14b342f47c8563604cf"
+  }
+}

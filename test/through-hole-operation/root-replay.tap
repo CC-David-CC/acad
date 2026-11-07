@@ -1,0 +1,184 @@
+TAP version 13
+# Subtest: source-bound holes inherit one genuine origin, fixture 0
+ok 1 - source-bound holes inherit one genuine origin, fixture 0
+  ---
+  duration_ms: 9.548531
+  type: 'test'
+  ...
+# Subtest: source-bound holes inherit one genuine origin, fixture 1
+ok 2 - source-bound holes inherit one genuine origin, fixture 1
+  ---
+  duration_ms: 5.435562
+  type: 'test'
+  ...
+# Subtest: source-bound holes inherit one genuine origin, fixture 2
+ok 3 - source-bound holes inherit one genuine origin, fixture 2
+  ---
+  duration_ms: 2.629185
+  type: 'test'
+  ...
+# Subtest: rejects stale source feature before native dispatch
+ok 4 - rejects stale source feature before native dispatch
+  ---
+  duration_ms: 1.504144
+  type: 'test'
+  ...
+# Subtest: rejects stale source face before native dispatch
+ok 5 - rejects stale source face before native dispatch
+  ---
+  duration_ms: 1.06723
+  type: 'test'
+  ...
+# Subtest: rejects stale source region before native dispatch
+ok 6 - rejects stale source region before native dispatch
+  ---
+  duration_ms: 0.936449
+  type: 'test'
+  ...
+# Subtest: rejects stale producer before native dispatch
+ok 7 - rejects stale producer before native dispatch
+  ---
+  duration_ms: 0.903468
+  type: 'test'
+  ...
+# Subtest: missing genuine profile binding cannot authorize a through-hole source
+ok 8 - missing genuine profile binding cannot authorize a through-hole source
+  ---
+  duration_ms: 0.685576
+  type: 'test'
+  ...
+# Subtest: changed source plane refuses dispatch and invalidates retained publication
+ok 9 - changed source plane refuses dispatch and invalidates retained publication
+  ---
+  duration_ms: 3.275361
+  type: 'test'
+  ...
+# Subtest: consumed original output remains a private source, never a reused live operand
+ok 10 - consumed original output remains a private source, never a reused live operand
+  ---
+  duration_ms: 2.404462
+  type: 'test'
+  ...
+# Subtest: bad missing origin rejects before projection
+ok 11 - bad missing origin rejects before projection
+  ---
+  duration_ms: 1.193531
+  type: 'test'
+  ...
+# Subtest: bad invented tool origin rejects before projection
+ok 12 - bad invented tool origin rejects before projection
+  ---
+  duration_ms: 0.728597
+  type: 'test'
+  ...
+# Subtest: schema exposes exactly 12 required authored fields and two optional numeric offsets
+ok 13 - schema exposes exactly 12 required authored fields and two optional numeric offsets
+  ---
+  duration_ms: 5.836115
+  type: 'test'
+  ...
+# Subtest: center/corners route exact raw intent, retain source handle, and publish one measured model
+ok 14 - center/corners route exact raw intent, retain source handle, and publish one measured model
+  ---
+  duration_ms: 3.446893
+  type: 'test'
+  ...
+# Subtest: invalid extra fields, wrong types and undefined corner offsets refuse before dispatch
+ok 15 - invalid extra fields, wrong types and undefined corner offsets refuse before dispatch
+  ---
+  duration_ms: 5.21798
+  type: 'test'
+  ...
+# Subtest: raw capture rejects accessors without invoking them; materialized values cannot replace raw
+ok 16 - raw capture rejects accessors without invoking them; materialized values cannot replace raw
+  ---
+  duration_ms: 1.781267
+  type: 'test'
+  ...
+# Subtest: initial independent-plane predicate rejects matching plain objects and stale ownership
+ok 17 - initial independent-plane predicate rejects matching plain objects and stale ownership
+  ---
+  duration_ms: 6.455651
+  type: 'test'
+  ...
+# Subtest: wrong source origin/face/region and wrong producer refuse without consuming candidate input
+ok 18 - wrong source origin/face/region and wrong producer refuse without consuming candidate input
+  ---
+  duration_ms: 2.165821
+  type: 'test'
+  ...
+# Subtest: all await phases honor document cancellation and close mount exactly once
+ok 19 - all await phases honor document cancellation and close mount exactly once
+  ---
+  duration_ms: 3.080389
+  type: 'test'
+  ...
+# Subtest: pending result rechecks services, storage, history, expressions, owner and plane identity
+ok 20 - pending result rechecks services, storage, history, expressions, owner and plane identity
+  ---
+  duration_ms: 9.037155
+  type: 'test'
+  ...
+# Subtest: registered owner publication checks remain live after operation return
+ok 21 - registered owner publication checks remain live after operation return
+  ---
+  duration_ms: 2.839327
+  type: 'test'
+  ...
+# Subtest: projection placement changes invalidate registered publication
+ok 22 - projection placement changes invalidate registered publication
+  ---
+  duration_ms: 0.910769
+  type: 'test'
+  ...
+# Subtest: unavailable selection remains explicit and cannot authorize a later dependent hole
+ok 23 - unavailable selection remains explicit and cannot authorize a later dependent hole
+  ---
+  duration_ms: 0.97135
+  type: 'test'
+  ...
+# Subtest: invented tool origin cannot publish as an authored sketch context
+ok 24 - invented tool origin cannot publish as an authored sketch context
+  ---
+  duration_ms: 0.871638
+  type: 'test'
+  ...
+# Subtest: unmeasured or invalid native result cannot become a hole projection
+ok 25 - unmeasured or invalid native result cannot become a hole projection
+  ---
+  duration_ms: 1.584035
+  type: 'test'
+  ...
+# Subtest: pending operation refuses the same face after its plane predicate becomes false
+ok 26 - pending operation refuses the same face after its plane predicate becomes false
+  ---
+  duration_ms: 7.018327
+  type: 'test'
+  ...
+# Subtest: registered publication refuses the same face after its plane predicate becomes false
+ok 27 - registered publication refuses the same face after its plane predicate becomes false
+  ---
+  duration_ms: 2.182741
+  type: 'test'
+  ...
+# Subtest: profile source bindings reject malformed own-data identity before creating a mount
+ok 28 - profile source bindings reject malformed own-data identity before creating a mount
+  ---
+  duration_ms: 8.637422
+  type: 'test'
+  ...
+# Subtest: different candidate owner cannot reuse another candidate ledger source or target
+ok 29 - different candidate owner cannot reuse another candidate ledger source or target
+  ---
+  duration_ms: 1.878648
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 432.608727

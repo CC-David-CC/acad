@@ -1,0 +1,11 @@
+// Actual production semantic Worker, hand-authored component source bytes only.
+// No sketch-solve or native-success claim is attached to these protocol fixtures.
+import './platform.mjs';import test from 'node:test';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+import {sweepSourceFixture} from '../selected-profile-sweep/source-fixture.mjs';
+import {installWindow,lifecycle,drain} from './platform.mjs';installWindow();
+async function inspect(sweep){const worker=new Worker('/static/semantic.js');try{return await new Promise((yes,no)=>{worker.onmessage=e=>yes(e.data);worker.onerror=no;worker.postMessage({jobId:'actual-worker-discovery',kind:'inspect-sweep',sweep});});}finally{worker.terminate();}}
+async function fixture(){const {profile,path}=await sweepSourceFixture();delete profile.regionId;delete path.pathCurves;return{profile,path};}
+test('production semantic Worker returns actual membership rows for component sources',async()=>{const input=await fixture(),r=await inspect(input);assert.equal(r.ok,true,JSON.stringify(r));assert.equal(r.value.profileBinding.sketchDigest,input.profile.sketchDigest);assert.equal(r.value.pathBinding.sketchDigest,input.path.sketchDigest);assert.deepEqual(r.value.regions[0].descriptor.outerCurveIds,['circle']);assert.deepEqual(r.value.pathCurves[0].b,[0,10]);});
+test('production semantic Worker refuses whole oversized UTF-8 response with typed resource limit',async()=>{const f=await fixture(),s=JSON.parse(f.path.sketchJSON);s.objects=Array.from({length:240},(_,i)=>({id:'長'.repeat(40)+i,type:'Circle',role:null,stage:0,data:{c:{x:i,y:0},r:1}}));f.path.sketchJSON=JSON.stringify(s);f.path.sketchDigest=createHash('sha256').update(f.path.sketchJSON).digest('hex');assert(new TextEncoder().encode(f.path.sketchJSON).byteLength<65536);const r=await inspect(f);assert.equal(r.ok,false);assert.equal(r.code,'RESOURCE_LIMIT');assert(!Object.hasOwn(r,'value'));});
+test('production semantic Worker refuses inconsistent two-source capture revision',async()=>{const f=await fixture();f.path.revision='other-source-state';const r=await inspect(f);assert.equal(r.ok,false);assert.equal(r.code,'STALE_SOURCE');});
+test.after(async()=>{await drain();assert.equal(lifecycle.started,lifecycle.terminated);});

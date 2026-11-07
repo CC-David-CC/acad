@@ -1,0 +1,27 @@
+export async function exerciseRevolve({pins,cases,refusals}){
+ const {createRevolveProfileOccMount}=await import(pins.constructorPath),Original=window.Worker,workers=[];let hold=false,heldResolve,deliver;
+ window.Worker=class extends Original{constructor(...a){super(...a);this.record={url:String(a[0]),posts:[],terminated:false};workers.push(this.record);let listener;Object.defineProperty(this,'onmessage',{get:()=>listener,set:v=>listener=v});this.addEventListener('message',event=>{if(hold&&this.record.posts.at(-1)==='selected-profile-revolve'&&event.data.kind==='result'){hold=false;deliver=()=>listener?.call(this,event);heldResolve(event.data);}else listener?.call(this,event);});}postMessage(m,...a){this.record.posts.push(m.kind);return super.postMessage(m,...a);}terminate(){this.record.terminated=true;return super.terminate();}};
+ const start=async()=>{const m=createRevolveProfileOccMount(pins.mountOptions),record=workers.at(-1);await m.ready;return{m,record};},err=e=>({code:e?.code,message:e?.message}),snapshot=async(m,h)=>({topology:await m.execute({op:'solid.topology.read',version:1,handle:h}),mesh:await m.readSolidMesh({op:'solid.mesh.read',version:1,handle:h})});
+ const compact=s=>({topology:s.topology,mesh:{evidence:s.mesh.evidence,triangleCount:s.mesh.triangleCount,coordinates:Array.from(new Float64Array(s.mesh.buffer))}}),out={rows:[],refusals:[],workers};
+ try{
+  const {m,record}=await start();try{
+   out.descriptor=m.descriptor;const base=await m.execute({op:'solid.box.create',version:1,unit:'millimeter',origin:[50,50,50],dimensions:[2,3,4]}),before=compact(await snapshot(m,base.handle));out.retained={base,before};
+   for(const c of cases){const raw=JSON.stringify(c.request),result=await m.execute(c.request),state=compact(await snapshot(m,result.handle)),points=[];for(const [point,expected]of c.points)points.push({point,expected,actual:await m.execute({op:'solid.point.classify',version:1,unit:'millimeter',handle:result.handle,point})});
+    const selection=await m.execute({op:'solid.selections.read',version:1,handle:result.handle,featureId:100});await m.dispose({op:'solid.dispose',version:1,handle:result.handle});let stale;try{await m.execute({op:'solid.topology.read',version:1,handle:result.handle});}catch(e){stale=err(e);}out.rows.push({name:c.name,result,state,points,selection,stale,sourcePreserved:raw===JSON.stringify(c.request),retainedAfter:compact(await snapshot(m,base.handle))});
+   }
+   for(const c of refusals){const raw=JSON.stringify(c.request),posts=record.posts.length;let outcome;try{await m.execute(c.request);}catch(e){outcome=err(e);}out.refusals.push({name:c.name,outcome,posts:record.posts.length-posts,sourcePreserved:raw===JSON.stringify(c.request),retainedAfter:compact(await snapshot(m,base.handle))});}
+   const bad={...cases[0].request,extra:true};let malformed;try{await m.execute(bad);}catch(e){malformed=err(e);}out.malformed=malformed;
+   // Mutate caller input immediately after invocation, while digest/preparation
+   // awaits; immutable capture must retain the original face/axis/angle.
+   const caller=structuredClone(cases[0].request),raw=JSON.stringify(caller),p=m.execute(caller);caller.angleRadians=-Math.PI/2;caller.region.outer[0].a[0]=123;caller.axis.b[1]=77;const captured=await p;out.callerMutation={original:JSON.parse(raw),result:captured};await m.dispose({op:'solid.dispose',version:1,handle:captured.handle});await m.dispose({op:'solid.dispose',version:1,handle:base.handle});
+  }finally{m.close();}
+  {const {m,record}=await start();try{const controller=new AbortController(),genuine=new Promise(r=>heldResolve=r);hold=true;const pending=m.execute(cases[0].request,{signal:controller.signal}).then(value=>({unexpected:value}),err);const reply=await genuine;controller.abort();const outcome=await pending;deliver();let retry;try{await m.execute(cases[0].request);}catch(e){retry=err(e);}out.cancel={genuine:reply,outcome,retry,terminated:record.terminated};}finally{hold=false;m.close();}}
+  {const {m,record}=await start();try{const results=[];for(let i=0;i<32;i++){const r=await m.execute(cases[0].request);results.push(r.evidence);await m.dispose({op:'solid.dispose',version:1,handle:r.handle});}const posts=record.posts.length;let outcome;try{await m.execute(cases[0].request);}catch(e){outcome=err(e);}out.budget={results,outcome,posts:record.posts.length-posts};}finally{m.close();}}
+  {const {m,record}=await start();try{
+    const base=await m.execute({op:'solid.box.create',version:1,unit:'millimeter',origin:[50,50,50],dimensions:[2,3,4]}),before=compact(await snapshot(m,base.handle)),large=cases.find(c=>c.name==='annular-torus').request,accepted=[];let outcome;
+    for(let i=0;i<31;i++){try{const r=await m.execute(large);accepted.push(r.evidence);await m.dispose({op:'solid.dispose',version:1,handle:r.handle});}catch(e){outcome=err(e);break;}}
+    const after=compact(await snapshot(m,base.handle)),healthy=await m.execute(cases[0].request);out.aggregateBudget={accepted,outcome,before,after,healthy,posts:record.posts};await m.dispose({op:'solid.dispose',version:1,handle:healthy.handle});await m.dispose({op:'solid.dispose',version:1,handle:base.handle});
+   }finally{m.close();}}
+  out.csp=window.componentCsp;return out;
+ }finally{window.Worker=Original;}
+}

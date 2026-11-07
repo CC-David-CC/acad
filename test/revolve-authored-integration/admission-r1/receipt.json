@@ -1,0 +1,18 @@
+{
+  "status": "SOURCE_FIX_PENDING_REAL_APP_RERUN",
+  "product": "12d07e710f2b9f2651540d0a901902097b74e667",
+  "beforeRuntimeSource": "3d111e99d45905223b65070712491e35535ef7ec",
+  "actualBeforeDesktopEvidence": "59de87f3c",
+  "unchangedSignedRegression": "f42254e0d",
+  "beforeCraftSHA256": "91e6dc6d24f16da17deff99dee1fbba37effcd0ddf82854dd6f52d689315d500",
+  "afterCraftSHA256": "fb3e9ddc55ede5150bd9f9abd96568dad548d3a5eced0e06e8542779fd5db205",
+  "beforeFileByteIdenticalToIntegratedRuntimeSource": true,
+  "typescriptExit": 0,
+  "pureTests": 61,
+  "productionDelta": "two exact admission lists only",
+  "realAppAfter": "not run yet",
+  "limits": [
+    "No native Save passed in failed R1.",
+    "No fake native or extracted/copied Craft success test. Genuine unchanged signed driver is required next."
+  ]
+}

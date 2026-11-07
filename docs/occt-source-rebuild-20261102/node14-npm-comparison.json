@@ -1,0 +1,39 @@
+{
+  "published_sha256": "fee4624786bb114de1d381340f05f0cdf47e6700b9fd62ef8a5dace82c8fda77",
+  "candidate_sha256": "a2b2f7daf6a4eb98b975f8aec136f6cbaf2720295ea32e71edb13ff4c5ceaecb",
+  "published_size": 34918350,
+  "candidate_size": 34918350,
+  "changed_positions_count": 6,
+  "changed_positions_first_64": [
+    {
+      "offset": 13624268,
+      "published": 92,
+      "candidate": 91
+    },
+    {
+      "offset": 13630458,
+      "published": 85,
+      "candidate": 84
+    },
+    {
+      "offset": 13630581,
+      "published": 81,
+      "candidate": 83
+    },
+    {
+      "offset": 13650694,
+      "published": 18,
+      "candidate": 11
+    },
+    {
+      "offset": 13650701,
+      "published": 11,
+      "candidate": 16
+    },
+    {
+      "offset": 13650708,
+      "published": 16,
+      "candidate": 18
+    }
+  ]
+}

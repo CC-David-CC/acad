@@ -1,0 +1,1 @@
+const path=require('path');const c=require('../../build/webpack.project-validation-worker.cjs');c.resolve.symlinks=false;c.devtool=false;c.output.path='/tmp/codi-physical-project-worker/static';module.exports=c;

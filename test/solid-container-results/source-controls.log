@@ -1,0 +1,23 @@
+✔ public inspection returns immutable local metrics with actual placement and refuses reentry (1138.980003ms)
+✔ owner-bound operands are private and same exact current model (5.170016ms)
+✔ wrong engine and stale operands fail before dispatch (0.93165ms)
+✔ superseded worker completion closes its candidate and does not return a model (4.789192ms)
+✔ factory provenance validation fails closed and releases the owned mount (0.588676ms)
+✔ mismatched persisted engine build refuses before kernel dispatch (0.693947ms)
+✔ bound kernel evidence is detached and preserves engine-specific volume semantics (1.194672ms)
+✔ invalid, empty or unbound measurement evidence is refused (0.385774ms)
+✔ complete material containers preserve counts without invented body IDs (1.146992ms)
+✔ undefined nonmanifold volume is explicitly unavailable, never numeric (0.238743ms)
+✔ OCC solids and Manifold mesh components are not material regions (4.116394ms)
+✔ empty results preserve each provider measurement/validity vocabulary (0.380844ms)
+✔ measurement alone never reclassifies native geometry and false counts refuse (0.459105ms)
+{"scope":"Source-controlled real model/ledger/inspection with controlled provider records; not actual kernel/browser qualification","emptyIsMetadata":true,"emptyOperandRetainsPrivateHandle":true,"wholeCompoundOutput":true,"modernAbove512CustodyTransferred":true,"unavailableDisplayRetainsNonempty":true}
+✔ real common model and ledger preserve empty/compound/verified projection boundaries (1071.604413ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1229.61808

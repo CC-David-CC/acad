@@ -1,0 +1,30 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {AlgNumSubSystem} from '../../web/app/sketcher/constr/AlgNumSystem.ts';
+import {ConstraintDefinitions as d} from '../../web/app/sketcher/constr/ANConstraints.ts';
+
+test('locked endpoint proof requires the same two valid fixed points and positive t branch',()=>{
+ const sys=new AlgNumSubSystem(()=>100,v=>v,{objects:[]});
+ const a={x:0,y:0}, b={x:100,y:0}, segment={a,b,t:100};
+ const lock=(p,x,y)=>({schema:d.LockPoint,objects:[p],constants:{x,y}});
+ const la=lock(a,'0','0'),lb=lock(b,'100','0');
+ const polar={schema:d.Polar,objects:[segment,a,b]};
+ const length={schema:d.SegmentLength,objects:[segment],constants:{length:'100'}};
+ assert.equal(sys.impliedByLockedEndpoints(length,[polar,la,lb]),true);
+ assert.equal(sys.impliedByLockedEndpoints(length,[la,lb]),false,'polar relationship must be admitted');
+ assert.equal(sys.impliedByLockedEndpoints(length,[polar,la]),false);
+ assert.equal(sys.impliedByLockedEndpoints(length,[polar,la,lock({x:100,y:0},'100','0')]),false);
+ assert.equal(sys.impliedByLockedEndpoints({...length,constants:{length:'100.00000001'}},[polar,la,lb]),false);
+ assert.equal(sys.impliedByLockedEndpoints(length,[polar,la,lock(b,'100.00000001','0')]),false);
+ const bigA={x:1e16,y:0}, bigB={x:1e16+100,y:0}, bigSegment={a:bigA,b:bigB,t:100};
+ assert.equal(sys.impliedByLockedEndpoints({...length,objects:[bigSegment]},[{schema:d.Polar,objects:[bigSegment,bigA,bigB]},lock(bigA,1e16+2,0),lock(bigB,1e16+100,0)]),false,'large coordinates must not widen equality tolerance');
+ assert.equal(sys.impliedByLockedEndpoints(length,[polar,la,lock(b,'100',null)]),false);
+ assert.equal(sys.impliedByLockedEndpoints(length,[polar,la,lock(b,'100','')]),false);
+ assert.equal(sys.impliedByLockedEndpoints(length,[polar,la,lb,lock(b,'90','0')]),false);
+ assert.equal(sys.impliedByLockedEndpoints({...length,constants:{length:'0'}},[polar,la,lb]),false);
+ assert.equal(sys.impliedByLockedEndpoints({...length,constants:{length:'NaN'}},[polar,la,lb]),false);
+ assert.equal(sys.impliedByLockedEndpoints({...length,constants:{length:'0x64'}},[polar,la,lb]),false,'must agree with constraint resolver parsing');
+ const reversed={a,b,t:-100};
+ assert.equal(sys.impliedByLockedEndpoints({...length,objects:[reversed]},[{schema:d.Polar,objects:[reversed,a,b]},la,lb]),false);
+ assert.equal(sys.impliedByLockedEndpoints({...length,objects:[{a,b:a,t:0}]},[la,la]),false);
+});

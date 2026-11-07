@@ -1,0 +1,5 @@
+{
+  "scope": "old retained fixture import whitelist before additive adaptation, no Native evaluation",
+  "name": "AssertionError",
+  "message": "Unexpected import ./genericManufacturingAssignment.mjs"
+}

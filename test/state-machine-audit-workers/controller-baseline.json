@@ -1,0 +1,13 @@
+{
+  "sourceSHA256": "bf68ef634deaf483c97858967e3c275fa1f656f23ac5da8fc69638427b306cdc",
+  "testsSHA256": "584a409654e89ff3614e0b7e532758694177aeefa6c0a80b8e24b73a6491a737",
+  "scope": "Injected Worker termination failure transport controls; no native success payload",
+  "originalTests": {
+    "pass": 1,
+    "fail": 2
+  },
+  "expandedTests": {
+    "pass": 1,
+    "fail": 7
+  }
+}

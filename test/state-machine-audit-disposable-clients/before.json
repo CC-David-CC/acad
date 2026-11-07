@@ -1,0 +1,1107 @@
+{
+  "scope": "Production client code bundled unchanged; explicit WebLock/Worker transport and cleanup doubles; no mathematical output claim",
+  "sources": {
+    "web/app/cad/parameters/physicalWorkerClient.mjs": "2f9323bb502d2c448e82dc7c3c870695d943dcd3dc815b5f49f071d9f1966823",
+    "modules/engine/extrusion/prismSemanticClient.ts": "4e71ed75fde2d8a4c4afc8dfa1664467ac84571b9fc6322acca299330e5cdeae",
+    "web/app/sketcher/headless/client.ts": "4776485ff93cfb4aa5af23e342bc20de723bb638bf0ea3fc5a8a60ebf3e92d91"
+  },
+  "bundleSHA256": "8462b30dfcd374cf4cc9a2c4e34f53538b88a121f5c208cec1e2af22ee77fff1",
+  "probeSHA256": "4071c2e6de34b664eab0dc89dc27d23529f43d2a14168d686b31033ac92156ca",
+  "rows": [
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": true
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "operation-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Parameter worker failed.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "message-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Parameter worker returned invalid data.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "malformed",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Invalid parameter worker response.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "abort",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Parameter evaluation cancelled.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "timeout",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Parameter evaluation timed out.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "late",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Parameter evaluation cancelled.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "injected termination failure"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "null",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "null"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "undefined",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "undefined"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "zero",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "0"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "false",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "false"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "empty",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        ""
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "physical",
+      "scenario": "operation-error",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "injected termination failure"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "physical",
+      "scenario": "abort",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "injected termination failure"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "physical",
+      "scenario": "timeout",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "injected termination failure"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": true
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "operation-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Prism semantic Worker failed.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "message-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Prism semantic Worker message failed.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "malformed",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Invalid prism semantic Worker response.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "abort",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Prism semantic job cancelled or superseded.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "timeout",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Prism semantic job timed out.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "late",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Prism semantic job cancelled or superseded.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "injected termination failure"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "null",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "null"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "undefined",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "undefined"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "zero",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "0"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "false",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "false"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "empty",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        ""
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "semantic",
+      "scenario": "operation-error",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "injected termination failure"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "semantic",
+      "scenario": "abort",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "injected termination failure"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "semantic",
+      "scenario": "timeout",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "injected termination failure"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": true
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "operation-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Sketch worker failed.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "message-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Sketch worker returned invalid data.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "malformed",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Invalid sketch worker result.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "abort",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Sketch solve cancelled",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "timeout",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Sketch solve timed out.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "late",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Sketch solve cancelled",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "null",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "undefined",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "zero",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "false",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "empty",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "sketch",
+      "scenario": "operation-error",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "injected termination failure"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "sketch",
+      "scenario": "abort",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "injected termination failure"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    },
+    {
+      "family": "sketch",
+      "scenario": "timeout",
+      "fault": "error",
+      "settled": false,
+      "settlements": 0,
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": false,
+        "settlements": 0,
+        "terminateCalls": 1
+      },
+      "uncaught": [
+        "injected termination failure"
+      ],
+      "timers": 0,
+      "intervals": 1,
+      "abortListeners": 1
+    }
+  ]
+}

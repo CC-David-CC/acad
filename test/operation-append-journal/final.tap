@@ -1,0 +1,328 @@
+TAP version 13
+# Subtest: capture detaches the exact ordered data-only edge identity
+ok 1 - capture detaches the exact ordered data-only edge identity
+  ---
+  duration_ms: 1.906308
+  type: 'test'
+  ...
+# Subtest: only size changes with exact proposed undo and redo
+ok 2 - only size changes with exact proposed undo and redo
+  ---
+  duration_ms: 1.513375
+  type: 'test'
+  ...
+# Subtest: every immutable identity change including valid alternate target refuses
+ok 3 - every immutable identity change including valid alternate target refuses
+  ---
+  duration_ms: 1.228632
+  type: 'test'
+  ...
+# Subtest: stale document/revision/index/feature and missing history refuse unchanged
+ok 4 - stale document/revision/index/feature and missing history refuse unchanged
+  ---
+  duration_ms: 0.403394
+  type: 'test'
+  ...
+# Subtest: invalid and unchanged size proposals never create journal churn
+ok 5 - invalid and unchanged size proposals never create journal churn
+  ---
+  duration_ms: 0.639916
+  type: 'test'
+  ...
+# Subtest: canonical logical target and scalar native-identity guards refuse corruption
+ok 6 - canonical logical target and scalar native-identity guards refuse corruption
+  ---
+  duration_ms: 1.672446
+  type: 'test'
+  ...
+# Subtest: fields and dense bounded edge arrays do not evaluate accessors
+ok 7 - fields and dense bounded edge arrays do not evaluate accessors
+  ---
+  duration_ms: 0.573635
+  type: 'test'
+  ...
+# Subtest: journal retains detached immutable selections after caller mutation
+ok 8 - journal retains detached immutable selections after caller mutation
+  ---
+  duration_ms: 0.299873
+  type: 'test'
+  ...
+# Subtest: new size edit after undo truncates only redo tail
+ok 9 - new size edit after undo truncates only redo tail
+  ---
+  duration_ms: 0.507694
+  type: 'test'
+  ...
+# Subtest: ordinary64-entry bound preserves exact latest size
+ok 10 - ordinary64-entry bound preserves exact latest size
+  ---
+  duration_ms: 3.943118
+  type: 'test'
+  ...
+# Subtest: travel isolates edge treatment from old scalar and box kinds
+ok 11 - travel isolates edge treatment from old scalar and box kinds
+  ---
+  duration_ms: 1.563145
+  type: 'test'
+  ...
+# Subtest: identity byte charge matches serialized UTF8 and UTF16 exactly
+ok 12 - identity byte charge matches serialized UTF8 and UTF16 exactly
+  ---
+  duration_ms: 0.534805
+  type: 'test'
+  ...
+# Subtest: large identities evict by bytes and coexist with old snapshots
+ok 13 - large identities evict by bytes and coexist with old snapshots
+  ---
+  duration_ms: 35.813178
+  type: 'test'
+  ...
+# Subtest: inverse and forward plans advance only proposed states
+ok 14 - inverse and forward plans advance only proposed states
+  ---
+  duration_ms: 1.534065
+  type: 'test'
+  ...
+# Subtest: stale document, revision, identity and depth refuse without mutation
+ok 15 - stale document, revision, identity and depth refuse without mutation
+  ---
+  duration_ms: 1.503984
+  type: 'test'
+  ...
+# Subtest: new edit after undo truncates redo and journal is bounded
+ok 16 - new edit after undo truncates redo and journal is bounded
+  ---
+  duration_ms: 1.108541
+  type: 'test'
+  ...
+# Subtest: invalid and no-op depths are refused
+ok 17 - invalid and no-op depths are refused
+  ---
+  duration_ms: 0.229093
+  type: 'test'
+  ...
+# Subtest: hole edits store bounded detached numeric deltas and reject stale undo
+ok 18 - hole edits store bounded detached numeric deltas and reject stale undo
+  ---
+  duration_ms: 2.432014
+  type: 'test'
+  ...
+# Subtest: sketch deltas retain exact bytes with bounded total and stale refusal
+ok 19 - sketch deltas retain exact bytes with bounded total and stale refusal
+  ---
+  duration_ms: 17.042365
+  type: 'test'
+  ...
+# Subtest: mixed journals evict old snapshots within the retained-string budget and keep cross-kind order
+ok 20 - mixed journals evict old snapshots within the retained-string budget and keep cross-kind order
+  ---
+  duration_ms: 6.568304
+  type: 'test'
+  ...
+# Subtest: sketch entry bounds use serialized bytes and retain exact non-ASCII text
+ok 21 - sketch entry bounds use serialized bytes and retain exact non-ASCII text
+  ---
+  duration_ms: 3.900828
+  type: 'test'
+  ...
+# Subtest: dense sketch history retains exact snapshots and caps total storage
+ok 22 - dense sketch history retains exact snapshots and caps total storage
+  ---
+  duration_ms: 15.750192
+  type: 'test'
+  ...
+# Subtest: canonical capture is detached frozen exact type/params for both supported edge kinds
+ok 23 - canonical capture is detached frozen exact type/params for both supported edge kinds
+  ---
+  duration_ms: 2.432784
+  type: 'test'
+  ...
+# Subtest: capture rejects unknown operations, numeric strings, extra saved geometry and malformed identities
+ok 24 - capture rejects unknown operations, numeric strings, extra saved geometry and malformed identities
+  ---
+  duration_ms: 0.561755
+  type: 'test'
+  ...
+# Subtest: request, parameter and edge-array accessors are never invoked
+ok 25 - request, parameter and edge-array accessors are never invoked
+  ---
+  duration_ms: 0.509245
+  type: 'test'
+  ...
+# Subtest: append entry holds only one captured operation and bounded tip metadata
+ok 26 - append entry holds only one captured operation and bounded tip metadata
+  ---
+  duration_ms: 0.744687
+  type: 'test'
+  ...
+# Subtest: append supports indices 0..9999 with strict previous-tip ID/null rules
+ok 27 - append supports indices 0..9999 with strict previous-tip ID/null rules
+  ---
+  duration_ms: 2.372263
+  type: 'test'
+  ...
+# Subtest: record/travel options are exact own-data inputs without callbacks or getters
+ok 28 - record/travel options are exact own-data inputs without callbacks or getters
+  ---
+  duration_ms: 0.717967
+  type: 'test'
+  ...
+# Subtest: Undo/Redo travel reuses immutable entry storage and returns the canonical operation
+ok 29 - Undo/Redo travel reuses immutable entry storage and returns the canonical operation
+  ---
+  duration_ms: 0.436205
+  type: 'test'
+  ...
+# Subtest: every full parameter/runtime/source-key mutation refuses Undo unchanged
+ok 30 - every full parameter/runtime/source-key mutation refuses Undo unchanged
+  ---
+  duration_ms: 3.999579
+  type: 'test'
+  ...
+# Subtest: stale document/revision/index/feature/tip length/previous ID and present Redo slots refuse
+ok 31 - stale document/revision/index/feature/tip length/previous ID and present Redo slots refuse
+  ---
+  duration_ms: 0.558915
+  type: 'test'
+  ...
+# Subtest: real helper composition preserves creation then size-edit chronology in both directions
+ok 32 - real helper composition preserves creation then size-edit chronology in both directions
+  ---
+  duration_ms: 0.941039
+  type: 'test'
+  ...
+# Subtest: branching after creation Undo truncates only the redo tail in the same journal
+ok 33 - branching after creation Undo truncates only the redo tail in the same journal
+  ---
+  duration_ms: 0.461414
+  type: 'test'
+  ...
+# Subtest: mixed old journal entries keep their order, storage and existing travel semantics
+ok 34 - mixed old journal entries keep their order, storage and existing travel semantics
+  ---
+  duration_ms: 0.580825
+  type: 'test'
+  ...
+# Subtest: 64-entry cap still retains the latest appends and preserves proposal-only mutation
+ok 35 - 64-entry cap still retains the latest appends and preserves proposal-only mutation
+  ---
+  duration_ms: 6.420542
+  type: 'test'
+  ...
+# Subtest: byte accounting matches independent full serialized UTF8/UTF16 oracle including surrogate boundaries
+ok 36 - byte accounting matches independent full serialized UTF8/UTF16 oracle including surrogate boundaries
+  ---
+  duration_ms: 2.307322
+  type: 'test'
+  ...
+# Subtest: accounting only serializes small fragments even with sixteen maximum opaque IDs
+ok 37 - accounting only serializes small fragments even with sixteen maximum opaque IDs
+  ---
+  duration_ms: 5.754866
+  type: 'test'
+  ...
+# Subtest: 8MiB trimming charges new entries together with old snapshots and size-edit records
+ok 38 - 8MiB trimming charges new entries together with old snapshots and size-edit records
+  ---
+  duration_ms: 39.570304
+  type: 'test'
+  ...
+# Subtest: capture is the canonical full12/14 authored parser; detached frozen primitives only
+ok 39 - capture is the canonical full12/14 authored parser; detached frozen primitives only
+  ---
+  duration_ms: 2.435794
+  type: 'test'
+  ...
+# Subtest: center: immutable full identity and exact UndoRedo dimensions
+ok 40 - center: immutable full identity and exact UndoRedo dimensions
+  ---
+  duration_ms: 0.891638
+  type: 'test'
+  ...
+# Subtest: corners: immutable full identity and exact UndoRedo dimensions
+ok 41 - corners: immutable full identity and exact UndoRedo dimensions
+  ---
+  duration_ms: 0.349063
+  type: 'test'
+  ...
+# Subtest: before/after dimensions and identity are detached from caller mutation
+ok 42 - before/after dimensions and identity are detached from caller mutation
+  ---
+  duration_ms: 0.237203
+  type: 'test'
+  ...
+# Subtest: offset-only edits are authored while exact numeric no-ops refuse
+ok 43 - offset-only edits are authored while exact numeric no-ops refuse
+  ---
+  duration_ms: 1.686687
+  type: 'test'
+  ...
+# Subtest: stale document/revision/index/feature or numeric current dimensions refuse without changing journal
+ok 44 - stale document/revision/index/feature or numeric current dimensions refuse without changing journal
+  ---
+  duration_ms: 3.896898
+  type: 'test'
+  ...
+# Subtest: every valid altered source/target/runtime identity refuses even with matching dimensions
+ok 45 - every valid altered source/target/runtime identity refuses even with matching dimensions
+  ---
+  duration_ms: 0.724547
+  type: 'test'
+  ...
+# Subtest: invalid parameter fields and non-numeric dimensions never coerce or enter journal
+ok 46 - invalid parameter fields and non-numeric dimensions never coerce or enter journal
+  ---
+  duration_ms: 0.940829
+  type: 'test'
+  ...
+# Subtest: source and editable dimension getters are refused without invoking them
+ok 47 - source and editable dimension getters are refused without invoking them
+  ---
+  duration_ms: 0.429544
+  type: 'test'
+  ...
+# Subtest: positive finite primitive extremes remain exact; no journal-side unit conversion or rounding
+ok 48 - positive finite primitive extremes remain exact; no journal-side unit conversion or rounding
+  ---
+  duration_ms: 0.582205
+  type: 'test'
+  ...
+# Subtest: Undo followed by a new edit discards redo branch while leaving old proposals immutable
+ok 49 - Undo followed by a new edit discards redo branch while leaving old proposals immutable
+  ---
+  duration_ms: 0.443574
+  type: 'test'
+  ...
+# Subtest: 64-entry cap trims oldest through-hole edits with correct cursor and revision
+ok 50 - 64-entry cap trims oldest through-hole edits with correct cursor and revision
+  ---
+  duration_ms: 3.11516
+  type: 'test'
+  ...
+# Subtest: full canonical identity and both dimension objects are conservatively byte-charged
+ok 51 - full canonical identity and both dimension objects are conservatively byte-charged
+  ---
+  duration_ms: 1.984529
+  type: 'test'
+  ...
+# Subtest: aggregate8MiB trim counts through-hole byteSize instead of the generic256byte estimate
+ok 52 - aggregate8MiB trim counts through-hole byteSize instead of the generic256byte estimate
+  ---
+  duration_ms: 6.22007
+  type: 'test'
+  ...
+# Subtest: new through-hole kind cannot travel unrelated scalar entries and old scalar planners reject it
+ok 53 - new through-hole kind cannot travel unrelated scalar entries and old scalar planners reject it
+  ---
+  duration_ms: 2.484974
+  type: 'test'
+  ...
+1..53
+# tests 53
+# suites 0
+# pass 53
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 150.734852

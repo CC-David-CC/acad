@@ -1,0 +1,5 @@
+# Coherent normal build integration
+
+Root composed Coree1221832d after source checkpoints. Existing Worker compilation succeeded. A local CODI_SWEEP_NATIVE_DIR typo first stopped normal staging; corrected to the actual R730 source path without a product change. The subsequent normal staging exposed a real closure omission: both manufacturing/shell emitted module tables and factory graph expectations included isolatedOpenProfileComponents.mjs, but their root module collections did not stage that nontransitive helper. The component stager correctly refused the missing file.
+
+Add the actual helper to both root module sets so source staging, emitted assets and factory graph agree. Existing recursive capture includes its real imports and records hashes; no copied stub or relaxed manifest. Native R2 hashes/default engines remain unchanged. First failed build logs are retained on the task R730 worktree .build/; this is normal application build integration, no per-step test or geometry qualification. Complete E01/E12/native-source workflows remain to run after the normal composed build.

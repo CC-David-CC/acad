@@ -1,0 +1,14 @@
+✔ actual readonly inventory binds production class/history/registry/runtime without parsing IDs (296.169641ms)
+✔ private prepare uses real hash Worker and pure model capture without writes/publication/ID allocation (229.792197ms)
+✔ pending actual hash reply is fenced by source/registry/runtime/model/counter/lifetime changes (1322.487098ms)
+✔ returned private proposal becomes stale without installing metadata (130.059951ms)
+✔ stale/malformed/cancelled requests refuse before hash worker dispatch (105.504719ms)
+✔ wrong class/producer/origin/current build/placement never becomes a supported discovery target (439.253797ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2837.22598

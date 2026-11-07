@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "scope": "Actual frozenR4 component observations; not public ledger/authoring qualification",
+  "ordinaryCases": 8,
+  "windingCompanion": 1,
+  "nativeTargetsActuallyReordered": true,
+  "authoredKeysUnchanged": true,
+  "beforeTargets": {
+    "e0": [
+      3,
+      4,
+      1
+    ],
+    "e1": [
+      6,
+      7,
+      2
+    ],
+    "e2": [
+      8,
+      9,
+      3
+    ]
+  },
+  "reversedTargets": {
+    "e0": [
+      8,
+      9,
+      3
+    ],
+    "e1": [
+      3,
+      4,
+      1
+    ],
+    "e2": [
+      6,
+      7,
+      2
+    ]
+  },
+  "classifications": 32,
+  "workersTerminated": 14,
+  "ownedBrowserAndProfileClosed": true
+}

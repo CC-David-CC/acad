@@ -1,0 +1,19 @@
+✔ valid cross-realm metadata reaches the production admission boundary without invoking native work (155.16146ms)
+✔ getters, inherited/extra fields, sparse and oversized points refuse before document access (59.054063ms)
+✔ point accessor and extra own-array properties refuse without evaluation (50.849638ms)
+✔ 64 bounded points are admissible metadata and another registered build refuses explicitly (37.747791ms)
+✔ lease is bound to the existing evaluator, tail, captured sources and candidate ledger (1.729338ms)
+✔ original evaluator failure settles and restores exact ID context without publication (83.290144ms)
+✔ concurrent reader and writer admission refuse during a held exclusive lease (23.386232ms)
+✔ caller loss before queued replay prevents any evaluator allocation (21.388692ms)
+✔ reentrant context mutation is restored and refused (24.722757ms)
+✔ a writer queued before lease acquisition prevents replay and restores busy count (15.878545ms)
+✔ candidate cleanup uncertainty refuses result and latches existing pool failure (15.3872ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 562.028161

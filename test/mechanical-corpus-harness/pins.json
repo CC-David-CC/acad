@@ -1,0 +1,90 @@
+{
+  "base": "e361f95249935aff2e8f77f16d402d4065a12222",
+  "versions": {
+    "node": "v24.22.1",
+    "webpack": "5.74.0",
+    "babel": "7.18.10"
+  },
+  "filesSha256": {
+    "test/mechanical-corpus-harness/README.md": "c6e7c06b2288d00698ff0de09958218671159e649451fa1008d04a50d48b9739",
+    "test/mechanical-corpus-harness/loader-contract.test.cjs": "28707a182cb900480b259fea62b441cc53760cfc3cadb8c8441b0cacf0693ef3",
+    "test/mechanical-corpus-harness/receipt.json": "1972ebbbcc48d42e840baeeca8312f5d9b226e0d3d213bc540dc30e8507e29e3",
+    "test/mechanical-corpus-harness/reevaluate-entry-loader.cjs": "7fc76adfac20bc830ef605ef6c8b4c47ba9a4267f15908eff2743b87db537a9c",
+    "test/mechanical-corpus-harness/webpack.broad.cjs": "8106e8d321144b0cd0b28087a5c35ec735eda59e6d0fd7ec6b13a31ca246aa72",
+    "test/mechanical-corpus-harness/webpack.focused.cjs": "ce9dbe9df41ebf4490b8ece2da92bdc66763ac3377eb5f63477df981b76d3163",
+    "test/mechanical/noop-sketch-save.test.mjs": "e5d65c47a824445475d729b2b4a1421976c179433a814b6dc11ea7c68b6e7337",
+    "test/mechanical/rigid-group-solver-probe.test.mjs": "18a3b69ac5793fac003ceab6b171125f44f684f3f5bd04c01bf31df82d82ea83",
+    "package.json": "a3959033cbb9c5c848cbdea054dc27189a27c3091888d247a8d0f6094d70b7ff",
+    "package-lock.json": "2ac3646c63f3ae771cfe6712efcd820626f4fdc43af72a429a7443403b650a99",
+    ".babelrc": "1db5dbc266d6f98a89437dfa5f5a28710cd4d1171220f79de6d85d3323c0fb86",
+    "test/mechanical/noop-sketch-save.fixture.json": "5e3d8ebf2b8f9fd39dd66e22d71330d867dae192ef3864d8af82bdec137e1b17",
+    "test/mechanical/noop-sketch-save-first.fixture.json": "5126177452dbe7ecd4d8ffe999bed9ae67ff87f7affce6a90daa3063df9cca4b"
+  },
+  "executedBundlesSha256": {
+    "broad": "3ea01f643e3e0007f7d63c7e6d5a4ddb04fa84895acfaff9ae82a5617d18ba5f",
+    "focused": "25932cfed0201173c3918c99de2918b11abeafd9dae96adbe8b49f378aea0bec"
+  },
+  "unchangedMechanicalFilesSha256": {
+    "test/mechanical/admission-io.test.mjs": "61bc3d0ab2baba79058e497f6b42d6bdc8eb6957d7002d0f21ca898c39831458",
+    "test/mechanical/atomic-admission.test.mjs": "5b35b3dbdef3256304f62409a3c77e4bfdb1e01fece80794a221e8baa779a5ac",
+    "test/mechanical/authored-edit-journal.test.mjs": "aa43fbd425a9ebc839d1784e6d79cfe709b7d9c59a26f4d848d523b0f23c9199",
+    "test/mechanical/axis-angle-domain.test.mjs": "9a67ba81c385262e92e3f864ff5a80a86a7cb946a608da2fd873855956dcf7fb",
+    "test/mechanical/basic-angle-branches.test.mjs": "1583aa31d8cf88c35e63ac274aa6f8b5c9f6d6b852cf2e23f787723d015691b0",
+    "test/mechanical/capture-authored-history.test.mjs": "ee6e1924605d199fbc3a7431fb0c2d62eff03a866f826eac4986923c6d3b9b0f",
+    "test/mechanical/concentric.test.mjs": "79e1434e064567a663dd231aeca970e8cca1c9ab62c16948c846f95ae12814c8",
+    "test/mechanical/craft-request-normalization.test.mjs": "70fa50a1c14934ca3b04e8ab01eaa70632b61b1488ab92f3fc496d1eb83357c9",
+    "test/mechanical/diameter.test.mjs": "a80c4ef8504c161c1892e5a949d223ca65ef29684e89c5162ab47d74e8a8c072",
+    "test/mechanical/dimension-domains.test.mjs": "e0eace40552086276c74d951bfed30d23cfa31694f00f7df882c2a478aa276b8",
+    "test/mechanical/directional-snapshot-release-extra.test.mjs": "c65494eaf32eb494ed9ba62ed95714927a901fa8e033bfe9314d12f943761525",
+    "test/mechanical/directional-snapshot-release.test.mjs": "495187071b41f722dbe0c7f950614f25fee76ef547b6dc0789165b7beed55e0a",
+    "test/mechanical/dof-status.test.mjs": "65bb7018fc13862eac46a65bac088ed24592afbf112567217e7f02c47f09897b",
+    "test/mechanical/external-stage-reclassification.test.mjs": "d95c90c3ac3645cbe4a0ff41953b30ea1e980ccaeb45d14e9dcc63952458f34e",
+    "test/mechanical/failed-add-regression.test.mjs": "11f2f582fe556fa2e9913522bd9b403e011ce45755c90b95432e61eb2ef8a01d",
+    "test/mechanical/fix-entity.test.mjs": "9c5c461f06cc6d7894182b74f9d3d451ffa6d353466124f28e786ea5b81a0189",
+    "test/mechanical/headless-fixed-boundary.test.mjs": "b5a29b8db6515d5b17d191f9d326e6de7c9931994b2e1a4e15d2c3eb8333bd1e",
+    "test/mechanical/incremental-connected.test.mjs": "dc4a7fb35dd498044ad870d394b38d73fcabd63c9fb323c87b0a4b9e0167f1df",
+    "test/mechanical/independent-external-recovery.test.mjs": "3d64916071ba9a0ccdf815e22e519d20f9c458b8bcbffcf91eeb57a980e1a7df",
+    "test/mechanical/label-preview.test.mjs": "3bd01935228bd12436c4eb36e177d3ccdfe2f66a0e4813372a26a5b71eaff3a6",
+    "test/mechanical/length-admission-shared.test.mjs": "55b9ad2ff169a05f222077576d06d7d5d0a611e263d6266df53abff47c393ea9",
+    "test/mechanical/length-relation.test.mjs": "a51d4a300ff502060204c5ede1b7695a984f25f2cd01dbcc65b6ea5acb4bb36c",
+    "test/mechanical/line-relations.test.mjs": "7ac3032df35b6331c8cadcf5b90cedb593df02fdb8530b74c5b822c7ea6a53f7",
+    "test/mechanical/locked-length-proof.test.mjs": "d5691008256dd907ad9ee1d08c8da8cc46266f2f2e8deca63687f3b7ef9ff088",
+    "test/mechanical/midpoint-conflict-removal.test.mjs": "d3187fe469b7e4c1506f8a53599848e968b7b1feadf91b2b1d3e9e52e2240c28",
+    "test/mechanical/midpoint-order.test.mjs": "2f184c3acb4204c43fd635356502857d80f7aec4866eb62b857a34d69a5a35eb",
+    "test/mechanical/midpoint.test.mjs": "a9c2316e727f3a806349cd278e0e16fd9954ae581325f7e85edd24c7170e1bf9",
+    "test/mechanical/multi-constraint-history.test.mjs": "612aa143dbbefb9c0723a01d2519277e13ff006a7b2b9cf1f040b3475a5f23a6",
+    "test/mechanical/parameter-formulas.test.mjs": "efec3a9af01a4d2dc6a0fadafb19777c5870fa241f94cc0f0c17f7e14d7b98f0",
+    "test/mechanical/project-sketch-preflight.test.mjs": "090a5b03c2feceb1939eaec7cc3a211f7f2e750e655e196dba1a020e5517d989",
+    "test/mechanical/rigid-group-plan.test.mjs": "c3994d9715f70d6e6915e173dd767be5eb20776cdf27e5e2731a8bae37eeaa7e",
+    "test/mechanical/signed-distance.test.mjs": "b75393defffed9a6941dcf52cbdb3b362a5315eb4d587f356f6d5cc5312475a1",
+    "test/mechanical/sketch-revision-guard.test.mjs": "fffa77e8dc424d767a810971a7f56f14202e2dbcb1f678e66ba10e00a129d488",
+    "test/mechanical/sketch-revision.test.mjs": "17040224d6a76d683e9f156b3a98af3dd82b8de2ffc701c71b30c3d2491a19aa",
+    "test/mechanical/sketch-transaction.test.mjs": "19012d28650d3afdac8d70a3318b9109db222398fe95656d94dc4568c72429b7",
+    "test/mechanical/stage-admission.test.mjs": "dc8bcade2808d4d2fd117ba6c3d00cba317df76af82a95f83f9065d9dd06756a",
+    "test/mechanical/storage-stage-write.test.mjs": "5d93d79664a34b81ae529ba454862be92b65e633c82f322d8d329e3769a831e2",
+    "test/mechanical/volatile-workspace.test.mjs": "bcfec90f520d2ae602ff936a44102cd8cfef436b95aa32570e3e08310da46963",
+    "test/mechanical/workspace-namespace-revision.test.mjs": "0f8d0f562aa714a876e37c5c260aa18740688c4f1840eea4a04fcd82056887fe"
+  },
+  "baselineBundle": "Before build source and full logs retained; its generated bundle was overwritten during candidate compilation, so no baseline binary hash is claimed.",
+  "builtOutputFilesSha256": {
+    "broad": {
+      "1b263015ce34d3f2835a.json": "5126177452dbe7ecd4d8ffe999bed9ae67ff87f7affce6a90daa3063df9cca4b",
+      "ac8b26af4526498b6f35.json": "5e3d8ebf2b8f9fd39dd66e22d71330d867dae192ef3864d8af82bdec137e1b17",
+      "test.cjs": "3ea01f643e3e0007f7d63c7e6d5a4ddb04fa84895acfaff9ae82a5617d18ba5f",
+      "web_app_cad_sketch_sketchConstantResolver_js.test.cjs": "574779c41891463f2d5e29dbd5dbd69027f291faf2ec93ff30b94012f72b6faa"
+    },
+    "focused": {
+      "1b263015ce34d3f2835a.json": "5126177452dbe7ecd4d8ffe999bed9ae67ff87f7affce6a90daa3063df9cca4b",
+      "ac8b26af4526498b6f35.json": "5e3d8ebf2b8f9fd39dd66e22d71330d867dae192ef3864d8af82bdec137e1b17",
+      "test.cjs": "25932cfed0201173c3918c99de2918b11abeafd9dae96adbe8b49f378aea0bec",
+      "web_app_sketcher_actions_sketchTransaction_js.test.cjs": "8235317309bc0c3c8b816fc614fa4501c499a2a4b43e19f7598fd2d3b68016c6",
+      "web_app_sketcher_headless_solve_ts.test.cjs": "abe7246a6021b924715c8d4e5e195027b6b0b2dc2f04c4797fe9e32985af8cb2",
+      "web_app_sketcher_rigid_rigidGroupOperation_js.test.cjs": "a1c4c28775f99105111ee21b529fb3dec6d18ca144818597e19f124aa9e0ac39"
+    }
+  },
+  "originalTransformedSourceAsset": {
+    "name": "a68cc62f97eaf68e133c.ts",
+    "sha256": "33ca14dba4d6774b9a7e73caca64319b6623b8d804d32e083435aeae2e5f661b",
+    "scope": "Retained emitted Babel source asset confirms helper hoisting; private evidence only, not a final runtime asset or committed generated code."
+  }
+}

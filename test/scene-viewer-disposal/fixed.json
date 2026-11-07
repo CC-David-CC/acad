@@ -1,0 +1,74 @@
+{
+  "format": "codi-scene-viewer-disposal/1",
+  "appSHA256": "ce8ce5175d0636f7c1828a372b5f5c4dd273644130eb37ab5b23bdd1ab0b1057",
+  "result": "PASS",
+  "checks": {
+    "activeBefore": true,
+    "stoppedAfterDispose": true,
+    "controlsReleasedOnce": true,
+    "rendererReleasedOnce": true,
+    "canvasRemoved": true,
+    "lateWorkInert": true,
+    "idempotent": true,
+    "siblingRetained": true,
+    "failedCleanupContinues": true
+  },
+  "rows": {
+    "normal": {
+      "before": {
+        "evaluations": 8,
+        "renders": 0,
+        "controls": 0,
+        "renderer": 0
+      },
+      "after": {
+        "evaluations": 8,
+        "renders": 0,
+        "controls": 1,
+        "renderer": 1
+      },
+      "late": {
+        "evaluations": 8,
+        "renders": 0,
+        "controls": 1,
+        "renderer": 1
+      },
+      "afterSecondDispose": {
+        "evaluations": 8,
+        "renders": 0,
+        "controls": 1,
+        "renderer": 1
+      },
+      "beforeSecondDispose": {
+        "evaluations": 8,
+        "renders": 0,
+        "controls": 1,
+        "renderer": 1
+      },
+      "scheduled": 0,
+      "canvasRemoved": true,
+      "siblingAdvanced": true,
+      "siblingCanvasPresent": true
+    },
+    "failedCleanup": {
+      "expectedError": true,
+      "beforeWait": {
+        "evaluations": 0,
+        "renders": 0,
+        "controls": 1,
+        "renderer": 1
+      },
+      "afterWait": {
+        "evaluations": 0,
+        "renders": 0,
+        "controls": 1,
+        "renderer": 1
+      },
+      "canvasRemoved": true
+    }
+  },
+  "scope": "Actual Viewer component teardown in a retained realm; genuine RAF/controls/renderer forwarding and one injected post-cleanup exception. No claim that normal host iframe removal leaks, no arbitrary child exception safety or forced GC evidence.",
+  "testSHA256": "b1dd50135480f468b21d50b2a2ec8461eb4fbf97c055ab0d31f1a76541517207",
+  "runtimeSource": "a36a6b259",
+  "fixture": "http://127.0.0.1:20646/"
+}

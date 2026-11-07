@@ -1,0 +1,203 @@
+{
+  "status": "PASS",
+  "scope": "Data-only admission parity with the actual supplied core capture helper; no engine/build/selection feasibility claim",
+  "coreSourceSHA256": "aefd2681fb17603d7b40a704764e3a8e18f7931a37ae5f7ad6814154f88a7515",
+  "journalSourceSHA256": "061f0b09e09424d76e86eab943aed6e55a2af3aec5339d6b89171d0d74db6b96",
+  "cases": 48,
+  "accepted": 3,
+  "refused": 45,
+  "rows": [
+    {
+      "name": "fillet",
+      "accepted": true
+    },
+    {
+      "name": "chamfer",
+      "accepted": true
+    },
+    {
+      "name": "reordered-valid-IDs",
+      "accepted": true
+    },
+    {
+      "name": "version-0",
+      "accepted": false
+    },
+    {
+      "name": "version-1",
+      "accepted": false
+    },
+    {
+      "name": "unit-0",
+      "accepted": false
+    },
+    {
+      "name": "engine-0",
+      "accepted": false
+    },
+    {
+      "name": "engine-1",
+      "accepted": false
+    },
+    {
+      "name": "engineRevision-0",
+      "accepted": false
+    },
+    {
+      "name": "featureId-0",
+      "accepted": false
+    },
+    {
+      "name": "featureId-1",
+      "accepted": false
+    },
+    {
+      "name": "producerFeatureId-0",
+      "accepted": false
+    },
+    {
+      "name": "producerFeatureId-1",
+      "accepted": false
+    },
+    {
+      "name": "target-0",
+      "accepted": false
+    },
+    {
+      "name": "target-1",
+      "accepted": false
+    },
+    {
+      "name": "target-2",
+      "accepted": false
+    },
+    {
+      "name": "kind-0",
+      "accepted": false
+    },
+    {
+      "name": "kind-1",
+      "accepted": false
+    },
+    {
+      "name": "size-0",
+      "accepted": false
+    },
+    {
+      "name": "size-1",
+      "accepted": false
+    },
+    {
+      "name": "size-2",
+      "accepted": false
+    },
+    {
+      "name": "size-3",
+      "accepted": false
+    },
+    {
+      "name": "size-4",
+      "accepted": false
+    },
+    {
+      "name": "size-5",
+      "accepted": false
+    },
+    {
+      "name": "edgeIds-0",
+      "accepted": false
+    },
+    {
+      "name": "edgeIds-1",
+      "accepted": false
+    },
+    {
+      "name": "edgeIds-2",
+      "accepted": false
+    },
+    {
+      "name": "edgeIds-3",
+      "accepted": false
+    },
+    {
+      "name": "edgeIds-4",
+      "accepted": false
+    },
+    {
+      "name": "edgeIds-5",
+      "accepted": false
+    },
+    {
+      "name": "extra-handle",
+      "accepted": false
+    },
+    {
+      "name": "extra-nativeIndex",
+      "accepted": false
+    },
+    {
+      "name": "extra-resultLocal",
+      "accepted": false
+    },
+    {
+      "name": "extra-geometry",
+      "accepted": false
+    },
+    {
+      "name": "extra-mesh",
+      "accepted": false
+    },
+    {
+      "name": "extra-profile",
+      "accepted": false
+    },
+    {
+      "name": "extra-ptr",
+      "accepted": false
+    },
+    {
+      "name": "extra-propagation",
+      "accepted": false
+    },
+    {
+      "name": "accessor-version",
+      "accepted": false
+    },
+    {
+      "name": "accessor-unit",
+      "accepted": false
+    },
+    {
+      "name": "accessor-engine",
+      "accepted": false
+    },
+    {
+      "name": "accessor-engineRevision",
+      "accepted": false
+    },
+    {
+      "name": "accessor-featureId",
+      "accepted": false
+    },
+    {
+      "name": "accessor-target",
+      "accepted": false
+    },
+    {
+      "name": "accessor-producerFeatureId",
+      "accepted": false
+    },
+    {
+      "name": "accessor-kind",
+      "accepted": false
+    },
+    {
+      "name": "accessor-edgeIds",
+      "accepted": false
+    },
+    {
+      "name": "accessor-size",
+      "accepted": false
+    }
+  ]
+}

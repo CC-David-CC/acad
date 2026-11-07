@@ -1,0 +1,21 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {projectRenderSketch} from '../../web/app/sketcher/headless/renderSketchProjection.mjs';
+const p=(x,y)=>({x,y});
+const base=objects=>({version:3,objects,dimensions:[],labels:[],stages:[{constraints:[],generators:[]}],constants:'',boundary:{lines:[],arcs:[],circles:[],nurbses:[]}});
+const row=(id,type,data,role=null)=>({id,type,data,role,stage:0});
+test('analytic data, native child identities and detached ownership',()=>{
+ const input=base([row('p','Point',p(2,3),'construction'),row('s','Segment',{a:p(-2,1),b:p(3,4)}),row('c','Circle',{c:p(2,0),r:3}),row('a','Arc',{a:p(1,0),b:p(0,-1),c:p(0,0)}),row('e','Ellipse',{c:p(0,0),rx:4,ry:2,rot:0.5}),row('q','EllipticalArc',{c:p(0,0),rx:4,ry:2,rot:0,a:p(4,0),b:p(0,2)}),row('b','BezierCurve',{cp1:p(0,0),cp2:p(1,2),cp3:p(3,4),cp4:p(5,6)})]);
+ input.stages[0].generators.push({typeId:'Mirror',objects:['s']});const result=projectRenderSketch(input);
+ assert.deepEqual(result.objects.map(x=>x.geometry.kind),['point','segment','circle','arc','ellipse','ellipticalArc','cubic']);
+ assert.deepEqual(result.objects[1].handles.map(x=>x.id),['s:A','s:B']);assert.deepEqual(result.objects[6].handles.map(x=>x.id),['b:1:A','b:1:B','b:2:B','b:2:A']);
+ assert.equal(result.objects[0].role,'construction');assert.equal(result.objects[3].geometry.end,-Math.PI/2);assert.equal(result.objects[5].geometry.end,Math.PI/2);
+ assert.equal(result.bounds.complete,false);assert.equal(result.unrendered[0].kind,'generator');assert.equal(result.bounds.kind,'conservative-projected-geometry');assert.ok(result.bounds.minX<=-6&&result.bounds.maxX>=6&&result.bounds.maxY>=6);
+ input.objects[1].data.a.x=99;input.stages[0].generators[0].objects.push('new');assert.equal(result.objects[1].geometry.a.x,-2);assert.equal(result.source.stages[0].generators[0].objects.length,1);assert.ok(Object.isFrozen(result.source.stages[0].generators[0].objects));
+ assert.equal(result.capabilities.solver,'unavailable');assert.equal(result.capabilities.generators,'source-only');
+});
+test('full sweep and unsupported source remain explicit',()=>{const input=base([row('a','Arc',{a:p(1,0),b:p(1,0),c:p(0,0)}),row('spline','BSpline',{degree:3,cPoints:[]})]);const out=projectRenderSketch(input);assert.equal(out.objects[0].geometry.fullCircle,true);assert.equal(out.objects[0].geometry.end,2*Math.PI);assert.equal(out.objects[1].geometry,null);assert.equal(out.unsupported[0].id,'spline');assert.equal(out.bounds.complete,false);assert.equal(out.source.objects[1].data.degree,3)});
+test('ellipse display radius follows the existing renderer minimum',()=>{const o=projectRenderSketch(base([row('e','Ellipse',{c:p(0,0),rx:1e-10,ry:1,rot:0})]));assert.equal(o.objects[0].geometry.rx,1e-8);assert.equal(o.source.objects[0].data.rx,1e-10)});
+test('nonfinite derived ellipse angles are explicitly unsupported',()=>{const o=projectRenderSketch(base([row('e','EllipticalArc',{c:p(-1e308,-1e308),rx:1e-300,ry:1e300,rot:0,a:p(1e308,1e308),b:p(1,0)})]));assert.equal(o.objects[0].geometry,null);assert.equal(o.unsupported[0].id,'e')});
+test('omitted annotations and boundaries are disclosed',()=>{const s=base([row('x','Point',p(1,2))]);s.stages[0].constraints.push({typeId:'LockPoint'});s.dimensions.push({id:'dim'});s.labels.push({id:'label'});s.boundary.lines.push({id:'line'});const o=projectRenderSketch(s);assert.deepEqual(o.unrendered.map(x=>x.kind),['constraint-annotations','dimensions','labels','boundary']);assert.equal(o.bounds.complete,false)});
+test('rejects sparse arrays, accessors, duplicate IDs, nonfinite and invalid stage',()=>{const input=base([row('x','Point',p(1,2))]);let calls=0;Object.defineProperty(input.objects[0].data,'x',{enumerable:true,get(){calls++;return 1}});assert.throws(()=>projectRenderSketch(input));assert.equal(calls,0);assert.throws(()=>projectRenderSketch(base([row('x','Point',p(1,2)),row('x','Point',p(3,4))])));assert.throws(()=>projectRenderSketch(base([row('x','Point',p(Infinity,2))])));const sparse=base([]);sparse.objects.length=1;assert.throws(()=>projectRenderSketch(sparse));const stage=base([row('x','Point',p(1,2))]);stage.objects[0].stage=1;assert.throws(()=>projectRenderSketch(stage))});

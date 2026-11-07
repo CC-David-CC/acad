@@ -1,0 +1,10 @@
+Source 5f8d745d9dcce2f60d16e6cbee837cdf6b3ab6c8, app17a1350c7d866a63d9e52e2ebe06522ad6a0d8b52d3244333121a2f046261fb7, direct20486.
+Initial fixed timeline run failed the test's TypeError expectation:
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
++ undefined
+- 'TypeError'
+at history-aba-browser.test.cjs:37:196
+
+Earlier assertions in the same statement passed: attempted value stayed10, paramsFrozen=true, writable=false. The helper containing the assignment was non-strict, so refusal was silent. The correction adds 'use strict' only inside the injected assignment helper; it does not suppress operation/native failures or change product code. Complete corrected runtime receipts are separate.

@@ -1,0 +1,109 @@
+{
+  "status": "READ_ONLY_OBSERVED",
+  "scope": "Frozen mechanical module exports and JS-exposed ABI only; no native operation or geometry executed",
+  "wasmPath": "/mnt/data10tb/codi-polygon-combined-mechanical-app-20261106-r2/.build/mechanical-profile-assets/mechanical-profile-occ.wasm",
+  "jsPath": "/mnt/data10tb/codi-polygon-combined-mechanical-app-20261106-r2/.build/mechanical-profile-assets/mechanical-profile-occ-portable.js",
+  "wasmSha256": "28e8e2c2752cef100a98e24ec487f7d90021edb98fb060fdd1160fe63501bbe2",
+  "jsSha256": "b3d91cbb02f90ba56732039283d787b92eda97c51091fafbd933ecf4db30dd97",
+  "wasmExportCount": 61,
+  "wasmSemanticExports": [
+    {
+      "name": "CallCommand",
+      "kind": "function"
+    },
+    {
+      "name": "CreateSelectedProfileV2",
+      "kind": "function"
+    },
+    {
+      "name": "CreateSelectedProfileV3",
+      "kind": "function"
+    },
+    {
+      "name": "InspectOwnedSolidV2",
+      "kind": "function"
+    },
+    {
+      "name": "ReleaseOwnedShapeV2",
+      "kind": "function"
+    },
+    {
+      "name": "OwnedShapeNamesV2",
+      "kind": "function"
+    },
+    {
+      "name": "ClassifyOwnedPointV2",
+      "kind": "function"
+    },
+    {
+      "name": "ReadOwnedMeshV2",
+      "kind": "function"
+    },
+    {
+      "name": "ApplyOwnedEdgeTreatmentV1",
+      "kind": "function"
+    },
+    {
+      "name": "ReadOwnedTopologyV1",
+      "kind": "function"
+    },
+    {
+      "name": "Interogate",
+      "kind": "function"
+    },
+    {
+      "name": "InspectTopologyCensusV1",
+      "kind": "function"
+    },
+    {
+      "name": "InspectDrilledTopologyV1",
+      "kind": "function"
+    },
+    {
+      "name": "ResearchFourCornerCut",
+      "kind": "function"
+    },
+    {
+      "name": "PerformDrilledCutV1",
+      "kind": "function"
+    },
+    {
+      "name": "GetProductionHistory",
+      "kind": "function"
+    },
+    {
+      "name": "ClassifyPointToFace",
+      "kind": "function"
+    },
+    {
+      "name": "ClassifyFaceToFace",
+      "kind": "function"
+    },
+    {
+      "name": "ClassifyEdgeToFace",
+      "kind": "function"
+    }
+  ],
+  "jsExposedRelevantNames": [
+    "_ApplyOwnedEdgeTreatmentV1",
+    "_CallCommand",
+    "_ClassifyEdgeToFace",
+    "_ClassifyFaceToFace",
+    "_ClassifyOwnedPointV2",
+    "_ClassifyPointToFace",
+    "_CreateSelectedProfileV2",
+    "_CreateSelectedProfileV3",
+    "_GetProductionHistory",
+    "_InspectDrilledTopologyV1",
+    "_InspectOwnedSolidV2",
+    "_InspectTopologyCensusV1",
+    "_Interogate",
+    "_OwnedShapeNamesV2",
+    "_PerformDrilledCutV1",
+    "_ReadOwnedMeshV2",
+    "_ReadOwnedTopologyV1",
+    "_ReleaseOwnedShapeV2",
+    "_ResearchFourCornerCut"
+  ],
+  "glueExposedNameCount": 49
+}

@@ -1,0 +1,23 @@
+# Read-only primitive reader and projection fidelity
+
+Bounded source fix on base `1350b705a1e265618aa763c67965b6d4fc3937bd`. No solver, Worker, craft, coordinator, desktop or file-state source is changed. Exact source-file SHA256 values and the immutable test bundle hash are in each browser receipt. The baseline bundle reads the unmodified detached base worktree; the candidate bundle reads the changed production modules. Each CDP Fetch overlay reads its bytes once and serves that same buffer under a same-origin URL allowed by the app CSP.
+
+The actual app fixture is unchanged source `5f8d745d9dcce2f60d16e6cbee837cdf6b3ab6c8`, direct20486, app SHA256 `17a1350c7d866a63d9e52e2ebe06522ad6a0d8b52d3244333121a2f046261fb7`. This qualifies the candidate production reader/model/view modules in real Chromium/WebGL, **not** a rebuilt integrated app or a registered agent command. A real app-created plane supplies the surface; actual MFace and SketchingView classes use the actual app services. Dedicated real WebGL canvases render the resulting projections. There is no substitute reader, geometry math, renderer or viewer service.
+
+The reader now preserves standalone Point as a display-only SketchPoint. It has a stable global ID, one local point and a real THREE.Points projection; it never enters connections/loops/contours. Its projection has no raycast collider and owns/disposes its geometry and material. Construction geometry of every currently read type routes to the historical constructionSegments display collection when requested, and is omitted when construction is not requested. That collection's old name is preserved for compatibility. MFace includes authored points in sketchObjects and excludes them from loops/regions. Existing curve calculations and ordinary curve classifications are unchanged.
+
+Actual negative control `baseline-browser.json` reproduces Point omission (zero objects/pixels), construction BSpline omission and construction Circle becoming one contour/one region. Construction Arc/Bezier go to connections and Circle/Ellipse/EllipticalArc go to loops. The baseline is retained; no expectation hides that behavior.
+
+Actual candidate `fixed-browser.json` passes:
+
+- All eight types (Point, Segment, Circle, Arc, Ellipse, EllipticalArc, BezierCurve, BSpline) remain visible as construction, with zero connections/loops and finite tessellation. Omitting construction omits all eight.
+- Twelve real WebGL projection controls cover ordinary Point/Segment/Circle/Arc plus all eight construction types. Each renders nonwhite pixels, has the proper role/color, and disposes its observed geometry/material once. Point has exactly one vertex, 49 colored pixels, zero raycast hits and blue/brown color by role. Construction BSpline renders 324 pixels.
+- A translated/rotated plane maps Point local [2,3,0] to world [23,-30,42] and retains reader-face/moved-point identity.
+- Authored Point and crossing construction line/circle leave a rectangle's one contour and exact selected region ID unchanged. An ordinary inner Circle changes the region ID, so the old region is absent. No feature extrusion, automatic hole selection or arbitrary planar-arrangement validity is claimed.
+- Independent Node `compare.cjs` proves exact ordinary curve IDs/tessellations unchanged for all seven carried curve types, and construction geometry equals the same ordinary geometry for all eight types. Authored input data is unchanged.
+
+The existing narrow region reader still reports “A closed profile is required” for Point-only/open sketches. This is profile availability, not a new rejection of valid authored open geometry. Unsupported older ellipse ep1 serialization remains outside this change. No general contour/solid/manufacturing or curve-engine parity claim follows.
+
+Validation: full repository `tsc --noEmit --pretty false`, both tiny webpack builds, actual baseline/fixed browser controls, Node `compare.cjs`, syntax and diff checks pass. Webpack emits only size/performance guidance for the 2.1 MiB test-only export bundle. Browser contexts are closed; the parent-owned fixture remains running.
+
+Reproduce with Node24 and Puppeteer core: build `webpack.config.cjs` with CODI_READER_SOURCE_ROOT and CODI_READER_OUTPUT. Run `browser.test.cjs` with loopback JSKETCHER_TEST_URL/CODI_TEST_CDP, CODI_APP_SHA256, CODI_READER_SOURCE_ROOT, CODI_READER_BUNDLE, CODI_SOURCE_DESCRIPTION (JSON base/variant), PUPPETEER_CORE_PATH and CODI_RECEIPT; set CODI_EXPECT_FIXED=1 for the candidate. Then run `node test/sketch-reader-fidelity/compare.cjs`. Bundle bytes and recorded source-file hashes must agree with the intended checkout.

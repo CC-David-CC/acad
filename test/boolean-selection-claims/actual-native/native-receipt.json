@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "scope": "Direct C++ compiled to WASM helper qualification; no main export, public app, authored history/save or public holes claim",
+  "matrixRows": 61,
+  "matrixSuccesses": 59,
+  "matrixTypedRefusals": 2,
+  "validEmptyResults": 19,
+  "multiSolidResults": 9,
+  "plateBooleanCuts": 10,
+  "plateEdgeTreatments": 4,
+  "nativePointChecks": 132,
+  "generatedVertexTargetsPreserved": 20,
+  "plates": [
+    {
+      "case": "plate100x50",
+      "width": 100,
+      "height": 50,
+      "depth": 20,
+      "holes": 5,
+      "outerCornerFillets": 2,
+      "outerCornerChamfers": 2,
+      "nativeVolume": 97326.63736287944,
+      "expectedVolume": 97326.63736287945,
+      "nativeCylinderFaces": 7,
+      "retainedNativeAncestorsExact": 7
+    },
+    {
+      "case": "plate150x30",
+      "width": 150,
+      "height": 30,
+      "depth": 20,
+      "holes": 5,
+      "outerCornerFillets": 2,
+      "outerCornerChamfers": 2,
+      "nativeVolume": 87326.63736287947,
+      "expectedVolume": 87326.63736287945,
+      "nativeCylinderFaces": 7,
+      "retainedNativeAncestorsExact": 7
+    }
+  ],
+  "matrixSHA256": "a1a333fa692a9ab83c38a9f6ed2b7b6a52dee4b01fd8bd3baf25f4877e5b63b9",
+  "plateSHA256": "ab6d33f646a8b7ad2f89fc2aaf435efc7e001dae90ddef6268a68243bbb4c3af"
+}

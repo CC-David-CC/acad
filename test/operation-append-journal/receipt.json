@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PASS",
+  "scope": "pure-operation-append-journal-edge-treatment-only",
+  "base": "53c6203fb0abf37904b695300b81fe445a51b83c",
+  "node": "v24.22.1",
+  "tests": {
+    "newGroups": 16,
+    "retainedGroups": 37,
+    "total": 53,
+    "command": [
+      "/tmp/codi-files-move-node/bin/node",
+      "--test",
+      "--test-reporter=tap",
+      "test/operation-append-journal/journal.test.mjs",
+      "test/edge-treatment-journal/journal.test.mjs",
+      "test/mechanical/authored-edit-journal.test.mjs",
+      "test/through-hole-journal/journal.test.mjs"
+    ]
+  },
+  "sourceHashesBeforeAndAfter": {
+    "web/app/cad/craft/authoredEditJournal.mjs": "1eadf6096f287a74a0aaa1415baec78eb54a0c4bd1f8c8cdde8aea7afd879c07",
+    "modules/engine/solid/solidIntent.mjs": "aefd2681fb17603d7b40a704764e3a8e18f7931a37ae5f7ad6814154f88a7515",
+    "test/operation-append-journal/journal.test.mjs": "0199ef6b363cfb3fd36f3bf5af240fe557b9567d481225f3a5b75048adf61a4b",
+    "test/operation-append-journal/README.md": "985585788aa4e42d8b3ce5abda4998262200dc4ae96811807fc84252cb102e27",
+    "test/operation-append-journal/verify.mjs": "194cb2053571b3817cd42adca9655537c8a36319e27027c19830eb5cf076c614",
+    "test/operation-append-journal/harness-before.json": "dcea3f1c1e24cc9d42619fd239a35344b1d54ba5257f8752a295d66b0daf91b0"
+  },
+  "tapSHA256": "c6c88826f4b70ef030980030e6022b239f4db86bfd9ceccfabf5fa80783ebc4e",
+  "limitations": [
+    "No prefix graph/history/owner/journal-head proof",
+    "No pipeline, counter reuse, source writes, UI, native or persistence execution",
+    "No app UndoRedo or full Gate1 qualification"
+  ]
+}

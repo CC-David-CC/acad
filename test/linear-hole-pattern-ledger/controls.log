@@ -1,0 +1,25 @@
+✔ unknown or non-centered seeds and count1 refuse before dispatch (13.517643ms)
+✔ pattern source and target custody remain current (5.116581ms)
+✔ old mounts cannot silently evaluate a newly registered pattern (2.957889ms)
+✔ whole-part budget includes every transient pattern result and preserves build identity (1.04019ms)
+✔ centered seed witnesses survive corner cuts and treatments as immutable data only (1.743397ms)
+✔ source-bound holes inherit one genuine origin, fixture 0 (8.197051ms)
+✔ source-bound holes inherit one genuine origin, fixture 1 (3.908089ms)
+✔ source-bound holes inherit one genuine origin, fixture 2 (2.535755ms)
+✔ rejects stale source feature before native dispatch (1.550336ms)
+✔ rejects stale source face before native dispatch (1.02528ms)
+✔ rejects stale source region before native dispatch (0.902879ms)
+✔ rejects stale producer before native dispatch (0.91446ms)
+✔ missing genuine profile binding cannot authorize a through-hole source (0.710167ms)
+✔ changed source plane refuses dispatch and invalidates retained publication (4.891119ms)
+✔ consumed original output remains a private source, never a reused live operand (2.136391ms)
+✔ bad missing origin rejects before projection (1.163381ms)
+✔ bad invented tool origin rejects before projection (0.821188ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 137.01796

@@ -1,0 +1,1 @@
+const path=require('path');const config=require('./webpack.config.cjs');config.entry=path.join(__dirname,'locked-length-proof.test.mjs');config.output={path:'/tmp/codi-locked-length-proof',filename:'proof.cjs'};module.exports=config;

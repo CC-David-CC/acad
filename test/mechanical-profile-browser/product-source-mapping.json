@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "scope": "Post-run mapping of frozen component module and bootstrap bytes to a committed product tree; not app/history qualification or a replay of the C++ build",
+  "commit": "f5103e95969f07a783ac0197644ceb6a25d28d0b",
+  "bootstrapSha256": "75f08f14dd907084f86c4b0f8b4fe0d7a404ab978266e7bb0be315fa42907133",
+  "sources": {
+    "modules/engine/mount/occ-mechanical-profile-mount.mjs": "f60d63912fefe1cad09c9120cf43b07df04c5d3da709d1374e296118301d8bb2",
+    "modules/engine/mount/selectedProfilePlan.mjs": "824dc5bfc8555a89fe9a647612ce76970f98b8adfd6e648185dd29e9f311c8a0",
+    "modules/engine/mount/worker-controller.mjs": "b64fdedd176d18f950554796bf0ccb56248fe0fc83770272d54fb41026a616e6",
+    "modules/engine/mount/selectedProfileBudget.mjs": "22264ab4b700953d5aa6bc48479e6b6e945d1fddbcd36c4e0fd1f8ac0cd93d1e",
+    "modules/engine/mount/enclosureManufacturingMesh.mjs": "8e6486f479fd4e6379ac169eaff4a1b18380da4947421362a82c309c9e78f3a0",
+    "modules/engine/mount/enclosurePlan.mjs": "080ee18dd77731efaccfb9101b3d7f138b0ea6f525b881b2ccf4b174d544d19f",
+    "modules/engine/mount/enclosureMesh.mjs": "2b6f1474105c430f3efe6eb87d002576d6a9744a7b1cc98f5493ed129b2ce5f3",
+    "modules/engine/mount/contract.mjs": "374313f7212c6911d82ad9223e7441ac655e80d946c99ec4c663152398654f11",
+    "modules/engine/mount/workerReplyRecord.mjs": "56e3b40d184875c46ac81c9a5376fbc5b6e9dc2c6a8952bb70d99fdec141751f",
+    "modules/engine/mount/portable-topology-envelope.mjs": "cc0b58a590e9d4fe68b3a19a6ec5274401a605006425255eb2fc714a7150ea8a",
+    "modules/engine/mount/drilledTopologyEnvelope.mjs": "283740c9ef61cbc7a24dfd144e73608d008a2cf1a7a753b53652bdbcc876f346",
+    "modules/engine/mount/fourCornerMountContract.mjs": "cea81ebb05d1bc170df5639ed3ab567fd7f5a4aa08712f8eef3c994505fbc1d1",
+    "modules/engine/mount/selectionAncestryIndex.mjs": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+    "modules/engine/mount/ownedTopologyContract.mjs": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+    "modules/engine/mount/polygonProfilePlan.mjs": "fa5ab686b60bb16348074df57e37ba04d4173ac5e0b9a441e2d4dfc4cc03737d",
+    "modules/engine/extrusion/simplePolygon.mjs": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+    "modules/engine/mount/prismSelectionIndex.mjs": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c"
+  },
+  "jsSha256": "b3d91cbb02f90ba56732039283d787b92eda97c51091fafbd933ecf4db30dd97",
+  "wasmSha256": "28e8e2c2752cef100a98e24ec487f7d90021edb98fb060fdd1160fe63501bbe2",
+  "workerSha256": "cc5434dc3267ce8bc6cb565bbae98b51af2ba8daa78cbef60ab07a1cdb4a3270",
+  "qualifiedComponentCopies": {
+    "example.invalid": "/srv/data/codi-cad-mechanical-component-20261106-r1",
+    "r730": "/mnt/data10tb/codi-cad-component-assets-20261106/codi-mechanical-profile-component-20261106-r1"
+  }
+}

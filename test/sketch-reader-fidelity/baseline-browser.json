@@ -1,0 +1,1326 @@
+{
+  "version": 1,
+  "expectation": "baseline-negative-control",
+  "layer": "production-reader-model-view-bundle-in-actual-Chromium-with-real-WebGL",
+  "source": {
+    "base": "1350b705a1e265618aa763c67965b6d4fc3937bd",
+    "variant": "unmodified-production-reader-model-view",
+    "files": {
+      "web/app/cad/sketch/sketchReader.ts": "7975ea6015e371e5474bc380c1d001b7485eacb57168d91bd7cd1f2f8187c2c5",
+      "web/app/cad/sketch/sketchModel.ts": "bb7d5bead77e7de25eeddffe5fa5421e219e3efad5c47dd71639da20ec962d49",
+      "web/app/cad/model/mface.ts": "50fd204ab34c4ca6b2cfc2ec5e139c12cf8dbbc5c693b7781870b1a25954ae25",
+      "web/app/cad/scene/views/faceView.js": "003764137f400fe3f28d3ab4c0b1dd565fe6c835c8dc06e554291764f3a30e49",
+      "web/app/cad/scene/views/sketchPointView.js": null
+    }
+  },
+  "fixture": "http://127.0.0.1:20486/",
+  "app": {
+    "url": "http://127.0.0.1:20486/static/index.bundle.js",
+    "sha256": "17a1350c7d866a63d9e52e2ebe06522ad6a0d8b52d3244333121a2f046261fb7"
+  },
+  "wrapperSha256": "e7f555cf8db9f2033da7786eb06c40b182a8858ba81edc98d3a898158dc8eb9a",
+  "browser": "Chrome/155.0.8059.79",
+  "targetId": "DE3F21550C827787087CF5ABCBC80647",
+  "single": [
+    {
+      "type": "Point",
+      "connections": 0,
+      "loops": 0,
+      "construction": 0,
+      "points": 0,
+      "ids": [],
+      "tessellation": []
+    },
+    {
+      "type": "Segment",
+      "connections": 1,
+      "loops": 0,
+      "construction": 0,
+      "points": 0,
+      "ids": [
+        "reader-face/segment"
+      ],
+      "tessellation": [
+        [
+          [
+            -4,
+            -2,
+            0
+          ],
+          [
+            4,
+            2,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "type": "Circle",
+      "connections": 0,
+      "loops": 1,
+      "construction": 0,
+      "points": 0,
+      "ids": [
+        "reader-face/circle"
+      ],
+      "tessellation": [
+        [
+          [
+            3,
+            0,
+            0
+          ],
+          [
+            2.789364903187291,
+            1.1042841286856184,
+            0
+          ],
+          [
+            2.510986533655954,
+            1.6416292601554276,
+            0
+          ],
+          [
+            2.121320343559643,
+            2.121320343559643,
+            0
+          ],
+          [
+            1.6416292601554276,
+            2.510986533655954,
+            0
+          ],
+          [
+            1.1042841286856184,
+            2.789364903187291,
+            0
+          ],
+          [
+            0.5458891572364344,
+            2.949916105249723,
+            0
+          ],
+          [
+            1.8369701987210297e-16,
+            3,
+            0
+          ],
+          [
+            -1.1042841286856182,
+            2.789364903187291,
+            0
+          ],
+          [
+            -1.6416292601554276,
+            2.510986533655954,
+            0
+          ],
+          [
+            -2.121320343559643,
+            2.121320343559643,
+            0
+          ],
+          [
+            -2.510986533655954,
+            1.6416292601554279,
+            0
+          ],
+          [
+            -2.789364903187291,
+            1.1042841286856186,
+            0
+          ],
+          [
+            -2.949916105249723,
+            0.5458891572364346,
+            0
+          ],
+          [
+            -3,
+            3.6739403974420594e-16,
+            0
+          ],
+          [
+            -2.789364903187291,
+            -1.104284128685618,
+            0
+          ],
+          [
+            -2.510986533655954,
+            -1.6416292601554274,
+            0
+          ],
+          [
+            -2.1213203435596433,
+            -2.1213203435596424,
+            0
+          ],
+          [
+            -1.6416292601554279,
+            -2.510986533655954,
+            0
+          ],
+          [
+            -1.1042841286856186,
+            -2.789364903187291,
+            0
+          ],
+          [
+            -0.5458891572364347,
+            -2.949916105249723,
+            0
+          ],
+          [
+            -5.51091059616309e-16,
+            -3,
+            0
+          ],
+          [
+            1.1042841286856178,
+            -2.789364903187291,
+            0
+          ],
+          [
+            1.6416292601554272,
+            -2.510986533655954,
+            0
+          ],
+          [
+            2.1213203435596424,
+            -2.1213203435596433,
+            0
+          ],
+          [
+            2.510986533655954,
+            -1.6416292601554279,
+            0
+          ],
+          [
+            2.789364903187291,
+            -1.1042841286856189,
+            0
+          ],
+          [
+            2.949916105249723,
+            -0.5458891572364348,
+            0
+          ],
+          [
+            3,
+            -7.347880794884119e-16,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "type": "Arc",
+      "connections": 1,
+      "loops": 0,
+      "construction": 0,
+      "points": 0,
+      "ids": [
+        "reader-face/arc"
+      ],
+      "tessellation": [
+        [
+          [
+            3,
+            0,
+            0
+          ],
+          [
+            2.789364903187291,
+            1.1042841286856184,
+            0
+          ],
+          [
+            2.510986533655954,
+            1.6416292601554276,
+            0
+          ],
+          [
+            2.121320343559643,
+            2.121320343559643,
+            0
+          ],
+          [
+            1.6416292601554276,
+            2.510986533655954,
+            0
+          ],
+          [
+            1.1042841286856184,
+            2.789364903187291,
+            0
+          ],
+          [
+            0.5458891572364342,
+            2.949916105249723,
+            0
+          ],
+          [
+            0,
+            3,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "type": "Ellipse",
+      "connections": 0,
+      "loops": 1,
+      "construction": 0,
+      "points": 0,
+      "ids": [
+        "reader-face/ellipse"
+      ],
+      "tessellation": [
+        [
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            3.9332214736662974,
+            0.36392610482428933,
+            0
+          ],
+          [
+            3.719153204249721,
+            0.7361894191237455,
+            0
+          ],
+          [
+            3.3479820448746054,
+            1.094419506770285,
+            0
+          ],
+          [
+            2.82842712474619,
+            1.414213562373095,
+            0
+          ],
+          [
+            2.18883901354057,
+            1.6739910224373027,
+            0
+          ],
+          [
+            1.4723788382474914,
+            1.8595766021248603,
+            0
+          ],
+          [
+            2.4492935982947064e-16,
+            2,
+            0
+          ],
+          [
+            -1.4723788382474907,
+            1.8595766021248605,
+            0
+          ],
+          [
+            -2.82842712474619,
+            1.4142135623730954,
+            0
+          ],
+          [
+            -3.3479820448746054,
+            1.0944195067702853,
+            0
+          ],
+          [
+            -3.7191532042497206,
+            0.7361894191237457,
+            0
+          ],
+          [
+            -3.933221473666297,
+            0.36392610482428966,
+            0
+          ],
+          [
+            -4,
+            2.4492935982947064e-16,
+            0
+          ],
+          [
+            -3.9332214736662974,
+            -0.36392610482428916,
+            0
+          ],
+          [
+            -3.719153204249721,
+            -0.7361894191237451,
+            0
+          ],
+          [
+            -3.3479820448746054,
+            -1.0944195067702847,
+            0
+          ],
+          [
+            -2.82842712474619,
+            -1.4142135623730947,
+            0
+          ],
+          [
+            -2.1888390135405706,
+            -1.6739910224373025,
+            0
+          ],
+          [
+            -1.4723788382474916,
+            -1.8595766021248603,
+            0
+          ],
+          [
+            -7.347880794884119e-16,
+            -2,
+            0
+          ],
+          [
+            1.4723788382474903,
+            -1.859576602124861,
+            0
+          ],
+          [
+            2.82842712474619,
+            -1.4142135623730958,
+            0
+          ],
+          [
+            3.3479820448746054,
+            -1.0944195067702858,
+            0
+          ],
+          [
+            3.7191532042497206,
+            -0.736189419123746,
+            0
+          ],
+          [
+            3.933221473666297,
+            -0.36392610482429,
+            0
+          ],
+          [
+            4,
+            -4.898587196589413e-16,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "type": "EllipticalArc",
+      "connections": 0,
+      "loops": 1,
+      "construction": 0,
+      "points": 0,
+      "ids": [
+        "reader-face/elliptical-arc"
+      ],
+      "tessellation": [
+        [
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            3.9332214736662974,
+            0.36392610482428933,
+            0
+          ],
+          [
+            3.719153204249721,
+            0.7361894191237455,
+            0
+          ],
+          [
+            3.3479820448746054,
+            1.094419506770285,
+            0
+          ],
+          [
+            2.82842712474619,
+            1.414213562373095,
+            0
+          ],
+          [
+            2.18883901354057,
+            1.6739910224373027,
+            0
+          ],
+          [
+            1.4723788382474914,
+            1.8595766021248603,
+            0
+          ],
+          [
+            2.4492935982947064e-16,
+            2,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "type": "BezierCurve",
+      "connections": 1,
+      "loops": 0,
+      "construction": 0,
+      "points": 0,
+      "ids": [
+        "reader-face/bezier"
+      ],
+      "tessellation": [
+        [
+          [
+            -4,
+            0,
+            0
+          ],
+          [
+            -3.1640625,
+            0.984375,
+            0
+          ],
+          [
+            -2.1875,
+            1.6875,
+            0
+          ],
+          [
+            -1.1171875,
+            2.109375,
+            0
+          ],
+          [
+            0,
+            2.25,
+            0
+          ],
+          [
+            1.1171875,
+            2.109375,
+            0
+          ],
+          [
+            2.1875,
+            1.6875,
+            0
+          ],
+          [
+            3.1640625,
+            0.984375,
+            0
+          ],
+          [
+            4,
+            0,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "type": "BSpline",
+      "connections": 1,
+      "loops": 0,
+      "construction": 0,
+      "points": 0,
+      "ids": [
+        "reader-face/spline"
+      ],
+      "tessellation": [
+        [
+          [
+            -3,
+            -3,
+            0
+          ],
+          [
+            3,
+            3,
+            0
+          ]
+        ]
+      ]
+    }
+  ],
+  "allSummary": {
+    "connections": 2,
+    "loops": 3,
+    "construction": 1,
+    "points": 0,
+    "ids": [
+      "reader-face/arc",
+      "reader-face/bezier",
+      "reader-face/circle",
+      "reader-face/ellipse",
+      "reader-face/elliptical-arc",
+      "reader-face/segment"
+    ]
+  },
+  "omitted": {
+    "connections": 0,
+    "loops": 0,
+    "construction": 0,
+    "points": 0,
+    "ids": []
+  },
+  "circleOnly": {
+    "connections": 0,
+    "loops": 1,
+    "construction": 0,
+    "points": 0,
+    "ids": [
+      "reader-face/circle"
+    ],
+    "contours": 1,
+    "regions": 1
+  },
+  "profileFacts": {
+    "profileId": "sketch-region:{\"faceId\":\"reader-face\",\"outer\":[\"reader-face/rect-0\",\"reader-face/rect-1\",\"reader-face/rect-2\",\"reader-face/rect-3\"],\"holes\":[]}",
+    "auxiliaryIds": [],
+    "auxiliaryContours": 2,
+    "auxiliaryObjects": [
+      {
+        "id": "reader-face/cross-line",
+        "construction": true
+      },
+      {
+        "id": "reader-face/rect-0",
+        "construction": false
+      },
+      {
+        "id": "reader-face/rect-1",
+        "construction": false
+      },
+      {
+        "id": "reader-face/rect-2",
+        "construction": false
+      },
+      {
+        "id": "reader-face/rect-3",
+        "construction": false
+      },
+      {
+        "id": "reader-face/cross-circle",
+        "construction": false
+      }
+    ],
+    "auxiliaryError": "Profiles intersect, touch or are too close; separate them before extruding.",
+    "ordinaryCircleIds": [
+      "sketch-region:{\"faceId\":\"reader-face\",\"outer\":[\"reader-face/rect-0\",\"reader-face/rect-1\",\"reader-face/rect-2\",\"reader-face/rect-3\"],\"holes\":[[\"reader-face/inner-circle\"]]}",
+      "sketch-region:{\"faceId\":\"reader-face\",\"outer\":[\"reader-face/inner-circle\"],\"holes\":[]}"
+    ]
+  },
+  "transform": [],
+  "draws": [
+    {
+      "type": "Point",
+      "construction": false,
+      "objects": 0,
+      "buffers": [],
+      "nonwhite": 0,
+      "render": {
+        "points": 0,
+        "calls": 0
+      },
+      "geometryDisposals": 0,
+      "materialDisposals": 0,
+      "detached": true
+    },
+    {
+      "type": "Segment",
+      "construction": false,
+      "objects": 1,
+      "buffers": [
+        {
+          "id": "reader-face/segment",
+          "construction": false,
+          "isPoints": false,
+          "vertices": 8,
+          "positions": null,
+          "color": 255
+        }
+      ],
+      "nonwhite": 264,
+      "render": {
+        "points": 0,
+        "calls": 1
+      },
+      "geometryDisposals": 1,
+      "materialDisposals": 1,
+      "detached": true
+    },
+    {
+      "type": "Circle",
+      "construction": false,
+      "objects": 1,
+      "buffers": [
+        {
+          "id": "reader-face/circle",
+          "construction": false,
+          "isPoints": false,
+          "vertices": 8,
+          "positions": null,
+          "color": 255
+        }
+      ],
+      "nonwhite": 600,
+      "render": {
+        "points": 0,
+        "calls": 1
+      },
+      "geometryDisposals": 1,
+      "materialDisposals": 1,
+      "detached": true
+    },
+    {
+      "type": "Arc",
+      "construction": false,
+      "objects": 1,
+      "buffers": [
+        {
+          "id": "reader-face/arc",
+          "construction": false,
+          "isPoints": false,
+          "vertices": 8,
+          "positions": null,
+          "color": 255
+        }
+      ],
+      "nonwhite": 154,
+      "render": {
+        "points": 0,
+        "calls": 1
+      },
+      "geometryDisposals": 1,
+      "materialDisposals": 1,
+      "detached": true
+    },
+    {
+      "type": "Point",
+      "construction": true,
+      "objects": 0,
+      "buffers": [],
+      "nonwhite": 0,
+      "render": {
+        "points": 0,
+        "calls": 0
+      },
+      "geometryDisposals": 0,
+      "materialDisposals": 0,
+      "detached": true
+    },
+    {
+      "type": "Segment",
+      "construction": true,
+      "objects": 1,
+      "buffers": [
+        {
+          "id": "reader-face/segment",
+          "construction": true,
+          "isPoints": false,
+          "vertices": 8,
+          "positions": null,
+          "color": 9849600
+        }
+      ],
+      "nonwhite": 264,
+      "render": {
+        "points": 0,
+        "calls": 1
+      },
+      "geometryDisposals": 1,
+      "materialDisposals": 1,
+      "detached": true
+    },
+    {
+      "type": "Circle",
+      "construction": true,
+      "objects": 1,
+      "buffers": [
+        {
+          "id": "reader-face/circle",
+          "construction": false,
+          "isPoints": false,
+          "vertices": 8,
+          "positions": null,
+          "color": 255
+        }
+      ],
+      "nonwhite": 600,
+      "render": {
+        "points": 0,
+        "calls": 1
+      },
+      "geometryDisposals": 1,
+      "materialDisposals": 1,
+      "detached": true
+    },
+    {
+      "type": "Arc",
+      "construction": true,
+      "objects": 1,
+      "buffers": [
+        {
+          "id": "reader-face/arc",
+          "construction": false,
+          "isPoints": false,
+          "vertices": 8,
+          "positions": null,
+          "color": 255
+        }
+      ],
+      "nonwhite": 154,
+      "render": {
+        "points": 0,
+        "calls": 1
+      },
+      "geometryDisposals": 1,
+      "materialDisposals": 1,
+      "detached": true
+    },
+    {
+      "type": "Ellipse",
+      "construction": true,
+      "objects": 1,
+      "buffers": [
+        {
+          "id": "reader-face/ellipse",
+          "construction": false,
+          "isPoints": false,
+          "vertices": 8,
+          "positions": null,
+          "color": 255
+        }
+      ],
+      "nonwhite": 616,
+      "render": {
+        "points": 0,
+        "calls": 1
+      },
+      "geometryDisposals": 1,
+      "materialDisposals": 1,
+      "detached": true
+    },
+    {
+      "type": "EllipticalArc",
+      "construction": true,
+      "objects": 1,
+      "buffers": [
+        {
+          "id": "reader-face/elliptical-arc",
+          "construction": false,
+          "isPoints": false,
+          "vertices": 8,
+          "positions": null,
+          "color": 255
+        }
+      ],
+      "nonwhite": 160,
+      "render": {
+        "points": 0,
+        "calls": 1
+      },
+      "geometryDisposals": 1,
+      "materialDisposals": 1,
+      "detached": true
+    },
+    {
+      "type": "BezierCurve",
+      "construction": true,
+      "objects": 1,
+      "buffers": [
+        {
+          "id": "reader-face/bezier",
+          "construction": false,
+          "isPoints": false,
+          "vertices": 8,
+          "positions": null,
+          "color": 255
+        }
+      ],
+      "nonwhite": 309,
+      "render": {
+        "points": 0,
+        "calls": 1
+      },
+      "geometryDisposals": 1,
+      "materialDisposals": 1,
+      "detached": true
+    },
+    {
+      "type": "BSpline",
+      "construction": true,
+      "objects": 0,
+      "buffers": [],
+      "nonwhite": 0,
+      "render": {
+        "points": 0,
+        "calls": 0
+      },
+      "geometryDisposals": 0,
+      "materialDisposals": 0,
+      "detached": true
+    }
+  ],
+  "constructionInputUnchanged": true,
+  "allConstructionTessellations": [
+    {
+      "id": "reader-face/arc",
+      "points": [
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          2.789364903187291,
+          1.1042841286856184,
+          0
+        ],
+        [
+          2.510986533655954,
+          1.6416292601554276,
+          0
+        ],
+        [
+          2.121320343559643,
+          2.121320343559643,
+          0
+        ],
+        [
+          1.6416292601554276,
+          2.510986533655954,
+          0
+        ],
+        [
+          1.1042841286856184,
+          2.789364903187291,
+          0
+        ],
+        [
+          0.5458891572364342,
+          2.949916105249723,
+          0
+        ],
+        [
+          0,
+          3,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "reader-face/bezier",
+      "points": [
+        [
+          -4,
+          0,
+          0
+        ],
+        [
+          -3.1640625,
+          0.984375,
+          0
+        ],
+        [
+          -2.1875,
+          1.6875,
+          0
+        ],
+        [
+          -1.1171875,
+          2.109375,
+          0
+        ],
+        [
+          0,
+          2.25,
+          0
+        ],
+        [
+          1.1171875,
+          2.109375,
+          0
+        ],
+        [
+          2.1875,
+          1.6875,
+          0
+        ],
+        [
+          3.1640625,
+          0.984375,
+          0
+        ],
+        [
+          4,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "reader-face/circle",
+      "points": [
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          2.789364903187291,
+          1.1042841286856184,
+          0
+        ],
+        [
+          2.510986533655954,
+          1.6416292601554276,
+          0
+        ],
+        [
+          2.121320343559643,
+          2.121320343559643,
+          0
+        ],
+        [
+          1.6416292601554276,
+          2.510986533655954,
+          0
+        ],
+        [
+          1.1042841286856184,
+          2.789364903187291,
+          0
+        ],
+        [
+          0.5458891572364344,
+          2.949916105249723,
+          0
+        ],
+        [
+          1.8369701987210297e-16,
+          3,
+          0
+        ],
+        [
+          -1.1042841286856182,
+          2.789364903187291,
+          0
+        ],
+        [
+          -1.6416292601554276,
+          2.510986533655954,
+          0
+        ],
+        [
+          -2.121320343559643,
+          2.121320343559643,
+          0
+        ],
+        [
+          -2.510986533655954,
+          1.6416292601554279,
+          0
+        ],
+        [
+          -2.789364903187291,
+          1.1042841286856186,
+          0
+        ],
+        [
+          -2.949916105249723,
+          0.5458891572364346,
+          0
+        ],
+        [
+          -3,
+          3.6739403974420594e-16,
+          0
+        ],
+        [
+          -2.789364903187291,
+          -1.104284128685618,
+          0
+        ],
+        [
+          -2.510986533655954,
+          -1.6416292601554274,
+          0
+        ],
+        [
+          -2.1213203435596433,
+          -2.1213203435596424,
+          0
+        ],
+        [
+          -1.6416292601554279,
+          -2.510986533655954,
+          0
+        ],
+        [
+          -1.1042841286856186,
+          -2.789364903187291,
+          0
+        ],
+        [
+          -0.5458891572364347,
+          -2.949916105249723,
+          0
+        ],
+        [
+          -5.51091059616309e-16,
+          -3,
+          0
+        ],
+        [
+          1.1042841286856178,
+          -2.789364903187291,
+          0
+        ],
+        [
+          1.6416292601554272,
+          -2.510986533655954,
+          0
+        ],
+        [
+          2.1213203435596424,
+          -2.1213203435596433,
+          0
+        ],
+        [
+          2.510986533655954,
+          -1.6416292601554279,
+          0
+        ],
+        [
+          2.789364903187291,
+          -1.1042841286856189,
+          0
+        ],
+        [
+          2.949916105249723,
+          -0.5458891572364348,
+          0
+        ],
+        [
+          3,
+          -7.347880794884119e-16,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "reader-face/ellipse",
+      "points": [
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          3.9332214736662974,
+          0.36392610482428933,
+          0
+        ],
+        [
+          3.719153204249721,
+          0.7361894191237455,
+          0
+        ],
+        [
+          3.3479820448746054,
+          1.094419506770285,
+          0
+        ],
+        [
+          2.82842712474619,
+          1.414213562373095,
+          0
+        ],
+        [
+          2.18883901354057,
+          1.6739910224373027,
+          0
+        ],
+        [
+          1.4723788382474914,
+          1.8595766021248603,
+          0
+        ],
+        [
+          2.4492935982947064e-16,
+          2,
+          0
+        ],
+        [
+          -1.4723788382474907,
+          1.8595766021248605,
+          0
+        ],
+        [
+          -2.82842712474619,
+          1.4142135623730954,
+          0
+        ],
+        [
+          -3.3479820448746054,
+          1.0944195067702853,
+          0
+        ],
+        [
+          -3.7191532042497206,
+          0.7361894191237457,
+          0
+        ],
+        [
+          -3.933221473666297,
+          0.36392610482428966,
+          0
+        ],
+        [
+          -4,
+          2.4492935982947064e-16,
+          0
+        ],
+        [
+          -3.9332214736662974,
+          -0.36392610482428916,
+          0
+        ],
+        [
+          -3.719153204249721,
+          -0.7361894191237451,
+          0
+        ],
+        [
+          -3.3479820448746054,
+          -1.0944195067702847,
+          0
+        ],
+        [
+          -2.82842712474619,
+          -1.4142135623730947,
+          0
+        ],
+        [
+          -2.1888390135405706,
+          -1.6739910224373025,
+          0
+        ],
+        [
+          -1.4723788382474916,
+          -1.8595766021248603,
+          0
+        ],
+        [
+          -7.347880794884119e-16,
+          -2,
+          0
+        ],
+        [
+          1.4723788382474903,
+          -1.859576602124861,
+          0
+        ],
+        [
+          2.82842712474619,
+          -1.4142135623730958,
+          0
+        ],
+        [
+          3.3479820448746054,
+          -1.0944195067702858,
+          0
+        ],
+        [
+          3.7191532042497206,
+          -0.736189419123746,
+          0
+        ],
+        [
+          3.933221473666297,
+          -0.36392610482429,
+          0
+        ],
+        [
+          4,
+          -4.898587196589413e-16,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "reader-face/elliptical-arc",
+      "points": [
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          3.9332214736662974,
+          0.36392610482428933,
+          0
+        ],
+        [
+          3.719153204249721,
+          0.7361894191237455,
+          0
+        ],
+        [
+          3.3479820448746054,
+          1.094419506770285,
+          0
+        ],
+        [
+          2.82842712474619,
+          1.414213562373095,
+          0
+        ],
+        [
+          2.18883901354057,
+          1.6739910224373027,
+          0
+        ],
+        [
+          1.4723788382474914,
+          1.8595766021248603,
+          0
+        ],
+        [
+          2.4492935982947064e-16,
+          2,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "reader-face/segment",
+      "points": [
+        [
+          -4,
+          -2,
+          0
+        ],
+        [
+          4,
+          2,
+          0
+        ]
+      ]
+    }
+  ]
+}

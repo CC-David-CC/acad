@@ -1,0 +1,37 @@
+{
+  "fixture": "http://127.0.0.1:20551/static/index.html",
+  "source": "CAD047e41961 atop a548e2da0; cancellation followup; Worker unchanged078dc",
+  "pinnedModules": [
+    {
+      "url": "/static/smlibMount.mjs",
+      "sha256": "9530d3c2c55348841266a0a973b3c9b2300c6796f6d3f774cc530e09bfcb57d6"
+    },
+    {
+      "url": "/static/smlib-worker.js",
+      "sha256": "078dc881c488e82fff16cfdcdaef077c107a61e8b7ab45e522f32f7509f403ed"
+    },
+    {
+      "url": "/static/smlib.wasm",
+      "sha256": "a48a3283760c21337881c5e2d5c973dbc62cf95cae46d1c012effd75389eb1ae"
+    }
+  ],
+  "engines": [
+    {
+      "slot": "smlib",
+      "moduleUrl": "/static/smlibMount.mjs",
+      "exportName": "createVerifiedSmlibMount",
+      "options": {
+        "workerUrl": "/static/smlib-worker.js",
+        "wasmPath": "/static/smlib.wasm"
+      },
+      "expected": {
+        "engine": "smlib-wasm",
+        "representation": "smlib-brep-worker-owned",
+        "jsSha256": "edf63120f9e08e7fbad9fa2e44bebb8b28eee0dfaae50b4b720fd084438f6c24",
+        "wasmSha256": "a48a3283760c21337881c5e2d5c973dbc62cf95cae46d1c012effd75389eb1ae",
+        "emptyRefusal": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "emptyRefusalClosesMount": true
+      }
+    }
+  ]
+}

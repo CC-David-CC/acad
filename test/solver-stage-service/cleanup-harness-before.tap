@@ -1,0 +1,136 @@
+TAP version 13
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: normal discovery/analyze command closes the saved multi-stage service refusal
+ok 1 - normal discovery/analyze command closes the saved multi-stage service refusal
+  ---
+  duration_ms: 153.888703
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: active mode uses real current staged solver objects and the same authorized commands
+ok 2 - active mode uses real current staged solver objects and the same authorized commands
+  ---
+  duration_ms: 148.617171
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: ordinary single-stage saved/active output shape and Worker option remain unchanged
+ok 3 - ordinary single-stage saved/active output shape and Worker option remain unchanged
+  ---
+  duration_ms: 257.05572
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed saved/active multi-stage diagnostics retain dimensional names and use normal typed task
+ok 4 - typed saved/active multi-stage diagnostics retain dimensional names and use normal typed task
+  ---
+  duration_ms: 275.719232
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed single-stage diagnostics and typed-dependent-solve keep existing contracts
+ok 5 - typed single-stage diagnostics and typed-dependent-solve keep existing contracts
+  ---
+  duration_ms: 264.016218
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: unsupported typed units/bindings return honest unavailable snapshots without a rank claim
+ok 6 - unsupported typed units/bindings return honest unavailable snapshots without a rank claim
+  ---
+  duration_ms: 233.831733
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: singular stages and shared-budget exhaustion remain explicit through the normal service
+ok 7 - singular stages and shared-budget exhaustion remain explicit through the normal service
+  ---
+  duration_ms: 257.12275
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: saved source ABA/history/stream/document changes invalidate completed Worker reports
+ok 8 - saved source ABA/history/stream/document changes invalidate completed Worker reports
+  ---
+  duration_ms: 645.888717
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: active actual parameter mutation invalidates pending active-source diagnostics
+ok 9 - active actual parameter mutation invalidates pending active-source diagnostics
+  ---
+  duration_ms: 132.15896
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed physical currentness and original physical source fence completed reports
+ok 10 - typed physical currentness and original physical source fence completed reports
+  ---
+  duration_ms: 269.574193
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: host cancellation/detachment is enforced by unchanged normal command lifetime custody
+not ok 11 - host cancellation/detachment is enforced by unchanged normal command lifetime custody
+  ---
+  duration_ms: 128.754497
+  type: 'test'
+  location: '/tmp/codi-cad-solver-stage-service-20261106/test/solver-stage-service/service.test.mjs:49:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    use (file:///tmp/codi-cad-solver-stage-service-20261106/test/solver-stage-service/service.test.mjs:13:144)
+    async TestContext.<anonymous> (file:///tmp/codi-cad-solver-stage-service-20261106/test/solver-stage-service/service.test.mjs:50:60)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: malformed ordered reports, nullity and original residuals refuse after actual Worker solve
+ok 12 - malformed ordered reports, nullity and original residuals refuse after actual Worker solve
+  ---
+  duration_ms: 1215.249865
+  type: 'test'
+  ...
+# Subtest: normal protocol rejects new caller scope fields, stale revisions and stale saved frames
+ok 13 - normal protocol rejects new caller scope fields, stale revisions and stale saved frames
+  ---
+  duration_ms: 1.07189
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 12
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4158.437984

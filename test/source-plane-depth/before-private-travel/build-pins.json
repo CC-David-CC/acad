@@ -1,0 +1,23 @@
+{
+  "head": "066a38e5bbb27fa00eb127061e67e311f0a3d9b1",
+  "sourceHashesBeforeAfter": {
+    "web/app/cad/craft/sourcePlaneDepthCommands.ts": "1ea7d27d25e5c1a404b36fb47557d0dff95ddb416a657b721b277a61139e9e64",
+    "web/app/cad/craft/craftBundle.ts": "058146740672ecd1f907050d7a6cf477dea5b74ce5ec85d7f530e2de87f91940",
+    "web/app/cad/craft/authoredEditJournal.mjs": "8708006c2a2aa0746f868c7ff785a72b47ad9e173469bb14521be6d6d3b784e3",
+    "web/app/sketcher/headless/sourcePlaneDepthEnvelope.mjs": "a56468f89001ae9dbe242fdbd27550b39b63fd9b59f5561d11cf9654a1157ce9",
+    "web/app/sketcher/headless/sourcePlaneDepthClient.ts": "eb447590d1a22e0b568dec6bbb238f3b7f7a56850c15b0634cd01273742b11c1",
+    "web/app/sketcher/headless/sourcePlaneDepthTransition.ts": "7b960d6deec4b46312483663c6441b1bef86faeae642af8a58b04ffa59c4999e",
+    "web/app/sketcher/headless/solveWorker.ts": "b7d09391e952f22ebd60e98fb62b2e5ade801d395a0a7d0833146e53dc743004",
+    "web/app/sketcher/headless/client.ts": "48e1f7c63f67da69c5922402972bf5cdb942837ad540ff7f95c79bf9c4c52a95",
+    "test/source-plane-depth/entry.ts": "e6dcb4f837eb2a9f4de37d4af9e0e115693b51cf33c86f901cb1d2220e033471",
+    "test/source-plane-depth/build.cjs": "6e04a686bc522aa2d9ac5f010087d99db35b82ca7be39f82abcf5ee90e7d50ef",
+    "test/source-plane-depth/browser-entry.ts": "d60bf0413de28cec68f6a18a3d3a5a6e8778801aceff6959ccd02eed0d5cb4a2"
+  },
+  "sketch": "dc5fa20c3f7a8879396dab3cfc14b792f8364d862368cc1a334979b3ce6fcf9d",
+  "service": "6aff9bddab2260f6c2825b6792504d070c6411d0d0ca60f18d1bfb99af18cd20",
+  "browser": "9d288389f88ca642c527ae1b9488185e2318c9d94c2b73ab545b9f684f7714ae",
+  "verb": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3",
+  "numeric": "987450eec65f7e00c74c8da9281537558fd1ee8e63ee48721253cf2458260386",
+  "node": "v24.22.1",
+  "webpack": "5.74.0"
+}

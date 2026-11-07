@@ -1,0 +1,53 @@
+{
+  "source": "2bef632f",
+  "build": "Normal npm run build; CODI_EMBED_NUMERIC=1 CODI_EMBED_MANIFOLD=1; no test mount alias",
+  "typecheck": "PASS",
+  "commandTest": "PASS test/worker-feature-commands/browser.test.cjs",
+  "timeoutTest": "PASS test/webos/project-restore-timeout-browser.test.cjs",
+  "timeoutEvidence": {
+    "result": {
+      "ok": false,
+      "name": "Error",
+      "message": "The project rebuild timed out.",
+      "diagnostic": {
+        "expectedHistory": 2,
+        "actualHistory": 0,
+        "pointer": -1,
+        "processing": true,
+        "elapsedMs": 30020,
+        "resources": {
+          "owners": 1,
+          "candidates": 1,
+          "accepted": 0,
+          "cleanupFailed": false
+        }
+      }
+    },
+    "lateDelivered": true,
+    "aborted": true,
+    "terminations": 1,
+    "keys": 0,
+    "stable": true,
+    "waitAfterHoldMs": 29908
+  },
+  "limits": [
+    "Disposable test-host app, not signed desktop registry",
+    "Intermittent original restore delay cause remains open",
+    "No public deployment",
+    "Bracket/enclosure/3MF not qualified"
+  ],
+  "logs": {
+    "build": {
+      "sha256": "01e990099d5cb3707feb2a5e763686bc49d8b27b8727597c9f6a7d784e1c0aba"
+    },
+    "tsc": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "commands": {
+      "sha256": "0fa241358b72b1e0c17e765facb9effebe762f0340a8361cbf5a6abe0dca8dd8"
+    },
+    "timeout": {
+      "sha256": "397cdbc27af286bd8e8a49cab486441a16cc8a86bd030595c518b1f186b74c80"
+    }
+  }
+}

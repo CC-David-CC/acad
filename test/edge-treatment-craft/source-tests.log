@@ -1,0 +1,12 @@
+✔ edge size and exact-kind travel share the existing owned feature transaction (17.540228ms)
+✔ treatment branch changes only size and uses the exact capture/record/travel helpers (3.561958ms)
+✔ existing replay/publication/committed-outcome path remains after the edge branch (2.900392ms)
+✔ source, services, runtime-bearing history and expression table are currentness-bound (4.354815ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 548.722877

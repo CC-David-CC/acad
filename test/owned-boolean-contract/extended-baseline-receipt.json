@@ -1,0 +1,541 @@
+{
+  "base": "46668a3dd729b44803bb264063095694162ab02c",
+  "modulePath": "/tmp/codi-cad-mechanical-candidate-20261105/modules/engine/mount/ownedBooleanContract.mjs",
+  "sourceBefore": {
+    "sha256": "891012293c4f34f369a8c014c046d71a12b4c6dc3d7db08730d70e911fcf10f4",
+    "bytes": 4261
+  },
+  "sourceAfter": {
+    "sha256": "891012293c4f34f369a8c014c046d71a12b4c6dc3d7db08730d70e911fcf10f4",
+    "bytes": 4261
+  },
+  "sourceUnchanged": true,
+  "dependencies": {
+    "ownedTopologyContract.mjs": {
+      "sha256": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+      "bytes": 7063
+    },
+    "booleanSelectionClaims.mjs": {
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+      "bytes": 9413
+    }
+  },
+  "dependenciesAfter": {
+    "ownedTopologyContract.mjs": {
+      "sha256": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+      "bytes": 7063
+    },
+    "booleanSelectionClaims.mjs": {
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+      "bytes": 9413
+    }
+  },
+  "node": "v24.22.1",
+  "nativeReceipt": {
+    "sha256": "7a445e90c397b2e3c54b2b8355f5fab2588aa1afa8c853576da2d7322cda2598",
+    "bytes": 4294706
+  },
+  "worker": {
+    "sha256": "2baafabf2c0286a5f306f4a8813f1d5b36c171bd198a83cbb0bbe4d9a9a1f4c4",
+    "bytes": 7489
+  },
+  "status": "FAIL",
+  "scope": "actual Node Worker pure admission of recorded main export +targeted malformed records; no new native/app execution",
+  "actualSuccesses": 30,
+  "actualRefusals": 16,
+  "rows": [
+    {
+      "name": "actual main overlap-0",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main overlap-1",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main overlap-2",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main contained-0",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main contained-1",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main contained-2",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main face-contact-0",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main face-contact-1",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main face-contact-2",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": true,
+        "solidCount": 0
+      }
+    },
+    {
+      "name": "actual main disjoint-0",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 2
+      }
+    },
+    {
+      "name": "actual main disjoint-1",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main disjoint-2",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": true,
+        "solidCount": 0
+      }
+    },
+    {
+      "name": "actual main same-operand-0",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main same-operand-1",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": true,
+        "solidCount": 0
+      }
+    },
+    {
+      "name": "actual main same-operand-2",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main empty-A-0",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main A-empty-0",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main empty-empty-0",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": true,
+        "solidCount": 0
+      }
+    },
+    {
+      "name": "actual main empty-A-1",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": true,
+        "solidCount": 0
+      }
+    },
+    {
+      "name": "actual main A-empty-1",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main empty-empty-1",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": true,
+        "solidCount": 0
+      }
+    },
+    {
+      "name": "actual main empty-A-2",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": true,
+        "solidCount": 0
+      }
+    },
+    {
+      "name": "actual main A-empty-2",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": true,
+        "solidCount": 0
+      }
+    },
+    {
+      "name": "actual main empty-empty-2",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": true,
+        "solidCount": 0
+      }
+    },
+    {
+      "name": "actual main multi-cut",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 2
+      }
+    },
+    {
+      "name": "actual main multi-common",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 2
+      }
+    },
+    {
+      "name": "actual main real-circle-through-cut",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main max-input-name",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main max-result-name",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main healthy-after-refusals",
+      "scope": "recorded genuine main-WASM successful Boolean export",
+      "status": "PASS",
+      "data": {
+        "empty": false,
+        "solidCount": 1
+      }
+    },
+    {
+      "name": "actual main typed refusals",
+      "scope": "recorded genuine main-WASM refused invocations, no fabricated result",
+      "status": "PASS",
+      "data": {
+        "refusals": 16
+      }
+    },
+    {
+      "name": "unknown native field",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid native flags",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "solid count differs from catalog",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid volume 0",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid volume -1",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid volume Infinity",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid volume NaN",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid volume 1",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "inverted bounds",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "positive volume cannot have collapsed bounds",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:13:1"
+    },
+    {
+      "name": "sparse bounds must refuse",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:14:1"
+    },
+    {
+      "name": "bounds array extra field must refuse",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:15:1"
+    },
+    {
+      "name": "one source topology refuses",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "three source topologies refuse",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "nonarray source topology list refuses",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:18:1"
+    },
+    {
+      "name": "sparse source topology list refuses",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ Comparison {}\n- Comparison {\n-   code: 'ENGINE_FAILURE'\n- }\n",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ Comparison {}\n- Comparison {\n-   code: 'ENGINE_FAILURE'\n- }\n\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:19:1"
+    },
+    {
+      "name": "copy duplicate target",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "copy missing row",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "copy source count mismatch",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "copy working count mismatch",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "copy false geometry flag",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "copy unknown method",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "copy row extra native field",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "copy array extra field must refuse",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:27:1"
+    },
+    {
+      "name": "native ancestry requires v2",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "ancestry source count mismatch",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "ancestry missing vertex row",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "ancestry invalid generated vertex",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "unavailable native history reason is bounded",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "unavailable history does not hide other malformed map",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "PASS"
+    },
+    {
+      "name": "available geometry plus explicit unavailable native naming remains truthful",
+      "scope": "clone modifying only naming availability for contract admission",
+      "status": "PASS"
+    },
+    {
+      "name": "accessor native measurement refuses before invocation",
+      "scope": "targeted non-data metadata control",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:35:258\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:35:1"
+    },
+    {
+      "name": "accessor nested copy refuses before invocation",
+      "scope": "targeted non-data metadata control",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:36:244\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:36:1"
+    },
+    {
+      "name": "accessor source topology refuses before invocation",
+      "scope": "targeted non-data source observation control",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:37:283\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:37:1"
+    },
+    {
+      "name": "accessor options refuse before invocation",
+      "scope": "targeted non-data binding envelope control",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:38:317\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:38:1"
+    },
+    {
+      "name": "resource-stress history preserves valid geometry with naming unavailable",
+      "scope": "oversized history clone, not genuine large-history/native output",
+      "status": "PASS"
+    },
+    {
+      "name": "exact empty-copy method is accepted and alternate spelling refuses",
+      "scope": "genuine empty-input main result +malformed method control",
+      "status": "PASS"
+    }
+  ]
+}

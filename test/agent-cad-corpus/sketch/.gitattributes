@@ -1,0 +1,3 @@
+# Preserve exact executed webpack bytes for the recorded SHA; generated tabs
+# on blank runtime lines are intentional, not handwritten source whitespace.
+receipts/r2/client.bundle.js -whitespace

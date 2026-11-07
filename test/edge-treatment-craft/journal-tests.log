@@ -1,0 +1,43 @@
+✔ real detached history capture permits size-only candidate, exact undo/redo and retained descendants (8.764986ms)
+✔ currentness refusal during real yielded capture leaves accepted history/journal exact (6.215409ms)
+✔ invalid scalar and immutable selection/build changes cannot produce a travel proposal (0.88903ms)
+✔ capture detaches the exact ordered data-only edge identity (1.760829ms)
+✔ only size changes with exact proposed undo and redo (1.554567ms)
+✔ every immutable identity change including valid alternate target refuses (1.024061ms)
+✔ stale document/revision/index/feature and missing history refuse unchanged (0.404154ms)
+✔ invalid and unchanged size proposals never create journal churn (0.533185ms)
+✔ canonical logical target and scalar native-identity guards refuse corruption (1.278834ms)
+✔ fields and dense bounded edge arrays do not evaluate accessors (0.589357ms)
+✔ journal retains detached immutable selections after caller mutation (0.382964ms)
+✔ new size edit after undo truncates only redo tail (0.606216ms)
+✔ ordinary64-entry bound preserves exact latest size (3.708471ms)
+✔ travel isolates edge treatment from old scalar and box kinds (1.483796ms)
+✔ identity byte charge matches serialized UTF8 and UTF16 exactly (0.568077ms)
+✔ large identities evict by bytes and coexist with old snapshots (35.733392ms)
+✔ inverse and forward plans advance only proposed states (1.158383ms)
+✔ stale document, revision, identity and depth refuse without mutation (0.321483ms)
+✔ new edit after undo truncates redo and journal is bounded (1.103492ms)
+✔ invalid and no-op depths are refused (0.222853ms)
+✔ hole edits store bounded detached numeric deltas and reject stale undo (1.066901ms)
+✔ sketch deltas retain exact bytes with bounded total and stale refusal (19.094589ms)
+✔ mixed journals evict old snapshots within the retained-string budget and keep cross-kind order (5.904825ms)
+✔ sketch entry bounds use serialized bytes and retain exact non-ASCII text (2.80032ms)
+✔ dense sketch history retains exact snapshots and caps total storage (9.805488ms)
+✔ maximal multibyte identities remain charged and bounded after repeated edits (7.831386ms)
+✔ valid alternate source/runtime identifiers cannot hijack retained travel (0.804468ms)
+✔ redo is removed by a new edit after undo without mutating original snapshots (0.367294ms)
+✔ all own identity accessors refuse before evaluation (0.311163ms)
+✔ selected depth retains exact selection and runtime, scalar-only undo/redo (2.349786ms)
+✔ every immutable identity mutation refuses travel without journal writes (0.707468ms)
+✔ stale/invalid/no-op edits and data accessors refuse (0.385244ms)
+✔ selected travel never accepts an old rectangle or box journal entry (1.770339ms)
+✔ editing after undo clears only redo tail and preserves bounded retention (2.243024ms)
+✔ selected identity retention charges both UTF-8 and browser string memory (0.225452ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 129.980086

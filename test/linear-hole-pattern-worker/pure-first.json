@@ -1,0 +1,83 @@
+{
+  "node": "v24.22.1",
+  "sourceHashesBeforeAfter": {
+    "../../modules/engine/mount/ownedLinearHolePatternPlan.mjs": "d54a8a01a039b3a43f5facee2a86db160350a292674906b2069e637e7408491d",
+    "../../modules/engine/solid/ownedLinearHolePatternIntent.mjs": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+    "../../modules/engine/mount/ownedThroughHolePlan.mjs": "7dd92c330acf098e258a916e2b8209a3ebacb62e1cdf6265dd8ae054f85fd69c",
+    "./pure-worker.mjs": "88a0a89fb4f9cff2e7b8667e2c4e272e071b66e4388f617252352d773df1b539",
+    "./pure-run.mjs": "a02fff2ccbfe1d5106a12e69b550ff705405dc3907d104737eb8e2d142405086"
+  },
+  "status": "FAIL",
+  "scope": "Pure production planner/intent in actual Node Worker; no native/causal proof",
+  "rows": [
+    {
+      "name": "count3 includes real seed and clears four known corner holes in source-localX",
+      "status": "PASS",
+      "data": {
+        "centers": [
+          [
+            50,
+            25
+          ],
+          [
+            70,
+            25
+          ],
+          [
+            90,
+            25
+          ]
+        ],
+        "cost": 4
+      }
+    },
+    {
+      "name": "source150x30/depth25 and seedD14 drive all copies",
+      "status": "PASS"
+    },
+    {
+      "name": "source-local axis survives rotated oblique translated frame and reversed source winding",
+      "status": "PASS"
+    },
+    {
+      "name": "copies must separate from existing corner holes, not only seed and each other",
+      "status": "PASS"
+    },
+    {
+      "name": "copy/seed overlap and boundary contact are explicit distinct refusals",
+      "status": "PASS"
+    },
+    {
+      "name": "count1 captures intent but refuses identity before source preparation;0/fraction invalid",
+      "status": "PASS"
+    },
+    {
+      "name": "seed must be centered and exactly match one known successful intent",
+      "status": "PASS"
+    },
+    {
+      "name": "known holes share exact source/build and distinct feature identities",
+      "status": "FAIL",
+      "error": {
+        "code": "ERR_ASSERTION",
+        "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  Comparison {\n+   code: 'INVALID_REQUEST'\n-   code: 'STALE_SOURCE'\n  }\n",
+        "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  Comparison {\n+   code: 'INVALID_REQUEST'\n-   code: 'STALE_SOURCE'\n  }\n\n    at error (file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-worker/pure-worker.mjs:7:231)\n    at file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-worker/pure-worker.mjs:15:360\n    at check (file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-worker/pure-worker.mjs:7:48)\n    at file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-worker/pure-worker.mjs:15:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      }
+    },
+    {
+      "name": "exact semantic capture rejects solved/native overrides and invalid dimensions",
+      "status": "PASS"
+    },
+    {
+      "name": "source/metric/known-hole getters never run and outputs detach",
+      "status": "PASS"
+    },
+    {
+      "name": "known-hole and work limits bound preparatory work; actual ownership remains outside pure helper",
+      "status": "PASS",
+      "data": {
+        "scope": "Positive metrics and matching supplied IDs do not authenticate native ownership/material; Worker causal witnesses must do so"
+      }
+    }
+  ]
+}

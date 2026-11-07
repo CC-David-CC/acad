@@ -1,0 +1,27 @@
+{
+  "status": "FAIL",
+  "scope": "Actual headless sketch-model/solver and semantic Chromium Workers; real native source constructed through production primitive commands, no public app/native solid/history/save claim",
+  "pins": {
+    "scope": "Current candidate real production sketch+semantic Workers",
+    "files": {
+      "index.html": {
+        "sha256": "8a995ad5a0d52df76b2bbe60594895407735f33582611152a005645c26a2e58e",
+        "bytes": 83
+      },
+      "workers/sketch.js": {
+        "sha256": "072f8de698b7f5d4c181639145ec0e7e416fa838894e4c74241d49f26525d328",
+        "bytes": 3659034
+      },
+      "workers/semantic.js": {
+        "sha256": "b3c739c18874110371f62e529160b245900ebee555c088a8da169ab7befb7faa",
+        "bytes": 1445991
+      }
+    }
+  },
+  "driverSHA256": "45f47624bade46a3009a493cec2f0127619f1e35fa90c0114f48c1eb743adf21",
+  "ownedBrowserClosed": true,
+  "error": {
+    "message": "Uncaught NetworkError: Failed to execute 'importScripts' on 'WorkerGlobalScope': The script at 'http://127.0.0.1:20934/lib/verb.js' failed to load.",
+    "stack": "Error: Uncaught NetworkError: Failed to execute 'importScripts' on 'WorkerGlobalScope': The script at 'http://127.0.0.1:20934/lib/verb.js' failed to load.\n    at w.onerror (evaluate at /tmp/codi-selected-profile-revolve-20261106/test/selected-profile-revolve/source-browser.cjs:6:179, <anonymous>:2:342)\n    at #evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/ExecutionContext.js:391:56)\n    at async ExecutionContext.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/ExecutionContext.js:277:16)\n    at async IsolatedWorld.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/IsolatedWorld.js:100:16)\n    at async CdpFrame.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Frame.js:362:20)\n    at async CdpPage.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Page.js:826:20)\n    at async /tmp/codi-selected-profile-revolve-20261106/test/selected-profile-revolve/source-browser.cjs:6:168"
+  }
+}

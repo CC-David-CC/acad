@@ -1,0 +1,83 @@
+✔ default/no-op/changed receipt is document-scoped and canonical unit remains mm (618.58591ms)
+✔ setter preserves history/source/counter/journal/material identities without Worker dispatch (193.207872ms)
+✔ malformed exact fields/options/getters and stale revisions reject unchanged (148.560976ms)
+✔ active/processing/history/wizard and cleanup states refuse metadata writes (619.167986ms)
+✔ closed/unbound/replaced manager and cancelled caller refuse before changing state (393.671272ms)
+✔ post-commit lifetime loss is marked committed and never rolls into another document (82.403869ms)
+✔ New/reset returns to absent metadata and invalidates prior document revision (80.818974ms)
+verb 2.0.0
+✔ actual manager snapshot/Blob reopen retains presentation through actual validation Worker (292.059774ms)
+verb 2.0.0
+✔ presentation installs only after successful replay and final restore guards (199.626122ms)
+verb 2.0.0
+verb 2.0.0
+✔ validation/replay failure and cancelled native Open never install incoming presentation (469.673971ms)
+✔ display change invalidates captured Save currentness independently of material state (95.625792ms)
+verb 2.0.0
+✔ actual manufacturing preparation/hashing retains optional presentation outside digest domains (301.337711ms)
+verb 2.0.0
+✔ an original default-mm native envelope reopens as default without metadata migration (163.750387ms)
+verb 2.0.0
+✔ metadata changes during actual asynchronous manufacturing hashing reject the old Save (338.855291ms)
+✔ binds the authored roles independently of body order (3.988327ms)
+✔ rejects stale metadata, missing/duplicate bodies and conflicting identities (1.547115ms)
+✔ reassignment preserves authored object name, region identity and transform (1.365583ms)
+✔ v2 keeps label as a distinct material region inside the lid object (0.614546ms)
+✔ v2 region identity and authored placement survive reassignment (0.532525ms)
+✔ v2 refuses missing label, wrong version identity and duplicate roles without mutation (2.014299ms)
+(node:2596282) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/projectManager/documentLifetime.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/codi-cad-generic-manufacturing-preparation-20261107/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual pure capture matches normal save exactly without writes/counters/IDs (189.032833ms)
+✔ pure model capture preserves custom workbench and refuses lost document (70.071774ms)
+✔ strict capture detaches/freeze and pure proposal retains explicit unknown identity (5.469911ms)
+✔ null material/appearance remain unknown rather than defaulting a substance or color (1.423764ms)
+✔ stable custom binding/part/region IDs reused without retargeting (2.15166ms)
+✔ existing identity definition conflicts and absent material references refuse atomically (3.698574ms)
+✔ prospective aliases collide explicitly and duplicate aliases stay ambiguous (1.786777ms)
+✔ separate parts and aligned regions remain distinct with interface qualification pending (0.824307ms)
+✔ the same complete producer cannot appear twice in one export assignment proposal (0.653536ms)
+✔ retained enclosure grouping definitions and transforms survive generic preparation (2.531093ms)
+✔ stale source digest, unsupported target, wrong producer and unsupported placement refuse (6.119677ms)
+✔ own-data capture rejects getter/extra/sparse/string ID coercion/prototype tricks without reads (0.790848ms)
+✔ 32-part/region bounds and definition caps refuse before giant capture (0.496444ms)
+✔ empty actual output inventory is structured unready without inventing a target (354.669289ms)
+✔ all unsupported actual targets are structured unready while row reason survives (303.653923ms)
+✔ initial stable busy is availability, not lifetime cancellation (164.607066ms)
+✔ initial stable assembly is availability, not lifetime cancellation (142.411908ms)
+✔ initial stable unbound-host is availability, not lifetime cancellation (139.684243ms)
+✔ actual disposed document still aborts readonly inspection (133.827909ms)
+✔ availability changing during readonly capture still aborts even if reason text stays unavailable (108.849166ms)
+verb 2.0.0
+✔ actual manager restore guard rejects inspection before a stable document revision exists (263.812971ms)
+✔ actual readonly inventory binds production class/history/registry/runtime without parsing IDs (352.003274ms)
+✔ private prepare uses real hash Worker and pure model capture without writes/publication/ID allocation (371.916609ms)
+✔ pending actual hash reply is fenced by source/registry/runtime/model/counter/lifetime changes (1681.882229ms)
+✔ returned private proposal becomes stale without installing metadata (139.188398ms)
+✔ stale/malformed/cancelled requests refuse before hash worker dispatch (81.140537ms)
+✔ wrong class/producer/origin/current build/placement never becomes a supported discovery target (440.748252ms)
+✔ existing actual enclosure material assignment invalidates prior Craft Undo; generic publication stays pending (464.029899ms)
+✔ assigned lid/label remain grouped under the same rigid placement (4.678993ms)
+✔ different label placement cannot reuse nominal contact proof (1.179011ms)
+✔ separate label object, cross-feature pairing and duplicate role refuse (2.16165ms)
+✔ body cannot silently merge into the lid print object (3.071389ms)
+✔ enclosure material bindings survive reordered outputs and native envelope roundtrip (4.973636ms)
+✔ enclosure refuses missing, duplicate, foreign and relabeled outputs (1.677446ms)
+✔ only declared enclosure roles are accepted, with no implicit first output (14.027981ms)
+✔ legacy remains unchanged, no invented metadata or identity (0.985779ms)
+✔ versioned metadata roundtrips and separates unit, material and appearance (0.332913ms)
+✔ unknown versions and invalid references fail before caller mutates state (0.469414ms)
+✔ body resolution refuses absent and ambiguous identities (0.628816ms)
+✔ object grouping and transforms roundtrip explicitly rather than by color (0.381873ms)
+✔ changed revision produces a review proposal only for unique compatible producer (0.431304ms)
+✔ separate canonical hashes detect geometry or material changes without formatting changes (4.997427ms)
+✔ preparation recomputes revisions and rejects stale or concurrently edited data (52.52946ms)
+ℹ tests 63
+ℹ suites 0
+ℹ pass 63
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4399.218488

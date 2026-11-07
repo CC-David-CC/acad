@@ -1,0 +1,33 @@
+{
+  "sourceBase": "282c0f5ec",
+  "sourceCommits": [
+    "ae816711ebb865a4c38a3b7ced1e9615799eec58",
+    "c00f1746daa813735589401aeec41a37f3b767e6"
+  ],
+  "candidate": {
+    "source": "c00f1746daa813735589401aeec41a37f3b767e6",
+    "appSha256": "af50c7169036e9eec0db224065ae7ad9f484208335bfd4bcb3be82d58b284396",
+    "sketchWorker": {
+      "filename": "sketch-solver.ad677143b779f7cc29be.js",
+      "sha256": "6ba6afbb5017173d4441b7a9a9bb11f982b0b1af6206da8fae3c41c31c6edfea"
+    },
+    "projectWorkerSha256": "7236c461672b662cf9d860439c99a3962784012f88245c248a771158f7287286",
+    "prismWorkerSha256": "be72279d53e63ab5b14e6e1f8840bbea9395d1ce5a140817d1e372650e9de488",
+    "r730Runtime": "/mnt/data10tb/codi-admission-cause-20261106",
+    "sourceTrackedDiff": "clean",
+    "privateFixturePort": 20711
+  },
+  "baseline": {
+    "source": "75a2b053c850fb7fcdba6f1779c190acc8345fde",
+    "appSha256": "95deb6ad4ea50d44753d0e64e56e24c38509bb0dd5e68c25e10c8455d9eef231",
+    "sketchWorker": {
+      "filename": "sketch-solver.ee727310593963348e57.js",
+      "sha256": "3aeb3ea7b47d319e0788da4068d31188d3058ea52936c82b65ed266eb776b514"
+    },
+    "r730Runtime": "/mnt/data10tb/codi-function-aware-substitution-20261106-r1",
+    "privateFixturePort": 20712
+  },
+  "fixtureSha256": "ee2e99b353ba0dbcc966f3bccc790c66190d3488fccb074ed1913023d5c94f79",
+  "transport": "Actual production app referenced Worker; no fake solver, Canvas or viewer. Shared browser19329 was neither restarted nor closed. Separate browser contexts closed and each dedicated Worker terminated. No performance/hardware-GPU claim.",
+  "deployment": "None. Private fixture servers/tunnels stopped after proof. Public Craft cause propagation remains parent-owned."
+}

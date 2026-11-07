@@ -1,0 +1,21 @@
+✔ capture detaches the exact ordered data-only edge identity (1.723589ms)
+✔ only size changes with exact proposed undo and redo (1.009931ms)
+✔ every immutable identity change including valid alternate target refuses (0.829148ms)
+✔ stale document/revision/index/feature and missing history refuse unchanged (0.387274ms)
+✔ invalid and unchanged size proposals never create journal churn (0.518995ms)
+✔ canonical logical target and scalar native-identity guards refuse corruption (1.224133ms)
+✔ fields and dense bounded edge arrays do not evaluate accessors (0.573486ms)
+✔ journal retains detached immutable selections after caller mutation (0.255013ms)
+✔ new size edit after undo truncates only redo tail (0.454705ms)
+✔ ordinary64-entry bound preserves exact latest size (6.424419ms)
+✔ travel isolates edge treatment from old scalar and box kinds (1.419906ms)
+✔ identity byte charge matches serialized UTF8 and UTF16 exactly (0.508256ms)
+✔ large identities evict by bytes and coexist with old snapshots (32.188844ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 122.457488

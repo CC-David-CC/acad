@@ -1,0 +1,1 @@
+const path=require('path');const config=require('./webpack.config.cjs');config.entry=path.join(__dirname,'craft-request-normalization.test.mjs');config.output={path:'/tmp/codi-craft-normalization',filename:'tests.cjs'};module.exports=config;

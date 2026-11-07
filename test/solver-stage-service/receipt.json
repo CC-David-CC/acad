@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "status": "PASS",
+  "scope": "normal-command/service/production-Worker-with-explicit-host-storage-context-doubles",
+  "base": "40018895d54d5a90eea332b9d24af845420c119c",
+  "productCommit": "7cf6a2a093069b58454370d32cf81c1ee876bf8b",
+  "node": "v24.22.1",
+  "tests": {
+    "serviceGroups": 13,
+    "retainedGroups": 19,
+    "total": 32,
+    "serviceWorkers": {
+      "started": 31,
+      "terminated": 31
+    },
+    "retainedWorkers": {
+      "started": 27,
+      "terminated": 27
+    },
+    "command": [
+      "/tmp/codi-files-move-node/bin/node",
+      "--test",
+      "--test-reporter=tap",
+      "test/solver-stage-service/service.test.mjs",
+      "test/solver-stage-diagnostics/worker.test.mjs",
+      "test/local-jacobian/rank.test.mjs"
+    ]
+  },
+  "build": {
+    "worker": {
+      "version": 1,
+      "sourceRoot": "/tmp/codi-cad-solver-stage-service-20261106",
+      "head": "40018895d54d5a90eea332b9d24af845420c119c",
+      "node": "v24.22.1",
+      "webpack": "5.74.0",
+      "mode": "production",
+      "entry": "web/app/sketcher/headless/solveWorker.ts",
+      "trackedInputCount": 1263,
+      "trackedInputsBeforeAndAfter": "6024f37eff0adf981e2bdfe4b1fc3db4bd0a1dd53795df518f8a93319aadfb4b",
+      "sourceHashes": {
+        "web/app/sketcher/headless/localJacobian.mjs": "29922c4fe243f47fd2fadfa4fd4eb6c112bf4fbfa27f3a72b785e85a4d78e36a",
+        "web/app/sketcher/headless/solve.ts": "c0b901172338f11ccd38ccad09aec835771a70f3e435523ded62c0e32428027d",
+        "web/app/sketcher/headless/solveWorker.ts": "a940d3e3e5465967113448c04ff33f35909dc4614101085956bb3d6fe0711f47"
+      },
+      "numericSHA256": "987450eec65f7e00c74c8da9281537558fd1ee8e63ee48721253cf2458260386",
+      "verbSHA256": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3",
+      "workerSHA256": "630ec03b4348c99ca509dc20ecf894f7aa20c3b41dbddbf9982b57402bc1d984",
+      "workerBytes": 1177884
+    },
+    "service": {
+      "version": 1,
+      "head": "7cf6a2a093069b58454370d32cf81c1ee876bf8b",
+      "node": "v24.22.1",
+      "webpack": "5.74.0",
+      "mode": "production",
+      "trackedInputCount": 1263,
+      "trackedInputsBeforeAndAfter": "6024f37eff0adf981e2bdfe4b1fc3db4bd0a1dd53795df518f8a93319aadfb4b",
+      "sourceHashes": {
+        "web/app/cad/sketch/sketchDiagnosticService.ts": "ccfef180cf5be46348a8dc11071e3e1b590122bf6d75f596d0e85e1ac2506498",
+        "web/app/sketcher/headless/solveWorker.ts": "a940d3e3e5465967113448c04ff33f35909dc4614101085956bb3d6fe0711f47",
+        "test/solver-stage-service/entry.ts": "c6725ef75e7991c84ec547ee3699257b9f90397e4966f5c6fb1c31b33c2b6748",
+        "test/solver-stage-service/worker-url.mjs": "6358fa4b3c24ffbee296703d70bbfc22a49f06455a926755ff2bc28c01b0fecd"
+      },
+      "serviceSHA256": "f6b82cc9a7fc3d84c8972203ff72ee1b4351475c35cb8a11d87cef3aac1ae3e2",
+      "serviceBytes": 1226499
+    }
+  },
+  "sourceHashesBeforeAndAfter": {
+    "web/app/cad/sketch/sketchDiagnosticService.ts": "ccfef180cf5be46348a8dc11071e3e1b590122bf6d75f596d0e85e1ac2506498",
+    "web/app/sketcher/headless/solveWorker.ts": "a940d3e3e5465967113448c04ff33f35909dc4614101085956bb3d6fe0711f47",
+    "test/solver-stage-service/entry.ts": "c6725ef75e7991c84ec547ee3699257b9f90397e4966f5c6fb1c31b33c2b6748",
+    "test/solver-stage-service/normal-command.mjs": "7e490debb22fd56b68becd9e89b73d61ad1f665a971b0e1191188d7c37444373",
+    "test/solver-stage-service/transport.mjs": "27807b57f5f40018c3f9ab86a8ab4115abac442eb5166920ef54da1ad25a1f90",
+    "test/solver-stage-service/service.test.mjs": "e4ec9ed6a634fa180fe7d4cef81918ebeb01ccca6a7b29613e83c2b07ee8ec97",
+    "test/solver-stage-service/build-service.cjs": "257ab0ca161e4ef836402e2809c8a1e254482675cea72572c2b8a8f543fff605",
+    "test/solver-stage-service/worker-url.mjs": "6358fa4b3c24ffbee296703d70bbfc22a49f06455a926755ff2bc28c01b0fecd",
+    "test/solver-stage-service/README.md": "c50e069818b46bc74f010491fe67dbef3d9f9a6223aeac82e6449cd6ebf24b43",
+    "test/solver-stage-service/verify.mjs": "599e3b178e519796675a180552b56c1cd547a205024ae4ded0df364cbf95b7d9",
+    "test/solver-stage-service/before-service.json": "675916dff61b28d24ec7f2f8cfa2d26f9af7b38b87368c62fbdc41c0b23e3220",
+    "/tmp/codi-desktop-mechanical-candidate-20261105/apps/system/jsketcher/diagnostic-commands.mjs": "9abad8688cc49ee70e8ab7e1ced620ea4a00670941db4a627a150b96af08d617",
+    "/tmp/codi-desktop-mechanical-candidate-20261105/apps/system/jsketcher/scoped-command.mjs": "e3a6cea748e01ded5ea8ebf09eca72d1bac3839203e43697aafb546de9177640",
+    "web/lib/verb.js": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3"
+  },
+  "evidenceHashes": {
+    "before-service.json": "675916dff61b28d24ec7f2f8cfa2d26f9af7b38b87368c62fbdc41c0b23e3220",
+    "cleanup-harness-before.tap": "53f818798228148f5faab7d211bf3fbe9ddcd1c9252b6a1affc739f5156aa69c",
+    "cleanup-harness-before.json": "98d6abd7fd053819feb3bb207b509f2dd3bde2deed8dbfd27bbc30d55d5abe31",
+    "actual-service.json": "14eb8fe56397c17f401d632c3f83a1f28727899476ceebfc15d16288e89b5b48",
+    "after.tap": "b1c2ac6790232428f1d0683dbcb5858f8bf521ddef3e5d21bc7ce5f5f8a4028a",
+    "combined.tap": "532982f97745543a0304e637b7fba4392fccc3a569d6910f229251d253b3f581",
+    "worker-build.log": "7ce87b547f14a1780a603745c0281c90b8ef245414545d4d36e5991c75417c0a",
+    "service-build.log": "01ce960d6fc2eca5c2d65eb81d13c5427720e391548b48e272c85bb0601a7491"
+  },
+  "limitations": [
+    "Host/storage/session are doubles; real service, command registrar, models and production solver Worker",
+    "Node transport, not signed public/browser/Web Locks qualification",
+    "No renderer/native/app-authoring/persistence/full Gate1 claim"
+  ]
+}

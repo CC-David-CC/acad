@@ -1,0 +1,31 @@
+// Reproducible pure host contract checks; no app, native runtime or browser.
+import assert from 'node:assert/strict';
+import {spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createRequire} from 'node:module';
+import {dirname,resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'../..');
+const tsc=process.env.THROUGH_HOLE_TSC||'/tmp/codi-typed-common-transaction-20261105/node_modules/typescript/bin/tsc';
+const run=(args)=>{
+ const r=spawnSync(process.execPath,args,{cwd:root,encoding:'utf8',maxBuffer:2*1024*1024});
+ process.stdout.write(r.stdout||'');process.stderr.write(r.stderr||'');
+ assert.equal(r.error,undefined);assert.equal(r.status,0,JSON.stringify(args));return r.stdout;
+};
+const products=['modules/engine/mount/engineCatalog.mjs','modules/engine/solid/SolidKernel.ts','modules/engine/mount/selectedProfileBudget.mjs','modules/engine/mount/selectedProfileBuildSelection.mjs'];
+const files=[...products,...['contracts.test.mjs','contracts.mts','README.md','verify.mjs'].map(f=>'test/through-hole-contracts/'+f)];
+const hashes=()=>Object.fromEntries(files.map(f=>[f,createHash('sha256').update(readFileSync(resolve(root,f))).digest('hex')]));
+const before=hashes();
+const tests=['test/through-hole-contracts/contracts.test.mjs','test/selected-profile-budget/production/budget.test.mjs','test/selected-profile-kernel/catalog-build.test.mjs'];
+const testArgs=['--test','--test-reporter=tap',...tests],tap=run(testArgs);
+assert.match(tap,/# tests 20\b/);assert.match(tap,/# fail 0\b/);
+const typeArgs=[tsc,'--noEmit','--strict','--exactOptionalPropertyTypes','--target','ES2022','--module','commonjs','--moduleResolution','node','test/through-hole-contracts/contracts.mts','test/boolean-history-catalog/contracts.mts'];
+run(typeArgs);
+const require=createRequire(import.meta.url),ts=require(resolve(dirname(tsc),'../lib/typescript.js'));
+const emitted=ts.transpileModule(readFileSync(resolve(root,products[1]),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2015}}).outputText;
+assert(!emitted.includes('ownedHoleIntent'),'Type-only dependency must not emit runtime import');
+assert.deepEqual(hashes(),before);
+const receipt={version:1,status:'PASS',scope:'pure-host-through-hole-contracts-only',base:'982db0619566116ff985fc63ad24d70b30e4d96d',node:process.version,typescript:ts.version,tests:{total:20,new:12,retained:8,command:[process.execPath,...testArgs]},types:{status:'PASS',fixtures:2,command:[process.execPath,...typeArgs],typeOnlyImportErased:true},sourceHashesBeforeAndAfter:before,limits:['No geometry/native/browser/authoring qualification','CommonJS app compilation; standalone NodeNext TS1471 is outside app mode','Older incomplete success/default fixtures are documented in README and were not reported passing']};
+writeFileSync(resolve(root,'test/through-hole-contracts/receipt.json'),JSON.stringify(receipt,null,2)+'\n');
+console.log('Through-hole host contracts PASS: 20 controls, 2 strict type fixtures, erased shared import.');

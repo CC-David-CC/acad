@@ -1,0 +1,13 @@
+✔ unchanged genuine plate100 Native record replays in real Node Worker (63.455934ms)
+✔ unchanged genuine plate150 Native record replays in real Node Worker (52.369925ms)
+✔ unchanged genuine rotated Native record replays in real Node Worker (52.139362ms)
+✔ SYNTHETIC nonidentity valid copy permutation is not applied a second time (50.205444ms)
+✔ SYNTHETIC finite extent mismatch remains outside cylindrical-support witness (50.682588ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 333.949813

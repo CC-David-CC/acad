@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "scope": "Detached authored-data contract and declaration tests only; no geometry/runtime/capability qualification",
+  "baseCommit": "f53e3ba5ebcda89db716fed021bf5ef7da4c07f4",
+  "nodeVersion": "24.22.1",
+  "typescriptVersion": "4.7.4",
+  "checks": [
+    {
+      "command": "/tmp/codi-files-move-node/bin/node --test test/owned-hole-intent/intent.test.mjs",
+      "exitCode": 0,
+      "passed": 11,
+      "failed": 0
+    },
+    {
+      "command": "/tmp/codi-files-move-node/bin/node /tmp/codi-typed-common-transaction-20261105/node_modules/typescript/bin/tsc --noEmit --strict --skipLibCheck --target ES2022 --module NodeNext --moduleResolution NodeNext test/owned-hole-intent/declarations.mts",
+      "exitCode": 0
+    }
+  ],
+  "sha256": {
+    "modules/engine/solid/ownedHoleIntent.mjs": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+    "modules/engine/solid/ownedHoleIntent.d.mts": "86523521203d68086b90e1088ad7d71ce9a5d0648b865ba86a436ab74d373128",
+    "test/owned-hole-intent/intent.test.mjs": "7cb2e32ae2f55424d542ceba60821417fca60f9431f7f60b02d673a0bbde1a2c",
+    "test/owned-hole-intent/declarations.mts": "966f0021c3a9752d47addc324ec8b34cbc1db7a6cf9a843b5855df02cb5f54b6"
+  }
+}

@@ -1,0 +1,41 @@
+✔ detaching accepted resources revokes native capability but preserves document and owner (2.46011ms)
+✔ only an accepted owner detaches; acceptance stays synchronous and callback-free (1.167689ms)
+✔ detachment cleanup failure is explicit and prevents all new engine work (0.525844ms)
+✔ reentrant close keeps reservation charged until mount close finishes (0.465063ms)
+✔ document close during native detachment ends the owner and never detaches a new document (0.292552ms)
+✔ detached accepted capability cannot reacquire a mount, while its copied display remains current (0.367013ms)
+✔ two feature mounts share one candidate without exceeding the pool ceiling (3.921033ms)
+✔ cancelled in-flight factory reservation cannot be reused reentrantly (0.524614ms)
+✔ failed factory releases its reservation and limits reject invalid configuration (0.468834ms)
+✔ failed replacement closes only its resources, retaining both accepted revisions (0.470733ms)
+✔ admission precedes allocation and stale factory results are closed (0.379753ms)
+✔ sealing forbids allocation and publication acceptance invokes no external guard (0.262792ms)
+✔ document abort during factory creation closes the returned mount (0.265543ms)
+✔ a cleanup failure cannot silently admit another engine (0.327943ms)
+✔ three retained/candidate owners are the per-document ceiling (0.352493ms)
+✔ cleanup failure also blocks an already-admitted candidate (0.371183ms)
+✔ cleanup failure during allocation discards the returned mount (0.288193ms)
+✔ a guard cancelling its own owner cannot start a new mount (0.218912ms)
+✔ registered source and handle guards are rechecked before publication (0.390033ms)
+✔ publication guards cannot recurse, await or cancel unnoticed (0.330513ms)
+✔ publication check count is bounded and accepted phase invokes no callbacks (6.723976ms)
+✔ profile captures strict nested data and freezes detached ephemeral geometry (2.712883ms)
+✔ v2 dispatch creates one generic output, forwards revision and preserves source (3.62197ms)
+✔ same runtime reuses mount; changed same-engine revision refuses before factory/job (1.156599ms)
+✔ profile outputs use same-runtime Boolean ownership without consuming source (2.110417ms)
+✔ profile is detached before mount readiness suspension (0.510564ms)
+✔ wrong persisted mount revision refuses before dispatch and closes owner (0.400484ms)
+✔ cancelled held protocol completion cannot project or mutate source (0.633665ms)
+✔ stale completion and post-acceptance ownership check refuse (0.707395ms)
+✔ missing native facts, multisolids, invalid/zero facts and malformed mesh refuse (1.984016ms)
+✔ positive selected region cannot publish an otherwise valid empty result (0.441574ms)
+✔ native measurements are detached and never replace mesh observations or absent old facts (0.170222ms)
+✔ native pair/key/dense/finite/accessor checks refuse without getter invocation (0.526434ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 92.786617

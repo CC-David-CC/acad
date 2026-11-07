@@ -1,0 +1,14 @@
+{
+  "sourceBase": "b249b5afb",
+  "productSource": "6cfc7fe27",
+  "runtime": "/mnt/data10tb/codi-arc25-openface-20261105/dist",
+  "app": {
+    "url": "http://127.0.0.1:20504/static/index.bundle.js",
+    "sha256": "145ce7e1e6b959b534c05d5cab210f8efc9a9cc74318f09ccc3e9dde0093e535"
+  },
+  "projectWorker": {
+    "url": "http://127.0.0.1:20504/static/project-validator.1c3d792b2bdd7998cb7c.js",
+    "bytes": 1838485,
+    "sha256": "c0f6db34857b0b4bf1e211f79f90615a1052097c75afd2d2bbea7f38efa74cc8"
+  }
+}

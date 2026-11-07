@@ -1,0 +1,130 @@
+{
+  "status": "OBSERVATIONS_ONLY_SEE_TAP",
+  "scope": "Genuine production sketch transitions and double independent two-source Worker discovery. Shared submit refuses NATIVE_NOT_RUN; no accepted/native model is synthesized.",
+  "lifecycle": {
+    "started": 67,
+    "terminated": 67
+  },
+  "requestCount": 67,
+  "responseCount": 67,
+  "rows": [
+    {
+      "kind": "genuine-production-worker-discovery",
+      "report": {
+        "revision": "creation:1",
+        "faceId": "S:4/SURFACE",
+        "pathFaceId": "S:5/SURFACE",
+        "sourceDigest": "c998869f1f39fa0c86cb34eee422a99cc7eb78ba59c0c5800d7fc584e5c0abb6",
+        "pathDigest": "b18919ba9eabf030bcc6533d00409f6d2a4d91d3229510bdf0b7350ffe7ffa67",
+        "engine": "occ",
+        "engineRevision": "sha256:a9cfa6e53a8bc14f2fb035e33afd1a82d9ae36ace1cf9f66169c739d2de72580:e105bdfe7c7bcb113eee5398d8202831cb8e8b1608dcc1730fc4461c9f24263d",
+        "unit": "millimeter",
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:4/SURFACE\",\"outer\":[\"S:4/SURFACE/agent-primitive-b66ab59c-80e6-428d-b3c2-12605aba5d7b\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "agent-primitive-b66ab59c-80e6-428d-b3c2-12605aba5d7b"
+              ],
+              "holeCurveIds": []
+            }
+          }
+        ],
+        "pathCurves": [
+          {
+            "curveId": "agent-primitive-c97ef469-30c4-4e9d-9170-6e6fe9d78d1a",
+            "type": "Segment",
+            "role": null,
+            "stage": 0,
+            "supported": true,
+            "reason": null,
+            "a": [
+              0,
+              0
+            ],
+            "b": [
+              0,
+              10
+            ]
+          },
+          {
+            "curveId": "agent-primitive-5c413a3d-7882-44e3-8fe2-2ce238b3f53a",
+            "type": "Arc",
+            "role": "construction",
+            "stage": 0,
+            "supported": true,
+            "reason": null,
+            "a": [
+              0,
+              10
+            ],
+            "b": [
+              10,
+              0
+            ],
+            "c": [
+              0,
+              0
+            ]
+          }
+        ],
+        "qualification": "source-membership-only; path ordering, attachment, transport and native result require evaluation"
+      }
+    },
+    {
+      "kind": "routing-only-no-native-success",
+      "request": {
+        "type": "WORKER_SELECTED_PROFILE_SWEEP_V1",
+        "params": {
+          "version": 1,
+          "unit": "millimeter",
+          "engine": "occ",
+          "engineRevision": "sha256:a9cfa6e53a8bc14f2fb035e33afd1a82d9ae36ace1cf9f66169c739d2de72580:e105bdfe7c7bcb113eee5398d8202831cb8e8b1608dcc1730fc4461c9f24263d",
+          "featureId": 3,
+          "faceId": "S:6/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:6/SURFACE\",\"outer\":[\"S:6/SURFACE/agent-primitive-b66ab59c-80e6-428d-b3c2-12605aba5d7b\"],\"holes\":[]}",
+          "pathFaceId": "S:7/SURFACE",
+          "pathCurves": [
+            {
+              "curveId": "agent-primitive-c97ef469-30c4-4e9d-9170-6e6fe9d78d1a",
+              "reversed": false
+            }
+          ],
+          "transport": "corrected-frenet",
+          "bodyPolicy": "separate"
+        }
+      }
+    },
+    {
+      "kind": "history-contract-fixture-not-native",
+      "history": {
+        "ready": true,
+        "reason": null,
+        "revision": "creation:1",
+        "features": [
+          {
+            "version": 1,
+            "unit": "millimeter",
+            "engine": "occ",
+            "engineRevision": "sha256:a9cfa6e53a8bc14f2fb035e33afd1a82d9ae36ace1cf9f66169c739d2de72580:e105bdfe7c7bcb113eee5398d8202831cb8e8b1608dcc1730fc4461c9f24263d",
+            "featureId": 3,
+            "faceId": "S:20/SURFACE",
+            "regionId": "sketch-region:{\"faceId\":\"S:20/SURFACE\",\"outer\":[\"S:20/SURFACE/agent-primitive-b66ab59c-80e6-428d-b3c2-12605aba5d7b\"],\"holes\":[]}",
+            "pathFaceId": "S:21/SURFACE",
+            "pathCurves": [
+              {
+                "curveId": "agent-primitive-c97ef469-30c4-4e9d-9170-6e6fe9d78d1a",
+                "reversed": false
+              }
+            ],
+            "transport": "corrected-frenet",
+            "bodyPolicy": "separate",
+            "index": 2
+          }
+        ]
+      }
+    }
+  ]
+}

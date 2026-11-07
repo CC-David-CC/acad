@@ -1,0 +1,41 @@
+✔ weak close-once record preserves error (2.128377ms)
+✔ weak close-once record preserves null (1.714314ms)
+✔ weak close-once record preserves undefined (0.878247ms)
+✔ weak close-once record preserves zero (0.951139ms)
+✔ weak close-once record preserves false (0.835257ms)
+✔ weak close-once record preserves empty (1.061019ms)
+✔ successful close is idempotent and does not fence a new Worker (0.995259ms)
+✔ validation null (816.882463ms)
+✔ validation undefined (870.354133ms)
+✔ validation zero (792.306978ms)
+✔ validation false (839.667107ms)
+✔ validation empty (855.21494ms)
+✔ hash null (870.271738ms)
+✔ hash undefined (887.544425ms)
+✔ hash zero (835.973992ms)
+✔ hash false (901.682036ms)
+✔ hash empty (879.791054ms)
+✔ hash-abort null (917.906545ms)
+✔ hash-abort undefined (847.936308ms)
+✔ hash-abort zero (854.083411ms)
+✔ hash-abort false (902.733512ms)
+✔ hash-abort empty (884.416959ms)
+✔ validation-abort none (859.965135ms)
+✔ validation-abort error (794.963518ms)
+✔ hash-abort none (896.942179ms)
+✔ validation-stale none (845.010553ms)
+✔ hash-stale none (931.245431ms)
+✔ material publication follows successful shared hash-owner cleanup and currentness (87.591469ms)
+✔ validation cleanup=none (1.583973ms)
+✔ validation cleanup=error (0.217572ms)
+✔ hash cleanup=none (0.115511ms)
+✔ hash cleanup=error (0.119791ms)
+✔ hash-abort cleanup=error (0.122651ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17459.506227

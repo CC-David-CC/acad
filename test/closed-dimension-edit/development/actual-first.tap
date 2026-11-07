@@ -1,0 +1,144 @@
+TAP version 13
+# verb 2.0.0
+# Subtest: actual normal coordinator replaces one circle diameter and journals exact Undo/Redo
+not ok 1 - actual normal coordinator replaces one circle diameter and journals exact Undo/Redo
+  ---
+  duration_ms: 140.415685
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:22:1'
+  failureType: 'testCodeFailure'
+  error: 'verb is not defined'
+  code: 'ERR_TEST_FAILURE'
+  name: 'ReferenceError'
+  stack: |-
+    Yd (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1296787)
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1299378
+    i.value (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1299386)
+    new a (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:971928)
+    Module.Ay (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1320927)
+    use (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:13:52)
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:23:8)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# verb 2.0.0
+# Subtest: actual segment length edit and removal preserve object identity and genuine underconstraint
+not ok 2 - actual segment length edit and removal preserve object identity and genuine underconstraint
+  ---
+  duration_ms: 131.295418
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:25:1'
+  failureType: 'testCodeFailure'
+  error: 'verb is not defined'
+  code: 'ERR_TEST_FAILURE'
+  name: 'ReferenceError'
+  stack: |-
+    Yd (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1296787)
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1299378
+    i.value (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1299386)
+    new a (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:971928)
+    Module.Ay (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1320927)
+    use (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:13:52)
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:26:8)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# verb 2.0.0
+# Subtest: removing a real accepted duplicate reactivates the surviving redundant diameter
+not ok 3 - removing a real accepted duplicate reactivates the surviving redundant diameter
+  ---
+  duration_ms: 124.616157
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:28:1'
+  failureType: 'testCodeFailure'
+  error: 'verb is not defined'
+  code: 'ERR_TEST_FAILURE'
+  name: 'ReferenceError'
+  stack: |-
+    Yd (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1296787)
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1299378
+    i.value (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1299386)
+    new a (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:971928)
+    Module.Ay (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1320927)
+    use (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:13:52)
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:29:8)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# verb 2.0.0
+# Subtest: contradictory existing dimension edit preserves source/journal and a valid retry recovers
+not ok 4 - contradictory existing dimension edit preserves source/journal and a valid retry recovers
+  ---
+  duration_ms: 119.489283
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:31:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {"code":"SOLVE_ERROR","message":"Invalid constraint constants"}
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    solve (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:12:186)
+    async TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:32:12)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# verb 2.0.0
+# Subtest: strict discovered identity/domain/no-op and unsupported schema refuse without publication
+not ok 5 - strict discovered identity/domain/no-op and unsupported schema refuse without publication
+  ---
+  duration_ms: 125.434595
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:34:1'
+  failureType: 'testCodeFailure'
+  error: 'verb is not defined'
+  code: 'ERR_TEST_FAILURE'
+  name: 'ReferenceError'
+  stack: |-
+    Yd (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1296787)
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1299378
+    i.value (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1299386)
+    new a (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:971928)
+    Module.Ay (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1320927)
+    use (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:13:52)
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:35:8)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# verb 2.0.0
+# Subtest: typed diameter rebinding/literal/removal use actual quantity lengths and exact typed Undo
+not ok 6 - typed diameter rebinding/literal/removal use actual quantity lengths and exact typed Undo
+  ---
+  duration_ms: 126.847151
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:38:1'
+  failureType: 'testCodeFailure'
+  error: 'verb is not defined'
+  code: 'ERR_TEST_FAILURE'
+  name: 'ReferenceError'
+  stack: |-
+    Yd (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1296787)
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1299378
+    i.value (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1299386)
+    new a (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:971928)
+    Module.Ay (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1320927)
+    use (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:13:52)
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:40:8)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 0
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 927.087

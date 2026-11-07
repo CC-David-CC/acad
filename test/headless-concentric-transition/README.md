@@ -1,0 +1,34 @@
+# Pure Concentric-add transition
+
+Base CAD `b69d18b3f106d020f01c34e02a8ad91545d21c89`. New `web/app/sketcher/headless/concentricTransition.ts` accepts:
+
+```js
+{revision, sketchJSON, externalParameters, intent: {ids: [firstId, secondId]}}
+```
+
+It reconstructs a complete saved native sketch through the existing strict replay, resolves two existing Circle/Arc objects, and uses the shared existing Concentric admission semantics in a disposable `HeadlessSketchWorkspace`. Request records/IDs/parameters are bounded own data; native source is bounded to 1 MiB UTF-8 by replay. The circular inventory retains the current command's 1024-object bound. No DOM, editor, canvas, history cache, storage, public preparation hook or publication authority is supplied.
+
+`concentricAdmission.js` extracts the existing pure PM/stage/constraint validation. The only existing product-file change is `concentricOperation.js` replacing that pure preparation/validation hunk. Existing current-object checks remain before constraint allocation; revision, history checkpoint/rollback, lifetime, refresh and return behavior remain in their original wrapper. Worker dispatch, transport/client, IO, PM, coordinator and active UI publication are untouched.
+
+Success returns `{revision,ok:true,serializedSketch,evidence,relation}`. `relation` contains `{typeId:'Concentric',objects,stage,index,status}`. Stage/index identify the added **native row at this revision**, including a second redundant row with identical object IDs; this is not a new persistent constraint UUID. The actual serialized row/type/ordered objects/stage/admission are checked against that receipt. The later selected-object stage owns the relation; generated objects in that same stage refuse, while earlier-stage generated targets follow the existing allowed behavior.
+
+Before publication of any result, verification allows only the existing per-shape solver-coordinate fields to differ. Prior IDs/types/roles/stages, constants, constraints/admission/annotations, generators, labels/dimensions, metadata and non-solver authored shape fields remain strict. This reuses `transitionGeometryPolicy.mjs`; it does not mask arbitrary object.data changes. A final real solve checks native geometry and stored admission again. Refusal returns a correlated revision/error and **no candidate/native bytes**. Existing replay rules for unsupported/missing admission hints are not loosened. Conflict refusal currently retains the existing generic INVALID code and conflict message; it is not a new global unsatisfiability certificate.
+
+`browser-observed.json` records a complete passing actual Chrome155 strict-CSP run. The test-only disposable Worker is SHA256 `393dc65b23e83135b3bd915ac0acf073e9669c772dd13fe61ce3a4da94294847`, with real verb dependency SHA256 `55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3`. Its 45 jobs comprise 14 real native-IO fixture constructions, 14 successful additions, one strict native replay, 15 refusal controls and one direct shared-PM rollback control. All45 Workers terminate. Core realms explicitly report no window/document/HTMLCanvasElement; no canvas or fake viewer is installed in the Worker. The existing app at loopback20488 supplies only the origin/CSP and unchanged verb asset; no app/editor API participates in the math controls. The worker bytes are read once, hashed and served from that same immutable CDP Fetch buffer. No shared fixture or service is modified.
+
+The passing controls independently check:
+
+- Circle/Circle, both Circle/Arc orders, Arc/Arc and reversed selected IDs. Centers agree within 1e-6 mm; simple unconstrained Circle radii remain5/9. Arc endpoints stay on one positive-radius circle. No general radius/endpoint immobility is invented for dependent constraints.
+- A duplicate Concentric succeeds as redundant at stage0/index1, while the prior native row remains exact. Accepted native bytes replay strictly.
+- Two locked distinct centers refuse. A registered LockPoint + SignedDistanceY counterexample permits an attempted x move but contradicts y; the real shared PM transaction restores exact native bytes, centers [3,4]/[10,20], constraints and cleared transaction state. No rejected row escapes.
+- Later-stage ownership, unrelated Mirror generator preservation, same-stage generated-target refusal and earlier-stage generated-target acceptance.
+- Exact saved TangentLC.inverted true/false and Fillet.inverted1/inverted2 retention. Flipping an existing saved branch without changing its geometry refuses with CURRENT_GEOMETRY_MISMATCH. Unrelated B-spline authored data remains exact.
+- Missing, duplicate and wrong-child IDs; degenerate Circle/Arc; changed explicit admission; extra fields, UTF-8 overflow, Map/accessor external parameters and invalid JSON. Valid revisions survive refusal, accessors have zero reads, and inputs remain unchanged.
+
+Fixtures with prior constraints are emitted by actual native IO, including its natural admission and annotation data. Only explicit negative controls alter saved hints/branches. Initial fixture mistakes (UI SignedY label and an empty dimension-annotation array) are retained in `initial-fixture-schema-name.txt`; they were fixture-construction errors, not solver verdicts or product fixes.
+
+Validation: full TypeScript noEmit passes; the new real Worker build passes; all45 actual Worker jobs pass; the carried13 Concentric action tests pass using Node24 `--test --test-force-exit`. Those carried action tests use their existing synthetic viewer/history fixtures and are **not** actual UI/Worker evidence. Direct Node execution reported all13 passes but stayed alive because of imported frontend runtime handles; the standard force-exit test-runner mode finishes with13pass/0fail and exit0. React's existing nonbrowser RAF warnings are unrelated to the headless Worker run.
+
+Reproduce: set `CODI_CONCENTRIC_OUTPUT=/tmp/unique-artifact`, run webpack with this directory's `webpack.cjs`, then run `browser.test.cjs` with `PUPPETEER_CORE_PATH`, loopback `JSKETCHER_TEST_URL`/`CODI_TEST_CDP`, `CODI_CONCENTRIC_WORKER` and `CODI_RECEIPT`. The test enforces self-only Worker CSP and excludes blob/unsafe-eval. For carried controls, build `test/mechanical/webpack.concentric.config.cjs` and run Node24 `--test --test-force-exit /tmp/codi-jsketcher-concentric-tests/concentric.cjs`.
+
+This checkpoint supplies a pure core and shared admission seam. It does not wire production Worker tasks/transport or migrate active editor publication/history/cache ownership. It does not qualify all UI commands, Files/account/save, arbitrary shape/generator/boundary domains, global DOF, exact algebraic dependence or whole-editor performance. Accepted/redundant remain the existing numerical-algebraic admission classifications at the solver's current tolerances.

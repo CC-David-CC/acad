@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "scope": "Same full8 component controls on R2 plus explicit diagnostic correction; no public CAD claim",
+  "beforeCode": "SELF_TOUCHING_BOUNDARY",
+  "afterCode": "ZERO_LENGTH_EDGE",
+  "sourceAndPriorTopologyDisplayPreserved": true,
+  "changedComponentFile": "modules/engine/extrusion/simplePolygon.mjs",
+  "nativeWorkerControllerUnchanged": true,
+  "rows": 8,
+  "classifications": 29
+}

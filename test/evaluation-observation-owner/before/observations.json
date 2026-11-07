@@ -1,0 +1,45 @@
+{
+  "scope": "actual pool/native AbortSignal; synthetic closable mount and override, no Native/browser/account/filesystem race",
+  "rows": [
+    {
+      "case": "unrestricted-observation-promotion",
+      "state": "accepted",
+      "usage": {
+        "owners": 1,
+        "mounts": 0,
+        "candidates": 0,
+        "accepted": 1,
+        "detached": 0,
+        "cleanupFailed": false
+      }
+    },
+    {
+      "case": "reentrant-admission-over-ceiling",
+      "maxOwners": 1,
+      "usage": {
+        "owners": 2,
+        "mounts": 0,
+        "candidates": 2,
+        "accepted": 0,
+        "detached": 0,
+        "cleanupFailed": false
+      }
+    },
+    {
+      "case": "removal-fault-leaves-closed-owner-resource",
+      "failure": {
+        "cause": 0
+      },
+      "state": "closed",
+      "closed": 0,
+      "usage": {
+        "owners": 1,
+        "mounts": 1,
+        "candidates": 0,
+        "accepted": 0,
+        "detached": 0,
+        "cleanupFailed": false
+      }
+    }
+  ]
+}

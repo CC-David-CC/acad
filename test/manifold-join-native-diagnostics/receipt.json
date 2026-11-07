@@ -1,0 +1,34 @@
+{
+  "status": "PASS_DIAGNOSTICS_NOT_JOIN",
+  "nativeRepo": "/mnt/data10tb/codi-manifold-join-native-20261106",
+  "branch": "feature/manifold-join-diagnostics-20261106",
+  "buildRoot": "/mnt/data10tb/codi-manifold-join-diagnostics-build-20261106-r1",
+  "initialProbeFailure": "empty native epsilon -1; no native changes",
+  "initialCppFailure": "ambiguous vec3(0) integer/null overload; fixture now vec3(0.0)",
+  "observationRows": 18,
+  "singleBoundaryObservationRows": 3,
+  "exactDoublePreservation": {
+    "status": "PASS",
+    "shapes": 16,
+    "bitwiseMeshGL64Snapshots": 44,
+    "twoInputPreservedPairs": 16,
+    "invalidSearchControls": 4,
+    "scope": "same native archive, exact double MeshGL64 arrays and reported scalars; no app or Join certificate"
+  },
+  "claim": "Native Node/WASM and same-archive C++ only; strict Join remains JOIN_UNQUALIFIED",
+  "evidence": {
+    "before/empty-epsilon-failure.json": "2acd5e0d7fc6464463d4a58d997644121a8feb8f41056d608b831e1a81938009",
+    "before/empty-epsilon-failure.log": "826ab2fd03cadd871393543375f4c8e6826592bccf5241e9653ad834e06e64bf",
+    "before/preservation-before-zero-constructor.cpp": "3fe59b4b676f255803821f57b01c9de5ecdae14d30ddf1ea725ac4a8495b7035",
+    "before/probe-before-empty-convention.mjs": "1b33639ffa392180143614d87dff7c8831b115b06c428544f0bfb726762976b8",
+    "before/zero-constructor-failure.log": "a164a3c6ca74f376df2e5b615a5d044a69e05e9d34af7fdecda1c7997301d37e",
+    "observed-r2.json": "5e44ff78d6cb7c7fa1bc23503aa47c2740011943e38a2689921d5e0bbb8d7d97",
+    "pins.json": "676acd1539f93624b3d871e7f092905a4f799d172f822233b15f399c0b966e7f",
+    "preservation.json": "30adacbafc9f43215a4591618fd2b9124fed6a4fa4dc353258979af50c76a5c1",
+    "same-boundary.json": "fb26f6c54cc6301525f304587f9b61f01dd0a87e262b230e5237a64bb1ecbe65"
+  },
+  "unchangedApp": {
+    "jsSha256": "cd2031fd75cbbc812b550dd228f95b9fd666ae4da6557f840e3d3ed4cbed268b",
+    "wasmSha256": "7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d"
+  }
+}

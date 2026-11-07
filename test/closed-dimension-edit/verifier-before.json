@@ -1,0 +1,564 @@
+{
+  "lifecycle": {
+    "started": 8,
+    "terminated": 8
+  },
+  "rows": [
+    {
+      "id": "candidate",
+      "before": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "c",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 10
+            }
+          },
+          {
+            "id": "free",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 50,
+                "y": 0
+              },
+              "r": 3
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "DiameterLength",
+                "objects": [
+                  "c"
+                ],
+                "constants": {
+                  "diameter": "20"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "angle": 0
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "genuine": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "c",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 15
+            }
+          },
+          {
+            "id": "free",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 50,
+                "y": 0
+              },
+              "r": 3
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "DiameterLength",
+                "objects": [
+                  "c"
+                ],
+                "constants": {
+                  "diameter": "30"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "angle": 0
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "tampered": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "c",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 15
+            }
+          },
+          {
+            "id": "free",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 57,
+                "y": 0
+              },
+              "r": 3
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "DiameterLength",
+                "objects": [
+                  "c"
+                ],
+                "constants": {
+                  "diameter": "30"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "angle": 0
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "result": {
+        "revision": "candidate",
+        "ok": true,
+        "verified": true
+      }
+    },
+    {
+      "id": "travel",
+      "before": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "c",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 10
+            }
+          },
+          {
+            "id": "free",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 50,
+                "y": 0
+              },
+              "r": 3
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "DiameterLength",
+                "objects": [
+                  "c"
+                ],
+                "constants": {
+                  "diameter": "20"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "angle": 0
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "genuine": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "c",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 15
+            }
+          },
+          {
+            "id": "free",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 50,
+                "y": 0
+              },
+              "r": 3
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "DiameterLength",
+                "objects": [
+                  "c"
+                ],
+                "constants": {
+                  "diameter": "30"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "angle": 0
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "tampered": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "c",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 15
+            }
+          },
+          {
+            "id": "free",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 57,
+                "y": 0
+              },
+              "r": 3
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "DiameterLength",
+                "objects": [
+                  "c"
+                ],
+                "constants": {
+                  "diameter": "30"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "angle": 0
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "result": {
+        "revision": "travel",
+        "ok": true,
+        "verified": true
+      }
+    }
+  ]
+}

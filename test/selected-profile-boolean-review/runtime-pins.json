@@ -1,0 +1,25 @@
+{
+  "source": "32386643ab487de2ca40094549274b109822a6f4",
+  "workers": {
+    "sketch-solver": [
+      "sketch-solver.bd9a5a96b8d7ede6919c.js"
+    ],
+    "project-validator": [
+      "project-validator.760e8f44baf4dc8db1a2.js"
+    ],
+    "prism-semantic": [
+      "prism-semantic.334b28c725a9ef9b0d97.js"
+    ]
+  },
+  "files": {
+    "index.bundle.js": "a0e2ef4030f29d17e83b5290277480e80414bcb5a0ce10d907f73ed00d65ccc2",
+    "selected-profile-worker.js": "0f3240cdde9b5faced831ace71ee5ffcfb6fe159dacba5b7265e5a09b0ca9853",
+    "selected-profile-occ-portable.js": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+    "sketch-solver.bd9a5a96b8d7ede6919c.js": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+    "project-validator.760e8f44baf4dc8db1a2.js": "7236c461672b662cf9d860439c99a3962784012f88245c248a771158f7287286",
+    "prism-semantic.334b28c725a9ef9b0d97.js": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+    "a81af0b78dd585124f3f.wasm": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+  },
+  "runtime": "/mnt/data10tb/codi-cad-selected-profile-boolean-20261106-r1",
+  "port": 20683
+}

@@ -1,0 +1,1769 @@
+{
+  "version": 1,
+  "status": "pass",
+  "projectionSource": "3deae76c704972791efea6278ef966779e21340d",
+  "workerSHA": "e289986872bd7f63f443176c3a6648c4dc37842f9edb8bfdfd9f022bb689e5ea",
+  "normalSource": "997df3dbb97b83d79b65db62f191c45c2f23b4ea",
+  "fixture": "http://127.0.0.1:20488/",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'",
+  "targetId": "ADDE2B18CB8889EFD773A152533D1F2F",
+  "browser": "Chrome/155.0.8059.79",
+  "rows": [
+    {
+      "id": "rectangle",
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"rect-0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":100,\"y\":0}}},{\"id\":\"rect-1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":0},\"b\":{\"x\":100,\"y\":50}}},{\"id\":\"rect-2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":50},\"b\":{\"x\":0,\"y\":50}}},{\"id\":\"rect-3\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":50},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PCoincident\",\"objects\":[\"rect-0:B\",\"rect-1:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-1:B\",\"rect-2:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-2:B\",\"rect-3:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-3:B\",\"rect-0:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-0\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-1\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-2\"],\"constants\":{\"angle\":\"180\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-3\"],\"constants\":{\"angle\":\"270\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"rect-0:A\"],\"constants\":{\"x\":\"0\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-0\"],\"constants\":{\"length\":\"100\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-1\"],\"constants\":{\"length\":\"50\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "normal": {
+        "revision": "mapping-rectangle",
+        "ok": true,
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "rect-0",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 100,
+                  "y": 0
+                }
+              }
+            },
+            {
+              "id": "rect-1",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 100,
+                  "y": 0
+                },
+                "b": {
+                  "x": 100,
+                  "y": 50
+                }
+              }
+            },
+            {
+              "id": "rect-2",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 100,
+                  "y": 50
+                },
+                "b": {
+                  "x": 0,
+                  "y": 50
+                }
+              }
+            },
+            {
+              "id": "rect-3",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 50
+                },
+                "b": {
+                  "x": 0,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-0:B",
+                    "rect-1:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-1:B",
+                    "rect-2:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-2:B",
+                    "rect-3:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-3:B",
+                    "rect-0:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "angle": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "angle": "90"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-2"
+                  ],
+                  "constants": {
+                    "angle": "180"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-3"
+                  ],
+                  "constants": {
+                    "angle": "270"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "rect-0:A"
+                  ],
+                  "constants": {
+                    "x": "0",
+                    "y": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "length": "100"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "length": "50"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "evidence": [
+          {
+            "typeId": "PCoincident",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "PCoincident",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "PCoincident",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "PCoincident",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "Horizontal",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              1e-8
+            ],
+            "units": [
+              "radian"
+            ],
+            "tolerance": 1e-8,
+            "unit": "radian"
+          },
+          {
+            "typeId": "Vertical",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              1e-8
+            ],
+            "units": [
+              "radian"
+            ],
+            "tolerance": 1e-8,
+            "unit": "radian"
+          },
+          {
+            "typeId": "Horizontal",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              1e-8
+            ],
+            "units": [
+              "radian"
+            ],
+            "tolerance": 1e-8,
+            "unit": "radian"
+          },
+          {
+            "typeId": "Vertical",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              1e-8
+            ],
+            "units": [
+              "radian"
+            ],
+            "tolerance": 1e-8,
+            "unit": "radian"
+          },
+          {
+            "typeId": "LockPoint",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "SegmentLength",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              0.000001
+            ],
+            "units": [
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "SegmentLength",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              0.000001
+            ],
+            "units": [
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ]
+      },
+      "projection": {
+        "revision": "mapping-rectangle",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"rect-0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":100,\"y\":0}}},{\"id\":\"rect-1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":0},\"b\":{\"x\":100,\"y\":50}}},{\"id\":\"rect-2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":50},\"b\":{\"x\":0,\"y\":50}}},{\"id\":\"rect-3\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":50},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PCoincident\",\"objects\":[\"rect-0:B\",\"rect-1:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-1:B\",\"rect-2:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-2:B\",\"rect-3:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-3:B\",\"rect-0:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-0\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-1\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-2\"],\"constants\":{\"angle\":\"180\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-3\"],\"constants\":{\"angle\":\"270\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"rect-0:A\"],\"constants\":{\"x\":\"0\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-0\"],\"constants\":{\"length\":\"100\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-1\"],\"constants\":{\"length\":\"50\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"rect-0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":100,\"y\":0}}},{\"id\":\"rect-1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":0},\"b\":{\"x\":100,\"y\":50}}},{\"id\":\"rect-2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":50},\"b\":{\"x\":0,\"y\":50}}},{\"id\":\"rect-3\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":50},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PCoincident\",\"objects\":[\"rect-0:B\",\"rect-1:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-1:B\",\"rect-2:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-2:B\",\"rect-3:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-3:B\",\"rect-0:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-0\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-1\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-2\"],\"constants\":{\"angle\":\"180\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-3\"],\"constants\":{\"angle\":\"270\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"rect-0:A\"],\"constants\":{\"x\":\"0\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-0\"],\"constants\":{\"length\":\"100\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-1\"],\"constants\":{\"length\":\"50\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "witness": {
+          "frame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          },
+          "stages": [
+            {
+              "index": 0,
+              "generatorCount": 0,
+              "constraints": [
+                {
+                  "stage": 0,
+                  "index": 0,
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-0:B",
+                    "rect-1:A"
+                  ],
+                  "constants": {},
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 1,
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-1:B",
+                    "rect-2:A"
+                  ],
+                  "constants": {},
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 2,
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-2:B",
+                    "rect-3:A"
+                  ],
+                  "constants": {},
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 3,
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-3:B",
+                    "rect-0:A"
+                  ],
+                  "constants": {},
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 4,
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "angle": "0"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 5,
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "angle": "90"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 6,
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-2"
+                  ],
+                  "constants": {
+                    "angle": "180"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 7,
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-3"
+                  ],
+                  "constants": {
+                    "angle": "270"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 8,
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "rect-0:A"
+                  ],
+                  "constants": {
+                    "x": "0",
+                    "y": "0"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 9,
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "length": "100"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 10,
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "length": "50"
+                  },
+                  "admission": "accepted"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "duplicate",
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"redundant\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "normal": {
+        "revision": "mapping-duplicate",
+        "ok": true,
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Circle",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "c": {
+                  "x": 10,
+                  "y": 20
+                },
+                "r": 5
+              }
+            },
+            {
+              "id": "b",
+              "type": "Circle",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "c": {
+                  "x": 10,
+                  "y": 20
+                },
+                "r": 9
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "Concentric",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Concentric",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "redundant"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "KEEP = 2",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            },
+            "marker": "native-é",
+            "branchIntent": {
+              "retain": true
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "evidence": [
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "Concentric",
+            "state": "redundant",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ]
+      },
+      "projection": {
+        "revision": "mapping-duplicate",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"redundant\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"redundant\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "witness": {
+          "frame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          },
+          "stages": [
+            {
+              "index": 0,
+              "generatorCount": 0,
+              "constraints": [
+                {
+                  "stage": 0,
+                  "index": 0,
+                  "typeId": "Concentric",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "constants": {},
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 1,
+                  "typeId": "Concentric",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "constants": {},
+                  "admission": "redundant"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "staged",
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":1,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]},\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]},{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"b:C\"],\"constants\":{\"x\":\"10\",\"y\":\"20\"},\"stage\":1,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}]}",
+      "normal": {
+        "revision": "mapping-staged",
+        "ok": true,
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Circle",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "c": {
+                  "x": 3,
+                  "y": 4
+                },
+                "r": 5
+              }
+            },
+            {
+              "id": "b",
+              "type": "Circle",
+              "role": null,
+              "stage": 1,
+              "data": {
+                "c": {
+                  "x": 10,
+                  "y": 20
+                },
+                "r": 5
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "a:C"
+                  ],
+                  "constants": {
+                    "x": "3",
+                    "y": "4"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            },
+            {
+              "constraints": [
+                {
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "b:C"
+                  ],
+                  "constants": {
+                    "x": "10",
+                    "y": "20"
+                  },
+                  "stage": 1,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "evidence": [
+          {
+            "typeId": "LockPoint",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "LockPoint",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ]
+      },
+      "projection": {
+        "revision": "mapping-staged",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":1,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]},\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]},{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"b:C\"],\"constants\":{\"x\":\"10\",\"y\":\"20\"},\"stage\":1,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}]}",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":1,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]},{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"b:C\"],\"constants\":{\"x\":\"10\",\"y\":\"20\"},\"stage\":1,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "witness": {
+          "frame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          },
+          "stages": [
+            {
+              "index": 0,
+              "generatorCount": 0,
+              "constraints": [
+                {
+                  "stage": 0,
+                  "index": 0,
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "a:C"
+                  ],
+                  "constants": {
+                    "x": "3",
+                    "y": "4"
+                  },
+                  "admission": "accepted"
+                }
+              ]
+            },
+            {
+              "index": 1,
+              "generatorCount": 0,
+              "constraints": [
+                {
+                  "stage": 1,
+                  "index": 0,
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "b:C"
+                  ],
+                  "constants": {
+                    "x": "10",
+                    "y": "20"
+                  },
+                  "admission": "accepted"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mirror",
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"rect-0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":100,\"y\":0}}},{\"id\":\"rect-1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":0},\"b\":{\"x\":100,\"y\":50}}},{\"id\":\"rect-2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":50},\"b\":{\"x\":0,\"y\":50}}},{\"id\":\"rect-3\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":50},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"41\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":-50},\"b\":{\"x\":0,\"y\":-50}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PCoincident\",\"objects\":[\"rect-0:B\",\"rect-1:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-1:B\",\"rect-2:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-2:B\",\"rect-3:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-3:B\",\"rect-0:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-0\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-1\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-2\"],\"constants\":{\"angle\":\"180\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-3\"],\"constants\":{\"angle\":\"270\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"rect-0:A\"],\"constants\":{\"x\":\"0\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-0\"],\"constants\":{\"length\":\"100\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-1\"],\"constants\":{\"length\":\"50\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[{\"typeId\":\"Mirror\",\"params\":{\"reflectionLine\":[\"rect-0\"],\"objects\":[\"rect-2\"]},\"stage\":0,\"generatedObjects\":[\"41\"]}]},{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]},\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}}}",
+      "normal": {
+        "revision": "mapping-mirror",
+        "ok": true,
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "rect-0",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 100,
+                  "y": 0
+                }
+              }
+            },
+            {
+              "id": "rect-1",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 100,
+                  "y": 0
+                },
+                "b": {
+                  "x": 100,
+                  "y": 50
+                }
+              }
+            },
+            {
+              "id": "rect-2",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 100,
+                  "y": 50
+                },
+                "b": {
+                  "x": 0,
+                  "y": 50
+                }
+              }
+            },
+            {
+              "id": "rect-3",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 50
+                },
+                "b": {
+                  "x": 0,
+                  "y": 0
+                }
+              }
+            },
+            {
+              "id": "41",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 100,
+                  "y": -50
+                },
+                "b": {
+                  "x": 0,
+                  "y": -50
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-0:B",
+                    "rect-1:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-1:B",
+                    "rect-2:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-2:B",
+                    "rect-3:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-3:B",
+                    "rect-0:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "angle": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "angle": "90"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-2"
+                  ],
+                  "constants": {
+                    "angle": "180"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-3"
+                  ],
+                  "constants": {
+                    "angle": "270"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "rect-0:A"
+                  ],
+                  "constants": {
+                    "x": "0",
+                    "y": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "length": "100"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "length": "50"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": [
+                {
+                  "typeId": "Mirror",
+                  "params": {
+                    "reflectionLine": [
+                      "rect-0"
+                    ],
+                    "objects": [
+                      "rect-2"
+                    ]
+                  },
+                  "stage": 0,
+                  "generatedObjects": [
+                    "41"
+                  ]
+                }
+              ]
+            },
+            {
+              "constraints": [],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "evidence": [
+          {
+            "typeId": "PCoincident",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "PCoincident",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "PCoincident",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "PCoincident",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "Horizontal",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              1e-8
+            ],
+            "units": [
+              "radian"
+            ],
+            "tolerance": 1e-8,
+            "unit": "radian"
+          },
+          {
+            "typeId": "Vertical",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              1e-8
+            ],
+            "units": [
+              "radian"
+            ],
+            "tolerance": 1e-8,
+            "unit": "radian"
+          },
+          {
+            "typeId": "Horizontal",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              1e-8
+            ],
+            "units": [
+              "radian"
+            ],
+            "tolerance": 1e-8,
+            "unit": "radian"
+          },
+          {
+            "typeId": "Vertical",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              1e-8
+            ],
+            "units": [
+              "radian"
+            ],
+            "tolerance": 1e-8,
+            "unit": "radian"
+          },
+          {
+            "typeId": "LockPoint",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "SegmentLength",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              0.000001
+            ],
+            "units": [
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "SegmentLength",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              0.000001
+            ],
+            "units": [
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ]
+      },
+      "projection": {
+        "revision": "mapping-mirror",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"rect-0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":100,\"y\":0}}},{\"id\":\"rect-1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":0},\"b\":{\"x\":100,\"y\":50}}},{\"id\":\"rect-2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":50},\"b\":{\"x\":0,\"y\":50}}},{\"id\":\"rect-3\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":50},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"41\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":-50},\"b\":{\"x\":0,\"y\":-50}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PCoincident\",\"objects\":[\"rect-0:B\",\"rect-1:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-1:B\",\"rect-2:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-2:B\",\"rect-3:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-3:B\",\"rect-0:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-0\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-1\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-2\"],\"constants\":{\"angle\":\"180\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-3\"],\"constants\":{\"angle\":\"270\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"rect-0:A\"],\"constants\":{\"x\":\"0\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-0\"],\"constants\":{\"length\":\"100\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-1\"],\"constants\":{\"length\":\"50\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[{\"typeId\":\"Mirror\",\"params\":{\"reflectionLine\":[\"rect-0\"],\"objects\":[\"rect-2\"]},\"stage\":0,\"generatedObjects\":[\"41\"]}]},{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]},\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}}}",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"rect-0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":100,\"y\":0}}},{\"id\":\"rect-1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":0},\"b\":{\"x\":100,\"y\":50}}},{\"id\":\"rect-2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":50},\"b\":{\"x\":0,\"y\":50}}},{\"id\":\"rect-3\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":50},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"41\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":-50},\"b\":{\"x\":0,\"y\":-50}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PCoincident\",\"objects\":[\"rect-0:B\",\"rect-1:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-1:B\",\"rect-2:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-2:B\",\"rect-3:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-3:B\",\"rect-0:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-0\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-1\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-2\"],\"constants\":{\"angle\":\"180\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-3\"],\"constants\":{\"angle\":\"270\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"rect-0:A\"],\"constants\":{\"x\":\"0\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-0\"],\"constants\":{\"length\":\"100\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-1\"],\"constants\":{\"length\":\"50\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[{\"typeId\":\"Mirror\",\"params\":{\"reflectionLine\":[\"rect-0\"],\"objects\":[\"rect-2\"]},\"stage\":0,\"generatedObjects\":[\"41\"]}]},{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "witness": {
+          "frame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          },
+          "stages": [
+            {
+              "index": 0,
+              "generatorCount": 1,
+              "constraints": [
+                {
+                  "stage": 0,
+                  "index": 0,
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-0:B",
+                    "rect-1:A"
+                  ],
+                  "constants": {},
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 1,
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-1:B",
+                    "rect-2:A"
+                  ],
+                  "constants": {},
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 2,
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-2:B",
+                    "rect-3:A"
+                  ],
+                  "constants": {},
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 3,
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-3:B",
+                    "rect-0:A"
+                  ],
+                  "constants": {},
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 4,
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "angle": "0"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 5,
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "angle": "90"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 6,
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-2"
+                  ],
+                  "constants": {
+                    "angle": "180"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 7,
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-3"
+                  ],
+                  "constants": {
+                    "angle": "270"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 8,
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "rect-0:A"
+                  ],
+                  "constants": {
+                    "x": "0",
+                    "y": "0"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 9,
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "length": "100"
+                  },
+                  "admission": "accepted"
+                },
+                {
+                  "stage": 0,
+                  "index": 10,
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "length": "50"
+                  },
+                  "admission": "accepted"
+                }
+              ]
+            },
+            {
+              "index": 1,
+              "generatorCount": 0,
+              "constraints": []
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "normalFailure": {
+    "revision": "late-intent-failure",
+    "ok": false,
+    "error": {
+      "code": "INTENT_CHANGED",
+      "message": "Constraint intent changed during solving."
+    }
+  },
+  "projectionFailure": {
+    "revision": "late-intent-failure",
+    "ok": false,
+    "error": {
+      "code": "INTENT_CHANGED",
+      "message": "Constraint intent changed during solving."
+    }
+  },
+  "normalURL": "http://127.0.0.1:20488/static/sketch-solver.d9991d9167715129b639.js",
+  "normalSHA": "3211e4c5f5b51dc6b19dbce0e29c4cd1dbdb15ce7bbc89c075d5973b3bf7bc87",
+  "starts": 10,
+  "terminated": 10
+}

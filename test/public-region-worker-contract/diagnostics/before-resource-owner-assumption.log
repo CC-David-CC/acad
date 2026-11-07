@@ -1,0 +1,9 @@
+Error: Candidate cleanup did not settle
+    at evaluate (evaluate at run (/tmp/codi-public-region-worker-counterexample-20261106/test/public-region-worker-contract/browser.cjs:35:26), <anonymous>:18:152)
+    at #evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/ExecutionContext.js:391:56)
+    at async ExecutionContext.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/ExecutionContext.js:277:16)
+    at async IsolatedWorld.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/IsolatedWorld.js:100:16)
+    at async CdpFrame.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Frame.js:362:20)
+    at async CdpPage.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Page.js:826:20)
+    at async run (/tmp/codi-public-region-worker-counterexample-20261106/test/public-region-worker-contract/browser.cjs:35:15)
+    at async /tmp/codi-public-region-worker-counterexample-20261106/test/public-region-worker-contract/browser.cjs:63:3

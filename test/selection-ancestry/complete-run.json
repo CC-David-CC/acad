@@ -1,0 +1,117 @@
+{
+  "capturedAt": "2026-11-06T19:25:26.758Z",
+  "node": "v24.22.1",
+  "sources": {
+    "../../modules/engine/mount/selectionAncestryIndex.mjs": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+    "../../modules/engine/mount/prismSelectionIndex.mjs": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+    "../../modules/engine/mount/ownedTopologyContract.mjs": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+    "./worker.mjs": "6db8403a24dd3b7aeec478d35c1e0c8cad3034977a64d13d614f7b3af194f459",
+    "./native-first-receipt.json": "a1a99f0f6178aa64463a1688a1b3022880821fde68f027751378bcd7fd2496d7"
+  },
+  "status": "PASS",
+  "scope": "Actual Node Worker pure propagation of recorded genuine main-export fixtures plus explicitly synthetic metadata controls; no new native/browser/public operation",
+  "rows": [
+    {
+      "name": "recorded actual main-export fillet and raw-deleted survivors",
+      "status": "PASS",
+      "data": {
+        "volume": 99961.37166941153,
+        "edges": 11,
+        "faces": 7,
+        "retainedDespiteRawDeleted": 7,
+        "newBlendFaces": 1,
+        "unclaimedEdges": 4
+      }
+    },
+    {
+      "name": "recorded actual equal-distance chamfer",
+      "status": "PASS",
+      "data": {
+        "volume": 99990
+      }
+    },
+    {
+      "name": "recorded actual far-corner chamfer after fillet",
+      "status": "PASS",
+      "data": {
+        "volume": 99951.37166941154,
+        "edges": 10,
+        "faces": 8,
+        "oldBlendSurvives": true,
+        "unclaimedEdges": 8
+      }
+    },
+    {
+      "name": "recorded radius edit changes geometry while identities survive replay",
+      "status": "PASS",
+      "data": {
+        "volume": 99982.83185307178,
+        "sameKeysAfterSizeChange": true
+      }
+    },
+    {
+      "name": "synthetic same+modified duplicate dedup and raw deleted flag",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic missing descendant remains explicit evidence",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic split is ambiguous without nearest matching",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic many-to-one rejects both identities",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic overlapping split and merge records shared origin",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic Generated edges never replace old edges",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic unique new face uses actual catalog field type",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic shared or retained generated faces stay unqualified",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic un-authored native co-generator also prevents unique naming",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic face merge remains distinct from edge index space",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic earlier failure survives without aggregate double count",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic surface observation updates retained descriptor",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic malformed ancestry counts and membership refuse",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic caller and private binding admission refuse",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic generated key and actual UTF8 plan budgets",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic deterministic plans and input preservation",
+      "status": "PASS"
+    }
+  ]
+}

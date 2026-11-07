@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "base": "3deae76c704972791efea6278ef966779e21340d",
+  "fix": "d75f166763461f7bf4a3b8d2adf2640dbab25754",
+  "finding": {
+    "id": "borrowed-constants-callback",
+    "before": {
+      "geometry": 100,
+      "savedTarget": 200,
+      "ok": true,
+      "inputChanged": true
+    },
+    "after": {
+      "geometry": 100,
+      "savedTarget": 100,
+      "ok": true,
+      "inputChanged": false
+    },
+    "scope": "Injected mutating trusted optional hook; current production collector only pushes rows; current installed Worker3211 has no hook."
+  },
+  "checks": [
+    {
+      "id": "full-native-and-evidence-compatibility",
+      "status": "pass",
+      "evidence": [
+        "callback-after.json",
+        "mapping-after.json"
+      ]
+    },
+    {
+      "id": "normal-intrinsic-row-mapping",
+      "status": "pass",
+      "workers": 10,
+      "evidence": [
+        "mapping-after.json"
+      ]
+    },
+    {
+      "id": "owner-snapshot-source-controls",
+      "status": "pass",
+      "cases": 15
+    },
+    {
+      "id": "existing-real-owner-integration",
+      "status": "pass",
+      "evidence": [
+        "owner-real-after.log"
+      ]
+    },
+    {
+      "id": "actual-MFace-frames",
+      "status": "pass",
+      "workers": 7,
+      "evidence": [
+        "frame-before.json"
+      ]
+    }
+  ],
+  "notClaimed": [
+    "production integration",
+    "live cache installation",
+    "DOF",
+    "global safety",
+    "untrusted transport authentication",
+    "wall-time deadline through owner response copy"
+  ]
+}

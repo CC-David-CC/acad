@@ -1,0 +1,37 @@
+OCCT mapped rebuild receipt
+Recorded UTC: 2026-11-02T05:03:23.054918+00:00
+
+source_commit=5efaf53accb45bac475155fc4d5552642c19e91e
+published_wasm_sha256=fee4624786bb114de1d381340f05f0cdf47e6700b9fd62ef8a5dace82c8fda77
+published_js_sha256=3c56e74e6e08411436a68fb930bab38aedd3137e4369af2bc67fd382e568787e
+emcc=emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 2.0.30 (f782b50a7f8dded7cd0e2c7ee4fed41ab743f5c0)
+node=v24.19.0
+cmake=cmake version 3.28.3
+python=Python 3.12.3
+
+Mapped build: -j4; disk watchdog stops this build if free space drops below 15 GiB.
+Compile exit: 0
+Link exit: 0
+Disk guard: not available
+
+Mapped artifact SHA-256:
+7a7f927d4552eec7561ff0899d841cfabfdf49fe62e3ce7abfb91640c698be73  main.wasm
+3c56e74e6e08411436a68fb930bab38aedd3137e4369af2bc67fd382e568787e  main.js
+
+main.wasm matches published npm artifact: no
+main.js matches published npm artifact: yes
+
+Limitations: this uses current emsdk with Emscripten 2.0.30 but Node 24.19.0, CMake 3.28.3 and Python 3.12.3; original image environment is not reproduced. Compiler and link source paths are prefix-mapped. A mismatch is inconclusive; a match establishes binary equality for these two artifacts, not a complete licensing or dependency audit.
+
+Mapped binary comparison:
+- Both WASM files are 34,918,350 bytes, and exactly four byte positions differ: 13624145, 13630458, 13650708, 13650715 (zero-based).
+- Parsing the WASM code section locates all four bytes in defined function body 18834, starting at file offset 13507699 and spanning 161054 bytes. Binaryen wasm-dis labels it $18834.
+- Text disassembly with the pinned Emscripten 2.0.30 wasm-dis differs only at two branch-table label references (1165 and 1166 exchanged) and two local constant values (10 and 16 exchanged). See mapped-wat.diff; disassembly-sha256.txt records the full generated WAT hashes. This suggests a reordered internal state, but behavior equivalence is not established.
+- The original 1.2 GiB text disassemblies were removed after hashing to conserve disk; they can be regenerated from occt.wasm and source/build-mapped/main.wasm. The comparison output and originals remain under this isolated directory.
+- A profiling relink used separately named profile.* outputs solely to investigate symbol names; it does not affect the above hashes. The initial profiling wasm optimizer briefly used more CPU threads than the four-job cap before completion; the retry uses taskset to restrict affinity to four CPUs.
+
+Profiling relink identification (provisional):
+- A separate --profiling-funcs relink assigns module function index 19412 (578 imported functions plus defined body 18834) the name ShapeFix_Wire::FixGap2d(int, bool).
+- Its first and last 64 body bytes match the original mapped build, but the profiling build body is 161086 bytes versus 161054 bytes for the unprofiled build. Therefore the symbol mapping is suggestive, not established beyond doubt, and no behavioral-equivalence claim is made.
+- Source candidate: occt/src/ShapeFix/ShapeFix_Wire_1.cxx, around line 768 of interpreter commit 5efaf53accb45bac475155fc4d5552642c19e91e.
+- The profiling relink was run with taskset CPU affinity 0-3. Generated 12 MiB function dumps and profiling build artifacts are disposable and are not required to read this receipt; exact scripts and logs are preserved.

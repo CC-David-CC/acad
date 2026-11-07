@@ -1,0 +1,39 @@
+{
+  "sourceTip": "2ed70c8ad8ee2077a9fb71e1a14ea4916388b518",
+  "versions": {
+    "node": "v24.22.1",
+    "webpack": "5.74.0",
+    "babel": "7.18.10"
+  },
+  "productGitTreeIds": {
+    "web": "da4f8c7847cb32775e7315d8a87f98b8d0a0d267",
+    "modules": "472511d47157d962b736141157cb6f20aede21eb",
+    "build": "17900e6b96ebc67f02d99883daff40e7346139df"
+  },
+  "sha256": {
+    "web/app/sketcher/constr/AlgNumSystem.ts": "74302e85a4f694af0cf598dadfb097c0137ca9d4f574e849a42c8aea47cf6692",
+    "web/app/sketcher/constr/polynomial.ts": "b53fac3628b1383a711c64d5e7a54e21d0c483b564bbf8e946b6c57a80badcc5",
+    "test/headless-axis-symmetry/domain-normalization.test.mjs": "a411fb5ebe049ad34014fcd5b38231c0f472d05c21f29845bebd0295605cc684",
+    "test/headless-axis-symmetry/fixtures/consumed-axis-zero-x-before.json": "dce281f7d0c67152a9cd02ff64b4492a4c1a6a3a6460fd815539c49b6bd42da9",
+    "package.json": "a3959033cbb9c5c848cbdea054dc27189a27c3091888d247a8d0f6094d70b7ff",
+    "package-lock.json": "2ac3646c63f3ae771cfe6712efcd820626f4fdc43af72a429a7443403b650a99",
+    ".babelrc": "1db5dbc266d6f98a89437dfa5f5a28710cd4d1171220f79de6d85d3323c0fb86",
+    "tsconfig.json": "3e806316cc1aa04774ee41b2364a53e2bd7a2136e0b159c94a5611f5ffe34950",
+    "test/mechanical/noop-sketch-save.test.mjs": "e5d65c47a824445475d729b2b4a1421976c179433a814b6dc11ea7c68b6e7337",
+    "test/mechanical/rigid-group-solver-probe.test.mjs": "18a3b69ac5793fac003ceab6b171125f44f684f3f5bd04c01bf31df82d82ea83",
+    "test/mechanical-corpus-harness/reevaluate-entry-loader.cjs": "7fc76adfac20bc830ef605ef6c8b4c47ba9a4267f15908eff2743b87db537a9c",
+    "test/mechanical-corpus-harness/loader-contract.test.cjs": "28707a182cb900480b259fea62b441cc53760cfc3cadb8c8441b0cacf0693ef3",
+    "test/mechanical-normalization-compose/README.md": "dda28f27862d9a3c63c66bd714fad9369226b33e7f02034586039eaa080812d0",
+    "test/mechanical-normalization-compose/receipt.json": "2976070b745f4ccc68f6bfd1bea4faf079a398f4ec8d8c7972e86bf086aec89a"
+  },
+  "builtOutputFilesSha256": {
+    "broad": {
+      "1b263015ce34d3f2835a.json": "5126177452dbe7ecd4d8ffe999bed9ae67ff87f7affce6a90daa3063df9cca4b",
+      "ac8b26af4526498b6f35.json": "5e3d8ebf2b8f9fd39dd66e22d71330d867dae192ef3864d8af82bdec137e1b17",
+      "test.cjs": "6555fb195b5ba9509b6d040be095349828ca491b92f79212e645f497ec2d33f7"
+    },
+    "normalization": {
+      "test.cjs": "c9a23f780bed1f60e746ebcdf5f3ad1731b88d2e00550d96cb633a1a7da646fe"
+    }
+  }
+}

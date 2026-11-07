@@ -1,0 +1,9 @@
+{
+  "status": "PASS_NORMAL_COMBINED_BUILD",
+  "source": "6725b03eb13df92d70626b2a1b55f73c22e52d5c",
+  "runtime": "r730:/mnt/data10tb/codi-polygon-combined-sweep-arc-20261107-r4",
+  "typescriptExit": 0,
+  "typescriptOutputBytes": 0,
+  "compiledIndexSHA256": "0b08d64b6e20eae48c108c6a41aa4759d5d6275383fff769b4008a33bee77f36",
+  "scope": "Code/asset build only. After-fix signed4case test still running; no full Gate1 claim."
+}

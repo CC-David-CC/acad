@@ -1,0 +1,17 @@
+{
+  "sourceCommit": "3c969bf687ea37dc719ec9dad2d2cc8578c0eea2",
+  "resourceSourceSHA256": "119e56578df6be8620e2884513f19b76443b8a95b75212c59c34e078ee696617",
+  "files": {
+    "resource-after.log": "8120a096da640746472a608330050a608b4b09d8f535171819519519559e6f0c",
+    "resource-retained-candidate.log": "ddf513d051aeb0475d2f5113682df11bac65093dfee59323dad8c178827ada18",
+    "resource-pool-proposal.patch": "538b67f74a272eed5639104208c54d6010fea248f1a494a2c26be23ec74699a1",
+    "resource-candidate.log": "53313c5714985d1e5617d2ea625f3602e72af89ec11229d704be8c4357f5a496",
+    "resource-baseline.json": "611656c5d67a3eeaa388d7485ab9a25548db877a094e67b8df2e3a933f74f186",
+    "resource-retained-before.log": "d19e9b4320c27bb70dd90da4a6986a7ee982fef4981da1e7ccc3e118e4ce09f6",
+    "resource-before.log": "eb9e300059abd38f0093e7e64e2566de2310239e21aa4bc73d82055b9d3d3232",
+    "resource-regressions.test.mjs": "81c44d9ee1577883d787a6d3710d3306118d210e9848d84fc82e67cd0571f704"
+  },
+  "combinedTests": 22,
+  "pass": 22,
+  "fail": 0
+}

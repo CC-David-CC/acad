@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "source": "4d3dbca4085563ae3e5f284a33d9e3fc0bb7e631",
+  "clientSha256": "f95d8549ccc000389ae65bb00bc3c3000afcbe79ddd12305ff2c77e0713c0d22",
+  "layer": "real-Chromium-Web-Locks-with-labeled-Worker-double",
+  "fixture": "http://127.0.0.1:20584/",
+  "cdp": "http://127.0.0.1:19329/",
+  "targetId": "59A44006DC195EF6BF58ED757F709FDE",
+  "browser": "Chrome/155.0.8059.79",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'",
+  "output": [
+    {
+      "id": "third-pending",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Too many pending sketch transitions in this window."
+    },
+    {
+      "id": "queued-abort",
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sketch solve cancelled"
+    },
+    {
+      "id": "queued-capture",
+      "status": "fulfilled",
+      "ok": true,
+      "revision": "queued-capture",
+      "frozen": true,
+      "captured": {
+        "task": "sketch-transition-length-relation",
+        "revision": "queued-capture",
+        "sketchJSON": "{}",
+        "externalParameters": {
+          "N": 3
+        },
+        "intent": {
+          "ids": [
+            "a",
+            "b"
+          ],
+          "factor": 2,
+          "offset": 0
+        }
+      },
+      "deepFrozen": true,
+      "serializedLength": 168
+    },
+    {
+      "id": "active-abort",
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sketch solve cancelled"
+    },
+    {
+      "id": "after-abort-slot-reuse",
+      "status": "fulfilled",
+      "ok": true,
+      "revision": "after-abort-slot-reuse",
+      "frozen": true,
+      "serializedLength": 118
+    },
+    {
+      "id": "typed-refusal",
+      "status": "fulfilled",
+      "ok": false,
+      "error": {
+        "code": "RESIDUAL",
+        "message": "Controlled refusal"
+      },
+      "revision": "typed-refusal",
+      "frozen": true
+    },
+    {
+      "id": "deadline",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Sketch solve timed out."
+    },
+    {
+      "id": "wrong-revision",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch worker result."
+    },
+    {
+      "id": "sparse-outer",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition result."
+    },
+    {
+      "id": "sparse-residual",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition result."
+    },
+    {
+      "id": "sparse-tolerance",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition result."
+    },
+    {
+      "id": "sparse-units",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition result."
+    },
+    {
+      "id": "nonfinite",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition evidence."
+    },
+    {
+      "id": "exceeds-residual",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition evidence."
+    },
+    {
+      "id": "bad-unit",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition evidence."
+    },
+    {
+      "id": "extra-row-key",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition request."
+    },
+    {
+      "id": "error-too-long",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition result."
+    },
+    {
+      "id": "utf8-response",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition result."
+    },
+    {
+      "id": "bad-relation",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition result."
+    },
+    {
+      "id": "sparse-relation",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition result."
+    },
+    {
+      "id": "response-microtask-abort",
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sketch transition cancelled"
+    },
+    {
+      "id": "response-microtask-ABA",
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sketch transition cancelled"
+    },
+    {
+      "id": "final-valid-sync-abort",
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sketch transition cancelled"
+    },
+    {
+      "id": "input-getter",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition parameters."
+    },
+    {
+      "id": "utf8-input",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch transition result."
+    },
+    {
+      "id": "validation-third-pending",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Too many pending sketch transitions in this window."
+    },
+    {
+      "id": "validation-budget-A",
+      "status": "fulfilled",
+      "ok": true,
+      "revision": "validation-budget-A",
+      "frozen": true,
+      "serializedLength": 100000
+    },
+    {
+      "id": "validation-budget-B",
+      "status": "fulfilled",
+      "ok": true,
+      "revision": "validation-budget-B",
+      "frozen": true,
+      "serializedLength": 100000
+    },
+    {
+      "id": "validation-abort",
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sketch transition cancelled"
+    },
+    {
+      "id": "validation-deadline",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Sketch transition timed out."
+    }
+  ],
+  "queuedAbort": true,
+  "queuedABA": true,
+  "epoch": 2,
+  "authored": "original",
+  "getterReads": 0,
+  "workersForGetter": 0,
+  "workersForUtf": 1,
+  "validationFacts": {
+    "bothWorkersEndedBeforeBudgetCheck": true
+  },
+  "finalControllerAborted": true,
+  "afterResponseChecks": 2,
+  "created": 26,
+  "terminated": 26,
+  "maxTerminateCalls": 1,
+  "violations": []
+}

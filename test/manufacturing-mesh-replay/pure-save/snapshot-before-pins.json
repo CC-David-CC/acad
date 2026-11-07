@@ -1,0 +1,10 @@
+{
+  "sourceCheckpoint": "08071aa6e (root9098 authority+ad460 coherentpureprep composed)",
+  "sourceHashes": {
+    "web/app/cad/projectManager/projectManagerBundle.ts": "2bc6e7348aa94c946fd80b79a4fa6edc81527fb055417ee8082cd18822cde7e4",
+    "test/manufacturing-mesh-replay/pure-save/snapshot.test.mjs": "636220c019ee1bb512b15d50bad918b47d8955f28979efd9c68b7e168250546c",
+    "test/manufacturing-mesh-replay/fixture.mjs": "8d74019644f32b8c445bd6bf0982ad6d6b701a403be091c2ea88f27f39882d1f",
+    "test/generic-manufacturing-assignment/manager-fixture.mjs": "52757acd323e6bdb171928ca87b9f6035876a9d9f26c8534a9b3cdb9866310a5"
+  },
+  "scope": "Actual PM snapshot/capture, protocol accepted geometry;3incidental project.save calls"
+}

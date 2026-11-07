@@ -1,0 +1,24 @@
+--- a/web/app/cad/craft/evaluationResources.mjs
++++ b/web/app/cad/craft/evaluationResources.mjs
+@@ -53,7 +53,7 @@
+         // mount twice or release its reservation before cleanup returns.
+         if (slot.value === null) continue;
+         const mount = slot.value; slot.value = null;
+-        try { mount.close(); } catch (error) { cleanupFailure = cleanupFailure || error; }
++        try { mount.close(); } catch (error) { cleanupFailure = cleanupFailure || {cause:error}; }
+         reservations.delete(slot);
+       }
+       mounts.clear(); publicationChecks.clear();
+@@ -110,9 +110,9 @@
+           requireCurrent(); slot.value = value; return value;
+         } catch (error) {
+           mounts.delete(key);
+-          if (value && typeof value.close === 'function') {
+-            try { value.close(); } catch (failure) { cleanupFailure = cleanupFailure || failure; }
+-          }
++          try {
++            if (value && typeof value.close === 'function') value.close();
++          } catch (failure) { cleanupFailure = cleanupFailure || {cause:failure}; }
+           reservations.delete(slot);
+           throw error;
+         }

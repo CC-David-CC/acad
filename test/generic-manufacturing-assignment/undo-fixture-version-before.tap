@@ -1,0 +1,21 @@
+✖ existing actual enclosure material assignment invalidates prior Craft Undo; generic publication stays pending (223.825074ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 643.343467
+
+✖ failing tests:
+
+test at test/generic-manufacturing-assignment/undo-gap.test.mjs:5:1
+✖ existing actual enclosure material assignment invalidates prior Craft Undo; generic publication stays pending (223.825074ms)
+  Error: A versioned sketch workspace is required.
+      at sketchRevision (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/craft/sketchRevision.mjs:5:11)
+      at TestContext.<anonymous> (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/undo-gap.test.mjs:5:915)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)

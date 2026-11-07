@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "status": "BUILD_AND_PACKAGE_PASS",
+  "appSource": "69a476bfa850b695f16fed135ba27a513238e01c",
+  "desktopSource": "1ef1390a4c00a5c3f38d671bffa6eef3240c73e5",
+  "packageFiles": 181,
+  "coreFiles": 71,
+  "outer": {
+    "bundleSHA256": "c54741f3a61c649f8684cbdc477792711bf898b37aa2cae02c3cb323551f54c1",
+    "sha256": "940336b50da6260d6829fdfe321117c511a7da7008494d222d3d62cbcc0de3de",
+    "path": "assets/desktop/apps/jsketcher/c54741f3a61c649f8684cbdc477792711bf898b37aa2cae02c3cb323551f54c1/index.mjs"
+  },
+  "coreAppSHA256": "fb956536598817de35076f9829a7f572a69daeb4b0befba033050f0c36577f83",
+  "nativeJsSHA256": "dd666902fe926d69cc3c8843f5568c2a3e569f38ff49291baa2f248165b5ea99",
+  "nativeWasmSHA256": "8d5e537e0d7f9e12b8ae0eaf239c0be1080934ed12a24bf6e7f849c9135ed5a2",
+  "booleanWorkerSHA256": "95478c5d3efa062804082ae50bea76484841e2975044b4937586709f25fd9b14",
+  "exactVolumeAssets": {
+    "static/boolean-history/modules/engine/mount/exactMeshVolume.mjs": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+    "static/exactMeshVolume.mjs": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+    "static/mechanical-profile/modules/engine/mount/exactMeshVolume.mjs": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+    "static/polygon-profile/modules/engine/mount/exactMeshVolume.mjs": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c"
+  },
+  "buildDirectory": "/mnt/data10tb/codi-polygon-combined-core-qualified-app-20261106-r1",
+  "sourceTrackedClean": true,
+  "buildEvidence": {
+    ".build/combined-build.log": {
+      "bytes": 26987,
+      "sha256": "fdee47ec58772a6024fb069c546b8c799dff42b22142b263e6babffebf4fa195"
+    },
+    ".build/typescript.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".build/combined-pins.txt": {
+      "bytes": 1308,
+      "sha256": "da1aa58abcfa81683c7467448d0983b6e58491f34c41c80a15bbc2dd934cf49a"
+    },
+    "test/polygon-profile-app-history/build-private-r730.sh": {
+      "bytes": 3164,
+      "sha256": "3b09dd0ce73b7fa15c9b472fed7c22589f546b0ccbcdc920c7269306c0b28963"
+    },
+    ".build/boolean-history-assets/component.json": {
+      "bytes": 7842,
+      "sha256": "cc423f60645ce8210b493798064a4b27699d4ca438fdda305aaa2a486731ba53"
+    }
+  },
+  "scope": "Verified source build/package and exact helper resource emission only; signed combined app qualification separate."
+}

@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "status": "PASS",
+  "product": "84d9b6df1924b3975c1b13d8f035678a45c08973",
+  "base": "3cc1eede5dee4bfc7dd3947b1153d21844c5d256",
+  "rootDependency": "6cc89858d140c67d4f5caab15ce90289ed5b52fa",
+  "localDependencyCherryPick": "2ca65e8d3",
+  "scope": "actual source-bound discovery + shared journal + explicit edit callback protocol; not native suffix replay or public app acceptance",
+  "tests": {
+    "pass": 22,
+    "fail": 0,
+    "skipped": 0,
+    "newJournalGroups": 7,
+    "sourceServiceGroups": 9,
+    "retainedDepthGroups": 6,
+    "tap": "frozen.tap",
+    "typescriptExitCode": 0
+  },
+  "workers": {
+    "started": 163,
+    "terminated": 163
+  },
+  "build": {
+    "head": "2ca65e8d37b2c732e24d0953b1f67522977ac8fd",
+    "node": "v24.22.1",
+    "webpack": "5.74.0",
+    "sourceCount": 1278,
+    "sourceCohortBeforeAfter": "2b0523975526a44bbe89dd2cde05da075690a4096fed6eb61ea087d11de7195e",
+    "sourceHashes": {
+      "web/app/cad/craft/selectedProfileRegionCommands.ts": "142929ac0abd6980c98f9db8f6c6bf05960c3458f2a61b6dc3d47db9d46cd379",
+      "web/app/cad/craft/authoredEditJournal.mjs": "a96ca1a260ab14209e70f98b8f6a3de531ed5a12d50e5b10c5b4b11e058e6ffc"
+    },
+    "sketch": "2b2a308a9c32ca30631d40055e4fafd60c660677ba8f456dfe8b1dc850b75792",
+    "semantic": "413fafb1e4cc3e5f77304b20ea4b40d707dc1f403ba3e706dd0591a6e87a2d11",
+    "service": "63bdab4fb79a04c23cc0aa2d67c24dfa9996823dc8ead4fd647c9491696d7495"
+  },
+  "sourcePinsMatchProduct": true,
+  "testSha256": {
+    "platform.mjs": "6fac2b432d5572b6273f21fe94491a7232e00a886a495b78d7ca49137f4e8164",
+    "service.test.mjs": "db7e9e792240431ce929728ccbbe04711eec85ca40a99e302adc94c7282b6279",
+    "build.cjs": "80543d3ee515fcf12b326af3f9d43c92e826e47bf88e6d11c4f71c06cf0eea10",
+    "sketch-url.mjs": "47306d6bdc16909f980f32f6b20fbb9af3a12c82be78fecc8c4290fcb6275d18",
+    "journal.test.mjs": "02dad3b18386ba1fa869811a415f202ae1c3f7557b2070545bae3eca29036fb9",
+    "semantic-url.mjs": "48e1d9af6c99271e73b7b73ab375770b95404881f2da183a34229ab8cf277621",
+    "entry.ts": "97bfaafe3d7ce21ae2c3995d535937a4378899477fca1e979548e6ddc69492d7"
+  },
+  "limits": [
+    "typed selected profiles unsupported",
+    "actual native compatible-child/rejection/UndoRedo/SaveOpen pending root integration",
+    "combined rejected source-edit plus reselection repair unfinished",
+    "V2 readonly discovery qualified after root fix; no legacy native V2 execution claim"
+  ]
+}

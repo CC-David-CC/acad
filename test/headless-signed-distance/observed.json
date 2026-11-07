@@ -1,0 +1,2767 @@
+{
+  "source": "e1e7839e7",
+  "appSha256": "d79b4af5ab22f5f201c5dcb0587af318c34e43d85570d271bac7d5d0e3e18f48",
+  "rows": [
+    {
+      "id": "x",
+      "receipt": {
+        "changed": true,
+        "faceId": "S:0/SURFACE",
+        "dimension": {
+          "axis": "x",
+          "typeId": "SignedDistanceX",
+          "objects": [
+            "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+            "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+          ],
+          "distance": -7,
+          "status": "accepted"
+        },
+        "revision": "5ff0df78-5e4e-46d5-bd68-73ed565b1fa2",
+        "persistence": "volatile-workspace",
+        "authoredUndo": true,
+        "manufacturingAssignments": "review-if-present"
+      },
+      "measurement": {
+        "value": -7,
+        "data": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": -7,
+                "y": 4
+              }
+            },
+            {
+              "id": "agent-primitive-42c514bc-5507-4d72-8099-2b9ebe157830",
+              "type": "Segment",
+              "role": "construction",
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 20,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "SignedDistanceX",
+                  "objects": [
+                    "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+                    "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+                  ],
+                  "constants": {
+                    "distance": -7
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        }
+      }
+    },
+    {
+      "id": "y",
+      "receipt": {
+        "changed": true,
+        "faceId": "S:0/SURFACE",
+        "dimension": {
+          "axis": "y",
+          "typeId": "SignedDistanceY",
+          "objects": [
+            "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+            "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+          ],
+          "distance": 0,
+          "status": "accepted"
+        },
+        "revision": "39d2ee1e-27d5-433b-bb0f-ed5847d4d261",
+        "persistence": "volatile-workspace",
+        "authoredUndo": true,
+        "manufacturingAssignments": "review-if-present"
+      },
+      "measurement": {
+        "value": 0,
+        "data": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": -7,
+                "y": 0
+              }
+            },
+            {
+              "id": "agent-primitive-42c514bc-5507-4d72-8099-2b9ebe157830",
+              "type": "Segment",
+              "role": "construction",
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 20,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "SignedDistanceX",
+                  "objects": [
+                    "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+                    "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+                  ],
+                  "constants": {
+                    "distance": -7
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceY",
+                  "objects": [
+                    "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+                    "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+                  ],
+                  "constants": {
+                    "distance": 0
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        }
+      }
+    },
+    {
+      "id": "duplicate",
+      "receipt": {
+        "changed": true,
+        "faceId": "S:0/SURFACE",
+        "dimension": {
+          "axis": "x",
+          "typeId": "SignedDistanceX",
+          "objects": [
+            "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+            "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+          ],
+          "distance": -7,
+          "status": "redundant"
+        },
+        "revision": "aa638e9b-d05d-48a6-b4b4-ee2b6e9c54de",
+        "persistence": "volatile-workspace",
+        "authoredUndo": true,
+        "manufacturingAssignments": "review-if-present"
+      },
+      "measurement": {
+        "value": -7,
+        "data": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": -7,
+                "y": 0
+              }
+            },
+            {
+              "id": "agent-primitive-42c514bc-5507-4d72-8099-2b9ebe157830",
+              "type": "Segment",
+              "role": "construction",
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 20,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "SignedDistanceX",
+                  "objects": [
+                    "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+                    "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+                  ],
+                  "constants": {
+                    "distance": -7
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceY",
+                  "objects": [
+                    "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+                    "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+                  ],
+                  "constants": {
+                    "distance": 0
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceX",
+                  "objects": [
+                    "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+                    "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+                  ],
+                  "constants": {
+                    "distance": -7
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "redundant"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        }
+      }
+    },
+    {
+      "id": "conflict",
+      "error": {
+        "name": "Error",
+        "code": "DISTANCE_CONFLICT",
+        "message": "The signed distance conflicts with existing constraints.",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "id": "missing",
+      "error": {
+        "name": "Error",
+        "code": "INVALID_TARGET",
+        "message": "A selected sketch target is missing.",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "id": "wrong-type",
+      "error": {
+        "name": "Error",
+        "code": "INVALID",
+        "message": "Choose two distinct current points and, for projection, one direction segment.",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "id": "string",
+      "error": {
+        "name": "Error",
+        "code": null,
+        "message": "Provide distinct point IDs and finite signed millimeters within ±1,000,000.",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "id": "nonfinite",
+      "error": {
+        "name": "Error",
+        "code": null,
+        "message": "Provide distinct point IDs and finite signed millimeters within ±1,000,000.",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "id": "oversize",
+      "error": {
+        "name": "Error",
+        "code": null,
+        "message": "Provide distinct point IDs and finite signed millimeters within ±1,000,000.",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "id": "same-point",
+      "error": {
+        "name": "Error",
+        "code": null,
+        "message": "Provide distinct point IDs and finite signed millimeters within ±1,000,000.",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "id": "accessor",
+      "error": {
+        "name": "Error",
+        "code": null,
+        "message": "Sketch request fields must be data.",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "id": "stale",
+      "error": {
+        "name": "AbortError",
+        "code": 20,
+        "message": "Sketch edit was cancelled or superseded.",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "id": "projected-reversed",
+      "receipt": {
+        "changed": true,
+        "faceId": "S:1/SURFACE",
+        "dimension": {
+          "axis": "projected",
+          "typeId": "ProjectedDistance",
+          "objects": [
+            "agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8",
+            "agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112",
+            "agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07"
+          ],
+          "distance": -5,
+          "status": "accepted"
+        },
+        "revision": "7e8b6ed7-417d-4678-86fe-e2ba7785ad87",
+        "persistence": "volatile-workspace",
+        "authoredUndo": true,
+        "manufacturingAssignments": "review-if-present"
+      },
+      "measurement": {
+        "value": -4.999999999999938,
+        "data": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": -0.8694503501420013,
+                "y": -0.0003424619410787188
+              }
+            },
+            {
+              "id": "agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 3.8694503501420017,
+                "y": 4.000342461941079
+              }
+            },
+            {
+              "id": "agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07",
+              "type": "Segment",
+              "role": "construction",
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 19.99224170576228,
+                  "y": 0.34028977030243107
+                },
+                "b": {
+                  "x": 10.00775829423772,
+                  "y": -0.34028977030243107
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "ProjectedDistance",
+                  "objects": [
+                    "agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8",
+                    "agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112",
+                    "agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07"
+                  ],
+                  "constants": {
+                    "distance": -5
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        }
+      }
+    },
+    {
+      "id": "live-datum-edit",
+      "measurement": {
+        "value": -4.99999999984338,
+        "data": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": -0.8754082511263055,
+                "y": 4.068518728580622
+              }
+            },
+            {
+              "id": "agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 3.8754082511263057,
+                "y": -0.06851872858062226
+              }
+            },
+            {
+              "id": "agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07",
+              "type": "Segment",
+              "role": "construction",
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 21.942433674248424,
+                  "y": 0.4379988655580527
+                },
+                "b": {
+                  "x": 20,
+                  "y": 10
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "ProjectedDistance",
+                  "objects": [
+                    "agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8",
+                    "agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112",
+                    "agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07"
+                  ],
+                  "constants": {
+                    "distance": -5
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        }
+      },
+      "before": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":-0.8694503501420013,\"y\":-0.0003424619410787188}},{\"id\":\"agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":3.8694503501420017,\"y\":4.000342461941079}},{\"id\":\"agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":19.99224170576228,\"y\":0.34028977030243107},\"b\":{\"x\":10.00775829423772,\"y\":-0.34028977030243107}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"ProjectedDistance\",\"objects\":[\"agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8\",\"agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112\",\"agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07\"],\"constants\":{\"distance\":-5},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "after": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":-0.8754082511263055,\"y\":4.068518728580622}},{\"id\":\"agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":3.8754082511263057,\"y\":-0.06851872858062226}},{\"id\":\"agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":21.942433674248424,\"y\":0.4379988655580527},\"b\":{\"x\":20,\"y\":10}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"ProjectedDistance\",\"objects\":[\"agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8\",\"agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112\",\"agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07\"],\"constants\":{\"distance\":-5},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "additional-x-4",
+      "receipt": {
+        "changed": true,
+        "faceId": "S:2/SURFACE",
+        "dimension": {
+          "axis": "x",
+          "typeId": "SignedDistanceX",
+          "objects": [
+            "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+            "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d"
+          ],
+          "distance": 4,
+          "status": "accepted"
+        },
+        "revision": "d6933d7e-79d8-4c6e-8f42-7c7d7eb1dac6",
+        "persistence": "volatile-workspace",
+        "authoredUndo": true,
+        "manufacturingAssignments": "review-if-present"
+      },
+      "measurement": {
+        "value": 4,
+        "data": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 4,
+                "y": -2
+              }
+            },
+            {
+              "id": "agent-primitive-0bc01290-ced8-4bf2-b31a-8992459775b5",
+              "type": "Segment",
+              "role": "construction",
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 30,
+                  "y": 30
+                },
+                "b": {
+                  "x": 33,
+                  "y": 34
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "SignedDistanceX",
+                  "objects": [
+                    "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                    "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d"
+                  ],
+                  "constants": {
+                    "distance": 4
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        }
+      }
+    },
+    {
+      "id": "additional-y--2",
+      "receipt": {
+        "changed": true,
+        "faceId": "S:2/SURFACE",
+        "dimension": {
+          "axis": "y",
+          "typeId": "SignedDistanceY",
+          "objects": [
+            "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+            "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d"
+          ],
+          "distance": -2,
+          "status": "accepted"
+        },
+        "revision": "726d8da6-de45-442a-8dc0-9b64e9dc2818",
+        "persistence": "volatile-workspace",
+        "authoredUndo": true,
+        "manufacturingAssignments": "review-if-present"
+      },
+      "measurement": {
+        "value": -2,
+        "data": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 4,
+                "y": -2
+              }
+            },
+            {
+              "id": "agent-primitive-0bc01290-ced8-4bf2-b31a-8992459775b5",
+              "type": "Segment",
+              "role": "construction",
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 30,
+                  "y": 30
+                },
+                "b": {
+                  "x": 33,
+                  "y": 34
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "SignedDistanceX",
+                  "objects": [
+                    "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                    "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d"
+                  ],
+                  "constants": {
+                    "distance": 4
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceY",
+                  "objects": [
+                    "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                    "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d"
+                  ],
+                  "constants": {
+                    "distance": -2
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        }
+      }
+    },
+    {
+      "id": "additional-projected-0.8",
+      "receipt": {
+        "changed": true,
+        "faceId": "S:2/SURFACE",
+        "dimension": {
+          "axis": "projected",
+          "typeId": "ProjectedDistance",
+          "objects": [
+            "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+            "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d",
+            "agent-primitive-0bc01290-ced8-4bf2-b31a-8992459775b5"
+          ],
+          "distance": 0.8,
+          "status": "accepted"
+        },
+        "revision": "43cf36a9-b24e-4dfc-a7ab-b1e306492ca6",
+        "persistence": "volatile-workspace",
+        "authoredUndo": true,
+        "manufacturingAssignments": "review-if-present"
+      },
+      "measurement": {
+        "value": 0.8,
+        "data": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 4,
+                "y": -2
+              }
+            },
+            {
+              "id": "agent-primitive-0bc01290-ced8-4bf2-b31a-8992459775b5",
+              "type": "Segment",
+              "role": "construction",
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 30,
+                  "y": 30
+                },
+                "b": {
+                  "x": 33,
+                  "y": 34
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "SignedDistanceX",
+                  "objects": [
+                    "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                    "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d"
+                  ],
+                  "constants": {
+                    "distance": 4
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceY",
+                  "objects": [
+                    "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                    "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d"
+                  ],
+                  "constants": {
+                    "distance": -2
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "ProjectedDistance",
+                  "objects": [
+                    "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                    "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d",
+                    "agent-primitive-0bc01290-ced8-4bf2-b31a-8992459775b5"
+                  ],
+                  "constants": {
+                    "distance": 0.8
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        }
+      }
+    },
+    {
+      "id": "projected-zero",
+      "receipt": {
+        "changed": true,
+        "faceId": "S:2/SURFACE",
+        "dimension": {
+          "axis": "projected",
+          "typeId": "ProjectedDistance",
+          "objects": [
+            "agent-primitive-64e5dbc3-ca81-4d29-b60a-b49a471ff09a",
+            "agent-primitive-4f4743fb-c943-4b48-a03c-3c1cae7254ed",
+            "agent-primitive-d0057973-ba05-4340-a976-193f17034e6e"
+          ],
+          "distance": 0,
+          "status": "accepted"
+        },
+        "revision": "d7f05769-d24b-4dde-a649-5395ce46090b",
+        "persistence": "volatile-workspace",
+        "authoredUndo": true,
+        "manufacturingAssignments": "review-if-present"
+      },
+      "measurement": {
+        "value": 0,
+        "data": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 4,
+                "y": -2
+              }
+            },
+            {
+              "id": "agent-primitive-0bc01290-ced8-4bf2-b31a-8992459775b5",
+              "type": "Segment",
+              "role": "construction",
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 30,
+                  "y": 30
+                },
+                "b": {
+                  "x": 33,
+                  "y": 34
+                }
+              }
+            },
+            {
+              "id": "agent-primitive-64e5dbc3-ca81-4d29-b60a-b49a471ff09a",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "agent-primitive-4f4743fb-c943-4b48-a03c-3c1cae7254ed",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 3
+              }
+            },
+            {
+              "id": "agent-primitive-d0057973-ba05-4340-a976-193f17034e6e",
+              "type": "Segment",
+              "role": "construction",
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 60,
+                  "y": 0
+                },
+                "b": {
+                  "x": 70,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "SignedDistanceX",
+                  "objects": [
+                    "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                    "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d"
+                  ],
+                  "constants": {
+                    "distance": 4
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceY",
+                  "objects": [
+                    "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                    "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d"
+                  ],
+                  "constants": {
+                    "distance": -2
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "ProjectedDistance",
+                  "objects": [
+                    "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                    "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d",
+                    "agent-primitive-0bc01290-ced8-4bf2-b31a-8992459775b5"
+                  ],
+                  "constants": {
+                    "distance": 0.8
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "ProjectedDistance",
+                  "objects": [
+                    "agent-primitive-64e5dbc3-ca81-4d29-b60a-b49a471ff09a",
+                    "agent-primitive-4f4743fb-c943-4b48-a03c-3c1cae7254ed",
+                    "agent-primitive-d0057973-ba05-4340-a976-193f17034e6e"
+                  ],
+                  "constants": {
+                    "distance": 0
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        }
+      }
+    },
+    {
+      "id": "collapsed-segment",
+      "error": {
+        "name": "Error",
+        "code": "INVALID",
+        "message": "Degenerate sketch segment.",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "id": "cancel",
+      "error": {
+        "name": "AbortError",
+        "code": 20,
+        "message": "Sketch edit was cancelled or superseded.",
+        "committed": false
+      },
+      "preserved": true
+    }
+  ],
+  "saved": {
+    "format": "codi-jsketcher-project",
+    "version": 2,
+    "unit": "millimeter",
+    "project": {
+      "model": {
+        "history": [
+          {
+            "params": {
+              "datum": null,
+              "depth": 0,
+              "featureId": "1",
+              "orientation": "XY"
+            },
+            "type": "PLANE"
+          },
+          {
+            "params": {
+              "datum": null,
+              "depth": 0,
+              "featureId": "2",
+              "orientation": "XY"
+            },
+            "type": "PLANE"
+          },
+          {
+            "params": {
+              "datum": null,
+              "depth": 0,
+              "featureId": "3",
+              "orientation": "XY"
+            },
+            "type": "PLANE"
+          }
+        ],
+        "expressions": "",
+        "assembly": [],
+        "counters": {
+          "featureId": 3
+        }
+      },
+      "sketches": [
+        {
+          "id": "S:0/SURFACE",
+          "data": {
+            "version": 3,
+            "objects": [
+              {
+                "id": "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+                "type": "Point",
+                "role": null,
+                "stage": 0,
+                "data": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              {
+                "id": "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9",
+                "type": "Point",
+                "role": null,
+                "stage": 0,
+                "data": {
+                  "x": -7,
+                  "y": 0
+                }
+              },
+              {
+                "id": "agent-primitive-42c514bc-5507-4d72-8099-2b9ebe157830",
+                "type": "Segment",
+                "role": "construction",
+                "stage": 0,
+                "data": {
+                  "a": {
+                    "x": 20,
+                    "y": 0
+                  },
+                  "b": {
+                    "x": 10,
+                    "y": 0
+                  }
+                }
+              },
+              {
+                "id": "agent-primitive-eeb5b3e8-e5a7-449b-b680-c02689f7876a",
+                "type": "Point",
+                "role": null,
+                "stage": 0,
+                "data": {
+                  "x": 90,
+                  "y": 90
+                }
+              }
+            ],
+            "dimensions": [],
+            "labels": [],
+            "stages": [
+              {
+                "constraints": [
+                  {
+                    "typeId": "SignedDistanceX",
+                    "objects": [
+                      "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+                      "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+                    ],
+                    "constants": {
+                      "distance": -7
+                    },
+                    "stage": 0,
+                    "annotations": [
+                      {
+                        "offset": 20
+                      }
+                    ],
+                    "admission": {
+                      "version": 1,
+                      "state": "accepted"
+                    }
+                  },
+                  {
+                    "typeId": "SignedDistanceY",
+                    "objects": [
+                      "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+                      "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+                    ],
+                    "constants": {
+                      "distance": 0
+                    },
+                    "stage": 0,
+                    "annotations": [
+                      {
+                        "offset": 20
+                      }
+                    ],
+                    "admission": {
+                      "version": 1,
+                      "state": "accepted"
+                    }
+                  },
+                  {
+                    "typeId": "SignedDistanceX",
+                    "objects": [
+                      "agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6",
+                      "agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9"
+                    ],
+                    "constants": {
+                      "distance": -7
+                    },
+                    "stage": 0,
+                    "annotations": [
+                      {
+                        "offset": 20
+                      }
+                    ],
+                    "admission": {
+                      "version": 1,
+                      "state": "redundant"
+                    }
+                  }
+                ],
+                "generators": []
+              }
+            ],
+            "constants": "",
+            "metadata": {
+              "boundaryFrame": {
+                "origin": [
+                  0,
+                  0,
+                  0
+                ],
+                "x": [
+                  1,
+                  0,
+                  0
+                ],
+                "y": [
+                  0,
+                  1,
+                  0
+                ],
+                "z": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            "boundary": {
+              "lines": [],
+              "arcs": [],
+              "circles": [],
+              "nurbses": []
+            }
+          }
+        },
+        {
+          "id": "S:1/SURFACE",
+          "data": {
+            "version": 3,
+            "objects": [
+              {
+                "id": "agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8",
+                "type": "Point",
+                "role": null,
+                "stage": 0,
+                "data": {
+                  "x": -0.8754082511263055,
+                  "y": 4.068518728580622
+                }
+              },
+              {
+                "id": "agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112",
+                "type": "Point",
+                "role": null,
+                "stage": 0,
+                "data": {
+                  "x": 3.8754082511263057,
+                  "y": -0.06851872858062226
+                }
+              },
+              {
+                "id": "agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07",
+                "type": "Segment",
+                "role": "construction",
+                "stage": 0,
+                "data": {
+                  "a": {
+                    "x": 21.942433674248424,
+                    "y": 0.4379988655580527
+                  },
+                  "b": {
+                    "x": 20,
+                    "y": 10
+                  }
+                }
+              }
+            ],
+            "dimensions": [],
+            "labels": [],
+            "stages": [
+              {
+                "constraints": [
+                  {
+                    "typeId": "ProjectedDistance",
+                    "objects": [
+                      "agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8",
+                      "agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112",
+                      "agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07"
+                    ],
+                    "constants": {
+                      "distance": -5
+                    },
+                    "stage": 0,
+                    "annotations": [
+                      {
+                        "offset": 20
+                      }
+                    ],
+                    "admission": {
+                      "version": 1,
+                      "state": "accepted"
+                    }
+                  }
+                ],
+                "generators": []
+              }
+            ],
+            "constants": "",
+            "metadata": {
+              "boundaryFrame": {
+                "origin": [
+                  0,
+                  0,
+                  0
+                ],
+                "x": [
+                  1,
+                  0,
+                  0
+                ],
+                "y": [
+                  0,
+                  1,
+                  0
+                ],
+                "z": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            "boundary": {
+              "lines": [],
+              "arcs": [],
+              "circles": [],
+              "nurbses": []
+            }
+          }
+        },
+        {
+          "id": "S:2/SURFACE",
+          "data": {
+            "version": 3,
+            "objects": [
+              {
+                "id": "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                "type": "Point",
+                "role": null,
+                "stage": 0,
+                "data": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              {
+                "id": "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d",
+                "type": "Point",
+                "role": null,
+                "stage": 0,
+                "data": {
+                  "x": 4,
+                  "y": -2
+                }
+              },
+              {
+                "id": "agent-primitive-0bc01290-ced8-4bf2-b31a-8992459775b5",
+                "type": "Segment",
+                "role": "construction",
+                "stage": 0,
+                "data": {
+                  "a": {
+                    "x": 30,
+                    "y": 30
+                  },
+                  "b": {
+                    "x": 33,
+                    "y": 34
+                  }
+                }
+              },
+              {
+                "id": "agent-primitive-64e5dbc3-ca81-4d29-b60a-b49a471ff09a",
+                "type": "Point",
+                "role": null,
+                "stage": 0,
+                "data": {
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              {
+                "id": "agent-primitive-4f4743fb-c943-4b48-a03c-3c1cae7254ed",
+                "type": "Point",
+                "role": null,
+                "stage": 0,
+                "data": {
+                  "x": 0,
+                  "y": 3
+                }
+              },
+              {
+                "id": "agent-primitive-d0057973-ba05-4340-a976-193f17034e6e",
+                "type": "Segment",
+                "role": "construction",
+                "stage": 0,
+                "data": {
+                  "a": {
+                    "x": 60,
+                    "y": 0
+                  },
+                  "b": {
+                    "x": 70,
+                    "y": 0
+                  }
+                }
+              },
+              {
+                "id": "agent-primitive-3a104945-2eaf-4c43-8b66-b3854b4b2ebc",
+                "type": "Segment",
+                "role": null,
+                "stage": 0,
+                "data": {
+                  "a": {
+                    "x": 50,
+                    "y": -0.13516822306461404
+                  },
+                  "b": {
+                    "x": 50,
+                    "y": 2.135168223064614
+                  }
+                }
+              }
+            ],
+            "dimensions": [],
+            "labels": [],
+            "stages": [
+              {
+                "constraints": [
+                  {
+                    "typeId": "SignedDistanceX",
+                    "objects": [
+                      "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                      "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d"
+                    ],
+                    "constants": {
+                      "distance": 4
+                    },
+                    "stage": 0,
+                    "annotations": [
+                      {
+                        "offset": 20
+                      }
+                    ],
+                    "admission": {
+                      "version": 1,
+                      "state": "accepted"
+                    }
+                  },
+                  {
+                    "typeId": "SignedDistanceY",
+                    "objects": [
+                      "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                      "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d"
+                    ],
+                    "constants": {
+                      "distance": -2
+                    },
+                    "stage": 0,
+                    "annotations": [
+                      {
+                        "offset": 20
+                      }
+                    ],
+                    "admission": {
+                      "version": 1,
+                      "state": "accepted"
+                    }
+                  },
+                  {
+                    "typeId": "ProjectedDistance",
+                    "objects": [
+                      "agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d",
+                      "agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d",
+                      "agent-primitive-0bc01290-ced8-4bf2-b31a-8992459775b5"
+                    ],
+                    "constants": {
+                      "distance": 0.8
+                    },
+                    "stage": 0,
+                    "annotations": [
+                      {
+                        "offset": 20
+                      }
+                    ],
+                    "admission": {
+                      "version": 1,
+                      "state": "accepted"
+                    }
+                  },
+                  {
+                    "typeId": "ProjectedDistance",
+                    "objects": [
+                      "agent-primitive-64e5dbc3-ca81-4d29-b60a-b49a471ff09a",
+                      "agent-primitive-4f4743fb-c943-4b48-a03c-3c1cae7254ed",
+                      "agent-primitive-d0057973-ba05-4340-a976-193f17034e6e"
+                    ],
+                    "constants": {
+                      "distance": 0
+                    },
+                    "stage": 0,
+                    "annotations": [
+                      {
+                        "offset": 20
+                      }
+                    ],
+                    "admission": {
+                      "version": 1,
+                      "state": "accepted"
+                    }
+                  },
+                  {
+                    "typeId": "SignedDistanceX",
+                    "objects": [
+                      "agent-primitive-3a104945-2eaf-4c43-8b66-b3854b4b2ebc:A",
+                      "agent-primitive-3a104945-2eaf-4c43-8b66-b3854b4b2ebc:B"
+                    ],
+                    "constants": {
+                      "distance": 0
+                    },
+                    "stage": 0,
+                    "annotations": [
+                      {
+                        "offset": 20
+                      }
+                    ],
+                    "admission": {
+                      "version": 1,
+                      "state": "accepted"
+                    }
+                  }
+                ],
+                "generators": []
+              }
+            ],
+            "constants": "",
+            "metadata": {
+              "boundaryFrame": {
+                "origin": [
+                  0,
+                  0,
+                  0
+                ],
+                "x": [
+                  1,
+                  0,
+                  0
+                ],
+                "y": [
+                  0,
+                  1,
+                  0
+                ],
+                "z": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            "boundary": {
+              "lines": [],
+              "arcs": [],
+              "circles": [],
+              "nurbses": []
+            }
+          }
+        }
+      ]
+    }
+  },
+  "sketches": [
+    {
+      "id": "S:0/SURFACE",
+      "bytes": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":-7,\"y\":0}},{\"id\":\"agent-primitive-42c514bc-5507-4d72-8099-2b9ebe157830\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-eeb5b3e8-e5a7-449b-b680-c02689f7876a\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":90,\"y\":90}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"SignedDistanceX\",\"objects\":[\"agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6\",\"agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9\"],\"constants\":{\"distance\":-7},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SignedDistanceY\",\"objects\":[\"agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6\",\"agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9\"],\"constants\":{\"distance\":0},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SignedDistanceX\",\"objects\":[\"agent-primitive-63320c27-c1b3-433a-8cd3-f81c421a6cf6\",\"agent-primitive-eca5274e-56f8-4c5d-917e-a8a95d21a9d9\"],\"constants\":{\"distance\":-7},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"redundant\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "S:1/SURFACE",
+      "bytes": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":-0.8754082511263055,\"y\":4.068518728580622}},{\"id\":\"agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":3.8754082511263057,\"y\":-0.06851872858062226}},{\"id\":\"agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":21.942433674248424,\"y\":0.4379988655580527},\"b\":{\"x\":20,\"y\":10}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"ProjectedDistance\",\"objects\":[\"agent-primitive-398f80c2-4a77-44b1-b085-c29acb7284d8\",\"agent-primitive-b1a9f0b3-1bc7-467a-b7ff-0abcde55f112\",\"agent-primitive-4ff205da-6cb3-403b-a273-dd5836ccfb07\"],\"constants\":{\"distance\":-5},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "S:2/SURFACE",
+      "bytes": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":4,\"y\":-2}},{\"id\":\"agent-primitive-0bc01290-ced8-4bf2-b31a-8992459775b5\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":30,\"y\":30},\"b\":{\"x\":33,\"y\":34}}},{\"id\":\"agent-primitive-64e5dbc3-ca81-4d29-b60a-b49a471ff09a\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"agent-primitive-4f4743fb-c943-4b48-a03c-3c1cae7254ed\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":3}},{\"id\":\"agent-primitive-d0057973-ba05-4340-a976-193f17034e6e\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":60,\"y\":0},\"b\":{\"x\":70,\"y\":0}}},{\"id\":\"agent-primitive-3a104945-2eaf-4c43-8b66-b3854b4b2ebc\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":50,\"y\":-0.13516822306461404},\"b\":{\"x\":50,\"y\":2.135168223064614}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"SignedDistanceX\",\"objects\":[\"agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d\",\"agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d\"],\"constants\":{\"distance\":4},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SignedDistanceY\",\"objects\":[\"agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d\",\"agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d\"],\"constants\":{\"distance\":-2},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"ProjectedDistance\",\"objects\":[\"agent-primitive-44dfa654-d410-446a-be49-d5022d093a9d\",\"agent-primitive-36024f5d-6f49-49d4-8d53-12aacadd537d\",\"agent-primitive-0bc01290-ced8-4bf2-b31a-8992459775b5\"],\"constants\":{\"distance\":0.8},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"ProjectedDistance\",\"objects\":[\"agent-primitive-64e5dbc3-ca81-4d29-b60a-b49a471ff09a\",\"agent-primitive-4f4743fb-c943-4b48-a03c-3c1cae7254ed\",\"agent-primitive-d0057973-ba05-4340-a976-193f17034e6e\"],\"constants\":{\"distance\":0},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SignedDistanceX\",\"objects\":[\"agent-primitive-3a104945-2eaf-4c43-8b66-b3854b4b2ebc:A\",\"agent-primitive-3a104945-2eaf-4c43-8b66-b3854b4b2ebc:B\"],\"constants\":{\"distance\":0},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    }
+  ],
+  "workers": [
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-empty",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 248.29999995231628
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 236.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 240.39999985694885
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 244.20000004768372
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0,
+      "wallMs": 242.29999995231628
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 256
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.39999985694885254,
+      "wallMs": 256.7999999523163
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 428.09999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 240.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-verify-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 241.79999995231628
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 247.79999995231628
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 250.20000004768372
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-verify-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.39999985694885254,
+      "wallMs": 250.09999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 241.70000004768372
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 239.29999995231628
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-verify-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 255.29999995231628
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 388.7999999523163
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 253.80000019073486
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 255.29999995231628
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 261.59999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 262.2999999523163
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 265.2000000476837
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 244.39999985694885
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 248.69999980926514
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-empty",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 235.20000004768372
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 280.09999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 245.70000004768372
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 239.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 236.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 239.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.19999980926513672,
+      "wallMs": 251.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 267.2000000476837
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0,
+      "wallMs": 272.7999999523163
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-verify-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 267
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 242.90000009536743
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-point-coordinate",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 248.59999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.19999980926513672,
+      "wallMs": 245.19999980926514
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 252.29999995231628
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-replay",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 244.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 246.10000014305115
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 242.59999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-replay",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 270.30000019073486
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-empty",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 245.79999995231628
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 249.80000019073486
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.19999980926513672,
+      "wallMs": 254.19999980926514
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 264.7000000476837
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 253.59999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.19999980926513672,
+      "wallMs": 277
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 244.09999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 253.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 242.09999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-verify-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0,
+      "wallMs": 261.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 250.29999995231628
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 266.2000000476837
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-verify-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0,
+      "wallMs": 272.7000000476837
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 243.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 263.40000009536743
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-verify-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 251.39999985694885
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 275.60000014305115
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 264.60000014305115
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 270.39999985694885
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 252.70000004768372
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 277.40000009536743
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.10000014305114746,
+      "wallMs": 243
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.2999999523162842,
+      "wallMs": 258.2000000476837
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 263.09999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-verify-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 258.59999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.19999980926513672,
+      "wallMs": 256.59999990463257
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-primitive",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.09999990463256836,
+      "wallMs": 251.20000004768372
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.19999980926513672,
+      "wallMs": 251.39999985694885
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.40000009536743164,
+      "wallMs": 252.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-verify-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.2999999523162842,
+      "wallMs": 276.5
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-inspection",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.2999999523162842,
+      "wallMs": 308.2000000476837
+    },
+    {
+      "url": "http://127.0.0.1:20613/static/sketch-solver.239f5a78332cf15e50b5.js",
+      "task": "sketch-transition-signed-distance",
+      "received": true,
+      "terminated": true,
+      "constructorMs": 0.20000004768371582,
+      "wallMs": 262
+    }
+  ],
+  "faults": [
+    {
+      "mode": "extra-envelope",
+      "injected": true,
+      "getters": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid signed distance worker response.",
+        "committed": false
+      },
+      "preserved": true,
+      "differences": []
+    },
+    {
+      "mode": "extra-dimension",
+      "injected": true,
+      "getters": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid signed distance worker response.",
+        "committed": false
+      },
+      "preserved": true,
+      "differences": []
+    },
+    {
+      "mode": "changed-distance",
+      "injected": true,
+      "getters": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid signed distance identity or evidence.",
+        "committed": false
+      },
+      "preserved": true,
+      "differences": []
+    },
+    {
+      "mode": "accessor-dimension",
+      "injected": true,
+      "getters": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid signed distance worker response.",
+        "committed": false
+      },
+      "preserved": true,
+      "differences": []
+    },
+    {
+      "mode": "bad-native",
+      "injected": true,
+      "getters": 0,
+      "error": {
+        "name": "Error",
+        "message": "The returned signed candidate differs from its captured authored operation.",
+        "committed": false
+      },
+      "preserved": true,
+      "differences": []
+    },
+    {
+      "mode": "changed-native-metadata",
+      "injected": true,
+      "getters": 0,
+      "error": {
+        "name": "Error",
+        "message": "The returned signed candidate differs from its captured authored operation.",
+        "committed": false
+      },
+      "preserved": true,
+      "differences": []
+    },
+    {
+      "mode": "changed-native-role",
+      "injected": true,
+      "getters": 0,
+      "error": {
+        "name": "Error",
+        "message": "The returned signed candidate differs from its captured authored operation.",
+        "committed": false
+      },
+      "preserved": true,
+      "differences": []
+    },
+    {
+      "mode": "verify-extra",
+      "injected": true,
+      "getters": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid signed distance verification response.",
+        "committed": false
+      },
+      "preserved": true,
+      "differences": []
+    },
+    {
+      "mode": "verify-false",
+      "injected": true,
+      "getters": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid signed distance verification response.",
+        "committed": false
+      },
+      "preserved": true,
+      "differences": []
+    },
+    {
+      "mode": "verify-nonce",
+      "injected": true,
+      "getters": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid signed distance verification response.",
+        "committed": false
+      },
+      "preserved": true,
+      "differences": []
+    },
+    {
+      "mode": "verify-accessor",
+      "injected": true,
+      "getters": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid signed distance verification response.",
+        "committed": false
+      },
+      "preserved": true,
+      "differences": []
+    },
+    {
+      "mode": "currentness-ABA",
+      "genuineSuccessHeld": true,
+      "result": {
+        "ok": false,
+        "name": "AbortError",
+        "message": "Sketch solve cancelled",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "mode": "lifetime",
+      "genuineSuccessHeld": true,
+      "result": {
+        "ok": false,
+        "name": "AbortError",
+        "message": "Sketch edit was cancelled or superseded.",
+        "committed": false
+      },
+      "preserved": true
+    },
+    {
+      "mode": "verify-lifetime",
+      "genuineSuccessHeld": true,
+      "result": {
+        "ok": false,
+        "name": "AbortError",
+        "message": "Sketch edit was cancelled or superseded.",
+        "committed": false
+      },
+      "preserved": true
+    }
+  ],
+  "scope": "Actual public craft command + real production Worker, ordinary authored journal travel and native host save/reopen; no signed My files claim."
+}

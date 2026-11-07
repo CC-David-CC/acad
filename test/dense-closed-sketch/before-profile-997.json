@@ -1,0 +1,49 @@
+{
+  "appSha": "9993b01af9f49ca29aa2eceaa1701489aef01c992ee3a3b38a1a0799f87a9c28",
+  "objects": 514,
+  "constraints": 513,
+  "bytes": 139517,
+  "restoreMs": 328.19999980926514,
+  "steps": [
+    {
+      "name": "inspect",
+      "wallMs": 1051.7000000476837,
+      "maxSiblingGapMs": 12.099999904632568,
+      "longTasks": []
+    },
+    {
+      "name": "relation",
+      "wallMs": 3647.899999856949,
+      "maxSiblingGapMs": 236.90000009536743,
+      "longTasks": [
+        124
+      ]
+    },
+    {
+      "name": "capture",
+      "wallMs": 20,
+      "maxSiblingGapMs": 13.399999856948853,
+      "longTasks": []
+    },
+    {
+      "name": "undo",
+      "wallMs": 3402.2000000476837,
+      "maxSiblingGapMs": 221.70000004768372,
+      "longTasks": [
+        105
+      ]
+    },
+    {
+      "name": "redo",
+      "wallMs": 3450.100000143051,
+      "maxSiblingGapMs": 216.5,
+      "longTasks": [
+        99
+      ]
+    }
+  ],
+  "made": 9,
+  "ended": 9,
+  "status": "accepted",
+  "otherReady": true
+}

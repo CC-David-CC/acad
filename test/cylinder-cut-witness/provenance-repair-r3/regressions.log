@@ -1,0 +1,25 @@
+✔ strict provenance capture refuses construction-status-getter without executing or mutating input (47.952222ms)
+✔ strict provenance capture refuses construction-edge-getter without executing or mutating input (41.443957ms)
+✔ actual-record retains actual diameter through selected native ancestry (87.318748ms)
+✔ shifted-origin-same-support retains actual diameter through selected native ancestry (70.436412ms)
+✔ reversed-axis-same-support retains actual diameter through selected native ancestry (72.133929ms)
+✔ no-history refuses without changing captured evidence (68.564414ms)
+✔ split-descendant refuses without changing captured evidence (74.863656ms)
+✔ missing-descendant refuses without changing captured evidence (73.179529ms)
+✔ wrong-result-radius refuses without changing captured evidence (73.609283ms)
+✔ wrong-result-axis refuses without changing captured evidence (71.263341ms)
+✔ wrong-result-position refuses without changing captured evidence (69.961577ms)
+✔ nominal-radius-mismatch refuses without changing captured evidence (71.626534ms)
+✔ nominal-center-mismatch refuses without changing captured evidence (74.674774ms)
+✔ copy-corrupt refuses without changing captured evidence (69.388052ms)
+✔ non-circle refuses without changing captured evidence (54.455815ms)
+✔ wrong-operation refuses without changing captured evidence (53.747718ms)
+✔ top-getter refuses without changing captured evidence (52.538626ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1122.17905

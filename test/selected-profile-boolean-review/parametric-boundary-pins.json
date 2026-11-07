@@ -1,0 +1,15 @@
+{
+  "status": "CONFIRMED known-history admission gap; both refusals preserve exact state before Worker dispatch",
+  "source": "32386643ab487de2ca40094549274b109822a6f4",
+  "appSHA256": "a0e2ef4030f29d17e83b5290277480e80414bcb5a0ce10d907f73ed00d65ccc2",
+  "previousReviewCheckpoint": "26d1745115787f637a4e3b02b04daf695dacb19b",
+  "receiptSHA256": "bb5a956d73d2ae67688a5e4b1daa7565aadce0642630d4080717991d5bb8ceb5",
+  "sharedHelperModified": false,
+  "files": {
+    "parametric-boundary.cjs": "44f0813b38208890a4e9f1d8def967e24b4b03792be0799584fb8aed1f0db56b",
+    "parametric-boundary.md": "133d5cf7de94fb334b0b70de67335bd7fdb12a03c8239e8ba7ffa60e6609cdd2",
+    "parametric-boundary-receipt.json": "bb5a956d73d2ae67688a5e4b1daa7565aadce0642630d4080717991d5bb8ceb5",
+    "dependency-proposal.md": "3119af41d6b31ffb503f4de22618b4e52d3295ea124b1350212fd0a2dda22985",
+    "evidence/parametric-boundary.log": "b7a7665db91a175bcc2f61c51fffab22810c463caf1c839739673c83a679024e"
+  }
+}

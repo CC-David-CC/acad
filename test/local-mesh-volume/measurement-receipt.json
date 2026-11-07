@@ -1,0 +1,163 @@
+{
+  "status": "PASS_SCOPED_WITH_UNRESOLVED_COUNTEREXAMPLE",
+  "base": "14537a7ed8dae74291863d703f0b73d57ff1660f",
+  "scope": "pure candidate + actual frozen native mesh observation; no app/native validity/dimensional-drift fix",
+  "rows": [
+    {
+      "id": "tiny-large-origin",
+      "request": {
+        "op": "solid.box.create",
+        "version": 1,
+        "unit": "millimeter",
+        "origin": [
+          1000000,
+          1000000,
+          1000000
+        ],
+        "dimensions": [
+          1e-06,
+          2e-06,
+          3e-06
+        ]
+      },
+      "nativeVolume": 6.000137061924313e-18,
+      "oldWorkerSignedIntegral": -2.6667257770895962e-06,
+      "localEstimate": {
+        "signedVolume": 6.000137061924313e-18,
+        "triangles": 12,
+        "anchor": [
+          1000000.0000005,
+          1000000.000001,
+          1000000.0000015
+        ],
+        "absoluteTetrahedronSum": 6.000137061924313e-18,
+        "cancellationSensitive": false
+      },
+      "exactFractionNearest": 6.000137061924313e-18,
+      "requestedProduct": 6e-18
+    },
+    {
+      "id": "tiny-origin",
+      "request": {
+        "op": "solid.box.create",
+        "version": 1,
+        "unit": "millimeter",
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "dimensions": [
+          1e-06,
+          2e-06,
+          3e-06
+        ]
+      },
+      "nativeVolume": 5.999999999999999e-18,
+      "oldWorkerSignedIntegral": 6e-18,
+      "localEstimate": {
+        "signedVolume": 5.999999999999999e-18,
+        "triangles": 12,
+        "anchor": [
+          5e-07,
+          1e-06,
+          1.5e-06
+        ],
+        "absoluteTetrahedronSum": 5.999999999999999e-18,
+        "cancellationSensitive": false
+      },
+      "exactFractionNearest": 6e-18,
+      "requestedProduct": 6e-18
+    },
+    {
+      "id": "ordinary-translated",
+      "request": {
+        "op": "solid.box.create",
+        "version": 1,
+        "unit": "millimeter",
+        "origin": [
+          -13,
+          7,
+          2
+        ],
+        "dimensions": [
+          11,
+          17,
+          23
+        ]
+      },
+      "nativeVolume": 4301,
+      "oldWorkerSignedIntegral": 4300.999999999999,
+      "localEstimate": {
+        "signedVolume": 4301,
+        "triangles": 12,
+        "anchor": [
+          -7.5,
+          15.5,
+          13.5
+        ],
+        "absoluteTetrahedronSum": 4301,
+        "cancellationSensitive": false
+      },
+      "exactFractionNearest": 4301,
+      "requestedProduct": 4301
+    }
+  ],
+  "remaining": {
+    "case": "two analytic tiny boxes separated across \u00b11e6",
+    "exactRepresentedVolume": 1.2000274123848626e-17,
+    "measured": 1.2000551038462114e-17,
+    "cancellationSensitive": true,
+    "fixed": false
+  },
+  "tests": {
+    "groups": 7,
+    "skipped": 0
+  },
+  "pins": {
+    "modules/engine/mount/localMeshVolume.mjs": {
+      "sha256": "18270f2b00a32c76dc6bca505202c660f9acd2eda5f298a79585f45ae14f96ba",
+      "bytes": 4789
+    },
+    "test/local-mesh-volume/capture-native.cjs": {
+      "sha256": "eec3ffde4892a5ee8efcba7d3676b7afe5541b3f1fae72494f3635856c7439f1",
+      "bytes": 4943
+    },
+    "test/local-mesh-volume/actual-native-mesh.json": {
+      "sha256": "d734dcedaf5da8aa5903ece9a3138b2f86d6b7b44f0210f2404d571820f3d957",
+      "bytes": 18626
+    },
+    "test/local-mesh-volume/capture-native.log": {
+      "sha256": "ab4cce17aa9d4d89ca9b1a9d0d5e906be64b9d1d05a8e97f7eae2a041d2d8e9a",
+      "bytes": 272
+    },
+    "test/local-mesh-volume/fraction-oracle.py": {
+      "sha256": "9625a8317ec3f7ec98bf36c69468408493c53fc07485a22fffe1ede68d1ce912",
+      "bytes": 1590
+    },
+    "test/local-mesh-volume/fraction-oracle.json": {
+      "sha256": "c3c079c215ded5c60f83af0dfd82e05c535c0ec13020537106d7c0e9f5c1e4d1",
+      "bytes": 1033
+    },
+    "test/local-mesh-volume/fixtures.mjs": {
+      "sha256": "0dd190b183121a5154bf0fa73cf9641135922ae10a782a6ec9f5930d85abf348",
+      "bytes": 774
+    },
+    "test/local-mesh-volume/worker.mjs": {
+      "sha256": "19a22ea74976a444011383d8d98873649168281037dfbc952d2eee767249d1fd",
+      "bytes": 389
+    },
+    "test/local-mesh-volume/tests.mjs": {
+      "sha256": "5171ba550cd4e64f309a41b3e5692b93a7a431c1ff9d0c729d3f37e649b197f7",
+      "bytes": 7000
+    },
+    "test/local-mesh-volume/tests.log": {
+      "sha256": "ca91d09538a76ddc5430dd65deae070d9eaaacc3966647d93ce57dffccbbe1bf",
+      "bytes": 1014
+    },
+    "test/local-mesh-volume/cleanup.json": {
+      "sha256": "4428bf2c61376cb9c5db35ad70164b76bb3431675fbbf62d6100d6de96143746",
+      "bytes": 323
+    }
+  }
+}

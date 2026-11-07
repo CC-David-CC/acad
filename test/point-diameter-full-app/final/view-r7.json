@@ -1,0 +1,182 @@
+{
+  "view": {
+    "open": true,
+    "faceId": "S:0/SURFACE",
+    "revision": "aca82cd0-04fc-4724-b378-359c2b72f690",
+    "selection": [],
+    "objects": [
+      {
+        "id": "agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3",
+        "type": "Circle",
+        "role": null,
+        "stage": 0,
+        "geometry": {
+          "kind": "circle",
+          "c": {
+            "x": 0,
+            "y": 0
+          },
+          "r": 10
+        },
+        "handles": [
+          {
+            "id": "agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3:C",
+            "x": 0,
+            "y": 0
+          }
+        ]
+      },
+      {
+        "id": "agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50",
+        "type": "Circle",
+        "role": null,
+        "stage": 0,
+        "geometry": {
+          "kind": "circle",
+          "c": {
+            "x": 30,
+            "y": 10
+          },
+          "r": 4
+        },
+        "handles": [
+          {
+            "id": "agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50:C",
+            "x": 30,
+            "y": 10
+          }
+        ]
+      }
+    ],
+    "unsupported": [],
+    "unrendered": [],
+    "capabilities": {
+      "geometry": "partial",
+      "selection": "geometry-only",
+      "constraints": "source-only",
+      "generators": "source-only",
+      "dimensions": "source-only",
+      "labels": "source-only",
+      "boundary": "source-only",
+      "solver": "unavailable"
+    },
+    "numericalCache": "absent",
+    "dof": null
+  },
+  "selected": {
+    "open": true,
+    "faceId": "S:0/SURFACE",
+    "revision": "aca82cd0-04fc-4724-b378-359c2b72f690",
+    "selection": [
+      "agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3",
+      "agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50"
+    ],
+    "objects": [
+      {
+        "id": "agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3",
+        "type": "Circle",
+        "role": null,
+        "stage": 0,
+        "geometry": {
+          "kind": "circle",
+          "c": {
+            "x": 0,
+            "y": 0
+          },
+          "r": 10
+        },
+        "handles": [
+          {
+            "id": "agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3:C",
+            "x": 0,
+            "y": 0
+          }
+        ]
+      },
+      {
+        "id": "agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50",
+        "type": "Circle",
+        "role": null,
+        "stage": 0,
+        "geometry": {
+          "kind": "circle",
+          "c": {
+            "x": 30,
+            "y": 10
+          },
+          "r": 4
+        },
+        "handles": [
+          {
+            "id": "agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50:C",
+            "x": 30,
+            "y": 10
+          }
+        ]
+      }
+    ],
+    "unsupported": [],
+    "unrendered": [],
+    "capabilities": {
+      "geometry": "partial",
+      "selection": "geometry-only",
+      "constraints": "source-only",
+      "generators": "source-only",
+      "dimensions": "source-only",
+      "labels": "source-only",
+      "boundary": "source-only",
+      "solver": "unavailable"
+    },
+    "numericalCache": "absent",
+    "dof": null
+  },
+  "colored": 2301,
+  "unchanged": true,
+  "noLegacyEditor": true,
+  "invalid": {
+    "ok": false,
+    "name": "Error",
+    "code": "INVALID_TARGET",
+    "committed": false
+  },
+  "rejectedIntact": true,
+  "relation": {
+    "changed": true,
+    "faceId": "S:0/SURFACE",
+    "relation": {
+      "typeId": "Concentric",
+      "objects": [
+        "agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3",
+        "agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50"
+      ],
+      "stage": 0,
+      "index": 0,
+      "status": "accepted"
+    },
+    "revision": "adaee8f6-ef58-4f33-9ded-14f16bc9c5ab",
+    "persistence": "volatile-workspace",
+    "authoredUndo": true,
+    "manufacturingAssignments": "review-if-present"
+  },
+  "centers": [
+    {
+      "x": 30,
+      "y": 10
+    },
+    {
+      "x": 30,
+      "y": 10
+    }
+  ],
+  "before": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":10},\"r\":4}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+  "after": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":10},\"r\":10}},{\"id\":\"agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":10},\"r\":4}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3\",\"agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+  "undo": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":10},\"r\":4}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+  "redo": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":10},\"r\":10}},{\"id\":\"agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":10},\"r\":4}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"agent-primitive-cd649567-e3b5-4cac-b77d-712e315e51b3\",\"agent-primitive-b227eebd-c00f-4490-8192-930b91a87e50\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+  "closed": {
+    "open": false
+  },
+  "views": 0,
+  "resizeBefore": 769,
+  "starts": 19,
+  "terminated": 19
+}

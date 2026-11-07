@@ -1,0 +1,26 @@
+✔ discovery exposes only immutable current mechanical targets, without allocation or transport (164.618749ms)
+✔ missing integration, hostless, wrong-unit and already-busy workspaces remain unavailable (228.101068ms)
+✔ fillet and equal chamfer route only captured data, infer producer, and allow own busy publication (86.182428ms)
+✔ older registered builds explicitly refuse before allocation or submission (157.249395ms)
+✔ stale revision, unknown body, wrong runtime and unknown advertised edges never allocate (162.039743ms)
+✔ new feature/producer/native fields, invalid literal sizes and duplicate/sparse IDs refuse as data (463.542861ms)
+✔ ineligible metadata and mixed whole-part runtime are explicit unsupported targets (185.990024ms)
+✔ quota32 and unsupported history refuse before feature-ID allocation (81.276099ms)
+✔ caller arrays are detached before async submission (30.008022ms)
+✔ pending document/service/source/stream/model/snapshot changes refuse before commit (388.96766ms)
+✔ caller and document cancellation cancel only the captured candidate epoch (63.576741ms)
+✔ initial abort and a reentrant lifetime guard refuse before allocation (96.094509ms)
+✔ invalid prepared results never publish; source must be consumed and native measurement admitted (296.870152ms)
+✔ submission failures release IDs and committed outcomes remain explicit (81.727213ms)
+✔ history captures exact numeric intent and edit delegates only size and identity (33.651339ms)
+✔ history edit stale identities, invalid size, unavailable hook and old backend refuse without delegation (274.203873ms)
+✔ malformed options and cancelled/reentrant history lifetime do not delegate (210.29227ms)
+✔ inspection-time unit changes and reentrant history edits abort without routing stale state (79.418221ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3393.943791

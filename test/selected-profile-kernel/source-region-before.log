@@ -1,0 +1,80 @@
+✔ disjoint exact source loops select independently without rewriting source (10.001683ms)
+✔ three nested circles keep distinct selectable annuli and disk (3.294871ms)
+✖ mixed holes, exact thin coordinates and XZ/oblique placement survive preparation (8.310247ms)
+✖ gaps, duplicate/touching boundaries and unsupported ordinary curves refuse explicitly (1.638816ms)
+✔ digest/frame/region/domain failures remain separate and source stays unchanged (1.523735ms)
+✔ capture rejects getters and detaches frame before asynchronous digest (0.862848ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 4
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 91.160756
+
+✖ failing tests:
+
+test at test/selected-profile-kernel/source-region.test.mjs:41:1
+✖ mixed holes, exact thin coordinates and XZ/oblique placement survive preparation (8.310247ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      max: [
+  +     11.000000000000002,
+  +     12.000000000000002,
+  -     11,
+  -     12,
+        8
+      ],
+      min: [
+  +     -9.000000000000002,
+  +     -8.000000000000002,
+  -     -9,
+  -     -8,
+        3
+      ]
+    }
+  
+      at TestContext.<anonymous> (file:///tmp/codi-cad-mechanical-candidate-20261105/test/selected-profile-kernel/source-region.test.mjs:50:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { min: [ -9.000000000000002, -8.000000000000002, 3 ], max: [ 11.000000000000002, 12.000000000000002, 8 ] },
+    expected: { min: [ -9, -8, 3 ], max: [ 11, 12, 8 ] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/selected-profile-kernel/source-region.test.mjs:53:1
+✖ gaps, duplicate/touching boundaries and unsupported ordinary curves refuse explicitly (1.638816ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    Comparison {
+  +   code: 'UNSUPPORTED_PROFILE'
+  -   code: 'OPEN_OR_AMBIGUOUS_PROFILE'
+    }
+  
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-mechanical-candidate-20261105/test/selected-profile-kernel/source-region.test.mjs:55:2)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Only exact axis-aligned local rectangles are supported.
+        at fail (file:///tmp/codi-cad-mechanical-candidate-20261105/modules/engine/mount/selectedProfilePlan.mjs:3:37)
+        at loop (file:///tmp/codi-cad-mechanical-candidate-20261105/modules/engine/mount/selectedProfilePlan.mjs:45:176)
+        at Array.map (<anonymous>)
+        at prepareSelectedProfileExtrusion (file:///tmp/codi-cad-mechanical-candidate-20261105/modules/engine/mount/selectedProfilePlan.mjs:50:49)
+        at file:///tmp/codi-cad-mechanical-candidate-20261105/modules/engine/extrusion/selectedSketchProfile.mjs:67:18
+        at Array.map (<anonymous>)
+        at prepareSolvedSelectedRegion (file:///tmp/codi-cad-mechanical-candidate-20261105/modules/engine/extrusion/selectedSketchProfile.mjs:66:23)
+        at async waitForActual (node:assert:646:5)
+        at async strict.rejects (node:assert:769:25)
+        at async TestContext.<anonymous> (file:///tmp/codi-cad-mechanical-candidate-20261105/test/selected-profile-kernel/source-region.test.mjs:55:2),
+    expected: { code: 'OPEN_OR_AMBIGUOUS_PROFILE' },
+    operator: 'rejects',
+    diff: 'simple'
+  }

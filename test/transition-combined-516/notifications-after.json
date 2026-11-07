@@ -1,0 +1,44 @@
+{
+  "calls": 1,
+  "states": [
+    0,
+    15
+  ],
+  "beforeCount": 15,
+  "afterCount": 15,
+  "expectedIds": [
+    "Polar:26",
+    "Polar:27",
+    "Polar:28",
+    "Polar:29",
+    "PCoincident:30",
+    "PCoincident:31",
+    "PCoincident:32",
+    "PCoincident:33",
+    "Horizontal:34",
+    "Vertical:35",
+    "Horizontal:36",
+    "Vertical:37",
+    "LockPoint:38",
+    "SegmentLength:39",
+    "SegmentLength:40"
+  ],
+  "actualIds": [
+    "Polar:26",
+    "Polar:27",
+    "Polar:28",
+    "Polar:29",
+    "PCoincident:30",
+    "PCoincident:31",
+    "PCoincident:32",
+    "PCoincident:33",
+    "Horizontal:34",
+    "Vertical:35",
+    "Horizontal:36",
+    "Vertical:37",
+    "LockPoint:38",
+    "SegmentLength:39",
+    "SegmentLength:40"
+  ],
+  "exactNative": true
+}

@@ -1,0 +1,4 @@
+// Component request data only; no actual authored sketch membership assertion.
+export const frame=z=>({origin:[0,0,z],x:[1,0,0],y:[0,1,0],z:[0,0,1]});
+export const polygon=(w,h,cw=false)=>{let p=[[-w/2,-h/2],[w/2,-h/2],[w/2,h/2],[-w/2,h/2]];if(cw)p.reverse();return p.map((a,i)=>({kind:'segment',id:'edge-'+i,a,b:p[(i+1)%p.length]}));};
+export function request(kind='polygon'){return{op:'solid.profile.loft',version:1,unit:'millimeter',sections:[0,1].map(i=>({source:{faceId:'component-section-'+i,sourceSha256:String(i+1).repeat(64)},frame:frame(i*30),region:{id:'component-region-'+i,outer:kind==='polygon'?polygon(i?10:20,i?5:10):[{kind:'circle',id:'circle',center:[0,0],radius:i?2:4}],holes:[]}})),correspondence:{kind,startA:0,reverseA:false,startB:0,reverseB:false},construction:'ruled-solid'};}

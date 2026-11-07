@@ -1,0 +1,234 @@
+TAP version 13
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: actual normal coordinator replaces one circle diameter and journals exact Undo/Redo
+ok 1 - actual normal coordinator replaces one circle diameter and journals exact Undo/Redo
+  ---
+  duration_ms: 1436.695899
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: actual segment length edit and removal preserve object identity and genuine underconstraint
+ok 2 - actual segment length edit and removal preserve object identity and genuine underconstraint
+  ---
+  duration_ms: 2773.143424
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: removing a real accepted duplicate reactivates the surviving redundant diameter
+ok 3 - removing a real accepted duplicate reactivates the surviving redundant diameter
+  ---
+  duration_ms: 1394.967729
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: contradictory existing dimension edit preserves source/journal and a valid retry recovers
+ok 4 - contradictory existing dimension edit preserves source/journal and a valid retry recovers
+  ---
+  duration_ms: 1063.377879
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: strict discovered identity/domain/no-op and unsupported schema refuse without publication
+ok 5 - strict discovered identity/domain/no-op and unsupported schema refuse without publication
+  ---
+  duration_ms: 1525.214124
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed diameter rebinding/literal/removal use actual quantity lengths and exact typed Undo
+ok 6 - typed diameter rebinding/literal/removal use actual quantity lengths and exact typed Undo
+  ---
+  duration_ms: 4285.184189
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: actual arc diameter replacement preserves consistency and source IDs
+ok 7 - actual arc diameter replacement preserves consistency and source IDs
+  ---
+  duration_ms: 666.814435
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed rectangle removes and restores one named driving length through the same journal
+ok 8 - typed rectangle removes and restores one named driving length through the same journal
+  ---
+  duration_ms: 2749.909036
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: multi-stage earlier geometry remains fixed while a later owned segment length changes
+ok 9 - multi-stage earlier geometry remains fixed while a later owned segment length changes
+  ---
+  duration_ms: 670.23182
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: actual Worker response is fenced by source/history/physical result/quantity and host lifetime
+ok 10 - actual Worker response is fenced by source/history/physical result/quantity and host lifetime
+  ---
+  duration_ms: 4161.258194
+  type: 'test'
+  ...
+# Subtest: intent/response capture rejects getters, sparse identities and malformed reply fields
+ok 11 - intent/response capture rejects getters, sparse identities and malformed reply fields
+  ---
+  duration_ms: 0.562505
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 20900.615114

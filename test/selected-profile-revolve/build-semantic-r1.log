@@ -1,0 +1,16 @@
+asset worker.js 1.38 MiB [emitted] (name: main) 1 related asset
+runtime modules 1.25 KiB 6 modules
+modules by path ./modules/ 489 KiB
+  modules by path ./modules/geom/ 106 KiB 17 modules
+  modules by path ./modules/engine/ 112 KiB 14 modules
+  modules by path ./modules/brep/ 208 KiB 13 modules
+  modules by path ./modules/math/ 44.6 KiB 9 modules
+  modules by path ./modules/workbenches/modeler/features/extrude/*.mjs 18.9 KiB 3 modules
+modules by path ./web/app/ 21.1 KiB
+  ./web/app/cad/tess/pip.js 5.57 KiB [built] [code generated]
+  ./web/app/utils/errors.js 5.85 KiB [built] [code generated]
+  ./web/app/cad/cad-utils.js 9.65 KiB [built] [code generated]
+modules by path ../codi-jsketcher-release-integration-20261104/node_modules/ 820 KiB
+  ../codi-jsketcher-release-integration-20261104/node_modules/lodash/lodash.js 531 KiB [built] [code generated]
+  ../codi-jsketcher-release-integration-20261104/node_modules/.cache/codi-numeric/precompiled.js 289 KiB [built] [code generated]
+webpack 5.74.0 compiled successfully in 3572 ms

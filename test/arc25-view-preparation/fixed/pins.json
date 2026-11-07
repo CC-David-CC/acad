@@ -1,0 +1,24 @@
+{
+  "source": "69298c8e123d72827630492987119032966ebf7e",
+  "note": "Fetched fixture inventory. The PLANE restore executes project validation Worker; no sketch solve is claimed for these cases.",
+  "rows": [
+    {
+      "name": "app",
+      "url": "http://127.0.0.1:20496/static/index.bundle.js",
+      "sha256": "f701506f81619f4d050ed6fd3a4ca04195f3187407590ca877c85d74e66f759b",
+      "bytes": 32630963
+    },
+    {
+      "name": "sketch-worker",
+      "url": "http://127.0.0.1:20496/static/sketch-solver.0737c828227d6036fd26.js",
+      "sha256": "f170f70d67f8ad69bc60f4a356142694752b2330291826d9ae275826bc03ae46",
+      "bytes": 3419768
+    },
+    {
+      "name": "project-worker",
+      "url": "http://127.0.0.1:20496/static/project-validator.cdeb32dd69943b42c57b.js",
+      "sha256": "dce5e52958cb3c1d152ed25a09079dacd4be1b07fd5c812c5e7d064d3f8b8cc0",
+      "bytes": 1836375
+    }
+  ]
+}

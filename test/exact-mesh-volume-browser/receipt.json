@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scope": "Exact OCI Worker/component/asset-graph only; no final app/native validity/scale guarantee",
+  "base": "4623f68cb",
+  "product": "a24be70dc",
+  "sourceHashes": {
+    "modules/engine/mount/oci-verified-worker.js": "1a17103c5e2dd4f8edd2824513608e00dc18652cd542809a295fe99a868e4a92",
+    "modules/engine/mount/worker-controller.mjs": "394cf4542a3908366facdafa194a5e235605155031810ecd8bcb4566869308cc",
+    "modules/engine/mount/exactMeshVolume.mjs": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c"
+  },
+  "proofHashes": {
+    "browser-r2.json": "c87384307c9a06aa8bb753cbea94daf124500f01835f0ea7d4e56061feb98039",
+    "fraction-r2.json": "a68bbc2b4ceff1e75a385e2220a2998e5aa2d0be1fda5f3283b44f8ff7e6e5b8",
+    "retained-through-holes.json": "05936cd42939331685f9f1ad868ef5e78a0be67fd4ce587c38dc62a4fd7af7bf",
+    "retained-boolean-history.json": "8fecd9e530793207b8ef3fdefb2d0c361cbbdcfd197487bbb4c19d2431d75d94",
+    "legacy-profile-r3.json": "703de4a99ecf83449b1644cb6be6984d8f752a619cc665b1c43205a869efc99f",
+    "worker-pins.json": "326181d2dbadcf609dbef4954ba6e969be8e6aabb3dcb689ba519b3747a1092c",
+    "components-r1.json": "bf323b63233666df0fc848e178294a4ff8537c3bc1990c1d8fd9aebc8a073935",
+    "components-r3.json": "858fea96a66c4860b055fd120a0cee9c0b821a2f99be7db70f123f4ac08e5afd",
+    "protocol.log": "76daf0aae2ab1091c2c3b625248815b2206c8918f581e87ff863d703f9051ce5",
+    "asset-graph-build.log": "4ce4695944bf32c5d374ed66fa660e74822a7e2c2fa92f213ae2cc7ec2693b8a",
+    "typescript.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "remote-cleanup.json": "de3685fcceeae0dbeb7edc96f2000b705d80e611d907a694a3e171d6e9f26579",
+    "local-cleanup.json": "d23b5045221652228a5073ed0e887ac343ec1439e502d8a4358a54210e18a48f"
+  },
+  "checks": {
+    "actualNativeBoxUnionCases": 20,
+    "independentFractionCases": 20,
+    "throughHoleFixtures": 3,
+    "booleanPlateFixtures": 2,
+    "legacyProfileFixtures": 2,
+    "numericRangeProtocolDouble": true,
+    "allFiveStagers": true,
+    "webpackAssetGraph": true,
+    "repositoryTSC": true
+  },
+  "remaining": [
+    "Final merged app/host qualification",
+    "Actual geometry numeric-range case not qualified",
+    "No general scale/precision qualification"
+  ]
+}

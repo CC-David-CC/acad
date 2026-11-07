@@ -1,0 +1,76 @@
+✖ direct preparation client rejects native preabort despite own false data, zero allocation (66.151124ms)
+✖ direct client uses native signal operations, including one signal in both slots and exact listener cleanup (1.76914ms)
+✖ direct held genuine result abort cannot be masked and own remove overrides cannot invent cleanup failure (33.913937ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 164.448706
+
+✖ failing tests:
+
+test at test/manufacturing-publication-review/client-signals.test.mjs:6:1
+✖ direct preparation client rejects native preabort despite own false data, zero allocation (66.151124ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection (AbortError).
+      at async file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/client-signals.test.mjs:7:148
+      at async use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/client-signals.test.mjs:5:229)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { name: 'AbortError' },
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test/manufacturing-publication-review/client-signals.test.mjs:9:1
+✖ direct client uses native signal operations, including one signal in both slots and exact listener cleanup (1.76914ms)
+  Error: Manufacturing preparation failed.
+      at operationFailure (file:///tmp/codi-manufacturing-publication-review-20261107/web/app/cad/projectManager/manufacturingPublicationClient.mjs?native-signal-review=2:6:118)
+      at Module.prepareManufacturingInWorker (file:///tmp/codi-manufacturing-publication-review-20261107/web/app/cad/projectManager/manufacturingPublicationClient.mjs?native-signal-review=2:23:37)
+      at file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/client-signals.test.mjs:11:10
+      at use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/client-signals.test.mjs:5:235)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    code: 'METADATA_PREPARATION_FAILED',
+    cause: false
+  }
+
+test at test/manufacturing-publication-review/client-signals.test.mjs:13:1
+✖ direct held genuine result abort cannot be masked and own remove overrides cannot invent cleanup failure (33.913937ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    Comparison {
+  +   name: 'Error'
+  -   name: 'AbortError'
+    }
+  
+      at async file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/client-signals.test.mjs:15:152
+      at async use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/client-signals.test.mjs:5:229)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Manufacturing Worker cleanup failed; reload this client module.
+        at clean (file:///tmp/codi-manufacturing-publication-review-20261107/web/app/cad/projectManager/manufacturingPublicationClient.mjs?native-signal-review=3:31:78)
+        at finish (file:///tmp/codi-manufacturing-publication-review-20261107/web/app/cad/projectManager/manufacturingPublicationClient.mjs?native-signal-review=3:32:35)
+        at AbortSignal.onAbort (file:///tmp/codi-manufacturing-publication-review-20261107/web/app/cad/projectManager/manufacturingPublicationClient.mjs?native-signal-review=3:42:21)
+        at [nodejs.internal.kHybridDispatch] (node:internal/event_target:869:20)
+        at AbortSignal.dispatchEvent (node:internal/event_target:810:26)
+        at runAbort (node:internal/abort_controller:561:10)
+        at abortSignal (node:internal/abort_controller:525:3)
+        at AbortController.abort (node:internal/abort_controller:580:5)
+        at file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/client-signals.test.mjs:15:144
+        at async use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/client-signals.test.mjs:5:229) {
+      [cause]: ''
+    },
+    expected: { name: 'AbortError' },
+    operator: 'rejects',
+    diff: 'simple'
+  }

@@ -1,0 +1,30 @@
+✔ two feature mounts share one candidate without exceeding the pool ceiling (6.627481ms)
+✔ cancelled in-flight factory reservation cannot be reused reentrantly (0.583615ms)
+✔ failed factory releases its reservation and limits reject invalid configuration (0.418464ms)
+✔ failed replacement closes only its resources, retaining both accepted revisions (0.412484ms)
+✔ admission precedes allocation and stale factory results are closed (0.361864ms)
+✔ sealing forbids allocation and publication acceptance invokes no external guard (0.232512ms)
+✔ document abort during factory creation closes the returned mount (0.239912ms)
+✔ a cleanup failure cannot silently admit another engine (0.279083ms)
+✔ three retained/candidate owners are the per-document ceiling (0.448654ms)
+✔ cleanup failure also blocks an already-admitted candidate (0.311373ms)
+✔ cleanup failure during allocation discards the returned mount (0.287723ms)
+✔ a guard cancelling its own owner cannot start a new mount (0.176492ms)
+✔ registered source and handle guards are rechecked before publication (0.282313ms)
+✔ publication guards cannot recurse, await or cancel unnoticed (1.253792ms)
+✔ publication check count is bounded and accepted phase invokes no callbacks (7.158145ms)
+✔ any thrown cleanup value permanently fences pool: undefined (1.620335ms)
+✔ any thrown cleanup value permanently fences pool: null (1.117ms)
+✔ any thrown cleanup value permanently fences pool: zero (0.242233ms)
+✔ any thrown cleanup value permanently fences pool: false (0.318983ms)
+✔ any thrown cleanup value permanently fences pool: empty-string (0.216502ms)
+✔ invalid cleanup accessor cannot orphan a native-mount reservation (0.293303ms)
+✔ ordinary Error cleanup already fences current and new owners (0.278963ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 84.954137

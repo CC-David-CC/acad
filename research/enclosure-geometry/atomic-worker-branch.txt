@@ -1,0 +1,23 @@
+    if (msg?.kind==='research-enclosure-build') {
+      let started=false;
+      try {
+        const {enclosurePlan}=await import('/static/plan.mjs');
+        const plan=enclosurePlan(msg.plan);
+        if(typeof msg.bodyToken!=='string'||typeof msg.lidToken!=='string'||!msg.bodyToken||!msg.lidToken||msg.bodyToken===msg.lidToken||shapes.has(msg.bodyToken)||shapes.has(msg.lidToken)) throw Error('invalid tokens');
+        started=true;
+        const mkbox=r=>{const name=allocateName();call('box',[name,'-min',...r.origin,'-size',...r.dimensions,'-dir',0,0,1,'-xdir',1,0,0]);return name;};
+        const outer=mkbox(plan.body.outer),cavity=mkbox(msg.testNoop?{origin:[200000,0,0],dimensions:[1,1,1]}:plan.body.cavity),body=allocateName();
+        call('bop',[outer,cavity]);call('bopcut',[body]);
+        const cover=mkbox(plan.lid.cover),lip=mkbox(plan.lid.lip),lid=allocateName();
+        call('bop',[cover,lip]);call('bopfuse',[lid]);
+        const verify=(name,expected,bounds)=>{
+          const mesh=summarize(name);if(!mesh)throw Error('empty');
+          if(mesh.bounds.min.some((x,i)=>Math.abs(x-bounds.min[i])>1e-6)||mesh.bounds.max.some((x,i)=>Math.abs(x-bounds.max[i])>1e-6)||Math.abs(mesh.signedVolume-expected)>Math.max(1e-6,expected*1e-9))throw Error('mesh mismatch');
+          let p;try{p=str2C(name);globalThis.__OCI_EXCHANGE_VAL=null;Module._InspectAnalyticV1(p);const v=globalThis.__OCI_EXCHANGE_VAL;if(!v||v.version!==1||v.scope!=='response-local'||v.valid!==true||v.solidCount!==1||!Number.isFinite(v.signedVolume)||!Array.isArray(v.faces)||v.faces.length<1||v.faces.length>64||Math.abs(v.signedVolume-expected)>Math.max(1e-6,expected*1e-9))throw Error('native mismatch');return {nativeVolume:v.signedVolume,mesh};}finally{if(p)_free(p);globalThis.__OCI_EXCHANGE_VAL=null;}
+        };
+        const bodyEvidence=verify(body,plan.body.volume,plan.body.bounds),lidEvidence=verify(lid,plan.lid.volume,plan.lid.bounds);
+        shapes.set(msg.bodyToken,body);shapes.set(msg.lidToken,lid);
+        self.postMessage({kind:'enclosure-result',seq:msg.seq,bodyToken:msg.bodyToken,lidToken:msg.lidToken,bodyEvidence,lidEvidence});
+      }catch(e){self.postMessage({kind:'refused',seq:msg.seq,code:'ENCLOSURE_BUILD_FAILED'});if(started)self.close();}
+      return;
+    }

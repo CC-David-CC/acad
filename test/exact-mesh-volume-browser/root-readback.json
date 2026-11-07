@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "Root source/proof digest readback and independent Fraction replay of retained actual browser coordinates; no additional native execution",
+  "productionHashes": {
+    "modules/engine/mount/oci-verified-worker.js": "1a17103c5e2dd4f8edd2824513608e00dc18652cd542809a295fe99a868e4a92",
+    "modules/engine/mount/worker-controller.mjs": "394cf4542a3908366facdafa194a5e235605155031810ecd8bcb4566869308cc",
+    "modules/engine/mount/exactMeshVolume.mjs": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c"
+  },
+  "proofCount": 13,
+  "browserMeshCount": 20,
+  "fractionOutputSHA256": "a68bbc2b4ceff1e75a385e2220a2998e5aa2d0be1fda5f3283b44f8ff7e6e5b8"
+}

@@ -1,0 +1,87 @@
+TAP version 13
+# Subtest: default/no-op/changed receipt is document-scoped and canonical unit remains mm
+ok 1 - default/no-op/changed receipt is document-scoped and canonical unit remains mm
+  ---
+  duration_ms: 416.727721
+  type: 'test'
+  ...
+# Subtest: setter preserves history/source/counter/journal/material identities without Worker dispatch
+ok 2 - setter preserves history/source/counter/journal/material identities without Worker dispatch
+  ---
+  duration_ms: 123.013473
+  type: 'test'
+  ...
+# Subtest: malformed exact fields/options/getters and stale revisions reject unchanged
+ok 3 - malformed exact fields/options/getters and stale revisions reject unchanged
+  ---
+  duration_ms: 100.975366
+  type: 'test'
+  ...
+# Subtest: active/processing/history/wizard and cleanup states refuse metadata writes
+ok 4 - active/processing/history/wizard and cleanup states refuse metadata writes
+  ---
+  duration_ms: 477.229856
+  type: 'test'
+  ...
+# Subtest: closed/unbound/replaced manager and cancelled caller refuse before changing state
+ok 5 - closed/unbound/replaced manager and cancelled caller refuse before changing state
+  ---
+  duration_ms: 386.878086
+  type: 'test'
+  ...
+# Subtest: post-commit lifetime loss is marked committed and never rolls into another document
+ok 6 - post-commit lifetime loss is marked committed and never rolls into another document
+  ---
+  duration_ms: 81.882638
+  type: 'test'
+  ...
+# Subtest: New/reset returns to absent metadata and invalidates prior document revision
+ok 7 - New/reset returns to absent metadata and invalidates prior document revision
+  ---
+  duration_ms: 76.295603
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: actual manager snapshot/Blob reopen retains presentation through actual validation Worker
+ok 8 - actual manager snapshot/Blob reopen retains presentation through actual validation Worker
+  ---
+  duration_ms: 277.949872
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: presentation installs only after successful replay and final restore guards
+ok 9 - presentation installs only after successful replay and final restore guards
+  ---
+  duration_ms: 197.349666
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: validation/replay failure and cancelled native Open never install incoming presentation
+ok 10 - validation/replay failure and cancelled native Open never install incoming presentation
+  ---
+  duration_ms: 433.607837
+  type: 'test'
+  ...
+# Subtest: display change invalidates captured Save currentness independently of material state
+ok 11 - display change invalidates captured Save currentness independently of material state
+  ---
+  duration_ms: 89.938877
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: actual manufacturing preparation/hashing retains optional presentation outside digest domains
+ok 12 - actual manufacturing preparation/hashing retains optional presentation outside digest domains
+  ---
+  duration_ms: 335.179286
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3293.109969

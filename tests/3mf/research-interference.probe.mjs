@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {pathToFileURL} from 'node:url';
+import {researchManifoldInterference} from '../../web/app/cad/export/researchManifoldInterference.mjs';
+const path=process.env.CODI_MANIFOLD_JS;if(!path)throw Error('CODI_MANIFOLD_JS required');
+const mod=await import(pathToFileURL(path)),wasm=await mod.default();wasm.setup();const verify=researchManifoldInterference(wasm);
+const t=[[0,2,1],[0,3,2],[4,5,6],[4,6,7],[0,1,5],[0,5,4],[1,2,6],[1,6,5],[2,3,7],[2,7,6],[3,0,4],[3,4,7]],v=[[0,0,0],[1,0,0],[1,1,0],[0,1,0],[0,0,1],[1,0,1],[1,1,1],[0,1,1]];
+const b=x=>({vertices:v,triangles:t,transform:[1,0,0,0,1,0,0,0,1,x,0,0]});
+assert.equal(await verify(b(0),b(.5)),'overlap');
+assert.equal(await verify(b(0),b(1)),'uncertain');
+assert.equal(await verify(b(0),b(2)),'uncertain');
+assert.equal(await verify(b(0),b(1-1e-12)),'uncertain');
+const controller=new AbortController();controller.abort();await assert.rejects(verify(b(0),b(1),{signal:controller.signal}),{name:'AbortError'});
+console.log('Manifold research classifier: positive overlap detected; zero volume and inexact Float32 fail closed');

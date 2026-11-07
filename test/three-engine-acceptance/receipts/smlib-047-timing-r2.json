@@ -1,0 +1,311 @@
+{
+  "source": "CAD047e41961 atop a548e2da0; cancellation followup; Worker unchanged078dc",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'",
+  "fixture": "http://127.0.0.1:20551/static/index.html",
+  "browserVersion": "Chrome/155.0.8059.79",
+  "cacheScope": "Fresh owned browser context in an already running shared Chrome process; no browser/process cache cleared; assets prefetched for SHA checks with cache:no-store; first mount is first within this run, not proven cold compilation; later mounts reuse the same process",
+  "engines": [
+    {
+      "slot": "smlib",
+      "engine": "smlib-wasm",
+      "representation": "smlib-brep-worker-owned",
+      "unit": "millimeter",
+      "rows": [
+        {
+          "id": "box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "offset-fractional-box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-common",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-subtract",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "touch-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-common",
+          "status": "unsupported",
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "lifetime": "candidate-closed"
+        },
+        {
+          "id": "coincident-subtract",
+          "status": "unsupported",
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "lifetime": "candidate-closed"
+        },
+        {
+          "id": "foreign-mount",
+          "status": "pass"
+        },
+        {
+          "id": "unit-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "negative-dimension-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "unsupported-operation",
+          "status": "pass"
+        },
+        {
+          "id": "pre-aborted-operation",
+          "status": "pass"
+        },
+        {
+          "id": "disposed-handle",
+          "status": "pass"
+        },
+        {
+          "id": "lifetime-budget",
+          "status": "pass"
+        },
+        {
+          "id": "closed-mount-after-lifetime-budget",
+          "status": "pass"
+        }
+      ],
+      "timings": [
+        {
+          "id": "box",
+          "mountOrdinal": 1,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 28.200000047683716
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 15.5
+            }
+          ],
+          "initMs": 61.299999952316284
+        },
+        {
+          "id": "offset-fractional-box",
+          "mountOrdinal": 2,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 24.800000190734863
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 12.599999904632568
+            }
+          ],
+          "initMs": 58.39999985694885
+        },
+        {
+          "id": "overlap-common",
+          "mountOrdinal": 3,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 22.90000009536743
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 4.200000047683716
+            },
+            {
+              "label": "boolean-common",
+              "elapsedMs": 27.899999856948853
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 11.399999856948853
+            }
+          ],
+          "initMs": 55.5
+        },
+        {
+          "id": "overlap-union",
+          "mountOrdinal": 4,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 21.40000009536743
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 3.1999998092651367
+            },
+            {
+              "label": "boolean-union",
+              "elapsedMs": 28.800000190734863
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 9.699999809265137
+            }
+          ],
+          "initMs": 55.59999990463257
+        },
+        {
+          "id": "overlap-subtract",
+          "mountOrdinal": 5,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 23.5
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 3.700000047683716
+            },
+            {
+              "label": "boolean-subtract",
+              "elapsedMs": 29.299999952316284
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 11.399999856948853
+            }
+          ],
+          "initMs": 54.10000014305115
+        },
+        {
+          "id": "touch-union",
+          "mountOrdinal": 6,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 23.59999990463257
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 3.6000001430511475
+            },
+            {
+              "label": "boolean-union",
+              "elapsedMs": 24.299999952316284
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 9.200000047683716
+            }
+          ],
+          "initMs": 50.10000014305115
+        },
+        {
+          "id": "disjoint-union",
+          "mountOrdinal": 7,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 21.59999990463257
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 3.5
+            },
+            {
+              "label": "boolean-union",
+              "elapsedMs": 18.09999990463257
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 12.200000047683716
+            }
+          ],
+          "initMs": 53.5
+        },
+        {
+          "id": "disjoint-common",
+          "mountOrdinal": 8,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 23
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 3.3999998569488525
+            },
+            {
+              "label": "boolean-common",
+              "elapsedMs": 2.3000001907348633
+            }
+          ],
+          "initMs": 57.40000009536743
+        },
+        {
+          "id": "coincident-subtract",
+          "mountOrdinal": 9,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 24
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 2.9000000953674316
+            },
+            {
+              "label": "boolean-subtract",
+              "elapsedMs": 0.5999999046325684
+            }
+          ],
+          "initMs": 52.90000009536743
+        }
+      ],
+      "timingScope": "performance.now client/Worker roundtrip, not pure kernel time; init excludes entry import and includes Worker startup/WASM load; mesh includes independent checks and first-box reread",
+      "workerMemory": {
+        "available": false,
+        "reason": "Current real mount API reports no measured Worker/WASM memory; host JS heap is not a substitute"
+      },
+      "scope": "Numerical/caller-boundary controls only; no history/native/in-flight-cancellation/stale-response proof"
+    }
+  ],
+  "modules": [
+    {
+      "url": "/static/smlibMount.mjs",
+      "sha256": "9530d3c2c55348841266a0a973b3c9b2300c6796f6d3f774cc530e09bfcb57d6"
+    },
+    {
+      "url": "/static/smlib-worker.js",
+      "sha256": "078dc881c488e82fff16cfdcdaef077c107a61e8b7ab45e522f32f7509f403ed"
+    },
+    {
+      "url": "/static/smlib.wasm",
+      "sha256": "a48a3283760c21337881c5e2d5c973dbc62cf95cae46d1c012effd75389eb1ae"
+    },
+    {
+      "url": "/static/__three_engine_tests__/matrix.mjs",
+      "sha256": "5b982cc9fbfa3346be4a94200f21a63eeee8f0a2f29efdf0f92e514d7a5ea463"
+    },
+    {
+      "url": "/static/__three_engine_tests__/cases.mjs",
+      "sha256": "51cf6af59deb376dcf6fb1f54f03f2de5090c01a9323a7e293f542901c153e1b"
+    }
+  ],
+  "qualifiedAllNumericCases": false,
+  "scope": "Actual supplied Worker/kernel numerical and caller-boundary controls. History/native/agent/in-flight-stale controls remain separate."
+}

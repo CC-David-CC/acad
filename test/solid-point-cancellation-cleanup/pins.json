@@ -1,0 +1,34 @@
+{
+  "rootBase": "3cb6be4fbc0270649b45b977f917b6222b28cebb",
+  "composedPlaneTip": "df6a54a9a",
+  "beforeCommit": "f6aca31a6",
+  "productCommit": "501fffd27b2076c447c990412a154b254f509ae0",
+  "node": "v24.22.1",
+  "qualification": {
+    "focusedGroups": 33,
+    "retainedGroups": 11,
+    "tsc": "PASS",
+    "nativeClassificationClaim": false,
+    "nativeGeometryClaim": false,
+    "publicAuthoringClaim": false,
+    "fixture": "explicit admission doubles; exact production service/helpers; strictly error-only evaluator"
+  },
+  "sha256": {
+    "web/app/cad/craft/workerSolidPointCommands.ts": "32343da941bb3932fdbef131b03f7d61b3d13c2bfcfa1f702d140eebf282de01",
+    "web/app/cad/craft/capturePipelineHistory.mjs": "2a9f1822bf92c6a81b7e3a68e2b3962abd0c38eca059742f9136fa91dd506e70",
+    "web/app/cad/craft/sketchRevision.mjs": "6b5dc66ca9a9f54a404dff031503ac0ee06f044767bf6f7bd79048512b217e5c",
+    "modules/engine/solid/authoredSolidKinds.mjs": "fba0e557bfe96870a9bdb5a563c6f635e1b239c87f862cb0819bf614ab6c1534",
+    "modules/engine/mount/engineCatalog.mjs": "b091def16f304858a9ea9e73978abab63b59388849ad8599599c256c92c972d5",
+    "modules/engine/mount/selectedProfileBuildSelection.mjs": "d6f71fa1da507ce404ee90044046b24343a318ccfcf4d30513573bc3216fa275",
+    "modules/engine/mount/selectedProfileBudget.mjs": "f77ae112dc8f0e7d93a47d79e4394712937a392a0f32776ec39cbf01ef1eb03c",
+    "test/solid-point-cancellation-cleanup/after-tests.log": "0919c161d4a80f201ee06de5b86421a1d778976a84bf2dfa76e68c5c22ff9008",
+    "test/solid-point-cancellation-cleanup/before-fixture/fixture.mjs.txt": "92086592237ec39b8ea430ac83cd2365e3f47227a337cc3e568633e74e6cd1c7",
+    "test/solid-point-cancellation-cleanup/before-fixture/probe.log": "ec52ec9726d756aa437581daf2d4f09c65c403ff7bbe608653e8bd5732b4c782",
+    "test/solid-point-cancellation-cleanup/before-probe.mjs": "9921fd014710e73c8e6e91341c6f3a9a169fa9935113dd7e1d79c66e3b99eaf0",
+    "test/solid-point-cancellation-cleanup/before.json": "1e0426d680060d5d6a9426b4fe2b390bfbf0aefcdfe35e214f78607869895de9",
+    "test/solid-point-cancellation-cleanup/fixture.mjs": "99a2e9f25a83d4326d683a2ae4b20c89c83464655bbe526a92d3628cd2ba6515",
+    "test/solid-point-cancellation-cleanup/retained.log": "5c0f3b6e05d1c0303d7ebaced8b4e8e0252a65bba95da6b3afa6836bc1840ae1",
+    "test/solid-point-cancellation-cleanup/settlement.test.mjs": "6d1092fa584163d659a4547e4afa066eb6cc94973cf981800f90bc8c4326b058",
+    "test/solid-point-cancellation-cleanup/tsc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

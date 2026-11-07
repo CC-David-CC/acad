@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "source": "b6d1760308de9d409ff73384b50e972c721bc9cd",
+  "clientSha256": "5a5ca79a8908ea38c76155cc4e9b33937b6f0ca298bf186c9f8e6c1d3d7b84a8",
+  "layer": "actual-browser-client-controlled-guard-cost-labeled-worker-double",
+  "targetId": "8392880C53DEFD61BA292139CBA68740",
+  "status": "rejected",
+  "name": "Error",
+  "message": "Sketch inspection timed out.",
+  "workers": 1,
+  "terminated": 1,
+  "calls": 8,
+  "burned": true,
+  "signalAborted": false,
+  "elapsedMs": 49.40000009536743
+}

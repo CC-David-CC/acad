@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "same48Expressions": true,
+  "sameOriginalOracleSources": true,
+  "comparisonScope": "Volume and bounds against independent integer cells; kernel topology counts are not interchangeable. Experimental SMLib earlier receipt scored volume/census/validity, not bounds. No engine default or general parity conclusion.",
+  "occ": {
+    "pass": 42,
+    "fail": 0,
+    "notTested": 6,
+    "maxCreatedNames": 6
+  },
+  "manifold": {
+    "pass": 42,
+    "fail": 0,
+    "notTested": 6,
+    "maxCreatedNames": 6
+  },
+  "experimentalSmlib6c99": {
+    "pass": 40,
+    "fail": 2,
+    "notTested": 6,
+    "failures": [
+      "hollow-partial",
+      "translated-partial"
+    ]
+  }
+}

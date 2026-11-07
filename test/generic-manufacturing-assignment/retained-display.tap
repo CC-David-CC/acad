@@ -1,0 +1,29 @@
+✔ default/no-op/changed receipt is document-scoped and canonical unit remains mm (379.877438ms)
+✔ setter preserves history/source/counter/journal/material identities without Worker dispatch (129.718902ms)
+✔ malformed exact fields/options/getters and stale revisions reject unchanged (120.163402ms)
+✔ active/processing/history/wizard and cleanup states refuse metadata writes (520.345462ms)
+✔ closed/unbound/replaced manager and cancelled caller refuse before changing state (411.845539ms)
+✔ post-commit lifetime loss is marked committed and never rolls into another document (81.97465ms)
+✔ New/reset returns to absent metadata and invalidates prior document revision (89.460724ms)
+verb 2.0.0
+✔ actual manager snapshot/Blob reopen retains presentation through actual validation Worker (287.364041ms)
+verb 2.0.0
+✔ presentation installs only after successful replay and final restore guards (188.597838ms)
+verb 2.0.0
+verb 2.0.0
+✔ validation/replay failure and cancelled native Open never install incoming presentation (444.628715ms)
+✔ display change invalidates captured Save currentness independently of material state (85.585171ms)
+verb 2.0.0
+✔ actual manufacturing preparation/hashing retains optional presentation outside digest domains (313.784383ms)
+verb 2.0.0
+✔ an original default-mm native envelope reopens as default without metadata migration (227.586677ms)
+verb 2.0.0
+✔ metadata changes during actual asynchronous manufacturing hashing reject the old Save (365.393308ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4006.582923

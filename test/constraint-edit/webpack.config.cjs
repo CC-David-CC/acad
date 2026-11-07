@@ -1,0 +1,1 @@
+const path=require('path');const config=require('../mechanical/webpack.config.cjs');config.entry=path.join(__dirname,'atomic.test.mjs');config.output={path:'/tmp/codi-existing-constraint-tests',filename:'test.cjs'};config.plugins=[];config.resolve.symlinks=false;module.exports=config;

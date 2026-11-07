@@ -1,0 +1,35 @@
+{
+  "fixture": "http://127.0.0.1:20547/static/index.html",
+  "source": "server uncommitted SMLib prototype 2026-11-05; pinned upstream1ffd/NVIDIA3fd; exact served hashes below",
+  "pinnedModules": [
+    {
+      "url": "/static/smlibMount.mjs",
+      "sha256": "624ae0ffc583322717a60d33e65c1ebf6bc73e5f930543f0ddd30ee230f0d660"
+    },
+    {
+      "url": "/static/smlib-worker.js",
+      "sha256": "a8cf76a5ea8572573a23d6753f9c92681a898f38fa0d50095431586a05c57dc2"
+    },
+    {
+      "url": "/static/smlib.wasm",
+      "sha256": "a48a3283760c21337881c5e2d5c973dbc62cf95cae46d1c012effd75389eb1ae"
+    }
+  ],
+  "engines": [
+    {
+      "slot": "smlib",
+      "moduleUrl": "/static/smlibMount.mjs",
+      "exportName": "createVerifiedSmlibMount",
+      "options": {
+        "workerUrl": "/static/smlib-worker.js",
+        "wasmPath": "/static/smlib.wasm"
+      },
+      "expected": {
+        "engine": "smlib-wasm",
+        "representation": "smlib-brep-worker-owned",
+        "jsSha256": "edf63120f9e08e7fbad9fa2e44bebb8b28eee0dfaae50b4b720fd084438f6c24",
+        "wasmSha256": "a48a3283760c21337881c5e2d5c973dbc62cf95cae46d1c012effd75389eb1ae"
+      }
+    }
+  ]
+}

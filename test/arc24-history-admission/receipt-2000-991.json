@@ -1,0 +1,27 @@
+{
+  "bytes": 151959,
+  "history": 2000,
+  "keys": 2001,
+  "keysMs": 0.10000014305114746,
+  "timings": {
+    "reset": 0.7999999523162842,
+    "loadData": 23.90000009536743,
+    "stageCalls": 2000,
+    "stagedFactoryCalls": 1,
+    "registryPrepareCalls": 1,
+    "registryPrepareMs": 1.2000000476837158,
+    "modelNotifyCalls": 1,
+    "modelNotifyMs": 170.59999990463257
+  },
+  "tasks": [
+    {
+      "start": 5735.699999809265,
+      "duration": 792
+    }
+  ],
+  "elapsedMs": 4004.5,
+  "maxOtherGap": 2074.2000000476837,
+  "outcome": "accepted",
+  "otherReady": true,
+  "appHash": "8184854b80a018c58c74a48a59a8e0cdd7be970e24c6b2276ee003fe5eb38ba9"
+}

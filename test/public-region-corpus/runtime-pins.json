@@ -1,0 +1,48 @@
+{
+  "source": "5fb0f703201c3bff752e7bff217f46e14c3ed933",
+  "runtimeDirectory": "/mnt/data10tb/codi-exact-sketch-projection-20261106-r1",
+  "fixture": "http://127.0.0.1:20645/",
+  "buildConfig": "test/headless-line-relations/webpack.app.cjs",
+  "node": "v24.22.1",
+  "assets": {
+    "dist/static/index.bundle.js": "655c7d15f09eb5a041911baeb6c079e2c52fd11a9e0fd242de81918171bf26dd",
+    "dist/static/sketch-solver.0144ce96ceb9457b9e77.js": "ec4dd5826b1f7f73e75012c1845bb5f5bb0dd2e10f0bb503290f012f5b895ca0",
+    "dist/static/project-validator.15366ca88101ddc6dcd7.js": "5f186ef20fecf25d0f238f5eee68ad4b2a627af51cbe58d14b21b3a1e4bbf9c1",
+    "dist/static/prism-semantic.c72a0da0eb498fdb6979.js": "cae4139ac0f4d677a6696f9e833e9d2a9d6b7bb93a6a5380c6ac102f933758ed"
+  },
+  "buildInputs": {
+    ".build/headless-sketch-worker/worker.js": "ec4dd5826b1f7f73e75012c1845bb5f5bb0dd2e10f0bb503290f012f5b895ca0",
+    ".build/line-relation-project-worker/worker.js": "5f186ef20fecf25d0f238f5eee68ad4b2a627af51cbe58d14b21b3a1e4bbf9c1",
+    ".build/manufacturing-hash-worker/worker.js": "3f7cf784c31276d9cca6f700bb524fd3ecf6cf39763c686e43b5d350fdf08125",
+    ".build/manufacturing-hash-worker/worker.js.LICENSE.txt": "54ab905b3d66f63dbcff5f29af87d6f8d3c6e3151bf6f4c7fa3da9bef155cc9a",
+    ".build/physical-parameters-worker/worker.js": "227ed7d3e8b31520486d967202c97653ac326f758bf6397163441b1f3b7e007c",
+    ".build/prism-assets/authoredRegions.mjs": "46368ba6ca386671afef5e8462e7827d803e02bd816fb1d3b35d7c9c3b9086e6",
+    ".build/prism-assets/boundedPrismBoundary.mjs": "c7ca8a53962d587cde7bd162a08ad00b6ae523a432216e19202943726731ad51",
+    ".build/prism-assets/centeredHolePlan.mjs": "3a40691c595ac5630c47cbe8d8e943d22a29d9fc7f43083671ad770633a856f8",
+    ".build/prism-assets/centeredHoleTopology.mjs": "d2707b381a18e53a0157c2af068fe83d869185662e4447c38ea0ba639949655e",
+    ".build/prism-assets/displayProjection.mjs": "cfbe942e493522b08246920303214b73ce2a89e6f74c5cbd236a1d5f4466fcea",
+    ".build/prism-assets/enclosureLabelContact.mjs": "774a3488fa63974f847a89c458f269ff2d4795472b259447fc6cab680d9c03ba",
+    ".build/prism-assets/enclosureManufacturingMesh.mjs": "8e6486f479fd4e6379ac169eaff4a1b18380da4947421362a82c309c9e78f3a0",
+    ".build/prism-assets/enclosureMesh.mjs": "2b6f1474105c430f3efe6eb87d002576d6a9744a7b1cc98f5493ed129b2ce5f3",
+    ".build/prism-assets/enclosurePlan.mjs": "080ee18dd77731efaccfb9101b3d7f138b0ea6f525b881b2ccf4b174d544d19f",
+    ".build/prism-assets/fourCornerHolePlan.mjs": "75547f1d32a047d344d3933282cb90b09d90b7086798862e874cca68abcc030a",
+    ".build/prism-assets/fourCornerHoleProvenance.mjs": "24f4323bb57fdfc1920a4b2ad3f5ca8b28ac2fbd8bcf8ce8415029ed21af287e",
+    ".build/prism-assets/fourCornerHoleTopology.mjs": "dae7a5c3c5e4fa93a0103ec036143e26cffbf7ecc3a25a0b5b21759345d47499",
+    ".build/prism-assets/manifold-verified-worker.js": "35876bd7cd773b5eb243fde935599afb670314c192ba77ec11036dcb12aa79e4",
+    ".build/prism-assets/manifold-worker.wasm": "7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d",
+    ".build/prism-assets/occ-portable.js": "a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884",
+    ".build/prism-assets/occ.wasm": "07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e",
+    ".build/prism-assets/oci-verified-worker.js": "26c2191e2f952d2dfb62768aec971b847ed50165cd767987eb3ab1e4115052f5",
+    ".build/prism-assets/profile-topology.mjs": "700fc9fac9d73bf357d0bcba0599ac1dd44bfc81ca9eccd5464cfcdb64eb724b",
+    ".build/prism-assets/profilePlan.mjs": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237",
+    ".build/prism-assets/rectangleProfileRequest.mjs": "a3db8cc2add43838c1e0b3a2c8e4d456acbf70ffb6a014ada7520f8401fb6ab9",
+    ".build/prism-semantic-worker/worker.js": "cae4139ac0f4d677a6696f9e833e9d2a9d6b7bb93a6a5380c6ac102f933758ed",
+    ".build/raw-smlib-worker/raw-provider.wasm": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+    ".build/raw-smlib-worker/raw-smlib-worker.js": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65"
+  },
+  "buildLogs": {
+    "/mnt/data10tb/codi-exact-sketch-projection-20261106-r1-app-build.log": "c28fc986f3f92534dc19486529c3009feaadcfd2f22b7234d3d5f1f312363a11",
+    "/mnt/data10tb/codi-exact-sketch-projection-20261106-r1-app-build-final.log": "d89dfa653bc33ceb13a8aa1a30c1dac6cc548d13008e7036ee5d1b2d017328ff"
+  },
+  "qualification": "Direct Chromium app only; no public deployment, whole performance/memory or signed-host qualification."
+}

@@ -1,0 +1,24 @@
+✔ loft creation Undo/Redo retains both exact ordered source seams across JSON round trips (3.984888ms)
+✔ loft journal capture detaches nested sources and seams (0.281712ms)
+✔ different source, region, seam, order or traversal cannot undo another loft (0.780797ms)
+✔ loft append byte accounting covers nested escaped Unicode using actual serialized size (0.729856ms)
+✔ both loft sources require replay; a genuinely unrelated sketch may use fast-save (1.166801ms)
+✔ one immutable solid vocabulary includes sweep exactly once (1.10226ms)
+✔ sweep ownership cannot be ignored in mixed history or unknown runtime (1.05641ms)
+✔ sweep consumes one native-result budget even after visible results disappear (0.414014ms)
+✔ unqualified sweep build cannot permit a sketch fast-save (1.12969ms)
+✔ backend identity accessor refuses without executing it (0.235872ms)
+✔ Craft admission and journal capture share the closed operation vocabulary (0.791828ms)
+✔ creation Undo/Redo preserves exact two-source intent across independent JSON copies (1.984219ms)
+✔ nested path rows detach before caller mutation and are immutable (0.243012ms)
+✔ different source, path identity/order/direction or build cannot undo another intent (2.18243ms)
+✔ bounded byte accounting measures nested JSON including escaped Unicode source refs (0.548875ms)
+✔ unaccepted saved geometry and accessor path rows cannot enter chronology (0.360984ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 92.789651

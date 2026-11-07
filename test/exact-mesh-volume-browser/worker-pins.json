@@ -1,0 +1,54 @@
+{
+  "modules/engine/mount/oci-verified-worker.js": {
+    "sha256": "1a17103c5e2dd4f8edd2824513608e00dc18652cd542809a295fe99a868e4a92",
+    "bytes": 61851
+  },
+  "modules/engine/mount/exactMeshVolume.mjs": {
+    "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+    "bytes": 4760
+  },
+  "modules/engine/mount/worker-controller.mjs": {
+    "sha256": "394cf4542a3908366facdafa194a5e235605155031810ecd8bcb4566869308cc",
+    "bytes": 80220
+  },
+  ".build/prism-assets/oci-verified-worker.js": {
+    "sha256": "953ef43f0d3b0bb0e926bd8fc06b56681a3e29729aefe95b949063b4798abaa2",
+    "bytes": 371118
+  },
+  ".build/prism-assets/occ-portable.js": {
+    "sha256": "a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884",
+    "bytes": 307709
+  },
+  ".build/prism-assets/occ.wasm": {
+    "sha256": "07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e",
+    "bytes": 34989243
+  },
+  ".build/prism-assets/manifold-verified-worker.js": {
+    "sha256": "35876bd7cd773b5eb243fde935599afb670314c192ba77ec11036dcb12aa79e4",
+    "bytes": 92667
+  },
+  ".build/selected-profile-assets/selected-profile-worker.js": {
+    "sha256": "4fb4ff29a673a9022d0889d33fe85aa6e7c95a54ceef2e7554f7f957fd7a162d",
+    "bytes": 371837
+  },
+  ".build/selected-profile-assets/selected-profile-occ-portable.js": {
+    "sha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+    "bytes": 308353
+  },
+  ".build/selected-profile-assets/selected-profile-occ.wasm": {
+    "sha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+    "bytes": 35020148
+  },
+  ".build/polygon-profile-assets/modules/engine/mount/polygon-profile-worker.js": {
+    "sha256": "0fcd80913cdf54ab90364dfac0d8f580696a5a578e4f75c13169a7a60d7e1724",
+    "bytes": 372762
+  },
+  ".build/mechanical-profile-assets/modules/engine/mount/mechanical-profile-worker.js": {
+    "sha256": "b0892a52fa18772fefebfd6fcf78eee96dd0c4d072aaa93caad9347a759126c3",
+    "bytes": 373820
+  },
+  ".build/boolean-history-assets/modules/engine/mount/boolean-history-worker.js": {
+    "sha256": "95478c5d3efa062804082ae50bea76484841e2975044b4937586709f25fd9b14",
+    "bytes": 373940
+  }
+}

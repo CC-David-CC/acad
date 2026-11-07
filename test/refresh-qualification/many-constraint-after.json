@@ -1,0 +1,204 @@
+{
+  "appSha": "e3882008660359e53714f3fdd1618c34cc4ac017f215919f55ea0e4d10433bcf",
+  "setup": {
+    "ids": [
+      "3",
+      "12"
+    ],
+    "faceId": "S:0/SURFACE",
+    "bytes": 139364,
+    "objects": 514,
+    "constraints": 512,
+    "loadMs": 683.5
+  },
+  "stats": {
+    "inspectMs": 6.900000095367432,
+    "invokeMs": 558.4000000953674,
+    "undoMs": 714.0999999046326,
+    "redoMs": 897.2000000476837,
+    "status": "accepted",
+    "undoChanged": true,
+    "redoExact": true,
+    "longTasks": [
+      1281,
+      125,
+      898,
+      113
+    ],
+    "maxHeartbeat": 1409.7999999523163,
+    "entries": 4,
+    "bytes": 839074,
+    "heap": 140678709
+  },
+  "secondWindow": {
+    "max": 11.100000143051147,
+    "count": 520,
+    "stillReady": true
+  },
+  "save": {
+    "saveMs": 1140.8999998569489,
+    "captureMs": 12.900000095367432,
+    "current": true,
+    "released": true
+  },
+  "multi": {
+    "createMs": 552.2999999523163,
+    "captureMs": 16,
+    "sketches": 2,
+    "current": true,
+    "faceId": "S:1/SURFACE"
+  },
+  "profileSamples": 2447,
+  "top": [
+    {
+      "function": "updateViewportSizeIfNeeded",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 40596,
+      "hits": 169
+    },
+    {
+      "function": "(idle)",
+      "url": "",
+      "line": 0,
+      "hits": 90
+    },
+    {
+      "function": "(garbage collector)",
+      "url": "",
+      "line": 0,
+      "hits": 86
+    },
+    {
+      "function": "(program)",
+      "url": "",
+      "line": 0,
+      "hits": 82
+    },
+    {
+      "function": "eliminate",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 119858,
+      "hits": 72
+    },
+    {
+      "function": "eliminate",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 119858,
+      "hits": 55
+    },
+    {
+      "function": "get",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 120019,
+      "hits": 40
+    },
+    {
+      "function": "compact",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 119984,
+      "hits": 40
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 119809,
+      "hits": 38
+    },
+    {
+      "function": "_loop4",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 118421,
+      "hits": 37
+    },
+    {
+      "function": "mark",
+      "url": "",
+      "line": 0,
+      "hits": 36
+    },
+    {
+      "function": "eliminate",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 119858,
+      "hits": 34
+    },
+    {
+      "function": "get",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 120019,
+      "hits": 33
+    },
+    {
+      "function": "evaluatePolynomials",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 118379,
+      "hits": 32
+    },
+    {
+      "function": "compact",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 119984,
+      "hits": 32
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 119809,
+      "hits": 29
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 117448,
+      "hits": 28
+    },
+    {
+      "function": "evaluatePolynomials",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 118379,
+      "hits": 27
+    },
+    {
+      "function": "evaluatePolynomials",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 118379,
+      "hits": 27
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 119809,
+      "hits": 27
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 119809,
+      "hits": 27
+    },
+    {
+      "function": "mark",
+      "url": "",
+      "line": 0,
+      "hits": 26
+    },
+    {
+      "function": "",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 205171,
+      "hits": 26
+    },
+    {
+      "function": "_loop4",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 118421,
+      "hits": 25
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20480/static/index.bundle.js",
+      "line": 119809,
+      "hits": 25
+    }
+  ]
+}

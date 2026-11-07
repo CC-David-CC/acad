@@ -1,0 +1,321 @@
+{
+  "revision": "plate-fixture-1",
+  "sketch": {
+    "version": 3,
+    "objects": [
+      {
+        "id": "44",
+        "type": "Circle",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "c": {
+            "x": 10,
+            "y": 10
+          },
+          "r": 3
+        }
+      },
+      {
+        "id": "49",
+        "type": "Circle",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "c": {
+            "x": 90,
+            "y": 10
+          },
+          "r": 3
+        }
+      },
+      {
+        "id": "54",
+        "type": "Circle",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "c": {
+            "x": 90,
+            "y": 40.000000000000014
+          },
+          "r": 3
+        }
+      },
+      {
+        "id": "59",
+        "type": "Circle",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "c": {
+            "x": 10,
+            "y": 40.000000000000014
+          },
+          "r": 3
+        }
+      }
+    ],
+    "dimensions": [],
+    "labels": [],
+    "stages": [
+      {
+        "constraints": [
+          {
+            "typeId": "DistancePL",
+            "objects": [
+              "44:C",
+              "boundary/E:LID[S:0/SURFACE/3]"
+            ],
+            "constants": {
+              "distance": "10.00",
+              "inverted": "false"
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "DistancePL",
+            "objects": [
+              "44:C",
+              "boundary/E:LID[S:0/SURFACE/30]"
+            ],
+            "constants": {
+              "distance": "10.00",
+              "inverted": "false"
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "DistancePL",
+            "objects": [
+              "49:C",
+              "boundary/E:LID[S:0/SURFACE/3]"
+            ],
+            "constants": {
+              "distance": "10.00",
+              "inverted": "false"
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "DistancePL",
+            "objects": [
+              "49:C",
+              "boundary/E:LID[S:0/SURFACE/12]"
+            ],
+            "constants": {
+              "distance": "10.00",
+              "inverted": "false"
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "DistancePL",
+            "objects": [
+              "54:C",
+              "boundary/E:LID[S:0/SURFACE/21]"
+            ],
+            "constants": {
+              "distance": "10.00",
+              "inverted": "false"
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "DistancePL",
+            "objects": [
+              "54:C",
+              "boundary/E:LID[S:0/SURFACE/12]"
+            ],
+            "constants": {
+              "distance": "10.00",
+              "inverted": "false"
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "DistancePL",
+            "objects": [
+              "59:C",
+              "boundary/E:LID[S:0/SURFACE/21]"
+            ],
+            "constants": {
+              "distance": "10.00",
+              "inverted": "false"
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "DistancePL",
+            "objects": [
+              "59:C",
+              "boundary/E:LID[S:0/SURFACE/30]"
+            ],
+            "constants": {
+              "distance": "10.00",
+              "inverted": "false"
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          }
+        ],
+        "generators": []
+      }
+    ],
+    "constants": "",
+    "metadata": {
+      "expressionsSignature": "1793778891987"
+    },
+    "boundary": {
+      "lines": [
+        {
+          "id": "E:LID[S:0/SURFACE/3]",
+          "a": {
+            "x": 0,
+            "y": 0
+          },
+          "b": {
+            "x": 100,
+            "y": 0
+          }
+        },
+        {
+          "id": "E:LID[S:0/SURFACE/12]",
+          "a": {
+            "x": 100,
+            "y": 0
+          },
+          "b": {
+            "x": 100,
+            "y": 50
+          }
+        },
+        {
+          "id": "E:LID[S:0/SURFACE/21]",
+          "a": {
+            "x": 100,
+            "y": 50
+          },
+          "b": {
+            "x": 0,
+            "y": 50
+          }
+        },
+        {
+          "id": "E:LID[S:0/SURFACE/30]",
+          "a": {
+            "x": 0,
+            "y": 50
+          },
+          "b": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      ],
+      "arcs": [],
+      "circles": [
+        {
+          "id": "E:BASE[F:LID[S:0/SURFACE/12]/39]",
+          "c": {
+            "x": 30.000000043698936,
+            "y": 15
+          },
+          "r": 4.999999956301064
+        }
+      ],
+      "nurbses": []
+    }
+  },
+  "boundary": {
+    "lines": [
+      {
+        "id": "E:LID[S:0/SURFACE/3]",
+        "a": {
+          "x": 0,
+          "y": 0
+        },
+        "b": {
+          "x": 150,
+          "y": 0
+        }
+      },
+      {
+        "id": "E:LID[S:0/SURFACE/12]",
+        "a": {
+          "x": 150,
+          "y": 0
+        },
+        "b": {
+          "x": 150,
+          "y": 30
+        }
+      },
+      {
+        "id": "E:LID[S:0/SURFACE/21]",
+        "a": {
+          "x": 150,
+          "y": 30
+        },
+        "b": {
+          "x": 0,
+          "y": 30
+        }
+      },
+      {
+        "id": "E:LID[S:0/SURFACE/30]",
+        "a": {
+          "x": 0,
+          "y": 30
+        },
+        "b": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    ],
+    "arcs": [],
+    "circles": [],
+    "nurbses": []
+  },
+  "externalParameters": {}
+}

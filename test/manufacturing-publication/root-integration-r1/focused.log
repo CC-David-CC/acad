@@ -1,0 +1,36 @@
+✔ actual Worker generation/noop/travel binds private clone without claiming cloned freeze (151.048436ms)
+✔ actual Worker semantic refusal remains healthy for retry (72.449157ms)
+✔ genuine Worker result with corrupted small transport header refuses before capability (84.148377ms)
+✔ preabort has no allocation; held genuine result abort cleans and late release cannot succeed (93.342022ms)
+✔ real four-owner bound refuses a fifth allocation and cancel permits healthy retry (107.287195ms)
+✔ transport double: falsy operation failure settles, preserves cause and does not fence successful release (49.277008ms)
+✔ transport doubles: falsy termination causes latch cleanup fence and refuse all subsequent allocation (7.516027ms)
+✔ transport double: throwing listener cleanup still terminates and settles before fencing (2.081942ms)
+✔ real preparation Worker accepts large legacy no-op without charging a nonexistent edit, refuses overbudget change (1557.985894ms)
+✔ successful metadata computation cannot publish after cleanup fails; subsequent assignment allocates no Workers (423.240691ms)
+✔ actual enclosure assignment/role edit jointly installs A/J/T before first observer (484.511063ms)
+✔ diagnostic wrapper of real Worker reply proves main publication does not traverse metadata payload arrays (265.047991ms)
+✔ metadata Undo/Redo uses same journal, restores exact payload and leaves prior geometry travel route available (284.449421ms)
+✔ canonical no-op preserves all A/J/T/revisions/storage and does not truncate redo (363.01283ms)
+✔ conflict/stale/preabort reject with exact accepted A/J/T and redo state preserved (237.477387ms)
+✔ genuine held metadata Worker result cancellation releases owner and late delivery cannot commit (171.937801ms)
+✔ post-Worker caller callback reentrancy cannot bypass last pure A/J/T preflight (207.67903ms)
+✔ ordinary observer throw is logged after commit and entry stays Undoable (228.94959ms)
+✔ escaping notification failure is committed:true with exact cause, no rollback (222.440641ms)
+✔ observer caller loss/cancel/Close preserve committed entry and refuse normal success (533.683359ms)
+✔ observer starts a second real metadata operation in the same chronology without rollback (267.336884ms)
+✔ concurrent preparations have one accepted publication; stale loser cannot append a second entry (186.870185ms)
+✔ actual rebind is prepared read-only then uses same commit/travel; stale review token refuses (459.212661ms)
+✔ generic shared setter uses actual class/custody admission fixture and actual Worker metadata, not Native geometry (257.957257ms)
+✔ initial caller reentrancy cannot silently adopt a newer generic request revision (103.609878ms)
+✔ initial caller rebind cannot make an older enclosure request current (260.432043ms)
+verb 2.0.0
+✔ native envelope manager save/restore preserves definitions; fresh protocol session can reedit/Undo (569.314475ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5775.018292

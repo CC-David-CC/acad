@@ -1,0 +1,17 @@
+{
+  "status": "OBSERVED_CONTRACT_FAILURE",
+  "scope": "Earlier direct pure-unit reproduction on genuine R2 annulus observations, synthetic allowed8190-backslash region label; not native/public geometry",
+  "sourceStatus": "Root uncommitted prismSelectionIndex before add-time key admission fix. Source hash was not captured in that earlier direct tool execution; this is a transcription of its output, not a source-pinned new run.",
+  "advertisedEdges": 4,
+  "advertisedFaces": 4,
+  "unresolvableKeys": [
+    {"kind":"edge","length":16443,"code":"INVALID_SELECTION"},
+    {"kind":"edge","length":16442,"code":"INVALID_SELECTION"},
+    {"kind":"edge","length":16443,"code":"INVALID_SELECTION"},
+    {"kind":"edge","length":16442,"code":"INVALID_SELECTION"},
+    {"kind":"face","length":16435,"code":"INVALID_SELECTION"},
+    {"kind":"face","length":16434,"code":"INVALID_SELECTION"},
+    {"kind":"face","length":16443,"code":"INVALID_SELECTION"},
+    {"kind":"face","length":16443,"code":"INVALID_SELECTION"}
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "scope": "Root integration: Craft registration, TypeScript, source/real Worker component controls; no native app publication or Save/Open acceptance",
+  "sourceParent": "79c76a261dd9b5d8916a34950777a18a7ebcebe8",
+  "sources": {
+    "web/app/cad/craft/craftBundle.ts": "a6fc61565283a404a334ced5ff834a00012f25bbda6589971ee2f6191eb9deaa",
+    "web/app/cad/craft/workerSweepCommands.ts": "de4d303127c0083a80a4cc85f397367a45448c1ccb64f88d68fe49dc3f35871a"
+  },
+  "typescript": {
+    "exit": 0,
+    "outputBytes": 0
+  },
+  "tests": {
+    "pure": "\u2139 tests 19\n\u2139 suites 0\n\u2139 pass 19\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 101.43548",
+    "service": "\u2139 tests 15\n\u2139 suites 0\n\u2139 pass 15\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 7680.537937"
+  },
+  "componentPins": {
+    "head": "79c76a261dd9b5d8916a34950777a18a7ebcebe8",
+    "node": "v24.22.1",
+    "webpack": "5.74.0",
+    "sourceCount": 1303,
+    "sourceCohortBeforeAfter": "bfc1b1e223caaf5d657f4992436d41abe7e3c78aa7d5da0b042eb130c6c7e893",
+    "sourceHashes": {
+      "web/app/cad/craft/workerSweepCommands.ts": "de4d303127c0083a80a4cc85f397367a45448c1ccb64f88d68fe49dc3f35871a",
+      "modules/engine/extrusion/selectedSketchSweepDiscovery.mjs": "c276f53d9f87796bce57815649f8761945e73f8bee2eb0fb2b7a6c6fb2e608ee",
+      "modules/engine/extrusion/selectedSketchSweepPath.mjs": "7117a5b6baa3d00702733a538ff8acb6a0809f6d06d21c2e9906182a8d0f85e6",
+      "modules/engine/extrusion/prismSemantic.worker.ts": "71064f7518594000958a7dae9d051a7500ad98c51b8551657d70f0ed909cc0e6"
+    },
+    "sketch": "f0071d989d392181bcab17c5bfe52475697d9415a0be0afc0f4f9a42018f0956",
+    "semantic": "a8723b4f5bacabb91a351216c0e282dc196dfb9959a7848a642d6854c7bf0033",
+    "service": "ea5b57d7a6104c07de8c74adbfc7be3199a08e9fc88cdeaade60f713e5e1766f"
+  }
+}

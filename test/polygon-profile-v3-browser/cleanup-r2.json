@@ -1,0 +1,8 @@
+{
+  "fixture": "R2",
+  "ownedLoopbackServerStopped": 2180243,
+  "sharedChromeAlive": "Chrome/155.0.8059.79",
+  "contextClosedByDriver": true,
+  "workersTerminated": 12,
+  "liveOwnedWorkerTargets": 0
+}

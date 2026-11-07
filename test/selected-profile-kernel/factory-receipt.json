@@ -1,0 +1,313 @@
+{
+  "scope": "Actual compiled shared catalog factory, explicit profile revision and retained default; no Craft/history/public app claim",
+  "result": "PASS",
+  "rows": [
+    {
+      "revision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+      "descriptor": {
+        "contractVersion": 1,
+        "engine": "occ-selected-profile-v2-component",
+        "mountId": "69870013-2eb7-4e71-aee9-aee1b77c52fe",
+        "generation": 1,
+        "unit": "millimeter",
+        "representation": "occ-brep-worker-owned",
+        "bootstrap": "host-trusted",
+        "runtimeAssets": {
+          "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+          "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+          "verification": "worker-sha256"
+        },
+        "maxLifetimeNames": 8,
+        "maxPending": 1,
+        "tolerances": "OCC interpreter defaults; not yet configurable or qualified",
+        "operations": [
+          {
+            "id": "solid.box.create",
+            "version": 1,
+            "input": "oci-box-mm-v1",
+            "output": "oci-shape-result-v1",
+            "qualification": "scoped-browser-evidence"
+          },
+          {
+            "id": "solid.mesh.read",
+            "version": 1,
+            "input": "owned-solid-mesh-request-v1",
+            "output": "owned-solid-mesh-result-v1",
+            "qualification": "unqualified",
+            "purpose": "display-only"
+          },
+          {
+            "id": "solid.profile.extrude",
+            "version": 2,
+            "input": "selected-profile-mm-v2",
+            "output": "oci-shape-result-v1",
+            "qualification": "component-research"
+          },
+          {
+            "id": "solid.boolean.common",
+            "version": 1,
+            "input": "oci-boolean-mm-v1",
+            "output": "oci-shape-result-v1",
+            "qualification": "scoped-browser-evidence"
+          },
+          {
+            "id": "solid.boolean.union",
+            "version": 1,
+            "input": "oci-boolean-mm-v1",
+            "output": "oci-shape-result-v1",
+            "qualification": "scoped-browser-evidence"
+          },
+          {
+            "id": "solid.boolean.subtract",
+            "version": 1,
+            "input": "oci-boolean-mm-v1",
+            "output": "oci-shape-result-v1",
+            "qualification": "scoped-browser-evidence"
+          },
+          {
+            "id": "solid.dispose",
+            "version": 1,
+            "input": "oci-dispose-v1",
+            "output": "empty-v1",
+            "qualification": "native-owned-name-release-v2"
+          }
+        ]
+      },
+      "evidence": {
+        "nativeVolume": 1570.7963267948965,
+        "nativeBounds": {
+          "min": [
+            -10,
+            -10,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            5
+          ]
+        },
+        "faces": 3,
+        "triangles": 176,
+        "bounds": {
+          "min": [
+            -9.975640502598242,
+            -9.993908270190957,
+            0
+          ],
+          "max": [
+            10,
+            9.993908270190957,
+            5
+          ]
+        },
+        "signedVolume": 1565.6973858007377,
+        "empty": false,
+        "resultKind": "single-solid",
+        "solidCount": 1,
+        "nativeValidity": {
+          "method": "occ-inspect-analytic-v1",
+          "valid": true
+        },
+        "nativeTopology": {
+          "version": 1,
+          "method": "occ-topology-census-v1",
+          "shapeType": 2,
+          "directChildren": 1,
+          "counts": {
+            "compounds": 0,
+            "compsolids": 0,
+            "solids": 1,
+            "shells": 1,
+            "faces": 3,
+            "wires": 3,
+            "edges": 3,
+            "vertices": 2
+          }
+        },
+        "materialRegions": null,
+        "voidRegions": null,
+        "validLevel0": null,
+        "validLevel2": null,
+        "manifoldPredicate": null,
+        "volumeQuality": "tessellation-signed-integral"
+      },
+      "triangles": 176
+    },
+    {
+      "revision": "sha256:a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884:07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e",
+      "descriptor": {
+        "contractVersion": 1,
+        "engine": "occ-oci-verified-runtime-research",
+        "mountId": "6b160360-c6ac-4ea1-ba8f-7e2d64f99fd2",
+        "generation": 1,
+        "unit": "millimeter",
+        "representation": "occ-brep-worker-owned",
+        "bootstrap": "host-trusted",
+        "runtimeAssets": {
+          "jsSha256": "a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884",
+          "wasmSha256": "07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e",
+          "verification": "worker-sha256"
+        },
+        "maxLifetimeNames": 8,
+        "maxPending": 1,
+        "tolerances": "OCC interpreter defaults; not yet configurable or qualified",
+        "operations": [
+          {
+            "id": "solid.box.create",
+            "version": 1,
+            "input": "oci-box-mm-v1",
+            "output": "oci-shape-result-v1",
+            "qualification": "scoped-browser-evidence"
+          },
+          {
+            "id": "solid.mesh.read",
+            "version": 1,
+            "input": "owned-solid-mesh-request-v1",
+            "output": "owned-solid-mesh-result-v1",
+            "qualification": "unqualified",
+            "purpose": "display-only"
+          },
+          {
+            "id": "solid.profile.extrude",
+            "version": 1,
+            "input": "oci-rectangle-profile-v1",
+            "output": "oci-profile-result-v1",
+            "qualification": "research",
+            "researchTopology": {
+              "version": 1,
+              "scope": "mount-lifetime"
+            }
+          },
+          {
+            "id": "solid.profile.centered-through-hole",
+            "version": 1,
+            "input": "oci-centered-hole-v1",
+            "output": "oci-centered-hole-result-v1",
+            "qualification": "research"
+          },
+          {
+            "id": "solid.profile.four-corner-through-holes",
+            "version": 1,
+            "input": "oci-four-corner-hole-v1",
+            "output": "oci-four-corner-hole-result-v1",
+            "qualification": "research"
+          },
+          {
+            "id": "solid.enclosure.interface",
+            "version": 1,
+            "input": "oci-enclosure-interface-v1",
+            "output": "enclosure-interface-result-v1",
+            "qualification": "research"
+          },
+          {
+            "id": "solid.enclosure.manufacturing-mesh",
+            "version": 1,
+            "input": "oci-enclosure-manufacturing-v1",
+            "output": "enclosure-manufacturing-result-v1",
+            "qualification": "research"
+          },
+          {
+            "id": "solid.enclosure.mesh",
+            "version": 1,
+            "input": "oci-enclosure-mesh-v1",
+            "output": "oci-enclosure-mesh-result-v1",
+            "qualification": "research"
+          },
+          {
+            "id": "solid.enclosure.create",
+            "version": 1,
+            "input": "oci-enclosure-v1",
+            "output": "oci-enclosure-result-v1",
+            "qualification": "research"
+          },
+          {
+            "id": "solid.enclosure.create",
+            "version": 2,
+            "input": "oci-enclosure-v2",
+            "output": "enclosure-result-v2",
+            "qualification": "research"
+          },
+          {
+            "id": "solid.boolean.common",
+            "version": 1,
+            "input": "oci-boolean-mm-v1",
+            "output": "oci-shape-result-v1",
+            "qualification": "scoped-browser-evidence"
+          },
+          {
+            "id": "solid.boolean.union",
+            "version": 1,
+            "input": "oci-boolean-mm-v1",
+            "output": "oci-shape-result-v1",
+            "qualification": "scoped-browser-evidence"
+          },
+          {
+            "id": "solid.boolean.subtract",
+            "version": 1,
+            "input": "oci-boolean-mm-v1",
+            "output": "oci-shape-result-v1",
+            "qualification": "scoped-browser-evidence"
+          },
+          {
+            "id": "solid.dispose",
+            "version": 1,
+            "input": "oci-dispose-v1",
+            "output": "empty-v1",
+            "qualification": "logical-only"
+          }
+        ]
+      },
+      "evidence": {
+        "faces": 6,
+        "triangles": 12,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            5
+          ]
+        },
+        "signedVolume": 499.99999999999994,
+        "empty": false,
+        "resultKind": "single-solid",
+        "solidCount": 1,
+        "nativeValidity": {
+          "method": "occ-inspect-analytic-v1",
+          "valid": true
+        },
+        "nativeTopology": {
+          "version": 1,
+          "method": "occ-topology-census-v1",
+          "shapeType": 2,
+          "directChildren": 1,
+          "counts": {
+            "compounds": 0,
+            "compsolids": 0,
+            "solids": 1,
+            "shells": 1,
+            "faces": 6,
+            "wires": 6,
+            "edges": 12,
+            "vertices": 8
+          }
+        },
+        "materialRegions": null,
+        "voidRegions": null,
+        "validLevel0": null,
+        "validLevel2": null,
+        "manifoldPredicate": null,
+        "volumeQuality": "tessellation-signed-integral"
+      },
+      "triangles": 12
+    }
+  ],
+  "unknownRevisionCode": "ENGINE_REVISION_MISMATCH",
+  "unknownCreatedWorkers": 0,
+  "liveOwnedWorkers": 0
+}

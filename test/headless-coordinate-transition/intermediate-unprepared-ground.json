@@ -1,0 +1,31 @@
+{
+  "sourceBase": "1c3f5dc3f7b73cd991439e403e7b4981adc8c06e",
+  "workerSha256": "8c51331456014c7d4961309925f0c957fbc8893093ef3f58c53ebbaf8ba9b2d2",
+  "moduleSha256": "eb5e9a535683bb9e11f49f2bcb6b90c75a3efc5f521807bd6950edc0b302c704",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'",
+  "browser": "Chrome/155.0.8059.79",
+  "status": "assertion-failed",
+  "assertion": "AssertionError [ERR_ASSERTION]: point: {\"revision\":\"point\",\"ok\":false,\"error\":{\"code\":\"INVALID\",\"message\":\"Cannot read properties of undefined (reading 'forEach')\"}}\n\nfalse !== true\n\n    at /tmp/codi-headless-coordinate-transition-20261105/test/headless-coordinate-transition/browser.cjs:6:75",
+  "scope": "Unintegrated candidate diagnostic: direct pm.solve lacked prepared ground cache. Fixed with the existing per-stage prepare/solve sequence used by solveSketch; not a current runtime defect.",
+  "starts": 58,
+  "terminated": 58,
+  "pointFailure": {
+    "id": "point",
+    "elapsedMs": 270.7999999523163,
+    "requestUnchanged": true,
+    "result": {
+      "revision": "point",
+      "ok": false,
+      "error": {
+        "code": "INVALID",
+        "message": "Cannot read properties of undefined (reading 'forEach')"
+      }
+    },
+    "inputUnchanged": true,
+    "realm": {
+      "document": "undefined",
+      "window": "undefined",
+      "canvas": "undefined"
+    }
+  }
+}

@@ -1,0 +1,526 @@
+{
+  "base": "f1072e9f5",
+  "node": "v24.22.1",
+  "sourceHashesBeforeAndAfter": {
+    "../../modules/engine/mount/exactMeshVolume.mjs": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+    "../../modules/engine/mount/localMeshVolume.mjs": "18270f2b00a32c76dc6bca505202c660f9acd2eda5f298a79585f45ae14f96ba",
+    "../local-mesh-volume/actual-native-mesh.json": "d734dcedaf5da8aa5903ece9a3138b2f86d6b7b44f0210f2404d571820f3d957",
+    "../local-mesh-volume/fixtures.mjs": "0dd190b183121a5154bf0fa73cf9641135922ae10a782a6ec9f5930d85abf348",
+    "./cases.mjs": "d6afb1033c35e47e3d191b5b44cf1ee04b38826486a10d24e83eb01352e655f1",
+    "./fraction-oracle.py": "e61c33c2e79982f1f308aaa060d3b1403f0701886918e930b18041e66f76e7d1",
+    "./worker.mjs": "f4c7e758b25bc3097e2fb0f3190638fd671d74a5ec030b012e35e96c2db31a13",
+    "./run.mjs": "a5580ee3ce4a11825e0608b3eeb3b73529e1a5750bc71f55a044f4e1eafa6653"
+  },
+  "status": "PASS",
+  "scope": "Actual NodeWorker exact represented-coordinate integration and arithmetic controls, no closure/native validity claim",
+  "rows": [
+    {
+      "id": "recorded-native:tiny-large-origin",
+      "status": "PASS",
+      "signedVolume": 6.000137061924313e-18,
+      "bits": "3c5babb627628000"
+    },
+    {
+      "id": "recorded-native:tiny-origin",
+      "status": "PASS",
+      "signedVolume": 6e-18,
+      "bits": "3c5bab8cbabb6581"
+    },
+    {
+      "id": "recorded-native:ordinary-translated",
+      "status": "PASS",
+      "signedVolume": 4301,
+      "bits": "40b0cd0000000000"
+    },
+    {
+      "id": "separated-tiny-shell-counterexample",
+      "status": "PASS",
+      "signedVolume": 1.2000274123848626e-17,
+      "bits": "3c6babb627628000"
+    },
+    {
+      "id": "separated-reversed",
+      "status": "PASS",
+      "signedVolume": -1.2000274123848626e-17,
+      "bits": "bc6babb627628000"
+    },
+    {
+      "id": "cavity",
+      "status": "PASS",
+      "signedVolume": 784,
+      "bits": "4088800000000000"
+    },
+    {
+      "id": "disconnected",
+      "status": "PASS",
+      "signedVolume": 234,
+      "bits": "406d400000000000"
+    },
+    {
+      "id": "opposite-cancellation",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "empty",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "all-zero",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "degenerate",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "single-open-triangle",
+      "status": "PASS",
+      "signedVolume": 0.16666666666666666,
+      "bits": "3fc5555555555555"
+    },
+    {
+      "id": "box:ordinary",
+      "status": "PASS",
+      "signedVolume": 6,
+      "bits": "4018000000000000"
+    },
+    {
+      "id": "box-reversed:ordinary",
+      "status": "PASS",
+      "signedVolume": -6,
+      "bits": "c018000000000000"
+    },
+    {
+      "id": "box:translated",
+      "status": "PASS",
+      "signedVolume": 6.000000272877513e-9,
+      "bits": "3e39c511efe3f57e"
+    },
+    {
+      "id": "box-reversed:translated",
+      "status": "PASS",
+      "signedVolume": -6.000000272877513e-9,
+      "bits": "be39c511efe3f57e"
+    },
+    {
+      "id": "box:small",
+      "status": "PASS",
+      "signedVolume": 1.1830521861667747e-271,
+      "bits": "07b0000000000000"
+    },
+    {
+      "id": "box-reversed:small",
+      "status": "PASS",
+      "signedVolume": -1.1830521861667747e-271,
+      "bits": "87b0000000000000"
+    },
+    {
+      "id": "box:large",
+      "status": "PASS",
+      "signedVolume": 8.452712498170644e+270,
+      "bits": "7830000000000000"
+    },
+    {
+      "id": "box-reversed:large",
+      "status": "PASS",
+      "signedVolume": -8.452712498170644e+270,
+      "bits": "f830000000000000"
+    },
+    {
+      "id": "tie-normal-even",
+      "status": "PASS",
+      "signedVolume": 1,
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "tie-normal-odd",
+      "status": "PASS",
+      "signedVolume": 1.0000000000000004,
+      "bits": "3ff0000000000002"
+    },
+    {
+      "id": "tie-negative",
+      "status": "PASS",
+      "signedVolume": -1.0000000000000004,
+      "bits": "bff0000000000002"
+    },
+    {
+      "id": "tie-subnormal-zero",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "subnormal-above-half",
+      "status": "PASS",
+      "signedVolume": 5e-324,
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "subnormal-below-half",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "tie-subnormal-odd",
+      "status": "PASS",
+      "signedVolume": 1e-323,
+      "bits": "0000000000000002"
+    },
+    {
+      "id": "tie-subnormal-even",
+      "status": "PASS",
+      "signedVolume": 1e-323,
+      "bits": "0000000000000002"
+    },
+    {
+      "id": "positive-underflow",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "negative-underflow",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "max-finite",
+      "status": "PASS",
+      "signedVolume": 1.7976931348623157e+308,
+      "bits": "7fefffffffffffff"
+    },
+    {
+      "id": "overflow",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "overflow-halfway",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "below-overflow-halfway",
+      "status": "PASS",
+      "signedVolume": 1.7976931348623157e+308,
+      "bits": "7fefffffffffffff"
+    },
+    {
+      "id": "extreme-cancellation-to-one",
+      "status": "PASS",
+      "signedVolume": 1,
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "extreme-cancellation-to-minsub",
+      "status": "PASS",
+      "signedVolume": 5e-324,
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "sample:0",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:1",
+      "status": "PASS",
+      "signedVolume": -9007199254740992,
+      "bits": "c340000000000000"
+    },
+    {
+      "id": "sample:2",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:3",
+      "status": "PASS",
+      "signedVolume": 0.0078125,
+      "bits": "3f80000000000000"
+    },
+    {
+      "id": "sample:4",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:5",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:6",
+      "status": "PASS",
+      "signedVolume": -0.0078125,
+      "bits": "bf80000000000000"
+    },
+    {
+      "id": "sample:7",
+      "status": "PASS",
+      "signedVolume": -4.4024544261305435e+268,
+      "bits": "f7b5555555555555"
+    },
+    {
+      "id": "sample:8",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:9",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:10",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:11",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:12",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:13",
+      "status": "PASS",
+      "signedVolume": -6.603681639195816e+268,
+      "bits": "f7c0000000000000"
+    },
+    {
+      "id": "sample:14",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:15",
+      "status": "PASS",
+      "signedVolume": 6.603681639195816e+268,
+      "bits": "77c0000000000000"
+    },
+    {
+      "id": "sample:16",
+      "status": "PASS",
+      "signedVolume": 6.776263578034403e-21,
+      "bits": "3bc0000000000000"
+    },
+    {
+      "id": "sample:17",
+      "status": "PASS",
+      "signedVolume": -0.0078125,
+      "bits": "bf80000000000000"
+    },
+    {
+      "id": "sample:18",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:19",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:20",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:21",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:22",
+      "status": "PASS",
+      "signedVolume": -9007199254740992,
+      "bits": "c340000000000000"
+    },
+    {
+      "id": "sample:23",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:24",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:25",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:26",
+      "status": "PASS",
+      "signedVolume": -6.776263578034403e-21,
+      "bits": "bbc0000000000000"
+    },
+    {
+      "id": "sample:27",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:28",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:29",
+      "status": "PASS",
+      "signedVolume": -0.0078125,
+      "bits": "bf80000000000000"
+    },
+    {
+      "id": "sample:30",
+      "status": "PASS",
+      "signedVolume": 4.4024544261305435e+268,
+      "bits": "77b5555555555555"
+    },
+    {
+      "id": "sample:31",
+      "status": "PASS",
+      "signedVolume": 6.603681639195816e+268,
+      "bits": "77c0000000000000"
+    },
+    {
+      "id": "sample:32",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:33",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:34",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:35",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:36",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:37",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:38",
+      "status": "PASS",
+      "signedVolume": -9007199254740992,
+      "bits": "c340000000000000"
+    },
+    {
+      "id": "sample:39",
+      "status": "PASS",
+      "signedVolume": -4.517509052022935e-21,
+      "bits": "bbb5555555555555"
+    },
+    {
+      "id": "sample:40",
+      "status": "PASS",
+      "signedVolume": -6004799503160661,
+      "bits": "c335555555555555"
+    },
+    {
+      "id": "sample:41",
+      "status": "PASS",
+      "signedVolume": 4.4024544261305435e+268,
+      "bits": "77b5555555555555"
+    },
+    {
+      "id": "sample:42",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:43",
+      "status": "PASS",
+      "signedVolume": 0,
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "sample:44",
+      "status": "PASS",
+      "signedVolume": 6.603681639195816e+268,
+      "bits": "77c0000000000000"
+    },
+    {
+      "id": "sample:45",
+      "status": "PASS",
+      "signedVolume": -6.776263578034403e-21,
+      "bits": "bbc0000000000000"
+    },
+    {
+      "id": "sample:46",
+      "status": "PASS",
+      "rangeRefusal": true
+    },
+    {
+      "id": "sample:47",
+      "status": "PASS",
+      "rangeRefusal": true
+    }
+  ],
+  "controls": [
+    {
+      "name": "strict typed finite/unshared/detached admission, exact options, workcap",
+      "status": "PASS"
+    },
+    {
+      "name": "known common-anchor separated-shell cancellation is corrected, not guessed into components",
+      "status": "PASS",
+      "data": {
+        "oldLocalEstimate": 1.2000551038462114e-17,
+        "exactRoundedIntegral": 1.2000274123848626e-17,
+        "cancellationSensitive": true
+      }
+    },
+    {
+      "name": "recorded translated tiny native mesh does not fix authored dimensional drift",
+      "status": "PASS",
+      "data": {
+        "scope": "All recorded native rows checked against Fraction above; requested/native dimensions remain separate",
+        "example": 4301
+      }
+    }
+  ],
+  "benchmarks": []
+}

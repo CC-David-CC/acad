@@ -1,0 +1,41 @@
+✔ unqualified legacy OCC, Manifold and SMLib neither advertise nor dispatch generic profiles (8.25456ms)
+✖ public dispatch rejects discriminator accessors without evaluating them or sending a native job (2.100702ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76.823559
+
+✖ failing tests:
+
+test at test/selected-profile-kernel/unsupported.test.mjs:16:1
+✖ public dispatch rejects discriminator accessors without evaluating them or sending a native job (2.100702ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      {
+        field: 'op',
+  +     reads: 6
+  -     reads: 0
+      },
+      {
+        field: 'version',
+  +     reads: 1
+  -     reads: 0
+      }
+    ]
+  
+      at TestContext.<anonymous> (file:///tmp/codi-cad-mechanical-candidate-20261105/test/selected-profile-kernel/unsupported.test.mjs:31:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { field: 'op', reads: 6 }, { field: 'version', reads: 1 } ],
+    expected: [ { field: 'op', reads: 0 }, { field: 'version', reads: 0 } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

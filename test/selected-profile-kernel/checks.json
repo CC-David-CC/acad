@@ -1,0 +1,14 @@
+{
+  "pureTests": "8 passed: 7 actual pure geometry/data cases plus 1 explicitly labelled protocol-admission case",
+  "typescript": "SolidKernel.ts strict isolated noEmit es2020+dom PASS",
+  "advertisedSchema": "AJV compile + valid v2 circle + v1 rejection PASS",
+  "nativeAssets": "Both LAN artifact directories SHA256SUMS PASS",
+  "nativeGit": "Both LAN native branch refs c10848b72b9bebf7c9fff334bdf83e5acf79bda5",
+  "scope": "Component only; no public feature/history/signed Files acceptance claim",
+  "currentRootPureTests": "18 passed:7 source-preparation,7 geometry/data,2 catalog/protocol and2 mount/dispatch protocol controls",
+  "rootNativeBrowser": "Six actual native case groups, dispatch accessors/inherited op refuse with zero getter reads/native jobs; all preexisting geometry/Boolean/lifecycle checks retained; zero owned Worker targets",
+  "sourcePreparation": "7 pure source controls +9 existing component/protocol controls pass16/16; actual five-case seeded preparation Worker->native OCC composition passes, zero owned Workers; no public/history/solver qualification",
+  "staticWorker": "Exact native v2 artifacts with statically embedded Worker; genuine six-group native+five seeded source Worker composition pass without blob/unsafe-eval permission; no public/history qualification",
+  "catalogFactory": "Actual compiled shared factory: explicit v2 native circle, retained default box, unknownrevision/noWorker, zero liveWorkers PASS; normal app compiles and TypeScript exit0, no fullapp workflow proof",
+  "productionSemantic": "Actual production semantic Worker->nativeOCC five seededsource cases PASS; no actual solver/public/history claim"
+}

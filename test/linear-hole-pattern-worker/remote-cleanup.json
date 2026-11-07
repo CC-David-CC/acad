@@ -1,0 +1,19 @@
+{
+  "scope": "Owned component loopback servers only",
+  "rows": [
+    {
+      "port": 20942,
+      "matchedPids": [
+        1750005
+      ],
+      "exactArgsAndCwd": true
+    },
+    {
+      "port": 20943,
+      "matchedPids": [
+        1751076
+      ],
+      "exactArgsAndCwd": true
+    }
+  ]
+}

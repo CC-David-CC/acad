@@ -1,0 +1,9 @@
+{
+  "beforeStorage": 1,
+  "afterStorage": 4,
+  "explicitSaveCalls": 3,
+  "preparedCurrent": true,
+  "counters": {
+    "featureId": 1
+  }
+}

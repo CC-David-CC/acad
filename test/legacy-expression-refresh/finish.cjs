@@ -1,0 +1,16 @@
+const assert=require('node:assert/strict');
+module.exports=async function finish({page,fresh,fixture,before,applied,oldSource,newSource}){
+ const faults=await require('./faults.cjs')(page);
+ const travelled=await page.evaluate(async()=>{const k=__CAD_APP.craftService;await k.authoredEditTravel({revision:k.inspectAuthoredEdits().revision,direction:'undo'});const undo=capture();await k.authoredEditTravel({revision:k.inspectAuthoredEdits().revision,direction:'redo'});return {undo,redo:capture()};});
+ for(const key of ['source','sketches','metadata']){assert.deepEqual(travelled.undo[key],before[key],'undo '+key);assert.deepEqual(travelled.redo[key],applied.state[key],'redo '+key);}assert.deepEqual(travelled.undo.bounds,before.bounds);assert.deepEqual(travelled.redo.bounds,applied.state.bounds);
+ await page.click('[data-view="expressions"]');await page.evaluate(()=>{const button=[...document.querySelectorAll('button')].find(b=>b.textContent.trim()==='Script');if(!button)throw Error('Script tab unavailable');button.click();});
+ const editor=await page.waitForSelector('[aria-label="Numeric expression script"]',{visible:true}),uiSource='base = 80\nW = base * 2\nH = base\nD = 30';const reload=await require('./reload.cjs')(page,editor,newSource);await editor.click();await page.keyboard.down('Control');await page.keyboard.press('A');await page.keyboard.up('Control');await editor.type(uiSource);
+ assert.equal(await page.evaluate(()=>__CAD_APP.expressionService.script$.value),newSource,'typing only changes the private draft');await editor.press('Tab');await page.waitForFunction(source=>__CAD_APP.expressionService.script$.value===source,{timeout:30000},uiSource);
+ const ui=await page.evaluate(()=>capture());assert.deepEqual(ui.bounds,[[0,160],[0,80],[0,30]]);assert.equal(ui.isTyped,false);assert.equal(ui.localWidth,30);
+ const saved=await page.evaluate(async()=>{const prepared=await __CAD_APP.projectManager.prepareHostSave();if(!prepared.isCurrent())throw Error('Save became stale');return prepared.envelope;});
+ const reopenedPage=await fresh();await reopenedPage.evaluate(async snapshot=>__CAD_APP.projectManager.restoreSnapshotBytesInEmptyWorkspace(new Blob([JSON.stringify(snapshot)])),saved);
+ const reopened=await reopenedPage.evaluate(({mainId,localId})=>{const c=__CAD_APP,body=c.craftService.models$.value.find(m=>m.brepShell?.vertices),points=Array.from(body.brepShell.vertices,v=>v.point);return {source:c.expressionService.script$.value,isTyped:c.expressionService.isTyped,sketches:[mainId,localId].map(id=>({id,bytes:c.sketchStorageService.getSketchData(id)})),bounds:['x','y','z'].map(a=>[Math.min(...points.map(p=>p[a])),Math.max(...points.map(p=>p[a]))])};},fixture);
+ assert.equal(reopened.source,ui.source);assert.equal(reopened.isTyped,false);assert.deepEqual(reopened.bounds,ui.bounds);assert.deepEqual(reopened.sketches,ui.sketches);
+ const ownership=await require('./ownership.cjs').finish({page,fresh,saved});
+ return {...faults,...ownership,reload,travel:{undoBounds:travelled.undo.bounds,redoBounds:travelled.redo.bounds,exactSourceAndSketchBytes:true},ui:{source:ui.source,bounds:ui.bounds,draftWasPrivate:true},reopened:{source:reopened.source,bounds:reopened.bounds,exactSketchBytes:true,isTyped:reopened.isTyped}};
+};

@@ -1,0 +1,1253 @@
+{
+  "emptySourceWithSketchesNoop": {
+    "result": {
+      "changed": false,
+      "revision": "1:0:b1fb9324-50f2-453b-9279-1228662f34ef"
+    },
+    "source": "",
+    "sketches": 2,
+    "preserved": {
+      "streams": true,
+      "sketches": true,
+      "journal": true
+    }
+  },
+  "appSha256": "d4c1b52e5097d85b6d5b080ff9e8cf47c9342fc86552c3332e214452bcafd81d",
+  "refusals": [
+    {
+      "source": "base = (() => 75)()\nW = base * 2\nH = base\nD = 25",
+      "error": {
+        "name": "Error",
+        "code": "LEGACY_EXPRESSION_INVALID",
+        "message": "Line 1: Only numbers, variables and supported math functions are allowed.\nLine 2: Unknown math variable: base\nLine 3: Unknown math variable: base"
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "pipelineFailure": null
+    },
+    {
+      "source": "W = 1\nW = 2",
+      "error": {
+        "name": "Error",
+        "code": "LEGACY_EXPRESSION_INVALID",
+        "message": "Line 2: Variable names must be unique."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "pipelineFailure": null
+    },
+    {
+      "source": "W = H\nH = W\nD = 25",
+      "error": {
+        "name": "Error",
+        "code": "LEGACY_EXPRESSION_INVALID",
+        "message": "Line 1: Cyclic parameter dependency.\nLine 2: Invalid parameter dependency: H"
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "pipelineFailure": null
+    },
+    {
+      "source": "base = -75\nW = base * 2\nH = base\nD = 25",
+      "error": {
+        "name": "Error",
+        "code": "SOLVE_ERROR",
+        "message": "length of the segment must be a positive number."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "pipelineFailure": null
+    },
+    {
+      "source": "base = 75\nW = base * 2\nH = base\nD = -25",
+      "error": {
+        "name": "Error",
+        "code": null,
+        "message": "A valid feature and positive bounded depth are required."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "pipelineFailure": null
+    }
+  ],
+  "interrupted": [
+    {
+      "mode": "cancel",
+      "result": {
+        "ok": false,
+        "name": "AbortError",
+        "message": "Expression edit was cancelled or superseded."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "heldTask": "legacy-expression-transaction"
+    },
+    {
+      "mode": "lifetime",
+      "result": {
+        "ok": false,
+        "name": "AbortError",
+        "message": "Expression edit was cancelled or superseded."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "heldTask": "legacy-expression-transaction"
+    },
+    {
+      "mode": "table-ABA",
+      "result": {
+        "ok": false,
+        "name": "AbortError",
+        "message": "Expression edit was cancelled or superseded."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "heldTask": "legacy-expression-transaction"
+    },
+    {
+      "mode": "source-ABA",
+      "result": {
+        "ok": false,
+        "name": "AbortError",
+        "message": "Expression edit was cancelled or superseded."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "heldTask": "legacy-expression-transaction"
+    },
+    {
+      "mode": "cancel",
+      "result": {
+        "ok": false,
+        "name": "AbortError",
+        "message": "Expression edit was cancelled or superseded."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "heldTask": "rectangle-extrusion-solve"
+    }
+  ],
+  "malformed": [
+    {
+      "mode": "extra-envelope",
+      "injected": true,
+      "getterCalls": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid legacy expression worker response."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      }
+    },
+    {
+      "mode": "extra-result",
+      "injected": true,
+      "getterCalls": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid legacy expression worker response."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      }
+    },
+    {
+      "mode": "bad-number",
+      "injected": true,
+      "getterCalls": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid legacy expression worker response."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      }
+    },
+    {
+      "mode": "duplicate-name",
+      "injected": true,
+      "getterCalls": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid legacy expression worker response."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      }
+    },
+    {
+      "mode": "source-native",
+      "injected": true,
+      "getterCalls": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid legacy expression worker response."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      }
+    },
+    {
+      "mode": "source-frame",
+      "injected": true,
+      "getterCalls": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid legacy expression worker response."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      }
+    },
+    {
+      "mode": "accessor",
+      "injected": true,
+      "getterCalls": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid legacy expression worker response."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      }
+    },
+    {
+      "mode": "bad-native-json",
+      "injected": true,
+      "getterCalls": 0,
+      "error": {
+        "name": "Error",
+        "message": "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      }
+    },
+    {
+      "mode": "changed-intent",
+      "injected": true,
+      "getterCalls": 0,
+      "error": {
+        "name": "Error",
+        "message": "Legacy expression edits changed authored sketch intent."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      }
+    },
+    {
+      "mode": "bad-frame",
+      "injected": true,
+      "getterCalls": 0,
+      "error": {
+        "name": "Error",
+        "message": "Invalid legacy expression worker response."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      }
+    },
+    {
+      "mode": "changed-frame",
+      "injected": true,
+      "getterCalls": 0,
+      "error": {
+        "name": "Error",
+        "message": "The legacy sketch frame changed."
+      },
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      }
+    }
+  ],
+  "stale": {
+    "error": {
+      "name": "AbortError",
+      "message": "Expression edit was cancelled or superseded."
+    },
+    "preserved": {
+      "source": true,
+      "sketches": true,
+      "models": true,
+      "history": true,
+      "table": true,
+      "metadata": true,
+      "versions": true,
+      "journal": true
+    }
+  },
+  "cleanup": {
+    "workers": [
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "rectangle-extrusion-solve",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": null,
+        "closed": true,
+        "received": false
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": null,
+        "closed": true,
+        "received": false
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": null,
+        "closed": true,
+        "received": false
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": null,
+        "closed": true,
+        "received": false
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": null,
+        "closed": true,
+        "received": false
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "rectangle-extrusion-solve",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "rectangle-extrusion-solve",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "rectangle-extrusion-solve",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      }
+    ],
+    "usage": {
+      "owners": 1,
+      "mounts": 0,
+      "candidates": 0,
+      "accepted": 0,
+      "detached": 1,
+      "cleanupFailed": false
+    }
+  },
+  "sourceNoop": {
+    "result": {
+      "changed": false,
+      "revision": "2:4:f5c7cefa-20a1-42f2-a61c-7509e6a5d2a4"
+    },
+    "source": "base = 80\nW = base * 2\nH = base\nD = 30",
+    "sketches": 2,
+    "preserved": {
+      "streams": true,
+      "sketches": true,
+      "journal": true
+    }
+  },
+  "oldTableMismatch": {
+    "error": {
+      "name": "Error",
+      "code": "CURRENT_EXPRESSIONS_MISMATCH",
+      "message": "The accepted legacy source and table differ."
+    },
+    "preserved": {
+      "source": true,
+      "history": true,
+      "models": true,
+      "sketches": true
+    }
+  },
+  "documentReplacement": {
+    "result": {
+      "ok": false,
+      "name": "AbortError",
+      "committed": false
+    },
+    "generation": 3,
+    "empty": {
+      "source": "",
+      "models": 0,
+      "sketches": 0
+    }
+  },
+  "emptyNoop": {
+    "result": {
+      "changed": false,
+      "revision": "3:0:f72b9880-c4a5-45c9-bf01-5e7a0e9e093f"
+    },
+    "source": "",
+    "sketches": 0,
+    "preserved": {
+      "streams": true,
+      "sketches": true,
+      "journal": true
+    }
+  },
+  "sourceOnly": {
+    "result": {
+      "changed": true,
+      "revision": "3:1:f763b592-585f-47fd-9c62-e18771d40cc1",
+      "format": "legacy-numeric-v1",
+      "sketches": 0,
+      "persistence": "volatile-workspace",
+      "authoredUndo": true
+    },
+    "source": "k = 3 * 4",
+    "value": 12,
+    "models": 0,
+    "isTyped": false
+  },
+  "reentrant": [
+    {
+      "mode": "source-stream",
+      "fired": true,
+      "error": {
+        "name": "AbortError",
+        "committed": true,
+        "message": "Accepted expression edit was superseded."
+      },
+      "source": "foreign = 7",
+      "sketches": [
+        {
+          "id": "S:0/SURFACE",
+          "source": "{\"version\":3,\"objects\":[{\"id\":\"rect-0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":180,\"y\":0}}},{\"id\":\"rect-1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":180,\"y\":0},\"b\":{\"x\":180,\"y\":90}}},{\"id\":\"rect-2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":180,\"y\":90},\"b\":{\"x\":0,\"y\":90}}},{\"id\":\"rect-3\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":90},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PCoincident\",\"objects\":[\"rect-0:B\",\"rect-1:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-1:B\",\"rect-2:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-2:B\",\"rect-3:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-3:B\",\"rect-0:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-0\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-1\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-2\"],\"constants\":{\"angle\":\"180\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-3\"],\"constants\":{\"angle\":\"270\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"rect-0:A\"],\"constants\":{\"x\":\"0\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-0\"],\"constants\":{\"length\":\"W\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-1\"],\"constants\":{\"length\":\"H\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+        },
+        {
+          "id": "S:2/SURFACE",
+          "source": "{\"version\":3,\"objects\":[{\"id\":\"rect-0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":200,\"y\":0},\"b\":{\"x\":230,\"y\":0}}},{\"id\":\"rect-1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":230,\"y\":0},\"b\":{\"x\":230,\"y\":10}}},{\"id\":\"rect-2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":230,\"y\":10},\"b\":{\"x\":200,\"y\":10}}},{\"id\":\"rect-3\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":200,\"y\":10},\"b\":{\"x\":200,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PCoincident\",\"objects\":[\"rect-0:B\",\"rect-1:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-1:B\",\"rect-2:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-2:B\",\"rect-3:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-3:B\",\"rect-0:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-0\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-1\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-2\"],\"constants\":{\"angle\":\"180\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-3\"],\"constants\":{\"angle\":\"270\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"rect-0:A\"],\"constants\":{\"x\":\"200\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-0\"],\"constants\":{\"length\":\"W\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-1\"],\"constants\":{\"length\":\"LH\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"W = 30\\nLH = 5 * 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+        }
+      ],
+      "models": 2
+    },
+    {
+      "mode": "new-document",
+      "fired": true,
+      "error": {
+        "name": "AbortError",
+        "committed": true,
+        "message": "Committed model revision was superseded."
+      },
+      "source": "",
+      "sketches": [],
+      "models": 0
+    }
+  ],
+  "finalCanvas": [],
+  "reload": [
+    {
+      "mode": "mouse",
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "workersUnchanged": true,
+      "streamVersionsUnchanged": true
+    },
+    {
+      "mode": "touch",
+      "preserved": {
+        "source": true,
+        "sketches": true,
+        "models": true,
+        "history": true,
+        "table": true,
+        "metadata": true,
+        "versions": true,
+        "journal": true
+      },
+      "workersUnchanged": true,
+      "streamVersionsUnchanged": true
+    }
+  ],
+  "travel": {
+    "undoBounds": [
+      [
+        0,
+        100
+      ],
+      [
+        0,
+        50
+      ],
+      [
+        0,
+        20
+      ]
+    ],
+    "redoBounds": [
+      [
+        0,
+        150
+      ],
+      [
+        0,
+        75
+      ],
+      [
+        0,
+        25
+      ]
+    ],
+    "exactSourceAndSketchBytes": true
+  },
+  "ui": {
+    "source": "base = 80\nW = base * 2\nH = base\nD = 30",
+    "bounds": [
+      [
+        0,
+        160
+      ],
+      [
+        0,
+        80
+      ],
+      [
+        0,
+        30
+      ]
+    ],
+    "draftWasPrivate": true
+  },
+  "reopened": {
+    "source": "base = 80\nW = base * 2\nH = base\nD = 30",
+    "bounds": [
+      [
+        0,
+        160
+      ],
+      [
+        0,
+        80
+      ],
+      [
+        0,
+        30
+      ]
+    ],
+    "exactSketchBytes": true,
+    "isTyped": false
+  },
+  "source": "base = 75\nW = base * 2\nH = base\nD = 25",
+  "applied": {
+    "changed": true,
+    "revision": "2:1:90a5b725-ca9a-4dc6-8adf-f5c4bebb1afc",
+    "format": "legacy-numeric-v1",
+    "sketches": 1,
+    "persistence": "volatile-workspace",
+    "authoredUndo": true
+  },
+  "bounds": [
+    [
+      0,
+      150
+    ],
+    [
+      0,
+      75
+    ],
+    [
+      0,
+      25
+    ]
+  ],
+  "localWidth": 30,
+  "atomic": {
+    "observations": [
+      {
+        "source": "base = 50\nW = base * 2\nH = base\nD = 20",
+        "bounds": [
+          [
+            0,
+            100
+          ],
+          [
+            0,
+            50
+          ],
+          [
+            0,
+            20
+          ]
+        ],
+        "width": 100,
+        "tableW": 100
+      },
+      {
+        "source": "base = 50\nW = base * 2\nH = base\nD = 20",
+        "bounds": [
+          [
+            0,
+            100
+          ],
+          [
+            0,
+            50
+          ],
+          [
+            0,
+            20
+          ]
+        ],
+        "width": 100,
+        "tableW": 100
+      },
+      {
+        "source": "base = 50\nW = base * 2\nH = base\nD = 20",
+        "bounds": [
+          [
+            0,
+            100
+          ],
+          [
+            0,
+            50
+          ],
+          [
+            0,
+            20
+          ]
+        ],
+        "width": 100,
+        "tableW": 100
+      },
+      {
+        "source": "base = 75\nW = base * 2\nH = base\nD = 25",
+        "bounds": [
+          [
+            0,
+            150
+          ],
+          [
+            0,
+            75
+          ],
+          [
+            0,
+            25
+          ]
+        ],
+        "width": 150,
+        "tableW": 150
+      },
+      {
+        "source": "base = 75\nW = base * 2\nH = base\nD = 25",
+        "bounds": [
+          [
+            0,
+            150
+          ],
+          [
+            0,
+            75
+          ],
+          [
+            0,
+            25
+          ]
+        ],
+        "width": 150,
+        "tableW": 150
+      },
+      {
+        "source": "base = 75\nW = base * 2\nH = base\nD = 25",
+        "bounds": [
+          [
+            0,
+            150
+          ],
+          [
+            0,
+            75
+          ],
+          [
+            0,
+            25
+          ]
+        ],
+        "width": 150,
+        "tableW": 150
+      }
+    ],
+    "canvasCreations": [],
+    "workers": [
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      },
+      {
+        "url": "http://127.0.0.1:20596/static/sketch-solver.f8441f49499d2e720991.js",
+        "task": "legacy-expression-transaction",
+        "closed": true,
+        "received": true
+      }
+    ]
+  },
+  "scope": "Actual app and genuine headless Worker command; component-local Script UI, cancellation/currentness/fault refusal, authored undo/redo, native host-save preparation and fresh restore. No signed Files/public deployment claim."
+}

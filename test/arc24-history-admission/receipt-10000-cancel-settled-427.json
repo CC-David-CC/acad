@@ -1,0 +1,49 @@
+{
+  "cleanupWaitMs": 0,
+  "nativeEqual": null,
+  "snapshotError": "Document was replaced or closed.",
+  "storageEqual": true,
+  "sourceEqual": true,
+  "beforeModels": 0,
+  "afterModels": 0,
+  "beforeHistory": 0,
+  "afterHistory": 0,
+  "beforeResources": {
+    "owners": 0,
+    "mounts": 0,
+    "candidates": 0,
+    "accepted": 0,
+    "detached": 0,
+    "cleanupFailed": false
+  },
+  "afterResources": {
+    "owners": 0,
+    "mounts": 0,
+    "candidates": 0,
+    "accepted": 0,
+    "detached": 0,
+    "cleanupFailed": false
+  },
+  "workers": [
+    {
+      "closed": true,
+      "url": "http://127.0.0.1:20491/static/project-validator.3ae7f2bbbaedf25e54c3.js"
+    }
+  ],
+  "bytes": 767961,
+  "history": 10000,
+  "keys": 10001,
+  "keysMs": 0.8999998569488525,
+  "timings": {
+    "reset": 1,
+    "loadData": 26.59999990463257,
+    "stageCalls": 10000,
+    "stagedFactoryCalls": 1
+  },
+  "tasks": [],
+  "elapsedMs": 5014,
+  "maxOtherGap": 55.59999990463257,
+  "outcome": "AbortError: Project restore cancelled",
+  "otherReady": true,
+  "appHash": "a86b12ab91382d461a3ec26f04c9e56085543c317fe781c78e87ce905d9a7077"
+}

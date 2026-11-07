@@ -1,0 +1,21 @@
+{
+  "productCommit": "d0446c532",
+  "beforeCommit": "68c33b575",
+  "base": "1c4605ea6",
+  "scope": "actual Core/sketch/semantic Worker discovery; explicit model inventory fixture; error-only submit, no native publication or signed authoring claim",
+  "sourceHashes": {
+    "web/app/cad/craft/selectedProfileCommands.ts": "459acbc5fa27612228484bce7d0243328a97d6e966458d0e2a88a945a9099f00",
+    "test/selected-profile-build-choice/entry.ts": "2349cda7f400d247374f797147eddf98c6f1b3c06c2d879fe78fc5cd61f9307a",
+    "test/selected-profile-build-choice/service.test.mjs": "275549cb448b89223bf62cfac937cde961c2cef6ab1f44e6ab995ed8a0468eba",
+    "test/selected-profile-build-choice/platform.mjs": "570808a082db53d8be3df49af8bd17e51232298d2474171f018638453ea7f06d"
+  },
+  "tests": {
+    "groups": 8,
+    "pass": 8,
+    "typescriptExit": 0
+  },
+  "lifecycle": {
+    "started": 20,
+    "terminated": 20
+  }
+}

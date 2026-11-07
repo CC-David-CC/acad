@@ -1,0 +1,487 @@
+import {
+  ArcEntity,
+  Block,
+  CircleEntity,
+  DxfGlobalObject,
+  EllipseEntity,
+  InsertEntity,
+  LineEntity,
+  LWPolylineEntity,
+  Parser,
+  PointEntity,
+  PolylineEntity,
+  SplineEntity
+} from "@dxfjs/parser";
+import { Colors, DLine, DxfWriter, point3d, SplineArgs_t, SplineFlags, Units, vec3_t } from '@tarikjabiri/dxf';
+import { SketchFormat_V3 } from './io';
+import { Arc, SketchArcSerializationData } from './shapes/arc';
+import { BezierCurve } from "./shapes/bezier-curve";
+import { Circle } from './shapes/circle';
+import { AngleBetweenDimension, DiameterDimension, HDimension, LinearDimension, VDimension } from './shapes/dim';
+import { Ellipse } from './shapes/ellipse';
+import { Label } from './shapes/label';
+import { EndPoint, SketchPointSerializationData } from './shapes/point';
+import { Segment, SketchSegmentSerializationData } from './shapes/segment';
+import { SketchObject, SketchObjectSerializationData } from './shapes/sketch-object';
+import { Layer } from './viewer2d';
+import { areEqual, TOLERANCE } from 'math/equality';
+
+interface IPoint {
+  x: number,
+  y: number
+}
+
+interface SketchCircleSerializationData extends SketchObjectSerializationData {
+  c: SketchPointSerializationData;
+  r: number
+}
+
+interface SketchEllipseSerializationData extends SketchObjectSerializationData {
+  c: SketchPointSerializationData;
+  rx: number;
+  ry: number;
+  rot: number;
+}
+
+interface ITransform {
+  translation: IPoint;
+  rotation: number;
+  origin: IPoint;
+}
+
+const {PI, cos, sin, atan2} = Math
+
+export function deg(angle: number): number {
+  return (angle * 180) / PI
+}
+
+export function rad(angle: number): number {
+  return (angle * PI) / 180
+}
+
+function polar(origin: IPoint, angle: number, radius: number): IPoint {
+  return {
+    x: origin.x + radius * cos(angle),
+    y: origin.y + radius * sin(angle)
+  }
+}
+
+function angle(fp: IPoint, sp: IPoint) {
+  let angle = Math.atan2(sp.y - fp.y, sp.x - fp.x)
+  if(angle < 0) angle += 2 * Math.PI
+  return angle
+}
+
+function translate(p: IPoint, t: IPoint): IPoint {
+  return {
+    x: p.x + t.x,
+    y: p.y + t.y,
+  }
+}
+
+function rotatePoint(p: IPoint, t: ITransform): IPoint {
+  const { cos, sin } = Math;
+  const ox = p.x - t.origin.x;
+  const oy = p.y - t.origin.y;
+  return {
+    x: t.origin.x + (ox * cos(t.rotation) - oy * sin(t.rotation)),
+    y: t.origin.y + (ox * sin(t.rotation) + oy * cos(t.rotation))
+  }
+}
+
+function applyTransformPoint(p: IPoint, t: ITransform) {
+  return rotatePoint(translate(p, t.translation), t);
+}
+
+export class DxfWriterAdapter {
+  writer: DxfWriter;
+
+  constructor() {
+    this.writer = new DxfWriter();
+    this.writer.setUnits(Units.Millimeters);
+
+    // Dimensions customization
+    // I hard coded these values but I am not sure about them
+    this.writer.setVariable('$DIMTXT', { 40: 10 }); // The text height
+    this.writer.setVariable('$DIMASZ', { 40: 10 }); // Dimensioning arrow size
+
+    // Theses for preserving the look like jsketcher
+    this.writer.setVariable('$DIMDEC', { 70: 2 }); // Number of precision places displayed
+    this.writer.setVariable('$DIMTIH', { 70: 0 }); // Text inside horizontal if nonzero
+    this.writer.setVariable('$DIMTOH', { 70: 0 }); // Text outside horizontal if nonzero
+    // Do not force text inside extensions
+    this.writer.setVariable('$DIMTIX', { 70: 0 }); // Force text inside extensions if nonzero
+    this.writer.setVariable('$DIMATFIT', { 70: 0 }); // Controls dimension text and arrow placement
+
+    // For more customization
+    // this.writer.setVariable('$DIMEXE', { 40: 10 }); // Extension line extension
+    // this.writer.setVariable('$DIMCLRD', { 70: Colors.Yellow }); // Dimension line color
+    // this.writer.setVariable('$DIMCLRE', { 70: Colors.Red }); // Dimension extension line color
+    // this.writer.setVariable('$DIMCLRT', { 70: Colors.Green }); // Dimension text color
+    // this.writer.setVariable('$DIMTIX', { 70: 1 }); // Force text inside extensions if nonzero
+  }
+
+  private _point(shape: EndPoint) {
+    this.writer.addPoint(shape.x, shape.y, 0);
+  }
+
+  private _segment(shape: Segment) {
+    this.writer.addLine(point3d(shape.a.x, shape.a.y), point3d(shape.b.x, shape.b.y));
+  }
+
+  private _arc(shape: Arc) {
+    // Match Arc.drawImpl's full-sweep branch, including its coordinate tolerance.
+    // A DXF ARC start/end pair does not encode this full turn. Emit CIRCLE
+    // without changing the native Arc or its endpoints.
+    if (areEqual(shape.a.x, shape.b.x, TOLERANCE) && areEqual(shape.a.y, shape.b.y, TOLERANCE)) {
+      this.writer.addCircle(point3d(shape.c.x, shape.c.y), shape.r.get());
+      return;
+    }
+    this.writer.addArc(
+      point3d(shape.c.x, shape.c.y),
+      shape.r.get(),
+      deg(shape.getStartAngle()),
+      deg(shape.getEndAngle())
+    );
+  }
+
+  private _circle(shape: Circle) {
+    this.writer.addCircle(point3d(shape.c.x, shape.c.y), shape.r.get());
+  }
+
+  private _ellipse(shape: Ellipse) {
+    const swapped = shape.radiusY > shape.radiusX;
+    const angle = shape.rotation + (swapped ? Math.PI / 2 : 0);
+    const major = swapped ? shape.radiusY : shape.radiusX;
+    const minor = swapped ? shape.radiusX : shape.radiusY;
+    const majorX = Math.cos(angle) * major;
+    const majorY = Math.sin(angle) * major;
+    this.writer.addEllipse(
+      point3d(shape.centerX, shape.centerY),
+      point3d(majorX, majorY),
+      minor / major,
+      0,
+      2 * Math.PI
+    );
+  }
+
+  private _bezier(shape: BezierCurve) {
+    const controlPoints: vec3_t[] = [
+      point3d(shape.p0.x, shape.p0.y),
+      point3d(shape.p1.x, shape.p1.y),
+      point3d(shape.p2.x, shape.p2.y),
+      point3d(shape.p3.x, shape.p3.y),
+    ];
+    const splineArgs: SplineArgs_t = {
+      controlPoints,
+      flags: SplineFlags.Periodic,
+    };
+    this.writer.addSpline(splineArgs);
+  }
+
+  private _label(shape: Label) {
+    const m = shape.assignedObject.labelCenter;
+    if (!m) return;
+    const height = shape.textHelper.fontSize;
+    const h = shape.textHelper.textMetrics.width / 2;
+    const lx = m.x - h + shape.offsetX;
+    const ly = m.y + shape.marginOffset + shape.offsetY;
+    this.writer.addText(point3d(lx, ly), height, shape.text);
+  }
+
+  private _vdim(shape: VDimension) {
+    this.writer.addLinearDim(point3d(shape.a.x, shape.a.y), point3d(shape.b.x, shape.b.y), {
+      angle: 90, // Make it vertical
+      offset: -shape.offset,
+    });
+  }
+
+  private _hdim(shape: HDimension) {
+    this.writer.addLinearDim(point3d(shape.a.x, shape.a.y), point3d(shape.b.x, shape.b.y), { offset: -shape.offset });
+  }
+
+  private _linearDim(shape: LinearDimension) {
+    this.writer.addAlignedDim(point3d(shape.a.x, shape.a.y), point3d(shape.b.x, shape.b.y), { offset: shape.offset });
+  }
+
+  private _ddim(shape: DiameterDimension) {
+    // I remarked that the DiameterDimension looks like Radius dimension so I used RadialDim
+    const radius = shape.obj.distanceA ? shape.obj.distanceA() : shape.obj.r.get();
+    const x = shape.obj.c.x + radius * Math.cos(shape.angle);
+    const y = shape.obj.c.y + radius * Math.sin(shape.angle);
+    this.writer.addRadialDim(point3d(x, y), point3d(shape.obj.c.x, shape.obj.c.y));
+  }
+
+  private _bwdim(shape: AngleBetweenDimension) {
+    // This is not working as expected.
+    const s: DLine = {
+      start: point3d(shape.a.a.x, shape.a.a.y),
+      end: point3d(shape.a.b.x, shape.a.b.y),
+    };
+    const f: DLine = {
+      start: point3d(shape.b.a.x, shape.b.a.y),
+      end: point3d(shape.b.b.x, shape.b.b.y),
+    };
+    const c = point3d(shape.a.a.x, shape.a.a.y);
+    const offset = shape.offset;
+    const dyf = f.end.y - c.y;
+    const dys = s.end.y - c.y;
+    const df = Math.sqrt(Math.pow(f.end.x - c.x, 2) + Math.pow(f.end.y - c.y, 2));
+    const ds = Math.sqrt(Math.pow(s.end.x - c.x, 2) + Math.pow(s.end.y - c.y, 2));
+    const alphaf = Math.acos(dyf / df);
+    const alphas = Math.acos(dys / ds);
+    const alpham = Math.abs(alphaf - alphas) / 2 + (alphaf > alphas ? alphas : alphaf);
+    const xm = c.x + offset*Math.cos(alpham)
+    const ym = c.y + offset*Math.sin(alpham)
+    this.writer.addAngularLinesDim(f, s, point3d(xm, ym));
+  }
+
+  export(layers: Layer<SketchObject>[]) {
+    layers.forEach(layer => {
+      // this will prevent addLayer from throwing.
+      if (!this.writer.layer(layer.name))
+        this.writer.addLayer(layer.name, Colors.Black);
+      this.writer.setCurrentLayerName(layer.name);
+
+      layer.objects.forEach(shape => {
+        if (shape instanceof EndPoint) this._point(shape);
+        else if (shape instanceof Segment) this._segment(shape);
+        else if (shape instanceof Arc) this._arc(shape);
+        else if (shape instanceof Circle) this._circle(shape);
+        else if (shape instanceof Ellipse) this._ellipse(shape);
+        else if (shape instanceof BezierCurve) this._bezier(shape);
+        else if (shape instanceof Label) this._label(shape);
+        else if (shape instanceof VDimension) this._vdim(shape);
+        else if (shape instanceof HDimension) this._hdim(shape);
+        else if (shape instanceof LinearDimension) this._linearDim(shape);
+        else if (shape instanceof DiameterDimension) this._ddim(shape);
+        else if (shape instanceof AngleBetweenDimension) this._bwdim(shape);
+      });
+    });
+  }
+
+  stringify(): string {
+    // reset the current layer to 0, because its preserved in the dxf.
+    this.writer.setZeroLayerAsCurrent();
+    return this.writer.stringify();
+  }
+}
+
+export class DxfParserAdapter {
+  private static _seed = 0; // Used as ids for the shapes.
+
+  private assertPlanar(...values: (number | undefined | null)[]) {
+    if (values.some(value => value != null && (!Number.isFinite(value) || value !== 0))) {
+      throw new Error('3D DXF geometry cannot be imported into a 2D sketch.');
+    }
+  }
+
+  // The parser discards unknown entities and extrusion directions. Inspect
+  // records first to avoid silently changing the drawing. Walk incrementally
+  // so the check does not duplicate a large file in memory.
+  private assertSupportedGeometry(text: string) {
+    const supported = new Set(['LINE', 'ARC', 'CIRCLE', 'ELLIPSE', 'POINT', 'LWPOLYLINE', 'POLYLINE', 'VERTEX', 'INSERT']);
+    const records = new Set([...supported, 'SPLINE', 'SEQEND', 'BLOCK', 'ENDBLK']);
+    let offset = 0, record = '', section = '';
+    const nextLine = () => {
+      if (offset >= text.length) return null;
+      const end = text.indexOf('\n', offset);
+      const line = text.slice(offset, end < 0 ? text.length : end).trim();
+      offset = end < 0 ? text.length : end + 1;
+      return line;
+    };
+    for (;;) {
+      const code = nextLine(), value = nextLine();
+      if (code === null || value === null) break;
+      if (code === '0') {
+        record = value.toUpperCase();
+        if (record === 'ENDSEC') section = '';
+        else if ((section === 'ENTITIES' || section === 'BLOCKS') && !records.has(record)) {
+          throw new Error('Unsupported DXF entity type: ' + record);
+        }
+      } else if (code === '2' && record === 'SECTION') section = value.toUpperCase();
+      else if (supported.has(record) && (code === '210' || code === '220' || code === '230')) {
+        const normal = Number(value), expected = code === '230' ? 1 : 0;
+        if (!value || !Number.isFinite(normal) || normal !== expected) {
+          throw new Error('3D DXF extrusion directions cannot be imported into a 2D sketch.');
+        }
+      }
+    }
+  }
+
+  private _createSketchObject(type: string, data: object) {
+    return {
+      id: (DxfParserAdapter._seed++).toString(),
+      type, role: null, stage: 0, data
+    }
+  }
+
+  private _createSketchFormat(obj: DxfGlobalObject): SketchFormat_V3 {
+    DxfParserAdapter._seed = 0;
+    const sketch: SketchFormat_V3 = {
+      version: 3, objects: [], dimensions: [], labels: [],
+      stages: [], constants: null, metadata: {}
+    };
+    const transform: ITransform = {
+      translation: { x: 0, y: 0 },
+      rotation: 0,
+      origin: { x: 0, y: 0 }
+    }
+
+    this.handleEntities(obj.entities, sketch, transform)
+    obj.entities.inserts.forEach(i => this._insert(obj.blocks, i, sketch, transform, []));
+
+    return sketch;
+  }
+
+  private handleEntities(entities: Omit<DxfGlobalObject["entities"], "inserts">, sketch: SketchFormat_V3, t: ITransform) {
+    for (const key of ['face3ds', 'solid3ds', 'solids', 'texts']) {
+      if (Array.isArray((entities as any)[key]) && (entities as any)[key].length) {
+        throw new Error('Unsupported DXF entity type: ' + key);
+      }
+    }
+    entities.arcs.forEach(a => sketch.objects.push(this._arc(a, t)));
+    entities.circles.forEach(c => sketch.objects.push(this._circle(c, t)));
+    entities.ellipses.forEach(e => sketch.objects.push(this._ellipse(e, t)));
+    entities.lines.forEach(l => sketch.objects.push(this._segment(l, t)));
+    entities.points.forEach(p => sketch.objects.push(this._point(p, t)));
+    entities.lwPolylines.forEach(p => sketch.objects.push(...this._lwPolyline(p, t)));
+    entities.polylines.forEach(p => sketch.objects.push(...this._polyline(p, t)));
+    entities.splines.forEach(s => this._spline(s, t));
+  }
+
+  private _insert(blocks: Block[], insert: InsertEntity, sketch: SketchFormat_V3, parent: ITransform, ancestors: string[]) {
+    const block = blocks.find(b => b.name === insert.blockName || b.name2 === insert.blockName);
+    if (!block) throw new Error('DXF insert references an unknown block: ' + insert.blockName);
+    this.assertPlanar(insert.z, block.basePointZ);
+    if (ancestors.includes(insert.blockName) || ancestors.length >= 32) throw new Error('Recursive or excessively nested DXF block');
+    if ((insert.xScale != null && insert.xScale !== 1) || (insert.yScale != null && insert.yScale !== 1) ||
+        (insert.zScale != null && insert.zScale !== 1) || (insert.columnCount != null && insert.columnCount > 1) ||
+        (insert.rowCount != null && insert.rowCount > 1)) {
+      throw new Error('Scaled and array DXF block inserts are not supported');
+    }
+    const rotation = parent.rotation + rad(insert.rotation ?? 0);
+    const insertion = applyTransformPoint({x: insert.x ?? 0, y: insert.y ?? 0}, parent);
+    // Convert the world insertion point back into the new frame so that
+    // applying this rotation maps the block base point to the insertion.
+    const c = cos(rotation), si = sin(rotation);
+    const transform: ITransform = {
+      rotation,
+      origin: {x: 0, y: 0},
+      translation: {
+        x: c * insertion.x + si * insertion.y - (block.basePointX ?? 0),
+        y: -si * insertion.x + c * insertion.y - (block.basePointY ?? 0)
+      }
+    };
+    this.handleEntities(block.entities, sketch, transform);
+    const path = [...ancestors, insert.blockName];
+    block.entities.inserts.forEach(child => this._insert(blocks, child, sketch, transform, path));
+  }
+
+  private _spline(_s: SplineEntity, _t: ITransform) {
+    // Control points are not generally independent cubic Bezier segments.
+    // Refuse unsupported geometry rather than silently changing its shape.
+    throw new Error('DXF spline import is not yet supported');
+  }
+
+  private _polyline(p: PolylineEntity, t: ITransform) {
+    this.assertPlanar(p.z, p.thickness);
+    p.vertices.forEach(v => this.assertPlanar(v.z));
+    if (p.flag & (8 | 16 | 64)) throw new Error('3D DXF polylines cannot be imported into a 2D sketch.');
+    return this._lwPolyline(p, t);
+  }
+
+  private _lwPolyline(p: LWPolylineEntity | PolylineEntity, t: ITransform) {
+    if ('elevation' in p) this.assertPlanar(p.elevation, p.thickness);
+    const objects = [];
+    for (let i = 0; i < p.vertices.length;) {
+      const curr = p.vertices[i];
+      let next = p.vertices[++i];
+
+      if(p.flag & 1 && !next) {
+        next = p.vertices[0];
+      }
+      if(curr && next) {
+        if(!curr.bulge || curr.bulge === 0) {
+          const data: SketchSegmentSerializationData = {
+            a: applyTransformPoint({ x: curr.x, y: curr.y }, t),
+            b: applyTransformPoint({x: next.x, y: next.y}, t)
+          };
+          objects.push(this._createSketchObject(Segment.prototype.TYPE, data));
+        } else {
+          const beta = angle(curr, next);
+          const theta = 4 * Math.atan(curr.bulge);
+          const radius = (Math.hypot(curr.x - next.x, curr.y - next.y) / 2) / Math.sin(theta / 2);
+          const center = polar(curr, beta + (Math.PI - theta) / 2, radius);
+          const data: SketchArcSerializationData =  {
+            a: applyTransformPoint(curr.bulge > 0 ? {x: curr.x, y: curr.y} : {x: next.x, y: next.y}, t),
+            b: applyTransformPoint(curr.bulge > 0 ? {x: next.x, y: next.y} : {x: curr.x, y: curr.y}, t),
+            c: applyTransformPoint(center, t),
+          };
+          objects.push(this._createSketchObject(Arc.prototype.TYPE, data));
+        }
+      }
+    }
+    return objects;
+  }
+
+  private _arc(a: ArcEntity, t: ITransform) {
+    this.assertPlanar(a.centerZ, a.thickness);
+    const center: IPoint = {x: a.centerX, y: a.centerY};
+    const data: SketchArcSerializationData =  {
+      a: applyTransformPoint(polar(center, rad(a.startAngle), a.radius), t),
+      b: applyTransformPoint(polar(center, rad(a.endAngle), a.radius), t),
+      c: applyTransformPoint(center, t),
+    };
+    return this._createSketchObject(Arc.prototype.TYPE, data);
+  }
+
+  private _circle(c: CircleEntity, t: ITransform) {
+    this.assertPlanar(c.centerZ, c.thickness);
+    const data: SketchCircleSerializationData = {
+      c: applyTransformPoint({ x: c.centerX, y: c.centerY }, t),
+      r: c.radius
+    };
+    return this._createSketchObject(Circle.prototype.TYPE, data);
+  }
+
+  private _ellipse(e: EllipseEntity, t: ITransform) {
+    this.assertPlanar(e.centerZ, e.majorAxisZ);
+    if (e.startParameter != null && e.endParameter != null &&
+        Math.abs(Math.abs(e.endParameter - e.startParameter) - 2 * Math.PI) > 1e-8) {
+      throw new Error('Partial DXF ellipses are not yet supported');
+    }
+    const c: IPoint = applyTransformPoint({x: e.centerX, y: e.centerY}, t);
+    let rot = atan2(e.majorAxisY, e.majorAxisX);
+    const rx = Math.hypot(e.majorAxisX, e.majorAxisY);
+    const ry = e.ratioOfMinorAxisToMajorAxis * rx;
+    rot += t.rotation;
+    const data: SketchEllipseSerializationData = { c, rx, ry, rot };
+    return this._createSketchObject(Ellipse.prototype.TYPE, data);
+  }
+
+  private _segment(l: LineEntity, t: ITransform) {
+    this.assertPlanar(l.startZ, l.endZ, l.thickness);
+    const data: SketchSegmentSerializationData = {
+      a: applyTransformPoint({x: l.startX, y: l.startY}, t),
+      b: applyTransformPoint({x: l.endX, y: l.endY}, t)
+    };
+    return this._createSketchObject(Segment.prototype.TYPE, data);
+  }
+
+  private _point(p: PointEntity, t: ITransform) {
+    this.assertPlanar(p.z, p.thickness);
+    const data: SketchPointSerializationData = applyTransformPoint(p, t);
+    return this._createSketchObject(EndPoint.prototype.TYPE, data);
+  }
+
+  parse(dxfString: string): Promise<SketchFormat_V3> {
+    return new Promise((resolve, reject) => {
+      this.assertSupportedGeometry(dxfString);
+      new Parser()
+        .parse(dxfString)
+        .then(dxfObject =>  resolve(this._createSketchFormat(dxfObject)))
+        .catch(error => reject(error));
+    });
+  }
+}

@@ -1,0 +1,17 @@
+# Sweep Worker bootstrap staging repair
+
+The reviewed Worker source54ce073 changed the retained bootstrap hash from4e7072… toaa7f6433…. The normal combined build at11558ed2a stopped in `prepare-selected-profile-assets.cjs`; root dce53517e changes only that fixed hash. Its next normal build reached `prepare-prism-assets.cjs` and stopped in `embedded-oci-worker.cjs` with the same stale hash; root9c6dc2eb2 changes the second fixed hash. The actual second failure log is retained as `evidence/root-r2-before.log`. The first root build's stdout file was empty because the error was on stderr; its original tool failure remains parent evidence. Our isolated old-pin control independently reproduces the selected stager mismatch and retains exact stderr without claiming to be that original build.
+
+Six ordinary sequential controls pass on R730 using actual retained JS/WASM cbd49d63…/a81af0b7… and actual legacy OCI glue a84b3190…. The test copies seven actual source files/native inputs into temporary directories, never modifying retained caches or root build trees. No native modeling, Worker/browser execution, service/public deployment, or cancelled filesystem-race/security probe is involved. `evidence/receipt.json` records source/native hashes, five emitted resource hashes, refusal stderr, prior output fingerprints and cleanup.
+
+```sh
+CODI_RETAINED_SELECTED_NATIVE=/mnt/data10tb/codi-selected-profile-static-runtime-20261106/.build/selected-profile-assets \
+CODI_RETAINED_PRISM_ASSETS=/mnt/data10tb/codi-polygon-combined-core-qualified-app-20261106-r1/.build/prism-assets \
+  /mnt/data10tb/codi-3mf-qualification-SrUmue/node/bin/node --test test/selected-profile-sweep-staging/staging.test.cjs
+```
+
+Reviewed inputs emit exactly native JS, WASM, embedded Worker, selectedProfilePlan.mjs and exactMeshVolume.mjs, with an identical second staging. The old selected pin refuses before output creation. Unreviewed bootstrap/native glue/WASM refuse while every prior selected-output byte/name remains intact. The pure legacy embedded OCI helper accepts real retained glue reproducibly and refuses the old bootstrap/unreviewed bootstrap/glue before returning a Worker. This helper is pure; it has no file publication path.
+
+B01 is a separate **confirmed full-prism staging defect**, not a passed preservation claim. `prism-prior-output.cjs` copies the actual full prism script plus required loader source into an owned temporary root, writes an existing output marker, then deliberately omits the first ordinary source dependency. The actual script fails ENOENT after deleting the marker/output contents. `evidence/prism-prior-output.json` records actual source hashes, stderr, before/after and CONFIRMED_B01_DEFECT. Reproduce with `node test/selected-profile-sweep-staging/prism-prior-output.cjs`; exit0 means the counterexample was reproduced, not that safe staging was qualified. No cache/native dependency is reached in this deliberately early missing-source control. The source also deletes output before later bootstrap checks. A future atomic full-prism staging repair is separate; current combined qualification uses fresh task-owned build directories. No product repair is made here.
+
+R730 test inputs/source at `/mnt/data10tb/codi-selected-profile-sweep-staging-20261107-r1`. Retained native/source hashes are rechecked after execution; temporary native copies are removed. Only source, logs and compact JSON receipts belong in Git; native artifacts stay outside it.

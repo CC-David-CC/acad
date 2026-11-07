@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "source": "997df3dbb97b83d79b65db62f191c45c2f23b4ea",
+  "appSha256": "9993b01af9f49ca29aa2eceaa1701489aef01c992ee3a3b38a1a0799f87a9c28",
+  "workerSha256": "3211e4c5f5b51dc6b19dbce0e29c4cd1dbdb15ce7bbc89c075d5973b3bf7bc87",
+  "cases": [
+    {
+      "id": "primitive-projections",
+      "status": "pass",
+      "actual": "Full app Point/Segment/Circle/Arc projections, stable IDs and native fresh",
+      "evidence": [
+        "full-app-997.json"
+      ]
+    },
+    {
+      "id": "queued-intent",
+      "status": "pass",
+      "actual": "Deep public input capture retains Point7,8 despite caller mutation",
+      "evidence": [
+        "full-app-997.json"
+      ]
+    },
+    {
+      "id": "domain-rejection",
+      "status": "pass",
+      "actual": "DOMAIN zero segment leaves source/native/history/journal/model unchanged",
+      "evidence": [
+        "full-app-997.json"
+      ]
+    },
+    {
+      "id": "common-journal",
+      "status": "pass",
+      "actual": "Unconsumed/consumed exact-byte sketch undo and redo",
+      "evidence": [
+        "full-app-997.json"
+      ]
+    },
+    {
+      "id": "consumed-auxiliary",
+      "status": "pass",
+      "actual": "Point and crossing construction preserve100x50x20 geometry/region",
+      "evidence": [
+        "full-app-997.json"
+      ]
+    },
+    {
+      "id": "consumed-circle-rejection",
+      "status": "pass",
+      "actual": "INVALID_PARAMS ordinary inner circle, exact atomic preservation",
+      "evidence": [
+        "full-app-997.json"
+      ]
+    },
+    {
+      "id": "host-close",
+      "status": "pass",
+      "actual": "Genuine held Worker reply + host abort + manually forwarded genuine late reply",
+      "evidence": [
+        "full-app-997.json"
+      ]
+    },
+    {
+      "id": "planes",
+      "status": "pass",
+      "actual": "XY/XZ/ZY inspected/native/MFace frames and Point GPU/world/native fresh",
+      "evidence": [
+        "boundaries-997.json"
+      ]
+    },
+    {
+      "id": "box-ancestry",
+      "status": "pass",
+      "actual": "Actual OCC box ancestry refuses before Worker dispatch, native/model unchanged",
+      "evidence": [
+        "boundaries-997.json"
+      ]
+    }
+  ],
+  "scope": "actual full app public craft API; no signed desktop claim; host-close late-reply delivery timing injected"
+}

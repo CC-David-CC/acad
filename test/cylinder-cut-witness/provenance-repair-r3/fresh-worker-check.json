@@ -1,0 +1,263 @@
+{
+  "status": "PASS",
+  "scope": "fresh Native cylinder/edited plate/rotated frame records consumed by genuine Node Worker; not production Worker or linked drawing",
+  "nativeReceiptSHA": "77d9b823536463401b79ae785c4495b68d7e049072630ff580bc334b339e6435",
+  "runtimePins": {
+    "base": "9ff18a9e58d6fcd7aeabd14f36629588ff4591a9",
+    "sourceCapture": "0e429519e97a29e991ec4aa42b5ea6ddab24ddbb",
+    "jsSha256": "2914d9598842df0e0a1f1ba228728ea05b338d84454931d71b75dcd6e5a936bf",
+    "wasmSha256": "abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc",
+    "runtimeBytes": {
+      "main.js": 313795,
+      "main.wasm": 36011152
+    },
+    "sourceFiles": {
+      "/mnt/data10tb/codi-occ-owned-manufacturing-mesh-20261107/shape-io/main.cpp": "e112df2976200b4edebe798f2f211762ecc6de5146eeda40aa127a4f4deaaca8",
+      "/mnt/data10tb/codi-occ-owned-manufacturing-mesh-20261107/shape-io/ownedManufacturingMeshV1.hpp": "600a5caf087ac408fd7718928e48cc77b8d954ba6410588e888e6b8e72e685d1",
+      "/mnt/data10tb/codi-occ-owned-manufacturing-mesh-20261107/shape-io/ownedManufacturingMeshFFIV1.hpp": "1408d3e410cc57e52799f85248a0b436e959397cf90c735d56837e0b7a1fafe0",
+      "/mnt/data10tb/codi-occ-owned-manufacturing-mesh-20261107/shape-io/ownedStepExportV1.hpp": "f53d1f0626aa720c60b666ff077d60c1c1f05eb3800a9745e0b34d1e2d93c4a4",
+      "/mnt/data10tb/codi-occ-owned-manufacturing-mesh-20261107/shape-io/ownedStepExportFFIV1.hpp": "80fed2667b6b6b15d06fbb0a5e8b1d35855d4ec49fc758e8c6cb97547ffb5461",
+      "/mnt/data10tb/codi-occ-owned-manufacturing-mesh-20261107/shape-io/ownedOrthographicReadV1.hpp": "4cd54defccceb55b665e8edff77efddda19bad09ff6ea8e31d6fe5824c9be856",
+      "/mnt/data10tb/codi-occ-owned-manufacturing-mesh-20261107/shape-io/ownedOrthographicReadFFIV1.hpp": "3f97e4d5e31317e41ea34cee1159507e49728b1904c3242ea671e89eba7e21a6",
+      "/mnt/data10tb/codi-occ-owned-manufacturing-mesh-20261107/scripts/build-selected-profile-v2.sh": "9abb996bb9bb8cac31580c08867ad2ec9a062e65ca3b50c91e07bc93cb45f878"
+    },
+    "sourceBeforeAfterIdentical": true,
+    "scope": "Actual full native main; no registered app/runtime/default promotion",
+    "compiledInputsIdenticalToCommit": true,
+    "probeSha256": "f04dd6c227c5da9c6324c4683a2ad8a504b5238e061adbe994200b25ae326214",
+    "runnerSha256": "037eef144b52fab9f1206a5b798bc6495e50aea6817429547badc7a5e35659ec"
+  },
+  "sourcePins": {
+    "../../modules/engine/mount/cylinderCutWitness.mjs": "0398b807d077248eb7277b88d8cc5efc8b631fd93097e63cb969dcf7824cdceb",
+    "../../modules/engine/mount/ownedBooleanContract.mjs": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+    "../../modules/engine/mount/ownedTopologyContract.mjs": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+    "../../modules/engine/mount/polygonProfilePlan.mjs": "a0419bce6708ab912f3ae18b2916f63673f76d84729bd3d3362b4fcf6418f3ed",
+    "../../modules/engine/mount/selectedProfilePlan.mjs": "cb19aa85d723fef1395a4b06d85f9ddacf2b2381ded879ab863793fd316a45e8",
+    "../../modules/engine/mount/booleanSelectionClaims.mjs": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+    "../../modules/engine/extrusion/simplePolygon.mjs": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+    "./native-probe.cjs": "f04dd6c227c5da9c6324c4683a2ad8a504b5238e061adbe994200b25ae326214",
+    "./fresh-worker.mjs": "f899f77c5dfb54a6c5f61a6c4dd179ebf1955ec821ac9327083067f20465b065",
+    "./check-fresh.mjs": "fac6e9c3e6d7da370fe9d2161c94ef52cb24a171be7371a58e2eb3d404514fda"
+  },
+  "sourceHashesAfter": {
+    "../../modules/engine/mount/cylinderCutWitness.mjs": "0398b807d077248eb7277b88d8cc5efc8b631fd93097e63cb969dcf7824cdceb",
+    "../../modules/engine/mount/ownedBooleanContract.mjs": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+    "../../modules/engine/mount/ownedTopologyContract.mjs": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+    "../../modules/engine/mount/polygonProfilePlan.mjs": "a0419bce6708ab912f3ae18b2916f63673f76d84729bd3d3362b4fcf6418f3ed",
+    "../../modules/engine/mount/selectedProfilePlan.mjs": "cb19aa85d723fef1395a4b06d85f9ddacf2b2381ded879ab863793fd316a45e8",
+    "../../modules/engine/mount/booleanSelectionClaims.mjs": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+    "../../modules/engine/extrusion/simplePolygon.mjs": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+    "./native-probe.cjs": "f04dd6c227c5da9c6324c4683a2ad8a504b5238e061adbe994200b25ae326214",
+    "./fresh-worker.mjs": "f899f77c5dfb54a6c5f61a6c4dd179ebf1955ec821ac9327083067f20465b065",
+    "./check-fresh.mjs": "fac6e9c3e6d7da370fe9d2161c94ef52cb24a171be7371a58e2eb3d404514fda"
+  },
+  "results": [
+    {
+      "name": "plate100",
+      "expected": {
+        "w": 100,
+        "h": 50,
+        "d": 20,
+        "diameter": 10,
+        "axisPoint": [
+          50,
+          25,
+          0
+        ]
+      },
+      "witness": {
+        "version": 1,
+        "unit": "millimeter",
+        "scope": "response-local",
+        "persistentIds": false,
+        "sourceCurveId": "plate100-circle",
+        "sourceFace": 1,
+        "resultFace": 7,
+        "cylinder": {
+          "origin": [
+            50,
+            25,
+            -1
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "radius": 5
+        },
+        "diameter": 10,
+        "method": "native-prism-cut-b-ancestry"
+      },
+      "nativeVolume": 98429.20367320512,
+      "points": [
+        {
+          "point": [
+            50,
+            25,
+            10
+          ],
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "point": [
+            56,
+            25,
+            10
+          ],
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "point": [
+            0,
+            25,
+            10
+          ],
+          "expected": 2,
+          "actual": 2
+        }
+      ],
+      "inputUnchanged": true
+    },
+    {
+      "name": "plate150",
+      "expected": {
+        "w": 150,
+        "h": 30,
+        "d": 25,
+        "diameter": 14,
+        "axisPoint": [
+          75,
+          15,
+          0
+        ]
+      },
+      "witness": {
+        "version": 1,
+        "unit": "millimeter",
+        "scope": "response-local",
+        "persistentIds": false,
+        "sourceCurveId": "plate150-circle",
+        "sourceFace": 1,
+        "resultFace": 7,
+        "cylinder": {
+          "origin": [
+            75,
+            15,
+            -1
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "radius": 7
+        },
+        "diameter": 14,
+        "method": "native-prism-cut-b-ancestry"
+      },
+      "nativeVolume": 108651.54899935253,
+      "points": [
+        {
+          "point": [
+            75,
+            15,
+            12.5
+          ],
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "point": [
+            83,
+            15,
+            12.5
+          ],
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "point": [
+            0,
+            15,
+            12.5
+          ],
+          "expected": 2,
+          "actual": 2
+        }
+      ],
+      "inputUnchanged": true
+    },
+    {
+      "name": "rotated",
+      "expected": {
+        "w": 100,
+        "h": 50,
+        "d": 20,
+        "diameter": 10,
+        "axisPoint": [
+          10,
+          70,
+          55
+        ]
+      },
+      "witness": {
+        "version": 1,
+        "unit": "millimeter",
+        "scope": "response-local",
+        "persistentIds": false,
+        "sourceCurveId": "rotated-circle",
+        "sourceFace": 1,
+        "resultFace": 7,
+        "cylinder": {
+          "origin": [
+            9,
+            70,
+            55
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "radius": 5
+        },
+        "diameter": 10,
+        "method": "native-prism-cut-b-ancestry"
+      },
+      "nativeVolume": 98429.20367320512,
+      "points": [
+        {
+          "point": [
+            20,
+            70,
+            55
+          ],
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "point": [
+            20,
+            76,
+            55
+          ],
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "point": [
+            20,
+            20,
+            55
+          ],
+          "expected": 2,
+          "actual": 2
+        }
+      ],
+      "inputUnchanged": true
+    }
+  ]
+}

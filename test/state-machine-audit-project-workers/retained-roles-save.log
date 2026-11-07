@@ -1,0 +1,17 @@
+✔ binds the authored roles independently of body order (4.440826ms)
+✔ rejects stale metadata, missing/duplicate bodies and conflicting identities (1.067689ms)
+✔ reassignment preserves authored object name, region identity and transform (0.964858ms)
+✔ v2 keeps label as a distinct material region inside the lid object (0.527945ms)
+✔ v2 region identity and authored placement survive reassignment (0.483844ms)
+✔ v2 refuses missing label, wrong version identity and duplicate roles without mutation (1.261351ms)
+✔ worker save uses legacy-compatible revision and snapshot digest with one capture (39.152661ms)
+✔ stale generation and cancellation cannot publish (12.964196ms)
+✔ bounded snapshots and stale material revision fail closed (11.804186ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 141.868741

@@ -1,0 +1,12 @@
+import {Worker} from 'node:worker_threads';
+import {createHash} from 'node:crypto';
+import {readFileSync,writeFileSync} from 'node:fs';
+const paths=['modules/engine/extrusion/simplePolygon.mjs','modules/engine/mount/polygonProfilePlan.mjs','modules/engine/mount/selectedProfilePlan.mjs'];
+const source=Object.fromEntries(paths.map(p=>[p,createHash('sha256').update(readFileSync(new URL('../../'+p,import.meta.url))).digest('hex')]));
+const receipt=await new Promise((resolve,reject)=>{const w=new Worker(new URL('./worker.mjs',import.meta.url));let result;w.on('message',r=>result=r);w.on('error',reject);w.on('exit',n=>n===0&&result?resolve(result):reject(Error('Worker failed '+n)));});
+const reviewPaths=['fixtures.py','fixtures.json','worker.mjs','run.mjs'];
+const reviewSource=Object.fromEntries(reviewPaths.map(p=>[p,createHash('sha256').update(readFileSync(new URL('./'+p,import.meta.url))).digest('hex')]));
+const out={capturedAt:new Date().toISOString(),node:process.version,source,reviewSource,...receipt};
+if(process.argv[2])writeFileSync(process.argv[2],JSON.stringify(out,null,2)+'\n');
+console.log(JSON.stringify({status:out.status,rows:out.rows.length,failed:out.rows.filter(r=>r.status!=='PASS')},null,2));
+if(out.status!=='PASS')process.exitCode=1;

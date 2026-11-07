@@ -1,0 +1,23 @@
+{
+  "format": "codi-public-region-worker-counterexample/1",
+  "sourceBase": "6170a501616ea711df242d7c86331cfe53ff864a",
+  "scope": "Actual public authoring/discovery/feature request; passive model/source oracles. No source seeds, private operation dispatch, builds, signed Files or native suite reruns.",
+  "result": "FAIL",
+  "rows": [],
+  "runtime": {
+    "base": "http://127.0.0.1:20645/",
+    "sha256": "655c7d15f09eb5a041911baeb6c079e2c52fd11a9e0fd242de81918171bf26dd",
+    "bytes": 32786060
+  },
+  "referenceRuntime": {
+    "base": "http://127.0.0.1:20630/",
+    "sha256": "91c921bb4b4747a0e04604e01314145d61325013b448bc9330d9d04fba63811e",
+    "bytes": 32791544
+  },
+  "browserVersion": "Chrome/155.0.8059.79",
+  "error": {
+    "name": "Error",
+    "message": "Candidate cleanup did not settle",
+    "stack": "Error: Candidate cleanup did not settle\n    at evaluate (evaluate at run (/tmp/codi-public-region-worker-counterexample-20261106/test/public-region-worker-contract/browser.cjs:35:26), <anonymous>:18:152)\n    at #evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/ExecutionContext.js:391:56)\n    at async ExecutionContext.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/ExecutionContext.js:277:16)\n    at async IsolatedWorld.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/IsolatedWorld.js:100:16)\n    at async CdpFrame.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Frame.js:362:20)\n    at async CdpPage.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Page.js:826:20)\n    at async run (/tmp/codi-public-region-worker-counterexample-20261106/test/public-region-worker-contract/browser.cjs:35:15)\n    at async /tmp/codi-public-region-worker-counterexample-20261106/test/public-region-worker-contract/browser.cjs:63:3"
+  }
+}

@@ -1,0 +1,962 @@
+[
+  {
+    "file": "test/constraint-edit/editor-browser.test.cjs",
+    "line": 10,
+    "call": "c.services.sketcher.inPlaceEditor.save()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/constraint-edit/editor-retry-browser.test.cjs",
+    "line": 10,
+    "call": "c.services.sketcher.inPlaceEditor.save()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/coreTests/testCases/craftCut.js",
+    "line": 12,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftCut.js",
+    "line": 28,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftCut.js",
+    "line": 44,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftCut.js",
+    "line": 60,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftCut.js",
+    "line": 76,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftCut.js",
+    "line": 94,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftCut.js",
+    "line": 110,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftCut.js",
+    "line": 126,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftCut.js",
+    "line": 142,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftCut.js",
+    "line": 159,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrude.js",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrude.js",
+    "line": 26,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrude.js",
+    "line": 45,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrude.js",
+    "line": 60,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrude.js",
+    "line": 75,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrudeBasicShapes.js",
+    "line": 14,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrudeBasicShapes.js",
+    "line": 59,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrudeBasicShapes.js",
+    "line": 91,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrudeBasicShapes.js",
+    "line": 120,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrudeBasicShapes.js",
+    "line": 151,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrudeBasicShapes.js",
+    "line": 184,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftExtrudeOptions.js",
+    "line": 14,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftLoft.js",
+    "line": 8,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftLoft.js",
+    "line": 16,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftLoft.js",
+    "line": 28,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftLoft.js",
+    "line": 36,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftLoft.js",
+    "line": 45,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftLoft.js",
+    "line": 60,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftLoft.js",
+    "line": 68,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftRevolve.js",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/testCases/craftRevolve.js",
+    "line": 28,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/coreTests/utils/scripts.js",
+    "line": 14,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/engine-four-corner-history/browser.test.cjs",
+    "line": 24,
+    "call": "editUI.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/engine-hole-projection/history-browser.test.cjs",
+    "line": 7,
+    "call": "editUI.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/review-common-typed/ui-literal-to-common-browser.test.cjs",
+    "line": 11,
+    "call": "__CAD_APP.actionService.run('sketchSaveAndExit')",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/review-common-typed/ui-literal-to-common-browser.test.cjs",
+    "line": 15,
+    "call": "__CAD_APP.actionService.run('sketchSaveAndExit')",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/review-common-typed/ui-to-common-browser.test.cjs",
+    "line": 11,
+    "call": "__CAD_APP.actionService.run('sketchSaveAndExit')",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/review-common-typed/ui-to-common-browser.test.cjs",
+    "line": 15,
+    "call": "__CAD_APP.actionService.run('sketchSaveAndExit')",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/review-rigid/rigid-boundary-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/review-rigid/rigid-boundary-browser.test.cjs",
+    "line": 19,
+    "call": "__CAD_APP.actionService.run('sketchSaveAndExit')",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/typed-configurations/sketch-editor.test.cjs",
+    "line": 11,
+    "call": "__CAD_APP.actionService.run('sketchSaveAndExit')",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/typed-configurations/sketch-editor.test.cjs",
+    "line": 15,
+    "call": "__CAD_APP.actionService.run('sketchSaveAndExit')",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/basic-sketch-shapes-browser.test.cjs",
+    "line": 7,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/basic-washer-browser.test.cjs",
+    "line": 7,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/bracket-request-trace.cjs",
+    "line": 193,
+    "call": "editUI.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/cut-default-browser.test.cjs",
+    "line": 4,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/cut-default-browser.test.cjs",
+    "line": 5,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/diameter-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/explicit-regions-browser.test.cjs",
+    "line": 7,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/feature-pattern-cut-browser.test.cjs",
+    "line": 85,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/feature-pattern-cut-browser.test.cjs",
+    "line": 115,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/feature-pattern-cut-browser.test.cjs",
+    "line": 241,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/feature-pattern-cut-browser.test.cjs",
+    "line": 316,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/feature-pattern-cut-browser.test.cjs",
+    "line": 376,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/feature-pattern-picker-browser.test.cjs",
+    "line": 85,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/feature-pattern-picker-browser.test.cjs",
+    "line": 115,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/feature-pattern-picker-browser.test.cjs",
+    "line": 253,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/fix-entity-ui-browser.test.cjs",
+    "line": 41,
+    "call": "testUI.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/length-measurement-roles-browser.test.cjs",
+    "line": 25,
+    "call": "webosTest.modellerUISubject(__CAD_APP).commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/line-relations-ui-browser.test.cjs",
+    "line": 27,
+    "call": "testUI.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/marquee-browser.test.cjs",
+    "line": 87,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/native-region-refusal-browser.test.cjs",
+    "line": 2,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-fillet-chamfer-wizard.test.cjs",
+    "line": 83,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-fillet-chamfer-wizard.test.cjs",
+    "line": 99,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-fillet-chamfer-wizard.test.cjs",
+    "line": 154,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-fillet-chamfer-wizard.test.cjs",
+    "line": 235,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-fillet-pattern-browser.test.cjs",
+    "line": 80,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-fillet-pattern-browser.test.cjs",
+    "line": 96,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-fillet-pattern-browser.test.cjs",
+    "line": 151,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-fillet-pattern-browser.test.cjs",
+    "line": 224,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-boolean-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-boolean-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-centered-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-centered-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-centered-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-centered-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-distance-browser.test.cjs",
+    "line": 12,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-distance-browser.test.cjs",
+    "line": 12,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-impossible-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-impossible-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-impossible-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-impossible-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-last-valid-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-last-valid-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-last-valid-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-last-valid-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-last-valid-browser.test.cjs",
+    "line": 15,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-open-cancel-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-open-cancel-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-open-cancel-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-open-cancel-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-regeneration-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-regeneration-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-regeneration-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-regeneration-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-stale-safety-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-stale-safety-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-stale-safety-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-stale-safety-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-worker-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-worker-browser.test.cjs",
+    "line": 11,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-worker-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/plate-parametric-worker-browser.test.cjs",
+    "line": 13,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/project-admission-browser.test.cjs",
+    "line": 24,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/rectangle-region-browser.test.cjs",
+    "line": 7,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/region-face-ownership-browser.test.cjs",
+    "line": 2,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/region-interactive-edit-browser.test.cjs",
+    "line": 7,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/region-interactive-edit-browser.test.cjs",
+    "line": 9,
+    "call": "__CAD_APP.actionService.run('sketchSaveAndExit')",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/region-picking-browser.test.cjs",
+    "line": 7,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/region-stale-browser.test.cjs",
+    "line": 7,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/rigid-group-bracket-extrude-browser.test.cjs",
+    "line": 9,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  },
+  {
+    "file": "test/webos/rigid-group-ui-browser.test.cjs",
+    "line": 25,
+    "call": "ui.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/signed-distance-ui-browser.test.cjs",
+    "line": 41,
+    "call": "testUI.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/sketch-epoch-spline-browser.test.cjs",
+    "line": 46,
+    "call": "testUI.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/sketch-history-large-browser.test.cjs",
+    "line": 5,
+    "call": "__CAD_APP.actionService.run('sketchSaveAndExit')",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/snapshot-workflow.test.cjs",
+    "line": 9,
+    "call": "subject.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/spline-history-browser.test.cjs",
+    "line": 93,
+    "call": "testUI.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": false
+  },
+  {
+    "file": "test/webos/worker-rectangle-browser.test.cjs",
+    "line": 50,
+    "call": "editUI.commitSketch()",
+    "awaited": true,
+    "asyncFunction": true,
+    "previouslyAsyncFunction": true
+  }
+]

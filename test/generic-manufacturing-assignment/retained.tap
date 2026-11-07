@@ -1,0 +1,29 @@
+✔ binds the authored roles independently of body order (6.743141ms)
+✔ rejects stale metadata, missing/duplicate bodies and conflicting identities (1.534512ms)
+✔ reassignment preserves authored object name, region identity and transform (1.433391ms)
+✔ v2 keeps label as a distinct material region inside the lid object (0.588264ms)
+✔ v2 region identity and authored placement survive reassignment (0.509744ms)
+✔ v2 refuses missing label, wrong version identity and duplicate roles without mutation (1.422311ms)
+✔ assigned lid/label remain grouped under the same rigid placement (3.344015ms)
+✔ different label placement cannot reuse nominal contact proof (1.014248ms)
+✔ separate label object, cross-feature pairing and duplicate role refuse (1.31867ms)
+✔ body cannot silently merge into the lid print object (1.25159ms)
+✔ enclosure material bindings survive reordered outputs and native envelope roundtrip (3.301586ms)
+✔ enclosure refuses missing, duplicate, foreign and relabeled outputs (1.136969ms)
+✔ only declared enclosure roles are accepted, with no implicit first output (10.652681ms)
+✔ legacy remains unchanged, no invented metadata or identity (0.917157ms)
+✔ versioned metadata roundtrips and separates unit, material and appearance (0.281392ms)
+✔ unknown versions and invalid references fail before caller mutates state (0.418064ms)
+✔ body resolution refuses absent and ambiguous identities (0.587555ms)
+✔ object grouping and transforms roundtrip explicitly rather than by color (0.357013ms)
+✔ changed revision produces a review proposal only for unique compatible producer (0.428073ms)
+✔ separate canonical hashes detect geometry or material changes without formatting changes (4.637335ms)
+✔ preparation recomputes revisions and rejects stale or concurrently edited data (51.752774ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 142.766777

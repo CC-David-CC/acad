@@ -1,0 +1,14 @@
+{
+  "retained-linear.mjs": {
+    "source": "test/linear-hole-pattern-worker/exercise.mjs",
+    "sourceSHA256": "01c47c0e6945b0ee47adca0cf7ca4640b3f739ac638146678ef8763eed8a5534",
+    "adaptation": "Only constructor import alias changes; all authoring, native reads and controls unchanged",
+    "adaptedSHA256": "136431c1168481415e3368b82416c02a7264a24410e0571652a8855757dc4d8b"
+  },
+  "retained-boolean.mjs": {
+    "source": "test/boolean-history-browser/exercise.mjs",
+    "sourceSHA256": "668b59df8592f064183dd6aa5d98803132ae3c01f3c544e3190c4a273a5f2e48",
+    "adaptation": "Only constructor import alias changes; all authoring, native reads and controls unchanged",
+    "adaptedSHA256": "a49d26be4dbff7583a224b87966a0d3bf374ff3ea7e22ac7d06bd16b054f9dc9"
+  }
+}

@@ -1,0 +1,13 @@
+import {spawnSync} from 'node:child_process';
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+const output=process.argv[2];if(!/^evidence-r[12]$/.test(output||''))throw Error('Expected evidence-r1 or evidence-r2');
+const directory=new URL(output+'/',import.meta.url);mkdirSync(directory,{recursive:true});
+const files=['modules/drawing/linkedPartDrawingDefinition.mjs','modules/drawing/linkedPartDrawingOperation.mjs','web/app/cad/projectManager/projectEnvelope.mjs','web/app/cad/projectManager/projectValidationCore.ts','web/app/cad/projectManager/projectValidationWorker.ts','web/app/cad/projectManager/projectManagerBundle.ts','web/app/cad/projectManager/workerSavePreparation.mjs','web/app/cad/craft/authoredEditJournal.mjs','test/display-units/manager-fixture.mjs','test/display-units/node-worker.cjs','test/linked-part-drawing-definition/fixture.mjs','test/linked-part-drawing-persistence/before.test.mjs','test/linked-part-drawing-persistence/build-validation.cjs','test/linked-part-drawing-persistence/run.mjs','.build/display-units/validation/worker.js'];
+const hash=path=>createHash('sha256').update(readFileSync(path)).digest('hex'),before=Object.fromEntries(files.map(p=>[p,hash(p)]));
+const result=spawnSync(process.execPath,['--test','test/linked-part-drawing-persistence/before.test.mjs'],{encoding:'utf8',timeout:60000});
+writeFileSync(new URL('test.log',directory),result.stdout+'\n'+result.stderr);
+const after=Object.fromEntries(files.map(p=>[p,hash(p)]));
+const receipt={scope:'BEFORE metadata/persistence boundary only; no native geometry or publication proof',base:'8b8adfc7b39d968e026c2078d971d62cf8cd6d37',node:process.version,status:result.status,signal:result.signal,sourceUnchanged:JSON.stringify(before)===JSON.stringify(after),before,after};
+writeFileSync(new URL('receipt.json',directory),JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({output,status:result.status,sourceUnchanged:receipt.sourceUnchanged}));
+if(result.error)throw result.error;process.exitCode=result.status||0;

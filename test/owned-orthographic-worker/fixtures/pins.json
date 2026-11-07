@@ -1,0 +1,46 @@
+{
+  "scope": "Exact recorded Native FFI projection payloads only; not fresh Worker/native execution or public authored source",
+  "commit": "9ff18a9e58d6fcd7aeabd14f36629588ff4591a9",
+  "files": {
+    "plate-top.orthographic.json": {
+      "sha256": "cabd5b7169924b05db684f49557ba024d0f847e96016414c10d1b40422daeeba",
+      "bytes": 4100,
+      "nativeGitPath": "shape-io/owned-orthographic-ffi-v1-probe/evidence-r1/production/plate-top.orthographic.json"
+    },
+    "plate-front.orthographic.json": {
+      "sha256": "9984e88da072bd36d12d2783cb6669761523ab2f8089d94a781bed8d52a978f7",
+      "bytes": 3925,
+      "nativeGitPath": "shape-io/owned-orthographic-ffi-v1-probe/evidence-r1/production/plate-front.orthographic.json"
+    },
+    "plate-right.orthographic.json": {
+      "sha256": "00d93d7d1ff2dcb8efb49b395d81f45fd659882a8ed80bf88ad41b3d39a8d1bb",
+      "bytes": 4820,
+      "nativeGitPath": "shape-io/owned-orthographic-ffi-v1-probe/evidence-r1/production/plate-right.orthographic.json"
+    },
+    "plate-translated-view.orthographic.json": {
+      "sha256": "985a048310cb3821a8ba2bce7d974d2320ac432458fac91350373a3ccd3b0640",
+      "bytes": 4149,
+      "nativeGitPath": "shape-io/owned-orthographic-ffi-v1-probe/evidence-r1/production/plate-translated-view.orthographic.json"
+    },
+    "plate-oblique-ellipse.orthographic.json": {
+      "sha256": "5c6fba210b8b1b156e6a13734f16173310c198130419c5db5530e8031a209a5c",
+      "bytes": 7001,
+      "nativeGitPath": "shape-io/owned-orthographic-ffi-v1-probe/evidence-r1/production/plate-oblique-ellipse.orthographic.json"
+    },
+    "healthy-after-refusals.orthographic.json": {
+      "sha256": "9984e88da072bd36d12d2783cb6669761523ab2f8089d94a781bed8d52a978f7",
+      "bytes": 3925,
+      "nativeGitPath": "shape-io/owned-orthographic-ffi-v1-probe/evidence-r1/production/healthy-after-refusals.orthographic.json"
+    },
+    "repeat-top.orthographic.json": {
+      "sha256": "cabd5b7169924b05db684f49557ba024d0f847e96016414c10d1b40422daeeba",
+      "bytes": 4100,
+      "nativeGitPath": "shape-io/owned-orthographic-ffi-v1-probe/evidence-r1/production/repeat-top.orthographic.json"
+    },
+    "genuine-multi-chunk.orthographic.json": {
+      "sha256": "0d34c13528633db84b86abe740d2e4bfdf6b6a43388cc3cad3177cf31727b122",
+      "bytes": 71557,
+      "nativeGitPath": "shape-io/owned-orthographic-ffi-v1-probe/evidence-r1/production/genuine-multi-chunk.orthographic.json"
+    }
+  }
+}

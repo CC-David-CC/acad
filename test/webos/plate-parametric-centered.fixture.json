@@ -1,0 +1,247 @@
+{
+  "revision": "center-fixture-1",
+  "sketch": {
+    "version": 3,
+    "objects": [
+      {
+        "id": "39",
+        "type": "Segment",
+        "role": "construction",
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": 0,
+            "y": 0
+          },
+          "b": {
+            "x": 100,
+            "y": 50
+          }
+        }
+      },
+      {
+        "id": "48",
+        "type": "Segment",
+        "role": "construction",
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": 100,
+            "y": 0
+          },
+          "b": {
+            "x": 0,
+            "y": 50
+          }
+        }
+      },
+      {
+        "id": "57",
+        "type": "Circle",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "c": {
+            "x": 50,
+            "y": 25
+          },
+          "r": 5
+        }
+      }
+    ],
+    "dimensions": [],
+    "labels": [],
+    "stages": [
+      {
+        "constraints": [
+          {
+            "typeId": "PCoincident",
+            "objects": [
+              "39:A",
+              "boundary/E:LID[S:0/SURFACE/3]:A"
+            ],
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "PCoincident",
+            "objects": [
+              "39:B",
+              "boundary/E:LID[S:0/SURFACE/12]:B"
+            ],
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "PCoincident",
+            "objects": [
+              "48:A",
+              "boundary/E:LID[S:0/SURFACE/3]:B"
+            ],
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "PCoincident",
+            "objects": [
+              "48:B",
+              "boundary/E:LID[S:0/SURFACE/21]:B"
+            ],
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "PointOnLine",
+            "objects": [
+              "57:C",
+              "39"
+            ],
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "PointOnLine",
+            "objects": [
+              "57:C",
+              "48"
+            ],
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          }
+        ],
+        "generators": []
+      }
+    ],
+    "constants": "",
+    "metadata": {
+      "expressionsSignature": "1793779265409"
+    },
+    "boundary": {
+      "lines": [
+        {
+          "id": "E:LID[S:0/SURFACE/3]",
+          "a": {
+            "x": 0,
+            "y": 0
+          },
+          "b": {
+            "x": 100,
+            "y": 0
+          }
+        },
+        {
+          "id": "E:LID[S:0/SURFACE/12]",
+          "a": {
+            "x": 100,
+            "y": 0
+          },
+          "b": {
+            "x": 100,
+            "y": 50
+          }
+        },
+        {
+          "id": "E:LID[S:0/SURFACE/21]",
+          "a": {
+            "x": 100,
+            "y": 50
+          },
+          "b": {
+            "x": 0,
+            "y": 50
+          }
+        },
+        {
+          "id": "E:LID[S:0/SURFACE/30]",
+          "a": {
+            "x": 0,
+            "y": 50
+          },
+          "b": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      ],
+      "arcs": [],
+      "circles": [],
+      "nurbses": []
+    }
+  },
+  "boundary": {
+    "lines": [
+      {
+        "id": "E:LID[S:0/SURFACE/3]",
+        "a": {
+          "x": 0,
+          "y": 0
+        },
+        "b": {
+          "x": 150,
+          "y": 0
+        }
+      },
+      {
+        "id": "E:LID[S:0/SURFACE/12]",
+        "a": {
+          "x": 150,
+          "y": 0
+        },
+        "b": {
+          "x": 150,
+          "y": 30
+        }
+      },
+      {
+        "id": "E:LID[S:0/SURFACE/21]",
+        "a": {
+          "x": 150,
+          "y": 30
+        },
+        "b": {
+          "x": 0,
+          "y": 30
+        }
+      },
+      {
+        "id": "E:LID[S:0/SURFACE/30]",
+        "a": {
+          "x": 0,
+          "y": 30
+        },
+        "b": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    ],
+    "arcs": [],
+    "circles": [],
+    "nurbses": []
+  },
+  "externalParameters": {}
+}

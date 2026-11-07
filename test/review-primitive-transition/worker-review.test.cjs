@@ -1,0 +1,18 @@
+// Independent targeted controls against the supplied test-only real Worker.
+const assert=require('node:assert/strict'),puppeteer=require('puppeteer-core');
+const base=new URL(process.env.JSKETCHER_TEST_URL),cdp=new URL(process.env.CODI_TEST_CDP);if(![base,cdp].every(u=>['127.0.0.1','localhost','[::1]'].includes(u.hostname)))throw Error('Loopback only');
+(async()=>{const browser=await puppeteer.connect({browserURL:cdp.href,protocolTimeout:120000}),context=await browser.createBrowserContext();try{
+ const p=await context.newPage(),response=await p.goto(new URL('/static/index.html',base));assert.match(response.headers()['content-security-policy'],/worker-src 'self'/);assert.doesNotMatch(response.headers()['content-security-policy'],/script-src[^;]*'unsafe-eval'|worker-src[^;]*blob:/);
+ const out=await p.evaluate(async()=>{
+  const run=message=>new Promise((resolve,reject)=>{const w=new Worker('/static/worker.js'),t=setTimeout(()=>{w.terminate();reject(Error('timeout'))},30000);w.onmessage=e=>{clearTimeout(t);w.terminate();resolve(e.data)};w.onerror=e=>{clearTimeout(t);w.terminate();reject(Error(e.message))};w.postMessage(message)}),frame={origin:[0,0,0],x:[1,0,0],y:[0,1,0],z:[0,0,1]};
+  const empty=await run({mode:'empty',frame});if(!empty.ok)throw Error('empty unavailable');const source=structuredClone(empty.sketch);source.stages.push({constraints:[],generators:[]});source.metadata={...source.metadata,reviewNote:'π preserved'};
+  const id='agent-primitive-'+crypto.randomUUID(),request={revision:'stage-two',sketchJSON:JSON.stringify(source),externalParameters:{},primitive:{id,kind:'Arc',role:'construction',stage:1,data:{a:{x:4,y:0},b:{x:0,y:-4},c:{x:0,y:0}}}};
+  const major=await run({mode:'append',request});let priorEqual=false,majorObject=null;if(major.ok){const saved=JSON.parse(major.serializedSketch);majorObject=saved.objects.find(x=>x.id===id);priorEqual=JSON.stringify({...saved,objects:saved.objects.filter(x=>x.id!==id)})===JSON.stringify(source)}
+  const minorId='agent-primitive-'+crypto.randomUUID(),minor=await run({mode:'append',request:{...request,revision:'minor',primitive:{...request.primitive,id:minorId,data:{a:{x:4,y:0},b:{x:0,y:4},c:{x:0,y:0}}}}});
+  const rootExtra=structuredClone(source);rootExtra.unexpected=1;const invalidRoot=await run({mode:'append',request:{...request,revision:'extra',sketchJSON:JSON.stringify(rootExtra)}});
+  const nonlast=await run({mode:'append',request:{...request,revision:'nonlast',primitive:{...request.primitive,id:'agent-primitive-'+crypto.randomUUID(),stage:0}}});
+  const boundary=structuredClone(source),collision='agent-primitive-'+crypto.randomUUID();boundary.boundary.circles.push({id:collision,c:{x:0,y:0},r:4});const collisionResult=await run({mode:'append',request:{...request,revision:'boundary',sketchJSON:JSON.stringify(boundary),primitive:{id:collision,kind:'Point',role:null,stage:1,data:{x:8,y:8}}}});
+  return {major,minor,majorObject,priorEqual,invalidRoot,nonlast,collisionResult};
+ });
+ assert.equal(out.major.ok,true,JSON.stringify(out.major.error));assert.equal(out.minor.ok,true,JSON.stringify(out.minor.error));assert.equal(out.priorEqual,true);assert.equal(out.majorObject.role,'construction');assert.equal(out.majorObject.stage,1);assert.deepEqual(out.majorObject.data,{a:{x:4,y:0},b:{x:0,y:-4},c:{x:0,y:0}});for(const key of ['invalidRoot','nonlast','collisionResult'])assert.equal(out[key].ok,false,key);assert.equal(out.collisionResult.error.code,'IDENTITY_COLLISION');console.log('PASS actual Worker multistage/major-minor intent, metadata, root/domain and boundary identity controls');
+ }finally{await context.close();browser.disconnect()}})().catch(e=>{console.error(e.stack);process.exitCode=1});

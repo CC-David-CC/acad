@@ -1,0 +1,20 @@
+{
+  "status": "PASS bounded independent review",
+  "source": "6f01a09fea5c75beba9297772edd50ff37b1b2a4",
+  "appSha256": "85d91870c836e4bd918e3b39593bdc7d31466ba6840235d97dfe8d581f70adab",
+  "publicRows": 5,
+  "pureControls": 7,
+  "instrumentedAuthoringWorkers": 70,
+  "scope": "Public box/native-empty/default continuation, ordinary native replay and registry metadata bounds; no signed Files/public32 claim",
+  "files": {
+    "README.md": "8012726c99f51d69006c9172e800755d5340c222ad0f41b64b66649c4a550214",
+    "browser.cjs": "78949f612ff729ba3de595c68100a66e592af7ae8190b62cd7736ad350e11ee2",
+    "evidence/empty-compound-oracle-before.json": "a638935c4e4403897c767c80bfa062424890ad1c82aafae8d2b4b7a5f9dd744b",
+    "evidence/empty-compound-oracle-before.log": "e4eda779523b36c63b679f309a87035cdd772136641575242112c880b567566f",
+    "evidence/public.log": "b94c56f5d33405e77e23f81a16792bf7314fa628199042167d190134a444c879",
+    "evidence/pure.log": "3bf2af367d33d92befec6c91581ee1a8acc362f22cadc5383398512f4579b97e",
+    "pure.test.mjs": "51976f7ea38c6937123c8be2d685e72c58977c8fc6f4df8406686b81d0bfba95",
+    "receipt.json": "bf36ddc1a01d8b540d66d36c00899772359c0fbe45efa2096f01aba993c38dcc",
+    "runtime-pins.json": "07455b878b0ebd54d54e434198a0fce3066b396a3bc835bbb2b556532e279adf"
+  }
+}

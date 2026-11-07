@@ -1,0 +1,47 @@
+✖ terminal cleanup failure settles initialization readiness and stays observable (108.354306ms)
+✖ terminal cleanup failure settles in-flight request even after its deadline (102.071618ms)
+✔ ordinary close still rejects pending work and remains idempotent (101.889277ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 381.280602
+
+✖ failing tests:
+
+test at test/state-machine-audit-workers/controller-cleanup.test.mjs:14:1
+✖ terminal cleanup failure settles initialization readiness and stays observable (108.354306ms)
+  AssertionError [ERR_ASSERTION]: Closing must reject ready even if termination throws
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/controller-cleanup.test.mjs:15:173)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/controller-cleanup.test.mjs:17:1
+✖ terminal cleanup failure settles in-flight request even after its deadline (102.071618ms)
+  AssertionError [ERR_ASSERTION]: Pending operation must not remain hung after closed+deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/controller-cleanup.test.mjs:18:297)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

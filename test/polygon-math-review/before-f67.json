@@ -1,0 +1,781 @@
+{
+  "capturedAt": "2026-11-06T17:37:53.483Z",
+  "source": {
+    "modules/engine/extrusion/simplePolygon.mjs": "a15b45c4540ef832d87cb1683a1270e20a2c9c278c05c147246a0a7d58776208",
+    "modules/engine/mount/polygonProfilePlan.mjs": "4945afd1772699c7e9d392b6a719422de10f4ea1bd25bf5c616ae79a97bf11ef",
+    "modules/engine/mount/selectedProfilePlan.mjs": "824dc5bfc8555a89fe9a647612ce76970f98b8adfd6e648185dd29e9f311c8a0"
+  },
+  "status": "FAIL",
+  "scope": "Actual Node Worker pure geometry/preparation only; no solver, native or public UI claim",
+  "rows": [
+    {
+      "name": "1200 independently generated rational orientation expectations",
+      "status": "PASS",
+      "result": {
+        "cases": 1200
+      }
+    },
+    {
+      "name": "exact rational area: subnormal double-round4-to5",
+      "status": "FAIL",
+      "error": "{\"expected\":2.5e-323,\"actual\":2e-323}\n+ actual - expected\n\n+ 2e-323\n- 2.5e-323\n",
+      "code": "ERR_ASSERTION"
+    },
+    {
+      "name": "exact rational area: subnormal double-round0-to1",
+      "status": "FAIL",
+      "error": "Polygon area is outside the numeric range.",
+      "code": "UNREPRESENTABLE_AREA"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-0",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-1",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-2",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-3",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-4",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-5",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-6",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-7",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-8",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-9",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-10",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-11",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-12",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-13",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-14",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-15",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-16",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-17",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-18",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-19",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-20",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-21",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-22",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-23",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-24",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-25",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-26",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-27",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-28",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-29",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-30",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-31",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-32",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-33",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-34",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-35",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-36",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-37",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-38",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-39",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-40",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-41",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-42",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-43",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-44",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-45",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-46",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-47",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-48",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-49",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-50",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-51",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-52",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-53",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-54",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-55",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-56",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-57",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-58",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-59",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-60",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-61",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-62",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-63",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-64",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-65",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-66",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-67",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-68",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-69",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-70",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-71",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-72",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-73",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-74",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-75",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-76",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-77",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-78",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-79",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-80",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-81",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-82",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-83",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-84",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-85",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-86",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-87",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-88",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-89",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-90",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-91",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-92",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-93",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-94",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-95",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-96",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-97",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-98",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-99",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-100",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-101",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-102",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-103",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-104",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-105",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-106",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-107",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-108",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-109",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-110",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-111",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-112",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-113",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-114",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-115",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-116",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-117",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-118",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-119",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-120",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-121",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-122",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-123",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-124",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-125",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-126",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-127",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-128",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-129",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-130",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-131",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-132",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-133",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-134",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-135",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-136",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-137",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-138",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-139",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-140",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-141",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-142",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-143",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-144",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-145",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-146",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-147",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-148",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-149",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-150",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-151",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-152",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-153",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-154",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-155",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-156",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-157",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-158",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-159",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-160",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-161",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-162",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-163",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-164",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-165",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-166",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-167",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-168",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-169",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-170",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-171",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-172",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-173",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-174",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-175",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-176",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-177",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-178",
+      "status": "PASS"
+    },
+    {
+      "name": "exact rational area: power-scaled-product-179",
+      "status": "PASS"
+    },
+    {
+      "name": "concave containment uses actual notch rather than bounding box",
+      "status": "PASS"
+    },
+    {
+      "name": "mixed loop clearance measures edge interiors, not only vertices",
+      "status": "PASS"
+    },
+    {
+      "name": "winding/order/frame and native stream retain analytic geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "capture detaches coordinates and refuses accessor or extra fields",
+      "status": "PASS"
+    },
+    {
+      "name": "V2 remains rectangle-only; V3 loop admission is bounded",
+      "status": "PASS"
+    },
+    {
+      "name": "thin triangle observation is not a minimum-width guarantee",
+      "status": "PASS",
+      "result": {
+        "admitted": true,
+        "altitude": 1e-12,
+        "area": 5e-7,
+        "nativeClaim": false
+      }
+    }
+  ]
+}

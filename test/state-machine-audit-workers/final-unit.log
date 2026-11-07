@@ -1,0 +1,28 @@
+✔ terminal cleanup failure settles initialization readiness and stays observable (107.648296ms)
+✔ terminal cleanup failure settles in-flight request even after its deadline (102.096322ms)
+✔ ordinary close still rejects pending work and remains idempotent (100.270793ms)
+✔ exact falsey termination failure remains visible: undefined (101.595057ms)
+✔ exact falsey termination failure remains visible: null (100.311104ms)
+✔ exact falsey termination failure remains visible: zero (101.366335ms)
+✔ exact falsey termination failure remains visible: false (101.090852ms)
+✔ exact falsey termination failure remains visible: empty (100.356734ms)
+✔ resource owner observes controller failure after abort settlement: Error (102.985901ms)
+✔ resource owner observes controller failure after abort settlement: null (100.404175ms)
+{"scope":"Actual oriented triangle integral range; not a closed mesh/native CAD geometry or public admission","rows":[{"scale":1e+200,"code":"MESH_VOLUME_NUMERIC_RANGE","message":"Exact mesh integral overflows binary64."},{"scale":1e-200,"code":"MESH_VOLUME_NUMERIC_RANGE","message":"Nonzero exact mesh integral rounds below binary64 range."}]}
+✔ actual exact-integral helper attributes overflow and underflow in a real Worker (38.003603ms)
+✔ the exact numeric-range Worker error branch closes before return (68.696554ms)
+✔ any thrown cleanup value permanently fences pool: undefined (1.640846ms)
+✔ any thrown cleanup value permanently fences pool: null (1.217822ms)
+✔ any thrown cleanup value permanently fences pool: zero (0.311273ms)
+✔ any thrown cleanup value permanently fences pool: false (0.571865ms)
+✔ any thrown cleanup value permanently fences pool: empty-string (0.376714ms)
+✔ invalid cleanup accessor cannot orphan a native-mount reservation (0.472814ms)
+✔ ordinary Error cleanup already fences current and new owners (0.396004ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1090.094636

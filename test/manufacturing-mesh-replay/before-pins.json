@@ -1,0 +1,16 @@
+{
+  "base": "afd6e4d46",
+  "sourceHashes": {
+    "web/app/cad/craft/craftBundle.ts": "297d3bf76dcf00894baea63e5c43e137121f1fb8ee4d904d8fba1a383357b6ad",
+    "web/app/cad/craft/evaluationResources.mjs": "366322175c54333d7ebffe8ce24670293fe9a073695a5f4dc2e7495e079db14f",
+    "modules/engine/solid/solidLedger.mjs": "135049f45fc6989672fe8d1886c197084f8e52fa632d8a358b64e02d14610e12",
+    "modules/engine/mount/ownedManufacturingMeshProtocol.mjs": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+    "test/manufacturing-mesh-replay/before.test.mjs": "f859ce9c149e987f43664aead99cdca7c0b89ccfaaf37607ff673ee7a9120c6d"
+  },
+  "result": {
+    "tests": 3,
+    "pass": 1,
+    "fail": 2
+  },
+  "scope": "Actual observation-pool +source absence; no Native positive"
+}

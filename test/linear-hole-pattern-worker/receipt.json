@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "scope": "Authenticated linear hole pattern native component only; no host/public/history/Save qualification",
+  "product": "173bfe44efa30c66645153411d3f2e1882f7d951",
+  "sourceHashes": {
+    "modules/engine/mount/oci-verified-worker.js": "e8c29f8b3313fd1cf87aae058b80d46701d85e78f4234a77b0b9af33313ea08f",
+    "modules/engine/mount/worker-controller.mjs": "456c880a9b79dd0cc79645fe6104bb42270a5c997379536838bcf80791cde935",
+    "modules/engine/mount/ownedLinearHolePatternPlan.mjs": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+    "modules/engine/solid/ownedLinearHolePatternIntent.mjs": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff"
+  },
+  "evidenceHashes": {
+    "component-r1.json": "30ede777e3cc2604707b967586daa10a723f558f5e3008a9e5e4773a16ec6ae1",
+    "browser-r1.json": "32feb9cb33d848f0ee841e3da475610aee059e4b130f2cea93b37ac3a17cf1fe",
+    "cancel-r1.json": "213593d9f12b2528627246df3cc31a744f8a182a975f2061b1e705f67d3e6da2",
+    "all-native-r1.json": "dca39ec39ea8232c5204e5d951825a05ad8d1247fca63b40a8b1ff61ff64bf58",
+    "all-native-fraction.json": "a68bbc2b4ceff1e75a385e2220a2998e5aa2d0be1fda5f3283b44f8ff7e6e5b8",
+    "retained-through-holes.json": "a6f8f1bb23d300254ac72ab02b7d91141e75a6f6d0c25a8d72343ea1c947e8a7",
+    "retained-boolean-history.json": "5147e91d065d4e3e171ba117821fed6117b47e5502d0a804b3230dd1ee9f13e6",
+    "pure-r730.json": "3e091b744ea60ae64a4319a75c15e645f524a5d81b0da60e56a7a26d9fbcb5c4",
+    "retained-pure.json": "39c84f2094098ae9415ae6104e9f18daeb009f6310c0680ce140aae797e2f49b",
+    "worker-pins.json": "dd3c70e6be603dff5dab86980e254fabfcd83273d38922a0d4154b9fcb80214f",
+    "asset-graph.log": "4ce4695944bf32c5d374ed66fa660e74822a7e2c2fa92f213ae2cc7ec2693b8a",
+    "typescript-r730.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "local-cleanup.json": "44580d4760f6c5a16f4fc922b9b4e3a0c7635983c3eab7c8729b358124aecbc4",
+    "remote-cleanup.json": "000d84593bdad90dbe19f7f7f31deebabb37de4ec285f732d0fcfffa55b2e952"
+  },
+  "checks": {
+    "patternParts": 4,
+    "nativePointClassifications": 84,
+    "patternRefusalCostControls": 8,
+    "genuineHeldNativeCancel": true,
+    "pureGroups": 11,
+    "retainedPureGroups": 21,
+    "retainedThroughHoleFixtures": 3,
+    "retainedBooleanPlateFixtures": 2,
+    "allFiveNativeSmokeCases": 20,
+    "independentFractionCases": 20,
+    "allFiveStagers": true,
+    "webpackAssetGraph": true,
+    "repositoryTSC": true,
+    "ownedCleanup": true
+  },
+  "open": [
+    "Count1 owned identity",
+    "Host authored/history/public Save integration",
+    "Other axes/generalBoolean/pattern-on-pattern/otherkernels"
+  ]
+}

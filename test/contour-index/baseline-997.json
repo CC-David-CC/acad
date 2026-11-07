@@ -1,0 +1,3506 @@
+{
+  "appSha": "9993b01af9f49ca29aa2eceaa1701489aef01c992ee3a3b38a1a0799f87a9c28",
+  "rows": [
+    {
+      "name": "rectangle",
+      "readMs": 0.7000000476837158,
+      "modelMs": 2.0999999046325684,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/r0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r3",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/r0",
+              "inverted": false,
+              "a": [
+                0,
+                0,
+                0
+              ],
+              "b": [
+                100,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r1",
+              "inverted": false,
+              "a": [
+                100,
+                0,
+                0
+              ],
+              "b": [
+                100,
+                50,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r2",
+              "inverted": false,
+              "a": [
+                100,
+                50,
+                0
+              ],
+              "b": [
+                0,
+                50,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r3",
+              "inverted": false,
+              "a": [
+                0,
+                50,
+                0
+              ],
+              "b": [
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/r0\",\"S:0/SURFACE/r1\",\"S:0/SURFACE/r2\",\"S:0/SURFACE/r3\"],\"holes\":[]}"
+        ],
+        "error": null
+      }
+    },
+    {
+      "name": "reversed",
+      "readMs": 0,
+      "modelMs": 0.40000009536743164,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/r3",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r0",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/r0",
+              "inverted": true,
+              "a": [
+                100,
+                0,
+                0
+              ],
+              "b": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r1",
+              "inverted": true,
+              "a": [
+                100,
+                50,
+                0
+              ],
+              "b": [
+                100,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r2",
+              "inverted": true,
+              "a": [
+                0,
+                50,
+                0
+              ],
+              "b": [
+                100,
+                50,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r3",
+              "inverted": true,
+              "a": [
+                0,
+                0,
+                0
+              ],
+              "b": [
+                0,
+                50,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/r0\",\"S:0/SURFACE/r1\",\"S:0/SURFACE/r2\",\"S:0/SURFACE/r3\"],\"holes\":[]}"
+        ],
+        "error": null
+      }
+    },
+    {
+      "name": "disjoint",
+      "readMs": 0.09999990463256836,
+      "modelMs": 0.7000000476837158,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/r0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r3",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/q0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/q1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/q2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/q3",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/r0",
+              "inverted": false,
+              "a": [
+                0,
+                0,
+                0
+              ],
+              "b": [
+                100,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r1",
+              "inverted": false,
+              "a": [
+                100,
+                0,
+                0
+              ],
+              "b": [
+                100,
+                50,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r2",
+              "inverted": false,
+              "a": [
+                100,
+                50,
+                0
+              ],
+              "b": [
+                0,
+                50,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r3",
+              "inverted": false,
+              "a": [
+                0,
+                50,
+                0
+              ],
+              "b": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          [
+            {
+              "id": "S:0/SURFACE/q0",
+              "inverted": false,
+              "a": [
+                200,
+                0,
+                0
+              ],
+              "b": [
+                210,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/q1",
+              "inverted": false,
+              "a": [
+                210,
+                0,
+                0
+              ],
+              "b": [
+                210,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/q2",
+              "inverted": false,
+              "a": [
+                210,
+                10,
+                0
+              ],
+              "b": [
+                200,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/q3",
+              "inverted": false,
+              "a": [
+                200,
+                10,
+                0
+              ],
+              "b": [
+                200,
+                0,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/r0\",\"S:0/SURFACE/r1\",\"S:0/SURFACE/r2\",\"S:0/SURFACE/r3\"],\"holes\":[]}",
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/q0\",\"S:0/SURFACE/q1\",\"S:0/SURFACE/q2\",\"S:0/SURFACE/q3\"],\"holes\":[]}"
+        ],
+        "error": null
+      }
+    },
+    {
+      "name": "nested",
+      "readMs": 0,
+      "modelMs": 0.5,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/r0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r3",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/q0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/q1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/q2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/q3",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/r0",
+              "inverted": false,
+              "a": [
+                0,
+                0,
+                0
+              ],
+              "b": [
+                100,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r1",
+              "inverted": false,
+              "a": [
+                100,
+                0,
+                0
+              ],
+              "b": [
+                100,
+                50,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r2",
+              "inverted": false,
+              "a": [
+                100,
+                50,
+                0
+              ],
+              "b": [
+                0,
+                50,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r3",
+              "inverted": false,
+              "a": [
+                0,
+                50,
+                0
+              ],
+              "b": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          [
+            {
+              "id": "S:0/SURFACE/q0",
+              "inverted": false,
+              "a": [
+                10,
+                10,
+                0
+              ],
+              "b": [
+                30,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/q1",
+              "inverted": false,
+              "a": [
+                30,
+                10,
+                0
+              ],
+              "b": [
+                30,
+                30,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/q2",
+              "inverted": false,
+              "a": [
+                30,
+                30,
+                0
+              ],
+              "b": [
+                10,
+                30,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/q3",
+              "inverted": false,
+              "a": [
+                10,
+                30,
+                0
+              ],
+              "b": [
+                10,
+                10,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/r0\",\"S:0/SURFACE/r1\",\"S:0/SURFACE/r2\",\"S:0/SURFACE/r3\"],\"holes\":[[\"S:0/SURFACE/q0\",\"S:0/SURFACE/q1\",\"S:0/SURFACE/q2\",\"S:0/SURFACE/q3\"]]}",
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/q0\",\"S:0/SURFACE/q1\",\"S:0/SURFACE/q2\",\"S:0/SURFACE/q3\"],\"holes\":[]}"
+        ],
+        "error": null
+      }
+    },
+    {
+      "name": "point-touch",
+      "readMs": 0,
+      "modelMs": 0.9000000953674316,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/a0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/a1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/a2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/a3",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/b0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/b1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/b2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/b3",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/a0",
+              "inverted": false,
+              "a": [
+                0,
+                0,
+                0
+              ],
+              "b": [
+                10,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/a1",
+              "inverted": false,
+              "a": [
+                10,
+                0,
+                0
+              ],
+              "b": [
+                10,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/a2",
+              "inverted": false,
+              "a": [
+                10,
+                10,
+                0
+              ],
+              "b": [
+                0,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/a3",
+              "inverted": false,
+              "a": [
+                0,
+                10,
+                0
+              ],
+              "b": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          [
+            {
+              "id": "S:0/SURFACE/b0",
+              "inverted": false,
+              "a": [
+                10,
+                10,
+                0
+              ],
+              "b": [
+                20,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/b1",
+              "inverted": false,
+              "a": [
+                20,
+                10,
+                0
+              ],
+              "b": [
+                20,
+                20,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/b2",
+              "inverted": false,
+              "a": [
+                20,
+                20,
+                0
+              ],
+              "b": [
+                10,
+                20,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/b3",
+              "inverted": false,
+              "a": [
+                10,
+                20,
+                0
+              ],
+              "b": [
+                10,
+                10,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [],
+        "error": "Profiles intersect, touch or are too close; separate them before extruding."
+      }
+    },
+    {
+      "name": "edge-touch",
+      "readMs": 0.20000004768371582,
+      "modelMs": 0.2999999523162842,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/a0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/a1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/a2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/a3",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/b0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/b1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/b2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/b3",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/a0",
+              "inverted": false,
+              "a": [
+                0,
+                0,
+                0
+              ],
+              "b": [
+                10,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/a1",
+              "inverted": true,
+              "a": [
+                10,
+                0,
+                0
+              ],
+              "b": [
+                10,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/a2",
+              "inverted": false,
+              "a": [
+                10,
+                10,
+                0
+              ],
+              "b": [
+                0,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/a3",
+              "inverted": false,
+              "a": [
+                0,
+                10,
+                0
+              ],
+              "b": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          [
+            {
+              "id": "S:0/SURFACE/b0",
+              "inverted": false,
+              "a": [
+                10,
+                0,
+                0
+              ],
+              "b": [
+                20,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/b1",
+              "inverted": false,
+              "a": [
+                20,
+                0,
+                0
+              ],
+              "b": [
+                20,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/b2",
+              "inverted": false,
+              "a": [
+                20,
+                10,
+                0
+              ],
+              "b": [
+                10,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/a1",
+              "inverted": true,
+              "a": [
+                10,
+                0,
+                0
+              ],
+              "b": [
+                10,
+                10,
+                0
+              ]
+            }
+          ],
+          [
+            {
+              "id": "S:0/SURFACE/a0",
+              "inverted": false,
+              "a": [
+                0,
+                0,
+                0
+              ],
+              "b": [
+                10,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/b0",
+              "inverted": false,
+              "a": [
+                10,
+                0,
+                0
+              ],
+              "b": [
+                20,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/b1",
+              "inverted": false,
+              "a": [
+                20,
+                0,
+                0
+              ],
+              "b": [
+                20,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/b2",
+              "inverted": false,
+              "a": [
+                20,
+                10,
+                0
+              ],
+              "b": [
+                10,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/a2",
+              "inverted": false,
+              "a": [
+                10,
+                10,
+                0
+              ],
+              "b": [
+                0,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/a3",
+              "inverted": false,
+              "a": [
+                0,
+                10,
+                0
+              ],
+              "b": [
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [],
+        "error": "Every non-construction profile must be closed."
+      }
+    },
+    {
+      "name": "duplicate",
+      "readMs": 0.10000014305114746,
+      "modelMs": 0.20000004768371582,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/r0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r3",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/dup",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/dup",
+              "inverted": false,
+              "a": [
+                0,
+                0,
+                0
+              ],
+              "b": [
+                100,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r1",
+              "inverted": false,
+              "a": [
+                100,
+                0,
+                0
+              ],
+              "b": [
+                100,
+                50,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r2",
+              "inverted": false,
+              "a": [
+                100,
+                50,
+                0
+              ],
+              "b": [
+                0,
+                50,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r3",
+              "inverted": false,
+              "a": [
+                0,
+                50,
+                0
+              ],
+              "b": [
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [],
+        "error": "Every non-construction profile must be closed."
+      }
+    },
+    {
+      "name": "pair-arcs",
+      "readMs": 0.09999990463256836,
+      "modelMs": 3.4000000953674316,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/a",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/b",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/a",
+              "inverted": false,
+              "a": [
+                10,
+                0,
+                0
+              ],
+              "b": [
+                -10,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/b",
+              "inverted": false,
+              "a": [
+                -10,
+                0,
+                0
+              ],
+              "b": [
+                10,
+                0,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [],
+        "error": "Multiple profiles must be circles or axis-aligned rectangles; nested profiles are not yet supported for other shapes."
+      }
+    },
+    {
+      "name": "arc-chord",
+      "readMs": 0.10000014305114746,
+      "modelMs": 0.39999985694885254,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/a",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/b",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/a",
+              "inverted": false,
+              "a": [
+                10,
+                0,
+                0
+              ],
+              "b": [
+                -10,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/b",
+              "inverted": false,
+              "a": [
+                -10,
+                0,
+                0
+              ],
+              "b": [
+                10,
+                0,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [],
+        "error": "Multiple profiles must be circles or axis-aligned rectangles; nested profiles are not yet supported for other shapes."
+      }
+    },
+    {
+      "name": "circles",
+      "readMs": 0.20000004768371582,
+      "modelMs": 1.2000000476837158,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/a",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/b",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/c",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/a",
+              "inverted": false
+            }
+          ],
+          [
+            {
+              "id": "S:0/SURFACE/b",
+              "inverted": false
+            }
+          ],
+          [
+            {
+              "id": "S:0/SURFACE/c",
+              "inverted": false
+            }
+          ]
+        ],
+        "regions": [
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/a\"],\"holes\":[[\"S:0/SURFACE/b\"]]}",
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/b\"],\"holes\":[[\"S:0/SURFACE/c\"]]}",
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/c\"],\"holes\":[]}"
+        ],
+        "error": null
+      }
+    },
+    {
+      "name": "auxiliary",
+      "readMs": 0.10000014305114746,
+      "modelMs": 0.20000004768371582,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/c",
+            "construction": true
+          },
+          {
+            "id": "S:0/SURFACE/cross",
+            "construction": true
+          },
+          {
+            "id": "S:0/SURFACE/r0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r3",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/p",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/r0",
+              "inverted": false,
+              "a": [
+                0,
+                0,
+                0
+              ],
+              "b": [
+                100,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r1",
+              "inverted": false,
+              "a": [
+                100,
+                0,
+                0
+              ],
+              "b": [
+                100,
+                50,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r2",
+              "inverted": false,
+              "a": [
+                100,
+                50,
+                0
+              ],
+              "b": [
+                0,
+                50,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r3",
+              "inverted": false,
+              "a": [
+                0,
+                50,
+                0
+              ],
+              "b": [
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/r0\",\"S:0/SURFACE/r1\",\"S:0/SURFACE/r2\",\"S:0/SURFACE/r3\"],\"holes\":[]}"
+        ],
+        "error": null
+      }
+    },
+    {
+      "name": "negative-zero",
+      "readMs": 0,
+      "modelMs": 0.20000004768371582,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/r0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r3",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/r0",
+              "inverted": false,
+              "a": [
+                0,
+                0,
+                0
+              ],
+              "b": [
+                10,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r1",
+              "inverted": false,
+              "a": [
+                10,
+                0,
+                0
+              ],
+              "b": [
+                10,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r2",
+              "inverted": false,
+              "a": [
+                10,
+                10,
+                0
+              ],
+              "b": [
+                0,
+                10,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r3",
+              "inverted": false,
+              "a": [
+                0,
+                10,
+                0
+              ],
+              "b": [
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/r0\",\"S:0/SURFACE/r1\",\"S:0/SURFACE/r2\",\"S:0/SURFACE/r3\"],\"holes\":[]}"
+        ],
+        "error": null
+      }
+    },
+    {
+      "name": "fractional",
+      "readMs": 0,
+      "modelMs": 0.2999999523162842,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/r0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/r3",
+            "construction": false
+          }
+        ],
+        "contours": [
+          [
+            {
+              "id": "S:0/SURFACE/r0",
+              "inverted": false,
+              "a": [
+                0.123456789,
+                0.987654321,
+                0
+              ],
+              "b": [
+                0.126456789,
+                0.987654321,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r1",
+              "inverted": false,
+              "a": [
+                0.126456789,
+                0.987654321,
+                0
+              ],
+              "b": [
+                0.126456789,
+                0.991654321,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r2",
+              "inverted": false,
+              "a": [
+                0.126456789,
+                0.991654321,
+                0
+              ],
+              "b": [
+                0.123456789,
+                0.991654321,
+                0
+              ]
+            },
+            {
+              "id": "S:0/SURFACE/r3",
+              "inverted": false,
+              "a": [
+                0.123456789,
+                0.991654321,
+                0
+              ],
+              "b": [
+                0.123456789,
+                0.987654321,
+                0
+              ]
+            }
+          ]
+        ],
+        "regions": [
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/r0\",\"S:0/SURFACE/r1\",\"S:0/SURFACE/r2\",\"S:0/SURFACE/r3\"],\"holes\":[]}"
+        ],
+        "error": null
+      }
+    },
+    {
+      "name": "dense-open",
+      "readMs": 14.099999904632568,
+      "modelMs": 75.90000009536743,
+      "facts": {
+        "objects": [
+          {
+            "id": "S:0/SURFACE/s0",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s1",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s2",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s3",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s4",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s5",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s6",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s7",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s8",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s9",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s10",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s11",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s12",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s13",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s14",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s15",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s16",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s17",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s18",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s19",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s20",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s21",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s22",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s23",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s24",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s25",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s26",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s27",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s28",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s29",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s30",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s31",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s32",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s33",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s34",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s35",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s36",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s37",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s38",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s39",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s40",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s41",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s42",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s43",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s44",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s45",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s46",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s47",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s48",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s49",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s50",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s51",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s52",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s53",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s54",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s55",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s56",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s57",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s58",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s59",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s60",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s61",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s62",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s63",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s64",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s65",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s66",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s67",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s68",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s69",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s70",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s71",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s72",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s73",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s74",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s75",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s76",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s77",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s78",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s79",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s80",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s81",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s82",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s83",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s84",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s85",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s86",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s87",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s88",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s89",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s90",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s91",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s92",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s93",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s94",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s95",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s96",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s97",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s98",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s99",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s100",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s101",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s102",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s103",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s104",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s105",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s106",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s107",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s108",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s109",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s110",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s111",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s112",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s113",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s114",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s115",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s116",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s117",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s118",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s119",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s120",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s121",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s122",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s123",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s124",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s125",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s126",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s127",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s128",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s129",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s130",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s131",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s132",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s133",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s134",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s135",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s136",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s137",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s138",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s139",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s140",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s141",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s142",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s143",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s144",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s145",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s146",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s147",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s148",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s149",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s150",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s151",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s152",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s153",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s154",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s155",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s156",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s157",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s158",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s159",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s160",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s161",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s162",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s163",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s164",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s165",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s166",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s167",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s168",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s169",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s170",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s171",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s172",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s173",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s174",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s175",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s176",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s177",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s178",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s179",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s180",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s181",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s182",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s183",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s184",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s185",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s186",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s187",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s188",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s189",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s190",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s191",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s192",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s193",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s194",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s195",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s196",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s197",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s198",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s199",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s200",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s201",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s202",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s203",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s204",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s205",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s206",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s207",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s208",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s209",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s210",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s211",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s212",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s213",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s214",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s215",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s216",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s217",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s218",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s219",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s220",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s221",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s222",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s223",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s224",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s225",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s226",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s227",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s228",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s229",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s230",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s231",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s232",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s233",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s234",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s235",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s236",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s237",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s238",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s239",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s240",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s241",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s242",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s243",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s244",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s245",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s246",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s247",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s248",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s249",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s250",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s251",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s252",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s253",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s254",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s255",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s256",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s257",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s258",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s259",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s260",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s261",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s262",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s263",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s264",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s265",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s266",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s267",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s268",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s269",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s270",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s271",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s272",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s273",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s274",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s275",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s276",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s277",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s278",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s279",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s280",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s281",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s282",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s283",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s284",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s285",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s286",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s287",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s288",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s289",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s290",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s291",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s292",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s293",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s294",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s295",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s296",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s297",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s298",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s299",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s300",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s301",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s302",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s303",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s304",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s305",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s306",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s307",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s308",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s309",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s310",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s311",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s312",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s313",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s314",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s315",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s316",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s317",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s318",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s319",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s320",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s321",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s322",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s323",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s324",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s325",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s326",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s327",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s328",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s329",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s330",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s331",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s332",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s333",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s334",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s335",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s336",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s337",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s338",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s339",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s340",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s341",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s342",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s343",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s344",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s345",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s346",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s347",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s348",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s349",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s350",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s351",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s352",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s353",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s354",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s355",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s356",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s357",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s358",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s359",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s360",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s361",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s362",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s363",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s364",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s365",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s366",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s367",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s368",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s369",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s370",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s371",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s372",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s373",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s374",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s375",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s376",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s377",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s378",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s379",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s380",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s381",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s382",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s383",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s384",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s385",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s386",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s387",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s388",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s389",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s390",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s391",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s392",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s393",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s394",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s395",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s396",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s397",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s398",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s399",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s400",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s401",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s402",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s403",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s404",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s405",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s406",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s407",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s408",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s409",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s410",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s411",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s412",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s413",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s414",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s415",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s416",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s417",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s418",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s419",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s420",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s421",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s422",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s423",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s424",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s425",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s426",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s427",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s428",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s429",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s430",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s431",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s432",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s433",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s434",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s435",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s436",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s437",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s438",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s439",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s440",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s441",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s442",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s443",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s444",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s445",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s446",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s447",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s448",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s449",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s450",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s451",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s452",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s453",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s454",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s455",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s456",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s457",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s458",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s459",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s460",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s461",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s462",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s463",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s464",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s465",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s466",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s467",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s468",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s469",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s470",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s471",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s472",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s473",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s474",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s475",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s476",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s477",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s478",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s479",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s480",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s481",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s482",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s483",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s484",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s485",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s486",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s487",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s488",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s489",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s490",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s491",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s492",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s493",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s494",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s495",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s496",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s497",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s498",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s499",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s500",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s501",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s502",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s503",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s504",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s505",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s506",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s507",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s508",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s509",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s510",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s511",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s512",
+            "construction": false
+          },
+          {
+            "id": "S:0/SURFACE/s513",
+            "construction": false
+          }
+        ],
+        "contours": [],
+        "regions": [],
+        "error": "A closed profile is required."
+      }
+    }
+  ]
+}

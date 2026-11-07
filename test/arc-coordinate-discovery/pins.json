@@ -1,0 +1,30 @@
+{
+  "status": "PASS_COMPONENT_REPAIR",
+  "scope": "Genuine production sketch Worker author/inspect/edit/verify plus retained sweep-service controls; no after-fix signed native sweep claim",
+  "sourceParent": "db34c89f11511740c994ea34a0d5764d2752fdfd",
+  "sources": {
+    "web/app/sketcher/headless/closedSketchInspection.ts": "2dc58f9c9fbee9931a8ab66b36123687bf308716ee9e124f28178ff40f337b02",
+    "web/app/sketcher/headless/coordinateTransition.ts": "31e8bd34a2277920ae6dc89c66d2ff6e4742e977de2f850fe87f11339cf00233",
+    "test/arc-coordinate-discovery/arc.test.mjs": "8155e030525fcf4a50b8240612551f96826c4dcff6bad45f22b476f5ab800d94"
+  },
+  "newTests": 8,
+  "retainedServiceTests": 15,
+  "typescriptExit": 0,
+  "workerBuild": {
+    "head": "db34c89f11511740c994ea34a0d5764d2752fdfd",
+    "node": "v24.22.1",
+    "webpack": "5.74.0",
+    "sourceCount": 1303,
+    "sourceCohortBeforeAfter": "824ac87bc0bc0e3d542ce8dd07060df4dd043135036def1d72f14899108593ba",
+    "sourceHashes": {
+      "web/app/cad/craft/workerSweepCommands.ts": "de4d303127c0083a80a4cc85f397367a45448c1ccb64f88d68fe49dc3f35871a",
+      "modules/engine/extrusion/selectedSketchSweepDiscovery.mjs": "c276f53d9f87796bce57815649f8761945e73f8bee2eb0fb2b7a6c6fb2e608ee",
+      "modules/engine/extrusion/selectedSketchSweepPath.mjs": "7117a5b6baa3d00702733a538ff8acb6a0809f6d06d21c2e9906182a8d0f85e6",
+      "modules/engine/extrusion/prismSemantic.worker.ts": "71064f7518594000958a7dae9d051a7500ad98c51b8551657d70f0ed909cc0e6"
+    },
+    "sketch": "0afdecab7578d7ddaf81a101bc5025a3815cf4d4e3b33094c193a417d2c1010d",
+    "semantic": "a8723b4f5bacabb91a351216c0e282dc196dfb9959a7848a642d6854c7bf0033",
+    "service": "ea5b57d7a6104c07de8c74adbfc7be3199a08e9fc88cdeaade60f713e5e1766f"
+  },
+  "harnessCorrection": "Initial duplicate test reused same object reference, so existing client tree admission rejected it before target check. Distinct data records now exercise duplicate-ID refusal; original client policy unchanged."
+}

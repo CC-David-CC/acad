@@ -1,0 +1,33 @@
+{
+  "scope": "Only owned loopback fixture servers terminated after exact command/cwd match",
+  "rows": [
+    {
+      "port": 20938,
+      "matchedPids": [
+        1741938
+      ],
+      "verifiedExactArgsAndCwd": true
+    },
+    {
+      "port": 20939,
+      "matchedPids": [
+        1743067
+      ],
+      "verifiedExactArgsAndCwd": true
+    },
+    {
+      "port": 20940,
+      "matchedPids": [
+        1743730
+      ],
+      "verifiedExactArgsAndCwd": true
+    },
+    {
+      "port": 20941,
+      "matchedPids": [
+        1744198
+      ],
+      "verifiedExactArgsAndCwd": true
+    }
+  ]
+}

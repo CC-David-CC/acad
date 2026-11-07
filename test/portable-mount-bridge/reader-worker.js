@@ -1,0 +1,2 @@
+const {readPortablePrism}=require('../../modules/brep/io/readPortablePrism.ts');
+self.onmessage=e=>{try{if(typeof window!=='undefined'||typeof document!=='undefined'||typeof verb!=='undefined')throw Error('unexpected runtime');const s=readPortablePrism(e.data.topology,e.data.provenance);self.postMessage({ok:true,faces:s.faces.length,edges:[...s.edges].length,vertices:[...s.vertices].length});}catch(error){self.postMessage({ok:false,error:String(error)});}};

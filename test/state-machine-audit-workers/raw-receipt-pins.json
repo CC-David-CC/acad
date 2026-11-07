@@ -1,0 +1,26 @@
+{
+  "retained-paths-after.json": {
+    "sha256": "2d3489366c539162fd9e40ae56860623a6539a8999d078ca67b975d2243ad50c",
+    "bytes": 12529695,
+    "compactedSHA256": "ed6dd07c9fdd05d629acfd45eb6c5a4520268133d1ef731de072c461be685cfe",
+    "displayArrays": 242
+  },
+  "retained-old-after.json": {
+    "sha256": "327b1b7c4e82d77623053be35bf608021b9c6e9e60933e2fec6e77f9180b9102",
+    "bytes": 6089591,
+    "compactedSHA256": "d5b1795322e61a0e52b1258a864269471fa85d7d4253d924f6f9c4783b8ca09f",
+    "displayArrays": 126
+  },
+  "retained-controller-after.json": {
+    "sha256": "759b6a5ef024f6a71873926733c60d4b299568abcb34da14e286260573e71290",
+    "bytes": 12529706,
+    "compactedSHA256": "1c77e857e90381537533d81b00d1eec7fae116b9b5d4a72f57f6905e63684eb0",
+    "displayArrays": 242
+  },
+  "retained-old-controller-after.json": {
+    "sha256": "d622f4f50fc26f738ef70149f24fc8e4c5bbdef1305ab0d40d7466822553a370",
+    "bytes": 6089595,
+    "compactedSHA256": "dd190b933af3a83c8d6f5c24adefaaa2a1977a068e8284b0049c4b73ededef8e",
+    "displayArrays": 126
+  }
+}

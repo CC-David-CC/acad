@@ -1,0 +1,53 @@
+{
+  "capturedAt": "2026-11-06T19:20:48.614Z",
+  "node": "v24.22.1",
+  "sources": {
+    "../../modules/engine/mount/selectionAncestryIndex.mjs": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+    "../../modules/engine/mount/prismSelectionIndex.mjs": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+    "../../modules/engine/mount/ownedTopologyContract.mjs": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+    "./worker.mjs": "2ad1596a7d0d3cface3bcfe670b06ef8b735a18a7147739c03384b2143f0a7ea",
+    "./native-first-receipt.json": "a1a99f0f6178aa64463a1688a1b3022880821fde68f027751378bcd7fd2496d7"
+  },
+  "status": "PASS",
+  "scope": "Actual Node Worker pure propagation of recorded genuine main-export fixtures; no new native/browser/public operation",
+  "rows": [
+    {
+      "name": "recorded actual main-export fillet and raw-deleted survivors",
+      "status": "PASS",
+      "data": {
+        "volume": 99961.37166941153,
+        "edges": 11,
+        "faces": 7,
+        "retainedDespiteRawDeleted": 7,
+        "newBlendFaces": 1,
+        "unclaimedEdges": 4
+      }
+    },
+    {
+      "name": "recorded actual equal-distance chamfer",
+      "status": "PASS",
+      "data": {
+        "volume": 99990
+      }
+    },
+    {
+      "name": "recorded actual far-corner chamfer after fillet",
+      "status": "PASS",
+      "data": {
+        "volume": 99951.37166941154,
+        "edges": 10,
+        "faces": 8,
+        "oldBlendSurvives": true,
+        "unclaimedEdges": 8
+      }
+    },
+    {
+      "name": "recorded radius edit changes geometry while identities survive replay",
+      "status": "PASS",
+      "data": {
+        "volume": 99982.83185307178,
+        "sameKeysAfterSizeChange": true
+      }
+    }
+  ]
+}

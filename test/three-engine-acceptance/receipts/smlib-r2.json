@@ -1,0 +1,119 @@
+{
+  "source": "server uncommitted SMLib prototype 2026-11-05; pinned upstream1ffd/NVIDIA3fd; exact served hashes below",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'",
+  "fixture": "http://127.0.0.1:20547/static/index.html",
+  "engines": [
+    {
+      "slot": "smlib",
+      "engine": "smlib-wasm",
+      "representation": "smlib-brep-worker-owned",
+      "unit": "millimeter",
+      "rows": [
+        {
+          "id": "box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "offset-fractional-box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-common",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-subtract",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "touch-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-common",
+          "status": "failure",
+          "code": "ENGINE_FAILURE",
+          "message": "SMLib refused or failed the operation."
+        },
+        {
+          "id": "coincident-subtract",
+          "status": "failure",
+          "code": "ENGINE_FAILURE",
+          "message": "SMLib refused or failed the operation."
+        },
+        {
+          "id": "foreign-mount",
+          "status": "pass"
+        },
+        {
+          "id": "unit-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "negative-dimension-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "unsupported-operation",
+          "status": "failure",
+          "code": null,
+          "message": "Expected UNSUPPORTED_OPERATION, received INVALID_REQUEST"
+        },
+        {
+          "id": "pre-aborted-operation",
+          "status": "pass"
+        },
+        {
+          "id": "disposed-handle",
+          "status": "pass"
+        },
+        {
+          "id": "closed-mount",
+          "status": "failure",
+          "code": null,
+          "message": "Expected MOUNT_CLOSED, received DISPOSED"
+        }
+      ],
+      "scope": "Numerical/caller-boundary controls only; no history/native/in-flight-cancellation/stale-response proof"
+    }
+  ],
+  "modules": [
+    {
+      "url": "/static/smlibMount.mjs",
+      "sha256": "624ae0ffc583322717a60d33e65c1ebf6bc73e5f930543f0ddd30ee230f0d660"
+    },
+    {
+      "url": "/static/smlib-worker.js",
+      "sha256": "a8cf76a5ea8572573a23d6753f9c92681a898f38fa0d50095431586a05c57dc2"
+    },
+    {
+      "url": "/static/smlib.wasm",
+      "sha256": "a48a3283760c21337881c5e2d5c973dbc62cf95cae46d1c012effd75389eb1ae"
+    },
+    {
+      "url": "/static/__three_engine_tests__/matrix.mjs",
+      "sha256": "cd2dbf99c3eff33c86661b2d1f7191d6ae1eb788d016f554ebbdf7be403c0959"
+    },
+    {
+      "url": "/static/__three_engine_tests__/cases.mjs",
+      "sha256": "51cf6af59deb376dcf6fb1f54f03f2de5090c01a9323a7e293f542901c153e1b"
+    }
+  ],
+  "qualifiedAllNumericCases": false,
+  "scope": "Actual supplied Worker/kernel numerical and caller-boundary controls. History/native/agent/in-flight-stale controls remain separate."
+}

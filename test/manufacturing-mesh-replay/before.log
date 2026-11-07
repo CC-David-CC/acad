@@ -1,0 +1,205 @@
+✔ actual observation prerequisite permanently forbids publication (2.637388ms)
+✖ required protected orchestration module must exist (5.385516ms)
+✖ Craft exposes preparation through shared read dispatcher (1.280574ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.826236
+
+✖ failing tests:
+
+test at test/manufacturing-mesh-replay/before.test.mjs:6:1
+✖ required protected orchestration module must exist (5.385516ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(fs.existsSync(new URL('../../web/app/cad/craft/workerManufacturingMeshReplay.ts',import.meta.url)))
+  
+      at TestContext.<anonymous> (file:///tmp/codi-drawing-custody-review-20261107/test/manufacturing-mesh-replay/before.test.mjs:6:70)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at test/manufacturing-mesh-replay/before.test.mjs:7:1
+✖ Craft exposes preparation through shared read dispatcher (1.280574ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /prepareWorkerManufacturingMeshes/. Input:
+  
+  "import {createSourcePlaneDepthCommands} from './sourcePlaneDepthCommands';\n" +
+    "import {captureSourcePlaneParameters,sourcePlaneDepth} from 'sketcher/headless/sourcePlaneDepthEnvelope.mjs';\n" +
+    "import {recordSourcePlaneDepthEdit,planSourcePlaneDepthTravel} from './authoredEditJournal.mjs';\n" +
+    "import {addModification, stepOverriding} from './craftHistoryUtils';\n" +
+    "import {Emitter, state, StateStream, stream} from 'lstream';\n" +
+    "import materializeParams from './schema/materializeParams';\n" +
+    "import CadError from '../../utils/errors';\n" +
+    "import {MObject, MObjectIdGenerator} from '../model/mobject';\n" +
+    'import {intercept} from "lstream/intercept";\n' +
+    'import {ApplicationContext} from "cad/context";\n' +
+    'import {OperationParams} from "cad/craft/schema/schema";\n' +
+    'import {createOCCUtils} from "cad/craft/e0/OCCUtils";\n' +
+    'import {clearImplicitModels} from "cad/craft/e0/occCommandInterface";\n' +
+    "import {normalizeNewOperationRequest} from './normalizeNewOperationRequest';\n" +
+    'import {CraftStaleStatus} from "./ui/CraftStaleStatus";\n' +
+    'import {contributeComponent} from "cad/dom/components/ContributedComponents";\n' +
+    "import {prepareStateBatch} from 'lstream/stateBatch';\n" +
+    "import {recordPreparedManufacturingEdit,planPreparedManufacturingTravel,documentMetadataTarget} from './authoredEditJournal.mjs';\n" +
+    "import {createRectangleCreationCommands, PreparedSketchCommand} from './rectangleCreation';\n" +
+    "import {createRectangleEditingCommands} from './rectangleEditing';\n" +
+    "import {createClosedSketchTransitionCommands} from './closedSketchTransitions';\n" +
+    "import {createLegacyExpressionCommands} from './legacyExpressionCommands';\n" +
+    "import {createEmptySketchCreationCommands} from './emptySketchCreation';\n" +
+    "import {createWorkerFeatureCommands} from './workerFeatureCommands';\n" +
+    "import {createWorkerRevolveCommands} from './workerRevolveCommands';\n" +
+    "import {createWorkerLoftCommands} from './workerLoftCommands';\n" +
+    "import {createWorkerSweepCommands} from './workerSweepCommands';\n" +
+    "import {genericHistoryBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';\n" +
+    "import {selectedProfileHistoryBudget} from 'engine/mount/selectedProfileBudget.mjs';\n" +
+    "import {createWorkerSolidCommands} from './workerSolidCommands';\n" +
+    "import {createWorkerSolidPointCommands} from './workerSolidPointCommands';\n" +
+    "import {classifyCandidateWorkerSolidPoints,exportCandidateWorkerSTEP} from 'engine/solid/solidLedger.mjs';\n" +
+    "import {createWorkerStepExportCommands} from './workerStepExportCommands';\n" +
+    "import {createWorkerLinearHolePatternCommands} from './workerLinearHolePatternCommands';\n" +
+    "import {createWorkerThroughHoleCommands} from './workerThroughHoleCommands';\n" +
+    "import {createWorkerEdgeTreatmentCommands} from './workerEdgeTreatmentCommands';\n" +
+    "import {createSelectedProfileCommands} from './selectedProfileCommands';\n" +
+    "import {createSelectedProfileDepthCommands} from './selectedProfileDepthCommands';\n" +
+    "import {createSelectedProfileRegionCommands} from './selectedProfileRegionCommands';\n" +
+    "import {inspectCatalogSolidCapabilities,listAvailableSelectedProfileBuilds,requireAvailableSelectedProfileBuild,listAvailableLoftBuilds,requireAvailableLoftBuild,listAvailableSweepBuilds,requireAvailableSweepBuild,listAvailableRevolveBuilds,requireAvailableRevolveBuild,requireAvailablePointBuild,listAvailableStepExportBuilds,requireAvailableStepExportBuild} from 'engine/mount/catalogMount';\n" +
+    "import {createEvaluationResourcePool} from './evaluationResources.mjs';\n" +
+    "import {assertLegacyOperationInputs} from './legacyOperationInputs';\n" +
+    "import {recordRevolveAngleEdit,planRevolveAngleTravel} from './authoredEditJournal.mjs';\n" +
+    "import {captureOwnedRevolveFeature} from 'engine/solid/ownedRevolveFeature.mjs';\n" +
+    "import {emptyAuthoredEditJournal, supportsOperationAppend, captureOperationAppend, recordOperationAppend, planOperationAppendTravel, captureLinearHolePatternParameters, recordLinearHolePatternEdit, planLinearHolePatternTravel, captureThroughHoleParameters, recordThroughHoleEdit, planThroughHoleTravel, recordExtrusionEdit, planExtrusionTravel, recordSolidBoxEdit, planSolidBoxTravel, captureSelectedProfileDepthParameters, recordSelectedProfileDepthEdit, planSelectedProfileDepthTravel, recordSelectedProfileRegionEdit, planSelectedProfileRegionTravel, captureSolidEdgeTreatmentParameters, recordSolidEdgeTreatmentEdit, planSolidEdgeTreatmentTravel, recordHoleEdit, planHoleTravel, recordSketchEdit, planSketchTravel, recordPhysicalTransaction, planPhysicalTravel, recordCenteredParentRepair, planCenteredParentRepairTravel} from './authoredEditJournal.mjs';\n" +
+    "import {captureHoleEdit} from './holeEditIntent.mjs';\n" +
+    "import {captureAuthoredHistory} from './captureAuthoredHistory.mjs';\n" +
+    "import {capturePipelineHistory,assertPipelineHistoryCurrent} from './capturePipelineHistory.mjs';\n" +
+    "import {sketchRevision} from './sketchRevision.mjs';\n" +
+    "import {assertPhysicalMaterialBaseline} from './physicalMaterialBaseline.mjs';\n" +
+    "import {registerUnconsumedSketchSave,hasOnlyUnconsumedSketchHistory,commitUnconsumedSketchSave,knownOwnSketchSaveTip} from './unconsumedSketchSave.mjs';\n" +
+    "import {sketchBoundaryFrame} from '../sketch/boundaryValidity';\n" +
+    "import {encodeUpdatedPhysicalDefinitions,encodePhysicalConfigurations,decodePhysicalSource} from '../parameters/physicalSource.mjs';\n" +
+    "import {evaluatePhysicalInWorker} from '../parameters/physicalWorkerClient.mjs';\n" +
+    "import {prepareExpressionPublication} from '../parameters/expressionPublication.mjs';\n" +
+    "import physicalWorkerUrl from 'codi-physical-parameters-worker';\n" +
+    "import sketchWorkerUrl from 'codi-headless-sketch-worker';\n" +
+    "import {runSketchSolve} from 'sketcher/headless/client';\n" +
+    "import {prepareTypedRectangle} from '../parameters/typedRectangleBindings.mjs';\n" +
+    "import {deriveAuthoredPhysicalManifest} from '../parameters/authoredPhysicalManifest.mjs';\n" +
+    "import {physicalBindingFields} from '../parameters/physicalBindingFields.mjs';\n" +
+    "import {ReadSketch} from '../sketch/sketchReader';\n" +
+    "import {MOpenFaceShell} from '../model/mopenFace';\n" +
+    "import {getSketchBoundaries} from '../sketch/sketchBoundaries';\n" +
+    "import {sameSketchSaveFrame} from './unconsumedSketchSave.mjs';\n" +
+    "import {createCandidateSketchStorage} from './candidateSketchStorage.mjs';\n" +
+    "import {centeredHoleIntentFromLid} from 'engine/extrusion/centeredHoleIntent.mjs';\n" +
+    "import standardPlaneOperation from 'workbenches/modeler/features/plane/simplePlaneOperation';\n" +
+    '\n' +
+    'export function activate(ctx: ApplicationContext) {\n' +
+    '\n' +
+    '\n' +
+    '  const modifications$ = state({\n' +
+    '    history: [],\n' +
+    '    pointer: -1\n' +
+    '  });\n' +
+    '\n' +
+    '  const models$ = state<MObject[]>([]);\n' +
+    '  const update$ = stream<void>();\n' +
+    '  const pipelineFailure$ = state<any>(null);\n' +
+    '  const engineCleanupFailure$ = state<any>(null);\n' +
+    '  const authoredJournal$ = state(emptyAuthoredEditJournal((ctx.projectService as any).documentGeneration, 0));\n' +
+    '  let journalHeadSignature: string = null;\n' +
+    '  // One reference to the immutable accepted definition; entries retain no prefix.\n' +
+    '  let journalHeadDefinition: OperationRequest[] = null;\n' +
+    '  let fullTipSignature: string = null;\n' +
+    '  let fullTipSketchRevision: string = null;\n' +
+    '  let fullTipMaterialSurfaceRevision: string = null;\n' +
+    '  let rewindBaseline: {document:number,signature:string} = null;\n' +
+    '  let prepareSketchJournalTravel: Function = null;\n' +
+    '  let sourcePlaneDepthCommands:any=null;\n' +
+    '  let legacyExpressionCommands:any = null;\n' +
+    '  const failedEvaluationHistory=new WeakMap<object,any[]>();\n' +
+    '  const ownedPipelineHistories=new WeakSet<any[]>();\n' +
+    '\n' +
+    '  let pendingModifications = 0;\n' +
+    '  let pendingPipelines = 0;\n' +
+    '  let evaluationEpoch = 0;\n' +
+    '  let pipelineTail = Promise.resolve();\n' +
+    '  let lastComplete: MObject[] = null;\n' +
+    '  // This freshly activated craft service already contains the empty state of\n' +
+    '  // its document. Its first command must not emit a spurious document reset.\n' +
+    '  let lastCompleteGeneration: number = (ctx.projectService as any).documentGeneration;\n' +
+    '  let lastCompleteService = ctx.projectService;\n' +
+    '  const engineResources = createEvaluationResourcePool({maxMounts:2,maxTotalMounts:3});\n' +
+    '  let acceptedResources = null, lastCompleteResources = null;\n' +
+    '  function reportEngineCleanupFailure(force = false) {\n' +
+    '    if ((!force && !engineResources.usage.cleanupFailed) || engineCleanupFailure$.value) return;\n' +
+    "    try { engineCleanupFailure$.next(Object.freeze({code:'ENGINE_CLEANUP_FAILED',message:'Engine cleanup failed. Close and reopen this CAD window before further model evaluation.'})); }\n" +
+    "    catch (error) { console.error('Engine cleanup status observer failed:',error); }\n" +
+    '  }\n' +
+    '  function requireEngineCleanup() {\n' +
+    '    reportEngineCleanupFailure();\n' +
+    "    if (engineCleanupFailure$.value) throw new Error('Engine cleanup failed. Close and reopen this CAD window.');\n" +
+    '  }\n' +
+    '  function detachAccepted(owner) {\n' +
+    "    if (!owner || owner.state !== 'accepted') return;\n" +
+    '    try { owner.detach(); } catch (error) {\n' +
+    "      if (owner.state !== 'closed' || engineResources.usage.cleanupFailed) { console.error('Accepted engine resource cleanup failed:',error); reportEngineCleanupFailure(true); }\n" +
+    '    }\n' +
+    '  }\n' +
+    '  function retireUnused(...owners) {\n' +
+    '    let failed = false;\n' +
+    '    for (const owner of new Set(owners)) {\n' +
+    '      if (owner && owner !== acceptedResources && owner !== lastCompleteResources) {\n' +
+    "        try { owner.close(); } catch (error) { failed = true; console.error('Engine retirement failed:',error); }\n" +
+    '      }\n' +
+    '    }\n' +
+    '    reportEngineCleanupFailure(failed);\n' +
+    '  }\n' +
+    '  contributeComponent(CraftStaleStatus);\n' +
+    '\n' +
+    '  const modificationCallbacks = new WeakMap();\n' +
+    '  function settleModification(curr, error?: any) {\n' +
+    '    const callbacks=modificationCallbacks.get(curr);\n' +
+    '    if (!callbacks) return;\n' +
+    '    modificationCallbacks.delete(curr);\n' +
+    '    pendingModifications--;\n' +
+    '    try {\n' +
+    '      if (error === undefined) callbacks.onAccepted();\n' +
+    '      else callbacks.onError(error);\n' +
+    '    } catch (callbackError) {\n' +
+    '      // Consumer/UI exceptions do not turn an accepted model into a failed one.\n' +
+    "      console.error('Error in model-operation callback:', callbackError);\n" +
+    '    }\n' +
+    '  }\n' +
+    '  async function submitModification(request, transform, onAccepted, onError, editingHistory = false, preparation?: PreparedSketchCommand) {\n' +
+    '    try {\n' +
+    '      requireEngineCleanup();\n' +
+    '      preparation?.requireCurrent();\n' +
+    '      if (pendingPipelines '... 161806 more characters
+  
+      at TestContext.<anonymous> (file:///tmp/codi-drawing-custody-review-20261107/test/manufacturing-mesh-replay/before.test.mjs:7:175)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: `import {createSourcePlaneDepthCommands} from './sourcePlaneDepthCommands';\nimport {captureSourcePlaneParameters,sourcePlaneDepth} from 'sketcher/headless/sourcePlaneDepthEnvelope.mjs';\nimport {recordSourcePlaneDepthEdit,planSourcePlaneDepthTravel} from './authoredEditJournal.mjs';\nimport {addModification, stepOverriding} from './craftHistoryUtils';\nimport {Emitter, state, StateStream, stream} from 'lstream';\nimport materializeParams from './schema/materializeParams';\nimport CadError from '../../utils/errors';\nimport {MObject, MObjectIdGenerator} from '../model/mobject';\nimport {intercept} from "lstream/intercept";\nimport {ApplicationContext} from "cad/context";\nimport {OperationParams} from "cad/craft/schema/schema";\nimport {createOCCUtils} from "cad/craft/e0/OCCUtils";\nimport {clearImplicitModels} from "cad/craft/e0/occCommandInterface";\nimport {normalizeNewOperationRequest} from './normalizeNewOperationRequest';\nimport {CraftStaleStatus} from "./ui/CraftStaleStatus";\nimport {contributeComponent} from "cad/dom/components/ContributedComponents";\nimport {prepareStateBatch} from 'lstream/stateBatch';\nimport {recordPreparedManufacturingEdit,planPreparedManufacturingTravel,documentMetadataTarget} from './authoredEditJournal.mjs';\nimport {createRectangleCreationCommands, PreparedSketchCommand} from './rectangleCreation';\nimport {createRectangleEditingCommands} from './rectangleEditing';\nimport {createClosedSketchTransitionCommands} from './closedSketchTransitions';\nimport {createLegacyExpressionCommands} from './legacyExpressionCommands';\nimport {createEmptySketchCreationCommands} from './emptySketchCreation';\nimport {createWorkerFeatureCommands} from './workerFeatureCommands';\nimport {createWorkerRevolveCommands} from './workerRevolveCommands';\nimport {createWorkerLoftCommands} from './workerLoftCommands';\nimport {createWorkerSweepCommands} from './workerSweepCommands';\nimport {genericHistoryBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';\nimport {selectedProfileHistoryBudget} from 'engine/mount/selectedProfileBudget.mjs';\nimport {createWorkerSolidCommands} from './workerSolidCommands';\nimport {createWorkerSolidPointCommands} from './workerSolidPointCommands';\nimport {classifyCandidateWorkerSolidPoints,exportCandidateWorkerSTEP} from 'engine/solid/solidLedger.mjs';\nimport {createWorkerStepExportCommands} from './workerStepExportCommands';\nimport {createWorkerLinearHolePatternCommands} from './workerLinearHolePatternCommands';\nimport {createWorkerThroughHoleCommands} from './workerThroughHoleCommands';\nimport {createWorkerEdgeTreatmentCommands} from './workerEdgeTreatmentCommands';\nimport {createSelectedProfileCommands} from './selectedProfileCommands';\nimport {createSelectedProfileDepthCommands} from './selectedProfileDepthCommands';\nimport {createSelectedProfileRegionCommands} from './selectedProfileRegionCommands';\nimport {inspectCatalogSolidCapabilities,listAvailableSelectedProfileBuilds,requireAvailableSelectedProfileBuild,listAvailableLoftBuilds,requireAvailableLoftBuild,listAvailableSweepBuilds,requireAvailableSweepBuild,listAvailableRevolveBuilds,requireAvailableRevolveBuild,requireAvailablePointBuild,listAvailableStepExportBuilds,requireAvailableStepExportBuild} from 'engine/mount/catalogMount';\nimport {createEvaluationResourcePool} from './evaluationResources.mjs';\nimport {assertLegacyOperationInputs} from './legacyOperationInputs';\nimport {recordRevolveAngleEdit,planRevolveAngleTravel} from './authoredEditJournal.mjs';\nimport {captureOwnedRevolveFeature} from 'engine/solid/ownedRevolveFeature.mjs';\nimport {emptyAuthoredEditJournal, supportsOperationAppend, captureOperationAppend, recordOperationAppend, planOperationAppendTravel, captureLinearHolePatternParameters, recordLinearHolePatternEdit, planLinearHolePatternTravel, captureThroughHoleParameters, recordThroughHoleEdit, planThroughHoleTravel, recordExtrusionEdit, planExtrusionTravel, recordSolidBoxEdit, planSolidBoxTravel, captureSelectedProfileDepthParameters, recordSelectedProfileDepthEdit, planSelectedProfileDepthTravel, recordSelectedProfileRegionEdit, planSelectedProfileRegionTravel, captureSolidEdgeTreatmentParameters, recordSolidEdgeTreatmentEdit, planSolidEdgeTreatmentTravel, recordHoleEdit, planHoleTravel, recordSketchEdit, planSketchTravel, recordPhysicalTransaction, planPhysicalTravel, recordCenteredParentRepair, planCenteredParentRepairTravel} from './authoredEditJournal.mjs';\nimport {captureHoleEdit} from './holeEditIntent.mjs';\nimport {captureAuthoredHistory} from './captureAuthoredHistory.mjs';\nimport {capturePipelineHistory,assertPipelineHistoryCurrent} from './capturePipelineHistory.mjs';\nimport {sketchRevision} from './sketchRevision.mjs';\nimport {assertPhysicalMaterialBaseline} from './physicalMaterialBaseline.mjs';\nimport {registerUnconsumedSketchSave,hasOnlyUnconsumedSketchHistory,commitUnconsumedSketchSave,knownOwnSketchSaveTip} from './unconsumedSketchSave.mjs';\nimport {sketchBoundaryFrame} from '../sketch/boundaryValidity';\nimport {encodeUpdatedPhysicalDefinitions,encodePhysicalConfigurations,decodePhysicalSource} from '../parameters/physicalSource.mjs';\nimport {evaluatePhysicalInWorker} from '../parameters/physicalWorkerClient.mjs';\nimport {prepareExpressionPublication} from '../parameters/expressionPublication.mjs';\nimport physicalWorkerUrl from 'codi-physical-parameters-worker';\nimport sketchWorkerUrl from 'codi-headless-sketch-worker';\nimport {runSketchSolve} from 'sketcher/headless/client';\nimport {prepareTypedRectangle} from '../parameters/typedRectangleBindings.mjs';\nimport {deriveAuthoredPhysicalManifest} from '../parameters/authoredPhysicalManifest.mjs';\nimport {physicalBindingFields} from '../parameters/physicalBindingFields.mjs';\nimport {ReadSketch} from '../sketch/sketchReader';\nimport {MOpenFaceShell} from '../model/mopenFace';\nimport {getSketchBoundaries} from '../sketch/sketchBoundaries';\nimport {sameSketchSaveFrame} from './unconsumedSketchSave.mjs';\nimport {createCandidateSketchStorage} from './candidateSketchStorage.mjs';\nimport {centeredHoleIntentFromLid} from 'engine/extrusion/centeredHoleIntent.mjs';\nimport standardPlaneOperation from 'workbenches/modeler/features/plane/simplePlaneOperation';\n\nexport function activate(ctx: ApplicationContext) {\n\n\n  const modifications$ = state({\n    history: [],\n    pointer: -1\n  });\n\n  const models$ = state<MObject[]>([]);\n  const update$ = stream<void>();\n  const pipelineFailure$ = state<any>(null);\n  const engineCleanupFailure$ = state<any>(null);\n  const authoredJournal$ = state(emptyAuthoredEditJournal((ctx.projectService as any).documentGeneration, 0));\n  let journalHeadSignature: string = null;\n  // One reference to the immutable accepted definition; entries retain no prefix.\n  let journalHeadDefinition: OperationRequest[] = null;\n  let fullTipSignature: string = null;\n  let fullTipSketchRevision: string = null;\n  let fullTipMaterialSurfaceRevision: string = null;\n  let rewindBaseline: {document:number,signature:string} = null;\n  let prepareSketchJournalTravel: Function = null;\n  let sourcePlaneDepthCommands:any=null;\n  let legacyExpressionCommands:any = null;\n  const failedEvaluationHistory=new WeakMap<object,any[]>();\n  const ownedPipelineHistories=new WeakSet<any[]>();\n\n  let pendingModifications = 0;\n  let pendingPipelines = 0;\n  let evaluationEpoch = 0;\n  let pipelineTail = Promise.resolve();\n  let lastComplete: MObject[] = null;\n  // This freshly activated craft service already contains the empty state of\n  // its document. Its first command must not emit a spurious document reset.\n  let lastCompleteGeneration: number = (ctx.projectService as any).documentGeneration;\n  let lastCompleteService = ctx.projectService;\n  const engineResources = createEvaluationResourcePool({maxMounts:2,maxTotalMounts:3});\n  let acceptedResources = null, lastCompleteResources = null;\n  function reportEngineCleanupFailure(force = false) {\n    if ((!force && !engineResources.usage.cleanupFailed) || engineCleanupFailure$.value) return;\n    try { engineCleanupFailure$.next(Object.freeze({code:'ENGINE_CLEANUP_FAILED',message:'Engine cleanup failed. Close and reopen this CAD window before further model evaluation.'})); }\n    catch (error) { console.error('Engine cleanup status observer failed:',error); }\n  }\n  function requireEngineCleanup() {\n    reportEngineCleanupFailure();\n    if (engineCleanupFailure$.value) throw new Error('Engine cleanup failed. Close and reopen this CAD window.');\n  }\n  function detachAccepted(owner) {\n    if (!owner || owner.state !== 'accepted') return;\n    try { owner.detach(); } catch (error) {\n      if (owner.state !== 'closed' || engineResources.usage.cleanupFailed) { console.error('Accepted engine resource cleanup failed:',error); reportEngineCleanupFailure(true); }\n    }\n  }\n  function retireUnused(...owners) {\n    let failed = false;\n    for (const owner of new Set(owners)) {\n      if (owner && owner !== acceptedResources && owner !== lastCompleteResources) {\n        try { owner.close(); } catch (error) { failed = true; console.error('Engine retirement failed:',error); }\n      }\n    }\n    reportEngineCleanupFailure(failed);\n  }\n  contributeComponent(CraftStaleStatus);\n\n  const modificationCallbacks = new WeakMap();\n  function settleModification(curr, error?: any) {\n    const callbacks=modificationCallbacks.get(curr);\n    if (!callbacks) return;\n    modificationCallbacks.delete(curr);\n    pendingModifications--;\n    try {\n      if (error === undefined) callbacks.onAccepted();\n      else callbacks.onError(error);\n    } catch (callbackError) {\n      // Consumer/UI exceptions do not turn an accepted model into a failed one.\n      console.error('Error in model-operation callback:', callbackError);\n    }\n  }\n  async function submitModification(request, transform, onAccepted, onError, editingHistory = false, preparation?: PreparedSketchCommand) {\n    try {\n      requireEngineCleanup();\n      preparation?.requireCurrent();\n      if (pendingPipelines `... 161806 more characters,
+    expected: /prepareWorkerManufacturingMeshes/,
+    operator: 'match',
+    diff: 'simple'
+  }

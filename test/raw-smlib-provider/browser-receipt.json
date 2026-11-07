@@ -1,0 +1,131 @@
+{
+  "a": {
+    "resultKind": "single-material",
+    "materialRegions": 1,
+    "voidRegions": 0,
+    "validLevel0": true,
+    "validLevel2": true,
+    "manifoldPredicate": true,
+    "volume": 1000,
+    "volumeQuality": "native-relative-0.001",
+    "bounds": {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        10,
+        10,
+        10
+      ]
+    }
+  },
+  "cavity": {
+    "resultKind": "single-material",
+    "materialRegions": 1,
+    "voidRegions": 1,
+    "validLevel0": true,
+    "validLevel2": true,
+    "manifoldPredicate": true,
+    "volume": 784,
+    "volumeQuality": "native-relative-0.001",
+    "bounds": {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        10,
+        10,
+        10
+      ]
+    }
+  },
+  "joined": {
+    "resultKind": "multi-material",
+    "materialRegions": 2,
+    "voidRegions": 0,
+    "validLevel0": true,
+    "validLevel2": true,
+    "manifoldPredicate": false,
+    "volume": null,
+    "volumeQuality": "native-undefined-nonmanifold",
+    "bounds": {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        20,
+        20,
+        10
+      ]
+    }
+  },
+  "empty": {
+    "resultKind": "empty",
+    "materialRegions": 0,
+    "voidRegions": 0,
+    "validLevel0": true,
+    "validLevel2": null,
+    "manifoldPredicate": null,
+    "volume": 0,
+    "volumeQuality": "empty",
+    "bounds": null
+  },
+  "emptyUnion": {
+    "resultKind": "single-material",
+    "materialRegions": 1,
+    "voidRegions": 0,
+    "validLevel0": true,
+    "validLevel2": true,
+    "manifoldPredicate": true,
+    "volume": 1000,
+    "volumeQuality": "native-relative-0.001",
+    "bounds": {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        10,
+        10,
+        10
+      ]
+    }
+  },
+  "meshes": [
+    12,
+    24,
+    24,
+    0
+  ],
+  "displays": [
+    {
+      "status": "available",
+      "reason": null,
+      "bytes": 432
+    },
+    {
+      "status": "available",
+      "reason": null,
+      "bytes": 864
+    },
+    {
+      "status": "available",
+      "reason": null,
+      "bytes": 864
+    },
+    {
+      "status": "available",
+      "reason": null,
+      "bytes": 0
+    }
+  ],
+  "emptyBytes": 0,
+  "disposed": "INVALID_HANDLE"
+}

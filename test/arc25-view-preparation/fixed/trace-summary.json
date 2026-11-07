@@ -1,0 +1,182 @@
+{
+  "scope": "Actual app d177, registered native PLANE envelope, same-renderer second actual CAD; inclusive trace durations overlap and tracing adds overhead. Not an exact CPU-share or latency guarantee.",
+  "traceSha256": "92543484207857a0d41e4e08d7154fa6d28a1ba2db5c710e67acc98283e73bd0",
+  "pid": 1954804,
+  "tid": 1954804,
+  "restoreSpanMs": 3297.757,
+  "groups": {
+    "RunMicrotasks": {
+      "count": 458,
+      "inclusiveMs": 412.9100000000001,
+      "maxMs": 194.411
+    },
+    "TimerFire": {
+      "count": 856,
+      "inclusiveMs": 404.80999999999983,
+      "maxMs": 194.434
+    },
+    "FunctionCall": {
+      "count": 1125,
+      "inclusiveMs": 238.57500000000022,
+      "maxMs": 145.506
+    },
+    "FireAnimationFrame": {
+      "count": 246,
+      "inclusiveMs": 216.72899999999996,
+      "maxMs": 145.529
+    },
+    "V8.StackGuard": {
+      "count": 586,
+      "inclusiveMs": 45.9440000000001,
+      "maxMs": 2.945
+    },
+    "V8.HandleInterrupts": {
+      "count": 586,
+      "inclusiveMs": 44.07699999999998,
+      "maxMs": 2.942
+    },
+    "HandlePostMessage": {
+      "count": 2,
+      "inclusiveMs": 40.482,
+      "maxMs": 34.771
+    },
+    "MinorGC": {
+      "count": 10,
+      "inclusiveMs": 35.349000000000004,
+      "maxMs": 6.621
+    },
+    "V8.GC_SCAVENGER": {
+      "count": 10,
+      "inclusiveMs": 34.382,
+      "maxMs": 6.531
+    },
+    "V8.GC_SCAVENGER_SCAVENGE": {
+      "count": 10,
+      "inclusiveMs": 34.144,
+      "maxMs": 6.498
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE": {
+      "count": 10,
+      "inclusiveMs": 28.598,
+      "maxMs": 5.482
+    },
+    "V8.GC_MC_INCREMENTAL": {
+      "count": 173,
+      "inclusiveMs": 28.47899999999999,
+      "maxMs": 0.932
+    },
+    "MajorGC": {
+      "count": 1,
+      "inclusiveMs": 12.515,
+      "maxMs": 12.515
+    },
+    "V8.GC_MARK_COMPACTOR": {
+      "count": 1,
+      "inclusiveMs": 12.427,
+      "maxMs": 12.427
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_PARALLEL": {
+      "count": 11,
+      "inclusiveMs": 11.200000000000001,
+      "maxMs": 4.494
+    },
+    "V8.GC_MC_EVACUATE": {
+      "count": 2,
+      "inclusiveMs": 6.398999999999999,
+      "maxMs": 6.395
+    },
+    "EventDispatch": {
+      "count": 20,
+      "inclusiveMs": 5.442999999999999,
+      "maxMs": 1.797
+    },
+    "V8.GC_MC_EVACUATE_UPDATE_POINTERS": {
+      "count": 1,
+      "inclusiveMs": 4.866,
+      "maxMs": 4.866
+    },
+    "V8.GC_MC_CLEAR": {
+      "count": 1,
+      "inclusiveMs": 4.163,
+      "maxMs": 4.163
+    },
+    "ParseHTML": {
+      "count": 42,
+      "inclusiveMs": 3.7030000000000003,
+      "maxMs": 0.207
+    }
+  },
+  "longEvents": [
+    {
+      "name": "TimerFire",
+      "ms": 194.434,
+      "args": {
+        "data": {
+          "frame": "8D1E2A251130C583568C759AB0C6675F",
+          "timerId": 467
+        }
+      }
+    },
+    {
+      "name": "RunMicrotasks",
+      "ms": 194.411,
+      "args": {
+        "microtask_count": 107
+      }
+    },
+    {
+      "name": "FireAnimationFrame",
+      "ms": 145.529,
+      "args": {
+        "data": {
+          "frame": "8D1E2A251130C583568C759AB0C6675F",
+          "id": 214,
+          "sampleTraceId": 6414889829271784
+        }
+      }
+    },
+    {
+      "name": "FunctionCall",
+      "ms": 145.506,
+      "args": {
+        "data": {
+          "columnNumber": 38,
+          "frame": "8D1E2A251130C583568C759AB0C6675F",
+          "functionName": "",
+          "isolate": "8924192656902063330",
+          "lineNumber": 23371,
+          "sampleTraceId": 6414889829271785,
+          "scriptId": "7",
+          "url": "http://127.0.0.1:20496/static/index.bundle.js"
+        }
+      }
+    },
+    {
+      "name": "FireAnimationFrame",
+      "ms": 41.735,
+      "args": {
+        "data": {
+          "frame": "8D1E2A251130C583568C759AB0C6675F",
+          "id": 221,
+          "sampleTraceId": 6414889829272602
+        }
+      }
+    },
+    {
+      "name": "FunctionCall",
+      "ms": 41.714,
+      "args": {
+        "data": {
+          "columnNumber": 38,
+          "frame": "8D1E2A251130C583568C759AB0C6675F",
+          "functionName": "",
+          "isolate": "8924192656902063330",
+          "lineNumber": 23371,
+          "sampleTraceId": 6414889829272603,
+          "scriptId": "7",
+          "url": "http://127.0.0.1:20496/static/index.bundle.js"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+✔ default/no-op/changed receipt is document-scoped and canonical unit remains mm (1345.993745ms)
+✔ setter preserves history/source/counter/journal/material identities without Worker dispatch (295.994848ms)
+✔ malformed exact fields/options/getters and stale revisions reject unchanged (262.149123ms)
+✔ active/processing/history/wizard and cleanup states refuse metadata writes (780.421677ms)
+✔ closed/unbound/replaced manager and cancelled caller refuse before changing state (566.462047ms)
+✔ post-commit lifetime loss is marked committed and never rolls into another document (106.720147ms)
+✔ New/reset returns to absent metadata and invalidates prior document revision (116.383247ms)
+verb 2.0.0
+✔ actual manager snapshot/Blob reopen retains presentation through actual validation Worker (370.905701ms)
+verb 2.0.0
+✔ presentation installs only after successful replay and final restore guards (231.23556ms)
+verb 2.0.0
+verb 2.0.0
+✔ validation/replay failure and cancelled native Open never install incoming presentation (527.922374ms)
+✔ display change invalidates captured Save currentness independently of material state (119.293808ms)
+verb 2.0.0
+✔ actual manufacturing preparation/hashing retains optional presentation outside digest domains (350.523278ms)
+verb 2.0.0
+✔ an original default-mm native envelope reopens as default without metadata migration (196.594518ms)
+verb 2.0.0
+✔ metadata changes during actual asynchronous manufacturing hashing reject the old Save (326.982812ms)
+✔ independent exact length/area/volume examples use distinct unit powers (1.734878ms)
+✔ radians display in degrees independently of length presentation (0.520236ms)
+✔ default mm leaves canonical values intact and never accepts counts or strings as lengths (0.740308ms)
+✔ optional metadata is exact detached immutable inch-only data, never a default-mm field (1.214452ms)
+✔ native envelope preserves project/unit while default output retains exact original shape (1.039331ms)
+✔ presentation remains outside geometry/manufacturing digest domains (19.571195ms)
+✔ physical expression constructors share constants without changing canonical results or source (10.57561ms)
+verb 2.0.0
+✔ current manager preserves drawing through genuine validation and Save (1022.357259ms)
+✔ initial restore validity callback replacing actual manager must refuse before document generation changes (401.180658ms)
+verb 2.0.0
+✔ old manager Save preparation after reactivation must not authenticate old drawing as current (451.844028ms)
+verb 2.0.0
+✔ orphan snapshot refuses before local storage writes and does not purge either manager (1156.360621ms)
+verb 2.0.0
+✔ orphan Save refuses before invoking external options or writing workspace (510.777485ms)
+verb 2.0.0
+✔ prepared Save becomes stale after reactivation without copying or clearing metadata (423.748744ms)
+verb 2.0.0
+✔ initial Save validity reactivation refuses before captured snapshot writes (274.22307ms)
+✔ replacement preflight callback cannot reactivate manager after advancing document (187.440681ms)
+✔ later Worker-phase reactivation cannot let failed old restore dispose replacement (166.375481ms)
+✔ v2 encoding and decoded return shape remain exact, including null fourth argument (1.761849ms)
+✔ v3 has exactly one detached frozen definition; removal returns ordinary v2 (6.578839ms)
+✔ v3 rejects missing/null/empty/multiple/sparse/extra-property arrays and unsupported combinations (12.275499ms)
+✔ v3 field/list/definition accessors are rejected without evaluating them (4.835301ms)
+✔ v3 rejects symbol/hidden/foreign prototypes while admitted null data prototypes work (4.832881ms)
+✔ definition schema/physical domains and existing 64KiB cap are enforced in codec (7.203186ms)
+✔ drawing is outside project geometry/manufacturing digest domains and coexists with inch presentation (29.204995ms)
+✔ global tree depth/node/nonfinite limits remain active (30.286017ms)
+verb 2.0.0
+✔ actual validation Worker retains complete v3 data and model/sketch-only storage projection (205.915125ms)
+verb 2.0.0
+✔ actual Worker retains structurally valid unresolved source/target/build intent (200.106364ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ actual Worker rejects malformed v3 and does not return staged storage (1002.074687ms)
+verb 2.0.0
+verb 2.0.0
+✔ complete definition survives actual validation/Open/Save/fresh manager Open without materials (1683.257595ms)
+verb 2.0.0
+verb 2.0.0
+✔ complete definition survives actual validation/Open/Save/fresh manager Open with materials (767.694233ms)
+verb 2.0.0
+✔ string entry also parses/validates in actual Worker and retains full envelope (279.468925ms)
+verb 2.0.0
+✔ definition installs only after accepted replay and final custody guard (279.9283ms)
+verb 2.0.0
+✔ failed validation Open cannot install incoming definition or leave staged bytes (246.933394ms)
+verb 2.0.0
+✔ failed replay Open cannot install incoming definition or leave staged bytes (213.08406ms)
+verb 2.0.0
+✔ failed cancel Open cannot install incoming definition or leave staged bytes (264.6855ms)
+verb 2.0.0
+✔ drawing-bearing otherwise-empty workspace refuses replacement without losing accepted metadata (221.121764ms)
+verb 2.0.0
+verb 2.0.0
+✔ New clears definition; previous signal cannot clear later definition; prepared Save becomes stale (327.719949ms)
+verb 2.0.0
+✔ dispose promptly clears private definition and invalidates prepared save (226.55634ms)
+✔ repeated reset retires old listener and uses intrinsic signal methods (104.761466ms)
+verb 2.0.0
+verb 2.0.0
+✔ two managers isolate drawing custody; reset does not affect another document (441.832913ms)
+verb 2.0.0
+✔ manager replacement during pending accepted-state wait cannot install into orphaned manager (238.637047ms)
+verb 2.0.0
+✔ INTEGRATION BLOCKER: actual manager Open then Save must retain drawing (ordinary) (1094.757356ms)
+verb 2.0.0
+✔ INTEGRATION BLOCKER: actual manager Open then Save must retain drawing (manufacturing reconstruction) (682.760435ms)
+✔ actual Worker generation/noop/travel binds private clone without claiming cloned freeze (251.511642ms)
+✔ actual Worker semantic refusal remains healthy for retry (123.445432ms)
+✔ genuine Worker result with corrupted small transport header refuses before capability (142.575832ms)
+✔ preabort has no allocation; held genuine result abort cleans and late release cannot succeed (156.968173ms)
+✔ real four-owner bound refuses a fifth allocation and cancel permits healthy retry (209.814195ms)
+✔ transport double: falsy operation failure settles, preserves cause and does not fence successful release (78.230799ms)
+✔ transport doubles: falsy termination causes latch cleanup fence and refuse all subsequent allocation (43.481645ms)
+✔ transport double: throwing listener cleanup still terminates and settles before fencing (17.18915ms)
+✔ real preparation Worker accepts large legacy no-op without charging a nonexistent edit, refuses overbudget change (2359.425641ms)
+✔ successful metadata computation cannot publish after cleanup fails; subsequent assignment allocates no Workers (871.293148ms)
+✔ actual enclosure assignment/role edit jointly installs A/J/T before first observer (1035.247204ms)
+✔ diagnostic wrapper of real Worker reply proves main publication does not traverse metadata payload arrays (419.164017ms)
+✔ metadata Undo/Redo uses same journal, restores exact payload and leaves prior geometry travel route available (327.161013ms)
+✔ canonical no-op preserves all A/J/T/revisions/storage and does not truncate redo (469.632624ms)
+✔ conflict/stale/preabort reject with exact accepted A/J/T and redo state preserved (327.061022ms)
+✔ genuine held metadata Worker result cancellation releases owner and late delivery cannot commit (217.105542ms)
+✔ post-Worker caller callback reentrancy cannot bypass last pure A/J/T preflight (196.751829ms)
+✔ ordinary observer throw is logged after commit and entry stays Undoable (242.261625ms)
+✔ escaping notification failure is committed:true with exact cause, no rollback (250.135638ms)
+✔ observer caller loss/cancel/Close preserve committed entry and refuse normal success (575.947448ms)
+✔ observer starts a second real metadata operation in the same chronology without rollback (296.348081ms)
+✔ concurrent preparations have one accepted publication; stale loser cannot append a second entry (185.730584ms)
+✔ actual rebind is prepared read-only then uses same commit/travel; stale review token refuses (443.222448ms)
+✔ generic shared setter uses actual class/custody admission fixture and actual Worker metadata, not Native geometry (231.592533ms)
+✔ initial caller reentrancy cannot silently adopt a newer generic request revision (93.955453ms)
+✔ initial caller rebind cannot make an older enclosure request current (240.056642ms)
+verb 2.0.0
+✔ native envelope manager save/restore preserves definitions; fresh protocol session can reedit/Undo (552.633373ms)
+ℹ tests 83
+ℹ suites 0
+ℹ pass 83
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7226.24353

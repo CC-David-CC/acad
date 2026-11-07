@@ -1,0 +1,3 @@
+AssertionError [ERR_ASSERTION]: undefined != 24
+    at near (/tmp/codi-revolve-build-registration-20261106/test/revolve-build-registration/browser.cjs:3:244)
+    at /tmp/codi-revolve-build-registration-20261106/test/revolve-build-registration/browser.cjs:18:40

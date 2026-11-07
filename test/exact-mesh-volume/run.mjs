@@ -1,0 +1,14 @@
+import {Worker} from 'node:worker_threads';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
+import assert from 'node:assert/strict';
+import {cases} from './cases.mjs';
+const files=['../../modules/engine/mount/exactMeshVolume.mjs','../../modules/engine/mount/localMeshVolume.mjs','../local-mesh-volume/actual-native-mesh.json','../local-mesh-volume/fixtures.mjs','./cases.mjs','./fraction-oracle.py','./worker.mjs','./run.mjs'];
+const hashes=()=>Object.fromEntries(files.map(p=>[p,createHash('sha256').update(readFileSync(new URL(p,import.meta.url))).digest('hex')]));
+const sources=hashes();writeFileSync(new URL('./cases.json',import.meta.url),JSON.stringify(cases())+'\n');
+const python=spawnSync('python3',[new URL('./fraction-oracle.py',import.meta.url).pathname,new URL('./cases.json',import.meta.url).pathname,new URL('./fraction-oracle.json',import.meta.url).pathname],{encoding:'utf8'});assert.ifError(python.error);assert.equal(python.status,0,python.stderr);console.log(python.stdout.trim());
+const result=await new Promise((resolve,reject)=>{const worker=new Worker(new URL('./worker.mjs',import.meta.url),{workerData:{benchmark:process.env.BENCHMARK==='1'}});let receipt;worker.on('message',r=>receipt=r);worker.on('error',reject);worker.on('exit',n=>n===0&&receipt?resolve(receipt):reject(Error('Exact volume Worker failed '+n)));});
+assert.deepEqual(hashes(),sources);const out={base:'f1072e9f5',node:process.version,sourceHashesBeforeAndAfter:sources,...result};
+const file=process.argv[2]||new URL('./receipt.json',import.meta.url);writeFileSync(file,JSON.stringify(out,null,2)+'\n');
+console.log(out.status,'oracle cases',out.rows.length,'controls',out.controls.length);for(const row of [...out.rows,...out.controls])if(row.status!=='PASS')console.log(row);for(const b of out.benchmarks)console.log(b.mode,b.elapsedMs,'ms',b.error||b.result.signedVolume);if(out.status!=='PASS')process.exitCode=1;

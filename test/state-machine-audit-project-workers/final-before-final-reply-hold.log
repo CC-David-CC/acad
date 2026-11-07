@@ -1,0 +1,99 @@
+✔ validation null (817.908782ms)
+✔ validation undefined (823.544036ms)
+✔ validation zero (792.032976ms)
+✔ validation false (824.612916ms)
+✔ validation empty (944.783519ms)
+✔ hash null (914.312949ms)
+✔ hash undefined (857.463799ms)
+✔ hash zero (880.924982ms)
+✔ hash false (913.976046ms)
+✔ hash empty (875.222417ms)
+✔ hash-abort null (860.205515ms)
+✔ hash-abort undefined (853.312169ms)
+✔ hash-abort zero (857.047654ms)
+✔ hash-abort false (950.015999ms)
+✔ hash-abort empty (861.366575ms)
+✖ validation-abort none (843.439255ms)
+✖ validation-abort error (794.066865ms)
+✔ hash-abort none (913.789574ms)
+✖ validation-stale none (827.137409ms)
+✔ hash-stale none (858.945882ms)
+✔ material publication follows successful shared hash-owner cleanup and currentness (85.930977ms)
+✔ validation cleanup=none (1.539535ms)
+✔ validation cleanup=error (0.136302ms)
+✔ hash cleanup=none (0.134292ms)
+✔ hash cleanup=error (0.101541ms)
+✔ hash-abort cleanup=error (0.119051ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 23
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17438.676551
+
+✖ failing tests:
+
+test at test/state-machine-audit-project-workers/extended.test.mjs:3:32
+✖ validation-abort none (843.439255ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-project-workers-20261106/test/state-machine-audit-project-workers/extended.test.mjs:6:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-project-workers/extended.test.mjs:3:32
+✖ validation-abort error (794.066865ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(row.after.outcome.operationError)
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-project-workers-20261106/test/state-machine-audit-project-workers/extended.test.mjs:5:291)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-project-workers/extended.test.mjs:3:32
+✖ validation-stale none (827.137409ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-project-workers-20261106/test/state-machine-audit-project-workers/extended.test.mjs:6:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

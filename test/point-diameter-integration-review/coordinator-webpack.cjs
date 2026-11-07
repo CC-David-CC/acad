@@ -1,0 +1,1 @@
+const path=require('path'),base=require('../closed-sketch-transition/webpack.cjs');base.cache=false;base.entry=path.join(__dirname,'coordinator.test.ts');base.output={path:process.env.CODI_TEST_OUTPUT,filename:'coordinator.cjs'};module.exports=base;

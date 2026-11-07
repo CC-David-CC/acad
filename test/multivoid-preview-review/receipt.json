@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "root": "/tmp/codi-cad-mechanical-candidate-20261105",
+  "sourceHashes": {
+    "modules/engine/solid/SolidKernel.ts": "8149c0cc96e7a8d7b1db4442627c50c2bb357f3bf301180fab1e6d6d34a27f2f",
+    "modules/engine/solid/solidLedger.mjs": "4e2162d3cc2e268508e3d83193c94c8884a7381f4c2560b9fa523b20e78b8da4",
+    "modules/engine/solid/solidMetrics.mjs": "4dd74a8c2ec580656c63528320fe411fa9db5676a6afe90b863d78ee2fc3b2b3",
+    "web/app/cad/model/mworkerSolid.ts": "e83703915b5b4b8d0becc24136e819a2e848ea5dad62a9d9d74138e8b6f70f53"
+  },
+  "testSources": {
+    "run.cjs": "54fdfb175bd77662390253de2a703cd38ed656d539bc442610c7fe6db005db4d",
+    "control.ts": "d1bbbf35d229dca1d9bd9be2cc1492c1d090afda213dc5b90e908a540e34fed0"
+  },
+  "scope": "Source-controlled real capture/model/ledger with controlled provider records; no actual kernel/browser/signed transport qualification",
+  "records": [
+    {
+      "id": "qualified-reason-zero-preview-private-custody",
+      "status": "pass"
+    },
+    {
+      "id": "legacy-Float64-rejected",
+      "status": "pass"
+    },
+    {
+      "id": "available-preview-rejected",
+      "status": "pass"
+    },
+    {
+      "id": "precision-reason-cannot-replace-orientation",
+      "status": "pass"
+    },
+    {
+      "id": "nonzero-unavailable-buffer-rejected",
+      "status": "pass"
+    },
+    {
+      "id": "single-material-reason-refused",
+      "status": "pass"
+    },
+    {
+      "id": "no-void-reason-refused",
+      "status": "pass"
+    },
+    {
+      "id": "OCC-reason-refused",
+      "status": "pass"
+    },
+    {
+      "id": "Manifold-reason-refused",
+      "status": "pass"
+    },
+    {
+      "id": "legacy-unclassified-known-two-material-one-void",
+      "status": "pass",
+      "resultKind": "unclassified-nonempty",
+      "materialRegions": 2,
+      "voidRegions": 1,
+      "refused": true,
+      "scope": "Captured-metrics/model source boundary only; current raw mount separately requires explicit classified evidence"
+    },
+    {
+      "id": "ledger-hidden-result-downstream-native-handle",
+      "status": "pass"
+    },
+    {
+      "id": "ledger-available-refused",
+      "status": "pass",
+      "ownerClosed": true,
+      "noOutputPublished": true
+    },
+    {
+      "id": "ledger-legacy-classified-refused",
+      "status": "pass",
+      "ownerClosed": true,
+      "noOutputPublished": true
+    },
+    {
+      "id": "ledger-legacy-unclassified-refused",
+      "status": "pass",
+      "ownerClosed": true,
+      "noOutputPublished": true
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "source": "6f01a09fea5c75beba9297772edd50ff37b1b2a4",
+  "workers": {
+    "sketch-solver": [
+      "sketch-solver.bd9a5a96b8d7ede6919c.js"
+    ],
+    "project-validator": [
+      "project-validator.760e8f44baf4dc8db1a2.js"
+    ],
+    "prism-semantic": [
+      "prism-semantic.334b28c725a9ef9b0d97.js"
+    ]
+  },
+  "files": {
+    "index.bundle.js": "85d91870c836e4bd918e3b39593bdc7d31466ba6840235d97dfe8d581f70adab",
+    "selected-profile-worker.js": "dd60fbf4d31186ca8ac739d59af8be45355a7005d22575575cee9f9602d8da25",
+    "selected-profile-occ-portable.js": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+    "a81af0b78dd585124f3f.wasm": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+    "sketch-solver.bd9a5a96b8d7ede6919c.js": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+    "project-validator.760e8f44baf4dc8db1a2.js": "7236c461672b662cf9d860439c99a3962784012f88245c248a771158f7287286",
+    "prism-semantic.334b28c725a9ef9b0d97.js": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+    "oci-verified-worker.js": "6189a58b58667c4bca68c67e1593f8656d04ad0875162b301659392a82fd96e4",
+    "occ-portable.js": "a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884",
+    "manifold-verified-worker.js": "35876bd7cd773b5eb243fde935599afb670314c192ba77ec11036dcb12aa79e4",
+    "07d763a05f35cd257501.wasm": "07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e",
+    "7bb5f8ee10fcafdab787.wasm": "7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d"
+  },
+  "runtime": "/mnt/data10tb/codi-cad-selected-profile-capacity-combined-20261106-r2",
+  "port": 20688
+}

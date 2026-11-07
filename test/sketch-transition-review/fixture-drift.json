@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "status": "environment-pin-mismatch-before-cases",
+  "fixture": "http://127.0.0.1:20583/static/index.html",
+  "expectedWorkerSha256": "ba4f8a52062e0433d8e888281a505fb39bb72c3772811ee9cf0ecd7903073ae6",
+  "observedWorkerSha256": "b68386a4056fbcc56fc9aee31120d113a4452943a20cda223c0eef5e921e3124",
+  "scope": "Later follow-up stopped before request dispatch at the SHA assertion. No core verdict or new runtime qualification. Original 14-case ba4 run already completed."
+}

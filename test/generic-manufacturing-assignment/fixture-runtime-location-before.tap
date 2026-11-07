@@ -1,0 +1,69 @@
+✖ actual readonly inventory binds production class/history/registry/runtime without parsing IDs (285.176395ms)
+✖ private prepare uses real hash Worker and pure model capture without writes/publication/ID allocation (249.257725ms)
+✔ pending actual hash reply is fenced by source/registry/runtime/model/counter/lifetime changes (1050.539651ms)
+✖ returned private proposal becomes stale without installing metadata (144.754864ms)
+✔ stale/malformed/cancelled requests refuse before hash worker dispatch (87.867859ms)
+✔ wrong class/producer/origin/current build/placement never becomes a supported discovery target (637.554398ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 3
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2763.875186
+
+✖ failing tests:
+
+test at test/generic-manufacturing-assignment/service.test.mjs:7:1
+✖ actual readonly inventory binds production class/history/registry/runtime without parsing IDs (285.176395ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/service.test.mjs:7:320
+      at use (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/service.test.mjs:5:72)
+      at TestContext.<anonymous> (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/service.test.mjs:7:106)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/generic-manufacturing-assignment/service.test.mjs:8:1
+✖ private prepare uses real hash Worker and pure model capture without writes/publication/ID allocation (249.257725ms)
+  Error: Select an actual current supported output and producer.
+      at fail (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/projectManager/genericManufacturingAssignment.mjs:5:49)
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/projectManager/genericManufacturingAssignment.mjs:19:511
+      at Array.map (<anonymous>)
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/projectManager/genericManufacturingAssignment.mjs:19:350
+      at Array.map (<anonymous>)
+      at prepareGenericManufacturingMetadata (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/projectManager/genericManufacturingAssignment.mjs:19:180)
+      at Object.prepareGenericManufacturingAssignment (actual-projectManagerBundle.ts:386:103)
+      at async file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/service.test.mjs:8:240
+      at async use (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/service.test.mjs:5:66)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    code: 'UNSUPPORTED_TARGET'
+  }
+
+test at test/generic-manufacturing-assignment/service.test.mjs:10:1
+✖ returned private proposal becomes stale without installing metadata (144.754864ms)
+  Error: Select an actual current supported output and producer.
+      at fail (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/projectManager/genericManufacturingAssignment.mjs:5:49)
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/projectManager/genericManufacturingAssignment.mjs:19:511
+      at Array.map (<anonymous>)
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/projectManager/genericManufacturingAssignment.mjs:19:350
+      at Array.map (<anonymous>)
+      at prepareGenericManufacturingMetadata (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/projectManager/genericManufacturingAssignment.mjs:19:180)
+      at Object.prepareGenericManufacturingAssignment (actual-projectManagerBundle.ts:386:103)
+      at async file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/service.test.mjs:10:105
+      at async use (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/service.test.mjs:5:66)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    code: 'UNSUPPORTED_TARGET'
+  }

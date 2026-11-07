@@ -1,0 +1,41 @@
+{
+  "status": "CONFIRMED_SYNTHETIC_CONTRACT_DEFECTS",
+  "sourceSha256": "1cf48c969aeb9e65087f7338574566694773de80717d37c13851dd2858857126",
+  "scope": "error-only synthetic offered API contract; no native result or incident claim",
+  "rows": [
+    {
+      "case": "duck remove",
+      "dispatchThrowsExactCause": true,
+      "unsettledAfterDeadline": true,
+      "unsettledAfterClose": true,
+      "terminations": 1
+    },
+    {
+      "case": "native overridden remove",
+      "dispatchThrowsExactCause": true,
+      "unsettledAfterDeadline": true,
+      "unsettledAfterClose": true,
+      "terminations": 1
+    },
+    {
+      "case": "duck add",
+      "setupThrowsExactCause": true,
+      "retryBusy": true,
+      "postedJobs": 0,
+      "terminations": 1
+    },
+    {
+      "case": "native overridden add",
+      "setupThrowsExactCause": true,
+      "retryBusy": true,
+      "postedJobs": 0,
+      "terminations": 1
+    },
+    {
+      "case": "post failure throwing coercion",
+      "originalMasked": true,
+      "coerced": 1,
+      "retryBusy": true
+    }
+  ]
+}

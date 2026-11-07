@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "isolated candidate for root review; no candidate installed-browser/app qualification",
+  "baselineCommit": "35bf9d0987f4d02091ce1b82b521c79a1f5ca49e",
+  "productPath": "web/app/sketcher/constr/AlgNumSystem.ts",
+  "baselineSourceSha256": "a366bd7a1003491d15070353e333781c43125d60727c063f1a4b609457dadab3",
+  "candidateSourceSha256": "f9cf7adb93cec86ed1ee0fcb8d7fdb5249bceac9a65f60ea7c096e047ae7a13d",
+  "nodeVersion": "v24.22.1",
+  "files": {
+    "README.md": "8b13b66885de1af1cf6f3b76d4e55b9d34ac35ff1edf88673bac7f22a5e466cf",
+    "compare.mjs": "1ea8895049b514a2645e2f1636ce1a778efe988646b5d651a2477c131c24627d",
+    "fresh-worker-browser.test.cjs": "0a49865ea33776bbb419f39eb3ef2877225437153ca5803964a1a0973c016ca7",
+    "generic-controls.ts": "b3c988c83989d343fc2d8c60a41fe95b53845b1a5ef7cc63a7cb2f8839e12ae0",
+    "receipts/before.json": "246132760a1722d843c8469fb5e778f3e777aa17e4be9639d1bb0c226085df6c",
+    "receipts/before.log": "2153f3bc7409665821215bb32143d3db403d97872b86b6e2bb590b95e461bd64",
+    "receipts/candidate.json": "a2a79621c11babdf6b38b624f77446d6d56f86efe3e3492d0da1638c1eb88aa5",
+    "receipts/candidate.log": "ad22954d6e069dc3a5792fa04f3a85f3ac3d8484d24bcc1b644183e77f7c1b59",
+    "receipts/comparison.json": "daae96f039f9cf1de9cf7668eb7ad95f80500648686c48e04b619d4f873cbae6",
+    "receipts/inputs.json": "64f689a6605e6ba339a5f94be9b768be3f2e9031c1ab1ccbd905ca7dbd50251b",
+    "receipts/mechanical-pass.log": "efd02d5e4e2453f5c4c34d99a04dcafed40d3cabfe52308565c2d3bb053efd94",
+    "receipts/old-worker-negative.json": "363022b3c65de18359b841d6ebd2e0862706b3698a099c7c99b89cf090bff22d",
+    "run-source.cjs": "252340dc1143f0691fe1b671ddeb343e95fd173a4cae69db68c19feba332dc0f",
+    "source-control.ts": "e613df94c5e7e0b1c31c9f2db469b40fc70fb3dc5513d8048322e76e23536391"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "runtimeSource": "e1e7839e71fbd02c1b7b77a87b9255171169670a",
+  "testSource": "ea392c1105eb8ccfe494319dacc1ce462627bf8d",
+  "base": "2c67f9bfea671e0fb8a89d796fba3325721fc18e",
+  "app": "d79b4af5ab22f5f201c5dcb0587af318c34e43d85570d271bac7d5d0e3e18f48",
+  "sketchWorker": "9fa5dd2fca0c36efd879496c67503719f3bb272dbed7552dff71a0f5138d8cd6",
+  "projectWorker": "134e945d13e0ae5416f00e6521af4be026e4133c545de961417b1add3ac94462",
+  "fixture": "r730:/mnt/data10tb/codi-signed-distance-20261105-r2",
+  "loopbackPort": 20613,
+  "scope": "Actual core app + production Workers, public craft operations, native host save/reopen. Signed desktop My files integration remains separate."
+}

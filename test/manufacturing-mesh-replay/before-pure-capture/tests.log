@@ -1,0 +1,78 @@
+verb 2.0.0
+✖ actual factory +PM Workers issue opaque one-shot after protocol read, preserving state and per-part region IDs (456.931832ms)
+verb 2.0.0
+✔ forged/stale/currentness-lost capabilities refuse without model publication (332.996747ms)
+verb 2.0.0
+✔ stale revision, unsupported build, preabort native shadow refuse without read (259.067865ms)
+verb 2.0.0
+✔ actual PM saved assignments cannot silently omit a new current output (271.099988ms)
+verb 2.0.0
+✖ held protocol read cancellation/refusal never issues, preserving accepted state (296.333588ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 3
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2012.398227
+
+✖ failing tests:
+
+test at test/manufacturing-mesh-replay/service.test.mjs:4:1
+✖ actual factory +PM Workers issue opaque one-shot after protocol read, preserving state and per-part region IDs (456.931832ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    {
+      counters: {
+        featureId: 2
+      },
+      epoch: 1,
+  ...
+      revision: '9ef6a031-332c-4860-b039-cdbec95df368',
+  +   storage: 2
+  -   storage: 1
+    }
+  
+      at use.count (file:///tmp/codi-drawing-custody-review-20261107/test/manufacturing-mesh-replay/service.test.mjs:5:170)
+      at async use (file:///tmp/codi-drawing-custody-review-20261107/test/manufacturing-mesh-replay/service.test.mjs:3:67)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [Object],
+    expected: [Object],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/manufacturing-mesh-replay/service.test.mjs:16:1
+✖ held protocol read cancellation/refusal never issues, preserving accepted state (296.333588ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    {
+      counters: {
+        featureId: 1
+      },
+      epoch: 1,
+  ...
+      revision: 'c4cf15d1-9089-4d87-9f0f-cdeae6c0e422',
+  +   storage: 2
+  -   storage: 1
+    }
+  
+      at use.evaluate.f.release (file:///tmp/codi-drawing-custody-review-20261107/test/manufacturing-mesh-replay/service.test.mjs:17:264)
+      at async use (file:///tmp/codi-drawing-custody-review-20261107/test/manufacturing-mesh-replay/service.test.mjs:3:67)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [Object],
+    expected: [Object],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

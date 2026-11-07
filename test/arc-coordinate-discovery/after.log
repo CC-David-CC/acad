@@ -1,0 +1,54 @@
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ public Arc inspection exposes three actual stable native points and is read-only (519.70452ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ anchored quarter Arc batch edit reaches exact discovered endpoint/center targets (627.624098ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ major-Arc endpoint order and construction role survive coordinate edits (506.607483ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ Arc no-op retains identical source and exact coordinate receipt (496.801455ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ unknown Arc child identity refuses rather than creating a point (493.490705ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ duplicate coordinate targets refuse before solving (481.266016ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ independent coordinate verifier accepts real Arc candidate and rejects altered receipt (762.83568ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ incompatible exact Arc radii refuse and original saved source still replays (628.247774ms)
+actual Worker lifecycle {"started":36,"terminated":36}
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4641.561791

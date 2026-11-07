@@ -1,0 +1,13 @@
+{
+  "product": "cb0f4a062a7425fb95c96f0cd5eadbafa1b85777",
+  "scope": "Post-run candidate source snapshot; source-r2 separately pins actual compiled Workers",
+  "files": {
+    "modules/engine/extrusion/selectedSketchProfile.mjs": "defdc34e8c93587917b03e601978a2e3f358f1b38b81a35d649d7f65d05eb50a",
+    "modules/engine/extrusion/selectedSketchRevolve.mjs": "d43c0c8471064142c88a00e2b725599d3ef5c8cbb5806a79c3ba1842455c9419",
+    "modules/engine/extrusion/prismSemantic.worker.ts": "0941d4ae03ba35bdd2ba8c664410e0bbe61bc3f281a81bf1e9596b4fe01acb4c",
+    "modules/engine/extrusion/prismSemanticClient.ts": "6c3824fdfe172fd33cdfedc25d33cfacc132eeb45f5466baf20c7412175751b3",
+    "modules/engine/solid/ownedRevolveFeature.mjs": "f63ac31ac4ec086952635d0792dd48322c5e1710d993da57f7b34567939f9c44",
+    "modules/workbenches/modeler/features/workerSelectedRevolve/workerSelectedRevolve.operation.ts": "0bac5aecedeb4d20619dad7e070779f786ee6e6ec53a4cc864ab71d5f01ed774",
+    "web/app/cad/craft/workerRevolveCommands.ts": "4317750aa85729dd6455aa6629db9b81559c0b1963bebbc8367d8f3dbeb57c8b"
+  }
+}

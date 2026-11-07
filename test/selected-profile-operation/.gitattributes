@@ -1,0 +1,2 @@
+# Preserve actual upstream console bytes, including "LOADED. " trailing space.
+evidence/*.log -whitespace

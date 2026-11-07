@@ -1,0 +1,76 @@
+[
+  {
+    "pins": {
+      "app": "e3882008660359e53714f3fdd1618c34cc4ac017f215919f55ea0e4d10433bcf",
+      "worker": "de90850d961327b206f311460bc3a221091289490e38968cc0df3e27bf985028",
+      "helper": "f6badfd2a1c36e08c2b0a2b47348acbd67e941b3ac067410c582076fe67e73be",
+      "verb": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3"
+    },
+    "mode": "normal",
+    "bytes": 139586,
+    "workerMs": 1158.4000000953674,
+    "loadMs": 702.5999999046326,
+    "stats": {
+      "segmentRead": {
+        "calls": 514,
+        "ms": 4.5
+      },
+      "constraintRead": {
+        "calls": 513,
+        "ms": 1.1000001430511475
+      },
+      "annotationAdd": {
+        "calls": 1,
+        "ms": 0
+      },
+      "layerObjectAdd": {
+        "calls": 514,
+        "ms": 1
+      },
+      "admission": {
+        "calls": 1,
+        "ms": 425
+      },
+      "prepare": {
+        "calls": 1,
+        "ms": 417.80000019073486
+      },
+      "finish": {
+        "calls": 1,
+        "ms": 564.7000000476837
+      },
+      "notify": {
+        "calls": 3,
+        "ms": 233.49999976158142
+      },
+      "refresh": {
+        "calls": 515,
+        "ms": 0.19999980926513672
+      },
+      "repaint": {
+        "calls": 1,
+        "ms": 5.5
+      },
+      "objectsUpdate": {
+        "calls": 517,
+        "ms": 0.6999998092651367
+      }
+    },
+    "authoredObjects": 514,
+    "objects": 515,
+    "constraints": 513,
+    "solver": {
+      "solveStatus": {
+        "error": 0,
+        "success": true
+      },
+      "dof": null,
+      "polynomials": 1028,
+      "isolations": 514,
+      "conflicting": 0,
+      "redundant": 0,
+      "inTransaction": false,
+      "hasProjectedLastValid": false
+    }
+  }
+]

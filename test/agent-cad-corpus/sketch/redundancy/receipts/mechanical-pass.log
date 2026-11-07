@@ -1,0 +1,38 @@
+PASS midpoint equations, conflict recovery, redundancy handling, saved order and repeated solve
+PASS restored line-first midpoint remains enforced after rebuild and removal
+PASS conflict removal revalidation and simultaneous-conflict handling
+✔ a rejected multi-equation constraint preserves previously unconstrained coordinates (1.713611ms)
+✔ a later solve cannot apply a sibling equation from a rejected constraint (0.321414ms)
+✔ a formerly conflicting constraint that is reactivated links to its objects (0.436826ms)
+✔ rejected multi-equation effects cannot make an independent later constraint conflicting (1.336736ms)
+✔ inconsistent candidate cannot replace an existing accepted relation (0.403524ms)
+✔ fully redundant relation is retained, and becomes active after removing original (0.353974ms)
+✔ exception in a new constraint leaves old geometry, backlinks and solver usable (0.557386ms)
+✔ failed removal restores constraint membership and geometry (0.440135ms)
+✔ failed bulk admission drops staged links and restores original solver (0.565316ms)
+✔ serialized native constraints restore deterministic accepted priority (0.508916ms)
+✔ failed bulk mutation restores links for removed relations (0.320563ms)
+✔ solve-time reclassification cannot displace accepted constraints with an external-stage reference (0.356034ms)
+✔ accepted conflict priority survives native constraint serialization without reordering authored entries (0.637098ms)
+✔ real point-on-line and locks preserve accepted branch after removal and reload (0.694668ms)
+✔ independent accepted point locks are retried together without changing conflict priority (3.853855ms)
+✔ bulk load batches only isolated locks and retains authored priority for overlapping locks (2.57256ms)
+✔ external-stage prepare must not apply part of a rejected constraint (1.095233ms)
+✔ external-stage solveFine must not apply part of a rejected constraint (0.528936ms)
+✔ external rebuild exception restores geometry and the previous solver (0.355404ms)
+✔ public preparation rejects non-finite output without losing the prior geometry (0.276953ms)
+✔ hard-solve reclassification retains dragged parameter preferences (1.109593ms)
+✔ reactivation failure restores active geometry and retries safely (3.991776ms)
+✔ external-stage prepare must not apply part of a rejected constraint (0.642307ms)
+✔ external-stage solveFine must not apply part of a rejected constraint (0.357764ms)
+✔ external rebuild exception restores geometry and the previous solver (0.288744ms)
+✔ public preparation rejects non-finite output without losing the prior geometry (0.269533ms)
+✔ hard-solve reclassification retains dragged parameter preferences (0.475226ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 31.751273

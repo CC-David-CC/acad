@@ -1,0 +1,141 @@
+{
+  "base": "403816df103fec4b12a385c426fb3331c13381bf",
+  "node": "v24.22.1",
+  "pins": {
+    "../../modules/engine/mount/booleanSelectionClaims.mjs": {
+      "sha256": "7610da29d24948ca190fc1c56cd0cf14d08f274eb5ec899ea3cf563671cb649d",
+      "bytes": 8876
+    },
+    "../../modules/engine/mount/ownedTopologyContract.mjs": {
+      "sha256": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+      "bytes": 7063
+    },
+    "../../modules/engine/mount/prismSelectionIndex.mjs": {
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+      "bytes": 4753
+    },
+    "./worker.mjs": {
+      "sha256": "336996cb940eee2144f1111968ba4acabad3114e5b55ef8a4f3822e8bc44901a",
+      "bytes": 11607
+    },
+    "./fixtures.mjs": {
+      "sha256": "c0b86c0c7ce9dfadf45521dbdefb21d7c238ebf2dba3f87705f3eba9bba120b8",
+      "bytes": 2367
+    },
+    "../selection-ancestry/native-first-receipt.json": {
+      "sha256": "a1a99f0f6178aa64463a1688a1b3022880821fde68f027751378bcd7fd2496d7",
+      "bytes": 133073
+    }
+  },
+  "status": "FAIL",
+  "scope": "actual Node Worker pure reconciliation; recorded genuine legacy single-input histories plus synthetic joint-claim controls only",
+  "rows": [
+    {
+      "name": "recorded v1 edge-fillet",
+      "scope": "recorded genuine single-input native history + explicitly synthetic empty second input, not a fresh Boolean",
+      "status": "PASS",
+      "data": {
+        "resolvedEdges": 11,
+        "resolvedFaces": 6,
+        "rawDeletedSurvivors": 7
+      }
+    },
+    {
+      "name": "recorded v1 edge-chamfer",
+      "scope": "recorded genuine single-input native history + explicitly synthetic empty second input, not a fresh Boolean",
+      "status": "PASS",
+      "data": {
+        "resolvedEdges": 11,
+        "resolvedFaces": 6,
+        "rawDeletedSurvivors": 7
+      }
+    },
+    {
+      "name": "recorded v1 healthy-after-refusals",
+      "scope": "recorded genuine single-input native history + explicitly synthetic empty second input, not a fresh Boolean",
+      "status": "PASS",
+      "data": {
+        "resolvedEdges": 11,
+        "resolvedFaces": 6,
+        "rawDeletedSurvivors": 7
+      }
+    },
+    {
+      "name": "two input distinct surviving claims use separate same-kind spaces",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "same authored ID unions duplicate same/modified candidates across inputs",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "same ID split or one absent source remains explicit without raw-delete override",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "different input IDs sharing a descendant BOTH become unresolved merges",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "overlapping split+merge uses merge precedence across both inputs",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "generated vertices/edges/faces remain separate, including unclaimed source rows",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "genuine empty output has no inherited members and no fabricated validity claim",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "same-ID conflicting kinds, duplicate IDs or duplicate per-kind source indices refuse",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "complete ordered ancestry includes every vertex row and actual result member",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "complete unclaimed rows still validate malformed target members",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "all nested data including topology refuses accessors before invocation",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown fields, sparse arrays, prototypes, cycles and nonfinite data refuse",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy v1 remains explicit, vertex omissions/mixed versions refuse rather than convert",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    },
+    {
+      "name": "captured byte cap is exact, returned observations use actual UTF8, not character estimates",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "FAIL",
+      "error": "The expression evaluated to a falsy value:\n\n  assert(JSON.stringify(multi).length<CAP)\n",
+      "code": "ERR_ASSERTION"
+    },
+    {
+      "name": "detached frozen observations and private generated/resolver data survive caller mutation",
+      "scope": "synthetic metadata control; not native Boolean output",
+      "status": "PASS"
+    }
+  ]
+}

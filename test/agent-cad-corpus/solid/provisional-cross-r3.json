@@ -1,0 +1,298 @@
+{
+  "version": 1,
+  "source": "4a3d7aba4",
+  "scope": "actual registered craft commands, fresh context per case, synthetic host lifetime; triangle-derived measurements, direct local fixture; not signed desktop commands",
+  "records": [
+    {
+      "engine": "occ",
+      "case": "cross-engine",
+      "status": "pass",
+      "reason": "second-engine box refused; first body ID and mesh summaries unchanged (cross-engine Boolean not reached)",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "ENGINE_MISMATCH",
+        "name": "Error",
+        "message": "Mixed engine candidates are not supported.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "cross-engine",
+      "status": "pass",
+      "reason": "second-engine box refused; first body ID and mesh summaries unchanged (cross-engine Boolean not reached)",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "ENGINE_MISMATCH",
+        "name": "Error",
+        "message": "Mixed engine candidates are not supported.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "cross-engine",
+      "status": "pass",
+      "reason": "second-engine box refused; first body ID and mesh summaries unchanged (cross-engine Boolean not reached)",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "ENGINE_MISMATCH",
+        "name": "Error",
+        "message": "Mixed engine candidates are not supported.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "extrusion",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "extrusion",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "extrusion",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "revolve",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "revolve",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "revolve",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "curved-profile",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "curved-profile",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "curved-profile",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "shell",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "shell",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "shell",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "fillet",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "fillet",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "fillet",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "STEP-import-export",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "STEP-import-export",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "STEP-import-export",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "cross-engine-boolean",
+      "status": "not-tested",
+      "reason": "mixed-engine graph refused at second body creation before a Boolean could be issued"
+    },
+    {
+      "engine": "manifold",
+      "case": "cross-engine-boolean",
+      "status": "not-tested",
+      "reason": "mixed-engine graph refused at second body creation before a Boolean could be issued"
+    },
+    {
+      "engine": "smlib",
+      "case": "cross-engine-boolean",
+      "status": "not-tested",
+      "reason": "mixed-engine graph refused at second body creation before a Boolean could be issued"
+    }
+  ]
+}

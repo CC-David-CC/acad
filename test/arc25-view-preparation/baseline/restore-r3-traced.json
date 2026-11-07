@@ -1,0 +1,105 @@
+{
+  "immediate": {
+    "models": 2000,
+    "views": 2001,
+    "rootsWithView": 2000,
+    "facesWithView": 2000,
+    "selection": {
+      "id": "S:0",
+      "registered": true,
+      "marked": true,
+      "viewMarked": true
+    }
+  },
+  "cleanupWaitMs": 0.10000014305114746,
+  "nativeEqual": false,
+  "snapshotError": null,
+  "storageEqual": false,
+  "sourceEqual": true,
+  "beforeModels": 0,
+  "afterModels": 2000,
+  "beforeHistory": 0,
+  "afterHistory": 2000,
+  "beforeResources": {
+    "owners": 0,
+    "mounts": 0,
+    "candidates": 0,
+    "accepted": 0,
+    "detached": 0,
+    "cleanupFailed": false
+  },
+  "afterResources": {
+    "owners": 1,
+    "mounts": 0,
+    "candidates": 0,
+    "accepted": 0,
+    "detached": 1,
+    "cleanupFailed": false
+  },
+  "workers": [
+    {
+      "closed": true,
+      "url": "http://127.0.0.1:20495/static/project-validator.3ae7f2bbbaedf25e54c3.js"
+    }
+  ],
+  "bytes": 151959,
+  "history": 2000,
+  "keys": 2001,
+  "keysMs": 0.19999980926513672,
+  "timings": {
+    "renders": [
+      {
+        "start": 3840,
+        "ms": 0.8999998569488525,
+        "models": 0,
+        "sceneChildren": 1,
+        "drawCalls": 6,
+        "triangles": 45,
+        "geometries": 2
+      },
+      {
+        "start": 6946.399999856949,
+        "ms": 155.10000014305115,
+        "models": 2000,
+        "sceneChildren": 2001,
+        "drawCalls": 2964,
+        "triangles": 5961,
+        "geometries": 1481
+      },
+      {
+        "start": 8262.099999904633,
+        "ms": 49.799999952316284,
+        "models": 2000,
+        "sceneChildren": 2001,
+        "drawCalls": 2964,
+        "triangles": 5961,
+        "geometries": 1481
+      }
+    ],
+    "viewport": [
+      {
+        "start": 7101.899999856949,
+        "ms": 248
+      }
+    ],
+    "reset": 0.7999999523162842,
+    "loadData": 23,
+    "stageCalls": 2000,
+    "stagedFactoryCalls": 1,
+    "registryPrepareCalls": 1,
+    "registryPrepareMs": 1.3999998569488525,
+    "modelNotifyCalls": 1,
+    "modelNotifyMs": 169
+  },
+  "tasks": [
+    {
+      "start": 5563.899999856949,
+      "duration": 1382
+    }
+  ],
+  "elapsedMs": 4568.099999904633,
+  "maxOtherGap": 2627.899999856949,
+  "outcome": "accepted",
+  "otherReady": true,
+  "appHash": "d7588344757f704ede436fcd32474fe5787b1525a9af78b8e1d7425bb4abc868"
+}

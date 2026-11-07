@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url),'utf8'));
+const before=read('browser-r1-receipt.json'),after=read('browser-r2-receipt.json');
+assert.equal(before.status,'PASS');assert.equal(after.status,'PASS');
+assert.deepEqual(before.reviewSource,after.reviewSource,'Same original browser/geometry assertions must run');
+const a=read('component-r1-manifest.json'),b=read('component-r2-manifest.json');
+assert.deepEqual(Object.keys(a.files),Object.keys(b.files));
+assert.deepEqual(Object.keys(a.files).filter(p=>JSON.stringify(a.files[p])!==JSON.stringify(b.files[p])),['modules/engine/extrusion/simplePolygon.mjs']);
+const old=before.observed.preservation.rejections.find(r=>r.id==='zero-edge'),now=after.observed.preservation.rejections.find(r=>r.id==='zero-edge');
+assert.equal(old.error.code,'SELF_TOUCHING_BOUNDARY');assert.equal(now.error.code,'ZERO_LENGTH_EDGE');
+assert.equal(now.sourcePreserved,true);assert.equal(after.observed.preservation.topologyPreserved,true);assert.equal(after.observed.preservation.meshPreserved,true);
+assert.equal(after.observed.rows.length,8);assert.equal(after.observed.rows.reduce((s,r)=>s+r.classification.length,0),29);
+assert.equal(after.liveOwnedWorkerTargets,0);assert(after.observed.workers.every(w=>w.terminated));
+console.log(JSON.stringify({status:'PASS',scope:'Same full8 component controls on R2 plus explicit diagnostic correction; no public CAD claim',beforeCode:old.error.code,afterCode:now.error.code,sourceAndPriorTopologyDisplayPreserved:true,changedComponentFile:'modules/engine/extrusion/simplePolygon.mjs',nativeWorkerControllerUnchanged:true,rows:8,classifications:29},null,2));

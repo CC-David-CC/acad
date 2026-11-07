@@ -1,0 +1,35 @@
+--- published.wat	2026-11-02 00:04:29.846067699 -0500
++++ rebuilt-mapped.wat	2026-11-02 00:04:54.835258467 -0500
+@@ -9100766,7 +9100766,7 @@
+                                                                                                                                                                   (local.set $7
+                                                                                                                                                                    (call $fimport$2)
+                                                                                                                                                                   )
+-                                                                                                                                                                  (br_table $label$1107 $label$1110 $label$1165
++                                                                                                                                                                  (br_table $label$1107 $label$1110 $label$1166
+                                                                                                                                                                    (i32.sub
+                                                                                                                                                                     (local.get $4)
+                                                                                                                                                                     (i32.const 1)
+@@ -9105049,7 +9105049,7 @@
+                                                                                                                                                         (local.set $7
+                                                                                                                                                          (call $fimport$2)
+                                                                                                                                                         )
+-                                                                                                                                                        (br_table $label$1107 $label$1110 $label$1166
++                                                                                                                                                        (br_table $label$1107 $label$1110 $label$1165
+                                                                                                                                                          (i32.sub
+                                                                                                                                                           (local.get $4)
+                                                                                                                                                           (i32.const 1)
+@@ -9119088,12 +9119088,12 @@
+                                                                    (br $label$1106)
+                                                                   )
+                                                                   (local.set $4
+-                                                                   (i32.const 16)
++                                                                   (i32.const 10)
+                                                                   )
+                                                                   (br $label$1106)
+                                                                  )
+                                                                  (local.set $4
+-                                                                  (i32.const 10)
++                                                                  (i32.const 16)
+                                                                  )
+                                                                  (br $label$1106)
+                                                                 )

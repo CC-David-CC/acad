@@ -1,0 +1,676 @@
+{
+  "rows": [
+    {
+      "label": "XY/empty/0",
+      "faceId": "S:0/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          -400,
+          400,
+          0
+        ],
+        [
+          -400,
+          -400,
+          0
+        ],
+        [
+          400,
+          -400,
+          0
+        ],
+        [
+          400,
+          400,
+          0
+        ]
+      ],
+      "normals": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "XY/far-point/17",
+      "faceId": "S:1/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          -400,
+          25,
+          17
+        ],
+        [
+          -400,
+          -825,
+          17
+        ],
+        [
+          1525,
+          -825,
+          17
+        ],
+        [
+          1525,
+          25,
+          17
+        ]
+      ],
+      "normals": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "XY/far-pair/-23",
+      "faceId": "S:2/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          2475,
+          4525,
+          -23
+        ],
+        [
+          2475,
+          2975,
+          -23
+        ],
+        [
+          3525,
+          2975,
+          -23
+        ],
+        [
+          3525,
+          4525,
+          -23
+        ]
+      ],
+      "normals": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "XY/long-line/4",
+      "faceId": "S:3/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          -400,
+          2025,
+          4
+        ],
+        [
+          -400,
+          -1025,
+          4
+        ],
+        [
+          400,
+          -1025,
+          4
+        ],
+        [
+          400,
+          2025,
+          4
+        ]
+      ],
+      "normals": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "XZ/empty/0",
+      "faceId": "S:4/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          400,
+          0,
+          400
+        ],
+        [
+          400,
+          0,
+          -400
+        ],
+        [
+          -400,
+          0,
+          -400
+        ],
+        [
+          -400,
+          0,
+          400
+        ]
+      ],
+      "normals": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "XZ/far-point/17",
+      "faceId": "S:5/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          400,
+          17,
+          25
+        ],
+        [
+          400,
+          17,
+          -825
+        ],
+        [
+          -1525,
+          17,
+          -825
+        ],
+        [
+          -1525,
+          17,
+          25
+        ]
+      ],
+      "normals": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "XZ/far-pair/-23",
+      "faceId": "S:6/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          -2475,
+          -23,
+          4525
+        ],
+        [
+          -2475,
+          -23,
+          2975
+        ],
+        [
+          -3525,
+          -23,
+          2975
+        ],
+        [
+          -3525,
+          -23,
+          4525
+        ]
+      ],
+      "normals": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "XZ/long-line/4",
+      "faceId": "S:7/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          400,
+          4,
+          2025
+        ],
+        [
+          400,
+          4,
+          -1025
+        ],
+        [
+          -400,
+          4,
+          -1025
+        ],
+        [
+          -400,
+          4,
+          2025
+        ]
+      ],
+      "normals": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "ZY/empty/0",
+      "faceId": "S:8/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          0,
+          400,
+          400
+        ],
+        [
+          0,
+          -400,
+          400
+        ],
+        [
+          0,
+          -400,
+          -400
+        ],
+        [
+          0,
+          400,
+          -400
+        ]
+      ],
+      "normals": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "ZY/far-point/17",
+      "faceId": "S:9/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          17,
+          25,
+          400
+        ],
+        [
+          17,
+          -825,
+          400
+        ],
+        [
+          17,
+          -825,
+          -1525
+        ],
+        [
+          17,
+          25,
+          -1525
+        ]
+      ],
+      "normals": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "ZY/far-pair/-23",
+      "faceId": "S:10/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          -23,
+          4525,
+          -2475
+        ],
+        [
+          -23,
+          2975,
+          -2475
+        ],
+        [
+          -23,
+          2975,
+          -3525
+        ],
+        [
+          -23,
+          4525,
+          -3525
+        ]
+      ],
+      "normals": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "ZY/long-line/4",
+      "faceId": "S:11/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          4,
+          2025,
+          400
+        ],
+        [
+          4,
+          -1025,
+          400
+        ],
+        [
+          4,
+          -1025,
+          -400
+        ],
+        [
+          4,
+          2025,
+          -400
+        ]
+      ],
+      "normals": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    },
+    {
+      "label": "rotated-translated-datum",
+      "faceId": "S:12/SURFACE",
+      "factories": 0,
+      "corners": [
+        [
+          -368.2019413809763,
+          323.3309629269453,
+          180.62093237398528
+        ],
+        [
+          -368.2019413809763,
+          -354.5323852566539,
+          -107.1149877614752
+        ],
+        [
+          368.2019413809763,
+          -354.5323852566539,
+          -107.1149877614752
+        ],
+        [
+          368.2019413809763,
+          323.3309629269453,
+          180.62093237398528
+        ]
+      ],
+      "normals": [
+        0,
+        -0.3907311260700226,
+        0.9205048680305481,
+        0,
+        -0.3907311260700226,
+        0.9205048680305481,
+        0,
+        -0.3907311260700226,
+        0.9205048680305481,
+        0,
+        -0.3907311260700226,
+        0.9205048680305481
+      ],
+      "disposedOldGeometry": 1,
+      "sourceUnchanged": true,
+      "modelSurfaceRetained": true
+    }
+  ],
+  "fallback": {
+    "label": "instance-boundTo-override",
+    "faceId": "S:12/SURFACE",
+    "factories": 1,
+    "corners": [
+      [
+        -377.4069899155007,
+        336.04090070538774,
+        186.0159808765252
+      ],
+      [
+        -377.4069899155007,
+        -367.2423230350964,
+        -112.51003626401511
+      ],
+      [
+        377.4069899155007,
+        -367.2423230350964,
+        -112.51003626401511
+      ],
+      [
+        377.4069899155007,
+        336.04090070538774,
+        186.0159808765252
+      ]
+    ],
+    "normals": [
+      0,
+      -0.3907311260700226,
+      0.9205048680305481,
+      0,
+      -0.3907311260700226,
+      0.9205048680305481,
+      0,
+      -0.3907311260700226,
+      0.9205048680305481,
+      0,
+      -0.3907311260700226,
+      0.9205048680305481
+    ],
+    "disposedOldGeometry": 1,
+    "sourceUnchanged": true,
+    "modelSurfaceRetained": true
+  },
+  "subclassFallback": {
+    "label": "derived-plane-prototype",
+    "faceId": "S:12/SURFACE",
+    "factories": 1,
+    "corners": [
+      [
+        -368.2019413809763,
+        323.3309629269453,
+        180.62093237398528
+      ],
+      [
+        -368.2019413809763,
+        -354.5323852566539,
+        -107.1149877614752
+      ],
+      [
+        368.2019413809763,
+        -354.5323852566539,
+        -107.1149877614752
+      ],
+      [
+        368.2019413809763,
+        323.3309629269453,
+        180.62093237398528
+      ]
+    ],
+    "normals": [
+      0,
+      -0.3907311260700226,
+      0.9205048680305481,
+      0,
+      -0.3907311260700226,
+      0.9205048680305481,
+      0,
+      -0.3907311260700226,
+      0.9205048680305481,
+      0,
+      -0.3907311260700226,
+      0.9205048680305481
+    ],
+    "disposedOldGeometry": 1,
+    "sourceUnchanged": true,
+    "modelSurfaceRetained": true
+  },
+  "extensionCalls": 2,
+  "selection": {
+    "registered": true,
+    "marked": true,
+    "viewMarked": true
+  },
+  "models": 14,
+  "history": 14,
+  "rootViews": 14,
+  "appHash": "88d65535d3a7fbee4718d42e04fc1c6b34d0843114f7a83cf985f33005d68e39",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'",
+  "base": "http://127.0.0.1:20614/"
+}

@@ -1,0 +1,16 @@
+✔ terminal cleanup failure settles initialization readiness and stays observable (107.315938ms)
+✔ terminal cleanup failure settles in-flight request even after its deadline (101.172731ms)
+✔ ordinary close still rejects pending work and remains idempotent (104.148519ms)
+✔ exact falsey termination failure remains visible: undefined (101.03244ms)
+✔ exact falsey termination failure remains visible: null (100.434265ms)
+✔ exact falsey termination failure remains visible: zero (101.18121ms)
+✔ exact falsey termination failure remains visible: false (100.303053ms)
+✔ exact falsey termination failure remains visible: empty (101.337622ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 879.5765

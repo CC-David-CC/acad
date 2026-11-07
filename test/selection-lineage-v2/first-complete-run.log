@@ -1,0 +1,206 @@
+{
+  "node": "v24.22.1",
+  "sources": {
+    "../../modules/engine/mount/selectionLineageIndex.mjs": "5d7ba16694c737ea25a2e9e4016601fc2890f955b9f694e1df6c71b54ffab1c1",
+    "../../modules/engine/mount/booleanSelectionClaims.mjs": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+    "../../modules/engine/mount/prismSelectionIndex.mjs": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+    "../../modules/engine/mount/ownedTopologyContract.mjs": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+    "./worker.mjs": "d61cc652d6190c506bfa922ea894ec578716cf3d4751e2eeff7c726a6a9c4be9",
+    "./fixtures.mjs": "8c1134b4b2c9891dd5d9354058927e162df234c95030fdd8102419d2342d3291",
+    "./native-main-fixture.json": "2268e8d0dbaa8b6508f8ccb4a3d4a4c44dae7e58f993c837edd323c8dc2a480a",
+    "../selection-ancestry/native-first-receipt.json": "a1a99f0f6178aa64463a1688a1b3022880821fde68f027751378bcd7fd2496d7"
+  },
+  "status": "PASS",
+  "scope": "Pure Node Worker replay of frozen actual native construction/edge/Boolean data with explicit component caller source slots; synthetic controls labeled; no new kernel/public authoring",
+  "rows": [
+    {
+      "name": "actual frozen initial prism lifts exact keys and genuine component origin",
+      "status": "PASS"
+    },
+    {
+      "name": "actual frozen fillet uses one real source and actual unique generated blend",
+      "status": "PASS",
+      "data": {
+        "resolvedEdges": 11,
+        "resolvedFaces": 7,
+        "origin": 1
+      }
+    },
+    {
+      "name": "actual frozen subsequent chamfer preserves first failure and old blend origin",
+      "status": "PASS"
+    },
+    {
+      "name": "actual frozen size replay retains opaque keys with changed native geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "actual main V3 source-bound Boolean disjoint-0",
+      "status": "PASS",
+      "data": {
+        "contexts": [
+          {
+            "kind": "sketch-profile",
+            "featureId": 10,
+            "regionId": "native-v3-component:A"
+          },
+          {
+            "kind": "sketch-profile",
+            "featureId": 30,
+            "regionId": "native-v3-component:C"
+          }
+        ],
+        "resolvedEdges": 24,
+        "resolvedFaces": 12,
+        "detailedUnresolved": 0
+      }
+    },
+    {
+      "name": "actual main V3 source-bound Boolean overlap-0",
+      "status": "PASS",
+      "data": {
+        "contexts": [
+          {
+            "kind": "sketch-profile",
+            "featureId": 10,
+            "regionId": "native-v3-component:A"
+          },
+          {
+            "kind": "sketch-profile",
+            "featureId": 20,
+            "regionId": "native-v3-component:B"
+          }
+        ],
+        "resolvedEdges": 16,
+        "resolvedFaces": 2,
+        "detailedUnresolved": 18
+      }
+    },
+    {
+      "name": "actual main V3 source-bound Boolean overlap-1",
+      "status": "PASS",
+      "data": {
+        "contexts": [
+          {
+            "kind": "sketch-profile",
+            "featureId": 10,
+            "regionId": "native-v3-component:A"
+          },
+          {
+            "kind": "sketch-profile",
+            "featureId": 20,
+            "regionId": "native-v3-component:B"
+          }
+        ],
+        "resolvedEdges": 12,
+        "resolvedFaces": 6,
+        "detailedUnresolved": 18
+      }
+    },
+    {
+      "name": "actual main V3 source-bound Boolean same-operand-0",
+      "status": "PASS",
+      "data": {
+        "contexts": [
+          {
+            "kind": "sketch-profile",
+            "featureId": 10,
+            "regionId": "native-v3-component:A"
+          }
+        ],
+        "resolvedEdges": 12,
+        "resolvedFaces": 6,
+        "detailedUnresolved": 0
+      }
+    },
+    {
+      "name": "actual main V3 source-bound Boolean same-operand-1",
+      "status": "PASS",
+      "data": {
+        "contexts": [
+          {
+            "kind": "sketch-profile",
+            "featureId": 10,
+            "regionId": "native-v3-component:A"
+          }
+        ],
+        "resolvedEdges": 0,
+        "resolvedFaces": 0,
+        "detailedUnresolved": 18
+      }
+    },
+    {
+      "name": "actual main V3 source-bound Boolean real-circle-through-cut",
+      "status": "PASS",
+      "data": {
+        "contexts": [
+          {
+            "kind": "sketch-profile",
+            "featureId": 40,
+            "regionId": "native-v3-component:plate"
+          },
+          {
+            "kind": "sketch-profile",
+            "featureId": 50,
+            "regionId": "native-v3-component:circle-tool"
+          }
+        ],
+        "resolvedEdges": 12,
+        "resolvedFaces": 7,
+        "detailedUnresolved": 4
+      }
+    },
+    {
+      "name": "synthetic same/modified duplicates and raw deletion flags preserve inherited keys",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic split/merge failures use true one-input evidence and preserve origin",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic unclaimed native co-generators and retained faces forbid blend naming",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic prior boolean evidence and first failure survive without stale counts",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic branch role/origin/source-region conflicts refuse naming explicitly",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic same ID derived geometry differences are not authored metadata conflicts",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic prior-versus-resolved and conflicting first histories are never repaired",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic contexts sort numerically and merge only actual matching origins",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic original caller data is captured before resolver callbacks",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic nested/outer accessors, custom objects and extra native fields refuse unread",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic malformed raw histories and advertised native bindings refuse",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic producer and selected-edge identity admission",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic key cap and immutable resolver publication",
+      "status": "PASS"
+    }
+  ]
+}

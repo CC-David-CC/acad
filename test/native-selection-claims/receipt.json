@@ -1,0 +1,2283 @@
+{
+  "base": "41e6e82a37b782f365e43fc6d56d17b17a868f03",
+  "node": "v24.22.1",
+  "pins": {
+    "../../modules/engine/mount/booleanSelectionClaims.mjs": {
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+      "bytes": 9413
+    },
+    "../../modules/engine/mount/ownedTopologyContract.mjs": {
+      "sha256": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+      "bytes": 7063
+    },
+    "./worker.mjs": {
+      "sha256": "3bc0ca2807846ef2d65ad9125dd1a22df5634358bb29e252a892589a3b5e5084",
+      "bytes": 8223
+    },
+    "./run.mjs": {
+      "sha256": "4df7572a8a7887f1fd831af4e61423a519cce77639b3f47a5edf5a327e09825a",
+      "bytes": 2362
+    },
+    "../boolean-selection-claims/worker.mjs": {
+      "sha256": "d99b1191f99ea1fea9353b5d847a7333da36f4b71e4b80269e1a08139579164c",
+      "bytes": 11654
+    },
+    "../boolean-selection-claims/fixtures.mjs": {
+      "sha256": "c0b86c0c7ce9dfadf45521dbdefb21d7c238ebf2dba3f87705f3eba9bba120b8",
+      "bytes": 2367
+    },
+    "../boolean-selection-claims/actual-native/worker.mjs": {
+      "sha256": "1d44e816173fbc74594ea6af0cf97ec6f863aa834461d90f5b7ad2d90ac2f48c",
+      "bytes": 11878
+    },
+    "../selection-ancestry/native-first-receipt.json": {
+      "sha256": "a1a99f0f6178aa64463a1688a1b3022880821fde68f027751378bcd7fd2496d7",
+      "bytes": 133073
+    },
+    "../boolean-selection-claims/actual-native/matrix-r3/observations.jsonl": {
+      "sha256": "a1a333fa692a9ab83c38a9f6ed2b7b6a52dee4b01fd8bd3baf25f4877e5b63b9",
+      "bytes": 2098316
+    },
+    "../boolean-selection-claims/actual-native/plate-r1/observations.jsonl": {
+      "sha256": "ab6d33f646a8b7ad2f89fc2aaf435efc7e001dae90ddef6268a68243bbb4c3af",
+      "bytes": 718728
+    }
+  },
+  "status": "PASS",
+  "current": {
+    "status": "PASS",
+    "scope": "one/two-source pure claims API; recorded genuine one-input v1 and two-input v2 + clearly synthetic one-input v2 controls",
+    "rows": [
+      {
+        "name": "genuine one-source v1 edge-fillet",
+        "scope": "recorded genuine native edge operation; fixture-local arithmetic IDs, no new native/public execution",
+        "status": "PASS",
+        "data": {
+          "actualSources": 1,
+          "retainedRawDeleted": 7,
+          "resolvedEdges": 11
+        }
+      },
+      {
+        "name": "genuine one-source v1 edge-chamfer",
+        "scope": "recorded genuine native edge operation; fixture-local arithmetic IDs, no new native/public execution",
+        "status": "PASS",
+        "data": {
+          "actualSources": 1,
+          "retainedRawDeleted": 7,
+          "resolvedEdges": 11
+        }
+      },
+      {
+        "name": "genuine one-source v1 edge-sequential",
+        "scope": "recorded genuine native edge operation; fixture-local arithmetic IDs, no new native/public execution",
+        "status": "PASS",
+        "data": {
+          "actualSources": 1,
+          "retainedRawDeleted": 10,
+          "resolvedEdges": 14
+        }
+      },
+      {
+        "name": "genuine one-source v1 healthy-after-refusals",
+        "scope": "recorded genuine native edge operation; fixture-local arithmetic IDs, no new native/public execution",
+        "status": "PASS",
+        "data": {
+          "actualSources": 1,
+          "retainedRawDeleted": 7,
+          "resolvedEdges": 11
+        }
+      },
+      {
+        "name": "one source v2 retains all kinds and generated cross-kind evidence without inheritance",
+        "scope": "synthetic one-source v2 metadata control, not native geometry",
+        "status": "PASS"
+      },
+      {
+        "name": "one source split/merge/dedup/deleted evidence follows the unchanged invariant",
+        "scope": "synthetic one-source v2 metadata control, not native geometry",
+        "status": "PASS"
+      },
+      {
+        "name": "zero/three/sparse/malformed source lists reject; Boolean never accepts one",
+        "scope": "synthetic one-source v2 metadata control, not native geometry",
+        "status": "PASS"
+      },
+      {
+        "name": "one-source capture refuses getters without access and remains detached/frozen",
+        "scope": "synthetic one-source v2 metadata control, not native geometry",
+        "status": "PASS"
+      },
+      {
+        "name": "single capture has the same exact UTF8 input/returned budgets without dummy-source overhead",
+        "scope": "synthetic one-source v2 metadata control, not native geometry",
+        "status": "PASS",
+        "data": {
+          "actualSources": 1,
+          "capturedBytes": 524288,
+          "returnedBytes": 509461
+        }
+      },
+      {
+        "name": "two-source API parity on all actual recorded Boolean successes",
+        "scope": "recorded genuine native v2 histories; fixture-local arithmetic labels",
+        "status": "PASS",
+        "data": {
+          "actualTwoSourceCases": 69
+        }
+      }
+    ]
+  },
+  "retainedBoolean18": {
+    "status": "PASS",
+    "scope": "actual Node Worker pure reconciliation; recorded genuine legacy single-input histories plus synthetic joint-claim controls only",
+    "rows": [
+      {
+        "name": "recorded v1 edge-fillet",
+        "scope": "recorded genuine single-input native history + explicitly synthetic empty second input, not a fresh Boolean",
+        "status": "PASS",
+        "data": {
+          "resolvedEdges": 11,
+          "resolvedFaces": 6,
+          "rawDeletedSurvivors": 7
+        }
+      },
+      {
+        "name": "recorded v1 edge-chamfer",
+        "scope": "recorded genuine single-input native history + explicitly synthetic empty second input, not a fresh Boolean",
+        "status": "PASS",
+        "data": {
+          "resolvedEdges": 11,
+          "resolvedFaces": 6,
+          "rawDeletedSurvivors": 7
+        }
+      },
+      {
+        "name": "recorded v1 healthy-after-refusals",
+        "scope": "recorded genuine single-input native history + explicitly synthetic empty second input, not a fresh Boolean",
+        "status": "PASS",
+        "data": {
+          "resolvedEdges": 11,
+          "resolvedFaces": 6,
+          "rawDeletedSurvivors": 7
+        }
+      },
+      {
+        "name": "two input distinct surviving claims use separate same-kind spaces",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "same authored ID unions duplicate same/modified candidates across inputs",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "same ID split or one absent source remains explicit without raw-delete override",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "different input IDs sharing a descendant BOTH become unresolved merges",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "overlapping split+merge uses merge precedence across both inputs",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "generated vertices/edges/faces remain separate, including unclaimed source rows",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "genuine empty output has no inherited members and no fabricated validity claim",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "same-ID conflicting kinds, duplicate IDs or duplicate per-kind source indices refuse",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "complete ordered ancestry includes every vertex row and actual result member",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "complete unclaimed rows still validate malformed target members",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "all nested data including topology refuses accessors before invocation",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "unknown fields, sparse arrays, prototypes, cycles and nonfinite data refuse",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "legacy v1 remains explicit, vertex omissions/mixed versions refuse rather than convert",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      },
+      {
+        "name": "captured byte cap is exact, returned observations use actual UTF8, not character estimates",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS",
+        "data": {
+          "capturedBoundaryBytes": 524288,
+          "returnedBoundaryBytes": 514352,
+          "unicodeReturnedBytes": 30120
+        }
+      },
+      {
+        "name": "detached frozen observations and private generated/resolver data survive caller mutation",
+        "scope": "synthetic metadata control; not native Boolean output",
+        "status": "PASS"
+      }
+    ]
+  },
+  "retainedActual69": {
+    "status": "PASS",
+    "scope": "actual Node Worker replay of recorded genuine native v2 Boolean observations; no new native/browser/public execution",
+    "summary": {
+      "matrixSuccesses": 59,
+      "matrixRefusals": 2,
+      "emptyOutputs": 19,
+      "multiSolidOutputs": 9,
+      "sameOriginalLinks": 0,
+      "resolved": 1178,
+      "NO_DESCENDANT": 1164,
+      "MULTIPLE_DESCENDANTS": 0,
+      "MERGED_DESCENDANT": 388,
+      "generatedVertexTargets": 40,
+      "edgeGeneratedVertexTargets": 20,
+      "plateCuts": 10,
+      "plateCornerBindings": 40,
+      "rawSameKindSplitRelations": 48,
+      "isolatedNativeSplits": 1
+    },
+    "observations": [
+      {
+        "case": "disjoint-ab-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "3055f314265d59df77d5ab75175ae81b30c9eded7d80f0717ea53ad278836f33"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "dc07dcb97a4044e7be6d77cee551bfc9318061eddef0ad559050db9f29c74c05",
+          "b": "830f9b65240ccc33880eddea7237f680a23d04beaf69d15ec5aa22cf04d49c06"
+        },
+        "resultCatalogSHA256": "b5fce78f07d1f4224b6da2d655eda724cf140a506016d889eed04f800bdd0a7c",
+        "inputBytes": 22862,
+        "resolved": 52,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 2
+      },
+      {
+        "case": "disjoint-ba-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3055f314265d59df77d5ab75175ae81b30c9eded7d80f0717ea53ad278836f33",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "dc07dcb97a4044e7be6d77cee551bfc9318061eddef0ad559050db9f29c74c05",
+          "b": "830f9b65240ccc33880eddea7237f680a23d04beaf69d15ec5aa22cf04d49c06"
+        },
+        "resultCatalogSHA256": "7de0f93f44120f67fba78c880962d7604d26fb28261e5f9afc7590ebe7a837e8",
+        "inputBytes": 22862,
+        "resolved": 52,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 2
+      },
+      {
+        "case": "disjoint-ab-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "3055f314265d59df77d5ab75175ae81b30c9eded7d80f0717ea53ad278836f33"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "395ae8ebbb6b6857be45a81a87f5120296df47d92078eac97f726835b9176552",
+          "b": "48f61f56fd00e9eb38fcbf51d9f230a66a0504dcc41dd2ddb687e302cea55c9a"
+        },
+        "resultCatalogSHA256": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+        "inputBytes": 18216,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "disjoint-ba-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3055f314265d59df77d5ab75175ae81b30c9eded7d80f0717ea53ad278836f33",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "395ae8ebbb6b6857be45a81a87f5120296df47d92078eac97f726835b9176552",
+          "b": "48f61f56fd00e9eb38fcbf51d9f230a66a0504dcc41dd2ddb687e302cea55c9a"
+        },
+        "resultCatalogSHA256": "3055f314265d59df77d5ab75175ae81b30c9eded7d80f0717ea53ad278836f33",
+        "inputBytes": 18233,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "disjoint-ab-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "3055f314265d59df77d5ab75175ae81b30c9eded7d80f0717ea53ad278836f33"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13669,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "disjoint-ba-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3055f314265d59df77d5ab75175ae81b30c9eded7d80f0717ea53ad278836f33",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13669,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "overlap-ab-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "05e300cc44437f8263d54e80de3a481c569944ea30eaea722051c2774da852f0"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "0b71c5ee9dfff4bbe958d207baf7edc7c7aa5b6447e8fec893f313bb06bea32d",
+          "b": "8418782a6a726cacc4284aab186a1039e07491f20e1e72394dc21e3b7360ba7e"
+        },
+        "resultCatalogSHA256": "3331aa73dc690b2f13850652a62cd20676e35c27912210dd2f001e2ed2c831f6",
+        "inputBytes": 24263,
+        "resolved": 34,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 2,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 16
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "overlap-ba-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "05e300cc44437f8263d54e80de3a481c569944ea30eaea722051c2774da852f0",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "0f3a01934fc582ce0b5b4a73badd0b14194966c3c4678903edf2e9396c36cc2b",
+          "b": "df7a80037d50a4b17e35b04f773025640c870ee3fce857a127dc527000ec7b95"
+        },
+        "resultCatalogSHA256": "3360de47e807f600de1ff0ad13ce530e9f96eea1a531850d92ab7b02deb538f8",
+        "inputBytes": 24252,
+        "resolved": 34,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 2,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 16
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "overlap-ab-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "05e300cc44437f8263d54e80de3a481c569944ea30eaea722051c2774da852f0"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "d1a38395e598e74d1573a88fa614807ec99cc196095fb214451ca006fbfc2301",
+          "b": "53c540d7bc6e4be1ca3133cf2dd46286d826cc0d5a28463ca2ef8a856da7e8c3"
+        },
+        "resultCatalogSHA256": "72138b8dbce2c322df282153fa7fc2a6c64999a313658697274dfbc3167cffca",
+        "inputBytes": 18152,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "overlap-ba-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "05e300cc44437f8263d54e80de3a481c569944ea30eaea722051c2774da852f0",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "c07f8a968e7c3dee3f332291e421906eaa87c0ae639d0e7de99ff0a2fd9e1b39",
+          "b": "387856c393bedf6387dcd2a796b2ffe851b2ea4437ade4c092725b456502d2f8"
+        },
+        "resultCatalogSHA256": "7274f0a1be837024f5a167f041034075bac7b4fae7c32a8bcbc7368f4cf591e5",
+        "inputBytes": 18174,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "overlap-ab-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "05e300cc44437f8263d54e80de3a481c569944ea30eaea722051c2774da852f0"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "8bec4e89b09b69fcac500f2fad6d4cf876f54ded544b5e7c9c662732bcfe8be5",
+          "b": "800da6b50bf154845e9405430b8ef237689095f0307ba6fdc70218502232b664"
+        },
+        "resultCatalogSHA256": "8e37cebdd1b285463a36c7248dce0d093cc41d27866bdaf6dcae795f39e56702",
+        "inputBytes": 18182,
+        "resolved": 18,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 18,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 16
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "overlap-ba-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "05e300cc44437f8263d54e80de3a481c569944ea30eaea722051c2774da852f0",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "ecce03578dec3d21717b1d798031d3c334da34cefb839632c481c5a390081034",
+          "b": "e6333d4a570b7a6757da6759e890fc7cbac54e5320d9702d7bd1c5eb65c46273"
+        },
+        "resultCatalogSHA256": "ba074745e626bafa7b21e40c431a75b10e4f05b79d59434c31f5bd3d8218434f",
+        "inputBytes": 18178,
+        "resolved": 18,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 18,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 16
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "contained-ab-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "21a035bf2802c63d1bdc04bf48bde5ddbee7ea08136c60dbf86df505439ee955"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "00da03a04a67e4aea07d74b51096e1900b96a59c6420905cd2138e407279bd20",
+          "b": "48f61f56fd00e9eb38fcbf51d9f230a66a0504dcc41dd2ddb687e302cea55c9a"
+        },
+        "resultCatalogSHA256": "28767e503325dc1270d4bde237bf66d73be5e89b000447efe65f3bf37b1f3528",
+        "inputBytes": 18269,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "contained-ba-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "21a035bf2802c63d1bdc04bf48bde5ddbee7ea08136c60dbf86df505439ee955",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "48f61f56fd00e9eb38fcbf51d9f230a66a0504dcc41dd2ddb687e302cea55c9a",
+          "b": "00da03a04a67e4aea07d74b51096e1900b96a59c6420905cd2138e407279bd20"
+        },
+        "resultCatalogSHA256": "28767e503325dc1270d4bde237bf66d73be5e89b000447efe65f3bf37b1f3528",
+        "inputBytes": 18269,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "contained-ab-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "21a035bf2802c63d1bdc04bf48bde5ddbee7ea08136c60dbf86df505439ee955"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "d2ee250636b671c2016df2b5813b0356c0904c0fce75c92f2b3de322281f6369",
+          "b": "1388270d038d9fefdd32ac6527046a539db63c80ced5ddc1c8ab437223027f9b"
+        },
+        "resultCatalogSHA256": "c46b893c8cc36e0dfe8ab773a41239a00d480c99d047ba9fd7f4b279240c426c",
+        "inputBytes": 22858,
+        "resolved": 52,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "contained-ba-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "21a035bf2802c63d1bdc04bf48bde5ddbee7ea08136c60dbf86df505439ee955",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13721,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "contained-ab-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "21a035bf2802c63d1bdc04bf48bde5ddbee7ea08136c60dbf86df505439ee955"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "48f61f56fd00e9eb38fcbf51d9f230a66a0504dcc41dd2ddb687e302cea55c9a",
+          "b": "395ae8ebbb6b6857be45a81a87f5120296df47d92078eac97f726835b9176552"
+        },
+        "resultCatalogSHA256": "21a035bf2802c63d1bdc04bf48bde5ddbee7ea08136c60dbf86df505439ee955",
+        "inputBytes": 18229,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "contained-ba-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "21a035bf2802c63d1bdc04bf48bde5ddbee7ea08136c60dbf86df505439ee955",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "395ae8ebbb6b6857be45a81a87f5120296df47d92078eac97f726835b9176552",
+          "b": "48f61f56fd00e9eb38fcbf51d9f230a66a0504dcc41dd2ddb687e302cea55c9a"
+        },
+        "resultCatalogSHA256": "21a035bf2802c63d1bdc04bf48bde5ddbee7ea08136c60dbf86df505439ee955",
+        "inputBytes": 18229,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "identical-ab-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "323ef7315e6da29176af80b7b5ffa67992c12725d3c0013745cfe0edcb3f6020",
+          "b": "323ef7315e6da29176af80b7b5ffa67992c12725d3c0013745cfe0edcb3f6020"
+        },
+        "resultCatalogSHA256": "0fb6905f4dc67aaaa474b4aa7132eacb7fe2f6896638595509c613940c413253",
+        "inputBytes": 18324,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 52
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "identical-ba-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "323ef7315e6da29176af80b7b5ffa67992c12725d3c0013745cfe0edcb3f6020",
+          "b": "323ef7315e6da29176af80b7b5ffa67992c12725d3c0013745cfe0edcb3f6020"
+        },
+        "resultCatalogSHA256": "0fb6905f4dc67aaaa474b4aa7132eacb7fe2f6896638595509c613940c413253",
+        "inputBytes": 18324,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 52
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "identical-ab-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13721,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "identical-ba-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13721,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "identical-ab-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "393921ee39348cd9fc78c75433e682c8737608a2299115b13aed92a2c601a6c5",
+          "b": "393921ee39348cd9fc78c75433e682c8737608a2299115b13aed92a2c601a6c5"
+        },
+        "resultCatalogSHA256": "f551b536972c0c0e43c6d5ef36f3f898c67d3581b55f99e7a5cf8ead3676f7a5",
+        "inputBytes": 18323,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 52
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "identical-ba-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "393921ee39348cd9fc78c75433e682c8737608a2299115b13aed92a2c601a6c5",
+          "b": "393921ee39348cd9fc78c75433e682c8737608a2299115b13aed92a2c601a6c5"
+        },
+        "resultCatalogSHA256": "f551b536972c0c0e43c6d5ef36f3f898c67d3581b55f99e7a5cf8ead3676f7a5",
+        "inputBytes": 18323,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 52
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "face-ab-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "2ea6a010bd2c4b16ed3e4928d83565515f77c46717f4d8b74fc41c9884c9c4bd"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "7970df433618b1805a550ae05357f83e4c04e186c595936333a93a59a81c5587",
+          "b": "4b4a0b063c3d0fbb4f68d26e6ef87be6525839845cde0113e21aa28fb833cb43"
+        },
+        "resultCatalogSHA256": "3ded000cb7134452d80fc02ee47d8931564dd6da26b64d72e743b92606c3577a",
+        "inputBytes": 21075,
+        "resolved": 34,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 2,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 16
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "face-ba-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "2ea6a010bd2c4b16ed3e4928d83565515f77c46717f4d8b74fc41c9884c9c4bd",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "a3f906589553714a47ad693b8cc3e1da0d46a620756ee174623ae227fc9764b4",
+          "b": "285e6487ef9467a6132567acd86576f053a9a16515d4ac218eeb18425f83a2b7"
+        },
+        "resultCatalogSHA256": "10f65567da0987899b9d73fd371f48b551259bfbd34566cdb81aec21cfbaa1a7",
+        "inputBytes": 21075,
+        "resolved": 34,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 2,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 16
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "face-ab-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "2ea6a010bd2c4b16ed3e4928d83565515f77c46717f4d8b74fc41c9884c9c4bd"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "f11a6424b27f8e5ad7a62db1808c5f1302cc97093f4ee7890ae87c71a5e1b239",
+          "b": "abad96b8de6f51d9b748fc2fbdedd6ff0a37c51aa28202d6fbdac67c7413ba95"
+        },
+        "resultCatalogSHA256": "1517c1a3b0e545114e8c656f094ee883b49d06df60966629a71a34a4d24a5fda",
+        "inputBytes": 18026,
+        "resolved": 17,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 17,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 18
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "face-ba-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "2ea6a010bd2c4b16ed3e4928d83565515f77c46717f4d8b74fc41c9884c9c4bd",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "bffaeb599c19189d30677694666876bf9851287085dc5984538d1f14c861eda0",
+          "b": "3e8d40cf88f91ffb60eaeafffe68f056431ddb4bd1673d3579ea50b1472948ba"
+        },
+        "resultCatalogSHA256": "6634747bc309f5d2580e68744b820024aada3106a9599658818a9af407e3bd7c",
+        "inputBytes": 18043,
+        "resolved": 17,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 17,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 18
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "face-ab-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "2ea6a010bd2c4b16ed3e4928d83565515f77c46717f4d8b74fc41c9884c9c4bd"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13461,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "face-ba-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "2ea6a010bd2c4b16ed3e4928d83565515f77c46717f4d8b74fc41c9884c9c4bd",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13461,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "edge-ab-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "1b80d9d0b48abd62dd4d9e96961c5103a5d77c983118c2052545279397a34496"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "652e0e2f408c297fca9bc4172afee1644bb60181c3424a8e105efa660145e52c",
+          "b": "31177c2446fa268bd9f502d46d20da52d19bfbdb4f3a4ede66c98861bb29ebec"
+        },
+        "resultCatalogSHA256": "cb08de7eb83adc9bbb6e8802a8fe8aa9921655d0b69c9d22a6230ea6329b08fb",
+        "inputBytes": 22415,
+        "resolved": 46,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 6
+        },
+        "resultSolidCount": 2
+      },
+      {
+        "case": "edge-ba-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "1b80d9d0b48abd62dd4d9e96961c5103a5d77c983118c2052545279397a34496",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2b8b6e50943c492d1632eccc04bea03662e5fca4d7b0b509b747e727fdebaa50",
+          "b": "778b839269ead0043f9c9b7b4597c4f09ccb2e90c2a42e088cc9e5727f8ed73c"
+        },
+        "resultCatalogSHA256": "a9bdbb10a929c1c256e3165381315bc5bd98098ad4948a25312231308756b03b",
+        "inputBytes": 22412,
+        "resolved": 46,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 6
+        },
+        "resultSolidCount": 2
+      },
+      {
+        "case": "edge-ab-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "1b80d9d0b48abd62dd4d9e96961c5103a5d77c983118c2052545279397a34496"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "395ae8ebbb6b6857be45a81a87f5120296df47d92078eac97f726835b9176552",
+          "b": "246965b5edd232b55ef2c7f680abd400429a8c7e08ca6782032f3b27c12ba7cb"
+        },
+        "resultCatalogSHA256": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+        "inputBytes": 18014,
+        "resolved": 23,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 23,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 6
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "edge-ba-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "1b80d9d0b48abd62dd4d9e96961c5103a5d77c983118c2052545279397a34496",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "bffaeb599c19189d30677694666876bf9851287085dc5984538d1f14c861eda0",
+          "b": "87f428bfc4a818d15f935b8c4dd4244aed54f0ad38e75fac3ccc51b5ba2b090a"
+        },
+        "resultCatalogSHA256": "00d561279cfc82fb035057c7f0a32c0c722dadbb9e89ac226b3c5dd660c4194f",
+        "inputBytes": 18048,
+        "resolved": 23,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 23,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 6
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "edge-ab-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "1b80d9d0b48abd62dd4d9e96961c5103a5d77c983118c2052545279397a34496"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13461,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "edge-ba-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "1b80d9d0b48abd62dd4d9e96961c5103a5d77c983118c2052545279397a34496",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13461,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "point-ab-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "3228b2988975bac91975e9af4a046e3ebcb4af51bc8aafd64e3240528ce12760"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "604d7b1b3eb3a6916cb7c4b691fa12be5b8f6d0ed94c809902b0fc3b08f949d3",
+          "b": "5a1f8f9f80bae4a9d7eb9b4c343b2e577c4b7f6c7b9a70f99f82bd535eea6472"
+        },
+        "resultCatalogSHA256": "1320b071157d05ff43bc710c1528afc46f0c0ad5e30e741bf00c4008832299e1",
+        "inputBytes": 22706,
+        "resolved": 50,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 2
+        },
+        "resultSolidCount": 2
+      },
+      {
+        "case": "point-ba-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3228b2988975bac91975e9af4a046e3ebcb4af51bc8aafd64e3240528ce12760",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "4b7842ca95ed289dcf6bcb1c1bab5279962f3a37e8242c193559d59ce35643b2",
+          "b": "3c5303340cd71abd598dc3bdef373a0c05e2160b33776b8cfe20fa8918d26903"
+        },
+        "resultCatalogSHA256": "eb243edc25ad4ac8a2ba29871f5e15505945de7c62b5440ddc8cfc7373acc354",
+        "inputBytes": 22706,
+        "resolved": 50,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 2
+        },
+        "resultSolidCount": 2
+      },
+      {
+        "case": "point-ab-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "3228b2988975bac91975e9af4a046e3ebcb4af51bc8aafd64e3240528ce12760"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "395ae8ebbb6b6857be45a81a87f5120296df47d92078eac97f726835b9176552",
+          "b": "dccab8217e94eb2f5aae9fb01b12dbb4743e09e7fa4ce76de51883c369395ace"
+        },
+        "resultCatalogSHA256": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+        "inputBytes": 18062,
+        "resolved": 25,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 25,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 2
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "point-ba-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3228b2988975bac91975e9af4a046e3ebcb4af51bc8aafd64e3240528ce12760",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "bffaeb599c19189d30677694666876bf9851287085dc5984538d1f14c861eda0",
+          "b": "58bb2fad3a19edd6a1743de182df7dd8e1ea736705e30fb9100ec70caab1d56a"
+        },
+        "resultCatalogSHA256": "618163fff94684193079b7699f13c9ebff07cdc2b56a994a83b438bf3ca3551a",
+        "inputBytes": 18113,
+        "resolved": 25,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 25,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 2
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "point-ab-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "3228b2988975bac91975e9af4a046e3ebcb4af51bc8aafd64e3240528ce12760"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13513,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "point-ba-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3228b2988975bac91975e9af4a046e3ebcb4af51bc8aafd64e3240528ce12760",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13513,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "same-handle-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "323ef7315e6da29176af80b7b5ffa67992c12725d3c0013745cfe0edcb3f6020",
+          "b": "323ef7315e6da29176af80b7b5ffa67992c12725d3c0013745cfe0edcb3f6020"
+        },
+        "resultCatalogSHA256": "0fb6905f4dc67aaaa474b4aa7132eacb7fe2f6896638595509c613940c413253",
+        "inputBytes": 18532,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "same-handle-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13929,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "same-handle-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "393921ee39348cd9fc78c75433e682c8737608a2299115b13aed92a2c601a6c5",
+          "b": "393921ee39348cd9fc78c75433e682c8737608a2299115b13aed92a2c601a6c5"
+        },
+        "resultCatalogSHA256": "f551b536972c0c0e43c6d5ef36f3f898c67d3581b55f99e7a5cf8ead3676f7a5",
+        "inputBytes": 18531,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "empty-seed",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "3055f314265d59df77d5ab75175ae81b30c9eded7d80f0717ea53ad278836f33"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 13513,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 52,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "multi-seed",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "3055f314265d59df77d5ab75175ae81b30c9eded7d80f0717ea53ad278836f33"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "dc07dcb97a4044e7be6d77cee551bfc9318061eddef0ad559050db9f29c74c05",
+          "b": "830f9b65240ccc33880eddea7237f680a23d04beaf69d15ec5aa22cf04d49c06"
+        },
+        "resultCatalogSHA256": "b5fce78f07d1f4224b6da2d655eda724cf140a506016d889eed04f800bdd0a7c",
+        "inputBytes": 22706,
+        "resolved": 52,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 2
+      },
+      {
+        "case": "empty-ab-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "13d105b4c5e7cc8601035883d48c9fa61bf2767d574778880d70a004c9be36a9",
+          "b": "395ae8ebbb6b6857be45a81a87f5120296df47d92078eac97f726835b9176552"
+        },
+        "resultCatalogSHA256": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+        "inputBytes": 11600,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "empty-ba-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2"
+        },
+        "ancestryHashes": {
+          "a": "395ae8ebbb6b6857be45a81a87f5120296df47d92078eac97f726835b9176552",
+          "b": "13d105b4c5e7cc8601035883d48c9fa61bf2767d574778880d70a004c9be36a9"
+        },
+        "resultCatalogSHA256": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+        "inputBytes": 11600,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "both-empty-0",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+          "b": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168"
+        },
+        "sourceCopyHashes": {
+          "a": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2",
+          "b": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2"
+        },
+        "ancestryHashes": {
+          "a": "0f61e5000c1a880884db9fe7bcd50597d701cc602bc9d2433aa9ec2bf32c88f4",
+          "b": "0f61e5000c1a880884db9fe7bcd50597d701cc602bc9d2433aa9ec2bf32c88f4"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 593,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "empty-ab-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "0f61e5000c1a880884db9fe7bcd50597d701cc602bc9d2433aa9ec2bf32c88f4",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 7053,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "empty-ba-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2"
+        },
+        "ancestryHashes": {
+          "a": "395ae8ebbb6b6857be45a81a87f5120296df47d92078eac97f726835b9176552",
+          "b": "13d105b4c5e7cc8601035883d48c9fa61bf2767d574778880d70a004c9be36a9"
+        },
+        "resultCatalogSHA256": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+        "inputBytes": 11600,
+        "resolved": 26,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "both-empty-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+          "b": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168"
+        },
+        "sourceCopyHashes": {
+          "a": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2",
+          "b": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2"
+        },
+        "ancestryHashes": {
+          "a": "0f61e5000c1a880884db9fe7bcd50597d701cc602bc9d2433aa9ec2bf32c88f4",
+          "b": "0f61e5000c1a880884db9fe7bcd50597d701cc602bc9d2433aa9ec2bf32c88f4"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 593,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "empty-ab-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+          "b": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d"
+        },
+        "sourceCopyHashes": {
+          "a": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "0f61e5000c1a880884db9fe7bcd50597d701cc602bc9d2433aa9ec2bf32c88f4",
+          "b": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 7053,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "empty-ba-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2"
+        },
+        "ancestryHashes": {
+          "a": "2605076b317cb5385015b934eaf0c90f6ba174dedd66cd85a89fd919c5fa773f",
+          "b": "0f61e5000c1a880884db9fe7bcd50597d701cc602bc9d2433aa9ec2bf32c88f4"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 7053,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "both-empty-2",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+          "b": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168"
+        },
+        "sourceCopyHashes": {
+          "a": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2",
+          "b": "4142f052505b7af7b83c17c418698647aa2cd6d3b4d1f8d5a0fcc962bf4821f2"
+        },
+        "ancestryHashes": {
+          "a": "0f61e5000c1a880884db9fe7bcd50597d701cc602bc9d2433aa9ec2bf32c88f4",
+          "b": "0f61e5000c1a880884db9fe7bcd50597d701cc602bc9d2433aa9ec2bf32c88f4"
+        },
+        "resultCatalogSHA256": "3bf1cb4d43edd41151185d45889ba809d2bd572febea936d99a36312f5cf1168",
+        "inputBytes": 593,
+        "resolved": 0,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 0,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 0
+      },
+      {
+        "case": "multi-cut",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "b5fce78f07d1f4224b6da2d655eda724cf140a506016d889eed04f800bdd0a7c",
+          "b": "f7231c42725dfda24e8e52a1d65dd6a379bed49ac6e587c033a05b294f70e8ae"
+        },
+        "sourceCopyHashes": {
+          "a": "93e7206af7e65d000b3ba38302c6d86caa704d58532f9f3a99551f17e8376316",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "d18b80b6ee629df0f5b9b4cf73676d64878decbe735a32a3712bd12bc8499ef9",
+          "b": "b6efb3743ca5c14447c744c7f865e1b141dc01dc22d1b520d565dd6cd044c8ff"
+        },
+        "resultCatalogSHA256": "246d43f6e5f2016367034ec5bbefba6bbdac6c4d68ad1d7f879899d2e5ce4882",
+        "inputBytes": 29151,
+        "resolved": 52,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 2
+      },
+      {
+        "case": "multi-common",
+        "operation": 2,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "b5fce78f07d1f4224b6da2d655eda724cf140a506016d889eed04f800bdd0a7c",
+          "b": "00f718c2d61584fb14abd498e41a2b35b51bec69f390da218c7ec2dcd213265c"
+        },
+        "sourceCopyHashes": {
+          "a": "93e7206af7e65d000b3ba38302c6d86caa704d58532f9f3a99551f17e8376316",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "f29faeef93ca7904677d2d7518ebadd913e618be30a683a71179624c433f0c73",
+          "b": "277ab6129dceb9c3adbafb203fd811dbaa8a0d838a091f9c0bd266daefd48f31"
+        },
+        "resultCatalogSHA256": "b5fce78f07d1f4224b6da2d655eda724cf140a506016d889eed04f800bdd0a7c",
+        "inputBytes": 29384,
+        "resolved": 52,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 26,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 2
+      },
+      {
+        "case": "meshed-overlap",
+        "operation": 0,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "db04680bf1c0723570861bdb4d999a55b8d7e8b21c62d3bb10f2ef9e37b2879d",
+          "b": "05e300cc44437f8263d54e80de3a481c569944ea30eaea722051c2774da852f0"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950"
+        },
+        "ancestryHashes": {
+          "a": "0b71c5ee9dfff4bbe958d207baf7edc7c7aa5b6447e8fec893f313bb06bea32d",
+          "b": "8418782a6a726cacc4284aab186a1039e07491f20e1e72394dc21e3b7360ba7e"
+        },
+        "resultCatalogSHA256": "3331aa73dc690b2f13850652a62cd20676e35c27912210dd2f001e2ed2c831f6",
+        "inputBytes": 24367,
+        "resolved": 34,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 2,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 16
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "plate100x50-hole-0",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "5fa144b44635ab8d3417abab24438ac05b86e94a3d41e729ae58d09ef5574b59",
+          "b": "cb8ae6b566d144d178e9dd3434f869ffbce5600e1714d857db7e394e451f60e3"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "8bfd1e25b03c173236e79f6a2279e30b56f44b1169b0ea3e06bcc0ec3133299c"
+        },
+        "ancestryHashes": {
+          "a": "c5546fff549b55a9166880b0197def069bca3c24a940a6fb38d33a3cdc1e2d5b",
+          "b": "09bebfd60f8118cf091a0ba8e63e602a64289f9ff9a903d83f0b19a323fd20f0"
+        },
+        "resultCatalogSHA256": "557e828eb226f69f5c0f136668866be93b596438d7dda28f9cb1fa9d8a3293f2",
+        "inputBytes": 15100,
+        "resolved": 28,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 6,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "plate100x50-hole-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "557e828eb226f69f5c0f136668866be93b596438d7dda28f9cb1fa9d8a3293f2",
+          "b": "13107c3f0c0ff7dc0f76d7629d507e8afbdd56e9ba617c10c297fbe08433f1ff"
+        },
+        "sourceCopyHashes": {
+          "a": "603ce4493fa48de967dbd2a8e669c44a9fc63f95fcba0b3663b2c216cd27f0e6",
+          "b": "8bfd1e25b03c173236e79f6a2279e30b56f44b1169b0ea3e06bcc0ec3133299c"
+        },
+        "ancestryHashes": {
+          "a": "58b731b0fffb40b92b6b278801809d34c4d728e7bc5e8ccbbd5120726779c05e",
+          "b": "2f0cb2da6be23a6eb661c97b21ce06fdef52459cfb812b5a7c9ef41196aef81a"
+        },
+        "resultCatalogSHA256": "358c1b4d85d819c2d4447cb342240e31453dd9700dc0177e187a717184154aea",
+        "inputBytes": 17573,
+        "resolved": 30,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 6,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "plate100x50-hole-2",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "358c1b4d85d819c2d4447cb342240e31453dd9700dc0177e187a717184154aea",
+          "b": "05859a3bf56581c14a79eaad488d2a0baa97fbd04d0729438f9349714b153b61"
+        },
+        "sourceCopyHashes": {
+          "a": "218b33bd390161fc3150caffe68ba07f7fda41723a1a38a9108a35ba20fa859a",
+          "b": "8bfd1e25b03c173236e79f6a2279e30b56f44b1169b0ea3e06bcc0ec3133299c"
+        },
+        "ancestryHashes": {
+          "a": "dec825937c5eab3ead5ee3bc2335904635c3f98fe0970187f414fe350d85b318",
+          "b": "a945935ee62c85a9a2aedd2978f2163d1097f1f67f76d86e798cbb5b4f92132b"
+        },
+        "resultCatalogSHA256": "7c8cbd81d4bcb9f9cedd090a5de4f66e0cc90cb38456b7e88616e8e002be5c42",
+        "inputBytes": 20050,
+        "resolved": 32,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 6,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "plate100x50-hole-3",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "7c8cbd81d4bcb9f9cedd090a5de4f66e0cc90cb38456b7e88616e8e002be5c42",
+          "b": "37ed1d463d0fbf0502f4f72a4e663bfa0edd0f34127cc91dd6b21ce3b6508a5d"
+        },
+        "sourceCopyHashes": {
+          "a": "57d6628977180e8616253d9d4b15a2773a152b32b44bb8dcd8bc139d76d54e92",
+          "b": "8bfd1e25b03c173236e79f6a2279e30b56f44b1169b0ea3e06bcc0ec3133299c"
+        },
+        "ancestryHashes": {
+          "a": "59b9ebe2f6b3618c6b563dc1d07c5844ec00435c93f0f2b1afa4c89476a857a4",
+          "b": "941d15935c3fa443c45bc48093bed09f7b48ddf1469744b3f06ec26390a012d6"
+        },
+        "resultCatalogSHA256": "aaa4e57521f3845ef8202874e7f67e37a089a4f33386a62b58414df92883e4be",
+        "inputBytes": 22488,
+        "resolved": 34,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 6,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "plate100x50-hole-4",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "aaa4e57521f3845ef8202874e7f67e37a089a4f33386a62b58414df92883e4be",
+          "b": "496aa53e5c39c69480952cc641e0a4e30d04cde5e7371a1a8bff6d57b1f037f4"
+        },
+        "sourceCopyHashes": {
+          "a": "177692780e9e5b1162f7c7ec48b327c2bf1b6ae7d44b12fc5522701e51498e62",
+          "b": "8bfd1e25b03c173236e79f6a2279e30b56f44b1169b0ea3e06bcc0ec3133299c"
+        },
+        "ancestryHashes": {
+          "a": "21f4abca8e2a5b1ece760f75640a78c28ff570db65a4197a35053d83b80b2c2e",
+          "b": "a79d6eec90fb84071d9d457154cc30ff9331c5c7992161fda1061c40f5a704a2"
+        },
+        "resultCatalogSHA256": "dca1f75ec8e5b6d8924e62d3a9b7e0fea671f27bafe78f551760c2509a643b27",
+        "inputBytes": 24924,
+        "resolved": 36,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 6,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "plate150x30-hole-0",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "204f54606a22709debf0e572ebc33a8f92bfbc5be190c6dade3f58f94c946828",
+          "b": "883a9c42f3a643a70bcb44b9f001e8a114916973f03d18a84bd960bece9f0963"
+        },
+        "sourceCopyHashes": {
+          "a": "fb56f83cb09972699c86be2f3857e58de9cafcb7a87735781f38bf7690e91950",
+          "b": "8bfd1e25b03c173236e79f6a2279e30b56f44b1169b0ea3e06bcc0ec3133299c"
+        },
+        "ancestryHashes": {
+          "a": "c5546fff549b55a9166880b0197def069bca3c24a940a6fb38d33a3cdc1e2d5b",
+          "b": "09bebfd60f8118cf091a0ba8e63e602a64289f9ff9a903d83f0b19a323fd20f0"
+        },
+        "resultCatalogSHA256": "40402bea5d276693a8a1d8b1b13b69bf6d61ea263170259884137ca8ddedc24d",
+        "inputBytes": 15100,
+        "resolved": 28,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 6,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "plate150x30-hole-1",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "40402bea5d276693a8a1d8b1b13b69bf6d61ea263170259884137ca8ddedc24d",
+          "b": "13107c3f0c0ff7dc0f76d7629d507e8afbdd56e9ba617c10c297fbe08433f1ff"
+        },
+        "sourceCopyHashes": {
+          "a": "603ce4493fa48de967dbd2a8e669c44a9fc63f95fcba0b3663b2c216cd27f0e6",
+          "b": "8bfd1e25b03c173236e79f6a2279e30b56f44b1169b0ea3e06bcc0ec3133299c"
+        },
+        "ancestryHashes": {
+          "a": "58b731b0fffb40b92b6b278801809d34c4d728e7bc5e8ccbbd5120726779c05e",
+          "b": "2f0cb2da6be23a6eb661c97b21ce06fdef52459cfb812b5a7c9ef41196aef81a"
+        },
+        "resultCatalogSHA256": "b09038594228d1b314d371193d9c61c9d45d174c1bcd55d622fddfa26e895ec8",
+        "inputBytes": 17573,
+        "resolved": 30,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 6,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "plate150x30-hole-2",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "b09038594228d1b314d371193d9c61c9d45d174c1bcd55d622fddfa26e895ec8",
+          "b": "68f8f13c87f475c807959d098c8517f90effcbbdd59ca177f7268a5345738841"
+        },
+        "sourceCopyHashes": {
+          "a": "218b33bd390161fc3150caffe68ba07f7fda41723a1a38a9108a35ba20fa859a",
+          "b": "8bfd1e25b03c173236e79f6a2279e30b56f44b1169b0ea3e06bcc0ec3133299c"
+        },
+        "ancestryHashes": {
+          "a": "dec825937c5eab3ead5ee3bc2335904635c3f98fe0970187f414fe350d85b318",
+          "b": "a945935ee62c85a9a2aedd2978f2163d1097f1f67f76d86e798cbb5b4f92132b"
+        },
+        "resultCatalogSHA256": "899b60c95c6ede14067a2649ddadf815b9e219f894468e77c4ae72f1d3d51f3e",
+        "inputBytes": 20056,
+        "resolved": 32,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 6,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "plate150x30-hole-3",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "899b60c95c6ede14067a2649ddadf815b9e219f894468e77c4ae72f1d3d51f3e",
+          "b": "0e199126e13649fb57b3ae5479ea90a45aecefa6f5fec1241696e5f5fd678165"
+        },
+        "sourceCopyHashes": {
+          "a": "57d6628977180e8616253d9d4b15a2773a152b32b44bb8dcd8bc139d76d54e92",
+          "b": "8bfd1e25b03c173236e79f6a2279e30b56f44b1169b0ea3e06bcc0ec3133299c"
+        },
+        "ancestryHashes": {
+          "a": "59b9ebe2f6b3618c6b563dc1d07c5844ec00435c93f0f2b1afa4c89476a857a4",
+          "b": "941d15935c3fa443c45bc48093bed09f7b48ddf1469744b3f06ec26390a012d6"
+        },
+        "resultCatalogSHA256": "0b912471ed08536174008db74f56028c6265c4844273fb6ba2812b10a426d936",
+        "inputBytes": 22500,
+        "resolved": 34,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 6,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      },
+      {
+        "case": "plate150x30-hole-4",
+        "operation": 1,
+        "status": "PASS",
+        "inputSnapshotHashes": {
+          "a": "0b912471ed08536174008db74f56028c6265c4844273fb6ba2812b10a426d936",
+          "b": "383f4af150242e89c042aec093d81040bf1b8bc50e9e7b6256159feaab5ae942"
+        },
+        "sourceCopyHashes": {
+          "a": "177692780e9e5b1162f7c7ec48b327c2bf1b6ae7d44b12fc5522701e51498e62",
+          "b": "8bfd1e25b03c173236e79f6a2279e30b56f44b1169b0ea3e06bcc0ec3133299c"
+        },
+        "ancestryHashes": {
+          "a": "21f4abca8e2a5b1ece760f75640a78c28ff570db65a4197a35053d83b80b2c2e",
+          "b": "a79d6eec90fb84071d9d457154cc30ff9331c5c7992161fda1061c40f5a704a2"
+        },
+        "resultCatalogSHA256": "7acab94c36b6648ed741ea9d4f59348637f0979fa84702966084af5a6e4c412d",
+        "inputBytes": 24936,
+        "resolved": 36,
+        "unresolvedCounts": {
+          "NO_DESCENDANT": 6,
+          "MULTIPLE_DESCENDANTS": 0,
+          "MERGED_DESCENDANT": 0
+        },
+        "resultSolidCount": 1
+      }
+    ],
+    "isolatedSplitControl": {
+      "case": "overlap-ab-0",
+      "scope": "subset of fixture-local claims over unchanged actual native rows/catalog",
+      "sourceInput": "A",
+      "sourceIndex": 9,
+      "nativeCandidates": [
+        5,
+        13
+      ],
+      "unresolved": [
+        {
+          "kind": "edge",
+          "id": "fixture:isolated-native-overlap-split",
+          "reason": "MULTIPLE_DESCENDANTS",
+          "candidateCount": 2,
+          "reportedDeleted": [
+            {
+              "input": 0,
+              "reportedDeleted": false
+            }
+          ]
+        }
+      ]
+    },
+    "plateChains": [
+      {
+        "case": "plate100x50",
+        "status": "PASS",
+        "scope": "recorded fixed-cylinder Boolean cuts only, not authored/public through-all hole semantics",
+        "checkpoints": [
+          {
+            "step": 0,
+            "cornerIds": [
+              "native-fixture-construction-corner:0",
+              "native-fixture-construction-corner:1",
+              "native-fixture-construction-corner:2",
+              "native-fixture-construction-corner:3"
+            ],
+            "corners": [
+              1,
+              2,
+              8,
+              5
+            ],
+            "resultHash": "557e828eb226f69f5c0f136668866be93b596438d7dda28f9cb1fa9d8a3293f2"
+          },
+          {
+            "step": 1,
+            "cornerIds": [
+              "native-fixture-construction-corner:0",
+              "native-fixture-construction-corner:1",
+              "native-fixture-construction-corner:2",
+              "native-fixture-construction-corner:3"
+            ],
+            "corners": [
+              1,
+              2,
+              8,
+              5
+            ],
+            "resultHash": "358c1b4d85d819c2d4447cb342240e31453dd9700dc0177e187a717184154aea"
+          },
+          {
+            "step": 2,
+            "cornerIds": [
+              "native-fixture-construction-corner:0",
+              "native-fixture-construction-corner:1",
+              "native-fixture-construction-corner:2",
+              "native-fixture-construction-corner:3"
+            ],
+            "corners": [
+              1,
+              2,
+              8,
+              5
+            ],
+            "resultHash": "7c8cbd81d4bcb9f9cedd090a5de4f66e0cc90cb38456b7e88616e8e002be5c42"
+          },
+          {
+            "step": 3,
+            "cornerIds": [
+              "native-fixture-construction-corner:0",
+              "native-fixture-construction-corner:1",
+              "native-fixture-construction-corner:2",
+              "native-fixture-construction-corner:3"
+            ],
+            "corners": [
+              1,
+              2,
+              8,
+              5
+            ],
+            "resultHash": "aaa4e57521f3845ef8202874e7f67e37a089a4f33386a62b58414df92883e4be"
+          },
+          {
+            "step": 4,
+            "cornerIds": [
+              "native-fixture-construction-corner:0",
+              "native-fixture-construction-corner:1",
+              "native-fixture-construction-corner:2",
+              "native-fixture-construction-corner:3"
+            ],
+            "corners": [
+              1,
+              2,
+              8,
+              5
+            ],
+            "resultHash": "dca1f75ec8e5b6d8924e62d3a9b7e0fea671f27bafe78f551760c2509a643b27"
+          }
+        ]
+      },
+      {
+        "case": "plate150x30",
+        "status": "PASS",
+        "scope": "recorded fixed-cylinder Boolean cuts only, not authored/public through-all hole semantics",
+        "checkpoints": [
+          {
+            "step": 0,
+            "cornerIds": [
+              "native-fixture-construction-corner:0",
+              "native-fixture-construction-corner:1",
+              "native-fixture-construction-corner:2",
+              "native-fixture-construction-corner:3"
+            ],
+            "corners": [
+              1,
+              2,
+              8,
+              5
+            ],
+            "resultHash": "40402bea5d276693a8a1d8b1b13b69bf6d61ea263170259884137ca8ddedc24d"
+          },
+          {
+            "step": 1,
+            "cornerIds": [
+              "native-fixture-construction-corner:0",
+              "native-fixture-construction-corner:1",
+              "native-fixture-construction-corner:2",
+              "native-fixture-construction-corner:3"
+            ],
+            "corners": [
+              1,
+              2,
+              8,
+              5
+            ],
+            "resultHash": "b09038594228d1b314d371193d9c61c9d45d174c1bcd55d622fddfa26e895ec8"
+          },
+          {
+            "step": 2,
+            "cornerIds": [
+              "native-fixture-construction-corner:0",
+              "native-fixture-construction-corner:1",
+              "native-fixture-construction-corner:2",
+              "native-fixture-construction-corner:3"
+            ],
+            "corners": [
+              1,
+              2,
+              8,
+              5
+            ],
+            "resultHash": "899b60c95c6ede14067a2649ddadf815b9e219f894468e77c4ae72f1d3d51f3e"
+          },
+          {
+            "step": 3,
+            "cornerIds": [
+              "native-fixture-construction-corner:0",
+              "native-fixture-construction-corner:1",
+              "native-fixture-construction-corner:2",
+              "native-fixture-construction-corner:3"
+            ],
+            "corners": [
+              1,
+              2,
+              8,
+              5
+            ],
+            "resultHash": "0b912471ed08536174008db74f56028c6265c4844273fb6ba2812b10a426d936"
+          },
+          {
+            "step": 4,
+            "cornerIds": [
+              "native-fixture-construction-corner:0",
+              "native-fixture-construction-corner:1",
+              "native-fixture-construction-corner:2",
+              "native-fixture-construction-corner:3"
+            ],
+            "corners": [
+              1,
+              2,
+              8,
+              5
+            ],
+            "resultHash": "7acab94c36b6648ed741ea9d4f59348637f0979fa84702966084af5a6e4c412d"
+          }
+        ]
+      }
+    ],
+    "failures": []
+  },
+  "oldPinnedReceiptsPreserved": {
+    "../boolean-selection-claims/receipt.json": {
+      "sha256": "3a06b55bed81ad4dad960e4637b20af6c8673c047e5d1cdeb15949ee70d21576",
+      "bytes": 5370
+    },
+    "../boolean-selection-claims/run.log": {
+      "sha256": "3a06b55bed81ad4dad960e4637b20af6c8673c047e5d1cdeb15949ee70d21576",
+      "bytes": 5370
+    },
+    "../boolean-selection-claims/actual-native/receipt.json": {
+      "sha256": "f3351d69f12a6479b9d29e8544e5bca1560f293357875e2bf2e26c5c56a05a12",
+      "bytes": 76245
+    },
+    "../boolean-selection-claims/actual-native/run.log": {
+      "sha256": "ed7b8d33947496e9fd23efec226cbb27428c412dd05d138b79041713f9444694",
+      "bytes": 494
+    }
+  }
+}

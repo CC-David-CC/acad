@@ -1,0 +1,2 @@
+const path=require('node:path');
+module.exports={mode:'development',devtool:false,entry:path.resolve(__dirname,'browser-client-entry.ts'),output:{path:process.env.CODI_CLIENT_OUTPUT||'/tmp/codi-registered-save-browser-client',filename:'client.js'},resolve:{extensions:['.ts','.js']},module:{rules:[{test:/\.ts$/,loader:'babel-loader',options:{babelrc:false,configFile:false,presets:[['@babel/preset-env',{targets:'defaults'}],'@babel/preset-typescript']}}]}};

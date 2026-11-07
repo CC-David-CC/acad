@@ -1,0 +1,204 @@
+{
+  "appSha": "d73fecd5f3d9b268e1828611f7f0acc2ae4719ac9cd6b95c0b1bf5080a2fde11",
+  "setup": {
+    "ids": [
+      "3",
+      "12"
+    ],
+    "faceId": "S:0/SURFACE",
+    "bytes": 139364,
+    "objects": 514,
+    "constraints": 512,
+    "loadMs": 565
+  },
+  "stats": {
+    "inspectMs": 8.100000143051147,
+    "invokeMs": 551,
+    "undoMs": 626.5999999046326,
+    "redoMs": 602,
+    "status": "accepted",
+    "undoChanged": true,
+    "redoExact": true,
+    "longTasks": [
+      1187,
+      114,
+      603,
+      90
+    ],
+    "maxHeartbeat": 1304.2000000476837,
+    "entries": 4,
+    "bytes": 839074,
+    "heap": 148812395
+  },
+  "secondWindow": {
+    "max": 11.5,
+    "count": 463,
+    "stillReady": true
+  },
+  "save": {
+    "saveMs": 1028,
+    "captureMs": 14.600000143051147,
+    "current": true,
+    "released": true
+  },
+  "multi": {
+    "createMs": 553.5999999046326,
+    "captureMs": 11.299999952316284,
+    "sketches": 2,
+    "current": true,
+    "faceId": "S:1/SURFACE"
+  },
+  "profileSamples": 2053,
+  "top": [
+    {
+      "function": "updateViewportSizeIfNeeded",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 40596,
+      "hits": 147
+    },
+    {
+      "function": "(idle)",
+      "url": "",
+      "line": 0,
+      "hits": 90
+    },
+    {
+      "function": "(garbage collector)",
+      "url": "",
+      "line": 0,
+      "hits": 72
+    },
+    {
+      "function": "(program)",
+      "url": "",
+      "line": 0,
+      "hits": 67
+    },
+    {
+      "function": "eliminate",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 119858,
+      "hits": 57
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 119809,
+      "hits": 48
+    },
+    {
+      "function": "compact",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 119984,
+      "hits": 41
+    },
+    {
+      "function": "eliminate",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 119858,
+      "hits": 35
+    },
+    {
+      "function": "compact",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 119984,
+      "hits": 34
+    },
+    {
+      "function": "eliminate",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 119858,
+      "hits": 33
+    },
+    {
+      "function": "mark",
+      "url": "",
+      "line": 0,
+      "hits": 33
+    },
+    {
+      "function": "mark",
+      "url": "",
+      "line": 0,
+      "hits": 32
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 119809,
+      "hits": 29
+    },
+    {
+      "function": "_loop4",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 118421,
+      "hits": 28
+    },
+    {
+      "function": "get",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 120019,
+      "hits": 28
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 119809,
+      "hits": 28
+    },
+    {
+      "function": "mark",
+      "url": "",
+      "line": 0,
+      "hits": 27
+    },
+    {
+      "function": "evaluatePolynomials",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 118379,
+      "hits": 27
+    },
+    {
+      "function": "compact",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 119984,
+      "hits": 26
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 119809,
+      "hits": 26
+    },
+    {
+      "function": "_loop4",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 118421,
+      "hits": 25
+    },
+    {
+      "function": "",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 205171,
+      "hits": 25
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 119809,
+      "hits": 24
+    },
+    {
+      "function": "evaluatePolynomials",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 118379,
+      "hits": 24
+    },
+    {
+      "function": "evaluatePolynomials",
+      "url": "http://127.0.0.1:20481/static/index.bundle.js",
+      "line": 118379,
+      "hits": 23
+    }
+  ]
+}

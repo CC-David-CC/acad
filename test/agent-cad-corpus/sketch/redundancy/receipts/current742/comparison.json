@@ -1,0 +1,354 @@
+{
+  "version": 1,
+  "scope": "Source-controlled Node backend only; no installed browser/frontend/Worker qualification",
+  "inputs": 89,
+  "registeredSchemas": 37,
+  "coverage": "35 registered authored schemas plus Polar/ArcConsistency internal equations; unknown-schema negative retained separately",
+  "allGeometryJsonEqual": true,
+  "allInputsUnchanged": true,
+  "unchangedAdmissionAndErrorOutcomes": 88,
+  "changes": [
+    {
+      "name": "p0/sketch.p0.known-implied-redundancy-label",
+      "before": {
+        "ok": true,
+        "error": null,
+        "hints": [
+          [
+            {
+              "typeId": "Horizontal",
+              "admission": {
+                "version": 1,
+                "state": "accepted"
+              }
+            },
+            {
+              "typeId": "SignedDistanceY",
+              "admission": {
+                "version": 1,
+                "state": "accepted"
+              }
+            }
+          ]
+        ]
+      },
+      "after": {
+        "ok": false,
+        "error": {
+          "code": "INTENT_CHANGED",
+          "message": "Constraint intent changed during solving."
+        },
+        "hints": [
+          [
+            {
+              "typeId": "Horizontal",
+              "admission": {
+                "version": 1,
+                "state": "accepted"
+              }
+            },
+            {
+              "typeId": "SignedDistanceY",
+              "admission": {
+                "version": 1,
+                "state": "redundant"
+              }
+            }
+          ]
+        ]
+      }
+    }
+  ],
+  "multistage": [
+    {
+      "name": "stages/two-independent-stages",
+      "ok": true
+    },
+    {
+      "name": "stages/later-refers-earlier",
+      "ok": true
+    }
+  ],
+  "freshAuthoring": {
+    "before": {
+      "admissions": [
+        {
+          "typeId": "Horizontal",
+          "admission": {
+            "version": 1,
+            "state": "accepted"
+          }
+        },
+        {
+          "typeId": "SignedDistanceY",
+          "admission": {
+            "version": 1,
+            "state": "accepted"
+          }
+        }
+      ],
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"s\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Horizontal\",\"objects\":[\"s\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SignedDistanceY\",\"objects\":[\"s:A\",\"s:B\"],\"constants\":{\"distance\":\"0\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "workerRequest": {
+        "revision": "fresh-authored-priority",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "s"
+                  ],
+                  "constants": {
+                    "angle": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceY",
+                  "objects": [
+                    "s:A",
+                    "s:B"
+                  ],
+                  "constants": {
+                    "distance": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      },
+      "strictSolve": true,
+      "strictReload": true
+    },
+    "after": {
+      "admissions": [
+        {
+          "typeId": "Horizontal",
+          "admission": {
+            "version": 1,
+            "state": "accepted"
+          }
+        },
+        {
+          "typeId": "SignedDistanceY",
+          "admission": {
+            "version": 1,
+            "state": "redundant"
+          }
+        }
+      ],
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"s\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Horizontal\",\"objects\":[\"s\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SignedDistanceY\",\"objects\":[\"s:A\",\"s:B\"],\"constants\":{\"distance\":\"0\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"redundant\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "workerRequest": {
+        "revision": "fresh-authored-priority",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "s"
+                  ],
+                  "constants": {
+                    "angle": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceY",
+                  "objects": [
+                    "s:A",
+                    "s:B"
+                  ],
+                  "constants": {
+                    "distance": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "redundant"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      },
+      "strictSolve": true,
+      "strictReload": true
+    }
+  },
+  "existingZeroTolerance": {
+    "offset": 1e-13,
+    "classification": "redundant",
+    "mathematicalExactRedundancy": false
+  },
+  "benchmark": [
+    {
+      "count": 16,
+      "beforeMedianMs": 0.859929999999963,
+      "afterMedianMs": 1.0403220000000033
+    },
+    {
+      "count": 128,
+      "beforeMedianMs": 17.61105299999997,
+      "afterMedianMs": 21.96142599999996
+    },
+    {
+      "count": 512,
+      "beforeMedianMs": 166.21362,
+      "afterMedianMs": 182.329772
+    }
+  ],
+  "sourceReceipts": {
+    "beforeSha256": "246132760a1722d843c8469fb5e778f3e777aa17e4be9639d1bb0c226085df6c",
+    "afterSha256": "3e44123deb478f0b2923e16909c078eaae592cafa8a6bd047b93b81363361110"
+  }
+}

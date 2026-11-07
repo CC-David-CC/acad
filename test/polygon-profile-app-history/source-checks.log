@@ -1,0 +1,37 @@
+✔ unconsumed save accepts only explicitly reference-free history (1.409497ms)
+✔ staged save refuses stale or failed preparation and installs before notifications (2.328978ms)
+✔ notification-time invalidation reports that installation committed (0.500696ms)
+✔ guarded editor save refuses active tools, transactions and rejected relations (0.336884ms)
+✔ frame comparison uses an absolute threshold even at large coordinates (0.721298ms)
+✔ save action awaits success, reports rejection, and never exits a replacement editor (0.83037ms)
+✔ known feature lineage proves an unrelated sketch and refuses related or ambiguous references (2.115825ms)
+✔ same-viewer reentrant draft change after commit prevents exit and reports committed (0.831629ms)
+✔ same-viewer no-op edit queued before exit refuses without committed marker (0.390075ms)
+✔ frame proof rejects extra frame provenance keys (0.657018ms)
+✔ strict frame comparison rejects hidden, symbol, accessor and sparse properties without invoking getters (0.445815ms)
+✔ new profile intent selects explicit V3; registered V2/V3 history retains its exact build (2.416049ms)
+✔ consumed/empty results retain their history and runtime backend without fallback (0.736439ms)
+✔ mixed history, old box backend, unavailable revisions and sparse/accessor identities refuse (1.185974ms)
+✔ V2 and V3 count all generic native results and refuse result33 before append (1.248345ms)
+✔ unrelated fast Save accepts only exact registered selected V2/V3 ancestry (1.435937ms)
+✔ public coordinator sends explicit V3 for new parts and V2/V3 for recorded parts (275.56886ms)
+✔ wrong build, box-first old backend, mixed history and stale revision refuse before allocation/Worker (136.637696ms)
+✔ profile-first box preserves V2/V3 including empty output; budget counts all32 history names (439.221475ms)
+✔ empty workspace retains defaults; current output retains its exact registered build (1.115954ms)
+✔ native-empty output preserves its build rather than selecting the default (0.157762ms)
+✔ mixed builds, wrong engine, duplicate IDs and unavailable revisions refuse (1.885392ms)
+✔ continuation reads no accessors and does not mutate inspected evidence (0.404135ms)
+✔ selected depth retains exact selection and runtime, scalar-only undo/redo (2.097335ms)
+✔ every immutable identity mutation refuses travel without journal writes (1.233065ms)
+✔ stale/invalid/no-op edits and data accessors refuse (0.561547ms)
+✔ selected travel never accepts an old rectangle or box journal entry (2.288637ms)
+✔ editing after undo clears only redo tail and preserves bounded retention (3.826035ms)
+✔ selected identity retention charges both UTF-8 and browser string memory (0.401634ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1121.188663

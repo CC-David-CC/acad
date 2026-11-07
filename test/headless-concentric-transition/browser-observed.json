@@ -1,0 +1,1189 @@
+{
+  "version": 1,
+  "status": "pass",
+  "source": {
+    "base": "b69d18b3f106d020f01c34e02a8ad91545d21c89",
+    "files": {
+      "web/app/sketcher/headless/concentricTransition.ts": "1a7ee9be93a049dbf8ba0ba1827f199d03c5b935110f3a001b5ce2d7caf2f1b3",
+      "web/app/sketcher/actions/concentricAdmission.js": "85cf2ae2ccce025af37d873ddd1591f48d07ca338cf744e420d3a619b7a03659",
+      "web/app/sketcher/actions/concentricOperation.js": "dfb2a8177d9f5d4939e2d2c469f84d8399760d819671bde268d8b33060199306"
+    }
+  },
+  "workerSha256": "393dc65b23e83135b3bd915ac0acf073e9669c772dd13fe61ce3a4da94294847",
+  "fixture": "http://127.0.0.1:20488/",
+  "workerURL": "http://127.0.0.1:20488/static/concentric-transition-review-worker.js",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'",
+  "browser": "Chrome/155.0.8059.79",
+  "targetId": "93D5845C226CED75440A05DF9F0E4CD5",
+  "rows": [
+    {
+      "id": "fixture-basic",
+      "elapsedMs": 251.29999995231628,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "circle-circle",
+      "elapsedMs": 245.89999985694885,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "circle-circle",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 0,
+          "index": 0,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "reverse-ids",
+      "elapsedMs": 227.20000004768372,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "reverse-ids",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"b\",\"a\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "b",
+            "a"
+          ],
+          "stage": 0,
+          "index": 0,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "duplicate-redundant",
+      "elapsedMs": 217.29999995231628,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "duplicate-redundant",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"redundant\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "Concentric",
+            "state": "redundant",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 0,
+          "index": 1,
+          "status": "redundant"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "accepted-native-replay",
+      "elapsedMs": 185.10000014305115,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "accepted-native-replay",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ]
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-circle-arc",
+      "elapsedMs": 199.90000009536743,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":19,\"y\":20},\"b\":{\"x\":10,\"y\":29},\"c\":{\"x\":10,\"y\":20}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "circle-arc",
+      "elapsedMs": 236.5,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "circle-arc",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}},{\"id\":\"b\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":19,\"y\":20},\"b\":{\"x\":10,\"y\":29},\"c\":{\"x\":10,\"y\":20}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 0,
+          "index": 0,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-arc-circle",
+      "elapsedMs": 201.79999995231628,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":8,\"y\":4},\"b\":{\"x\":3,\"y\":9},\"c\":{\"x\":3,\"y\":4}}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "arc-circle",
+      "elapsedMs": 219.70000004768372,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "arc-circle",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5.8542044840884,\"y\":9.434404728140287},\"b\":{\"x\":6.176186738695726,\"y\":12.756492998709536},\"c\":{\"x\":8.969608777215873,\"y\":10.80910227315018}}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":8.969608777215873,\"y\":10.80910227315018},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 0,
+          "index": 0,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-arc-arc",
+      "elapsedMs": 209.89999985694885,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":8,\"y\":4},\"b\":{\"x\":3,\"y\":9},\"c\":{\"x\":3,\"y\":4}}},{\"id\":\"b\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":19,\"y\":20},\"b\":{\"x\":10,\"y\":29},\"c\":{\"x\":10,\"y\":20}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "arc-arc",
+      "elapsedMs": 226.19999980926514,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "arc-arc",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":8.819649310584177,\"y\":12.290175052632312},\"b\":{\"x\":5.9702579788237085,\"y\":13.438577671944188},\"c\":{\"x\":6.988549554714431,\"y\":11.856015688565286}}},{\"id\":\"b\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":18.418156558389732,\"y\":19.244001286604867},\"b\":{\"x\":9.803386597487945,\"y\":25.171230300253352},\"c\":{\"x\":6.988549554714431,\"y\":11.856015688565286}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 0,
+          "index": 0,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-locked",
+      "elapsedMs": 221,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"b:C\"],\"constants\":{\"x\":\"10\",\"y\":\"20\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "contradictory-fixed-centers",
+      "elapsedMs": 203.60000014305115,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "contradictory-fixed-centers",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "The concentric constraint conflicts with existing constraints."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-partial",
+      "elapsedMs": 193.5,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SignedDistanceY\",\"objects\":[\"ground/ORIGIN\",\"b:C\"],\"constants\":{\"distance\":\"20\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "partial-conflict",
+      "elapsedMs": 199.79999995231628,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "partial-conflict",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "The concentric constraint conflicts with existing constraints."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "shared-partial-rollback",
+      "elapsedMs": 212.60000014305115,
+      "inputUnchanged": true,
+      "before": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SignedDistanceY\",\"objects\":[\"ground/ORIGIN\",\"b:C\"],\"constants\":{\"distance\":\"20\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}}}",
+      "after": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SignedDistanceY\",\"objects\":[\"ground/ORIGIN\",\"b:C\"],\"constants\":{\"distance\":\"20\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}}}",
+      "error": {
+        "message": "The concentric constraint conflicts with existing constraints."
+      },
+      "inTransaction": false,
+      "stageTransactions": [
+        {
+          "inTransaction": false,
+          "hasSnapshot": false
+        }
+      ],
+      "centers": [
+        {
+          "id": "a",
+          "x": 3,
+          "y": 4
+        },
+        {
+          "id": "b",
+          "x": 10,
+          "y": 20
+        }
+      ]
+    },
+    {
+      "id": "missing-id",
+      "elapsedMs": 189.29999995231628,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "missing-id",
+        "ok": false,
+        "error": {
+          "code": "INVALID_TARGET",
+          "message": "Choose two existing circles or arcs."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "same-id",
+      "elapsedMs": 203.70000004768372,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "same-id",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Provide two distinct circular object IDs."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "wrong-child-id",
+      "elapsedMs": 208.89999985694885,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "wrong-child-id",
+        "ok": false,
+        "error": {
+          "code": "INVALID_TARGET",
+          "message": "Choose two existing circles or arcs."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "degenerate-circle",
+      "elapsedMs": 187,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "degenerate-circle",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Degenerate sketch circle."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "degenerate-arc",
+      "elapsedMs": 193.5,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "degenerate-arc",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Degenerate sketch arc."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-stages",
+      "elapsedMs": 194.60000014305115,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":1,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]},{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "multistage-later-owner",
+      "elapsedMs": 214.40000009536743,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "multistage-later-owner",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":1,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]},{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":1,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "LockPoint",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 1,
+          "index": 0,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-tangent-true",
+      "elapsedMs": 197.79999995231628,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":-5},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":-5},\"r\":9}},{\"id\":\"tangent-line\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":0},\"b\":{\"x\":20,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"TangentLC\",\"objects\":[\"tangent-line\",\"a\"],\"constants\":{\"inverted\":\"true\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "tangent-true",
+      "elapsedMs": 211.90000009536743,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "tangent-true",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":-5},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":-5},\"r\":9}},{\"id\":\"tangent-line\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":0},\"b\":{\"x\":20,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"TangentLC\",\"objects\":[\"tangent-line\",\"a\"],\"constants\":{\"inverted\":\"true\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "TangentLC",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              0.000001
+            ],
+            "units": [
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 0,
+          "index": 1,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-tangent-false",
+      "elapsedMs": 188.60000014305115,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":5},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":5},\"r\":9}},{\"id\":\"tangent-line\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":0},\"b\":{\"x\":20,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"TangentLC\",\"objects\":[\"tangent-line\",\"a\"],\"constants\":{\"inverted\":\"false\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "tangent-false",
+      "elapsedMs": 247.40000009536743,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "tangent-false",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":5},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":5},\"r\":9}},{\"id\":\"tangent-line\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":0},\"b\":{\"x\":20,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"TangentLC\",\"objects\":[\"tangent-line\",\"a\"],\"constants\":{\"inverted\":\"false\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "TangentLC",
+            "state": "accepted",
+            "residuals": [
+              0
+            ],
+            "tolerances": [
+              0.000001
+            ],
+            "units": [
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 0,
+          "index": 1,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "changed-saved-branch",
+      "elapsedMs": 209.69999980926514,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "changed-saved-branch",
+        "ok": false,
+        "error": {
+          "code": "CURRENT_GEOMETRY_MISMATCH",
+          "message": "The solved sketch differs from the captured native state."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-fillet",
+      "elapsedMs": 219,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":6,\"y\":3},\"b\":{\"x\":3,\"y\":6},\"c\":{\"x\":3,\"y\":3}}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":3},\"r\":7}},{\"id\":\"line1\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-5,\"y\":0},\"b\":{\"x\":5,\"y\":0}}},{\"id\":\"line2\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":-5},\"b\":{\"x\":0,\"y\":5}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Fillet\",\"objects\":[\"line1\",\"line2\",\"a\"],\"constants\":{\"inverted1\":\"false\",\"inverted2\":\"true\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "saved-fillet-branches",
+      "elapsedMs": 219.79999995231628,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "saved-fillet-branches",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":6,\"y\":3},\"b\":{\"x\":3,\"y\":6},\"c\":{\"x\":3,\"y\":3}}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":3},\"r\":7}},{\"id\":\"line1\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-5,\"y\":0},\"b\":{\"x\":5,\"y\":0}}},{\"id\":\"line2\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":-5},\"b\":{\"x\":0,\"y\":5}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Fillet\",\"objects\":[\"line1\",\"line2\",\"a\"],\"constants\":{\"inverted1\":\"false\",\"inverted2\":\"true\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "Fillet",
+            "state": "accepted",
+            "residuals": [
+              0,
+              4.440892098500626e-16
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 0,
+          "index": 1,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-generator",
+      "elapsedMs": 197,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}},{\"id\":\"mirror-axis\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":-10},\"b\":{\"x\":-20,\"y\":10}}},{\"id\":\"seed\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-30,\"y\":0},\"r\":2}},{\"id\":\"copy\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-10,\"y\":0},\"r\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[{\"typeId\":\"Mirror\",\"params\":{\"reflectionLine\":[\"mirror-axis\"],\"objects\":[\"seed\"]},\"stage\":0,\"generatedObjects\":[\"copy\"]}]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "unrelated-generator",
+      "elapsedMs": 223.20000004768372,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "unrelated-generator",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}},{\"id\":\"mirror-axis\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":-10},\"b\":{\"x\":-20,\"y\":10}}},{\"id\":\"seed\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-30,\"y\":0},\"r\":2}},{\"id\":\"copy\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-10,\"y\":0},\"r\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[{\"typeId\":\"Mirror\",\"params\":{\"reflectionLine\":[\"mirror-axis\"],\"objects\":[\"seed\"]},\"stage\":0,\"generatedObjects\":[\"copy\"]}]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 0,
+          "index": 0,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "same-stage-generated-target",
+      "elapsedMs": 219.69999980926514,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "same-stage-generated-target",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Cannot constrain a generated object in the same stage."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-earlier-generator",
+      "elapsedMs": 211.60000014305115,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":1,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}},{\"id\":\"mirror-axis\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":-10},\"b\":{\"x\":-20,\"y\":10}}},{\"id\":\"seed\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-30,\"y\":0},\"r\":2}},{\"id\":\"copy\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-10,\"y\":0},\"r\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[{\"typeId\":\"Mirror\",\"params\":{\"reflectionLine\":[\"mirror-axis\"],\"objects\":[\"seed\"]},\"stage\":0,\"generatedObjects\":[\"copy\"]}]},{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "earlier-generated-target",
+      "elapsedMs": 227.29999995231628,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "earlier-generated-target",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":1,\"data\":{\"c\":{\"x\":-10,\"y\":0},\"r\":9}},{\"id\":\"mirror-axis\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":-10},\"b\":{\"x\":-20,\"y\":10}}},{\"id\":\"seed\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-30,\"y\":0},\"r\":2}},{\"id\":\"copy\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-10,\"y\":0},\"r\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[{\"typeId\":\"Mirror\",\"params\":{\"reflectionLine\":[\"mirror-axis\"],\"objects\":[\"seed\"]},\"stage\":0,\"generatedObjects\":[\"copy\"]}]},{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"copy\",\"b\"],\"stage\":1,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "copy",
+            "b"
+          ],
+          "stage": 1,
+          "index": 0,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-spline",
+      "elapsedMs": 214.79999995231628,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}},{\"id\":\"raw\",\"type\":\"BSpline\",\"role\":\"construction\",\"stage\":0,\"data\":{\"degree\":2,\"cPoints\":[{\"x\":0,\"y\":40,\"id\":\"splineraw_cPoint0\"},{\"x\":10,\"y\":50,\"id\":\"splineraw_cPoint1\"},{\"x\":20,\"y\":40,\"id\":\"splineraw_cPoint2\"}],\"fPoints\":[],\"kValues\":[0,0,0,1,1,1],\"interpolation\":false,\"CVModel\":false,\"type\":\"Clamped\",\"method\":-1}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "unrelated-spline-intent",
+      "elapsedMs": 213,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "unrelated-spline-intent",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}},{\"id\":\"raw\",\"type\":\"BSpline\",\"role\":\"construction\",\"stage\":0,\"data\":{\"degree\":2,\"cPoints\":[{\"x\":0,\"y\":40,\"id\":\"splineraw_cPoint0\"},{\"x\":10,\"y\":50,\"id\":\"splineraw_cPoint1\"},{\"x\":20,\"y\":40,\"id\":\"splineraw_cPoint2\"}],\"fPoints\":[],\"kValues\":[0,0,0,1,1,1],\"interpolation\":false,\"CVModel\":false,\"type\":\"Clamped\",\"method\":-1}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 0,
+          "index": 0,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "fixture-external",
+      "elapsedMs": 181.70000004768372,
+      "inputUnchanged": true,
+      "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"CX\",\"y\":\"CY\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+    },
+    {
+      "id": "external-numeric-bindings",
+      "elapsedMs": 210.70000004768372,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "external-numeric-bindings",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"CX\",\"y\":\"CY\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "evidence": [
+          {
+            "typeId": "LockPoint",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          },
+          {
+            "typeId": "Concentric",
+            "state": "accepted",
+            "residuals": [
+              0,
+              0
+            ],
+            "tolerances": [
+              0.000001,
+              0.000001
+            ],
+            "units": [
+              "millimeter",
+              "millimeter"
+            ],
+            "tolerance": 0.000001,
+            "unit": "millimeter"
+          }
+        ],
+        "relation": {
+          "typeId": "Concentric",
+          "objects": [
+            "a",
+            "b"
+          ],
+          "stage": 0,
+          "index": 1,
+          "status": "accepted"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "changed-explicit-admission",
+      "elapsedMs": 221.59999990463257,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "changed-explicit-admission",
+        "ok": false,
+        "error": {
+          "code": "INTENT_CHANGED",
+          "message": "Constraint intent changed during solving."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "extra-request-field",
+      "elapsedMs": 192.70000004768372,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "concentric-current",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Invalid concentric transition request."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "utf8-limit",
+      "elapsedMs": 207.29999995231628,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "concentric-current",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Invalid sketch transition request."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "external-map",
+      "elapsedMs": 210.5,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "concentric-current",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "External parameters must be a plain numeric record."
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    },
+    {
+      "id": "external-accessor",
+      "elapsedMs": 183,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "concentric-current",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Invalid external parameter."
+        }
+      },
+      "reads": 0
+    },
+    {
+      "id": "invalid-json-revision-retained",
+      "elapsedMs": 172.20000004768372,
+      "inputUnchanged": true,
+      "result": {
+        "revision": "concentric-current",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+        }
+      },
+      "realm": {
+        "hasDocument": false,
+        "hasWindow": false,
+        "hasCanvas": false
+      }
+    }
+  ],
+  "sources": {
+    "basic": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "accepted": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "circle-arc": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":19,\"y\":20},\"b\":{\"x\":10,\"y\":29},\"c\":{\"x\":10,\"y\":20}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "arc-circle": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":8,\"y\":4},\"b\":{\"x\":3,\"y\":9},\"c\":{\"x\":3,\"y\":4}}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "arc-arc": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":8,\"y\":4},\"b\":{\"x\":3,\"y\":9},\"c\":{\"x\":3,\"y\":4}}},{\"id\":\"b\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":19,\"y\":20},\"b\":{\"x\":10,\"y\":29},\"c\":{\"x\":10,\"y\":20}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "locked": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"b:C\"],\"constants\":{\"x\":\"10\",\"y\":\"20\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "partial": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SignedDistanceY\",\"objects\":[\"ground/ORIGIN\",\"b:C\"],\"constants\":{\"distance\":\"20\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "stages": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":1,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"3\",\"y\":\"4\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]},{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "tangent-true": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":-5},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":-5},\"r\":9}},{\"id\":\"tangent-line\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":0},\"b\":{\"x\":20,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"TangentLC\",\"objects\":[\"tangent-line\",\"a\"],\"constants\":{\"inverted\":\"true\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "tangent-false": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":5},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":5},\"r\":9}},{\"id\":\"tangent-line\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":0},\"b\":{\"x\":20,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"TangentLC\",\"objects\":[\"tangent-line\",\"a\"],\"constants\":{\"inverted\":\"false\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "fillet": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":6,\"y\":3},\"b\":{\"x\":3,\"y\":6},\"c\":{\"x\":3,\"y\":3}}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":3},\"r\":7}},{\"id\":\"line1\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-5,\"y\":0},\"b\":{\"x\":5,\"y\":0}}},{\"id\":\"line2\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":-5},\"b\":{\"x\":0,\"y\":5}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Fillet\",\"objects\":[\"line1\",\"line2\",\"a\"],\"constants\":{\"inverted1\":\"false\",\"inverted2\":\"true\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "generator": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}},{\"id\":\"mirror-axis\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":-10},\"b\":{\"x\":-20,\"y\":10}}},{\"id\":\"seed\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-30,\"y\":0},\"r\":2}},{\"id\":\"copy\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-10,\"y\":0},\"r\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[{\"typeId\":\"Mirror\",\"params\":{\"reflectionLine\":[\"mirror-axis\"],\"objects\":[\"seed\"]},\"stage\":0,\"generatedObjects\":[\"copy\"]}]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "earlier-generator": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":1,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}},{\"id\":\"mirror-axis\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-20,\"y\":-10},\"b\":{\"x\":-20,\"y\":10}}},{\"id\":\"seed\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-30,\"y\":0},\"r\":2}},{\"id\":\"copy\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":-10,\"y\":0},\"r\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[{\"typeId\":\"Mirror\",\"params\":{\"reflectionLine\":[\"mirror-axis\"],\"objects\":[\"seed\"]},\"stage\":0,\"generatedObjects\":[\"copy\"]}]},{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "spline": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}},{\"id\":\"raw\",\"type\":\"BSpline\",\"role\":\"construction\",\"stage\":0,\"data\":{\"degree\":2,\"cPoints\":[{\"x\":0,\"y\":40,\"id\":\"splineraw_cPoint0\"},{\"x\":10,\"y\":50,\"id\":\"splineraw_cPoint1\"},{\"x\":20,\"y\":40,\"id\":\"splineraw_cPoint2\"}],\"fPoints\":[],\"kValues\":[0,0,0,1,1,1],\"interpolation\":false,\"CVModel\":false,\"type\":\"Clamped\",\"method\":-1}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "external": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":3,\"y\":4},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":20},\"r\":9}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"a:C\"],\"constants\":{\"x\":\"CX\",\"y\":\"CY\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"KEEP = 2\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]},\"marker\":\"native-é\",\"branchIntent\":{\"retain\":true}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+  },
+  "starts": 45,
+  "terminations": 45,
+  "verb": {
+    "url": "http://127.0.0.1:20488/lib/verb.js",
+    "sha256": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3"
+  }
+}

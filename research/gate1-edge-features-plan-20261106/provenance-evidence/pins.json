@@ -1,0 +1,25 @@
+{
+  "scope": "Standalone actual native helper; root main/selectedProfileV2 unchanged by this lane",
+  "sourceBase": "c10848b72b9bebf7c9fff334bdf83e5acf79bda5",
+  "files": {
+    "profilePrismProvenanceV1.hpp": "a7c803833b3657a74e80ab678a59d02af889beb6c055d911acf4a1f835a5e637",
+    "ownedTopologyV1.hpp": "227b19221b5645ad3d356fef27a07aa11c040c4b67ca386d6a08131a2517fb29",
+    "probe.cpp": "fcaf3277a707dedd9691516d2de3401054ee614436f536293febad1dde170232",
+    "helper-probe-final.js": "3ba4e58f9f29cd34f667403fed8c85aa6921c3d26f061bf86813ece44008d66c",
+    "helper-probe-final.wasm": "417f297a3232cec0bef154cc7dd0a7c67ba751b7d72348099d277cabc2ce73f5"
+  },
+  "toolchain": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/emsdk_env.sh",
+  "include": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/include/opencascade",
+  "libraries": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib",
+  "flags": [
+    "-O1",
+    "-std=c++0x",
+    "ALLOW_MEMORY_GROWTH=1",
+    "DISABLE_EXCEPTION_CATCHING=0",
+    "ENVIRONMENT=node",
+    "EXIT_RUNTIME=1"
+  ],
+  "archiveReceiptSHA256": "9071c17e9f39a6881a20eb69f00ba612d2eca512a32ed6e26f33e71187b8c1d5",
+  "Node": "/mnt/data10tb/codi-3mf-qualification-SrUmue/node/bin/node",
+  "run": "global.fetch=undefined; require(helper-probe-final.js)"
+}

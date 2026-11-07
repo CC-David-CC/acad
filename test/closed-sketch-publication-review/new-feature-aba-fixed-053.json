@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "source": "053163cc472d52b1a9a3f61e4edc4373f83a9ad2",
+  "operationMode": "new-feature",
+  "layer": "actual-app-real-Workers-native-kernel-with-injected-history-ABA-message-timing",
+  "fixture": "http://127.0.0.1:20484/",
+  "browser": "Chrome/155.0.8059.79",
+  "targetId": "4C4FBDA32A99844C2CD1C1C98BAFFA31",
+  "restoredTargetId": "D7CCB925FEC7625A9AA2EF390518D7B8",
+  "app": {
+    "url": "http://127.0.0.1:20484/static/index.bundle.js",
+    "sha256": "113078a78741b531de52bd54047617b4076b14a379fe6e8cefb5ec661dcee12a"
+  },
+  "workerPins": [
+    {
+      "url": "http://127.0.0.1:20484/static/sketch-solver.b086fb3ba95f8193ba94.js",
+      "sha256": "d959fcb7282eaa3807d77d797c3ba80b708a7e95cd6efb8158a1f98ab8635c27"
+    },
+    {
+      "url": "/static/prism-semantic.031ff7d6b44bf3189abb.js",
+      "sha256": "8f205c70d2147856b693e594713110b75a2e715ee9b5ff947e080870e3291e63"
+    },
+    {
+      "url": "/static/oci-verified-worker.js",
+      "sha256": "26c2191e2f952d2dfb62768aec971b847ed50165cd767987eb3ab1e4115052f5"
+    }
+  ],
+  "before": {
+    "history": "[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"face\":\"S:0/SURFACE\",\"featureId\":2,\"length\":20,\"regions\":[\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\"]},\"type\":\"WORKER_RECTANGLE_EXTRUDE_V1\"},{\"type\":\"WORKER_CENTERED_THROUGH_HOLE_V1\",\"params\":{\"featureId\":3,\"face\":\"worker-prism:1:[\\\"2\\\",\\\"face\\\",\\\"LID\\\",{\\\"regionId\\\":\\\"sketch-region:{\\\\\\\"faceId\\\\\\\":\\\\\\\"S:0/SURFACE\\\\\\\",\\\\\\\"outer\\\\\\\":[\\\\\\\"S:0/SURFACE/rect-0\\\\\\\",\\\\\\\"S:0/SURFACE/rect-1\\\\\\\",\\\\\\\"S:0/SURFACE/rect-2\\\\\\\",\\\\\\\"S:0/SURFACE/rect-3\\\\\\\"],\\\\\\\"holes\\\\\\\":[]}\\\"}]\",\"diameter\":10}}]",
+    "revision": 3,
+    "sketch": "{\"version\":3,\"objects\":[{\"id\":\"rect-0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":100,\"y\":0}}},{\"id\":\"rect-1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":0},\"b\":{\"x\":100,\"y\":50}}},{\"id\":\"rect-2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":50},\"b\":{\"x\":0,\"y\":50}}},{\"id\":\"rect-3\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":50},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PCoincident\",\"objects\":[\"rect-0:B\",\"rect-1:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-1:B\",\"rect-2:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-2:B\",\"rect-3:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-3:B\",\"rect-0:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-0\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-1\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-2\"],\"constants\":{\"angle\":\"180\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-3\"],\"constants\":{\"angle\":\"270\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"rect-0:A\"],\"constants\":{\"x\":\"0\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-0\"],\"constants\":{\"length\":\"100\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-1\"],\"constants\":{\"length\":\"50\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "geometry": {
+      "modelId": "worker-prism:1:[\"2\",\"body\"]",
+      "diameters": [
+        10,
+        10
+      ],
+      "faces": 7
+    }
+  },
+  "after": {
+    "history": "[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"face\":\"S:0/SURFACE\",\"featureId\":2,\"length\":20,\"regions\":[\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\"]},\"type\":\"WORKER_RECTANGLE_EXTRUDE_V1\"},{\"params\":{\"diameter\":10,\"face\":\"worker-prism:1:[\\\"2\\\",\\\"face\\\",\\\"LID\\\",{\\\"regionId\\\":\\\"sketch-region:{\\\\\\\"faceId\\\\\\\":\\\\\\\"S:0/SURFACE\\\\\\\",\\\\\\\"outer\\\\\\\":[\\\\\\\"S:0/SURFACE/rect-0\\\\\\\",\\\\\\\"S:0/SURFACE/rect-1\\\\\\\",\\\\\\\"S:0/SURFACE/rect-2\\\\\\\",\\\\\\\"S:0/SURFACE/rect-3\\\\\\\"],\\\\\\\"holes\\\\\\\":[]}\\\"}]\",\"featureId\":3},\"type\":\"WORKER_CENTERED_THROUGH_HOLE_V1\"},{\"type\":\"WORKER_FOUR_CORNER_THROUGH_HOLES_V1\",\"params\":{\"featureId\":4,\"face\":\"worker-prism:1:[\\\"3\\\",\\\"face\\\",\\\"HOLE_WALL\\\",{\\\"parentFeatureId\\\":\\\"2\\\",\\\"regionId\\\":\\\"sketch-region:{\\\\\\\"faceId\\\\\\\":\\\\\\\"S:0/SURFACE\\\\\\\",\\\\\\\"outer\\\\\\\":[\\\\\\\"S:0/SURFACE/rect-0\\\\\\\",\\\\\\\"S:0/SURFACE/rect-1\\\\\\\",\\\\\\\"S:0/SURFACE/rect-2\\\\\\\",\\\\\\\"S:0/SURFACE/rect-3\\\\\\\"],\\\\\\\"holes\\\\\\\":[]}\\\"}]\",\"sideIds\":{\"minX\":\"S:0/SURFACE/rect-3\",\"maxX\":\"S:0/SURFACE/rect-1\",\"minY\":\"S:0/SURFACE/rect-0\",\"maxY\":\"S:0/SURFACE/rect-2\"},\"diameter\":4,\"offsetX\":10,\"offsetY\":10}}]",
+    "revision": 4,
+    "sketch": "{\"version\":3,\"objects\":[{\"id\":\"rect-0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":100,\"y\":0}}},{\"id\":\"rect-1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":0},\"b\":{\"x\":100,\"y\":50}}},{\"id\":\"rect-2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":100,\"y\":50},\"b\":{\"x\":0,\"y\":50}}},{\"id\":\"rect-3\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":50},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PCoincident\",\"objects\":[\"rect-0:B\",\"rect-1:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-1:B\",\"rect-2:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-2:B\",\"rect-3:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"PCoincident\",\"objects\":[\"rect-3:B\",\"rect-0:A\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-0\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-1\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Horizontal\",\"objects\":[\"rect-2\"],\"constants\":{\"angle\":\"180\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"Vertical\",\"objects\":[\"rect-3\"],\"constants\":{\"angle\":\"270\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"LockPoint\",\"objects\":[\"rect-0:A\"],\"constants\":{\"x\":\"0\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-0\"],\"constants\":{\"length\":\"100\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"SegmentLength\",\"objects\":[\"rect-1\"],\"constants\":{\"length\":\"50\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "geometry": {
+      "modelId": "worker-prism:1:[\"2\",\"body\"]",
+      "diameters": [
+        4,
+        4,
+        4,
+        10,
+        4,
+        4,
+        4,
+        4,
+        10,
+        4
+      ],
+      "faces": 11
+    },
+    "failure": null
+  },
+  "outcome": {
+    "ok": true,
+    "value": {
+      "featureId": 4,
+      "bodyId": "worker-prism:1:[\"2\",\"body\"]",
+      "lidFaceId": "worker-prism:1:[\"2\",\"face\",\"LID\",{\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\"}]",
+      "unit": "millimeter",
+      "persistence": "volatile-workspace",
+      "revision": "18498dc5-3265-4c66-b232-2065367e39b1"
+    }
+  },
+  "injected": true,
+  "restored": {
+    "diameters": [
+      4,
+      4,
+      4,
+      10,
+      4,
+      4,
+      4,
+      4,
+      10,
+      4
+    ],
+    "history": "[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"face\":\"S:0/SURFACE\",\"featureId\":2,\"length\":20,\"regions\":[\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\"]},\"type\":\"WORKER_RECTANGLE_EXTRUDE_V1\"},{\"params\":{\"diameter\":10,\"face\":\"worker-prism:1:[\\\"2\\\",\\\"face\\\",\\\"LID\\\",{\\\"regionId\\\":\\\"sketch-region:{\\\\\\\"faceId\\\\\\\":\\\\\\\"S:0/SURFACE\\\\\\\",\\\\\\\"outer\\\\\\\":[\\\\\\\"S:0/SURFACE/rect-0\\\\\\\",\\\\\\\"S:0/SURFACE/rect-1\\\\\\\",\\\\\\\"S:0/SURFACE/rect-2\\\\\\\",\\\\\\\"S:0/SURFACE/rect-3\\\\\\\"],\\\\\\\"holes\\\\\\\":[]}\\\"}]\",\"featureId\":3},\"type\":\"WORKER_CENTERED_THROUGH_HOLE_V1\"},{\"type\":\"WORKER_FOUR_CORNER_THROUGH_HOLES_V1\",\"params\":{\"featureId\":4,\"face\":\"worker-prism:1:[\\\"3\\\",\\\"face\\\",\\\"HOLE_WALL\\\",{\\\"parentFeatureId\\\":\\\"2\\\",\\\"regionId\\\":\\\"sketch-region:{\\\\\\\"faceId\\\\\\\":\\\\\\\"S:0/SURFACE\\\\\\\",\\\\\\\"outer\\\\\\\":[\\\\\\\"S:0/SURFACE/rect-0\\\\\\\",\\\\\\\"S:0/SURFACE/rect-1\\\\\\\",\\\\\\\"S:0/SURFACE/rect-2\\\\\\\",\\\\\\\"S:0/SURFACE/rect-3\\\\\\\"],\\\\\\\"holes\\\\\\\":[]}\\\"}]\",\"sideIds\":{\"minX\":\"S:0/SURFACE/rect-3\",\"maxX\":\"S:0/SURFACE/rect-1\",\"minY\":\"S:0/SURFACE/rect-0\",\"maxY\":\"S:0/SURFACE/rect-2\"},\"diameter\":4,\"offsetX\":10,\"offsetY\":10}}]",
+    "faces": 11
+  },
+  "nativeDiameter": 10,
+  "posts": [
+    {
+      "at": "rectangle-extrusion-solve",
+      "diameter": 12,
+      "historyRevision": 3
+    },
+    {
+      "at": "research-centered-cut",
+      "nativeDiameter": 10,
+      "restoredDiameter": 10,
+      "historyRevision": 3
+    }
+  ],
+  "terminated": 5,
+  "workerURLs": [
+    "http://127.0.0.1:20484/static/sketch-solver.b086fb3ba95f8193ba94.js",
+    "/static/prism-semantic.031ff7d6b44bf3189abb.js",
+    "/static/oci-verified-worker.js"
+  ],
+  "faceId": "S:0/SURFACE"
+}

@@ -1,0 +1,138 @@
+{
+  "kind": "read-only-source-review",
+  "sourceCommit": "a27040f58e34dcdb960864cfc941fda9879f3053",
+  "sourceTree": "eb678845ca9894cc23457c942059d6981e1c9907",
+  "executionTestsRun": false,
+  "files": [
+    {
+      "path": "modules/engine/solid/SolidKernel.ts",
+      "sha256": "7eb06b24afe93ad9df058a3b69cbbd1b94ca26cfdd3a48fa4c324a7c1b85ac89",
+      "bytes": 5750
+    },
+    {
+      "path": "modules/engine/solid/solidLedger.mjs",
+      "sha256": "4e2162d3cc2e268508e3d83193c94c8884a7381f4c2560b9fa523b20e78b8da4",
+      "bytes": 9807
+    },
+    {
+      "path": "modules/engine/solid/solidMetrics.mjs",
+      "sha256": "4dd74a8c2ec580656c63528320fe411fa9db5676a6afe90b863d78ee2fc3b2b3",
+      "bytes": 6354
+    },
+    {
+      "path": "modules/engine/mount/selectedProfilePlan.mjs",
+      "sha256": "7d51355e667efa79b26528f2e39582256e9a1513a0a12ca949d265f3963d234f",
+      "bytes": 7885
+    },
+    {
+      "path": "modules/engine/mount/occ-selected-profile-mount.mjs",
+      "sha256": "33f43cd9079b572d9057ddaec4272e18a3cf828bf7fdf4780543cf7a28bbf326",
+      "bytes": 662
+    },
+    {
+      "path": "modules/engine/mount/worker-controller.mjs",
+      "sha256": "d204642c5c44b12689c28592404af0bfc46dc7f385f6544b971c55e2b64f411a",
+      "bytes": 60026
+    },
+    {
+      "path": "modules/engine/mount/catalogMount.ts",
+      "sha256": "00d863622368783c272e91720a38f83afb5d4f2ac46d00de7a9433e44ec4db54",
+      "bytes": 2729
+    },
+    {
+      "path": "modules/engine/mount/engineCatalog.mjs",
+      "sha256": "18940955d72afb0bc47179ecb7fb365896efb792e15cae91e1385232507389b5",
+      "bytes": 2844
+    },
+    {
+      "path": "modules/engine/extrusion/rectanglePrismAdapter.ts",
+      "sha256": "6b459221b19ef1a450ebc99672cbcdb6f2713aefada89a17c1ac8feffe8d09bd",
+      "bytes": 8526
+    },
+    {
+      "path": "modules/workbenches/modeler/features/workerRectangleExtrude/workerRectangleExtrude.operation.ts",
+      "sha256": "281750ee9c72bf87f9164a847a568d8d991772c1563f04192eff112035358959",
+      "bytes": 8523
+    },
+    {
+      "path": "modules/workbenches/modeler/features/workerSolid/workerSolid.operation.ts",
+      "sha256": "4ed4c68166200cceaed802d3ab75040dcc75ab2a5062f3f3c159863fe83db036",
+      "bytes": 4332
+    },
+    {
+      "path": "modules/workbenches/modeler/features/extrude/authoredRegions.mjs",
+      "sha256": "46368ba6ca386671afef5e8462e7827d803e02bd816fb1d3b35d7c9c3b9086e6",
+      "bytes": 3009
+    },
+    {
+      "path": "web/app/cad/craft/workerFeatureCommands.ts",
+      "sha256": "7f0005b150f482ea636abd80bed489b3be2df2a40754963432dd5773a7dd877f",
+      "bytes": 28069
+    },
+    {
+      "path": "web/app/cad/craft/workerSolidCommands.ts",
+      "sha256": "d5ac6eec991431e98e677733b75ecb9d478e06101fe71473d3ab59aa4cc37133",
+      "bytes": 10066
+    },
+    {
+      "path": "web/app/cad/craft/craftBundle.ts",
+      "sha256": "b2b2340e13a028f40976e4c059c98a9ba85812830298459f836f7b2be5e55dc1",
+      "bytes": 131485
+    },
+    {
+      "path": "web/app/cad/craft/unconsumedSketchSave.mjs",
+      "sha256": "3000c47d925126a2f1bfad76c4d10f1028dc4a230403e1ecc1da5c97b0957835",
+      "bytes": 9366
+    },
+    {
+      "path": "web/app/cad/model/mworkerSolid.ts",
+      "sha256": "e83703915b5b4b8d0becc24136e819a2e848ea5dad62a9d9d74138e8b6f70f53",
+      "bytes": 4407
+    },
+    {
+      "path": "web/app/cad/model/msketchRegion.ts",
+      "sha256": "62bca3f071f4f50d2b4cfc28c71315c3aabe5c2c211b9e955bf7a39c4c347728",
+      "bytes": 757
+    },
+    {
+      "path": "web/app/cad/model/mface.ts",
+      "sha256": "6d6d201bf2d03114e90f8e69dedbbb4d34bfe3c8cfa87d26524e14fc6dd4bb19",
+      "bytes": 7857
+    },
+    {
+      "path": "web/app/cad/sketch/sketchReader.ts",
+      "sha256": "b1fe86475198b5e09f3afde8d4978cf73835bbad80ebbec9dde0b5dc812b5a81",
+      "bytes": 11060
+    },
+    {
+      "path": "web/app/cad/sketch/sketchRegions.ts",
+      "sha256": "1edf5ddc68c359b5e5aa77cc8de463e055e17c1b81b9b776ee739f663b91822e",
+      "bytes": 1447
+    },
+    {
+      "path": "web/app/cad/parameters/authoredPhysicalManifest.mjs",
+      "sha256": "781d5d968d4e46b34b370e616d4cca0871e0a17dc69a0d348767ad7fe32daae1",
+      "bytes": 3140
+    },
+    {
+      "path": "web/app/cad/parameters/physicalBindingFields.mjs",
+      "sha256": "a61d1fe48e14acac34f4f048e75fdd388a4733b40fd0742319e19c9e3a1253a3",
+      "bytes": 584
+    },
+    {
+      "path": "web/app/cad/projectManager/projectManagerBundle.ts",
+      "sha256": "3d2afe8ec4085d047afd60bbe33bbe37d2a921e47d4c23061250c6966d5db364",
+      "bytes": 56176
+    },
+    {
+      "path": "test/public-region-worker-contract/CONTRACT.md",
+      "sha256": "12cd7dad330f85889d4a416ecb116a610253dd2dd0d0d0560af018615bbf0047",
+      "bytes": 6136
+    },
+    {
+      "path": "test/selected-profile-kernel/README.md",
+      "sha256": "511cbc691522348ed07e7f3b74a018f46c0f3073b87233e1fbe8764848b56961",
+      "bytes": 11608
+    }
+  ]
+}

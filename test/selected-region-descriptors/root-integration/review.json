@@ -1,0 +1,24 @@
+{
+  "integrationSource": "06c4f85e1",
+  "componentSource": "6c55599d8c369b3032025c191154cac9620a7749",
+  "pureControls": {
+    "passed": 44,
+    "failed": 0,
+    "log": "root-pure-controls.log"
+  },
+  "componentEvidenceVerification": {
+    "status": "PASS",
+    "worktree": "/tmp/codi-display-units-review-20261106",
+    "note": "Full-cohort checker correctly refuses a different combined source. Executed unchanged checker against its exact frozen component checkout; all three product hashes also match integration."
+  },
+  "sources": {
+    "modules/engine/extrusion/selectedRegionDescriptor.mjs": "f6b7c4b1c2e33c926e5282caadb1d94cc63ad58486991c5370d4ccc0c64bad71",
+    "modules/engine/extrusion/selectedSketchProfile.mjs": "989bb66f105899579a23a9c5f301ee28797f4581a2c4bb1fb7a4a9590c3a8269",
+    "web/app/cad/craft/selectedProfileCommands.ts": "890728f14455476141f5d3080ed497ccff9e77475e3c63b51601d69bf7608a50"
+  },
+  "notQualified": [
+    "combined signed E04/E05",
+    "existing-feature region reselection",
+    "circle winding reversal"
+  ]
+}

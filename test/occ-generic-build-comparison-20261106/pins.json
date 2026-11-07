@@ -1,0 +1,20 @@
+{
+  "status": "PASS bounded shared generic corpus",
+  "source": "6f01a09fea5c75beba9297772edd50ff37b1b2a4",
+  "matrixRows": 42,
+  "repeatedCuts": 2,
+  "genuineCancellation": 2,
+  "workers": 46,
+  "defaultOrNativeChanged": false,
+  "scope": "Two registered OCCT build variants; independent analytic/Node mesh oracles, no automatic default/public CAD promotion or RSS claim",
+  "files": {
+    "README.md": "c8ef12fb43d296019757e8f072f7731b5834aa1985f691229d400a3442665a8c",
+    "browser.cjs": "01cd9a9577ba3a0fc7c34ea26de5a81ad3f0663629beffe93cfd503335f6e308",
+    "cases.mjs": "069ce10656f14838e1cd9cfa63b3963be537518c517cccdd813325207c4963f9",
+    "default-worker.js": "ab407055b5ce05c3ee77cc428d0516361d5cb3139723ee514bab021204990a8d",
+    "evidence/comparison.log": "908d61b8fa7e3dca31aca7ef2e43094de20c41e0bc8f8a687dcd5878995c4773",
+    "index.html": "2343313d00ff92a39ad5e1aab8063cbfdf9a062a77017976a11e79571ae2f3ef",
+    "receipt.json": "e8544f53fac53cbdff0110207520271b034724baab3bec3a644a0e0929a7da80",
+    "selected-worker.js": "273745bf2f94265a7346308727819e8c8dab4cd8e4eebb2d9121c51512a0aeb2"
+  }
+}

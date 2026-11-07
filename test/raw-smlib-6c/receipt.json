@@ -1,0 +1,201 @@
+{
+  "assets": {
+    "rawMount.mjs": "2d538b710b507710ca8749d6b1c6118a816237a9161177bf89fecee297969e89",
+    "raw-smlib-worker.js": "6d2c3a892d21d865a05854853e3559500a825fd5912fd4f296f00565006f8338",
+    "raw-provider.wasm": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa"
+  },
+  "descriptor": {
+    "bindingRevision": "e854d6ced3886c8533cea06dd5506e2385fdf6c1",
+    "kernelRevision": "6c99bfcfe6c7b9735a8c617b4207921c64b0555e",
+    "wasmSha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa"
+  },
+  "before": [
+    {
+      "evidence": {
+        "resultKind": "single-material",
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": true,
+        "volume": 1000,
+        "volumeQuality": "native-relative-0.001",
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        }
+      },
+      "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+      "triangles": 12
+    },
+    {
+      "evidence": {
+        "resultKind": "single-material",
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": true,
+        "volume": 215.99999999999997,
+        "volumeQuality": "native-relative-0.001",
+        "bounds": {
+          "min": [
+            2,
+            2,
+            2
+          ],
+          "max": [
+            8,
+            8,
+            8
+          ]
+        }
+      },
+      "meshSha256": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+      "triangles": 12
+    },
+    {
+      "evidence": {
+        "resultKind": "single-material",
+        "materialRegions": 1,
+        "voidRegions": 1,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": true,
+        "volume": 784,
+        "volumeQuality": "native-relative-0.001",
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        }
+      },
+      "meshSha256": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+      "triangles": 24
+    }
+  ],
+  "after": [
+    {
+      "evidence": {
+        "resultKind": "single-material",
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": true,
+        "volume": 1000,
+        "volumeQuality": "native-relative-0.001",
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        }
+      },
+      "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+      "triangles": 12
+    },
+    {
+      "evidence": {
+        "resultKind": "single-material",
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": true,
+        "volume": 215.99999999999997,
+        "volumeQuality": "native-relative-0.001",
+        "bounds": {
+          "min": [
+            2,
+            2,
+            2
+          ],
+          "max": [
+            8,
+            8,
+            8
+          ]
+        }
+      },
+      "meshSha256": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+      "triangles": 12
+    },
+    {
+      "evidence": {
+        "resultKind": "single-material",
+        "materialRegions": 1,
+        "voidRegions": 1,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": true,
+        "volume": 784,
+        "volumeQuality": "native-relative-0.001",
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        }
+      },
+      "meshSha256": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+      "triangles": 24
+    }
+  ],
+  "fill": {
+    "evidence": {
+      "resultKind": "single-material",
+      "materialRegions": 1,
+      "voidRegions": 0,
+      "validLevel0": true,
+      "validLevel2": true,
+      "manifoldPredicate": true,
+      "volume": 1000,
+      "volumeQuality": "native-relative-0.001",
+      "bounds": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          10,
+          10,
+          10
+        ]
+      }
+    },
+    "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+    "triangles": 12
+  },
+  "partialDenial": "ENGINE_FAILURE",
+  "separateMount": "live",
+  "violations": []
+}

@@ -1,0 +1,15 @@
+{
+  "project": "ACAD",
+  "expandedName": "Agent Computer-Aided Design",
+  "date": "2026-11-07",
+  "sourceReferenceRepository": "example.invalid:/srv/data/git/JSKetcher.git",
+  "sourceReferenceCommit": "bd627b59b60415d8620d4f322e008f57a1c20b5d",
+  "sourceReferenceTree": "c55ad695abd758d4aba38fab0d2d125b0b7ee4a9",
+  "historyImported": false,
+  "newRootDocumentation": [
+    "README.md",
+    "docs/ACAD-REPOSITORY.md",
+    "SOURCE-SNAPSHOT.json"
+  ],
+  "qualification": "Prior evidence stays attributed to its frozen builds. Composed snapshot requires complete workflow qualification."
+}

@@ -1,0 +1,8 @@
+{
+  "status": "AUTHORED_HISTORY_COMPONENT_PASS",
+  "newControls": 5,
+  "retainedControls": 11,
+  "combinedControls": 16,
+  "scope": "Exact nested source/seam append capture, detached metadata, Undo/Redo by value across native JSON copies, UTF8/UTF16 byte budgets, source-specific replay versus unrelated sketch fast-save. No native geometry or signed app result fabricated.",
+  "appWorkflowQualified": false
+}

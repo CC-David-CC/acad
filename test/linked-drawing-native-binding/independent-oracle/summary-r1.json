@@ -1,0 +1,172 @@
+{
+  "status": "PASS_SCOPED_ARTIFACTS_AND_FROZEN_SOURCE_CUSTODY",
+  "artifactOracleRuns": 1,
+  "artifactOracleReceipt": "receipt-r1.json",
+  "retainedInitialStatus": "FAIL (only current-checkout source-path assumption)",
+  "frozenSourcePinsAllMatch": true,
+  "producerBeforeAfterSourcePinsEqual": true,
+  "sourceRoleCorrection": "Runtime Core15c0f1fb9 builds application assets; separate driver-only Core7031d5de1 pins the accepted producer. Current Desktop harness advanced after the completed run; frozen0e348 remains exact. No artifacts or numerical checks rerun.",
+  "sources": [
+    {
+      "relativePath": "test/linked-drawing-native-binding/desktop-driver.mjs",
+      "repository": "core",
+      "producerCommit": "7031d5de11030d5f4a7fc253b8609f0c964dc5a3",
+      "sha256": "5fed740501df93018e85d12f9eb66f12eaa678fb143de708b8e52415e9a2f035",
+      "bytes": 24732
+    },
+    {
+      "relativePath": "test/linked-drawing-native-binding/README.md",
+      "repository": "core",
+      "producerCommit": "15c0f1fb969e8e87d33868042d7f75dd11c29cd6",
+      "sha256": "44629c05028d5690a8af6dd5649c21538e9c72e61b2815e8ddaab9d0179fe50d",
+      "bytes": 4293
+    },
+    {
+      "relativePath": "test/agent-cad-corpus/sweep/signed-harness.mjs",
+      "repository": "desktop",
+      "producerCommit": "0e348d61774762a9c5580f9c3629acdbd53fd1c0",
+      "sha256": "618ed682501cbf3ac76a9d0af395a394717ad67f10eaf01c3bef97dedd42ac2c",
+      "bytes": 13537
+    },
+    {
+      "relativePath": "test/agent-cad-corpus/strict-join/oracle.mjs",
+      "repository": "desktop",
+      "producerCommit": "0e348d61774762a9c5580f9c3629acdbd53fd1c0",
+      "sha256": "acd45c6f4ea820a324f5956749db734eb96048a687f56e8a01bd37c8439271fc",
+      "bytes": 3726
+    }
+  ],
+  "servedAssetMapRecords": [
+    {
+      "case": "original",
+      "innerAssetCount": 42,
+      "outerSha256": "e57906092bcf5afe7e1a013afd87cce9e084364baf31f4617f3764eb44b99732"
+    },
+    {
+      "case": "original",
+      "innerAssetCount": 42,
+      "outerSha256": "e57906092bcf5afe7e1a013afd87cce9e084364baf31f4617f3764eb44b99732"
+    },
+    {
+      "case": "original",
+      "innerAssetCount": 42,
+      "outerSha256": "e57906092bcf5afe7e1a013afd87cce9e084364baf31f4617f3764eb44b99732"
+    },
+    {
+      "case": "original",
+      "innerAssetCount": 42,
+      "outerSha256": "e57906092bcf5afe7e1a013afd87cce9e084364baf31f4617f3764eb44b99732"
+    },
+    {
+      "case": "negative-datum",
+      "innerAssetCount": 42,
+      "outerSha256": "e57906092bcf5afe7e1a013afd87cce9e084364baf31f4617f3764eb44b99732"
+    },
+    {
+      "case": "negative-datum",
+      "innerAssetCount": 42,
+      "outerSha256": "e57906092bcf5afe7e1a013afd87cce9e084364baf31f4617f3764eb44b99732"
+    },
+    {
+      "case": "negative-datum",
+      "innerAssetCount": 42,
+      "outerSha256": "e57906092bcf5afe7e1a013afd87cce9e084364baf31f4617f3764eb44b99732"
+    },
+    {
+      "case": "negative-datum",
+      "innerAssetCount": 42,
+      "outerSha256": "e57906092bcf5afe7e1a013afd87cce9e084364baf31f4617f3764eb44b99732"
+    }
+  ],
+  "committedPacketCopies": [
+    {
+      "file": "receipt.json",
+      "bytes": 4877246,
+      "sha256": "47843a644366d7c65abad73e6c4e1b102a3eaae33e96e7632ff8d48968bb9acc"
+    },
+    {
+      "file": "original-original.svg",
+      "bytes": 20651,
+      "sha256": "7d691db5ef65dbd93c3982a4174c30d2f2606a65dc8526877a06fab1aba27f3d"
+    },
+    {
+      "file": "original-reopened.svg",
+      "bytes": 22677,
+      "sha256": "44c8007694b0319d14fc1cb952af06bcf76092c36dfdfed01e09877d7ad6035d"
+    },
+    {
+      "file": "original-unresolved.svg",
+      "bytes": 21810,
+      "sha256": "94bae8a3cf978d566e2537ba6c7c571dd6e58c5002e84dc1d523457a5dac2b4f"
+    },
+    {
+      "file": "original-final.svg",
+      "bytes": 22135,
+      "sha256": "9184a178cb4a253aa92e10221875382652123a014839c670339c388fec414126"
+    },
+    {
+      "file": "negative-datum-original.svg",
+      "bytes": 20369,
+      "sha256": "b09173cc015092f189952cf25df6821f3cae710517ad4d7bab31c0ac84883a2b"
+    },
+    {
+      "file": "negative-datum-reopened.svg",
+      "bytes": 22766,
+      "sha256": "75965ad97da0062753884075f5fc12b91e8130b3c666ae521d8d6a7733596d87"
+    },
+    {
+      "file": "negative-datum-unresolved.svg",
+      "bytes": 21902,
+      "sha256": "39adc4c7e3efd3576f212d95137bab11e5dbe24a3a2a4fb1325bc430cb575995"
+    },
+    {
+      "file": "negative-datum-final.svg",
+      "bytes": 22234,
+      "sha256": "aaa36371e01ea9305fa917df11057817a4633838206df137eff8b14fe473b1c3"
+    },
+    {
+      "file": "original-edited.jsketcher.json",
+      "bytes": 9890,
+      "sha256": "d10b053163f5c04673ec0a88c897c5b61163d7c6851cfc449e496dff49a20ace"
+    },
+    {
+      "file": "original-unresolved.jsketcher.json",
+      "bytes": 9890,
+      "sha256": "ef469a76c3be9e80011775e6408e915345467bf47f978912b1551dd3db706b73"
+    },
+    {
+      "file": "original-final.jsketcher.json",
+      "bytes": 9890,
+      "sha256": "52e12c450ab3bb68df626678f989770bbd202f4f58eb7348680cf2646bda46a3"
+    },
+    {
+      "file": "negative-datum-edited.jsketcher.json",
+      "bytes": 9922,
+      "sha256": "1cd442a5cadd4d2b0737ded92cf6123a02be059823a1c84748c4b2db887357a2"
+    },
+    {
+      "file": "negative-datum-unresolved.jsketcher.json",
+      "bytes": 9922,
+      "sha256": "022389eddae7523f5c734bc835f480c850d53d6d9e1a72eef8a097a640c02bd5"
+    },
+    {
+      "file": "negative-datum-final.jsketcher.json",
+      "bytes": 9922,
+      "sha256": "239eaed98b03960f57798338cc69df6dc0a29ab89ae72f6bc37f8acf03c73f8f"
+    }
+  ],
+  "counts": {
+    "svgFiles": 8,
+    "nativeV3Files": 6,
+    "recordedNativeReads": 24,
+    "workflowRows": 56
+  },
+  "maxNativeVolumeAbsErrorMm3": 2.9103830456733704e-11,
+  "limitations": [
+    "SVG polylines are presentation; successful XML/label/geometry checks do not prove arbitrary Native validity or engineering drawing compliance.",
+    "Native facts are recorded genuine observations, not a fresh independent kernel execution.",
+    "Only fixed plate/center-hole/edge-treatment cases and the two datum origins are covered.",
+    "No rotated datum, changed sheet scale, edge-length dimension, all lost-reference categories or human editing UI is qualified.",
+    "JSON/XML use SHA-256 byte identity; no ZIP or CRC applies."
+  ]
+}

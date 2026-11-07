@@ -1,0 +1,31 @@
+// Ephemeral component data only. Declared source digests are NOT membership
+// proof. Planning, serialization and binding hashes belong in the Worker.
+import {capturePolygonProfileFaceRequest} from '../mount/selectedProfilePlan.mjs';
+const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
+function record(value,keys){if(!value||typeof value!=='object'||Array.isArray(value)||![Object.prototype,null].includes(Object.getPrototypeOf(value))||Reflect.ownKeys(value).length!==keys.length||Reflect.ownKeys(value).some(k=>typeof k!=='string'||!keys.includes(k)))fail('INVALID_REQUEST','Expected exact loft data.');const out={};for(const key of keys){const d=Object.getOwnPropertyDescriptor(value,key);if(!d?.enumerable||!Object.hasOwn(d,'value'))fail('INVALID_REQUEST','Loft fields must be own data.');out[key]=d.value;}return out;}
+function array(value,n){if(!Array.isArray(value)||value.length!==n||Reflect.ownKeys(value).length!==n+1)fail('INVALID_REQUEST','Expected exactly two dense loft sections.');return Array.from({length:n},(_,i)=>{const d=Object.getOwnPropertyDescriptor(value,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value'))fail('INVALID_REQUEST','Section entries must be data.');return d.value;});}
+function identity(value,max=256){if(typeof value!=='string'||!value||value.length>max)fail('INVALID_REQUEST','Expected a bounded loft source identity.');return value;}
+function source(value){const s=record(value,['faceId','sourceSha256']);s.faceId=identity(s.faceId);if(typeof s.sourceSha256!=='string'||!/^[a-f0-9]{64}$/.test(s.sourceSha256))fail('INVALID_REQUEST','Expected a declared source digest.');return s;}
+function correspondence(value){const c=record(value,['kind','startA','reverseA','startB','reverseB']);if(!['polygon','circle'].includes(c.kind)||typeof c.reverseA!=='boolean'||typeof c.reverseB!=='boolean'||[c.startA,c.startB].some(x=>typeof x!=='number'||!Number.isFinite(x)||Math.abs(x)>1e6))fail('INVALID_REQUEST','Expected explicit loft correspondence.');return c;}
+function freeze(v){if(v&&typeof v==='object'){for(const x of Object.values(v))freeze(x);Object.freeze(v);}return v;}
+const captured=new WeakSet();
+export function captureOwnedLoftIntent(value){
+ const r=record(value,['op','version','unit','sections','correspondence','construction']);if(r.op!=='solid.profile.loft'||r.version!==1||r.unit!=='millimeter'||r.construction!=='ruled-solid')fail('INVALID_REQUEST','Select version1 millimeter ruled-solid loft.');
+ r.sections=array(r.sections,2).map(value=>{const s=record(value,['source','frame','region']);s.source=source(s.source);const face=capturePolygonProfileFaceRequest({version:1,unit:r.unit,frame:s.frame,region:s.region});s.frame=face.frame;s.region=face.region;return s;});
+ if(r.sections[0].source.faceId===r.sections[1].source.faceId)fail('LOFT_UNSUPPORTED_SOURCE','Two distinct declared source planes are required.');
+ r.correspondence=correspondence(r.correspondence);const c=r.correspondence;
+ for(const s of r.sections){if(s.region.holes.length)fail('LOFT_UNSUPPORTED_HOLES','This loft component supports outer loops without holes.');const outer=s.region.outer;if(c.kind==='circle'?(outer.length!==1||outer[0].kind!=='circle'):outer.length<3||outer.some(x=>x.kind!=='segment'))fail('LOFT_UNSUPPORTED_CORRESPONDENCE','Use two circles or two same-edge-count simple polygons.');}
+ if(c.kind==='polygon'&&r.sections[0].region.outer.length!==r.sections[1].region.outer.length)fail('LOFT_UNSUPPORTED_CORRESPONDENCE','Polygon sections need equal edge counts.');
+ const result=freeze(r);captured.add(result);return result;
+}
+export function ownedLoftBindingFields(request){const r=captured.has(request)?request:captureOwnedLoftIntent(request);return freeze({version:1,unit:r.unit,sections:r.sections.map(s=>({source:{...s.source},regionId:s.region.id})),correspondence:{...r.correspondence},construction:r.construction});}
+export async function bindOwnedLoftIntent(value){const r=captured.has(value)?value:captureOwnedLoftIntent(value),text=JSON.stringify(r),bytes=new TextEncoder().encode(text);if(bytes.byteLength>1048576)fail('RESOURCE_LIMIT','Loft request exceeds1MiB UTF-8.');const digest=await crypto.subtle.digest('SHA-256',bytes);return freeze({...ownedLoftBindingFields(r),requestSha256:Array.from(new Uint8Array(digest),n=>n.toString(16).padStart(2,'0')).join('')});}
+export function equalOwnedLoftBinding(a,b){if(Object.is(a,b))return true;if(!a||!b||typeof a!=='object'||typeof b!=='object'||Array.isArray(a)!==Array.isArray(b))return false;const keys=Reflect.ownKeys(a);return keys.length===Reflect.ownKeys(b).length&&keys.every(key=>{const x=Object.getOwnPropertyDescriptor(a,key),y=Object.getOwnPropertyDescriptor(b,key);return x&&y&&Object.hasOwn(x,'value')&&Object.hasOwn(y,'value')&&equalOwnedLoftBinding(x.value,y.value);});}
+export function captureOwnedLoftBinding(value,expected){
+ const r=record(value,['version','unit','sections','correspondence','construction','requestSha256']);if(r.version!==1||r.unit!=='millimeter'||r.construction!=='ruled-solid'||typeof r.requestSha256!=='string'||!/^[a-f0-9]{64}$/.test(r.requestSha256))fail('INVALID_RESPONSE','Invalid loft binding.');
+ r.sections=array(r.sections,2).map(value=>{const s=record(value,['source','regionId']);s.source=source(s.source);s.regionId=identity(s.regionId,8192);return s;});r.correspondence=correspondence(r.correspondence);
+ const {requestSha256,...base}=r;if(expected&&!equalOwnedLoftBinding(base,expected))fail('INVALID_RESPONSE','Loft source/region/correspondence binding changed.');
+ const text=JSON.stringify(r);if(text.length>65536||new TextEncoder().encode(text).byteLength>65536)fail('RESOURCE_LIMIT','Loft binding exceeds64KiB UTF-8.');return freeze(r);
+}
+export const LOFT_NATIVE_REFUSALS=Object.freeze(['LOFT_INVALID_REQUEST','LOFT_INVALID_PROFILE','LOFT_INVALID_CORRESPONDENCE','LOFT_UNSUPPORTED_HOLES','LOFT_UNSUPPORTED_CORRESPONDENCE','LOFT_UNSUPPORTED_SECTION_PLANES','LOFT_COINCIDENT_SECTIONS','LOFT_INVALID_RESULT','LOFT_SELF_INTERFERENCE','LOFT_RESOURCE_LIMIT','LOFT_FAILED']);
+export const LOFT_PREPARATION_REFUSALS=Object.freeze(['LOFT_UNSUPPORTED_SOURCE','LOFT_UNSUPPORTED_HOLES','LOFT_UNSUPPORTED_CORRESPONDENCE','LOFT_INVALID_CORRESPONDENCE']);

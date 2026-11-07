@@ -1,0 +1,17 @@
+{
+  "productSource": "75a2b053c850fb7fcdba6f1779c190acc8345fde",
+  "baseSource": "11d88120bfa78f3a0b3703f024b4a5192817816f",
+  "broadTestHarness": "5a9f22423",
+  "runtime": "/mnt/data10tb/codi-function-aware-substitution-20261106-r1",
+  "fixture": "http://127.0.0.1:20710/",
+  "sourceFiles": {
+    "web/app/sketcher/constr/polynomial.ts": "2567b62da9049b6f290527c9e41a6becd952be93bd5a7fc1088ff44e37680492",
+    "web/app/sketcher/constr/AlgNumSystem.ts": "d2a7159681c6033a3ea5b380bdd83d66b0858b759b595b2f60074a3607547ea6"
+  },
+  "assets": {
+    "dist/static/index.bundle.js": "95deb6ad4ea50d44753d0e64e56e24c38509bb0dd5e68c25e10c8455d9eef231",
+    ".build/headless-sketch-worker/worker.js": "3aeb3ea7b47d319e0788da4068d31188d3058ea52936c82b65ed266eb776b514",
+    ".build/line-relation-project-worker/worker.js": "923648368f43642ff996cf21715f5be55b8458086a445525fd50f135b70ea98a",
+    ".build/prism-semantic-worker/worker.js": "be72279d53e63ab5b14e6e1f8840bbea9395d1ce5a140817d1e372650e9de488"
+  }
+}

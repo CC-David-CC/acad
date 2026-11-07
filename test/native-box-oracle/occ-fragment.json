@@ -1,0 +1,5110 @@
+{
+  "version": 1,
+  "source": {
+    "commit": "147814d8400de9d14d3718980f3e17b85241bcde",
+    "appSha256": null,
+    "workerSha256": "26c2191e2f952d2dfb62768aec971b847ed50165cd767987eb3ab1e4115052f5",
+    "wasmSha256": "07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e",
+    "scope": "Immutable production Worker bytes exercised through raw protocol; no application UI or host path"
+  },
+  "cases": [
+    {
+      "id": "OCC-BOX-CELLS-HOLLOW-EXACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 6,
+          "triangles": 12,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 999.9999999999999,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 6,
+              "wires": 6,
+              "edges": 12,
+              "vertices": 8
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 999.9999999999999,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 6,
+                "wires": 6,
+                "edges": 12,
+                "vertices": 8
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.0"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-EXACT-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 6,
+          "triangles": 12,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 999.9999999999999,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 6,
+              "wires": 6,
+              "edges": 12,
+              "vertices": 8
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 999.9999999999999,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 6,
+                "wires": 6,
+                "edges": 12,
+                "vertices": 8
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.1"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-HOLLOW-PARTIAL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 892,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 892,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 892,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.2"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-PARTIAL-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 892,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 892,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 892,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.3"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-HOLLOW-ISLAND",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 18,
+          "triangles": 36,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 792,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 3,
+              "faces": 18,
+              "wires": 18,
+              "edges": 36,
+              "vertices": 24
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 792,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 3,
+                "faces": 18,
+                "wires": 18,
+                "edges": 36,
+                "vertices": 24
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.4"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-ISLAND-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 18,
+          "triangles": 36,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 792,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 3,
+              "faces": 18,
+              "wires": 18,
+              "edges": 36,
+              "vertices": 24
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 792,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 3,
+                "faces": 18,
+                "wires": 18,
+                "edges": 36,
+                "vertices": 24
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.5"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-HOLLOW-ENCLOSING",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 6,
+          "triangles": 12,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 999.9999999999999,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 6,
+              "wires": 6,
+              "edges": 12,
+              "vertices": 8
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 999.9999999999999,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 6,
+                "wires": 6,
+                "edges": 12,
+                "vertices": 8
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.6"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-ENCLOSING-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 6,
+          "triangles": 12,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 999.9999999999999,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 6,
+              "wires": 6,
+              "edges": 12,
+              "vertices": 8
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 999.9999999999999,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 6,
+                "wires": 6,
+                "edges": 12,
+                "vertices": 8
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.7"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-HOLLOW-DISJOINT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1784,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 18,
+          "triangles": 36,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 1784,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 3,
+              "faces": 18,
+              "wires": 18,
+              "edges": 36,
+              "vertices": 24
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1784,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 3,
+                "faces": 18,
+                "wires": 18,
+                "edges": 36,
+                "vertices": 24
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.8"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-DISJOINT-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1784,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 18,
+          "triangles": 36,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 1784,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 3,
+              "faces": 18,
+              "wires": 18,
+              "edges": 36,
+              "vertices": 24
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1784,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 3,
+                "faces": 18,
+                "wires": 18,
+                "edges": 36,
+                "vertices": 24
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.9"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-COMPOSITE-FILL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 2000.0000000000002,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000.0000000000002,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.10"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-FILL-COMPOSITE",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 2000.0000000000002,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000.0000000000002,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.11"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-FILLED-BEFORE-DISJOINT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 2000.0000000000002,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000.0000000000002,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.12"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-COMPOSITE-MINUS-DISJOINT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 784,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 784,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 784,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.13"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-COMPOSITE-COMMON-OUTER",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 784,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 784,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 784,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.14"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-DISJOINT-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 0,
+          "triangles": 0,
+          "bounds": null,
+          "signedVolume": 0,
+          "empty": true,
+          "resultKind": "empty",
+          "solidCount": 0,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 0,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 0,
+              "shells": 0,
+              "faces": 0,
+              "wires": 0,
+              "edges": 0,
+              "vertices": 0
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 0,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 0,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 0,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 0,
+                "shells": 0,
+                "faces": 0,
+                "wires": 0,
+                "edges": 0,
+                "vertices": 0
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.15"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-IDENTICAL-SUBTRACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 0,
+          "triangles": 0,
+          "bounds": null,
+          "signedVolume": 0,
+          "empty": true,
+          "resultKind": "empty",
+          "solidCount": 0,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 0,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 0,
+              "shells": 0,
+              "faces": 0,
+              "wires": 0,
+              "edges": 0,
+              "vertices": 0
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 0,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 0,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 0,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 0,
+                "shells": 0,
+                "faces": 0,
+                "wires": 0,
+                "edges": 0,
+                "vertices": 0
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.16"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-OVERLAP-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1500,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            15,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 14,
+          "triangles": 28,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              15,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 1500,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 14,
+              "wires": 14,
+              "edges": 28,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1500,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 14,
+                "wires": 14,
+                "edges": 28,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.17"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-OVERLAP-REVERSED-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1500,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            15,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 14,
+          "triangles": 28,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              15,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 1499.9999999999995,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 14,
+              "wires": 14,
+              "edges": 28,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1499.9999999999995,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 14,
+                "wires": 14,
+                "edges": 28,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.18"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-OVERLAP-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": {
+          "min": [
+            5,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 6,
+          "triangles": 12,
+          "bounds": {
+            "min": [
+              5,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 499.99999999999994,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 6,
+              "wires": 6,
+              "edges": 12,
+              "vertices": 8
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 499.99999999999994,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 6,
+                "wires": 6,
+                "edges": 12,
+                "vertices": 8
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.19"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-OVERLAP-REVERSED-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": {
+          "min": [
+            5,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 6,
+          "triangles": 12,
+          "bounds": {
+            "min": [
+              5,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 500,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 6,
+              "wires": 6,
+              "edges": 12,
+              "vertices": 8
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 500,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 6,
+                "wires": 6,
+                "edges": 12,
+                "vertices": 8
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.20"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-OVERLAP-SUBTRACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            5,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 6,
+          "triangles": 12,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              5,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 499.99999999999994,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 6,
+              "wires": 6,
+              "edges": 12,
+              "vertices": 8
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 499.99999999999994,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 6,
+                "wires": 6,
+                "edges": 12,
+                "vertices": 8
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.21"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-OVERLAP-REVERSED-SUBTRACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": {
+          "min": [
+            10,
+            0,
+            0
+          ],
+          "max": [
+            15,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 6,
+          "triangles": 12,
+          "bounds": {
+            "min": [
+              10,
+              0,
+              0
+            ],
+            "max": [
+              15,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 500.0000000000001,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 6,
+              "wires": 6,
+              "edges": 12,
+              "vertices": 8
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 500.0000000000001,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 6,
+                "wires": 6,
+                "edges": 12,
+                "vertices": 8
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.22"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-FACE-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 10,
+          "triangles": 20,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 1999.9999999999998,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 10,
+              "wires": 10,
+              "edges": 20,
+              "vertices": 12
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1999.9999999999998,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 10,
+                "wires": 10,
+                "edges": 20,
+                "vertices": 12
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.23"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-FACE-UNION-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 10,
+          "triangles": 20,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 2000.0000000000002,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 10,
+              "wires": 10,
+              "edges": 20,
+              "vertices": 12
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000.0000000000002,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 10,
+                "wires": 10,
+                "edges": 20,
+                "vertices": 12
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.24"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-FACE-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "faces": 0,
+          "triangles": 0,
+          "bounds": null,
+          "signedVolume": 0,
+          "empty": true,
+          "resultKind": "empty",
+          "solidCount": 0,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 0,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 0,
+              "shells": 0,
+              "faces": 0,
+              "wires": 0,
+              "edges": 0,
+              "vertices": 0
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.25"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-FACE-COMMON-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "faces": 0,
+          "triangles": 0,
+          "bounds": null,
+          "signedVolume": 0,
+          "empty": true,
+          "resultKind": "empty",
+          "solidCount": 0,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 0,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 0,
+              "shells": 0,
+              "faces": 0,
+              "wires": 0,
+              "edges": 0,
+              "vertices": 0
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.26"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-EDGE-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            20,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              20,
+              10
+            ]
+          },
+          "signedVolume": 1999.9999999999998,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 23,
+              "vertices": 14
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1999.9999999999998,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 23,
+                "vertices": 14
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.27"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-EDGE-UNION-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            20,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              20,
+              10
+            ]
+          },
+          "signedVolume": 2000.0000000000002,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 23,
+              "vertices": 14
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000.0000000000002,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 23,
+                "vertices": 14
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.28"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-EDGE-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "faces": 0,
+          "triangles": 0,
+          "bounds": null,
+          "signedVolume": 0,
+          "empty": true,
+          "resultKind": "empty",
+          "solidCount": 0,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 0,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 0,
+              "shells": 0,
+              "faces": 0,
+              "wires": 0,
+              "edges": 0,
+              "vertices": 0
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.29"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-EDGE-COMMON-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "faces": 0,
+          "triangles": 0,
+          "bounds": null,
+          "signedVolume": 0,
+          "empty": true,
+          "resultKind": "empty",
+          "solidCount": 0,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 0,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 0,
+              "shells": 0,
+              "faces": 0,
+              "wires": 0,
+              "edges": 0,
+              "vertices": 0
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.30"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-VERTEX-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            20,
+            20
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              20,
+              20
+            ]
+          },
+          "signedVolume": 1999.9999999999995,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 15
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1999.9999999999995,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 15
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.31"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-VERTEX-UNION-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            20,
+            20
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              20,
+              20
+            ]
+          },
+          "signedVolume": 2000.0000000000005,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 15
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000.0000000000005,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 15
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.32"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-VERTEX-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "faces": 0,
+          "triangles": 0,
+          "bounds": null,
+          "signedVolume": 0,
+          "empty": true,
+          "resultKind": "empty",
+          "solidCount": 0,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 0,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 0,
+              "shells": 0,
+              "faces": 0,
+              "wires": 0,
+              "edges": 0,
+              "vertices": 0
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.33"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-CONTACT-VERTEX-COMMON-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "faces": 0,
+          "triangles": 0,
+          "bounds": null,
+          "signedVolume": 0,
+          "empty": true,
+          "resultKind": "empty",
+          "solidCount": 0,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 0,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 0,
+              "shells": 0,
+              "faces": 0,
+              "wires": 0,
+              "edges": 0,
+              "vertices": 0
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.34"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-TRANSLATED-PARTIAL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 892,
+        "bounds": {
+          "min": [
+            -13,
+            7,
+            29
+          ],
+          "max": [
+            -3,
+            17,
+            39
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              -13,
+              7,
+              29
+            ],
+            "max": [
+              -3,
+              17,
+              39
+            ]
+          },
+          "signedVolume": 892,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 892,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.35"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-PERMUTED-PARTIAL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 892,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 892,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 892,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.36"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-TRANSLATED-FILL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            -13,
+            7,
+            29
+          ],
+          "max": [
+            17,
+            17,
+            39
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              -13,
+              7,
+              29
+            ],
+            "max": [
+              17,
+              17,
+              39
+            ]
+          },
+          "signedVolume": 1999.9999999999998,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1999.9999999999998,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.37"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-PERMUTED-FILL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            30,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              30,
+              10
+            ]
+          },
+          "signedVolume": 2000.0000000000002,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000.0000000000002,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.38"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-TRANSLATED-ISLAND",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "bounds": {
+          "min": [
+            -13,
+            7,
+            29
+          ],
+          "max": [
+            -3,
+            17,
+            39
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 18,
+          "triangles": 36,
+          "bounds": {
+            "min": [
+              -13,
+              7,
+              29
+            ],
+            "max": [
+              -3,
+              17,
+              39
+            ]
+          },
+          "signedVolume": 792,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 3,
+              "faces": 18,
+              "wires": 18,
+              "edges": 36,
+              "vertices": 24
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 792,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 3,
+                "faces": 18,
+                "wires": 18,
+                "edges": 36,
+                "vertices": 24
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.39"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-PERMUTED-ISLAND",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 18,
+          "triangles": 36,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "signedVolume": 792,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 3,
+              "faces": 18,
+              "wires": 18,
+              "edges": 36,
+              "vertices": 24
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 792,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 3,
+                "faces": 18,
+                "wires": 18,
+                "edges": 36,
+                "vertices": 24
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.40"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-SEEDED-0",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 0,
+          "triangles": 0,
+          "bounds": null,
+          "signedVolume": 0,
+          "empty": true,
+          "resultKind": "empty",
+          "solidCount": 0,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 0,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 0,
+              "shells": 0,
+              "faces": 0,
+              "wires": 0,
+              "edges": 0,
+              "vertices": 0
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 0,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 0,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 0,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 0,
+                "shells": 0,
+                "faces": 0,
+                "wires": 0,
+                "edges": 0,
+                "vertices": 0
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.41"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-SEEDED-1",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 0,
+          "triangles": 0,
+          "bounds": null,
+          "signedVolume": 0,
+          "empty": true,
+          "resultKind": "empty",
+          "solidCount": 0,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 0,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 0,
+              "shells": 0,
+              "faces": 0,
+              "wires": 0,
+              "edges": 0,
+              "vertices": 0
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 0,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 0,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 0,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 0,
+                "shells": 0,
+                "faces": 0,
+                "wires": 0,
+                "edges": 0,
+                "vertices": 0
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.42"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-SEEDED-2",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 0,
+          "triangles": 0,
+          "bounds": null,
+          "signedVolume": 0,
+          "empty": true,
+          "resultKind": "empty",
+          "solidCount": 0,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 0,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 0,
+              "shells": 0,
+              "faces": 0,
+              "wires": 0,
+              "edges": 0,
+              "vertices": 0
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 0,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 0,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 0,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 0,
+                "shells": 0,
+                "faces": 0,
+                "wires": 0,
+                "edges": 0,
+                "vertices": 0
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.43"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-SEEDED-3",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 339,
+        "bounds": {
+          "min": [
+            0,
+            -4,
+            -6
+          ],
+          "max": [
+            11,
+            5,
+            3
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 18,
+          "triangles": 54,
+          "bounds": {
+            "min": [
+              0,
+              -4,
+              -6
+            ],
+            "max": [
+              11,
+              5,
+              3
+            ]
+          },
+          "signedVolume": 338.99999999999994,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 18,
+              "wires": 18,
+              "edges": 45,
+              "vertices": 29
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 338.99999999999994,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 18,
+                "wires": 18,
+                "edges": 45,
+                "vertices": 29
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.44"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-SEEDED-4",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 345,
+        "bounds": {
+          "min": [
+            -1,
+            -4,
+            -2
+          ],
+          "max": [
+            7,
+            3,
+            11
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 16,
+          "triangles": 46,
+          "bounds": {
+            "min": [
+              -1,
+              -4,
+              -2
+            ],
+            "max": [
+              7,
+              3,
+              11
+            ]
+          },
+          "signedVolume": 345,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 16,
+              "wires": 16,
+              "edges": 39,
+              "vertices": 25
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 345,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 16,
+                "wires": 16,
+                "edges": 39,
+                "vertices": 25
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.45"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-SEEDED-5",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 48,
+        "bounds": {
+          "min": [
+            -4,
+            -2,
+            -5
+          ],
+          "max": [
+            0,
+            0,
+            1
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 6,
+          "triangles": 12,
+          "bounds": {
+            "min": [
+              -4,
+              -2,
+              -5
+            ],
+            "max": [
+              0,
+              0,
+              1
+            ]
+          },
+          "signedVolume": 48,
+          "empty": false,
+          "resultKind": "single-solid",
+          "solidCount": 1,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 1,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 1,
+              "shells": 1,
+              "faces": 6,
+              "wires": 6,
+              "edges": 12,
+              "vertices": 8
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 48,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 1,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 6,
+                "wires": 6,
+                "edges": 12,
+                "vertices": 8
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.46"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "OCC-BOX-CELLS-SEEDED-6",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 336,
+        "bounds": {
+          "min": [
+            -5,
+            -4,
+            0
+          ],
+          "max": [
+            9,
+            5,
+            5
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "faces": 12,
+          "triangles": 24,
+          "bounds": {
+            "min": [
+              -5,
+              -4,
+              0
+            ],
+            "max": [
+              9,
+              5,
+              5
+            ]
+          },
+          "signedVolume": 336,
+          "empty": false,
+          "resultKind": "multi-solid",
+          "solidCount": 2,
+          "nativeValidity": {
+            "method": "occ-inspect-analytic-v1",
+            "valid": true
+          },
+          "nativeTopology": {
+            "version": 1,
+            "method": "occ-topology-census-v1",
+            "shapeType": 0,
+            "directChildren": 2,
+            "counts": {
+              "compounds": 1,
+              "compsolids": 0,
+              "solids": 2,
+              "shells": 2,
+              "faces": 12,
+              "wires": 12,
+              "edges": 24,
+              "vertices": 16
+            }
+          },
+          "materialRegions": null,
+          "voidRegions": null,
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "tessellation-signed-integral"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 336,
+          "volumeQuality": "tessellation-signed-integral",
+          "nativeFacts": {
+            "solidCount": 2,
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 0,
+              "directChildren": 2,
+              "counts": {
+                "compounds": 1,
+                "compsolids": 0,
+                "solids": 2,
+                "shells": 2,
+                "faces": 12,
+                "wires": 12,
+                "edges": 24,
+                "vertices": 16
+              }
+            },
+            "meshComponents": null,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.occ.rows.47"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    }
+  ]
+}

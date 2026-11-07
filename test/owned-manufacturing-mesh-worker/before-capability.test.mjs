@@ -1,0 +1,25 @@
+// BEFORE-state capability/admission only. The Worker double acknowledges init;
+// it never fabricates a successful native shape, mesh, STEP or drawing result.
+import test from 'node:test';import a from 'node:assert/strict';
+import {createSelectedProfileOccMount} from '../../modules/engine/mount/occ-selected-profile-mount.mjs';
+import {createPolygonProfileOccMount} from '../../modules/engine/mount/occ-polygon-profile-mount.mjs';
+import {createMechanicalProfileOccMount} from '../../modules/engine/mount/occ-mechanical-profile-mount.mjs';
+import {createBooleanHistoryOccMount} from '../../modules/engine/mount/occ-boolean-history-mount.mjs';
+import {createRevolveProfileOccMount} from '../../modules/engine/mount/occ-revolve-profile-mount.mjs';
+import {createSweepProfileOccMount} from '../../modules/engine/mount/occ-sweep-profile-mount.mjs';
+import {createLoftProfileOccMount} from '../../modules/engine/mount/occ-loft-profile-mount.mjs';
+import {createAdaptiveMetrologyOccMount} from '../../modules/engine/mount/occ-adaptive-metrology-mount.mjs';
+import {createStepExportOccMount} from '../../modules/engine/mount/occ-step-export-mount.mjs';
+import {createOrthographicOccMount} from '../../modules/engine/mount/occ-orthographic-profile-mount.mjs';
+import {createWorkerMount} from '../../modules/engine/mount/worker-controller.mjs';
+import {requireCadEngineBuild,preferredCadEngineBuild,OCC_BOOLEAN_HISTORY_BUILD} from '../../modules/engine/mount/engineCatalog.mjs';
+const created=[],previous=globalThis.Worker;
+globalThis.Worker=class{constructor(){this.posts=[];this.closed=false;created.push(this);}postMessage(value){this.posts.push(structuredClone(value));if(value.kind==='init')queueMicrotask(()=>this.onmessage?.({data:{kind:'ready'}}));}terminate(){this.closed=true;}emit(data){this.onmessage?.({data});}};
+const options={workerUrl:'/test-only-worker.js',jsPath:'/test-only.js',wasmPath:'/test-only.wasm'};
+const constructors=[createSelectedProfileOccMount,createPolygonProfileOccMount,createMechanicalProfileOccMount,createBooleanHistoryOccMount,createRevolveProfileOccMount,createSweepProfileOccMount,createLoftProfileOccMount,createAdaptiveMetrologyOccMount,createStepExportOccMount,createOrthographicOccMount];
+for(const factory of constructors)test('BEFORE '+factory.name+' has no controlled manufacturing capability or dispatch',async()=>{const mount=factory(options),worker=created.at(-1);try{await mount.ready;a(!mount.descriptor.operations.some(op=>op.id==='solid.manufacturing.mesh.read'));a(!Object.hasOwn(worker.posts[0],'manufacturingMesh'));const display=mount.descriptor.operations.find(op=>op.id==='solid.mesh.read');a.equal(display.purpose,'display-only');a.equal(display.qualification,'unqualified');let reads=0;const request={op:'solid.manufacturing.mesh.read',version:1,unit:'millimeter'};Object.defineProperty(request,'handle',{enumerable:true,get(){reads++;throw Error('must not read unsupported payload');}});await a.rejects(mount.execute(request),{code:'UNSUPPORTED_OPERATION'});a.equal(reads,0);a.equal(worker.posts.length,1);a.equal(mount.descriptor.maxPending,1);}finally{mount.close();}});
+const js='32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08',wasm='abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc';
+test('BEFORE exact new runtime is not a registered build or default migration',()=>{a.throws(()=>requireCadEngineBuild('occ','sha256:'+js+':'+wasm),{code:'ENGINE_REVISION_MISMATCH'});a.equal(preferredCadEngineBuild('occ'),OCC_BOOLEAN_HISTORY_BUILD);});
+test('BEFORE new runtime cannot be substituted into inherited projection cohort',()=>{const count=created.length;a.throws(()=>createWorkerMount(options,{engine:'occ-manufacturing-mesh-v1-component',representation:'occ-brep-worker-owned',jsSha256:js,wasmSha256:wasm,orthographicRead:true}),{code:'INVALID_MOUNT'});a.equal(created.length,count);});
+test('BEFORE unsolicited new lease phase cannot be accepted as a box result',async()=>{const mount=createOrthographicOccMount(options),worker=created.at(-1);try{await mount.ready;const pending=mount.execute({op:'solid.box.create',version:1,unit:'millimeter',origin:[0,0,0],dimensions:[1,1,1]});worker.emit({kind:'manufacturing-mesh-begun',seq:worker.posts.at(-1).seq,op:'solid.manufacturing.mesh.read'});await a.rejects(pending,{code:'ENGINE_FAILURE'});a(worker.closed);}finally{mount.close();}});
+test.after(()=>{a(created.every(w=>w.closed));globalThis.Worker=previous;});

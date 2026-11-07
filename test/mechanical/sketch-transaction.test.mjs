@@ -1,0 +1,14 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {runSketchTransaction} from '../../web/app/sketcher/actions/sketchTransaction.js';
+function fixture(){
+ let text='before',extra=false;const sys={inTransaction:false,transactionBefore:null};
+ const pm={inTransaction:false,stages:[{algNumSystem:sys}],startTransaction(){this.inTransaction=true;sys.inTransaction=true;sys.transactionBefore={}},finishTransaction(validate){this.inTransaction=false;try{validate?.(this.stages)}finally{sys.inTransaction=false;sys.transactionBefore=null}}};
+ const history={diffs:['prior'],historyPointer:0,lastCheckpoint:'old',_counter:4,recoverySnapshot:null,_checkpoint(){this.diffs.push('new');this.historyPointer=1;this.lastCheckpoint=text;this._counter=0}};
+ return {viewer:{parametricManager:pm,historyManager:history,io:{serializeSketch:()=>text}},history,pm,sys,get text(){return text},set text(v){text=v},get extra(){return extra},set extra(v){extra=v}};
+}
+test('successful transaction invokes mutation and validator once',()=>{const f=fixture();let n=0;runSketchTransaction(f.viewer,{mutate(){n++},validate(){n++}});assert.equal(n,2);assert.equal(f.history.recoverySnapshot,null)});
+test('ordinary failure restores history and preserves original error',()=>{const f=fixture();assert.throws(()=>runSketchTransaction(f.viewer,{mutate(){throw Error('numerical failure')}}),/numerical failure/);assert.deepEqual(f.history.diffs,['prior']);assert.equal(f.history.historyPointer,0);assert.equal(f.history.lastCheckpoint,'old');assert.equal(f.history.recoverySnapshot,null)});
+test('unrestored bytes, incomplete stages or failed external cleanup require recovery',()=>{for(const mode of ['bytes','stage','cleanup']){const f=fixture();assert.throws(()=>runSketchTransaction(f.viewer,{mutate(){if(mode==='bytes')f.text='changed';if(mode==='stage')f.pm.finishTransaction=()=>{f.pm.inTransaction=false;throw Error('failed rollback')};throw Error('failure')},rollbackExtra(){if(mode==='cleanup')throw Error('failed cleanup')}}),/held for recovery/);assert.equal(f.history.recoverySnapshot,'before');assert.throws(()=>runSketchTransaction(f.viewer,{mutate(){}}),/not ready/);}});
+test('oversized checkpoint is rejected before mutation and history restored',()=>{const f=fixture();f.text='x'.repeat(1024*1024+1);let called=false;assert.throws(()=>runSketchTransaction(f.viewer,{mutate(){called=true}}),/size limit/);assert.equal(called,false);assert.deepEqual(f.history.diffs,['prior']);assert.equal(f.history.lastCheckpoint,'old');assert.equal(f.history.recoverySnapshot,null)});
+test('checkpoint bound counts UTF-8 bytes rather than UTF-16 code units',()=>{const f=fixture();f.text='é'.repeat(524289);let called=false;assert.throws(()=>runSketchTransaction(f.viewer,{mutate(){called=true}}),/size limit/);assert.equal(called,false);assert.equal(f.history.lastCheckpoint,'old')});

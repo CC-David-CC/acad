@@ -1,0 +1,93 @@
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+This browser doesn't support cancelAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Concentric Circle/Circle
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend EqualRadius Circle/Circle
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Concentric Circle/Arc
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend EqualRadius Circle/Arc
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Concentric Arc/Circle
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend EqualRadius Arc/Circle
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Concentric Arc/Arc
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend EqualRadius Arc/Arc
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend RadiusLength Arc
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Angle
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend AngleBetween
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Parallel
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Perpendicular
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend DistancePP
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend PointInMiddle
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Symmetry
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend PointOnCircle Circle
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend TangentLC Circle
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend PointOnCircle Arc
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend TangentLC Arc
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend PointOnBezier
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend TangentLineBezier
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend PointOnEllipse Ellipse
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend PointOnEllipse EllipticalArc
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Fillet
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Ellipse native geometry
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend EllipticalArc native geometry
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Bezier geometry
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Ellipse legacy read/current native write
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend EllipticalArc legacy read/current native write
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Bezier zero endpoint handle
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Bezier child LockPoint
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Ellipse center LockPoint
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend EllipticalArc endpoint LockPoint
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Parallel same direction
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save + real backend Perpendicular positive direction
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual typed Save TangentLC Circle
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual typed Save Fillet
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save refuses unknown schema without write/exit
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save refuses wrong entity reference without write/exit
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save refuses unknown geometric intent without write/exit
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save refuses degenerate circular domain without write/exit
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save refuses nonfinite geometry without write/exit
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save refuses degenerate Bezier without write/exit
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+PASS actual Save refuses solver-changed geometry without write/exit
+PASS 36 registered save compatibility controls + typed/refusal checks (Node Worker thread, not browser Worker)

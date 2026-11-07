@@ -1,0 +1,481 @@
+{
+  "version": 1,
+  "source": "997df3dbb97b83d79b65db62f191c45c2f23b4ea",
+  "layer": "actual-full-app-public-craft-API-real-Workers-planes-and-ancestry-refusal",
+  "fixture": "http://127.0.0.1:20488/",
+  "app": {
+    "url": "http://127.0.0.1:20488/static/index.bundle.js",
+    "sha256": "9993b01af9f49ca29aa2eceaa1701489aef01c992ee3a3b38a1a0799f87a9c28"
+  },
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'",
+  "browser": "Chrome/155.0.8059.79",
+  "targets": {
+    "planes": "9AC2AA97D17B41ABF89A7D2D5FCF6A0A",
+    "reopen": "71425F1C3380FE31CFA2D09564666538",
+    "ancestry": "DD8DBCF04084BB52D9B65DD8387F3872"
+  },
+  "planes": {
+    "rows": [
+      {
+        "plane": "XY",
+        "made": {
+          "featureId": 1,
+          "faceId": "S:0/SURFACE",
+          "unit": "millimeter",
+          "persistence": "volatile-workspace",
+          "revision": "a5d7e3f9-b13b-4d62-8193-dc94d63302b0"
+        },
+        "appended": {
+          "changed": true,
+          "faceId": "S:0/SURFACE",
+          "primitive": {
+            "id": "agent-primitive-b1972194-53b1-4837-99f3-11a06e4b17d5",
+            "kind": "Point",
+            "role": null,
+            "stage": 0
+          },
+          "revision": "30d2f668-7ee7-48e5-a533-4716fdf219cb",
+          "persistence": "volatile-workspace",
+          "authoredUndo": true,
+          "manufacturingAssignments": "review-if-present"
+        },
+        "frame": {
+          "origin": [
+            0,
+            0,
+            5
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "inspectedFrame": {
+          "origin": [
+            0,
+            0,
+            5
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "nativeFrame": {
+          "origin": [
+            0,
+            0,
+            5
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "globalId": "S:0/SURFACE/agent-primitive-b1972194-53b1-4837-99f3-11a06e4b17d5",
+        "world": [
+          2,
+          3,
+          5
+        ],
+        "projection": {
+          "isPoints": true,
+          "vertices": 1,
+          "world": [
+            2,
+            3,
+            5
+          ]
+        },
+        "regions": 0
+      },
+      {
+        "plane": "XZ",
+        "made": {
+          "featureId": 2,
+          "faceId": "S:1/SURFACE",
+          "unit": "millimeter",
+          "persistence": "volatile-workspace",
+          "revision": "36557848-3544-4e8c-8a81-9816c42a04d0"
+        },
+        "appended": {
+          "changed": true,
+          "faceId": "S:1/SURFACE",
+          "primitive": {
+            "id": "agent-primitive-22ba220e-3d98-41c1-be99-46ec2fc7086d",
+            "kind": "Point",
+            "role": null,
+            "stage": 0
+          },
+          "revision": "7e319b42-cea3-474e-b8d2-f6ad89e71f28",
+          "persistence": "volatile-workspace",
+          "authoredUndo": true,
+          "manufacturingAssignments": "review-if-present"
+        },
+        "frame": {
+          "origin": [
+            0,
+            5,
+            0
+          ],
+          "x": [
+            -1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            0,
+            1
+          ],
+          "z": [
+            0,
+            1,
+            0
+          ]
+        },
+        "inspectedFrame": {
+          "origin": [
+            0,
+            5,
+            0
+          ],
+          "x": [
+            -1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            0,
+            1
+          ],
+          "z": [
+            0,
+            1,
+            0
+          ]
+        },
+        "nativeFrame": {
+          "origin": [
+            0,
+            5,
+            0
+          ],
+          "x": [
+            -1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            0,
+            1
+          ],
+          "z": [
+            0,
+            1,
+            0
+          ]
+        },
+        "globalId": "S:1/SURFACE/agent-primitive-22ba220e-3d98-41c1-be99-46ec2fc7086d",
+        "world": [
+          -2,
+          5,
+          3
+        ],
+        "projection": {
+          "isPoints": true,
+          "vertices": 1,
+          "world": [
+            -2,
+            5,
+            3
+          ]
+        },
+        "regions": 0
+      },
+      {
+        "plane": "ZY",
+        "made": {
+          "featureId": 3,
+          "faceId": "S:2/SURFACE",
+          "unit": "millimeter",
+          "persistence": "volatile-workspace",
+          "revision": "f7f2d19f-7350-49a2-8191-b576554f31e9"
+        },
+        "appended": {
+          "changed": true,
+          "faceId": "S:2/SURFACE",
+          "primitive": {
+            "id": "agent-primitive-c6c5c903-7d7e-4b43-9e7e-d53049899e81",
+            "kind": "Point",
+            "role": null,
+            "stage": 0
+          },
+          "revision": "e7263fbc-793b-4623-a32a-c85f269f8794",
+          "persistence": "volatile-workspace",
+          "authoredUndo": true,
+          "manufacturingAssignments": "review-if-present"
+        },
+        "frame": {
+          "origin": [
+            5,
+            0,
+            0
+          ],
+          "x": [
+            0,
+            0,
+            -1
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            1,
+            0,
+            0
+          ]
+        },
+        "inspectedFrame": {
+          "origin": [
+            5,
+            0,
+            0
+          ],
+          "x": [
+            0,
+            0,
+            -1
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            1,
+            0,
+            0
+          ]
+        },
+        "nativeFrame": {
+          "origin": [
+            5,
+            0,
+            0
+          ],
+          "x": [
+            0,
+            0,
+            -1
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            1,
+            0,
+            0
+          ]
+        },
+        "globalId": "S:2/SURFACE/agent-primitive-c6c5c903-7d7e-4b43-9e7e-d53049899e81",
+        "world": [
+          5,
+          3,
+          -2
+        ],
+        "projection": {
+          "isPoints": true,
+          "vertices": 1,
+          "world": [
+            5,
+            3,
+            -2
+          ]
+        },
+        "regions": 0
+      }
+    ],
+    "worker": {
+      "url": "http://127.0.0.1:20488/static/sketch-solver.d9991d9167715129b639.js",
+      "sha256": "3211e4c5f5b51dc6b19dbce0e29c4cd1dbdb15ce7bbc89c075d5973b3bf7bc87"
+    }
+  },
+  "reopened": [
+    {
+      "globalId": "S:0/SURFACE/agent-primitive-b1972194-53b1-4837-99f3-11a06e4b17d5",
+      "world": [
+        2,
+        3,
+        5
+      ],
+      "frame": {
+        "origin": [
+          0,
+          0,
+          5
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "globalId": "S:1/SURFACE/agent-primitive-22ba220e-3d98-41c1-be99-46ec2fc7086d",
+      "world": [
+        -2,
+        5,
+        3
+      ],
+      "frame": {
+        "origin": [
+          0,
+          5,
+          0
+        ],
+        "x": [
+          -1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          0,
+          1
+        ],
+        "z": [
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "globalId": "S:2/SURFACE/agent-primitive-c6c5c903-7d7e-4b43-9e7e-d53049899e81",
+      "world": [
+        5,
+        3,
+        -2
+      ],
+      "frame": {
+        "origin": [
+          5,
+          0,
+          0
+        ],
+        "x": [
+          0,
+          0,
+          -1
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          1,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "ancestry": {
+    "initial": {
+      "ready": true,
+      "reason": null,
+      "revision": "0539f5bf-0f99-475a-8e82-0caa04c9fef9",
+      "unit": "millimeter",
+      "planes": [
+        "XY",
+        "XZ",
+        "ZY"
+      ],
+      "depthLimit": 100000000
+    },
+    "box": {
+      "featureId": 1,
+      "outputId": "worker-solid:1:[1,\"body\"]",
+      "resultKind": "single-solid",
+      "bodyId": "worker-solid:1:[1,\"body\"]",
+      "engine": "occ",
+      "unit": "millimeter"
+    },
+    "readiness": {
+      "ready": false,
+      "reason": "This sketch creation path requires supported part history with room for another plane.",
+      "revision": "8de468f6-0bcd-4998-8b68-e66be0c4fc21",
+      "unit": "millimeter",
+      "planes": [
+        "XY",
+        "XZ",
+        "ZY"
+      ],
+      "depthLimit": 100000000
+    },
+    "before": "{\"format\":\"codi-jsketcher-project\",\"version\":2,\"unit\":\"millimeter\",\"project\":{\"model\":{\"history\":[{\"type\":\"WORKER_SOLID_BOX_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884:07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e\",\"featureId\":1,\"x\":0,\"y\":0,\"z\":0,\"width\":10,\"depth\":10,\"height\":10}}],\"expressions\":\"\",\"assembly\":[],\"counters\":{\"featureId\":1}},\"sketches\":[]}}",
+    "refused": {
+      "ok": false,
+      "name": "Error",
+      "message": "This sketch creation path requires supported part history with room for another plane.",
+      "committed": false
+    },
+    "after": "{\"format\":\"codi-jsketcher-project\",\"version\":2,\"unit\":\"millimeter\",\"project\":{\"model\":{\"history\":[{\"type\":\"WORKER_SOLID_BOX_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884:07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e\",\"featureId\":1,\"x\":0,\"y\":0,\"z\":0,\"width\":10,\"depth\":10,\"height\":10}}],\"expressions\":\"\",\"assembly\":[],\"counters\":{\"featureId\":1}},\"sketches\":[]}}",
+    "sameModels": true,
+    "failure": null,
+    "sketches": [],
+    "posts": []
+  }
+}

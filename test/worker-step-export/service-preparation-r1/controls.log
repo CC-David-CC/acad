@@ -1,0 +1,29 @@
+✔ absent or malformed candidate custody refuses without native work (2.201961ms)
+✔ accepted closed aborted and superseded owners cannot export (0.870334ms)
+✔ a fabricated candidate cannot grant private ledger authority (0.285781ms)
+✔ body-count and engine input bounds refuse before custody (1.430307ms)
+✔ array holes and custom fields cannot supply a native handle (0.261942ms)
+✔ captures immutable detached input (3.375557ms)
+✔ foreign-realm and null-prototype records (1.757468ms)
+✔ one through32 distinct outputs (0.764894ms)
+✔ no native pointers or replacement geometry (0.300382ms)
+✔ exact own data only, no getter execution (0.402702ms)
+✔ dense selection arrays only (0.313772ms)
+✔ duplicate IDs rejected without silent deduplication (0.223321ms)
+✔ exact unit version engine and runtime syntax (0.383682ms)
+✔ both revisions explicitly required (0.352121ms)
+✔ bounded producer IDs and body names (1.449447ms)
+✔ constructor requires evaluator and staged policy (1.018755ms)
+✔ unavailable discovery gives explicit null document revision (0.975065ms)
+✔ staged refusal remains exact without replay (0.938475ms)
+✔ old registered build cannot claim STEP (0.281852ms)
+✔ options refuse before policy without getter execution (0.620573ms)
+✔ discovery callbacks cannot hide replacement workspace (0.212611ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 402.737761

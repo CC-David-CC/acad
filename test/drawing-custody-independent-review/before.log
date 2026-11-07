@@ -1,0 +1,49 @@
+verb 2.0.0
+✔ current manager preserves drawing through genuine validation and Save (371.204365ms)
+verb 2.0.0
+✖ initial restore validity callback replacing actual manager must refuse before document generation changes (271.078123ms)
+verb 2.0.0
+✖ old manager Save preparation after reactivation must not authenticate old drawing as current (256.748589ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1229.191882
+
+✖ failing tests:
+
+test at test/drawing-custody-independent-review/review.test.mjs:11:1
+✖ initial restore validity callback replacing actual manager must refuse before document generation changes (271.078123ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 1
+  
+      at file:///tmp/codi-drawing-custody-review-20261107/test/drawing-custody-independent-review/review.test.mjs:15:48
+      at async use (file:///tmp/codi-drawing-custody-review-20261107/test/drawing-custody-independent-review/review.test.mjs:9:46)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/drawing-custody-independent-review/review.test.mjs:17:1
+✖ old manager Save preparation after reactivation must not authenticate old drawing as current (256.748589ms)
+  AssertionError [ERR_ASSERTION]: orphaned manager must not authenticate Save
+      at file:///tmp/codi-drawing-custody-review-20261107/test/drawing-custody-independent-review/review.test.mjs:20:9
+      at async use (file:///tmp/codi-drawing-custody-review-20261107/test/drawing-custody-independent-review/review.test.mjs:9:46)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

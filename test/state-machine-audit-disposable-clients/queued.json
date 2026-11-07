@@ -1,0 +1,122 @@
+{
+  "scope": "Real production clients with serialized WebLock/Worker doubles",
+  "rows": [
+    {
+      "family": "physical",
+      "scenario": "queued",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "queuedOutcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "queued",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Prism semantic Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "queuedOutcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "queued",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Sketch Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "queuedOutcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    }
+  ]
+}

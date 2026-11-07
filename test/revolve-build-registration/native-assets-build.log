@@ -1,0 +1,50 @@
+
+> jsketcher@0.1.0 build:prism-workers
+> node build/prepare-prism-assets.cjs && webpack --config build/webpack.prism-semantic-worker.cjs && node build/prepare-raw-smlib-assets.cjs && npm run build:polygon-profile-worker && npm run build:mechanical-profile-worker && npm run build:boolean-history-worker && npm run build:revolve-profile
+
+{"inputSha256":"7dfb70d551333756d9936f7a7882d9f8f5482b921c7bee398e95ad03ef979641","outputSha256":"a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884","wasm":"unchanged"}
+{"embeddedWorkerSHA256":"ba08bd6c4d4a88084e450fff722c35e509e0a437df3eabd72bff25d1549e3d6b"}
+{"embeddedManifoldWorkerSHA256":"35876bd7cd773b5eb243fde935599afb670314c192ba77ec11036dcb12aa79e4"}
+asset worker.js 1.38 MiB [emitted] (name: main) 1 related asset
+runtime modules 1.25 KiB 6 modules
+modules by path ./modules/ 489 KiB
+  modules by path ./modules/geom/ 106 KiB 17 modules
+  modules by path ./modules/engine/ 112 KiB 14 modules
+  modules by path ./modules/brep/ 208 KiB 13 modules
+  modules by path ./modules/math/ 44.6 KiB 9 modules
+  modules by path ./modules/workbenches/modeler/features/extrude/*.mjs 18.9 KiB
+    ./modules/workbenches/modeler/features/extrude/rectangleProfileRequest.mjs 9.65 KiB [built] [code generated]
+    + 2 modules
+modules by path ./web/app/ 21.1 KiB
+  ./web/app/cad/tess/pip.js 5.57 KiB [built] [code generated]
+  ./web/app/utils/errors.js 5.85 KiB [built] [code generated]
+  ./web/app/cad/cad-utils.js 9.65 KiB [built] [code generated]
+../codi-four-corner-clean-integrated-20261104/node_modules/lodash/lodash.js 531 KiB [built] [code generated]
+./node_modules/.cache/codi-numeric/precompiled.js 289 KiB [built] [code generated]
+webpack 5.74.0 compiled successfully in 4150 ms
+asset raw-smlib-worker.js 11.4 KiB [compared for emit] [minimized] (name: main)
+orphan modules 15.2 KiB [orphan] 2 modules
+./modules/engine/raw-smlib/rawWorker.js + 2 modules 20 KiB [built] [code generated]
+webpack 5.74.0 compiled successfully in 754 ms
+node:fs:3210
+  binding.copyFile(
+          ^
+
+Error: EACCES: permission denied, copyfile '/mnt/data10tb/codi-revolve-catalog-registration-20261106-r1/node_modules/.cache/codi-raw-smlib/raw-provider.wasm' -> '/mnt/data10tb/codi-revolve-catalog-registration-20261106-r1/.build/raw-smlib-worker/raw-provider.wasm'
+    at Object.copyFileSync (node:fs:3210:11)
+    at Object.<anonymous> (/mnt/data10tb/codi-revolve-catalog-registration-20261106-r1/build/prepare-raw-smlib-assets.cjs:14:4)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'copyfile',
+  path: '/mnt/data10tb/codi-revolve-catalog-registration-20261106-r1/node_modules/.cache/codi-raw-smlib/raw-provider.wasm',
+  dest: '/mnt/data10tb/codi-revolve-catalog-registration-20261106-r1/.build/raw-smlib-worker/raw-provider.wasm'
+}
+
+Node.js v24.22.1

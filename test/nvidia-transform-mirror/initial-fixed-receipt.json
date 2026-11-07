@@ -1,0 +1,50 @@
+[
+  {
+    "mode": 0,
+    "exitCode": 0,
+    "stdout": "{\"phase\":\"before\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n{\"mode\":0,\"operationStatus\":1000}\n{\"phase\":\"after\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n",
+    "stderr": ""
+  },
+  {
+    "mode": 1,
+    "exitCode": 0,
+    "stdout": "{\"phase\":\"before\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n{\"mode\":1,\"operationStatus\":1000}\n{\"phase\":\"after\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n",
+    "stderr": ""
+  },
+  {
+    "mode": 2,
+    "exitCode": 0,
+    "stdout": "{\"phase\":\"before\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n{\"mode\":2,\"operationStatus\":1000}\n{\"phase\":\"after\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[2.0000000000000002e-05,2.0000000000000002e-05],\"edgeTolerance\":[2.0000000000000002e-05,2.0000000000000002e-05],\"faceTolerance\":[2.0000000000000002e-05,2.0000000000000002e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n",
+    "stderr": ""
+  },
+  {
+    "mode": 3,
+    "exitCode": 0,
+    "stdout": "{\"phase\":\"before\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n{\"mode\":3,\"operationStatus\":1000}\n{\"phase\":\"after\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n",
+    "stderr": ""
+  },
+  {
+    "mode": 4,
+    "exitCode": 0,
+    "stdout": "{\"phase\":\"before\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n{\"mode\":4,\"operationStatus\":1000}\n{\"phase\":\"after\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n",
+    "stderr": ""
+  },
+  {
+    "mode": 5,
+    "exitCode": 0,
+    "stdout": "{\"phase\":\"before\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n{\"mode\":5,\"operationStatus\":1000}\n{\"phase\":\"after\",\"vertices\":1,\"edges\":2,\"faces\":1,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":0,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n",
+    "stderr": ""
+  },
+  {
+    "mode": 6,
+    "exitCode": 0,
+    "stdout": "{\"phase\":\"before\",\"vertices\":8,\"edges\":12,\"faces\":6,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":12,\"circles\":0,\"otherBSplines\":0,\"otherCurves\":0}\n{\"mode\":6,\"operationStatus\":1000}\n{\"phase\":\"after\",\"vertices\":8,\"edges\":12,\"faces\":6,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":12,\"circles\":0,\"otherBSplines\":0,\"otherCurves\":0}\n",
+    "stderr": ""
+  },
+  {
+    "mode": 7,
+    "exitCode": 0,
+    "stdout": "{\"phase\":\"before\",\"vertices\":2,\"edges\":3,\"faces\":3,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":1,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n{\"mode\":7,\"operationStatus\":1000}\n{\"phase\":\"after\",\"vertices\":2,\"edges\":3,\"faces\":3,\"vertexTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"edgeTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"faceTolerance\":[1.0000000000000001e-05,1.0000000000000001e-05],\"lines\":1,\"circles\":2,\"otherBSplines\":0,\"otherCurves\":0}\n",
+    "stderr": ""
+  }
+]

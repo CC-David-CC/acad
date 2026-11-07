@@ -1,0 +1,14 @@
+✔ duplicate initialization preserves one healthy initializer (0.772088ms)
+✔ concurrent same-token native work cannot overwrite ownership (1.161302ms)
+✔ normal controller still serializes native calls (0.165962ms)
+✔ recoverable typed refusal returns to ready without native-name loss (0.781888ms)
+✔ fatal initialization cannot be retried in the same Worker (1.083291ms)
+✔ fatal native-handle integrity failure cannot accept late native work (0.153812ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 68.956675

@@ -1,0 +1,25 @@
+{
+  "appSha256": "41764cb64ae096277673eeb0acddb424642ee977be33e45dcfe0b831d14b6af1",
+  "rows": [
+    {
+      "case": "D-union-insert",
+      "wholeContainerReplay": true,
+      "initialVolume": 1784,
+      "finalVolume": 2000
+    },
+    {
+      "case": "insert-union-D",
+      "wholeContainerReplay": true,
+      "initialVolume": 1784,
+      "finalVolume": 2000
+    },
+    {
+      "case": "island",
+      "volume": 792,
+      "editedVolume": 992,
+      "hiddenPreview": true,
+      "editTravelAndFreshReplay": true
+    }
+  ],
+  "scope": "bounded exact-box native/container evidence; no material-side tessellation or manufacturing qualification"
+}

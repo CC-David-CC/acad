@@ -1,0 +1,1621 @@
+{
+  "version": 1,
+  "nativeSource": "8db6c88a9e5a7fe561f77b8a6d6e9fa822dda52e",
+  "kernelPatch": "6c99bfcfe6c7b9735a8c617b4207921c64b0555e",
+  "scope": "Existing pinned diagnostic native WASM in real Workers; no app provider, fake geometry or native source edits",
+  "browser": "Chrome/155.0.8059.79",
+  "runs": {
+    "baseline": {
+      "pins": {
+        "glue": "af32c74530a8fcdd0238726509f43ac4cf00b0621d39a561a3fd1ce9e7cd92f9",
+        "wasm": "542c13cabd28ff0a3287c42476e84092f2817e1054430bb4431995ac62ab1803",
+        "worker": "414276817a36ad8ba9c28f2b154a9f2048fceac1a9adc82b484b4375b5d38f53"
+      },
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; object-src 'none'",
+      "result": {
+        "outer": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "inner": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 216,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 216,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "far": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 1000.0000000000002,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "hollow": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 784,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 784,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            }
+          ]
+        },
+        "composite": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 1784,
+          "faces": 18,
+          "tessStatus": 1000,
+          "triangles": 36,
+          "meshSignedVolume": 1783.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "forward": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 1999.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "reverse": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 2000,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 1999.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "filled": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 0,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 0,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            }
+          ]
+        },
+        "filledReverse": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "reference": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 2000,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 1999.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "partialForward": {
+          "valid0": false,
+          "valid2": false,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 892,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 771.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            }
+          ]
+        },
+        "partialReverse": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 892,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 771.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            }
+          ]
+        },
+        "smallForward": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 792,
+          "faces": 18,
+          "tessStatus": 1000,
+          "triangles": 36,
+          "meshSignedVolume": 775.9999999999998,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "smallReverse": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 792,
+          "faces": 18,
+          "tessStatus": 1000,
+          "triangles": 36,
+          "meshSignedVolume": 776,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 2
+            }
+          ]
+        },
+        "largeForward": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 0,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 0,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            }
+          ]
+        },
+        "largeReverse": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "empty": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": false,
+          "censusStatus": 1000,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volumeStatus": -1,
+          "volume": null,
+          "faces": 0,
+          "tessStatus": 1001,
+          "triangles": 0,
+          "meshSignedVolume": 0,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 0
+            }
+          ]
+        },
+        "hcopy": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 784,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 784,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            }
+          ]
+        },
+        "compositeCopy": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 1784,
+          "faces": 18,
+          "tessStatus": 1000,
+          "triangles": 36,
+          "meshSignedVolume": 1783.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "forwardNested": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 2000,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 1999.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "filledNested": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "beforeOuter": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "beforeInner": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 216,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 216,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "beforeFar": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 1000.0000000000002,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "beforeH": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 784,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 784,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            }
+          ]
+        },
+        "beforeComposite": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 1784,
+          "faces": 18,
+          "tessStatus": 1000,
+          "triangles": 36,
+          "meshSignedVolume": 1783.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        }
+      }
+    },
+    "candidate": {
+      "pins": {
+        "glue": "03259700d14562d5dd2736f50864fc3950a5dcc3df9822554374e22beffdfe9d",
+        "wasm": "c23fce99b25edd65a145e5ae8f2a69da9a737d64660f1a43c116ee5451a62f4f",
+        "worker": "b7033d83162bd0b51bc6f9de69f1cc1c81a82b062f935e83797cc4dc601a9b3a"
+      },
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; object-src 'none'",
+      "result": {
+        "outer": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "inner": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 216,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 216,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "far": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 1000.0000000000002,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "hollow": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 784,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 784,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            }
+          ]
+        },
+        "composite": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 1784,
+          "faces": 18,
+          "tessStatus": 1000,
+          "triangles": 36,
+          "meshSignedVolume": 1783.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "forward": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 2000,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 1999.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "reverse": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 2000,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 1999.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "filled": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "filledReverse": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "reference": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 2000,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 1999.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "partialForward": {
+          "valid0": false,
+          "valid2": false,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 892,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 771.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            }
+          ]
+        },
+        "partialReverse": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 892,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 771.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            }
+          ]
+        },
+        "smallForward": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 792,
+          "faces": 18,
+          "tessStatus": 1000,
+          "triangles": 36,
+          "meshSignedVolume": 775.9999999999998,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "smallReverse": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 792,
+          "faces": 18,
+          "tessStatus": 1000,
+          "triangles": 36,
+          "meshSignedVolume": 776,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 2
+            }
+          ]
+        },
+        "largeForward": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "largeReverse": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "empty": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": false,
+          "censusStatus": 1000,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volumeStatus": -1,
+          "volume": null,
+          "faces": 0,
+          "tessStatus": 1001,
+          "triangles": 0,
+          "meshSignedVolume": 0,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 0
+            }
+          ]
+        },
+        "hcopy": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 784,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 784,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            }
+          ]
+        },
+        "compositeCopy": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 1784,
+          "faces": 18,
+          "tessStatus": 1000,
+          "triangles": 36,
+          "meshSignedVolume": 1783.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "forwardNested": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 2000,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 1999.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "filledNested": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "beforeOuter": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 999.9999999999999,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "beforeInner": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 216,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 216,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "beforeFar": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volumeStatus": 1000,
+          "volume": 1000,
+          "faces": 6,
+          "tessStatus": 1000,
+          "triangles": 12,
+          "meshSignedVolume": 1000.0000000000002,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        },
+        "beforeH": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 784,
+          "faces": 12,
+          "tessStatus": 1000,
+          "triangles": 24,
+          "meshSignedVolume": 784,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            }
+          ]
+        },
+        "beforeComposite": {
+          "valid0": true,
+          "valid2": true,
+          "manifoldStatus": 1000,
+          "manifold": true,
+          "censusStatus": 1000,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volumeStatus": 1000,
+          "volume": 1784,
+          "faces": 18,
+          "tessStatus": 1000,
+          "triangles": 36,
+          "meshSignedVolume": 1783.9999999999993,
+          "regions": [
+            {
+              "infinite": true,
+              "void": true,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 2
+            },
+            {
+              "infinite": false,
+              "void": true,
+              "shells": 1
+            },
+            {
+              "infinite": false,
+              "void": false,
+              "shells": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "status": "pass-bounded-corrections-and-baseline-reproduction",
+  "fullBooleanQualification": "not-qualified",
+  "open": [
+    "partialForward valid2=false retained",
+    "partial fill and island triangle-order discrepancy retained",
+    "specialized/infinite/attributed/custom-attribute guard negative controls untested",
+    "curved/general topology and app history untested"
+  ]
+}

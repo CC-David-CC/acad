@@ -1,0 +1,187 @@
+{
+  "source": "353fdc843",
+  "app": "e282632d4536af7bb964abe44f2ab6c7fef05e23b2d2120396b87e95ce2b6ca6",
+  "rows": [
+    {
+      "label": "representative",
+      "bytes": 17112,
+      "rows": [
+        {
+          "inspectMs": 1.4000000953674316,
+          "invokeMs": 45.69999980926514,
+          "serializations": [
+            0.19999980926513672,
+            0.09999990463256836,
+            0.20000004768371582
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 0.6999998092651367,
+          "invokeMs": 34.10000014305115,
+          "serializations": [
+            0.2999999523162842,
+            0.09999990463256836,
+            0.20000004768371582
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 0.5999999046325684,
+          "invokeMs": 33.90000009536743,
+          "serializations": [
+            0.20000004768371582,
+            0.10000014305114746,
+            0.19999980926513672
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 1.1000001430511475,
+          "invokeMs": 33.89999985694885,
+          "serializations": [
+            0.5,
+            0.5,
+            0.10000014305114746
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 0.5999999046325684,
+          "invokeMs": 35.700000047683716,
+          "serializations": [
+            0.10000014305114746,
+            0.09999990463256836,
+            0.09999990463256836
+          ],
+          "status": "accepted"
+        }
+      ],
+      "longTasks": [],
+      "heartbeatMaxMs": 55.89999985694885,
+      "heartbeatCount": 50
+    },
+    {
+      "label": "near-1MiB",
+      "bytes": 1047695,
+      "rows": [
+        {
+          "inspectMs": 7.900000095367432,
+          "invokeMs": 69.29999995231628,
+          "serializations": [
+            2,
+            2.700000047683716,
+            2
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 7.1000001430511475,
+          "invokeMs": 2528.2999999523163,
+          "serializations": [
+            2,
+            1.5,
+            1.5999999046325684
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 7.1000001430511475,
+          "invokeMs": 94.89999985694885,
+          "serializations": [
+            2.0999999046325684,
+            2.0999999046325684,
+            2.1000001430511475
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 6.300000190734863,
+          "invokeMs": 90.89999985694885,
+          "serializations": [
+            2.200000047683716,
+            1.3999998569488525,
+            1.0999999046325684
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 5.799999952316284,
+          "invokeMs": 89.59999990463257,
+          "serializations": [
+            1.7000000476837158,
+            1.2000000476837158,
+            1.1999998092651367
+          ],
+          "status": "accepted"
+        }
+      ],
+      "longTasks": [
+        69,
+        77,
+        65,
+        2535,
+        65,
+        102,
+        53,
+        97,
+        53,
+        95,
+        54
+      ],
+      "heartbeatMaxMs": 2601.7000000476837,
+      "heartbeatCount": 18
+    }
+  ],
+  "pausedAt": "second LengthRelation invocation after 8 seconds",
+  "frames": [
+    {
+      "function": "diff_match_patch.diff_commonPrefix",
+      "line": 10
+    },
+    {
+      "function": "c",
+      "line": 13
+    },
+    {
+      "function": "diff_match_patch.diff_halfMatch_",
+      "line": 14
+    },
+    {
+      "function": "diff_match_patch.diff_compute_",
+      "line": 3
+    },
+    {
+      "function": "diff_match_patch.diff_main",
+      "line": 1
+    },
+    {
+      "function": "__webpack_modules__../web/app/sketcher/history.js.HistoryManager.getDiff",
+      "line": 119159
+    },
+    {
+      "function": "__webpack_modules__../web/app/sketcher/history.js.HistoryManager._checkpoint",
+      "line": 119026
+    },
+    {
+      "function": "runSketchTransaction",
+      "line": 108022
+    },
+    {
+      "function": "addLengthRelation",
+      "line": 106412
+    },
+    {
+      "function": "addLengthRelationByIdsAtRevision",
+      "line": 106570
+    },
+    {
+      "function": "invokeByIds",
+      "line": 104160
+    },
+    {
+      "function": "",
+      "line": 0
+    }
+  ]
+}

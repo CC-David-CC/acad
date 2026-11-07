@@ -1,0 +1,27 @@
+✔ real dedicated Worker transfers actual Native artifact once and returns bound ZIP (84.053119ms)
+✔ separate parts retain distinct build groups; multi-region same part explicitly refuses (39.749036ms)
+✔ unknown/null materials and appearance never default (0.916409ms)
+✔ exact metadata getters/sparse/extra/duplicate/source binding reject before transfer (0.874959ms)
+✔ nonshared intrinsic buffer and aggregate mesh budgets are strict (11.233638ms)
+✔ damaged real binary refuses rather than repair (0.491705ms)
+✔ reply metadata never executes toJSON/getters or admits altered mapping (10.772023ms)
+✔ preaborted intrinsic signal with shadowed fields retains unconsumed input and allocates no Worker (0.574406ms)
+✔ actual Worker cancellation after dispatch consumes inputs and closes encoder only (7.009213ms)
+✔ falsey post failure and falsey cleanup preserve exact causes and detached state (1.94058ms)
+✔ intrinsic active signal subscription ignores own method overrides (6.494448ms)
+✔ empty assignment tables refuse explicitly and64KiB envelope budget is enforced (1.579617ms)
+✔ actual Worker unknown assignment and currentness loss retain consumed-input/no-write outcomes (468.500823ms)
+✔ synthetic routing/deadline controls close encoder; no synthetic geometry success (2.277044ms)
+✔ absent optional provenance leaves legacy ZIP byte-identical at same metadata date (30.269506ms)
+✔ optional provenance binds actual resource maps and malformed metadata refuses before writer (13.541382ms)
+✔ different parts may both name their sole region main; actual resources remain unambiguous (59.29522ms)
+✔ duplicate region IDs within same part and globally repeated body IDs still refuse (1.104671ms)
+✔ structural acceptance alone cannot certify live Native byte/source membership (22.609336ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 766.545592

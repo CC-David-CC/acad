@@ -1,0 +1,2 @@
+const path=require('node:path'),config=require('../../webpack.config.js');
+config.mode='development';config.entry=path.join(__dirname,'assets-entry.mjs');config.output={path:path.resolve(__dirname,'../../.build/exact-volume-asset-build'),filename:'assets.js'};config.optimization={minimize:false,splitChunks:false,runtimeChunk:false};config.devtool=false;config.stats='errors-warnings';module.exports=config;

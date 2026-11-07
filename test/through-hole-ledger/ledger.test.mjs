@@ -1,0 +1,17 @@
+// Recorded geometry, doubled transport/projection. No fresh native/app proof.
+import test from 'node:test';import assert from 'node:assert/strict';
+import {fixture} from './fixture.mjs';
+for(const i of [0,1,2])test(`source-bound holes inherit one genuine origin, fixture ${i}`,async()=>{
+ const f=fixture(i);try{
+  for(const step of f.steps){const result=await f.apply(step);assert.deepEqual(f.inspect(result.model),step.observed.selection);assert.equal(result.consumed.length,step.kind==='profile'?0:1);assert.equal(f.objects.size,1);assert.doesNotThrow(result.publicationCheck);}
+  assert.equal(f.factoryCalls,1);const calls=f.calls.filter(c=>c.op==='solid.holes.through');assert.equal(calls.length,2);assert.equal(calls[0].sourceHandle,calls[1].sourceHandle);assert.notEqual(calls[1].handle,calls[1].sourceHandle);
+  assert(!JSON.stringify(f.outputs.at(-1).model).includes('recordedTransportId'));assert.equal(f.inspect(f.outputs.at(-1).model).plan.sourceContexts.length,1);
+ }finally{f.owner.close();}assert.equal(f.closes,1);
+});
+for(const [label,patch,code] of [['source feature',{sourceFeatureId:99},'STALE_SOURCE'],['source face',{sourceFaceId:'wrong'},'STALE_SOURCE'],['source region',{sourceRegionId:'wrong'},'STALE_SOURCE'],['producer',{producerFeatureId:99,target:'worker-solid:1:[99,"body"]'},'INVALID_OPERAND']])test(`rejects stale ${label} before native dispatch`,async()=>{
+ const f=fixture();try{await f.apply(f.steps[0]);const n=f.calls.length;await assert.rejects(f.run('through-hole',{...f.steps[1].intent,...patch}),{code});assert.equal(f.calls.length,n);assert.equal(f.objects.size,1);await f.apply(f.steps[1]);}finally{f.owner.close();}
+});
+test('missing genuine profile binding cannot authorize a through-hole source',async()=>{const f=fixture();try{await f.apply({...f.steps[0],sourceBinding:undefined});const n=f.calls.length;await assert.rejects(f.run('through-hole',f.steps[1].intent),{code:'STALE_SOURCE'});assert.equal(f.calls.length,n);}finally{f.owner.close();}});
+test('changed source plane refuses dispatch and invalidates retained publication',async()=>{const f=fixture();try{const base=await f.apply(f.steps[0]);f.faces.set(f.face.id,{});const n=f.calls.length;await assert.rejects(f.run('through-hole',f.steps[1].intent),{code:'STALE_SOURCE'});assert.equal(f.calls.length,n);assert.throws(base.publicationCheck,{code:'STALE_SOURCE'});}finally{f.owner.close();}});
+test('consumed original output remains a private source, never a reused live operand',async()=>{const f=fixture();try{await f.apply(f.steps[0]);await f.apply(f.steps[1]);assert(!f.objects.has(f.steps[1].intent.target));await f.apply(f.steps[2]);const n=f.calls.length;await assert.rejects(f.run('through-hole',{...f.steps[1].intent,featureId:90}),{code:'INVALID_OPERAND'});assert.equal(f.calls.length,n);}finally{f.owner.close();}});
+for(const [name,transform] of [['missing origin',s=>{s.plan.sourceContexts=[];return s;}],['invented tool origin',s=>{s.plan.sourceContexts.push({kind:'sketch-profile',featureId:98,regionId:'tool'});return s;}]])test(`bad ${name} rejects before projection`,async()=>{const f=fixture(0,{selectionTransform:(s,step)=>step.kind==='through-hole'?transform(s):s});try{const base=await f.apply(f.steps[0]);const n=f.projections.length;await assert.rejects(f.apply(f.steps[1]),{code:'ENGINE_FAILURE'});assert.equal(f.projections.length,n);assert.equal(f.objects.get(base.outputId),base.model);assert.equal(f.owner.state,'closed');}finally{f.owner.close();}});

@@ -1,0 +1,2804 @@
+{
+  "version": 1,
+  "source": {
+    "commit": "6c99bfcfe6c7b9735a8c617b4207921c64b0555e",
+    "appSha256": null,
+    "workerSha256": "75fa2a4f7537ea17dad338f386b6e865cffccd0d7c52dadf448924b1c795a775",
+    "wasmSha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+    "scope": "test-only direct native binding, not installed CAD app runtime"
+  },
+  "cases": [
+    {
+      "id": "NATIVE-BOX-CELLS-HOLLOW-EXACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 1000,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "hollow-exact",
+          "baseline": "fail",
+          "candidate": "pass",
+          "classification": "corrected",
+          "newlyFailedChecks": [],
+          "nativeChanged": true
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.0"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-EXACT-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 1000,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "exact-hollow",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.1"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-HOLLOW-PARTIAL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "fail",
+      "expected": {
+        "volume": 892,
+        "materialRegions": 1,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": false,
+          "validLevel2": false,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volume": 892,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "fail",
+          "checks": {
+            "valid0": false,
+            "valid2": false,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "hollow-partial",
+          "baseline": "fail",
+          "candidate": "fail",
+          "classification": "baseline-failure-retained",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.2"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-PARTIAL-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 892,
+        "materialRegions": 1,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volume": 892,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "partial-hollow",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.3"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-HOLLOW-ISLAND",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "materialRegions": 2,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volume": 792,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "hollow-island",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.4"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-ISLAND-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "materialRegions": 2,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volume": 792,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "island-hollow",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.5"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-HOLLOW-ENCLOSING",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 1000,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "hollow-enclosing",
+          "baseline": "fail",
+          "candidate": "pass",
+          "classification": "corrected",
+          "newlyFailedChecks": [],
+          "nativeChanged": true
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.6"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-ENCLOSING-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 1000,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "enclosing-hollow",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.7"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-HOLLOW-DISJOINT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1784,
+        "materialRegions": 2,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volume": 1784,
+          "bounds": [
+            0,
+            0,
+            0,
+            30,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "hollow-disjoint",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.8"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-DISJOINT-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1784,
+        "materialRegions": 2,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volume": 1784,
+          "bounds": [
+            0,
+            0,
+            0,
+            30,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "disjoint-hollow",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.9"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-COMPOSITE-FILL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volume": 2000,
+          "bounds": [
+            0,
+            0,
+            0,
+            30,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "composite-fill",
+          "baseline": "fail",
+          "candidate": "pass",
+          "classification": "corrected",
+          "newlyFailedChecks": [],
+          "nativeChanged": true
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.10"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-FILL-COMPOSITE",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volume": 2000,
+          "bounds": [
+            0,
+            0,
+            0,
+            30,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "fill-composite",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.11"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-FILLED-BEFORE-DISJOINT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volume": 2000,
+          "bounds": [
+            0,
+            0,
+            0,
+            30,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "filled-before-disjoint",
+          "baseline": "fail",
+          "candidate": "pass",
+          "classification": "corrected",
+          "newlyFailedChecks": [],
+          "nativeChanged": true
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.12"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-COMPOSITE-MINUS-DISJOINT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 784,
+        "materialRegions": 1,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volume": 784,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "composite-minus-disjoint",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.13"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-COMPOSITE-COMMON-OUTER",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 784,
+        "materialRegions": 1,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volume": 784,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "composite-common-outer",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.14"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-DISJOINT-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "validLevel0": true,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volume": 0,
+          "bounds": null
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "disjoint-common",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.15"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-IDENTICAL-SUBTRACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "validLevel0": true,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volume": 0,
+          "bounds": null
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "identical-subtract",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.16"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-OVERLAP-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1500,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 1500,
+          "bounds": [
+            0,
+            0,
+            0,
+            15,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "overlap-union",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.17"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-OVERLAP-REVERSED-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1500,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 1500,
+          "bounds": [
+            0,
+            0,
+            0,
+            15,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "overlap-reversed-union",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.18"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-OVERLAP-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 500,
+          "bounds": [
+            5,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "overlap-common",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.19"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-OVERLAP-REVERSED-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 500,
+          "bounds": [
+            5,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "overlap-reversed-common",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.20"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-OVERLAP-SUBTRACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 500,
+          "bounds": [
+            0,
+            0,
+            0,
+            5,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "overlap-subtract",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.21"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-OVERLAP-REVERSED-SUBTRACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 500,
+          "bounds": [
+            10,
+            0,
+            0,
+            15,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "overlap-reversed-subtract",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.22"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-FACE-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 2000,
+          "bounds": [
+            0,
+            0,
+            0,
+            20,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "contact-face-union",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.23"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-FACE-UNION-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 2000,
+          "bounds": [
+            0,
+            0,
+            0,
+            20,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "contact-face-union-reversed",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.24"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-FACE-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "validLevel0": true,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volume": 0,
+          "bounds": null
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology is outside positive-volume cell oracle"
+        },
+        "baselineComparison": {
+          "id": "contact-face-common",
+          "baseline": "not-tested",
+          "candidate": "not-tested",
+          "classification": "boundary-scope-not-qualified",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.25"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-FACE-COMMON-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "validLevel0": true,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volume": 0,
+          "bounds": null
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology is outside positive-volume cell oracle"
+        },
+        "baselineComparison": {
+          "id": "contact-face-common-reversed",
+          "baseline": "not-tested",
+          "candidate": "not-tested",
+          "classification": "boundary-scope-not-qualified",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.26"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-EDGE-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": false,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volume": null,
+          "bounds": [
+            0,
+            0,
+            0,
+            20,
+            20,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": null
+          },
+          "volumeScope": "native-nonmanifold-volume-skipped"
+        },
+        "baselineComparison": {
+          "id": "contact-edge-union",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.27"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-EDGE-UNION-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": false,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volume": null,
+          "bounds": [
+            0,
+            0,
+            0,
+            20,
+            20,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": null
+          },
+          "volumeScope": "native-nonmanifold-volume-skipped"
+        },
+        "baselineComparison": {
+          "id": "contact-edge-union-reversed",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.28"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-EDGE-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "validLevel0": true,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volume": 0,
+          "bounds": null
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology is outside positive-volume cell oracle"
+        },
+        "baselineComparison": {
+          "id": "contact-edge-common",
+          "baseline": "not-tested",
+          "candidate": "not-tested",
+          "classification": "boundary-scope-not-qualified",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.29"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-EDGE-COMMON-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "validLevel0": true,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volume": 0,
+          "bounds": null
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology is outside positive-volume cell oracle"
+        },
+        "baselineComparison": {
+          "id": "contact-edge-common-reversed",
+          "baseline": "not-tested",
+          "candidate": "not-tested",
+          "classification": "boundary-scope-not-qualified",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.30"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-VERTEX-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volume": 2000,
+          "bounds": [
+            0,
+            0,
+            0,
+            20,
+            20,
+            20
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "contact-vertex-union",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.31"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-VERTEX-UNION-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volume": 2000,
+          "bounds": [
+            0,
+            0,
+            0,
+            20,
+            20,
+            20
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "contact-vertex-union-reversed",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.32"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-VERTEX-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "validLevel0": true,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volume": 0,
+          "bounds": null
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology is outside positive-volume cell oracle"
+        },
+        "baselineComparison": {
+          "id": "contact-vertex-common",
+          "baseline": "not-tested",
+          "candidate": "not-tested",
+          "classification": "boundary-scope-not-qualified",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.33"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-CONTACT-VERTEX-COMMON-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "validLevel0": true,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volume": 0,
+          "bounds": null
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology is outside positive-volume cell oracle"
+        },
+        "baselineComparison": {
+          "id": "contact-vertex-common-reversed",
+          "baseline": "not-tested",
+          "candidate": "not-tested",
+          "classification": "boundary-scope-not-qualified",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.34"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-TRANSLATED-PARTIAL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "fail",
+      "expected": {
+        "volume": 892,
+        "materialRegions": 1,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": false,
+          "validLevel2": false,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volume": 892,
+          "bounds": [
+            -13,
+            7,
+            29,
+            -3,
+            17,
+            39
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "fail",
+          "checks": {
+            "valid0": false,
+            "valid2": false,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "translated-partial",
+          "baseline": "fail",
+          "candidate": "fail",
+          "classification": "baseline-failure-retained",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.35"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-PERMUTED-PARTIAL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 892,
+        "materialRegions": 1,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "volume": 892,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "permuted-partial",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.36"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-TRANSLATED-FILL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volume": 2000,
+          "bounds": [
+            -13,
+            7,
+            29,
+            17,
+            17,
+            39
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "translated-fill",
+          "baseline": "fail",
+          "candidate": "pass",
+          "classification": "corrected",
+          "newlyFailedChecks": [],
+          "nativeChanged": true
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.37"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-PERMUTED-FILL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volume": 2000,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            30,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "permuted-fill",
+          "baseline": "fail",
+          "candidate": "pass",
+          "classification": "corrected",
+          "newlyFailedChecks": [],
+          "nativeChanged": true
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.38"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-TRANSLATED-ISLAND",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "materialRegions": 2,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volume": 792,
+          "bounds": [
+            -13,
+            7,
+            29,
+            -3,
+            17,
+            39
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "translated-island",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.39"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-PERMUTED-ISLAND",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "materialRegions": 2,
+        "voidRegions": 1,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "volume": 792,
+          "bounds": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "permuted-island",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.40"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-SEEDED-0",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "validLevel0": true,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volume": 0,
+          "bounds": null
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "seeded-0",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.41"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-SEEDED-1",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "validLevel0": true,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volume": 0,
+          "bounds": null
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "seeded-1",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.42"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-SEEDED-2",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "validLevel0": true,
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "volume": 0,
+          "bounds": null
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "seeded-2",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.43"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-SEEDED-3",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 339,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 339,
+          "bounds": [
+            0,
+            -4,
+            -6,
+            11,
+            5,
+            3
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "seeded-3",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.44"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-SEEDED-4",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 345,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 345,
+          "bounds": [
+            -1,
+            -4,
+            -2,
+            7,
+            3,
+            11
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "seeded-4",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.45"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-SEEDED-5",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 48,
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "volume": 48,
+          "bounds": [
+            -4,
+            -2,
+            -5,
+            0,
+            0,
+            1
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "seeded-5",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.46"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    },
+    {
+      "id": "NATIVE-BOX-CELLS-SEEDED-6",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 336,
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "volume": 336,
+          "bounds": [
+            -5,
+            -4,
+            0,
+            9,
+            5,
+            5
+          ]
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "valid0": true,
+            "valid2": true,
+            "materialRegions": true,
+            "voidRegions": true,
+            "sourcesUnchanged": true,
+            "volume": true
+          },
+          "volumeScope": "defined-native-volume-vs-exact-integer"
+        },
+        "baselineComparison": {
+          "id": "seeded-6",
+          "baseline": "pass",
+          "candidate": "pass",
+          "classification": "both-pass",
+          "newlyFailedChecks": [],
+          "nativeChanged": false
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "variants.candidate.rows.47"
+        }
+      ],
+      "scope": "Fixed bounded integer AABB expression; exact midpoint-cell volume and six-neighbor interior regions; no tessellation oracle, curved geometry, app history or export qualification."
+    }
+  ]
+}

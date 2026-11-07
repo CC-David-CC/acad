@@ -1,0 +1,29 @@
+✖ owner-bound operands are private and same exact current model (4.04132ms)
+✔ wrong engine and stale operands fail before dispatch (1.182391ms)
+✔ superseded worker completion closes its candidate and does not return a model (4.185351ms)
+✔ factory provenance validation fails closed and releases the owned mount (1.882588ms)
+✔ mismatched persisted engine build refuses before kernel dispatch (3.630056ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 80.321683
+
+✖ failing tests:
+
+test at ../codi-pattern-ledger-baseline-20261106/baseline.test.mjs:4:1
+✖ owner-bound operands are private and same exact current model (4.04132ms)
+  Error: Boolean operand is missing, stale or from another engine.
+      at fail (file:///tmp/codi-pattern-ledger-baseline-20261106/solidLedger.mjs:10:67)
+      at file:///tmp/codi-pattern-ledger-baseline-20261106/solidLedger.mjs:40:216
+      at Array.map (<anonymous>)
+      at evaluateWorkerSolid (file:///tmp/codi-pattern-ledger-baseline-20261106/solidLedger.mjs:40:31)
+      at run (file:///tmp/codi-pattern-ledger-baseline-20261106/baseline.test.mjs:4:118)
+      at TestContext.<anonymous> (file:///tmp/codi-pattern-ledger-baseline-20261106/baseline.test.mjs:4:533)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    code: 'INVALID_OPERAND'
+  }

@@ -1,0 +1,11 @@
+// Existing selected EqualLength action and actual headless Worker compatibility.
+const assert=require('node:assert/strict'),puppeteer=require(process.env.PUPPETEER_CORE_PATH||'puppeteer-core');
+const base=new URL(process.env.JSKETCHER_TEST_URL),cdp=new URL(process.env.CODI_TEST_CDP);
+for(const u of [base,cdp])if(!['127.0.0.1','localhost','[::1]'].includes(u.hostname))throw Error('Loopback only');
+(async()=>{const browser=await puppeteer.connect({browserURL:cdp.href}),context=await browser.createBrowserContext();try{
+ const page=await context.newPage();await page.goto(new URL('index-webos.html?DEFAULT&webos=1',base));await page.waitForFunction('__CAD_APP?.streams?.lifecycle?.projectLoaded?.value===true',{timeout:90000});await page.addScriptTag({url:new URL('static/webosTest.bundle.js',base).href});
+ const sketch=await page.evaluate(async()=>{window.Cypress={$:s=>{const a=[...document.querySelectorAll(s)];a.index=n=>a.indexOf(n);return a}};const ui=webosTest.modellerUISubject(__CAD_APP),[s]=await webosTest.createPlaneAndOpenSketcher(ui),ctx=__CAD_APP.services.sketcher.inPlaceEditor.sketcherAppContext;const a=s.addSegment(0,0,30,0),b=s.addSegment(0,10,10,10);s.select([a,b]);ctx.actions.EntityEqualityGlobal.invoke(ctx);return JSON.parse(s.viewer.io.serializeSketch(undefined,{strict:true}))});
+ const equal=sketch.stages.flatMap(s=>s.constraints).find(c=>c.typeId==='EqualLength');assert.ok(equal);sketch.boundary||={lines:[],arcs:[],circles:[],nurbses:[]};
+ const solved=await page.evaluate(({sketch,url})=>new Promise((resolve,reject)=>{const w=new Worker(url),timer=setTimeout(()=>{w.terminate();reject(Error('Worker timeout'))},30000);w.onerror=e=>{clearTimeout(timer);w.terminate();reject(Error(e.message))};w.onmessage=e=>{clearTimeout(timer);w.terminate();resolve(e.data)};w.postMessage({revision:'equal-ui',sketch,boundary:structuredClone(sketch.boundary),externalParameters:{}})}),{sketch,url:new URL(process.env.LENGTH_WORKER,base).href});
+ assert.equal(solved.ok,true,JSON.stringify(solved));assert.ok(solved.evidence.some(e=>e.typeId==='EqualLength'&&e.state==='accepted'));console.log('PASS actual EqualLength selection serializes and solves in actual Worker');
+ }finally{await context.close();browser.disconnect()}})().catch(e=>{console.error(e.stack);process.exitCode=1});

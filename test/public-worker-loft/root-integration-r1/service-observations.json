@@ -1,0 +1,110 @@
+{
+  "status": "OBSERVATIONS_ONLY_SEE_TAP",
+  "scope": "Actual production sketch/semantic Workers and coordinator boundary; no accepted/native solid or app UI fabricated",
+  "lifecycle": {
+    "started": 53,
+    "terminated": 53
+  },
+  "requests": 53,
+  "reports": [
+    {
+      "kind": "actual-worker-discovery",
+      "result": {
+        "revision": "creation:1",
+        "unit": "millimeter",
+        "engine": "occ",
+        "engineRevision": "sha256:5ce2aa94ecdd48dc16f0b9c3ad2a065ea1416ddb7d123c3168661e31ade0a1b5:b18af4376fb0fb8b4aaa7478ede6b47346c331ee45e1198347c0a70232fd4180",
+        "sections": [
+          {
+            "faceId": "S:6/SURFACE",
+            "sourceDigest": "df2a48ee85f9d0461d9519e7573d9e3d56cb9b000439031e63126e23b9364063",
+            "regions": [
+              {
+                "regionId": "sketch-region:{\"faceId\":\"S:6/SURFACE\",\"outer\":[\"S:6/SURFACE/agent-primitive-4da00023-8f5d-4b6c-9920-adf79c8c9a97\"],\"holes\":[]}",
+                "support": "supported",
+                "reason": null,
+                "descriptor": {
+                  "outerCurveIds": [
+                    "agent-primitive-4da00023-8f5d-4b6c-9920-adf79c8c9a97"
+                  ],
+                  "holeCurveIds": []
+                },
+                "sectionKind": "circle",
+                "edgeCount": 1,
+                "seams": [
+                  {
+                    "kind": "circle-angle",
+                    "curveId": "agent-primitive-4da00023-8f5d-4b6c-9920-adf79c8c9a97"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "faceId": "S:7/SURFACE",
+            "sourceDigest": "db966bbd4e70458c451d58b54704c681fd3da84921f530b77ef61ebebe4315c3",
+            "regions": [
+              {
+                "regionId": "sketch-region:{\"faceId\":\"S:7/SURFACE\",\"outer\":[\"S:7/SURFACE/agent-primitive-d6e7ac1b-b04c-4c3d-a94d-7a0f6cc806f8\"],\"holes\":[]}",
+                "support": "supported",
+                "reason": null,
+                "descriptor": {
+                  "outerCurveIds": [
+                    "agent-primitive-d6e7ac1b-b04c-4c3d-a94d-7a0f6cc806f8"
+                  ],
+                  "holeCurveIds": []
+                },
+                "sectionKind": "circle",
+                "edgeCount": 1,
+                "seams": [
+                  {
+                    "kind": "circle-angle",
+                    "curveId": "agent-primitive-d6e7ac1b-b04c-4c3d-a94d-7a0f6cc806f8"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "qualification": "source-membership/domain-only; section placement, correspondence and solid validity require native evaluation"
+      }
+    },
+    {
+      "kind": "shared-submit-routing-only",
+      "operation": {
+        "type": "WORKER_SELECTED_PROFILE_LOFT_V1",
+        "params": {
+          "version": 1,
+          "unit": "millimeter",
+          "engine": "occ",
+          "engineRevision": "sha256:5ce2aa94ecdd48dc16f0b9c3ad2a065ea1416ddb7d123c3168661e31ade0a1b5:b18af4376fb0fb8b4aaa7478ede6b47346c331ee45e1198347c0a70232fd4180",
+          "featureId": 3,
+          "sections": [
+            {
+              "faceId": "S:8/SURFACE",
+              "regionId": "sketch-region:{\"faceId\":\"S:8/SURFACE\",\"outer\":[\"S:8/SURFACE/agent-primitive-4da00023-8f5d-4b6c-9920-adf79c8c9a97\"],\"holes\":[]}",
+              "seam": {
+                "kind": "circle-angle",
+                "curveId": "agent-primitive-4da00023-8f5d-4b6c-9920-adf79c8c9a97",
+                "angleRadians": 0,
+                "reversed": false
+              }
+            },
+            {
+              "faceId": "S:9/SURFACE",
+              "regionId": "sketch-region:{\"faceId\":\"S:9/SURFACE\",\"outer\":[\"S:9/SURFACE/agent-primitive-d6e7ac1b-b04c-4c3d-a94d-7a0f6cc806f8\"],\"holes\":[]}",
+              "seam": {
+                "kind": "circle-angle",
+                "curveId": "agent-primitive-d6e7ac1b-b04c-4c3d-a94d-7a0f6cc806f8",
+                "angleRadians": 1.0471975511965976,
+                "reversed": true
+              }
+            }
+          ],
+          "construction": "ruled-solid",
+          "bodyPolicy": "separate"
+        }
+      }
+    }
+  ]
+}

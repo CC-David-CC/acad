@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "sourceBase": "9f835a929b36e0639f25457424c6d5059ae7cd90",
+  "scope": "Source-controlled actual common model/ledger/inspection with controlled provider records; not native-kernel/browser qualification",
+  "sourceControls": {
+    "status": "pass",
+    "tests": 14,
+    "log": "source-controls.log"
+  },
+  "typescript": {
+    "status": "pass",
+    "command": "node node_modules/typescript/bin/tsc --noEmit --pretty false"
+  },
+  "integratedNativeBrowserHistorySave": {
+    "status": "not-tested",
+    "owner": "root matched build and independent browser lane"
+  }
+}

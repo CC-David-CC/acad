@@ -1,0 +1,1686 @@
+{
+  "version": 1,
+  "source": "2ad57a006df613c4ce0cbdfb1743742bfb26a763",
+  "base": "3bd196f31",
+  "scope": "Pure comparison-method differential controls; no fake viewer, browser or new native history runtime claim",
+  "seed": 118595117,
+  "node": "v24.22.1",
+  "rows": [
+    {
+      "id": "mixed-stages-only-absent-hint-added",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "saved-hint-changed",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "saved-hint-removed",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "explicit-null-hint-is-owned",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "constraint-order-retained",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "stage-order-retained",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "geometry-retained",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "metadata-retained",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "extra-constraint-field-retained",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "array-vs-object-not-equivalent",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "prototype-names-are-own-json-data",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "key-value-__proto__",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "key-value-constructor",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "key-value-toJSON",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "key-value-01",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "key-value-1",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "key-value-a.b",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-0",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-0",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-1",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-1",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-2",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-2",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-3",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-3",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-4",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-4",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-5",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-5",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-6",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-6",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-7",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-7",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-8",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-8",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-9",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-9",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-10",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-10",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-11",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-11",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-12",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-12",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-13",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-13",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-14",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-14",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-15",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-15",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-16",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-16",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-17",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-17",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-18",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-18",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-19",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-19",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-20",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-20",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-21",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-21",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-22",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-22",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-23",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-23",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-24",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-24",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-25",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-25",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-26",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-26",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-27",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-27",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-28",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-28",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-29",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-29",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-30",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-30",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-31",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-31",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-32",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-32",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-33",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-33",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-34",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-34",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-35",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-35",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-36",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-36",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-37",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-37",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-38",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-38",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-39",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-39",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-40",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-40",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-41",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-41",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-42",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-42",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-43",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-43",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-44",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-44",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-45",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-45",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-46",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-46",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-47",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-47",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-48",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-48",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-49",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-49",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-50",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-50",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-51",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-51",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-52",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-52",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-53",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-53",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-54",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-54",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-55",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-55",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-56",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-56",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-57",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-57",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-58",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-58",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-59",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-59",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-60",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-60",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-61",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-61",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-62",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-62",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-63",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-63",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-64",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-64",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-65",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-65",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-66",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-66",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-67",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-67",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-68",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-68",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-69",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-69",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-70",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-70",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-71",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-71",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-72",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-72",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-73",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-73",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-74",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-74",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-75",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-75",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-76",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-76",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-77",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-77",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-78",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-78",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-79",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-79",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-80",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-80",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-81",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-81",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-82",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-82",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-83",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-83",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-84",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-84",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-85",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-85",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-86",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-86",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-87",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-87",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-88",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-88",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-89",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-89",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-90",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-90",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-91",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-91",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-92",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-92",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-93",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-93",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-94",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-94",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-95",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-95",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-96",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-96",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-97",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-97",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-98",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-98",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-99",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-99",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-100",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-100",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-101",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-101",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-102",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-102",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-103",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-103",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-104",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-104",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-105",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-105",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-106",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-106",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-107",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-107",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-108",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-108",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-109",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-109",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-110",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-110",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-111",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-111",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-112",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-112",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-113",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-113",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-114",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-114",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-115",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-115",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-116",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-116",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-117",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-117",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-118",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-118",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-119",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-119",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-120",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-120",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-121",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-121",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-122",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-122",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-123",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-123",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-124",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-124",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-125",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-125",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-126",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-126",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "fixed-seed-key-permutation-127",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "fixed-seed-added-key-127",
+      "previous": false,
+      "current": false,
+      "expected": false
+    },
+    {
+      "id": "large-full-string-key-permutation",
+      "previous": true,
+      "current": true,
+      "expected": true
+    },
+    {
+      "id": "large-late-character-difference",
+      "previous": false,
+      "current": false,
+      "expected": false
+    }
+  ],
+  "allocations": {
+    "previous": {
+      "parses": 4,
+      "stringifies": 4,
+      "generatedCodeUnits": 4161920
+    },
+    "current": {
+      "parses": 2,
+      "stringifies": 0,
+      "generatedCodeUnits": 0
+    },
+    "scope": "Comparator JSON call instrumentation only; not peak/RSS or all history allocations"
+  },
+  "largeInputCodeUnits": 1040480,
+  "invalidOutsideNative": {
+    "overflowVsNull": {
+      "previous": true,
+      "current": false
+    },
+    "scope": "Syntactically valid JSON numeric overflow; strict native IO rejects nonfinite geometry. New comparison refuses the old stringify-to-null collision."
+  },
+  "testSources": {
+    "review.mjs": "7f287103698032a2b569f464da371aae3b4c09c88aa32484c0f5c612fab58c13",
+    "previous.mjs": "fc88e85a3a332d71bc06553bc3fce63b53313594af361dc4f7484da362f78855",
+    "../../web/app/sketcher/historyEquivalence.mjs": "1b24fc866a09947efab2bd18815d738057623406fe79261129622375f9484b8d"
+  }
+}

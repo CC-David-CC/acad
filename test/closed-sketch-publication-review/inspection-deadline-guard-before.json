@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "source": "467a145c1a620b36dcf8160287a9b449b5a3990d",
+  "clientSha256": "c4497de7a8dda9078a718c52abcc1c9f88472d8a62704d42b37415fd8ec3f184",
+  "layer": "actual-browser-client-controlled-guard-cost-labeled-worker-double",
+  "targetId": "E2BD276E73AFA92EEE4282394B77181A",
+  "status": "rejected",
+  "name": "AbortError",
+  "message": "Sketch solve cancelled",
+  "workers": 0,
+  "terminated": 0,
+  "calls": 2,
+  "burned": true,
+  "signalAborted": false,
+  "elapsedMs": 46
+}

@@ -1,0 +1,29 @@
+{
+  "coreCommit": "1a3988fefeadc520d1bbbae30cb9162152222dae",
+  "desktopCommit": "4347211b9eeaf59bb3a8b6d7ce5211c334c09d2f",
+  "coreSourceHashes": {
+    "web/app/cad/projectManager/projectManagerBundle.ts": "53451a2922f99b7a9d2c43b39340037888d17639e8715e1633658fd43de0ebc2",
+    "web/app/cad/projectManager/projectEnvelope.mjs": "82c063f8fdd86785af14b49f699e9c244b2d0c7ac879f4400b3dc328894d9e2e",
+    "web/app/cad/projectManager/failOwnedRestore.mjs": "1a9851edb3b348a2ea14e407a2a5c015af730cace6b771defcd285268b436301",
+    "web/app/cad/projectManager/captureDocumentJobOptions.mjs": "f340f2ce794e9b4ef049d726257f011c46b24db01b8eeb5d6acbd565baa973df",
+    "test/display-units/manager-fixture.mjs": "ae446999477b5e190f2c59477fdfdfbeb5e9a501dd7b666acc1039ab96b28c36",
+    "test/linked-part-drawing-definition/fixture.mjs": "f7d221e6482d99852ebe77872e42378e8f9aa7c72f5b1dbb2b0d9d4b9134d6b6",
+    "test/drawing-custody-independent-review/review.test.mjs": "42ef768e3a790882411a4526a5042b6e5b96d48dcd5b57f46e4627448bdc5c3a"
+  },
+  "desktopSourceHashes": {
+    "apps/system/jsketcher/index.mjs": "dc1b30f337a65b4bf5c0794dcc7a948555c3eb5f7b8a8d14e1d5202e4c09a4f5",
+    "apps/system/jsketcher/inspect-state.mjs": "67a9dcd25d7e0a855f973ccdcfaffd2e2adc1f7b5cd8e413962bb0f67254957f"
+  },
+  "generatedFixtureSHA256": "c322dc731b1bbb3ae742428035923728c3e68207f20a38f48640501f11d536e0",
+  "actualValidationWorker": {
+    "sha256": "cbf7f98a1e2aac68808ba36898a91685f9d27178132f9de2a632a0fb2cc392a6",
+    "bytes": 726511
+  },
+  "scope": "Actual PM/Workers; empty project and synthetic drawing metadata; no Native/signed app claim",
+  "testResult": {
+    "tests": 3,
+    "pass": 1,
+    "fail": 2
+  },
+  "cleanup": "All test-owned Node Workers drained; no browser/services started."
+}

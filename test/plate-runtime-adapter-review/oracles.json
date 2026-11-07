@@ -1,0 +1,163 @@
+{
+  "status": "ANALYTIC_EXPECTATIONS_ONLY_UNEXECUTED",
+  "volumeToleranceMm3": "max(1e-6,1e-9*abs(expected))",
+  "boundsToleranceMm": 1e-7,
+  "pointClassificationToleranceMm": 1e-7,
+  "rectangleConstraintResidualMm": 1e-8,
+  "cases": [
+    {
+      "unit": "millimeter",
+      "width": 100,
+      "height": 50,
+      "depth": 20,
+      "centerDiameter": 10,
+      "cornerDiameter": 4,
+      "offsetX": 10,
+      "offsetY": 10,
+      "volumesMm3": {
+        "rectangle": 100000,
+        "centered": 98429.2036732051,
+        "fiveHoles": 97423.89402405637,
+        "fiveHolesAndFourVerticalFilletsR2": 97355.22143634355,
+        "fiveHolesAndFourVerticalChamfers1": 97383.89402405637
+      },
+      "bounds": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          100,
+          50,
+          20
+        ]
+      },
+      "centers": [
+        [
+          50,
+          25
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          90,
+          10
+        ],
+        [
+          90,
+          40
+        ],
+        [
+          10,
+          40
+        ]
+      ]
+    },
+    {
+      "unit": "millimeter",
+      "width": 100,
+      "height": 50,
+      "depth": 12,
+      "centerDiameter": 10,
+      "cornerDiameter": 4,
+      "offsetX": 10,
+      "offsetY": 10,
+      "volumesMm3": {
+        "rectangle": 60000,
+        "centered": 59057.522203923065,
+        "fiveHoles": 58454.33641443382,
+        "fiveHolesAndFourVerticalFilletsR2": 58413.13286180613,
+        "fiveHolesAndFourVerticalChamfers1": 58430.33641443382
+      },
+      "bounds": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          100,
+          50,
+          12
+        ]
+      },
+      "centers": [
+        [
+          50,
+          25
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          90,
+          10
+        ],
+        [
+          90,
+          40
+        ],
+        [
+          10,
+          40
+        ]
+      ]
+    },
+    {
+      "unit": "millimeter",
+      "width": 150,
+      "height": 30,
+      "depth": 20,
+      "centerDiameter": 10,
+      "cornerDiameter": 4,
+      "offsetX": 10,
+      "offsetY": 10,
+      "volumesMm3": {
+        "rectangle": 90000,
+        "centered": 88429.2036732051,
+        "fiveHoles": 87423.89402405637,
+        "fiveHolesAndFourVerticalFilletsR2": 87355.22143634355,
+        "fiveHolesAndFourVerticalChamfers1": 87383.89402405637
+      },
+      "bounds": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          150,
+          30,
+          20
+        ]
+      },
+      "centers": [
+        [
+          75,
+          15
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          140,
+          10
+        ],
+        [
+          140,
+          20
+        ],
+        [
+          10,
+          20
+        ]
+      ]
+    }
+  ],
+  "scope": "Four convex outer vertical edges; fillet/chamfer in separate genuine parts. Full original-rectangle seven-hole/pattern test remains required."
+}

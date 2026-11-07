@@ -1,0 +1,11 @@
+{"scope":"Actual oriented triangle integral range; not a closed mesh/native CAD geometry or public admission","rows":[{"scale":1e+200,"code":"MESH_VOLUME_NUMERIC_RANGE","message":"Exact mesh integral overflows binary64."},{"scale":1e-200,"code":"MESH_VOLUME_NUMERIC_RANGE","message":"Nonzero exact mesh integral rounds below binary64 range."}]}
+✔ actual exact-integral helper attributes overflow and underflow in a real Worker (40.655971ms)
+✔ the exact numeric-range Worker error branch closes before return (67.912722ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 189.262756

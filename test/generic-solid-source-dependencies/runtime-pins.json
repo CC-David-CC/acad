@@ -1,0 +1,30 @@
+{
+  "source": "20ada87473b452ad3302e4c2bc286462bb1be3d1",
+  "workers": {
+    "sketch-solver": [
+      "sketch-solver.c29fb61fba66f49e7124.js"
+    ],
+    "project-validator": [
+      "project-validator.f8fd1104e6aa9df00d7d.js"
+    ],
+    "prism-semantic": [
+      "prism-semantic.334b28c725a9ef9b0d97.js"
+    ]
+  },
+  "files": {
+    "index.bundle.js": "7ca0b4811cf759aad7b23f4ba5b87640bda9f0b3b49099c88abbec1460e479f4",
+    "selected-profile-worker.js": "0f3240cdde9b5faced831ace71ee5ffcfb6fe159dacba5b7265e5a09b0ca9853",
+    "selected-profile-occ-portable.js": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+    "a81af0b78dd585124f3f.wasm": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+    "sketch-solver.c29fb61fba66f49e7124.js": "f15e6d50518663856b423733bf614bf2fcdd1a79f68e55e8e374f15df883bcde",
+    "project-validator.f8fd1104e6aa9df00d7d.js": "923648368f43642ff996cf21715f5be55b8458086a445525fd50f135b70ea98a",
+    "prism-semantic.334b28c725a9ef9b0d97.js": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3"
+  },
+  "runtime": "/mnt/data10tb/codi-generic-solid-source-dependencies-20261106-r1",
+  "port": 20685,
+  "removedCopiedUnreferencedWorkers": [
+    "sketch-solver.bd9a5a96b8d7ede6919c.js",
+    "project-validator.760e8f44baf4dc8db1a2.js"
+  ],
+  "builds": "TSC and fresh sketch/project/semantic/normal app successful"
+}

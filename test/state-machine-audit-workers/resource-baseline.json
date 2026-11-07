@@ -1,0 +1,16 @@
+{
+  "sourceCommit": "794aab6ef5882cef17d3704538962ca0542c88b9",
+  "sourceSHA256": "1c513bf9a904e7c0f37480dce5db0eb0fa14a23f02b1f1d2b32d37beb80c49cf",
+  "newTestsSHA256": "81c44d9ee1577883d787a6d3710d3306118d210e9848d84fc82e67cd0571f704",
+  "newRegressionResult": {
+    "tests": 7,
+    "pass": 1,
+    "fail": 6
+  },
+  "retainedResult": {
+    "tests": 15,
+    "pass": 15,
+    "fail": 0
+  },
+  "scope": "Injected synchronous cleanup/admission faults in real resource pool, not observed kernel or public incident"
+}

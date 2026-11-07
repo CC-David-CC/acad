@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "scope": "Independent root read of retained actual signed output and analytic resized-volume check; not another browser run or fullGate1",
+  "rows": 13,
+  "source": "14537a7ed8dae74291863d703f0b73d57ff1660f",
+  "desktop": "a9014b13704e16c08d9ea6508a4bee2e122c3255",
+  "files": [
+    {
+      "name": "edge-chain.jsketcher.json",
+      "bytes": 4964,
+      "sha256": "ac00bd3f134095ec5bb88275477453336780546d220418365ea7f793bdfa1642",
+      "profileDepthMm": 25,
+      "filletMm": 4,
+      "chamferMm": 1
+    },
+    {
+      "name": "edge-chain-reedited.jsketcher.json",
+      "bytes": 4966,
+      "sha256": "a7e3f4daf0ba8ec530f160bd289756e5ec68d00481c8c7772a279088f58d69ce",
+      "profileDepthMm": 25,
+      "filletMm": 4,
+      "chamferMm": 1.5
+    }
+  ],
+  "resizedVolume": {
+    "actualMm3": 112303.31853071797,
+    "analyticMm3": 112303.31853071795,
+    "absoluteToleranceMm3": 1e-06
+  },
+  "filesystemRaceRun": false
+}

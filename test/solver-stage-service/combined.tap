@@ -1,0 +1,261 @@
+TAP version 13
+# Subtest: local independent and dependent rows with free variables
+ok 1 - local independent and dependent rows with free variables
+  ---
+  duration_ms: 2.406794
+  type: 'test'
+  ...
+# Subtest: scale changes retain clear rank and near threshold is ambiguous
+ok 2 - scale changes retain clear rank and near threshold is ambiguous
+  ---
+  duration_ms: 0.415104
+  type: 'test'
+  ...
+# Subtest: zero gradient is singular, not proof of redundancy
+ok 3 - zero gradient is singular, not proof of redundancy
+  ---
+  duration_ms: 1.067
+  type: 'test'
+  ...
+# Subtest: bounds, sparse values and failed solve are unavailable
+ok 4 - bounds, sparse values and failed solve are unavailable
+  ---
+  duration_ms: 0.473935
+  type: 'test'
+  ...
+# Subtest: 128-variable and 128-equation boundary, 129 refused
+ok 5 - 128-variable and 128-equation boundary, 129 refused
+  ---
+  duration_ms: 71.477207
+  type: 'test'
+  ...
+# Subtest: constraint auxiliary variables and external fixed inputs have explicit treatment
+ok 6 - constraint auxiliary variables and external fixed inputs have explicit treatment
+  ---
+  duration_ms: 0.957329
+  type: 'test'
+  ...
+# Subtest: extreme finite coefficient scaling refuses lost nonzero terms
+ok 7 - extreme finite coefficient scaling refuses lost nonzero terms
+  ---
+  duration_ms: 0.146201
+  type: 'test'
+  ...
+# Subtest: polynomial visits and derivative work are bounded before evaluation
+ok 8 - polynomial visits and derivative work are bounded before evaluation
+  ---
+  duration_ms: 1.06305
+  type: 'test'
+  ...
+# Subtest: near-flat raw derivative is not promoted into a confident classification
+ok 9 - near-flat raw derivative is not promoted into a confident classification
+  ---
+  duration_ms: 0.392163
+  type: 'test'
+  ...
+# Subtest: ordered prefix credits local rank without attributing a pivot row
+ok 10 - ordered prefix credits local rank without attributing a pivot row
+  ---
+  duration_ms: 0.662457
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: actual production Worker closes reproduced two-stage fixed-prior reporting gap
+ok 11 - actual production Worker closes reproduced two-stage fixed-prior reporting gap
+  ---
+  duration_ms: 149.014753
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: real per-stage under/full/redundant controls use original Jacobians and preserve admission
+ok 12 - real per-stage under/full/redundant controls use original Jacobians and preserve admission
+  ---
+  duration_ms: 394.382636
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: real singular zero-distance constraint keeps uncertainty separate from local nullity
+ok 13 - real singular zero-distance constraint keeps uncertainty separate from local nullity
+  ---
+  duration_ms: 134.30204
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: real algebraic contradiction returns existing exact rejection and no diagnostic
+ok 14 - real algebraic contradiction returns existing exact rejection and no diagnostic
+  ---
+  duration_ms: 127.721175
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: zero-length segment and zero-radius circle are domain refusals, not contradiction reports
+ok 15 - zero-length segment and zero-radius circle are domain refusals, not contradiction reports
+  ---
+  duration_ms: 246.206181
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: actual ground reference is fixed in the new stage-local report
+ok 16 - actual ground reference is fixed in the new stage-local report
+  ---
+  duration_ms: 129.430262
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: ordinary single-stage Worker reports and no-option results remain byte-equivalent data
+ok 17 - ordinary single-stage Worker reports and no-option results remain byte-equivalent data
+  ---
+  duration_ms: 1202.89867
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: diagnostic variable/equation quotas are shared across stages without rejecting a valid solve
+ok 18 - diagnostic variable/equation quotas are shared across stages without rejecting a valid solve
+  ---
+  duration_ms: 567.386583
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: existing source-stage bound is preserved and invalid scope requests remain invalid
+ok 19 - existing source-stage bound is preserved and invalid scope requests remain invalid
+  ---
+  duration_ms: 591.938282
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: normal discovery/analyze command closes the saved multi-stage service refusal
+ok 20 - normal discovery/analyze command closes the saved multi-stage service refusal
+  ---
+  duration_ms: 156.053032
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: active mode uses real current staged solver objects and the same authorized commands
+ok 21 - active mode uses real current staged solver objects and the same authorized commands
+  ---
+  duration_ms: 151.200745
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: ordinary single-stage saved/active output shape and Worker option remain unchanged
+ok 22 - ordinary single-stage saved/active output shape and Worker option remain unchanged
+  ---
+  duration_ms: 266.777571
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed saved/active multi-stage diagnostics retain dimensional names and use normal typed task
+ok 23 - typed saved/active multi-stage diagnostics retain dimensional names and use normal typed task
+  ---
+  duration_ms: 294.622413
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed single-stage diagnostics and typed-dependent-solve keep existing contracts
+ok 24 - typed single-stage diagnostics and typed-dependent-solve keep existing contracts
+  ---
+  duration_ms: 276.898071
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: unsupported typed units/bindings return honest unavailable snapshots without a rank claim
+ok 25 - unsupported typed units/bindings return honest unavailable snapshots without a rank claim
+  ---
+  duration_ms: 258.311179
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: singular stages and shared-budget exhaustion remain explicit through the normal service
+ok 26 - singular stages and shared-budget exhaustion remain explicit through the normal service
+  ---
+  duration_ms: 281.580656
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: saved source ABA/history/stream/document changes invalidate completed Worker reports
+ok 27 - saved source ABA/history/stream/document changes invalidate completed Worker reports
+  ---
+  duration_ms: 625.328308
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: active actual parameter mutation invalidates pending active-source diagnostics
+ok 28 - active actual parameter mutation invalidates pending active-source diagnostics
+  ---
+  duration_ms: 133.708784
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed physical currentness and original physical source fence completed reports
+ok 29 - typed physical currentness and original physical source fence completed reports
+  ---
+  duration_ms: 279.000251
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: host cancellation/detachment is enforced by unchanged normal command lifetime custody
+ok 30 - host cancellation/detachment is enforced by unchanged normal command lifetime custody
+  ---
+  duration_ms: 260.774973
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: malformed ordered reports, nullity and original residuals refuse after actual Worker solve
+ok 31 - malformed ordered reports, nullity and original residuals refuse after actual Worker solve
+  ---
+  duration_ms: 1138.507362
+  type: 'test'
+  ...
+# Subtest: normal protocol rejects new caller scope fields, stale revisions and stale saved frames
+ok 32 - normal protocol rejects new caller scope fields, stale revisions and stale saved frames
+  ---
+  duration_ms: 1.484724
+  type: 'test'
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 32
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4303.319444

@@ -1,0 +1,6 @@
+{
+  "scope": "private new service before final host-currentness guard; actual hash Worker/metadata fixtures only",
+  "helperBeforeSHA256": "a1a36741ea3b5f12afce53c1056a05eb0d995cb237f91c3c25a64912ccdf0bb5",
+  "helperAfterSHA256": "807feeb2f1cbb7694846540df6580ac12ed058266b82adcffa5eee498b3d9aeb",
+  "failure": "hasHostLifetime false without document disposal was not rechecked; no metadata published"
+}

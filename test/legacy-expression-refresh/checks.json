@@ -1,0 +1,19 @@
+{
+  "source": "378c336fa068c5006a0b5a6999898fec759b83be",
+  "typedRegression": {
+    "command": "node test/physical-parameters/history-browser.test.cjs",
+    "exitCode": 0,
+    "output": "PASS real extrusion typed binding, edit, undo/redo, rejection and native reopen"
+  },
+  "typecheck": {
+    "command": "node node_modules/typescript/bin/tsc --noEmit",
+    "exitCode": 0,
+    "output": ""
+  },
+  "journalControl": {
+    "command": "node --test test/legacy-expression-refresh/journal.test.mjs",
+    "tests": 1,
+    "pass": 1,
+    "fail": 0
+  }
+}

@@ -1,0 +1,178 @@
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✖ discovery exposes actual plane identity; guarded no-op starts no Worker or write (258.264998ms)
+verb 2.0.0
+verb 2.0.0
+✖ no-op callbacks cannot invalidate owner, source, units or current plane params then dispatch (244.298349ms)
+verb 2.0.0
+verb 2.0.0
+✖ real Worker prepares exact source/frame/history intent; real candidate frame gate passes and workspace discards (251.695383ms)
+verb 2.0.0
+verb 2.0.0
+✖ actual frame gate rejects changed params without reframe, wrong type or missing witness (259.733363ms)
+verb 2.0.0
+verb 2.0.0
+✖ stale/unknown/malformed/unsupported requests refuse before Worker or publication (243.962136ms)
+verb 2.0.0
+verb 2.0.0
+✖ genuine held Worker replies are refused after source ABA and actual document lifetime abort (240.640243ms)
+✔ physically releases every production Worker (1.699617ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 1
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1907.045407
+
+✖ failing tests:
+
+test at test/source-plane-depth/service.test.mjs:8:1
+✖ discovery exposes actual plane identity; guarded no-op starts no Worker or write (258.264998ms)
+  TypeError [Error]: e.getAllKeysFromNamespace is not a function
+      at Ci (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:408466)
+      at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1044837
+      at c (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024907)
+      at Generator._invoke (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024660)
+      at Generator.next (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1025270)
+      at km (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1031880)
+      at o (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032084)
+      at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032145
+      at new Promise (<anonymous>)
+      at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032024
+
+test at test/source-plane-depth/service.test.mjs:9:1
+✖ no-op callbacks cannot invalidate owner, source, units or current plane params then dispatch (244.298349ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  TypeError: e.getAllKeysFromNamespace is not a function
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-source-plane-depth-20261107/test/source-plane-depth/service.test.mjs:9:356)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: TypeError: e.getAllKeysFromNamespace is not a function
+        at Ci (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:408466)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1044837
+        at c (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024907)
+        at Generator._invoke (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024660)
+        at Generator.next (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1025270)
+        at km (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1031880)
+        at o (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032084)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032145
+        at new Promise (<anonymous>)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032024,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test/source-plane-depth/service.test.mjs:10:1
+✖ real Worker prepares exact source/frame/history intent; real candidate frame gate passes and workspace discards (251.695383ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + Comparison {}
+  - Comparison {
+  -   code: 'NATIVE_NOT_RUN'
+  - }
+  
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-source-plane-depth-20261107/test/source-plane-depth/service.test.mjs:10:669)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: TypeError: e.getAllKeysFromNamespace is not a function
+        at Ci (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:408466)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1044837
+        at c (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024907)
+        at Generator._invoke (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024660)
+        at Generator.next (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1025270)
+        at km (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1031880)
+        at o (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032084)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032145
+        at new Promise (<anonymous>)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032024,
+    expected: { code: 'NATIVE_NOT_RUN' },
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test/source-plane-depth/service.test.mjs:11:1
+✖ actual frame gate rejects changed params without reframe, wrong type or missing witness (259.733363ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + Comparison {}
+  - Comparison {
+  -   code: 'NATIVE_NOT_RUN'
+  - }
+  
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-source-plane-depth-20261107/test/source-plane-depth/service.test.mjs:11:604)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: TypeError: e.getAllKeysFromNamespace is not a function
+        at Ci (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:408466)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1044837
+        at c (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024907)
+        at Generator._invoke (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024660)
+        at Generator.next (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1025270)
+        at km (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1031880)
+        at o (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032084)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032145
+        at new Promise (<anonymous>)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032024,
+    expected: { code: 'NATIVE_NOT_RUN' },
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test/source-plane-depth/service.test.mjs:12:1
+✖ stale/unknown/malformed/unsupported requests refuse before Worker or publication (243.962136ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    Comparison {
+  +   code: 'UNAVAILABLE'
+  -   code: 'UNSUPPORTED_PLANE'
+    }
+  
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-source-plane-depth-20261107/test/source-plane-depth/service.test.mjs:12:624)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: A supported complete authored part is required.
+        at Am (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032200)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1044249
+        at c (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024907)
+        at Generator._invoke (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024660)
+        at Generator.next (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1025270)
+        at km (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1031880)
+        at o (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032084)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032145
+        at new Promise (<anonymous>)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032024,
+    expected: { code: 'UNSUPPORTED_PLANE' },
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test/source-plane-depth/service.test.mjs:13:1
+✖ genuine held Worker replies are refused after source ABA and actual document lifetime abort (240.640243ms)
+  TypeError [Error]: e.getAllKeysFromNamespace is not a function
+      at Ci (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:408466)
+      at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1044837
+      at c (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024907)
+      at Generator._invoke (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024660)
+      at Generator.next (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1025270)
+      at km (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1031880)
+      at o (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032084)
+      at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032145
+      at new Promise (<anonymous>)
+      at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1032024

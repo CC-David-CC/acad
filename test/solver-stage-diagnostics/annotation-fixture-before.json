@@ -1,0 +1,8 @@
+{
+  "revision": "local-report-reproducer",
+  "ok": false,
+  "error": {
+    "code": "SOLVE_ERROR",
+    "message": "Cannot read properties of undefined (reading 'offset')"
+  }
+}

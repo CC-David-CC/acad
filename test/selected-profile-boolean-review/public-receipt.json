@@ -1,0 +1,1330 @@
+{
+  "source": "32386643ab487de2ca40094549274b109822a6f4",
+  "scope": "Additional actual public Boolean refusal/default-box/native-empty interaction controls; no signed Files/lifecycle/full Boolean corpus claim",
+  "result": "PASS scoped public controls",
+  "cases": [
+    {
+      "mode": "default-box",
+      "refusals": [],
+      "created": {
+        "featureId": 1,
+        "outputId": "worker-solid:1:[1,\"body\"]",
+        "resultKind": "single-solid",
+        "bodyId": "worker-solid:1:[1,\"body\"]",
+        "engine": "occ",
+        "unit": "millimeter"
+      },
+      "advertisedDefaultRevision": "sha256:a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884:07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e",
+      "final": {
+        "history": "{\"history\":[{\"type\":\"WORKER_SOLID_BOX_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884:07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e\",\"featureId\":1,\"x\":0,\"y\":0,\"z\":0,\"width\":10,\"depth\":20,\"height\":30}}],\"pointer\":0}",
+        "sources": [],
+        "outputs": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "resultKind": "single-solid",
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 6,
+                  "wires": 6,
+                  "edges": 12,
+                  "vertices": 8
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 6000,
+              "volumeMagnitude": 6000,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": null,
+              "nativeBounds": null,
+              "nativeMeasurementQuality": null,
+              "triangleCount": 12,
+              "bounds": {
+                "min": [
+                  0,
+                  0,
+                  0
+                ],
+                "max": [
+                  10,
+                  20,
+                  30
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-oci-verified-runtime-research",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884",
+                "wasmSha256": "07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e"
+              }
+            }
+          }
+        ],
+        "streams": [
+          1,
+          1
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "/static/oci-verified-worker.js",
+          "tasks": [
+            "init",
+            "box",
+            "solid-mesh"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20683/static/oci-verified-worker.js",
+          "sha256": "26c2191e2f952d2dfb62768aec971b847ed50165cd767987eb3ab1e4115052f5"
+        }
+      ]
+    },
+    {
+      "mode": "selected-empty",
+      "refusals": [
+        {
+          "label": "unknown operand",
+          "error": {
+            "name": "Error",
+            "code": "INVALID_OPERAND",
+            "message": "The selected operands are unavailable.",
+            "committed": false
+          },
+          "stateExact": true,
+          "noWorkerDispatch": true
+        },
+        {
+          "label": "repeated operand",
+          "error": {
+            "name": "Error",
+            "code": "INVALID_OPERAND",
+            "message": "Select two distinct current operands.",
+            "committed": false
+          },
+          "stateExact": true,
+          "noWorkerDispatch": true
+        },
+        {
+          "label": "wrong engine",
+          "error": {
+            "name": "Error",
+            "code": "INVALID_OPERAND",
+            "message": "The selected operands are unavailable.",
+            "committed": false
+          },
+          "stateExact": true,
+          "noWorkerDispatch": true
+        },
+        {
+          "label": "stale revision",
+          "error": {
+            "name": "AbortError",
+            "code": 20,
+            "message": "Solid command was cancelled or superseded.",
+            "committed": false
+          },
+          "stateExact": true,
+          "noWorkerDispatch": true
+        },
+        {
+          "label": "caller cannot choose a runtime",
+          "error": {
+            "name": "Error",
+            "code": "INVALID_REQUEST",
+            "message": "Invalid solid command fields.",
+            "committed": false
+          },
+          "stateExact": true,
+          "noWorkerDispatch": true
+        },
+        {
+          "label": "consumed earlier output",
+          "error": {
+            "name": "Error",
+            "code": "INVALID_OPERAND",
+            "message": "The selected operands are unavailable.",
+            "committed": false
+          },
+          "stateExact": true,
+          "noWorkerDispatch": true
+        }
+      ],
+      "created": [
+        {
+          "featureId": 2,
+          "outputId": "worker-solid:1:[2,\"body\"]",
+          "bodyId": "worker-solid:1:[2,\"body\"]",
+          "sourceFaceId": "S:0/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-800a8b31-a884-48d5-9f2c-00bab1a366ae\"],\"holes\":[]}",
+          "engine": "occ",
+          "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+          "unit": "millimeter",
+          "bodyPolicy": "separate",
+          "persistence": "volatile-workspace",
+          "revision": "123aa1f7-7ec6-4a92-a0c4-cf6660cfc5bd"
+        },
+        {
+          "featureId": 3,
+          "outputId": "worker-solid:1:[3,\"body\"]",
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "sourceFaceId": "S:0/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-830564cb-8f3e-4fce-b929-dd108b36aaf2\"],\"holes\":[]}",
+          "engine": "occ",
+          "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+          "unit": "millimeter",
+          "bodyPolicy": "separate",
+          "persistence": "volatile-workspace",
+          "revision": "08fef3d2-ef04-477a-bfa4-c8a0688384ce"
+        },
+        {
+          "featureId": 4,
+          "outputId": "worker-solid:1:[4,\"body\"]",
+          "bodyId": "worker-solid:1:[4,\"body\"]",
+          "sourceFaceId": "S:0/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-3fb1f426-c298-42d2-8c08-4f0ac7d20937\"],\"holes\":[]}",
+          "engine": "occ",
+          "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+          "unit": "millimeter",
+          "bodyPolicy": "separate",
+          "persistence": "volatile-workspace",
+          "revision": "60d1eb9b-6e24-44ca-99af-c40326d7034b"
+        }
+      ],
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-800a8b31-a884-48d5-9f2c-00bab1a366ae\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-830564cb-8f3e-4fce-b929-dd108b36aaf2\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-3fb1f426-c298-42d2-8c08-4f0ac7d20937\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":60,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "before": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":2,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-800a8b31-a884-48d5-9f2c-00bab1a366ae\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":3,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-830564cb-8f3e-4fce-b929-dd108b36aaf2\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-3fb1f426-c298-42d2-8c08-4f0ac7d20937\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}}],\"pointer\":3}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "bytes": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-800a8b31-a884-48d5-9f2c-00bab1a366ae\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-830564cb-8f3e-4fce-b929-dd108b36aaf2\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-3fb1f426-c298-42d2-8c08-4f0ac7d20937\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":60,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+            "version": 4
+          }
+        ],
+        "outputs": [
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "bodyId": "worker-solid:1:[2,\"body\"]",
+            "resultKind": "single-solid",
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.6973858007377,
+              "volumeMagnitude": 1565.6973858007377,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  -10,
+                  -10,
+                  0
+                ],
+                "max": [
+                  10,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  -9.975640502598242,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  10,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          },
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "resultKind": "single-solid",
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.6973858007352,
+              "volumeMagnitude": 1565.6973858007352,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  20,
+                  -10,
+                  0
+                ],
+                "max": [
+                  40,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  20.024359497401758,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  40,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          },
+          {
+            "id": "worker-solid:1:[4,\"body\"]",
+            "bodyId": "worker-solid:1:[4,\"body\"]",
+            "resultKind": "single-solid",
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.697385800735,
+              "volumeMagnitude": 1565.697385800735,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  50,
+                  -10,
+                  0
+                ],
+                "max": [
+                  70,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  50.02435949740176,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  70,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ],
+        "streams": [
+          7,
+          7
+        ],
+        "failure": null
+      },
+      "empty": {
+        "featureId": 5,
+        "outputId": "worker-solid:1:[5,\"body\"]",
+        "resultKind": "empty",
+        "bodyId": null,
+        "engine": "occ",
+        "unit": "millimeter"
+      },
+      "afterEmpty": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":2,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-800a8b31-a884-48d5-9f2c-00bab1a366ae\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":3,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-830564cb-8f3e-4fce-b929-dd108b36aaf2\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-3fb1f426-c298-42d2-8c08-4f0ac7d20937\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SOLID_BOOLEAN_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":5,\"kind\":\"common\",\"a\":\"worker-solid:1:[2,\\\"body\\\"]\",\"b\":\"worker-solid:1:[3,\\\"body\\\"]\"}}],\"pointer\":4}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "bytes": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-800a8b31-a884-48d5-9f2c-00bab1a366ae\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-830564cb-8f3e-4fce-b929-dd108b36aaf2\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-3fb1f426-c298-42d2-8c08-4f0ac7d20937\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":60,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+            "version": 4
+          }
+        ],
+        "outputs": [
+          {
+            "id": "worker-solid:1:[4,\"body\"]",
+            "bodyId": "worker-solid:1:[4,\"body\"]",
+            "resultKind": "single-solid",
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.697385800735,
+              "volumeMagnitude": 1565.697385800735,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  50,
+                  -10,
+                  0
+                ],
+                "max": [
+                  70,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  50.02435949740176,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  70,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          },
+          {
+            "id": "worker-solid:1:[5,\"body\"]",
+            "bodyId": null,
+            "resultKind": "empty",
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "empty",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 0,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 0,
+                "directChildren": 0,
+                "counts": {
+                  "compounds": 1,
+                  "compsolids": 0,
+                  "solids": 0,
+                  "shells": 0,
+                  "faces": 0,
+                  "wires": 0,
+                  "edges": 0,
+                  "vertices": 0
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 0,
+              "volumeMagnitude": 0,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": null,
+              "nativeBounds": null,
+              "nativeMeasurementQuality": null,
+              "triangleCount": 0,
+              "bounds": null,
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ],
+        "streams": [
+          8,
+          8
+        ],
+        "failure": null
+      },
+      "union": {
+        "featureId": 6,
+        "outputId": "worker-solid:1:[6,\"body\"]",
+        "resultKind": "single-solid",
+        "bodyId": "worker-solid:1:[6,\"body\"]",
+        "engine": "occ",
+        "unit": "millimeter"
+      },
+      "final": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":2,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-800a8b31-a884-48d5-9f2c-00bab1a366ae\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":3,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-830564cb-8f3e-4fce-b929-dd108b36aaf2\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-3fb1f426-c298-42d2-8c08-4f0ac7d20937\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SOLID_BOOLEAN_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":5,\"kind\":\"common\",\"a\":\"worker-solid:1:[2,\\\"body\\\"]\",\"b\":\"worker-solid:1:[3,\\\"body\\\"]\"}},{\"type\":\"WORKER_SOLID_BOOLEAN_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":6,\"kind\":\"union\",\"a\":\"worker-solid:1:[5,\\\"body\\\"]\",\"b\":\"worker-solid:1:[4,\\\"body\\\"]\"}}],\"pointer\":5}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "bytes": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-800a8b31-a884-48d5-9f2c-00bab1a366ae\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-830564cb-8f3e-4fce-b929-dd108b36aaf2\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-3fb1f426-c298-42d2-8c08-4f0ac7d20937\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":60,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+            "version": 4
+          }
+        ],
+        "outputs": [
+          {
+            "id": "worker-solid:1:[6,\"body\"]",
+            "bodyId": "worker-solid:1:[6,\"body\"]",
+            "resultKind": "single-solid",
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 0,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 1,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.697385800735,
+              "volumeMagnitude": 1565.697385800735,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  50,
+                  -10,
+                  0
+                ],
+                "max": [
+                  70,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  50.02435949740176,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  70,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ],
+        "streams": [
+          9,
+          9
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/selected-profile-worker.js",
+          "tasks": [
+            "init",
+            "selected-profile-extrude",
+            "solid-mesh"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/selected-profile-worker.js",
+          "tasks": [
+            "init",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "selected-profile-extrude",
+            "solid-mesh"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/selected-profile-worker.js",
+          "tasks": [
+            "init",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "selected-profile-extrude",
+            "solid-mesh"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/selected-profile-worker.js",
+          "tasks": [
+            "init",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "common",
+            "solid-mesh"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/selected-profile-worker.js",
+          "tasks": [
+            "init",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "common",
+            "solid-mesh",
+            "union",
+            "solid-mesh"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20683/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9"
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3"
+        },
+        {
+          "url": "http://127.0.0.1:20683/static/selected-profile-worker.js",
+          "sha256": "0f3240cdde9b5faced831ace71ee5ffcfb6fe159dacba5b7265e5a09b0ca9853"
+        }
+      ]
+    }
+  ],
+  "app": {
+    "url": "http://127.0.0.1:20683/static/index.bundle.js",
+    "sha256": "a0e2ef4030f29d17e83b5290277480e80414bcb5a0ce10d907f73ed00d65ccc2"
+  }
+}

@@ -1,0 +1,1 @@
+const path=require('path'),base=require('../../webpack.config');base.entry={plateResearch:'./test/webos/plate-parametric-helper-entry.js'};base.module.rules[0].include.push(path.resolve(__dirname));base.devtool=false;module.exports=base;

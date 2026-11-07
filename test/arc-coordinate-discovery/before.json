@@ -1,0 +1,20 @@
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+{
+  "status": "CONFIRMED_MISSING_ARC_POINT_DISCOVERY",
+  "scope": "Actual production sketch Worker primitive and inspection; no native solid/app claim",
+  "sourceSHA256": "9cd622674069f13476e6338dffe30dc4974c65b01669cde1141ec1f9dace5761",
+  "object": {
+    "id": "agent-primitive-1bd6543d-0b59-4aca-a52e-e330d5a46ad3",
+    "type": "Arc",
+    "role": null,
+    "stage": 0
+  },
+  "points": [],
+  "workerLifecycle": {
+    "started": 3,
+    "terminated": 3
+  }
+}

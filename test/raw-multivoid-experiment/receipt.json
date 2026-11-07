@@ -1,0 +1,2518 @@
+{
+  "version": 1,
+  "scope": "Experimental direct mount/real Worker/native WASM; no registered history/app qualification",
+  "pins": {
+    "wasm": "4d35fd5b3a37e500d79388523329d5e61560fcd80cb963b2824533d6cf0f8f21",
+    "glue": "8e49622c97d839cf94d6c4d5e2de6cbd96d1166075741e08dcbda3b1a223d8fa",
+    "baselineWorker": "5c17193baaabef79fb4cc6ad4e552e56e36bc9d07fd1b0ebf03ea392eac5f45f",
+    "candidateWorker": "4c86d804cfd4f15399225c2ddd6bfd10cd20860467dc110275f98c973665ad60"
+  },
+  "mountSha256": {
+    "baseline": "d79a98f714d0e36489ee91ef450b692c3a5f166c3587d7631d347527dce156a8",
+    "candidate": "99f0bd250b0eb9d73e6e1e12f2070e084e66dcea60d689b2a42ea6a4e1434f0b"
+  },
+  "cases": [
+    {
+      "variant": "baseline",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 1,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 784,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 24,
+          "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+          "signedVolume": 784,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 2,
+          "displayStatus": "available"
+        }
+      ],
+      "error": {
+        "code": "MULTI_MATERIAL_VOID_UNSUPPORTED",
+        "message": "SMLib refused or failed the operation."
+      }
+    },
+    {
+      "variant": "forward",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 1,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 784,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 24,
+          "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+          "signedVolume": 784,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 2,
+          "displayStatus": "available"
+        }
+      ],
+      "composite": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 36,
+        "digest": "9ac8a98aa661726b85bf15373776f54d6b143f75d79ccbb4778329ac003dc8a6",
+        "signedVolume": 1783.9999999999993,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 3,
+        "displayStatus": "available"
+      },
+      "after": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 1,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 784,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 24,
+          "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+          "signedVolume": 784,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 2,
+          "displayStatus": "available"
+        }
+      ],
+      "compositeAfter": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 36,
+        "digest": "9ac8a98aa661726b85bf15373776f54d6b143f75d79ccbb4778329ac003dc8a6",
+        "signedVolume": 1783.9999999999993,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 3,
+        "displayStatus": "available"
+      },
+      "status": "completed"
+    },
+    {
+      "variant": "reverse",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 1,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 784,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 24,
+          "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+          "signedVolume": 784,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 2,
+          "displayStatus": "available"
+        }
+      ],
+      "composite": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 36,
+        "digest": "0f1f4fe4a9453f79b56257e0b9ab529417bf6d3020402964925b496fc3ab6351",
+        "signedVolume": 1784.000000000001,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 3,
+        "displayStatus": "available"
+      },
+      "after": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 1,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 784,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 24,
+          "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+          "signedVolume": 784,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 2,
+          "displayStatus": "available"
+        }
+      ],
+      "compositeAfter": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 36,
+        "digest": "0f1f4fe4a9453f79b56257e0b9ab529417bf6d3020402964925b496fc3ab6351",
+        "signedVolume": 1784.000000000001,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 3,
+        "displayStatus": "available"
+      },
+      "status": "completed"
+    },
+    {
+      "variant": "subtract",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 1,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 784,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 24,
+          "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+          "signedVolume": 784,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 2,
+          "displayStatus": "available"
+        }
+      ],
+      "composite": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 36,
+        "digest": "9ac8a98aa661726b85bf15373776f54d6b143f75d79ccbb4778329ac003dc8a6",
+        "signedVolume": 1783.9999999999993,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 3,
+        "displayStatus": "available"
+      },
+      "downstream": {
+        "evidence": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 24,
+        "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+        "signedVolume": 784,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 2,
+        "displayStatus": "available"
+      },
+      "after": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 1,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 784,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 24,
+          "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+          "signedVolume": 784,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 2,
+          "displayStatus": "available"
+        }
+      ],
+      "compositeAfter": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 36,
+        "digest": "9ac8a98aa661726b85bf15373776f54d6b143f75d79ccbb4778329ac003dc8a6",
+        "signedVolume": 1783.9999999999993,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 3,
+        "displayStatus": "available"
+      },
+      "status": "completed"
+    },
+    {
+      "variant": "fill",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 1,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 784,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 24,
+          "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+          "signedVolume": 784,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 2,
+          "displayStatus": "available"
+        }
+      ],
+      "composite": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 36,
+        "digest": "9ac8a98aa661726b85bf15373776f54d6b143f75d79ccbb4778329ac003dc8a6",
+        "signedVolume": 1783.9999999999993,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 3,
+        "displayStatus": "available"
+      },
+      "downstream": {
+        "evidence": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1000,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 24,
+        "digest": "5ee73cd27d028c8a5200504eb11feb6319f642c1e2ba60dddbc2740e8245b152",
+        "signedVolume": 1999.9999999999993,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 2,
+        "displayStatus": "available"
+      },
+      "after": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 1,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 784,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 24,
+          "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+          "signedVolume": 784,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 2,
+          "displayStatus": "available"
+        }
+      ],
+      "compositeAfter": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 36,
+        "digest": "9ac8a98aa661726b85bf15373776f54d6b143f75d79ccbb4778329ac003dc8a6",
+        "signedVolume": 1783.9999999999993,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 3,
+        "displayStatus": "available"
+      },
+      "status": "completed"
+    },
+    {
+      "variant": "common",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 1,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 784,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 24,
+          "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+          "signedVolume": 784,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 2,
+          "displayStatus": "available"
+        }
+      ],
+      "composite": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 36,
+        "digest": "9ac8a98aa661726b85bf15373776f54d6b143f75d79ccbb4778329ac003dc8a6",
+        "signedVolume": 1783.9999999999993,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 3,
+        "displayStatus": "available"
+      },
+      "downstream": {
+        "evidence": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 24,
+        "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+        "signedVolume": 784,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 2,
+        "displayStatus": "available"
+      },
+      "after": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 12,
+          "digest": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 1,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 1,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 784,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "triangleCount": 24,
+          "digest": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+          "signedVolume": 784,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "badEdges": 0,
+          "degenerateTriangles": 0,
+          "surfaceComponents": 2,
+          "displayStatus": "available"
+        }
+      ],
+      "compositeAfter": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "triangleCount": 36,
+        "digest": "9ac8a98aa661726b85bf15373776f54d6b143f75d79ccbb4778329ac003dc8a6",
+        "signedVolume": 1783.9999999999993,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "badEdges": 0,
+        "degenerateTriangles": 0,
+        "surfaceComponents": 3,
+        "displayStatus": "available"
+      },
+      "status": "completed"
+    }
+  ],
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; object-src 'none'",
+  "browser": "Chrome/155.0.8059.79"
+}

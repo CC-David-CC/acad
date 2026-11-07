@@ -1,0 +1,20 @@
+{
+  "sourceCheckpoint": "20eef14bc",
+  "scope": "Actual PM/validation/hash Workers and actual orchestration factory; accepted models/metrics/Native read are recorded/protocol fixtures, not fresh Native success",
+  "result": {
+    "tests": 5,
+    "pass": 3,
+    "fail": 2
+  },
+  "confirmed": "prepareHostSave default snapshotCurrentProject writes workspace model cache; successful and cancelled observation increments storage revision1to2. Other accepted state equal.",
+  "sourceHashes": {
+    "web/app/cad/projectManager/projectManagerBundle.ts": "53451a2922f99b7a9d2c43b39340037888d17639e8715e1633658fd43de0ebc2",
+    "web/app/cad/craft/craftBundle.ts": "e62e9b732b524703aed31446de54d0c40078df85eae155aa03c7ce762dd4208f",
+    "web/app/cad/craft/workerManufacturingMeshReplay.ts": "89c607a89dcf073b7498ca4f36db0f2823941a5706e4e8b4c5fc37d48583c854",
+    "web/app/cad/craft/manufacturingMeshReplayResult.mjs": "84d64baa80a24b5c82edf27bf0f81da5aabf0cfe2ed87d286d3e3cd29902bca6",
+    "test/manufacturing-mesh-replay/service.test.mjs": "5c992f934383e7f1e71f61dcc6b261057f1c0dcf732086611ef849a263813b2b",
+    "test/manufacturing-mesh-replay/fixture.mjs": "b9d5a752e09290a84b7ea233e0688d376b32b2e0a5872a6dd80d72bff24c74fb",
+    "test/manufacturing-mesh-replay/entry.ts": "b3afaa5ab7c5db63f4f9782d574aec0a1c002aca2ef75e51e5fff07db0f52a1f",
+    "test/manufacturing-mesh-replay/build.cjs": "a61d1ab0819fac1d2197f27fc80dbfd3e2a2d743b5cc581f9729c3783535b274"
+  }
+}

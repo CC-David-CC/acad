@@ -1,0 +1,117 @@
+{
+  "status": "READ_ONLY_EXISTING_RECEIPT_EXCERPT",
+  "source": "test/mechanical-profile-browser/evidence-r1/receipt.json",
+  "scope": "Existing mechanical component circle plan; no new construction/app/hole proof",
+  "observations": [
+    {
+      "jsonPath": [
+        "actual",
+        "controls",
+        "circle-edge",
+        "inputBefore",
+        "plan"
+      ],
+      "plan": {
+        "version": 1,
+        "featureId": 101,
+        "regionId": "circle-component",
+        "scope": "authored-source",
+        "source": "prism-construction-history",
+        "edges": [
+          {
+            "id": "worker-prism-selection:1:[101,\"circle-component\",\"edge\",\"first-boundary\",\"actual-circle\"]",
+            "role": "first-boundary",
+            "curveId": "actual-circle",
+            "geometry": "circle"
+          },
+          {
+            "id": "worker-prism-selection:1:[101,\"circle-component\",\"edge\",\"last-boundary\",\"actual-circle\"]",
+            "role": "last-boundary",
+            "curveId": "actual-circle",
+            "geometry": "circle"
+          }
+        ],
+        "faces": [
+          {
+            "id": "worker-prism-selection:1:[101,\"circle-component\",\"face\",\"first-cap\",null]",
+            "role": "first-cap",
+            "geometry": "plane"
+          },
+          {
+            "id": "worker-prism-selection:1:[101,\"circle-component\",\"face\",\"last-cap\",null]",
+            "role": "last-cap",
+            "geometry": "plane"
+          },
+          {
+            "id": "worker-prism-selection:1:[101,\"circle-component\",\"face\",\"swept-boundary\",\"actual-circle\"]",
+            "role": "swept-boundary",
+            "curveId": "actual-circle",
+            "geometry": "cylinder"
+          }
+        ],
+        "unresolved": [
+          {
+            "kind": "edge",
+            "count": 1,
+            "reason": "UNAUTHORED_KERNEL_EDGE"
+          }
+        ]
+      }
+    },
+    {
+      "jsonPath": [
+        "actual",
+        "controls",
+        "circle-edge",
+        "inputAfter",
+        "plan"
+      ],
+      "plan": {
+        "version": 1,
+        "featureId": 101,
+        "regionId": "circle-component",
+        "scope": "authored-source",
+        "source": "prism-construction-history",
+        "edges": [
+          {
+            "id": "worker-prism-selection:1:[101,\"circle-component\",\"edge\",\"first-boundary\",\"actual-circle\"]",
+            "role": "first-boundary",
+            "curveId": "actual-circle",
+            "geometry": "circle"
+          },
+          {
+            "id": "worker-prism-selection:1:[101,\"circle-component\",\"edge\",\"last-boundary\",\"actual-circle\"]",
+            "role": "last-boundary",
+            "curveId": "actual-circle",
+            "geometry": "circle"
+          }
+        ],
+        "faces": [
+          {
+            "id": "worker-prism-selection:1:[101,\"circle-component\",\"face\",\"first-cap\",null]",
+            "role": "first-cap",
+            "geometry": "plane"
+          },
+          {
+            "id": "worker-prism-selection:1:[101,\"circle-component\",\"face\",\"last-cap\",null]",
+            "role": "last-cap",
+            "geometry": "plane"
+          },
+          {
+            "id": "worker-prism-selection:1:[101,\"circle-component\",\"face\",\"swept-boundary\",\"actual-circle\"]",
+            "role": "swept-boundary",
+            "curveId": "actual-circle",
+            "geometry": "cylinder"
+          }
+        ],
+        "unresolved": [
+          {
+            "kind": "edge",
+            "count": 1,
+            "reason": "UNAUTHORED_KERNEL_EDGE"
+          }
+        ]
+      }
+    }
+  ]
+}

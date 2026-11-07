@@ -1,0 +1,91 @@
+{
+  "status": "FAIL",
+  "source": {
+    "sha256": "891012293c4f34f369a8c014c046d71a12b4c6dc3d7db08730d70e911fcf10f4",
+    "bytes": 4261
+  },
+  "actualResults": 30,
+  "actualRefusals": 16,
+  "failures": [
+    {
+      "name": "positive volume cannot have collapsed bounds",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:13:1"
+    },
+    {
+      "name": "sparse bounds must refuse",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:14:1"
+    },
+    {
+      "name": "bounds array extra field must refuse",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:15:1"
+    },
+    {
+      "name": "nonarray source topology list refuses",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:18:1"
+    },
+    {
+      "name": "sparse source topology list refuses",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ Comparison {}\n- Comparison {\n-   code: 'ENGINE_FAILURE'\n- }\n",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ Comparison {}\n- Comparison {\n-   code: 'ENGINE_FAILURE'\n- }\n\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:19:1"
+    },
+    {
+      "name": "copy array extra field must refuse",
+      "scope": "targeted malformed clone of genuine native record; not new successful engine output",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:198\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at malformed (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:7:32)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:27:1"
+    },
+    {
+      "name": "accessor native measurement refuses before invocation",
+      "scope": "targeted non-data metadata control",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:35:258\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:35:1"
+    },
+    {
+      "name": "accessor nested copy refuses before invocation",
+      "scope": "targeted non-data metadata control",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:36:244\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:36:1"
+    },
+    {
+      "name": "accessor source topology refuses before invocation",
+      "scope": "targeted non-data source observation control",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:37:283\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:37:1"
+    },
+    {
+      "name": "accessor options refuse before invocation",
+      "scope": "targeted non-data binding envelope control",
+      "status": "FAIL",
+      "error": "Missing expected exception.",
+      "code": "ERR_ASSERTION",
+      "stack": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:38:317\n    at check (file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:3:68)\n    at file:///tmp/codi-owned-boolean-contract-20261106/test/owned-boolean-contract/worker.mjs:38:1"
+    }
+  ]
+}

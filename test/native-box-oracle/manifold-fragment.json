@@ -1,0 +1,3712 @@
+{
+  "version": 1,
+  "source": {
+    "commit": "147814d8400de9d14d3718980f3e17b85241bcde",
+    "appSha256": null,
+    "workerSha256": "35876bd7cd773b5eb243fde935599afb670314c192ba77ec11036dcb12aa79e4",
+    "wasmSha256": "7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d",
+    "scope": "Immutable production Worker bytes exercised through raw protocol; no application UI or host path"
+  },
+  "cases": [
+    {
+      "id": "MANIFOLD-BOX-CELLS-HOLLOW-EXACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 12,
+          "vertices": 8,
+          "volume": 1000,
+          "components": 1,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.0"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-EXACT-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 12,
+          "vertices": 8,
+          "volume": 1000,
+          "components": 1,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.1"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-HOLLOW-PARTIAL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 892,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 892,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 892,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.2"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-PARTIAL-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 892,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 892,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 892,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.3"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-HOLLOW-ISLAND",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 36,
+          "vertices": 24,
+          "volume": 791.9999999999999,
+          "components": 3,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 3,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 791.9999999999999,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 3,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.4"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-ISLAND-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 36,
+          "vertices": 24,
+          "volume": 791.9999999999999,
+          "components": 3,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 3,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 791.9999999999999,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 3,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.5"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-HOLLOW-ENCLOSING",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 12,
+          "vertices": 8,
+          "volume": 1000,
+          "components": 1,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.6"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-ENCLOSING-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 12,
+          "vertices": 8,
+          "volume": 1000,
+          "components": 1,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.7"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-HOLLOW-DISJOINT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1784,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 36,
+          "vertices": 24,
+          "volume": 1784,
+          "components": 3,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 3,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1784,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 3,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.8"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-DISJOINT-HOLLOW",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1784,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 36,
+          "vertices": 24,
+          "volume": 1784,
+          "components": 3,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 3,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1784,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 3,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.9"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-COMPOSITE-FILL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 2000,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.10"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-FILL-COMPOSITE",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 2000,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.11"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-FILLED-BEFORE-DISJOINT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 2000,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.12"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-COMPOSITE-MINUS-DISJOINT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 784,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 784,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 784,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.13"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-COMPOSITE-COMMON-OUTER",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 784,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 784,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 784,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.14"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-DISJOINT-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "triangles": 0,
+          "vertices": 0,
+          "volume": 0,
+          "components": 0,
+          "bounds": null,
+          "resultKind": "empty",
+          "meshComponents": 0,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 0,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 0,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.15"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-IDENTICAL-SUBTRACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "triangles": 0,
+          "vertices": 0,
+          "volume": 0,
+          "components": 0,
+          "bounds": null,
+          "resultKind": "empty",
+          "meshComponents": 0,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 0,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 0,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.16"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-OVERLAP-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1500,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            15,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 28,
+          "vertices": 16,
+          "volume": 1500,
+          "components": 1,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              15,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1500,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.17"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-OVERLAP-REVERSED-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1500,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            15,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 28,
+          "vertices": 16,
+          "volume": 1500,
+          "components": 1,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              15,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1500,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.18"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-OVERLAP-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": {
+          "min": [
+            5,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 12,
+          "vertices": 8,
+          "volume": 500,
+          "components": 1,
+          "bounds": {
+            "min": [
+              5,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 500,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.19"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-OVERLAP-REVERSED-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": {
+          "min": [
+            5,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 12,
+          "vertices": 8,
+          "volume": 500,
+          "components": 1,
+          "bounds": {
+            "min": [
+              5,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 500,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.20"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-OVERLAP-SUBTRACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            5,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 12,
+          "vertices": 8,
+          "volume": 500,
+          "components": 1,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              5,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 500,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.21"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-OVERLAP-REVERSED-SUBTRACT",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": {
+          "min": [
+            10,
+            0,
+            0
+          ],
+          "max": [
+            15,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 12,
+          "vertices": 8,
+          "volume": 500,
+          "components": 1,
+          "bounds": {
+            "min": [
+              10,
+              0,
+              0
+            ],
+            "max": [
+              15,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 500,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.22"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-FACE-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 20,
+          "vertices": 12,
+          "volume": 2000,
+          "components": 1,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.23"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-FACE-UNION-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 20,
+          "vertices": 12,
+          "volume": 2000,
+          "components": 1,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.24"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-FACE-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "triangles": 0,
+          "vertices": 0,
+          "volume": 0,
+          "components": 0,
+          "bounds": null,
+          "resultKind": "empty",
+          "meshComponents": 0,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.25"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-FACE-COMMON-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "triangles": 0,
+          "vertices": 0,
+          "volume": 0,
+          "components": 0,
+          "bounds": null,
+          "resultKind": "empty",
+          "meshComponents": 0,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.26"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-EDGE-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            20,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 2000,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              20,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.27"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-EDGE-UNION-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            20,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 2000,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              20,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.28"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-EDGE-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "triangles": 0,
+          "vertices": 0,
+          "volume": 0,
+          "components": 0,
+          "bounds": null,
+          "resultKind": "empty",
+          "meshComponents": 0,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.29"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-EDGE-COMMON-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "triangles": 0,
+          "vertices": 0,
+          "volume": 0,
+          "components": 0,
+          "bounds": null,
+          "resultKind": "empty",
+          "meshComponents": 0,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.30"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-VERTEX-UNION",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            20,
+            20
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 2000,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              20,
+              20
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.31"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-VERTEX-UNION-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            20,
+            20
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 2000,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              20,
+              20
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.32"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-VERTEX-COMMON",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "triangles": 0,
+          "vertices": 0,
+          "volume": 0,
+          "components": 0,
+          "bounds": null,
+          "resultKind": "empty",
+          "meshComponents": 0,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.33"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-CONTACT-VERTEX-COMMON-REVERSED",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "not-tested",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": true
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "triangles": 0,
+          "vertices": 0,
+          "volume": 0,
+          "components": 0,
+          "bounds": null,
+          "resultKind": "empty",
+          "meshComponents": 0,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "not-tested",
+          "reason": "Boundary-only topology remains outside volumetric oracle"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.34"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-TRANSLATED-PARTIAL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 892,
+        "bounds": {
+          "min": [
+            -13,
+            7,
+            29
+          ],
+          "max": [
+            -3,
+            17,
+            39
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 892,
+          "components": 2,
+          "bounds": {
+            "min": [
+              -13,
+              7,
+              29
+            ],
+            "max": [
+              -3,
+              17,
+              39
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 892,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.35"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-PERMUTED-PARTIAL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 892,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 892,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 892,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.36"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-TRANSLATED-FILL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            -13,
+            7,
+            29
+          ],
+          "max": [
+            17,
+            17,
+            39
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 1999.9999999999998,
+          "components": 2,
+          "bounds": {
+            "min": [
+              -13,
+              7,
+              29
+            ],
+            "max": [
+              17,
+              17,
+              39
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 1999.9999999999998,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.37"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-PERMUTED-FILL",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            30,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 2000,
+          "components": 2,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              30,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 2000,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.38"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-TRANSLATED-ISLAND",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "bounds": {
+          "min": [
+            -13,
+            7,
+            29
+          ],
+          "max": [
+            -3,
+            17,
+            39
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 36,
+          "vertices": 24,
+          "volume": 792,
+          "components": 3,
+          "bounds": {
+            "min": [
+              -13,
+              7,
+              29
+            ],
+            "max": [
+              -3,
+              17,
+              39
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 3,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 792,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 3,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.39"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-PERMUTED-ISLAND",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 792,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 36,
+          "vertices": 24,
+          "volume": 791.9999999999999,
+          "components": 3,
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 3,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 791.9999999999999,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 3,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.40"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-SEEDED-0",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "triangles": 0,
+          "vertices": 0,
+          "volume": 0,
+          "components": 0,
+          "bounds": null,
+          "resultKind": "empty",
+          "meshComponents": 0,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 0,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 0,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.41"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-SEEDED-1",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "triangles": 0,
+          "vertices": 0,
+          "volume": 0,
+          "components": 0,
+          "bounds": null,
+          "resultKind": "empty",
+          "meshComponents": 0,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 0,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 0,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.42"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-SEEDED-2",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 0,
+        "bounds": null,
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": true,
+          "triangles": 0,
+          "vertices": 0,
+          "volume": 0,
+          "components": 0,
+          "bounds": null,
+          "resultKind": "empty",
+          "meshComponents": 0,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 0,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 0,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.43"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-SEEDED-3",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 339,
+        "bounds": {
+          "min": [
+            0,
+            -4,
+            -6
+          ],
+          "max": [
+            11,
+            5,
+            3
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 54,
+          "vertices": 29,
+          "volume": 339,
+          "components": 1,
+          "bounds": {
+            "min": [
+              0,
+              -4,
+              -6
+            ],
+            "max": [
+              11,
+              5,
+              3
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 339,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.44"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-SEEDED-4",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 345,
+        "bounds": {
+          "min": [
+            -1,
+            -4,
+            -2
+          ],
+          "max": [
+            7,
+            3,
+            11
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 46,
+          "vertices": 25,
+          "volume": 345,
+          "components": 1,
+          "bounds": {
+            "min": [
+              -1,
+              -4,
+              -2
+            ],
+            "max": [
+              7,
+              3,
+              11
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 345,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.45"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-SEEDED-5",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 48,
+        "bounds": {
+          "min": [
+            -4,
+            -2,
+            -5
+          ],
+          "max": [
+            0,
+            0,
+            1
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 12,
+          "vertices": 8,
+          "volume": 48,
+          "components": 1,
+          "bounds": {
+            "min": [
+              -4,
+              -2,
+              -5
+            ],
+            "max": [
+              0,
+              0,
+              1
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 1,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 48,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 1,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.46"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    },
+    {
+      "id": "MANIFOLD-BOX-CELLS-SEEDED-6",
+      "subsystem": "geometry",
+      "priority": "P1",
+      "level": "CAD2",
+      "layer": "browser-worker",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 336,
+        "bounds": {
+          "min": [
+            -5,
+            -4,
+            0
+          ],
+          "max": [
+            9,
+            5,
+            5
+          ]
+        },
+        "boundaryOnlyNonempty": false
+      },
+      "actual": {
+        "native": {
+          "empty": false,
+          "triangles": 24,
+          "vertices": 16,
+          "volume": 336,
+          "components": 2,
+          "bounds": {
+            "min": [
+              -5,
+              -4,
+              0
+            ],
+            "max": [
+              9,
+              5,
+              5
+            ]
+          },
+          "resultKind": "mesh-container",
+          "meshComponents": 2,
+          "solidCount": null,
+          "materialRegions": null,
+          "voidRegions": null,
+          "nativeValidity": null,
+          "nativeStatus": "NoError",
+          "validLevel0": null,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volumeQuality": "mesh-kernel-volume"
+        },
+        "error": null,
+        "assessment": {
+          "status": "pass",
+          "checks": {
+            "volume": true,
+            "bounds": true,
+            "sourcesUnchanged": true,
+            "kernelStatus": true
+          },
+          "measuredVolume": 336,
+          "volumeQuality": "mesh-kernel-volume",
+          "nativeFacts": {
+            "solidCount": null,
+            "nativeTopology": null,
+            "meshComponents": 2,
+            "materialRegions": null,
+            "voidRegions": null
+          },
+          "scope": "Kernel partition/component counts are recorded, not equated to material/void cell floods"
+        }
+      },
+      "evidence": [
+        {
+          "file": "occ-manifold-receipt.json",
+          "record": "engines.manifold.rows.47"
+        }
+      ],
+      "scope": "Bounded integer AABB expression, exact occupied-cell volume/bounds. Kernel solid/mesh component counts recorded separately; no material-count equivalence, boundary-only topology, curved geometry, app history, export or parity claim."
+    }
+  ]
+}

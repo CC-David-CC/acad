@@ -1,0 +1,21 @@
+// Actual production sketch Worker component proof; native source fixture is
+// diagnostic data, not a claim of public authoring through the desktop.
+const fs=require('node:fs'),assert=require('node:assert/strict'),crypto=require('node:crypto'),path=require('node:path'),puppeteer=require(process.env.PUPPETEER_CORE_PATH||'puppeteer-core');
+const base=new URL(process.env.JSKETCHER_TEST_URL),cdp=new URL(process.env.CODI_TEST_CDP||'http://127.0.0.1:19329/');for(const u of[base,cdp])assert.ok(['127.0.0.1','localhost','[::1]'].includes(u.hostname));
+(async()=>{
+ const fixtureBytes=fs.readFileSync(path.join(__dirname,'midpoint-fixture.json')),fixture=JSON.parse(fixtureBytes),response=await fetch(new URL('static/index.bundle.js',base)),hash=crypto.createHash('sha256'),names=new Set();let tail='';
+ assert.equal(response.status,200);for await(const chunk of response.body){hash.update(chunk);const text=tail+new TextDecoder().decode(chunk);for(const m of text.matchAll(/sketch-solver\.[a-f0-9]+\.js/g))names.add(m[0]);tail=text.slice(-100);}
+ assert.equal(names.size,1,'Resolve the actual app referenced sketch Worker');const workerName=[...names][0],workerResponse=await fetch(new URL('static/'+workerName,base)),workerBytes=Buffer.from(await workerResponse.arrayBuffer());assert.equal(workerResponse.status,200);
+ const receipt={source:process.env.CODI_SOURCE,appSha256:hash.digest('hex'),workerName,workerSha256:crypto.createHash('sha256').update(workerBytes).digest('hex'),fixtureSha256:crypto.createHash('sha256').update(fixtureBytes).digest('hex'),baseline:process.env.CODI_EXPECT_BASELINE==='1',scope:'Production Worker component against a diagnostic registered native model; no public authoring/UI/Files claim.'};
+ const browser=await puppeteer.connect({browserURL:cdp.href,protocolTimeout:120000}),context=await browser.createBrowserContext();try{
+ const page=await context.newPage();await page.goto(new URL('index-webos.html?DEFAULT&webos=1',base));
+ receipt.result=await page.evaluate(async({fixture,workerName})=>{
+  const boundary={lines:[],arcs:[],circles:[],nurbses:[]},jobs=[];
+  async function solve(sketch,revision){const before=JSON.stringify(sketch),request={revision,sketch:JSON.parse(before),boundary:JSON.parse(JSON.stringify(boundary)),externalParameters:{}};return await new Promise((resolve,reject)=>{const worker=new Worker('/static/'+workerName),timer=setTimeout(()=>{worker.terminate();reject(Error('Worker timed out'));},30000);worker.onerror=e=>{clearTimeout(timer);worker.terminate();reject(Error(e.message));};worker.onmessage=e=>{clearTimeout(timer);worker.terminate();if(JSON.stringify(sketch)!==before){reject(Error('Input native data changed'));return;}jobs.push({revision,terminated:true});resolve(e.data);};worker.postMessage(request);});}
+  const first=await solve(fixture.source,'midpoint-valid'),bad=await solve(fixture.contradictory,'midpoint-invalid');const replay=first.ok?await solve(first.sketch,'midpoint-replay'):null;return{first,bad,replay,jobs};
+ },{fixture,workerName});
+ if(receipt.baseline){assert.equal(receipt.result.first.ok,false);assert.equal(receipt.result.first.error.code,'RESIDUAL');}
+ else{for(const result of[receipt.result.first,receipt.result.replay]){assert.equal(result.ok,true,JSON.stringify(result));const mid=result.sketch.objects.find(o=>o.id==='mid'),line=result.sketch.objects.find(o=>o.id==='line');assert.ok(Math.abs(mid.data.x-5)<1e-6);assert.ok(Math.abs(line.data.b.x-10)<1e-6);}assert.deepEqual(receipt.result.replay.sketch,receipt.result.first.sketch);}
+ assert.equal(receipt.result.bad.ok,false);assert.ok(['RESIDUAL','SOLVE_FAILED'].includes(receipt.result.bad.error.code));assert.ok(receipt.result.jobs.every(j=>j.terminated));receipt.status='PASS';if(process.env.CODI_RECEIPT)fs.writeFileSync(process.env.CODI_RECEIPT,JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({status:receipt.status,baseline:receipt.baseline,app:receipt.appSha256,worker:receipt.workerSha256,valid:receipt.result.first.ok?'accepted':receipt.result.first.error.code,invalid:receipt.result.bad.error.code,jobs:receipt.result.jobs.length}));
+ }finally{await context.close();browser.disconnect();}
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

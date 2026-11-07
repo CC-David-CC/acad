@@ -1,0 +1,16 @@
+✔ actual Worker: compact boxes retain represented volume over translations, scales and winding (45.299201ms)
+✔ actual Worker: cavities subtract, disconnected solids add, opposite shells cancel without abs (29.928354ms)
+✔ actual Worker: exact signed tetrahedron, degenerate and empty arithmetic do not claim validity (29.170566ms)
+✔ bounds, finite data, dense arrays and conservative arithmetic range refusals are explicit (1.978341ms)
+✔ actual recorded native mesh corrects integral cancellation without rewriting geometry or drift (30.604212ms)
+✔ retained unresolved counterexample: one anchor cannot certify widely separated tiny solids (30.668182ms)
+{"scope":"one Node Worker roundtrip, including clone/init/measurement; not native or RSS","triangles":100000,"elapsedMs":80.105558}
+✔ actual Worker accepts the fixed 100000-triangle ceiling without mutating its input (102.364169ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 340.426998

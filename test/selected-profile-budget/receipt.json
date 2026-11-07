@@ -1,0 +1,136 @@
+{
+  "result": "PASS bounded baseline and private32 experiments",
+  "baseSource": "15b9607a7880eeb7cf98f9de40a3563d19a3c5a6",
+  "productionChanged": false,
+  "nativeOrDefaultBuildChanged": false,
+  "publicCapacity": "Untouched8; actual ninth refusal preserved",
+  "experimentCapacity": 32,
+  "scope": "Native/controller/Worker capacity review, no public32 or memory-used/RSS qualification",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "5f4e9d5b6fd127597d37796ba223a0b43dcda5ad3106b8f182fa567e083857a3",
+      "bytes": 9977
+    },
+    {
+      "path": "component-32.cjs",
+      "sha256": "b8c9e0287ccb0d53e19d335c7be8f4149613948ff4284fe99d61ae249de811ae",
+      "bytes": 9232
+    },
+    {
+      "path": "component.cjs",
+      "sha256": "6d4d0ef02a0129f7487e83f2603dfc88a64cb1f4e095f1d689f82e3b390ff3e2",
+      "bytes": 8977
+    },
+    {
+      "path": "diagnostic-worker-32.js",
+      "sha256": "b14499bcc913c8ec55a966a585b475dd8a17938bf84b96226686cf50dc8142a0",
+      "bytes": 902
+    },
+    {
+      "path": "diagnostic-worker.js",
+      "sha256": "ed36d438fe018815d6e32464b0e2ffe250acb95145bbbedd81ef00ed78a7b025",
+      "bytes": 821
+    },
+    {
+      "path": "discovery.cjs",
+      "sha256": "4e62bc3e2d2417b8ed939d5952759c90b67854e7efd841c257f0672385f55268",
+      "bytes": 1664
+    },
+    {
+      "path": "evidence/component-32.json",
+      "sha256": "7fa65861aa921d24717edf459107d3da2ae7ebe69be9bfb34d3fb456153bca71",
+      "bytes": 179669
+    },
+    {
+      "path": "evidence/component-32.log",
+      "sha256": "7c6a178414a5a94f799957a6a463a0efe4091ef0a6d5cd05d3b5239b6eeeab94",
+      "bytes": 515
+    },
+    {
+      "path": "evidence/component-before-wrapper-relative-assets.json",
+      "sha256": "9ba3830f5ce3524960a2c9864079ac26091585cc78051329458966cbdc94c19a",
+      "bytes": 2472
+    },
+    {
+      "path": "evidence/component-before-wrapper-relative-assets.log",
+      "sha256": "0b1a926478630a7e15c57719e53ce1e8fcccbcab9466ad532252125db3e6f270",
+      "bytes": 1242
+    },
+    {
+      "path": "evidence/component-eight.json",
+      "sha256": "d4b5200fbcf623eb0b5a83b8a14d995d3f3cf64eb068ff2f2ad77c29f5a2afd1",
+      "bytes": 55830
+    },
+    {
+      "path": "evidence/component-eight.log",
+      "sha256": "7f9ec5b1354183aa2c84b44e8daec5790a6a00214b653cf0b1efd935e6c8beab",
+      "bytes": 480
+    },
+    {
+      "path": "evidence/discovery.json",
+      "sha256": "4e5b36d487e16ffc31506ecdf0685d4983c2ee6052c8a04588eb3ab1fd474356",
+      "bytes": 2804
+    },
+    {
+      "path": "evidence/discovery.log",
+      "sha256": "68d9660173b59fd1a5377be3d528557319054d5ffefdaa7236aab9ec50a35c59",
+      "bytes": 47
+    },
+    {
+      "path": "evidence/experiment-staging.json",
+      "sha256": "bf4df1e7ded6cc4f4e57f349a70116a8765a98e855b5c9b9cc07f2bd0d832048",
+      "bytes": 3378
+    },
+    {
+      "path": "evidence/mechanical-32.json",
+      "sha256": "5cb42e48ccfd85755c45bbdb1ec097a300c811f4ebaa9cd8eb6c75fcfbb15fd1",
+      "bytes": 25800
+    },
+    {
+      "path": "evidence/mechanical-32.log",
+      "sha256": "4e907127663b4c86d09239424cc654a7ad6f036fa3f31e0a9c39a92c459f1eb2",
+      "bytes": 200
+    },
+    {
+      "path": "evidence/native-memory-source-excerpt.txt",
+      "sha256": "943ec287feff309ccf3a1f9cb51b129cc8f09d9f012f1a245d360894a6814e83",
+      "bytes": 802
+    },
+    {
+      "path": "evidence/native-source-inspection.sha256",
+      "sha256": "70f0d8d6dce35a7b22a8b54fe4cc9da569520b3cd0e194b372b9c05d13b4202f",
+      "bytes": 472
+    },
+    {
+      "path": "evidence/public-nine.json",
+      "sha256": "215c3c02878616ced6f62608d1532fc35ee0c5cceb4be79894efd0045f6e5151",
+      "bytes": 136332
+    },
+    {
+      "path": "evidence/public-nine.log",
+      "sha256": "556aa63c786ec91a91112a841944af775bdb3863ff04578fb911151eb633c706",
+      "bytes": 352
+    },
+    {
+      "path": "index.html",
+      "sha256": "30d7520e59a2a59c8521a0c0df1aa8a0e71ddfb29225ce54356b4a95f6298c83",
+      "bytes": 82
+    },
+    {
+      "path": "mechanical-32.cjs",
+      "sha256": "dbb92420299e32444acc28d69da862b0de4c8bb10824c27f7849724c81489f75",
+      "bytes": 5643
+    },
+    {
+      "path": "public-nine.cjs",
+      "sha256": "0cdac62b562847c7c1b6911e5322199b5c39969cd6d494e763ee7c3219cb00a4",
+      "bytes": 6186
+    },
+    {
+      "path": "stage-experiment.py",
+      "sha256": "a3a2e4598fe13918f03112cdf8f2ae452fd0170c95b8c07ea44dc91b8cd2154b",
+      "bytes": 1404
+    }
+  ]
+}

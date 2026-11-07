@@ -1,0 +1,94 @@
+import CadError from 'utils/errors';
+import {ApplicationContext} from 'cad/context';
+import {roundValueForPresentation as r} from 'cad/craft/operationHelper';
+import {EntityKind} from "cad/model/entities";
+import {BooleanDefinition} from "cad/craft/schema/common/BooleanDefinition";
+import {OperationDescriptor} from "cad/craft/operationBundle";
+import {MDatum} from "cad/model/mdatum";
+import CSys from "math/csys";
+import { ExpectedOrderProductionAnalyzer } from "cad/craft/production/productionAnalyzer";
+
+interface PrimitiveSphereParams {
+  featureId: number,
+  radius: number,
+  locations: MDatum,
+  boolean: BooleanDefinition,
+}
+
+export const PrimitiveSphereOperation: OperationDescriptor<PrimitiveSphereParams> = {
+  id: 'SPHERE',
+  label: 'Sphere',
+  icon: 'img/cad/sphere',
+  info: 'Primitive Sphere',
+  path:__dirname,
+  paramsInfo: ({radius,}) => `(${r(radius)}  )`,
+  form: [
+    {
+      type: 'number',
+      label: 'Radius',
+      name: 'radius',
+      defaultValue: 50,
+    },
+
+    {
+      type: 'selection',
+      name: 'locations',
+      capture: [EntityKind.DATUM],
+      label: 'locations',
+      multi: false,
+      optional: true,
+      defaultValue: {
+        usePreselection: true,
+        preselectionIndex: 0
+      },
+    },
+
+    {
+      type: 'boolean',
+      name: 'boolean',
+      label: 'boolean',
+      optional: true,
+    }
+
+  ],
+
+
+  run: (params: PrimitiveSphereParams, ctx: ApplicationContext) => {
+    if (!Number.isFinite(params.radius) || params.radius <= 0) {
+      throw new CadError({kind: CadError.KIND.INVALID_PARAMS, userMessage: 'Sphere radius must be finite and greater than zero.'});
+    }
+
+    const occ = ctx.occService;
+    const oci = occ.commandInterface;
+
+    const csys = params.locations?.csys || CSys.ORIGIN;
+    oci.plane("csys",
+      csys.origin.x,
+      csys.origin.y,
+      csys.origin.z,
+      csys.z.x,
+      csys.z.y,
+      csys.z.z,
+      csys.x.x,
+      csys.x.y,
+      csys.x.z);
+
+    oci.psphere("sphere", "csys", params.radius);
+
+    const sphere = occ.io.getShell("sphere", new ExpectedOrderProductionAnalyzer(
+      [
+        {
+          id: (params.featureId === -1 ? '' : params.featureId) + 'F:SPHERE',
+          productionInfo: {
+            role: 'sweep'
+          }
+        },
+      ],
+      [],
+      []
+    ));
+
+    return occ.utils.applyBooleanModifier([sphere], params.boolean);
+
+  },
+}

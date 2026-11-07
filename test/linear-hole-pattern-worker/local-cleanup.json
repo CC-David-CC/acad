@@ -1,0 +1,18 @@
+{
+  "scope": "Only exact owned forwards stopped; own Chromium profiles checked read-only; shared19329 untouched",
+  "forwards": [
+    {
+      "port": 20942,
+      "exactOwnedForwardPids": [
+        2271206
+      ]
+    },
+    {
+      "port": 20943,
+      "exactOwnedForwardPids": [
+        2272955
+      ]
+    }
+  ],
+  "remainingOwnedChromiumPids": []
+}

@@ -1,0 +1,17 @@
+✔ rectangle: exact copied input, volume and bounds; orientation reversal only (3.555488ms)
+✔ circle, annulus and independently selected nested regions use analytic areas (0.719298ms)
+✔ disjoint selected rectangles remain two independent requests, never an implicit compound (0.512196ms)
+✔ arbitrary orthonormal placement; handedness and scaling refuse (0.796649ms)
+✔ thin source preserved; tiny gap never repaired (0.446805ms)
+✔ hole domains are deliberate: outside, touching, intersecting or nested holes refuse (1.270363ms)
+✔ unsupported curves and profiles are honest; malformed data never coerced (0.739228ms)
+✔ unqualified legacy OCC, Manifold and SMLib neither advertise nor dispatch generic profiles (9.512603ms)
+✔ public dispatch rejects discriminator accessors without evaluating them or sending a native job (0.784869ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 85.316182

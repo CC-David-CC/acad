@@ -1,0 +1,9 @@
+# Closed curved-cavity witness, frozen before execution
+
+Unchanged approved production Native portable32eec74e…/WASMabbf2aa0…; direct owned FFI only. Outer actual circle prismR5,h12,originz0; innerR2,h8,originz2; actual owned subtract. Expected one valid solid/two closed shells, volumeπ(25×12−4×8)=268π within1e-6mm³, bounds[-5,-5,0]..[5,5,12] within1e-7mm. Genuine Native classification: [0,0,6]outside/void,[0,0,1]inside cap,[4,0,6]inside wall,[6,0,6]outside. No public/history/Save claim.
+
+Capture actual construction/Boolean outputs, catalog/topology, Native metrics/points, input arrays and before/after observable metrics/catalog. Trusted Native helper has exact internal source preservation checks; this production FFI exposes no independent BRep/tolerance/attached-mesh byte snapshot, so do not claim this new driver independently compares those bytes. Existing exact Native helper qualification remains separate.
+
+Read one controlled indexed mesh at0.01mm/0.1rad through bounded64KiB chunks; release lease, repeat release harmless, all three names released, countzero. Record source observations before/after, byteSHA, actual counts. Heap capacity/process RSS snapshots/maxRSS are diagnostic only: maxRSS is process lifetime including WASM startup/compile, not mesh-only increment/peak budget.
+
+Transfer exact genuine artifact to current production encoder client through the existing Node Worker bridge, retaining result/refusal. A separate diagnostic encoder Worker may expose the actual preserved error cause chain on identical bytes, with no product edits. A valid cavity may be refused by conservative serializer; expected source-backed reason Ambiguous overlapping shell bounds is a prediction until observed. No tolerance change or rawsourcePreserved bypass. All Native/runtime/bulk outputs onR730; portable source/receipts only Git. No browser/server/accounts/deployment.

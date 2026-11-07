@@ -1,0 +1,3050 @@
+[
+  {
+    "schema": "Angle",
+    "offset": 0,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 0,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 1.504632769052528e-36,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 0,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 0,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 9.4039548065783e-38,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          -4.336808689942018e-18
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 0,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 3.516841608018829e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 0,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 1.483160307327751e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 0,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 4.999999999940612e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          9.999999999940612e-09
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 0,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 3.2000007966858395e-19,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          8.00000035585718e-09
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 0,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 0,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 6.162975822039155e-33,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 0,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 0,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 0,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 3.516841650372849e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 0,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 1.4831584231284264e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 0,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 4.9999999392252905e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          9.99999993922529e-09
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 0,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 3.199999961104186e-15,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          7.999999944980231e-09
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 0,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 0,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 6.462348535570529e-27,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 0,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 0,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 0,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 3.5168390534594895e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 0,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 1.4832023730809496e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 0,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 5.000007932834214e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          1.0000007932831068e-08
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 0,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 8.021361677182061e-19,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          -1.2665987270783167e-13
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 0,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 0,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 6.776263578034403e-21,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 0,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 0,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 0,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 3.552117367605634e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 0,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 1.4887451080941583e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 0,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 5.011724542314244e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          1.0011717677116394e-08
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 0,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 3.332539304944405e-13,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          8.163993269159897e-14
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 1000000,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 1000000,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 1000000,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 4.336808496071564e-23,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          9.313225537987968e-12
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 1000000,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 1000000,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 3.552117367605634e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 1000000,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 1.4541861638461828e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 1000000,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 5.021053017597705e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          1.0021030902654382e-08
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 1000000,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 1000000,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 1000000,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 1000000,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 1000000,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 1000000,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 3.4701245783114176e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 1000000,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 1.4887451080941583e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 1000000,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 5.011724542314244e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          1.0011717677116394e-08
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 1000000,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 1000000,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 1000000,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 1000000,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 1000000,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 1000000,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 3.4701245783114176e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 1000000,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 1.4887451080941583e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 1000000,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 5.011724542314244e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          1.0011717677116394e-08
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 1000000,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 1000000,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 1000000,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 1000000,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 1000000,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 1000000,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 3.688997891881929e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 1000000,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 1.54227759036063e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 1000000,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 5.011724542314244e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          1.0011717677116394e-08
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 1000000,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 1,
+    "workerOK": false,
+    "error": {
+      "code": "UNSUPPORTED",
+      "message": "Rejected or missing admission intent cannot be regenerated."
+    }
+  },
+  {
+    "schema": "Angle",
+    "offset": 100000000,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 100000000,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 100000000,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 1.4388490398025334e-17,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          5.3644180295769894e-09
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 100000000,
+    "scale": 0.01,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 100000000,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 2.220446049250313e-16,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 100000000,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 100000000,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 2.0534685063045034e-16,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          2.0265579223424646e-08
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 100000000,
+    "scale": 0.01,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 100000000,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 100000000,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 100000000,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 100000000,
+    "scale": 1,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 100000000,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 2.220446049250313e-16,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 100000000,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 100000000,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 1.1102230246251565e-16,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          1.4901161193847656e-08
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 100000000,
+    "scale": 1,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 100000000,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 100000000,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 100000000,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 100000000,
+    "scale": 1000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 100000000,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 2.220446049250313e-16,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 100000000,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 100000000,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 1.1102230246251565e-16,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          1.4901161193847656e-08
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 100000000,
+    "scale": 1000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 100000000,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 100000000,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 100000000,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 100000000,
+    "scale": 1000000,
+    "epsilon": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "Angle",
+    "offset": 100000000,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 2.220446049250313e-16,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "Angle",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-08
+        ],
+        "units": [
+          "radian"
+        ],
+        "tolerance": 1e-08,
+        "unit": "radian"
+      }
+    ]
+  },
+  {
+    "schema": "SegmentLength",
+    "offset": 100000000,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "SegmentLength",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "TangentLC",
+    "offset": 100000000,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 1.1102230246251565e-16,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "TangentLC",
+        "state": "accepted",
+        "residuals": [
+          1.4901161193847656e-08
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "offset": 100000000,
+    "scale": 1000000,
+    "epsilon": 1e-08,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "domain": -5,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "domain": 0,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  },
+  {
+    "schema": "DistancePP",
+    "domain": 5,
+    "uiStatus": {
+      "error": 0,
+      "success": true
+    },
+    "uiRejected": 0,
+    "workerOK": true,
+    "delta": 0,
+    "geometryAccepted": true,
+    "evidence": [
+      {
+        "typeId": "DistancePP",
+        "state": "accepted",
+        "residuals": [
+          0
+        ],
+        "tolerances": [
+          1e-06
+        ],
+        "units": [
+          "millimeter"
+        ],
+        "tolerance": 1e-06,
+        "unit": "millimeter"
+      }
+    ]
+  }
+]

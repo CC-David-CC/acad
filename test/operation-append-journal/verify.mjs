@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {resolve,dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'../..'),prefix='test/operation-append-journal/';
+const files=['web/app/cad/craft/authoredEditJournal.mjs','modules/engine/solid/solidIntent.mjs',...['journal.test.mjs','README.md','verify.mjs','harness-before.json'].map(f=>prefix+f)];
+const hash=file=>createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex'),hashes=()=>Object.fromEntries(files.map(f=>[f,hash(f)])),before=hashes();
+const args=['--test','--test-reporter=tap',prefix+'journal.test.mjs','test/edge-treatment-journal/journal.test.mjs','test/mechanical/authored-edit-journal.test.mjs','test/through-hole-journal/journal.test.mjs'];
+const result=spawnSync(process.execPath,args,{cwd:root,encoding:'utf8',maxBuffer:1024*1024});
+writeFileSync(resolve(root,prefix+'final.tap'),result.stdout+(result.stderr||''));
+assert.equal(result.error,undefined);assert.equal(result.status,0,result.stdout+result.stderr);assert.match(result.stdout,/# tests 53\b/);assert.match(result.stdout,/# fail 0\b/);assert.deepEqual(hashes(),before);
+const receipt={version:1,status:'PASS',scope:'pure-operation-append-journal-edge-treatment-only',base:'53c6203fb0abf37904b695300b81fe445a51b83c',node:process.version,tests:{newGroups:16,retainedGroups:37,total:53,command:[process.execPath,...args]},sourceHashesBeforeAndAfter:before,tapSHA256:hash(prefix+'final.tap'),limitations:['No prefix graph/history/owner/journal-head proof','No pipeline, counter reuse, source writes, UI, native or persistence execution','No app UndoRedo or full Gate1 qualification']};
+writeFileSync(resolve(root,prefix+'receipt.json'),JSON.stringify(receipt,null,2)+'\n');
+console.log('PASS:16new operation-append groups +37retained journal groups; one shared bounded chronology.');

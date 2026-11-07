@@ -1,0 +1,87 @@
+{
+  "scope": "actual OCC native Worker + production ledger; test-only projection; no public CAD/source-solve/history/persistence claim",
+  "productAndTestsCommit": "57d1251164f107e3f4e311e51e7d958eb7629340",
+  "nodeVersion": "v24.22.1",
+  "tsc": {
+    "exitCode": 0,
+    "diagnosticBytes": 0
+  },
+  "nativeResult": "PASS",
+  "sourcePins": {
+    "modules/engine/solid/solidLedger.mjs": {
+      "sha256": "509c2194fc1080e3470773430768d42a81679790f71d4ba202767a384bc089c3",
+      "bytes": 10433
+    },
+    "modules/engine/solid/solidIntent.mjs": {
+      "sha256": "f76ff4abf03839ee11b34d382eb1d9348abe00889a3601bc27b253368d8d704b",
+      "bytes": 2894
+    },
+    "modules/engine/solid/solidMetrics.mjs": {
+      "sha256": "f7ca08e43692610acee6fa7ba140eeedb328c7f7e1e74dd64837ffb41f7c282a",
+      "bytes": 7858
+    },
+    "modules/engine/mount/selectedProfilePlan.mjs": {
+      "sha256": "7d51355e667efa79b26528f2e39582256e9a1513a0a12ca949d265f3963d234f",
+      "bytes": 7885
+    },
+    "web/app/cad/craft/evaluationResources.mjs": {
+      "sha256": "f3ce4580b963ea6aaeb3e59ec82b24291b14cb32bfa17eae4042f686d99a6ca3",
+      "bytes": 6911
+    }
+  },
+  "logs": [
+    {
+      "file": "local-pure-26.log",
+      "sha256": "4911bd971f44ae86a73cc27c2311936a8006e71c3c147df4b49a5dee5712ac24",
+      "tests": 26,
+      "pass": 26,
+      "fail": 0
+    },
+    {
+      "file": "r730-source-27.log",
+      "sha256": "5c8a34507a107510d1f5515186502de9ce2bc1bfac4f0db12170b2c313bad29e",
+      "tests": 27,
+      "pass": 27,
+      "fail": 0
+    },
+    {
+      "file": "r730-node-path-before.log",
+      "sha256": "5107e75e545499aee8553e11500d566bcca17015ae32b5a4d35e0bcd948919a2",
+      "tests": 27,
+      "pass": 26,
+      "fail": 1
+    }
+  ],
+  "evidence": [
+    {
+      "file": "local-pure-26.log",
+      "sha256": "4911bd971f44ae86a73cc27c2311936a8006e71c3c147df4b49a5dee5712ac24",
+      "bytes": 2409
+    },
+    {
+      "file": "native-browser.json",
+      "sha256": "b94d8445463e961742d77754098e73b0545e75880b4f5e07d24989a9430a85a9",
+      "bytes": 15288
+    },
+    {
+      "file": "native-browser.log",
+      "sha256": "3575927d3f2c02c70777fe6194fe3f7f08876f1f3ab70b63aa356561fa4a0494",
+      "bytes": 384
+    },
+    {
+      "file": "r730-node-path-before.log",
+      "sha256": "5107e75e545499aee8553e11500d566bcca17015ae32b5a4d35e0bcd948919a2",
+      "bytes": 3921
+    },
+    {
+      "file": "r730-source-27.log",
+      "sha256": "5c8a34507a107510d1f5515186502de9ce2bc1bfac4f0db12170b2c313bad29e",
+      "bytes": 2874
+    },
+    {
+      "file": "r730-tsc.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ]
+}

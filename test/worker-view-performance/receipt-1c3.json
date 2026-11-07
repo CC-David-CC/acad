@@ -1,0 +1,61 @@
+{
+  "small": {
+    "objects": 1,
+    "cache": "absent",
+    "selection": 1,
+    "unchanged": true
+  },
+  "sourceBytes": 139517,
+  "restoreMs": 298,
+  "openMs": 2474.300000190735,
+  "maxSiblingGapMs": 31,
+  "maxFrameGapMs": 16.800000000000182,
+  "longTasks": [],
+  "siblingInspects": 257,
+  "drawStats": {
+    "strokes": 1028,
+    "strokeMs": 0.5999994277954102,
+    "swaps": 2,
+    "swapMs": 1.1000001430511475
+  },
+  "starts": 3,
+  "terminations": 3,
+  "tasks": [
+    {
+      "task": "sketch-transition-inspection",
+      "at": 5333.599999904633,
+      "elapsedMs": 1049.9000000953674
+    },
+    {
+      "task": "sketch-transition-projection",
+      "at": 6401.299999952316,
+      "elapsedMs": 998.0999999046326
+    },
+    {
+      "task": "sketch-transition-inspection",
+      "at": 8061
+    }
+  ],
+  "canvas": {
+    "width": 1069,
+    "height": 647,
+    "colored": 4721
+  },
+  "objects": 514,
+  "unsupported": 0,
+  "cache": "absent",
+  "dof": null,
+  "unchanged": true,
+  "noLegacy": true,
+  "siblingReady": true,
+  "openCancelled": true,
+  "closed": false,
+  "views": 0,
+  "appSha": "b55b1f47337d6cd23fe68c9cc91764b9727746f53e790687218e59b185c6c768",
+  "workerAssets": [
+    {
+      "url": "http://127.0.0.1:20493/static/sketch-solver.2248898c4f75fb46bd47.js",
+      "sha256": "26dbefbbc7a69128730385a81f822cfe07def2cf2b63a46a451551ba22f3d0d6"
+    }
+  ]
+}

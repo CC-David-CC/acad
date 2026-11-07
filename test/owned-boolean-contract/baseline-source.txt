@@ -1,0 +1,42 @@
+// Worker-only checks; neither copy indices nor ancestry are document IDs.
+import {validateOwnedTopology} from './ownedTopologyContract.mjs';
+import {reconcileNativeSelectionClaims} from './booleanSelectionClaims.mjs';
+const fail=message=>{throw Object.assign(Error(message),{code:'ENGINE_FAILURE'});};
+const exact=(v,keys)=>{if(!v||typeof v!=='object'||Array.isArray(v)||Reflect.ownKeys(v).length!==keys.length||keys.some(k=>!Object.hasOwn(v,k)))fail('Invalid native Boolean record.');return v;};
+const kinds=['vertices','edges','faces'],limits={vertices:1024,edges:512,faces:256};
+const bounded=(n,max,min=0)=>Number.isSafeInteger(n)&&n>=min&&n<=max;
+export const BOOLEAN_REFUSAL_CODES=Object.freeze(['BOOLEAN_INVALID_REQUEST','BOOLEAN_INVALID_INPUT','BOOLEAN_UNSUPPORTED','BOOLEAN_FAILED','BOOLEAN_INVALID_RESULT','BOOLEAN_RESOURCE_LIMIT','BOOLEAN_COPY_FAILED']);
+export const BOOLEAN_NAMING_REASONS=Object.freeze(['BOOLEAN_HISTORY_UNSUPPORTED','BOOLEAN_HISTORY_RESOURCE_LIMIT','BOOLEAN_HISTORY_FAILED','SELECTION_RESOURCE_LIMIT','SELECTION_UNAVAILABLE','NO_AUTHORED_SOURCE_SELECTIONS']);
+export function validateOwnedBooleanResult(value,{sourceTopologies,topology}){
+ const v=exact(value,['version','valid','empty','solidCount','nativeVolume','nativeBounds','ancestryA','ancestryB','sourceCopyA','sourceCopyB']);
+ const result=validateOwnedTopology(topology),sources=sourceTopologies.map(validateOwnedTopology);
+ if(sources.length!==2||v.version!==1||v.valid!==true||typeof v.empty!=='boolean'||!bounded(v.solidCount,256)||result.solidCount!==v.solidCount||typeof v.nativeVolume!=='number'||!Number.isFinite(v.nativeVolume))fail('Invalid native Boolean measurements.');
+ if(v.empty){if(v.solidCount!==0||v.nativeVolume!==0||v.nativeBounds!==null||kinds.some(k=>result[k].length))fail('Invalid empty Boolean result.');}
+ else{
+  const box=exact(v.nativeBounds,['min','max']);
+  if(v.solidCount<1||v.nativeVolume<=0||!result.faces.length||['min','max'].some(k=>!Array.isArray(box[k])||box[k].length!==3||box[k].some(n=>typeof n!=='number'||!Number.isFinite(n)))||box.min.some((n,i)=>n>box.max[i]))fail('Invalid nonempty Boolean result.');
+ }
+ let reason=null;
+ for(let i=0;i<2;i++){
+  const copy=exact(v[i?'sourceCopyB':'sourceCopyA'],['version','scope','persistentIds','kind','method','copyGeometry','copyMesh','sourceCounts','workingCounts',...kinds]),source=sources[i];
+  const empty=kinds.every(k=>source[k].length===0)&&source.solidCount===0;
+  if(copy.version!==1||copy.scope!=='response-local'||copy.persistentIds!==false||copy.kind!=='verified-detached-native-copy'||copy.method!==(empty?'TopoDS_Shape.EmptyCopied':'BRepBuilderAPI_Copy')||copy.copyGeometry!==!empty||copy.copyMesh!==!empty)fail('Invalid native detached-copy certificate.');
+  for(const name of ['sourceCounts','workingCounts']){exact(copy[name],kinds);for(const kind of kinds)if(copy[name][kind]!==source[kind].length)fail('Native copy differs from actual source membership.');}
+  for(const kind of kinds){
+   const rows=copy[kind],count=source[kind].length,seen=new Set();
+   if(!Array.isArray(rows)||rows.length!==count||rows.length>limits[kind])fail('Incomplete detached-copy membership.');
+   rows.forEach((row,j)=>{exact(row,['source','target']);if(row.source!==j+1||!bounded(row.target,count,1)||seen.has(row.target))fail('Detached-copy membership is not a bijection.');seen.add(row.target);});
+  }
+  const observation=v[i?'ancestryB':'ancestryA'];
+  if(observation?.status==='unavailable'){
+   exact(observation,['status','reason']);if(!BOOLEAN_NAMING_REASONS.slice(0,3).includes(observation.reason))fail('Invalid native Boolean history refusal.');reason??=observation.reason;
+  }else{
+   exact(observation,['status','data']);if(observation.status!=='available'||observation.data?.version!==2)fail('Missing native Boolean history.');
+   for(const kind of kinds)if(observation.data.sourceCounts?.[kind]!==source[kind].length)fail('Boolean history differs from the actual original input.');
+   // Validate this genuine source even if the other history is unavailable.
+   try{reconcileNativeSelectionClaims({sources:[{claims:[],ancestry:observation.data}],topology:result});}
+   catch(e){if(e?.code!=='SELECTION_RESOURCE_LIMIT')throw e;reason??=e.code;}
+  }
+ }
+ return{reason};
+}

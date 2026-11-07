@@ -1,0 +1,32 @@
+(node:2591226) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/projectManager/documentLifetime.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/codi-cad-generic-manufacturing-preparation-20261107/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual pure capture matches normal save exactly without writes/counters/IDs (156.191133ms)
+✔ pure model capture preserves custom workbench and refuses lost document (56.938461ms)
+✔ strict capture detaches/freeze and pure proposal retains explicit unknown identity (2.805733ms)
+✔ null material/appearance remain unknown rather than defaulting a substance or color (0.899657ms)
+✔ stable custom binding/part/region IDs reused without retargeting (1.457052ms)
+✔ existing identity definition conflicts and absent material references refuse atomically (1.627984ms)
+✔ prospective aliases collide explicitly and duplicate aliases stay ambiguous (0.899878ms)
+✔ separate parts and aligned regions remain distinct with interface qualification pending (0.803307ms)
+✔ the same complete producer cannot appear twice in one export assignment proposal (0.361573ms)
+✔ retained enclosure grouping definitions and transforms survive generic preparation (2.551201ms)
+✔ stale source digest, unsupported target, wrong producer and unsupported placement refuse (2.359279ms)
+✔ own-data capture rejects getter/extra/sparse/string ID coercion/prototype tricks without reads (0.820687ms)
+✔ 32-part/region bounds and definition caps refuse before giant capture (0.404893ms)
+✔ actual readonly inventory binds production class/history/registry/runtime without parsing IDs (275.641443ms)
+✔ private prepare uses real hash Worker and pure model capture without writes/publication/ID allocation (271.715989ms)
+✔ pending actual hash reply is fenced by source/registry/runtime/model/counter/lifetime changes (1603.372938ms)
+✔ returned private proposal becomes stale without installing metadata (146.865787ms)
+✔ stale/malformed/cancelled requests refuse before hash worker dispatch (92.900969ms)
+✔ wrong class/producer/origin/current build/placement never becomes a supported discovery target (462.731533ms)
+✔ existing actual enclosure material assignment invalidates prior Craft Undo; generic publication stays pending (332.072979ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3267.57494

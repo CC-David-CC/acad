@@ -1,0 +1,31 @@
+{
+  "productCommit": "4d0e3e745c13373bb137f06570ffa6ec9471f51e",
+  "beforeCommit": "4b396393b",
+  "base": "9ba304395",
+  "scope": "Actual PM/Craft and genuine Workers/native signals; accepted geometry protocol fixture, no Native/browser/signed claim",
+  "sourceHashes": {
+    "web/app/cad/projectManager/projectManagerBundle.ts": "255f0fd11c0415b97322db1d3aa37f34f9672144ac99a8548c3ba0cbc6d960a2",
+    "web/app/cad/projectManager/manufacturingPublicationClient.mjs": "405053921910b734fbf8222586da2da4d45930fa23339ed60199ceaeb546cb22",
+    "web/app/cad/projectManager/captureDocumentJobOptions.mjs": "f340f2ce794e9b4ef049d726257f011c46b24db01b8eeb5d6acbd565baa973df",
+    "test/manufacturing-publication-review/review.test.mjs": "62bfa068c31fc6dfe169dd2c60103ee9400c7175a092f0bfa1b754bbca45f8ad",
+    "test/manufacturing-publication-review/client-signals.test.mjs": "251597f0da7fe725688d39c43b500c402c2c3f3ecc8685cd7250b963ed112d76",
+    "test/manufacturing-publication-review/check.mjs": "93a72bb3cea0458c4cf525896af83238a0e0d7f74f732444491e6f3ce8cc7a5e"
+  },
+  "evidenceHashes": {
+    "aborted-property-observation.json": "c74c2026499c5d21a19bd888e8dd2c3e87f69d4c77d1910d9abd8d02c5cb8f4a",
+    "after-observation.json": "73f70aae32da2027fef2188517b2382a0c848fba2498e439bba368ce0d6aac85",
+    "extended-before-pins.json": "37ae306ce0a4cd01f02af1f68975a923bd295fdee968c333c5af83bfecdb97e7",
+    "extended-before.log": "939d7fdb77f8f2851686445a1e12a64fa2ca556f37facf3c2af573ea6488a45d",
+    "client-signals-before.log": "a5038d68c9a649297caa60fc9873d971247f65dc69dfc24f1c959f1d07e1dbd7",
+    "final-focused.log": "1b9c53ee907dd618734394cbe5159bd70cc5db09d3a649ec0bb91f46f7e05edc",
+    "retained.log": "44118538cd721fb2f9d4e34699a1437446f27a63f0978a57d2e3cfa8ea968ddb",
+    "tsc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "builds": {
+    ".build/manufacturing-publication-worker/worker.js": "4c41500c91706a1fb38afe0f915e31cc4886bcef3b9ba4b9882c7ebc490d37ea",
+    ".build/manufacturing-publication-tests/runtime.cjs": "796e3d772858aa692aab8b50c69215bf7682bbed9908ad29788c68f7d7fd1a51",
+    ".build/generic-manufacturing-assignment/service.cjs": "58cabeb2d380c6a2d9b6b7470ba5e1ca32524b44025a559e32cd8b1e911b69f7",
+    ".build/display-units/validation/worker.js": "83d5cf595d04431bec7245a2d598a00b69d91f4beb613a3109c3906139b8a1e8"
+  },
+  "cleanup": "All owned Node Worker threads drained by fixtures; no browser/server/services started."
+}

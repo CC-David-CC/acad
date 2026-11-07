@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "source": {
+    "version": 3,
+    "objects": [
+      {
+        "id": "a",
+        "type": "Segment",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": 0,
+            "y": 0
+          },
+          "b": {
+            "x": 10,
+            "y": 0
+          }
+        }
+      },
+      {
+        "id": "b",
+        "type": "Segment",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": 0,
+            "y": 20
+          },
+          "b": {
+            "x": 10,
+            "y": 20
+          }
+        }
+      }
+    ],
+    "dimensions": [],
+    "labels": [],
+    "stages": [
+      {
+        "constraints": [
+          {
+            "typeId": "LockPoint",
+            "objects": [
+              "a:A"
+            ],
+            "constants": {
+              "x": "0",
+              "y": "0"
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "LockPoint",
+            "objects": [
+              "b:A"
+            ],
+            "constants": {
+              "x": "0",
+              "y": "20"
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          }
+        ],
+        "generators": []
+      }
+    ],
+    "constants": "",
+    "metadata": {
+      "marker": "exact-é",
+      "boundaryFrame": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "boundary": {
+      "lines": [],
+      "arcs": [],
+      "circles": [],
+      "nurbses": []
+    }
+  },
+  "layer": "actual-test-only-browser-worker",
+  "fixture": "http://127.0.0.1:20583/",
+  "cdp": "http://127.0.0.1:19329/",
+  "browser": "Chrome/155.0.8059.79",
+  "targetId": "AF38E22849D8FB4D4237D1B361747575",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'",
+  "assets": {
+    "/static/worker.js": "ba4f8a52062e0433d8e888281a505fb39bb72c3772811ee9cf0ecd7903073ae6",
+    "/static/verb.js": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3"
+  },
+  "out": [
+    {
+      "id": "exact-baseline",
+      "elapsedMs": 205.60000014305115,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": true
+      },
+      "outputSha256": "675b070824de553052c3134bc37981fcf8c38b47898d91bdf3cd476cf7e9d604"
+    },
+    {
+      "id": "accepted-length",
+      "elapsedMs": 184,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": true,
+        "relation": {
+          "objects": [
+            "a",
+            "b"
+          ],
+          "status": "accepted"
+        }
+      },
+      "outputSha256": "85a2ea46c2d4d578db5ebde9b10c861e73a254305a799fa0bc62b7b87a059945"
+    },
+    {
+      "id": "fixed-boundary",
+      "elapsedMs": 172.20000004768372,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": true,
+        "relation": {
+          "objects": [
+            "a",
+            "b"
+          ],
+          "status": "accepted"
+        }
+      },
+      "outputSha256": "6bd4da5a3c9ca86d5af359a393d8e8f81572b650db44fe29fadfa09ff60685dc"
+    },
+    {
+      "id": "multistage-length",
+      "elapsedMs": 167.39999985694885,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": true,
+        "relation": {
+          "objects": [
+            "a",
+            "b"
+          ],
+          "status": "accepted"
+        }
+      },
+      "outputSha256": "0eafeb736f0a4e53722d186c3bcda72b4bd3035293f4ee26b6a6c052e9f1dae5"
+    },
+    {
+      "id": "unrelated-raw-spline",
+      "elapsedMs": 171.69999980926514,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": true,
+        "relation": {
+          "objects": [
+            "a",
+            "b"
+          ],
+          "status": "accepted"
+        }
+      },
+      "outputSha256": "2adaad0508065d74365fa37c7b7a509d320cab8e58f1533e719225ae56909954"
+    },
+    {
+      "id": "legacy-missing-hint",
+      "elapsedMs": 153.79999995231628,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": false,
+        "error": {
+          "code": "UNSUPPORTED",
+          "message": "Rejected or missing admission intent cannot be regenerated."
+        }
+      }
+    },
+    {
+      "id": "changed-explicit-hint",
+      "elapsedMs": 164.5,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": false,
+        "error": {
+          "code": "INTENT_CHANGED",
+          "message": "Constraint intent changed during solving."
+        }
+      }
+    },
+    {
+      "id": "degenerate-source",
+      "elapsedMs": 153.29999995231628,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Degenerate sketch segment."
+        }
+      }
+    },
+    {
+      "id": "malformed-json",
+      "elapsedMs": 145.80000019073486,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+        }
+      }
+    },
+    {
+      "id": "extra-request-key",
+      "elapsedMs": 144.40000009536743,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Invalid sketch transition request."
+        }
+      }
+    },
+    {
+      "id": "utf8-over-limit",
+      "elapsedMs": 174.29999995231628,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Invalid sketch transition request."
+        }
+      }
+    },
+    {
+      "id": "external-map",
+      "elapsedMs": 161.09999990463257,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": true
+      },
+      "outputSha256": "675b070824de553052c3134bc37981fcf8c38b47898d91bdf3cd476cf7e9d604"
+    },
+    {
+      "id": "external-date",
+      "elapsedMs": 156.29999995231628,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": true
+      },
+      "outputSha256": "675b070824de553052c3134bc37981fcf8c38b47898d91bdf3cd476cf7e9d604"
+    },
+    {
+      "id": "external-array",
+      "elapsedMs": 163.59999990463257,
+      "inputJSONUnchanged": true,
+      "result": {
+        "revision": "review-current",
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Invalid solve request."
+        }
+      }
+    }
+  ],
+  "started": 14,
+  "terminated": 14,
+  "violations": []
+}

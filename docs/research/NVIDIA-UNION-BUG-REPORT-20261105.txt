@@ -1,0 +1,39 @@
+Title: Manifold union can retain void classification when filling a cavity
+
+## Summary
+On main `3fd5b9548d19aa8c12c29bc9637a96d42a06f8a5`, `SmApiBoolean` can return success with incorrect material/void classification and volume when UNION fills a cavity. Reversing operands changes the result.
+
+## Minimal geometry
+- A: box at (0,0,0), size 10x10x10.
+- I: box at (2,2,2), size 6x6x6.
+- H = A - I: volume 784, one material region and one void.
+- C: separate box at (20,0,0), size 10x10x10; D = H union C.
+
+| Operation | Expected volume | Observed volume | Material/void regions |
+|---|---:|---:|---|
+| H union I | 1000 | 0 | 0 / 1 |
+| I union H | 1000 | 1000 | 1 / 0 |
+| D union I | 2000 | 1000 | 1 / 1 |
+| I union D | 2000 | 2000 | 2 / 0 |
+
+Inputs pass level-2 AssertValid and manifold/census checks immediately before consuming calls. The reproducer uses deep copies, checks result ownership and retained originals, and applies no healing/reclassification. Result validity can still pass despite the wrong census/volume.
+
+## Reproducer and proposed fix
+https://github.com/CC-David-CC/usd-brep/tree/fix/union-material-survivor
+
+Regression-only commit `761974f979ff61d6df2492146967fd3bf3687edc` can be applied to the upstream base without kernel-fix commit `03b5adf9dca5041b14177bf802dde38e2968eca0`. It registers `TestSmUnionMaterialSurvivor` in the existing SM_API runner. Standard native reproduction after applying the test:
+```sh
+./repo.sh build
+./tests/SM_API_test/SM_API_test.sh linux-x86_64
+```
+
+The proposed fix preserves an adjacent finite, unattributed material region during ordinary postprocessed manifold UNION face deletion. Other operations and specialized modes retain their existing policy. Please review that assumption.
+
+## Validation
+The exact focused C++ test compiled to WASM with Emscripten 4.0.10 fails on upstream at the first exact-fill census assertion and passes with the fix. The fixed test covers both orders of exact/enclosing/composite fills and overlap/disjoint controls; later baseline cases are not claimed to have run.
+
+Native g++ syntax checks pass; native CPU execution and the full upstream suite were not run. A separate bounded 48-expression box corpus found 6 corrected, 34 passing on both builds, 2 unchanged partial-fill failures and 6 boundary-only cases outside scope, with no new regressions. This is not general Boolean qualification.
+
+Prefilled issue URL:
+https://github.com/NVIDIA-Omniverse/usd-brep/issues/new?title=Manifold%20union%20can%20retain%20void%20classification%20when%20filling%20a%20cavity&body=%23%23%20Summary%0AOn%20main%20%603fd5b9548d19aa8c12c29bc9637a96d42a06f8a5%60%2C%20%60SmApiBoolean%60%20can%20return%20success%20with%20incorrect%20material%2Fvoid%20classification%20and%20volume%20when%20UNION%20fills%20a%20cavity.%20Reversing%20operands%20changes%20the%20result.%0A%0A%23%23%20Minimal%20geometry%0A-%20A%3A%20box%20at%20(0%2C0%2C0)%2C%20size%2010x10x10.%0A-%20I%3A%20box%20at%20(2%2C2%2C2)%2C%20size%206x6x6.%0A-%20H%20%3D%20A%20-%20I%3A%20volume%20784%2C%20one%20material%20region%20and%20one%20void.%0A-%20C%3A%20separate%20box%20at%20(20%2C0%2C0)%2C%20size%2010x10x10%3B%20D%20%3D%20H%20union%20C.%0A%0A%7C%20Operation%20%7C%20Expected%20volume%20%7C%20Observed%20volume%20%7C%20Material%2Fvoid%20regions%20%7C%0A%7C---%7C---%3A%7C---%3A%7C---%7C%0A%7C%20H%20union%20I%20%7C%201000%20%7C%200%20%7C%200%20%2F%201%20%7C%0A%7C%20I%20union%20H%20%7C%201000%20%7C%201000%20%7C%201%20%2F%200%20%7C%0A%7C%20D%20union%20I%20%7C%202000%20%7C%201000%20%7C%201%20%2F%201%20%7C%0A%7C%20I%20union%20D%20%7C%202000%20%7C%202000%20%7C%202%20%2F%200%20%7C%0A%0AInputs%20pass%20level-2%20AssertValid%20and%20manifold%2Fcensus%20checks%20immediately%20before%20consuming%20calls.%20The%20reproducer%20uses%20deep%20copies%2C%20checks%20result%20ownership%20and%20retained%20originals%2C%20and%20applies%20no%20healing%2Freclassification.%20Result%20validity%20can%20still%20pass%20despite%20the%20wrong%20census%2Fvolume.%0A%0A%23%23%20Reproducer%20and%20proposed%20fix%0Ahttps%3A%2F%2Fgithub.com%2FCC-David-CC%2Fusd-brep%2Ftree%2Ffix%2Funion-material-survivor%0A%0ARegression-only%20commit%20%60761974f979ff61d6df2492146967fd3bf3687edc%60%20can%20be%20applied%20to%20the%20upstream%20base%20without%20kernel-fix%20commit%20%6003b5adf9dca5041b14177bf802dde38e2968eca0%60.%20It%20registers%20%60TestSmUnionMaterialSurvivor%60%20in%20the%20existing%20SM_API%20runner.%20Standard%20native%20reproduction%20after%20applying%20the%20test%3A%0A%60%60%60sh%0A.%2Frepo.sh%20build%0A.%2Ftests%2FSM_API_test%2FSM_API_test.sh%20linux-x86_64%0A%60%60%60%0A%0AThe%20proposed%20fix%20preserves%20an%20adjacent%20finite%2C%20unattributed%20material%20region%20during%20ordinary%20postprocessed%20manifold%20UNION%20face%20deletion.%20Other%20operations%20and%20specialized%20modes%20retain%20their%20existing%20policy.%20Please%20review%20that%20assumption.%0A%0A%23%23%20Validation%0AThe%20exact%20focused%20C%2B%2B%20test%20compiled%20to%20WASM%20with%20Emscripten%204.0.10%20fails%20on%20upstream%20at%20the%20first%20exact-fill%20census%20assertion%20and%20passes%20with%20the%20fix.%20The%20fixed%20test%20covers%20both%20orders%20of%20exact%2Fenclosing%2Fcomposite%20fills%20and%20overlap%2Fdisjoint%20controls%3B%20later%20baseline%20cases%20are%20not%20claimed%20to%20have%20run.%0A%0ANative%20g%2B%2B%20syntax%20checks%20pass%3B%20native%20CPU%20execution%20and%20the%20full%20upstream%20suite%20were%20not%20run.%20A%20separate%20bounded%2048-expression%20box%20corpus%20found%206%20corrected%2C%2034%20passing%20on%20both%20builds%2C%202%20unchanged%20partial-fill%20failures%20and%206%20boundary-only%20cases%20outside%20scope%2C%20with%20no%20new%20regressions.%20This%20is%20not%20general%20Boolean%20qualification.
+

@@ -1,0 +1,73 @@
+{
+  "fixtureBytes": 151959,
+  "counts": {
+    "rewind": {
+      "dropGeometry": {
+        "calls": 4000,
+        "beforeMaterial": 1000,
+        "meshPresent": 3000,
+        "ms": 19.3000009059906
+      },
+      "updateBounds": {
+        "calls": 2000,
+        "beforeMaterial": 1000,
+        "meshPresent": 1000,
+        "ms": 83.1999979019165
+      },
+      "createGeometry": {
+        "calls": 2000,
+        "beforeMaterial": 1000,
+        "meshPresent": 1000,
+        "ms": 27.599998712539673
+      },
+      "elapsedMs": 422.2999999523163,
+      "models": 1000,
+      "history": 2000,
+      "rootViews": 1000,
+      "faceViews": 1000,
+      "previousRootsReleased": false,
+      "previousFacesReleased": true,
+      "firstRootAttributeObservers": 2,
+      "firstFaceAttributeObservers": 1
+    },
+    "full": {
+      "dropGeometry": {
+        "calls": 5000,
+        "beforeMaterial": 2000,
+        "meshPresent": 3000,
+        "ms": 5.599999904632568
+      },
+      "updateBounds": {
+        "calls": 4000,
+        "beforeMaterial": 2000,
+        "meshPresent": 2000,
+        "ms": 176.60000014305115
+      },
+      "createGeometry": {
+        "calls": 4000,
+        "beforeMaterial": 2000,
+        "meshPresent": 2000,
+        "ms": 66.89999771118164
+      },
+      "elapsedMs": 620.3000001907349,
+      "models": 2000,
+      "history": 2000,
+      "rootViews": 2000,
+      "faceViews": 2000,
+      "previousRootsReleased": false,
+      "previousFacesReleased": true,
+      "firstRootAttributeObservers": 3,
+      "firstFaceAttributeObservers": 1
+    }
+  },
+  "selection": {
+    "id": "S:0",
+    "registered": true,
+    "marked": true,
+    "viewMarked": true
+  },
+  "historyUnchanged": true,
+  "sourceUnchanged": true,
+  "pointer": 1999,
+  "appHash": "e8d809e7f6775c0e0e331ab874d3197e7ab61c4f231e349401ef597719c3ed65"
+}

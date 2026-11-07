@@ -1,0 +1,1 @@
+const path=require('path');const c=require('../mechanical/webpack.signed-distance.config.cjs');c.entry=path.join(__dirname,'rigid-save-bounds.test.mjs');c.output={path:'/tmp/codi-rigid-independent-review',filename:'test.cjs'};module.exports=c;

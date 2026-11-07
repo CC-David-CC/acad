@@ -1,0 +1,74 @@
+{
+  "runtimeSource": "6d8395a6cfa330aac807f344c6f92dfce4c2ad0b",
+  "artifacts": {
+    "main.js": {
+      "sha256": "9ea3a1ae853cf81381a34a4e449622ba6d92615785dacad95528c00ef52cf796",
+      "bytes": 310388
+    },
+    "main.wasm": {
+      "sha256": "28e8e2c2752cef100a98e24ec487f7d90021edb98fb060fdd1160fe63501bbe2",
+      "bytes": 35101040
+    },
+    "occ-portable.js": {
+      "sha256": "b3d91cbb02f90ba56732039283d787b92eda97c51091fafbd933ecf4db30dd97",
+      "bytes": 310338
+    }
+  },
+  "preBuildSourcesVerifiedAfter": {
+    "shape-io/main.cpp": {
+      "sha256": "862b9d4e32b499b9763300327b26c38e3059a69dc9d33db9b0ce959be09ba333",
+      "bytes": 14349
+    },
+    "shape-io/selectedProfileV2.hpp": {
+      "sha256": "817b11686f9ff20822d2e7dc104c5bb8699cb34117cfcc6d14a5a9a4d4883b06",
+      "bytes": 9741
+    },
+    "shape-io/ownedTopologyV1.hpp": {
+      "sha256": "227b19221b5645ad3d356fef27a07aa11c040c4b67ca386d6a08131a2517fb29",
+      "bytes": 9232
+    },
+    "shape-io/profilePrismProvenanceV1.hpp": {
+      "sha256": "a7c803833b3657a74e80ab678a59d02af889beb6c055d911acf4a1f835a5e637",
+      "bytes": 6116
+    },
+    "shape-io/ownedEdgeTreatmentV1.hpp": {
+      "sha256": "5056292e410b7ad780d4fa7424f13c347825178e16ded1b574ca6750ead6d160",
+      "bytes": 7074
+    }
+  },
+  "probeSources": {
+    "shape-io/edge-treatment-main-v1-adapt.py": {
+      "sha256": "050327b1f3735c4d3cb1b25d8ca3cc2f83d58dda211f7a7b3f0da91b06a70e50",
+      "bytes": 1102
+    },
+    "shape-io/edge-treatment-main-v1-check.py": {
+      "sha256": "5185788f88420f4ad520b52a3f589807c41012dedcd04ca82c61679380d2e9a7",
+      "bytes": 2935
+    },
+    "shape-io/edge-treatment-main-v1-probe.cjs": {
+      "sha256": "3552ca53142f9f2e64bbb3dd3d178f2045eba7ff59eebcdc429c066c2d14ba37",
+      "bytes": 7164
+    },
+    "shape-io/run-edge-treatment-main-v1-probe.cjs": {
+      "sha256": "134b5a40b9c15120bfd1e74e20612da8b17a97a9f9727a8a2fa3844ccd82e57d",
+      "bytes": 880
+    },
+    "shape-io/selected-profile-v2-probe.cjs": {
+      "sha256": "07cf0b5c73be5da38703b3fc69616f8aa77e81a459724a895a680a35e0439b16",
+      "bytes": 3213
+    }
+  },
+  "buildLog": {
+    "sha256": "f790184d0e6fa209c55ca6d6dd9546ebd9fd79db46450628988ef6ec2366cddc",
+    "bytes": 3612
+  },
+  "portableAdapterExactReproduction": true,
+  "initialReceiptPreserved": {
+    "path": "/mnt/data10tb/codi-occ-edge-treatment-main-20261106-r1/actual-export-first-receipt.json",
+    "sha256": "a1a99f0f6178aa64463a1688a1b3022880821fde68f027751378bcd7fd2496d7",
+    "bytes": 133073
+  },
+  "noNativeRebuildInThisCheckpoint": true,
+  "retainedR2RunnerUnchanged": true,
+  "sequentialInputSnapshots": "receipt.json rows[name=edge-sequential].inputBefore/inputAfter, actual catalog and metrics exact equality"
+}

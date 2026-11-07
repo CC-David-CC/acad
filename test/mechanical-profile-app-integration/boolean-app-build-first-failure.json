@@ -1,0 +1,7 @@
+{
+  "source": "cd98ff9f03a12c6257666893ef2e9c165f1119a7",
+  "status": "FAIL",
+  "cause": "Missing Boolean asset/resource rule; fixed by298e0e151",
+  "buildLogSHA256": "4b486f48c0f44a2b130a684231ad28851c46d20d9a5a4079c559090fd3641a96",
+  "worktreeRemoved": "/mnt/data10tb/codi-polygon-combined-boolean-app-20261106-r1"
+}

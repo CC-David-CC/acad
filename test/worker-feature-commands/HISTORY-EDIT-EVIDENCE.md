@@ -1,0 +1,7 @@
+# Scoped worker extrusion history edit
+
+On base `c9e05a18`, an isolated R730 app build rebuilt all sketch, project, manufacturing-hash and prism workers from source with private dependency/cache copies and clean pinned OCC 13617 runtime. `dist/static/index.bundle.js` SHA-256 `ad0038d6c8b6c4339184243a5513abb41e889a153445525ae7610e6e3aa1fae0`; Webpack and `tsc --noEmit` passed.
+
+`history-edit-browser.test.cjs` uses actual browser CAD models/workers and a separate independently bound document. It creates 100×50×20 geometry, rewinds the feature-history cursor (not authored undo), rejects a stale revision and invalid depth without state changes, then changes the existing extrusion to 35 through the same `stepOverriding` craft path as the wizard. A held real profile-worker dispatch is separately aborted by signal and invalidated by the host guard; each terminates a worker, retains the prior accepted model/history and leaves zero candidates. The other document's serialized state stays unchanged. It does not claim signed desktop acceptance, full agent bracket workflow, an authored undo journal, or physical-device testing.
+
+Reproduce against a loopback server of the built `dist` and a separately owned Chromium: `JSKETCHER_TEST_URL=http://127.0.0.1:PORT/ CODI_TEST_CDP=http://127.0.0.1:CDP/ PUPPETEER_CORE_PATH=/path/to/puppeteer-core node test/worker-feature-commands/history-edit-browser.test.cjs`.

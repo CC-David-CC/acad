@@ -1,0 +1,6 @@
+CANCELLED_TRAVEL {"result":{"ok":false,"name":"AbortError"},"sketch":true,"model":true,"journal":false,"journalBefore":"{\"revision\":\"1:3:c10c79cf-792b-4c65-bfb5-199d01c28073\",\"canUndo\":true,\"canRedo\":false,\"undoTarget\":{\"kind\":\"sketch-bytes\",\"faceId\":\"S:0/SURFACE\"},\"redoTarget\":null}","journalAfter":"{\"revision\":\"1:3:231cb0c7-2d29-4aea-beea-978e2677b374\",\"canUndo\":true,\"canRedo\":false,\"undoTarget\":{\"kind\":\"sketch-bytes\",\"faceId\":\"S:0/SURFACE\"},\"redoTarget\":null}"}
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at /tmp/codi-rectangle-edit-journal-observation.cjs:53:258

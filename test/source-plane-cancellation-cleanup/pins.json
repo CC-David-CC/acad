@@ -1,0 +1,33 @@
+{
+  "base": "e55f03573",
+  "beforeCommit": "60ef3ccc0",
+  "productCommit": "46a725732b53695027e01e3876969f1ad3fc2e4d",
+  "node": "v24.22.1",
+  "qualification": {
+    "newGroups": 26,
+    "retainedServiceGroups": 9,
+    "irrecoverableScenarios": 2,
+    "tsc": "PASS",
+    "nativePublicationClaim": false,
+    "signedAppClaim": false
+  },
+  "sha256": {
+    "web/app/cad/craft/sourcePlaneDepthCommands.ts": "82fcd0bb1cf7ae4597271bed20f97e0b17fb16391d077378e30a4dc4c131d6ee",
+    "web/app/cad/craft/workerSolidPointCommands.ts": "50c24341ff04c8e4da771eabd099a1c2c737a3afbefb51edb95dfc75fca1ccd1",
+    "test/source-plane-cancellation-cleanup/after-build-pins.json": "488183eefe1af8faff47a2699089d5b77919567198d18629beec8bb53248964f",
+    "test/source-plane-cancellation-cleanup/after-build.log": "c8214ad8c82dbf820537934707a19f817a5c3555a2165932338de501765d56f0",
+    "test/source-plane-cancellation-cleanup/after-tests.log": "5f5ae97644cf02360d03db244bc4d75d852559f957bf2e52ca238cadbfe77e68",
+    "test/source-plane-cancellation-cleanup/before-build-pins.json": "75064494d06d8549d029a20bc07730a799db38aff27bd128feb271bb53e7bfbe",
+    "test/source-plane-cancellation-cleanup/before-build.log": "ff02268f8a9260451e45a04fe92c57252bc02d2c97203b3375a9096c108a81c5",
+    "test/source-plane-cancellation-cleanup/before-probe.mjs": "ff76004ac2c62b1d0245f119961e280bef1c92f05d26035fd2a479c15221509a",
+    "test/source-plane-cancellation-cleanup/before.json": "6245ff1d30f0c16953d308b12bdd59059f4e542dccf85baab64c98402128af03",
+    "test/source-plane-cancellation-cleanup/build.cjs": "e9bdc39c0d6959d9bb006097a5e26305d9b1c93c3efd3b203b8e608640555051",
+    "test/source-plane-cancellation-cleanup/entry.ts": "58048aca49feb30efd7e656ea4a7c9abddcb25a6db2a10ec31cf7ee0c65b37af",
+    "test/source-plane-cancellation-cleanup/fixture.mjs": "546384346ac3903d21b459d4a48f0390dbff0810d000ee6c2a4cf71d14ed684f",
+    "test/source-plane-cancellation-cleanup/intrinsic-fault.mjs": "fc34cb68a4773e98bc5e17744df2e67fb63ff083af0eb0ae46133e32ce9c8a51",
+    "test/source-plane-cancellation-cleanup/intrinsic-receipt.json": "73ea9cb81afee6228751cba63a107338262022557f64c057859b1720d1a65dc5",
+    "test/source-plane-cancellation-cleanup/intrinsic.log": "02ae2c7ca07d7d5e67fd24cb376dd2fccd6dbc1bb9d1325e6fa8672d815d6409",
+    "test/source-plane-cancellation-cleanup/settlement.test.mjs": "114331c6214fbaa01e777230235c7b7b14f79325be5d46973631a791ca9a8e5d",
+    "test/source-plane-cancellation-cleanup/tsc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,63 @@
+TAP version 13
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: independent creation-candidate verification refuses unrelated free-loop displacement
+not ok 1 - independent creation-candidate verification refuses unrelated free-loop displacement
+  ---
+  duration_ms: 525.159743
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/verification-regression.test.mjs:9:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    A valid solved candidate must not move an unrelated free loop
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/verification-regression.test.mjs:9:569)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: independent journal-pair verification refuses unrelated free-loop displacement
+not ok 2 - independent journal-pair verification refuses unrelated free-loop displacement
+  ---
+  duration_ms: 524.196946
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/verification-regression.test.mjs:9:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    A valid solved candidate must not move an unrelated free loop
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/verification-regression.test.mjs:9:569)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 0
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1216.242715

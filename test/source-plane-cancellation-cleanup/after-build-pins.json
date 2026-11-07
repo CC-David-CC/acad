@@ -1,0 +1,10 @@
+{
+  "sourceHashes": {
+    "web/app/cad/craft/sourcePlaneDepthCommands.ts": "82fcd0bb1cf7ae4597271bed20f97e0b17fb16391d077378e30a4dc4c131d6ee",
+    "test/source-plane-cancellation-cleanup/entry.ts": "58048aca49feb30efd7e656ea4a7c9abddcb25a6db2a10ec31cf7ee0c65b37af",
+    "test/source-plane-cancellation-cleanup/build.cjs": "e9bdc39c0d6959d9bb006097a5e26305d9b1c93c3efd3b203b8e608640555051"
+  },
+  "worker": "c4709d80d41edbcc0b70c801f00464972b1395b484e9b1badcedc629bb7b9c93",
+  "service": "f5393461b797554996d61d18d8a1371d0aeb6c2757947ee3baaf354b4a8326f0",
+  "node": "v24.22.1"
+}

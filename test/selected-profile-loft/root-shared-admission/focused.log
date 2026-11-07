@@ -1,0 +1,25 @@
+✔ saved eight fields preserve actual ordered references without geometry/defaults (2.517134ms)
+✔ explicit circle seam radians preserve sign/order and require actual curve reference later (0.303023ms)
+✔ invalid identities/build/units/policies and all unknown saved fields refuse (1.461504ms)
+✔ section count, distinct source, sparse/accessor/symbol and unknown seam refuse without getter calls (0.435884ms)
+✔ seam numeric types/domain and geometry ordinals cannot enter history (0.357264ms)
+✔ loft refuses stale missing before allocation (3.822086ms)
+✔ loft refuses stale feature before allocation (1.335253ms)
+✔ loft refuses stale first source before allocation (0.561335ms)
+✔ loft refuses stale second source before allocation (0.345123ms)
+✔ loft refuses stale region before allocation (0.467595ms)
+✔ loft refuses stale curve before allocation (0.387894ms)
+✔ loft refuses stale angle before allocation (0.451034ms)
+✔ loft refuses stale direction before allocation (0.287303ms)
+✔ loft refuses stale section order before allocation (0.346114ms)
+✔ loft refuses an actually missing second source before allocation (0.421034ms)
+✔ loft refuses accessor binding without invoking it (0.442804ms)
+✔ loft refuses native dispatch without declared loft capability (0.635536ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 96.291884

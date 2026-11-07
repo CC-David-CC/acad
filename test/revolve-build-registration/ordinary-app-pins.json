@@ -1,0 +1,387 @@
+{
+  "scope": "Ordinary application webpack output, all dist files; not outer desktop app-package acceptance",
+  "files": {
+    "static/07d763a05f35cd257501.wasm": {
+      "bytes": 34989243,
+      "sha256": "07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e"
+    },
+    "static/7bb5f8ee10fcafdab787.wasm": {
+      "bytes": 493694,
+      "sha256": "7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d"
+    },
+    "static/a81af0b78dd585124f3f.wasm": {
+      "bytes": 35020148,
+      "sha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+    },
+    "static/authoredRegions.mjs": {
+      "bytes": 3263,
+      "sha256": "4b79e9e0da035acf505a71e29bdeecf95f9105c8e276b29e71b4a2bcc091a92f"
+    },
+    "static/boolean-history/boolean-history-occ-portable.js": {
+      "bytes": 310458,
+      "sha256": "dd666902fe926d69cc3c8843f5568c2a3e569f38ff49291baa2f248165b5ea99"
+    },
+    "static/boolean-history/boolean-history-occ.wasm": {
+      "bytes": 35156483,
+      "sha256": "8d5e537e0d7f9e12b8ae0eaf239c0be1080934ed12a24bf6e7f849c9135ed5a2"
+    },
+    "static/boolean-history/modules/engine/extrusion/simplePolygon.mjs": {
+      "bytes": 5128,
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df"
+    },
+    "static/boolean-history/modules/engine/mount/boolean-history-worker.js": {
+      "bytes": 384506,
+      "sha256": "b4f5502bf81de88a22b3513ae2b60d286609743b47f97edf52c08b9235487620"
+    },
+    "static/boolean-history/modules/engine/mount/booleanSelectionClaims.mjs": {
+      "bytes": 9413,
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5"
+    },
+    "static/boolean-history/modules/engine/mount/exactMeshVolume.mjs": {
+      "bytes": 4760,
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c"
+    },
+    "static/boolean-history/modules/engine/mount/ownedBooleanContract.mjs": {
+      "bytes": 7736,
+      "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39"
+    },
+    "static/boolean-history/modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+      "bytes": 6918,
+      "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81"
+    },
+    "static/boolean-history/modules/engine/mount/ownedThroughHolePlan.mjs": {
+      "bytes": 8055,
+      "sha256": "7dd92c330acf098e258a916e2b8209a3ebacb62e1cdf6265dd8ae054f85fd69c"
+    },
+    "static/boolean-history/modules/engine/mount/ownedTopologyContract.mjs": {
+      "bytes": 7063,
+      "sha256": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9"
+    },
+    "static/boolean-history/modules/engine/mount/polygonProfilePlan.mjs": {
+      "bytes": 8040,
+      "sha256": "a0419bce6708ab912f3ae18b2916f63673f76d84729bd3d3362b4fcf6418f3ed"
+    },
+    "static/boolean-history/modules/engine/mount/prismSelectionIndex.mjs": {
+      "bytes": 4753,
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c"
+    },
+    "static/boolean-history/modules/engine/mount/selectedProfilePlan.mjs": {
+      "bytes": 8755,
+      "sha256": "cb19aa85d723fef1395a4b06d85f9ddacf2b2381ded879ab863793fd316a45e8"
+    },
+    "static/boolean-history/modules/engine/mount/selectionAncestryIndex.mjs": {
+      "bytes": 11394,
+      "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6"
+    },
+    "static/boolean-history/modules/engine/mount/selectionLineageIndex.mjs": {
+      "bytes": 18757,
+      "sha256": "32da989a9add455aeee4bbe1e6f0d50270da565208d09bf9e4a0567bbdce3e8b"
+    },
+    "static/boolean-history/modules/engine/solid/ownedHoleIntent.mjs": {
+      "bytes": 2877,
+      "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c"
+    },
+    "static/boolean-history/modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+      "bytes": 1913,
+      "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff"
+    },
+    "static/boolean-history/modules/engine/solid/solidIntent.mjs": {
+      "bytes": 4276,
+      "sha256": "521841efb17bec51740773aaf0d3ebc3efd7f10fefd802f2f4d6d1c7592ec5a7"
+    },
+    "static/boundedPrismBoundary.mjs": {
+      "bytes": 4597,
+      "sha256": "c7ca8a53962d587cde7bd162a08ad00b6ae523a432216e19202943726731ad51"
+    },
+    "static/centeredHolePlan.mjs": {
+      "bytes": 3706,
+      "sha256": "3a40691c595ac5630c47cbe8d8e943d22a29d9fc7f43083671ad770633a856f8"
+    },
+    "static/centeredHoleTopology.mjs": {
+      "bytes": 8184,
+      "sha256": "d2707b381a18e53a0157c2af068fe83d869185662e4447c38ea0ba639949655e"
+    },
+    "static/enclosureLabelContact.mjs": {
+      "bytes": 2736,
+      "sha256": "774a3488fa63974f847a89c458f269ff2d4795472b259447fc6cab680d9c03ba"
+    },
+    "static/enclosureManufacturingMesh.mjs": {
+      "bytes": 10388,
+      "sha256": "8e6486f479fd4e6379ac169eaff4a1b18380da4947421362a82c309c9e78f3a0"
+    },
+    "static/enclosureMesh.mjs": {
+      "bytes": 1754,
+      "sha256": "2b6f1474105c430f3efe6eb87d002576d6a9744a7b1cc98f5493ed129b2ce5f3"
+    },
+    "static/enclosurePlan.mjs": {
+      "bytes": 4369,
+      "sha256": "080ee18dd77731efaccfb9101b3d7f138b0ea6f525b881b2ccf4b174d544d19f"
+    },
+    "static/exactMeshVolume.mjs": {
+      "bytes": 4760,
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c"
+    },
+    "static/f33f19cd0098b610756d.wasm": {
+      "bytes": 3944436,
+      "sha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa"
+    },
+    "static/fourCornerHolePlan.mjs": {
+      "bytes": 10791,
+      "sha256": "75547f1d32a047d344d3933282cb90b09d90b7086798862e874cca68abcc030a"
+    },
+    "static/fourCornerHoleProvenance.mjs": {
+      "bytes": 4302,
+      "sha256": "24f4323bb57fdfc1920a4b2ad3f5ca8b28ac2fbd8bcf8ce8415029ed21af287e"
+    },
+    "static/fourCornerHoleTopology.mjs": {
+      "bytes": 11082,
+      "sha256": "dae7a5c3c5e4fa93a0103ec036143e26cffbf7ecc3a25a0b5b21759345d47499"
+    },
+    "static/index.bundle.js": {
+      "bytes": 33538247,
+      "sha256": "6f05e7c64ede86afba66db34bb24cd43043362217ed392bedf01cd7bf864d5a6"
+    },
+    "static/manifold-verified-worker.js": {
+      "bytes": 92667,
+      "sha256": "35876bd7cd773b5eb243fde935599afb670314c192ba77ec11036dcb12aa79e4"
+    },
+    "static/manufacturing-hash.b9be312ee7d9ee44402a.js": {
+      "bytes": 5163,
+      "sha256": "3f7cf784c31276d9cca6f700bb524fd3ecf6cf39763c686e43b5d350fdf08125"
+    },
+    "static/mechanical-profile/mechanical-profile-occ-portable.js": {
+      "bytes": 310338,
+      "sha256": "b3d91cbb02f90ba56732039283d787b92eda97c51091fafbd933ecf4db30dd97"
+    },
+    "static/mechanical-profile/mechanical-profile-occ.wasm": {
+      "bytes": 35101040,
+      "sha256": "28e8e2c2752cef100a98e24ec487f7d90021edb98fb060fdd1160fe63501bbe2"
+    },
+    "static/mechanical-profile/modules/engine/extrusion/simplePolygon.mjs": {
+      "bytes": 5128,
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df"
+    },
+    "static/mechanical-profile/modules/engine/mount/exactMeshVolume.mjs": {
+      "bytes": 4760,
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c"
+    },
+    "static/mechanical-profile/modules/engine/mount/mechanical-profile-worker.js": {
+      "bytes": 384386,
+      "sha256": "0c5464cff286ae74173e8863729948d0a0ee1282cb4617e1b40aab5555a23e7a"
+    },
+    "static/mechanical-profile/modules/engine/mount/ownedTopologyContract.mjs": {
+      "bytes": 7063,
+      "sha256": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9"
+    },
+    "static/mechanical-profile/modules/engine/mount/polygonProfilePlan.mjs": {
+      "bytes": 8040,
+      "sha256": "a0419bce6708ab912f3ae18b2916f63673f76d84729bd3d3362b4fcf6418f3ed"
+    },
+    "static/mechanical-profile/modules/engine/mount/prismSelectionIndex.mjs": {
+      "bytes": 4753,
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c"
+    },
+    "static/mechanical-profile/modules/engine/mount/selectedProfilePlan.mjs": {
+      "bytes": 8755,
+      "sha256": "cb19aa85d723fef1395a4b06d85f9ddacf2b2381ded879ab863793fd316a45e8"
+    },
+    "static/mechanical-profile/modules/engine/mount/selectionAncestryIndex.mjs": {
+      "bytes": 11394,
+      "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6"
+    },
+    "static/modules_brep_operations_mesh_browserNodeModuleStub_js.bundle.js": {
+      "bytes": 992,
+      "sha256": "c77f3fd14c7f9a20bddefa1f883a17cf3447907dc73778698b3e223d15b38328"
+    },
+    "static/occ-portable.js": {
+      "bytes": 307709,
+      "sha256": "a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884"
+    },
+    "static/oci-verified-worker.js": {
+      "bytes": 381684,
+      "sha256": "ba08bd6c4d4a88084e450fff722c35e509e0a437df3eabd72bff25d1549e3d6b"
+    },
+    "static/physical-parameters.43b70351c5e1c442158e.js": {
+      "bytes": 133135,
+      "sha256": "1cb90f172f8d8439f60ad7ccae4d77e849dbb5cc3dbdaaa7e93e940881000567"
+    },
+    "static/polygon-profile/modules/engine/extrusion/simplePolygon.mjs": {
+      "bytes": 5128,
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df"
+    },
+    "static/polygon-profile/modules/engine/mount/exactMeshVolume.mjs": {
+      "bytes": 4760,
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c"
+    },
+    "static/polygon-profile/modules/engine/mount/ownedTopologyContract.mjs": {
+      "bytes": 7063,
+      "sha256": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9"
+    },
+    "static/polygon-profile/modules/engine/mount/polygon-profile-worker.js": {
+      "bytes": 383328,
+      "sha256": "ec551ff4f0d776767e43821d22464949a15be9315e7ca59ee25246d8b2d74381"
+    },
+    "static/polygon-profile/modules/engine/mount/polygonProfilePlan.mjs": {
+      "bytes": 8040,
+      "sha256": "a0419bce6708ab912f3ae18b2916f63673f76d84729bd3d3362b4fcf6418f3ed"
+    },
+    "static/polygon-profile/modules/engine/mount/prismSelectionIndex.mjs": {
+      "bytes": 4753,
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c"
+    },
+    "static/polygon-profile/modules/engine/mount/selectedProfilePlan.mjs": {
+      "bytes": 8755,
+      "sha256": "cb19aa85d723fef1395a4b06d85f9ddacf2b2381ded879ab863793fd316a45e8"
+    },
+    "static/polygon-profile/polygon-profile-occ-portable.js": {
+      "bytes": 309280,
+      "sha256": "5414a24c96eff09b77f7d3fe758287c9696e63127c91e73011f6f2939de2a8eb"
+    },
+    "static/polygon-profile/polygon-profile-occ.wasm": {
+      "bytes": 35065928,
+      "sha256": "534ffdd2d88632a7878d654742f2df72c16691f3c814085e4f525efc74961e19"
+    },
+    "static/polygonProfilePlan.mjs": {
+      "bytes": 8029,
+      "sha256": "86a50173d803855d5b8c26b95d8a5c7071f48e1cd2d76601da7cf68dfe9748ef"
+    },
+    "static/prism-semantic.44eb88ab6ab37a2a5e20.js": {
+      "bytes": 1445716,
+      "sha256": "73030f14756060faabb406f54c1ff603ae68e66d58dc88252b3c3da67a9a83f2"
+    },
+    "static/profile-topology.mjs": {
+      "bytes": 5745,
+      "sha256": "700fc9fac9d73bf357d0bcba0599ac1dd44bfc81ca9eccd5464cfcdb64eb724b"
+    },
+    "static/profilePlan.mjs": {
+      "bytes": 6134,
+      "sha256": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237"
+    },
+    "static/project-validator.2447fd0fe0ed017e847d.js": {
+      "bytes": 1851639,
+      "sha256": "32c9bc7a1f26dc454b980f929b656498d4b25574b68d6257f5e1594ab06953c4"
+    },
+    "static/raw-smlib-worker.js": {
+      "bytes": 11639,
+      "sha256": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65"
+    },
+    "static/rectangleProfileRequest.mjs": {
+      "bytes": 9886,
+      "sha256": "cbbf644fdd4682db4d301f6adf61a4d733a0722b8a81b3b4c8f56cfcb0ddbcb9"
+    },
+    "static/revolve-profile/modules/engine/extrusion/simplePolygon.mjs": {
+      "bytes": 5128,
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df"
+    },
+    "static/revolve-profile/modules/engine/mount/booleanSelectionClaims.mjs": {
+      "bytes": 9413,
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5"
+    },
+    "static/revolve-profile/modules/engine/mount/exactMeshVolume.mjs": {
+      "bytes": 4760,
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c"
+    },
+    "static/revolve-profile/modules/engine/mount/ownedBooleanContract.mjs": {
+      "bytes": 7736,
+      "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39"
+    },
+    "static/revolve-profile/modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+      "bytes": 6918,
+      "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81"
+    },
+    "static/revolve-profile/modules/engine/mount/ownedRevolvePlan.mjs": {
+      "bytes": 980,
+      "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb"
+    },
+    "static/revolve-profile/modules/engine/mount/ownedThroughHolePlan.mjs": {
+      "bytes": 8055,
+      "sha256": "7dd92c330acf098e258a916e2b8209a3ebacb62e1cdf6265dd8ae054f85fd69c"
+    },
+    "static/revolve-profile/modules/engine/mount/ownedTopologyContract.mjs": {
+      "bytes": 7063,
+      "sha256": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9"
+    },
+    "static/revolve-profile/modules/engine/mount/polygonProfilePlan.mjs": {
+      "bytes": 8040,
+      "sha256": "a0419bce6708ab912f3ae18b2916f63673f76d84729bd3d3362b4fcf6418f3ed"
+    },
+    "static/revolve-profile/modules/engine/mount/prismSelectionIndex.mjs": {
+      "bytes": 4753,
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c"
+    },
+    "static/revolve-profile/modules/engine/mount/revolve-profile-worker.js": {
+      "bytes": 384608,
+      "sha256": "53446741cf3ea6de1108836a5a0c59d33c143cfdb854a95ba2609bf6d459223b"
+    },
+    "static/revolve-profile/modules/engine/mount/selectedProfilePlan.mjs": {
+      "bytes": 8755,
+      "sha256": "cb19aa85d723fef1395a4b06d85f9ddacf2b2381ded879ab863793fd316a45e8"
+    },
+    "static/revolve-profile/modules/engine/mount/selectionAncestryIndex.mjs": {
+      "bytes": 11394,
+      "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6"
+    },
+    "static/revolve-profile/modules/engine/mount/selectionLineageIndex.mjs": {
+      "bytes": 18757,
+      "sha256": "32da989a9add455aeee4bbe1e6f0d50270da565208d09bf9e4a0567bbdce3e8b"
+    },
+    "static/revolve-profile/modules/engine/solid/ownedHoleIntent.mjs": {
+      "bytes": 2877,
+      "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c"
+    },
+    "static/revolve-profile/modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+      "bytes": 1913,
+      "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff"
+    },
+    "static/revolve-profile/modules/engine/solid/ownedRevolveIntent.mjs": {
+      "bytes": 3529,
+      "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e"
+    },
+    "static/revolve-profile/modules/engine/solid/solidIntent.mjs": {
+      "bytes": 4276,
+      "sha256": "521841efb17bec51740773aaf0d3ebc3efd7f10fefd802f2f4d6d1c7592ec5a7"
+    },
+    "static/revolve-profile/revolve-profile-occ-portable.js": {
+      "bytes": 310560,
+      "sha256": "567419c13c78fff46cbc9cd07e5a993106b652a13cb9f6944831f68ef48729cc"
+    },
+    "static/revolve-profile/revolve-profile-occ.wasm": {
+      "bytes": 35175631,
+      "sha256": "ad9475c81ea2eecadd41c73f0b0860d7d06c53e4292b16047472f03995f3efdd"
+    },
+    "static/selected-profile-occ-portable.js": {
+      "bytes": 308353,
+      "sha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9"
+    },
+    "static/selected-profile-worker.js": {
+      "bytes": 381625,
+      "sha256": "c9d35d542bbf7c59d9c273a09d7372229a08ceb59e7c0fc38f7ba8b65bdb3b5b"
+    },
+    "static/selectedProfilePlan.mjs": {
+      "bytes": 8755,
+      "sha256": "cb19aa85d723fef1395a4b06d85f9ddacf2b2381ded879ab863793fd316a45e8"
+    },
+    "static/simplePolygon.mjs": {
+      "bytes": 5128,
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df"
+    },
+    "static/sketch-solver.980419540ca4b83df21c.js": {
+      "bytes": 3657312,
+      "sha256": "53d0b1f66262414da08a7c33cfd82b82523eaa03313476fbbdacdc0493aed44a"
+    },
+    "static/sketcher.bundle.js": {
+      "bytes": 21972034,
+      "sha256": "70b48776b986a3a63ed98ecdf139e65dba6cd9a93cbce272bfd32ea6bae04783"
+    },
+    "static/vendors-node_modules_cache_codi-manifold_manifold_js.bundle.js": {
+      "bytes": 80291,
+      "sha256": "dd23d45bfd08304b7ca227238bd192cd9211703fd8f70601b365192adff058f1"
+    }
+  },
+  "count": 94,
+  "bytes": 282318459,
+  "revolveBytes": 35985146,
+  "appPackageCeilingBytes": 335544320,
+  "bytesBelowCeiling": 53225861,
+  "helperEntryPresent": false
+}

@@ -1,0 +1,36 @@
+{
+  "scope": "Stop only owned20943 factory service/forward; preserve frozen artifacts and root services",
+  "forward": {
+    "pid": 2384655,
+    "args": [
+      "ssh",
+      "-N",
+      "-o",
+      "ExitOnForwardFailure=yes",
+      "-L",
+      "20943:127.0.0.1:20943",
+      "r730"
+    ],
+    "statStart": "181488058"
+  },
+  "before": {
+    "20943": true,
+    "20931": true,
+    "19329": true
+  },
+  "remote": {
+    "serverPID": 1810493,
+    "serverIdentityVerified": true,
+    "serverPortClosed": true,
+    "factoryFilesPreserved": 72,
+    "rawReceiptPreserved": true,
+    "reviewedRevolveNativePairPreserved": true,
+    "reviewedRawCachePreserved": true
+  },
+  "after": {
+    "20943": false,
+    "20931": true,
+    "19329": true
+  },
+  "status": "PASS"
+}

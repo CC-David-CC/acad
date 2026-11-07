@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "scope": "actual exported WebAssembly.Memory.buffer.byteLength; test-instrumented bootstrap; one fresh Worker per engine; no RSS or peak claim",
+  "rows": [
+    {
+      "engine": "occ",
+      "bytes": [
+        16777216,
+        16777216,
+        16777216,
+        16777216,
+        16777216,
+        16777216,
+        16777216,
+        16777216
+      ],
+      "instances": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "volume": 499.99999999999994,
+      "triangles": 12,
+      "terminated": true
+    },
+    {
+      "engine": "manifold",
+      "bytes": [
+        16777216,
+        16777216,
+        16777216,
+        16777216,
+        16777216,
+        16777216,
+        16777216,
+        16777216
+      ],
+      "instances": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "volume": 500,
+      "triangles": 12,
+      "terminated": true
+    },
+    {
+      "engine": "smlib",
+      "bytes": [
+        33554432,
+        33554432,
+        33554432,
+        33554432,
+        33554432,
+        33554432,
+        33554432,
+        33554432
+      ],
+      "instances": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "volume": 500,
+      "triangles": 12,
+      "terminated": true
+    }
+  ],
+  "csp": []
+}

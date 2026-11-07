@@ -1,0 +1,7 @@
+# Actual viewer refresh qualification
+
+Baseline a9daf app41764 on20478 queued512 complete paints for512 refresh calls. Candidate2bb10330e1889b8992b1b33af01263b5b3c1ee74, R730 /mnt/data10tb/codi-diag-final-refresh-length-20261105-r1, app e3882008660359e53714f3fdd1618c34cc4ac017f215919f55ea0e4d10433bcf on20480 queues one. Both real Canvas/browser runs preserve a refresh requested while painting (two frames) and paint zero times after disposal. Pending frame ownership is per viewer, cleared before paint and cancelled before tool teardown. TypeScript passes; no layout/model semantics changed.
+
+Reproduce test/webos/viewer-refresh-browser.test.cjs with JSKETCHER_TEST_URL/CODI_TEST_CDP and CODI_EXPECT_COALESCED=0 forbaseline or1 forcandidate. before.json/after.json record actual selected fixtures. Independent two-viewer/error/disposal controls are separately recorded in test/review-viewer-refresh/RESULT-2BB.md.
+
+The source-pinned many-constraint test was repeated using CODI_APP_SHA256. many-constraint-after.json preserves exact undo/redo, Save and history release, with another CAD page ready. Invoke558.4ms, undo714.1ms, redo897.2ms and long tasks remain. Shared-process observations are not a paired speed benchmark; numerical solve improvement is not established. Combined heartbeat1409.8ms, independent page11.1ms. after-profile.json is the actual sampled CPU profile. Duplicate-paint removal does not close Worker-first solve/hydration gates. No deployment or full CAD1 claim follows.

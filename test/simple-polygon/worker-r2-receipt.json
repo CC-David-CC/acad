@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "scope": "Actual Node Worker geometry/preparation, not public CAD/arrangement/native qualification",
+  "groups": 11,
+  "rows": [
+    "analytic triangle, rotated rectangle and concave L",
+    "reverse, cyclic rotation and translation preserve area",
+    "independent integer determinant oracle",
+    "cancellation and subnormal orientation retain exact signs",
+    "crossing, contact, overlap and gap remain distinct",
+    "invalid closed boundaries refuse explicitly",
+    "nested, disjoint, intersecting and touching loops",
+    "detached input and 512-vertex boundary",
+    "public gap fixtures have analytic v3 preparation",
+    "polygon and circle holes preserve region intent",
+    "rotated frame, winding and resolution are explicit"
+  ],
+  "utc": "2026-11-06T17:41:19.608392+00:00",
+  "sources": {
+    "modules/engine/extrusion/simplePolygon.mjs": "e98f6594090a1b88a2ca50f582c0f9f855f085fe3a7658e105ff0f423be96227",
+    "modules/engine/mount/polygonProfilePlan.mjs": "4945afd1772699c7e9d392b6a719422de10f4ea1bd25bf5c616ae79a97bf11ef",
+    "modules/engine/mount/selectedProfilePlan.mjs": "824dc5bfc8555a89fe9a647612ce76970f98b8adfd6e648185dd29e9f311c8a0",
+    "test/simple-polygon/worker.mjs": "875d2ec125a53cd704f835e88cab4c6a5c7a1aa60e11bea40e9a7b2edcaa0ba9",
+    "test/simple-polygon/worker.test.mjs": "e98815ced5c603ef00edd4c138b6611308c24e27fd88162611b79eb7f2d659e1"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "receipts/allocation-baseline-r10.json": "5ca421ddff1fb3077364338c59593c89f96da2e9e8440827a3c0e567524d4240",
+  "receipts/allocation-candidate-r10.json": "64665b31055fded885abb3666d3e1f337878391f86550b668bafec84a9e0d762",
+  "receipts/cancel-candidate-r10.json": "47b7fc2c23b1678f65a0edd4aecf69b6685baa77f5119bbbfd137faa2076cdb3",
+  "receipts/child-lifecycle-candidate-r10.json": "ea00e6eb4aef94e5231ce95d30b82aaa75f41a8a499b4ac16fb18118693bf06f",
+  "receipts/corners-baseline-r10.json": "69a549187f8acf443f1097af449fedbfe8878073ef6b9117b902c035c8b2af03",
+  "receipts/corners-candidate-r10.json": "9d97a836cb85094b8fd68d149e8cbcc3fdfb01e1d74289a34e052ada5fb4b420",
+  "receipts/final-http-pins.json": "cdbe226c85810022da2ec904db57a846c5ea546647b865369fdc1ee7609db490",
+  "receipts/restore-baseline-r10-repeat.json": "15dece7837568d1a97312a690dcc80998bf127dbde46ee4c2dc86f41685e293e",
+  "receipts/restore-baseline-r10.json": "e09003932f1b19822cdad9052f1cbb58f113c1155130a8ecbbdeed01fe9a2666",
+  "receipts/restore-candidate-r10-repeat.json": "06b062548c52ef6aaa11113fcb8e4889c906e4f2697e9a171594e697b35655c6",
+  "receipts/restore-candidate-r10.json": "0f3a97f98d7095806a7137444ac661ab89b85f1510a9a65a1ce3b2b0d3f150e9",
+  "receipts/runtime-pins-r10.json": "65aa00f61bce26c22067a378d7764018411cdfefffffbbbabc89bc15de761b75"
+}

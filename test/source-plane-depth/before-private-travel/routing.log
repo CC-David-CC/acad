@@ -1,0 +1,97 @@
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ exact Craft coordinator proposes detached plane history and one source-byte journal without publishing (411.035094ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ exact Craft coordinator privately travels the original byte journal and rejects mismatched candidate history (402.595605ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ stale source/tip and changed journal proposals refuse before dispatch; post-prepare stale state discards workspace (434.532746ms)
+✔ all genuine source-producing Workers terminate (1.285302ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ discovery exposes actual plane identity; guarded no-op starts no Worker or write (287.082447ms)
+verb 2.0.0
+verb 2.0.0
+✔ no-op callbacks cannot invalidate owner, source, units or current plane params then dispatch (272.740601ms)
+verb 2.0.0
+verb 2.0.0
+✔ no-op refuses a reentrant replacement of the standard operation run function (264.423743ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ real Worker prepares exact source/frame/history intent; real candidate frame gate passes and workspace discards (1884.483045ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ actual frame gate rejects changed params without reframe, wrong type or missing witness (535.150975ms)
+verb 2.0.0
+verb 2.0.0
+✔ stale/unknown/malformed/unsupported requests refuse before Worker or publication (239.848001ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ genuine held Worker replies are refused after source ABA and actual document lifetime abort (510.872056ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✖ private journal travel validates genuine sources and retains exact historical bytes without publishing (490.970968ms)
+✔ physically releases every production Worker (1.222271ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 12
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4991.711855
+
+✖ failing tests:
+
+test at test/source-plane-depth/service.test.mjs:16:1
+✖ private journal travel validates genuine sources and retains exact historical bytes without publishing (490.970968ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    Comparison {
+  +   code: 'INVALID_REQUEST'
+  -   code: 'NATIVE_NOT_RUN'
+    }
+  
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-source-plane-depth-20261107/test/source-plane-depth/service.test.mjs:18:260)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Expected exact source-plane data.
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:873272
+        at Zf (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:873291)
+        at Kf (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:873588)
+        at Im (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1033023)
+        at /tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1044511
+        at c (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024907)
+        at Generator._invoke (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1024660)
+        at Generator.next (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1025270)
+        at Em (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1030845)
+        at o (/tmp/codi-cad-source-plane-depth-20261107/.build/source-plane-depth/service.cjs:2:1031049),
+    expected: { code: 'NATIVE_NOT_RUN' },
+    operator: 'rejects',
+    diff: 'simple'
+  }

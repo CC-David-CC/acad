@@ -1,0 +1,245 @@
+{
+  "appSha": "655c7d15f09eb5a041911baeb6c079e2c52fd11a9e0fd242de81918171bf26dd",
+  "objects": 514,
+  "constraints": 513,
+  "bytes": 139517,
+  "restoreMs": 242.70000004768372,
+  "steps": [
+    {
+      "name": "inspect",
+      "wallMs": 1088.6000001430511,
+      "maxSiblingGapMs": 10.299999952316284,
+      "longTasks": []
+    },
+    {
+      "name": "relation",
+      "wallMs": 3583.100000143051,
+      "maxSiblingGapMs": 169.59999990463257,
+      "longTasks": []
+    },
+    {
+      "name": "capture",
+      "wallMs": 20,
+      "maxSiblingGapMs": 14.300000190734863,
+      "longTasks": []
+    },
+    {
+      "name": "undo",
+      "wallMs": 3183.600000143051,
+      "maxSiblingGapMs": 153.70000004768372,
+      "longTasks": []
+    },
+    {
+      "name": "redo",
+      "wallMs": 3319.7000000476837,
+      "maxSiblingGapMs": 155.80000019073486,
+      "longTasks": []
+    }
+  ],
+  "made": 9,
+  "ended": 9,
+  "status": "accepted",
+  "otherReady": true,
+  "profileTop": [
+    {
+      "functionName": "(idle)",
+      "scriptId": "0",
+      "url": "",
+      "lineNumber": -1,
+      "columnNumber": -1,
+      "hits": 10978
+    },
+    {
+      "functionName": "(program)",
+      "scriptId": "0",
+      "url": "",
+      "lineNumber": -1,
+      "columnNumber": -1,
+      "hits": 1376
+    },
+    {
+      "functionName": "(garbage collector)",
+      "scriptId": "0",
+      "url": "",
+      "lineNumber": -1,
+      "columnNumber": -1,
+      "hits": 113
+    },
+    {
+      "functionName": "getProgramInfoLog",
+      "scriptId": "0",
+      "url": "",
+      "lineNumber": -1,
+      "columnNumber": -1,
+      "hits": 86
+    },
+    {
+      "functionName": "updateViewportSizeIfNeeded",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 219854,
+      "columnNumber": 46,
+      "hits": 43
+    },
+    {
+      "functionName": "hash",
+      "scriptId": "24",
+      "url": "pptr:evaluate;%2Ftmp%2Fcodi-cad-mechanical-candidate-20261105%2Ftest%2Fdense-closed-sketch%2Fbrowser.test.cjs%3A7%3A26",
+      "lineNumber": 16,
+      "columnNumber": 41,
+      "hits": 38
+    },
+    {
+      "functionName": "copy",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 353745,
+      "columnNumber": 5,
+      "hits": 31
+    },
+    {
+      "functionName": "requestAnimationFrame",
+      "scriptId": "0",
+      "url": "",
+      "lineNumber": -1,
+      "columnNumber": -1,
+      "hits": 20
+    },
+    {
+      "functionName": "_callee$",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 311332,
+      "columnNumber": 55,
+      "hits": 16
+    },
+    {
+      "functionName": "WebGLRenderer.setSize",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 376364,
+      "columnNumber": 25,
+      "hits": 15
+    },
+    {
+      "functionName": "",
+      "scriptId": "24",
+      "url": "pptr:evaluate;%2Ftmp%2Fcodi-cad-mechanical-candidate-20261105%2Ftest%2Fdense-closed-sketch%2Fbrowser.test.cjs%3A7%3A26",
+      "lineNumber": 8,
+      "columnNumber": 221,
+      "hits": 15
+    },
+    {
+      "functionName": "worker.onmessage",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 310202,
+      "columnNumber": 52,
+      "hits": 14
+    },
+    {
+      "functionName": "LineMaterial",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 400966,
+      "columnNumber": 12,
+      "hits": 12
+    },
+    {
+      "functionName": "getResolution",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 219466,
+      "columnNumber": 22,
+      "hits": 11
+    },
+    {
+      "functionName": "record",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 311266,
+      "columnNumber": 15,
+      "hits": 10
+    },
+    {
+      "functionName": "getResolution",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 219466,
+      "columnNumber": 22,
+      "hits": 9
+    },
+    {
+      "functionName": "Object3D",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 356864,
+      "columnNumber": 12,
+      "hits": 8
+    },
+    {
+      "functionName": "Float32BufferAttribute",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 359114,
+      "columnNumber": 12,
+      "hits": 8
+    },
+    {
+      "functionName": "updateWorldMatrix",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 361111,
+      "columnNumber": 18,
+      "hits": 7
+    },
+    {
+      "functionName": "LineMaterial",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 400966,
+      "columnNumber": 12,
+      "hits": 7
+    },
+    {
+      "functionName": "Object3D",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 356864,
+      "columnNumber": 12,
+      "hits": 6
+    },
+    {
+      "functionName": "Object3D",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 356864,
+      "columnNumber": 12,
+      "hits": 6
+    },
+    {
+      "functionName": "animate",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 220019,
+      "columnNumber": 27,
+      "hits": 6
+    },
+    {
+      "functionName": "lookAt",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 357092,
+      "columnNumber": 7,
+      "hits": 6
+    },
+    {
+      "functionName": "_objectSpread",
+      "scriptId": "4",
+      "url": "http://127.0.0.1:20645/static/index.bundle.js",
+      "lineNumber": 311246,
+      "columnNumber": 22,
+      "hits": 6
+    }
+  ]
+}

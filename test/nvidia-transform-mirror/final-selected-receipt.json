@@ -1,0 +1,32 @@
+[
+  {
+    "label": "combined",
+    "mode": "extended",
+    "exitCode": 0,
+    "stdout": "PASS combined mirror and tolerance controls (selected mode 0)\n",
+    "stderr": "",
+    "testSHA256": "bd3ec37e148387b8c8c5af0a969549c0edfebda556c4af1f16ec42b4569e2aef",
+    "glueSHA256": "9c4d6e59efe06ba6f7f91628d59d6ecf8e080a7a1b9f60d67633d2d218bdd64d",
+    "wasmSHA256": "8832944c14ae621294895574e3f01d96cdfff3a4b35c93625e5cfadb8bc16375"
+  },
+  {
+    "label": "tolerance",
+    "mode": "tolerance",
+    "exitCode": 0,
+    "stdout": "PASS tolerances: raised local values, nonuniform/shrink/disabled scaling, exact shared-context size and tolerance (selected mode 2)\n",
+    "stderr": "",
+    "testSHA256": "bd3ec37e148387b8c8c5af0a969549c0edfebda556c4af1f16ec42b4569e2aef",
+    "glueSHA256": "bf5c9f1e138b5f50fb08148450c405abb9ffdfbaf3d303222e206d453ce225a7",
+    "wasmSHA256": "1999c2deae51c484a2115e8bd57ab0c48588e672fec7c31b47029221a5221f46"
+  },
+  {
+    "label": "mirror",
+    "mode": "mirror",
+    "exitCode": 0,
+    "stdout": "PASS mirrors: translated oblique planes, partial/inside-out analytic curves, exact domains/samples, retained source, primitive validity/volume (selected mode 1)\n",
+    "stderr": "",
+    "testSHA256": "bd3ec37e148387b8c8c5af0a969549c0edfebda556c4af1f16ec42b4569e2aef",
+    "glueSHA256": "a6b20e24244b057cb68827284e237ad7a48ea404f7afb71610007b81a2c26ce0",
+    "wasmSHA256": "016855a54331372f128bdf39707e3f80981de37b4019f724f0b56bf4e6fd82ce"
+  }
+]

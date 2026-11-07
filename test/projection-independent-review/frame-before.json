@@ -1,0 +1,455 @@
+{
+  "version": 1,
+  "projectionSource": "3deae76c704972791efea6278ef966779e21340d",
+  "workerSha256": "e289986872bd7f63f443176c3a6648c4dc37842f9edb8bfdfd9f022bb689e5ea",
+  "appSource": "997df3dbb97b83d79b65db62f191c45c2f23b4ea",
+  "app": {
+    "url": "http://127.0.0.1:20488/static/index.bundle.js",
+    "sha256": "9993b01af9f49ca29aa2eceaa1701489aef01c992ee3a3b38a1a0799f87a9c28"
+  },
+  "fixture": "http://127.0.0.1:20488/",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'",
+  "browser": "Chrome/155.0.8059.79",
+  "targetId": "9BCCEEDC4A222D0DBCF613E15AE92EA2",
+  "rows": [
+    {
+      "plane": "XY",
+      "negativeZero": {
+        "origin": [
+          false,
+          false,
+          false
+        ],
+        "x": [
+          false,
+          false,
+          false
+        ],
+        "y": [
+          false,
+          false,
+          false
+        ],
+        "z": [
+          false,
+          false,
+          false
+        ]
+      },
+      "actual": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "native": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "live": {
+        "revision": "live-XY",
+        "source": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "witness": {
+          "frame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          },
+          "stages": [
+            {
+              "index": 0,
+              "generatorCount": 0,
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "saved": {
+        "revision": "saved-XY",
+        "source": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "witness": {
+          "frame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          },
+          "stages": [
+            {
+              "index": 0,
+              "generatorCount": 0,
+              "constraints": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "plane": "XZ",
+      "negativeZero": {
+        "origin": [
+          false,
+          false,
+          false
+        ],
+        "x": [
+          false,
+          false,
+          false
+        ],
+        "y": [
+          false,
+          false,
+          false
+        ],
+        "z": [
+          false,
+          false,
+          false
+        ]
+      },
+      "actual": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          -1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          0,
+          1
+        ],
+        "z": [
+          0,
+          1,
+          0
+        ]
+      },
+      "native": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          -1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          0,
+          1
+        ],
+        "z": [
+          0,
+          1,
+          0
+        ]
+      },
+      "live": {
+        "revision": "live-XZ",
+        "source": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[-1,0,0],\"y\":[0,0,1],\"z\":[0,1,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[-1,0,0],\"y\":[0,0,1],\"z\":[0,1,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "witness": {
+          "frame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              -1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              0,
+              1
+            ],
+            "z": [
+              0,
+              1,
+              0
+            ]
+          },
+          "stages": [
+            {
+              "index": 0,
+              "generatorCount": 0,
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "saved": {
+        "revision": "saved-XZ",
+        "source": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[-1,0,0],\"y\":[0,0,1],\"z\":[0,1,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[-1,0,0],\"y\":[0,0,1],\"z\":[0,1,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "witness": {
+          "frame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              -1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              0,
+              1
+            ],
+            "z": [
+              0,
+              1,
+              0
+            ]
+          },
+          "stages": [
+            {
+              "index": 0,
+              "generatorCount": 0,
+              "constraints": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "plane": "ZY",
+      "negativeZero": {
+        "origin": [
+          false,
+          false,
+          false
+        ],
+        "x": [
+          false,
+          false,
+          false
+        ],
+        "y": [
+          false,
+          false,
+          false
+        ],
+        "z": [
+          false,
+          false,
+          false
+        ]
+      },
+      "actual": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          0,
+          0,
+          -1
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          1,
+          0,
+          0
+        ]
+      },
+      "native": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          0,
+          0,
+          -1
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          1,
+          0,
+          0
+        ]
+      },
+      "live": {
+        "revision": "live-ZY",
+        "source": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[0,0,-1],\"y\":[0,1,0],\"z\":[1,0,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[0,0,-1],\"y\":[0,1,0],\"z\":[1,0,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "witness": {
+          "frame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              0,
+              0,
+              -1
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              1,
+              0,
+              0
+            ]
+          },
+          "stages": [
+            {
+              "index": 0,
+              "generatorCount": 0,
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "saved": {
+        "revision": "saved-ZY",
+        "source": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[0,0,-1],\"y\":[0,1,0],\"z\":[1,0,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "ok": true,
+        "serializedSketch": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[0,0,-1],\"y\":[0,1,0],\"z\":[1,0,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "witness": {
+          "frame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              0,
+              0,
+              -1
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              1,
+              0,
+              0
+            ]
+          },
+          "stages": [
+            {
+              "index": 0,
+              "generatorCount": 0,
+              "constraints": []
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "controlled": {
+    "revision": "signed-zero-control",
+    "ok": false,
+    "error": {
+      "code": "PROJECTION_INVALID",
+      "message": "Invalid sketch projection witness."
+    }
+  },
+  "starts": 7,
+  "terminated": 7
+}

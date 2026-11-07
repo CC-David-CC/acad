@@ -1,0 +1,12 @@
+{
+  "ownedServerPID": 2205979,
+  "port": 45861,
+  "signal": "SIGTERM",
+  "exactCmdlineAndCwdChecked": true,
+  "sharedCDP19329Used": false,
+  "rootFixture20916Used": false,
+  "ownedServerPortClosedVerified": true,
+  "ownedBrowserPID": 2206081,
+  "ownedBrowserPIDAbsentVerified": true,
+  "ownedProfileAbsentVerified": true
+}

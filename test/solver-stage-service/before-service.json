@@ -1,0 +1,18 @@
+{
+  "inspected": {
+    "revision": "9e703df9-9b83-4704-8581-7a5f6e7f944a",
+    "activeFaceId": null,
+    "saved": [
+      {
+        "faceId": "S:0/SURFACE",
+        "availability": "current"
+      }
+    ]
+  },
+  "outcome": {
+    "ok": false,
+    "code": "UNSUPPORTED",
+    "message": "The sketch constraint inventory exceeds diagnostic support."
+  },
+  "dispatches": 0
+}

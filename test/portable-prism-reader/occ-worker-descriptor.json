@@ -1,0 +1,888 @@
+{
+  "version": 1,
+  "unit": "millimeter",
+  "idScope": "response-local",
+  "toleranceMm": 0.000001,
+  "vertices": [
+    {
+      "id": "vertex:0",
+      "point": [
+        13,
+        16,
+        7
+      ]
+    },
+    {
+      "id": "vertex:1",
+      "point": [
+        13,
+        16,
+        17
+      ]
+    },
+    {
+      "id": "vertex:2",
+      "point": [
+        113,
+        16,
+        7
+      ]
+    },
+    {
+      "id": "vertex:3",
+      "point": [
+        113,
+        16,
+        17
+      ]
+    },
+    {
+      "id": "vertex:4",
+      "point": [
+        113,
+        66,
+        7
+      ]
+    },
+    {
+      "id": "vertex:5",
+      "point": [
+        113,
+        66,
+        17
+      ]
+    },
+    {
+      "id": "vertex:6",
+      "point": [
+        13,
+        66,
+        7
+      ]
+    },
+    {
+      "id": "vertex:7",
+      "point": [
+        13,
+        66,
+        17
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge:0",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            13,
+            16,
+            7
+          ],
+          [
+            13,
+            16,
+            17
+          ]
+        ]
+      },
+      "a": "vertex:0",
+      "b": "vertex:1",
+      "uses": [
+        {
+          "face": "face:0",
+          "reversed": true
+        },
+        {
+          "face": "face:3",
+          "reversed": false
+        }
+      ]
+    },
+    {
+      "id": "edge:1",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            13,
+            16,
+            7
+          ],
+          [
+            113,
+            16,
+            7
+          ]
+        ]
+      },
+      "a": "vertex:0",
+      "b": "vertex:2",
+      "uses": [
+        {
+          "face": "face:0",
+          "reversed": false
+        },
+        {
+          "face": "face:4",
+          "reversed": true
+        }
+      ]
+    },
+    {
+      "id": "edge:2",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            113,
+            16,
+            7
+          ],
+          [
+            113,
+            16,
+            17
+          ]
+        ]
+      },
+      "a": "vertex:2",
+      "b": "vertex:3",
+      "uses": [
+        {
+          "face": "face:0",
+          "reversed": false
+        },
+        {
+          "face": "face:1",
+          "reversed": true
+        }
+      ]
+    },
+    {
+      "id": "edge:3",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            13,
+            16,
+            17
+          ],
+          [
+            113,
+            16,
+            17
+          ]
+        ]
+      },
+      "a": "vertex:1",
+      "b": "vertex:3",
+      "uses": [
+        {
+          "face": "face:0",
+          "reversed": true
+        },
+        {
+          "face": "face:5",
+          "reversed": false
+        }
+      ]
+    },
+    {
+      "id": "edge:4",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            113,
+            16,
+            7
+          ],
+          [
+            113,
+            66,
+            7
+          ]
+        ]
+      },
+      "a": "vertex:2",
+      "b": "vertex:4",
+      "uses": [
+        {
+          "face": "face:1",
+          "reversed": false
+        },
+        {
+          "face": "face:4",
+          "reversed": true
+        }
+      ]
+    },
+    {
+      "id": "edge:5",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            113,
+            66,
+            7
+          ],
+          [
+            113,
+            66,
+            17
+          ]
+        ]
+      },
+      "a": "vertex:4",
+      "b": "vertex:5",
+      "uses": [
+        {
+          "face": "face:1",
+          "reversed": false
+        },
+        {
+          "face": "face:2",
+          "reversed": true
+        }
+      ]
+    },
+    {
+      "id": "edge:6",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            113,
+            16,
+            17
+          ],
+          [
+            113,
+            66,
+            17
+          ]
+        ]
+      },
+      "a": "vertex:3",
+      "b": "vertex:5",
+      "uses": [
+        {
+          "face": "face:1",
+          "reversed": true
+        },
+        {
+          "face": "face:5",
+          "reversed": false
+        }
+      ]
+    },
+    {
+      "id": "edge:7",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            113,
+            66,
+            7
+          ],
+          [
+            13,
+            66,
+            7
+          ]
+        ]
+      },
+      "a": "vertex:4",
+      "b": "vertex:6",
+      "uses": [
+        {
+          "face": "face:2",
+          "reversed": false
+        },
+        {
+          "face": "face:4",
+          "reversed": true
+        }
+      ]
+    },
+    {
+      "id": "edge:8",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            13,
+            66,
+            7
+          ],
+          [
+            13,
+            66,
+            17
+          ]
+        ]
+      },
+      "a": "vertex:6",
+      "b": "vertex:7",
+      "uses": [
+        {
+          "face": "face:2",
+          "reversed": false
+        },
+        {
+          "face": "face:3",
+          "reversed": true
+        }
+      ]
+    },
+    {
+      "id": "edge:9",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            113,
+            66,
+            17
+          ],
+          [
+            13,
+            66,
+            17
+          ]
+        ]
+      },
+      "a": "vertex:5",
+      "b": "vertex:7",
+      "uses": [
+        {
+          "face": "face:2",
+          "reversed": true
+        },
+        {
+          "face": "face:5",
+          "reversed": false
+        }
+      ]
+    },
+    {
+      "id": "edge:10",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            13,
+            66,
+            7
+          ],
+          [
+            13,
+            16,
+            7
+          ]
+        ]
+      },
+      "a": "vertex:6",
+      "b": "vertex:0",
+      "uses": [
+        {
+          "face": "face:3",
+          "reversed": false
+        },
+        {
+          "face": "face:4",
+          "reversed": true
+        }
+      ]
+    },
+    {
+      "id": "edge:11",
+      "curve": {
+        "type": "line-segment",
+        "tessellation": [
+          [
+            13,
+            66,
+            17
+          ],
+          [
+            13,
+            16,
+            17
+          ]
+        ]
+      },
+      "a": "vertex:7",
+      "b": "vertex:1",
+      "uses": [
+        {
+          "face": "face:3",
+          "reversed": true
+        },
+        {
+          "face": "face:5",
+          "reversed": false
+        }
+      ]
+    }
+  ],
+  "faces": [
+    {
+      "id": "face:0",
+      "plane": {
+        "origin": [
+          13,
+          16,
+          7
+        ],
+        "normal": [
+          0,
+          1,
+          0
+        ],
+        "direct": true
+      },
+      "inverted": true,
+      "loop": [
+        {
+          "edge": "edge:0",
+          "reversed": true
+        },
+        {
+          "edge": "edge:1",
+          "reversed": false
+        },
+        {
+          "edge": "edge:2",
+          "reversed": false
+        },
+        {
+          "edge": "edge:3",
+          "reversed": true
+        }
+      ],
+      "triangles": [
+        [
+          [
+            113,
+            16,
+            7
+          ],
+          [
+            13,
+            16,
+            7
+          ],
+          [
+            13,
+            16,
+            17
+          ]
+        ],
+        [
+          [
+            113,
+            16,
+            7
+          ],
+          [
+            13,
+            16,
+            17
+          ],
+          [
+            113,
+            16,
+            17
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "face:1",
+      "plane": {
+        "origin": [
+          113,
+          16,
+          7
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "direct": true
+      },
+      "inverted": true,
+      "loop": [
+        {
+          "edge": "edge:2",
+          "reversed": true
+        },
+        {
+          "edge": "edge:4",
+          "reversed": false
+        },
+        {
+          "edge": "edge:5",
+          "reversed": false
+        },
+        {
+          "edge": "edge:6",
+          "reversed": true
+        }
+      ],
+      "triangles": [
+        [
+          [
+            113,
+            66,
+            7
+          ],
+          [
+            113,
+            16,
+            7
+          ],
+          [
+            113,
+            16,
+            17
+          ]
+        ],
+        [
+          [
+            113,
+            66,
+            7
+          ],
+          [
+            113,
+            16,
+            17
+          ],
+          [
+            113,
+            66,
+            17
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "face:2",
+      "plane": {
+        "origin": [
+          113,
+          66,
+          7
+        ],
+        "normal": [
+          0,
+          -1,
+          0
+        ],
+        "direct": true
+      },
+      "inverted": true,
+      "loop": [
+        {
+          "edge": "edge:5",
+          "reversed": true
+        },
+        {
+          "edge": "edge:7",
+          "reversed": false
+        },
+        {
+          "edge": "edge:8",
+          "reversed": false
+        },
+        {
+          "edge": "edge:9",
+          "reversed": true
+        }
+      ],
+      "triangles": [
+        [
+          [
+            13,
+            66,
+            7
+          ],
+          [
+            113,
+            66,
+            7
+          ],
+          [
+            113,
+            66,
+            17
+          ]
+        ],
+        [
+          [
+            13,
+            66,
+            7
+          ],
+          [
+            113,
+            66,
+            17
+          ],
+          [
+            13,
+            66,
+            17
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "face:3",
+      "plane": {
+        "origin": [
+          13,
+          66,
+          7
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ],
+        "direct": true
+      },
+      "inverted": true,
+      "loop": [
+        {
+          "edge": "edge:8",
+          "reversed": true
+        },
+        {
+          "edge": "edge:10",
+          "reversed": false
+        },
+        {
+          "edge": "edge:0",
+          "reversed": false
+        },
+        {
+          "edge": "edge:11",
+          "reversed": true
+        }
+      ],
+      "triangles": [
+        [
+          [
+            13,
+            16,
+            7
+          ],
+          [
+            13,
+            66,
+            7
+          ],
+          [
+            13,
+            66,
+            17
+          ]
+        ],
+        [
+          [
+            13,
+            16,
+            7
+          ],
+          [
+            13,
+            66,
+            17
+          ],
+          [
+            13,
+            16,
+            17
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "face:4",
+      "plane": {
+        "origin": [
+          63,
+          41,
+          7
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "direct": true
+      },
+      "inverted": true,
+      "loop": [
+        {
+          "edge": "edge:1",
+          "reversed": true
+        },
+        {
+          "edge": "edge:10",
+          "reversed": true
+        },
+        {
+          "edge": "edge:7",
+          "reversed": true
+        },
+        {
+          "edge": "edge:4",
+          "reversed": true
+        }
+      ],
+      "triangles": [
+        [
+          [
+            113,
+            66,
+            7
+          ],
+          [
+            13,
+            16,
+            7
+          ],
+          [
+            113,
+            16,
+            7
+          ]
+        ],
+        [
+          [
+            113,
+            66,
+            7
+          ],
+          [
+            13,
+            66,
+            7
+          ],
+          [
+            13,
+            16,
+            7
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "face:5",
+      "plane": {
+        "origin": [
+          63,
+          41,
+          17
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "direct": true
+      },
+      "inverted": false,
+      "loop": [
+        {
+          "edge": "edge:3",
+          "reversed": false
+        },
+        {
+          "edge": "edge:6",
+          "reversed": false
+        },
+        {
+          "edge": "edge:9",
+          "reversed": false
+        },
+        {
+          "edge": "edge:11",
+          "reversed": false
+        }
+      ],
+      "triangles": [
+        [
+          [
+            113,
+            66,
+            17
+          ],
+          [
+            13,
+            16,
+            17
+          ],
+          [
+            113,
+            16,
+            17
+          ]
+        ],
+        [
+          [
+            113,
+            66,
+            17
+          ],
+          [
+            13,
+            66,
+            17
+          ],
+          [
+            13,
+            16,
+            17
+          ]
+        ]
+      ]
+    }
+  ],
+  "sourceEdges": [
+    {
+      "sourceEdgeId": "S:0/SURFACE/rect-0",
+      "baseEdge": "edge:1",
+      "sweptFace": "face:0",
+      "sourceReversed": false
+    },
+    {
+      "sourceEdgeId": "S:0/SURFACE/rect-1",
+      "baseEdge": "edge:4",
+      "sweptFace": "face:1",
+      "sourceReversed": false
+    },
+    {
+      "sourceEdgeId": "S:0/SURFACE/rect-2",
+      "baseEdge": "edge:7",
+      "sweptFace": "face:2",
+      "sourceReversed": false
+    },
+    {
+      "sourceEdgeId": "S:0/SURFACE/rect-3",
+      "baseEdge": "edge:10",
+      "sweptFace": "face:3",
+      "sourceReversed": false
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+# Empty sketch plane coordinator
+
+The private factory `createEmptySketchCreationCommands(ctx, submit)` uses the existing rectangle-creation readiness guard, additionally requires a host-bound current document and untyped expressions, and exposes `inspectPrimitiveCreation()` and `createEmptySketchPlane({revision,unit,plane,depth}, options)`. It submits a normal `PLANE` operation and prepares the strict empty sketch bytes from the actual replay-created `MOpenFaceShell` frame. The candidate face and source bytes publish together through the existing prepared-workspace participant. The worker result is bounded and checked for empty objects, constraints, boundary and profiles before staging. This module does not register public operations or touch the live editor.
+
+`coordinator.test.cjs` executes the actual transpiled coordinator source with explicitly synthetic Worker/workspace participants. It checks all three orientation intents, host/typed/stale/domain rejection, and cancellation before commit. This is not a real kernel, Worker, browser, or end-to-end native-save proof. The separate `test/primitive-worker-transport` receipt qualifies the real empty-sketch Worker and stage inspection, but does not exercise this coordinator. An integrated real app test remains required.
+
+Run `NODE_PATH=/tmp/codi-cad-mechanical-candidate-20261105/node_modules /tmp/codi-files-move-node/bin/node --test test/empty-sketch-creation/coordinator.test.cjs`. TypeScript `--noEmit` also passed against source `3010cbda5` plus this module.

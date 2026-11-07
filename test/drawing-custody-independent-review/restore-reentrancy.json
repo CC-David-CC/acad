@@ -1,0 +1,12 @@
+{
+  "scope": "Actual manager functions/Workers; empty-model metadata fixture",
+  "error": {
+    "name": "AbortError",
+    "message": "Project manager was replaced."
+  },
+  "beforeGeneration": 1,
+  "afterGeneration": 2,
+  "oldSignalAborted": true,
+  "currentSignalAborted": true,
+  "validationWorkers": 1
+}

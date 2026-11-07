@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "scope": "standalone formatter test bundle initialization",
+  "error": "TypeError: Super expression must either be null or a function",
+  "cause": "The test entry imported dimension classes before the existing sketch IO/workspace graph initialized its cyclic shape/constraint/annotation dependencies.",
+  "correction": "Initialize the actual HeadlessSketchWorkspace import first, matching the normal application/production validation Worker graph. No product initialization, class, geometry or rendering workaround was introduced.",
+  "rawFailure": ".build/display-units/failures/formatting-entry-before.tap (runtime source context remains outside Git)"
+}

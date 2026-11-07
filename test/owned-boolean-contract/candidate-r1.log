@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "source": {
+    "sha256": "162f98b213e5b1948a8400dbc3ddf97b05f31543b417ece1a770f8994b1846e8",
+    "bytes": 7705
+  },
+  "actualResults": 30,
+  "actualRefusals": 16,
+  "failures": []
+}

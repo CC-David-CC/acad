@@ -1,0 +1,363 @@
+TAP version 13
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: actual normal coordinator replaces one circle diameter and journals exact Undo/Redo
+ok 1 - actual normal coordinator replaces one circle diameter and journals exact Undo/Redo
+  ---
+  duration_ms: 1484.630423
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: actual segment length edit and removal preserve object identity and genuine underconstraint
+ok 2 - actual segment length edit and removal preserve object identity and genuine underconstraint
+  ---
+  duration_ms: 2797.388879
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: removing a real accepted duplicate reactivates the surviving redundant diameter
+ok 3 - removing a real accepted duplicate reactivates the surviving redundant diameter
+  ---
+  duration_ms: 1453.082724
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: contradictory existing dimension edit preserves source/journal and a valid retry recovers
+ok 4 - contradictory existing dimension edit preserves source/journal and a valid retry recovers
+  ---
+  duration_ms: 1039.107723
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: strict discovered identity/domain/no-op and unsupported schema refuse without publication
+ok 5 - strict discovered identity/domain/no-op and unsupported schema refuse without publication
+  ---
+  duration_ms: 1551.558195
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed diameter rebinding/literal/removal use actual quantity lengths and exact typed Undo
+ok 6 - typed diameter rebinding/literal/removal use actual quantity lengths and exact typed Undo
+  ---
+  duration_ms: 4502.515408
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: actual arc diameter replacement preserves consistency and source IDs
+ok 7 - actual arc diameter replacement preserves consistency and source IDs
+  ---
+  duration_ms: 667.912152
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed rectangle removes and restores one named driving length through the same journal
+ok 8 - typed rectangle removes and restores one named driving length through the same journal
+  ---
+  duration_ms: 2815.623663
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: multi-stage earlier geometry remains fixed while a later owned segment length changes
+ok 9 - multi-stage earlier geometry remains fixed while a later owned segment length changes
+  ---
+  duration_ms: 698.858676
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: actual Worker response is fenced by source/history/physical result/quantity and host lifetime
+ok 10 - actual Worker response is fenced by source/history/physical result/quantity and host lifetime
+  ---
+  duration_ms: 4191.371388
+  type: 'test'
+  ...
+# Subtest: intent/response capture rejects getters, sparse identities and malformed reply fields
+ok 11 - intent/response capture rejects getters, sparse identities and malformed reply fields
+  ---
+  duration_ms: 0.614405
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed permission remains narrow and geometry-only/other-field travel is refused by actual Worker
+ok 12 - typed permission remains narrow and geometry-only/other-field travel is refused by actual Worker
+  ---
+  duration_ms: 509.405296
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: second actual Worker rejects a valid solved candidate containing another dimension edit
+ok 13 - second actual Worker rejects a valid solved candidate containing another dimension edit
+  ---
+  duration_ms: 394.062388
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: malformed actual Worker replies refuse without granting publication authority
+ok 14 - malformed actual Worker replies refuse without granting publication authority
+  ---
+  duration_ms: 2076.405542
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: known publication survives post-commit host loss as committed error
+ok 15 - known publication survives post-commit host loss as committed error
+  ---
+  duration_ms: 685.054062
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: legacy raw expression restores exactly through Undo and a rejected value permits healthy retry
+ok 16 - legacy raw expression restores exactly through Undo and a rejected value permits healthy retry
+  ---
+  duration_ms: 1763.014348
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed underconstrained arc Undo proves the original forward edit instead of requiring inverse-solver symmetry
+ok 17 - typed underconstrained arc Undo proves the original forward edit instead of requiring inverse-solver symmetry
+  ---
+  duration_ms: 1778.821828
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: independent whole-state proof preserves legitimate motion of a dependent second circle
+ok 18 - independent whole-state proof preserves legitimate motion of a dependent second circle
+  ---
+  duration_ms: 1438.757907
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: independent creation-candidate verification refuses unrelated free-loop displacement
+ok 19 - independent creation-candidate verification refuses unrelated free-loop displacement
+  ---
+  duration_ms: 547.987839
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: independent journal-pair verification refuses unrelated free-loop displacement
+ok 20 - independent journal-pair verification refuses unrelated free-loop displacement
+  ---
+  duration_ms: 538.433075
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 30028.977171

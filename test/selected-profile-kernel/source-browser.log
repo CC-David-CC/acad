@@ -1,0 +1,1 @@
+PASS genuine source preparation Worker -> native OCC [{"name":"disjoint-a","nativeVolume":499.9999999999999},{"name":"disjoint-b","nativeVolume":499.9999999999999},{"name":"outer-annulus","nativeVolume":7853.981633974482},{"name":"middle-annulus","nativeVolume":4712.38898038469},{"name":"inner-disk","nativeVolume":1570.7963267948965}]

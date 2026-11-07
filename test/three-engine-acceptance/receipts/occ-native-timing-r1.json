@@ -1,0 +1,635 @@
+{
+  "source": "root 9e9dadf84 fixture; Native glue statically bundled in pinned Worker, its source pin checked in descriptor",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'",
+  "fixture": "http://127.0.0.1:20467/static/index.html",
+  "browserVersion": "Chrome/155.0.8059.79",
+  "cacheScope": "Fresh owned browser context in an already running shared Chrome process; no browser/process cache cleared; assets prefetched for SHA checks with cache:no-store; first mount is first within this run, not proven cold compilation; later mounts reuse the same process",
+  "engines": [
+    {
+      "slot": "occ",
+      "engine": "occ-oci-verified-runtime-research",
+      "representation": "occ-brep-worker-owned",
+      "unit": "millimeter",
+      "rows": [
+        {
+          "id": "box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "offset-fractional-box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-common",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-subtract",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "touch-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-common",
+          "status": "unsupported",
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "lifetime": "not-checked"
+        },
+        {
+          "id": "coincident-subtract",
+          "status": "unsupported",
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "lifetime": "not-checked"
+        },
+        {
+          "id": "foreign-mount",
+          "status": "pass"
+        },
+        {
+          "id": "unit-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "negative-dimension-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "unsupported-operation",
+          "status": "pass"
+        },
+        {
+          "id": "pre-aborted-operation",
+          "status": "pass"
+        },
+        {
+          "id": "disposed-handle",
+          "status": "pass"
+        },
+        {
+          "id": "lifetime-budget",
+          "status": "pass"
+        },
+        {
+          "id": "closed-mount-after-lifetime-budget",
+          "status": "pass"
+        }
+      ],
+      "timings": [
+        {
+          "id": "box",
+          "mountOrdinal": 1,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 56.59999990463257
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 40
+            }
+          ],
+          "initMs": 236.90000009536743
+        },
+        {
+          "id": "offset-fractional-box",
+          "mountOrdinal": 2,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 58.5
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 20.700000047683716
+            }
+          ],
+          "initMs": 248
+        },
+        {
+          "id": "overlap-common",
+          "mountOrdinal": 3,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 56.5
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 21.5
+            },
+            {
+              "label": "boolean-common",
+              "elapsedMs": 157.20000004768372
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 17.799999952316284
+            }
+          ],
+          "initMs": 245.5
+        },
+        {
+          "id": "overlap-union",
+          "mountOrdinal": 4,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 58.299999952316284
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 19.90000009536743
+            },
+            {
+              "label": "boolean-union",
+              "elapsedMs": 191.5
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 36.799999952316284
+            }
+          ],
+          "initMs": 251.70000004768372
+        },
+        {
+          "id": "overlap-subtract",
+          "mountOrdinal": 5,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 57.60000014305115
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 19.799999952316284
+            },
+            {
+              "label": "boolean-subtract",
+              "elapsedMs": 155.79999995231628
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 17
+            }
+          ],
+          "initMs": 250.59999990463257
+        },
+        {
+          "id": "touch-union",
+          "mountOrdinal": 6,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 57.69999980926514
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 19.700000047683716
+            },
+            {
+              "label": "boolean-union",
+              "elapsedMs": 127.90000009536743
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 28
+            }
+          ],
+          "initMs": 244.90000009536743
+        },
+        {
+          "id": "disjoint-union",
+          "mountOrdinal": 7,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 55.299999952316284
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 20.300000190734863
+            },
+            {
+              "label": "boolean-union",
+              "elapsedMs": 106
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 33.09999990463257
+            }
+          ],
+          "initMs": 240.5
+        },
+        {
+          "id": "disjoint-common",
+          "mountOrdinal": 8,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 55
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 19.700000047683716
+            },
+            {
+              "label": "boolean-common",
+              "elapsedMs": 64.19999980926514
+            }
+          ],
+          "initMs": 232.70000004768372
+        },
+        {
+          "id": "coincident-subtract",
+          "mountOrdinal": 9,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 58.89999985694885
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 20.40000009536743
+            },
+            {
+              "label": "boolean-subtract",
+              "elapsedMs": 98.59999990463257
+            }
+          ],
+          "initMs": 236.40000009536743
+        }
+      ],
+      "timingScope": "performance.now client/Worker roundtrip, not pure kernel time; init excludes entry import and includes Worker startup/WASM load; mesh includes independent checks and first-box reread",
+      "workerMemory": {
+        "available": false,
+        "reason": "Current real mount API reports no measured Worker/WASM memory; host JS heap is not a substitute"
+      },
+      "scope": "Numerical/caller-boundary controls only; no history/native/in-flight-cancellation/stale-response proof"
+    },
+    {
+      "slot": "native",
+      "engine": "manifold-mesh-verified-runtime-research",
+      "representation": "manifold-mesh-worker-owned",
+      "unit": "millimeter",
+      "rows": [
+        {
+          "id": "box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "offset-fractional-box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-common",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-subtract",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "touch-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-common",
+          "status": "pass",
+          "mesh": "not-checked"
+        },
+        {
+          "id": "coincident-subtract",
+          "status": "pass",
+          "mesh": "not-checked"
+        },
+        {
+          "id": "foreign-mount",
+          "status": "pass"
+        },
+        {
+          "id": "unit-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "negative-dimension-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "unsupported-operation",
+          "status": "pass"
+        },
+        {
+          "id": "pre-aborted-operation",
+          "status": "pass"
+        },
+        {
+          "id": "disposed-handle",
+          "status": "pass"
+        },
+        {
+          "id": "lifetime-budget",
+          "status": "pass"
+        },
+        {
+          "id": "closed-mount-after-lifetime-budget",
+          "status": "pass"
+        }
+      ],
+      "timings": [
+        {
+          "id": "box",
+          "mountOrdinal": 1,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 3
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 1.4000000953674316
+            }
+          ],
+          "initMs": 27.90000009536743
+        },
+        {
+          "id": "offset-fractional-box",
+          "mountOrdinal": 2,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 3.3999998569488525
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 1.1000001430511475
+            }
+          ],
+          "initMs": 22.600000143051147
+        },
+        {
+          "id": "overlap-common",
+          "mountOrdinal": 3,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 3.700000047683716
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 0.5999999046325684
+            },
+            {
+              "label": "boolean-common",
+              "elapsedMs": 4.400000095367432
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 0.9000000953674316
+            }
+          ],
+          "initMs": 25
+        },
+        {
+          "id": "overlap-union",
+          "mountOrdinal": 4,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 2.799999952316284
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 0.2999999523162842
+            },
+            {
+              "label": "boolean-union",
+              "elapsedMs": 3.299999952316284
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 0.9000000953674316
+            }
+          ],
+          "initMs": 23.799999952316284
+        },
+        {
+          "id": "overlap-subtract",
+          "mountOrdinal": 5,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 3.3999998569488525
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 0.40000009536743164
+            },
+            {
+              "label": "boolean-subtract",
+              "elapsedMs": 3.9000000953674316
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 0.8999998569488525
+            }
+          ],
+          "initMs": 26.5
+        },
+        {
+          "id": "touch-union",
+          "mountOrdinal": 6,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 2.799999952316284
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 0.40000009536743164
+            },
+            {
+              "label": "boolean-union",
+              "elapsedMs": 3.299999952316284
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 0.8999998569488525
+            }
+          ],
+          "initMs": 21.200000047683716
+        },
+        {
+          "id": "disjoint-union",
+          "mountOrdinal": 7,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 2.9000000953674316
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 0.39999985694885254
+            },
+            {
+              "label": "boolean-union",
+              "elapsedMs": 1.2999999523162842
+            },
+            {
+              "label": "mesh-and-independent-check",
+              "elapsedMs": 1.2000000476837158
+            }
+          ],
+          "initMs": 22
+        },
+        {
+          "id": "disjoint-common",
+          "mountOrdinal": 8,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 3.5
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 0.5
+            },
+            {
+              "label": "boolean-common",
+              "elapsedMs": 1.7000000476837158
+            }
+          ],
+          "initMs": 23.700000047683716
+        },
+        {
+          "id": "coincident-subtract",
+          "mountOrdinal": 9,
+          "operations": [
+            {
+              "label": "create-a",
+              "elapsedMs": 2.799999952316284
+            },
+            {
+              "label": "create-b",
+              "elapsedMs": 0.20000004768371582
+            },
+            {
+              "label": "boolean-subtract",
+              "elapsedMs": 2
+            }
+          ],
+          "initMs": 26.40000009536743
+        }
+      ],
+      "timingScope": "performance.now client/Worker roundtrip, not pure kernel time; init excludes entry import and includes Worker startup/WASM load; mesh includes independent checks and first-box reread",
+      "workerMemory": {
+        "available": false,
+        "reason": "Current real mount API reports no measured Worker/WASM memory; host JS heap is not a substitute"
+      },
+      "scope": "Numerical/caller-boundary controls only; no history/native/in-flight-cancellation/stale-response proof"
+    }
+  ],
+  "modules": [
+    {
+      "url": "/static/oci-verified-mount.mjs",
+      "sha256": "ab531291944eeee914df7b8bd046ef87419f7e7adf8761dfa73341b166b03951"
+    },
+    {
+      "url": "/static/worker-controller.mjs",
+      "sha256": "79797e89cbb4e44b08db60efaf1bfe7688adc39be2f5a17c5e6120084bd0253e"
+    },
+    {
+      "url": "/static/enclosureManufacturingMesh.mjs",
+      "sha256": "8e6486f479fd4e6379ac169eaff4a1b18380da4947421362a82c309c9e78f3a0"
+    },
+    {
+      "url": "/static/enclosurePlan.mjs",
+      "sha256": "080ee18dd77731efaccfb9101b3d7f138b0ea6f525b881b2ccf4b174d544d19f"
+    },
+    {
+      "url": "/static/enclosureMesh.mjs",
+      "sha256": "2b6f1474105c430f3efe6eb87d002576d6a9744a7b1cc98f5493ed129b2ce5f3"
+    },
+    {
+      "url": "/static/contract.mjs",
+      "sha256": "374313f7212c6911d82ad9223e7441ac655e80d946c99ec4c663152398654f11"
+    },
+    {
+      "url": "/static/portable-topology-envelope.mjs",
+      "sha256": "cc0b58a590e9d4fe68b3a19a6ec5274401a605006425255eb2fc714a7150ea8a"
+    },
+    {
+      "url": "/static/drilledTopologyEnvelope.mjs",
+      "sha256": "283740c9ef61cbc7a24dfd144e73608d008a2cf1a7a753b53652bdbcc876f346"
+    },
+    {
+      "url": "/static/fourCornerMountContract.mjs",
+      "sha256": "cea81ebb05d1bc170df5639ed3ab567fd7f5a4aa08712f8eef3c994505fbc1d1"
+    },
+    {
+      "url": "/static/manifold-verified-mount.mjs",
+      "sha256": "8be7febcac469c87ad1ffdd099fe908e3dd80e46de34906e5766455ab67574cd"
+    },
+    {
+      "url": "/static/oci-verified-worker.js",
+      "sha256": "d1dfb0c42929870f07037a9e83590e0568d92803873053879042d1f820035fd1"
+    },
+    {
+      "url": "/static/manifold-verified-worker.js",
+      "sha256": "494a336a665759a1c3002b2cbcc6881f375bc78711186c65a254a3bb7dbef301"
+    },
+    {
+      "url": "/static/occ-portable.js",
+      "sha256": "a8774acbbe3a90d7c82fe294c769096179eae351e5a8c854d4d0a31737a706ee"
+    },
+    {
+      "url": "/static/occ.wasm",
+      "sha256": "13617eda9a2118edfd1244b5d46523e7d9628a87ec995a0237b2b5cc58d532f2"
+    },
+    {
+      "url": "/static/manifold.wasm",
+      "sha256": "7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d"
+    },
+    {
+      "url": "/static/__three_engine_tests__/matrix.mjs",
+      "sha256": "5b982cc9fbfa3346be4a94200f21a63eeee8f0a2f29efdf0f92e514d7a5ea463"
+    },
+    {
+      "url": "/static/__three_engine_tests__/cases.mjs",
+      "sha256": "51cf6af59deb376dcf6fb1f54f03f2de5090c01a9323a7e293f542901c153e1b"
+    }
+  ],
+  "qualifiedAllNumericCases": false,
+  "scope": "Actual supplied Worker/kernel numerical and caller-boundary controls. History/native/agent/in-flight-stale controls remain separate."
+}

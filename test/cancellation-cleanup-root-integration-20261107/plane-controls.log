@@ -1,0 +1,89 @@
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ prepare actual authored Circle source (253.801904ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=false, cause=Error: own add failure (4.376797ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=false, cause=undefined (0.631886ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=false, cause=null (0.560966ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=false, cause=0 (0.519196ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=false, cause=false (0.620667ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=false, cause= (0.531766ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=true, cause=Error: own add failure (0.592356ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=true, cause=undefined (0.791318ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=true, cause=null (0.811679ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=true, cause=0 (0.599047ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=true, cause=false (0.508085ms)
+✔ registration failure unwinds earlier project subscription, afterRegister=true, cause= (0.458135ms)
+✔ remove fallback preserves ordinary no-op receipt and removes native listener: Error: own remove failure (0.817309ms)
+✔ remove fallback preserves ordinary no-op receipt and removes native listener: undefined (0.566826ms)
+✔ remove fallback preserves ordinary no-op receipt and removes native listener: null (0.417865ms)
+✔ remove fallback preserves ordinary no-op receipt and removes native listener: 0 (0.384504ms)
+✔ remove fallback preserves ordinary no-op receipt and removes native listener: false (0.359344ms)
+✔ remove fallback preserves ordinary no-op receipt and removes native listener:  (0.331803ms)
+verb 2.0.0
+verb 2.0.0
+✔ real preparation + error-only submit preserves exact primary and discards workspace: committed marker=false (251.58764ms)
+verb 2.0.0
+verb 2.0.0
+✔ real preparation + error-only submit preserves exact primary and discards workspace: committed marker=true (259.313763ms)
+verb 2.0.0
+verb 2.0.0
+✔ both instance removals may throw; all native fallbacks and workspace discard still run (260.373384ms)
+✔ ordinary caller abort stays cancelled and releases both subscriptions (0.727988ms)
+✔ synchronous registration document loss dispatches no source Worker (0.425675ms)
+✔ false signal remains rejected by native-brand validation (0.587486ms)
+✔ all real production Workers physically retire (0.784338ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ discovery exposes actual plane identity; guarded no-op starts no Worker or write (258.341783ms)
+verb 2.0.0
+verb 2.0.0
+✔ no-op callbacks cannot invalidate owner, source, units or current plane params then dispatch (245.757838ms)
+verb 2.0.0
+verb 2.0.0
+✔ no-op refuses a reentrant replacement of the standard operation run function (242.326412ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ real Worker prepares exact source/frame/history intent; real candidate frame gate passes and workspace discards (1524.32447ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ actual frame gate rejects changed params without reframe, wrong type or missing witness (514.920395ms)
+verb 2.0.0
+verb 2.0.0
+✔ stale/unknown/malformed/unsupported requests refuse before Worker or publication (240.735564ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ genuine held Worker replies are refused after source ABA and actual document lifetime abort (475.052419ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ private journal travel validates genuine sources and retains exact historical bytes without publishing (992.258928ms)
+✔ physically releases every production Worker (0.775538ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4902.768923

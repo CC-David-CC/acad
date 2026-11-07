@@ -1,0 +1,14 @@
+(node:2587662) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/web/app/cad/projectManager/documentLifetime.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/codi-cad-generic-manufacturing-preparation-20261107/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ before: actual project save rewrites identical serialized state (130.602945ms)
+✔ before: actual manager snapshot invokes the write path on unchanged capture (193.233936ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 635.17313

@@ -1,0 +1,38 @@
+import {MWorkerSolid} from '../model/mworkerSolid';
+import {AUTHORED_SOLID_KINDS} from 'engine/solid/authoredSolidKinds.mjs';
+import {genericHistoryBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';
+import {GENERIC_MANUFACTURING_LIMITS} from './genericManufacturingAssignment.mjs';
+import type {GenericManufacturingTarget} from './genericManufacturingAssignment.mjs';
+const fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
+const MATRIX=['mxx','mxy','mxz','tx','myx','myy','myz','ty','mzx','mzy','mzz','tz'],IDENTITY=[1,0,0,0,0,1,0,0,0,0,1,0],AXES=['origin','x','y','z'];
+const kinds=new Set(AUTHORED_SOLID_KINDS);
+function placement(model:any){const location=model.location$,matrix=location?.value,csys=model.csys,axes=AXES.map(k=>[csys?.[k]?.x,csys?.[k]?.y,csys?.[k]?.z]);if(!matrix||MATRIX.some((key,i)=>!Object.is(matrix[key],IDENTITY[i]))||axes.some((v,i)=>v.some((n,j)=>!Object.is(n,i===j+1?1:0))))fail('UNSUPPORTED_PLACEMENT','Only unplaced complete native outputs can be assigned.');return{location,matrix,csys,axes};}
+export function captureGenericManufacturingBodies(ctx:any){
+ const craft=ctx.craftService,registry=ctx.cadRegistry,project=ctx.projectService,manager=ctx.projectManager,state=craft.modifications$.value,inspectMethod=craft.inspectWorkerSolids,inventory=inspectMethod.call(craft),models=craft.models$.value,history=state.history,find=registry.find,shells=registry.shells,expressions=ctx.expressionService;
+ if(!Array.isArray(history)||history.length>256||state.pointer!==history.length-1)fail('UNSUPPORTED_HISTORY','Generic material discovery requires a bounded complete authored tip.');
+ if(!Array.isArray(inventory.outputs)||inventory.outputs.length>128)fail('RESOURCE_LIMIT','Generic body discovery exceeds its limit.');
+ const build=genericHistoryBuild(history),targets:GenericManufacturingTarget[]=[],checks:any[]=[];
+ const availability=(observed:any)=>{
+  const values=[observed.ready,observed.reason??null,project.hasHostLifetime,manager.isRestoring,manager.unit,craft.isProcessing,craft.pipelineFailure$.value,craft.engineCleanupFailure$.value,ctx.services.sketcher.inPlaceEditor.inEditMode,ctx.wizardService.workingRequest$.value,ctx.assemblyService.getConstraints().length,expressions.isTyped,expressions.isTyped?expressions.hasCurrentPhysicalResult():true];
+  const reason=!values[0]?values[1]||'UNAVAILABLE':!values[2]||values[3]?'UNAVAILABLE':values[4]!=='millimeter'?'UNSUPPORTED_UNIT':values[5]||values[6]||values[7]||values[8]||values[9]?'UNAVAILABLE':values[10]?'UNSUPPORTED_PLACEMENT':!values[12]?'UNAVAILABLE':null;
+  return{values,reason};
+ };
+ const initialAvailability=availability(inventory),reason=initialAvailability.reason;
+
+ const seen=new Set();
+ for(const row of inventory.outputs){const bodyId=row.outputId,featureId=row.featureId,model=registry.find(bodyId),metrics=model?.inspectKernelMetrics?.();let code=reason,operationType=null,engineRevision=null,p=null;
+  if(typeof bodyId!=='string'||!bodyId||bodyId.length>1024||!Number.isSafeInteger(featureId)||featureId<1||seen.has(bodyId))fail('INVALID_RESPONSE','Invalid accepted body inventory identity.');seen.add(bodyId);
+  try{const indices=history.flatMap((op:any,i:number)=>op?.params?.featureId===featureId?[i]:[]);if(indices.length!==1)fail('UNSUPPORTED_TARGET','The producer is missing or ambiguous.');const index=indices[0],op=history[index];operationType=op.type;engineRevision=op.params.engineRevision;
+   if(!kinds.has(operationType)||!(model instanceof MWorkerSolid)||model.inspectKernelMetrics!==MWorkerSolid.prototype.inspectKernelMetrics||model.featureId!==featureId||model.originatingOperation!==index||row.metrics!==metrics||model.inspectKernelMetrics()!==metrics)fail('UNSUPPORTED_TARGET','Select an actual uniquely bound current Worker solid.');
+   if(op.params.engine!=='occ'||row.engine!=='occ'||model.ext.workerGeometry.engine!=='occ'||model.ext.workerGeometry.featureId!==featureId||model.ext.workerGeometry.unit!=='millimeter')fail('UNSUPPORTED_ENGINE','This generic assignment slice supports OCC outputs only.');
+   if(!build||build.id!=='occ'||build.revision!==engineRevision||model.ext.workerGeometry.runtime!==metrics?.runtime||metrics.runtime.mountEngine!==build.mountEngine||'sha256:'+metrics.runtime.jsSha256+':'+metrics.runtime.wasmSha256!==engineRevision)fail('ENGINE_REVISION_MISMATCH','The actual body and recorded whole-part runtime must agree.');
+   if(!Object.isFrozen(metrics)||metrics.resultKind!=='single-solid'||metrics.solidCount!==1||metrics.nativeValidity?.valid!==true||!Number.isFinite(metrics.nativeVolume)||metrics.nativeVolume<=0||!metrics.nativeBounds||['min','max'].some(k=>!Array.isArray(metrics.nativeBounds[k])||metrics.nativeBounds[k].length!==3||!metrics.nativeBounds[k].every(Number.isFinite))||metrics.nativeBounds.min.some((n,i)=>n>metrics.nativeBounds.max[i]))fail('UNSUPPORTED_TARGET','A current measured valid positive single solid is required.');
+   p=placement(model);
+  }catch(error){code=code||error.code||'UNSUPPORTED_TARGET';}
+  targets.push(Object.freeze({bodyId,featureId,operationType,engineRevision,canAssign:!code,reason:code||null}));const sourceOperation=history[model?.originatingOperation];checks.push({row,model,metrics,p,operation:sourceOperation,index:model?.originatingOperation,operationType:sourceOperation?.type,parameters:sourceOperation?.params,producer:sourceOperation?.params?.featureId,engineRevision:sourceOperation?.params?.engineRevision});
+ }
+ const revision=inventory.revision,generation=project.documentGeneration,signal=project.documentSignal;
+ const requireCurrent=()=>{if(!project.isDocumentCurrent(generation)||project.documentSignal!==signal||ctx.expressionService!==expressions||state.pointer!==history.length-1||ctx.craftService!==craft||ctx.cadRegistry!==registry||registry.find!==find||registry.shells!==shells||craft.inspectWorkerSolids!==inspectMethod||ctx.projectService!==project||ctx.projectManager!==manager||craft.modifications$.value!==state||craft.models$.value!==models||inspectMethod.call(craft).revision!==revision||availability(inspectMethod.call(craft)).values.some((v,i)=>!Object.is(v,initialAvailability.values[i])))throw new DOMException('Manufacturing body selection changed.','AbortError');for(const{row,model,metrics,p,operation,index,operationType,parameters,producer,engineRevision}of checks){if(registry.find(row.outputId)!==model||model?.inspectKernelMetrics?.()!==metrics||model&&model.featureId!==row.featureId||model?.originatingOperation!==index||operation&&(history[index]!==operation||operation.params!==parameters||parameters.featureId!==producer||parameters.engineRevision!==engineRevision||operation.type!==operationType)||p&&model.inspectKernelMetrics!==MWorkerSolid.prototype.inspectKernelMetrics)throw new DOMException('Manufacturing body ownership changed.','AbortError');if(p&&(model.location$!==p.location||p.location.value!==p.matrix||model.csys!==p.csys||MATRIX.some((k,i)=>!Object.is(p.matrix[k],IDENTITY[i]))||AXES.some((k,i)=>[p.csys[k].x,p.csys[k].y,p.csys[k].z].some((n,j)=>!Object.is(n,p.axes[i][j])))))throw new DOMException('Manufacturing placement changed.','AbortError');}};
+ requireCurrent();if(new TextEncoder().encode(JSON.stringify(targets)).byteLength>GENERIC_MANUFACTURING_LIMITS.inspectionBytes)fail('RESOURCE_LIMIT','Manufacturing discovery exceeds its metadata bound.');
+ const ready=!reason&&targets.some(target=>target.canAssign);return Object.freeze({targets:Object.freeze(targets),geometryRevision:revision,ready,reason:reason||(!ready?'NO_SUPPORTED_TARGET':null),requireCurrent});
+}

@@ -1,0 +1,10 @@
+✔ actual first and second readonly-source builds succeed with unchanged exact pins (0.723057ms)
+✔ unreviewed input preserves all prior output bytes and file identity (0.757457ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 65.666731

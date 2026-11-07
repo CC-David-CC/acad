@@ -1,0 +1,20 @@
+{
+  "source": "f4d427fa",
+  "sourceBase": "e9ec16d7d6ee6044efd709579693ab43df3fb340",
+  "files": {
+    "modules/engine/extrusion/selectedSketchProfile.mjs": "a03be682ee5191a9d41243ff1ce6b9fc42fe592127a4dfb33ce8f3dfa021e9b0",
+    "modules/engine/mount/polygonProfilePlan.mjs": "fa5ab686b60bb16348074df57e37ba04d4173ac5e0b9a441e2d4dfc4cc03737d",
+    "modules/engine/extrusion/simplePolygon.mjs": "e98f6594090a1b88a2ca50f582c0f9f855f085fe3a7658e105ff0f423be96227",
+    "modules/engine/mount/selectedProfilePlan.mjs": "824dc5bfc8555a89fe9a647612ce76970f98b8adfd6e648185dd29e9f311c8a0",
+    "modules/workbenches/modeler/features/extrude/authoredRegions.mjs": "bf524fdab34d6ead706a8f6f5a3d89843dfd40aae873c74294efbe8da5e42f19",
+    "modules/workbenches/modeler/features/extrude/profilePlan.mjs": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237",
+    "test/selected-polygon-source-v3/worker.mjs": "6d6a47efcc87149c0ef7739e41612f0dc218312c8e19de363862700dae85b6ab",
+    "test/selected-polygon-source-v3/fixtures.mjs": "ac61d24d388bf7373a8ce427d9ccc303574cd272d2b84b52228a904b6e49d4c9",
+    "test/selected-region-discovery/fixtures.mjs": "3dc59e45b14ebb1f49b4112b9c8a4d82a985580d95d6c44034033012a240d8f1"
+  },
+  "newWorkerCases": 13,
+  "retainedV2WorkerCases": 9,
+  "nodeTestEntries": 31,
+  "scope": "Actual Chromium dedicated module Workers executing source preparation; explicit native-v3 fixtures, no solver/native/public CAD/Files qualification",
+  "fixture": "http://127.0.0.1:20722/"
+}

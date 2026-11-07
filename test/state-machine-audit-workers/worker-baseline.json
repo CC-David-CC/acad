@@ -1,0 +1,9 @@
+{
+  "sourceSHA256": "182b57fbeb2e621412bc6c0a8fae7499ee6f7f1d2fc0d88e3c08e19e7932cbd3",
+  "driverSHA256": "27d23dbdf644e20819802dc6ef5e2130c12340c2be8d273acf947dcf84962a43",
+  "actualReceiptSHA256": "2d7b46e3a88f0ee48ddb8e1d26e4839599cbad2cf531175065c4766ff265f2d0",
+  "scope": "Direct private protocol only; normal controller serial control passes",
+  "duplicateInitReadyWithin30s": 0,
+  "sameTokenNativeResults": 2,
+  "ownedAfterDispose": 1
+}

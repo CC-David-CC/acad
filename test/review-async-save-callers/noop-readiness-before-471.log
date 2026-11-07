@@ -1,0 +1,69 @@
+✔ stable byte no-op retains stored text and starts no Worker before successful exit (2.906177ms)
+✖ initial active tool/transactions/rejected relation refuse unchanged saves without exit (1.715737ms)
+✖ tool and transaction changes before either async receipt check preserve the open editor (1.543295ms)
+✖ receipt rechecks readiness after its own serialization callbacks (0.631226ms)
+✔ duplicate Save rejects while the first no-op is pending, without canceling its receipt (0.805937ms)
+✖ a replacement editor or a post-return active tool cannot consume the no-op exit receipt (1.07247ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 2
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.387643
+
+✖ failing tests:
+
+test at test/review-async-save-callers/noop-readiness.test.mjs:20:1
+✖ initial active tool/transactions/rejected relation refuse unchanged saves without exit (1.715737ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///tmp/codi-noop-save-readiness-20261105/test/review-async-save-callers/noop-readiness.test.mjs:21:243)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /Finish the current sketch operation/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test/review-async-save-callers/noop-readiness.test.mjs:23:1
+✖ tool and transaction changes before either async receipt check preserve the open editor (1.543295ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection (refusal).
+      at async TestContext.<anonymous> (file:///tmp/codi-noop-save-readiness-20261105/test/review-async-save-callers/noop-readiness.test.mjs:24:348)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test/review-async-save-callers/noop-readiness.test.mjs:26:1
+✖ receipt rechecks readiness after its own serialization callbacks (0.631226ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection (refusal).
+      at async TestContext.<anonymous> (file:///tmp/codi-noop-save-readiness-20261105/test/review-async-save-callers/noop-readiness.test.mjs:26:157)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test/review-async-save-callers/noop-readiness.test.mjs:28:1
+✖ a replacement editor or a post-return active tool cannot consume the no-op exit receipt (1.07247ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception (refusal).
+      at TestContext.<anonymous> (file:///tmp/codi-noop-save-readiness-20261105/test/review-async-save-callers/noop-readiness.test.mjs:30:84)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }

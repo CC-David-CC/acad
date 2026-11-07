@@ -1,0 +1,137 @@
+{
+  "status": "PASS",
+  "scope": "Component only: real production sketch transitions and source discovery Workers; submission intentionally refuses NATIVE_NOT_RUN. No native/public-app/Save/Open geometry claim.",
+  "lifecycle": {
+    "started": 67,
+    "terminated": 67
+  },
+  "requestCount": 67,
+  "responseCount": 67,
+  "rows": [
+    {
+      "kind": "genuine-production-worker-discovery",
+      "report": {
+        "revision": "creation:1",
+        "faceId": "S:4/SURFACE",
+        "pathFaceId": "S:5/SURFACE",
+        "sourceDigest": "ba0ce100dde82c6e892e553b55ac39a90b82a7da50204e28a3ae83d014876d0d",
+        "pathDigest": "a3efee1cf9485bb815594d7a2ce15a396621134cb7f6d602c701680a75b972cd",
+        "engine": "occ",
+        "engineRevision": "sha256:a9cfa6e53a8bc14f2fb035e33afd1a82d9ae36ace1cf9f66169c739d2de72580:e105bdfe7c7bcb113eee5398d8202831cb8e8b1608dcc1730fc4461c9f24263d",
+        "unit": "millimeter",
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:4/SURFACE\",\"outer\":[\"S:4/SURFACE/agent-primitive-ec80f746-7f39-4cda-89ac-d75a6df59fb5\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "agent-primitive-ec80f746-7f39-4cda-89ac-d75a6df59fb5"
+              ],
+              "holeCurveIds": []
+            }
+          }
+        ],
+        "pathCurves": [
+          {
+            "curveId": "agent-primitive-4491fa29-8ced-4ec7-a865-45f45d0db57c",
+            "type": "Segment",
+            "role": null,
+            "stage": 0,
+            "supported": true,
+            "reason": null,
+            "a": [
+              0,
+              0
+            ],
+            "b": [
+              0,
+              10
+            ]
+          },
+          {
+            "curveId": "agent-primitive-073885be-9632-43ab-83a4-5b278eb52b1b",
+            "type": "Arc",
+            "role": "construction",
+            "stage": 0,
+            "supported": true,
+            "reason": null,
+            "a": [
+              0,
+              10
+            ],
+            "b": [
+              10,
+              0
+            ],
+            "c": [
+              0,
+              0
+            ]
+          }
+        ],
+        "qualification": "source-membership-only; path ordering, attachment, transport and native result require evaluation"
+      }
+    },
+    {
+      "kind": "routing-only-no-native-success",
+      "request": {
+        "type": "WORKER_SELECTED_PROFILE_SWEEP_V1",
+        "params": {
+          "version": 1,
+          "unit": "millimeter",
+          "engine": "occ",
+          "engineRevision": "sha256:a9cfa6e53a8bc14f2fb035e33afd1a82d9ae36ace1cf9f66169c739d2de72580:e105bdfe7c7bcb113eee5398d8202831cb8e8b1608dcc1730fc4461c9f24263d",
+          "featureId": 3,
+          "faceId": "S:6/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:6/SURFACE\",\"outer\":[\"S:6/SURFACE/agent-primitive-ec80f746-7f39-4cda-89ac-d75a6df59fb5\"],\"holes\":[]}",
+          "pathFaceId": "S:7/SURFACE",
+          "pathCurves": [
+            {
+              "curveId": "agent-primitive-4491fa29-8ced-4ec7-a865-45f45d0db57c",
+              "reversed": false
+            }
+          ],
+          "transport": "corrected-frenet",
+          "bodyPolicy": "separate"
+        }
+      }
+    },
+    {
+      "kind": "history-contract-fixture-not-native",
+      "history": {
+        "ready": true,
+        "reason": null,
+        "revision": "creation:1",
+        "features": [
+          {
+            "version": 1,
+            "unit": "millimeter",
+            "engine": "occ",
+            "engineRevision": "sha256:a9cfa6e53a8bc14f2fb035e33afd1a82d9ae36ace1cf9f66169c739d2de72580:e105bdfe7c7bcb113eee5398d8202831cb8e8b1608dcc1730fc4461c9f24263d",
+            "featureId": 3,
+            "faceId": "S:20/SURFACE",
+            "regionId": "sketch-region:{\"faceId\":\"S:20/SURFACE\",\"outer\":[\"S:20/SURFACE/agent-primitive-ec80f746-7f39-4cda-89ac-d75a6df59fb5\"],\"holes\":[]}",
+            "pathFaceId": "S:21/SURFACE",
+            "pathCurves": [
+              {
+                "curveId": "agent-primitive-4491fa29-8ced-4ec7-a865-45f45d0db57c",
+                "reversed": false
+              }
+            ],
+            "transport": "corrected-frenet",
+            "bodyPolicy": "separate",
+            "index": 2
+          }
+        ]
+      }
+    }
+  ],
+  "testedSourceCommit": "8820075171503631aac834b9d41c1e54d6e5d210",
+  "sourceHashes": {
+    "web/app/cad/craft/workerSweepCommands.ts": "de4d303127c0083a80a4cc85f397367a45448c1ccb64f88d68fe49dc3f35871a",
+    "modules/engine/extrusion/selectedSketchSweepPath.mjs": "7117a5b6baa3d00702733a538ff8acb6a0809f6d06d21c2e9906182a8d0f85e6",
+    "modules/engine/extrusion/selectedSketchSweepDiscovery.mjs": "c276f53d9f87796bce57815649f8761945e73f8bee2eb0fb2b7a6c6fb2e608ee",
+    "modules/engine/extrusion/prismSemantic.worker.ts": "71064f7518594000958a7dae9d051a7500ad98c51b8551657d70f0ed909cc0e6"
+  }
+}

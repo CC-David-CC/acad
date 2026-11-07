@@ -1,0 +1,48 @@
+{
+  "source": "04731a067",
+  "base": "db51a42f9",
+  "scope": "source/unit/type only; no app/native/host qualification",
+  "counts": {
+    "captureAndJournal": 35,
+    "sourceAST": 4,
+    "skipped": 0
+  },
+  "typescript": {
+    "exitCode": 0,
+    "logBytes": 0
+  },
+  "files": {
+    "web/app/cad/craft/craftBundle.ts": {
+      "sha256": "afa3d30604ad24a41d183bbd2a680b57981e9c68117d1ed79d95bd9b9968abef",
+      "bytes": 136494
+    },
+    "web/app/cad/craft/authoredEditJournal.mjs": {
+      "sha256": "061f0b09e09424d76e86eab943aed6e55a2af3aec5339d6b89171d0d74db6b96",
+      "bytes": 30705
+    },
+    "web/app/cad/craft/captureAuthoredHistory.mjs": {
+      "sha256": "3965b7be94e5b20a0c8845deccb59b9fa9caa51a63e9cf326bdbbc825bb6db62",
+      "bytes": 2847
+    },
+    "test/edge-treatment-craft/source.test.mjs": {
+      "sha256": "7f06f4eb5ae7d64e74c6a5dbe03b1fbbc47df0fb6bc31fd91a77c5ed760969b1",
+      "bytes": 5088
+    },
+    "test/edge-treatment-craft/history.test.mjs": {
+      "sha256": "a5ecf3de7f517d793a1a952120f3e1c629bc0e966e9cb8a7a24e6f90226b2972",
+      "bytes": 4212
+    },
+    "test/edge-treatment-craft/journal-tests.log": {
+      "sha256": "b83f5dc3a44caacc53d4d4e2a51d9d5eb26bb5a580deb49ed5c64ca715d9ee77",
+      "bytes": 3090
+    },
+    "test/edge-treatment-craft/source-tests.log": {
+      "sha256": "03dcf329e4cf5892301df8175121fbfcd19a01bbd2cf28164368438b73cfa635",
+      "bytes": 511
+    },
+    "test/edge-treatment-craft/tsc.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  }
+}

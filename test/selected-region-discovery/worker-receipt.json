@@ -1,0 +1,898 @@
+{
+  "source": "cda4558ca",
+  "rows": [
+    {
+      "case": "nested",
+      "result": {
+        "binding": {
+          "revision": "current",
+          "sketchDigest": "2aaaf962ff49f93f44003b905ea2ece15c2bb0aafc42016c6c7925adfa8ab469",
+          "faceId": "plane"
+        },
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/outer\"],\"holes\":[[\"plane/middle\"]]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/middle\"],\"holes\":[[\"plane/inner\"]]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/inner\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          }
+        ]
+      },
+      "digests": 1,
+      "sourceUnchanged": true,
+      "deepFrozen": true,
+      "dedicatedWorker": true,
+      "resources": [],
+      "scope": "Explicit native-data geometry fixtures; no solver admission, native CAD, public authoring or signed persistence",
+      "terminated": true
+    },
+    {
+      "case": "disjoint",
+      "result": {
+        "binding": {
+          "revision": "current",
+          "sketchDigest": "ffaf7ea5f020f493071a0ea120d7d0c036f3bd4e4ee4f264a89381cb3ea416c3",
+          "faceId": "plane"
+        },
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/a0\",\"plane/a1\",\"plane/a2\",\"plane/a3\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/b0\",\"plane/b1\",\"plane/b2\",\"plane/b3\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          }
+        ]
+      },
+      "digests": 1,
+      "sourceUnchanged": true,
+      "deepFrozen": true,
+      "dedicatedWorker": true,
+      "resources": [],
+      "scope": "Explicit native-data geometry fixtures; no solver admission, native CAD, public authoring or signed persistence",
+      "terminated": true
+    },
+    {
+      "case": "mixed",
+      "result": {
+        "binding": {
+          "revision": "current",
+          "sketchDigest": "4e736872e0d9d81607bec9c0d7a96a6ec60787873839182ce8c4d78d35987e79",
+          "faceId": "plane"
+        },
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/hole\"],\"holes\":[[\"plane/island0\",\"plane/island1\",\"plane/island2\",\"plane/island3\"]]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/island0\",\"plane/island1\",\"plane/island2\",\"plane/island3\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/outer0\",\"plane/outer1\",\"plane/outer2\",\"plane/outer3\"],\"holes\":[[\"plane/hole\"]]}",
+            "support": "supported",
+            "reason": null
+          }
+        ]
+      },
+      "digests": 1,
+      "sourceUnchanged": true,
+      "deepFrozen": true,
+      "dedicatedWorker": true,
+      "resources": [],
+      "scope": "Explicit native-data geometry fixtures; no solver admission, native CAD, public authoring or signed persistence",
+      "terminated": true
+    },
+    {
+      "case": "hole-cap",
+      "result": {
+        "binding": {
+          "revision": "current",
+          "sketchDigest": "655061b868325615c512f4e9fa6cd0cabe1f21e5e861371fe68a8d40bc396d91",
+          "faceId": "plane"
+        },
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/hole0\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/hole1\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/hole2\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/hole3\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/hole4\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/hole5\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/hole6\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/hole7\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/hole8\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/outer0\",\"plane/outer1\",\"plane/outer2\",\"plane/outer3\"],\"holes\":[[\"plane/hole0\"],[\"plane/hole1\"],[\"plane/hole2\"],[\"plane/hole3\"],[\"plane/hole4\"],[\"plane/hole5\"],[\"plane/hole6\"],[\"plane/hole7\"],[\"plane/hole8\"]]}",
+            "support": "unsupported",
+            "reason": {
+              "code": "INVALID_REQUEST",
+              "message": "Invalid bounded profile array."
+            }
+          }
+        ]
+      },
+      "digests": 1,
+      "sourceUnchanged": true,
+      "deepFrozen": true,
+      "dedicatedWorker": true,
+      "resources": [],
+      "scope": "Explicit native-data geometry fixtures; no solver admission, native CAD, public authoring or signed persistence",
+      "terminated": true
+    },
+    {
+      "case": "max-loops",
+      "result": {
+        "binding": {
+          "revision": "current",
+          "sketchDigest": "0d27287167a6c26b5b4870e83b2bb2ada85e0265c74482a45af50e1068885d88",
+          "faceId": "plane"
+        },
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c0\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c1\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c2\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c3\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c4\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c5\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c6\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c7\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c8\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c9\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c10\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c11\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c12\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c13\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c14\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c15\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c16\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c17\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c18\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c19\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c20\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c21\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c22\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c23\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c24\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c25\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c26\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c27\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c28\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c29\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c30\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c31\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c32\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c33\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c34\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c35\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c36\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c37\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c38\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c39\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c40\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c41\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c42\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c43\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c44\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c45\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c46\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c47\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c48\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c49\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c50\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c51\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c52\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c53\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c54\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c55\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c56\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c57\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c58\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c59\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c60\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c61\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c62\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c63\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c64\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c65\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c66\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c67\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c68\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c69\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c70\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c71\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c72\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c73\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c74\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c75\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c76\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c77\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c78\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c79\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c80\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c81\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c82\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c83\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c84\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c85\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c86\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c87\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c88\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c89\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c90\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c91\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c92\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c93\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c94\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c95\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c96\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c97\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c98\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c99\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c100\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c101\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c102\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c103\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c104\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c105\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c106\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c107\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c108\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c109\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c110\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c111\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c112\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c113\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c114\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c115\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c116\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c117\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c118\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c119\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c120\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c121\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c122\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c123\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c124\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c125\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c126\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"plane\",\"outer\":[\"plane/c127\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null
+          }
+        ]
+      },
+      "digests": 1,
+      "sourceUnchanged": true,
+      "deepFrozen": true,
+      "dedicatedWorker": true,
+      "resources": [],
+      "scope": "Explicit native-data geometry fixtures; no solver admission, native CAD, public authoring or signed persistence",
+      "terminated": true
+    },
+    {
+      "case": "utf8-over",
+      "error": {
+        "code": "INVALID_REQUEST",
+        "message": "Native sketch source exceeds1MiB of UTF-8 data."
+      },
+      "digests": 0,
+      "sourceUnchanged": true,
+      "deepFrozen": null,
+      "dedicatedWorker": true,
+      "resources": [],
+      "scope": "Explicit native-data geometry fixtures; no solver admission, native CAD, public authoring or signed persistence",
+      "terminated": true
+    },
+    {
+      "case": "arc",
+      "error": {
+        "code": "UNSUPPORTED_PROFILE",
+        "message": "Only ordinary rectangle segments and full circles are qualified."
+      },
+      "digests": 1,
+      "sourceUnchanged": true,
+      "deepFrozen": null,
+      "dedicatedWorker": true,
+      "resources": [],
+      "scope": "Explicit native-data geometry fixtures; no solver admission, native CAD, public authoring or signed persistence",
+      "terminated": true
+    },
+    {
+      "case": "touch",
+      "error": {
+        "code": "UNSUPPORTED_REGION_TOPOLOGY",
+        "message": "Profiles intersect, touch or are too close; separate them before extruding."
+      },
+      "digests": 1,
+      "sourceUnchanged": true,
+      "deepFrozen": null,
+      "dedicatedWorker": true,
+      "resources": [],
+      "scope": "Explicit native-data geometry fixtures; no solver admission, native CAD, public authoring or signed persistence",
+      "terminated": true
+    },
+    {
+      "case": "digest",
+      "error": {
+        "code": "STALE_SKETCH",
+        "message": "Selected region source digest changed."
+      },
+      "digests": 1,
+      "sourceUnchanged": true,
+      "deepFrozen": null,
+      "dedicatedWorker": true,
+      "resources": [],
+      "scope": "Explicit native-data geometry fixtures; no solver admission, native CAD, public authoring or signed persistence",
+      "terminated": true
+    }
+  ],
+  "pins": {
+    "modules/engine/extrusion/selectedSketchProfile.mjs": "71eb8607c12474361a932d191a8af58213e545119a46b6c87f762ef7b90eb0d5",
+    "modules/engine/mount/selectedProfilePlan.mjs": "7d51355e667efa79b26528f2e39582256e9a1513a0a12ca949d265f3963d234f",
+    "modules/workbenches/modeler/features/extrude/authoredRegions.mjs": "46368ba6ca386671afef5e8462e7827d803e02bd816fb1d3b35d7c9c3b9086e6",
+    "modules/workbenches/modeler/features/extrude/profilePlan.mjs": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237",
+    "test/selected-region-discovery/worker.mjs": "5c0c297e49cb0d8d779dff8a35aa306cd29e1ad0e5ebd3b2189e38d6dab896b9",
+    "test/selected-region-discovery/fixtures.mjs": "3dc59e45b14ebb1f49b4112b9c8a4d82a985580d95d6c44034033012a240d8f1"
+  },
+  "scope": "Actual Chromium module Workers executing geometry-support discovery on explicit native-data fixtures; no sketch solver admission, native kernel, public desktop or Files proof"
+}

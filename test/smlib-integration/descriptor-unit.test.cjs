@@ -1,0 +1,4 @@
+// Compiles and exercises the actual descriptor with a bounded mount double.
+// This catches descriptor-to-ledger wiring, not real-kernel behavior.
+const test=require('node:test'),assert=require('node:assert/strict'),esbuild=require('esbuild-wasm'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+test('registered descriptor validates mount and invokes the ledger',async()=>{const dir=fs.mkdtempSync(path.join(os.tmpdir(),'solid-descriptor-'));try{const output=path.join(dir,'test.cjs');esbuild.buildSync({entryPoints:[path.join(__dirname,'descriptor-unit-entry.ts')],bundle:true,platform:'node',format:'cjs',outfile:output,logLevel:'silent',tsconfig:path.join(__dirname,'../../tsconfig.json')});const {exerciseDescriptor}=require(output);assert.deepEqual(await exerciseDescriptor(),{validated:1,dispatched:1,id:'worker-solid:1:[1,"body"]',engine:'smlib'});}finally{fs.rmSync(dir,{recursive:true,force:true})}});

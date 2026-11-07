@@ -1,0 +1,1211 @@
+{
+  "version": 1,
+  "source": {
+    "commit": "4a3d7aba490490c1d87bae11be92cb88b962f3e6",
+    "appSha256": "4a340ecf3973c88c67d879a697fcb17d7e55e523812aedcd356323be388bfa53",
+    "workerSha256": "bfa92a0f627b359aee3f0338a585c3426a9aee6e49caf10f5f187a6702b97893"
+  },
+  "cases": [
+    {
+      "id": "SKETCH-P0-FREE-LINE-3-4-5",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "accepted",
+        "oracle": {
+          "kind": "line",
+          "id": "s",
+          "a": [
+            1,
+            2
+          ],
+          "b": [
+            4,
+            6
+          ],
+          "length": 5
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": true,
+        "error": null,
+        "admission": [],
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "independent geometry math",
+            "exact caller-request bytes unchanged",
+            "authored intent preserved",
+            "serialized Worker reload and geometry",
+            "finite bounded residuals where supplied"
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 0
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-FREE-CIRCLE",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "accepted",
+        "oracle": {
+          "kind": "circle",
+          "id": "c",
+          "center": [
+            -2,
+            3
+          ],
+          "radius": 5
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": true,
+        "error": null,
+        "admission": [],
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "independent geometry math",
+            "exact caller-request bytes unchanged",
+            "authored intent preserved",
+            "serialized Worker reload and geometry",
+            "finite bounded residuals where supplied"
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 1
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-ZERO-LINE",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "rejected",
+        "oracle": {
+          "kind": "refusal",
+          "code": "INVALID"
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Degenerate sketch segment."
+        },
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "typed refusal",
+            "exact caller-request bytes unchanged",
+            "no returned solved candidate"
+          ],
+          "error": {
+            "code": "INVALID",
+            "message": "Degenerate sketch segment."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 2
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-ZERO-CIRCLE",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "rejected",
+        "oracle": {
+          "kind": "refusal",
+          "code": "INVALID"
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Degenerate sketch circle."
+        },
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "typed refusal",
+            "exact caller-request bytes unchanged",
+            "no returned solved candidate"
+          ],
+          "error": {
+            "code": "INVALID",
+            "message": "Degenerate sketch circle."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 3
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-NEGATIVE-CIRCLE",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "rejected",
+        "oracle": {
+          "kind": "refusal",
+          "code": "INVALID"
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Degenerate sketch circle."
+        },
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "typed refusal",
+            "exact caller-request bytes unchanged",
+            "no returned solved candidate"
+          ],
+          "error": {
+            "code": "INVALID",
+            "message": "Degenerate sketch circle."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 4
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-ANCHORED-DIMENSIONED-RECTANGLE",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "accepted",
+        "oracle": {
+          "kind": "rectangle",
+          "origin": [
+            10,
+            20
+          ],
+          "width": 100,
+          "height": 50
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": true,
+        "error": null,
+        "admission": [
+          {
+            "typeId": "PCoincident",
+            "state": "accepted"
+          },
+          {
+            "typeId": "PCoincident",
+            "state": "accepted"
+          },
+          {
+            "typeId": "PCoincident",
+            "state": "accepted"
+          },
+          {
+            "typeId": "PCoincident",
+            "state": "accepted"
+          },
+          {
+            "typeId": "Horizontal",
+            "state": "accepted"
+          },
+          {
+            "typeId": "Vertical",
+            "state": "accepted"
+          },
+          {
+            "typeId": "Horizontal",
+            "state": "accepted"
+          },
+          {
+            "typeId": "Vertical",
+            "state": "accepted"
+          },
+          {
+            "typeId": "LockPoint",
+            "state": "accepted"
+          },
+          {
+            "typeId": "SegmentLength",
+            "state": "accepted"
+          },
+          {
+            "typeId": "SegmentLength",
+            "state": "accepted"
+          }
+        ],
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "independent geometry math",
+            "exact caller-request bytes unchanged",
+            "authored intent preserved",
+            "serialized Worker reload and geometry",
+            "finite bounded residuals where supplied"
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 5
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-RECTANGLE-INCH-REFUSAL",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "rejected",
+        "oracle": {
+          "kind": "refusal"
+        },
+        "reason": "The existing rectangle protocol admits millimeters; no implicit inch conversion."
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "INVALID",
+          "message": "Rectangle request could not be prepared."
+        },
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "typed refusal",
+            "exact caller-request bytes unchanged",
+            "no returned solved candidate"
+          ],
+          "error": {
+            "code": "INVALID",
+            "message": "Rectangle request could not be prepared."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 6
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-RECTANGLE-ZERO-WIDTH",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "rejected",
+        "oracle": {
+          "kind": "refusal",
+          "code": "RECTANGLE_DOMAIN"
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "RECTANGLE_DOMAIN",
+          "message": "Width and height must be between 0.001 and 1,000,000 mm."
+        },
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "typed refusal",
+            "exact caller-request bytes unchanged",
+            "no returned solved candidate"
+          ],
+          "error": {
+            "code": "RECTANGLE_DOMAIN",
+            "message": "Width and height must be between 0.001 and 1,000,000 mm."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 7
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-MIDPOINT-PERPENDICULAR-BISECTOR-COUNTEREXAMPLE-POINTINMIDDLE",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "accepted",
+        "oracle": {
+          "kind": "point",
+          "id": "p",
+          "at": [
+            0,
+            0
+          ]
+        },
+        "reason": "Equal distance to endpoints alone would incorrectly accept (0,5); both midpoint coordinates must be enforced."
+      },
+      "actual": {
+        "ok": true,
+        "error": null,
+        "admission": [
+          {
+            "typeId": "PointInMiddle",
+            "state": "accepted"
+          }
+        ],
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "independent geometry math",
+            "exact caller-request bytes unchanged",
+            "authored intent preserved",
+            "serialized Worker reload and geometry",
+            "finite bounded residuals where supplied"
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 8
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-MIDPOINT-PERPENDICULAR-BISECTOR-COUNTEREXAMPLE-SYMMETRY",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "accepted",
+        "oracle": {
+          "kind": "point",
+          "id": "p",
+          "at": [
+            0,
+            0
+          ]
+        },
+        "reason": "Equal distance to endpoints alone would incorrectly accept (0,5); both midpoint coordinates must be enforced."
+      },
+      "actual": {
+        "ok": true,
+        "error": null,
+        "admission": [
+          {
+            "typeId": "Symmetry",
+            "state": "accepted"
+          }
+        ],
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "independent geometry math",
+            "exact caller-request bytes unchanged",
+            "authored intent preserved",
+            "serialized Worker reload and geometry",
+            "finite bounded residuals where supplied"
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 9
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-CONCENTRIC-ANCHORED-CENTERS",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "accepted",
+        "oracle": {
+          "kind": "concentric",
+          "a": "a",
+          "b": "b",
+          "center": [
+            0,
+            0
+          ],
+          "radii": [
+            5,
+            3
+          ]
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": true,
+        "error": null,
+        "admission": [
+          {
+            "typeId": "LockPoint",
+            "state": "accepted"
+          },
+          {
+            "typeId": "Concentric",
+            "state": "accepted"
+          }
+        ],
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "independent geometry math",
+            "exact caller-request bytes unchanged",
+            "authored intent preserved",
+            "serialized Worker reload and geometry",
+            "finite bounded residuals where supplied"
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 10
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-DIAMETER-ACCEPTED-EDIT",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "accepted",
+        "oracle": {
+          "kind": "circle",
+          "id": "c",
+          "center": [
+            2,
+            3
+          ],
+          "radius": 10
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": true,
+        "error": null,
+        "admission": [
+          {
+            "typeId": "DiameterLength",
+            "state": "accepted"
+          }
+        ],
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "independent geometry math",
+            "exact caller-request bytes unchanged",
+            "authored intent preserved",
+            "serialized Worker reload and geometry",
+            "finite bounded residuals where supplied"
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 11
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-DIAMETER-CONTRADICTORY-EDIT",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "rejected",
+        "oracle": {
+          "kind": "refusal",
+          "code": "SOLVE_FAILED"
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "SOLVE_FAILED",
+          "message": "A constraint was rejected during solving."
+        },
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "typed refusal",
+            "exact caller-request bytes unchanged",
+            "no returned solved candidate"
+          ],
+          "error": {
+            "code": "SOLVE_FAILED",
+            "message": "A constraint was rejected during solving."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 12
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-SIGNED-XY-NEGATIVE-POSITIVE",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "accepted",
+        "oracle": {
+          "kind": "points",
+          "points": {
+            "a": [
+              2,
+              3
+            ],
+            "b": [
+              -3,
+              10
+            ]
+          }
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": true,
+        "error": null,
+        "admission": [
+          {
+            "typeId": "LockPoint",
+            "state": "accepted"
+          },
+          {
+            "typeId": "SignedDistanceX",
+            "state": "accepted"
+          },
+          {
+            "typeId": "SignedDistanceY",
+            "state": "accepted"
+          }
+        ],
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "independent geometry math",
+            "exact caller-request bytes unchanged",
+            "authored intent preserved",
+            "serialized Worker reload and geometry",
+            "finite bounded residuals where supplied"
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 13
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-UNSIGNED-DISTANCE-NEGATIVE",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "rejected",
+        "oracle": {
+          "kind": "refusal"
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "SOLVE_ERROR",
+          "message": "the distance between two points must be a nonnegative number."
+        },
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "typed refusal",
+            "exact caller-request bytes unchanged",
+            "no returned solved candidate"
+          ],
+          "error": {
+            "code": "SOLVE_ERROR",
+            "message": "the distance between two points must be a nonnegative number."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 14
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-UNSIGNED-DISTANCE-ZERO",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "accepted",
+        "oracle": {
+          "kind": "points",
+          "points": {
+            "a": [
+              0,
+              0
+            ],
+            "b": [
+              0,
+              0
+            ]
+          }
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": true,
+        "error": null,
+        "admission": [
+          {
+            "typeId": "DistancePP",
+            "state": "accepted"
+          }
+        ],
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "independent geometry math",
+            "exact caller-request bytes unchanged",
+            "authored intent preserved",
+            "serialized Worker reload and geometry",
+            "finite bounded residuals where supplied"
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 15
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-INCONSISTENT-HORIZONTAL-SIGNED-Y",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "rejected",
+        "oracle": {
+          "kind": "refusal",
+          "code": "SOLVE_FAILED"
+        },
+        "reason": "Independent contradiction: a horizontal nondegenerate segment cannot have signed Y difference5. SOLVE_FAILED alone is not a universal inconsistency certificate."
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "SOLVE_FAILED",
+          "message": "A constraint was rejected during solving."
+        },
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "typed refusal",
+            "exact caller-request bytes unchanged",
+            "no returned solved candidate"
+          ],
+          "error": {
+            "code": "SOLVE_FAILED",
+            "message": "A constraint was rejected during solving."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 16
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-KNOWN-IMPLIED-REDUNDANCY-LABEL",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "fail",
+      "expected": {
+        "behavior": "truthful-redundancy",
+        "oracle": {
+          "kind": "redundancy"
+        },
+        "reason": "Signed Y=0 is implied by horizontal. Record admission truthfully; local rank is not a physical DOF or general logical-redundancy proof."
+      },
+      "actual": {
+        "ok": true,
+        "error": null,
+        "admission": [
+          {
+            "typeId": "Horizontal",
+            "state": "accepted"
+          },
+          {
+            "typeId": "SignedDistanceY",
+            "state": "accepted"
+          }
+        ],
+        "check": {
+          "status": "fail",
+          "message": "Known implied SignedDistanceY=0 was not labeled redundant; accepted labels retained"
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 17
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-LEGACY-SCALAR-EXPRESSION",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "fail",
+      "expected": {
+        "behavior": "accepted",
+        "oracle": {
+          "kind": "length",
+          "id": "s",
+          "length": 15,
+          "authored": "W + 5"
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "SOLVE_ERROR",
+          "message": "length of the segment must be a positive number."
+        },
+        "check": {
+          "status": "fail",
+          "message": "{\"code\":\"SOLVE_ERROR\",\"message\":\"length of the segment must be a positive number.\"}\n\nfalse !== true\n"
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 18
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-MISSING-EXPRESSION-NAME",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "rejected",
+        "oracle": {
+          "kind": "refusal"
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "SOLVE_ERROR",
+          "message": "length of the segment must be a positive number."
+        },
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "typed refusal",
+            "exact caller-request bytes unchanged",
+            "no returned solved candidate"
+          ],
+          "error": {
+            "code": "SOLVE_ERROR",
+            "message": "length of the segment must be a positive number."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 19
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-TYPED-CM-LENGTH-NAME",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "fail",
+      "expected": {
+        "behavior": "accepted",
+        "oracle": {
+          "kind": "circle",
+          "id": "c",
+          "center": [
+            0,
+            0
+          ],
+          "radius": 10
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "TYPED_SKETCH_INVALID",
+          "message": "The sketch could not be regenerated with these parameters."
+        },
+        "check": {
+          "status": "fail",
+          "message": "{\"code\":\"TYPED_SKETCH_INVALID\",\"message\":\"The sketch could not be regenerated with these parameters.\"}\n\nfalse !== true\n"
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 20
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-TYPED-ANGLE-AS-LENGTH-REFUSAL",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": {
+        "behavior": "rejected",
+        "oracle": {
+          "kind": "refusal",
+          "code": "TYPED_SKETCH_INVALID"
+        },
+        "reason": null
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "TYPED_SKETCH_INVALID",
+          "message": "The sketch could not be regenerated with these parameters."
+        },
+        "check": {
+          "status": "pass",
+          "assertions": [
+            "typed refusal",
+            "exact caller-request bytes unchanged",
+            "no returned solved candidate"
+          ],
+          "error": {
+            "code": "TYPED_SKETCH_INVALID",
+            "message": "The sketch could not be regenerated with these parameters."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 21
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-TYPED-COMPOUND-FIELD-EXPRESSION",
+      "subsystem": "geometry",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "unsupported",
+      "expected": {
+        "behavior": "unsupported",
+        "oracle": {
+          "kind": "refusal",
+          "code": "TYPED_SKETCH_INVALID"
+        },
+        "reason": "Typed dimensional consumers currently admit a bare length name, not an arbitrary compound expression in the sketch field."
+      },
+      "actual": {
+        "ok": false,
+        "error": {
+          "code": "TYPED_SKETCH_INVALID",
+          "message": "The sketch could not be regenerated with these parameters."
+        },
+        "check": {
+          "status": "unsupported",
+          "assertions": [
+            "typed refusal",
+            "exact caller-request bytes unchanged",
+            "no returned solved candidate"
+          ],
+          "error": {
+            "code": "TYPED_SKETCH_INVALID",
+            "message": "The sketch could not be regenerated with these parameters."
+          }
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": 22
+        }
+      ],
+      "scope": "Production client + actual installed disposable sketch Worker. Refusal immutability covers caller request only; no live editor/history rollback or physical DOF inferred."
+    },
+    {
+      "id": "SKETCH-P0-REGISTERED-RECTANGLE-ACCEPTED-EDIT",
+      "subsystem": "history",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "subsystem",
+      "backend": "shared",
+      "status": "pass",
+      "expected": "Actual registered model-service operation preserves accepted state on refusal",
+      "actual": {
+        "edited": {
+          "faceId": "S:0/SURFACE",
+          "width": 120,
+          "height": 60,
+          "unit": "millimeter",
+          "persistence": "volatile-workspace",
+          "revision": "f35b59e7-b6f4-4453-8c0e-1917d37b1e80",
+          "authoredUndo": true
+        }
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "registered"
+        }
+      ],
+      "scope": "Actual registered craft create/edit service and installed Worker, headlessly via API; no signed external agent transport or UI assertion."
+    },
+    {
+      "id": "SKETCH-P0-REGISTERED-RECTANGLE-REJECTED-EXACT-STATE",
+      "subsystem": "history",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "subsystem",
+      "backend": "shared",
+      "status": "pass",
+      "expected": "Actual registered model-service operation preserves accepted state on refusal",
+      "actual": {
+        "refusal": {
+          "name": "Error",
+          "code": null,
+          "message": "Invalid rectangle edit dimensions or reference."
+        },
+        "nativeBytesUnchanged": true,
+        "historyBytesUnchanged": true,
+        "sketchBytesUnchanged": true
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "registered"
+        }
+      ],
+      "scope": "Invalid dimension edit (width0), not a solver contradiction. Exact accepted real project/source/history state, including serialized metadata/counters."
+    },
+    {
+      "id": "SKETCH-P0-SAVED-DIAGNOSTICS-READONLY",
+      "subsystem": "history",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "subsystem",
+      "backend": "shared",
+      "status": "pass",
+      "expected": "Actual registered model-service operation preserves accepted state on refusal",
+      "actual": {
+        "scope": "current-sketch-local-estimate",
+        "status": "estimated",
+        "unchanged": true
+      },
+      "evidence": [
+        {
+          "file": "receipt.json",
+          "record": "registered"
+        }
+      ],
+      "scope": "Actual saved diagnostic service; local differential estimate only, never a certified physical DOF count."
+    },
+    {
+      "id": "SKETCH-P0-LIVE-CONTRADICTORY-CONSTRAINT-ROLLBACK",
+      "subsystem": "history",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "subsystem",
+      "backend": "shared",
+      "status": "not-tested",
+      "expected": "Live constraint-edit rollback through signed agent transport was not invoked; Worker input immutability is not document rollback.",
+      "actual": null,
+      "evidence": [],
+      "scope": "Live constraint-edit rollback through signed agent transport was not invoked; Worker input immutability is not document rollback."
+    },
+    {
+      "id": "SKETCH-P0-CONSISTENT-NUMERICAL-NONCONVERGENCE",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "subsystem",
+      "backend": "shared",
+      "status": "not-tested",
+      "expected": "No independently consistent problem with genuine numerical nonconvergence was established; SOLVE_FAILED is not automatically an inconsistency certificate.",
+      "actual": null,
+      "evidence": [],
+      "scope": "No independently consistent problem with genuine numerical nonconvergence was established; SOLVE_FAILED is not automatically an inconsistency certificate."
+    },
+    {
+      "id": "SKETCH-P0-PHYSICAL-DOF-CERTIFICATION",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "subsystem",
+      "backend": "shared",
+      "status": "not-tested",
+      "expected": "No physical DOF result qualified. Equation counts and local Jacobian rank were not used as physical DOF.",
+      "actual": null,
+      "evidence": [],
+      "scope": "No physical DOF result qualified. Equation counts and local Jacobian rank were not used as physical DOF."
+    }
+  ]
+}

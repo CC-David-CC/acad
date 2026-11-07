@@ -1,0 +1,126 @@
+{
+  "revision": "local-report-reproducer",
+  "ok": true,
+  "sketch": {
+    "version": 3,
+    "objects": [
+      {
+        "id": "p",
+        "type": "Point",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "x": 1,
+          "y": 2
+        }
+      },
+      {
+        "id": "q",
+        "type": "Point",
+        "role": null,
+        "stage": 1,
+        "data": {
+          "x": 5,
+          "y": 2
+        }
+      }
+    ],
+    "dimensions": [],
+    "labels": [],
+    "stages": [
+      {
+        "constraints": [
+          {
+            "typeId": "LockPoint",
+            "objects": [
+              "p"
+            ],
+            "constants": {
+              "x": "1",
+              "y": "2"
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          }
+        ],
+        "generators": []
+      },
+      {
+        "constraints": [
+          {
+            "typeId": "SignedDistanceX",
+            "objects": [
+              "p",
+              "q"
+            ],
+            "constants": {
+              "distance": "4"
+            },
+            "stage": 1,
+            "annotations": [
+              {
+                "offset": 20
+              }
+            ],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          }
+        ],
+        "generators": []
+      }
+    ],
+    "constants": "",
+    "boundary": {
+      "lines": [],
+      "arcs": [],
+      "circles": [],
+      "nurbses": []
+    }
+  },
+  "evidence": [
+    {
+      "typeId": "LockPoint",
+      "state": "accepted",
+      "residuals": [
+        0,
+        0
+      ],
+      "tolerances": [
+        0.000001,
+        0.000001
+      ],
+      "units": [
+        "millimeter",
+        "millimeter"
+      ],
+      "tolerance": 0.000001,
+      "unit": "millimeter"
+    },
+    {
+      "typeId": "SignedDistanceX",
+      "state": "accepted",
+      "residuals": [
+        0
+      ],
+      "tolerances": [
+        0.000001
+      ],
+      "units": [
+        "millimeter"
+      ],
+      "tolerance": 0.000001,
+      "unit": "millimeter"
+    }
+  ],
+  "localJacobian": {
+    "version": 1,
+    "status": "unavailable",
+    "reason": "unsupported-stages"
+  }
+}

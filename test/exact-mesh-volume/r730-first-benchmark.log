@@ -1,0 +1,4 @@
+Fraction oracle: 84 cases
+PASS oracle cases 84 controls 3
+typical-100k 95.720867 ms 100000
+adversarial-exponents-100k 5180.719724 ms 0

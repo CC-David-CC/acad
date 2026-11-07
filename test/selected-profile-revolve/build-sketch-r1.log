@@ -1,0 +1,15 @@
+asset worker.js 3.49 MiB [emitted] (name: main) 1 related asset
+orphan modules 22.7 KiB [orphan] 7 modules
+runtime modules 1.25 KiB 6 modules
+modules by path ../codi-jsketcher-release-integration-20261104/node_modules/ 1.88 MiB 231 modules
+modules by path ./ 1.23 MiB
+  modules by path ./web/app/ 1.02 MiB
+    modules by path ./web/app/sketcher/ 988 KiB 115 modules
+    modules by path ./web/app/cad/ 52.5 KiB
+      modules by path ./web/app/cad/parameters/*.mjs 24.6 KiB
+        ./web/app/cad/parameters/evaluatePhysicalSource.mjs 1.07 KiB [built] [code generated]
+        + 6 modules
+      + 4 modules
+    ./web/app/utils/utils.js 2.81 KiB [built] [code generated]
+  modules by path ./modules/ 214 KiB 44 modules
+webpack 5.74.0 compiled successfully in 7151 ms

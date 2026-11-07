@@ -1,0 +1,16 @@
+web/app/cad/craft/closedSketchTransitions.ts(134,37): error TS2339: Property 'value' does not exist on type 'Readonly<{}>'.
+web/app/cad/craft/closedSketchTransitions.ts(135,85): error TS2339: Property 'value' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/drivingDimensionTransition.ts(23,414): error TS2339: Property 'constraintId' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/drivingDimensionTransition.ts(24,63): error TS2339: Property 'value' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/drivingDimensionTransition.ts(24,87): error TS2339: Property 'value' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/drivingDimensionTransition.ts(24,109): error TS2339: Property 'value' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/drivingDimensionTransition.ts(25,88): error TS2339: Property 'constraintId' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/drivingDimensionTransition.ts(26,61): error TS2339: Property 'value' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/drivingDimensionTransition.ts(29,133): error TS2339: Property 'value' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/drivingDimensionTransition.ts(31,61): error TS2339: Property 'value' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/drivingDimensionTransition.ts(37,92): error TS2339: Property 'constraintId' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/drivingDimensionTransition.ts(45,112): error TS2339: Property 'constraintId' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/drivingDimensionTransition.ts(45,185): error TS2339: Property 'value' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/inspectionClient.ts(83,272): error TS2550: Property 'hasOwn' does not exist on type 'ObjectConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2022' or later.
+web/app/sketcher/headless/transitionClient.ts(160,134): error TS2339: Property 'dimension' does not exist on type 'Readonly<{}>'.
+web/app/sketcher/headless/transitionClient.ts(160,363): error TS2339: Property 'changed' does not exist on type 'Readonly<{}>'.

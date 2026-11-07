@@ -1,0 +1,19 @@
+{
+  "source": "a36a6b25937fe5ce39b7d65a626519ab80da96a8",
+  "runtimeDirectory": "/mnt/data10tb/codi-scene-disposal-20261106-r1",
+  "fixture": "http://127.0.0.1:20646/",
+  "buildConfig": "test/headless-line-relations/webpack.app.cjs",
+  "sha256": {
+    "dist/static/index.bundle.js": "ce8ce5175d0636f7c1828a372b5f5c4dd273644130eb37ab5b23bdd1ab0b1057",
+    "dist/static/sketch-solver.0144ce96ceb9457b9e77.js": "ec4dd5826b1f7f73e75012c1845bb5f5bb0dd2e10f0bb503290f012f5b895ca0",
+    "dist/static/project-validator.15366ca88101ddc6dcd7.js": "5f186ef20fecf25d0f238f5eee68ad4b2a627af51cbe58d14b21b3a1e4bbf9c1",
+    "modules/scene/sceneSetup.ts": "aabdbc2c7c2018f248d13e9d6f0042f52e583fa644f83e2a59f6a6c764c427bc",
+    "web/app/cad/scene/viewer.ts": "c391afac2e4921bf14ededfb66103d1a089652e0ecd32aa9c9bcb582e83c49da"
+  },
+  "buildLogSHA256": "fdc209a75d4667d0b62403f76c911b629de884e21c2bb8aef7b8956d8b4a9223",
+  "tsc": {
+    "status": "PASS",
+    "command": "node node_modules/typescript/bin/tsc --noEmit --pretty false",
+    "logSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

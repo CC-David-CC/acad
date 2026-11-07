@@ -1,0 +1,114 @@
+{
+  "node": "v24.22.1",
+  "sources": {
+    "../../modules/engine/mount/ownedThroughHolePlan.mjs": "7dd92c330acf098e258a916e2b8209a3ebacb62e1cdf6265dd8ae054f85fd69c",
+    "../../modules/engine/solid/ownedHoleIntent.mjs": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+    "../../modules/engine/solid/solidIntent.mjs": "aefd2681fb17603d7b40a704764e3a8e18f7931a37ae5f7ad6814154f88a7515",
+    "../../modules/engine/mount/polygonProfilePlan.mjs": "fa5ab686b60bb16348074df57e37ba04d4173ac5e0b9a441e2d4dfc4cc03737d",
+    "../../modules/engine/mount/selectedProfilePlan.mjs": "824dc5bfc8555a89fe9a647612ce76970f98b8adfd6e648185dd29e9f311c8a0",
+    "../../modules/engine/extrusion/simplePolygon.mjs": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+    "./fixtures.mjs": "cda5d4134c5f2469efee6a54a4232e10f0b6a87f26ee8e1cbe28d2e304a49bb8",
+    "./worker.mjs": "fb846b9a9ac08bcffb7948b89198a424a0711d6387e9f8d70106b63c7f36ddfe",
+    "./run.mjs": "fa93a7b69b31c3c47a68bf713efba4e9b917c17aefb1a1a83b2ac7e6b1a4480b"
+  },
+  "status": "PASS",
+  "scope": "Pure layout mathematics and strict data admission in Node Worker; no native execution, material/ancestry, runtime or public authoring qualification",
+  "rows": [
+    {
+      "name": "centered 100x50x20 layout exact frozen contract and independent volume",
+      "status": "PASS",
+      "data": {
+        "sourceDepth": 20,
+        "toolDepth": 22,
+        "expectedRemovedVolume": 1570.7963267948967
+      }
+    },
+    {
+      "name": "four corners 100x50x20 have deterministic anchors and independent removal",
+      "status": "PASS"
+    },
+    {
+      "name": "source dimensions and depth variants 150x30x25 are recomputed",
+      "status": "PASS"
+    },
+    {
+      "name": "source-local translation and clockwise ordering do not change anchors",
+      "status": "PASS"
+    },
+    {
+      "name": "translated quarter-turn world frame retains current local coordinates",
+      "status": "PASS"
+    },
+    {
+      "name": "mixed-sign rotated normal requires all eight native AABB corners",
+      "status": "PASS",
+      "data": {
+        "axialSpan": {
+          "min": -50.00000000000001,
+          "max": 70.00000000000001
+        },
+        "toolDepth": 122.00000000000003,
+        "sourceDepth": 20
+      }
+    },
+    {
+      "name": "actual target axial span is independent of current source extrusion depth",
+      "status": "PASS"
+    },
+    {
+      "name": "positive native volume is not material/ancestry proof",
+      "status": "PASS",
+      "data": {
+        "scope": "Runtime must authenticate source face/feature and actual material; planner does not infer them"
+      }
+    },
+    {
+      "name": "offset rows and columns may reverse when all circles remain disjoint",
+      "status": "PASS"
+    },
+    {
+      "name": "H12 tangent boundary and exterior holes explicitly refuse",
+      "status": "PASS"
+    },
+    {
+      "name": "current tool-to-tool touching, overlap and coincident rows refuse",
+      "status": "PASS"
+    },
+    {
+      "name": "qualified profile clearance is explicit and not rounded into contact",
+      "status": "PASS"
+    },
+    {
+      "name": "nonrectangle, slight local skew, source holes and invalid frame refuse",
+      "status": "PASS"
+    },
+    {
+      "name": "stale region and invalid authored schema reject before producing tools",
+      "status": "PASS"
+    },
+    {
+      "name": "exact actual metric contract rejects empty, multi, invalid and missing bounds",
+      "status": "PASS"
+    },
+    {
+      "name": "derived tool depth and origin honor exact V3 domain bounds",
+      "status": "PASS"
+    },
+    {
+      "name": "unrepresentable subnormal and below-resolution radii refuse tools",
+      "status": "PASS"
+    },
+    {
+      "name": "detached immutable output and deterministic internal labels",
+      "status": "PASS"
+    },
+    {
+      "name": "outer/nested getters and toJSON never execute",
+      "status": "PASS"
+    },
+    {
+      "name": "strict dense/plain/finite snapshot and input work limits",
+      "status": "PASS"
+    }
+  ]
+}

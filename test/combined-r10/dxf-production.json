@@ -1,0 +1,272 @@
+{
+  "base": "http://127.0.0.1:20600/",
+  "pins": {
+    "/static/index.bundle.js": "fa1ba70a9c6a38744706e7f5557d794b743ca8288b1ed034f9f34e40d679132e",
+    "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js": "6cda1dc90bdfa3312cea28dbcef2f855eb1923449bc4492fc4b7b1e602a3bd31"
+  },
+  "workerStats": [
+    {
+      "started": 10,
+      "terminated": 10,
+      "urls": [
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js"
+      ]
+    },
+    {
+      "started": 1,
+      "terminated": 1,
+      "urls": [
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js"
+      ]
+    },
+    {
+      "started": 4,
+      "terminated": 4,
+      "urls": [
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js"
+      ]
+    },
+    {
+      "started": 4,
+      "terminated": 4,
+      "urls": [
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js",
+        "http://127.0.0.1:20600/static/sketch-solver.0d881b445e625030cb80.js"
+      ]
+    }
+  ],
+  "saved": {
+    "plane": {
+      "featureId": 1,
+      "faceId": "S:0/SURFACE",
+      "unit": "millimeter",
+      "persistence": "volatile-workspace",
+      "revision": "b8d6a780-f350-4790-9823-219fc75347d3"
+    },
+    "candidate": {
+      "faceId": "S:0/SURFACE",
+      "sketchId": "S:0/SURFACE"
+    },
+    "before": {
+      "revision": "84e92f41-7266-47e5-a3d3-2687c5454801",
+      "journal": "{\"revision\":\"1:4:84e92f41-7266-47e5-a3d3-2687c5454801\",\"canUndo\":true,\"canRedo\":false,\"undoTarget\":{\"kind\":\"sketch-bytes\",\"faceId\":\"S:0/SURFACE\"},\"redoTarget\":null}",
+      "namespaceVersion": 5,
+      "workspaceRevision": 5,
+      "keys": [
+        {
+          "key": "TCAD.projects.DEFAULT.sketch.S:0/SURFACE",
+          "value": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-1b8b495c-1233-4eb1-bc20-1e60328ff654\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":3,\"y\":4}},{\"id\":\"agent-primitive-1b839190-205d-4a79-bcb2-17b01b15749b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":20},\"b\":{\"x\":30,\"y\":40}}},{\"id\":\"agent-primitive-e91e4939-8ace-4ce2-bd69-0d8d206db083\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":70,\"y\":80},\"r\":5}},{\"id\":\"agent-primitive-255d2e2d-709e-49a0-8056-7160d1934bc2\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":0,\"y\":10},\"c\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,7,0],\"x\":[-1,0,0],\"y\":[0,0,1],\"z\":[0,1,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+          "version": 5
+        }
+      ],
+      "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":7,\"featureId\":\"1\",\"orientation\":\"XZ\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+      "script": ""
+    },
+    "after": {
+      "revision": "84e92f41-7266-47e5-a3d3-2687c5454801",
+      "journal": "{\"revision\":\"1:4:84e92f41-7266-47e5-a3d3-2687c5454801\",\"canUndo\":true,\"canRedo\":false,\"undoTarget\":{\"kind\":\"sketch-bytes\",\"faceId\":\"S:0/SURFACE\"},\"redoTarget\":null}",
+      "namespaceVersion": 5,
+      "workspaceRevision": 5,
+      "keys": [
+        {
+          "key": "TCAD.projects.DEFAULT.sketch.S:0/SURFACE",
+          "value": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-1b8b495c-1233-4eb1-bc20-1e60328ff654\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":3,\"y\":4}},{\"id\":\"agent-primitive-1b839190-205d-4a79-bcb2-17b01b15749b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":20},\"b\":{\"x\":30,\"y\":40}}},{\"id\":\"agent-primitive-e91e4939-8ace-4ce2-bd69-0d8d206db083\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":70,\"y\":80},\"r\":5}},{\"id\":\"agent-primitive-255d2e2d-709e-49a0-8056-7160d1934bc2\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":0,\"y\":10},\"c\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,7,0],\"x\":[-1,0,0],\"y\":[0,0,1],\"z\":[0,1,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+          "version": 5
+        }
+      ],
+      "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":7,\"featureId\":\"1\",\"orientation\":\"XZ\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+      "script": ""
+    },
+    "sameModels": true,
+    "stale": {
+      "accepted": false,
+      "name": "AbortError",
+      "code": 20
+    },
+    "afterStale": {
+      "revision": "84e92f41-7266-47e5-a3d3-2687c5454801",
+      "journal": "{\"revision\":\"1:4:84e92f41-7266-47e5-a3d3-2687c5454801\",\"canUndo\":true,\"canRedo\":false,\"undoTarget\":{\"kind\":\"sketch-bytes\",\"faceId\":\"S:0/SURFACE\"},\"redoTarget\":null}",
+      "namespaceVersion": 5,
+      "workspaceRevision": 5,
+      "keys": [
+        {
+          "key": "TCAD.projects.DEFAULT.sketch.S:0/SURFACE",
+          "value": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-1b8b495c-1233-4eb1-bc20-1e60328ff654\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":3,\"y\":4}},{\"id\":\"agent-primitive-1b839190-205d-4a79-bcb2-17b01b15749b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":20},\"b\":{\"x\":30,\"y\":40}}},{\"id\":\"agent-primitive-e91e4939-8ace-4ce2-bd69-0d8d206db083\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":70,\"y\":80},\"r\":5}},{\"id\":\"agent-primitive-255d2e2d-709e-49a0-8056-7160d1934bc2\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":0,\"y\":10},\"c\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,7,0],\"x\":[-1,0,0],\"y\":[0,0,1],\"z\":[0,1,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+          "version": 5
+        }
+      ],
+      "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":7,\"featureId\":\"1\",\"orientation\":\"XZ\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+      "script": ""
+    },
+    "result": {
+      "revision": "84e92f41-7266-47e5-a3d3-2687c5454801",
+      "faceId": "S:0/SURFACE",
+      "unit": "millimeter",
+      "coordinates": "sketch-local",
+      "frame": {
+        "origin": [
+          0,
+          7,
+          0
+        ],
+        "x": [
+          -1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          0,
+          1
+        ],
+        "z": [
+          0,
+          1,
+          0
+        ]
+      },
+      "mime": "application/dxf",
+      "size": 3235,
+      "frozen": true
+    },
+    "text": "0\nSECTION\n2\nHEADER\n9\n$ACADVER\n1\nAC1021\n9\n$LASTSAVEDBY\n1\n@tarikjabiri/dxf\n9\n$HANDSEED\n5\n1F\n9\n$INSUNITS\n70\n4\n9\n$CLAYER\n8\n0\n9\n$DIMTXT\n40\n10\n9\n$DIMASZ\n40\n10\n9\n$DIMDEC\n70\n2\n9\n$DIMTIH\n70\n0\n9\n$DIMTOH\n70\n0\n9\n$DIMTIX\n70\n0\n9\n$DIMATFIT\n70\n0\n9\n$VIEWCTR\n10\n3\n20\n4\n0\nENDSEC\n0\nSECTION\n2\nCLASSES\n0\nENDSEC\n0\nSECTION\n2\nTABLES\n0\nTABLE\n2\nVPORT\n5\n1\n330\n0\n100\nAcDbSymbolTable\n70\n1\n0\nVPORT\n5\n19\n330\n1\n100\nAcDbSymbolTableRecord\n100\nAcDbViewportTableRecord\n2\n*Active\n70\n0\n10\n0\n20\n0\n11\n1\n21\n1\n12\n3\n22\n4\n13\n0\n23\n0\n14\n10\n24\n10\n15\n10\n25\n10\n16\n0\n26\n0\n36\n1\n17\n0\n27\n0\n37\n0\n40\n200\n41\n2\n42\n50\n43\n0\n44\n0\n50\n0\n51\n0\n71\n0\n72\n100\n73\n1\n74\n3\n75\n0\n76\n1\n77\n0\n78\n0\n281\n0\n65\n1\n110\n0\n120\n0\n130\n0\n111\n1\n121\n0\n131\n0\n112\n0\n122\n1\n132\n0\n79\n0\n146\n0\n348\n10020\n60\n7\n61\n5\n292\n1\n282\n1\n141\n0\n142\n0\n63\n250\n421\n3358443\n0\nENDTAB\n0\nTABLE\n2\nLTYPE\n5\n2\n330\n0\n100\nAcDbSymbolTable\n70\n3\n0\nLTYPE\n5\n12\n330\n2\n100\nAcDbSymbolTableRecord\n100\nAcDbLinetypeTableRecord\n2\nByBlock\n70\n0\n3\n\n72\n65\n73\n0\n40\n0\n0\nLTYPE\n5\n13\n330\n2\n100\nAcDbSymbolTableRecord\n100\nAcDbLinetypeTableRecord\n2\nByLayer\n70\n0\n3\n\n72\n65\n73\n0\n40\n0\n0\nLTYPE\n5\n14\n330\n2\n100\nAcDbSymbolTableRecord\n100\nAcDbLinetypeTableRecord\n2\nContinuous\n70\n0\n3\nSolid line\n72\n65\n73\n0\n40\n0\n0\nENDTAB\n0\nTABLE\n2\nLAYER\n5\n3\n330\n0\n100\nAcDbSymbolTable\n70\n2\n0\nLAYER\n5\n15\n330\n3\n100\nAcDbSymbolTableRecord\n100\nAcDbLayerTableRecord\n2\n0\n70\n0\n62\n7\n6\nContinuous\n370\n0\n390\n0\n0\nLAYER\n5\n1A\n330\n3\n100\nAcDbSymbolTableRecord\n100\nAcDbLayerTableRecord\n2\nsketch\n70\n0\n62\n0\n6\nContinuous\n370\n0\n390\n0\n0\nENDTAB\n0\nTABLE\n2\nSTYLE\n5\n4\n330\n0\n100\nAcDbSymbolTable\n70\n1\n0\nSTYLE\n5\n16\n330\n4\n100\nAcDbSymbolTableRecord\n100\nAcDbTextStyleTableRecord\n2\nStandard\n70\n0\n40\n0\n41\n1\n50\n0\n71\n0\n42\n1\n3\ntxt\n4\n\n0\nENDTAB\n0\nTABLE\n2\nVIEW\n5\n5\n330\n0\n100\nAcDbSymbolTable\n70\n0\n0\nENDTAB\n0\nTABLE\n2\nUCS\n5\n6\n330\n0\n100\nAcDbSymbolTable\n70\n0\n0\nENDTAB\n0\nTABLE\n2\nAPPID\n5\n7\n330\n0\n100\nAcDbSymbolTable\n70\n1\n0\nAPPID\n5\n17\n330\n7\n100\nAcDbSymbolTableRecord\n100\nAcDbRegAppTableRecord\n2\nACAD\n70\n0\n0\nENDTAB\n0\nTABLE\n2\nDIMSTYLE\n5\n8\n330\n0\n100\nAcDbSymbolTable\n70\n1\n100\nAcDbDimStyleTable\n0\nDIMSTYLE\n105\n18\n330\n8\n100\nAcDbSymbolTableRecord\n100\nAcDbDimStyleTableRecord\n2\nStandard\n70\n0\n340\n16\n0\nENDTAB\n0\nTABLE\n2\nBLOCK_RECORD\n5\n9\n330\n0\n100\nAcDbSymbolTable\n70\n2\n0\nBLOCK_RECORD\n5\nC\n330\n9\n100\nAcDbSymbolTableRecord\n100\nAcDbBlockTableRecord\n2\n*Model_Space\n70\n0\n280\n1\n281\n0\n0\nBLOCK_RECORD\n5\nF\n330\n9\n100\nAcDbSymbolTableRecord\n100\nAcDbBlockTableRecord\n2\n*Paper_Space\n70\n0\n280\n1\n281\n0\n0\nENDTAB\n0\nENDSEC\n0\nSECTION\n2\nBLOCKS\n0\nBLOCK\n5\nD\n330\nC\n100\nAcDbEntity\n8\n0\n100\nAcDbBlockBegin\n2\n*Model_Space\n70\n0\n10\n0\n20\n0\n30\n0\n3\n*Model_Space\n1\n\n0\nENDBLK\n5\nE\n100\nAcDbEntity\n8\n0\n100\nAcDbBlockEnd\n0\nBLOCK\n5\n10\n330\nF\n100\nAcDbEntity\n8\n0\n100\nAcDbBlockBegin\n2\n*Paper_Space\n70\n0\n10\n0\n20\n0\n30\n0\n3\n*Paper_Space\n1\n\n0\nENDBLK\n5\n11\n100\nAcDbEntity\n8\n0\n100\nAcDbBlockEnd\n0\nENDSEC\n0\nSECTION\n2\nENTITIES\n0\nPOINT\n5\n1B\n330\nD\n100\nAcDbEntity\n8\nsketch\n100\nAcDbPoint\n10\n3\n20\n4\n30\n0\n0\nLINE\n5\n1C\n330\nD\n100\nAcDbEntity\n8\nsketch\n100\nAcDbLine\n10\n10\n20\n20\n30\n0\n11\n30\n21\n40\n31\n0\n0\nCIRCLE\n5\n1D\n330\nD\n100\nAcDbEntity\n8\nsketch\n100\nAcDbCircle\n10\n70\n20\n80\n30\n0\n40\n5\n0\nARC\n5\n1E\n330\nD\n100\nAcDbEntity\n8\nsketch\n100\nAcDbCircle\n10\n0\n20\n0\n30\n0\n40\n10\n100\nAcDbArc\n50\n0\n51\n90\n0\nENDSEC\n0\nSECTION\n2\nOBJECTS\n0\nDICTIONARY\n5\nA\n330\n0\n100\nAcDbDictionary\n281\n1\n3\nACAD_GROUP\n350\nB\n0\nDICTIONARY\n5\nB\n330\nA\n100\nAcDbDictionary\n281\n0\n0\nENDSEC\n0\nEOF"
+  },
+  "outline": {
+    "candidate": {
+      "faceId": "501F:FRONT",
+      "sketchId": null
+    },
+    "before": {
+      "revision": "36ecea98-3842-44f2-a231-93803fe6b37b",
+      "journal": "{\"revision\":\"1:0:36ecea98-3842-44f2-a231-93803fe6b37b\",\"canUndo\":false,\"canRedo\":false,\"undoTarget\":null,\"redoTarget\":null}",
+      "namespaceVersion": 0,
+      "workspaceRevision": 0,
+      "keys": [],
+      "history": "{\"history\":[{\"type\":\"BOX\",\"params\":{\"featureId\":501,\"x\":30,\"y\":40,\"z\":5,\"boolean\":{\"kind\":\"NONE\",\"simplify\":true,\"targets\":[]}}}],\"pointer\":0}",
+      "script": ""
+    },
+    "after": {
+      "revision": "36ecea98-3842-44f2-a231-93803fe6b37b",
+      "journal": "{\"revision\":\"1:0:36ecea98-3842-44f2-a231-93803fe6b37b\",\"canUndo\":false,\"canRedo\":false,\"undoTarget\":null,\"redoTarget\":null}",
+      "namespaceVersion": 0,
+      "workspaceRevision": 0,
+      "keys": [],
+      "history": "{\"history\":[{\"type\":\"BOX\",\"params\":{\"featureId\":501,\"x\":30,\"y\":40,\"z\":5,\"boolean\":{\"kind\":\"NONE\",\"simplify\":true,\"targets\":[]}}}],\"pointer\":0}",
+      "script": ""
+    },
+    "sameModels": true,
+    "source": null,
+    "version": null,
+    "text": "0\nSECTION\n2\nHEADER\n9\n$ACADVER\n1\nAC1021\n9\n$LASTSAVEDBY\n1\n@tarikjabiri/dxf\n9\n$HANDSEED\n5\n1F\n9\n$INSUNITS\n70\n4\n9\n$CLAYER\n8\n0\n9\n$DIMTXT\n40\n10\n9\n$DIMASZ\n40\n10\n9\n$DIMDEC\n70\n2\n9\n$DIMTIH\n70\n0\n9\n$DIMTOH\n70\n0\n9\n$DIMTIX\n70\n0\n9\n$DIMATFIT\n70\n0\n9\n$VIEWCTR\n10\n15\n20\n20\n0\nENDSEC\n0\nSECTION\n2\nCLASSES\n0\nENDSEC\n0\nSECTION\n2\nTABLES\n0\nTABLE\n2\nVPORT\n5\n1\n330\n0\n100\nAcDbSymbolTable\n70\n1\n0\nVPORT\n5\n19\n330\n1\n100\nAcDbSymbolTableRecord\n100\nAcDbViewportTableRecord\n2\n*Active\n70\n0\n10\n0\n20\n0\n11\n1\n21\n1\n12\n15\n22\n20\n13\n0\n23\n0\n14\n10\n24\n10\n15\n10\n25\n10\n16\n0\n26\n0\n36\n1\n17\n0\n27\n0\n37\n0\n40\n40\n41\n2\n42\n50\n43\n0\n44\n0\n50\n0\n51\n0\n71\n0\n72\n100\n73\n1\n74\n3\n75\n0\n76\n1\n77\n0\n78\n0\n281\n0\n65\n1\n110\n0\n120\n0\n130\n0\n111\n1\n121\n0\n131\n0\n112\n0\n122\n1\n132\n0\n79\n0\n146\n0\n348\n10020\n60\n7\n61\n5\n292\n1\n282\n1\n141\n0\n142\n0\n63\n250\n421\n3358443\n0\nENDTAB\n0\nTABLE\n2\nLTYPE\n5\n2\n330\n0\n100\nAcDbSymbolTable\n70\n3\n0\nLTYPE\n5\n12\n330\n2\n100\nAcDbSymbolTableRecord\n100\nAcDbLinetypeTableRecord\n2\nByBlock\n70\n0\n3\n\n72\n65\n73\n0\n40\n0\n0\nLTYPE\n5\n13\n330\n2\n100\nAcDbSymbolTableRecord\n100\nAcDbLinetypeTableRecord\n2\nByLayer\n70\n0\n3\n\n72\n65\n73\n0\n40\n0\n0\nLTYPE\n5\n14\n330\n2\n100\nAcDbSymbolTableRecord\n100\nAcDbLinetypeTableRecord\n2\nContinuous\n70\n0\n3\nSolid line\n72\n65\n73\n0\n40\n0\n0\nENDTAB\n0\nTABLE\n2\nLAYER\n5\n3\n330\n0\n100\nAcDbSymbolTable\n70\n2\n0\nLAYER\n5\n15\n330\n3\n100\nAcDbSymbolTableRecord\n100\nAcDbLayerTableRecord\n2\n0\n70\n0\n62\n7\n6\nContinuous\n370\n0\n390\n0\n0\nLAYER\n5\n1A\n330\n3\n100\nAcDbSymbolTableRecord\n100\nAcDbLayerTableRecord\n2\nsketch\n70\n0\n62\n0\n6\nContinuous\n370\n0\n390\n0\n0\nENDTAB\n0\nTABLE\n2\nSTYLE\n5\n4\n330\n0\n100\nAcDbSymbolTable\n70\n1\n0\nSTYLE\n5\n16\n330\n4\n100\nAcDbSymbolTableRecord\n100\nAcDbTextStyleTableRecord\n2\nStandard\n70\n0\n40\n0\n41\n1\n50\n0\n71\n0\n42\n1\n3\ntxt\n4\n\n0\nENDTAB\n0\nTABLE\n2\nVIEW\n5\n5\n330\n0\n100\nAcDbSymbolTable\n70\n0\n0\nENDTAB\n0\nTABLE\n2\nUCS\n5\n6\n330\n0\n100\nAcDbSymbolTable\n70\n0\n0\nENDTAB\n0\nTABLE\n2\nAPPID\n5\n7\n330\n0\n100\nAcDbSymbolTable\n70\n1\n0\nAPPID\n5\n17\n330\n7\n100\nAcDbSymbolTableRecord\n100\nAcDbRegAppTableRecord\n2\nACAD\n70\n0\n0\nENDTAB\n0\nTABLE\n2\nDIMSTYLE\n5\n8\n330\n0\n100\nAcDbSymbolTable\n70\n1\n100\nAcDbDimStyleTable\n0\nDIMSTYLE\n105\n18\n330\n8\n100\nAcDbSymbolTableRecord\n100\nAcDbDimStyleTableRecord\n2\nStandard\n70\n0\n340\n16\n0\nENDTAB\n0\nTABLE\n2\nBLOCK_RECORD\n5\n9\n330\n0\n100\nAcDbSymbolTable\n70\n2\n0\nBLOCK_RECORD\n5\nC\n330\n9\n100\nAcDbSymbolTableRecord\n100\nAcDbBlockTableRecord\n2\n*Model_Space\n70\n0\n280\n1\n281\n0\n0\nBLOCK_RECORD\n5\nF\n330\n9\n100\nAcDbSymbolTableRecord\n100\nAcDbBlockTableRecord\n2\n*Paper_Space\n70\n0\n280\n1\n281\n0\n0\nENDTAB\n0\nENDSEC\n0\nSECTION\n2\nBLOCKS\n0\nBLOCK\n5\nD\n330\nC\n100\nAcDbEntity\n8\n0\n100\nAcDbBlockBegin\n2\n*Model_Space\n70\n0\n10\n0\n20\n0\n30\n0\n3\n*Model_Space\n1\n\n0\nENDBLK\n5\nE\n100\nAcDbEntity\n8\n0\n100\nAcDbBlockEnd\n0\nBLOCK\n5\n10\n330\nF\n100\nAcDbEntity\n8\n0\n100\nAcDbBlockBegin\n2\n*Paper_Space\n70\n0\n10\n0\n20\n0\n30\n0\n3\n*Paper_Space\n1\n\n0\nENDBLK\n5\n11\n100\nAcDbEntity\n8\n0\n100\nAcDbBlockEnd\n0\nENDSEC\n0\nSECTION\n2\nENTITIES\n0\nLINE\n5\n1B\n330\nD\n100\nAcDbEntity\n8\nsketch\n100\nAcDbLine\n10\n0\n20\n40\n30\n0\n11\n0\n21\n0\n31\n0\n0\nLINE\n5\n1C\n330\nD\n100\nAcDbEntity\n8\nsketch\n100\nAcDbLine\n10\n0\n20\n0\n30\n0\n11\n30\n21\n0\n31\n0\n0\nLINE\n5\n1D\n330\nD\n100\nAcDbEntity\n8\nsketch\n100\nAcDbLine\n10\n30\n20\n0\n30\n0\n11\n30\n21\n40\n31\n0\n0\nLINE\n5\n1E\n330\nD\n100\nAcDbEntity\n8\nsketch\n100\nAcDbLine\n10\n30\n20\n40\n30\n0\n11\n0\n21\n40\n31\n0\n0\nENDSEC\n0\nSECTION\n2\nOBJECTS\n0\nDICTIONARY\n5\nA\n330\n0\n100\nAcDbDictionary\n281\n1\n3\nACAD_GROUP\n350\nB\n0\nDICTIONARY\n5\nB\n330\nA\n100\nAcDbDictionary\n281\n0\n0\nENDSEC\n0\nEOF",
+    "frame": {
+      "origin": [
+        0,
+        0,
+        5
+      ],
+      "x": [
+        1,
+        0,
+        0
+      ],
+      "y": [
+        0,
+        1,
+        0
+      ],
+      "z": [
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "cancellations": [
+    {
+      "reason": "host-close",
+      "genuineSuccess": true,
+      "outcome": {
+        "accepted": false,
+        "name": "AbortError",
+        "code": 20
+      },
+      "expected": {
+        "namespaceVersion": 2,
+        "workspaceRevision": 2,
+        "keys": [
+          {
+            "key": "TCAD.projects.DEFAULT.sketch.S:0/SURFACE",
+            "value": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-f4d98e0b-df9b-47a5-abe6-8a21e61d1321\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":1,\"y\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+            "version": 2
+          }
+        ],
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "script": ""
+      },
+      "after": {
+        "namespaceVersion": 2,
+        "workspaceRevision": 2,
+        "keys": [
+          {
+            "key": "TCAD.projects.DEFAULT.sketch.S:0/SURFACE",
+            "value": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-f4d98e0b-df9b-47a5-abe6-8a21e61d1321\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":1,\"y\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+            "version": 2
+          }
+        ],
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "script": ""
+      },
+      "sameModels": true
+    },
+    {
+      "reason": "source-change",
+      "genuineSuccess": true,
+      "outcome": {
+        "accepted": false,
+        "name": "AbortError",
+        "code": 20
+      },
+      "expected": {
+        "namespaceVersion": 3,
+        "workspaceRevision": 3,
+        "keys": [
+          {
+            "key": "TCAD.projects.DEFAULT.sketch.S:0/SURFACE",
+            "value": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-35247bb8-07bf-41ee-8e8b-ebd4e74b1957\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":1,\"y\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}} ",
+            "version": 3
+          }
+        ],
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "script": ""
+      },
+      "after": {
+        "namespaceVersion": 3,
+        "workspaceRevision": 3,
+        "keys": [
+          {
+            "key": "TCAD.projects.DEFAULT.sketch.S:0/SURFACE",
+            "value": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-35247bb8-07bf-41ee-8e8b-ebd4e74b1957\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":1,\"y\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}} ",
+            "version": 3
+          }
+        ],
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "script": ""
+      },
+      "sameModels": true
+    }
+  ]
+}

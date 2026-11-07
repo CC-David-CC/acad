@@ -1,0 +1,11 @@
+{
+  "pins": [
+    "ad53518fb37a4e23e67d132b4d4daa76fbecad36954ecb59b8217e4cf1479e16",
+    "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3"
+  ],
+  "ok": true,
+  "elapsedMs": 2216.2000000476837,
+  "objects": 513,
+  "constraints": 512,
+  "sourceUnchanged": true
+}

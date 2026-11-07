@@ -1,0 +1,9 @@
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   "Uncaught NetworkError: Failed to execute 'importScripts' on 'WorkerGlobalScope': The script at 'http://127.0.0.1:38461/lib/verb.js' failed to load."
++ ]
+- []
+
+    at /tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/browser.cjs:26:97

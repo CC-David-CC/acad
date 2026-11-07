@@ -1,0 +1,180 @@
+{
+  "scope": "tests only; actual public API/runtime evidence remains source matched; no signed Files or new selected depth journal claim",
+  "testBranchBase": "d0d3abc0173d10b592a3b6a0cfb55c2abef1b1b9",
+  "testTipBeforeEvidence": "a20c58c11c2523f08fdace30561cab47b7aac6c0",
+  "runs": [
+    {
+      "receipt": "r1-other-five.json",
+      "runtimeSource": "d0d3abc0173d10b592a3b6a0cfb55c2abef1b1b9",
+      "result": "PASS",
+      "sha256": "df84c535ba574f8e7cdec171177975cba404757a8f90cae0f86f53def056772b",
+      "testScriptCommit": "11573c06f"
+    },
+    {
+      "receipt": "r1-rectangle.json",
+      "runtimeSource": "d0d3abc0173d10b592a3b6a0cfb55c2abef1b1b9",
+      "result": "PASS",
+      "sha256": "2e966bf5380456d6cafb4e81b0a8e441e2df788c3dca9d79e0e360e1677b1d08",
+      "testScriptCommit": "11573c06f"
+    },
+    {
+      "receipt": "r2-metadata-save-before.json",
+      "runtimeSource": "61a5ecdbcc140ab70503a78e2372be1e06644271",
+      "result": "FAIL",
+      "sha256": "3df88e68be09c175b446d7f55ba165d0d16deae3833e289f048e6e78f51a2666",
+      "testScriptCommit": "a20c58c11"
+    },
+    {
+      "receipt": "r2-retained-boxes.json",
+      "runtimeSource": "61a5ecdbcc140ab70503a78e2372be1e06644271",
+      "result": "PASS",
+      "sha256": "23827d2e8f22f5dd10383f516a466bf2c44d603164bf6e2561887895ddf947d4",
+      "testScriptCommit": "11573c06f"
+    },
+    {
+      "receipt": "r2-six-cases.json",
+      "runtimeSource": "61a5ecdbcc140ab70503a78e2372be1e06644271",
+      "result": "PASS",
+      "sha256": "4f6c02c85f0553dbead88ec970ac6819b43e4afaf1e054e23f65c312e607e795",
+      "testScriptCommit": "11573c06f"
+    },
+    {
+      "receipt": "r3-lifecycle.json",
+      "runtimeSource": "15ed6c577f4bef9f56debd533cd8f2299ab152e4",
+      "result": "PASS",
+      "sha256": "ec16624dbfa4f35c4608b9ec26b3d4264dc8bdb3b86efaeca48e490d02328090",
+      "testScriptCommit": "11573c06f"
+    },
+    {
+      "receipt": "r3-regeneration.json",
+      "runtimeSource": "15ed6c577f4bef9f56debd533cd8f2299ab152e4",
+      "result": "PASS",
+      "sha256": "c45be01056ea3a13b75f0b7ef0e3ec58ef33225da8d3859b9be1bb65775a1c39",
+      "testScriptCommit": "11573c06f"
+    },
+    {
+      "receipt": "r4-lifecycle.json",
+      "runtimeSource": "a0b363bce15e8533be17c9332b46a7e51ddeea5d",
+      "result": "PASS",
+      "sha256": "95f129c1035ef9394af797555a669d963d2c6637fe3b542d1c36ba9008352897",
+      "testScriptCommit": "a20c58c11"
+    },
+    {
+      "receipt": "r4-regeneration.json",
+      "runtimeSource": "a0b363bce15e8533be17c9332b46a7e51ddeea5d",
+      "result": "PASS",
+      "sha256": "b7340cc55ddd9353fa857c60cd0cc7bdf91e821b64a56347a4868263258a703a",
+      "testScriptCommit": "11573c06f"
+    }
+  ],
+  "scripts": [
+    {
+      "path": "test/selected-profile-public/box-smoke.cjs",
+      "sha256": "6493e9d80d765dad57b1e11e73e029c5eb97d71df15f64177b8eae5687162989"
+    },
+    {
+      "path": "test/selected-profile-public/browser.cjs",
+      "sha256": "5a356865363787668d1a7d25656552fffb923b2d5816f8ab1f7bf8645a820811"
+    },
+    {
+      "path": "test/selected-profile-public/lifecycle.cjs",
+      "sha256": "590182672e47791636efcf738f97a09fe3c6a8c90293f1f9c13048b553046d6b"
+    },
+    {
+      "path": "test/selected-profile-public/regeneration.cjs",
+      "sha256": "d91d9a22f66c7b48c1b2e3c2737b14c91d11f892ab0b104e8b92fae28b673c79"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "r1-other-five.json",
+      "sha256": "df84c535ba574f8e7cdec171177975cba404757a8f90cae0f86f53def056772b",
+      "bytes": 179839
+    },
+    {
+      "file": "r1-other-five.log",
+      "sha256": "99af7af10968ef2e5fc079a180d1703cfb30d1d7c19ea19b69cf4ec25444017d",
+      "bytes": 581
+    },
+    {
+      "file": "r1-rectangle.json",
+      "sha256": "2e966bf5380456d6cafb4e81b0a8e441e2df788c3dca9d79e0e360e1677b1d08",
+      "bytes": 52447
+    },
+    {
+      "file": "r1-rectangle.log",
+      "sha256": "1837afae9272752d687eed078066a3be1cdefdb2376c7fb6a52556b515652a6b",
+      "bytes": 109
+    },
+    {
+      "file": "r2-metadata-save-before.json",
+      "sha256": "3df88e68be09c175b446d7f55ba165d0d16deae3833e289f048e6e78f51a2666",
+      "bytes": 5025
+    },
+    {
+      "file": "r2-metadata-save-before.log",
+      "sha256": "5d0ff77d1421d5b8353f8c9d3c6adc7c061b7236114b70043a6a7173bb54f296",
+      "bytes": 301
+    },
+    {
+      "file": "r2-retained-boxes.json",
+      "sha256": "23827d2e8f22f5dd10383f516a466bf2c44d603164bf6e2561887895ddf947d4",
+      "bytes": 7526
+    },
+    {
+      "file": "r2-retained-boxes.log",
+      "sha256": "2d96aead54c7b07d52db19d9eebd0894e45313167c88ada3291479da37918b7f",
+      "bytes": 472
+    },
+    {
+      "file": "r2-six-cases.json",
+      "sha256": "4f6c02c85f0553dbead88ec970ac6819b43e4afaf1e054e23f65c312e607e795",
+      "bytes": 231772
+    },
+    {
+      "file": "r2-six-cases.log",
+      "sha256": "50c92a864d094f40e78c88fb6c3b53c894ac9f9596018d07e65f355dc8968ed3",
+      "bytes": 690
+    },
+    {
+      "file": "r3-lifecycle.json",
+      "sha256": "ec16624dbfa4f35c4608b9ec26b3d4264dc8bdb3b86efaeca48e490d02328090",
+      "bytes": 24303
+    },
+    {
+      "file": "r3-lifecycle.log",
+      "sha256": "4495f8dce41be79bdf749d079d1e2432b4ef4f411dfaab114697a53cfc8d3a08",
+      "bytes": 138
+    },
+    {
+      "file": "r3-regeneration.json",
+      "sha256": "c45be01056ea3a13b75f0b7ef0e3ec58ef33225da8d3859b9be1bb65775a1c39",
+      "bytes": 54801
+    },
+    {
+      "file": "r3-regeneration.log",
+      "sha256": "873b9b04e7ac1d35eaf1fa1d8c11ab0b75bde9bde451ed51909917696a7980c8",
+      "bytes": 310
+    },
+    {
+      "file": "r4-lifecycle.json",
+      "sha256": "95f129c1035ef9394af797555a669d963d2c6637fe3b542d1c36ba9008352897",
+      "bytes": 35629
+    },
+    {
+      "file": "r4-lifecycle.log",
+      "sha256": "98d46fba2d39295a77c74df488aec999ed9e601bf74fe5106adc5625eccb986f",
+      "bytes": 239
+    },
+    {
+      "file": "r4-regeneration.json",
+      "sha256": "b7340cc55ddd9353fa857c60cd0cc7bdf91e821b64a56347a4868263258a703a",
+      "bytes": 54801
+    },
+    {
+      "file": "r4-regeneration.log",
+      "sha256": "873b9b04e7ac1d35eaf1fa1d8c11ab0b75bde9bde451ed51909917696a7980c8",
+      "bytes": 310
+    }
+  ]
+}

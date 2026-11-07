@@ -1,0 +1,2044 @@
+[
+  {
+    "id": "sketch.p0.free-line-3-4-5",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "accepted",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "s",
+            "type": "Segment",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "a": {
+                "x": 1,
+                "y": 2
+              },
+              "b": {
+                "x": 4,
+                "y": 6
+              }
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "line",
+      "id": "s",
+      "a": [
+        1,
+        2
+      ],
+      "b": [
+        4,
+        6
+      ],
+      "length": 5
+    }
+  },
+  {
+    "id": "sketch.p0.free-circle",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "accepted",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "c",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": -2,
+                "y": 3
+              },
+              "r": 5
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "circle",
+      "id": "c",
+      "center": [
+        -2,
+        3
+      ],
+      "radius": 5
+    }
+  },
+  {
+    "id": "sketch.p0.zero-line",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "rejected",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "s",
+            "type": "Segment",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "refusal",
+      "code": "INVALID"
+    }
+  },
+  {
+    "id": "sketch.p0.zero-circle",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "rejected",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "c",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 0
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "refusal",
+      "code": "INVALID"
+    }
+  },
+  {
+    "id": "sketch.p0.negative-circle",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "rejected",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "c",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": -1
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "refusal",
+      "code": "INVALID"
+    }
+  },
+  {
+    "id": "sketch.p0.anchored-dimensioned-rectangle",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "accepted",
+    "request": {
+      "task": "rectangle",
+      "revision": "corpus",
+      "unit": "millimeter",
+      "frame": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "origin": [
+        10,
+        20
+      ],
+      "width": 100,
+      "height": 50
+    },
+    "oracle": {
+      "kind": "rectangle",
+      "origin": [
+        10,
+        20
+      ],
+      "width": 100,
+      "height": 50
+    }
+  },
+  {
+    "id": "sketch.p0.rectangle-inch-refusal",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "rejected",
+    "request": {
+      "task": "rectangle",
+      "revision": "corpus",
+      "unit": "inch",
+      "frame": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "origin": [
+        0,
+        0
+      ],
+      "width": 1,
+      "height": 1
+    },
+    "oracle": {
+      "kind": "refusal"
+    },
+    "reason": "The existing rectangle protocol admits millimeters; no implicit inch conversion."
+  },
+  {
+    "id": "sketch.p0.rectangle-zero-width",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "rejected",
+    "request": {
+      "task": "rectangle",
+      "revision": "corpus",
+      "unit": "millimeter",
+      "frame": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "origin": [
+        0,
+        0
+      ],
+      "width": 0,
+      "height": 1
+    },
+    "oracle": {
+      "kind": "refusal",
+      "code": "RECTANGLE_DOMAIN"
+    }
+  },
+  {
+    "id": "sketch.p0.midpoint-perpendicular-bisector-counterexample-PointInMiddle",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "accepted",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "p",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 0,
+              "y": 5
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "PointInMiddle",
+                "objects": [
+                  "p",
+                  "boundary/base"
+                ],
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [
+            {
+              "id": "base",
+              "a": {
+                "x": -1,
+                "y": 0
+              },
+              "b": {
+                "x": 1,
+                "y": 0
+              }
+            }
+          ],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [
+          {
+            "id": "base",
+            "a": {
+              "x": -1,
+              "y": 0
+            },
+            "b": {
+              "x": 1,
+              "y": 0
+            }
+          }
+        ],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "point",
+      "id": "p",
+      "at": [
+        0,
+        0
+      ]
+    },
+    "reason": "Equal distance to endpoints alone would incorrectly accept (0,5); both midpoint coordinates must be enforced."
+  },
+  {
+    "id": "sketch.p0.midpoint-perpendicular-bisector-counterexample-Symmetry",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "accepted",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "p",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 0,
+              "y": 5
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "Symmetry",
+                "objects": [
+                  "p",
+                  "boundary/base"
+                ],
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [
+            {
+              "id": "base",
+              "a": {
+                "x": -1,
+                "y": 0
+              },
+              "b": {
+                "x": 1,
+                "y": 0
+              }
+            }
+          ],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [
+          {
+            "id": "base",
+            "a": {
+              "x": -1,
+              "y": 0
+            },
+            "b": {
+              "x": 1,
+              "y": 0
+            }
+          }
+        ],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "point",
+      "id": "p",
+      "at": [
+        0,
+        0
+      ]
+    },
+    "reason": "Equal distance to endpoints alone would incorrectly accept (0,5); both midpoint coordinates must be enforced."
+  },
+  {
+    "id": "sketch.p0.concentric-anchored-centers",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "accepted",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "a",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 5
+            }
+          },
+          {
+            "id": "b",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 3,
+                "y": 4
+              },
+              "r": 3
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "LockPoint",
+                "objects": [
+                  "a:C"
+                ],
+                "constants": {
+                  "x": "0",
+                  "y": "0"
+                },
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              },
+              {
+                "typeId": "Concentric",
+                "objects": [
+                  "a",
+                  "b"
+                ],
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "concentric",
+      "a": "a",
+      "b": "b",
+      "center": [
+        0,
+        0
+      ],
+      "radii": [
+        5,
+        3
+      ]
+    }
+  },
+  {
+    "id": "sketch.p0.diameter-accepted-edit",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "accepted",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "c",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 2,
+                "y": 3
+              },
+              "r": 5
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "DiameterLength",
+                "objects": [
+                  "c"
+                ],
+                "constants": {
+                  "diameter": "20"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "angle": 0.7853981633974483
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "circle",
+      "id": "c",
+      "center": [
+        2,
+        3
+      ],
+      "radius": 10
+    }
+  },
+  {
+    "id": "sketch.p0.diameter-contradictory-edit",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "rejected",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "c",
+            "type": "Circle",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "c": {
+                "x": 2,
+                "y": 3
+              },
+              "r": 5
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "DiameterLength",
+                "objects": [
+                  "c"
+                ],
+                "constants": {
+                  "diameter": "10"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "angle": 0.7853981633974483
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              },
+              {
+                "typeId": "DiameterLength",
+                "objects": [
+                  "c"
+                ],
+                "constants": {
+                  "diameter": "20"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "angle": 0.7853981633974483
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "refusal",
+      "code": "SOLVE_FAILED"
+    }
+  },
+  {
+    "id": "sketch.p0.signed-xy-negative-positive",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "accepted",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "a",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 2,
+              "y": 3
+            }
+          },
+          {
+            "id": "b",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 9,
+              "y": 9
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "LockPoint",
+                "objects": [
+                  "a"
+                ],
+                "constants": {
+                  "x": "2",
+                  "y": "3"
+                },
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              },
+              {
+                "typeId": "SignedDistanceX",
+                "objects": [
+                  "a",
+                  "b"
+                ],
+                "constants": {
+                  "distance": "-5"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "offset": 20
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              },
+              {
+                "typeId": "SignedDistanceY",
+                "objects": [
+                  "a",
+                  "b"
+                ],
+                "constants": {
+                  "distance": "7"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "offset": 20
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "points",
+      "points": {
+        "a": [
+          2,
+          3
+        ],
+        "b": [
+          -3,
+          10
+        ]
+      }
+    }
+  },
+  {
+    "id": "sketch.p0.unsigned-distance-negative",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "rejected",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "a",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "id": "b",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 3,
+              "y": 4
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "DistancePP",
+                "objects": [
+                  "a",
+                  "b"
+                ],
+                "constants": {
+                  "distance": "-5"
+                },
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "refusal"
+    }
+  },
+  {
+    "id": "sketch.p0.unsigned-distance-zero",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "accepted",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "a",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "id": "b",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "DistancePP",
+                "objects": [
+                  "a",
+                  "b"
+                ],
+                "constants": {
+                  "distance": "0"
+                },
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "points",
+      "points": {
+        "a": [
+          0,
+          0
+        ],
+        "b": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  {
+    "id": "sketch.p0.inconsistent-horizontal-signed-y",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "rejected",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "s",
+            "type": "Segment",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 0
+              }
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "Horizontal",
+                "objects": [
+                  "s"
+                ],
+                "constants": {
+                  "angle": "0"
+                },
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              },
+              {
+                "typeId": "SignedDistanceY",
+                "objects": [
+                  "s:A",
+                  "s:B"
+                ],
+                "constants": {
+                  "distance": "5"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "offset": 20
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "refusal",
+      "code": "SOLVE_FAILED"
+    },
+    "reason": "Independent contradiction: a horizontal nondegenerate segment cannot have signed Y difference5. SOLVE_FAILED alone is not a universal inconsistency certificate."
+  },
+  {
+    "id": "sketch.p0.known-implied-redundancy-label",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "truthful-redundancy",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "s",
+            "type": "Segment",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 0
+              }
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "Horizontal",
+                "objects": [
+                  "s"
+                ],
+                "constants": {
+                  "angle": "0"
+                },
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              },
+              {
+                "typeId": "SignedDistanceY",
+                "objects": [
+                  "s:A",
+                  "s:B"
+                ],
+                "constants": {
+                  "distance": "0"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "offset": 20
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {},
+      "localJacobian": {
+        "version": 1
+      }
+    },
+    "oracle": {
+      "kind": "redundancy"
+    },
+    "reason": "Signed Y=0 is implied by horizontal. Record admission truthfully; local rank is not a physical DOF or general logical-redundancy proof."
+  },
+  {
+    "id": "sketch.p0.legacy-scalar-expression",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "accepted",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "s",
+            "type": "Segment",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 15,
+                "y": 0
+              }
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "SegmentLength",
+                "objects": [
+                  "s"
+                ],
+                "constants": {
+                  "length": "W + 5"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "offset": 20
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {
+        "W": 10
+      }
+    },
+    "oracle": {
+      "kind": "length",
+      "id": "s",
+      "length": 15,
+      "authored": "W + 5"
+    }
+  },
+  {
+    "id": "sketch.p0.missing-expression-name",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "rejected",
+    "request": {
+      "revision": "corpus",
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "s",
+            "type": "Segment",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 0
+              }
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "SegmentLength",
+                "objects": [
+                  "s"
+                ],
+                "constants": {
+                  "length": "MISSING"
+                },
+                "stage": 0,
+                "annotations": [
+                  {
+                    "offset": 20
+                  }
+                ],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "metadata": {
+          "boundaryFrame": {
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "x": [
+              1,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0
+            ],
+            "z": [
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      },
+      "externalParameters": {}
+    },
+    "oracle": {
+      "kind": "refusal"
+    }
+  },
+  {
+    "id": "sketch.p0.typed-cm-length-name",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "accepted",
+    "request": {
+      "task": "typed-sketch-transaction",
+      "revision": "corpus",
+      "frame": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "parameterSource": "codi-physical-parameters:1\n[{\"name\":\"D\",\"dimension\":\"length\",\"expression\":\"2 cm\"}]",
+      "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"c\"],\"constants\":{\"diameter\":\"D\"},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "verifyCurrent": false
+    },
+    "oracle": {
+      "kind": "circle",
+      "id": "c",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10
+    }
+  },
+  {
+    "id": "sketch.p0.typed-angle-as-length-refusal",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "rejected",
+    "request": {
+      "task": "typed-sketch-transaction",
+      "revision": "corpus",
+      "frame": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "parameterSource": "codi-physical-parameters:1\n[{\"name\":\"D\",\"dimension\":\"angle\",\"expression\":\"90 deg\"}]",
+      "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"c\"],\"constants\":{\"diameter\":\"D\"},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "verifyCurrent": false
+    },
+    "oracle": {
+      "kind": "refusal",
+      "code": "TYPED_SKETCH_INVALID"
+    }
+  },
+  {
+    "id": "sketch.p0.typed-compound-field-expression",
+    "level": "P0",
+    "scope": "production-sketch-worker-subsystem",
+    "expected": "unsupported",
+    "request": {
+      "task": "typed-sketch-transaction",
+      "revision": "corpus",
+      "frame": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "parameterSource": "codi-physical-parameters:1\n[{\"name\":\"D\",\"dimension\":\"length\",\"expression\":\"2 cm\"}]",
+      "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"c\"],\"constants\":{\"diameter\":\"D + 1\"},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "verifyCurrent": false
+    },
+    "oracle": {
+      "kind": "refusal",
+      "code": "TYPED_SKETCH_INVALID"
+    },
+    "reason": "Typed dimensional consumers currently admit a bare length name, not an arbitrary compound expression in the sketch field."
+  }
+]

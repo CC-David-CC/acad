@@ -1,0 +1,79 @@
+{
+  "sourceTip": "2ed70c8ad8ee2077a9fb71e1a14ea4916388b518",
+  "harnessBase": "5a9f224236b4365ba72b3c273bc55d4ee55cae36",
+  "originalMissingRange": [
+    "874ec624ed7d160aad58ad9d18c09e27113e3ce9",
+    "7757cf749f51bc82d79ee0d23b9be35e8305b0c8",
+    "11d88120bfa78f3a0b3703f024b4a5192817816f"
+  ],
+  "composedRange": [
+    "ac10ea97e",
+    "22f1d1c26",
+    "2ed70c8ad"
+  ],
+  "scope": "Private offline composition only; no product/guard/expectation edits, no promotion/browser qualification",
+  "sameMechanicalModuleCount": 41,
+  "broad": {
+    "tests": 228,
+    "pass": 228,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "focusedNormalization": {
+    "tests": 9,
+    "pass": 9,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "astGuards": {
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "typescript": {
+    "exitCode": 0,
+    "diagnosticBytes": 0
+  },
+  "sourceChecks": {
+    "productTreesMatch11dExactly": true,
+    "normalizationProductFilesMatch7757Exactly": true,
+    "all41MechanicalModulesAndHarnessMatch5a9Exactly": true,
+    "normalization9TestsMatch11dExactly": true
+  },
+  "firstNormalizationInvocation": {
+    "counts": {
+      "tests": 9,
+      "pass": 8,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "error": "ERR_INVALID_ARG_TYPE: readFileSync path was undefined",
+    "cause": "required CODI_AXIS_FIXTURE was omitted",
+    "handling": "Failed log retained unchanged; same built bundle rerun with documented fixture, no source/expectation change"
+  },
+  "normalizationFixture": "test/headless-axis-symmetry/fixtures/consumed-axis-zero-x-before.json",
+  "unqualified": [
+    "actual composed browser/host/Worker lifecycle",
+    "BRep kernels",
+    "inherited or unrelated algebraic limitations",
+    "general solver correctness"
+  ],
+  "rawEvidenceSha256": {
+    "broad-build.log": "da983259cea13d5402619711b6dd895b95c18230cb39282c79ab8411d73617ad",
+    "broad.log": "e6bde2cab74a36868e1a98dde60d8bc086100b9bd1b17e3a873057ccd4a4c966",
+    "normalization-build.log": "542acc480ce1dee39fbac3ad1dfbfd5d660aa89eef32bacbf6178ec501aa1f9d",
+    "normalization-missing-fixture.log": "d6e1c5da869a4dd3f955fb72fba849f60ad4d005f256dbbc06e6f34bdab1536a",
+    "normalization-with-fixture.log": "4ef56c17d34a109dc232e3021bdf04366e830f607211e30b6f98b62e26e2219b",
+    "ast-guards.log": "8df720521849a904e47599dc060117404984dcfbe87aa58371773c7ef5ffe0ff",
+    "typescript.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

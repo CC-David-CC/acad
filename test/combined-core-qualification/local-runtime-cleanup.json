@@ -1,0 +1,14 @@
+[
+  {
+    "localRuntimeRemoved": "/tmp/codi-pattern-shared-apps-20261106-r1",
+    "bytes": 261403432,
+    "retainedRuntime": "r730:/mnt/data10tb/codi-pattern-shared-apps-20261106-r1",
+    "manifestAndRuntimePinsMatch": true
+  },
+  {
+    "localRuntimeRemoved": "/tmp/codi-display-units-apps-20261106-r1",
+    "bytes": 261300657,
+    "retainedRuntime": "r730:/mnt/data10tb/codi-display-units-apps-20261106-r1",
+    "manifestAndRuntimePinsMatch": true
+  }
+]

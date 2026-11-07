@@ -1,0 +1,58 @@
+{
+  "productSource": "cda4558ca9ec534056249067235d3b14218fbbc0",
+  "base": "bd191e7b8",
+  "productFiles": [
+    "modules/engine/extrusion/selectedSketchProfile.mjs"
+  ],
+  "contract": "inspectSolvedSelectedRegions(input) -> {binding:{revision,sketchDigest,faceId},regions:[{regionId,support,reason}]}",
+  "results": {
+    "retainedPureSource": {
+      "passed": 7,
+      "total": 7
+    },
+    "retainedIndependentAdversarial": {
+      "passed": 17,
+      "total": 17
+    },
+    "newDiscovery": {
+      "passed": 11,
+      "total": 11
+    },
+    "actualChromiumWorkers": {
+      "passed": 9,
+      "total": 9,
+      "terminated": 9
+    }
+  },
+  "sourceFiles": {
+    "modules/engine/extrusion/selectedSketchProfile.mjs": "71eb8607c12474361a932d191a8af58213e545119a46b6c87f762ef7b90eb0d5",
+    "modules/engine/mount/selectedProfilePlan.mjs": "7d51355e667efa79b26528f2e39582256e9a1513a0a12ca949d265f3963d234f",
+    "modules/workbenches/modeler/features/extrude/authoredRegions.mjs": "46368ba6ca386671afef5e8462e7827d803e02bd816fb1d3b35d7c9c3b9086e6",
+    "modules/workbenches/modeler/features/extrude/profilePlan.mjs": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237"
+  },
+  "newTestFiles": {
+    "browser.cjs": "7b8ef39df201f86f755ed6890d627a8f07702fbcc6937cded10cfac358691943",
+    "discovery.test.mjs": "5c137dfd7c439baedbcf9c660b65956794a343390239dd5ce1a214c682137259",
+    "fixtures.mjs": "3dc59e45b14ebb1f49b4112b9c8a4d82a985580d95d6c44034033012a240d8f1",
+    "index.html": "260f4ae04de256df5de80f425cedb38a15e29571ba85a0c1c811374c95501559",
+    "serve.py": "1a59217a51486049667068d5e3dbfa05143a5aeb8a0e08a90f836e6925936c87",
+    "worker.mjs": "5c0c297e49cb0d8d779dff8a35aa306cd29e1ad0e5ebd3b2189e38d6dab896b9"
+  },
+  "logs": {
+    "discovery-before-gap-fixture-fix.log": "b62c6d357771e8e8a42be7557fa4ee27b21cb20474903e00802787accbc23107",
+    "discovery.log": "2160ed564052dc06b5ebaab9a19b65a198d5a11f172876f813a504b7e7db802e",
+    "retained-seven.log": "f90e85ba5ea09a3a3114dc5ebe4d9c5f4f3ee4ec397793203ff455b7affa3115",
+    "retained-seventeen.log": "d2bcb0e654da996a5254e0e6021373f8eba63ed9cba774fcebd8183a548c6de5",
+    "worker.log": "48a32ed67d86a6189549ecfbf725c0ef8e89ff9be0ca0ee1d469d8c0530e3a9f"
+  },
+  "workerReceiptSHA256": "51b3546928bc8aeeaba8347e57e4b1c8591163da6db3285b3552c9fc6214f7f3",
+  "fixture": "http://127.0.0.1:20649/",
+  "runtimeBackup": "/mnt/data10tb/codi-selected-region-discovery-20261106",
+  "evidenceBackup": "/mnt/data10tb/codi-selected-region-discovery-evidence-20261106",
+  "fixtureFailurePreserved": "structuredClone preserved JS endpoint aliases; JSON-native copy fixed only gap fixture, original expected refusal/product unchanged",
+  "scope": "Pure Worker-side geometry support from explicit native-data fixtures; not solver admission, native allocation, public API or persistence qualification",
+  "globalCurveIdCapUnchanged": 256,
+  "supportedRegionIdCapUnchanged": 8192,
+  "unsupportedRegionIdsOpaqueAndUntruncated": true,
+  "publicDeployment": false
+}

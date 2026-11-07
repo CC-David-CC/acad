@@ -1,0 +1,85 @@
+{
+  "source": "CAD a548e2da0; authored-box empty preflight only; lifetime/evidence followup",
+  "fixture": "http://127.0.0.1:20551/static/index.html",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'",
+  "historicalMountViaCdp": true,
+  "testSha256": "41ff6a7d253e13810d51dea26b2acebbbb3e468f0c8ee967b91a5105f52b3e5c",
+  "rows": [
+    {
+      "id": "ordinary-microtask-abort-before-dispatch/box",
+      "status": "failure",
+      "message": "Aborted signal accepted=true, code=undefined, volume=0.9999999999999999"
+    },
+    {
+      "id": "ordinary-microtask-abort-before-dispatch/mesh",
+      "status": "failure",
+      "message": "Aborted signal accepted=true, code=undefined, volume=0.9999999999999999"
+    },
+    {
+      "id": "ordinary-microtask-abort-before-dispatch/dispose",
+      "status": "failure",
+      "message": "Aborted signal accepted=true, code=undefined, volume=undefined"
+    },
+    {
+      "id": "post-native-response-abort/box",
+      "status": "failure",
+      "message": "Post-response cancellation accepted"
+    },
+    {
+      "id": "post-native-response-abort/mesh",
+      "status": "failure",
+      "message": "Post-response cancellation accepted"
+    },
+    {
+      "id": "post-native-response-abort/dispose",
+      "status": "failure",
+      "message": "Post-response cancellation accepted"
+    },
+    {
+      "id": "initialization-deadline-before-delayed-timer",
+      "status": "pass",
+      "scope": "Genuine ready response held; main-thread busy wait prevents timer dispatch",
+      "code": "TIMEOUT"
+    },
+    {
+      "id": "private-handle-and-frozen-evidence-binding",
+      "status": "pass",
+      "scope": "Real owned solid; structural-copy refusal and immutable proof, no response injection"
+    },
+    {
+      "id": "held-real-response-busy-abort-stale-and-accepted-survival",
+      "status": "pass",
+      "scope": "Actual response delivery held/released; payload unchanged",
+      "busy": "BUSY",
+      "binding": "BUSY",
+      "cancelled": "CANCELLED"
+    },
+    {
+      "id": "operation-deadline-before-delayed-timer",
+      "status": "pass",
+      "scope": "Main-thread busy wait and genuine response delivery timing injection",
+      "code": "TIMEOUT"
+    },
+    {
+      "id": "actual-mesh-proof-mismatch-closes-candidate-only",
+      "status": "pass",
+      "scope": "Injected volume-field fault in genuine mesh response; not an ordinary kernel result"
+    }
+  ],
+  "pins": [
+    {
+      "url": "/static/smlibMount.mjs",
+      "sha256": "385eeb8accf7e84bf090bc5cc1b14fc6bff992776cdafb74b6c4c649e8d05fb9"
+    },
+    {
+      "url": "/static/smlib-worker.js",
+      "sha256": "078dc881c488e82fff16cfdcdaef077c107a61e8b7ab45e522f32f7509f403ed"
+    },
+    {
+      "url": "/static/smlib.wasm",
+      "sha256": "a48a3283760c21337881c5e2d5c973dbc62cf95cae46d1c012effd75389eb1ae"
+    }
+  ],
+  "allWorkersTerminated": true,
+  "forcedCleanupRequired": false
+}

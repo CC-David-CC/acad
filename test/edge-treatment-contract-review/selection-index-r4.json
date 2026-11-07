@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "scope": "Pure selection identity and bounds only; explicit synthetic labels/renumbering on genuine R2 observations",
+  "sourceSHA256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+  "rows": [
+    {
+      "name": "ordinary-genuine-R2-label",
+      "status": "PASS",
+      "advertisedResolved": 8
+    },
+    {
+      "name": "allowed8190-backslash-region-label",
+      "status": "PASS",
+      "policy": "explicit-bounded-refusal"
+    },
+    {
+      "name": "synthetic-bijective-native-renumbering",
+      "status": "PASS",
+      "sameAuthoredPlan": true,
+      "privateTargetsRemapped": true
+    },
+    {
+      "name": "producer-identity-changes-namespace",
+      "status": "PASS"
+    }
+  ]
+}

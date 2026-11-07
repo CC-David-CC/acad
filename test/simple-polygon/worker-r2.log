@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "scope": "Actual Node Worker geometry/preparation, not public CAD/arrangement/native qualification",
+  "groups": 11,
+  "rows": [
+    "analytic triangle, rotated rectangle and concave L",
+    "reverse, cyclic rotation and translation preserve area",
+    "independent integer determinant oracle",
+    "cancellation and subnormal orientation retain exact signs",
+    "crossing, contact, overlap and gap remain distinct",
+    "invalid closed boundaries refuse explicitly",
+    "nested, disjoint, intersecting and touching loops",
+    "detached input and 512-vertex boundary",
+    "public gap fixtures have analytic v3 preparation",
+    "polygon and circle holes preserve region intent",
+    "rotated frame, winding and resolution are explicit"
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "scope": "Real publicly authored native sketch before failed signed X=0; diagnostic only, not positive workflow seeding",
+  "sketch": {
+    "version": 3,
+    "objects": [
+      {
+        "id": "agent-primitive-84a91439-afaa-4815-bab2-a07519f46d8b",
+        "type": "Point",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "x": 4,
+          "y": 6
+        }
+      },
+      {
+        "id": "agent-primitive-aacd649d-766a-4b1b-af22-b1bc2289958a",
+        "type": "Point",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "x": 4,
+          "y": -2
+        }
+      },
+      {
+        "id": "agent-primitive-3804e63d-9cf0-44ce-973f-42649f21b98b",
+        "type": "Segment",
+        "role": "construction",
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": -5,
+            "y": 2
+          },
+          "b": {
+            "x": 7,
+            "y": 2
+          }
+        }
+      },
+      {
+        "id": "agent-primitive-2e6e6325-78d1-4a35-bf5f-d6c548fe3e53",
+        "type": "Point",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "x": 150,
+          "y": 150
+        }
+      },
+      {
+        "id": "agent-primitive-52ee9a30-4894-4cd1-9891-c3b2e42f9706",
+        "type": "Point",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "x": 3,
+          "y": 0
+        }
+      },
+      {
+        "id": "agent-primitive-17385533-41ef-4d7c-bc40-b0816b6c7d2f",
+        "type": "Point",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "x": 3,
+          "y": 0
+        }
+      },
+      {
+        "id": "agent-primitive-063b28e8-cc2b-4878-a60a-bbf9ac16b228",
+        "type": "Segment",
+        "role": "construction",
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": 0,
+            "y": 0
+          },
+          "b": {
+            "x": 10,
+            "y": 0
+          }
+        }
+      },
+      {
+        "id": "agent-primitive-1e6720a5-7e33-441b-a97e-28c9ba924bea",
+        "type": "Point",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "x": 6.206770225482903,
+          "y": 2.137847626100963
+        }
+      },
+      {
+        "id": "agent-primitive-10e55cb2-6ccf-462a-ae5d-94933d8bba27",
+        "type": "Point",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "x": 3.365660213333052,
+          "y": 6.717291126224651
+        }
+      },
+      {
+        "id": "agent-primitive-2ddd3d84-9a78-4382-96ca-58756b69caec",
+        "type": "Segment",
+        "role": "construction",
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": -0.5431254467911718,
+            "y": 1.1212193525219531
+          },
+          "b": {
+            "x": 8.970695007975216,
+            "y": 7.023641895152433
+          }
+        }
+      }
+    ],
+    "dimensions": [],
+    "labels": [],
+    "stages": [
+      {
+        "constraints": [
+          {
+            "typeId": "AxisSymmetry",
+            "objects": [
+              "agent-primitive-84a91439-afaa-4815-bab2-a07519f46d8b",
+              "agent-primitive-aacd649d-766a-4b1b-af22-b1bc2289958a",
+              "agent-primitive-3804e63d-9cf0-44ce-973f-42649f21b98b"
+            ],
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "AxisSymmetry",
+            "objects": [
+              "agent-primitive-52ee9a30-4894-4cd1-9891-c3b2e42f9706",
+              "agent-primitive-17385533-41ef-4d7c-bc40-b0816b6c7d2f",
+              "agent-primitive-063b28e8-cc2b-4878-a60a-bbf9ac16b228"
+            ],
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "AxisSymmetry",
+            "objects": [
+              "agent-primitive-1e6720a5-7e33-441b-a97e-28c9ba924bea",
+              "agent-primitive-10e55cb2-6ccf-462a-ae5d-94933d8bba27",
+              "agent-primitive-2ddd3d84-9a78-4382-96ca-58756b69caec"
+            ],
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          }
+        ],
+        "generators": []
+      }
+    ],
+    "constants": "",
+    "metadata": {
+      "boundaryFrame": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "boundary": {
+      "lines": [],
+      "arcs": [],
+      "circles": [],
+      "nurbses": []
+    }
+  },
+  "ids": [
+    "agent-primitive-1e6720a5-7e33-441b-a97e-28c9ba924bea",
+    "agent-primitive-10e55cb2-6ccf-462a-ae5d-94933d8bba27",
+    "agent-primitive-2ddd3d84-9a78-4382-96ca-58756b69caec"
+  ]
+}

@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),puppeteer=require(process.env.PUPPETEER_CORE_PATH||'puppeteer-core');
+const base=new URL(process.env.JSKETCHER_TEST_URL),cdp=new URL(process.env.CODI_TEST_CDP),worker=process.env.CODI_SKETCH_WORKER;
+if(!worker||![base,cdp].every(u=>['127.0.0.1','localhost','[::1]'].includes(u.hostname)))throw Error('Loopback and worker path required');
+(async()=>{const b=await puppeteer.connect({browserURL:cdp.href}),context=await b.createBrowserContext();try{
+ const page=await context.newPage();await page.goto(base.href);const output=await page.evaluate(async worker=>{
+  const run=req=>new Promise((resolve,reject)=>{const w=new Worker(worker),t=setTimeout(()=>{w.terminate();reject(Error('worker timeout'));},30000);w.onmessage=e=>{clearTimeout(t);w.terminate();resolve(e.data)};w.onerror=e=>{clearTimeout(t);w.terminate();reject(Error(e.message))};w.postMessage(req);});
+  const boundary=()=>({lines:[],arcs:[],circles:[],nurbses:[]}),local=[[[0,0],[100,0]],[[50,100],[50,120]]];
+  function sketch(x){const members=[],points=[],objects=[];for(let i=0;i<local.length;i++){const id='s'+i,a=id+':A',b=id+':B',p=local[i];members.push({id,a,b});points.push({id:a,x:p[0][0],y:p[0][1]},{id:b,x:p[1][0],y:p[1][1]});objects.push({id,type:'Segment',stage:0,role:null,data:{a:{x:x+p[0][0],y:p[0][1]},b:{x:x+p[1][0],y:p[1][1]}}});}objects.push({id:'g',type:'RigidGroup',stage:0,role:null,data:{version:1,members,points,transform:{x,y:0,angle:0}}});return {version:3,objects,dimensions:[],labels:[],constants:'',stages:[{constraints:[{typeId:'RigidGroup',objects:['g',...members.map(m=>m.id)],stage:0,annotations:[],admission:{version:1,state:'accepted'}}],generators:[]}],boundary:boundary()};}
+  const req=(revision,x)=>({revision,sketch:sketch(x),boundary:boundary(),externalParameters:{}});return {good:await run(req('good',999800)),bad:await run(req('bad',999950))};
+ },worker);assert.equal(output.good.ok,true,JSON.stringify(output.good.error));assert.equal(output.bad.ok,false);console.log('PASS real strict-CSP sketch Worker accepts loadable near-bound pose and refuses a consistent out-of-domain group record');
+}finally{await context.close();b.disconnect();}})().catch(e=>{console.error(e.stack);process.exitCode=1});

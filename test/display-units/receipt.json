@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "scope": "document-display-units source/service/formatter qualification; not signed app acceptance",
+  "productCommit": "4ceb313f275ba43f54a8075a91666ed0b36c30bb",
+  "node": "v24.22.1",
+  "typescript": "4.7.4",
+  "sourceSha256": {
+    "modules/workbenches/modeler/actions/getInfo/measureEdge.action.ts": "8beb864656147275407125f81c6383d7feeec91baf654229a4506c107f3f4dd5",
+    "web/app/cad/parameters/physicalQuantities.mjs": "0afb1585f919c9767d9015388d75e357f32b6dca22c291d0f4856874ec035943",
+    "web/app/cad/parameters/physicalUnitConstants.mjs": "37ed6dabc5108cc6a61420aa96015608eab84f8d7052130a67bfe1bc482aa1de",
+    "web/app/cad/projectManager/displayUnits.mjs": "5a306a31e38aa875912cbc1a47f6310151f75f42b19a062f0ed77746beab2471",
+    "web/app/cad/projectManager/projectEnvelope.mjs": "1e1e7d3a7245d4a3c468016e7c7cae1381fc0f2c81c99791f9f75b0e27053de1",
+    "web/app/cad/projectManager/projectManagerBundle.ts": "1f04d51df811e198037227db67a902c9b37069d8c5c85867a9653310104bc466",
+    "web/app/sketcher/shapes/annotations/angleAnnotation.ts": "c64b26cb730718d084bd2a0d6f3611dc50e6be8e511aa8d2cd51674970e0675d",
+    "web/app/sketcher/shapes/dim.js": "4989ec311f33acd71d5db836c7352c44cfc519ad6701ad1063586efc39a33cf6"
+  },
+  "runtimeSha256": {
+    ".build/display-units/validation/worker.js": "83d5cf595d04431bec7245a2d598a00b69d91f4beb613a3109c3906139b8a1e8",
+    ".build/display-units/formatting/formatting.cjs": "8cac8c12d9d6bdfa57eeda4a7afec03a892d5b0fba378f94a5b037ccc4b042d3",
+    "web/lib/verb.js": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3",
+    "web/app/cad/projectManager/incrementalHashWorker.mjs": "bc0dbc203db163b5bd9aed5f4e5b520eed89b5df0ca8890d04049a631eba31f9",
+    "node_modules/.cache/codi-numeric/precompiled.js": "987450eec65f7e00c74c8da9281537558fd1ee8e63ee48721253cf2458260386"
+  },
+  "tests": {
+    "pass": 33,
+    "fail": 0,
+    "skipped": 0,
+    "tap": "all.tap",
+    "typescriptExitCode": 0
+  },
+  "productionWorkers": [
+    "actual project validation Worker",
+    "actual incremental manufacturing hash Worker"
+  ],
+  "geometryWorkerDispatch": "none; fixture refuses geometry Worker creation",
+  "fixtureLimitations": [
+    "empty native project for manager persistence",
+    "explicit storage/pipeline/UI protocol doubles",
+    "actual annotation methods without canvas painting",
+    "nonempty signed Save/Open and public/menu runtime pending"
+  ],
+  "preservedFailure": "formatting-entry-before.json"
+}

@@ -1,0 +1,7 @@
+{
+  "status": "FAIL",
+  "scope": "Initial test oracle, unchanged product",
+  "reason": "The initial expected toolbar omitted existing debugBundle.js menu.debug appended after UI configuration. Actual toolbar retained all seven configured menus plus that existing Debug menu.",
+  "source": "e5f603b609fe2b9948c4fa03181a706f4a9ee759",
+  "productChangedToSatisfyTest": false
+}

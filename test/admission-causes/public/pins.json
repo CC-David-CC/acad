@@ -1,0 +1,38 @@
+{
+  "source": "aca23b2b3d83935df5a127ad0a1343b39ab22b3c",
+  "sourceTrackedDiff": "",
+  "appSha256": "9a445345aba19a20a55d7ecb22315e534bd998eb49966cb6a181138d4defdb7b",
+  "workers": [
+    {
+      "file": "prism-semantic.2eb4b26a03470bc9397a.js",
+      "sha256": "d0d5bfa23ee2ca5820770ea90b61ea58685387398dd5fec4b711de7037f9831c"
+    },
+    {
+      "file": "project-validator.760e8f44baf4dc8db1a2.js",
+      "sha256": "7236c461672b662cf9d860439c99a3962784012f88245c248a771158f7287286"
+    },
+    {
+      "file": "sketch-solver.bd9a5a96b8d7ede6919c.js",
+      "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9"
+    }
+  ],
+  "removedCopiedStaleFiles": [
+    {
+      "path": "static/sketch-solver.5c9322de8eed63d12a6b.js",
+      "sha256": "90f7cd86a9bd5a4e20ea44d51a9d3e61bffb766f9f8a0389d7bc2eceed8df44b"
+    }
+  ],
+  "tsc": {
+    "command": "node_modules/.bin/tsc --noEmit --pretty false",
+    "exitCode": 0
+  },
+  "focusedActualSource": {
+    "tests": 9,
+    "pass": 9
+  },
+  "runtime": "/mnt/data10tb/codi-cad-cause-combined-20261106-r1",
+  "dependencies": "/mnt/data10tb/codi-worker-sketch-view-20261105-r11/node_modules",
+  "port": 20678,
+  "buildConfig": "test/combined-axis/webpack.app.cjs",
+  "defaultNativeAssetPromotion": false
+}

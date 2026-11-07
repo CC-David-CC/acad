@@ -1,0 +1,146 @@
+{
+  "scope": "Actual DOM/Canvas with labeled projection/inspection/context doubles and deliberately held animation-frame delivery; no real Worker/native acceptance claim",
+  "cases": [
+    {
+      "phase": "before",
+      "fault": false,
+      "installed": null,
+      "serviceSha256": "15367401b645335cac3ad7920daf2632b973acfd7b77edd3664b8190c1207281",
+      "canvasSha256": "0d7bd5959df5498d689ae9a8846e2837c6ebe1dd943187747dec4f65569482a4",
+      "immediate": {
+        "error": null,
+        "roots": 1,
+        "canvas": [
+          300,
+          150
+        ],
+        "events": [],
+        "inspect": {
+          "open": false
+        }
+      },
+      "settled": {
+        "result": {
+          "name": "AbortError",
+          "message": "Sketch view changed or closed."
+        },
+        "repeated": null,
+        "roots": 0,
+        "events": [
+          "owner.close",
+          "surface.close"
+        ]
+      }
+    },
+    {
+      "phase": "before",
+      "fault": true,
+      "installed": null,
+      "serviceSha256": "15367401b645335cac3ad7920daf2632b973acfd7b77edd3664b8190c1207281",
+      "canvasSha256": "0d7bd5959df5498d689ae9a8846e2837c6ebe1dd943187747dec4f65569482a4",
+      "immediate": {
+        "error": null,
+        "roots": 1,
+        "canvas": [
+          300,
+          150
+        ],
+        "events": [],
+        "inspect": {
+          "open": false
+        }
+      },
+      "settled": {
+        "result": {
+          "name": "Error",
+          "message": "injected owner cleanup"
+        },
+        "repeated": null,
+        "roots": 1,
+        "events": [
+          "owner.close"
+        ]
+      }
+    },
+    {
+      "phase": "after",
+      "fault": false,
+      "installed": {
+        "unrendered": [
+          {
+            "kind": "constraint-annotations",
+            "stage": 0,
+            "count": 1
+          }
+        ],
+        "status": "Partial sketch view · omitted geometry and annotations are listed by Inspect",
+        "roots": 0
+      },
+      "serviceSha256": "be3e35d173cd2ff842f8b6f8d341800b1a5780660eb825d32ef4b5f07e34685c",
+      "canvasSha256": "0d7bd5959df5498d689ae9a8846e2837c6ebe1dd943187747dec4f65569482a4",
+      "immediate": {
+        "error": null,
+        "roots": 0,
+        "canvas": [
+          1,
+          1
+        ],
+        "events": [
+          "owner.close",
+          "surface.close"
+        ],
+        "inspect": {
+          "open": false
+        }
+      },
+      "settled": {
+        "result": {
+          "name": "AbortError",
+          "message": "Drawing superseded."
+        },
+        "repeated": null,
+        "roots": 0,
+        "events": [
+          "owner.close",
+          "surface.close"
+        ]
+      }
+    },
+    {
+      "phase": "after",
+      "fault": true,
+      "installed": null,
+      "serviceSha256": "be3e35d173cd2ff842f8b6f8d341800b1a5780660eb825d32ef4b5f07e34685c",
+      "canvasSha256": "0d7bd5959df5498d689ae9a8846e2837c6ebe1dd943187747dec4f65569482a4",
+      "immediate": {
+        "error": "injected owner cleanup",
+        "roots": 0,
+        "canvas": [
+          1,
+          1
+        ],
+        "events": [
+          "owner.close",
+          "surface.close"
+        ],
+        "inspect": {
+          "open": false
+        }
+      },
+      "settled": {
+        "result": {
+          "name": "AbortError",
+          "message": "Drawing superseded."
+        },
+        "repeated": null,
+        "roots": 0,
+        "events": [
+          "owner.close",
+          "surface.close"
+        ]
+      }
+    }
+  ],
+  "status": "pass",
+  "browser": "Chrome/155.0.8059.79"
+}

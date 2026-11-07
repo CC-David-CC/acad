@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "scope": "Actual standalone C++ compiled WASM in Node; no public/native-history/browser qualification",
+  "cases": 6,
+  "actualCaptureCases": 5,
+  "sameGeometryAbsentNativeEdgeRefusalControls": 4,
+  "wireCopyFinding": {
+    "independentOriginalRetained": 1,
+    "rectangleEdges": 4,
+    "sharedOriginalRetained": 4
+  },
+  "sourceOrdinals": "response-only, not persistent",
+  "outputIndices": "response-local, not persistent",
+  "persistentIdsAssigned": false,
+  "observationsSHA256": "d59c26dd79e86c3c63932b714e5e4943737bdbff8c1a1f55d81583da978e13a8"
+}

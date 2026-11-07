@@ -1,0 +1,217 @@
+{
+  "status": "PASS",
+  "rows": [],
+  "discovery": {
+    "rectangle": {
+      "featureId": 1,
+      "faceId": "S:0/SURFACE",
+      "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/rect-0\",\"S:0/SURFACE/rect-1\",\"S:0/SURFACE/rect-2\",\"S:0/SURFACE/rect-3\"],\"holes\":[]}",
+      "unit": "millimeter",
+      "persistence": "volatile-workspace",
+      "revision": "c53c465e-9c75-46cb-948d-94b6a0a59eb8"
+    },
+    "result": {
+      "featureId": 2,
+      "outputId": "worker-solid:1:[2,\"body\"]",
+      "bodyId": "worker-solid:1:[2,\"body\"]",
+      "sourceFaceId": "S:0/SURFACE",
+      "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/rect-0\",\"S:0/SURFACE/rect-1\",\"S:0/SURFACE/rect-2\",\"S:0/SURFACE/rect-3\"],\"holes\":[]}",
+      "engine": "occ",
+      "engineRevision": "sha256:b3d91cbb02f90ba56732039283d787b92eda97c51091fafbd933ecf4db30dd97:28e8e2c2752cef100a98e24ec487f7d90021edb98fb060fdd1160fe63501bbe2",
+      "unit": "millimeter",
+      "bodyPolicy": "separate",
+      "persistence": "volatile-workspace",
+      "revision": "491b2b5d-e7e3-4b44-8bce-9702daee1862"
+    },
+    "edges": {
+      "ready": true,
+      "reason": null,
+      "revision": "491b2b5d-e7e3-4b44-8bce-9702daee1862",
+      "unit": "millimeter",
+      "engine": "occ",
+      "kinds": [
+        "fillet",
+        "chamfer-equal"
+      ],
+      "limits": {
+        "selectedEdges": 16,
+        "maxSizeMm": 1000000
+      },
+      "canCreate": true,
+      "targets": [
+        {
+          "bodyId": "worker-solid:1:[2,\"body\"]",
+          "featureId": 2,
+          "engine": "occ",
+          "engineRevision": "sha256:b3d91cbb02f90ba56732039283d787b92eda97c51091fafbd933ecf4db30dd97:28e8e2c2752cef100a98e24ec487f7d90021edb98fb060fdd1160fe63501bbe2",
+          "selections": {
+            "status": "available",
+            "plan": {
+              "version": 1,
+              "featureId": 2,
+              "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/rect-0\",\"S:0/SURFACE/rect-1\",\"S:0/SURFACE/rect-2\",\"S:0/SURFACE/rect-3\"],\"holes\":[]}",
+              "scope": "authored-source",
+              "source": "prism-construction-history",
+              "edges": [
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"first-boundary\",\"S:0/SURFACE/rect-0\"]",
+                  "role": "first-boundary",
+                  "curveId": "S:0/SURFACE/rect-0",
+                  "geometry": "line"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"last-boundary\",\"S:0/SURFACE/rect-0\"]",
+                  "role": "last-boundary",
+                  "curveId": "S:0/SURFACE/rect-0",
+                  "geometry": "line"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"first-boundary\",\"S:0/SURFACE/rect-1\"]",
+                  "role": "first-boundary",
+                  "curveId": "S:0/SURFACE/rect-1",
+                  "geometry": "line"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"last-boundary\",\"S:0/SURFACE/rect-1\"]",
+                  "role": "last-boundary",
+                  "curveId": "S:0/SURFACE/rect-1",
+                  "geometry": "line"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"first-boundary\",\"S:0/SURFACE/rect-2\"]",
+                  "role": "first-boundary",
+                  "curveId": "S:0/SURFACE/rect-2",
+                  "geometry": "line"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"last-boundary\",\"S:0/SURFACE/rect-2\"]",
+                  "role": "last-boundary",
+                  "curveId": "S:0/SURFACE/rect-2",
+                  "geometry": "line"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"first-boundary\",\"S:0/SURFACE/rect-3\"]",
+                  "role": "first-boundary",
+                  "curveId": "S:0/SURFACE/rect-3",
+                  "geometry": "line"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"last-boundary\",\"S:0/SURFACE/rect-3\"]",
+                  "role": "last-boundary",
+                  "curveId": "S:0/SURFACE/rect-3",
+                  "geometry": "line"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"connector\",[\"S:0/SURFACE/rect-0\",\"S:0/SURFACE/rect-3\"]]",
+                  "role": "connector",
+                  "incidentCurveIds": [
+                    "S:0/SURFACE/rect-0",
+                    "S:0/SURFACE/rect-3"
+                  ],
+                  "geometry": "line"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"connector\",[\"S:0/SURFACE/rect-0\",\"S:0/SURFACE/rect-1\"]]",
+                  "role": "connector",
+                  "incidentCurveIds": [
+                    "S:0/SURFACE/rect-0",
+                    "S:0/SURFACE/rect-1"
+                  ],
+                  "geometry": "line"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"connector\",[\"S:0/SURFACE/rect-1\",\"S:0/SURFACE/rect-2\"]]",
+                  "role": "connector",
+                  "incidentCurveIds": [
+                    "S:0/SURFACE/rect-1",
+                    "S:0/SURFACE/rect-2"
+                  ],
+                  "geometry": "line"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"connector\",[\"S:0/SURFACE/rect-2\",\"S:0/SURFACE/rect-3\"]]",
+                  "role": "connector",
+                  "incidentCurveIds": [
+                    "S:0/SURFACE/rect-2",
+                    "S:0/SURFACE/rect-3"
+                  ],
+                  "geometry": "line"
+                }
+              ],
+              "faces": [
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+                  "role": "first-cap",
+                  "geometry": "plane"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+                  "role": "last-cap",
+                  "geometry": "plane"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"swept-boundary\",\"S:0/SURFACE/rect-0\"]",
+                  "role": "swept-boundary",
+                  "curveId": "S:0/SURFACE/rect-0",
+                  "geometry": "plane"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"swept-boundary\",\"S:0/SURFACE/rect-1\"]",
+                  "role": "swept-boundary",
+                  "curveId": "S:0/SURFACE/rect-1",
+                  "geometry": "plane"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"swept-boundary\",\"S:0/SURFACE/rect-2\"]",
+                  "role": "swept-boundary",
+                  "curveId": "S:0/SURFACE/rect-2",
+                  "geometry": "plane"
+                },
+                {
+                  "id": "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"swept-boundary\",\"S:0/SURFACE/rect-3\"]",
+                  "role": "swept-boundary",
+                  "curveId": "S:0/SURFACE/rect-3",
+                  "geometry": "plane"
+                }
+              ],
+              "unresolved": []
+            }
+          },
+          "edgeIds": [
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"first-boundary\",\"S:0/SURFACE/rect-0\"]",
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"last-boundary\",\"S:0/SURFACE/rect-0\"]",
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"first-boundary\",\"S:0/SURFACE/rect-1\"]",
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"last-boundary\",\"S:0/SURFACE/rect-1\"]",
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"first-boundary\",\"S:0/SURFACE/rect-2\"]",
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"last-boundary\",\"S:0/SURFACE/rect-2\"]",
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"first-boundary\",\"S:0/SURFACE/rect-3\"]",
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"last-boundary\",\"S:0/SURFACE/rect-3\"]",
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"connector\",[\"S:0/SURFACE/rect-0\",\"S:0/SURFACE/rect-3\"]]",
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"connector\",[\"S:0/SURFACE/rect-0\",\"S:0/SURFACE/rect-1\"]]",
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"connector\",[\"S:0/SURFACE/rect-1\",\"S:0/SURFACE/rect-2\"]]",
+            "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"edge\",\"connector\",[\"S:0/SURFACE/rect-2\",\"S:0/SURFACE/rect-3\"]]"
+          ],
+          "budget": {
+            "scope": "selected-owned-evaluation-v1",
+            "maxLifetimeNames": 32,
+            "maxCumulativeResultTriangles": 100000,
+            "supported": true,
+            "compatible": true,
+            "reason": null,
+            "plannedNativeResults": 1,
+            "remainingNativeResults": 31,
+            "withinLimit": true,
+            "canAppend": true,
+            "separateMountFeatures": 0,
+            "unsupportedTypes": [],
+            "incompatibleOperations": []
+          },
+          "canCreate": true,
+          "reason": null
+        }
+      ],
+      "unsupported": [],
+      "scope": "numeric-authored-worker-edge-treatment-v1"
+    }
+  }
+}

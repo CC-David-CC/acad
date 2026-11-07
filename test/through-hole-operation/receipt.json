@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "status": "PASS",
+  "scope": "actual-adapter-and-ledger-with-explicit-transport-model-doubles",
+  "base": "d32b4d90a5bb73d4359ab90d552b0c5038ff652d",
+  "rootFix": "7edaa9e1170afd63cb1818b2ef9cd92c39f07be0",
+  "localFix": "f5870eaa0665a23c1aec12116fe1c1bbddba4cae",
+  "node": "v24.22.1",
+  "typescript": "4.7.4",
+  "tests": {
+    "newGroups": 17,
+    "retainedGroups": 12,
+    "total": 29,
+    "command": [
+      "/tmp/codi-files-move-node/bin/node",
+      "--test",
+      "--test-reporter=tap",
+      "test/through-hole-operation/operation.test.mjs",
+      "test/through-hole-operation/source-binding.test.mjs",
+      "test/through-hole-operation/plane-currentness.test.mjs",
+      "test/through-hole-ledger/ledger.test.mjs"
+    ]
+  },
+  "regression": {
+    "beforeOperationSHA256": "ce5c599427ce357cb83b301a53a5b8e952a1b7f4aa5f94120a232ebb86b4278a",
+    "afterOperationSHA256": "6d3b906bd6671aee2fbf649344af9d4b6a993915842fd11a8e9ec686900bb575",
+    "beforeFailed": 2,
+    "afterPassed": 2
+  },
+  "sourceHashesBeforeAndAfter": {
+    "modules/workbenches/modeler/features/workerThroughHoles/workerThroughHoles.operation.ts": "6d3b906bd6671aee2fbf649344af9d4b6a993915842fd11a8e9ec686900bb575",
+    "modules/workbenches/modeler/features/workerSelectedProfile/workerSelectedProfile.operation.ts": "9b1e0fd8368e6d18388e2fab64242aafaf30fb3b6462c50d3e7830c632a902a8",
+    "modules/engine/solid/solidLedger.mjs": "3a59a1f5731728ca2261f5b8881658be237482739b15a4b30b34856c42e080a3",
+    "modules/engine/solid/ownedHoleIntent.mjs": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+    "web/app/cad/craft/evaluationResources.mjs": "1c513bf9a904e7c0f37480dce5db0eb0fa14a23f02b1f1d2b32d37beb80c49cf",
+    "test/through-hole-operation/fixture.mjs": "6178bd5faad383dccdc1f1cd7fb5b76298683bf63e2bcf4d015ac73736fbebdc",
+    "test/through-hole-operation/operation.test.mjs": "d8acdf4a68e1a11b4409a89d065d6f996d5d5ce19dcccb39228f8f315fb6be4b",
+    "test/through-hole-operation/source-binding.test.mjs": "27cc29311c7a091f301a5dd124e2a3557c1f60fbff77b7e86e12ca48e92a30df",
+    "test/through-hole-operation/plane-currentness.test.mjs": "cae026113307706a4e3835a27f08b0f9ac97c326af6063ae95aa969032c6b4e0",
+    "test/through-hole-operation/README.md": "e2dea66a39f30a10bd7aa287adc9529d07f4f47508320df4a7e669c8675afdf7",
+    "test/through-hole-operation/verify.mjs": "1b62c58e1df93099385edaf88ebfdf0f7f5135c7fabe246c7cc106e0aa455fb6"
+  },
+  "inputProof": {
+    "sha256": "ebdcd7e886fa73a0b7b9564785532eb3695061842c369bba20ec4d8bde51f74e",
+    "rawSHA256": "3b1c1b45e26d1b4dbdbf0942c9ba3bb1670d9c80c6bef41cf67dafac0dc838af",
+    "componentSHA256": "c609aaa93e2a4cb12a8464cc307520aae24f13d4dc5eb710fe1dec615f6fa744"
+  },
+  "evidenceHashes": {
+    "plane-before.tap": "c88b7ac06d8483203087fb147b6beae2d57572fc3434e7f3e2708e6541d43ad6",
+    "plane-semantic-before.tap": "d8375fb98c8811bdffca6aa8d96543cfd115d5328e0f91f7fc10073fd39db623",
+    "plane-before.sha256": "a273a75398b80a10accfc7de7c28a01de7d0043fb1490242cac1e3853147a98b",
+    "plane-after.tap": "6f4497aba6ff2aff4eb61c42d5930bfbf232d48b52db068f67a196ddc932069f",
+    "harness-array-before.tap": "8fb8edbde4377409b5fcedf76154a4eafcb4185baadbaac2edb887166ab76d13",
+    "operation-after.tap": "d1c8059784f904418a27d988efa2214bb057157bac2bbd7f9c7a8ed16a52b750",
+    "combined-after.tap": "92dc4a1594aa34bc2ebe900916bc3ef806b694d32b36f8e5b82de8bc7de3703d"
+  },
+  "limitations": [
+    "Models/transport/projection are doubles; source requests and measurements are recorded",
+    "Actual selected-profile solve/preparation and constructors are not run",
+    "No fresh native/browser/public workflow/Save/Open/full Gate1 claim"
+  ]
+}

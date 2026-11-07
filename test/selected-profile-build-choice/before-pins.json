@@ -1,0 +1,14 @@
+{
+  "head": "1c4605ea62585565f19147c2409b3309e74c9dbf",
+  "node": "v24.22.1",
+  "webpack": "5.74.0",
+  "sourceCount": 1334,
+  "sourceCohortBeforeAfter": "5757c2cecc73a18e20c1894acc0a0782c6c72017c4a707b26def01c4fca28085",
+  "sourceHashes": {
+    "web/app/cad/craft/selectedProfileCommands.ts": "2e9592e77f913d580fa04b4753a072c63767c27a1857669ce2627ae14e5c398d",
+    "web/app/cad/craft/authoredEditJournal.mjs": "8708006c2a2aa0746f868c7ff785a72b47ad9e173469bb14521be6d6d3b784e3"
+  },
+  "sketch": "d6835ce643c986381cf05e80105251491b0327d9c8ec93266e5319783c7fd9d8",
+  "semantic": "91b6b1353adb6322d08be0ba472d446dd0c46ac6384396bd32483687965f560d",
+  "service": "e950e8c86a3d3b5edf707b369219e61f225e64013f1292aa62231e6673dc4892"
+}

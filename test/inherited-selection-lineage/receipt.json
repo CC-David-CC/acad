@@ -1,0 +1,499 @@
+{
+  "base": "3451730e56c8fb604213eeba86e4a8f8e135f32e",
+  "node": "v24.22.1",
+  "pins": {
+    "../../modules/engine/mount/selectionLineageIndex.mjs": {
+      "sha256": "32da989a9add455aeee4bbe1e6f0d50270da565208d09bf9e4a0567bbdce3e8b",
+      "bytes": 18757
+    },
+    "../../modules/engine/mount/booleanSelectionClaims.mjs": {
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+      "bytes": 9413
+    },
+    "../../modules/engine/mount/ownedTopologyContract.mjs": {
+      "sha256": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+      "bytes": 7063
+    },
+    "../../modules/engine/mount/ownedBooleanContract.mjs": {
+      "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+      "bytes": 7736
+    },
+    "./run.mjs": {
+      "sha256": "f60e4854453cee34b314c0bdeb268acd00a615c7ac9b1beac22d81acd4341437",
+      "bytes": 2146
+    },
+    "./worker.mjs": {
+      "sha256": "96ccd5bdb32ce74cd462ad804034a23eb9cdc0ada6883d5ec686c6a6481bddf7",
+      "bytes": 13214
+    },
+    "../selection-lineage-v2/worker.mjs": {
+      "sha256": "e991203b21cf0b718ff5d02bf665ead9d7bf4b2222a03b8162a226c3eee166fc",
+      "bytes": 20516
+    },
+    "../selection-lineage-v2/fixtures.mjs": {
+      "sha256": "8c1134b4b2c9891dd5d9354058927e162df234c95030fdd8102419d2342d3291",
+      "bytes": 4125
+    },
+    "../selection-lineage-v2/native-main-fixture.json": {
+      "sha256": "2268e8d0dbaa8b6508f8ccb4a3d4a4c44dae7e58f993c837edd323c8dc2a480a",
+      "bytes": 831333
+    },
+    "../selection-ancestry/native-first-receipt.json": {
+      "sha256": "a1a99f0f6178aa64463a1688a1b3022880821fde68f027751378bcd7fd2496d7",
+      "bytes": 133073
+    },
+    "../boolean-selection-claims/actual-native/plate-r1/observations.jsonl": {
+      "sha256": "ab6d33f646a8b7ad2f89fc2aaf435efc7e001dae90ddef6268a68243bbb4c3af",
+      "bytes": 718728
+    },
+    "../boolean-selection-claims/actual-native/native-producer-pins.json": {
+      "sha256": "17d0f93e070eea41d4279a50d18e24390f432b390b9ae97a6ffb0ff876431ce5",
+      "bytes": 6622
+    }
+  },
+  "status": "PASS",
+  "current": {
+    "status": "PASS",
+    "scope": "pure Node Worker inherited-only lineage over recorded genuine CutA/constructor/edge data; synthetic controls labeled; no R2 hidden-map inference or fresh native/public run",
+    "rows": [
+      {
+        "name": "recorded real circle Cut A retains target identities without tool origins",
+        "scope": "genuine main-WASM constructor/Boolean replay; explicit component caller source labels, no new native/public run",
+        "status": "PASS",
+        "data": {
+          "outerConnectors": 4,
+          "sourceContexts": [
+            {
+              "kind": "sketch-profile",
+              "featureId": 40,
+              "regionId": "native-v3-component:plate"
+            }
+          ],
+          "unclaimed": [
+            {
+              "kind": "vertex",
+              "count": 10,
+              "reason": "UNCLAIMED_KERNEL_ENTITY"
+            },
+            {
+              "kind": "edge",
+              "count": 3,
+              "reason": "UNCLAIMED_KERNEL_ENTITY"
+            },
+            {
+              "kind": "face",
+              "count": 1,
+              "reason": "UNCLAIMED_KERNEL_ENTITY"
+            }
+          ]
+        }
+      },
+      {
+        "name": "same actual Cut preserves binary semantics while unary advertises no tool source",
+        "scope": "genuine recorded maps with one versus two deliberately named sources",
+        "status": "PASS",
+        "data": {
+          "unaryOrigins": 1,
+          "binaryOrigins": 2,
+          "sourceBValidatedOutsideUnary": true
+        }
+      },
+      {
+        "name": "unary inheritance does NOT create even a uniquely attributable blend face",
+        "scope": "genuine recorded fillet map used only as an inheritance control",
+        "status": "PASS"
+      },
+      {
+        "name": "ten native Cut-A snapshots preserve actual Generated-constructor corner labels",
+        "scope": "genuine native plate-r1 histories; native-only fixture labels, not R2 browser/private/public bindings",
+        "status": "PASS",
+        "data": {
+          "cuts": 10,
+          "cornerBindings": 40,
+          "chains": [
+            {
+              "case": "plate100x50",
+              "cuts": 5,
+              "steps": [
+                {
+                  "step": 0,
+                  "cornerIndices": [
+                    1,
+                    2,
+                    8,
+                    5
+                  ],
+                  "contexts": 1
+                },
+                {
+                  "step": 1,
+                  "cornerIndices": [
+                    1,
+                    2,
+                    8,
+                    5
+                  ],
+                  "contexts": 1
+                },
+                {
+                  "step": 2,
+                  "cornerIndices": [
+                    1,
+                    2,
+                    8,
+                    5
+                  ],
+                  "contexts": 1
+                },
+                {
+                  "step": 3,
+                  "cornerIndices": [
+                    1,
+                    2,
+                    8,
+                    5
+                  ],
+                  "contexts": 1
+                },
+                {
+                  "step": 4,
+                  "cornerIndices": [
+                    1,
+                    2,
+                    8,
+                    5
+                  ],
+                  "contexts": 1
+                }
+              ]
+            },
+            {
+              "case": "plate150x30",
+              "cuts": 5,
+              "steps": [
+                {
+                  "step": 0,
+                  "cornerIndices": [
+                    1,
+                    2,
+                    8,
+                    5
+                  ],
+                  "contexts": 1
+                },
+                {
+                  "step": 1,
+                  "cornerIndices": [
+                    1,
+                    2,
+                    8,
+                    5
+                  ],
+                  "contexts": 1
+                },
+                {
+                  "step": 2,
+                  "cornerIndices": [
+                    1,
+                    2,
+                    8,
+                    5
+                  ],
+                  "contexts": 1
+                },
+                {
+                  "step": 3,
+                  "cornerIndices": [
+                    1,
+                    2,
+                    8,
+                    5
+                  ],
+                  "contexts": 1
+                },
+                {
+                  "step": 4,
+                  "cornerIndices": [
+                    1,
+                    2,
+                    8,
+                    5
+                  ],
+                  "contexts": 1
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "first failure survives later identity history and aggregates are recomputed once",
+        "scope": "synthetic raw relation over genuine unchanged catalog; not native output",
+        "status": "PASS"
+      },
+      {
+        "name": "fresh producer and exact unary fields remain strict",
+        "scope": "synthetic admission controls; repeated producer is NOT a supported cut-chain API",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed history, bindings and nested accessors refuse before user reads",
+        "scope": "synthetic malformed metadata controls only",
+        "status": "PASS"
+      },
+      {
+        "name": "exact one-source snapshot byte budget and UTF8 refusal remain bounded",
+        "scope": "synthetic metadata resource control, no fake native geometry",
+        "status": "PASS",
+        "data": {
+          "acceptedBytes": 524288,
+          "rejectedBytes": 524289,
+          "returnedBytes": 514659
+        }
+      },
+      {
+        "name": "published inherited metadata is detached, immutable and private-index-free",
+        "scope": "synthetic identity history over genuine catalog, no native operation claim",
+        "status": "PASS"
+      }
+    ]
+  },
+  "retained29": {
+    "status": "PASS",
+    "scope": "Pure Node Worker replay of frozen actual native construction/edge/Boolean data with explicit component caller source slots; synthetic controls labeled; no new kernel/public authoring",
+    "rows": [
+      {
+        "name": "actual frozen initial prism lifts exact keys and genuine component origin",
+        "status": "PASS"
+      },
+      {
+        "name": "actual frozen fillet uses one real source and actual unique generated blend",
+        "status": "PASS",
+        "data": {
+          "resolvedEdges": 11,
+          "resolvedFaces": 7,
+          "origin": 1
+        }
+      },
+      {
+        "name": "actual frozen subsequent chamfer preserves first failure and old blend origin",
+        "status": "PASS"
+      },
+      {
+        "name": "actual frozen size replay retains opaque keys with changed native geometry",
+        "status": "PASS"
+      },
+      {
+        "name": "actual main V3 source-bound Boolean disjoint-0",
+        "status": "PASS",
+        "data": {
+          "contexts": [
+            {
+              "kind": "sketch-profile",
+              "featureId": 10,
+              "regionId": "native-v3-component:A"
+            },
+            {
+              "kind": "sketch-profile",
+              "featureId": 30,
+              "regionId": "native-v3-component:C"
+            }
+          ],
+          "resolvedEdges": 24,
+          "resolvedFaces": 12,
+          "detailedUnresolved": 0
+        }
+      },
+      {
+        "name": "actual main V3 source-bound Boolean overlap-0",
+        "status": "PASS",
+        "data": {
+          "contexts": [
+            {
+              "kind": "sketch-profile",
+              "featureId": 10,
+              "regionId": "native-v3-component:A"
+            },
+            {
+              "kind": "sketch-profile",
+              "featureId": 20,
+              "regionId": "native-v3-component:B"
+            }
+          ],
+          "resolvedEdges": 16,
+          "resolvedFaces": 2,
+          "detailedUnresolved": 18
+        }
+      },
+      {
+        "name": "actual main V3 source-bound Boolean overlap-1",
+        "status": "PASS",
+        "data": {
+          "contexts": [
+            {
+              "kind": "sketch-profile",
+              "featureId": 10,
+              "regionId": "native-v3-component:A"
+            },
+            {
+              "kind": "sketch-profile",
+              "featureId": 20,
+              "regionId": "native-v3-component:B"
+            }
+          ],
+          "resolvedEdges": 12,
+          "resolvedFaces": 6,
+          "detailedUnresolved": 18
+        }
+      },
+      {
+        "name": "actual main V3 source-bound Boolean same-operand-0",
+        "status": "PASS",
+        "data": {
+          "contexts": [
+            {
+              "kind": "sketch-profile",
+              "featureId": 10,
+              "regionId": "native-v3-component:A"
+            }
+          ],
+          "resolvedEdges": 12,
+          "resolvedFaces": 6,
+          "detailedUnresolved": 0
+        }
+      },
+      {
+        "name": "actual main V3 source-bound Boolean same-operand-1",
+        "status": "PASS",
+        "data": {
+          "contexts": [
+            {
+              "kind": "sketch-profile",
+              "featureId": 10,
+              "regionId": "native-v3-component:A"
+            }
+          ],
+          "resolvedEdges": 0,
+          "resolvedFaces": 0,
+          "detailedUnresolved": 18
+        }
+      },
+      {
+        "name": "actual main V3 source-bound Boolean real-circle-through-cut",
+        "status": "PASS",
+        "data": {
+          "contexts": [
+            {
+              "kind": "sketch-profile",
+              "featureId": 40,
+              "regionId": "native-v3-component:plate"
+            },
+            {
+              "kind": "sketch-profile",
+              "featureId": 50,
+              "regionId": "native-v3-component:circle-tool"
+            }
+          ],
+          "resolvedEdges": 12,
+          "resolvedFaces": 7,
+          "detailedUnresolved": 4
+        }
+      },
+      {
+        "name": "synthetic same/modified duplicates and raw deletion flags preserve inherited keys",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic split/merge failures use true one-input evidence and preserve origin",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic unclaimed native co-generators and retained faces forbid blend naming",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic prior boolean evidence and first failure survive without stale counts",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic branch role/origin/source-region conflicts refuse naming explicitly",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic same ID derived geometry differences are not authored metadata conflicts",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic prior-versus-resolved and conflicting first histories are never repaired",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic contexts sort numerically and merge only actual matching origins",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic original caller data is captured before resolver callbacks",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic nested/outer accessors, custom objects and extra native fields refuse unread",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic malformed raw histories and advertised native bindings refuse",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic producer and selected-edge identity admission",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic key cap and immutable resolver publication",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic qualified-vertex metadata uses real membership and refuses legacy missing rows",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic prior evidence strict union rejects fabricated slots and contradictory reasons",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic exact captured UTF-8 boundary accepts and one byte more refuses",
+        "status": "PASS",
+        "data": {
+          "acceptedSnapshotBytes": 524288,
+          "rejectedSnapshotBytes": 524289,
+          "outputBytes": 514529
+        }
+      },
+      {
+        "name": "synthetic multibyte limit counts actual UTF-8 independently of string length",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic derived observation budget remains independent of captured input",
+        "status": "PASS",
+        "data": {
+          "capturedBytes": 524288,
+          "control": "Synthetic generated relations over unchanged frozen native catalog; no geometry claim"
+        }
+      },
+      {
+        "name": "synthetic sparse/symbol/cyclic/nonfinite data is never serialized through callbacks",
+        "status": "PASS"
+      }
+    ]
+  },
+  "retainedReceiptPinsUnchanged": {
+    "../selection-lineage-v2/final-run.json": {
+      "sha256": "cb5458414323eedffc2984a8c096750dd543e6df085425b6e1c22f690fb5ffb8",
+      "bytes": 8055
+    },
+    "../selection-lineage-v2/final-run.log": {
+      "sha256": "cb5458414323eedffc2984a8c096750dd543e6df085425b6e1c22f690fb5ffb8",
+      "bytes": 8055
+    }
+  }
+}

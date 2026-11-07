@@ -1,0 +1,22 @@
+✔ rectangle: exact copied input, volume and bounds; orientation reversal only (4.507519ms)
+✔ circle, annulus and independently selected nested regions use analytic areas (0.970649ms)
+✔ disjoint selected rectangles remain two independent requests, never an implicit compound (0.593695ms)
+✔ arbitrary orthonormal placement; handedness and scaling refuse (0.893728ms)
+✔ thin source preserved; tiny gap never repaired (0.488295ms)
+✔ hole domains are deliberate: outside, touching, intersecting or nested holes refuse (1.710965ms)
+✔ unsupported curves and profiles are honest; malformed data never coerced (0.966679ms)
+✔ disjoint exact source loops select independently without rewriting source (13.286736ms)
+✔ three nested circles keep distinct selectable annuli and disk (4.334838ms)
+✔ mixed holes, exact thin coordinates and XZ/oblique placement survive preparation (9.18165ms)
+✔ gaps, duplicate/touching boundaries and unsupported ordinary curves refuse explicitly (2.381121ms)
+✔ digest/frame/region/domain failures remain separate and source stays unchanged (1.348582ms)
+✔ capture rejects getters and detaches frame before asynchronous digest (1.072679ms)
+✔ source admission caps UTF-8 bytes rather than UTF-16 code units alone (16.913537ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 139.675707

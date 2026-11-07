@@ -1,0 +1,28 @@
+✔ owner captures/freeze values before awaiting supplied transport (2.370319ms)
+✔ synchronous final guard abort and close both fence ticket creation (1.132303ms)
+✔ cancellation remains effective through cooperative witness capture (8.450914ms)
+✔ owner rejects accessor/sparse/misindexed witness without executing accessors (1.125764ms)
+✔ transport trust boundary is explicit: owner shape checks are not native validation (0.456285ms)
+✔ intrinsic same-type objects/constants, stage/index and admission are all significant (0.960742ms)
+✔ exact source hook leaves ordinary output/write count unchanged when omitted (0.870621ms)
+✔ callback records are provisional and constants are borrowed until witness copy (0.319184ms)
+✔ fixed exact snapshot function detaches and recursively freezes callback data (0.557877ms)
+✔ analytic data, native child identities and detached ownership (7.107338ms)
+✔ full sweep and unsupported source remain explicit (0.440405ms)
+✔ ellipse display radius follows the existing renderer minimum (0.353485ms)
+✔ rejects sparse arrays, accessors, duplicate IDs, nonfinite and invalid stage (0.901811ms)
+✔ owns bound immutable source and constraint identities with unknown cache (4.998342ms)
+✔ witness refuses missing, swapped, wrong status/frame and extra intrinsic rows (0.597638ms)
+✔ owner rejects duplicate or swapped stage/index identity (1.239335ms)
+✔ stale, cancellation, replacement and foreign owner refuse (1.540279ms)
+✔ captured params and abort are fenced around trusted worker (1.706031ms)
+✔ rejects oversized UTF-8 serialized output before projection (23.743651ms)
+✔ render records are bounded, frozen, and fail closed on malformed geometry (2.285808ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 100.624655

@@ -1,0 +1,102 @@
+✖ empty actual output inventory is structured unready without inventing a target (248.783629ms)
+✖ all unsupported actual targets are structured unready while row reason survives (165.064152ms)
+✖ initial stable busy is availability, not lifetime cancellation (115.447312ms)
+✖ initial stable assembly is availability, not lifetime cancellation (112.264322ms)
+✖ initial stable unbound-host is availability, not lifetime cancellation (124.748928ms)
+✔ actual disposed document still aborts readonly inspection (110.347935ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 1
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1228.453064
+
+✖ failing tests:
+
+test at test/generic-manufacturing-assignment/readiness.test.mjs:4:1
+✖ empty actual output inventory is structured unready without inventing a target (248.783629ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:4:229
+      at use (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:3:71)
+      at TestContext.<anonymous> (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:4:91)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/generic-manufacturing-assignment/readiness.test.mjs:5:1
+✖ all unsupported actual targets are structured unready while row reason survives (165.064152ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:5:198
+      at use (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:3:71)
+      at TestContext.<anonymous> (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:5:92)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/generic-manufacturing-assignment/readiness.test.mjs:6:53
+✖ initial stable busy is availability, not lifetime cancellation (115.447312ms)
+  AbortError: Manufacturing body selection changed.
+      at new DOMException (node:internal/per_context/domexception:76:18)
+      at w (/tmp/codi-cad-generic-manufacturing-preparation-20261107/.build/generic-manufacturing-assignment/service.cjs:1:305388)
+      at it (/tmp/codi-cad-generic-manufacturing-preparation-20261107/.build/generic-manufacturing-assignment/service.cjs:1:306447)
+      at Object.inspectGenericManufacturingParts (actual-projectManagerBundle.ts:346:91)
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:6:321
+      at use (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:3:71)
+      at TestContext.<anonymous> (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:6:131)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+
+test at test/generic-manufacturing-assignment/readiness.test.mjs:6:53
+✖ initial stable assembly is availability, not lifetime cancellation (112.264322ms)
+  AbortError: Manufacturing body selection changed.
+      at new DOMException (node:internal/per_context/domexception:76:18)
+      at w (/tmp/codi-cad-generic-manufacturing-preparation-20261107/.build/generic-manufacturing-assignment/service.cjs:1:305388)
+      at it (/tmp/codi-cad-generic-manufacturing-preparation-20261107/.build/generic-manufacturing-assignment/service.cjs:1:306447)
+      at Object.inspectGenericManufacturingParts (actual-projectManagerBundle.ts:346:91)
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:6:321
+      at use (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:3:71)
+      at TestContext.<anonymous> (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:6:131)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+
+test at test/generic-manufacturing-assignment/readiness.test.mjs:6:53
+✖ initial stable unbound-host is availability, not lifetime cancellation (124.748928ms)
+  AbortError: Manufacturing body selection changed.
+      at new DOMException (node:internal/per_context/domexception:76:18)
+      at w (/tmp/codi-cad-generic-manufacturing-preparation-20261107/.build/generic-manufacturing-assignment/service.cjs:1:305388)
+      at it (/tmp/codi-cad-generic-manufacturing-preparation-20261107/.build/generic-manufacturing-assignment/service.cjs:1:306447)
+      at Object.inspectGenericManufacturingParts (actual-projectManagerBundle.ts:346:91)
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:6:321
+      at use (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:3:71)
+      at TestContext.<anonymous> (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/generic-manufacturing-assignment/readiness.test.mjs:6:131)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)

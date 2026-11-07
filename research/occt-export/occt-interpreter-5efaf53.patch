@@ -1,0 +1,74 @@
+diff --git a/shape-io/main.cpp b/shape-io/main.cpp
+index db506cf62..93932519b 100644
+--- a/shape-io/main.cpp
++++ b/shape-io/main.cpp
+@@ -1,4 +1,10 @@
+ #include <iostream>
++#include <iomanip>
++#include <sstream>
++#include <locale>
++#include <limits>
++#include <cmath>
++#include <BRepBuilderAPI_Copy.hxx>
+ 
+ #include <emscripten.h>
+ #include <DBRep.hxx>
+@@ -33,6 +39,58 @@ extern "C" {
+     }
+   }
+ 
++  // Research-only prototype. Returned JSON is per-face triangle soup: do not
++  // treat it as a welded or manufacturing-validated mesh. The caller owns the
++  // live pointer and must keep it valid; no output is published on failure.
++  EMSCRIPTEN_KEEPALIVE
++  int ExportTessellationCopy(int shapePtr, double deflection) {
++    if (!shapePtr || !std::isfinite(deflection) || deflection < 0.0001 || deflection > 100.0) return 1;
++    try {
++      const TopoDS_Shape* source = reinterpret_cast<const TopoDS_Shape*>(shapePtr);
++      if (source->IsNull()) return 2;
++      // Copy geometry and topology, but not triangulation. Clean/mesh only the
++      // copy: OCCT shapes otherwise share mutable TShape triangulation caches.
++      BRepBuilderAPI_Copy copier(*source, Standard_True, Standard_False);
++      if (!copier.IsDone()) return 3;
++      TopoDS_Shape shape = copier.Shape();
++      BRepMesh_IncrementalMesh mesher(shape, deflection);
++      if (!mesher.IsDone()) return 4;
++      std::ostringstream out;
++      out.imbue(std::locale::classic());
++      out << std::setprecision(std::numeric_limits<double>::max_digits10);
++      out << "{\"deflection\":" << deflection << ",\"triangles\":[";
++      bool first=true;
++      unsigned int triangleCount=0, faceCount=0;
++      for (TopExp_Explorer ex(shape,TopAbs_FACE);ex.More();ex.Next()) {
++        if (++faceCount > 10000) return 5;
++        const TopoDS_Face face=TopoDS::Face(ex.Current());
++        TopLoc_Location loc;
++        const Handle(Poly_Triangulation) mesh=BRep_Tool::Triangulation(face,loc);
++        if (mesh.IsNull()) return 6;
++        for (Standard_Integer i=1;i<=mesh->NbTriangles();i++) {
++          if (++triangleCount > 250000) return 5;
++          Standard_Integer a,b,c; mesh->Triangle(i).Get(a,b,c);
++          if(face.Orientation()==TopAbs_REVERSED) std::swap(b,c);
++          if(a<1||b<1||c<1||a>mesh->NbNodes()||b>mesh->NbNodes()||c>mesh->NbNodes()) return 7;
++          const gp_Pnt points[3]={mesh->Node(a).Transformed(loc),mesh->Node(b).Transformed(loc),mesh->Node(c).Transformed(loc)};
++          if (!first) out << ','; first=false; out << '[';
++          for(int p=0;p<3;p++) {
++            const gp_Pnt& v=points[p];
++            if(!std::isfinite(v.X())||!std::isfinite(v.Y())||!std::isfinite(v.Z())) return 7;
++            if(p) out << ','; out << '[' << v.X() << ',' << v.Y() << ',' << v.Z() << ']';
++          }
++          out << ']';
++        }
++      }
++      if (!faceCount || !triangleCount) return 6;
++      out << "]}";
++      const std::string result=out.str();
++      EM_ASM_({ __OCI_EXCHANGE(UTF8ToString($0)); }, result.c_str());
++      return 0;
++    } catch (Standard_Failure const&) { return 8; }
++      catch (std::exception const&) { return 8; }
++  }
++
+   EMSCRIPTEN_KEEPALIVE
+   void GetProductionHistory() {
+     io::DATA out = io::productionHistoryWrite();

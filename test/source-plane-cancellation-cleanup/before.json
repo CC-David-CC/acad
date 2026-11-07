@@ -1,0 +1,34 @@
+{
+  "status": "CONFIRMED_SYNTHETIC_SERVICE_CONTRACT_DEFECTS",
+  "sourceSha256": "8661a3d6b57ef956930631505f67771019f878a1c99eef68ecc508325a31267f",
+  "rows": [
+    {
+      "case": "true signal add override",
+      "priorProjectListenerLeaked": true,
+      "workersDispatched": 0
+    },
+    {
+      "case": "true signal remove override on no-op",
+      "ordinaryReceiptReplaced": true
+    },
+    {
+      "case": "ordinary primary error",
+      "primaryReplaced": true,
+      "preparedWorkspaceNotDiscarded": true,
+      "realSourceWorkerPreparation": true,
+      "nativePublication": false
+    },
+    {
+      "case": "committed-marked primary error",
+      "primaryReplaced": true,
+      "preparedWorkspaceNotDiscarded": true,
+      "realSourceWorkerPreparation": true,
+      "nativePublication": false
+    }
+  ],
+  "workers": {
+    "started": 6,
+    "terminated": 6
+  },
+  "scope": "Actual plane/source/production Workers; controlled error-only submit, no native success/public incident"
+}

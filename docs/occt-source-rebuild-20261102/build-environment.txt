@@ -1,0 +1,8 @@
+upstream_source=5efaf53accb45bac475155fc4d5552642c19e91e
+upstream_tree=f820351dd52207a3ad757bdeaf5510f7b4ae01fc
+emsdk_source=d7b4130688bfa348392b921ab04015aa15c4f154
+emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 2.0.30 (f782b50a7f8dded7cd0e2c7ee4fed41ab743f5c0)
+v24.19.0
+cmake version 3.28.3
+Python 3.12.3
+Linux dflanag3-PowerEdge-R730xd 7.0.0-38-generic #38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2 x86_64 x86_64 x86_64 GNU/Linux

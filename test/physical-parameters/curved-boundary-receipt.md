@@ -1,0 +1,7 @@
+# Curved boundary Worker control
+
+Research checkpoint based on db82b0d91. The data-only policy accepts bounded analytic circle/arc boundary records and indexes their generated parent and point identities. Referenced prior curves must remain exactly the same analytic source; changed, missing or reversed referenced curves refuse. Unreferenced valid changes may pass. Post-solve checks verify generated fixed centers, endpoints, radii and arc angles. NURBS boundaries, multiple stages and authored generators remain explicitly unsupported. The circle generator now supplies its radius and ID in the correct constructor positions.
+
+`node --test test/physical-parameters/curved-boundary-policy.test.mjs` passed two focused tests; `tsc --noEmit` passed. With `CODI_EMBED_NUMERIC=1`, `build/webpack.headless-sketch-worker.cjs` built the Worker (SHA-256 `297d8a7c2f8b48f22d5732fb51ee76c18186534c2efb8e15f9715da0c7fa1131`). `curved-boundary-worker-browser.test.cjs` passed against the actual Worker and real solver in Chromium under the fixture's strict CSP. It covers circle/arc generated reference identities, post-solve fixed geometry, and changed/missing/invalid refusal. Inputs are constructed analytic boundary records, not a native face, signed UI save or full-app qualification.
+
+The next separate compatibility step needs explicit per-stage and generator provenance and bounded validation against actual carried sketches. Relaxing the current single-stage or generator refusal without that work would not validate regeneration or fixed references.

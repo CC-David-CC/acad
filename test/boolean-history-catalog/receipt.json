@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "scope": "Catalog metadata and TypeScript contracts only; no geometry/runtime/public authoring execution",
+  "baseCommit": "7453702eaa62f76cb34e61d0743f97272dabb426",
+  "node": "24.22.1",
+  "typescript": "4.7.4",
+  "catalogTests": {
+    "newPassed": 6,
+    "existingPassed": 2,
+    "failed": 0
+  },
+  "strictTypecheck": {
+    "exitCode": 0,
+    "flags": [
+      "--noEmit",
+      "--strict",
+      "--exactOptionalPropertyTypes",
+      "--skipLibCheck",
+      "--target",
+      "ES2022",
+      "--module",
+      "NodeNext",
+      "--moduleResolution",
+      "NodeNext"
+    ]
+  },
+  "sha256": {
+    "modules/engine/mount/engineCatalog.mjs": "4d5f6aac432a480ae76bd5061106ee80578eec7e2c02e9f10fbc146d496cc446",
+    "modules/engine/solid/SolidKernel.ts": "6f1f9b625a94ca7e008362c7d7950f2f893fa579c43e069916220a5bab541546",
+    "test/boolean-history-catalog/catalog.test.mjs": "0c0a812ebfc66555208a9ab3ce3e02e1500bee1b88629f48ef7889a4f299f1ec",
+    "test/boolean-history-catalog/contracts.mts": "535bb42b4453b860575252fa6709142986812ac0aabb06d4151807201a619ec8"
+  }
+}

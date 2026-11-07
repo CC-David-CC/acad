@@ -1,0 +1,60 @@
+{
+  "upstreamBase": "31afd71d17c7a94cfaeada83f657d7b42628ead6",
+  "jsSha256": "cd2031fd75cbbc812b550dd228f95b9fd666ae4da6557f840e3d3ed4cbed268b",
+  "wasmSha256": "636b7dc8e03a31a355ce5d7ec5a2bf3bb449eb7ea1c0aba5819bfb467d46ca0f",
+  "scope": "Experimental diagnostics only; application runtime unchanged",
+  "version": 1,
+  "nativeProductFiles": [
+    "include/manifold/manifold.h",
+    "src/manifold.cpp",
+    "bindings/wasm/bindings.cpp"
+  ],
+  "sources": {
+    "include/manifold/manifold.h": "18da4a0f9752a642cb368ddc09528e86ca74d2d5c929ebed954a90e824190841",
+    "src/manifold.cpp": "fc072aae6e289718cc79bff0fe0d75b548baa58c2d910d98c1c1a23c4f8fbe48",
+    "bindings/wasm/bindings.cpp": "5e1200039beeb4f34f155ee5d51ee7a898e73e3e4662006eb21dbad6485aea0d",
+    "src/properties.cpp": "189acbed3ae9b81de5c7ac82a93580f934745a1b3de1d15f85a6d01db7c7a5cb",
+    "src/impl.h": "ac3685dd1882c6c409705c9dcdad7e682367670fbbeb7955db6da03f8e02ca67",
+    "research/join-diagnostics-v1/build.sh": "f444361463272be93fc3f85fec9d11890e87888cc5591b51c0306dd409386727",
+    "research/join-diagnostics-v1/probe.mjs": "e50316d2e153b0094d182bd8cf24693c71a641463f37c5d69a42134b47f7a05a",
+    "research/join-diagnostics-v1/same-boundary.mjs": "cb2ba8251772a9be65506e0e526732983a586fce3ded74e0cc6f96c64fcd9aff",
+    "research/join-diagnostics-v1/preservation.cpp": "820a74ecc54e451244a62d4136aef2bf61a930abad046c7765b547c524da76ff",
+    "research/join-diagnostics-v1/run-preservation.sh": "270dc745d8e8a05390878dff9881d000e94f395aa3661178691aacf0cab204ce",
+    "research/join-diagnostics-v1/check.mjs": "501b7e6334a37a8ffaa64563906b5424271750ee1460e30afb47ac6680047a6a"
+  },
+  "sourceHeadAtBuild": "31afd71d17c7a94cfaeada83f657d7b42628ead6",
+  "buildHasExplicitUncommittedAdditiveSource": true,
+  "clipper2Commit": "46f639177fe418f9689e8ddb74f08a870c71f5b4",
+  "compiler": "emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 5.0.2 (dc80f645ee70178c11666de0c3860d9e064d50e4)\nCopyright (C) 2026 the Emscripten authors (see AUTHORS.txt)\nThis is free and open source software under the MIT license.\nThere is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "artifacts": {
+    "bindings/wasm/manifold.js": {
+      "sha256": "cd2031fd75cbbc812b550dd228f95b9fd666ae4da6557f840e3d3ed4cbed268b",
+      "bytes": 79045
+    },
+    "bindings/wasm/manifold.wasm": {
+      "sha256": "636b7dc8e03a31a355ce5d7ec5a2bf3bb449eb7ea1c0aba5819bfb467d46ca0f",
+      "bytes": 499725
+    },
+    "src/libmanifold.a": {
+      "sha256": "02fb30113c9ec3d51a395a884ad5ea662b8b7edaf913b2dd9640721d79aba504",
+      "bytes": 1280208
+    },
+    "_deps/clipper2-build/libClipper2.a": {
+      "sha256": "8c48700013cbcfc952c7de9542c3741237fe26ecbc91c8b3788d757dcc771a7c",
+      "bytes": 282980
+    },
+    "preservation.cjs": {
+      "sha256": "1eb42b662b793cbc0aa21c05cb3b47ef257f2fb8ae8dc5e85361d9b9ab891083",
+      "bytes": 116659
+    },
+    "preservation.wasm": {
+      "sha256": "cbfa39afc85044392080d8b02452156d221ce5e37568171e25428e76e8c43ffa",
+      "bytes": 411084
+    }
+  },
+  "buildMetadata": {
+    "sources-before.sha256": "5a4a47130b1843f9d136a73fdeaac2388c22034f38ad8e2d51b8fd6352335a8f",
+    "CMakeCache.txt": "49947388b93d60d619320a406562bb160ed5b7bbf06879e906a1042b0661c12b",
+    "probe-archives.sha256": "3dde0b290821cad1dc51e21e4a012681e5418063bbf8723c51ab4ea7476a9774"
+  }
+}

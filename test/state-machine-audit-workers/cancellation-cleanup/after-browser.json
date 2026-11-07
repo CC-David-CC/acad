@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "scope": "Chromium native signals including genuine distinct iframe realm; transport/error-only; no native geometry",
+  "browser": "Chrome/155.0.8059.79",
+  "controllerSha256": "0ff0c9ace898893f687a12e9f92ee16082062524ac92d3aa60bfb2e5d9802587",
+  "rows": [
+    {
+      "case": "ordinary native abort",
+      "foreign": false,
+      "code": "CANCELLED"
+    },
+    {
+      "case": "overridden native add",
+      "foreign": false,
+      "code": "ENGINE_FAILURE",
+      "noJobPosted": true
+    },
+    {
+      "case": "overridden native remove",
+      "foreign": false,
+      "code": "MEASUREMENT_PRECISION_UNRESOLVED",
+      "cleanupExact": true
+    },
+    {
+      "case": "ordinary native abort",
+      "foreign": true,
+      "code": "CANCELLED"
+    },
+    {
+      "case": "overridden native add",
+      "foreign": true,
+      "code": "ENGINE_FAILURE",
+      "noJobPosted": true
+    },
+    {
+      "case": "overridden native remove",
+      "foreign": true,
+      "code": "MEASUREMENT_PRECISION_UNRESOLVED",
+      "cleanupExact": true
+    }
+  ],
+  "ownedContextClosed": true
+}

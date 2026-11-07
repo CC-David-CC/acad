@@ -1,0 +1,119 @@
+{
+  "source": "CAD a548e2da0; authored-box empty preflight only; lifetime/evidence followup",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'",
+  "fixture": "http://127.0.0.1:20551/static/index.html",
+  "engines": [
+    {
+      "slot": "smlib",
+      "engine": "smlib-wasm",
+      "representation": "smlib-brep-worker-owned",
+      "unit": "millimeter",
+      "rows": [
+        {
+          "id": "box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "offset-fractional-box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-common",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-subtract",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "touch-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-common",
+          "status": "unsupported",
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "lifetime": "candidate-closed"
+        },
+        {
+          "id": "coincident-subtract",
+          "status": "unsupported",
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "lifetime": "candidate-closed"
+        },
+        {
+          "id": "foreign-mount",
+          "status": "pass"
+        },
+        {
+          "id": "unit-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "negative-dimension-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "unsupported-operation",
+          "status": "pass"
+        },
+        {
+          "id": "pre-aborted-operation",
+          "status": "pass"
+        },
+        {
+          "id": "disposed-handle",
+          "status": "pass"
+        },
+        {
+          "id": "lifetime-budget",
+          "status": "pass"
+        },
+        {
+          "id": "closed-mount-after-lifetime-budget",
+          "status": "pass"
+        }
+      ],
+      "scope": "Numerical/caller-boundary controls only; no history/native/in-flight-cancellation/stale-response proof"
+    }
+  ],
+  "modules": [
+    {
+      "url": "/static/smlibMount.mjs",
+      "sha256": "385eeb8accf7e84bf090bc5cc1b14fc6bff992776cdafb74b6c4c649e8d05fb9"
+    },
+    {
+      "url": "/static/smlib-worker.js",
+      "sha256": "078dc881c488e82fff16cfdcdaef077c107a61e8b7ab45e522f32f7509f403ed"
+    },
+    {
+      "url": "/static/smlib.wasm",
+      "sha256": "a48a3283760c21337881c5e2d5c973dbc62cf95cae46d1c012effd75389eb1ae"
+    },
+    {
+      "url": "/static/__three_engine_tests__/matrix.mjs",
+      "sha256": "373f596a7e17f52b14a32695448a26da08e3b6bb7e6fefe6e58c79213d485ba6"
+    },
+    {
+      "url": "/static/__three_engine_tests__/cases.mjs",
+      "sha256": "51cf6af59deb376dcf6fb1f54f03f2de5090c01a9323a7e293f542901c153e1b"
+    }
+  ],
+  "qualifiedAllNumericCases": false,
+  "scope": "Actual supplied Worker/kernel numerical and caller-boundary controls. History/native/agent/in-flight-stale controls remain separate."
+}

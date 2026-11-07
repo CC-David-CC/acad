@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "newGroups": [
+    {
+      "name": "genuine one-source v1 edge-fillet",
+      "scope": "recorded genuine native edge operation; fixture-local arithmetic IDs, no new native/public execution",
+      "status": "PASS",
+      "data": {
+        "actualSources": 1,
+        "retainedRawDeleted": 7,
+        "resolvedEdges": 11
+      }
+    },
+    {
+      "name": "genuine one-source v1 edge-chamfer",
+      "scope": "recorded genuine native edge operation; fixture-local arithmetic IDs, no new native/public execution",
+      "status": "PASS",
+      "data": {
+        "actualSources": 1,
+        "retainedRawDeleted": 7,
+        "resolvedEdges": 11
+      }
+    },
+    {
+      "name": "genuine one-source v1 edge-sequential",
+      "scope": "recorded genuine native edge operation; fixture-local arithmetic IDs, no new native/public execution",
+      "status": "PASS",
+      "data": {
+        "actualSources": 1,
+        "retainedRawDeleted": 10,
+        "resolvedEdges": 14
+      }
+    },
+    {
+      "name": "genuine one-source v1 healthy-after-refusals",
+      "scope": "recorded genuine native edge operation; fixture-local arithmetic IDs, no new native/public execution",
+      "status": "PASS",
+      "data": {
+        "actualSources": 1,
+        "retainedRawDeleted": 7,
+        "resolvedEdges": 11
+      }
+    },
+    {
+      "name": "one source v2 retains all kinds and generated cross-kind evidence without inheritance",
+      "scope": "synthetic one-source v2 metadata control, not native geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "one source split/merge/dedup/deleted evidence follows the unchanged invariant",
+      "scope": "synthetic one-source v2 metadata control, not native geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "zero/three/sparse/malformed source lists reject; Boolean never accepts one",
+      "scope": "synthetic one-source v2 metadata control, not native geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "one-source capture refuses getters without access and remains detached/frozen",
+      "scope": "synthetic one-source v2 metadata control, not native geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "single capture has the same exact UTF8 input/returned budgets without dummy-source overhead",
+      "scope": "synthetic one-source v2 metadata control, not native geometry",
+      "status": "PASS",
+      "data": {
+        "actualSources": 1,
+        "capturedBytes": 524288,
+        "returnedBytes": 509461
+      }
+    },
+    {
+      "name": "two-source API parity on all actual recorded Boolean successes",
+      "scope": "recorded genuine native v2 histories; fixture-local arithmetic labels",
+      "status": "PASS",
+      "data": {
+        "actualTwoSourceCases": 69
+      }
+    }
+  ],
+  "retainedBoolean18": "PASS",
+  "retainedActual69": "PASS"
+}

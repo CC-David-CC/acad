@@ -1,0 +1,17 @@
+{
+  "status": "PASS twelve scoped public edge cases plus independent native/control evidence check",
+  "cadSource": "a0b363bce15e8533be17c9332b46a7e51ddeea5d",
+  "fixture": "http://127.0.0.1:20682/",
+  "browserReceiptSHA256": "fce6032402efdeb92594b8daca10fe6f4b1c7781200d4bc7b1a65cc59a5b80d2",
+  "cases": 12,
+  "supportedNativeControl": "three nested circle regions, measured volumes/bounds/validity, explicit native JS/WASM binding",
+  "files": {
+    "README.md": "148315e49b4ace27862a0302fde28092b4af6b8222e493f8ad4aa96533945990",
+    "browser.cjs": "7fdfe8a19b9c4d2ae09ec0cb689265c417f0e3b0dc56ddb76ea5de5af354e97f",
+    "check-receipt.py": "f9f6380d022cfa21853d82ed05e5fceafa750b551005efc5b2176b01c867e59d",
+    "evidence/browser.log": "5c2bcee014f8a840727a4bc58bdc881ca5742645a20f886f70d93f0deb8058c3",
+    "evidence/independent-check.log": "677119e4def60a91d2a2231af4ea259787a73e99bf84fbb20acc0b40e6896a6f",
+    "receipt.json": "fce6032402efdeb92594b8daca10fe6f4b1c7781200d4bc7b1a65cc59a5b80d2",
+    "runtime-pins.json": "ce9d774858d306715012809d2b0514d3f14f8b1247c7205d32cda76a2294df2e"
+  }
+}

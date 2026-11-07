@@ -1,0 +1,77 @@
+{
+  "scope": "Recorded genuine native component observations, not new Native execution or public authored models",
+  "nativeSource": "0e429519e97a29e991ec4aa42b5ea6ddab24ddbb",
+  "nativeProofTip": "c15e49dfbb5bb5fcf7b5c81e7c63724c81807ae0",
+  "originalReceiptSha256": "7c45b5a977f90a153358632e9757504bb6a3bb2779bdbcad04c21ce19ab41653",
+  "rows": [
+    {
+      "label": "box",
+      "begin": {
+        "version": 1,
+        "op": "manufacturing.mesh.begin",
+        "unit": "millimeter",
+        "format": "owned-manufacturing-mesh-v1",
+        "resourceId": 1,
+        "byteLength": 368,
+        "vertexCount": 8,
+        "triangleCount": 12,
+        "positionsOffset": 32,
+        "indicesOffset": 224,
+        "linearDeflectionMm": 0.01,
+        "angularDeflectionRadians": 0.1,
+        "relative": false,
+        "maxChunkBytes": 65536,
+        "correspondence": "native-topology-parameters-v1",
+        "maxBoundaryDiscrepancyMm": 0,
+        "sourcePreserved": true
+      },
+      "sha256": "95e37bfc069c17a1e00ecb574282fb71afb6a0d788a466e9c672dc10c6de1e6f"
+    },
+    {
+      "label": "annulus",
+      "begin": {
+        "version": 1,
+        "op": "manufacturing.mesh.begin",
+        "unit": "millimeter",
+        "format": "owned-manufacturing-mesh-v1",
+        "resourceId": 3,
+        "byteLength": 24224,
+        "vertexCount": 504,
+        "triangleCount": 1008,
+        "positionsOffset": 32,
+        "indicesOffset": 12128,
+        "linearDeflectionMm": 0.01,
+        "angularDeflectionRadians": 0.1,
+        "relative": false,
+        "maxChunkBytes": 65536,
+        "correspondence": "native-topology-parameters-v1",
+        "maxBoundaryDiscrepancyMm": 0,
+        "sourcePreserved": true
+      },
+      "sha256": "7124cc158f005a9e57cfce54ea9bc7f1ac6e668d2926be0b206ba9469481d21e"
+    },
+    {
+      "label": "cavity",
+      "begin": {
+        "version": 1,
+        "op": "manufacturing.mesh.begin",
+        "unit": "millimeter",
+        "format": "owned-manufacturing-mesh-v1",
+        "resourceId": 13,
+        "byteLength": 704,
+        "vertexCount": 16,
+        "triangleCount": 24,
+        "positionsOffset": 32,
+        "indicesOffset": 416,
+        "linearDeflectionMm": 0.01,
+        "angularDeflectionRadians": 0.1,
+        "relative": false,
+        "maxChunkBytes": 65536,
+        "correspondence": "native-topology-parameters-v1",
+        "maxBoundaryDiscrepancyMm": 0,
+        "sourcePreserved": true
+      },
+      "sha256": "77d6df5022a24d5918daad8e0ad3e6e99f781bff045e5ed9ad385ef2ee959e04"
+    }
+  ]
+}

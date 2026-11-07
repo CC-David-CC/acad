@@ -1,0 +1,95 @@
+{
+  "scope": "single bounded actual Chromium run per candidate; not a general latency or memory guarantee",
+  "observations": {
+    "before147": {
+      "bytes": 1037419,
+      "rows": [
+        {
+          "inspectMs": 7.799999952316284,
+          "invokeMs": 16
+        },
+        {
+          "inspectMs": 5.599999904632568,
+          "invokeMs": 13.900000095367432
+        },
+        {
+          "inspectMs": 5.400000095367432,
+          "invokeMs": 15
+        },
+        {
+          "inspectMs": 5.799999952316284,
+          "invokeMs": 17.300000190734863
+        },
+        {
+          "inspectMs": 6.099999904632568,
+          "invokeMs": 14.600000143051147
+        }
+      ],
+      "undoChanged": true,
+      "redoExact": true,
+      "longTasks": [
+        52
+      ],
+      "maxHeartbeat": 59.40000009536743,
+      "heapBefore": 114639804,
+      "heapAfter": 135270327,
+      "retainedBytes": 8304560,
+      "entries": 2,
+      "kinds": [
+        "snapshot",
+        "snapshot"
+      ],
+      "labelPaint": {
+        "maxMeasured": 512,
+        "maxPainted": 512,
+        "previewCalls": 72
+      },
+      "nativeReopen": true,
+      "historyReleased": true
+    },
+    "after2ad": {
+      "bytes": 1037419,
+      "rows": [
+        {
+          "inspectMs": 6.900000095367432,
+          "invokeMs": 17.399999856948853
+        },
+        {
+          "inspectMs": 5.200000047683716,
+          "invokeMs": 12.599999904632568
+        },
+        {
+          "inspectMs": 5.099999904632568,
+          "invokeMs": 14.099999904632568
+        },
+        {
+          "inspectMs": 5.699999809265137,
+          "invokeMs": 16.90000009536743
+        },
+        {
+          "inspectMs": 5.5,
+          "invokeMs": 14
+        }
+      ],
+      "undoChanged": true,
+      "redoExact": true,
+      "longTasks": [],
+      "maxHeartbeat": 42.19999980926514,
+      "heapBefore": 114623837,
+      "heapAfter": 135218452,
+      "retainedBytes": 8304560,
+      "entries": 2,
+      "kinds": [
+        "snapshot",
+        "snapshot"
+      ],
+      "labelPaint": {
+        "maxMeasured": 512,
+        "maxPainted": 512,
+        "previewCalls": 72
+      },
+      "nativeReopen": true,
+      "historyReleased": true
+    }
+  }
+}

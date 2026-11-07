@@ -1,0 +1,108 @@
+// Authoritative engine identity vocabulary for authored operations. Runtime
+// handles and render meshes never belong in this catalogue or saved intent.
+// Capability detail comes from the selected, verified mount's descriptor.
+function engine(spec,jsSha256,wasmSha256){return Object.freeze({...spec,
+ revision:'sha256:'+jsSha256+':'+wasmSha256,
+ runtimeAssets:Object.freeze({jsSha256,wasmSha256})});}
+export const CAD_ENGINES=Object.freeze({
+ occ:engine({id:'occ',name:'OpenCascade',mountEngine:'occ-oci-verified-runtime-research',representation:'occ-brep-worker-owned',family:'brep'},'a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884','07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e'),
+ manifold:engine({id:'manifold',name:'Native Mesh / Manifold',mountEngine:'manifold-mesh-verified-runtime-research',representation:'manifold-mesh-worker-owned',family:'mesh'},'cd2031fd75cbbc812b550dd228f95b9fd666ae4da6557f840e3d3ed4cbed268b','7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d'),
+ smlib:engine({id:'smlib',name:'SMLib',mountEngine:'smlib-wasm',representation:'smlib-brep-worker-owned',family:'brep'},'8e49622c97d839cf94d6c4d5e2de6cbd96d1166075741e08dcbda3b1a223d8fa','f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa')
+});
+// Production selection follows the correctness/performance/export corpus.
+// SMLib stays experimental; primitive passes alone do not promote a default.
+export const DEFAULT_CAD_ENGINE='occ';
+// Registered build identities are separate from the preference for a new part.
+// Persist the selected revision; never substitute it for an existing operation.
+export const OCC_SELECTED_PROFILE_BUILD=engine({id:'occ',name:'OpenCascade selected profiles',mountEngine:'occ-selected-profile-v2-component',representation:'occ-brep-worker-owned',family:'brep'},'cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9','a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637');
+export const OCC_POLYGON_PROFILE_BUILD=engine({id:'occ',name:'OpenCascade polygon profiles',mountEngine:'occ-polygon-profile-v3-component',representation:'occ-brep-worker-owned',family:'brep',selectedProfileVersion:3},'5414a24c96eff09b77f7d3fe758287c9696e63127c91e73011f6f2939de2a8eb','534ffdd2d88632a7878d654742f2df72c16691f3c814085e4f525efc74961e19');
+export const OCC_MECHANICAL_PROFILE_BUILD=engine({id:'occ',name:'OpenCascade mechanical profiles',mountEngine:'occ-mechanical-profile-v1-component',representation:'occ-brep-worker-owned',family:'brep',selectedProfileVersion:3,edgeTreatmentVersion:1},'b3d91cbb02f90ba56732039283d787b92eda97c51091fafbd933ecf4db30dd97','28e8e2c2752cef100a98e24ec487f7d90021edb98fb060fdd1160fe63501bbe2');
+export const OCC_BOOLEAN_HISTORY_BUILD=engine({id:'occ',name:'OpenCascade Boolean history',mountEngine:'occ-boolean-history-v1-component',representation:'occ-brep-worker-owned',family:'brep',selectedProfileVersion:3,edgeTreatmentVersion:1,booleanHistoryVersion:1,selectionPlanVersion:2,throughHoleVersion:1,linearHolePatternVersion:1},'dd666902fe926d69cc3c8843f5568c2a3e569f38ff49291baa2f248165b5ea99','8d5e537e0d7f9e12b8ae0eaf239c0be1080934ed12a24bf6e7f849c9135ed5a2');
+// Explicit experimental revision only. Existing/default parts retain their pin.
+export const OCC_REVOLVE_PROFILE_BUILD=engine({id:'occ',name:'OpenCascade owned revolve (experimental)',mountEngine:'occ-revolve-profile-v1-component',representation:'occ-brep-worker-owned',family:'brep',selectedProfileVersion:3,edgeTreatmentVersion:1,booleanHistoryVersion:1,selectionPlanVersion:2,throughHoleVersion:1,linearHolePatternVersion:1,revolveVersion:1,experimental:true},'567419c13c78fff46cbc9cd07e5a993106b652a13cb9f6944831f68ef48729cc','ad9475c81ea2eecadd41c73f0b0860d7d06c53e4292b16047472f03995f3efdd');
+// Explicit experimental sweep revision; inherited capabilities use this same build.
+export const OCC_SWEEP_PROFILE_BUILD=engine({id:'occ',name:'OpenCascade owned sweep (experimental)',mountEngine:'occ-sweep-profile-v1-component',representation:'occ-brep-worker-owned',family:'brep',selectedProfileVersion:3,edgeTreatmentVersion:1,booleanHistoryVersion:1,selectionPlanVersion:2,throughHoleVersion:1,linearHolePatternVersion:1,revolveVersion:1,sweepVersion:1,pointObservationVersion:1,experimental:true},'a9cfa6e53a8bc14f2fb035e33afd1a82d9ae36ace1cf9f66169c739d2de72580','e105bdfe7c7bcb113eee5398d8202831cb8e8b1608dcc1730fc4461c9f24263d');
+// Explicit experimental loft revision. Saved parts never switch implicitly.
+export const OCC_LOFT_PROFILE_BUILD=engine({id:'occ',name:'OpenCascade owned loft (experimental)',mountEngine:'occ-loft-profile-v1-component',representation:'occ-brep-worker-owned',family:'brep',selectedProfileVersion:3,edgeTreatmentVersion:1,booleanHistoryVersion:1,selectionPlanVersion:2,throughHoleVersion:1,linearHolePatternVersion:1,revolveVersion:1,sweepVersion:1,loftVersion:1,pointObservationVersion:1,experimental:true},'5ce2aa94ecdd48dc16f0b9c3ad2a065ea1416ddb7d123c3168661e31ade0a1b5','b18af4376fb0fb8b4aaa7478ede6b47346c331ee45e1198347c0a70232fd4180');
+// Separately selected adaptive reporting cohort; no saved revision substitution.
+export const OCC_ADAPTIVE_METROLOGY_BUILD=engine({id:'occ',name:'OpenCascade adaptive metrology (experimental)',mountEngine:'occ-adaptive-metrology-v1-component',representation:'occ-brep-worker-owned',family:'brep',selectedProfileVersion:3,edgeTreatmentVersion:1,booleanHistoryVersion:1,selectionPlanVersion:2,throughHoleVersion:1,linearHolePatternVersion:1,revolveVersion:1,sweepVersion:1,loftVersion:1,adaptiveMetrologyVersion:1,pointObservationVersion:1,experimental:true},'ed06b634a3e81f9a51c89f75b3d65e03b8ace1fc483900ea2858eae8eff970a4','bc8895ceb123e33aad68c8a1cf6322b5c0ccef9bfb129207defe1b8a5a7c893a');
+// Separate native derivative-export capability; saved revisions never migrate implicitly.
+export const OCC_STEP_EXPORT_BUILD=engine({id:'occ',name:'OpenCascade owned STEP export (experimental)',mountEngine:'occ-step-export-v1-component',representation:'occ-brep-worker-owned',family:'brep',selectedProfileVersion:3,edgeTreatmentVersion:1,booleanHistoryVersion:1,selectionPlanVersion:2,throughHoleVersion:1,linearHolePatternVersion:1,revolveVersion:1,sweepVersion:1,loftVersion:1,adaptiveMetrologyVersion:1,stepExportVersion:1,pointObservationVersion:1,experimental:true},'ca349411fc9e27677bf27072497abb22077d80c28e27ef073266966d16b07733','c154a4e04961a9a50108fadcf72eca54169ba4db2e9564d24519f197e0568c2f');
+// Explicit controlled-mesh cohort; known identity is not installed availability.
+export const OCC_MANUFACTURING_MESH_BUILD=engine({id:'occ',name:'OpenCascade controlled manufacturing mesh (experimental)',mountEngine:'occ-manufacturing-mesh-v1-component',representation:'occ-brep-worker-owned',family:'brep',selectedProfileVersion:3,edgeTreatmentVersion:1,booleanHistoryVersion:1,selectionPlanVersion:2,throughHoleVersion:1,linearHolePatternVersion:1,revolveVersion:1,sweepVersion:1,loftVersion:1,adaptiveMetrologyVersion:1,stepExportVersion:1,orthographicReadVersion:1,manufacturingMeshVersion:1,drawingReferenceVersion:1,pointObservationVersion:1,experimental:true},'32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08','abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc');
+
+// Explicit shell cohort; availability belongs to the compiled asset graph.
+export const OCC_SHELL_BUILD=engine({id:'occ',name:'OpenCascade owned shell (experimental)',mountEngine:'occ-shell-v1-component',representation:'occ-brep-worker-owned',family:'brep',selectedProfileVersion:3,edgeTreatmentVersion:1,booleanHistoryVersion:1,selectionPlanVersion:2,throughHoleVersion:1,linearHolePatternVersion:1,revolveVersion:1,sweepVersion:1,loftVersion:1,adaptiveMetrologyVersion:1,stepExportVersion:1,orthographicReadVersion:1,manufacturingMeshVersion:1,drawingReferenceVersion:1,pointObservationVersion:1,shellVersion:1,boxConstructionVersion:1,experimental:true},'57b74074e0a249b917ac68357fbd003c37d1ab61897206886b575088e6995858','60dc956b08e01f43d08a48035a384e478e63bb34fb55f21a152c8cd12e8b8947');
+
+const data=(value,key)=>{const d=value&&typeof value==='object'?Object.getOwnPropertyDescriptor(value,key):null;return d?.enumerable&&Object.hasOwn(d,'value')?d.value:undefined;};
+function throughHoleBinding(op){
+ if(data(op,'id')!=='solid.holes.through'||data(op,'version')!==1||data(op,'source')!=='selected-rectangle'||data(op,'termination')!=='through-all')return false;
+ const kinds=data(op,'kinds'),cost=data(op,'nativeResultCost');
+ if(!Array.isArray(kinds)||kinds.length!==2||Reflect.ownKeys(kinds).length!==3)return false;
+ const values=[data(kinds,'0'),data(kinds,'1')];
+ return new Set(values).size===2&&values.includes('centered-through')&&values.includes('four-corner-through')&&!!cost&&typeof cost==='object'&&!Array.isArray(cost)&&[null,Object.prototype].includes(Object.getPrototypeOf(cost))&&Reflect.ownKeys(cost).length===2&&data(cost,'centered-through')===2&&data(cost,'four-corner-through')===8;
+}
+const fail=(code,message)=>{throw Object.assign(new Error(message),{code});};
+export function requireCadEngine(id){
+ if(typeof id!=='string'||!Object.hasOwn(CAD_ENGINES,id))fail('UNSUPPORTED_ENGINE','Select a registered CAD engine.');
+ return CAD_ENGINES[id];
+}
+// New OCC box parts use the same native-evidence build as new selected profiles.
+// This preference never re-evaluates an already-authored part or changes its pin.
+export function preferredCadEngineBuild(id){
+ const standard=requireCadEngine(id);
+ return id==='occ'?OCC_BOOLEAN_HISTORY_BUILD:standard;
+}
+export function requireCadEngineBuild(id,revision){
+ const standard=requireCadEngine(id);
+ if(revision===undefined||revision===standard.revision)return standard;
+ if(id==='occ'&&revision===OCC_SELECTED_PROFILE_BUILD.revision)return OCC_SELECTED_PROFILE_BUILD;
+ if(id==='occ'&&revision===OCC_POLYGON_PROFILE_BUILD.revision)return OCC_POLYGON_PROFILE_BUILD;
+ if(id==='occ'&&revision===OCC_MECHANICAL_PROFILE_BUILD.revision)return OCC_MECHANICAL_PROFILE_BUILD;
+ if(id==='occ'&&revision===OCC_BOOLEAN_HISTORY_BUILD.revision)return OCC_BOOLEAN_HISTORY_BUILD;
+ if(id==='occ'&&revision===OCC_REVOLVE_PROFILE_BUILD.revision)return OCC_REVOLVE_PROFILE_BUILD;
+ if(id==='occ'&&revision===OCC_SWEEP_PROFILE_BUILD.revision)return OCC_SWEEP_PROFILE_BUILD;
+ if(id==='occ'&&revision===OCC_LOFT_PROFILE_BUILD.revision)return OCC_LOFT_PROFILE_BUILD;
+ if(id==='occ'&&revision===OCC_ADAPTIVE_METROLOGY_BUILD.revision)return OCC_ADAPTIVE_METROLOGY_BUILD;
+ if(id==='occ'&&revision===OCC_STEP_EXPORT_BUILD.revision)return OCC_STEP_EXPORT_BUILD;
+ if(id==='occ'&&revision===OCC_MANUFACTURING_MESH_BUILD.revision)return OCC_MANUFACTURING_MESH_BUILD;
+ if(id==='occ'&&revision===OCC_SHELL_BUILD.revision)return OCC_SHELL_BUILD;
+ fail('ENGINE_REVISION_MISMATCH','The saved engine build is unavailable.');
+}
+export function validateEngineMount(id,mount,revision){
+ const spec=requireCadEngineBuild(id,revision),descriptor=mount?.descriptor;
+ if(!descriptor||descriptor.contractVersion!==1||descriptor.engine!==spec.mountEngine||descriptor.representation!==spec.representation||descriptor.unit!=='millimeter'||!mount.ready||typeof mount.ready.then!=='function'||!['execute','close','readSolidMesh','assertSolidBinding'].every(k=>typeof mount[k]==='function'))fail('ENGINE_BINDING_MISMATCH','The selected engine does not match its mount.');
+ if(descriptor.runtimeAssets?.jsSha256!==spec.runtimeAssets.jsSha256||descriptor.runtimeAssets?.wasmSha256!==spec.runtimeAssets.wasmSha256)fail('ENGINE_REVISION_MISMATCH','The selected engine runtime does not match its declared revision.');
+ if(spec.manufacturingMeshVersion===1){
+  const ops=descriptor.operations;
+  if(!Array.isArray(ops)||ops.length<1||ops.length>64||Reflect.ownKeys(ops).length!==ops.length+1)fail('UNBOUND_OPERATION','Expected dense controlled-mesh capability data.');
+  for(let i=0;i<ops.length;i++){const d=Object.getOwnPropertyDescriptor(ops,String(i)),op=d?.value;if(!d?.enumerable||!Object.hasOwn(d,'value')||!op||typeof op!=='object'||Array.isArray(op)||Reflect.ownKeys(op).some(key=>{const f=Object.getOwnPropertyDescriptor(op,key);return typeof key!=='string'||!f?.enumerable||!Object.hasOwn(f,'value');}))fail('UNBOUND_OPERATION','Controlled-mesh capability fields must be own data.');}
+ }
+ if(!Array.isArray(descriptor.operations)||!['solid.box.create','solid.boolean.common','solid.boolean.union','solid.boolean.subtract','solid.mesh.read','solid.dispose'].every(id=>descriptor.operations.some(op=>op.id===id&&op.version===1)))fail('UNBOUND_OPERATION','The selected engine does not bind the required solid commands.');
+ if(spec===OCC_SELECTED_PROFILE_BUILD&&!descriptor.operations.some(op=>op.id==='solid.profile.extrude'&&op.version===2))fail('UNBOUND_OPERATION','The selected build does not bind selected-profile version2.');
+ if(spec.selectedProfileVersion===3&&!descriptor.operations.some(op=>op.id==='solid.profile.extrude'&&op.version===3))fail('UNBOUND_OPERATION','The selected build does not bind polygon-profile version3.');
+ if(spec.edgeTreatmentVersion===1&&(!descriptor.operations.some(op=>op.id==='solid.profile.extrude'&&op.version===3)||!descriptor.operations.some(op=>op.id==='solid.edge.treat'&&op.version===1)))fail('UNBOUND_OPERATION','The selected build does not bind mechanical profile operations.');
+ if(spec.booleanHistoryVersion===1&&(
+  !descriptor.operations.some(op=>op.id==='solid.profile.extrude'&&op.version===3)||
+  !descriptor.operations.some(op=>op.id==='solid.edge.treat'&&op.version===1)||
+  !descriptor.operations.some(op=>op.id==='solid.selections.read'&&op.version===1&&op.selectionPlanVersion===2)||
+  !descriptor.operations.some(throughHoleBinding)||
+  !descriptor.operations.some(op=>data(op,'id')==='solid.holes.pattern.linear'&&data(op,'version')===1)||
+  !['common','union','subtract'].every(kind=>descriptor.operations.some(op=>op.id==='solid.boolean.'+kind&&op.version===1&&op.input==='oci-boolean-history-mm-v1'))
+ ))fail('UNBOUND_OPERATION','The selected build does not bind Boolean history, through holes, linear hole patterns and selection plan version2.');
+ if(spec.revolveVersion===1&&!descriptor.operations.some(op=>data(op,'id')==='solid.profile.revolve'&&data(op,'version')===1&&data(op,'input')==='solved-profile-axis-mm-v1'&&data(op,'output')==='oci-shape-result-v1'&&data(op,'sourceQualification')==='requires-solved-source-binding'&&data(op,'qualification')==='component-research'))fail('UNBOUND_OPERATION','The selected experimental build does not bind source-qualified revolve version1.');
+ if(spec.sweepVersion===1&&!descriptor.operations.some(op=>data(op,'id')==='solid.profile.sweep'&&data(op,'version')===1&&data(op,'input')==='solved-profile-path-mm-v1'&&data(op,'output')==='oci-shape-result-v1'&&data(op,'qualification')==='component-research'))fail('UNBOUND_OPERATION','The selected experimental build does not bind sweep version1.');
+ if(spec.loftVersion===1&&!descriptor.operations.some(op=>data(op,'id')==='solid.profile.loft'&&data(op,'version')===1&&data(op,'input')==='solved-sections-mm-v1'&&data(op,'output')==='oci-shape-result-v1'&&data(op,'sections')===2&&data(op,'construction')==='ruled-solid'&&data(op,'sourceQualification')==='requires-two-solved-source-bindings'&&data(op,'qualification')==='component-research'))fail('UNBOUND_OPERATION','The selected experimental build does not bind the exact two-section loft contract.');
+ if(spec.adaptiveMetrologyVersion===1){const m=descriptor.nativeMeasurement;if(!m||Reflect.ownKeys(m).length!==5||data(m,'version')!==1||data(m,'method')!=='occ-adaptive-volume-properties'||data(m,'relativeEps')!==1e-10||data(m,'onlyClosed')!==false||data(m,'skipShared')!==false)fail('UNBOUND_OPERATION','The selected adaptive build does not bind checked native reporting.');}
+ if(spec.stepExportVersion===1&&!descriptor.operations.some(op=>data(op,'id')==='solid.step.export'&&data(op,'version')===1&&data(op,'input')==='owned-current-solids-v1'&&data(op,'output')==='step-blob-v1'&&data(op,'maxInputs')===32&&data(op,'maxBytes')===8388608&&data(op,'maxChunkBytes')===65536&&data(op,'schema')==='AP214IS'&&data(op,'structure')==='geometric-solid-set'&&data(op,'qualification')==='native-component'))fail('UNBOUND_OPERATION','The selected build does not bind bounded owned STEP export.');
+ if(spec.manufacturingMeshVersion===1){
+  if(typeof mount.readManufacturingMesh!=='function'||!descriptor.operations.some(op=>data(op,'id')==='solid.manufacturing.mesh.read'&&data(op,'version')===1&&data(op,'input')==='owned-current-single-solid-controls-v1'&&data(op,'output')==='owned-manufacturing-mesh-buffer-v1'&&data(op,'maxBytes')===8388608&&data(op,'maxChunkBytes')===65536&&data(op,'maxVertices')===150000&&data(op,'maxTriangles')===100000&&data(op,'linearDeflectionMm')===.01&&data(op,'angularDeflectionRadians')===.1&&data(op,'relative')===false&&data(op,'nativeResultCost')===0&&data(op,'scope')==='response-local'&&data(op,'qualification')==='native-component'))fail('UNBOUND_OPERATION','The selected build does not bind controlled owned manufacturing mesh.');
+  if(!descriptor.operations.some(op=>data(op,'id')==='solid.drawing.orthographic.read'&&data(op,'version')===1&&data(op,'input')==='owned-orthographic-frame-mm-v1'&&data(op,'output')==='orthographic-analytic-buffers-v1'&&data(op,'maxFragments')===8192&&data(op,'maxNativeJsonBytes')===4194304&&data(op,'maxChunkBytes')===65536&&data(op,'maxTransferBytes')===819200&&data(op,'nativeResultCost')===0&&data(op,'scope')==='response-local'&&data(op,'qualification')==='component-research'))fail('UNBOUND_OPERATION','The selected build does not bind inherited owned orthographic read.');
+  if(typeof mount.readDrawingReferences!=='function'||!descriptor.operations.some(op=>data(op,'id')==='solid.drawing.references.read'&&data(op,'version')===1&&data(op,'input')==='owned-semantic-drawing-definition-v1'&&data(op,'output')==='bounded-drawing-reference-facts-v1'&&data(op,'maxDimensions')===16&&data(op,'maxPrimitiveReferences')===32&&data(op,'maxBytes')===65536&&data(op,'nativeResultCost')===0&&data(op,'scope')==='response-local'&&data(op,'qualification')==='workflow-unqualified'))fail('UNBOUND_OPERATION','The selected build does not bind bounded native drawing references.');
+ }
+ if(spec.shellVersion===1){
+  if(typeof mount.shellSolid!=='function'||!descriptor.operations.some(op=>data(op,'id')==='solid.shell'&&data(op,'version')===1&&data(op,'input')==='owned-source-faces-mm-v1'&&data(op,'output')==='oci-shape-result-v1'&&data(op,'direction')==='inward'&&data(op,'maxFaces')===16&&data(op,'nativeResultCost')===1&&data(op,'constructionToleranceMm')===1e-7&&data(op,'join')==='intersection'&&data(op,'qualification')==='workflow-unqualified'))fail('UNBOUND_OPERATION','The selected build does not bind the exact owned shell contract.');
+ }
+ if(spec.boxConstructionVersion===1&&!descriptor.operations.some(op=>data(op,'id')==='solid.box.create'&&data(op,'version')===1&&data(op,'input')==='oci-authored-box-mm-v1'&&data(op,'output')==='oci-shape-result-v1'))fail('UNBOUND_OPERATION','The selected build does not bind authored box face provenance.');
+ return mount;
+}

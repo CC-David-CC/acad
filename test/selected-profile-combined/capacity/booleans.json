@@ -1,0 +1,1296 @@
+{
+  "source": "b322e02c2d9a3ea26a12ea863e6371ce15e3dba4",
+  "scope": "Public selected-profile operands and Boolean; independently measured geometry, owned rollback and native fresh replay. No signed Files or full CAD gate claim.",
+  "result": "PASS",
+  "cases": [
+    {
+      "kind": "union",
+      "a": {
+        "plane": "S:0/SURFACE",
+        "primitive": "agent-primitive-ffdc199c-016d-4723-82a6-85168ab2f2b5",
+        "solid": {
+          "featureId": 2,
+          "outputId": "worker-solid:1:[2,\"body\"]",
+          "bodyId": "worker-solid:1:[2,\"body\"]",
+          "sourceFaceId": "S:0/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-ffdc199c-016d-4723-82a6-85168ab2f2b5\"],\"holes\":[]}",
+          "engine": "occ",
+          "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+          "unit": "millimeter",
+          "bodyPolicy": "separate",
+          "persistence": "volatile-workspace",
+          "revision": "394a8299-e101-42a5-b8aa-5eb269082076"
+        }
+      },
+      "b": {
+        "plane": "S:2/SURFACE",
+        "primitive": "agent-primitive-079c331a-a8e1-4f5c-9deb-f6e10cc60967",
+        "solid": {
+          "featureId": 4,
+          "outputId": "worker-solid:1:[4,\"body\"]",
+          "bodyId": "worker-solid:1:[4,\"body\"]",
+          "sourceFaceId": "S:2/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:2/SURFACE\",\"outer\":[\"S:2/SURFACE/agent-primitive-079c331a-a8e1-4f5c-9deb-f6e10cc60967\"],\"holes\":[]}",
+          "engine": "occ",
+          "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+          "unit": "millimeter",
+          "bodyPolicy": "separate",
+          "persistence": "volatile-workspace",
+          "revision": "c29bb2d5-d71e-453c-b395-adc6fcd095d3"
+        }
+      },
+      "value": {
+        "featureId": 5,
+        "outputId": "worker-solid:1:[5,\"body\"]",
+        "resultKind": "single-solid",
+        "bodyId": "worker-solid:1:[5,\"body\"]",
+        "engine": "occ",
+        "unit": "millimeter"
+      },
+      "before": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"bodyPolicy\":\"separate\",\"depth\":5,\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"faceId\":\"S:0/SURFACE\",\"featureId\":2,\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-ffdc199c-016d-4723-82a6-85168ab2f2b5\\\"],\\\"holes\\\":[]}\",\"unit\":\"millimeter\",\"version\":1},\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\"},{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"3\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:2/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:2/SURFACE\\\",\\\"outer\\\":[\\\"S:2/SURFACE/agent-primitive-079c331a-a8e1-4f5c-9deb-f6e10cc60967\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}}],\"pointer\":3}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-ffdc199c-016d-4723-82a6-85168ab2f2b5\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          },
+          {
+            "id": "S:2/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-079c331a-a8e1-4f5c-9deb-f6e10cc60967\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          }
+        ],
+        "bodies": [
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "featureId": 2,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.6973858007377,
+              "volumeMagnitude": 1565.6973858007377,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  -10,
+                  -10,
+                  0
+                ],
+                "max": [
+                  10,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  -9.975640502598242,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  10,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          },
+          {
+            "id": "worker-solid:1:[4,\"body\"]",
+            "featureId": 4,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.697385800736,
+              "volumeMagnitude": 1565.697385800736,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  0,
+                  -10,
+                  0
+                ],
+                "max": [
+                  20,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  0.02435949740175758,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  20,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ]
+      },
+      "after": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"bodyPolicy\":\"separate\",\"depth\":5,\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"faceId\":\"S:0/SURFACE\",\"featureId\":2,\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-ffdc199c-016d-4723-82a6-85168ab2f2b5\\\"],\\\"holes\\\":[]}\",\"unit\":\"millimeter\",\"version\":1},\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\"},{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"3\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:2/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:2/SURFACE\\\",\\\"outer\\\":[\\\"S:2/SURFACE/agent-primitive-079c331a-a8e1-4f5c-9deb-f6e10cc60967\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SOLID_BOOLEAN_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":5,\"kind\":\"union\",\"a\":\"worker-solid:1:[2,\\\"body\\\"]\",\"b\":\"worker-solid:1:[4,\\\"body\\\"]\"}}],\"pointer\":4}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-ffdc199c-016d-4723-82a6-85168ab2f2b5\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          },
+          {
+            "id": "S:2/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-079c331a-a8e1-4f5c-9deb-f6e10cc60967\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          }
+        ],
+        "bodies": [
+          {
+            "id": "worker-solid:1:[5,\"body\"]",
+            "featureId": 5,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 0,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 1,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 9,
+                  "wires": 9,
+                  "edges": 15,
+                  "vertices": 8
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 2520.609216293203,
+              "volumeMagnitude": 2520.609216293203,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 2527.407804285406,
+              "nativeBounds": {
+                "min": [
+                  -10,
+                  -10,
+                  0
+                ],
+                "max": [
+                  20,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 352,
+              "bounds": {
+                "min": [
+                  -10,
+                  -9.993908270190964,
+                  0
+                ],
+                "max": [
+                  20,
+                  9.993908270190964,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ]
+      },
+      "reopened": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"bodyPolicy\":\"separate\",\"depth\":5,\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"faceId\":\"S:0/SURFACE\",\"featureId\":2,\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-ffdc199c-016d-4723-82a6-85168ab2f2b5\\\"],\\\"holes\\\":[]}\",\"unit\":\"millimeter\",\"version\":1},\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\"},{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"3\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:2/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:2/SURFACE\\\",\\\"outer\\\":[\\\"S:2/SURFACE/agent-primitive-079c331a-a8e1-4f5c-9deb-f6e10cc60967\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SOLID_BOOLEAN_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":5,\"kind\":\"union\",\"a\":\"worker-solid:1:[2,\\\"body\\\"]\",\"b\":\"worker-solid:1:[4,\\\"body\\\"]\"}}],\"pointer\":4}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-ffdc199c-016d-4723-82a6-85168ab2f2b5\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          },
+          {
+            "id": "S:2/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-079c331a-a8e1-4f5c-9deb-f6e10cc60967\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          }
+        ],
+        "bodies": [
+          {
+            "id": "worker-solid:1:[5,\"body\"]",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 0,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 1,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 9,
+                  "wires": 9,
+                  "edges": 15,
+                  "vertices": 8
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 2520.609216293203,
+              "volumeMagnitude": 2520.609216293203,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 2527.407804285406,
+              "nativeBounds": {
+                "min": [
+                  -10,
+                  -10,
+                  0
+                ],
+                "max": [
+                  20,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 352,
+              "bounds": {
+                "min": [
+                  -10,
+                  -9.993908270190964,
+                  0
+                ],
+                "max": [
+                  20,
+                  9.993908270190964,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "subtract",
+      "a": {
+        "plane": "S:0/SURFACE",
+        "primitive": "agent-primitive-ece48a3d-f243-44bf-b8b8-9bd68f20e008",
+        "solid": {
+          "featureId": 2,
+          "outputId": "worker-solid:1:[2,\"body\"]",
+          "bodyId": "worker-solid:1:[2,\"body\"]",
+          "sourceFaceId": "S:0/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-ece48a3d-f243-44bf-b8b8-9bd68f20e008\"],\"holes\":[]}",
+          "engine": "occ",
+          "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+          "unit": "millimeter",
+          "bodyPolicy": "separate",
+          "persistence": "volatile-workspace",
+          "revision": "37436dfe-6365-42bf-bec3-647dd95e5a4e"
+        }
+      },
+      "b": {
+        "plane": "S:2/SURFACE",
+        "primitive": "agent-primitive-575d2198-7666-4d89-a685-f977d2b6596e",
+        "solid": {
+          "featureId": 4,
+          "outputId": "worker-solid:1:[4,\"body\"]",
+          "bodyId": "worker-solid:1:[4,\"body\"]",
+          "sourceFaceId": "S:2/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:2/SURFACE\",\"outer\":[\"S:2/SURFACE/agent-primitive-575d2198-7666-4d89-a685-f977d2b6596e\"],\"holes\":[]}",
+          "engine": "occ",
+          "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+          "unit": "millimeter",
+          "bodyPolicy": "separate",
+          "persistence": "volatile-workspace",
+          "revision": "2487c0d3-1484-419e-9f84-dbf07807fb41"
+        }
+      },
+      "value": {
+        "featureId": 5,
+        "outputId": "worker-solid:1:[5,\"body\"]",
+        "resultKind": "single-solid",
+        "bodyId": "worker-solid:1:[5,\"body\"]",
+        "engine": "occ",
+        "unit": "millimeter"
+      },
+      "before": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"bodyPolicy\":\"separate\",\"depth\":5,\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"faceId\":\"S:0/SURFACE\",\"featureId\":2,\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-ece48a3d-f243-44bf-b8b8-9bd68f20e008\\\"],\\\"holes\\\":[]}\",\"unit\":\"millimeter\",\"version\":1},\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\"},{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"3\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:2/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:2/SURFACE\\\",\\\"outer\\\":[\\\"S:2/SURFACE/agent-primitive-575d2198-7666-4d89-a685-f977d2b6596e\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}}],\"pointer\":3}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-ece48a3d-f243-44bf-b8b8-9bd68f20e008\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          },
+          {
+            "id": "S:2/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-575d2198-7666-4d89-a685-f977d2b6596e\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          }
+        ],
+        "bodies": [
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "featureId": 2,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.6973858007377,
+              "volumeMagnitude": 1565.6973858007377,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  -10,
+                  -10,
+                  0
+                ],
+                "max": [
+                  10,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  -9.975640502598242,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  10,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          },
+          {
+            "id": "worker-solid:1:[4,\"body\"]",
+            "featureId": 4,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.697385800736,
+              "volumeMagnitude": 1565.697385800736,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  0,
+                  -10,
+                  0
+                ],
+                "max": [
+                  20,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  0.02435949740175758,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  20,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ]
+      },
+      "after": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"bodyPolicy\":\"separate\",\"depth\":5,\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"faceId\":\"S:0/SURFACE\",\"featureId\":2,\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-ece48a3d-f243-44bf-b8b8-9bd68f20e008\\\"],\\\"holes\\\":[]}\",\"unit\":\"millimeter\",\"version\":1},\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\"},{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"3\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:2/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:2/SURFACE\\\",\\\"outer\\\":[\\\"S:2/SURFACE/agent-primitive-575d2198-7666-4d89-a685-f977d2b6596e\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SOLID_BOOLEAN_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":5,\"kind\":\"subtract\",\"a\":\"worker-solid:1:[2,\\\"body\\\"]\",\"b\":\"worker-solid:1:[4,\\\"body\\\"]\"}}],\"pointer\":4}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-ece48a3d-f243-44bf-b8b8-9bd68f20e008\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          },
+          {
+            "id": "S:2/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-575d2198-7666-4d89-a685-f977d2b6596e\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          }
+        ],
+        "bodies": [
+          {
+            "id": "worker-solid:1:[5,\"body\"]",
+            "featureId": 5,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 0,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 1,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 4,
+                  "wires": 4,
+                  "edges": 6,
+                  "vertices": 4
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 954.9118304924632,
+              "volumeMagnitude": 954.9118304924632,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 956.6114774905044,
+              "nativeBounds": {
+                "min": [
+                  -10,
+                  -10,
+                  0
+                ],
+                "max": [
+                  5,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  -10,
+                  -9.993908270190948,
+                  0
+                ],
+                "max": [
+                  4.9999999999996865,
+                  9.99390827019095,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ]
+      },
+      "reopened": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"bodyPolicy\":\"separate\",\"depth\":5,\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"faceId\":\"S:0/SURFACE\",\"featureId\":2,\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-ece48a3d-f243-44bf-b8b8-9bd68f20e008\\\"],\\\"holes\\\":[]}\",\"unit\":\"millimeter\",\"version\":1},\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\"},{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"3\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:2/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:2/SURFACE\\\",\\\"outer\\\":[\\\"S:2/SURFACE/agent-primitive-575d2198-7666-4d89-a685-f977d2b6596e\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SOLID_BOOLEAN_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":5,\"kind\":\"subtract\",\"a\":\"worker-solid:1:[2,\\\"body\\\"]\",\"b\":\"worker-solid:1:[4,\\\"body\\\"]\"}}],\"pointer\":4}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-ece48a3d-f243-44bf-b8b8-9bd68f20e008\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          },
+          {
+            "id": "S:2/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-575d2198-7666-4d89-a685-f977d2b6596e\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          }
+        ],
+        "bodies": [
+          {
+            "id": "worker-solid:1:[5,\"body\"]",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 0,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 1,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 4,
+                  "wires": 4,
+                  "edges": 6,
+                  "vertices": 4
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 954.9118304924632,
+              "volumeMagnitude": 954.9118304924632,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 956.6114774905044,
+              "nativeBounds": {
+                "min": [
+                  -10,
+                  -10,
+                  0
+                ],
+                "max": [
+                  5,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  -10,
+                  -9.993908270190948,
+                  0
+                ],
+                "max": [
+                  4.9999999999996865,
+                  9.99390827019095,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "common",
+      "a": {
+        "plane": "S:0/SURFACE",
+        "primitive": "agent-primitive-221d58fb-62d6-437a-89f6-d8121fad1006",
+        "solid": {
+          "featureId": 2,
+          "outputId": "worker-solid:1:[2,\"body\"]",
+          "bodyId": "worker-solid:1:[2,\"body\"]",
+          "sourceFaceId": "S:0/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-221d58fb-62d6-437a-89f6-d8121fad1006\"],\"holes\":[]}",
+          "engine": "occ",
+          "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+          "unit": "millimeter",
+          "bodyPolicy": "separate",
+          "persistence": "volatile-workspace",
+          "revision": "d5e02d00-c3fa-436b-9914-e5e875ca3348"
+        }
+      },
+      "b": {
+        "plane": "S:2/SURFACE",
+        "primitive": "agent-primitive-b213345b-8e89-4e61-8bf7-44c61d8f1d2f",
+        "solid": {
+          "featureId": 4,
+          "outputId": "worker-solid:1:[4,\"body\"]",
+          "bodyId": "worker-solid:1:[4,\"body\"]",
+          "sourceFaceId": "S:2/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:2/SURFACE\",\"outer\":[\"S:2/SURFACE/agent-primitive-b213345b-8e89-4e61-8bf7-44c61d8f1d2f\"],\"holes\":[]}",
+          "engine": "occ",
+          "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+          "unit": "millimeter",
+          "bodyPolicy": "separate",
+          "persistence": "volatile-workspace",
+          "revision": "b589bd48-e82c-4d9f-b85d-696ddd5af5ef"
+        }
+      },
+      "value": {
+        "featureId": 5,
+        "outputId": "worker-solid:1:[5,\"body\"]",
+        "resultKind": "single-solid",
+        "bodyId": "worker-solid:1:[5,\"body\"]",
+        "engine": "occ",
+        "unit": "millimeter"
+      },
+      "before": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"bodyPolicy\":\"separate\",\"depth\":5,\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"faceId\":\"S:0/SURFACE\",\"featureId\":2,\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-221d58fb-62d6-437a-89f6-d8121fad1006\\\"],\\\"holes\\\":[]}\",\"unit\":\"millimeter\",\"version\":1},\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\"},{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"3\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:2/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:2/SURFACE\\\",\\\"outer\\\":[\\\"S:2/SURFACE/agent-primitive-b213345b-8e89-4e61-8bf7-44c61d8f1d2f\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}}],\"pointer\":3}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-221d58fb-62d6-437a-89f6-d8121fad1006\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          },
+          {
+            "id": "S:2/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-b213345b-8e89-4e61-8bf7-44c61d8f1d2f\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          }
+        ],
+        "bodies": [
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "featureId": 2,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.6973858007377,
+              "volumeMagnitude": 1565.6973858007377,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  -10,
+                  -10,
+                  0
+                ],
+                "max": [
+                  10,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  -9.975640502598242,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  10,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          },
+          {
+            "id": "worker-solid:1:[4,\"body\"]",
+            "featureId": 4,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.697385800736,
+              "volumeMagnitude": 1565.697385800736,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  0,
+                  -10,
+                  0
+                ],
+                "max": [
+                  20,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  0.02435949740175758,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  20,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ]
+      },
+      "after": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"bodyPolicy\":\"separate\",\"depth\":5,\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"faceId\":\"S:0/SURFACE\",\"featureId\":2,\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-221d58fb-62d6-437a-89f6-d8121fad1006\\\"],\\\"holes\\\":[]}\",\"unit\":\"millimeter\",\"version\":1},\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\"},{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"3\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:2/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:2/SURFACE\\\",\\\"outer\\\":[\\\"S:2/SURFACE/agent-primitive-b213345b-8e89-4e61-8bf7-44c61d8f1d2f\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SOLID_BOOLEAN_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":5,\"kind\":\"common\",\"a\":\"worker-solid:1:[2,\\\"body\\\"]\",\"b\":\"worker-solid:1:[4,\\\"body\\\"]\"}}],\"pointer\":4}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-221d58fb-62d6-437a-89f6-d8121fad1006\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          },
+          {
+            "id": "S:2/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-b213345b-8e89-4e61-8bf7-44c61d8f1d2f\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          }
+        ],
+        "bodies": [
+          {
+            "id": "worker-solid:1:[5,\"body\"]",
+            "featureId": 5,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 0,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 1,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 5,
+                  "wires": 5,
+                  "edges": 9,
+                  "vertices": 6
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 610.991195588233,
+              "volumeMagnitude": 610.991195588233,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 614.1848493043829,
+              "nativeBounds": {
+                "min": [
+                  0,
+                  -8.660254037844542,
+                  0
+                ],
+                "max": [
+                  10,
+                  8.660254037844538,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 120,
+              "bounds": {
+                "min": [
+                  0.024359497401755803,
+                  -8.66025403784445,
+                  0
+                ],
+                "max": [
+                  10,
+                  8.660254037844448,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ]
+      },
+      "reopened": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"params\":{\"bodyPolicy\":\"separate\",\"depth\":5,\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"faceId\":\"S:0/SURFACE\",\"featureId\":2,\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-221d58fb-62d6-437a-89f6-d8121fad1006\\\"],\\\"holes\\\":[]}\",\"unit\":\"millimeter\",\"version\":1},\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\"},{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"3\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:2/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:2/SURFACE\\\",\\\"outer\\\":[\\\"S:2/SURFACE/agent-primitive-b213345b-8e89-4e61-8bf7-44c61d8f1d2f\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SOLID_BOOLEAN_V1\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":5,\"kind\":\"common\",\"a\":\"worker-solid:1:[2,\\\"body\\\"]\",\"b\":\"worker-solid:1:[4,\\\"body\\\"]\"}}],\"pointer\":4}",
+        "sources": [
+          {
+            "id": "S:0/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-221d58fb-62d6-437a-89f6-d8121fad1006\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          },
+          {
+            "id": "S:2/SURFACE",
+            "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-b213345b-8e89-4e61-8bf7-44c61d8f1d2f\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+          }
+        ],
+        "bodies": [
+          {
+            "id": "worker-solid:1:[5,\"body\"]",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 0,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 1,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 5,
+                  "wires": 5,
+                  "edges": 9,
+                  "vertices": 6
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 610.991195588233,
+              "volumeMagnitude": 610.991195588233,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 614.1848493043829,
+              "nativeBounds": {
+                "min": [
+                  0,
+                  -8.660254037844542,
+                  0
+                ],
+                "max": [
+                  10,
+                  8.660254037844538,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 120,
+              "bounds": {
+                "min": [
+                  0.024359497401755803,
+                  -8.66025403784445,
+                  0
+                ],
+                "max": [
+                  10,
+                  8.660254037844448,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "assets": [
+    {
+      "url": "http://127.0.0.1:20687/static/index.bundle.js",
+      "sha256": "99d007ac94391f1966c47be03b33a2cd8ebc1fd719349270d64ba85abda2fd91",
+      "bytes": 32969928
+    },
+    {
+      "url": "http://127.0.0.1:20687/static/selected-profile-worker.js",
+      "sha256": "dd60fbf4d31186ca8ac739d59af8be45355a7005d22575575cee9f9602d8da25",
+      "bytes": 348588
+    },
+    {
+      "url": "http://127.0.0.1:20687/static/selected-profile-occ-portable.js",
+      "sha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+      "bytes": 308353
+    },
+    {
+      "url": "http://127.0.0.1:20687/static/a81af0b78dd585124f3f.wasm",
+      "sha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+      "bytes": 35020148
+    },
+    {
+      "url": "http://127.0.0.1:20687/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+      "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+      "bytes": 3564892
+    },
+    {
+      "url": "http://127.0.0.1:20687/static/project-validator.760e8f44baf4dc8db1a2.js",
+      "sha256": "7236c461672b662cf9d860439c99a3962784012f88245c248a771158f7287286",
+      "bytes": 1791830
+    },
+    {
+      "url": "http://127.0.0.1:20687/static/prism-semantic.334b28c725a9ef9b0d97.js",
+      "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+      "bytes": 1406382
+    }
+  ],
+  "app": {
+    "url": "http://127.0.0.1:20687/static/index.bundle.js",
+    "sha256": "99d007ac94391f1966c47be03b33a2cd8ebc1fd719349270d64ba85abda2fd91"
+  }
+}

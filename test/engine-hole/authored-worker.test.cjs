@@ -1,0 +1,16 @@
+const assert=require('node:assert/strict'),p=require(process.env.PUPPETEER_CORE_PATH||'puppeteer-core');
+(async()=>{let b=await p.connect({browserURL:process.env.CODI_TEST_CDP||'http://127.0.0.1:19986/'}),c=await b.createBrowserContext(),page=await c.newPage();try{
+ let resp=await page.goto(process.env.CODI_TEST_URL||'http://127.0.0.1:19985/');assert.match(resp.headers()['content-security-policy'],/script-src 'self' 'wasm-unsafe-eval'/);
+ const data=await page.evaluate(async()=>{
+ const frame={origin:[0,0,7],x:[1,0,0],y:[0,1,0],z:[0,0,1]},faceId='S:0/SURFACE',d='/static/';
+ async function draft(w,h){let worker=new Worker(d+'sketch-worker.js');return await new Promise((yes,no)=>{worker.onmessage=e=>{worker.terminate();yes(e.data)};worker.onerror=e=>no(Error(e.message));worker.postMessage({task:'rectangle',revision:'r',unit:'millimeter',frame,origin:[10000,20000],width:w,height:h})})}
+ async function run(width,height,depth){let a=await draft(width,height);if(!a.ok)throw Error(JSON.stringify(a));let sketchJSON=a.serializedSketch,sketchDigest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(sketchJSON)))].map(x=>x.toString(16).padStart(2,'0')).join(''),regionId='sketch-region:'+JSON.stringify({faceId,outer:a.sketch.objects.map(o=>faceId+'/'+o.id).sort(),holes:[]});let w=new Worker(d+'worker.js'),seq=0;
+ const call=data=>new Promise((ok,no)=>{let timer=setTimeout(()=>no(Error('worker timeout')),45000);w.onmessage=e=>{clearTimeout(timer);ok(e.data)};w.onerror=e=>{clearTimeout(timer);no(Error(e.message))};w.postMessage({...data,seq:++seq})});try{
+ let init=await call({kind:'init',manifest:{version:1,js:{path:d+'unused.js',sha256:'f74142622c9ced56b8f2e7955301ace5902f811734a71128767fb05de4159972'},wasm:{path:d+'engine.wasm',sha256:'c39793b8aff34dc548b57fee1d901219e372702a5005ef92dfdf94994c012897'}}});if(init.kind!=='ready')throw Error('init '+JSON.stringify(init));
+ let profile={version:2,unit:'millimeter',engine:'occ',revision:'r',sketchDigest,faceId,regionId,frame,depth,sketchJSON},prism=await call({kind:'profile-extrude',token:'parent',profile});if(prism.kind!=='result')throw Error('prism '+JSON.stringify(prism));
+ let request={version:1,unit:'millimeter',revision:'r',sketchDigest,faceId,regionId,diameter:10};let bad=await call({kind:'research-centered-cut',token:'bad',parent:'parent',request:{...request,diameter:height}}),cut=await call({kind:'research-centered-cut',token:'hole',parent:'parent',request});return {width,height,depth,bad,cut};
+ }finally{w.terminate()}}
+ return [await run(100,50,20),await run(150,30,35)];});
+ for(const r of data){assert.equal(r.bad.kind,'refused',JSON.stringify(r.bad));assert.equal(r.cut.kind,'result',JSON.stringify(r.cut));assert.equal(r.cut.evidence.rimCount,2);assert.ok(Math.abs(r.cut.evidence.analyticVolume-(r.width*r.height-Math.PI*25)*r.depth)<1e-5)}
+ if(process.env.CODI_CUT_OUT)require('fs').writeFileSync(process.env.CODI_CUT_OUT,JSON.stringify(data));console.log('PASS authored translated rectangles and current-centered analytic through cuts under strict CSP');
+ }finally{await c.close();b.disconnect()}})().catch(e=>{console.error(e.stack);process.exitCode=1});

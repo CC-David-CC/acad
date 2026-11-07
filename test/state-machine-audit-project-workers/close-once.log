@@ -1,0 +1,15 @@
+✔ weak close-once record preserves error (3.005705ms)
+✔ weak close-once record preserves null (2.313669ms)
+✔ weak close-once record preserves undefined (1.159119ms)
+✔ weak close-once record preserves zero (1.134129ms)
+✔ weak close-once record preserves false (0.958508ms)
+✔ weak close-once record preserves empty (0.906137ms)
+✔ successful close is idempotent and does not fence a new Worker (0.939007ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 77.547087

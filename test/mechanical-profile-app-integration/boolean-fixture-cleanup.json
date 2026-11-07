@@ -1,0 +1,12 @@
+{
+  "fixturePid": 2223085,
+  "caddyPid": 2223095,
+  "port": 20917,
+  "temporaryState": "/tmp/codi-desktop-files-y1xionfc",
+  "action": "SIGINT to verified owned fixture",
+  "status": "PASS",
+  "portClosed": true,
+  "temporaryStateRemoved": true,
+  "ownTargetsRemaining": 0,
+  "sharedChromeRetained": true
+}

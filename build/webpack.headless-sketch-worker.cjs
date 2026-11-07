@@ -1,0 +1,12 @@
+const path = require('path');
+const fs = require('fs');
+const config = require('../webpack.config');
+const numeric = path.join(__dirname, '../node_modules/.cache/codi-numeric/precompiled.js');
+if (!fs.existsSync(numeric)) throw new Error('Build the CSP-safe numeric module before the sketch worker.');
+config.resolve.alias.numeric = numeric;
+config.target = 'webworker';
+config.entry = path.join(__dirname, '../web/app/sketcher/headless/solveWorker.ts');
+config.output = {path: path.join(__dirname, '../.build/headless-sketch-worker'), filename: 'worker.js', globalObject: 'self'};
+config.optimization = {splitChunks:false,runtimeChunk:false};
+config.module.rules = [config.module.rules.find(rule => rule.loader === 'babel-loader'), {test:/\.(css|less)$/,type:'asset/source'}, ...config.module.rules.slice(-3)];
+module.exports = config;

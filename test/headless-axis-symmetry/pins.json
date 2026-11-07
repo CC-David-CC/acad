@@ -1,0 +1,12 @@
+{
+  "runtimeSource": "7757cf749f51bc82d79ee0d23b9be35e8305b0c8",
+  "fixture": "http://127.0.0.1:20635/",
+  "runtimeBackup": "/mnt/data10tb/codi-headless-axis-symmetry-20261106-r4",
+  "assets": {
+    "dist/static/index.bundle.js": "0964d5254a1bc34abad66db9ba142b45f759f23ea4b84c7c62e57689a3ab7d53",
+    "dist/static/prism-semantic.35da90d38704e3348655.js": "be72279d53e63ab5b14e6e1f8840bbea9395d1ce5a140817d1e372650e9de488",
+    "dist/static/project-validator.68a9c507d26d85e6830e.js": "50708779365d5e3a4ceadb40a4de244e940676a0bb8efe60438a1e7caf6dd28c",
+    "dist/static/rectangleProfileRequest.mjs": "cbbf644fdd4682db4d301f6adf61a4d733a0722b8a81b3b4c8f56cfcb0ddbcb9",
+    "dist/static/sketch-solver.2605a0ea1c7432912230.js": "ea7a8febee7242c25d8a7a60fbf492678114a4fcba0d16f1af35489de2b8856d"
+  }
+}

@@ -1,0 +1,44 @@
+import {admissionCause,withAdmissionCause,failureCause} from '../constr/admissionCause.mjs';
+import {HeadlessSketchWorkspace} from './workspace';
+import {replaySketchTransition} from './sketchTransition';
+import {solveSketch} from './solve';
+import {prepareSignedDistance} from '../actions/signedDistanceAdmission';
+import {projectedDirectionValid} from '../constr/projectedDistanceDomain.mjs';
+import {assertAllowedSolverGeometry} from './transitionGeometryPolicy.mjs';
+import {sameRestoredSketch} from '../historyEquivalence.mjs';
+const fail=(code:string,message:string)=>withAdmissionCause(Object.assign(Error(message),{code}),code==='RESIDUAL'?admissionCause('original-residual-failure'):['DIRECTION_DOMAIN','PROJECTED_DIRECTION_DOMAIN','DISTANCE_DOMAIN'].includes(code)?admissionCause('invalid-domain'):undefined);
+function record(value:any,keys:string[]){if(!value||typeof value!=='object'||Array.isArray(value)||![Object.prototype,null].includes(Object.getPrototypeOf(value))||Reflect.ownKeys(value).length!==keys.length)throw fail('INVALID','Invalid signed distance request.');const out:any={};for(const key of keys){const d=Object.getOwnPropertyDescriptor(value,key);if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value'))throw fail('INVALID','Distance fields must be data.');out[key]=d.value;}return out;}
+function external(value:any){if(!value||typeof value!=='object'||Array.isArray(value)||![Object.prototype,null].includes(Object.getPrototypeOf(value)))throw fail('INVALID','External parameters must be plain data.');const keys=Reflect.ownKeys(value),out=Object.create(null);if(keys.length>1024)throw fail('LIMIT','Too many external parameters.');for(const key of keys){if(typeof key!=='string'||!key||key.length>256)throw fail('INVALID','Invalid external parameter.');const d=Object.getOwnPropertyDescriptor(value,key);if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value')||typeof d.value!=='number'||!Number.isFinite(d.value)||Math.abs(d.value)>1e9)throw fail('INVALID','Invalid external parameter.');out[key]=d.value;}return out;}
+
+function verifyIntent(before:any,after:any,intent:any,stage:number,typeId:string,status:string){
+ if(before.objects.length!==after.objects.length||before.stages.length!==after.stages.length)throw fail('INTENT_CHANGED','Sketch structure changed.');
+ after.objects.forEach((object,i)=>{if(object.type!==before.objects[i]?.type)throw fail('INTENT_CHANGED','Sketch object type changed.');assertAllowedSolverGeometry(object.type,before.objects[i].data,object.data);});
+ const restored={...after,objects:after.objects.map((o,i)=>({...o,data:before.objects[i].data})),stages:after.stages.map(s=>({...s,constraints:[...s.constraints]}))},prior=before.stages[stage]?.constraints,next=restored.stages[stage]?.constraints;
+ if(!Array.isArray(prior)||!Array.isArray(next)||next.length!==prior.length+1)throw fail('INTENT_CHANGED','Exactly one signed distance constraint is required.');
+ let index=0;while(index<prior.length&&JSON.stringify(prior[index])===JSON.stringify(next[index]))index++;
+ const added=next[index];if(added?.typeId!==typeId||added.stage!==stage||JSON.stringify(added.objects)!==JSON.stringify(intent.ids)||added.constants?.distance!==intent.distance||Reflect.ownKeys(added.constants).length!==1||added.admission?.version!==1||added.admission.state!==status)throw fail('INTENT_CHANGED','Signed distance identity, value or admission changed.');
+ next.splice(index,1);if(!sameRestoredSketch(JSON.stringify(before),JSON.stringify(restored)))throw fail('INTENT_CHANGED','Existing authored sketch intent changed.');
+}
+// Candidate computation only in a disposable Worker. The public coordinator
+// owns source bytes, full downstream replay, currentness and atomic journal.
+export function addSignedDistanceTransition(request:any){let revision='';try{
+ const d=request&&typeof request==='object'?Object.getOwnPropertyDescriptor(request,'revision'):null;if(d?.enumerable&&Object.prototype.hasOwnProperty.call(d,'value')&&typeof d.value==='string'&&d.value.length<=256)revision=d.value;
+ const args=record(request,['revision','sketchJSON','externalParameters','intent']);if(typeof args.revision!=='string'||!args.revision||args.revision.length>256)throw fail('INVALID','Invalid signed distance revision.');revision=args.revision;
+ const intent=record(args.intent,['axis','ids','distance']);if(!['x','y','projected'].includes(intent.axis)||!Array.isArray(intent.ids)||Object.getPrototypeOf(intent.ids)!==Array.prototype||intent.ids.length!==(intent.axis==='projected'?3:2)||Reflect.ownKeys(intent.ids).length!==intent.ids.length+1)throw fail('INVALID','Invalid signed distance targets.');
+ intent.ids=Array.from({length:intent.ids.length},(_,i)=>{const d=Object.getOwnPropertyDescriptor(intent.ids,String(i));if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value')||typeof d.value!=='string'||!d.value||d.value.length>256)throw fail('INVALID','Distance IDs must be data.');return d.value;});
+ if(intent.ids[0]===intent.ids[1]||typeof intent.distance!=='number'||!Number.isFinite(intent.distance)||Math.abs(intent.distance)>1e6)throw fail('DISTANCE_DOMAIN','Choose distinct points and a finite signed millimetre distance within ±1,000,000.');
+ const bindings=external(args.externalParameters),captured=replaySketchTransition({revision,sketchJSON:args.sketchJSON,externalParameters:bindings});if(!captured.ok||!('serializedSketch' in captured))return captured;
+ const before=JSON.parse(captured.serializedSketch);if(before.objects.length>1024)throw fail('LIMIT','Too many authored sketch objects.');
+ const workspace=new HeadlessSketchWorkspace(bindings);workspace.io._loadSketch(before,{strict:true});const pm=workspace.parametricManager,index=workspace.createIndex(),objects=intent.ids.map(id=>index[id]);
+ if(objects.some(o=>!o))throw fail('INVALID_TARGET','A selected sketch target is missing.');
+ const {constraint,validate}=prepareSignedDistance(pm,intent.axis,objects,intent.distance);pm.startTransaction();try{pm._add(constraint);pm.finishTransaction(stages=>{try{validate(stages)}catch(error){throw withAdmissionCause(error,constraint.stage?.solverSystem.getAdmissionCause(constraint));}},false);}catch(error){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw error},false)}catch(_){}throw error;}
+ const stage=constraint.stage.index,typeId=constraint.schema.id,status=(constraint.stage as any).algNumSystem.redundant.has(constraint)?'redundant':'accepted',candidate=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));candidate.boundary=before.boundary;
+ verifyIntent(before,candidate,intent,stage,typeId,status);const solved=solveSketch({revision,sketch:candidate,boundary:structuredClone(candidate.boundary),externalParameters:bindings});if(!solved.ok)return solved;
+ const serializedSketch=JSON.stringify(solved.sketch);if(serializedSketch.length>1048576||new TextEncoder().encode(serializedSketch).byteLength>1048576)throw fail('LIMIT','The resulting sketch exceeds its limit.');
+ if(!sameRestoredSketch(JSON.stringify(candidate),serializedSketch))throw fail('CURRENT_GEOMETRY_MISMATCH','Signed distance verification changed the solved geometry.');
+ const authored=solved.sketch.stages.flatMap(s=>s.constraints);if(authored.length!==solved.evidence.length||authored.some((c,i)=>c.typeId!==solved.evidence[i].typeId||c.admission?.version!==1||c.admission.state!==solved.evidence[i].state))throw fail('ADMISSION_CHANGED','Candidate admission changed during verification.');
+ const verified=new HeadlessSketchWorkspace(bindings);verified.io._loadSketch(solved.sketch,{strict:true});const checked=verified.createIndex(),a=checked[intent.ids[0]],b=checked[intent.ids[1]];let measurement=intent.axis==='x'?b.x-a.x:b.y-a.y;
+ if(intent.axis==='projected'){const direction=checked[intent.ids[2]];if(!projectedDirectionValid(direction))throw fail('PROJECTED_DIRECTION_DOMAIN','The live projection datum is invalid.');const dx=direction.b.x-direction.a.x,dy=direction.b.y-direction.a.y;measurement=((b.x-a.x)*dx+(b.y-a.y)*dy)/Math.hypot(dx,dy);}
+ if(!Number.isFinite(measurement)||Math.abs(measurement-intent.distance)>1e-6)throw fail('RESIDUAL','The signed distance does not agree with solved geometry.');
+ return {revision,ok:true as const,serializedSketch,evidence:solved.evidence,dimension:{axis:intent.axis,typeId,objects:intent.ids,distance:intent.distance,status}};
+ }catch(error){return {revision,ok:false as const,error:{code:typeof error?.code==='string'?error.code:'INVALID',message:typeof error?.message==='string'?error.message:'Signed distance transition failed.',...(failureCause(error)?{cause:failureCause(error)}:{})}};}}

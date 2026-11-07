@@ -1,0 +1,190 @@
+{
+  "sourceCommit": "7d6fb5ab99e257eac3e6dbb7c11ece9f319d5a03",
+  "sourcesAfterExclusiveOwnerBuilds": {
+    "ownedBooleanHistoryV1.hpp": {
+      "sha256": "852e592a5cfe654668e4207dbbab3259235e11442248975fa92480da1dec82b8",
+      "bytes": 14450
+    },
+    "ownedTopologyV1.hpp": {
+      "sha256": "227b19221b5645ad3d356fef27a07aa11c040c4b67ca386d6a08131a2517fb29",
+      "bytes": 9232
+    },
+    "ownedEdgeTreatmentV1.hpp": {
+      "sha256": "5056292e410b7ad780d4fa7424f13c347825178e16ded1b574ca6750ead6d160",
+      "bytes": 7074
+    },
+    "owned-boolean-history-v1-probe.cpp": {
+      "sha256": "fec089582afda6afa7db9140b9b11df080c94ff8020bd5365df568d4abfac094",
+      "bytes": 4752
+    },
+    "owned-boolean-history-v1-plate-probe.cpp": {
+      "sha256": "948e95ae36d51ef1f79cff8a1850e05a3d9b5840fa9fc37705dc4aafca37ac7a",
+      "bytes": 5468
+    },
+    "owned-boolean-history-v1-check.py": {
+      "sha256": "5137712eb51802cbd999b252fea4dd51aea8ce578d7b39edd55de226bd5a369d",
+      "bytes": 10216
+    }
+  },
+  "runtimeDirectory": "/mnt/data10tb/codi-owned-boolean-history-v1-proof-20261106",
+  "runtime": {
+    "matrix-r3": {
+      "probe.wasm": {
+        "sha256": "3dd6ae063bfeec7f264f99940b28bc927bc2e01a938a9ff879ef2646305ff986",
+        "bytes": 10013929
+      },
+      "observations.jsonl": {
+        "sha256": "a1a333fa692a9ab83c38a9f6ed2b7b6a52dee4b01fd8bd3baf25f4877e5b63b9",
+        "bytes": 2098316
+      },
+      "build.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "probe.stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "probe.js": {
+        "sha256": "7ea4dbbb1a04c09996c5dfe1bd9d6afcef515b7380683471011d32c03d76a486",
+        "bytes": 292506
+      }
+    },
+    "plate-r1": {
+      "probe.wasm": {
+        "sha256": "659a678efa33f521dec4814585c1b0f0e760ae23c88cf4144789d6f169fd4e9c",
+        "bytes": 15136253
+      },
+      "observations.jsonl": {
+        "sha256": "ab6d33f646a8b7ad2f89fc2aaf435efc7e001dae90ddef6268a68243bbb4c3af",
+        "bytes": 718728
+      },
+      "build.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "probe.stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "probe.js": {
+        "sha256": "934081681efbad45dc489e3c4014173f3c75bf05a1d632eec0f9de33beb00f4c",
+        "bytes": 334064
+      }
+    }
+  },
+  "flags": [
+    "-O1",
+    "-std=c++0x",
+    "ALLOW_MEMORY_GROWTH=1",
+    "DISABLE_EXCEPTION_CATCHING=0",
+    "ENVIRONMENT=node",
+    "EXIT_RUNTIME=1",
+    "WASM_ASYNC_COMPILATION=0"
+  ],
+  "nativeMainRebuilt": false,
+  "publicAppOrHistoryQualified": false,
+  "toolchain": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/emsdk_env.sh",
+  "include": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/include/opencascade",
+  "libraryDirectory": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib",
+  "archiveReceiptSHA256": "1cac4f9b6a77b3fd1f4c7d37b3840f37cc05492f2ac38857cad2f3a539631ad9",
+  "archivesVerifiedAfterBuild": {
+    "TKTopTest": {
+      "sha256": "5a3f4b317d6ed48cf5c881224bd60da50086adf4704f0a44a5c2e67d4278e4e2",
+      "bytes": 4274584
+    },
+    "TKBool": {
+      "sha256": "199b5e3baafebcd6ec32f390919eacfb009365663a8b17c96c6fb2c8bec7bfb1",
+      "bytes": 14333202
+    },
+    "TKBO": {
+      "sha256": "b393cacc75bb7ea39cb0d1d9b262caca55af4f098222db9b399e5bc797b16f44",
+      "bytes": 8572828
+    },
+    "TKBRep": {
+      "sha256": "0e26cbf845ac6576b782fcff94e09c667a41ec9dc527681d5ebe8274aac0dd62",
+      "bytes": 3792770
+    },
+    "TKernel": {
+      "sha256": "5ccb85cf4649cf25b1febfec354458dde1cc7c61744ae6fd836f85792f458286",
+      "bytes": 3833160
+    },
+    "TKFeat": {
+      "sha256": "7732c31af4494601f0751a3b0750ef1b95dc959ad02cf5bc31b642943c4f2974",
+      "bytes": 4395420
+    },
+    "TKFillet": {
+      "sha256": "d4c19f502a4f82e98ebb60b58317017cb54ad38525eeb6d6e2a94e68ad43f8bb",
+      "bytes": 6621068
+    },
+    "TKG2d": {
+      "sha256": "cf952113c6ac6f582997585319a5d08b198d1d6a14b4ab8de0a22fd5f0ce7d23",
+      "bytes": 917228
+    },
+    "TKG3d": {
+      "sha256": "a3bf5f26cb192ef14ea0060aed5e021289493519b18b263aa230a6fd43c4ca10",
+      "bytes": 2725370
+    },
+    "TKGeomAlgo": {
+      "sha256": "904643447a8b02a3739b1f5cee781904aca8fe273a015ff31430f6d457b5ee2c",
+      "bytes": 12324140
+    },
+    "TKGeomBase": {
+      "sha256": "552f83a0ffaafa6f539cf1bcd5cba1fbcfcb9b70b0ee3da6d5eed49fb8796296",
+      "bytes": 10028396
+    },
+    "TKHLR": {
+      "sha256": "62e25a7f3f48057daa8d1cca1abe32493fab9a669bd1071bdd46b58967474bb5",
+      "bytes": 2618554
+    },
+    "TKMath": {
+      "sha256": "75d98453df3ccff20ddc37c3b9e932b03e809a4d72545a6d6ca0e837c26914c3",
+      "bytes": 5382568
+    },
+    "TKMesh": {
+      "sha256": "56e04cb9a7c1b82be9119f33eddcc898a8a9159f832d868f7d02d2051c38fbb1",
+      "bytes": 2785470
+    },
+    "TKOffset": {
+      "sha256": "8a099fbc35ef72adfb66ecbf1dfee961831f5036b6507e3c36eadc6cb60102a4",
+      "bytes": 6037192
+    },
+    "TKPrim": {
+      "sha256": "f6a3507b823edb52649c10ccc2acaf9dfaae4333ce43a5799a89b6f8c2f65ead",
+      "bytes": 921056
+    },
+    "TKShHealing": {
+      "sha256": "e4c39f913ad183615313ef69ec8943b25898ecab4ef8f83f63bd594f7ddb8a26",
+      "bytes": 10156380
+    },
+    "TKTopAlgo": {
+      "sha256": "3c86701c470b649f7f15768be5871a44761674afa234f282c1dc2a11962cf913",
+      "bytes": 8235782
+    },
+    "TKXSBase": {
+      "sha256": "b4f4f331ebc73d14d63f376e55945f811e6bd1d05e49edfe8bb11f50bfef5e2c",
+      "bytes": 8916436
+    },
+    "TKSTEPBase": {
+      "sha256": "c939ac34c5483aabfb178f5275859e46b8c54f28316724dee1601ba47ed52a4b",
+      "bytes": 9603156
+    },
+    "TKSTEPAttr": {
+      "sha256": "6aaf33489e2f1446099348d28e8bd5491e181318c3e6d531c0dfc4b9799ff7fd",
+      "bytes": 6748758
+    },
+    "TKSTEP209": {
+      "sha256": "5d861ec9b634e175944e256939b21d9033bcf0bbbcf4a5623d39ed5c75e7c9d4",
+      "bytes": 2142044
+    },
+    "TKSTEP": {
+      "sha256": "fc86b40b83b4b157b473c48d703e3795b671ea32e20eb4d0db20b774052ae8bc",
+      "bytes": 10429870
+    }
+  },
+  "Node": "/mnt/data10tb/codi-3mf-qualification-SrUmue/node/bin/node",
+  "copySemantics": "Real original->Copy.ModifiedShape->Boolean composition; copied survivors are modified, never IsSame(original)",
+  "emptyCopyMethod": "TopoDS_Shape.EmptyCopied, only zero material topology",
+  "snapshotCapBytesPerInput": 8388608,
+  "historyCapBytesPerInput": 524288
+}

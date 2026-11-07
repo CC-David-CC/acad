@@ -1,0 +1,99 @@
+{
+  "format": "polygon-profile-component/3",
+  "jsSha256": "5414a24c96eff09b77f7d3fe758287c9696e63127c91e73011f6f2939de2a8eb",
+  "wasmSha256": "534ffdd2d88632a7878d654742f2df72c16691f3c814085e4f525efc74961e19",
+  "bootstrapSha256": "d771301ae16d945da7d304e5debeac17a9c682194ae5c134515f44c58ffcb15a",
+  "workerSha256": "9a73eaabe5f8590d9ea8f48166d32b735cec65e51a1eb6c9961621712467b50a",
+  "sources": {
+    "modules/engine/mount/occ-polygon-profile-mount.mjs": "6b33d416d04a588e20181d0bf1fd803fa6612018024a1d78d3a7298837d1e84a",
+    "modules/engine/mount/selectedProfilePlan.mjs": "824dc5bfc8555a89fe9a647612ce76970f98b8adfd6e648185dd29e9f311c8a0",
+    "modules/engine/mount/worker-controller.mjs": "fe837822bb116eb6f048ea9e77c89b8861d4ae7cfd2d28fe4c5730403369ef6a",
+    "modules/engine/mount/selectedProfileBudget.mjs": "f5a69a4ee884a5848d5cc1fec86174d3fe9badc77710654d02bae69c97897013",
+    "modules/engine/mount/enclosureManufacturingMesh.mjs": "8e6486f479fd4e6379ac169eaff4a1b18380da4947421362a82c309c9e78f3a0",
+    "modules/engine/mount/enclosurePlan.mjs": "080ee18dd77731efaccfb9101b3d7f138b0ea6f525b881b2ccf4b174d544d19f",
+    "modules/engine/mount/enclosureMesh.mjs": "2b6f1474105c430f3efe6eb87d002576d6a9744a7b1cc98f5493ed129b2ce5f3",
+    "modules/engine/mount/contract.mjs": "374313f7212c6911d82ad9223e7441ac655e80d946c99ec4c663152398654f11",
+    "modules/engine/mount/workerReplyRecord.mjs": "56e3b40d184875c46ac81c9a5376fbc5b6e9dc2c6a8952bb70d99fdec141751f",
+    "modules/engine/mount/portable-topology-envelope.mjs": "cc0b58a590e9d4fe68b3a19a6ec5274401a605006425255eb2fc714a7150ea8a",
+    "modules/engine/mount/drilledTopologyEnvelope.mjs": "283740c9ef61cbc7a24dfd144e73608d008a2cf1a7a753b53652bdbcc876f346",
+    "modules/engine/mount/fourCornerMountContract.mjs": "cea81ebb05d1bc170df5639ed3ab567fd7f5a4aa08712f8eef3c994505fbc1d1",
+    "modules/engine/mount/polygonProfilePlan.mjs": "fa5ab686b60bb16348074df57e37ba04d4173ac5e0b9a441e2d4dfc4cc03737d",
+    "modules/engine/extrusion/simplePolygon.mjs": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+    "modules/engine/mount/ownedTopologyContract.mjs": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9"
+  },
+  "files": {
+    "modules/engine/mount/occ-polygon-profile-mount.mjs": {
+      "sha256": "6b33d416d04a588e20181d0bf1fd803fa6612018024a1d78d3a7298837d1e84a",
+      "bytes": 758
+    },
+    "modules/engine/mount/selectedProfilePlan.mjs": {
+      "sha256": "824dc5bfc8555a89fe9a647612ce76970f98b8adfd6e648185dd29e9f311c8a0",
+      "bytes": 8190
+    },
+    "modules/engine/mount/worker-controller.mjs": {
+      "sha256": "fe837822bb116eb6f048ea9e77c89b8861d4ae7cfd2d28fe4c5730403369ef6a",
+      "bytes": 66414
+    },
+    "modules/engine/mount/selectedProfileBudget.mjs": {
+      "sha256": "f5a69a4ee884a5848d5cc1fec86174d3fe9badc77710654d02bae69c97897013",
+      "bytes": 4511
+    },
+    "modules/engine/mount/enclosureManufacturingMesh.mjs": {
+      "sha256": "8e6486f479fd4e6379ac169eaff4a1b18380da4947421362a82c309c9e78f3a0",
+      "bytes": 10388
+    },
+    "modules/engine/mount/enclosurePlan.mjs": {
+      "sha256": "080ee18dd77731efaccfb9101b3d7f138b0ea6f525b881b2ccf4b174d544d19f",
+      "bytes": 4369
+    },
+    "modules/engine/mount/enclosureMesh.mjs": {
+      "sha256": "2b6f1474105c430f3efe6eb87d002576d6a9744a7b1cc98f5493ed129b2ce5f3",
+      "bytes": 1754
+    },
+    "modules/engine/mount/contract.mjs": {
+      "sha256": "374313f7212c6911d82ad9223e7441ac655e80d946c99ec4c663152398654f11",
+      "bytes": 5830
+    },
+    "modules/engine/mount/workerReplyRecord.mjs": {
+      "sha256": "56e3b40d184875c46ac81c9a5376fbc5b6e9dc2c6a8952bb70d99fdec141751f",
+      "bytes": 2299
+    },
+    "modules/engine/mount/portable-topology-envelope.mjs": {
+      "sha256": "cc0b58a590e9d4fe68b3a19a6ec5274401a605006425255eb2fc714a7150ea8a",
+      "bytes": 3947
+    },
+    "modules/engine/mount/drilledTopologyEnvelope.mjs": {
+      "sha256": "283740c9ef61cbc7a24dfd144e73608d008a2cf1a7a753b53652bdbcc876f346",
+      "bytes": 1900
+    },
+    "modules/engine/mount/fourCornerMountContract.mjs": {
+      "sha256": "cea81ebb05d1bc170df5639ed3ab567fd7f5a4aa08712f8eef3c994505fbc1d1",
+      "bytes": 4877
+    },
+    "modules/engine/mount/polygonProfilePlan.mjs": {
+      "sha256": "fa5ab686b60bb16348074df57e37ba04d4173ac5e0b9a441e2d4dfc4cc03737d",
+      "bytes": 7049
+    },
+    "modules/engine/extrusion/simplePolygon.mjs": {
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+      "bytes": 5128
+    },
+    "modules/engine/mount/ownedTopologyContract.mjs": {
+      "sha256": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+      "bytes": 7063
+    },
+    "modules/engine/mount/polygon-profile-worker.js": {
+      "sha256": "9a73eaabe5f8590d9ea8f48166d32b735cec65e51a1eb6c9961621712467b50a",
+      "bytes": 351853
+    },
+    "polygon-profile-occ-portable.js": {
+      "sha256": "5414a24c96eff09b77f7d3fe758287c9696e63127c91e73011f6f2939de2a8eb",
+      "bytes": 309280
+    },
+    "polygon-profile-occ.wasm": {
+      "sha256": "534ffdd2d88632a7878d654742f2df72c16691f3c814085e4f525efc74961e19",
+      "bytes": 35065928
+    }
+  },
+  "output": "/tmp/codi-polygon-profile-component-20261106-r2"
+}

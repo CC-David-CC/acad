@@ -1,0 +1,17 @@
+import {captureManufacturingMeshRequest,captureManufacturingMeshResult,MANUFACTURING_MESH_NATIVE_CODES,MANUFACTURING_MESH_REFUSAL_CODES} from './ownedManufacturingMeshProtocol.mjs';
+import {captureOrthographicReadRequest,captureOrthographicReadResult,orthographicFrameValues,ORTHOGRAPHIC_NATIVE_CODES,ORTHOGRAPHIC_REFUSAL_CODES} from './ownedOrthographicReadProtocol.mjs';
+import {captureStepExportRequest,captureStepExportResult,STEP_EXPORT_NATIVE_CODES,STEP_EXPORT_REFUSAL_CODES} from './ownedStepExportProtocol.mjs';
+// Explicit component only; no catalog/default/part revision promotion.
+import {capturePolygonProfileRequest} from './selectedProfilePlan.mjs';
+import {captureOwnedRevolveIntent,bindOwnedRevolveIntent} from '../solid/ownedRevolveIntent.mjs';
+import {captureOwnedSweepIntent,bindOwnedSweepIntent} from '../solid/ownedSweepIntent.mjs';
+import {captureOwnedLoftIntent,ownedLoftBindingFields,captureOwnedLoftBinding,equalOwnedLoftBinding,LOFT_NATIVE_REFUSALS,LOFT_PREPARATION_REFUSALS} from '../solid/ownedLoftIntent.mjs';
+import {createWorkerMount} from './worker-controller.mjs';
+export function createManufacturingMeshOccMount(options){
+ return createWorkerMount(options,Object.freeze({engine:'occ-manufacturing-mesh-v1-component',representation:'occ-brep-worker-owned',mesh:false,profile:false,
+  selectedProfile:true,selectedProfileVersion:3,edgeTreatments:true,booleanHistory:true,throughHoles:true,linearHolePatterns:true,revolve:true,sweep:true,loft:true,adaptiveMetrology:true,stepExport:true,orthographicRead:true,drawingReferences:true,manufacturingMesh:true,captureManufacturingMeshRequest,captureManufacturingMeshResult,manufacturingNativeCodes:MANUFACTURING_MESH_NATIVE_CODES,manufacturingRefusalCodes:MANUFACTURING_MESH_REFUSAL_CODES,captureOrthographicReadRequest,captureOrthographicReadResult,orthographicFrameValues,orthographicNativeCodes:ORTHOGRAPHIC_NATIVE_CODES,orthographicRefusalCodes:ORTHOGRAPHIC_REFUSAL_CODES,captureStepExportRequest,captureStepExportResult,stepNativeCodes:STEP_EXPORT_NATIVE_CODES,stepRefusalCodes:STEP_EXPORT_REFUSAL_CODES,
+  captureSelectedProfile:capturePolygonProfileRequest,captureRevolve:captureOwnedRevolveIntent,bindRevolve:bindOwnedRevolveIntent,captureSweep:captureOwnedSweepIntent,bindSweep:bindOwnedSweepIntent,
+  captureLoft:captureOwnedLoftIntent,loftBindingFields:ownedLoftBindingFields,captureLoftBinding:captureOwnedLoftBinding,sameLoftBinding:equalOwnedLoftBinding,loftNativeCodes:LOFT_NATIVE_REFUSALS,loftPreparationCodes:LOFT_PREPARATION_REFUSALS,
+  jsSha256:'32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08',
+  wasmSha256:'abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc'}));
+}

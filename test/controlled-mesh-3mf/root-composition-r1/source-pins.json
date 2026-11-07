@@ -1,0 +1,7 @@
+{
+  "web/app/cad/projectManager/projectManagerBundle.ts": "21dde8243bad4008776079e0a8677fba28b97da8c056d646d1f837189fb9e712",
+  "web/app/cad/projectManager/projectEnvelope.mjs": "82c063f8fdd86785af14b49f699e9c244b2d0c7ac879f4400b3dc328894d9e2e",
+  "web/app/cad/export/core3mf.mjs": "555cad61ee8fac6c820b5ab7b3e174579943d60c8d8f8318009e099ec00264b3",
+  "web/app/cad/export/controlledMesh3mfProtocol.mjs": "37746ff090eb0f8d7a74cfddaafa7611c22419567b5c40c72a6e5e51e8d9e218",
+  "web/app/cad/export/controlledMesh3mfClient.mjs": "3d6255a69a0c05d817579e19549b2f16d4920a14a867914e858a1c231d0549da"
+}

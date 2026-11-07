@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "source": "10489c3d5ef3da13394f1e8d0e1f8098b64c9980",
+  "layer": "synthetic-exact-source-method",
+  "functionBodySha256": "0e171aa0ee0e096ecdac455081a9719aa595610bc28bb45694bcb09746994a40",
+  "scope": "Private verifyLengthIntent only. Other validation may reject mutated fields; no actual solver mutation or accepted full-transition corruption is established.",
+  "controls": [
+    {
+      "id": "requested-relation-only",
+      "verifierAccepted": true,
+      "error": null
+    },
+    {
+      "id": "numeric-coordinate-change",
+      "verifierAccepted": true,
+      "error": null
+    },
+    {
+      "id": "changed-root-id",
+      "verifierAccepted": false,
+      "error": {
+        "code": "INTENT_CHANGED",
+        "message": "Existing authored sketch intent changed."
+      }
+    },
+    {
+      "id": "changed-metadata",
+      "verifierAccepted": false,
+      "error": {
+        "code": "INTENT_CHANGED",
+        "message": "Existing authored sketch intent changed."
+      }
+    },
+    {
+      "id": "changed-generator-intent",
+      "verifierAccepted": false,
+      "error": {
+        "code": "INTENT_CHANGED",
+        "message": "Existing authored sketch intent changed."
+      }
+    },
+    {
+      "id": "changed-relation-target",
+      "verifierAccepted": false,
+      "error": {
+        "code": "INTENT_CHANGED",
+        "message": "The requested relation was not retained."
+      }
+    },
+    {
+      "id": "masked-spline-degree-and-knots",
+      "verifierAccepted": true,
+      "error": null
+    },
+    {
+      "id": "masked-spline-method",
+      "verifierAccepted": true,
+      "error": null
+    },
+    {
+      "id": "masked-spline-mode",
+      "verifierAccepted": true,
+      "error": null
+    },
+    {
+      "id": "masked-spline-child-id",
+      "verifierAccepted": true,
+      "error": null
+    },
+    {
+      "id": "masked-rigid-local-definition",
+      "verifierAccepted": true,
+      "error": null
+    },
+    {
+      "id": "masked-rigid-member-id",
+      "verifierAccepted": true,
+      "error": null
+    }
+  ]
+}

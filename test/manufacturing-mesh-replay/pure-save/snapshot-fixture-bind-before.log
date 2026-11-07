@@ -1,0 +1,23 @@
+verb 2.0.0
+✖ repeated native snapshot/dirty reads never write model cache or mutate accepted definitions (461.979857ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 851.799019
+
+✖ failing tests:
+
+test at test/manufacturing-mesh-replay/pure-save/snapshot.test.mjs:4:1
+✖ repeated native snapshot/dirty reads never write model cache or mutate accepted definitions (461.979857ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'projectStorageKey')
+      at save (file:///tmp/codi-drawing-custody-review-20261107/.build/manufacturing-mesh-replay/manager-fixture.mjs:43:492)
+      at f.project.save (file:///tmp/codi-drawing-custody-review-20261107/test/manufacturing-mesh-replay/pure-save/snapshot.test.mjs:5:410)
+      at captureCurrentProject (actual-projectManagerBundle.ts:629:32)
+      at Object.snapshotCurrentProject (actual-projectManagerBundle.ts:609:48)
+      at TestContext.<anonymous> (file:///tmp/codi-drawing-custody-review-20261107/test/manufacturing-mesh-replay/pure-save/snapshot.test.mjs:6:48)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

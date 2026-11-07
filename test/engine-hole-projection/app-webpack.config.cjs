@@ -1,0 +1,2 @@
+// Disposable full-app test only. Production runtime pins remain unchanged.
+const path=require('path'),base=require('../../webpack.config.js');base.devtool=false;base.resolve.symlinks=false;base.output={...base.output,path:'/tmp/codi-hole-history-app/static'};base.resolve.alias={...base.resolve.alias,'engine/mount/oci-verified-mount.mjs$':path.join(__dirname,'test-oci-mount.mjs')};module.exports=base;

@@ -1,0 +1,86 @@
+[
+  {
+    "box": {
+      "x": 36.484375,
+      "y": 35,
+      "height": 899,
+      "width": 723
+    },
+    "outer": {
+      "focused": true,
+      "visibility": "visible",
+      "active": {
+        "tag": "BODY",
+        "cls": ""
+      },
+      "hit": {
+        "tag": "IFRAME",
+        "cls": "jsketcher-frame"
+      },
+      "iframes": [
+        {
+          "src": "http://127.0.0.1:20920/assets/desktop/apps/jsketcher/bbe367ef935ee79b1cc91f6704d71e686764b00eeb9f95fc2f615d5272032b2f/node_modules/jsketcher-build/index-webos.html?DEFAULT&webos=1",
+          "box": {
+            "x": 5,
+            "y": 35,
+            "width": 754,
+            "height": 924.203125
+          }
+        }
+      ]
+    },
+    "inner": {
+      "focused": false,
+      "active": {
+        "tag": "BODY",
+        "cls": ""
+      },
+      "size": {
+        "width": 754,
+        "height": 924
+      }
+    }
+  },
+  {
+    "box": {
+      "x": 679,
+      "y": 781.40625,
+      "height": 80,
+      "width": 80
+    },
+    "outer": {
+      "focused": true,
+      "visibility": "visible",
+      "active": {
+        "tag": "BODY",
+        "cls": ""
+      },
+      "hit": {
+        "tag": "IFRAME",
+        "cls": "jsketcher-frame"
+      },
+      "iframes": [
+        {
+          "src": "http://127.0.0.1:20920/assets/desktop/apps/jsketcher/bbe367ef935ee79b1cc91f6704d71e686764b00eeb9f95fc2f615d5272032b2f/node_modules/jsketcher-build/index-webos.html?DEFAULT&webos=1",
+          "box": {
+            "x": 5,
+            "y": 35,
+            "width": 754,
+            "height": 924.203125
+          }
+        }
+      ]
+    },
+    "inner": {
+      "focused": false,
+      "active": {
+        "tag": "BODY",
+        "cls": ""
+      },
+      "size": {
+        "width": 754,
+        "height": 924
+      }
+    }
+  }
+]

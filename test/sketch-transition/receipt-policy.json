@@ -1,0 +1,134 @@
+{
+  "accepted": {
+    "revision": "replay-32",
+    "ok": true
+  },
+  "added": {
+    "revision": "length",
+    "ok": true,
+    "relation": {
+      "objects": [
+        "s0",
+        "s1"
+      ],
+      "status": "accepted"
+    }
+  },
+  "missing": {
+    "revision": "missing",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "Choose two distinct segments in the current sketch."
+    }
+  },
+  "conflict": {
+    "revision": "conflict",
+    "ok": false,
+    "error": {
+      "code": "RESIDUAL",
+      "message": "A constraint residual exceeds its numerical tolerance."
+    }
+  },
+  "missingHint": {
+    "revision": "legacy-missing-hint",
+    "ok": false,
+    "error": {
+      "code": "UNSUPPORTED",
+      "message": "Rejected or missing admission intent cannot be regenerated."
+    }
+  },
+  "validExternal": {
+    "revision": "external-ok",
+    "ok": true
+  },
+  "getter": {
+    "result": {
+      "revision": "",
+      "ok": false,
+      "error": {
+        "code": "INVALID",
+        "message": "Invalid sketch transition request."
+      }
+    },
+    "reads": 0
+  },
+  "externalGetter": {
+    "result": {
+      "revision": "get-external",
+      "ok": false,
+      "error": {
+        "code": "INVALID",
+        "message": "Invalid external parameter."
+      }
+    },
+    "reads": 0
+  },
+  "externalMap": {
+    "revision": "map",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "External parameters must be a plain numeric record."
+    }
+  },
+  "externalDate": {
+    "revision": "date",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "External parameters must be a plain numeric record."
+    }
+  },
+  "externalArray": {
+    "revision": "typed-array",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "External parameters must be a plain numeric record."
+    }
+  },
+  "elapsedMs": 222.20000004768372,
+  "mismatch": {
+    "revision": "mismatch",
+    "ok": false,
+    "error": {
+      "code": "CURRENT_GEOMETRY_MISMATCH",
+      "message": "The solved sketch differs from the captured native state."
+    }
+  },
+  "badHint": {
+    "revision": "hint",
+    "ok": false,
+    "error": {
+      "code": "INTENT_CHANGED",
+      "message": "Constraint intent changed during solving."
+    }
+  },
+  "invalid": {
+    "revision": "invalid",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "Invalid external parameter."
+    }
+  },
+  "extra": {
+    "revision": "replay-32",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "Invalid sketch transition request."
+    }
+  },
+  "oversize": {
+    "revision": "replay-32",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "Invalid sketch transition request."
+    }
+  },
+  "unchanged": true,
+  "violations": []
+}

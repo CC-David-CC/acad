@@ -1,0 +1,130 @@
+{
+  "base": "e361f95249935aff2e8f77f16d402d4065a12222",
+  "scope": "Test/harness-only, hold for integration review; no UI/worker/kernel qualification or product changes",
+  "sourceModules": 41,
+  "before": {
+    "tests": 228,
+    "pass": 225,
+    "fail": 3,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "after": {
+    "tests": 228,
+    "pass": 228,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "focused": {
+    "tests": 13,
+    "pass": 13,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "loaderGuards": {
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "unchangedOtherMechanicalModules": 39,
+  "protectedArcAndFixationSourceUnchanged": true,
+  "originalFailures": [
+    {
+      "name": "actual legacy reevaluate writer skips only clock-only storage without skipping refresh/reset",
+      "caughtCause": "ReferenceError: _objectSpread is not defined",
+      "assertion": "reset count 0 !== 1 after caught error"
+    },
+    {
+      "name": "legacy reevaluate persists real geometry/metadata changes and retains boundary provenance",
+      "caughtCause": "ReferenceError: _objectSpread is not defined",
+      "assertion": "write count 0 !== 1 after caught error"
+    },
+    {
+      "name": "explicit group and real segment endpoints follow a single transform with polar equations",
+      "assertion": "true !== false: retain the observed false admission as a regression",
+      "cause": "Current baseline already rejects the contradictory candidate"
+    }
+  ],
+  "writerControls": {
+    "actualHeadlessIOAndParametricMath": true,
+    "unchangedOriginalBytesOnTwoReevaluations": true,
+    "explicitWriterRefreshAndRealIDResetPerRun": 1,
+    "additionalRealIOLoadRefreshPerRun": 1,
+    "namedWidth": 120,
+    "dependentGeometryAndFreshResiduals": true,
+    "metadata": "explicitly injected field after actual IO serialization; not a general metadata hydration claim"
+  },
+  "rigidFreshResiduals": [
+    {
+      "type": "Polar",
+      "max": 1.5631940186722204e-13,
+      "rejected": false
+    },
+    {
+      "type": "Polar",
+      "max": 1.1787903986260062e-11,
+      "rejected": false
+    },
+    {
+      "type": "Polar",
+      "max": 2.984279490192421e-13,
+      "rejected": false
+    },
+    {
+      "type": "Polar",
+      "max": 1.1787903986260062e-11,
+      "rejected": false
+    },
+    {
+      "type": "RigidUnprotectedProbe",
+      "max": 0,
+      "rejected": false
+    },
+    {
+      "type": "Horizontal",
+      "max": 0,
+      "rejected": false
+    },
+    {
+      "type": "TemporaryAngleProbe",
+      "max": 1.0471975511965976,
+      "rejected": true
+    }
+  ],
+  "rigidControls": {
+    "exactRejectedGeometryTransformAndPolarPreservation": true,
+    "sameAngleAcceptedAfterRemovingHorizontal": true,
+    "independentSineCosineGeometry": true,
+    "unknownDOFAndFullyConstrainedRemainNull": true,
+    "existingTransactionAndExternalAnchorControlsRetained": true
+  },
+  "initialNonvisualHarnessObservation": {
+    "counts": {
+      "tests": 228,
+      "pass": 226,
+      "fail": 2,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "cause": "Actual IO calls refresh during load in addition to the source writer refresh; observer now distinguishes both and delegates both"
+  },
+  "logsSha256": {
+    "before": "abbe4a3aea014596342e7cfe9c866a5266b1a50cdcaeffe02d6c6faf22fb15d7",
+    "beforeBuild": "abdf89807dfcfdaacb020773841ee8b53c2fa12c756177e44a9bdf7805e865f7",
+    "initialNonvisual": "2df7f78acc6cd2b30d742ad840f83b9d6649876efece35a6e81bc89975a9419f",
+    "after": "a2fcb737361b3ea24a62f879cf402278dd7714fb7403e6fa2b218ac1a38e6c94",
+    "afterBuild": "f3a6f588006da9b047fdfd6bd72b7b3d7b3bfa66df055ff7f31aac75566e0609",
+    "focused": "6a6ae6d09fd739ee5e5d1af96def2ca724a04df6a51b6a6d6e7fe6ee0600f684",
+    "focusedBuild": "c4b5f6fbe6044daf87aab329dfd65da2f3c9edb52cc1492f6b0aab703eff882b",
+    "loader": "285c3d955a7fd6b4e91df2a0c945f53664fcb1231fbc65e7b6f4039338a6d77a"
+  }
+}

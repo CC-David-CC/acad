@@ -1,0 +1,17 @@
+/tmp/save-capability-OTj5Hi/test.cjs:866
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+                                                                                                          ^
+
+TypeError: Super expression must either be null or a function
+    at _inherits (/tmp/save-capability-OTj5Hi/test.cjs:866:113)
+    at /tmp/save-capability-OTj5Hi/test.cjs:884:3
+    at ./modules/lstream/throttle.js (/tmp/save-capability-OTj5Hi/test.cjs:933:2)
+    at __webpack_require__ (/tmp/save-capability-OTj5Hi/test.cjs:1509:41)
+    at ./modules/lstream/base.js (/tmp/save-capability-OTj5Hi/test.cjs:102:17)
+    at __webpack_require__ (/tmp/save-capability-OTj5Hi/test.cjs:1509:41)
+    at ./modules/lstream/emitter.js (/tmp/save-capability-OTj5Hi/test.cjs:187:63)
+    at __webpack_require__ (/tmp/save-capability-OTj5Hi/test.cjs:1509:41)
+    at ./modules/lstream/state.js (/tmp/save-capability-OTj5Hi/test.cjs:596:66)
+    at __webpack_require__ (/tmp/save-capability-OTj5Hi/test.cjs:1509:41)
+
+Node.js v24.22.1

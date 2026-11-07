@@ -1,0 +1,32 @@
+✔ actual readonly inventory binds production class/history/registry/runtime without parsing IDs (269.499994ms)
+✔ private prepare uses real hash Worker and pure model capture without writes/publication/ID allocation (241.83125ms)
+✖ pending actual hash reply is fenced by source/registry/runtime/model/counter/lifetime changes (497.904047ms)
+✔ returned private proposal becomes stale without installing metadata (156.779139ms)
+✔ stale/malformed/cancelled requests refuse before hash worker dispatch (107.746541ms)
+✔ wrong class/producer/origin/current build/placement never becomes a supported discovery target (583.533736ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 5
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2231.181676
+
+✖ failing tests:
+
+test at .build/pure-save-readonly/service.test.mjs:9:1
+✖ pending actual hash reply is fenced by source/registry/runtime/model/counter/lifetime changes (497.904047ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async file:///tmp/codi-drawing-custody-review-20261107/.build/pure-save-readonly/service.test.mjs:9:978
+      at async use (file:///tmp/codi-drawing-custody-review-20261107/.build/pure-save-readonly/service.test.mjs:5:66)
+      at async TestContext.<anonymous> (file:///tmp/codi-drawing-custody-review-20261107/.build/pure-save-readonly/service.test.mjs:9:770)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }

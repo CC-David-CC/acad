@@ -1,0 +1,1 @@
+const path=require('path');module.exports={mode:'production',target:'webworker',devtool:false,entry:path.join(__dirname,'rank-worker.mjs'),output:{path:'/tmp/codi-m01-jacobian-site/static',filename:'rank-benchmark.js'}};

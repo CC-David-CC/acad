@@ -1,0 +1,23 @@
+{
+  "scope": "Owned component fixture resources only",
+  "server": {
+    "host": "r730",
+    "pid": 1999077,
+    "bind": "127.0.0.1:32897",
+    "exactCmdlineCheckedBeforeSIGTERM": true,
+    "portVerifiedClosed": true
+  },
+  "forward": {
+    "bind": "127.0.0.1:32897",
+    "session": 79797,
+    "closed": true,
+    "portVerifiedClosed": true
+  },
+  "browsers": {
+    "allOwnedClosedPerReceipts": true,
+    "ownProfilesRemoved": true,
+    "sharedCDPConnected": false
+  },
+  "noSharedServiceOrDeploymentChanged": true,
+  "runtimeBinariesPreservedOutsideGit": true
+}

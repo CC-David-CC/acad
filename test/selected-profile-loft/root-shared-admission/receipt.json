@@ -1,0 +1,7 @@
+{
+  "status": "SOURCE_ADMISSION_COMPONENT_PASS",
+  "focusedControls": 17,
+  "scope": "5 feature-capture and12 ledger-admission controls; retained ledger controls and full tsc pass. No native result success fabricated. New operation is unregistered and awaits production semantic dispatch, catalog/staging, shared commands and actual app/history/Save/Open qualification.",
+  "nativeSuccess": false,
+  "appWorkflowQualified": false
+}

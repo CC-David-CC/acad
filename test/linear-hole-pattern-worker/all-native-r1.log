@@ -1,0 +1,20 @@
+PASS legacy/tiny-translated:6.000137061924313e-18
+legacy/tiny-origin:6e-18
+legacy/ordinary:4301
+legacy/tiny-disjoint-union:1.2000274123848626e-17
+selected/tiny-translated:6.000137061924313e-18
+selected/tiny-origin:6e-18
+selected/ordinary:4301
+selected/tiny-disjoint-union:1.2000274123848626e-17
+polygon/tiny-translated:6.000137061924313e-18
+polygon/tiny-origin:6e-18
+polygon/ordinary:4301
+polygon/tiny-disjoint-union:1.2000274123848626e-17
+mechanical/tiny-translated:6.000137061924313e-18
+mechanical/tiny-origin:6e-18
+mechanical/ordinary:4301
+mechanical/tiny-disjoint-union:1.2000274123848626e-17
+boolean-history/tiny-translated:6.000137061924313e-18
+boolean-history/tiny-origin:6e-18
+boolean-history/ordinary:4301
+boolean-history/tiny-disjoint-union:1.2000274123848626e-17

@@ -1,0 +1,208 @@
+{
+  "source": "b322e02c2d9a3ea26a12ea863e6371ce15e3dba4",
+  "result": "PASS",
+  "scope": "Public selected-native box continuation preserving exact authored build and accepted inputs. No signed Files or general CAD claim.",
+  "workflow": {
+    "profile": {
+      "featureId": 2,
+      "outputId": "worker-solid:1:[2,\"body\"]",
+      "bodyId": "worker-solid:1:[2,\"body\"]",
+      "sourceFaceId": "S:0/SURFACE",
+      "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-ce0d9863-251c-4335-a4a7-e2d50634b626\"],\"holes\":[]}",
+      "engine": "occ",
+      "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+      "unit": "millimeter",
+      "bodyPolicy": "separate",
+      "persistence": "volatile-workspace",
+      "revision": "76ea2d6a-ea47-41d2-9d9f-3642e7116833"
+    },
+    "before": {
+      "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":2,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-ce0d9863-251c-4335-a4a7-e2d50634b626\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}}],\"pointer\":1}",
+      "sources": [
+        {
+          "id": "S:0/SURFACE",
+          "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-ce0d9863-251c-4335-a4a7-e2d50634b626\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "worker-solid:1:[2,\"body\"]",
+          "metrics": {
+            "version": 1,
+            "unit": "millimeter",
+            "space": "model-local",
+            "resultKind": "single-solid",
+            "materialRegions": null,
+            "voidRegions": null,
+            "solidCount": 1,
+            "meshComponents": null,
+            "validLevel0": null,
+            "validLevel2": null,
+            "manifoldPredicate": null,
+            "nativeValidity": {
+              "method": "occ-inspect-analytic-v1",
+              "valid": true
+            },
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 2,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 0,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 3,
+                "wires": 3,
+                "edges": 3,
+                "vertices": 2
+              }
+            },
+            "nativeStatus": null,
+            "volumeUnit": "cubic-millimeter",
+            "reportedVolume": 1565.6973858007377,
+            "volumeMagnitude": 1565.6973858007377,
+            "volumeAvailable": true,
+            "volumeQuality": "tessellation-signed-integral",
+            "volumeKind": "occ-tessellation-signed-volume",
+            "boundsKind": "tessellation",
+            "nativeVolume": 1570.7963267948965,
+            "nativeBounds": {
+              "min": [
+                -10,
+                -10,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                5
+              ]
+            },
+            "nativeMeasurementQuality": "provider-native-unqualified",
+            "triangleCount": 176,
+            "bounds": {
+              "min": [
+                -9.975640502598242,
+                -9.993908270190957,
+                0
+              ],
+              "max": [
+                10,
+                9.993908270190957,
+                5
+              ]
+            },
+            "precision": {
+              "kind": "engine-defaults-unqualified"
+            },
+            "runtime": {
+              "mountEngine": "occ-selected-profile-v2-component",
+              "representation": "occ-brep-worker-owned",
+              "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+              "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+            }
+          }
+        }
+      ]
+    },
+    "error": {
+      "name": "Error",
+      "code": "ENGINE_REVISION_MISMATCH",
+      "message": "Mixed engine runtime revisions are not supported."
+    },
+    "after": {
+      "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":2,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-ce0d9863-251c-4335-a4a7-e2d50634b626\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}}],\"pointer\":1}",
+      "sources": [
+        {
+          "id": "S:0/SURFACE",
+          "data": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-ce0d9863-251c-4335-a4a7-e2d50634b626\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "worker-solid:1:[2,\"body\"]",
+          "metrics": {
+            "version": 1,
+            "unit": "millimeter",
+            "space": "model-local",
+            "resultKind": "single-solid",
+            "materialRegions": null,
+            "voidRegions": null,
+            "solidCount": 1,
+            "meshComponents": null,
+            "validLevel0": null,
+            "validLevel2": null,
+            "manifoldPredicate": null,
+            "nativeValidity": {
+              "method": "occ-inspect-analytic-v1",
+              "valid": true
+            },
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 2,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 0,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 3,
+                "wires": 3,
+                "edges": 3,
+                "vertices": 2
+              }
+            },
+            "nativeStatus": null,
+            "volumeUnit": "cubic-millimeter",
+            "reportedVolume": 1565.6973858007377,
+            "volumeMagnitude": 1565.6973858007377,
+            "volumeAvailable": true,
+            "volumeQuality": "tessellation-signed-integral",
+            "volumeKind": "occ-tessellation-signed-volume",
+            "boundsKind": "tessellation",
+            "nativeVolume": 1570.7963267948965,
+            "nativeBounds": {
+              "min": [
+                -10,
+                -10,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                5
+              ]
+            },
+            "nativeMeasurementQuality": "provider-native-unqualified",
+            "triangleCount": 176,
+            "bounds": {
+              "min": [
+                -9.975640502598242,
+                -9.993908270190957,
+                0
+              ],
+              "max": [
+                10,
+                9.993908270190957,
+                5
+              ]
+            },
+            "precision": {
+              "kind": "engine-defaults-unqualified"
+            },
+            "runtime": {
+              "mountEngine": "occ-selected-profile-v2-component",
+              "representation": "occ-brep-worker-owned",
+              "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+              "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+            }
+          }
+        }
+      ]
+    },
+    "sameModels": true
+  }
+}

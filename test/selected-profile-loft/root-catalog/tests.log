@@ -1,0 +1,31 @@
+✔ experimental revision is exact, immutable and never implicitly preferred (1.582795ms)
+✔ complete native metadata binds without executing geometry (0.584555ms)
+✔ sweep requires exact own versioned descriptor fields (1.174171ms)
+✔ sweep revision retains all full-history native bindings (0.541965ms)
+✔ old native identities cannot satisfy the new mount or silently replace it (0.387044ms)
+✔ explicit sweep selection is compatible with inherited revolve and selected profiles (0.907498ms)
+✔ existing histories preserve their exact build and mixed revisions refuse (0.435084ms)
+✔ registered capability admits the actual source-pinned Chromium descriptor (0.503684ms)
+✔ experimental revision is exact, immutable and never implicitly preferred (1.493414ms)
+✔ complete native metadata binds without executing geometry (1.457564ms)
+✔ revolve requires exact own source-qualified versioned descriptor fields (1.284252ms)
+✔ revolve revision retains all full-history native bindings (0.630706ms)
+✔ old native identities cannot satisfy the new mount or silently replace it (0.402874ms)
+✔ loft is an explicit exact experimental revision without default promotion (4.137698ms)
+✔ complete inherited and exact loft descriptors bind as metadata only (1.308832ms)
+✔ missing, changed and accessor loft fields refuse without invoking getters (2.660525ms)
+✔ loft retains inherited operations and does not accept an older runtime (0.600685ms)
+✔ saved loft participates in single-backend ownership, budgets and source-save exclusion (1.285062ms)
+✔ one immutable solid vocabulary includes sweep exactly once (1.08845ms)
+✔ sweep ownership cannot be ignored in mixed history or unknown runtime (1.518544ms)
+✔ sweep consumes one native-result budget even after visible results disappear (0.540735ms)
+✔ unqualified sweep build cannot permit a sketch fast-save (1.313142ms)
+✔ backend identity accessor refuses without executing it (0.367353ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 109.815641

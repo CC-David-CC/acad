@@ -1,0 +1,176 @@
+{
+  "status": "PASS_OBSERVATIONS",
+  "scope": "Native boxed-CSG observation; no Join certificate or mesh classifier",
+  "pins": {
+    "upstreamBase": "31afd71d17c7a94cfaeada83f657d7b42628ead6",
+    "jsSha256": "cd2031fd75cbbc812b550dd228f95b9fd666ae4da6557f840e3d3ed4cbed268b",
+    "wasmSha256": "636b7dc8e03a31a355ce5d7ec5a2bf3bb449eb7ea1c0aba5819bfb467d46ca0f",
+    "scope": "Experimental diagnostics only; application runtime unchanged"
+  },
+  "producerSha256": "cb2ba8251772a9be65506e0e526732983a586fce3ded74e0cc6f96c64fcd9aff",
+  "rows": [
+    {
+      "id": "exterior-notches-separated",
+      "source": {
+        "outer": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "dimensions": [
+            30,
+            30,
+            30
+          ]
+        },
+        "first": {
+          "origin": [
+            -1,
+            -1,
+            -1
+          ],
+          "dimensions": [
+            16,
+            16,
+            16
+          ]
+        },
+        "second": {
+          "origin": [
+            16,
+            16,
+            16
+          ],
+          "dimensions": [
+            15,
+            15,
+            15
+          ]
+        }
+      },
+      "status": "NoError",
+      "volume": 20881,
+      "components": [
+        {
+          "volume": 20881,
+          "status": "NoError",
+          "twoManifold": true,
+          "selfIntersecting": false
+        }
+      ],
+      "twoManifold": true,
+      "selfIntersecting": false,
+      "epsilon": 3.0999999999999996e-11
+    },
+    {
+      "id": "exterior-notches-point-touch",
+      "source": {
+        "outer": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "dimensions": [
+            30,
+            30,
+            30
+          ]
+        },
+        "first": {
+          "origin": [
+            -1,
+            -1,
+            -1
+          ],
+          "dimensions": [
+            16,
+            16,
+            16
+          ]
+        },
+        "second": {
+          "origin": [
+            15,
+            15,
+            15
+          ],
+          "dimensions": [
+            16,
+            16,
+            16
+          ]
+        }
+      },
+      "status": "NoError",
+      "volume": 20250,
+      "components": [
+        {
+          "volume": 20250,
+          "status": "NoError",
+          "twoManifold": true,
+          "selfIntersecting": false
+        }
+      ],
+      "twoManifold": true,
+      "selfIntersecting": false,
+      "epsilon": 3.0999999999999996e-11
+    },
+    {
+      "id": "exterior-notches-edge-touch",
+      "source": {
+        "outer": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "dimensions": [
+            30,
+            30,
+            30
+          ]
+        },
+        "first": {
+          "origin": [
+            -1,
+            -1,
+            -1
+          ],
+          "dimensions": [
+            16,
+            16,
+            16
+          ]
+        },
+        "second": {
+          "origin": [
+            15,
+            15,
+            -1
+          ],
+          "dimensions": [
+            16,
+            16,
+            32
+          ]
+        }
+      },
+      "status": "NoError",
+      "volume": 16875,
+      "components": [
+        {
+          "volume": 16875,
+          "status": "NoError",
+          "twoManifold": true,
+          "selfIntersecting": false
+        }
+      ],
+      "twoManifold": true,
+      "selfIntersecting": false,
+      "epsilon": 3.199999999999999e-11
+    }
+  ],
+  "retainedWrappers": 0
+}

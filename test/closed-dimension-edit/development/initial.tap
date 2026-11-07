@@ -1,0 +1,128 @@
+TAP version 13
+# Subtest: actual normal coordinator replaces one circle diameter and journals exact Undo/Redo
+not ok 1 - actual normal coordinator replaces one circle diameter and journals exact Undo/Redo
+  ---
+  duration_ms: 2.082173
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:22:1'
+  failureType: 'testCodeFailure'
+  error: 'Sketch worker must be same-origin.'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:837047
+    c (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828462)
+    Generator._invoke (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828215)
+    Generator.next (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828825)
+    b (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834655)
+    a (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834858)
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834917
+    new Promise (<anonymous>)
+    Module.<anonymous> (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834798)
+    Module.E (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:844920)
+  ...
+# Subtest: actual segment length edit and removal preserve object identity and genuine underconstraint
+not ok 2 - actual segment length edit and removal preserve object identity and genuine underconstraint
+  ---
+  duration_ms: 0.350323
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:25:1'
+  failureType: 'testCodeFailure'
+  error: 'Sketch worker must be same-origin.'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:837047
+    c (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828462)
+    Generator._invoke (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828215)
+    Generator.next (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828825)
+    b (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834655)
+    a (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834858)
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834917
+    new Promise (<anonymous>)
+    Module.<anonymous> (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834798)
+    Module.S (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:835672)
+  ...
+# Subtest: removing a real accepted duplicate reactivates the surviving redundant diameter
+not ok 3 - removing a real accepted duplicate reactivates the surviving redundant diameter
+  ---
+  duration_ms: 0.264393
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:28:1'
+  failureType: 'testCodeFailure'
+  error: 'Sketch worker must be same-origin.'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:837047
+    c (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828462)
+    Generator._invoke (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828215)
+    Generator.next (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828825)
+    b (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834655)
+    a (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834858)
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834917
+    new Promise (<anonymous>)
+    Module.<anonymous> (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834798)
+    Module.S (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:835672)
+  ...
+# Subtest: contradictory existing dimension edit preserves source/journal and a valid retry recovers
+not ok 4 - contradictory existing dimension edit preserves source/journal and a valid retry recovers
+  ---
+  duration_ms: 0.348994
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:31:1'
+  failureType: 'testCodeFailure'
+  error: 'Sketch worker must be same-origin.'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:837047
+    c (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828462)
+    Generator._invoke (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828215)
+    Generator.next (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828825)
+    b (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834655)
+    a (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834858)
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834917
+    new Promise (<anonymous>)
+    Module.<anonymous> (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834798)
+    Module.S (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:835672)
+  ...
+# Subtest: strict discovered identity/domain/no-op and unsupported schema refuse without publication
+not ok 5 - strict discovered identity/domain/no-op and unsupported schema refuse without publication
+  ---
+  duration_ms: 0.377834
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:34:1'
+  failureType: 'testCodeFailure'
+  error: 'Sketch worker must be same-origin.'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:837047
+    c (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828462)
+    Generator._invoke (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828215)
+    Generator.next (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828825)
+    b (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834655)
+    a (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834858)
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834917
+    new Promise (<anonymous>)
+    Module.<anonymous> (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834798)
+    Module.S (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:835672)
+  ...
+# Subtest: typed diameter rebinding/literal/removal use actual quantity lengths and exact typed Undo
+not ok 6 - typed diameter rebinding/literal/removal use actual quantity lengths and exact typed Undo
+  ---
+  duration_ms: 0.368384
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:38:1'
+  failureType: 'testCodeFailure'
+  error: 'Sketch worker must be same-origin.'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:837047
+    c (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828462)
+    Generator._invoke (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828215)
+    Generator.next (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:828825)
+    b (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834655)
+    a (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834858)
+    /tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834917
+    new Promise (<anonymous>)
+    Module.<anonymous> (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:834798)
+    Module.S (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:835672)
+  ...
+# Interrupted while running: test/closed-dimension-edit/dimension.test.mjs at /tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:1:1

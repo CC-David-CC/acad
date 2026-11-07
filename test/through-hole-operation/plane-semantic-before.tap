@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: pending operation refuses the same face after its plane predicate becomes false
+not ok 1 - pending operation refuses the same face after its plane predicate becomes false
+  ---
+  duration_ms: 7.270058
+  type: 'test'
+  location: '/tmp/codi-cad-through-hole-operation-20261106/test/through-hole-operation/plane-currentness.test.mjs:4:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected rejection (AbortError).'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    name: 'AbortError'
+  operator: 'rejects'
+  stack: |-
+    async TestContext.<anonymous> (file:///tmp/codi-cad-through-hole-operation-20261106/test/through-hole-operation/plane-currentness.test.mjs:5:151)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: registered publication refuses the same face after its plane predicate becomes false
+not ok 2 - registered publication refuses the same face after its plane predicate becomes false
+  ---
+  duration_ms: 1.563205
+  type: 'test'
+  location: '/tmp/codi-cad-through-hole-operation-20261106/test/through-hole-operation/plane-currentness.test.mjs:7:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception (AbortError).'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    name: 'AbortError'
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/codi-cad-through-hole-operation-20261106/test/through-hole-operation/plane-currentness.test.mjs:8:94)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 0
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 381.566318

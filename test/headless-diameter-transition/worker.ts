@@ -1,0 +1,5 @@
+(self as any).importScripts(new URL('../lib/verb.js',self.location.href).href);
+const {addDiameterTransition}=require('../../web/app/sketcher/headless/diameterTransition');
+const {replaySketchTransition}=require('../../web/app/sketcher/headless/sketchTransition');
+const {HeadlessSketchWorkspace}=require('../../web/app/sketcher/headless/workspace');
+let used=false;self.onmessage=event=>{if(used)return;used=true;const {mode,request}=event.data;try{if(mode==='fixture'){const w=new HeadlessSketchWorkspace(request.externalParameters||{});w.io._loadSketch(request.sketch,{strict:true});const native=JSON.parse(w.io.serializeSketch(request.sketch.metadata,{strict:true}));native.boundary=request.sketch.boundary;self.postMessage({serializedSketch:JSON.stringify(native)});return}const before=JSON.stringify(request),result=mode==='replay'?replaySketchTransition(request):addDiameterTransition(request);self.postMessage({result,inputUnchanged:before===JSON.stringify(request),realm:{window:typeof window!=='undefined',document:typeof document!=='undefined',canvas:typeof HTMLCanvasElement!=='undefined'}})}catch(error){self.postMessage({error:error?.message||String(error)})}};

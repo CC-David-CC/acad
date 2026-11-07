@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "scope": "Independent analysis of retained coordinates, not fresh kernel execution or an accuracy-policy qualification",
+  "originUlp": 1.1641532182693481e-10,
+  "representedSideLengths": [
+    1.00000761449337e-06,
+    2.00001522898674e-06,
+    3.00002284348011e-06
+  ],
+  "representedVolume": 6.000137061924313e-18,
+  "recordedNativeVolume": 6.000137061924313e-18,
+  "exactNativeMatch": true,
+  "relativeErrorVersusDecimalNominal": 2.2843654052137795e-05,
+  "geometryEndpointConstructionMatches": [
+    true,
+    true,
+    true
+  ],
+  "interpretation": "Recorded box is exactly consistent with the rounded binary64 global endpoints; ideal dimension-product difference alone is not evidence of an additional kernel defect."
+}

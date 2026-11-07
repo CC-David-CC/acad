@@ -1,0 +1,118 @@
+{
+  "fixtureBytes": 151959,
+  "counts": {
+    "rewind": {
+      "dropGeometry": {
+        "calls": 3000,
+        "beforeMaterial": 0,
+        "meshPresent": 2000,
+        "ms": 17.200000524520874
+      },
+      "updateBounds": {
+        "calls": 1000,
+        "beforeMaterial": 0,
+        "meshPresent": 0,
+        "ms": 58.49999785423279
+      },
+      "createGeometry": {
+        "calls": 1000,
+        "beforeMaterial": 0,
+        "meshPresent": 0,
+        "ms": 15.299997806549072
+      },
+      "elapsedMs": 362.5,
+      "models": 1000,
+      "history": 2000,
+      "rootViews": 1000,
+      "faceViews": 1000,
+      "previousRootsReleased": true,
+      "previousFacesReleased": true,
+      "firstRootAttributeObservers": 1,
+      "firstFaceAttributeObservers": 1
+    },
+    "full": {
+      "dropGeometry": {
+        "calls": 3000,
+        "beforeMaterial": 0,
+        "meshPresent": 1000,
+        "ms": 2.200000286102295
+      },
+      "updateBounds": {
+        "calls": 2000,
+        "beforeMaterial": 0,
+        "meshPresent": 0,
+        "ms": 108.90000128746033
+      },
+      "createGeometry": {
+        "calls": 2000,
+        "beforeMaterial": 0,
+        "meshPresent": 0,
+        "ms": 53.100000858306885
+      },
+      "elapsedMs": 510.09999990463257,
+      "models": 2000,
+      "history": 2000,
+      "rootViews": 2000,
+      "faceViews": 2000,
+      "previousRootsReleased": true,
+      "previousFacesReleased": true,
+      "firstRootAttributeObservers": 1,
+      "firstFaceAttributeObservers": 1
+    }
+  },
+  "selection": {
+    "id": "S:0",
+    "registered": true,
+    "marked": true,
+    "viewMarked": true
+  },
+  "historyUnchanged": true,
+  "sourceUnchanged": true,
+  "pointer": 1999,
+  "appHash": "145ce7e1e6b959b534c05d5cab210f8efc9a9cc74318f09ccc3e9dde0093e535",
+  "lifecycle": {
+    "update": {
+      "replaced": true,
+      "disposed": 1,
+      "positionsUnchanged": true,
+      "materialRetained": true,
+      "oldMeshDetached": true,
+      "currentMeshAttached": true,
+      "sameOwner": true
+    },
+    "ownership": {
+      "newerRetained": true,
+      "originalFailureRetained": true,
+      "reentrantReleaseCalls": 1,
+      "oldDisposed": true
+    },
+    "fault": {
+      "scope": "Injected post-geometry constructor and cleanup errors on actual scene publication; this is derived-view resource cleanup evidence, not a claim of transactional view-publication rollback.",
+      "geometryDisposals": 1,
+      "materialDisposals": 1,
+      "rootReleases": 1,
+      "childDisposed": true,
+      "parentDisposed": true,
+      "faceOwnerCleared": true,
+      "shellOwnerCleared": true,
+      "rootObservers": 0,
+      "faceObservers": 0,
+      "originalErrorObserved": true,
+      "cleanupErrorObserved": true,
+      "materialErrorObserved": true,
+      "rootErrorObserved": true,
+      "models": 2000,
+      "history": 2000
+    },
+    "recovered": {
+      "models": 2000,
+      "history": 2000,
+      "rootViews": 2000,
+      "faceViews": 2000,
+      "firstRootObservers": 1,
+      "firstFaceObservers": 1,
+      "historyUnchanged": true,
+      "sourceUnchanged": true
+    }
+  }
+}

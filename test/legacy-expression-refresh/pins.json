@@ -1,0 +1,21 @@
+{
+  "source": "378c336fa068c5006a0b5a6999898fec759b83be",
+  "fixture": "/mnt/data10tb/codi-legacy-expression-20261105-r5",
+  "app": {
+    "path": "/static/index.bundle.js",
+    "sha256": "d4c1b52e5097d85b6d5b080ff9e8cf47c9342fc86552c3332e214452bcafd81d",
+    "bytes": 32755141
+  },
+  "workers": [
+    {
+      "path": "/static/sketch-solver.f8441f49499d2e720991.js",
+      "sha256": "d87972ca1d5274cf0708b6decfdbb9a8eb71eadf73d7cd8ed4810ad5535a2cc7",
+      "bytes": 3479484
+    },
+    {
+      "path": "/static/project-validator.1c3d792b2bdd7998cb7c.js",
+      "sha256": "c0f6db34857b0b4bf1e211f79f90615a1052097c75afd2d2bbea7f38efa74cc8",
+      "bytes": 1838485
+    }
+  ]
+}

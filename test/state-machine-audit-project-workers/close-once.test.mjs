@@ -1,0 +1,8 @@
+// Pure cleanup contract: explicit Worker doubles, never geometry/native success.
+import test from 'node:test';import assert from 'node:assert/strict';
+let serial=0;
+const load=()=>import('../../web/app/cad/projectManager/incrementalCanonical.mjs?cleanup-control='+serial++);
+for(const [name,cause]of [['error',Error('first cleanup cause')],['null',null],['undefined',undefined],['zero',0],['false',false],['empty','']])test('weak close-once record preserves '+name,async()=>{
+ const api=await load(),operationError=Error('original operation failed');let calls=0;const worker={terminate(){calls++;throw cause;}};let first;try{api.closeCanonicalHashWorker(worker,operationError);}catch(error){first=error;}assert(first);assert.equal(first.code,'WORKER_CLEANUP_FAILED');assert.equal(first.cause,cause);assert.equal(first.operationError,operationError);assert.throws(()=>api.closeCanonicalHashWorker(worker,Error('later error')),error=>error===first);assert.equal(calls,1);assert.throws(()=>api.assertCanonicalHashWorkerAvailable(),error=>error===first);await assert.rejects(api.hashCanonicalInWorker(null,worker,null,()=>0),error=>error===first);
+});
+test('successful close is idempotent and does not fence a new Worker',async()=>{const api=await load();let calls=0;const worker={terminate(){calls++;}};api.assertCanonicalHashWorkerAvailable(worker);api.closeCanonicalHashWorker(worker);api.closeCanonicalHashWorker(worker);assert.equal(calls,1);assert.throws(()=>api.assertCanonicalHashWorkerAvailable(worker),/already closed/);assert.doesNotThrow(()=>api.assertCanonicalHashWorkerAvailable({terminate(){}}));});

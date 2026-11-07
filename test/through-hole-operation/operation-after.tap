@@ -1,0 +1,100 @@
+TAP version 13
+# Subtest: schema exposes exactly 12 required authored fields and two optional numeric offsets
+ok 1 - schema exposes exactly 12 required authored fields and two optional numeric offsets
+  ---
+  duration_ms: 5.882775
+  type: 'test'
+  ...
+# Subtest: center/corners route exact raw intent, retain source handle, and publish one measured model
+ok 2 - center/corners route exact raw intent, retain source handle, and publish one measured model
+  ---
+  duration_ms: 3.19247
+  type: 'test'
+  ...
+# Subtest: invalid extra fields, wrong types and undefined corner offsets refuse before dispatch
+ok 3 - invalid extra fields, wrong types and undefined corner offsets refuse before dispatch
+  ---
+  duration_ms: 3.972887
+  type: 'test'
+  ...
+# Subtest: raw capture rejects accessors without invoking them; materialized values cannot replace raw
+ok 4 - raw capture rejects accessors without invoking them; materialized values cannot replace raw
+  ---
+  duration_ms: 1.220621
+  type: 'test'
+  ...
+# Subtest: initial independent-plane predicate rejects matching plain objects and stale ownership
+ok 5 - initial independent-plane predicate rejects matching plain objects and stale ownership
+  ---
+  duration_ms: 4.544412
+  type: 'test'
+  ...
+# Subtest: wrong source origin/face/region and wrong producer refuse without consuming accepted input
+ok 6 - wrong source origin/face/region and wrong producer refuse without consuming accepted input
+  ---
+  duration_ms: 1.522024
+  type: 'test'
+  ...
+# Subtest: all await phases honor document cancellation and close mount exactly once
+ok 7 - all await phases honor document cancellation and close mount exactly once
+  ---
+  duration_ms: 2.469333
+  type: 'test'
+  ...
+# Subtest: pending result rechecks services, storage, history, expressions, owner and plane identity
+ok 8 - pending result rechecks services, storage, history, expressions, owner and plane identity
+  ---
+  duration_ms: 9.48641
+  type: 'test'
+  ...
+# Subtest: registered owner publication checks remain live after operation return
+ok 9 - registered owner publication checks remain live after operation return
+  ---
+  duration_ms: 2.794176
+  type: 'test'
+  ...
+# Subtest: projection placement changes invalidate registered publication
+ok 10 - projection placement changes invalidate registered publication
+  ---
+  duration_ms: 0.896248
+  type: 'test'
+  ...
+# Subtest: unavailable selection remains explicit and cannot authorize a later dependent hole
+ok 11 - unavailable selection remains explicit and cannot authorize a later dependent hole
+  ---
+  duration_ms: 0.995979
+  type: 'test'
+  ...
+# Subtest: invented tool origin cannot publish as an authored sketch context
+ok 12 - invented tool origin cannot publish as an authored sketch context
+  ---
+  duration_ms: 0.807928
+  type: 'test'
+  ...
+# Subtest: unmeasured or invalid native result cannot become a hole projection
+ok 13 - unmeasured or invalid native result cannot become a hole projection
+  ---
+  duration_ms: 1.534845
+  type: 'test'
+  ...
+# Subtest: pending operation refuses the same face after its plane predicate becomes false
+ok 14 - pending operation refuses the same face after its plane predicate becomes false
+  ---
+  duration_ms: 6.745613
+  type: 'test'
+  ...
+# Subtest: registered publication refuses the same face after its plane predicate becomes false
+ok 15 - registered publication refuses the same face after its plane predicate becomes false
+  ---
+  duration_ms: 1.724596
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 423.465543

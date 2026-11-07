@@ -1,0 +1,3 @@
+ce5c599427ce357cb83b301a53a5b8e952a1b7f4aa5f94120a232ebb86b4278a  modules/workbenches/modeler/features/workerThroughHoles/workerThroughHoles.operation.ts
+6178bd5faad383dccdc1f1cd7fb5b76298683bf63e2bcf4d015ac73736fbebdc  test/through-hole-operation/fixture.mjs
+cae026113307706a4e3835a27f08b0f9ac97c326af6063ae95aa969032c6b4e0  test/through-hole-operation/plane-currentness.test.mjs

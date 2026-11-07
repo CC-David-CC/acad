@@ -1,0 +1,53 @@
+{
+  "cleanupWaitMs": 9276.799999952316,
+  "nativeEqual": null,
+  "snapshotError": "The project restore is incomplete. Close this workspace and try again.",
+  "storageEqual": true,
+  "sourceEqual": true,
+  "beforeModels": 0,
+  "afterModels": 10000,
+  "beforeHistory": 0,
+  "afterHistory": 10000,
+  "beforeResources": {
+    "owners": 0,
+    "mounts": 0,
+    "candidates": 0,
+    "accepted": 0,
+    "detached": 0,
+    "cleanupFailed": false
+  },
+  "afterResources": {
+    "owners": 1,
+    "mounts": 0,
+    "candidates": 0,
+    "accepted": 0,
+    "detached": 1,
+    "cleanupFailed": false
+  },
+  "workers": [
+    {
+      "closed": true,
+      "url": "http://127.0.0.1:20489/static/project-validator.3ae7f2bbbaedf25e54c3.js"
+    }
+  ],
+  "bytes": 767961,
+  "history": 10000,
+  "keys": 10001,
+  "keysMs": 0.9000000953674316,
+  "timings": {
+    "reset": 0.7999999523162842,
+    "loadData": 26,
+    "stageCalls": 10000,
+    "stagedFactoryCalls": 1,
+    "registryPrepareCalls": 1,
+    "registryPrepareMs": 4.6000001430511475,
+    "modelNotifyCalls": 1,
+    "modelNotifyMs": 670.1000001430511
+  },
+  "tasks": [],
+  "elapsedMs": 5019.299999952316,
+  "maxOtherGap": 49.59999990463257,
+  "outcome": "AbortError: Document was replaced, closed or cancelled.",
+  "otherReady": true,
+  "appHash": "8184854b80a018c58c74a48a59a8e0cdd7be970e24c6b2276ee003fe5eb38ba9"
+}

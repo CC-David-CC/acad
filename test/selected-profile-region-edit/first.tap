@@ -1,0 +1,244 @@
+TAP version 13
+# Subtest: selected depth retains exact selection and runtime, scalar-only undo/redo
+ok 1 - selected depth retains exact selection and runtime, scalar-only undo/redo
+  ---
+  duration_ms: 2.101941
+  type: 'test'
+  ...
+# Subtest: every immutable identity mutation refuses travel without journal writes
+ok 2 - every immutable identity mutation refuses travel without journal writes
+  ---
+  duration_ms: 0.751397
+  type: 'test'
+  ...
+# Subtest: stale/invalid/no-op edits and data accessors refuse
+ok 3 - stale/invalid/no-op edits and data accessors refuse
+  ---
+  duration_ms: 0.376364
+  type: 'test'
+  ...
+# Subtest: selected travel never accepts an old rectangle or box journal entry
+ok 4 - selected travel never accepts an old rectangle or box journal entry
+  ---
+  duration_ms: 1.417345
+  type: 'test'
+  ...
+# Subtest: editing after undo clears only redo tail and preserves bounded retention
+ok 5 - editing after undo clears only redo tail and preserves bounded retention
+  ---
+  duration_ms: 3.00461
+  type: 'test'
+  ...
+# Subtest: selected identity retention charges both UTF-8 and browser string memory
+ok 6 - selected identity retention charges both UTF-8 and browser string memory
+  ---
+  duration_ms: 0.311104
+  type: 'test'
+  ...
+# Subtest: region journal captures immutable identity, depth and exact opaque strings
+ok 7 - region journal captures immutable identity, depth and exact opaque strings
+  ---
+  duration_ms: 1.793897
+  type: 'test'
+  ...
+# Subtest: depth/region/depth share genuine strict LIFO Undo and Redo
+ok 8 - depth/region/depth share genuine strict LIFO Undo and Redo
+  ---
+  duration_ms: 1.448844
+  type: 'test'
+  ...
+# Subtest: all immutable fields/current region/stale identities refuse without journal mutation
+ok 9 - all immutable fields/current region/stale identities refuse without journal mutation
+  ---
+  duration_ms: 0.472485
+  type: 'test'
+  ...
+# Subtest: invalid/no-op/accessor intents refuse and raw params are detached
+ok 10 - invalid/no-op/accessor intents refuse and raw params are detached
+  ---
+  duration_ms: 0.353034
+  type: 'test'
+  ...
+# Subtest: accepted replacement after Undo truncates only future journal entries
+ok 11 - accepted replacement after Undo truncates only future journal entries
+  ---
+  duration_ms: 0.313953
+  type: 'test'
+  ...
+# Subtest: region retention shares existing 64 entry and 8 MiB mixed byte budgets
+ok 12 - region retention shares existing 64 entry and 8 MiB mixed byte budgets
+  ---
+  duration_ms: 8.884339
+  type: 'test'
+  ...
+# Subtest: UTF8/browser-string accounting charges both opaque regions and identity
+ok 13 - UTF8/browser-string accounting charges both opaque regions and identity
+  ---
+  duration_ms: 0.289413
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: genuine bound discovery yields detached descriptors and separate revision domains
+ok 14 - genuine bound discovery yields detached descriptors and separate revision domains
+  ---
+  duration_ms: 918.95357
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: opaque reselection routes exact same identity and permits expected transaction phase
+ok 15 - opaque reselection routes exact same identity and permits expected transaction phase
+  ---
+  duration_ms: 1281.676017
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: same ID no-op still validates a current supported choice without journal allocation
+ok 16 - same ID no-op still validates a current supported choice without journal allocation
+  ---
+  duration_ms: 919.450847
+  type: 'test'
+  ...
+# Subtest: unknown and genuinely unsupported rows refuse before submit
+not ok 17 - unknown and genuinely unsupported rows refuse before submit
+  ---
+  duration_ms: 0.771208
+  type: 'test'
+  location: '/tmp/codi-cad-region-edit-20261106/test/selected-profile-region-edit/service.test.mjs:14:1'
+  failureType: 'testCodeFailure'
+  error: 'Sketch solve request must be a tree.'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    /tmp/codi-cad-region-edit-20261106/.build/selected-profile-region-edit/service/service.cjs:2:1167398
+    c (/tmp/codi-cad-region-edit-20261106/.build/selected-profile-region-edit/service/service.cjs:2:1158059)
+    Generator._invoke (/tmp/codi-cad-region-edit-20261106/.build/selected-profile-region-edit/service/service.cjs:2:1157812)
+    Generator.next (/tmp/codi-cad-region-edit-20261106/.build/selected-profile-region-edit/service/service.cjs:2:1158422)
+    oh (/tmp/codi-cad-region-edit-20261106/.build/selected-profile-region-edit/service/service.cjs:2:1164258)
+    a (/tmp/codi-cad-region-edit-20261106/.build/selected-profile-region-edit/service/service.cjs:2:1164462)
+    /tmp/codi-cad-region-edit-20261106/.build/selected-profile-region-edit/service/service.cjs:2:1164523
+    new Promise (<anonymous>)
+    Module.<anonymous> (/tmp/codi-cad-region-edit-20261106/.build/selected-profile-region-edit/service/service.cjs:2:1164402)
+    Module.fh (/tmp/codi-cad-region-edit-20261106/.build/selected-profile-region-edit/service/service.cjs:2:1165287)
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: reselection at append capacity retains the same evaluation cost
+ok 18 - reselection at append capacity retains the same evaluation cost
+  ---
+  duration_ms: 1302.390264
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: both revision domains/source/frame/plane/identity and cancellation fence actual Worker results
+ok 19 - both revision domains/source/frame/plane/identity and cancellation fence actual Worker results
+  ---
+  duration_ms: 6712.061609
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: source-owned digest changes independently of stable region membership
+ok 20 - source-owned digest changes independently of stable region membership
+  ---
+  duration_ms: 1286.423026
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: incompatible-child callback error is propagated without retargeting or fallback
+ok 21 - incompatible-child callback error is propagated without retargeting or fallback
+  ---
+  duration_ms: 1278.880802
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: strict request capture and bounded pending discovery reject guessed identities
+ok 22 - strict request capture and bounded pending discovery reject guessed identities
+  ---
+  duration_ms: 930.61958
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 21
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 14820.642979

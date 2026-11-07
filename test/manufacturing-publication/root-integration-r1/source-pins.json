@@ -1,0 +1,7 @@
+{
+  "web/app/cad/craft/craftBundle.ts": "297d3bf76dcf00894baea63e5c43e137121f1fb8ee4d904d8fba1a383357b6ad",
+  "web/app/cad/craft/authoredEditJournal.mjs": "6f0ae9cc17d3c8938a242b8351dd64f4481b0f1d7825829f1cb987c9065228b2",
+  "web/app/cad/craft/evaluationResources.mjs": "366322175c54333d7ebffe8ce24670293fe9a073695a5f4dc2e7495e079db14f",
+  "web/app/cad/projectManager/projectManagerBundle.ts": "1a91da8c9bd24592a123c036b9aeaecfb6f94d0e4e7f09ea44b78e7a103de8fd",
+  "test/edge-treatment-craft/source.test.mjs": "ddabac13e03f88c9005734f26d45b9b2d461bf4e7796b534db05afbde005cf41"
+}

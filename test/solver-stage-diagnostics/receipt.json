@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "status": "PASS",
+  "scope": "opt-in-stage-local-production-Worker-diagnostics",
+  "base": "f1072e9f5734feb6e1c23bf2b71b77556e1c7347",
+  "node": "v24.22.1",
+  "tests": {
+    "newWorkerGroups": 9,
+    "retainedGroups": 10,
+    "total": 19,
+    "actualWorkerJobs": 27,
+    "workerLifecycle": {
+      "started": 27,
+      "terminated": 27
+    },
+    "command": [
+      "/tmp/codi-files-move-node/bin/node",
+      "--test",
+      "--test-reporter=tap",
+      "test/solver-stage-diagnostics/worker.test.mjs",
+      "test/local-jacobian/rank.test.mjs"
+    ]
+  },
+  "beforeWorkerSHA256": "903bba99c3527f1019539877507156e2151d4644575cc1a45fecafd774e72d34",
+  "oldSourceHashes": {
+    "web/app/sketcher/headless/localJacobian.mjs": "769d25c94a55afef9e5958419fcbbe388d0435cb669e3c249df8c79403e64ccb",
+    "web/app/sketcher/headless/solve.ts": "e4996cc646964325fef94c41cc49fb2c0b22f8e453d00f1d5260389d95bd2a2b"
+  },
+  "build": {
+    "version": 1,
+    "sourceRoot": "/tmp/codi-cad-solver-report-qualification-20261106",
+    "head": "f1072e9f5734feb6e1c23bf2b71b77556e1c7347",
+    "node": "v24.22.1",
+    "webpack": "5.74.0",
+    "mode": "production",
+    "entry": "web/app/sketcher/headless/solveWorker.ts",
+    "trackedInputCount": 1262,
+    "trackedInputsBeforeAndAfter": "fc7add160f15a3a876585b8186cdd1db17738ec3dc532e20be9d5b85f11c2ca8",
+    "sourceHashes": {
+      "web/app/sketcher/headless/localJacobian.mjs": "29922c4fe243f47fd2fadfa4fd4eb6c112bf4fbfa27f3a72b785e85a4d78e36a",
+      "web/app/sketcher/headless/solve.ts": "c0b901172338f11ccd38ccad09aec835771a70f3e435523ded62c0e32428027d",
+      "web/app/sketcher/headless/solveWorker.ts": "24c30ab382d176917b8e1c739643a2f0394c5832ac88886ed367ffcccb46962b"
+    },
+    "numericSHA256": "987450eec65f7e00c74c8da9281537558fd1ee8e63ee48721253cf2458260386",
+    "verbSHA256": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3",
+    "workerSHA256": "5d0176a0f5e2fbba5281a9c1611f0c60f8d1536bd54c62c125825e62a9534457",
+    "workerBytes": 1177839
+  },
+  "sourceHashesBeforeAndAfter": {
+    "web/app/sketcher/headless/localJacobian.mjs": "29922c4fe243f47fd2fadfa4fd4eb6c112bf4fbfa27f3a72b785e85a4d78e36a",
+    "web/app/sketcher/headless/solve.ts": "c0b901172338f11ccd38ccad09aec835771a70f3e435523ded62c0e32428027d",
+    "web/app/sketcher/headless/solveWorker.ts": "24c30ab382d176917b8e1c739643a2f0394c5832ac88886ed367ffcccb46962b",
+    "web/app/sketcher/constr/AlgNumSystem.ts": "0cb8b8b76f2560b1e21c792ae9219c88f864b55e8c546bfbe6d9a7936be9dcc8",
+    "web/app/sketcher/constr/solver.js": "8119d27a612df319d249823311db5b0192a59e76523699a1b52be47607c3fc40",
+    "web/lib/verb.js": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3",
+    "test/solver-stage-diagnostics/build.cjs": "c3c337d7633036b0ff71f927f9b78089332ecc7809f63476ee9a1f3d8e545f09",
+    "test/solver-stage-diagnostics/node-worker.cjs": "0512dcdd0d68b9a6470f97b2e79f5ad8ce56e37151e0fda1eb1b63ce53f75741",
+    "test/solver-stage-diagnostics/reproduce.mjs": "d5ac7f00fd56f12811ab275127eb07e65757e1a311819f92f6bd824a21f5062f",
+    "test/solver-stage-diagnostics/capture-before.mjs": "cf68b40cb1f62720226d5530ab5b5c57e8f16eece37456b4f03e8f2b5cbfdcc8",
+    "test/solver-stage-diagnostics/worker.test.mjs": "ad30a9f7ca1c5752dc81028b3702e93e07ecad3365acd99538c9586941d8824a",
+    "test/solver-stage-diagnostics/README.md": "517dbd6fcb2809f7c09d20e6551d13cee71cdd8bc8b1b5362fd56d4af12b5040",
+    "test/solver-stage-diagnostics/verify.mjs": "de21566f28fef06ae580d40818ef812c40f2558be768c8fc503e7f9f06d78472",
+    "test/solver-stage-diagnostics/before.json": "b52fa87906a9bc1a03f724303a59fab059169066507999fd3a90f34affc2fe1d",
+    "test/solver-stage-diagnostics/before-opt-in.json": "97b1ca52c2c791cff6597237219b7af7e67236f37afcdab73c3a33d5d5e3e8a0",
+    "test/solver-stage-diagnostics/baseline-before.json": "e09e820bfa6c484b09f7d905f7bf00b13c9f7e71fba42417a5a5050c98e0b5a9"
+  },
+  "evidenceHashes": {
+    "before-build.log": "96914ff4f37abf6a498341754438fe08408eb05714644ab988271421b4bc3eb4",
+    "after-build.log": "7202daac4b6555ced419b939782d82640cbc414f74f8f04bef0a9f670bd759ef",
+    "annotation-fixture-before.json": "713c594733fdf3bd98c86b264d1719dc63f4ea3ca39d6cbed2eb4156a870ca01",
+    "stage-fixture-before.json": "18aaa7871635328f9bcdb4f631d402247cfc09493a9af009dd6435f9e9899cdd",
+    "stage-fixture-before.tap": "edd2e9c3c9e6f4c24f88b4486032aa7b3b1f542861918324cd3c7cf302ac0229",
+    "after.json": "0e859194973da508d101ad1efc9102675230178a66a07c76c61938a2aaaa8031",
+    "after.tap": "e7b9bdf8b5f5dfff13ce0d2f548a3ee13423c55157cc53800e76862beefb00cc"
+  },
+  "limitations": [
+    "Local rank/nullity estimates at current stage point; physicalDof:null; no aggregate/global solvability",
+    "Existing saved/active/typed-task service contracts unchanged; no UI/Craft integration or public deployment",
+    "No full Gate1 claim; E17/C10 moved to Gate2"
+  ]
+}

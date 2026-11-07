@@ -1,0 +1,13 @@
+{
+  "removed": [],
+  "added": [
+    "CreateSelectedProfileV2",
+    "InspectOwnedSolidV2",
+    "ReleaseOwnedShapeV2",
+    "OwnedShapeNamesV2",
+    "ClassifyOwnedPointV2",
+    "ReadOwnedMeshV2"
+  ],
+  "beforeCount": 52,
+  "afterCount": 58
+}

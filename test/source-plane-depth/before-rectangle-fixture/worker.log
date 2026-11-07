@@ -1,0 +1,105 @@
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✖ real production Worker XY/XZ/ZY signed and zero placements preserve exact local sources (5163.821677ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ journal candidate restores exact historical bytes including whitespace (751.510266ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ candidate local geometry or constraint mutation and wrong original frame refuse (1203.07544ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ referenced boundary, invalid depths and malformed data refuse without changing source (353.512917ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ independent verification rejects altered genuine Worker candidate reply (513.846911ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ genuine held prepared reply is cancelled; later reply stays inert (394.634286ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ valid source within limit can explicitly exhaust the encoded reply envelope (390.674131ms)
+✔ all genuine Workers are physically terminated (2.124804ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 7
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8913.18886
+
+✖ failing tests:
+
+test at test/source-plane-depth/worker.test.mjs:12:1
+✖ real production Worker XY/XZ/ZY signed and zero placements preserve exact local sources (5163.821677ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(r.ok)
+  
+      at source (file:///tmp/codi-cad-source-plane-depth-20261107/test/source-plane-depth/worker.test.mjs:6:159)
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-source-plane-depth-20261107/test/source-plane-depth/worker.test.mjs:12:206)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

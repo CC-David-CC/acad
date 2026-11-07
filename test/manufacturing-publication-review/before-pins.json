@@ -1,0 +1,10 @@
+{
+  "sourceCommit": "9ba3043955105b62c043ee079b4048d667c1f47e",
+  "scope": "Actual PM/Craft functions and genuine Workers; accepted geometry protocol fixture",
+  "sha256": {
+    "web/app/cad/projectManager/projectManagerBundle.ts": "1a91da8c9bd24592a123c036b9aeaecfb6f94d0e4e7f09ea44b78e7a103de8fd",
+    "web/app/cad/projectManager/manufacturingPublicationClient.mjs": "64cc3d104d4178b421b4936a02608e25d2c9bb11cf6ffb54639f3d8012e0cac5",
+    "web/app/cad/projectManager/captureDocumentJobOptions.mjs": "f340f2ce794e9b4ef049d726257f011c46b24db01b8eeb5d6acbd565baa973df",
+    "test/manufacturing-publication-review/review.test.mjs": "6e88389b00d49205a5986c16135b709ec13613c4473a74dddc8f66af0bb103d7"
+  }
+}

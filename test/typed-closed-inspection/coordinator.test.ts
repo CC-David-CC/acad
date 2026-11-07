@@ -1,0 +1,30 @@
+import {strict as assert} from 'node:assert';
+import {createClosedSketchTransitionCommands} from '../../web/app/cad/craft/closedSketchTransitions';
+import {MOpenFaceShell} from './mocks';
+import {source,frame} from './fixtures.mjs';
+const stream=(value:any)=>({value,revision:0});
+function fixture(consumed=false){
+ let bytes=source(),version=1,physicalReady=true,workerCalls=0,writes=0;const lengths={W:100,H:50},doc=new AbortController(),face:any={id:'plane',defaultSketchId:'plane',root:consumed?null:Object.assign(new MOpenFaceShell(),{originatingOperation:0}),frame};
+ const history:any=[{type:'PLANE',params:{featureId:1,orientation:'XY',depth:0,datum:null}},...(consumed?[{type:'WORKER_RECTANGLE_EXTRUDE_V1',params:{featureId:2,face:'plane',regions:['region'],length:20}}]:[])];
+ const editor={inEditMode:false},storage:any={revision:0,versionOf:()=>version,namespaceRevision:()=>version,getAllKeysFromNamespace:()=>['nsplane'],get:()=>bytes,prepareWrites(){writes++;throw Error('Inspection cannot prepare writes')}};
+ const expression:any={isTyped:true,script$:stream('accepted typed source'),list$:stream([{name:'W',dimension:'length',value:100},{name:'H',dimension:'length',value:50}]),errors$:stream([]),table$:stream({unusedScalar:2}),hasCurrentPhysicalResult:()=>physicalReady,resolveQuantity:(name:string,dimension:string)=>{assert.equal(dimension,'length');if(!(name in lengths))throw Error('Unknown length');return lengths[name]}};
+ const craft:any={evaluationEpoch:0,modifications$:stream({history,pointer:history.length-1}),models$:stream([]),pipelineFailure$:stream(null),engineCleanupFailure$:stream(null),inspectRectangleCreation:()=>({ready:true,revision:'base'})};
+ const ctx:any={projectService:{documentGeneration:1,hasHostLifetime:true,documentSignal:doc.signal,sketchStorageNamespace:'ns',sketchStorageKey:()=> 'nsplane',isDocumentCurrent:()=>!doc.signal.aborted},storageService:storage,craftService:craft,cadRegistry:{findFace:(id:string)=>id==='plane'&&!consumed?face:undefined},sketchStorageService:{getAllSketches:()=>[{id:'plane'}],getSketchData:()=>bytes},operationService:{},expressionService:expression,projectManager:{unit:'millimeter',inspectMaterialSurfaceRevision:()=> 'm'},services:{sketcher:{inPlaceEditor:editor}},wizardService:{workingRequest$:stream(null)},workbenchService:{currentWorkbench$:stream(null)},assemblyService:{constraints$:stream([])},streams:{sketcher:{sketchingFace:stream(null)}}};
+ const envelope=(revision:string)=>({ok:true,revision,objects:[],points:[],constraints:[],stageCount:1,boundaryFrame:frame,emptyBoundary:true});
+ globalThis.__typedInspection=async(_u:any,r:any,o:any)=>{workerCalls++;assert(o.valid());assert.deepEqual({...r.externalParameters},{W:100,H:50});assert.equal(r.sketchJSON,bytes);return envelope(r.revision)};
+ const api=createClosedSketchTransitionCommands(ctx,()=>{writes++;throw Error('Inspection cannot publish')},()=>{});
+ return {api,ctx,expression,lengths,doc,envelope,get bytes(){return bytes},get workers(){return workerCalls},get writes(){return writes},stale(){physicalReady=false},replace(s:string){bytes=s;version++}};
+}
+async function run(){
+ let passed=0;
+ for(const consumed of[false,true]){const f=fixture(consumed),d=f.api.inspectSketchTransitions();assert.equal(d.ready,true);assert.deepEqual(d.candidates,[{faceId:'plane'}]);assert.equal(d.capabilities.mutations,false);const before=f.bytes,out=await f.api.inspectClosedSketch({revision:d.revision,faceId:'plane'});assert.equal(out.capabilities.mutations,false);assert.equal(f.bytes,before);assert.equal(f.workers,1);assert.equal(f.writes,0);passed++;}
+ {const f=fixture();f.stale();const d=f.api.inspectSketchTransitions();assert.equal(d.ready,false);assert.match(d.reason,/stale/);assert.equal(f.workers,0);passed++;}
+ {const f=fixture(),s=JSON.parse(f.bytes);s.constants='W = 1';f.replace(JSON.stringify(s));const d=f.api.inspectSketchTransitions();assert.equal(d.ready,true);assert.equal(d.candidates.length,0);assert.match(d.unsupported[0].reason,/local sketch constants/);assert.equal(f.workers,0);passed++;}
+ {const f=fixture();f.expression.resolveQuantity=()=>{throw Error('DIMENSION_MISMATCH')};const d=f.api.inspectSketchTransitions();assert.equal(d.candidates.length,0);assert.match(d.unsupported[0].reason,/DIMENSION_MISMATCH/);passed++;}
+ {const f=fixture(),d=f.api.inspectSketchTransitions(),r={revision:d.revision,faceId:'plane'};for(const work of[()=>f.api.applySketchLengthRelation({...r,ids:['rect-0','rect-1'],factor:2,offset:0}),()=>f.api.applySketchConcentric({...r,ids:['a','b']}),()=>f.api.editClosedSketchPoint({...r,id:'rect-0:A',x:0,y:0}),()=>f.api.applySketchDiameter({...r,id:'a',diameter:10}),()=>f.api.applySketchSignedDistance({...r,axis:'x',ids:['rect-0:A','rect-0:B'],distance:100}),()=>f.api.applySketchLineRelation({...r,kind:'collinear',ids:['rect-0','rect-2']}),()=>f.api.appendClosedSketchPrimitive({...r,kind:'Point',role:null,stage:0,data:{x:1,y:2}})])await assert.rejects(work,(e:any)=>e.code==='TYPED_SKETCH_MUTATION_UNSUPPORTED');assert.equal(f.workers,0);assert.equal(f.writes,0);passed++;}
+ for(const change of[(f:any)=>f.stale(),(f:any)=>f.expression.table$.value.unusedScalar=3,(f:any)=>f.lengths.W=120,(f:any)=>f.expression.script$.value='changed',(f:any)=>f.expression.list$.value=[],(f:any)=>f.ctx.projectManager.unit='inch',(f:any)=>f.expression.table$.revision++,(f:any)=>f.expression.isTyped=false,(f:any)=>f.doc.abort()]){
+  const f=fixture(),d=f.api.inspectSketchTransitions();let release:any;globalThis.__typedInspection=async(_u:any,r:any)=>new Promise(resolve=>{release=()=>resolve(f.envelope(r.revision))});const pending=f.api.inspectClosedSketch({revision:d.revision,faceId:'plane'});while(!release)await new Promise(r=>setTimeout(r,0));change(f);release();await assert.rejects(pending,(e:any)=>e.name==='AbortError');assert.equal(f.writes,0);passed++;
+ }
+ console.log('PASS typed readonly coordinator controls '+passed+'; synthetic transport, not actual Worker qualification');
+}
+run().catch(e=>{console.error(e);process.exitCode=1});

@@ -1,0 +1,301 @@
+{
+  "scope": "Actual PM/Craft and Workers; protocol accepted geometry only",
+  "nativeAborted": true,
+  "ownAborted": false,
+  "error": null,
+  "before": {
+    "A": null,
+    "J": {
+      "document": 1,
+      "revision": 1,
+      "entries": [
+        {
+          "kind": "extrusion-depth",
+          "index": 0,
+          "featureId": 7,
+          "before": 1,
+          "after": 2
+        }
+      ],
+      "cursor": 1
+    },
+    "T": "41e92459-4d6b-40ca-83ec-a893a24799ce",
+    "material": "41e92459-4d6b-40ca-83ec-a893a24799ce",
+    "revision": "1eedb8de-c7bc-44e8-b935-36cba9beac21",
+    "history": {
+      "history": [
+        {
+          "type": "WORKER_ENCLOSURE_V1",
+          "params": {
+            "featureId": 7,
+            "width": 100,
+            "height": 50,
+            "depth": 20
+          }
+        }
+      ],
+      "pointer": 0
+    },
+    "models": [
+      {
+        "id": "worker-enclosure:1:[7,\"BODY\"]",
+        "featureId": 7,
+        "originatingOperation": 0,
+        "outputRole": "BODY"
+      },
+      {
+        "id": "worker-enclosure:1:[7,\"LID\"]",
+        "featureId": 7,
+        "originatingOperation": 0,
+        "outputRole": "LID"
+      }
+    ],
+    "epoch": 1,
+    "counters": {
+      "featureId": 0
+    },
+    "storageRevision": 0
+  },
+  "after": {
+    "A": {
+      "version": 1,
+      "unit": "millimeter",
+      "revision": "sha256-03035062103f5dfa2662c79373b792a36d164941672dc8cf23de4f26d6cd48a3",
+      "materials": [
+        {
+          "id": "pla",
+          "name": "PLA"
+        },
+        {
+          "id": "petg",
+          "name": "PETG"
+        }
+      ],
+      "appearances": [
+        {
+          "color": "#ff0000",
+          "id": "red",
+          "name": "Red"
+        }
+      ],
+      "bindings": [
+        {
+          "featureId": 7,
+          "id": "enclosure-7-BODY",
+          "operationType": "WORKER_ENCLOSURE_V1",
+          "outputRole": "BODY"
+        },
+        {
+          "featureId": 7,
+          "id": "enclosure-7-LID",
+          "operationType": "WORKER_ENCLOSURE_V1",
+          "outputRole": "LID"
+        }
+      ],
+      "objects": [
+        {
+          "id": "enclosure-object-7-BODY",
+          "name": "Enclosure body",
+          "regions": [
+            {
+              "appearanceId": "red",
+              "bodyId": "enclosure-7-BODY",
+              "id": "region-BODY",
+              "materialId": "pla",
+              "transform": [
+                1,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "enclosure-object-7-LID",
+          "name": "Enclosure lid",
+          "regions": [
+            {
+              "appearanceId": null,
+              "bodyId": "enclosure-7-LID",
+              "id": "region-LID",
+              "materialId": "petg",
+              "transform": [
+                1,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "J": {
+      "document": 1,
+      "revision": 2,
+      "entries": [
+        {
+          "kind": "extrusion-depth",
+          "index": 0,
+          "featureId": 7,
+          "before": 1,
+          "after": 2
+        },
+        {
+          "kind": "document-metadata",
+          "version": 1,
+          "domain": "manufacturing",
+          "key": "manufacturing",
+          "before": null,
+          "after": {
+            "version": 1,
+            "unit": "millimeter",
+            "revision": "sha256-03035062103f5dfa2662c79373b792a36d164941672dc8cf23de4f26d6cd48a3",
+            "materials": [
+              {
+                "id": "pla",
+                "name": "PLA"
+              },
+              {
+                "id": "petg",
+                "name": "PETG"
+              }
+            ],
+            "appearances": [
+              {
+                "color": "#ff0000",
+                "id": "red",
+                "name": "Red"
+              }
+            ],
+            "bindings": [
+              {
+                "featureId": 7,
+                "id": "enclosure-7-BODY",
+                "operationType": "WORKER_ENCLOSURE_V1",
+                "outputRole": "BODY"
+              },
+              {
+                "featureId": 7,
+                "id": "enclosure-7-LID",
+                "operationType": "WORKER_ENCLOSURE_V1",
+                "outputRole": "LID"
+              }
+            ],
+            "objects": [
+              {
+                "id": "enclosure-object-7-BODY",
+                "name": "Enclosure body",
+                "regions": [
+                  {
+                    "appearanceId": "red",
+                    "bodyId": "enclosure-7-BODY",
+                    "id": "region-BODY",
+                    "materialId": "pla",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "enclosure-object-7-LID",
+                "name": "Enclosure lid",
+                "regions": [
+                  {
+                    "appearanceId": null,
+                    "bodyId": "enclosure-7-LID",
+                    "id": "region-LID",
+                    "materialId": "petg",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "byteSize": 1926
+        }
+      ],
+      "cursor": 2
+    },
+    "T": "09841060-fe3c-4e34-bf90-b6bb645be976",
+    "material": "09841060-fe3c-4e34-bf90-b6bb645be976",
+    "revision": "0489dff2-e8f8-499f-9014-61691e874f0d",
+    "history": {
+      "history": [
+        {
+          "type": "WORKER_ENCLOSURE_V1",
+          "params": {
+            "featureId": 7,
+            "width": 100,
+            "height": 50,
+            "depth": 20
+          }
+        }
+      ],
+      "pointer": 0
+    },
+    "models": [
+      {
+        "id": "worker-enclosure:1:[7,\"BODY\"]",
+        "featureId": 7,
+        "originatingOperation": 0,
+        "outputRole": "BODY"
+      },
+      {
+        "id": "worker-enclosure:1:[7,\"LID\"]",
+        "featureId": 7,
+        "originatingOperation": 0,
+        "outputRole": "LID"
+      }
+    ],
+    "epoch": 1,
+    "counters": {
+      "featureId": 0
+    },
+    "storageRevision": 0
+  },
+  "hashWorkers": 1,
+  "metadataWorkers": 1
+}

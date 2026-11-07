@@ -1,0 +1,12 @@
+// Fresh output only; read exact tracked source and actual webpack input modules.
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),cp=require('node:child_process'),webpack=require('webpack');
+const root=path.resolve(__dirname,'../..'),out=path.resolve(process.env.CODI_POLYGON_VERIFY_OUT),proof=path.resolve(process.env.CODI_POLYGON_VERIFY_PROOF);if(fs.existsSync(out)||fs.existsSync(proof))throw Error('Fresh outputs required');
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex'),git=(...a)=>cp.execFileSync('git',['-C',root,...a],{encoding:'utf8'}).trim();
+const snapshot=()=>{if(git('status','--porcelain','--untracked-files=no'))throw Error('Tracked source is dirty');return {source:git('rev-parse','HEAD'),files:Object.fromEntries(cp.execFileSync('git',['-C',root,'ls-files','-z'],{encoding:'utf8'}).split('\0').filter(Boolean).map(n=>[n,sha(fs.readFileSync(path.join(root,n)))]))};};
+const before=snapshot(),config=require('./webpack.app.cjs'),configSha=sha(fs.readFileSync(path.join(__dirname,'webpack.app.cjs')));config.output={...config.output,path:out};
+webpack(config,(error,stats)=>{if(error||stats.hasErrors()){fs.writeFileSync(proof,JSON.stringify({status:'FAIL',error:String(error||stats.toString())},null,2)+'\n');process.exitCode=1;return;}
+ const after=snapshot();if(JSON.stringify(before)!==JSON.stringify(after))throw Error('Source changed during rebuild');
+ const resources={};for(const m of stats.compilation.modules){const name=m.resource;if(typeof name==='string'&&fs.existsSync(name)&&fs.statSync(name).isFile())resources[name]={sha256:sha(fs.readFileSync(name)),bytes:fs.statSync(name).size};}
+ const files={};for(const asset of stats.compilation.getAssets()){const name=asset.name,p=path.join(out,name),prior=path.join(root,'dist/static',name);if(!fs.existsSync(prior))throw Error('Prior runtime missing '+name);const actual=sha(fs.readFileSync(p)),expected=sha(fs.readFileSync(prior));if(actual!==expected)throw Error('Independent output mismatch '+name);files[name]={sha256:actual,bytes:fs.statSync(p).size};}
+ const result={status:'PASS',scope:'Fresh output clean-source rebuild matches retained complete app asset graph; live artifact unchanged',before,after,configSha256:configSha,webpackVersion:webpack.version,nodeVersion:process.version,resources,files};fs.writeFileSync(proof,JSON.stringify(result,null,2)+'\n');console.log('PASS',before.source,files['index.bundle.js'].sha256,Object.keys(files).length,Object.keys(resources).length);
+});

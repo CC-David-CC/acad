@@ -1,0 +1,135 @@
+{
+  "results": [
+    {
+      "engine": "occ",
+      "id": "overlap-union",
+      "kind": "single-solid",
+      "volume": 1500,
+      "solidCount": 1,
+      "meshComponents": null,
+      "triangles": 28
+    },
+    {
+      "engine": "occ",
+      "id": "face-union",
+      "kind": "single-solid",
+      "volume": 1999.9999999999998,
+      "solidCount": 1,
+      "meshComponents": null,
+      "triangles": 20
+    },
+    {
+      "engine": "occ",
+      "id": "edge-union",
+      "kind": "multi-solid",
+      "volume": 1999.9999999999998,
+      "solidCount": 2,
+      "meshComponents": null,
+      "triangles": 24
+    },
+    {
+      "engine": "occ",
+      "id": "point-union",
+      "kind": "multi-solid",
+      "volume": 1999.9999999999995,
+      "solidCount": 2,
+      "meshComponents": null,
+      "triangles": 24
+    },
+    {
+      "engine": "occ",
+      "id": "disjoint-union",
+      "kind": "multi-solid",
+      "volume": 2000.0000000000002,
+      "solidCount": 2,
+      "meshComponents": null,
+      "triangles": 24
+    },
+    {
+      "engine": "occ",
+      "id": "disjoint-common",
+      "kind": "empty",
+      "volume": 0,
+      "solidCount": 0,
+      "meshComponents": null,
+      "triangles": 0
+    },
+    {
+      "engine": "occ",
+      "id": "identical-subtract",
+      "kind": "empty",
+      "volume": 0,
+      "solidCount": 0,
+      "meshComponents": null,
+      "triangles": 0
+    },
+    {
+      "engine": "manifold",
+      "id": "overlap-union",
+      "kind": "mesh-container",
+      "volume": 1500,
+      "solidCount": null,
+      "meshComponents": 1,
+      "triangles": 28
+    },
+    {
+      "engine": "manifold",
+      "id": "face-union",
+      "kind": "mesh-container",
+      "volume": 2000,
+      "solidCount": null,
+      "meshComponents": 1,
+      "triangles": 20
+    },
+    {
+      "engine": "manifold",
+      "id": "edge-union",
+      "kind": "mesh-container",
+      "volume": 2000,
+      "solidCount": null,
+      "meshComponents": 2,
+      "triangles": 24
+    },
+    {
+      "engine": "manifold",
+      "id": "point-union",
+      "kind": "mesh-container",
+      "volume": 2000,
+      "solidCount": null,
+      "meshComponents": 2,
+      "triangles": 24
+    },
+    {
+      "engine": "manifold",
+      "id": "disjoint-union",
+      "kind": "mesh-container",
+      "volume": 2000,
+      "solidCount": null,
+      "meshComponents": 2,
+      "triangles": 24
+    },
+    {
+      "engine": "manifold",
+      "id": "disjoint-common",
+      "kind": "empty",
+      "volume": 0,
+      "solidCount": null,
+      "meshComponents": 0,
+      "triangles": 0
+    },
+    {
+      "engine": "manifold",
+      "id": "identical-subtract",
+      "kind": "empty",
+      "volume": 0,
+      "solidCount": null,
+      "meshComponents": 0,
+      "triangles": 0
+    }
+  ],
+  "workersStarted": 14,
+  "workersTerminated": 14,
+  "scope": "Actual pinned OCC/Manifold workers, not shared app history or signed Files; no material-region census inferred from mesh components.",
+  "occWorkerSha256": "1d9cc0e2c97ee3af064c85f25c636bd37bfcea39ad78dff1c8b7164645c9a0c0",
+  "manifoldWorkerSha256": "a9475c49fb7632cd774dc43b3af95c24e27fb0aba179156b02c509fb54a7eda1"
+}

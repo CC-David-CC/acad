@@ -1,0 +1,5 @@
+import {test} from "node:test"; import assert from "node:assert/strict"; import {enclosurePlan} from "./plan.mjs";
+const request={unit:"millimeter",width:100,length:70,height:30,wall:3,clearance:0.3,lidThickness:3,lipDepth:2};
+test("body and separate lip/cover retain dimensions and clearance",()=>{const p=enclosurePlan(request);assert.equal(p.body.volume,100*70*30-94*64*27);assert.equal(p.lid.volume,100*70*3+(94-0.6)*(64-0.6)*2);assert.deepEqual(p.lid.bounds,{min:[0,0,28],max:[100,70,33]});assert.equal(request.width,100)});
+test("size and wall edits change the analytic result",()=>{assert.notEqual(enclosurePlan({...request,width:150,wall:4}).body.volume,enclosurePlan(request).body.volume)});
+test("invalid or untrusted inputs refuse",()=>{for(const patch of [{width:6.6},{wall:30},{lipDepth:27},{clearance:0},{unit:"inch"},{height:Infinity},{extra:1}]) assert.throws(()=>enclosurePlan({...request,...patch}));const x={...request};Object.defineProperty(x,"width",{get(){throw Error("getter called")},enumerable:true});assert.throws(()=>enclosurePlan(x),/INVALID_REQUEST/)});

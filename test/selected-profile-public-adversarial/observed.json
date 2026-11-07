@@ -1,0 +1,148 @@
+{
+  "status": "PASS bounded public adversarial controls",
+  "testSource": "5779adb4fe27cf4ff97101ced0cf27d919fde928",
+  "productSource": "a0b363bce15e8533be17c9332b46a7e51ddeea5d",
+  "appSha256": "8ae3ddc83e706829761c66ddc573fae42f9d746171ee09c1ee3b0f0744d98965",
+  "getterProbes": {
+    "beforeSource": "d0d3abc0173d10b592a3b6a0cfb55c2abef1b1b9",
+    "beforeReads": {
+      "solve-ok": 3,
+      "solve-revision": 1,
+      "solve-sketch": 2,
+      "semantic-jobId": 1,
+      "semantic-ok": 2,
+      "semantic-value": 1,
+      "native-seq": 1,
+      "native-kind": 5,
+      "native-ready-kind": 1,
+      "native-evidence-volume": 3
+    },
+    "afterReads": {
+      "solve-ok": 0,
+      "solve-revision": 0,
+      "solve-sketch": 0,
+      "semantic-jobId": 0,
+      "semantic-ok": 0,
+      "semantic-value": 0,
+      "native-seq": 0,
+      "native-kind": 0,
+      "native-ready-kind": 0,
+      "native-evidence-volume": 0
+    },
+    "allZero": true
+  },
+  "currentness": [
+    {
+      "mode": "identical-project-save",
+      "outcome": {
+        "ok": true,
+        "regionIds": [
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-a3816589-30e0-4ff4-ba3a-bc37f74a50d2\"],\"holes\":[]}",
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-bd6de7dc-0a10-48b2-989b-10199da0c767\"],\"holes\":[]}"
+        ]
+      },
+      "sourceBytesUnchanged": true,
+      "globalBefore": 4,
+      "globalAfter": 5,
+      "namespaceBefore": 3,
+      "namespaceAfter": 3,
+      "preserved": true
+    },
+    {
+      "mode": "public-source-ABA",
+      "outcome": {
+        "ok": false,
+        "name": "AbortError",
+        "code": 20,
+        "message": "Prism semantic job cancelled or superseded."
+      },
+      "sourceBytesUnchanged": true,
+      "globalBefore": 4,
+      "globalAfter": 6,
+      "namespaceBefore": 3,
+      "namespaceAfter": 6,
+      "preserved": true
+    }
+  ],
+  "topLevelControls": 35,
+  "compositeWorkflowRows": [
+    {
+      "id": "genuine-selected-disk",
+      "error": null,
+      "nativeVolume": 37.69911184307751,
+      "sourceBytesVersionsPreserved": true
+    },
+    {
+      "id": "dependent-construction-point",
+      "error": null,
+      "nativeVolume": 37.69911184307751,
+      "sourceBytesVersionsPreserved": null
+    },
+    {
+      "id": "dependent-selected-circle-diameter6",
+      "error": null,
+      "nativeVolume": 84.82300164692441,
+      "sourceBytesVersionsPreserved": null
+    },
+    {
+      "id": "contradictory-driving-diameter20",
+      "error": {
+        "name": "Error",
+        "code": "INVALID",
+        "message": "The diameter conflicts with existing constraints.",
+        "committed": false
+      },
+      "nativeVolume": 84.82300164692441,
+      "sourceBytesVersionsPreserved": null
+    },
+    {
+      "id": "dependent-unselected-circle-intersection",
+      "error": {
+        "name": "Error",
+        "code": "STALE_REGION",
+        "message": "Select one current region on an owned source plane.",
+        "committed": false
+      },
+      "nativeVolume": 84.82300164692441,
+      "sourceBytesVersionsPreserved": null
+    },
+    {
+      "id": "unrelated-construction-point",
+      "error": null,
+      "nativeVolume": 84.82300164692441,
+      "sourceBytesVersionsPreserved": null
+    }
+  ],
+  "nativeForgedVolumeGuard": {
+    "mode": "prepare-volume-both",
+    "injected": 2,
+    "nativeResults": 1,
+    "outcome": {
+      "ok": false,
+      "name": "Error",
+      "code": "NATIVE_MEASUREMENT_MISMATCH",
+      "message": "Native result does not match the selected region measurements.",
+      "committed": false
+    },
+    "preserved": true,
+    "differences": [],
+    "resources": {
+      "owners": 1,
+      "mounts": 0,
+      "candidates": 0,
+      "accepted": 0,
+      "detached": 1,
+      "cleanupFailed": false
+    }
+  },
+  "closedResources": {
+    "owners": 0,
+    "mounts": 0,
+    "candidates": 0,
+    "accepted": 0,
+    "detached": 0,
+    "cleanupFailed": false
+  },
+  "scope": "Actual public selected-profile APIs, publicly authored native geometry and genuine Workers. No native source seed, private editor/Canvas/fake math, Files, UI, signed host, deployment or full-gate claim.",
+  "separateFollowup": "After-commit cancellation outcome is tracked separately; no full-gate/deployment/Files/UI qualification."
+}

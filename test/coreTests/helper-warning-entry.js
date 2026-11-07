@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {createSketcherTPI} from './subjects/sketcherTPI';
+const direct=[],joints=[];
+const viewer={parametricManager:{},activeLayer:{},canvas:{height:100},retinaPxielRatio:1,addSegment:(...args)=>direct.push(args)};
+viewer.toolManager={tool:null,releaseControl(){}};
+const ctx={viewer,actions:{SegmentTool:{invoke(){let first=null,last=null;viewer.toolManager.tool={mousemove(e){last=[e.offsetX,e.offsetY]},mousedown(){},mouseup(e){if(!first)first=[e.offsetX,e.offsetY];else joints.push([first,[e.offsetX,e.offsetY]])},get line(){return {first,last}}};}}}};
+const subject=createSketcherTPI(ctx);subject.addSerpinski(0,0,3,4,1);
+assert.equal(direct.length,6);assert.equal(joints.length,2);
+for(const line of direct)for(const n of line.slice(0,4))assert.equal(Number.isFinite(n),true);
+for(const [actual,expected] of [[joints[0],[[0,100],[1,100.75]]],[joints[1],[[3,96],[4,96.75]]]])for(let i=0;i<2;i++)for(let j=0;j<2;j++)assert.ok(Math.abs(actual[i][j]-expected[i][j])<1e-9,JSON.stringify({actual,expected}));
+console.log('PASS real addSerpinski helper uses Euclidean joint width and two connector segments');

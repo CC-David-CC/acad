@@ -1,0 +1,18 @@
+{
+  "disconnected": {
+    "provenance": "Unmodified sketch data extracted from previously genuine public-command native Save; component Worker input, not app native seed",
+    "desktopProofCommit": "c486e4c35",
+    "nativeRelativePath": "b-first/disconnected.jsketcher.json",
+    "nativeSHA256": "779c6f5e73a30260e95a825e8083acfec90728585fc3944af69a629019e11c8e",
+    "faceId": "S:0/SURFACE",
+    "sketchDataSHA256": "a47e511cca6e9a49de896574c9ca8b26a6b2d226c7819721cdca26de3f14392b"
+  },
+  "driven": {
+    "provenance": "Unmodified sketch data extracted from previously genuine public-command native Save; component Worker input, not app native seed",
+    "desktopProofCommit": "c486e4c35",
+    "nativeRelativePath": "a/E02.jsketcher.json",
+    "nativeSHA256": "a9ab39e43acef041b07f43b09d4ed8054951ad4cc25c4e099bf3247ee2765fc0",
+    "faceId": "S:0/SURFACE",
+    "sketchDataSHA256": "13bb09fbd24d3f45a391d380720a807176204ed641acc280a2182a10b4bb74e6"
+  }
+}

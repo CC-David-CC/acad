@@ -1,0 +1,244 @@
+{
+  "clientSha256": "77c194c4f8c4751d84c02670d1e6cb86ce49509c7af35285a65407ff01b80fbd",
+  "workerSha256": "c9b5ec0d92e0215e8dbc1a43bfd936b1d95ff4d264f406bbf544a81ce8d95344",
+  "inspection": {
+    "revision": "inspect",
+    "ok": true,
+    "objects": [
+      {
+        "id": "rect-0",
+        "type": "Segment",
+        "role": null,
+        "stage": 0
+      },
+      {
+        "id": "rect-1",
+        "type": "Segment",
+        "role": null,
+        "stage": 0
+      },
+      {
+        "id": "rect-2",
+        "type": "Segment",
+        "role": null,
+        "stage": 0
+      },
+      {
+        "id": "rect-3",
+        "type": "Segment",
+        "role": null,
+        "stage": 0
+      }
+    ],
+    "constraints": [
+      {
+        "stage": 0,
+        "index": 0,
+        "typeId": "PCoincident",
+        "objects": [
+          "rect-0:B",
+          "rect-1:A"
+        ],
+        "constants": {},
+        "admission": {
+          "version": 1,
+          "state": "accepted"
+        }
+      },
+      {
+        "stage": 0,
+        "index": 1,
+        "typeId": "PCoincident",
+        "objects": [
+          "rect-1:B",
+          "rect-2:A"
+        ],
+        "constants": {},
+        "admission": {
+          "version": 1,
+          "state": "accepted"
+        }
+      },
+      {
+        "stage": 0,
+        "index": 2,
+        "typeId": "PCoincident",
+        "objects": [
+          "rect-2:B",
+          "rect-3:A"
+        ],
+        "constants": {},
+        "admission": {
+          "version": 1,
+          "state": "accepted"
+        }
+      },
+      {
+        "stage": 0,
+        "index": 3,
+        "typeId": "PCoincident",
+        "objects": [
+          "rect-3:B",
+          "rect-0:A"
+        ],
+        "constants": {},
+        "admission": {
+          "version": 1,
+          "state": "accepted"
+        }
+      },
+      {
+        "stage": 0,
+        "index": 4,
+        "typeId": "Horizontal",
+        "objects": [
+          "rect-0"
+        ],
+        "constants": {
+          "angle": "0"
+        },
+        "admission": {
+          "version": 1,
+          "state": "accepted"
+        }
+      },
+      {
+        "stage": 0,
+        "index": 5,
+        "typeId": "Vertical",
+        "objects": [
+          "rect-1"
+        ],
+        "constants": {
+          "angle": "90"
+        },
+        "admission": {
+          "version": 1,
+          "state": "accepted"
+        }
+      },
+      {
+        "stage": 0,
+        "index": 6,
+        "typeId": "Horizontal",
+        "objects": [
+          "rect-2"
+        ],
+        "constants": {
+          "angle": "180"
+        },
+        "admission": {
+          "version": 1,
+          "state": "accepted"
+        }
+      },
+      {
+        "stage": 0,
+        "index": 7,
+        "typeId": "Vertical",
+        "objects": [
+          "rect-3"
+        ],
+        "constants": {
+          "angle": "270"
+        },
+        "admission": {
+          "version": 1,
+          "state": "accepted"
+        }
+      },
+      {
+        "stage": 0,
+        "index": 8,
+        "typeId": "LockPoint",
+        "objects": [
+          "rect-0:A"
+        ],
+        "constants": {
+          "x": "0",
+          "y": "0"
+        },
+        "admission": {
+          "version": 1,
+          "state": "accepted"
+        }
+      },
+      {
+        "stage": 0,
+        "index": 9,
+        "typeId": "SegmentLength",
+        "objects": [
+          "rect-0"
+        ],
+        "constants": {
+          "length": "100"
+        },
+        "admission": {
+          "version": 1,
+          "state": "accepted"
+        }
+      },
+      {
+        "stage": 0,
+        "index": 10,
+        "typeId": "SegmentLength",
+        "objects": [
+          "rect-1"
+        ],
+        "constants": {
+          "length": "50"
+        },
+        "admission": {
+          "version": 1,
+          "state": "accepted"
+        }
+      }
+    ],
+    "boundaryFrame": {
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "x": [
+        1,
+        0,
+        0
+      ],
+      "y": [
+        0,
+        1,
+        0
+      ],
+      "z": [
+        0,
+        0,
+        1
+      ]
+    },
+    "emptyBoundary": true
+  },
+  "malformed": {
+    "revision": "bad",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "A complete native sketch is required."
+    }
+  },
+  "absentFrame": {
+    "revision": "frame",
+    "ok": false,
+    "error": {
+      "code": "FRAME_UNAVAILABLE",
+      "message": "The saved sketch has no valid authored frame."
+    }
+  },
+  "cancelled": true,
+  "frozen": true,
+  "starts": 4,
+  "terminations": 4,
+  "ticks": 67,
+  "maxGap": 5.3999998569488525,
+  "sourceUnchanged": true
+}

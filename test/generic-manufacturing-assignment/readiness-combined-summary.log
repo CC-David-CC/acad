@@ -1,0 +1,19 @@
+6ms)
+✔ only declared enclosure roles are accepted, with no implicit first output (14.027981ms)
+✔ legacy remains unchanged, no invented metadata or identity (0.985779ms)
+✔ versioned metadata roundtrips and separates unit, material and appearance (0.332913ms)
+✔ unknown versions and invalid references fail before caller mutates state (0.469414ms)
+✔ body resolution refuses absent and ambiguous identities (0.628816ms)
+✔ object grouping and transforms roundtrip explicitly rather than by color (0.381873ms)
+✔ changed revision produces a review proposal only for unique compatible producer (0.431304ms)
+✔ separate canonical hashes detect geometry or material changes without formatting changes (4.997427ms)
+✔ preparation recomputes revisions and rejects stale or concurrently edited data (52.52946ms)
+ℹ tests 63
+ℹ suites 0
+ℹ pass 63
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4399.218488
+

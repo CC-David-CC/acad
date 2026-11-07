@@ -1,0 +1,154 @@
+{
+  "scope": "nonvisual real model operation + genuine solve/semantic/native Workers; controlled native fixtures and project/storage adapters; no public/history/Files proof",
+  "productTestSource": "bbffda3a200e1590a4aa8375f18033ca9f8afe90",
+  "prerequisite": "bd191e7b8",
+  "browserResult": "PASS",
+  "actualWorkerCount": 46,
+  "actualWorkerTermination": true,
+  "newProductPaths": [
+    "modules/workbenches/modeler/features/workerSelectedProfile/workerSelectedProfile.operation.ts"
+  ],
+  "sourcePins": [
+    {
+      "path": "modules/workbenches/modeler/features/workerSelectedProfile/workerSelectedProfile.operation.ts",
+      "sha256": "3adbd71eaff5587a8c9a7178641debdc2da1768ab64e89955c941bc93e2d8c1a",
+      "bytes": 14906
+    },
+    {
+      "path": "modules/engine/extrusion/selectedSketchProfile.mjs",
+      "sha256": "f0b594e7fd93382bd328b4e60e3cc96d47f74b43cad2ce89f50add94a881c9f0",
+      "bytes": 7654
+    },
+    {
+      "path": "modules/engine/extrusion/prismSemantic.worker.ts",
+      "sha256": "281b32ee98f6a4b8c39ff34c79e35e79cbbbbf5801cea4711c8738d218b5c47b",
+      "bytes": 2212
+    },
+    {
+      "path": "modules/engine/extrusion/prismSemanticClient.ts",
+      "sha256": "63a551fa5d84f84c4b4452ebb707faaee9f147fa592669e73c1ed4f9f1114425",
+      "bytes": 3665
+    },
+    {
+      "path": "modules/engine/solid/solidLedger.mjs",
+      "sha256": "509c2194fc1080e3470773430768d42a81679790f71d4ba202767a384bc089c3",
+      "bytes": 10433
+    },
+    {
+      "path": "modules/engine/solid/solidIntent.mjs",
+      "sha256": "f76ff4abf03839ee11b34d382eb1d9348abe00889a3601bc27b253368d8d704b",
+      "bytes": 2894
+    },
+    {
+      "path": "modules/engine/solid/solidMetrics.mjs",
+      "sha256": "f7ca08e43692610acee6fa7ba140eeedb328c7f7e1e74dd64837ffb41f7c282a",
+      "bytes": 7858
+    },
+    {
+      "path": "modules/engine/mount/catalogMount.ts",
+      "sha256": "cb7a6b17bf88d1f3d974c3e082cfdc25792005f01988745006a3e54cd0ab2297",
+      "bytes": 3620
+    },
+    {
+      "path": "modules/engine/mount/engineCatalog.mjs",
+      "sha256": "492989c3db9d23f76dbd826a036df1e8780c0855845ca61b463c9e2c60358e25",
+      "bytes": 3904
+    },
+    {
+      "path": "test/selected-profile-operation/component-entry.ts",
+      "sha256": "46c64fa3e34c3a2f5d51816a91374f15eac792c037cf6c37013bef7230531ca2",
+      "bytes": 4156
+    },
+    {
+      "path": "test/selected-profile-operation/build-component.cjs",
+      "sha256": "d222b8b8824fc1956f82c07b46d939087ab4d1070ce6ac47d6d60ee3eec6a0a4",
+      "bytes": 1329
+    },
+    {
+      "path": "test/selected-profile-operation/browser.cjs",
+      "sha256": "919051854ac7fc075d66da4f766f422151ee316a3b47224d8fedb694fc483c96",
+      "bytes": 12121
+    },
+    {
+      "path": "web/lib/verb.js",
+      "sha256": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3",
+      "bytes": 268801
+    }
+  ],
+  "assets": {
+    "/operation-review/component.js": {
+      "sha256": "f509fa6c988d6d3ae187320971a73c3458b0806bc1156faff642921de4cac0ea",
+      "bytes": 1094325
+    },
+    "/operation-review/sketch-worker.js": {
+      "sha256": "c7b435b2360c521d279d4f6bfacf761365c84934b2e9f0d3e8c5e3ee4593297b",
+      "bytes": 3552214
+    },
+    "/operation-review/verb.js": {
+      "sha256": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3",
+      "bytes": 268801
+    },
+    "/static/semantic-worker.js": {
+      "sha256": "d0d5bfa23ee2ca5820770ea90b61ea58685387398dd5fec4b711de7037f9831c",
+      "bytes": 1404497
+    },
+    "/static/oci-verified-worker.js": {
+      "sha256": "0f3240cdde9b5faced831ace71ee5ffcfb6fe159dacba5b7265e5a09b0ca9853",
+      "bytes": 346381
+    },
+    "/static/occ-portable.js": {
+      "sha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+      "bytes": 308353
+    },
+    "/static/occ-profile.wasm": {
+      "sha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+      "bytes": 35020148
+    }
+  },
+  "typescript": {
+    "exitCode": 0,
+    "diagnosticBytes": 0
+  },
+  "evidence": [
+    {
+      "file": "build-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "component-final.json",
+      "sha256": "ae5cd7e49dc4bf46eda005d00f200c5ac12afeb82b05e8c614ea0e9271353077",
+      "bytes": 26140
+    },
+    {
+      "file": "component-final.log",
+      "sha256": "f0226996221f12af487966500997f3eda5eb4391cb6cb0c6b9df26bf5b76aa79",
+      "bytes": 5114
+    },
+    {
+      "file": "csp-test-build-before.log",
+      "sha256": "759653be53f9e827ca5976528cd01aa8194f53d107207e74faa323e681d92bcf",
+      "bytes": 1545
+    },
+    {
+      "file": "missing-verb-fixture-before.log",
+      "sha256": "b5b50506c443a04eea5a7e387e99d496fb63043599bec3775fd09caca3bda77c",
+      "bytes": 1334
+    },
+    {
+      "file": "radius-annotation-fixture-before.log",
+      "sha256": "6358215dad16aadd4bd736fc268b5f94dc68c5f978cac77df5e5a02b71415cfb",
+      "bytes": 2491
+    },
+    {
+      "file": "tsc-before.log",
+      "sha256": "7151949a1661b02d3026d5836aa134be631bb1304ac2514805b1a4a5dd5e8eaa",
+      "bytes": 1079
+    },
+    {
+      "file": "tsc-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ]
+}

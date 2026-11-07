@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "sourceRoot": "/tmp/codi-cad-solver-report-qualification-20261106",
+  "head": "f1072e9f5734feb6e1c23bf2b71b77556e1c7347",
+  "node": "v24.22.1",
+  "webpack": "5.74.0",
+  "mode": "production",
+  "entry": "web/app/sketcher/headless/solveWorker.ts",
+  "trackedInputCount": 1262,
+  "trackedInputsBeforeAndAfter": "fc7add160f15a3a876585b8186cdd1db17738ec3dc532e20be9d5b85f11c2ca8",
+  "sourceHashes": {
+    "web/app/sketcher/headless/localJacobian.mjs": "29922c4fe243f47fd2fadfa4fd4eb6c112bf4fbfa27f3a72b785e85a4d78e36a",
+    "web/app/sketcher/headless/solve.ts": "c0b901172338f11ccd38ccad09aec835771a70f3e435523ded62c0e32428027d",
+    "web/app/sketcher/headless/solveWorker.ts": "24c30ab382d176917b8e1c739643a2f0394c5832ac88886ed367ffcccb46962b"
+  },
+  "numericSHA256": "987450eec65f7e00c74c8da9281537558fd1ee8e63ee48721253cf2458260386",
+  "verbSHA256": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3",
+  "workerSHA256": "5d0176a0f5e2fbba5281a9c1611f0c60f8d1536bd54c62c125825e62a9534457",
+  "workerBytes": 1177839
+}

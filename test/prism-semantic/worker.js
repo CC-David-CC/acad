@@ -1,0 +1,2 @@
+const {deriveRectanglePrismRoles}=require('../../modules/engine/provenance/rectanglePrismRoles.ts');
+self.onmessage=async e=>{try{if(typeof document!=='undefined'||typeof window!=='undefined'||typeof verb!=='undefined')throw Error('Unexpected runtime');const v=await deriveRectanglePrismRoles(e.data.featureId,e.data.profile,e.data.result);self.postMessage({ok:true,value:v});}catch(error){self.postMessage({ok:false,error:String(error)});}};

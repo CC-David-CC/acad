@@ -1,0 +1,15 @@
+asset worker.js 3.43 MiB [emitted] (name: main) 1 related asset
+orphan modules 22.7 KiB [orphan] 7 modules
+runtime modules 1.25 KiB 6 modules
+modules by path ../ 1.88 MiB 231 modules
+modules by path ./ 1.18 MiB
+  modules by path ./web/app/ 1000 KiB
+    modules by path ./web/app/sketcher/ 948 KiB 112 modules
+    modules by path ./web/app/cad/ 48.7 KiB
+      modules by path ./web/app/cad/parameters/*.mjs 24.3 KiB 6 modules
+      ./web/app/cad/sketch/boundaryValidity.js 8.36 KiB [built] [code generated]
+      ./web/app/cad/craft/unconsumedSketchSave.mjs 14 KiB [built] [code generated]
+      ./web/app/cad/desktopFileActions.js 1.96 KiB [built] [code generated]
+    ./web/app/utils/utils.js 2.81 KiB [built] [code generated]
+  modules by path ./modules/ 211 KiB 43 modules
+webpack 5.74.0 compiled successfully in 8120 ms

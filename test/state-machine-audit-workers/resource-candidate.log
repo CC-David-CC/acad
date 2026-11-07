@@ -1,0 +1,15 @@
+✔ any thrown cleanup value permanently fences pool: undefined (1.623035ms)
+✔ any thrown cleanup value permanently fences pool: null (0.979869ms)
+✔ any thrown cleanup value permanently fences pool: zero (0.247142ms)
+✔ any thrown cleanup value permanently fences pool: false (0.275892ms)
+✔ any thrown cleanup value permanently fences pool: empty-string (0.224842ms)
+✔ invalid cleanup accessor cannot orphan a native-mount reservation (0.301643ms)
+✔ ordinary Error cleanup already fences current and new owners (0.280912ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 69.210458

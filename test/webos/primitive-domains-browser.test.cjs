@@ -1,0 +1,15 @@
+/* OCC parameter domain controls plus valid pointed-cone cases. */
+const assert=require('node:assert/strict'),puppeteer=require(process.env.PUPPETEER_CORE_PATH||'puppeteer-core');
+const base=new URL(process.env.JSKETCHER_TEST_URL||'http://127.0.0.1:19783/'),cdp=new URL(process.env.CODI_TEST_CDP||'http://127.0.0.1:19282');
+if(![base,cdp].every(u=>['127.0.0.1','localhost','[::1]'].includes(u.hostname)))throw Error('Loopback required');
+(async()=>{const browser=await puppeteer.connect({browserURL:cdp.href,protocolTimeout:60000}),context=await browser.createBrowserContext(),page=await context.newPage();try{
+ await page.goto(new URL('index-webos.html?DEFAULT&webos=1',base).href);await page.waitForFunction('window.__CAD_APP?.streams?.lifecycle?.projectLoaded?.value===true',{timeout:90000});
+ const result=await page.evaluate(async()=>{const c=__CAD_APP,items=[['BOX',{x:10,y:20,z:30},['x','y','z']],['CYLINDER',{diameter:20,height:30},['diameter','height']],['SPHERE',{radius:10},['radius']],['CONE',{diameterA:20,diameterB:10,height:30},['height']]],out={};
+  for(const [id,base,fields] of items){out[id]=[];for(const field of fields)for(const value of [0,-1,Infinity,NaN])try{await c.operationService.get(id).run({...base,[field]:value,featureId:100,boolean:{kind:'NONE'}},c);out[id].push({field,value:String(value),accepted:true})}catch(e){out[id].push({field,value:String(value),accepted:false,message:e.userMessage||String(e.message||e)})}}
+  for(const field of ['diameterA','diameterB'])for(const value of [-1,Infinity,NaN])try{await c.operationService.get('CONE').run({diameterA:20,diameterB:10,height:30,[field]:value,featureId:100,boolean:{kind:'NONE'}},c);out.CONE.push({field,value:String(value),accepted:true})}catch(e){out.CONE.push({field,value:String(value),accepted:false,message:e.userMessage||String(e.message||e)})}
+  out.points=[];for(const [diameterA,diameterB] of [[20,0],[0,20]])try{const r=await c.operationService.get('CONE').run({diameterA,diameterB,height:30,featureId:100,boolean:{kind:'NONE'}},c);out.points.push(r.created[0].brepShell.faces.length)}catch(e){out.points.push(String(e.message||e))}
+  try{await c.operationService.get('CONE').run({diameterA:0,diameterB:0,height:30,featureId:100,boolean:{kind:'NONE'}},c);out.zeroCone='accepted'}catch(e){out.zeroCone=e.userMessage||String(e.message||e)}
+  const after=await c.operationService.get('BOX').run({x:10,y:20,z:30,featureId:101,boolean:{kind:'NONE'}},c);out.afterInvalidFaces=after.created[0].brepShell.faces.length;return out;});
+ for(const id of ['BOX','CYLINDER','SPHERE','CONE'])for(const item of result[id]){assert.equal(item.accepted,false,id+' '+JSON.stringify(item));assert.match(item.message,/finite|positive|greater/i)}
+ assert.deepEqual(result.points,[2,2]);assert.match(result.zeroCone,/positive/i);assert.equal(result.afterInvalidFaces,6);console.log('PASS finite positive primitive domains, rejected degenerate solid, valid pointed cones and subsequent valid operation',JSON.stringify(result));
+ }finally{await context.close();browser.disconnect()}})().catch(e=>{console.error(e.stack);process.exitCode=1});

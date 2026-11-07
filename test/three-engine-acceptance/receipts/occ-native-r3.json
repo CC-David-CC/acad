@@ -1,0 +1,253 @@
+{
+  "source": "root 9e9dadf84 fixture; Native glue statically bundled in pinned Worker, its source pin checked in descriptor",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'",
+  "fixture": "http://127.0.0.1:20467/static/index.html",
+  "engines": [
+    {
+      "slot": "occ",
+      "engine": "occ-oci-verified-runtime-research",
+      "representation": "occ-brep-worker-owned",
+      "unit": "millimeter",
+      "rows": [
+        {
+          "id": "box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "offset-fractional-box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-common",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-subtract",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "touch-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-common",
+          "status": "unsupported",
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "lifetime": "not-checked"
+        },
+        {
+          "id": "coincident-subtract",
+          "status": "unsupported",
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "lifetime": "not-checked"
+        },
+        {
+          "id": "foreign-mount",
+          "status": "pass"
+        },
+        {
+          "id": "unit-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "negative-dimension-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "unsupported-operation",
+          "status": "pass"
+        },
+        {
+          "id": "pre-aborted-operation",
+          "status": "pass"
+        },
+        {
+          "id": "disposed-handle",
+          "status": "pass"
+        },
+        {
+          "id": "lifetime-budget",
+          "status": "pass"
+        },
+        {
+          "id": "closed-mount-after-lifetime-budget",
+          "status": "pass"
+        }
+      ],
+      "scope": "Numerical/caller-boundary controls only; no history/native/in-flight-cancellation/stale-response proof"
+    },
+    {
+      "slot": "native",
+      "engine": "manifold-mesh-verified-runtime-research",
+      "representation": "manifold-mesh-worker-owned",
+      "unit": "millimeter",
+      "rows": [
+        {
+          "id": "box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "offset-fractional-box",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-common",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "overlap-subtract",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "touch-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-union",
+          "status": "pass",
+          "mesh": "analytic-volume-bounds"
+        },
+        {
+          "id": "disjoint-common",
+          "status": "pass",
+          "mesh": "not-checked"
+        },
+        {
+          "id": "coincident-subtract",
+          "status": "pass",
+          "mesh": "not-checked"
+        },
+        {
+          "id": "foreign-mount",
+          "status": "pass"
+        },
+        {
+          "id": "unit-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "negative-dimension-refusal",
+          "status": "pass"
+        },
+        {
+          "id": "unsupported-operation",
+          "status": "pass"
+        },
+        {
+          "id": "pre-aborted-operation",
+          "status": "pass"
+        },
+        {
+          "id": "disposed-handle",
+          "status": "pass"
+        },
+        {
+          "id": "lifetime-budget",
+          "status": "pass"
+        },
+        {
+          "id": "closed-mount-after-lifetime-budget",
+          "status": "pass"
+        }
+      ],
+      "scope": "Numerical/caller-boundary controls only; no history/native/in-flight-cancellation/stale-response proof"
+    }
+  ],
+  "modules": [
+    {
+      "url": "/static/oci-verified-mount.mjs",
+      "sha256": "ab531291944eeee914df7b8bd046ef87419f7e7adf8761dfa73341b166b03951"
+    },
+    {
+      "url": "/static/worker-controller.mjs",
+      "sha256": "79797e89cbb4e44b08db60efaf1bfe7688adc39be2f5a17c5e6120084bd0253e"
+    },
+    {
+      "url": "/static/enclosureManufacturingMesh.mjs",
+      "sha256": "8e6486f479fd4e6379ac169eaff4a1b18380da4947421362a82c309c9e78f3a0"
+    },
+    {
+      "url": "/static/enclosurePlan.mjs",
+      "sha256": "080ee18dd77731efaccfb9101b3d7f138b0ea6f525b881b2ccf4b174d544d19f"
+    },
+    {
+      "url": "/static/enclosureMesh.mjs",
+      "sha256": "2b6f1474105c430f3efe6eb87d002576d6a9744a7b1cc98f5493ed129b2ce5f3"
+    },
+    {
+      "url": "/static/contract.mjs",
+      "sha256": "374313f7212c6911d82ad9223e7441ac655e80d946c99ec4c663152398654f11"
+    },
+    {
+      "url": "/static/portable-topology-envelope.mjs",
+      "sha256": "cc0b58a590e9d4fe68b3a19a6ec5274401a605006425255eb2fc714a7150ea8a"
+    },
+    {
+      "url": "/static/drilledTopologyEnvelope.mjs",
+      "sha256": "283740c9ef61cbc7a24dfd144e73608d008a2cf1a7a753b53652bdbcc876f346"
+    },
+    {
+      "url": "/static/fourCornerMountContract.mjs",
+      "sha256": "cea81ebb05d1bc170df5639ed3ab567fd7f5a4aa08712f8eef3c994505fbc1d1"
+    },
+    {
+      "url": "/static/manifold-verified-mount.mjs",
+      "sha256": "8be7febcac469c87ad1ffdd099fe908e3dd80e46de34906e5766455ab67574cd"
+    },
+    {
+      "url": "/static/oci-verified-worker.js",
+      "sha256": "d1dfb0c42929870f07037a9e83590e0568d92803873053879042d1f820035fd1"
+    },
+    {
+      "url": "/static/manifold-verified-worker.js",
+      "sha256": "494a336a665759a1c3002b2cbcc6881f375bc78711186c65a254a3bb7dbef301"
+    },
+    {
+      "url": "/static/occ-portable.js",
+      "sha256": "a8774acbbe3a90d7c82fe294c769096179eae351e5a8c854d4d0a31737a706ee"
+    },
+    {
+      "url": "/static/occ.wasm",
+      "sha256": "13617eda9a2118edfd1244b5d46523e7d9628a87ec995a0237b2b5cc58d532f2"
+    },
+    {
+      "url": "/static/manifold.wasm",
+      "sha256": "7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d"
+    },
+    {
+      "url": "/static/__three_engine_tests__/matrix.mjs",
+      "sha256": "373f596a7e17f52b14a32695448a26da08e3b6bb7e6fefe6e58c79213d485ba6"
+    },
+    {
+      "url": "/static/__three_engine_tests__/cases.mjs",
+      "sha256": "51cf6af59deb376dcf6fb1f54f03f2de5090c01a9323a7e293f542901c153e1b"
+    }
+  ],
+  "qualifiedAllNumericCases": false,
+  "scope": "Actual supplied Worker/kernel numerical and caller-boundary controls. History/native/agent/in-flight-stale controls remain separate."
+}

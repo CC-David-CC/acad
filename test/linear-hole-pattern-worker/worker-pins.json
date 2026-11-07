@@ -1,0 +1,57 @@
+{
+  "source": "173bfe44e",
+  "files": {
+    "modules/engine/mount/oci-verified-worker.js": {
+      "sha256": "e8c29f8b3313fd1cf87aae058b80d46701d85e78f4234a77b0b9af33313ea08f",
+      "bytes": 68041
+    },
+    "modules/engine/mount/worker-controller.mjs": {
+      "sha256": "456c880a9b79dd0cc79645fe6104bb42270a5c997379536838bcf80791cde935",
+      "bytes": 84591
+    },
+    "modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+      "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+      "bytes": 6918
+    },
+    "modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+      "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+      "bytes": 1913
+    },
+    ".build/prism-assets/oci-verified-worker.js": {
+      "sha256": "dce34302a6be3b0b832913684d0a8f2bfb6ebaf18ca55acb8ded9afe174fba95",
+      "bytes": 377308
+    },
+    ".build/prism-assets/occ-portable.js": {
+      "sha256": "a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884",
+      "bytes": 307709
+    },
+    ".build/prism-assets/occ.wasm": {
+      "sha256": "07d763a05f35cd257501d339d9087df63c65bcaeb51a4f4f80832e333892e12e",
+      "bytes": 34989243
+    },
+    ".build/selected-profile-assets/selected-profile-worker.js": {
+      "sha256": "55f92133d5f503008ce4f000809af01bc15b62bbeed26c4b7fe2cee336e8caa8",
+      "bytes": 378027
+    },
+    ".build/selected-profile-assets/selected-profile-occ-portable.js": {
+      "sha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+      "bytes": 308353
+    },
+    ".build/selected-profile-assets/selected-profile-occ.wasm": {
+      "sha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+      "bytes": 35020148
+    },
+    ".build/polygon-profile-assets/modules/engine/mount/polygon-profile-worker.js": {
+      "sha256": "2093beaafa53f82064c486c5f1ced3780f008f45411a5a011cc2859abb33bfe6",
+      "bytes": 378952
+    },
+    ".build/mechanical-profile-assets/modules/engine/mount/mechanical-profile-worker.js": {
+      "sha256": "60041ed99de4beb686f6ceda90da1d78eb08cecab15a4c37df35f53cadba6191",
+      "bytes": 380010
+    },
+    ".build/boolean-history-assets/modules/engine/mount/boolean-history-worker.js": {
+      "sha256": "245d4e2f28958ff74a421e4fb0f7cf67ad0439d5825cdf58ed070280ee3f72a5",
+      "bytes": 380130
+    }
+  }
+}

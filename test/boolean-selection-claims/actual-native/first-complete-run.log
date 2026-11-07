@@ -1,0 +1,24 @@
+{
+  "status": "FAIL",
+  "summary": {
+    "matrixSuccesses": 59,
+    "matrixRefusals": 2,
+    "emptyOutputs": 19,
+    "multiSolidOutputs": 9,
+    "sameOriginalLinks": 0,
+    "resolved": 1178,
+    "NO_DESCENDANT": 1164,
+    "MULTIPLE_DESCENDANTS": 0,
+    "MERGED_DESCENDANT": 388,
+    "generatedVertexTargets": 40,
+    "edgeGeneratedVertexTargets": 20,
+    "plateCuts": 10,
+    "plateCornerBindings": 40
+  },
+  "failures": [
+    {
+      "case": "aggregate",
+      "message": "The expression evaluated to a falsy value:\n\n  assert(summary.NO_DESCENDANT>0&&summary.MULTIPLE_DESCENDANTS>0&&summary.MERGED_DESCENDANT>0)\n"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+
+Caught error:
+
+Error: Select an unplaced current measured single solid.
+    at async file:///tmp/codi-cad-point-cancel-cleanup-20261107/test/solid-point-cancellation-cleanup/before-probe.mjs:7:280 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: Error: Select an unplaced current measured single solid.
+      at fail (evalmachine.<anonymous>:15:55)
+      at Object.classifyWorkerSolidPoints (evalmachine.<anonymous>:58:13)
+      at file:///tmp/codi-cad-point-cancel-cleanup-20261107/test/solid-point-cancellation-cleanup/before-probe.mjs:7:307
+      at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+      at async node:internal/modules/esm/loader:647:26
+      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+    code: 'UNSUPPORTED_TARGET'
+  },
+  expected: [Function (anonymous)],
+  operator: 'rejects',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

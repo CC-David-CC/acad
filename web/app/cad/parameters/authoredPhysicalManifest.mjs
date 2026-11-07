@@ -1,0 +1,29 @@
+import {physicalBindingFields} from './physicalBindingFields.mjs';
+import {prepareTypedRectangle} from './typedRectangleBindings.mjs';
+const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+// Namespace hints cover the union of two independently bounded 256-name sources.
+// They do not enlarge the authored definition, Worker quantity, or target limits.
+// Input history is already captured by captureAuthoredHistory; it is detached,
+// cooperative and bounded. No live document or raw model state is read here.
+export function deriveAuthoredPhysicalManifest(history,parameterNames,readSketch){
+ if(!Array.isArray(history)||history.length>256||!Array.isArray(parameterNames)||parameterNames.length>512||typeof readSketch!=='function')throw Error('Invalid captured parameter inputs.');
+ const names=new Set(parameterNames);if(names.size!==parameterNames.length||parameterNames.some(n=>typeof n!=='string'||!/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(n)))throw Error('Invalid parameter names.');
+ const targets=[],faces=new Set(),features=new Set();
+ function rejectNamed(value){if(typeof value==='string'&&names.has(value.trim()))throw Error('An unsupported field references a typed parameter.');if(Array.isArray(value))for(const v of value)rejectNamed(v);else if(value&&typeof value==='object')for(const k of Object.keys(value))rejectNamed(value[k]);}
+ for(let index=0;index<history.length;index++){
+  const request=history[index];if(!request||typeof request!=='object'||typeof request.type!=='string'||!request.params||typeof request.params!=='object')throw Error('Invalid captured feature.');
+  const list=own(physicalBindingFields,request.type)?physicalBindingFields[request.type]:null;
+  if(!list){rejectNamed(request.params);continue;}
+  const featureId=Number(request.params.featureId);if(!Number.isSafeInteger(featureId)||featureId<1||features.has(featureId))throw Error('Duplicate or invalid feature identity.');features.add(featureId);
+  const fields=Object.create(null);for(const key of list){if(!own(request.params,key))throw Error('A supported feature field is missing.');fields[key]=request.params[key];}for(const key of Object.keys(request.params))if(!list.includes(key))rejectNamed(request.params[key]);
+  targets.push(Object.freeze({kind:'feature',index,featureId,type:request.type,fields:Object.freeze(fields)}));
+  if(request.type==='WORKER_RECTANGLE_EXTRUDE_V1'){
+   const faceId=request.params.face;if(typeof faceId!=='string'||!faceId||faceId.length>1024||faces.has(faceId))throw Error('Duplicate or invalid rectangle identity.');faces.add(faceId);
+   const source=readSketch(faceId);if(typeof source!=='string')throw Error('The rectangle source is unavailable.');
+   const sketch=prepareTypedRectangle(source,[],()=>1),width=sketch.bindings.find(x=>x.segmentId==='rect-0')?.value,height=sketch.bindings.find(x=>x.segmentId==='rect-1')?.value;
+   targets.push(Object.freeze({kind:'rectangle',faceId,widthSegmentId:'rect-0',heightSegmentId:'rect-1',width,height}));
+  }
+ }
+ if(targets.length>256)throw Error('Too many supported binding targets.');
+ return Object.freeze({version:1,targets:Object.freeze(targets)});
+}

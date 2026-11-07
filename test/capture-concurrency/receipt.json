@@ -1,0 +1,204 @@
+{
+  "appSha": "41764cb64ae096277673eeb0acddb424642ee977be33e45dcfe0b831d14b6af1",
+  "setup": {
+    "ids": [
+      "3",
+      "12"
+    ],
+    "faceId": "S:0/SURFACE",
+    "bytes": 139364,
+    "objects": 514,
+    "constraints": 512,
+    "loadMs": 678.5999999046326
+  },
+  "stats": {
+    "inspectMs": 4.099999904632568,
+    "invokeMs": 515,
+    "undoMs": 676.2999999523163,
+    "redoMs": 766.7999999523163,
+    "status": "accepted",
+    "undoChanged": true,
+    "redoExact": true,
+    "longTasks": [
+      1198,
+      815,
+      768,
+      851
+    ],
+    "maxHeartbeat": 2016,
+    "entries": 4,
+    "bytes": 839074,
+    "heap": 138981120
+  },
+  "secondWindow": {
+    "max": 11.399999856948853,
+    "count": 653,
+    "stillReady": true
+  },
+  "save": {
+    "saveMs": 1097.5999999046326,
+    "captureMs": 14.400000095367432,
+    "current": true,
+    "released": true
+  },
+  "multi": {
+    "createMs": 540.7000000476837,
+    "captureMs": 10.099999904632568,
+    "sketches": 2,
+    "current": true,
+    "faceId": "S:1/SURFACE"
+  },
+  "profileSamples": 3597,
+  "top": [
+    {
+      "function": "accept",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 135358,
+      "hits": 238
+    },
+    {
+      "function": "save",
+      "url": "",
+      "line": 0,
+      "hits": 203
+    },
+    {
+      "function": "restore",
+      "url": "",
+      "line": 0,
+      "hits": 164
+    },
+    {
+      "function": "updateViewportSizeIfNeeded",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 40596,
+      "hits": 131
+    },
+    {
+      "function": "(garbage collector)",
+      "url": "",
+      "line": 0,
+      "hits": 126
+    },
+    {
+      "function": "accept",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 135358,
+      "hits": 119
+    },
+    {
+      "function": "fill",
+      "url": "",
+      "line": 0,
+      "hits": 100
+    },
+    {
+      "function": "(program)",
+      "url": "",
+      "line": 0,
+      "hits": 93
+    },
+    {
+      "function": "(idle)",
+      "url": "",
+      "line": 0,
+      "hits": 80
+    },
+    {
+      "function": "SetStyle",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 133824,
+      "hits": 60
+    },
+    {
+      "function": "eliminate",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 119793,
+      "hits": 55
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 135233,
+      "hits": 48
+    },
+    {
+      "function": "eliminate",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 119793,
+      "hits": 42
+    },
+    {
+      "function": "_createForOfIteratorHelper",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 135233,
+      "hits": 42
+    },
+    {
+      "function": "eliminate",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 119793,
+      "hits": 41
+    },
+    {
+      "function": "stroke",
+      "url": "",
+      "line": 0,
+      "hits": 40
+    },
+    {
+      "function": "",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 140952,
+      "hits": 40
+    },
+    {
+      "function": "evaluatePolynomials",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 118314,
+      "hits": 36
+    },
+    {
+      "function": "compact",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 119919,
+      "hits": 36
+    },
+    {
+      "function": "compact",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 119919,
+      "hits": 34
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 119744,
+      "hits": 32
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 119744,
+      "hits": 32
+    },
+    {
+      "function": "_createForOfIteratorHelper",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 119744,
+      "hits": 32
+    },
+    {
+      "function": "_loop4",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 118356,
+      "hits": 31
+    },
+    {
+      "function": "n",
+      "url": "http://127.0.0.1:20478/static/index.bundle.js",
+      "line": 140508,
+      "hits": 31
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+✔ default/no-op/changed receipt is document-scoped and canonical unit remains mm (536.529785ms)
+✔ setter preserves history/source/counter/journal/material identities without Worker dispatch (187.639066ms)
+✔ malformed exact fields/options/getters and stale revisions reject unchanged (130.005997ms)
+✔ active/processing/history/wizard and cleanup states refuse metadata writes (520.27271ms)
+✔ closed/unbound/replaced manager and cancelled caller refuse before changing state (408.85542ms)
+✔ post-commit lifetime loss is marked committed and never rolls into another document (91.375ms)
+✔ New/reset returns to absent metadata and invalidates prior document revision (84.241212ms)
+verb 2.0.0
+✔ actual manager snapshot/Blob reopen retains presentation through actual validation Worker (288.237382ms)
+verb 2.0.0
+✔ presentation installs only after successful replay and final restore guards (191.477532ms)
+verb 2.0.0
+verb 2.0.0
+✔ validation/replay failure and cancelled native Open never install incoming presentation (454.001059ms)
+✔ display change invalidates captured Save currentness independently of material state (73.398939ms)
+verb 2.0.0
+✔ actual manufacturing preparation/hashing retains optional presentation outside digest domains (306.056972ms)
+verb 2.0.0
+✔ an original default-mm native envelope reopens as default without metadata migration (192.38391ms)
+verb 2.0.0
+✔ metadata changes during actual asynchronous manufacturing hashing reject the old Save (357.534902ms)
+✔ incremental hash matches Web Crypto, including escapes, Unicode and boundary surrogates (16.275035ms)
+✔ invalid JSON inputs and cycles are refused, cancellation is observed (2.10561ms)
+✔ unchanged entries reuse hash, edits rehash only changed item, order affects root (17.600228ms)
+✔ stale and discarded preparations cannot publish cached state (4.100589ms)
+✔ duplicate paths and invalid item hashes fail (1.964428ms)
+✔ cached root matches fresh full recomputation and changed file version cannot reuse (2.469543ms)
+✔ a concurrent publication or model change invalidates pending transactions (1.941449ms)
+✔ service-provided stable chunks permit one-byte edit without hashing other chunks (2.217811ms)
+✔ final caller guard cannot authorize newer-presentation invalidation (329.267393ms)
+✔ final caller guard cannot authorize newer-matching-presentation invalidation (213.956436ms)
+✔ final caller guard cannot authorize pipeline-start invalidation (158.100704ms)
+✔ final caller guard cannot authorize manager-replaced invalidation (124.146311ms)
+✔ final caller guard cannot authorize craft-replaced invalidation (113.186777ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4173.287077

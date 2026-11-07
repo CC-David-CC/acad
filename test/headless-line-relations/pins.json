@@ -1,0 +1,37 @@
+{
+  "runtimeSource": "724178adc682f5707f130edf1e88d79fe087dea3",
+  "coreSource": "01b7e39412bc324576913619b9e773a5fe008b22",
+  "base": "607b1ea42",
+  "fixture": "http://127.0.0.1:20630/",
+  "runtimeBackup": "/mnt/data10tb/codi-headless-collinear-20261105-r1",
+  "assets": {
+    "dist/static/index.bundle.js": "91c921bb4b4747a0e04604e01314145d61325013b448bc9330d9d04fba63811e",
+    "dist/static/sketch-solver.0144ce96ceb9457b9e77.js": "ec4dd5826b1f7f73e75012c1845bb5f5bb0dd2e10f0bb503290f012f5b895ca0",
+    "dist/static/project-validator.15366ca88101ddc6dcd7.js": "5f186ef20fecf25d0f238f5eee68ad4b2a627af51cbe58d14b21b3a1e4bbf9c1",
+    "dist/static/prism-semantic.c72a0da0eb498fdb6979.js": "cae4139ac0f4d677a6696f9e833e9d2a9d6b7bb93a6a5380c6ac102f933758ed",
+    "dist/static/rectangleProfileRequest.mjs": "a3db8cc2add43838c1e0b3a2c8e4d456acbf70ffb6a014ada7520f8401fb6ab9"
+  },
+  "receipts": {
+    "observed.json": "95d612bdb37ad74d4e1b4c7190e0424014e81a6d1e1c4f38f10022f92c4a2c46",
+    "signed-regression.json": "a1ce834d696084b86f7b4294278c07ac8b77a6c438955b6bc9ba547ff6ca5c10"
+  },
+  "logs": {
+    "/tmp/codi-collinear-actual-r1-20261105.log": "17d068f0c862077334de9e260b66867f409b801a2ba34c138b204d25dc69bee5",
+    "/tmp/codi-collinear-actual-r2-20261105.log": "1c1c5c07d0c7738233988e6642e3c0cd20ddcfee52e0f0371b37e130f7029316",
+    "/tmp/codi-collinear-actual-r3-20261105.log": "63cebb3e5e7e8bd5867ef08c5b7bded154c826e23e38dcfb1c77d904de1585db",
+    "/tmp/codi-collinear-actual-r4-20261105.log": "31c99a559ef97a3c26fad057a76e7806e28f81af00393a7158bd8a1c138c522f",
+    "/tmp/codi-collinear-actual-r5-20261105.log": "c378f966fe4cad47abe7bef9e2bf6692aa6970c133965f8faf5fe39508c21bcd",
+    "/tmp/codi-collinear-actual-r6-20261105.log": "c378f966fe4cad47abe7bef9e2bf6692aa6970c133965f8faf5fe39508c21bcd",
+    "/tmp/codi-collinear-signed-regression-20261105.log": "f718469a027c4861dd9762cd55acbac2aadcf8b9aebb051a38e5e127dd9c8171",
+    "/tmp/codi-line-shared-helper-tests-20261105.log": "867bc96b647388d5a2a501ccd29b190b34add0442de1879b9f2123f425daf9ef",
+    "/tmp/codi-collinear-signed-helper-tests-20261105.log": "bf19e21e841a807b0c01c2618ff04430125b655f23e63a1fa875ee654e156f1f",
+    "/tmp/codi-collinear-profile-tests-20261105.log": "a9c66869a15e45a83e934e4bd96b76dae6e32346f8993b80a78fe6267a00c050"
+  },
+  "unitControls": {
+    "existingLineRelations": 16,
+    "existingSignedDistance": 29,
+    "descriptorEnvelopes": 4,
+    "rectanglePlanner": 13,
+    "typeScriptNoEmit": "PASS"
+  }
+}

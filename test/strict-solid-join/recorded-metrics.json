@@ -1,0 +1,400 @@
+{
+  "scope": "Unmodified metrics extracted from actual signed raw-Boolean observations; not a fresh Join/native test",
+  "source": {
+    "repository": "CodiServer-distro",
+    "commit": "f0f89f639",
+    "path": "test/agent-cad-corpus/multi-engine-common/evidence-r1/receipt.json",
+    "sha256": "78b0fc8f56a2890113e51fd5231e4f50481158af1353a6e8db4cf14da299dc1e"
+  },
+  "records": [
+    {
+      "id": "smlib-overlap-union",
+      "engine": "smlib",
+      "sourceCase": "smlib-overlap-union",
+      "sourceField": "geometry.outputs[0].metrics",
+      "expected": "accepted",
+      "metrics": {
+        "version": 1,
+        "unit": "millimeter",
+        "space": "model-local",
+        "resultKind": "single-material",
+        "materialRegions": 1,
+        "voidRegions": 0,
+        "solidCount": null,
+        "meshComponents": null,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": true,
+        "nativeValidity": null,
+        "nativeTopology": null,
+        "nativeStatus": null,
+        "volumeUnit": "cubic-millimeter",
+        "reportedVolume": 1500,
+        "volumeMagnitude": 1500,
+        "volumeAvailable": true,
+        "volumeQuality": "native-relative-0.001",
+        "volumeKind": "smlib-brep",
+        "boundsKind": "kernel",
+        "nativeVolume": null,
+        "nativeBounds": null,
+        "nativeMeasurementQuality": null,
+        "triangleCount": 12,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            15,
+            10,
+            10
+          ]
+        },
+        "precision": {
+          "kind": "kernel-compute-tolerance",
+          "value": 0.001,
+          "note": "Kernel computation tolerance; not an accuracy guarantee."
+        },
+        "runtime": {
+          "mountEngine": "smlib-wasm",
+          "representation": "smlib-brep-worker-owned",
+          "jsSha256": "8e49622c97d839cf94d6c4d5e2de6cbd96d1166075741e08dcbda3b1a223d8fa",
+          "wasmSha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+          "workerSha256": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65"
+        }
+      }
+    },
+    {
+      "id": "smlib-disjoint-union",
+      "engine": "smlib",
+      "sourceCase": "smlib-disjoint-union",
+      "sourceField": "geometry.outputs[0].metrics",
+      "expected": "JOIN_MULTIPLE_SOLIDS",
+      "metrics": {
+        "version": 1,
+        "unit": "millimeter",
+        "space": "model-local",
+        "resultKind": "multi-material",
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "solidCount": null,
+        "meshComponents": null,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": true,
+        "nativeValidity": null,
+        "nativeTopology": null,
+        "nativeStatus": null,
+        "volumeUnit": "cubic-millimeter",
+        "reportedVolume": 2000,
+        "volumeMagnitude": 2000,
+        "volumeAvailable": true,
+        "volumeQuality": "native-relative-0.001",
+        "volumeKind": "smlib-brep",
+        "boundsKind": "kernel",
+        "nativeVolume": null,
+        "nativeBounds": null,
+        "nativeMeasurementQuality": null,
+        "triangleCount": 24,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        },
+        "precision": {
+          "kind": "kernel-compute-tolerance",
+          "value": 0.001,
+          "note": "Kernel computation tolerance; not an accuracy guarantee."
+        },
+        "runtime": {
+          "mountEngine": "smlib-wasm",
+          "representation": "smlib-brep-worker-owned",
+          "jsSha256": "8e49622c97d839cf94d6c4d5e2de6cbd96d1166075741e08dcbda3b1a223d8fa",
+          "wasmSha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+          "workerSha256": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65"
+        }
+      }
+    },
+    {
+      "id": "smlib-empty-common-continuation",
+      "engine": "smlib",
+      "sourceCase": "smlib-empty-common-continuation",
+      "sourceField": "geometry.outputs[0].metrics",
+      "expected": "JOIN_EMPTY",
+      "metrics": {
+        "version": 1,
+        "unit": "millimeter",
+        "space": "model-local",
+        "resultKind": "empty",
+        "materialRegions": 0,
+        "voidRegions": 0,
+        "solidCount": null,
+        "meshComponents": null,
+        "validLevel0": true,
+        "validLevel2": null,
+        "manifoldPredicate": null,
+        "nativeValidity": null,
+        "nativeTopology": null,
+        "nativeStatus": null,
+        "volumeUnit": "cubic-millimeter",
+        "reportedVolume": 0,
+        "volumeMagnitude": 0,
+        "volumeAvailable": true,
+        "volumeQuality": "empty",
+        "volumeKind": "smlib-brep",
+        "boundsKind": "kernel",
+        "nativeVolume": null,
+        "nativeBounds": null,
+        "nativeMeasurementQuality": null,
+        "triangleCount": 0,
+        "bounds": null,
+        "precision": {
+          "kind": "kernel-compute-tolerance",
+          "value": 0.001,
+          "note": "Kernel computation tolerance; not an accuracy guarantee."
+        },
+        "runtime": {
+          "mountEngine": "smlib-wasm",
+          "representation": "smlib-brep-worker-owned",
+          "jsSha256": "8e49622c97d839cf94d6c4d5e2de6cbd96d1166075741e08dcbda3b1a223d8fa",
+          "wasmSha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+          "workerSha256": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65"
+        }
+      }
+    },
+    {
+      "id": "smlib-contained-cavity",
+      "engine": "smlib",
+      "sourceCase": "smlib-contained-cavity",
+      "sourceField": "geometry.outputs[0].metrics",
+      "expected": "accepted",
+      "metrics": {
+        "version": 1,
+        "unit": "millimeter",
+        "space": "model-local",
+        "resultKind": "single-material",
+        "materialRegions": 1,
+        "voidRegions": 1,
+        "solidCount": null,
+        "meshComponents": null,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": true,
+        "nativeValidity": null,
+        "nativeTopology": null,
+        "nativeStatus": null,
+        "volumeUnit": "cubic-millimeter",
+        "reportedVolume": 992,
+        "volumeMagnitude": 992,
+        "volumeAvailable": true,
+        "volumeQuality": "native-relative-0.001",
+        "volumeKind": "smlib-brep",
+        "boundsKind": "kernel",
+        "nativeVolume": null,
+        "nativeBounds": null,
+        "nativeMeasurementQuality": null,
+        "triangleCount": 24,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "precision": {
+          "kind": "kernel-compute-tolerance",
+          "value": 0.001,
+          "note": "Kernel computation tolerance; not an accuracy guarantee."
+        },
+        "runtime": {
+          "mountEngine": "smlib-wasm",
+          "representation": "smlib-brep-worker-owned",
+          "jsSha256": "8e49622c97d839cf94d6c4d5e2de6cbd96d1166075741e08dcbda3b1a223d8fa",
+          "wasmSha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+          "workerSha256": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65"
+        }
+      }
+    },
+    {
+      "id": "smlib-edge-contact-union",
+      "engine": "smlib",
+      "sourceCase": "smlib-edge-contact-union",
+      "sourceField": "geometry.outputs[0].metrics",
+      "expected": "JOIN_NONMANIFOLD",
+      "metrics": {
+        "version": 1,
+        "unit": "millimeter",
+        "space": "model-local",
+        "resultKind": "multi-material",
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "solidCount": null,
+        "meshComponents": null,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": false,
+        "nativeValidity": null,
+        "nativeTopology": null,
+        "nativeStatus": null,
+        "volumeUnit": "cubic-millimeter",
+        "reportedVolume": null,
+        "volumeMagnitude": null,
+        "volumeAvailable": false,
+        "volumeQuality": "native-undefined-nonmanifold",
+        "volumeKind": "unavailable",
+        "boundsKind": "kernel",
+        "nativeVolume": null,
+        "nativeBounds": null,
+        "nativeMeasurementQuality": null,
+        "triangleCount": 24,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            20,
+            20,
+            10
+          ]
+        },
+        "precision": {
+          "kind": "unavailable",
+          "value": null,
+          "note": "Native nonmanifold volume is unavailable."
+        },
+        "runtime": {
+          "mountEngine": "smlib-wasm",
+          "representation": "smlib-brep-worker-owned",
+          "jsSha256": "8e49622c97d839cf94d6c4d5e2de6cbd96d1166075741e08dcbda3b1a223d8fa",
+          "wasmSha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+          "workerSha256": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65"
+        }
+      }
+    },
+    {
+      "id": "manifold-box-edit-persistence",
+      "engine": "manifold",
+      "sourceCase": "manifold-box-edit-persistence",
+      "sourceField": "initial.metrics",
+      "expected": "JOIN_UNQUALIFIED",
+      "metrics": {
+        "version": 1,
+        "unit": "millimeter",
+        "space": "model-local",
+        "resultKind": "mesh-container",
+        "materialRegions": null,
+        "voidRegions": null,
+        "solidCount": null,
+        "meshComponents": 1,
+        "validLevel0": null,
+        "validLevel2": null,
+        "manifoldPredicate": null,
+        "nativeValidity": null,
+        "nativeTopology": null,
+        "nativeStatus": "NoError",
+        "volumeUnit": "cubic-millimeter",
+        "reportedVolume": 1000,
+        "volumeMagnitude": 1000,
+        "volumeAvailable": true,
+        "volumeQuality": "mesh-kernel-volume",
+        "volumeKind": "manifold-mesh",
+        "boundsKind": "mesh",
+        "nativeVolume": null,
+        "nativeBounds": null,
+        "nativeMeasurementQuality": null,
+        "triangleCount": 12,
+        "bounds": {
+          "min": [
+            -3,
+            7,
+            11
+          ],
+          "max": [
+            17,
+            17,
+            16
+          ]
+        },
+        "precision": {
+          "kind": "engine-defaults-unqualified"
+        },
+        "runtime": {
+          "mountEngine": "manifold-mesh-verified-runtime-research",
+          "representation": "manifold-mesh-worker-owned",
+          "jsSha256": "cd2031fd75cbbc812b550dd228f95b9fd666ae4da6557f840e3d3ed4cbed268b",
+          "wasmSha256": "7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d"
+        }
+      }
+    },
+    {
+      "id": "manifold-contained-cavity",
+      "engine": "manifold",
+      "sourceCase": "manifold-contained-cavity",
+      "sourceField": "geometry.outputs[0].metrics",
+      "expected": "JOIN_UNQUALIFIED",
+      "metrics": {
+        "version": 1,
+        "unit": "millimeter",
+        "space": "model-local",
+        "resultKind": "mesh-container",
+        "materialRegions": null,
+        "voidRegions": null,
+        "solidCount": null,
+        "meshComponents": 2,
+        "validLevel0": null,
+        "validLevel2": null,
+        "manifoldPredicate": null,
+        "nativeValidity": null,
+        "nativeTopology": null,
+        "nativeStatus": "NoError",
+        "volumeUnit": "cubic-millimeter",
+        "reportedVolume": 991.9999999999999,
+        "volumeMagnitude": 991.9999999999999,
+        "volumeAvailable": true,
+        "volumeQuality": "mesh-kernel-volume",
+        "volumeKind": "manifold-mesh",
+        "boundsKind": "mesh",
+        "nativeVolume": null,
+        "nativeBounds": null,
+        "nativeMeasurementQuality": null,
+        "triangleCount": 24,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            10
+          ]
+        },
+        "precision": {
+          "kind": "engine-defaults-unqualified"
+        },
+        "runtime": {
+          "mountEngine": "manifold-mesh-verified-runtime-research",
+          "representation": "manifold-mesh-worker-owned",
+          "jsSha256": "cd2031fd75cbbc812b550dd228f95b9fd666ae4da6557f840e3d3ed4cbed268b",
+          "wasmSha256": "7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d"
+        }
+      }
+    }
+  ]
+}

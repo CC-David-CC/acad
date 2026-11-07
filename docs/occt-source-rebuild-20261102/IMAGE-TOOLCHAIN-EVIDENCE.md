@@ -1,0 +1,13 @@
+# Original image toolchain comparison
+
+The source Dockerfile names `emscripten/emsdk:2.0.30`. Docker Hub's current amd64 manifest for that tag is `sha256:cb4f61b05f950e235666bb7a87feeb81a6c81855a16e9d573721a1ae6e8cdf24`, created 2021-09-15; immutable manifest and config were saved from the registry. The emsdk layer `sha256:68ef73ed916820aa810f37e26ce02d447d49278cb763936cdae140218651163e` was downloaded in guarded isolated scratch, and its compressed SHA-256 verified.
+
+The image config identifies `/emsdk/node/14.15.5_64bit/bin/node`. Node 14.15.5 downloaded from nodejs.org was checked against Node's SHA256 manifest; downloaded tar SHA-256 fa198afa9a2872cde991c3aa71796894bf7b5310d6eb178c3eafcf66e3ae79a7. Stripping a COPY of the downloaded Node binary produces `fbda5a45196def991004f7bf06263f35fac9c22347aa6a6e5392b6d8172e43bf`, matching the Node binary extracted from the image byte-for-byte.
+
+The image's stripped clang-14 SHA-256 is `5b90bebfafe280ec99b36b46cc15818167858f9d147e5d84ffc0813b4a954f31`; stripping a COPY of the 2.0.30 emsdk-downloaded clang produces the same SHA-256. Both report LLVM commit c4048d8f50aaf2c4c13b8d3e138abc34a22da754. The image's stripped wasm-opt SHA-256 is `8773e62f3ce4231092b4dc3bcc2fef24dac0ddd6c741d3560c11f642c7ebc0ad`, exactly matching a stripped COPY of the downloaded wasm-opt; both report Binaryen 102, commit g5b90e0332. This explains their original differing hashes; stripping does not prove every image tool or sysroot file matches.
+
+The base image and toolchain cannot alone establish the image actually used to build npm WASM. The project's Dockerfile layers additional unpinned apt installations on top, and original apt versions, installed-package set and exact build state have not been recovered. The current source build uses Node 24, not the image's Node 14; once the full compile finishes, a separate guarded relink using Node 14 will be compared. That relink is not a complete Node-14-from-start clean rebuild. No binary-equality or legal-clearance conclusion follows from tool comparisons alone.
+
+Additional comparison: the image's stripped `lld` SHA-256 is `d9b325049ab77ff9110823ca874d0f7db8228663f0ff9f8c4d3a0d7b810f719e`; stripping a copy of the downloaded emsdk `lld` yields the same SHA-256. This verifies the tested linker executable as well as clang and wasm-opt, after stripping.
+
+Four sampled Emscripten source/tool scripts (`emcc.py`, `tools/config.py`, `tools/shared.py`, `src/compiler.js`) are byte-identical between the original image layer and the installed emsdk 2.0.30. This is a sample, not a comparison of the full sysroot, every compiler tool, or all installed apt packages.

@@ -1,0 +1,2 @@
+// Actual production aliases with both optional native env selectors absent.
+const path=require('node:path');if(process.env.CODI_LOFT_NATIVE_DIR||process.env.CODI_ADAPTIVE_METROLOGY_NATIVE_DIR)throw Error('Optional native builds must be unset for unavailable proof');const config=require('./webpack.factory.cjs');config.output.path=path.resolve(__dirname,'../../.build/adaptive-catalog-unavailable');module.exports=config;

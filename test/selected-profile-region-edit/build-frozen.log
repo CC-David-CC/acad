@@ -1,0 +1,8 @@
+asset worker.js 1.14 MiB [compared for emit] [minimized] (name: main) 1 related asset
+webpack compiled in 20449 ms
+
+asset worker.js 454 KiB [compared for emit] [minimized] (name: main) 1 related asset
+webpack compiled in 17156 ms
+
+asset service.cjs 1.23 MiB [emitted] [minimized] (name: main) 1 related asset
+webpack compiled in 22236 ms

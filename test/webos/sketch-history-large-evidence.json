@@ -1,0 +1,232 @@
+{
+  "runtimeSource": "41bb3ea0c4a543fe10a17e024b968933ee5c27d8",
+  "appSha256": "fb6d6e6f2e117fc1fd26a3098a4ebe1967f68962ee8a47e36311cfc98e7351e3",
+  "desktop": {
+    "bytes": 1037667,
+    "rows": [
+      {
+        "inspectMs": 6.799999952316284,
+        "invokeMs": 16.90000009536743
+      },
+      {
+        "inspectMs": 5.400000095367432,
+        "invokeMs": 14.199999809265137
+      },
+      {
+        "inspectMs": 5.5,
+        "invokeMs": 15.400000095367432
+      },
+      {
+        "inspectMs": 5.299999952316284,
+        "invokeMs": 15.900000095367432
+      },
+      {
+        "inspectMs": 10.700000047683716,
+        "invokeMs": 18.200000047683716
+      }
+    ],
+    "undoChanged": true,
+    "redoExact": true,
+    "longTasks": [
+      70,
+      79,
+      78,
+      72,
+      77,
+      78,
+      62,
+      414
+    ],
+    "maxHeartbeat": 478,
+    "heapBefore": 118645067,
+    "heapAfter": 158133974,
+    "retainedBytes": 8306560,
+    "entries": 2,
+    "kinds": [
+      "snapshot",
+      "snapshot"
+    ],
+    "nativeReopen": true,
+    "historyReleased": true
+  },
+  "phone390": {
+    "bytes": 1037667,
+    "rows": [
+      {
+        "inspectMs": 8.899999856948853,
+        "invokeMs": 19.200000047683716
+      },
+      {
+        "inspectMs": 7,
+        "invokeMs": 21
+      },
+      {
+        "inspectMs": 5.5,
+        "invokeMs": 16.200000047683716
+      },
+      {
+        "inspectMs": 7.200000047683716,
+        "invokeMs": 17.199999809265137
+      },
+      {
+        "inspectMs": 7.099999904632568,
+        "invokeMs": 15.900000095367432
+      }
+    ],
+    "undoChanged": true,
+    "redoExact": true,
+    "longTasks": [
+      83,
+      81,
+      77,
+      73,
+      73,
+      75,
+      59,
+      419
+    ],
+    "maxHeartbeat": 479.7000000476837,
+    "heapBefore": 113596078,
+    "heapAfter": 158421635,
+    "retainedBytes": 8306560,
+    "entries": 2,
+    "kinds": [
+      "snapshot",
+      "snapshot"
+    ],
+    "nativeReopen": true,
+    "historyReleased": true
+  },
+  "distributedAfter": [
+    {
+      "label": "representative",
+      "bytes": 17112,
+      "rows": [
+        {
+          "inspectMs": 1.2999999523162842,
+          "invokeMs": 39.799999952316284,
+          "serializations": [
+            0.20000004768371582,
+            0.19999980926513672,
+            0.20000004768371582
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 0.8000001907348633,
+          "invokeMs": 28.59999990463257,
+          "serializations": [
+            0.20000004768371582,
+            0.20000004768371582,
+            0.2999999523162842
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 0.6000001430511475,
+          "invokeMs": 27.899999856948853,
+          "serializations": [
+            0.19999980926513672,
+            0.20000004768371582,
+            0.10000014305114746
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 0.5,
+          "invokeMs": 29.100000143051147,
+          "serializations": [
+            0.20000004768371582,
+            0.19999980926513672,
+            0.20000004768371582
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 0.5,
+          "invokeMs": 29.699999809265137,
+          "serializations": [
+            0.20000004768371582,
+            0.10000014305114746,
+            0.10000014305114746
+          ],
+          "status": "accepted"
+        }
+      ],
+      "longTasks": [],
+      "heartbeatMaxMs": 49.700000047683716,
+      "heartbeatCount": 49
+    },
+    {
+      "label": "near-1MiB",
+      "bytes": 1047695,
+      "rows": [
+        {
+          "inspectMs": 9.5,
+          "invokeMs": 64.09999990463257,
+          "serializations": [
+            2.6999998092651367,
+            2.700000047683716,
+            2
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 9.799999952316284,
+          "invokeMs": 60.90000009536743,
+          "serializations": [
+            3.799999952316284,
+            3.799999952316284,
+            1.7000000476837158
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 8.400000095367432,
+          "invokeMs": 50.5,
+          "serializations": [
+            3.4000000953674316,
+            2.700000047683716,
+            1.8999998569488525
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 7.799999952316284,
+          "invokeMs": 52,
+          "serializations": [
+            2.0999999046325684,
+            1.4000000953674316,
+            1.4000000953674316
+          ],
+          "status": "accepted"
+        },
+        {
+          "inspectMs": 8.599999904632568,
+          "invokeMs": 50,
+          "serializations": [
+            2.299999952316284,
+            1.2999999523162842,
+            1.5
+          ],
+          "status": "accepted"
+        }
+      ],
+      "longTasks": [
+        67,
+        73,
+        60,
+        70,
+        61,
+        59,
+        58,
+        59,
+        62,
+        58,
+        57
+      ],
+      "heartbeatMaxMs": 135.10000014305115,
+      "heartbeatCount": 18
+    }
+  ]
+}

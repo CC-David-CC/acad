@@ -1,0 +1,18 @@
+{
+  "README.md": {
+    "bytes": 1297,
+    "sha256": "4134371d3fcd843650a000e6fea5e8ba7aca8034d1f49efadbcb46c6e3694655"
+  },
+  "fresh-worker-check.json": {
+    "bytes": 8640,
+    "sha256": "7a7cbe5d811632f296ee61769aa317d16902705aea27f9e2ecbef6b6239c334a"
+  },
+  "retained-review.log": {
+    "bytes": 562,
+    "sha256": "bdcd1b7ac949359fd1a34dcedf56ff222f434fd3affd7b0c8e714c81a61acf08"
+  },
+  "regressions.log": {
+    "bytes": 1577,
+    "sha256": "1bf269ed37bb43dc62190c6553868726bcea12546b52c28ac2cbff6fecdfee71"
+  }
+}

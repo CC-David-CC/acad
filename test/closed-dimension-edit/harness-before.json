@@ -1,0 +1,14 @@
+{
+  "status": "FAIL",
+  "scope": "initial Node platform fixture, before production operation qualification",
+  "error": "window.performance was absent; later fixture lacked window.location.origin, actual Verb initialization and storage namespace enumeration",
+  "correction": "Use actual Verb distribution; load actual service before installing Node browser-location shim; implement explicit versioned-storage protocol methods. No product geometry, solver, guard or admission bypass.",
+  "rawInitialLog": ".build/closed-dimension-edit/failures/platform-before.tap",
+  "rawInitialSha256": "7ba062b5aaa3bf27d754526ea6355e63f5f92868c6bb8820bebc1ed2479b17ea",
+  "subsequentReceipts": [
+    "development/initial.tap",
+    "development/actual-first.tap",
+    "development/actual-second.tap"
+  ],
+  "frozenQualification": "verified.tap"
+}

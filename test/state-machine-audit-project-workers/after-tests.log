@@ -1,0 +1,13 @@
+✔ validation cleanup=none (1.506084ms)
+✔ validation cleanup=error (0.121191ms)
+✔ hash cleanup=none (1.131841ms)
+✔ hash cleanup=error (0.144681ms)
+✔ hash-abort cleanup=error (0.323503ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 67.512462

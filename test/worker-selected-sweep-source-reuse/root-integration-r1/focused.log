@@ -1,0 +1,56 @@
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ first tuple proves both sources in4 real Workers; owned record freezes without a second clone (805.275394ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ in-flight equal-key consumers coalesce one real4Worker proof, not one reply copied twice (284.788891ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ a different actual face identity or captured value misses; new owner obtains new real proof (288.393394ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ mismatch in a real second reconstruction never becomes a reusable proof; healthy retry is real (521.905784ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ stale and cancelled real source waits cannot populate retained Map (502.094716ms)
+✔ seal/accept/close/detach clear held proof Map through captured intrinsic, without callback dispatch (1.714416ms)
+✔ late pending completion after seal/close cannot reinsert or return a retired proof (0.504475ms)
+✔ reentrant source guard retirement and native cleanup failure keep held proof data empty (0.718627ms)
+✔ optional32tuple and8MiB caps fall back uncached without adding a model rejection (6.66668ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ actual operation uses the real owner cache and still refuses evaluator-only geometry boundary (584.018543ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3147.059647

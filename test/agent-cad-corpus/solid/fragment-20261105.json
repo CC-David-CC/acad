@@ -1,0 +1,4947 @@
+{
+  "version": 1,
+  "source": {
+    "commit": "4a3d7aba490490c1d87bae11be92cb88b962f3e6",
+    "appSha256": "4a340ecf3973c88c67d879a697fcb17d7e55e523812aedcd356323be388bfa53",
+    "runtimeWorkerSha256": {
+      "occ": "d1dfb0c42929870f07037a9e83590e0568d92803873053879042d1f820035fd1",
+      "manifold": "494a336a665759a1c3002b2cbcc6881f375bc78711186c65a254a3bb7dbef301",
+      "smlib": "078dc881c488e82fff16cfdcdaef077c107a61e8b7ab45e522f32f7509f403ed"
+    },
+    "wasmSha256": {
+      "occ": "13617eda9a2118edfd1244b5d46523e7d9628a87ec995a0237b2b5cc58d532f2",
+      "manifold": "7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d",
+      "smlib": "a48a3283760c21337881c5e2d5c973dbc62cf95cae46d1c012effd75389eb1ae"
+    }
+  },
+  "cases": [
+    {
+      "id": "SOLID-BOX",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-OVERLAP_UNION",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            15,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "occ",
+              "volume": 1500,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  15,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 28,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "occ"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-OVERLAP_SUBTRACT",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "occ",
+              "volume": 499.99999999999994,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  5,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "occ"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-OVERLAP_COMMON",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            5,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "occ",
+              "volume": 499.99999999999994,
+              "bounds": [
+                [
+                  5,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "occ"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-DISJOINT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "name": "EngineContractError",
+          "message": "OCC returned no faces; this mount does not support empty or non-solid results",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  20,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  20,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-FACE_CONTACT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "name": "EngineContractError",
+          "message": "OCC returned no faces; this mount does not support empty or non-solid results",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  10,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  10,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-EDGE_CONTACT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "name": "EngineContractError",
+          "message": "OCC returned no faces; this mount does not support empty or non-solid results",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-POINT_CONTACT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "name": "EngineContractError",
+          "message": "OCC returned no faces; this mount does not support empty or non-solid results",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "occ",
+              "volume": 1000,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  10
+                ],
+                [
+                  20,
+                  20,
+                  20
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "occ",
+              "volume": 1000,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  10
+                ],
+                [
+                  20,
+                  20,
+                  20
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-COINCIDENT_SUBTRACT",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "name": "EngineContractError",
+          "message": "OCC returned no faces; this mount does not support empty or non-solid results",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-FACE_CONTACT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "occ",
+              "volume": 1999.9999999999998,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 20,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "occ"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-DISJOINT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            30,
+            10,
+            10
+          ]
+        ],
+        "components": 2
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds and component count",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "occ",
+              "volume": 2000.0000000000002,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 24,
+              "components": 2
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "occ"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-MULTI_BODY",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "bodies": 2
+      },
+      "actual": {
+        "reason": "two independent bodies",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  20,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-SMALL_BOX",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1e-09,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.001,
+            0.001,
+            0.001
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 1.0000001424923606e-09,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0.0010000000474974513,
+                  0.0010000000474974513,
+                  0.0010000000474974513
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-LARGE_BOX",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "volume": 1000000000000000,
+        "bounds": [
+          [
+            100000,
+            0,
+            0
+          ],
+          [
+            200000,
+            100000,
+            100000
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999999999999999.9,
+              "bounds": [
+                [
+                  100000,
+                  0,
+                  0
+                ],
+                [
+                  200000,
+                  100000,
+                  100000
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-ZERO_BOX",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "outcome": "INVALID_REQUEST",
+        "publishedBodies": 0
+      },
+      "actual": {
+        "reason": "invalid request rejected with no published body",
+        "observation": {
+          "ok": false,
+          "code": "INVALID_REQUEST",
+          "name": "Error",
+          "message": "Invalid solid coordinate.",
+          "after": []
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-NEGATIVE_BOX",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "outcome": "INVALID_REQUEST",
+        "publishedBodies": 0
+      },
+      "actual": {
+        "reason": "invalid request rejected with no published body",
+        "observation": {
+          "ok": false,
+          "code": "INVALID_REQUEST",
+          "name": "Error",
+          "message": "Invalid solid coordinate.",
+          "after": []
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-CROSS_ENGINE",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "pass",
+      "expected": {
+        "outcome": "ENGINE_MISMATCH",
+        "priorBody": "same ID and mesh summaries"
+      },
+      "actual": {
+        "reason": "second-engine box refused; first body ID and mesh summaries unchanged; cross-engine Boolean not reached",
+        "observation": {
+          "ok": false,
+          "code": "ENGINE_MISMATCH",
+          "name": "Error",
+          "message": "Mixed engine candidates are not supported.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "occ",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-BOX",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-OVERLAP_UNION",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            15,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "manifold",
+              "volume": 1500,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  15,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 28,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "manifold"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-OVERLAP_SUBTRACT",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "manifold",
+              "volume": 499.99999999999994,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  5,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "manifold"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-OVERLAP_COMMON",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            5,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "manifold",
+              "volume": 499.99999999999994,
+              "bounds": [
+                [
+                  5,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "manifold"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-DISJOINT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "UNSUPPORTED_CASE",
+          "name": "Error",
+          "message": "Empty or larger than 512-triangle solid display is not supported.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  20,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  20,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-FACE_CONTACT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "UNSUPPORTED_CASE",
+          "name": "Error",
+          "message": "Empty or larger than 512-triangle solid display is not supported.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "manifold",
+              "volume": 1000,
+              "bounds": [
+                [
+                  10,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "manifold",
+              "volume": 1000,
+              "bounds": [
+                [
+                  10,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-EDGE_CONTACT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "UNSUPPORTED_CASE",
+          "name": "Error",
+          "message": "Empty or larger than 512-triangle solid display is not supported.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "manifold",
+              "volume": 1000,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "manifold",
+              "volume": 1000,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-POINT_CONTACT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "UNSUPPORTED_CASE",
+          "name": "Error",
+          "message": "Empty or larger than 512-triangle solid display is not supported.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999998,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  10
+                ],
+                [
+                  20,
+                  20,
+                  20
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999998,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  10
+                ],
+                [
+                  20,
+                  20,
+                  20
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-COINCIDENT_SUBTRACT",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "UNSUPPORTED_CASE",
+          "name": "Error",
+          "message": "Empty or larger than 512-triangle solid display is not supported.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-FACE_CONTACT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "manifold",
+              "volume": 2000.0000000000002,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 20,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "manifold"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-DISJOINT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            30,
+            10,
+            10
+          ]
+        ],
+        "components": 2
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds and component count",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "manifold",
+              "volume": 2000.0000000000005,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 24,
+              "components": 2
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "manifold"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-MULTI_BODY",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "bodies": 2
+      },
+      "actual": {
+        "reason": "two independent bodies",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  20,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-SMALL_BOX",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1e-09,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.001,
+            0.001,
+            0.001
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 1.0000001424923606e-09,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0.0010000000474974513,
+                  0.0010000000474974513,
+                  0.0010000000474974513
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-LARGE_BOX",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "volume": 1000000000000000,
+        "bounds": [
+          [
+            100000,
+            0,
+            0
+          ],
+          [
+            200000,
+            100000,
+            100000
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 1000000000000000,
+              "bounds": [
+                [
+                  100000,
+                  0,
+                  0
+                ],
+                [
+                  200000,
+                  100000,
+                  100000
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-ZERO_BOX",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "outcome": "INVALID_REQUEST",
+        "publishedBodies": 0
+      },
+      "actual": {
+        "reason": "invalid request rejected with no published body",
+        "observation": {
+          "ok": false,
+          "code": "INVALID_REQUEST",
+          "name": "Error",
+          "message": "Invalid solid coordinate.",
+          "after": []
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-NEGATIVE_BOX",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "outcome": "INVALID_REQUEST",
+        "publishedBodies": 0
+      },
+      "actual": {
+        "reason": "invalid request rejected with no published body",
+        "observation": {
+          "ok": false,
+          "code": "INVALID_REQUEST",
+          "name": "Error",
+          "message": "Invalid solid coordinate.",
+          "after": []
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-CROSS_ENGINE",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "pass",
+      "expected": {
+        "outcome": "ENGINE_MISMATCH",
+        "priorBody": "same ID and mesh summaries"
+      },
+      "actual": {
+        "reason": "second-engine box refused; first body ID and mesh summaries unchanged; cross-engine Boolean not reached",
+        "observation": {
+          "ok": false,
+          "code": "ENGINE_MISMATCH",
+          "name": "Error",
+          "message": "Mixed engine candidates are not supported.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "manifold",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-BOX",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-OVERLAP_UNION",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            15,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "smlib",
+              "volume": 1500,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  15,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "smlib"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-OVERLAP_SUBTRACT",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "smlib",
+              "volume": 499.99999999999994,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  5,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "smlib"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-OVERLAP_COMMON",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            5,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "smlib",
+              "volume": 500.00000000000006,
+              "bounds": [
+                [
+                  5,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "smlib"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-DISJOINT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "name": "Error",
+          "message": "SMLib refused or failed the operation.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 1000.0000000000002,
+              "bounds": [
+                [
+                  20,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 1000.0000000000002,
+              "bounds": [
+                [
+                  20,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-FACE_CONTACT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "name": "Error",
+          "message": "SMLib refused or failed the operation.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 1000.0000000000001,
+              "bounds": [
+                [
+                  10,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 1000.0000000000001,
+              "bounds": [
+                [
+                  10,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-EDGE_CONTACT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "name": "Error",
+          "message": "SMLib refused or failed the operation.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-POINT_CONTACT_COMMON",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "name": "Error",
+          "message": "SMLib refused or failed the operation.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  10
+                ],
+                [
+                  20,
+                  20,
+                  20
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  10
+                ],
+                [
+                  20,
+                  20,
+                  20
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-COINCIDENT_SUBTRACT",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "unsupported",
+      "expected": {
+        "outcome": "empty or explicitly unsupported",
+        "priorBodies": "same IDs and mesh summaries"
+      },
+      "actual": {
+        "reason": "empty result refused; prior body IDs and mesh summaries unchanged",
+        "observation": {
+          "ok": false,
+          "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+          "name": "Error",
+          "message": "SMLib refused or failed the operation.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-FACE_CONTACT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            10,
+            10
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "smlib",
+              "volume": 1999.9999999999998,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "smlib"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-DISJOINT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            30,
+            10,
+            10
+          ]
+        ],
+        "components": 2
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds and component count",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "smlib",
+              "volume": 1999.9999999999993,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 24,
+              "components": 2
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "smlib"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-MULTI_BODY",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "bodies": 2
+      },
+      "actual": {
+        "reason": "two independent bodies",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 1000.0000000000002,
+              "bounds": [
+                [
+                  20,
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-SMALL_BOX",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1e-09,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.001,
+            0.001,
+            0.001
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 1.0000001424923606e-09,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0.0010000000474974513,
+                  0.0010000000474974513,
+                  0.0010000000474974513
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-LARGE_BOX",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "volume": 1000000000000000,
+        "bounds": [
+          [
+            100000,
+            0,
+            0
+          ],
+          [
+            200000,
+            100000,
+            100000
+          ]
+        ]
+      },
+      "actual": {
+        "reason": "independent triangle volume/bounds",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 1000000000000000.1,
+              "bounds": [
+                [
+                  100000,
+                  0,
+                  0
+                ],
+                [
+                  200000,
+                  100000,
+                  100000
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 1,
+            "bodyId": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-ZERO_BOX",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "outcome": "INVALID_REQUEST",
+        "publishedBodies": 0
+      },
+      "actual": {
+        "reason": "invalid request rejected with no published body",
+        "observation": {
+          "ok": false,
+          "code": "INVALID_REQUEST",
+          "name": "Error",
+          "message": "Invalid solid coordinate.",
+          "after": []
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-NEGATIVE_BOX",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "outcome": "INVALID_REQUEST",
+        "publishedBodies": 0
+      },
+      "actual": {
+        "reason": "invalid request rejected with no published body",
+        "observation": {
+          "ok": false,
+          "code": "INVALID_REQUEST",
+          "name": "Error",
+          "message": "Invalid solid coordinate.",
+          "after": []
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-CROSS_ENGINE",
+      "subsystem": "kernel",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "pass",
+      "expected": {
+        "outcome": "ENGINE_MISMATCH",
+        "priorBody": "same ID and mesh summaries"
+      },
+      "actual": {
+        "reason": "second-engine box refused; first body ID and mesh summaries unchanged; cross-engine Boolean not reached",
+        "observation": {
+          "ok": false,
+          "code": "ENGINE_MISMATCH",
+          "name": "Error",
+          "message": "Mixed engine candidates are not supported.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-EDGE_CONTACT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "not-tested",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            20,
+            10
+          ]
+        ],
+        "solid_manifoldness": "unproven"
+      },
+      "actual": {
+        "reason": "contact union returned geometry; independent manifoldness not established",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "occ",
+              "volume": 1999.9999999999998,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  10
+                ]
+              ],
+              "triangles": 24,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "occ"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-POINT_CONTACT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "not-tested",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            20,
+            20
+          ]
+        ],
+        "solid_manifoldness": "unproven"
+      },
+      "actual": {
+        "reason": "contact union returned geometry; independent manifoldness not established",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "occ",
+              "volume": 1999.9999999999995,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  20
+                ]
+              ],
+              "triangles": 24,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "occ"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "occ"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-EDGE_CONTACT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "not-tested",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            20,
+            10
+          ]
+        ],
+        "solid_manifoldness": "unproven"
+      },
+      "actual": {
+        "reason": "contact union returned geometry; independent manifoldness not established",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "manifold",
+              "volume": 1999.9999999999998,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  10
+                ]
+              ],
+              "triangles": 24,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "manifold"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-POINT_CONTACT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "not-tested",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            20,
+            20
+          ]
+        ],
+        "solid_manifoldness": "unproven"
+      },
+      "actual": {
+        "reason": "contact union returned geometry; independent manifoldness not established",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "manifold",
+              "volume": 1999.9999999999998,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  20
+                ]
+              ],
+              "triangles": 24,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "manifold"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "manifold"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-EDGE_CONTACT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "fail",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            20,
+            10
+          ]
+        ],
+        "solid_manifoldness": "unproven"
+      },
+      "actual": {
+        "reason": "ENGINE_FAILURE",
+        "observation": {
+          "ok": false,
+          "code": "ENGINE_FAILURE",
+          "name": "Error",
+          "message": "SMLib refused or failed the operation.",
+          "before": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ],
+          "after": [
+            {
+              "id": "worker-solid:1:[1,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  10,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            },
+            {
+              "id": "worker-solid:1:[2,\"body\"]",
+              "engine": "smlib",
+              "volume": 999.9999999999999,
+              "bounds": [
+                [
+                  10,
+                  10,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  10
+                ]
+              ],
+              "triangles": 12,
+              "components": 1
+            }
+          ]
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-POINT_CONTACT_UNION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "not-tested",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            20,
+            20
+          ]
+        ],
+        "solid_manifoldness": "unproven"
+      },
+      "actual": {
+        "reason": "contact union returned geometry; independent manifoldness not established",
+        "observation": {
+          "ok": true,
+          "models": [
+            {
+              "id": "worker-solid:1:[3,\"body\"]",
+              "engine": "smlib",
+              "volume": 1999.9999999999998,
+              "bounds": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  20,
+                  20,
+                  20
+                ]
+              ],
+              "triangles": 24,
+              "components": 1
+            }
+          ],
+          "history": [
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOX_V1",
+              "engine": "smlib"
+            },
+            {
+              "type": "WORKER_SOLID_BOOLEAN_V1",
+              "engine": "smlib"
+            }
+          ],
+          "noNativeHandles": true,
+          "result": {
+            "featureId": 3,
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "unit": "millimeter"
+          }
+        }
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-CROSS_ENGINE_BOOLEAN",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "not-tested",
+      "expected": {
+        "outcome": "no cross-engine operation or implicit conversion"
+      },
+      "actual": {
+        "reason": "second engine is refused at body creation, so a cross-engine Boolean could not be issued"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-EXTRUSION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-REVOLVE",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-CURVED_PROFILE",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-SHELL",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-FILLET",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-STEP_IMPORT_EXPORT",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "occ",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-CROSS_ENGINE_BOOLEAN",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "not-tested",
+      "expected": {
+        "outcome": "no cross-engine operation or implicit conversion"
+      },
+      "actual": {
+        "reason": "second engine is refused at body creation, so a cross-engine Boolean could not be issued"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-EXTRUSION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-REVOLVE",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-CURVED_PROFILE",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-SHELL",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-FILLET",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-STEP_IMPORT_EXPORT",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "manifold",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-CROSS_ENGINE_BOOLEAN",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "not-tested",
+      "expected": {
+        "outcome": "no cross-engine operation or implicit conversion"
+      },
+      "actual": {
+        "reason": "second engine is refused at body creation, so a cross-engine Boolean could not be issued"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-EXTRUSION",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-REVOLVE",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-CURVED_PROFILE",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-SHELL",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-FILLET",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    },
+    {
+      "id": "SOLID-STEP_IMPORT_EXPORT",
+      "subsystem": "kernel",
+      "priority": "P1",
+      "level": "CAD1",
+      "layer": "registered-agent-command",
+      "backend": "smlib",
+      "status": "unsupported",
+      "expected": {
+        "capability": "not advertised by common worker-solid command surface"
+      },
+      "actual": {
+        "reason": "not advertised by this common worker-solid command surface; other paths not evaluated"
+      },
+      "evidence": [
+        "test/agent-cad-corpus/solid/receipt-20261105.json",
+        "docs/research/AGENT-SOLID-CORPUS-20261105.md"
+      ],
+      "scope": "Registered shared craft commands in a fresh local strict-CSP app context with synthetic host lifetime; triangle-derived display-mesh summaries, not BRep manifold proof or signed desktop bridge. Engine-unavailable feature labels refer only to this command surface."
+    }
+  ]
+}

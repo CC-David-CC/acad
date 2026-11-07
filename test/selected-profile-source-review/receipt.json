@@ -1,0 +1,155 @@
+{
+  "scope": "independent pure preparation only; no solver/native/public/history gate",
+  "baseTrackedSource": "a27040f58e34dcdb960864cfc941fda9879f3053",
+  "fixedProductCommit": "e67f2ea2acf8c76b56dd9c7f72095c3858cc980d",
+  "baselineModuleGitRevision": "e67f2ea2acf8c76b56dd9c7f72095c3858cc980d^",
+  "nodeVersion": "v24.22.1",
+  "testSourceSha256": "6fc07983e1d499e2595ade04f69f183e33f4b1c829895e65782c95412c9510f2",
+  "runs": [
+    {
+      "log": "baseline-14.log",
+      "sha256": "6ac962c9797b39b337c71ea4afc5285e7c63fec5b155e8578bc4e2b8e7eb907c",
+      "tests": 14,
+      "pass": 13,
+      "fail": 1,
+      "sourcePins": [
+        {
+          "path": "modules/engine/extrusion/selectedSketchProfile.mjs",
+          "sha256": "a9eb949c6c08d7ca3c7fb2f8e44ae4ff4df85e1e85680b582032b90eb51fc788",
+          "bytes": 7510
+        },
+        {
+          "path": "modules/engine/mount/selectedProfilePlan.mjs",
+          "sha256": "7d51355e667efa79b26528f2e39582256e9a1513a0a12ca949d265f3963d234f",
+          "bytes": 7885
+        },
+        {
+          "path": "modules/workbenches/modeler/features/extrude/authoredRegions.mjs",
+          "sha256": "46368ba6ca386671afef5e8462e7827d803e02bd816fb1d3b35d7c9c3b9086e6",
+          "bytes": 3009
+        },
+        {
+          "path": "modules/workbenches/modeler/features/extrude/profilePlan.mjs",
+          "sha256": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237",
+          "bytes": 6134
+        }
+      ]
+    },
+    {
+      "log": "baseline-expanded-17.log",
+      "sha256": "acae78536e8ad43391fe0c26526cab4391f71cdc875e3e6817774dd5d36c120f",
+      "tests": 17,
+      "pass": 15,
+      "fail": 2,
+      "sourcePins": [
+        {
+          "path": "modules/engine/extrusion/selectedSketchProfile.mjs",
+          "sha256": "a9eb949c6c08d7ca3c7fb2f8e44ae4ff4df85e1e85680b582032b90eb51fc788",
+          "bytes": 7510
+        },
+        {
+          "path": "modules/engine/mount/selectedProfilePlan.mjs",
+          "sha256": "7d51355e667efa79b26528f2e39582256e9a1513a0a12ca949d265f3963d234f",
+          "bytes": 7885
+        },
+        {
+          "path": "modules/workbenches/modeler/features/extrude/authoredRegions.mjs",
+          "sha256": "46368ba6ca386671afef5e8462e7827d803e02bd816fb1d3b35d7c9c3b9086e6",
+          "bytes": 3009
+        },
+        {
+          "path": "modules/workbenches/modeler/features/extrude/profilePlan.mjs",
+          "sha256": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237",
+          "bytes": 6134
+        }
+      ]
+    },
+    {
+      "log": "baseline-r730-17.log",
+      "sha256": "d2bd16518184e4c1573f0331aa7af0ad0025f0d1056429bf59c99b1f43dca615",
+      "tests": 17,
+      "pass": 15,
+      "fail": 2,
+      "sourcePins": [
+        {
+          "path": "modules/engine/extrusion/selectedSketchProfile.mjs",
+          "sha256": "a9eb949c6c08d7ca3c7fb2f8e44ae4ff4df85e1e85680b582032b90eb51fc788",
+          "bytes": 7510
+        },
+        {
+          "path": "modules/engine/mount/selectedProfilePlan.mjs",
+          "sha256": "7d51355e667efa79b26528f2e39582256e9a1513a0a12ca949d265f3963d234f",
+          "bytes": 7885
+        },
+        {
+          "path": "modules/workbenches/modeler/features/extrude/authoredRegions.mjs",
+          "sha256": "46368ba6ca386671afef5e8462e7827d803e02bd816fb1d3b35d7c9c3b9086e6",
+          "bytes": 3009
+        },
+        {
+          "path": "modules/workbenches/modeler/features/extrude/profilePlan.mjs",
+          "sha256": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237",
+          "bytes": 6134
+        }
+      ]
+    },
+    {
+      "log": "fixed-local-17.log",
+      "sha256": "b8ccb9fc7fbed482c7dffdfb31437f86e17e3919b87913bee0f03115f790fda9",
+      "tests": 17,
+      "pass": 17,
+      "fail": 0,
+      "sourcePins": [
+        {
+          "path": "modules/engine/extrusion/selectedSketchProfile.mjs",
+          "sha256": "f0b594e7fd93382bd328b4e60e3cc96d47f74b43cad2ce89f50add94a881c9f0",
+          "bytes": 7654
+        },
+        {
+          "path": "modules/engine/mount/selectedProfilePlan.mjs",
+          "sha256": "7d51355e667efa79b26528f2e39582256e9a1513a0a12ca949d265f3963d234f",
+          "bytes": 7885
+        },
+        {
+          "path": "modules/workbenches/modeler/features/extrude/authoredRegions.mjs",
+          "sha256": "46368ba6ca386671afef5e8462e7827d803e02bd816fb1d3b35d7c9c3b9086e6",
+          "bytes": 3009
+        },
+        {
+          "path": "modules/workbenches/modeler/features/extrude/profilePlan.mjs",
+          "sha256": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237",
+          "bytes": 6134
+        }
+      ]
+    },
+    {
+      "log": "fixed-r730-17.log",
+      "sha256": "3d3096fc60b5981aef6658bc3dd7e0d0c807f66998f550577fe537bd70572cce",
+      "tests": 17,
+      "pass": 17,
+      "fail": 0,
+      "sourcePins": [
+        {
+          "path": "modules/engine/extrusion/selectedSketchProfile.mjs",
+          "sha256": "f0b594e7fd93382bd328b4e60e3cc96d47f74b43cad2ce89f50add94a881c9f0",
+          "bytes": 7654
+        },
+        {
+          "path": "modules/engine/mount/selectedProfilePlan.mjs",
+          "sha256": "7d51355e667efa79b26528f2e39582256e9a1513a0a12ca949d265f3963d234f",
+          "bytes": 7885
+        },
+        {
+          "path": "modules/workbenches/modeler/features/extrude/authoredRegions.mjs",
+          "sha256": "46368ba6ca386671afef5e8462e7827d803e02bd816fb1d3b35d7c9c3b9086e6",
+          "bytes": 3009
+        },
+        {
+          "path": "modules/workbenches/modeler/features/extrude/profilePlan.mjs",
+          "sha256": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237",
+          "bytes": 6134
+        }
+      ]
+    }
+  ]
+}

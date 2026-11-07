@@ -1,0 +1,118 @@
+[
+  {
+    "pins": {
+      "app": "e3882008660359e53714f3fdd1618c34cc4ac017f215919f55ea0e4d10433bcf",
+      "worker": "de90850d961327b206f311460bc3a221091289490e38968cc0df3e27bf985028",
+      "helper": "f6badfd2a1c36e08c2b0a2b47348acbd67e941b3ac067410c582076fe67e73be",
+      "verb": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3"
+    },
+    "mode": "normal",
+    "bytes": 139424,
+    "workerMs": 1253.1000001430511,
+    "loadMs": 726.2999999523163,
+    "stats": {
+      "admission": {
+        "calls": 1,
+        "ms": 435.09999990463257
+      },
+      "prepare": {
+        "calls": 1,
+        "ms": 428.2000000476837
+      },
+      "finish": {
+        "calls": 1,
+        "ms": 585.8999998569489
+      },
+      "notify": {
+        "calls": 3,
+        "ms": 242.70000004768372
+      },
+      "refresh": {
+        "calls": 514,
+        "ms": 0.5
+      },
+      "repaint": {
+        "calls": 1,
+        "ms": 4
+      },
+      "objectsUpdate": {
+        "calls": 516,
+        "ms": 0.8999998569488525
+      }
+    },
+    "authoredObjects": 514,
+    "objects": 515,
+    "constraints": 512,
+    "solver": {
+      "solveStatus": {
+        "error": 0,
+        "success": true
+      },
+      "dof": null,
+      "polynomials": 1028,
+      "isolations": 514,
+      "conflicting": 0,
+      "redundant": 0,
+      "inTransaction": false,
+      "hasProjectedLastValid": false
+    }
+  },
+  {
+    "pins": {
+      "app": "e3882008660359e53714f3fdd1618c34cc4ac017f215919f55ea0e4d10433bcf",
+      "worker": "de90850d961327b206f311460bc3a221091289490e38968cc0df3e27bf985028",
+      "helper": "f6badfd2a1c36e08c2b0a2b47348acbd67e941b3ac067410c582076fe67e73be",
+      "verb": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3"
+    },
+    "mode": "diagnostic-skip",
+    "bytes": 139424,
+    "workerMs": 1227.2000000476837,
+    "loadMs": 255.40000009536743,
+    "stats": {
+      "admission": {
+        "calls": 1,
+        "ms": 0
+      },
+      "prepare": {
+        "calls": 0,
+        "ms": 0
+      },
+      "finish": {
+        "calls": 1,
+        "ms": 129.90000009536743
+      },
+      "notify": {
+        "calls": 3,
+        "ms": 217.50000023841858
+      },
+      "refresh": {
+        "calls": 514,
+        "ms": 0.10000014305114746
+      },
+      "repaint": {
+        "calls": 1,
+        "ms": 2
+      },
+      "objectsUpdate": {
+        "calls": 516,
+        "ms": 0.40000009536743164
+      }
+    },
+    "authoredObjects": 514,
+    "objects": 515,
+    "constraints": 512,
+    "solver": {
+      "solveStatus": {
+        "error": 0,
+        "success": true
+      },
+      "dof": null,
+      "polynomials": 0,
+      "isolations": null,
+      "conflicting": 0,
+      "redundant": 0,
+      "inTransaction": false,
+      "hasProjectedLastValid": false
+    }
+  }
+]

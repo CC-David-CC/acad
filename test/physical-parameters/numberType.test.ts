@@ -1,0 +1,4 @@
+import {NumberType} from '../../web/app/cad/craft/schema/types/numberType';
+import {test} from 'node:test';import assert from 'node:assert/strict';
+function resolve(value:any,dimension?:'length'){const errors:string[]=[];const service={isTyped:true,resolveQuantity(name:string,kind:string){if(name!=='depth'||kind!=='length')throw Error('dimension');return 25.4},evaluateExpression(){throw Error('no untyped resolution')}};const result=NumberType.resolve({expressionService:service} as any,value,{type:'number',dimension} as any,(e:string)=>errors.push(e) as any,null as any);return {result,errors}}
+test('only an annotated length field can consume a typed reference',()=>{assert.equal(resolve('depth','length').result,25.4);assert.ok(resolve('depth').errors.length);assert.ok(resolve('angle','length').errors.length);assert.equal(resolve('50','length').result,50);assert.ok(resolve('1e999','length').errors.length)});

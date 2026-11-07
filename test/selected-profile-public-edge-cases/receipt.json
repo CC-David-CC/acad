@@ -1,0 +1,3054 @@
+{
+  "source": "a0b363bce15e8533be17c9332b46a7e51ddeea5d",
+  "scope": "Actual public primitives/discovery/extrusion/refusal; no signed Files, topology broadening, solver contradiction, reference repair or whole CAD1 claim",
+  "result": "PASS scoped corpus",
+  "cases": [
+    {
+      "name": "tiny-real-gap",
+      "expectation": "Four finite valid segments; the 0.00001 mm gap is real. No bounded region without explicit repair; do not weld endpoints.",
+      "classification": "open-profile",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 0
+              }
+            }
+          },
+          "id": "agent-primitive-561f2d72-28c1-41e6-b11f-16ac0c1df01a"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 10,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-60cecf88-02ff-43ae-a297-f71914dcf614"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 10,
+                "y": 10
+              },
+              "b": {
+                "x": 0,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-e6e3c622-67c4-477d-b62b-94955643942b"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 10
+              },
+              "b": {
+                "x": 0,
+                "y": 0.00001
+              }
+            }
+          },
+          "id": "agent-primitive-e82e6407-a0d5-4f72-b388-408c92b04797"
+        }
+      ],
+      "discovery": {
+        "ok": false,
+        "error": {
+          "name": "Error",
+          "code": "OPEN_OR_AMBIGUOUS_PROFILE",
+          "message": "Prism semantic validation failed: Segments must form exact nonbranching closed boundaries.",
+          "committed": false
+        }
+      },
+      "creation": [
+        {
+          "notAttempted": "No public region ID was ever returned for this source; no fabricated selection."
+        }
+      ],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "acceptedSource": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-561f2d72-28c1-41e6-b11f-16ac0c1df01a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-60cecf88-02ff-43ae-a297-f71914dcf614\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-e6e3c622-67c4-477d-b62b-94955643942b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-e82e6407-a0d5-4f72-b388-408c92b04797\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":0,\"y\":0.00001}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "final": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-561f2d72-28c1-41e6-b11f-16ac0c1df01a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-60cecf88-02ff-43ae-a297-f71914dcf614\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-e6e3c622-67c4-477d-b62b-94955643942b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-e82e6407-a0d5-4f72-b388-408c92b04797\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":0,\"y\":0.00001}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 5,
+        "namespaceRevision": 5,
+        "models": [
+          "S:0"
+        ],
+        "bodies": [],
+        "streams": [
+          5,
+          5,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        }
+      ],
+      "result": "PASS scoped behavior"
+    },
+    {
+      "name": "skew-four-line-loop",
+      "expectation": "Valid closed convex parallelogram with area100 mm2, so a general CAD kernel could extrude500 mm3. Current exact local rectangle-only scope may explicitly refuse it.",
+      "classification": "unsupported-valid-profile",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 0
+              }
+            }
+          },
+          "id": "agent-primitive-6ea6d938-7ca9-4b44-9884-1bf295c96ae0"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 10,
+                "y": 0
+              },
+              "b": {
+                "x": 12,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-fe358bc6-6e4a-4b7c-93ca-d6078648458d"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 12,
+                "y": 10
+              },
+              "b": {
+                "x": 2,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-9bd26e82-7b6a-4b03-90ed-e0027442fcf4"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 2,
+                "y": 10
+              },
+              "b": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "id": "agent-primitive-b8cc12a2-6785-499d-88a2-9f03ef5dd8cd"
+        }
+      ],
+      "discovery": {
+        "ok": false,
+        "error": {
+          "name": "Error",
+          "code": "UNSUPPORTED_PROFILE",
+          "message": "Prism semantic validation failed: Only exact axis-aligned local rectangles are supported.",
+          "committed": false
+        }
+      },
+      "creation": [
+        {
+          "notAttempted": "No public region ID was ever returned for this source; no fabricated selection."
+        }
+      ],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "acceptedSource": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-6ea6d938-7ca9-4b44-9884-1bf295c96ae0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-fe358bc6-6e4a-4b7c-93ca-d6078648458d\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":12,\"y\":10}}},{\"id\":\"agent-primitive-9bd26e82-7b6a-4b03-90ed-e0027442fcf4\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":12,\"y\":10},\"b\":{\"x\":2,\"y\":10}}},{\"id\":\"agent-primitive-b8cc12a2-6785-499d-88a2-9f03ef5dd8cd\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":2,\"y\":10},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "final": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-6ea6d938-7ca9-4b44-9884-1bf295c96ae0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-fe358bc6-6e4a-4b7c-93ca-d6078648458d\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":12,\"y\":10}}},{\"id\":\"agent-primitive-9bd26e82-7b6a-4b03-90ed-e0027442fcf4\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":12,\"y\":10},\"b\":{\"x\":2,\"y\":10}}},{\"id\":\"agent-primitive-b8cc12a2-6785-499d-88a2-9f03ef5dd8cd\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":2,\"y\":10},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 5,
+        "namespaceRevision": 5,
+        "models": [
+          "S:0"
+        ],
+        "bodies": [],
+        "streams": [
+          5,
+          5,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        }
+      ],
+      "result": "PASS scoped behavior"
+    },
+    {
+      "name": "duplicate-segment",
+      "expectation": "Five individually valid segments, including a duplicated rectangle edge. Duplicate boundary is ambiguous, not a second region; explicit refusal/repair is required.",
+      "classification": "ambiguous-boundary",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 0
+              }
+            }
+          },
+          "id": "agent-primitive-57a40950-881f-4a3b-a2e5-5c490f4543fb"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 10,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-dae2d439-9328-47b1-b373-615a77a141e0"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 10,
+                "y": 10
+              },
+              "b": {
+                "x": 0,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-53ab6ab6-7de3-4195-9999-eb8d266a95f2"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 10
+              },
+              "b": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "id": "agent-primitive-9495b10f-6152-45c2-a6e8-cfdec12d4a11"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 0
+              }
+            }
+          },
+          "id": "agent-primitive-6f684f75-22c3-4819-847e-da9db1157fe0"
+        }
+      ],
+      "discovery": {
+        "ok": false,
+        "error": {
+          "name": "Error",
+          "code": "OPEN_OR_AMBIGUOUS_PROFILE",
+          "message": "Prism semantic validation failed: Segments must form exact nonbranching closed boundaries.",
+          "committed": false
+        }
+      },
+      "creation": [
+        {
+          "selection": "genuine earlier/publicly returned ID",
+          "error": {
+            "name": "Error",
+            "code": "STALE_REGION",
+            "message": "Select one current region on an owned source plane.",
+            "committed": false
+          },
+          "preserved": true
+        }
+      ],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "previousPublicRegionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-53ab6ab6-7de3-4195-9999-eb8d266a95f2\",\"S:0/SURFACE/agent-primitive-57a40950-881f-4a3b-a2e5-5c490f4543fb\",\"S:0/SURFACE/agent-primitive-9495b10f-6152-45c2-a6e8-cfdec12d4a11\",\"S:0/SURFACE/agent-primitive-dae2d439-9328-47b1-b373-615a77a141e0\"],\"holes\":[]}",
+      "acceptedSource": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-57a40950-881f-4a3b-a2e5-5c490f4543fb\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-dae2d439-9328-47b1-b373-615a77a141e0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-53ab6ab6-7de3-4195-9999-eb8d266a95f2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-9495b10f-6152-45c2-a6e8-cfdec12d4a11\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"agent-primitive-6f684f75-22c3-4819-847e-da9db1157fe0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "final": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-57a40950-881f-4a3b-a2e5-5c490f4543fb\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-dae2d439-9328-47b1-b373-615a77a141e0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-53ab6ab6-7de3-4195-9999-eb8d266a95f2\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-9495b10f-6152-45c2-a6e8-cfdec12d4a11\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"agent-primitive-6f684f75-22c3-4819-847e-da9db1157fe0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 6,
+        "namespaceRevision": 6,
+        "models": [
+          "S:0"
+        ],
+        "bodies": [],
+        "streams": [
+          6,
+          6,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        }
+      ],
+      "result": "PASS scoped behavior"
+    },
+    {
+      "name": "duplicate-circle",
+      "expectation": "Two individually valid identical circles. Coincident boundaries must not silently become two solids or cancel into empty space.",
+      "classification": "ambiguous-boundary",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Circle",
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 10
+            }
+          },
+          "id": "agent-primitive-7f1e5870-0fa2-4cd8-bdd7-210b82803be1"
+        },
+        {
+          "input": {
+            "kind": "Circle",
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 10
+            }
+          },
+          "id": "agent-primitive-f420d09f-3c01-46bb-bf9f-77b9b7f1af2e"
+        }
+      ],
+      "discovery": {
+        "ok": false,
+        "error": {
+          "name": "Error",
+          "code": "UNSUPPORTED_REGION_TOPOLOGY",
+          "message": "Prism semantic validation failed: Profiles intersect, touch or are too close; separate them before extruding.",
+          "committed": false
+        }
+      },
+      "creation": [
+        {
+          "selection": "genuine earlier/publicly returned ID",
+          "error": {
+            "name": "Error",
+            "code": "STALE_REGION",
+            "message": "Select one current region on an owned source plane.",
+            "committed": false
+          },
+          "preserved": true
+        }
+      ],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "previousPublicRegionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-7f1e5870-0fa2-4cd8-bdd7-210b82803be1\"],\"holes\":[]}",
+      "acceptedSource": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-7f1e5870-0fa2-4cd8-bdd7-210b82803be1\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-f420d09f-3c01-46bb-bf9f-77b9b7f1af2e\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "final": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-7f1e5870-0fa2-4cd8-bdd7-210b82803be1\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-f420d09f-3c01-46bb-bf9f-77b9b7f1af2e\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 3,
+        "namespaceRevision": 3,
+        "models": [
+          "S:0"
+        ],
+        "bodies": [],
+        "streams": [
+          3,
+          3,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        }
+      ],
+      "result": "PASS scoped behavior"
+    },
+    {
+      "name": "intersecting-circles",
+      "expectation": "Two valid circles at distance10 with radii10 have two intersections. A planar arrangement has three bounded cells; this limited engine may refuse instead of inventing two independent overlapping regions.",
+      "classification": "unsupported-arrangement",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Circle",
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 10
+            }
+          },
+          "id": "agent-primitive-78e4d8ae-38f8-4b6b-9bd8-f66b72b0836d"
+        },
+        {
+          "input": {
+            "kind": "Circle",
+            "data": {
+              "c": {
+                "x": 10,
+                "y": 0
+              },
+              "r": 10
+            }
+          },
+          "id": "agent-primitive-f9163335-e581-40e7-8a67-0340068f16f5"
+        }
+      ],
+      "discovery": {
+        "ok": false,
+        "error": {
+          "name": "Error",
+          "code": "UNSUPPORTED_REGION_TOPOLOGY",
+          "message": "Prism semantic validation failed: Profiles intersect, touch or are too close; separate them before extruding.",
+          "committed": false
+        }
+      },
+      "creation": [
+        {
+          "selection": "genuine earlier/publicly returned ID",
+          "error": {
+            "name": "Error",
+            "code": "STALE_REGION",
+            "message": "Select one current region on an owned source plane.",
+            "committed": false
+          },
+          "preserved": true
+        }
+      ],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "previousPublicRegionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-78e4d8ae-38f8-4b6b-9bd8-f66b72b0836d\"],\"holes\":[]}",
+      "acceptedSource": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-78e4d8ae-38f8-4b6b-9bd8-f66b72b0836d\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-f9163335-e581-40e7-8a67-0340068f16f5\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "final": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-78e4d8ae-38f8-4b6b-9bd8-f66b72b0836d\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-f9163335-e581-40e7-8a67-0340068f16f5\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":10,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 3,
+        "namespaceRevision": 3,
+        "models": [
+          "S:0"
+        ],
+        "bodies": [],
+        "streams": [
+          3,
+          3,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        }
+      ],
+      "result": "PASS scoped behavior"
+    },
+    {
+      "name": "tangent-circles",
+      "expectation": "Two radius10 circles at distance20 touch at one point. Contact has zero area and must not be treated as a valid shared volumetric connection; explicit unsupported is permitted.",
+      "classification": "point-contact",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Circle",
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 10
+            }
+          },
+          "id": "agent-primitive-0cf5d0bd-eca2-4491-9a65-5604946dbb6c"
+        },
+        {
+          "input": {
+            "kind": "Circle",
+            "data": {
+              "c": {
+                "x": 20,
+                "y": 0
+              },
+              "r": 10
+            }
+          },
+          "id": "agent-primitive-6c385160-2e91-4627-9c03-474276f1f937"
+        }
+      ],
+      "discovery": {
+        "ok": false,
+        "error": {
+          "name": "Error",
+          "code": "UNSUPPORTED_REGION_TOPOLOGY",
+          "message": "Prism semantic validation failed: Profiles intersect, touch or are too close; separate them before extruding.",
+          "committed": false
+        }
+      },
+      "creation": [
+        {
+          "selection": "genuine earlier/publicly returned ID",
+          "error": {
+            "name": "Error",
+            "code": "STALE_REGION",
+            "message": "Select one current region on an owned source plane.",
+            "committed": false
+          },
+          "preserved": true
+        }
+      ],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "previousPublicRegionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-0cf5d0bd-eca2-4491-9a65-5604946dbb6c\"],\"holes\":[]}",
+      "acceptedSource": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-0cf5d0bd-eca2-4491-9a65-5604946dbb6c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-6c385160-2e91-4627-9c03-474276f1f937\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":20,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "final": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-0cf5d0bd-eca2-4491-9a65-5604946dbb6c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}},{\"id\":\"agent-primitive-6c385160-2e91-4627-9c03-474276f1f937\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":20,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 3,
+        "namespaceRevision": 3,
+        "models": [
+          "S:0"
+        ],
+        "bodies": [],
+        "streams": [
+          3,
+          3,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        }
+      ],
+      "result": "PASS scoped behavior"
+    },
+    {
+      "name": "rectangles-point-contact",
+      "expectation": "Two valid10x10 rectangles meet at one corner. This is not a shared volumetric connection; explicit ambiguous/unsupported topology is permitted.",
+      "classification": "point-contact",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 0
+              }
+            }
+          },
+          "id": "agent-primitive-80661401-ec39-4ba2-9386-631ed515131a"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 10,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-72f824af-661b-49f1-9113-9c60611d8501"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 10,
+                "y": 10
+              },
+              "b": {
+                "x": 0,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-4d6f4781-8c84-4425-a5b7-c0ed10875392"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 10
+              },
+              "b": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "id": "agent-primitive-0c86bbcb-ed64-49f4-b062-ec8ed36a3a7b"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 10,
+                "y": 10
+              },
+              "b": {
+                "x": 20,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-347f0d95-fc79-4674-b022-0d3f2444761b"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 20,
+                "y": 10
+              },
+              "b": {
+                "x": 20,
+                "y": 20
+              }
+            }
+          },
+          "id": "agent-primitive-13e91f0e-3637-4804-9453-0474ae563d28"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 20,
+                "y": 20
+              },
+              "b": {
+                "x": 10,
+                "y": 20
+              }
+            }
+          },
+          "id": "agent-primitive-41ea3b16-7f8e-452e-8e44-24c618d034d5"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 10,
+                "y": 20
+              },
+              "b": {
+                "x": 10,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-6e8bdd02-4614-4cb8-9b98-9e9f26d07cfc"
+        }
+      ],
+      "discovery": {
+        "ok": false,
+        "error": {
+          "name": "Error",
+          "code": "OPEN_OR_AMBIGUOUS_PROFILE",
+          "message": "Prism semantic validation failed: Segments must form exact nonbranching closed boundaries.",
+          "committed": false
+        }
+      },
+      "creation": [
+        {
+          "selection": "genuine earlier/publicly returned ID",
+          "error": {
+            "name": "Error",
+            "code": "STALE_REGION",
+            "message": "Select one current region on an owned source plane.",
+            "committed": false
+          },
+          "preserved": true
+        }
+      ],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "previousPublicRegionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-0c86bbcb-ed64-49f4-b062-ec8ed36a3a7b\",\"S:0/SURFACE/agent-primitive-4d6f4781-8c84-4425-a5b7-c0ed10875392\",\"S:0/SURFACE/agent-primitive-72f824af-661b-49f1-9113-9c60611d8501\",\"S:0/SURFACE/agent-primitive-80661401-ec39-4ba2-9386-631ed515131a\"],\"holes\":[]}",
+      "acceptedSource": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-80661401-ec39-4ba2-9386-631ed515131a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-72f824af-661b-49f1-9113-9c60611d8501\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-4d6f4781-8c84-4425-a5b7-c0ed10875392\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-0c86bbcb-ed64-49f4-b062-ec8ed36a3a7b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"agent-primitive-347f0d95-fc79-4674-b022-0d3f2444761b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":20,\"y\":10}}},{\"id\":\"agent-primitive-13e91f0e-3637-4804-9453-0474ae563d28\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":10},\"b\":{\"x\":20,\"y\":20}}},{\"id\":\"agent-primitive-41ea3b16-7f8e-452e-8e44-24c618d034d5\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":20},\"b\":{\"x\":10,\"y\":20}}},{\"id\":\"agent-primitive-6e8bdd02-4614-4cb8-9b98-9e9f26d07cfc\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":20},\"b\":{\"x\":10,\"y\":10}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "final": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-80661401-ec39-4ba2-9386-631ed515131a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-72f824af-661b-49f1-9113-9c60611d8501\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-4d6f4781-8c84-4425-a5b7-c0ed10875392\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-0c86bbcb-ed64-49f4-b062-ec8ed36a3a7b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"agent-primitive-347f0d95-fc79-4674-b022-0d3f2444761b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":20,\"y\":10}}},{\"id\":\"agent-primitive-13e91f0e-3637-4804-9453-0474ae563d28\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":10},\"b\":{\"x\":20,\"y\":20}}},{\"id\":\"agent-primitive-41ea3b16-7f8e-452e-8e44-24c618d034d5\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":20},\"b\":{\"x\":10,\"y\":20}}},{\"id\":\"agent-primitive-6e8bdd02-4614-4cb8-9b98-9e9f26d07cfc\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":20},\"b\":{\"x\":10,\"y\":10}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 9,
+        "namespaceRevision": 9,
+        "models": [
+          "S:0"
+        ],
+        "bodies": [],
+        "streams": [
+          9,
+          9,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        }
+      ],
+      "result": "PASS scoped behavior"
+    },
+    {
+      "name": "nested-rings-control",
+      "expectation": "Three concentric circles r30/r20/r10 define outer annulus, middle annulus and inner disk. All three selectable regions are supported; depth5 gives2500pi/1500pi/500pi mm3.",
+      "classification": "supported",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Circle",
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 30
+            }
+          },
+          "id": "agent-primitive-24cda2ec-8c9d-4ae2-b9ce-c9699c993fd0"
+        },
+        {
+          "input": {
+            "kind": "Circle",
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 20
+            }
+          },
+          "id": "agent-primitive-91437f9e-ec42-4844-a138-1b4a0ecf2c5a"
+        },
+        {
+          "input": {
+            "kind": "Circle",
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 10
+            }
+          },
+          "id": "agent-primitive-0b7f7f98-ebca-483b-aa36-16560dcb5b9f"
+        }
+      ],
+      "discovery": {
+        "ok": true,
+        "value": {
+          "revision": "1bfbd07a-70aa-4ab1-b640-1c6a429196c5",
+          "faceId": "S:0/SURFACE",
+          "sourceDigest": "6b93d6313a5415dba48d529bc0314c4f3eb5c095a9171675d9e36f7d23435f0d",
+          "depth": 5,
+          "unit": "millimeter",
+          "engine": "occ",
+          "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+          "regions": [
+            {
+              "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-24cda2ec-8c9d-4ae2-b9ce-c9699c993fd0\"],\"holes\":[[\"S:0/SURFACE/agent-primitive-91437f9e-ec42-4844-a138-1b4a0ecf2c5a\"]]}",
+              "support": "supported",
+              "reason": null
+            },
+            {
+              "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-91437f9e-ec42-4844-a138-1b4a0ecf2c5a\"],\"holes\":[[\"S:0/SURFACE/agent-primitive-0b7f7f98-ebca-483b-aa36-16560dcb5b9f\"]]}",
+              "support": "supported",
+              "reason": null
+            },
+            {
+              "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-0b7f7f98-ebca-483b-aa36-16560dcb5b9f\"],\"holes\":[]}",
+              "support": "supported",
+              "reason": null
+            }
+          ]
+        }
+      },
+      "creation": [
+        {
+          "ok": true,
+          "value": {
+            "featureId": 2,
+            "outputId": "worker-solid:1:[2,\"body\"]",
+            "bodyId": "worker-solid:1:[2,\"body\"]",
+            "sourceFaceId": "S:0/SURFACE",
+            "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-24cda2ec-8c9d-4ae2-b9ce-c9699c993fd0\"],\"holes\":[[\"S:0/SURFACE/agent-primitive-91437f9e-ec42-4844-a138-1b4a0ecf2c5a\"]]}",
+            "engine": "occ",
+            "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+            "unit": "millimeter",
+            "bodyPolicy": "separate",
+            "persistence": "volatile-workspace",
+            "revision": "3b860555-42cb-4f0d-9e40-237e556290ca"
+          }
+        },
+        {
+          "ok": true,
+          "value": {
+            "featureId": 3,
+            "outputId": "worker-solid:1:[3,\"body\"]",
+            "bodyId": "worker-solid:1:[3,\"body\"]",
+            "sourceFaceId": "S:0/SURFACE",
+            "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-91437f9e-ec42-4844-a138-1b4a0ecf2c5a\"],\"holes\":[[\"S:0/SURFACE/agent-primitive-0b7f7f98-ebca-483b-aa36-16560dcb5b9f\"]]}",
+            "engine": "occ",
+            "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+            "unit": "millimeter",
+            "bodyPolicy": "separate",
+            "persistence": "volatile-workspace",
+            "revision": "511456ae-ab44-459e-b4cb-7f56050a9157"
+          }
+        },
+        {
+          "ok": true,
+          "value": {
+            "featureId": 4,
+            "outputId": "worker-solid:1:[4,\"body\"]",
+            "bodyId": "worker-solid:1:[4,\"body\"]",
+            "sourceFaceId": "S:0/SURFACE",
+            "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-0b7f7f98-ebca-483b-aa36-16560dcb5b9f\"],\"holes\":[]}",
+            "engine": "occ",
+            "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+            "unit": "millimeter",
+            "bodyPolicy": "separate",
+            "persistence": "volatile-workspace",
+            "revision": "f315f62f-5885-4aa1-be82-793dd6664239"
+          }
+        },
+        {
+          "depth": 0,
+          "error": {
+            "name": "Error",
+            "code": "UNSUPPORTED_REQUEST",
+            "message": "Select a qualified separate OCC region extrusion.",
+            "committed": false
+          },
+          "preserved": true
+        },
+        {
+          "depth": -5,
+          "error": {
+            "name": "Error",
+            "code": "UNSUPPORTED_REQUEST",
+            "message": "Select a qualified separate OCC region extrusion.",
+            "committed": false
+          },
+          "preserved": true
+        }
+      ],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "acceptedSource": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-24cda2ec-8c9d-4ae2-b9ce-c9699c993fd0\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":30}},{\"id\":\"agent-primitive-91437f9e-ec42-4844-a138-1b4a0ecf2c5a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":20}},{\"id\":\"agent-primitive-0b7f7f98-ebca-483b-aa36-16560dcb5b9f\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "acceptedBodies": [
+        {
+          "id": "worker-solid:1:[2,\"body\"]",
+          "featureId": 2,
+          "engine": "occ",
+          "metrics": {
+            "version": 1,
+            "unit": "millimeter",
+            "space": "model-local",
+            "resultKind": "single-solid",
+            "materialRegions": null,
+            "voidRegions": null,
+            "solidCount": 1,
+            "meshComponents": null,
+            "validLevel0": null,
+            "validLevel2": null,
+            "manifoldPredicate": null,
+            "nativeValidity": {
+              "method": "occ-inspect-analytic-v1",
+              "valid": true
+            },
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 2,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 0,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 4,
+                "wires": 6,
+                "edges": 6,
+                "vertices": 4
+              }
+            },
+            "nativeStatus": null,
+            "volumeUnit": "cubic-millimeter",
+            "reportedVolume": 7848.709038992229,
+            "volumeMagnitude": 7848.709038992229,
+            "volumeAvailable": true,
+            "volumeQuality": "tessellation-signed-integral",
+            "volumeKind": "occ-tessellation-signed-volume",
+            "boundsKind": "tessellation",
+            "nativeVolume": 7853.981633974482,
+            "nativeBounds": {
+              "min": [
+                -30,
+                -30,
+                0
+              ],
+              "max": [
+                30,
+                30,
+                5
+              ]
+            },
+            "nativeMeasurementQuality": "provider-native-unqualified",
+            "triangleCount": 560,
+            "bounds": {
+              "min": [
+                -29.97503398033749,
+                -29.993757845676193,
+                0
+              ],
+              "max": [
+                30,
+                29.993757845676193,
+                5
+              ]
+            },
+            "precision": {
+              "kind": "engine-defaults-unqualified"
+            },
+            "runtime": {
+              "mountEngine": "occ-selected-profile-v2-component",
+              "representation": "occ-brep-worker-owned",
+              "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+              "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+            }
+          }
+        },
+        {
+          "id": "worker-solid:1:[3,\"body\"]",
+          "featureId": 3,
+          "engine": "occ",
+          "metrics": {
+            "version": 1,
+            "unit": "millimeter",
+            "space": "model-local",
+            "resultKind": "single-solid",
+            "materialRegions": null,
+            "voidRegions": null,
+            "solidCount": 1,
+            "meshComponents": null,
+            "validLevel0": null,
+            "validLevel2": null,
+            "manifoldPredicate": null,
+            "nativeValidity": {
+              "method": "occ-inspect-analytic-v1",
+              "valid": true
+            },
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 2,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 0,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 4,
+                "wires": 6,
+                "edges": 6,
+                "vertices": 4
+              }
+            },
+            "nativeStatus": null,
+            "volumeUnit": "cubic-millimeter",
+            "reportedVolume": 4707.0769497357105,
+            "volumeMagnitude": 4707.0769497357105,
+            "volumeAvailable": true,
+            "volumeQuality": "tessellation-signed-integral",
+            "volumeKind": "occ-tessellation-signed-volume",
+            "boundsKind": "tessellation",
+            "nativeVolume": 4712.38898038469,
+            "nativeBounds": {
+              "min": [
+                -20,
+                -20,
+                0
+              ],
+              "max": [
+                20,
+                20,
+                5
+              ]
+            },
+            "nativeMeasurementQuality": "provider-native-unqualified",
+            "triangleCount": 432,
+            "bounds": {
+              "min": [
+                -19.97513842437845,
+                -19.993783640016325,
+                0
+              ],
+              "max": [
+                20,
+                19.993783640016325,
+                5
+              ]
+            },
+            "precision": {
+              "kind": "engine-defaults-unqualified"
+            },
+            "runtime": {
+              "mountEngine": "occ-selected-profile-v2-component",
+              "representation": "occ-brep-worker-owned",
+              "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+              "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+            }
+          }
+        },
+        {
+          "id": "worker-solid:1:[4,\"body\"]",
+          "featureId": 4,
+          "engine": "occ",
+          "metrics": {
+            "version": 1,
+            "unit": "millimeter",
+            "space": "model-local",
+            "resultKind": "single-solid",
+            "materialRegions": null,
+            "voidRegions": null,
+            "solidCount": 1,
+            "meshComponents": null,
+            "validLevel0": null,
+            "validLevel2": null,
+            "manifoldPredicate": null,
+            "nativeValidity": {
+              "method": "occ-inspect-analytic-v1",
+              "valid": true
+            },
+            "nativeTopology": {
+              "version": 1,
+              "method": "occ-topology-census-v1",
+              "shapeType": 2,
+              "directChildren": 1,
+              "counts": {
+                "compounds": 0,
+                "compsolids": 0,
+                "solids": 1,
+                "shells": 1,
+                "faces": 3,
+                "wires": 3,
+                "edges": 3,
+                "vertices": 2
+              }
+            },
+            "nativeStatus": null,
+            "volumeUnit": "cubic-millimeter",
+            "reportedVolume": 1565.6973858007377,
+            "volumeMagnitude": 1565.6973858007377,
+            "volumeAvailable": true,
+            "volumeQuality": "tessellation-signed-integral",
+            "volumeKind": "occ-tessellation-signed-volume",
+            "boundsKind": "tessellation",
+            "nativeVolume": 1570.7963267948965,
+            "nativeBounds": {
+              "min": [
+                -10,
+                -10,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                5
+              ]
+            },
+            "nativeMeasurementQuality": "provider-native-unqualified",
+            "triangleCount": 176,
+            "bounds": {
+              "min": [
+                -9.975640502598242,
+                -9.993908270190957,
+                0
+              ],
+              "max": [
+                10,
+                9.993908270190957,
+                5
+              ]
+            },
+            "precision": {
+              "kind": "engine-defaults-unqualified"
+            },
+            "runtime": {
+              "mountEngine": "occ-selected-profile-v2-component",
+              "representation": "occ-brep-worker-owned",
+              "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+              "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+            }
+          }
+        }
+      ],
+      "final": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":2,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-24cda2ec-8c9d-4ae2-b9ce-c9699c993fd0\\\"],\\\"holes\\\":[[\\\"S:0/SURFACE/agent-primitive-91437f9e-ec42-4844-a138-1b4a0ecf2c5a\\\"]]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":3,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-91437f9e-ec42-4844-a138-1b4a0ecf2c5a\\\"],\\\"holes\\\":[[\\\"S:0/SURFACE/agent-primitive-0b7f7f98-ebca-483b-aa36-16560dcb5b9f\\\"]]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}},{\"type\":\"WORKER_SELECTED_PROFILE_EXTRUDE_V2\",\"params\":{\"version\":1,\"unit\":\"millimeter\",\"engine\":\"occ\",\"engineRevision\":\"sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637\",\"featureId\":4,\"faceId\":\"S:0/SURFACE\",\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-0b7f7f98-ebca-483b-aa36-16560dcb5b9f\\\"],\\\"holes\\\":[]}\",\"depth\":5,\"bodyPolicy\":\"separate\"}}],\"pointer\":3}",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-24cda2ec-8c9d-4ae2-b9ce-c9699c993fd0\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":30}},{\"id\":\"agent-primitive-91437f9e-ec42-4844-a138-1b4a0ecf2c5a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":20}},{\"id\":\"agent-primitive-0b7f7f98-ebca-483b-aa36-16560dcb5b9f\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 4,
+        "namespaceRevision": 4,
+        "models": [
+          "S:0",
+          "worker-solid:1:[2,\"body\"]",
+          "worker-solid:1:[3,\"body\"]",
+          "worker-solid:1:[4,\"body\"]"
+        ],
+        "bodies": [
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "featureId": 2,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 4,
+                  "wires": 6,
+                  "edges": 6,
+                  "vertices": 4
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 7848.709038992229,
+              "volumeMagnitude": 7848.709038992229,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 7853.981633974482,
+              "nativeBounds": {
+                "min": [
+                  -30,
+                  -30,
+                  0
+                ],
+                "max": [
+                  30,
+                  30,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 560,
+              "bounds": {
+                "min": [
+                  -29.97503398033749,
+                  -29.993757845676193,
+                  0
+                ],
+                "max": [
+                  30,
+                  29.993757845676193,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          },
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "featureId": 3,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 4,
+                  "wires": 6,
+                  "edges": 6,
+                  "vertices": 4
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 4707.0769497357105,
+              "volumeMagnitude": 4707.0769497357105,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 4712.38898038469,
+              "nativeBounds": {
+                "min": [
+                  -20,
+                  -20,
+                  0
+                ],
+                "max": [
+                  20,
+                  20,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 432,
+              "bounds": {
+                "min": [
+                  -19.97513842437845,
+                  -19.993783640016325,
+                  0
+                ],
+                "max": [
+                  20,
+                  19.993783640016325,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          },
+          {
+            "id": "worker-solid:1:[4,\"body\"]",
+            "featureId": 4,
+            "engine": "occ",
+            "metrics": {
+              "version": 1,
+              "unit": "millimeter",
+              "space": "model-local",
+              "resultKind": "single-solid",
+              "materialRegions": null,
+              "voidRegions": null,
+              "solidCount": 1,
+              "meshComponents": null,
+              "validLevel0": null,
+              "validLevel2": null,
+              "manifoldPredicate": null,
+              "nativeValidity": {
+                "method": "occ-inspect-analytic-v1",
+                "valid": true
+              },
+              "nativeTopology": {
+                "version": 1,
+                "method": "occ-topology-census-v1",
+                "shapeType": 2,
+                "directChildren": 1,
+                "counts": {
+                  "compounds": 0,
+                  "compsolids": 0,
+                  "solids": 1,
+                  "shells": 1,
+                  "faces": 3,
+                  "wires": 3,
+                  "edges": 3,
+                  "vertices": 2
+                }
+              },
+              "nativeStatus": null,
+              "volumeUnit": "cubic-millimeter",
+              "reportedVolume": 1565.6973858007377,
+              "volumeMagnitude": 1565.6973858007377,
+              "volumeAvailable": true,
+              "volumeQuality": "tessellation-signed-integral",
+              "volumeKind": "occ-tessellation-signed-volume",
+              "boundsKind": "tessellation",
+              "nativeVolume": 1570.7963267948965,
+              "nativeBounds": {
+                "min": [
+                  -10,
+                  -10,
+                  0
+                ],
+                "max": [
+                  10,
+                  10,
+                  5
+                ]
+              },
+              "nativeMeasurementQuality": "provider-native-unqualified",
+              "triangleCount": 176,
+              "bounds": {
+                "min": [
+                  -9.975640502598242,
+                  -9.993908270190957,
+                  0
+                ],
+                "max": [
+                  10,
+                  9.993908270190957,
+                  5
+                ]
+              },
+              "precision": {
+                "kind": "engine-defaults-unqualified"
+              },
+              "runtime": {
+                "mountEngine": "occ-selected-profile-v2-component",
+                "representation": "occ-brep-worker-owned",
+                "jsSha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9",
+                "wasmSha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+              }
+            }
+          }
+        ],
+        "streams": [
+          7,
+          7,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/selected-profile-worker.js",
+          "tasks": [
+            "init",
+            "selected-profile-extrude",
+            "solid-mesh"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/selected-profile-worker.js",
+          "tasks": [
+            "init",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "selected-profile-extrude",
+            "solid-mesh"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/selected-profile-worker.js",
+          "tasks": [
+            "init",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "selected-profile-extrude",
+            "solid-mesh",
+            "selected-profile-extrude",
+            "solid-mesh"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "prepare-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/selected-profile-worker.js",
+          "sha256": "0f3240cdde9b5faced831ace71ee5ffcfb6fe159dacba5b7265e5a09b0ca9853",
+          "bytes": 346381
+        }
+      ],
+      "result": "PASS scoped behavior"
+    },
+    {
+      "name": "bowtie-self-intersection",
+      "expectation": "Four valid nonzero segments cross. A self-intersecting chain needs explicit arrangement decomposition or refusal; it is not a simple rectangle region.",
+      "classification": "unsupported-arrangement",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 10,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-8bd8fc61-3da8-4094-9f91-873aa7b3ff15"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 10,
+                "y": 10
+              },
+              "b": {
+                "x": 0,
+                "y": 10
+              }
+            }
+          },
+          "id": "agent-primitive-2d3c51c9-c084-493c-ad4f-a233d0e28c78"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 10
+              },
+              "b": {
+                "x": 10,
+                "y": 0
+              }
+            }
+          },
+          "id": "agent-primitive-c7b3160a-daa0-4c32-9030-609b13bafcbc"
+        },
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 10,
+                "y": 0
+              },
+              "b": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "id": "agent-primitive-728887bd-e49d-4a31-9286-09cc17b32b68"
+        }
+      ],
+      "discovery": {
+        "ok": false,
+        "error": {
+          "name": "Error",
+          "code": "UNSUPPORTED_PROFILE",
+          "message": "Prism semantic validation failed: Only exact axis-aligned local rectangles are supported.",
+          "committed": false
+        }
+      },
+      "creation": [
+        {
+          "notAttempted": "No public region ID was ever returned for this source; no fabricated selection."
+        }
+      ],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "acceptedSource": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-8bd8fc61-3da8-4094-9f91-873aa7b3ff15\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-2d3c51c9-c084-493c-ad4f-a233d0e28c78\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-c7b3160a-daa0-4c32-9030-609b13bafcbc\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-728887bd-e49d-4a31-9286-09cc17b32b68\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "final": {
+        "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-8bd8fc61-3da8-4094-9f91-873aa7b3ff15\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-2d3c51c9-c084-493c-ad4f-a233d0e28c78\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-c7b3160a-daa0-4c32-9030-609b13bafcbc\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-728887bd-e49d-4a31-9286-09cc17b32b68\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 5,
+        "namespaceRevision": 5,
+        "models": [
+          "S:0"
+        ],
+        "bodies": [],
+        "streams": [
+          5,
+          5,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        }
+      ],
+      "result": "PASS scoped behavior"
+    },
+    {
+      "name": "zero-radius-circle",
+      "expectation": "The public Circle domain requires positive radius; zero is invalid Circle input, independent of region extraction.",
+      "classification": "invalid-input",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Circle",
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": 0
+            }
+          },
+          "error": {
+            "name": "Error",
+            "code": null,
+            "message": "Invalid circle radius.",
+            "committed": false
+          },
+          "preserved": true
+        }
+      ],
+      "discovery": {
+        "ok": false,
+        "error": {
+          "name": "Error",
+          "code": "UNSUPPORTED_PROFILE",
+          "message": "Prism semantic validation failed: Expected a bounded set of closed regions.",
+          "committed": false
+        }
+      },
+      "creation": [],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "acceptedSource": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "final": {
+        "history": "{\"history\":[{\"type\":\"PLANE\",\"params\":{\"featureId\":\"1\",\"orientation\":\"XY\",\"depth\":0,\"datum\":null}}],\"pointer\":0}",
+        "source": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 1,
+        "namespaceRevision": 1,
+        "models": [
+          "S:0"
+        ],
+        "bodies": [],
+        "streams": [
+          1,
+          1,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        }
+      ],
+      "result": "PASS scoped behavior"
+    },
+    {
+      "name": "negative-radius-circle",
+      "expectation": "Negative radius is invalid Circle input; do not reinterpret it as a positive circle or mirrored coordinates.",
+      "classification": "invalid-input",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Circle",
+            "data": {
+              "c": {
+                "x": 0,
+                "y": 0
+              },
+              "r": -10
+            }
+          },
+          "error": {
+            "name": "Error",
+            "code": null,
+            "message": "Invalid circle radius.",
+            "committed": false
+          },
+          "preserved": true
+        }
+      ],
+      "discovery": {
+        "ok": false,
+        "error": {
+          "name": "Error",
+          "code": "UNSUPPORTED_PROFILE",
+          "message": "Prism semantic validation failed: Expected a bounded set of closed regions.",
+          "committed": false
+        }
+      },
+      "creation": [],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "acceptedSource": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "final": {
+        "history": "{\"history\":[{\"type\":\"PLANE\",\"params\":{\"featureId\":\"1\",\"orientation\":\"XY\",\"depth\":0,\"datum\":null}}],\"pointer\":0}",
+        "source": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 1,
+        "namespaceRevision": 1,
+        "models": [
+          "S:0"
+        ],
+        "bodies": [],
+        "streams": [
+          1,
+          1,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        }
+      ],
+      "result": "PASS scoped behavior"
+    },
+    {
+      "name": "zero-length-segment",
+      "expectation": "A coincident-endpoint segment is degenerate. It may be explicitly refused as input or retained with an explicit non-region refusal; it must not create a solid.",
+      "classification": "degenerate-input",
+      "authoring": [
+        {
+          "input": {
+            "kind": "Segment",
+            "data": {
+              "a": {
+                "x": 0,
+                "y": 0
+              },
+              "b": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "error": {
+            "name": "Error",
+            "code": "DOMAIN",
+            "message": "Segment endpoints must be distinct.",
+            "committed": false
+          },
+          "preserved": true
+        }
+      ],
+      "discovery": {
+        "ok": false,
+        "error": {
+          "name": "Error",
+          "code": "UNSUPPORTED_PROFILE",
+          "message": "Prism semantic validation failed: Expected a bounded set of closed regions.",
+          "committed": false
+        }
+      },
+      "creation": [],
+      "issues": [],
+      "constraints": "No authored constraints; no satisfiability/infeasibility claim.",
+      "faceId": "S:0/SURFACE",
+      "acceptedSource": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "final": {
+        "history": "{\"history\":[{\"type\":\"PLANE\",\"params\":{\"featureId\":\"1\",\"orientation\":\"XY\",\"depth\":0,\"datum\":null}}],\"pointer\":0}",
+        "source": "{\"version\":3,\"objects\":[],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "keyVersion": 1,
+        "namespaceRevision": 1,
+        "models": [
+          "S:0"
+        ],
+        "bodies": [],
+        "streams": [
+          1,
+          1,
+          null
+        ],
+        "failure": null
+      },
+      "trace": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-empty"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-inspection"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "sketch-transition-primitive"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "tasks": [
+            "rectangle-extrusion-solve"
+          ],
+          "terminated": true
+        },
+        {
+          "url": "/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "tasks": [
+            "inspect-selected"
+          ],
+          "terminated": true
+        }
+      ],
+      "workerPins": [
+        {
+          "url": "http://127.0.0.1:20682/static/sketch-solver.bd9a5a96b8d7ede6919c.js",
+          "sha256": "241267a8f24892743ec82beaf5bda00da962538b8bb445c3d02b6559d4583da9",
+          "bytes": 3564892
+        },
+        {
+          "url": "http://127.0.0.1:20682/static/prism-semantic.334b28c725a9ef9b0d97.js",
+          "sha256": "b2978247c61a269ff5e8e2143dfdaca04221c3ee6e950e1336099f1bb440d2a3",
+          "bytes": 1406382
+        }
+      ],
+      "result": "PASS scoped behavior"
+    }
+  ],
+  "assets": [
+    {
+      "url": "http://127.0.0.1:20682/static/index.bundle.js",
+      "sha256": "8ae3ddc83e706829761c66ddc573fae42f9d746171ee09c1ee3b0f0744d98965",
+      "bytes": 32922632
+    }
+  ],
+  "browser": "Chrome/155.0.8059.79"
+}

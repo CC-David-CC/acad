@@ -1,0 +1,9 @@
+{
+  "source": "5a8ebfd5b",
+  "scope": "actual readonly service with explicit admission fixtures; no Native geometry",
+  "sourceHashes": {
+    "web/app/cad/projectManager/genericManufacturingBodies.ts": "1860e9deacb6633102b12dd8c25c2a3448fb3d38bf8d464a9eb5a28b185a7bb7",
+    "web/app/cad/projectManager/projectManagerBundle.ts": "590765c53f91546e026746eaeffbf1ac731dfa843b88e2e372f2adb463ebb435",
+    "test/generic-manufacturing-assignment/readiness.test.mjs": "c55f42522a10c298772666947bdcceeb83dd6377763e7f15d892a1d8af63f9a2"
+  }
+}

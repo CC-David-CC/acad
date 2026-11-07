@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "source": {
+    "commit": "0447b2a8bd59ce567077b3ff15ff89e01e64f983",
+    "appSha256": "57c15127fe0030043094216cef6c897126bfdf91290115c1c23b58be74d372f3",
+    "workerSha256": "04d8de669388705426129690e283f9290b809d3e98b09da843db246422070d19"
+  },
+  "helperSha256": "7e06ff8e9608d0bc55938b7209c5aa57e0e56d2d5d214d3a8dea8317c7c457a8",
+  "workerURL": "/static/sketch-solver.826cc2e4f1b86a8d5ebd.js",
+  "fixtureScope": "isolated loopback20481 to R73020579; matched private build; stopped after qualification",
+  "files": {
+    "app-save-browser.test.cjs": "48234c5ae1bda630b6dbae157b249cb497a61d8d6e45cb5930559422751ba0e6",
+    "fresh-worker-browser.test.cjs": "0a49865ea33776bbb419f39eb3ef2877225437153ca5803964a1a0973c016ca7",
+    "receipts/current742/app-r1-harness-error.json": "2a1ee9f5d1b88639d0e805237dd53b5c22bcea05b9499f7f9c2462b40de489e0",
+    "receipts/current742/installed-worker-pass.json": "32d5e9d468dc7060f506f532dd8575b088c34fd000f80cdbe963a1d5ade81a22",
+    "receipts/current742/app-r2-pass.json": "886aade828b916e431067eaa56b5898603134088c869b48715a556653c243691",
+    "receipts/current742/comparison.json": "a30cf2e8b36cf29983d0342c699119c80a9b31cb12b0082724c43a943fbe1986",
+    "receipts/current742/r730-build-pins.log": "d301b8844d05f286fa5d797acac3a517af398f188fd1cde17b5b040cad72e27d",
+    "receipts/current742/source.json": "3e44123deb478f0b2923e16909c078eaae592cafa8a6bd047b93b81363361110"
+  }
+}

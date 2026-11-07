@@ -1,0 +1,900 @@
+{
+  "under": {
+    "source": {
+      "version": 3,
+      "objects": [
+        {
+          "id": "p",
+          "type": "Point",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "x": 1,
+            "y": 2
+          }
+        }
+      ],
+      "dimensions": [],
+      "labels": [],
+      "stages": [
+        {
+          "constraints": [],
+          "generators": []
+        }
+      ],
+      "constants": "",
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      }
+    },
+    "result": {
+      "revision": "local-report-reproducer",
+      "ok": true,
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "p",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 1,
+              "y": 2
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "evidence": [],
+      "localJacobian": {
+        "version": 1,
+        "status": "estimated",
+        "variables": 2,
+        "equations": 0,
+        "rank": 0,
+        "rankLower": 0,
+        "rankUpper": 0,
+        "localNullity": 2,
+        "nullityLower": 2,
+        "nullityUpper": 2,
+        "dependentRows": [],
+        "zeroGradientRows": [],
+        "nearZeroGradientRows": [],
+        "thresholds": {
+          "low": 1e-12,
+          "high": 1e-8
+        },
+        "method": "equilibrated-pivoted-mgs2",
+        "orderedContribution": {
+          "baseline": {
+            "status": "estimated",
+            "rankLower": 0,
+            "rankUpper": 0,
+            "increment": 0
+          },
+          "groups": []
+        },
+        "auxiliaryVariables": 0,
+        "fixedExternalVariables": 0,
+        "rowOrigins": []
+      }
+    }
+  },
+  "full": {
+    "source": {
+      "version": 3,
+      "objects": [
+        {
+          "id": "p",
+          "type": "Point",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "x": 1,
+            "y": 2
+          }
+        }
+      ],
+      "dimensions": [],
+      "labels": [],
+      "stages": [
+        {
+          "constraints": [
+            {
+              "typeId": "LockPoint",
+              "objects": [
+                "p"
+              ],
+              "constants": {
+                "x": "1",
+                "y": "2"
+              },
+              "stage": 0,
+              "annotations": [],
+              "admission": {
+                "version": 1,
+                "state": "accepted"
+              }
+            }
+          ],
+          "generators": []
+        }
+      ],
+      "constants": "",
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      }
+    },
+    "result": {
+      "revision": "local-report-reproducer",
+      "ok": true,
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "p",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 1,
+              "y": 2
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "LockPoint",
+                "objects": [
+                  "p"
+                ],
+                "constants": {
+                  "x": "1",
+                  "y": "2"
+                },
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "evidence": [
+        {
+          "typeId": "LockPoint",
+          "state": "accepted",
+          "residuals": [
+            0,
+            0
+          ],
+          "tolerances": [
+            0.000001,
+            0.000001
+          ],
+          "units": [
+            "millimeter",
+            "millimeter"
+          ],
+          "tolerance": 0.000001,
+          "unit": "millimeter"
+        }
+      ],
+      "localJacobian": {
+        "version": 1,
+        "status": "estimated",
+        "variables": 2,
+        "equations": 2,
+        "rank": 2,
+        "rankLower": 2,
+        "rankUpper": 2,
+        "localNullity": 0,
+        "nullityLower": 0,
+        "nullityUpper": 0,
+        "dependentRows": [],
+        "zeroGradientRows": [],
+        "nearZeroGradientRows": [],
+        "thresholds": {
+          "low": 1e-12,
+          "high": 1e-8
+        },
+        "method": "equilibrated-pivoted-mgs2",
+        "orderedContribution": {
+          "baseline": {
+            "status": "estimated",
+            "rankLower": 0,
+            "rankUpper": 0,
+            "increment": 0
+          },
+          "groups": [
+            {
+              "constraintIndex": 0,
+              "authoredIndex": 0,
+              "constraintId": "LockPoint:2",
+              "typeId": "LockPoint",
+              "status": "estimated",
+              "rankLower": 2,
+              "rankUpper": 2,
+              "increment": 2
+            }
+          ]
+        },
+        "auxiliaryVariables": 0,
+        "fixedExternalVariables": 0,
+        "rowOrigins": [
+          {
+            "constraintIndex": 0,
+            "authoredIndex": 0,
+            "constraintId": "LockPoint:2",
+            "typeId": "LockPoint",
+            "internal": false
+          },
+          {
+            "constraintIndex": 0,
+            "authoredIndex": 0,
+            "constraintId": "LockPoint:2",
+            "typeId": "LockPoint",
+            "internal": false
+          }
+        ]
+      }
+    }
+  },
+  "redundant": {
+    "source": {
+      "version": 3,
+      "objects": [
+        {
+          "id": "p",
+          "type": "Point",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "x": 1,
+            "y": 2
+          }
+        }
+      ],
+      "dimensions": [],
+      "labels": [],
+      "stages": [
+        {
+          "constraints": [
+            {
+              "typeId": "LockPoint",
+              "objects": [
+                "p"
+              ],
+              "constants": {
+                "x": "1",
+                "y": "2"
+              },
+              "stage": 0,
+              "annotations": [],
+              "admission": {
+                "version": 1,
+                "state": "accepted"
+              }
+            },
+            {
+              "typeId": "LockPoint",
+              "objects": [
+                "p"
+              ],
+              "constants": {
+                "x": "1",
+                "y": "2"
+              },
+              "stage": 0,
+              "annotations": [],
+              "admission": {
+                "version": 1,
+                "state": "redundant"
+              }
+            }
+          ],
+          "generators": []
+        }
+      ],
+      "constants": "",
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      }
+    },
+    "result": {
+      "revision": "local-report-reproducer",
+      "ok": true,
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "p",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 1,
+              "y": 2
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "LockPoint",
+                "objects": [
+                  "p"
+                ],
+                "constants": {
+                  "x": "1",
+                  "y": "2"
+                },
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              },
+              {
+                "typeId": "LockPoint",
+                "objects": [
+                  "p"
+                ],
+                "constants": {
+                  "x": "1",
+                  "y": "2"
+                },
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "redundant"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "evidence": [
+        {
+          "typeId": "LockPoint",
+          "state": "accepted",
+          "residuals": [
+            0,
+            0
+          ],
+          "tolerances": [
+            0.000001,
+            0.000001
+          ],
+          "units": [
+            "millimeter",
+            "millimeter"
+          ],
+          "tolerance": 0.000001,
+          "unit": "millimeter"
+        },
+        {
+          "typeId": "LockPoint",
+          "state": "redundant",
+          "residuals": [
+            0,
+            0
+          ],
+          "tolerances": [
+            0.000001,
+            0.000001
+          ],
+          "units": [
+            "millimeter",
+            "millimeter"
+          ],
+          "tolerance": 0.000001,
+          "unit": "millimeter"
+        }
+      ],
+      "localJacobian": {
+        "version": 1,
+        "status": "estimated",
+        "variables": 2,
+        "equations": 4,
+        "rank": 2,
+        "rankLower": 2,
+        "rankUpper": 2,
+        "localNullity": 0,
+        "nullityLower": 0,
+        "nullityUpper": 0,
+        "dependentRows": [
+          2,
+          3
+        ],
+        "zeroGradientRows": [],
+        "nearZeroGradientRows": [],
+        "thresholds": {
+          "low": 1e-12,
+          "high": 1e-8
+        },
+        "method": "equilibrated-pivoted-mgs2",
+        "orderedContribution": {
+          "baseline": {
+            "status": "estimated",
+            "rankLower": 0,
+            "rankUpper": 0,
+            "increment": 0
+          },
+          "groups": [
+            {
+              "constraintIndex": 0,
+              "authoredIndex": 0,
+              "constraintId": "LockPoint:4",
+              "typeId": "LockPoint",
+              "status": "estimated",
+              "rankLower": 2,
+              "rankUpper": 2,
+              "increment": 2
+            },
+            {
+              "constraintIndex": 1,
+              "authoredIndex": 1,
+              "constraintId": "LockPoint:5",
+              "typeId": "LockPoint",
+              "status": "estimated",
+              "rankLower": 2,
+              "rankUpper": 2,
+              "increment": 0
+            }
+          ]
+        },
+        "auxiliaryVariables": 0,
+        "fixedExternalVariables": 0,
+        "rowOrigins": [
+          {
+            "constraintIndex": 0,
+            "authoredIndex": 0,
+            "constraintId": "LockPoint:4",
+            "typeId": "LockPoint",
+            "internal": false
+          },
+          {
+            "constraintIndex": 0,
+            "authoredIndex": 0,
+            "constraintId": "LockPoint:4",
+            "typeId": "LockPoint",
+            "internal": false
+          },
+          {
+            "constraintIndex": 1,
+            "authoredIndex": 1,
+            "constraintId": "LockPoint:5",
+            "typeId": "LockPoint",
+            "internal": false
+          },
+          {
+            "constraintIndex": 1,
+            "authoredIndex": 1,
+            "constraintId": "LockPoint:5",
+            "typeId": "LockPoint",
+            "internal": false
+          }
+        ]
+      }
+    }
+  },
+  "contradictory": {
+    "source": {
+      "version": 3,
+      "objects": [
+        {
+          "id": "p",
+          "type": "Point",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "x": 1,
+            "y": 2
+          }
+        }
+      ],
+      "dimensions": [],
+      "labels": [],
+      "stages": [
+        {
+          "constraints": [
+            {
+              "typeId": "LockPoint",
+              "objects": [
+                "p"
+              ],
+              "constants": {
+                "x": "1",
+                "y": "2"
+              },
+              "stage": 0,
+              "annotations": [],
+              "admission": {
+                "version": 1,
+                "state": "accepted"
+              }
+            },
+            {
+              "typeId": "LockPoint",
+              "objects": [
+                "p"
+              ],
+              "constants": {
+                "x": "3",
+                "y": "2"
+              },
+              "stage": 0,
+              "annotations": [],
+              "admission": {
+                "version": 1,
+                "state": "accepted"
+              }
+            }
+          ],
+          "generators": []
+        }
+      ],
+      "constants": "",
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      }
+    },
+    "result": {
+      "revision": "local-report-reproducer",
+      "ok": false,
+      "error": {
+        "code": "SOLVE_FAILED",
+        "message": "A constraint was rejected during solving.",
+        "cause": {
+          "kind": "algebraic-contradiction",
+          "basis": "exact-reduced-row"
+        }
+      }
+    }
+  },
+  "singular": {
+    "source": {
+      "version": 3,
+      "objects": [
+        {
+          "id": "p",
+          "type": "Point",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "id": "q",
+          "type": "Point",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      ],
+      "dimensions": [],
+      "labels": [],
+      "stages": [
+        {
+          "constraints": [
+            {
+              "typeId": "DistancePP",
+              "objects": [
+                "p",
+                "q"
+              ],
+              "constants": {
+                "distance": "0"
+              },
+              "stage": 0,
+              "annotations": [],
+              "admission": {
+                "version": 1,
+                "state": "accepted"
+              }
+            }
+          ],
+          "generators": []
+        }
+      ],
+      "constants": "",
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      }
+    },
+    "result": {
+      "revision": "local-report-reproducer",
+      "ok": true,
+      "sketch": {
+        "version": 3,
+        "objects": [
+          {
+            "id": "p",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "id": "q",
+            "type": "Point",
+            "role": null,
+            "stage": 0,
+            "data": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "dimensions": [],
+        "labels": [],
+        "stages": [
+          {
+            "constraints": [
+              {
+                "typeId": "DistancePP",
+                "objects": [
+                  "p",
+                  "q"
+                ],
+                "constants": {
+                  "distance": "0"
+                },
+                "stage": 0,
+                "annotations": [],
+                "admission": {
+                  "version": 1,
+                  "state": "accepted"
+                }
+              }
+            ],
+            "generators": []
+          }
+        ],
+        "constants": "",
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        }
+      },
+      "evidence": [
+        {
+          "typeId": "DistancePP",
+          "state": "accepted",
+          "residuals": [
+            0
+          ],
+          "tolerances": [
+            0.000001
+          ],
+          "units": [
+            "millimeter"
+          ],
+          "tolerance": 0.000001,
+          "unit": "millimeter"
+        }
+      ],
+      "localJacobian": {
+        "version": 1,
+        "status": "zero-gradient",
+        "variables": 4,
+        "equations": 1,
+        "rank": 0,
+        "rankLower": 0,
+        "rankUpper": 0,
+        "localNullity": 4,
+        "nullityLower": 4,
+        "nullityUpper": 4,
+        "dependentRows": [
+          0
+        ],
+        "zeroGradientRows": [
+          0
+        ],
+        "nearZeroGradientRows": [],
+        "thresholds": {
+          "low": 1e-12,
+          "high": 1e-8
+        },
+        "method": "equilibrated-pivoted-mgs2",
+        "orderedContribution": {
+          "baseline": {
+            "status": "estimated",
+            "rankLower": 0,
+            "rankUpper": 0,
+            "increment": 0
+          },
+          "groups": [
+            {
+              "constraintIndex": 0,
+              "authoredIndex": 0,
+              "constraintId": "DistancePP:2",
+              "typeId": "DistancePP",
+              "status": "unknown",
+              "rankLower": 0,
+              "rankUpper": 0,
+              "increment": null
+            }
+          ]
+        },
+        "auxiliaryVariables": 0,
+        "fixedExternalVariables": 0,
+        "rowOrigins": [
+          {
+            "constraintIndex": 0,
+            "authoredIndex": 0,
+            "constraintId": "DistancePP:2",
+            "typeId": "DistancePP",
+            "internal": false
+          }
+        ]
+      }
+    }
+  },
+  "zeroSegment": {
+    "source": {
+      "version": 3,
+      "objects": [
+        {
+          "id": "s",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "dimensions": [],
+      "labels": [],
+      "stages": [
+        {
+          "constraints": [],
+          "generators": []
+        }
+      ],
+      "constants": "",
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      }
+    },
+    "result": {
+      "revision": "local-report-reproducer",
+      "ok": false,
+      "error": {
+        "code": "INVALID",
+        "message": "Degenerate sketch segment.",
+        "cause": {
+          "kind": "invalid-domain",
+          "basis": "domain-check"
+        }
+      }
+    }
+  },
+  "zeroCircle": {
+    "source": {
+      "version": 3,
+      "objects": [
+        {
+          "id": "c",
+          "type": "Circle",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "c": {
+              "x": 0,
+              "y": 0
+            },
+            "r": 0
+          }
+        }
+      ],
+      "dimensions": [],
+      "labels": [],
+      "stages": [
+        {
+          "constraints": [],
+          "generators": []
+        }
+      ],
+      "constants": "",
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      }
+    },
+    "result": {
+      "revision": "local-report-reproducer",
+      "ok": false,
+      "error": {
+        "code": "INVALID",
+        "message": "Degenerate sketch circle.",
+        "cause": {
+          "kind": "invalid-domain",
+          "basis": "domain-check"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+import React, {useContext} from 'react';
+import ls from './EntityList.less';
+import Label from 'ui/components/controls/Label';
+import Field from 'ui/components/controls/Field';
+import Fa from 'ui/components/Fa';
+import {attachToForm} from './Form';
+import {camelCaseSplitToStr} from 'gems/camelCaseSplit';
+import {EMPTY_ARRAY, removeInPlace} from 'gems/iterables';
+import {ReactApplicationContext} from "cad/dom/ReactApplicationContext";
+import produce from "immer";
+import {FiEdit} from "react-icons/fi";
+import {MFace} from "cad/model/mface";
+import {ModelIcon} from "cad/craft/ui/ModelIcon";
+import {SafeLength} from "cad/craft/ui/SafeLength";
+
+
+function EntityList(props) {
+
+  const ctx = useContext(ReactApplicationContext);
+
+  let {name, label, active, setActive, value, placeholder, readOnly, entityRenderer} = props;
+
+  if (!entityRenderer) {
+    entityRenderer = e => <SafeLength text={e} limit={20} />
+  }
+
+  const deselect = (entityId) => {
+    const {value, onChange} = props;
+    if (Array.isArray(value)) {
+      onChange(produce(value, value => removeInPlace(value, entityId)));
+    } else {
+      onChange(undefined);
+    }
+  };
+  
+
+  if (!Array.isArray(value)) {
+    value = value ? asArray(value) : EMPTY_ARRAY;
+  }
+  return <Field active={active} name={name} onClick={setActive}>
+    <Label>{label||camelCaseSplitToStr(name)}:</Label>
+    {props.sketchRegionChoices && <div aria-label="Choose sketch regions">
+      {(ctx.cadRegistry.findFace(ctx.wizardService.readParam(['face']))?.sketchRegions || []).map((region, index) =>
+        <label key={region.id} onMouseEnter={() => ctx.highlightService.highlight(region.id)} onMouseLeave={() => ctx.highlightService.unHighlight(region.id)}>
+          <input type='checkbox' aria-label={'Sketch region ' + (index + 1)} checked={value.includes(region.id)}
+            onChange={event => props.onChange(event.target.checked ? [...value, region.id] : value.filter(id => id !== region.id))} />
+          {' Region ' + (index + 1)}
+        </label>)}
+    </div>}
+    {props.occShellChoices && <div aria-label="Choose OCC bodies">
+      {ctx.cadRegistry.shells.filter(shell => shell.brepShell && !shell.brepShell.data?.__meshWithOrigins).map(shell =>
+        <label key={shell.id}>
+          <input type='checkbox' checked={value.includes(shell.id)}
+            onChange={event => props.onChange(event.target.checked ? [...value, shell.id] : value.filter(id => id !== shell.id))} />
+          {' OCC body ' + shell.id}
+        </label>)}
+    </div>}
+    {props.nativeMeshChoices && <select aria-label={label || camelCaseSplitToStr(name)}
+      value={value[0] || ''} onChange={event => props.onChange(event.target.value || undefined)}>
+      <option value=''>Choose a Native Mesh solid</option>
+      {ctx.cadRegistry.shells.filter(shell => shell.brepShell?.data?.__meshWithOrigins).map(shell =>
+        <option key={shell.id} value={shell.id}>{shell.id}</option>)}
+    </select>}
+    <div className={ls.container}>{value.length === 0 ?
+      <span className={ls.emptySelection}>{placeholder || '<not selected>'}</span> :
+      value.map((entity, i) => {
+        const model = ctx.cadRegistry.find(entity);
+        return <span className={ls.entityRef} key={i}
+                onMouseEnter={() => ctx.highlightService.highlight(entity)}
+                onMouseLeave={() => ctx.highlightService.unHighlight(entity)}>
+          <span className={ls.entityLabel}>
+            <EditButton model={model}/>
+            <ModelIcon entityType={model?.TYPE} style={{marginRight: 3}} />
+
+            {entityRenderer(entity)}
+          </span>
+            {!readOnly && <span className={ls.rm} onClick={() => deselect(entity)}> <Fa icon='times'/></span>}
+        </span>
+      })}
+    </div>
+  </Field>;
+
+}
+
+function EditButton({model}) {
+  const ctx = useContext(ReactApplicationContext);
+
+  if (!(model instanceof MFace)) {
+    return null;
+  }
+
+  return <span onClick={() => ctx.sketcherService.sketchFace(model)} className={ls.editBtn}>
+    <FiEdit/>
+  </span>;
+}
+
+
+export default attachToForm(EntityList);
+
+function asArray(val) {
+  _arr[0] = val;
+  return _arr;
+}
+
+const _arr = [];
+

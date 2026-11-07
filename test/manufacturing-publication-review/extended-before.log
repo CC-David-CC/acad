@@ -1,0 +1,90 @@
+✔ unmodified native pre-aborted signal refuses before Worker allocation (231.521817ms)
+✖ native pre-aborted signal remains cancelled when its aborted property is shadowed (244.967935ms)
+✔ native cancellation after hash completion preserves A/J/T and healthy concurrent caller may commit (214.81197ms)
+✔ native cancellation during final valid callback after genuine Worker cleanup preserves exact state (263.109768ms)
+✖ native signal own accessors and add/remove overrides cannot change normal assignment or cleanup (108.458827ms)
+✖ hash cancellation uses native signal even with own method/property overrides, then healthy retry succeeds (103.683971ms)
+✖ held genuine preparation abort ignores own remove override, preserves state and leaves healthy module (192.027552ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 3
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1848.702912
+
+✖ failing tests:
+
+test at test/manufacturing-publication-review/review.test.mjs:15:1
+✖ native pre-aborted signal remains cancelled when its aborted property is shadowed (244.967935ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'AbortError'
+  
+      at file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:21:9
+      at async use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:9:44)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'AbortError',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/manufacturing-publication-review/review.test.mjs:33:1
+✖ native signal own accessors and add/remove overrides cannot change normal assignment or cleanup (108.458827ms)
+  false
+
+test at test/manufacturing-publication-review/review.test.mjs:39:1
+✖ hash cancellation uses native signal even with own method/property overrides, then healthy retry succeeds (103.683971ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:43:2
+      at async use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:9:44)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test/manufacturing-publication-review/review.test.mjs:47:1
+✖ held genuine preparation abort ignores own remove override, preserves state and leaves healthy module (192.027552ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    Comparison {
+  +   name: 'Error'
+  -   name: 'AbortError'
+    }
+  
+      at async file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:50:2
+      at async use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:9:44)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Manufacturing Worker cleanup failed; reload this client module.
+        at clean (file:///tmp/codi-manufacturing-publication-review-20261107/web/app/cad/projectManager/manufacturingPublicationClient.mjs:31:78)
+        at finish (file:///tmp/codi-manufacturing-publication-review-20261107/web/app/cad/projectManager/manufacturingPublicationClient.mjs:32:99)
+        at AbortSignal.onAbort (file:///tmp/codi-manufacturing-publication-review-20261107/web/app/cad/projectManager/manufacturingPublicationClient.mjs:42:21)
+        at [nodejs.internal.kHybridDispatch] (node:internal/event_target:869:20)
+        at AbortSignal.dispatchEvent (node:internal/event_target:810:26)
+        at runAbort (node:internal/abort_controller:561:10)
+        at abortSignal (node:internal/abort_controller:525:3)
+        at AbortController.abort (node:internal/abort_controller:580:5)
+        at file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:49:179
+        at async use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:9:44) {
+      [cause]: ''
+    },
+    expected: { name: 'AbortError' },
+    operator: 'rejects',
+    diff: 'simple'
+  }

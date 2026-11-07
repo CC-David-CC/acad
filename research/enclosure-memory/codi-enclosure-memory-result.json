@@ -1,0 +1,3067 @@
+{
+  "version": 1,
+  "browserVersion": "Chrome/130.0.6723.116",
+  "note": "One bounded Chrome process tree; PSS/RSS sampled via smaps_rollup; no forced GC; app is isolated fixture, not full desktop. Each scenario starts a fresh browser context but browser process is reused.",
+  "scenarios": [
+    {
+      "engines": [
+        "occ",
+        "occ",
+        "occ"
+      ],
+      "steps": [
+        {
+          "label": "baseline",
+          "workers": 0,
+          "pageHeap": {
+            "usedJSHeapSize": 1054688,
+            "totalJSHeapSize": 1861108,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 185672,
+                  "Pss": 76402,
+                  "Private_Clean": 5092,
+                  "Private_Dirty": 40612,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13279,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61256,
+                  "Pss": 9663,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 556,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130724,
+                  "Pss": 45913,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19212,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 103864,
+                  "Pss": 28936,
+                  "Private_Clean": 588,
+                  "Private_Dirty": 15112,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 49476,
+                  "Pss": 7785,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2020,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684996,
+                "unavailable": true
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 96628,
+                  "Pss": 21862,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7588,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685357,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65096,
+                  "Pss": 13286,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5492,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685358,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 107012,
+                  "Pss": 27826,
+                  "Private_Clean": 3128,
+                  "Private_Dirty": 8880,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 860664,
+              "Pss": 244952,
+              "Private_Clean": 8900,
+              "Private_Dirty": 100184,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "open-1",
+          "workers": 1,
+          "pageHeap": {
+            "usedJSHeapSize": 1398389,
+            "totalJSHeapSize": 4286437,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 186320,
+                  "Pss": 76511,
+                  "Private_Clean": 4876,
+                  "Private_Dirty": 40948,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13277,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61256,
+                  "Pss": 9661,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 556,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130732,
+                  "Pss": 45890,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19220,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 104356,
+                  "Pss": 29228,
+                  "Private_Clean": 512,
+                  "Private_Dirty": 15544,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 49476,
+                  "Pss": 7780,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2020,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 96628,
+                  "Pss": 21850,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7588,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685357,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65548,
+                  "Pss": 13347,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685358,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 238492,
+                  "Pss": 154765,
+                  "Private_Clean": 11432,
+                  "Private_Dirty": 125748,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 993744,
+              "Pss": 372309,
+              "Private_Clean": 16912,
+              "Private_Dirty": 217832,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "open-2",
+          "workers": 2,
+          "pageHeap": {
+            "usedJSHeapSize": 1569385,
+            "totalJSHeapSize": 4294609,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 192344,
+                  "Pss": 81552,
+                  "Private_Clean": 5060,
+                  "Private_Dirty": 45452,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13275,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9664,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 556,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130196,
+                  "Pss": 45846,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19700,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105364,
+                  "Pss": 29456,
+                  "Private_Clean": 496,
+                  "Private_Dirty": 15656,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 49588,
+                  "Pss": 7767,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2004,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 96760,
+                  "Pss": 21836,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7592,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685357,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65740,
+                  "Pss": 13367,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685358,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 292244,
+                  "Pss": 208354,
+                  "Private_Clean": 11432,
+                  "Private_Dirty": 179372,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 1054492,
+              "Pss": 431117,
+              "Private_Clean": 17080,
+              "Private_Dirty": 276540,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "open-3",
+          "workers": 3,
+          "pageHeap": {
+            "usedJSHeapSize": 1773425,
+            "totalJSHeapSize": 4560829,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 192448,
+                  "Pss": 81656,
+                  "Private_Clean": 5060,
+                  "Private_Dirty": 45556,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13276,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9664,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 556,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130196,
+                  "Pss": 45846,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19700,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105396,
+                  "Pss": 29488,
+                  "Private_Clean": 496,
+                  "Private_Dirty": 15688,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 49588,
+                  "Pss": 7768,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2004,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 96760,
+                  "Pss": 21836,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7592,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685357,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65740,
+                  "Pss": 13367,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685358,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 346164,
+                  "Pss": 262274,
+                  "Private_Clean": 11432,
+                  "Private_Dirty": 233292,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 1108548,
+              "Pss": 485175,
+              "Private_Clean": 17080,
+              "Private_Dirty": 330596,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "close-to-2",
+          "workers": 2,
+          "pageHeap": {
+            "usedJSHeapSize": 1776665,
+            "totalJSHeapSize": 4560829,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 192592,
+                  "Pss": 81754,
+                  "Private_Clean": 5040,
+                  "Private_Dirty": 45696,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13275,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9663,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 556,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130196,
+                  "Pss": 45842,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19700,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105504,
+                  "Pss": 29531,
+                  "Private_Clean": 496,
+                  "Private_Dirty": 15732,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 49588,
+                  "Pss": 7766,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2004,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22129,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685357,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65284,
+                  "Pss": 12850,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 4972,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685358,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 294372,
+                  "Pss": 210092,
+                  "Private_Clean": 11564,
+                  "Private_Dirty": 180920,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 1057332,
+              "Pss": 432902,
+              "Private_Clean": 17192,
+              "Private_Dirty": 278088,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "close-to-1",
+          "workers": 1,
+          "pageHeap": {
+            "usedJSHeapSize": 1778685,
+            "totalJSHeapSize": 4560829,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 192596,
+                  "Pss": 81758,
+                  "Private_Clean": 5040,
+                  "Private_Dirty": 45700,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13275,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9663,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 556,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130196,
+                  "Pss": 45842,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19700,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105504,
+                  "Pss": 29531,
+                  "Private_Clean": 496,
+                  "Private_Dirty": 15732,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 49588,
+                  "Pss": 7766,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2004,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22129,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685357,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65284,
+                  "Pss": 12850,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 4972,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685358,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 241552,
+                  "Pss": 157272,
+                  "Private_Clean": 11564,
+                  "Private_Dirty": 128100,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 1004516,
+              "Pss": 380086,
+              "Private_Clean": 17192,
+              "Private_Dirty": 225272,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "close-to-0",
+          "workers": 0,
+          "pageHeap": {
+            "usedJSHeapSize": 1780705,
+            "totalJSHeapSize": 4560829,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 191416,
+                  "Pss": 80577,
+                  "Private_Clean": 5040,
+                  "Private_Dirty": 44520,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13273,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9662,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 556,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130200,
+                  "Pss": 45846,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19704,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105348,
+                  "Pss": 29374,
+                  "Private_Clean": 496,
+                  "Private_Dirty": 15576,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 49584,
+                  "Pss": 7761,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2000,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22129,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685357,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65284,
+                  "Pss": 12850,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 4972,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 685358,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 136428,
+                  "Pss": 52148,
+                  "Private_Clean": 11564,
+                  "Private_Dirty": 22976,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 898056,
+              "Pss": 273620,
+              "Private_Clean": 17192,
+              "Private_Dirty": 118812,
+              "Swap": 0
+            }
+          }
+        }
+      ],
+      "afterContext": {
+        "rootPid": 684905,
+        "processes": [
+          {
+            "pid": 684905,
+            "ppid": 1,
+            "type": "browser",
+            "kib": {
+              "Rss": 190832,
+              "Pss": 82206,
+              "Private_Clean": 5480,
+              "Private_Dirty": 44008,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684921,
+            "ppid": 684905,
+            "type": "zygote",
+            "kib": {
+              "Rss": 60936,
+              "Pss": 13441,
+              "Private_Clean": 0,
+              "Private_Dirty": 712,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684922,
+            "ppid": 684905,
+            "type": "zygote",
+            "kib": {
+              "Rss": 61320,
+              "Pss": 11445,
+              "Private_Clean": 12,
+              "Private_Dirty": 556,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684942,
+            "ppid": 684921,
+            "type": "gpu-process",
+            "kib": {
+              "Rss": 128488,
+              "Pss": 45256,
+              "Private_Clean": 48,
+              "Private_Dirty": 19076,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684943,
+            "ppid": 684905,
+            "type": "utility",
+            "kib": {
+              "Rss": 105552,
+              "Pss": 30155,
+              "Private_Clean": 552,
+              "Private_Dirty": 15244,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684948,
+            "ppid": 684922,
+            "type": "utility",
+            "kib": {
+              "Rss": 51492,
+              "Pss": 10193,
+              "Private_Clean": 32,
+              "Private_Dirty": 2000,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684997,
+            "ppid": 684922,
+            "type": "renderer",
+            "kib": {
+              "Rss": 97540,
+              "Pss": 29028,
+              "Private_Clean": 2096,
+              "Private_Dirty": 7796,
+              "Swap": 0
+            }
+          }
+        ],
+        "totalsKiB": {
+          "Rss": 696160,
+          "Pss": 221724,
+          "Private_Clean": 8220,
+          "Private_Dirty": 89392,
+          "Swap": 0
+        }
+      }
+    },
+    {
+      "engines": [
+        "manifold",
+        "manifold",
+        "manifold"
+      ],
+      "steps": [
+        {
+          "label": "baseline",
+          "workers": 0,
+          "pageHeap": {
+            "usedJSHeapSize": 1054688,
+            "totalJSHeapSize": 1861108,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 195140,
+                  "Pss": 83420,
+                  "Private_Clean": 5840,
+                  "Private_Dirty": 45472,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13276,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9628,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130608,
+                  "Pss": 45535,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 18868,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105580,
+                  "Pss": 29308,
+                  "Private_Clean": 528,
+                  "Private_Dirty": 15268,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51520,
+                  "Pss": 8050,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2024,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22119,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686165,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65292,
+                  "Pss": 13128,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5304,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686166,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 105968,
+                  "Pss": 27225,
+                  "Private_Clean": 2860,
+                  "Private_Dirty": 8752,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 873904,
+              "Pss": 251689,
+              "Private_Clean": 9320,
+              "Private_Dirty": 104692,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "open-1",
+          "workers": 1,
+          "pageHeap": {
+            "usedJSHeapSize": 1398906,
+            "totalJSHeapSize": 4286422,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 195152,
+                  "Pss": 83137,
+                  "Private_Clean": 5596,
+                  "Private_Dirty": 45592,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13274,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9626,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130608,
+                  "Pss": 45508,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 18868,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105992,
+                  "Pss": 29579,
+                  "Private_Clean": 508,
+                  "Private_Dirty": 15640,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51520,
+                  "Pss": 8038,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2024,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22117,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686165,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65292,
+                  "Pss": 13129,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5304,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686166,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 125764,
+                  "Pss": 43408,
+                  "Private_Clean": 8012,
+                  "Private_Dirty": 18472,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 894124,
+              "Pss": 267816,
+              "Private_Clean": 14208,
+              "Private_Dirty": 114904,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "open-2",
+          "workers": 2,
+          "pageHeap": {
+            "usedJSHeapSize": 1570590,
+            "totalJSHeapSize": 4294594,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 193252,
+                  "Pss": 81576,
+                  "Private_Clean": 5532,
+                  "Private_Dirty": 44496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13274,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9626,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130320,
+                  "Pss": 45612,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19372,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105708,
+                  "Pss": 29277,
+                  "Private_Clean": 492,
+                  "Private_Dirty": 15356,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51504,
+                  "Pss": 8022,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2008,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22117,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686165,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65292,
+                  "Pss": 13129,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5304,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686166,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 134840,
+                  "Pss": 51924,
+                  "Private_Clean": 9252,
+                  "Private_Dirty": 25536,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 900712,
+              "Pss": 274557,
+              "Private_Clean": 15368,
+              "Private_Dirty": 121076,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "open-3",
+          "workers": 3,
+          "pageHeap": {
+            "usedJSHeapSize": 1775694,
+            "totalJSHeapSize": 4560814,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 193364,
+                  "Pss": 81679,
+                  "Private_Clean": 5528,
+                  "Private_Dirty": 44612,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13274,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9626,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130320,
+                  "Pss": 45612,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19372,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105736,
+                  "Pss": 29302,
+                  "Private_Clean": 492,
+                  "Private_Dirty": 15384,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51504,
+                  "Pss": 8022,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2008,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22117,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686165,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65292,
+                  "Pss": 13129,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5304,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686166,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 140868,
+                  "Pss": 57754,
+                  "Private_Clean": 9252,
+                  "Private_Dirty": 31348,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 906880,
+              "Pss": 280515,
+              "Private_Clean": 15364,
+              "Private_Dirty": 127032,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "close-to-2",
+          "workers": 2,
+          "pageHeap": {
+            "usedJSHeapSize": 1778934,
+            "totalJSHeapSize": 4560814,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 193372,
+                  "Pss": 81646,
+                  "Private_Clean": 5468,
+                  "Private_Dirty": 44628,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13273,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9625,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130320,
+                  "Pss": 45610,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19372,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105736,
+                  "Pss": 29294,
+                  "Private_Clean": 492,
+                  "Private_Dirty": 15384,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51504,
+                  "Pss": 8021,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2008,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22117,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686165,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65292,
+                  "Pss": 13129,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5304,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686166,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 136296,
+                  "Pss": 52857,
+                  "Private_Clean": 9448,
+                  "Private_Dirty": 26160,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 902316,
+              "Pss": 275572,
+              "Private_Clean": 15500,
+              "Private_Dirty": 121860,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "close-to-1",
+          "workers": 1,
+          "pageHeap": {
+            "usedJSHeapSize": 1780954,
+            "totalJSHeapSize": 4560814,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 193376,
+                  "Pss": 81651,
+                  "Private_Clean": 5464,
+                  "Private_Dirty": 44628,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13273,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9625,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130320,
+                  "Pss": 45609,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19372,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105736,
+                  "Pss": 29288,
+                  "Private_Clean": 492,
+                  "Private_Dirty": 15384,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51504,
+                  "Pss": 8018,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2008,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22104,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686165,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65476,
+                  "Pss": 12861,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 4972,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686166,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 131308,
+                  "Pss": 47918,
+                  "Private_Clean": 9448,
+                  "Private_Dirty": 21236,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 897516,
+              "Pss": 270347,
+              "Private_Clean": 15496,
+              "Private_Dirty": 116604,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "close-to-0",
+          "workers": 0,
+          "pageHeap": {
+            "usedJSHeapSize": 1782974,
+            "totalJSHeapSize": 4560814,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 193376,
+                  "Pss": 81673,
+                  "Private_Clean": 5464,
+                  "Private_Dirty": 44628,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13273,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9625,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130320,
+                  "Pss": 45609,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19372,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105736,
+                  "Pss": 29289,
+                  "Private_Clean": 492,
+                  "Private_Dirty": 15384,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51504,
+                  "Pss": 8018,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2008,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22104,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686165,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65476,
+                  "Pss": 12861,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 4972,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686166,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 125016,
+                  "Pss": 41789,
+                  "Private_Clean": 9448,
+                  "Private_Dirty": 15184,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 891224,
+              "Pss": 264241,
+              "Private_Clean": 15496,
+              "Private_Dirty": 110552,
+              "Swap": 0
+            }
+          }
+        }
+      ],
+      "afterContext": {
+        "rootPid": 684905,
+        "processes": [
+          {
+            "pid": 684905,
+            "ppid": 1,
+            "type": "browser",
+            "kib": {
+              "Rss": 190776,
+              "Pss": 82150,
+              "Private_Clean": 5632,
+              "Private_Dirty": 43800,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684921,
+            "ppid": 684905,
+            "type": "zygote",
+            "kib": {
+              "Rss": 60936,
+              "Pss": 13441,
+              "Private_Clean": 0,
+              "Private_Dirty": 712,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684922,
+            "ppid": 684905,
+            "type": "zygote",
+            "kib": {
+              "Rss": 61320,
+              "Pss": 11445,
+              "Private_Clean": 12,
+              "Private_Dirty": 556,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684942,
+            "ppid": 684921,
+            "type": "gpu-process",
+            "kib": {
+              "Rss": 128032,
+              "Pss": 44800,
+              "Private_Clean": 48,
+              "Private_Dirty": 18620,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684943,
+            "ppid": 684905,
+            "type": "utility",
+            "kib": {
+              "Rss": 105480,
+              "Pss": 30083,
+              "Private_Clean": 552,
+              "Private_Dirty": 15172,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684948,
+            "ppid": 684922,
+            "type": "utility",
+            "kib": {
+              "Rss": 51452,
+              "Pss": 10153,
+              "Private_Clean": 32,
+              "Private_Dirty": 1960,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684997,
+            "ppid": 684922,
+            "type": "renderer",
+            "kib": {
+              "Rss": 97540,
+              "Pss": 29028,
+              "Private_Clean": 2096,
+              "Private_Dirty": 7796,
+              "Swap": 0
+            }
+          }
+        ],
+        "totalsKiB": {
+          "Rss": 695536,
+          "Pss": 221100,
+          "Private_Clean": 8372,
+          "Private_Dirty": 88616,
+          "Swap": 0
+        }
+      }
+    },
+    {
+      "engines": [
+        "occ",
+        "manifold",
+        "occ"
+      ],
+      "steps": [
+        {
+          "label": "baseline",
+          "workers": 0,
+          "pageHeap": {
+            "usedJSHeapSize": 1054688,
+            "totalJSHeapSize": 1861108,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 195068,
+                  "Pss": 83372,
+                  "Private_Clean": 5496,
+                  "Private_Dirty": 45796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13277,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9628,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130784,
+                  "Pss": 45579,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 18908,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 105524,
+                  "Pss": 29251,
+                  "Private_Clean": 528,
+                  "Private_Dirty": 15212,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51500,
+                  "Pss": 8033,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2004,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22117,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686714,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65088,
+                  "Pss": 13100,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5296,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686715,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 105704,
+                  "Pss": 27078,
+                  "Private_Clean": 2860,
+                  "Private_Dirty": 8668,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 873464,
+              "Pss": 251435,
+              "Private_Clean": 8976,
+              "Private_Dirty": 104888,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "open-1",
+          "workers": 1,
+          "pageHeap": {
+            "usedJSHeapSize": 1398437,
+            "totalJSHeapSize": 4286437,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 195148,
+                  "Pss": 82964,
+                  "Private_Clean": 5196,
+                  "Private_Dirty": 45872,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13274,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9626,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130784,
+                  "Pss": 45544,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 18908,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 106048,
+                  "Pss": 29546,
+                  "Private_Clean": 476,
+                  "Private_Dirty": 15636,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51500,
+                  "Pss": 8018,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2004,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22115,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686714,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65088,
+                  "Pss": 13101,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5296,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686715,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 235584,
+                  "Pss": 151660,
+                  "Private_Clean": 11336,
+                  "Private_Dirty": 122768,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 1003948,
+              "Pss": 375848,
+              "Private_Clean": 17100,
+              "Private_Dirty": 219488,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "open-2",
+          "workers": 2,
+          "pageHeap": {
+            "usedJSHeapSize": 1576074,
+            "totalJSHeapSize": 4295174,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 193916,
+                  "Pss": 82311,
+                  "Private_Clean": 5328,
+                  "Private_Dirty": 45480,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13293,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9646,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130784,
+                  "Pss": 45969,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19752,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 106296,
+                  "Pss": 29810,
+                  "Private_Clean": 476,
+                  "Private_Dirty": 15884,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51500,
+                  "Pss": 8017,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2004,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22115,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686714,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65088,
+                  "Pss": 13101,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5296,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686715,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 243240,
+                  "Pss": 159032,
+                  "Private_Clean": 11468,
+                  "Private_Dirty": 129976,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 1010620,
+              "Pss": 383294,
+              "Private_Clean": 17364,
+              "Private_Dirty": 227396,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "open-3",
+          "workers": 3,
+          "pageHeap": {
+            "usedJSHeapSize": 1780102,
+            "totalJSHeapSize": 4561394,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 193468,
+                  "Pss": 81852,
+                  "Private_Clean": 5324,
+                  "Private_Dirty": 45036,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13290,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9643,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130576,
+                  "Pss": 45754,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19544,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 106092,
+                  "Pss": 29602,
+                  "Private_Clean": 476,
+                  "Private_Dirty": 15680,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51496,
+                  "Pss": 8013,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2000,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22115,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686714,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65088,
+                  "Pss": 13101,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 5296,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686715,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 299384,
+                  "Pss": 215046,
+                  "Private_Clean": 11532,
+                  "Private_Dirty": 185920,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 1065900,
+              "Pss": 438416,
+              "Private_Clean": 17424,
+              "Private_Dirty": 282480,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "close-to-2",
+          "workers": 2,
+          "pageHeap": {
+            "usedJSHeapSize": 1783342,
+            "totalJSHeapSize": 4561394,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 193468,
+                  "Pss": 81832,
+                  "Private_Clean": 5308,
+                  "Private_Dirty": 45028,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13293,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9645,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130576,
+                  "Pss": 45758,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19544,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 106092,
+                  "Pss": 29596,
+                  "Private_Clean": 476,
+                  "Private_Dirty": 15680,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51496,
+                  "Pss": 8010,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2000,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22103,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686714,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65272,
+                  "Pss": 12833,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 4964,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686715,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 247160,
+                  "Pss": 162499,
+                  "Private_Clean": 11664,
+                  "Private_Dirty": 133188,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 1013860,
+              "Pss": 385569,
+              "Private_Clean": 17540,
+              "Private_Dirty": 229408,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "close-to-1",
+          "workers": 1,
+          "pageHeap": {
+            "usedJSHeapSize": 1785362,
+            "totalJSHeapSize": 4561394,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 193468,
+                  "Pss": 81842,
+                  "Private_Clean": 5308,
+                  "Private_Dirty": 45028,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13293,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9645,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130576,
+                  "Pss": 45758,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19544,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 106092,
+                  "Pss": 29596,
+                  "Private_Clean": 476,
+                  "Private_Dirty": 15680,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51496,
+                  "Pss": 8010,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2000,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22103,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686714,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65272,
+                  "Pss": 12833,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 4964,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686715,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 241468,
+                  "Pss": 156980,
+                  "Private_Clean": 11600,
+                  "Private_Dirty": 127744,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 1008168,
+              "Pss": 380060,
+              "Private_Clean": 17476,
+              "Private_Dirty": 223964,
+              "Swap": 0
+            }
+          }
+        },
+        {
+          "label": "close-to-0",
+          "workers": 0,
+          "pageHeap": {
+            "usedJSHeapSize": 1787382,
+            "totalJSHeapSize": 4561394,
+            "jsHeapSizeLimit": 4294705152
+          },
+          "processTree": {
+            "rootPid": 684905,
+            "processes": [
+              {
+                "pid": 684905,
+                "ppid": 1,
+                "type": "browser",
+                "kib": {
+                  "Rss": 193472,
+                  "Pss": 81856,
+                  "Private_Clean": 5296,
+                  "Private_Dirty": 45032,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684921,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 60936,
+                  "Pss": 13293,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 712,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684922,
+                "ppid": 684905,
+                "type": "zygote",
+                "kib": {
+                  "Rss": 61320,
+                  "Pss": 9646,
+                  "Private_Clean": 12,
+                  "Private_Dirty": 496,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684942,
+                "ppid": 684921,
+                "type": "gpu-process",
+                "kib": {
+                  "Rss": 130576,
+                  "Pss": 45758,
+                  "Private_Clean": 48,
+                  "Private_Dirty": 19544,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684943,
+                "ppid": 684905,
+                "type": "utility",
+                "kib": {
+                  "Rss": 106092,
+                  "Pss": 29593,
+                  "Private_Clean": 476,
+                  "Private_Dirty": 15680,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684948,
+                "ppid": 684922,
+                "type": "utility",
+                "kib": {
+                  "Rss": 51496,
+                  "Pss": 8010,
+                  "Private_Clean": 32,
+                  "Private_Dirty": 2000,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 684997,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 97540,
+                  "Pss": 22103,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 7796,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686714,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 65272,
+                  "Pss": 12833,
+                  "Private_Clean": 0,
+                  "Private_Dirty": 4964,
+                  "Swap": 0
+                }
+              },
+              {
+                "pid": 686715,
+                "ppid": 684922,
+                "type": "renderer",
+                "kib": {
+                  "Rss": 135548,
+                  "Pss": 51178,
+                  "Private_Clean": 11656,
+                  "Private_Dirty": 21944,
+                  "Swap": 0
+                }
+              }
+            ],
+            "totalsKiB": {
+              "Rss": 902252,
+              "Pss": 274270,
+              "Private_Clean": 17520,
+              "Private_Dirty": 118168,
+              "Swap": 0
+            }
+          }
+        }
+      ],
+      "afterContext": {
+        "rootPid": 684905,
+        "processes": [
+          {
+            "pid": 684905,
+            "ppid": 1,
+            "type": "browser",
+            "kib": {
+              "Rss": 190880,
+              "Pss": 82419,
+              "Private_Clean": 5676,
+              "Private_Dirty": 43992,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684921,
+            "ppid": 684905,
+            "type": "zygote",
+            "kib": {
+              "Rss": 60936,
+              "Pss": 13458,
+              "Private_Clean": 0,
+              "Private_Dirty": 712,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684922,
+            "ppid": 684905,
+            "type": "zygote",
+            "kib": {
+              "Rss": 61320,
+              "Pss": 11462,
+              "Private_Clean": 12,
+              "Private_Dirty": 556,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684942,
+            "ppid": 684921,
+            "type": "gpu-process",
+            "kib": {
+              "Rss": 128416,
+              "Pss": 45026,
+              "Private_Clean": 48,
+              "Private_Dirty": 18812,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684943,
+            "ppid": 684905,
+            "type": "utility",
+            "kib": {
+              "Rss": 105384,
+              "Pss": 30002,
+              "Private_Clean": 552,
+              "Private_Dirty": 15076,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684948,
+            "ppid": 684922,
+            "type": "utility",
+            "kib": {
+              "Rss": 51452,
+              "Pss": 10153,
+              "Private_Clean": 32,
+              "Private_Dirty": 1960,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 684997,
+            "ppid": 684922,
+            "type": "renderer",
+            "kib": {
+              "Rss": 97540,
+              "Pss": 29024,
+              "Private_Clean": 2096,
+              "Private_Dirty": 7796,
+              "Swap": 0
+            }
+          },
+          {
+            "pid": 686714,
+            "unavailable": true
+          }
+        ],
+        "totalsKiB": {
+          "Rss": 695928,
+          "Pss": 221544,
+          "Private_Clean": 8416,
+          "Private_Dirty": 88904,
+          "Swap": 0
+        }
+      }
+    }
+  ],
+  "sourceBinding": {
+    "enclosureCandidate": "0e7938bad95ac554c40e778f1a222ca29d79a8b5",
+    "poolSource": "63f946c8",
+    "note": "Direct mount measurements; no pool or full desktop exercised."
+  },
+  "assetHashes": {
+    "ociWorker": "fc43d276fffc6e432b351cbba317fa98546c37ce754a4977018f8f24ecebe062",
+    "manifoldWorker": "8f2e6b4092f7a07e27f7e5a58ea084bb9fbe497447e7c6ec55d147336e426804",
+    "ociWasm": "13617eda9a2118edfd1244b5d46523e7d9628a87ec995a0237b2b5cc58d532f2",
+    "manifoldWasm": "7bb5f8ee10fcafdab78799b1e5dd2cdc7c282ea0bf8e7939c43f3ad34b823e3d",
+    "controller": "332ca3dbffd08f4004aa31eb5e49512719bc16f87d8ad8a167ae8a7a757f381c",
+    "plan": "acefd3a51ab3b7b3f90d12bbfa655ead87135320077db9bf1e615778fc463555",
+    "mesh": "2b6f1474105c430f3efe6eb87d002576d6a9744a7b1cc98f5493ed129b2ce5f3"
+  },
+  "postBrowserClose": {
+    "recordedPids": [
+      684905,
+      684921,
+      684922,
+      684942,
+      684943,
+      684948,
+      684997,
+      686714
+    ],
+    "allAbsentFromPs": true,
+    "scope": "only PIDs in final after-context snapshot"
+  }
+}

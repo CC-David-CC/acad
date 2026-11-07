@@ -1,0 +1,10 @@
+{
+  "scope": "Actual PM Workers and exact source project scheduleSave/save/captureModel with genuine2secondtimer; accepted model protocol fixture",
+  "sourceHashes": {
+    "web/app/cad/projectManager/projectManagerBundle.ts": "098bca0ae423c23af19926e49cb5108e085acc677a091c29749ca4229091d769",
+    "web/app/cad/projectBundle.ts": "fec549d13bb59fa5ee5a491ff7baa6b4468e7a37e6a7a1d4d98c0e6647023708",
+    "test/manufacturing-mesh-replay/pure-save/autosave.test.mjs": "ae8f4fa699433db0902ee37f682aca5f2d9b3c25995954bcdd163263050dce3c",
+    "test/manufacturing-mesh-replay/fixture.mjs": "8d74019644f32b8c445bd6bf0982ad6d6b701a403be091c2ea88f27f39882d1f"
+  },
+  "expected": "pure capture no write passes; same-model autosave invalidates globalrevision capture (confirmed failed assertion)"
+}

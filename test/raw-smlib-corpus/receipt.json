@@ -1,0 +1,963 @@
+{
+  "assets": {
+    "rawMount.mjs": "d79a98f714d0e36489ee91ef450b692c3a5f166c3587d7631d347527dce156a8",
+    "raw-smlib-worker.js": "5c17193baaabef79fb4cc6ad4e552e56e36bc9d07fd1b0ebf03ea392eac5f45f",
+    "raw-provider.wasm": "4d35fd5b3a37e500d79388523329d5e61560fcd80cb963b2824533d6cf0f8f21"
+  },
+  "cases": [
+    {
+      "name": "edge",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                10,
+                10,
+                0
+              ],
+              "max": [
+                20,
+                20,
+                10
+              ]
+            }
+          },
+          "meshSha256": "f72051159729a7407af9fe145a011357bf653c77d645bb10ba251a7af3e9845a",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "after": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                10,
+                10,
+                0
+              ],
+              "max": [
+                20,
+                20,
+                10
+              ]
+            }
+          },
+          "meshSha256": "f72051159729a7407af9fe145a011357bf653c77d645bb10ba251a7af3e9845a",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "observed": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": false,
+          "volume": null,
+          "volumeQuality": "native-undefined-nonmanifold",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              20,
+              10
+            ]
+          }
+        },
+        "meshSha256": "895d5c5e765c99e8390e81e669528938e89b18a08def8e475f93b862ba70cc77",
+        "signedVolume": 1999.9999999999998,
+        "triangles": 24,
+        "displayStatus": "available"
+      }
+    },
+    {
+      "name": "point",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                10,
+                10,
+                10
+              ],
+              "max": [
+                20,
+                20,
+                20
+              ]
+            }
+          },
+          "meshSha256": "c209539330cc522fdf939c870965876fe7eae51a4938d33da96aa31c462d2f59",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "after": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                10,
+                10,
+                10
+              ],
+              "max": [
+                20,
+                20,
+                20
+              ]
+            }
+          },
+          "meshSha256": "c209539330cc522fdf939c870965876fe7eae51a4938d33da96aa31c462d2f59",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "observed": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 2000,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              20,
+              20
+            ]
+          }
+        },
+        "meshSha256": "78b4b8a712b5d4e788670b1a0acd14f9da12b3042228f98c1c00f3df64e11256",
+        "signedVolume": 1999.9999999999998,
+        "triangles": 24,
+        "displayStatus": "available"
+      }
+    },
+    {
+      "name": "face",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                10,
+                0,
+                0
+              ],
+              "max": [
+                20,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "0c07f164418920ec6e7f5103fa0de3c1ec9488239533caa89fbaedf5d86535b0",
+          "signedVolume": 1000.0000000000001,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "after": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                10,
+                0,
+                0
+              ],
+              "max": [
+                20,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "0c07f164418920ec6e7f5103fa0de3c1ec9488239533caa89fbaedf5d86535b0",
+          "signedVolume": 1000.0000000000001,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "observed": {
+        "evidence": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 2000,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              20,
+              10,
+              10
+            ]
+          }
+        },
+        "meshSha256": "22aa88996ed5c2d8621800d0dcec6d4121ef88325b0472aacf7d0da03e4fe823",
+        "signedVolume": 1999.9999999999998,
+        "triangles": 12,
+        "displayStatus": "available"
+      }
+    },
+    {
+      "name": "disjoint",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "after": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "observed": {
+        "evidence": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 0,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 2000,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "meshSha256": "5ee73cd27d028c8a5200504eb11feb6319f642c1e2ba60dddbc2740e8245b152",
+        "signedVolume": 1999.9999999999993,
+        "triangles": 24,
+        "displayStatus": "available"
+      }
+    },
+    {
+      "name": "cavity",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "meshSha256": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "after": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 215.99999999999997,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                2,
+                2,
+                2
+              ],
+              "max": [
+                8,
+                8,
+                8
+              ]
+            }
+          },
+          "meshSha256": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+          "signedVolume": 216,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "observed": {
+        "evidence": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          }
+        },
+        "meshSha256": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+        "signedVolume": 784,
+        "triangles": 24,
+        "displayStatus": "available"
+      }
+    },
+    {
+      "name": "empty",
+      "before": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "after": [
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                0,
+                0,
+                0
+              ],
+              "max": [
+                10,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+          "signedVolume": 999.9999999999999,
+          "triangles": 12,
+          "displayStatus": "available"
+        },
+        {
+          "evidence": {
+            "resultKind": "single-material",
+            "materialRegions": 1,
+            "voidRegions": 0,
+            "validLevel0": true,
+            "validLevel2": true,
+            "manifoldPredicate": true,
+            "volume": 1000,
+            "volumeQuality": "native-relative-0.001",
+            "bounds": {
+              "min": [
+                20,
+                0,
+                0
+              ],
+              "max": [
+                30,
+                10,
+                10
+              ]
+            }
+          },
+          "meshSha256": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+          "signedVolume": 1000.0000000000002,
+          "triangles": 12,
+          "displayStatus": "available"
+        }
+      ],
+      "observed": {
+        "evidence": {
+          "resultKind": "empty",
+          "materialRegions": 0,
+          "voidRegions": 0,
+          "validLevel0": true,
+          "validLevel2": null,
+          "manifoldPredicate": null,
+          "volume": 0,
+          "volumeQuality": "empty",
+          "bounds": null
+        },
+        "meshSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "signedVolume": 0,
+        "triangles": 0,
+        "displayStatus": "available"
+      }
+    }
+  ],
+  "sequence": {
+    "one": {
+      "resultKind": "single-material",
+      "materialRegions": 1,
+      "voidRegions": 0,
+      "validLevel0": true,
+      "validLevel2": true,
+      "manifoldPredicate": true,
+      "volume": 960,
+      "volumeQuality": "native-relative-0.001",
+      "bounds": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          10,
+          10,
+          10
+        ]
+      }
+    },
+    "two": {
+      "resultKind": "single-material",
+      "materialRegions": 1,
+      "voidRegions": 0,
+      "validLevel0": true,
+      "validLevel2": true,
+      "manifoldPredicate": true,
+      "volume": 920,
+      "volumeQuality": "native-relative-0.001",
+      "bounds": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          10,
+          10,
+          10
+        ]
+      }
+    },
+    "empty": {
+      "resultKind": "empty",
+      "materialRegions": 0,
+      "voidRegions": 0,
+      "validLevel0": true,
+      "validLevel2": null,
+      "manifoldPredicate": null,
+      "volume": 0,
+      "volumeQuality": "empty",
+      "bounds": null
+    },
+    "restored": {
+      "resultKind": "single-material",
+      "materialRegions": 1,
+      "voidRegions": 0,
+      "validLevel0": true,
+      "validLevel2": true,
+      "manifoldPredicate": true,
+      "volume": 1000,
+      "volumeQuality": "native-relative-0.001",
+      "bounds": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          10,
+          10,
+          10
+        ]
+      }
+    },
+    "signedVolume": 920,
+    "triangles": 52,
+    "displayStatus": "available"
+  },
+  "violations": []
+}

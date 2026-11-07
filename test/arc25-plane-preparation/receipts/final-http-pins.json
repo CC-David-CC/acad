@@ -1,0 +1,30 @@
+[
+  {
+    "label": "baseline",
+    "base": "http://127.0.0.1:20600/",
+    "headers": {
+      "Server": "SimpleHTTP/0.6 Python/3.12.3",
+      "Date": "Fri, 06 Nov 2026 04:07:27 GMT",
+      "Content-type": "text/html",
+      "Content-Length": "737",
+      "Last-Modified": "Thu, 05 Nov 2026 20:54:53 GMT",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'"
+    },
+    "appBytes": 32759039,
+    "appSha256": "fa1ba70a9c6a38744706e7f5557d794b743ca8288b1ed034f9f34e40d679132e"
+  },
+  {
+    "label": "candidate",
+    "base": "http://127.0.0.1:20506/",
+    "headers": {
+      "Server": "SimpleHTTP/0.6 Python/3.12.3",
+      "Date": "Fri, 06 Nov 2026 04:07:27 GMT",
+      "Content-type": "text/html",
+      "Content-Length": "737",
+      "Last-Modified": "Thu, 05 Nov 2026 20:54:53 GMT",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'"
+    },
+    "appBytes": 32761800,
+    "appSha256": "deb6bc2ea87a66a6e79d70542aec6b71d68c987d7c76fcf7ace48ec1b6a4c64e"
+  }
+]

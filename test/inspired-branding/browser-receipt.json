@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "source": "e5f603b609fe2b9948c4fa03181a706f4a9ee759",
+  "url": "http://127.0.0.1:20689/",
+  "appSHA256": "d78d53333222222404fcd030d187b655a24132f750a429b0fa55cbd9b8c1b319",
+  "htmlSHA256": "fd42181f1f5e0630d06bacc5362a404f927c179cbed3b1eea8aa1e752da59e80",
+  "actual": {
+    "title": "CAD Modeler (JSketcher inspired)",
+    "toolbar": [
+      "menu.file",
+      "menu.edit",
+      "menu.craft",
+      "menu.boolean",
+      "menu.primitives",
+      "menu.views",
+      "menu.viewModes",
+      "menu.debug"
+    ],
+    "removed": [
+      {
+        "id": "Donate",
+        "dom": 0,
+        "registered": false
+      },
+      {
+        "id": "GitHub",
+        "dom": 0,
+        "registered": false
+      }
+    ],
+    "visibleMenus": [
+      "menu.workbenches",
+      "menu.file",
+      "menu.edit",
+      "menu.craft",
+      "menu.boolean",
+      "menu.primitives",
+      "menu.views",
+      "menu.viewModes",
+      "menu.debug"
+    ],
+    "canvases": 2
+  },
+  "scope": "Actual normal-app title, rendered footer menus and absent remote action registrations; no CAD geometry qualification repeated"
+}

@@ -1,0 +1,7 @@
+The first actual test-only Worker run stopped while building the partial-conflict fixture:
+
+Fixture partial: {"inputUnchanged":true,"testHarnessError":"constraint schema SignedY doesn't exist"}
+
+The fixture used the UI label SignedY instead of the actual registered native schema SignedDistanceY. Correcting that fixture identifier changes no production code or success/refusal expectation. This was a fixture-construction error, not a Concentric solver verdict. No completed-run claim is made for that attempt.
+
+The next attempt used the correct schema but supplied annotations:[] even though SignedDistanceY owns one dimension annotation. Real IO then reported "Cannot read properties of undefined (reading 'offset')" while constructing the fixture. Omitting that fixture annotation field allows the real native constructor/writer to produce its normal default annotation instead. No product IO or constraint schema was changed. The eventual command inputs come from that real native writer, not hand-edited admission hints.

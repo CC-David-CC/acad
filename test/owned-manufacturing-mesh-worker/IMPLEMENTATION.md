@@ -1,0 +1,42 @@
+# Implemented component and qualification
+
+Source chain: `658f41ce` froze the proposed contract/BEFORE controls; `76ff7b623414186a389b9ab59d5ff02365a10511` implemented the explicit component; `e0b6e2b2a0aa6739a8df0f01126a9e44c838d6aa` added intrinsic standalone ArrayBuffer admission; `ebdb82713` validates primitives before serialization/error classification. No catalog, defaults, common SolidKernel types, ledger, Craft, public command/UI or normal-build asset availability was changed. All six retained OCI bootstrap pin consumers changed together. Bootstrap SHA is `842745cff2be8670a3a3d9ddd54583093e2a5e4282396ba0cfd02a1f9252a018`.
+
+Final frozen component: R730 `/mnt/data10tb/codi-manufacturing-mesh-component-20261107-r3/component.json`, SHA `f1781aeaddd3cdb2b23b7d8b64066b1170162224e2c539792fd1962cc821302b`, 42 declared files /37,060,178 B. Native portableJS `32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08` and WASM `abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc` are unchanged from native qualification `c15e49df`. Runtime binaries stay outside Git. R1/R2 artifacts and receipts remain unchanged.
+
+The runtime constructor, nine-field request, one pending read/begun marker, one Native lease, ≤64KiB chunks, ≤8MiB standalone buffer and ≤2KiB metadata follow `CONTRACT.md`. Main captures only small data/buffer lengths; decoding, finite/index/edge/link validation and all scalar geometry traversal occur in Worker. The mesh is not a saved feature or separate design document. Source/shape/build binding remains private; app source membership/accepted-model transaction protection is not established by this component.
+
+## Actual final results
+
+- `evidence-r3/receipt.json`: production embedded Worker/strict-CSP Chromium, all42 served asset sizes/hashes verified. Fourteen genuine meshes, six refusals, five inherited operations, two held-genuine-positive cancellation controls PASS.
+- Independent unchanged Python oracles:14 meshes /93 material-void points PASS. Native plate/circle/annulus/cavity/Boolean geometry, original opaque source-ID-selected fillet/chamfer edges and32holes all came from actual shared mount operations. Fixture source IDs are component labels, not public authored-source membership.
+- Ordinary artifact cap refusal leaves topology/metrics unchanged; same realm continues with actual geometry/export/projection. A separate same-source continuation packet strengthens that observation. Empty/multi-solid containers remain explicitly refused by manufacturing while generic Boolean behavior stays intact. Valid cavities with multiple closed boundary components are admitted.
+- Inherited new-cohort STEP, HLR, circle loft, straight sweep, toroidal revolve and actual point read PASS. Five real old-native cohorts (legacy, selected, loft, adaptive, STEP) load through the new bootstrap with exact old pairs, unchanged descriptors and no manufacturing flag/dispatch (`retained-proof-r3.json`). No old part silently acquires a capability or changes revision.
+- `fault-proof-r4.json`: six labeled Native-backed controls PASS: duplicate genuine begun marker, wrong token/count in genuine result, injected primary throw after real Native read, falsey throw after real Native release, and primary+cleanup precedence. Hooked cases wrap the actual production service and original Native methods, execute real Native calls, then throw. No successful Native receipt or geometry is fabricated. Those hooks are test-only extra files, outside the42-file production graph. Actual release receipts show activeCount0, and the source still has one owned Native name before the deliberate realm close. The combined fault preserves the original primary message while cleanup failure takes precedence. Normal production geometry results remain separately qualified by the unhooked run.
+- Source tests44 groups PASS:12 new protocol/real Node Worker codec groups plus32 BEFORE/retained controls. Four ordinary actual stager controls PASS: wrong JS/WASM/bootstrap refuse before staging; existing output stays byte-exact. No filesystem race/security/account test was performed.
+
+## Retained failures and corrections
+
+`evidence-before-shared-buffer` proves the old decoder accepted a SharedArrayBuffer containing genuine recorded native box bytes. Actual Native read allocated ordinary ArrayBuffer, so this is a component contract gap, not a demonstrated app defect. The intrinsic guard now rejects SAB/detached input at both decoder and main capture.
+
+`evidence-before-scalar-validation` proves a thrown-cause code getter and a scalar toJSON were observed during malformed protocol admission. Capture was rearranged so shape/schema exceptions are wrapped without reading their properties and scalar validation precedes serialization. These pure mutation fixtures are not Native/app incidents. Twelve protocol groups pass after both fixes.
+
+`evidence-fault-fixture-first` retains the fault harness's first failure: placing its wrapper at the server root changed self.location-relative module imports and failed to fetch exactMeshVolume.mjs before its Native test. Moving the test wrapper beside the actual Worker fixes that prerequisite; production module bytes did not change.
+
+`evidence-fault-release-assumption` retains a second harness failure: it expected a second release for primary+cleanup failure. Actual trace correctly had one real successful release reached only through finally. The corrected assertion requires one release in that branch, two only for release-only failure (explicit release throws after completion, then finally attempts idempotent cleanup). Native source/result/volume/cap/cancellation expectations were unchanged.
+
+## Preservation and limits
+
+Worker read compares source token/name, Native name count, next-name counter, cumulative result triangle accounting and name argument bytes around the call. Current controller handle and frozen evidence record must agree before/after the reply. Exact BRep/location/tolerance/attached-mesh preservation is performed by the same qualified Native helper; its source bytes and WASM are unchanged. Artifact triangles do not create or consume named geometry results. This is not a private legacy-pointer adoption path.
+
+Cancellation/timeout/integrity failure terminates the owning Worker realm. The two genuine held-read controls demonstrate rejection and termination; they intentionally destroy that realm and do NOT prove an accepted model remains usable afterward. A future shared export must use the existing candidate-owner transaction to protect accepted state. Explicit Native Release is not claimed after termination. Ordinary success/failure paths in a live realm release in finally, and cleanup failure closes conservatively.
+
+Decoder manifold checks are combinatorial; there is no universal geometric self-intersection, shell nesting, material/paired-interface or global achieved-surface-error certificate. Native0.01mm/.1rad are actual requested controls, with measured edge-parameter discrepancy. Independent fixture chord/sag/volume approximation tolerances remain distinct from BRep1e-6 tolerances. Native mesher work/peak allocation can precede final count checks; no hard peak-memory/time claim follows from caps.
+
+Generic material assignment, multi-region consistent interfaces, 3MF encoding/readback, Save/Open and normal signed public application workflows remain separate unqualified integration tasks. Existing display tessellation is still display-only. No deployment or shared browser/service was changed.
+
+## Reproduction and W02 input
+
+Use `node --test test/owned-manufacturing-mesh-worker/protocol.test.mjs` for exact small protocol and real Node Worker decoder controls over genuine recorded native buffers. `browser.cjs BASE FRESH_OUTPUT` runs the unhooked production corpus and writes immutable output receipts; use `serve.py COMPONENT FRESH_ARTIFACT_OUTPUT PORT` on owned loopback only. Fault and retained drivers are separately labeled; no runtime binaries are in Git. `check-evidence.py` rechecks portable pins, output sets and analytic math.
+
+W02 state input remains one pending sequence/deadline with derived begun phase, then released/decoded/once-transferred. No parallel public job or duplicated document state exists. Missing/duplicate/unsolicited progress, malformed output, Native INPUT_CHANGED, cleanup failure and cancellation end the realm. Ordinary typed resource/domain refusal preserves the source and permits continuation while that realm is live.

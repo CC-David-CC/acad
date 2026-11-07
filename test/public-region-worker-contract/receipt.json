@@ -1,0 +1,2644 @@
+{
+  "format": "codi-public-region-worker-counterexample/1",
+  "sourceBase": "6170a501616ea711df242d7c86331cfe53ff864a",
+  "scope": "Actual public authoring/discovery/feature request; passive model/source oracles. No source seeds, private operation dispatch, builds, signed Files or native suite reruns.",
+  "result": "PASS",
+  "rows": [
+    {
+      "name": "one-rectangle-positive",
+      "mode": "extrude",
+      "faceId": "S:0/SURFACE",
+      "inputs": [
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 0
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 10,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 10
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 10,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 10
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "completed": 4,
+      "authoringError": null,
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "nativeObjects": [
+        {
+          "id": "agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 10,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 10,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "primitiveProjection": [
+        {
+          "id": "S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 10,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 10,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "regions": [
+        {
+          "id": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\",\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\",\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\",\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\"],\"holes\":[]}",
+          "descriptor": {
+            "faceId": "S:0/SURFACE",
+            "outer": [
+              "S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1",
+              "S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb",
+              "S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844",
+              "S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80"
+            ],
+            "holes": []
+          }
+        }
+      ],
+      "regionError": null,
+      "advertised": {
+        "ready": true,
+        "reason": null,
+        "revision": "bfac900b-e07b-49a4-8207-e3d5da76aafd",
+        "unit": "millimeter",
+        "engine": "occ",
+        "capabilities": {
+          "extrusion": true,
+          "centeredHole": true,
+          "fourCornerHoles": true,
+          "enclosureV1": true,
+          "enclosureV2": true
+        },
+        "extrusionCandidates": [
+          {
+            "faceId": "S:0/SURFACE",
+            "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\",\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\",\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\",\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\"],\"holes\":[]}"
+          }
+        ],
+        "centeredHoleCandidates": [],
+        "fourCornerCandidates": [],
+        "enclosureVersions": [
+          {
+            "version": 1,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth"
+            ]
+          },
+          {
+            "version": 2,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID",
+              "LABEL"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth",
+              "labelWidth",
+              "labelLength",
+              "labelDepth"
+            ]
+          }
+        ],
+        "note": "Registered OCC worker operations; assets and candidate geometry are verified when run."
+      },
+      "advertisedForFace": [
+        {
+          "faceId": "S:0/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\",\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\",\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\",\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\"],\"holes\":[]}"
+        }
+      ],
+      "request": {
+        "revision": "bfac900b-e07b-49a4-8207-e3d5da76aafd",
+        "faceId": "S:0/SURFACE",
+        "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\",\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\",\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\",\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\"],\"holes\":[]}",
+        "depth": 5
+      },
+      "before": {
+        "native": {
+          "format": "codi-jsketcher-project",
+          "version": 2,
+          "unit": "millimeter",
+          "project": {
+            "model": {
+              "history": [
+                {
+                  "params": {
+                    "datum": null,
+                    "depth": 0,
+                    "featureId": "1",
+                    "orientation": "XY"
+                  },
+                  "type": "PLANE"
+                }
+              ],
+              "expressions": "",
+              "assembly": [],
+              "counters": {
+                "featureId": 1
+              }
+            },
+            "sketches": [
+              {
+                "id": "S:0/SURFACE",
+                "data": {
+                  "version": 3,
+                  "objects": [
+                    {
+                      "id": "agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 0,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 10,
+                          "y": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 10,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 10,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 10,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 0,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 0,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 0,
+                          "y": 0
+                        }
+                      }
+                    }
+                  ],
+                  "dimensions": [],
+                  "labels": [],
+                  "stages": [
+                    {
+                      "constraints": [],
+                      "generators": []
+                    }
+                  ],
+                  "constants": "",
+                  "metadata": {
+                    "boundaryFrame": {
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "x": [
+                        1,
+                        0,
+                        0
+                      ],
+                      "y": [
+                        0,
+                        1,
+                        0
+                      ],
+                      "z": [
+                        0,
+                        0,
+                        1
+                      ]
+                    }
+                  },
+                  "boundary": {
+                    "lines": [],
+                    "arcs": [],
+                    "circles": [],
+                    "nurbses": []
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "history": {
+          "history": [
+            {
+              "params": {
+                "datum": null,
+                "depth": 0,
+                "featureId": "1",
+                "orientation": "XY"
+              },
+              "type": "PLANE"
+            }
+          ],
+          "pointer": 0
+        },
+        "modelIds": [
+          "S:0"
+        ],
+        "registryIds": [
+          "S:0",
+          "S:0/SURFACE",
+          "S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80",
+          "S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb",
+          "S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1",
+          "S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844",
+          "S:0/SURFACE/L:0",
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\",\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\",\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\",\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\"],\"holes\":[]}"
+        ],
+        "sourceVersion": 5,
+        "resources": {
+          "owners": 1,
+          "mounts": 0,
+          "candidates": 0,
+          "accepted": 0,
+          "detached": 1,
+          "cleanupFailed": false
+        }
+      },
+      "featureReceipt": {
+        "featureId": 2,
+        "bodyId": "worker-prism:1:[\"2\",\"body\"]",
+        "lidFaceId": "worker-prism:1:[\"2\",\"face\",\"LID\",{\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\\\",\\\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\\\",\\\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\\\",\\\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\\\"],\\\"holes\\\":[]}\"}]",
+        "unit": "millimeter",
+        "persistence": "volatile-workspace",
+        "revision": "c9098027-da85-47ec-9c7d-d49b967747c4"
+      },
+      "commandError": null,
+      "after": {
+        "native": {
+          "format": "codi-jsketcher-project",
+          "version": 2,
+          "unit": "millimeter",
+          "project": {
+            "model": {
+              "history": [
+                {
+                  "params": {
+                    "datum": null,
+                    "depth": 0,
+                    "featureId": "1",
+                    "orientation": "XY"
+                  },
+                  "type": "PLANE"
+                },
+                {
+                  "type": "WORKER_RECTANGLE_EXTRUDE_V1",
+                  "params": {
+                    "featureId": 2,
+                    "face": "S:0/SURFACE",
+                    "regions": [
+                      "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\",\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\",\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\",\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\"],\"holes\":[]}"
+                    ],
+                    "length": 5
+                  }
+                }
+              ],
+              "expressions": "",
+              "assembly": [],
+              "counters": {
+                "featureId": 2
+              }
+            },
+            "sketches": [
+              {
+                "id": "S:0/SURFACE",
+                "data": {
+                  "version": 3,
+                  "objects": [
+                    {
+                      "id": "agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 0,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 10,
+                          "y": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 10,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 10,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 10,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 0,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 0,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 0,
+                          "y": 0
+                        }
+                      }
+                    }
+                  ],
+                  "dimensions": [],
+                  "labels": [],
+                  "stages": [
+                    {
+                      "constraints": [],
+                      "generators": []
+                    }
+                  ],
+                  "constants": "",
+                  "metadata": {
+                    "boundaryFrame": {
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "x": [
+                        1,
+                        0,
+                        0
+                      ],
+                      "y": [
+                        0,
+                        1,
+                        0
+                      ],
+                      "z": [
+                        0,
+                        0,
+                        1
+                      ]
+                    }
+                  },
+                  "boundary": {
+                    "lines": [],
+                    "arcs": [],
+                    "circles": [],
+                    "nurbses": []
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "history": {
+          "history": [
+            {
+              "params": {
+                "datum": null,
+                "depth": 0,
+                "featureId": "1",
+                "orientation": "XY"
+              },
+              "type": "PLANE"
+            },
+            {
+              "type": "WORKER_RECTANGLE_EXTRUDE_V1",
+              "params": {
+                "featureId": 2,
+                "face": "S:0/SURFACE",
+                "regions": [
+                  "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\",\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\",\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\",\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\"],\"holes\":[]}"
+                ],
+                "length": 5
+              }
+            }
+          ],
+          "pointer": 1
+        },
+        "modelIds": [
+          "worker-prism:1:[\"2\",\"body\"]"
+        ],
+        "registryIds": [
+          "worker-prism:1:[\"2\",\"body\"]",
+          "worker-prism:1:[\"2\",\"face\",\"SWEEP\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\"}]",
+          "worker-prism:1:[\"2\",\"face\",\"SWEEP\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\"}]",
+          "worker-prism:1:[\"2\",\"face\",\"SWEEP\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\"}]",
+          "worker-prism:1:[\"2\",\"face\",\"SWEEP\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\"}]",
+          "worker-prism:1:[\"2\",\"face\",\"BASE\",{\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\\\",\\\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\\\",\\\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\\\",\\\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\\\"],\\\"holes\\\":[]}\"}]",
+          "worker-prism:1:[\"2\",\"face\",\"LID\",{\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\\\",\\\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\\\",\\\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\\\",\\\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\\\"],\\\"holes\\\":[]}\"}]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"edge:0\"]",
+          "worker-prism:1:[\"2\",\"edge\",\"BASE\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\"}]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"edge:2\"]",
+          "worker-prism:1:[\"2\",\"edge\",\"LID\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\"}]",
+          "worker-prism:1:[\"2\",\"edge\",\"BASE\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\"}]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"edge:5\"]",
+          "worker-prism:1:[\"2\",\"edge\",\"LID\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\"}]",
+          "worker-prism:1:[\"2\",\"edge\",\"BASE\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\"}]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"edge:8\"]",
+          "worker-prism:1:[\"2\",\"edge\",\"LID\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\"}]",
+          "worker-prism:1:[\"2\",\"edge\",\"BASE\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\"}]",
+          "worker-prism:1:[\"2\",\"edge\",\"LID\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\"}]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"vertex:1\"]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"vertex:0\"]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"vertex:2\"]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"vertex:3\"]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"vertex:4\"]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"vertex:5\"]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"vertex:6\"]",
+          "worker-prism:1:[\"transient\",\"a9601d44-ee0c-4679-a43f-29a75a27eeb2\",\"vertex:7\"]"
+        ],
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "sourceVersion": 5,
+        "resources": {
+          "owners": 1,
+          "mounts": 0,
+          "candidates": 0,
+          "accepted": 0,
+          "detached": 1,
+          "cleanupFailed": false
+        },
+        "pipelineFailure": null
+      },
+      "preservation": {
+        "sourceExact": true,
+        "sourceVersionExact": true,
+        "historyExact": false,
+        "historyObjectExact": false,
+        "modelsArrayExact": false,
+        "modelsObjectExact": false,
+        "registryMapExact": false,
+        "registryEntriesExact": false
+      },
+      "published": {
+        "revision": "c9098027-da85-47ec-9c7d-d49b967747c4",
+        "unit": "millimeter",
+        "scope": "published-worker-plates",
+        "bodies": [
+          {
+            "bodyId": "worker-prism:1:[\"2\",\"body\"]",
+            "representation": "worker-owned-occ-prism",
+            "bounds": [
+              [
+                0,
+                10
+              ],
+              [
+                0,
+                10
+              ],
+              [
+                0,
+                5
+              ]
+            ],
+            "faces": [
+              {
+                "id": "worker-prism:1:[\"2\",\"face\",\"SWEEP\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\"}]",
+                "role": "SWEEP"
+              },
+              {
+                "id": "worker-prism:1:[\"2\",\"face\",\"SWEEP\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\"}]",
+                "role": "SWEEP"
+              },
+              {
+                "id": "worker-prism:1:[\"2\",\"face\",\"SWEEP\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\"}]",
+                "role": "SWEEP"
+              },
+              {
+                "id": "worker-prism:1:[\"2\",\"face\",\"SWEEP\",{\"segmentId\":\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\"}]",
+                "role": "SWEEP"
+              },
+              {
+                "id": "worker-prism:1:[\"2\",\"face\",\"BASE\",{\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\\\",\\\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\\\",\\\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\\\",\\\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\\\"],\\\"holes\\\":[]}\"}]",
+                "role": "BASE"
+              },
+              {
+                "id": "worker-prism:1:[\"2\",\"face\",\"LID\",{\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/agent-primitive-2f9f94a5-6da7-4215-9171-4d9464958fd1\\\",\\\"S:0/SURFACE/agent-primitive-44db5898-2bc7-4331-a81d-7b74f534e9fb\\\",\\\"S:0/SURFACE/agent-primitive-874f11fb-8b10-4cce-8fc4-76a7fb773844\\\",\\\"S:0/SURFACE/agent-primitive-a8d971b5-153c-4770-b3fa-73654a035f80\\\"],\\\"holes\\\":[]}\"}]",
+                "role": "LID"
+              }
+            ],
+            "holes": []
+          }
+        ],
+        "omittedBodies": 0
+      },
+      "afterHostAbortResources": {
+        "owners": 0,
+        "mounts": 0,
+        "candidates": 0,
+        "accepted": 0,
+        "detached": 0,
+        "cleanupFailed": false
+      }
+    },
+    {
+      "name": "disjoint-advertised-then-refused",
+      "mode": "extrude",
+      "faceId": "S:0/SURFACE",
+      "inputs": [
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 0
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 10,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 10
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 10,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 10
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 20,
+              "y": 0
+            },
+            "b": {
+              "x": 30,
+              "y": 0
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 30,
+              "y": 0
+            },
+            "b": {
+              "x": 30,
+              "y": 10
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 30,
+              "y": 10
+            },
+            "b": {
+              "x": 20,
+              "y": 10
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 20,
+              "y": 10
+            },
+            "b": {
+              "x": 20,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "completed": 8,
+      "authoringError": null,
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":0},\"b\":{\"x\":30,\"y\":0}}},{\"id\":\"agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":30,\"y\":0},\"b\":{\"x\":30,\"y\":10}}},{\"id\":\"agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":30,\"y\":10},\"b\":{\"x\":20,\"y\":10}}},{\"id\":\"agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":10},\"b\":{\"x\":20,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "nativeObjects": [
+        {
+          "id": "agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 10,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 10,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 20,
+              "y": 0
+            },
+            "b": {
+              "x": 30,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 30,
+              "y": 0
+            },
+            "b": {
+              "x": 30,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 30,
+              "y": 10
+            },
+            "b": {
+              "x": 20,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 20,
+              "y": 10
+            },
+            "b": {
+              "x": 20,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "primitiveProjection": [
+        {
+          "id": "S:0/SURFACE/agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 10,
+              "y": 0
+            },
+            "b": {
+              "x": 10,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 10,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0,
+              "y": 10
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 20,
+              "y": 0
+            },
+            "b": {
+              "x": 30,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 30,
+              "y": 0
+            },
+            "b": {
+              "x": 30,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 30,
+              "y": 10
+            },
+            "b": {
+              "x": 20,
+              "y": 10
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 20,
+              "y": 10
+            },
+            "b": {
+              "x": 20,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "regions": [
+        {
+          "id": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e\",\"S:0/SURFACE/agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c\",\"S:0/SURFACE/agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c\",\"S:0/SURFACE/agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7\"],\"holes\":[]}",
+          "descriptor": {
+            "faceId": "S:0/SURFACE",
+            "outer": [
+              "S:0/SURFACE/agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e",
+              "S:0/SURFACE/agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c",
+              "S:0/SURFACE/agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c",
+              "S:0/SURFACE/agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7"
+            ],
+            "holes": []
+          }
+        },
+        {
+          "id": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6\",\"S:0/SURFACE/agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a\",\"S:0/SURFACE/agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d\",\"S:0/SURFACE/agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9\"],\"holes\":[]}",
+          "descriptor": {
+            "faceId": "S:0/SURFACE",
+            "outer": [
+              "S:0/SURFACE/agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6",
+              "S:0/SURFACE/agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a",
+              "S:0/SURFACE/agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d",
+              "S:0/SURFACE/agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9"
+            ],
+            "holes": []
+          }
+        }
+      ],
+      "regionError": null,
+      "advertised": {
+        "ready": true,
+        "reason": null,
+        "revision": "b385b0d8-73e5-4514-a04c-138b35782b18",
+        "unit": "millimeter",
+        "engine": "occ",
+        "capabilities": {
+          "extrusion": true,
+          "centeredHole": true,
+          "fourCornerHoles": true,
+          "enclosureV1": true,
+          "enclosureV2": true
+        },
+        "extrusionCandidates": [
+          {
+            "faceId": "S:0/SURFACE",
+            "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e\",\"S:0/SURFACE/agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c\",\"S:0/SURFACE/agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c\",\"S:0/SURFACE/agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7\"],\"holes\":[]}"
+          },
+          {
+            "faceId": "S:0/SURFACE",
+            "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6\",\"S:0/SURFACE/agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a\",\"S:0/SURFACE/agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d\",\"S:0/SURFACE/agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9\"],\"holes\":[]}"
+          }
+        ],
+        "centeredHoleCandidates": [],
+        "fourCornerCandidates": [],
+        "enclosureVersions": [
+          {
+            "version": 1,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth"
+            ]
+          },
+          {
+            "version": 2,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID",
+              "LABEL"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth",
+              "labelWidth",
+              "labelLength",
+              "labelDepth"
+            ]
+          }
+        ],
+        "note": "Registered OCC worker operations; assets and candidate geometry are verified when run."
+      },
+      "advertisedForFace": [
+        {
+          "faceId": "S:0/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e\",\"S:0/SURFACE/agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c\",\"S:0/SURFACE/agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c\",\"S:0/SURFACE/agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7\"],\"holes\":[]}"
+        },
+        {
+          "faceId": "S:0/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6\",\"S:0/SURFACE/agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a\",\"S:0/SURFACE/agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d\",\"S:0/SURFACE/agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9\"],\"holes\":[]}"
+        }
+      ],
+      "request": {
+        "revision": "b385b0d8-73e5-4514-a04c-138b35782b18",
+        "faceId": "S:0/SURFACE",
+        "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e\",\"S:0/SURFACE/agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c\",\"S:0/SURFACE/agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c\",\"S:0/SURFACE/agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7\"],\"holes\":[]}",
+        "depth": 5
+      },
+      "before": {
+        "native": {
+          "format": "codi-jsketcher-project",
+          "version": 2,
+          "unit": "millimeter",
+          "project": {
+            "model": {
+              "history": [
+                {
+                  "params": {
+                    "datum": null,
+                    "depth": 0,
+                    "featureId": "1",
+                    "orientation": "XY"
+                  },
+                  "type": "PLANE"
+                }
+              ],
+              "expressions": "",
+              "assembly": [],
+              "counters": {
+                "featureId": 1
+              }
+            },
+            "sketches": [
+              {
+                "id": "S:0/SURFACE",
+                "data": {
+                  "version": 3,
+                  "objects": [
+                    {
+                      "id": "agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 0,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 10,
+                          "y": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 10,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 10,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 10,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 0,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 0,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 0,
+                          "y": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 20,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 30,
+                          "y": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 30,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 30,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 30,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 20,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 20,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 20,
+                          "y": 0
+                        }
+                      }
+                    }
+                  ],
+                  "dimensions": [],
+                  "labels": [],
+                  "stages": [
+                    {
+                      "constraints": [],
+                      "generators": []
+                    }
+                  ],
+                  "constants": "",
+                  "metadata": {
+                    "boundaryFrame": {
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "x": [
+                        1,
+                        0,
+                        0
+                      ],
+                      "y": [
+                        0,
+                        1,
+                        0
+                      ],
+                      "z": [
+                        0,
+                        0,
+                        1
+                      ]
+                    }
+                  },
+                  "boundary": {
+                    "lines": [],
+                    "arcs": [],
+                    "circles": [],
+                    "nurbses": []
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "history": {
+          "history": [
+            {
+              "params": {
+                "datum": null,
+                "depth": 0,
+                "featureId": "1",
+                "orientation": "XY"
+              },
+              "type": "PLANE"
+            }
+          ],
+          "pointer": 0
+        },
+        "modelIds": [
+          "S:0"
+        ],
+        "registryIds": [
+          "S:0",
+          "S:0/SURFACE",
+          "S:0/SURFACE/agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e",
+          "S:0/SURFACE/agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c",
+          "S:0/SURFACE/agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c",
+          "S:0/SURFACE/agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7",
+          "S:0/SURFACE/agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9",
+          "S:0/SURFACE/agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a",
+          "S:0/SURFACE/agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6",
+          "S:0/SURFACE/agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d",
+          "S:0/SURFACE/L:0",
+          "S:0/SURFACE/L:1",
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e\",\"S:0/SURFACE/agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c\",\"S:0/SURFACE/agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c\",\"S:0/SURFACE/agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7\"],\"holes\":[]}",
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6\",\"S:0/SURFACE/agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a\",\"S:0/SURFACE/agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d\",\"S:0/SURFACE/agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9\"],\"holes\":[]}"
+        ],
+        "sourceVersion": 9,
+        "resources": {
+          "owners": 1,
+          "mounts": 0,
+          "candidates": 0,
+          "accepted": 0,
+          "detached": 1,
+          "cleanupFailed": false
+        }
+      },
+      "commandError": {
+        "name": "Error",
+        "code": "UNSUPPORTED_PROFILE",
+        "message": "Prism semantic validation failed: Four ordinary rectangle edges and optional reference geometry are required.",
+        "committed": false
+      },
+      "after": {
+        "native": {
+          "format": "codi-jsketcher-project",
+          "version": 2,
+          "unit": "millimeter",
+          "project": {
+            "model": {
+              "history": [
+                {
+                  "params": {
+                    "datum": null,
+                    "depth": 0,
+                    "featureId": "1",
+                    "orientation": "XY"
+                  },
+                  "type": "PLANE"
+                }
+              ],
+              "expressions": "",
+              "assembly": [],
+              "counters": {
+                "featureId": 2
+              }
+            },
+            "sketches": [
+              {
+                "id": "S:0/SURFACE",
+                "data": {
+                  "version": 3,
+                  "objects": [
+                    {
+                      "id": "agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 0,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 10,
+                          "y": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 10,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 10,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 10,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 0,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 0,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 0,
+                          "y": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 20,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 30,
+                          "y": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 30,
+                          "y": 0
+                        },
+                        "b": {
+                          "x": 30,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 30,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 20,
+                          "y": 10
+                        }
+                      }
+                    },
+                    {
+                      "id": "agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d",
+                      "type": "Segment",
+                      "role": null,
+                      "stage": 0,
+                      "data": {
+                        "a": {
+                          "x": 20,
+                          "y": 10
+                        },
+                        "b": {
+                          "x": 20,
+                          "y": 0
+                        }
+                      }
+                    }
+                  ],
+                  "dimensions": [],
+                  "labels": [],
+                  "stages": [
+                    {
+                      "constraints": [],
+                      "generators": []
+                    }
+                  ],
+                  "constants": "",
+                  "metadata": {
+                    "boundaryFrame": {
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "x": [
+                        1,
+                        0,
+                        0
+                      ],
+                      "y": [
+                        0,
+                        1,
+                        0
+                      ],
+                      "z": [
+                        0,
+                        0,
+                        1
+                      ]
+                    }
+                  },
+                  "boundary": {
+                    "lines": [],
+                    "arcs": [],
+                    "circles": [],
+                    "nurbses": []
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "history": {
+          "history": [
+            {
+              "params": {
+                "datum": null,
+                "depth": 0,
+                "featureId": "1",
+                "orientation": "XY"
+              },
+              "type": "PLANE"
+            }
+          ],
+          "pointer": 0
+        },
+        "modelIds": [
+          "S:0"
+        ],
+        "registryIds": [
+          "S:0",
+          "S:0/SURFACE",
+          "S:0/SURFACE/agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e",
+          "S:0/SURFACE/agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c",
+          "S:0/SURFACE/agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c",
+          "S:0/SURFACE/agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7",
+          "S:0/SURFACE/agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9",
+          "S:0/SURFACE/agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a",
+          "S:0/SURFACE/agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6",
+          "S:0/SURFACE/agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d",
+          "S:0/SURFACE/L:0",
+          "S:0/SURFACE/L:1",
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e\",\"S:0/SURFACE/agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c\",\"S:0/SURFACE/agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c\",\"S:0/SURFACE/agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7\"],\"holes\":[]}",
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6\",\"S:0/SURFACE/agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a\",\"S:0/SURFACE/agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d\",\"S:0/SURFACE/agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9\"],\"holes\":[]}"
+        ],
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-5318f752-9c0c-40cb-ae74-0820b71c236e\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-de7d067c-5a66-4c6c-9b04-96c1af9b9a3c\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-97a0ffc0-352b-4067-9f66-64ab37bda26c\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":0,\"y\":10}}},{\"id\":\"agent-primitive-e77cc3c1-a0b4-4f58-b7e7-576251753aa7\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":10},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"agent-primitive-f26c5481-8c10-4151-98a7-84ba9354eac9\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":0},\"b\":{\"x\":30,\"y\":0}}},{\"id\":\"agent-primitive-0b2ff331-7b55-44cc-a56f-1ce8c4fd3b7a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":30,\"y\":0},\"b\":{\"x\":30,\"y\":10}}},{\"id\":\"agent-primitive-0a38e3d4-2be9-4e23-b857-bbefeca911c6\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":30,\"y\":10},\"b\":{\"x\":20,\"y\":10}}},{\"id\":\"agent-primitive-8095e541-caaf-4099-b863-31bc91e2979d\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":10},\"b\":{\"x\":20,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "sourceVersion": 9,
+        "resources": {
+          "owners": 1,
+          "mounts": 0,
+          "candidates": 0,
+          "accepted": 0,
+          "detached": 1,
+          "cleanupFailed": false
+        },
+        "pipelineFailure": null
+      },
+      "preservation": {
+        "sourceExact": true,
+        "sourceVersionExact": true,
+        "historyExact": true,
+        "historyObjectExact": true,
+        "modelsArrayExact": true,
+        "modelsObjectExact": true,
+        "registryMapExact": true,
+        "registryEntriesExact": true
+      },
+      "afterHostAbortResources": {
+        "owners": 0,
+        "mounts": 0,
+        "candidates": 0,
+        "accepted": 0,
+        "detached": 0,
+        "cleanupFailed": false
+      },
+      "refusalStage": "Semantic Worker profile preflight after public discovery/admission and feature-ID allocation; before native OCC mount allocation or publication.",
+      "allocator": {
+        "before": 1,
+        "after": 2,
+        "policy": "One attempted feature ID is permanently skipped; this is the only native-envelope exception."
+      }
+    },
+    {
+      "name": "circle-region-not-advertised",
+      "mode": "inspect",
+      "faceId": "S:0/SURFACE",
+      "inputs": [
+        {
+          "kind": "Circle",
+          "role": null,
+          "data": {
+            "c": {
+              "x": 0,
+              "y": 0
+            },
+            "r": 10
+          }
+        }
+      ],
+      "completed": 1,
+      "authoringError": null,
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-cafa510b-2fd9-4b96-b70a-cba46ce8b25c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "nativeObjects": [
+        {
+          "id": "agent-primitive-cafa510b-2fd9-4b96-b70a-cba46ce8b25c",
+          "type": "Circle",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "c": {
+              "x": 0,
+              "y": 0
+            },
+            "r": 10
+          }
+        }
+      ],
+      "primitiveProjection": [
+        {
+          "id": "S:0/SURFACE/agent-primitive-cafa510b-2fd9-4b96-b70a-cba46ce8b25c",
+          "construction": false,
+          "points": {
+            "c": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "r": 10
+        }
+      ],
+      "regions": [
+        {
+          "id": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-cafa510b-2fd9-4b96-b70a-cba46ce8b25c\"],\"holes\":[]}",
+          "descriptor": {
+            "faceId": "S:0/SURFACE",
+            "outer": [
+              "S:0/SURFACE/agent-primitive-cafa510b-2fd9-4b96-b70a-cba46ce8b25c"
+            ],
+            "holes": []
+          }
+        }
+      ],
+      "regionError": null,
+      "advertised": {
+        "ready": true,
+        "reason": null,
+        "revision": "de3c9128-476b-4f91-a4b3-8df536a2a880",
+        "unit": "millimeter",
+        "engine": "occ",
+        "capabilities": {
+          "extrusion": true,
+          "centeredHole": true,
+          "fourCornerHoles": true,
+          "enclosureV1": true,
+          "enclosureV2": true
+        },
+        "extrusionCandidates": [],
+        "centeredHoleCandidates": [],
+        "fourCornerCandidates": [],
+        "enclosureVersions": [
+          {
+            "version": 1,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth"
+            ]
+          },
+          {
+            "version": 2,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID",
+              "LABEL"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth",
+              "labelWidth",
+              "labelLength",
+              "labelDepth"
+            ]
+          }
+        ],
+        "note": "Registered OCC worker operations; assets and candidate geometry are verified when run."
+      },
+      "advertisedForFace": []
+    },
+    {
+      "name": "three-nested-regions-not-advertised",
+      "mode": "inspect",
+      "faceId": "S:0/SURFACE",
+      "inputs": [
+        {
+          "kind": "Circle",
+          "role": null,
+          "data": {
+            "c": {
+              "x": 0,
+              "y": 0
+            },
+            "r": 30
+          }
+        },
+        {
+          "kind": "Circle",
+          "role": null,
+          "data": {
+            "c": {
+              "x": 0,
+              "y": 0
+            },
+            "r": 20
+          }
+        },
+        {
+          "kind": "Circle",
+          "role": null,
+          "data": {
+            "c": {
+              "x": 0,
+              "y": 0
+            },
+            "r": 10
+          }
+        }
+      ],
+      "completed": 3,
+      "authoringError": null,
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-144eeb0d-3768-4ea5-a7d0-2b219f8af2c9\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":30}},{\"id\":\"agent-primitive-bb0d477f-0aa5-476a-bb88-eec29e8508ba\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":20}},{\"id\":\"agent-primitive-b544c896-075e-4973-aa42-20a113359de3\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":10}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "nativeObjects": [
+        {
+          "id": "agent-primitive-144eeb0d-3768-4ea5-a7d0-2b219f8af2c9",
+          "type": "Circle",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "c": {
+              "x": 0,
+              "y": 0
+            },
+            "r": 30
+          }
+        },
+        {
+          "id": "agent-primitive-bb0d477f-0aa5-476a-bb88-eec29e8508ba",
+          "type": "Circle",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "c": {
+              "x": 0,
+              "y": 0
+            },
+            "r": 20
+          }
+        },
+        {
+          "id": "agent-primitive-b544c896-075e-4973-aa42-20a113359de3",
+          "type": "Circle",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "c": {
+              "x": 0,
+              "y": 0
+            },
+            "r": 10
+          }
+        }
+      ],
+      "primitiveProjection": [
+        {
+          "id": "S:0/SURFACE/agent-primitive-144eeb0d-3768-4ea5-a7d0-2b219f8af2c9",
+          "construction": false,
+          "points": {
+            "c": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "r": 30
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-bb0d477f-0aa5-476a-bb88-eec29e8508ba",
+          "construction": false,
+          "points": {
+            "c": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "r": 20
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-b544c896-075e-4973-aa42-20a113359de3",
+          "construction": false,
+          "points": {
+            "c": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "r": 10
+        }
+      ],
+      "regions": [
+        {
+          "id": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-144eeb0d-3768-4ea5-a7d0-2b219f8af2c9\"],\"holes\":[[\"S:0/SURFACE/agent-primitive-bb0d477f-0aa5-476a-bb88-eec29e8508ba\"]]}",
+          "descriptor": {
+            "faceId": "S:0/SURFACE",
+            "outer": [
+              "S:0/SURFACE/agent-primitive-144eeb0d-3768-4ea5-a7d0-2b219f8af2c9"
+            ],
+            "holes": [
+              [
+                "S:0/SURFACE/agent-primitive-bb0d477f-0aa5-476a-bb88-eec29e8508ba"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-bb0d477f-0aa5-476a-bb88-eec29e8508ba\"],\"holes\":[[\"S:0/SURFACE/agent-primitive-b544c896-075e-4973-aa42-20a113359de3\"]]}",
+          "descriptor": {
+            "faceId": "S:0/SURFACE",
+            "outer": [
+              "S:0/SURFACE/agent-primitive-bb0d477f-0aa5-476a-bb88-eec29e8508ba"
+            ],
+            "holes": [
+              [
+                "S:0/SURFACE/agent-primitive-b544c896-075e-4973-aa42-20a113359de3"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-b544c896-075e-4973-aa42-20a113359de3\"],\"holes\":[]}",
+          "descriptor": {
+            "faceId": "S:0/SURFACE",
+            "outer": [
+              "S:0/SURFACE/agent-primitive-b544c896-075e-4973-aa42-20a113359de3"
+            ],
+            "holes": []
+          }
+        }
+      ],
+      "regionError": null,
+      "advertised": {
+        "ready": true,
+        "reason": null,
+        "revision": "f255970e-9c9f-4600-88ec-90534364ecf9",
+        "unit": "millimeter",
+        "engine": "occ",
+        "capabilities": {
+          "extrusion": true,
+          "centeredHole": true,
+          "fourCornerHoles": true,
+          "enclosureV1": true,
+          "enclosureV2": true
+        },
+        "extrusionCandidates": [],
+        "centeredHoleCandidates": [],
+        "fourCornerCandidates": [],
+        "enclosureVersions": [
+          {
+            "version": 1,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth"
+            ]
+          },
+          {
+            "version": 2,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID",
+              "LABEL"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth",
+              "labelWidth",
+              "labelLength",
+              "labelDepth"
+            ]
+          }
+        ],
+        "note": "Registered OCC worker operations; assets and candidate geometry are verified when run."
+      },
+      "advertisedForFace": []
+    },
+    {
+      "name": "thin-reference-projection",
+      "mode": "inspect",
+      "faceId": "S:0/SURFACE",
+      "inputs": [
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 0
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0.0005,
+              "y": 0
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 1
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0.0005,
+              "y": 1
+            },
+            "b": {
+              "x": 0,
+              "y": 1
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 1
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "completed": 4,
+      "authoringError": null,
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-3139352a-fb1b-4d71-91a7-d0f7ef91a5d5\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":0.0005,\"y\":0}}},{\"id\":\"agent-primitive-f4302844-560a-42dc-b669-7f8313c0b380\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0.0005,\"y\":0},\"b\":{\"x\":0.0005,\"y\":1}}},{\"id\":\"agent-primitive-42ca769a-e904-4e17-91a8-2b3f93762b15\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0.0005,\"y\":1},\"b\":{\"x\":0,\"y\":1}}},{\"id\":\"agent-primitive-6e68df78-f15f-46da-998a-5e1b5ca4dd20\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":1},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "nativeObjects": [
+        {
+          "id": "agent-primitive-3139352a-fb1b-4d71-91a7-d0f7ef91a5d5",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-f4302844-560a-42dc-b669-7f8313c0b380",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0.0005,
+              "y": 0
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 1
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-42ca769a-e904-4e17-91a8-2b3f93762b15",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0.0005,
+              "y": 1
+            },
+            "b": {
+              "x": 0,
+              "y": 1
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-6e68df78-f15f-46da-998a-5e1b5ca4dd20",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 1
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "primitiveProjection": [
+        {
+          "id": "S:0/SURFACE/agent-primitive-3139352a-fb1b-4d71-91a7-d0f7ef91a5d5",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-f4302844-560a-42dc-b669-7f8313c0b380",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 1
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-42ca769a-e904-4e17-91a8-2b3f93762b15",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0.0005,
+              "y": 1
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 1
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-6e68df78-f15f-46da-998a-5e1b5ca4dd20",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0.0005,
+              "y": 1
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "regions": [],
+      "regionError": "Every non-construction profile must be closed.",
+      "advertised": {
+        "ready": true,
+        "reason": null,
+        "revision": "69af600e-c9ad-404f-9119-a04883c9ef62",
+        "unit": "millimeter",
+        "engine": "occ",
+        "capabilities": {
+          "extrusion": true,
+          "centeredHole": true,
+          "fourCornerHoles": true,
+          "enclosureV1": true,
+          "enclosureV2": true
+        },
+        "extrusionCandidates": [],
+        "centeredHoleCandidates": [],
+        "fourCornerCandidates": [],
+        "enclosureVersions": [
+          {
+            "version": 1,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth"
+            ]
+          },
+          {
+            "version": 2,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID",
+              "LABEL"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth",
+              "labelWidth",
+              "labelLength",
+              "labelDepth"
+            ]
+          }
+        ],
+        "note": "Registered OCC worker operations; assets and candidate geometry are verified when run."
+      },
+      "advertisedForFace": []
+    },
+    {
+      "name": "thin-fixed-projection",
+      "mode": "inspect",
+      "faceId": "S:0/SURFACE",
+      "inputs": [
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 0
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0.0005,
+              "y": 0
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 1
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0.0005,
+              "y": 1
+            },
+            "b": {
+              "x": 0,
+              "y": 1
+            }
+          }
+        },
+        {
+          "kind": "Segment",
+          "role": null,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 1
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "completed": 4,
+      "authoringError": null,
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-382bf58d-4d1d-477c-9c62-eb3170b931f4\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":0.0005,\"y\":0}}},{\"id\":\"agent-primitive-ee3dcc19-d349-4342-a69b-787d612fadab\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0.0005,\"y\":0},\"b\":{\"x\":0.0005,\"y\":1}}},{\"id\":\"agent-primitive-db7c8f12-7753-4373-9768-9bef96c47957\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0.0005,\"y\":1},\"b\":{\"x\":0,\"y\":1}}},{\"id\":\"agent-primitive-00123efc-9673-4a2e-8515-6047f802bf0c\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":1},\"b\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "nativeObjects": [
+        {
+          "id": "agent-primitive-382bf58d-4d1d-477c-9c62-eb3170b931f4",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-ee3dcc19-d349-4342-a69b-787d612fadab",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0.0005,
+              "y": 0
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 1
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-db7c8f12-7753-4373-9768-9bef96c47957",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0.0005,
+              "y": 1
+            },
+            "b": {
+              "x": 0,
+              "y": 1
+            }
+          }
+        },
+        {
+          "id": "agent-primitive-00123efc-9673-4a2e-8515-6047f802bf0c",
+          "type": "Segment",
+          "role": null,
+          "stage": 0,
+          "data": {
+            "a": {
+              "x": 0,
+              "y": 1
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "primitiveProjection": [
+        {
+          "id": "S:0/SURFACE/agent-primitive-382bf58d-4d1d-477c-9c62-eb3170b931f4",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0,
+              "y": 0
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-ee3dcc19-d349-4342-a69b-787d612fadab",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0.0005,
+              "y": 0
+            },
+            "b": {
+              "x": 0.0005,
+              "y": 1
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-db7c8f12-7753-4373-9768-9bef96c47957",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0.0005,
+              "y": 1
+            },
+            "b": {
+              "x": 0,
+              "y": 1
+            }
+          }
+        },
+        {
+          "id": "S:0/SURFACE/agent-primitive-00123efc-9673-4a2e-8515-6047f802bf0c",
+          "construction": false,
+          "points": {
+            "a": {
+              "x": 0,
+              "y": 1
+            },
+            "b": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        }
+      ],
+      "regions": [
+        {
+          "id": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-00123efc-9673-4a2e-8515-6047f802bf0c\",\"S:0/SURFACE/agent-primitive-382bf58d-4d1d-477c-9c62-eb3170b931f4\",\"S:0/SURFACE/agent-primitive-db7c8f12-7753-4373-9768-9bef96c47957\",\"S:0/SURFACE/agent-primitive-ee3dcc19-d349-4342-a69b-787d612fadab\"],\"holes\":[]}",
+          "descriptor": {
+            "faceId": "S:0/SURFACE",
+            "outer": [
+              "S:0/SURFACE/agent-primitive-00123efc-9673-4a2e-8515-6047f802bf0c",
+              "S:0/SURFACE/agent-primitive-382bf58d-4d1d-477c-9c62-eb3170b931f4",
+              "S:0/SURFACE/agent-primitive-db7c8f12-7753-4373-9768-9bef96c47957",
+              "S:0/SURFACE/agent-primitive-ee3dcc19-d349-4342-a69b-787d612fadab"
+            ],
+            "holes": []
+          }
+        }
+      ],
+      "regionError": null,
+      "advertised": {
+        "ready": true,
+        "reason": null,
+        "revision": "501d55fa-a34b-42ea-bcf4-fa835220a2ca",
+        "unit": "millimeter",
+        "engine": "occ",
+        "capabilities": {
+          "extrusion": true,
+          "centeredHole": true,
+          "fourCornerHoles": true,
+          "enclosureV1": true,
+          "enclosureV2": true
+        },
+        "extrusionCandidates": [
+          {
+            "faceId": "S:0/SURFACE",
+            "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-00123efc-9673-4a2e-8515-6047f802bf0c\",\"S:0/SURFACE/agent-primitive-382bf58d-4d1d-477c-9c62-eb3170b931f4\",\"S:0/SURFACE/agent-primitive-db7c8f12-7753-4373-9768-9bef96c47957\",\"S:0/SURFACE/agent-primitive-ee3dcc19-d349-4342-a69b-787d612fadab\"],\"holes\":[]}"
+          }
+        ],
+        "centeredHoleCandidates": [],
+        "fourCornerCandidates": [],
+        "enclosureVersions": [
+          {
+            "version": 1,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth"
+            ]
+          },
+          {
+            "version": 2,
+            "unit": "millimeter",
+            "roles": [
+              "BODY",
+              "LID",
+              "LABEL"
+            ],
+            "fields": [
+              "width",
+              "length",
+              "height",
+              "wall",
+              "clearance",
+              "lidThickness",
+              "lipDepth",
+              "labelWidth",
+              "labelLength",
+              "labelDepth"
+            ]
+          }
+        ],
+        "note": "Registered OCC worker operations; assets and candidate geometry are verified when run."
+      },
+      "advertisedForFace": [
+        {
+          "faceId": "S:0/SURFACE",
+          "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/agent-primitive-00123efc-9673-4a2e-8515-6047f802bf0c\",\"S:0/SURFACE/agent-primitive-382bf58d-4d1d-477c-9c62-eb3170b931f4\",\"S:0/SURFACE/agent-primitive-db7c8f12-7753-4373-9768-9bef96c47957\",\"S:0/SURFACE/agent-primitive-ee3dcc19-d349-4342-a69b-787d612fadab\"],\"holes\":[]}"
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "base": "http://127.0.0.1:20645/",
+    "sha256": "655c7d15f09eb5a041911baeb6c079e2c52fd11a9e0fd242de81918171bf26dd",
+    "bytes": 32786060
+  },
+  "referenceRuntime": {
+    "base": "http://127.0.0.1:20630/",
+    "sha256": "91c921bb4b4747a0e04604e01314145d61325013b448bc9330d9d04fba63811e",
+    "bytes": 32791544
+  },
+  "browserVersion": "Chrome/155.0.8059.79",
+  "thinProjectionScope": "Public authoring/projection control only; no thin-solid extrusion claim."
+}

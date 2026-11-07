@@ -1,0 +1,5 @@
+Fraction oracle: 84 cases
+PASS oracle cases 84 controls 3
+simple-100k 87.75152300000002 ms 100000
+recorded-box-coordinates-100k 145.320466 ms 35840233
+adversarial-exponents-100k 4670.8185300000005 ms 0

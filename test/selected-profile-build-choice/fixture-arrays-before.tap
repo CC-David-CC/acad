@@ -1,0 +1,48 @@
+verb 2.0.0
+✔ no option preserves default; explicit staged choice is detached and does not persist choice (9.212835ms)
+verb 2.0.0
+✖ real Worker descriptor discovery uses requested STEP and recorded V2 contracts (137.728193ms)
+verb 2.0.0
+✖ create passes explicit current build unchanged to error-only submit and releases reserved ID (138.927573ms)
+✔ saved whole-part revision wins; mixed explicit requests refuse before Worker or ID (2.441332ms)
+✔ unstaged choice and absent policy refuse before Worker/allocation (1.403353ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ policy withdrawal/source/lifetime changes across actual replies refuse (514.905669ms)
+✔ malformed/getter/undefined/extra requests refuse without getter reads (0.841138ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 5
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1001.985734
+
+✖ failing tests:
+
+test at test/selected-profile-build-choice/service.test.mjs:8:1
+✖ real Worker descriptor discovery uses requested STEP and recorded V2 contracts (137.728193ms)
+  Error: Invalid sketch arrays.
+      at /tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1207265
+      at c (/tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1189233)
+      at Generator._invoke (/tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1188986)
+      at Generator.next (/tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1189596)
+      at xp (/tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1195171)
+      at a (/tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1195375) {
+    code: 'INVALID'
+  }
+
+test at test/selected-profile-build-choice/service.test.mjs:9:1
+✖ create passes explicit current build unchanged to error-only submit and releases reserved ID (138.927573ms)
+  Error: Invalid sketch arrays.
+      at /tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1207265
+      at c (/tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1189233)
+      at Generator._invoke (/tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1188986)
+      at Generator.next (/tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1189596)
+      at xp (/tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1195171)
+      at a (/tmp/codi-cad-selected-profile-build-20261107/.build/selected-profile-build-choice/service/service.cjs:2:1195375) {
+    code: 'INVALID'
+  }

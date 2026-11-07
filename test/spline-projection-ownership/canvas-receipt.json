@@ -1,0 +1,201 @@
+{
+  "scope": "Actual Chromium Canvas/Path2D and native RAF; deliberate callback withholding and a5ms injected native-lineTo forwarding delay force the inner polyline yield. No Worker/app/math/performance claim.",
+  "canvasSha256": "25fcb3af0a491d7b645b00eb549c24c450ffe344317db60aa28a7f7bb8cf5cc8",
+  "compiledSha256": "524508ab0402bdc8ae87406d1e0818ed2a3a58f2ed0a43dc98e6b5df6894862a",
+  "cases": [
+    {
+      "mode": "close-queued",
+      "after": {
+        "before": {
+          "lines": 128,
+          "delivered": 0
+        },
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "cancelled": 1,
+        "lines": 128,
+        "linesAtAction": 128,
+        "deliveredAtAction": 0,
+        "draws": 0,
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "frozen": true
+      },
+      "late": {
+        "before": {
+          "lines": 128,
+          "draws": 0
+        },
+        "after": {
+          "lines": 128,
+          "draws": 0
+        },
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    },
+    {
+      "mode": "close-delivered",
+      "after": {
+        "before": {
+          "lines": 128,
+          "delivered": 1
+        },
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "cancelled": 1,
+        "lines": 128,
+        "linesAtAction": 128,
+        "deliveredAtAction": 0,
+        "draws": 0,
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "frozen": true
+      },
+      "late": {
+        "before": {
+          "lines": 128,
+          "draws": 0
+        },
+        "after": {
+          "lines": 128,
+          "draws": 0
+        },
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    },
+    {
+      "mode": "clear-queued",
+      "after": {
+        "before": {
+          "lines": 128,
+          "delivered": 0
+        },
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "cancelled": 1,
+        "lines": 128,
+        "linesAtAction": 128,
+        "deliveredAtAction": 0,
+        "draws": 0,
+        "dimensions": [
+          [
+            300,
+            150
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "frozen": true
+      },
+      "late": {
+        "before": {
+          "lines": 128,
+          "draws": 0
+        },
+        "after": {
+          "lines": 128,
+          "draws": 0
+        },
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    },
+    {
+      "mode": "replace-queued",
+      "after": {
+        "before": {
+          "lines": 128,
+          "delivered": 0
+        },
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "cancelled": 1,
+        "lines": 128,
+        "linesAtAction": 128,
+        "deliveredAtAction": 0,
+        "draws": 1,
+        "dimensions": [
+          [
+            400,
+            400
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "frozen": true
+      },
+      "late": {
+        "before": {
+          "lines": 128,
+          "draws": 1
+        },
+        "after": {
+          "lines": 128,
+          "draws": 1
+        },
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    }
+  ],
+  "status": "pass",
+  "browser": "Chrome/155.0.8059.79"
+}

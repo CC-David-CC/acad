@@ -1,0 +1,260 @@
+{
+  "scope": "Actual app d177, registered native PLANE envelope, same-renderer second actual CAD; inclusive trace durations overlap and tracing adds overhead. Not an exact CPU-share or latency guarantee.",
+  "traceSha256": "130c48e8cd31e3ab91b00b3a59b5b3b52815c5588ee0ce1f341b36e34e21abe9",
+  "pid": 1949372,
+  "tid": 1949372,
+  "restoreSpanMs": 4568.139,
+  "groups": {
+    "RunMicrotasks": {
+      "count": 458,
+      "inclusiveMs": 1601.261,
+      "maxMs": 1381.98
+    },
+    "TimerFire": {
+      "count": 656,
+      "inclusiveMs": 1599.8679999999997,
+      "maxMs": 1382.004
+    },
+    "FunctionCall": {
+      "count": 926,
+      "inclusiveMs": 523.367,
+      "maxMs": 404.351
+    },
+    "FireAnimationFrame": {
+      "count": 248,
+      "inclusiveMs": 484.3180000000001,
+      "maxMs": 404.378
+    },
+    "ParseHTML": {
+      "count": 4000,
+      "inclusiveMs": 314.84800000000126,
+      "maxMs": 0.577
+    },
+    "Layout": {
+      "count": 1,
+      "inclusiveMs": 138.132,
+      "maxMs": 138.132
+    },
+    "UpdateLayoutTree": {
+      "count": 1,
+      "inclusiveMs": 109.701,
+      "maxMs": 109.701
+    },
+    "UserTiming::Measure": {
+      "count": 22177,
+      "inclusiveMs": 102.23000000000924,
+      "maxMs": 0.055
+    },
+    "PrePaint": {
+      "count": 124,
+      "inclusiveMs": 78.571,
+      "maxMs": 76.378
+    },
+    "MinorGC": {
+      "count": 12,
+      "inclusiveMs": 63.259,
+      "maxMs": 12.31
+    },
+    "V8.GC_SCAVENGER": {
+      "count": 12,
+      "inclusiveMs": 62.146,
+      "maxMs": 12.239
+    },
+    "V8.GC_SCAVENGER_SCAVENGE": {
+      "count": 12,
+      "inclusiveMs": 61.785000000000004,
+      "maxMs": 12.195
+    },
+    "V8.StackGuard": {
+      "count": 732,
+      "inclusiveMs": 57.806000000000026,
+      "maxMs": 4.045
+    },
+    "V8.HandleInterrupts": {
+      "count": 731,
+      "inclusiveMs": 55.236000000000104,
+      "maxMs": 4.041
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE": {
+      "count": 12,
+      "inclusiveMs": 48.713,
+      "maxMs": 10.138
+    },
+    "Paint": {
+      "count": 191,
+      "inclusiveMs": 41.34100000000009,
+      "maxMs": 21.903
+    },
+    "HandlePostMessage": {
+      "count": 2,
+      "inclusiveMs": 31.8,
+      "maxMs": 31.564
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_PARALLEL": {
+      "count": 22,
+      "inclusiveMs": 30.552,
+      "maxMs": 7.997
+    },
+    "EventDispatch": {
+      "count": 19,
+      "inclusiveMs": 23.159,
+      "maxMs": 19.86
+    },
+    "V8.GC_MC_INCREMENTAL": {
+      "count": 186,
+      "inclusiveMs": 21.931999999999988,
+      "maxMs": 0.832
+    }
+  },
+  "longEvents": [
+    {
+      "name": "TimerFire",
+      "ms": 1382.004,
+      "args": {
+        "data": {
+          "frame": "7DF3F6B3254BC849ED93B1E6E269D4F6",
+          "timerId": 466
+        }
+      }
+    },
+    {
+      "name": "RunMicrotasks",
+      "ms": 1381.98,
+      "args": {
+        "microtask_count": 107
+      }
+    },
+    {
+      "name": "FireAnimationFrame",
+      "ms": 404.378,
+      "args": {
+        "data": {
+          "frame": "7DF3F6B3254BC849ED93B1E6E269D4F6",
+          "id": 213,
+          "sampleTraceId": 7958908604326332
+        }
+      }
+    },
+    {
+      "name": "FunctionCall",
+      "ms": 404.351,
+      "args": {
+        "data": {
+          "columnNumber": 38,
+          "frame": "7DF3F6B3254BC849ED93B1E6E269D4F6",
+          "functionName": "",
+          "isolate": "17812283746766076142",
+          "lineNumber": 23371,
+          "sampleTraceId": 7958908604326335,
+          "scriptId": "7",
+          "url": "http://127.0.0.1:20495/static/index.bundle.js"
+        }
+      }
+    },
+    {
+      "name": "Layout",
+      "ms": 138.132,
+      "args": {
+        "beginData": {
+          "dirtyObjects": 24013,
+          "frame": "7DF3F6B3254BC849ED93B1E6E269D4F6",
+          "partialLayout": false,
+          "sampleTraceId": 7958908604326106,
+          "stackTrace": [
+            {
+              "columnNumber": 55,
+              "functionName": "updateViewportSizeIfNeeded",
+              "lineNumber": 23204,
+              "scriptId": "7",
+              "url": "http://127.0.0.1:20495/static/index.bundle.js"
+            },
+            {
+              "columnNumber": 326,
+              "functionName": "scene.updateViewportSizeIfNeeded",
+              "lineNumber": 1,
+              "scriptId": "28",
+              "url": "pptr:evaluate;%2Ftmp%2Fcodi-arc25-view-preparation-20261105%2Ftest%2Farc25-view-preparation%2Frestore-browser.cjs%3A2%3A1337"
+            },
+            {
+              "columnNumber": 12,
+              "functionName": "animate",
+              "lineNumber": 23380,
+              "scriptId": "7",
+              "url": "http://127.0.0.1:20495/static/index.bundle.js"
+            },
+            {
+              "columnNumber": 22,
+              "functionName": "",
+              "lineNumber": 23372,
+              "scriptId": "7",
+              "url": "http://127.0.0.1:20495/static/index.bundle.js"
+            }
+          ],
+          "totalObjects": 24351
+        },
+        "endData": {
+          "layoutRoots": [
+            {
+              "depth": 1,
+              "nodeId": 2,
+              "nodeName": "#document",
+              "quads": [
+                [
+                  0,
+                  0,
+                  800,
+                  0,
+                  800,
+                  600,
+                  0,
+                  600
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "UpdateLayoutTree",
+      "ms": 109.701,
+      "args": {
+        "beginData": {
+          "frame": "7DF3F6B3254BC849ED93B1E6E269D4F6",
+          "sampleTraceId": 7958908604326082,
+          "stackTrace": [
+            {
+              "columnNumber": 55,
+              "functionName": "updateViewportSizeIfNeeded",
+              "lineNumber": 23204,
+              "scriptId": "7",
+              "url": "http://127.0.0.1:20495/static/index.bundle.js"
+            },
+            {
+              "columnNumber": 326,
+              "functionName": "scene.updateViewportSizeIfNeeded",
+              "lineNumber": 1,
+              "scriptId": "28",
+              "url": "pptr:evaluate;%2Ftmp%2Fcodi-arc25-view-preparation-20261105%2Ftest%2Farc25-view-preparation%2Frestore-browser.cjs%3A2%3A1337"
+            },
+            {
+              "columnNumber": 12,
+              "functionName": "animate",
+              "lineNumber": 23380,
+              "scriptId": "7",
+              "url": "http://127.0.0.1:20495/static/index.bundle.js"
+            },
+            {
+              "columnNumber": 22,
+              "functionName": "",
+              "lineNumber": 23372,
+              "scriptId": "7",
+              "url": "http://127.0.0.1:20495/static/index.bundle.js"
+            }
+          ]
+        },
+        "elementCount": 22006
+      }
+    }
+  ]
+}

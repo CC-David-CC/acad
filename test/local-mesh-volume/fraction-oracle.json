@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "scope": "exact Fraction test oracle; no production arbitrary-precision path",
+  "rows": [
+    {
+      "id": "tiny-large-origin",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "39614081257132168796771975168",
+      "nearestBinary64": 6.000137061924313e-18,
+      "representedBoxProductEqual": true
+    },
+    {
+      "id": "tiny-origin",
+      "exactNumerator": "39492109375708942438034858509354246921456744925",
+      "exactDenominator": "6582018229284824168619876730229402019930943462534319453394436096",
+      "nearestBinary64": 6e-18,
+      "representedBoxProductEqual": true
+    },
+    {
+      "id": "ordinary-translated",
+      "exactNumerator": "4301",
+      "exactDenominator": "1",
+      "nearestBinary64": 4301.0,
+      "representedBoxProductEqual": true
+    },
+    {
+      "id": "separated-tiny-boxes-analytic-oracle",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "19807040628566084398385987584",
+      "nearestBinary64": 1.2000274123848626e-17
+    }
+  ]
+}

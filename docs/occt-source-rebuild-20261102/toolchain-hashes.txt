@@ -1,0 +1,7 @@
+ee1c8270096a728966ae38af548047d1f64c18318e06ba75952e657136f02537  /tmp/codi-occt-release-20261102.3DKcW3s3/emsdk/downloads/c69458f1bbf3ef5b8da4e934de210659cc9bca04-wasm-binaries.tbz2
+e2113cfe02737c39edc7b746f8d4bce1139c5d37a39660f68a368bff290a4cd4  /tmp/codi-occt-release-20261102.3DKcW3s3/emsdk/upstream/bin/clang
+4835ac897c16f3c820087375bbe7dfb0a0a5896c13aa7771904d5b03408d943e  /tmp/codi-occt-release-20261102.3DKcW3s3/emsdk/upstream/bin/wasm-ld
+8cd9c6f4cf897e6edfd2311a7c105f92451b157460aa9d612d20be0bc49baa91  /tmp/codi-occt-release-20261102.3DKcW3s3/emsdk/upstream/bin/wasm-opt
+bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12  /tmp/codi-occt-release-20261102.3DKcW3s3/emsdk/node/24.19.0_64bit/bin/node
+fa198afa9a2872cde991c3aa71796894bf7b5310d6eb178c3eafcf66e3ae79a7  /tmp/codi-occt-release-20261102.3DKcW3s3/node14.tar.xz
+990e832e27b521b52ac1000ca49ef144c611190c8f66d5842ddce7a662da9923  /tmp/codi-occt-release-20261102.3DKcW3s3/node14/bin/node

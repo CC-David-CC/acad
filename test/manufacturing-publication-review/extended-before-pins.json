@@ -1,0 +1,21 @@
+{
+  "sourceCommit": "9ba304395",
+  "sha256": {
+    "web/app/cad/projectManager/projectManagerBundle.ts": "1a91da8c9bd24592a123c036b9aeaecfb6f94d0e4e7f09ea44b78e7a103de8fd",
+    "web/app/cad/projectManager/manufacturingPublicationClient.mjs": "64cc3d104d4178b421b4936a02608e25d2c9bb11cf6ffb54639f3d8012e0cac5",
+    "test/manufacturing-publication-review/review.test.mjs": "a27099c43f00548988a67dbeefb0332770c881b27c4fbb67e01ab8f2a5dc0c07",
+    "test/manufacturing-publication-review/client-signals.test.mjs": "251597f0da7fe725688d39c43b500c402c2c3f3ecc8685cd7250b963ed112d76"
+  },
+  "scope": "Actual functions/Workers/native signals with explicit own property/method overrides. Geometry protocol fixture, no browser/security/native geometry probe.",
+  "results": {
+    "service": {
+      "pass": 3,
+      "fail": 4
+    },
+    "client": {
+      "pass": 0,
+      "fail": 3
+    }
+  },
+  "initialOracleCorrection": "Earlier complete-before expected AbortError from hash cancellation; actual existing hash contract uses Error(Hash cancelled). Corrected only that over-specific test assertion to require cancellation message, rejection and unchanged state; preserved original failing log."
+}

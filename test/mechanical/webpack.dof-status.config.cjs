@@ -1,0 +1,1 @@
+const path=require('path');const config=require('./webpack.config.cjs');config.entry=path.join(__dirname,'dof-status.test.mjs');config.output={path:'/tmp/codi-dof-status',filename:'dof.cjs'};module.exports=config;

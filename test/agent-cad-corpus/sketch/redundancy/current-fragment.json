@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "source": {
+    "commit": "0447b2a8bd59ce567077b3ff15ff89e01e64f983",
+    "appSha256": "57c15127fe0030043094216cef6c897126bfdf91290115c1c23b58be74d372f3",
+    "workerSha256": "04d8de669388705426129690e283f9290b809d3e98b09da843db246422070d19"
+  },
+  "cases": [
+    {
+      "id": "SKETCH-P0-KNOWN-IMPLIED-REDUNDANCY-LABEL",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": "Horizontal precedes Signed Y=0: naturally classify the latter redundant, preserve geometry, Save and fresh native replay preserve authored admission.",
+      "actual": {
+        "appActions": [
+          "Horizontal.invoke",
+          "SignedDistanceY.inspect/invokeByIds"
+        ],
+        "admissions": [
+          "accepted",
+          "redundant"
+        ],
+        "geometryJsonEqual": true,
+        "undoRedoExact": true,
+        "appSaveWorkers": {
+          "started": 2,
+          "terminated": 2
+        },
+        "installedWorkerControls": {
+          "started": 4,
+          "terminated": 4
+        },
+        "nativeFreshRestore": true,
+        "reopenedNoopSaveBytesEqual": true
+      },
+      "evidence": [
+        "receipts/current742/app-r2-pass.json",
+        "receipts/current742/installed-worker-pass.json",
+        "receipts/current742/comparison.json"
+      ],
+      "scope": "Numerical-algebraic priority at existing eqEps=1e-12; no exact/global independence, rank/DOF, signed host transport or general solver performance claim."
+    },
+    {
+      "id": "SKETCH-P0-LEGACY-ADMISSION-PRIORITY-REFUSAL",
+      "subsystem": "constraints",
+      "priority": "P0",
+      "level": "CAD1",
+      "layer": "browser-worker",
+      "backend": "shared",
+      "status": "pass",
+      "expected": "Older prototype accepted/accepted serialized admission must strict-refuse INTENT_CHANGED rather than silently rewrite intent.",
+      "actual": {
+        "error": "INTENT_CHANGED",
+        "inputUnchanged": true
+      },
+      "evidence": [
+        "receipts/current742/installed-worker-pass.json",
+        "receipts/current742/comparison.json"
+      ],
+      "scope": "Intentional old prototype metadata compatibility boundary. No migration or relaxed intent comparison."
+    }
+  ]
+}

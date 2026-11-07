@@ -1,0 +1,39 @@
+{
+  "worker": {
+    "version": 1,
+    "sourceRoot": "/tmp/codi-cad-solver-stage-service-20261106",
+    "head": "40018895d54d5a90eea332b9d24af845420c119c",
+    "node": "v24.22.1",
+    "webpack": "5.74.0",
+    "mode": "production",
+    "entry": "web/app/sketcher/headless/solveWorker.ts",
+    "trackedInputCount": 1263,
+    "trackedInputsBeforeAndAfter": "6024f37eff0adf981e2bdfe4b1fc3db4bd0a1dd53795df518f8a93319aadfb4b",
+    "sourceHashes": {
+      "web/app/sketcher/headless/localJacobian.mjs": "29922c4fe243f47fd2fadfa4fd4eb6c112bf4fbfa27f3a72b785e85a4d78e36a",
+      "web/app/sketcher/headless/solve.ts": "c0b901172338f11ccd38ccad09aec835771a70f3e435523ded62c0e32428027d",
+      "web/app/sketcher/headless/solveWorker.ts": "a940d3e3e5465967113448c04ff33f35909dc4614101085956bb3d6fe0711f47"
+    },
+    "numericSHA256": "987450eec65f7e00c74c8da9281537558fd1ee8e63ee48721253cf2458260386",
+    "verbSHA256": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3",
+    "workerSHA256": "630ec03b4348c99ca509dc20ecf894f7aa20c3b41dbddbf9982b57402bc1d984",
+    "workerBytes": 1177884
+  },
+  "service": {
+    "version": 1,
+    "head": "7cf6a2a093069b58454370d32cf81c1ee876bf8b",
+    "node": "v24.22.1",
+    "webpack": "5.74.0",
+    "mode": "production",
+    "trackedInputCount": 1263,
+    "trackedInputsBeforeAndAfter": "6024f37eff0adf981e2bdfe4b1fc3db4bd0a1dd53795df518f8a93319aadfb4b",
+    "sourceHashes": {
+      "web/app/cad/sketch/sketchDiagnosticService.ts": "ccfef180cf5be46348a8dc11071e3e1b590122bf6d75f596d0e85e1ac2506498",
+      "web/app/sketcher/headless/solveWorker.ts": "a940d3e3e5465967113448c04ff33f35909dc4614101085956bb3d6fe0711f47",
+      "test/solver-stage-service/entry.ts": "c6725ef75e7991c84ec547ee3699257b9f90397e4966f5c6fb1c31b33c2b6748",
+      "test/solver-stage-service/worker-url.mjs": "6358fa4b3c24ffbee296703d70bbfc22a49f06455a926755ff2bc28c01b0fecd"
+    },
+    "serviceSHA256": "f6b82cc9a7fc3d84c8972203ff72ee1b4351475c35cb8a11d87cef3aac1ae3e2",
+    "serviceBytes": 1226499
+  }
+}

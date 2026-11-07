@@ -1,0 +1,446 @@
+{
+  "scope": "One instrumented own-browser full SwiftShader OpenGL ES compositor run. All computation remains CPU software rendering. Nested durations overlap; no physical hardware-GPU or product-wide latency claim.",
+  "traceSha256": "f1aa1b77f0981889be1890313cd3286b30ca8560ad2ee5df9822ab66c61b3881",
+  "receiptSha256": "766054ade6c5a5bc53623b598cd9f6426d58bb77a0d13c1946ef4d0ad542675b",
+  "rendererPid": 1966813,
+  "rendererTid": 1966813,
+  "environment": {
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/155.0.8059.79",
+      "revision": "@a49e2e3d4addfd84e765b52afe230bedb81096db",
+      "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+      "jsVersion": "15.5.35.23"
+    },
+    "graphicsFlags": [
+      "--headless",
+      "--enable-gpu",
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+      "--enable-unsafe-swiftshader"
+    ],
+    "implementation": "(gl=egl-angle,angle=swiftshader)",
+    "glRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+    "glVendor": "Google Inc. (Google)"
+  },
+  "longNativeEvents": [
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "TimerFire",
+      "startFromRestoreMs": 1905.028,
+      "durationMs": 194.715,
+      "args": {
+        "data": {
+          "frame": "4EDDBDB79B4BFB1131C791DF46512B3E",
+          "timerId": 464
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "RunMicrotasks",
+      "startFromRestoreMs": 1905.038,
+      "durationMs": 194.688,
+      "args": {
+        "microtask_count": 107
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "ProxyMain::BeginMainFrame",
+      "startFromRestoreMs": 2099.835,
+      "durationMs": 155.543,
+      "args": {
+        "begin_frame_id": 333,
+        "main_frame_pipeline": {
+          "main_frame_id": 7528412244066582384,
+          "step": "BEGIN_MAIN_FRAME"
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "FireAnimationFrame",
+      "startFromRestoreMs": 2099.895,
+      "durationMs": 152.203,
+      "args": {
+        "data": {
+          "frame": "4EDDBDB79B4BFB1131C791DF46512B3E",
+          "id": 208
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "FunctionCall",
+      "startFromRestoreMs": 2099.904,
+      "durationMs": 152.184,
+      "args": {
+        "data": {
+          "columnNumber": 38,
+          "frame": "4EDDBDB79B4BFB1131C791DF46512B3E",
+          "functionName": "",
+          "isolate": "2922643112121105787",
+          "lineNumber": 23371,
+          "sampleTraceId": 7400866357852340,
+          "scriptId": "7",
+          "url": "http://127.0.0.1:20501/static/index.bundle.js"
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "DedicatedWorker thread",
+      "ownRendererThread": false,
+      "name": "EvaluateScript",
+      "startFromRestoreMs": 29.068,
+      "durationMs": 110.768,
+      "args": {
+        "data": {
+          "columnNumber": 1,
+          "frame": "",
+          "lineNumber": 1,
+          "scriptId": 0,
+          "url": "http://127.0.0.1:20501/static/project-validator.cdeb32dd69943b42c57b.js"
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "HandlePostMessage",
+      "startFromRestoreMs": 162.357,
+      "durationMs": 35.698,
+      "args": {
+        "data": {
+          "traceId": "7528412244066574545"
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "RunMicrotasks",
+      "startFromRestoreMs": 167.924,
+      "durationMs": 30.119,
+      "args": {
+        "microtask_count": 193
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "ThreadPoolForegroundWorker",
+      "ownRendererThread": false,
+      "name": "V8.GC_MC_BACKGROUND_MARKING",
+      "startFromRestoreMs": 126.729,
+      "durationMs": 25.876,
+      "args": {
+        "epoch": 14
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "ThreadPoolForegroundWorker",
+      "ownRendererThread": false,
+      "name": "V8.GC_MC_BACKGROUND_MARKING",
+      "startFromRestoreMs": 126.687,
+      "durationMs": 25.82,
+      "args": {
+        "epoch": 14
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "ThreadPoolForegroundWorker",
+      "ownRendererThread": false,
+      "name": "V8.GC_MC_BACKGROUND_MARKING",
+      "startFromRestoreMs": 126.847,
+      "durationMs": 25.728,
+      "args": {
+        "epoch": 14
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "ThreadPoolForegroundWorker",
+      "ownRendererThread": false,
+      "name": "V8.GC_MC_BACKGROUND_MARKING",
+      "startFromRestoreMs": 126.86,
+      "durationMs": 25.714,
+      "args": {
+        "epoch": 14
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "ThreadPoolForegroundWorker",
+      "ownRendererThread": false,
+      "name": "V8.GC_MC_BACKGROUND_MARKING",
+      "startFromRestoreMs": 127.207,
+      "durationMs": 25.342,
+      "args": {
+        "epoch": 14
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "ThreadPoolForegroundWorker",
+      "ownRendererThread": false,
+      "name": "V8.GC_MC_BACKGROUND_MARKING",
+      "startFromRestoreMs": 127.862,
+      "durationMs": 24.716,
+      "args": {
+        "epoch": 14
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "ThreadPoolForegroundWorker",
+      "ownRendererThread": false,
+      "name": "V8.GC_MC_BACKGROUND_MARKING",
+      "startFromRestoreMs": 128.246,
+      "durationMs": 24.338,
+      "args": {
+        "epoch": 14
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "DedicatedWorker thread",
+      "ownRendererThread": false,
+      "name": "v8.compile",
+      "startFromRestoreMs": 29.122,
+      "durationMs": 24.312,
+      "args": {
+        "data": {
+          "columnNumber": 1,
+          "lineNumber": 1,
+          "notStreamedReason": "worker top-level scripts are not streamable",
+          "scriptId": 3,
+          "streamed": false,
+          "url": "http://127.0.0.1:20501/static/project-validator.cdeb32dd69943b42c57b.js"
+        },
+        "fileName": "http://127.0.0.1:20501/static/project-validator.cdeb32dd69943b42c57b.js"
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "TimerFire",
+      "startFromRestoreMs": 2310.332,
+      "durationMs": 22.698,
+      "args": {
+        "data": {
+          "frame": "4EDDBDB79B4BFB1131C791DF46512B3E",
+          "timerId": 467
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "RunMicrotasks",
+      "startFromRestoreMs": 2310.344,
+      "durationMs": 22.674,
+      "args": {
+        "microtask_count": 1
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "TimerFire",
+      "startFromRestoreMs": 1097.166,
+      "durationMs": 19.831,
+      "args": {
+        "data": {
+          "frame": "4EDDBDB79B4BFB1131C791DF46512B3E",
+          "timerId": 244
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "RunMicrotasks",
+      "startFromRestoreMs": 1097.177,
+      "durationMs": 19.807,
+      "args": {
+        "microtask_count": 523
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "DedicatedWorker thread",
+      "ownRendererThread": false,
+      "name": "EvaluateScript",
+      "startFromRestoreMs": 107.833,
+      "durationMs": 18.18,
+      "args": {
+        "data": {
+          "columnNumber": 1,
+          "frame": "",
+          "lineNumber": 1,
+          "scriptId": 0,
+          "url": "http://127.0.0.1:20501/lib/verb.js"
+        }
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "Scheduler::RunTask",
+      "startFromRestoreMs": 201.75,
+      "durationMs": 18.038,
+      "args": {}
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "TimerFire",
+      "startFromRestoreMs": 1044.964,
+      "durationMs": 11.025,
+      "args": {
+        "data": {
+          "frame": "4EDDBDB79B4BFB1131C791DF46512B3E",
+          "timerId": 238
+        }
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "Scheduler::RunTask",
+      "startFromRestoreMs": 2137.764,
+      "durationMs": 10.295,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "GpuChannel::ExecuteDeferredRequest",
+      "startFromRestoreMs": 2137.768,
+      "durationMs": 10.286,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "WebGL",
+      "startFromRestoreMs": 2137.772,
+      "durationMs": 10.274,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "CommandBuffer::Flush",
+      "startFromRestoreMs": 2137.773,
+      "durationMs": 10.272,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "CommandBufferStub::OnAsyncFlush",
+      "startFromRestoreMs": 2137.775,
+      "durationMs": 10.269,
+      "args": {
+        "put_offset": 44395
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "CommandBufferService:PutChanged",
+      "startFromRestoreMs": 2137.777,
+      "durationMs": 10.262,
+      "args": {
+        "handler": ".WebGL-0x3f2400177200",
+        "put_offset": 44395
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "GLES2Implementation::GetProgramiv",
+      "startFromRestoreMs": 2126.948,
+      "durationMs": 9.516,
+      "args": {}
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "ImplementationBase::WaitForCmd",
+      "startFromRestoreMs": 2126.95,
+      "durationMs": 9.513,
+      "args": {}
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "CommandBufferHelper::Finish",
+      "startFromRestoreMs": 2126.951,
+      "durationMs": 9.511,
+      "args": {}
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "CommandBufferProxyImpl::WaitForGetOffset",
+      "startFromRestoreMs": 2126.969,
+      "durationMs": 9.49,
+      "args": {
+        "end": 44057,
+        "start": 44057
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "Scheduler::RunTask",
+      "startFromRestoreMs": 2127.023,
+      "durationMs": 9.356,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "GpuChannel::ExecuteDeferredRequest",
+      "startFromRestoreMs": 2127.024,
+      "durationMs": 9.35,
+      "args": {}
+    }
+  ],
+  "ownRendererReadPixelsEventsDuringRestoreAnd200ms": 0
+}

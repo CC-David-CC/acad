@@ -1,0 +1,1 @@
+const path=require('path');const config=require('./webpack.config.cjs');config.entry=path.join(__dirname,'headless-fixed-boundary.test.mjs');config.output={path:'/tmp/codi-headless-fixed-boundary',filename:'tests.cjs'};module.exports=config;

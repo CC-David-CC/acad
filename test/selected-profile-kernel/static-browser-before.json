@@ -1,0 +1,35 @@
+{
+  "format": "selected-profile-kernel-component/2",
+  "result": "FAIL",
+  "assets": {
+    "occ-portable.js": {
+      "bytes": 308353,
+      "sha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9"
+    },
+    "occ-profile.wasm": {
+      "bytes": 35020148,
+      "sha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+    },
+    "oci-verified-worker.js": {
+      "bytes": 346306,
+      "sha256": "f1796e00c025457f5afd68d68218f01517c793d2e8ccde68197d6e96930b59bb"
+    },
+    "worker-controller.mjs": {
+      "bytes": 60026,
+      "sha256": "d204642c5c44b12689c28592404af0bfc46dc7f385f6544b971c55e2b64f411a"
+    },
+    "selectedProfilePlan.mjs": {
+      "bytes": 7885,
+      "sha256": "7d51355e667efa79b26528f2e39582256e9a1513a0a12ca949d265f3963d234f"
+    },
+    "occ-selected-profile-mount.mjs": {
+      "bytes": 662,
+      "sha256": "33f43cd9079b572d9057ddaec4272e18a3cf828bf7fdf4780543cf7a28bbf326"
+    }
+  },
+  "browserVersion": "Chrome/155.0.8059.79",
+  "error": {
+    "message": "ReferenceError: HEAPF64 is not defined",
+    "stack": "EngineContractError: ReferenceError: HEAPF64 is not defined\n    at #evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/ExecutionContext.js:391:56)\n    at async ExecutionContext.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/ExecutionContext.js:277:16)\n    at async IsolatedWorld.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/IsolatedWorld.js:100:16)\n    at async CdpFrame.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Frame.js:362:20)\n    at async CdpPage.evaluate (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Page.js:826:20)\n    at async /tmp/codi-cad-mechanical-candidate-20261105/test/selected-profile-kernel/browser.cjs:11:19\n    at worker.onmessage (http://127.0.0.1:20672/static/worker-controller.mjs:60:38)\n    at err (http://127.0.0.1:20672/static/worker-controller.mjs:8:26)"
+  }
+}

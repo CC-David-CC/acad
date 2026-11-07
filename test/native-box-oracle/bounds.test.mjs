@@ -1,0 +1,3 @@
+import assert from 'node:assert/strict';import {cases} from './cases.mjs';import {boundedOracle} from './bounds.mjs';
+const rows=cases(),at=id=>boundedOracle(rows.find(r=>r.id===id).expr);
+assert.deepEqual(at('hollow-partial').bounds,{min:[0,0,0],max:[10,10,10]});assert.deepEqual(at('composite-fill').bounds,{min:[0,0,0],max:[30,10,10]});assert.deepEqual(at('translated-fill').bounds,{min:[-13,7,29],max:[17,17,39]});assert.deepEqual(at('permuted-fill').bounds,{min:[0,0,0],max:[10,30,10]});assert.deepEqual(at('overlap-common').bounds,{min:[5,0,0],max:[10,10,10]});assert.equal(at('disjoint-common').bounds,null);assert.equal(at('contact-face-common').boundaryOnlyNonempty,true);console.log('PASS independent occupied-cell bounds; original oracle sources unchanged');

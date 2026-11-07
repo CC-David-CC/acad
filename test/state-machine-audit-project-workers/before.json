@@ -1,0 +1,189 @@
+{
+  "scope": "Actual production manager/client, retained fixture protocol doubles, real validation and incremental-hash CPU Workers",
+  "sources": {
+    "web/app/cad/projectManager/projectManagerBundle.ts": "5889f9d1b0a211203aa173edb4d8e779fbbd9855da822d8265373a4a20dc820e",
+    "web/app/cad/projectManager/incrementalCanonical.mjs": "149a5510cab0e837ea8892d5d9a409d327de3362958e256204401bc91e7eb1a8",
+    "test/display-units/manager-fixture.mjs": "33e153761431542428a66ace6eb409c111c1b4926b6549bba9f1f82ada15c41f",
+    "test/display-units/node-worker.cjs": "b2d207e821838be4efcb2b1ef6b7adc8a89dc22423a351f6046e31c4cb71b89b",
+    ".build/display-units/validation/worker.js": "83d5cf595d04431bec7245a2d598a00b69d91f4beb613a3109c3906139b8a1e8"
+  },
+  "probeSHA256": "e4fdd53d6d023e46b81469a25e3c3cdf40c959ba84a92c23dff1115e2dc57094",
+  "rows": [
+    {
+      "kind": "validation",
+      "fault": "none",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 0,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": true
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "null"
+      },
+      "lateSettled": true,
+      "heldMessages": [],
+      "uncaught": []
+    },
+    {
+      "kind": "validation",
+      "fault": "error",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 0,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": false,
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null"
+      },
+      "lateSettled": false,
+      "heldMessages": [],
+      "uncaught": [
+        "injected after real Node Worker termination"
+      ]
+    },
+    {
+      "kind": "hash",
+      "fault": "none",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": true
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 2
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "heldMessages": [],
+      "uncaught": []
+    },
+    {
+      "kind": "hash",
+      "fault": "error",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "name": "Error",
+          "message": "injected after real Node Worker termination",
+          "causeExact": false,
+          "originalExact": true
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 1,
+        "callerAbortListeners": 1,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "heldMessages": [],
+      "uncaught": []
+    },
+    {
+      "kind": "hash-abort",
+      "fault": "error",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": false,
+        "termCalls": 1,
+        "projectAbortListeners": 1,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": false,
+      "heldMessages": [
+        {
+          "type": "ready"
+        }
+      ],
+      "uncaught": [
+        "injected after real Node Worker termination"
+      ]
+    }
+  ]
+}

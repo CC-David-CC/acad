@@ -1,0 +1,149 @@
+TAP version 13
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: actual normal coordinator replaces one circle diameter and journals exact Undo/Redo
+not ok 1 - actual normal coordinator replaces one circle diameter and journals exact Undo/Redo
+  ---
+  duration_ms: 138.30181
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:22:1'
+  failureType: 'testCodeFailure'
+  error: 'e.getAllKeysFromNamespace is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Gr (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:990217)
+    u (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1011989)
+    Object.l [as inspectSketchTransitions] (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1013623)
+    inspect (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:14:46)
+    target (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:15:45)
+    edit (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:16:52)
+    file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:23:83
+    use (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:13:92)
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:23:8)
+    async Test.run (node:internal/test_runner/test:1409:7)
+  ...
+# verb 2.0.0
+# Subtest: actual segment length edit and removal preserve object identity and genuine underconstraint
+not ok 2 - actual segment length edit and removal preserve object identity and genuine underconstraint
+  ---
+  duration_ms: 129.770029
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:25:1'
+  failureType: 'testCodeFailure'
+  error: 'e.getAllKeysFromNamespace is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Gr (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:990217)
+    u (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1011989)
+    Object.l [as inspectSketchTransitions] (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1013623)
+    inspect (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:14:46)
+    target (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:15:45)
+    edit (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:16:52)
+    file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:26:84
+    use (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:13:92)
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:26:8)
+    async Test.run (node:internal/test_runner/test:1409:7)
+  ...
+# verb 2.0.0
+# Subtest: removing a real accepted duplicate reactivates the surviving redundant diameter
+not ok 3 - removing a real accepted duplicate reactivates the surviving redundant diameter
+  ---
+  duration_ms: 128.110533
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:28:1'
+  failureType: 'testCodeFailure'
+  error: 'e.getAllKeysFromNamespace is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Gr (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:990217)
+    u (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1011989)
+    Object.l [as inspectSketchTransitions] (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1013623)
+    inspect (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:14:46)
+    target (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:15:45)
+    file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:29:125
+    use (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:13:92)
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:29:8)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# verb 2.0.0
+# Subtest: contradictory existing dimension edit preserves source/journal and a valid retry recovers
+not ok 4 - contradictory existing dimension edit preserves source/journal and a valid retry recovers
+  ---
+  duration_ms: 126.890319
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:31:1'
+  failureType: 'testCodeFailure'
+  error: 'e.getAllKeysFromNamespace is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Gr (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:990217)
+    u (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1011989)
+    Object.l [as inspectSketchTransitions] (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1013623)
+    inspect (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:14:46)
+    target (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:15:45)
+    edit (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:16:52)
+    file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:32:269
+    async use (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:13:86)
+    async TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:32:2)
+    async Test.run (node:internal/test_runner/test:1409:7)
+  ...
+# verb 2.0.0
+# Subtest: strict discovered identity/domain/no-op and unsupported schema refuse without publication
+not ok 5 - strict discovered identity/domain/no-op and unsupported schema refuse without publication
+  ---
+  duration_ms: 128.973892
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:34:1'
+  failureType: 'testCodeFailure'
+  error: 'e.getAllKeysFromNamespace is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Gr (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:990217)
+    u (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1011989)
+    Object.l [as inspectSketchTransitions] (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1013623)
+    inspect (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:14:46)
+    target (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:15:45)
+    file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:35:70
+    use (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:13:92)
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:35:8)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# verb 2.0.0
+# Subtest: typed diameter rebinding/literal/removal use actual quantity lengths and exact typed Undo
+not ok 6 - typed diameter rebinding/literal/removal use actual quantity lengths and exact typed Undo
+  ---
+  duration_ms: 124.977319
+  type: 'test'
+  location: '/tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:38:1'
+  failureType: 'testCodeFailure'
+  error: 'e.getAllKeysFromNamespace is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Gr (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:990217)
+    u (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1011989)
+    Object.l [as inspectSketchTransitions] (/tmp/codi-cad-dimension-review-20261106/.build/closed-dimension-edit/service/service.cjs:2:1013623)
+    inspect (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:14:46)
+    target (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:15:45)
+    edit (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:16:52)
+    file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:40:103
+    use (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:13:92)
+    TestContext.<anonymous> (file:///tmp/codi-cad-dimension-review-20261106/test/closed-dimension-edit/dimension.test.mjs:40:8)
+    async Test.run (node:internal/test_runner/test:1409:7)
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 0
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 951.779557

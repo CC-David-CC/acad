@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "scope": "initial standalone Node service test host setup, before command invocation",
+  "source": "observed tool stderr",
+  "error": "ReferenceError: require is not defined",
+  "location": "actual-verb.js:37, optional webworker-threads require",
+  "cause": "The standalone ESM Node test host had no importScripts platform loader. The unchanged real Verb library selected its Node-only optional webworker-threads branch.",
+  "correction": "Provide the local-code importScripts platform loader, as used by the actual production Node Worker adapter. No window/DOM shim, production provider, solver, model or Verb source was changed."
+}

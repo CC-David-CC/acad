@@ -1,0 +1,30 @@
+{
+  "scope": "Own SSH forwards only; own Chromium profile arguments read-only check; shared Chrome untouched",
+  "forwards": [
+    {
+      "port": 20938,
+      "exactOwnedForwardPids": [
+        2259077
+      ]
+    },
+    {
+      "port": 20939,
+      "exactOwnedForwardPids": [
+        2260202
+      ]
+    },
+    {
+      "port": 20940,
+      "exactOwnedForwardPids": [
+        2261392
+      ]
+    },
+    {
+      "port": 20941,
+      "exactOwnedForwardPids": [
+        2262227
+      ]
+    }
+  ],
+  "remainingOwnedChromiumPids": []
+}

@@ -1,0 +1,1497 @@
+{
+  "scope": "Production client code bundled unchanged; explicit WebLock/Worker transport and cleanup doubles; no mathematical output claim",
+  "sources": {
+    "web/app/cad/parameters/physicalWorkerClient.mjs": "d2703bf80817733f19be8d0cb2a830eb8249fec955deff3f9bf4fde32b2e574b",
+    "modules/engine/extrusion/prismSemanticClient.ts": "b9571b6ec69d829d3034a4f0ff5ce09386f710afb38fc7444478a0d9825269ec",
+    "web/app/sketcher/headless/client.ts": "31c727f0a17efb816c494c9d7800de88b81f1c8691c400fed74baef489c9d207"
+  },
+  "bundleSHA256": "9f79d805196d64b08f7e379840bbf0af3f10ba3cf653bb27d63fb8bf1b59816e",
+  "probeSHA256": "9e87c13a5f12cd7c5d3891340f26a03af4eb80fbc9ca13964c378b06642da68f",
+  "rows": [
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": true
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "operation-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Parameter worker failed.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "message-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Parameter worker returned invalid data.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "malformed",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Invalid parameter worker response.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "abort",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Parameter evaluation cancelled.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "timeout",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Parameter evaluation timed out.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "late",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Parameter evaluation cancelled.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "null",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "undefined",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "zero",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "false",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "success",
+      "fault": "empty",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "operation-error",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": {
+          "name": "Error",
+          "message": "Parameter worker failed."
+        }
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "abort",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": {
+          "name": "AbortError",
+          "message": "Parameter evaluation cancelled."
+        }
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "physical",
+      "scenario": "timeout",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": {
+          "name": "Error",
+          "message": "Parameter evaluation timed out."
+        }
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": true
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "operation-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Prism semantic Worker failed.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "message-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Prism semantic Worker message failed.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "malformed",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Invalid prism semantic Worker response.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "abort",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Prism semantic job cancelled or superseded.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "timeout",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Prism semantic job timed out.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "late",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Prism semantic job cancelled or superseded.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Prism semantic Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "null",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Prism semantic Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "undefined",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Prism semantic Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "zero",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Prism semantic Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "false",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Prism semantic Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "success",
+      "fault": "empty",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Prism semantic Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "operation-error",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Prism semantic Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": {
+          "name": "Error",
+          "message": "Prism semantic Worker failed."
+        }
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "abort",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Prism semantic Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": {
+          "name": "AbortError",
+          "message": "Prism semantic job cancelled or superseded."
+        }
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "semantic",
+      "scenario": "timeout",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Prism semantic Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": {
+          "name": "Error",
+          "message": "Prism semantic job timed out."
+        }
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": true
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "operation-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Sketch worker failed.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "message-error",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Sketch worker returned invalid data.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "malformed",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Invalid sketch worker result.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "abort",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Sketch solve cancelled",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "timeout",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Sketch solve timed out.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "late",
+      "fault": "none",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": 20,
+        "name": "AbortError",
+        "message": "Sketch solve cancelled",
+        "causeExact": true,
+        "operationError": null
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Sketch Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "null",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Sketch Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "undefined",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Sketch Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "zero",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Sketch Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "false",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Sketch Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "success",
+      "fault": "empty",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Sketch Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "operation-error",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Sketch Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": {
+          "name": "Error",
+          "message": "Sketch worker failed."
+        }
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "abort",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Sketch Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": {
+          "name": "AbortError",
+          "message": "Sketch solve cancelled"
+        }
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    },
+    {
+      "family": "sketch",
+      "scenario": "timeout",
+      "fault": "error",
+      "settled": true,
+      "settlements": 1,
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Sketch Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": {
+          "name": "Error",
+          "message": "Sketch solve timed out."
+        }
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "posts": 0,
+        "terminations": 0
+      },
+      "terminateCalls": 1,
+      "posts": 1,
+      "lateCalls": 1,
+      "beforeLate": {
+        "settled": true,
+        "settlements": 1,
+        "terminateCalls": 1
+      },
+      "uncaught": [],
+      "timers": 0,
+      "intervals": 0,
+      "abortListeners": 0
+    }
+  ]
+}

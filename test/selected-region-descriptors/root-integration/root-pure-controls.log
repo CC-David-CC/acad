@@ -1,0 +1,53 @@
+✔ disjoint exact source loops select independently without rewriting source (10.129225ms)
+✔ three nested circles keep distinct selectable annuli and disk (4.066553ms)
+✔ mixed holes, exact thin coordinates and XZ/oblique placement survive preparation (5.083503ms)
+✔ gaps, duplicate/touching boundaries and unsupported ordinary curves refuse explicitly (2.026071ms)
+✔ digest/frame/region/domain failures remain separate and source stays unchanged (1.746168ms)
+✔ capture rejects getters and detaches frame before asynchronous digest (1.258543ms)
+✔ source admission caps UTF-8 bytes rather than UTF-16 code units alone (19.225221ms)
+✔ local descriptors identify geographic second rectangle by actual source IDs without parsing opaque IDs (15.584932ms)
+✔ nested roles select only outer+disk and preserve cross-row reuse and creation-order independence (5.876981ms)
+✔ unsupported outer reason retained alongside complete descriptor and supported child regions (3.983692ms)
+✔ source census admits only ordinary current-stage Segment/Circle IDs and preserves opaque strings (1.276293ms)
+✔ captured descriptors are detached/frozen and per-row membership is source-bound (1.369094ms)
+✔ malformed descriptors, row identity/roles and binding mismatch refuse; no empty or truncated success (2.597857ms)
+✔ source geometry edits keep identities only when membership remains true; changed nesting cannot reuse old cell (2.568117ms)
+✔ descriptor binding captures face/source before digest suspension (1.724288ms)
+✔ exact65536-byte value remains complete;65537-byte value is never truncated into fake empty discovery (171.738031ms)
+✔ disjoint rectangles and three nested circles expose exact membership, matching execution (20.346653ms)
+✔ mixed nested rectangle/circle islands and separate holes preserve the complete hierarchy (6.256435ms)
+✔ nine-hole outer region is unsupported without dropping nine supported child disks (9.692591ms)
+✔ selected curve-count cap is local to the outer region (13.837644ms)
+✔ oversized region identity remains local; qualified global curve-ID cap is unchanged (11.804573ms)
+✔ regeneration changes only canonical affected membership; discovery never substitutes an old selection (3.958872ms)
+✔ one genuine digest captures bytes/frame/depth before suspension and returns detached frozen data (1.94795ms)
+✔ source, digest, frame, engine and geometric-topology failures remain distinct global refusals (3.003461ms)
+✔ accessors/extra fields/sparse frames refuse without reading getters and without source mutation (1.507406ms)
+✔ UTF-8 cap and opaque escaped/multibyte identities preserve exact source bytes (25.612038ms)
+✔ 128 qualified loops remain bounded; construction and point data do not invent regions or solver proof (20.847267ms)
+SOURCE_PINS [{"path":"modules/engine/extrusion/selectedSketchProfile.mjs","sha256":"989bb66f105899579a23a9c5f301ee28797f4581a2c4bb1fb7a4a9590c3a8269","bytes":10362},{"path":"modules/engine/extrusion/selectedRegionDescriptor.mjs","sha256":"f6b7c4b1c2e33c926e5282caadb1d94cc63ad58486991c5370d4ccc0c64bad71","bytes":5512},{"path":"modules/engine/mount/polygonProfilePlan.mjs","sha256":"fa5ab686b60bb16348074df57e37ba04d4173ac5e0b9a441e2d4dfc4cc03737d","bytes":7049},{"path":"modules/engine/extrusion/simplePolygon.mjs","sha256":"4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df","bytes":5128},{"path":"modules/engine/mount/selectedProfilePlan.mjs","sha256":"824dc5bfc8555a89fe9a647612ce76970f98b8adfd6e648185dd29e9f311c8a0","bytes":8190},{"path":"modules/workbenches/modeler/features/extrude/authoredRegions.mjs","sha256":"bf524fdab34d6ead706a8f6f5a3d89843dfd40aae873c74294efbe8da5e42f19","bytes":3286},{"path":"modules/workbenches/modeler/features/extrude/profilePlan.mjs","sha256":"610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237","bytes":6134}]
+✔ all 64 edge order/direction permutations preserve exact rectangle and source (38.676613ms)
+✔ disjoint source regions select independent volumes without joining unselected geometry (2.626437ms)
+✔ three nested circles use immediate children rather than grandchildren (2.941011ms)
+✔ mixed nested rectangle/circle and separate holes retain analytic areas (2.735488ms)
+✔ descriptor binds exact face, members and canonical sorted IDs; digest binds source (1.215703ms)
+✔ capture precedes genuine digest suspension, result is deeply frozen (0.762908ms)
+✔ extra input keys/accessors and sparse frame refuse without invoking getters (0.583386ms)
+✔ source metadata frame/stage/identity violations refuse (1.073181ms)
+✔ near rectangle, exact gap, duplicate and crossed unselected loop refuse (1.590386ms)
+✔ touching, intersecting and coincident unselected ordinary loops are not ignored (1.278053ms)
+✔ resolution, coordinate and depth domain boundaries remain explicit (4.520767ms)
+✔ oblique frame bounds agree with independent eight-vertex transform (1.258013ms)
+✔ 128-loop boundary accepted, excess contours/objects/global identities refuse (25.562107ms)
+✔ UTF-8 source admission matches existing native candidate-storage 1MiB byte cap (8.791091ms)
+✔ 512 segment traversal boundary accepts 128 independent rectangles and rejects the next (26.523327ms)
+✔ ASCII and multibyte metadata agree at exact UTF-8 cap without source normalization (24.86536ms)
+✔ native full Arc stays explicit unsupported source rather than silently reauthored Circle (1.635657ms)
+ℹ tests 44
+ℹ suites 0
+ℹ pass 44
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 280.98038

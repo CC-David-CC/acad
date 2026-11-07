@@ -1,0 +1,23 @@
+✔ new build is explicit, frozen and pinned; defaults and historical identities persist (1.700505ms)
+✔ exact new metadata binding passes without executing anything (1.488313ms)
+✔ new build requires profile v3, edge v1 and common selection v1/plan v2 (0.668386ms)
+✔ all three modern Boolean operations require their exact history input label (0.621306ms)
+✔ old mount contracts do not acquire common-read/history requirements (0.354204ms)
+✔ runtime and engine mismatches cannot implicitly substitute old or new builds (0.282463ms)
+✔ experimental revision is exact, immutable and never implicitly preferred (1.532194ms)
+✔ complete native metadata binds without executing geometry (1.245671ms)
+✔ revolve requires exact own source-qualified versioned descriptor fields (1.503404ms)
+✔ revolve revision retains all full-history native bindings (0.757446ms)
+✔ old native identities cannot satisfy the new mount or silently replace it (0.463644ms)
+✔ normal build requires configured native input without mutating staged assets (42.062511ms)
+✔ unreviewed native bytes refuse before replacing an existing component (79.45486ms)
+✔ experimental OCC build is explicit and leaves default engine identities unchanged (1.205111ms)
+✔ same engine with a different runtime cannot silently satisfy a mount binding (0.474835ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 205.043906

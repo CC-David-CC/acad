@@ -1,0 +1,93 @@
+{
+  "scope": "actual manager/canonical hash Worker; explicit model/measurement admission fixtures; no Native positive geometry/public authoring claim",
+  "rows": [
+    {
+      "scope": "admission fixture only",
+      "inspection": {
+        "version": 1,
+        "revision": "e862cf62-613c-4cd9-b605-de06d716f100",
+        "unit": "millimeter",
+        "ready": true,
+        "reason": null,
+        "targets": [
+          {
+            "bodyId": "worker-solid:1:[7,\"body\"]",
+            "featureId": 7,
+            "operationType": "WORKER_SOLID_BOX_V1",
+            "engineRevision": "sha256:ca349411fc9e27677bf27072497abb22077d80c28e27ef073266966d16b07733:c154a4e04961a9a50108fadcf72eca54169ba4db2e9564d24519f197e0568c2f",
+            "canAssign": true,
+            "reason": null
+          }
+        ],
+        "assignments": [],
+        "limits": {
+          "parts": 32,
+          "regions": 32,
+          "definitions": 128,
+          "metadataBytes": 262144,
+          "inspectionBytes": 65536
+        },
+        "publication": "unavailable",
+        "authoredUndo": "pending-shared-journal",
+        "manufacturingMesh": "unqualified"
+      }
+    },
+    {
+      "scope": "private metadata proposal; no native evaluation",
+      "summary": {
+        "partCount": 1,
+        "regionCount": 1,
+        "unknownRegionCount": 1,
+        "alignedPartsUnqualified": 0,
+        "publication": "unavailable",
+        "authoredUndo": "pending-shared-journal",
+        "manufacturingMesh": "unqualified"
+      },
+      "geometryRevision": "sha256-423fdd1120d2655b668b285090368968fb333a01b4c1d5fca99c53c9b5169426"
+    },
+    {
+      "id": "actual-hash-fenced-source-field"
+    },
+    {
+      "id": "actual-hash-fenced-expression"
+    },
+    {
+      "id": "actual-hash-fenced-storage"
+    },
+    {
+      "id": "actual-hash-fenced-history"
+    },
+    {
+      "id": "actual-hash-fenced-registry"
+    },
+    {
+      "id": "actual-hash-fenced-model"
+    },
+    {
+      "id": "actual-hash-fenced-counter"
+    },
+    {
+      "id": "actual-hash-fenced-document"
+    },
+    {
+      "id": "unsupported-producer",
+      "reason": "UNSUPPORTED_TARGET"
+    },
+    {
+      "id": "unsupported-origin",
+      "reason": "UNSUPPORTED_TARGET"
+    },
+    {
+      "id": "unsupported-build",
+      "reason": "ENGINE_REVISION_MISMATCH"
+    },
+    {
+      "id": "unsupported-placement",
+      "reason": "UNSUPPORTED_PLACEMENT"
+    },
+    {
+      "id": "unsupported-class",
+      "reason": "UNSUPPORTED_TARGET"
+    }
+  ]
+}

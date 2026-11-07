@@ -1,0 +1,2 @@
+const path=require('path'),root=path.resolve(__dirname,'../..');
+module.exports={mode:'development',target:'web',devtool:false,entry:path.join(__dirname,'inspection-entry.ts'),output:{path:process.env.CODI_INSPECTION_OUTPUT||'/tmp/codi-closed-inspection-client',filename:'client.js'},resolve:{extensions:['.ts','.js'],modules:[path.join(root,'modules'),path.join(root,'web/app'),'node_modules']},module:{rules:[{test:/\.(js|ts)$/,loader:'babel-loader',include:[path.join(root,'modules'),path.join(root,'web/app'),__dirname]}]}};

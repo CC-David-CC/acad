@@ -1,0 +1,120 @@
+TAP version 13
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: normal discovery/analyze command closes the saved multi-stage service refusal
+ok 1 - normal discovery/analyze command closes the saved multi-stage service refusal
+  ---
+  duration_ms: 158.305425
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: active mode uses real current staged solver objects and the same authorized commands
+ok 2 - active mode uses real current staged solver objects and the same authorized commands
+  ---
+  duration_ms: 146.042296
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: ordinary single-stage saved/active output shape and Worker option remain unchanged
+ok 3 - ordinary single-stage saved/active output shape and Worker option remain unchanged
+  ---
+  duration_ms: 262.709884
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed saved/active multi-stage diagnostics retain dimensional names and use normal typed task
+ok 4 - typed saved/active multi-stage diagnostics retain dimensional names and use normal typed task
+  ---
+  duration_ms: 276.501109
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed single-stage diagnostics and typed-dependent-solve keep existing contracts
+ok 5 - typed single-stage diagnostics and typed-dependent-solve keep existing contracts
+  ---
+  duration_ms: 283.068053
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: unsupported typed units/bindings return honest unavailable snapshots without a rank claim
+ok 6 - unsupported typed units/bindings return honest unavailable snapshots without a rank claim
+  ---
+  duration_ms: 256.206821
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: singular stages and shared-budget exhaustion remain explicit through the normal service
+ok 7 - singular stages and shared-budget exhaustion remain explicit through the normal service
+  ---
+  duration_ms: 270.522201
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: saved source ABA/history/stream/document changes invalidate completed Worker reports
+ok 8 - saved source ABA/history/stream/document changes invalidate completed Worker reports
+  ---
+  duration_ms: 653.079555
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: active actual parameter mutation invalidates pending active-source diagnostics
+ok 9 - active actual parameter mutation invalidates pending active-source diagnostics
+  ---
+  duration_ms: 129.142731
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: typed physical currentness and original physical source fence completed reports
+ok 10 - typed physical currentness and original physical source fence completed reports
+  ---
+  duration_ms: 268.076687
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: host cancellation/detachment is enforced by unchanged normal command lifetime custody
+ok 11 - host cancellation/detachment is enforced by unchanged normal command lifetime custody
+  ---
+  duration_ms: 251.439635
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: malformed ordered reports, nullity and original residuals refuse after actual Worker solve
+ok 12 - malformed ordered reports, nullity and original residuals refuse after actual Worker solve
+  ---
+  duration_ms: 1152.103126
+  type: 'test'
+  ...
+# Subtest: normal protocol rejects new caller scope fields, stale revisions and stale saved frames
+ok 13 - normal protocol rejects new caller scope fields, stale revisions and stale saved frames
+  ---
+  duration_ms: 1.124951
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4273.771788

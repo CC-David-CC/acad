@@ -1,0 +1,31 @@
+{
+  "status": "CONFIRMED_SYNTHETIC_SERVICE_CONTRACT_DEFECTS",
+  "sourceSha256": "50c24341ff04c8e4da771eabd099a1c2c737a3afbefb51edb95dfc75fca1ccd1",
+  "scope": "exact service with explicit model/metadata admission doubles and strictly error-only evaluator; no native geometry/classification/public authoring",
+  "rows": [
+    {
+      "case": "true signal add override",
+      "registerThenThrow": false,
+      "earlierProjectListenerLeaked": true,
+      "evaluatorCalls": 0
+    },
+    {
+      "case": "true signal add override",
+      "registerThenThrow": true,
+      "earlierProjectListenerLeaked": true,
+      "evaluatorCalls": 0
+    },
+    {
+      "case": "caller remove override",
+      "originalEvaluatorFailureReplaced": true,
+      "laterCallerSubscriptionStillInstalled": true,
+      "evaluatorCalls": 1
+    },
+    {
+      "case": "project remove override",
+      "originalEvaluatorFailureReplaced": true,
+      "laterCallerSubscriptionStillInstalled": true,
+      "evaluatorCalls": 1
+    }
+  ]
+}

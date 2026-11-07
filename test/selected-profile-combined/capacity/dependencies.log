@@ -1,0 +1,3 @@
+PASS actual generic source dependencies circle-union {"resultKind":"multi-solid","nativeVolume":3832.743037379548,"nativeReopen":true}
+PASS actual generic source dependencies empty-to-solid {"resultKind":"single-solid","nativeVolume":269.27161376523804,"nativeReopen":true}
+PASS actual generic source dependencies default-box {"resultKind":"single-solid","nativeVolume":null,"nativeReopen":true}

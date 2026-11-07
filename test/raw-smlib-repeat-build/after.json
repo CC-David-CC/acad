@@ -1,0 +1,92 @@
+{
+  "scope": "Real build CLI with readonly copies of exact reviewed native inputs; no geometry qualification",
+  "uid": 1000,
+  "builderSHA256": "f24b40911edbc9ff293d3008d65b2ce2315d5c50dc0006c5a20f98075d6020c5",
+  "driverSHA256": "785587cf7470300b7a83e2550f3840bf1a25a9eedb109f2b21800bc5e7ef2a17",
+  "nativeExpected": {
+    "raw-provider.mjs": "8e49622c97d839cf94d6c4d5e2de6cbd96d1166075741e08dcbda3b1a223d8fa",
+    "raw-provider.wasm": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa"
+  },
+  "first": {
+    "status": 0,
+    "stdout": "asset raw-smlib-worker.js 11.4 KiB [emitted] [minimized] (name: main)\norphan modules 15.2 KiB [orphan] 2 modules\n./modules/engine/raw-smlib/rawWorker.js + 2 modules 20 KiB [built] [code generated]\nwebpack 5.74.0 compiled successfully in 661 ms\n{\"rawSmlibWorkerSha256\":\"bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65\",\"wasmSha256\":\"f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa\"}\n",
+    "stderr": ""
+  },
+  "afterFirst": {
+    "raw-provider.wasm": {
+      "sha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+      "bytes": 3944436,
+      "mode": 292,
+      "ino": "53220439",
+      "mtimeNs": "1794027987294577791"
+    },
+    "raw-smlib-worker.js": {
+      "sha256": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65",
+      "bytes": 11639,
+      "mode": 436,
+      "ino": "53220438",
+      "mtimeNs": "1794027987243577343"
+    }
+  },
+  "second": {
+    "status": 0,
+    "stdout": "asset raw-smlib-worker.js 11.4 KiB [compared for emit] [minimized] (name: main)\norphan modules 15.2 KiB [orphan] 2 modules\n./modules/engine/raw-smlib/rawWorker.js + 2 modules 20 KiB [built] [code generated]\nwebpack 5.74.0 compiled successfully in 666 ms\n{\"rawSmlibWorkerSha256\":\"bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65\",\"wasmSha256\":\"f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa\"}\n",
+    "stderr": ""
+  },
+  "afterSecond": {
+    "raw-provider.wasm": {
+      "sha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+      "bytes": 3944436,
+      "mode": 292,
+      "ino": "53220440",
+      "mtimeNs": "1794027988568588953"
+    },
+    "raw-smlib-worker.js": {
+      "sha256": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65",
+      "bytes": 11639,
+      "mode": 436,
+      "ino": "53220438",
+      "mtimeNs": "1794027987243577343"
+    }
+  },
+  "malformed": {
+    "status": 1,
+    "stdout": "",
+    "stderr": "/mnt/data10tb/codi-raw-smlib-repeat-build-20261107-after/build/prepare-raw-smlib-assets.cjs:13\nfor(const [name,hash] of Object.entries(expected))if(!fs.existsSync(path.join(cache,name))||fileHash(path.join(cache,name))!==hash)throw Error('Missing or mismatched direct NVIDIA runtime '+name+'; see test/raw-smlib-corpus/README.md');\n                                                                                                                                   ^\n\nError: Missing or mismatched direct NVIDIA runtime raw-provider.wasm; see test/raw-smlib-corpus/README.md\n    at Object.<anonymous> (/mnt/data10tb/codi-raw-smlib-repeat-build-20261107-after/build/prepare-raw-smlib-assets.cjs:13:138)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v24.22.1\n"
+  },
+  "beforeBad": {
+    "raw-provider.wasm": {
+      "sha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+      "bytes": 3944436,
+      "mode": 292,
+      "ino": "53220440",
+      "mtimeNs": "1794027988568588953"
+    },
+    "raw-smlib-worker.js": {
+      "sha256": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65",
+      "bytes": 11639,
+      "mode": 436,
+      "ino": "53220438",
+      "mtimeNs": "1794027987243577343"
+    }
+  },
+  "afterBad": {
+    "raw-provider.wasm": {
+      "sha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+      "bytes": 3944436,
+      "mode": 292,
+      "ino": "53220440",
+      "mtimeNs": "1794027988568588953"
+    },
+    "raw-smlib-worker.js": {
+      "sha256": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65",
+      "bytes": 11639,
+      "mode": 436,
+      "ino": "53220438",
+      "mtimeNs": "1794027987243577343"
+    }
+  },
+  "originalCacheUnchanged": true,
+  "tempOutputs": [],
+  "status": "PASS"
+}

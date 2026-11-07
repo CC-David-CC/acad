@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "status": "PASS",
+  "scope": "actual production Node Worker + shared closed-sketch coordinator; storage/publication/lifetime/Web Locks are explicit protocol doubles",
+  "productCommits": [
+    "99a9a6c7e8c872ae3cb7ed03f88ab800a5691b31",
+    "215fbf1460da6a96d016b93ce8166d2c1fba9b01"
+  ],
+  "base": "b953ec1a7054eb77871bda5867c40dba4f8bd25e",
+  "tests": {
+    "pass": 20,
+    "fail": 0,
+    "skipped": 0,
+    "tap": "verified.tap",
+    "typescriptExitCode": 0,
+    "typescriptLog": "typescript-verifier-frozen.log"
+  },
+  "workers": {
+    "main": {
+      "started": 223,
+      "terminated": 223
+    },
+    "negative": {
+      "started": 8,
+      "terminated": 8
+    },
+    "totalStarted": 231,
+    "totalTerminated": 231
+  },
+  "requestsByTask": {
+    "ordinary-solve": 27,
+    "sketch-transition-inspection": 114,
+    "sketch-transition-driving-dimension": 33,
+    "sketch-transition-verify-driving-dimension": 20,
+    "sketch-transition-replay": 18,
+    "sketch-transition-verify-dimension-travel": 10,
+    "rectangle": 1
+  },
+  "runtime": {
+    "node": "v24.22.1",
+    "webpack": "5.74.0",
+    "sourceSha256": {
+      "web/app/sketcher/headless/drivingDimensionTarget.mjs": "a69f153c277c75d9735ba0641018e4336ac5549638e0119971af95f5c56ea4d6",
+      "web/app/sketcher/headless/drivingDimensionTransition.ts": "f84135486a83f340288207a9e1824d1365987a2b87967e5e45add642987cd358",
+      "web/app/sketcher/headless/closedSketchInspection.ts": "9cd622674069f13476e6338dffe30dc4974c65b01669cde1141ec1f9dace5761",
+      "web/app/sketcher/headless/inspectionClient.ts": "849d9ee249c1821e56cfce763faf4bcc563cb82be6ed4519372d4ff09e421500",
+      "web/app/sketcher/headless/transitionClient.ts": "405f308f665f434ddb805168c54f7c910745e07f023d11d83fca0c07c54984aa",
+      "web/app/sketcher/headless/solveWorker.ts": "9f83ee4ec282fe52f4ff2d382dc3cd6f838b24ff37220cc9a6f4b5f6ae7f4225",
+      "web/app/sketcher/headless/client.ts": "4776485ff93cfb4aa5af23e342bc20de723bb638bf0ea3fc5a8a60ebf3e92d91",
+      "web/app/cad/craft/closedSketchTransitions.ts": "a2302d216a9f842be5ca508ede99e410e20401b8fa7301c18500a5da93afe80d",
+      "web/app/cad/craft/typedClosedSketchInspection.mjs": "f31284d172eb98b7cafd8fe3a1251d1f5f7bcf04816283700b7e5af144ba8153"
+    },
+    "worker": "2b2a308a9c32ca30631d40055e4fafd60c660677ba8f456dfe8b1dc850b75792",
+    "service": "f23f3a0e5cb749c9bcf50f162a475e929e63b02bcb71cf4e5b17220a5e10e405"
+  },
+  "sourcePinsMatchFrozenProduct": true,
+  "verifierRegression": {
+    "beforeTests": {
+      "pass": 0,
+      "fail": 2
+    },
+    "beforeProduct": "99a9a6c7e8c872ae3cb7ed03f88ab800a5691b31",
+    "beforeWorker": "d589f8dfe83e502112790ceaf53106ef7507154fcd62b2a53c1659b88f4433d8",
+    "beforeReceipt": "verifier-before.json",
+    "afterReceipt": "verification-regression.json",
+    "unrelatedFreeLoopDisplacementMillimeters": 7,
+    "comparison": "independent full-state transition reproduction; journal pair may reproduce either valid forward direction; no geometry epsilon"
+  },
+  "testSha256": {
+    "platform.mjs": "65716e41c68638f351dc9a1dda7f60de8ec83d205d39c7311569d9ec32a5a16d",
+    "verification-regression.test.mjs": "e0441f83e277169381d9cdc22937b6371c92d36b7db0f8d76df97b8d29414e0f",
+    "build.cjs": "1db58c0c700c665aab042461e3c50f42d7fa7773d88f194c42515396dab9330f",
+    "worker-url.mjs": "e498f72d2acde6860979aee1c4424b5e0e2b7d78fd2d84c30aa3d8ec2a85832a",
+    "dimension.test.mjs": "0d2be8f55a883b5633f8d5eebcb5b6b56941d193062e849494896024ad5e0d45",
+    "entry.ts": "7089a1194a0b4095281449f2664f187f292f90f26d57b306de6a0d304843b6c0"
+  },
+  "limits": [
+    "two declared driving schemas only",
+    "other typed mutation families remain guarded",
+    "typed local constants/generators/labels/separate reference dimensions unsupported",
+    "signed desktop/native downstream replay/SaveOpen/paint pending parent qualification"
+  ]
+}

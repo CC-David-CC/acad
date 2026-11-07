@@ -1,0 +1,76 @@
+{
+  "accepted": {
+    "revision": "replay-32",
+    "ok": true
+  },
+  "added": {
+    "revision": "length",
+    "ok": true,
+    "relation": {
+      "objects": [
+        "s0",
+        "s1"
+      ],
+      "status": "accepted"
+    }
+  },
+  "missing": {
+    "revision": "missing",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "Choose two distinct segments in the current sketch."
+    }
+  },
+  "conflict": {
+    "revision": "conflict",
+    "ok": false,
+    "error": {
+      "code": "RESIDUAL",
+      "message": "A constraint residual exceeds its numerical tolerance."
+    }
+  },
+  "elapsedMs": 224.10000014305115,
+  "mismatch": {
+    "revision": "mismatch",
+    "ok": false,
+    "error": {
+      "code": "CURRENT_GEOMETRY_MISMATCH",
+      "message": "The solved sketch differs from the captured native state."
+    }
+  },
+  "badHint": {
+    "revision": "hint",
+    "ok": false,
+    "error": {
+      "code": "INTENT_CHANGED",
+      "message": "Constraint intent changed during solving."
+    }
+  },
+  "invalid": {
+    "revision": "invalid",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "Sketch contains a non-finite or out-of-range number."
+    }
+  },
+  "extra": {
+    "revision": "",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "Invalid sketch transition request."
+    }
+  },
+  "oversize": {
+    "revision": "",
+    "ok": false,
+    "error": {
+      "code": "INVALID",
+      "message": "Invalid sketch transition request."
+    }
+  },
+  "unchanged": true,
+  "violations": []
+}

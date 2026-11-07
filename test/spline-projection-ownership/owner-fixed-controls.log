@@ -1,0 +1,27 @@
+✔ 2 and 4096 points are copied, recursively frozen and detached (193.411723ms)
+✔ refuses malformed spline short (0.673277ms)
+✔ refuses malformed spline oversized (134.347982ms)
+✔ refuses malformed spline sparse (0.748568ms)
+✔ refuses malformed spline arrayExtra (0.410694ms)
+✔ refuses malformed spline pointExtra (0.434615ms)
+✔ refuses malformed spline missing (0.428375ms)
+✔ refuses malformed spline nonfinite (0.411205ms)
+✔ refuses malformed spline tolerance (0.488595ms)
+✔ refuses malformed spline toleranceType (0.567006ms)
+✔ refuses malformed spline approximation (0.414734ms)
+✔ refuses malformed spline kind (0.336973ms)
+✔ refuses malformed spline extra (0.285323ms)
+✔ does not execute a point accessor (0.321853ms)
+✔ refuses type mismatch and malformed/nonfinite top bounds (1.174312ms)
+✔ supports explicit spline unsupported reasons without partial geometry (0.642477ms)
+✔ cancellation and supersession remain effective during cooperative polyline capture (191.543723ms)
+✔ enforces aggregate8192 while retaining maximum8192 success (854.269879ms)
+✔ final current callback cannot abort or close and still publish a spline ticket (534.326948ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1998.889655

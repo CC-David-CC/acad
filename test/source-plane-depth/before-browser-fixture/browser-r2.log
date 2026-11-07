@@ -1,0 +1,8 @@
+verb 2.0.0
+TimeoutError: Waiting failed: 2000ms exceeded
+    at new WaitTask (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/common/WaitTask.js:49:34)
+    at IsolatedWorld.waitForFunction (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Realm.js:25:26)
+    at CdpFrame.waitForFunction (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Frame.js:583:43)
+    at CdpFrame.<anonymous> (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/util/decorators.js:109:27)
+    at CdpPage.waitForFunction (/path/to/workspace/CodiServer/desktop-preview/SIMPLIFIED/tests/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Page.js:1445:37)
+    at main (/tmp/codi-cad-source-plane-depth-20261107/test/source-plane-depth/browser.test.cjs:15:14)

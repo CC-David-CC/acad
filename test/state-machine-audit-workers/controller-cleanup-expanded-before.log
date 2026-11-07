@@ -1,0 +1,137 @@
+✖ terminal cleanup failure settles initialization readiness and stays observable (109.67558ms)
+✖ terminal cleanup failure settles in-flight request even after its deadline (100.886698ms)
+✔ ordinary close still rejects pending work and remains idempotent (101.159351ms)
+✖ exact falsey termination failure remains visible: undefined (100.771978ms)
+✖ exact falsey termination failure remains visible: null (100.718716ms)
+✖ exact falsey termination failure remains visible: zero (100.644286ms)
+✖ exact falsey termination failure remains visible: false (100.800017ms)
+✖ exact falsey termination failure remains visible: empty (100.737506ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 1
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 889.628682
+
+✖ failing tests:
+
+test at test/state-machine-audit-workers/controller-cleanup.test.mjs:14:1
+✖ terminal cleanup failure settles initialization readiness and stays observable (109.67558ms)
+  AssertionError [ERR_ASSERTION]: Closing must reject ready even if termination throws
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/controller-cleanup.test.mjs:15:173)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/controller-cleanup.test.mjs:17:1
+✖ terminal cleanup failure settles in-flight request even after its deadline (100.886698ms)
+  AssertionError [ERR_ASSERTION]: Pending operation must not remain hung after closed+deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/controller-cleanup.test.mjs:18:297)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/controller-cleanup.test.mjs:24:108
+✖ exact falsey termination failure remains visible: undefined (100.771978ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/controller-cleanup.test.mjs:25:282)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/controller-cleanup.test.mjs:24:108
+✖ exact falsey termination failure remains visible: null (100.718716ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/controller-cleanup.test.mjs:25:282)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/controller-cleanup.test.mjs:24:108
+✖ exact falsey termination failure remains visible: zero (100.644286ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/controller-cleanup.test.mjs:25:282)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/controller-cleanup.test.mjs:24:108
+✖ exact falsey termination failure remains visible: false (100.800017ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/controller-cleanup.test.mjs:25:282)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/controller-cleanup.test.mjs:24:108
+✖ exact falsey termination failure remains visible: empty (100.737506ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/controller-cleanup.test.mjs:25:282)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

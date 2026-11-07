@@ -1,0 +1,160 @@
+{
+  "scope": "Real Chromium disposable Worker using actual headless workspace/solver/replay/export, independently parsed DXF group codes. Native Arc preserved; no Viewer/Canvas and no live Files publication qualification.",
+  "workerSha256": "ec4fad4d72dfb4556a7946fcb5a25ac081f7f0a3cf63544878984b13cb0bc9cc",
+  "observations": [
+    {
+      "name": "quadrant-I",
+      "type": "ARC",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10,
+      "sweep": 90,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "major-270",
+      "type": "ARC",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10,
+      "sweep": 270,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "wrap-IV-I",
+      "type": "ARC",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10,
+      "sweep": 90,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "translated-quadrant-III-IV",
+      "type": "ARC",
+      "center": [
+        3,
+        -7
+      ],
+      "radius": 10,
+      "sweep": 90,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "full-identical",
+      "type": "CIRCLE",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10,
+      "sweep": 360,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "full-near-positive",
+      "type": "CIRCLE",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10,
+      "sweep": 360,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "full-near-negative",
+      "type": "CIRCLE",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10,
+      "sweep": 360,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "full-strictly-below-threshold",
+      "type": "CIRCLE",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10,
+      "sweep": 360,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "arc-at-strict-threshold",
+      "type": "ARC",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10,
+      "sweep": 0.000005729577935653651,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "arc-above-threshold",
+      "type": "ARC",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10,
+      "sweep": 0.000005729583676838956,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "full-diagonal-coordinate-predicate",
+      "type": "CIRCLE",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10,
+      "sweep": 360,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "arc-outside-diagonal-threshold",
+      "type": "ARC",
+      "center": [
+        0,
+        0
+      ],
+      "radius": 10,
+      "sweep": 0.000008594366931902186,
+      "nativeType": "Arc",
+      "sourceUnchanged": true
+    }
+  ],
+  "fullBoundary": {
+    "type": "CIRCLE",
+    "ok": true
+  },
+  "workers": {
+    "created": 14,
+    "terminated": 14
+  },
+  "canvasCount": 0,
+  "viewerPresent": false
+}

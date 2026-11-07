@@ -1,0 +1,12 @@
+// Two positive shared-model typed reads in the same combined application.
+import assert from 'node:assert/strict';import {canonical} from '../polygon-profile-app-history/public-oracle.mjs';
+export async function typedReadPositive(h,record){
+ const c=h.command;await h.retire();await h.login();await h.launch();
+ let i=await c('inspect-rectangle-creation');const rectangle=await c('create-rectangle-sketch',{revision:i.revision,unit:'millimeter',origin:[0,0],width:100,height:50,depth:0}),faceId=rectangle.faceId;
+ let f=await c('inspect-worker-features');await c('create-worker-extrusion',{revision:f.revision,...f.extrusionCandidates.find(x=>x.faceId===faceId),depth:20});f=await c('inspect-worker-features');await c('create-worker-centered-hole',{revision:f.revision,...f.centeredHoleCandidates[0],diameter:10});f=await c('inspect-worker-features');await c('create-worker-four-corner-holes',{revision:f.revision,...f.fourCornerCandidates[0],diameter:4,offsetX:10,offsetY:10});
+ for(const [expression,w,hgt]of [['mm(120)',120,60],['inch(5)',127,63.5]]){
+  const p=await c('inspect-physical-parameters');assert.equal(p.brackets.length,1);const b=p.brackets[0],definitions=[{name:'W',dimension:'length',expression},{name:'H',dimension:'length',expression:'W/2'},{name:'OX',dimension:'length',expression:'mm(10)'},{name:'OY',dimension:'length',expression:'mm(10)'}];await c('apply-physical-bracket',{revision:p.revision,faceId:b.faceId,index:b.index,featureId:b.featureId,width:'W',height:'H',offsetX:'OX',offsetY:'OY',definitions});
+  const before=await h.capture([faceId]),r=await h.inspect(faceId);assert.equal(r.capabilities.mutations,false);assert.equal(r.objects.length,4);assert.equal(r.constraints.length,11);const expected={'rect-0:A':[0,0],'rect-0:B':[w,0],'rect-1:A':[w,0],'rect-1:B':[w,hgt],'rect-2:A':[w,hgt],'rect-2:B':[0,hgt],'rect-3:A':[0,hgt],'rect-3:B':[0,0]};for(const [id,[x,y]]of Object.entries(expected)){const q=r.points.find(q=>q.id===id);assert(q);assert(Math.abs(q.x-x)<=1e-7&&Math.abs(q.y-y)<=1e-7,id);}
+  for(const [id,name]of [['rect-0','W'],['rect-1','H']])assert.equal(r.constraints.find(q=>q.typeId==='SegmentLength'&&q.objects[0]===id).constants.length,name);assert.equal(canonical(await h.capture([faceId])),canonical(before));record('Combined typed readonly positive '+expression,{faceId,widthMm:w,heightMm:hgt,sourceNames:['W','H'],unchangedAcceptedIntent:true,mutations:false});
+ }
+}

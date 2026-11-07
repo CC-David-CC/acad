@@ -1,0 +1,7 @@
+{
+  "web/app/cad/craft/workerLoftCommands.ts": "e84a15f5aca5d6fc748b07827eb29127a7042747f2d9d40fcbc2772d2504e5fd",
+  "web/app/cad/craft/craftBundle.ts": "9437cb4b96e4d318aed0f2ec49e81a9dde56a184ea298f733d92ec719651a661",
+  "modules/engine/mount/catalogMount.ts": "25e9e4789aeefe83fc651bdf39cdff59c0bb342150cde66955989cb57c6d28a7",
+  "modules/workbenches/modeler/index.ts": "43d5d0703143e8c6d76c9b35c2a05b58187af880177c19a61b7c58d302155aa2",
+  "test/public-worker-loft/service.test.mjs": "04904262e02a5a6bc8d2552cd63d3cfc0de90eb5176f23a80422e9941b8de8e6"
+}

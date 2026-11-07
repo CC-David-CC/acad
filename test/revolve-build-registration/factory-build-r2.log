@@ -1,0 +1,31 @@
+assets by path revolve-profile/ 34.3 MiB 20 assets
+assets by path boolean-history/ 34.3 MiB 18 assets
+assets by path mechanical-profile/ 34.2 MiB 10 assets
+assets by path polygon-profile/ 34.1 MiB
+  assets by path polygon-profile/modules/engine/ 412 KiB 7 assets
+  + 2 assets
+assets by path *.js 1.69 MiB
+  asset oci-verified-worker.js 373 KiB [emitted] [from: .build/prism-assets/oci-verified-worker.js] (auxiliary name: factory)
+  + 6 assets
+assets by path *.wasm 71 MiB
+  asset a81af0b78dd585124f3f.wasm 33.4 MiB [emitted] [immutable] [from: .build/selected-profile-assets/selected-profile-occ.wasm] (auxiliary name: factory)
+  + 3 assets
+assets by path *.mjs 13.2 KiB
+  asset selectedProfilePlan.mjs 8.55 KiB [emitted] [from: .build/selected-profile-assets/selectedProfilePlan.mjs] (auxiliary name: factory)
+  asset exactMeshVolume.mjs 4.65 KiB [emitted] [from: .build/selected-profile-assets/exactMeshVolume.mjs] (auxiliary name: factory)
+runtime modules 1.72 KiB 5 modules
+modules by path ./.build/ 10.2 KiB (javascript) 138 MiB (asset)
+  asset modules 2.71 KiB (javascript) 138 MiB (asset) 66 modules
+  javascript modules 7.53 KiB
+    modules by path ./.build/*.mjs 7.26 KiB 4 modules
+    modules by path ./.build/prism-assets/ 138 bytes 2 modules
+    + 2 modules
+modules by path ./modules/engine/ 187 KiB
+  modules by path ./modules/engine/mount/*.mjs 148 KiB 19 modules
+  modules by path ./modules/engine/solid/*.mjs 12.3 KiB
+    ./modules/engine/solid/ownedRevolveIntent.mjs 3.45 KiB [built] [code generated]
+    + 3 modules
+  ./modules/engine/mount/catalogMount.ts 11 KiB [built] [code generated]
+  ./modules/engine/raw-smlib/rawMount.mjs 15.5 KiB [built] [code generated]
+./test/revolve-build-registration/factory-entry.ts 1.42 KiB [built] [code generated]
+webpack 5.74.0 compiled successfully in 2034 ms

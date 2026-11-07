@@ -1,0 +1,11 @@
+{
+  "scope": "Labeled trusted-transport double; receiving-owner corruption boundary, not real Worker/native math proof",
+  "ownerSha256": "3d6fa96e24c94b5d92a7f01099e5ed9701efe75fc49b96c12a65e402a7c7d19d",
+  "workerDeclaredTotal": 8192,
+  "perObject": 4096,
+  "objects": 3,
+  "acceptedTotal": 12288,
+  "ticketPublished": true,
+  "allPointsFrozen": true,
+  "status": "finding-confirmed"
+}

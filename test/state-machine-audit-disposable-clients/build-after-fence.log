@@ -1,0 +1,17 @@
+asset clients.cjs 380 KiB [emitted] (name: main)
+runtime modules 670 bytes 3 modules
+modules by path ./ 160 KiB
+  modules by path ./web/app/ 121 KiB
+    modules by path ./web/app/sketcher/ 70.5 KiB
+      modules by path ./web/app/sketcher/headless/*.mjs 24.7 KiB 3 modules
+      + 2 modules
+    modules by path ./web/app/cad/parameters/*.mjs 50.1 KiB
+      ./web/app/cad/parameters/physicalWorkerClient.mjs 30.6 KiB [built] [code generated]
+      + 3 modules
+  modules by path ./modules/ 39.6 KiB
+    ./modules/engine/extrusion/prismSemanticClient.ts 23.9 KiB [built] [code generated]
+    ./modules/engine/mount/workerReplyRecord.mjs 4.85 KiB [built] [code generated]
+    ./modules/gems/safeExpression.mjs 10.9 KiB [built] [code generated]
+  ./test/state-machine-audit-disposable-clients/entry.ts 257 bytes [built] [code generated]
+../codi-jsketcher-release-integration-20261104/node_modules/acorn/dist/acorn.mjs 202 KiB [built] [code generated]
+webpack 5.74.0 compiled successfully in 1472 ms

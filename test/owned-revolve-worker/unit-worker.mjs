@@ -1,0 +1,15 @@
+import {parentPort} from 'node:worker_threads';
+import assert from 'node:assert/strict';
+import {captureOwnedRevolveIntent,bindOwnedRevolveIntent} from '../../modules/engine/solid/ownedRevolveIntent.mjs';
+import {prepareOwnedRevolve} from '../../modules/engine/mount/ownedRevolvePlan.mjs';
+const frame={origin:[0,0,0],x:[1,0,0],y:[0,1,0],z:[0,0,1]},points=[[0,0],[10,0],[10,10],[5,10],[5,30],[0,30]];
+const make=()=>({op:'solid.profile.revolve',version:1,unit:'millimeter',source:{faceId:'face:component',sourceSha256:'a'.repeat(64)},frame:structuredClone(frame),region:{id:'region:component',outer:points.map((a,i)=>({kind:'segment',id:'edge'+i,a:[...a],b:[...points[(i+1)%points.length]]})),holes:[]},axis:{kind:'source-segment',id:'axis',a:[0,0],b:[0,5]},angleRadians:Math.PI});
+const rows=[];
+let x=make(),s=JSON.stringify(x),p=await prepareOwnedRevolve(x);assert.equal(JSON.stringify(x),s);assert.deepEqual(p.nativeAxis,[0,0,0,0,5,0]);assert.equal(p.nativeValues[0],1);assert.equal(p.nativeValues[13],1);assert.equal(p.nativeValues.length,28);assert(!Object.hasOwn(p.request,'depth'));rows.push('real depth-free shared V3 face preparation');
+const captured=captureOwnedRevolveIntent(x);x.region.outer[0].a[0]=99;x.axis.b[1]=7;assert.equal(captured.region.outer[0].a[0],0);assert.equal(captured.axis.b[1],5);assert(Object.isFrozen(captured.axis.b));rows.push('detached immutable component source');
+const a=await bindOwnedRevolveIntent(make());for(const change of [r=>r.region.outer[1].a[0]=9,r=>r.frame.origin[0]=100,r=>r.source.sourceSha256='b'.repeat(64),r=>r.axis.b[1]=6,r=>r.angleRadians=-Math.PI]){const r=make();change(r);assert.notEqual((await bindOwnedRevolveIntent(r)).requestSha256,a.requestSha256);}rows.push('full request digest binds face/frame/source/axis/angle');
+for(const change of [r=>r.extra=1,r=>r.source.extra=1,r=>r.axis.extra=1,r=>r.axis.a.length=3,r=>r.axis.b[0]=Infinity,r=>r.region.outer.push(r.region.outer[0]),r=>Object.defineProperty(r,'angleRadians',{enumerable:true,get(){throw Error('getter executed');}})]){x=make();change(x);assert.throws(()=>captureOwnedRevolveIntent(x),e=>e.code==='INVALID_REQUEST');}rows.push('strict own data and dense bounded arrays');
+for(const angle of [0,-0,NaN,Infinity,2*Math.PI+.0001]){x=make();x.angleRadians=angle;assert.throws(()=>captureOwnedRevolveIntent(x),e=>e.code==='REVOLVE_INVALID_ANGLE');}x=make();x.axis.b=[0,0];assert.throws(()=>captureOwnedRevolveIntent(x),e=>e.code==='REVOLVE_INVALID_AXIS');rows.push('angle and zero axis admission');
+for(const angle of [-2*Math.PI,-Math.PI/2,2*Math.PI]){x=make();x.angleRadians=angle;assert.equal((await prepareOwnedRevolve(x)).request.angleRadians,angle);}rows.push('signed angle preserved exactly');
+x=make();x.frame={origin:[100,200,300],x:[Math.SQRT1_2,Math.SQRT1_2,0],y:[0,0,1],z:[Math.SQRT1_2,-Math.SQRT1_2,0]};p=await prepareOwnedRevolve(x);assert.deepEqual(p.nativeAxis,[100,200,300,0,0,5]);rows.push('source-local axis transformed in genuine oblique frame');
+parentPort.postMessage({status:'PASS',rows});

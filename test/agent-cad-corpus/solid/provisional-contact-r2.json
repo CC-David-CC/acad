@@ -1,0 +1,486 @@
+{
+  "version": 1,
+  "source": "4a3d7aba4",
+  "scope": "actual registered craft commands, fresh context per case, synthetic host lifetime; triangle-derived measurements, direct local fixture; not signed desktop commands",
+  "records": [
+    {
+      "engine": "occ",
+      "case": "edge-contact-union",
+      "status": "not-tested",
+      "reason": "contact union returned geometry; independent manifoldness not established",
+      "expected": null,
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "volume": 1999.9999999999998,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                20,
+                20,
+                10
+              ]
+            ],
+            "triangles": 24,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "occ"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "occ",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "point-contact-union",
+      "status": "not-tested",
+      "reason": "contact union returned geometry; independent manifoldness not established",
+      "expected": null,
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "volume": 1999.9999999999995,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                20,
+                20,
+                20
+              ]
+            ],
+            "triangles": 24,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "occ"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "occ",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "edge-contact-union",
+      "status": "not-tested",
+      "reason": "contact union returned geometry; independent manifoldness not established",
+      "expected": null,
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "volume": 1999.9999999999998,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                20,
+                20,
+                10
+              ]
+            ],
+            "triangles": 24,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "manifold"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "manifold",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "point-contact-union",
+      "status": "not-tested",
+      "reason": "contact union returned geometry; independent manifoldness not established",
+      "expected": null,
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "volume": 1999.9999999999998,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                20,
+                20,
+                20
+              ]
+            ],
+            "triangles": 24,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "manifold"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "manifold",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "edge-contact-union",
+      "status": "fail",
+      "reason": "ENGINE_FAILURE",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "ENGINE_FAILURE",
+        "name": "Error",
+        "message": "SMLib refused or failed the operation.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                10,
+                10,
+                0
+              ],
+              [
+                20,
+                20,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                10,
+                10,
+                0
+              ],
+              [
+                20,
+                20,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "point-contact-union",
+      "status": "not-tested",
+      "reason": "contact union returned geometry; independent manifoldness not established",
+      "expected": null,
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "volume": 1999.9999999999998,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                20,
+                20,
+                20
+              ]
+            ],
+            "triangles": 24,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "smlib"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "smlib",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "cross-engine-boolean",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "cross-engine-boolean",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "cross-engine-boolean",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "extrusion",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "extrusion",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "extrusion",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "revolve",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "revolve",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "revolve",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "curved-profile",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "curved-profile",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "curved-profile",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "shell",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "shell",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "shell",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "fillet",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "fillet",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "fillet",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "occ",
+      "case": "STEP-import-export",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "manifold",
+      "case": "STEP-import-export",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    },
+    {
+      "engine": "smlib",
+      "case": "STEP-import-export",
+      "status": "unsupported",
+      "reason": "not available on the common worker-solid command surface; other engine-specific paths not evaluated"
+    }
+  ]
+}

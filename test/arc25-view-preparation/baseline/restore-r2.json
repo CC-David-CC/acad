@@ -1,0 +1,99 @@
+{
+  "immediate": {
+    "models": 2000,
+    "views": 2001,
+    "rootsWithView": 2000,
+    "facesWithView": 2000,
+    "selection": {
+      "id": "S:0",
+      "registered": true,
+      "marked": true,
+      "viewMarked": true
+    }
+  },
+  "cleanupWaitMs": 0,
+  "nativeEqual": false,
+  "snapshotError": null,
+  "storageEqual": false,
+  "sourceEqual": true,
+  "beforeModels": 0,
+  "afterModels": 2000,
+  "beforeHistory": 0,
+  "afterHistory": 2000,
+  "beforeResources": {
+    "owners": 0,
+    "mounts": 0,
+    "candidates": 0,
+    "accepted": 0,
+    "detached": 0,
+    "cleanupFailed": false
+  },
+  "afterResources": {
+    "owners": 1,
+    "mounts": 0,
+    "candidates": 0,
+    "accepted": 0,
+    "detached": 1,
+    "cleanupFailed": false
+  },
+  "workers": [
+    {
+      "closed": true,
+      "url": "http://127.0.0.1:20495/static/project-validator.3ae7f2bbbaedf25e54c3.js"
+    }
+  ],
+  "bytes": 151959,
+  "history": 2000,
+  "keys": 2001,
+  "keysMs": 0,
+  "timings": {
+    "renders": [
+      {
+        "start": 3800.5999999046326,
+        "ms": 0.5,
+        "models": 0,
+        "sceneChildren": 1,
+        "drawCalls": 6,
+        "triangles": 45,
+        "geometries": 2
+      },
+      {
+        "start": 6279,
+        "ms": 156.19999980926514,
+        "models": 2000,
+        "sceneChildren": 2001,
+        "drawCalls": 2964,
+        "triangles": 5961,
+        "geometries": 1481
+      },
+      {
+        "start": 7553.599999904633,
+        "ms": 47.59999990463257,
+        "models": 2000,
+        "sceneChildren": 2001,
+        "drawCalls": 2964,
+        "triangles": 5961,
+        "geometries": 1481
+      }
+    ],
+    "reset": 0.8999998569488525,
+    "loadData": 22.299999952316284,
+    "stageCalls": 2000,
+    "stagedFactoryCalls": 1,
+    "registryPrepareCalls": 1,
+    "registryPrepareMs": 1.2000000476837158,
+    "modelNotifyCalls": 1,
+    "modelNotifyMs": 174.40000009536743
+  },
+  "tasks": [
+    {
+      "start": 5503.899999856949,
+      "duration": 774
+    }
+  ],
+  "elapsedMs": 3893.4000000953674,
+  "maxOtherGap": 1983.0999999046326,
+  "outcome": "accepted",
+  "otherReady": true,
+  "appHash": "d7588344757f704ede436fcd32474fe5787b1525a9af78b8e1d7425bb4abc868"
+}

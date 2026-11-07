@@ -1,0 +1,5 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {validateEnclosureMesh} from '../../modules/engine/mount/enclosureMesh.mjs';
+const p=[0,0,0],x=[1,0,0],y=[0,1,0],z=[0,0,1],tris=[[p,y,x],[p,x,z],[p,z,y],[x,y,z]],expected={nativeVolume:1/6,mesh:{triangles:4,bounds:{min:p,max:[1,1,1]}}};
+const data=()=>Float64Array.from(tris.flat(2)).buffer;
+test('bounded oriented triangle data matches native volume and bounds',()=>{assert.equal(validateEnclosureMesh(data(),4,expected),true)});
+test('invalid sizes, nonfinite data, degenerate triangles and reversed winding refuse',()=>{assert.throws(()=>validateEnclosureMesh(data(),513,expected));assert.throws(()=>validateEnclosureMesh(data().slice(0,8),4,expected));let a=new Float64Array(data());a[0]=NaN;assert.throws(()=>validateEnclosureMesh(a.buffer,4,expected));a=new Float64Array(data());a.set(a.slice(0,3),3);assert.throws(()=>validateEnclosureMesh(a.buffer,4,expected));const reversed=Float64Array.from(tris.map(t=>[t[0],t[2],t[1]]).flat(2)).buffer;assert.throws(()=>validateEnclosureMesh(reversed,4,expected))});

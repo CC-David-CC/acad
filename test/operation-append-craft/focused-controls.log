@@ -1,0 +1,40 @@
+✔ real detached history capture permits size-only candidate, exact undo/redo and retained descendants (3.794177ms)
+✔ currentness refusal during real yielded capture leaves accepted history/journal exact (5.910547ms)
+✔ invalid scalar and immutable selection/build changes cannot produce a travel proposal (0.824768ms)
+✔ edge size and exact-kind travel share the existing owned feature transaction (25.865601ms)
+✔ treatment branch changes only size and uses the exact capture/record/travel helpers (2.208761ms)
+✔ existing replay/publication/committed-outcome path remains after the edge branch (2.412404ms)
+✔ source, services, runtime-bearing history and expression table are currentness-bound (3.767807ms)
+✔ canonical capture is detached frozen exact type/params for both supported edge kinds (2.636925ms)
+✔ capture rejects unknown operations, numeric strings, extra saved geometry and malformed identities (0.615316ms)
+✔ request, parameter and edge-array accessors are never invoked (0.464424ms)
+✔ append entry holds only one captured operation and bounded tip metadata (0.783117ms)
+✔ append supports indices 0..9999 with strict previous-tip ID/null rules (2.11342ms)
+✔ record/travel options are exact own-data inputs without callbacks or getters (0.488155ms)
+✔ Undo/Redo travel reuses immutable entry storage and returns the canonical operation (0.324483ms)
+✔ every full parameter/runtime/source-key mutation refuses Undo unchanged (4.243831ms)
+✔ stale document/revision/index/feature/tip length/previous ID and present Redo slots refuse (0.576776ms)
+✔ real helper composition preserves creation then size-edit chronology in both directions (1.05923ms)
+✔ branching after creation Undo truncates only the redo tail in the same journal (0.898049ms)
+✔ mixed old journal entries keep their order, storage and existing travel semantics (0.672347ms)
+✔ 64-entry cap still retains the latest appends and preserves proposal-only mutation (6.417053ms)
+✔ byte accounting matches independent full serialized UTF8/UTF16 oracle including surrogate boundaries (2.07932ms)
+✔ accounting only serializes small fragments even with sixteen maximum opaque IDs (6.993408ms)
+✔ 8MiB trimming charges new entries together with old snapshots and size-edit records (36.02557ms)
+✔ detached source-bound candidate edits only dimensions, travels exactly and retains dependent intent (5.316932ms)
+✔ consumed source plane cannot take unrelated-sketch save shortcut (0.813908ms)
+✔ unrelated-save proof refuses unknown source (0.281682ms)
+✔ unrelated-save proof refuses wrong face (0.306123ms)
+✔ unrelated-save proof refuses wrong region (0.314054ms)
+✔ unrelated-save proof refuses consumed target (0.220372ms)
+✔ unrelated-save proof refuses missing offsets (0.224292ms)
+✔ unrelated-save proof refuses duplicate feature (0.151101ms)
+✔ unrelated-save proof refuses mixed backend (0.324893ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 379.111325

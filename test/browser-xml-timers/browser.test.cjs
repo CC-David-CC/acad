@@ -1,0 +1,15 @@
+const assert=require('node:assert/strict'),puppeteer=require(process.env.PUPPETEER_CORE_PATH||'puppeteer-core');
+const base=new URL(process.env.CODI_TEST_URL),cdp=new URL(process.env.CODI_TEST_CDP);if(![base,cdp].every(u=>['127.0.0.1','localhost','[::1]'].includes(u.hostname)))throw Error('Loopback only');
+(async()=>{const browser=await puppeteer.connect({browserURL:cdp.href}),context=await browser.createBrowserContext(),page=await context.newPage();try{
+ const response=await page.goto(base.href);assert.match(response.headers()['content-security-policy'],/script-src 'self'/);assert.doesNotMatch(response.headers()['content-security-policy'],/script-src[^;]*(?:'unsafe-eval'|blob:)/);await page.addScriptTag({url:new URL('entry.js',base).href});
+ const result=await page.evaluate(async()=>{const {Parser,parseString,timers}=window.xmlTimerFixture;
+  let cancelled=false,args=null;const handle=timers.setImmediate(()=>cancelled=true);timers.clearImmediate(handle);timers.setImmediate((a,b)=>args=[a,b],4,'x');await new Promise(r=>setTimeout(r,30));
+  let sync=false;parseString('<root><v>ok</v></root>',(e,v)=>{if(e)throw e;sync=v.root.v[0]==='ok'});if(!sync)throw Error('default parser no longer synchronous');
+  let heartbeat=0,callbacks=0,returned=false,asyncCallback=false;const pulse=setInterval(()=>heartbeat++,1),xml='<root>'+Array.from({length:64},(_,i)=>'<item>'+i+'</item>').join('')+'</root>';
+  const parsed=await new Promise((yes,no)=>{new Parser({async:true,chunkSize:16}).parseString(xml,(e,v)=>{callbacks++;asyncCallback=returned;e?no(e):yes(v)});returned=true});clearInterval(pulse);
+  let errors=0;const malformed=await new Promise(resolve=>new Parser({async:true,chunkSize:3}).parseString('<root><a></root>',e=>{errors++;resolve(!!e)}));await new Promise(r=>setTimeout(r,25));
+  let done=false;const worker=new Worker('/worker.js'),started=new Promise((yes,no)=>{worker.onmessage=e=>{if(e.data.kind==='started')yes();else if(e.data.kind==='done')done=true};worker.onerror=e=>no(Error(e.message))});worker.postMessage('<root>'+('x'.repeat(500000))+'</root>');await started;worker.terminate();await new Promise(r=>setTimeout(r,100));
+  let nonfunction=false;try{timers.setImmediate('not code')}catch(e){nonfunction=e instanceof TypeError}
+  return {cancelled,args,sync,heartbeat,callbacks,asyncCallback,count:parsed.root.item.length,first:parsed.root.item[0],last:parsed.root.item[63],malformed,errors,done,nonfunction};
+ });assert.equal(result.cancelled,false);assert.deepEqual(result.args,[4,'x']);assert.equal(result.sync,true);assert.ok(result.heartbeat>0);assert.equal(result.callbacks,1);assert.equal(result.asyncCallback,true);assert.equal(result.count,64);assert.equal(result.first,'0');assert.equal(result.last,'63');assert.equal(result.malformed,true);assert.equal(result.errors,1);assert.equal(result.done,false);assert.equal(result.nonfunction,true);console.log('PASS real async browser-xml2js, yield, malformed XML, timer cancel and Worker termination',JSON.stringify(result));
+}finally{await context.close();browser.disconnect()}})().catch(e=>{console.error(e.stack);process.exitCode=1});

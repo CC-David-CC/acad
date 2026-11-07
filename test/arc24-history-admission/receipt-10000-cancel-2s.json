@@ -1,0 +1,11 @@
+{
+  "bytes": 767961,
+  "history": 10000,
+  "keys": 10001,
+  "keysMs": 1,
+  "elapsedMs": 2030.6000001430511,
+  "maxOtherGap": 48.5,
+  "outcome": "AbortError: Document was replaced, closed or cancelled.",
+  "otherReady": true,
+  "appHash": "9993b01af9f49ca29aa2eceaa1701489aef01c992ee3a3b38a1a0799f87a9c28"
+}

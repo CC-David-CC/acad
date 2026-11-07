@@ -1,0 +1,36 @@
+{
+  "product": "18872d36da8df5d5699fea2b801791d702efdc5e",
+  "sourcesAndRuntime": {
+    "web/app/cad/projectManager/projectManagerBundle.ts": "48c097f9affd427c180b4c650169dcb9236c0f1e67156c006f9666b2d72e3548",
+    "web/app/cad/projectManager/incrementalCanonical.mjs": "08b5f23d37b83bc7af9cfb3071909a177157eaf739c4174857d777c69ff71a1b",
+    "web/app/cad/projectManager/incrementalHashWorker.mjs": "bc0dbc203db163b5bd9aed5f4e5b520eed89b5df0ca8890d04049a631eba31f9",
+    "test/display-units/manager-fixture.mjs": "33e153761431542428a66ace6eb409c111c1b4926b6549bba9f1f82ada15c41f",
+    "test/display-units/node-worker.cjs": "b2d207e821838be4efcb2b1ef6b7adc8a89dc22423a351f6046e31c4cb71b89b",
+    "web/lib/verb.js": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3",
+    ".build/display-units/validation/worker.js": "83d5cf595d04431bec7245a2d598a00b69d91f4beb613a3109c3906139b8a1e8"
+  },
+  "testDrivers": {
+    "probe.mjs": "e105a74446081b091c143d31444e962ecf36247ecc72d361d8a517bfc5466cd8",
+    "probe-before-final-reply-hold.mjs": "01eed791fd52c3fd90b1b3eb10ed6d4d7cbaa99a8e2be8415a81183f99a40f8c",
+    "observations.test.mjs": "c31c31d86c7fd74f305c44a09e456ad3aeaf6ebc8facd37ebabdc14b3178578e",
+    "close-once.test.mjs": "80407b4a1a713d33969154d233f5c4650b13ab62d33ae7ec47fe1ea441a5b87d",
+    "run.cjs": "db0e5bde7b790a13c705c761bb61606a10b255f06e61686b037c8d3dfc4163e2",
+    "extended.test.mjs": "0fc911ef329c221b68e60a032c1c8788afef172029ea59ec3bb84115dc7f7272"
+  },
+  "receipts": {
+    "hash-normal.json": "04bfdb7a08629c121f1251891dfa206e90d9d59f4105f184f1ce39a8f02288b8",
+    "hash-before.json": "32c2c9a4935369e716d37b8abda05b1be31afb9ea77262a4a3cc446ea0826e68",
+    "after.json": "67274cc98bba150b7f745b4b022244e4dadd5a7baa68a33651ec8f186da8b993",
+    "extended-before-final-reply-hold.json": "19814c296aa9067db5cdb0253b2597de146307c8a2b44aad9b1673b1682f134a",
+    "final.json": "93462a12fc75dd1e9152d26191ff0992012e6ff7d9a775e68b914107d499bccb",
+    "validation-normal.json": "93a530cc1be481a5050160f6700fc75095ebdfd31bfa5760192cb7621f4e7d74",
+    "before.json": "cd839b4b8a62f27c396e7d0ec9491b742e7895856c438ab847b29e8a990793b3",
+    "validation-before.json": "f4d334aea7203544e05f881e366b7954ba18abc9af1b4e4fd7e26b4ed6e14543",
+    "extended.json": "aceee9e38b90c3bb3360db093c8b93286759272325420e695f133734e159b811",
+    "hash-abort-before.json": "c68a2a18a94661dc1aa1365e5b8bb097579ae848023b13092f0355b0faf86ad3"
+  },
+  "focusedPassed": 33,
+  "retainedManagerHashPassed": 27,
+  "retainedRolesSavePassed": 9,
+  "typescriptExitCode": 0
+}

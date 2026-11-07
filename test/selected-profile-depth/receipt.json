@@ -1,0 +1,142 @@
+{
+  "result": "PASS",
+  "productSource": "8a59ae6d12f5bbc7e1788329ee459c55dc14dd85",
+  "base": "c9f3684da",
+  "normalAppSha256": "712f9a1dfeadbdb78b320eaa8035098acc30deb591dcbbb5c15e28876f837d03",
+  "controls": {
+    "publicDepthScenarios": 8,
+    "retainedPublicTransactions": 3,
+    "journalTests": 18,
+    "additionalAuthoredFieldsFreshReopen": 1,
+    "tsc": "PASS",
+    "normalBuild": "PASS"
+  },
+  "scope": "Bounded numeric selected depth + owned authored travel, genuine Workers/native model; no signed desktop Files or broad CAD gate claim",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "2848268a65a8af0be727ad97c6ff08fe3d224ae9cf6473ae41de9c29b33aea83",
+      "bytes": 9418
+    },
+    {
+      "path": "browser.cjs",
+      "sha256": "92d99b92f6b5f4380bd18216542d74a7948fed9253816aac81e22f957ba6a98d",
+      "bytes": 16820
+    },
+    {
+      "path": "evidence/annulus-before-source-label-correction.json",
+      "sha256": "39d706894497dfc7986aa59152ca110f8afa828d82d583f4bf3e05e5ef733eea",
+      "bytes": 48662
+    },
+    {
+      "path": "evidence/annulus-before-source-label-correction.log",
+      "sha256": "ecef8a198fb225727fe8172527c506408f672f4fddfb16a3e8e29f7b39049bb1",
+      "bytes": 33
+    },
+    {
+      "path": "evidence/authored-fields-r2.json",
+      "sha256": "3f406807692ddbd7a70f8c0efeba9a4652cbd8b98349dc0d3719f7d8cc2693b7",
+      "bytes": 55126
+    },
+    {
+      "path": "evidence/authored-fields-r2.log",
+      "sha256": "ecef8a198fb225727fe8172527c506408f672f4fddfb16a3e8e29f7b39049bb1",
+      "bytes": 33
+    },
+    {
+      "path": "evidence/build-r2.log",
+      "sha256": "9e7d6f1c7506345b5edf7407855158797388df2a18517c94ea2f2493fc7523c6",
+      "bytes": 2232
+    },
+    {
+      "path": "evidence/cancel-before-capability-oracle-correction.json",
+      "sha256": "7174350d97430a1f69be7aa33d286b4f935408b41a03b0f2ffbade0f6e003a7e",
+      "bytes": 63091
+    },
+    {
+      "path": "evidence/cancel-before-capability-oracle-correction.log",
+      "sha256": "5b5f6a5cdd46a37724aa2aa48c0ecf6ef80b302cf58010129b88c4d864b0a6ba",
+      "bytes": 623
+    },
+    {
+      "path": "evidence/host-close-before-closed-journal-oracle-correction.json",
+      "sha256": "46dacf8af6866e419ceab48b0719144650e3b7b0094b6ff86a9cb71493b45764",
+      "bytes": 72362
+    },
+    {
+      "path": "evidence/host-close-before-closed-journal-oracle-correction.log",
+      "sha256": "daab4c657e730ba2229160e95a42ed354fdd1d0b6b8025620ac9a98384258a9f",
+      "bytes": 1060
+    },
+    {
+      "path": "evidence/journal-final.log",
+      "sha256": "16b77f139ece91a8cdc752ffbbdb2871cf3fe5252a272e91d96370d7a4188d6b",
+      "bytes": 1644
+    },
+    {
+      "path": "evidence/post-commit-close-before.json",
+      "sha256": "fd7a916b23d6d533f58023829042baa907527b805f386f004bdd7c612059814c",
+      "bytes": 14260
+    },
+    {
+      "path": "evidence/post-commit-close-before.log",
+      "sha256": "d89b9899b9093b4a11fdb454a3829bfee0c1b225b5a0a341dcc8d892bf1d2174",
+      "bytes": 266
+    },
+    {
+      "path": "evidence/post-commit-valid-before.json",
+      "sha256": "1656e587cef6b5f90675f0ce7f9b7940428f7132e9a89a01eacfa9f0aac14401",
+      "bytes": 14525
+    },
+    {
+      "path": "evidence/post-commit-valid-before.log",
+      "sha256": "3dfe699ee8dbda771db42ba0650a7ef566dcfee6d275f71e185a0fe2ffbe247c",
+      "bytes": 284
+    },
+    {
+      "path": "evidence/public-r2.json",
+      "sha256": "604331b98076c4ee155258043cc29e109eceb770a3082f9144e86ef8d85c9f47",
+      "bytes": 175630
+    },
+    {
+      "path": "evidence/public-r2.log",
+      "sha256": "2bb25a25c6ede19d2f761e1c7c729235c9acb890d26b50e341aad7d1b07647a8",
+      "bytes": 326
+    },
+    {
+      "path": "evidence/retained-transactions-r2.json",
+      "sha256": "0830f8b918684a9241edbf7de778e7202e1e36c69ab47108f7cc3dfe61133d27",
+      "bytes": 31728
+    },
+    {
+      "path": "evidence/retained-transactions-r2.log",
+      "sha256": "a0b19a14da6381ee36cd116f1fdd9004003d98da749e2c0fe6129b1e67546968",
+      "bytes": 149
+    },
+    {
+      "path": "evidence/tsc-before.log",
+      "sha256": "3a54a8576270f7902e38488094106199d11e60f6b6329dcb3c7f1f3e33d5f348",
+      "bytes": 247
+    },
+    {
+      "path": "evidence/tsc-r2.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "journal.test.mjs",
+      "sha256": "11463b19ca56c3f19037df7f853c6a866afde413419bfc313bf8c9e18b8e5766",
+      "bytes": 4782
+    },
+    {
+      "path": "retained-transactions.cjs",
+      "sha256": "389b0f016859a93364fe80c285c4318d80128a4647e792b26e9e4363ece0df19",
+      "bytes": 4941
+    },
+    {
+      "path": "webpack.app.cjs",
+      "sha256": "a8f6a7ce17918c2c9e0fa51a4887defb11cf1904d462a3979400dbe44a7ee9ae",
+      "bytes": 267
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "scope": "Expected failing regression probe against unchanged production source1d2b19d5d. Only the new audit-export test helper was copied into the baseline checkout; no production adapter/core edit and no fake solver. Same independent oracle restricted to full-near-positive.",
+  "source": "1d2b19d5d1f8f638c2331b3f3652b161086efcce",
+  "workerSha256": "f36350cb3ba5226a147a532cb524bb7395a6825721e27a255939e0839a90bf24",
+  "case": "full-near-positive",
+  "endpoints": {
+    "a": {
+      "x": 10,
+      "y": 0
+    },
+    "b": {
+      "x": 9.999999999999988,
+      "y": 5e-07
+    },
+    "c": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  "expected": "CIRCLE",
+  "observed": "ARC",
+  "testExitCode": 1,
+  "assertion": "AssertionError [ERR_ASSERTION]: full-near-positive full/partial branch mismatch\n\n'ARC' !== 'CIRCLE'\n\n    at /tmp/codi-dxf-arc-before.test.cjs:96:14\n"
+}

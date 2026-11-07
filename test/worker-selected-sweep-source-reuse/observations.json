@@ -1,0 +1,27 @@
+{
+  "scope": "Real production solve/preparation Workers and source operation/evaluation owner; no native model/app success. Identity/cap/fault controls use already-real solved data as data-only accounting fixtures.",
+  "lifecycle": {
+    "started": 40,
+    "terminated": 40
+  },
+  "requests": 40,
+  "observations": [
+    {
+      "id": "actual4Worker-miss-and-immutable-hit",
+      "workers": 4,
+      "computes": 1,
+      "sources": [
+        {
+          "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-4f179e2c-3791-41f3-ab7d-b95d33a625b5\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+          "digest": "ac0f0b33cecc5bd2fa11cb1c1c7d6baf86e18d2b55c59d4aa3655eca617d6d71",
+          "evidence": "[]"
+        },
+        {
+          "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-5b1ee402-6776-4fdb-a7fd-ac3f3bbb48b9\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":0,\"y\":10}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[-1,0,0],\"y\":[0,0,1],\"z\":[0,1,0]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+          "digest": "f74ab1abeba594738f2b94853d0440f303ea0b5e0c7b5cc5386f93e0c5867d9b",
+          "evidence": "[]"
+        }
+      ]
+    }
+  ]
+}

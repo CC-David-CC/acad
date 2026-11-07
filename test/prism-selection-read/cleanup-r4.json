@@ -1,0 +1,7 @@
+{
+  "ownedLoopbackServerStopped": 2187977,
+  "ownedBrowserPID": 2188200,
+  "ownedBrowserProcessGone": true,
+  "ownedProfileRemoved": true,
+  "sharedChrome": "Not connected by this driver; no shared browser lifecycle calls"
+}

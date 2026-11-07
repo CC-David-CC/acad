@@ -1,0 +1,54 @@
+✔ unmodified native pre-aborted signal refuses before Worker allocation (234.602145ms)
+✖ native pre-aborted signal remains cancelled when its aborted property is shadowed (250.90488ms)
+✖ native cancellation after hash completion preserves A/J/T and healthy concurrent caller may commit (220.408131ms)
+✔ native cancellation during final valid callback after genuine Worker cleanup preserves exact state (304.482301ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 2
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1496.468264
+
+✖ failing tests:
+
+test at test/manufacturing-publication-review/review.test.mjs:14:1
+✖ native pre-aborted signal remains cancelled when its aborted property is shadowed (250.90488ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'AbortError'
+  
+      at file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:20:9
+      at async use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:8:44)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'AbortError',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/manufacturing-publication-review/review.test.mjs:22:1
+✖ native cancellation after hash completion preserves A/J/T and healthy concurrent caller may commit (220.408131ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'Error'
+  - 'AbortError'
+  
+      at file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:25:98
+      at async use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:8:44)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Error',
+    expected: 'AbortError',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

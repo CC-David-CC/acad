@@ -1,0 +1,16 @@
+{
+  "nativeSource": "7d6fb5ab99e257eac3e6dbb7c11ece9f319d5a03",
+  "header": "shape-io/ownedBooleanHistoryV1.hpp",
+  "headerSHA256": "852e592a5cfe654668e4207dbbab3259235e11442248975fa92480da1dec82b8",
+  "verification": "Read-only R730 git HEAD and sha256sum against exact source/payload paths; no native rebuild by this lane",
+  "matrix-r3": {
+    "observationsSHA256": "a1a333fa692a9ab83c38a9f6ed2b7b6a52dee4b01fd8bd3baf25f4877e5b63b9",
+    "jsSHA256": "7ea4dbbb1a04c09996c5dfe1bd9d6afcef515b7380683471011d32c03d76a486",
+    "wasmSHA256": "3dd6ae063bfeec7f264f99940b28bc927bc2e01a938a9ff879ef2646305ff986"
+  },
+  "plate-r1": {
+    "observationsSHA256": "ab6d33f646a8b7ad2f89fc2aaf435efc7e001dae90ddef6268a68243bbb4c3af",
+    "jsSHA256": "934081681efbad45dc489e3c4014173f3c75bf05a1d632eec0f9de33beb00f4c",
+    "wasmSHA256": "659a678efa33f521dec4814585c1b0f0e760ae23c88cf4144789d6f169fd4e9c"
+  }
+}

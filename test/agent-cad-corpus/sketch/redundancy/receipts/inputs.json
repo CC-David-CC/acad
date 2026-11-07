@@ -1,0 +1,5549 @@
+{
+  "source": "35bf9d098 baseline fixture generation; frozen before prototype edits",
+  "rows": [
+    {
+      "name": "carried-save/Concentric Circle/Circle",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "a61f8016-8b5f-458c-8f37-9445af109a3c",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":7}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/EqualRadius Circle/Circle",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "1d956b58-cdc6-4356-b86d-22d73413d8f0",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"EqualRadius\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Concentric Circle/Arc",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "ebc595a1-ff5c-497e-b1a5-fb2b61a54a22",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}},{\"id\":\"b\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":7,\"y\":0},\"b\":{\"x\":0,\"y\":7},\"c\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/EqualRadius Circle/Arc",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "057c59ae-a277-4b0e-bbe9-48c51e78b545",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}},{\"id\":\"b\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":5},\"c\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"EqualRadius\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Concentric Arc/Circle",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "a6234d61-0420-4e65-b5b5-4bf9bfb2cb1e",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":5},\"c\":{\"x\":0,\"y\":0}}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":7}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/EqualRadius Arc/Circle",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "ec007940-7cb5-493d-99a1-cff1104634dc",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":5},\"c\":{\"x\":0,\"y\":0}}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"EqualRadius\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Concentric Arc/Arc",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "17d59b2e-de1a-4179-880d-02b5044a3b14",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":5},\"c\":{\"x\":0,\"y\":0}}},{\"id\":\"b\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":7,\"y\":0},\"b\":{\"x\":0,\"y\":7},\"c\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/EqualRadius Arc/Arc",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "2a2d715b-3618-4396-8687-4a455fc03ec7",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":5},\"c\":{\"x\":0,\"y\":0}}},{\"id\":\"b\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":5},\"c\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"EqualRadius\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/RadiusLength Arc",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "e34a2b7b-7e8e-475f-8062-3b29d93d5d19",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":5},\"c\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"RadiusLength\",\"objects\":[\"a\"],\"constants\":{\"length\":\"5\"},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Angle",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "78826db3-398c-472c-8038-1b0a96101f22",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Angle\",\"objects\":[\"a\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/AngleBetween",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "28cb952d-89f1-457b-82f8-d1d52a75c669",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":0},\"b\":{\"x\":20,\"y\":10}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"AngleBetween\",\"objects\":[\"a\",\"b\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Parallel",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "f00178e3-9484-421a-aa9c-898a1589157f",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":0},\"b\":{\"x\":10,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Parallel\",\"objects\":[\"a\",\"b\"],\"constants\":{\"angle\":\"180\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Perpendicular",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "4903dc70-5b39-4d53-b2b5-a20cf8f41a8e",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":0},\"b\":{\"x\":20,\"y\":-10}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Perpendicular\",\"objects\":[\"a\",\"b\"],\"constants\":{\"angle\":\"270\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/DistancePP",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "519be25c-f6bf-491f-8cf2-7a9363f1aeb9",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"b\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":3,\"y\":4}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DistancePP\",\"objects\":[\"a\",\"b\"],\"constants\":{\"distance\":\"5\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/PointInMiddle",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "dbfe7b85-9d76-4f85-a051-90a33a16b84b",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"p\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":5,\"y\":0}},{\"id\":\"s\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PointInMiddle\",\"objects\":[\"p\",\"s\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Symmetry",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "d82d0d7b-b91d-422f-b590-c122897b1311",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"p\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":5,\"y\":0}},{\"id\":\"s\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Symmetry\",\"objects\":[\"p\",\"s\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/PointOnCircle Circle",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "b1832615-9f2c-4968-b6fb-2a3ac4583325",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"p\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":3,\"y\":4}},{\"id\":\"c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PointOnCircle\",\"objects\":[\"p\",\"c\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/TangentLC Circle",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "c7e2e00e-3a16-4a61-896c-14fc6966b46a",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"s\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":-5,\"y\":0},\"b\":{\"x\":5,\"y\":0}}},{\"id\":\"c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":3},\"r\":3}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"TangentLC\",\"objects\":[\"s\",\"c\"],\"constants\":{\"inverted\":\"false\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/PointOnCircle Arc",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "66a62e50-b03a-4b91-a0f0-48932dca4d20",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"p\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":3,\"y\":4}},{\"id\":\"c\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":5},\"c\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PointOnCircle\",\"objects\":[\"p\",\"c\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/TangentLC Arc",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "33799286-c460-468f-87af-09b380ec48ed",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"s\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":-5,\"y\":0},\"b\":{\"x\":5,\"y\":0}}},{\"id\":\"c\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":3,\"y\":3},\"b\":{\"x\":0,\"y\":6},\"c\":{\"x\":0,\"y\":3}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"TangentLC\",\"objects\":[\"s\",\"c\"],\"constants\":{\"inverted\":\"false\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/PointOnBezier",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "1a477b15-3568-4305-a11b-3ce484dceebb",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"p\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":15,\"y\":0}},{\"id\":\"b\",\"type\":\"BezierCurve\",\"role\":null,\"stage\":0,\"data\":{\"cp1\":{\"x\":0,\"y\":0},\"cp2\":{\"x\":10,\"y\":0},\"cp3\":{\"x\":20,\"y\":0},\"cp4\":{\"x\":30,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PointOnBezier\",\"objects\":[\"p\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/TangentLineBezier",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "8324b44a-f4cb-44ab-a144-9e43b63b8437",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"s\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":-5,\"y\":0},\"b\":{\"x\":5,\"y\":0}}},{\"id\":\"b\",\"type\":\"BezierCurve\",\"role\":null,\"stage\":0,\"data\":{\"cp1\":{\"x\":0,\"y\":0},\"cp2\":{\"x\":10,\"y\":0},\"cp3\":{\"x\":20,\"y\":0},\"cp4\":{\"x\":30,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"TangentLineBezier\",\"objects\":[\"s\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/PointOnEllipse Ellipse",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "1edf91e3-1993-4d77-8a29-8786cac97d80",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"p\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":5,\"y\":0}},{\"id\":\"e\",\"type\":\"Ellipse\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"rx\":5,\"ry\":3,\"rot\":0}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PointOnEllipse\",\"objects\":[\"p\",\"e\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/PointOnEllipse EllipticalArc",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "bfc436c8-f7d3-479d-bc18-f6d937200556",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"p\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":5,\"y\":0}},{\"id\":\"e\",\"type\":\"EllipticalArc\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"rx\":5,\"ry\":3,\"rot\":0,\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":3}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"PointOnEllipse\",\"objects\":[\"p\",\"e\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Fillet",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "5f0e6049-3133-4cf2-bb46-d8577e136cab",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":-5,\"y\":0},\"b\":{\"x\":5,\"y\":0}}},{\"id\":\"b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":-5},\"b\":{\"x\":0,\"y\":5}}},{\"id\":\"r\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":6,\"y\":3},\"b\":{\"x\":3,\"y\":6},\"c\":{\"x\":3,\"y\":3}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Fillet\",\"objects\":[\"a\",\"b\",\"r\"],\"constants\":{\"inverted1\":\"false\",\"inverted2\":\"true\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Ellipse native geometry",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "a5e6d706-9aa8-413c-96e9-218b7943df5d",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"e\",\"type\":\"Ellipse\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"rx\":5,\"ry\":3,\"rot\":0}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/EllipticalArc native geometry",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "ff84ebeb-1f77-4456-8617-38afa07a0ca3",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"e\",\"type\":\"EllipticalArc\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"rx\":5,\"ry\":3,\"rot\":0,\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":3}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Bezier geometry",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "cc1c6207-c27d-4a4c-bc45-886f88972bef",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"b\",\"type\":\"BezierCurve\",\"role\":null,\"stage\":0,\"data\":{\"cp1\":{\"x\":0,\"y\":0},\"cp2\":{\"x\":10,\"y\":0},\"cp3\":{\"x\":20,\"y\":0},\"cp4\":{\"x\":30,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Ellipse legacy read/current native write",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "04d01506-2047-4b31-a0bf-de3a23cc00ab",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"e\",\"type\":\"Ellipse\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"rx\":5,\"ry\":3,\"rot\":0}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/EllipticalArc legacy read/current native write",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "106a55ca-8749-4a7c-b60f-3543124016e5",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"e\",\"type\":\"EllipticalArc\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"rx\":5,\"ry\":3,\"rot\":0,\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":3}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Bezier zero endpoint handle",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "b198557f-f2e7-4135-a521-66cfb18fe12c",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"b\",\"type\":\"BezierCurve\",\"role\":null,\"stage\":0,\"data\":{\"cp1\":{\"x\":0,\"y\":0},\"cp2\":{\"x\":0,\"y\":0},\"cp3\":{\"x\":20,\"y\":0},\"cp4\":{\"x\":30,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Bezier child LockPoint",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "8385adf4-0402-43dd-a8de-97cf161a55d4",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"b\",\"type\":\"BezierCurve\",\"role\":null,\"stage\":0,\"data\":{\"cp1\":{\"x\":0,\"y\":0},\"cp2\":{\"x\":10,\"y\":0},\"cp3\":{\"x\":20,\"y\":0},\"cp4\":{\"x\":30,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"b:1:B\"],\"constants\":{\"x\":\"10\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Ellipse center LockPoint",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "8c439f69-9ab5-4fee-a3e6-ef5e83522b86",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"e\",\"type\":\"Ellipse\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"rx\":5,\"ry\":3,\"rot\":0}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"e:C\"],\"constants\":{\"x\":\"0\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/EllipticalArc endpoint LockPoint",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "316be73b-8bf3-42d4-be95-14bd7f61a6c7",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"e\",\"type\":\"EllipticalArc\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"rx\":5,\"ry\":3,\"rot\":0,\"a\":{\"x\":5,\"y\":0},\"b\":{\"x\":0,\"y\":3}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"LockPoint\",\"objects\":[\"e:A\"],\"constants\":{\"x\":\"5\",\"y\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Parallel same direction",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "0cca34b8-e942-4688-b479-6d059edb0179",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":0},\"b\":{\"x\":30,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Parallel\",\"objects\":[\"a\",\"b\"],\"constants\":{\"angle\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/Perpendicular positive direction",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "1db47d15-b49c-4757-b274-585021a98df1",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":20,\"y\":0},\"b\":{\"x\":20,\"y\":10}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Perpendicular\",\"objects\":[\"a\",\"b\"],\"constants\":{\"angle\":\"90\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/DistancePP zero coincidence",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "0a984e79-4307-46df-97e6-096deabf70c4",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"b\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DistancePP\",\"objects\":[\"a\",\"b\"],\"constants\":{\"distance\":\"0\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/SignedDistanceX negative",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "423110cf-5ffe-4783-b330-9cb3e387a497",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"b\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":-5,\"y\":0}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"SignedDistanceX\",\"objects\":[\"a\",\"b\"],\"constants\":{\"distance\":\"-5\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/SignedDistanceY negative",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "f05b8667-ebbd-4d9f-a9cb-224402c5debf",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"b\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":-5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"SignedDistanceY\",\"objects\":[\"a\",\"b\"],\"constants\":{\"distance\":\"-5\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/ProjectedDistance negative",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "1654b3f1-d237-42b7-8152-a0fd7209f42d",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"b\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":-5,\"y\":0}},{\"id\":\"axis\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"ProjectedDistance\",\"objects\":[\"a\",\"b\",\"axis\"],\"constants\":{\"distance\":\"-5\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/typed TangentLC Circle",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "080c3ba0-9e3e-4e14-a8d7-b28b16449859",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"s\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":-5,\"y\":0},\"b\":{\"x\":5,\"y\":0}}},{\"id\":\"c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":3},\"r\":3}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"TangentLC\",\"objects\":[\"s\",\"c\"],\"constants\":{\"inverted\":\"false\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": "codi-physical-parameters:1\n[]",
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/typed Fillet",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "c51d3bb0-e5fc-4e79-99ea-2daa80a144c1",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":-5,\"y\":0},\"b\":{\"x\":5,\"y\":0}}},{\"id\":\"b\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":-5},\"b\":{\"x\":0,\"y\":5}}},{\"id\":\"r\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":6,\"y\":3},\"b\":{\"x\":3,\"y\":6},\"c\":{\"x\":3,\"y\":3}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Fillet\",\"objects\":[\"a\",\"b\",\"r\"],\"constants\":{\"inverted1\":\"false\",\"inverted2\":\"true\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": "codi-physical-parameters:1\n[]",
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/refuse unknown schema",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "577b2c50-5e09-4e09-938a-1fe4c48cb456",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":7}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"FutureRelation\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/refuse wrong entity reference",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "d65a7525-e2f8-45fc-9a83-47c1e393f192",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":7}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"missing\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/refuse unknown geometric intent",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "8ffb15e6-6607-4105-805f-431ba96b3bbf",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5,\"hiddenIntent\":1}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":7}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/refuse degenerate circular domain",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "eb1b23df-b3a0-4a86-a346-1151c021a057",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":0}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":7}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/refuse nonfinite geometry",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "289f46b4-e0e0-4e5b-96ee-fad425ab58bf",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":\"Infinity\"}},{\"id\":\"b\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":7}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Concentric\",\"objects\":[\"a\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/refuse negative DistancePP",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "3f524151-ae29-4956-b030-c43ebfe57564",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"b\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":3,\"y\":4}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DistancePP\",\"objects\":[\"a\",\"b\"],\"constants\":{\"distance\":\"-5\"},\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/refuse degenerate Bezier",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "9b9119d7-055c-46f2-b24c-c90e5b06f396",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"s\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":-5,\"y\":0},\"b\":{\"x\":5,\"y\":0}}},{\"id\":\"b\",\"type\":\"BezierCurve\",\"role\":null,\"stage\":0,\"data\":{\"cp1\":{\"x\":0,\"y\":0},\"cp2\":{\"x\":0,\"y\":0},\"cp3\":{\"x\":0,\"y\":0},\"cp4\":{\"x\":0,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"TangentLineBezier\",\"objects\":[\"s\",\"b\"],\"stage\":0,\"annotations\":[],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "carried-save/refuse solver-changed geometry",
+      "request": {
+        "task": "sketch-save-validation",
+        "revision": "8e1168f4-6082-4705-ad91-71f3687b1e5f",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"a\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"Angle\",\"objects\":[\"a\"],\"constants\":{\"angle\":\"10\"},\"stage\":0,\"annotations\":[{\"offset\":20}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"expressionsSignature\":\"123\",\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": null,
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.free-line-3-4-5",
+      "request": {
+        "revision": "0a9f3873-a811-47e4-a4f2-4ec9f980b278",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 1,
+                  "y": 2
+                },
+                "b": {
+                  "x": 4,
+                  "y": 6
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.free-circle",
+      "request": {
+        "revision": "2fb2175a-9a66-4519-acd7-f14f12df090d",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "c",
+              "type": "Circle",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "c": {
+                  "x": -2,
+                  "y": 3
+                },
+                "r": 5
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.zero-line",
+      "request": {
+        "revision": "f7516555-48bc-4fa5-bd92-def0fbba2548",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 0,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.zero-circle",
+      "request": {
+        "revision": "94b9cedb-358c-4dda-b364-4a3741ad6651",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "c",
+              "type": "Circle",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "c": {
+                  "x": 0,
+                  "y": 0
+                },
+                "r": 0
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.negative-circle",
+      "request": {
+        "revision": "171fc6e5-82e3-4071-aa3f-2a53669f2798",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "c",
+              "type": "Circle",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "c": {
+                  "x": 0,
+                  "y": 0
+                },
+                "r": -1
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.midpoint-perpendicular-bisector-counterexample-PointInMiddle",
+      "request": {
+        "revision": "4fe1142e-e15b-4d7a-9ffe-0e8654e38dc4",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "p",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 5
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "PointInMiddle",
+                  "objects": [
+                    "p",
+                    "boundary/base"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [
+              {
+                "id": "base",
+                "a": {
+                  "x": -1,
+                  "y": 0
+                },
+                "b": {
+                  "x": 1,
+                  "y": 0
+                }
+              }
+            ],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [
+            {
+              "id": "base",
+              "a": {
+                "x": -1,
+                "y": 0
+              },
+              "b": {
+                "x": 1,
+                "y": 0
+              }
+            }
+          ],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.midpoint-perpendicular-bisector-counterexample-Symmetry",
+      "request": {
+        "revision": "564dbcad-f75c-412d-9d62-81d5ef464ac0",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "p",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 5
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "Symmetry",
+                  "objects": [
+                    "p",
+                    "boundary/base"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [
+              {
+                "id": "base",
+                "a": {
+                  "x": -1,
+                  "y": 0
+                },
+                "b": {
+                  "x": 1,
+                  "y": 0
+                }
+              }
+            ],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [
+            {
+              "id": "base",
+              "a": {
+                "x": -1,
+                "y": 0
+              },
+              "b": {
+                "x": 1,
+                "y": 0
+              }
+            }
+          ],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.concentric-anchored-centers",
+      "request": {
+        "revision": "d2dce91f-62ca-4f3c-bac0-9f9e2b9ac481",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Circle",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "c": {
+                  "x": 0,
+                  "y": 0
+                },
+                "r": 5
+              }
+            },
+            {
+              "id": "b",
+              "type": "Circle",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "c": {
+                  "x": 3,
+                  "y": 4
+                },
+                "r": 3
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "a:C"
+                  ],
+                  "constants": {
+                    "x": "0",
+                    "y": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Concentric",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.diameter-accepted-edit",
+      "request": {
+        "revision": "c8230b2e-6c46-4bb1-bf5b-1578b923e71e",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "c",
+              "type": "Circle",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "c": {
+                  "x": 2,
+                  "y": 3
+                },
+                "r": 5
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "DiameterLength",
+                  "objects": [
+                    "c"
+                  ],
+                  "constants": {
+                    "diameter": "20"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "angle": 0.7853981633974483
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.diameter-contradictory-edit",
+      "request": {
+        "revision": "d86d5f5c-0400-4731-a904-d4568a318f1f",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "c",
+              "type": "Circle",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "c": {
+                  "x": 2,
+                  "y": 3
+                },
+                "r": 5
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "DiameterLength",
+                  "objects": [
+                    "c"
+                  ],
+                  "constants": {
+                    "diameter": "10"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "angle": 0.7853981633974483
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "DiameterLength",
+                  "objects": [
+                    "c"
+                  ],
+                  "constants": {
+                    "diameter": "20"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "angle": 0.7853981633974483
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.signed-xy-negative-positive",
+      "request": {
+        "revision": "f5f7957a-3893-469a-934b-7b13bb7ad91f",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 2,
+                "y": 3
+              }
+            },
+            {
+              "id": "b",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 9,
+                "y": 9
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "a"
+                  ],
+                  "constants": {
+                    "x": "2",
+                    "y": "3"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceX",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "constants": {
+                    "distance": "-5"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceY",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "constants": {
+                    "distance": "7"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.unsigned-distance-negative",
+      "request": {
+        "revision": "2d27532a-5a7b-4cd7-98f6-491fe4931484",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "b",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 3,
+                "y": 4
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "DistancePP",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "constants": {
+                    "distance": "-5"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.unsigned-distance-zero",
+      "request": {
+        "revision": "c60ddecc-75b4-4566-a13a-9172ebad28b9",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "b",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "DistancePP",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "constants": {
+                    "distance": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.inconsistent-horizontal-signed-y",
+      "request": {
+        "revision": "c336cf80-b2c5-4411-8e5f-e8099a1295c9",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "s"
+                  ],
+                  "constants": {
+                    "angle": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceY",
+                  "objects": [
+                    "s:A",
+                    "s:B"
+                  ],
+                  "constants": {
+                    "distance": "5"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.known-implied-redundancy-label",
+      "request": {
+        "revision": "b36b974c-f918-4158-9e4e-9347833b5761",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "s"
+                  ],
+                  "constants": {
+                    "angle": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SignedDistanceY",
+                  "objects": [
+                    "s:A",
+                    "s:B"
+                  ],
+                  "constants": {
+                    "distance": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {},
+        "localJacobian": {
+          "version": 1
+        }
+      }
+    },
+    {
+      "name": "p0/sketch.p0.legacy-inline-field-expression",
+      "request": {
+        "revision": "8678d254-0f4d-43aa-b182-d1e2bdfc9b26",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 15,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "s"
+                  ],
+                  "constants": {
+                    "length": "W + 5"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {
+          "W": 10
+        }
+      }
+    },
+    {
+      "name": "p0/sketch.p0.legacy-named-arithmetic-definition",
+      "request": {
+        "revision": "7e1b2585-fdbd-4f5e-a7c6-e20c0676ff01",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 15,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "s"
+                  ],
+                  "constants": {
+                    "length": "L"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "W = 10\nL = W + 5",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.legacy-external-literal-name",
+      "request": {
+        "revision": "5a88d4af-8985-4b08-91dc-952865cd1ebb",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 15,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "s"
+                  ],
+                  "constants": {
+                    "length": "W"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {
+          "W": 15
+        }
+      }
+    },
+    {
+      "name": "p0/sketch.p0.missing-expression-name",
+      "request": {
+        "revision": "a1d88474-1851-4c29-8a84-661bbd770f33",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "s"
+                  ],
+                  "constants": {
+                    "length": "MISSING"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "p0/sketch.p0.typed-inch-length-name",
+      "request": {
+        "task": "typed-sketch-transaction",
+        "revision": "ba31eb51-d6de-4764-a67d-d3920bf2bcbf",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": "codi-physical-parameters:1\n[{\"name\":\"D\",\"dimension\":\"length\",\"expression\":\"inch(1)\"}]",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"c\"],\"constants\":{\"diameter\":\"D\"},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "verifyCurrent": false
+      }
+    },
+    {
+      "name": "p0/sketch.p0.typed-centimeter-free-text-syntax",
+      "request": {
+        "task": "typed-sketch-transaction",
+        "revision": "371374fa-48da-4c90-bff9-26958a74f416",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": "codi-physical-parameters:1\n[{\"name\":\"D\",\"dimension\":\"length\",\"expression\":\"2 cm\"}]",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"c\"],\"constants\":{\"diameter\":\"D\"},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "verifyCurrent": false
+      }
+    },
+    {
+      "name": "p0/sketch.p0.typed-angle-as-length-refusal",
+      "request": {
+        "task": "typed-sketch-transaction",
+        "revision": "20ad90c1-c01d-41f4-8d0e-0b5e2344d03b",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": "codi-physical-parameters:1\n[{\"name\":\"D\",\"dimension\":\"angle\",\"expression\":\"deg(90)\"}]",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"c\"],\"constants\":{\"diameter\":\"D\"},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "verifyCurrent": false
+      }
+    },
+    {
+      "name": "p0/sketch.p0.typed-compound-field-expression",
+      "request": {
+        "task": "typed-sketch-transaction",
+        "revision": "48ea2277-3be5-46a7-b38e-79e283fbd4c6",
+        "frame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "parameterSource": "codi-physical-parameters:1\n[{\"name\":\"D\",\"dimension\":\"length\",\"expression\":\"2 cm\"}]",
+        "sketchJSON": "{\"version\":3,\"objects\":[{\"id\":\"c\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":0,\"y\":0},\"r\":5}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"c\"],\"constants\":{\"diameter\":\"D + 1\"},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+        "verifyCurrent": false
+      }
+    },
+    {
+      "name": "registered-rectangle/original",
+      "request": {
+        "revision": "original",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "rect-0",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 10,
+                  "y": 20
+                },
+                "b": {
+                  "x": 110,
+                  "y": 20
+                }
+              }
+            },
+            {
+              "id": "rect-1",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 110,
+                  "y": 20
+                },
+                "b": {
+                  "x": 110,
+                  "y": 70
+                }
+              }
+            },
+            {
+              "id": "rect-2",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 110,
+                  "y": 70
+                },
+                "b": {
+                  "x": 10,
+                  "y": 70
+                }
+              }
+            },
+            {
+              "id": "rect-3",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 10,
+                  "y": 70
+                },
+                "b": {
+                  "x": 10,
+                  "y": 20
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-0:B",
+                    "rect-1:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-1:B",
+                    "rect-2:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-2:B",
+                    "rect-3:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-3:B",
+                    "rect-0:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "angle": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "angle": "90"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-2"
+                  ],
+                  "constants": {
+                    "angle": "180"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-3"
+                  ],
+                  "constants": {
+                    "angle": "270"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "rect-0:A"
+                  ],
+                  "constants": {
+                    "x": "10",
+                    "y": "20"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "length": "100"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "length": "50"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "registered-rectangle/acceptedSource",
+      "request": {
+        "revision": "acceptedSource",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "rect-0",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 10,
+                  "y": 20
+                },
+                "b": {
+                  "x": 130,
+                  "y": 20
+                }
+              }
+            },
+            {
+              "id": "rect-1",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 130,
+                  "y": 20
+                },
+                "b": {
+                  "x": 130,
+                  "y": 80
+                }
+              }
+            },
+            {
+              "id": "rect-2",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 130,
+                  "y": 80
+                },
+                "b": {
+                  "x": 10,
+                  "y": 80
+                }
+              }
+            },
+            {
+              "id": "rect-3",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 10,
+                  "y": 80
+                },
+                "b": {
+                  "x": 10,
+                  "y": 20
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-0:B",
+                    "rect-1:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-1:B",
+                    "rect-2:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-2:B",
+                    "rect-3:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "rect-3:B",
+                    "rect-0:A"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "angle": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "angle": "90"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Horizontal",
+                  "objects": [
+                    "rect-2"
+                  ],
+                  "constants": {
+                    "angle": "180"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "Vertical",
+                  "objects": [
+                    "rect-3"
+                  ],
+                  "constants": {
+                    "angle": "270"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "rect-0:A"
+                  ],
+                  "constants": {
+                    "x": "10",
+                    "y": "20"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-0"
+                  ],
+                  "constants": {
+                    "length": "120"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                },
+                {
+                  "typeId": "SegmentLength",
+                  "objects": [
+                    "rect-1"
+                  ],
+                  "constants": {
+                    "length": "60"
+                  },
+                  "stage": 0,
+                  "annotations": [
+                    {
+                      "offset": 20
+                    }
+                  ],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/PCoincident",
+      "request": {
+        "revision": "PCoincident",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "b",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/Vertical",
+      "request": {
+        "revision": "Vertical",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 0,
+                  "y": 10
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "Vertical",
+                  "objects": [
+                    "s"
+                  ],
+                  "constants": {
+                    "angle": "90"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/EqualLength",
+      "request": {
+        "revision": "EqualLength",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            },
+            {
+              "id": "b",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 2
+                },
+                "b": {
+                  "x": 10,
+                  "y": 2
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "EqualLength",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/LengthRelation",
+      "request": {
+        "revision": "LengthRelation",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            },
+            {
+              "id": "b",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 2
+                },
+                "b": {
+                  "x": 20,
+                  "y": 2
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "LengthRelation",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "constants": {
+                    "factor": "2",
+                    "offset": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/DistancePL",
+      "request": {
+        "revision": "DistancePL",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "p",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 5
+              }
+            },
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": -10,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "DistancePL",
+                  "objects": [
+                    "p",
+                    "s"
+                  ],
+                  "constants": {
+                    "distance": "5",
+                    "inverted": "false"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/PointOnLine",
+      "request": {
+        "revision": "PointOnLine",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "p",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 3,
+                "y": 0
+              }
+            },
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "PointOnLine",
+                  "objects": [
+                    "p",
+                    "s"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/Collinear",
+      "request": {
+        "revision": "Collinear",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            },
+            {
+              "id": "b",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 20,
+                  "y": 0
+                },
+                "b": {
+                  "x": 30,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "Collinear",
+                  "objects": [
+                    "a",
+                    "b"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/AxisSymmetry",
+      "request": {
+        "revision": "AxisSymmetry",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "p",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 2,
+                "y": 3
+              }
+            },
+            {
+              "id": "q",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 2,
+                "y": -3
+              }
+            },
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "AxisSymmetry",
+                  "objects": [
+                    "p",
+                    "q",
+                    "s"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/FixSegment",
+      "request": {
+        "revision": "FixSegment",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "s",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "FixSegment",
+                  "objects": [
+                    "s"
+                  ],
+                  "constants": {
+                    "ax": "0",
+                    "ay": "0",
+                    "bx": "10",
+                    "by": "0",
+                    "length": "10",
+                    "direction": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/FixCircle",
+      "request": {
+        "revision": "FixCircle",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "c",
+              "type": "Circle",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "c": {
+                  "x": 2,
+                  "y": 3
+                },
+                "r": 5
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "FixCircle",
+                  "objects": [
+                    "c"
+                  ],
+                  "constants": {
+                    "cx": "2",
+                    "cy": "3",
+                    "radius": "5"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/FixArc",
+      "request": {
+        "revision": "FixArc",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "r",
+              "type": "Arc",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 5,
+                  "y": 0
+                },
+                "b": {
+                  "x": 0,
+                  "y": 5
+                },
+                "c": {
+                  "x": 0,
+                  "y": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "FixArc",
+                  "objects": [
+                    "r"
+                  ],
+                  "constants": {
+                    "ax": "5",
+                    "ay": "0",
+                    "bx": "0",
+                    "by": "5",
+                    "cx": "0",
+                    "cy": "0",
+                    "radius": "5",
+                    "sweep": "1.5707963267948966"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "schema/RigidGroup",
+      "request": {
+        "revision": "RigidGroup",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 0,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 0
+                }
+              }
+            },
+            {
+              "id": "b",
+              "type": "Segment",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "a": {
+                  "x": 10,
+                  "y": 0
+                },
+                "b": {
+                  "x": 10,
+                  "y": 10
+                }
+              }
+            },
+            {
+              "id": "g",
+              "type": "RigidGroup",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "version": 1,
+                "members": [
+                  {
+                    "id": "a",
+                    "a": "a:A",
+                    "b": "a:B"
+                  },
+                  {
+                    "id": "b",
+                    "a": "b:A",
+                    "b": "b:B"
+                  }
+                ],
+                "points": [
+                  {
+                    "id": "a:A",
+                    "x": 0,
+                    "y": 0
+                  },
+                  {
+                    "id": "a:B",
+                    "x": 10,
+                    "y": 0
+                  },
+                  {
+                    "id": "b:A",
+                    "x": 10,
+                    "y": 0
+                  },
+                  {
+                    "id": "b:B",
+                    "x": 10,
+                    "y": 10
+                  }
+                ],
+                "transform": {
+                  "x": 0,
+                  "y": 0,
+                  "angle": 0
+                }
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "RigidGroup",
+                  "objects": [
+                    "g",
+                    "a",
+                    "b"
+                  ],
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "stages/two-independent-stages",
+      "request": {
+        "revision": "two-independent-stages",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "b",
+              "type": "Point",
+              "role": null,
+              "stage": 1,
+              "data": {
+                "x": 2,
+                "y": 3
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "a"
+                  ],
+                  "constants": {
+                    "x": "0",
+                    "y": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            },
+            {
+              "constraints": [],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    },
+    {
+      "name": "stages/later-refers-earlier",
+      "request": {
+        "revision": "later-refers-earlier",
+        "sketch": {
+          "version": 3,
+          "objects": [
+            {
+              "id": "a",
+              "type": "Point",
+              "role": null,
+              "stage": 0,
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "id": "b",
+              "type": "Point",
+              "role": null,
+              "stage": 1,
+              "data": {
+                "x": 2,
+                "y": 3
+              }
+            }
+          ],
+          "dimensions": [],
+          "labels": [],
+          "stages": [
+            {
+              "constraints": [
+                {
+                  "typeId": "LockPoint",
+                  "objects": [
+                    "a"
+                  ],
+                  "constants": {
+                    "x": "0",
+                    "y": "0"
+                  },
+                  "stage": 0,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            },
+            {
+              "constraints": [
+                {
+                  "typeId": "PCoincident",
+                  "objects": [
+                    "b",
+                    "a"
+                  ],
+                  "stage": 1,
+                  "annotations": [],
+                  "admission": {
+                    "version": 1,
+                    "state": "accepted"
+                  }
+                }
+              ],
+              "generators": []
+            }
+          ],
+          "constants": "",
+          "metadata": {
+            "boundaryFrame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "boundary": {
+            "lines": [],
+            "arcs": [],
+            "circles": [],
+            "nurbses": []
+          }
+        },
+        "boundary": {
+          "lines": [],
+          "arcs": [],
+          "circles": [],
+          "nurbses": []
+        },
+        "externalParameters": {}
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "status": "PASS within stated component/Worker scope",
+  "source": "c00f1746daa813735589401aeec41a37f3b767e6",
+  "focusedActualSource": {
+    "tests": 9,
+    "passed": 9,
+    "covers": [
+      "exact and approximate reduction ancestry",
+      "current object/stage ownership",
+      "readmission/removal/revalidation/rollback",
+      "no persisted cause fields",
+      "fresh original residual refusal and actual native rollback",
+      "genuine custom-schema finite numerical failure",
+      "nonfinite reduced row is not algebraic contradiction",
+      "bounded getter-free strict failure capture"
+    ]
+  },
+  "normalization": {
+    "tests": 9,
+    "passed": 9
+  },
+  "mechanicalCorpus": {
+    "tests": 228,
+    "passed": 228
+  },
+  "harnessContracts": {
+    "tests": 5,
+    "passed": 5
+  },
+  "productionWorker": {
+    "before": {
+      "jobs": 8,
+      "passed": 8,
+      "causeFieldsAbsent": true
+    },
+    "after": {
+      "jobs": 8,
+      "passed": 8,
+      "verifiedKinds": [
+        "algebraic-contradiction",
+        "invalid-domain",
+        "original-residual-failure"
+      ],
+      "legacyCodesUnchanged": true,
+      "inputPreserved": true,
+      "workersTerminated": true
+    },
+    "publicAuthoringClaim": false
+  },
+  "publicRetainedRegressions": {
+    "AxisSymmetry": {
+      "workers": 150,
+      "faultLifetimeControls": 17
+    },
+    "Collinear": {
+      "workers": 92,
+      "faultLifetimeControls": 15
+    },
+    "signedDistance": {
+      "workers": 74,
+      "faultLifetimeControls": 14
+    },
+    "appSha256": "af50c7169036e9eec0db224065ae7ad9f484208335bfd4bcb3be82d58b284396",
+    "newCauseVisibleAtCraftBoundary": false
+  },
+  "remaining": {
+    "nonlinearOptimizer": "Inherited stationary success with bad original residuals remains; original residual guard refuses and restores. See fixtures.json nonlinearDiagnostic.",
+    "publicCraft": "Root owns copying validated cause onto thrown Error at closedSketchTransitions.ts:99 and combined public/signed proof.",
+    "classificationScope": "Exact/approximate reduced rows describe this trial, not proof of global infeasibility. Resource and rigid collapsed-status mappings are only classifier-tested here.",
+    "ui": "No UI message changes; old generic conflict code/message remains.",
+    "generalNumericalCorrectness": "Not established by adding diagnostics."
+  }
+}

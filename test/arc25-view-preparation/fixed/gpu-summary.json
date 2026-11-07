@@ -1,0 +1,431 @@
+{
+  "scope": "One instrumented shared HeadlessChrome software-GPU run. Nested durations overlap, some spans extend into post-restore observation. Shared GPU work/contention is not isolated; no hardware-GPU/product-wide latency claim.",
+  "traceSha256": "60de5b41695cc2ec966ca74463d5c6cd9a3c3ce2320235b857c7641aafcb944c",
+  "receiptSha256": "f5ddd2892f7d4944ffa65c6fd42102c86c7fa35e1cdcd3f6ae542c1f2332bc19",
+  "rendererPid": 1955775,
+  "rendererTid": 1955775,
+  "environment": {
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/155.0.8059.79",
+      "revision": "@a49e2e3d4addfd84e765b52afe230bedb81096db",
+      "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+      "jsVersion": "15.5.35.23"
+    },
+    "graphicsFlags": {
+      "unavailable": "Protocol error (Browser.getBrowserCommandLine): Command line not returned because --enable-automation not set."
+    },
+    "implementation": "(gl=egl-angle,angle=swiftshader)",
+    "glRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+    "glVendor": "Google Inc. (Google)"
+  },
+  "longNativeEvents": [
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "ThreadControllerImpl::RunTask",
+      "startFromRestoreMs": 2119.847,
+      "durationMs": 1114.831,
+      "args": {
+        "src_file": "cc/trees/proxy_impl.cc",
+        "src_func": "ScheduledActionSendBeginMainFrame",
+        "src_line": 849
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "ProxyMain::BeginMainFrame",
+      "startFromRestoreMs": 2119.862,
+      "durationMs": 1114.813,
+      "args": {
+        "begin_frame_id": 327,
+        "main_frame_pipeline": {
+          "main_frame_id": 13702137810887992231,
+          "step": "BEGIN_MAIN_FRAME"
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "LayerTreeHost::DoUpdateLayers",
+      "startFromRestoreMs": 2264.4,
+      "durationMs": 969.946,
+      "args": {
+        "source_frame_number": 169
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "GLES2::ReadPixels",
+      "startFromRestoreMs": 2264.443,
+      "durationMs": 966.149,
+      "args": {}
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "ImplementationBase::WaitForCmd",
+      "startFromRestoreMs": 2264.45,
+      "durationMs": 965.907,
+      "args": {}
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "CommandBufferHelper::Finish",
+      "startFromRestoreMs": 2264.451,
+      "durationMs": 965.905,
+      "args": {}
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "CommandBufferProxyImpl::WaitForGetOffset",
+      "startFromRestoreMs": 2264.476,
+      "durationMs": 965.831,
+      "args": {
+        "end": 8381,
+        "start": 8381
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "ThreadControllerImpl::RunTask",
+      "startFromRestoreMs": 2264.565,
+      "durationMs": 965.567,
+      "args": {
+        "src_file": "gpu/command_buffer/service/scheduler.cc",
+        "src_func": "TryScheduleSequence",
+        "src_line": 439
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "Scheduler::RunTask",
+      "startFromRestoreMs": 2264.571,
+      "durationMs": 965.556,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "GpuChannel::ExecuteDeferredRequest",
+      "startFromRestoreMs": 2264.573,
+      "durationMs": 965.546,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "WebGL",
+      "startFromRestoreMs": 2264.59,
+      "durationMs": 965.508,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "CommandBuffer::Flush",
+      "startFromRestoreMs": 2264.591,
+      "durationMs": 965.506,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "CommandBufferStub::OnAsyncFlush",
+      "startFromRestoreMs": 2264.592,
+      "durationMs": 965.504,
+      "args": {
+        "put_offset": 8381
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "CommandBufferService:PutChanged",
+      "startFromRestoreMs": 2264.594,
+      "durationMs": 965.494,
+      "args": {
+        "handler": ".WebGL-0x3834001a3e00",
+        "put_offset": 8381
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "ThreadControllerImpl::RunTask",
+      "startFromRestoreMs": 3306.894,
+      "durationMs": 955.092,
+      "args": {
+        "src_file": "cc/trees/proxy_impl.cc",
+        "src_func": "ScheduledActionSendBeginMainFrame",
+        "src_line": 849
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "ProxyMain::BeginMainFrame",
+      "startFromRestoreMs": 3306.897,
+      "durationMs": 955.086,
+      "args": {
+        "begin_frame_id": 409,
+        "main_frame_pipeline": {
+          "main_frame_id": 13702137810887993015,
+          "step": "BEGIN_MAIN_FRAME"
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "LayerTreeHost::DoUpdateLayers",
+      "startFromRestoreMs": 3344.183,
+      "durationMs": 917.673,
+      "args": {
+        "source_frame_number": 174
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "GLES2::ReadPixels",
+      "startFromRestoreMs": 3344.242,
+      "durationMs": 913.895,
+      "args": {}
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "ImplementationBase::WaitForCmd",
+      "startFromRestoreMs": 3344.25,
+      "durationMs": 913.575,
+      "args": {}
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "CommandBufferHelper::Finish",
+      "startFromRestoreMs": 3344.252,
+      "durationMs": 913.572,
+      "args": {}
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "CommandBufferProxyImpl::WaitForGetOffset",
+      "startFromRestoreMs": 3344.276,
+      "durationMs": 913.488,
+      "args": {
+        "end": 129920,
+        "start": 129920
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "ThreadControllerImpl::RunTask",
+      "startFromRestoreMs": 3344.362,
+      "durationMs": 913.042,
+      "args": {
+        "src_file": "gpu/command_buffer/service/scheduler.cc",
+        "src_func": "TryScheduleSequence",
+        "src_line": 439
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "Scheduler::RunTask",
+      "startFromRestoreMs": 3344.365,
+      "durationMs": 913.035,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "GpuChannel::ExecuteDeferredRequest",
+      "startFromRestoreMs": 3344.367,
+      "durationMs": 913.025,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "WebGL",
+      "startFromRestoreMs": 3344.368,
+      "durationMs": 913.005,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "CommandBuffer::Flush",
+      "startFromRestoreMs": 3344.37,
+      "durationMs": 912.997,
+      "args": {}
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "CommandBufferStub::OnAsyncFlush",
+      "startFromRestoreMs": 3344.371,
+      "durationMs": 912.995,
+      "args": {
+        "put_offset": 129920
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "CrGpuMain",
+      "ownRendererThread": false,
+      "name": "CommandBufferService:PutChanged",
+      "startFromRestoreMs": 3344.372,
+      "durationMs": 912.987,
+      "args": {
+        "handler": ".WebGL-0x3834001a3e00",
+        "put_offset": 129920
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "VizCompositorThread",
+      "ownRendererThread": false,
+      "name": "ThreadControllerImpl::RunTask",
+      "startFromRestoreMs": 2672.713,
+      "durationMs": 558.503,
+      "args": {
+        "src_file": "components/viz/service/display/display_scheduler.cc",
+        "src_func": "ScheduleBeginFrameDeadline",
+        "src_line": 803
+      }
+    },
+    {
+      "process": "GPU Process",
+      "thread": "VizCompositorThread",
+      "ownRendererThread": false,
+      "name": "BlockingSequenceRunner::Sequence::RunAllTasks::WaitSyncToken",
+      "startFromRestoreMs": 2672.789,
+      "durationMs": 557.498,
+      "args": {
+        "sequence_id": 141
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "ThreadControllerImpl::RunTask",
+      "startFromRestoreMs": 1927.255,
+      "durationMs": 192.532,
+      "args": {
+        "chrome_task_annotator": {
+          "delay_policy": "PRECISE",
+          "task_delay_us": 3999
+        },
+        "src_file": "third_party/blink/renderer/core/scheduler/dom_timer.cc",
+        "src_func": "DOMTimer",
+        "src_line": 356
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "CrRendererMain",
+      "ownRendererThread": true,
+      "name": "TimerFire",
+      "startFromRestoreMs": 1927.257,
+      "durationMs": 192.527,
+      "args": {
+        "data": {
+          "frame": "7FF987E34F0695F8A618508CD93A793A",
+          "timerId": 465
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "DedicatedWorker thread",
+      "ownRendererThread": false,
+      "name": "ThreadControllerImpl::RunTask",
+      "startFromRestoreMs": 23.619,
+      "durationMs": 157.618,
+      "args": {
+        "src_file": "mojo/public/cpp/bindings/lib/connector.cc",
+        "src_func": "PostDispatchNextMessageFromPipe",
+        "src_line": 589
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "DedicatedWorker thread",
+      "ownRendererThread": false,
+      "name": "Receive mojo message",
+      "startFromRestoreMs": 23.623,
+      "durationMs": 157.605,
+      "args": {
+        "chrome_mojo_event_info": {
+          "data_num_bytes": 240,
+          "ipc_hash": 2759509506,
+          "mojo_interface_method": {
+            "native_symbol": {
+              "mapping_id": 8,
+              "rel_pc": 55665632
+            }
+          },
+          "mojo_interface_tag": "network.mojom.URLLoaderClient",
+          "payload_size": 184
+        }
+      }
+    },
+    {
+      "process": "Renderer",
+      "thread": "DedicatedWorker thread",
+      "ownRendererThread": false,
+      "name": "EvaluateScript",
+      "startFromRestoreMs": 26.932,
+      "durationMs": 144.873,
+      "args": {
+        "data": {
+          "columnNumber": 1,
+          "frame": "",
+          "lineNumber": 1,
+          "scriptId": 0,
+          "url": "http://127.0.0.1:20496/static/project-validator.cdeb32dd69943b42c57b.js"
+        }
+      }
+    }
+  ]
+}

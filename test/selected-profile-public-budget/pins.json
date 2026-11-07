@@ -1,0 +1,29 @@
+{
+  "status": "PASS actual public selected-owned32 capacity/readOnly/depth/travel/native persistence",
+  "productSource": "6f01a09fea5c75beba9297772edd50ff37b1b2a4",
+  "testBase": "4c859b106",
+  "fixture": "http://127.0.0.1:20688/",
+  "appSHA256": "85d91870c836e4bd918e3b39593bdc7d31466ba6840235d97dfe8d581f70adab",
+  "receiptSHA256": "bf950c11ca167d2cbb60abba2fc8ea863915d378006060428f53379dedcaff38",
+  "realCreatedFeatures": 32,
+  "fastZeroWorkZeroAllocatorRefusals": 3,
+  "maximumObservedNativeResults": 32,
+  "maximumObservedResultTriangles": 5632,
+  "firstFailureCheckpoint": "f2a4be0adeb566cb2ec631659ba7ea26aca2f1cf",
+  "productChangesInThisLane": false,
+  "files": {
+    "README.md": "7ea3513503938f29c16484ea2ede753dcc63052d63e64c860671ca47c8de0be7",
+    "browser.cjs": "bb9d8d7970905a2dcda15d4a338af343000066a043681a86e263095a69cece92",
+    "check-final.py": "343400271cc4d95afadecbc848518cff2d5ff2a326e791485e43190d078bd282",
+    "check-initial-gap.py": "091ca4f63bff5ae6398e6a34d3630eb8ab3f0c4dc426e5f69d396a4ed2d69cb3",
+    "evidence/final-check.log": "45bf97df0dd97a3e6e661c8b79e625d5157804d5425ab136035900d2beacc4c5",
+    "evidence/initial-gap-check.log": "445aef33f51b8b07e836fe91aa75ec685acdf15be7e8b64f936487d479dd7590",
+    "evidence/public-final.log": "ff90127a2361a37aee7918f90090bb86e625a84dc9eacf5a918012c9885df18b",
+    "evidence/publication-cap8-driver.cjs": "cae62b0a7b30cb07b54f8456c5fd90ffa5c713453d3bbfe43760c54cd7b1cdef",
+    "evidence/publication-cap8-failure.json": "8f3b28a43f566f2d40ccf45c959e7234c8f7a8ce01b789d1dcf01d70668a0fb1",
+    "evidence/publication-cap8-failure.log": "2ce1a94dc13d33e91d3094046f62bc064f88180403cbb8beec55fe9252d71c76",
+    "evidence/publication-cap8-runtime-pins.json": "b401f4510ae1b0b058008d7bd1341be7942f63b45a06939fe8da0fb7b5ecffc2",
+    "public-receipt.json": "bf950c11ca167d2cbb60abba2fc8ea863915d378006060428f53379dedcaff38",
+    "runtime-pins.json": "07455b878b0ebd54d54e434198a0fce3066b396a3bc835bbb2b556532e279adf"
+  }
+}

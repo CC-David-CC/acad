@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "source": "70f8d648f",
+  "base": "022f1dca7930875fd83b12cce3aa196639528486",
+  "catalogPrerequisite": "07a1e515e",
+  "scope": "routing/custody doubles and full TypeScript only; no native/public app proof",
+  "tests": {
+    "existingV1": 18,
+    "newV2": 10,
+    "total": 28,
+    "failed": 0,
+    "skipped": 0
+  },
+  "typescript": {
+    "exitCode": 0,
+    "logBytes": 0
+  },
+  "pins": {
+    "web/app/cad/craft/workerEdgeTreatmentCommands.ts": {
+      "sha256": "c91c159dda232dbdc2e83e6f252e6a9d6884a9ecd6857a3dcf97e8ca7635d694",
+      "bytes": 21486
+    },
+    "test/edge-treatment-commands/fixture.cjs": {
+      "sha256": "58cc787fcf214501d91d6f034ce0c525b922f0b2e8be27499cb733b5bc5ee437",
+      "bytes": 6274
+    },
+    "test/boolean-history-edge-commands/coordinator.test.cjs": {
+      "sha256": "bd2e344f3198d006429b9c74272ced4c5a0a31a293481004f0d7c8a351ad6e72",
+      "bytes": 8525
+    },
+    "test/boolean-history-edge-commands/coordinator.log": {
+      "sha256": "c89520cc26b881a2060db6521b8a4523cea1c0b50e3c4142fc4470ef91f80812",
+      "bytes": 2969
+    },
+    "test/boolean-history-edge-commands/typescript.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "modules/engine/mount/engineCatalog.mjs": {
+      "sha256": "4d5f6aac432a480ae76bd5061106ee80578eec7e2c02e9f10fbc146d496cc446",
+      "bytes": 6455
+    },
+    "modules/engine/mount/selectedProfileBuildSelection.mjs": {
+      "sha256": "8d4e40fd382e2d06d8921ccacefcb8d17a59a0937c0f3638b47b1df65f362f1d",
+      "bytes": 2743
+    },
+    "modules/engine/mount/selectedProfileBudget.mjs": {
+      "sha256": "22264ab4b700953d5aa6bc48479e6b6e945d1fddbcd36c4e0fd1f8ac0cd93d1e",
+      "bytes": 4544
+    },
+    "modules/engine/solid/solidOperandRuntime.mjs": {
+      "sha256": "bce853ccced15b651e681666ff7ab077ae4a265c623d1204205a4d1c10ed9a6f",
+      "bytes": 3143
+    }
+  }
+}

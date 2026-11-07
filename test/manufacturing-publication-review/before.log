@@ -1,0 +1,27 @@
+✔ unmodified native pre-aborted signal refuses before Worker allocation (236.740269ms)
+✖ native pre-aborted signal remains cancelled when its aborted property is shadowed (264.522971ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1007.933076
+
+✖ failing tests:
+
+test at test/manufacturing-publication-review/review.test.mjs:13:1
+✖ native pre-aborted signal remains cancelled when its aborted property is shadowed (264.522971ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection (AbortError).
+      at async file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:17:2
+      at async use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:7:44)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { name: 'AbortError' },
+    operator: 'rejects',
+    diff: 'simple'
+  }

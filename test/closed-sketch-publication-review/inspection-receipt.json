@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "source": "467a145c1a620b36dcf8160287a9b449b5a3990d",
+  "inspectionSource": "a42a81c8944309b41a8383f9802e2e7d0a47ba7a",
+  "clientSha256": "c4497de7a8dda9078a718c52abcc1c9f88472d8a62704d42b37415fd8ec3f184",
+  "layer": "real-Chromium-Web-Locks-with-labeled-Worker-double",
+  "fixture": "http://127.0.0.1:20584/",
+  "targetId": "3E27B3274E6FF0FE3B96498052D675FD",
+  "browser": "Chrome/155.0.8059.79",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'",
+  "out": [
+    {
+      "id": "third-pending",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Too many pending sketch inspections in this window."
+    },
+    {
+      "id": "queued-abort",
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sketch solve cancelled"
+    },
+    {
+      "id": "queued-capture",
+      "status": "fulfilled",
+      "ok": true,
+      "frozen": true,
+      "posted": {
+        "task": "sketch-transition-inspection",
+        "revision": "queued-capture",
+        "sketchJSON": "{}",
+        "externalParameters": {
+          "N": 3
+        }
+      },
+      "deepFrozen": true
+    },
+    {
+      "id": "active-abort",
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sketch solve cancelled"
+    },
+    {
+      "id": "deadline",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Sketch solve timed out."
+    },
+    {
+      "id": "typed-refusal",
+      "status": "fulfilled",
+      "ok": false,
+      "error": {
+        "code": "UNSUPPORTED",
+        "message": "Controlled refusal"
+      },
+      "frozen": true
+    },
+    {
+      "id": "foreign",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch worker result."
+    },
+    {
+      "id": "sparse-objects",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "sparse-constraints",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "sparse-references",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "sparse-frame",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "nonfinite-frame",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "duplicate-objects",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "duplicate-constraints",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "bad-admission",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "nonfinite-constant",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "oversized-constant",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "objects-limit",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid sketch worker result."
+    },
+    {
+      "id": "stage-limit",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "extra-key",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "boundary-type",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "response-ABA",
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sketch inspection cancelled or superseded."
+    },
+    {
+      "id": "guard-sync-dispose",
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sketch inspection cancelled or superseded."
+    },
+    {
+      "id": "accessor",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Invalid closed sketch inspection data."
+    },
+    {
+      "id": "validation-third",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Too many pending sketch inspections in this window."
+    },
+    {
+      "id": "validation-budget-A",
+      "status": "fulfilled",
+      "ok": true,
+      "frozen": true
+    },
+    {
+      "id": "validation-budget-B",
+      "status": "fulfilled",
+      "ok": true,
+      "frozen": true
+    },
+    {
+      "id": "validation-abort",
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sketch inspection cancelled or superseded."
+    },
+    {
+      "id": "validation-deadline",
+      "status": "rejected",
+      "name": "Error",
+      "message": "Sketch inspection timed out."
+    }
+  ],
+  "epoch": 2,
+  "disposalWorkers": 0,
+  "reads": 0,
+  "accessorWorkers": 0,
+  "validationWorkersEnded": true,
+  "created": 24,
+  "terminated": 24,
+  "maxTerminateCalls": 1,
+  "violations": [],
+  "authoredSourceAfterABA": "original",
+  "harnessReceiptCorrection": "The controlled source-state variable overwrote the source commit in an object spread. Raw receipt retained separately; source pin resolved from the tested script/source checkpoint and independently checked client bytes. Runtime outcomes/assertions unchanged."
+}

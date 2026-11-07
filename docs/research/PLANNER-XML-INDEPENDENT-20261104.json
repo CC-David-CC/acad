@@ -1,0 +1,19 @@
+{
+  "cadSource": "a41ba36d",
+  "plannerSource": "8fd49d19",
+  "plannerTests": {
+    "command": "node --test test/engine-hole/plan.test.mjs test/four-corner-planner/plan.test.mjs",
+    "passed": 17
+  },
+  "xmlTests": {
+    "browser": "PASS",
+    "productionWebpackGraph": "PASS",
+    "result": "PASS real async browser-xml2js, yield, malformed XML, timer cancel and Worker termination {\"cancelled\":false,\"args\":[4,\"x\"],\"sync\":true,\"heartbeat\":61,\"callbacks\":1,\"asyncCallback\":true,\"count\":64,\"first\":\"0\",\"last\":\"63\",\"malformed\":true,\"errors\":1,\"done\":false,\"nonfunction\":true}",
+    "statsSHA256": "9d3570697f8222037c7248a2a9a1be7c4f7187ade643bbbf8bb04fb8aee1b54b"
+  },
+  "limits": [
+    "Planner is geometry only; not a checked same-mount parent or CAD history feature",
+    "XML test is library scheduling/worker termination, not full import workflow",
+    "Desktop runtime pin remains2bef pending next package; no public deployment"
+  ]
+}

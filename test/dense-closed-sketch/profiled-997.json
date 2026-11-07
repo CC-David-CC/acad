@@ -1,0 +1,251 @@
+{
+  "appSha": "9993b01af9f49ca29aa2eceaa1701489aef01c992ee3a3b38a1a0799f87a9c28",
+  "objects": 514,
+  "constraints": 513,
+  "bytes": 139517,
+  "restoreMs": 311.59999990463257,
+  "steps": [
+    {
+      "name": "inspect",
+      "wallMs": 1192.5,
+      "maxSiblingGapMs": 10.599999904632568,
+      "longTasks": []
+    },
+    {
+      "name": "relation",
+      "wallMs": 3741.7999999523163,
+      "maxSiblingGapMs": 256.5,
+      "longTasks": [
+        111
+      ]
+    },
+    {
+      "name": "capture",
+      "wallMs": 19.90000009536743,
+      "maxSiblingGapMs": 13.400000095367432,
+      "longTasks": []
+    },
+    {
+      "name": "undo",
+      "wallMs": 3435.7000000476837,
+      "maxSiblingGapMs": 240.29999995231628,
+      "longTasks": [
+        123
+      ]
+    },
+    {
+      "name": "redo",
+      "wallMs": 3497.5999999046326,
+      "maxSiblingGapMs": 236.29999995231628,
+      "longTasks": [
+        117
+      ]
+    }
+  ],
+  "made": 9,
+  "ended": 9,
+  "status": "accepted",
+  "otherReady": true,
+  "profileTop": [
+    {
+      "functionName": "(idle)",
+      "scriptId": "0",
+      "url": "",
+      "lineNumber": -1,
+      "columnNumber": -1,
+      "hits": 11354
+    },
+    {
+      "functionName": "(program)",
+      "scriptId": "0",
+      "url": "",
+      "lineNumber": -1,
+      "columnNumber": -1,
+      "hits": 1336
+    },
+    {
+      "functionName": "getProgramInfoLog",
+      "scriptId": "0",
+      "url": "",
+      "lineNumber": -1,
+      "columnNumber": -1,
+      "hits": 86
+    },
+    {
+      "functionName": "(garbage collector)",
+      "scriptId": "0",
+      "url": "",
+      "lineNumber": -1,
+      "columnNumber": -1,
+      "hits": 70
+    },
+    {
+      "functionName": "get",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 90003,
+      "columnNumber": 21,
+      "hits": 54
+    },
+    {
+      "functionName": "get",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 90003,
+      "columnNumber": 21,
+      "hits": 50
+    },
+    {
+      "functionName": "updateViewportSizeIfNeeded",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 23202,
+      "columnNumber": 46,
+      "hits": 49
+    },
+    {
+      "functionName": "hash",
+      "scriptId": "24",
+      "url": "pptr:evaluate;%2Ftmp%2Fcodi-cad-mechanical-candidate-20261105%2Ftest%2Fdense-closed-sketch%2Fbrowser.test.cjs%3A7%3A26",
+      "lineNumber": 16,
+      "columnNumber": 41,
+      "hits": 41
+    },
+    {
+      "functionName": "updateMatrixWorld",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 352688,
+      "columnNumber": 18,
+      "hits": 30
+    },
+    {
+      "functionName": "requestAnimationFrame",
+      "scriptId": "0",
+      "url": "",
+      "lineNumber": -1,
+      "columnNumber": -1,
+      "hits": 22
+    },
+    {
+      "functionName": "eq",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 127909,
+      "columnNumber": 13,
+      "hits": 19
+    },
+    {
+      "functionName": "",
+      "scriptId": "24",
+      "url": "pptr:evaluate;%2Ftmp%2Fcodi-cad-mechanical-candidate-20261105%2Ftest%2Fdense-closed-sketch%2Fbrowser.test.cjs%3A7%3A26",
+      "lineNumber": 8,
+      "columnNumber": 221,
+      "hits": 18
+    },
+    {
+      "functionName": "_callee$",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 110234,
+      "columnNumber": 55,
+      "hits": 17
+    },
+    {
+      "functionName": "eq",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 127909,
+      "columnNumber": 13,
+      "hits": 15
+    },
+    {
+      "functionName": "LineMaterial",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 396261,
+      "columnNumber": 12,
+      "hits": 15
+    },
+    {
+      "functionName": "eq",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 127909,
+      "columnNumber": 13,
+      "hits": 15
+    },
+    {
+      "functionName": "__webpack_modules__../web/app/utils/hashmap.js.HashTable._findEntry",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 127786,
+      "columnNumber": 42,
+      "hits": 15
+    },
+    {
+      "functionName": "WebGLRenderer.setSize",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 371659,
+      "columnNumber": 25,
+      "hits": 14
+    },
+    {
+      "functionName": "eq",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 127909,
+      "columnNumber": 13,
+      "hits": 14
+    },
+    {
+      "functionName": "eq",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 127909,
+      "columnNumber": 13,
+      "hits": 14
+    },
+    {
+      "functionName": "eq",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 127909,
+      "columnNumber": 13,
+      "hits": 13
+    },
+    {
+      "functionName": "LineMaterial",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 396261,
+      "columnNumber": 12,
+      "hits": 13
+    },
+    {
+      "functionName": "__webpack_modules__../web/app/utils/hashmap.js.HashTable._findEntry",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 127786,
+      "columnNumber": 42,
+      "hits": 13
+    },
+    {
+      "functionName": "lookAt",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 352387,
+      "columnNumber": 7,
+      "hits": 12
+    },
+    {
+      "functionName": "n",
+      "scriptId": "7",
+      "url": "http://127.0.0.1:20488/static/index.bundle.js",
+      "lineNumber": 21444,
+      "columnNumber": 751,
+      "hits": 12
+    }
+  ]
+}

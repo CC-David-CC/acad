@@ -1,0 +1,123 @@
+{
+  "base": "53c6203fb",
+  "node": "v24.22.1",
+  "sourcesBeforeAndAfter": {
+    "../../modules/engine/mount/ownedThroughHolePlan.mjs": "7dd92c330acf098e258a916e2b8209a3ebacb62e1cdf6265dd8ae054f85fd69c",
+    "../../modules/engine/solid/ownedHoleIntent.mjs": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+    "../../modules/engine/solid/solidIntent.mjs": "aefd2681fb17603d7b40a704764e3a8e18f7931a37ae5f7ad6814154f88a7515",
+    "../../modules/engine/mount/polygonProfilePlan.mjs": "fa5ab686b60bb16348074df57e37ba04d4173ac5e0b9a441e2d4dfc4cc03737d",
+    "../../modules/engine/mount/selectedProfilePlan.mjs": "824dc5bfc8555a89fe9a647612ce76970f98b8adfd6e648185dd29e9f311c8a0",
+    "../../modules/engine/extrusion/simplePolygon.mjs": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+    "../owned-through-hole-plan/fixtures.mjs": "cda5d4134c5f2469efee6a54a4232e10f0b6a87f26ee8e1cbe28d2e304a49bb8",
+    "./draft-plan.mjs": "fb49a618f2f2ddec8c60dfc64507868ee84d9fe382a88dd3a7fa309a6d5bb21a",
+    "./fixtures.mjs": "3f49f02257838b8c079078f79111201af7e35d0c7822ef54b23614ee8a17baa8",
+    "./worker.mjs": "a8562d462ed3b62e63a4dde3637fdf21c18c5246cdcf9da3b230bc6e05695ad1",
+    "./run.mjs": "f2b2f319d7334f7a0048d4690da4862a88626be39db485fa0e4c49d9add65160"
+  },
+  "status": "FAIL",
+  "scope": "Pure test-only layout/intent contract in actual Node Worker; no native ownership, geometry, copy identity, actual ancestor, material, public/Craft/history qualification",
+  "rows": [
+    {
+      "name": "three holes INCLUDING seed yield only2 additional tools at localX+20,+40",
+      "status": "PASS",
+      "data": {
+        "centers": [
+          [
+            50,
+            25
+          ],
+          [
+            70,
+            25
+          ],
+          [
+            90,
+            25
+          ]
+        ],
+        "cost": 4,
+        "additionalRemoval": 3141.5926535897934
+      }
+    },
+    {
+      "name": "current source150x30/depth25 recomputes seed/copies and target extent",
+      "status": "PASS"
+    },
+    {
+      "name": "seed diameter edits update every copy without storing diameter in pattern intent",
+      "status": "PASS"
+    },
+    {
+      "name": "authored intent stores seed/count/spacing/axis and common identity, never solved copies or source duplication",
+      "status": "PASS"
+    },
+    {
+      "name": "count1 is seed-only layout requiring genuine owned identity output; no fictitious zero-cost policy",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid counts/axes/spacing and conflicting current feature IDs refuse",
+      "status": "PASS"
+    },
+    {
+      "name": "new source/seed/target/runtime binding must match exactly without aliasing original target",
+      "status": "PASS",
+      "data": {
+        "scope": "Structural captured-binding checks only; native ownership and target contains seed require evaluator proof"
+      }
+    },
+    {
+      "name": "four-corner or other non-centered seeds are explicit unsupported, not silently repurposed",
+      "status": "PASS"
+    },
+    {
+      "name": "source-local translation and reversed source winding preserve intended +X pattern",
+      "status": "PASS"
+    },
+    {
+      "name": "rotated translated source frame maps copies to +sourceX, never worldX",
+      "status": "PASS"
+    },
+    {
+      "name": "oblique frame preserves all8 actual AABB projection bounds for every copy",
+      "status": "PASS"
+    },
+    {
+      "name": "overlap/touching and source-boundary exterior copies are separate explicit failures",
+      "status": "FAIL",
+      "error": {
+        "code": "ERR_ASSERTION",
+        "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  Comparison {\n+   code: 'PATTERN_OUTSIDE_PROFILE'\n-   code: 'PATTERN_OVERLAP'\n  }\n",
+        "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  Comparison {\n+   code: 'PATTERN_OUTSIDE_PROFILE'\n-   code: 'PATTERN_OVERLAP'\n  }\n\n    at error (file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-plan/worker.mjs:6:89)\n    at file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-plan/worker.mjs:49:30\n    at check (file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-plan/worker.mjs:5:48)\n    at file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-plan/worker.mjs:46:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      }
+    },
+    {
+      "name": "maximum perfeature count17 plans16additionaltools/32results while wholehistory budget remains external",
+      "status": "PASS",
+      "data": {
+        "scope": "This mathematical per-feature ceiling does not reserve whole-part capacity; existing source/seed/edges consume additional results"
+      }
+    },
+    {
+      "name": "actual material and mixed preexisting holes remain OPEN, not inferred from positive volume/bindings",
+      "status": "PASS",
+      "data": {
+        "scope": "Planner cannot certify target contains seed, no intersecting prior holes or constant material along cut. Runtime verification required",
+        "referenceRemoval": 3141.5926535897934,
+        "targetVolume": 1
+      }
+    },
+    {
+      "name": "original intent/profile/measurements unchanged; detached immutable derived plan survives caller edits",
+      "status": "PASS"
+    },
+    {
+      "name": "getter/extra/sparse/nonfinite data and oversized source admission preserve product guards",
+      "status": "PASS"
+    },
+    {
+      "name": "source reshape/holes/seed placement failures remain product through-hole admission failures",
+      "status": "PASS"
+    }
+  ]
+}

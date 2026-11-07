@@ -1,0 +1,230 @@
+import * as ActionHelpers from './actionHelpers'
+import {AiOutlineExport} from "react-icons/ai";
+import {desktopFileMode, requestDesktopFileAction} from '../desktopFileActions';
+import {resolveIcon} from "cad/craft/ui/iconResolver";
+import sketchSvg from "./SKETCH.svg";
+
+export default [
+  {
+    id: 'DesktopDimensionedRectangle',
+    appearance: {cssIcons: ['square-o'], label: 'Dimensioned rectangle', info: 'Create a dimensioned XY sketch'},
+    invoke: () => {
+      if (!desktopFileMode || window.parent === window) throw new Error('Desktop modeling controls are unavailable.');
+      window.parent.postMessage({codiJSketcher: {type: 'rectangle-dialog'}}, window.location.origin);
+    }
+  },
+  {
+    id: 'DesktopEditRectangleDimensions',
+    appearance: {cssIcons: ['pencil'], label: 'Edit rectangle dimensions', info: 'Edit a supported authored rectangle'},
+    invoke: () => {
+      if (!desktopFileMode || window.parent === window) throw new Error('Desktop modeling controls are unavailable.');
+      window.parent.postMessage({codiJSketcher: {type: 'rectangle-edit-dialog'}}, window.location.origin);
+    }
+  },
+  {
+    id: 'EditFace',
+    appearance: {
+      icon: resolveIcon({ iconType: 'svg', iconContent: sketchSvg }),
+      label: 'sketch',
+      info: 'open sketcher for a face/plane',
+    },
+    listens: ctx => ctx.streams.selection.face,
+    update: ActionHelpers.checkForSelectedFaces(1),
+    invoke: ({services}) => services.sketcher.sketchFace(services.selection.face.single)
+  },
+
+  {
+    id: 'ReassignSketch',
+    appearance: {
+      cssIcons: ['share'],
+      label: 'reassign sketch',
+      icon96: 'img/cad/face-edit96.png',
+      info: 'open sketcher for a face/plane',
+    },
+    listens: ctx => ctx.streams.selection.face,
+    update: ActionHelpers.checkForSelectedFaces(1),
+    invoke: ctx => ctx.services.sketcher.reassignSketchMode.enter(ctx.services.selection.face.single.id)
+  },
+
+  {
+    id: 'Save',
+    appearance: {
+      cssIcons: ['floppy-o'],
+      label: desktopFileMode ? 'Save to My files' : 'save',
+      info: desktopFileMode ? 'save the project through the desktop' : 'save project to storage',
+    },
+    invoke: (context) => desktopFileMode ? requestDesktopFileAction('save') : context.projectService.save()
+  },
+  {
+    id: 'DesktopSaveAs',
+    appearance: {cssIcons: ['floppy-o'], label: 'Save As to My files', info: 'save a copy through the desktop'},
+    invoke: () => requestDesktopFileAction('save-as')
+  },
+
+  {
+    id: 'DesktopExport3MF',
+    appearance: {cssIcons: ['upload'], label: 'Export 3MF to My files (research)', info: 'export supported assigned native box models'},
+    invoke: () => requestDesktopFileAction('export-3mf')
+  },
+
+  {
+    id: 'DesktopExportSTEP',
+    appearance: {cssIcons: ['upload'], label: 'Export STEP to My files', info: 'Export current parts; editable history stays in the project file'},
+    listens: ctx => ctx.streams.craft.update,
+    update: (state, _change, ctx) => {
+      try {
+        const info=ctx.craftService.inspectWorkerStepExports();
+        state.enabled=info.ready&&info.bodies.some(body=>body.canExport);
+        state.hint=state.enabled?'Export current parts to My files':info.reason||'No exportable current solids';
+      } catch {
+        state.enabled=false;
+        state.hint='STEP export is unavailable in the current part';
+      }
+    },
+    invoke: () => requestDesktopFileAction('export-step')
+  },
+
+  {
+    id: 'StlExport',
+    appearance: {
+      cssIcons: ['upload', 'flip-vertical'],
+      label: 'STL Export',
+      info: 'export model to STL file',
+    },
+    invoke: (context) => context.services.export.stlAscii()
+  },
+  
+  {
+    id: 'ImagePngExport',
+    appearance: {
+      cssIcons: ['image'],
+      label: 'PNG Export',
+      info: 'export model as png image/render a snapshot',
+    },
+    invoke: (context) => context.services.export.imagePng()
+  },
+
+  {
+    id: 'NativeFormatExport',
+    appearance: {
+      cssIcons: ['book'],
+      label: 'Download Project',
+      info: 'export model and its sketches as a json bundle',
+    },
+    invoke: (context) => context.services.export.nativeFormat()
+  },
+
+  {
+    id: 'NativeFormatImport',
+    appearance: {
+      cssIcons: ['download', 'flip-vertical'],
+      label: desktopFileMode ? 'Open from My files' : 'Import Project',
+      info: desktopFileMode ? 'open a project through the desktop' : 'empty current project and import replacing with native format json(model and its sketches)',
+    },
+    invoke: (context) => desktopFileMode ? requestDesktopFileAction('open') : context.services.projectManager.importProject()
+  },
+  
+  {
+    id: 'NativeFormatImportAs',
+    appearance: {
+      cssIcons: ['download', 'flip-vertical'],
+      label: 'Import Project as...',
+      info: 'import native format json(model and its sketches) as a new project',
+    },
+    invoke: (context) => context.services.projectManager.importProjectAs()
+  },
+
+  {
+    id: 'NewProject',
+    appearance: {
+      cssIcons: ['file-o'],
+      label: 'New Project...',
+      info: 'create new project and open in a new tab',
+    },
+    invoke: (context) => context.services.projectManager.newProject()
+  },
+  
+  {
+    id: 'CloneCurrentProject',
+    appearance: {
+      cssIcons: ['copy'],
+      label: 'Clone Project...',
+      info: 'clone current project and open in a new tab',
+    },
+    invoke: (context) => context.services.projectManager.cloneProject(context.projectService.id)
+  },
+
+  {
+    id: 'RefreshSketches',
+    appearance: {
+      cssIcons: ['refresh'],
+      label: 'Refresh Sketches',
+      info: 'refresh all visible sketches',
+    },
+    invoke: (context) => context.services.sketcher.updateAllSketches()
+  },
+
+  {
+    id: 'DeselectAll',
+    appearance: {
+      cssIcons: ['square-o'],
+      label: 'deselect all',
+      info: 'deselect everything',
+    },
+    invoke: (context) => context.services.pickControl.deselectAll()
+  },
+
+  {
+    id: 'ToggleCameraMode',
+    appearance: {
+      cssIcons: ['video-camera'],
+      label: 'toggle camera',
+      info: 'switch camera mode between perspective and orthographic',
+    },
+    invoke: context => {
+      const viewer = context.services.viewer;
+      viewer.toggleCamera();
+      viewer.render();
+    }
+  },
+
+  {
+    id: 'Info',
+    appearance: {
+      cssIcons: ['info-circle'],
+      label: 'info',
+      info: 'opens help dialog',
+    },
+    invoke: (context) => context.services.help.showInfo()
+  },
+
+  {
+    id: 'ShowSketches',
+    type: 'binary',
+    property: 'showSketches',
+    appearance: {
+      cssIcons: ['image'],
+      label: 'show sketches',
+      info: 'toggle whether to show sketches on a solid face'
+    }
+  },
+  {
+    id: 'noIcon',
+    appearance: {
+      label: 'no icon'
+    }
+  },
+
+  {
+    id: 'ExportFaceToDXF',
+    appearance: {
+      icon: AiOutlineExport,
+      label: 'export face DXF',
+      info: 'export a selected face to a DXF file',
+    },
+    listens: ctx => ctx.streams.selection.face,
+    update: ActionHelpers.checkForSelectedFaces(1),
+    invoke: ({services}) => services.sketcher.exportFaceToDXF(services.selection.face.single)
+  },
+]
+

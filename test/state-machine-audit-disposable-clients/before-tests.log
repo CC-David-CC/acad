@@ -1,0 +1,625 @@
+✔ physical success cleanup=none (1.652836ms)
+✔ physical operation-error cleanup=none (0.154121ms)
+✔ physical message-error cleanup=none (0.138941ms)
+✔ physical malformed cleanup=none (0.113752ms)
+✔ physical abort cleanup=none (0.141622ms)
+✔ physical timeout cleanup=none (0.476464ms)
+✔ physical late cleanup=none (1.093641ms)
+✖ physical success cleanup=error (0.802828ms)
+✖ physical success cleanup=null (0.183022ms)
+✖ physical success cleanup=undefined (0.227992ms)
+✖ physical success cleanup=zero (0.173502ms)
+✖ physical success cleanup=false (0.129921ms)
+✖ physical success cleanup=empty (0.112051ms)
+✖ physical operation-error cleanup=error (0.091121ms)
+✖ physical abort cleanup=error (0.107851ms)
+✖ physical timeout cleanup=error (0.133881ms)
+✔ semantic success cleanup=none (0.088271ms)
+✔ semantic operation-error cleanup=none (0.085851ms)
+✔ semantic message-error cleanup=none (0.07404ms)
+✔ semantic malformed cleanup=none (0.047301ms)
+✔ semantic abort cleanup=none (0.045871ms)
+✔ semantic timeout cleanup=none (0.0533ms)
+✔ semantic late cleanup=none (0.04122ms)
+✖ semantic success cleanup=error (0.115771ms)
+✖ semantic success cleanup=null (0.092661ms)
+✖ semantic success cleanup=undefined (0.09429ms)
+✖ semantic success cleanup=zero (0.091821ms)
+✖ semantic success cleanup=false (0.086551ms)
+✖ semantic success cleanup=empty (0.082001ms)
+✖ semantic operation-error cleanup=error (0.080071ms)
+✖ semantic abort cleanup=error (0.081421ms)
+✖ semantic timeout cleanup=error (0.082791ms)
+✔ sketch success cleanup=none (0.04798ms)
+✔ sketch operation-error cleanup=none (0.041361ms)
+✔ sketch message-error cleanup=none (0.04399ms)
+✔ sketch malformed cleanup=none (0.03873ms)
+✔ sketch abort cleanup=none (0.039711ms)
+✔ sketch timeout cleanup=none (0.04163ms)
+✔ sketch late cleanup=none (0.051041ms)
+✖ sketch success cleanup=error (0.084501ms)
+✖ sketch success cleanup=null (0.080381ms)
+✖ sketch success cleanup=undefined (0.078841ms)
+✖ sketch success cleanup=zero (0.079421ms)
+✖ sketch success cleanup=false (0.079861ms)
+✖ sketch success cleanup=empty (0.107451ms)
+✖ sketch operation-error cleanup=error (0.159312ms)
+✖ sketch abort cleanup=error (0.113111ms)
+✖ sketch timeout cleanup=error (0.089081ms)
+ℹ tests 48
+ℹ suites 0
+ℹ pass 21
+ℹ fail 27
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 94.512335
+
+✖ failing tests:
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ physical success cleanup=error (0.802828ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ physical success cleanup=null (0.183022ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ physical success cleanup=undefined (0.227992ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ physical success cleanup=zero (0.173502ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ physical success cleanup=false (0.129921ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ physical success cleanup=empty (0.112051ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ physical operation-error cleanup=error (0.091121ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ physical abort cleanup=error (0.107851ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ physical timeout cleanup=error (0.133881ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ semantic success cleanup=error (0.115771ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ semantic success cleanup=null (0.092661ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ semantic success cleanup=undefined (0.09429ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ semantic success cleanup=zero (0.091821ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ semantic success cleanup=false (0.086551ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ semantic success cleanup=empty (0.082001ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ semantic operation-error cleanup=error (0.080071ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ semantic abort cleanup=error (0.081421ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ semantic timeout cleanup=error (0.082791ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ sketch success cleanup=error (0.084501ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ sketch success cleanup=null (0.080381ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ sketch success cleanup=undefined (0.078841ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ sketch success cleanup=zero (0.079421ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ sketch success cleanup=false (0.079861ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ sketch success cleanup=empty (0.107451ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ sketch operation-error cleanup=error (0.159312ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ sketch abort cleanup=error (0.113111ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-disposable-clients/observations.test.mjs:4:31
+✖ sketch timeout cleanup=error (0.089081ms)
+  AssertionError [ERR_ASSERTION]: Every terminal path must settle after its deadline
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/observations.test.mjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

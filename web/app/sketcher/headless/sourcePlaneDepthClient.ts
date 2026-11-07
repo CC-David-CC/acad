@@ -1,0 +1,8 @@
+import {runSketchSolve,SketchSolveOptions} from './client';
+import {captureSourcePlaneRequest,captureSourcePlaneReply} from './sourcePlaneDepthEnvelope.mjs';
+export async function runSourcePlaneDepthPreparation(workerUrl:string,input:any,options:SketchSolveOptions={}){
+ const request=captureSourcePlaneRequest(input),limit=options.timeoutMs===undefined?30000:options.timeoutMs;if(!Number.isSafeInteger(limit)||limit<1||limit>30000)throw Error('Invalid plane transition deadline.');const deadline=performance.now()+limit,remaining=()=>{const ms=Math.floor(deadline-performance.now());if(ms<1)throw Object.assign(Error('Plane transition timed out.'),{code:'TIMEOUT'});return {...options,timeoutMs:ms};},current=()=>{if(options.signal?.aborted||options.valid&&options.valid()!==true)throw new DOMException('Plane movement was cancelled.','AbortError');};
+ current();const first:any=captureSourcePlaneReply(await runSketchSolve(workerUrl,{task:'sketch-source-plane-depth',...request},remaining()),request.revision);current();if(!first.ok)throw Object.assign(Error(first.error.message),first.error);
+ const verified:any=captureSourcePlaneReply(await runSketchSolve(workerUrl,{task:'sketch-source-plane-depth-verify',...request,candidateJSON:first.serializedSketch},remaining()),request.revision);current();if(!verified.ok)throw Object.assign(Error(verified.error.message),verified.error);
+ if(first.serializedSketch!==verified.serializedSketch||JSON.stringify(first.frame)!==JSON.stringify(verified.frame))throw Object.assign(Error('Independent source-plane verification differs.'),{code:'INVALID_RESPONSE'});return first;
+}

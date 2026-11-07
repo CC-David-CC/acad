@@ -1,0 +1,9 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {resolveSketchConstant,checkSketchLocalConstants} from '../../web/app/cad/sketch/sketchConstantResolver.js';
+function typed(){const values={width:{dimension:'length',value:150},angle:{dimension:'angle',value:1.2},scalar:{dimension:'scalar',value:3}};return {isTyped:true,hasCurrentPhysicalResult:()=>true,resolveQuantity(name,dimension){const row=values[name];if(!row||row.dimension!==dimension)throw Error('dimension mismatch');return row.value}}}
+test('typed sketch numeric literals preserve field units and typed length names require length metadata',()=>{const e=typed();for(const [v,n] of [['0',0],['-1.5',-1.5],['2e2',200],[3,3]])assert.equal(resolveSketchConstant(e,v,{}),n);assert.equal(resolveSketchConstant(e,' width ',{dimension:'length'}),150);assert.throws(()=>resolveSketchConstant(e,'angle',{dimension:'length'}),/dimension/);assert.throws(()=>resolveSketchConstant(e,'width',{}),/dimension-aware/);assert.throws(()=>resolveSketchConstant(e,'width+1',{dimension:'length'}),/dimension-aware/)});
+test('typed sketch refuses stale facades and local constants',()=>{const e=typed();e.hasCurrentPhysicalResult=()=>false;assert.throws(()=>resolveSketchConstant(e,'1',{dimension:'length'}),/unavailable/);assert.throws(()=>checkSketchLocalConstants(e,'width = 1'),/local/);assert.doesNotThrow(()=>checkSketchLocalConstants(e,''))});
+test('legacy resolver remains authoritative',()=>{const e={isTyped:false,evaluateExpression:v=>v==='width'?17:v};assert.equal(resolveSketchConstant(e,'width',{}),17);assert.doesNotThrow(()=>checkSketchLocalConstants(e,'width = 1'))});
+
+test('nonfinite numeric inputs refuse before mutation',()=>{const e=typed();for(const value of [NaN,Infinity,-Infinity,'1e309','Infinity','NaN'])assert.throws(()=>resolveSketchConstant(e,value,{dimension:'length'}));});

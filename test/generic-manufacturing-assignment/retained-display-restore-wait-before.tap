@@ -1,0 +1,78 @@
+✔ default/no-op/changed receipt is document-scoped and canonical unit remains mm (428.808623ms)
+✔ setter preserves history/source/counter/journal/material identities without Worker dispatch (147.285837ms)
+✔ malformed exact fields/options/getters and stale revisions reject unchanged (131.337565ms)
+✔ active/processing/history/wizard and cleanup states refuse metadata writes (519.902976ms)
+✔ closed/unbound/replaced manager and cancelled caller refuse before changing state (390.949082ms)
+✔ post-commit lifetime loss is marked committed and never rolls into another document (86.659697ms)
+✔ New/reset returns to absent metadata and invalidates prior document revision (93.261931ms)
+verb 2.0.0
+✖ actual manager snapshot/Blob reopen retains presentation through actual validation Worker (274.004255ms)
+verb 2.0.0
+✖ presentation installs only after successful replay and final restore guards (175.702823ms)
+verb 2.0.0
+verb 2.0.0
+✔ validation/replay failure and cancelled native Open never install incoming presentation (464.997404ms)
+✔ display change invalidates captured Save currentness independently of material state (85.82603ms)
+verb 2.0.0
+✖ actual manufacturing preparation/hashing retains optional presentation outside digest domains (269.446878ms)
+verb 2.0.0
+✖ an original default-mm native envelope reopens as default without metadata migration (170.467029ms)
+verb 2.0.0
+✖ metadata changes during actual asynchronous manufacturing hashing reject the old Save (327.419168ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 9
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7511.159863
+
+✖ failing tests:
+
+test at test/display-units/manager.test.mjs:31:1
+✖ actual manager snapshot/Blob reopen retains presentation through actual validation Worker (274.004255ms)
+  Error: Unqualified unused import projectRebuildWaitMs
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/display-units/manager-fixture.mjs:24:54
+      at restoreParsedSnapshotInEmptyWorkspace (actual-projectManagerBundle.ts:846:77)
+      at Object.restoreSnapshotBytesInEmptyWorkspace (actual-projectManagerBundle.ts:812:19)
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/display-units/manager.test.mjs:32:180)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at test/display-units/manager.test.mjs:34:1
+✖ presentation installs only after successful replay and final restore guards (175.702823ms)
+  Error: Unqualified unused import projectRebuildWaitMs
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/display-units/manager-fixture.mjs:24:54
+      at restoreParsedSnapshotInEmptyWorkspace (actual-projectManagerBundle.ts:846:77)
+      at Object.restoreSnapshotBytesInEmptyWorkspace (actual-projectManagerBundle.ts:812:19)
+
+test at test/display-units/manager.test.mjs:43:1
+✖ actual manufacturing preparation/hashing retains optional presentation outside digest domains (269.446878ms)
+  Error: Unqualified unused import projectRebuildWaitMs
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/display-units/manager-fixture.mjs:24:54
+      at restoreParsedSnapshotInEmptyWorkspace (actual-projectManagerBundle.ts:846:77)
+      at async Object.restoreSnapshotBytesInEmptyWorkspace (actual-projectManagerBundle.ts:812:13)
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/display-units/manager.test.mjs:44:212)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at test/display-units/manager.test.mjs:46:1
+✖ an original default-mm native envelope reopens as default without metadata migration (170.467029ms)
+  Error: Unqualified unused import projectRebuildWaitMs
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/display-units/manager-fixture.mjs:24:54
+      at restoreParsedSnapshotInEmptyWorkspace (actual-projectManagerBundle.ts:846:77)
+      at Object.restoreSnapshotBytesInEmptyWorkspace (actual-projectManagerBundle.ts:812:19)
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/display-units/manager.test.mjs:47:91)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at test/display-units/manager.test.mjs:49:1
+✖ metadata changes during actual asynchronous manufacturing hashing reject the old Save (327.419168ms)
+  Error: Unqualified unused import projectRebuildWaitMs
+      at file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/display-units/manager-fixture.mjs:24:54
+      at restoreParsedSnapshotInEmptyWorkspace (actual-projectManagerBundle.ts:846:77)
+      at async Object.restoreSnapshotBytesInEmptyWorkspace (actual-projectManagerBundle.ts:812:13)
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-generic-manufacturing-preparation-20261107/test/display-units/manager.test.mjs:50:212)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

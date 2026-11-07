@@ -1,0 +1,1207 @@
+{
+  "scope": "Standalone Python after-complete-workflow SVG/native artifact review; no production validators, Native execution, browser or geometry authoring. Not full E22.",
+  "status": "FAIL",
+  "inputReceiptSha256": "47843a644366d7c65abad73e6c4e1b102a3eaae33e96e7632ff8d48968bb9acc",
+  "oracleSha256": "a522fad99d2655bc5f4052704592be04a3d5dcbb1926a60a4805f22b94272f13",
+  "runtimePins": {
+    "source": "15c0f1fb969e8e87d33868042d7f75dd11c29cd6",
+    "desktop": "0e348d61774762a9c5580f9c3629acdbd53fd1c0",
+    "outer": {
+      "bundleSHA256": "050d5687daef84a87ad9602071a968e059ef67f03c8ef7943c8411c976935dd4",
+      "sha256": "e57906092bcf5afe7e1a013afd87cce9e084364baf31f4617f3764eb44b99732"
+    },
+    "files": {
+      "index-webos.html": "fd42181f1f5e0630d06bacc5362a404f927c179cbed3b1eea8aa1e752da59e80",
+      "static/controlled-3mf.0b23f5fab463f9557f68.js": "3db10b192c94b07d59c7de08422e477caca6d2338da5697d47519564105f1895",
+      "static/controlled-3mf.22afa15158099677faf3.js": "97306e38c14c481d8e71ba5840df1741e00c5feb72523c15850476bc16798b32",
+      "static/controlled-3mf.8b0b7e51326d4565d3fb.js": "1b0216514aa6914210e235f91fe8b4ede9e2b7004ec2cc2e694bb1ba9091a483",
+      "static/controlled-3mf.c8c9111c5001d1180fe0.js": "639a6ec84d876a4dfe461efdac1c1e00cfc6e2c9e28772f83aa45b51d6fe678b",
+      "static/controlled-3mf.e377404b6e8570e517c6.js": "26d7385f6c1baf64fca4d72faefc367d090deccb42b7a7aea4335ea82a53ef4c",
+      "static/index.bundle.js": "c07607d93a1d2d8e10ba623a435a5f4268f88ffdea7f1bfe50d1388dc5ac7c62",
+      "static/manufacturing-mesh/manufacturing-mesh-occ-portable.js": "32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08",
+      "static/manufacturing-mesh/manufacturing-mesh-occ.wasm": "abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc",
+      "static/manufacturing-mesh/modules/drawing/linkedPartDrawingDefinition.mjs": "223a68a2d5b44f478a4cebc4e5a77a7d9c83f81401fef53dd81c79d688e06ea7",
+      "static/manufacturing-mesh/modules/engine/extrusion/selectedRegionDescriptor.mjs": "cdb3f0ad622f398b78618ec290b94937561aae5c5b34fa71438e83fbd41a87e4",
+      "static/manufacturing-mesh/modules/engine/extrusion/simplePolygon.mjs": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+      "static/manufacturing-mesh/modules/engine/mount/booleanSelectionClaims.mjs": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+      "static/manufacturing-mesh/modules/engine/mount/cylinderCutWitness.mjs": "0398b807d077248eb7277b88d8cc5efc8b631fd93097e63cb969dcf7824cdceb",
+      "static/manufacturing-mesh/modules/engine/mount/drawingReferenceFacts.mjs": "75a8842887a5688062b2d62fe80be16ce458c0ff5540ff7c8bf160f0de21d9c1",
+      "static/manufacturing-mesh/modules/engine/mount/exactMeshVolume.mjs": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+      "static/manufacturing-mesh/modules/engine/mount/manufacturing-mesh-worker.js": "22588b077487e2cc971c1f5b20fa8025a1e06f111eb33838f857d6e90bdeb2e3",
+      "static/manufacturing-mesh/modules/engine/mount/manufacturingMeshRecord.mjs": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+      "static/manufacturing-mesh/modules/engine/mount/orthographicAnalyticRecord.mjs": "8454077795e4c92099523435ed4a32cc86c1264b80d881e590667adc8fd517ae",
+      "static/manufacturing-mesh/modules/engine/mount/ownedBooleanContract.mjs": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+      "static/manufacturing-mesh/modules/engine/mount/ownedDrawingReadProtocol.mjs": "6d886cde053ffb65a11edc85df6c739731947ee28b1becb63d564323ed7af0c9",
+      "static/manufacturing-mesh/modules/engine/mount/ownedLinearHolePatternPlan.mjs": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+      "static/manufacturing-mesh/modules/engine/mount/ownedLoftPlan.mjs": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+      "static/manufacturing-mesh/modules/engine/mount/ownedManufacturingMeshProtocol.mjs": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+      "static/manufacturing-mesh/modules/engine/mount/ownedOrthographicReadProtocol.mjs": "52ae654d5df0f593a2354b3196577804a508069b055a5c52ee0f55416f553087",
+      "static/manufacturing-mesh/modules/engine/mount/ownedRevolvePlan.mjs": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+      "static/manufacturing-mesh/modules/engine/mount/ownedStepExportProtocol.mjs": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+      "static/manufacturing-mesh/modules/engine/mount/ownedSweepPlan.mjs": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+      "static/manufacturing-mesh/modules/engine/mount/ownedThroughHolePlan.mjs": "7dd92c330acf098e258a916e2b8209a3ebacb62e1cdf6265dd8ae054f85fd69c",
+      "static/manufacturing-mesh/modules/engine/mount/ownedTopologyContract.mjs": "a59d63b5b3cfade6e9c858aa69693d7a1461372622f1bd4321607f4d1c781fb9",
+      "static/manufacturing-mesh/modules/engine/mount/polygonProfilePlan.mjs": "a0419bce6708ab912f3ae18b2916f63673f76d84729bd3d3362b4fcf6418f3ed",
+      "static/manufacturing-mesh/modules/engine/mount/prismSelectionIndex.mjs": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+      "static/manufacturing-mesh/modules/engine/mount/selectedProfilePlan.mjs": "cb19aa85d723fef1395a4b06d85f9ddacf2b2381ded879ab863793fd316a45e8",
+      "static/manufacturing-mesh/modules/engine/mount/selectionAncestryIndex.mjs": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+      "static/manufacturing-mesh/modules/engine/mount/selectionLineageIndex.mjs": "32da989a9add455aeee4bbe1e6f0d50270da565208d09bf9e4a0567bbdce3e8b",
+      "static/manufacturing-mesh/modules/engine/solid/ownedHoleIntent.mjs": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+      "static/manufacturing-mesh/modules/engine/solid/ownedLinearHolePatternIntent.mjs": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+      "static/manufacturing-mesh/modules/engine/solid/ownedLoftIntent.mjs": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+      "static/manufacturing-mesh/modules/engine/solid/ownedRevolveIntent.mjs": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+      "static/manufacturing-mesh/modules/engine/solid/ownedSweepIntent.mjs": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+      "static/manufacturing-mesh/modules/engine/solid/solidIntent.mjs": "521841efb17bec51740773aaf0d3ebc3efd7f10fefd802f2f4d6d1c7592ec5a7",
+      "static/manufacturing-mesh/modules/engine/solid/sweepLimits.mjs": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13"
+    }
+  },
+  "svg": [
+    {
+      "file": "original-original.svg",
+      "sha256": "7d691db5ef65dbd93c3982a4174c30d2f2606a65dc8526877a06fab1aba27f3d",
+      "status": "available",
+      "expectedDimensionsMm": {
+        "width": 100,
+        "height": 50,
+        "depth": 20,
+        "hole-diameter": 10,
+        "hole-offset-x": 50.0,
+        "hole-offset-y": 25.0
+      },
+      "projectedBoundsPaperMm": {
+        "top": [
+          110,
+          50,
+          210,
+          100
+        ],
+        "front": [
+          110,
+          170,
+          210,
+          190
+        ],
+        "right": [
+          310,
+          170,
+          360,
+          190
+        ]
+      },
+      "geometryPaths": 111,
+      "boreCirclePaths": 2,
+      "unresolvedLabels": [],
+      "documentRevision": "2c775c22-6551-4b45-96d2-ac6ce93906c4",
+      "geometryRevision": "115045c4-c7aa-468f-8787-4401d128fcc4"
+    },
+    {
+      "file": "original-reopened.svg",
+      "sha256": "44c8007694b0319d14fc1cb952af06bcf76092c36dfdfed01e09877d7ad6035d",
+      "status": "available",
+      "expectedDimensionsMm": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 14,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "projectedBoundsPaperMm": {
+        "top": [
+          110,
+          70,
+          260,
+          100
+        ],
+        "front": [
+          110,
+          165,
+          260,
+          190
+        ],
+        "right": [
+          310,
+          165,
+          340,
+          190
+        ]
+      },
+      "geometryPaths": 111,
+      "boreCirclePaths": 2,
+      "unresolvedLabels": [],
+      "documentRevision": "c9158052-cc1a-406f-8e89-ae0dc744aadc",
+      "geometryRevision": "27acfe52-1456-4218-b97f-0659f445e14f"
+    },
+    {
+      "file": "original-unresolved.svg",
+      "sha256": "94bae8a3cf978d566e2537ba6c7c571dd6e58c5002e84dc1d523457a5dac2b4f",
+      "status": "unresolved",
+      "expectedDimensionsMm": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "projectedBoundsPaperMm": {
+        "top": [
+          110,
+          70,
+          260,
+          100
+        ],
+        "front": [
+          110,
+          165,
+          260,
+          190
+        ],
+        "right": [
+          310,
+          165,
+          340,
+          190
+        ]
+      },
+      "geometryPaths": 111,
+      "boreCirclePaths": 2,
+      "unresolvedLabels": [
+        "hole-diameter",
+        "hole-offset-x",
+        "hole-offset-y"
+      ],
+      "documentRevision": "01f1aa1c-59a5-4fe1-bd90-3f1e5b1e4446",
+      "geometryRevision": "143c101b-4260-46d9-ae75-16b0551ddd4d"
+    },
+    {
+      "file": "original-final.svg",
+      "sha256": "9184a178cb4a253aa92e10221875382652123a014839c670339c388fec414126",
+      "status": "available",
+      "expectedDimensionsMm": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "projectedBoundsPaperMm": {
+        "top": [
+          110,
+          70,
+          260,
+          100
+        ],
+        "front": [
+          110,
+          165,
+          260,
+          190
+        ],
+        "right": [
+          310,
+          165,
+          340,
+          190
+        ]
+      },
+      "geometryPaths": 111,
+      "boreCirclePaths": 2,
+      "unresolvedLabels": [],
+      "documentRevision": "1ffe0ee8-35c0-4b42-8429-8bc78603327c",
+      "geometryRevision": "5ec6271a-ebc2-4d0e-975a-560c17ccef75"
+    },
+    {
+      "file": "negative-datum-original.svg",
+      "sha256": "b09173cc015092f189952cf25df6821f3cae710517ad4d7bab31c0ac84883a2b",
+      "status": "available",
+      "expectedDimensionsMm": {
+        "width": 100,
+        "height": 50,
+        "depth": 20,
+        "hole-diameter": 10,
+        "hole-offset-x": 30.0,
+        "hole-offset-y": 15.0
+      },
+      "projectedBoundsPaperMm": {
+        "top": [
+          30,
+          90,
+          130,
+          140
+        ],
+        "front": [
+          30,
+          170,
+          130,
+          190
+        ],
+        "right": [
+          270,
+          170,
+          320,
+          190
+        ]
+      },
+      "geometryPaths": 111,
+      "boreCirclePaths": 2,
+      "unresolvedLabels": [],
+      "documentRevision": "4fcb6513-2c0f-4f5c-a900-6b8e373f7832",
+      "geometryRevision": "27d32b36-768f-4d07-9ec8-c83252398ac5"
+    },
+    {
+      "file": "negative-datum-reopened.svg",
+      "sha256": "75965ad97da0062753884075f5fc12b91e8130b3c666ae521d8d6a7733596d87",
+      "status": "available",
+      "expectedDimensionsMm": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 14,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "projectedBoundsPaperMm": {
+        "top": [
+          30,
+          110,
+          180,
+          140
+        ],
+        "front": [
+          30,
+          165,
+          180,
+          190
+        ],
+        "right": [
+          270,
+          165,
+          300,
+          190
+        ]
+      },
+      "geometryPaths": 111,
+      "boreCirclePaths": 2,
+      "unresolvedLabels": [],
+      "documentRevision": "607c6ad4-630f-412a-89d0-cf760ce0752d",
+      "geometryRevision": "2f1216ff-e183-45ce-a0d0-a5b8197f3b5f"
+    },
+    {
+      "file": "negative-datum-unresolved.svg",
+      "sha256": "39adc4c7e3efd3576f212d95137bab11e5dbe24a3a2a4fb1325bc430cb575995",
+      "status": "unresolved",
+      "expectedDimensionsMm": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "projectedBoundsPaperMm": {
+        "top": [
+          30,
+          110,
+          180,
+          140
+        ],
+        "front": [
+          30,
+          165,
+          180,
+          190
+        ],
+        "right": [
+          270,
+          165,
+          300,
+          190
+        ]
+      },
+      "geometryPaths": 111,
+      "boreCirclePaths": 2,
+      "unresolvedLabels": [
+        "hole-diameter",
+        "hole-offset-x",
+        "hole-offset-y"
+      ],
+      "documentRevision": "a8f840e8-5531-4895-88fd-71783143d18f",
+      "geometryRevision": "02d07c0e-bddd-4783-afc3-28cb9337f451"
+    },
+    {
+      "file": "negative-datum-final.svg",
+      "sha256": "aaa36371e01ea9305fa917df11057817a4633838206df137eff8b14fe473b1c3",
+      "status": "available",
+      "expectedDimensionsMm": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "projectedBoundsPaperMm": {
+        "top": [
+          30,
+          110,
+          180,
+          140
+        ],
+        "front": [
+          30,
+          165,
+          180,
+          190
+        ],
+        "right": [
+          270,
+          165,
+          300,
+          190
+        ]
+      },
+      "geometryPaths": 111,
+      "boreCirclePaths": 2,
+      "unresolvedLabels": [],
+      "documentRevision": "51877ef6-a54e-4f8a-a46d-ed72bd98d8e9",
+      "geometryRevision": "72c2b280-edfe-4b26-958f-55087a7ea3ad"
+    }
+  ],
+  "native": [
+    {
+      "file": "original-edited.jsketcher.json",
+      "sha256": "d10b053163f5c04673ec0a88c897c5b61163d7c6851cfc449e496dff49a20ace",
+      "sourceGeometryMm": [
+        0,
+        0,
+        150,
+        30,
+        25,
+        14
+      ],
+      "authoredReferenceIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ],
+      "deliberatelyUnresolved": false,
+      "featureIds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "savedDefinitionOnly": true
+    },
+    {
+      "file": "original-unresolved.jsketcher.json",
+      "sha256": "ef469a76c3be9e80011775e6408e915345467bf47f978912b1551dd3db706b73",
+      "sourceGeometryMm": [
+        0,
+        0,
+        150,
+        30,
+        25,
+        12
+      ],
+      "authoredReferenceIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "4",
+        "4",
+        "4"
+      ],
+      "deliberatelyUnresolved": true,
+      "featureIds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "savedDefinitionOnly": true
+    },
+    {
+      "file": "original-final.jsketcher.json",
+      "sha256": "52e12c450ab3bb68df626678f989770bbd202f4f58eb7348680cf2646bda46a3",
+      "sourceGeometryMm": [
+        0,
+        0,
+        150,
+        30,
+        25,
+        12
+      ],
+      "authoredReferenceIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ],
+      "deliberatelyUnresolved": false,
+      "featureIds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "savedDefinitionOnly": true
+    },
+    {
+      "file": "negative-datum-edited.jsketcher.json",
+      "sha256": "1cd442a5cadd4d2b0737ded92cf6123a02be059823a1c84748c4b2db887357a2",
+      "sourceGeometryMm": [
+        -80,
+        -40,
+        150,
+        30,
+        25,
+        14
+      ],
+      "authoredReferenceIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ],
+      "deliberatelyUnresolved": false,
+      "featureIds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "savedDefinitionOnly": true
+    },
+    {
+      "file": "negative-datum-unresolved.jsketcher.json",
+      "sha256": "022389eddae7523f5c734bc835f480c850d53d6d9e1a72eef8a097a640c02bd5",
+      "sourceGeometryMm": [
+        -80,
+        -40,
+        150,
+        30,
+        25,
+        12
+      ],
+      "authoredReferenceIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "4",
+        "4",
+        "4"
+      ],
+      "deliberatelyUnresolved": true,
+      "featureIds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "savedDefinitionOnly": true
+    },
+    {
+      "file": "negative-datum-final.jsketcher.json",
+      "sha256": "239eaed98b03960f57798338cc69df6dc0a29ab89ae72f6bc37f8acf03c73f8f",
+      "sourceGeometryMm": [
+        -80,
+        -40,
+        150,
+        30,
+        25,
+        12
+      ],
+      "authoredReferenceIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ],
+      "deliberatelyUnresolved": false,
+      "featureIds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "savedDefinitionOnly": true
+    }
+  ],
+  "reads": [
+    {
+      "case": "original",
+      "revision": "2c775c22-6551-4b45-96d2-ac6ce93906c4",
+      "geometryRevision": "115045c4-c7aa-468f-8787-4401d128fcc4",
+      "unresolved": false,
+      "dimensions": {
+        "width": 100,
+        "height": 50,
+        "depth": 20,
+        "hole-diameter": 10,
+        "hole-offset-x": 50.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "original",
+      "revision": "1185d48e-de4e-4814-831a-4ecf12c7b92d",
+      "geometryRevision": "2fcfe9dc-5a88-4b8c-937f-dc15c760b538",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 50,
+        "depth": 20,
+        "hole-diameter": 10,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 0.0,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "original",
+      "revision": "36732b7d-ecfe-49ac-ab2d-fe2d3a4162e6",
+      "geometryRevision": "b6117b05-6a36-41e2-8ab2-cefce137e744",
+      "unresolved": false,
+      "dimensions": {
+        "width": 100,
+        "height": 50,
+        "depth": 20,
+        "hole-diameter": 10,
+        "hole-offset-x": 50.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "original",
+      "revision": "d0ff40ca-7b3c-45fd-bc46-7383d640e267",
+      "geometryRevision": "e758789a-af62-4eb9-b7d9-8114b277c5bf",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 14,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "original",
+      "revision": "d24489b6-ab56-4d0d-bbad-d4369e152bb5",
+      "geometryRevision": "76df0d77-50ee-40ad-9135-8a18d5bbe648",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 10,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "original",
+      "revision": "c9158052-cc1a-406f-8e89-ae0dc744aadc",
+      "geometryRevision": "27acfe52-1456-4218-b97f-0659f445e14f",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 14,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "original",
+      "revision": "2609d722-4a61-4209-b311-09e3e1c9c2a6",
+      "geometryRevision": "8a046d6b-87cb-4c31-a76a-d9c18d71c6ea",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "original",
+      "revision": "7285aace-99f6-4bb5-a8f6-b3f7a5c35554",
+      "geometryRevision": "ed34daba-0c9c-4d49-99de-7d0b3060c95f",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 14,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "original",
+      "revision": "01f1aa1c-59a5-4fe1-bd90-3f1e5b1e4446",
+      "geometryRevision": "143c101b-4260-46d9-ae75-16b0551ddd4d",
+      "unresolved": true,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "4",
+        "4",
+        "4"
+      ]
+    },
+    {
+      "case": "original",
+      "revision": "39730d28-040e-4b68-bc77-2d77ea7acfe6",
+      "geometryRevision": "4c599582-8ebf-4f10-b8b2-6c4afc818c95",
+      "unresolved": true,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "4",
+        "4",
+        "4"
+      ]
+    },
+    {
+      "case": "original",
+      "revision": "d280dc80-3466-4159-bdf1-3e9db9446265",
+      "geometryRevision": "4c599582-8ebf-4f10-b8b2-6c4afc818c95",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "original",
+      "revision": "1ffe0ee8-35c0-4b42-8429-8bc78603327c",
+      "geometryRevision": "5ec6271a-ebc2-4d0e-975a-560c17ccef75",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 75.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "4fcb6513-2c0f-4f5c-a900-6b8e373f7832",
+      "geometryRevision": "27d32b36-768f-4d07-9ec8-c83252398ac5",
+      "unresolved": false,
+      "dimensions": {
+        "width": 100,
+        "height": 50,
+        "depth": 20,
+        "hole-diameter": 10,
+        "hole-offset-x": 30.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "72a6b77a-f3b6-41ee-8e9d-0f60a15ccc9e",
+      "geometryRevision": "52c219e3-b662-4910-a83c-dbaa12e3cc8e",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 50,
+        "depth": 20,
+        "hole-diameter": 10,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 2.9103830456733704e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "b380073b-32f0-4935-9219-eb82a4f151f6",
+      "geometryRevision": "538a5c7d-ec01-426b-8d53-6302083aa92c",
+      "unresolved": false,
+      "dimensions": {
+        "width": 100,
+        "height": 50,
+        "depth": 20,
+        "hole-diameter": 10,
+        "hole-offset-x": 30.0,
+        "hole-offset-y": 15.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "0f38e89d-10f7-49d4-b6b0-d15c1b5eed47",
+      "geometryRevision": "b5955a1a-0449-4556-848b-21769cce1544",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 14,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "4ffcc824-80e3-40f8-869c-3fbb8291f71c",
+      "geometryRevision": "d3076bb6-81c7-4397-b644-aa108dc22dc7",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 10,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 0.0,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "607c6ad4-630f-412a-89d0-cf760ce0752d",
+      "geometryRevision": "2f1216ff-e183-45ce-a0d0-a5b8197f3b5f",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 14,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "02cbba19-7603-4c0e-b095-ea75de465ef4",
+      "geometryRevision": "602c97cd-7da5-4bf9-bc18-600f78470e46",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 0.0,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "b1844dc8-ece4-4904-a366-e0302a6c8d45",
+      "geometryRevision": "f20ec8b2-868e-49d2-b449-9b7cb2ba1652",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 14,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 1.4551915228366852e-11,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "a8f840e8-5531-4895-88fd-71783143d18f",
+      "geometryRevision": "02d07c0e-bddd-4783-afc3-28cb9337f451",
+      "unresolved": true,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 0.0,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "4",
+        "4",
+        "4"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "c82ec2b7-32ca-4134-84df-150fa949027c",
+      "geometryRevision": "a7e7a7b0-0b50-4012-8d49-ef7082a00a4f",
+      "unresolved": true,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 0.0,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "4",
+        "4",
+        "4"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "b13830c6-7191-4766-b4d1-ca028b1b16eb",
+      "geometryRevision": "a7e7a7b0-0b50-4012-8d49-ef7082a00a4f",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 0.0,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "case": "negative-datum",
+      "revision": "51877ef6-a54e-4f8a-a46d-ed72bd98d8e9",
+      "geometryRevision": "72c2b280-edfe-4b26-958f-55087a7ea3ad",
+      "unresolved": false,
+      "dimensions": {
+        "width": 150,
+        "height": 30,
+        "depth": 25,
+        "hole-diameter": 12,
+        "hole-offset-x": 5.0,
+        "hole-offset-y": 25.0
+      },
+      "nativeVolumeError": 0.0,
+      "referencedIds": [
+        "rect-0",
+        "rect-0",
+        "rect-1",
+        "rect-1",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"first-cap\",null]",
+        "worker-prism-selection:1:[2,\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\",\"face\",\"last-cap\",null]",
+        "3",
+        "3",
+        "3"
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "scope": "source/runtime pins",
+      "type": "ValueError",
+      "message": "current source differs from recorded pin signed-harness.mjs"
+    }
+  ],
+  "sourceVerification": null,
+  "limitations": [
+    "SVG polylines are presentation; successful XML/label/geometry checks do not prove arbitrary Native validity or engineering drawing compliance.",
+    "Native facts are recorded genuine observations, not a fresh independent kernel execution.",
+    "Only fixed plate/center-hole/edge-treatment cases and the two datum origins are covered.",
+    "No rotated datum, changed sheet scale, edge-length dimension, all lost-reference categories or human editing UI is qualified.",
+    "JSON/XML use SHA-256 byte identity; no ZIP or CRC applies."
+  ]
+}

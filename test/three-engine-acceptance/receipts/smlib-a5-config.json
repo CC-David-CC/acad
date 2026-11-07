@@ -1,0 +1,37 @@
+{
+  "fixture": "http://127.0.0.1:20549/static/index.html",
+  "source": "CAD a5ba34740; SMLib fork c97a8e76; NVIDIA3fd; root-compatible typed refusals; AABB/known-box empty preflight",
+  "pinnedModules": [
+    {
+      "url": "/static/smlibMount.mjs",
+      "sha256": "f3fd92fc2c06b6f1fe942c63ea0a6065242b121894a92bf637bbd158cb87ae87"
+    },
+    {
+      "url": "/static/smlib-worker.js",
+      "sha256": "3e870ad64aad4d5e19d4629601d9e407f16c8b546edb26539fbcc7aa0aa62472"
+    },
+    {
+      "url": "/static/smlib.wasm",
+      "sha256": "a48a3283760c21337881c5e2d5c973dbc62cf95cae46d1c012effd75389eb1ae"
+    }
+  ],
+  "engines": [
+    {
+      "slot": "smlib",
+      "moduleUrl": "/static/smlibMount.mjs",
+      "exportName": "createVerifiedSmlibMount",
+      "options": {
+        "workerUrl": "/static/smlib-worker.js",
+        "wasmPath": "/static/smlib.wasm"
+      },
+      "expected": {
+        "engine": "smlib-wasm",
+        "representation": "smlib-brep-worker-owned",
+        "jsSha256": "edf63120f9e08e7fbad9fa2e44bebb8b28eee0dfaae50b4b720fd084438f6c24",
+        "wasmSha256": "a48a3283760c21337881c5e2d5c973dbc62cf95cae46d1c012effd75389eb1ae",
+        "emptyRefusal": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "emptyRefusalClosesMount": true
+      }
+    }
+  ]
+}

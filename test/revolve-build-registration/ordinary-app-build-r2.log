@@ -1,0 +1,24 @@
+assets by chunk 216 MiB (auxiliary name: index)
+  assets by path revolve-profile/ 34.3 MiB 20 assets
+  assets by path boolean-history/ 34.3 MiB 18 assets
+  assets by path *.mjs 111 KiB 18 assets
+  assets by path *.js 8.18 MiB 11 assets
+  assets by path mechanical-profile/ 34.2 MiB 10 assets
+  assets by path polygon-profile/ 34.1 MiB 9 assets
+  assets by path *.wasm 71 MiB
+    asset a81af0b78dd585124f3f.wasm 33.4 MiB [emitted] [immutable] [from: .build/selected-profile-assets/selected-profile-occ.wasm] (auxiliary name: index)
+    + 3 assets
+asset index.bundle.js 32 MiB [emitted] (name: index)
+asset sketcher.bundle.js 21 MiB [emitted] (name: sketcher)
+asset vendors-node_modules_cache_codi-manifold_manifold_js.bundle.js 78.4 KiB [emitted] (id hint: vendors)
+asset modules_brep_operations_mesh_browserNodeModuleStub_js.bundle.js 992 bytes [emitted]
+runtime modules 8.45 KiB 19 modules
+orphan modules 22.7 KiB [orphan] 8 modules
+javascript modules 27.9 MiB
+  modules by path ./ 27.9 MiB 1843 modules
+  modules by path ../codi-four-corner-clean-integrated-20261104/node_modules/ 12 KiB
+    ../codi-four-corner-clean-integrated-20261104/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.64 KiB [built] [code generated]
+    ../codi-four-corner-clean-integrated-20261104/node_modules/css-loader/dist/runtime/api.js 2.46 KiB [built] [code generated]
+    ../codi-four-corner-clean-integrated-20261104/node_modules/component-emitter/index.js 2.93 KiB [built] [code generated]
+asset modules 3.61 KiB (javascript) 145 MiB (asset) 88 modules
+webpack 5.74.0 compiled successfully in 36572 ms

@@ -1,0 +1,8 @@
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+{"status":"PASS","scope":"controlled irrecoverable cleanup faults; actual source Workers and error-only submit, no native success","rows":[{"loggerThrows":false,"exactPrimaryPreserved":true,"committedMarkerPreserved":true,"attemptedAllRemovals":true,"workspaceDiscardAttempted":true,"exactOpaqueNullZeroCausesDiagnosed":true,"releaseClaim":"unconfirmed","nativePublication":false},{"loggerThrows":true,"exactPrimaryPreserved":true,"committedMarkerPreserved":true,"attemptedAllRemovals":true,"workspaceDiscardAttempted":true,"exactOpaqueNullZeroCausesDiagnosed":true,"releaseClaim":"unconfirmed","nativePublication":false}],"workers":{"started":6,"terminated":6}}

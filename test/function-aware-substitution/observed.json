@@ -1,0 +1,52 @@
+{
+  "algebra": {
+    "pass": 12,
+    "fail": 0
+  },
+  "realPMNativeReplay": {
+    "pass": 2,
+    "fail": 0
+  },
+  "domainNormalization": {
+    "pass": 9,
+    "fail": 0
+  },
+  "mechanicalReviewedHarness": {
+    "pass": 228,
+    "fail": 0
+  },
+  "harnessFaultControls": {
+    "pass": 5,
+    "fail": 0
+  },
+  "existingFourthPower": "PASS",
+  "public": {
+    "axis": {
+      "workers": 150,
+      "faultControls": 17,
+      "appSha256": "95deb6ad4ea50d44753d0e64e56e24c38509bb0dd5e68c25e10c8455d9eef231"
+    },
+    "collinear": {
+      "workers": 92,
+      "faultControls": 15,
+      "appSha256": "95deb6ad4ea50d44753d0e64e56e24c38509bb0dd5e68c25e10c8455d9eef231"
+    },
+    "signed": {
+      "workers": 74,
+      "faultControls": 14,
+      "appSha256": "95deb6ad4ea50d44753d0e64e56e24c38509bb0dd5e68c25e10c8455d9eef231"
+    }
+  },
+  "componentBeforeAfter": {
+    "sameFixtureSha256": "7d2b76cd19fb15c34077dc37e43122fc2639f654137042aeae93aaf45bd06038",
+    "beforeValidFixture": "RESIDUAL",
+    "afterValidFixture": "accepted + exact replay",
+    "contradictoryFixture": "RESIDUAL",
+    "baselinePMOriginalResidual": -12.499999999971806
+  },
+  "limitations": [
+    "Not new signed-host proof; parent must qualify its combined source.",
+    "Generic nonlinear numerical success can coexist with violated original equations; fresh residual guards remain authoritative.",
+    "Optional expansion budget retains original equations when unsupported; no input geometry is truncated."
+  ]
+}

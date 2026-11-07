@@ -1,0 +1,36 @@
+✔ registered v2 discovery uses actual source contexts with no top-level region (410.165794ms)
+✔ v2 mixed-origin fillet/chamfer infers CURRENT producer, preserving exact request fields (337.58898ms)
+✔ v2 initial single-prism context is admitted only for its actual producer origin (144.54729ms)
+✔ missing/unknown/mismatched plan versions explicitly refuse for BOTH registered build paths (763.740746ms)
+✔ malformed origins/context regions and top-region fiction refuse without allocation (1695.571754ms)
+✔ edge origins must belong to declared actual source contexts; IDs stay distinct and dense (636.596623ms)
+✔ mutable context/edge containers or rows do not masquerade as a frozen v2 snapshot (408.217007ms)
+✔ selection, context and edge accessors refuse before invocation (415.079162ms)
+✔ pending v2 snapshot replacement, cancellation and committed outcomes keep old custody semantics (305.987268ms)
+✔ public callers still cannot provide new IDs, producers, handles or source-context overrides (516.999851ms)
+✔ discovery exposes only immutable current mechanical targets, without allocation or transport (274.506811ms)
+✔ missing integration, hostless, wrong-unit and already-busy workspaces remain unavailable (355.892574ms)
+✔ fillet and equal chamfer route only captured data, infer producer, and allow own busy publication (165.217262ms)
+✔ older registered builds explicitly refuse before allocation or submission (272.592873ms)
+✔ stale revision, unknown body, wrong runtime and unknown advertised edges never allocate (271.662343ms)
+✔ new feature/producer/native fields, invalid literal sizes and duplicate/sparse IDs refuse as data (773.416987ms)
+✔ ineligible metadata and mixed whole-part runtime are explicit unsupported targets (305.517418ms)
+✔ quota32 and unsupported history refuse before feature-ID allocation (110.080581ms)
+✔ caller arrays are detached before async submission (52.947684ms)
+✔ pending document/service/source/stream/model/snapshot changes refuse before commit (684.43024ms)
+✔ caller and document cancellation cancel only the captured candidate epoch (104.444779ms)
+✔ initial abort and a reentrant lifetime guard refuse before allocation (170.703865ms)
+✔ invalid prepared results never publish; source must be consumed and native measurement admitted (537.859216ms)
+✔ submission failures release IDs and committed outcomes remain explicit (154.54805ms)
+✔ history captures exact numeric intent and edit delegates only size and identity (63.838021ms)
+✔ history edit stale identities, invalid size, unavailable hook and old backend refuse without delegation (529.634931ms)
+✔ malformed options and cancelled/reentrant history lifetime do not delegate (312.2131ms)
+✔ inspection-time unit changes and reentrant history edits abort without routing stale state (100.421749ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6098.636506

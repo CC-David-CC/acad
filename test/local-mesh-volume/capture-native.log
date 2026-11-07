@@ -1,0 +1,1 @@
+{"status":"PASS","rows":[{"id":"tiny-large-origin","native":6.000137061924313e-18,"oldIntegral":-0.0000026667257770895962},{"id":"tiny-origin","native":5.999999999999999e-18,"oldIntegral":6e-18},{"id":"ordinary-translated","native":4301,"oldIntegral":4300.999999999999}]}

@@ -1,0 +1,57 @@
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ discovery exposes actual plane identity; guarded no-op starts no Worker or write (262.391394ms)
+verb 2.0.0
+verb 2.0.0
+✖ no-op callbacks cannot invalidate owner, source, units or current plane params then dispatch (247.942314ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ real Worker prepares exact source/frame/history intent; real candidate frame gate passes and workspace discards (1547.796006ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ actual frame gate rejects changed params without reframe, wrong type or missing witness (524.459565ms)
+verb 2.0.0
+verb 2.0.0
+✔ stale/unknown/malformed/unsupported requests refuse before Worker or publication (244.41701ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ genuine held Worker replies are refused after source ABA and actual document lifetime abort (482.866622ms)
+✔ physically releases every production Worker (1.911518ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3697.646647
+
+✖ failing tests:
+
+test at test/source-plane-depth/service.test.mjs:9:1
+✖ no-op callbacks cannot invalidate owner, source, units or current plane params then dispatch (247.942314ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///tmp/codi-cad-source-plane-depth-20261107/test/source-plane-depth/service.test.mjs:9:356)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }

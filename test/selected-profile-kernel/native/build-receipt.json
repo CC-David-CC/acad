@@ -1,0 +1,57 @@
+{
+  "format": "selected-profile-native-build/2",
+  "baseSource": "42b626445e11ffb62860c408b03ee935f6564738",
+  "librarySource": "846bea93aebfabb3e18c94672ed4c295ac1c1fa3",
+  "emscripten": "2.0.30",
+  "libraryArchives": {
+    "TKTopTest": "5a3f4b317d6ed48cf5c881224bd60da50086adf4704f0a44a5c2e67d4278e4e2",
+    "TKBool": "199b5e3baafebcd6ec32f390919eacfb009365663a8b17c96c6fb2c8bec7bfb1",
+    "TKBO": "b393cacc75bb7ea39cb0d1d9b262caca55af4f098222db9b399e5bc797b16f44",
+    "TKBRep": "0e26cbf845ac6576b782fcff94e09c667a41ec9dc527681d5ebe8274aac0dd62",
+    "TKernel": "5ccb85cf4649cf25b1febfec354458dde1cc7c61744ae6fd836f85792f458286",
+    "TKFeat": "7732c31af4494601f0751a3b0750ef1b95dc959ad02cf5bc31b642943c4f2974",
+    "TKFillet": "d4c19f502a4f82e98ebb60b58317017cb54ad38525eeb6d6e2a94e68ad43f8bb",
+    "TKG2d": "cf952113c6ac6f582997585319a5d08b198d1d6a14b4ab8de0a22fd5f0ce7d23",
+    "TKG3d": "a3bf5f26cb192ef14ea0060aed5e021289493519b18b263aa230a6fd43c4ca10",
+    "TKGeomAlgo": "904643447a8b02a3739b1f5cee781904aca8fe273a015ff31430f6d457b5ee2c",
+    "TKGeomBase": "552f83a0ffaafa6f539cf1bcd5cba1fbcfcb9b70b0ee3da6d5eed49fb8796296",
+    "TKHLR": "62e25a7f3f48057daa8d1cca1abe32493fab9a669bd1071bdd46b58967474bb5",
+    "TKMath": "75d98453df3ccff20ddc37c3b9e932b03e809a4d72545a6d6ca0e837c26914c3",
+    "TKMesh": "56e04cb9a7c1b82be9119f33eddcc898a8a9159f832d868f7d02d2051c38fbb1",
+    "TKOffset": "8a099fbc35ef72adfb66ecbf1dfee961831f5036b6507e3c36eadc6cb60102a4",
+    "TKPrim": "f6a3507b823edb52649c10ccc2acaf9dfaae4333ce43a5799a89b6f8c2f65ead",
+    "TKShHealing": "e4c39f913ad183615313ef69ec8943b25898ecab4ef8f83f63bd594f7ddb8a26",
+    "TKTopAlgo": "3c86701c470b649f7f15768be5871a44761674afa234f282c1dc2a11962cf913",
+    "TKXSBase": "b4f4f331ebc73d14d63f376e55945f811e6bd1d05e49edfe8bb11f50bfef5e2c",
+    "TKSTEPBase": "c939ac34c5483aabfb178f5275859e46b8c54f28316724dee1601ba47ed52a4b",
+    "TKSTEPAttr": "6aaf33489e2f1446099348d28e8bd5491e181318c3e6d531c0dfc4b9799ff7fd",
+    "TKSTEP209": "5d861ec9b634e175944e256939b21d9033bcf0bbbcf4a5623d39ed5c75e7c9d4",
+    "TKSTEP": "fc86b40b83b4b157b473c48d703e3795b671ea32e20eb4d0db20b774052ae8bc"
+  },
+  "sourceFiles": {
+    "shape-io/main.cpp": "fd353dd30e30599eda0605a7b642a6ae1972506595354567d2633c5476bbfefe",
+    "shape-io/selectedProfileV2.hpp": "258a75c441921d0aa6335a90fd37348ddec3d340705acfc7ae831da6d32f63cb",
+    "occt/src/CommandInterpreter/DBRep.hxx": "4d41b0f2a6df9526531aa88b7fa58818a1f18e5951a65ef850f132823770e4fe",
+    "scripts/build-selected-profile-v2.sh": "9abb996bb9bb8cac31580c08867ad2ec9a062e65ca3b50c91e07bc93cb45f878",
+    "shape-io/selected-profile-v2-probe.cjs": "07cf0b5c73be5da38703b3fc69616f8aa77e81a459724a895a680a35e0439b16",
+    "scripts/adapt-selected-profile-portable.py": "3e9502d0437a9231b5e14bcc507157db85ed06dccb20edb0b0ce596181a71ed9"
+  },
+  "artifacts": {
+    "main.js": {
+      "bytes": 308403,
+      "sha256": "e1ca1ef329659c5a2d605c82e698d8ca7890c386e2bca71de87b9ba18499f3f8"
+    },
+    "main.wasm": {
+      "bytes": 35020148,
+      "sha256": "a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+    },
+    "occ-portable.js": {
+      "bytes": 308353,
+      "sha256": "cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9"
+    }
+  },
+  "scope": "C++ source compiled to WASM, actual Node WASM and Chromium Worker execution. No native CPU execution or full clean library rebuild claimed.",
+  "sourceRevision": "9ac8fa5bf3ef4b54963de8b8f419ed2f2340cb05",
+  "buildScriptExecuted": true,
+  "portableAdapterExecuted": true
+}

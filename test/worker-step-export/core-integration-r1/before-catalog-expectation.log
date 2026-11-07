@@ -1,0 +1,153 @@
+✖ separate adaptive identity never changes default, preference or old loft (3.384524ms)
+✔ all inherited capabilities use exact same explicit build and mixed histories refuse (1.022488ms)
+✔ actual constructor descriptor is strictly bound; metadata probe does not execute native (11.154298ms)
+✔ structured precision error terminates, settles and forbids future work (1.306739ms)
+✔ text mentioning precision code remains generic failure (0.479993ms)
+✔ actual Worker helper admits exact native precision envelope v1 (2.418467ms)
+✔ actual Worker helper admits exact native precision envelope v2 (0.309422ms)
+✔ actual Worker helper admits exact native precision envelope v3 (0.248331ms)
+✔ malformed/freeform native envelope never becomes typed precision: {version:1,error:'prefix MEASUREMENT_PRECISION_UNRESOLVED'} (0.249051ms)
+✔ malformed/freeform native envelope never becomes typed precision: {version:1,error:'MEASUREMENT_PRECISION_UNRESOLVED',extra:true} (0.354502ms)
+✔ malformed/freeform native envelope never becomes typed precision: {version:true,error:'MEASUREMENT_PRECISION_UNRESOLVED'} (0.208612ms)
+✔ malformed/freeform native envelope never becomes typed precision: Object.create({version:1,error:'MEASUREMENT_PRECISION_UNRESOLVED'}) (0.222682ms)
+✔ malformed/freeform native envelope never becomes typed precision: {version:1,get error(){throw Error('getter executed')}} (0.300182ms)
+✔ actual point replay guard accepts only the requested complete-history build identity (8.002455ms)
+✔ actual Craft/workbench wiring uses availability-aware policies without changing pure defaults (0.646255ms)
+✔ remove failure settles original Worker error: native=false, cause=Error: remove fault (16.679616ms)
+✔ remove failure settles original Worker error: native=false, cause=undefined (1.004817ms)
+✔ remove failure settles original Worker error: native=false, cause=null (1.623091ms)
+✔ remove failure settles original Worker error: native=false, cause=0 (2.649018ms)
+✔ remove failure settles original Worker error: native=false, cause=false (2.093745ms)
+✔ remove failure settles original Worker error: native=false, cause= (2.496128ms)
+✔ remove failure settles original Worker error: native=true, cause=Error: remove fault (1.674782ms)
+✔ remove failure settles original Worker error: native=true, cause=undefined (2.364447ms)
+✔ remove failure settles original Worker error: native=true, cause=null (2.089974ms)
+✔ remove failure settles original Worker error: native=true, cause=0 (2.178135ms)
+✔ remove failure settles original Worker error: native=true, cause=false (2.030594ms)
+✔ remove failure settles original Worker error: native=true, cause= (2.131085ms)
+✔ registration failure retires mount immediately: native=false (1.861562ms)
+✔ registration failure retires mount immediately: native=true (1.143658ms)
+✔ transport opaque error is not coerced and exact cause is retained (0.414263ms)
+✔ falsey transport failure preserved: undefined (0.342882ms)
+✔ falsey transport failure preserved: null (0.614224ms)
+✔ falsey transport failure preserved: 0 (0.255582ms)
+✔ falsey transport failure preserved: false (0.992427ms)
+✔ falsey transport failure preserved:  (0.221532ms)
+✔ initial post failure settles readiness with exact uncoerced cause (0.419083ms)
+✔ synchronous registration abort prevents posting (0.419622ms)
+✔ synchronous registration close prevents posting (0.344592ms)
+✔ synchronous registration abort-then-throw prevents posting (0.327122ms)
+✔ abort without callback during registration is detected before post (0.336252ms)
+✔ reentrant remove cannot submit a second job before settlement (0.747635ms)
+✔ reentrant remove close settles once without recursive cleanup (0.450754ms)
+✔ native abort settles CANCELLED; listener removal and close remain ordinary (0.284432ms)
+✔ native already aborted refuses before posting or reservation (0.240162ms)
+✔ ordinary no-signal adaptive failure remains exact (0.205451ms)
+✔ aborted getter failure at reply preserves original Worker failure instead of escaping (0.303283ms)
+✔ timeout with throwing removal still settles and preserves cleanup cause (11.661901ms)
+✔ falsey registration cause stays exact: undefined (0.501864ms)
+✔ falsey registration cause stays exact: null (0.167972ms)
+✔ falsey registration cause stays exact: 0 (0.212501ms)
+✔ falsey registration cause stays exact: false (0.156061ms)
+✔ falsey registration cause stays exact:  (0.161231ms)
+✔ setup failure remains primary when removal also fails (0.248492ms)
+✔ native abort removal failure preserves CANCELLED and exact cleanup failure (0.261862ms)
+✔ known unsupported result remains primary when removal fails (0.311102ms)
+✔ changed remove method getter is guarded at terminal reply (0.264622ms)
+✔ ordinary unsupported completion clears pending and permits a healthy transport retry (0.297212ms)
+✔ valid cross-realm metadata reaches the production admission boundary without invoking native work (169.549758ms)
+✔ getters, inherited/extra fields, sparse and oversized points refuse before document access (69.0622ms)
+✔ point accessor and extra own-array properties refuse without evaluation (56.556173ms)
+✔ 64 bounded points are admissible metadata and another registered build refuses explicitly (38.86292ms)
+✔ lease is bound to the existing evaluator, tail, captured sources and candidate ledger (1.823333ms)
+✔ original evaluator failure settles and restores exact ID context without publication (91.600427ms)
+✔ concurrent reader and writer admission refuse during a held exclusive lease (29.871668ms)
+✔ caller loss before queued replay prevents any evaluator allocation (21.910433ms)
+✔ reentrant context mutation is restored and refused (29.444825ms)
+✔ a writer queued before lease acquisition prevents replay and restores busy count (18.041785ms)
+✔ candidate cleanup uncertainty refuses result and latches existing pool failure (14.517481ms)
+✔ STEP shares the existing lease and restores custody on controlled export refusal (14.777143ms)
+✔ unknown read kind refuses before lease or evaluator admission (15.75544ms)
+✔ absent or malformed candidate custody refuses without native work (2.056664ms)
+✔ accepted closed aborted and superseded owners cannot export (0.887727ms)
+✔ a fabricated candidate cannot grant private ledger authority (0.803106ms)
+✔ body-count and engine input bounds refuse before custody (2.87748ms)
+✔ array holes and custom fields cannot supply a native handle (0.562514ms)
+✔ captures immutable detached input (4.652632ms)
+✔ foreign-realm and null-prototype records (1.966564ms)
+✔ one through32 distinct outputs (0.849976ms)
+✔ no native pointers or replacement geometry (0.302252ms)
+✔ exact own data only, no getter execution (0.423642ms)
+✔ dense selection arrays only (0.300012ms)
+✔ duplicate IDs rejected without silent deduplication (0.235282ms)
+✔ exact unit version engine and runtime syntax (0.673425ms)
+✔ both revisions explicitly required (0.894117ms)
+✔ bounded producer IDs and body names (0.875016ms)
+✔ constructor requires evaluator and staged policy (1.658312ms)
+✔ unavailable discovery gives explicit null document revision (1.525851ms)
+✔ staged refusal remains exact without replay (1.243579ms)
+✔ old registered build cannot claim STEP (0.380423ms)
+✔ options refuse before policy without getter execution (0.860776ms)
+✔ discovery callbacks cannot hide replacement workspace (0.220421ms)
+ℹ tests 91
+ℹ suites 0
+ℹ pass 90
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 639.579994
+
+✖ failing tests:
+
+test at test/adaptive-metrology-registration/catalog.test.mjs:8:1
+✖ separate adaptive identity never changes default, preference or old loft (3.384524ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    [
+      {
+        booleanHistoryVersion: 1,
+        edgeTreatmentVersion: 1,
+        experimental: true,
+  ...
+      },
+  +   {
+  +     adaptiveMetrologyVersion: 1,
+  +     booleanHistoryVersion: 1,
+  +     edgeTreatmentVersion: 1,
+  +     experimental: true,
+  +     family: 'brep',
+  +     id: 'occ',
+  +     linearHolePatternVersion: 1,
+  +     loftVersion: 1,
+  +     mountEngine: 'occ-step-export-v1-component',
+  +     name: 'OpenCascade owned STEP export (experimental)',
+  +     representation: 'occ-brep-worker-owned',
+  +     revision: 'sha256:ca349411fc9e27677bf27072497abb22077d80c28e27ef073266966d16b07733:c154a4e04961a9a50108fadcf72eca54169ba4db2e9564d24519f197e0568c2f',
+  +     revolveVersion: 1,
+  +     runtimeAssets: {
+  +       jsSha256: 'ca349411fc9e27677bf27072497abb22077d80c28e27ef073266966d16b07733',
+  +       wasmSha256: 'c154a4e04961a9a50108fadcf72eca54169ba4db2e9564d24519f197e0568c2f'
+  +     },
+  +     selectedProfileVersion: 3,
+  +     selectionPlanVersion: 2,
+  +     stepExportVersion: 1,
+  +     sweepVersion: 1,
+  +     throughHoleVersion: 1
+  +   }
+    ]
+  
+      at TestContext.<anonymous> (file:///tmp/codi-cad-mechanical-candidate-20261105/test/adaptive-metrology-registration/catalog.test.mjs:8:636)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { id: 'occ', name: 'OpenCascade owned loft (experimental)', mountEngine: 'occ-loft-profile-v1-component', representation: 'occ-brep-worker-owned', family: 'brep', selectedProfileVersion: 3, edgeTreatmentVersion: 1, booleanHistoryVersion: 1, selectionPlanVersion: 2, throughHoleVersion: 1, linearHolePatternVersion: 1, revolveVersion: 1, sweepVersion: 1, loftVersion: 1, experimental: true, revision: 'sha256:5ce2aa94ecdd48dc16f0b9c3ad2a065ea1416ddb7d123c3168661e31ade0a1b5:b18af4376fb0fb8b4aaa7478ede6b47346c331ee45e1198347c0a70232fd4180', runtimeAssets: [Object] }, { id: 'occ', name: 'OpenCascade adaptive metrology (experimental)', mountEngine: 'occ-adaptive-metrology-v1-component', representation: 'occ-brep-worker-owned', family: 'brep', selectedProfileVersion: 3, edgeTreatmentVersion: 1, booleanHistoryVersion: 1, selectionPlanVersion: 2, throughHoleVersion: 1, linearHolePatternVersion: 1, revolveVersion: 1, sweepVersion: 1, loftVersion: 1, adaptiveMetrologyVersion: 1, experimental: true, revision: 'sha256:ed06b634a3e81f9a51c89f75b3d65e03b8ace1fc483900ea2858eae8eff970a4:bc8895ceb123e33aad68c8a1cf6322b5c0ccef9bfb129207defe1b8a5a7c893a', runtimeAssets: [Object] }, { id: 'occ', name: 'OpenCascade owned STEP export (experimental)', mountEngine: 'occ-step-export-v1-component', representation: 'occ-brep-worker-owned', family: 'brep', selectedProfileVersion: 3, edgeTreatmentVersion: 1, booleanHistoryVersion: 1, selectionPlanVersion: 2, throughHoleVersion: 1, linearHolePatternVersion: 1, revolveVersion: 1, sweepVersion: 1, loftVersion: 1, adaptiveMetrologyVersion: 1, stepExportVersion: 1, experimental: true, revision: 'sha256:ca349411fc9e27677bf27072497abb22077d80c28e27ef073266966d16b07733:c154a4e04961a9a50108fadcf72eca54169ba4db2e9564d24519f197e0568c2f', runtimeAssets: [Object] } ],
+    expected: [ { id: 'occ', name: 'OpenCascade owned loft (experimental)', mountEngine: 'occ-loft-profile-v1-component', representation: 'occ-brep-worker-owned', family: 'brep', selectedProfileVersion: 3, edgeTreatmentVersion: 1, booleanHistoryVersion: 1, selectionPlanVersion: 2, throughHoleVersion: 1, linearHolePatternVersion: 1, revolveVersion: 1, sweepVersion: 1, loftVersion: 1, experimental: true, revision: 'sha256:5ce2aa94ecdd48dc16f0b9c3ad2a065ea1416ddb7d123c3168661e31ade0a1b5:b18af4376fb0fb8b4aaa7478ede6b47346c331ee45e1198347c0a70232fd4180', runtimeAssets: [Object] }, { id: 'occ', name: 'OpenCascade adaptive metrology (experimental)', mountEngine: 'occ-adaptive-metrology-v1-component', representation: 'occ-brep-worker-owned', family: 'brep', selectedProfileVersion: 3, edgeTreatmentVersion: 1, booleanHistoryVersion: 1, selectionPlanVersion: 2, throughHoleVersion: 1, linearHolePatternVersion: 1, revolveVersion: 1, sweepVersion: 1, loftVersion: 1, adaptiveMetrologyVersion: 1, experimental: true, revision: 'sha256:ed06b634a3e81f9a51c89f75b3d65e03b8ace1fc483900ea2858eae8eff970a4:bc8895ceb123e33aad68c8a1cf6322b5c0ccef9bfb129207defe1b8a5a7c893a', runtimeAssets: [Object] } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,9 @@
+Actual full app1b2/20487, app8df21a. Initial run completed the primitive setup and failed this Node assertion:
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
++ '[{"params":{"datum":null,"depth":0,"featureId":"1","orientation":"XY"},"type":"PLANE"}]'
+- '[{"type":"PLANE","params":{"featureId":"1","orientation":"XY","depth":0,"datum":null}}]'
+at browser.test.cjs:25:69
+
+The comparison concerned successful replay canonicalization of feature-history object keys, an existing documented behavior. It was corrected to parsed deep equality for successful operations only. Exact source/native/history equality for refusal and exact sketch-byte equality for undo/redo remain required. No product code changed. Full qualification was subsequently moved to the newer matched997/r2 fixture20488.

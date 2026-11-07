@@ -1,0 +1,35 @@
+# Central replay ownership review
+
+Reviewed CAD `37e71c5e2f6354c2b58ee9322b388403bc94f779`, ownership follow-up `853419dd7774002956d1f144d85764ec633d24a9`, and failure-snapshot release `5f8d745d9dcce2f60d16e6cbee837cdf6b3ab6c8`, with helper `a47f57449` and freeze follow-up `acaa01792`. Tests and this note are independent; no product source is changed here.
+
+`evaluatePipeline` captures and freezes a detached data-only history before native replay. The follow-up may reuse a privately branded already-immutable history; arbitrary frozen caller input cannot acquire that private brand. Its returned history is passed to both prepared-workspace construction and accepted-state publication. Direct `runPipeline` publishes that same owned history. A private WeakMap retains the captured definition for an evaluation error; failure during initial capture falls back to the prior state only within the captured service/document generation. Generation/epoch checks surround the asynchronous phases and precede publication. Materialization builds new parameter objects/arrays; the reviewed schema materializers do not mutate the frozen raw request. Edit-command captures remain mutable before this central ownership boundary.
+
+This does not establish universal hostile-object isolation or fully worker-first capture. The helper's synchronous per-container `Reflect.ownKeys`, node/text/depth/history-entry budgets, Proxy/provenance restriction and cooperative comparison limitation are recorded in `test/pipeline-history-capture/README.md` and `test/review-pipeline-history/RESULT.md`. The independent three existing helper controls passed locally. No maximum-pause, million-node runtime or whole-CAD performance claim follows.
+
+One pending-state scope edge was reported to root: replay received `curr.pointer` by value, while the later published state spread `curr`. A caller retaining and mutating that pending state object could therefore change metadata independently of the replay position. Current public coordinators construct private pending states; no actual registered-agent route to this mutation was demonstrated. Root's subsequently reviewed follow-up captures `requestedHistory`, `requestedPointer` and `requestedState` before awaiting and freezes the published state. It also privately brands captured histories, requires that brand for nonempty publication, and permits generic new-feature prefix sharing only from these immutable accepted records. This closes the identified source edge without freezing a caller's input or imposing the small edit-capture limits on generic native history. This is distinct from the demonstrated nested-history defect below.
+
+## Retained actual timeline counterexample
+
+`timeline-aba-baseline-053.json` pins source `053163cc472d52b1a9a3f61e4edc4373f83a9ad2`, app SHA `113078a78741b531de52bd54047617b4076b14a379fe6e8cefb5ec661dcee12a`, direct fixture 20484 and actual Worker hashes. The design is a 100×50 mm rectangle, 20 mm extrusion and 10 mm centered hole. After rewinding to the plane, the test ends timeline replay. At the genuine rectangle Worker post it changes the accepted hole parameter 10→12; at the genuine centered-cut post it records the already-materialized native parameter and restores history to 10.
+
+The baseline sends native diameter 12, publishes analytic circular-loop diameters [12,12], retains history diameter 10, and restores [10,10] in a fresh native workspace. This is an actual native/persistence inconsistency under injected message timing. It does not claim an ordinary user gesture produces this mutation, and it uses no fake Worker replies, model or storage.
+
+The harness's frozen-history follow-up catches only each targeted test assignment and records its error/value/property flags, then forwards the genuine Worker message. Operation failures and native restore errors remain test failures. The pre-existing prepared and new-feature modes remain available; their earlier receipts are retained. Normal workflows are separate controls.
+
+## Matched fixed runtime
+
+The fixed runtime is source `5f8d745d9dcce2f60d16e6cbee837cdf6b3ab6c8` at direct fixture 20486, app SHA `17a1350c7d866a63d9e52e2ebe06522ad6a0d8b52d3244333121a2f046261fb7`, sketch Worker SHA `d959fcb7282eaa3807d77d797c3ba80b708a7e95cd6efb8158a1f98ab8635c27`. Each receipt verifies those bytes, records the other genuine Worker hashes and owns a separate browser context. The fix explicitly deletes private failure-map entries after consumption or direct-pipeline rejection; that cleanup is source-reviewed, not a measured heap-retention claim.
+
+`timeline-aba-fixed-5f8.json` passes: the strict injected 12 mm assignment throws `TypeError`, the accepted parameter remains 10 and is frozen/nonwritable, the real native request is 10, published analytic loops are [10,10], and fresh native restore remains [10,10]. The original geometry, feature IDs and full history agree.
+
+`new-feature-aba-fixed-5f8.json` passes the same refusal during model-API four-corner-hole creation. The original prefix and centered 10 mm hole remain intact; one feature adds four 4 mm holes (eight circular-loop observations), with 11 faces, and fresh native replay agrees.
+
+`prepared-aba-fixed-5f8.json` passes during model-API closed-sketch LengthRelation replay. The sketch bytes change, the complete feature history remains semantically identical, native circular-loop diameters remain [10,10], and fresh native replay agrees.
+
+`rewound-prefix-fixed-5f8.json` is a separate normal model-API carry control without the injected write. It starts at pointer -1/history 0/models 0, creates the first rectangle and its two downstream features, rewinds, inserts two planes and retains the prior suffix. Feature sequences are [1,4,2,3] then [1,4,5,2,3]. Full replay and fresh native restore retain the original body identity, centered 10 mm hole and three resulting models.
+
+The first fixed timeline run expected `TypeError` from a non-strict helper and instead observed silent write prevention. `timeline-fixed-initial-oracle.txt` retains that failed oracle. The corrected helper is explicitly strict; no product change was needed. This is separate from all complete fixed receipts.
+
+Run `history-aba-browser.test.cjs` with the pinned `CODI_SOURCE_PIN`, `CODI_APP_SHA256`, `CODI_SKETCH_SHA256`, `JSKETCHER_TEST_URL`, loopback `CODI_TEST_CDP`, `PUPPETEER_CORE_PATH` and a distinct `CODI_RECEIPT`. Fixed controls set `CODI_EXPECT_DETACHED_FIX=1 CODI_EXPECT_FROZEN_HISTORY=1`; `CODI_OPERATION_MODE` is `timeline`, `new-feature` or `closed-sketch`. The separate `rewound-prefix-browser.test.cjs` uses the same source/app/fixture/CDP settings. Each context is closed after its run; the parent-owned fixture is retained.
+
+These controls qualify real browser model APIs, actual Workers/native geometry and native serialization/restore. They do not add signed Files/account, human UI, cancellation, giant-history performance or universal model-object immutability claims. Existing receipts for those separate scopes are not superseded by this small geometry control.

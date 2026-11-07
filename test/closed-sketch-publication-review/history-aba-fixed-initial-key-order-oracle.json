@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "source": "cb4a0dce8e4ce5c6d70524eb3b38e354ec58ec31",
+  "appSha256": "323878bd7c3ce662ae2ef57b9ece84fa4b7ebfb5c0fcd54fc20cd15a3cde1aac",
+  "status": "harness-oracle-failure",
+  "assertion": "Exact JSON string equality of feature history after replay",
+  "cause": "Detached capture preserves data but sorts object keys; the reported before/after values differ in object-key order.",
+  "scope": "Failure occurred before geometry/fresh-restore assertions; no product-failure verdict. Corrected oracle uses parsed deep equality retaining all IDs, values, types and array ordering."
+}

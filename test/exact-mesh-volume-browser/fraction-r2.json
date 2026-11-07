@@ -1,0 +1,206 @@
+{
+  "status": "PASS",
+  "scope": "Independent Fraction/analytic represented-coordinate check of actual new browser Worker meshes; native validity remains separate",
+  "rows": [
+    {
+      "engine": "legacy",
+      "id": "tiny-translated",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "39614081257132168796771975168",
+      "nearestBinary64": 6.000137061924313e-18,
+      "nativeVolume": null,
+      "nativeMeasurementAvailable": false,
+      "requestedTinyBoxProduct": 6e-18
+    },
+    {
+      "engine": "legacy",
+      "id": "tiny-origin",
+      "exactNumerator": "39492109375708942438034858509354246921456744925",
+      "exactDenominator": "6582018229284824168619876730229402019930943462534319453394436096",
+      "nearestBinary64": 6e-18,
+      "nativeVolume": null,
+      "nativeMeasurementAvailable": false,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "legacy",
+      "id": "ordinary",
+      "exactNumerator": "4301",
+      "exactDenominator": "1",
+      "nearestBinary64": 4301.0,
+      "nativeVolume": null,
+      "nativeMeasurementAvailable": false,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "legacy",
+      "id": "tiny-disjoint-union",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "19807040628566084398385987584",
+      "nearestBinary64": 1.2000274123848626e-17,
+      "nativeVolume": null,
+      "nativeMeasurementAvailable": false,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "selected",
+      "id": "tiny-translated",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "39614081257132168796771975168",
+      "nearestBinary64": 6.000137061924313e-18,
+      "nativeVolume": 6.000137061924313e-18,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": 6e-18
+    },
+    {
+      "engine": "selected",
+      "id": "tiny-origin",
+      "exactNumerator": "39492109375708942438034858509354246921456744925",
+      "exactDenominator": "6582018229284824168619876730229402019930943462534319453394436096",
+      "nearestBinary64": 6e-18,
+      "nativeVolume": 5.999999999999999e-18,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "selected",
+      "id": "ordinary",
+      "exactNumerator": "4301",
+      "exactDenominator": "1",
+      "nearestBinary64": 4301.0,
+      "nativeVolume": 4301,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "selected",
+      "id": "tiny-disjoint-union",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "19807040628566084398385987584",
+      "nearestBinary64": 1.2000274123848626e-17,
+      "nativeVolume": 1.1999915763751673e-17,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "polygon",
+      "id": "tiny-translated",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "39614081257132168796771975168",
+      "nearestBinary64": 6.000137061924313e-18,
+      "nativeVolume": 6.000137061924313e-18,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": 6e-18
+    },
+    {
+      "engine": "polygon",
+      "id": "tiny-origin",
+      "exactNumerator": "39492109375708942438034858509354246921456744925",
+      "exactDenominator": "6582018229284824168619876730229402019930943462534319453394436096",
+      "nearestBinary64": 6e-18,
+      "nativeVolume": 5.999999999999999e-18,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "polygon",
+      "id": "ordinary",
+      "exactNumerator": "4301",
+      "exactDenominator": "1",
+      "nearestBinary64": 4301.0,
+      "nativeVolume": 4301,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "polygon",
+      "id": "tiny-disjoint-union",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "19807040628566084398385987584",
+      "nearestBinary64": 1.2000274123848626e-17,
+      "nativeVolume": 1.1999915763751673e-17,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "mechanical",
+      "id": "tiny-translated",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "39614081257132168796771975168",
+      "nearestBinary64": 6.000137061924313e-18,
+      "nativeVolume": 6.000137061924313e-18,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": 6e-18
+    },
+    {
+      "engine": "mechanical",
+      "id": "tiny-origin",
+      "exactNumerator": "39492109375708942438034858509354246921456744925",
+      "exactDenominator": "6582018229284824168619876730229402019930943462534319453394436096",
+      "nearestBinary64": 6e-18,
+      "nativeVolume": 5.999999999999999e-18,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "mechanical",
+      "id": "ordinary",
+      "exactNumerator": "4301",
+      "exactDenominator": "1",
+      "nearestBinary64": 4301.0,
+      "nativeVolume": 4301,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "mechanical",
+      "id": "tiny-disjoint-union",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "19807040628566084398385987584",
+      "nearestBinary64": 1.2000274123848626e-17,
+      "nativeVolume": 1.1999915763751673e-17,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "boolean-history",
+      "id": "tiny-translated",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "39614081257132168796771975168",
+      "nearestBinary64": 6.000137061924313e-18,
+      "nativeVolume": 6.000137061924313e-18,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": 6e-18
+    },
+    {
+      "engine": "boolean-history",
+      "id": "tiny-origin",
+      "exactNumerator": "39492109375708942438034858509354246921456744925",
+      "exactDenominator": "6582018229284824168619876730229402019930943462534319453394436096",
+      "nearestBinary64": 6e-18,
+      "nativeVolume": 5.999999999999999e-18,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "boolean-history",
+      "id": "ordinary",
+      "exactNumerator": "4301",
+      "exactDenominator": "1",
+      "nearestBinary64": 4301.0,
+      "nativeVolume": 4301,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    },
+    {
+      "engine": "boolean-history",
+      "id": "tiny-disjoint-union",
+      "exactNumerator": "237689917125",
+      "exactDenominator": "19807040628566084398385987584",
+      "nearestBinary64": 1.2000274123848626e-17,
+      "nativeVolume": 1.1999915763751673e-17,
+      "nativeMeasurementAvailable": true,
+      "requestedTinyBoxProduct": null
+    }
+  ]
+}

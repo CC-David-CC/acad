@@ -1,0 +1,171 @@
+{
+  "status": "FAIL",
+  "scope": "Real Chromium + genuine production CPU Workers; post-real-termination fault; no native/public-app qualification",
+  "workerSource": "224f3302d421957a9390879034102660f81d6ac0",
+  "pins": {
+    "sketch": {
+      "name": "static/sketch-solver.980419540ca4b83df21c.js",
+      "sha256": "53d0b1f66262414da08a7c33cfd82b82523eaa03313476fbbdacdc0493aed44a"
+    },
+    "semantic": {
+      "name": "static/prism-semantic.bd8ce56ab447fca11f5a.js",
+      "sha256": "096a8a56ae02b457affe04731c25a28b5dcc9ffee1d7eb6711c7bde7410f91b9"
+    },
+    "physical": {
+      "name": "static/physical-parameters.43b70351c5e1c442158e.js",
+      "sha256": "1cb90f172f8d8439f60ad7ccae4d77e849dbb5cc3dbdaaa7e93e940881000567"
+    },
+    "clients": {
+      "sha256": "bde0c711476e3902589c83941c8cd4ec682b9fec10173f2f842e99dfd7be7371"
+    }
+  },
+  "rows": [
+    {
+      "family": "physical",
+      "mode": "normal",
+      "outcome": {
+        "resolved": true,
+        "value": {
+          "revision": "42788e7e-5c73-42bf-b1d4-b146a71833c1",
+          "ok": true,
+          "result": {
+            "version": 1,
+            "values": [
+              {
+                "name": "w",
+                "dimension": "length",
+                "value": 4
+              }
+            ]
+          }
+        }
+      },
+      "genuine": {
+        "revision": "42788e7e-5c73-42bf-b1d4-b146a71833c1",
+        "ok": true,
+        "result": {
+          "version": 1,
+          "values": [
+            {
+              "name": "w",
+              "dimension": "length",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "records": [
+        {
+          "terminateCalls": 1,
+          "actuallyTerminated": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "family": "physical",
+      "mode": "cleanup-failure",
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": null
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true
+      },
+      "genuine": {
+        "revision": "3aff9830-b009-4626-ba3e-597a5941facd",
+        "ok": true,
+        "result": {
+          "version": 1,
+          "values": [
+            {
+              "name": "w",
+              "dimension": "length",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "records": [
+        {
+          "terminateCalls": 1,
+          "actuallyTerminated": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "family": "physical",
+      "mode": "abort-held",
+      "outcome": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "name": "Error",
+        "message": "Parameter Worker cleanup failed; reload this client module before evaluating again.",
+        "causeExact": true,
+        "operationError": {
+          "name": "AbortError",
+          "message": "Parameter evaluation cancelled."
+        }
+      },
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true
+      },
+      "genuine": {
+        "revision": "4e1ce304-7c0d-4aa3-913d-70b9ccc80244",
+        "ok": true,
+        "result": {
+          "version": 1,
+          "values": [
+            {
+              "name": "w",
+              "dimension": "length",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "records": [
+        {
+          "terminateCalls": 1,
+          "actuallyTerminated": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "family": "sketch",
+      "mode": "normal",
+      "outcome": {
+        "resolved": false,
+        "name": "Error",
+        "message": "Sketch worker failed.",
+        "causeExact": false,
+        "operationError": null
+      },
+      "genuine": null,
+      "records": [
+        {
+          "terminateCalls": 1,
+          "actuallyTerminated": true
+        }
+      ],
+      "errors": [
+        "Uncaught NetworkError: Failed to execute 'importScripts' on 'WorkerGlobalScope': The script at 'http://127.0.0.1:38461/lib/verb.js' failed to load."
+      ]
+    }
+  ],
+  "ownedBrowserClosed": true,
+  "error": {
+    "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   \"Uncaught NetworkError: Failed to execute 'importScripts' on 'WorkerGlobalScope': The script at 'http://127.0.0.1:38461/lib/verb.js' failed to load.\"\n+ ]\n- []\n",
+    "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   \"Uncaught NetworkError: Failed to execute 'importScripts' on 'WorkerGlobalScope': The script at 'http://127.0.0.1:38461/lib/verb.js' failed to load.\"\n+ ]\n- []\n\n    at /tmp/codi-state-machine-disposable-clients-20261106/test/state-machine-audit-disposable-clients/browser.cjs:26:97"
+  }
+}

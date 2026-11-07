@@ -1,0 +1,8 @@
+{
+  "nativeProof": "c15e49dfbb5bb5fcf7b5c81e7c63724c81807ae0",
+  "scope": "Unchanged independent native fixture math, replayed against actual production Worker binary output",
+  "files": {
+    "check-mesh.py": "12a75dc483e1c768ef4f1e5fb8c40a87ea738de145b9b9c504a9b484cf436bf5",
+    "check-matrix.py": "09a5b5cff3552cf8051760a2e31ddc7b3ace5c0e4662c01dc7058be6c627f2ac"
+  }
+}

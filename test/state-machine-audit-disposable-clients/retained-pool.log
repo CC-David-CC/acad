@@ -1,0 +1,23 @@
+✔ two feature mounts share one candidate without exceeding the pool ceiling (6.125348ms)
+✔ cancelled in-flight factory reservation cannot be reused reentrantly (0.470044ms)
+✔ failed factory releases its reservation and limits reject invalid configuration (0.377953ms)
+✔ failed replacement closes only its resources, retaining both accepted revisions (0.390023ms)
+✔ admission precedes allocation and stale factory results are closed (0.337213ms)
+✔ sealing forbids allocation and publication acceptance invokes no external guard (0.223002ms)
+✔ document abort during factory creation closes the returned mount (0.222452ms)
+✔ a cleanup failure cannot silently admit another engine (0.259752ms)
+✔ three retained/candidate owners are the per-document ceiling (0.296053ms)
+✔ cleanup failure also blocks an already-admitted candidate (0.291893ms)
+✔ cleanup failure during allocation discards the returned mount (0.279322ms)
+✔ a guard cancelling its own owner cannot start a new mount (0.163241ms)
+✔ registered source and handle guards are rechecked before publication (0.259513ms)
+✔ publication guards cannot recurse, await or cancel unnoticed (1.471674ms)
+✔ publication check count is bounded and accepted phase invokes no callbacks (7.921216ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 87.303697

@@ -1,0 +1,147 @@
+{
+  "scope": "Recorded actual production mount descriptor; no new geometry executed by this fixture",
+  "observation": "test/owned-sweep-worker/evidence-r1/receipt-r2.json",
+  "observationSHA256": "c2a2e85a8a39c67bed0d20d9278b0048ff252091ba0e2cac9d534808efe265c7",
+  "descriptor": {
+    "contractVersion": 1,
+    "engine": "occ-sweep-profile-v1-component",
+    "mountId": "65060f25-fef9-4f06-bb86-941ec6de2db7",
+    "generation": 1,
+    "unit": "millimeter",
+    "representation": "occ-brep-worker-owned",
+    "bootstrap": "host-trusted",
+    "runtimeAssets": {
+      "jsSha256": "a9cfa6e53a8bc14f2fb035e33afd1a82d9ae36ace1cf9f66169c739d2de72580",
+      "wasmSha256": "e105bdfe7c7bcb113eee5398d8202831cb8e8b1608dcc1730fc4461c9f24263d",
+      "verification": "worker-sha256"
+    },
+    "maxLifetimeNames": 32,
+    "maxPending": 1,
+    "maxCumulativeResultTriangles": 100000,
+    "budgetScope": "selected-owned-evaluation-v1",
+    "tolerances": "OCC interpreter defaults; not yet configurable or qualified",
+    "operations": [
+      {
+        "id": "solid.box.create",
+        "version": 1,
+        "input": "oci-box-mm-v1",
+        "output": "oci-shape-result-v1",
+        "qualification": "scoped-browser-evidence"
+      },
+      {
+        "id": "solid.mesh.read",
+        "version": 1,
+        "input": "owned-solid-mesh-request-v1",
+        "output": "owned-solid-mesh-result-v1",
+        "qualification": "unqualified",
+        "purpose": "display-only"
+      },
+      {
+        "id": "solid.profile.extrude",
+        "version": 3,
+        "input": "selected-profile-mm-v3",
+        "output": "oci-shape-result-v1",
+        "qualification": "component-research"
+      },
+      {
+        "id": "solid.topology.read",
+        "version": 1,
+        "scope": "response-local",
+        "qualification": "component-research"
+      },
+      {
+        "id": "solid.point.classify",
+        "version": 1,
+        "qualification": "component-research"
+      },
+      {
+        "id": "solid.selections.read",
+        "version": 1,
+        "selectionPlanVersion": 2,
+        "qualification": "component-research"
+      },
+      {
+        "id": "solid.profile.sweep",
+        "version": 1,
+        "input": "solved-profile-path-mm-v1",
+        "output": "oci-shape-result-v1",
+        "qualification": "component-research"
+      },
+      {
+        "id": "solid.profile.revolve",
+        "version": 1,
+        "input": "solved-profile-axis-mm-v1",
+        "output": "oci-shape-result-v1",
+        "sourceQualification": "requires-solved-source-binding",
+        "qualification": "component-research"
+      },
+      {
+        "id": "solid.holes.through",
+        "version": 1,
+        "kinds": [
+          "centered-through",
+          "four-corner-through"
+        ],
+        "source": "selected-rectangle",
+        "termination": "through-all",
+        "nativeResultCost": {
+          "centered-through": 2,
+          "four-corner-through": 8
+        },
+        "qualification": "component-research"
+      },
+      {
+        "id": "solid.holes.pattern.linear",
+        "version": 1,
+        "axis": "source-local-x-positive",
+        "countIncludesSeed": true,
+        "executableCounts": {
+          "min": 2,
+          "max": 17
+        },
+        "unsupportedCounts": [
+          1
+        ],
+        "qualification": "component-research"
+      },
+      {
+        "id": "solid.edge.treat",
+        "version": 1,
+        "kinds": [
+          "fillet",
+          "chamfer-equal"
+        ],
+        "scope": "selected-line-edges-between-planar-faces",
+        "qualification": "component-research"
+      },
+      {
+        "id": "solid.boolean.common",
+        "version": 1,
+        "input": "oci-boolean-history-mm-v1",
+        "output": "oci-shape-result-v1",
+        "qualification": "scoped-browser-evidence"
+      },
+      {
+        "id": "solid.boolean.union",
+        "version": 1,
+        "input": "oci-boolean-history-mm-v1",
+        "output": "oci-shape-result-v1",
+        "qualification": "scoped-browser-evidence"
+      },
+      {
+        "id": "solid.boolean.subtract",
+        "version": 1,
+        "input": "oci-boolean-history-mm-v1",
+        "output": "oci-shape-result-v1",
+        "qualification": "scoped-browser-evidence"
+      },
+      {
+        "id": "solid.dispose",
+        "version": 1,
+        "input": "oci-dispose-v1",
+        "output": "empty-v1",
+        "qualification": "native-owned-name-release-v2"
+      }
+    ]
+  }
+}

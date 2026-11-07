@@ -1,0 +1,116 @@
+{
+  "colors": {
+    "initialColor": "336699",
+    "updatedColor": "884422",
+    "selectedColor": "ffff80",
+    "selectedAfterUpdate": "ffff80",
+    "clearedColor": "228844",
+    "geometryCreates": 1
+  },
+  "scope": "Saved public rectangle; real child disposal precedes each injected wrapper failure. This qualifies SketchingView ownership coordination, not exception safety inside every child resource implementation.",
+  "sourceBytes": 2232,
+  "first": {
+    "groups": [
+      4,
+      1,
+      1
+    ],
+    "viewportObserversBefore": 4,
+    "viewportObserversAfter": 4,
+    "counts": [
+      {
+        "index": 0,
+        "id": "S:0/SURFACE/rect-0",
+        "kind": "SketchObjectView",
+        "attempts": 1,
+        "geometries": 1,
+        "materials": 1
+      },
+      {
+        "index": 1,
+        "id": "S:0/SURFACE/rect-1",
+        "kind": "SketchObjectView",
+        "attempts": 1,
+        "geometries": 1,
+        "materials": 1
+      },
+      {
+        "index": 2,
+        "id": "S:0/SURFACE/rect-2",
+        "kind": "SketchObjectView",
+        "attempts": 1,
+        "geometries": 1,
+        "materials": 1
+      },
+      {
+        "index": 3,
+        "id": "S:0/SURFACE/rect-3",
+        "kind": "SketchObjectView",
+        "attempts": 1,
+        "geometries": 1,
+        "materials": 1
+      },
+      {
+        "index": 4,
+        "id": "S:0/SURFACE/L:0",
+        "kind": "SketchLoopView",
+        "attempts": 1,
+        "geometries": 1,
+        "materials": 1
+      },
+      {
+        "index": 5,
+        "id": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/rect-0\",\"S:0/SURFACE/rect-1\",\"S:0/SURFACE/rect-2\",\"S:0/SURFACE/rect-3\"],\"holes\":[]}",
+        "kind": "SketchRegionView",
+        "attempts": 1,
+        "geometries": 1,
+        "materials": 1
+      }
+    ],
+    "baseReleases": 1,
+    "rootReleases": 1,
+    "arraysAtFirstChild": [
+      0,
+      0,
+      0
+    ],
+    "errorIsFirst": true,
+    "arrays": [
+      0,
+      0,
+      0
+    ],
+    "oldDisposed": true,
+    "oldRootDisposed": true,
+    "newerRootOwnerRetained": true,
+    "rootObservers": 1,
+    "newerOwnerRetained": true,
+    "newerChildOwnersRetained": true,
+    "oldChildrenDisposed": true,
+    "faceObservers": 1,
+    "newerAlive": true,
+    "sourceUnchanged": true,
+    "versionUnchanged": true,
+    "historyUnchanged": true,
+    "additionalFailures": [
+      "controlled loop release failure",
+      "controlled region release failure"
+    ]
+  },
+  "repeatInert": true,
+  "recovered": {
+    "models": 1,
+    "history": 1,
+    "counts": [
+      4,
+      1,
+      1
+    ],
+    "viewportObservers": 4,
+    "rootObservers": 1,
+    "faceObservers": 1,
+    "sourceUnchanged": true,
+    "versionUnchanged": true
+  },
+  "appHash": "deb6bc2ea87a66a6e79d70542aec6b71d68c987d7c76fcf7ace48ec1b6a4c64e"
+}

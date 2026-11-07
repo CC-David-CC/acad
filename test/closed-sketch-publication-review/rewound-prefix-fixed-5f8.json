@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "source": "5f8d745d9dcce2f60d16e6cbee837cdf6b3ab6c8",
+  "layer": "actual-model-api-real-Workers-and-native-replay",
+  "fixture": "http://127.0.0.1:20486/",
+  "app": {
+    "url": "http://127.0.0.1:20486/static/index.bundle.js",
+    "sha256": "17a1350c7d866a63d9e52e2ebe06522ad6a0d8b52d3244333121a2f046261fb7"
+  },
+  "targetId": "33AD0AB068942A3255E737B7E5E275C7",
+  "reopenedTargetId": "4FD3B40776A3CA799CBBB20B60EB0FBC",
+  "empty": {
+    "pointer": -1,
+    "history": 0,
+    "models": 0
+  },
+  "before": [
+    {
+      "type": "PLANE",
+      "params": {
+        "featureId": "1",
+        "orientation": "XY",
+        "depth": 0,
+        "datum": null
+      }
+    },
+    {
+      "type": "WORKER_RECTANGLE_EXTRUDE_V1",
+      "params": {
+        "featureId": 2,
+        "face": "S:0/SURFACE",
+        "regions": [
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/rect-0\",\"S:0/SURFACE/rect-1\",\"S:0/SURFACE/rect-2\",\"S:0/SURFACE/rect-3\"],\"holes\":[]}"
+        ],
+        "length": 20
+      }
+    },
+    {
+      "type": "WORKER_CENTERED_THROUGH_HOLE_V1",
+      "params": {
+        "featureId": 3,
+        "face": "worker-prism:1:[\"2\",\"face\",\"LID\",{\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\"}]",
+        "diameter": 10
+      }
+    }
+  ],
+  "bodyId": "worker-prism:1:[\"2\",\"body\"]",
+  "rounds": [
+    {
+      "pointer": 1,
+      "featureIds": [
+        1,
+        4,
+        2,
+        3
+      ],
+      "models": 2,
+      "failure": null
+    },
+    {
+      "pointer": 2,
+      "featureIds": [
+        1,
+        4,
+        5,
+        2,
+        3
+      ],
+      "models": 3,
+      "failure": null
+    }
+  ],
+  "history": [
+    {
+      "type": "PLANE",
+      "params": {
+        "featureId": "1",
+        "orientation": "XY",
+        "depth": 0,
+        "datum": null
+      }
+    },
+    {
+      "type": "PLANE",
+      "params": {
+        "featureId": 4,
+        "orientation": "XZ",
+        "depth": 5,
+        "datum": null
+      }
+    },
+    {
+      "type": "PLANE",
+      "params": {
+        "featureId": 5,
+        "orientation": "ZY",
+        "depth": 5,
+        "datum": null
+      }
+    },
+    {
+      "type": "WORKER_RECTANGLE_EXTRUDE_V1",
+      "params": {
+        "featureId": 2,
+        "face": "S:0/SURFACE",
+        "regions": [
+          "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/rect-0\",\"S:0/SURFACE/rect-1\",\"S:0/SURFACE/rect-2\",\"S:0/SURFACE/rect-3\"],\"holes\":[]}"
+        ],
+        "length": 20
+      }
+    },
+    {
+      "type": "WORKER_CENTERED_THROUGH_HOLE_V1",
+      "params": {
+        "featureId": 3,
+        "face": "worker-prism:1:[\"2\",\"face\",\"LID\",{\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\"}]",
+        "diameter": 10
+      }
+    }
+  ],
+  "diameters": [
+    10,
+    10
+  ],
+  "models": 3,
+  "reopened": {
+    "history": [
+      {
+        "type": "PLANE",
+        "params": {
+          "featureId": "1",
+          "orientation": "XY",
+          "depth": 0,
+          "datum": null
+        }
+      },
+      {
+        "type": "PLANE",
+        "params": {
+          "featureId": 4,
+          "orientation": "XZ",
+          "depth": 5,
+          "datum": null
+        }
+      },
+      {
+        "type": "PLANE",
+        "params": {
+          "featureId": 5,
+          "orientation": "ZY",
+          "depth": 5,
+          "datum": null
+        }
+      },
+      {
+        "type": "WORKER_RECTANGLE_EXTRUDE_V1",
+        "params": {
+          "featureId": 2,
+          "face": "S:0/SURFACE",
+          "regions": [
+            "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/rect-0\",\"S:0/SURFACE/rect-1\",\"S:0/SURFACE/rect-2\",\"S:0/SURFACE/rect-3\"],\"holes\":[]}"
+          ],
+          "length": 20
+        }
+      },
+      {
+        "type": "WORKER_CENTERED_THROUGH_HOLE_V1",
+        "params": {
+          "featureId": 3,
+          "face": "worker-prism:1:[\"2\",\"face\",\"LID\",{\"regionId\":\"sketch-region:{\\\"faceId\\\":\\\"S:0/SURFACE\\\",\\\"outer\\\":[\\\"S:0/SURFACE/rect-0\\\",\\\"S:0/SURFACE/rect-1\\\",\\\"S:0/SURFACE/rect-2\\\",\\\"S:0/SURFACE/rect-3\\\"],\\\"holes\\\":[]}\"}]",
+          "diameter": 10
+        }
+      }
+    ],
+    "models": 3,
+    "diameters": [
+      10,
+      10
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "ownedSignedFixturePort": 20916,
+  "ownedFixturePid": 2203660,
+  "ownedCaddyPid": 2203672,
+  "signal": "SIGINT after terminal PASS13 and independent reads",
+  "fixtureExitCode": 0,
+  "fixtureListenerClosed": true,
+  "privateTemporaryAccountFileStateRemoved": true,
+  "sharedChrome19329Preserved": true,
+  "compiledCodeRetainedOnR730": true,
+  "filesystemRaceRun": false
+}

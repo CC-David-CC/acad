@@ -1,0 +1,106 @@
+{
+  "runtimeSource": "7757cf749f51bc82d79ee0d23b9be35e8305b0c8",
+  "scope": "Actual shared public core/production Workers with independent mathematical and geometry checks; no signed host Files or human geometry UI qualification; overall CAD1 gate remains open",
+  "actual": {
+    "public-axis": {
+      "status": "PASS",
+      "positiveWorkers": 150,
+      "terminated": 150,
+      "faultControls": 17,
+      "receipt": "evidence/domain-normalization/public-axis.json"
+    },
+    "collinear": {
+      "status": "PASS",
+      "positiveWorkers": 92,
+      "terminated": 92,
+      "faultControls": 15,
+      "receipt": "evidence/domain-normalization/collinear.json"
+    },
+    "signed-distance": {
+      "status": "PASS",
+      "positiveWorkers": 74,
+      "terminated": 74,
+      "faultControls": 14,
+      "receipt": "evidence/domain-normalization/signed-distance.json"
+    }
+  },
+  "focused": {
+    "status": "PASS",
+    "count": 9,
+    "includes": "transitive tiny-offset/coefficient ancestry, nonzero certificates, native consumed-source replay"
+  },
+  "broad": {
+    "pass": 225,
+    "total": 228,
+    "remainingFailures": [
+      {
+        "test": "actual legacy reevaluate writer skips only clock-only storage without skipping refresh/reset",
+        "source": "test/mechanical/noop-sketch-save.test.mjs:36",
+        "cause": "Caught raw-eval _objectSpread ReferenceError; final assertion effect count0!==1"
+      },
+      {
+        "test": "legacy reevaluate persists real geometry/metadata changes and retains boundary provenance",
+        "source": "test/mechanical/noop-sketch-save.test.mjs:40",
+        "cause": "Caught raw-eval _objectSpread ReferenceError; final assertion effect count0!==1"
+      },
+      {
+        "test": "explicit group and real segment endpoints follow a single transform with polar equations",
+        "source": "test/mechanical/rigid-group-solver-probe.test.mjs:53",
+        "cause": "Preexisting unprotected-probe expected refusal but observes admission true!==false"
+      }
+    ],
+    "notWaived": true
+  },
+  "typeScriptNoEmit": "PASS",
+  "counterexample": {
+    "before": {
+      "accepted": false,
+      "evalCount": 5,
+      "fxInf": 4.277038055147746e-11,
+      "gInf": 6.76270715501259e-11,
+      "t": 1.3504334917023922e-10
+    },
+    "after": {
+      "accepted": true,
+      "evalCount": 15,
+      "fxInf": 1.4210854715202004e-14,
+      "gInf": 1.1960236035831142e-13,
+      "t": 10.151840455657837
+    },
+    "noPoseOrLengthSeed": true
+  },
+  "proofBoundary": "Cancel only exact common identity POW1 factors with exact zero constant and a same-system active nonzero-domain certificate; skip rows with transitive approximate ancestors; no retries or equation/domain relaxation",
+  "next": [
+    "Independent root source review and composition with exact-reader fixes",
+    "Fresh signed host AxisSymmetry public command/lifecycle/My files/account proof",
+    "Separate broad harness/oracle triage",
+    "Separate honest numerical/domain failure taxonomy"
+  ],
+  "sha256": {
+    "evidence/broad-after-precision-fixture.log": "79c86c2cc96e590742a606d9e4cf8dc1d43dfdb7f55fde448470078bb7990e27",
+    "evidence/broad-before-precision.log": "c7271ee7951f72a3c0acb91356ede71fa936f494c45eb2e9bad458dc35b52d41",
+    "evidence/collinear-regression.json": "5711f3f6963864ba0715a9f00a29169c313473718505785ca04311171f18718e",
+    "evidence/consumed-fine-failure.json": "96be4d03cef7320b5b75bce7ef248319776336543058dcf8f87dfa8440a449c5",
+    "evidence/consumed-stopping.json": "7ceab530ca0c92c1677b170e2e892d6a7e9555e42900ff19beb53bc97e82ff6c",
+    "evidence/diagnostic-coarse.json": "551333ef088c84d5bfaa6e2b09f43c04d06c5e33eada5ca9e3f62bacfc3441ac",
+    "evidence/diagnostic-fine.json": "f16fa081b15e2aacc14ed3b202f3c9096b15907647cc96b6137f525f019a776e",
+    "evidence/domain-normalization/broad.log": "2dd68b6c5ad44f4ee413452529127a766af886ff7f404c381c481891e9b62206",
+    "evidence/domain-normalization/collinear.json": "e48f31bf468dd18565a52afbf94fa4b2bd78008e79d155bf4a374fa26e93dedb",
+    "evidence/domain-normalization/collinear.log": "cc8c4de1152f017a5e715e5da1dc0ee291e3d7d2f2e8a8a5f34909e58eb1a481",
+    "evidence/domain-normalization/diagnostic.json": "a9d81823a9eac4079ec512bf3bace705d1f438f07d2b873190662c34d3df34fa",
+    "evidence/domain-normalization/envelope-planner.log": "9985b63db89986f01233a7b70720a5a6866a2122452366a11ba817d47601b7dc",
+    "evidence/domain-normalization/focused.log": "023e85047373d93e749462516fd6f7d4875cc39562c013f23992186920f3b36d",
+    "evidence/domain-normalization/public-axis.json": "ed5c017043e32fd71012a633840f2dcfc35629e3d6365feb7fe46656b8ee08ee",
+    "evidence/domain-normalization/public-axis.log": "916a5353d7a21313fae41eb4580fa714cbcaef680d3d1e66154f5d2cf932fa1c",
+    "evidence/domain-normalization/signed-distance.json": "a7b347da9b41521b3e96623e993a7b5476981e352aa7c93fe0f36c0b421a67bc",
+    "evidence/domain-normalization/signed-distance.log": "31795e1671aedf6e5a85b467efeb21c89e1b05e6baa7fe64f34c949f9502f475",
+    "evidence/live-axis-coarse-failure.json": "9c7e02d34d14ddf0a693257bf0cd8e5b5d32f85fc612ca86f0919c2207823095",
+    "evidence/same-start-lm.json": "1c5119a898de2a9b806c0e9a3086e54bf74e08d3ea32c4f93c1f5c03aa637022",
+    "evidence/signed-regression.json": "576f8ff32daa53db596c6558f281628c6a86a20c85766994ec034c4f80cd1396",
+    "evidence/unconsumed-fine.json": "fa7548c0446659535cd3ca98d32d2d76018849b9835b8a434101304634082a7d"
+  },
+  "descriptorEnvelopesAndPlanner": {
+    "status": "PASS",
+    "count": 17
+  }
+}

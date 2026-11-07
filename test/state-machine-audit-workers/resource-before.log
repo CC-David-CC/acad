@@ -1,0 +1,129 @@
+✖ any thrown cleanup value permanently fences pool: undefined (1.897037ms)
+✖ any thrown cleanup value permanently fences pool: null (4.105257ms)
+✖ any thrown cleanup value permanently fences pool: zero (0.281462ms)
+✖ any thrown cleanup value permanently fences pool: false (0.250952ms)
+✖ any thrown cleanup value permanently fences pool: empty-string (0.271722ms)
+✖ invalid cleanup accessor cannot orphan a native-mount reservation (0.487874ms)
+✔ ordinary Error cleanup already fences current and new owners (0.453414ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 1
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 72.090791
+
+✖ failing tests:
+
+test at test/state-machine-audit-workers/resource-regressions.test.mjs:7:115
+✖ any thrown cleanup value permanently fences pool: undefined (1.897037ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception: Existing candidate must be fenced
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/resource-regressions.test.mjs:11:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /cleanup failed/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/resource-regressions.test.mjs:7:115
+✖ any thrown cleanup value permanently fences pool: null (4.105257ms)
+  AssertionError [ERR_ASSERTION]: Every thrown value must latch cleanup failure
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/resource-regressions.test.mjs:10:32)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/resource-regressions.test.mjs:7:115
+✖ any thrown cleanup value permanently fences pool: zero (0.281462ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception: Existing candidate must be fenced
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/resource-regressions.test.mjs:11:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /cleanup failed/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/resource-regressions.test.mjs:7:115
+✖ any thrown cleanup value permanently fences pool: false (0.250952ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception: Existing candidate must be fenced
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/resource-regressions.test.mjs:11:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /cleanup failed/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/resource-regressions.test.mjs:7:115
+✖ any thrown cleanup value permanently fences pool: empty-string (0.271722ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception: Existing candidate must be fenced
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/resource-regressions.test.mjs:11:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /cleanup failed/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/state-machine-audit-workers/resource-regressions.test.mjs:14:1
+✖ invalid cleanup accessor cannot orphan a native-mount reservation (0.487874ms)
+  AssertionError [ERR_ASSERTION]: Failed factory must not leave unreachable reservations
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///tmp/codi-state-machine-audit-workers-20261106/test/state-machine-audit-workers/resource-regressions.test.mjs:17:57)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

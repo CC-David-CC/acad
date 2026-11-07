@@ -1,0 +1,23 @@
+{
+  "base": "407bbb2d52402d75a4d292cb889b2121bf94bb32",
+  "beforeCommit": "d090885a6",
+  "productCommit": "5471a2f6e2fcc31fd44ab7aa64e167b2b2509fa3",
+  "node": "v24.22.1",
+  "qualification": {
+    "newNodeControls": 42,
+    "retainedNodeControls": 10,
+    "chromiumNativeSignalControls": 6,
+    "nativeGeometryClaim": false,
+    "composedAppClaim": false
+  },
+  "sha256": {
+    "modules/engine/mount/worker-controller.mjs": "0ff0c9ace898893f687a12e9f92ee16082062524ac92d3aa60bfb2e5d9802587",
+    "test/state-machine-audit-workers/cancellation-cleanup/after-browser.json": "065ebabdcc01d62e4c4e2d170d03f4e1aa7b51ca07981849c7b16d1d39599cea",
+    "test/state-machine-audit-workers/cancellation-cleanup/after-unit.log": "47b363fd883c7d9708c49298e41e4b8e5f4e832e1027cb2ebba9a5d3d9dca2c0",
+    "test/state-machine-audit-workers/cancellation-cleanup/before-probe.mjs": "98abb14ab21c540f95c185686f07bebaec45b45c79e0f1e729a42d86723bf77c",
+    "test/state-machine-audit-workers/cancellation-cleanup/before.json": "1b44f935672774c5f7ea195d424f633d2d9c612fde48972d9951e8a20f4facd2",
+    "test/state-machine-audit-workers/cancellation-cleanup/browser.mjs": "366b2fccaddcf7981ec45e8b475fd0d780eac8d5610f08a9ed2eef66b86bf3e8",
+    "test/state-machine-audit-workers/cancellation-cleanup/fixture.mjs": "6c52442d81efd2db7e2634f1739b0210374cb17a0c1dcf9046cb170163e3a567",
+    "test/state-machine-audit-workers/cancellation-cleanup/settlement.test.mjs": "8a9565db7f1703fc72c2d7e5311ea500a1714366296bffb1b1c079f8db2e3121"
+  }
+}

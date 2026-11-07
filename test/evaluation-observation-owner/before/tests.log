@@ -1,0 +1,147 @@
+✖ observation authority permanently forbids promotion before during and after an awaited read (1.868901ms)
+✖ normal model owner is not an observation authority and still publishes without callbacks (0.983291ms)
+✖ unknown purpose cannot register an owner (0.365124ms)
+✖ reentrant initial lifetime guard cannot exceed the owner ceiling (0.407484ms)
+✖ own AbortSignal registration override cannot strand a failed begin (0.648967ms)
+✖ own AbortSignal removal override cannot leave closed owner mounts alive (0.462015ms)
+✔ already aborted actual signal admits nothing (0.581436ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 1
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 72.126539
+
+✖ failing tests:
+
+test at test/evaluation-observation-owner/authority.test.mjs:2:1
+✖ observation authority permanently forbids promotion before during and after an awaited read (1.868901ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///tmp/codi-cad-mechanical-candidate-20261105/test/evaluation-observation-owner/authority.test.mjs:2:278)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/evaluation-observation-owner/authority.test.mjs:3:1
+✖ normal model owner is not an observation authority and still publishes without callbacks (0.983291ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///tmp/codi-cad-mechanical-candidate-20261105/test/evaluation-observation-owner/authority.test.mjs:3:264)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/evaluation-observation-owner/authority.test.mjs:4:1
+✖ unknown purpose cannot register an owner (0.365124ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///tmp/codi-cad-mechanical-candidate-20261105/test/evaluation-observation-owner/authority.test.mjs:4:128)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /purpose|authority/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/evaluation-observation-owner/authority.test.mjs:5:1
+✖ reentrant initial lifetime guard cannot exceed the owner ceiling (0.407484ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///tmp/codi-cad-mechanical-candidate-20261105/test/evaluation-observation-owner/authority.test.mjs:5:186)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /Too many/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/evaluation-observation-owner/authority.test.mjs:6:1
+✖ own AbortSignal registration override cannot strand a failed begin (0.648967ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   cause: 0
+  + }
+  - null
+  
+      at TestContext.<anonymous> (file:///tmp/codi-cad-mechanical-candidate-20261105/test/evaluation-observation-owner/authority.test.mjs:6:422)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { cause: 0 },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/evaluation-observation-owner/authority.test.mjs:7:1
+✖ own AbortSignal removal override cannot leave closed owner mounts alive (0.462015ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   cause: 0
+  + }
+  - null
+  
+      at TestContext.<anonymous> (file:///tmp/codi-cad-mechanical-candidate-20261105/test/evaluation-observation-owner/authority.test.mjs:7:446)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { cause: 0 },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

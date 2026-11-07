@@ -1,0 +1,13 @@
+{
+  "node": "v24.22.1",
+  "webpack": "5.74.0",
+  "sourceHashes": {
+    "web/app/cad/projectBundle.ts": "fec549d13bb59fa5ee5a491ff7baa6b4468e7a37e6a7a1d4d98c0e6647023708",
+    "web/app/cad/projectManager/projectManagerBundle.ts": "590765c53f91546e026746eaeffbf1ac731dfa843b88e2e372f2adb463ebb435",
+    "web/app/cad/projectManager/genericManufacturingAssignment.mjs": "a43c23af0cac815317908d1fc2cf9bda15ce6b08ede8fbe612bf8bd3d75f2656",
+    "web/app/cad/projectManager/genericManufacturingAssignment.d.mts": "1a1cf060382af13a9ec1e0ab7c1ce3c7f88b96ca381057a1291f1590ed120559",
+    "web/app/cad/projectManager/genericManufacturingBodies.ts": "586df10b568d4e5280669db18597dd240c89d340dfe8e5edc63560a16d7002e7",
+    "test/generic-manufacturing-assignment/entry.ts": "757d5d700cbb708fd9b8fd957e0c94b6847e62a8d95056449a61506650452cf3"
+  },
+  "bundleSHA256": "1f6aa00be7de2fb0cd43b606b0ee53d5bef541aba6d5394beecfc9a7b998fb97"
+}

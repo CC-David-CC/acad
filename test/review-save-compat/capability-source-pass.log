@@ -1,0 +1,8 @@
+PASS own verified commit rearms direct retry, including unrelated project cache allocation
+PASS same-byte foreign ABA cannot become an accepted baseline
+PASS foreign namespace membership refuses
+PASS real state observer runs after rearm and draft-only edit permits retry
+PASS observer foreign/ABA writes are never adopted after notification
+PASS unexpected installed write version reports committed and never rearms
+PASS document/registry/material/models/history/expression/journal/service identity fences survive rearm
+PASS duplicate namespace proof refuses

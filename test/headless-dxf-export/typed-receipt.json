@@ -1,0 +1,109 @@
+{
+  "units": 4,
+  "types": [
+    "ARC",
+    "CIRCLE",
+    "LINE",
+    "POINT"
+  ],
+  "entities": [
+    {
+      "type": "POINT",
+      "values": {
+        "5": "1B",
+        "8": "sketch",
+        "10": "3",
+        "20": "4",
+        "30": "0",
+        "100": "AcDbPoint",
+        "330": "D"
+      }
+    },
+    {
+      "type": "LINE",
+      "values": {
+        "5": "1C",
+        "8": "sketch",
+        "10": "10",
+        "11": "30",
+        "20": "20",
+        "21": "40",
+        "30": "0",
+        "31": "0",
+        "100": "AcDbLine",
+        "330": "D"
+      }
+    },
+    {
+      "type": "CIRCLE",
+      "values": {
+        "5": "1D",
+        "8": "sketch",
+        "10": "70",
+        "20": "80",
+        "30": "0",
+        "40": "5",
+        "100": "AcDbCircle",
+        "330": "D"
+      }
+    },
+    {
+      "type": "ARC",
+      "values": {
+        "5": "1E",
+        "8": "sketch",
+        "10": "0",
+        "20": "0",
+        "30": "0",
+        "40": "10",
+        "50": "0",
+        "51": "90",
+        "100": "AcDbArc",
+        "330": "D"
+      }
+    }
+  ],
+  "bad": {
+    "revision": "export",
+    "ok": false,
+    "error": {
+      "code": "FRAME_MISMATCH",
+      "message": "The saved sketch frame has changed."
+    }
+  },
+  "badAnnotation": {
+    "revision": "export",
+    "ok": false,
+    "error": {
+      "code": "UNSUPPORTED",
+      "message": "DXF export of sketch annotations is not yet supported."
+    }
+  },
+  "badBoundary": {
+    "revision": "export",
+    "ok": false,
+    "error": {
+      "code": "UNSUPPORTED",
+      "message": "NURBS face boundaries are not supported by DXF export."
+    }
+  },
+  "typedGood": {
+    "ok": true
+  },
+  "typedMismatch": {
+    "revision": "export",
+    "ok": false,
+    "error": {
+      "code": "CURRENT_GEOMETRY_MISMATCH",
+      "message": "The solved sketch differs from the captured native state."
+    }
+  },
+  "typedWrong": {
+    "revision": "export",
+    "ok": false,
+    "error": {
+      "code": "DIMENSION_MISMATCH",
+      "message": "Expression dimension does not match its declaration."
+    }
+  }
+}

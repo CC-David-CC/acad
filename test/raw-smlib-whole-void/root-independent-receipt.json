@@ -1,0 +1,392 @@
+{
+  "assets": {
+    "rawMount.mjs": "1f9993a3d5fc0ed4ad2d467080a390e1b579bc1f4db962517ca455b7ccc037cd",
+    "raw-smlib-worker.js": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65",
+    "raw-provider.wasm": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa"
+  },
+  "dcase": {
+    "before": [
+      {
+        "e": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1000,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          }
+        },
+        "sha": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+        "volume": 999.9999999999999,
+        "status": "available",
+        "reason": null,
+        "displayBytes": 432
+      },
+      {
+        "e": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 215.99999999999997,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          }
+        },
+        "sha": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+        "volume": 216,
+        "status": "available",
+        "reason": null,
+        "displayBytes": 432
+      },
+      {
+        "e": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1000,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "sha": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+        "volume": 1000.0000000000002,
+        "status": "available",
+        "reason": null,
+        "displayBytes": 432
+      },
+      {
+        "e": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          }
+        },
+        "sha": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+        "volume": 784,
+        "status": "available",
+        "reason": null,
+        "displayBytes": 864
+      },
+      {
+        "e": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "sha": "9ac8a98aa661726b85bf15373776f54d6b143f75d79ccbb4778329ac003dc8a6",
+        "volume": 1783.9999999999993,
+        "status": "unavailable",
+        "reason": "material-orientation-unqualified",
+        "displayBytes": 0
+      }
+    ],
+    "after": [
+      {
+        "e": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1000,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          }
+        },
+        "sha": "7ae2296a32e245cf177d05d1478d038cd2e8997dc7f31e38f62728439860675b",
+        "volume": 999.9999999999999,
+        "status": "available",
+        "reason": null,
+        "displayBytes": 432
+      },
+      {
+        "e": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 215.99999999999997,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              2,
+              2,
+              2
+            ],
+            "max": [
+              8,
+              8,
+              8
+            ]
+          }
+        },
+        "sha": "26beba26d427e7f723f58b93933b7150d76864b1957d08b61bbc2c678f8998f3",
+        "volume": 216,
+        "status": "available",
+        "reason": null,
+        "displayBytes": 432
+      },
+      {
+        "e": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 0,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1000,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              20,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "sha": "07f8d45818062b6ffafe3c46901712cd79aa15f70239cce546826ffc96758c81",
+        "volume": 1000.0000000000002,
+        "status": "available",
+        "reason": null,
+        "displayBytes": 432
+      },
+      {
+        "e": {
+          "resultKind": "single-material",
+          "materialRegions": 1,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              10,
+              10,
+              10
+            ]
+          }
+        },
+        "sha": "99bfb16cfb8fb7d353c752767be31f48c511278db0bc21dbade91c1c4ddc0d76",
+        "volume": 784,
+        "status": "available",
+        "reason": null,
+        "displayBytes": 864
+      },
+      {
+        "e": {
+          "resultKind": "multi-material",
+          "materialRegions": 2,
+          "voidRegions": 1,
+          "validLevel0": true,
+          "validLevel2": true,
+          "manifoldPredicate": true,
+          "volume": 1784,
+          "volumeQuality": "native-relative-0.001",
+          "bounds": {
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              30,
+              10,
+              10
+            ]
+          }
+        },
+        "sha": "9ac8a98aa661726b85bf15373776f54d6b143f75d79ccbb4778329ac003dc8a6",
+        "volume": 1783.9999999999993,
+        "status": "unavailable",
+        "reason": "material-orientation-unqualified",
+        "displayBytes": 0
+      }
+    ],
+    "f": {
+      "e": {
+        "resultKind": "multi-material",
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": true,
+        "volume": 2000,
+        "volumeQuality": "native-relative-0.001",
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        }
+      },
+      "sha": "5ee73cd27d028c8a5200504eb11feb6319f642c1e2ba60dddbc2740e8245b152",
+      "volume": 1999.9999999999993,
+      "status": "available",
+      "reason": null,
+      "displayBytes": 864
+    },
+    "r": {
+      "e": {
+        "resultKind": "multi-material",
+        "materialRegions": 2,
+        "voidRegions": 0,
+        "validLevel0": true,
+        "validLevel2": true,
+        "manifoldPredicate": true,
+        "volume": 2000,
+        "volumeQuality": "native-relative-0.001",
+        "bounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            30,
+            10,
+            10
+          ]
+        }
+      },
+      "sha": "293fd0d9f89860f3ad1753bb78c3b56ebf2e033a07ea4423adcef315fca8993f",
+      "volume": 1999.9999999999993,
+      "status": "available",
+      "reason": null,
+      "displayBytes": 864
+    }
+  },
+  "island": {
+    "e": {
+      "resultKind": "multi-material",
+      "materialRegions": 2,
+      "voidRegions": 1,
+      "validLevel0": true,
+      "validLevel2": true,
+      "manifoldPredicate": true,
+      "volume": 792,
+      "volumeQuality": "native-relative-0.001",
+      "bounds": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          10,
+          10,
+          10
+        ]
+      }
+    },
+    "sha": "0c282968b81f5c106721fc26c3a5bac8871e79ae890505f9cd7f086a63e16fd9",
+    "volume": 775.9999999999998,
+    "status": "unavailable",
+    "reason": "material-orientation-unqualified",
+    "displayBytes": 0
+  },
+  "partial": "ENGINE_FAILURE",
+  "violations": []
+}

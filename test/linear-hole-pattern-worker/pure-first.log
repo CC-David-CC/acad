@@ -1,0 +1,30 @@
+FAIL 11
+{
+  name: 'known holes share exact source/build and distinct feature identities',
+  status: 'FAIL',
+  error: {
+    code: 'ERR_ASSERTION',
+    message: 'Expected values to be strictly deep-equal:\n' +
+      '+ actual - expected\n' +
+      '\n' +
+      '  Comparison {\n' +
+      "+   code: 'INVALID_REQUEST'\n" +
+      "-   code: 'STALE_SOURCE'\n" +
+      '  }\n',
+    stack: 'AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n' +
+      '+ actual - expected\n' +
+      '\n' +
+      '  Comparison {\n' +
+      "+   code: 'INVALID_REQUEST'\n" +
+      "-   code: 'STALE_SOURCE'\n" +
+      '  }\n' +
+      '\n' +
+      '    at error (file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-worker/pure-worker.mjs:7:231)\n' +
+      '    at file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-worker/pure-worker.mjs:15:360\n' +
+      '    at check (file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-worker/pure-worker.mjs:7:48)\n' +
+      '    at file:///tmp/codi-linear-hole-pattern-plan-20261106/test/linear-hole-pattern-worker/pure-worker.mjs:15:1\n' +
+      '    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n' +
+      '    at async node:internal/modules/esm/loader:647:26\n' +
+      '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)'
+  }
+}

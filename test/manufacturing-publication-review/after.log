@@ -1,0 +1,18 @@
+✔ direct preparation client rejects native preabort despite own false data, zero allocation (4.071428ms)
+✔ direct client uses native signal operations, including one signal in both slots and exact listener cleanup (66.285942ms)
+✔ direct held genuine result abort cannot be masked and own remove overrides cannot invent cleanup failure (72.15965ms)
+✔ unmodified native pre-aborted signal refuses before Worker allocation (258.828462ms)
+✔ native pre-aborted signal remains cancelled when its aborted property is shadowed (170.575455ms)
+✔ native cancellation after hash completion preserves A/J/T and healthy concurrent caller may commit (265.769972ms)
+✔ native cancellation during final valid callback after genuine Worker cleanup preserves exact state (292.689565ms)
+✔ native signal own accessors and add/remove overrides cannot change normal assignment or cleanup (192.106524ms)
+✔ hash cancellation uses native signal even with own method/property overrides, then healthy retry succeeds (232.323742ms)
+✔ held genuine preparation abort ignores own remove override, preserves state and leaves healthy module (262.145489ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2209.339683

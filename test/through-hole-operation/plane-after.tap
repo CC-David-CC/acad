@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: pending operation refuses the same face after its plane predicate becomes false
+ok 1 - pending operation refuses the same face after its plane predicate becomes false
+  ---
+  duration_ms: 6.540841
+  type: 'test'
+  ...
+# Subtest: registered publication refuses the same face after its plane predicate becomes false
+ok 2 - registered publication refuses the same face after its plane predicate becomes false
+  ---
+  duration_ms: 1.706576
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 374.731795

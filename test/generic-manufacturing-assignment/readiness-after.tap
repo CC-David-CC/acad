@@ -1,0 +1,20 @@
+✔ empty actual output inventory is structured unready without inventing a target (262.99518ms)
+✔ all unsupported actual targets are structured unready while row reason survives (168.938194ms)
+✔ initial stable busy is availability, not lifetime cancellation (143.337786ms)
+✔ initial stable assembly is availability, not lifetime cancellation (116.565355ms)
+✔ initial stable unbound-host is availability, not lifetime cancellation (130.250083ms)
+✔ actual disposed document still aborts readonly inspection (117.763707ms)
+✔ actual readonly inventory binds production class/history/registry/runtime without parsing IDs (258.362887ms)
+✔ private prepare uses real hash Worker and pure model capture without writes/publication/ID allocation (252.359431ms)
+✔ pending actual hash reply is fenced by source/registry/runtime/model/counter/lifetime changes (1551.371322ms)
+✔ returned private proposal becomes stale without installing metadata (158.766919ms)
+✔ stale/malformed/cancelled requests refuse before hash worker dispatch (86.540547ms)
+✔ wrong class/producer/origin/current build/placement never becomes a supported discovery target (440.785437ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3130.898476

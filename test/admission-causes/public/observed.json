@@ -1,0 +1,43 @@
+{
+  "status": "PASS bounded public cause contract",
+  "productSource": "aca23b2b3d83935df5a127ad0a1343b39ab22b3c",
+  "testSource": "e45d335aa992063f3a1522f6f9e64c9bb0562567",
+  "publicRows": 8,
+  "faultRows": 12,
+  "observedWorkers": 99,
+  "allObservedWorkersTerminated": true,
+  "typecheck": {
+    "exitCode": 0
+  },
+  "focusedPM": {
+    "tests": 9,
+    "passed": 9
+  },
+  "normalNativeReopen": {
+    "exactSketches": true
+  },
+  "publicCauseRecordsFrozen": true,
+  "legacyCodeAndMessagePreserved": true,
+  "allRefusalsPreserveLastValidState": true,
+  "genuineWorkerLifetimeRows": [
+    {
+      "mode": "held-success-lifetime",
+      "genuineSuccessHeld": true,
+      "wouldChangeNative": true,
+      "preserved": true,
+      "lateReplyDelivered": true,
+      "lateReplyPreserved": true,
+      "closedInspectionRefused": null
+    },
+    {
+      "mode": "held-success-host-close",
+      "genuineSuccessHeld": true,
+      "wouldChangeNative": true,
+      "preserved": true,
+      "lateReplyDelivered": true,
+      "lateReplyPreserved": true,
+      "closedInspectionRefused": true
+    }
+  ],
+  "scope": "Public core API and actual production Workers; not signed-host/Files/UI/deployment/full-gate qualification. Cause structure is validated, not cryptographic truth."
+}

@@ -1,0 +1,19 @@
+{
+  "source": "3bd196f3102db48ddeca5db458f6fb7969706c4c",
+  "appSha": "d45e4a51cdad02d8627d36fa444132186b3f718441927c232e635ce9c5ccfe50",
+  "wasmSha": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+  "fill": {
+    "volume": 1000,
+    "editedVolume": 1200,
+    "outputId": "worker-solid:1:[5,\"body\"]",
+    "editTravelAndFreshReplay": true
+  },
+  "partial": {
+    "failure": {
+      "name": "Error",
+      "message": "SMLib refused or failed the operation."
+    },
+    "preservedExceptSkippedId": true,
+    "explicitReverseVolume": 892
+  }
+}

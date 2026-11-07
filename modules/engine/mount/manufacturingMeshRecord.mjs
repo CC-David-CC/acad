@@ -1,0 +1,17 @@
+// Worker-only binary traversal. Never coordinate-weld, repair or infer material.
+import {captureManufacturingMetadata,manufacturingMeshMetadata} from './ownedManufacturingMeshProtocol.mjs';
+const fail=message=>{throw Object.assign(Error(message),{code:'ENGINE_FAILURE'});};
+export function decodeManufacturingMesh(buffer,begin,controls){
+ const metadata=captureManufacturingMetadata(manufacturingMeshMetadata(begin),controls);let view;try{Object.getOwnPropertyDescriptor(ArrayBuffer.prototype,'byteLength').get.call(buffer);view=new DataView(buffer);}catch{fail('Expected attached standalone manufacturing binary');}if(view.byteLength!==metadata.byteLength)fail('Manufacturing binary byte length changed');for(let i=0;i<8;i++)if(view.getUint8(i)!=='CMESH001'.charCodeAt(i))fail('Invalid manufacturing binary magic');for(const[offset,value]of [[8,metadata.vertexCount],[12,metadata.triangleCount],[16,metadata.positionsOffset],[20,metadata.indicesOffset],[24,0],[28,0]])if(view.getUint32(offset,true)!==value)fail('Manufacturing binary header changed');
+ const n=metadata.vertexCount,used=new Uint8Array(n),edges=new Map(),triangles=new Set(),links=new Array(n);const vertex=i=>[0,1,2].map(j=>view.getFloat64(32+i*24+j*8,true));
+ for(let i=0;i<n;i++)if(vertex(i).some(x=>!Number.isFinite(x)))fail('Nonfinite manufacturing position');
+ function edge(a,b){const lo=Math.min(a,b),hi=Math.max(a,b),key=lo*n+hi,direction=a===lo?1:-1,old=edges.get(key);if(old){if(old.count!==1||old.direction===direction)fail('Manufacturing edge incidence/orientation');old.count=2;}else edges.set(key,{count:1,direction});}
+ function link(v,a,b){let map=links[v];if(!map)links[v]=map=new Map();for(const[x,y]of [[a,b],[b,a]]){let row=map.get(x);if(!row)map.set(x,row=[]);if(row.length>=2||row.includes(y))fail('Manufacturing vertex link incidence');row.push(y);}}
+ for(let i=0;i<metadata.triangleCount;i++){
+  const p=metadata.indicesOffset+i*12,a=view.getUint32(p,true),b=view.getUint32(p+4,true),c=view.getUint32(p+8,true);if(a>=n||b>=n||c>=n||a===b||b===c||c===a)fail('Invalid manufacturing triangle indices');const sorted=[a,b,c].sort((x,y)=>x-y),key=sorted.join(',');if(triangles.has(key))fail('Duplicate manufacturing triangle');triangles.add(key);
+  const x=vertex(a),y=vertex(b),z=vertex(c),u=y.map((v,j)=>v-x[j]),v=z.map((v,j)=>v-x[j]),cross=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];if(cross.some(v=>!Number.isFinite(v))||cross.every(v=>v===0))fail('Nonfinite or zero-area manufacturing triangle');used[a]=used[b]=used[c]=1;edge(a,b);edge(b,c);edge(c,a);link(a,b,c);link(b,c,a);link(c,a,b);
+ }
+ if(edges.size>300000||triangles.size!==metadata.triangleCount)fail('Manufacturing incidence work exceeded bounds');for(const e of edges.values())if(e.count!==2)fail('Open manufacturing boundary');
+ for(let i=0;i<n;i++){if(!used[i])fail('Unused manufacturing payload vertex');const map=links[i];if(!map||map.size<3)fail('Invalid manufacturing vertex link');for(const row of map.values())if(row.length!==2)fail('Open manufacturing vertex link');const start=map.keys().next().value,seen=new Set();let previous=null,current=start;do{if(seen.has(current))fail('Manufacturing vertex link repeats');seen.add(current);const row=map.get(current);if(!row)fail('Missing manufacturing vertex link');const next=row[0]===previous?row[1]:row[0];previous=current;current=next;}while(current!==start);if(seen.size!==map.size)fail('Disconnected manufacturing vertex link');}
+ return Object.freeze({metadata,buffer});
+}

@@ -1,0 +1,1 @@
+const path=require('path');module.exports={mode:'production',target:'webworker',devtool:false,entry:path.resolve(__dirname,'../../web/app/cad/parameters/physicalQuantitiesWorker.mjs'),output:{path:'/tmp/codi-physical-parameters-worker',filename:'worker.js'}};

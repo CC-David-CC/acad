@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "source": "c9f1d103976a815cef12a0eeb371b61e2442ca85",
+  "layer": "synthetic-exact-source-method",
+  "functionBodySha256": "eb67391649a7d77df0f9e700c135646d71254ae7f5a876a44ea67fc287ca20c1",
+  "scope": "Private verifyLengthIntent only. The production field policy is called from the exact private verifier. Controlled mutated candidate data; no actual solver mutation is simulated.",
+  "controls": [
+    {
+      "id": "requested-relation-only",
+      "verifierAccepted": true,
+      "error": null
+    },
+    {
+      "id": "numeric-coordinate-change",
+      "verifierAccepted": true,
+      "error": null
+    },
+    {
+      "id": "changed-root-id",
+      "verifierAccepted": false,
+      "error": {
+        "code": "INTENT_CHANGED",
+        "message": "Existing authored sketch intent changed."
+      }
+    },
+    {
+      "id": "changed-metadata",
+      "verifierAccepted": false,
+      "error": {
+        "code": "INTENT_CHANGED",
+        "message": "Existing authored sketch intent changed."
+      }
+    },
+    {
+      "id": "changed-generator-intent",
+      "verifierAccepted": false,
+      "error": {
+        "code": "INTENT_CHANGED",
+        "message": "Existing authored sketch intent changed."
+      }
+    },
+    {
+      "id": "changed-relation-target",
+      "verifierAccepted": false,
+      "error": {
+        "code": "INTENT_CHANGED",
+        "message": "The requested relation was not retained."
+      }
+    },
+    {
+      "id": "masked-spline-degree-and-knots",
+      "verifierAccepted": false,
+      "error": {
+        "code": "UNSUPPORTED_SOLVER_DATA_CHANGE",
+        "message": "The transition changed unsupported authored shape data."
+      }
+    },
+    {
+      "id": "masked-spline-method",
+      "verifierAccepted": false,
+      "error": {
+        "code": "UNSUPPORTED_SOLVER_DATA_CHANGE",
+        "message": "The transition changed unsupported authored shape data."
+      }
+    },
+    {
+      "id": "masked-spline-mode",
+      "verifierAccepted": false,
+      "error": {
+        "code": "UNSUPPORTED_SOLVER_DATA_CHANGE",
+        "message": "The transition changed unsupported authored shape data."
+      }
+    },
+    {
+      "id": "masked-spline-child-id",
+      "verifierAccepted": false,
+      "error": {
+        "code": "UNSUPPORTED_SOLVER_DATA_CHANGE",
+        "message": "The transition changed unsupported authored shape data."
+      }
+    },
+    {
+      "id": "masked-rigid-local-definition",
+      "verifierAccepted": false,
+      "error": {
+        "code": "UNSUPPORTED_SOLVER_DATA_CHANGE",
+        "message": "The transition changed unsupported authored shape data."
+      }
+    },
+    {
+      "id": "masked-rigid-member-id",
+      "verifierAccepted": false,
+      "error": {
+        "code": "UNSUPPORTED_SOLVER_DATA_CHANGE",
+        "message": "The transition changed unsupported authored shape data."
+      }
+    }
+  ]
+}

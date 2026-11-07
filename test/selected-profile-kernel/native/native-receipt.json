@@ -1,0 +1,77 @@
+{
+  "result": "PASS",
+  "scope": "Actual C++ compiled to WASM; native CPU execution not claimed.",
+  "rows": [
+    {
+      "name": "rectangle",
+      "evidence": {
+        "version": 2,
+        "valid": true,
+        "solidCount": 1,
+        "nativeVolume": 499.9999999999999,
+        "nativeBounds": {
+          "min": [
+            0,
+            0,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "name": "circle",
+      "evidence": {
+        "version": 2,
+        "valid": true,
+        "solidCount": 1,
+        "nativeVolume": 1570.7963267948965,
+        "nativeBounds": {
+          "min": [
+            -10,
+            -10,
+            0
+          ],
+          "max": [
+            10,
+            10,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "name": "annulus",
+      "evidence": {
+        "version": 2,
+        "valid": true,
+        "solidCount": 1,
+        "nativeVolume": 4712.38898038469,
+        "nativeBounds": {
+          "min": [
+            -20,
+            -20,
+            0
+          ],
+          "max": [
+            20,
+            20,
+            5
+          ]
+        }
+      }
+    }
+  ],
+  "annulusClassification": {
+    "void": 1,
+    "material": 0,
+    "exterior": 1
+  },
+  "duplicateAndInvalidPreserved": true,
+  "repeatedCreateRelease": 32,
+  "finalNativeNames": 0
+}

@@ -1,0 +1,75 @@
+{
+  "scope": "Recorded genuine native evidence used only as a protocol double, not fresh geometry",
+  "sourceReceiptSHA256": "07c3e95b33c2da408a10e8fb215678be459650d2ff975b90f45b55d23f7e417d",
+  "evidence": {
+    "nativeVolume": 4712.38898038469,
+    "nativeBounds": {
+      "min": [
+        -10,
+        0,
+        -10
+      ],
+      "max": [
+        10,
+        30,
+        10
+      ]
+    },
+    "faces": 5,
+    "triangles": 304,
+    "bounds": {
+      "min": [
+        -9.975640502598242,
+        0,
+        -9.993908270190957
+      ],
+      "max": [
+        10,
+        30,
+        9.993908270190957
+      ]
+    },
+    "signedVolume": 4692.117347730498,
+    "empty": false,
+    "resultKind": "single-solid",
+    "solidCount": 1,
+    "nativeValidity": {
+      "method": "occ-inspect-analytic-v1",
+      "valid": true
+    },
+    "nativeTopology": {
+      "version": 1,
+      "method": "occ-topology-census-v1",
+      "shapeType": 2,
+      "directChildren": 1,
+      "counts": {
+        "compounds": 0,
+        "compsolids": 0,
+        "solids": 1,
+        "shells": 1,
+        "faces": 5,
+        "wires": 6,
+        "edges": 6,
+        "vertices": 4
+      }
+    },
+    "materialRegions": null,
+    "voidRegions": null,
+    "validLevel0": null,
+    "validLevel2": null,
+    "manifoldPredicate": null,
+    "volumeQuality": "tessellation-signed-integral"
+  },
+  "binding": {
+    "version": 1,
+    "unit": "millimeter",
+    "source": {
+      "faceId": "component-source-face",
+      "sourceSha256": "0671ff44c5bf9ce762546436d70f8d4f63d8bd973dd437ca191f19595b890dd5"
+    },
+    "regionId": "component-selected-region",
+    "axisId": "component-source-axis",
+    "angleRadians": 6.283185307179586,
+    "requestSha256": "c54f3e8c18a59b1f8bda8c10faf1e13cf34d48a87dc907d7f91a069fea9039a6"
+  }
+}

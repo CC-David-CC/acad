@@ -1,0 +1,73 @@
+{
+  "format": "codi-scene-viewer-disposal/1",
+  "appSHA256": "655c7d15f09eb5a041911baeb6c079e2c52fd11a9e0fd242de81918171bf26dd",
+  "result": "FAIL",
+  "checks": {
+    "activeBefore": true,
+    "stoppedAfterDispose": false,
+    "controlsReleasedOnce": false,
+    "rendererReleasedOnce": false,
+    "canvasRemoved": false,
+    "lateWorkInert": false,
+    "idempotent": false,
+    "siblingRetained": true,
+    "failedCleanupContinues": false
+  },
+  "rows": {
+    "normal": {
+      "before": {
+        "evaluations": 9,
+        "renders": 0,
+        "controls": 0,
+        "renderer": 0
+      },
+      "after": {
+        "evaluations": 16,
+        "renders": 0,
+        "controls": 0,
+        "renderer": 1
+      },
+      "late": {
+        "evaluations": 31,
+        "renders": 1,
+        "controls": 0,
+        "renderer": 1
+      },
+      "afterSecondDispose": {
+        "evaluations": 31,
+        "renders": 1,
+        "controls": 0,
+        "renderer": 2
+      },
+      "beforeSecondDispose": {
+        "evaluations": 31,
+        "renders": 1,
+        "controls": 0,
+        "renderer": 1
+      },
+      "scheduled": 1,
+      "canvasRemoved": false,
+      "siblingAdvanced": true,
+      "siblingCanvasPresent": true
+    },
+    "failedCleanup": {
+      "expectedError": false,
+      "beforeWait": {
+        "evaluations": 0,
+        "renders": 0,
+        "controls": 0,
+        "renderer": 1
+      },
+      "afterWait": {
+        "evaluations": 8,
+        "renders": 0,
+        "controls": 0,
+        "renderer": 2
+      },
+      "canvasRemoved": false
+    }
+  },
+  "scope": "Actual Viewer component teardown in a retained realm; genuine RAF/controls/renderer forwarding and one injected post-cleanup exception. No claim that normal host iframe removal leaks, no arbitrary child exception safety or forced GC evidence.",
+  "testSHA256": "b1029052aa65b974ed82642df04cc680f1f646c21ac86b7cab1217402d07f080",
+  "runtimeSource": "5fb0f703201c3bff752e7bff217f46e14c3ed933"
+}

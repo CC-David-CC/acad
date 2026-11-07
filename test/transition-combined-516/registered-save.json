@@ -1,0 +1,553 @@
+{
+  "source": "5163605d175b8fee3ea5d9507375546002eaf690",
+  "workerURL": "http://127.0.0.1:20481/static/sketch-solver.6b000ad9d7f6a446d6ff.js",
+  "workerSHA256": "6fcd982aaab142b311b29d8c4bc0fb3b99eb5b58668cd364acdb580c06a9de2d",
+  "appSHA256": "d73fecd5f3d9b268e1828611f7f0acc2ae4719ac9cd6b95c0b1bf5080a2fde11",
+  "clientWrapperSHA256": "43740c22a28508f3afe6fa0289cef3fd19e1939bd1340c95885d495c38dc5a8c",
+  "fixtureSHA256": "d5ff3b5d57e5dede586c1ac339a45ef682ba1aeac2a4db669e8e832e4c0bbadb",
+  "fixtureSource": "349eb4d60",
+  "scope": "actual production client module and installed browser Worker; no app UI/host acceptance",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'",
+  "servedPins": {
+    "worker": "6fcd982aaab142b311b29d8c4bc0fb3b99eb5b58668cd364acdb580c06a9de2d",
+    "app": "d73fecd5f3d9b268e1828611f7f0acc2ae4719ac9cd6b95c0b1bf5080a2fde11"
+  },
+  "results": {
+    "rows": [
+      {
+        "name": "Concentric Circle/Circle",
+        "expectedOK": true,
+        "result": {
+          "revision": "797e1350-c7d9-4c3f-80dd-563174376cde",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "EqualRadius Circle/Circle",
+        "expectedOK": true,
+        "result": {
+          "revision": "27ed0260-a65e-4951-9e9e-c4f4e11d7c27",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Concentric Circle/Arc",
+        "expectedOK": true,
+        "result": {
+          "revision": "3b486f59-2348-40ae-b24b-4f9327935d1e",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "EqualRadius Circle/Arc",
+        "expectedOK": true,
+        "result": {
+          "revision": "7f655774-3925-4b85-a96d-ae15ba8e7c11",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Concentric Arc/Circle",
+        "expectedOK": true,
+        "result": {
+          "revision": "5de16a04-439e-4016-a77a-1f1ad37f2452",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "EqualRadius Arc/Circle",
+        "expectedOK": true,
+        "result": {
+          "revision": "b37c49eb-98c2-468e-99c8-8522270a29d5",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Concentric Arc/Arc",
+        "expectedOK": true,
+        "result": {
+          "revision": "5eb31e32-dfe2-4a89-9fbf-02006d5b4fa8",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "EqualRadius Arc/Arc",
+        "expectedOK": true,
+        "result": {
+          "revision": "2bce883c-1d11-4829-bdcc-3dc88101b1af",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "RadiusLength Arc",
+        "expectedOK": true,
+        "result": {
+          "revision": "22b264b3-dd07-42b0-878c-e0ca46a0c395",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Angle",
+        "expectedOK": true,
+        "result": {
+          "revision": "ab52ab6e-efd6-40eb-a497-9c9f8679fb54",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "AngleBetween",
+        "expectedOK": true,
+        "result": {
+          "revision": "9cf97ef0-8723-4328-9f52-4599ebd53c5d",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Parallel",
+        "expectedOK": true,
+        "result": {
+          "revision": "8a2b5b78-4fd8-49dd-916d-2b35ad81bf6e",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Perpendicular",
+        "expectedOK": true,
+        "result": {
+          "revision": "88b5b5a9-f5ed-462b-817e-b3c6a3af411d",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "DistancePP",
+        "expectedOK": true,
+        "result": {
+          "revision": "2b9bb728-0f67-4fb7-ad5d-7a75a317138c",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "PointInMiddle",
+        "expectedOK": true,
+        "result": {
+          "revision": "ddd376f5-8c33-47cb-8017-02f6b963c1a7",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Symmetry",
+        "expectedOK": true,
+        "result": {
+          "revision": "b28e59ae-d0a9-4dac-9aa2-43b7eca649a6",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "PointOnCircle Circle",
+        "expectedOK": true,
+        "result": {
+          "revision": "c6ff34d1-0bd6-45f0-89ab-b96b1ee3a16d",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "TangentLC Circle",
+        "expectedOK": true,
+        "result": {
+          "revision": "69014c72-17d8-4a8f-9a1c-6a69e2e99937",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "PointOnCircle Arc",
+        "expectedOK": true,
+        "result": {
+          "revision": "00268ca4-0410-4431-a6f7-14e87d697594",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "TangentLC Arc",
+        "expectedOK": true,
+        "result": {
+          "revision": "e106ff3e-5cae-43e3-a222-db044a7d7504",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "PointOnBezier",
+        "expectedOK": true,
+        "result": {
+          "revision": "fbdb6cab-159f-4029-8f1d-0dffbdc3b17a",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "TangentLineBezier",
+        "expectedOK": true,
+        "result": {
+          "revision": "e5674995-6580-48c3-98db-88c4d64c84ca",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "PointOnEllipse Ellipse",
+        "expectedOK": true,
+        "result": {
+          "revision": "28013907-453e-4b32-be2f-e1848e70c4e5",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "PointOnEllipse EllipticalArc",
+        "expectedOK": true,
+        "result": {
+          "revision": "8a89666f-d9b0-4717-9a93-0baff4f00974",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Fillet",
+        "expectedOK": true,
+        "result": {
+          "revision": "2fb90df0-31f4-4c53-b275-19f2bd59b98d",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Ellipse native geometry",
+        "expectedOK": true,
+        "result": {
+          "revision": "6b4bd173-6d6d-4d76-b3fe-74301dd3a877",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "EllipticalArc native geometry",
+        "expectedOK": true,
+        "result": {
+          "revision": "07da976a-abda-4bfd-93cf-5c6e089d4b56",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Bezier geometry",
+        "expectedOK": true,
+        "result": {
+          "revision": "eab2af1e-96f9-4b66-9602-ead5b90f8aa8",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Ellipse legacy read/current native write",
+        "expectedOK": true,
+        "result": {
+          "revision": "9a381f1c-f2e0-4a85-a88d-2975e9d4355a",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "EllipticalArc legacy read/current native write",
+        "expectedOK": true,
+        "result": {
+          "revision": "b208c2a4-11df-4681-be72-98e85dd3846d",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Bezier zero endpoint handle",
+        "expectedOK": true,
+        "result": {
+          "revision": "9130f788-eca3-4175-9a7e-01278d7a0b79",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Bezier child LockPoint",
+        "expectedOK": true,
+        "result": {
+          "revision": "6d3d018d-5c70-4d9a-8ede-18c8c223201d",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Ellipse center LockPoint",
+        "expectedOK": true,
+        "result": {
+          "revision": "54692d55-d6ca-4ce9-8031-b77d15758fe1",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "EllipticalArc endpoint LockPoint",
+        "expectedOK": true,
+        "result": {
+          "revision": "bb080c52-5f5c-4c4e-b1dc-462ad9d1ab2e",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Parallel same direction",
+        "expectedOK": true,
+        "result": {
+          "revision": "c1e55161-8600-4fd7-ae4b-3e3cc58c6ded",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "Perpendicular positive direction",
+        "expectedOK": true,
+        "result": {
+          "revision": "c599f6b0-58ae-4bcf-bfe1-fd2a0f49b0f3",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "DistancePP zero coincidence",
+        "expectedOK": true,
+        "result": {
+          "revision": "1af62536-f197-48a9-b2e4-eaf4c5f9583e",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "SignedDistanceX negative",
+        "expectedOK": true,
+        "result": {
+          "revision": "cfe83c0c-77df-4501-b798-138a046cafbb",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "SignedDistanceY negative",
+        "expectedOK": true,
+        "result": {
+          "revision": "d9bfffef-e191-435c-93f1-cda1071b889d",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "ProjectedDistance negative",
+        "expectedOK": true,
+        "result": {
+          "revision": "99b836d5-0b32-419f-af59-e1928576a8ef",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "typed TangentLC Circle",
+        "expectedOK": true,
+        "result": {
+          "revision": "de22d722-8d83-41b0-a3a9-00c0ff5a5888",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "typed Fillet",
+        "expectedOK": true,
+        "result": {
+          "revision": "0c9e11bd-bdc4-43e1-bdea-8c913d882f49",
+          "ok": true,
+          "validated": true
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "refuse unknown schema",
+        "expectedOK": false,
+        "result": {
+          "revision": "56c57ce8-9886-4229-af24-acf134b53972",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported sketch constraint: FutureRelation"
+          }
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "refuse wrong entity reference",
+        "expectedOK": false,
+        "result": {
+          "revision": "935fbd3b-2809-436b-9af3-93745514539e",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Invalid or unsupported stage/generator graph."
+          }
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "refuse unknown geometric intent",
+        "expectedOK": false,
+        "result": {
+          "revision": "69ee8793-563d-435d-9567-7bac6b10763e",
+          "ok": false,
+          "error": {
+            "code": "INVALID",
+            "message": "Degenerate sketch circle."
+          }
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "refuse degenerate circular domain",
+        "expectedOK": false,
+        "result": {
+          "revision": "106d3db6-5f36-4e09-bde1-6883f889f6b5",
+          "ok": false,
+          "error": {
+            "code": "INVALID",
+            "message": "Degenerate sketch circle."
+          }
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "refuse nonfinite geometry",
+        "expectedOK": false,
+        "result": {
+          "revision": "6586d9ba-dbf4-41d8-b9ef-5ca8d6815722",
+          "ok": false,
+          "error": {
+            "code": "INVALID",
+            "message": "Degenerate sketch circle."
+          }
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "refuse negative DistancePP",
+        "expectedOK": false,
+        "result": {
+          "revision": "a4b49bf7-6c25-4902-bae5-d4743ce21dba",
+          "ok": false,
+          "error": {
+            "code": "SOLVE_ERROR",
+            "message": "the distance between two points must be a nonnegative number."
+          }
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "refuse degenerate Bezier",
+        "expectedOK": false,
+        "result": {
+          "revision": "5580d245-ad3b-4072-a857-ad25d73d441a",
+          "ok": false,
+          "error": {
+            "code": "SOLVE_ERROR",
+            "message": "Invalid or degenerate carried sketch curve."
+          }
+        },
+        "inputUnchanged": true
+      },
+      {
+        "name": "refuse solver-changed geometry",
+        "expectedOK": false,
+        "result": {
+          "revision": "5ea8c281-54be-4096-a005-110aa05eb993",
+          "ok": false,
+          "error": {
+            "code": "SKETCH_SAVE_INVALID",
+            "message": "The sketch could not be validated for saving."
+          }
+        },
+        "inputUnchanged": true
+      }
+    ],
+    "started": 51,
+    "terminated": 51,
+    "cancellation": {
+      "name": "AbortError",
+      "message": "Sketch solve cancelled"
+    },
+    "heldRealResponse": true,
+    "violations": [],
+    "unhandledRejections": []
+  },
+  "pass": true
+}

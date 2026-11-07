@@ -1,0 +1,29 @@
+verb 2.0.0
+✔ no option preserves default; explicit staged choice is detached and does not persist choice (7.500999ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ real Worker descriptor discovery uses requested STEP and recorded V2 contracts (881.604447ms)
+verb 2.0.0
+verb 2.0.0
+✔ actual 32-circle source retains the normal STEP selected-profile path (441.077336ms)
+verb 2.0.0
+verb 2.0.0
+✔ create passes explicit current build unchanged to error-only submit and releases reserved ID (409.796208ms)
+✔ saved whole-part revision wins; mixed explicit requests refuse before Worker or ID (1.255941ms)
+✔ unstaged choice and absent policy refuse before Worker/allocation (1.10239ms)
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+verb 2.0.0
+✔ policy withdrawal/source/lifetime changes across actual replies refuse (526.531352ms)
+✔ malformed/getter/undefined/extra requests refuse without getter reads (0.819288ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2438.713156

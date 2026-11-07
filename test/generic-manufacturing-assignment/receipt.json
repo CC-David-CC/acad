@@ -1,0 +1,61 @@
+{
+  "scope": "Core metadata/type/custody/preparation only; actual canonical-hash and validation Workers, explicit model/measurement admission fixtures; no Native geometry/public-authoring/manufacturing qualification",
+  "node": "v24.22.1",
+  "exit": 0,
+  "sourceHashesBefore": {
+    "test/generic-manufacturing-assignment/readiness.test.mjs": "a1b6f04b8722956bbae7b2940767fccf4e42a00348317e29780c9d16f4a4f10b",
+    "test/generic-manufacturing-assignment/metadata.test.mjs": "6187da73c8bdf8a3fce0f83a12987b0774cd526f1303f4de2da172513897ccca",
+    "test/generic-manufacturing-assignment/capture-after.test.mjs": "3d368b03db212d70b528c8bd569cfae17d2eebef825f12d486cbd54c29b783fe",
+    "test/generic-manufacturing-assignment/service.test.mjs": "6fb1414e83b5a799c220dfaa2db8d25014d62caea0cfa08af65b6295ef7f7ca9",
+    "test/generic-manufacturing-assignment/undo-gap.test.mjs": "a7e895d924b824ba1ec4b9ff80a7843df35f5faca492fd3f23ec8da57615e0fe",
+    "test/enclosure-material/assignment.test.mjs": "b7cd46ca4053321f5fbdec6e70bc652b81787e20f917e385bac06f0dc5963d5b",
+    "test/manufacturing/metadata.test.mjs": "51439b68e093d96bc088a25f19fc1d722ea7a0d6190b345b78efb0c45769bc6a",
+    "test/manufacturing/enclosure-groups.test.mjs": "38d0ca6b38cb595676a88c1d06b1aacbaa13de58b21a68683d3df574b218f7b7",
+    "test/display-units/manager.test.mjs": "ab6799eacb7a55da09c9683bc7ee8f269aadcb3538ca34ba557efba0e5ecb180",
+    "web/app/cad/projectBundle.ts": "fec549d13bb59fa5ee5a491ff7baa6b4468e7a37e6a7a1d4d98c0e6647023708",
+    "web/app/cad/projectManager/projectManagerBundle.ts": "590765c53f91546e026746eaeffbf1ac731dfa843b88e2e372f2adb463ebb435",
+    "web/app/cad/projectManager/genericManufacturingAssignment.mjs": "a43c23af0cac815317908d1fc2cf9bda15ce6b08ede8fbe612bf8bd3d75f2656",
+    "web/app/cad/projectManager/genericManufacturingAssignment.d.mts": "1a1cf060382af13a9ec1e0ab7c1ce3c7f88b96ca381057a1291f1590ed120559",
+    "web/app/cad/projectManager/genericManufacturingBodies.ts": "586df10b568d4e5280669db18597dd240c89d340dfe8e5edc63560a16d7002e7",
+    "test/generic-manufacturing-assignment/manager-fixture.mjs": "6fac045c7739098e28bf8ab356d09b6ad6ddb44ba97719cdb4c4451ed6e04fd6",
+    "test/generic-manufacturing-assignment/admission-fixture.mjs": "192154083a3d2bc73bc8c273cecfb47e6a82674f2e353d604c623226c0e54315",
+    "test/generic-manufacturing-assignment/capture-model-fixture.mjs": "64e8824c27841539a585010883abf6cdcd65acc889173625a0aafb830646174b",
+    "test/generic-manufacturing-assignment/project-fixture.mjs": "2e648008432a0443c5b10f6a8326925515c078cb3fa48aa9f373fec064e0beba",
+    "test/display-units/manager-fixture.mjs": "6b7a187d6ec5fccba6ec90f75aa64fa416266714ce1382c18abff97191f08d70"
+  },
+  "sourceHashesAfter": {
+    "test/generic-manufacturing-assignment/readiness.test.mjs": "a1b6f04b8722956bbae7b2940767fccf4e42a00348317e29780c9d16f4a4f10b",
+    "test/generic-manufacturing-assignment/metadata.test.mjs": "6187da73c8bdf8a3fce0f83a12987b0774cd526f1303f4de2da172513897ccca",
+    "test/generic-manufacturing-assignment/capture-after.test.mjs": "3d368b03db212d70b528c8bd569cfae17d2eebef825f12d486cbd54c29b783fe",
+    "test/generic-manufacturing-assignment/service.test.mjs": "6fb1414e83b5a799c220dfaa2db8d25014d62caea0cfa08af65b6295ef7f7ca9",
+    "test/generic-manufacturing-assignment/undo-gap.test.mjs": "a7e895d924b824ba1ec4b9ff80a7843df35f5faca492fd3f23ec8da57615e0fe",
+    "test/enclosure-material/assignment.test.mjs": "b7cd46ca4053321f5fbdec6e70bc652b81787e20f917e385bac06f0dc5963d5b",
+    "test/manufacturing/metadata.test.mjs": "51439b68e093d96bc088a25f19fc1d722ea7a0d6190b345b78efb0c45769bc6a",
+    "test/manufacturing/enclosure-groups.test.mjs": "38d0ca6b38cb595676a88c1d06b1aacbaa13de58b21a68683d3df574b218f7b7",
+    "test/display-units/manager.test.mjs": "ab6799eacb7a55da09c9683bc7ee8f269aadcb3538ca34ba557efba0e5ecb180",
+    "web/app/cad/projectBundle.ts": "fec549d13bb59fa5ee5a491ff7baa6b4468e7a37e6a7a1d4d98c0e6647023708",
+    "web/app/cad/projectManager/projectManagerBundle.ts": "590765c53f91546e026746eaeffbf1ac731dfa843b88e2e372f2adb463ebb435",
+    "web/app/cad/projectManager/genericManufacturingAssignment.mjs": "a43c23af0cac815317908d1fc2cf9bda15ce6b08ede8fbe612bf8bd3d75f2656",
+    "web/app/cad/projectManager/genericManufacturingAssignment.d.mts": "1a1cf060382af13a9ec1e0ab7c1ce3c7f88b96ca381057a1291f1590ed120559",
+    "web/app/cad/projectManager/genericManufacturingBodies.ts": "586df10b568d4e5280669db18597dd240c89d340dfe8e5edc63560a16d7002e7",
+    "test/generic-manufacturing-assignment/manager-fixture.mjs": "6fac045c7739098e28bf8ab356d09b6ad6ddb44ba97719cdb4c4451ed6e04fd6",
+    "test/generic-manufacturing-assignment/admission-fixture.mjs": "192154083a3d2bc73bc8c273cecfb47e6a82674f2e353d604c623226c0e54315",
+    "test/generic-manufacturing-assignment/capture-model-fixture.mjs": "64e8824c27841539a585010883abf6cdcd65acc889173625a0aafb830646174b",
+    "test/generic-manufacturing-assignment/project-fixture.mjs": "2e648008432a0443c5b10f6a8326925515c078cb3fa48aa9f373fec064e0beba",
+    "test/display-units/manager-fixture.mjs": "6b7a187d6ec5fccba6ec90f75aa64fa416266714ce1382c18abff97191f08d70"
+  },
+  "sourceUnchanged": true,
+  "compiledSourcePins": {
+    "node": "v24.22.1",
+    "webpack": "5.74.0",
+    "sourceHashes": {
+      "web/app/cad/projectBundle.ts": "fec549d13bb59fa5ee5a491ff7baa6b4468e7a37e6a7a1d4d98c0e6647023708",
+      "web/app/cad/projectManager/projectManagerBundle.ts": "590765c53f91546e026746eaeffbf1ac731dfa843b88e2e372f2adb463ebb435",
+      "web/app/cad/projectManager/genericManufacturingAssignment.mjs": "a43c23af0cac815317908d1fc2cf9bda15ce6b08ede8fbe612bf8bd3d75f2656",
+      "web/app/cad/projectManager/genericManufacturingAssignment.d.mts": "1a1cf060382af13a9ec1e0ab7c1ce3c7f88b96ca381057a1291f1590ed120559",
+      "web/app/cad/projectManager/genericManufacturingBodies.ts": "586df10b568d4e5280669db18597dd240c89d340dfe8e5edc63560a16d7002e7",
+      "test/generic-manufacturing-assignment/entry.ts": "757d5d700cbb708fd9b8fd957e0c94b6847e62a8d95056449a61506650452cf3"
+    },
+    "bundleSHA256": "1f6aa00be7de2fb0cd43b606b0ee53d5bef541aba6d5394beecfc9a7b998fb97"
+  }
+}

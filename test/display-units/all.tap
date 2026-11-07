@@ -1,0 +1,216 @@
+TAP version 13
+# verb 2.0.0
+# Subtest: actual linear/radius/diameter methods use the document formatter and preserve source data
+ok 1 - actual linear/radius/diameter methods use the document formatter and preserve source data
+  ---
+  duration_ms: 328.433557
+  type: 'test'
+  ...
+# Subtest: actual signed/projected annotation methods preserve prefixes, signs and undefined domain
+ok 2 - actual signed/projected annotation methods preserve prefixes, signs and undefined domain
+  ---
+  duration_ms: 214.224294
+  type: 'test'
+  ...
+# Subtest: actual shared angle formatting stays degrees across mm/inch documents
+ok 3 - actual shared angle formatting stays degrees across mm/inch documents
+  ---
+  duration_ms: 132.230079
+  type: 'test'
+  ...
+# Subtest: real measurement formatter converts all coordinates/deltas/chord while canonical API stays unchanged
+ok 4 - real measurement formatter converts all coordinates/deltas/chord while canonical API stays unchanged
+  ---
+  duration_ms: 116.209831
+  type: 'test'
+  ...
+# Subtest: default/no-op/changed receipt is document-scoped and canonical unit remains mm
+ok 5 - default/no-op/changed receipt is document-scoped and canonical unit remains mm
+  ---
+  duration_ms: 502.588047
+  type: 'test'
+  ...
+# Subtest: setter preserves history/source/counter/journal/material identities without Worker dispatch
+ok 6 - setter preserves history/source/counter/journal/material identities without Worker dispatch
+  ---
+  duration_ms: 151.173775
+  type: 'test'
+  ...
+# Subtest: malformed exact fields/options/getters and stale revisions reject unchanged
+ok 7 - malformed exact fields/options/getters and stale revisions reject unchanged
+  ---
+  duration_ms: 130.427071
+  type: 'test'
+  ...
+# Subtest: active/processing/history/wizard and cleanup states refuse metadata writes
+ok 8 - active/processing/history/wizard and cleanup states refuse metadata writes
+  ---
+  duration_ms: 488.201126
+  type: 'test'
+  ...
+# Subtest: closed/unbound/replaced manager and cancelled caller refuse before changing state
+ok 9 - closed/unbound/replaced manager and cancelled caller refuse before changing state
+  ---
+  duration_ms: 377.346207
+  type: 'test'
+  ...
+# Subtest: post-commit lifetime loss is marked committed and never rolls into another document
+ok 10 - post-commit lifetime loss is marked committed and never rolls into another document
+  ---
+  duration_ms: 76.014207
+  type: 'test'
+  ...
+# Subtest: New/reset returns to absent metadata and invalidates prior document revision
+ok 11 - New/reset returns to absent metadata and invalidates prior document revision
+  ---
+  duration_ms: 74.433911
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: actual manager snapshot/Blob reopen retains presentation through actual validation Worker
+ok 12 - actual manager snapshot/Blob reopen retains presentation through actual validation Worker
+  ---
+  duration_ms: 277.306894
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: presentation installs only after successful replay and final restore guards
+ok 13 - presentation installs only after successful replay and final restore guards
+  ---
+  duration_ms: 189.963986
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: validation/replay failure and cancelled native Open never install incoming presentation
+ok 14 - validation/replay failure and cancelled native Open never install incoming presentation
+  ---
+  duration_ms: 408.101799
+  type: 'test'
+  ...
+# Subtest: display change invalidates captured Save currentness independently of material state
+ok 15 - display change invalidates captured Save currentness independently of material state
+  ---
+  duration_ms: 70.585604
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: actual manufacturing preparation/hashing retains optional presentation outside digest domains
+ok 16 - actual manufacturing preparation/hashing retains optional presentation outside digest domains
+  ---
+  duration_ms: 294.075429
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: an original default-mm native envelope reopens as default without metadata migration
+ok 17 - an original default-mm native envelope reopens as default without metadata migration
+  ---
+  duration_ms: 159.383196
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: metadata changes during actual asynchronous manufacturing hashing reject the old Save
+ok 18 - metadata changes during actual asynchronous manufacturing hashing reject the old Save
+  ---
+  duration_ms: 276.311814
+  type: 'test'
+  ...
+# Subtest: independent exact length/area/volume examples use distinct unit powers
+ok 19 - independent exact length/area/volume examples use distinct unit powers
+  ---
+  duration_ms: 1.128931
+  type: 'test'
+  ...
+# Subtest: radians display in degrees independently of length presentation
+ok 20 - radians display in degrees independently of length presentation
+  ---
+  duration_ms: 1.054461
+  type: 'test'
+  ...
+# Subtest: default mm leaves canonical values intact and never accepts counts or strings as lengths
+ok 21 - default mm leaves canonical values intact and never accepts counts or strings as lengths
+  ---
+  duration_ms: 0.428684
+  type: 'test'
+  ...
+# Subtest: optional metadata is exact detached immutable inch-only data, never a default-mm field
+ok 22 - optional metadata is exact detached immutable inch-only data, never a default-mm field
+  ---
+  duration_ms: 0.816278
+  type: 'test'
+  ...
+# Subtest: native envelope preserves project/unit while default output retains exact original shape
+ok 23 - native envelope preserves project/unit while default output retains exact original shape
+  ---
+  duration_ms: 0.685217
+  type: 'test'
+  ...
+# Subtest: presentation remains outside geometry/manufacturing digest domains
+ok 24 - presentation remains outside geometry/manufacturing digest domains
+  ---
+  duration_ms: 11.312571
+  type: 'test'
+  ...
+# Subtest: physical expression constructors share constants without changing canonical results or source
+ok 25 - physical expression constructors share constants without changing canonical results or source
+  ---
+  duration_ms: 4.13353
+  type: 'test'
+  ...
+# Subtest: forward dependencies, conversion and dimensioned area and volume
+ok 26 - forward dependencies, conversion and dimensioned area and volume
+  ---
+  duration_ms: 5.05418
+  type: 'test'
+  ...
+# Subtest: divisions track dimensional exponents
+ok 27 - divisions track dimensional exponents
+  ---
+  duration_ms: 1.392253
+  type: 'test'
+  ...
+# Subtest: reject mismatched units, invalid counts, division and unsafe syntax
+ok 28 - reject mismatched units, invalid counts, division and unsafe syntax
+  ---
+  duration_ms: 1.138721
+  type: 'test'
+  ...
+# Subtest: missing, cyclic, duplicate and sparse inputs refuse
+ok 29 - missing, cyclic, duplicate and sparse inputs refuse
+  ---
+  duration_ms: 0.515546
+  type: 'test'
+  ...
+# Subtest: input is unchanged on failure
+ok 30 - input is unchanged on failure
+  ---
+  duration_ms: 0.344684
+  type: 'test'
+  ...
+# Subtest: counts remain distinct from numeric scalars
+ok 31 - counts remain distinct from numeric scalars
+  ---
+  duration_ms: 1.345993
+  type: 'test'
+  ...
+# Subtest: parameter journal stores source and binding together and rejects stale travel
+ok 32 - parameter journal stores source and binding together and rejects stale travel
+  ---
+  duration_ms: 3.268652
+  type: 'test'
+  ...
+# Subtest: parameter and sketch journal share one bounded byte budget
+ok 33 - parameter and sketch journal share one bounded byte budget
+  ---
+  duration_ms: 4.600125
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3791.985361

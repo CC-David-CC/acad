@@ -1,0 +1,28 @@
+{
+  "product": "04840305d61d9db74608fb1f7837a08daf9cf270",
+  "builderSHA256": "f24b40911edbc9ff293d3008d65b2ce2315d5c50dc0006c5a20f98075d6020c5",
+  "driverSHA256": "785587cf7470300b7a83e2550f3840bf1a25a9eedb109f2b21800bc5e7ef2a17",
+  "beforeSHA256": "01b2109013c171442f6396cef082fd1f6a49ecd4917c762a5052b4e7b0c1580d",
+  "afterSHA256": "248de21851704be466dd9babf8a8f35ca94424bd455d150105a4dd989c82db90",
+  "unchangedNativeExpected": {
+    "raw-provider.mjs": "8e49622c97d839cf94d6c4d5e2de6cbd96d1166075741e08dcbda3b1a223d8fa",
+    "raw-provider.wasm": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa"
+  },
+  "outputAfter": {
+    "raw-provider.wasm": {
+      "sha256": "f33f19cd0098b610756db70ae0d25ac1dcba315e9af9eb90e387d0668be90daa",
+      "bytes": 3944436,
+      "mode": 292,
+      "ino": "53220440",
+      "mtimeNs": "1794027988568588953"
+    },
+    "raw-smlib-worker.js": {
+      "sha256": "bbfdfe916d879fcc1ee84f59453f6b3dd67eb08ea92c06614e505aa35b413a65",
+      "bytes": 11639,
+      "mode": 436,
+      "ino": "53220438",
+      "mtimeNs": "1794027987243577343"
+    }
+  },
+  "testsPassed": 2
+}

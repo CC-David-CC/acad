@@ -1,0 +1,1 @@
+const path=require('path');const config=require('./webpack.config.cjs');config.entry=path.join(__dirname,'axis-angle-domain.test.mjs');config.output={path:'/tmp/codi-axis-angle-domain',filename:'tests.cjs'};module.exports=config;

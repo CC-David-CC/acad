@@ -1,0 +1,646 @@
+{
+  "scope": "actual Core and sketch/semantic Workers; model inventory is fixture; submit error-only, no native geometry claim",
+  "lifecycle": {
+    "started": 20,
+    "terminated": 20
+  },
+  "rows": [
+    {
+      "id": "choice",
+      "r": {
+        "ready": true,
+        "reason": null,
+        "canCreate": true,
+        "creationReason": null,
+        "budget": {
+          "scope": "selected-owned-evaluation-v1",
+          "maxLifetimeNames": 32,
+          "maxCumulativeResultTriangles": 100000,
+          "supported": true,
+          "compatible": true,
+          "reason": null,
+          "plannedNativeResults": 0,
+          "remainingNativeResults": 32,
+          "withinLimit": true,
+          "canAppend": true,
+          "separateMountFeatures": 0,
+          "unsupportedTypes": [],
+          "incompatibleOperations": []
+        },
+        "availableBuilds": [
+          {
+            "engine": "occ",
+            "engineRevision": "sha256:dd666902fe926d69cc3c8843f5568c2a3e569f38ff49291baa2f248165b5ea99:8d5e537e0d7f9e12b8ae0eaf239c0be1080934ed12a24bf6e7f849c9135ed5a2"
+          },
+          {
+            "engine": "occ",
+            "engineRevision": "sha256:ca349411fc9e27677bf27072497abb22077d80c28e27ef073266966d16b07733:c154a4e04961a9a50108fadcf72eca54169ba4db2e9564d24519f197e0568c2f"
+          },
+          {
+            "engine": "occ",
+            "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637"
+          }
+        ],
+        "revision": "creation:1",
+        "unit": "millimeter",
+        "engine": "occ",
+        "engineRevision": "sha256:ca349411fc9e27677bf27072497abb22077d80c28e27ef073266966d16b07733:c154a4e04961a9a50108fadcf72eca54169ba4db2e9564d24519f197e0568c2f",
+        "profileVersion": 3,
+        "bodyPolicies": [
+          "separate"
+        ],
+        "sourceFaces": [
+          {
+            "faceId": "S:0/SURFACE",
+            "source": "saved"
+          }
+        ],
+        "limits": {
+          "sourceBytes": 65536,
+          "regions": 128,
+          "responseBytes": 65536
+        },
+        "scope": "selected-profile-v3-experimental",
+        "note": "The recorded whole-part backend determines supported regions. Supported source edits use full replay and may require region reselection. Generated-face operations and typed project bindings remain unqualified."
+      }
+    },
+    {
+      "id": "actual-discovery",
+      "result": {
+        "revision": "creation:1",
+        "faceId": "S:1/SURFACE",
+        "sourceDigest": "6675628f8ea34e23022fa30b44213ee87c3aef9ad81fa9aca5e2293fc5aa6086",
+        "depth": 20,
+        "unit": "millimeter",
+        "engine": "occ",
+        "engineRevision": "sha256:ca349411fc9e27677bf27072497abb22077d80c28e27ef073266966d16b07733:c154a4e04961a9a50108fadcf72eca54169ba4db2e9564d24519f197e0568c2f",
+        "profileVersion": 3,
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:1/SURFACE\",\"outer\":[\"S:1/SURFACE/hole\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:1/SURFACE\",\"outer\":[\"S:1/SURFACE/outer0\",\"S:1/SURFACE/outer1\",\"S:1/SURFACE/outer2\",\"S:1/SURFACE/outer3\"],\"holes\":[[\"S:1/SURFACE/hole\"]]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "outer0",
+                "outer1",
+                "outer2",
+                "outer3"
+              ],
+              "holeCurveIds": [
+                [
+                  "hole"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "actual-discovery",
+      "result": {
+        "revision": "creation:1",
+        "faceId": "S:2/SURFACE",
+        "sourceDigest": "6675628f8ea34e23022fa30b44213ee87c3aef9ad81fa9aca5e2293fc5aa6086",
+        "depth": 20,
+        "unit": "millimeter",
+        "engine": "occ",
+        "engineRevision": "sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637",
+        "profileVersion": 2,
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:2/SURFACE\",\"outer\":[\"S:2/SURFACE/hole\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:2/SURFACE\",\"outer\":[\"S:2/SURFACE/outer0\",\"S:2/SURFACE/outer1\",\"S:2/SURFACE/outer2\",\"S:2/SURFACE/outer3\"],\"holes\":[[\"S:2/SURFACE/hole\"]]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "outer0",
+                "outer1",
+                "outer2",
+                "outer3"
+              ],
+              "holeCurveIds": [
+                [
+                  "hole"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "actual-32-hole-discovery",
+      "result": {
+        "revision": "creation:1",
+        "faceId": "S:3/SURFACE",
+        "sourceDigest": "f99d892aff564d1c3502a33d1801cf0968d50408d4f19d6ddedf3b0ae9acd2c6",
+        "depth": 20,
+        "unit": "millimeter",
+        "engine": "occ",
+        "engineRevision": "sha256:ca349411fc9e27677bf27072497abb22077d80c28e27ef073266966d16b07733:c154a4e04961a9a50108fadcf72eca54169ba4db2e9564d24519f197e0568c2f",
+        "profileVersion": 3,
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole0\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole0"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole1\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole1"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole2\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole2"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole3\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole3"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole4\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole4"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole5\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole5"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole6\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole6"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole7\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole7"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole8\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole8"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole9\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole9"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole10\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole10"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole11\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole11"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole12\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole12"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole13\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole13"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole14\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole14"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole15\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole15"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole16\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole16"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole17\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole17"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole18\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole18"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole19\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole19"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole20\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole20"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole21\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole21"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole22\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole22"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole23\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole23"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole24\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole24"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole25\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole25"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole26\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole26"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole27\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole27"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole28\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole28"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole29\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole29"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole30\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole30"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/hole31\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "hole31"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/outer0\",\"S:3/SURFACE/outer1\",\"S:3/SURFACE/outer2\",\"S:3/SURFACE/outer3\"],\"holes\":[[\"S:3/SURFACE/hole0\"],[\"S:3/SURFACE/hole1\"],[\"S:3/SURFACE/hole10\"],[\"S:3/SURFACE/hole11\"],[\"S:3/SURFACE/hole12\"],[\"S:3/SURFACE/hole13\"],[\"S:3/SURFACE/hole14\"],[\"S:3/SURFACE/hole15\"],[\"S:3/SURFACE/hole16\"],[\"S:3/SURFACE/hole17\"],[\"S:3/SURFACE/hole18\"],[\"S:3/SURFACE/hole19\"],[\"S:3/SURFACE/hole2\"],[\"S:3/SURFACE/hole20\"],[\"S:3/SURFACE/hole21\"],[\"S:3/SURFACE/hole22\"],[\"S:3/SURFACE/hole23\"],[\"S:3/SURFACE/hole24\"],[\"S:3/SURFACE/hole25\"],[\"S:3/SURFACE/hole26\"],[\"S:3/SURFACE/hole27\"],[\"S:3/SURFACE/hole28\"],[\"S:3/SURFACE/hole29\"],[\"S:3/SURFACE/hole3\"],[\"S:3/SURFACE/hole30\"],[\"S:3/SURFACE/hole31\"],[\"S:3/SURFACE/hole4\"],[\"S:3/SURFACE/hole5\"],[\"S:3/SURFACE/hole6\"],[\"S:3/SURFACE/hole7\"],[\"S:3/SURFACE/hole8\"],[\"S:3/SURFACE/hole9\"]]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "outer0",
+                "outer1",
+                "outer2",
+                "outer3"
+              ],
+              "holeCurveIds": [
+                [
+                  "hole0"
+                ],
+                [
+                  "hole1"
+                ],
+                [
+                  "hole10"
+                ],
+                [
+                  "hole11"
+                ],
+                [
+                  "hole12"
+                ],
+                [
+                  "hole13"
+                ],
+                [
+                  "hole14"
+                ],
+                [
+                  "hole15"
+                ],
+                [
+                  "hole16"
+                ],
+                [
+                  "hole17"
+                ],
+                [
+                  "hole18"
+                ],
+                [
+                  "hole19"
+                ],
+                [
+                  "hole2"
+                ],
+                [
+                  "hole20"
+                ],
+                [
+                  "hole21"
+                ],
+                [
+                  "hole22"
+                ],
+                [
+                  "hole23"
+                ],
+                [
+                  "hole24"
+                ],
+                [
+                  "hole25"
+                ],
+                [
+                  "hole26"
+                ],
+                [
+                  "hole27"
+                ],
+                [
+                  "hole28"
+                ],
+                [
+                  "hole29"
+                ],
+                [
+                  "hole3"
+                ],
+                [
+                  "hole30"
+                ],
+                [
+                  "hole31"
+                ],
+                [
+                  "hole4"
+                ],
+                [
+                  "hole5"
+                ],
+                [
+                  "hole6"
+                ],
+                [
+                  "hole7"
+                ],
+                [
+                  "hole8"
+                ],
+                [
+                  "hole9"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "fenced-policy"
+    },
+    {
+      "id": "fenced-source"
+    },
+    {
+      "id": "fenced-history"
+    },
+    {
+      "id": "fenced-lifetime"
+    }
+  ]
+}

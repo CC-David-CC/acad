@@ -1,0 +1,25 @@
+{
+  "product": "1c39f4ff2cab0ac07106e9ab9061e8c022b3f654",
+  "sources": {
+    "web/app/cad/parameters/physicalWorkerClient.mjs": "d2703bf80817733f19be8d0cb2a830eb8249fec955deff3f9bf4fde32b2e574b",
+    "modules/engine/extrusion/prismSemanticClient.ts": "b9571b6ec69d829d3034a4f0ff5ce09386f710afb38fc7444478a0d9825269ec",
+    "web/app/sketcher/headless/client.ts": "31c727f0a17efb816c494c9d7800de88b81f1c8691c400fed74baef489c9d207"
+  },
+  "testFiles": {
+    "queued.test.mjs": "922e4b8f6403c6078ffa5072a3ae6f7fef86798e4703e8cd7b1577bebb6c67f8",
+    "webpack.browser.cjs": "5eb52812fb89d6cefb46897d87da300b9a1cb799858a3c537abec3c856fa638b",
+    "browser.cjs": "beb52d8d06060afe09c9ed3a25361d8c4fdad77cd7505404aebace5a5ba98ec0",
+    "observations.test.mjs": "23291448674a9bab149d3456bec7ae4b91768e88d2f1f6537c3cae4b9128aaba",
+    "webpack.cjs": "ed4868a8d5fc5543ca972561d75121ef2d12d4ecd2c6385e0a473c6bd32ebdb5",
+    "run.cjs": "c0a2a2b81cd1d3944b2f3fac11bdfca7e2ef7f55e359102a49f5d359e28208da",
+    "probe.cjs": "ef91435e7697bab24a4a4b46142f0366343c0a88db35fb9c5b12ef20280d0c2f",
+    "entry.ts": "33ec5efe34b75c9baaa571e6119c171529bddd3bf713bb9e075b7ff4775c6c32"
+  },
+  "bundles": {
+    ".build/disposable-client-audit/clients.cjs": "9f79d805196d64b08f7e379840bbf0af3f10ba3cf653bb27d63fb8bf1b59816e",
+    ".build/disposable-client-browser/clients.js": "bde0c711476e3902589c83941c8cd4ec682b9fec10173f2f842e99dfd7be7371"
+  },
+  "actualBrowserReceiptSHA256": "1ed94718fc83ee4c73ea248cc733434f7ee640b63d2232c0ae595fff17f8917b",
+  "typescriptExitCode": 0,
+  "retainedPoolPassed": 15
+}

@@ -1,0 +1,13 @@
+✔ owner-bound operands are private and same exact current model (4.617685ms)
+✔ wrong engine and stale operands fail before dispatch (0.94753ms)
+✔ superseded worker completion closes its candidate and does not return a model (3.212392ms)
+✔ factory provenance validation fails closed and releases the owned mount (1.418744ms)
+✔ mismatched persisted engine build refuses before kernel dispatch (0.434374ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.674676

@@ -1,0 +1,876 @@
+{
+  "scope": "actual sketch/semantic Worker discovery; edit callback is explicit protocol double, no native geometry claim",
+  "lifecycle": {
+    "started": 163,
+    "terminated": 163
+  },
+  "requests": [
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "sketch",
+      "task": "rectangle-extrusion-solve"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    },
+    {
+      "kind": "semantic",
+      "kindRequest": "inspect-selected"
+    }
+  ],
+  "rows": [
+    {
+      "id": "actual-discovery",
+      "report": {
+        "revision": "authored:0:0:1",
+        "regionRevision": "creation:1",
+        "index": 1,
+        "version": 1,
+        "unit": "millimeter",
+        "engine": "occ",
+        "engineRevision": "sha256:dd666902fe926d69cc3c8843f5568c2a3e569f38ff49291baa2f248165b5ea99:8d5e537e0d7f9e12b8ae0eaf239c0be1080934ed12a24bf6e7f849c9135ed5a2",
+        "featureId": 2,
+        "faceId": "S:0/SURFACE",
+        "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/left\"],\"holes\":[]}",
+        "depth": 5,
+        "bodyPolicy": "separate",
+        "currentSourceDigest": "ea0bbde120a657e4012fa83adae02599e5479b0e0e2d1c0fb6118f48526c99b2",
+        "profileVersion": 3,
+        "sourceFrame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        },
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/left\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "left"
+              ],
+              "holeCurveIds": []
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"S:0/SURFACE\",\"outer\":[\"S:0/SURFACE/right\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "right"
+              ],
+              "holeCurveIds": []
+            }
+          }
+        ],
+        "dependencyCompatibility": "requires-full-replay"
+      }
+    },
+    {
+      "id": "protocol-edit-routing",
+      "result": {
+        "changed": true,
+        "revision": "authored:1:0:1",
+        "index": 1,
+        "featureId": 2,
+        "regionId": "sketch-region:{\"faceId\":\"S:1/SURFACE\",\"outer\":[\"S:1/SURFACE/right\"],\"holes\":[]}"
+      },
+      "original": {
+        "version": 1,
+        "unit": "millimeter",
+        "engine": "occ",
+        "engineRevision": "sha256:dd666902fe926d69cc3c8843f5568c2a3e569f38ff49291baa2f248165b5ea99:8d5e537e0d7f9e12b8ae0eaf239c0be1080934ed12a24bf6e7f849c9135ed5a2",
+        "featureId": 2,
+        "faceId": "S:1/SURFACE",
+        "regionId": "sketch-region:{\"faceId\":\"S:1/SURFACE\",\"outer\":[\"S:1/SURFACE/left\"],\"holes\":[]}",
+        "depth": 5,
+        "bodyPolicy": "separate"
+      },
+      "journal": {
+        "document": 1,
+        "revision": 1,
+        "entries": [
+          {
+            "kind": "selected-profile-region",
+            "index": 1,
+            "featureId": 2,
+            "identity": {
+              "version": 1,
+              "unit": "millimeter",
+              "engine": "occ",
+              "engineRevision": "sha256:dd666902fe926d69cc3c8843f5568c2a3e569f38ff49291baa2f248165b5ea99:8d5e537e0d7f9e12b8ae0eaf239c0be1080934ed12a24bf6e7f849c9135ed5a2",
+              "faceId": "S:1/SURFACE",
+              "depth": 5,
+              "bodyPolicy": "separate"
+            },
+            "before": "sketch-region:{\"faceId\":\"S:1/SURFACE\",\"outer\":[\"S:1/SURFACE/left\"],\"holes\":[]}",
+            "after": "sketch-region:{\"faceId\":\"S:1/SURFACE\",\"outer\":[\"S:1/SURFACE/right\"],\"holes\":[]}",
+            "byteSize": 1092
+          }
+        ],
+        "cursor": 1
+      }
+    },
+    {
+      "id": "retained-unsupported",
+      "row": {
+        "regionId": "sketch-region:{\"faceId\":\"S:3/SURFACE\",\"outer\":[\"S:3/SURFACE/outer0\",\"S:3/SURFACE/outer1\",\"S:3/SURFACE/outer2\",\"S:3/SURFACE/outer3\"],\"holes\":[[\"S:3/SURFACE/hole0\"],[\"S:3/SURFACE/hole1\"],[\"S:3/SURFACE/hole2\"],[\"S:3/SURFACE/hole3\"],[\"S:3/SURFACE/hole4\"],[\"S:3/SURFACE/hole5\"],[\"S:3/SURFACE/hole6\"],[\"S:3/SURFACE/hole7\"],[\"S:3/SURFACE/hole8\"]]}",
+        "support": "unsupported",
+        "reason": {
+          "code": "INVALID_REQUEST",
+          "message": "Invalid bounded profile array."
+        },
+        "descriptor": {
+          "outerCurveIds": [
+            "outer0",
+            "outer1",
+            "outer2",
+            "outer3"
+          ],
+          "holeCurveIds": [
+            [
+              "hole0"
+            ],
+            [
+              "hole1"
+            ],
+            [
+              "hole2"
+            ],
+            [
+              "hole3"
+            ],
+            [
+              "hole4"
+            ],
+            [
+              "hole5"
+            ],
+            [
+              "hole6"
+            ],
+            [
+              "hole7"
+            ],
+            [
+              "hole8"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "cost-policy",
+      "before": {
+        "scope": "selected-owned-evaluation-v1",
+        "maxLifetimeNames": 32,
+        "maxCumulativeResultTriangles": 100000,
+        "supported": true,
+        "compatible": true,
+        "reason": null,
+        "plannedNativeResults": 32,
+        "remainingNativeResults": 0,
+        "withinLimit": true,
+        "canAppend": false,
+        "separateMountFeatures": 0,
+        "unsupportedTypes": [],
+        "incompatibleOperations": []
+      },
+      "after": {
+        "scope": "selected-owned-evaluation-v1",
+        "maxLifetimeNames": 32,
+        "maxCumulativeResultTriangles": 100000,
+        "supported": true,
+        "compatible": true,
+        "reason": null,
+        "plannedNativeResults": 32,
+        "remainingNativeResults": 0,
+        "withinLimit": true,
+        "canAppend": false,
+        "separateMountFeatures": 0,
+        "unsupportedTypes": [],
+        "incompatibleOperations": []
+      }
+    },
+    {
+      "id": "actual-response-fenced-journal"
+    },
+    {
+      "id": "actual-response-fenced-creation"
+    },
+    {
+      "id": "actual-response-fenced-source"
+    },
+    {
+      "id": "actual-response-fenced-frame"
+    },
+    {
+      "id": "actual-response-fenced-plane"
+    },
+    {
+      "id": "actual-response-fenced-params"
+    },
+    {
+      "id": "actual-response-fenced-history"
+    },
+    {
+      "id": "actual-response-fenced-typed"
+    },
+    {
+      "id": "actual-response-fenced-host"
+    },
+    {
+      "id": "actual-response-fenced-cancel"
+    },
+    {
+      "id": "source-digest-not-region-id",
+      "before": "ea0bbde120a657e4012fa83adae02599e5479b0e0e2d1c0fb6118f48526c99b2",
+      "after": "1b4e445d5ce25d31b6ed0220d4110ddc924cdbd419f02cefd52dc90818dd9c16"
+    },
+    {
+      "id": "protocol-rejection-propagation",
+      "note": "Routing only; actual native suffix compatibility requires root integration"
+    }
+  ]
+}

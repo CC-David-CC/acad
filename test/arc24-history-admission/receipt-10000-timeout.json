@@ -1,0 +1,11 @@
+{
+  "bytes": 767961,
+  "history": 10000,
+  "keys": 10001,
+  "keysMs": 1,
+  "elapsedMs": 51687.59999990463,
+  "maxOtherGap": 47497.5,
+  "outcome": "Error: The project rebuild timed out.",
+  "otherReady": true,
+  "appHash": "9993b01af9f49ca29aa2eceaa1701489aef01c992ee3a3b38a1a0799f87a9c28"
+}

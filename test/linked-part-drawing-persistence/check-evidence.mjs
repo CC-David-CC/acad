@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+const read=p=>readFileSync(new URL(p,import.meta.url),'utf8');
+const r1=JSON.parse(read('evidence-r1/receipt.json')),r2=JSON.parse(read('evidence-r2/receipt.json'));
+assert.equal(r1.status,1);assert.equal(r2.status,0);assert(r1.sourceUnchanged&&r2.sourceUnchanged);
+const sourcePath='test/linked-part-drawing-persistence/before.test.mjs',source=read('before.test.mjs');
+const sha=x=>createHash('sha256').update(x).digest('hex');
+assert.equal(sha(source),r2.before[sourcePath]);
+const first=source.replace('assert.deepEqual(JSON.parse(JSON.stringify(captured)),source);assert.equal(Object.getPrototypeOf(captured),null);','assert.deepEqual(captured,source);');
+assert.notEqual(first,source);assert.equal(sha(first),r1.before[sourcePath]);
+for(const [path,hash] of Object.entries(r1.before))if(path!==sourcePath)assert.equal(r2.before[path],hash,path+' unexpectedly changed');
+assert.match(read('evidence-r1/test.log'),/tests 11/);assert.match(read('evidence-r1/test.log'),/fail 1/);assert.match(read('evidence-r1/test.log'),/Object: null prototype/);
+assert.match(read('evidence-r2/test.log'),/tests 11/);assert.match(read('evidence-r2/test.log'),/pass 11/);assert.match(read('evidence-r2/test.log'),/fail 0/);
+console.log('PASS: 11 BEFORE observations; R1 harness correction exact; production/Worker hashes unchanged across runs.');

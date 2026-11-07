@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "source": "9b88a776698c65d6a2a3a0abde405b94f4f0e37d",
+  "layer": "synthetic-exact-source-method-no-model-evaluation",
+  "functionSha256": "8de4b028231c1f8cadbc6594ad990980ccfa2e292f451f2d6c93015a4229e43f",
+  "detachedArray": true,
+  "aliasedOperationRecord": true,
+  "transientDepthObserved": 30,
+  "finalDepth": 20,
+  "finalSignatureUnchanged": true,
+  "scope": "Prepared replay input aliases mutable accepted operation records. Demonstrates source ownership gap only; no actual candidate model or publication was executed."
+}

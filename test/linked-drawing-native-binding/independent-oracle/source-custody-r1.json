@@ -1,0 +1,55 @@
+{
+  "scope": "Read-only Git object custody addendum after the one complete artifact oracle. No artifact rerun.",
+  "allFrozenSourcePinsMatch": false,
+  "producerBeforeAfterPinsEqual": true,
+  "sources": [
+    {
+      "relativePath": "test/linked-drawing-native-binding/desktop-driver.mjs",
+      "repository": "core",
+      "runtimeSource": "15c0f1fb969e8e87d33868042d7f75dd11c29cd6",
+      "expectedSha256": "5fed740501df93018e85d12f9eb66f12eaa678fb143de708b8e52415e9a2f035",
+      "frozenCommitSha256": "87e312a9449aa3b7ed2a73d34e93a355e535adbb76f11b17259e2158cd4f46e2",
+      "frozenCommitMatches": false,
+      "currentPathSha256": "5fed740501df93018e85d12f9eb66f12eaa678fb143de708b8e52415e9a2f035",
+      "currentPathMatches": true,
+      "frozenBytes": 24641,
+      "currentBytes": 24732
+    },
+    {
+      "relativePath": "test/linked-drawing-native-binding/README.md",
+      "repository": "core",
+      "runtimeSource": "15c0f1fb969e8e87d33868042d7f75dd11c29cd6",
+      "expectedSha256": "44629c05028d5690a8af6dd5649c21538e9c72e61b2815e8ddaab9d0179fe50d",
+      "frozenCommitSha256": "44629c05028d5690a8af6dd5649c21538e9c72e61b2815e8ddaab9d0179fe50d",
+      "frozenCommitMatches": true,
+      "currentPathSha256": "44629c05028d5690a8af6dd5649c21538e9c72e61b2815e8ddaab9d0179fe50d",
+      "currentPathMatches": true,
+      "frozenBytes": 4293,
+      "currentBytes": 4293
+    },
+    {
+      "relativePath": "test/agent-cad-corpus/sweep/signed-harness.mjs",
+      "repository": "desktop",
+      "runtimeSource": "0e348d61774762a9c5580f9c3629acdbd53fd1c0",
+      "expectedSha256": "618ed682501cbf3ac76a9d0af395a394717ad67f10eaf01c3bef97dedd42ac2c",
+      "frozenCommitSha256": "618ed682501cbf3ac76a9d0af395a394717ad67f10eaf01c3bef97dedd42ac2c",
+      "frozenCommitMatches": true,
+      "currentPathSha256": "0ea0b0c77cc35740276b398c6021578f6b7f4033953964c8df386f10f93303b5",
+      "currentPathMatches": false,
+      "frozenBytes": 13537,
+      "currentBytes": 14525
+    },
+    {
+      "relativePath": "test/agent-cad-corpus/strict-join/oracle.mjs",
+      "repository": "desktop",
+      "runtimeSource": "0e348d61774762a9c5580f9c3629acdbd53fd1c0",
+      "expectedSha256": "acd45c6f4ea820a324f5956749db734eb96048a687f56e8a01bd37c8439271fc",
+      "frozenCommitSha256": "acd45c6f4ea820a324f5956749db734eb96048a687f56e8a01bd37c8439271fc",
+      "frozenCommitMatches": true,
+      "currentPathSha256": "acd45c6f4ea820a324f5956749db734eb96048a687f56e8a01bd37c8439271fc",
+      "currentPathMatches": true,
+      "frozenBytes": 3726,
+      "currentBytes": 3726
+    }
+  ]
+}

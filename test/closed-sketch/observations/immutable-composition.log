@@ -1,0 +1,1 @@
+PASS composed plate/enclosure edit, invalid preservation, undo/redo, reopen and worker termination {"counts":{"made":13,"ended":13,"max":2},"usage":{"owners":1,"mounts":0,"candidates":0,"accepted":0,"detached":1,"cleanupFailed":false}}

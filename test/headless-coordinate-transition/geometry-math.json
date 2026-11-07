@@ -1,0 +1,7 @@
+{
+  "status": "pass",
+  "scope": "Independent finite/radius/distance and unrelated-geometry assertions on exact passing real Worker receipt; no runtime rerun",
+  "receiptSha256": "c24be3aeed7034cb0e39698f27032ac523439638070068e0a2f04abfe5cb4018",
+  "checkedPrimitiveObjects": 32,
+  "unchangedUnrelatedObjects": 16
+}

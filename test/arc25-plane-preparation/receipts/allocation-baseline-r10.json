@@ -1,0 +1,79 @@
+{
+  "fixtureBytes": 151959,
+  "counts": {
+    "rewind": {
+      "nurbsFactoryCalls": 2000,
+      "nurbsFactoryMs": 5.700000286102295,
+      "dropGeometry": {
+        "calls": 3000,
+        "beforeMaterial": 0,
+        "meshPresent": 2000,
+        "ms": 15.799997806549072
+      },
+      "updateBounds": {
+        "calls": 1000,
+        "beforeMaterial": 0,
+        "meshPresent": 0,
+        "ms": 42.90000057220459
+      },
+      "createGeometry": {
+        "calls": 1000,
+        "beforeMaterial": 0,
+        "meshPresent": 0,
+        "ms": 13.999998807907104
+      },
+      "elapsedMs": 378.60000014305115,
+      "models": 1000,
+      "history": 2000,
+      "rootViews": 1000,
+      "faceViews": 1000,
+      "previousRootsReleased": true,
+      "previousFacesReleased": true,
+      "firstRootAttributeObservers": 1,
+      "firstFaceAttributeObservers": 1
+    },
+    "full": {
+      "nurbsFactoryCalls": 4000,
+      "nurbsFactoryMs": 7.899999618530273,
+      "dropGeometry": {
+        "calls": 3000,
+        "beforeMaterial": 0,
+        "meshPresent": 1000,
+        "ms": 1.0999999046325684
+      },
+      "updateBounds": {
+        "calls": 2000,
+        "beforeMaterial": 0,
+        "meshPresent": 0,
+        "ms": 96.10000085830688
+      },
+      "createGeometry": {
+        "calls": 2000,
+        "beforeMaterial": 0,
+        "meshPresent": 0,
+        "ms": 53.70000219345093
+      },
+      "elapsedMs": 517.0999999046326,
+      "models": 2000,
+      "history": 2000,
+      "rootViews": 2000,
+      "faceViews": 2000,
+      "previousRootsReleased": true,
+      "previousFacesReleased": true,
+      "firstRootAttributeObservers": 1,
+      "firstFaceAttributeObservers": 1
+    }
+  },
+  "selection": {
+    "id": "S:0",
+    "registered": true,
+    "marked": true,
+    "viewMarked": true
+  },
+  "historyUnchanged": true,
+  "sourceUnchanged": true,
+  "pointer": 1999,
+  "appHash": "fa1ba70a9c6a38744706e7f5557d794b743ca8288b1ed034f9f34e40d679132e",
+  "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'",
+  "base": "http://127.0.0.1:20600/"
+}

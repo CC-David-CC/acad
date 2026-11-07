@@ -1,0 +1,926 @@
+{
+  "scope": "Actual manager and real CPU Workers; post-real-terminate faults, stale/cancel controls; metadata publication AST guard",
+  "rows": [
+    {
+      "kind": "validation",
+      "fault": "null",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 0,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Project Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null"
+      },
+      "lateSettled": true,
+      "heldMessages": [],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "validation",
+      "fault": "undefined",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 0,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Project Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null"
+      },
+      "lateSettled": true,
+      "heldMessages": [],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "validation",
+      "fault": "zero",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 0,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Project Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null"
+      },
+      "lateSettled": true,
+      "heldMessages": [],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "validation",
+      "fault": "false",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 0,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Project Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null"
+      },
+      "lateSettled": true,
+      "heldMessages": [],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "validation",
+      "fault": "empty",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 0,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Project Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null"
+      },
+      "lateSettled": true,
+      "heldMessages": [],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash",
+      "fault": "null",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Hash Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "newWorkers": 0
+      },
+      "heldMessages": [],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash",
+      "fault": "undefined",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Hash Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "newWorkers": 0
+      },
+      "heldMessages": [],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash",
+      "fault": "zero",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Hash Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "newWorkers": 0
+      },
+      "heldMessages": [],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash",
+      "fault": "false",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Hash Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "newWorkers": 0
+      },
+      "heldMessages": [],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash",
+      "fault": "empty",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Hash Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "newWorkers": 0
+      },
+      "heldMessages": [],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash-abort",
+      "fault": "null",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Hash Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": {
+            "name": "Error",
+            "message": "Hash cancelled"
+          }
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "newWorkers": 0
+      },
+      "heldMessages": [
+        {
+          "type": "ready"
+        }
+      ],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash-abort",
+      "fault": "undefined",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Hash Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": {
+            "name": "Error",
+            "message": "Hash cancelled"
+          }
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "newWorkers": 0
+      },
+      "heldMessages": [
+        {
+          "type": "ready"
+        }
+      ],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash-abort",
+      "fault": "zero",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Hash Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": {
+            "name": "Error",
+            "message": "Hash cancelled"
+          }
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "newWorkers": 0
+      },
+      "heldMessages": [
+        {
+          "type": "ready"
+        }
+      ],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash-abort",
+      "fault": "false",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Hash Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": {
+            "name": "Error",
+            "message": "Hash cancelled"
+          }
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "newWorkers": 0
+      },
+      "heldMessages": [
+        {
+          "type": "ready"
+        }
+      ],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash-abort",
+      "fault": "empty",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Hash Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": {
+            "name": "Error",
+            "message": "Hash cancelled"
+          }
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "subsequent": {
+        "resolved": false,
+        "code": "WORKER_CLEANUP_FAILED",
+        "causeExact": true,
+        "newWorkers": 0
+      },
+      "heldMessages": [
+        {
+          "type": "ready"
+        }
+      ],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "validation-abort",
+      "fault": "none",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 0,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": true
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "null"
+      },
+      "lateSettled": true,
+      "heldMessages": [
+        {
+          "progress": "started"
+        }
+      ],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "validation-abort",
+      "fault": "error",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 0,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "code": "WORKER_CLEANUP_FAILED",
+          "name": "Error",
+          "message": "Project Worker cleanup failed; reload this client module before evaluating again.",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null"
+      },
+      "lateSettled": true,
+      "heldMessages": [
+        {
+          "progress": "started"
+        }
+      ],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash-abort",
+      "fault": "none",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "name": "Error",
+          "message": "Hash cancelled",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 2
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "heldMessages": [
+        {
+          "type": "ready"
+        }
+      ],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "validation-stale",
+      "fault": "none",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 0,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 0
+        },
+        "material": "null",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": true
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "null"
+      },
+      "lateSettled": true,
+      "heldMessages": [
+        {
+          "progress": "started"
+        }
+      ],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    },
+    {
+      "kind": "hash-stale",
+      "fault": "none",
+      "scope": "Actual manager/client + real CPU Workers, injected post-real-termination fault, no geometry/public app claim",
+      "before": {
+        "workers": {
+          "validation": 1,
+          "hash": 0,
+          "geometry": 0,
+          "terminated": 1
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}",
+        "projectAbortListeners": 0
+      },
+      "after": {
+        "settled": true,
+        "outcome": {
+          "resolved": false,
+          "name": "Error",
+          "message": "Project changed while hashing",
+          "causeExact": true,
+          "originalExact": false,
+          "operationError": null
+        },
+        "termCalls": 1,
+        "projectAbortListeners": 0,
+        "callerAbortListeners": 0,
+        "workers": {
+          "validation": 1,
+          "hash": 1,
+          "geometry": 0,
+          "terminated": 2
+        },
+        "material": "{\"version\":1,\"unit\":\"millimeter\",\"revision\":\"sha256-6a1336987f63eb1b957f44f497a595cd70042f11dcaad9abf879500746639308\",\"materials\":[],\"appearances\":[],\"bindings\":[],\"objects\":[]}"
+      },
+      "lateSettled": true,
+      "heldMessages": [
+        {
+          "type": "ready"
+        }
+      ],
+      "actualTerminationAttempts": 1,
+      "uncaught": []
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "status": "REPRODUCED_OLD_CROSS_KIND_ACCEPTANCE",
+  "scope": "Actual full Git-source pure journal execution only; no CAD/kernel/browser operation",
+  "sourceCommit": "971fd8ea1",
+  "sourceSHA256": "f83454cbe2933e2703149f186c112c93b047199d7fa1a1284bb85acb0aea674d",
+  "actualEntryKind": "selected-profile-depth",
+  "wrongTravelHelper": "planExtrusionTravel",
+  "returnedDepth": 3
+}

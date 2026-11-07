@@ -1,0 +1,257 @@
+{
+  "app": "e8d809e7f6775c0e0e331ab874d3197e7ab61c4f231e349401ef597719c3ed65",
+  "pins": {
+    "app": "e8d809e7f6775c0e0e331ab874d3197e7ab61c4f231e349401ef597719c3ed65",
+    "worker": "3e1b41242e8f4a279d7598ab75675380d5cc124f925e2469a74d03e330debf91"
+  },
+  "workers": [
+    {
+      "started": 28,
+      "terminated": 28
+    },
+    {
+      "started": 0,
+      "terminated": 0
+    },
+    {
+      "started": 5,
+      "terminated": 5
+    }
+  ],
+  "result": {
+    "plane": {
+      "featureId": 1,
+      "faceId": "S:0/SURFACE",
+      "unit": "millimeter",
+      "persistence": "volatile-workspace",
+      "revision": "e6b31e61-81b6-4926-b261-36b7779c8ded"
+    },
+    "ids": {
+      "point": "agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd",
+      "segment": "agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4",
+      "circle": "agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56",
+      "arc": "agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00"
+    },
+    "found": {
+      "revision": "788540ae-bd06-4ec5-a635-c8b1bf6af606",
+      "faceId": "S:0/SURFACE",
+      "objects": [
+        {
+          "id": "agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd",
+          "type": "Point",
+          "role": null,
+          "stage": 0
+        },
+        {
+          "id": "agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4",
+          "type": "Segment",
+          "role": null,
+          "stage": 0
+        },
+        {
+          "id": "agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56",
+          "type": "Circle",
+          "role": null,
+          "stage": 0
+        },
+        {
+          "id": "agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00",
+          "type": "Arc",
+          "role": null,
+          "stage": 0
+        }
+      ],
+      "points": [
+        {
+          "id": "agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd",
+          "parentId": "agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4:A",
+          "parentId": "agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4",
+          "x": 10,
+          "y": 0
+        },
+        {
+          "id": "agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4:B",
+          "parentId": "agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4",
+          "x": 20,
+          "y": 0
+        },
+        {
+          "id": "agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56:C",
+          "parentId": "agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56",
+          "x": 30,
+          "y": 10
+        }
+      ],
+      "constraints": [],
+      "stageCount": 1,
+      "boundaryFrame": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "emptyBoundary": true
+    },
+    "noop": {
+      "changed": false,
+      "faceId": "S:0/SURFACE",
+      "point": {
+        "id": "agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd",
+        "x": 0,
+        "y": 0
+      },
+      "revision": "788540ae-bd06-4ec5-a635-c8b1bf6af606",
+      "persistence": "volatile-workspace",
+      "authoredUndo": false,
+      "manufacturingAssignments": "unchanged"
+    },
+    "beforeNoop": {
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":20,\"y\":0}}},{\"id\":\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":10},\"r\":5}},{\"id\":\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":30},\"b\":{\"x\":0,\"y\":40},\"c\":{\"x\":0,\"y\":30}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+      "journal": "{\"revision\":\"1:4:ef7c5cba-4fcf-48ca-ae1a-9a9629004898\",\"canUndo\":true,\"canRedo\":false,\"undoTarget\":{\"kind\":\"sketch-bytes\",\"faceId\":\"S:0/SURFACE\"},\"redoTarget\":null}"
+    },
+    "afterNoop": {
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":20,\"y\":0}}},{\"id\":\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":30,\"y\":10},\"r\":5}},{\"id\":\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":30},\"b\":{\"x\":0,\"y\":40},\"c\":{\"x\":0,\"y\":30}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+      "journal": "{\"revision\":\"1:4:ef7c5cba-4fcf-48ca-ae1a-9a9629004898\",\"canUndo\":true,\"canRedo\":false,\"undoTarget\":{\"kind\":\"sketch-bytes\",\"faceId\":\"S:0/SURFACE\"},\"redoTarget\":null}"
+    },
+    "noopSameModels": true,
+    "segmentBefore": {
+      "a": {
+        "x": 10,
+        "y": 0
+      },
+      "b": {
+        "x": 20,
+        "y": 0
+      }
+    },
+    "segmentAfter": {
+      "a": {
+        "x": 11,
+        "y": 2
+      },
+      "b": {
+        "x": 20,
+        "y": 0
+      }
+    },
+    "centerAfter": {
+      "c": {
+        "x": 35,
+        "y": 12
+      },
+      "r": 5
+    },
+    "arcResult": {
+      "changed": true,
+      "faceId": "S:0/SURFACE",
+      "dimension": {
+        "id": "agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00",
+        "typeId": "DiameterLength",
+        "diameter": 14,
+        "status": "accepted"
+      },
+      "revision": "eb45719d-0445-4201-b078-f0494d9d6953",
+      "persistence": "volatile-workspace",
+      "authoredUndo": true,
+      "manufacturingAssignments": "review-if-present"
+    },
+    "beforeArc": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":11,\"y\":2},\"b\":{\"x\":20,\"y\":0}}},{\"id\":\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":35,\"y\":12},\"r\":6}},{\"id\":\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":30},\"b\":{\"x\":0,\"y\":40},\"c\":{\"x\":0,\"y\":30}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\"],\"constants\":{\"diameter\":12},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "afterArc": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":11,\"y\":2},\"b\":{\"x\":20,\"y\":0}}},{\"id\":\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":35,\"y\":12},\"r\":6}},{\"id\":\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":8.392762242915573,\"y\":30.050502232421962},\"b\":{\"x\":0.050502232421960086,\"y\":38.39276224291557},\"c\":{\"x\":1.5567355246624666,\"y\":31.55673552466247}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\"],\"constants\":{\"diameter\":12},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"DiameterLength\",\"objects\":[\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\"],\"constants\":{\"diameter\":14},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "geometry": [
+      {
+        "id": "agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56",
+        "type": "Circle",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "c": {
+            "x": 35,
+            "y": 12
+          },
+          "r": 6
+        }
+      },
+      {
+        "id": "agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00",
+        "type": "Arc",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": 8.392762242915573,
+            "y": 30.050502232421962
+          },
+          "b": {
+            "x": 0.050502232421960086,
+            "y": 38.39276224291557
+          },
+          "c": {
+            "x": 1.5567355246624666,
+            "y": 31.55673552466247
+          }
+        }
+      }
+    ],
+    "undo": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":11,\"y\":2},\"b\":{\"x\":20,\"y\":0}}},{\"id\":\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":35,\"y\":12},\"r\":6}},{\"id\":\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":30},\"b\":{\"x\":0,\"y\":40},\"c\":{\"x\":0,\"y\":30}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\"],\"constants\":{\"diameter\":12},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "redo": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":11,\"y\":2},\"b\":{\"x\":20,\"y\":0}}},{\"id\":\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":35,\"y\":12},\"r\":6}},{\"id\":\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":8.392762242915573,\"y\":30.050502232421962},\"b\":{\"x\":0.050502232421960086,\"y\":38.39276224291557},\"c\":{\"x\":1.5567355246624666,\"y\":31.55673552466247}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\"],\"constants\":{\"diameter\":12},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"DiameterLength\",\"objects\":[\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\"],\"constants\":{\"diameter\":14},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+    "prior": {
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":11,\"y\":2},\"b\":{\"x\":20,\"y\":0}}},{\"id\":\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":35,\"y\":12},\"r\":6}},{\"id\":\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":8.392762242915573,\"y\":30.050502232421962},\"b\":{\"x\":0.050502232421960086,\"y\":38.39276224291557},\"c\":{\"x\":1.5567355246624666,\"y\":31.55673552466247}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\"],\"constants\":{\"diameter\":12},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"DiameterLength\",\"objects\":[\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\"],\"constants\":{\"diameter\":14},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+      "journal": "{\"revision\":\"1:10:fa021ca0-0868-4159-8245-660aa76d4967\",\"canUndo\":true,\"canRedo\":false,\"undoTarget\":{\"kind\":\"sketch-bytes\",\"faceId\":\"S:0/SURFACE\"},\"redoTarget\":null}"
+    },
+    "conflict": {
+      "accepted": false,
+      "name": "Error",
+      "code": "INVALID",
+      "message": "The diameter conflicts with existing constraints."
+    },
+    "afterConflict": {
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-fbffaf00-b221-4407-8c97-ae883d1957dd\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":0,\"y\":0}},{\"id\":\"agent-primitive-ff346df2-b616-4931-b2a8-19089e3cefe4\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":11,\"y\":2},\"b\":{\"x\":20,\"y\":0}}},{\"id\":\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":35,\"y\":12},\"r\":6}},{\"id\":\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\",\"type\":\"Arc\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":8.392762242915573,\"y\":30.050502232421962},\"b\":{\"x\":0.050502232421960086,\"y\":38.39276224291557},\"c\":{\"x\":1.5567355246624666,\"y\":31.55673552466247}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[{\"typeId\":\"DiameterLength\",\"objects\":[\"agent-primitive-4d81d5f9-0e24-4804-b3fc-ad5c351d9f56\"],\"constants\":{\"diameter\":12},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}},{\"typeId\":\"DiameterLength\",\"objects\":[\"agent-primitive-109525d3-7ba0-43a5-a557-28560457dd00\"],\"constants\":{\"diameter\":14},\"stage\":0,\"annotations\":[{\"angle\":0.7853981633974483}],\"admission\":{\"version\":1,\"state\":\"accepted\"}}],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+      "journal": "{\"revision\":\"1:10:fa021ca0-0868-4159-8245-660aa76d4967\",\"canUndo\":true,\"canRedo\":false,\"undoTarget\":{\"kind\":\"sketch-bytes\",\"faceId\":\"S:0/SURFACE\"},\"redoTarget\":null}"
+    },
+    "conflictSameModels": true
+  },
+  "restored": true,
+  "held": {
+    "success": true,
+    "outcome": {
+      "ok": false,
+      "name": "AbortError",
+      "committed": false
+    },
+    "terminated": 2,
+    "before": {
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-c4fc9b87-ddab-4325-a2ec-4d8ea4d2382c\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":1,\"y\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}"
+    },
+    "after": {
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-c4fc9b87-ddab-4325-a2ec-4d8ea4d2382c\",\"type\":\"Point\",\"role\":null,\"stage\":0,\"data\":{\"x\":1,\"y\":2}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "history": "{\"history\":[{\"params\":{\"datum\":null,\"depth\":0,\"featureId\":\"1\",\"orientation\":\"XY\"},\"type\":\"PLANE\"}],\"pointer\":0}",
+      "sameModels": true
+    }
+  }
+}

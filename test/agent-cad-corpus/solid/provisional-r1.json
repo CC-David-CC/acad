@@ -1,0 +1,3418 @@
+{
+  "version": 1,
+  "source": "4a3d7aba4",
+  "scope": "actual registered craft commands, fresh context per case, synthetic host lifetime; triangle-derived measurements, direct local fixture; not signed desktop commands",
+  "records": [
+    {
+      "engine": "occ",
+      "case": "box",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "occ",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "overlap-union",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            15,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "volume": 1500,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                15,
+                10,
+                10
+              ]
+            ],
+            "triangles": 28,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "occ"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "occ",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "overlap-subtract",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "volume": 499.99999999999994,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                5,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "occ"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "occ",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "overlap-common",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            5,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "volume": 499.99999999999994,
+            "bounds": [
+              [
+                5,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "occ"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "occ",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "disjoint-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: EMPTY_OR_NON_SOLID_UNSUPPORTED",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "name": "EngineContractError",
+        "message": "OCC returned no faces; this mount does not support empty or non-solid results",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                20,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                20,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "face-contact-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: EMPTY_OR_NON_SOLID_UNSUPPORTED",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "name": "EngineContractError",
+        "message": "OCC returned no faces; this mount does not support empty or non-solid results",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                10,
+                0,
+                0
+              ],
+              [
+                20,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                10,
+                0,
+                0
+              ],
+              [
+                20,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "edge-contact-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: EMPTY_OR_NON_SOLID_UNSUPPORTED",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "name": "EngineContractError",
+        "message": "OCC returned no faces; this mount does not support empty or non-solid results",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                10,
+                10,
+                0
+              ],
+              [
+                20,
+                20,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                10,
+                10,
+                0
+              ],
+              [
+                20,
+                20,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "point-contact-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: EMPTY_OR_NON_SOLID_UNSUPPORTED",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "name": "EngineContractError",
+        "message": "OCC returned no faces; this mount does not support empty or non-solid results",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "occ",
+            "volume": 1000,
+            "bounds": [
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                20,
+                20,
+                20
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "occ",
+            "volume": 1000,
+            "bounds": [
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                20,
+                20,
+                20
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "coincident-subtract",
+      "status": "unsupported",
+      "reason": "empty result refusal: EMPTY_OR_NON_SOLID_UNSUPPORTED",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "name": "EngineContractError",
+        "message": "OCC returned no faces; this mount does not support empty or non-solid results",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "face-contact-union",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "volume": 1999.9999999999998,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                20,
+                10,
+                10
+              ]
+            ],
+            "triangles": 20,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "occ"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "occ",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "disjoint-union",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds and component count",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            30,
+            10,
+            10
+          ]
+        ],
+        "components": 2
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "occ",
+            "volume": 2000.0000000000002,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 24,
+            "components": 2
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "occ"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "occ",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "multi-body",
+      "status": "pass",
+      "reason": "two independent bodies",
+      "expected": {
+        "bodies": 2
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                20,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "occ",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "small-box",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1e-9,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.001,
+            0.001,
+            0.001
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 1.0000001424923606e-9,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0.0010000000474974513,
+                0.0010000000474974513,
+                0.0010000000474974513
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "occ",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "large-box",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1000000000000000,
+        "bounds": [
+          [
+            100000,
+            0,
+            0
+          ],
+          [
+            200000,
+            100000,
+            100000
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999999999999999.9,
+            "bounds": [
+              [
+                100000,
+                0,
+                0
+              ],
+              [
+                200000,
+                100000,
+                100000
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "occ"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "occ",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "zero-box",
+      "status": "pass",
+      "reason": "rejected",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "INVALID_REQUEST",
+        "name": "Error",
+        "message": "Invalid solid coordinate.",
+        "after": []
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "negative-box",
+      "status": "pass",
+      "reason": "rejected",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "INVALID_REQUEST",
+        "name": "Error",
+        "message": "Invalid solid coordinate.",
+        "after": []
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "cross-engine",
+      "status": "pass",
+      "reason": "rejected",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "ENGINE_MISMATCH",
+        "name": "Error",
+        "message": "Mixed engine candidates are not supported.",
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "occ",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "box",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "manifold",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "overlap-union",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            15,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "volume": 1500,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                15,
+                10,
+                10
+              ]
+            ],
+            "triangles": 28,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "manifold"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "manifold",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "overlap-subtract",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "volume": 499.99999999999994,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                5,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "manifold"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "manifold",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "overlap-common",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            5,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "volume": 499.99999999999994,
+            "bounds": [
+              [
+                5,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "manifold"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "manifold",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "disjoint-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: UNSUPPORTED_CASE",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "UNSUPPORTED_CASE",
+        "name": "Error",
+        "message": "Empty or larger than 512-triangle solid display is not supported.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                20,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                20,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "face-contact-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: UNSUPPORTED_CASE",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "UNSUPPORTED_CASE",
+        "name": "Error",
+        "message": "Empty or larger than 512-triangle solid display is not supported.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "manifold",
+            "volume": 1000,
+            "bounds": [
+              [
+                10,
+                0,
+                0
+              ],
+              [
+                20,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "manifold",
+            "volume": 1000,
+            "bounds": [
+              [
+                10,
+                0,
+                0
+              ],
+              [
+                20,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "edge-contact-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: UNSUPPORTED_CASE",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "UNSUPPORTED_CASE",
+        "name": "Error",
+        "message": "Empty or larger than 512-triangle solid display is not supported.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "manifold",
+            "volume": 1000,
+            "bounds": [
+              [
+                10,
+                10,
+                0
+              ],
+              [
+                20,
+                20,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "manifold",
+            "volume": 1000,
+            "bounds": [
+              [
+                10,
+                10,
+                0
+              ],
+              [
+                20,
+                20,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "point-contact-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: UNSUPPORTED_CASE",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "UNSUPPORTED_CASE",
+        "name": "Error",
+        "message": "Empty or larger than 512-triangle solid display is not supported.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999998,
+            "bounds": [
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                20,
+                20,
+                20
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999998,
+            "bounds": [
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                20,
+                20,
+                20
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "coincident-subtract",
+      "status": "unsupported",
+      "reason": "empty result refusal: UNSUPPORTED_CASE",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "UNSUPPORTED_CASE",
+        "name": "Error",
+        "message": "Empty or larger than 512-triangle solid display is not supported.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "face-contact-union",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "volume": 2000.0000000000002,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                20,
+                10,
+                10
+              ]
+            ],
+            "triangles": 20,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "manifold"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "manifold",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "disjoint-union",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds and component count",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            30,
+            10,
+            10
+          ]
+        ],
+        "components": 2
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "manifold",
+            "volume": 2000.0000000000005,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 24,
+            "components": 2
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "manifold"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "manifold",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "multi-body",
+      "status": "pass",
+      "reason": "two independent bodies",
+      "expected": {
+        "bodies": 2
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                20,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "manifold",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "small-box",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1e-9,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.001,
+            0.001,
+            0.001
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 1.0000001424923606e-9,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0.0010000000474974513,
+                0.0010000000474974513,
+                0.0010000000474974513
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "manifold",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "large-box",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1000000000000000,
+        "bounds": [
+          [
+            100000,
+            0,
+            0
+          ],
+          [
+            200000,
+            100000,
+            100000
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 1000000000000000,
+            "bounds": [
+              [
+                100000,
+                0,
+                0
+              ],
+              [
+                200000,
+                100000,
+                100000
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "manifold"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "manifold",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "zero-box",
+      "status": "pass",
+      "reason": "rejected",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "INVALID_REQUEST",
+        "name": "Error",
+        "message": "Invalid solid coordinate.",
+        "after": []
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "negative-box",
+      "status": "pass",
+      "reason": "rejected",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "INVALID_REQUEST",
+        "name": "Error",
+        "message": "Invalid solid coordinate.",
+        "after": []
+      }
+    },
+    {
+      "engine": "manifold",
+      "case": "cross-engine",
+      "status": "pass",
+      "reason": "rejected",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "ENGINE_MISMATCH",
+        "name": "Error",
+        "message": "Mixed engine candidates are not supported.",
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "manifold",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "box",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "smlib",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "overlap-union",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            15,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "volume": 1500,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                15,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "smlib"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "smlib",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "overlap-subtract",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "volume": 499.99999999999994,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                5,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "smlib"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "smlib",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "overlap-common",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 500,
+        "bounds": [
+          [
+            5,
+            0,
+            0
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "volume": 500.00000000000006,
+            "bounds": [
+              [
+                5,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "smlib"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "smlib",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "disjoint-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: EMPTY_OR_NON_SOLID_UNSUPPORTED",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "name": "Error",
+        "message": "SMLib refused or failed the operation.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 1000.0000000000002,
+            "bounds": [
+              [
+                20,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 1000.0000000000002,
+            "bounds": [
+              [
+                20,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "face-contact-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: EMPTY_OR_NON_SOLID_UNSUPPORTED",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "name": "Error",
+        "message": "SMLib refused or failed the operation.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 1000.0000000000001,
+            "bounds": [
+              [
+                10,
+                0,
+                0
+              ],
+              [
+                20,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 1000.0000000000001,
+            "bounds": [
+              [
+                10,
+                0,
+                0
+              ],
+              [
+                20,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "edge-contact-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: EMPTY_OR_NON_SOLID_UNSUPPORTED",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "name": "Error",
+        "message": "SMLib refused or failed the operation.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                10,
+                10,
+                0
+              ],
+              [
+                20,
+                20,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                10,
+                10,
+                0
+              ],
+              [
+                20,
+                20,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "point-contact-common",
+      "status": "unsupported",
+      "reason": "empty result refusal: EMPTY_OR_NON_SOLID_UNSUPPORTED",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "name": "Error",
+        "message": "SMLib refused or failed the operation.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                20,
+                20,
+                20
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                20,
+                20,
+                20
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "coincident-subtract",
+      "status": "unsupported",
+      "reason": "empty result refusal: EMPTY_OR_NON_SOLID_UNSUPPORTED",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "EMPTY_OR_NON_SOLID_UNSUPPORTED",
+        "name": "Error",
+        "message": "SMLib refused or failed the operation.",
+        "before": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "face-contact-union",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            10,
+            10
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "volume": 1999.9999999999998,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                20,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "smlib"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "smlib",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "disjoint-union",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds and component count",
+      "expected": {
+        "volume": 2000,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            30,
+            10,
+            10
+          ]
+        ],
+        "components": 2
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[3,\"body\"]",
+            "engine": "smlib",
+            "volume": 1999.9999999999993,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 24,
+            "components": 2
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOOLEAN_V1",
+            "engine": "smlib"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 3,
+          "bodyId": "worker-solid:1:[3,\"body\"]",
+          "engine": "smlib",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "multi-body",
+      "status": "pass",
+      "reason": "two independent bodies",
+      "expected": {
+        "bodies": 2
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          },
+          {
+            "id": "worker-solid:1:[2,\"body\"]",
+            "engine": "smlib",
+            "volume": 1000.0000000000002,
+            "bounds": [
+              [
+                20,
+                0,
+                0
+              ],
+              [
+                30,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          },
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "smlib",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "small-box",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1e-9,
+        "bounds": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.001,
+            0.001,
+            0.001
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 1.0000001424923606e-9,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0.0010000000474974513,
+                0.0010000000474974513,
+                0.0010000000474974513
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "smlib",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "large-box",
+      "status": "pass",
+      "reason": "independent triangle volume/bounds",
+      "expected": {
+        "volume": 1000000000000000,
+        "bounds": [
+          [
+            100000,
+            0,
+            0
+          ],
+          [
+            200000,
+            100000,
+            100000
+          ]
+        ]
+      },
+      "result": {
+        "ok": true,
+        "models": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 1000000000000000.1,
+            "bounds": [
+              [
+                100000,
+                0,
+                0
+              ],
+              [
+                200000,
+                100000,
+                100000
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ],
+        "history": [
+          {
+            "type": "WORKER_SOLID_BOX_V1",
+            "engine": "smlib"
+          }
+        ],
+        "noNativeHandles": true,
+        "result": {
+          "featureId": 1,
+          "bodyId": "worker-solid:1:[1,\"body\"]",
+          "engine": "smlib",
+          "unit": "millimeter"
+        }
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "zero-box",
+      "status": "pass",
+      "reason": "rejected",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "INVALID_REQUEST",
+        "name": "Error",
+        "message": "Invalid solid coordinate.",
+        "after": []
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "negative-box",
+      "status": "pass",
+      "reason": "rejected",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "INVALID_REQUEST",
+        "name": "Error",
+        "message": "Invalid solid coordinate.",
+        "after": []
+      }
+    },
+    {
+      "engine": "smlib",
+      "case": "cross-engine",
+      "status": "pass",
+      "reason": "rejected",
+      "expected": null,
+      "result": {
+        "ok": false,
+        "code": "ENGINE_MISMATCH",
+        "name": "Error",
+        "message": "Mixed engine candidates are not supported.",
+        "after": [
+          {
+            "id": "worker-solid:1:[1,\"body\"]",
+            "engine": "smlib",
+            "volume": 999.9999999999999,
+            "bounds": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "triangles": 12,
+            "components": 1
+          }
+        ]
+      }
+    },
+    {
+      "engine": "occ",
+      "case": "extrusion",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "manifold",
+      "case": "extrusion",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "smlib",
+      "case": "extrusion",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "occ",
+      "case": "revolve",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "manifold",
+      "case": "revolve",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "smlib",
+      "case": "revolve",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "occ",
+      "case": "curved-profile",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "manifold",
+      "case": "curved-profile",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "smlib",
+      "case": "curved-profile",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "occ",
+      "case": "shell",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "manifold",
+      "case": "shell",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "smlib",
+      "case": "shell",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "occ",
+      "case": "fillet",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "manifold",
+      "case": "fillet",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "smlib",
+      "case": "fillet",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "occ",
+      "case": "STEP-import-export",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "manifold",
+      "case": "STEP-import-export",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    },
+    {
+      "engine": "smlib",
+      "case": "STEP-import-export",
+      "status": "not-tested",
+      "reason": "not exercised by this bounded solid-command corpus"
+    }
+  ]
+}

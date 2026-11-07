@@ -1,0 +1,6 @@
+{
+  "path": "/tmp/codi-cad-mechanical-candidate-20261105/modules/engine/mount/ownedBooleanContract.mjs",
+  "sha256": "706c18865c6ca1a92d82f5b462bd0bb9b2aaead5c23160009ce02a171aa89f35",
+  "bytes": 4262,
+  "finding": "Empty copy method uses :: instead of actual native dot spelling."
+}

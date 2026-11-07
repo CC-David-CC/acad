@@ -1,0 +1,274 @@
+{
+  "pins": {
+    "worker": "ad53518fb37a4e23e67d132b4d4daa76fbecad36954ecb59b8217e4cf1479e16",
+    "verb": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3"
+  },
+  "empty": {
+    "ok": true,
+    "sketch": {
+      "version": 3,
+      "objects": [],
+      "dimensions": [],
+      "labels": [],
+      "stages": [
+        {
+          "constraints": [],
+          "generators": []
+        }
+      ],
+      "constants": "",
+      "metadata": {
+        "boundaryFrame": {
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "x": [
+            1,
+            0,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0
+          ],
+          "z": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "boundary": {
+        "lines": [],
+        "arcs": [],
+        "circles": [],
+        "nurbses": []
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "agent-primitive-dac879c0-564f-47cd-b42a-eca631136b7d",
+      "kind": "Segment",
+      "role": null,
+      "added": {
+        "id": "agent-primitive-dac879c0-564f-47cd-b42a-eca631136b7d",
+        "type": "Segment",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": 0,
+            "y": 0
+          },
+          "b": {
+            "x": 10,
+            "y": 0
+          }
+        }
+      },
+      "priorCount": 0,
+      "constraints": 0
+    },
+    {
+      "id": "agent-primitive-cfd5bc1a-4e70-49e4-8824-53f661cf85ce",
+      "kind": "Point",
+      "role": "construction",
+      "added": {
+        "id": "agent-primitive-cfd5bc1a-4e70-49e4-8824-53f661cf85ce",
+        "type": "Point",
+        "role": "construction",
+        "stage": 0,
+        "data": {
+          "x": 10,
+          "y": 0
+        }
+      },
+      "priorCount": 1,
+      "constraints": 0
+    },
+    {
+      "id": "agent-primitive-8ee2d735-056b-4896-a491-8e3ac9ced81f",
+      "kind": "Circle",
+      "role": null,
+      "added": {
+        "id": "agent-primitive-8ee2d735-056b-4896-a491-8e3ac9ced81f",
+        "type": "Circle",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "c": {
+            "x": 30,
+            "y": 30
+          },
+          "r": 10
+        }
+      },
+      "priorCount": 2,
+      "constraints": 0
+    },
+    {
+      "id": "agent-primitive-b1f2b3df-a54b-4591-915d-4ef91623d60e",
+      "kind": "Arc",
+      "role": null,
+      "added": {
+        "id": "agent-primitive-b1f2b3df-a54b-4591-915d-4ef91623d60e",
+        "type": "Arc",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": 10,
+            "y": 0
+          },
+          "b": {
+            "x": 0,
+            "y": 10
+          },
+          "c": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "priorCount": 3,
+      "constraints": 0
+    }
+  ],
+  "majorData": {
+    "a": {
+      "x": 10,
+      "y": 0
+    },
+    "b": {
+      "x": 0,
+      "y": -10
+    },
+    "c": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  "locked": {
+    "ok": true,
+    "unchanged": true
+  },
+  "bad": {
+    "duplicate": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "IDENTITY_COLLISION",
+        "message": "Primitive identity is already in use."
+      }
+    },
+    "zeroSegment": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "DOMAIN",
+        "message": "Segment endpoints must be distinct."
+      }
+    },
+    "zeroCircle": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "DOMAIN",
+        "message": "Circle radius must be positive and bounded."
+      }
+    },
+    "badArc": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "DOMAIN",
+        "message": "Arc endpoints must be distinct and lie on one positive-radius circle."
+      }
+    },
+    "fullArc": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "DOMAIN",
+        "message": "Arc endpoints must be distinct and lie on one positive-radius circle."
+      }
+    },
+    "nearFullArc": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "DOMAIN",
+        "message": "Arc endpoints must be distinct and lie on one positive-radius circle."
+      }
+    },
+    "badStage": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "UNSUPPORTED",
+        "message": "Only the current last sketch stage is supported."
+      }
+    },
+    "badId": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "INVALID",
+        "message": "Invalid primitive identity or kind."
+      }
+    },
+    "nonfinite": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "DOMAIN",
+        "message": "Invalid sketch coordinate."
+      }
+    },
+    "childCollision": {
+      "revision": "child",
+      "ok": false,
+      "error": {
+        "code": "IDENTITY_COLLISION",
+        "message": "Primitive identity is already in use."
+      }
+    },
+    "extra": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "INVALID",
+        "message": "Invalid primitive request."
+      }
+    },
+    "oversize": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "INVALID",
+        "message": "Invalid primitive source."
+      }
+    },
+    "map": {
+      "revision": "negative",
+      "ok": false,
+      "error": {
+        "code": "INVALID",
+        "message": "External parameters must be a plain numeric record."
+      }
+    },
+    "boundaryCollision": {
+      "revision": "boundary",
+      "ok": false,
+      "error": {
+        "code": "IDENTITY_COLLISION",
+        "message": "Primitive identity is already in use."
+      }
+    }
+  },
+  "violations": []
+}

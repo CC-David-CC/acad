@@ -1,0 +1,1653 @@
+{
+  "status": "PASS",
+  "scope": "Actual headless sketch-model/solver and semantic Chromium Workers; real native source constructed through production primitive commands, no public app/native solid/history/save claim",
+  "pins": {
+    "scope": "Current candidate real production sketch+semantic Workers",
+    "files": {
+      "index.html": {
+        "sha256": "8a995ad5a0d52df76b2bbe60594895407735f33582611152a005645c26a2e58e",
+        "bytes": 83
+      },
+      "workers/sketch.js": {
+        "sha256": "072f8de698b7f5d4c181639145ec0e7e416fa838894e4c74241d49f26525d328",
+        "bytes": 3659034
+      },
+      "workers/semantic.js": {
+        "sha256": "b3c739c18874110371f62e529160b245900ebee555c088a8da169ab7befb7faa",
+        "bytes": 1445991
+      },
+      "lib/verb.js": {
+        "sha256": "55f13091a656c635d1ebe3931a9b52236c65023549b7b69bc8278362f87686f3",
+        "bytes": 268801
+      }
+    }
+  },
+  "driverSHA256": "45f47624bade46a3009a493cec2f0127619f1e35fa90c0114f48c1eb743adf21",
+  "actual": {
+    "rows": [
+      {
+        "name": "step-angle-6.283185307179586",
+        "prepared": {
+          "binding": {
+            "revision": "source-fd4caf15-8f30-4ead-930f-62debcf60423",
+            "sketchDigest": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c",
+            "faceId": "component-plane",
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisSegmentId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "angleRadians": 6.283185307179586
+          },
+          "request": {
+            "op": "solid.profile.revolve",
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c"
+            },
+            "frame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            },
+            "region": {
+              "id": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+              "outer": [
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0",
+                  "a": [
+                    5,
+                    10
+                  ],
+                  "b": [
+                    5,
+                    30
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c",
+                  "a": [
+                    5,
+                    30
+                  ],
+                  "b": [
+                    0,
+                    30
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+                  "a": [
+                    0,
+                    30
+                  ],
+                  "b": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e",
+                  "a": [
+                    0,
+                    0
+                  ],
+                  "b": [
+                    10,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d",
+                  "a": [
+                    10,
+                    0
+                  ],
+                  "b": [
+                    10,
+                    10
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0",
+                  "a": [
+                    10,
+                    10
+                  ],
+                  "b": [
+                    5,
+                    10
+                  ]
+                }
+              ],
+              "holes": []
+            },
+            "axis": {
+              "kind": "source-segment",
+              "id": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+              "a": [
+                0,
+                -5
+              ],
+              "b": [
+                0,
+                40
+              ]
+            },
+            "angleRadians": 6.283185307179586
+          },
+          "revolveBinding": {
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c"
+            },
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "angleRadians": 6.283185307179586,
+            "requestSha256": "d7d64a5b655ed074c41b784a19825ce084562dec1d74d5fa63a22857187241fc"
+          }
+        }
+      },
+      {
+        "name": "step-angle-1.5707963267948966",
+        "prepared": {
+          "binding": {
+            "revision": "source-fd4caf15-8f30-4ead-930f-62debcf60423",
+            "sketchDigest": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c",
+            "faceId": "component-plane",
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisSegmentId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "angleRadians": 1.5707963267948966
+          },
+          "request": {
+            "op": "solid.profile.revolve",
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c"
+            },
+            "frame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            },
+            "region": {
+              "id": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+              "outer": [
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0",
+                  "a": [
+                    5,
+                    10
+                  ],
+                  "b": [
+                    5,
+                    30
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c",
+                  "a": [
+                    5,
+                    30
+                  ],
+                  "b": [
+                    0,
+                    30
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+                  "a": [
+                    0,
+                    30
+                  ],
+                  "b": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e",
+                  "a": [
+                    0,
+                    0
+                  ],
+                  "b": [
+                    10,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d",
+                  "a": [
+                    10,
+                    0
+                  ],
+                  "b": [
+                    10,
+                    10
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0",
+                  "a": [
+                    10,
+                    10
+                  ],
+                  "b": [
+                    5,
+                    10
+                  ]
+                }
+              ],
+              "holes": []
+            },
+            "axis": {
+              "kind": "source-segment",
+              "id": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+              "a": [
+                0,
+                -5
+              ],
+              "b": [
+                0,
+                40
+              ]
+            },
+            "angleRadians": 1.5707963267948966
+          },
+          "revolveBinding": {
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c"
+            },
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "angleRadians": 1.5707963267948966,
+            "requestSha256": "b5d4ab6e31d7c19bb12a17218a530b56779017e14763d53501fdc1cf35a4d970"
+          }
+        }
+      },
+      {
+        "name": "step-angle--1.5707963267948966",
+        "prepared": {
+          "binding": {
+            "revision": "source-fd4caf15-8f30-4ead-930f-62debcf60423",
+            "sketchDigest": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c",
+            "faceId": "component-plane",
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisSegmentId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "angleRadians": -1.5707963267948966
+          },
+          "request": {
+            "op": "solid.profile.revolve",
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c"
+            },
+            "frame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            },
+            "region": {
+              "id": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+              "outer": [
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0",
+                  "a": [
+                    5,
+                    10
+                  ],
+                  "b": [
+                    5,
+                    30
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c",
+                  "a": [
+                    5,
+                    30
+                  ],
+                  "b": [
+                    0,
+                    30
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+                  "a": [
+                    0,
+                    30
+                  ],
+                  "b": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e",
+                  "a": [
+                    0,
+                    0
+                  ],
+                  "b": [
+                    10,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d",
+                  "a": [
+                    10,
+                    0
+                  ],
+                  "b": [
+                    10,
+                    10
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0",
+                  "a": [
+                    10,
+                    10
+                  ],
+                  "b": [
+                    5,
+                    10
+                  ]
+                }
+              ],
+              "holes": []
+            },
+            "axis": {
+              "kind": "source-segment",
+              "id": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+              "a": [
+                0,
+                -5
+              ],
+              "b": [
+                0,
+                40
+              ]
+            },
+            "angleRadians": -1.5707963267948966
+          },
+          "revolveBinding": {
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c"
+            },
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "angleRadians": -1.5707963267948966,
+            "requestSha256": "ae54a4cf92626aaba9e2432f403c714caa863f5cf5016dd7a1cc25448e6d0b07"
+          }
+        }
+      },
+      {
+        "name": "boundary-axis",
+        "prepared": {
+          "binding": {
+            "revision": "source-fd4caf15-8f30-4ead-930f-62debcf60423",
+            "sketchDigest": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c",
+            "faceId": "component-plane",
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisSegmentId": "agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+            "angleRadians": 3.141592653589793
+          },
+          "request": {
+            "op": "solid.profile.revolve",
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c"
+            },
+            "frame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            },
+            "region": {
+              "id": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+              "outer": [
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0",
+                  "a": [
+                    5,
+                    10
+                  ],
+                  "b": [
+                    5,
+                    30
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c",
+                  "a": [
+                    5,
+                    30
+                  ],
+                  "b": [
+                    0,
+                    30
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+                  "a": [
+                    0,
+                    30
+                  ],
+                  "b": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e",
+                  "a": [
+                    0,
+                    0
+                  ],
+                  "b": [
+                    10,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d",
+                  "a": [
+                    10,
+                    0
+                  ],
+                  "b": [
+                    10,
+                    10
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0",
+                  "a": [
+                    10,
+                    10
+                  ],
+                  "b": [
+                    5,
+                    10
+                  ]
+                }
+              ],
+              "holes": []
+            },
+            "axis": {
+              "kind": "source-segment",
+              "id": "agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+              "a": [
+                0,
+                30
+              ],
+              "b": [
+                0,
+                0
+              ]
+            },
+            "angleRadians": 3.141592653589793
+          },
+          "revolveBinding": {
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c"
+            },
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisId": "agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+            "angleRadians": 3.141592653589793,
+            "requestSha256": "8444a3e10faedfe5948f53886a7d1f7fa2b9b70d3aff153970f306b106e9ec44"
+          }
+        }
+      },
+      {
+        "name": "real-axis-edit",
+        "prepared": {
+          "binding": {
+            "revision": "source-758329ba-f5a1-416f-ad00-566afd5cad76",
+            "sketchDigest": "62cc57399f8de6e64126feea8def6a64631189a380e966b93bff18ab43924489",
+            "faceId": "component-plane",
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisSegmentId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "angleRadians": 6.283185307179586
+          },
+          "request": {
+            "op": "solid.profile.revolve",
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "62cc57399f8de6e64126feea8def6a64631189a380e966b93bff18ab43924489"
+            },
+            "frame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            },
+            "region": {
+              "id": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+              "outer": [
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0",
+                  "a": [
+                    5,
+                    10
+                  ],
+                  "b": [
+                    5,
+                    30
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c",
+                  "a": [
+                    5,
+                    30
+                  ],
+                  "b": [
+                    0,
+                    30
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+                  "a": [
+                    0,
+                    30
+                  ],
+                  "b": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e",
+                  "a": [
+                    0,
+                    0
+                  ],
+                  "b": [
+                    10,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d",
+                  "a": [
+                    10,
+                    0
+                  ],
+                  "b": [
+                    10,
+                    10
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0",
+                  "a": [
+                    10,
+                    10
+                  ],
+                  "b": [
+                    5,
+                    10
+                  ]
+                }
+              ],
+              "holes": []
+            },
+            "axis": {
+              "kind": "source-segment",
+              "id": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+              "a": [
+                -2,
+                -5
+              ],
+              "b": [
+                -2,
+                40
+              ]
+            },
+            "angleRadians": 6.283185307179586
+          },
+          "revolveBinding": {
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "62cc57399f8de6e64126feea8def6a64631189a380e966b93bff18ab43924489"
+            },
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "angleRadians": 6.283185307179586,
+            "requestSha256": "2330041a67b4cbd2dbf5f2bcab62d4a1e235397fc5288b6e063f6693e7fae80a"
+          }
+        },
+        "originalAxisId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881"
+      },
+      {
+        "name": "real-profile-edit",
+        "prepared": {
+          "binding": {
+            "revision": "source-671fe587-5c55-41cc-9c3f-9c4a68c2bfa1",
+            "sketchDigest": "5d7c2746e18c20ae072fae30a4487eeb0c4117bc3d3465eaf26955fa2b29d1e7",
+            "faceId": "component-plane",
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisSegmentId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "angleRadians": 6.283185307179586
+          },
+          "request": {
+            "op": "solid.profile.revolve",
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "5d7c2746e18c20ae072fae30a4487eeb0c4117bc3d3465eaf26955fa2b29d1e7"
+            },
+            "frame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            },
+            "region": {
+              "id": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+              "outer": [
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0",
+                  "a": [
+                    6,
+                    10
+                  ],
+                  "b": [
+                    6,
+                    35
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c",
+                  "a": [
+                    6,
+                    35
+                  ],
+                  "b": [
+                    0,
+                    35
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+                  "a": [
+                    0,
+                    35
+                  ],
+                  "b": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e",
+                  "a": [
+                    0,
+                    0
+                  ],
+                  "b": [
+                    12,
+                    0
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d",
+                  "a": [
+                    12,
+                    0
+                  ],
+                  "b": [
+                    12,
+                    10
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "id": "component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0",
+                  "a": [
+                    12,
+                    10
+                  ],
+                  "b": [
+                    6,
+                    10
+                  ]
+                }
+              ],
+              "holes": []
+            },
+            "axis": {
+              "kind": "source-segment",
+              "id": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+              "a": [
+                0,
+                -5
+              ],
+              "b": [
+                0,
+                40
+              ]
+            },
+            "angleRadians": 6.283185307179586
+          },
+          "revolveBinding": {
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "5d7c2746e18c20ae072fae30a4487eeb0c4117bc3d3465eaf26955fa2b29d1e7"
+            },
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "axisId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "angleRadians": 6.283185307179586,
+            "requestSha256": "ee115c6127cdcbf1ec09ee81c57e33d66fb5a098f4d0e5a5a661c1637e1a8c18"
+          }
+        },
+        "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":12,\"y\":0}}},{\"id\":\"agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":12,\"y\":0},\"b\":{\"x\":12,\"y\":10}}},{\"id\":\"agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":12,\"y\":10},\"b\":{\"x\":6,\"y\":10}}},{\"id\":\"agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":6,\"y\":10},\"b\":{\"x\":6,\"y\":35}}},{\"id\":\"agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":6,\"y\":35},\"b\":{\"x\":0,\"y\":35}}},{\"id\":\"agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":35},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":-5},\"b\":{\"x\":0,\"y\":40}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}"
+      },
+      {
+        "name": "real-annular-source",
+        "prepared": {
+          "binding": {
+            "revision": "source-9dda1986-2fa3-4edf-a2cc-5fa8f6883782",
+            "sketchDigest": "68d3ef1454a7db4040496c45475ec1ad22c07eac17efa499aa7c31f63aa28dc0",
+            "faceId": "component-plane",
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0be99412-5ddb-4573-a1f6-a47d543dd7a7\"],\"holes\":[[\"component-plane/agent-primitive-a371ade2-95e9-4745-9c3f-b94369d0a569\"]]}",
+            "axisSegmentId": "agent-primitive-14065390-1545-47c2-9464-9839d792c7b5",
+            "angleRadians": 6.283185307179586
+          },
+          "request": {
+            "op": "solid.profile.revolve",
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "68d3ef1454a7db4040496c45475ec1ad22c07eac17efa499aa7c31f63aa28dc0"
+            },
+            "frame": {
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "x": [
+                1,
+                0,
+                0
+              ],
+              "y": [
+                0,
+                1,
+                0
+              ],
+              "z": [
+                0,
+                0,
+                1
+              ]
+            },
+            "region": {
+              "id": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0be99412-5ddb-4573-a1f6-a47d543dd7a7\"],\"holes\":[[\"component-plane/agent-primitive-a371ade2-95e9-4745-9c3f-b94369d0a569\"]]}",
+              "outer": [
+                {
+                  "kind": "circle",
+                  "id": "component-plane/agent-primitive-0be99412-5ddb-4573-a1f6-a47d543dd7a7",
+                  "center": [
+                    8,
+                    0
+                  ],
+                  "radius": 2
+                }
+              ],
+              "holes": [
+                [
+                  {
+                    "kind": "circle",
+                    "id": "component-plane/agent-primitive-a371ade2-95e9-4745-9c3f-b94369d0a569",
+                    "center": [
+                      8,
+                      0
+                    ],
+                    "radius": 1
+                  }
+                ]
+              ]
+            },
+            "axis": {
+              "kind": "source-segment",
+              "id": "agent-primitive-14065390-1545-47c2-9464-9839d792c7b5",
+              "a": [
+                0,
+                -5
+              ],
+              "b": [
+                0,
+                40
+              ]
+            },
+            "angleRadians": 6.283185307179586
+          },
+          "revolveBinding": {
+            "version": 1,
+            "unit": "millimeter",
+            "source": {
+              "faceId": "component-plane",
+              "sourceSha256": "68d3ef1454a7db4040496c45475ec1ad22c07eac17efa499aa7c31f63aa28dc0"
+            },
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0be99412-5ddb-4573-a1f6-a47d543dd7a7\"],\"holes\":[[\"component-plane/agent-primitive-a371ade2-95e9-4745-9c3f-b94369d0a569\"]]}",
+            "axisId": "agent-primitive-14065390-1545-47c2-9464-9839d792c7b5",
+            "angleRadians": 6.283185307179586,
+            "requestSha256": "cfd1700946ea07d6f2170e91ba17b409987f6ebca3f463ae0ff3e0fa71161cd9"
+          }
+        }
+      }
+    ],
+    "controls": [
+      {
+        "name": "stale-axis",
+        "result": {
+          "jobId": "d8bf1f6d-0538-4ea8-922d-6be97307051c",
+          "ok": false,
+          "code": "STALE_AXIS",
+          "error": "The selected source Segment axis is unavailable."
+        }
+      },
+      {
+        "name": "circle-as-axis",
+        "result": {
+          "jobId": "2df3c20d-ca9a-406d-b528-e638809ede64",
+          "ok": false,
+          "code": "STALE_AXIS",
+          "error": "The selected source Segment axis is unavailable."
+        }
+      },
+      {
+        "name": "zero-angle",
+        "result": {
+          "jobId": "f93af7ed-d882-4592-8a04-e8fa056bd69e",
+          "ok": false,
+          "code": "REVOLVE_INVALID_ANGLE",
+          "error": "Expected nonzero signed angle with magnitude at most2π."
+        }
+      },
+      {
+        "name": "over-angle",
+        "result": {
+          "jobId": "67777ff9-d5b6-4c8c-b7d3-8bfda3618e92",
+          "ok": false,
+          "code": "REVOLVE_INVALID_ANGLE",
+          "error": "Expected nonzero signed angle with magnitude at most2π."
+        }
+      },
+      {
+        "name": "stale-region",
+        "result": {
+          "jobId": "da83ce18-cf46-4748-b3e7-ab39ffa97d03",
+          "ok": false,
+          "code": "STALE_REGION",
+          "error": "Selected source boundary membership changed."
+        }
+      },
+      {
+        "name": "wrong-digest",
+        "result": {
+          "jobId": "52fec409-bc30-462d-9b8b-502aaac707cc",
+          "ok": false,
+          "code": "STALE_SKETCH",
+          "error": "Selected region source digest changed."
+        }
+      }
+    ],
+    "workers": [
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-empty",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-primitive",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-primitive",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-primitive",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-primitive",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-primitive",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-primitive",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-primitive",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "rectangle-extrusion-solve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "rectangle-extrusion-solve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "inspect-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "inspect-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-inspection",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-point-coordinates",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "rectangle-extrusion-solve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "rectangle-extrusion-solve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "inspect-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "inspect-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-point-coordinates",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "rectangle-extrusion-solve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "rectangle-extrusion-solve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "inspect-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "inspect-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-empty",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-primitive",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-primitive",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "sketch-transition-primitive",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "rectangle-extrusion-solve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/sketch.js",
+        "task": "rectangle-extrusion-solve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "inspect-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "inspect-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      },
+      {
+        "url": "/workers/semantic.js",
+        "task": "prepare-revolve",
+        "terminated": true
+      }
+    ],
+    "initial": {
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":5,\"y\":10}}},{\"id\":\"agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":10},\"b\":{\"x\":5,\"y\":30}}},{\"id\":\"agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":30},\"b\":{\"x\":0,\"y\":30}}},{\"id\":\"agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":30},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":-5},\"b\":{\"x\":0,\"y\":40}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "discovery": {
+        "binding": {
+          "revision": "source-fd4caf15-8f30-4ead-930f-62debcf60423",
+          "sketchDigest": "98f05782eb5cf73a259a8f5ed454a828512f2ff7a9de58143457309714a8993c",
+          "faceId": "component-plane"
+        },
+        "axes": [
+          {
+            "axisSegmentId": "agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e",
+            "role": null,
+            "stage": 0,
+            "a": [
+              0,
+              0
+            ],
+            "b": [
+              10,
+              0
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d",
+            "role": null,
+            "stage": 0,
+            "a": [
+              10,
+              0
+            ],
+            "b": [
+              10,
+              10
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-b1686aec-13be-4279-954d-06767578f7e0",
+            "role": null,
+            "stage": 0,
+            "a": [
+              10,
+              10
+            ],
+            "b": [
+              5,
+              10
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0",
+            "role": null,
+            "stage": 0,
+            "a": [
+              5,
+              10
+            ],
+            "b": [
+              5,
+              30
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c",
+            "role": null,
+            "stage": 0,
+            "a": [
+              5,
+              30
+            ],
+            "b": [
+              0,
+              30
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+            "role": null,
+            "stage": 0,
+            "a": [
+              0,
+              30
+            ],
+            "b": [
+              0,
+              0
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "role": "construction",
+            "stage": 0,
+            "a": [
+              0,
+              -5
+            ],
+            "b": [
+              0,
+              40
+            ],
+            "supported": true,
+            "reason": null
+          }
+        ],
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0",
+                "agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d",
+                "agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c",
+                "agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+                "agent-primitive-b1686aec-13be-4279-954d-06767578f7e0",
+                "agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e"
+              ],
+              "holeCurveIds": []
+            }
+          }
+        ],
+        "qualification": "source-membership-only; selected profile and signed angle require native evaluation"
+      },
+      "solveEvidence": []
+    },
+    "axisEdited": {
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":0},\"b\":{\"x\":10,\"y\":0}}},{\"id\":\"agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":0},\"b\":{\"x\":10,\"y\":10}}},{\"id\":\"agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":10,\"y\":10},\"b\":{\"x\":5,\"y\":10}}},{\"id\":\"agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":10},\"b\":{\"x\":5,\"y\":30}}},{\"id\":\"agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":5,\"y\":30},\"b\":{\"x\":0,\"y\":30}}},{\"id\":\"agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"type\":\"Segment\",\"role\":null,\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":30},\"b\":{\"x\":0,\"y\":0}}},{\"id\":\"agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":-2,\"y\":-5},\"b\":{\"x\":-2,\"y\":40}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "discovery": {
+        "binding": {
+          "revision": "source-758329ba-f5a1-416f-ad00-566afd5cad76",
+          "sketchDigest": "62cc57399f8de6e64126feea8def6a64631189a380e966b93bff18ab43924489",
+          "faceId": "component-plane"
+        },
+        "axes": [
+          {
+            "axisSegmentId": "agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e",
+            "role": null,
+            "stage": 0,
+            "a": [
+              0,
+              0
+            ],
+            "b": [
+              10,
+              0
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d",
+            "role": null,
+            "stage": 0,
+            "a": [
+              10,
+              0
+            ],
+            "b": [
+              10,
+              10
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-b1686aec-13be-4279-954d-06767578f7e0",
+            "role": null,
+            "stage": 0,
+            "a": [
+              10,
+              10
+            ],
+            "b": [
+              5,
+              10
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0",
+            "role": null,
+            "stage": 0,
+            "a": [
+              5,
+              10
+            ],
+            "b": [
+              5,
+              30
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c",
+            "role": null,
+            "stage": 0,
+            "a": [
+              5,
+              30
+            ],
+            "b": [
+              0,
+              30
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+            "role": null,
+            "stage": 0,
+            "a": [
+              0,
+              30
+            ],
+            "b": [
+              0,
+              0
+            ],
+            "supported": true,
+            "reason": null
+          },
+          {
+            "axisSegmentId": "agent-primitive-9a9e0258-4e82-4da8-ae77-bea708096881",
+            "role": "construction",
+            "stage": 0,
+            "a": [
+              -2,
+              -5
+            ],
+            "b": [
+              -2,
+              40
+            ],
+            "supported": true,
+            "reason": null
+          }
+        ],
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0\",\"component-plane/agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d\",\"component-plane/agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c\",\"component-plane/agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c\",\"component-plane/agent-primitive-b1686aec-13be-4279-954d-06767578f7e0\",\"component-plane/agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "agent-primitive-0761cf6b-905a-4de6-8a25-66d18c9a68c0",
+                "agent-primitive-11bd071d-730d-43d7-a6a2-e7d310c7398d",
+                "agent-primitive-7012f0f8-6153-44c0-bdea-8f935724730c",
+                "agent-primitive-95ba5b3c-a6cc-4bce-a62a-579cfaaea96c",
+                "agent-primitive-b1686aec-13be-4279-954d-06767578f7e0",
+                "agent-primitive-bab915b1-f1f1-498b-bc0a-e5ea3f3ab59e"
+              ],
+              "holeCurveIds": []
+            }
+          }
+        ],
+        "qualification": "source-membership-only; selected profile and signed angle require native evaluation"
+      }
+    },
+    "annular": {
+      "source": "{\"version\":3,\"objects\":[{\"id\":\"agent-primitive-0be99412-5ddb-4573-a1f6-a47d543dd7a7\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":8,\"y\":0},\"r\":2}},{\"id\":\"agent-primitive-a371ade2-95e9-4745-9c3f-b94369d0a569\",\"type\":\"Circle\",\"role\":null,\"stage\":0,\"data\":{\"c\":{\"x\":8,\"y\":0},\"r\":1}},{\"id\":\"agent-primitive-14065390-1545-47c2-9464-9839d792c7b5\",\"type\":\"Segment\",\"role\":\"construction\",\"stage\":0,\"data\":{\"a\":{\"x\":0,\"y\":-5},\"b\":{\"x\":0,\"y\":40}}}],\"dimensions\":[],\"labels\":[],\"stages\":[{\"constraints\":[],\"generators\":[]}],\"constants\":\"\",\"metadata\":{\"boundaryFrame\":{\"origin\":[0,0,0],\"x\":[1,0,0],\"y\":[0,1,0],\"z\":[0,0,1]}},\"boundary\":{\"lines\":[],\"arcs\":[],\"circles\":[],\"nurbses\":[]}}",
+      "discovery": {
+        "binding": {
+          "revision": "source-9dda1986-2fa3-4edf-a2cc-5fa8f6883782",
+          "sketchDigest": "68d3ef1454a7db4040496c45475ec1ad22c07eac17efa499aa7c31f63aa28dc0",
+          "faceId": "component-plane"
+        },
+        "axes": [
+          {
+            "axisSegmentId": "agent-primitive-14065390-1545-47c2-9464-9839d792c7b5",
+            "role": "construction",
+            "stage": 0,
+            "a": [
+              0,
+              -5
+            ],
+            "b": [
+              0,
+              40
+            ],
+            "supported": true,
+            "reason": null
+          }
+        ],
+        "regions": [
+          {
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-0be99412-5ddb-4573-a1f6-a47d543dd7a7\"],\"holes\":[[\"component-plane/agent-primitive-a371ade2-95e9-4745-9c3f-b94369d0a569\"]]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "agent-primitive-0be99412-5ddb-4573-a1f6-a47d543dd7a7"
+              ],
+              "holeCurveIds": [
+                [
+                  "agent-primitive-a371ade2-95e9-4745-9c3f-b94369d0a569"
+                ]
+              ]
+            }
+          },
+          {
+            "regionId": "sketch-region:{\"faceId\":\"component-plane\",\"outer\":[\"component-plane/agent-primitive-a371ade2-95e9-4745-9c3f-b94369d0a569\"],\"holes\":[]}",
+            "support": "supported",
+            "reason": null,
+            "descriptor": {
+              "outerCurveIds": [
+                "agent-primitive-a371ade2-95e9-4745-9c3f-b94369d0a569"
+              ],
+              "holeCurveIds": []
+            }
+          }
+        ],
+        "qualification": "source-membership-only; selected profile and signed angle require native evaluation"
+      }
+    }
+  },
+  "ownedBrowserClosed": true
+}

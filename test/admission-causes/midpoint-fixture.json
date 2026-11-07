@@ -1,0 +1,360 @@
+{
+  "source": {
+    "version": 3,
+    "objects": [
+      {
+        "id": "line",
+        "type": "Segment",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": 0,
+            "y": 0
+          },
+          "b": {
+            "x": 10,
+            "y": 0
+          }
+        }
+      },
+      {
+        "id": "mid",
+        "type": "Point",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "x": 5,
+          "y": 0
+        }
+      }
+    ],
+    "dimensions": [],
+    "labels": [],
+    "stages": [
+      {
+        "constraints": [
+          {
+            "typeId": "LockPoint",
+            "objects": [
+              "line:A"
+            ],
+            "constants": {
+              "x": 0,
+              "y": 0
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "Horizontal",
+            "objects": [
+              "line"
+            ],
+            "constants": {
+              "angle": 0
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "PointInMiddle",
+            "objects": [
+              "mid",
+              "line"
+            ],
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "DistancePP",
+            "objects": [
+              "line:A",
+              "mid"
+            ],
+            "constants": {
+              "distance": 5
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          }
+        ],
+        "generators": []
+      }
+    ],
+    "constants": "",
+    "metadata": {
+      "boundaryFrame": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "boundary": {
+      "lines": [],
+      "arcs": [],
+      "circles": [],
+      "nurbses": []
+    }
+  },
+  "contradictory": {
+    "version": 3,
+    "objects": [
+      {
+        "id": "line",
+        "type": "Segment",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "a": {
+            "x": 0,
+            "y": 0
+          },
+          "b": {
+            "x": 10,
+            "y": 0
+          }
+        }
+      },
+      {
+        "id": "mid",
+        "type": "Point",
+        "role": null,
+        "stage": 0,
+        "data": {
+          "x": 5,
+          "y": 0
+        }
+      }
+    ],
+    "dimensions": [],
+    "labels": [],
+    "stages": [
+      {
+        "constraints": [
+          {
+            "typeId": "LockPoint",
+            "objects": [
+              "line:A"
+            ],
+            "constants": {
+              "x": 0,
+              "y": 0
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "Horizontal",
+            "objects": [
+              "line"
+            ],
+            "constants": {
+              "angle": 0
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "PointInMiddle",
+            "objects": [
+              "mid",
+              "line"
+            ],
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "DistancePP",
+            "objects": [
+              "line:A",
+              "mid"
+            ],
+            "constants": {
+              "distance": 5
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          },
+          {
+            "typeId": "DistancePP",
+            "objects": [
+              "line:A",
+              "line:B"
+            ],
+            "constants": {
+              "distance": 11
+            },
+            "stage": 0,
+            "annotations": [],
+            "admission": {
+              "version": 1,
+              "state": "accepted"
+            }
+          }
+        ],
+        "generators": []
+      }
+    ],
+    "constants": "",
+    "metadata": {
+      "boundaryFrame": {
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "boundary": {
+      "lines": [],
+      "arcs": [],
+      "circles": [],
+      "nurbses": []
+    }
+  },
+  "invalidResult": {
+    "revision": "contradictory-midpoint",
+    "ok": false,
+    "error": {
+      "code": "RESIDUAL",
+      "message": "A constraint residual exceeds its numerical tolerance."
+    }
+  },
+  "expected": {
+    "midX": 5,
+    "lineEndX": 10
+  },
+  "evidence": [
+    {
+      "typeId": "LockPoint",
+      "state": "accepted",
+      "residuals": [
+        0,
+        0
+      ],
+      "tolerances": [
+        0.000001,
+        0.000001
+      ],
+      "units": [
+        "millimeter",
+        "millimeter"
+      ],
+      "tolerance": 0.000001,
+      "unit": "millimeter"
+    },
+    {
+      "typeId": "Horizontal",
+      "state": "accepted",
+      "residuals": [
+        0
+      ],
+      "tolerances": [
+        1e-8
+      ],
+      "units": [
+        "radian"
+      ],
+      "tolerance": 1e-8,
+      "unit": "radian"
+    },
+    {
+      "typeId": "PointInMiddle",
+      "state": "accepted",
+      "residuals": [
+        0,
+        0
+      ],
+      "tolerances": [
+        0.000001,
+        0.000001
+      ],
+      "units": [
+        "millimeter",
+        "millimeter"
+      ],
+      "tolerance": 0.000001,
+      "unit": "millimeter"
+    },
+    {
+      "typeId": "DistancePP",
+      "state": "accepted",
+      "residuals": [
+        0
+      ],
+      "tolerances": [
+        0.000001
+      ],
+      "units": [
+        "millimeter"
+      ],
+      "tolerance": 0.000001,
+      "unit": "millimeter"
+    }
+  ]
+}

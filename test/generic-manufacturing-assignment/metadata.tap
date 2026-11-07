@@ -1,0 +1,19 @@
+✔ strict capture detaches/freeze and pure proposal retains explicit unknown identity (3.244442ms)
+✔ null material/appearance remain unknown rather than defaulting a substance or color (0.965089ms)
+✔ stable custom binding/part/region IDs reused without retargeting (1.602386ms)
+✔ existing identity definition conflicts and absent material references refuse atomically (1.641396ms)
+✔ prospective aliases collide explicitly and duplicate aliases stay ambiguous (1.05571ms)
+✔ separate parts and aligned regions remain distinct with interface qualification pending (0.546785ms)
+✔ the same complete producer cannot appear twice in one export assignment proposal (0.232522ms)
+✔ retained enclosure grouping definitions and transforms survive generic preparation (1.534705ms)
+✔ stale source digest, unsupported target, wrong producer and unsupported placement refuse (1.240172ms)
+✔ own-data capture rejects getter/extra/sparse/string ID coercion/prototype tricks without reads (0.576746ms)
+✔ 32-part/region bounds and definition caps refuse before giant capture (0.368983ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 82.223977

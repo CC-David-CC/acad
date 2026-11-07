@@ -1,0 +1,46 @@
+✔ direct preparation client rejects native preabort despite own false data, zero allocation (4.38137ms)
+✔ direct client uses native signal operations, including one signal in both slots and exact listener cleanup (88.487562ms)
+✔ direct held genuine result abort cannot be masked and own remove overrides cannot invent cleanup failure (89.126899ms)
+✔ unmodified native pre-aborted signal refuses before Worker allocation (321.915215ms)
+✔ native pre-aborted signal remains cancelled when its aborted property is shadowed (197.104502ms)
+✔ native cancellation after hash completion preserves A/J/T and healthy concurrent caller may commit (278.043068ms)
+✔ native cancellation during final valid callback after genuine Worker cleanup preserves exact state (300.236789ms)
+✔ native signal own accessors and add/remove overrides cannot change normal assignment or cleanup (186.637902ms)
+✔ hash cancellation uses native signal even with own method/property overrides, then healthy retry succeeds (229.761231ms)
+✔ held genuine preparation abort ignores own remove override, preserves state and leaves healthy module (253.054754ms)
+✔ actual Worker generation/noop/travel binds private clone without claiming cloned freeze (179.420311ms)
+✔ actual Worker semantic refusal remains healthy for retry (84.714259ms)
+✔ genuine Worker result with corrupted small transport header refuses before capability (79.997136ms)
+✔ preabort has no allocation; held genuine result abort cleans and late release cannot succeed (105.296522ms)
+✔ real four-owner bound refuses a fifth allocation and cancel permits healthy retry (104.115919ms)
+✔ transport double: falsy operation failure settles, preserves cause and does not fence successful release (51.737746ms)
+✔ transport doubles: falsy termination causes latch cleanup fence and refuse all subsequent allocation (7.620746ms)
+✔ transport double: throwing listener cleanup still terminates and settles before fencing (2.482439ms)
+✔ real preparation Worker accepts large legacy no-op without charging a nonexistent edit, refuses overbudget change (1621.970906ms)
+✔ successful metadata computation cannot publish after cleanup fails; subsequent assignment allocates no Workers (436.699914ms)
+✔ actual enclosure assignment/role edit jointly installs A/J/T before first observer (537.590507ms)
+✔ diagnostic wrapper of real Worker reply proves main publication does not traverse metadata payload arrays (271.614995ms)
+✔ metadata Undo/Redo uses same journal, restores exact payload and leaves prior geometry travel route available (304.157463ms)
+✔ canonical no-op preserves all A/J/T/revisions/storage and does not truncate redo (376.885357ms)
+✔ conflict/stale/preabort reject with exact accepted A/J/T and redo state preserved (252.077654ms)
+✔ genuine held metadata Worker result cancellation releases owner and late delivery cannot commit (180.911778ms)
+✔ post-Worker caller callback reentrancy cannot bypass last pure A/J/T preflight (175.273024ms)
+✔ ordinary observer throw is logged after commit and entry stays Undoable (212.804948ms)
+✔ escaping notification failure is committed:true with exact cause, no rollback (212.594266ms)
+✔ observer caller loss/cancel/Close preserve committed entry and refuse normal success (570.149263ms)
+✔ observer starts a second real metadata operation in the same chronology without rollback (282.562228ms)
+✔ concurrent preparations have one accepted publication; stale loser cannot append a second entry (189.218911ms)
+✔ actual rebind is prepared read-only then uses same commit/travel; stale review token refuses (441.84302ms)
+✔ generic shared setter uses actual class/custody admission fixture and actual Worker metadata, not Native geometry (245.66417ms)
+✔ initial caller reentrancy cannot silently adopt a newer generic request revision (103.800814ms)
+✔ initial caller rebind cannot make an older enclosure request current (265.581025ms)
+verb 2.0.0
+✔ native envelope manager save/restore preserves definitions; fresh protocol session can reedit/Undo (561.28405ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5888.294201

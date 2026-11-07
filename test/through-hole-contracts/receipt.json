@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "status": "PASS",
+  "scope": "pure-host-through-hole-contracts-only",
+  "base": "982db0619566116ff985fc63ad24d70b30e4d96d",
+  "node": "v24.22.1",
+  "typescript": "4.7.4",
+  "tests": {
+    "total": 20,
+    "new": 12,
+    "retained": 8,
+    "command": [
+      "/tmp/codi-files-move-node/bin/node",
+      "--test",
+      "--test-reporter=tap",
+      "test/through-hole-contracts/contracts.test.mjs",
+      "test/selected-profile-budget/production/budget.test.mjs",
+      "test/selected-profile-kernel/catalog-build.test.mjs"
+    ]
+  },
+  "types": {
+    "status": "PASS",
+    "fixtures": 2,
+    "command": [
+      "/tmp/codi-files-move-node/bin/node",
+      "/tmp/codi-typed-common-transaction-20261105/node_modules/typescript/bin/tsc",
+      "--noEmit",
+      "--strict",
+      "--exactOptionalPropertyTypes",
+      "--target",
+      "ES2022",
+      "--module",
+      "commonjs",
+      "--moduleResolution",
+      "node",
+      "test/through-hole-contracts/contracts.mts",
+      "test/boolean-history-catalog/contracts.mts"
+    ],
+    "typeOnlyImportErased": true
+  },
+  "sourceHashesBeforeAndAfter": {
+    "modules/engine/mount/engineCatalog.mjs": "45b143b33fcf990bda8de14d2ff6bebae2a7e46ee33dbe46cdf3ace8d484641f",
+    "modules/engine/solid/SolidKernel.ts": "ed792bbb90dccf3f72fc31a54014fad8f43fd5ab399e50e4c1303bade2b70a73",
+    "modules/engine/mount/selectedProfileBudget.mjs": "06f24e4a9561bf9bd9577d8006751ceeb90bd5dd00e6a7b611b0db44d73cf5b0",
+    "modules/engine/mount/selectedProfileBuildSelection.mjs": "5c6820c751ff0493ce6de565dd94c03f9054666534e7a772ab1c0809eca6ee77",
+    "test/through-hole-contracts/contracts.test.mjs": "8d7624b5456f22a1a880e21a1c350d34dde8c73ce19c6cd4c63fb8a72ad0eae0",
+    "test/through-hole-contracts/contracts.mts": "5a520fce7e4fb0f3bd2d2959b906b8b87d5c28116b2489b3dacda4a754eaf82d",
+    "test/through-hole-contracts/README.md": "433c161c108ad98884af5bbe87b7cdf86f240610758695bbbfd66e2202d87cf5",
+    "test/through-hole-contracts/verify.mjs": "ef651feac531b0e5d9118c26a8524897a1919636f5de814500c376f9531d9c0c"
+  },
+  "limits": [
+    "No geometry/native/browser/authoring qualification",
+    "CommonJS app compilation; standalone NodeNext TS1471 is outside app mode",
+    "Older incomplete success/default fixtures are documented in README and were not reported passing"
+  ]
+}

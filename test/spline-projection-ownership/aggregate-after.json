@@ -1,0 +1,8 @@
+{
+  "scope": "Labeled trusted-transport double; receiver cap only, not Worker/native math proof",
+  "ownerSha256": "889f92e0e62a0c92a4cb9c9dd1f1aac9b89bf3fb75cd1a744905fd1b211feb58",
+  "acceptedTotal": 8192,
+  "rejectedTotal": 12288,
+  "rejectedWith": "Invalid spline projection",
+  "status": "pass"
+}

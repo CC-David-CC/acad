@@ -1,0 +1,24 @@
+{
+  "source": "36bf090f46085e5d72a1cc5fa3a5654dd2c13bb3",
+  "runtime": "/mnt/data10tb/codi-cad-combined-axis-20261106-r1",
+  "loopbackPort": 20647,
+  "app": {
+    "path": "static/index.bundle.js",
+    "sha256": "6545abcb0a60739230480303ff129e7d378a85c195149b14104d4dbdf9de2e02"
+  },
+  "sketchWorker": {
+    "path": "static/sketch-solver.cdcd797902e88e23b4a6.js",
+    "sha256": "5b5ee16cd611d32c3e2fade60bdbcb16faa1f2b8d756ff3c8c9e17fb2451a85d"
+  },
+  "projectWorker": {
+    "path": "static/project-validator.4e6eefb39455fd9062b4.js",
+    "sha256": "090bc41a2bba09b192b5f4f4d8e4cd7ee269205bb057718cdc52fa50db2ac6ad"
+  },
+  "semanticWorker": {
+    "path": "static/prism-semantic.4aab2743811962667652.js",
+    "sha256": "6e23b9cb4d35d37f20271ccc6efbbd00bfd940837d75d0f2b2b4fbe9f020df0f"
+  },
+  "normalEntriesOnly": true,
+  "privateHelperPresent": false,
+  "defaultNativeAssetsChanged": false
+}

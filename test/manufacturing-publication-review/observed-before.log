@@ -1,0 +1,32 @@
+✔ unmodified native pre-aborted signal refuses before Worker allocation (224.443714ms)
+✖ native pre-aborted signal remains cancelled when its aborted property is shadowed (239.165524ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 985.669139
+
+✖ failing tests:
+
+test at test/manufacturing-publication-review/review.test.mjs:14:1
+✖ native pre-aborted signal remains cancelled when its aborted property is shadowed (239.165524ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'AbortError'
+  
+      at file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:20:9
+      at async use (file:///tmp/codi-manufacturing-publication-review-20261107/test/manufacturing-publication-review/review.test.mjs:8:44)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'AbortError',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

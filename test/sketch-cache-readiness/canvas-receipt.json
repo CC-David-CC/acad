@@ -1,0 +1,47 @@
+{
+  "scope": "Real Chrome Canvas/Path2D and trusted mouse; copied renderer source only, no Worker or full-app claim",
+  "cases": [
+    {
+      "name": "before",
+      "sourceSha256": "6d3118608dc186362e9814c3dbedfba69819a64be4fae285756a2c283986f9ec",
+      "compiledSha256": "dd99aa9a96a2cd27be0c9ddca826e2b7a9c47529e3c0c70e0eab9c5ab2b62028",
+      "actual": {
+        "selected": [],
+        "pixelBounds": {
+          "minX": 196,
+          "maxX": 203,
+          "minY": 196,
+          "maxY": 203
+        },
+        "pixels": 52
+      },
+      "closedDimensions": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "after",
+      "sourceSha256": "0d7bd5959df5498d689ae9a8846e2837c6ebe1dd943187747dec4f65569482a4",
+      "compiledSha256": "579723d7c039f97db7a2d9a3384cb4c885bc6e4343df6e071277f4a2dbdd0248",
+      "actual": {
+        "selected": [
+          "point"
+        ],
+        "pixelBounds": {
+          "minX": 196,
+          "maxX": 203,
+          "minY": 196,
+          "maxY": 203
+        },
+        "pixels": 52
+      },
+      "closedDimensions": [
+        1,
+        1
+      ]
+    }
+  ],
+  "status": "pass",
+  "browser": "Chrome/155.0.8059.79"
+}

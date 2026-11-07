@@ -1,0 +1,211 @@
+{
+  "status": "FAIL",
+  "current": [
+    {
+      "name": "recorded real circle Cut A retains target identities without tool origins",
+      "scope": "genuine main-WASM constructor/Boolean replay; explicit component caller source labels, no new native/public run",
+      "status": "PASS",
+      "data": {
+        "outerConnectors": 4,
+        "sourceContexts": [
+          {
+            "kind": "sketch-profile",
+            "featureId": 40,
+            "regionId": "native-v3-component:plate"
+          }
+        ],
+        "unclaimed": [
+          {
+            "kind": "vertex",
+            "count": 10,
+            "reason": "UNCLAIMED_KERNEL_ENTITY"
+          },
+          {
+            "kind": "edge",
+            "count": 3,
+            "reason": "UNCLAIMED_KERNEL_ENTITY"
+          },
+          {
+            "kind": "face",
+            "count": 1,
+            "reason": "UNCLAIMED_KERNEL_ENTITY"
+          }
+        ]
+      }
+    },
+    {
+      "name": "same actual Cut preserves binary semantics while unary advertises no tool source",
+      "scope": "genuine recorded maps with one versus two deliberately named sources",
+      "status": "PASS",
+      "data": {
+        "unaryOrigins": 1,
+        "binaryOrigins": 2,
+        "sourceBValidatedOutsideUnary": true
+      }
+    },
+    {
+      "name": "unary inheritance does NOT create even a uniquely attributable blend face",
+      "scope": "genuine recorded fillet map used only as an inheritance control",
+      "status": "PASS"
+    },
+    {
+      "name": "ten native Cut-A snapshots preserve actual Generated-constructor corner labels",
+      "scope": "genuine native plate-r1 histories; native-only fixture labels, not R2 browser/private/public bindings",
+      "status": "PASS",
+      "data": {
+        "cuts": 10,
+        "cornerBindings": 40,
+        "chains": [
+          {
+            "case": "plate100x50",
+            "cuts": 5,
+            "steps": [
+              {
+                "step": 0,
+                "cornerIndices": [
+                  1,
+                  2,
+                  8,
+                  5
+                ],
+                "contexts": 1
+              },
+              {
+                "step": 1,
+                "cornerIndices": [
+                  1,
+                  2,
+                  8,
+                  5
+                ],
+                "contexts": 1
+              },
+              {
+                "step": 2,
+                "cornerIndices": [
+                  1,
+                  2,
+                  8,
+                  5
+                ],
+                "contexts": 1
+              },
+              {
+                "step": 3,
+                "cornerIndices": [
+                  1,
+                  2,
+                  8,
+                  5
+                ],
+                "contexts": 1
+              },
+              {
+                "step": 4,
+                "cornerIndices": [
+                  1,
+                  2,
+                  8,
+                  5
+                ],
+                "contexts": 1
+              }
+            ]
+          },
+          {
+            "case": "plate150x30",
+            "cuts": 5,
+            "steps": [
+              {
+                "step": 0,
+                "cornerIndices": [
+                  1,
+                  2,
+                  8,
+                  5
+                ],
+                "contexts": 1
+              },
+              {
+                "step": 1,
+                "cornerIndices": [
+                  1,
+                  2,
+                  8,
+                  5
+                ],
+                "contexts": 1
+              },
+              {
+                "step": 2,
+                "cornerIndices": [
+                  1,
+                  2,
+                  8,
+                  5
+                ],
+                "contexts": 1
+              },
+              {
+                "step": 3,
+                "cornerIndices": [
+                  1,
+                  2,
+                  8,
+                  5
+                ],
+                "contexts": 1
+              },
+              {
+                "step": 4,
+                "cornerIndices": [
+                  1,
+                  2,
+                  8,
+                  5
+                ],
+                "contexts": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "first failure survives later identity history and aggregates are recomputed once",
+      "scope": "synthetic raw relation over genuine unchanged catalog; not native output",
+      "status": "PASS"
+    },
+    {
+      "name": "fresh producer and exact unary fields remain strict",
+      "scope": "synthetic admission controls; repeated producer is NOT a supported cut-chain API",
+      "status": "FAIL",
+      "error": {
+        "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  Comparison {\n+   code: 'ENGINE_FAILURE'\n-   code: 'INVALID_REQUEST'\n  }\n",
+        "code": "ERR_ASSERTION",
+        "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  Comparison {\n+   code: 'ENGINE_FAILURE'\n-   code: 'INVALID_REQUEST'\n  }\n\n    at file:///tmp/codi-inherited-selection-lineage-20261106/test/inherited-selection-lineage/worker.mjs:41:73\n    at check (file:///tmp/codi-inherited-selection-lineage-20261106/test/inherited-selection-lineage/worker.mjs:5:54)\n    at file:///tmp/codi-inherited-selection-lineage-20261106/test/inherited-selection-lineage/worker.mjs:40:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      }
+    },
+    {
+      "name": "malformed history, bindings and nested accessors refuse before user reads",
+      "scope": "synthetic malformed metadata controls only",
+      "status": "PASS"
+    },
+    {
+      "name": "exact one-source snapshot byte budget and UTF8 refusal remain bounded",
+      "scope": "synthetic metadata resource control, no fake native geometry",
+      "status": "PASS",
+      "data": {
+        "acceptedBytes": 524288,
+        "rejectedBytes": 524289,
+        "returnedBytes": 514659
+      }
+    },
+    {
+      "name": "published inherited metadata is detached, immutable and private-index-free",
+      "scope": "synthetic identity history over genuine catalog, no native operation claim",
+      "status": "PASS"
+    }
+  ],
+  "retained29": "PASS"
+}

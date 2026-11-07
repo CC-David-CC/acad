@@ -1,0 +1,162 @@
+TAP version 13
+# Subtest: local independent and dependent rows with free variables
+ok 1 - local independent and dependent rows with free variables
+  ---
+  duration_ms: 2.06329
+  type: 'test'
+  ...
+# Subtest: scale changes retain clear rank and near threshold is ambiguous
+ok 2 - scale changes retain clear rank and near threshold is ambiguous
+  ---
+  duration_ms: 0.322003
+  type: 'test'
+  ...
+# Subtest: zero gradient is singular, not proof of redundancy
+ok 3 - zero gradient is singular, not proof of redundancy
+  ---
+  duration_ms: 0.704827
+  type: 'test'
+  ...
+# Subtest: bounds, sparse values and failed solve are unavailable
+ok 4 - bounds, sparse values and failed solve are unavailable
+  ---
+  duration_ms: 0.431614
+  type: 'test'
+  ...
+# Subtest: 128-variable and 128-equation boundary, 129 refused
+ok 5 - 128-variable and 128-equation boundary, 129 refused
+  ---
+  duration_ms: 72.267861
+  type: 'test'
+  ...
+# Subtest: constraint auxiliary variables and external fixed inputs have explicit treatment
+ok 6 - constraint auxiliary variables and external fixed inputs have explicit treatment
+  ---
+  duration_ms: 1.138511
+  type: 'test'
+  ...
+# Subtest: extreme finite coefficient scaling refuses lost nonzero terms
+ok 7 - extreme finite coefficient scaling refuses lost nonzero terms
+  ---
+  duration_ms: 3.522305
+  type: 'test'
+  ...
+# Subtest: polynomial visits and derivative work are bounded before evaluation
+ok 8 - polynomial visits and derivative work are bounded before evaluation
+  ---
+  duration_ms: 1.115571
+  type: 'test'
+  ...
+# Subtest: near-flat raw derivative is not promoted into a confident classification
+ok 9 - near-flat raw derivative is not promoted into a confident classification
+  ---
+  duration_ms: 0.230202
+  type: 'test'
+  ...
+# Subtest: ordered prefix credits local rank without attributing a pivot row
+ok 10 - ordered prefix credits local rank without attributing a pivot row
+  ---
+  duration_ms: 0.595865
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: actual production Worker closes reproduced two-stage fixed-prior reporting gap
+ok 11 - actual production Worker closes reproduced two-stage fixed-prior reporting gap
+  ---
+  duration_ms: 144.37394
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: real per-stage under/full/redundant controls use original Jacobians and preserve admission
+ok 12 - real per-stage under/full/redundant controls use original Jacobians and preserve admission
+  ---
+  duration_ms: 390.94497
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: real singular zero-distance constraint keeps uncertainty separate from local nullity
+ok 13 - real singular zero-distance constraint keeps uncertainty separate from local nullity
+  ---
+  duration_ms: 129.902029
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: real algebraic contradiction returns existing exact rejection and no diagnostic
+ok 14 - real algebraic contradiction returns existing exact rejection and no diagnostic
+  ---
+  duration_ms: 127.715898
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: zero-length segment and zero-radius circle are domain refusals, not contradiction reports
+ok 15 - zero-length segment and zero-radius circle are domain refusals, not contradiction reports
+  ---
+  duration_ms: 233.10127
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: actual ground reference is fixed in the new stage-local report
+ok 16 - actual ground reference is fixed in the new stage-local report
+  ---
+  duration_ms: 132.354323
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: ordinary single-stage Worker reports and no-option results remain byte-equivalent data
+ok 17 - ordinary single-stage Worker reports and no-option results remain byte-equivalent data
+  ---
+  duration_ms: 1161.222128
+  type: 'test'
+  ...
+# verb 2.0.0
+# verb 2.0.0
+# Subtest: diagnostic variable quota is shared across stages without rejecting a valid solve
+ok 18 - diagnostic variable quota is shared across stages without rejecting a valid solve
+  ---
+  duration_ms: 263.792127
+  type: 'test'
+  ...
+# verb 2.0.0
+# Subtest: stage bound refuses diagnostic only and invalid scope requests remain invalid
+not ok 19 - stage bound refuses diagnostic only and invalid scope requests remain invalid
+  ---
+  duration_ms: 118.723391
+  type: 'test'
+  location: '/tmp/codi-cad-solver-report-qualification-20261106/test/solver-stage-diagnostics/worker.test.mjs:46:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/codi-cad-solver-report-qualification-20261106/test/solver-stage-diagnostics/worker.test.mjs:47:116)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 18
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2782.542657

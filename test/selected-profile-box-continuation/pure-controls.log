@@ -1,0 +1,25 @@
+✔ retained defaults and explicit selected-profile build preserve exact runtime (1.2668ms)
+✔ mixed registered OCC revisions refuse instead of selecting a default or converting (0.701966ms)
+✔ missing, duplicate, wrong-engine and repeated operands refuse (0.236402ms)
+✔ unregistered or malformed runtime hashes cannot become authored revisions (0.252662ms)
+✔ wrong native representation or mount identity refuses (0.207152ms)
+✔ runtime and array accessors reject without reads; sparse inspections refuse (0.395464ms)
+✔ empty native outputs keep their runtime and input inspection is unchanged (0.202312ms)
+✔ empty workspace retains defaults; current output retains its exact registered build (1.040748ms)
+✔ native-empty output preserves its build rather than selecting the default (0.152932ms)
+✔ mixed builds, wrong engine, duplicate IDs and unavailable revisions refuse (1.483902ms)
+✔ continuation reads no accessors and does not mutate inspected evidence (0.307342ms)
+✔ costs current native operations, planes zero;32 is full but replayable,33 refuses (1.24891ms)
+✔ unknown history remains unsupported, malformed/accessor data never executes (0.606585ms)
+✔ aggregate exact boundary accepted, one over refuses without changing charge (1.350011ms)
+✔ same-result inspections do not recharge; changed evidence fails; names remain bounded (0.776646ms)
+✔ invalid counts refuse, close releases accounting and cannot reopen quota (0.278713ms)
+✔ legacy separate mounts cost zero here, incompatible generic builds block append explicitly (0.265162ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.509619

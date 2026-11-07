@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "scope": "Recorded genuine production Worker/native component + independent fixture math; not generic manufacturing/3MF certification",
+  "runs": [
+    {
+      "run": "r1",
+      "meshes": 14,
+      "points": 93
+    },
+    {
+      "run": "r2",
+      "meshes": 14,
+      "points": 93
+    },
+    {
+      "run": "r3",
+      "meshes": 14,
+      "points": 93
+    }
+  ],
+  "faults": 6,
+  "oldCohorts": 5,
+  "sameSourceContinuation": true
+}

@@ -1,0 +1,17 @@
+/tmp/save-capability-DwkjBg/test.cjs:1836
+ if(typeof data!=='string'||!current())throw Error('The authored sketch changed; reopen before saving.');
+                                       ^
+
+Error: The authored sketch changed; reopen before saving.
+    at commitUnconsumedSketchSave (/tmp/save-capability-DwkjBg/test.cjs:1836:46)
+    at Object.commit (eval at _construct (/tmp/save-capability-DwkjBg/test.cjs:2137:401), <anonymous>:33:7)
+    at /tmp/save-capability-DwkjBg/test.cjs:2282:9
+    at /tmp/save-capability-DwkjBg/test.cjs:2374:3
+    at Object.<anonymous> (/tmp/save-capability-DwkjBg/test.cjs:2376:12)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+
+Node.js v24.22.1

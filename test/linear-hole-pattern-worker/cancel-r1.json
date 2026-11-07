@@ -1,0 +1,125 @@
+{
+  "status": "PASS",
+  "scope": "Actual candidate native result cancellation/late delivery only",
+  "ownedBrowserPid": 2272020,
+  "actual": {
+    "outcome": {
+      "code": "CANCELLED"
+    },
+    "after": {
+      "code": "MOUNT_CLOSED"
+    },
+    "heldGenuineMessage": {
+      "kind": "result",
+      "seq": 14,
+      "evidence": {
+        "nativeVolume": 94185.04470928965,
+        "nativeBounds": {
+          "min": [
+            -1.7763568394002505e-15,
+            -4.440892098500626e-16,
+            0
+          ],
+          "max": [
+            100,
+            50,
+            20
+          ]
+        },
+        "faces": 17,
+        "triangles": 1008,
+        "bounds": {
+          "min": [
+            -4.107825191113079e-15,
+            -4.440892098500626e-16,
+            0
+          ],
+          "max": [
+            100,
+            50,
+            20
+          ]
+        },
+        "signedVolume": 94219.89988659356,
+        "empty": false,
+        "resultKind": "single-solid",
+        "solidCount": 1,
+        "nativeValidity": {
+          "method": "occ-inspect-analytic-v1",
+          "valid": true
+        },
+        "nativeTopology": {
+          "version": 1,
+          "method": "occ-topology-census-v1",
+          "shapeType": 0,
+          "directChildren": 1,
+          "counts": {
+            "compounds": 1,
+            "compsolids": 0,
+            "solids": 1,
+            "shells": 1,
+            "faces": 17,
+            "wires": 31,
+            "edges": 45,
+            "vertices": 30
+          }
+        },
+        "materialRegions": null,
+        "voidRegions": null,
+        "validLevel0": null,
+        "validLevel2": null,
+        "manifoldPredicate": null,
+        "volumeQuality": "tessellation-signed-integral"
+      },
+      "pattern": {
+        "version": 1,
+        "unit": "millimeter",
+        "engine": "occ",
+        "engineRevision": "sha256:dd666902fe926d69cc3c8843f5568c2a3e569f38ff49291baa2f248165b5ea99:8d5e537e0d7f9e12b8ae0eaf239c0be1080934ed12a24bf6e7f849c9135ed5a2",
+        "featureId": 50,
+        "target": "worker-solid:1:[41,\"body\"]",
+        "producerFeatureId": 41,
+        "seedFeatureId": 20,
+        "axis": "source-local-x-positive",
+        "count": 3,
+        "spacing": 20
+      },
+      "work": {
+        "version": 1,
+        "nativeResults": 4,
+        "resultTriangles": [
+          124,
+          124,
+          248,
+          1008
+        ]
+      }
+    },
+    "records": [
+      {
+        "terminated": 1,
+        "posts": [
+          "init",
+          "selected-profile-extrude",
+          "solid-selections",
+          "solid-through-holes",
+          "solid-selections",
+          "solid-through-holes",
+          "solid-selections",
+          "solid-edge-treatment",
+          "solid-selections",
+          "solid-edge-treatment",
+          "solid-selections",
+          "dispose",
+          "dispose",
+          "dispose",
+          "solid-linear-hole-pattern"
+        ]
+      }
+    ],
+    "seedGeometryDisposedBeforePattern": true
+  },
+  "liveOwnedWorkers": 0,
+  "ownedBrowserClosed": true,
+  "profileRemoved": true
+}

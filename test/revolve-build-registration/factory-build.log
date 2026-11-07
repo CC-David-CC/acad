@@ -1,0 +1,24 @@
+asset factory.bundle.js 2.62 KiB [emitted] (name: factory)
+./test/revolve-build-registration/factory-entry.ts 39 bytes [built] [code generated] [1 error]
+
+ERROR in ./test/revolve-build-registration/factory-entry.ts
+Module build failed (from ../codi-four-corner-clean-integrated-20261104/node_modules/babel-loader/lib/index.js):
+SyntaxError: /mnt/data10tb/codi-revolve-catalog-registration-20261106-r1/test/revolve-build-registration/factory-entry.ts: Unexpected token, expected "," (5:12)
+
+  3 | import * as catalog from 'engine/mount/engineCatalog.mjs';
+  4 | import revolveAssets from 'codi-revolve-profile-assets';
+> 5 | (globalThis as any).__revolveFactory={createCatalogMount,revolveAssets,...catalog};
+    |             ^
+  6 |
+    at instantiate (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:72:32)
+    at constructor (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:366:12)
+    at Parser.raise (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:3453:19)
+    at Parser.unexpected (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:3491:16)
+    at Parser.expect (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:4128:28)
+    at Parser.parseParenAndDistinguishExpression (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:13523:14)
+    at Parser.parseExprAtom (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:13113:23)
+    at Parser.parseExprSubscripts (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:12785:23)
+    at Parser.parseUpdate (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:12764:21)
+    at Parser.parseMaybeUnary (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:12734:23)
+
+webpack 5.74.0 compiled with 1 error in 320 ms

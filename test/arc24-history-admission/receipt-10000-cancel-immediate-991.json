@@ -1,0 +1,48 @@
+{
+  "nativeEqual": null,
+  "snapshotError": "The project restore is incomplete. Close this workspace and try again.",
+  "storageEqual": true,
+  "sourceEqual": true,
+  "beforeModels": 0,
+  "afterModels": 0,
+  "beforeHistory": 0,
+  "afterHistory": 0,
+  "beforeResources": {
+    "owners": 0,
+    "mounts": 0,
+    "candidates": 0,
+    "accepted": 0,
+    "detached": 0,
+    "cleanupFailed": false
+  },
+  "afterResources": {
+    "owners": 1,
+    "mounts": 0,
+    "candidates": 1,
+    "accepted": 0,
+    "detached": 0,
+    "cleanupFailed": false
+  },
+  "workers": [
+    {
+      "closed": true,
+      "url": "http://127.0.0.1:20489/static/project-validator.3ae7f2bbbaedf25e54c3.js"
+    }
+  ],
+  "bytes": 767961,
+  "history": 10000,
+  "keys": 10001,
+  "keysMs": 1.1000001430511475,
+  "timings": {
+    "reset": 1,
+    "loadData": 26.200000047683716,
+    "stageCalls": 10000,
+    "stagedFactoryCalls": 1
+  },
+  "tasks": [],
+  "elapsedMs": 5025.5,
+  "maxOtherGap": 56.299999952316284,
+  "outcome": "AbortError: Document was replaced, closed or cancelled.",
+  "otherReady": true,
+  "appHash": "8184854b80a018c58c74a48a59a8e0cdd7be970e24c6b2276ee003fe5eb38ba9"
+}

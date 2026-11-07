@@ -1,0 +1,27 @@
+const assert=require('node:assert/strict'),puppeteer=require(process.env.PUPPETEER_CORE_PATH||'puppeteer-core');
+const base=new URL(process.env.JSKETCHER_TEST_URL),cdp=new URL(process.env.CODI_TEST_CDP);
+if(![base,cdp].every(u=>['127.0.0.1','localhost','[::1]'].includes(u.hostname)))throw Error('Loopback only');
+(async()=>{const browser=await puppeteer.connect({browserURL:cdp.href,protocolTimeout:120000}),context=await browser.createBrowserContext();try{
+ const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(new URL('index-webos.html?DEFAULT&webos=1',base).href);await page.waitForFunction('__CAD_APP?.streams?.lifecycle?.projectLoaded?.value===true',{timeout:90000});await page.addScriptTag({url:new URL('static/webosTest.bundle.js',base).href});
+ const initial=await page.evaluate(async()=>{
+  window.Cypress={$:s=>{const a=[...document.querySelectorAll(s)];a.index=n=>a.indexOf(n);return a}};
+  window.ui=webosTest.modellerUISubject(__CAD_APP);[window.sketch]=await webosTest.createPlaneAndOpenSketcher(ui);
+  window.ctx=__CAD_APP.services.sketcher.inPlaceEditor.sketcherAppContext;window.v=sketch.viewer;
+  window.segments=[sketch.addSegment(-80,-40,80,-40),sketch.addSegment(80,-40,80,40),sketch.addSegment(80,40,-80,40),sketch.addSegment(-80,40,-80,-40)];
+  const before=v.io.serializeSketch(undefined,{strict:true});sketch.select(segments);ctx.actions.CreateRigidGroupGlobal.invoke(ctx);return before;
+ });
+ await page.waitForFunction(()=>v.parametricManager.stage.algNumSystem.allConstraints.some(c=>c.schema.id==='RigidGroup'));
+ const history=await page.evaluate(()=>{const h=v.historyManager,after=v.io.serializeSketch(undefined,{strict:true});h.undo();const undo=v.io.serializeSketch(undefined,{strict:true});h.redo();return {after,undo,redo:v.io.serializeSketch(undefined,{strict:true})};});assert.equal(history.undo,initial);assert.equal(history.redo,history.after);
+ const drag=await page.evaluate(()=>{const relation=v.parametricManager.stage.algNumSystem.allConstraints.find(c=>c.schema.id==='RigidGroup');window.group=relation.objects[0];window.segments=relation.objects.slice(1);const p=segments[0].b,s=v.screenToModelMatrix.invert().apply3([p.x,p.y,0]),r=v.canvas.getBoundingClientRect();return {x:r.x+s[0]/v.retinaPxielRatio,y:r.y+(v.canvas.height-s[1])/v.retinaPxielRatio,id:p.id,before:[p.x,p.y]};});
+ await page.mouse.move(drag.x,drag.y);await new Promise(r=>setTimeout(r,100));await page.mouse.down();const selected=await page.evaluate(()=>({tool:v.toolManager.tool?.name,ids:v.selected.map(o=>o.id)}));assert.equal(selected.tool,'drag');assert.ok(selected.ids.includes(drag.id));await page.mouse.move(drag.x-12,drag.y+8,{steps:4});await page.mouse.up();
+ const moved=await page.evaluate(()=>({point:[segments[0].b.x,segments[0].b.y],status:v.parametricManager.stage.algNumSystem.solveStatus,residuals:v.parametricManager.stage.algNumSystem.allConstraints.flatMap(c=>{const out=[];c.collectPolynomials(out);return out.map(x=>x.value());})}));assert.equal(moved.status.success,true);assert.notDeepEqual(moved.point,drag.before);assert.ok(moved.residuals.every(n=>Number.isFinite(n)&&Math.abs(n)<1e-6));
+ await page.evaluate(()=>{sketch.select([segments[0]]);ctx.actions.PoseRigidGroupGlobal.invoke(ctx);});await page.waitForFunction(()=>document.body.innerText.toLowerCase().includes('rigid group pose'));
+ const inputs=await page.$$('input:not([type=file])');assert.equal(inputs.length,3,`expected pose fields, found ${inputs.length}`);
+ for(let i=0;i<3;i++){await inputs[i].click({clickCount:3});await inputs[i].press('Backspace');await inputs[i].type(['0','30','20'][i]);}
+ await page.evaluate(()=>[...document.querySelectorAll('button')].find(b=>b.textContent.trim()==='APPLY').click());
+ await page.waitForFunction(()=>!document.body.innerText.toLowerCase().includes('rigid group pose'));try{await page.waitForFunction(()=>Math.abs(group.tx.get()-30)<1e-6&&Math.abs(group.ty.get()-20)<1e-6&&Math.abs(group.angle.get())<1e-8,{timeout:10000});}catch(e){console.error('POSE_DIAGNOSTIC',await page.evaluate(()=>({pose:[group.tx.get(),group.ty.get(),group.angle.get()],text:document.body.innerText.slice(-1000),status:v.parametricManager.stage.algNumSystem.solveStatus})));throw e;}
+ const second=await page.evaluate(async()=>{const view=ctx.actions.PoseRigidGroup.inspect(ctx);return ctx.actions.PoseRigidGroup.invokeById(ctx,group.id,view.revision,{x:31,y:22,angle:0.4});});assert.equal(second.status,'accepted');
+ await page.evaluate(async ()=>await ui.commitSketch());const saved=await page.evaluate(()=>__CAD_APP.projectManager.snapshotCurrentProject());const fresh=await context.newPage();await fresh.goto(new URL('index-webos.html?DEFAULT&webos=1',base).href);await fresh.waitForFunction('__CAD_APP?.streams?.lifecycle?.projectLoaded?.value===true',{timeout:90000});await fresh.evaluate(snapshot=>__CAD_APP.projectManager.restoreSnapshotInEmptyWorkspace(JSON.stringify(snapshot)),saved);const restored=await fresh.evaluate(()=>__CAD_APP.projectManager.snapshotCurrentProject());assert.deepEqual(restored.project.sketches,saved.project.sketches);assert.ok(JSON.stringify(restored.project.sketches).includes('RigidGroup'));assert.deepEqual(errors,[]);
+ console.log('PASS selected create, real drag, UI and ID pose, undo/redo and fresh native replay');
+}finally{await context.close();browser.disconnect();}})().catch(error=>{console.error(error.stack);process.exitCode=1});

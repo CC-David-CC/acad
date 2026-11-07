@@ -1,0 +1,597 @@
+{
+  "version": 1,
+  "source": "1c3f5dc3f7b73cd991439e403e7b4981adc8c06e",
+  "scope": "Actual Chromium Canvas, Path2D and native request/cancelAnimationFrame. Test timing interception withholds callback delivery; no Worker/full-app/CSP claim.",
+  "cases": [
+    {
+      "phase": "baseline",
+      "mode": "close-queued",
+      "sourceSha256": "0d7bd5959df5498d689ae9a8846e2837c6ebe1dd943187747dec4f65569482a4",
+      "compiledSha256": "579723d7c039f97db7a2d9a3384cb4c885bc6e4343df6e071277f4a2dbdd0248",
+      "after": {
+        "deliveredBefore": 0,
+        "result": null,
+        "cancelled": [],
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            400,
+            400
+          ]
+        ],
+        "draws": 0
+      },
+      "late": {
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "drawsBefore": 0,
+        "drawsAfter": 0,
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "final": {
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    },
+    {
+      "phase": "baseline",
+      "mode": "close-delivered",
+      "sourceSha256": "0d7bd5959df5498d689ae9a8846e2837c6ebe1dd943187747dec4f65569482a4",
+      "compiledSha256": "579723d7c039f97db7a2d9a3384cb4c885bc6e4343df6e071277f4a2dbdd0248",
+      "after": {
+        "deliveredBefore": 1,
+        "result": null,
+        "cancelled": [],
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            400,
+            400
+          ]
+        ],
+        "draws": 0
+      },
+      "late": {
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "drawsBefore": 0,
+        "drawsAfter": 0,
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "final": {
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    },
+    {
+      "phase": "baseline",
+      "mode": "clear-queued",
+      "sourceSha256": "0d7bd5959df5498d689ae9a8846e2837c6ebe1dd943187747dec4f65569482a4",
+      "compiledSha256": "579723d7c039f97db7a2d9a3384cb4c885bc6e4343df6e071277f4a2dbdd0248",
+      "after": {
+        "deliveredBefore": 0,
+        "result": null,
+        "cancelled": [],
+        "dimensions": [
+          [
+            300,
+            150
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            400,
+            400
+          ]
+        ],
+        "draws": 0
+      },
+      "late": {
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "drawsBefore": 0,
+        "drawsAfter": 0,
+        "dimensions": [
+          [
+            300,
+            150
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "final": {
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    },
+    {
+      "phase": "baseline",
+      "mode": "replace-queued",
+      "sourceSha256": "0d7bd5959df5498d689ae9a8846e2837c6ebe1dd943187747dec4f65569482a4",
+      "compiledSha256": "579723d7c039f97db7a2d9a3384cb4c885bc6e4343df6e071277f4a2dbdd0248",
+      "after": {
+        "deliveredBefore": 0,
+        "result": null,
+        "cancelled": [],
+        "dimensions": [
+          [
+            400,
+            400
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            400,
+            400
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "draws": 1
+      },
+      "late": {
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "drawsBefore": 1,
+        "drawsAfter": 1,
+        "dimensions": [
+          [
+            400,
+            400
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "final": {
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    },
+    {
+      "phase": "fixed",
+      "mode": "close-queued",
+      "sourceSha256": "1169b4f632c510a121610799791b54a1eb9a46f2dfd68e3facd9831dc229ee7c",
+      "compiledSha256": "fd599ab7c51e72088f687df0135f48a7572f8a45ff71b28aa24feabdc579b2d6",
+      "after": {
+        "deliveredBefore": 0,
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "cancelled": [
+          1
+        ],
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "draws": 0
+      },
+      "late": {
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "drawsBefore": 0,
+        "drawsAfter": 0,
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "final": {
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    },
+    {
+      "phase": "fixed",
+      "mode": "close-delivered",
+      "sourceSha256": "1169b4f632c510a121610799791b54a1eb9a46f2dfd68e3facd9831dc229ee7c",
+      "compiledSha256": "fd599ab7c51e72088f687df0135f48a7572f8a45ff71b28aa24feabdc579b2d6",
+      "after": {
+        "deliveredBefore": 1,
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "cancelled": [
+          1
+        ],
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "draws": 0
+      },
+      "late": {
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "drawsBefore": 0,
+        "drawsAfter": 0,
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "final": {
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    },
+    {
+      "phase": "fixed",
+      "mode": "clear-queued",
+      "sourceSha256": "1169b4f632c510a121610799791b54a1eb9a46f2dfd68e3facd9831dc229ee7c",
+      "compiledSha256": "fd599ab7c51e72088f687df0135f48a7572f8a45ff71b28aa24feabdc579b2d6",
+      "after": {
+        "deliveredBefore": 0,
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "cancelled": [
+          1
+        ],
+        "dimensions": [
+          [
+            300,
+            150
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "draws": 0
+      },
+      "late": {
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "drawsBefore": 0,
+        "drawsAfter": 0,
+        "dimensions": [
+          [
+            300,
+            150
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "final": {
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    },
+    {
+      "phase": "fixed",
+      "mode": "replace-queued",
+      "sourceSha256": "1169b4f632c510a121610799791b54a1eb9a46f2dfd68e3facd9831dc229ee7c",
+      "compiledSha256": "fd599ab7c51e72088f687df0135f48a7572f8a45ff71b28aa24feabdc579b2d6",
+      "after": {
+        "deliveredBefore": 0,
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "cancelled": [
+          1
+        ],
+        "dimensions": [
+          [
+            400,
+            400
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "draws": 1
+      },
+      "late": {
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        },
+        "drawsBefore": 1,
+        "drawsAfter": 1,
+        "dimensions": [
+          [
+            400,
+            400
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "final": {
+        "dimensions": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "result": {
+          "status": "rejected",
+          "name": "AbortError"
+        }
+      }
+    }
+  ],
+  "status": "pass",
+  "browser": "Chrome/155.0.8059.79"
+}
