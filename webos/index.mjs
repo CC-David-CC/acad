@@ -17,6 +17,7 @@ import {registerParameterCommands} from './parameter-commands.mjs';
 import {registerLegacyExpressionCommands} from './legacy-expression-commands.mjs';
 import {registerDisplayUnitCommands} from './display-unit-commands.mjs';
 import {registerMaterialCommands} from './material-commands.mjs';
+import {registerDrawingCommands} from './drawing-commands.mjs';
 import {registerManufacturingCommands} from './manufacturing-commands.mjs';
 import {registerDocumentSaveCommand} from './document-commands.mjs';
 import {registerSketchDiagnosticCommands} from './diagnostic-commands.mjs';
@@ -208,6 +209,11 @@ export function mount(host){
   return {manager,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.projectManager===manager};
  }));
  if(host.commands)host.onDispose(registerDrawingExportCommand(host,{inspect:inspectSaveTarget,exportDrawing:exportDrawingSvg}));
+ if(host.commands)host.onDispose(registerDrawingCommands(host,()=>{
+  if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
+  const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
+  return {manager,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.projectManager===manager};
+ }));
  if(host.commands)host.onDispose(registerManufacturingCommands(host,{inspect:inspectSaveTarget,exportModel:args=>export3mf(args),getTarget:()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
