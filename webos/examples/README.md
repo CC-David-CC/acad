@@ -261,7 +261,7 @@ Actual deployed beta receipts:
 `../../../../research/beta-cad-public-acceptance-20261106/`.
 These older receipts keep their original source/build pins, not new UI pins.
 
-### Native point observation (implementation pending signed qualification)
+### Native point observation (bounded signed qualification passes)
 
 The shared command `classify-worker-solid-points` accepts exact fields
 `revision,version:1,unit:'millimeter',engine:'occ',engineRevision,bodyId,featureId,points`.
@@ -279,4 +279,4 @@ captured current history, checks the resulting native metrics/bindings, queries
 the kernel, then retires temporary resources before returning. It does not save,
 allocate authored IDs, or publish geometry. This is a kernel observation, not a
 continuous geometric or physical certificate. The adapter's tests cover metadata
-and lifetime routing only; signed native replay acceptance is still pending.
+and lifetime routing only. Separate signed native proof passes13queries/77points over four saved-source fixtures; see desktop test/agent-cad-corpus/sweep/signed-point-evidence-r1. Full capacity/general domains/interruption remain unqualified.
