@@ -1,5 +1,11 @@
 # Browser CAD command examples
 
+The [source-bound shell example](source-bound-shell.md) is a new on-disk helper
+for a genuine native box, discovered builder-semantic top face and inward shell.
+It uses shared thickness/source replay, travel and normal Save/Open. Source only:
+the complete composed signed workflow and app-entry export are pending; no
+Native-success or arbitrary-shell claim follows from this addition.
+
 [Explicit deletion and parent repair](reference-repair.md) describes the new
 source-only shared reference commands. They require actual discovery, checked
 replay and separate Save; candidate eligibility is not a geometry guarantee.
