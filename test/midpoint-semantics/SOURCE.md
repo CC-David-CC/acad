@@ -115,3 +115,27 @@ constraint JSON or seed a saved native sketch and label it public authoring.
 Its required mapping is an explicit next integration dependency; it was not
 silently invented in this bounded audit. No Root Craft, PM, Native/Worker-shell,
 Desktop registry or common lifecycle file changes are part of this checkpoint.
+
+## Follow-up shared/public source slice (not executed)
+
+The capability gaps recorded above are now implemented in source, without
+changing the already-correct midpoint equations. Public commands
+`apply-closed-sketch-midpoint` and `apply-closed-sketch-angle-group` use the same
+real `prepareConstraintGroup`/`addConstraintGroup` admission as human actions.
+The shared transition reconstructs the actual source, applies one transaction,
+preserves unrelated objects and authored intent, solves the candidate and then
+independently reconstructs the complete requested group in another disposable
+Worker before existing sketch-byte replay/publication. Creation and numeric
+angle edits reuse the existing journal; there is no second chronology.
+
+The initial angle branch is explicit: numeric0<degrees<180, positive polar t,
+no directed zero/360 crossing. Global wrap semantics and typed angle expressions
+are not advertised. Existing typed mutation refusals remain. Inspection exposes
+these limits and requires actual Worker validation for eligibility. Capture
+accepts own dense bounded data across the real same-origin iframe realms.
+Desktop detaches/freezes IDs before dispatch with the existing account/window/
+document scope and committed-outcome settlement.
+
+See `WORKFLOW.md` and `desktop-driver.mjs` for the prepared complete public
+acceptance. The Desktop example performs no work on import. No checks, builds,
+Native results or signed execution have been run for this follow-up checkpoint.
