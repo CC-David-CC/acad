@@ -26,6 +26,7 @@ import {openCadSources} from './source-dialog.mjs';
 import {createAgentToolsPanel} from './agent-tools-panel.mjs';
 export {createCadAgent} from './examples/cad-agent.mjs';
 export {createSourceBoundPatternExample} from './examples/source-bound-pattern.mjs';
+export {createSourceBoundSweepExample} from './examples/source-bound-sweep.mjs';
 
 const APP_NAME='CAD Modeler (JSketcher inspired)';
 

@@ -1,5 +1,10 @@
 # Browser CAD command examples
 
+The [source-bound sweep example](source-bound-sweep.md) is now present in source,
+pending combined signed-runtime qualification. Its exported helper uses the same
+public commands for genuine two-plane source authoring, creation and Save.
+Its presence does not imply the deployed beta contains the sweep API.
+
 The new [source-bound pattern recipe](source-bound-pattern.md) uses the generic
 owned part path, semantic holes and outer edge treatments. Its JavaScript lives
 in `source-bound-pattern.mjs`, exported as `createSourceBoundPatternExample` by
