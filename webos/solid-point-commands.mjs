@@ -1,0 +1,17 @@
+import {settleScopedCommand} from './scoped-command.mjs';
+// Transport only: the shared core owns frozen full replay, native classification,
+// currentness, resource cleanup and read-only accepted-state preservation.
+export function registerSolidPointCommands(host,getTarget){
+ const keys=['revision','version','unit','engine','engineRevision','bodyId','featureId','points'],bounded=(v,n)=>typeof v==='string'&&v.length>0&&v.length<=n;
+ function data(v,wanted){const p=v&&typeof v==='object'?Object.getPrototypeOf(v):undefined;if(!v||typeof v!=='object'||Array.isArray(v)||(p!==null&&Object.getPrototypeOf(p)!==null)||Reflect.ownKeys(v).length!==wanted.length||Reflect.ownKeys(v).some(k=>typeof k!=='string'||!wanted.includes(k)))throw Error('Expected exact native point command fields.');const out={};for(const k of wanted){const d=Object.getOwnPropertyDescriptor(v,k);if(!d?.enumerable||!Object.hasOwn(d,'value'))throw Error('Native point fields must be own data.');out[k]=d.value;}return out;}
+ function dense(v,min,max){if(!Array.isArray(v)||v.length<min||v.length>max||Reflect.ownKeys(v).length!==v.length+1)throw Error('Expected bounded dense point data.');return Array.from({length:v.length},(_,i)=>{const d=Object.getOwnPropertyDescriptor(v,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value'))throw Error('Point coordinates must be dense own data.');return d.value;});}
+ const text=maxLength=>({type:'string',minLength:1,maxLength}),buildPattern='^sha256:[a-f0-9]{64}:[a-f0-9]{64}$';
+ const stop=host.commands.register({id:'classify-worker-solid-points',description:'Read native classifications of up to64 world-space millimeter points through temporary current-part re-evaluation. Does not edit or save the model.',parameters:{type:'object',additionalProperties:false,required:keys.slice(),properties:{revision:text(256),version:{type:'integer',enum:[1]},unit:{enum:['millimeter']},engine:{enum:['occ']},engineRevision:{type:'string',minLength:136,maxLength:136,pattern:buildPattern},bodyId:text(1024),featureId:{type:'integer',minimum:1,maximum:Number.MAX_SAFE_INTEGER},points:{type:'array',minItems:1,maxItems:64,items:{type:'array',minItems:3,maxItems:3,items:{type:'number',minimum:-4000000,maximum:4000000}}}}}},async args=>{
+  const input=data(args,keys);if(!bounded(input.revision,256)||input.version!==1||input.unit!=='millimeter'||input.engine!=='occ'||typeof input.engineRevision!=='string'||input.engineRevision.length!==136||!new RegExp(buildPattern).test(input.engineRevision)||!bounded(input.bodyId,1024)||!Number.isSafeInteger(input.featureId)||input.featureId<1)throw Error('Provide current body/producer/revision, explicit OCC build and millimeter units.');
+  input.points=Object.freeze(dense(input.points,1,64).map(p=>Object.freeze(dense(p,3,3).map(n=>{if(typeof n!=='number'||!Number.isFinite(n)||Math.abs(n)>4000000)throw Error('Native point coordinates must be finite millimeters within ±4,000,000.');return n;}))));
+  const intent=Object.freeze(input),target=getTarget(),session=host.session();const valid=()=>{try{return !!session&&!host.signal.aborted&&host.session()===session&&target.valid()===true;}catch{return false;}};
+  if(!valid()||typeof target.craft?.classifyWorkerSolidPoints!=='function')throw Error('Native point observation is unavailable in this modeling window.');
+  const scope=Object.freeze({signal:host.signal,valid});return settleScopedCommand(target.craft.classifyWorkerSolidPoints(intent,scope),scope);
+ });
+ let disposed=false;return()=>{if(!disposed){disposed=true;stop();}};
+}

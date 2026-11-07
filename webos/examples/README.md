@@ -260,3 +260,23 @@ Actual geometry and file regression tests:
 Actual deployed beta receipts:
 `../../../../research/beta-cad-public-acceptance-20261106/`.
 These older receipts keep their original source/build pins, not new UI pins.
+
+### Native point observation (implementation pending signed qualification)
+
+The shared command `classify-worker-solid-points` accepts exact fields
+`revision,version:1,unit:'millimeter',engine:'occ',engineRevision,bodyId,featureId,points`.
+Use current `inspect-worker-solids` output to select the actual body/producer
+and its runtime pin. Points are1–64 dense world-space millimeter triples within
+±4,000,000. Initial core support is the explicit registered OCC sweep build and
+a current unplaced valid single-solid at the full authored history tip, without
+typed/project expressions. Unsupported domains refuse; there is no fallback to
+preview mesh classification or an older live handle.
+
+The response retains the binding, `quality:'native-re-evaluation-observation'`
+and `points:[{point,classification}]`. Classifications are `inside`, `outside`,
+`boundary`, or `unknown`; unknown stays unknown. The core privately re-evaluates
+captured current history, checks the resulting native metrics/bindings, queries
+the kernel, then retires temporary resources before returning. It does not save,
+allocate authored IDs, or publish geometry. This is a kernel observation, not a
+continuous geometric or physical certificate. The adapter's tests cover metadata
+and lifetime routing only; signed native replay acceptance is still pending.
