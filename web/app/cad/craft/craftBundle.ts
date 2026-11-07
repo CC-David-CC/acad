@@ -1711,6 +1711,8 @@ interface CraftService {
   createEmptySketchPlane?: ReturnType<typeof createEmptySketchCreationCommands>['createEmptySketchPlane'];
   inspectSketchTransitions?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectSketchTransitions'];
   inspectClosedSketch?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketch'];
+  applyClosedSketchMidpoint?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchMidpoint'];
+  applyClosedSketchAngleGroup?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchAngleGroup'];
   applySketchLengthRelation?: ReturnType<typeof createClosedSketchTransitionCommands>['applySketchLengthRelation'];
   applySketchConcentric?: ReturnType<typeof createClosedSketchTransitionCommands>['applySketchConcentric'];
   editClosedSketchPoint?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchPoint'];
