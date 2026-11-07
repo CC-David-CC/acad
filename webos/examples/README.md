@@ -1,5 +1,12 @@
 # Browser CAD command examples
 
+[Linked part drawing commands](linked-part-drawing.md) now have an on-disk
+`linked-part-drawing.mjs` helper for caller-supplied authentic definitions,
+create/replace/remove, shared Undo/Redo, SVG export and native Save/Open.
+It uses the existing public document-bound agent, performs nothing on import,
+and adds no app-entry export. This source-only addition awaits full workflow
+qualification; installed commands and measurement support must be discovered.
+
 [Printable parts and material assignments](printable-parts.md) documents the new
 shared transaction commands. Source only; combined browser acceptance pending.
 
