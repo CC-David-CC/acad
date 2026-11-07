@@ -41,6 +41,21 @@ export function registerMaterialCommands(host,getTarget){
    if(!t.valid())throw Error('The window or account changed.');
    return {status:'accepted',saved:false};
   }));
+  const nullableId={anyOf:[{type:'null'},text(128)]};
+  const region={type:'object',additionalProperties:false,required:['id','bodyId','featureId','materialId','appearanceId'],properties:{id:text(128),bodyId:text(1024),featureId:{type:'integer',minimum:1},materialId:nullableId,appearanceId:nullableId}};
+  const part={type:'object',additionalProperties:false,required:['id','name','regions'],properties:{id:text(128),name:text(256),regions:{type:'array',minItems:1,maxItems:32,items:region}}};
+  stops.push(host.commands.register({id:'inspect-printable-parts',description:'Discover current authored bodies, stable producer IDs, existing part/material assignments and publication readiness. This does not certify exportability.',parameters:{type:'object',additionalProperties:false}},args=>{
+   fields(args,[]);const t=target('inspectGenericManufacturingParts'),result=t.manager.inspectGenericManufacturingParts();
+   if(!t.valid())throw Error('The window or account changed.');return result;
+  }));
+  stops.push(host.commands.register({id:'assign-printable-parts',description:'Assign named printable parts and their material regions through the shared authored transaction. Use discovered IDs and revision. Supports shared session Undo/Redo; Save is separate. Does not certify a manufacturing export.',parameters:{type:'object',additionalProperties:false,required:['revision','materials','appearances','parts'],properties:{revision:text(256),materials:{type:'array',maxItems:128,items:material},appearances:{type:'array',maxItems:128,items:appearance.anyOf[1]},parts:{type:'array',maxItems:32,items:part}}}},async args=>{
+   fields(args,['revision','materials','appearances','parts']);bounded(args.revision,256);
+   const t=target('assignGenericManufacturingParts');
+   // The shared manager synchronously captures bounded own data before its first
+   // await. Keep that single authoritative validator; no adapter-owned model or
+   // second assignment representation. Unsupported/older runtimes refuse above.
+   return settleScopedCommand(t.manager.assignGenericManufacturingParts(args,{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
+  }));
  }catch(error){for(const stop of stops.reverse())stop();throw error;}
  return ()=>{for(const stop of stops.splice(0).reverse())stop();};
 }

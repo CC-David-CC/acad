@@ -1,5 +1,8 @@
 # Browser CAD command examples
 
+[Printable parts and material assignments](printable-parts.md) documents the new
+shared transaction commands. Source only; combined browser acceptance pending.
+
 The [source-bound sweep example](source-bound-sweep.md) is now present in source,
 pending combined signed-runtime qualification. Its exported helper uses the same
 public commands for genuine two-plane source authoring, creation and Save.
