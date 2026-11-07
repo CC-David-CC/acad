@@ -100,7 +100,14 @@ export function mount(host){
  function detach(frame){if(!frame)return;frames.delete(frame);try{frame.contentWindow?.__CAD_APP?.projectService?.dispose?.();}catch(error){console.error('CAD document cleanup failed',error);}try{frame.src='about:blank';}catch{}frame.remove();}
  function createFrame(hidden){const frame=document.createElement('iframe');frame.title=APP_NAME;frame.sandbox='allow-scripts allow-same-origin allow-modals';frame.className='jsketcher-frame'+(hidden?' jsketcher-staging':'');frame.src=new URL('./node_modules/jsketcher-build/index-webos.html?DEFAULT&webos=1',import.meta.url).href;frames.add(frame);stage.append(frame);return frame;}
  async function waitReady(frame){const deadline=Date.now()+60000;while(valid()&&frames.has(frame)){let ctx;try{ctx=frame.contentWindow?.__CAD_APP;}catch{}const failure=ctx?.streams?.lifecycle?.initializationFailure?.value;if(failure){console.error('CAD initialization failed',failure);throw Object.assign(Error(APP_NAME+' could not finish starting. Close this window and open it again.'),{cause:failure});}if(ctx?.streams?.lifecycle?.projectLoaded?.value&&ctx.projectManager?.snapshotCurrentProject&&ctx.projectManager?.restoreSnapshotInEmptyWorkspace){if(typeof ctx.projectService?.bindHostLifetime==='function'&&!ctx.projectService.hasHostLifetime)ctx.projectService.bindHostLifetime({signal:host.signal,valid:()=>valid()&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx});return ctx;}if(Date.now()>deadline)throw Error(APP_NAME+' took too long to start.');await pause(50);}throw Error('The window or account changed.');}
- function supportedEnvelope(value){if(value?.format!=='codi-jsketcher-project'||value.version!==2||value.unit!=='millimeter'||!value.project||typeof value.project!=='object'||Array.isArray(value.project))throw Error('The CAD runtime returned an unsupported project format or units.');return value;}
+ function supportedEnvelope(value){
+  if(value?.format!=='codi-jsketcher-project'||![2,3].includes(value.version)||value.unit!=='millimeter'||!value.project||typeof value.project!=='object'||Array.isArray(value.project))throw Error('The CAD runtime returned an unsupported project format or units.');
+  // Full definition validation belongs to the CAD validation Worker/manager.
+  // Never accept a mismatched version that could silently discard metadata.
+  const hasDrawings=Object.hasOwn(value,'drawings');
+  if(value.version===2?hasDrawings:!hasDrawings||!Array.isArray(value.drawings)||value.drawings.length!==1||Reflect.ownKeys(value.drawings).length!==2||!Object.hasOwn(value.drawings,0)||!value.drawings[0]||typeof value.drawings[0]!=='object'||Array.isArray(value.drawings[0])||value.drawings[0].version!==1||value.drawings[0].unit!=='millimeter')throw Error('The CAD runtime returned unsupported drawing metadata.');
+  return value;
+ }
  function snapshot(frame=active){if(!valid()||!frame||!frames.has(frame))throw Error('The modeling window is unavailable.');const ctx=frame.contentWindow?.__CAD_APP;if(!ctx?.projectManager)throw Error('The model is still loading.');return JSON.stringify(supportedEnvelope(ctx.projectManager.snapshotCurrentProject()));}
  function unchanged(frame,previous){try{return frame===active&&snapshot(frame)===previous;}catch{return false;}}
  function inspectSaveTarget(){
@@ -141,7 +148,8 @@ export function mount(host){
    const project={model:savedModel,sketches,...(surfacing?{surfacing}:{})};
    const getter=typeof ctx.projectManager?.getManufacturingMetadata==='function'?()=>ctx.projectManager.getManufacturingMetadata():null;
    const presentation=typeof ctx.projectManager?.getPresentationMetadata==='function'?()=>ctx.projectManager.getPresentationMetadata():null;
-   return {documentToken:commandDocumentToken(),path:state.path,revision:inspectSaveTarget().revision,dirty:inspectedProjectIsDirty(project,baseline,getter,ctx.projectManager.unit,presentation),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
+   const drawing=typeof ctx.projectManager?.getLinkedPartDrawingDefinition==='function'?()=>ctx.projectManager.getLinkedPartDrawingDefinition():null;
+   return {documentToken:commandDocumentToken(),path:state.path,revision:inspectSaveTarget().revision,dirty:inspectedProjectIsDirty(project,baseline,getter,ctx.projectManager.unit,presentation,drawing),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
   });host.onDispose(unregister);
   for(const opening of [false,true]){
    const id=opening?'open-project':'new-project',keys=opening?['revision','path']:['revision'];

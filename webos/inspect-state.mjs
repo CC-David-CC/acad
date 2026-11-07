@@ -1,7 +1,19 @@
 // Read-only inspection mirrors the host's serialized saved envelope.
-export function inspectedProjectIsDirty(project, baseline, getManufacturing, unit, getPresentation) {
+export function inspectedProjectIsDirty(project, baseline, getManufacturing, unit, getPresentation, getDrawing) {
   const prior = JSON.parse(baseline);
-  if(prior?.format!=='codi-jsketcher-project'||prior.version!==2||prior.unit!=='millimeter'||unit!==prior.unit)throw Error('Supported project units and format are unavailable.');
+  if(prior?.format!=='codi-jsketcher-project'||![2,3].includes(prior.version)||prior.unit!=='millimeter'||unit!==prior.unit)throw Error('Supported project units and format are unavailable.');
+  const drawingWrapped=Object.hasOwn(prior,'drawings');
+  function drawing(value){
+    if(!value||typeof value!=='object'||Array.isArray(value)||value.version!==1||value.unit!=='millimeter')throw Error('Drawing metadata is unavailable.');
+    return value;
+  }
+  if(prior.version===3){
+    if(!drawingWrapped||!Array.isArray(prior.drawings)||prior.drawings.length!==1)throw Error('Drawing metadata is unavailable.');
+    drawing(prior.drawings[0]);
+    if(typeof getDrawing!=='function')throw Error('Drawing metadata is unavailable.');
+  }else if(drawingWrapped)throw Error('Drawing metadata is unavailable.');
+  const currentDrawing=typeof getDrawing==='function'?getDrawing():null;
+  const definition=currentDrawing===null?null:drawing(currentDrawing);
   const wrapped = Object.prototype.hasOwnProperty.call(prior,'manufacturing');
   if (wrapped && typeof getManufacturing !== 'function') throw Error('Manufacturing state is unavailable.');
   const manufacturing = typeof getManufacturing === 'function' ? getManufacturing() : null;
@@ -20,6 +32,6 @@ export function inspectedProjectIsDirty(project, baseline, getManufacturing, uni
   }
   const currentPresentation = typeof getPresentation === 'function' ? getPresentation() : null;
   const display = currentPresentation === null ? null : presentation(currentPresentation);
-  const inspected = {format:'codi-jsketcher-project',version:2,unit,project,...(manufacturing?{manufacturing}:{}),...(display?{presentation:display}:{})};
+  const inspected = {format:'codi-jsketcher-project',version:definition===null?2:3,unit,project,...(manufacturing?{manufacturing}:{}),...(display?{presentation:display}:{}),...(definition===null?{}:{drawings:[definition]})};
   return JSON.stringify(inspected) !== baseline;
 }
