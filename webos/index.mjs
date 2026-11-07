@@ -19,6 +19,7 @@ import {registerManufacturingCommands} from './manufacturing-commands.mjs';
 import {registerDocumentSaveCommand} from './document-commands.mjs';
 import {registerSketchDiagnosticCommands} from './diagnostic-commands.mjs';
 import {registerSketchExportCommands,validateDxfBlob} from './sketch-export-commands.mjs';
+import {createStepExportController} from './step-export-commands.mjs';
 import {registerSelectedProfileCommands} from './selected-profile-commands.mjs';
 import {registerSelectedProfileRegionCommands} from './selected-profile-region-commands.mjs';
 import {registerRevolveCommands} from './revolve-commands.mjs';
@@ -46,7 +47,7 @@ export function mount(host){
  let disposed=false,busy=operations.busy,active=null,candidate=null,baseline=null,watch=()=>{},watchRevision=0,checkRevision=0;
  let actionCleanup=()=>{};
  const sourceMenus=new WeakSet(),sourceLifetime=new AbortController();let sourceOpening=false,sourceClose=null;
- let agentTools=null;
+ let agentTools=null,stepExport=null;
  const abortSources=()=>sourceLifetime.abort();if(host.signal.aborted)abortSources();else host.signal.addEventListener('abort',abortSources,{once:true});
  const unsubscribeOperations=operations.subscribe(state=>{busy=state.busy;if(active&&frames.has(active))syncCurrentActions();});
  let updateActions=()=>{};function syncCurrentActions(){updateActions();}
@@ -73,7 +74,7 @@ export function mount(host){
   }
   const cleanups=[],updates=[];
   try{
-  for(const id of ['Save','DesktopSaveAs','DesktopExport3MF','DesktopExportDXF','ExportFaceToDXF','NativeFormatImport','DesktopDisplayInches','DesktopDisplayMillimeters']){
+  for(const id of ['Save','DesktopSaveAs','DesktopExport3MF','DesktopExportSTEP','DesktopExportDXF','ExportFaceToDXF','NativeFormatImport','DesktopDisplayInches','DesktopDisplayMillimeters']){
    const stream=ctx?.streams?.action?.state?.[id];if(!stream?.attach||!stream?.next)continue;
    let writing=false,base=!!stream.value?.enabled;
    const update=()=>{
@@ -163,6 +164,12 @@ export function mount(host){
   const frame=active,ctx=frame.contentWindow?.__CAD_APP;
   return {craft:ctx?.craftService,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx};
  });
+ stepExport=createStepExportController(host,{container:body,tell,getTarget:()=>{
+  if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading or its file operation to finish.');
+  const frame=active,ctx=frame.contentWindow?.__CAD_APP,craft=ctx?.craftService,project=ctx?.projectService,signal=project?.documentSignal,generation=project?.documentGeneration;
+  return{craft,blobPrototype:frame.contentWindow.Blob.prototype,valid:()=>valid()&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.craftService===craft&&ctx?.projectService===project&&project?.documentSignal===signal&&!signal?.aborted&&project?.isDocumentCurrent(generation)===true};
+ }});
+ host.onDispose(stepExport.dispose);if(host.commands)host.onDispose(stepExport.register());
  if(host.commands){host.onDispose(rectangle.register());host.onDispose(registerFeatureCommands(host,()=>rectangle.target()));host.onDispose(registerClosedSketchCommands(host,()=>rectangle.target()));host.onDispose(registerPrimitiveCommands(host,()=>rectangle.target()));host.onDispose(registerSolidCommands(host,()=>rectangle.target()));host.onDispose(registerParameterCommands(host,()=>rectangle.target()));host.onDispose(registerLegacyExpressionCommands(host,()=>rectangle.target()));}
  if(host.commands)host.onDispose(registerSketchExportCommands(host,{getTarget:()=>rectangle.target(),exportDxf:args=>exportDxf(args)}));
  if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
@@ -384,12 +391,12 @@ export function mount(host){
    return Object.freeze({path,version:written.version,status:written.status,sourceRevision:revision,faceId,unit:'millimeter',coordinates:'sketch-local',frame:exportedFrame,dirty:earlier,persistence:'browser',serverStatus:'not-verified'});
   }catch(error){tell('Could not export DXF: '+error.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));if(command){if(writeStarted)Object.defineProperty(error,'possiblyCommitted',{value:true,enumerable:true});throw error;}}finally{token.finish();}
  }
- function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(data?.type==='rectangle-edit-dialog'&&Object.keys(data).length===1){openRectangleEditDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','export-3mf','export-dxf'].includes(data.action))return;if(data.action==='export-dxf'&&(Object.keys(data).sort().join(',')!=='action,faceId,type'||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>1024))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='export-3mf')void export3mf();else if(data.action==='export-dxf')void exportDxf(null,data.faceId);else void saveProject(data.action==='save-as');}
+ function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(data?.type==='rectangle-edit-dialog'&&Object.keys(data).length===1){openRectangleEditDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','export-3mf','export-dxf','export-step'].includes(data.action))return;if(data.action==='export-dxf'&&(Object.keys(data).sort().join(',')!=='action,faceId,type'||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>1024))return;if(data.action==='export-step'&&(Reflect.ownKeys(data).length!==2||!['type','action'].every(key=>{const d=Object.getOwnPropertyDescriptor(data,key);return d?.enumerable&&Object.hasOwn(d,'value')})))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='export-3mf')void export3mf();else if(data.action==='export-dxf')void exportDxf(null,data.faceId);else if(data.action==='export-step')void stepExport.open().catch(error=>tell('Could not export STEP: '+error.message));else void saveProject(data.action==='save-as');}
  window.addEventListener('message',receive);
  const retry=textButton('Retry opening project',()=>{if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner)void openProject(w.launchContext.path,{initial:true});});retry.hidden=true;
  const review=textButton('Review material assignments',()=>void reviewManufacturing());review.hidden=true;
  body.append(warning,stage,status,retry,review);
  const initialToken=begin('initial-load');
  queueMicrotask(async()=>{if(!initialToken)return;try{if(!current(initialToken))return;active=createFrame(false);const ctx=await waitReady(active);if(!current(initialToken))return;bindActions(ctx);baseline=snapshot();tell('New model. Use File to open or save a project in My files.');if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner){await openProject(w.launchContext.path,{initial:true,token:initialToken});if(valid()&&state.path!==w.launchContext.path)retry.hidden=false;}}catch(e){tell('Could not start '+APP_NAME+': '+e.message);}finally{initialToken.finish();}});
- return {element:body,dispose(){if(disposed)return;disposed=true;agentTools?.dispose();agentTools=null;abortSources();sourceClose?.();sourceClose=null;host.signal.removeEventListener('abort',abortSources);unsubscribeOperations();actionCleanup();closeRectangleDialog();closeRectangleEditDialog();watchRevision++;checkRevision++;watch();delete state.hasChanges;window.removeEventListener('message',receive);for(const [id,reject] of timers){clearTimeout(id);reject(Error('Window closed.'));}timers.clear();for(const frame of [...frames])detach(frame);candidate=null;active=null;}};
+ return {element:body,dispose(){if(disposed)return;disposed=true;stepExport?.dispose();stepExport=null;agentTools?.dispose();agentTools=null;abortSources();sourceClose?.();sourceClose=null;host.signal.removeEventListener('abort',abortSources);unsubscribeOperations();actionCleanup();closeRectangleDialog();closeRectangleEditDialog();watchRevision++;checkRevision++;watch();delete state.hasChanges;window.removeEventListener('message',receive);for(const [id,reject] of timers){clearTimeout(id);reject(Error('Window closed.'));}timers.clear();for(const frame of [...frames])detach(frame);candidate=null;active=null;}};
 }
