@@ -21,6 +21,7 @@ import {registerSketchDiagnosticCommands} from './diagnostic-commands.mjs';
 import {registerSketchExportCommands,validateDxfBlob} from './sketch-export-commands.mjs';
 import {registerSelectedProfileCommands} from './selected-profile-commands.mjs';
 import {registerSelectedProfileRegionCommands} from './selected-profile-region-commands.mjs';
+import {registerRevolveCommands} from './revolve-commands.mjs';
 import {openCadSources} from './source-dialog.mjs';
 import {createAgentToolsPanel} from './agent-tools-panel.mjs';
 export {createCadAgent} from './examples/cad-agent.mjs';
@@ -154,6 +155,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerSketchExportCommands(host,{getTarget:()=>rectangle.target(),exportDxf:args=>exportDxf(args)}));
  if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileRegionCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerRevolveCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerThroughHoleCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLinearHolePatternCommands(host,()=>rectangle.target()));

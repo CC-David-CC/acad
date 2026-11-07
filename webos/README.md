@@ -470,3 +470,17 @@ synchronization. Rebinding uses the core's revision-bound proposal token and
 checks producing references; accepting it is not a geometry or printability
 certificate. This source addition has adapter fault tests; its full signed
 export workflow still requires a matching integrated fixture.
+
+## Experimental shared revolve command adapter
+
+The candidate host exposes `inspect-worker-revolves`,
+`inspect-worker-revolve-regions`, `create-worker-revolve`,
+`inspect-worker-revolve-history` and `edit-worker-revolve`. Inputs preserve
+source face/opaque region/actual source Segment identity, an explicit OCC build,
+separate-body intent and nonzero signed radians up to2π. Discovery/create and
+authored-edit revisions have different roles; use the corresponding inspection.
+The adapter captures scalar intent and uses the existing scoped host lifetime.
+Six transport/admission controls pass; no native CAD or full authored history
+success follows from those controls. Core feature wiring, genuine native
+creation/travel and normal Save/Open must qualify before this feature is ready.
+There is no shutdown save, autosave or compensating rollback.
