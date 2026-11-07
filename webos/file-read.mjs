@@ -10,14 +10,14 @@ export async function readVersionedBytes(files,path,{maximumBytes,valid=()=>true
   if(value.bytes>maximumBytes)throw Error('This file exceeds the supported size.');
   return value;
  };
- check();const before=metadata(await files.stat(path));check();
+ check();const before=metadata(await files.stat(path,{signal}));check();
  const file=await files.readBounded(path,maximumBytes,{signal});check();
  if(!file||!ArrayBuffer.isView(file.data)||Object.prototype.toString.call(file.data)!=='[object Uint8Array]')throw Error('Invalid file snapshot.');
  if(file.status==='conflict')throw Error('Resolve this file conflict in Files first.');
  if(file.data.byteLength>maximumBytes)throw Error('This file exceeds the supported size.');
  if(file.version!==before.version||file.data.byteLength!==before.bytes||
     (typeof before.sha256==='string'&&file.sha256!==before.sha256))throw Error('The file changed while opening. Try again.');
- const after=metadata(await files.stat(path));check();
+ const after=metadata(await files.stat(path,{signal}));check();
  if(after.version!==file.version||after.bytes!==file.data.byteLength||
     (typeof file.sha256==='string'&&after.sha256!==file.sha256))throw Error('The file changed while opening. Try again.');
  return file;
@@ -35,14 +35,14 @@ export async function acquireVersionedSnapshot(files,path,{maximumBytes,valid=()
   if(value.bytes>maximumBytes)throw Error('This file exceeds the supported size.');
   return value;
  };
- check();const before=metadata(await files.stat(path));check();
+ check();const before=metadata(await files.stat(path,{signal}));check();
  const lease=await files.acquireSnapshot(path,{signal,expected:before.version});
  try{
   check();if(!lease||typeof lease.release!=='function'||!['[object Blob]','[object File]'].includes(Object.prototype.toString.call(lease.data)))throw Error('Invalid file snapshot.');
   if(lease.status==='conflict')throw Error('Resolve this file conflict in Files first.');
   if(lease.data.size>maximumBytes)throw Error('This file exceeds the supported size.');
   if(lease.version!==before.version||lease.data.size!==before.bytes||(typeof before.sha256==='string'&&lease.sha256!==before.sha256))throw Error('The file changed while opening. Try again.');
-  const after=metadata(await files.stat(path));check();
+  const after=metadata(await files.stat(path,{signal}));check();
   if(after.version!==lease.version||after.bytes!==lease.data.size||(typeof lease.sha256==='string'&&after.sha256!==lease.sha256))throw Error('The file changed while opening. Try again.');
   return lease;
  }catch(error){lease?.release?.();throw error;}
