@@ -8,10 +8,22 @@ export function createCadAgent({api = globalThis.codiDesktopCommands, windowId, 
     windowId = ids[0];
   }
   if (typeof windowId !== 'string' || !windows().includes(windowId)) throw Error('The selected CAD window is unavailable.');
+  const token = value => typeof value === 'string' && value.length > 0 && value.length <= 256;
+  function readDocumentToken() {
+    const rows = api.list().filter(c => c.appId === 'jsketcher' && c.windowId === windowId);
+    if (!rows.length) throw Error('The selected CAD window or account changed.');
+    const values = rows.map(c => c.documentToken);
+    if (values.some(value => !token(value)) || new Set(values).size !== 1) throw Error('A current CAD document binding is unavailable. Wait for loading to finish.');
+    return values[0];
+  }
+  // Pin once for the helper's entire lifetime, including recipes using execute
+  // repeatedly. Only an explicit accepted New/Open may adopt its exact receipt.
+  let documentToken = readDocumentToken();
   let running = false;
   const current = () => {
     if (signal?.aborted) throw new DOMException('The example was cancelled.', 'AbortError');
     if (!windows().includes(windowId)) throw Error('The selected CAD window or account changed.');
+    if (readDocumentToken() !== documentToken) throw Error('The selected CAD document changed. Create a new helper for it.');
   };
   const notify = event => { try { onStep(Object.freeze(event)); } catch { /* A log callback cannot change command outcomes. */ } };
   async function call(command, args = {}) {
@@ -19,7 +31,7 @@ export function createCadAgent({api = globalThis.codiDesktopCommands, windowId, 
     if (!api.list().some(c => c.appId === 'jsketcher' && c.windowId === windowId && c.id === command)) throw Error('Command unavailable in this build: ' + command);
     notify({command, phase: 'started'});
     try {
-      const result = await api.execute({windowId, command, args});
+      const result = await api.execute({windowId, command, args, expectedDocumentToken:documentToken});
       notify({command, phase: 'accepted'});
       // The registry/handler own in-flight cancellation. Return their accepted
       // receipt; a subsequent call checks lifetime before starting another step.
@@ -28,6 +40,16 @@ export function createCadAgent({api = globalThis.codiDesktopCommands, windowId, 
       notify({command, phase: 'rejected', error: {message: String(error.message), committed: error.committed === true, possiblyCommitted: error.possiblyCommitted === true}});
       throw error; // Never retry a mutation or an uncertain file write.
     }
+  }
+  async function replaceDocument(command, args) {
+    const result = await call(command, args);
+    const own = key => {const d = result && typeof result === 'object' ? Object.getOwnPropertyDescriptor(result, key) : null;return d && Object.hasOwn(d, 'value') ? d.value : undefined;};
+    if (own('status') === 'opened' && own('committed') === true && token(own('documentToken'))) {
+      // Preserve the accepted receipt even if a callback/other caller already
+      // replaced its document again. That case must leave this helper stale.
+      try {if (readDocumentToken() === own('documentToken')) documentToken = own('documentToken');} catch {}
+    }
+    return result;
   }
   async function serial(work) {
     if (running) throw Error('Wait for the current example operation to finish.');
@@ -45,8 +67,8 @@ export function createCadAgent({api = globalThis.codiDesktopCommands, windowId, 
     execute: (command, args = {}) => serial(() => call(command, args)),
     inspect: () => serial(() => call('inspect')),
     // Feature-detected: older deployed builds have no public new/open command.
-    newProject: () => serial(async () => { const d = await call('inspect'); return call('new-project', {revision: d.revision}); }),
-    open: path => serial(async () => { const d = await call('inspect'); return call('open-project', {revision: d.revision, path}); }),
+    newProject: () => serial(async () => { const d = await call('inspect'); return replaceDocument('new-project', {revision: d.revision}); }),
+    open: path => serial(async () => { const d = await call('inspect'); return replaceDocument('open-project', {revision: d.revision, path}); }),
     buildBracket: () => serial(async () => {
       const document = await call('inspect');
       if (document.operationCount !== 0 || document.sketchCount !== 0 || document.path || document.dirty) throw Error('Run this demo in a new, empty, unsaved CAD window. Existing work was not replaced.');

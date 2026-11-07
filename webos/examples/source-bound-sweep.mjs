@@ -2,6 +2,7 @@
 import {createCadAgent} from './cad-agent.mjs';
 const one=(rows,label)=>{if(!Array.isArray(rows)||rows.length!==1)throw Error('Choose exactly one '+label+'.');return rows[0];};
 export function createSourceBoundSweepExample(options={}){
+ // This one agent pins the same document token across every recipe step.
  const agent=createCadAgent(options);let busy=false;
  const call=(command,args={})=>agent.execute(command,args);
  const serial=async work=>{if(busy)throw Error('Wait for the current recipe step.');busy=true;try{return await work();}finally{busy=false;}};

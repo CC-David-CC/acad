@@ -109,6 +109,13 @@ export function mount(host){
  // The desktop must call this from its close guard; if the model is in an
  // unsupported intermediate state, prefer a confirmation to data loss.
  state.hasChanges=()=>{if(busy||!valid()||!active||baseline===null)return true;try{return snapshot()!==baseline;}catch{return true;}};
+ // One opaque token derives from the authoritative active document signal.
+ // Save/path changes keep it; accepted New/Open replace the signal itself.
+ const commandDocumentToken=()=>host.commands?.documentToken?.()??null;
+ if(host.commands?.bindDocument)host.onDispose(host.commands.bindDocument(()=>{
+  if(!valid()||!active||!frames.has(active))return null;
+  return active.contentWindow?.__CAD_APP?.projectService?.documentSignal??null;
+ }));
  if(host.commands){
   const unregister=host.commands.register({id:'inspect',description:'Inspect bounded modeling history and save state for this CAD window.',parameters:{type:'object',additionalProperties:false}},args=>{
    if(!args||typeof args!=='object'||Array.isArray(args)||Object.keys(args).length)throw Error('This command accepts no arguments.');
@@ -129,7 +136,7 @@ export function mount(host){
    const project={model:savedModel,sketches,...(surfacing?{surfacing}:{})};
    const getter=typeof ctx.projectManager?.getManufacturingMetadata==='function'?()=>ctx.projectManager.getManufacturingMetadata():null;
    const presentation=typeof ctx.projectManager?.getPresentationMetadata==='function'?()=>ctx.projectManager.getPresentationMetadata():null;
-   return {path:state.path,revision:inspectSaveTarget().revision,dirty:inspectedProjectIsDirty(project,baseline,getter,ctx.projectManager.unit,presentation),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
+   return {documentToken:commandDocumentToken(),path:state.path,revision:inspectSaveTarget().revision,dirty:inspectedProjectIsDirty(project,baseline,getter,ctx.projectManager.unit,presentation),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
   });host.onDispose(unregister);
   for(const opening of [false,true]){
    const id=opening?'open-project':'new-project',keys=opening?['revision','path']:['revision'];
@@ -256,9 +263,9 @@ export function mount(host){
    const empty=snapshot(next);prepared=prepareActions(ctx);const revision=ctx.projectManager.inspectDocumentRevision();
    if(!current(token)||!unchanged(previous,prior)||!token.setDocument(null)||!current(token))throw Error('The window or file changed.');
    const priorWatch=watch;watchRevision++;checkRevision++;watch=()=>{};baseline=empty;state.path=null;state.version=null;delete w.launchContext;w.title=APP_NAME;warning.hidden=true;retry.hidden=true;review.hidden=true;
-   active=next;candidate=null;next=null;published=true;active.classList.remove('jsketcher-staging');
+   active=next;candidate=null;next=null;published=true;const publishedDocumentToken=commandDocumentToken();active.classList.remove('jsketcher-staging');
    detach(previous);const binding=prepared;prepared=null;installActions(binding);priorWatch();tell('New model. Use File to open or save a project in My files.');
-   return Object.freeze({status:'opened',path:null,revision,saved:false,committed:true});
+   return Object.freeze({status:'opened',path:null,revision,saved:false,committed:true,documentToken:publishedDocumentToken});
   }catch(error){if(published)Object.defineProperty(error,'committed',{value:true,enumerable:true});tell('Could not start a new project: '+error.message);throw error;}
   finally{prepared?.cleanup();if(next)detach(next);if(candidate===next)candidate=null;token.finish();if(published&&!valid())throw Object.assign(Error('The new project was published before the window or account changed.'),{committed:true});}
  }
@@ -278,9 +285,9 @@ export function mount(host){
    prepared=prepareActions(ctx);watchBinding=prepareWatch(c,p,file.version);const revision=ctx.projectManager.inspectDocumentRevision(),launch=Object.freeze({version:1,storage:'mirror',path:p,owner});
    if(!unchanged(previous,prior)||!token.setDocument('mirror:'+p)||!current(token)||!c.valid())throw Error('The window or file changed.');
    const priorWatch=watch,publishedWatch=watchBinding;watch=()=>publishedWatch.dispose();watchBinding=null;baseline=restored;state.path=p;state.version=file.version;w.launchContext=launch;w.title=p.split('/').pop()+' — '+APP_NAME;retry.hidden=true;review.hidden=true;
-   active=next;candidate=null;next=null;published=true;active.classList.remove('jsketcher-staging');publishedWatch.activate();detach(previous);
+   active=next;candidate=null;next=null;published=true;const publishedDocumentToken=commandDocumentToken();active.classList.remove('jsketcher-staging');publishedWatch.activate();detach(previous);
    const binding=prepared;prepared=null;installActions(binding);priorWatch();tell('Opened '+p+'.');
-   return Object.freeze({status:'opened',path:p,revision,persistence:'browser',committed:true});
+   return Object.freeze({status:'opened',path:p,revision,persistence:'browser',committed:true,documentToken:publishedDocumentToken});
   }catch(e){if(published)Object.defineProperty(e,'committed',{value:true,enumerable:true});tell('Could not open project: '+e.message+(initial?'':' The current model remains open.'));if(command)throw e;}finally{prepared?.cleanup();watchBinding?.dispose();file?.release();if(next)detach(next);if(candidate===next)candidate=null;token.finish();if(command&&published&&!valid())throw Object.assign(Error('The project was opened before the window or account changed.'),{committed:true});}
  }
  async function saveProject(asCopy=false,command=null){
