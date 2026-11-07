@@ -1,3 +1,4 @@
+import {registerDrawingExportCommand} from './drawing-export-command.mjs';
 import {settleCadFileExport,fileErrorData,safeFileErrorMessage} from './file-export-outcome.mjs';
 import './style.css';
 import {settleScopedCommand} from './scoped-command.mjs';
@@ -206,6 +207,7 @@ export function mount(host){
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
   return {manager,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.projectManager===manager};
  }));
+ if(host.commands)host.onDispose(registerDrawingExportCommand(host,{inspect:inspectSaveTarget,exportDrawing:exportDrawingSvg}));
  if(host.commands)host.onDispose(registerManufacturingCommands(host,{inspect:inspectSaveTarget,exportModel:args=>export3mf(args),getTarget:()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
@@ -347,17 +349,19 @@ export function mount(host){
  }
  // Research-only, scoped to supported assigned models. The iframe never gets
  // account credentials; this host owns file selection and version checks.
- async function export3mf(command=null){
+ async function export3mf(command=null){return exportDerivedModel(command,{label:'3MF',extension:'3mf',method:'exportCore3mfResearch'});}
+ async function exportDrawingSvg(command){return exportDerivedModel(command,{label:'SVG drawing',extension:'svg',method:'exportLinkedPartDrawingSvg'});}
+ async function exportDerivedModel(command,{label,extension,method}){
   if(command&&inspectSaveTarget().revision!==command.revision)throw Error('The model changed; inspect it before exporting.');
-  if(!valid()||!active)return;const token=begin('export-3mf');if(!token)return;
-  return settleCadFileExport(token,{command:!!command,tell,isCurrent:valid,label:'3MF'},async write=>{
+  if(!valid()||!active)return;const token=begin('export-'+extension);if(!token)return;
+  return settleCadFileExport(token,{command:!!command,tell,isCurrent:valid,label},async write=>{
    const frame=active,prior=snapshot(frame),manager=frame.contentWindow?.__CAD_APP?.projectManager;
-   if(typeof manager?.exportCore3mfResearch!=='function')throw Error('3MF export is unavailable.');
-   const chosen=command?.path??await host.ui.prompt('Export the model to My files:',{title:'Export 3MF',value:'/Design.3mf',confirmLabel:'Export',signal:token.signal});
+   if(typeof manager?.[method]!=='function')throw Error(label+' export is unavailable.');
+   const chosen=command?.path??await host.ui.prompt('Export the model to My files:',{title:'Export '+label,value:'/Design.'+extension,confirmLabel:'Export',signal:token.signal});
    if(chosen===null||!current(token))return;
    if(!unchanged(frame,prior))throw Error('The model changed while choosing a file. Try again.');
    const c=await mirrorFileContext();if(!current(token)||!c.valid()||frame!==active)return;
-   const p=c.path(chosen);claim(token,p);if(!/\.3mf$/i.test(p))throw Error('Use a .3mf filename.');let expected=null,old;
+   const p=c.path(chosen);claim(token,p);if(!p.toLowerCase().endsWith('.'+extension))throw Error('Use a .'+extension+' filename.');let expected=null,old;
    try{old=await c.files.stat(p);}catch(e){if(fileErrorData(e,'message')!=='File not found.')throw e;}
    if(old){
     if(command)throw Error('The export path already exists. Choose a new filename.');
@@ -367,9 +371,9 @@ export function mount(host){
     const latest=await c.files.stat(p);if(latest.status==='conflict'||latest.version!==old.version)throw Error('The file changed while confirming. Try again.');expected=old.version;
    }
    if(!unchanged(frame,prior))throw Error('The model changed while preparing export. Try again.');
-   tell('Preparing the 3MF model…');const bytes=await settleScopedCommand(manager.exportCore3mfResearch({signal:token.signal,valid:()=>current(token)&&frame===active}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&frame===active});
+   tell('Preparing '+label+'…');const bytes=await settleScopedCommand(manager[method]({signal:token.signal,valid:()=>current(token)&&frame===active}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&frame===active});
    if(!current(token)||!c.valid()||frame!==active)return;
-   if(!(bytes instanceof frame.contentWindow.Uint8Array)||bytes.byteLength>128*1024*1024)throw Error('The 3MF export is invalid or too large.');
+   if(!(bytes instanceof frame.contentWindow.Uint8Array)||bytes.byteLength>128*1024*1024)throw Error('The '+label+' export is invalid or too large.');
    if(!unchanged(frame,prior))throw Error('The model changed during export. Try again.');
    if(!token.enterLocalWrite())throw new DOMException('The modeling window closed before saving.','AbortError');if(!current(token)||!c.valid()||frame!==active)throw new DOMException('The export was cancelled before writing.','AbortError');write.begin();const result=write.accept(await c.files.write(p,bytes,expected));
    if(!current(token)||!c.valid()||frame!==active)return;
