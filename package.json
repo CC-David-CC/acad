@@ -1,7 +1,7 @@
 {
-  "name": "jsketcher",
+  "name": "acad",
   "version": "0.1.0",
-  "description": "JS.Sketcher is a parametric 2D and 3D CAD modeler written in pure javascript",
+  "description": "ACAD — Agent Computer-Aided Design for the browser WebOS",
   "scripts": {
     "start": "npm run build:physical-parameters-worker && npm run build:sketch-worker && npm run build:project-worker && npm run build:manufacturing-hash-worker && npm run build:controlled-3mf-worker && npm run build:prism-workers && node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.js --port 3000 --host 0.0.0.0",
     "pack": "npm run build:physical-parameters-worker && npm run build:sketch-worker && npm run build:project-worker && npm run build:manufacturing-hash-worker && npm run build:controlled-3mf-worker && npm run build:prism-workers && node ./node_modules/webpack/bin/webpack.js --config webpack.config.js --progress --profile --color",
@@ -22,7 +22,8 @@
     "build:physical-parameters-worker": "webpack --config build/webpack.physical-parameters-worker.cjs",
     "build:project-worker": "node build/precompile-numeric.cjs && webpack --config build/webpack.project-validation-worker.cjs",
     "build:sketch-worker": "node build/precompile-numeric.cjs && webpack --config build/webpack.headless-sketch-worker.cjs",
-    "build:prism-workers": "node build/prepare-prism-assets.cjs && webpack --config build/webpack.prism-semantic-worker.cjs && node build/prepare-raw-smlib-assets.cjs && npm run build:polygon-profile-worker && npm run build:mechanical-profile-worker && npm run build:boolean-history-worker && npm run build:revolve-profile && npm run build:sweep-profile && npm run build:loft-profile && npm run build:adaptive-metrology && npm run build:step-export && npm run build:manufacturing-mesh && npm run build:shell",
+    "build:selected-profile-worker": "node build/prepare-selected-profile-assets.cjs \"${CODI_SELECTED_NATIVE_DIR}\"",
+    "build:prism-workers": "npm run build:selected-profile-worker && node build/prepare-prism-assets.cjs && webpack --config build/webpack.prism-semantic-worker.cjs && node build/prepare-raw-smlib-assets.cjs && npm run build:polygon-profile-worker && npm run build:mechanical-profile-worker && npm run build:boolean-history-worker && npm run build:revolve-profile && npm run build:sweep-profile && npm run build:loft-profile && npm run build:adaptive-metrology && npm run build:step-export && npm run build:manufacturing-mesh && npm run build:shell",
     "build:polygon-profile-worker": "node build/prepare-polygon-profile-assets.cjs \"${CODI_POLYGON_NATIVE_DIR}\" && node build/polygon-profile-assets-entry.cjs",
     "build:mechanical-profile-worker": "node build/prepare-mechanical-profile-assets.cjs \"${CODI_MECHANICAL_NATIVE_DIR}\" && node build/mechanical-profile-assets-entry.cjs",
     "build:boolean-history-worker": "node build/prepare-boolean-history-assets.cjs \"${CODI_BOOLEAN_HISTORY_NATIVE_DIR}\" && node build/boolean-history-assets-entry.cjs",
@@ -36,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/xibyte/jsketcher.git"
+    "url": "example.invalid/srv/data/git/ACAD.git"
   },
   "keywords": [
     "parametric",
