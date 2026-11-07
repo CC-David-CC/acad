@@ -14,6 +14,7 @@ import {registerSolidCommands} from './solid-commands.mjs';
 import {registerThroughHoleCommands} from './through-hole-commands.mjs';
 import {registerLinearHolePatternCommands} from './linear-hole-pattern-commands.mjs';
 import {registerEdgeTreatmentCommands} from './edge-treatment-commands.mjs';
+import {registerShellCommands} from './shell-commands.mjs';
 import {registerParameterCommands} from './parameter-commands.mjs';
 import {registerLegacyExpressionCommands} from './legacy-expression-commands.mjs';
 import {registerDisplayUnitCommands} from './display-unit-commands.mjs';
@@ -35,6 +36,7 @@ import {openCadSources} from './source-dialog.mjs';
 import {createAgentToolsPanel} from './agent-tools-panel.mjs';
 export {createCadAgent} from './examples/cad-agent.mjs';
 export {createSourceBoundPatternExample} from './examples/source-bound-pattern.mjs';
+export {createSourceBoundShellExample,SHELL_ENGINE_REVISION} from './examples/source-bound-shell.mjs';
 export {createSourceBoundSweepExample} from './examples/source-bound-sweep.mjs';
 
 const APP_NAME='CAD Modeler (JSketcher inspired)';
@@ -193,6 +195,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerSourcePlaneDepthCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSolidPointCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerShellCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerThroughHoleCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLinearHolePatternCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerDisplayUnitCommands(host,()=>{
