@@ -1,5 +1,10 @@
 # Browser CAD command examples
 
+[Midpoint and directed angle groups](sketch-constraint-groups.md) provides a new
+source-only public example with actual inspected point/segment IDs, atomic
+constraint groups, source edits, shared travel and normal Save/Open. Composed
+signed-runtime qualification is pending.
+
 The [source-bound shell example](source-bound-shell.md) is a new on-disk helper
 for a genuine native box, discovered builder-semantic top face and inward shell.
 It uses shared thickness/source replay, travel and normal Save/Open. Source only:
