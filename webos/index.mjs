@@ -12,6 +12,7 @@ import {registerThroughHoleCommands} from './through-hole-commands.mjs';
 import {registerEdgeTreatmentCommands} from './edge-treatment-commands.mjs';
 import {registerParameterCommands} from './parameter-commands.mjs';
 import {registerLegacyExpressionCommands} from './legacy-expression-commands.mjs';
+import {registerDisplayUnitCommands} from './display-unit-commands.mjs';
 import {registerMaterialCommands} from './material-commands.mjs';
 import {registerManufacturingCommands} from './manufacturing-commands.mjs';
 import {registerDocumentSaveCommand} from './document-commands.mjs';
@@ -49,14 +50,21 @@ export function mount(host){
     if(!valid()||active?.contentWindow?.__CAD_APP!==ctx)return;
     if(sourceOpening||sourceClose)return;sourceOpening=true;void openCadSources({read:(name,options)=>host.storage.readCadSource(owner,name,options),valid,signal:sourceLifetime.signal,onClose:()=>{sourceClose=null;}}).then(close=>{if(valid())sourceClose=close;else close();}).catch(()=>tell('Sources and licenses are unavailable.')).finally(()=>{sourceOpening=false;});
    }}]);
-   ctx.streams.ui.menu.all.update(menus=>menus.map(menu=>menu.id==='file'?{...menu,actions:[...menu.actions,'-','DesktopSources']}:menu));
+   const unitActions=['millimeter','inch'].map(lengthUnit=>({id:lengthUnit==='inch'?'DesktopDisplayInches':'DesktopDisplayMillimeters',appearance:{label:lengthUnit==='inch'?'Display units: inches':'Display units: millimeters'},invoke:()=>{
+    if(!valid()||busy||active?.contentWindow?.__CAD_APP!==ctx)return;
+    const manager=ctx.projectManager,current=()=>valid()&&!busy&&active?.contentWindow?.__CAD_APP===ctx&&ctx.projectManager===manager;
+    try{const inspected=manager.inspectDisplayUnits();manager.setDisplayUnits({revision:inspected.revision,lengthUnit},{signal:host.signal,valid:current});if(current()){ctx.viewer.requestRender();tell('Display units: '+(lengthUnit==='inch'?'inches':'millimeters')+'. Model dimensions are unchanged.');}}
+    catch(error){tell('Could not change display units: '+error.message);}
+   }}));
+   ctx.actionService.registerActions(unitActions);
+   ctx.streams.ui.menu.all.update(menus=>menus.map(menu=>menu.id==='file'?{...menu,actions:[...menu.actions,'-','DesktopSources']}:menu.id==='viewModes'?{...menu,actions:[...menu.actions,'-',...unitActions.map(action=>action.id)]}:menu));
    ctx.services.menu.registerMenus([{id:'agent-tools',label:'Agent tools',actions:['DesktopAgentTools']}]);
    ctx.streams.ui.controlBars.left.update(actions=>actions.flatMap(action=>action==='menu.file'?[action,'menu.agent-tools']:[action]));
    sourceMenus.add(ctx);
   }
   const cleanups=[],updates=[];
   try{
-  for(const id of ['Save','DesktopSaveAs','DesktopExport3MF','DesktopExportDXF','ExportFaceToDXF','NativeFormatImport']){
+  for(const id of ['Save','DesktopSaveAs','DesktopExport3MF','DesktopExportDXF','ExportFaceToDXF','NativeFormatImport','DesktopDisplayInches','DesktopDisplayMillimeters']){
    const stream=ctx?.streams?.action?.state?.[id];if(!stream?.attach||!stream?.next)continue;
    let writing=false,base=!!stream.value?.enabled;
    const update=()=>{
@@ -114,7 +122,8 @@ export function mount(host){
    const operations=history.slice(0,100).map(op=>{if(!op||typeof op.type!=='string')throw Error('The operation history is unavailable.');return op.type.slice(0,128);});
    const project={model:savedModel,sketches,...(surfacing?{surfacing}:{})};
    const getter=typeof ctx.projectManager?.getManufacturingMetadata==='function'?()=>ctx.projectManager.getManufacturingMetadata():null;
-   return {path:state.path,revision:inspectSaveTarget().revision,dirty:inspectedProjectIsDirty(project,baseline,getter,ctx.projectManager.unit),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
+   const presentation=typeof ctx.projectManager?.getPresentationMetadata==='function'?()=>ctx.projectManager.getPresentationMetadata():null;
+   return {path:state.path,revision:inspectSaveTarget().revision,dirty:inspectedProjectIsDirty(project,baseline,getter,ctx.projectManager.unit,presentation),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
   });host.onDispose(unregister);
   for(const opening of [false,true]){
    const id=opening?'open-project':'new-project',keys=opening?['revision','path']:['revision'];
@@ -143,6 +152,11 @@ export function mount(host){
  if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerThroughHoleCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerDisplayUnitCommands(host,()=>{
+  if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading or saving.');
+  const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
+  return {manager,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.projectManager===manager};
+ }));
  if(host.commands)host.onDispose(registerSketchDiagnosticCommands(host,()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,diagnostics=ctx?.sketchDiagnosticService;
