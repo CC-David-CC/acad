@@ -41,3 +41,28 @@ test('partial command registration cleans up',()=>{
  assert.throws(()=>registerMaterialCommands({commands:{register(){if(++count===2)throw Error('registration');return ()=>removed++;}}},()=>null),/registration/);
  assert.equal(removed,1);
 });
+// Adapter controls use an explicit manager protocol fixture. They do not claim
+// Native geometry, recursive payload admission, journal publication or Save.
+const generic=()=>({revision:'g1',materials:[{id:'pla',name:'PLA'}],appearances:[],parts:[{id:'plate',name:'Plate',regions:[{id:'main',bodyId:'worker-solid:7',featureId:7,materialId:'pla',appearanceId:null}]}]});
+test('generic discovery and setter route to the shared manager and retain its receipt',async()=>{
+ const f=fixture(),inspection=Object.freeze({revision:'g1',targets:[],publication:'shared-metadata-transaction-v1'}),receipt=Object.freeze({changed:true,authoredUndo:true,revision:'g2'});let seen;
+ try{f.manager.inspectGenericManufacturingParts=()=>inspection;f.manager.assignGenericManufacturingParts=(input,options)=>{seen={input,options};assert(options.valid());return Promise.resolve(receipt)};
+ assert.equal(f.handlers.get('inspect-printable-parts')({}),inspection);const input=generic();assert.equal(await f.handlers.get('assign-printable-parts')(input),receipt);assert.equal(seen.input,input);assert.equal(seen.options.signal,f.abort.signal);assert.equal(f.state.mutations,0);
+ }finally{f.dispose()}
+});
+test('generic methods unavailable in an older runtime refuse without an alternate writer',async()=>{
+ const f=fixture();try{assert.throws(()=>f.handlers.get('inspect-printable-parts')({}),/unavailable/);await assert.rejects(f.handlers.get('assign-printable-parts')(generic()),/unavailable/);assert.equal(f.state.mutations,0)}finally{f.dispose()}
+});
+test('generic top-level accessors and extras refuse before shared admission',async()=>{
+ const f=fixture();let calls=0,reads=0;f.manager.assignGenericManufacturingParts=()=>{calls++;return Promise.resolve()};
+ try{for(const field of ['revision','materials','appearances','parts']){const input=generic();Object.defineProperty(input,field,{enumerable:true,get(){reads++;throw Error('must not run')}});await assert.rejects(f.handlers.get('assign-printable-parts')(input),/arguments/)}const input=generic();input[Symbol('extra')]=true;await assert.rejects(f.handlers.get('assign-printable-parts')(input),/arguments/);assert.equal(reads,0);assert.equal(calls,0)}finally{f.dispose()}
+});
+test('generic in-flight adapter refuses stale account/window and observes original completion',async()=>{
+ for(const invalidate of [f=>f.state.session={},f=>f.state.current=false,f=>f.abort.abort()]){const f=fixture();let release;const wait=new Promise(r=>release=r);f.manager.assignGenericManufacturingParts=async(input,options)=>{await wait;assert.equal(options.valid(),false);throw new DOMException('stale','AbortError')};try{const pending=f.handlers.get('assign-printable-parts')(generic());invalidate(f);release();await assert.rejects(pending,{name:'AbortError'})}finally{release?.();f.dispose()}}
+});
+test('generic committed failures and falsey rejection causes are not replaced',async()=>{
+ for(const cause of [Object.assign(Error('observer failed'),{committed:true}),0,false,null,undefined]){const f=fixture();f.manager.assignGenericManufacturingParts=()=>Promise.reject(cause);try{let observed=false;await f.handlers.get('assign-printable-parts')(generic()).then(()=>assert.fail('must reject'),error=>{observed=true;assert.equal(error,cause)});assert(observed)}finally{f.dispose()}}
+});
+test('partial generic registration and disposal release every registered command',()=>{
+ const registered=new Set();let count=0;assert.throws(()=>registerMaterialCommands({commands:{register(def){if(++count===4)throw Error('fourth');registered.add(def.id);return()=>registered.delete(def.id)}}},()=>null),/fourth/);assert.equal(registered.size,0);
+});
