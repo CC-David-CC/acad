@@ -27,6 +27,7 @@ import {registerSketchExportCommands,validateDxfBlob} from './sketch-export-comm
 import {createStepExportController,stepExportErrorMessage} from './step-export-commands.mjs';
 import {registerSelectedProfileCommands} from './selected-profile-commands.mjs';
 import {registerSelectedProfileRegionCommands} from './selected-profile-region-commands.mjs';
+import {registerSelectedProfileSourceDimensionCommands} from './selected-profile-source-dimension-commands.mjs';
 import {registerRevolveCommands} from './revolve-commands.mjs';
 import {registerSweepCommands} from './sweep-commands.mjs';
 import {registerLoftCommands} from './loft-commands.mjs';
@@ -37,6 +38,7 @@ import {createAgentToolsPanel} from './agent-tools-panel.mjs';
 export {createCadAgent} from './examples/cad-agent.mjs';
 export {createSourceBoundPatternExample} from './examples/source-bound-pattern.mjs';
 export {createSourceBoundShellExample,SHELL_ENGINE_REVISION} from './examples/source-bound-shell.mjs';
+export {createSourceDimensionRegionExample} from './examples/source-dimension-region.mjs';
 export {createSourceBoundSweepExample} from './examples/source-bound-sweep.mjs';
 
 const APP_NAME='CAD Modeler (JSketcher inspired)';
@@ -189,6 +191,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerReferenceCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileRegionCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerSelectedProfileSourceDimensionCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerRevolveCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSweepCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLoftCommands(host,()=>rectangle.target()));
