@@ -6,17 +6,26 @@ export function registerDrawingCommands(host,getTarget){
  const stops=[],text=maxLength=>({type:'string',minLength:1,maxLength}),integer={type:'integer',minimum:1,maximum:Number.MAX_SAFE_INTEGER};
  const record=properties=>({type:'object',additionalProperties:false,required:Object.keys(properties),properties});
  const point={type:'array',minItems:2,maxItems:2,items:{type:'number',minimum:0,maximum:10000}};
- const source=record({kind:{enum:['source-point']},featureId:integer,faceId:text(256),regionId:text(8192),curveId:text(256),curveType:{enum:['segment','circle']},point:{enum:['a','b','center']}});
- const face=record({kind:{enum:['native-face']},originFeatureId:integer,selectionId:text(16384),geometry:{enum:['plane']}});
- const edge=record({kind:{enum:['native-edge']},originFeatureId:integer,selectionId:text(16384),geometry:{enum:['line']}});
- const hole=record({kind:{enum:['center-hole']},featureId:integer,sourceFeatureId:integer,faceId:text(256),regionId:text(8192),slot:{enum:['center']},geometry:{enum:['cylinder']}});
- const base={dimensionId:text(128),viewId:text(128),label:point},axis={enum:['datum-x','datum-y']};
- const dimension={anyOf:[record({...base,kind:{enum:['source-distance']},axis,from:source,to:source}),record({...base,kind:{enum:['plane-distance']},axis:{enum:['datum-normal']},first:face,second:face}),record({...base,kind:{enum:['edge-length']},edge}),record({...base,kind:{enum:['hole-diameter']},hole}),record({...base,kind:{enum:['hole-offset']},axis,hole})]};
+ // Descriptions are bounded registry metadata, not a second semantic
+ // validator. The shared manager captures the full exact definition schema.
+ const ref=name=>({$ref:'#/$defs/'+name});
+ const refs={
+  source:{type:'object',description:'Exact {kind:source-point,featureId,faceId,regionId,curveId,curveType,point}. curveType segment uses point a|b; circle uses center. Must retain declared datum binding.'},
+  face:{type:'object',description:'Exact {kind:native-face,originFeatureId,selectionId,geometry:plane}. Inspected authored selection only; no Native ordinal.'},
+  edge:{type:'object',description:'Exact {kind:native-edge,originFeatureId,selectionId,geometry:line}. Inspected authored selection only; no Native ordinal.'},
+  hole:{type:'object',description:'Exact {kind:center-hole,featureId,sourceFeatureId,faceId,regionId,slot:center,geometry:cylinder}. Retain datum/source identity.'},
+  point
+ };
+ const dimension=record({dimensionId:text(128),viewId:text(128),kind:{enum:['source-distance','plane-distance','edge-length','hole-diameter','hole-offset']},label:ref('point')});
+ // Variant fields are conditional; actual fieldsets are enforced by PM.
+ dimension.required=['dimensionId','viewId','kind','label'];
+ Object.assign(dimension.properties,{axis:{enum:['datum-x','datum-y','datum-normal']},from:ref('source'),to:ref('source'),first:ref('face'),second:ref('face'),edge:ref('edge'),hole:ref('hole')});
+ dimension.description='Exact variants add: source-distance axis datum-x|datum-y +from/to; plane-distance axis datum-normal +first/second (front/right only); edge-length edge; hole-diameter hole; hole-offset axis datum-x|datum-y +hole. Components are datum-axis magnitudes, not diagonal lengths. Labels are paper mm.';
  const definition=record({version:{enum:[1]},unit:{enum:['millimeter']},drawingId:text(128),title:{type:'string',maxLength:256},
   target:record({featureId:integer,operationType:text(128),engine:{enum:['occ']},engineRevision:{type:'string',pattern:'^sha256:[a-f0-9]{64}:[a-f0-9]{64}$'},output:{enum:['complete-native-result']}}),
   datum:record({featureId:integer,faceId:text(256),regionId:text(8192)}),
   sheet:record({width:{type:'number',exclusiveMinimum:0,maximum:10000},height:{type:'number',exclusiveMinimum:0,maximum:10000},scale:record({numerator:{type:'integer',minimum:1,maximum:10000},denominator:{type:'integer',minimum:1,maximum:10000}})}),
-  views:{type:'array',minItems:1,maxItems:3,items:record({viewId:text(128),basis:{enum:['top','front','right']},paperOrigin:point,visibility:{enum:['visible-and-hidden']}})},dimensions:{type:'array',maxItems:16,items:dimension}});
+  views:{type:'array',minItems:1,maxItems:3,items:record({viewId:text(128),basis:{enum:['top','front','right']},paperOrigin:ref('point'),visibility:{enum:['visible-and-hidden']}})},dimensions:{type:'array',maxItems:16,items:dimension}});
  function plain(value){const p=Object.getPrototypeOf(value);if(p===null)return true;const c=Object.getOwnPropertyDescriptor(p,'constructor');return Object.getPrototypeOf(p)===null&&c&&Object.hasOwn(c,'value')&&typeof c.value==='function'&&c.value.prototype===p;}
  function own(value,keys){
   if(!value||typeof value!=='object'||Array.isArray(value)||!plain(value)||Reflect.ownKeys(value).length!==keys.length)throw Error('Expected exact drawing command fields.');
@@ -57,7 +66,7 @@ export function registerDrawingCommands(host,getTarget){
   }));
   for(const [id,op] of [['create-linked-part-drawing','drawing.create'],['replace-linked-part-drawing','drawing.replace'],['remove-linked-part-drawing','drawing.remove']]){
    const properties={version:{enum:[1]},unit:{enum:['millimeter']},revision:text(256),geometryRevision:text(256),...(op==='drawing.create'?{}:{drawingId:text(128)}),...(op==='drawing.remove'?{}:{definition})};
-   stops.push(host.commands.register({id,description:'Publish an authored linked drawing definition through the shared document transaction. Use both inspected revisions; travel-authored-edit supplies Undo/Redo. Save separately. References may remain explicitly unresolved.',parameters:record(properties)},args=>{
+   stops.push(host.commands.register({id,description:'Publish an authored linked drawing definition through the shared document transaction. Use both inspected revisions; travel-authored-edit supplies Undo/Redo. Save separately. References may remain explicitly unresolved.',parameters:{...record(properties),...(op==='drawing.remove'?{}:{$defs:refs})}},args=>{
     const request=detach({op,...own(args,Object.keys(properties))}),t=target('applyLinkedPartDrawingOperation'),scope={signal:host.signal,valid:t.valid};
     return settleScopedCommand(t.manager.applyLinkedPartDrawingOperation(request,scope),scope);
    }));
