@@ -1,3 +1,4 @@
+import {fileErrorData as errorData,fileOutcomeError as outcomeError,safeFileErrorMessage} from './file-export-outcome.mjs';
 import {settleScopedCommand} from './scoped-command.mjs';
 
 const ADD_ABORT=AbortSignal.prototype.addEventListener,REMOVE_ABORT=AbortSignal.prototype.removeEventListener;
@@ -40,16 +41,7 @@ export function captureStepArtifact(value,request,selected,blobPrototype){
  const m=fields(r.metadata,['format','schema','structure','byteLength','inputShapeCount','inputSolidCounts','transferCount'],'INVALID_RESPONSE');m.inputSolidCounts=Object.freeze(dense(m.inputSolidCounts,32,'INVALID_RESPONSE'));if(m.format!=='step'||m.schema!=='AP214IS'||m.structure!=='geometric-solid-set'||!Number.isSafeInteger(m.byteLength)||m.byteLength<1||m.byteLength>MAX_BYTES||m.inputShapeCount!==selected.length||m.transferCount!==selected.length||m.inputSolidCounts.length!==selected.length||m.inputSolidCounts.some((count,i)=>count!==selected[i].solidCount))fail('INVALID_RESPONSE','STEP native metadata disagrees with selected outputs.');
  let size,type;try{size=Object.getOwnPropertyDescriptor(blobPrototype,'size').get.call(r.blob);type=Object.getOwnPropertyDescriptor(blobPrototype,'type').get.call(r.blob)}catch{fail('INVALID_RESPONSE','STEP export did not return a real Blob.');}if(size!==m.byteLength||type!=='application/octet-stream')fail('INVALID_RESPONSE','STEP Blob size or type disagrees with its native receipt.');r.metadata=Object.freeze(m);return Object.freeze(r);
 }
-// Exceptions are arbitrary JavaScript values. Never read their accessors or
-// use their truthiness to decide whether an operation failed.
-function errorData(value,key){try{if(value===null||(typeof value!=='object'&&typeof value!=='function'))return;for(let i=0;value&&i<8;i++,value=Object.getPrototypeOf(value)){const d=Object.getOwnPropertyDescriptor(value,key);if(d)return Object.hasOwn(d,'value')?d.value:undefined}}catch{return}}
-function ownErrorData(value,key){try{const d=Object.getOwnPropertyDescriptor(value,key);return d&&Object.hasOwn(d,'value')?d.value:undefined}catch{return}}
-export function stepExportErrorMessage(error){const message=errorData(error,'message');return typeof message==='string'&&message.trim()?message.slice(0,1024):'STEP export was interrupted. Inspect My files before retrying.';}
-function outcomeError(error,outcome,current){
- const known=outcome?.kind==='committed',pending=outcome?.kind==='pending';if(!known&&!pending)return error;
- const message=errorData(error,'message'),name=errorData(error,'name'),code=errorData(error,'code'),detail=typeof message==='string'?message.slice(0,512):'Completion was interrupted.';const result=new Error(!current?'The export outcome belongs to a window or account that changed. Inspect My files before retrying.':(known?'The STEP file was saved on this device, but completion was interrupted. ':'The export write outcome is uncertain. ')+'Inspect My files before retrying. '+detail,{cause:error});result.name=typeof name==='string'&&name.length<=128?name:'Error';if(typeof code==='string')result.code=code.slice(0,256);
- if(known||ownErrorData(error,'committed')===true)result.committed=true;else result.possiblyCommitted=true;return result;
-}
+export function stepExportErrorMessage(error){return safeFileErrorMessage(error,'STEP export was interrupted. Inspect My files before retrying.');}
 
 // One app-contained controller serves real File-menu selection and the command.
 // Host storage owns hashing/bytes/CAS; this module never reads the whole Blob,

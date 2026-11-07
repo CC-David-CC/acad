@@ -1,3 +1,4 @@
+import {settleCadFileExport,fileErrorData} from './file-export-outcome.mjs';
 import './style.css';
 import {settleScopedCommand} from './scoped-command.mjs';
 import {inspectedProjectIsDirty} from './inspect-state.mjs';
@@ -331,8 +332,8 @@ export function mount(host){
  // account credentials; this host owns file selection and version checks.
  async function export3mf(command=null){
   if(command&&inspectSaveTarget().revision!==command.revision)throw Error('The model changed; inspect it before exporting.');
-  if(!valid()||!active)return;const token=begin('export-3mf');if(!token)return;let writeStarted=false;
-  try{
+  if(!valid()||!active)return;const token=begin('export-3mf');if(!token)return;
+  return settleCadFileExport(token,{command:!!command,tell,isCurrent:valid,label:'3MF'},async write=>{
    const frame=active,prior=snapshot(frame),manager=frame.contentWindow?.__CAD_APP?.projectManager;
    if(typeof manager?.exportCore3mfResearch!=='function')throw Error('3MF export is unavailable.');
    const chosen=command?.path??await host.ui.prompt('Export the model to My files:',{title:'Export 3MF',value:'/Design.3mf',confirmLabel:'Export',signal:token.signal});
@@ -340,7 +341,7 @@ export function mount(host){
    if(!unchanged(frame,prior))throw Error('The model changed while choosing a file. Try again.');
    const c=await mirrorFileContext();if(!current(token)||!c.valid()||frame!==active)return;
    const p=c.path(chosen);claim(token,p);if(!/\.3mf$/i.test(p))throw Error('Use a .3mf filename.');let expected=null,old;
-   try{old=await c.files.stat(p);}catch(e){if(e.message!=='File not found.')throw e;}
+   try{old=await c.files.stat(p);}catch(e){if(fileErrorData(e,'message')!=='File not found.')throw e;}
    if(old){
     if(command)throw Error('The export path already exists. Choose a new filename.');
     if(old.status==='conflict')throw Error('Resolve this file conflict in Files first.');
@@ -353,16 +354,17 @@ export function mount(host){
    if(!current(token)||!c.valid()||frame!==active)return;
    if(!(bytes instanceof frame.contentWindow.Uint8Array)||bytes.byteLength>128*1024*1024)throw Error('The 3MF export is invalid or too large.');
    if(!unchanged(frame,prior))throw Error('The model changed during export. Try again.');
-   if(!token.enterLocalWrite())throw new DOMException('The modeling window closed before saving.','AbortError');writeStarted=true;const result=await c.files.write(p,bytes,expected);
+   if(!token.enterLocalWrite())throw new DOMException('The modeling window closed before saving.','AbortError');if(!current(token)||!c.valid()||frame!==active)throw new DOMException('The export was cancelled before writing.','AbortError');write.begin();const result=write.accept(await c.files.write(p,bytes,expected));
    if(!current(token)||!c.valid()||frame!==active)return;
    tell(result.status==='conflict'?'Export saved with a conflict. Resolve it in Files.':!unchanged(frame,prior)?'Exported the earlier model; newer changes are not included.':'Exported to My files; syncing with the server: '+p+'.');
    return Object.freeze({path:p,version:result.version,status:result.status,sourceRevision:command?.revision??null,dirty:!unchanged(frame,prior),persistence:'browser',serverStatus:'not-verified'});
-  }catch(e){tell('Could not export 3MF: '+e.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));if(command){if(writeStarted)Object.defineProperty(e,'possiblyCommitted',{value:true,enumerable:true});throw e;}}finally{token.finish();}
+  });
  }
+
  async function exportDxf(command=null,selectedFaceId=null){
   if(!valid()||!active){if(command)throw Error('The modeling window is unavailable.');return;}
-  const token=begin('export-dxf');if(!token){if(command)throw Error('Another file operation is in progress.');return;}let writeStarted=false;
-  try{
+  const token=begin('export-dxf');if(!token){if(command)throw Error('Another file operation is in progress.');return;}
+  return settleCadFileExport(token,{command:!!command,tell,isCurrent:valid,label:'DXF'},async write=>{
    const frame=active,ctx=frame.contentWindow?.__CAD_APP,craft=ctx?.craftService,faceId=command?.faceId??selectedFaceId;
    if(typeof faceId!=='string'||!faceId||faceId.length>1024||typeof craft?.inspectSketchDXFExports!=='function'||typeof craft?.exportSketchDXFBlob!=='function')throw Error('Select an available saved sketch for DXF export.');
    const initial=craft.inspectSketchDXFExports(),revision=command?.revision??initial?.revision;
@@ -373,7 +375,7 @@ export function mount(host){
    if(!targetCurrent())throw Error('The sketch changed while choosing a file. Try again.');
    const c=await mirrorFileContext();if(!current(token)||!c.valid()||frame!==active)return;
    const path=c.path(chosen);claim(token,path);if(!/\.dxf$/i.test(path))throw Error('Use a .dxf filename.');let expected=null,old;
-   try{old=await c.files.stat(path)}catch(error){if(error.message!=='File not found.')throw error;}
+   try{old=await c.files.stat(path)}catch(error){if(fileErrorData(error,'message')!=='File not found.')throw error;}
    if(old){if(command)throw Error('The export path already exists. Choose a new filename.');if(old.status==='conflict')throw Error('Resolve this file conflict in Files first.');
     if(!await host.ui.confirm('Replace '+path+'?',{title:'Replace export?',confirmLabel:'Replace',cancelLabel:'Keep existing',danger:true,signal:token.signal}))return;
     if(!current(token)||!c.valid()||frame!==active)return;const latest=await c.files.stat(path);if(latest.status==='conflict'||latest.version!==old.version)throw Error('The file changed while confirming. Try again.');expected=old.version;
@@ -386,11 +388,12 @@ export function mount(host){
    const frameData=result.frame,keys=['origin','x','y','z'];if(!frameData||keys.some(key=>!Array.isArray(frameData[key])||frameData[key].length!==3||!frameData[key].every(Number.isFinite)))throw Error('The DXF export frame is invalid.');
    const exportedFrame=Object.freeze(Object.fromEntries(keys.map(key=>[key,Object.freeze(Array.from(frameData[key]))])));
    if(!targetCurrent())throw Error('The sketch changed during export. Try again.');
-   if(!token.enterLocalWrite())throw new DOMException('The modeling window closed before saving.','AbortError');writeStarted=true;const written=await c.files.write(path,result.blob,expected);if(!current(token)||!c.valid()||frame!==active)throw Error('The window or account changed while writing the export.');
+   if(!token.enterLocalWrite())throw new DOMException('The modeling window closed before saving.','AbortError');if(!current(token)||!c.valid()||frame!==active)throw new DOMException('The export was cancelled before writing.','AbortError');write.begin();const written=write.accept(await c.files.write(path,result.blob,expected));if(!current(token)||!c.valid()||frame!==active)throw Error('The window or account changed while writing the export.');
    const earlier=!targetCurrent();tell(written.status==='conflict'?'Export saved with a conflict. Resolve it in Files.':earlier?'Exported the earlier sketch; newer changes are not included.':'Exported to My files; syncing with the server: '+path+'.');
    return Object.freeze({path,version:written.version,status:written.status,sourceRevision:revision,faceId,unit:'millimeter',coordinates:'sketch-local',frame:exportedFrame,dirty:earlier,persistence:'browser',serverStatus:'not-verified'});
-  }catch(error){tell('Could not export DXF: '+error.message+(writeStarted?' The file may have been saved; check Files before retrying.':''));if(command){if(writeStarted)Object.defineProperty(error,'possiblyCommitted',{value:true,enumerable:true});throw error;}}finally{token.finish();}
+  });
  }
+
  function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(data?.type==='rectangle-edit-dialog'&&Object.keys(data).length===1){openRectangleEditDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','export-3mf','export-dxf','export-step'].includes(data.action))return;if(data.action==='export-dxf'&&(Object.keys(data).sort().join(',')!=='action,faceId,type'||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>1024))return;if(data.action==='export-step'&&(Reflect.ownKeys(data).length!==2||!['type','action'].every(key=>{const d=Object.getOwnPropertyDescriptor(data,key);return d?.enumerable&&Object.hasOwn(d,'value')})))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='export-3mf')void export3mf();else if(data.action==='export-dxf')void exportDxf(null,data.faceId);else if(data.action==='export-step')void stepExport.open().catch(error=>tell('Could not export STEP: '+stepExportErrorMessage(error)));else void saveProject(data.action==='save-as');}
  window.addEventListener('message',receive);
  const retry=textButton('Retry opening project',()=>{if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner)void openProject(w.launchContext.path,{initial:true});});retry.hidden=true;
