@@ -57,6 +57,20 @@ export function registerClosedSketchCommands(host,getTarget){
    const points=Array.from({length:v.points.length},(_,i)=>{const d=Object.getOwnPropertyDescriptor(v.points,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value'))throw Error('Coordinate points must be dense data.');const p=copy(d.value,['id','x','y']);if(!validId(p.id,256)||![p.x,p.y].every(n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=1e8))throw Error('Provide current point IDs and finite sketch coordinates.');return Object.freeze({id:p.id,x:p.x,y:p.y});});
    if(new Set(points.map(p=>p.id)).size!==points.length)throw Error('Provide distinct inspected point IDs.');v.points=Object.freeze(points);const t=target('editClosedSketchPoints');return settleScopedCommand(t.craft.editClosedSketchPoints(Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
   }));
+  // Existing driving dimensions are addressed only by discovered opaque locators.
+  // Canonical millimeters and typed length names share the same core operation.
+  for(const [command,method,action] of [
+   ['edit-closed-sketch-dimension','editClosedSketchDimension','edit'],
+   ['remove-closed-sketch-dimension','removeClosedSketchDimension','remove']
+  ]){
+   const keys=action==='edit'?['revision','faceId','constraintId','value']:['revision','faceId','constraintId'];
+   const properties={revision:id(256),faceId:id(1024),constraintId:id(4096),...(action==='edit'?{value:{oneOf:[{type:'number',exclusiveMinimum:0,maximum:1000000},{type:'string',minLength:1,maxLength:128,pattern:'^[A-Za-z_$][A-Za-z0-9_$]{0,127}$'}]}}:{})};
+   stops.push(host.commands.register({id:command,description:action==='edit'?'Edit one inspected driving length or diameter using canonical millimeters or a typed length name. Rediscover after editing; save separately.':'Remove one inspected driving length or diameter. Other relationships remain and may become active. Save separately.',parameters:spec(keys,properties)},async args=>{
+    const v=copy(args,keys);
+    if(!validId(v.revision,256)||!validId(v.faceId,1024)||!validId(v.constraintId,4096)||action==='edit'&&!(typeof v.value==='number'&&Number.isFinite(v.value)&&v.value>0&&v.value<=1e6||typeof v.value==='string'&&/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(v.value)))throw Error('Provide a current inspected dimension and a positive millimeter value or typed length name.');
+    const t=target(method);return settleScopedCommand(t.craft[method](Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
+   }));
+  }
   const diameterEdit=['revision','faceId','id','diameter'];
   stops.push(host.commands.register({id:'apply-closed-sketch-diameter',description:'Add a driving circle or arc diameter in millimeters. Save separately.',parameters:spec(diameterEdit,{revision:id(256),faceId:id(1024),id:id(256),diameter:{type:'number',exclusiveMinimum:0,maximum:1000000}})},async args=>{const v=copy(args,diameterEdit);if(!validId(v.revision,256)||!validId(v.faceId,1024)||!validId(v.id,256)||typeof v.diameter!=='number'||!Number.isFinite(v.diameter)||v.diameter<=0||v.diameter>1e6)throw Error('Provide current curve identity and positive diameter.');const t=target('applySketchDiameter');return settleScopedCommand(t.craft.applySketchDiameter(Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});}));
   stops.push(host.commands.register({id:'open-worker-sketch-view',description:'Open a partial geometry and selection view computed by the sketch Worker. Legacy drawing tools are not attached.',parameters:spec(inspect,{revision:id(256),faceId:id(1024)})},async args=>{const v=copy(args,inspect);if(!validId(v.revision,256)||!validId(v.faceId,1024))throw Error('Provide a current sketch target.');const t=target('openWorkerSketchView');return settleScopedCommand(t.craft.openWorkerSketchView(Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});}));
