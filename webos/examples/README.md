@@ -1,5 +1,9 @@
 # Browser CAD command examples
 
+[Explicit deletion and parent repair](reference-repair.md) describes the new
+source-only shared reference commands. They require actual discovery, checked
+replay and separate Save; candidate eligibility is not a geometry guarantee.
+
 [Linked part drawing commands](linked-part-drawing.md) now have an on-disk
 `linked-part-drawing.mjs` helper for caller-supplied authentic definitions,
 create/replace/remove, shared Undo/Redo, SVG export and native Save/Open.
