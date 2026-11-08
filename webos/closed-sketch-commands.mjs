@@ -21,7 +21,7 @@ export function registerClosedSketchCommands(host,getTarget){
    copy(args,[]);const t=target('inspectSketchTransitions'),result=t.craft.inspectSketchTransitions();if(!t.valid())throw Error('The window or account changed.');return result;
   }));
   const inspect=['revision','faceId'];
-  stops.push(host.commands.register({id:'inspect-closed-sketch',description:'Inspect bounded authored objects and constraints in a current closed sketch.',parameters:spec(inspect,{revision:id(256),faceId:id(1024)})},async args=>{
+  stops.push(host.commands.register({id:'inspect-closed-sketch',description:'Inspect bounded objects and constraints through a validated sketch replay. Coordinates are sketch-local millimeters and may differ from saved coordinates within the reconstruction budget; inspection does not rewrite saved source.',parameters:spec(inspect,{revision:id(256),faceId:id(1024)})},async args=>{
    const v=copy(args,inspect);if(!validId(v.revision,256)||!validId(v.faceId,1024))throw Error('Provide a current closed-sketch target.');const t=target('inspectClosedSketch');return settleScopedCommand(t.craft.inspectClosedSketch(Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
   }));
   const apply=['revision','faceId','ids','factor','offset'];

@@ -206,6 +206,17 @@ refused. Exports need new paths and have separate browser/server outcomes.
 The native project is the editable source; exports are handoffs. These
 examples do not promise STEP, outside CAD import or slicer project support.
 
+## Inspection coordinates and saved intent
+
+`inspect-closed-sketch` reconstructs and validates a solved copy of the saved
+sketch. Returned coordinates are in sketch-local millimeters. They may differ
+from stored coordinates within the applicable reconstruction budget; inspection
+does not rewrite the saved source. Stable entity IDs and revision-bound commands
+identify the authored objects. Do not infer a source edit from a small replay
+coordinate difference, or treat reconstructed coordinates as exact saved bytes.
+Numerical accuracy against an independent reference and source-to-replay drift
+are separate checks, even when both use the same tolerance.
+
 ## Positive DXF example: a standalone circle
 
 Use a build listing New/Open and the primitive commands. Stop if the user
