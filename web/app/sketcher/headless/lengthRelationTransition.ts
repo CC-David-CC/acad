@@ -4,16 +4,16 @@ import {prepareLengthRelation} from '../actions/lengthRelationAdmission';
 import {evaluateCapturedSketch} from './capturedSketchEvaluation';
 import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
 import {captureLengthRelationScope,applyLengthRelationGeometry,assertLengthRelationGeometryScope,firstLengthDifference} from './lengthRelationAffectedGeometry';
-import {captureAdmissionCause} from '../constr/admissionCause.mjs';
+import {withAdmissionCause,failureCause} from '../constr/admissionCause.mjs';
 const MAX=1048576,encoder=new TextEncoder(),fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
 function record(v:any,keys:string[]){if(!v||typeof v!=='object'||Array.isArray(v)||![null,Object.prototype].includes(Object.getPrototypeOf(v))||Reflect.ownKeys(v).length!==keys.length)fail('INVALID','Expected exact length-relation fields.');const r:any={};for(const k of keys){const d=Object.getOwnPropertyDescriptor(v,k);if(!d?.enumerable||!Object.hasOwn(d,'value'))fail('INVALID','Length-relation fields must be own data.');r[k]=d.value;}return r;}
 function dense(v:any,max:number){if(!Array.isArray(v)||v.length>max||Reflect.ownKeys(v).length!==v.length+1)fail('INVALID','Expected a bounded dense array.');return Array.from({length:v.length},(_,i)=>{const d=Object.getOwnPropertyDescriptor(v,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value'))fail('INVALID','Array entries must be own data.');return d.value;});}
 function bounded(v:any){if(typeof v!=='string'||v.length>MAX||encoder.encode(v).byteLength>MAX)fail('LIMIT','The length relation source exceeds1MiB.');return v;}
 function capture(request:any,verify=false){const a=record(request,verify?['revision','sketchJSON','externalParameters','intent','candidateJSON','relation']:['revision','sketchJSON','externalParameters','intent']);if(typeof a.revision!=='string'||!a.revision||a.revision.length>256)fail('INVALID','Invalid length relation revision.');a.sketchJSON=bounded(a.sketchJSON);a.intent=record(a.intent,['ids','factor','offset']);a.intent.ids=dense(a.intent.ids,2);if(a.intent.ids.length!==2||a.intent.ids.some(id=>typeof id!=='string'||!id||id.length>256)||a.intent.ids[0]===a.intent.ids[1]||typeof a.intent.factor!=='number'||!Number.isFinite(a.intent.factor)||a.intent.factor<0||typeof a.intent.offset!=='number'||!Number.isFinite(a.intent.offset))fail('INVALID','Use two actual Segment IDs, a finite nonnegative scalar factor and finite millimeter offset.');const p=a.externalParameters;if(!p||typeof p!=='object'||Array.isArray(p)||![null,Object.prototype].includes(Object.getPrototypeOf(p))||Reflect.ownKeys(p).length>1024)fail('INVALID','Invalid length relation bindings.');a.externalParameters=record(p,Reflect.ownKeys(p) as string[]);for(const k of Object.keys(a.externalParameters))if(!k||k.length>256||typeof a.externalParameters[k]!=='number'||!Number.isFinite(a.externalParameters[k])||Math.abs(a.externalParameters[k])>1e9)fail('INVALID','Invalid length relation parameter.');if(verify){a.candidateJSON=bounded(a.candidateJSON);a.relation=record(a.relation,['objects','status']);a.relation.objects=dense(a.relation.objects,2);if(a.relation.objects.length!==2||a.relation.objects.some((id,i)=>id!==a.intent.ids[i])||!['accepted','redundant'].includes(a.relation.status))fail('INVALID_CANDIDATE','The relation receipt must match its original request.');}return a;}
 function revisionOf(v:any){const d=v&&Object.getOwnPropertyDescriptor(v,'revision');return d&&Object.hasOwn(d,'value')&&typeof d.value==='string'&&d.value.length<=256?d.value:'';}
-function outcome(revision:string,e:any){return{revision,ok:false as const,error:{code:typeof e?.code==='string'?e.code.slice(0,64):'LENGTH_RELATION_FAILED',message:typeof e?.message==='string'?e.message.slice(0,512):'Length relation failed.',...(e?.cause?{cause:captureAdmissionCause(e.cause)}:{})}};}
+function outcome(revision:string,e:any){const cause=failureCause(e);return{revision,ok:false as const,error:{code:typeof e?.code==='string'?e.code.slice(0,64):'LENGTH_RELATION_FAILED',message:typeof e?.message==='string'?e.message.slice(0,512):'Length relation failed.',...(cause?{cause}:{})}};}
 function sameEvidence(a:any[],b:any[]){if(a.length!==b.length||a.some((r,i)=>r.typeId!==b[i].typeId||r.state!==b[i].state))fail('ADMISSION_CHANGED','Length relation cold classifications are not independently stable.');}
-function verifyColdGeometry(before:any,after:any,rows:any[],external:any,phase:string){try{assertVerifiedReplayGeometry(before,after,rows,external);}catch(e){throw Object.assign(Error((phase+': '+(e?.message||'Geometry verification failed.')+' First difference: '+firstLengthDifference(before,after)).slice(0,512)),{code:typeof e?.code==='string'?e.code:'CURRENT_GEOMETRY_MISMATCH'});}}
+function verifyColdGeometry(before:any,after:any,rows:any[],external:any,phase:string){try{assertVerifiedReplayGeometry(before,after,rows,external);}catch(e){throw withAdmissionCause(Object.assign(Error((phase+': '+(e?.message||'Geometry verification failed.')+' First difference: '+firstLengthDifference(before,after)).slice(0,512)),{code:typeof e?.code==='string'?e.code:'CURRENT_GEOMETRY_MISMATCH'}),failureCause(e));}}
 
 // Private observation callback, supplied only to a genuine successful solve.
 // This batch never crosses a Worker/public message or becomes saved geometry.
@@ -26,7 +26,13 @@ export function changeLengthRelation(request:any){const revision=revisionOf(requ
  verifyColdGeometry(before,proof.sketch,proof.evidence,external,'Original source replay');
  const scope=captureLengthRelationScope(before,external,a.intent,proof.evidence,original.auxiliaryWitnessBatch);
  const workspace=new HeadlessSketchWorkspace(external);workspace.io._loadSketch(structuredClone(before),{strict:true});const pm=workspace.parametricManager,index=workspace.createIndex(),objects=a.intent.ids.map(id=>index[id]),prepared=prepareLengthRelation(pm,objects,{factor:String(a.intent.factor),offset:String(a.intent.offset)}),constraint=prepared.constraint;
- pm.startTransaction();try{pm._add(constraint);pm.finishTransaction(prepared.validate,false);}catch(e){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw e},false);}catch{}throw e;}
+ // Capture the ACTUAL rejected row's diagnostic before finishTransaction
+ // restores its transaction snapshot. A numerical failure stays numerical.
+ const validate=(stages:any[])=>{try{prepared.validate(stages);}catch(error){let cause=failureCause(error);
+  if(!cause&&constraint.stage===prepared.stage&&stages.includes(prepared.stage)&&prepared.stage.solverSystem.allConstraints.includes(constraint))for(const stage of stages){const sys=stage.solverSystem,prior=sys.transactionBefore;if(!prior)continue;const rejected=sys.allConstraints.find(c=>{const was=prior.conflicting.has(c)&&!prior.redundant.has(c),now=sys.conflicting.has(c)&&!sys.redundant.has(c);return(c===constraint||!was)&&now;});if(rejected){cause=sys.getAdmissionCause(rejected);break;}}
+  throw withAdmissionCause(error,cause);
+ }};
+ pm.startTransaction();try{pm._add(constraint);pm.finishTransaction(validate,false);}catch(e){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw e},false);}catch{}throw e;}
  const stage=constraint.stage?.index,indexInStage=constraint.stage?.solverSystem.allConstraints.filter(c=>!c.internal).indexOf(constraint),status=constraint.stage?.solverSystem.redundant.has(constraint)?'redundant':'accepted';
  if(stage!==scope.stage||indexInStage!==before.stages[stage]?.constraints.length)fail('INTENT_CHANGED','The new relation is not appended to its actual authored stage.');
  const row=constraint.write();row.admission={version:1,state:status};
@@ -35,8 +41,9 @@ export function changeLengthRelation(request:any){const revision=revisionOf(requ
  const expected=structuredClone(before);expected.stages[stage].constraints.push(structuredClone(row));
  const restored={...warm,objects:warm.objects.map((o,i)=>({...o,data:before.objects[i]?.data}))},intentDifference=firstLengthDifference(expected,restored);
  if(intentDifference!=='no difference')fail('INTENT_CHANGED','Length admission changed retained intent: '+intentDifference);
- // Already-satisfied means original equations REALLY hold. The operation then
- // owns no coordinate change. Otherwise only the proved parameter delta moves.
+ // Satisfied means the ORIGINAL registered residual/domain policy passes,
+ // not algebraic exactness. This branch owns no coordinate change; otherwise
+ // only the authenticated parameter delta may move.
  const candidate=expected;candidate.objects=applyLengthRelationGeometry(before,warm,scope.fields,!scope.originalSatisfied);assertLengthRelationGeometryScope(before,candidate,scope.fields);
  const coldObservation=coldSolve(a.revision,candidate,external),cold=coldObservation.result;if(!cold.ok)return cold;
  verifyColdGeometry(candidate,cold.sketch,cold.evidence,external,'First cold proof');

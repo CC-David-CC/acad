@@ -24,11 +24,13 @@ export function captureLengthRelationScope(before:any,external:any,intent:any,fr
   const proposed=new AlgNumConstraint(ConstraintDefinitions.LengthRelation,objects,{factor:String(intent.factor),offset:String(intent.offset)});proposed.resolveConstants(pm.constantResolver);
   let originalSatisfied=true;try{validateConstraintGeometry(proposed);}catch(error){if(error?.code!=='RESIDUAL')throw error;originalSatisfied=false;}
   let visits=0;const charge=()=>{if(++visits>WORK)fail('LIMIT','Length relation dependency proof exceeds its bound.');},known=new Set<any>(),fixed=new Set<any>(),adjacency=new Map<any,any[]>();
-  for(const stage of[pm.groundStage,...pm.stages])for(const object of stage.objects)object.visitParams(p=>{charge();known.add(p);});
+  // The authenticated inventory includes descendant Polar ang/t, not just
+  // root visitParams. Factory auxiliary rows are added separately below.
+  for(const parameter of ownership.geometry){charge();known.add(parameter);}
   // Actual intrinsic generator identity, not a caller readOnly/constant flag.
   for(const generator of pm.groundStage.generators)if(generator.schema===GroundObjectsGeneratorSchema)for(const object of generator.generatedObjects||[]){if(index[object.id]!==object||object.stage!==pm.groundStage)continue;object.visitParams(p=>{charge();if(!Number.isFinite(p.get()))fail('INVALID_SCOPE','Ground parameters must be finite.');fixed.add(p);});}
   const all=pm.stages.flatMap(s=>s.solverSystem.allConstraints);
-  for(const c of all){charge();for(const declared of ownership.constraint(c,c.stage))known.add(declared.parameter);c.resolveConstants(pm.constantResolver);
+  for(const c of all){charge();for(const declared of ownership.constraint(c,c.stage)){charge();known.add(declared.parameter);}c.resolveConstants(pm.constantResolver);
    // No rank, epsilon, reduced row or solved-looking-coordinate inference.
    if(c.schema===ConstraintDefinitions.LockPoint&&c.objects.length===1)for(const key of['x','y']){const p=c.objects[0].params?.[key],value=c.resolvedConstants?.[key];if(p&&known.has(p)&&typeof value==='number'&&Number.isFinite(value)&&Object.is(p.get(),value))fixed.add(p);}
   }

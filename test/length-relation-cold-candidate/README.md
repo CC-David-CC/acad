@@ -89,3 +89,25 @@ Existing legacy component receipts remain producing-version evidence only. The
 old signed length runner includes unrelated account/held-Worker controls; this
 new workflow does not add those or perform cancelled filesystem-race testing.
 No full Gate1/typed/radial/general-solver claim follows from source alone.
+
+
+## Read-only peer-review corrections
+
+The original known-parameter adapter used stage/root visitParams despite the
+new ownership helper returning complete descendant geometry separately from its
+auxiliaries. The followup seeds the bounded known set from actual
+`ownership.geometry`, then adds factory-authenticated auxiliaries with the same
+work accounting. Bezier child Polar ang/t therefore are not falsely foreign.
+No new schema prohibition or cold-drift equivalence policy is introduced.
+
+Warm validation now captures the actual newly rejected row's private admission
+cause BEFORE transaction rollback; the strict shared failureCause serializer
+preserves original-residual/domain/resource versus numerical diagnostics. The
+plain legacy helper error alone did not carry that information. No generic
+numerical failure is promoted to proof of mathematical contradiction.
+
+`originalSatisfied` explicitly means the original registered residual/domain
+policy passes, not algebraic exactness. The already-satisfied branch publishes
+no coordinate changes, while fresh admission and full original equations remain
+mandatory. Unsupported carried-curve motion in the inherited replay equivalence
+remains an explicit existing refusal boundary, not permission to widen it here.
