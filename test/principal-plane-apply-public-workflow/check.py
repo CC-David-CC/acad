@@ -77,6 +77,7 @@ def main(folder):
     expected=['Real PLANE depth Apply XY5','Real PLANE orientation and depth Apply XZ7','Real PLANE negative depth and orientation Apply ZY-3','Real no-op draft Apply finishes at tip','Healthy correction after actual draft refusal','Native child complete closure real Apply XZ3'];need([q['label'] for q in r['applications']]==expected,'all required real OK paths')
     for row in r['applications']:
         before,after=row['before'],row['after'];need(before['view']['pointer']==b['index']-1 and after['view']['pointer']==len(after['capture']['native']['history'])-1,'one prefix-to-tip Apply');need(row['drafted']['capture']['native']==before['capture']['native'],'draft is not accepted source/history/geometry');entry=row['entry'];need(entry['kind']==('history-position' if row['noOp'] else 'source-frame'),'single proper authored event')
+        if row['noOp']:need(before['capture']['native']==after['capture']['native'],'position-only no-op preserves exact source bytes')
         old,new=before['capture']['native'],after['capture']['native'];need(old['counters']==new['counters'] and old['expressions']==new['expressions'] and old['presentation']==new['presentation'] and old['materialRevision']==new['materialRevision'],'unrelated state/IDs preserved');need(len(old['history'])==len(new['history']),'no substituted feature')
         for i,(a,c) in enumerate(zip(old['history'],new['history'])):
             if i==b['index']:need(a['type']==c['type']=='PLANE' and all(a['params'][k]==c['params'][k] for k in ('featureId','datum')),'only requested principal placement')
@@ -88,7 +89,7 @@ def main(folder):
             else:need(event['pointer']==b['index']-1,'no accepted temporary pointer')
     need(len(r['travels'])==18,'D/P real UI UndoRedo and no-op position travel')
     for row in r['travels']:
-        s=row['after'];need(s['view']['pointer']==row['pointer'] and not s['view']['wizard']['active'],'actual passive travel target')
+        s=row['after'];need(s['view']['pointer']==row['pointer'] and not s['view']['wizard']['active'],'actual passive travel target');need(s['capture']['native']['counters']==row['before']['capture']['native']['counters'],'travel preserves high-water');p=s['capture']['native']['history'][b['index']]['params'];need(p['depth']==row['expected']['depth'] and p['orientation']==row['expected']['orientation'],'actual travel restores recorded principal intent')
         if row['pointer']==-1:need(s['capture']['solids']['bodies']==[],'actual prefix projection, no filtered/fabricated final body')
     need([q['invalid'] for q in r['nativeCancels']]==[False,True],'ordinary and invalid Native-graph Cancel')
     for row in r['nativeCancels']:
