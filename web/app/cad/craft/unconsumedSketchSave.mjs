@@ -1,4 +1,5 @@
 import {canonicalAuthoredFeatureId} from './authoredFeatureIdentity.mjs';
+import {sourcePlaneFaceId} from './sourcePlaneIdentity.mjs';
 import {captureSourceFrameParameters} from '../../../../modules/engine/source/sourceFrameIntent.mjs';
 import {isAuthoredLength,captureAuthoredHoleIntent} from '../../../../modules/engine/solid/authoredLengthBinding.mjs';
 import {captureOwnedLoftFeature} from '../../../../modules/engine/solid/ownedLoftFeature.mjs';
@@ -27,38 +28,47 @@ export function hasOnlyUnconsumedSketchHistory(history,faceId){
  if(!Array.isArray(history)||history.length>256||typeof faceId!=='string'||!faceId||faceId.length>1024)return false;
  // Historical IDs remain reserved after consumption. Only live generic outputs
  // can be Boolean operands; empty results retain the same source dependencies.
- const features=new Map(),liveGeneric=new Map();let genericBuild=null;
+ const features=new Map(),sourceOwners=new Map(),liveGeneric=new Map();let genericBuild=null;
  const build=data=>{if(!genericCommon(data))return null;try{const spec=requireCadEngineBuild(data.engine,data.engineRevision);return spec.revision===data.engineRevision&&(!genericBuild||genericBuild.id===spec.id&&genericBuild.revision===spec.revision)?spec:null;}catch{return null;}};
  for(const item of history){if(!item||typeof item!=='object')return false;const pd=Object.getOwnPropertyDescriptor(item,'params'),td=Object.getOwnPropertyDescriptor(item,'type');if(!pd?.enumerable||!Object.hasOwn(pd,'value')||!td?.enumerable||!Object.hasOwn(td,'value')||!pd.value||typeof pd.value!=='object'||Array.isArray(pd.value))return false;const p=pd.value,fd=Object.getOwnPropertyDescriptor(p,'featureId');if(!fd?.enumerable||!Object.hasOwn(fd,'value'))return false;const id=fid(fd.value);if(!id||features.has(id))return false;
-  if(item.type==='PLANE'){if(!plain(p,['featureId','orientation','depth','datum'])||p.datum!==undefined&&p.datum!==null||p.orientation!==undefined&&!['XY','XZ','ZY'].includes(p.orientation)||p.depth!==undefined&&!numberField(p.depth))return false;features.set(id,{kind:'plane'});continue;}
-  if(item.type==='SOURCE_FRAME_V1'){let data;try{data=captureSourceFrameParameters(p);}catch{return false;}if(data.parent&&features.get(String(data.parent.featureId))?.kind!=='plane')return false;features.set(id,{kind:'plane'});continue;}
+  if(item.type==='PLANE'){if(!plain(p,['featureId','orientation','depth','datum'])||p.datum!==undefined&&p.datum!==null||p.orientation!==undefined&&!['XY','XZ','ZY'].includes(p.orientation)||p.depth!==undefined&&!numberField(p.depth))return false;const sourceFace=sourcePlaneFaceId(canonicalAuthoredFeatureId(fd.value));features.set(id,{kind:'plane',sourceFace});sourceOwners.set(sourceFace,id);continue;}
+  if(item.type==='SOURCE_FRAME_V1'){
+   let data;try{data=captureSourceFrameParameters(p);}catch{return false;}
+   if(data.parent?.kind==='native-planar-face'){
+    const parent=data.parent,producer=fid(parent.featureId),originId=fid(parent.originFeatureId),origin=features.get(originId),target=liveGeneric.get(parent.bodyId),owner=origin&&features.get(origin.sourceOwner);
+    // Structural causal proof only. The current candidate ledger separately
+    // resolves this exact opaque face against actual owned Native topology.
+    if(!producer||!originId||!features.has(producer)||!target||target.producer!==producer||target.build!==genericBuild||target.build.id!=='occ'||target.build.planarAttachmentVersion!==1||parent.engine!==target.build.id||parent.engineRevision!==target.build.revision||fid(parent.sourceFeatureId)!==originId||!target.origins?.has(originId)||!origin||origin.kind!=='selected-profile'||origin.build!==target.build||origin.sourceFace!==parent.sourceFaceId||origin.regionId!==parent.sourceRegionId||!owner||owner.kind!=='plane'||owner.sourceFace!==parent.sourceFaceId||!target.sources.has(parent.sourceFaceId))return false;
+   }else if(data.parent&&features.get(String(data.parent.featureId))?.kind!=='plane')return false;
+   const sourceFace=sourcePlaneFaceId(data.featureId);features.set(id,{kind:'plane',sourceFace});sourceOwners.set(sourceFace,id);continue;
+  }
   if(item.type==='WORKER_ENCLOSURE_V1'||item.type==='WORKER_ENCLOSURE_V2'){const fields=physicalBindingFields[item.type];if(!plain(p,['featureId',...fields])||fields.some(k=>!numberField(p[k])))return false;features.set(id,{kind:'enclosure'});continue;}
   if(item.type==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'){
    const data=exactData(p,['version','unit','engine','engineRevision','featureId','faceId','regionId','depth','bodyPolicy']),spec=build(data);
    if(!spec||selectedProfileVersion(spec)===null||fid(data.featureId)!==id||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>256||typeof data.regionId!=='string'||!data.regionId.startsWith('sketch-region:')||data.regionId.length>8192||!isAuthoredLength(data.depth)||data.bodyPolicy!=='separate'||data.faceId===faceId)return false;
    // Retaining the plane (consumed:[]) does not remove the source dependency.
    // Its edits require full atomic replay; only unrelated fast saves qualify.
-   features.set(id,{kind:'selected-profile',sourceFace:data.faceId,regionId:data.regionId});liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources:new Set([data.faceId]),holeSource:data.featureId,seeds:new Set()});genericBuild=spec;continue;
+   features.set(id,{kind:'selected-profile',build:spec,sourceFace:data.faceId,regionId:data.regionId,sourceOwner:sourceOwners.get(data.faceId)});liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set([data.faceId]),origins:new Set([id]),holeSource:data.featureId,seeds:new Set()});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_SELECTED_PROFILE_LOFT_V1'){
    let data;try{data=captureOwnedLoftFeature(p);}catch{return false;}const spec=build(data),sources=data.sections.map(section=>section.faceId);
    if(!spec||spec.loftVersion!==1||fid(data.featureId)!==id||sources.includes(faceId))return false;
-   features.set(id,{kind:'loft',sourceFaces:Object.freeze(sources.slice())});liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources:new Set(sources),holeSource:null,seeds:new Set()});genericBuild=spec;continue;
+   features.set(id,{kind:'loft',sourceFaces:Object.freeze(sources.slice())});liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set(sources),origins:new Set(),holeSource:null,seeds:new Set()});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_SELECTED_PROFILE_SWEEP_V1'){
    let data;try{data=captureOwnedSweepFeature(p);}catch{return false;}const spec=build(data);
    if(!spec||spec.sweepVersion!==1||fid(data.featureId)!==id||data.faceId===faceId||data.pathFaceId===faceId)return false;
-   features.set(id,{kind:'sweep',sourceFace:data.faceId,pathFace:data.pathFaceId,regionId:data.regionId});liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources:new Set([data.faceId,data.pathFaceId]),holeSource:null,seeds:new Set()});genericBuild=spec;continue;
+   features.set(id,{kind:'sweep',sourceFace:data.faceId,pathFace:data.pathFaceId,regionId:data.regionId});liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set([data.faceId,data.pathFaceId]),origins:new Set(),holeSource:null,seeds:new Set()});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_SELECTED_PROFILE_REVOLVE_V1'){
    let data;try{data=captureOwnedRevolveFeature(p);}catch{return false;}const spec=build(data);
    if(!spec||spec.revolveVersion!==1||fid(data.featureId)!==id||data.faceId===faceId)return false;
-   features.set(id,{kind:'revolve',sourceFace:data.faceId,regionId:data.regionId});liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources:new Set([data.faceId]),holeSource:null,seeds:new Set()});genericBuild=spec;continue;
+   features.set(id,{kind:'revolve',sourceFace:data.faceId,regionId:data.regionId});liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set([data.faceId]),origins:new Set(),holeSource:null,seeds:new Set()});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_SOLID_BOX_V1'){
    const data=exactData(p,['version','unit','engine','engineRevision','featureId','x','y','z','width','depth','height']),spec=build(data);
    if(!spec||fid(data.featureId)!==id||['x','y','z'].some(k=>typeof data[k]!=='number'||!Number.isFinite(data[k])||Math.abs(data[k])>1e6)||['width','depth','height'].some(k=>typeof data[k]!=='number'||!Number.isFinite(data[k])||data[k]<=0||data[k]>1e6))return false;
-   features.set(id,{kind:'generic-box'});liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources:new Set()});genericBuild=spec;continue;
+   features.set(id,{kind:'generic-box'});liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set(),origins:new Set()});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_SOLID_BOOLEAN_V1'){
    const data=exactData(p,['version','unit','engine','engineRevision','featureId','kind','a','b']),spec=build(data);
@@ -66,24 +76,24 @@ export function hasOnlyUnconsumedSketchHistory(history,faceId){
    const a=liveGeneric.get(data.a),b=liveGeneric.get(data.b);
    if(!a||!b||a.build!==spec||b.build!==spec)return false;
    const sources=new Set([...a.sources,...b.sources]);if(sources.has(faceId))return false;
-   liveGeneric.delete(data.a);liveGeneric.delete(data.b);liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources});features.set(id,{kind:'generic-boolean'});genericBuild=spec;continue;
+   liveGeneric.delete(data.a);liveGeneric.delete(data.b);liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources,origins:new Set([...a.origins,...b.origins])});features.set(id,{kind:'generic-boolean'});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_THROUGH_HOLES_V1'){
    let data;try{data=captureAuthoredHoleIntent(p);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target),source=features.get(fid(data.sourceFeatureId));
    if(!spec||spec.throughHoleVersion!==1||fid(data.featureId)!==id||!parent||parent.build!==spec||!source||source.kind!=='selected-profile'||source.sourceFace!==data.sourceFaceId||source.regionId!==data.sourceRegionId||!parent.sources.has(data.sourceFaceId)||parent.sources.has(faceId))return false;
-   liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources:new Set(parent.sources),holeSource:parent.holeSource===data.sourceFeatureId?parent.holeSource:null,seeds:parent.holeSource===data.sourceFeatureId?new Set([...parent.seeds,...(data.kind==='centered-through'?[data.featureId]:[])]):new Set()});features.set(id,{kind:'generic-through-hole'});genericBuild=spec;continue;
+   liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set(parent.sources),origins:new Set(parent.origins),holeSource:parent.holeSource===data.sourceFeatureId?parent.holeSource:null,seeds:parent.holeSource===data.sourceFeatureId?new Set([...parent.seeds,...(data.kind==='centered-through'?[data.featureId]:[])]):new Set()});features.set(id,{kind:'generic-through-hole'});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_SOLID_EDGE_TREATMENT_V1'){
    let data;try{data=captureSolidEdgeTreatment(p);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target);
    if(!spec||spec.edgeTreatmentVersion!==1||fid(data.featureId)!==id||!parent||parent.build!==spec||parent.sources.has(faceId))return false;
-   liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources:new Set(parent.sources),holeSource:parent.holeSource,seeds:parent.seeds});features.set(id,{kind:'generic-edge-treatment'});genericBuild=spec;continue;
+   liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set(parent.sources),origins:new Set(parent.origins),holeSource:parent.holeSource,seeds:parent.seeds});features.set(id,{kind:'generic-edge-treatment'});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_LINEAR_HOLE_PATTERN_V1'){
    let data;try{data=captureOwnedLinearHolePatternIntent(p);linearHolePatternNativeCost(data.count);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target);
    if(!spec||spec.linearHolePatternVersion!==1||fid(data.featureId)!==id||!parent||parent.build!==spec||!parent.holeSource||!parent.seeds?.has(data.seedFeatureId)||parent.sources.has(faceId))return false;
    // Only the explicit constructor→hole→cuts/edge path carries seed references.
    // Generic Booleans and pattern outputs deliberately carry no such witness.
-   liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources:new Set(parent.sources)});features.set(id,{kind:'generic-linear-hole-pattern'});genericBuild=spec;continue;
+   liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set(parent.sources),origins:new Set(parent.origins)});features.set(id,{kind:'generic-linear-hole-pattern'});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_RECTANGLE_EXTRUDE_V1'){if(!plain(p,['featureId','face','regions','length'])||!field(p.face)||!Array.isArray(p.regions)||p.regions.length!==1||Reflect.ownKeys(p.regions).length!==2||!Object.hasOwn(p.regions,0)||!field(p.regions[0])||!numberField(p.length)||p.face===faceId)return false;features.set(id,{kind:'prism',sourceFace:p.face,regionId:p.regions[0]});continue;}
   if(item.type==='WORKER_CENTERED_THROUGH_HOLE_V1'){if(!plain(p,['featureId','face','diameter'])||!numberField(p.diameter))return false;const t=semantic(p.face),parent=t&&features.get(t[0]);if(!t||t.length!==4||typeof t[0]!=='string'||t[1]!=='face'||t[2]!=='LID'||!parent||parent.kind!=='prism'||!plain(t[3],['regionId'])||t[3].regionId!==parent.regionId||parent.sourceFace===faceId)return false;features.set(id,{kind:'hole',sourceFace:parent.sourceFace,parent:t[0],regionId:parent.regionId});continue;}
