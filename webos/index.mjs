@@ -9,6 +9,7 @@ import {nativeProjectExtensions,nativeProjectFormat,requireNativeArchive,restore
 import {registerSketchCommands} from './sketch-commands.mjs';
 import {registerClosedSketchCommands} from './closed-sketch-commands.mjs';
 import {registerLengthMeasurementCommands} from './length-measurement-commands.mjs';
+import {registerRadiusCommands} from './radius-commands.mjs';
 import {registerFeatureHistoryCommands} from './feature-history-commands.mjs';
 import {registerPrimitiveCommands} from './primitive-commands.mjs';
 import {createRectangleController} from './rectangle-commands.mjs';
@@ -208,6 +209,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerSketchExportCommands(host,{getTarget:()=>rectangle.target(),exportDxf:args=>exportDxf(args)}));
  if(host.commands)host.onDispose(registerReferenceCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLengthMeasurementCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerRadiusCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerFeatureHistoryCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileRegionCommands(host,()=>rectangle.target()));
