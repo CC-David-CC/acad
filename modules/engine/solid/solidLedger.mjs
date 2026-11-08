@@ -1,5 +1,6 @@
 import {requireCadEngineBuild,validateEngineMount} from '../mount/engineCatalog.mjs';
 import {requireManufacturingMeshBuild} from '../mount/selectedProfileBuildSelection.mjs';
+import {captureBoxConstructionWitness} from './boxConstructionWitness.mjs';
 import {captureManufacturingControls,captureManufacturingMetadata} from '../mount/ownedManufacturingMeshProtocol.mjs';
 import {captureLinkedPartDrawingDefinition} from '../../drawing/linkedPartDrawingDefinition.mjs';
 import {captureDrawingReadResult,unresolvedDrawingRead} from '../mount/ownedDrawingReadProtocol.mjs';
@@ -220,7 +221,10 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
     seeds:Object.freeze(holeState.records.filter(r=>r.intent.kind==='centered-through').map(r=>Object.freeze({seedFeatureId:r.intent.featureId,kind:r.intent.kind})))}));
   }
   for(const parent of parents)s.outputs.delete(parent.model.id);
-  s.outputs.set(id,Object.freeze({engine:intent.engine,featureId:intent.featureId,kind,model,handle:result.handle,holeState}));
+  // Only this checked genuine Native publication creates construction authority.
+  // There is no public factory or flag that can insert it into the private ledger.
+  const boxConstruction=kind==='box'&&constructionBuild.manufacturingMeshVersion===1?captureBoxConstructionWitness({version:1,kind:'authored-axis-aligned-box',unit:intent.unit,engine:intent.engine,engineRevision:intent.engineRevision,bodyId:id,featureId:intent.featureId,origin:intent.origin,dimensions:intent.dimensions}):null;
+  s.outputs.set(id,Object.freeze({engine:intent.engine,featureId:intent.featureId,kind,model,handle:result.handle,holeState,boxConstruction}));
   return Object.freeze({model,resultKind:metrics.resultKind,outputId:id,consumed:Object.freeze(parents.map(x=>x.model)),publicationCheck});
  } catch(error){if(mount)owner.close();throw error;}
 }
@@ -319,7 +323,8 @@ export async function readCandidateWorkerManufacturingMesh({owner,registry,engin
   check();const result=await mount.execute({op:'solid.manufacturing.mesh.read',version:1,unit:'millimeter',handle:item.handle,...limits},{signal:owner.signal});check();
   if(!own(result,['op','contractVersion','unit','metadata','buffer'])||result.op!=='solid.manufacturing.mesh.read'||result.contractVersion!==1||result.unit!=='millimeter')fail('Malformed candidate manufacturing artifact.','ENGINE_FAILURE');
   const metadata=captureManufacturingMetadata(result.metadata,limits);let length;try{length=Object.getOwnPropertyDescriptor(ArrayBuffer.prototype,'byteLength').get.call(result.buffer);new DataView(result.buffer);}catch{fail('Expected standalone manufacturing binary.','ENGINE_FAILURE');}if(length!==metadata.byteLength)fail('Manufacturing artifact byte count changed.','ENGINE_FAILURE');
-  check();return Object.freeze({op:result.op,contractVersion:1,unit:'millimeter',body:Object.freeze({bodyId:captured.bodyId,featureId:captured.featureId}),engine,engineRevision,metadata,buffer:result.buffer});
+  const sourceConstruction=item.kind==='box'&&item.boxConstruction?captureBoxConstructionWitness(item.boxConstruction,{bodyId:captured.bodyId,featureId:captured.featureId,engine,engineRevision}):null;
+  check();return Object.freeze({op:result.op,contractVersion:1,unit:'millimeter',body:Object.freeze({bodyId:captured.bodyId,featureId:captured.featureId}),engine,engineRevision,metadata,buffer:result.buffer,...(sourceConstruction?{sourceConstruction}:{})});
  }catch(operationError){
   // Observation purpose permanently forbids accept, including after this read. Never
   // destroy an accepted owner, even if a caller violated that custody contract.
