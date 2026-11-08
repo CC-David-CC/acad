@@ -149,3 +149,15 @@ before and after solving, so this alone does NOT establish whether collapse
 occurred during the earlier strict load or the independent solve itself.
 No orientation groups or native saves are reached. All original equations,
 bounds and cases remain unchanged; actual root-cause repair is still pending.
+
+R10/evidence-r10 on84fe435/Desktop640279b9f reaches109rows: the prior first
+rectangle, mixed group, disconnected append and LengthRelation stops are passed.
+It fails the first anti-parallel endpoint edit170→190 with
+CURRENT_GEOMETRY_MISMATCH / "Verification changed the candidate geometry or
+authored intent." The throw is coordinateTransition's exact candidate versus
+fresh-solve comparison. The receipt does not identify a differing field/value
+or displacement, so no roundoff-only explanation or tolerance relaxation is
+justified. No saves are reached; full workflow remains FAIL and earlier runs
+remain immutable. The next coherent repair must preserve exact requested point
+coordinates, unaffected source, original equations/branch and independent
+original-request reconstruction.

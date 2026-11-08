@@ -57,3 +57,12 @@ message; the exact collapse point is not established. No later assertions or
 saves run. Original equations and all acceptance bounds remain unchanged.
 Shared reference/driving conversion and finite history suppress/prefix/branch
 controls are independent implementation lanes; neither is qualified yet.
+
+R10 on84fe435/Desktop640279b9f reaches109 recorded rows after the provenance
+repair: earlier rectangle/mixed/append/length stops pass in this whole attempt.
+First anti-parallel endpoint edit170→190 fails exact warm-candidate versus
+fresh-solve equivalence in coordinateTransition; no field/magnitude evidence.
+No save/reopen occurs. Coordinate original-request/scope repair is now the
+immediate solver lane. Do not claim full orientation/precision/native/archive
+qualification from the earlier passing portions. Frozen evidence is under
+`test/line-orientation-public-workflow/evidence-r10`.
