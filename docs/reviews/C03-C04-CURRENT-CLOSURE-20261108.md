@@ -1,5 +1,15 @@
 # Finite current C03/C04 closure contract
 
+## Latest ordinary checkpoint —19of21; full Gate1 open
+
+Root ORDINARY-E18-E20-SIGNOFF-20261108.md accepts finite E18/E19/E20 after
+primary evidence review and current .cad regression089dfc9 (actual8908fb8/
+7c2b85f48, whole47897 +FIRST independent oracle PASS).19ordinary Qualified:
+E01–E15/E18/E19/E20/E21; E16/E22 Partial; E17/C10 Gate2.23unique scoped workflows
+remains unchanged. Broader11competencies, measured PL reversal defect, viewing
+and final G10/beta remain open. Older counters below are historical checkpoints;
+no historical JSON is retagged .cad and no blanket current accuracy is inferred.
+
 ## Current evidence update —2026-11-08
 
 Projected R3 whole and first independent archive/source oracle PASS, frozen
