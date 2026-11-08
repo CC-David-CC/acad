@@ -42,3 +42,29 @@ services, actual H/J/source versions, counters, models, streams and metadata.
 The observed AbortError is consistent with this source bug; R2 alone cannot
 identify its precise throw site or exclude additional defects. A new normal
 build and the entire unchanged acceptance chain are required.
+
+## R3 progresses through Native closure, fails fresh-Open agent eligibility
+
+Normal build69778 and fixture9595 PASS. Actual runtime
+Core5d64f8fbc35bf96af2df1a7b1a31fb9123106c63 /
+Desktopc8779dd83a6c149c1437a173daeb3953a6893396. Whole driver85861
+terminates FAIL at `agent()` after Fresh Open native-child-xz3: inspection
+returns `PRINCIPAL_PLACEMENT_UNAVAILABLE` for the actual principal source.
+
+Before failure: all six real Apply paths (including no-op and corrected invalid
+draft), eighteen UI D/P travel events, source-bound Native child regeneration,
+ordinary/nonfinite Native Cancel, formula/stale/domain refusal controls and
+THREE real .cad Save/server equality/fresh Open cycles pass driver checks.
+Fourth reopened agent edit/save and final64-entry trim phase are NOT reached.
+Terminal state: idle, full pointer5/six genuine history features, epoch1, no
+wizard or pipeline/cleanup errors. No whole qualification or independent PASS
+artifact oracle follows from these useful intermediate checks. Source hashes
+stay unchanged; owned context retires; full original sources/archives/log and
+receipt retained in evidence-r3.
+
+Next source seam under investigation: new principal readiness requires
+journalHeadSignature===fullTipSignature, whereas a newly restored empty session
+journal has no such prior event signature. Existing history control readiness
+already derives custody from the genuine owned complete definition and current
+source/material anchors. Correct restored eligibility without fabricating J,
+weakening currentness or changing the whole acceptance workflow.
