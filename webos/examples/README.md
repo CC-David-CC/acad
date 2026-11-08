@@ -376,4 +376,30 @@ measured last cap and creates an independent sketch source. `depth`, explicit
 operations and the same pinned document helper. Author local primitives and
 selected extrusions with their normal public commands and actual returned IDs.
 No native IDs/face ordinals, geometry seeds, automatic execution or AI service.
-This example is source-only and unqualified until the complete application flow.
+The corresponding finite full-tip Native attachment flow is qualified R2 (ACADd82b3c1); arbitrary faces remain open.
+
+
+Numeric principal placement uses the existing createCadAgent helper for an
+explicit signed CAD window. Inspect actual features and choose a returned face
+ID; do not parse or invent it. The following runs only when deliberately called:
+
+```js
+async function placePrincipal(agent, chosenFaceId, orientation, depth) {
+  const i = await agent.execute('inspect-source-plane-placements');
+  const rows = i.features.filter(row => row.faceId === chosenFaceId);
+  if (rows.length !== 1 || !rows[0].canEdit) throw Error('Choose an editable inspected source.');
+  const p = rows[0];
+  return agent.execute('edit-source-plane-placement', {
+    revision: i.revision, index: p.index, featureId: p.featureId,
+    faceId: p.faceId, orientation, depth
+  });
+}
+```
+
+Orientation is XY/XZ/ZY; depth is signed finite millimeters within advertised
+bounds. Save/open/travel use existing explicit helper methods. No AI provider,
+private state injection, automatic execution or uncertain-write retry. The
+corresponding command workflow has finite R4 qualification ACAD25fc19e on
+Core6f6ccef/Desktopc8779dd83, including Native closure/4file cycles/64-entry trim
+and independent oracle. This recipe is transport guidance, no separate geometry
+proof or promise for unsupported families.

@@ -1,5 +1,14 @@
 # CAD Modeler (JSketcher inspired)
 
+Numeric principal Apply now has finite whole R4 qualification ACAD25fc19e,
+actualCore6f6ccef/Desktopc8779dd83:6real Apply cases/18UI travels/4.cad file
+cycles/Native child regeneration/reopened agent editing/64-entry trim recovery
+and independent oracle PASS. Public inspect-source-plane-placements and
+edit-source-plane-placement share the real wizard OK operation. Broader formula,
+datum, legacy, insertion and stale-gesture Apply remains open. Earlier source-era
+notes below do not supersede this proof or broaden it. See examples/README.md.
+
+
 StraightSlot source now has scoped R1 qualification (ACAD5c82504;
 actualCore79c9c86/Desktopddab73b45): radius/axis/direction edits, conflict
 recovery, source travel and three native saves/fresh Opens pass independent
@@ -11,7 +20,7 @@ Native extrusion-cap attachment now has scoped whole R2 qualification
 explicit repair, travel, four native saves/fresh Opens and independent
 source/frame/Native/ZIP checks pass. See examples/source-bound-native-frame.mjs.
 Native caches validate on Open; they are never silently healed. This is a
-full-tip last-cap capability, with arbitrary faces and prefix Apply still open.
+full-tip last-cap capability, with arbitrary faces open; finite principal prefix Apply passes separately above.
 
 Latest cubic curve qualification: ACAD e381b70, actualCore26d7a55/Desktopf6d1c07d1.
 Shared Bezier/cubic Clamped CV-spline creation, ordered control editing, native
@@ -26,7 +35,7 @@ passive-prefix keyboard UndoRedo have scoped complete R1 qualification
 (ACAD6895c51; runtimeCore2e14280/Desktop18c621383). Eighteen real events,
 16Native observations/48points and two .cad Save-sync-freshOpen cycles pass the
 independent checker. Active draft navigation correctly refuses without changing
-accepted state; actual Cancel retains its prefix. Principal Apply remains open.
+accepted state; actual Cancel retains its prefix. Finite principal Apply passes separately above.
 See docs/evidence/CAD-GATE1-BASELINE-20261106.md and docs/STATE-MACHINES.md.
 
 [JavaScript examples and README](examples/README.md) document the shared public
