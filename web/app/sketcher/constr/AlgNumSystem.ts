@@ -109,11 +109,14 @@ export class AlgNumSubSystem {
   }
 
   validConstraints(callback) {
-    this.allConstraints.forEach(c => {
-      if (!this.conflicting.has(c)) {
-        callback(c);
+    // Intrinsic equations are regenerated before authored rows on cold load,
+    // but a warm append registers its intrinsic rows later. Derive the same
+    // stable evaluation order without mutating stored/authored row order.
+    for (const internal of [true, false]) {
+      for (const c of this.allConstraints) {
+        if (!!c.internal === internal && !this.conflicting.has(c)) callback(c);
       }
-    });
+    }
   }
 
   addConstraint(constraint) {
@@ -135,7 +138,10 @@ export class AlgNumSubSystem {
 
   recordAdmissionHints() {
     for (const c of this.allConstraints) {
-      c.admissionHint = {version: 1, state: this.redundant.has(c) ? 'redundant' : this.conflicting.has(c) ? 'rejected' : 'accepted'};
+      // Internal hints are not serialized and cannot be hidden warm-only
+      // priority state. Actual internal conflict/redundancy stays derived.
+      if (c.internal) delete c.admissionHint;
+      else c.admissionHint = {version: 1, state: this.redundant.has(c) ? 'redundant' : this.conflicting.has(c) ? 'rejected' : 'accepted'};
     }
     this.externalConflictValues = new Map();
     for (const c of this.conflicting) {
@@ -395,13 +401,14 @@ export class AlgNumSubSystem {
   rebuildAdmission() {
     const originalConflicting = new Set(this.conflicting);
     const originalRedundant = new Set(this.redundant);
-    // Hinted accepted constraints retain precedence over legacy/unhinted rows;
-    // within each group authored order is unchanged. Legacy-only snapshots
-    // therefore retain the original authored-order behavior.
-    const hinted = this.allConstraints.filter(c => !originalConflicting.has(c) && c.admissionHint && c.admissionHint.state === 'accepted');
-    const legacy = this.allConstraints.filter(c => !originalConflicting.has(c) && !c.admissionHint);
-    const retry = this.allConstraints.filter(c => originalConflicting.has(c) || (c.admissionHint && c.admissionHint.state !== 'accepted'));
-    const candidates = [...hinted, ...legacy, ...retry];
+    // Intrinsics have the same derived priority warm or cold. Retain the
+    // existing authored accepted/legacy/retry precedence and source row order.
+    const internal = this.allConstraints.filter(c => c.internal);
+    const authored = this.allConstraints.filter(c => !c.internal);
+    const hinted = authored.filter(c => !originalConflicting.has(c) && c.admissionHint && c.admissionHint.state === 'accepted');
+    const legacy = authored.filter(c => !originalConflicting.has(c) && !c.admissionHint);
+    const retry = authored.filter(c => originalConflicting.has(c) || (c.admissionHint && c.admissionHint.state !== 'accepted'));
+    const candidates = [...internal, ...hinted, ...legacy, ...retry];
     const original = new Map();
     const oldDerived = {
       polynomials: this.polynomials, substitutedParams: new Map(this.substitutedParams),
@@ -429,7 +436,7 @@ export class AlgNumSubSystem {
       // Fast path for a clean, previously unambiguous set: one tentative build.
       // Any actual conflict, failure or non-finite result restores the snapshot
       // and falls back to deterministic whole-constraint admission.
-      if (originalConflicting.size === 0 && !candidates.some(c => c.admissionHint && c.admissionHint.state !== 'accepted')) {
+      if (!authored.some(c => originalConflicting.has(c)) && !authored.some(c => c.admissionHint && c.admissionHint.state !== 'accepted')) {
         this.conflicting = new Set();
         this.redundant = new Set();
         this.rejectionCauses = new Map();
@@ -452,7 +459,7 @@ export class AlgNumSubSystem {
       // nonlinear or connected constraints retain ordered replay. If the
       // trial fails, discard its geometry and use the complete replay.
       const lockedParams = new Set();
-      const independentLocks = hinted.every(c => {
+      const independentLocks = internal.length === 0 && hinted.every(c => {
         if (c.schema !== ConstraintDefinitions.LockPoint || c.params.length !== 2) return false;
         for (const p of c.params) {
           if (lockedParams.has(p)) return false;
@@ -478,7 +485,7 @@ export class AlgNumSubSystem {
       // else in the entire candidate set; every interacting lock stays in
       // authored order for ordinary admission. Restrict this to the built-in
       // lock schema to avoid changing nonlinear branch or custom semantics.
-      if (!accepted.length && candidates.every(c => c.schema === ConstraintDefinitions.LockPoint && c.params.length === 2)) {
+      if (internal.length === 0 && !accepted.length && candidates.every(c => c.schema === ConstraintDefinitions.LockPoint && c.params.length === 2)) {
         const uses = new Map();
         candidates.forEach(c => c.params.forEach(p => uses.set(p, (uses.get(p) || 0) + 1)));
         const isolated = [...hinted, ...legacy].filter(c => c.params.every(p => uses.get(p) === 1));

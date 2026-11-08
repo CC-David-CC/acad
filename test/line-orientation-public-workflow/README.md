@@ -108,3 +108,18 @@ The corrected case requires exact code20/name/message, not arbitrary cancellatio
 Source review also aligns zero-length append with the exact DOMAIN response
 already established by ordinary-entity-native-integrity/evidence-r1; no broad
 error-code allowlist remains for that case. No product behavior changed.
+
+R5/evidence-r5 reaches82rows: mixed group/no-op and stale/invalid-target/zero
+refusals pass, then unrelated Segment append fails the exact retained-state
+comparison before final reconstruction. That receipt does not identify its
+changed field; the primitive error now includes a bounded first-difference
+diagnostic, with the exact acceptance comparison unchanged.
+
+The shared source repair derives intrinsic-first evaluation in validConstraints
+and intrinsic-first admission regardless warm-only hints. Stored/all authored
+row order is unchanged; authored accepted/legacy/retry precedence remains.
+Internal hints are omitted, not internal equations or derived diagnostics. Both
+independent-point-lock optimizations require zero internal rows. Fast all-set
+preparation re-evaluates actual internals instead of branching on stale internal
+hint/priority metadata. No solver goal, coefficient epsilon or save bound changed.
+Whole orientation and retained source/report workflows must qualify the repair.

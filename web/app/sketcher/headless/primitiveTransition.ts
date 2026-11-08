@@ -20,6 +20,18 @@ function primitive(input:any){const a=record(input,['id','kind','role','stage','
  shape.role=a.role;return {shape,id:a.id,kind:a.kind,role:a.role,stage:a.stage};
 }
 
+// Diagnostic only: acceptance still uses the unchanged exact comparison.
+function retainedDifference(expected:any,actual:any){
+ const authored=new Set(expected.stages.flatMap(stage=>stage.constraints)),pending:any[]=[[expected,actual,'source']];let work=0;
+ const brief=(v:any)=>v&&typeof v==='object'?(Array.isArray(v)?'[array]':'[object]'):String(v).slice(0,80);
+ while(pending.length){if(++work>100000)return 'difference exceeds diagnostic budget';const[a,b,path]=pending.pop();if(a===b)continue;
+  if(!a||!b||typeof a!=='object'||typeof b!=='object'||Array.isArray(a)!==Array.isArray(b))return path.slice(-192)+': '+brief(a)+' -> '+brief(b);
+  const x=Object.keys(a).sort(),y=Object.keys(b).filter(k=>!(k==='admission'&&authored.has(a)&&!Object.hasOwn(a,'admission'))).sort();
+  if(x.length!==y.length||x.some((k,i)=>k!==y[i]))return path.slice(-192)+': retained field membership changed';
+  for(let i=x.length-1;i>=0;i--){const k=x[i];pending.push([a[k],b[k],path+'.'+k]);}
+ }return 'retained state differs';
+}
+
 // An ID is minted by the private coordinator, never by a public caller. Run
 // this data-only transition in a disposable Worker realm; it does not publish.
 export function appendSketchPrimitive(request:any){let revision='';try{
@@ -34,6 +46,6 @@ export function appendSketchPrimitive(request:any){let revision='';try{
  const requestedData=shape.write(),pm=workspace.parametricManager;pm.startTransaction();try{const target=pm.stages[stage];target.assignObject(shape);workspace.findLayerByName('sketch').add(shape);shape.stabilize(workspace as any);pm.finishTransaction(null,false);}catch(error){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw error},false)}catch(_){}throw error;}
  const candidate=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));candidate.boundary=before.boundary;
  const added=candidate.objects.filter(o=>o.id===id);if(added.length!==1||added[0].type!==kind||added[0].role!==role||added[0].stage!==stage||JSON.stringify(added[0].data)!==JSON.stringify(requestedData))throw fail('INTENT_CHANGED','The new primitive identity changed.');
- const restored={...candidate,objects:candidate.objects.filter(o=>o.id!==id)};if(!sameRestoredSketch(original.serializedSketch,JSON.stringify(restored)))throw fail('INTENT_CHANGED','Existing sketch state changed.');
+ const restored={...candidate,objects:candidate.objects.filter(o=>o.id!==id)};if(!sameRestoredSketch(original.serializedSketch,JSON.stringify(restored)))throw fail('INTENT_CHANGED','Existing sketch state changed: '+retainedDifference(before,restored));
  const solved=solveSketch({revision,sketch:candidate,boundary:structuredClone(candidate.boundary),externalParameters:bindings});if(!solved.ok)return solved;const serializedSketch=JSON.stringify(solved.sketch);if(serializedSketch.length>MAX||encoder.encode(serializedSketch).byteLength>MAX)throw fail('LIMIT','The resulting sketch exceeds its limit.');if(!sameRestoredSketch(JSON.stringify(candidate),serializedSketch))throw fail('CURRENT_GEOMETRY_MISMATCH','Primitive verification changed geometry.');return {revision,ok:true as const,serializedSketch,evidence:solved.evidence,primitive:{id,kind,role,stage}};
  }catch(error){return {revision,ok:false as const,error:{code:typeof error?.code==='string'?error.code:'INVALID',message:typeof error?.message==='string'?error.message:'Primitive transition failed.'}};}}
