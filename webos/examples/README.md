@@ -305,3 +305,24 @@ the kernel, then retires temporary resources before returning. It does not save,
 allocate authored IDs, or publish geometry. This is a kernel observation, not a
 continuous geometric or physical certificate. The adapter's tests cover metadata
 and lifetime routing only. Separate signed native proof passes13queries/77points over four saved-source fixtures; see desktop test/agent-cad-corpus/sweep/signed-point-evidence-r1. Full capacity/general domains/interruption remain unqualified.
+
+The modern typed-parameter recipe is `source-bound-parameters.mjs`, exporting
+`createModernParametersExample({engineRevision, ...cadAgentOptions})` and
+`mechanicalParameterDefinitions()`. Choose a genuinely staged explicit build that
+supports selected profiles and modern through holes. `build()` authors a numeric
+100×50×20 plate and five holes in a new empty document; `bind(receipt)` links the
+actual selected rectangle width/height, depth and hole dimensions to the returned
+length definitions. `replaceDefinitions(definitions)` edits directed formulas
+through the existing shared parameter transaction and journal. For example, replace
+`width`'s expression with `mm(120)` to drive height60 and depth24; a separate
+`edge: mm(14)` edit moves the corner holes. `inspect()`, `travel('undo'|'redo')`,
+`setDisplayUnits('inch'|'millimeter')`, `save(path)` and `open(path)` use ordinary
+public commands and the helper's pinned window/document scope. Save/Open is
+intentional; do not reuse a stale helper after an unrelated document replacement.
+
+This recipe is source-ready pending its complete composed application workflow.
+It evaluates a dependency graph, not simultaneous equations. Only the canonical
+selected rectangle/extrusion and modern through holes are integrated with typed
+parameters in this slice. Other generic families and typed STEP/3MF/drawing export
+remain explicit gaps. All feature/source/opaque region IDs come from actual
+receipts or discovery; importing the module performs no authoring or upload.
