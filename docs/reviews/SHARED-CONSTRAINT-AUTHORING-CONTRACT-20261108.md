@@ -28,6 +28,38 @@ written from qualified main `b5cc011`; its `REMOVE-CONSTANT-LIFECYCLE-R1.md` rec
 the exact failing path. That late failure after one real Save/Open does not imply
 complete projected qualification. Preserve all failed receipts and source pins.
 
+## Human policy and closed eligibility are separate boundaries
+
+Sharing actual native schema/math preparation does not authorize imposing a new
+closed-workflow whitelist on the active human editor. Compare the OLD real human
+call path before extraction: actual ground/prior-stage generated references,
+fresh consecutive N-selection groups, stage0 floor, existing rejected-row
+recovery and original dialog constraint/annotations may have different valid
+admission policies. Preserve legitimate behavior or justify a deliberate contract
+repair with source/evidence. Do not narrow it merely to make an ordinary closed
+fixture easier. Fixed's initial extraction and the initial PL packet both exposed
+this same review issue; their corrective source commits are retained separately.
+
+Put ordinary nongenerated/root/inventory restrictions in CLOSED eligibility,
+then share genuine actual-object/schema/constant/domain preparation. Stateful
+human insertion keeps its authoritative native transaction/recovery semantics;
+closed mutation keeps strict accepted-source, original-request proof and one
+full-suffix publication. A prior-rejected human draft row is not permission to
+adopt invalid closed source. Keep the actual edited constraint and annotations
+when a dialog authors them; do not silently reconstruct a metadata-free copy.
+
+## Source-ready requires resolved serial composition
+
+Source reading, patch review, ownership/import inspection and conflict-marker
+hygiene are allowed and required source work; they are not product execution or
+per-edit tests. A clean Git status does not establish resolved source: PL2170ac8
+contained committed markers in its coordinator. Root's serial composition removed
+them while retaining BOTH qualified typed-coordinate/Fix travel and the new PL
+method. Preserve that packet history as a source-quality failure, not a fabricated
+runtime incident. Do not call an unresolved packet coherent or discard the newer
+main path while adding a central route. Keep central splices separate for review;
+normal full build/whole workflow/oracle remain root's later execution boundary.
+
 ## Capture and model ownership
 
 Use current inspected IDs and revision-bound discovery, never parsed ID grammar,
