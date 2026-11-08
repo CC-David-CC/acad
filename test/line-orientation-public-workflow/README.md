@@ -123,3 +123,12 @@ independent-point-lock optimizations require zero internal rows. Fast all-set
 preparation re-evaluates actual internals instead of branching on stale internal
 hint/priority metadata. No solver goal, coefficient epsilon or save bound changed.
 Whole orientation and retained source/report workflows must qualify the repair.
+
+A separate source review fixes circular direction comparison in the replay
+branch guard: separately normalized angle subtraction falsely treats0 versus a
+tiny negative angle (or pi versus-pi) as almost a full turn apart. The comparator
+now measures the principal directed difference with atan2(sin(delta),cos(delta)).
+The existing angular/position bounds, exact unrelated fields, Arc sweep/full/
+major checks and authored branch constants are unchanged. This source-proven
+seam defect is not asserted as R7's unidentified exact-diff cause; the unchanged
+complete orientation workflow remains the required runtime evidence.

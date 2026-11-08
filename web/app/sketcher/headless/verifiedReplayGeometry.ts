@@ -75,7 +75,10 @@ function compareData(before:any,after:any,fields:Map<string,Set<string>>,bounded
 }
 function branch(a:any,b:any){
  const angle=(p:any,c:any)=>Math.atan2(p.y-c.y,p.x-c.x),normalized=(v:number)=>(v%TAU+TAU)%TAU;
- const sameDirection=(u:number,v:number)=>Number.isFinite(u)&&Number.isFinite(v)&&Math.abs(normalized(u)-normalized(v))<=ANGLE;
+ // Compare directions on the circle:0 and2*pi (or pi and-pi) are the
+ // same directed branch. Subtracting separately wrapped values falsely rejects
+ // a tiny numerical crossing of that seam; the angular bound is unchanged.
+ const sameDirection=(u:number,v:number)=>Number.isFinite(u)&&Number.isFinite(v)&&Math.abs(Math.atan2(Math.sin(u-v),Math.cos(u-v)))<=ANGLE;
  const radius=(p:any,c:any)=>Math.hypot(p.x-c.x,p.y-c.y),full=(d:any)=>Math.abs(d.a.x-d.b.x)<1e-6&&Math.abs(d.a.y-d.b.y)<1e-6;
  const x=a.data,y=b.data;
  if(a.type==='Segment'){
