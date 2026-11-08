@@ -1,5 +1,15 @@
 # CAD Modeler (JSketcher inspired)
 
+Whole-entity Fix/Unfix is finitely qualified by complete workflow ACAD2dbcc2b
+(actualdb99774/bbf2d284b):72records/769public traces/50observations/9refusals/
+three.cad Save/server/fresh Open cycles plus FIRST independent source/archive
+oracle. Genuine whole Segment/Circle/quarter+major Arc snapshots, redundancy,
+no-op/redo, conflicts, typed bindings and explicit Unfix/edit/Refix pass.
+See examples/whole-entity-fix.mjs for the exact tested public recipe. Generator/
+nested targets, near-coincident Arc branch precision and active human gestures
+remain unqualified; no Native3D or full Gate1 claim follows. No deployment.
+
+
 Finite live-Segment ProjectedDistance creation/edit/remove/named-binding and
 subsequent typed point movement now pass full workflow ACAD4325ef1
 (actual0133698/95d8023b0),52records/501public traces/37observations/7refusals/

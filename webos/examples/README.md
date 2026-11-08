@@ -1,5 +1,27 @@
 # Browser CAD command examples
 
+[Whole-entity Fix recipe](whole-entity-fix.mjs) is the exact helper from qualified
+workflow ACAD2dbcc2b, actualCoredb99774/Desktopbbf2d284b. It uses genuine
+FixSegment/FixCircle/FixArc snapshots, not a point lock or caller-supplied pose.
+On a normal fresh project, pass its existing document-bound agent:
+
+```js
+const recipe = createWholeEntityFixExample(agent);
+const sketch = await recipe.build();
+await recipe.fix(sketch, 'segment');
+await recipe.unfix(sketch, 'segment');
+```
+
+Import `createWholeEntityFixExample` from this module. Exact snapshots, genuine
+redundancy/reactivation, no-op preserving redo, motion conflicts, explicit
+Unfix/edit/Refix, typed named diameter preservation and positive update after
+Unfix, mixed travel and three.cad Save/server/fresh Open cycles passed the first
+complete browser run and FIRST independent source/archive oracle. Normal Save/
+Open is separate. Ordinary quarter/major Arc coverage does not qualify the
+inherited near-endpoint full-turn heuristic at50pm or Arc BRep. This workflow
+qualifies closed-source commands; active human gestures remain untested.
+
+
 [Four-corner plate recipe](four-corner-plate.mjs) is the exact helper from qualified
 whole workflow ACAD6511510 (actualCore0133698/Desktop68d66e4f8). On a normal
 fresh project, pass the existing document-bound agent and an actually advertised,
