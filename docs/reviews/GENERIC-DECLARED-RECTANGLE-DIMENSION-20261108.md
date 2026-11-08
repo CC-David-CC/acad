@@ -54,6 +54,19 @@ The generic transition's geometry, exact intent-delta and actual classification
 checks also run on the result; response metadata is resolved from that result's
 actual selected row.
 
+The optional generic-mutation constructor additionally requires literal
+placement declarations. Any nonliteral STRING in an authored Horizontal/Vertical
+angle or LockPoint x/y opts out BEFORE the literal-only recognizer is called.
+Named/local placement constants remain raw and use the prior generic native
+resolution and all its original domain/ownership/equation/cold verification.
+This is an eligibility disqualifier only, never a source-validity verdict or
+proof permission. Unknown/nonfinite/malformed/domain-invalid source must still
+refuse through those original generic checks. Numeric placement still receives
+the full declaration authentication; no ownership/domain/cold/captured failure
+is caught and converted into fallback. Named SegmentLength values are unaffected
+by this placement-only boundary. The recognizer/shared typed/read helpers are
+not modified by this follow-up.
+
 The helper's established null eligibility boundary preserves the old generic
 path (including noncanonical sources, additional objects/constraints and
 positive lengths outside the helper's qualified envelope). Any actual selected

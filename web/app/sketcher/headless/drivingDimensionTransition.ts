@@ -151,6 +151,15 @@ function validateWarmDimension(workspace:any){
 // existing helper authenticates registered ownership, ordered connectivity,
 // directed H/V branches, the actual anchor and both actual driving rows.
 function changeDeclaredRectangleDimension(revision:string,source:string,authored:any,row:any,intent:any,bindings:any){
+ // The existing recognizer interprets placement literals only. A named/local
+ // H/V angle or locked coordinate is NOT invalid merely because this optional
+ // constructor cannot interpret it. Leave the ORIGINAL request to generic
+ // native resolution/domain/ownership/proof, with no swallowed helper error.
+ const placementLiteral=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/;
+ for(const stage of authored.stages)for(const c of stage.constraints){
+  const fields=c.typeId==='LockPoint'?['x','y']:c.typeId==='Horizontal'||c.typeId==='Vertical'?['angle']:[];
+  for(const field of fields){const raw=c.constants?.[field];if(typeof raw==='string'&&!placementLiteral.test(raw.trim()))return null;}
+ }
  const request={revision,sketch:authored,boundary:authored.boundary,externalParameters:bindings},declaration=captureRectangleDimensionBindings(request);
  if(!declaration)return null;
  const sameRow=(bound:any)=>bound.stage===row.stage&&bound.index===row.index;
