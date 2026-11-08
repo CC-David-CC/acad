@@ -88,12 +88,23 @@ def main():
     bodies=[native_observation(row,r) for row in r['observations']];require(len(bodies)>=20,'complete material/travel/read chain')
     source0=r['observations'][0]['before']['capture']['native']['sketches'];b0=one([b['metrics'] for b in bodies[0] if b['featureId']==r['binding']['box']['featureId']],'unrelated B')
     for row,group in zip(r['observations'],bodies):require(row['before']['capture']['native']['sketches']==source0,'exact unchanged source sketch text');require(one([b['metrics'] for b in group if b['featureId']==r['binding']['box']['featureId']],'B measurement')==b0,'unrelated exact native facts')
+    # Runtime output IDs and saved manufacturing IDs are distinct opaque domains.
+    # Bind the public assignment request to its actual discovered producer, then
+    # retain the accepted manufacturing binding from BEFORE history changes.
+    box=r['binding']['box'];assignment=one([row for row in r['commandTrace'] if row['command']=='assign-printable-parts' and row.get('outcome')=='accepted' and len(row['args']['parts'])==1],'original public box assignment')
+    part=one(assignment['args']['parts'],'one assigned box');requested=one(part['regions'],'one requested box region')
+    require(part['id']=='box' and requested['featureId']==box['featureId'] and requested['bodyId']==box['outputId'] and requested['materialId']=='pla' and requested['appearanceId']=='blue','actual runtime producer selected by public assignment')
+    assigned=one([row for row in r['refusals'] if row['label']=='Assigned producer cannot disappear'],'original material guard')['before']['metadata']['manufacturing']
+    box_binding=one([row for row in assigned['bindings'] if row['featureId']==box['featureId']],'accepted original box binding')
+    require(box_binding['operationType']=='WORKER_SOLID_BOX_V1' and type(box_binding['id']) is str and bool(box_binding['id']),'authentic named manufacturing producer')
+    box_part=one([row for row in assigned['objects'] if row['id']==part['id']],'accepted original printable box');box_region=one(box_part['regions'],'one original printable region')
+    require(box_region['bodyId']==box_binding['id'] and box_region['materialId']==requested['materialId'] and box_region['appearanceId']==requested['appearanceId'],'original manufacturing region/producer association')
     archives={};rosters={};require([row['label'] for row in r['nativeSaves']]==['suppressed','restored-original','branch','branch-reedited'],'four ordinary native saves')
     for row in r['nativeSaves']:
         raw=(folder/row['savedFile']).read_bytes();archive=read_archive(folder/row['savedFile']);require(sha(raw)==row['sha256'] and len(raw)==row['bytes'],'real server-synchronized native bytes')
         envelope=archive['envelope'];model=envelope['project']['model'];require(model==row['before']['metadata']['model'],'saved whole authored model, not display snapshot');source_rectangle(envelope['project'],r['binding']);derive(model,r['binding'],r['engineRevision']);require(archive['rawSketches']=={s['id']:s['source'] for s in source0},'exact persisted original raw source')
         require(envelope['drawings']==[r['drawing']],'same valid drawing intent even unresolved');require(envelope['manufacturing']==row['before']['metadata']['manufacturing'],'actual material source persists');metadata=envelope['manufacturing'];require(len(metadata['bindings'])==len(metadata['objects'])==1,'only unrelated assignment');binding=metadata['bindings'][0]
-        require(binding['featureId']==r['binding']['box']['featureId'] and binding['id']==r['binding']['box']['outputId'] and binding['operationType']=='WORKER_SOLID_BOX_V1','no material auto-retarget');region=one(metadata['objects'][0]['regions'],'one material region');require(region['bodyId']==binding['id'] and region['materialId']=='pla' and region['appearanceId']=='blue','retained material/appearance identity')
+        require(binding==box_binding and metadata['objects'][0]==box_part,'exact original manufacturing binding/object, no material auto-retarget');require(metadata['materials']==assigned['materials'] and metadata['appearances']==assigned['appearances'],'retained material/appearance definitions')
         require(row['result']['committed'] and row['result']['archiveReuse']=='verified','normal verified native Save');archives[row['label']]=archive;rosters[row['label']]={identity(op['params']['featureId']):op for op in model['history']}
     require(len(r['edgeDiscoveries'])==2,'two actual public edge selection snapshots')
     for proof in r['edgeDiscoveries']:
