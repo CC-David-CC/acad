@@ -82,6 +82,9 @@ import {createCandidateSketchStorage} from './candidateSketchStorage.mjs';
 import {centeredHoleIntentFromLid} from 'engine/extrusion/centeredHoleIntent.mjs';
 import standardPlaneOperation from 'workbenches/modeler/features/plane/simplePlaneOperation';
 
+const HISTORY_SIGNAL_ABORTED=Function.call.bind(Object.getOwnPropertyDescriptor(AbortSignal.prototype,'aborted').get);
+const HISTORY_LISTEN=Function.call.bind(EventTarget.prototype.addEventListener),HISTORY_UNLISTEN=Function.call.bind(EventTarget.prototype.removeEventListener);
+
 export function activate(ctx: ApplicationContext) {
 
 
@@ -581,16 +584,18 @@ export function activate(ctx: ApplicationContext) {
     const stop=()=>{if(job.scope.epoch!==null&&job.scope.epoch===evaluationEpoch)engineResources.cancelCandidates();};
     const added:AbortSignal[]=[];let poll:any;
     try{
-      for(const signal of job.signals){if(Object.getOwnPropertyDescriptor(AbortSignal.prototype,'aborted').get.call(signal))throw superseded();EventTarget.prototype.addEventListener.call(signal,'abort',stop,{once:true});added.push(signal);}
+      for(const signal of job.signals){if(HISTORY_SIGNAL_ABORTED(signal))throw superseded();HISTORY_LISTEN(signal,'abort',stop,{once:true});added.push(signal);}
       poll=setInterval(()=>{try{job.current();}catch{stop();}},100);
       await new Promise<void>((resolve,reject)=>{pendingModifications++;modificationCallbacks.set(state,{onAccepted:resolve,onError:reject,preparation,journalProposal:proposal,journalSignature:next.signature,historyControl:true,historyControlAnchors:{sketch:job.sourceStamp,material:job.materialRevision}});modifications$.next(state);});
     }catch(error){
       if(error&&typeof error==='object'&&Object.isExtensible(error)&&plan.delta?.featureId!==undefined)Object.defineProperty(error,'requestedFeatureId',{value:plan.delta.featureId,enumerable:true,configurable:true});
       throw error;
-    }finally{clearInterval(poll);for(const signal of added)EventTarget.prototype.removeEventListener.call(signal,'abort',stop);}
-    preparation.requireCommittedCurrent();
-    return Object.freeze({changed:true,revision:inspectAuthoredEdits().revision,pointer:plan.pointer,afterFeatureId:plan.pointer<0?null:Number(next.history[plan.pointer].params.featureId),
-      ...(plan.kind==='feature-suppression'?{featureId:plan.delta.featureId,index:plan.delta.index,suppressed:plan.delta.afterSuppressed}:{}),kind:plan.kind,persistence:'volatile-workspace'});
+    }finally{clearInterval(poll);for(const signal of added)HISTORY_UNLISTEN(signal,'abort',stop);}
+    try{
+      preparation.requireCommittedCurrent();
+      return Object.freeze({changed:true,revision:inspectAuthoredEdits().revision,pointer:plan.pointer,afterFeatureId:plan.pointer<0?null:Number(next.history[plan.pointer].params.featureId),
+        ...(plan.kind==='feature-suppression'?{featureId:plan.delta.featureId,index:plan.delta.index,suppressed:plan.delta.afterSuppressed}:{}),kind:plan.kind,persistence:'volatile-workspace'});
+    }catch(cause){throw Object.assign(Error('History control committed, but its receipt or lifetime is unavailable.'),{code:'HISTORY_PUBLICATION_FAILED',committed:true,cause});}
   }
 
   async function travelHistoryControl(args:any,rawOptions:any){

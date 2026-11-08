@@ -36,3 +36,9 @@ signature text. The exact-state comparator now includes suppression; bounded
 without splitting surrogate pairs or a giant main encode. These are source
 contract findings, not reproduced public corruption/native incidents. No tests,
 builds or browser runs were launched; archive owner code remains untouched.
+
+Final receipt construction after the accepted modification also carries an
+explicit committed-error envelope (`HISTORY_PUBLICATION_FAILED`, exact cause)
+if its lifetime or revision inspection throws. Native signal intrinsics for
+this new private submit path are captured once, avoiding listener overrides
+across awaits. This additional root source finding has no asserted live incident.
