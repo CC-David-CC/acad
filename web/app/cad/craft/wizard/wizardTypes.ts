@@ -35,6 +35,10 @@ export interface WizardService {
 
   isInProgress(): boolean;
 
+  // False only for no request or a pristine, privately issued current-history
+  // navigation preview. Explicit edits remain active, including no-op edits.
+  hasActiveOperation(): boolean;
+
   workingRequest: OperationRequest;
 
   updateParams: (mutator: (params: OperationParams) => void) => void;
