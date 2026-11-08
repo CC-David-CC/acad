@@ -5,7 +5,7 @@ if(crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'..
 const {stageOwnedProfileComponent}=require('./stage-owned-profile-component.cjs');
 const defaultOutput=path.resolve(__dirname,'../.build/manufacturing-mesh-assets');
 if(fs.existsSync(process.argv[3]||defaultOutput))throw Error('Use a fresh manufacturing-mesh component output');
-stageOwnedProfileComponent({input:process.argv[2],output:process.argv[3]||defaultOutput,defaultOutput,
+stageOwnedProfileComponent({selectedRegionArrangementVersion:1,input:process.argv[2],output:process.argv[3]||defaultOutput,defaultOutput,
  jsSha:'32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08',
  wasmSha:'abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc',
  constructorModule:'modules/engine/mount/occ-manufacturing-mesh-mount.mjs',

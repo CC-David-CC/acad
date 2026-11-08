@@ -7,7 +7,7 @@ import {captureOwnedLoftIntent,ownedLoftBindingFields,captureOwnedLoftBinding,eq
 import {createWorkerMount} from './worker-controller.mjs';
 export function createStepExportOccMount(options){
  return createWorkerMount(options,Object.freeze({engine:'occ-step-export-v1-component',representation:'occ-brep-worker-owned',mesh:false,profile:false,
-  selectedProfile:true,selectedProfileVersion:3,edgeTreatments:true,booleanHistory:true,throughHoles:true,linearHolePatterns:true,revolve:true,sweep:true,loft:true,adaptiveMetrology:true,stepExport:true,captureStepExportRequest,captureStepExportResult,stepNativeCodes:STEP_EXPORT_NATIVE_CODES,stepRefusalCodes:STEP_EXPORT_REFUSAL_CODES,
+  selectedProfile:true,selectedProfileVersion:3,selectedRegionArrangementVersion:1,edgeTreatments:true,booleanHistory:true,throughHoles:true,linearHolePatterns:true,revolve:true,sweep:true,loft:true,adaptiveMetrology:true,stepExport:true,captureStepExportRequest,captureStepExportResult,stepNativeCodes:STEP_EXPORT_NATIVE_CODES,stepRefusalCodes:STEP_EXPORT_REFUSAL_CODES,
   captureSelectedProfile:capturePolygonProfileRequest,captureRevolve:captureOwnedRevolveIntent,bindRevolve:bindOwnedRevolveIntent,captureSweep:captureOwnedSweepIntent,bindSweep:bindOwnedSweepIntent,
   captureLoft:captureOwnedLoftIntent,loftBindingFields:ownedLoftBindingFields,captureLoftBinding:captureOwnedLoftBinding,sameLoftBinding:equalOwnedLoftBinding,loftNativeCodes:LOFT_NATIVE_REFUSALS,loftPreparationCodes:LOFT_PREPARATION_REFUSALS,
   jsSha256:'ca349411fc9e27677bf27072497abb22077d80c28e27ef073266966d16b07733',

@@ -55,7 +55,7 @@ module.exports = {
       'codi-selected-profile-occ-wasm$': path.join(__dirname, '.build/selected-profile-assets/selected-profile-occ.wasm'),
       'codi-selected-profile-exact-volume$': path.join(__dirname, '.build/selected-profile-assets/exactMeshVolume.mjs'),
       'codi-exact-mesh-volume-module$': path.join(__dirname, '.build/prism-assets/exactMeshVolume.mjs'),
-      'codi-selected-profile-plan$': path.join(__dirname, '.build/selected-profile-assets/selectedProfilePlan.mjs'),
+      'codi-selected-profile-plan$': path.join(__dirname, '.build/selected-profile-plan-entry.mjs'),
       'codi-polygon-profile-assets$': path.join(__dirname, '.build/polygon-profile-entry.mjs'),
       'codi-mechanical-profile-assets$': path.join(__dirname, '.build/mechanical-profile-entry.mjs'),
       'codi-boolean-history-assets$': path.join(__dirname, '.build/boolean-history-entry.mjs'),

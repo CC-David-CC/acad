@@ -5,7 +5,7 @@ if(crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'..
 const {stageOwnedProfileComponent}=require('./stage-owned-profile-component.cjs');
 const defaultOutput=path.resolve(__dirname,'../.build/shell-assets');
 if(fs.existsSync(process.argv[3]||defaultOutput))throw Error('Use a fresh shell component output');
-stageOwnedProfileComponent({input:process.argv[2],output:process.argv[3]||defaultOutput,defaultOutput,
+stageOwnedProfileComponent({selectedRegionArrangementVersion:1,input:process.argv[2],output:process.argv[3]||defaultOutput,defaultOutput,
  jsSha:'57b74074e0a249b917ac68357fbd003c37d1ab61897206886b575088e6995858',
  wasmSha:'60dc956b08e01f43d08a48035a384e478e63bb34fb55f21a152c8cd12e8b8947',
  constructorModule:'modules/engine/mount/occ-shell-mount.mjs',

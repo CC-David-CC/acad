@@ -6,7 +6,7 @@ import {captureOwnedLoftIntent,ownedLoftBindingFields,captureOwnedLoftBinding,eq
 import {createWorkerMount} from './worker-controller.mjs';
 export function createAdaptiveMetrologyOccMount(options){
  return createWorkerMount(options,Object.freeze({engine:'occ-adaptive-metrology-v1-component',representation:'occ-brep-worker-owned',mesh:false,profile:false,
-  selectedProfile:true,selectedProfileVersion:3,edgeTreatments:true,booleanHistory:true,throughHoles:true,linearHolePatterns:true,revolve:true,sweep:true,loft:true,adaptiveMetrology:true,
+  selectedProfile:true,selectedProfileVersion:3,selectedRegionArrangementVersion:1,edgeTreatments:true,booleanHistory:true,throughHoles:true,linearHolePatterns:true,revolve:true,sweep:true,loft:true,adaptiveMetrology:true,
   captureSelectedProfile:capturePolygonProfileRequest,captureRevolve:captureOwnedRevolveIntent,bindRevolve:bindOwnedRevolveIntent,captureSweep:captureOwnedSweepIntent,bindSweep:bindOwnedSweepIntent,
   captureLoft:captureOwnedLoftIntent,loftBindingFields:ownedLoftBindingFields,captureLoftBinding:captureOwnedLoftBinding,sameLoftBinding:equalOwnedLoftBinding,loftNativeCodes:LOFT_NATIVE_REFUSALS,loftPreparationCodes:LOFT_PREPARATION_REFUSALS,
   jsSha256:'ed06b634a3e81f9a51c89f75b3d65e03b8ace1fc483900ea2858eae8eff970a4',

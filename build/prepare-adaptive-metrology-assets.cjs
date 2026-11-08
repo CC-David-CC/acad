@@ -17,7 +17,7 @@ if(typeof input!=='string'||!input.trim()){
    const candidate=path.join(temporary,'component');
    execFileSync(process.execPath,[path.join(__dirname,'prepare-adaptive-metrology-profile-assets.cjs'),input,candidate],{stdio:'pipe'});
    const actual=JSON.parse(fs.readFileSync(path.join(base,'component.json'),'utf8')),fresh=JSON.parse(fs.readFileSync(path.join(candidate,'component.json'),'utf8'));
-   for(const key of ['format','jsSha256','wasmSha256','bootstrapSha256','workerSha256','sources','files'])if(JSON.stringify(actual[key])!==JSON.stringify(fresh[key]))throw Error('Stale adaptive-metrology stage; use a fresh task-owned output');
+   for(const key of ['format','jsSha256','wasmSha256','bootstrapSha256','workerSha256','selectedRegionArrangementVersion','sources','files'])if(JSON.stringify(actual[key])!==JSON.stringify(fresh[key]))throw Error('Stale adaptive-metrology stage; use a fresh task-owned output');
    for(const[name,pin]of Object.entries(fresh.files)){const b=fs.readFileSync(path.join(base,name));if(b.length!==pin.bytes||sha(b)!==pin.sha256)throw Error('Adaptive metrology stage changed: '+name);}
   }finally{fs.rmSync(temporary,{recursive:true,force:true});}
  }else execFileSync(process.execPath,[path.join(__dirname,'prepare-adaptive-metrology-profile-assets.cjs'),input,base],{stdio:'inherit'});

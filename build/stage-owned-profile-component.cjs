@@ -1,8 +1,9 @@
 // Private component staging; no deployment or default-engine promotion.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const {embedDisplayProjection}=require('./embedded-display.cjs');
-module.exports.stageOwnedProfileComponent=function({input,output,defaultOutput,jsSha,wasmSha,constructorModule,workerName,prefix,format,rootModules=[]}){
+module.exports.stageOwnedProfileComponent=function({input,output,defaultOutput,jsSha,wasmSha,constructorModule,workerName,prefix,format,rootModules=[],selectedRegionArrangementVersion=0}){
 const root=path.resolve(__dirname,'..');
+if(![0,1].includes(selectedRegionArrangementVersion)||selectedRegionArrangementVersion===1&&!rootModules.includes('modules/engine/mount/selectionLineageIndex.mjs'))throw Error('Arrangement capability requires the complete common selection-plan-v2 graph');
 if(!input)throw Error('Provide approved native artifacts');
 if(fs.existsSync(output)&&path.resolve(output)!==path.resolve(defaultOutput))throw Error('Use a fresh component output');
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -24,9 +25,9 @@ function stageModule(name){
  const imports=/\b(?:import|export)\s+(?:[^'";]*?\s+from\s*)?['"]([^'"]+)['"]/g;let match;
  while((match=imports.exec(text))){if(!match[1].startsWith('.'))throw Error('External component dependency');stageModule(path.relative(root,path.resolve(path.dirname(target),match[1])));}
 }
-for(const name of [constructorModule,'modules/engine/mount/exactMeshVolume.mjs',...rootModules,'modules/engine/mount/polygonProfilePlan.mjs','modules/engine/mount/ownedTopologyContract.mjs','modules/engine/mount/prismSelectionIndex.mjs'])stageModule(name);
+for(const name of [constructorModule,'modules/engine/mount/exactMeshVolume.mjs',...rootModules,'modules/engine/mount/polygonProfilePlan.mjs','modules/engine/mount/ownedTopologyContract.mjs','modules/engine/mount/prismSelectionIndex.mjs','modules/engine/mount/arrangedPrismSelectionIndex.mjs'])stageModule(name);
 write('modules/engine/mount/'+workerName,worker);write(prefix+'-occ-portable.js',glue);write(prefix+'-occ.wasm',wasm);
-const result={format,jsSha256:jsSha,wasmSha256:wasmSha,bootstrapSha256:bootstrapSha,workerSha256:sha(worker),sources,files,output};
+const result={format,selectedRegionArrangementVersion,jsSha256:jsSha,wasmSha256:wasmSha,bootstrapSha256:bootstrapSha,workerSha256:sha(worker),sources,files,output};
 fs.writeFileSync(path.join(output,'component.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
 
 return result;

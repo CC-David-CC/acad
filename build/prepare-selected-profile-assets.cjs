@@ -14,13 +14,21 @@ if(/\beval\s*\(|\bnew\s+Function\s*\(/.test(glue))throw Error('Dynamic JavaScrip
 const replace=(before,after)=>{if(bootstrap.split(before).length!==2)throw Error('Unexpected selected-profile bootstrap structure.');bootstrap=bootstrap.replace(before,after);};
 replace('const [js,wasm] = await Promise.all([verifiedAsset(msg.manifest.js, 1048576),verifiedAsset(msg.manifest.wasm, 41943040)]);',`if(msg.manifest.js?.sha256!=='${jsSha}') bad('Unexpected embedded JS identity'); const wasm=await verifiedAsset(msg.manifest.wasm,41943040);`);
 replace("const blob=URL.createObjectURL(new Blob([js], {type:'text/javascript'}));\n      try {importScripts(blob);} finally {URL.revokeObjectURL(blob);}",'runEmbeddedRuntime();');
+// The raw canonical bootstrap pin above is checked BEFORE this flat rewrite.
+bootstrap=bootstrap.split('../extrusion/selectedArrangementDescriptor.mjs').join('./selectedArrangementDescriptor.mjs');
 // The v2 binary input uses doubles. Both heap getters must follow native memory
 // growth rather than retaining the views present at initialization.
 const exposedNames=['_malloc','_free','lengthBytesUTF8','stringToUTF8Array','HEAP8','HEAPF64','str2C'];
 const worker=embedDisplayProjection(bootstrap+'\nfunction runEmbeddedRuntime(){\nvar Module=self.Module;\n'+glue+'\n'+exposedNames.map(name=>`Object.defineProperty(self,${JSON.stringify(name)},{configurable:true,get:()=>${name}});\n`).join('')+'self.Module=Module;\n}\n');
 fs.mkdirSync(output,{recursive:true});
 for(const [name,bytes]of [['selected-profile-occ-portable.js',glue],['selected-profile-occ.wasm',wasm],['selected-profile-worker.js',worker]])fs.writeFileSync(path.join(output,name),bytes);
-fs.copyFileSync(path.join(root,'modules/engine/mount/selectedProfilePlan.mjs'),path.join(output,'selectedProfilePlan.mjs'));
+const plan=fs.readFileSync(path.join(root,'modules/engine/mount/selectedProfilePlan.mjs'),'utf8').split('../extrusion/selectedArrangementDescriptor.mjs').join('./selectedArrangementDescriptor.mjs');
+fs.writeFileSync(path.join(output,'selectedProfilePlan.mjs'),plan);
+fs.copyFileSync(path.join(root,'modules/engine/extrusion/selectedArrangementDescriptor.mjs'),path.join(output,'selectedArrangementDescriptor.mjs'));
+// Asset/resource does not traverse .mjs imports. Explicitly emit the complete
+// active V2 metadata graph while preserving the original plan URL contract.
+fs.writeFileSync(path.join(root,'.build/selected-profile-plan-entry.mjs'),
+ "import plan from './selected-profile-assets/selectedProfilePlan.mjs';\nimport metadata from './selected-profile-assets/selectedArrangementDescriptor.mjs';\nif(plan.slice(0,plan.lastIndexOf('/')+1)!==metadata.slice(0,metadata.lastIndexOf('/')+1))throw Error('Selected-profile metadata modules are not colocated.');\nexport default plan;\n");
 console.log(JSON.stringify({bootstrapSha256:bootstrapSha,jsSha256:jsSha,wasmSha256:wasmSha,workerSha256:hash(worker),output}));
 
 fs.copyFileSync(path.join(root,'modules/engine/mount/exactMeshVolume.mjs'),path.join(output,'exactMeshVolume.mjs'));

@@ -3,11 +3,12 @@ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypt
 const {assertOwnedProfileResourceClosure}=require('./owned-profile-resource-closure.cjs');
 const root=path.resolve(__dirname,'..'),base=path.join(root,'.build/polygon-profile-assets');
 const manifest=JSON.parse(fs.readFileSync(path.join(base,'component.json'),'utf8'));
-const modules=['modules/engine/mount/exactMeshVolume.mjs','modules/engine/mount/polygonProfilePlan.mjs','modules/engine/mount/selectedProfilePlan.mjs','modules/engine/mount/ownedTopologyContract.mjs','modules/engine/mount/prismSelectionIndex.mjs','modules/engine/extrusion/simplePolygon.mjs','modules/engine/extrusion/exactExternalVertexContact.mjs'];
+const modules=['modules/engine/mount/exactMeshVolume.mjs','modules/engine/mount/polygonProfilePlan.mjs','modules/engine/mount/selectedProfilePlan.mjs','modules/engine/mount/ownedTopologyContract.mjs','modules/engine/mount/prismSelectionIndex.mjs','modules/engine/extrusion/simplePolygon.mjs','modules/engine/extrusion/exactExternalVertexContact.mjs','modules/engine/extrusion/selectedArrangementDescriptor.mjs','modules/engine/mount/arrangedPrismSelectionIndex.mjs'];
+if(manifest.selectedRegionArrangementVersion!==0)throw Error('Unexpected staged arrangement capability');
 const files=['modules/engine/mount/polygon-profile-worker.js','polygon-profile-occ-portable.js','polygon-profile-occ.wasm',...modules];
 for(const name of files){const bytes=fs.readFileSync(path.join(base,name)),v=manifest.files[name];if(!v||bytes.length!==v.bytes||crypto.createHash('sha256').update(bytes).digest('hex')!==v.sha256)throw Error('Component input changed: '+name);}
 assertOwnedProfileResourceClosure(base,manifest,modules);
 const imports=files.map((name,i)=>`import p${i} from ${JSON.stringify('./polygon-profile-assets/'+name)};`).join('\n');
 const table=Object.fromEntries(modules.map((name,i)=>[name,'p'+(i+3)]));
-const source=imports+'\nexport default {worker:p0,js:p1,wasm:p2,modules:{'+Object.entries(table).map(([k,v])=>JSON.stringify(k)+':'+v).join(',')+'}};\n';
+const source=imports+'\nexport default {selectedRegionArrangementVersion:'+manifest.selectedRegionArrangementVersion+',worker:p0,js:p1,wasm:p2,modules:{'+Object.entries(table).map(([k,v])=>JSON.stringify(k)+':'+v).join(',')+'}};\n';
 fs.writeFileSync(path.join(root,'.build/polygon-profile-entry.mjs'),source);

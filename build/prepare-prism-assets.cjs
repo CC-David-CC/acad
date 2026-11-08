@@ -12,13 +12,15 @@ const copy = (source, name) => {
  // This generated legacy directory is flat; canonical source stays separate.
  if(name==='authoredRegions.mjs')text=text.replace('../../../../engine/mount/polygonProfilePlan.mjs','./polygonProfilePlan.mjs');
  if(name==='polygonProfilePlan.mjs')text=text.replace('../extrusion/simplePolygon.mjs','./simplePolygon.mjs').replace('../extrusion/exactExternalVertexContact.mjs','./exactExternalVertexContact.mjs');
+ if(['selectedProfilePlan.mjs','ownedTopologyContract.mjs','arrangedPrismSelectionIndex.mjs'].includes(name))text=text.split('../extrusion/selectedArrangementDescriptor.mjs').join('./selectedArrangementDescriptor.mjs');
  fs.writeFileSync(path.join(out,name),text);
 };
 
-for (const name of ['exactMeshVolume.mjs','displayProjection.mjs','enclosureLabelContact.mjs','enclosureManufacturingMesh.mjs','enclosureMesh.mjs','enclosurePlan.mjs','profile-topology.mjs','centeredHolePlan.mjs','centeredHoleTopology.mjs','boundedPrismBoundary.mjs','fourCornerHolePlan.mjs','fourCornerHoleTopology.mjs','fourCornerHoleProvenance.mjs','selectedProfilePlan.mjs','polygonProfilePlan.mjs','ownedTopologyContract.mjs']) copy('modules/engine/mount/'+name,name);
+for (const name of ['exactMeshVolume.mjs','displayProjection.mjs','enclosureLabelContact.mjs','enclosureManufacturingMesh.mjs','enclosureMesh.mjs','enclosurePlan.mjs','profile-topology.mjs','centeredHolePlan.mjs','centeredHoleTopology.mjs','boundedPrismBoundary.mjs','fourCornerHolePlan.mjs','fourCornerHoleTopology.mjs','fourCornerHoleProvenance.mjs','selectedProfilePlan.mjs','polygonProfilePlan.mjs','ownedTopologyContract.mjs','arrangedPrismSelectionIndex.mjs']) copy('modules/engine/mount/'+name,name);
 for (const name of ['rectangleProfileRequest.mjs','authoredRegions.mjs','profilePlan.mjs']) copy('modules/workbenches/modeler/features/extrude/'+name,name);
 copy('modules/engine/extrusion/simplePolygon.mjs','simplePolygon.mjs');
 copy('modules/engine/extrusion/exactExternalVertexContact.mjs','exactExternalVertexContact.mjs');
+copy('modules/engine/extrusion/selectedArrangementDescriptor.mjs','selectedArrangementDescriptor.mjs');
 // Resource modules are served verbatim: emit their complete static import
 // closure without evaluating a planner on the main thread.
 const regionModules=[];let regionBytes=0;
@@ -32,6 +34,7 @@ function regionDependency(name){
  while((match=imports.exec(text))){if(!match[1].startsWith('.'))throw Error('External legacy region dependency');regionDependency(path.relative(out,path.resolve(path.dirname(file),match[1])));}
 }
 regionDependency('authoredRegions.mjs');
+regionDependency('arrangedPrismSelectionIndex.mjs');
 const regionEntry=regionModules.map((name,i)=>`import p${i} from ${JSON.stringify('./prism-assets/'+name)};`).join('\n')+'\n'+
  `const paths=[${regionModules.map((_,i)=>'p'+i).join(',')}],directory=p0.slice(0,p0.lastIndexOf('/')+1);\n`+
  `if(paths.some(p=>p.slice(0,p.lastIndexOf('/')+1)!==directory))throw Error('Legacy region Worker modules are not colocated.');\nexport default p0;\n`;
@@ -41,7 +44,8 @@ if (crypto.createHash('sha256').update(fs.readFileSync(wasm)).digest('hex') !== 
 fs.copyFileSync(wasm,path.join(out,'occ.wasm'));
 execFileSync(process.execPath,[path.join(root,'modules/engine/mount/build-headless-wrapper.mjs'),path.join(root,'node_modules/.cache/codi-oci-census/main.js'),path.join(out,'occ-portable.js')],{stdio:'inherit'});
 
-const bootstrap=fs.readFileSync(path.join(root,'modules/engine/mount/oci-verified-worker.js'),'utf8');
+// Canonical bootstrap stays unchanged; this generated legacy location is flat.
+const bootstrap=fs.readFileSync(path.join(root,'modules/engine/mount/oci-verified-worker.js'),'utf8').split('../extrusion/selectedArrangementDescriptor.mjs').join('./selectedArrangementDescriptor.mjs');
 const glue=fs.readFileSync(path.join(out,'occ-portable.js'),'utf8');
 const combined=embeddedWorker(bootstrap,glue);
 fs.writeFileSync(path.join(out,'oci-verified-worker.js'),combined,{flag:'wx'});
