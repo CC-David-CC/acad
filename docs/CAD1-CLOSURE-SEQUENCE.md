@@ -9,6 +9,13 @@ viewable output and one authoritative shared person/agent operation model remain
 
 ## Principal Apply integration checkpoint — 2026-11-08
 
+Latest R3 frozen be03c89: the owned-epoch fix advances6 real Apply paths,18 UI
+travels and3 .cad save/fresh Opens. Whole workflow remains FAILED at fresh-Open
+Native-child principal edit eligibility (PRINCIPAL_PLACEMENT_UNAVAILABLE).
+Investigate derived complete-head custody versus the absent prior-session J
+signature; do not fabricate J or weaken stale checks. Fourth save/trim/oracle
+remain required. Earlier R1/R2 details below remain historical evidence.
+
 Coherent source packet is composed over the qualified Slot/Native main on
 `integration/principal-plane-apply-20261108`. Actual Core0381d21a /
 Desktopc8779dd83 normal build and signed fixture passed. First WHOLE Chrome

@@ -21,6 +21,14 @@ reinstate assembly acceptance in Gate1.
 
 ## Current qualification checkpoint — 2026-11-08
 
+Latest principal Apply R3 progresses past the repaired owned-epoch failure:
+63 records,6 real Apply paths,18 UI travel events,26 Native observations,9
+refusals and3 .cad save/server/fresh Open cycles pass driver checks. It still
+terminates FAIL when agent editing the freshly reopened Native-child document
+reports PRINCIPAL_PLACEMENT_UNAVAILABLE. Frozen be03c89 retains exact sources
+and artifacts; fourth save and trim boundary were not reached. Full workflow
+and independent artifact signoff remain open. R1/R2 below are historical.
+
 Principal Apply candidate first whole R1 FAILED at its first actual OK with a
 180000ms settlement timeout (Core0381d21a/Desktopc8779dd83). Frozen evidence
 6f10c83 retains original sources and scoped prerequisite passes. Apply remains
