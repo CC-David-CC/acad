@@ -583,7 +583,7 @@ export function activate(ctx: ApplicationContext) {
     try{
       for(const signal of job.signals){if(Object.getOwnPropertyDescriptor(AbortSignal.prototype,'aborted').get.call(signal))throw superseded();EventTarget.prototype.addEventListener.call(signal,'abort',stop,{once:true});added.push(signal);}
       poll=setInterval(()=>{try{job.current();}catch{stop();}},100);
-      await new Promise<void>((resolve,reject)=>{pendingModifications++;modificationCallbacks.set(state,{onAccepted:resolve,onError:reject,preparation,journalProposal:proposal,journalSignature:next.signature,historyControl:true});modifications$.next(state);});
+      await new Promise<void>((resolve,reject)=>{pendingModifications++;modificationCallbacks.set(state,{onAccepted:resolve,onError:reject,preparation,journalProposal:proposal,journalSignature:next.signature,historyControl:true,historyControlAnchors:{sketch:job.sourceStamp,material:job.materialRevision}});modifications$.next(state);});
     }catch(error){
       if(error&&typeof error==='object'&&Object.isExtensible(error)&&plan.delta?.featureId!==undefined)Object.defineProperty(error,'requestedFeatureId',{value:plan.delta.featureId,enumerable:true,configurable:true});
       throw error;
@@ -1646,15 +1646,20 @@ export function activate(ctx: ApplicationContext) {
         if (nextJournal) journalHeadSignature=nextJournalSignature;
         if(callbacks?.historyControl){
           journalHeadDefinition=result.history;fullTipSignature=nextJournalSignature;
-          fullTipSketchRevision=sketchRevision(ctx.storageService,(service as any).sketchStorageNamespace);
-          fullTipMaterialSurfaceRevision=(ctx.projectManager as any).inspectMaterialSurfaceRevision();
+          fullTipSketchRevision=callbacks.historyControlAnchors.sketch;
+          fullTipMaterialSurfaceRevision=callbacks.historyControlAnchors.material;
         }
         if (requestedPointer===result.history.length-1) {
           fullTipSignature=nextTipSignature;journalHeadDefinition=result.history;
-          try {fullTipSketchRevision=sketchRevision(ctx.storageService,(service as any).sketchStorageNamespace);}
-          catch (_) {fullTipSketchRevision=null;}
-          try {fullTipMaterialSurfaceRevision=(ctx.projectManager as any).inspectMaterialSurfaceRevision();}
-          catch (_) {fullTipMaterialSurfaceRevision=null;}
+          if(callbacks?.historyControl){
+            fullTipSketchRevision=callbacks.historyControlAnchors.sketch;
+            fullTipMaterialSurfaceRevision=callbacks.historyControlAnchors.material;
+          }else{
+            try {fullTipSketchRevision=sketchRevision(ctx.storageService,(service as any).sketchStorageNamespace);}
+            catch (_) {fullTipSketchRevision=null;}
+            try {fullTipMaterialSurfaceRevision=(ctx.projectManager as any).inspectMaterialSurfaceRevision();}
+            catch (_) {fullTipMaterialSurfaceRevision=null;}
+          }
         }
         rewindBaseline=nextRewindBaseline;
         result.resources.accept();

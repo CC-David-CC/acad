@@ -56,7 +56,7 @@ export function createWorkerHistoryControlCommands(ctx:any,submit:(input:any)=>P
    const now=sketches.getAllSketches();if(now.length!==sourceRows.length||now.some((r:any)=>!sourceRows.some(v=>v.id===r.id)))throw abort();
    for(const r of sourceRows)if(sketches.getSketchData(r.id)!==r.source||r.owner.model.face!==r.owner.face||r.owner.face.root!==r.owner.model||JSON.stringify(sketchBoundaryFrame(r.owner.face))!==r.frame||registry.findFace(r.id)!==r.liveFace||r.liveFace&&JSON.stringify(sketchBoundaryFrame(r.liveFace))!==r.frame)throw abort();
   };
-  current();return{craft,project,manager,state,history,rows,models,context,sourceParents,protectedRefs:protectedRefs.references,scope,signals:[signal,opts.signal].filter(Boolean),alive,current,build,budget,
+  current();return{craft,project,manager,state,history,rows,models,context,sourceParents,protectedRefs:protectedRefs.references,scope,signals:[signal,opts.signal].filter(Boolean),alive,current,build,budget,sourceStamp:stamp,materialRevision:material,
    requireProtected(models:any[],nextHistory:any[]){for(const r of protectedBodies){const next=models.filter(m=>m.id===r.model.id&&m.featureId===r.ref.featureId);if(next.length!==1||nextHistory[next[0].originatingOperation]?.type!==r.ref.operationType||!equalMetrics(r.metrics,next[0].inspectKernelMetrics?.()))fail('REFERENCED_MANUFACTURING_OUTPUT','This history edit changes an assigned output. Rebind its materials explicitly first.');}}
   };
  }

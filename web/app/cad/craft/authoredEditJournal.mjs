@@ -411,7 +411,7 @@ export function planOperationAppendTravel(state,input) {
   if(!entry||entry.kind!=='operation-append'||entry.index!==index||entry.featureId!==featureId||entry.previousFeatureId!==previousFeatureId||currentLength!==(undo?index+1:index))throw Error('The authored append no longer matches this history tip.');
   if(undo){
     const current=captureOperationAppend(currentOperation),expected=entry.operation.params;
-    if(current.type!==entry.operation.type||appendKeys(current.type,current.params).some(key=>key==='sections'?!sameLoftSections(current.params.sections,expected.sections):key==='pathCurves'?current.params.pathCurves.length!==expected.pathCurves.length||current.params.pathCurves.some((ref,i)=>ref.curveId!==expected.pathCurves[i].curveId||ref.reversed!==expected.pathCurves[i].reversed):(key==='edgeIds'||key==='removedFaceIds')?current.params[key].length!==expected[key].length||current.params[key].some((id,i)=>id!==expected[key][i]):!Object.is(current.params[key],expected[key])))throw Error('The authored operation no longer matches this append.');
+    if(current.type!==entry.operation.type||featureSuppressed(current)!==featureSuppressed(entry.operation)||appendKeys(current.type,current.params).some(key=>key==='sections'?!sameLoftSections(current.params.sections,expected.sections):key==='pathCurves'?current.params.pathCurves.length!==expected.pathCurves.length||current.params.pathCurves.some((ref,i)=>ref.curveId!==expected.pathCurves[i].curveId||ref.reversed!==expected.pathCurves[i].reversed):(key==='edgeIds'||key==='removedFaceIds')?current.params[key].length!==expected[key].length||current.params[key].some((id,i)=>id!==expected[key][i]):!Object.is(current.params[key],expected[key])))throw Error('The authored operation no longer matches this append.');
   }else if(currentOperation!==null)throw Error('Redo requires an absent appended operation.');
   return Object.freeze({index,featureId,operation:entry.operation,next:make(document,revision+1,state.entries,state.cursor+(undo?-1:1))});
 }
@@ -756,13 +756,18 @@ export function planThroughHoleParentRepairTravel(state,input){
 // Same journal, source deltas only. Signatures bind the bounded exact authored
 // definition, not geometry; suffix payloads are charged and never snapshots.
 export const HISTORY_CONTROL_KINDS=Object.freeze(['feature-suppression','history-position','history-branch']);
+function historySignatureBytes(text){
+ const encoder=new TextEncoder();let bytes=0;
+ for(let start=0;start<text.length;){let end=Math.min(start+1024,text.length);if(end<text.length&&text.charCodeAt(end-1)>=0xd800&&text.charCodeAt(end-1)<=0xdbff&&text.charCodeAt(end)>=0xdc00&&text.charCodeAt(end)<=0xdfff)end--;bytes+=encoder.encode(text.slice(start,end)).byteLength;start=end;}
+ return Math.max(2*text.length,bytes);
+}
 export function recordHistoryControl(state,input){
  const common=['document','revision','kind','beforeSignature','afterSignature','beforePointer','afterPointer'];
  const kind=Object.getOwnPropertyDescriptor(input||{},'kind')?.value;
  const extra=kind==='feature-suppression'?['index','featureId','operationType','beforeSuppressed','afterSuppressed']:kind==='history-branch'?['suffix']:[];
  const a=appendData(input,[...common,...extra]);checkCurrent(state,a.document,a.revision);
  if(!HISTORY_CONTROL_KINDS.includes(kind)||!integer(a.beforePointer,-1,255)||!integer(a.afterPointer,-1,255)||[a.beforeSignature,a.afterSignature].some(v=>typeof v!=='string'||!v||v.length>262144))throw Error('Invalid bounded history-control record.');
- let byteSize=512+2*(a.beforeSignature.length+a.afterSignature.length),delta={};
+ let byteSize=512+historySignatureBytes(a.beforeSignature)+historySignatureBytes(a.afterSignature),delta={};
  if(kind==='feature-suppression'){
   checkIdentity(a.index,a.featureId);
   if(typeof a.operationType!=='string'||a.operationType.length>128||typeof a.beforeSuppressed!=='boolean'||typeof a.afterSuppressed!=='boolean'||a.beforeSuppressed===a.afterSuppressed)throw Error('Invalid suppression delta.');

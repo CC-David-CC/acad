@@ -23,3 +23,16 @@ The existing Craft evaluator/resource pool/registry/journal/publication are reus
 History controls admit at most256 entries,64 independent saved source sketches and256KiB bounded flat parameter metadata before exact intent capture; the existing cooperative256KiB edit capture remains authoritative. Oversize history remains a valid native document but refuses this edit capability. No heavy numeric geometry, mesh processing or new source hashing occurs on main; native/solve work remains in the existing Workers. Small source frame/placement/metric comparisons are bounded metadata checks, not an independent geometry proof. Native replay failure records its actual originating feature/index at the caught operation; requested edit identity is distinct. Exact typed causes remain, and preflight dependency refusal is not called a solver/kernel failure.
 
 The source packet introduces no second graph, parameter source, Undo stack, native engine or model publication authority. Postcommit notification/lifetime failure remains committed; candidate-only cancellation/release preserves accepted state, and cleanup uncertainty remains fenced by existing resource machinery. No claim of exact physical RAM reclamation, general geometry equivalence or passing runtime behavior follows from source review.
+
+
+Pre-integration source review corrections: the history-control commit interval
+now installs authenticated precomputed sketch/material scalar anchors from the
+captured job, with no getter/callback there, including at a full tip. Root found
+that the prior new branch reread those anchors after commit while resource
+acceptance was pending. Gate also identified an append-travel comparator that
+omitted the new suppression state and UTF-8 undercharging for three-byte BMP
+signature text. The exact-state comparator now includes suppression; bounded
+1024-code-unit chunks charge max(retained UTF-16 bytes, actual UTF-8 bytes),
+without splitting surrogate pairs or a giant main encode. These are source
+contract findings, not reproduced public corruption/native incidents. No tests,
+builds or browser runs were launched; archive owner code remains untouched.
