@@ -21,6 +21,12 @@ reinstate assembly acceptance in Gate1.
 
 ## Current qualification checkpoint — 2026-11-08
 
+Principal Apply candidate first whole R1 FAILED at its first actual OK with a
+180000ms settlement timeout (Core0381d21a/Desktopc8779dd83). Frozen evidence
+6f10c83 retains original sources and scoped prerequisite passes. Apply remains
+unqualified; terminal diagnostic60a1545 changes evidence capture only. This does
+not revoke the separately frozen twelve passing recent workflows below.
+
 The four-workflow repair batch now has FOUR scoped qualified passes. The next
 C09 quantity/native-ruler, C08 Phase A, ordinary Ellipse and real wizard Cancel whole workflows also passed. Real navigation/UI Undo now also passes, making twelve recent named proofs including cubic R2, native-face PhaseB R2 and StraightSlot R1
 are not the full Gate1 denominator: Gate1 contains21

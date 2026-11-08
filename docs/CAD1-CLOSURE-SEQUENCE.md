@@ -7,6 +7,19 @@ This guide sequences that scope; it neither adds later CAD work nor removes
 unconditional Gate1 requirements. Human authoring UI redesign remains deferred;
 viewable output and one authoritative shared person/agent operation model remain.
 
+## Principal Apply integration checkpoint — 2026-11-08
+
+Coherent source packet is composed over the qualified Slot/Native main on
+`integration/principal-plane-apply-20261108`. Actual Core0381d21a /
+Desktopc8779dd83 normal build and signed fixture passed. First WHOLE Chrome
+Apply run FAILED at the first real OK: unchanged180000ms settlement wait expired.
+Plate creation/Native read and actual prefix navigation passed; no Apply, save,
+reopen, child or trim qualification is claimed. Evidence6f10c83 preserves the
+original producing sources/log/receipt. Timeout is not a proven cause or proof
+of no commit. Terminal-error capture60a1545 improves evidence only; no positive
+assertion, tolerances or time bounds changed. Diagnose shared Apply, repair,
+rebuild and run the full chain before its independent artifact oracle.
+
 ## Established prerequisites and remaining work
 
 1. Retain qualified orientation R12 (618cf39) and its independent bounded50pm
