@@ -61,7 +61,10 @@ def declared(case,facts):
         require(case.get('expected')==spec.get('expected'),'frozen ordinary expected policy')
         order=[b['key'] for b in spec['boxes']]+[o['key'] for o in spec['operations']]
         if any(b['key']=='healthy' for b in case['boxes']):
-            require(spec.get('expected',{}).get('solids')==0,'only empty continuation');expected.append({'key':'healthy','origin':[100,0,0],'dimensions':[2,3,4]});order.append('healthy')
+            strict_join=bool(spec.get('refusalCodes')) and len(spec['operations'])==1 and spec['operations'][0]['kind']=='join'
+            require(spec.get('expected',{}).get('solids')==0 or strict_join,'only empty or strict Join refusal continuation');expected.append({'key':'healthy','origin':[100,0,0],'dimensions':[2,3,4]})
+            if strict_join:order=[b['key'] for b in spec['boxes']]+['healthy']
+            else:order.append('healthy')
         require(live==order[:len(live)] and len(live)>=len(spec['boxes']),'actual frozen feature prefix')
     require(case['boxes']==expected,'exact authored box/source intent, not fitted geometry')
     return spec
@@ -184,6 +187,19 @@ def allocation_contract(r,facts):
     for actual,expected in [(redo['after'],initial['before']),(mixed['after'],suffix['before'])]:
         for key in ('history','source','sketches','expressions','counters','presentation'):require(actual['capture']['native'][key]==expected['capture']['native'][key],'Redo/numeric travel retains exact source INCLUDING counters '+key)
     return {'everyTravelPreservesCounters':len(r['travels']),'parentHighWater':parent_high,'createdHighWater':created_high,'suffixHighWater':suffix_high,'creationUndoCounterRollback':'forbidden'}
+def reserved_join_refusal(row,spec):
+    require(row.get('reservedJoin') is True and row['candidate'] is True and row['label']==spec['label'] and len(spec['operations'])==1 and spec['operations'][0]['kind']=='join','reservation exception belongs ONLY to actual frozen strict Join candidate refusals')
+    require(row['error']['name']=='Error' and row['error']['code'] in spec['refusalCodes'],'precise frozen Native Join refusal code')
+    before=row['before'];after=row['after'];high=before['capture']['native']['counters']['featureId']
+    require(type(high) is int and 0<=high<2**53-1,'bounded actual pre-reservation high-water')
+    for branch in ('capture','ownership'):
+        a=before['capture']['native']['counters'] if branch=='capture' else before['ownership']['counters'];b=after['capture']['native']['counters'] if branch=='capture' else after['ownership']['counters']
+        require(a=={'featureId':high} and b=={'featureId':high+1},'exact +1 at BOTH views of the same authoritative counter')
+    require(after['lifecycle']['epoch']==before['lifecycle']['epoch']+1,'one actual failed candidate evaluation')
+    for a,b in [(before['host']['revision'],after['host']['revision']),(before['capture']['solids']['revision'],after['capture']['solids']['revision'])]:require(isinstance(a,str) and bool(a) and isinstance(b,str) and bool(b) and a!=b,'derived currentness token must change with reservation/candidate epoch')
+    suffix=':'+before['host']['revision'];journal=before['capture']['journal']['revision'];require(journal.endswith(suffix) and after['capture']['journal']['revision']==journal[:-len(suffix)]+':'+after['host']['revision'],'unchanged actual journal/document prefix plus current document revision; no journal advance')
+    expected=copy.deepcopy(before);expected['capture']['native']['counters']['featureId']=high+1;expected['ownership']['counters']['featureId']=high+1;expected['lifecycle']['epoch']+=1;expected['host']['revision']=after['host']['revision'];expected['capture']['solids']['revision']=after['capture']['solids']['revision'];expected['capture']['journal']['revision']=after['capture']['journal']['revision']
+    require(after==expected,'NO other accepted source/body/history/J/token/resource change in reserved strict Join refusal')
 def refusals(r,facts):
     seen=set()
     stale_rows={label:one([row for row in r['refusals'] if row['label']==label],'required genuine old authored-revision refusal '+label) for label in ('Actual stale source-box edit','Actual stale authored Undo')}
@@ -195,8 +211,12 @@ def refusals(r,facts):
         require(isinstance(row['before']['host']['documentToken'],str) and bool(row['before']['host']['documentToken']),'actual current document token recorded '+label)
     for row in r['refusals']:
         error=row['error'];require(error and error['committed'] is False and error['possiblyCommitted'] is False,'real uncommitted refusal')
-        require(normalized(row['before'],row['candidate'])==normalized(row['after'],row['candidate']),'exact accepted state/resources across refusal');settled(row['after']);history(row['case'],row['bindings'],row['before'],r,facts);seen.add(row['case']['label'])
         spec=declared(row['case'],facts)
+        if spec.get('refusalCodes') and row['label']==spec['label']:reserved_join_refusal(row,spec)
+        else:
+            require(row.get('reservedJoin') is False,'no reservation exception for any other refusal')
+            require(normalized(row['before'],row['candidate'])==normalized(row['after'],row['candidate']),'exact accepted state/resources across refusal')
+        settled(row['after']);history(row['case'],row['bindings'],row['before'],r,facts);history(row['case'],row['bindings'],row['after'],r,facts);seen.add(row['case']['label'])
         if spec.get('refusalCodes') and row['label']==spec['label']:require(error['code'] in spec['refusalCodes'],'frozen strict Join refusal catalogue')
         if 'point-query' in row['label']:require(error['code']=='UNSUPPORTED_TARGET','explicit app multi/empty point limitation')
         if 'STEP-export' in row['label']:require(error['code']=='UNAVAILABLE','empty STEP export unavailable')
@@ -205,6 +225,14 @@ def refusals(r,facts):
             require(row['before']==row['after'],'stale authored-history preflight retains ALL state/revisions/counters/resources, without normalization')
     for spec in facts['cases']:
         if spec.get('refusalCodes') or spec.get('expected',{}).get('solids') in (0,2):require(spec['label'] in seen,'required explicit strict/empty/multi refusal case')
+        if spec.get('refusalCodes'):
+            refused=one([row for row in r['refusals'] if row['label']==spec['label']],'actual strict Join refusal')
+            good=one([row for row in r['observations'] if row['case']['label']==spec['label'] and row['label']=='Strict Join refusal healthy no-reuse continuation'],'required genuine same-project continuation')
+            failed=refused['after']['capture']['native']['counters']['featureId'];binding=good['bindings']['healthy'];native=good['before']['capture']['native']
+            require(good['outputKey']=='healthy' and binding['featureId']==failed+1 and native['counters']=={'featureId':failed+1} and good['before']['ownership']['counters']==native['counters'],'next genuine healthy creator skips failed ID and advances exactly once')
+            require(native['history'][:-1]==refused['before']['capture']['native']['history'] and all(row['params']['featureId']!=failed for row in native['history']),'healthy continuation retains exact original parents and never publishes/reuses failed ID')
+            require(good['before']['host']['documentToken']==refused['after']['host']['documentToken'] and all(good['before']['lifecycle'][k]==refused['after']['lifecycle'][k] for k in ('generation','namespace')),'same actual project/document owner, no replacement healthy fixture')
+            require(good['expected']=={'volume':24,'bounds':{'min':[100,0,0],'max':[102,3,4]},'solids':1},'frozen analytic healthy box truth')
 def void_contact(case,bindings,nodes):
     outer=nodes[bindings['outer']['outputId']];notch=nodes[bindings['notch']['outputId']];inner=nodes[bindings['inner']['outputId']]
     lo=[max(outer[1][i],notch[1][i]) for i in range(3)];hi=[min(outer[2][i],notch[2][i]) for i in range(3)];extent=[min(hi[i],inner[2][i])-max(lo[i],inner[1][i]) for i in range(3)]

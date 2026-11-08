@@ -143,6 +143,78 @@ rows, corroborates the two actual recorded commands reused the identical old
 revision, and verifies it differs from each actual current journal revision.
 Successful real Undo/Redo later in the same whole workflow stays unchanged.
 
+### R3 rejected strict Join reservation and healthy continuation (source-only)
+
+Frozen R3 on actual Core4a65a67/Desktop78cc169 completed the main fourteen
+travels and all THREE .cad cycles, both structured stale guards, overlapping
+union/common in both orders, reversed subtraction and strict overlap/full-face
+Join. It then truthfully refused point-contact strict Join with
+`Error` + `JOIN_MULTIPLE_SOLIDS`, committed:false/possiblyCommitted:false.
+The harness still incorrectly required allocation counters to remain2 after
+this genuine candidate creation had already reserved3. R3 stays FAIL, including
+the complete original source, raw error and state; no later result replaces it.
+
+An exhaustive recursive comparison of that actual refusal's complete before/
+after state finds exactly SIX changed leaves:
+
+| Actual path | Observed transition |
+| --- | --- |
+| capture.native.counters.featureId | 2→3 |
+| ownership.counters.featureId | 2→3 (second observation of the SAME allocator) |
+| lifecycle.epoch | 2→3 (one failed candidate evaluation) |
+| host.revision | new current document fingerprint token |
+| capture.solids.revision | new candidate/inspection token |
+| capture.journal.revision | unchanged1:2 prefix plus new current host.revision suffix |
+
+All other leaves, including documentToken, exact source/history, accepted parent
+outputs/measurements, journal targets/canUndo/canRedo, dirty state, generation,
+namespace and live owned resources, are equal. These are measured R3 facts,
+not inferred error-name semantics or a product memory-leak claim.
+
+The allocator contract is explicit in docs/RECTANGLE-CREATION-20261104.md step2:
+claim a monotonic feature ID; rejection may leave an unused ID gap.
+workerSolidCommands.execute calls generateFeatureId once before submit; Craft
+claims the same authored ID before evaluation. releaseFeatureId in finally
+only removes a reservation. ProjectCounterGenerator explicitly never makes
+consumed/skipped failed IDs reusable or decrements its high-water mark. This
+candidate failure therefore has an intentional allocator transition, unlike
+the stale/schema preflight refusals that allocate nothing. No product repair
+or resetting the counter is justified by this observation.
+
+The source follow-up permits exactly this reservation transition ONLY for the
+three frozen strict Join candidate-refusal cases. It still requires the exact
+existing case's JOIN_MULTIPLE_SOLIDS/JOIN_INVALID_TOPOLOGY/JOIN_UNQUALIFIED code
+catalogue, Error and false publication markers. BOTH counter views must have
+the same exact before value and advance exactly+1. Epoch must advance exactly
+once. Host/solid revisions must change, and the authored journal retains its
+exact document/journal prefix plus the actual current host revision suffix,
+as constructed by inspectAuthoredEdits; this is not geometry-ID parsing.
+The assertion constructs the exact expected six-leaf delta and compares the
+ENTIRE raw after-state. Nothing else is normalized or omitted for this path.
+All other refusal assertions retain their previous contract. In particular
+the stale edit/Undo pair still requires complete raw equality including tokens
+and counters; no reservation exception applies to raw-contact policy outcomes.
+
+After EACH strict Join refusal, the SAME live project normally creates a box
+at[100,0,0] with dimensions[2,3,4], independently expected volume24 and bounds
+[100,0,0]..[102,3,4]. Actual public Native queries must classify[101,1,1] inside
+and[99,1,1] outside. Its actual feature ID must equal failedHighWater+1 (ordinary
+fresh case:4, permanently skipping refused3), while both original parents and
+their exact source/history remain. DocumentToken/generation/namespace stay the
+same. This is an additive healthy-creation control, not another account/model
+used as a substitute or a private handle probe. Failed result IDs never enter
+authored history. Original empty-result continuation remains unchanged.
+
+The independent after-whole checker separately enforces all six transitions,
+the strict code catalogue, exact full-state preservation elsewhere, actual
+public creator custody/no-reuse and real volume/bounds/point truth for each
+continuation. It derives admission of the exception from the frozen strict
+Join case, not solely a receipt flag. cases.json's original geometry, tolerances
+and contact policies remain unchanged. Main travel/three .cad cycles and the
+multi-solid public STEP/separate same-OCCT reader checks remain mandatory.
+No tests, probes, driver/checker, build, browser or Native execution accompanied
+this source-only correction.
+
 `example.mjs` invokes only existing registered commands. The driver authors all
 boxes normally, captures their actual feature/output receipts and uses those
 opaque IDs. Private frame reads are detached observations of source/resources,
