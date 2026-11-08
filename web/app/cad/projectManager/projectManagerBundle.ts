@@ -740,7 +740,7 @@ export function activate(ctx: ApplicationContext) {
           if (event.data?.ok === true) finish(null, {value: event.data.value, storage: event.data.storage, parameterState:event.data.parameterState});
           else {
             const error=new Error(event.data?.error || 'Project validation failed.'),code=event.data?.code;
-            if(['INVALID_FEATURE_ID','DUPLICATE_FEATURE_ID'].includes(code))Object.assign(error,{code});
+            if(['INVALID_FEATURE_ID','DUPLICATE_FEATURE_ID','INVALID_SKETCH_ENTITY_DOMAIN'].includes(code))Object.assign(error,{code});
             finish(error);
           }
         };

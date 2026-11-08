@@ -11,6 +11,7 @@ import {inspectBoundedSpline,SPLINE_WORK_LIMIT} from './splinePolicy.mjs';
 import {validateSplineDerivedGeometry} from './splineDerivedValidation';
 import {inspectCarriedCurve} from './carriedCurvePolicy.mjs';
 import {assertRegisteredConstraintDomain,registeredResidualProfile} from './registeredConstraintPolicy.mjs';
+import {ordinarySketchEntityDomainValid} from '../constr/ordinaryEntityDomain.mjs';
 
 const LIMIT = 10000;
 const MAX_COORD = 1e9;
@@ -80,9 +81,9 @@ function typeIndex(sketch, boundary) {
     const d=object.data;
     if (!record(d)) fail('INVALID','Invalid sketch geometry.');
     if(object.type==='BSpline'){let spline;try{spline=inspectBoundedSpline(object.id,d)}catch{fail('INVALID','Invalid or excessive B-spline geometry.')}splineWork+=spline.work;if(splineWork>SPLINE_WORK_LIMIT)fail('LIMIT','B-spline sampling exceeds limits.');for(const child of spline.childRefs)add(child.id,child.type);}
-    if (object.type === 'Segment' && (!only(d,['a','b']) || !pointRecord(d.a) || !pointRecord(d.b) || Math.hypot(d.b.x-d.a.x,d.b.y-d.a.y)<=1e-9)) fail('INVALID','Degenerate sketch segment.',admissionCause('invalid-domain'));
-    if (object.type === 'Circle' && (!only(d,['c','r']) || !pointRecord(d.c) || !Number.isFinite(d.r) || d.r<=1e-9)) fail('INVALID','Degenerate sketch circle.',admissionCause('invalid-domain'));
-    if (object.type === 'Arc' && (!only(d,['a','b','c']) || !pointRecord(d.a) || !pointRecord(d.b) || !pointRecord(d.c) || Math.hypot(d.a.x-d.c.x,d.a.y-d.c.y)<=1e-9 || Math.hypot(d.b.x-d.c.x,d.b.y-d.c.y)<=1e-9)) fail('INVALID','Degenerate sketch arc.',admissionCause('invalid-domain'));
+    if (object.type === 'Segment' && (!only(d,['a','b']) || !pointRecord(d.a) || !pointRecord(d.b) || !ordinarySketchEntityDomainValid('Segment',d))) fail('INVALID','Degenerate sketch segment.',admissionCause('invalid-domain'));
+    if (object.type === 'Circle' && (!only(d,['c','r']) || !pointRecord(d.c) || !ordinarySketchEntityDomainValid('Circle',d))) fail('INVALID','Degenerate sketch circle.',admissionCause('invalid-domain'));
+    if (object.type === 'Arc' && (!only(d,['a','b','c']) || !pointRecord(d.a) || !pointRecord(d.b) || !pointRecord(d.c) || !ordinarySketchEntityDomainValid('Arc',d))) fail('INVALID','Degenerate sketch arc.',admissionCause('invalid-domain'));
     if (['Ellipse','EllipticalArc','BezierCurve'].includes(object.type)) for(const [suffix,type] of inspectCarriedCurve(object.type,d)) add(object.id+suffix,type);
     if (object.type === 'Point' && !pointRecord(d)) fail('INVALID','Invalid sketch point.');
     if (object.type === 'Segment') { add(object.id+':A','Point'); add(object.id+':B','Point'); }

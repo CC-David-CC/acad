@@ -37,6 +37,8 @@ export function preflight(value, parameterState?: {source?: string, result?: any
       entries += stage.constraints.length + stage.generators.length;
     }
     if (entries > MAX_SKETCH_ENTRIES) throw new Error('Project contains too many sketch entries');
+    // Includes ordinary entity-domain admission before source can be staged.
+    // Constraint regeneration and derived profile/kernel results are separate.
     validateProjectSketch(data);
     if (data.constants !== undefined && parseMathDefinitions(data.constants).errors.length) throw new Error('A sketch contains invalid constants');
   }

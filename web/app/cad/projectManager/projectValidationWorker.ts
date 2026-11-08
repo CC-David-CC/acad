@@ -18,6 +18,6 @@ self.onmessage = async event => {
   } catch (error) {
     const code=error?.code;
     self.postMessage({ok:false,error: error instanceof Error ? error.message : 'Project validation failed',
-      ...(['INVALID_FEATURE_ID','DUPLICATE_FEATURE_ID'].includes(code)?{code}:{})});
+      ...(['INVALID_FEATURE_ID','DUPLICATE_FEATURE_ID','INVALID_SKETCH_ENTITY_DOMAIN'].includes(code)?{code}:{})});
   }
 };
