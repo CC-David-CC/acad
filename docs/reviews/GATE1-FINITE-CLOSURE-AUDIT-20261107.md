@@ -2,13 +2,30 @@
 
 Read-only acceptance audit,2026-11-07. **No gate/status changes, tests, builds, browser runs, product edits or new qualification are made by this document.** Existing drivers/oracles/first failures stay frozen. This is an actionable supplement for the owner of the canonical Desktop matrix, not another canonical matrix.
 
-## Current C03/C04 cross-reference — 2026-11-08
+## Current proof cross-reference — 2026-11-08
 
-The original source-era evidence index and exercise tables below remain a dated audit snapshot. **Current C03/C04 route availability, scoped proofs and exact remaining cases are maintained in [C03-C04-CURRENT-CLOSURE-20261108.md](C03-C04-CURRENT-CLOSURE-20261108.md), reconciled at Core 6407d6b.** Its RAD and COINC entries supersede any old missing ordinary RadiusLength/general selected-point-coincidence assertions. SIGN/REPORT/ROLE there also supersede their earlier open labels; old failed receipts keep their exact original producing pins.
+The original source-era index, exercise rows and finite inventories below remain
+a dated audit snapshot. Current C03/C04 route availability and exact remaining
+cases are maintained in [C03-C04-CURRENT-CLOSURE-20261108.md](C03-C04-CURRENT-CLOSURE-20261108.md),
+now reconciled after qualified mainb3fd5fc. Source-era absent/pending labels
+must not override the following completed workflows or trigger duplicate work.
 
-Radius R1 on actual Core d0069f0/Desktop dd58df71e and point coincidence R4 on Core 8353d12/Desktop 8eac41c9e have complete public workflows + FIRST independent actual-artifact oracles. Two-Circle cells separately qualify only their declared finite R6 scope in `test/circular-arrangement-workflow/QUALIFICATION.md`; this does not complete C02. **Seventeen recent named scoped proofs are qualified, all 21 formal exercises remain Partial, E17/C10 remains Gate2.** This update reruns no proof and does not turn 17 named C03 families into 17 completed families.
+| Competency | Later complete proof superseding source-era absence | Honest scope |
+|---|---|---|
+| C01 Ellipse | [Ellipse R1](../../test/ellipse-public-workflow/QUALIFICATION.md), actual d4b4bfa/aa88fd4d | Ordinary public owned Ellipse creation/parameter editing, source geometry/identity/domain refusals, persistence and independent artifacts; not every conic or BRep profile |
+| C01 cubic curve | [Cubic R2](../../test/cubic-curve-public-workflow/QUALIFICATION.md), actual26d7a55/f6d1c07 | Actual authored controls/knots/derived IDs, evaluated native sketch points and exact-source oracle; not curve tangency or BRep/profile construction |
+| C01 straight slot | [Slot R1](../../test/straight-slot-public-workflow/QUALIFICATION.md), actual79c9c86/ddab73b | Genuine Segment/Arc members, radius/axis/direction/branch/source/Open; not all general offsets |
+| C01 mirror | [Mirror R2](../../test/mirror-public-workflow/QUALIFICATION.md), actual104c24e/9bdb3a512 | Genuine native generator/source dependence/branch and same retained-source truth; not arbitrary generated geometry |
+| C02 Circle cells | [Circular R6](../../test/circular-arrangement-workflow/QUALIFICATION.md), actualf2574ea/70f096c23 | Lens/crescents/tangent separate bodies/coincident ownership/nested/disjoint under explicit Native cohort; not all C02 arrangements |
+| C03 Radius/coincidence | [Radius R1](../../test/radius-length-public-workflow/QUALIFICATION.md), actuald0069f0/dd58df71e; [Coincidence R4](../../test/point-coincidence-public-workflow/QUALIFICATION.md), actual8353d12/8eac41c9e | Finite real creation/edit/remove or authoring/redundancy/conflict/travel/Open; neither ordinary route is still missing |
+| C04 Projected distance | [Projected R3](../../test/projected-distance-public-workflow/QUALIFICATION.md), actual0133698/95d8023b0, proof4325ef1 | Live direction, signed edits, named binding, removal/typed point move/mixed travel, three .cad cycles and FIRST independent oracle; no BRep construction |
 
-Projected-distance source 10940466/d342b855/a538b850 is prepared, not executed/qualified. Its former edit/remove code gap must not be presented as still absent, or as a complete positive workflow. Other sections' dated source-era statements are not a fresh all-competency re-audit.
+**18 recent scoped whole workflows qualified. Five of21 ordinary exercise
+contracts qualified (E01/E02/E03/E07/E21);16 remain Partial; E17/C10 is Gate2.**
+Root acceptance follows the inspected [five-exercise evidence map](FIVE-EXERCISE-SIGNOFF-PROPOSAL-20261108.md)
+and canonical Desktop baseline. All11 broader competencies and final composed
+beta delivery remain separate. This reconciliation runs no new tests and does
+not change evidence/tolerances or qualify all17 constraint families.
 
 ## Authority and bounded interpretation
 
@@ -118,9 +135,9 @@ Each row includes G1–G9 as applicable and viewability/delivery G10 once on the
 | E21 reload saved model | Save exact authored graph/IDs/counters/units/expressions/material/drawing intent, browser/serverSHA; fresh signedOpen positive reedit/travel/resave; malformed refs/version/source refuse before adoption, session journal reset. | **P:** P/W/IC/ENC/TY/RV/SW/LF/RF/IO/DR show these across actual supported families. **W:** final single runtime capability set and requested native `.cad` container not yet proved. | Native format work is a **separate finite explicit delivery requirement** below, not loss of JSON proof. Whole final accepted graph through actual new container needed if `.cad` implemented. Do not require saved transient Undo journal or autosave. |
 | E22 linked manufacturing drawing |3 linked Native orthographic views, hidden bore lines;6 true reference dimensions(width,height,depth,diameter,source-datum offsets); positive/negative datum; source/hole edits; stale/unresolved no invented value; explicit repair/travel; v3SaveOpen+SVGview. | **P:** DR56rows/6saves/8SVG on actual source/native witnesses, refs outside solved geometry. **W:** typed readerTR. **M:** additional C11 isometric/section/detail/annotation kinds are not this narrow E22 proof. | Finish TR; keep output viewable. C11 exact additional view/annotation inventory below is the finite remaining competency obligation, not an unspecified “drawing standards” rewrite. |
 
-## Eleven competency areas: finite unqualified cases and implementation boundary
+## Eleven competency areas: original source-era inventory and implementation boundary
 
-Numbering follows the user's list; C10 excluded. Every case inherits G1–G9 where applicable. This lists the **full remaining finite inventory** from the contract rather than asserting that one sample certifies all inputs. Proposed tasks are not authorized edits by this audit.
+Numbering follows the user's list; C10 excluded. Every case inherits G1–G9 where applicable. This preserves the **original finite inventory** from the contract. Later complete proofs in the current cross-reference above supersede its missing/pending labels. Retain each genuinely unqualified case; do not rerun a completed workflow merely because it appears in this historical list. Proposed tasks are not authorized edits by this audit.
 
 ### C01 Sketch geometry
 
@@ -144,7 +161,7 @@ Still finite and open: per-family cases/states not established by those fixtures
 
 Use the [current finite C04 table](C03-C04-CURRENT-CLOSURE-20261108.md#c04-remaining-finite-cases-and-exact-seams), rather than this audit's source-era absence labels. W's required width chain, SIGN's named/signed consumer path, ROLE's ordinary Segment reference↔driving, QTY/PARAM and RAD's numeric Circle/quarter-Arc radius path are qualified on their distinct frozen producing pins. The actual quarter-Arc5π→3π derived length is proved; a public ArcLength driving dimension is not.
 
-Projected-distance edit/remove/typed target source 10940466/d342b855/a538b850 is **prepared and unqualified**, not an absent-code claim or PASS. Remaining named obligations include projected whole-flow qualification, angular/reference roles beyond the ordinary Segment route, true ArcLength/center-distance/offset cases, exact formula spellings where not already asserted, attached±0.10mm tolerance semantics and stated generator/human domains. Preserve actual schema/ordered targets/raw expressions and same-row edit/removal/travel; no remove/readd substitute or tolerance change.
+Projected-distance whole R3 is now qualified on actual0133698/95d8023b0 with FIRST independent oracle, proof4325ef1. The original prepared packet is superseded. Remaining named obligations include angular/reference roles beyond the ordinary Segment route, true ArcLength/center-distance/offset cases, exact formula spellings where not already asserted, attached±0.10mm tolerance semantics and stated generator/human domains. Preserve actual schema/ordered targets/raw expressions and same-row edit/removal/travel; no remove/readd substitute or tolerance change.
 
 ### C05 Degeneracy and numerical robustness
 
