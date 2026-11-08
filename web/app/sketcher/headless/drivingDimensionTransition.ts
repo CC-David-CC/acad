@@ -3,7 +3,8 @@ import {replaySketchTransition} from './sketchTransition';
 import {solveSketch} from './solve';
 import {projectRenderSketch} from './renderSketchProjection.mjs';
 import {assertAllowedSolverGeometry} from './transitionGeometryPolicy.mjs';
-import {captureAdmissionCause} from '../constr/admissionCause.mjs';
+import {captureAdmissionCause,causeForSolveStatus,withAdmissionCause} from '../constr/admissionCause.mjs';
+import {validateConstraintGeometry} from './sketchValidation';
 import {sameRestoredSketch} from '../historyEquivalence.mjs';
 import {assertVerifiedReplayGeometry,assertUnrelatedSignedGeometry} from './verifiedReplayGeometry';
 import {captureDrivingDimensionIntent,resolveDrivingDimension,drivingLengthField,classifyDrivingDimensionDelta,signedDrivingDimension,drivingDimensionValueValid} from './drivingDimensionTarget.mjs';
@@ -30,6 +31,41 @@ function expectedDelta(before:any,after:any,intent:any,action:string){
  const strip=(s:any)=>({...s,objects:s.objects.map(o=>({...o,data:null})),stages:s.stages.map(stage=>({...stage,constraints:stage.constraints.map(c=>{const x={...c};delete x.admission;return x})}))});
  if(!sameRestoredSketch(JSON.stringify(strip(expected)),JSON.stringify(strip(after))))throw fail('INTENT_CHANGED','Other authored sketch intent changed.');return row;
 }
+// PM transaction admission operates on raw algebra systems. Its warm result
+// is not a stage result: real generators run only through SolveStage.solve.
+// Finish that actual lifecycle before serializing a dimension candidate.
+// This is one ordered construction pass, not a retry/polishing loop.
+function finishGeneratedDimensionStages(workspace:any,stages:any[]){
+ const index=workspace.createIndex(),roster=stages.map(stage=>({stage,objects:[...stage.objects],generators:[...stage.generators].map((generator:any)=>{
+  const sources:any[]=[];generator.sourceObjects(o=>sources.push(o));
+  return{generator,sources,outputs:[...generator.generatedObjects],record:JSON.stringify(generator.write())};
+ })})),completed:Array<Map<any,number>>=[];let work=0;
+ const charge=()=>{if(++work>100000)throw fail('LIMIT','Dimension generator validation exceeds its existing Worker work envelope.');};
+ for(const {stage,generators}of roster){
+  for(const {generator,sources,outputs}of generators){
+   charge();if(generator.stage!==stage||sources.some(o=>index[o.id]!==o)||outputs.some(o=>index[o.id]!==o||o.stage!==stage||o.generator!==generator))throw fail('GENERATOR_CHANGED','The dimension candidate lost actual generator source/output custody.');
+  }
+  stage.solverSystem.prepare();stage.solve(false);
+  if(!stage.solverSystem.solveStatus.success||!Number.isFinite(stage.solverSystem.solveStatus.error))throw withAdmissionCause(fail('DIMENSION_REJECTED','The complete native stage solve did not establish the dimension change.'),causeForSolveStatus(stage.solverSystem.solveStatus));
+  for(const prior of completed)for(const [parameter,value]of prior){charge();if(!Object.is(parameter.get(),value))throw fail('STAGE_CHANGED','A later dimension stage changed an earlier native owner.');}
+  const values=new Map<any,number>();for(const object of stage.objects)object.visitParams(p=>{charge();if(!Number.isFinite(p.get()))throw fail('INVALID','Native dimension regeneration produced a nonfinite parameter.');values.set(p,p.get());});completed.push(values);
+ }
+ // Validate AFTER all real regenerations, including every original intrinsic
+ // and retained authored equation. A fresh cache is never proof of admission.
+ const afterIndex=workspace.createIndex();
+ for(const {stage,objects,generators}of roster){
+  if(stage.objects.size!==objects.length||[...stage.objects].some((o,i)=>o!==objects[i])||stage.generators.size!==generators.length||[...stage.generators].some((g,i)=>g!==generators[i].generator))throw fail('GENERATOR_CHANGED','Dimension regeneration changed native stage membership.');
+  for(const {generator,sources,outputs,record}of generators){
+   const actual:any[]=[];generator.sourceObjects(o=>actual.push(o));
+   if(JSON.stringify(generator.write())!==record||actual.length!==sources.length||actual.some((o,i)=>o!==sources[i]||afterIndex[o.id]!==o)||generator.generatedObjects.length!==outputs.length||generator.generatedObjects.some((o,i)=>o!==outputs[i]||afterIndex[o.id]!==o||o.generator!==generator||o.stage!==stage))throw fail('GENERATOR_CHANGED','Dimension regeneration changed ordered generator identity or dependencies.');
+  }
+  const sys=stage.solverSystem;
+  for(const constraint of sys.allConstraints){charge();if(constraint.stage!==stage||constraint.objects.some(o=>afterIndex[o.id]!==o))throw fail('INTENT_CHANGED','The dimension stage lost original constraint ownership.');
+   if(sys.conflicting.has(constraint)&&!sys.redundant.has(constraint))throw withAdmissionCause(fail('DIMENSION_REJECTED','The constraint change was rejected after actual generator regeneration.'),sys.getAdmissionCause(constraint));
+   constraint.resolveConstants(workspace.parametricManager.constantResolver);validateConstraintGeometry(constraint);
+  }
+ }
+}
 export function changeDrivingDimension(request:any){let revision=revisionOf(request);try{
  const a=record(request,['revision','sketchJSON','externalParameters','action','intent']);if(!revision||revision.length>256)throw fail('INVALID','Invalid dimension revision.');const intent=captureDrivingDimensionIntent(a.intent,a.action),bindings=external(a.externalParameters),captured=replay(revision,a.sketchJSON,bindings),before=JSON.parse(captured.serializedSketch),row=resolveDimension(before,intent.constraintId);
  let value:any=null;if(a.action==='edit'){
@@ -44,7 +80,10 @@ export function changeDrivingDimension(request:any){let revision=revisionOf(requ
  const field=drivingLengthField(row.typeId);if(a.action==='edit')c.validateCandidateConstants({...c.constants,[field]:String(intent.value)},pm.constantResolver);
  pm.startTransaction();try{
   if(a.action==='edit')c.updateConstant(field,String(intent.value));else pm._removeConstraint(c);
-  pm.finishTransaction(stages=>{for(const stage of stages)for(const constraint of stage.algNumSystem.allConstraints)if(stage.algNumSystem.conflicting.has(constraint)&&!stage.algNumSystem.redundant.has(constraint))throw Object.assign(fail('DIMENSION_REJECTED','The constraint change was rejected by the sketch solver.'),{cause:stage.algNumSystem.getAdmissionCause(constraint)});},false);
+  pm.finishTransaction(stages=>{
+   if(stages.some(stage=>stage.generators.size))finishGeneratedDimensionStages(workspace,stages);
+   else for(const stage of stages)for(const constraint of stage.algNumSystem.allConstraints)if(stage.algNumSystem.conflicting.has(constraint)&&!stage.algNumSystem.redundant.has(constraint))throw Object.assign(fail('DIMENSION_REJECTED','The constraint change was rejected by the sketch solver.'),{cause:stage.algNumSystem.getAdmissionCause(constraint)});
+  },false);
  }catch(error){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw error},false)}catch(_){}throw error;}
  const candidate=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));candidate.boundary=before.boundary;geometry(before,candidate);expectedDelta(before,candidate,intent,a.action);
  if(row.typeId==='DistancePP'&&a.action==='edit')assertUnrelatedSignedGeometry(before,candidate,bindings,{stage:row.stage,index:row.index});
