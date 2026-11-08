@@ -35,6 +35,7 @@ import {registerRevolveCommands} from './revolve-commands.mjs';
 import {registerSweepCommands} from './sweep-commands.mjs';
 import {registerLoftCommands} from './loft-commands.mjs';
 import {registerSourcePlaneDepthCommands} from './source-plane-depth-commands.mjs';
+import {registerSourceFrameCommands} from './source-frame-commands.mjs';
 import {registerSolidPointCommands} from './solid-point-commands.mjs';
 import {openCadSources} from './source-dialog.mjs';
 import {createAgentToolsPanel} from './agent-tools-panel.mjs';
@@ -45,6 +46,7 @@ export {createSourceBoundEnclosureExample} from './examples/source-bound-enclosu
 export {createModernParametersExample,mechanicalParameterDefinitions} from './examples/source-bound-parameters.mjs';
 export {createSourceDimensionRegionExample} from './examples/source-dimension-region.mjs';
 export {createSourceBoundSweepExample} from './examples/source-bound-sweep.mjs';
+export {createSourceBoundFrameExample} from './examples/source-bound-frame.mjs';
 
 const APP_NAME='CAD Modeler (JSketcher inspired)';
 
@@ -204,6 +206,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerSweepCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLoftCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSourcePlaneDepthCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerSourceFrameCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSolidPointCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerShellCommands(host,()=>rectangle.target()));

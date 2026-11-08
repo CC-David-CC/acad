@@ -354,3 +354,14 @@ The helper is not auto-executed or exported from the app index by this packet.
 Root registration: import `registerFeatureHistoryCommands` from
 `./feature-history-commands.mjs` and register it through the existing
 `host.onDispose(...(host,()=>rectangle.target()))` mount pattern.
+
+`source-bound-frame.mjs` exports `createSourceBoundFrameExample` for explicit
+numeric custom source frames and earlier-source-plane attachment. Import it,
+create a helper for one signed CAD window, then call its methods deliberately.
+`build()` requires a new empty document and returns genuine parent/child source
+receipts. `parentPose`, `pivot`, `points`, `travel`, normal `.cad` Save/Open use
+registered shared commands and one pinned document token. It never invents a
+source, region, Native face ID or geometry model. Add primitives/selected
+extrusions using actual public discovery and returned source IDs. This is
+source-only preparation, not runtime qualification. Attachment to a Native
+extruded solid face is required C08 phase B and is NOT implemented here.
