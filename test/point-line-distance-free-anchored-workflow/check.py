@@ -67,9 +67,10 @@ def validate(row,build):
     actual={(tuple(o['data']['a'][k] for k in ('x','y')),tuple(o['data']['b'][k] for k in ('x','y'))) for o in rect};require(actual==expected,'exact unrelated rectangle')
     require(objects[b['qRoot']]['type']=='Point' and objects[b['qRoot']]['data']=={'x':7,'y':9},'unrelated Point exact')
     line=objects[b['lineId']];require(line['type']=='Segment','actual line');a,z=line['data']['a'],line['data']['b'];require(a=={'x':0,'y':0},'source anchor exact')
-    mode=row['frameMode'];require(mode in ('requested','free','anchored'),'explicit test expectation phase')
-    if mode!='free':
+    mode=row['frameMode'];require(mode in ('requested','free','partial-x','anchored'),'explicit test expectation phase')
+    if mode in ('requested','anchored'):
         for key,want in zip(('x','y'),row['end']):near(z[key],D(want))
+    elif mode=='partial-x':near(z['x'],Decimal(-10))
     points={};cold_points={};cold_lines={}
     for p in i['points']:
         require(p['id'] not in points,'unique actual cold point')
@@ -84,6 +85,7 @@ def validate(row,build):
             line=cold_lines.setdefault(o['id'],{});end='a' if matched is data['a'] else 'b';require(end not in line,'unique actual cold endpoint');line[end]=p
     for o in objects.values():
         if o['type']=='Segment':require(set(cold_lines.get(o['id'],{}))=={'a','b'},'both actual cold Segment endpoints')
+    if mode=='partial-x':near(cold_points[b['bId']]['x'],Decimal(-10))
     wanted={}
     if row['hasDistance']:wanted[b['pointId']]=(D(row['distance']),False,row['rawDistance'])
     if row['minus']:wanted[row['minus']['id']]=(Decimal(2),True,'2')
@@ -115,7 +117,7 @@ def validate(row,build):
             # Cold equation/metadata use the SAME inspected A, B and P. Raw
             # source coordinates have their own original equation above.
             replay=cold_points[refs[0]];cold_line=cold_lines[refs[1]];cold_a,cold_b=cold_line['a'],cold_line['b'];cold_signed,cold_normal,cold_length=signed(replay,cold_a,cold_b);require(abs(cold_signed-target)<=BUDGET,'cold original supporting-line distance within50pm')
-            if mode!='free':
+            if mode in ('requested','anchored'):
                 idealA={'x':0,'y':0};idealB=dict(zip(('x','y'),row['end']))
                 for actual in (p,replay):require(abs(signed(actual,idealA,idealB)[0]-target)<=BUDGET,'stored/cold equation independently meets requested anchored frame within50pm')
             d=one([d for d in i['dimensionTargets'] if d['typeId']=='DistancePL' and d['objects']==refs],'actual inspected row');w=d['supportingLine']
@@ -128,9 +130,9 @@ def validate(row,build):
     validate_cold_equations(original,cold_points,cold_lines,q)
     require(set(found)==set(wanted),'actual complete DistancePL census')
     locks=[c for stage in s['stages'] for c in stage['constraints'] if c['typeId']in('SignedDistanceX','SignedDistanceY') and c['objects']==[b['datumId'],b['bId']]]
-    if mode=='free':
-        require(not locks,'B is genuinely free during definition update/Open/travel')
-        require(not any(c['typeId']=='SignedDistanceX' and c['objects']==[b['datumId'],b['pointId']]for stage in s['stages']for c in stage['constraints']),'P tangential freedom retained')
+    if mode=='free':require(not locks,'B is genuinely free during definition update/Open/travel')
+    if mode in ('free','partial-x'):require(not any(c['typeId']=='SignedDistanceX' and c['objects']==[b['datumId'],b['pointId']]for stage in s['stages']for c in stage['constraints']),'P tangential freedom retained')
+    if mode=='partial-x':require(len(locks)==1 and locks[0]['typeId']=='SignedDistanceX' and value(locks[0]['constants']['distance'],q)==Decimal(-110),'one actual X anchor; By genuinely free with no requested Y or normal')
     if mode=='anchored':
         require(len(locks)==2,'actual two authored B anchors')
         for typ,want in [('SignedDistanceX',-110),('SignedDistanceY',-100)]:require(value(one([c for c in locks if c['typeId']==typ],'B anchor')['constants']['distance'],q)==want,'actual datum-relative B anchor')
@@ -193,14 +195,14 @@ def check(directory):
         op=one([x for x in model['history'] if x['type']=='WORKER_SELECTED_PROFILE_EXTRUDE_V2'],'unchanged Native suffix');p=op['params'];b=item['b'];require(p['faceId']==b['faceId'] and p['featureId']==b['body']['featureId'] and p['regionId']==b['regionId'] and p['engineRevision']==r['engineRevision'] and p['depth']==20,'actual source/region/producer/build binding')
         archives.append({'file':item['savedFile'],'sha256':archive['sha256'],'designRevision':archive['manifest']['designRevision']})
     free=r['freePhase'];b=r['binding']
-    def reduced(state):
-        s=source(state,b)
+    def reduced_source(s):
         for o in s['objects']:
             if o['id']==b['lineId']:o['data']['b']={'x':None,'y':None}
             elif o['id']in (b['pointRoot'],r['observations'][-1]['minus']['root']):o['data']={'x':None,'y':None}
         for stage in s['stages']:
             for c in stage['constraints']:c.pop('admission',None)
         return s
+    def reduced(state):return reduced_source(source(state,b))
     require(reduced(free['before'])==reduced(free['changed']),'free update changes only actual coupled B/P/M geometry, keeps A/rectangle/Q/source intent exact')
     for key in ('history','counters','presentation'):require(free['before']['capture']['native'][key]==free['changed']['capture']['native'][key],'free update preserves '+key)
     for actual,expected in [(free['undone'],free['before']),(free['redone'],free['changed'])]:
@@ -211,5 +213,22 @@ def check(directory):
     free_save=one([s for s in r['saves']if s['label']=='supporting-line-free-named3'],'actual added free Save')
     require(free_save['frameMode']=='free' and free_save['before']['capture']['native']['source']==free['redone']['capture']['native']['source'],'free .cad binds accepted validated source, not preselected coordinates')
     require(any(x['frameMode']=='anchored' and x['label']=='ANCHORED public SignedX and SignedY hold B negative10 zero'for x in r['observations']),'subsequent genuine public B anchors')
+    anchors=r['anchorCreations'];require([x['axis']for x in anchors]==['x','y'],'immediate actual creation travel for BOTH anchors')
+    for item,want,before_mode,after_mode in zip(anchors,[-110,-100],['free','partial-x'],['partial-x','anchored']):
+        axis=item['axis'];typ='SignedDistanceX'if axis=='x'else'SignedDistanceY';require(item['beforeMode']==before_mode and item['afterMode']==after_mode,'exact partial anchoring phase')
+        result=item['result'];require(result['changed']is True and result['authoredUndo']is True and result['dimension']['axis']==axis and result['dimension']['typeId']==typ and result['dimension']['objects']==[b['datumId'],b['bId']] and result['dimension']['distance']==want,'actual public literal anchor creation receipt')
+        smaller=source(item['before'],b);larger=source(item['created'],b);matches=[(si,ci,c)for si,stage in enumerate(larger['stages'])for ci,c in enumerate(stage['constraints'])if c['typeId']==typ and c['objects']==[b['datumId'],b['bId']]]
+        si,ci,c=one(matches,'actual new anchor row');require(type(c['constants']['distance'])in(int,float) and c['constants']=={'distance':want} and c['stage']==si,'actual numeric writer row bound to requested datum')
+        require(not any(c['typeId']==typ and c['objects']==[b['datumId'],b['bId']]for stage in smaller['stages']for c in stage['constraints']),'anchor was genuinely absent before creation')
+        restored=json.loads(json.dumps(larger));restored['stages'][si]['constraints'].pop(ci);require(reduced_source(restored)==reduced_source(smaller),'exact single anchor row/source delta; only actual coupled B/P/M geometry may move')
+        for key in ('expressions','history','counters','presentation'):require(item['created']['capture']['native'][key]==item['before']['capture']['native'][key],'creation preserves definitions/feature highwater/other native '+key)
+        require(item['created']['parameters']['definitions']==item['before']['parameters']['definitions'] and item['created']['manufacturing']==item['before']['manufacturing'],'creation retains actual typed definitions/material metadata')
+        target={'kind':'sketch-bytes','faceId':b['faceId']};require(item['target']==target and item['created']['capture']['journal']['undoTarget']==target and item['undone']['capture']['journal']['redoTarget']==target and item['redone']['capture']['journal']['undoTarget']==target,'same actual source/J target through creation UndoRedo')
+        for actual,expected in [(item['undone'],item['before']),(item['redone'],item['created'])]:
+            for key in ('source','sketches','history','expressions','counters','presentation'):require(actual['capture']['native'][key]==expected['capture']['native'][key],'anchor creation travel exact accepted '+key)
+            require(actual['parameters']['definitions']==expected['parameters']['definitions'] and actual['manufacturing']==expected['manufacturing'],'anchor travel exact definitions/material metadata')
+    require(anchors[0]['before']['capture']['native']['source']==free_save['before']['capture']['native']['source'],'X creation snapshot is genuine same-project FREE post-.cad source')
+    require(anchors[1]['before']['capture']['native']['source']==anchors[0]['redone']['capture']['native']['source'],'Y creation follows the actual X Redo source')
+    require(any(x['frameMode']=='partial-x' and x['label']=='PARTIAL-X actual X lock with genuinely free By'for x in r['observations']),'actual X-only phase observed and independently validated')
     return {'status':'PASS','scope':'NEW complete free-coupled and explicitly anchored source DistancePL/named edits/live reversal/five native archives; not finite Segment proximity/parallel-line offset/BRep precision/allC03C04','observations':len(r['observations']),'refusals':len(r['refusals']),'archives':archives}
 if __name__=='__main__':print(json.dumps(check(sys.argv[1]),indent=2))

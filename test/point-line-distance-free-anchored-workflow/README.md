@@ -23,6 +23,7 @@ and public cold coordinate/equation checks stay50pm and normal checks1e-12.
 The new `frameMode` field is acceptance-only metadata: `requested` means the
 original immediate requested point-position postcondition; `free` means the
 actual source line determines the original equations, with no fixed B frame;
+`partial-x` requires ONLY the genuine X row/B.x=-10 and leaves B.y/normal free;
 `anchored` requires genuine public SignedX/Y rows at B=(-10,0). The old `end`
 metadata remains the last explicit coordinate request and is NEVER treated as a
 free-phase constraint. No such flag enters product schemas, source or callbacks.
@@ -80,3 +81,36 @@ resource assertions, so another failure retains the relevant source and cold
 values. Captures remain read-only observations, not authoring inputs. Original
 point-line-distance-public-workflow files, R1–R5 and new-packet R1 evidence remain
 unchanged. This is source preparation only, with no product change or execution.
+
+## Separate source acceptance extension for actual typed anchor creation travel
+
+The preserved R2 completed FREE named2→3/UndoRedo/.cad fresh Open, then refused
+the first typed signed-X creation. It remains FAIL; neither its evidence nor
+the original PL packet is edited. Product dependency a6c1c1cf adds only bounded
+typed numeric-X/Y admission plus original-forward insertion proof for journal
+travel. That NEW behavior requires actual creation travel in this full packet.
+
+AFTER the same genuine FREE .cad Open, the driver observes the same project's
+actual pre-X source. It creates X via the existing public recipe, immediately
+Undo/Redo through the shared journal, and compares exact prior/restored source,
+sketch inventory, raw typed definitions, history, counters/high-water and
+presentation. The actual journal target must remain that source face. It then
+observes actual pre-Y state, creates Y and immediately performs the same exact
+creation travel. Public replies/actual source rows prove both new creations;
+this is not inferred from subsequent parameter edits or an unrelated operation.
+
+The new X-only observations have exactly ONE actual SignedDistanceX B row and
+NO B SignedDistanceY. Both stored and cold B.x meet-10 within50pm; B.y and line
+normal receive no desired value. PL/opposite/alias and EVERY original equation
+are evaluated separately on saved and same-inspection coordinates as before.
+Cold normal corroboration stays1e-12 against that SAME cold line; all raw↔cold
+points stay50pm. Pure-free still requires zero B locks; final anchored still
+requires BOTH actual rows and the independently requested(-10,0) frame.
+
+The independent after-whole oracle additionally checks one actual new row per
+creation, exact retained nongeometry intent, only authenticated finite B/P/M
+geometry movement, exact definition/high-water retention and exact before/after
+UndoRedo snapshots. The pre-X source is bound to the FREE saved archive, pre-Y
+to actual X Redo. All original five .cad cycles, Native2000mm³ suffix/queries,
+refusals/tail/budgets and unchanged public recipe remain. No source-only success
+or execution claim accompanies this acceptance extension.

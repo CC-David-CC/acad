@@ -86,3 +86,23 @@ phase proofs/source snapshots separately and check actual Undo/Redo/Open,
 without pretending every allowed free realization is a unique physical answer.
 No successful source seed/private authoring or fake solver/Native response.
 This packet does not assert a completed workflow or broaden generic C03/C04.
+
+## Additional creation-travel criterion before the next whole run
+
+After the preserved R2 reached the genuine FREE .cad Open and exposed missing
+typed signed creation admission, the coherent source repair adds a new bounded
+journal insertion proof. Qualifying that production behavior requires immediate
+actual shared Undo/Redo of BOTH public X and Y anchor creations. Use exact
+same-project pre-X/pre-Y accepted snapshots obtained AFTER FREE fresh Open,
+never source seeds, private setters, discarded definitions or earlier anchors.
+
+The X-only phase is explicit: exactly one actual B SignedDistanceX row at the
+locked-datum relative-110 exists, no By row, and no desired By0 or preselected
+normal is asserted. Only actual X coordinate, source/cold original equations,
+identity/admission/custody and the existing numerical budgets apply. Pure-free
+zero-lock and final two-lock states remain strict. Each creation's Undo restores
+its exact accepted prior source/definitions/high-water; Redo restores the SAME
+authored row and accepted result. Existing Native/source/material checks and
+shared source-face J target remain. The unchanged five Save/Open cycles and
+entire original tail still follow. This finite observational test phase is not
+a product flag, new model, solver freedom waiver or retroactive R2 PASS.
