@@ -2,7 +2,7 @@ import {HeadlessSketchWorkspace} from './workspace';
 import {replaySketchTransition} from './sketchTransition';
 import {solveSketch} from './solve';
 import {prepareConstraintGroup} from '../actions/constraintGroupAdmission';
-import {captureConstraintGroupIntent,groupData} from './constraintGroupIntent.mjs';
+import {captureConstraintGroupIntent,groupData,orientationGroupContract} from './constraintGroupIntent.mjs';
 import {assertAllowedSolverGeometry} from './transitionGeometryPolicy.mjs';
 import {sameRestoredSketch} from '../historyEquivalence.mjs';
 import {captureAdmissionCause} from '../constr/admissionCause.mjs';
@@ -20,13 +20,13 @@ function affectedObjects(pm:any,targets:any[]){
 const stripAdmission=(sketch:any)=>({...sketch,stages:sketch.stages.map(stage=>({...stage,constraints:stage.constraints.map(c=>{const row={...c};delete row.admission;return row;})}))});
 export function changeConstraintGroup(request:any){let revision='';try{
  const a=groupData(request,['revision','sketchJSON','externalParameters','intent']);revision=a.revision;if(typeof revision!=='string'||!revision||revision.length>256)fail('INVALID_REQUEST','Invalid group revision.');
- const intent=captureConstraintGroupIntent(a.intent),external=bindings(a.externalParameters),captured=replay(revision,a.sketchJSON,external),before=JSON.parse(captured.serializedSketch);
+ const intent=captureConstraintGroupIntent(a.intent),orientation=orientationGroupContract(intent.kind),external=bindings(a.externalParameters),captured=replay(revision,a.sketchJSON,external),before=JSON.parse(captured.serializedSketch);
  if(before.objects.length>1024||before.stages.length!==1||before.stages[0].generators.length||before.objects.some(o=>!['Point','Segment','Circle','Arc'].includes(o.type)))fail('UNSUPPORTED_SKETCH','This group path currently supports one nongenerated ordinary analytic sketch stage.');
  const workspace=new HeadlessSketchWorkspace(external);workspace.io._loadSketch(structuredClone(before),{strict:true});const pm=workspace.parametricManager,index=workspace.createIndex(),objects=intent.ids.map(id=>index[id]);if(objects.some(o=>!o))fail('INVALID_TARGET','Choose actual inspected point/segment IDs.');
  const group=prepareConstraintGroup(pm,intent.kind,objects,intent.kind==='midpoint'?undefined:intent.angleDegrees,intent.action),affected=affectedObjects(pm,objects);
  const originalRows=new Map<any,any>();for(const s of pm.stages){const authored=s.algNumSystem.allConstraints.filter(c=>!c.internal);authored.forEach((c,i)=>originalRows.set(c,{stage:s.index,index:i,raw:before.stages[s.index].constraints[i]}));}
- const describe=(constraints:any[])=>constraints.map(c=>{const sys=c.stage.algNumSystem,at=sys.allConstraints.filter(row=>!row.internal).indexOf(c);if(at<0)fail('INTENT_CHANGED','The group member disappeared.');return{stage:c.stage.index,index:at,typeId:c.schema.id,objects:c.objects.map(o=>o.id),status:sys.redundant.has(c)?'redundant':'accepted'};});
- const receipt=()=>({kind:intent.kind,action:intent.action,ids:[...intent.ids],angleDegrees:intent.kind==='midpoint'?null:intent.angleDegrees,existing:!group.changed,rows:describe(group.constraints)});
+ const describe=(constraints:any[])=>constraints.map(c=>{const sys=c.stage.algNumSystem,at=sys.allConstraints.filter(row=>!row.internal).indexOf(c);if(at<0)fail('INTENT_CHANGED','The group member disappeared.');return{stage:c.stage.index,index:at,typeId:c.schema.id,objects:c.objects.map(o=>o.id),...(orientation?{angleDegrees:Number(c.constants.angle)}:{}),status:sys.redundant.has(c)?'redundant':'accepted'};});
+ const receipt=()=>({kind:intent.kind,action:intent.action,ids:[...intent.ids],...(!orientation?{angleDegrees:intent.kind==='midpoint'?null:intent.angleDegrees}:{}),existing:!group.changed,rows:describe(group.constraints)});
  if(!group.changed){group.validate(pm.stages);return{revision,ok:true,changed:false,serializedSketch:a.sketchJSON,evidence:captured.evidence,group:receipt()};}
  pm.startTransaction();try{group.apply(pm);pm.finishTransaction(group.validate,false);}catch(error){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw error},false);}catch{}throw error;}
  const candidate=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));candidate.boundary=before.boundary;

@@ -52,6 +52,23 @@ import {distanceAB} from "math/distance";
 // selected segment A→B direction. Zero has no direction and must fail closed.
 const DIRECTION_SIGN = new FreeFunction(t=>Math.abs(t)>1e-9?Math.sign(t):NaN,()=>0,'directed-segment-sign',()=>null);
 
+// A physical directed relation is periodic even when the two normalized
+// angle parameters lie on opposite sides of zero. Keep its authored canonical
+// constant, choosing only this evaluation's integer-turn chart. The polynomial
+// stays linear with derivatives [-1,+1] throughout that solve; rebuilding or
+// independently checking the current geometry derives a fresh chart. No lift is
+// persisted and no SolverParam iteration reads a stale captured object value.
+function collectPeriodicOrientation(polynomials,params,{angle},canonicalAngles) {
+  if (!canonicalAngles.includes(angle)) {
+    // Preserve legacy noncanonical angle constants outside this narrow repair.
+    polynomials.push(new Polynomial(-angle).monomial(1).term(params[1],POW_1_FN).monomial(-1).term(params[0],POW_1_FN));
+    return;
+  }
+  const delta=params[1].get()-params[0].get(),turns=Math.round((delta-angle)/(2*Math.PI));
+  if (!Number.isFinite(delta)||!Number.isSafeInteger(turns)) throw Error('Invalid directed orientation branch.');
+  polynomials.push(new Polynomial(-angle-2*Math.PI*turns).monomial(1).term(params[1],POW_1_FN).monomial(-1).term(params[0],POW_1_FN));
+}
+
 export const ConstraintDefinitions
   // : {
   //   [key: string]: ConstraintSchema
@@ -713,7 +730,7 @@ export const ConstraintDefinitions
     },
 
     collectPolynomials: (polynomials, params, constants) => {
-      ConstraintDefinitions.AngleBetween.collectPolynomials(polynomials, params, constants);
+      collectPeriodicOrientation(polynomials, params, constants, [90*DEG_RAD,270*DEG_RAD]);
     }
 
   },
@@ -748,7 +765,7 @@ export const ConstraintDefinitions
     },
 
     collectPolynomials: (polynomials, params, constants) => {
-      ConstraintDefinitions.AngleBetween.collectPolynomials(polynomials, params, constants);
+      collectPeriodicOrientation(polynomials, params, constants, [0,180*DEG_RAD]);
     }
 
   },

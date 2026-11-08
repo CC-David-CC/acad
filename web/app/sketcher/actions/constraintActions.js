@@ -430,15 +430,9 @@ export default [
     },
 
     invoke: (ctx, matchedObjects) => {
-      const {viewer} = ctx;
-      const pm = viewer.parametricManager;
-
-      matchedObjects.forEach(obj => {
-        const constr = new AlgNumConstraint(ConstraintDefinitions.Vertical, [obj]);
-        constr.initConstants();
-        pm._add(constr);
-      });
-      pm.commit();
+      const pm=ctx.viewer.parametricManager,group=prepareConstraintGroup(pm,'vertical',matchedObjects);
+      if(group.changed)addConstraintGroup(pm,group.constraints,group.validate,group.apply);
+      else group.validate(pm.stages);
     }
   },
 
@@ -456,15 +450,9 @@ export default [
     },
 
     invoke: (ctx, matchedObjects) => {
-      const {viewer} = ctx;
-      const pm = viewer.parametricManager;
-
-      matchedObjects.forEach(obj => {
-        const constr = new AlgNumConstraint(ConstraintDefinitions.Horizontal, [obj]);
-        constr.initConstants();
-        pm._add(constr);
-      });
-      pm.commit();
+      const pm=ctx.viewer.parametricManager,group=prepareConstraintGroup(pm,'horizontal',matchedObjects);
+      if(group.changed)addConstraintGroup(pm,group.constraints,group.validate,group.apply);
+      else group.validate(pm.stages);
     }
   },
 
@@ -511,16 +499,9 @@ export default [
     },
 
     invoke: (ctx, matchedObjects) => {
-      const {viewer} = ctx;
-
-      const pm = viewer.parametricManager;
-
-      for (let i = 1; i < matchedObjects.length; ++i) {
-        const constr = new AlgNumConstraint(ConstraintDefinitions.Perpendicular, [matchedObjects[i-1], matchedObjects[i]]);
-        constr.initConstants();
-        pm._add(constr);
-      }
-      pm.commit();
+      const pm=ctx.viewer.parametricManager,group=prepareConstraintGroup(pm,'perpendicular',matchedObjects);
+      if(group.changed)addConstraintGroup(pm,group.constraints,group.validate,group.apply);
+      else group.validate(pm.stages);
     }
   },
 
@@ -538,16 +519,9 @@ export default [
     },
 
     invoke: (ctx, matchedObjects) => {
-      const {viewer} = ctx;
-
-      const pm = viewer.parametricManager;
-
-      for (let i = 1; i < matchedObjects.length; ++i) {
-        const constr = new AlgNumConstraint(ConstraintDefinitions.Parallel, [matchedObjects[i-1], matchedObjects[i]]);
-        constr.initConstants();
-        pm._add(constr);
-      }
-      pm.commit();
+      const pm=ctx.viewer.parametricManager,group=prepareConstraintGroup(pm,'parallel',matchedObjects);
+      if(group.changed)addConstraintGroup(pm,group.constraints,group.validate,group.apply);
+      else group.validate(pm.stages);
     }
   },
 
