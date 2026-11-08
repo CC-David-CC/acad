@@ -1234,10 +1234,9 @@ export class AlgNumConstraint {
     if (this.schema.constants) {
       this.constants = {};
       this.constantKeys.map(name => {
-        let val = this.schema.constants[name].initialValue(this.objects);
-        if (typeof val === 'number') {
-          val = val.toFixed(2);
-        }
+        const val = this.schema.constants[name].initialValue(this.objects);
+        // This initializes authored intent, not a display label. Number string
+        // conversion preserves the full available round-trip numeric value.
         this.updateConstant(name, val + '');
       });
     }
