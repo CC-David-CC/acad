@@ -35,6 +35,7 @@ import {registerRevolveCommands} from './revolve-commands.mjs';
 import {registerSweepCommands} from './sweep-commands.mjs';
 import {registerLoftCommands} from './loft-commands.mjs';
 import {registerSourcePlaneDepthCommands} from './source-plane-depth-commands.mjs';
+import {registerPrincipalPlanePlacementCommands} from './principal-plane-placement-commands.mjs';
 import {registerSourceFrameCommands} from './source-frame-commands.mjs';
 import {registerSolidPointCommands} from './solid-point-commands.mjs';
 import {openCadSources} from './source-dialog.mjs';
@@ -215,6 +216,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerSweepCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLoftCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSourcePlaneDepthCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerPrincipalPlanePlacementCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSourceFrameCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSolidPointCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
