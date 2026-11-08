@@ -21,17 +21,15 @@ reinstate assembly acceptance in Gate1.
 
 ## Current finite execution lanes — 2026-11-08
 
-Latest composed complete run is orientation R10 on84fe435/Desktop640279b9f,
-frozen at b2f3242 under
-`test/line-orientation-public-workflow/evidence-r10`. It reaches109 rows, passing
-the earlier rectangle/mixed-group/disconnected-append/LengthRelation stops, then
-fails first anti-parallel endpoint edit170→190. coordinateTransition's exact
-candidate/fresh-solve comparison reports CURRENT_GEOMETRY_MISMATCH without a
-field/value/magnitude. No saves run. Original-request coordinate repair with
-exact targets/unaffected source/original equations is the immediate solver lane;
-no numerical-only explanation or tolerance waiver is justified. The shared
-capturedGeometryScope extraction is approved to reuse actual length/coordinate
-parameter ownership and original-equation dependency policy, not duplicate it.
+Latest composed complete run is orientationR11 on Corea5368ef/Desktopa0def557,
+frozen at2b92bdd, `test/line-orientation-public-workflow/evidence-r11`.
+It reaches109rows/no saves, failing first anti-parallel endpoint170→190.
+Actual candidate/coldY delta4.5604338084pm exceeds the executed1pm bound.
+Conditional independent expectedY errors are11.855235pm/7.294801pm; onlyY was
+captured. User explicitly accepts50pm=0.05nm=5e-8mm. Policy source change and
+whole-workflow qualification remain pending; historical FAIL stays unchanged.
+No full-vector/nanoscale-BRep/physical guarantee follows. Solver diagnostics
+and accepted-iterate ownership are a bounded separate source lane.
 
 Native archive repair774c779 is integrated: keep the decoded codec restore-local
 through same-generation metadata reset, then transfer custody after full guarded
@@ -73,3 +71,11 @@ exports at typed width100→120 exact-axis check; fresh Open/codec-lifetime/reus
 phases not reached, one codec retired. Typed rectangle declaration reconstruction
 is approved as a separate Worker source lane, preserving constraints/units/full
 precision and original-equation/cold proofs; no snapping or axis waiver.
+
+## Decision checkpoint — 2026-11-08
+
+See `docs/CAD1-CHECKPOINT-20261108.md` for the resumable snapshot, exact commits,
+failed runs, live source lanes, finite remaining work and effort/difficulty.
+User confirmed50pm small-design budget. Gate1 first; qualify and freeze that
+candidate before later CAD generations on separate branches/projects. No pause
+has been requested; checkpoint publication does not pause the active goal.
