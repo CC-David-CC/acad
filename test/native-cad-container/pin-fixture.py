@@ -14,6 +14,8 @@ p.add_argument('--core-source', type=Path, required=True)
 p.add_argument('--desktop-source', type=Path, required=True)
 p.add_argument('--previous-receipt', type=Path, required=True)
 p.add_argument('--output', type=Path, required=True)
+p.add_argument('--include-prefix', action='append', default=[],
+               help='Also pin every manifest asset under this explicit new cohort directory')
 a = p.parse_args()
 if a.output.exists():
     raise SystemExit('Preserve previous pins; select a fresh output')
@@ -68,13 +70,21 @@ for key in old:
 for key, pin in inner.items():
     if key.endswith('/authoredHistoryState.mjs'):
         selected[key] = pin['sha256']
+for cohort in a.include_prefix:
+    if not re.fullmatch(r'(?:[A-Za-z0-9_-]+/)+', cohort):
+        raise SystemExit('Require relative cohort directory segments ending in /')
+    matches = {key: pin['sha256'] for key, pin in inner.items() if key.startswith(cohort)}
+    if not matches:
+        raise SystemExit('Requested cohort has no emitted assets: ' + cohort)
+    selected.update(matches)
 base = bundle_directory(cad) / prefix
 for key, expected in selected.items():
     if not key.startswith('/') and digest(base / key) != expected:
         raise SystemExit('Actual inner fixture bytes differ: ' + key)
 summary = lambda row: {key: row[key] for key in ['bundleSHA256', 'sha256', 'path']}
 result = {'outer': summary(cad), 'filesApp': summary(files), 'files': selected,
-          'source': head(a.core_source), 'desktop': head(a.desktop_source)}
+          'source': head(a.core_source), 'desktop': head(a.desktop_source),
+          'additionalCohortPrefixes': a.include_prefix}
 a.output.write_text(json.dumps(result, indent=2) + '\n')
 print(json.dumps({'scope': 'actual build metadata only; no qualification',
                   'files': len(selected), 'source': result['source'], 'desktop': result['desktop']}))
