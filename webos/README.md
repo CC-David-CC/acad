@@ -1,5 +1,11 @@
 # CAD Modeler (JSketcher inspired)
 
+StraightSlot source now has scoped R1 qualification (ACAD5c82504;
+actualCore79c9c86/Desktopddab73b45): radius/axis/direction edits, conflict
+recovery, source travel and three native saves/fresh Opens pass independent
+native-sketch geometry/source/ZIP checks. See examples/sketch-straight-slot.mjs.
+This is editable sketch intent; Arc-region/BRep extrusion remains separate.
+
 Native extrusion-cap attachment now has scoped whole R2 qualification
 (ACADd82b3c1; runtimeCoreeff8af0/Desktop719a4049a): actual parent edits,
 explicit repair, travel, four native saves/fresh Opens and independent
