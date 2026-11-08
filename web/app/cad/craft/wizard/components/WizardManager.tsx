@@ -45,10 +45,18 @@ export default function WizardManager() {
     }
   };
 
+  // OK belongs to the actual rendered request as well as its owner. A delayed
+  // event cannot apply a newer draft (even when the requestKey was retained).
+  const apply=wizard.applyWorkingRequest,applyRevision=stream.revision;
+  const onOK=()=>{
+    if(!current()||stream.value!==workingRequest||stream.revision!==applyRevision||wizard.applyWorkingRequest!==apply)return;
+    apply.call(wizard);
+  };
+
   return <ErrorBoundary key={workingRequest.requestKey}
                         message={<span>operation error</span>}>
     <Wizard noFocus={workingRequest.hints?.noWizardFocus}
             onCancel={onCancel}
-            onOK={wizard.applyWorkingRequest} />
+            onOK={onOK} />
   </ErrorBoundary>
 }
