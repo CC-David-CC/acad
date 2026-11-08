@@ -1,15 +1,41 @@
 import {makeEmptySketch} from './emptySketch';
 import {solveSketch} from './solve';
 import {HeadlessSketchWorkspace} from './workspace';
+import {captureSketchFailure,failureCause,withAdmissionCause} from '../constr/admissionCause.mjs';
 
 export class RectangleInputError extends Error {
   readonly code: 'RECTANGLE_DOMAIN' | 'RECTANGLE_PRECISION';
   constructor(code: 'RECTANGLE_DOMAIN' | 'RECTANGLE_PRECISION', message: string) { super(message); this.name = 'RectangleInputError'; this.code = code; }
 }
 
+type RectangleDraftPhase='input'|'strict-load'|'canonical-serialization'|'independent-solve';
+function ownText(error:any,key:string):string|undefined {
+  if(!error||(typeof error!=='object'&&typeof error!=='function'))return;
+  const field=Object.getOwnPropertyDescriptor(error,key);
+  if(field&&Object.hasOwn(field,'value')&&typeof field.value==='string')return field.value;
+}
+// Data-only failure metadata: no stack or coercion of arbitrary thrown values.
+// The SyntaxError text is fixed because JSON.parse may quote source fragments.
+export function captureRectangleDraftFailure(error:any,phase?:RectangleDraftPhase){
+  const rawCode=ownText(error,'code'),code=rawCode&&/^[A-Z][A-Z0-9_]{0,63}$/.test(rawCode)?rawCode:'RECTANGLE_PREPARATION_FAILED';
+  const rawMessage=error instanceof SyntaxError?'Invalid source JSON syntax.':ownText(error,'message');
+  const detail=rawMessage?rawMessage.replace(/[\x00-\x1f\x7f]/g,' ').slice(0,384):'The internal rectangle operation failed without a message.';
+  const cause=failureCause(error);
+  return captureSketchFailure({code,message:(phase?'Rectangle '+phase+' failed: ':'')+detail,...(cause?{cause}:{})});
+}
+
 // Research-only draft. Call in a disposable Worker; this does not publish a
 // document or open an editor. Coordinates are sketch-local millimeters.
 export function makeRectangleDraft(unit: string, frame: any, origin: number[], width: number, height: number) {
+  let phase:RectangleDraftPhase='input';
+  try {return createRectangleDraft(unit,frame,origin,width,height,value=>{phase=value;});}
+  catch(error){
+    if(error instanceof RectangleInputError)throw error;
+    const failure=captureRectangleDraftFailure(error,phase);
+    throw withAdmissionCause(Object.assign(new Error(failure.message),{code:failure.code,cause:error}),failure.cause);
+  }
+}
+function createRectangleDraft(unit:string,frame:any,origin:number[],width:number,height:number,setPhase:(phase:RectangleDraftPhase)=>void) {
   const sketch=makeEmptySketch(unit,frame);
   const basis=sketch.metadata.boundaryFrame;
   const xy=[[1,0,0],[0,1,0],[0,0,1]];
@@ -38,10 +64,16 @@ export function makeRectangleDraft(unit: string, frame: any, origin: number[], w
   // Round-trip through the actual strict IO to obtain canonical stage and
   // annotation records before the independent residual-checked solve.
   const workspace=new HeadlessSketchWorkspace(Object.create(null));
+  setPhase('strict-load');
   workspace.io._loadSketch(sketch,{strict:true});
+  setPhase('canonical-serialization');
   const normalized=JSON.parse(workspace.io.serializeSketch(sketch.metadata,{strict:true}));
   normalized.boundary=JSON.parse(JSON.stringify(sketch.boundary));
+  setPhase('independent-solve');
   const solved=solveSketch({revision:'rectangle-draft',sketch:normalized,boundary:JSON.parse(JSON.stringify(normalized.boundary)),externalParameters:{}});
-  if (!solved.ok) throw new Error(solved.error?.message || 'Rectangle could not be solved.');
+  if (!solved.ok) {
+    const failure=captureSketchFailure(solved.error);
+    throw withAdmissionCause(Object.assign(new Error(failure.message),{code:failure.code}),failure.cause);
+  }
   return {sketch:solved.sketch,evidence:solved.evidence};
 }

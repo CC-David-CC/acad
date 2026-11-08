@@ -1,3 +1,4 @@
+import {captureSketchFailure} from 'sketcher/constr/admissionCause.mjs';
 import {runSketchSolve} from 'sketcher/headless/client';
 import rectangleWorkerUrl from 'codi-headless-sketch-worker';
 import {validateProjectSketch} from 'sketcher/io';
@@ -153,8 +154,9 @@ export function createRectangleCreationCommands(ctx: any, submit) {
             {signal: controller.signal, valid: () => { try { requireCurrent(); return true; } catch { return false; } }});
           requireCurrent();
           if (!result.ok) {
-            const error = new Error(result.error.message);
-            if (result.error.code === 'RECTANGLE_DOMAIN' || result.error.code === 'RECTANGLE_PRECISION') Object.defineProperty(error, 'code', {value: result.error.code, enumerable: true});
+            const failure=captureSketchFailure(result.error),error=new Error(failure.message);
+            Object.defineProperty(error,'code',{value:failure.code,enumerable:true});
+            if(failure.cause)Object.defineProperty(error,'cause',{value:failure.cause,enumerable:true});
             throw error;
           }
           // Only this fixed four-edge result is projected on the main thread.

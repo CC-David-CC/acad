@@ -2,7 +2,7 @@
 // another job. verb's UMD bundle exports directly to self, without a window shim.
 (self as any).importScripts(new URL('../lib/verb.js', self.location.href).href);
 const {solveSketch} = require('./solve');
-const {makeRectangleDraft, RectangleInputError} = require('./rectangleDraft');
+const {makeRectangleDraft, RectangleInputError, captureRectangleDraftFailure} = require('./rectangleDraft');
 const {evaluatePhysicalSource} = require('cad/parameters/evaluatePhysicalSource.mjs');
 const {decodePhysicalSource} = require('cad/parameters/physicalSource.mjs');
 const {prepareTypedRectangle} = require('cad/parameters/typedRectangleBindings.mjs');
@@ -199,7 +199,7 @@ self.onmessage = async event => {
         self.postMessage({revision,ok:true,sketch,evidence,serializedSketch:JSON.stringify(sketch)});
       } catch (error) {
         if (error instanceof RectangleInputError) self.postMessage({revision,ok:false,error:{code:error.code,message:error.message}});
-        else self.postMessage({revision,ok:false,error:{code:'INVALID',message:'Rectangle request could not be prepared.'}});
+        else self.postMessage({revision,ok:false,error:captureRectangleDraftFailure(error)});
       }
       return;
     }
