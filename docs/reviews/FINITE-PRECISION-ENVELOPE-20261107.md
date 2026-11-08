@@ -149,3 +149,14 @@ Current profile floors establish **unsupported 0.x nm profile input**, not failu
 Existing mechanical BRep/solver/validity proofs do not establish fine-design 1 pm geometric accuracy; absent independent references/envelope coverage, that claim is **unqualified**, not proven impossible. Construction tolerances identify actual policy/algorithm boundaries, but they are not measured error floors for every accepted result. Mesh approximations are explicitly much coarser by current controls and cannot claim the same precision. Source-confirmed early rounding/term removal/stopping require coherent repairs with actual full workflows, not an automatic threshold sweep.
 
 Still required per design/region: maximum physical extent and absolute placement; minimum feature/gap and scale ratio; required operations/backends; interface/contact discrimination; metric and independent uncertainty. The user's 1 m/0.007 nm example is a desired concrete corpus case, not current support evidence or a universal extent ceiling. Keep the fixed fine target while declaring coarser budgets where allowed, and explain each achieved/unachieved claim with evidence.
+
+## Subsequent source repair checkpoint
+
+The two-decimal default write described above is a historical confirmed defect.
+Main `1eaaed4` removes that authoritative `toFixed(2)` conversion and preserves the
+full available Number round-trip string through the existing validator. It does
+not change debug formatting or establish exact-real arithmetic. The genuine human
+untouched-default workflow is prepared under
+`test/default-constraint-precision-workflow/`; its complete UI/persistence result
+is still unqualified. Other coefficient/offset reduction observations above have
+not been repaired by this default-write change.

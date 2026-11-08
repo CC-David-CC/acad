@@ -127,3 +127,13 @@ Normal full build and parent whole-flow E2E are the next checks. There is no new
 runtime receipt or qualification from this source commit alone. Original Native
 pairs/defaults, old producing receipts, unrelated drivers and live services stay
 unchanged.
+
+## Main composition checkpoint
+
+Root composed the product, workflow and complete resource graph on main, then
+updated all seven canonical-bootstrap source pins to
+`44fbc4522d3dc9c5219b3908f53fcbda5c180d2e361d18bd31c5876d3c78b48e`.
+This is the SHA256 of the actual composed canonical source. Native JS/WASM pairs
+are unchanged. Generated flat/embedded Workers and component manifests must still
+be rebuilt from this composition; no earlier runtime is relabeled. The complete
+arrangement application workflow remains unexecuted at this checkpoint.
