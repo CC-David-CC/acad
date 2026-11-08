@@ -1,3 +1,4 @@
+import {addRadiusBatch,inspectRadiusTargets,addRadiusByIdAtRevision} from './radiusOperation';
 import {toast} from 'react-toastify';
 import {AlgNumConstraint, ConstraintDefinitions} from "../constr/ANConstraints";
 import {addLengthRelation, addLengthRelationByIdsAtRevision, inspectLengthRelationTargets} from "./lengthRelationOperation";
@@ -560,34 +561,16 @@ export default [
 
   {
     id: 'RadiusLength',
-    shortName: 'Radius Length',
-    kind: 'Constraint',
-    description: 'Radius Length',
-    icon: RadiusConstraintIcon,
-
-    selectionMatcher: {
-      selector: 'matchAll',
-      types: [Circle, Arc],
-      minQuantity: 1
+    shortName: 'Radius Length', kind: 'Constraint',
+    description: 'Driving numeric radius of current circles or arcs', icon: RadiusConstraintIcon,
+    selectionMatcher: {selector: 'matchAll', types: [Circle, Arc], minQuantity: 1},
+    invoke: (ctx, objects) => {
+      const constraint=new AlgNumConstraint(ConstraintDefinitions.RadiusLength,[objects[0]]);
+      constraint.initConstants();
+      editConstraint(ctx,constraint,()=>{try{addRadiusBatch(ctx.viewer,objects,constraint.constants.length);}catch(error){toast(error?.message||'The radius could not be applied.');}});
     },
-
-    invoke: (ctx, matchedObjects) => {
-      const {viewer} = ctx;
-
-      const [firstCircle, ...others] = matchedObjects;
-
-      const firstConstr = new AlgNumConstraint(ConstraintDefinitions.RadiusLength, [firstCircle]);
-      firstConstr.initConstants();
-
-      editConstraint(ctx, firstConstr, () => {
-        const pm = viewer.parametricManager;
-        pm._add(firstConstr);
-        for (const other of others) {
-          pm._add(new AlgNumConstraint(ConstraintDefinitions.RadiusLength, [other], {...firstConstr.constants}));
-        }
-        pm.commit();
-      });
-    }
+    inspect: (ctx, options) => inspectRadiusTargets(ctx.viewer, options),
+    invokeById: (ctx, id, radius, revision, options) => addRadiusByIdAtRevision(ctx.viewer,id,radius,revision,options)
   },
 
   {

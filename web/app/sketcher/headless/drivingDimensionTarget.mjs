@@ -2,7 +2,7 @@
 const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
 export const signedDrivingDimension=type=>type==='SignedDistanceX'||type==='SignedDistanceY';
 export const pointDrivingDimension=type=>signedDrivingDimension(type)||type==='DistancePP';
-export const drivingLengthField=type=>type==='SegmentLength'?'length':type==='DiameterLength'?'diameter':pointDrivingDimension(type)?'distance':null;
+export const drivingLengthField=type=>(type==='SegmentLength'||type==='RadiusLength')?'length':type==='DiameterLength'?'diameter':pointDrivingDimension(type)?'distance':null;
 export const drivingDimensionObjectCount=type=>drivingLengthField(type)?pointDrivingDimension(type)?2:1:0;
 export const drivingDimensionValueValid=(type,v)=>typeof v==='number'&&Number.isFinite(v)&&!!drivingLengthField(type)&&(signedDrivingDimension(type)?Math.abs(v)<=1e6:type==='DistancePP'?v>=0&&v<=1e6:v>0&&v<=1e6);
 export const drivingPointDimensionValue=(type,a,b)=>type==='SignedDistanceX'?b.x-a.x:type==='SignedDistanceY'?b.y-a.y:type==='DistancePP'?Math.hypot(b.x-a.x,b.y-a.y):NaN;
@@ -29,7 +29,7 @@ export function discoverDrivingDimensions(sketch,pointRows=[]){
   let supported=!!field&&c.constants&&Object.keys(c.constants).length===1&&Object.hasOwn(c.constants,field)&&['string','number'].includes(typeof c.constants[field]),resolvedValue=null;
   if(pair){const refs=c.objects,p=points();supported=!!supported&&Array.isArray(refs)&&refs.length===2&&refs[0]!==refs[1]&&refs.every(id=>typeof id==='string'&&id.length>0&&id.length<=256&&p.has(id));
    if(supported)resolvedValue=drivingPointDimensionValue(c.typeId,p.get(refs[0]),p.get(refs[1]));}
-  else{supported=!!supported&&!!o&&(c.typeId==='SegmentLength'?o.type==='Segment':['Circle','Arc'].includes(o.type));if(supported){const d=o.data;resolvedValue=o.type==='Segment'?Math.hypot(d.b.x-d.a.x,d.b.y-d.a.y):2*(o.type==='Circle'?d.r:Math.hypot(d.a.x-d.c.x,d.a.y-d.c.y));}}
+  else{supported=!!supported&&!!o&&(c.typeId==='SegmentLength'?o.type==='Segment':['Circle','Arc'].includes(o.type));if(supported){const d=o.data;resolvedValue=o.type==='Segment'?Math.hypot(d.b.x-d.a.x,d.b.y-d.a.y):(c.typeId==='RadiusLength'?1:2)*(o.type==='Circle'?d.r:Math.hypot(d.a.x-d.c.x,d.a.y-d.c.y));}}
   const admitted=supported&&drivingDimensionValueValid(c.typeId,resolvedValue)&&['accepted','redundant'].includes(c.admission?.state);
   rows.push(Object.freeze({constraintId:admitted?dimensionLocator(si,index,c):null,stage:si,index,typeId:c.typeId,objects:Object.freeze([...c.objects]),unit:field?'millimeter':null,
    rawValue:field&&c.constants&&Object.hasOwn(c.constants,field)?c.constants[field]:null,resolvedValue:admitted?resolvedValue:null,canEdit:admitted,canRemove:admitted,

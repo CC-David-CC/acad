@@ -1,3 +1,4 @@
+import {changeRadiusDimension} from './radiusTransition';
 import {HeadlessSketchWorkspace} from './workspace';
 import {replaySketchTransition} from './sketchTransition';
 import {solveSketch} from './solve';
@@ -67,7 +68,9 @@ function finishGeneratedDimensionStages(workspace:any,stages:any[]){
  }
 }
 export function changeDrivingDimension(request:any){let revision=revisionOf(request);try{
- const a=record(request,['revision','sketchJSON','externalParameters','action','intent']);if(!revision||revision.length>256)throw fail('INVALID','Invalid dimension revision.');const intent=captureDrivingDimensionIntent(a.intent,a.action),bindings=external(a.externalParameters),captured=replay(revision,a.sketchJSON,bindings),before=JSON.parse(captured.serializedSketch),row=resolveDimension(before,intent.constraintId);
+ const a=record(request,['revision','sketchJSON','externalParameters','action','intent']);if(!revision||revision.length>256)throw fail('INVALID','Invalid dimension revision.');const intent=captureDrivingDimensionIntent(a.intent,a.action),bindings=external(a.externalParameters);
+ const authored=JSON.parse(bounded(a.sketchJSON));if(resolveDimension(authored,intent.constraintId).typeId==='RadiusLength')return changeRadiusDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,intent},a.action);
+ const captured=replay(revision,a.sketchJSON,bindings),before=JSON.parse(captured.serializedSketch),row=resolveDimension(before,intent.constraintId);
  let value:any=null;if(a.action==='edit'){
   if(typeof row.rawValue==='string'&&/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(row.rawValue.trim())&&typeof intent.value==='number')throw fail('BOUND_DIMENSION','A driving dimension bound to a typed name cannot be silently replaced by a literal. Edit the parameter or submit a named binding.');
   value=typeof intent.value==='number'?intent.value:bindings[intent.value];

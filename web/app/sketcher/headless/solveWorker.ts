@@ -17,6 +17,7 @@ self.onmessage = async event => {
   const revision = typeof request?.revision === 'string' ? request.revision : '';
   try {
     if (request && Object.prototype.hasOwnProperty.call(request, 'task')) {
+      if(['sketch-transition-radius','sketch-transition-verify-radius','sketch-transition-verify-radius-dimension'].includes(request.task)){const {addRadiusTransition,verifyRadiusCandidate,verifyRadiusDimensionCandidate}=require('./radiusTransition');const {task,...payload}=request;self.postMessage(task==='sketch-transition-radius'?addRadiusTransition(payload):task==='sketch-transition-verify-radius'?verifyRadiusCandidate(payload):verifyRadiusDimensionCandidate(payload));return;}
       if(request.task==='rectangle-dimensions-edit'){const {prepareRectangleDimensionEdit}=require('./rectangleDimensionEdit');const {task,...payload}=request;self.postMessage(await prepareRectangleDimensionEdit(payload));return;}
       if(request.task==='source-frame-transition'){const {sourceFrameTransition}=require('./sourceFrameTransition');const {task,...payload}=request;self.postMessage(sourceFrameTransition(payload));return;}
       if(request.task==='sketch-length-measurement'||request.task==='sketch-length-measurement-verify'){const {changeLengthMeasurement,verifyLengthMeasurement}=require('./lengthMeasurementTransition');const {task,...payload}=request;self.postMessage(task==='sketch-length-measurement'?changeLengthMeasurement(payload):verifyLengthMeasurement(payload));return;}
