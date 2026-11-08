@@ -91,3 +91,27 @@ face orientation, the underlying kernel, or a particular numerical cause without
 further evidence. Source review now considers how independent Common/Cut cell
 boundaries retain actual fragment representations. No tolerance, count, timing,
 geometry or qualification standard is waived.
+
+## Fifth complete browser attempt R5 — interrupted, not qualified
+
+Actual Coref2574eaee3bc0c2e32590fd69ce5743dd9f1a000/Desktop70f096c23, Native7bf611ce
+with9789a617/707facb3 pair. Coherent app build98097 and fixture74853 completed0.
+Whole Chrome52120 reached97rows/33Native observation sets/8saves. Lens, left
+crescent and right crescent cases reached their finite driver PASS branches;
+tangent constructed its two bodies and saved, but the subsequent fresh Open
+lost its CDP target/connection. Entire run is FAIL/TargetCloseError, NOT a
+qualified circular workflow. Independent full-run oracle was not run.
+
+CDP19329 subsequently refused connections. Browser/context cleanup could not
+be confirmed: cleanupError ConnectionClosedError is retained. Source snapshots
+were unchanged. Cause of browser disappearance is unknown; no CAD assertion,
+OOM diagnosis or kernel failure is inferred. Original complete receipt, source
+snapshots and all8 saved artifacts are frozen in evidence-r5.
+
+A fresh dedicated local Chrome155.0.8059.79 process is launched with its own
+RAM-backed profile/cache on /dev/shm, same CDP port19329, with no certificate
+bypass or relaxed workflow assertions. Launch session5363/PID2895440 and log
+/tmp/codi-cad-chrome-20261108-r1.log are recorded. Existing other browsers are
+untouched. R6 whole run74062 uses the SAME exact app/source/Native/pins/fixture,
+unchanged driver and a fresh evidence directory, restarting from the beginning.
+No completed partial case is substituted for the required whole result.
