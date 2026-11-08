@@ -7,7 +7,7 @@ This guide sequences that scope; it neither adds later CAD work nor removes
 unconditional Gate1 requirements. Human authoring UI redesign remains deferred;
 viewable output and one authoritative shared person/agent operation model remain.
 
-## What actually remains
+## Established prerequisites and remaining work
 
 1. Retain qualified orientation R12 (618cf39) and its independent bounded50pm
    analytic oracle (c702b49). Both stored and replayed coordinates satisfy the
@@ -18,16 +18,17 @@ viewable output and one authoritative shared person/agent operation model remain
    actual Files routing, unchanged content reuse and ten retired codec Workers.
    Earlier failures remain frozen. Large capacity/peak memory and ARC23 costs
    remain separate limitations; this is a bounded workflow signoff.
-3. Repair and qualify the two failed shared edit/control workflows. Measurement
-   roles R1 (Desktop53363ab16) passed its ordinary edit/travel/three-save prefix,
-   then an unrelated Point blocked typed configuration setup. Narrow source
-   repair01fe7c5/c7cca14/5c4e036 is integrated but unqualified. History R1
-   (3b8a32f) passed suppression/noop/travel/dependency prefix, then a rectangle
-   resize produced UNSUPPORTED_PROFILE instead of the intended downstream
-   HOLE_OUTSIDE_PROFILE. Explicit rectangle construction plus exact historical
-   target verification is being implemented. Preserve all guards and expected
-   failure codes; rerun both unchanged complete workflows on a fresh build.
-   No second journal, hidden authored copy or silent material retarget allowed.
+3. Retain the now-qualified shared workflows on Core33b8aa3/Desktop4c4862b7b:
+   roles R3 Desktopc48a7fa8e (59rows/3nativeJSON files/final typed read/refusal),
+   history R3 d0964c8 (78rows/4.cad files/branch/travel/refusals), and C09 R1
+   4afbb06 (50rows/3.cad files/7quantity kinds/4display families/2own malformed
+   ruler Opens). Browser cleanup/source hashes and independent required oracles
+   pass. The history oracle's original ID-domain failure and corrected separate
+   analysis97a7828 remain preserved. All earlier runtime failures remain frozen.
+   This closes the four-workflow repair batch plus one finite C09 chain, not
+   the whole Gate1 inventory. Genuine wizard draft/no-op/Cancel recovery remains
+   a C12 boundary: legacy Cancel can move pointer outside its authored journal;
+   source contract/whole-flow preparation is underway, no runtime proof yet.
 4. Complete finite sketch/constraint/region gaps fromC01–C05. Basic primitives,
    many constraints, disjoint/nested/crossing rectangle workflows already pass.
    Required remaining cases include missing shared primitive/edit targets and
@@ -56,16 +57,15 @@ viewable output and one authoritative shared person/agent operation model remain
 
 ## Step-by-step execution
 
-A. Compose the isolated-Point and explicit rectangle-dimension repairs. Review
-   shared seams once; preserve all original failure evidence. C08 remains in a
-   separate source branch, excluded from this repair build.
-B. Prepare the next exact normal build. Current working private fixture already
-   uses direct private real-disk storage on the separate R730 root disk; do not
-   relabel earlier login failures as CAD failures. Preserve normal graph/resource
-   staging verification and immutable existing qualified fixture bytes.
-C. Run complete measurement and history workflows sequentially in Chrome, then
-   affected orientation/archive regressions according to changed dependencies.
-   Analyze actual saved artifacts independently after whole runs.
+A. Completed: compose/review/build the isolated-Point, declared rectangle edit,
+   typed native-ruler and passive-preview repairs. Preserve all first failures.
+B. Completed: normal Core33b8aa3 build plus real CAD/Files fixture/pins; current
+   loopback20986 uses private direct real-disk storage on R730's separate root
+   disk. Earlier immutable20984/20985 fixtures remain. No public deployment.
+C. Completed: full roles/history reruns and next C09 quantity/native-ruler chain,
+   sequential Chrome, with actual after-whole artifact analysis. Existing `.cad`
+   reuse/capacity/memory scopes stay distinct. Reuse unaffected proofs; rerun
+   affected complete paths for the NEXT composition, not gratuitous microtests.
    A failure identifies the next repair at its correct subsystem; no per-edit
    microtest loop, threshold tuning or substitute positive geometry.
 D. Complete remaining finite sketch/constraint/region operations in bounded
