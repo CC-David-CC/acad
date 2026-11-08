@@ -6,6 +6,25 @@ Agent tools/New/Open are source work being qualified; the earlier6f CAD build
 is active on beta. Consult the desktop work queue for deployed pins. Original
 integration notes below retain their historical scope.
 
+## Native `.cad` source packet (not yet runtime-qualified)
+
+The matching new Core/host packet uses a dedicated packaged archive Worker for
+`.cad` Save/Open around the same authored model/history/source envelope. New
+untitled projects default to `.cad` only when that Core API is installed;
+explicit historical `.jsketcher.json` paths remain JSON, with no automatic
+migration. My files associates `.cad` with CAD. The existing registered
+`save`/`open-project` commands and File menu retain account/version/CAS and
+committed/unknown settlement. A Worker-prepared archive alone is not a file
+commit or a geometry proof.
+
+The source codec, complete public workflow and standalone ZIP/source/STEP/
+core3MF/SVG oracle are in Core `test/native-cad-container/`. No new build,
+browser or isolated checks were run for this source packet. Runtime support,
+package limits, cancellation/cleanup and actual transfer/peak-memory costs
+remain subject to the composed whole workflow. Existing dirty/snapshot JSON
+comparisons on main remain the explicit ARC23 limitation. Details and historical
+qualified JSON evidence below retain their producing format/build scope.
+
 # jSketcher
 
 Current shared-save work: the desktop `inspect` command returns an opaque

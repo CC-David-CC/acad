@@ -5,6 +5,7 @@ import './style.css';
 import {settleScopedCommand} from './scoped-command.mjs';
 import {inspectedProjectIsDirty} from './inspect-state.mjs';
 import {acquireVersionedSnapshot} from './file-read.mjs';
+import {nativeProjectExtensions,nativeProjectFormat,requireNativeArchive,restoreNativeProjectFile,createNativeProjectBackings,validateNativeArchivePreparation} from './native-project-file.mjs';
 import {registerSketchCommands} from './sketch-commands.mjs';
 import {registerClosedSketchCommands} from './closed-sketch-commands.mjs';
 import {registerPrimitiveCommands} from './primitive-commands.mjs';
@@ -106,7 +107,8 @@ export function mount(host){
  const frames=new Set(),timers=new Map(),valid=()=>!disposed&&!host.signal.aborted&&body.isConnected&&signedInSubject()===owner&&host.session?.()===session;
  const tell=message=>{if(valid())status.textContent=message;};
  const pause=ms=>new Promise((resolve,reject)=>{if(disposed||host.signal.aborted){reject(Error('Window closed.'));return;}const id=setTimeout(()=>{timers.delete(id);resolve();},ms);timers.set(id,reject);});
- function detach(frame){if(!frame)return;frames.delete(frame);try{frame.contentWindow?.__CAD_APP?.projectService?.dispose?.();}catch(error){console.error('CAD document cleanup failed',error);}try{frame.src='about:blank';}catch{}frame.remove();}
+ const nativeBackings=createNativeProjectBackings();
+ function detach(frame){if(!frame)return;frames.delete(frame);try{nativeBackings.close(frame);}catch(error){console.error('CAD native archive cleanup failed',error);}try{frame.contentWindow?.__CAD_APP?.projectService?.dispose?.();}catch(error){console.error('CAD document cleanup failed',error);}try{frame.src='about:blank';}catch{}frame.remove();}
  function createFrame(hidden){const frame=document.createElement('iframe');frame.title=APP_NAME;frame.sandbox='allow-scripts allow-same-origin allow-modals';frame.className='jsketcher-frame'+(hidden?' jsketcher-staging':'');frame.src=new URL('./node_modules/jsketcher-build/index-webos.html?DEFAULT&webos=1',import.meta.url).href;frames.add(frame);stage.append(frame);return frame;}
  async function waitReady(frame){const deadline=Date.now()+60000;while(valid()&&frames.has(frame)){let ctx;try{ctx=frame.contentWindow?.__CAD_APP;}catch{}const failure=ctx?.streams?.lifecycle?.initializationFailure?.value;if(failure){console.error('CAD initialization failed',failure);throw Object.assign(Error(APP_NAME+' could not finish starting. Close this window and open it again.'),{cause:failure});}if(ctx?.streams?.lifecycle?.projectLoaded?.value&&ctx.projectManager?.snapshotCurrentProject&&ctx.projectManager?.restoreSnapshotInEmptyWorkspace){if(typeof ctx.projectService?.bindHostLifetime==='function'&&!ctx.projectService.hasHostLifetime)ctx.projectService.bindHostLifetime({signal:host.signal,valid:()=>valid()&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx});return ctx;}if(Date.now()>deadline)throw Error(APP_NAME+' took too long to start.');await pause(50);}throw Error('The window or account changed.');}
  function supportedEnvelope(value){
@@ -149,8 +151,8 @@ export function mount(host){
    const namespace=ctx.projectService.sketchStorageNamespace,keys=ctx.services.storage.getAllKeysFromNamespace(namespace).sort();
    const model={history,expressions:ctx.expressionService.script$.value,assembly};
    if(ctx.projectService.counterGenerator)model.counters=ctx.projectService.counterGenerator.projectCounters;
-   // Recreate the saved snapshot from read-only state; do not call the fork's
-   // snapshotCurrentProject(), which writes its project to workspace storage.
+   // ARC23: this existing JSON dirty comparison remains a main-thread cost.
+   // It is read-only; archive byte generation is a separate Worker job.
    const savedModel=JSON.parse(JSON.stringify(model)),sketches=keys.map(key=>({id:key.substring(namespace.length),data:JSON.parse(ctx.services.storage.get(key))}));
    const surfacing=ctx.surfacingService?.save();
    const operations=history.slice(0,100).map(op=>{if(!op||typeof op.type!=='string')throw Error('The operation history is unavailable.');return op.type.slice(0,128);});
@@ -158,14 +160,14 @@ export function mount(host){
    const getter=typeof ctx.projectManager?.getManufacturingMetadata==='function'?()=>ctx.projectManager.getManufacturingMetadata():null;
    const presentation=typeof ctx.projectManager?.getPresentationMetadata==='function'?()=>ctx.projectManager.getPresentationMetadata():null;
    const drawing=typeof ctx.projectManager?.getLinkedPartDrawingDefinition==='function'?()=>ctx.projectManager.getLinkedPartDrawingDefinition():null;
-   return {documentToken:commandDocumentToken(),path:state.path,revision:inspectSaveTarget().revision,dirty:inspectedProjectIsDirty(project,baseline,getter,ctx.projectManager.unit,presentation,drawing),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
+   return {documentToken:commandDocumentToken(),path:state.path,revision:inspectSaveTarget().revision,nativeProjectExtensions:nativeProjectExtensions(ctx.projectManager),dirty:inspectedProjectIsDirty(project,baseline,getter,ctx.projectManager.unit,presentation,drawing),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
   });host.onDispose(unregister);
   for(const opening of [false,true]){
    const id=opening?'open-project':'new-project',keys=opening?['revision','path']:['revision'];
    host.onDispose(host.commands.register({id,description:opening?'Open an inspected My files native project. Unsaved changes require confirmation; cancellation preserves the current project.':'Start a new empty project after inspected-revision and unsaved-change checks. Cancellation preserves the current project.',parameters:{type:'object',additionalProperties:false,required:keys,properties:{revision:{type:'string',minLength:1,maxLength:256},...(opening?{path:{type:'string',minLength:1,maxLength:1024}}:{})}}},args=>{
     if(!args||typeof args!=='object'||Array.isArray(args)||Reflect.ownKeys(args).length!==keys.length||Reflect.ownKeys(args).some(k=>typeof k!=='string'||!keys.includes(k)))throw Error('Invalid project command arguments.');
     const copy={};for(const k of keys){const d=Object.getOwnPropertyDescriptor(args,k);if(!d?.enumerable||!Object.hasOwn(d,'value')||typeof d.value!=='string'||!d.value||d.value.length>(k==='path'?1024:256))throw Error('Provide the inspected revision and native project path.');copy[k]=d.value;}
-    if(opening&&!/\.jsketcher\.json$/i.test(copy.path))throw Error('Choose a native .jsketcher.json project.');
+    if(opening)nativeProjectFormat(copy.path);
     return opening?openProject(copy.path,{command:Object.freeze(copy)}):newProject(Object.freeze(copy));
    }));
   }
@@ -325,16 +327,15 @@ export function mount(host){
   try{
    const previous=active,prior=snapshot(previous);
    if(baseline===null||prior!==baseline){const accepted=await host.ui.confirm('Discard the unsaved model and open a different project?',{title:'Unsaved changes',confirmLabel:'Discard and open',cancelLabel:'Keep editing',danger:true,signal:token.signal});if(!accepted||!current(token))return command?Object.freeze({status:'cancelled',path:state.path}):undefined;if(!unchanged(previous,prior))throw Error('The model changed during confirmation. Try again.');}
-   const chosen=selected||await host.storage.pickFile({extensions:['.jsketcher.json'],signal:token.signal});if(!chosen||!current(token))return command?Object.freeze({status:'cancelled',path:state.path}):undefined;if(!unchanged(previous,prior))throw Error('The model changed while choosing a file. Try again.');
+   const chosen=selected||await host.storage.pickFile({extensions:nativeProjectExtensions(previous.contentWindow?.__CAD_APP?.projectManager),signal:token.signal});if(!chosen||!current(token))return command?Object.freeze({status:'cancelled',path:state.path}):undefined;if(!unchanged(previous,prior))throw Error('The model changed while choosing a file. Try again.');
    const c=await mirrorFileContext();if(!current(token)||!c.valid())return interrupted();const p=c.path(chosen);claim(token,p);file=await acquireVersionedSnapshot(c.files,p,{maximumBytes:128*1024*1024,valid:()=>current(token)&&c.valid()&&previous===active,signal:token.signal});if(!current(token)||!c.valid())return interrupted();
    if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');tell('Rebuilding the selected model…');next=createFrame(true);candidate=next;const ctx=await waitReady(next);if(!current(token)||!c.valid())return interrupted();
-   if(typeof ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace!=='function')throw Error('This CAD runtime cannot validate file snapshots in a worker.');
-   await settleScopedCommand(ctx.projectManager.restoreSnapshotBytesInEmptyWorkspace(file.data,{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)});if(!current(token)||!c.valid())return interrupted();
+   await settleScopedCommand(restoreNativeProjectFile(ctx.projectManager,p,file.data,{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)});if(!current(token)||!c.valid())return interrupted();
    const restored=snapshot(next),now=await c.files.stat(p);if(!current(token)||!c.valid())return interrupted();if(now.version!==file.version||now.status==='conflict')throw Error('The project changed while opening. Try again.');if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');
    prepared=prepareActions(ctx);watchBinding=prepareWatch(c,p,file.version);const revision=ctx.projectManager.inspectDocumentRevision(),launch=Object.freeze({version:1,storage:'mirror',path:p,owner});
    if(!unchanged(previous,prior)||!token.setDocument('mirror:'+p)||!current(token)||!c.valid())throw Error('The window or file changed.');
    const priorWatch=watch,publishedWatch=watchBinding;watch=()=>publishedWatch.dispose();watchBinding=null;baseline=restored;state.path=p;state.version=file.version;w.launchContext=launch;w.title=p.split('/').pop()+' — '+APP_NAME;retry.hidden=true;review.hidden=true;
-   active=next;candidate=null;next=null;published=true;const publishedDocumentToken=commandDocumentToken();active.classList.remove('jsketcher-staging');publishedWatch.activate();detach(previous);
+   active=next;candidate=null;next=null;published=true;if(nativeProjectFormat(p)==='cad'){nativeBackings.replace(active,file);file=null;}const publishedDocumentToken=commandDocumentToken();active.classList.remove('jsketcher-staging');publishedWatch.activate();detach(previous);
    const binding=prepared;prepared=null;installActions(binding);priorWatch();tell('Opened '+p+'.');
    return Object.freeze({status:'opened',path:p,revision,persistence:'browser',committed:true,documentToken:publishedDocumentToken});
   }catch(e){if(published)Object.defineProperty(e,'committed',{value:true,enumerable:true});tell('Could not open project: '+e.message+(initial?'':' The current model remains open.'));if(command)throw e;}finally{prepared?.cleanup();watchBinding?.dispose();file?.release();if(next)detach(next);if(candidate===next)candidate=null;token.finish();if(command&&published&&!valid())throw Object.assign(Error('The project was opened before the window or account changed.'),{committed:true});}
@@ -343,24 +344,69 @@ export function mount(host){
   if(command){const target=inspectSaveTarget();if(target.revision!==command.revision)throw Error('The model changed; inspect it before saving.');if(target.path&&Object.hasOwn(command,'path'))throw Error('Save uses the open project path.');}
   if(!valid()||!active)return;const token=begin(asCopy?'save-as':'save');if(!token)return;
   return settleCadFileExport(token,{command:!!command,tell,isCurrent:valid,label:'project',action:'save',onError:error=>{if(/review material assignments/i.test(safeFileErrorMessage(error)))review.hidden=false;}},async write=>{
-   const frame=active;let capture,content;
-   {
+   const frame=active;let capture=null,rebaseFile=null;
+   try{
+    let chosen=state.path||command?.path;
+    if(asCopy||!chosen){if(command)throw Error('An untitled project needs a My files path.');const extension=nativeProjectExtensions(frame.contentWindow?.__CAD_APP?.projectManager)[0];chosen=await host.ui.prompt('Save the project to My files:',{title:asCopy?'Save project as':'Save project',value:chosen||'/Design'+extension,confirmLabel:'Save',signal:token.signal});if(chosen===null||!current(token))return;}
+    const c=await mirrorFileContext();if(!current(token)||!c.valid()||frame!==active)return;
+    const p=c.path(chosen),format=nativeProjectFormat(p);claim(token,p);
     const manager=frame.contentWindow?.__CAD_APP?.projectManager;
-    if(command&&frame.contentWindow?.__CAD_APP?.projectManager?.inspectDocumentRevision?.()!==command.revision)throw Error('The model changed before saving; inspect it again.');
-    if(typeof manager?.prepareHostSave!=='function')throw Error('Manufacturing save validation is unavailable.');
-    capture=await settleScopedCommand(manager.prepareHostSave({signal:token.signal,valid:()=>current(token)&&frame===active}),{signal:token.signal,valid:()=>current(token)&&frame===active});
-    if(!current(token)||frame!==active)return;
-    if(!capture.isCurrent())throw Error('The model changed while preparing the save. Try again.');
-    content=JSON.stringify(supportedEnvelope(capture.envelope));
+    if(command&&manager?.inspectDocumentRevision?.()!==command.revision)throw Error('The model changed before saving; inspect it again.');
+    // ARC23: retain the EXISTING authored JSON dirty comparator as a baseline.
+    // The archive encoder itself never invokes JSON.stringify on this thread.
+    let content,saveBaseline;
+    if(format==='cad'){
+     requireNativeArchive(manager);saveBaseline=snapshot(frame);
+     capture=validateNativeArchivePreparation(await settleScopedCommand(manager.prepareHostNativeArchive({signal:token.signal,valid:()=>current(token)&&c.valid()&&frame===active}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&frame===active}));
+     if(!capture.isCurrent()||!unchanged(frame,saveBaseline))throw Error('The model changed while preparing the save. Try again.');content=capture.blob;
+    }else{
+     if(typeof manager?.prepareHostSave!=='function')throw Error('Manufacturing save validation is unavailable.');
+     capture=await settleScopedCommand(manager.prepareHostSave({signal:token.signal,valid:()=>current(token)&&c.valid()&&frame===active}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&frame===active});
+     if(!capture.isCurrent())throw Error('The model changed while preparing the save. Try again.');content=JSON.stringify(supportedEnvelope(capture.envelope));saveBaseline=content;
+    }
+    if(!current(token)||!c.valid()||frame!==active)return;
+    if(new Blob([content]).size>128*1024*1024)throw Error('Project exceeds 128 MiB.');
+    let expected=null,old;
+    try{old=await c.files.stat(p,{signal:token.signal});}catch(e){if(fileErrorData(e,'message')!=='File not found.')throw e;}
+    if(old){
+     if(old.status==='conflict')throw Error('Resolve this project conflict in Files first.');
+     if(p===state.path&&state.version){if(old.version!==state.version)throw Error('The saved project changed. Save a copy or reopen it.');}
+     else{
+      if(command)throw Error('The selected filename already exists. Choose a new filename or open that project first.');
+      if(!await host.ui.confirm('Replace '+p+'?',{title:'Replace project?',confirmLabel:'Replace',cancelLabel:'Keep existing',danger:true,signal:token.signal}))return;
+      if(!current(token)||!c.valid()||frame!==active)return;
+      const latest=await c.files.stat(p,{signal:token.signal});if(latest.status==='conflict'||latest.version!==old.version)throw Error('The project changed while confirming. Try again.');
+     }expected=old.version;
+    }else if(p===state.path&&state.version)throw Error('The saved project was removed. Save a copy or reopen it.');
+    if(!current(token)||!c.valid()||frame!==active)return;
+    if(!capture.isCurrent())throw Error('The model changed while choosing where to save. Try again.');
+    if(!token.enterLocalWrite())throw new DOMException('The modeling window closed before saving.','AbortError');
+    if(!current(token)||!c.valid()||frame!==active)throw new DOMException('The modeling window closed before saving.','AbortError');
+    write.begin();const result=write.accept(await c.files.write(p,content,expected));
+    if(!current(token)||!c.valid()||frame!==active)return;
+    if(!token.setDocument('mirror:'+p)||!current(token))throw Error('The window or file changed after saving.');
+    state.path=p;state.version=result.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — '+APP_NAME;baseline=saveBaseline;setWatch(c,p,result.version);
+    let reuseStatus=format==='cad'?'unavailable':null,rebaseVerificationBytes=0;
+    if(format==='cad'&&result.status!=='conflict'){
+     // Files' whole-Blob integrity/CAS remains authoritative. Only after this
+     // verified generation exists may the private codec rebase its span table.
+     try{
+      rebaseFile=await acquireVersionedSnapshot(c.files,p,{maximumBytes:128*1024*1024,valid:()=>current(token)&&c.valid()&&frame===active,signal:token.signal});
+      if(rebaseFile.version!==result.version)throw Error('The committed archive was replaced before reuse could be established.');
+      const rebase=await capture.rebase(rebaseFile.data,{signal:token.signal,valid:()=>current(token)&&c.valid()&&frame===active});rebaseVerificationBytes=rebase.verifiedBytes;
+      nativeBackings.replace(frame,rebaseFile);rebaseFile=null;reuseStatus='verified';
+     }catch(error){
+      // A committed file stays committed. Reuse is an optimization, never a
+      // reason to undo/overwrite that write or to adopt a foreign generation.
+      nativeBackings.close(frame);
+      if(fileErrorData(error,'code')==='WORKER_CLEANUP_FAILED')throw error;
+     }
+    }
+    const earlier=!capture.isCurrent();tell(result.status==='conflict'?'Saved on this device with a conflict. Resolve it in Files.':earlier?'Saved an earlier model on this device; newer changes remain unsaved.':'Saved on this device; syncing with the server: '+p+'.');
+    return Object.freeze({path:p,version:result.version,status:result.status,dirty:earlier,persistence:'browser',serverStatus:'not-verified',...(format==='cad'?{nativeArchive:capture.receipt,archiveReuse:reuseStatus,archiveRebaseVerificationBytes:rebaseVerificationBytes}:{})});
+   }finally{
+    try{rebaseFile?.release();}finally{await capture?.release?.();}
    }
-   if(new Blob([content]).size>128*1024*1024)throw Error('Project exceeds 128 MiB.');
-   let chosen=state.path||command?.path;if(asCopy||!chosen){if(command)throw Error('An untitled project needs a My files path.');const defaultName=chosen||'/Design.jsketcher.json';chosen=await host.ui.prompt('Save the project to My files:',{title:asCopy?'Save project as':'Save project',value:defaultName,confirmLabel:'Save',signal:token.signal});if(chosen===null||!current(token))return;}
-   const c=await mirrorFileContext();if(!current(token)||!c.valid()||frame!==active)return;const p=c.path(chosen);claim(token,p);if(!/\.jsketcher\.json$/i.test(p))throw Error('Use a .jsketcher.json filename.');let expected=null,old;
-   try{old=await c.files.stat(p);}catch(e){if(fileErrorData(e,'message')!=='File not found.')throw e;}
-   if(old){if(old.status==='conflict')throw Error('Resolve this project conflict in Files first.');if(p===state.path&&state.version){if(old.version!==state.version)throw Error('The saved project changed. Save a copy or reopen it.');}else{if(command)throw Error('The selected filename already exists. Choose a new filename or open that project first.');if(!await host.ui.confirm('Replace '+p+'?',{title:'Replace project?',confirmLabel:'Replace',cancelLabel:'Keep existing',danger:true,signal:token.signal}))return;if(!current(token)||!c.valid()||frame!==active)return;const latest=await c.files.stat(p);if(latest.status==='conflict'||latest.version!==old.version)throw Error('The project changed while confirming. Try again.');}expected=old.version;
-   }else if(p===state.path&&state.version)throw Error('The saved project was removed. Save a copy or reopen it.');
-   if(!current(token)||!c.valid()||frame!==active)return;if(!capture.isCurrent())throw Error('The model changed while choosing where to save. Try again.');if(!token.enterLocalWrite())throw new DOMException('The modeling window closed before saving.','AbortError');if(!current(token)||!c.valid()||frame!==active)throw new DOMException('The modeling window closed before saving.','AbortError');write.begin();const result=write.accept(await c.files.write(p,content,expected));if(!current(token)||!c.valid()||frame!==active)return;if(!token.setDocument('mirror:'+p)||!current(token))throw Error('The window or file changed after saving.');state.path=p;state.version=result.version;w.launchContext=Object.freeze({version:1,storage:'mirror',path:p,owner});w.title=p.split('/').pop()+' — '+APP_NAME;baseline=content;setWatch(c,p,result.version);const earlier=!capture.isCurrent();tell(result.status==='conflict'?'Saved on this device with a conflict. Resolve it in Files.':earlier?'Saved an earlier model on this device; newer changes remain unsaved.':'Saved on this device; syncing with the server: '+p+'.');
-   return Object.freeze({path:p,version:result.version,status:result.status,dirty:earlier,persistence:'browser',serverStatus:'not-verified'});
   });
  }
  // Research-only, scoped to supported assigned models. The iframe never gets
