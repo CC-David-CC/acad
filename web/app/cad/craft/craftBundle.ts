@@ -1933,6 +1933,7 @@ interface CraftService {
   applyClosedSketchPointDistance?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchPointDistance'];
   applySketchLengthRelation?: ReturnType<typeof createClosedSketchTransitionCommands>['applySketchLengthRelation'];
   applySketchConcentric?: ReturnType<typeof createClosedSketchTransitionCommands>['applySketchConcentric'];
+  editClosedSketchEllipse?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchEllipse'];
   editClosedSketchPoint?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchPoint'];
   editClosedSketchPoints?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchPoints'];
   editClosedSketchDimension?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchDimension'];

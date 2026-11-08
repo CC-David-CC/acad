@@ -648,7 +648,7 @@ export function validateProjectSketch(sketch: any) {
     // Native project admission must establish the same ordinary entity domain
     // as a genuine solve, even when an unconsumed plane never invokes one.
     // This is not constraint satisfiability or closed-profile qualification.
-    if (['Segment','Circle','Arc'].includes(type)) assertOrdinarySketchEntityDomain(type,obj.data);
+    if (['Segment','Circle','Arc','Ellipse'].includes(type)) assertOrdinarySketchEntityDomain(type,obj.data);
     const ctor = [RigidGroup, Segment, EndPoint, Arc, Circle, Ellipse, EllipticalArc, BezierCurve, BSpline].find(c => c.prototype.TYPE === type);
     if (!ctor) throw new Error('Unknown sketch object type: ' + type);
     register((ctor as any).read(obj.id, obj.data));

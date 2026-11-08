@@ -35,6 +35,10 @@ self.onmessage = async event => {
         } catch (_) {self.postMessage({revision,ok:false,error:{code:'INVALID',message:'Empty sketch could not be prepared.'}});}
         return;
       }
+      if(request.task==='sketch-transition-ellipse-parameters'||request.task==='sketch-transition-verify-ellipse-parameters'){
+        const {editEllipseParameters,verifyEllipseParameters}=require('./ellipseParameterTransition');
+        const {task,...payload}=request;self.postMessage(task==='sketch-transition-ellipse-parameters'?editEllipseParameters(payload):verifyEllipseParameters(payload));return;
+      }
       if(request.task==='sketch-transition-inspection') {
         const {inspectClosedSketchTransition}=require('./closedSketchInspection');
         const {task,...payload}=request;self.postMessage(inspectClosedSketchTransition(payload));return;

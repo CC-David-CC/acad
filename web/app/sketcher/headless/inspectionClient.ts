@@ -1,3 +1,4 @@
+import {ELLIPSE_MIN_SEMIAXIS_MM} from '../shapes/ellipseRecord.mjs';
 import {runSketchSolve, SketchSolveOptions} from './client';
 import {dimensionLocator,drivingLengthField,pointDrivingDimension,drivingPointDimensionValue,drivingDimensionObjectCount,drivingDimensionValueValid} from './drivingDimensionTarget.mjs';
 
@@ -48,7 +49,7 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
     text(error.code,64);if(typeof error.message!=='string'||error.message.length>512)return invalid();
     const output=Object.freeze({revision,ok:false,error:Object.freeze(error)});current();return output;
   }
-  const data=record(result,['revision','ok','objects','points','constraints','dimensionTargets','stageCount','boundaryFrame','emptyBoundary']);
+  const data=record(result,['revision','ok','objects','points','constraints','ellipses','dimensionTargets','stageCount','boundaryFrame','emptyBoundary']);
   if(data.revision!==revision||data.ok!==true||typeof data.emptyBoundary!=='boolean'||!Number.isSafeInteger(data.stageCount)||data.stageCount<1||data.stageCount>32)return invalid();
   const rawObjects=array(data.objects,10000),rawConstraints=array(data.constraints,10000),objects=[],constraints=[],ids=new Set();
   let characters=0,referenceCount=0;
@@ -62,6 +63,15 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
   for(let i=0;i<rawPoints.length;i++){
     const point=record(rawPoints[i],['id','parentId','x','y']);text(point.id,1024);text(point.parentId);if(!ids.has(point.parentId)||pointIds.has(point.id)||![point.x,point.y].every(n=>typeof n==='number'&&Number.isFinite(n)))return invalid();
     characters+=point.id.length+point.parentId.length;if(characters>1048576)return invalid();pointIds.add(point.id);points.push(Object.freeze(point));
+    if(i%128===127){await new Promise(resolve=>setTimeout(resolve,0));current();}
+  }
+  const rawEllipses=array(data.ellipses,10000),ellipses=[],ellipseIds=new Set(),centerIds=new Set(),byId=new Map(objects.map(o=>[o.id,o]));
+  if(rawEllipses.length!==objects.filter(o=>o.type==='Ellipse').length)return invalid();
+  for(let i=0;i<rawEllipses.length;i++){
+    const e=record(rawEllipses[i],['id','centerId','stage','role','c','rx','ry','rotationRadians','encoding','canEdit','reason']),root=byId.get(e.id),c=record(e.c,['x','y']);
+    text(e.id);text(e.centerId,1024);
+    if(!root||root.type!=='Ellipse'||root.role!==e.role||root.stage!==e.stage||ellipseIds.has(e.id)||centerIds.has(e.centerId)||ids.has(e.centerId)||pointIds.has(e.centerId)||![c.x,c.y,e.rx,e.ry,e.rotationRadians].every(n=>typeof n==='number'&&Number.isFinite(n))||e.rx<=ELLIPSE_MIN_SEMIAXIS_MM||e.ry<=ELLIPSE_MIN_SEMIAXIS_MM||!['canonical-center-axes','legacy-endpoint-axis'].includes(e.encoding)||typeof e.canEdit!=='boolean'||(e.canEdit?(e.reason!==null||e.encoding!=='canonical-center-axes'):(typeof e.reason!=='string'||!e.reason||e.reason.length>256)))return invalid();
+    characters+=e.id.length+e.centerId.length+(e.reason?.length||0);if(characters>1048576)return invalid();ellipseIds.add(e.id);centerIds.add(e.centerId);ellipses.push(Object.freeze({...e,c:Object.freeze(c)}));
     if(i%128===127){await new Promise(resolve=>setTimeout(resolve,0));current();}
   }
   const seen=new Set();
@@ -96,5 +106,5 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
   }
   const frame=record(data.boundaryFrame,['origin','x','y','z']);
   for(const key of Object.keys(frame)){const values=array(frame[key],3);if(values.length!==3||values.some(value=>typeof value!=='number'||!Number.isFinite(value)))return invalid();frame[key]=Object.freeze(values);}
-  const output=Object.freeze({revision,ok:true,objects:Object.freeze(objects),points:Object.freeze(points),constraints:Object.freeze(constraints),dimensionTargets:Object.freeze(dimensionTargets),stageCount:data.stageCount,boundaryFrame:Object.freeze(frame),emptyBoundary:data.emptyBoundary});current();return output;
+  const output=Object.freeze({revision,ok:true,objects:Object.freeze(objects),points:Object.freeze(points),constraints:Object.freeze(constraints),ellipses:Object.freeze(ellipses),dimensionTargets:Object.freeze(dimensionTargets),stageCount:data.stageCount,boundaryFrame:Object.freeze(frame),emptyBoundary:data.emptyBoundary});current();return output;
 }

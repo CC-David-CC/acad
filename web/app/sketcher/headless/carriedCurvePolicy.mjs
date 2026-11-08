@@ -1,3 +1,4 @@
+import {captureEllipseRecordData} from '../shapes/ellipseRecord.mjs';
 // Bounded preflight for the serialized curve forms already read by sketch IO.
 const record=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
 const exact=(v,keys)=>record(v)&&Object.keys(v).sort().join(',')===[...keys].sort().join(',');
@@ -10,6 +11,9 @@ export function inspectCarriedCurve(type,data){
   return [[':1','Segment'],[':1:A','Point'],[':1:B','Point'],[':2','Segment'],[':2:A','Point'],[':2:B','Point']];
  }
  if(type!=='Ellipse'&&type!=='EllipticalArc')throw Error('Unknown carried curve type.');
+ // Ordinary Ellipse shares the native Open domain; EllipticalArc keeps its
+ // existing separate endpoint/curve policy unchanged.
+ if(type==='Ellipse'){captureEllipseRecordData(data);return [[':C','Point']];}
  const arc=type==='EllipticalArc',ends=arc?['a','b']:[];let cx,cy,rx,ry,rot;
  if(Object.hasOwn(data||{},'ep1')){
   if(!exact(data,['ep1','ep2','r',...ends])||!point(data.ep1)||!point(data.ep2))bad();

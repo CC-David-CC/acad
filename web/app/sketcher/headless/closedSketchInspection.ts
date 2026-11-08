@@ -1,5 +1,6 @@
 import {replaySketchTransition} from './sketchTransition';
 import {projectRenderSketch} from './renderSketchProjection.mjs';
+import {inspectEllipseRows} from './ellipseParameterTransition';
 import {discoverDrivingDimensions} from './drivingDimensionTarget.mjs';
 
 // Reconstruct the same solver model as an edit, in a disposable Worker.
@@ -26,7 +27,7 @@ export function inspectClosedSketchTransition(request:any) {
       constants:constraint.constants||{},admission:{version:constraint.admission.version,state:constraint.admission.state}
     })));
     if(objects.length>10000||constraints.length>10000)throw Error('Sketch inspection exceeds its limit.');
-    return {revision:request.revision,ok:true,objects,points,constraints,dimensionTargets:discoverDrivingDimensions(sketch,points),stageCount:sketch.stages.length,boundaryFrame:frame,
+    return {revision:request.revision,ok:true,objects,points,constraints,ellipses:inspectEllipseRows(JSON.parse(request.sketchJSON),sketch,request.externalParameters),dimensionTargets:discoverDrivingDimensions(sketch,points),stageCount:sketch.stages.length,boundaryFrame:frame,
       emptyBoundary:['lines','arcs','circles','nurbses'].every(key=>Array.isArray(sketch.boundary?.[key])&&sketch.boundary[key].length===0)};
   } catch(error) {
     return {revision:request.revision,ok:false,error:{code:error?.code||'INSPECTION_INVALID',message:error?.message||'Sketch inspection failed.'}};

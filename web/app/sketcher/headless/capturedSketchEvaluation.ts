@@ -49,7 +49,7 @@ export function evaluateCapturedSketch(sketch:any,external:any,coldEvidence:any[
     if(newPrimitiveId){
       const root=index[newPrimitiveId];if(!root||!roots.has(root)||root.parent||root.isGenerated||root.generators.size)fail('INVALID_TARGET','The appended primitive must be independently owned.');
       const members=new Set<any>();root.traverse(o=>{if(index[o.id]!==o||members.has(o)||o.isGenerated||o.generators.size)fail('INVALID_TARGET','The appended primitive child graph is ambiguous.');members.add(o);});
-      const expected=root.TYPE==='Segment'?3:root.TYPE==='Arc'?4:root.TYPE==='Circle'?2:1;
+      const expected=root.TYPE==='Segment'?3:root.TYPE==='Arc'?4:['Circle','Ellipse'].includes(root.TYPE)?2:1;
       if(members.size!==expected)fail('INVALID_TARGET','The appended primitive has unexpected children.');
       const internal=new Set<any>();
       for(const member of members)for(const c of member.constraints){

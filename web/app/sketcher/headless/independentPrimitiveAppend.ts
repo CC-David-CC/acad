@@ -8,7 +8,7 @@ import type {CapturedAuxiliaryWitnessBatch} from './capturedParameterOwnership';
 // Private, request-local source construction. The retained source is never
 // reserialized from a solver model, and no optimizer output is copied over it.
 export function prepareIndependentPrimitiveAppend(revision:string,before:any,external:any,added:any) {
-  const suffixes=added.type==='Segment'?[':A',':B']:added.type==='Circle'?[':C']:added.type==='Arc'?[':A',':B',':C']:[];
+  const suffixes=added.type==='Segment'?[':A',':B']:['Circle','Ellipse'].includes(added.type)?[':C']:added.type==='Arc'?[':A',':B',':C']:[];
   const names=new Set([added.id,...suffixes.map(s=>added.id+s)]),pending=[before];let work=0;
   // Strict whole-source schema/reference validation also runs below. This
   // conservative full data inventory excludes hidden dimensions/labels and
