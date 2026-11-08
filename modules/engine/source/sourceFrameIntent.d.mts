@@ -1,0 +1,9 @@
+export const SOURCE_FRAME_TYPE:'SOURCE_FRAME_V1';
+export function sourceFrameFail(code:string,message:string):never;
+export function sourceFrameRecord(value:any,keys:string[],code?:string):any;
+export function sourceFrameVector(value:any,limit?:number):readonly number[];
+export function captureSourceFrame(value:any):any;
+export function captureSourceFramePlacement(value:any):any;
+export function captureSourceFrameParent(value:any):any;
+export function captureSourceFrameParameters(value:any):any;
+export function sourceFrameText(value:any):string;

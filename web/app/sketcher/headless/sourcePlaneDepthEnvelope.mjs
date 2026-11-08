@@ -1,3 +1,4 @@
+import {canonicalAuthoredFeatureId} from '../../cad/craft/authoredFeatureIdentity.mjs';
 import {captureSketchFailure} from '../constr/admissionCause.mjs';
 // Pure bounded transport/identity data. No solver, model, DOM or geometry state.
 export const SOURCE_PLANE_BYTES=65536;
@@ -13,7 +14,7 @@ export const sourcePlaneDepth=n=>typeof n==='number'&&Number.isFinite(n)&&Math.a
 export function captureSourcePlaneParameters(value){
  const p=planeRecord(value,['featureId','orientation','datum','depth']);
  const id=p.featureId;
- if(!(typeof id==='number'&&Number.isSafeInteger(id)&&id>0||typeof id==='string'&&/^[1-9][0-9]{0,14}$/.test(id)&&Number.isSafeInteger(Number(id)))||!['XY','XZ','ZY'].includes(p.orientation)||p.datum!==null||!sourcePlaneDepth(p.depth))fail('UNSUPPORTED_PLANE','Select an independent principal plane with a numeric signed depth.');
+ if(!canonicalAuthoredFeatureId(id)||!['XY','XZ','ZY'].includes(p.orientation)||p.datum!==null||!sourcePlaneDepth(p.depth))fail('UNSUPPORTED_PLANE','Select an independent principal plane with a numeric signed depth.');
  return Object.freeze(p);
 }
 export function captureSourcePlaneFrame(value,code='INVALID_REQUEST'){

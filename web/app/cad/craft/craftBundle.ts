@@ -1,3 +1,7 @@
+import {createSourceFrameCommands} from './sourceFrameCommands';
+import {captureSourceFrameJournalOperation,recordSourceFrameEdit,planSourceFrameTravel} from './authoredEditJournal.mjs';
+import {captureSourceFrameParameters} from 'engine/source/sourceFrameIntent.mjs';
+import {isSourcePlaneType,isRegisteredSourcePlane} from './sourcePlanePolicy';
 import {featureSuppressed,historyStateVersion,assertHistoryControlAppendAllowed,requireActiveFeature} from 'engine/solid/authoredHistoryState.mjs';
 import {createWorkerHistoryControlCommands} from './workerHistoryControlCommands';
 import {validateControlledHistory,assertActiveHistoryDependencies,assertProtectedHistoryOutputs,applyHistoryControlTravel} from './authoredHistoryControls.mjs';
@@ -107,6 +111,7 @@ export function activate(ctx: ApplicationContext) {
   let rewindBaseline: {document:number,signature:string} = null;
   let prepareSketchJournalTravel: Function = null;
   let sourcePlaneDepthCommands:any=null;
+  let sourceFrameCommands:ReturnType<typeof createSourceFrameCommands>=null;
   let selectedProfileSourceDimensionCommands:any=null;
   let historyControlCommands:ReturnType<typeof createWorkerHistoryControlCommands>=null;
   let legacyExpressionCommands:any = null;
@@ -424,10 +429,28 @@ export function activate(ctx: ApplicationContext) {
       // Worker awaits. Bind private replay input to the accepted authored tip.
       const captured=await captureAuthoredHistory(previous.history,checkCapture);
       checkCapture();
-      if(!sourceTip||captured.signature!==sourceTip)throw superseded();
+      const initialFrameAppend=journalIntent?.kind==='source-frame'&&journalIntent.beforeOperation===null&&!journalIntent.direction&&previous.history.length===0&&previous.pointer===-1&&models$.value.length===0&&sketchRevision(ctx.storageService,(ctx.projectService as any).sketchStorageNamespace)==='[]'&&authoredJournal$.value.entries.length===0;
+      if((!sourceTip||captured.signature!==sourceTip)&&!initialFrameAppend)throw superseded();
       const nextState = {...previous, history:captured.history};
-      let journalProposal, journalSignature, guardedPreparation=preparation;
-      if (journalIntent?.kind==='legacy-expression-source') {
+      let journalProposal, journalSignature, guardedPreparation=preparation,initialFrameJournal:any=null;
+      if(journalIntent?.kind==='source-frame'){
+        const {index,featureId,faceId,beforeOperation,afterOperation,sketches,direction}=journalIntent,service:any=ctx.projectService,storage=ctx.storageService,oldJournal=authoredJournal$.value,document=service.documentGeneration;
+        const journal=initialFrameAppend&&oldJournal.document!==document?emptyAuthoredEditJournal(document,0):oldJournal;
+        if(initialFrameAppend)initialFrameJournal=oldJournal;
+        const before=captureSourceFrameJournalOperation(beforeOperation),after=captureSourceFrameJournalOperation(afterOperation);
+        if(!Number.isSafeInteger(index)||index<0||index>255||!Number.isSafeInteger(featureId)||featureId<1||typeof faceId!=='string'||!faceId||faceId.length>256||journal.document!==document)throw Error('Invalid source-frame journal identity.');
+        if(before===null){if(index!==captured.history.length||!after||after.type!=='SOURCE_FRAME_V1'||captured.history.some(entry=>Number(entry.params.featureId)===featureId))throw Error('Source creation is not a fresh append.');}
+        else if(JSON.stringify(captureSourceFrameJournalOperation(captured.history[index]))!==JSON.stringify(before))throw superseded();
+        if(after===null){const face=ctx.cadRegistry.findFace(faceId);if(!direction||before?.type!=='SOURCE_FRAME_V1'||index!==captured.history.length-1||!(face?.root instanceof MOpenFaceShell)||face.root.originatingOperation!==index||preparation.sketchRemovedIds?.length!==1||preparation.sketchRemovedIds[0]!==faceId)throw Error('Only the exact latest source creation can be undone.');}
+        else{if(Number(after.params.featureId)!==featureId||before&&before.type!==after.type)throw Error('Source producer identity changed.');if(before?.type==='SOURCE_FRAME_V1'&&JSON.stringify(captureSourceFrameParameters(before.params).parent)!==JSON.stringify(captureSourceFrameParameters(after.params).parent))throw Error('Source frame editing cannot reparent.');if(before?.type==='PLANE'){const a=captureSourcePlaneParameters(before.params),b=captureSourcePlaneParameters(after.params);if(a.featureId!==b.featureId||a.orientation!==b.orientation||a.datum!==b.datum)throw Error('Principal source identity changed.');}}
+        if(!Array.isArray(sketches)||sketches.length>64)throw Error('Invalid source delta.');for(const row of sketches){if(ctx.sketchStorageService.getSketchData(row.faceId)!==row.before)throw superseded();if(row.after===null){if(after!==null||row.faceId!==faceId)throw Error('Foreign source removal.');}else if(!preparation.sketchOverrides?.some(item=>item.id===row.faceId&&item.data===row.after))throw Error('Source override differs from journal.');}
+        if(before===null&&!sketches.some(row=>row.faceId===faceId&&row.before===null&&typeof row.after==='string'))throw Error('Source creation needs its actual prepared empty source.');
+        if(direction){const plan=planSourceFrameTravel(journal,{document,revision:journal.revision,direction,history:captured.history,readSketch:id=>ctx.sketchStorageService.getSketchData(id)});if(plan.index!==index||plan.featureId!==featureId||JSON.stringify(plan.afterOperation)!==JSON.stringify(after)||JSON.stringify(plan.sketches)!==JSON.stringify(sketches))throw Error('Source frame travel differs from its journal.');journalProposal=plan.next;}
+        else journalProposal=recordSourceFrameEdit(journal,{document,revision:journal.revision,index,featureId,faceId,beforeOperation:before,afterOperation:after,sketches});
+        if(after===null)captured.history.pop();else if(before===null)captured.history.push(after);else captured.history[index]=after;
+        const nextCapture=await captureAuthoredHistory(captured.history,checkCapture);checkCapture();nextState.history=nextCapture.history;nextState.pointer=nextCapture.history.length-1;journalSignature=nextCapture.signature;
+        guardedPreparation={...preparation,requireCurrent(){preparation.requireCurrent();if(authoredJournal$.value!==oldJournal||ctx.projectService!==service||ctx.storageService!==storage)throw superseded();},async prepare(models,history){const workspace=await preparation.prepare(models,history);try{if((await captureAuthoredHistory(history.history,()=>guardedPreparation.requireCurrent())).signature!==journalSignature)throw superseded();return workspace;}catch(error){workspace?.discard();throw error;}}};
+      } else if (journalIntent?.kind==='legacy-expression-source') {
         const service:any=ctx.projectService,storage=ctx.storageService,journal=authoredJournal$.value,document=service.documentGeneration;
         const {beforeSource,afterSource,sketches,direction}=journalIntent;
         if(journalIntent.parameterKind!=='legacy-numeric-v1'||ctx.expressionService.isTyped||ctx.expressionService.script$.value!==beforeSource||preparation.expressionPublication?.facade?.isTyped!==false||preparation.expressionPublication.facade.script$.value!==afterSource||fullTipSketchRevision!==sketchRevision(storage,service.sketchStorageNamespace)||fullTipMaterialSurfaceRevision!==(ctx.projectManager as any).inspectMaterialSurfaceRevision()||journal.document!==document||!Array.isArray(sketches))throw Error('The legacy expression edit is stale.');
@@ -504,7 +527,7 @@ export function activate(ctx: ApplicationContext) {
         }};
       }
       pendingModifications++;
-      modificationCallbacks.set(nextState,{onAccepted,onError,preparation:guardedPreparation,journalProposal,journalSignature});
+      modificationCallbacks.set(nextState,{onAccepted,onError,preparation:guardedPreparation,journalProposal,journalSignature,...(initialFrameJournal?{initialOperationAppendJournal:initialFrameJournal}:{})});
       modifications$.next(nextState);
     } catch (error) { Promise.resolve().then(() => onError(error)); }
   }
@@ -655,6 +678,7 @@ export function activate(ctx: ApplicationContext) {
         direction:args.direction,index:target.index,featureId:target.featureId,parameters,currentSketch:ctx.sketchStorageService.getSketchData(parameters.faceId)});
       return selectedProfileSourceDimensionCommands.travelSelectedProfileSourceDimension(args,options,plan);
     }
+    if(target.kind==='source-frame'){if(!sourceFrameCommands)throw Error('Source-frame journal is unavailable.');const journal=authoredJournal$.value,plan=planSourceFrameTravel(journal,{document:(ctx.projectService as any).documentGeneration,revision:journal.revision,direction:args.direction,history:modifications$.value.history,readSketch:id=>ctx.sketchStorageService.getSketchData(id)});return sourceFrameCommands.travelSourceFrame(args,options,plan);}
     if(target.kind==='source-plane-depth'){
       if(!sourcePlaneDepthCommands)throw Error('Source-plane journal travel is unavailable.');const journal=authoredJournal$.value,entry=modifications$.value.history[target.index];if(entry?.type!=='PLANE')throw Error('Source-plane history is unavailable.');const p=captureSourcePlaneParameters(entry.params),identity={index:target.index,featureId:target.featureId,faceId:target.faceId,orientation:p.orientation};if(Number(p.featureId)!==target.featureId)throw Error('Source-plane identity changed.');const plan=planSourcePlaneDepthTravel(journal,{document:(ctx.projectService as any).documentGeneration,revision:journal.revision,direction:args.direction,identity,currentDepth:p.depth,currentSketch:ctx.sketchStorageService.getSketchData(target.faceId)});return sourcePlaneDepthCommands.travelSourcePlaneDepth(args,options,plan);
     }
@@ -1294,7 +1318,9 @@ export function activate(ctx: ApplicationContext) {
       prepareSketchJournalTravel = callback;
     });
   Object.assign(ctx.craftService, closedSketchCommands);
-  sourcePlaneDepthCommands=createSourcePlaneDepthCommands(ctx,submitPreparedReplay,epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();});
+  sourceFrameCommands=createSourceFrameCommands(ctx,submitPreparedReplay,epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();});
+  Object.assign(ctx.craftService,{inspectSourceFrames:sourceFrameCommands.inspectSourceFrames,createSourceFrame:sourceFrameCommands.createSourceFrame,editSourceFrame:sourceFrameCommands.editSourceFrame,inspectSourceFramePoints:sourceFrameCommands.inspectSourceFramePoints});
+  sourcePlaneDepthCommands=createSourcePlaneDepthCommands(ctx,submitPreparedReplay,epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();},sourceFrameCommands.editPrincipalSourceDepth);
   Object.assign(ctx.craftService,{inspectSourcePlanes:sourcePlaneDepthCommands.inspectSourcePlanes,editSourcePlaneDepth:sourcePlaneDepthCommands.editSourcePlaneDepth});
   selectedProfileSourceDimensionCommands=createSelectedProfileSourceDimensionCommands(ctx,submitPreparedReplay,epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();});
   Object.assign(ctx.craftService,{inspectSelectedProfileSourceDimensionRegions:selectedProfileSourceDimensionCommands.inspectSelectedProfileSourceDimensionRegions,
@@ -1406,7 +1432,7 @@ export function activate(ctx: ApplicationContext) {
     try {
       MObjectIdGenerator.reset();
       const models = new Set<MObject>();
-      const sketchStorage = createCandidateSketchStorage(observation?.sketchStorage||ctx.sketchStorageService, preparation?.sketchOverrides, ReadSketch);
+      const sketchStorage = createCandidateSketchStorage(observation?.sketchStorage||ctx.sketchStorageService, preparation?.sketchOverrides, ReadSketch,preparation?.sketchRemovedIds);
       const registry = ctx.cadRegistry.createEvaluationRegistry(sketchStorage);
       const sourceFrames=new Map<string,any>(),observedFrames=new Map<string,number>();
       if(preparation?.sketchSourceFrames) {
@@ -1423,7 +1449,7 @@ export function activate(ctx: ApplicationContext) {
           if(matches.length>1)throw Error('The candidate sketch plane is ambiguous.');
           if(!matches.length)continue;
           const face=matches[0],index=face.root.originatingOperation;
-          if(!(face.root instanceof MOpenFaceShell)||face.defaultSketchId!==id||registry.findFace(id)!==face||history[index]?.type!=='PLANE'||
+          if(!(face.root instanceof MOpenFaceShell)||face.defaultSketchId!==id||registry.findFace(id)!==face||!isRegisteredSourcePlane(history[index]?.type,ctx.operationService.get(history[index]?.type))||
              observedFrames.has(id)&&observedFrames.get(id)!==index||!sameSketchSaveFrame(frame,sketchBoundaryFrame(face)))throw Error('The candidate sketch source plane changed.');
           const boundary=getSketchBoundaries(face);
           if(!['lines','arcs','circles','nurbses'].every(key=>Array.isArray(boundary[key])&&boundary[key].length===0))throw Error('Referenced sketch boundaries are not supported by this edit.');
@@ -1437,6 +1463,7 @@ export function activate(ctx: ApplicationContext) {
         operationContext.requireParameterCandidateCurrent=()=>{requireCurrent(epoch,documentGeneration,service);preparation.requireCurrent();requireCurrent(epoch,documentGeneration,service);};
       }
       operationContext.engineEvaluation = resources;
+      operationContext.authoredEvaluationHistory = history;
       const patternReplay = {requestedSeed: null, seed: null};
       operationContext.patternReplay = patternReplay;
       operationContext.cadRegistry = registry;
@@ -1843,6 +1870,10 @@ export interface CraftHints {
 }
 
 interface CraftService {
+  inspectSourceFrames?:ReturnType<typeof createSourceFrameCommands>['inspectSourceFrames'];
+  createSourceFrame?:ReturnType<typeof createSourceFrameCommands>['createSourceFrame'];
+  editSourceFrame?:ReturnType<typeof createSourceFrameCommands>['editSourceFrame'];
+  inspectSourceFramePoints?:ReturnType<typeof createSourceFrameCommands>['inspectSourceFramePoints'];
   inspectWorkerHistoryControls?:ReturnType<typeof createWorkerHistoryControlCommands>['inspectWorkerHistoryControls'];
   setWorkerFeatureSuppressed?:ReturnType<typeof createWorkerHistoryControlCommands>['setWorkerFeatureSuppressed'];
   setWorkerHistoryPrefix?:ReturnType<typeof createWorkerHistoryControlCommands>['setWorkerHistoryPrefix'];

@@ -1,6 +1,8 @@
 import {featureSuppressed} from '../../../../modules/engine/solid/authoredHistoryState.mjs';
 import {isAuthoredLength,captureAuthoredHoleIntent} from '../../../../modules/engine/solid/authoredLengthBinding.mjs';
 import {sourcePlaneDepth,boundedPlaneSource,planeRecord} from '../../sketcher/headless/sourcePlaneDepthEnvelope.mjs';
+import {captureSourceFrameParameters,sourceFrameRecord,sourceFrameText} from '../../../../modules/engine/source/sourceFrameIntent.mjs';
+import {captureSourcePlaneParameters} from '../../sketcher/headless/sourcePlaneDepthEnvelope.mjs';
 import {captureOwnedLoftFeature} from '../../../../modules/engine/solid/ownedLoftFeature.mjs';
 import {captureOwnedSweepFeature} from '../../../../modules/engine/solid/ownedSweepFeature.mjs';
 // Pure bounded journal: publication and full-pipeline replay belong to craft.
@@ -14,6 +16,24 @@ import {captureLinkedPartDrawingOperationRecord} from '../../../../modules/drawi
 import {validateManufacturingMetadata} from '../projectManager/manufacturingMetadata.mjs';
 import {readManufacturingWorkerPreparation} from '../projectManager/documentMetadataPreparation.mjs';
 const LIMIT=64;
+export function captureSourceFrameJournalOperation(value){if(value===null)return null;const r=sourceFrameRecord(value,['type','params']);if(r.type!=='SOURCE_FRAME_V1'&&r.type!=='PLANE')throw Error('Only a source producer belongs in source-frame travel.');return Object.freeze({type:r.type,params:r.type==='PLANE'?captureSourcePlaneParameters(r.params):captureSourceFrameParameters(r.params)});}
+export function recordSourceFrameEdit(state,{document,revision,index,featureId,faceId,beforeOperation,afterOperation,sketches}){
+ checkCurrent(state,document,revision);checkIdentity(index,featureId);if(typeof faceId!=='string'||!faceId||faceId.length>256||!Array.isArray(sketches)||sketches.length>64||Reflect.ownKeys(sketches).length!==sketches.length+1)throw Error('Invalid source-frame delta.');
+ const before=captureSourceFrameJournalOperation(beforeOperation),after=captureSourceFrameJournalOperation(afterOperation);if(!before&&!after||before&&Number(before.params.featureId)!==featureId||after&&Number(after.params.featureId)!==featureId)throw Error('Source-frame producer identity changed.');
+ let units=0;const seen=new Set(),rows=sketches.map(value=>{const r=sourceFrameRecord(value,['faceId','before','after']);if(typeof r.faceId!=='string'||!r.faceId||r.faceId.length>256||seen.has(r.faceId))throw Error('Invalid source-frame sketch identity.');seen.add(r.faceId);for(const key of ['before','after'])if(r[key]!==null){sourceFrameText(r[key]);units+=r[key].length;}if(r.before===r.after)throw Error('Source frame journal contains a no-op source.');return Object.freeze(r);});
+ // This new finite edit family has a64KiB retained-source envelope; it does
+ // not lower existing journal/legacy source limits or charge multi-MiB on UI.
+ if(units>32768)throw Object.assign(Error('Frame source delta exceeds64KiB retained UTF16.'),{code:'RESOURCE_LIMIT'});
+ const encoder=new TextEncoder(),measure=text=>{let bytes=0;for(let at=0;at<text.length;){let end=Math.min(at+1024,text.length);if(end<text.length&&text.charCodeAt(end-1)>=0xd800&&text.charCodeAt(end-1)<=0xdbff&&text.charCodeAt(end)>=0xdc00&&text.charCodeAt(end)<=0xdfff)end--;bytes+=encoder.encode(text.slice(at,end)).byteLength;at=end;}return Math.max(text.length*2,bytes);},byteSize=512+measure(JSON.stringify({index,featureId,faceId,before,after}))+rows.reduce((n,row)=>n+128+measure(row.faceId)+(row.before===null?4:measure(row.before))+(row.after===null?4:measure(row.after)),0);
+ const entry=Object.freeze({kind:'source-frame',index,featureId,faceId,beforeOperation:before,afterOperation:after,sketches:Object.freeze(rows),byteSize}),entries=bounded([...state.entries.slice(0,state.cursor),entry]);return make(document,revision+1,entries,entries.length);
+}
+export function planSourceFrameTravel(state,{document,revision,direction,history,readSketch}){
+ checkCurrent(state,document,revision);if(!['undo','redo'].includes(direction)||typeof readSketch!=='function')throw Error('Invalid frame travel.');const undo=direction==='undo',entry=state.entries[undo?state.cursor-1:state.cursor];if(entry?.kind!=='source-frame')throw Error('No source-frame travel in this direction.');
+ const expected=entry[undo?'afterOperation':'beforeOperation'],operation=entry[undo?'beforeOperation':'afterOperation'],current=history[entry.index];
+ if(expected?JSON.stringify(captureSourceFrameJournalOperation(current))!==JSON.stringify(expected):history.length!==entry.index)throw Error('Source producer no longer matches its journal.');
+ for(const row of entry.sketches)if(readSketch(row.faceId)!==row[undo?'after':'before'])throw Error('Source bytes no longer match their frame journal.');
+ return Object.freeze({index:entry.index,featureId:entry.featureId,faceId:entry.faceId,beforeOperation:expected,afterOperation:operation,sketches:Object.freeze(entry.sketches.map(row=>Object.freeze({faceId:row.faceId,before:row[undo?'after':'before'],after:row[undo?'before':'after']}))),next:make(document,revision+1,state.entries,state.cursor+(undo?-1:1))});
+}
 // Match the worker transition's native-source bound. The aggregate retained
 // string budget below still evicts old entries; this is not an unbounded log.
 const MAX_SKETCH_BYTES=1024*1024;
@@ -25,10 +45,10 @@ function checkIdentity(index,id) { if(!integer(index,0,255)||!integer(id,1,Numbe
 function make(document,revision,entries,cursor) {return Object.freeze({document,revision,entries:Object.freeze(entries),cursor});}
 function bounded(entries) {
   entries=entries.slice(-LIMIT);
-  let bytes=entries.reduce((sum,entry)=>sum+(['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','document-metadata','feature-suppression','history-position','history-branch'].includes(entry.kind) ? entry.byteSize : 256),0);
+  let bytes=entries.reduce((sum,entry)=>sum+(['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(entry.kind) ? entry.byteSize : 256),0);
   while(bytes>MAX_JOURNAL_BYTES && entries.length>1) {
     const removed=entries.shift();
-    bytes-=['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','document-metadata','feature-suppression','history-position','history-branch'].includes(removed.kind) ? removed.byteSize : 256;
+    bytes-=['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(removed.kind) ? removed.byteSize : 256;
   }
   if(bytes>MAX_JOURNAL_BYTES)throw Error('The authored edit exceeds the undo limit.');
   return entries;

@@ -1,0 +1,6 @@
+import {captureSourceFrame,sourceFrameRecord,sourceFrameText} from '../../../../modules/engine/source/sourceFrameIntent.mjs';
+import {captureSketchFailure} from '../constr/admissionCause.mjs';
+export function captureSourceFrameReply(value,revision){
+ if(value?.ok===false){const r=sourceFrameRecord(value,['revision','ok','error'],'INVALID_RESPONSE');if(r.revision!==revision)throw Error('Source frame reply revision changed.');return Object.freeze({...r,error:captureSketchFailure(r.error)});}
+ const keys=['revision','ok','frame',...(Object.hasOwn(value||{},'serializedSketch')?['serializedSketch']:[]),...(Object.hasOwn(value||{},'points')?['points']:[])],r=sourceFrameRecord(value,keys,'INVALID_RESPONSE');if(r.revision!==revision||r.ok!==true)throw Error('Source frame reply binding changed.');r.frame=captureSourceFrame(r.frame);if(r.serializedSketch!==undefined)r.serializedSketch=sourceFrameText(r.serializedSketch);if(r.points!==undefined){if(!Array.isArray(r.points)||r.points.length<1||r.points.length>16||Reflect.ownKeys(r.points).length!==r.points.length+1)throw Error('Invalid frame point reply.');r.points=Object.freeze(r.points.map((origin)=>captureSourceFrame({origin,x:[1,0,0],y:[0,1,0],z:[0,0,1]}).origin));}return Object.freeze(r);
+}

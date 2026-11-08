@@ -16,6 +16,8 @@ export interface PreparedSketchCommand {
   readonly sketchOverrides?: ReadonlyArray<Readonly<{id: string; data: string}>>;
   // Bind saved frame metadata to the actual reconstructed source plane.
   readonly sketchSourceFrames?: ReadonlyArray<Readonly<{id:string;frame:any}>>;
+  // Static removal only for a privately verified source-producer creation Undo.
+  readonly sketchRemovedIds?: ReadonlyArray<string>;
   readonly expressionPublication?: any;
   requireCurrent(): void;
   prepare(models: any[], history: CraftHistory): Promise<PreparedWorkspaceWrites>;

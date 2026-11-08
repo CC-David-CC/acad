@@ -1,3 +1,4 @@
+import {isSourcePlaneType,isRegisteredSourcePlane} from './sourcePlanePolicy';
 import {runLengthMeasurement} from 'sketcher/headless/lengthMeasurementClient';
 import {captureLengthMeasurementIntent} from 'sketcher/headless/lengthMeasurementIntent.mjs';
 import {runSketchTransition,verifyDrivingDimensionCandidate,verifySignedDistanceCandidate,verifyPointDistanceCandidate,verifyLineRelationCandidate,verifyPointsCoordinatesCandidate,verifyPointCoordinatesCandidate,verifyPrimitiveRemovalCandidate,verifyPrimitiveAppendCandidate,verifyLengthRelationCandidate} from 'sketcher/headless/transitionClient';
@@ -87,9 +88,9 @@ export function createClosedSketchTransitionCommands(ctx:any,submitPreparedRepla
   if(references.length>1)return null;
   let planeIndex:number;
   if(face){planeIndex=face.root.originatingOperation;if(!Number.isSafeInteger(planeIndex)||planeIndex<0||planeIndex>=history.length)return null;}
-  else {if(references.length!==1||!history.some((entry:any,index:number)=>entry?.type==='PLANE'&&index<references[0]))return null;return Object.freeze({planeIndex:null,planeFeatureId:null});}
+  else {if(references.length!==1||!history.some((entry:any,index:number)=>isSourcePlaneType(entry?.type)&&index<references[0]))return null;return Object.freeze({planeIndex:null,planeFeatureId:null});}
   const plane=history[planeIndex],raw=plane?.params?.featureId,planeFeatureId=Number(raw);
-  if(plane?.type!=='PLANE'||!Number.isSafeInteger(planeFeatureId)||planeFeatureId<1||(typeof raw!=='number'&&typeof raw!=='string')||references.some((index:number)=>index<=planeIndex))return null;
+  if(!isSourcePlaneType(plane?.type)||!isRegisteredSourcePlane(plane.type,ctx.operationService.get(plane.type))||!Number.isSafeInteger(planeFeatureId)||planeFeatureId<1||(typeof raw!=='number'&&typeof raw!=='string')||references.some((index:number)=>index<=planeIndex))return null;
   return Object.freeze({planeIndex,planeFeatureId});
  }
  function inspectSketchTransitions(){

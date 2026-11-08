@@ -18,6 +18,7 @@ self.onmessage = async event => {
   try {
     if (request && Object.prototype.hasOwnProperty.call(request, 'task')) {
       if(request.task==='rectangle-dimensions-edit'){const {prepareRectangleDimensionEdit}=require('./rectangleDimensionEdit');const {task,...payload}=request;self.postMessage(await prepareRectangleDimensionEdit(payload));return;}
+      if(request.task==='source-frame-transition'){const {sourceFrameTransition}=require('./sourceFrameTransition');const {task,...payload}=request;self.postMessage(sourceFrameTransition(payload));return;}
       if(request.task==='sketch-length-measurement'||request.task==='sketch-length-measurement-verify'){const {changeLengthMeasurement,verifyLengthMeasurement}=require('./lengthMeasurementTransition');const {task,...payload}=request;self.postMessage(task==='sketch-length-measurement'?changeLengthMeasurement(payload):verifyLengthMeasurement(payload));return;}
       if(request.task==='sketch-transition-constraint-group'||request.task==='sketch-transition-verify-constraint-group'){const {changeConstraintGroup,verifyConstraintGroup}=require('./constraintGroupTransition');const {task,...payload}=request;self.postMessage(task==='sketch-transition-constraint-group'?changeConstraintGroup(payload):verifyConstraintGroup(payload));return;}
 

@@ -29,7 +29,7 @@ function paramsToPlane({ orientation, datum, depth }) {
 // Source identity belongs to the saved authored producer, not to how many
 // unrelated shells happened to be constructed earlier during this replay.
 // Read the raw ID, so evaluating an expression cannot manufacture an identity.
-function sourcePlaneShellId(raw, materializedFeatureId) {
+export function sourcePlaneShellId(raw, materializedFeatureId) {
   const descriptor = raw && typeof raw === 'object' && !Array.isArray(raw)
     ? Object.getOwnPropertyDescriptor(raw, 'featureId') : null;
   const value = descriptor && Object.prototype.hasOwnProperty.call(descriptor, 'value') ? descriptor.value : undefined;
