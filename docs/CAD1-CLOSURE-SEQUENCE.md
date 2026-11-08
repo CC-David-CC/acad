@@ -1,5 +1,21 @@
 # Gate 1: remaining work and execution sequence
 
+## Ordinary E10–E13 accepted; E11 current archive workflow qualified
+
+NEW full E11 Chrome14232 +FIRST independent actual source/Native/archive oracle
+PASS on d790011/3ce2fec55:52records/975Native point classes/four refusals/
+two actual creation travel chains/three.cad cycles. Missing fillet-creation
+removal/restoration is directly witnessed. No criterion or code repair.
+
+Root also reviewed complete existing E10/E12/E13 evidence with independent
+review: their finite plate-edit/shell/stepped-revolve contracts are Qualified.
+These three are evidence reconciliation, not new runtime executions or retagged
+historical JSON as.cad. See docs/reviews/ORDINARY-E10-E13-SIGNOFF-20261108.md.
+
+**14of21 ordinary contracts Qualified (E01–E13/E21), seven Partial
+(E14/E15/E16/E18/E19/E20/E22);22recent scoped workflows.** Broader11competencies,
+PL redundancy defect and final composed beta/G10 remain open; main unchanged.
+
 ## Latest scoped qualification — genuine consumed typed Circle R1
 
 Complete Chrome43021 and FIRST independent actual archive/source/cylinder oracle
