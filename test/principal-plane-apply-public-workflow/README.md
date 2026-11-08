@@ -1,6 +1,6 @@
 # Complete numeric principal PLANE Apply workflow
 
-SOURCE PREPARATION ONLY. No test, TSC, build, probe or browser execution. Root must first qualify Phase B full-tip attachment, compose Core ecbe789 + followups and Desktop48e91927b (root index compositionb45c8ae), review source, then build/stage exact pins. Never claim this source packet or a source helper proves Apply.
+Current finite R4 whole Chrome workflow and independent after-whole oracle PASS; see QUALIFICATION.md and evidence-r4 for exact runtime/source pins, preserved earlier failures and limits. The instructions below describe the original source-preparation contract, now executed without loosening acceptance. Broader C12 and Gate1 remain open.
 
 ONE normal signed workflow authors the actual10×6 rectangle on XY depth2, extrudes4, creates actual centered D2 through-hole, and adds a separate XZ90 source with a genuine Point. Returned/discovered source, curve, region, body and feature identities remain opaque. All writes use public registered commands or genuine form events. The passive trace is a detached read-only subscription; it never writes a model/source/wizard field.
 
