@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useRef} from 'react';
 import connect from 'ui/connect';
 import Widget from 'ui/components/Widget';
 import decoratorChain from 'ui/decoratorChain';
@@ -11,6 +11,7 @@ import ButtonGroup from 'ui/components/controls/ButtonGroup';
 import Button from 'ui/components/controls/Button';
 import {ReactApplicationContext} from "cad/dom/ReactApplicationContext";
 import {resolveAppearance} from "cad/craft/operationHelper";
+import {captureHistoryNavigation} from '../historyNavigation';
 
 function SelectedModificationInfo({ history, index,
                                     operationRegistry,
@@ -18,6 +19,7 @@ function SelectedModificationInfo({ history, index,
                                     drop, edit,
                                     close}) {
   const ctx = useContext(ReactApplicationContext);
+  const mounted=useRef(true);
   const [deleting,setDeleting]=useState(false),[deleteError,setDeleteError]=useState('');
   const deleteSelected=async()=>{
     if(deleting)return;setDeleting(true);setDeleteError('');
@@ -26,13 +28,14 @@ function SelectedModificationInfo({ history, index,
   };
 
   useEffect(() => {
-
+    mounted.current=true;
     function clickAwayHandler() {
       ctx.streams.ui.craft.modificationSelection.next(EMPTY_OBJECT);
     }
 
     ctx.domService.viewerContainer.addEventListener('click', clickAwayHandler);
     return () => {
+      mounted.current=false;
       ctx.domService.viewerContainer.removeEventListener('click', clickAwayHandler);
     }
   }, []);
@@ -62,7 +65,7 @@ function SelectedModificationInfo({ history, index,
     </div>
     <div>
       <ButtonGroup>
-        <Button onClick={edit}>✏️EDIT</Button>
+        <Button data-history-navigation='edit-selected' onClick={()=>edit(()=>mounted.current)}>✏️EDIT</Button>
         <Button type='danger' disabled={deleting} onClick={deleteSelected}>{deleting?'Deleting…':'🗑DELETE'}</Button>
       </ButtonGroup>
       {deleteError&&<p role='status'>{deleteError}</p>}
@@ -86,10 +89,15 @@ export default decoratorChain(
       await craft.deleteWorkerFeature({revision:inspection.revision,index:props.index,featureId});
       ctx.streams.ui.craft.modificationSelection.next(EMPTY_OBJECT);
     },
-    edit: () => {
-      ctx.streams.craft.modifications.update(({history}) => ({history, pointer: props.index - 1}))
-      ctx.streams.ui.craft.modificationSelection.next(EMPTY_OBJECT);
-    }
+    edit: (() => {
+      const history=props.history,entry=history[props.index],after=props.index>0?history[props.index-1]:null,
+        navigation=captureHistoryNavigation(ctx,history),selection=ctx.streams.ui.craft.modificationSelection.value;
+      return async(valid)=>{
+        if(!entry||history.indexOf(entry)!==props.index||ctx.streams.ui.craft.modificationSelection.value!==selection)return;
+        const result=await navigation(after,valid);
+        if(result.ok&&ctx.streams.ui.craft.modificationSelection.value===selection)ctx.streams.ui.craft.modificationSelection.next(EMPTY_OBJECT);
+      };
+    })()
   }))
 )(SelectedModificationInfo);
   

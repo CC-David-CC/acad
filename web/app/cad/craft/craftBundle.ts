@@ -1,3 +1,5 @@
+import {isUnjournaledLegacyHistory} from './legacyHistoryNavigation.mjs';
+import {canonicalAuthoredFeatureId} from './authoredFeatureIdentity.mjs';
 import {readHistoryReviewCancel,discardHistoryReviewDraft} from './wizard/wizardBundle';
 import type {HistoryReviewCancelCapture} from './wizard/wizardBundle';
 import {AUTHORED_SOLID_KINDS} from 'engine/solid/authoredSolidKinds.mjs';
@@ -535,6 +537,61 @@ export function activate(ctx: ApplicationContext) {
     } catch (error) { Promise.resolve().then(() => onError(error)); }
   }
 
+  // Reference-bound inner UI seam. Modern navigation delegates the SAME
+  // registered history operation; it cannot become a raw pointer fallback.
+  async function navigateHistoryPosition(history:OperationRequest[],after:OperationRequest|null,options:any={}):Promise<any>{
+    const fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
+    if(!options||typeof options!=='object'||Array.isArray(options)||Reflect.ownKeys(options).some(key=>typeof key!=='string'||!['signal','valid'].includes(key)||!Object.getOwnPropertyDescriptor(options,key)?.enumerable||!Object.hasOwn(Object.getOwnPropertyDescriptor(options,key),'value'))||options.valid!==undefined&&typeof options.valid!=='function')fail('INVALID_REQUEST','Invalid history navigation lifetime.');
+    if(options.signal!==undefined)try{HISTORY_SIGNAL_ABORTED(options.signal);}catch{fail('INVALID_REQUEST','Use a genuine cancellation signal.');}
+    if(!Array.isArray(history))fail('INVALID_REQUEST','Use the actual rendered history.');
+    const craft=ctx.craftService,project:any=ctx.projectService,manager:any=ctx.projectManager,document=project.documentGeneration,signal=project.documentSignal,
+      previous=modifications$.value,journal=authoredJournal$.value,index=after===null?-1:history.indexOf(after);
+    const alive=()=>{try{if(options.valid&&options.valid()!==true)return false;return ctx.craftService===craft&&ctx.projectService===project&&ctx.projectManager===manager&&project.hasHostLifetime&&
+      project.documentGeneration===document&&project.documentSignal===signal&&!HISTORY_SIGNAL_ABORTED(signal)&&project.isDocumentCurrent(document)&&
+      (options.signal===undefined||!HISTORY_SIGNAL_ABORTED(options.signal));}catch{return false;}};
+    if(!alive())throw superseded();
+    if(history!==previous.history||after!==null&&index<0)fail('STALE_HISTORY','Choose an entry from the current rendered history.');
+    if(!ownedPipelineHistories.has(history))fail('UNAVAILABLE','The accepted owned history is unavailable.');
+    if(!isUnjournaledLegacyHistory(history,journal,ctx.operationService)){
+      const inspection=(craft as any).inspectWorkerHistoryControls();
+      if(!alive()||modifications$.value!==previous||authoredJournal$.value!==journal)throw superseded();
+      return (craft as any).setWorkerHistoryPrefix({revision:inspection.revision,afterFeatureId:after===null?null:canonicalAuthoredFeatureId(after.params.featureId)},options);
+    }
+    // Explicit legacy empty-J exception uses normal atomic candidate replay,
+    // not the raw historyTravel mutator. It makes no authored Undo claim.
+    const storage=ctx.storageService,namespace=project.sketchStorageNamespace,stamp=sketchRevision(storage,namespace),models=models$.value,
+      epoch=evaluationEpoch,material=manager.inspectMaterialSurfaceRevision(),presentation=manager.getPresentationMetadata(),drawing=manager.getLinkedPartDrawingDefinition(),
+      operations=ctx.operationService,expressions:any=ctx.expressionService,wizard=ctx.wizardService,admission=wizard.hasActiveOperation,
+      registry=ctx.cadRegistry,sketches=ctx.sketchStorageService,counter=project.counterGenerator,counters=counter.projectCounters,highWater=counters.featureId,
+      currentStreams=()=>[craft.modifications$,craft.models$,craft.pipelineFailure$,craft.engineCleanupFailure$,expressions.script$,expressions.list$,expressions.errors$,expressions.table$,ctx.streams.sketcher.sketchingFace,wizard.workingRequest$,ctx.workbenchService.currentWorkbench$,ctx.assemblyService.constraints$],
+      streams=currentStreams(),versions=streams.map(stream=>stream.revision),scope:{epoch:number|null}={epoch:null};
+    const current=()=>{
+      if(!alive()||ctx.storageService!==storage||ctx.operationService!==operations||ctx.expressionService!==expressions||ctx.wizardService!==wizard||
+          ctx.cadRegistry!==registry||ctx.sketchStorageService!==sketches||craft.modifications$!==modifications$||craft.models$!==models$||
+          project.counterGenerator!==counter||counter.projectCounters!==counters||counters.featureId!==highWater||
+          manager.isRestoring||pendingPipelines&&scope.epoch===null||pendingModifications&&scope.epoch===null||pipelineFailure$.value||engineCleanupFailure$.value||
+          manager.unit!=='millimeter'||typeof admission!=='function'||wizard.hasActiveOperation!==admission||admission.call(wizard)!==false||ctx.services.sketcher.inPlaceEditor.inEditMode||
+          modifications$.value!==previous||models$.value!==models||authoredJournal$.value!==journal||journal.document!==document||
+          project.sketchStorageNamespace!==namespace||sketchRevision(storage,namespace)!==stamp||manager.inspectMaterialSurfaceRevision()!==material||
+          manager.getPresentationMetadata()!==presentation||manager.getLinkedPartDrawingDefinition()!==drawing||
+          evaluationEpoch!==(scope.epoch===null?epoch:scope.epoch)||currentStreams().some((stream,i)=>stream!==streams[i]||stream.revision!==versions[i])||
+          !isUnjournaledLegacyHistory(history,journal,operations))throw superseded();
+    };
+    if(craft.isProcessing||manager.isRestoring||pipelineFailure$.value||engineCleanupFailure$.value||typeof admission!=='function'||admission.call(wizard)!==false||ctx.services.sketcher.inPlaceEditor.inEditMode||ctx.assemblyService.constraints$.value.length||ctx.surfacingService?.scene?.surfaces.length)fail('UNAVAILABLE','Finish the active document operation before navigating history.');
+    current();if(index===previous.pointer)return Object.freeze({changed:false,pointer:index,authoredUndo:false,kind:'legacy-position'});
+    const state={history,pointer:index,hints:{noWizardFocus:true}},preparation:PreparedSketchCommand={candidateScope:scope,requireCurrent:current,
+      requireCommittedCurrent(){if(!alive())throw superseded(true);},async prepare(_models,next){current();if(next.pointer!==index||next.history!==history)throw superseded();return null;}};
+    let settled=false,committed=false,poll:any;const signals=[signal,options.signal].filter(Boolean),added:any[]=[],stop=()=>{if(!settled&&scope.epoch!==null&&scope.epoch===evaluationEpoch)engineResources.cancelCandidates();};
+    try{
+      for(const item of signals){HISTORY_LISTEN(item,'abort',stop,{once:true});added.push(item);if(HISTORY_SIGNAL_ABORTED(item))throw superseded();}
+      poll=setInterval(()=>{try{current();}catch{stop();}},100);current();
+      await new Promise<void>((resolve,reject)=>{pendingModifications++;modificationCallbacks.set(state,{onAccepted:resolve,onError:reject,preparation});modifications$.next(state);});committed=true;
+      if(!alive())throw superseded(true);
+      return Object.freeze({changed:true,pointer:index,authoredUndo:false,kind:'legacy-position',persistence:'volatile-workspace'});
+    }catch(error){if(committed&&!error?.committed)throw Object.assign(Error('History navigation committed; its receipt is unavailable.'),{committed:true,cause:error});throw error;}
+    finally{settled=true;clearInterval(poll);for(const item of added)HISTORY_UNLISTEN(item,'abort',stop);}
+  }
+
   // UI-only discard of an actual privately issued review draft. This does not
   // travel history, evaluate geometry, publish a model or append a journal row.
   function cancelHistoryReviewDraft(capture: HistoryReviewCancelCapture): void {
@@ -583,15 +640,7 @@ export function activate(ctx: ApplicationContext) {
       // Positive fixed historical vocabulary, not "any registered non-Worker".
       // A shared-journal entry (including a Redo tail) is never a legacy lease:
       // its domain needs its own authored travel, even for PLANE-only history.
-      const legacyTypes=['PLANE','BOX','CONE','CYLINDER','SPHERE','TORUS','EXTRUDE','REVOLVE','BOOLEAN','LOFT','SWEEP',
-        'HOLE_TOOL','FILLET_TOOL','SHELL_TOOL','SCALE_BODY','SCALE_BODY_PIVOT','MIRROR_BODY','PATTERN_LINEAR','PATTERN_CUT_LINEAR','PATTERN_RADIAL',
-        'IMPORT_MODEL','DELETE_BODY','DEFEATURE_REMOVE_FACE','WIRE_LINE','MOVE_BODY','MOVE_BODY_XYZ','ROTATE_BODY_AXIS',
-        'NATIVE_MESH_BOX','NATIVE_MESH_BOOLEAN','SUBD_BOX','SUBD_SPHERE','SUBD_CYLINDER',
-        'WORKER_RECTANGLE_EXTRUDE_V1','WORKER_CENTERED_THROUGH_HOLE_V1','WORKER_FOUR_CORNER_THROUGH_HOLES_V1'];
-      if(journal.cursor!==0||journal.entries.length!==0||history.history.length>10000||!history.history.every(entry=>{
-        const operation=ctx.operationService.get(entry.type);
-        return legacyTypes.includes(entry.type)&&!entry.suppressed&&operation?.id===entry.type&&typeof operation.run==='function';
-      }))throw refusal('UNAVAILABLE','Only an explicitly supported legacy history without shared journal entries may return directly to its tip.');
+      if(!isUnjournaledLegacyHistory(history.history,journal,ctx.operationService))throw refusal('UNAVAILABLE','Only an explicitly supported legacy history without shared journal entries may return directly to its tip.');
       requireDraft();end.call(travel);return;
     }
     // All these anchors already belong to the accepted pipeline/journal. No
@@ -1363,7 +1412,7 @@ export function activate(ctx: ApplicationContext) {
 
      modify, modifyInHistoryAndStep, beginCenteredParentRepair:(input,options)=>beginCenteredParentRepair(input,options), repairCenteredParent:(input,options)=>repairCenteredParent(input,options), reset, rebuild, runRequest, runPipeline,
     historyTravel: historyTravel(modifications$),
-    cancelHistoryReviewDraft,
+    cancelHistoryReviewDraft,navigateHistoryPosition,
     modifications$, models$, update$, pipelineFailure$, engineCleanupFailure$
   };
   Object.assign(ctx.craftService, {captureManufacturingEditContext,commitManufacturingMetadata,authoredRevolveAngleOperation,inspectAuthoredEdits, authoredDepthOperation, authoredHoleOperation, authoredSolidBoxOperation, authoredSelectedProfileDepthOperation, authoredSolidEdgeTreatmentOperation, authoredSolidShellOperation, authoredLinearHolePatternOperation, authoredThroughHoleOperation, authoredEditTravel, applyPhysicalDepth, inspectPhysicalParameters, applyPhysicalConfigurations, applyPhysicalBracket, applyPhysicalEnclosure, applyPhysicalSelectedProfile, applyPhysicalBindings});
@@ -2099,6 +2148,7 @@ interface CraftService {
 
   // Internal private-token UI seam, not a registered host authoring command.
   cancelHistoryReviewDraft(capture: HistoryReviewCancelCapture): void;
+  navigateHistoryPosition(history:OperationRequest[],after:OperationRequest|null,options?:{signal?:AbortSignal;valid?:()=>boolean}):Promise<any>;
 
   runRequest(request: OperationRequest): Promise<OperationResult>;
 

@@ -1,3 +1,4 @@
+import {captureHistoryNavigation} from '../craft/historyNavigation';
 import Vector, {AXIS, ORIGIN} from 'math/vector';
 import {RiCamera2Line} from "react-icons/ri";
 import {ViewMode} from "cad/scene/viewer";
@@ -186,15 +187,17 @@ export default [
   },
   {
     id: 'HistoryBackward',
-    invoke: ctx => ctx.services.craft.historyTravel.backward({
-      noWizardFocus: true
-    })
+    invoke: ctx => {
+      const state=ctx.craftService.modifications$.value;
+      if(state.pointer>=0)return captureHistoryNavigation(ctx,state.history)(state.pointer?state.history[state.pointer-1]:null);
+    }
   },
   {
     id: 'HistoryForward',
-    invoke: ctx => ctx.services.craft.historyTravel.forward({
-      noWizardFocus: true
-    })
+    invoke: ctx => {
+      const state=ctx.craftService.modifications$.value;
+      if(state.pointer<state.history.length-1)return captureHistoryNavigation(ctx,state.history)(state.history[state.pointer+1]);
+    }
   },
   {
     id: 'ViewMode_WIREFRAME_ON',

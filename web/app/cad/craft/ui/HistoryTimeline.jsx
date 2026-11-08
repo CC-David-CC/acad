@@ -3,7 +3,7 @@ import React from 'react';
 import ls from './HistoryTimeline.less';
 import connect from 'ui/connect';
 import decoratorChain from 'ui/decoratorChain';
-import {finishHistoryEditing, removeAndDropDependants} from '../craftHistoryUtils';
+import {captureHistoryNavigation} from '../historyNavigation';
 import mapContext from 'ui/mapContext';
 import ImgIcon from 'ui/components/ImgIcon';
 import cx from 'classnames';
@@ -21,11 +21,9 @@ import {menuAboveElementHint} from "cad/dom/menu/menuUtils";
     inProgressOperation: !!insertOperationReq,
     getOperation: type => operationRegistry[type]||EMPTY_OBJECT
   })))
-@mapContext(({streams, services}) => ({
-  remove: atIndex => streams.craft.modifications.update(modifications => removeAndDropDependants(modifications, atIndex)),
-  cancel: () => streams.craft.modifications.update(modifications => finishHistoryEditing(modifications)),
-  setHistoryPointer: pointer => streams.craft.modifications.update(({history}) => ({history, pointer})),
-  rebuild: () => services.craft.rebuild()
+@mapContext((ctx,props) => ({
+  setHistoryPointer: captureHistoryNavigation(ctx,props.history),
+  rebuild: () => ctx.services.craft.rebuild()
 }))
 export default class HistoryTimeline extends React.Component {
 
@@ -59,14 +57,14 @@ export default class HistoryTimeline extends React.Component {
           const isCurrent = () => this.mounted && this.props.history === history && this.props.history[i] === m;
           return <div key={i} className={ls.historySlot} style={{width: HISTORY_SLOT_WIDTH * (future ? 2 : 1)}}
                       data-history-index={i} aria-posinset={i + 1} aria-setsize={history.length}>
-            <Timesplitter active={i - 1 === pointer} onClick={() => setPointer(i - 1)}/>
+            <Timesplitter beforeIndex={i} active={i - 1 === pointer} onClick={() => setPointer(i - 1)}/>
             {future && <FutureItem appearance={getOperation(inProgressOperation).appearance}/>}
             <HistoryItem index={i} modification={m} getOperation={getOperation} isCurrent={isCurrent}
                          disabled={pointer < i} inProgress={!inProgressOperation && pointer === i - 1}/>
           </div>;
         })}
         <div className={ls.spacer} style={{width: range.rightWidth}} aria-hidden='true'/>
-        <Timesplitter eoh active={eof === pointer} onClick={() => setPointer(eof)}/>
+        <Timesplitter beforeIndex={history.length} eoh active={eof === pointer} onClick={() => setPointer(eof)}/>
         {inProgressOperation && eof === pointer && <FutureItem appearance={getOperation(inProgressOperation).appearance}/>}
       </div>
       <div className={ls.scroller} onClick={() => this.scrollBy(60)}><Fa icon='caret-right'/></div>
@@ -75,7 +73,8 @@ export default class HistoryTimeline extends React.Component {
   }
 
   setPointer = (history, pointer) => {
-    if (this.mounted && this.props.history === history) this.props.setHistoryPointer(pointer);
+    if (this.mounted && this.props.history === history && pointer >= -1 && pointer < history.length)
+      this.props.setHistoryPointer(pointer < 0 ? null : history[pointer], () => this.mounted);
   };
   keepRef = el => this.el = el;
   keepScroller = el => this.scroller = el;
@@ -151,10 +150,10 @@ function FutureItem({appearance}) {
 
 }
 
-function Timesplitter({active, eoh, onClick}) {
+function Timesplitter({active, eoh, onClick, beforeIndex}) {
   
   return <div className={cx(ls.timesplitter, active&&ls.active, eoh&&ls.eoh)} >
-    <div className={ls.handle} onClick={onClick}>
+    <div className={ls.handle} data-history-navigation='splitter' data-history-before-index={beforeIndex} onClick={onClick}>
       <Handle />
     </div>
   </div>;
@@ -178,13 +177,13 @@ function Controls({rebuild, history, pointer, eoh, setHistoryPointer, }) {
     <div className={cx(ls.controlBtn, !history.length&&ls.disabled)} onClick={rebuild}>
       <Fa icon='repeat' fw/>
     </div>
-    <div className={cx(ls.controlBtn, noB&&ls.disabled)} onClick={noB?undefined :() => setHistoryPointer(pointer-1)}>
+    <div data-history-navigation='backward' className={cx(ls.controlBtn, noB&&ls.disabled)} onClick={noB?undefined :() => setHistoryPointer(pointer-1)}>
       <Fa icon='step-backward' fw/>
     </div>
-    <div className={cx(ls.controlBtn, noF&&ls.disabled)} onClick={noF?undefined :() => setHistoryPointer(pointer+1)}>
+    <div data-history-navigation='forward' className={cx(ls.controlBtn, noF&&ls.disabled)} onClick={noF?undefined :() => setHistoryPointer(pointer+1)}>
       <Fa icon='step-forward' fw/>
     </div>
-    <div className={cx(ls.controlBtn, noF&&ls.disabled)} onClick={noF?undefined :() => setHistoryPointer(eoh)}>
+    <div data-history-navigation='tip' className={cx(ls.controlBtn, noF&&ls.disabled)} onClick={noF?undefined :() => setHistoryPointer(eoh)}>
       <Fa icon='fast-forward' fw/>
     </div>
   </React.Fragment>;
@@ -203,7 +202,7 @@ const HistoryItem = decoratorChain(
 function HistoryItem({index, pointer, modification, getOperation, toggle, selected, disabled, inProgress, isCurrent}) {
   const operation = getOperation(modification.type);
   const appearance = resolveAppearance(operation, modification.params);
-  return <div className={cx(ls.historyItem, selected&&ls.selected, disabled&&ls.disabled, inProgress&&ls.inProgress)}
+  return <div data-history-navigation='select-feature' data-history-entry-index={index} className={cx(ls.historyItem, selected&&ls.selected, disabled&&ls.disabled, inProgress&&ls.inProgress)}
               onClick={e => { if (isCurrent()) toggle(index, modification, e.currentTarget); }}>
     <OperationIcon appearance={appearance} />
     <span className={ls.opIndex}>{ modification.params.featureId ?? index + 1 }</span>
