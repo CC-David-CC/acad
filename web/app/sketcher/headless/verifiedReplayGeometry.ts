@@ -7,6 +7,13 @@ const count=(value:number)=>{if(value>WORK)fail('LIMIT','Verified sketch replay 
 const withoutAdmission=(s:any)=>({...s,stages:s.stages.map(stage=>({...stage,constraints:stage.constraints.map(c=>{const row={...c};delete row.admission;return row;})}))});
 const authored=(stage:any)=>stage.algNumSystem.allConstraints.filter(c=>!c.internal);
 
+function admittedHint(value:any){
+ if(!value||typeof value!=='object'||Array.isArray(value)||Reflect.ownKeys(value).length!==2)return false;
+ const version=Object.getOwnPropertyDescriptor(value,'version'),state=Object.getOwnPropertyDescriptor(value,'state');
+ return version?.enumerable&&Object.hasOwn(version,'value')&&version.value===1&&state?.enumerable&&Object.hasOwn(state,'value')&&['accepted','redundant'].includes(state.value);
+}
+
+
 // All calls occur inside production sketch Workers, after genuine solve success.
 // The support graph uses actual native model parameter identities and original
 // polynomial dependencies, never a numerical rank or a public permission flag.
@@ -82,14 +89,14 @@ function branch(a:any,b:any){
 }
 function evidence(after:any,rows:any[]){
  let at=0;if(!Array.isArray(rows)||rows.length>10000)fail('ADMISSION_CHANGED','Verified replay evidence is unavailable.');
- for(const stage of after.stages)for(const c of stage.constraints){const row=rows[at++];if(!row||row.typeId!==c.typeId||!['accepted','redundant'].includes(row.state)||c.admission?.version!==1||c.admission.state!==row.state)fail('ADMISSION_CHANGED','Serialized replay admission differs from actual solved classification.');}
+ for(const stage of after.stages)for(const c of stage.constraints){const row=rows[at++];if(!row||row.typeId!==c.typeId||!['accepted','redundant'].includes(row.state)||!admittedHint(c.admission)||c.admission.state!==row.state)fail('ADMISSION_CHANGED','Serialized replay admission differs from actual solved classification.');}
  if(at!==rows.length)fail('ADMISSION_CHANGED','Verified replay evidence membership changed.');
 }
 export function assertVerifiedReplayGeometry(before:any,after:any,rows:any[],externalParameters:any,seed?:{stage:number,index:number}){
  evidence(after,rows);
  const restored={...after,objects:after.objects.map((o,i)=>({...o,data:before.objects[i]?.data}))};
  if(!sameRestoredSketch(JSON.stringify(withoutAdmission(before)),JSON.stringify(withoutAdmission(restored))))fail('INTENT_CHANGED','Verified replay changed exact authored sketch intent.');
- for(const stage of before.stages)for(const c of stage.constraints)if(c.admission!==undefined&&(c.admission.version!==1||!['accepted','redundant'].includes(c.admission.state)))fail('ADMISSION_CHANGED','The replay source contains unadmitted constraint intent.');
+ for(const stage of before.stages)for(const c of stage.constraints)if(c.admission!==undefined&&!admittedHint(c.admission))fail('ADMISSION_CHANGED','The replay source contains unadmitted constraint intent.');
  if(sameRestoredSketch(JSON.stringify(before),JSON.stringify(after)))return true;
  compareData(before,after,support(before,externalParameters,seed),true);return true;
 }

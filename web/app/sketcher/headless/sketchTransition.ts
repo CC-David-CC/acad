@@ -49,8 +49,6 @@ export function replaySketchTransition(request:any) {
     if(!sketch||typeof sketch!=='object'||Array.isArray(sketch)||!sketch.boundary)throw fail('INVALID','A complete native sketch is required.');
     const solved=solveSketch({revision,sketch,boundary:structuredClone(sketch.boundary),externalParameters:external});
     if(!solved.ok)return solved;
-    const authored=sketch.stages.flatMap(stage=>stage.constraints);
-    if(authored.length!==solved.evidence.length||authored.some((constraint,index)=>{const hint=constraint.admission;return constraint.typeId!==solved.evidence[index].typeId||(hint!==undefined && (!hint||hint.version!==1||hint.state!==solved.evidence[index].state))}))throw fail('ADMISSION_CHANGED','The reconstructed admission differs from the saved classification.');
     const serializedSketch=JSON.stringify(solved.sketch);
     if(!boundedText(serializedSketch))throw fail('LIMIT','The solved sketch exceeds the transition limit.');
     // Keep exact authored state, constrained numerical geometry within the existing

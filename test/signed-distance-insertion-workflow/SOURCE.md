@@ -120,3 +120,27 @@ No tests, probes, type checks, build or browser were launched for this repair.
 The unchanged complete public driver is the next qualification, including both
 real endpoint locks, contradictory group edit, exact refusal preservation,
 removal of only those locks via Undo, no-op and normal native Save/Open/reedit.
+
+### Root review follow-up: final-source admission bindings
+
+The replay wrapper no longer compares an old saved accepted/redundant hint to
+fresh evidence before invoking the new contract. The verified helper still
+rejects malformed/rejected prior hints (exact own version/state fields), proves
+exact prior authored intent independently of those hints and binds every final
+serialized classification to its actual final solved evidence. No global hint
+validator or solver residual policy was relaxed.
+
+The signed receipt now takes `dimension.status` from the final solved row at the
+proven actual insertion stage/index, not the earlier incremental PM status. It
+rechecks final schema, stage, ordered IDs, exact sole numeric distance and the
+corresponding final evidence row. Existing independent original-request replay
+and transition-client receipt admission therefore receive one consistent final
+source/status pair.
+
+Seeded support reconstruction loads only `structuredClone(sketch)` into its
+private workspace. The source's row arrays, metadata, admission objects and
+geometry are not written; without-admission comparison deletes only a newly
+allocated row's hint. This applies even when the only difference is derived
+classification and the numerical fields remain exact. No test/probe/build was
+run for this review follow-up. The1e-9mm bound, global equality helper and complete
+driver remain unchanged.
