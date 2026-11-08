@@ -43,11 +43,12 @@ function declaration(sketch:any,external:any){
   const widthRows=lengths.filter(c=>c.objects.length===1&&c.objects[0]===ordered[0]),heightRows=lengths.filter(c=>c.objects.length===1&&c.objects[0]===ordered[1]);if(widthRows.length!==1||heightRows.length!==1)return null;
   const anchor=exactConstants(lock,['x','y']),x=literal(anchor.x),y=literal(anchor.y);exactConstants(widthRows[0],['length']);exactConstants(heightRows[0],['length']);
   const width=widthRows[0].resolvedConstants.length,height=heightRows[0].resolvedConstants.length;if(![width,height].every(n=>typeof n==='number'&&Number.isFinite(n)&&n>=0.001&&n<=1e6)||![x,y].every(n=>Math.abs(n)<=1e8))fail('TYPED_RECTANGLE_DOMAIN','Declared rectangle dimensions or anchor exceed the supported domain.');
-  // The prior source must genuinely occupy this declared directed branch.
-  // This uses exact equalities, not a proximity test, repair or vertex weld.
+  // Exact prior branch is ELIGIBILITY for this finite reconstruction, not
+  // a new rejection of sources the pre-existing generic solver could admit.
+  // No proximity matching, coordinate snap or vertex weld opts a source in.
   const prior=ordered.map(s=>({id:s.id,a:{x:s.a.x,y:s.a.y},b:{x:s.b.x,y:s.b.y}})),x1=prior[0].b.x,y1=prior[1].b.y,oldCorners=[[x,y],[x1,y],[x1,y1],[x,y1]];
   const badEdge=prior.findIndex((s,i)=>['x','y'].some((axis,j)=>s.a[axis]!==oldCorners[i][j]||s.b[axis]!==oldCorners[(i+1)%4][j]));
-  if(!(x1>x&&y1>y)||badEdge>=0){const at=badEdge<0?0:badEdge,s=prior[at];fail('TYPED_RECTANGLE_SOURCE_BRANCH','The actual prior rectangle is not exactly on its declared anchored axis branch: '+JSON.stringify({edge:at,id:s.id.slice(0,64),a:s.a,b:s.b,expectedA:oldCorners[at],expectedB:oldCorners[(at+1)%4]}).slice(0,384));}
+  if(!(x1>x&&y1>y)||badEdge>=0){ownership.unchanged();return null;}
   const right=x+width,top=y+height;if(![right,top].every(n=>Number.isFinite(n)&&Math.abs(n)<=1e8)||!(right>x&&top>y))fail('TYPED_RECTANGLE_DOMAIN','The declared extent cannot be represented at this anchor.');
   ownership.unchanged();return{ids:ordered.map(s=>s.id),corners:[[x,y],[right,y],[right,top],[x,top]]};
  });
