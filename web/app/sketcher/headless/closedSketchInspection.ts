@@ -4,6 +4,9 @@ import {discoverDrivingDimensions} from './drivingDimensionTarget.mjs';
 
 // Reconstruct the same solver model as an edit, in a disposable Worker.
 // Transfer only discovery data, never live objects or publication authority.
+// Coordinates below belong to the validated cold replay, not exact saved bytes.
+// Replay verification bounds reconstruction drift; inspection never publishes
+// that solved copy back into storage or changes the authored revision.
 export function inspectClosedSketchTransition(request:any) {
   const verified=replaySketchTransition(request);
   if(!verified.ok||!('serializedSketch' in verified))return verified;
