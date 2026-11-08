@@ -32,12 +32,21 @@ def digest(file):
     return h.hexdigest()
 
 catalog = json.loads((a.apps / 'apps.json').read_text())['apps']
+def bundle_directory(row):
+    bundle = row['bundleSHA256']
+    if not re.fullmatch('[a-f0-9]{64}', bundle):
+        raise SystemExit('Require a canonical builder bundle identity')
+    if row['path'] != 'assets/desktop/apps/' + row['id'] + '/' + bundle + '/index.mjs':
+        raise SystemExit('Unexpected served app entry path')
+    # The builder stores apps/<id>/<hash>; assets/desktop is a server URL mount.
+    return a.apps / 'apps' / row['id'] / bundle
+
 def app(name):
     matches = [row for row in catalog if row['id'] == name]
     if len(matches) != 1:
         raise SystemExit('Require exactly one real ' + name + ' app')
     row = matches[0]
-    if digest(a.apps / row['path']) != row['sha256']:
+    if digest(bundle_directory(row) / 'index.mjs') != row['sha256']:
         raise SystemExit('App entry bytes differ from builder manifest')
     return row
 
@@ -59,7 +68,7 @@ for key in old:
 for key, pin in inner.items():
     if key.endswith('/authoredHistoryState.mjs'):
         selected[key] = pin['sha256']
-base = (a.apps / cad['path']).parent / prefix
+base = bundle_directory(cad) / prefix
 for key, expected in selected.items():
     if not key.startswith('/') and digest(base / key) != expected:
         raise SystemExit('Actual inner fixture bytes differ: ' + key)
