@@ -57,7 +57,7 @@ export function createPrincipalPlanePlacementCommands(ctx:any,readContext:()=>an
    const next=readContext();if(!alive()||manager.isRestoring||ctx.services.sketcher.inPlaceEditor.inEditMode||services().some((v,i)=>v!==saved[i])||streams().some((s,i)=>s!==tracked[i]||s.revision!==versions[i])||
      craft.modifications$.value!==state||craft.models$.value!==models||next.state!==state||next.journal!==journal||next.signature!==context.signature||!next.ready||
      craft.evaluationEpoch!==(scope.epoch===null?epoch:scope.epoch)||project.sketchStorageNamespace!==namespace||sketchRevision(storage,namespace)!==stamp||
-     manager.inspectMaterialSurfaceRevision()!==material||manager.getLinkedPartDrawingDefinition()!==drawing||manager.getPresentationMetadata()!==presentation||manager.inspectDocumentRevision()!==documentRevision||
+     manager.inspectMaterialSurfaceRevision()!==material||manager.getLinkedPartDrawingDefinition()!==drawing||manager.getPresentationMetadata()!==presentation||scope.epoch===null&&manager.inspectDocumentRevision()!==documentRevision||
      counter!==project.counterGenerator||counter.projectCounters!==counters||counters.featureId!==highwater)throw abort();
    for(const[type,r]of opBindings){const op=operations.get(type);if(op!==r.op||op.run!==r.run||op.admitGeometry!==r.admit)throw abort();}
    const now=sketches.getAllSketches();if(now.length!==sources.size||now.some(r=>!sources.has(r.id)))throw abort();for(const[id,text]of sources){const r=sourceVersions.get(id);if(storage.versionOf(r.key)!==r.version||storage.get(r.key)!==text||sketches.getSketchData(id)!==text)throw abort();}
