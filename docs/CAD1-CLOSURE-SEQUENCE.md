@@ -97,3 +97,25 @@ Files is accepted. No filesystem race/account-security campaign, external relay,
 assembly, future physics, future CAD generations, new AI provider or human UI
 redesign is part of this sequence. No completion percentage/calendar promise is
 inferred from number of commands or isolated passing examples.
+
+## Current bounded source queues — after C12R3
+
+The most recent frozen qualification is9e7b7ea: actual Core4f5b2ca with
+Desktop18c621383. It adds real draft/Cancel recovery to the earlier Ellipse,
+frame, quantity and repair proofs; it is not an all-Gate1 composed signoff.
+The current desktop documentation checkpoint is c49be0b54. Both repositories'
+source/evidence/checklists are on example.invalid and R730; private fixture state is not
+source and is not copied into Git.
+
+| Independent lane | Approved bounded work | Latest frozen contract / serial boundary |
+|---|---|---|
+| Cubic source author/edit/read | Genuine Bezier/CV-spline ownership, native derived proof in Worker, shared commands, actual native point observations, full save/reopen workflow | `docs/reviews/SPLINE-BEZIER-SHARED-SOURCE-CONTRACT-20261108.md` + `CUBIC-CURVE-READ-AND-PLANAR-EVALUATION-20261108.md`; product source pending review. No generic point authority or BRep/tangency claim |
+| Native solid-face attachment | Protected native plane read, causal candidate-only source preparation, exact source/J publication, complete parent-edit/repair/reopen chain | `test/custom-source-frame-plan/PHASE-B-CURRENT-SOURCE-20261108.md`; source-frame replay/shared engine seams owned by this lane until its checkpoint; PhaseA proof does not qualify PhaseB |
+| Navigation and UI journal travel | Replace live raw modern timeline/selected-edit/floating/usability pointer writes; enable actual Undo/Redo at owned passive prefix; retain current guard/refusal domains | Navigation slice of `test/plane-apply-history-plan/CONTRACT.md`; source-only independent UI/Craft adapter work. No new delete/Apply capability is inferred |
+| Principal wizard Apply (serial next) | Numeric depth AND orientation, one prefix→tip authored transaction, coherent source delta and pointer-aware Undo/Redo | Same Apply contract. Wait for native-attachment shared-source checkpoint and compose with qualified Cancel. Do not implement a temporary accepted-tip hop, second J or unowned allow-wizard flag |
+
+Root alone integrates the coherent packets and runs normal builds and whole
+Chrome workflows, strictly one at a time. Preserve every failed attempt and its
+actual scope, use independent artifact analysis after the complete run, then
+update this queue/matrix. No per-change microtests, filesystem races, external
+relay, final source/runtime packaging or early completion/pause follows.
