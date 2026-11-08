@@ -51,3 +51,9 @@ late-admission seam: a facade could otherwise advertise creation and advance
 high-water before Core's final guard refused. Box/profile/hole/edge appends stay
 allowed, and every no-state path retains its prior capability. This is not new
 family support and has no asserted runtime incident or executed test.
+
+Plane identity validation uses the common canonical safe-ID helper before calling
+the older plane-parameter validator, whose string branch is narrower than the
+shared ID domain. Only that validation argument is numeric; source histories,
+parameter records and saved numeric/string spelling remain exact and unchanged.
+This avoids excluding a valid16-digit canonical string ID from history controls.

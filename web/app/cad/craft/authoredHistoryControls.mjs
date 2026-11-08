@@ -20,7 +20,9 @@ export function validateControlledHistory(history,sourceParents=null){
   const parameterKeys=Reflect.ownKeys(params.value||{});if(parameterKeys.length>32)fail('RESOURCE_LIMIT','History-control parameter headers exceed their bound.');
   const charge=value=>{sourceCharge+=typeof value==='string'?2*value.length:32;if(sourceCharge>262144)fail('RESOURCE_LIMIT','History-control source metadata exceeds256KiB.');};
   for(const key of parameterKeys){const d=Object.getOwnPropertyDescriptor(params.value,key);if(typeof key!=='string'||!d?.enumerable||!Object.hasOwn(d,'value'))fail('INVALID_HISTORY_STATE','History parameters must be own data.');charge(key);const value=d.value;if(Array.isArray(value)){if(value.length>16||Reflect.ownKeys(value).length!==value.length+1)fail('RESOURCE_LIMIT','Selection headers exceed the history-control bound.');for(let i=0;i<value.length;i++){const item=Object.getOwnPropertyDescriptor(value,String(i));if(!item?.enumerable||!Object.hasOwn(item,'value'))fail('INVALID_HISTORY_STATE','Selection lists must be dense own data.');charge(item.value);}}else charge(value);}
-  const p=type.value==='PLANE'?captureSourcePlaneParameters(params.value):captureOperationAppend(entry).params;
+  // Canonical identity is validated as a number for this older plane helper;
+  // the actual saved params/ID spelling below are never rewritten.
+  const p=type.value==='PLANE'?captureSourcePlaneParameters({...params.value,featureId:canonicalAuthoredFeatureId(Object.getOwnPropertyDescriptor(params.value,'featureId')?.value)}):captureOperationAppend(entry).params;
   const featureId=canonicalAuthoredFeatureId(p.featureId);if(indices.has(featureId))fail('DUPLICATE_FEATURE_ID','Duplicate authored producer.');indices.set(featureId,index);
   // This capability is numeric, even if a broader operation supports bindings.
   if(type.value==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'&&typeof p.depth!=='number'||type.value==='WORKER_THROUGH_HOLES_V1'&&['diameter',...(p.kind==='four-corner-through'?['offsetX','offsetY']:[])].some(k=>typeof p[k]!=='number'))fail('UNSUPPORTED_PARAMETERS','History controls require literal local dimensions.');
