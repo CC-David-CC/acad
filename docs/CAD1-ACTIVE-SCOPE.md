@@ -1,5 +1,22 @@
 # Active CAD1 acceptance scope — user revision2026-11-06
 
+## Latest scoped qualification — genuine consumed typed Circle R1
+
+Complete Chrome43021 and FIRST independent actual archive/source/cylinder oracle
+PASS on Cored7900110d3bc8e9ef0a0da5e871ea7d93a4015e5 /
+Desktop3ce2fec559b42cd1f56321bed0acd3edd914dbed.38records/305public commands/
+20observations/100Native points/7refusals/3.cad Save/server/fresh Open cycles.
+Named RadiusLength and depth formulas, literal-name aliases, mixed travel,
+refusal preservation and reedit6/7/8 all pass; no rectangle/Diameter substitute.
+Source unchanged/contexts retired. See test/typed-circle-native-workflow/
+QUALIFICATION.md and evidence-r1. Candidate branch proof, not deployment.
+
+**21recent scoped workflows;10of21 ordinary contracts Qualified/11Partial.**
+Sibling PL R1 fails redundant SignedY admission (retained3dadc33); source-only
+exact-frame repair is pending. Circle qualification does not close that case or
+all C03/C04/general Arc/typed feature history. Previously qualified main remains
+unchanged; broader11competencies/final beta/viewable release remain open.
+
 ## Latest scoped qualification — whole-entity Fix R1,2026-11-08
 
 Whole Chrome37811 and FIRST independent source/archive oracle PASS on exact
