@@ -1,5 +1,13 @@
 # CAD Modeler (JSketcher inspired)
 
+Public symmetric point coincidence is finitely qualified (Core8353d12 /
+Desktop8eac41c9e, proof6407d6b). Actual redundant transitive row, reversed-pair
+no-op, rejected conflicts, mixed Native/source travel and three .cad save/server/
+freshOpen cycles pass independent original-equation/rational-rank/archive checks.
+See examples/point-coincidence.mjs, the exact recipe used by the whole workflow.
+Moving generator-dependent components and broad human gestures remain unqualified.
+
+
 Finite two-Circle region workflow now qualified (Coref2574ea/Desktop70f096c23,
 proof ACAD235b8de): lens/both crescents, externally tangent separate bodies,
 coincident source owners and retained nested/disjoint cells; dimension/depth

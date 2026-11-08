@@ -1,5 +1,14 @@
 # Browser CAD command examples
 
+[Point coincidence recipe](point-coincidence.mjs) is the exact helper used by
+qualified whole workflow6407d6b (actual Core8353d12/Desktop8eac41c9e). Pass the
+existing document-bound agent. It authors genuine points, discovers actual IDs,
+and uses public symmetric coincidence; same/reversed duplicate preserves the
+real row, while a distinct transitive pair is actually redundant. Normal Save/
+Open remains separate. Three save/reopen cycles, Native suffix and original
+point-equation/rational-rank checks pass. No identity welding or raw source writes.
+
+
 The finite two-Circle hardcoded public path is qualified in ACAD's
 `test/circular-arrangement-workflow/desktop-driver.mjs` with its README and
 QUALIFICATION.md (proof235b8de). It uses genuine source creation and actual
