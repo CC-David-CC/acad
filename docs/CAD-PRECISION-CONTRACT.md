@@ -89,3 +89,32 @@ A100nm profile admission floor establishes lack of current subnanometer feature
 support. It does not by itself establish the coordinate accuracy of larger
 admitted geometry. Conversely, stable serialization does not establish accurate
 geometry. These claims must be reported separately, with honest unresolved cases.
+
+## Per-design precision and mixed-scale clarification — 2026-11-07
+
+The user clarified that large parts are not expected to have the same accuracy
+as the smallest photonic/defect designs. A1m model containing0.007nm detail is a
+desired mixed-scale case, not a promise of current implementation support.
+The0.001nm budget therefore applies to the relevant fine design/region; it is
+not a new uniform absolute tolerance for every large part or every display mesh.
+Declare budgets and qualified envelopes per design/part/feature/representation,
+and check interfaces between differently conditioned regions explicitly.
+
+Representation alone does not rule out the stated example. Binary64 spacing at
+1000mm (1m) is2^-43mm=1.1368683772161603e-7nm, substantially below0.007nm.
+That is representable spacing, not accumulated computational error. Ill-conditioned
+intersections, cancellation, solver stopping and kernel tolerances can lose the
+available accuracy. A fixed coordinate type cannot prove end-to-end correctness.
+
+Source references: ECMAScript Number uses IEEE754 binary64:
+https://tc39.es/ecma262/#sec-ecmascript-language-types-number-type
+GNU MPFR provides arbitrary-precision correctly rounded arithmetic:
+https://www.mpfr.org/mpfr-current/mpfr.html
+
+Higher precision is an available engineering option where necessary, with its
+actual cost measured in Workers. It must be used by the relevant calculations,
+not rounded immediately back into a double-only kernel under a misleading
+precision label. Use local conditioning/explicit frames and reliable predicates
+where appropriate; increased bit counts do not fix incorrect geometry semantics
+or an unqualified tolerance policy. Each operation still needs independent
+accuracy/validity evidence, explicit limits and truthful failure reporting.
