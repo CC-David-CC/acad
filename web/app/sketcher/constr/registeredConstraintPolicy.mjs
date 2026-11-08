@@ -12,7 +12,7 @@ const circle=o=>o?.c&&Number.isFinite(o.r?.get())&&o.r.get()>1e-9;
 export function assertRegisteredConstraintDomain(c){
  const id=c.schema.id,o=c.objects;
  if(id==='StraightSlot')assertSlotBranch(o,c.resolvedConstants.radius);
- const lines=id==='Angle'||id==='Horizontal'||id==='Vertical'?[o[0]]:['AngleBetween','Parallel','Perpendicular'].includes(id)?o:['TangentLC','TangentLineBezier'].includes(id)?[o[0]]:id==='Fillet'?o.slice(0,2):[];
+ const lines=id==='DistancePL'?[o[1]]:id==='Angle'||id==='Horizontal'||id==='Vertical'?[o[0]]:['AngleBetween','Parallel','Perpendicular'].includes(id)?o:['TangentLC','TangentLineBezier'].includes(id)?[o[0]]:id==='Fillet'?o.slice(0,2):[];
  if(lines.some(line=>!projectedDirectionValid(line)))fail();
  const circular=['RadiusLength','DiameterLength'].includes(id)?[o[0]]:['Concentric','EqualRadius'].includes(id)?o:id==='PointOnCircle'?[o[1]]:id==='TangentLC'?[o[1]]:id==='Fillet'?[o[2]]:[];
  if(circular.some(x=>!circle(x)))fail();

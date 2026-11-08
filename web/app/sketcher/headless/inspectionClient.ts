@@ -1,4 +1,6 @@
 import {captureFixedEntityInspection} from './fixedEntityReply.mjs';
+import {capturePointLineSupport} from './pointLineDistanceEnvelope.mjs';
+import {pointLineSide,pointLineConstantsValid} from '../constr/pointLineDistanceDomain.mjs';
 import {captureMirrorInspection} from './mirrorReply.mjs';
 import {captureSlotInspection} from './straightSlotReply.mjs';
 import {ELLIPSE_MIN_SEMIAXIS_MM} from '../shapes/ellipseRecord.mjs';
@@ -108,11 +110,14 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
   const targetRows=array(data.dimensionTargets,10000),dimensionTargets=[],pointsById=new Map(points.map(p=>[p.id,p]));
   if(targetRows.length!==constraints.length)return invalid();
   for(let i=0;i<targetRows.length;i++){
-    const row=record(targetRows[i],['constraintId','stage','index','typeId','objects','unit','rawValue','resolvedValue','canEdit','canRemove','reason']),c=constraints[i],refs=array(row.objects,1024),field=drivingLengthField(c.typeId);
+    const row=record(targetRows[i],['constraintId','stage','index','typeId','objects','unit','rawValue','resolvedValue','canEdit','canRemove','reason',...(constraints[i].typeId==='DistancePL'?['supportingLine']:[])]),c=constraints[i],refs=array(row.objects,1024),field=drivingLengthField(c.typeId);
     if(row.stage!==c.stage||row.index!==c.index||row.typeId!==c.typeId||refs.length!==c.objects.length||refs.some((id,j)=>id!==c.objects[j])||typeof row.canEdit!=='boolean'||row.canRemove!==row.canEdit||row.unit!==(field?'millimeter':null)||row.rawValue!==(field&&Object.prototype.hasOwnProperty.call(c.constants,field)?c.constants[field]:null))return invalid();
     if(row.canEdit){
       if(row.constraintId!==dimensionLocator(c.stage,c.index,c)||row.constraintId.length>4096||refs.length!==drivingDimensionObjectCount(c.typeId)||!drivingDimensionValueValid(c.typeId,row.resolvedValue)||row.reason!==null)return invalid();
-      if(projectedDrivingDimension(c.typeId)){
+      if(c.typeId==='DistancePL'){
+        if(refs.length!==2||!pointsById.has(refs[0])||byId.get(refs[1])?.type!=='Segment'||!pointLineConstantsValid(c.constants))return invalid();
+        row.supportingLine=capturePointLineSupport(row.supportingLine,refs[1],pointLineSide(c.constants.inverted));
+      }else if(projectedDrivingDimension(c.typeId)){
         const direction=byId.get(refs[2]),endpoints=pointsByParent.get(refs[2]);
         if(refs.length!==3||refs[0]===refs[1]||refs.slice(0,2).some(id=>typeof id!=='string'||id.length>256||!pointsById.has(id))||typeof refs[2]!=='string'||refs[2].length>256||direction?.type!=='Segment'||direction.stage>c.stage||endpoints?.length!==2||endpoints[0].id===endpoints[1].id)return invalid();
         // Original equations, live directed geometry and projection value are
@@ -123,7 +128,7 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
         if(!Object.is(row.resolvedValue,actual))return invalid();
       }else if(!ids.has(refs[0]))return invalid();
     }
-    else if(row.constraintId!==null||row.resolvedValue!==null||typeof row.reason!=='string'||row.reason.length>256)return invalid();
+    else if(row.constraintId!==null||row.resolvedValue!==null||typeof row.reason!=='string'||row.reason.length>256||c.typeId==='DistancePL'&&row.supportingLine!==null)return invalid();
     characters+=(row.constraintId?.length||0)+(row.reason?.length||0);if(characters>2097152)return invalid();
     dimensionTargets.push(Object.freeze({...row,objects:Object.freeze(refs)}));
     if(i%128===127){await new Promise(resolve=>setTimeout(resolve,0));current();}

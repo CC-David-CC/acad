@@ -1,3 +1,4 @@
+import {changePointLineDistanceDimension} from './pointLineDistanceTransition';
 import {changeProjectedDistanceDimension} from './projectedDistanceDimensionTransition';
 import {changeRadiusDimension} from './radiusTransition';
 import {HeadlessSketchWorkspace} from './workspace';
@@ -70,7 +71,7 @@ function finishGeneratedDimensionStages(workspace:any,stages:any[]){
 }
 export function changeDrivingDimension(request:any){let revision=revisionOf(request);try{
  const a=record(request,['revision','sketchJSON','externalParameters','action','intent']);if(!revision||revision.length>256)throw fail('INVALID','Invalid dimension revision.');const intent=captureDrivingDimensionIntent(a.intent,a.action),bindings=external(a.externalParameters);
- const authored=JSON.parse(bounded(a.sketchJSON)),authoredTarget=resolveDimension(authored,intent.constraintId);if(authoredTarget.typeId==='ProjectedDistance')return changeProjectedDistanceDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,action:a.action,intent});if(authoredTarget.typeId==='RadiusLength')return changeRadiusDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,intent},a.action);
+ const authored=JSON.parse(bounded(a.sketchJSON)),authoredTarget=resolveDimension(authored,intent.constraintId);if(authoredTarget.typeId==='DistancePL')return changePointLineDistanceDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,intent},a.action);if(authoredTarget.typeId==='ProjectedDistance')return changeProjectedDistanceDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,action:a.action,intent});if(authoredTarget.typeId==='RadiusLength')return changeRadiusDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,intent},a.action);
  const captured=replay(revision,a.sketchJSON,bindings),before=JSON.parse(captured.serializedSketch),row=resolveDimension(before,intent.constraintId);
  let value:any=null;if(a.action==='edit'){
   if(typeof row.rawValue==='string'&&/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(row.rawValue.trim())&&typeof intent.value==='number')throw fail('BOUND_DIMENSION','A driving dimension bound to a typed name cannot be silently replaced by a literal. Edit the parameter or submit a named binding.');

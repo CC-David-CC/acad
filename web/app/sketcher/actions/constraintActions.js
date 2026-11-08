@@ -1,3 +1,4 @@
+import {addPointLineDistance} from './pointLineDistanceOperation';
 import {addPointCoincidenceGroup} from './pointCoincidenceOperation';
 import {addRadiusBatch,inspectRadiusTargets,addRadiusByIdAtRevision} from './radiusOperation';
 import {toast} from 'react-toastify';
@@ -617,8 +618,7 @@ export default [
       constr.initConstants();
 
       editConstraint(ctx, constr, () => {
-        const pm = viewer.parametricManager;
-        pm.add(constr);
+        try{addPointLineDistance(viewer,pt,seg,constr.constants.distance,constr.constants.inverted);}catch(error){toast(error?.message||'The point-line distance could not be applied.');}
       });
     }
   },
