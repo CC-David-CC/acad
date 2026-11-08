@@ -92,6 +92,8 @@ def validate(row,build):
             near(w['signedDistance'],target)
         else:raise ValueError('Unexpected finite fixture schema '+typ)
     require(set(found)==set(wanted),'actual complete DistancePL census')
+    if row['label']=='Actual supporting-line distance2 accepts foot beyond Segment endpoint':
+        p=points[b['pointId']];dx,dy=D(z['x'])-D(a['x']),D(z['y'])-D(a['y']);require(((D(p['x'])-D(a['x']))*dx+(D(p['y'])-D(a['y']))*dy)>dx*dx+dy*dy,'actual foot outside finite Segment, still valid supporting-line positive')
     if row['expectedPoint']:
         p=objects[b['pointRoot']]['data']
         for key,want in zip(('x','y'),row['expectedPoint']):near(p[key],D(want))

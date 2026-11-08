@@ -1,7 +1,9 @@
 # DistancePL source implementation packet
 
-Approved contract93ddf8b, product based918463a; root's typed-point/travel01336986
-is a composition dependency. Source-only: no checks/tests/probes/TSC/build/browser.
+Approved contract93ddf8b; initial source base918463a, now composed on exact
+root typed-point/travel013369861fad6123520065a4e06fafac752900e8. Its private
+dimension/coordinates/travel access union and original-operation dispatcher are
+retained; PL adds no access-union kind. Source-only: no checks/tests/probes/TSC/build/browser.
 Root owns complete normal build/workflow/oracle execution. Existing proofs and
 driver files are unchanged. Preparation adds no qualification or exercise signoff.
 
@@ -59,8 +61,9 @@ verification and typed travel dispatcher; no second stack or persistent flag.
 
 New domain/admission/operation, request/reply, native support inspection and
 transition modules contain the operation. Target/inspection/typed field policy
-changes are narrow and discriminated. Global native Open/IO/schema constants
-are not rewritten. The only registered-domain addition checks the actual
+changes are narrow and discriminated. PL-free inspections do not instantiate another native workspace. PL inspection
+builds its actual native rows once per stage, avoiding per-row rescans. Global
+native Open/IO/schema constants are not rewritten. The only registered-domain addition checks the actual
 DistancePL line against the existing finite nonzero Polar/endpoints policy.
 
 Central solveWorker/client/transitionClient/coordinator/Craft imports, tasks,

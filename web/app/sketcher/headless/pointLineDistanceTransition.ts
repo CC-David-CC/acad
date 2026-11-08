@@ -39,7 +39,7 @@ function change(request:any,action:'create'|'edit'|'remove'){
   if(old){const c=rowAt(pm,stage,old.index,ids,index);c.resolveConstants(pm.constantResolver);validateConstraintGeometry(c);}
   let originalSatisfied=true;const equations=[];
   if(action!=='remove'){const proposed=new AlgNumConstraint(ConstraintDefinitions.DistancePL,[inspected.point,inspected.line],{distance:String(raw),inverted:old?oldRow.constants.inverted:inverted});proposed.resolveConstants(pm.constantResolver);try{validateConstraintGeometry(proposed);}catch(e){if(e?.code!=='RESIDUAL')throw e;originalSatisfied=false;}proposed.collectPolynomials(equations);}
-  const generated=[];for(const s of pm.stages)for(const g of s.generators)if(!g.internal)for(const o of g.generatedObjects){if(index[o.id]!==o||o.generator!==g)fail('INVALID_TARGET','Generator ownership changed.');generated.push(o.id);}
+  const generated=[];for(const s of pm.stages)for(const g of s.generators)if(!g.internal)for(const o of g.generatedObjects){if(index[o.id]!==o||o.generator!==g)fail('INVALID_TARGET','Generator ownership changed.');if(generated.length>=10000)fail('LIMIT','Generator output inventory exceeds existing sketch limits.');generated.push(o.id);}
   return{equations,value:{originalSatisfied,stage,generated}};
  },'Point-line distance');
  if(scope.selection.generated.some(id=>(scope.fields.get(id)?.size||0)>0))fail('UNSUPPORTED_TARGET','Moving a generator-dependent component is not supported by this point-line operation.');
