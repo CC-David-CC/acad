@@ -1,6 +1,6 @@
 import {isBooleanSketchField,isBooleanSketchLiteral} from '../constr/booleanSketchFields.mjs';
 // A typed dependent sketch may currently bind names only in explicitly
-// length-valued SegmentLength and DiameterLength fields. No length is exported as a scalar to
+// length-valued SegmentLength, DiameterLength and signed X/Y distance fields. No length is exported as a scalar to
 // an unannotated consumer. The numerical solve remains in the sketch Worker.
 const numeric=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/;
 const identifier=/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/;
@@ -16,9 +16,10 @@ export function prepareTypedDependentSketch(sketch,resolveLength) {
     if(typeof value==='boolean')throw Error('Unregistered sketch boolean field.');
     if(typeof value!=='string')throw Error('Invalid sketch constant.');const text=value.trim();
     if(numeric.test(text))continue;
-    const lengthField=constraint.typeId==='SegmentLength'&&name==='length'||constraint.typeId==='DiameterLength'&&name==='diameter';
+    const signedField=['SignedDistanceX','SignedDistanceY'].includes(constraint.typeId)&&name==='distance';
+    const lengthField=signedField||constraint.typeId==='SegmentLength'&&name==='length'||constraint.typeId==='DiameterLength'&&name==='diameter';
     if(!lengthField||!identifier.test(text))throw Error('Typed sketch field is not dimension-aware.');
-    const n=resolveLength(text);if(typeof n!=='number'||!Number.isFinite(n)||n<=0||n>1e6)throw Error('Typed sketch length is invalid.');external[text]=n;
+    const n=resolveLength(text);if(typeof n!=='number'||!Number.isFinite(n)||(signedField?Math.abs(n)>1e6:n<=0||n>1e6))throw Error('Typed sketch length is outside its schema domain.');external[text]=n;
    }
   }
  }

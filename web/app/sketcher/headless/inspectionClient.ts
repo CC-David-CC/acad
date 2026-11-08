@@ -1,5 +1,5 @@
 import {runSketchSolve, SketchSolveOptions} from './client';
-import {dimensionLocator,drivingLengthField} from './drivingDimensionTarget.mjs';
+import {dimensionLocator,drivingLengthField,signedDrivingDimension,drivingDimensionObjectCount,drivingDimensionValueValid} from './drivingDimensionTarget.mjs';
 
 const invalid=():never=>{throw Error('Invalid closed sketch inspection data.');};
 const cancelled=()=>new DOMException('Sketch inspection cancelled or superseded.','AbortError');
@@ -76,12 +76,19 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
     constraints.push(Object.freeze({...row,objects:Object.freeze(refs),constants:Object.freeze(constants),admission:Object.freeze(admission)}));
     if(i%128===127){await new Promise(resolve=>setTimeout(resolve,0));current();}
   }
-  const targetRows=array(data.dimensionTargets,10000),dimensionTargets=[];
+  const targetRows=array(data.dimensionTargets,10000),dimensionTargets=[],pointsById=new Map(points.map(p=>[p.id,p]));
   if(targetRows.length!==constraints.length)return invalid();
   for(let i=0;i<targetRows.length;i++){
     const row=record(targetRows[i],['constraintId','stage','index','typeId','objects','unit','rawValue','resolvedValue','canEdit','canRemove','reason']),c=constraints[i],refs=array(row.objects,1024),field=drivingLengthField(c.typeId);
     if(row.stage!==c.stage||row.index!==c.index||row.typeId!==c.typeId||refs.length!==c.objects.length||refs.some((id,j)=>id!==c.objects[j])||typeof row.canEdit!=='boolean'||row.canRemove!==row.canEdit||row.unit!==(field?'millimeter':null)||row.rawValue!==(field&&Object.prototype.hasOwnProperty.call(c.constants,field)?c.constants[field]:null))return invalid();
-    if(row.canEdit){if(row.constraintId!==dimensionLocator(c.stage,c.index,c)||row.constraintId.length>4096||refs.length!==1||!ids.has(refs[0])||typeof row.resolvedValue!=='number'||!Number.isFinite(row.resolvedValue)||row.resolvedValue<=0||row.resolvedValue>1e6||row.reason!==null)return invalid();}
+    if(row.canEdit){
+      if(row.constraintId!==dimensionLocator(c.stage,c.index,c)||row.constraintId.length>4096||refs.length!==drivingDimensionObjectCount(c.typeId)||!drivingDimensionValueValid(c.typeId,row.resolvedValue)||row.reason!==null)return invalid();
+      if(signedDrivingDimension(c.typeId)){
+        if(refs[0]===refs[1]||refs.some(id=>typeof id!=='string'||id.length>256||!pointsById.has(id)))return invalid();
+        const a=pointsById.get(refs[0]),b=pointsById.get(refs[1]),actual=c.typeId==='SignedDistanceX'?b.x-a.x:b.y-a.y;
+        if(!Object.is(row.resolvedValue,actual))return invalid();
+      }else if(!ids.has(refs[0]))return invalid();
+    }
     else if(row.constraintId!==null||row.resolvedValue!==null||typeof row.reason!=='string'||row.reason.length>256)return invalid();
     characters+=(row.constraintId?.length||0)+(row.reason?.length||0);if(characters>2097152)return invalid();
     dimensionTargets.push(Object.freeze({...row,objects:Object.freeze(refs)}));

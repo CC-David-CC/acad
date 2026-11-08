@@ -130,7 +130,7 @@ export function createClosedSketchTransitionCommands(ctx:any,submitPreparedRepla
  function dimensionParameters(source:string,resolveLength:(name:string)=>number,access?:{value?:number|string,travelSource?:string}){
   const out={...prepareTypedClosedSketchInspection(source,resolveLength)};
   if(access?.travelSource)Object.assign(out,prepareTypedClosedSketchInspection(access.travelSource,resolveLength));
-  if(typeof access?.value==='string'){const n=resolveLength(access.value);if(typeof n!=='number'||!Number.isFinite(n)||n<=0||n>1e6)throw Error('A current positive typed length is required.');out[access.value]=n;}
+  if(typeof access?.value==='string'){const n=resolveLength(access.value);if(typeof n!=='number'||!Number.isFinite(n)||Math.abs(n)>1e6)throw Error('A current bounded typed length is required. The Worker enforces its dimension schema.');out[access.value]=n;}
   if(Object.keys(out).length>1024)throw Error('Typed dimension bindings exceed limits.');return Object.freeze(out);
  }
  async function changeClosedSketchDimension(input:any,rawOptions:any,action:'edit'|'remove'){

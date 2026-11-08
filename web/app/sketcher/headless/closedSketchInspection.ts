@@ -23,7 +23,7 @@ export function inspectClosedSketchTransition(request:any) {
       constants:constraint.constants||{},admission:{version:constraint.admission.version,state:constraint.admission.state}
     })));
     if(objects.length>10000||constraints.length>10000)throw Error('Sketch inspection exceeds its limit.');
-    return {revision:request.revision,ok:true,objects,points,constraints,dimensionTargets:discoverDrivingDimensions(sketch),stageCount:sketch.stages.length,boundaryFrame:frame,
+    return {revision:request.revision,ok:true,objects,points,constraints,dimensionTargets:discoverDrivingDimensions(sketch,points),stageCount:sketch.stages.length,boundaryFrame:frame,
       emptyBoundary:['lines','arcs','circles','nurbses'].every(key=>Array.isArray(sketch.boundary?.[key])&&sketch.boundary[key].length===0)};
   } catch(error) {
     return {revision:request.revision,ok:false,error:{code:error?.code||'INSPECTION_INVALID',message:error?.message||'Sketch inspection failed.'}};
