@@ -1,5 +1,6 @@
 import {replaySketchTransition} from './sketchTransition';
 import {projectRenderSketch} from './renderSketchProjection.mjs';
+import {inspectCubicSourceRows} from './cubicCurveTransition';
 import {inspectEllipseRows} from './ellipseParameterTransition';
 import {discoverDrivingDimensions} from './drivingDimensionTarget.mjs';
 
@@ -12,7 +13,7 @@ export function inspectClosedSketchTransition(request:any) {
   const verified=replaySketchTransition(request);
   if(!verified.ok||!('serializedSketch' in verified))return verified;
   try {
-    const sketch=JSON.parse(verified.serializedSketch),frame=sketch.metadata?.boundaryFrame;
+    const original=JSON.parse(request.sketchJSON),sketch=JSON.parse(verified.serializedSketch),frame=sketch.metadata?.boundaryFrame;
     if(!frame||Object.keys(frame).sort().join(',')!=='origin,x,y,z'||
        !['origin','x','y','z'].every(key=>Array.isArray(frame[key])&&frame[key].length===3&&frame[key].every(Number.isFinite))) {
       throw Object.assign(Error('The saved sketch has no valid authored frame.'),{code:'FRAME_UNAVAILABLE'});
@@ -27,7 +28,7 @@ export function inspectClosedSketchTransition(request:any) {
       constants:constraint.constants||{},admission:{version:constraint.admission.version,state:constraint.admission.state}
     })));
     if(objects.length>10000||constraints.length>10000)throw Error('Sketch inspection exceeds its limit.');
-    return {revision:request.revision,ok:true,objects,points,constraints,ellipses:inspectEllipseRows(JSON.parse(request.sketchJSON),sketch,request.externalParameters),dimensionTargets:discoverDrivingDimensions(sketch,points),stageCount:sketch.stages.length,boundaryFrame:frame,
+    return {revision:request.revision,ok:true,objects,points,constraints,curves:inspectCubicSourceRows(original,sketch,request.externalParameters),ellipses:inspectEllipseRows(original,sketch,request.externalParameters),dimensionTargets:discoverDrivingDimensions(sketch,points),stageCount:sketch.stages.length,boundaryFrame:frame,
       emptyBoundary:['lines','arcs','circles','nurbses'].every(key=>Array.isArray(sketch.boundary?.[key])&&sketch.boundary[key].length===0)};
   } catch(error) {
     return {revision:request.revision,ok:false,error:{code:error?.code||'INSPECTION_INVALID',message:error?.message||'Sketch inspection failed.'}};

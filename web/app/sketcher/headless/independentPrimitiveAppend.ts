@@ -7,9 +7,10 @@ import type {CapturedAuxiliaryWitnessBatch} from './capturedParameterOwnership';
 
 // Private, request-local source construction. The retained source is never
 // reserialized from a solver model, and no optimizer output is copied over it.
-export function prepareIndependentPrimitiveAppend(revision:string,before:any,external:any,added:any) {
+export function prepareIndependentPrimitiveAppend(revision:string,before:any,external:any,added:any,nativeMemberIds?:string[]) {
   const suffixes=added.type==='Segment'?[':A',':B']:['Circle','Ellipse'].includes(added.type)?[':C']:added.type==='Arc'?[':A',':B',':C']:[];
-  const names=new Set([added.id,...suffixes.map(s=>added.id+s)]),pending=[before];let work=0;
+  const names=new Set(nativeMemberIds||[added.id,...suffixes.map(s=>added.id+s)]),pending=[before];
+  if(!names.has(added.id)||names.size>256)fail('INVALID_TARGET','Actual native primitive identity inventory is invalid.');let work=0;
   // Strict whole-source schema/reference validation also runs below. This
   // conservative full data inventory excludes hidden dimensions/labels and
   // generator references as well as ordinary root/child ID collisions.

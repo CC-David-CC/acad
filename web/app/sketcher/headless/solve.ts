@@ -36,7 +36,7 @@ export function solveSketch(request, onAuthoredEvidence?: (row: any) => void, on
     if (!oldBoundary) fail('INVALID','Saved sketch boundary is required.');
     // Bound spline constructors before independently rebuilding their
     // derived geometry, and never replace authored source coordinates.
-    typeIndex(sketch,oldBoundary);for(const object of sketch.objects)if(object.type==='BSpline')try{validateSplineDerivedGeometry(object.id,object.data)}catch{fail('SPLINE_GEOMETRY','B-spline derived geometry is invalid or stale.');}
+    typeIndex(sketch,oldBoundary);for(const object of sketch.objects)if(object.type==='BSpline')try{validateSplineDerivedGeometry(object.id,object.data)}catch(error){fail(error?.code==='SPLINE_RESOURCE_LIMIT'?'LIMIT':error?.code==='UNSUPPORTED_SPLINE_SOURCE'?'UNSUPPORTED':'SPLINE_GEOMETRY',typeof error?.message==='string'?error.message:'B-spline derived geometry is invalid or stale.',failureCause(error)||(error?.code==='UNSUPPORTED_SPLINE_SOURCE'?undefined:admissionCause(error?.code==='SPLINE_RESOURCE_LIMIT'?'resource-limit':error?.code==='SPLINE_DERIVED_MISMATCH'?'retained-validation-failure':error?.code==='NONFINITE_RESULT'?'nonfinite-result':'invalid-domain')));}
     // Both the old and current boundary are verified before loading. The
     // structured-cloned worker request is never shared with the caller.
     assertSemantics(sketch,oldBoundary,request.boundary);
@@ -75,7 +75,7 @@ export function solveSketch(request, onAuthoredEvidence?: (row: any) => void, on
     // Geometry can become degenerate during the solve even when the input
     // was valid. Recheck output domains before returning anything to a caller.
     typeIndex(solved,request.boundary);
-    for(const object of solved.objects)if(object.type==='BSpline')try{validateSplineDerivedGeometry(object.id,object.data)}catch{fail('SPLINE_GEOMETRY','Solved B-spline derived geometry is invalid or stale.');}
+    for(const object of solved.objects)if(object.type==='BSpline')try{validateSplineDerivedGeometry(object.id,object.data)}catch(error){fail(error?.code==='SPLINE_RESOURCE_LIMIT'?'LIMIT':error?.code==='UNSUPPORTED_SPLINE_SOURCE'?'UNSUPPORTED':'SPLINE_GEOMETRY',typeof error?.message==='string'?error.message:'Solved B-spline derived geometry is invalid or stale.',failureCause(error)||(error?.code==='UNSUPPORTED_SPLINE_SOURCE'?undefined:admissionCause(error?.code==='SPLINE_RESOURCE_LIMIT'?'resource-limit':error?.code==='SPLINE_DERIVED_MISMATCH'?'retained-validation-failure':error?.code==='NONFINITE_RESULT'?'nonfinite-result':'invalid-domain')));}
     try { inspectStageGenerators(solved); } catch { fail('GENERATOR_CHANGED','Generated geometry is inconsistent.'); }
     if(JSON.stringify(solved.stages.map(s=>s.generators))!==JSON.stringify(sketch.stages.map(s=>s.generators)))fail('INTENT_CHANGED','Generator intent changed during solving.');
     if(JSON.stringify(incomingIntent(solved))!==JSON.stringify(incomingIntent(sketch)))fail('INTENT_CHANGED','Constraint intent changed during solving.');

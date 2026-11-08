@@ -141,6 +141,12 @@ export function LUT(a, b, cp1, cp2, scale) {
 }
 
 export function compute(t, from, to, controlPoint1, controlPoint2) {
+  // Native sketch EndPoints are planar and have no z. Never rely on Vector's
+  // falsey fallback to mask undefined-z arithmetic. Explicit3D callers remain3D.
+  const points=[from,controlPoint1,controlPoint2,to];
+  if(!Number.isFinite(t)||points.some(p=>!p||![p.x,p.y].every(Number.isFinite)))throw Object.assign(Error('Bezier evaluation requires finite coordinates and parameter.'),{code:'INVALID_CURVE_COORDINATES'});
+  const planar=points.every(p=>p.z===undefined);
+  if(!planar&&points.some(p=>!Number.isFinite(p.z)))throw Object.assign(Error('Bezier coordinate encoding must be entirely planar or finite3D.'),{code:'UNSUPPORTED_CURVE_COORDINATES'});
   const mt = 1 - t;
   const mt2 = mt * mt;
   const t2 = t * t;
@@ -153,9 +159,8 @@ export function compute(t, from, to, controlPoint1, controlPoint2) {
   const p3 = to;
   const p1 = controlPoint1;
   const p2 = controlPoint2;
-  return new Vector(
-    a * p0.x + b * p1.x + c * p2.x + d * p3.x,
-    a * p0.y + b * p1.y + c * p2.y + d * p3.y,
-    a * p0.z + b * p1.z + c * p2.z + d * p3.z
-  );
+  const x=a*p0.x+b*p1.x+c*p2.x+d*p3.x,y=a*p0.y+b*p1.y+c*p2.y+d*p3.y,
+    z=planar?0:a*p0.z+b*p1.z+c*p2.z+d*p3.z;
+  if(![x,y,z].every(Number.isFinite))throw Object.assign(Error('Bezier evaluation produced a nonfinite coordinate.'),{code:'NONFINITE_RESULT'});
+  return new Vector(x,y,z);
 }

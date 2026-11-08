@@ -1,15 +1,26 @@
 import {PHYSICAL_COORDINATE_RECONSTRUCTION_BUDGET_MM,isPhysicalSketchCoordinate} from './physicalCoordinateReconstruction.mjs';
+import {inspectBoundedSpline,splineSourceError} from './splinePolicy.mjs';
+import {admissionCause,withAdmissionCause,failureCause} from '../constr/admissionCause.mjs';
 import {BSpline} from '../shapes/b-spline';
 import {Generator} from '../id-generator';
-// Independently rebuild rendering-derived data in this disposable Worker.
-// Reuse the input's private EndPoints so validation never fabricates new IDs.
-// Source is never modified; any mismatch or unsupported mode is a refusal.
-export function validateSplineDerivedGeometry(id:string, data:any):void {
+// Worker-only actual rebuild. Unknown native inability is unavailable proof,
+// never automatically a mathematical domain failure or an infeasibility proof.
+export function validateSplineDerivedGeometry(id:string,data:any):void {
+ inspectBoundedSpline(id,data);
  Generator.withReservedIds(0,()=>{
-  const curve:any=BSpline.read(id,structuredClone(data));
-  if(curve.bSplineInterpolation.interpolation){curve.bSplineInterpolation.cPoints=curve.cPoints;curve.update(curve.type,curve.method)}
-  else if(curve.bSplineControlVertices.CVModel)curve.cvUpdate(curve.type,curve.method);
-  const actual=curve.write(), todo:any[]=[[data,actual,[]]];let count=0;
-  while(todo.length){const [a,b,path]=todo.pop();if(++count>8192)throw Error('Spline validation exceeds limits.');if(typeof a==='number'||typeof b==='number'){if(typeof a!=='number'||typeof b!=='number'||!Number.isFinite(a)||!Number.isFinite(b)||Math.abs(a-b)>(isPhysicalSketchCoordinate('BSpline',path)?PHYSICAL_COORDINATE_RECONSTRUCTION_BUDGET_MM:1e-9))throw Error('Spline derived geometry differs.');continue}if(a===null||b===null||typeof a!=='object'||typeof b!=='object'){if(a!==b)throw Error('Spline authored data differs.');continue}if(Array.isArray(a)!==Array.isArray(b))throw Error('Spline authored data differs.');const ak=Object.keys(a).sort(),bk=Object.keys(b).sort();if(ak.length!==bk.length||ak.some((key,i)=>key!==bk[i]))throw Error('Spline authored data differs.');for(const key of ak)todo.push([a[key],b[key],[...path,key]])}
+  let actual:any;
+  try{const curve:any=BSpline.read(id,structuredClone(data));if(curve.bSplineInterpolation.interpolation){curve.bSplineInterpolation.cPoints=curve.cPoints;curve.update(curve.type,curve.method);}else if(curve.bSplineControlVertices.CVModel)curve.cvUpdate(curve.type,curve.method);actual=curve.write();}
+  catch(error){if(failureCause(error)||['SPLINE_RESOURCE_LIMIT','UNSUPPORTED_SPLINE_SOURCE','SPLINE_DOMAIN','INVALID_SPLINE_DATA','NONFINITE_RESULT'].includes(error?.code))throw error;throw splineSourceError('UNSUPPORTED_SPLINE_SOURCE','Actual bounded native spline rebuild could not establish a source proof.');}
+  const mismatch=()=>{throw withAdmissionCause(splineSourceError('SPLINE_DERIVED_MISMATCH','Saved spline data differs from its actual bounded native rebuild.'),admissionCause('retained-validation-failure'));};
+  const todo:any[]=[[data,actual,[]]];let count=0;
+  while(todo.length){const [a,b,path]=todo.pop();if(++count>8192)throw withAdmissionCause(splineSourceError('SPLINE_RESOURCE_LIMIT','Spline validation exceeds its existing work limit.'),admissionCause('resource-limit'));
+   if(typeof a==='number'||typeof b==='number'){
+    if(typeof b!=='number'||!Number.isFinite(b))throw withAdmissionCause(splineSourceError('NONFINITE_RESULT','Actual native spline rebuild produced a nonfinite numeric field.'),admissionCause('nonfinite-result'));
+    if(typeof a!=='number'||!Number.isFinite(a))throw withAdmissionCause(splineSourceError('INVALID_SPLINE_DATA','Saved spline contains an invalid numeric field.'),admissionCause('invalid-domain'));
+    if(Math.abs(a-b)>(isPhysicalSketchCoordinate('BSpline',path)?PHYSICAL_COORDINATE_RECONSTRUCTION_BUDGET_MM:1e-9))mismatch();continue;
+   }
+   if(a===null||b===null||typeof a!=='object'||typeof b!=='object'){if(a!==b)mismatch();continue;}
+   if(Array.isArray(a)!==Array.isArray(b))mismatch();const ak=Object.keys(a).sort(),bk=Object.keys(b).sort();if(ak.length!==bk.length||ak.some((key,i)=>key!==bk[i]))mismatch();for(const key of ak)todo.push([a[key],b[key],[...path,key]]);
+  }
  });
 }

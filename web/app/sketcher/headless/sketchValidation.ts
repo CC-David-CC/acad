@@ -75,7 +75,7 @@ export function typeIndex(sketch, boundary) {
     add(object.id, object.type);
     const d=object.data;
     if (!record(d)) fail('INVALID','Invalid sketch geometry.');
-    if(object.type==='BSpline'){let spline;try{spline=inspectBoundedSpline(object.id,d)}catch{fail('INVALID','Invalid or excessive B-spline geometry.')}splineWork+=spline.work;if(splineWork>SPLINE_WORK_LIMIT)fail('LIMIT','B-spline sampling exceeds limits.');for(const child of spline.childRefs)add(child.id,child.type);}
+    if(object.type==='BSpline'){let spline;try{spline=inspectBoundedSpline(object.id,d)}catch(error){fail(error?.code==='SPLINE_RESOURCE_LIMIT'?'LIMIT':error?.code==='UNSUPPORTED_SPLINE_SOURCE'?'UNSUPPORTED':'INVALID',typeof error?.message==='string'?error.message:'Invalid B-spline source.',error?.code==='UNSUPPORTED_SPLINE_SOURCE'?undefined:admissionCause(error?.code==='SPLINE_RESOURCE_LIMIT'?'resource-limit':'invalid-domain'));}splineWork+=spline.work;if(splineWork>SPLINE_WORK_LIMIT)fail('LIMIT','B-spline sampling exceeds limits.');for(const child of spline.childRefs)add(child.id,child.type);}
     if (object.type === 'Segment' && (!only(d,['a','b']) || !pointRecord(d.a) || !pointRecord(d.b) || !ordinarySketchEntityDomainValid('Segment',d))) fail('INVALID','Degenerate sketch segment.',admissionCause('invalid-domain'));
     if (object.type === 'Circle' && (!only(d,['c','r']) || !pointRecord(d.c) || !ordinarySketchEntityDomainValid('Circle',d))) fail('INVALID','Degenerate sketch circle.',admissionCause('invalid-domain'));
     if (object.type === 'Arc' && (!only(d,['a','b','c']) || !pointRecord(d.a) || !pointRecord(d.b) || !pointRecord(d.c) || !ordinarySketchEntityDomainValid('Arc',d))) fail('INVALID','Degenerate sketch arc.',admissionCause('invalid-domain'));

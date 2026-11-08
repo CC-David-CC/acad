@@ -1,3 +1,4 @@
+import {validateSplineDerivedGeometry} from 'sketcher/headless/splineDerivedValidation';
 import {captureSourceFrameParameters} from 'engine/source/sourceFrameIntent.mjs';
 import {validateProjectSourceFrames} from 'sketcher/headless/sourceFrameValidation';
 import {decodeProjectEnvelope, validateProjectTree} from './projectEnvelope.mjs';
@@ -42,6 +43,9 @@ export function preflight(value, parameterState?: {source?: string, result?: any
     // Includes ordinary entity-domain admission before source can be staged.
     // Constraint regeneration and derived profile/kernel results are separate.
     validateProjectSketch(data);
+    // Worker-only native derived/provenance proof before Open adoption. Main
+    // legacy preflight remains bounded structure/domain only.
+    for(const object of data.objects)if(object.type==='BSpline')validateSplineDerivedGeometry(object.id,object.data);
     if (data.constants !== undefined && parseMathDefinitions(data.constants).errors.length) throw new Error('A sketch contains invalid constants');
   }
   validateProjectSourceFrames(project);

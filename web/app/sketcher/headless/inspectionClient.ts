@@ -49,7 +49,7 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
     text(error.code,64);if(typeof error.message!=='string'||error.message.length>512)return invalid();
     const output=Object.freeze({revision,ok:false,error:Object.freeze(error)});current();return output;
   }
-  const data=record(result,['revision','ok','objects','points','constraints','ellipses','dimensionTargets','stageCount','boundaryFrame','emptyBoundary']);
+  const data=record(result,['revision','ok','objects','points','constraints','curves','ellipses','dimensionTargets','stageCount','boundaryFrame','emptyBoundary']);
   if(data.revision!==revision||data.ok!==true||typeof data.emptyBoundary!=='boolean'||!Number.isSafeInteger(data.stageCount)||data.stageCount<1||data.stageCount>32)return invalid();
   const rawObjects=array(data.objects,10000),rawConstraints=array(data.constraints,10000),objects=[],constraints=[],ids=new Set();
   let characters=0,referenceCount=0;
@@ -64,6 +64,22 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
     const point=record(rawPoints[i],['id','parentId','x','y']);text(point.id,1024);text(point.parentId);if(!ids.has(point.parentId)||pointIds.has(point.id)||![point.x,point.y].every(n=>typeof n==='number'&&Number.isFinite(n)))return invalid();
     characters+=point.id.length+point.parentId.length;if(characters>1048576)return invalid();pointIds.add(point.id);points.push(Object.freeze(point));
     if(i%128===127){await new Promise(resolve=>setTimeout(resolve,0));current();}
+  }
+  const rawCurves=array(data.curves,10000),curves=[],curveRoots=objects.filter(o=>['BezierCurve','BSpline'].includes(o.type)),curvePointIds=new Set();
+  if(rawCurves.length!==curveRoots.length)return invalid();
+  for(let i=0;i<rawCurves.length;i++){
+    const c=record(rawCurves[i],['id','type','stage','role','representation','controls','derived','spline','canEdit','canEvaluate','reason']),root=curveRoots[i];
+    if(c.id!==root.id||c.type!==root.type||c.stage!==root.stage||c.role!==root.role||typeof c.canEdit!=='boolean'||c.canEvaluate!==c.canEdit)return invalid();
+    const rawControls=array(c.controls,64),rawDerived=array(c.derived,64),controls=[],derived=[];
+    if(c.canEdit){
+      if(c.reason!==null||c.representation!==(c.type==='BezierCurve'?'canonical-cubic-bezier':'cubic-clamped-cv-quasi-uniform')||rawControls.length<(c.type==='BezierCurve'?4:4)||c.type==='BezierCurve'&&rawControls.length!==4)return invalid();
+    }else if(c.representation!=='unsupported-source-mode'||typeof c.reason!=='string'||!c.reason||c.reason.length>256||rawControls.length||rawDerived.length||c.spline!==null)return invalid();
+    for(const p of rawControls){const v=record(p,['pointId','x','y']);text(v.pointId,1024);if(ids.has(v.pointId)||pointIds.has(v.pointId)||curvePointIds.has(v.pointId)||![v.x,v.y].every(n=>typeof n==='number'&&Number.isFinite(n)))return invalid();curvePointIds.add(v.pointId);characters+=v.pointId.length;controls.push(Object.freeze(v));}
+    for(const p of rawDerived){const v=record(p,['pointId','x','y','role','editable']);text(v.pointId,1024);if(ids.has(v.pointId)||pointIds.has(v.pointId)||curvePointIds.has(v.pointId)||v.role!=='derived-fit'||v.editable!==false||![v.x,v.y].every(n=>typeof n==='number'&&Number.isFinite(n)))return invalid();curvePointIds.add(v.pointId);characters+=v.pointId.length;derived.push(Object.freeze(v));}
+    let spline=null;
+    if(c.canEdit&&c.type==='BSpline'){const s=record(c.spline,['degree','type','method','interpolation','CVModel','kValues']),knots=array(s.kValues,70);if(s.degree!==3||s.type!=='Clamped'||s.method!==0||s.interpolation!==false||s.CVModel!==true||derived.length!==controls.length-2||knots.length!==controls.length+4||knots.some((k,j)=>typeof k!=='number'||!Number.isFinite(k)||j>0&&k<knots[j-1])||knots[3]!==0||knots[controls.length]!==1)return invalid();spline=Object.freeze({...s,kValues:Object.freeze(knots)});}else if(c.spline!==null||derived.length)return invalid();
+    characters+=c.id.length+(c.reason?.length||0);if(characters>1048576)return invalid();curves.push(Object.freeze({...c,controls:Object.freeze(controls),derived:Object.freeze(derived),spline}));
+    if(i%64===63){await new Promise(resolve=>setTimeout(resolve,0));current();}
   }
   const rawEllipses=array(data.ellipses,10000),ellipses=[],ellipseIds=new Set(),centerIds=new Set(),byId=new Map(objects.map(o=>[o.id,o]));
   if(rawEllipses.length!==objects.filter(o=>o.type==='Ellipse').length)return invalid();
@@ -106,5 +122,5 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
   }
   const frame=record(data.boundaryFrame,['origin','x','y','z']);
   for(const key of Object.keys(frame)){const values=array(frame[key],3);if(values.length!==3||values.some(value=>typeof value!=='number'||!Number.isFinite(value)))return invalid();frame[key]=Object.freeze(values);}
-  const output=Object.freeze({revision,ok:true,objects:Object.freeze(objects),points:Object.freeze(points),constraints:Object.freeze(constraints),ellipses:Object.freeze(ellipses),dimensionTargets:Object.freeze(dimensionTargets),stageCount:data.stageCount,boundaryFrame:Object.freeze(frame),emptyBoundary:data.emptyBoundary});current();return output;
+  const output=Object.freeze({revision,ok:true,objects:Object.freeze(objects),points:Object.freeze(points),constraints:Object.freeze(constraints),curves:Object.freeze(curves),ellipses:Object.freeze(ellipses),dimensionTargets:Object.freeze(dimensionTargets),stageCount:data.stageCount,boundaryFrame:Object.freeze(frame),emptyBoundary:data.emptyBoundary});current();return output;
 }

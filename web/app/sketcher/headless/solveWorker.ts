@@ -35,6 +35,10 @@ self.onmessage = async event => {
         } catch (_) {self.postMessage({revision,ok:false,error:{code:'INVALID',message:'Empty sketch could not be prepared.'}});}
         return;
       }
+      if(['sketch-transition-control-points','sketch-transition-verify-control-points','sketch-transition-curve-points'].includes(request.task)){
+        const {editCubicControlPoints,verifyCubicControlPoints,readCubicCurvePoints}=require('./cubicCurveTransition');
+        const {task,...payload}=request;self.postMessage(task==='sketch-transition-control-points'?editCubicControlPoints(payload):task==='sketch-transition-verify-control-points'?verifyCubicControlPoints(payload):readCubicCurvePoints(payload));return;
+      }
       if(request.task==='sketch-transition-ellipse-parameters'||request.task==='sketch-transition-verify-ellipse-parameters'){
         const {editEllipseParameters,verifyEllipseParameters}=require('./ellipseParameterTransition');
         const {task,...payload}=request;self.postMessage(task==='sketch-transition-ellipse-parameters'?editEllipseParameters(payload):verifyEllipseParameters(payload));return;

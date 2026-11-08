@@ -1,6 +1,7 @@
 import {captureLinearDimensionRecord} from './shapes/linearDimensionRecord.mjs';
 import { Generator, numericSketchIdHighWater } from './id-generator';
 import {noteSketchMutation} from './sketchMutationEpoch.mjs';
+import {inspectBoundedSpline} from './headless/splinePolicy.mjs';
 import {assertOrdinarySketchEntityDomain} from './constr/ordinaryEntityDomain.mjs';
 import {fixedEntityValid} from './constr/fixedEntityDomain.mjs';
 import {RigidGroup} from './rigid/rigidGroup';
@@ -648,10 +649,13 @@ export function validateProjectSketch(sketch: any) {
     // Native project admission must establish the same ordinary entity domain
     // as a genuine solve, even when an unconsumed plane never invokes one.
     // This is not constraint satisfiability or closed-profile qualification.
-    if (['Segment','Circle','Arc','Ellipse'].includes(type)) assertOrdinarySketchEntityDomain(type,obj.data);
+    if (['Segment','Circle','Arc','Ellipse','BezierCurve'].includes(type)) assertOrdinarySketchEntityDomain(type,obj.data);
     const ctor = [RigidGroup, Segment, EndPoint, Arc, Circle, Ellipse, EllipticalArc, BezierCurve, BSpline].find(c => c.prototype.TYPE === type);
     if (!ctor) throw new Error('Unknown sketch object type: ' + type);
-    register((ctor as any).read(obj.id, obj.data));
+    if(type==='BSpline')inspectBoundedSpline(obj.id,obj.data);
+    const rebuilt=(ctor as any).read(obj.id,obj.data);
+    if(['BezierCurve','BSpline'].includes(type))rebuilt.traverse(child=>child.visitParams(p=>{if(!Number.isFinite(p.get()))throw Object.assign(Error('Native curve construction has a nonfinite parameter.'),{code:'INVALID_SKETCH_ENTITY_DOMAIN'});}));
+    register(rebuilt);
   }
   sketch.dimensions.forEach(obj => validateStrictDimension(obj, index));
   sketch.labels.forEach(obj => validateStrictLabel(obj, index));

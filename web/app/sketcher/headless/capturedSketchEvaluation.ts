@@ -49,7 +49,7 @@ export function evaluateCapturedSketch(sketch:any,external:any,coldEvidence:any[
     if(newPrimitiveId){
       const root=index[newPrimitiveId];if(!root||!roots.has(root)||root.parent||root.isGenerated||root.generators.size)fail('INVALID_TARGET','The appended primitive must be independently owned.');
       const members=new Set<any>();root.traverse(o=>{if(index[o.id]!==o||members.has(o)||o.isGenerated||o.generators.size)fail('INVALID_TARGET','The appended primitive child graph is ambiguous.');members.add(o);});
-      const expected=root.TYPE==='Segment'?3:root.TYPE==='Arc'?4:['Circle','Ellipse'].includes(root.TYPE)?2:1;
+      const expected=root.TYPE==='Segment'?3:root.TYPE==='Arc'?4:root.TYPE==='BezierCurve'?7:root.TYPE==='BSpline'?1+new Set([...root.cPoints,...root.fPoints]).size:['Circle','Ellipse'].includes(root.TYPE)?2:1;
       if(members.size!==expected)fail('INVALID_TARGET','The appended primitive has unexpected children.');
       const internal=new Set<any>();
       for(const member of members)for(const c of member.constraints){
@@ -57,7 +57,10 @@ export function evaluateCapturedSketch(sketch:any,external:any,coldEvidence:any[
         internal.add(c);
       }
       const kind=root.TYPE==='Segment'?'Polar':root.TYPE==='Arc'?'ArcConsistency':null;
-      if(internal.size!==(kind?1:0)||[...internal].some(c=>c.schema.id!==kind))fail('INVALID_TARGET','Unexpected intrinsic primitive equations.');
+      if(root.TYPE==='BezierCurve'){
+        const segments=[...root.children];
+        if(internal.size!==2||segments.length!==2||segments.some(s=>![...internal].some(c=>c.schema.id==='Polar'&&c.objects.length===3&&c.objects[0]===s&&c.objects[1]===s.a&&c.objects[2]===s.b)))fail('INVALID_TARGET','Bezier must retain both actual child Polar equations.');
+      }else if(internal.size!==(kind?1:0)||[...internal].some(c=>c.schema.id!==kind))fail('INVALID_TARGET','Unexpected intrinsic primitive equations.');
       // Check actual generator object dependencies, not a saved permission flag.
       for(const stage of [pm.groundStage,...stages])for(const generator of stage.generators){
         generator.sourceObjects(o=>{if(members.has(o))fail('GENERATOR_REFERENCE','A generator depends on the new primitive.');});

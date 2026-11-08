@@ -1,3 +1,4 @@
+import {captureBezierRecord} from '../shapes/cubicCurveRecord.mjs';
 import {captureEllipseRecordData} from '../shapes/ellipseRecord.mjs';
 // Bounded preflight for the serialized curve forms already read by sketch IO.
 const record=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
@@ -6,8 +7,7 @@ const point=v=>exact(v,['x','y'])&&[v.x,v.y].every(Number.isFinite);
 const bad=()=>{throw Error('Invalid or degenerate carried sketch curve.');};
 export function inspectCarriedCurve(type,data){
  if(type==='BezierCurve'){
-  if(!exact(data,['cp1','cp2','cp3','cp4'])||!['cp1','cp2','cp3','cp4'].every(k=>point(data[k])))bad();
-  if(['cp2','cp3','cp4'].every(k=>Math.hypot(data[k].x-data.cp1.x,data[k].y-data.cp1.y)<=1e-9))bad();
+  captureBezierRecord(data);
   return [[':1','Segment'],[':1:A','Point'],[':1:B','Point'],[':2','Segment'],[':2:A','Point'],[':2:B','Point']];
  }
  if(type!=='Ellipse'&&type!=='EllipticalArc')throw Error('Unknown carried curve type.');
