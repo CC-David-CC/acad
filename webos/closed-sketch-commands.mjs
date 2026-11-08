@@ -72,10 +72,10 @@ export function registerClosedSketchCommands(host,getTarget){
    ['remove-closed-sketch-dimension','removeClosedSketchDimension','remove']
   ]){
    const keys=action==='edit'?['revision','faceId','constraintId','value']:['revision','faceId','constraintId'];
-   const properties={revision:id(256),faceId:id(1024),constraintId:id(4096),...(action==='edit'?{value:{oneOf:[{type:'number',exclusiveMinimum:0,maximum:1000000},{type:'string',minLength:1,maxLength:128,pattern:'^[A-Za-z_$][A-Za-z0-9_$]{0,127}$'}]}}:{})};
-   stops.push(host.commands.register({id:command,description:action==='edit'?'Edit one inspected driving length or diameter using canonical millimeters or a typed length name. Rediscover after editing; save separately.':'Remove one inspected driving length or diameter. Other relationships remain and may become active. Save separately.',parameters:spec(keys,properties)},async args=>{
+   const properties={revision:id(256),faceId:id(1024),constraintId:id(4096),...(action==='edit'?{value:{oneOf:[{type:'number',minimum:-1000000,maximum:1000000},{type:'string',minLength:1,maxLength:128,pattern:'^[A-Za-z_$][A-Za-z0-9_$]{0,127}$'}]}}:{})};
+   stops.push(host.commands.register({id:command,description:action==='edit'?'Edit one inspected length/diameter (positive) or ordered signed X/Y distance (including zero/negative), using canonical millimeters or a typed length name. The validated Worker enforces the discovered schema. Rediscover after editing; save separately.':'Remove one inspected driving length, diameter or ordered signed X/Y distance. Other relationships remain and may become active. Save separately.',parameters:spec(keys,properties)},async args=>{
     const v=copy(args,keys);
-    if(!validId(v.revision,256)||!validId(v.faceId,1024)||!validId(v.constraintId,4096)||action==='edit'&&!(typeof v.value==='number'&&Number.isFinite(v.value)&&v.value>0&&v.value<=1e6||typeof v.value==='string'&&/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(v.value)))throw Error('Provide a current inspected dimension and a positive millimeter value or typed length name.');
+    if(!validId(v.revision,256)||!validId(v.faceId,1024)||!validId(v.constraintId,4096)||action==='edit'&&!(typeof v.value==='number'&&Number.isFinite(v.value)&&Math.abs(v.value)<=1e6||typeof v.value==='string'&&/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(v.value)))throw Error('Provide a current inspected dimension and bounded canonical millimeters or a typed length name; the Worker enforces its schema.');
     const t=target(method);return settleScopedCommand(t.craft[method](Object.freeze(v),{signal:host.signal,valid:t.valid}),{signal:host.signal,valid:t.valid});
    }));
   }
