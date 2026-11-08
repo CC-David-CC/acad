@@ -98,12 +98,12 @@ assembly, future physics, future CAD generations, new AI provider or human UI
 redesign is part of this sequence. No completion percentage/calendar promise is
 inferred from number of commands or isolated passing examples.
 
-## Current bounded source queues — after real navigation R1
+## Current bounded source queues — after cubic R2
 
-The most recent frozen qualification is6895c51: actual Core2e14280 with
-Desktop18c621383. It adds real navigation/UI Undo and persistence to the earlier
-Cancel, Ellipse, frame, quantity and repair proofs; it is not an all-Gate1
-composed signoff. The current desktop documentation checkpoint is142a2b0ef. Both repositories'
+The most recent frozen qualification is e381b70: actual Core26d7a55 with
+Desktopf6d1c07d1. It adds cubic curve author/edit/native sampling/persistence
+to the earlier navigation, Cancel, Ellipse, frame, quantity and repair proofs.
+It is not an all-Gate1 composed signoff. Desktop documentation is1d63d8566. Both repositories'
 source/evidence/checklists are on example.invalid and R730; private fixture state is not
 source and is not copied into Git.
 
@@ -119,3 +119,21 @@ Chrome workflows, strictly one at a time. Preserve every failed attempt and its
 actual scope, use independent artifact analysis after the complete run, then
 update this queue/matrix. No per-change microtests, filesystem races, external
 relay, final source/runtime packaging or early completion/pause follows.
+
+### Native-face R1 integration stop
+
+The next candidate8ab73cf/Desktop719a4049a completed full normal build and
+signed fixture; whole NativeR1 then failed its first attached-source creation
+Undo with UNSUPPORTED_FRAME_HISTORY. Original47-command receipt and source
+snapshots are frozen e87d70e on integration/native-attachment-candidate-20261108
+on both LANs. Structural hasOnlyUnconsumedSketchHistory still requires a
+SOURCE_FRAME parent feature to be a plane and rejects a genuine native solid
+parent. Repair the same finite structural provenance policy with fast-save
+dependency safety intact; actual Native authority remains candidate-ledger only.
+No child extrusion/save/Native accuracy qualification was reached. Preserve
+whole expectations, build fresh after the coherent fix and rerun all of PhaseB.
+
+Principal Apply audit65bcf70 and pure capture62cbf2b are integrated but the
+helper remains unwired. Separate Apply implementation is in progress against
+the frozen PhaseB source checkpoint. Integration follows PhaseB qualification;
+no temporary accepted-tip hop or stale complete-model source basis is allowed.

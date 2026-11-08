@@ -324,3 +324,14 @@ candidate vertices were not captured; no numeric-only cause claimed. Accepted
 durable state stayed unchanged under the driver's explicit diagnostic exclusions.
 Explicit rectangle-edit construction repair is under review, no tolerance/code
 waiver. Both remaining full workflows require repaired-build complete reruns.
+
+### Native-solid-face Phase B: first whole-flow failure
+
+Complete source8ab73cf/Desktop719a4049a built normally. R1 fails the actual
+Undo of native-attached source creation: UNSUPPORTED_FRAME_HISTORY. The old
+shared unconsumed-history policy still admits only source-plane parents.
+Original evidence e87d70e is backed up on both LANs under
+integration/native-attachment-candidate-20261108. Narrow provenance/dependency
+repair and full unchanged rerun remain required; no PhaseB signoff or source
+creation lifecycle claim follows. The current ten recent scoped passes and
+all21 Partial exercise statuses remain unchanged.
