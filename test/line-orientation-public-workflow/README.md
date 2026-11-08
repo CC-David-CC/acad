@@ -56,3 +56,15 @@ PUPPETEER_CORE_PATH=/tmp/codi-occt-release-control/node_modules/puppeteer-core \
 ```
 
 The driver pins the real mounted inner assets/outer index and producing recipe/helper hashes separately. The producing Desktop checkout need not equal the served Desktop commit; keep both recorded. Existing source audits/old component receipts are historical evidence and are not relabeled as this complete workflow passing. No whole Gate1 signoff is implied.
+
+## First whole-run failure and current repair
+
+R1 on compiledb378bb7/Desktop67326a656 reached66rows before the partially
+existing parallel group refused CURRENT_GEOMETRY_MISMATCH at exact candidate
+versus independent-solve equality. `evidence-r1` retains that whole run.
+The group route now uses the existing production verified-replay contract: exact
+authored source intent and original solved evidence, bounded supported connected
+geometry and preserved branches, with no global history-equality relaxation.
+The reply derives row status from final independent reconstruction rather than
+the incremental precursor. This is source repair only until the unchanged full
+workflow passes. No claim that the failed diff was only roundoff is inferred.

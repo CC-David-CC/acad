@@ -5,6 +5,7 @@ import {prepareConstraintGroup} from '../actions/constraintGroupAdmission';
 import {captureConstraintGroupIntent,groupData,orientationGroupContract} from './constraintGroupIntent.mjs';
 import {assertAllowedSolverGeometry} from './transitionGeometryPolicy.mjs';
 import {sameRestoredSketch} from '../historyEquivalence.mjs';
+import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
 import {captureAdmissionCause} from '../constr/admissionCause.mjs';
 const fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
 const failure=(e:any)=>({code:typeof e?.code==='string'?e.code.slice(0,64):'CONSTRAINT_GROUP_INVALID',message:typeof e?.message==='string'?e.message.slice(0,512):'Constraint group failed.',...(e?.cause?{cause:captureAdmissionCause(e.cause)}:{})});
@@ -37,9 +38,16 @@ export function changeConstraintGroup(request:any){let revision='';try{
  const added=describe(group.created);for(const row of [...added].sort((a,b)=>b.stage-a.stage||b.index-a.index)){const c=restored.stages[row.stage].constraints[row.index];if(c.typeId!==row.typeId||JSON.stringify(c.objects)!==JSON.stringify(row.objects))fail('INTENT_CHANGED','Created group member changed.');restored.stages[row.stage].constraints.splice(row.index,1);}
  if(!sameRestoredSketch(JSON.stringify(stripAdmission(before)),JSON.stringify(stripAdmission(restored))))fail('INTENT_CHANGED','Other authored sketch intent changed.');
  const solved=solveSketch({revision,sketch:candidate,boundary:structuredClone(candidate.boundary),externalParameters:external});if(!solved.ok)return solved;
- const serializedSketch=bounded(JSON.stringify(solved.sketch));if(!sameRestoredSketch(JSON.stringify(candidate),serializedSketch))fail('CURRENT_GEOMETRY_MISMATCH','Independent replay changed candidate geometry or intent.');
+ const serializedSketch=bounded(JSON.stringify(solved.sketch));
+ // Use the same verified replay contract as ordinary source reconstruction:
+ // exact authored intent, original solved evidence, supported connected fields
+ // within the existing save bound, and unchanged geometric branches. Global
+ // history equality and independent requested-group reconstruction stay exact.
+ assertVerifiedReplayGeometry(candidate,solved.sketch,solved.evidence,external);
  const verify=new HeadlessSketchWorkspace(external);verify.io._loadSketch(solved.sketch,{strict:true});const checked=verify.createIndex(),check=prepareConstraintGroup(verify.parametricManager,intent.kind,intent.ids.map(id=>checked[id]),intent.kind==='midpoint'?undefined:intent.angleDegrees,'create');if(check.changed)fail('INTENT_CHANGED','The reconstructed group is incomplete.');check.validate(verify.parametricManager.stages);
  const rows=solved.sketch.stages.flatMap(s=>s.constraints);if(rows.length!==solved.evidence.length||rows.some((c,i)=>c.typeId!==solved.evidence[i].typeId||c.admission?.state!==solved.evidence[i].state))fail('ADMISSION_CHANGED','Group replay admission changed.');
- return{revision,ok:true,changed:true,serializedSketch,evidence:solved.evidence,group:receipt()};
+ // Classification is derived from the final independent reconstruction, not
+ // synchronized from the precursor incremental transaction.
+ return{revision,ok:true,changed:true,serializedSketch,evidence:solved.evidence,group:{...receipt(),rows:describe(check.constraints)}};
  }catch(error){return{revision,ok:false,error:failure(error)};}}
 export function verifyConstraintGroup(request:any){let revision='';try{const a=groupData(request,['revision','sketchJSON','externalParameters','intent','candidateJSON']);revision=a.revision;const intent=captureConstraintGroupIntent(a.intent),expected=changeConstraintGroup({revision,sketchJSON:a.sketchJSON,externalParameters:bindings(a.externalParameters),intent});if(!expected.ok)return expected;if(!sameRestoredSketch(expected.serializedSketch,bounded(a.candidateJSON)))fail('INTENT_CHANGED','The candidate differs from independent reconstruction of the complete requested group.');return{revision,ok:true,verified:true};}catch(error){return{revision,ok:false,error:failure(error)};}}
