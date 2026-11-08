@@ -31,8 +31,8 @@ implementation. Assemblies E17/C10 remain Gate2.
 |---|---|---|
 | Line orientation R12 | Scoped PASS618cf39; independent bounded50pm oracle PASS c702b49 | Retain frozen evidence; qualify affected changes on later builds |
 | Native `.cad` R6 | Scoped PASS49db2da; independent artifact oracle PASS | Retain frozen evidence; capacity/memory/ARC23 remain separate |
-| Length measurement roles R2 | FAIL Desktop505d40353 after56checkpoints/3saves, at typed discovery following successful setup | Old setup failure progressed; typed inspection refuses retained native dimension records. Narrow read repair underway; complete rerun still required |
-| Feature history controls R2 | FAIL697598a after45checkpoints/2.cad saves at passive prefix inspection | Old exact-axis rejection progressed; expected hole-clearance refusal/state retention and native reopen pass. Derived history wizard preview blocks next control inspection; bounded source repair underway |
+| Length measurement roles R2 | FAIL Desktop505d40353 after56checkpoints/3saves, at typed discovery following successful setup | Old setup failure progressed; typed inspection refuses retained native dimension records. Read/actual-Point ownership repair integrated86a4612; complete rerun required |
+| Feature history controls R2 | FAIL697598a after45checkpoints/2.cad saves at passive prefix inspection | Old exact-axis rejection progressed; expected hole-clearance refusal/state retention and native reopen pass. Passive-preview provenance repair integratedffb71b1; complete rerun required |
 
 Actual last qualified composition remains Core32ae9c8/Desktop60ec30ee9. New
 source repairs are not qualification evidence. C08 custom source-frame work is
@@ -80,6 +80,30 @@ from the next history entry even for passive review; controls reject any such
 request. Actual remaining readiness flags/post-prefix snapshot were not captured.
 Owned context retired, shared browser retained, source hashes unchanged. Driver2642
 is terminal; no Chrome workflow is currently running. Earlier R1 remains frozen.
+
+Next source composition, not execution evidence:
+
+- 86a4612 carriesabbd81d1: typed discovery admits only canonical existing native
+  LinearDimension records without dropping or rewriting them. Shared strict IO
+  requires their actual EndPoint/index identities; no new ID/offset cap or typed
+  mutation permission. Complete measurement and native Save/Open regressions are
+  required; own malformed-ruler controls are being added to the C09 whole flow.
+- ffb71b1 carries55133e1: WizardService privately distinguishes bounded pristine
+  history-derived preview from genuine/explicitly modified draft. Existing UI and
+  isInProgress remain; hints alone never grant admission. Existing detached data
+  is frozen only after bounded proof; unprovable requests remain editable/active.
+  History controls bind/recheck that predicate and retain all other guards, with
+  specific actual-condition diagnostics. Complete unchanged history rerun remains.
+- e23e31b carries77fad61 (prepared whole source a32294a/3d8042a): existing physical
+  inspector returns current public display projections for length/area/volume/
+  angle, keeping canonical values exact and display text rounding separate.
+  Nonapplicable or rejected formatting has explicit derived availability; no
+  canonical row is lost. Full C09 quantity/units/refusal/travel/native workflow
+  is prepared, not run. Additional malformed-ruler controls are source-only.
+
+C08 phase-A source remains isolated at36cd24a with Desktopcb821428e, including
+root registration/shared validation-code transport. It is excluded from the next
+repair build; required native-solid-face attachment phaseB remains open.
 
 The sections below retain chronological implementation and execution notes.
 Statements such as “running,” “queued,” and “not qualified yet” describe those
