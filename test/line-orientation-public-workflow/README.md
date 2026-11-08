@@ -132,3 +132,10 @@ The existing angular/position bounds, exact unrelated fields, Arc sweep/full/
 major checks and authored branch constants are unchanged. This source-proven
 seam defect is not asserted as R7's unidentified exact-diff cause; the unchanged
 complete orientation workflow remains the required runtime evidence.
+
+R8/evidence-r8 on actual8a79bde/Desktop640279b9f verifies97 runtime assets,
+then fails the FIRST public10×10 rectangle preparation with the generic
+"Rectangle request could not be prepared." reply. No orientation assertions or
+native saves are reached. The full failure is preserved. The cause is not
+established by that generic diagnostic; source investigation must precede any
+claim or remedy. No acceptance bounds/cases are changed.

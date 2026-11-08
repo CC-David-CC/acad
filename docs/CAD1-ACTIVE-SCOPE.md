@@ -19,20 +19,32 @@ Authoritative detailed definitions are in the desktop repository:
 Historical references to all22 exercises describe the prior scope and do not
 reinstate assembly acceptance in Gate1.
 
-## Current finite execution lanes — 2026-11-07
+## Current finite execution lanes — 2026-11-08
 
-- Shared primitive append: exact disconnected-component preservation, fresh
-  full-candidate admission and original-equation validation; R6 failure retained.
-- Singular point distance: actual free reduced-coordinate initializer integrated
- 0c6d44c; complete lock/alias/typed/travel/native workflow pending.
-- Intersecting profiles: bounded two-rectangle cell/source-span graph integrated;
-  normal build passes, whole source/reselection/child/repair/native workflow runs.
-- Native .cad: Worker archive/source capture plus ordinary host file association
-  source implementation; no archive runtime qualification yet.
-- Precision: default rounding source repair pending genuine untouched-default UI
-  proof; coefficient/affine-offset loss still open under separate coherent repair.
+Qualified scoped whole workflows: singular Point-distance31049d6 (89rows,
+10 native files), two intersecting axis-aligned rectangles8749e8c (159rows,
+6 native files), Base/Compact1f037a2 (37rows/4files), and retained rectangle
+reports875a9bc (21rows/2files). These do not constitute whole Gate1 signoffs.
 
-Qualified Base/Compact37rows/four native files (1f037a2) and current rectangle
-reports21rows/two files (875a9bc) are scoped whole-workflow results. They do not
-close full Gate1, alter any failed evidence, reopen Files, or qualify1pm geometry.
-The canonical detailed matrix remains in the desktop repository.
+Built composition8a79bde includes scoped LengthRelation original-request
+verification, descendant/auxiliary captured ownership, circular direction seam
+comparison, nonzero polynomial/offset preservation and deferred original-row
+validation. None is qualified by compilation alone. Original orientation R8
+on8a79bde/Desktop640279b9f fails its first10×10 rectangle preparation after
+actual97-asset pin verification; the generic failure does not identify its
+cause. Receipt and log are frozen under the orientation evidence-r8 directory.
+Investigate the real creation path; retain cases/bounds and rerun the whole flow.
+
+Native .cad R2 on63786b8/Desktop640279b9f passes37 functional rows, four native
+saves, twelve exports, six malformed-own-save refusals and genuine Files UI
+Open. The COMPLETE workflow FAILS its lifecycle expectation:11 codec targets
+versus10; all11 retire. Same-generation resetDocumentState closes the newly
+decoded managed archive owner, losing its prior compressed spans before reedit.
+The local restore-owned codec handoff repair is in progress, not qualified.
+Do not change the expected count or infer a permanent Worker leak.
+
+Reference/driving ordinary Segment measurement conversion is a separate bounded
+shared-operation implementation lane. Full dimensional families, history/frame
+coverage, drawings, fine-scale geometry and final one-build beta qualification
+remain open. Untouched human default-dialog precision still needs its real UI
+workflow. Files remains accepted; no race tests or external relay are resumed.
