@@ -21,8 +21,9 @@ reinstate assembly acceptance in Gate1.
 
 ## Current qualification checkpoint — 2026-11-08
 
-The current four-workflow batch has TWO scoped qualified passes and TWO complete
-workflow failures. These are not the full Gate1 denominator: Gate1 contains21
+The current four-workflow batch has THREE scoped qualified passes and ONE open
+workflow (latest completed attempt failed; repaired R3 running). These are not
+the full Gate1 denominator: Gate1 contains21
 exercises, with no complete exercise-level signoffs yet. Existing scoped passes
 remain useful evidence toward those exercises; zero signoffs does not mean zero
 implementation. Assemblies E17/C10 remain Gate2.
@@ -31,8 +32,8 @@ implementation. Assemblies E17/C10 remain Gate2.
 |---|---|---|
 | Line orientation R12 | Scoped PASS618cf39; independent bounded50pm oracle PASS c702b49 | Retain frozen evidence; qualify affected changes on later builds |
 | Native `.cad` R6 | Scoped PASS49db2da; independent artifact oracle PASS | Retain frozen evidence; capacity/memory/ARC23 remain separate |
-| Length measurement roles R2 | FAIL Desktop505d40353 after56checkpoints/3saves, at typed discovery following successful setup | Old setup failure progressed; typed inspection refuses retained native dimension records. Read/actual-Point ownership repair integrated86a4612; complete rerun required |
-| Feature history controls R2 | FAIL697598a after45checkpoints/2.cad saves at passive prefix inspection | Old exact-axis rejection progressed; expected hole-clearance refusal/state retention and native reopen pass. Passive-preview provenance repair integratedffb71b1; complete rerun required |
+| Length measurement roles R3 | Scoped PASS Desktopc48a7fa8e:59checkpoints/3saves, fresh Open/reedit/travel plus final typed ruler discovery/refusal | Actual Core33b8aa3/Desktop4c4862b7b; source hashes/cleanup pass. Native JSON scope; relevant `.cad` IO regression still required |
+| Feature history controls R3 | RUNNING on Core33b8aa3; prior FAIL697598a retained | Passive-preview provenance repair integratedffb71b1; unchanged complete workflow running, no new PASS |
 
 Actual last qualified composition remains Core32ae9c8/Desktop60ec30ee9. New
 source repairs are not qualification evidence. C08 custom source-frame work is
@@ -79,7 +80,7 @@ before the intended source-plane branch request. Wizard derives a workingRequest
 from the next history entry even for passive review; controls reject any such
 request. Actual remaining readiness flags/post-prefix snapshot were not captured.
 Owned context retired, shared browser retained, source hashes unchanged. Driver2642
-is terminal; no Chrome workflow is currently running. Earlier R1 remains frozen.
+is terminal. Earlier R1 remains frozen.
 
 Next source composition, not execution evidence:
 
@@ -104,6 +105,20 @@ Next source composition, not execution evidence:
 C08 phase-A source remains isolated at36cd24a with Desktopcb821428e, including
 root registration/shared validation-code transport. It is excluded from the next
 repair build; required native-solid-face attachment phaseB remains open.
+
+Latest executed composition: normal Core33b8aa35a8dec970b4a02d440024e7ba3efee8df
+build and actual fixture/pin recording both completed successfully. Producing logs
+are `.build/gate1-repairs-33b8aa3-{build,fixture}.log` in the same R730 build
+checkout.97selected pins are `/mnt/data10tb/codi-acad-gate1-repair-pins-20261108-r3.json`;
+CAD bundle7608c8da47eb0df87c3ec59b05575537050237b8562984771095b2d54aca35fe,
+Files unchangedee2a712c. Actual487files/414CAD assets/522394533innerbytes.
+Private loopback20986, backend83849/forward13720, fresh direct real-disk state
+`/tmp/codi-acad-fixture-state-20261108-r4` on R730. No relay/deploy/key copying.
+Roles R3 terminal PASS (driver62260 retired), frozen Desktopc48a7fa8e. History R3
+is the only live Chrome workflow, driver97452, output
+`/tmp/codi-feature-history-controls-20261108-r3` plus separate driver log.
+Complete cleanup/source integrity and independent after-whole artifact oracle
+remain required before calling that workflow qualified. Full Gate1 stays open.
 
 The sections below retain chronological implementation and execution notes.
 Statements such as “running,” “queued,” and “not qualified yet” describe those
