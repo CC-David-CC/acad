@@ -123,7 +123,7 @@ export function assertSemantics(sketch, oldBoundary, currentBoundary) {
     if (ax*bx+ay*by <= 1e-12*Math.hypot(ax,ay)*Math.hypot(bx,by)) fail('AMBIGUOUS_BOUNDARY','Boundary line orientation changed ambiguously.');
   }
 }
-export export function assertFixedBoundary(index, boundary) {
+export function assertFixedBoundary(index, boundary) {
   try{assertFixedCurvedBoundary(index,boundary)}catch{fail('BOUNDARY_CHANGED','A fixed curved boundary changed during solving.');}
   for (const edge of boundary.lines) {
     const line = index['boundary/' + edge.id];
