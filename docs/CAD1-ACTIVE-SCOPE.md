@@ -21,9 +21,9 @@ reinstate assembly acceptance in Gate1.
 
 ## Current qualification checkpoint — 2026-11-08
 
-The current four-workflow batch has THREE scoped qualified passes and ONE open
-workflow (latest completed attempt failed; repaired R3 running). These are not
-the full Gate1 denominator: Gate1 contains21
+The four-workflow repair batch now has FOUR scoped qualified passes. The next
+C09 quantity/native-ruler whole workflow also passed. These five named proofs
+are not the full Gate1 denominator: Gate1 contains21
 exercises, with no complete exercise-level signoffs yet. Existing scoped passes
 remain useful evidence toward those exercises; zero signoffs does not mean zero
 implementation. Assemblies E17/C10 remain Gate2.
@@ -33,10 +33,13 @@ implementation. Assemblies E17/C10 remain Gate2.
 | Line orientation R12 | Scoped PASS618cf39; independent bounded50pm oracle PASS c702b49 | Retain frozen evidence; qualify affected changes on later builds |
 | Native `.cad` R6 | Scoped PASS49db2da; independent artifact oracle PASS | Retain frozen evidence; capacity/memory/ARC23 remain separate |
 | Length measurement roles R3 | Scoped PASS Desktopc48a7fa8e:59checkpoints/3saves, fresh Open/reedit/travel plus final typed ruler discovery/refusal | Actual Core33b8aa3/Desktop4c4862b7b; source hashes/cleanup pass. Native JSON scope; relevant `.cad` IO regression still required |
-| Feature history controls R3 | RUNNING on Core33b8aa3; prior FAIL697598a retained | Passive-preview provenance repair integratedffb71b1; unchanged complete workflow running, no new PASS |
+| Feature history controls R3 | Scoped PASS d0964c8:78checkpoints/4.cad saves/25Native observations/3SVG/2malformed Opens | Browser cleanup/source hashes and independent artifact oracle PASS; original checker ID-domain mistake/corrected source97a7828 preserved separately |
+| C09 quantities/native ruler R1 (next finite workflow) | Scoped PASS4afbb06:50rows/3.cad saves/80Native point replies/12quantity refusals/2semantic ruler Opens | All7canonical quantity types/4public display families; independent Fraction/AST/ZIP/source/native oracle PASS; no whole-C09/Gate1 claim |
 
-Actual last qualified composition remains Core32ae9c8/Desktop60ec30ee9. New
-source repairs are not qualification evidence. C08 custom source-frame work is
+Orientation/archive qualifications remain on Core32ae9c8/Desktop60ec30ee9;
+roles/history/C09 qualified scopes are on Core33b8aa3/Desktop4c4862b7b. They are
+not one final all-Gate1 signoff. Source fixes alone are not qualification.
+C08 custom source-frame work is
 isolated and excluded from this repair batch. A four-of-four batch result would
 not close the remaining finite competencies or the final beta/agent delivery.
 
@@ -115,10 +118,17 @@ Files unchangedee2a712c. Actual487files/414CAD assets/522394533innerbytes.
 Private loopback20986, backend83849/forward13720, fresh direct real-disk state
 `/tmp/codi-acad-fixture-state-20261108-r4` on R730. No relay/deploy/key copying.
 Roles R3 terminal PASS (driver62260 retired), frozen Desktopc48a7fa8e. History R3
-is the only live Chrome workflow, driver97452, output
-`/tmp/codi-feature-history-controls-20261108-r3` plus separate driver log.
-Complete cleanup/source integrity and independent after-whole artifact oracle
-remain required before calling that workflow qualified. Full Gate1 stays open.
+terminal browser+independent PASS (driver97452 retired), frozen d0964c8. Original
+material oracle failure and corrected separate analysis97a7828 are preserved;
+manufacturing identity is never equated to a runtime output ID.
+C09 R1 terminal browser+independent PASS (driver78582 retired), frozen4afbb06.
+Actual .cad files prove typed ruler persistence and rejection of two own valid-
+integrity malformed rulers after real consent, while preserving a newer unsaved
+model/journal, followed by healthy edit/save/reopen. No Chrome driver is live.
+Full Gate1 stays open: C01 primitive/operation gaps, C02/C03/C04/C06/C07 finite
+remaining cases, C08 frames/attachments, C11 drawing competencies, relevant C12
+lifecycle boundaries, final composed beta/examples and handoff remain. Existing
+named ordinary exercise proofs are retained; no wider case is silently signed off.
 
 The sections below retain chronological implementation and execution notes.
 Statements such as “running,” “queued,” and “not qualified yet” describe those
