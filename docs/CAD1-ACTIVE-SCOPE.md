@@ -21,48 +21,47 @@ reinstate assembly acceptance in Gate1.
 
 ## Current finite execution lanes — 2026-11-08
 
-Qualified scoped whole workflows: singular Point-distance31049d6 (89rows,
-10 native files), two intersecting axis-aligned rectangles8749e8c (159rows,
-6 native files), Base/Compact1f037a2 (37rows/4files), and retained rectangle
-reports875a9bc (21rows/2files). These do not constitute whole Gate1 signoffs.
+Latest composed complete run is orientation R10 on84fe435/Desktop640279b9f,
+frozen at b2f3242 under
+`test/line-orientation-public-workflow/evidence-r10`. It reaches109 rows, passing
+the earlier rectangle/mixed-group/disconnected-append/LengthRelation stops, then
+fails first anti-parallel endpoint edit170→190. coordinateTransition's exact
+candidate/fresh-solve comparison reports CURRENT_GEOMETRY_MISMATCH without a
+field/value/magnitude. No saves run. Original-request coordinate repair with
+exact targets/unaffected source/original equations is the immediate solver lane;
+no numerical-only explanation or tolerance waiver is justified. The shared
+capturedGeometryScope extraction is approved to reuse actual length/coordinate
+parameter ownership and original-equation dependency policy, not duplicate it.
 
-Built composition8a79bde includes scoped LengthRelation original-request
-verification, descendant/auxiliary captured ownership, circular direction seam
-comparison, nonzero polynomial/offset preservation and deferred original-row
-validation. None is qualified by compilation alone. Original orientation R8
-on8a79bde/Desktop640279b9f fails its first10×10 rectangle preparation after
-actual97-asset pin verification; the generic failure does not identify its
-cause. Receipt and log are frozen under the orientation evidence-r8 directory.
-Investigate the real creation path; retain cases/bounds and rerun the whole flow.
+Native archive repair774c779 is integrated: keep the decoded codec restore-local
+through same-generation metadata reset, then transfer custody after full guarded
+replay. Complete .cad R2 previously passed37 functional rows/four saves/twelve
+exports/six malformed Opens/real Files UI Open, but FAILED11 versus10 codecs.
+All11 retired. New complete reuse/lifetime workflow still required; ten expected
+workers and actual unchanged drawing compressed-span reuse remain enforced.
 
-Native .cad R2 on63786b8/Desktop640279b9f passes37 functional rows, four native
-saves, twelve exports, six malformed-own-save refusals and genuine Files UI
-Open. The COMPLETE workflow FAILS its lifecycle expectation:11 codec targets
-versus10; all11 retire. Same-generation resetDocumentState closes the newly
-decoded managed archive owner, losing its prior compressed spans before reedit.
-The local restore-owned codec handoff repair is in progress, not qualified.
-Do not change the expected count or infer a permanent Worker leak.
+Shared ordinary Segment reference/driving conversion is source-integrated
+(c07915c through93ec67b), with strict original-request+receipt verification,
+original coordinates and existing native ruler identities. No role/value flags
+are stored. Root review repairs cause-less errors/job cleanup/metadata binding
+and removes per-ruler full-scene paint scans through maintained local links and
+mutation-bound membership indexes. Desktop dedicated bridge/registration and
+complete public workflow are integrated (25c432f9a/c43edd917), NOT built or
+qualified yet. Typed/formula/generated/ambiguous conversions remain explicit
+unsupported boundaries; actual human paint/gesture performance is unqualified.
 
-Reference/driving ordinary Segment measurement conversion is a separate bounded
-shared-operation implementation lane. Full dimensional families, history/frame
-coverage, drawings, fine-scale geometry and final one-build beta qualification
-remain open. Untouched human default-dialog precision still needs its real UI
-workflow. Files remains accepted; no race tests or external relay are resumed.
+Finite C07 shared suppression/prefix/branch controls are under isolated source
+implementation. The approved boundary is retained at
+`test/feature-history-controls-plan/CONTRACT.md` (64bfcdd): one authored graph
+and journal, no silent dependent/material retarget, derived-required schema
+marker, bounded readonly manufacturing-reference census and no archive-owner
+changes. This does not close broader history/frame requirements.
 
-Latest composition2157a85 includes reviewed archive-owner repair774c779 and
-bounded rectangle diagnostics. Whole orientation R9 (evidence-r9, frozen
-7a2c802) still fails first rectangle: INVALID, independent-solve phase,
-"Degenerate sketch segment." Both pre/post-solve geometry validation use that
-message; the exact collapse point is not established. No later assertions or
-saves run. Original equations and all acceptance bounds remain unchanged.
-Shared reference/driving conversion and finite history suppress/prefix/branch
-controls are independent implementation lanes; neither is qualified yet.
-
-R10 on84fe435/Desktop640279b9f reaches109 recorded rows after the provenance
-repair: earlier rectangle/mixed/append/length stops pass in this whole attempt.
-First anti-parallel endpoint edit170→190 fails exact warm-candidate versus
-fresh-solve equivalence in coordinateTransition; no field/magnitude evidence.
-No save/reopen occurs. Coordinate original-request/scope repair is now the
-immediate solver lane. Do not claim full orientation/precision/native/archive
-qualification from the earlier passing portions. Frozen evidence is under
-`test/line-orientation-public-workflow/evidence-r10`.
+Previously qualified scoped whole workflows remain: singular Point-distance
+31049d6 (89rows/10files), intersecting rectangles8749e8c (159rows/6files),
+Base/Compact1f037a2 (37rows/4files), retained reports875a9bc (21rows/2files).
+The canonical full matrix remains in the Desktop repository. Gate1 stays open;
+these older slices do not qualify the current untested composition. Nonzero
+math/length/precision retained workflows, untouched default-dialog UI, remaining
+finite competencies, final composed beta/agent delivery and handoff remain.
+Files is accepted, filesystem-race testing cancelled, visitor relay off.
