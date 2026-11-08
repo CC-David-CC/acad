@@ -659,12 +659,18 @@ export function activate(ctx: ApplicationContext) {
         applied?.kind!=='history-position'||applied.afterPointer!==history.pointer||applied.beforeSignature!==signature||applied.afterSignature!==signature)
       throw refusal();
     try{
+      if(history.history.some(entry=>entry.type==='SOURCE_FRAME_V1')){
+        // Only this explicitly supported new source family uses its own
+        // accepted-custody validator. Invalid form params are never parsed.
+        principalPlaneCommands.validateSourceFrameReview(capture);
+      }else{
       const rows=validateControlledHistory(history.history);assertActiveHistoryDependencies(rows);
       const build=genericHistoryBuild(history.history);
       if(!build||build.id!=='occ'||build.selectedProfileVersion!==3||requireAvailableSelectedProfileBuild(build.id,build.revision)!==build)
         throw refusal();
       for(const row of rows){const operation=ctx.operationService.get(row.type);
         if(typeof operation?.run!=='function'||row.type==='PLANE'&&(operation.run!==standardPlaneOperation.run||!!operation.admitGeometry))throw refusal();}
+      }
       if(expressions.isTyped||expressions.script$.value.trim()||Reflect.ownKeys(expressions.table$.value||{}).length||expressions.errors$.value.length||
           ctx.assemblyService.getConstraints().length||ctx.surfacingService?.scene?.surfaces.length)throw refusal();
       const workbench=ctx.workbenchService.currentWorkbench$.value;
