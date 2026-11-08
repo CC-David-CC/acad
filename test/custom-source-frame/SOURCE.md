@@ -40,6 +40,21 @@ command limits must be reported, not represented as arbitrary-size support.
 
 Root composition splices:
 
+Root completed the following splices on this isolated source branch after the
+phase-A packet froze. They remain excluded from the active roles/history repair
+build and are not execution evidence. The Desktop adapter is registered through
+the existing target/lifetime and the public recipe is exported. Validation Worker
+and PM now share one pure known-code projection (`projectValidationCodes.mjs`),
+including the five required frame codes and existing history/entity codes.
+Unknown failures remain generic. This also removes an existing JSON-validation
+transport mismatch: PM recognized INVALID_HISTORY_STATE but the validation
+Worker omitted it. Native `.cad` codec preflight is a separate path and already
+preserves its own failures; no new observed `.cad` failure is claimed.
+
+The original splice instructions below are retained for rationale; the source
+changes above supersede their pending status. No normal build or full frame
+workflow has run yet. Required native-solid-face attachment phaseB stays open.
+
 - Desktop index imports/registers `registerSourceFrameCommands` from the new
   adapter and may export createSourceBoundFrameExample; this branch does not edit
   index. Public IDs inspect-source-frames/create-source-frame/edit-source-frame/

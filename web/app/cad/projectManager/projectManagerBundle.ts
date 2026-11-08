@@ -17,6 +17,7 @@ import {AUTHORED_SOLID_KINDS} from '../../../../modules/engine/solid/authoredSol
 import {encodeProjectEnvelope, decodeProjectEnvelope, validateProjectTree} from './projectEnvelope.mjs';
 import {captureDisplayUnitsMetadata,formatDisplayQuantity as formatQuantity} from './displayUnits.mjs';
 import projectValidationWorkerUrl from 'codi-project-validation-worker';
+import {projectValidationFailureCode} from './projectValidationCodes.mjs';
 import {prepareManufacturingSnapshot, geometryRevision, proposeManufacturingRebind, PREPARE_LIMIT_BYTES, resolveManufacturingAssignments} from './manufacturingMetadata.mjs';
 import {assertLegacyGeometry} from 'cad/model/workerGeometry';
 import {restoreTimeout,projectRebuildWaitMs} from './restoreTimeout.mjs';
@@ -804,8 +805,8 @@ export function activate(ctx: ApplicationContext) {
           if (event.data?.progress === 'started') return;
           if (event.data?.ok === true) finish(null, {value: event.data.value, storage: event.data.storage, parameterState:event.data.parameterState});
           else {
-            const error=new Error(event.data?.error || 'Project validation failed.'),code=event.data?.code;
-            if(['INVALID_FEATURE_ID','DUPLICATE_FEATURE_ID','INVALID_SKETCH_ENTITY_DOMAIN','INVALID_HISTORY_STATE'].includes(code))Object.assign(error,{code});
+            const error=new Error(event.data?.error || 'Project validation failed.'),code=projectValidationFailureCode(event.data?.code);
+            if(code)Object.assign(error,{code});
             finish(error);
           }
         };
