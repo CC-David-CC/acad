@@ -1,3 +1,4 @@
+import {requireModernPhysicalHistory} from '../parameters/modernPhysicalBindings.mjs';
 import {MWorkerSolid} from '../model/mworkerSolid';
 import {MOpenFaceShell} from '../model/mopenFace';
 import {ReadSketch} from '../sketch/sketchReader';
@@ -30,8 +31,9 @@ export function createWorkerSolidPointCommands(ctx:any,evaluateReadOnly:(input:a
   const target=registry.find(a.bodyId),row=info.bodies.find((b:any)=>b.id===a.bodyId&&b.featureId===a.featureId&&b.engine===a.engine),expectedMetrics=target?.inspectKernelMetrics?.();
   const identity=[1,0,0,0,0,1,0,0,0,0,1,0];
   if(!(target instanceof MWorkerSolid)||!row||target.featureId!==a.featureId||row.metrics!==expectedMetrics||expectedMetrics?.resultKind!=='single-solid'||expectedMetrics.solidCount!==1||expectedMetrics.nativeValidity?.valid!==true||'sha256:'+expectedMetrics.runtime.jsSha256+':'+expectedMetrics.runtime.wasmSha256!==a.engineRevision||!Array.isArray(row.placement)||row.placement.some((v:any,i:number)=>!Object.is(v,identity[i])))fail('UNSUPPORTED_TARGET','Select an unplaced current measured single solid.');
-  if(expressions.isTyped||expressions.script$.value.trim()||Object.keys(expressions.table$.value||{}).length||expressions.errors$.value.length)fail('UNSUPPORTED_PARAMETERS','Point replay currently requires native local source constants.');
+  if(expressions.errors$.value.length||(expressions.isTyped?!expressions.hasCurrentPhysicalResult():expressions.script$.value.trim()||Object.keys(expressions.table$.value||{}).length))fail('UNSUPPORTED_PARAMETERS','Point replay requires empty source constants or the current integrated typed rectangle/through-hole history.');
   const before=craft.modifications$.value;if(!Array.isArray(before.history)||before.history.length>256||before.pointer!==before.history.length-1)fail('UNSUPPORTED_HISTORY','Observe a bounded current authored tip.');
+  if(expressions.isTyped&&!requireModernPhysicalHistory(before.history))fail('UNSUPPORTED_PARAMETERS','Typed point replay supports only the integrated modern rectangle and through holes.');
   if(genericHistoryBuild(before.history)!==build)fail('ENGINE_REVISION_MISMATCH','The complete part must retain the requested native runtime.');const budget=selectedProfileHistoryBudget(before.history,a.engineRevision);if(!budget.withinLimit)fail(budget.reason||'RESOURCE_LIMIT','The existing history exceeds its replay budget.');
   const epoch=craft.evaluationEpoch,generation=project.documentGeneration,namespace=project.sketchStorageNamespace,stamp=sketchRevision(storage,namespace),counter=project.counterGenerator,counters=counter.projectCounters,counterValue=counters.featureId;
   const streamList=()=>[craft.modifications$,craft.models$,craft.pipelineFailure$,craft.engineCleanupFailure$,expressions.script$,expressions.table$,expressions.list$,expressions.errors$,ctx.streams.sketcher.sketchingFace,ctx.wizardService.workingRequest$,ctx.workbenchService.currentWorkbench$,ctx.assemblyService.constraints$],tracked=streamList(),versions=tracked.map(s=>s.revision),models=craft.models$.value;

@@ -1,3 +1,4 @@
+import {isAuthoredLength,captureAuthoredHoleIntent} from '../../../../modules/engine/solid/authoredLengthBinding.mjs';
 import {captureOwnedLoftFeature} from '../../../../modules/engine/solid/ownedLoftFeature.mjs';
 import {captureOwnedSweepFeature} from '../../../../modules/engine/solid/ownedSweepFeature.mjs';
 // Explicit provenance allowlist; an unknown or implicit reference never advances the accepted tip.
@@ -31,7 +32,7 @@ export function hasOnlyUnconsumedSketchHistory(history,faceId){
   if(item.type==='WORKER_ENCLOSURE_V1'||item.type==='WORKER_ENCLOSURE_V2'){const fields=physicalBindingFields[item.type];if(!plain(p,['featureId',...fields])||fields.some(k=>!numberField(p[k])))return false;features.set(id,{kind:'enclosure'});continue;}
   if(item.type==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'){
    const data=exactData(p,['version','unit','engine','engineRevision','featureId','faceId','regionId','depth','bodyPolicy']),spec=build(data);
-   if(!spec||selectedProfileVersion(spec)===null||fid(data.featureId)!==id||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>256||typeof data.regionId!=='string'||!data.regionId.startsWith('sketch-region:')||data.regionId.length>8192||typeof data.depth!=='number'||!Number.isFinite(data.depth)||data.depth<=0||data.depth>1e6||data.bodyPolicy!=='separate'||data.faceId===faceId)return false;
+   if(!spec||selectedProfileVersion(spec)===null||fid(data.featureId)!==id||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>256||typeof data.regionId!=='string'||!data.regionId.startsWith('sketch-region:')||data.regionId.length>8192||!isAuthoredLength(data.depth)||data.bodyPolicy!=='separate'||data.faceId===faceId)return false;
    // Retaining the plane (consumed:[]) does not remove the source dependency.
    // Its edits require full atomic replay; only unrelated fast saves qualify.
    features.set(id,{kind:'selected-profile',sourceFace:data.faceId,regionId:data.regionId});liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources:new Set([data.faceId]),holeSource:data.featureId,seeds:new Set()});genericBuild=spec;continue;
@@ -65,7 +66,7 @@ export function hasOnlyUnconsumedSketchHistory(history,faceId){
    liveGeneric.delete(data.a);liveGeneric.delete(data.b);liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources});features.set(id,{kind:'generic-boolean'});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_THROUGH_HOLES_V1'){
-   let data;try{data=captureOwnedHoleIntent(p);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target),source=features.get(fid(data.sourceFeatureId));
+   let data;try{data=captureAuthoredHoleIntent(p);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target),source=features.get(fid(data.sourceFeatureId));
    if(!spec||spec.throughHoleVersion!==1||fid(data.featureId)!==id||!parent||parent.build!==spec||!source||source.kind!=='selected-profile'||source.sourceFace!==data.sourceFaceId||source.regionId!==data.sourceRegionId||!parent.sources.has(data.sourceFaceId)||parent.sources.has(faceId))return false;
    liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{build:spec,sources:new Set(parent.sources),holeSource:parent.holeSource===data.sourceFeatureId?parent.holeSource:null,seeds:parent.holeSource===data.sourceFeatureId?new Set([...parent.seeds,...(data.kind==='centered-through'?[data.featureId]:[])]):new Set()});features.set(id,{kind:'generic-through-hole'});genericBuild=spec;continue;
   }

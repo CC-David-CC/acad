@@ -3,18 +3,21 @@ import {Types} from 'cad/craft/schema/types';
 import {MWorkerSolid,WorkerSolidDisplay} from 'cad/model/mworkerSolid';
 import {MOpenFaceShell} from 'cad/model/mopenFace';
 import {evaluateWorkerSolid} from 'engine/solid/solidLedger.mjs';
-import {captureOwnedHoleIntent} from 'engine/solid/ownedHoleIntent.mjs';
+import {materializeAuthoredHoleIntent} from 'engine/solid/authoredLengthBinding.mjs';
+import {requireModernPhysicalHistory} from 'cad/parameters/modernPhysicalBindings.mjs';
 
 // One authored relationship; tools and through-all extents are Worker derived.
 export function createWorkerThroughHolesOperation(createMount:(engine:string,revision?:string)=>any,validateMount:(engine:string,mount:any,revision?:string)=>void):OperationDescriptor<any>{
  const schema:any={};
  for(const key of ['version','featureId','producerFeatureId','sourceFeatureId','diameter'])schema[key]={type:Types.number};
  for(const key of ['unit','engine','engineRevision','target','sourceFaceId','sourceRegionId','kind'])schema[key]={type:Types.string};
- for(const key of ['offsetX','offsetY'])schema[key]={type:Types.number,optional:true};
+ schema.diameter.dimension='length';
+ for(const key of ['offsetX','offsetY'])schema[key]={type:Types.number,dimension:'length',optional:true};
  return {id:'WORKER_THROUGH_HOLES_V1',label:'Worker through holes',info:'Source-relative through-all holes.',icon:'img/cad/cube',form:[],schema,paramsInfo:()=>'',admitGeometry:()=>{},
   run:async(_params:any,ctx:any,raw:any)=>{
-   const request=captureOwnedHoleIntent(raw),owner=ctx.engineEvaluation,project=ctx.projectService,craft=ctx.craftService,manager=ctx.projectManager,registry=ctx.cadRegistry,expressions=ctx.expressionService,storage=ctx.storageService;
+   const request=materializeAuthoredHoleIntent(raw,ctx.expressionService,_params),owner=ctx.engineEvaluation,project=ctx.projectService,craft=ctx.craftService,manager=ctx.projectManager,registry=ctx.cadRegistry,expressions=ctx.expressionService,storage=ctx.storageService;
    if(!owner||!project?.hasHostLifetime||manager?.unit!=='millimeter'||!project.isDocumentCurrent(project.documentGeneration))throw Error('A current host-bound millimeter workspace is required.');
+   if(expressions.isTyped)requireModernPhysicalHistory(craft.modifications$.value.history);
    const face=registry.findFace(request.sourceFaceId),plane=face?.root;
    if(!(plane instanceof MOpenFaceShell)||plane.face!==face||!face.isPlaneBased||face.defaultSketchId!==request.sourceFaceId)throw Object.assign(Error('The current independent source plane is unavailable.'),{code:'STALE_SOURCE'});
    const generation=project.documentGeneration,storageRevision=storage.revision,epoch=craft.evaluationEpoch,history=craft.modifications$.value,script=expressions.script$.value,streams=[expressions.script$,expressions.list$,expressions.errors$],versions=streams.map(s=>s.revision);

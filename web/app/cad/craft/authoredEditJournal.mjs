@@ -1,3 +1,4 @@
+import {isAuthoredLength,captureAuthoredHoleIntent} from '../../../../modules/engine/solid/authoredLengthBinding.mjs';
 import {sourcePlaneDepth,boundedPlaneSource,planeRecord} from '../../sketcher/headless/sourcePlaneDepthEnvelope.mjs';
 import {captureOwnedLoftFeature} from '../../../../modules/engine/solid/ownedLoftFeature.mjs';
 import {captureOwnedSweepFeature} from '../../../../modules/engine/solid/ownedSweepFeature.mjs';
@@ -5,7 +6,6 @@ import {captureOwnedSweepFeature} from '../../../../modules/engine/solid/ownedSw
 import {captureOwnedRevolveFeature} from '../../../../modules/engine/solid/ownedRevolveFeature.mjs';
 import {solidBodyId,captureSolidBox,captureSolidBoolean} from '../../../../modules/engine/solid/solidIntent.mjs';
 import {captureOwnedLinearHolePatternIntent,linearHolePatternNativeCost} from '../../../../modules/engine/solid/ownedLinearHolePatternIntent.mjs';
-import {captureOwnedHoleIntent} from '../../../../modules/engine/solid/ownedHoleIntent.mjs';
 import {captureOwnedShellFeature} from '../../../../modules/engine/solid/ownedShellFeature.mjs';
 import {captureDrivingDimensionIntent} from '../../sketcher/headless/drivingDimensionTarget.mjs';
 import {captureLinkedPartDrawingDefinition} from '../../../../modules/drawing/linkedPartDrawingDefinition.mjs';
@@ -211,13 +211,13 @@ export function captureSelectedProfileDepthParameters(value) {
   if(!value||typeof value!=='object'||Array.isArray(value)||(prototype!==null&&Object.getPrototypeOf(prototype)!==null)||Reflect.ownKeys(value).length!==selectedProfileKeys.length)throw Error('Invalid selected-profile depth parameters.');
   const result={};
   for(const key of selectedProfileKeys){const d=Object.getOwnPropertyDescriptor(value,key);if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value'))throw Error('Selected-profile depth parameters must be data.');result[key]=d.value;}
-  if(result.version!==1||result.unit!=='millimeter'||result.engine!=='occ'||typeof result.engineRevision!=='string'||!/^sha256:[a-f0-9]{64}:[a-f0-9]{64}$/.test(result.engineRevision)||!integer(result.featureId,1,Number.MAX_SAFE_INTEGER)||typeof result.faceId!=='string'||!result.faceId||result.faceId.length>256||typeof result.regionId!=='string'||!result.regionId.startsWith('sketch-region:')||result.regionId.length>8192||result.bodyPolicy!=='separate'||!depth(result.depth))throw Error('Invalid selected-profile depth parameters.');
+  if(result.version!==1||result.unit!=='millimeter'||result.engine!=='occ'||typeof result.engineRevision!=='string'||!/^sha256:[a-f0-9]{64}:[a-f0-9]{64}$/.test(result.engineRevision)||!integer(result.featureId,1,Number.MAX_SAFE_INTEGER)||typeof result.faceId!=='string'||!result.faceId||result.faceId.length>256||typeof result.regionId!=='string'||!result.regionId.startsWith('sketch-region:')||result.regionId.length>8192||result.bodyPolicy!=='separate'||!isAuthoredLength(result.depth))throw Error('Invalid selected-profile depth parameters.');
   return Object.freeze(result);
 }
 export function recordSelectedProfileDepthEdit(state,{document,revision,index,featureId,parameters,after}) {
   checkCurrent(state,document,revision);checkIdentity(index,featureId);
   const current=captureSelectedProfileDepthParameters(parameters);
-  if(current.featureId!==featureId||!depth(after)||current.depth===after)throw Error('Invalid selected-profile depth edit.');
+  if(current.featureId!==featureId||typeof current.depth!=='number'||!depth(after)||current.depth===after)throw Error('Invalid selected-profile depth edit.');
   const identity=Object.freeze(Object.fromEntries(selectedIdentityKeys.map(key=>[key,current[key]])));
   const text=JSON.stringify(identity),byteSize=256+Math.max(2*text.length,new TextEncoder().encode(text).byteLength);
   const entry=Object.freeze({kind:'selected-profile-depth',index,featureId,identity,before:current.depth,after,byteSize});
@@ -419,7 +419,7 @@ export function planOperationAppendTravel(state,input) {
 // Source/target/backend identity stays exact; tools and geometry are not stored.
 const throughHoleIdentityKeys=Object.freeze(['version','unit','engine','engineRevision','featureId','target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId','kind']);
 const throughHoleDimensionKind=kind=>kind==='centered-through'?'centered':kind==='four-corner-through'?'corners':null;
-export function captureThroughHoleParameters(value) {return captureOwnedHoleIntent(value);}
+export function captureThroughHoleParameters(value) {return captureAuthoredHoleIntent(value);}
 function currentThroughHoleDimensions(parameters) {
   const kind=throughHoleDimensionKind(parameters.kind),fields=holeFields(kind);
   return holeDimensions(kind,Object.fromEntries(fields.map(key=>[key,parameters[key]])));
@@ -736,18 +736,18 @@ export function captureThroughHoleParentBinding(value){
 }
 export function recordThroughHoleParentRepair(state,input){
  const {document,revision,index,featureId,parameters,after}=appendData(input,['document','revision','index','featureId','parameters','after']);checkCurrent(state,document,revision);checkIdentity(index,featureId);
- const current=captureOwnedHoleIntent(parameters),next=captureThroughHoleParentBinding(after);
+ const current=captureAuthoredHoleIntent(parameters),next=captureThroughHoleParentBinding(after);
  if(current.featureId!==featureId||current.kind!=='centered-through')throw Error('Only the same authored centered-through feature can be repaired.');
  const before=captureThroughHoleParentBinding(Object.fromEntries(throughHoleParentKeys.map(k=>[k,current[k]])));
  if(throughHoleParentKeys.every(k=>Object.is(before[k],next[k])))throw Error('An unchanged parent is not a repair.');
- captureOwnedHoleIntent({...current,...next});
+ captureAuthoredHoleIntent({...current,...next});
  const identity=Object.freeze(Object.fromEntries(throughHoleParentIdentityKeys.map(k=>[k,current[k]]))),entry=Object.freeze({kind:'through-hole-parent',index,featureId,identity,before,after:next,byteSize:512+primitiveRecordCharge(identity)+primitiveRecordCharge(before)+primitiveRecordCharge(next)});
  const entries=bounded([...state.entries.slice(0,state.cursor),entry]);return make(document,revision+1,entries,entries.length);
 }
 export function planThroughHoleParentRepairTravel(state,input){
  const {document,revision,direction,index,featureId,parameters}=appendData(input,['document','revision','direction','index','featureId','parameters']);checkCurrent(state,document,revision);checkIdentity(index,featureId);if(!['undo','redo'].includes(direction))throw Error('Invalid parent repair travel direction.');
- const undo=direction==='undo',entry=state.entries[undo?state.cursor-1:state.cursor],current=captureOwnedHoleIntent(parameters);
+ const undo=direction==='undo',entry=state.entries[undo?state.cursor-1:state.cursor],current=captureAuthoredHoleIntent(parameters);
  if(!entry||entry.kind!=='through-hole-parent'||entry.index!==index||entry.featureId!==featureId||current.kind!=='centered-through'||throughHoleParentIdentityKeys.some(k=>!Object.is(current[k],entry.identity[k]))||throughHoleParentKeys.some(k=>!Object.is(current[k],entry[undo?'after':'before'][k])))throw Error('The current hole no longer matches this parent repair.');
- const restored=captureOwnedHoleIntent({...entry.identity,...entry[undo?'before':'after']});
+ const restored=captureAuthoredHoleIntent({...entry.identity,...entry[undo?'before':'after']});
  return Object.freeze({index,featureId,parameters:restored,next:make(document,revision+1,state.entries,state.cursor+(undo?-1:1))});
 }
