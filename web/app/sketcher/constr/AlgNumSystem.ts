@@ -4,6 +4,7 @@ import {eqEps} from "geom/tolerance";
 import {Polynomial, POW_1_FN} from "./polynomial";
 import {AlgNumConstraint, ConstraintDefinitions} from "./ANConstraints";
 import {SolverParam} from "./solverParam";
+import {initializeSingularPointDistance} from './distancePPSingularInitialization';
 import {directionalRelation,directionalSegments,directionalRelationValid,directionalSegmentNonzero} from './lineRelationDomain.mjs';
 import {noteSketchMutation} from '../sketchMutationEpoch.mjs';
 import {assertRetainedStageValid} from '../rigid/rigidGroupDomain.mjs';
@@ -1176,6 +1177,11 @@ class Isolation {
   solve(rough) {
 
     this.beingSolvedConstraints.forEach(c => c.initialGuess());
+
+    // A deterministic DistancePP starting value uses only actual free reduced
+    // Point coordinates. This never declares solve/admission success.
+    initializeSingularPointDistance(this.system, this.polynomials,
+      this.numericalSolver.system.params, this.numericalSolver.system.constraints.length);
 
     this.beingSolvedParams.forEach(solverParam => {
       let val = solverParam.objectParam.get();
