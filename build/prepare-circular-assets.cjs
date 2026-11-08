@@ -7,7 +7,7 @@ if(typeof input!=='string'||!input.trim()){
  fs.writeFileSync(entry,'// Optional circular native assets were not explicitly configured.\nexport default null;\n');
  console.log(JSON.stringify({available:false,nativeInputsRead:false,entry}));
 }else{
- const expected={js:'9789a61709dc680cce64dfa29030a3862ee636319594bdc839c0ed92e9d3571b',wasm:'ad06c43be5d895c6cb41a562b53dee3f819c8b003182c5c99b65258e0b000c0d'};
+ const expected={js:'9789a61709dc680cce64dfa29030a3862ee636319594bdc839c0ed92e9d3571b',wasm:'707facb3d09aa4f84d7e0d2690141ceaf90315d2f69d110f9f763f52dc192649'};
  if(sha(fs.readFileSync(path.join(input,'occ-portable.js')))!==expected.js||sha(fs.readFileSync(path.join(input,'main.wasm')))!==expected.wasm)throw Error('Unexpected circular native input');
  if(fs.existsSync(base)){
   // Reproduce into an own temporary directory rather than trusting an editable

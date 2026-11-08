@@ -64,3 +64,21 @@ Root output /mnt/data10tb/codi-occ-circular-root-build-20261108-r2, Native sourc
 /mnt/data10tb/codi-occ-circular-root-source-20261108-r2. Existing R1 runtime and
 all unrelated kernel pairs remain unchanged. Next: full coherent app build,
 fresh isolated fixture, unchanged whole Chrome workflow and artifact analysis.
+
+## Occurrence-preserving Native build R3
+
+Normal native compile50713 completed0 from7bf611ceedd7d1c7a20c3449be1d270ce5c2efd4;
+recorded inputs unchanged. This preserves every actual per-cell edge/parameter
+occurrence instead of deduplicating across independently computed cells.
+Trimmed source-span records are bounded by two cells times two seam fragments;
+aggregate16 and64KiB bounds remain. It requires the matching occurrence-aware
+Worker validator before app build or execution; compilation is not geometry
+qualification. The original Native checks/constructor mappings are retained.
+
+RawJS remains0062648f3d408ef55e07caa7e1659d63526ea355c7de3025a42d713a1f4ba1d7,
+portableJS9789a61709dc680cce64dfa29030a3862ee636319594bdc839c0ed92e9d3571b;
+newWASM707facb3d09aa4f84d7e0d2690141ceaf90315d2f69d110f9f763f52dc192649.
+Exact existing callback adapter is carried by Native0e28fc069bd67d99cbb756e4a3dc7ef908f046b6,
+backed on both Native LANs. No interpreter execution was used for adaptation.
+Root output /mnt/data10tb/codi-occ-circular-root-build-20261108-r3;
+source /mnt/data10tb/codi-occ-circular-root-source-20261108-r3.
