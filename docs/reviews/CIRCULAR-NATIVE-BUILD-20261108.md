@@ -1,7 +1,7 @@
 # Circular arrangement Native compile checkpoint
 
 Normal Native build only, NOT functional qualification. Root job86376 exits0;
-source/SDK input hashes remain unchanged. Native source82028bb4b5eb25e6765fadfb958f9d2491de0844
+recorded source/archive input hashes remain unchanged. Native source82028bb4b5eb25e6765fadfb958f9d2491de0844
 is backed in both occt-interpreter-codi LAN repositories. Detached root source:
 R730 /mnt/data10tb/codi-occ-circular-root-source-20261108-r1. Output:
 /mnt/data10tb/codi-occ-circular-root-build-20261108-r1. No binary/default/runtime
@@ -36,3 +36,8 @@ cohort/exact-pair module/factory/closed graph, refresh reviewed common bootstrap
 pins, normal complete app build, then ONE full public C02 workflow and independent
 artifact oracle. Old cohorts/defaults/pairs stay separately pinned. Final runtime
 asset check-in/packaging waits for functional qualification per user direction.
+
+Portable adaptation source is now pinned in Native183ab32cd5261e9f30059cea9546dd74c71f96a9
+on both LANs. Recorded inputs cover the listed source files/static archives and
+CMake cache, not a full compiler/toolchain or SDK-header attestation. The exact
+output pair above remains the binding; functional qualification is still pending.
