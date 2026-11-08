@@ -1,3 +1,4 @@
+import {featureSuppressed,requireActiveFeature} from 'engine/solid/authoredHistoryState.mjs';
 import {captureSelectedProfileDepthParameters} from './authoredEditJournal.mjs';
 
 const TYPE='WORKER_SELECTED_PROFILE_EXTRUDE_V2';
@@ -14,7 +15,7 @@ export function createSelectedProfileDepthCommands(ctx:any){
   if(!reason&&!project.hasHostLifetime)reason='A current host-bound workspace is required.';
   if(!reason&&(expressions.isTyped||expressions.script$.value.trim()||Reflect.ownKeys(expressions.table$.value||{}).length))reason='Numeric depth editing currently requires local constants without project parameter bindings.';
   if(!Array.isArray(state.history)||state.history.length>256)fail('RESOURCE_LIMIT','Selected-profile history exceeds its bound.');
-  const features=state.history.flatMap((entry:any,index:number)=>entry.type===TYPE?[Object.freeze({index,...captureSelectedProfileDepthParameters(entry.params)})]:[]);
+  const features=state.history.flatMap((entry:any,index:number)=>entry.type===TYPE?[Object.freeze({index,...captureSelectedProfileDepthParameters(entry.params),state:featureSuppressed(entry)?'suppressed':'active',canEdit:!featureSuppressed(entry)&&!reason,reason:featureSuppressed(entry)?'FEATURE_SUPPRESSED':reason||null})]:[]);
   const end=craft.inspectRectangleCreation(),endJournal=craft.inspectAuthoredEdits();
   if(ctx.craftService!==craft||ctx.projectService!==project||ctx.expressionService!==expressions||craft.modifications$.value!==state||end.revision!==base.revision||endJournal.revision!==journal.revision)throw new DOMException('Selected-profile history changed during inspection.','AbortError');
   return Object.freeze({ready:!reason,reason:reason||null,revision:journal.revision,canUndo:journal.canUndo,canRedo:journal.canRedo,features:Object.freeze(features),scope:'numeric-selected-profile-depth',typedBindings:'unsupported'});
@@ -29,6 +30,7 @@ export function createSelectedProfileDepthCommands(ctx:any){
   if(!info.ready)fail(ctx.expressionService.isTyped||ctx.expressionService.script$.value.trim()||Reflect.ownKeys(ctx.expressionService.table$.value||{}).length?'UNSUPPORTED_PARAMETERS':'UNAVAILABLE',info.reason);
   if(args.revision!==info.revision)fail('STALE_HISTORY','The authored selected-profile revision is stale.');
   if(!info.features.some((feature:any)=>feature.index===args.index&&feature.featureId===args.featureId))fail('INVALID_FEATURE','The selected-profile feature is unavailable.');
+  requireActiveFeature(ctx.craftService.modifications$.value.history[args.index]);
   return craftEdit(args,options);
  }
  function craftEdit(args:any,options:any){return ctx.craftService.authoredSelectedProfileDepthOperation(args,options);}

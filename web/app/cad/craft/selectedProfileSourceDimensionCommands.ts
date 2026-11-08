@@ -1,3 +1,4 @@
+import {requireActiveFeature} from 'engine/solid/authoredHistoryState.mjs';
 import {runSketchTransition,verifyDrivingDimensionCandidate} from 'sketcher/headless/transitionClient';
 import {runSketchSolve} from 'sketcher/headless/client';
 import {captureDrivingDimensionIntent} from 'sketcher/headless/drivingDimensionTarget.mjs';
@@ -46,6 +47,7 @@ export function createSelectedProfileSourceDimensionCommands(ctx:any,submitPrepa
   if(typeof manager.hasManufacturingMetadata!=='function'||manager.hasManufacturingMetadata())fail('UNSUPPORTED_MANUFACTURING_METADATA','Assigned manufacturing metadata is outside this source slice.');
   if(!Array.isArray(entries)||entries.length>256||state.pointer!==entries.length-1||ctx.assemblyService.getConstraints().length)fail('UNSUPPORTED_HISTORY','Use a bounded current part history without assembly constraints.');
   const listed=h.features.find((r:any)=>r.index===a.index&&r.featureId===a.featureId),entry=entries[a.index];if(!listed||entry?.type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2')fail('INVALID_FEATURE','Choose the actual existing selected extrusion.');
+  requireActiveFeature(entry);
   const parameters:any=captureSelectedProfileDepthParameters(entry.params);if(parameters.featureId!==a.featureId||PARAMS.some(k=>listed[k]!==parameters[k]))fail('INVALID_FEATURE','The selected feature changed.');
   const build=requireSelectedProfileBuild(parameters.engine,parameters.engineRevision);if(selectedProfileVersion(build)!==3)fail('UNSUPPORTED_PROFILE_BUILD','Combined source repair requires the recorded version3 profile build.');const budget=selectedProfileHistoryBudget(entries,build.revision);if(!budget.withinLimit)fail(budget.reason||'RESOURCE_LIMIT','The existing replay exceeds its budget.');
   if(!s.candidates.some((r:any)=>r.faceId===parameters.faceId))fail('UNSUPPORTED_SOURCE','The current closed source is unavailable.');

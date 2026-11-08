@@ -1,3 +1,4 @@
+import {featureSuppressed} from '../solid/authoredHistoryState.mjs';
 import {AUTHORED_SOLID_KINDS} from '../solid/authoredSolidKinds.mjs';
 // Pure selected-owned evaluation policy. No geometry, callbacks, model writes,
 // or heap-used/OS-memory guarantee. Legacy mounts keep their existing policy.
@@ -38,7 +39,7 @@ export function selectedProfileHistoryBudget(history,engineRevision){
     if(!count?.enumerable||!Object.hasOwn(count,'value'))fail('INVALID_REQUEST','Pattern result cost requires an authored count.');
     cost=linearHolePatternNativeCost(count.value);
    }
-   if(engine.value==='occ'&&revision.value===engineRevision)count+=cost;
+   if(engine.value==='occ'&&revision.value===engineRevision){if(!featureSuppressed(entry))count+=cost;}
    else incompatible.push(Object.freeze({index:i,type:type.value,engine:engine.value,engineRevision:revision.value}));
   }else if(separateMountTypes.includes(type.value))separateMountFeatures++;
   else if(type.value!=='PLANE')unsupported.add(type.value);

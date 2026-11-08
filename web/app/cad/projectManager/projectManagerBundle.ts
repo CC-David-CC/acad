@@ -239,6 +239,26 @@ export function activate(ctx: ApplicationContext) {
     snapshotWorkspaceUncertain = null;
   }
   function hasManufacturingMetadata(): boolean { return manufacturingMetadata !== null; }
+  // Bounded authored references only. Works at an accepted prefix without
+  // cloning metadata or treating prefix geometry as assignable current parts.
+  function inspectAuthoredManufacturingReferences(){
+    const job=documentJob();job.guard();
+    const craft=ctx.craftService,data=manufacturingMetadata,revision=manufacturingRevision,materialRevision=inspectMaterialSurfaceRevision();
+    if(restoreUnavailable()||ownsDocument(restorePending)||craft.isProcessing||craft.pipelineFailure$.value||craft.engineCleanupFailure$.value)throw Object.assign(Error('Finish the current operation before inspecting references.'),{code:'UNAVAILABLE'});
+    const refs=new Map<string,Readonly<{featureId:number,operationType:string}>>(),bindings=new Map<string,any>();let headers=0,regions=0;
+    if(data){
+      if(data.bindings.length>128||data.objects.length>128)throw Object.assign(Error('Authored reference headers exceed the history-control bound.'),{code:'RESOURCE_LIMIT'});
+      for(const binding of data.bindings){if(++headers>512)throw Object.assign(Error('Authored references exceed the history-control bound.'),{code:'RESOURCE_LIMIT'});bindings.set(binding.id,binding);}
+      for(const part of data.objects){if(++headers>512)throw Object.assign(Error('Authored references exceed the history-control bound.'),{code:'RESOURCE_LIMIT'});for(const region of part.regions){
+        if(++regions>128||++headers>512)throw Object.assign(Error('Authored reference regions exceed the history-control bound.'),{code:'RESOURCE_LIMIT'});
+        const binding=bindings.get(region.bodyId);if(!binding)throw Object.assign(Error('An authored manufacturing reference is missing.'),{code:'INVALID_MANUFACTURING_REFERENCE'});
+        const key=binding.featureId+':'+binding.operationType;if(!refs.has(key))refs.set(key,Object.freeze({featureId:binding.featureId,operationType:binding.operationType}));
+      }}
+    }
+    const result=Object.freeze({materialRevision,references:Object.freeze([...refs.values()])});
+    job.guard();if(ctx.craftService!==craft||manufacturingMetadata!==data||manufacturingRevision!==revision||inspectMaterialSurfaceRevision()!==materialRevision||craft.isProcessing)throw new DOMException('Manufacturing references changed.','AbortError');return result;
+  }
+
   // Check retained assignments without cloning or hashing the whole document.
   // Only bounded, already-validated enclosure metadata is supported here.
   function verifyParentRepairAssignments(previous:any[], prefix:any[], candidate:any[], history:any[], affected:string[]): void {
@@ -1179,7 +1199,7 @@ export function activate(ctx: ApplicationContext) {
     get isRestoring(): boolean { return ownsDocument(restoringSnapshot); },
     listProjects, openProject, newProject, renameProject, deleteProject, importBundle,
     exists, cloneProject, exportProject, importProjectAs, importProject, loadExternalProject,
-    snapshotCurrentProject, snapshotForHostSave, prepareHostSave,prepareHostNativeArchive,restoreNativeArchiveBytesInEmptyWorkspace,closeNativeArchive, inspectDocumentRevision, inspectMaterialSurfaceRevision, inspectEnclosureMaterialRoles, assignEnclosureMaterialRoles, inspectGenericManufacturingParts, prepareGenericManufacturingAssignment,assignGenericManufacturingParts,travelManufacturingMetadata,readManufacturingPublication, restoreSnapshotInEmptyWorkspace, restoreSnapshotBytesInEmptyWorkspace, getManufacturingMetadata, hasManufacturingMetadata, verifyParentRepairAssignments, exportCore3mfResearch,
+    snapshotCurrentProject, snapshotForHostSave, prepareHostSave,prepareHostNativeArchive,restoreNativeArchiveBytesInEmptyWorkspace,closeNativeArchive, inspectDocumentRevision, inspectMaterialSurfaceRevision, inspectEnclosureMaterialRoles, assignEnclosureMaterialRoles, inspectGenericManufacturingParts, prepareGenericManufacturingAssignment,assignGenericManufacturingParts,travelManufacturingMetadata,readManufacturingPublication, restoreSnapshotInEmptyWorkspace, restoreSnapshotBytesInEmptyWorkspace, getManufacturingMetadata, hasManufacturingMetadata,inspectAuthoredManufacturingReferences, verifyParentRepairAssignments, exportCore3mfResearch,
     proposeHostManufacturingRebind, confirmHostManufacturingRebind, cancelHostManufacturingRebind, resetDocumentState
   };
 
@@ -1213,6 +1233,8 @@ export class ProjectCounters {
 }
 
 export interface ProjectModel {
+
+  historyStateVersion?: 1;
 
   history: OperationRequest[],
 
@@ -1278,6 +1300,7 @@ interface IProjectManager {
   readManufacturingPublication(ticket:object):any;
   getManufacturingMetadata(): any;
   hasManufacturingMetadata(): boolean;
+  inspectAuthoredManufacturingReferences():Readonly<{materialRevision:string,references:readonly Readonly<{featureId:number,operationType:string}>[]}>;
   verifyParentRepairAssignments(previous:any[],prefix:any[],candidate:any[],history:any[],affected:string[]): void;
   inspectDocumentRevision(): string;
   inspectMaterialSurfaceRevision(): string;

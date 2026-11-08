@@ -1,3 +1,4 @@
+import {historyStateVersion} from 'engine/solid/authoredHistoryState.mjs';
 import {captureSourcePlaneParameters} from 'sketcher/headless/sourcePlaneDepthEnvelope.mjs';
 import {MOpenFaceShell} from '../model/mopenFace';
 import {sketchBoundaryFrame} from '../sketch/boundaryValidity';
@@ -32,6 +33,7 @@ export function captureFeatureReferenceJob(ctx:any,revision:string|null,opts:any
  if(ctx.assemblyService.getConstraints().length)referenceFailure('UNSUPPORTED_ASSEMBLY','Reference edits do not rewrite assembly constraints');
  const surfacingScene=surfacing?.scene,surfaces=surfacingScene?.surfaces;if(surfacing&&(!Array.isArray(surfaces)||surfaces.length))referenceFailure('UNSUPPORTED_SURFACING','Reference edits do not rewrite surfacing history');
  const workbench=ctx.workbenchService.currentWorkbench$.value;if(workbench&&!workbench.internal&&workbench.workbenchId!==ctx.workbenchService.defaultWorkbenchId)referenceFailure('UNSUPPORTED_WORKBENCH','Use the default modeling workbench');
+ if(historyStateVersion(history)===1)referenceFailure('UNSUPPORTED_HISTORY','Delete and parent repair are not integrated with suppressed feature history.');
  const build=genericHistoryBuild(history);if(!build||build.id!=='occ'||build.selectedProfileVersion!==3||build.throughHoleVersion!==1||build.selectionPlanVersion!==2)referenceFailure('ENGINE_CAPABILITY_UNAVAILABLE','Use one recorded modern OCC part build');
  const budget=selectedProfileHistoryBudget(history,build.revision);if(!budget.withinLimit)referenceFailure(budget.reason||'RESOURCE_LIMIT','Existing history exceeds the recorded build budget');
  const operationBindings=new Map(),featureIndices=new Map<number,number>();

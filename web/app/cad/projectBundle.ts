@@ -1,3 +1,4 @@
+import {historyStateVersion} from '../../../modules/engine/solid/authoredHistoryState.mjs';
 import {setSketchPrecision} from './sketch/sketchReader';
 import {runSandbox} from './sandbox';
 import {LOG_FLAGS} from './logFlags';
@@ -74,6 +75,8 @@ export function initProjectService(ctx: ApplicationContext, id: string, hints: a
     if (!currentWorkbench?.internal && ctx.workbenchService.defaultWorkbenchId !== currentWorkbench.workbenchId) {
       data.workbench = currentWorkbench.workbenchId;
     }
+    const historyState=historyStateVersion(data.history);
+    if(historyState===1)data.historyStateVersion=historyState;
     data.counters = counterGenerator.projectCounters;
     return data;
   }

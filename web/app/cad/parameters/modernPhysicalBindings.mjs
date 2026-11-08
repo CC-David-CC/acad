@@ -1,9 +1,11 @@
+import {historyStateVersion} from '../../../../modules/engine/solid/authoredHistoryState.mjs';
 import {AUTHORED_SOLID_KINDS} from '../../../../modules/engine/solid/authoredSolidKinds.mjs';
 import {captureAuthoredHoleIntent} from '../../../../modules/engine/solid/authoredLengthBinding.mjs';
 import {prepareTypedRectangle} from './typedRectangleBindings.mjs';
 export const MODERN_PHYSICAL_TYPES=Object.freeze(['WORKER_SELECTED_PROFILE_EXTRUDE_V2','WORKER_THROUGH_HOLES_V1']);
 // A formula dependency document is not a geometric simultaneous-equation system.
 export function requireModernPhysicalHistory(history){
+ if(historyStateVersion(history)===1)throw Object.assign(Error('Typed history controls are not integrated.'),{code:'UNSUPPORTED_PARAMETERS'});
  if(!Array.isArray(history)||history.length>256)throw Object.assign(Error('Expected bounded authored parameter history.'),{code:'UNSUPPORTED_PARAMETERS'});
  const modern=history.some(row=>AUTHORED_SOLID_KINDS.includes(row.type));if(!modern)return false;
  for(const row of history)if(row.type!=='PLANE'&&!MODERN_PHYSICAL_TYPES.includes(row.type))throw Object.assign(Error('Typed generic parts currently support only selected rectangles and through holes.'),{code:'UNSUPPORTED_PARAMETERS'});

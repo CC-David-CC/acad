@@ -1,3 +1,4 @@
+import {requireActiveFeature} from 'engine/solid/authoredHistoryState.mjs';
 import {captureSelectedProfileDepthParameters} from './authoredEditJournal.mjs';
 import {captureAuthoredHistory} from './captureAuthoredHistory.mjs';
 import {sketchRevision} from './sketchRevision.mjs';
@@ -28,6 +29,7 @@ export function createSelectedProfileRegionCommands(ctx:any,submitRegionEdit:(ar
   if(!project.hasHostLifetime||manager.unit!=='millimeter'||expressions.isTyped||expressions.script$.value.trim()||Reflect.ownKeys(expressions.table$.value||{}).length)fail('UNSUPPORTED_PARAMETERS','Region reselection requires an owned canonical millimeter document without project parameter bindings.');
   if(!Array.isArray(entries)||entries.length>256||state.pointer!==entries.length-1)fail('UNAVAILABLE','Return to the accepted full history before selecting a region.');
   const listed=historyInfo.features.find((v:any)=>v.index===a.index&&v.featureId===a.featureId),entry=entries[a.index];if(!listed||entry?.type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2')fail('INVALID_FEATURE','The selected-profile feature is unavailable.');
+  requireActiveFeature(entry);
   const parameters:any=captureSelectedProfileDepthParameters(entry.params);if(PARAMS.some(key=>listed[key]!==parameters[key])||parameters.featureId!==a.featureId)fail('INVALID_FEATURE','The selected-profile identity changed.');
   const build=requireSelectedProfileBuild(parameters.engine,parameters.engineRevision),profileVersion=selectedProfileVersion(build);
   if(creationInfo.engineRevision!==parameters.engineRevision||creationInfo.profileVersion!==profileVersion)fail('ENGINE_REVISION_MISMATCH','Retain the exact recorded whole-part backend.');

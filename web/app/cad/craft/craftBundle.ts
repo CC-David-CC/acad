@@ -1,3 +1,7 @@
+import {featureSuppressed,historyStateVersion,HISTORY_CONTROL_TYPES,requireActiveFeature} from 'engine/solid/authoredHistoryState.mjs';
+import {createWorkerHistoryControlCommands} from './workerHistoryControlCommands';
+import {validateControlledHistory,assertActiveHistoryDependencies,assertProtectedHistoryOutputs,applyHistoryControlTravel} from './authoredHistoryControls.mjs';
+import {HISTORY_CONTROL_KINDS,recordHistoryControl,planHistoryControlTravel} from './authoredEditJournal.mjs';
 import {requireModernPhysicalHistory} from '../parameters/modernPhysicalBindings.mjs';
 import {createSourcePlaneDepthCommands} from './sourcePlaneDepthCommands';
 import {createSelectedProfileSourceDimensionCommands} from './selectedProfileSourceDimensionCommands';
@@ -101,6 +105,7 @@ export function activate(ctx: ApplicationContext) {
   let prepareSketchJournalTravel: Function = null;
   let sourcePlaneDepthCommands:any=null;
   let selectedProfileSourceDimensionCommands:any=null;
+  let historyControlCommands:ReturnType<typeof createWorkerHistoryControlCommands>=null;
   let legacyExpressionCommands:any = null;
   const failedEvaluationHistory=new WeakMap<object,any[]>();
   const ownedPipelineHistories=new WeakSet<any[]>();
@@ -170,12 +175,14 @@ export function activate(ctx: ApplicationContext) {
           !Number.isSafeInteger(Number(rawId)) || Number(rawId) <= 0) throw new Error('Invalid feature ID.');
       const id = Number(rawId), previous = modifications$.value;
       const target = editingHistory ? previous.pointer + 1 : -1;
+      if(editingHistory&&previous.history[target])requireActiveFeature(previous.history[target]);
       if (editingHistory && (target < 0 || target >= previous.history.length || Number(previous.history[target].params?.featureId) !== id)) {
         throw new Error('A history edit must retain its existing feature ID.');
       }
       if (previous.history.some((entry, index) => index !== target && Number(entry.params?.featureId) === id)) {
         throw new Error('Duplicate feature ID.');
       }
+      if(historyStateVersion(previous.history)===1&&!HISTORY_CONTROL_TYPES.includes(normalized.type))throw Object.assign(Error('This operation is not integrated with suppressed feature history.'),{code:'UNSUPPORTED_HISTORY'});
       if (!editingHistory) ctx.projectService.counterGenerator.claimNewFeatureId(id);
       const project:any=ctx.projectService,document=project.documentGeneration,sourceEpoch=evaluationEpoch,
         sourceRevision=modifications$.revision,sourceTip=fullTipSignature,sourceModels=models$.value,sourceModelsRevision=models$.revision;
@@ -545,6 +552,57 @@ export function activate(ctx: ApplicationContext) {
     }catch(cause){if(!committed)throw cause;throw Object.assign(Error('Document metadata committed, but notification or lifetime failed.'),{code:'METADATA_PUBLICATION_FAILED',committed:true,cause});}
   }
 
+  async function submitHistoryControl(input:any){
+    const {job,captured,plan,options}=input;
+    job.current();
+    if(captured.signature!==job.context.signature)throw Object.assign(Error('The authenticated authored definition changed.'),{code:'STALE_HISTORY'});
+    const next=await captureAuthoredHistory(plan.history,job.current);job.current();
+    const rows=validateControlledHistory(next.history,job.sourceParents);assertActiveHistoryDependencies(rows);
+    if(plan.kind!=='history-position')assertProtectedHistoryOutputs(job.rows,next.history,job.protectedRefs);
+    const budget=selectedProfileHistoryBudget(next.history,job.build.revision);
+    if(!budget.withinLimit)throw Object.assign(Error('The candidate history exceeds its recorded native budget.'),{code:budget.reason||'RESOURCE_LIMIT'});
+    const currentJournal=authoredJournal$.value;
+    let proposal:any;
+    if(input.travel){
+      if(input.travel.signature!==next.signature||input.travel.pointer!==plan.pointer)throw Error('History travel changed the requested definition or position.');
+      proposal=input.travel.next;
+    }else proposal=recordHistoryControl(currentJournal,{document:job.project.documentGeneration,revision:currentJournal.revision,kind:plan.kind,
+      beforeSignature:captured.signature,afterSignature:next.signature,beforePointer:job.state.pointer,afterPointer:plan.pointer,...plan.delta});
+    const state={history:next.history,pointer:plan.pointer,hints:{noWizardFocus:true}};
+    const preparation:PreparedSketchCommand={candidateScope:job.scope,requireCurrent:job.current,
+      requireCommittedCurrent(){if(!job.alive())throw superseded(true);},
+      async prepare(models,history){
+        job.current();if((await captureAuthoredHistory(history.history,job.current)).signature!==next.signature||history.pointer!==plan.pointer)throw superseded();
+        if(history.pointer===history.history.length-1&&plan.kind!=='history-position')job.requireProtected(models,history.history);
+        job.current();return null;
+      }};
+    job.current();
+    if(pendingPipelines||pendingModifications)throw Object.assign(Error('Another model operation is pending.'),{code:'BUSY'});
+    const stop=()=>{if(job.scope.epoch!==null&&job.scope.epoch===evaluationEpoch)engineResources.cancelCandidates();};
+    const added:AbortSignal[]=[];let poll:any;
+    try{
+      for(const signal of job.signals){if(Object.getOwnPropertyDescriptor(AbortSignal.prototype,'aborted').get.call(signal))throw superseded();EventTarget.prototype.addEventListener.call(signal,'abort',stop,{once:true});added.push(signal);}
+      poll=setInterval(()=>{try{job.current();}catch{stop();}},100);
+      await new Promise<void>((resolve,reject)=>{pendingModifications++;modificationCallbacks.set(state,{onAccepted:resolve,onError:reject,preparation,journalProposal:proposal,journalSignature:next.signature,historyControl:true});modifications$.next(state);});
+    }catch(error){
+      if(error&&typeof error==='object'&&Object.isExtensible(error)&&plan.delta?.featureId!==undefined)Object.defineProperty(error,'requestedFeatureId',{value:plan.delta.featureId,enumerable:true,configurable:true});
+      throw error;
+    }finally{clearInterval(poll);for(const signal of added)EventTarget.prototype.removeEventListener.call(signal,'abort',stop);}
+    preparation.requireCommittedCurrent();
+    return Object.freeze({changed:true,revision:inspectAuthoredEdits().revision,pointer:plan.pointer,afterFeatureId:plan.pointer<0?null:Number(next.history[plan.pointer].params.featureId),
+      ...(plan.kind==='feature-suppression'?{featureId:plan.delta.featureId,index:plan.delta.index,suppressed:plan.delta.afterSuppressed}:{}),kind:plan.kind,persistence:'volatile-workspace'});
+  }
+
+  async function travelHistoryControl(args:any,rawOptions:any){
+    if(!historyControlCommands)throw Error('History controls are unavailable.');
+    const job=historyControlCommands.captureHistoryControlJob(rawOptions);
+    const captured=await captureAuthoredHistory(job.history,job.current);job.current();
+    const travel=planHistoryControlTravel(authoredJournal$.value,{document:job.project.documentGeneration,revision:authoredJournal$.value.revision,direction:args.direction,currentSignature:captured.signature,currentPointer:job.state.pointer});
+    const state=applyHistoryControlTravel(captured.history,travel,args.direction);
+    const e=travel.entry,delta=e.kind==='feature-suppression'?{index:e.index,featureId:e.featureId,afterSuppressed:args.direction==='undo'?e.beforeSuppressed:e.afterSuppressed}:{};
+    return submitHistoryControl({job,captured,plan:{kind:e.kind,...state,delta},options:rawOptions,travel});
+  }
+
   function inspectAuthoredEdits() {
     const journal = authoredJournal$.value;
     // A native restore publishes its model while the manager still owns the
@@ -555,12 +613,15 @@ export function activate(ctx: ApplicationContext) {
     const fullTip = modifications$.value.pointer === modifications$.value.history.length - 1 &&
       fullTipSketchRevision === sketchRevision(ctx.storageService,(ctx.projectService as any).sketchStorageNamespace) &&
       fullTipMaterialSurfaceRevision === (ctx.projectManager as any).inspectMaterialSurfaceRevision();
+    const historyState=modifications$.value;
+    const controlsCurrent=journalHeadDefinition===historyState.history&&fullTipSketchRevision===sketchRevision(ctx.storageService,(ctx.projectService as any).sketchStorageNamespace)&&fullTipMaterialSurfaceRevision===(ctx.projectManager as any).inspectMaterialSurfaceRevision();
+    const canTravel=(entry:any)=>fullTip||(controlsCurrent&&HISTORY_CONTROL_KINDS.includes(entry?.kind));
     const documentRevision=(ctx.projectManager as any).inspectDocumentRevision();
     const target=(entry:any):any=>entry ? entry.kind==='document-metadata'?documentMetadataTarget(entry):Object.freeze(entry.kind==='operation-append'?{kind:entry.kind,index:entry.index,featureId:entry.featureId,operationType:entry.operation.type}:entry.kind==='source-plane-depth'?{kind:entry.kind,index:entry.index,featureId:entry.featureId,faceId:entry.faceId,orientation:entry.orientation}:entry.kind==='sketch-bytes'?{kind:entry.kind,faceId:entry.faceId}:entry.kind==='parameter-bracket'?{kind:entry.kind,faceId:entry.faceId,index:entry.index,featureId:entry.featureId}:{kind:entry.kind,index:entry.index,featureId:entry.featureId}) : null;
-    return Object.freeze({scope:'session-local-supported-authored-transactions-v1',revision:`${journal.document}:${journal.revision}:${documentRevision}`, canUndo:fullTip && journal.cursor > 0,
-      canRedo:fullTip && journal.cursor < journal.entries.length,
-      undoTarget:fullTip ? target(journal.entries[journal.cursor-1]) : null,
-      redoTarget:fullTip ? target(journal.entries[journal.cursor]) : null});
+    return Object.freeze({scope:'session-local-supported-authored-transactions-v1',revision:`${journal.document}:${journal.revision}:${documentRevision}`, canUndo:journal.cursor>0&&canTravel(journal.entries[journal.cursor-1]),
+      canRedo:journal.cursor<journal.entries.length&&canTravel(journal.entries[journal.cursor]),
+      undoTarget:canTravel(journal.entries[journal.cursor-1])?target(journal.entries[journal.cursor-1]):null,
+      redoTarget:canTravel(journal.entries[journal.cursor])?target(journal.entries[journal.cursor]):null});
   }
   function authoredEditTravel(args:any, options:any = {}) {
     if(!args || typeof args!=='object' || Array.isArray(args) ||
@@ -573,6 +634,7 @@ export function activate(ctx: ApplicationContext) {
     if(args.revision!==info.revision)throw new Error('Authored edit history is stale.');
     const target=args.direction==='undo'?info.undoTarget:info.redoTarget;
     if(!target)throw new Error('No supported authored edit in that direction.');
+    if(HISTORY_CONTROL_KINDS.includes(target.kind))return travelHistoryControl(args,options);
     if(target.kind==='document-metadata'){
       if(target.domain==='manufacturing')return (ctx.projectManager as any).travelManufacturingMetadata(args,options);
       if(target.domain==='linked-part-drawing')return (ctx.projectManager as any).travelLinkedPartDrawingMetadata(args,options);
@@ -909,6 +971,7 @@ export function activate(ctx: ApplicationContext) {
     const captured = appendTravel?{history:before.history,signature:null}:await captureAuthoredHistory(before.history, check);
     if (!appendTravel&&(!fullTipSignature || captured.signature !== fullTipSignature)) throw new Error('The accepted full-tip history is unavailable or changed.');
     const index = args.index, request = captured.history[index];
+    if(request)requireActiveFeature(request);
     const expectedType=kind==='solid-shell'?'WORKER_SOLID_SHELL_V1':removeOperation?'WORKER_SELECTED_PROFILE_EXTRUDE_V2':kind==='through-hole-parent'?'WORKER_THROUGH_HOLES_V1':kind==='revolve-angle'?'WORKER_SELECTED_PROFILE_REVOLVE_V1':kind==='linear-hole-pattern'?'WORKER_LINEAR_HOLE_PATTERN_V1':kind==='through-hole'?'WORKER_THROUGH_HOLES_V1':kind==='solid-edge-treatment'?'WORKER_SOLID_EDGE_TREATMENT_V1':['selected-profile-depth','selected-profile-region'].includes(kind)?'WORKER_SELECTED_PROFILE_EXTRUDE_V2':kind==='solid-box'?'WORKER_SOLID_BOX_V1':kind==='extrusion'?'WORKER_RECTANGLE_EXTRUDE_V1':kind==='centered'?'WORKER_CENTERED_THROUGH_HOLE_V1':'WORKER_FOUR_CORNER_THROUGH_HOLES_V1';
     if (!appendTravel&&!removeUndo&&(!Number.isSafeInteger(index) || index < 0 || !request || request.type !== expectedType ||
         Number(request.params?.featureId) !== args.featureId)) throw new Error('The selected feature is unavailable.');
@@ -1214,6 +1277,13 @@ export function activate(ctx: ApplicationContext) {
   Object.assign(ctx.craftService,createWorkerShellCommands(ctx,(request,accepted,rejected,preparation)=>
     submitModification(request,addModification,accepted,rejected,false,preparation),
     epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();}));
+  historyControlCommands=createWorkerHistoryControlCommands(ctx,submitHistoryControl,()=>({
+    ready:ownedPipelineHistories.has(modifications$.value.history)&&journalHeadDefinition===modifications$.value.history&&!!fullTipSignature&&fullTipSketchRevision===sketchRevision(ctx.storageService,(ctx.projectService as any).sketchStorageNamespace)&&fullTipMaterialSurfaceRevision===(ctx.projectManager as any).inspectMaterialSurfaceRevision(),
+    history:modifications$.value.history,journal:authoredJournal$.value,signature:fullTipSignature,
+    sourceModels:lastCompleteService===ctx.projectService&&lastCompleteGeneration===(ctx.projectService as any).documentGeneration?(lastComplete||models$.value):models$.value
+  }),epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();});
+  const {inspectWorkerHistoryControls,setWorkerFeatureSuppressed,setWorkerHistoryPrefix,commitWorkerHistoryBranch}=historyControlCommands;
+  Object.assign(ctx.craftService,{inspectWorkerHistoryControls,setWorkerFeatureSuppressed,setWorkerHistoryPrefix,commitWorkerHistoryBranch});
   Object.assign(ctx.craftService,createWorkerFeatureDeleteCommands(ctx,(args,options)=>authoredFeatureOperation('operation-remove',args,options)));
   Object.assign(ctx.craftService,createWorkerThroughHoleParentCommands(ctx,(args,options)=>authoredFeatureOperation('through-hole-parent',args,options)));
   Object.assign(ctx.craftService,createWorkerThroughHoleCommands(ctx,(request,accepted,rejected,preparation)=>
@@ -1287,6 +1357,7 @@ export function activate(ctx: ApplicationContext) {
     if(!ownedPipelineHistories.has(history))history=await capturePipelineHistory(history,()=>{requireCurrent(epoch,documentGeneration,service);preparation?.requireCurrent();});
     ownedPipelineHistories.add(history);
     if(!Number.isSafeInteger(endIndex)||endIndex < -1||endIndex >= history.length)throw Error('Invalid feature history position.');
+    if(historyStateVersion(history)===1){const rows=validateControlledHistory(history);assertActiveHistoryDependencies(rows);}
     const resources = engineResources.begin({purpose:observation?'observation':'model',signal:observation?.signal||service.documentSignal,
       valid:() => isCurrent(epoch, documentGeneration, service)&&(!observation||observation.valid())});
     try {
@@ -1343,6 +1414,7 @@ export function activate(ctx: ApplicationContext) {
       for (let i=0; i<=endIndex; i++) {
         await yieldIfNeeded();
         requireCurrent(epoch, documentGeneration, service);
+        if(featureSuppressed(history[i])){captureOperationAppend(history[i]);continue;}
         const next = i < endIndex ? history[i + 1] : null;
         patternReplay.requestedSeed = next?.type === 'PATTERN_CUT_LINEAR' ? Number(next.params?.seedFeatureId) : null;
         if (history[i].type !== 'PATTERN_CUT_LINEAR') patternReplay.seed = null;
@@ -1356,7 +1428,13 @@ export function activate(ctx: ApplicationContext) {
         if (!independentPlane) registry.flushModels();
         let operationResult;
         try { operationResult=await runRequest(history[i], operationContext, expectedOperation); }
-        catch(error) { if(markRepairFailure && error && typeof error==='object' && Object.isExtensible(error))Object.defineProperty(error,'evaluationIndex',{value:i,configurable:true}); throw error; }
+        catch(error) {
+          if(error&&typeof error==='object'&&Object.isExtensible(error)){
+            for(const [key,value]of [['originatingFeatureId',Number(history[i].params.featureId)],['originatingIndex',i]] as const){const prior=Object.getOwnPropertyDescriptor(error,key);if(!prior||prior.configurable)Object.defineProperty(error,key,{value,enumerable:true,configurable:true});}
+            if(markRepairFailure)Object.defineProperty(error,'evaluationIndex',{value:i,configurable:true});
+          }
+          throw error;
+        }
         const {consumed, created}=operationResult;
         if (history[i].type === 'PATTERN_CUT_LINEAR') patternReplay.seed = null;
         requireCurrent(epoch, documentGeneration, service);
@@ -1371,6 +1449,12 @@ export function activate(ctx: ApplicationContext) {
       await yieldIfNeeded();
       requireCurrent(epoch, documentGeneration, service);
       if(observedFrames.size!==sourceFrames.size)throw Error('The candidate sketch source plane could not be reconstructed.');
+      if(historyStateVersion(history)===1){
+        if(genericHistoryBuild(history)?.selectedProfileVersion!==3)throw Object.assign(Error('Suppressed history requires its recorded modern native build.'),{code:'ENGINE_CAPABILITY_UNAVAILABLE'});
+        const parents=new Map<string,number>();
+        for(const model of models)if(model instanceof MOpenFaceShell){const row=history[model.originatingOperation];if(row?.type==='PLANE')parents.set(model.face.id,Number(row.params.featureId));}
+        const rows=validateControlledHistory(history,endIndex===history.length-1?parents:null);assertActiveHistoryDependencies(rows);
+      }
       // Full documents must adopt saved sources onto their real owning faces;
       // prefix rollback legitimately leaves future sources for Redo.
       if(endIndex===history.length-1)registry.assertSketchSourcesResolved(sketchStorage.getAllSketches().map(row=>row.id));
@@ -1560,6 +1644,11 @@ export function activate(ctx: ApplicationContext) {
         publication.commit();
         expressionPublication?.installBinding();
         if (nextJournal) journalHeadSignature=nextJournalSignature;
+        if(callbacks?.historyControl){
+          journalHeadDefinition=result.history;fullTipSignature=nextJournalSignature;
+          fullTipSketchRevision=sketchRevision(ctx.storageService,(service as any).sketchStorageNamespace);
+          fullTipMaterialSurfaceRevision=(ctx.projectManager as any).inspectMaterialSurfaceRevision();
+        }
         if (requestedPointer===result.history.length-1) {
           fullTipSignature=nextTipSignature;journalHeadDefinition=result.history;
           try {fullTipSketchRevision=sketchRevision(ctx.storageService,(service as any).sketchStorageNamespace);}
@@ -1681,6 +1770,7 @@ function historyTravel(modifications$) {
 }
 
 export interface OperationRequest {
+  suppressed?: true;
   type: string;
   params: OperationParams;
 }
@@ -1705,6 +1795,11 @@ export interface CraftHints {
 }
 
 interface CraftService {
+  inspectWorkerHistoryControls?:ReturnType<typeof createWorkerHistoryControlCommands>['inspectWorkerHistoryControls'];
+  setWorkerFeatureSuppressed?:ReturnType<typeof createWorkerHistoryControlCommands>['setWorkerFeatureSuppressed'];
+  setWorkerHistoryPrefix?:ReturnType<typeof createWorkerHistoryControlCommands>['setWorkerHistoryPrefix'];
+  commitWorkerHistoryBranch?:ReturnType<typeof createWorkerHistoryControlCommands>['commitWorkerHistoryBranch'];
+
   captureManufacturingEditContext?: ()=>any;
   commitManufacturingMetadata?: (ticket:any)=>any;
   inspectSourcePlanes?: ReturnType<typeof createSourcePlaneDepthCommands>['inspectSourcePlanes'];

@@ -1,3 +1,4 @@
+import {featureSuppressed} from 'engine/solid/authoredHistoryState.mjs';
 import {MWorkerSolid} from 'cad/model/mworkerSolid';
 import {captureSolidEdgeTreatment,solidBodyId} from 'engine/solid/solidIntent.mjs';
 import {inspectWorkerSolidSelections} from 'engine/solid/solidLedger.mjs';
@@ -130,7 +131,7 @@ export function createWorkerEdgeTreatmentCommands(ctx:any,submit:any,cancelEpoch
   for(let index=0;index<state.history.length;index++){
    const d=Object.getOwnPropertyDescriptor(state.history,String(index)),entry=d?.value,type=entry&&Object.getOwnPropertyDescriptor(entry,'type');
    if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value')||!type?.enumerable||!Object.prototype.hasOwnProperty.call(type,'value')||typeof type.value!=='string')fail('INVALID_REQUEST','Authored history must be dense data.');
-   if(type.value===OP){const p=Object.getOwnPropertyDescriptor(entry,'params');if(!p?.enumerable||!Object.prototype.hasOwnProperty.call(p,'value'))fail('INVALID_REQUEST','Authored edge parameters must be data.');const captured=captureSolidEdgeTreatment(p.value);let unsupported=null;try{const build:any=requireCadEngineBuild(captured.engine,captured.engineRevision);if(build.edgeTreatmentVersion!==1)unsupported='ENGINE_CAPABILITY_UNAVAILABLE';}catch(error){unsupported=error.code||'ENGINE_REVISION_MISMATCH';}features.push(Object.freeze({index,...captured,canEdit:!reason&&!unsupported,reason:reason||unsupported}));}
+   if(type.value===OP){const p=Object.getOwnPropertyDescriptor(entry,'params');if(!p?.enumerable||!Object.prototype.hasOwnProperty.call(p,'value'))fail('INVALID_REQUEST','Authored edge parameters must be data.');const captured=captureSolidEdgeTreatment(p.value);let unsupported=null;try{const build:any=requireCadEngineBuild(captured.engine,captured.engineRevision);if(build.edgeTreatmentVersion!==1)unsupported='ENGINE_CAPABILITY_UNAVAILABLE';}catch(error){unsupported=error.code||'ENGINE_REVISION_MISMATCH';}features.push(Object.freeze({index,...captured,state:featureSuppressed(entry)?'suppressed':'active',canEdit:!featureSuppressed(entry)&&!reason&&!unsupported,reason:featureSuppressed(entry)?'FEATURE_SUPPRESSED':reason||unsupported}));}
   }
   const end=craft.inspectRectangleCreation(),endJournal=craft.inspectAuthoredEdits();
   if(ctx.craftService!==craft||ctx.projectService!==project||project.documentGeneration!==generation||ctx.projectManager!==manager||manager.unit!==unit||craft.modifications$.value!==state||end.revision!==base.revision||endJournal.revision!==journal.revision)throw abort();

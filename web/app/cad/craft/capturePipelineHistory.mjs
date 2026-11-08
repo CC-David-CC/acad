@@ -1,3 +1,4 @@
+import {historyStateVersion} from '../../../../modules/engine/solid/authoredHistoryState.mjs';
 // A private, cooperative capture for full replay. It is intentionally separate
 // from the much smaller edit-command capture. Strings are retained by value;
 // no serialized copy or canonical hash of the history is constructed.
@@ -75,6 +76,7 @@ async function traverse(history, snapshot, check, compare) {
     } finally { ancestors.delete(value); }
   };
   check();
+  historyStateVersion(history);
   const result = await visit(history, snapshot, 0);
   check();
   return result;

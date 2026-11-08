@@ -1,3 +1,4 @@
+import {validateModelHistoryState} from '../../../../modules/engine/solid/authoredHistoryState.mjs';
 import {validateManufacturingMetadata} from './manufacturingMetadata.mjs';
 import {captureDisplayUnitsMetadata} from './displayUnits.mjs';
 import {captureLinkedPartDrawingDefinition} from '../../../../modules/drawing/linkedPartDrawingDefinition.mjs';
@@ -20,7 +21,7 @@ export function validateProjectTree(root) {
 }
 function validateProject(project) {
   if (!record(project) || !only(project, ['model','sketches','surfacing']) || !record(project.model) ||
-      !only(project.model, ['history','expressions','assembly','workbench','counters']) ||
+      !only(project.model, ['history','expressions','assembly','workbench','counters','historyStateVersion']) ||
       !Array.isArray(project.model.history) || project.model.history.length > 10000 ||
       typeof project.model.expressions !== 'string' || !Array.isArray(project.sketches) || project.sketches.length > 10000) {
     throw new Error('Invalid or unsupported project structure');
@@ -29,6 +30,7 @@ function validateProject(project) {
       !only(project.model.counters, ['featureId']) || !Number.isSafeInteger(project.model.counters.featureId) || project.model.counters.featureId < 0)) {
     throw new Error('Invalid project counters');
   }
+  validateModelHistoryState(project.model);
   for (const sketch of project.sketches) {
     if (!record(sketch) || !only(sketch, ['id','data']) || typeof sketch.id !== 'string' || !record(sketch.data)) throw new Error('Invalid project sketch');
   }

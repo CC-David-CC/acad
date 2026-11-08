@@ -1,3 +1,4 @@
+import {featureSuppressed} from '../../../../modules/engine/solid/authoredHistoryState.mjs';
 import {isAuthoredLength,captureAuthoredHoleIntent} from '../../../../modules/engine/solid/authoredLengthBinding.mjs';
 import {sourcePlaneDepth,boundedPlaneSource,planeRecord} from '../../sketcher/headless/sourcePlaneDepthEnvelope.mjs';
 import {captureOwnedLoftFeature} from '../../../../modules/engine/solid/ownedLoftFeature.mjs';
@@ -24,10 +25,10 @@ function checkIdentity(index,id) { if(!integer(index,0,255)||!integer(id,1,Numbe
 function make(document,revision,entries,cursor) {return Object.freeze({document,revision,entries:Object.freeze(entries),cursor});}
 function bounded(entries) {
   entries=entries.slice(-LIMIT);
-  let bytes=entries.reduce((sum,entry)=>sum+(['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','document-metadata'].includes(entry.kind) ? entry.byteSize : 256),0);
+  let bytes=entries.reduce((sum,entry)=>sum+(['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','document-metadata','feature-suppression','history-position','history-branch'].includes(entry.kind) ? entry.byteSize : 256),0);
   while(bytes>MAX_JOURNAL_BYTES && entries.length>1) {
     const removed=entries.shift();
-    bytes-=['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','document-metadata'].includes(removed.kind) ? removed.byteSize : 256;
+    bytes-=['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','document-metadata','feature-suppression','history-position','history-branch'].includes(removed.kind) ? removed.byteSize : 256;
   }
   if(bytes>MAX_JOURNAL_BYTES)throw Error('The authored edit exceeds the undo limit.');
   return entries;
@@ -373,9 +374,9 @@ function captureSolidAppendParameters(value,box) {
 }
 export function supportsOperationAppend(type){return typeof type==='string'&&Object.hasOwn(appendDefinitions,type);}
 export function captureOperationAppend(request) {
- const captured=appendData(request,['type','params']);
+ const suppressed=featureSuppressed(request),captured=appendData(request,suppressed?['type','params','suppressed']:['type','params']);
  if(!supportsOperationAppend(captured.type))throw Error('Unsupported authored operation append.');
- return Object.freeze({type:captured.type,params:appendDefinitions[captured.type].capture(captured.params)});
+ return Object.freeze({type:captured.type,params:appendDefinitions[captured.type].capture(captured.params),...(suppressed?{suppressed:true}:{})});
 }
 function checkAppendIdentity(index,featureId,previousFeatureId) {
   if(!integer(index,0,9999)||!integer(featureId,1,Number.MAX_SAFE_INTEGER)||(index===0?previousFeatureId!==null:!integer(previousFeatureId,1,Number.MAX_SAFE_INTEGER))||featureId===previousFeatureId)throw Error('Invalid operation-append feature relationship.');
@@ -390,7 +391,7 @@ function operationAppendBytes(operation) {
   const string=value=>{add('"');for(let start=0;start<value.length;){let end=Math.min(start+1024,value.length);if(end<value.length&&value.charCodeAt(end-1)>=0xd800&&value.charCodeAt(end-1)<=0xdbff&&value.charCodeAt(end)>=0xdc00&&value.charCodeAt(end)<=0xdfff)end--;add(JSON.stringify(value.slice(start,end)).slice(1,-1));start=end;}add('"');};
   add('{"type":');string(operation.type);add(',"params":{');
   appendKeys(operation.type,operation.params).forEach((key,i)=>{if(i)add(',');string(key);add(':');const value=operation.params[key];if(key==='sections'){add('[');value.forEach((section,j)=>{if(j)add(',');add('{"faceId":');string(section.faceId);add(',"regionId":');string(section.regionId);add(',"seam":{"kind":');string(section.seam.kind);if(section.seam.kind==='vertex'){add(',"pointId":');string(section.seam.pointId);}else{add(',"curveId":');string(section.seam.curveId);add(',"angleRadians":');add(JSON.stringify(section.seam.angleRadians));}add(',"reversed":');add(String(section.seam.reversed));add('}}');});add(']');}else if(key==='pathCurves'){add('[');value.forEach((ref,j)=>{if(j)add(',');add('{\"curveId\":');string(ref.curveId);add(',\"reversed\":');add(String(ref.reversed));add('}');});add(']');}else if(key==='edgeIds'||key==='removedFaceIds'){add('[');value.forEach((id,j)=>{if(j)add(',');string(id);});add(']');}else if(typeof value==='string')string(value);else add(String(value));});
-  add('}}');return 256+Math.max(2*units,bytes);
+  add('}');if(featureSuppressed(operation))add(',"suppressed":true');add('}');return 256+Math.max(2*units,bytes);
 }
 export function recordOperationAppend(state,input) {
   const {document,revision,index,operation,previousFeatureId}=appendData(input,['document','revision','index','operation','previousFeatureId']);
@@ -750,4 +751,33 @@ export function planThroughHoleParentRepairTravel(state,input){
  if(!entry||entry.kind!=='through-hole-parent'||entry.index!==index||entry.featureId!==featureId||current.kind!=='centered-through'||throughHoleParentIdentityKeys.some(k=>!Object.is(current[k],entry.identity[k]))||throughHoleParentKeys.some(k=>!Object.is(current[k],entry[undo?'after':'before'][k])))throw Error('The current hole no longer matches this parent repair.');
  const restored=captureAuthoredHoleIntent({...entry.identity,...entry[undo?'before':'after']});
  return Object.freeze({index,featureId,parameters:restored,next:make(document,revision+1,state.entries,state.cursor+(undo?-1:1))});
+}
+
+// Same journal, source deltas only. Signatures bind the bounded exact authored
+// definition, not geometry; suffix payloads are charged and never snapshots.
+export const HISTORY_CONTROL_KINDS=Object.freeze(['feature-suppression','history-position','history-branch']);
+export function recordHistoryControl(state,input){
+ const common=['document','revision','kind','beforeSignature','afterSignature','beforePointer','afterPointer'];
+ const kind=Object.getOwnPropertyDescriptor(input||{},'kind')?.value;
+ const extra=kind==='feature-suppression'?['index','featureId','operationType','beforeSuppressed','afterSuppressed']:kind==='history-branch'?['suffix']:[];
+ const a=appendData(input,[...common,...extra]);checkCurrent(state,a.document,a.revision);
+ if(!HISTORY_CONTROL_KINDS.includes(kind)||!integer(a.beforePointer,-1,255)||!integer(a.afterPointer,-1,255)||[a.beforeSignature,a.afterSignature].some(v=>typeof v!=='string'||!v||v.length>262144))throw Error('Invalid bounded history-control record.');
+ let byteSize=512+2*(a.beforeSignature.length+a.afterSignature.length),delta={};
+ if(kind==='feature-suppression'){
+  checkIdentity(a.index,a.featureId);
+  if(typeof a.operationType!=='string'||a.operationType.length>128||typeof a.beforeSuppressed!=='boolean'||typeof a.afterSuppressed!=='boolean'||a.beforeSuppressed===a.afterSuppressed)throw Error('Invalid suppression delta.');
+  delta={index:a.index,featureId:a.featureId,operationType:a.operationType,beforeSuppressed:a.beforeSuppressed,afterSuppressed:a.afterSuppressed};
+ }else if(kind==='history-branch'){
+  if(!Array.isArray(a.suffix)||!a.suffix.length||a.suffix.length>256||Reflect.ownKeys(a.suffix).length!==a.suffix.length+1)throw Error('Invalid authored branch suffix.');
+  const suffix=[];for(let i=0;i<a.suffix.length;i++){const d=Object.getOwnPropertyDescriptor(a.suffix,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value'))throw Error('Branch suffix must be dense own data.');const operation=captureOperationAppend(d.value);byteSize+=operationAppendBytes(operation);suffix.push(operation);}
+  delta={suffix:Object.freeze(suffix)};
+ }else if(a.beforeSignature!==a.afterSignature||a.beforePointer===a.afterPointer)throw Error('Invalid history position delta.');
+ const entry=Object.freeze({kind,beforeSignature:a.beforeSignature,afterSignature:a.afterSignature,beforePointer:a.beforePointer,afterPointer:a.afterPointer,...delta,byteSize});
+ const entries=bounded([...state.entries.slice(0,state.cursor),entry]);return make(a.document,a.revision+1,entries,entries.length);
+}
+export function planHistoryControlTravel(state,{document,revision,direction,currentSignature,currentPointer}){
+ checkCurrent(state,document,revision);if(!['undo','redo'].includes(direction))throw Error('Invalid history-control direction.');
+ const entry=state.entries[direction==='undo'?state.cursor-1:state.cursor],undo=direction==='undo';
+ if(!entry||!HISTORY_CONTROL_KINDS.includes(entry.kind)||currentSignature!==entry[undo?'afterSignature':'beforeSignature']||currentPointer!==entry[undo?'afterPointer':'beforePointer'])throw Error('The authored history control is stale.');
+ return Object.freeze({entry,pointer:entry[undo?'beforePointer':'afterPointer'],signature:entry[undo?'beforeSignature':'afterSignature'],next:make(document,revision+1,state.entries,state.cursor+(undo?-1:1))});
 }
