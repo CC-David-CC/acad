@@ -48,3 +48,8 @@ declare module 'codi-step-export-assets' {const assets:null|{worker:string;js:st
 declare module 'codi-manufacturing-mesh-assets' {const assets:null|{worker:string;js:string;wasm:string;modules:Record<string,string>};export default assets;}
 
 declare module 'codi-shell-assets' {const assets:null|{worker:string;js:string;wasm:string;modules:Record<string,string>};export default assets;}
+
+declare module 'codi-circular-assets' {
+ const assets:null|{circularArrangementVersion:1;selectedRegionArrangementVersion:1;worker:string;js:string;wasm:string;modules:Record<string,string>};
+ export default assets;
+}

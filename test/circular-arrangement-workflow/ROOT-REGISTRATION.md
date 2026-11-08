@@ -28,3 +28,7 @@ Next: final source review and qualified common fixes, normal fresh full build,
 exact fixture, one complete public workflow then independent oracle. Preserve
 first failures and acceptance limits. No microtests or final runtime packaging.
 Earlier SOURCE.md missing-root/no-compile statements are historical milestones.
+
+Independent source review b4faf6d found missing circular resource rule and alias
+declaration. Both narrow sibling splices are added; old rules/closure/guards
+stay unchanged. Source repair only, no runtime/build failure or pass claimed.

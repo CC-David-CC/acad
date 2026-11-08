@@ -160,6 +160,11 @@ module.exports = {
         if(relative.startsWith('..')||path.isAbsolute(relative))throw Error('Unexpected manufacturing mesh asset path');
         return 'manufacturing-mesh/'+relative.split(path.sep).join('/');
       }}},
+      {include: [path.join(__dirname, '.build/circular-assets')], type: 'asset/resource', generator: {filename: data => {
+        const relative=path.relative(path.join(__dirname,'.build/circular-assets'),path.resolve(__dirname,data.filename));
+        if(relative.startsWith('..')||path.isAbsolute(relative))throw Error('Unexpected circular asset path');
+        return 'circular/'+relative.split(path.sep).join('/');
+      }}},
       {include: [path.join(__dirname, '.build/shell-assets')], type: 'asset/resource', generator: {filename: data => {
         const relative=path.relative(path.join(__dirname,'.build/shell-assets'),path.resolve(__dirname,data.filename));
         if(relative.startsWith('..')||path.isAbsolute(relative))throw Error('Unexpected shell asset path');
