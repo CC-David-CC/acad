@@ -233,3 +233,16 @@ export function verifyPrimitiveAppendCandidate(workerUrl:string,input:any,option
  else{const d=captureRecord(primitive.data,primitive.kind==='Arc'?['a','b','c']:['a','b']);data=Object.freeze(primitive.kind==='Arc'?{a:point(d.a),b:point(d.b),c:point(d.c)}:{a:point(d.a),b:point(d.b)});}
  return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-primitive',revision:a.revision,sketchJSON:a.sketchJSON,externalParameters:Object.freeze(external),primitive:Object.freeze({...primitive,data}),candidateJSON:a.candidateJSON}),captureOptions(options));
 }
+
+
+// Original request captured before queueing; no caller-provided scope/geometry
+// permission or solved status can replace the independent Worker reconstruction.
+export function verifyLengthRelationCandidate(workerUrl:string,input:any,options:SketchSolveOptions={}){
+ const a=captureRecord(input,['revision','sketchJSON','externalParameters','intent','candidateJSON','relation']);
+ if(typeof a.revision!=='string'||!a.revision||a.revision.length>256||[a.sketchJSON,a.candidateJSON].some(v=>typeof v!=='string'||v.length>1048576))throw Error('Invalid length relation verification source.');
+ const intent=captureRecord(a.intent,['ids','factor','offset']),ids=captureArray(intent.ids,2);if(ids.length!==2||ids.some(id=>typeof id!=='string'||!id||id.length>256)||ids[0]===ids[1]||typeof intent.factor!=='number'||!Number.isFinite(intent.factor)||intent.factor<0||typeof intent.offset!=='number'||!Number.isFinite(intent.offset))throw Error('Invalid length relation verification intent.');
+ const relation=captureRecord(a.relation,['objects','status']),objects=captureArray(relation.objects,2);if(objects.length!==2||objects.some((id,i)=>id!==ids[i])||!['accepted','redundant'].includes(relation.status))throw Error('Invalid length relation verification receipt.');
+ if(!plain(a.externalParameters)||Reflect.ownKeys(a.externalParameters).length>1024)throw Error('Invalid length relation verification bindings.');
+ const external=captureRecord(a.externalParameters,Reflect.ownKeys(a.externalParameters) as string[]);if(Object.keys(external).some(k=>!k||k.length>256||typeof external[k]!=='number'||!Number.isFinite(external[k])))throw Error('Invalid length relation bindings.');
+ return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-length-relation',revision:a.revision,sketchJSON:a.sketchJSON,externalParameters:Object.freeze(external),intent:Object.freeze({...intent,ids:Object.freeze(ids)}),candidateJSON:a.candidateJSON,relation:Object.freeze({...relation,objects:Object.freeze(objects)})}),captureOptions(options));
+}
