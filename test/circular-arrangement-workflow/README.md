@@ -1,9 +1,11 @@
 # Finite two-Circle public workflow
 
-SOURCE ONLY. Root must first compose and stage the exact compiled circular
-cohort, literal Native pair module, factory/catalog/closed graph and common
-bootstrap pins described in SOURCE.md. No tests, builds, probes or browser runs
-were performed to prepare these files. Do not run on an older runtime.
+Latest finite R6 whole Chrome workflow and independent actual-artifact oracle
+PASS. See QUALIFICATION.md for exact producing source/Native/host pins, retained
+first failures and limitations; evidence-r6 is the complete frozen result.
+This does not qualify all C02, tiny Native cells, arbitrary curves or ABI faults.
+The original source-only preparation notes in SOURCE.md are historical; always
+compose and stage an explicitly registered exact runtime before a new run.
 
 The single complete driver authors every source using registered public
 commands. It uses separate genuine contexts for the three overlap cells, two

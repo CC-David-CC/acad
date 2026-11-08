@@ -1,5 +1,19 @@
 # Active CAD1 acceptance scope — user revision2026-11-06
 
+## Latest scoped qualification — two-Circle cells R6, 2026-11-08
+
+Whole Chrome74062 and FIRST independent actual-artifact oracle PASS on exact
+Coref2574ea/Desktop70f096c23, Native7bf611ce (9789a617/707facb3).178records/
+488public trace entries/52Native observations/268actual classifications/15.cad
+Save/server/freshOpen checkpoints/4refusals. Lens/both crescents/tangent/
+coincident/nested/disjoint pass. Four near-boundary cases are SOURCE ONLY,
+not tiny Native constructions. Contexts closed/source unchanged. See
+`test/circular-arrangement-workflow/QUALIFICATION.md`. SIXTEEN recent scoped
+workflows pass; all21 exercise signoffs remain Partial. R1–R5 failures retained,
+including R5's unexplained browser interruption. Explicit experimental cohort;
+no default promotion/deployment, all C02 or ABI fault-suite claim.
+
+
 ## Latest scoped qualification — RadiusLength R1, 2026-11-08
 
 Actual Cored0069f0/Desktopdd58df71e whole Chrome75672 and first independent

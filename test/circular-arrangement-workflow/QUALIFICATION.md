@@ -1,5 +1,48 @@
 # Circular workflow qualification — in progress
 
+## Latest R6 finite whole workflow — PASS
+
+ActualCoref2574eaee3bc0c2e32590fd69ce5743dd9f1a000;
+Desktop70f096c23abfec072c00759982a8a910456a7c55;
+Native7bf611ceedd7d1c7a20c3449be1d270ce5c2efd4 with portable9789a617 /
+WASM707facb3 pair. Normal native build50713, app build98097 and fixture74853
+completed0. Whole Chrome74062 completed0/PASS using exact unchanged source,
+runtime, driver and fixture after the separately retained R5 browser interruption.
+Independent actual-artifact checker FIRST PASS; original stdout/stderr retained.
+
+178records/488public command trace entries/52Native observation sets/268actual
+point classifications/15.cad saves with actual server-byte equality and fresh
+signed Opens/4refusals/4explicit source-only boundary cases. Nine contexts/cases:
+lens, left crescent, right crescent, tangent, coincident, nested and disjoint all
+PASS; represented-boundaries are SOURCE_CLASSIFIED_ONLY and unsupported-global
+preserves refusals. Own contexts closed, source snapshots unchanged, shared
+Chrome disconnected only. Browser155.0.8059.79 remained available after the run.
+
+Genuine public commands create every source and selected region. Actual Native
+areas/volumes/bounds/material queries, creation travel, compatible diameter and
+depth changes, mixed UndoRedo, stale/no-op preservation, lost-lens refusal,
+explicit combined source-dimension/region repair, unit invariance, save/Open and
+fresh-session reedit all pass. Two externally tangent disks remain distinct
+bodies; coincident distinct source owners remain explicit. Earlier ordinary
+nested/disjoint descriptor paths remain exercised in this exact cohort.
+
+Independent ZIP32/CRC/entry SHA/native-source/semantic-span-key reconstruction,
+analytic lens/crescent/disk/annulus quantities and actual Native classifications
+PASS without production planner/validator/codec imports or a new Native run.
+The usual source-coordinate50pm budget remains separate from Native mass/bounds
+budgets1e-6mm3/1e-6mm. Exact source near-boundary classification is not a claim
+of tiny-cell Native construction or universal BRep precision.
+
+This is the SIXTEENTH recent scoped browser workflow, not16of21 completed
+exercises. All21 formal Gate1 signoffs remain Partial. More-than-two intersecting
+circles, internal tangency, mixed Arc arrangements, near-resolution Native cells,
+the complete ABI fault/ownership suite, broad human UI and whole C02 remain
+open. The new cohort stays explicit/experimental; existing defaults/pairs remain.
+R5's browser-disappearance cause is unknown and its cleanup failure remains
+retained; a successful fresh rerun does not diagnose that earlier interruption.
+No public/beta deployment or default-engine promotion.
+
+
 No circular workflow PASS yet. Fourteen earlier scoped workflows remain valid;
 all21 Gate1 exercise signoffs remain Partial.
 
