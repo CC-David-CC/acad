@@ -1,4 +1,36 @@
-# Four-corner creation lifecycle qualification — incomplete
+# Four-corner creation lifecycle — finite E09 qualified R2
+
+## R2 — complete browser PASS, FIRST independent artifact oracle PASS
+
+Actual application Core013369861fad6123520065a4e06fafac752900e8 /
+Desktop68d66e4f8295af29e145d24d72d3b9571e550cac. Normal app bundle70388
+completed0 against the existing unchanged normal Core32673 build. Fresh
+private21016/state-r34; exact explicit Native32eec74e/abbf2aa0.
+Whole Chrome61817 terminalPASS:39records/141public trace entries/
+27observations/343actual Native point classifications/4refusals/3.cad saves
+and3fresh signed Opens. Owned contexts retired/source hashes unchanged.
+
+FIRST AFTER-WHOLE independent oracle PASS: original rectangle source/11actual
+constraint equations/IDs/typed absence, exact creation/restoration chronology/
+high-water, independently recomputed cylinder-exclusion volume/bounds/point
+classes and three actual archives' ZIP32/CRC/SHA/manifest/designRevision/native
+source. Finite50pm source-coordinate and separate1e-6mm/mm³ Native bounds/volume
+budgets unchanged; no geometric or numerical acceptance criterion changed.
+
+Immediate actual CORNER operation Undo restores the center-holed producer and
+all four old centers become material; Redo restores SAME corner feature/output/
+source and four voids. Width/depth/diameter/offset edits, mixed travel, precise
+outside/overlap/zero/stale refusals, server-equal Save/fresh Open/reedit/resave
+and final healthy body queries all pass. The exact recorded E09/G6 gap is now
+closed for this ordinary positive-depth OCC path.
+
+R1 is retained below. Desktop68d66e4f8 adds INVALID_REQUEST only to argument
+capture/domain failures; no driver/oracle/geometry/source domain or downstream
+Native error was changed. E09 ordinary exercise accepted:10of21 Qualified,
+11Partial.19recent scoped workflows are qualified. Full C06/C07/Gate1,
+all-engine/large-model precision, physical manufacture and final beta delivery
+are not inferred. No deployment follows this private qualification.
+
 
 ## R1 complete attempt — FAIL on request error-code contract
 
