@@ -1,3 +1,4 @@
+import {captureLinearDimensionRecord} from './shapes/linearDimensionRecord.mjs';
 import { Generator, numericSketchIdHighWater } from './id-generator';
 import {noteSketchMutation} from './sketchMutationEpoch.mjs';
 import {assertOrdinarySketchEntityDomain} from './constr/ordinaryEntityDomain.mjs';
@@ -747,7 +748,14 @@ function validateStrictDimension(obj: any, index: any) {
   if (obj.type === DiameterDimension.prototype.TYPE) {
     strictReference(d.obj, index, 'dimension');
     strictNumber(d.angle, 'dimension angle');
-  } else if ([HDimension.prototype.TYPE, VDimension.prototype.TYPE, LinearDimension.prototype.TYPE, AngleBetweenDimension.prototype.TYPE].includes(obj.type)) {
+  } else if (obj.type === LinearDimension.prototype.TYPE) {
+    const ruler = captureLinearDimensionRecord(obj);
+    strictReference(ruler.data.a, index, 'dimension'); strictReference(ruler.data.b, index, 'dimension');
+    const a = index[ruler.data.a], b = index[ruler.data.b];
+    if (!(a instanceof EndPoint) || !(b instanceof EndPoint) || a.id !== ruler.data.a || b.id !== ruler.data.b || index[a.id] !== a || index[b.id] !== b) {
+      throw new Error('LinearDimension endpoints must be actual registered native Points.');
+    }
+  } else if ([HDimension.prototype.TYPE, VDimension.prototype.TYPE, AngleBetweenDimension.prototype.TYPE].includes(obj.type)) {
     strictReference(d.a, index, 'dimension'); strictReference(d.b, index, 'dimension');
     strictNumber(d.offset, 'dimension offset');
     if (obj.type === AngleBetweenDimension.prototype.TYPE) {
