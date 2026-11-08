@@ -21,15 +21,30 @@ must not override the following completed workflows or trigger duplicate work.
 | C03 whole-entity Fix | [Fix R1](../../test/closed-whole-entity-fix-workflow/QUALIFICATION.md), actualdb99774/bbf2d284b, proof2dbcc2b | Real whole Segment/Circle/quarter+major Arc snapshots, create/remove/travel/typed bindings and3.cad cycles; no generator/nested/near-endpoint Arc precision or human gesture claim |
 | C04 Projected distance | [Projected R3](../../test/projected-distance-public-workflow/QUALIFICATION.md), actual0133698/95d8023b0, proof4325ef1 | Live direction, signed edits, named binding, removal/typed point move/mixed travel, three .cad cycles and FIRST independent oracle; no BRep construction |
 
-**20 recent scoped whole workflows qualified. Ten of21 ordinary exercise
-contracts qualified (E01/E02/E03/E04/E05/E06/E07/E08/E09/E21);11 remain Partial;
-E17/C10 is Gate2.** E09 now has actual complete corner-creation UndoRedo/Native/
-three.cad lifecycle and FIRST independent oracle, proof6511510; its former gap
-is no longer inferred from centered-hole travel.
-Root acceptance follows the inspected [five-exercise evidence map](FIVE-EXERCISE-SIGNOFF-PROPOSAL-20261108.md)
-and canonical Desktop baseline. All11 broader competencies and final composed
-beta delivery remain separate. This reconciliation runs no new tests and does
-not change evidence/tolerances or qualify all17 constraint families.
+**Current reconciliation:23 recent scoped whole workflows qualified;16of21
+ordinary exercise contracts Qualified (E01–E15/E21); E16/E18/E19/E20/E22 remain
+Partial. E17/C10 belongs to Gate2.** These counters are separate and do not
+qualify all11 broader competencies or final composed beta delivery.
+
+Later finite proof supersedes earlier10ordinary/20scoped checkpoint:
+- Typed Circle: proof1e8856c, actuald790011/3ce2fec55.
+- E11 actual fillet/chamfer creation/edit travel and three.cad cycles:
+  proof fa6dc2b; same commit records root E10/E12/E13 evidence reconciliation
+  in ORDINARY-E10-E13-SIGNOFF-20261108.md.
+- E14 actual sweep creation/source/path/native persistence:
+  ORDINARY-E14-SIGNOFF-20261108.md, roota17ed23 (existing evidence reconciliation).
+- E15 new complete loft creation/source/plane/travel/three.cad workflow:
+  proof150f399, actualb097185/00e12613a, FIRST independent oracle PASS.
+
+E18/E19/E20 evidence is mapped in
+PARAMETERS-REFERENCES-EXPORT-DRAWING-EXERCISE-MAP-20261108.md and awaits root
+ordinary signoff; E22 direct repair UndoRedo remains explicitly open. PL R3
+proof5d61bf0 observes initial redundancy repair but rejects signed endpoint
+reversal before commit; full PL remains unqualified. Actual loft screenshot
+also leaves CAD-VIEW-01/finalG10 viewing open. No main promotion or final beta
+qualification follows from these finite successes. Original exercise rows
+below remain the dated source-era inventory and are superseded by these named
+proofs where their earlier pending labels conflict.
 
 ## Authority and bounded interpretation
 
