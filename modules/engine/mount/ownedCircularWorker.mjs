@@ -24,7 +24,7 @@ function corroborate(prepared,value){
  return r;
 }
 export function inspectOwnedCircularSource(env,prepared){
- const {Module}=env;if(typeof Module._ReadCircularArrangementV1!=='function'||typeof Module._CreateOwnedCircularCellV1!=='function')fail('The exact Native circular ABI is unavailable.','ENGINE_CAPABILITY_UNAVAILABLE');const before=Module._OwnedShapeNamesV2();let value;try{value=native(env,prepared);}finally{if(Module._OwnedShapeNamesV2()!==before)fail('Native circular read changed persistent ownership.','CIRCULAR_INPUT_CHANGED');}return corroborate(prepared,value);
+ const {Module}=env;if(typeof Module._ReadCircularArrangementV1!=='function'||typeof Module._CreateOwnedCircularCellV1!=='function')fail('The exact Native circular ABI is unavailable.','ENGINE_CAPABILITY_UNAVAILABLE');const before=Module._OwnedShapeNamesV2();let value;try{value=native(env,prepared);}finally{if(Module._OwnedShapeNamesV2()!==before)fail('Native circular read changed persistent ownership.','CIRCULAR_INPUT_CHANGED');}try{return corroborate(prepared,value);}catch(cause){fail('Actual Native circular read failed its strict observation contract.','ENGINE_FAILURE',cause);}
 }
 
 // The status-0 FFI contract proves exactly this new owned name; failures must
@@ -33,6 +33,7 @@ export function inspectOwnedCircularSource(env,prepared){
 export function createOwnedCircularResult(env,prepared,name){
  const {Module}=env,before=Module._OwnedShapeNamesV2();let created;
  try{created=native(env,prepared,name);}catch(cause){if(Module._OwnedShapeNamesV2()!==before)fail('Refused circular construction changed owned names.','CIRCULAR_INPUT_CHANGED',cause);throw cause;}
+ try{
  const c=circularFields(created,['version','valid','solidCount','nativeVolume','nativeBounds','constructionProvenance']);
  if(c.version!==1||c.valid!==true||c.solidCount!==1||Module._OwnedShapeNamesV2()!==before+1)fail('Native circular success did not establish exactly one owned solid.');
  const expected=prepared.expected,tolerance=Math.max(1e-7,expected.volume*1e-9),bounds=circularFields(c.nativeBounds,['min','max']);
@@ -41,4 +42,5 @@ export function createOwnedCircularResult(env,prepared,name){
  const topology=validateOwnedTopology(env.query('_ReadOwnedTopologyV1',name)),certificate=validateCircularPrismConstruction(c.constructionProvenance,topology,prepared),evidence=env.summarize(name,env.interrogate(name));
  if(!evidence||evidence.solidCount!==1||evidence.nativeValidity?.valid!==true||!Number.isFinite(evidence.nativeVolume)||Math.abs(evidence.nativeVolume-c.nativeVolume)>tolerance||['min','max'].some(k=>evidence.nativeBounds?.[k]?.length!==3||evidence.nativeBounds[k].some((n,i)=>!Number.isFinite(n)||Math.abs(n-bounds[k][i])>1e-9)))fail('Circular creation and independent owned-solid reporting disagree.');
  return{evidence,construction:c.constructionProvenance,certificate:{status:'available',data:certificate,sourceBinding:{scope:'solved-request',regionId:prepared.request.region.id,boundaryKind:'circular-source-spans',circularArrangementVersion:1}}};
+ }catch(cause){if(cause?.code==='MEASUREMENT_PRECISION_UNRESOLVED')throw cause;fail('Actual Native circular success failed its validation contract; realm ownership is revoked.','ENGINE_FAILURE',cause);}
 }
