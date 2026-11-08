@@ -186,7 +186,13 @@ def allocation_contract(r,facts):
     return {'everyTravelPreservesCounters':len(r['travels']),'parentHighWater':parent_high,'createdHighWater':created_high,'suffixHighWater':suffix_high,'creationUndoCounterRollback':'forbidden'}
 def refusals(r,facts):
     seen=set()
-    one([row for row in r['refusals'] if row['label']=='Actual stale source-box edit'],'required genuine old authored-revision refusal')
+    stale_rows={label:one([row for row in r['refusals'] if row['label']==label],'required genuine old authored-revision refusal '+label) for label in ('Actual stale source-box edit','Actual stale authored Undo')}
+    stale_box=one([row for row in r['commands'] if row['command']=='edit-worker-solid-box' and row.get('error',{}).get('code')=='STALE_HISTORY'],'actual stale source-box command')
+    stale_undo=one([row for row in r['commands'] if row['command']=='travel-authored-edit' and row.get('error',{}).get('code')=='STALE_HISTORY'],'actual stale authored Undo command')
+    require(stale_undo['args']=={'revision':stale_box['args']['revision'],'direction':'undo'},'both stale guards receive the SAME genuine previously captured revision')
+    for label,row in stale_rows.items():
+        require(stale_box['args']['revision']!=row['before']['capture']['journal']['revision'],'actual prior revision differs from current authored revision '+label)
+        require(isinstance(row['before']['host']['documentToken'],str) and bool(row['before']['host']['documentToken']),'actual current document token recorded '+label)
     for row in r['refusals']:
         error=row['error'];require(error and error['committed'] is False and error['possiblyCommitted'] is False,'real uncommitted refusal')
         require(normalized(row['before'],row['candidate'])==normalized(row['after'],row['candidate']),'exact accepted state/resources across refusal');settled(row['after']);history(row['case'],row['bindings'],row['before'],r,facts);seen.add(row['case']['label'])

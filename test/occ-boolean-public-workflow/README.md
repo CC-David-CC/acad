@@ -132,6 +132,17 @@ AbortError as equivalent. Counter high-water/geometry/refusal controls, all
 three .cad cycles and multi STEP checks are unchanged. Source review only;
 no driver/checker, tests, probes, build, browser or Native execution occurred.
 
+The complete follow-up additionally submits `travel-authored-edit` Undo with
+the SAME genuinely old `stale.revision` immediately after the stale box-edit
+refusal, before the next tool edit. This exercises authoredEditTravel's distinct
+preflight guard while a real current Undo target exists. It uses no invented
+identity or fault hook. Both calls require Error+STALE_HISTORY and exact raw
+before/after equality, including actual documentToken, history/J revisions,
+counter and owned resources. The after-whole checker requires BOTH refusal
+rows, corroborates the two actual recorded commands reused the identical old
+revision, and verifies it differs from each actual current journal revision.
+Successful real Undo/Redo later in the same whole workflow stays unchanged.
+
 `example.mjs` invokes only existing registered commands. The driver authors all
 boxes normally, captures their actual feature/output receipts and uses those
 opaque IDs. Private frame reads are detached observations of source/resources,
