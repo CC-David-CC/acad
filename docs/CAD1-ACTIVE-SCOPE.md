@@ -96,3 +96,33 @@ runtime state on R730's separate root disk, without moving real accounts or
 stopping unrelated transfers. No server-disk Save proof will be replaced by RAM.
 Normal complete build requires fresh configured Native graph staging for C07;
 then actual affected workflows run sequentially. See CAD1-CLOSURE-SEQUENCE.md.
+
+## Executed composed build / fresh fixture — 2026-11-08
+
+Normal Core32ae9c8 full build PASSED: physical/sketch/project/archive/hash/
+publication/controlled3MF Workers; selected/default prism/rawSMLib/all10 modern
+component graphs; main app webpack and Grunt resources. Actual Native/bootstrap
+pins stayed unchanged; new history dependency is bundled controller source,
+not an omitted dynamic resource. Build log remains on R730 at
+codi-acad-build-20261107-r2/.build/gate1-composed-32ae9c8-build.log.
+
+Fresh real CAD+Files bundle: codi-acad-gate1-composed-stage-20261108-r1-apps;
+487 files,414 CAD dist assets,522313863 inner bytes. Actual byte pins:
+codi-acad-gate1-composed-pins-20261108-r2.json (97 selected files, Core32ae,
+Desktop60ec30ee9). A test pin-recorder URL/disk-path mistake was corrected in
+6ba6c43; no CAD result follows from pin collection. Files bundle bytes unchanged.
+
+The first20984 launch correctly rejected a symlinked private runtime path.
+Desktop60ec30ee9 adds --runtime-root for fresh isolated fixtures only, preserving
+private-directory ownership/symlink checks and default service paths. Actual
+running fixture uses direct /tmp/codi-acad-fixture-state-20261108-r2 on R730's
+separate real disk. No account/key state was moved. Source/server/app code
+outside the test launcher is unchanged relative to Desktopfa0cd2156.
+
+OrientationR12 is now running on20984/CDP19329, source32ae/Desktop60ec, evidence
+/tmp/codi-orientation-workflow-20261108-r12, owned driver session26251. Login and
+the previously failing antiparallel170→190 edit/UndoRedo/further350/10 edits
+have completed. Do not label the whole run PASS before terminal result and
+cleanup. Next complete workflows remain archive, measurement roles and history;
+all Chrome drivers remain strictly sequential. Current source main also has
+metadata-helper/docs-only changes beyond the actual built32ae snapshot.
