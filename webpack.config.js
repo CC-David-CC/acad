@@ -64,6 +64,7 @@ module.exports = {
       'codi-loft-profile-assets$': process.env.CODI_LOFT_NATIVE_DIR?.trim()?path.join(__dirname,'.build/loft-profile-entry.mjs'):path.join(__dirname,'modules/engine/mount/unavailable-loft-assets.mjs'),
       'codi-adaptive-metrology-assets$': process.env.CODI_ADAPTIVE_METROLOGY_NATIVE_DIR?.trim()?path.join(__dirname,'.build/adaptive-metrology-entry.mjs'):path.join(__dirname,'modules/engine/mount/unavailable-loft-assets.mjs'),
       'codi-manufacturing-mesh-assets$': path.join(__dirname,'.build/manufacturing-mesh-entry.mjs'),
+      'codi-circular-assets$': path.join(__dirname,'.build/circular-entry.mjs'),
       'codi-shell-assets$': path.join(__dirname,'.build/shell-entry.mjs'),
       'codi-step-export-assets$': process.env.CODI_STEP_NATIVE_DIR?.trim()?path.join(__dirname,'.build/step-export-entry.mjs'):path.join(__dirname,'modules/engine/mount/unavailable-loft-assets.mjs'),
       'codi-prism-topology-module$': path.join(__dirname, '.build/prism-assets/profile-topology.mjs'),

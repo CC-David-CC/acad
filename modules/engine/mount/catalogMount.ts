@@ -1,3 +1,5 @@
+import {createCircularOccMount} from './occ-circular-mount.mjs';
+import circularAssets from 'codi-circular-assets';
 import {createShellOccMount} from './occ-shell-mount.mjs';
 import shellAssets from 'codi-shell-assets';
 import {createManufacturingMeshOccMount} from './occ-manufacturing-mesh-mount.mjs';
@@ -13,7 +15,7 @@ import {createSweepProfileOccMount} from './occ-sweep-profile-mount.mjs';
 import {createRevolveProfileOccMount} from './occ-revolve-profile-mount.mjs';
 import {createVerifiedManifoldMount} from './manifold-verified-mount.mjs';
 import {createRawSmlibMount} from '../raw-smlib/rawMount.mjs';
-import {CAD_ENGINES,preferredCadEngineBuild,requireCadEngineBuild,OCC_SELECTED_PROFILE_BUILD,OCC_POLYGON_PROFILE_BUILD,OCC_MECHANICAL_PROFILE_BUILD,OCC_BOOLEAN_HISTORY_BUILD,OCC_REVOLVE_PROFILE_BUILD,OCC_SWEEP_PROFILE_BUILD,OCC_LOFT_PROFILE_BUILD,OCC_ADAPTIVE_METROLOGY_BUILD,OCC_STEP_EXPORT_BUILD,OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD} from './engineCatalog.mjs';
+import {CAD_ENGINES,preferredCadEngineBuild,requireCadEngineBuild,OCC_SELECTED_PROFILE_BUILD,OCC_POLYGON_PROFILE_BUILD,OCC_MECHANICAL_PROFILE_BUILD,OCC_BOOLEAN_HISTORY_BUILD,OCC_REVOLVE_PROFILE_BUILD,OCC_SWEEP_PROFILE_BUILD,OCC_LOFT_PROFILE_BUILD,OCC_ADAPTIVE_METROLOGY_BUILD,OCC_STEP_EXPORT_BUILD,OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD} from './engineCatalog.mjs';
 import polygonAssets from 'codi-polygon-profile-assets';
 import mechanicalAssets from 'codi-mechanical-profile-assets';
 import booleanAssets from 'codi-boolean-history-assets';
@@ -65,6 +67,7 @@ function loftMountOptions(assets=loftAssets,prefix='loft-profile',extras:string[
 }
 export function createCatalogMount(id:string,revision?:string):SolidKernel{
  const build=requireCadEngineBuild(id,revision);
+ if(build===OCC_CIRCULAR_BUILD){requireAvailableShellBuild(id,build.revision);return createCircularOccMount(loftMountOptions(circularAssets,'circular',circularModules)) as SolidKernel;}
  if(build===OCC_SHELL_BUILD){requireAvailableShellBuild(id,build.revision);return createShellOccMount(loftMountOptions(shellAssets,'shell',shellModules)) as SolidKernel;}
  if(build===OCC_MANUFACTURING_MESH_BUILD){requireAvailableManufacturingMeshBuild(id,build.revision);return createManufacturingMeshOccMount(loftMountOptions(manufacturingAssets,'manufacturing-mesh',manufacturingModules)) as SolidKernel;}
  if(build===OCC_STEP_EXPORT_BUILD){requireAvailableStepExportBuild(id,build.revision);return createStepExportOccMount(loftMountOptions(stepAssets,'step-export',['modules/engine/mount/ownedStepExportProtocol.mjs'])) as SolidKernel;}
@@ -126,8 +129,9 @@ export function createCatalogMount(id:string,revision?:string):SolidKernel{
 const manufacturingModules=['modules/engine/extrusion/isolatedOpenProfileComponents.mjs','modules/engine/extrusion/articulatedRegionSegments.mjs','modules/engine/mount/ownedDrawingReadProtocol.mjs','modules/engine/mount/drawingReferenceFacts.mjs','modules/engine/mount/cylinderCutWitness.mjs','modules/engine/extrusion/selectedRegionDescriptor.mjs','modules/drawing/linkedPartDrawingDefinition.mjs','modules/engine/mount/ownedStepExportProtocol.mjs','modules/engine/mount/ownedOrthographicReadProtocol.mjs','modules/engine/mount/orthographicAnalyticRecord.mjs','modules/engine/mount/ownedManufacturingMeshProtocol.mjs','modules/engine/mount/manufacturingMeshRecord.mjs'];
 const shellModules=[...manufacturingModules,'modules/engine/mount/ownedShellProtocol.mjs','modules/engine/mount/ownedShellWorker.mjs','modules/engine/mount/ownedShellNativeContract.mjs','modules/engine/mount/boxSelectionIndex.mjs','modules/engine/mount/nativePlanarAttachmentFacts.mjs','modules/engine/mount/ownedPlanarAttachmentProtocol.mjs'];
 // Availability is a property of this compiled app, not catalog registration.
-export function listAvailableShellBuilds(){if(!shellAssets)return Object.freeze([]);requireAvailableShellBuild('occ',OCC_SHELL_BUILD.revision);return Object.freeze([OCC_SHELL_BUILD]);}
-export function requireAvailableShellBuild(engine:string,revision:string){const spec=requireShellBuild(engine,revision);if(spec!==OCC_SHELL_BUILD)throw Object.assign(Error('The registered shell cohort is not installed.'),{code:'ENGINE_BUILD_UNAVAILABLE'});loftMountOptions(shellAssets,'shell',shellModules);return spec;}
+const circularModules=[...shellModules,"modules/engine/mount/ownedCircularNativeContract.mjs","modules/engine/mount/ownedCircularWorker.mjs","modules/engine/mount/ownedCircularArrangementProtocol.mjs","modules/engine/mount/circularArrangementPlan.mjs","modules/engine/mount/circularPrismSelectionIndex.mjs","modules/engine/extrusion/circularArrangementDescriptor.mjs","modules/engine/extrusion/circularTopology.mjs"];
+export function listAvailableShellBuilds(){const out=[];if(shellAssets){requireAvailableShellBuild('occ',OCC_SHELL_BUILD.revision);out.push(OCC_SHELL_BUILD);}if(circularAssets){requireAvailableShellBuild('occ',OCC_CIRCULAR_BUILD.revision);out.push(OCC_CIRCULAR_BUILD);}return Object.freeze(out);}
+export function requireAvailableShellBuild(engine:string,revision:string){const spec=requireShellBuild(engine,revision);if(spec===OCC_CIRCULAR_BUILD){if(!circularAssets||circularAssets.circularArrangementVersion!==1)throw Object.assign(Error('The circular cohort is not staged.'),{code:'ENGINE_BUILD_UNAVAILABLE'});loftMountOptions(circularAssets,'circular',circularModules);return spec;}if(spec!==OCC_SHELL_BUILD)throw Object.assign(Error('The registered shell cohort is not installed.'),{code:'ENGINE_BUILD_UNAVAILABLE'});loftMountOptions(shellAssets,'shell',shellModules);return spec;}
 export function listAvailableLoftBuilds(){const out=[];if(loftAssets){loftMountOptions();out.push(OCC_LOFT_PROFILE_BUILD);}if(adaptiveAssets){loftMountOptions(adaptiveAssets,'adaptive-metrology');out.push(OCC_ADAPTIVE_METROLOGY_BUILD);}if(stepAssets){requireAvailableStepExportBuild('occ',OCC_STEP_EXPORT_BUILD.revision);out.push(OCC_STEP_EXPORT_BUILD);}if(manufacturingAssets){requireAvailableManufacturingMeshBuild('occ',OCC_MANUFACTURING_MESH_BUILD.revision);out.push(OCC_MANUFACTURING_MESH_BUILD);}return Object.freeze([...out,...listAvailableShellBuilds()]);}
 export function requireAvailableLoftBuild(engine:string,revision:string){
  const spec=requireCadEngineBuild(engine,revision);
