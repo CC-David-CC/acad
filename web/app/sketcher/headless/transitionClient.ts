@@ -203,7 +203,7 @@ export function verifyLineRelationCandidate(workerUrl:string,request:any,options
  return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-line-relation',...request}),options);
 }
 
-function verifyCoordinates(workerUrl:string,input:any,options:SketchSolveOptions,batch:boolean){
+function verifyCoordinates(workerUrl:string,input:any,options:SketchSolveOptions,batch:boolean,typed=false){
  const key=batch?'points':'point',a=captureRecord(input,['revision','sketchJSON','externalParameters','intent','candidateJSON',key]);
  if(typeof a.revision!=='string'||!a.revision||a.revision.length>256||[a.sketchJSON,a.candidateJSON].some(v=>typeof v!=='string'||v.length>1048576))throw Error('Invalid coordinate verification source.');
  const capturePoint=value=>{const p=captureRecord(value,['id','x','y']);if(typeof p.id!=='string'||!p.id||p.id.length>256||![p.x,p.y].every(v=>typeof v==='number'&&Number.isFinite(v)&&Math.abs(v)<=1e8))throw Error('Invalid coordinate verification target.');return Object.freeze({id:p.id,x:p.x,y:p.y});};
@@ -211,10 +211,19 @@ function verifyCoordinates(workerUrl:string,input:any,options:SketchSolveOptions
  const receipt:any=batch?Object.freeze(captureArray(a.points,32).map(capturePoint)):capturePoint(a.point),requested=batch?intent.points:[intent],returned=batch?receipt:[receipt];
  if(!requested.length||new Set(requested.map(p=>p.id)).size!==requested.length||JSON.stringify(requested)!==JSON.stringify(returned))throw Error('Coordinate verification receipt differs from exact requested targets.');
  if(!plain(a.externalParameters)||Reflect.ownKeys(a.externalParameters).length>1024)throw Error('Invalid coordinate verification parameters.');const external=captureRecord(a.externalParameters,Reflect.ownKeys(a.externalParameters)as string[]);if(Object.keys(external).some(k=>!k||k.length>256||typeof external[k]!=='number'||!Number.isFinite(external[k])||Math.abs(external[k])>1e9))throw Error('Invalid coordinate verification parameters.');
- return runSketchSolve(workerUrl,Object.freeze({task:batch?'sketch-transition-verify-point-coordinates':'sketch-transition-verify-point-coordinate',revision:a.revision,sketchJSON:a.sketchJSON,externalParameters:Object.freeze(external),intent,candidateJSON:a.candidateJSON,[key]:receipt}),captureOptions(options));
+ return runSketchSolve(workerUrl,Object.freeze({task:typed?(batch?'sketch-transition-verify-typed-point-coordinates':'sketch-transition-verify-typed-point-coordinate'):(batch?'sketch-transition-verify-point-coordinates':'sketch-transition-verify-point-coordinate'),revision:a.revision,sketchJSON:a.sketchJSON,externalParameters:Object.freeze(external),intent,candidateJSON:a.candidateJSON,[key]:receipt}),captureOptions(options));
 }
 export function verifyPointsCoordinatesCandidate(workerUrl:string,request:any,options:SketchSolveOptions={}){return verifyCoordinates(workerUrl,request,options,true);}
 export function verifyPointCoordinatesCandidate(workerUrl:string,request:any,options:SketchSolveOptions={}){return verifyCoordinates(workerUrl,request,options,false);}
+export function verifyTypedPointsCoordinatesCandidate(workerUrl:string,request:any,options:SketchSolveOptions={}){return verifyCoordinates(workerUrl,request,options,true,true);}
+export function verifyTypedPointCoordinatesCandidate(workerUrl:string,request:any,options:SketchSolveOptions={}){return verifyCoordinates(workerUrl,request,options,false,true);}
+
+export function verifyTypedSketchTravelCandidate(workerUrl:string,input:any,options:SketchSolveOptions={}){
+ const a=captureRecord(input,['revision','sketchJSON','externalParameters','candidateJSON']);
+ if(typeof a.revision!=='string'||!a.revision||a.revision.length>256||[a.sketchJSON,a.candidateJSON].some(v=>typeof v!=='string'||v.length>1048576))throw Error('Invalid typed sketch travel source.');
+ const external=captureRecord(a.externalParameters,Reflect.ownKeys(a.externalParameters||{}) as string[]);if(Object.keys(external).length>1024||Object.keys(external).some(k=>!k||k.length>256||typeof external[k]!=='number'||!Number.isFinite(external[k])||Math.abs(external[k])>1e9))throw Error('Invalid typed sketch travel bindings.');
+ return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-typed-travel',revision:a.revision,sketchJSON:a.sketchJSON,candidateJSON:a.candidateJSON,externalParameters:Object.freeze(external)}),captureOptions(options));
+}
 
 // Captured before the common client can queue or yield.
 export function verifyDrivingDimensionCandidate(workerUrl:string,input:any,options:SketchSolveOptions={},travel=false){

@@ -79,6 +79,8 @@ self.onmessage = async event => {
         const {exportSketchDXF}=require('./dxfExport');
         const {task,...payload}=request;self.postMessage(exportSketchDXF(payload));return;
       }
+      if(request.task==='sketch-transition-verify-typed-travel'){const {verifyTypedSketchTravel}=require('./typedSketchTravel');const {task,...payload}=request;self.postMessage(verifyTypedSketchTravel(payload));return;}
+      if(request.task==='sketch-transition-verify-typed-point-coordinate'||request.task==='sketch-transition-verify-typed-point-coordinates'){const {verifyTypedPointCoordinatesCandidate,verifyTypedPointsCoordinatesCandidate}=require('./verifyCoordinateCandidate');const {task,...payload}=request;self.postMessage(task==='sketch-transition-verify-typed-point-coordinates'?verifyTypedPointsCoordinatesCandidate(payload):verifyTypedPointCoordinatesCandidate(payload));return;}
       if (request.task === 'sketch-transition-point-coordinates') {
         const {editPointsCoordinatesTransition}=require('./coordinateTransition');
         const {task,...payload}=request;self.postMessage(editPointsCoordinatesTransition(payload));return;
