@@ -1,5 +1,36 @@
 # Cubic curve whole-workflow qualification
 
+## Current R2: scoped PASS
+
+Complete unchanged Chrome workflow and independent after-whole oracle PASS.
+Actual runtime Core26d7a55cefdc58d3c5dc91c4238bbe509d5c0dbf /
+Desktopf6d1c07d1d3006573a23ccec1a003fae4f142f19, full normal build and
+97-pin private fixture20994 completed first.884records/456traced commands/
+24observation stages/672actual native points/3.cad saves/15refusals/5own
+malformed native archives. Fresh signed Open/reedit/travel/resave completes.
+Owned contexts retire, shared Chrome stays running, source hashes are unchanged.
+
+Exact source/control/derived IDs, constraints, unrelated intent and archive
+bytes are checked separately from actual native point accuracy. Independent
+Fraction Bernstein/Cox-de Boor over actual saved controls/knots and actual
+represented parameters gives maximum coordinate error
+1.6349062021887491e-14mm, below the frozen50pm=5e-8mm budget in these finite
+0..100mm planar fixtures. Four/five-control splines, reversed curves, duplicate
+samples/t1, zero endpoint handle and collinearity all pass. This is a numerical
+reference comparison, not a physical manufacturing or universal precision claim.
+
+All five own malformed native files reach their required actual source-domain,
+derived-provenance or resource error before adoption. No archive validator,
+expected refusal, driver, assertion or tolerance was weakened. Root26d7a55
+centralizes duplicate source validation and preserves typed causes.
+
+No BRep/profile/tangency/3D/Canvas or all-C01/Gate1 qualification is claimed.
+The original R1 failure below remains retained and is superseded only within
+this named complete workflow. R2 evidence includes actual archives, source
+snapshots, driver log and independent-oracle-r1.json.
+
+## Historical R1
+
 R1 complete driver terminal FAIL; no workflow qualification.
 Actual runtime Core59d9bda9d143d15fef1d06c82a7fa572043ce535 /
 Desktopf6d1c07d1d3006573a23ccec1a003fae4f142f19. Full normal build and
