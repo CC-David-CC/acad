@@ -1,5 +1,6 @@
 // Evaluation-private read-only view. The live workspace remains untouched.
-export function createCandidateSketchStorage(source, override, readSketch, removed = []) {
+export function createCandidateSketchStorage(source, override, readSketch, removed) {
+  if(removed===undefined)removed=[];
   if(!Array.isArray(removed)||removed.length>64||Reflect.ownKeys(removed).length!==removed.length+1)throw new Error('Invalid removed source inventory.');
   const missing=new Set();for(let i=0;i<removed.length;i++){const d=Object.getOwnPropertyDescriptor(removed,String(i)),id=d?.value;if(!d?.enumerable||!Object.hasOwn(d,'value')||typeof id!=='string'||!id||id.length>1024||missing.has(id)||source.getSketchData(id)===null)throw new Error('Invalid removed source binding.');missing.add(id);}
   if (!missing.size&&(override === undefined || Array.isArray(override) && override.length === 0)) return source;

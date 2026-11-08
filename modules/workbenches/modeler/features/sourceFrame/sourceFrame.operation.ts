@@ -37,7 +37,7 @@ const sourceFrameRun=async(params:any,ctx:any,raw:any)=>{
  if(source!==null){await runSourceFramePreparation(workerUrl,{revision:crypto.randomUUID(),mode:'reframe',sketchJSON:source,beforeFrame:f,afterFrame:f,candidateJSON:source},{signal:owner.signal,valid:()=>{try{current();return true;}catch{return false;}}});current();}
  return{consumed:[],created:[model]};
 };
-export default {id:SOURCE_FRAME_TYPE,label:'Source frame',info:'Explicit numeric source frame and earlier source-plane attachment.',icon:'img/cad/plane',form:[],schema:{featureId:{type:Types.number}},admitGeometry:()=>{},paramsInfo:()=>'(source frame)',run:sourceFrameRun};
+export default {id:SOURCE_FRAME_TYPE,label:'Source frame',info:'Explicit numeric source frame and earlier source-plane attachment.',icon:standardPlaneOperation.icon,form:[],schema:{featureId:{type:Types.number}},admitGeometry:()=>{},paramsInfo:()=>'(source frame)',run:sourceFrameRun};
 
 // Internal producer identity, never a caller-supplied native locator.
 export const sourceFrameFaceId=sourcePlaneFaceId;
