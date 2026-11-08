@@ -53,6 +53,15 @@ function getCurrentSelectedOrFirstFace(ctx) {
 
 export default [
   {
+    id: 'FitWorkerSolids',
+    appearance: {label:'Fit solids', info:'Fit current displayed Native solid outputs; source planes and authored data stay unchanged'},
+    invoke: ctx => {
+      const craft=ctx.craftService,info=craft.inspectWorkerSolids();
+      const bodyIds=info.outputs.filter(row=>row.bodyId!==null&&row.displayProjection?.status==='available').map(row=>row.id);
+      return craft.fitWorkerSolids({revision:info.revision,bodyIds});
+    }
+  },
+  {
     id: 'ZoomIn',
     invoke: ctx => {
       ctx.services.viewer.zoomIn();

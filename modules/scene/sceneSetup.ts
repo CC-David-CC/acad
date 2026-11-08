@@ -264,6 +264,46 @@ export default class SceneSetUp {
     return vector;
   }
   
+  // Presentation only, explicitly requested; source planes/axes never enter
+  // these authenticated solid bounds. No scene/triangle traversal is needed.
+  fitBounds(bounds: Readonly<{min:readonly number[];max:readonly number[]}>) {
+    const fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
+    const camera:any=this.camera,controls:any=this.trackballControls;
+    if(this.disposed||!this.container.isConnected||!controls.enabled||controls.object!==camera)fail('UNAVAILABLE','The modeling viewport is unavailable.');
+    if(controls.hasActiveGesture())fail('VIEW_INTERACTION_ACTIVE','Finish the current camera gesture before fitting solids.');
+    const width=this.container.clientWidth,height=this.container.clientHeight;
+    if(!(width>0&&height>0))fail('UNAVAILABLE','The modeling viewport has no visible area.');
+    if(!bounds||bounds.min.length!==3||bounds.max.length!==3||bounds.min.some((n,i)=>!Number.isFinite(n)||!Number.isFinite(bounds.max[i])||n>bounds.max[i]))fail('INVALID_REQUEST','Expected finite ordered viewing bounds.');
+    const middle=bounds.min.map((n,i)=>n/2+bounds.max[i]/2);
+    const center=new Vector3(middle[0],middle[1],middle[2]);
+    const radius=Math.hypot(...bounds.min.map((n,i)=>(bounds.max[i]-n)/2));
+    const direction=new Vector3().subVectors(camera.position,controls.target),up=camera.up;
+    if(!(radius>0&&Number.isFinite(radius))||![direction.x,direction.y,direction.z,up.x,up.y,up.z,center.x,center.y,center.z].every(Number.isFinite)||direction.length()===0||new Vector3().crossVectors(direction,up).length()===0)fail('UNAVAILABLE','The current camera or bounds cannot define a finite solid view.');
+    const oldDistance=direction.length(),padding=1.15,padded=radius*padding,aspect=width/height;
+    direction.normalize();let distance:number,zoom:number=camera.zoom;
+    if(!Number.isFinite(zoom)||zoom<=0||camera.view?.enabled)fail('UNAVAILABLE','The current camera projection is unsupported for fitting.');
+    if(camera.isPerspectiveCamera){
+      const vertical=Math.atan(Math.tan(camera.fov*Math.PI/360)/zoom),horizontal=Math.atan(Math.tan(vertical)*aspect),angle=Math.min(vertical,horizontal);
+      if(!(angle>0&&angle<Math.PI/2))fail('UNAVAILABLE','The current perspective projection cannot fit finite solids.');
+      distance=padded/Math.sin(angle);
+    }else if(camera.isOrthographicCamera){
+      zoom=Math.min(width,height)/ORTHOGRAPHIC_CAMERA_FACTOR/padded;
+      distance=Math.max(oldDistance,2*padded);
+    }else fail('UNAVAILABLE','The current camera type cannot fit solids.');
+    // Retain existing manual zoom range; expand clipping only where fitting
+    // needs it (not a new geometry or precision tolerance).
+    const near=Math.min(camera.near,(distance-radius)/2),far=Math.max(camera.far,distance+2*padded),position=center.clone().addScaledVector(direction,distance);
+    if(![zoom,distance,near,far,position.x,position.y,position.z].every(Number.isFinite)||zoom<=0||near<=0||far<=near||distance<controls.minDistance||distance>controls.maxDistance)fail('UNAVAILABLE','The solid bounds exceed finite camera projection limits.');
+    // All refusal predicates precede these camera/control-only assignments.
+    if(camera.isPerspectiveCamera)camera.aspect=aspect;
+    else{camera.left=-width/ORTHOGRAPHIC_CAMERA_FACTOR;camera.right=width/ORTHOGRAPHIC_CAMERA_FACTOR;camera.top=height/ORTHOGRAPHIC_CAMERA_FACTOR;camera.bottom=-height/ORTHOGRAPHIC_CAMERA_FACTOR;}
+    camera.zoom=zoom;camera.near=near;camera.far=far;
+    camera.position.copy(position);controls.target.copy(center);
+    camera.updateProjectionMatrix();controls.syncExplicitView();camera.updateMatrixWorld(true);
+    this.requestRender();
+    return Object.freeze({mode:camera.isPerspectiveCamera?'PERSPECTIVE':'ORTHOGRAPHIC',position:Object.freeze(position.toArray()),target:Object.freeze(center.toArray()),up:Object.freeze(camera.up.toArray()),zoom,near,far,padding});
+  }
+
   lookAtObject(obj) {
     const camera = this.camera;
 

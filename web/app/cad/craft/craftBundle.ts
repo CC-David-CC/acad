@@ -2152,6 +2152,7 @@ interface CraftService {
   editSourcePlaneDepth?: ReturnType<typeof createSourcePlaneDepthCommands>['editSourcePlaneDepth'];
   inspectSelectedProfileSourceDimensionRegions?: ReturnType<typeof createSelectedProfileSourceDimensionCommands>['inspectSelectedProfileSourceDimensionRegions'];
   editSelectedProfileSourceDimensionRegion?: ReturnType<typeof createSelectedProfileSourceDimensionCommands>['editSelectedProfileSourceDimensionRegion'];
+  fitWorkerSolids?: ReturnType<typeof createWorkerSolidCommands>['fitWorkerSolids'];
   classifyWorkerSolidPoints?: ReturnType<typeof createWorkerSolidPointCommands>['classifyWorkerSolidPoints'];
   inspectWorkerStepExports?: ReturnType<typeof createWorkerStepExportCommands>['inspectWorkerStepExports'];
   exportWorkerSTEPBlob?: ReturnType<typeof createWorkerStepExportCommands>['exportWorkerSTEPBlob'];

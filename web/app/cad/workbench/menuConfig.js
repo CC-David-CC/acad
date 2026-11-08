@@ -32,7 +32,7 @@ export default [
     label: 'views',
     cssIcons: ['camera'],
     info: 'switching camera views',
-    actions: ['StandardViewFront', 'StandardViewBack', 'StandardViewLeft', 'StandardViewRight', 
+    actions: ['FitWorkerSolids', '-', 'StandardViewFront', 'StandardViewBack', 'StandardViewLeft', 'StandardViewRight', 
       'StandardViewTop', 'StandardViewBottom', 'StandardView3Way']
   },
   {

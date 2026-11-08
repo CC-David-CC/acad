@@ -1,3 +1,4 @@
+import {fitWorkerSolids} from '../scene/workerSolidViewCommands';
 import {assertHistoryControlAppendAllowed,historyControlAppendReason} from 'engine/solid/authoredHistoryState.mjs';
 import {MWorkerSolid} from 'cad/model/mworkerSolid';
 import {MWorkerEmpty} from 'cad/model/mworkerEmpty';
@@ -61,5 +62,5 @@ export function createWorkerSolidCommands(ctx:any,submit:any,cancelEpoch:(epoch:
  }
  function inspectSolidHistory(){const journal=ctx.craftService.inspectAuthoredEdits(),state=ctx.craftService.modifications$.value;if(!Array.isArray(state.history)||state.history.length>256)throw Error('Solid history is unavailable.');const features=state.history.flatMap((entry:any,index:number)=>entry.type==='WORKER_SOLID_BOX_V1'?[Object.freeze({index,featureId:entry.params.featureId,engine:entry.params.engine,x:entry.params.x,y:entry.params.y,z:entry.params.z,width:entry.params.width,depth:entry.params.depth,height:entry.params.height})]:[]);return Object.freeze({revision:journal.revision,canUndo:journal.canUndo,canRedo:journal.canRedo,features:Object.freeze(features)});}
  async function editSolidBox(input:any,options:any={}){const args=capture(input,['revision','index','featureId','engine','x','y','z','width','depth','height']);return ctx.craftService.authoredSolidBoxOperation(args,options);}
- return Object.freeze({inspectWorkerSolids:inspect,inspectWorkerSolidHistory:inspectSolidHistory,createWorkerSolidBox:(input:any,options:any)=>execute('box',input,options),createWorkerSolidBoolean:(input:any,options:any)=>execute('boolean',input,options),editWorkerSolidBox:editSolidBox});
+ return Object.freeze({fitWorkerSolids:(input:any,options:any={})=>fitWorkerSolids(ctx,input,options,inspect),inspectWorkerSolids:inspect,inspectWorkerSolidHistory:inspectSolidHistory,createWorkerSolidBox:(input:any,options:any)=>execute('box',input,options),createWorkerSolidBoolean:(input:any,options:any)=>execute('boolean',input,options),editWorkerSolidBox:editSolidBox});
 }

@@ -342,6 +342,22 @@ export function CADTrackballControls( object, domElement ) {
     return needsRender;
   };
 
+  // Explicit bounds-fit owns the next camera state. Do not carry a queued
+  // wheel/damping delta into it or interrupt an in-progress user gesture.
+  this.hasActiveGesture = function () { return _state !== STATE.NONE; };
+  this.syncExplicitView = function () {
+    _prevState = STATE.NONE;
+    _lastAngle = 0;
+    _touchZoomDistanceStart = _touchZoomDistanceEnd = 0;
+    _movePrev.copy(_moveCurr);
+    _zoomStart.copy(_zoomEnd);
+    _panStart.copy(_panEnd);
+    _eye.subVectors(_this.object.position, _this.target);
+    _this.object.lookAt(_this.target);
+    lastPosition.copy(_this.object.position);
+    _this.projectionChanged = true;
+  };
+
   this.reset = function () {
 
     _state = STATE.NONE;

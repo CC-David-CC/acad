@@ -52,6 +52,10 @@ export default class Viewer {
     }
   };
 
+  fitBounds(bounds: Readonly<{min:readonly number[];max:readonly number[]}>) {
+    return this.sceneSetup.fitBounds(bounds);
+  }
+
   lookAtObject(obj) {
     this.sceneSetup.lookAtObject(obj);
   }
