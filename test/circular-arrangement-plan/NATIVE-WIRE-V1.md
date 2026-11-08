@@ -67,6 +67,14 @@ Root reviews this scalar helper before compilation. Signed zero is mathematical
 zero. Internal tangency is explicitly recognized/unsupported, not misclassified.
 Proper overlap, external tangent and coincidence are required positive domains.
 
+Bound justification: base unit is2^-2148 (smallest product of represented
+subnormals). Each coordinate/radius is≤1e6<2^20, so product magnitude<2^40;
+the expanded distance-versus-sum/difference expression has9 products with
+coefficients at most2 and needs fewer than2196 magnitude bits.80×32=2560 bits
+therefore leaves explicit carry headroom. Mantissa multiplication uses bounded
+32-bit limbs and64-bit carries, not compiler-dependent128-bit arithmetic. Any
+unexpected overflow is a typed refusal, never wraparound or floating fallback.
+
 NEW separately named proposal `CIRCULAR_SUPPORT_INCIDENCE_MM=1e-9`: actual curve
 supports/endpoints and events satisfy original source circles/plane within that
 bound; unit direction/plane alignment uses1e-12. These are construction
@@ -174,7 +182,7 @@ No second graph or source mutation. A new Native read does not preserve a handle
 or solved cache between calls;0 persistent discovery names and1 create output.
 
 Native ownership: NEW shape-io/ownedCircularArrangementV1.hpp and a narrow
-main.cpp include+two exports on a separate branch/worktree from qualified
+shape-io/main.cpp include+two exports on a separate branch/worktree from qualified
 2f10f1e1 Shell source. Existing Native headers/algorithms remain unchanged.
 Core owns NEW circular descriptor/planner/provenance adapter plus exact source
 extraction/request captures. Coordinate common Worker/controller/ledger/selected
