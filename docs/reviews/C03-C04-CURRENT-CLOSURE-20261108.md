@@ -4,10 +4,10 @@
 
 Projected R3 whole and first independent archive/source oracle PASS, frozen
 4325ef1 on actual0133698/95d8023b0. Original R1/R2 failures retained.
-Eighteen recent scoped workflows; nine ordinary exercise contracts accepted
-separately (E01/E02/E03/E04/E05/E06/E07/E08/E21), twelve Partial. E09 retains
-the observed four-corner creation-travel evidence gap; its complete workflow
-is in source preparation. This document still tracks
+Nineteen recent scoped workflows; ten ordinary exercise contracts accepted
+separately (E01/E02/E03/E04/E05/E06/E07/E08/E09/E21), eleven Partial. E09 now
+has actual complete corner-creation UndoRedo/source/Native/three.cad evidence
+and FIRST independent oracle (proof6511510, actual0133698/68d66e4f8). This document still tracks
 broader C03/C04 family closure; those are not the exercise counter. Typed point
 edits now have a finite verified travel domain, not a general typed-mutation
 promise. No all-C03/C04 or full Gate1 signoff follows.

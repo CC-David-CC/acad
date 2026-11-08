@@ -1,5 +1,27 @@
 # Gate 1: remaining work and execution sequence
 
+## Latest qualification — four-corner creation R2,2026-11-08
+
+Whole Chrome61817 and FIRST independent source/Native/archive oracle PASS on
+actual Core013369861fad6123520065a4e06fafac752900e8 /
+Desktop68d66e4f8295af29e145d24d72d3b9571e550cac, Native32eec74e/abbf2aa0.
+39records/141public traces/27observations/343actual Native point checks/
+4refusals/3.cad Save/server equality/fresh signed Opens. Immediate CORNER
+creation UndoRedo retains original IDs/high-water and four physical bores;
+positive source/depth/diameter/offset edits, mixed travel, precise refusals and
+reopen/reedit/resave pass. R1 uncoded-request failure retained; only Desktop
+argument errors were repaired. No driver/oracle/geometric-policy changes.
+Contexts retired/source unchanged. See
+`test/four-corner-creation-workflow/QUALIFICATION.md`.
+
+**19recent scoped workflows;10of21 ordinary exercise contracts Qualified:**
+E01/E02/E03/E04/E05/E06/E07/E08/E09/E21.11Partial; E17/C10 remains Gate2.
+E09's previously unobserved G6 corner-creation travel is now actually proved.
+Broader11competencies/final beta/viewable-agent delivery stay open; neither
+counter is an overall time-completion percentage. Earlier counts below are
+historical. No public/beta deployment, UI diversion or canceled race testing.
+
+
 ## Ordinary exercise evidence review — nine qualified contracts, 2026-11-08
 
 Root inspected the complete actual region-descriptor/reselection/source-repair,

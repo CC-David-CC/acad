@@ -20,10 +20,11 @@ must not override the following completed workflows or trigger duplicate work.
 | C03 Radius/coincidence | [Radius R1](../../test/radius-length-public-workflow/QUALIFICATION.md), actuald0069f0/dd58df71e; [Coincidence R4](../../test/point-coincidence-public-workflow/QUALIFICATION.md), actual8353d12/8eac41c9e | Finite real creation/edit/remove or authoring/redundancy/conflict/travel/Open; neither ordinary route is still missing |
 | C04 Projected distance | [Projected R3](../../test/projected-distance-public-workflow/QUALIFICATION.md), actual0133698/95d8023b0, proof4325ef1 | Live direction, signed edits, named binding, removal/typed point move/mixed travel, three .cad cycles and FIRST independent oracle; no BRep construction |
 
-**18 recent scoped whole workflows qualified. Nine of21 ordinary exercise
-contracts qualified (E01/E02/E03/E04/E05/E06/E07/E08/E21);12 remain Partial;
-E17/C10 is Gate2.** E09 specifically retains its unobserved corner-creation
-UndoRedo G6 chain; it is not inferred from centered-hole travel.
+**19 recent scoped whole workflows qualified. Ten of21 ordinary exercise
+contracts qualified (E01/E02/E03/E04/E05/E06/E07/E08/E09/E21);11 remain Partial;
+E17/C10 is Gate2.** E09 now has actual complete corner-creation UndoRedo/Native/
+three.cad lifecycle and FIRST independent oracle, proof6511510; its former gap
+is no longer inferred from centered-hole travel.
 Root acceptance follows the inspected [five-exercise evidence map](FIVE-EXERCISE-SIGNOFF-PROPOSAL-20261108.md)
 and canonical Desktop baseline. All11 broader competencies and final composed
 beta delivery remain separate. This reconciliation runs no new tests and does
