@@ -870,7 +870,7 @@ export function activate(ctx: ApplicationContext) {
     }
     args={revision:args.revision,direction:args.direction};
     const info=inspectAuthoredEdits();
-    if(args.revision!==info.revision)throw new Error('Authored edit history is stale.');
+    if(args.revision!==info.revision)throw Object.assign(new Error('Authored edit history is stale.'),{code:'STALE_HISTORY'});
     const target=args.direction==='undo'?info.undoTarget:info.redoTarget;
     if(!target)throw new Error('No supported authored edit in that direction.');
     if(HISTORY_CONTROL_KINDS.includes(target.kind)){
@@ -1235,7 +1235,7 @@ export function activate(ctx: ApplicationContext) {
         before.pointer !== before.history.length - 1 || pipelineFailure$.value || engineCleanupFailure$.value) {
       throw new Error('Return to a valid full model before editing.');
     }
-    if (!args || args.revision !== inspectAuthoredEdits().revision || journal.document !== document) throw new Error('Authored edit history is stale.');
+    if (!args || args.revision !== inspectAuthoredEdits().revision || journal.document !== document) throw Object.assign(new Error('Authored edit history is stale.'),{code:'STALE_HISTORY'});
     const materialSurfaceRevision=manager.inspectMaterialSurfaceRevision();
     if (sourceSketchRevision!==fullTipSketchRevision || materialSurfaceRevision!==fullTipMaterialSurfaceRevision) {
       throw new Error('The accepted model is stale; rebuild before editing.');
