@@ -1,6 +1,7 @@
 import {requireCadEngineBuild,validateEngineMount} from '../mount/engineCatalog.mjs';
 import {requireManufacturingMeshBuild} from '../mount/selectedProfileBuildSelection.mjs';
 import {captureBoxConstructionWitness} from './boxConstructionWitness.mjs';
+import {captureBoxSubtractConstruction,captureManufacturingConstruction} from './rectilinearConstructionWitness.mjs';
 import {captureManufacturingControls,captureManufacturingMetadata} from '../mount/ownedManufacturingMeshProtocol.mjs';
 import {captureLinkedPartDrawingDefinition} from '../../drawing/linkedPartDrawingDefinition.mjs';
 import {captureDrawingReadResult,unresolvedDrawingRead} from '../mount/ownedDrawingReadProtocol.mjs';
@@ -224,7 +225,14 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
   // Only this checked genuine Native publication creates construction authority.
   // There is no public factory or flag that can insert it into the private ledger.
   const boxConstruction=kind==='box'&&constructionBuild.manufacturingMeshVersion===1?captureBoxConstructionWitness({version:1,kind:'authored-axis-aligned-box',unit:intent.unit,engine:intent.engine,engineRevision:intent.engineRevision,bodyId:id,featureId:intent.featureId,origin:intent.origin,dimensions:intent.dimensions}):null;
-  s.outputs.set(id,Object.freeze({engine:intent.engine,featureId:intent.featureId,kind,model,handle:result.handle,holeState,boxConstruction}));
+  // Optional derived provenance must never reject otherwise valid general
+  // Boolean modeling. Native invocation/validation errors are outside this
+  // capture: only this metadata derivation may yield no interface witness.
+  let subtractConstruction=null;
+  if(kind==='boolean'&&intent.kind==='subtract'&&parents.length===2&&parents[0].boxConstruction?.bodyId===intent.a&&parents[1].boxConstruction?.bodyId===intent.b&&metrics.resultKind==='single-solid'&&metrics.solidCount===1&&metrics.nativeValidity?.valid===true)try{
+   subtractConstruction=captureBoxSubtractConstruction({version:1,kind:'authored-box-subtract',unit:intent.unit,engine:intent.engine,engineRevision:intent.engineRevision,bodyId:id,featureId:intent.featureId,operation:'subtract',a:parents[0].boxConstruction,b:parents[1].boxConstruction,native:{volume:metrics.nativeVolume,bounds:metrics.nativeBounds}});
+  }catch{/* No witness: material-interface export remains explicitly unqualified. */}
+  s.outputs.set(id,Object.freeze({engine:intent.engine,featureId:intent.featureId,kind,model,handle:result.handle,holeState,boxConstruction,subtractConstruction}));
   return Object.freeze({model,resultKind:metrics.resultKind,outputId:id,consumed:Object.freeze(parents.map(x=>x.model)),publicationCheck});
  } catch(error){if(mount)owner.close();throw error;}
 }
@@ -323,7 +331,9 @@ export async function readCandidateWorkerManufacturingMesh({owner,registry,engin
   check();const result=await mount.execute({op:'solid.manufacturing.mesh.read',version:1,unit:'millimeter',handle:item.handle,...limits},{signal:owner.signal});check();
   if(!own(result,['op','contractVersion','unit','metadata','buffer'])||result.op!=='solid.manufacturing.mesh.read'||result.contractVersion!==1||result.unit!=='millimeter')fail('Malformed candidate manufacturing artifact.','ENGINE_FAILURE');
   const metadata=captureManufacturingMetadata(result.metadata,limits);let length;try{length=Object.getOwnPropertyDescriptor(ArrayBuffer.prototype,'byteLength').get.call(result.buffer);new DataView(result.buffer);}catch{fail('Expected standalone manufacturing binary.','ENGINE_FAILURE');}if(length!==metadata.byteLength)fail('Manufacturing artifact byte count changed.','ENGINE_FAILURE');
-  const sourceConstruction=item.kind==='box'&&item.boxConstruction?captureBoxConstructionWitness(item.boxConstruction,{bodyId:captured.bodyId,featureId:captured.featureId,engine,engineRevision}):null;
+  const issuedConstruction=item.kind==='box'?item.boxConstruction:item.kind==='boolean'?item.subtractConstruction:null;
+  const sourceConstruction=issuedConstruction?captureManufacturingConstruction(issuedConstruction,{bodyId:captured.bodyId,featureId:captured.featureId,engine,engineRevision}):null;
+  if(sourceConstruction?.kind==='authored-box-subtract'&&(!Object.is(sourceConstruction.native.volume,actual.volume)||['min','max'].some(k=>sourceConstruction.native.bounds[k].some((n,i)=>!Object.is(n,actual[k][i])))))fail('The actual subtract measurement differs from its private construction observation.','REPLAY_RESULT_MISMATCH');
   check();return Object.freeze({op:result.op,contractVersion:1,unit:'millimeter',body:Object.freeze({bodyId:captured.bodyId,featureId:captured.featureId}),engine,engineRevision,metadata,buffer:result.buffer,...(sourceConstruction?{sourceConstruction}:{})});
  }catch(operationError){
   // Observation purpose permanently forbids accept, including after this read. Never

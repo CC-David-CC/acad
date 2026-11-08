@@ -4,11 +4,12 @@ import {writeCore3mf} from './core3mf.mjs';
 import {decodeManufacturingMesh} from '../../../../modules/engine/mount/manufacturingMeshRecord.mjs';
 import {captureControlled3mf,expectedMapping,CONTROLS,small,fail} from './controlledMesh3mfProtocol.mjs';
 import {captureFullFaceBoxInterface} from './alignedBoxRegionInterface.mjs';
+import {captureInsetPocketInterface} from './insetPocketRegionInterface.mjs';
 
 export async function encodeControlledMesh3mf(input,{signal,onProgress=undefined}={}){
  const c=captureControlled3mf(input),r=c.request;
  const cancelled=()=>{if(signal&&Object.getOwnPropertyDescriptor(AbortSignal.prototype,'aborted').get.call(signal))throw new DOMException('3MF encoding cancelled','AbortError');};cancelled();
- if(r.parts.some(p=>p.regions.length>2))fail('Only a two-box material interface is supported','UNQUALIFIED_REGION_INTERFACE');
+ if(r.parts.some(p=>p.regions.length>2))fail('Only bounded two-region material interfaces are supported','UNQUALIFIED_REGION_INTERFACE');
  const mats=new Map(r.materials.map(x=>[x.id,x])),apps=new Map(r.appearances.map(x=>[x.id,x]));
  for(const p of r.parts)for(const z of p.regions)if(!mats.has(z.materialId)||!apps.has(z.appearanceId))fail('Choose a known material and appearance for every region','UNKNOWN_MATERIAL_ASSIGNMENT');
  const mapping=expectedMapping(r),byBody=new Map(r.artifacts.map(x=>[x.body.bodyId,x]));
@@ -26,7 +27,10 @@ export async function encodeControlledMesh3mf(input,{signal,onProgress=undefined
   // No cross-region intersection exception is handed to the writer. Each
   // region remains a full closed mesh and receives all existing exact checks.
   // Only this explicit construction domain proves allowed cross-region contact.
-  if(regions.length===2)await captureFullFaceBoxInterface({partId:p.id,regions},{signal});
+  if(regions.length===2){
+   if(regions.every(r=>r.sourceConstruction?.kind==='authored-axis-aligned-box'))await captureFullFaceBoxInterface({partId:p.id,regions},{signal});
+   else await captureInsetPocketInterface({partId:p.id,regions},{signal});
+  }
   builds.push({id:p.id,name:p.name,objects:p.regions.map(z=>z.objectId)});
  }
  let output;

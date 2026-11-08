@@ -1,6 +1,6 @@
 // PRIVATE owner-issued batch, never a public JSON/artifact admission API.
 import {captureManufacturingMetadata} from '../../../../modules/engine/mount/ownedManufacturingMeshProtocol.mjs';
-import {captureBoxConstructionWitness} from '../../../../modules/engine/solid/boxConstructionWitness.mjs';
+import {captureManufacturingConstruction} from '../../../../modules/engine/solid/rectilinearConstructionWitness.mjs';
 const issued=new WeakMap();
 const fail=(message,code='INVALID_RESPONSE')=>{throw Object.assign(Error(message),{code});};
 export const MANUFACTURING_REPLAY_LIMITS=Object.freeze({bytes:8388608,vertices:150000,triangles:250000,artifacts:32});
@@ -13,7 +13,7 @@ export function admitManufacturingReplayArtifacts(artifacts,bodies,engineRevisio
   const r=artifacts[i],body=bodies[i];
   const hasConstruction=!!r&&Object.hasOwn(r,'sourceConstruction');
   if(!r||Reflect.ownKeys(r).sort().join(',')!==(hasConstruction?'body,buffer,contractVersion,engine,engineRevision,metadata,op,sourceConstruction,unit':'body,buffer,contractVersion,engine,engineRevision,metadata,op,unit')||r.op!=='solid.manufacturing.mesh.read'||r.contractVersion!==1||r.unit!=='millimeter'||r.engine!=='occ'||r.engineRevision!==engineRevision||r.body?.bodyId!==body.bodyId||r.body?.featureId!==body.featureId)fail('Controlled artifact source binding changed.');
-  if(hasConstruction){const d=Object.getOwnPropertyDescriptor(r,'sourceConstruction');if(!d?.enumerable||!Object.hasOwn(d,'value'))fail('Construction witness must be own data.');captureBoxConstructionWitness(d.value,{bodyId:body.bodyId,featureId:body.featureId,engine:'occ',engineRevision});}
+  if(hasConstruction){const d=Object.getOwnPropertyDescriptor(r,'sourceConstruction');if(!d?.enumerable||!Object.hasOwn(d,'value'))fail('Construction witness must be own data.');captureManufacturingConstruction(d.value,{bodyId:body.bodyId,featureId:body.featureId,engine:'occ',engineRevision});}
   const m=captureManufacturingMetadata(r.metadata,MANUFACTURING_REPLAY_CONTROLS);let size;try{size=byteLength(r.buffer);new DataView(r.buffer);}catch{fail('Expected attached standalone controlled mesh.');}
   if(used.has(r.buffer)||size!==m.byteLength)fail('Controlled mesh buffer is aliased or changed.');used.add(r.buffer);bytes+=size;vertices+=m.vertexCount;triangles+=m.triangleCount;
   if(bytes>8388608||vertices>150000||triangles>250000)fail('Controlled mesh batch exceeds its budget.','RESOURCE_LIMIT');
