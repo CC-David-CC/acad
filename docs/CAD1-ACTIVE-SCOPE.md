@@ -132,3 +132,20 @@ have completed. Do not label the whole run PASS before terminal result and
 cleanup. Next complete workflows remain archive, measurement roles and history;
 all Chrome drivers remain strictly sequential. Current source main also has
 metadata-helper/docs-only changes beyond the actual built32ae snapshot.
+
+## Latest completed batch results
+
+Orientation618cf39 and archive49db2da are scoped qualifiedPASS. Independent
+orientation full-vector oracleV2 also passes its bounded50pm case (retained
+24.5772pm/replay7.2948pm); original source/replay-intake refusal is preserved.
+Measurement roleR1 FAIL is frozen Desktop53363ab16: ordinary role/point/dimension/
+travel/3save/reopen prefix passes, final typed configuration setup INVALID_INPUT.
+Source-confirmed canonical typed binder rejects an unrelated genuine Point;
+coherent repair is underway without dropping the final typed-bound refusal test.
+HistoryR1 FAIL is frozen3b8a32f:25checkpoints, no saves; suppression/noop/travel/
+dependency prefix passes, downstream hole sees non-axis-aligned resized source
+(UNSUPPORTED_PROFILE rather than expectedHOLE_OUTSIDE_PROFILE). Actual failed
+candidate vertices were not captured; no numeric-only cause claimed. Accepted
+durable state stayed unchanged under the driver's explicit diagnostic exclusions.
+Explicit rectangle-edit construction repair is under review, no tolerance/code
+waiver. Both remaining full workflows require repaired-build complete reruns.
