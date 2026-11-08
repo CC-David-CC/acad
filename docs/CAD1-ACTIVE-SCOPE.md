@@ -18,3 +18,21 @@ Authoritative detailed definitions are in the desktop repository:
 `docs/evidence/CAD-GATE1-BASELINE-20261106.md` (scope-change commit bd2642d46).
 Historical references to all22 exercises describe the prior scope and do not
 reinstate assembly acceptance in Gate1.
+
+## Current finite execution lanes — 2026-11-07
+
+- Shared primitive append: exact disconnected-component preservation, fresh
+  full-candidate admission and original-equation validation; R6 failure retained.
+- Singular point distance: actual free reduced-coordinate initializer integrated
+ 0c6d44c; complete lock/alias/typed/travel/native workflow pending.
+- Intersecting profiles: bounded two-rectangle cell/source-span graph integrated;
+  normal build passes, whole source/reselection/child/repair/native workflow runs.
+- Native .cad: Worker archive/source capture plus ordinary host file association
+  source implementation; no archive runtime qualification yet.
+- Precision: default rounding source repair pending genuine untouched-default UI
+  proof; coefficient/affine-offset loss still open under separate coherent repair.
+
+Qualified Base/Compact37rows/four native files (1f037a2) and current rectangle
+reports21rows/two files (875a9bc) are scoped whole-workflow results. They do not
+close full Gate1, alter any failed evidence, reopen Files, or qualify1pm geometry.
+The canonical detailed matrix remains in the desktop repository.
