@@ -1,5 +1,23 @@
 # Active CAD1 acceptance scope — user revision2026-11-06
 
+## Ordinary exercise evidence review — nine qualified contracts, 2026-11-08
+
+Root inspected the complete actual region-descriptor/reselection/source-repair,
+duplicate recovery, positive extrusion/depth and independent saved-source/Native
+arithmetic artifacts mapped by REGION-PLATE-HOLE-EXERCISE-MAP-20261108.md.
+Ordinary E04/E05/E06/E08 join E01/E02/E03/E07/E21 as accepted exercise contracts:
+**9of21 Qualified;12 Partial.18recent scoped workflows** remain the separate
+workflow counter. No new execution, accuracy relaxation or historical-runtime
+retagging occurred. Broader11competencies and final candidate delivery stay open.
+
+E09 stays Partial: four-corner group creation UndoRedo remains an explicitly
+unobserved G6 combination, despite strong corner edit/reopen/source/geometry
+proof and shared center/corner operation/publisher. A complete current public
+four-corner creation/travel/.cad workflow and independent oracle is being
+prepared before root execution. No fake inference from centered-hole travel.
+Earlier dated counts below are historical checkpoints.
+
+
 ## Latest qualification — projected R3 and ordinary exercise review, 2026-11-08
 
 Whole Chrome16184 and FIRST independent actual-artifact oracle PASS on exact
