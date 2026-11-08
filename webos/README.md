@@ -1,5 +1,16 @@
 # CAD Modeler (JSketcher inspired)
 
+Finite live-Segment ProjectedDistance creation/edit/remove/named-binding and
+subsequent typed point movement now pass full workflow ACAD4325ef1
+(actual0133698/95d8023b0),52records/501public traces/37observations/7refusals/
+three .cad Save/server/fresh Open cycles plus FIRST independent source/archive
+oracle. See examples/projected-distance.mjs, the exact tested helper. Both prior
+failures remain retained. Typed point admission proves bounded Undo before
+publication; other typed mutation classes remain explicit unsupported domains.
+This source-only geometry workflow makes no Native solid or all-C03/C04 claim.
+No public/beta deployment follows from this qualification.
+
+
 Public symmetric point coincidence is finitely qualified (Core8353d12 /
 Desktop8eac41c9e, proof6407d6b). Actual redundant transitive row, reversed-pair
 no-op, rejected conflicts, mixed Native/source travel and three .cad save/server/

@@ -1,5 +1,30 @@
 # Browser CAD command examples
 
+[Projected distance recipe](projected-distance.mjs) is the exact public-command
+helper used by qualified complete workflow ACAD4325ef1, actual
+Core0133698/Desktop95d8023b0. Start with a normal fresh project and its existing
+document-bound agent. Importing the helper does not author anything:
+
+```js
+const recipe = createProjectedDistanceExample(agent);
+const sketch = await recipe.build();
+await recipe.euclidean(sketch, 5);
+await recipe.projected(sketch, -3);
+await recipe.edit(sketch, 3);
+```
+
+Import `createProjectedDistanceExample` from this module. The direction is the
+actual inspected live Segment, not a frozen vector or reference measurement.
+Creation, positive/zero/negative scalar edits, direction rotation/reversal,
+named length formulas, removal, typed point movement, mixed Undo restoring the
+binding and three normal .cad Save/server/fresh Open cycles passed the complete
+browser run and FIRST independent equations/archive oracle. Use the desktop's
+normal Save/Open commands separately; the helper does not write raw source.
+Typed point edits retain bindings and prove supported Undo before publication;
+the finite travel domain is1..32 changed supported point handles in one stage.
+No general typed-mutation, arbitrary reference-role or native BRep claim.
+
+
 [Point coincidence recipe](point-coincidence.mjs) is the exact helper used by
 qualified whole workflow6407d6b (actual Core8353d12/Desktop8eac41c9e). Pass the
 existing document-bound agent. It authors genuine points, discovers actual IDs,
