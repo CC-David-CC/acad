@@ -235,7 +235,7 @@ module.exports = {
       },
       {
         test: /\.wasm$/,
-        exclude: [path.join(__dirname, '.build/polygon-profile-assets'),path.join(__dirname, '.build/mechanical-profile-assets'),path.join(__dirname, '.build/boolean-history-assets'),path.join(__dirname, '.build/revolve-profile-assets'),path.join(__dirname, '.build/sweep-profile-assets'),path.join(__dirname, '.build/loft-profile-assets'),path.join(__dirname, '.build/adaptive-metrology-assets'),path.join(__dirname, '.build/step-export-assets'),path.join(__dirname, '.build/manufacturing-mesh-assets'),path.join(__dirname, '.build/shell-assets')],
+        exclude: [path.join(__dirname, '.build/polygon-profile-assets'),path.join(__dirname, '.build/mechanical-profile-assets'),path.join(__dirname, '.build/boolean-history-assets'),path.join(__dirname, '.build/revolve-profile-assets'),path.join(__dirname, '.build/sweep-profile-assets'),path.join(__dirname, '.build/loft-profile-assets'),path.join(__dirname, '.build/adaptive-metrology-assets'),path.join(__dirname, '.build/step-export-assets'),path.join(__dirname, '.build/manufacturing-mesh-assets'),path.join(__dirname, '.build/shell-assets'),path.join(__dirname, '.build/circular-assets')],
         type: "javascript/auto",
         loader: "file-loader",
         options: {name: '[sha256:hash:hex:20].[ext]'}
