@@ -97,3 +97,14 @@ Read-only review also tightened the final receipt guard: the verification
 workspace's group locators/types/ordered refs/statuses must match the actual
 returned cold source. An unchecked third-workspace admission cannot become
 a public receipt. This is a source-contract repair, not a reproduced incident.
+
+R4 on578b865/Desktopfaac58663 reaches71rows. The original mixed group and
+exact no-op pass; a later stale-source refusal exposes a harness expectation
+mismatch. captureJob explicitly returns DOMException AbortError/code20 for
+stale source revision, while the driver expected STALE_HISTORY. Independent
+comparison confirms unchanged accepted source/history/lifetime/resources under
+the original declared diagnostic-token policy. evidence-r4 remains whole FAIL.
+The corrected case requires exact code20/name/message, not arbitrary cancellation.
+Source review also aligns zero-length append with the exact DOMAIN response
+already established by ordinary-entity-native-integrity/evidence-r1; no broad
+error-code allowlist remains for that case. No product behavior changed.
