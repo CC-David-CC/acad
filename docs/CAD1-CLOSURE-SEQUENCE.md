@@ -9,22 +9,24 @@ viewable output and one authoritative shared person/agent operation model remain
 
 ## What actually remains
 
-1. Numerical edit and persistence qualification. Orientation's last complete
-   attemptR11 failed its executed1pm guard. User now explicitly accepts50pm;
-   conditional measuredY accuracy11.86pm fits, but current complete workflow has
-   not passed. Coordinate-only policy3300aba is source-integrated. Actual solver
-   stop diagnostics/accepted-iterate ownership repair are still an agent lane.
-   Do not infer geometry accuracy merely from two matching reconstructions.
-2. New native .cad qualification. Codec ownership fix exists; older whole run
-   completed functional flows but counted11 versus10 workers(all retired).
-   Subsequent typed-width failure has source fixes. Latest startup timed out at
-   login before CAD: fix actual fixture failure, then finish the unchanged
-   Save/browser commit/server sync/fresh Open/reedit/unchanged-content reuse/
-   malformed Open/Files routing/resource-cleanup chain and independent artifacts.
-3. Finish shared edit/control integration. Reference↔driving Segment dimension
-   source/bridge exists but awaits complete qualification. Bounded history
-   suppress/unsuppress/prefix/branch source and driver are now integrated through
-   c5f5e4a; final PM typed-code forwarding/Desktop registration are root splices.
+1. Retain qualified orientation R12 (618cf39) and its independent bounded50pm
+   analytic oracle (c702b49). Both stored and replayed coordinates satisfy the
+   same independent reference/budget in that case; reconstruction agreement alone
+   is not an accuracy proof. Numerical repair and50pm policy are integrated.
+2. Retain qualified native `.cad` R6 (49db2da): four saves/server equality,
+   fresh Open/reedit, twelve independently checked exports, malformed Opens,
+   actual Files routing, unchanged content reuse and ten retired codec Workers.
+   Earlier failures remain frozen. Large capacity/peak memory and ARC23 costs
+   remain separate limitations; this is a bounded workflow signoff.
+3. Repair and qualify the two failed shared edit/control workflows. Measurement
+   roles R1 (Desktop53363ab16) passed its ordinary edit/travel/three-save prefix,
+   then an unrelated Point blocked typed configuration setup. Narrow source
+   repair01fe7c5/c7cca14/5c4e036 is integrated but unqualified. History R1
+   (3b8a32f) passed suppression/noop/travel/dependency prefix, then a rectangle
+   resize produced UNSUPPORTED_PROFILE instead of the intended downstream
+   HOLE_OUTSIDE_PROFILE. Explicit rectangle construction plus exact historical
+   target verification is being implemented. Preserve all guards and expected
+   failure codes; rerun both unchanged complete workflows on a fresh build.
    No second journal, hidden authored copy or silent material retarget allowed.
 4. Complete finite sketch/constraint/region gaps fromC01–C05. Basic primitives,
    many constraints, disjoint/nested/crossing rectangle workflows already pass.
@@ -54,13 +56,16 @@ viewable output and one authoritative shared person/agent operation model remain
 
 ## Step-by-step execution
 
-A. Compose current bounded source packets:50pm, numerical repair, measurement,
-   history. Review shared seams once; preserve all original failure evidence.
-B. Fix actual local fixture login startup and prepare one fresh normal build.
-   C07 adds a static Native graph dependency: rebuild graph staging normally;
-   do not reuse stale closed asset manifests or weaken verification.
-C. Run complete orientation, .cad, measurement and history workflows sequentially
-   in Chrome. Analyze actual saved artifacts independently after whole runs.
+A. Compose the isolated-Point and explicit rectangle-dimension repairs. Review
+   shared seams once; preserve all original failure evidence. C08 remains in a
+   separate source branch, excluded from this repair build.
+B. Prepare the next exact normal build. Current working private fixture already
+   uses direct private real-disk storage on the separate R730 root disk; do not
+   relabel earlier login failures as CAD failures. Preserve normal graph/resource
+   staging verification and immutable existing qualified fixture bytes.
+C. Run complete measurement and history workflows sequentially in Chrome, then
+   affected orientation/archive regressions according to changed dependencies.
+   Analyze actual saved artifacts independently after whole runs.
    A failure identifies the next repair at its correct subsystem; no per-edit
    microtest loop, threshold tuning or substitute positive geometry.
 D. Complete remaining finite sketch/constraint/region operations in bounded
