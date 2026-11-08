@@ -58,11 +58,11 @@ function replayProof(candidate:any,observation:any,external:any){try{assertVerif
 // Null means this is NOT the finite canonical rectangle: generic dependent
 // sketches keep their existing solver path. No coordinate-only heuristic can
 // opt a source into this reconstruction. All publication remains outside Worker.
-export function reconstructTypedRectangle(request:any,{update=false,required=false}:{update?:boolean,required?:boolean}={}){
+export function reconstructTypedRectangle(request:any,{update=false}:{update?:boolean}={}){
  const revision=request.revision;try{
   inspectTree(request);
   const sketch=request.sketch,external=request.externalParameters,declared=declaration(sketch,external);
-  if(!declared){if(required)fail('UNSUPPORTED_TYPED_RECTANGLE','A complete anchored four-line directed rectangle declaration is required.');return null;}
+  if(!declared)return null;
   const candidate=structuredClone(sketch);for(let i=0;i<4;i++){const object=candidate.objects.find(o=>o.id===declared.ids[i]);object.data.a.x=declared.corners[i][0];object.data.a.y=declared.corners[i][1];object.data.b.x=declared.corners[(i+1)%4][0];object.data.b.y=declared.corners[(i+1)%4][1];}
   if(!update&&JSON.stringify(candidate.objects)!==JSON.stringify(sketch.objects))fail('TYPED_RECTANGLE_CURRENT_MISMATCH','The current source does not represent its actual declared typed dimensions: '+firstGeometryDifference(candidate,sketch));
   // Exact declared coordinate construction precedes optimization. Nothing is
