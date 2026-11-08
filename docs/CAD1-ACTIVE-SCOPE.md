@@ -65,3 +65,11 @@ these older slices do not qualify the current untested composition. Nonzero
 math/length/precision retained workflows, untouched default-dialog UI, remaining
 finite competencies, final composed beta/agent delivery and handoff remain.
 Files is accepted, filesystem-race testing cancelled, visitor relay off.
+
+Latest complete results: small-equation R1 (33ff549) PASS70rows/six native cycles
+plus independent1pm-budget source arithmetic checker. This does not qualify
+nanoscale solids. Native archive R3 (015f354) FAIL7rows/two saves/three initial
+exports at typed width100→120 exact-axis check; fresh Open/codec-lifetime/reuse
+phases not reached, one codec retired. Typed rectangle declaration reconstruction
+is approved as a separate Worker source lane, preserving constraints/units/full
+precision and original-equation/cold proofs; no snapping or axis waiver.
