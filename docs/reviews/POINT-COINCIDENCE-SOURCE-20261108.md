@@ -68,6 +68,8 @@ Craft interface is added using the actual factory-return type. Desktop root
 index needs only import`registerCoincidenceCommands` from
 `./coincidence-commands.mjs` and
 `if(host.commands)host.onDispose(registerCoincidenceCommands(host,()=>rectangle.target()))`.
+The coordinator's existing typed-source mutation refusal remains explicit; this
+packet does not convert typed formulas or create a new typed-consumer path.
 No PM/format/Native/catalog/default or Apply source change.
 
 ## Complete qualification remains pending
