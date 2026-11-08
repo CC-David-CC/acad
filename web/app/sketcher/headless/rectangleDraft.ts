@@ -19,7 +19,7 @@ function ownText(error:any,key:string):string|undefined {
 export function captureRectangleDraftFailure(error:any,phase?:RectangleDraftPhase){
   const rawCode=ownText(error,'code'),code=rawCode&&/^[A-Z][A-Z0-9_]{0,63}$/.test(rawCode)?rawCode:'RECTANGLE_PREPARATION_FAILED';
   const rawMessage=error instanceof SyntaxError?'Invalid source JSON syntax.':ownText(error,'message');
-  const detail=rawMessage?rawMessage.replace(/[\x00-\x1f\x7f]/g,' ').slice(0,384):'The internal rectangle operation failed without a message.';
+  const detail=rawMessage?rawMessage.slice(0,384).replace(/[\x00-\x1f\x7f]/g,' '):'The internal rectangle operation failed without a message.';
   const cause=failureCause(error);
   return captureSketchFailure({code,message:(phase?'Rectangle '+phase+' failed: ':'')+detail,...(cause?{cause}:{})});
 }
