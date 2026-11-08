@@ -558,7 +558,8 @@ export function activate(ctx: ApplicationContext) {
       savedStreams=streams(),versions=savedStreams.map(stream=>stream.revision),values=savedStreams.map(stream=>stream.value);
     const requireAccepted=()=>{
       if(services().some((service,index)=>service!==savedServices[index])||ctx.craftService!==origin.craft||craft.modifications$!==modifications$||
-          craft.models$!==models$||craft.pipelineFailure$!==pipelineFailure$||craft.engineCleanupFailure$!==engineCleanupFailure$||registry.models!==registryModels||registry.shells!==registryShells||
+          craft.models$!==models$||craft.pipelineFailure$!==pipelineFailure$||craft.engineCleanupFailure$!==engineCleanupFailure$||
+          registry.isEvaluating!==false||registryModels!==models||registry.models!==registryModels||registry.shells!==registryShells||
           ctx.projectService!==origin.project||document!==origin.generation||signal!==origin.signal||project.documentSignal!==signal||HISTORY_SIGNAL_ABORTED(signal)||
           !project.hasHostLifetime||!project.isDocumentCurrent(document)||manager.unit!=='millimeter'||manager.isRestoring||
           modifications$.value!==history||history!==origin.state||history.history!==origin.history||history.pointer!==origin.pointer||
@@ -579,14 +580,18 @@ export function activate(ctx: ApplicationContext) {
     const applied=journal.cursor>0?journal.entries[journal.cursor-1]:null,
       modern=history.history.some(entry=>AUTHORED_SOLID_KINDS.includes(entry.type))||HISTORY_CONTROL_KINDS.includes(applied?.kind);
     if(!modern){
-      // Positively registered ordinary legacy operations retain their existing
-      // return-to-tip Cancel. A failed modern proof never reaches this branch.
-      const legacyWorkers=['WORKER_RECTANGLE_EXTRUDE_V1','WORKER_CENTERED_THROUGH_HOLE_V1','WORKER_FOUR_CORNER_THROUGH_HOLES_V1'];
-      if(history.history.length>10000||!history.history.every(entry=>{
+      // Positive fixed historical vocabulary, not "any registered non-Worker".
+      // A shared-journal entry (including a Redo tail) is never a legacy lease:
+      // its domain needs its own authored travel, even for PLANE-only history.
+      const legacyTypes=['PLANE','BOX','CONE','CYLINDER','SPHERE','TORUS','EXTRUDE','REVOLVE','BOOLEAN','LOFT','SWEEP',
+        'HOLE_TOOL','FILLET_TOOL','SHELL_TOOL','SCALE_BODY','SCALE_BODY_PIVOT','MIRROR_BODY','PATTERN_LINEAR','PATTERN_CUT_LINEAR','PATTERN_RADIAL',
+        'IMPORT_MODEL','DELETE_BODY','DEFEATURE_REMOVE_FACE','WIRE_LINE','MOVE_BODY','MOVE_BODY_XYZ','ROTATE_BODY_AXIS',
+        'NATIVE_MESH_BOX','NATIVE_MESH_BOOLEAN','SUBD_BOX','SUBD_SPHERE','SUBD_CYLINDER',
+        'WORKER_RECTANGLE_EXTRUDE_V1','WORKER_CENTERED_THROUGH_HOLE_V1','WORKER_FOUR_CORNER_THROUGH_HOLES_V1'];
+      if(journal.cursor!==0||journal.entries.length!==0||history.history.length>10000||!history.history.every(entry=>{
         const operation=ctx.operationService.get(entry.type);
-        return !entry.suppressed&&operation?.id===entry.type&&typeof operation.run==='function'&&
-          (!entry.type.startsWith('WORKER_')||legacyWorkers.includes(entry.type));
-      }))throw refusal('UNAVAILABLE','This operation is not an owned modern review or a supported registered legacy edit.');
+        return legacyTypes.includes(entry.type)&&!entry.suppressed&&operation?.id===entry.type&&typeof operation.run==='function';
+      }))throw refusal('UNAVAILABLE','Only an explicitly supported legacy history without shared journal entries may return directly to its tip.');
       requireDraft();end.call(travel);return;
     }
     // All these anchors already belong to the accepted pipeline/journal. No
