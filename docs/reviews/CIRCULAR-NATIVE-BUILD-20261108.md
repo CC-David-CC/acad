@@ -41,3 +41,26 @@ Portable adaptation source is now pinned in Native183ab32cd5261e9f30059cea9546dd
 on both LANs. Recorded inputs cover the listed source files/static archives and
 CMake cache, not a full compiler/toolchain or SDK-header attestation. The exact
 output pair above remains the binding; functional qualification is still pending.
+
+## Diagnostic-stage native build R2
+
+Normal root Native compile26577 completed0 from5a4f0a825a847667b805937f512c851dfeec4d38.
+Recorded source/archive/CMake inputs unchanged across build (not a complete SDK
+or toolchain attestation). This adds only per-call closed error-stage labels;
+no geometry fix or functional qualification is claimed. The strict JS capture
+is composed3659072, and the separate semantic seam fix764e38e is also present.
+
+RawJS0062648f3d408ef55e07caa7e1659d63526ea355c7de3025a42d713a1f4ba1d7;
+portableJS9789a61709dc680cce64dfa29030a3862ee636319594bdc839c0ed92e9d3571b;
+WASMad06c43be5d895c6cb41a562b53dee3f819c8b003182c5c99b65258e0b000c0d.
+Only existing exchange callback transformation window→globalThis and removal
+of two debug logs is applied, exactly once. Old adapter's exact raw hash guard
+correctly refused the new compiler output; Native71405a03236f5476b8df19a5c048620e577c3b16
+pins this build's exact input/output, backed on both Native LANs. Compiler JS
+changed53bytes in equal316025byte outputs, including generated ASM_CONSTS addresses.
+No engine execution occurred during build/adaptation.
+
+Root output /mnt/data10tb/codi-occ-circular-root-build-20261108-r2, Native source
+/mnt/data10tb/codi-occ-circular-root-source-20261108-r2. Existing R1 runtime and
+all unrelated kernel pairs remain unchanged. Next: full coherent app build,
+fresh isolated fixture, unchanged whole Chrome workflow and artifact analysis.
