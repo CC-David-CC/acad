@@ -7,6 +7,7 @@ const {evaluatePhysicalSource} = require('cad/parameters/evaluatePhysicalSource.
 const {decodePhysicalSource} = require('cad/parameters/physicalSource.mjs');
 const {prepareTypedRectangle} = require('cad/parameters/typedRectangleBindings.mjs');
 const {prepareTypedDependentSketch} = require('./typedDependentSketch.mjs');
+const {reconstructTypedRectangle} = require('./typedRectangleReconstruction');
 const {assertVerifiedReplayGeometry} = require('./verifiedReplayGeometry');
 let used = false;
 self.onmessage = async event => {
@@ -131,7 +132,7 @@ self.onmessage = async event => {
           const boundary={lines:[],arcs:[],circles:[],nurbses:[]};if(!sketch.boundary||Object.keys(boundary).some(k=>!Array.isArray(sketch.boundary[k])||sketch.boundary[k].length))throw Error('Referenced sketch boundary is unsupported.');
           const definitions=request.parameterSource===''?{version:1,definitions:[]}:decodePhysicalSource(request.parameterSource);if(!definitions)throw Error('Typed parameters are required.');const result=evaluatePhysicalSource(definitions),values=new Map(result.values.map(row=>[row.name,row]));
           const external=prepareTypedDependentSketch(sketch,name=>{const row:any=values.get(name);if(!row||row.dimension!=='length')throw Error('A typed length parameter is required.');return row.value;});
-          const solved=solveSketch({revision,sketch,boundary,externalParameters:external});if(!solved.ok){self.postMessage(solved);return;}if(request.verifyCurrent)assertVerifiedReplayGeometry(sketch,solved.sketch,solved.evidence,external);
+          const solved=reconstructTypedRectangle({revision,sketch,boundary,externalParameters:external},{update:!request.verifyCurrent})||solveSketch({revision,sketch,boundary,externalParameters:external});if(!solved.ok){self.postMessage(solved);return;}if(request.verifyCurrent)assertVerifiedReplayGeometry(sketch,solved.sketch,solved.evidence,external);
           const serializedSketch=JSON.stringify(solved.sketch);if(serializedSketch.length>1048576||new TextEncoder().encode(serializedSketch).byteLength>1048576)throw Error('Solved sketch exceeds limit.');self.postMessage({revision,ok:true,serializedSketch});return;
         }catch(_){self.postMessage({revision,ok:false,error:{code:'TYPED_SKETCH_INVALID',message:'The sketch could not be regenerated with these parameters.'}});return;}
       }
@@ -141,7 +142,7 @@ self.onmessage = async event => {
         const definitions=decodePhysicalSource(request.source);if(!definitions)throw Error('Typed parameters are required.');
         const result=evaluatePhysicalSource(definitions),values=new Map(result.values.map(row=>[row.name,row]));
         const prepared=prepareTypedRectangle(request.sketchJSON,request.bindings,name=>{const row:any=values.get(name);if(!row||row.dimension!=='length')throw Error('A typed length parameter is required.');return row.value;});
-        const sketch=JSON.parse(prepared.sketchJSON),solved=solveSketch({revision,sketch,boundary:JSON.parse(JSON.stringify(sketch.boundary)),externalParameters:prepared.externalParameters});
+        const sketch=JSON.parse(prepared.sketchJSON),solved=reconstructTypedRectangle({revision,sketch,boundary:structuredClone(sketch.boundary),externalParameters:prepared.externalParameters},{update:true,required:true});
         if(!solved.ok){self.postMessage(solved);return;}
         const serializedSketch=JSON.stringify(solved.sketch);if(serializedSketch.length>65536)throw Error('Solved sketch exceeds the limit.');
         self.postMessage({...solved,serializedSketch,bindings:prepared.bindings});return;
@@ -154,7 +155,7 @@ self.onmessage = async event => {
         const result=evaluatePhysicalSource(definitions),values=new Map(result.values.map(row=>[row.name,row]));
         let sketch;try{sketch=JSON.parse(request.sketchJSON)}catch{throw Error('Invalid sketch JSON.')}
         const external=prepareTypedDependentSketch(sketch,name=>{const row:any=values.get(name);if(!row||row.dimension!=='length')throw Error('A typed length parameter is required.');return row.value;});
-        const solved=solveSketch({revision,sketch,boundary:request.boundary,externalParameters:external,...(request.task==='typed-dependent-diagnostics'?{localJacobian:{version:1,...(sketch.stages.length>1?{scope:'per-stage'}:{})}}:{})});
+        const solved=(request.task==='typed-dependent-solve'?reconstructTypedRectangle({revision,sketch,boundary:request.boundary,externalParameters:external}):null)||solveSketch({revision,sketch,boundary:request.boundary,externalParameters:external,...(request.task==='typed-dependent-diagnostics'?{localJacobian:{version:1,...(sketch.stages.length>1?{scope:'per-stage'}:{})}}:{})});
         if(solved.ok&&request.task==='typed-dependent-diagnostics')assertVerifiedReplayGeometry({...sketch,boundary:request.boundary},solved.sketch,solved.evidence,external);
         self.postMessage(solved);return;
         } catch (_) {self.postMessage({revision,ok:false,error:{code:'TYPED_SKETCH_INVALID',message:'Typed sketch fields or parameters are invalid or unsupported.'}});return;}
@@ -165,7 +166,7 @@ self.onmessage = async event => {
         const definitions=decodePhysicalSource(request.parameterSource);if(!definitions)throw Error('A typed parameter source is required.');
         const evaluated=evaluatePhysicalSource(definitions),values=new Map(evaluated.values.map(row=>[row.name,row]));
         const prepared=prepareTypedRectangle(request.sketchJSON,[],name=>{const q:any=values.get(name);if(!q||q.dimension!=='length')throw Error('A typed rectangle length is required.');return q.value;});
-        const solved=solveSketch({revision,sketch:JSON.parse(prepared.sketchJSON),boundary:request.boundary,externalParameters:prepared.externalParameters});
+        const solved=reconstructTypedRectangle({revision,sketch:JSON.parse(prepared.sketchJSON),boundary:request.boundary,externalParameters:prepared.externalParameters},{required:true});
         if(!solved.ok){self.postMessage(solved);return;}
         const serializedSketch=JSON.stringify(solved.sketch);if(serializedSketch.length>65536)throw Error('Typed selected source exceeds64KiB.');
         const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(serializedSketch)),sketchDigest=Array.from(new Uint8Array(bytes),n=>n.toString(16).padStart(2,'0')).join('');
