@@ -211,13 +211,16 @@ self.onmessage = async event => {
         const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(serializedSketch)),sketchDigest=Array.from(new Uint8Array(bytes),n=>n.toString(16).padStart(2,'0')).join('');
         self.postMessage({...solved,serializedSketch,sketchDigest});return;
       }
-      if (request.task === 'rectangle-extrusion-solve') {
+      if (request.task === 'rectangle-extrusion-solve' || request.task === 'legacy-physical-sketch-transaction-solve') {
         const fields = ['boundary','externalParameters','revision','sketchJSON','task'];
         if (typeof request !== 'object' || Array.isArray(request) || Object.keys(request).sort().join(',') !== fields.join(',') || typeof request.sketchJSON !== 'string' || request.sketchJSON.length > 65536 || typeof revision !== 'string' || !revision || revision.length > 256) throw Error('Invalid extrusion solve request.');
         let sketch; try { sketch = JSON.parse(request.sketchJSON); } catch (_) { throw Error('Invalid sketch JSON.'); }
-        const solved = solveSketch({revision, sketch, boundary:request.boundary, externalParameters:request.externalParameters});
+        // Only the explicit legacy physical transaction may regenerate authored
+        // coordinates. Profile reads retain the validated captured geometry.
+        const input={revision,sketch,boundary:request.boundary,externalParameters:request.externalParameters};
+        const solved = request.task==='legacy-physical-sketch-transaction-solve'?solveSketch(input):require('./capturedProfileRead').readCapturedProfile(input);
         if (!solved.ok) { self.postMessage(solved); return; }
-        const serializedSketch = JSON.stringify(solved.sketch);
+        const serializedSketch = request.task==='legacy-physical-sketch-transaction-solve'?JSON.stringify(solved.sketch):solved.serializedSketch;
         if (serializedSketch.length > 65536) throw Error('Solved sketch exceeds the prism limit.');
         const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(serializedSketch));
         const sketchDigest = Array.from(new Uint8Array(bytes), n => n.toString(16).padStart(2,'0')).join('');
