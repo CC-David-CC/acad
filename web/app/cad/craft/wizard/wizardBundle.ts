@@ -3,7 +3,7 @@ import initializeBySchema from '../schema/initializeBySchema';
 import {clone} from 'gems/objects';
 import materializeParams from '../schema/materializeParams';
 import {createFunctionList} from 'gems/func';
-import {CraftHistory, OperationRequest} from "cad/craft/craftBundle";
+import type {CraftHistory, OperationRequest} from "cad/craft/craftBundle";
 import {NewOperationCall, ParamsPath, WizardService, WizardState, WorkingRequest} from "cad/craft/wizard/wizardTypes";
 import _ from "lodash";
 import {OperationParamValue} from "cad/craft/schema/schema";
@@ -68,6 +68,70 @@ function previewData(actual: any, expected: any): object[] | null {
   return objects;
 }
 
+// A revoked passive preview still has a private history origin. This records
+// actual wizard-produced request lineage, never a serialized active/passive flag.
+type HistoryReviewOrigin = Readonly<{
+  context: ApplicationContext, wizard: WizardService, craft: ApplicationContext['craftService'],
+  modifications: StateStream<CraftHistory>, state: CraftHistory, revision: number,
+  history: OperationRequest[], pointer: number, hints: CraftHistory['hints'],
+  entry: OperationRequest, type: string, suppressed: OperationRequest['suppressed'], params: OperationRequest['params'],
+  project: ApplicationContext['projectService'], generation: number, signal: AbortSignal,
+  insert: StateStream<NewOperationCall>, insertRevision: number, requests: StateStream<WorkingRequest>, requestKey: number, cancel: WizardService['cancel']
+}>;
+declare const historyReviewCaptureBrand: unique symbol;
+export type HistoryReviewCancelCapture = Readonly<{[historyReviewCaptureBrand]: true}>;
+const historyReviewOrigins = new WeakMap<WorkingRequest, HistoryReviewOrigin>();
+const historyReviewCaptures = new WeakMap<object, HistoryReviewOrigin>();
+const staleHistoryReview = () => Object.assign(new Error('The accepted history review changed. Reopen its preview before cancelling.'), {
+  code: 'STALE_HISTORY', userMessage: 'The accepted history review changed. Reopen its preview before cancelling.'
+});
+
+function currentHistoryOrigin(origin: HistoryReviewOrigin, ctx: ApplicationContext): boolean {
+  try {
+    const {wizard, craft, modifications, state: source, history, pointer, hints, entry, type, suppressed, params, project, generation, signal} = origin;
+    const current = wizard.workingRequest$.value;
+    return ctx === origin.context && ctx.wizardService === wizard && ctx.services.wizard === wizard && ctx.craftService === craft &&
+      wizard.workingRequest$ === origin.requests &&
+      wizard.cancel === origin.cancel && craft.modifications$ === modifications && modifications.value === source && modifications.revision === origin.revision &&
+      source.history === history && source.pointer === pointer && source.hints === hints && pointer >= -1 && pointer < history.length - 1 &&
+      history[pointer + 1] === entry && entry.type === type && entry.params === params && entry.suppressed === suppressed &&
+      current !== null && historyReviewOrigins.get(current) === origin && current.requestKey === origin.requestKey && current.type === type &&
+      ctx.streams.wizard.insertOperation === origin.insert && origin.insert.value === null && origin.insert.revision === origin.insertRevision &&
+      ctx.projectService === project && project.documentGeneration === generation && project.documentSignal === signal &&
+      project.hasHostLifetime && project.isDocumentCurrent(generation) && !signalAborted(signal);
+  } catch { return false; }
+}
+
+// Trusted module seam only: no host command accepts or constructs this token.
+export function captureHistoryReviewCancel(ctx: ApplicationContext, request: WorkingRequest): HistoryReviewCancelCapture | null {
+  const origin = historyReviewOrigins.get(request);
+  if (!origin || origin.wizard.workingRequest$.value !== request || !currentHistoryOrigin(origin, ctx)) return null;
+  const capture = Object.freeze({}) as HistoryReviewCancelCapture;
+  historyReviewCaptures.set(capture, origin);
+  return capture;
+}
+export function readHistoryReviewCancel(capture: HistoryReviewCancelCapture, ctx: ApplicationContext): HistoryReviewOrigin {
+  const origin = capture && historyReviewCaptures.get(capture);
+  if (!origin || !currentHistoryOrigin(origin, ctx)) throw staleHistoryReview();
+  return origin;
+}
+export function discardHistoryReviewDraft(capture: HistoryReviewCancelCapture, ctx: ApplicationContext): void {
+  const origin = readHistoryReviewCancel(capture, ctx), before = origin.wizard.workingRequest$.value;
+  // Retire this handler before stream notifications can reenter. All effects
+  // use the captured actual service; never look up and reset a replacement.
+  historyReviewCaptures.delete(capture);
+  origin.cancel.call(origin.wizard);
+  const next = origin.wizard.workingRequest$.value, nextOrigin = next && historyReviewOrigins.get(next);
+  if (ctx.wizardService !== origin.wizard || ctx.craftService !== origin.craft || ctx.projectService !== origin.project ||
+      origin.project.documentSignal !== origin.signal || !origin.project.isDocumentCurrent(origin.generation) || signalAborted(origin.signal) ||
+      next === before || !nextOrigin || !currentHistoryOrigin(nextOrigin, ctx) ||
+      nextOrigin.state !== origin.state || nextOrigin.history !== origin.history || nextOrigin.pointer !== origin.pointer ||
+      nextOrigin.entry !== origin.entry || nextOrigin.params !== origin.params || origin.wizard.hasActiveOperation()) {
+    // No rollback, retry, error publication or overwrite after a newer listener.
+    throw staleHistoryReview();
+  }
+}
+
 export function activate(ctx: ApplicationContext) {
 
   const {streams, services} = ctx;
@@ -75,6 +139,7 @@ export function activate(ctx: ApplicationContext) {
   const insertOperation$ = state<NewOperationCall>(null);
 
   let REQUEST_COUNTER = 1;
+  let actualWizard: WizardService = null;
   let reservedWizardFeatureId: string | null = null;
   const passivePreviews = new WeakMap<WorkingRequest, {
     modifications: StateStream<CraftHistory>, state: CraftHistory, revision: number,
@@ -138,6 +203,13 @@ export function activate(ctx: ApplicationContext) {
         } catch {
           // Proof failure must not prevent the ordinary wizard from opening.
         }
+        if (actualWizard) try { historyReviewOrigins.set(request, Object.freeze({
+          context: ctx, wizard: actualWizard, craft: ctx.craftService,
+          modifications: ctx.craftService.modifications$, state: mods, revision: ctx.craftService.modifications$.revision,
+          history, pointer, hints, entry, type, suppressed: entry.suppressed, params,
+          project: ctx.projectService, generation: ctx.projectService.documentGeneration, signal: ctx.projectService.documentSignal,
+          insert: insertOperation$, insertRevision: insertOperation$.revision, requests: actualWizard.workingRequest$, requestKey: request.requestKey, cancel: actualWizard.cancel
+        })); } catch { /* No private custody: ordinary UI remains, owned Cancel refuses. */ }
         return request;
       } else {
         return null;
@@ -194,9 +266,14 @@ export function activate(ctx: ApplicationContext) {
   const updateParams = mutator => {
     // Even an explicit no-op edit is a draft, not passive navigation.
     invalidatePassivePreview();
-    workingRequest$.update((req: WorkingRequest) => produce(req, draft => {
-      mutator(draft.params)
-    }));
+    workingRequest$.update((req: WorkingRequest) => {
+      const origin = req && historyReviewOrigins.get(req);
+      const next = produce(req, draft => { mutator(draft.params); });
+      // Actual Immer descendants only. Returning equal values does not recreate
+      // a passive witness; the origin merely permits owned discard of a draft.
+      if (origin && next && next.requestKey === origin.requestKey && next.type === origin.type) historyReviewOrigins.set(next, origin);
+      return next;
+    });
   };
   const updateState = mutator => {
     invalidatePassivePreview();
@@ -300,6 +377,7 @@ export function activate(ctx: ApplicationContext) {
     addDisposer: (disposer) => disposerList.add(disposer)
   };
 
+  actualWizard = wizardService;
   ctx.wizardService = services.wizard = wizardService;
 }
 

@@ -1,3 +1,6 @@
+import {readHistoryReviewCancel,discardHistoryReviewDraft} from './wizard/wizardBundle';
+import type {HistoryReviewCancelCapture} from './wizard/wizardBundle';
+import {AUTHORED_SOLID_KINDS} from 'engine/solid/authoredSolidKinds.mjs';
 import {createSourceFrameCommands} from './sourceFrameCommands';
 import {captureSourceFrameJournalOperation,recordSourceFrameEdit,planSourceFrameTravel} from './authoredEditJournal.mjs';
 import {captureSourceFrameParameters} from 'engine/source/sourceFrameIntent.mjs';
@@ -530,6 +533,89 @@ export function activate(ctx: ApplicationContext) {
       modificationCallbacks.set(nextState,{onAccepted,onError,preparation:guardedPreparation,journalProposal,journalSignature,...(initialFrameJournal?{initialOperationAppendJournal:initialFrameJournal}:{})});
       modifications$.next(nextState);
     } catch (error) { Promise.resolve().then(() => onError(error)); }
+  }
+
+  // UI-only discard of an actual privately issued review draft. This does not
+  // travel history, evaluate geometry, publish a model or append a journal row.
+  function cancelHistoryReviewDraft(capture: HistoryReviewCancelCapture): void {
+    const origin=readHistoryReviewCancel(capture,ctx),craft=ctx.craftService,project:any=ctx.projectService,
+      manager:any=ctx.projectManager,storage=ctx.storageService,expressions:any=ctx.expressionService,registry=ctx.cadRegistry,
+      registryModels=registry.models,registryShells=registry.shells,
+      history=modifications$.value,journal=authoredJournal$.value,models=models$.value,document=project.documentGeneration,
+      signal=project.documentSignal,namespace=project.sketchStorageNamespace,epoch=evaluationEpoch,
+      signature=fullTipSignature,head=journalHeadDefinition,headSignature=journalHeadSignature,
+      journalVersion=authoredJournal$.revision,sketch=sketchRevision(storage,namespace),material=manager.inspectMaterialSurfaceRevision(),
+      documentRevision=manager.inspectDocumentRevision(),presentation=manager.getPresentationMetadata(),drawing=manager.getLinkedPartDrawingDefinition(),
+      wizard=ctx.wizardService,request=wizard.workingRequest$.value,
+      wizardVersion=wizard.workingRequest$.revision,wizardState=wizard.state$.value,wizardStateVersion=wizard.state$.revision,
+      counter=project.counterGenerator,counters=counter.projectCounters,highWater=counters.featureId,
+      travel=craft.historyTravel,end=travel.end;
+    const refusal=(code='STALE_HISTORY',message='The accepted history review changed. Reopen its preview before cancelling.')=>Object.assign(new Error(message),{code,userMessage:message});
+    const services=()=>[ctx.craftService,ctx.projectService,ctx.projectManager,ctx.storageService,ctx.cadRegistry,ctx.expressionService,
+      ctx.sketchStorageService,ctx.operationService,ctx.services.storage,ctx.services.sketcher,ctx.wizardService,ctx.workbenchService,ctx.assemblyService,ctx.surfacingService],
+      savedServices=services(),streams=()=>[modifications$,models$,pipelineFailure$,engineCleanupFailure$,expressions.script$,expressions.list$,expressions.errors$,expressions.table$,
+      ctx.streams.sketcher.sketchingFace,ctx.workbenchService.currentWorkbench$,ctx.assemblyService.constraints$,...(ctx.surfacingService?[ctx.surfacingService.state$]:[])],
+      savedStreams=streams(),versions=savedStreams.map(stream=>stream.revision),values=savedStreams.map(stream=>stream.value);
+    const requireAccepted=()=>{
+      if(services().some((service,index)=>service!==savedServices[index])||ctx.craftService!==origin.craft||craft.modifications$!==modifications$||
+          craft.models$!==models$||craft.pipelineFailure$!==pipelineFailure$||craft.engineCleanupFailure$!==engineCleanupFailure$||registry.models!==registryModels||registry.shells!==registryShells||
+          ctx.projectService!==origin.project||document!==origin.generation||signal!==origin.signal||project.documentSignal!==signal||HISTORY_SIGNAL_ABORTED(signal)||
+          !project.hasHostLifetime||!project.isDocumentCurrent(document)||manager.unit!=='millimeter'||manager.isRestoring||
+          modifications$.value!==history||history!==origin.state||history.history!==origin.history||history.pointer!==origin.pointer||
+          authoredJournal$.value!==journal||authoredJournal$.revision!==journalVersion||journal.document!==document||
+          models$.value!==models||evaluationEpoch!==epoch||pendingPipelines||pendingModifications||pipelineFailure$.value||engineCleanupFailure$.value||
+          fullTipSignature!==signature||journalHeadDefinition!==head||journalHeadSignature!==headSignature||
+          project.sketchStorageNamespace!==namespace||sketchRevision(storage,namespace)!==sketch||manager.inspectMaterialSurfaceRevision()!==material||
+          manager.getPresentationMetadata()!==presentation||manager.getLinkedPartDrawingDefinition()!==drawing||
+          project.counterGenerator!==counter||counter.projectCounters!==counters||counters.featureId!==highWater||
+          craft.historyTravel!==travel||travel.end!==end||streams().some((stream,index)=>stream!==savedStreams[index]||stream.revision!==versions[index]||stream.value!==values[index]))throw refusal();
+    };
+    const requireDraft=()=>{
+      requireAccepted();
+      if(manager.inspectDocumentRevision()!==documentRevision||readHistoryReviewCancel(capture,ctx)!==origin||wizard.workingRequest$.value!==request||wizard.workingRequest$.revision!==wizardVersion||
+          wizard.state$.value!==wizardState||wizard.state$.revision!==wizardStateVersion||ctx.services.sketcher.inPlaceEditor.inEditMode)throw refusal();
+    };
+    requireDraft();
+    const applied=journal.cursor>0?journal.entries[journal.cursor-1]:null,
+      modern=history.history.some(entry=>AUTHORED_SOLID_KINDS.includes(entry.type))||HISTORY_CONTROL_KINDS.includes(applied?.kind);
+    if(!modern){
+      // Positively registered ordinary legacy operations retain their existing
+      // return-to-tip Cancel. A failed modern proof never reaches this branch.
+      const legacyWorkers=['WORKER_RECTANGLE_EXTRUDE_V1','WORKER_CENTERED_THROUGH_HOLE_V1','WORKER_FOUR_CORNER_THROUGH_HOLES_V1'];
+      if(history.history.length>10000||!history.history.every(entry=>{
+        const operation=ctx.operationService.get(entry.type);
+        return !entry.suppressed&&operation?.id===entry.type&&typeof operation.run==='function'&&
+          (!entry.type.startsWith('WORKER_')||legacyWorkers.includes(entry.type));
+      }))throw refusal('UNAVAILABLE','This operation is not an owned modern review or a supported registered legacy edit.');
+      requireDraft();end.call(travel);return;
+    }
+    // All these anchors already belong to the accepted pipeline/journal. No
+    // full-tip-only capture, caller flag, new synchronized state or new hash.
+    const noFocus=history.hints&&Object.getOwnPropertyDescriptor(history.hints,'noWizardFocus');
+    if(!noFocus?.enumerable||!Object.hasOwn(noFocus,'value')||noFocus.value!==true||Reflect.ownKeys(history.hints).length!==1||
+        !ownedPipelineHistories.has(history.history)||head!==history.history||!signature||headSignature!==signature||
+        fullTipSketchRevision!==sketch||fullTipMaterialSurfaceRevision!==material||history.pointer< -1||history.pointer>=history.history.length-1||
+        applied?.kind!=='history-position'||applied.afterPointer!==history.pointer||applied.beforeSignature!==signature||applied.afterSignature!==signature)
+      throw refusal();
+    try{
+      const rows=validateControlledHistory(history.history);assertActiveHistoryDependencies(rows);
+      const build=genericHistoryBuild(history.history);
+      if(!build||build.id!=='occ'||build.selectedProfileVersion!==3||requireAvailableSelectedProfileBuild(build.id,build.revision)!==build)
+        throw refusal();
+      for(const row of rows){const operation=ctx.operationService.get(row.type);
+        if(typeof operation?.run!=='function'||row.type==='PLANE'&&(operation.run!==standardPlaneOperation.run||!!operation.admitGeometry))throw refusal();}
+      if(expressions.isTyped||expressions.script$.value.trim()||Reflect.ownKeys(expressions.table$.value||{}).length||expressions.errors$.value.length||
+          ctx.assemblyService.getConstraints().length||ctx.surfacingService?.scene?.surfaces.length)throw refusal();
+      const workbench=ctx.workbenchService.currentWorkbench$.value;
+      if(workbench&&!workbench.internal&&workbench.workbenchId!==ctx.workbenchService.defaultWorkbenchId)throw refusal();
+    }catch{throw refusal('UNAVAILABLE','The current draft is not an authenticated supported modern history review.');}
+    requireDraft();
+    discardHistoryReviewDraft(capture,ctx);
+    // Stream listeners may replace the document, start a new operation or make
+    // a newer edit. Observe loss only: never roll it back or report into it.
+    // PM's document revision includes the wizard stream, so its pre-reset token
+    // is checked by requireDraft, not mistaken for accepted-state loss here.
+    requireAccepted();
   }
 
   // Private manager/Craft seam. A metadata proposal authenticates against the
@@ -1272,6 +1358,7 @@ export function activate(ctx: ApplicationContext) {
 
      modify, modifyInHistoryAndStep, beginCenteredParentRepair:(input,options)=>beginCenteredParentRepair(input,options), repairCenteredParent:(input,options)=>repairCenteredParent(input,options), reset, rebuild, runRequest, runPipeline,
     historyTravel: historyTravel(modifications$),
+    cancelHistoryReviewDraft,
     modifications$, models$, update$, pipelineFailure$, engineCleanupFailure$
   };
   Object.assign(ctx.craftService, {captureManufacturingEditContext,commitManufacturingMetadata,authoredRevolveAngleOperation,inspectAuthoredEdits, authoredDepthOperation, authoredHoleOperation, authoredSolidBoxOperation, authoredSelectedProfileDepthOperation, authoredSolidEdgeTreatmentOperation, authoredSolidShellOperation, authoredLinearHolePatternOperation, authoredThroughHoleOperation, authoredEditTravel, applyPhysicalDepth, inspectPhysicalParameters, applyPhysicalConfigurations, applyPhysicalBracket, applyPhysicalEnclosure, applyPhysicalSelectedProfile, applyPhysicalBindings});
@@ -2004,6 +2091,9 @@ interface CraftService {
   rebuild(): void;
 
   historyTravel: HistoryTravel;
+
+  // Internal private-token UI seam, not a registered host authoring command.
+  cancelHistoryReviewDraft(capture: HistoryReviewCancelCapture): void;
 
   runRequest(request: OperationRequest): Promise<OperationResult>;
 
