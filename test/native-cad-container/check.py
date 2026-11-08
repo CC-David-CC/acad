@@ -34,6 +34,17 @@ def main():
         costs.append({'label':row['label'],'outerBytes':value['bytes'],'changedEntryUtf8Bytes':changed,'reusedCompressedBytes':reused,'preparedOutputHashBytes':codec['archiveVerificationBytes'],'committedRebaseHashBytes':receipt['archiveRebaseVerificationBytes'],'filesOuterIntegrityAndDeltaWork':'retained; not measured as zero by this codec receipt'})
         previous=value
     require(archives['initial-source']['sha256']==archives['unchanged-source']['sha256'] and costs[1]['changedEntryUtf8Bytes']==0 and costs[1]['reusedCompressedBytes']>0,'deterministic unchanged save/private reuse')
+    # Bind reuse after genuine Open to actual verified archive entry identity,
+    # independently of the codec's claimed costs or its observed target count.
+    before_open=archives['edited-source'];after_open=archives['reedited-source']
+    prior_drawing=one([entry for entry in before_open['manifest']['entries'] if entry['role']=='drawings'],'one prior saved drawing entry')
+    next_drawing=one([entry for entry in after_open['manifest']['entries'] if entry['role']=='drawings'],'one reedited saved drawing entry')
+    require(prior_drawing==next_drawing,'unchanged authored drawing descriptor across Open/reedit')
+    drawing_path=prior_drawing['path'];prior_span=before_open['spans'][drawing_path];next_span=after_open['spans'][drawing_path]
+    require(prior_span==next_span and prior_span['compressedBytes']>0,'exact nonempty drawing compressed/local record retained after Open')
+    require(r['afterOpenReuse']=={'sourceLabel':'edited-source','sourceSha256':before_open['sha256'],'savedLabel':'reedited-source','savedSha256':after_open['sha256'],'reusedCompressedBytes':costs[3]['reusedCompressedBytes']},'genuine post-Open save receipt binding')
+    require(costs[3]['reusedCompressedBytes']>=prior_span['compressedBytes'],'post-Open owner reuses actual unchanged drawing compressed span')
+    drawing_reuse={'path':drawing_path,'logicalId':prior_drawing['logicalId'],'contentSha256':prior_span['contentSha256'],'compressedSha256':prior_span['compressedSha256'],'localSha256':prior_span['localSha256'],'compressedBytes':prior_span['compressedBytes']}
     pinrows=[x for x in r['rows'] if x['label']=='Exact frozen composed runtime'];require(len(pinrows)==4,'initial plus three genuine fresh runtime Opens')
     for row in pinrows:require({x['name']:x['sha256'] for x in row['assets']}==r['pins']['files'] and row['outer']['sha256']==r['pins']['outer']['sha256'],'exact served runtime/native/worker assets')
     module=args.desktop_source/'test/agent-cad-corpus/manufacturing-shared/oracle/mesh.py';pin=one([v for k,v in r['sourcePins'].items() if unquote(urlparse(k).path).endswith('/test/agent-cad-corpus/manufacturing-shared/oracle/mesh.py')],'mesh oracle pin');require(sha(module.read_bytes())==pin,'independent mesh source')
@@ -50,5 +61,5 @@ def main():
     for row in bad:
         require(sha((folder/row['file']).read_bytes())==row['sha256'] and row['sourceSha256']==archives['reedited-source']['sha256'],'own malformed derivative lineage')
         require(row['failure']['code']==row['code'] and not row['failure']['committed'] and not row['failure']['possiblyCommitted'],'typed refusal before adoption')
-    print(json.dumps({'status':'PASS','scope':'Independent complete .cad/source/typed Native/artifact subset; no blanket Gate1/interchange/performance/capacity claim','nativeArchives':[{k:v for k,v in row.items() if k!='filesOuterIntegrityAndDeltaWork'} for row in costs],'costLimits':{'FilesWholeBlobIntegrity':'still required; no zero-total-hash claim','mainThread':'existing ARC23 dirty comparisons and source hydration remain','memory':'not inferred from admitted capacity','derivedCache':'no public automatic producer in this workflow'},'exports':exports,'malformedNativeOpen':len(bad)},indent=2))
+    print(json.dumps({'status':'PASS','scope':'Independent complete .cad/source/typed Native/artifact subset; no blanket Gate1/interchange/performance/capacity claim','nativeArchives':[{k:v for k,v in row.items() if k!='filesOuterIntegrityAndDeltaWork'} for row in costs],'afterOpenDrawingReuse':drawing_reuse,'costLimits':{'FilesWholeBlobIntegrity':'still required; no zero-total-hash claim','mainThread':'existing ARC23 dirty comparisons and source hydration remain','memory':'not inferred from admitted capacity','derivedCache':'no public automatic producer in this workflow'},'exports':exports,'malformedNativeOpen':len(bad)},indent=2))
 if __name__=='__main__':main()

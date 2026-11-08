@@ -82,6 +82,7 @@ export function activate(ctx: ApplicationContext) {
   function closeNativeArchive(): void {if(archiveCleanupFailure)throw archiveCleanupFailure;const owner=archiveOwner;archiveOwner=null;try{owner?.close();}catch(error){archiveCleanupFailure=error;throw error;}}
   function nativeArchiveOwner(job:DocumentJob){
     job.guard();requireManagerAuthority();
+    if(ownsDocument(restorePending))throw Object.assign(new Error('A native archive restore is in progress.'),{code:'CAD_ARCHIVE_BUSY'});
     if(!archiveOwner?.available)archiveOwner=createNativeArchiveOwner(nativeArchiveWorkerUrl,job.signal);
     return archiveOwner;
   }
@@ -661,6 +662,7 @@ export function activate(ctx: ApplicationContext) {
   // cooperative source projection/hydration remain separately disclosed costs.
   async function prepareHostNativeArchive(options:{signal?:AbortSignal,valid?:()=>boolean}={}){
     options=captureDocumentJobOptions(options,true);
+    if(ownsDocument(restorePending))throw Object.assign(new Error('A native archive restore is in progress.'),{code:'CAD_ARCHIVE_BUSY'});
     const job=documentJob(options),captured=capturedManufacturingJob(job,undefined,false),project=job.project;
     const counter=project.counterGenerator,counters=counter.projectCounters,highWater=counters.featureId;
     const current=()=>captured.current()&&project.counterGenerator===counter&&counter.projectCounters===counters&&counters.featureId===highWater;
@@ -852,17 +854,33 @@ export function activate(ctx: ApplicationContext) {
     const previous=documentJob(options);requireEmptyWorkspace();previous.guard();
     const job=documentJob(options,true),guard=()=>{job.guard();requireRestoreManager(manager);};
     restorePending=job;
+    let localOwner:ReturnType<typeof createNativeArchiveOwner>|null=null;
     try{
-      const owner=nativeArchiveOwner(job),parsed=await owner.decode(blob,{signal:options.signal,valid:()=>{guard();return true;}});
+      guard();closeNativeArchive();guard();
+      // Decode belongs to this pending restore, not the managed document yet.
+      // loadData resets metadata within this SAME new generation. Keeping the
+      // verified codec local lets that unconditional reset retire only the old
+      // managed owner, without destroying this decode's private span table.
+      localOwner=createNativeArchiveOwner(nativeArchiveWorkerUrl,job.signal);
+      const parsed=await localOwner.decode(blob,{signal:options.signal,valid:()=>{guard();return true;}});
       guard();
       // Only this private Worker result bypasses the old duplicate on-main
       // manufacturing hash preparation; the same canonical domains/caps were
       // verified in the codec BEFORE staging. Native replay is never bypassed.
       await restoreParsedSnapshotInEmptyWorkspace(parsed.value,parsed.storage,job,parsed.parameterState,true);
-      guard();return parsed.receipt;
+      guard();
+      if(!localOwner.available)throw Object.assign(new Error('The verified native archive owner became unavailable.'),{code:'CAD_ARCHIVE_CLOSED'});
+      if(archiveOwner!==null)throw Object.assign(new Error('The managed native archive owner changed during restore.'),{code:'CAD_ARCHIVE_BUSY'});
+      // No callback/await between the final checks and this ownership handoff.
+      // The same Worker keeps its verified input; no rebind, decode or copy.
+      archiveOwner=localOwner;localOwner=null;
+      return parsed.receipt;
     }catch(error){
       let failure=error;
-      try{closeNativeArchive();}catch(cause){failure=Object.assign(new Error('Native archive cleanup failed.'),{code:'WORKER_CLEANUP_FAILED',cause,operationError:error});}
+      // A stale restore may never close a replacement job's managed owner.
+      // Termination uncertainty stays latched and exact-job native revocation
+      // below still runs, even when releasing this local codec fails.
+      try{localOwner?.close();}catch(cause){failure=Object.assign(new Error('Native archive cleanup failed.'),{code:'WORKER_CLEANUP_FAILED',cause,operationError:error});archiveCleanupFailure ||= failure;}
       // Codec cleanup failure cannot skip exact-owner native replay revocation.
       throw failOwnedRestore({job,currentProject:currentManagerProject,rollback:()=>{},error:failure});
     }finally{if(restorePending===job)restorePending=null;}
