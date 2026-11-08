@@ -28,3 +28,13 @@ negative artifacts and driver log. Owned contexts closed and shared browser
 was disconnected only; producer source hashes remained unchanged. No after-whole
 PASS oracle was run on this failed workflow. Remaining malformed native controls,
 fresh Open/reedit and final save have not been reached in this run.
+
+## Repair candidate after R1
+
+The duplicate generic BSpline branch in validateStrictObject is replaced by the
+same inspectBoundedSpline policy already required later before native loading.
+This preserves all source-domain/resource/unsupported checks and their typed
+cause at the first admission boundary; native constructors, archive mapping,
+expected refusal codes, driver, source/coordinate budgets and assertions remain
+unchanged. No geometry is sampled in the pure capture. A normal rebuilt complete
+R2 run is required; this source repair is not a qualified result.
