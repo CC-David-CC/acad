@@ -53,8 +53,10 @@ export function changeConstraintGroup(request:any){let revision='';try{
  const serializedSketch=bounded(JSON.stringify(solved.sketch));
  const verify=new HeadlessSketchWorkspace(external);verify.io._loadSketch(solved.sketch,{strict:true});const checked=verify.createIndex(),check=prepareConstraintGroup(verify.parametricManager,intent.kind,intent.ids.map(id=>checked[id]),intent.kind==='midpoint'?undefined:intent.angleDegrees,'create');if(check.changed)fail('INTENT_CHANGED','The reconstructed group is incomplete.');check.validate(verify.parametricManager.stages);
  const rows=solved.sketch.stages.flatMap(s=>s.constraints);if(rows.length!==solved.evidence.length||rows.some((c,i)=>c.typeId!==solved.evidence[i].typeId||c.admission?.state!==solved.evidence[i].state))fail('ADMISSION_CHANGED','Group replay admission changed.');
- // Classification is derived from the final independent reconstruction, not
- // synchronized from the precursor incremental transaction.
- return{revision,ok:true,changed:true,serializedSketch,evidence:solved.evidence,group:{...receipt(),rows:describe(check.constraints)}};
+ // The final read-only workspace must corroborate the returned cold source,
+ // not introduce an unchecked third classification into the public receipt.
+ const checkedRows=describe(check.constraints);
+ for(const row of checkedRows){const c=solved.sketch.stages[row.stage]?.constraints[row.index];if(!c||c.typeId!==row.typeId||c.stage!==row.stage||JSON.stringify(c.objects)!==JSON.stringify(row.objects)||c.admission?.state!==row.status)fail('ADMISSION_CHANGED','The reconstructed group receipt differs from the returned candidate.');}
+ return{revision,ok:true,changed:true,serializedSketch,evidence:solved.evidence,group:{...receipt(),rows:checkedRows}};
  }catch(error){return{revision,ok:false,error:failure(error)};}}
 export function verifyConstraintGroup(request:any){let revision='';try{const a=groupData(request,['revision','sketchJSON','externalParameters','intent','candidateJSON']);revision=a.revision;const intent=captureConstraintGroupIntent(a.intent),expected=changeConstraintGroup({revision,sketchJSON:a.sketchJSON,externalParameters:bindings(a.externalParameters),intent});if(!expected.ok)return expected;if(!sameRestoredSketch(expected.serializedSketch,bounded(a.candidateJSON)))fail('INTENT_CHANGED','The candidate differs from independent reconstruction of the complete requested group.');return{revision,ok:true,verified:true};}catch(error){return{revision,ok:false,error:failure(error)};}}

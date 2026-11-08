@@ -92,3 +92,8 @@ reconstruction remain enforced. The returned source is the checked first cold
 candidate, not an unchecked last iterate. No retry/polish loop, global hint-order
 change, numerical tolerance change or unsupported success is introduced. The
 unchanged full orientation workflow must qualify this repair before any PASS.
+
+Read-only review also tightened the final receipt guard: the verification
+workspace's group locators/types/ordered refs/statuses must match the actual
+returned cold source. An unchecked third-workspace admission cannot become
+a public receipt. This is a source-contract repair, not a reproduced incident.
