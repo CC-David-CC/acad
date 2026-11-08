@@ -23,7 +23,7 @@ function capture(request:any){const a=record(request,['revision','sketchJSON','e
 function receipt(stage:number,index:number,c:any,status:string,existing:boolean){return captureFixedEntityReceipt({typeId:c.typeId,id:c.objects[0],stage,index,constraintId:fixedEntityLocator(stage,index,c),status,existing});}
 
 export function changeFixedEntity(request:any){const revision=revisionOf(request);try{
- const a=capture(request),before=JSON.parse(a.sketchJSON),original=cold(a.revision,before,a.externalParameters);assertVerifiedReplayGeometry(before,original.result.sketch,original.result.evidence,a.externalParameters);const originalChecked=evaluateCapturedSketch(before,a.externalParameters,original.result.evidence,undefined,original.auxiliary);
+ const a=capture(request),before=JSON.parse(a.sketchJSON);if(!Array.isArray(before.objects)||before.objects.length>1024)fail('LIMIT','Closed Fix supports at most1024 source objects.');const original=cold(a.revision,before,a.externalParameters);assertVerifiedReplayGeometry(before,original.result.sketch,original.result.evidence,a.externalParameters);const originalChecked=evaluateCapturedSketch(before,a.externalParameters,original.result.evidence,undefined,original.auxiliary);
  const workspace=new HeadlessSketchWorkspace(a.externalParameters);workspace.io._loadSketch(structuredClone(before),{strict:true});const pm=workspace.parametricManager,index=workspace.createIndex();let constraint:any,stage:number,at:number,prepared:any;
  if(a.action==='create'){
   assertClosedFixedEntityTarget(pm,index[a.intent.id],index);prepared=prepareFixedEntity(pm,index[a.intent.id]);constraint=prepared.constraint;stage=prepared.stage.index;
