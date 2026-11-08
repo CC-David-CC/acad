@@ -41,6 +41,18 @@ implementation. Assemblies E17/C10 remain Gate2.
 
 | C12 real navigation/prefix UI Undo R1 | Scoped PASS on Core2e14280/Desktop18c621383:18real events/16Native observations/48points/2.cad saves/fresh Opens | Independent source/chronology/Native/ZIP checker PASS; genuine draft navigation refusal and Cancel preserve state. Apply remains open |
 
+C01 cubic source R1 is NOT qualified: actualCore59d9bda/Desktopf6d1c07d1
+completed686records/18observations/2.cad saves, then own malformed knot Open
+returned generic CAD_ARCHIVE_INVALID rather than required INVALID_SPLINE_DATA.
+Frozen9882ef6 retains that full failure. Root26d7a55 replaces the duplicate
+legacy generic BSpline admission with the already-required shared bounded typed
+policy. Expected codes/driver/geometry tolerances are unchanged. Normal full R2
+build and complete rerun are required; no independent sample-accuracy PASS is
+claimed from a failed partial chain. Actual curve samples and saved controls
+have different checks:50pm independent coordinate bound versus exact authored
+controls/identity. Native-face candidate29e7df5 remains a separate source-only
+branch pending its whole workflow; no public/beta update follows these steps.
+
 Orientation/archive qualifications remain on Core32ae9c8/Desktop60ec30ee9;
 roles/history/C09 qualified scopes are on Core33b8aa3/Desktop4c4862b7b. They are
 not one final all-Gate1 signoff. Source fixes alone are not qualification.
