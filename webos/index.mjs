@@ -144,13 +144,20 @@ export function mount(host){
   return active.contentWindow?.__CAD_APP?.projectService?.documentSignal??null;
  }));
  if(host.commands){
-  const unregister=host.commands.register({id:'inspect',description:'Inspect bounded modeling history and save state for this CAD window.',parameters:{type:'object',additionalProperties:false}},args=>{
+  const unregister=host.commands.register({id:'inspect',description:'Inspect accepted authored history and saved-file state, including settled history review. Unapplied wizard drafts are excluded; save and mutation readiness are checked separately.',parameters:{type:'object',additionalProperties:false}},args=>{
    if(!args||typeof args!=='object'||Array.isArray(args)||Object.keys(args).length)throw Error('This command accepts no arguments.');
    if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this model to finish loading or its file operation to finish.');
-   const ctx=active.contentWindow?.__CAD_APP,craft=ctx?.craftService;
+   const frame=active,ctx=frame.contentWindow?.__CAD_APP,craft=ctx?.craftService;
    if(!ctx?.streams?.lifecycle?.projectLoaded?.value||typeof craft?.isProcessing!=='boolean'||!ctx?.projectService||!ctx?.services?.storage)throw Error('Model readiness is unavailable.');
-   if(craft.isProcessing||craft.pipelineFailure$.value||craft.isEditingHistory||ctx.services.sketcher.inPlaceEditor.inEditMode||ctx.wizardService.workingRequest$.value)throw Error('Finish the current sketch, operation or history edit before inspecting.');
-   const history=craft.modifications$.value.history,assembly=ctx.assemblyService.getConstraints(),workbench=ctx.workbenchService.currentWorkbench$.value;
+   if(craft.isProcessing||craft.pipelineFailure$.value||ctx.services.sketcher.inPlaceEditor.inEditMode)throw Error('Finish model evaluation or the current sketch before inspecting accepted modeling data.');
+   // Accepted definition inspection is not a save lease. A settled prefix and
+   // its separate wizard draft may be observed without authorizing either to
+   // replace the saved document. Save keeps its own full-tip/draft guards.
+   const manager=ctx.projectManager,inspectRevision=manager?.inspectDocumentRevision;
+   if(typeof inspectRevision!=='function')throw Error('Document revision inspection is unavailable.');
+   const revision=inspectRevision.call(manager),priorBaseline=baseline,path=state.path,historyState=craft.modifications$.value;
+   if(typeof revision!=='string'||!revision)throw Error('Document revision inspection is unavailable.');
+   const history=historyState.history,assembly=ctx.assemblyService.getConstraints(),workbench=ctx.workbenchService.currentWorkbench$.value;
    if(!Array.isArray(history)||!Array.isArray(assembly)||assembly.length||(workbench&&!workbench.internal&&workbench.workbenchId!==ctx.workbenchService.defaultWorkbenchId))throw Error('This project uses an unsupported assembly or workbench.');
    const namespace=ctx.projectService.sketchStorageNamespace,keys=ctx.services.storage.getAllKeysFromNamespace(namespace).sort();
    const model={history,expressions:ctx.expressionService.script$.value,assembly};
@@ -164,7 +171,9 @@ export function mount(host){
    const getter=typeof ctx.projectManager?.getManufacturingMetadata==='function'?()=>ctx.projectManager.getManufacturingMetadata():null;
    const presentation=typeof ctx.projectManager?.getPresentationMetadata==='function'?()=>ctx.projectManager.getPresentationMetadata():null;
    const drawing=typeof ctx.projectManager?.getLinkedPartDrawingDefinition==='function'?()=>ctx.projectManager.getLinkedPartDrawingDefinition():null;
-   return {documentToken:commandDocumentToken(),path:state.path,revision:inspectSaveTarget().revision,nativeProjectExtensions:nativeProjectExtensions(ctx.projectManager),dirty:inspectedProjectIsDirty(project,baseline,getter,ctx.projectManager.unit,presentation,drawing),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Modeling data only; this does not validate CAD geometry or physical manufacturing.'};
+   const result={documentToken:commandDocumentToken(),path,revision,nativeProjectExtensions:nativeProjectExtensions(manager),dirty:inspectedProjectIsDirty(project,priorBaseline,getter,manager.unit,presentation,drawing),surfacingPatchCount:surfacing?.scene?.patches?.length||0,operationCount:history.length,operations,operationsTruncated:history.length>100,sketchCount:keys.length,note:'Accepted authored definition, including retained history; excludes unapplied wizard drafts. Save readiness is separate. This does not validate CAD geometry or physical manufacturing.'};
+   if(!valid()||busy||active!==frame||!frames.has(frame)||frame.contentWindow?.__CAD_APP!==ctx||ctx.craftService!==craft||ctx.projectManager!==manager||baseline!==priorBaseline||state.path!==path||craft.modifications$.value!==historyState||craft.isProcessing||craft.pipelineFailure$.value||ctx.services.sketcher.inPlaceEditor.inEditMode||manager.inspectDocumentRevision!==inspectRevision||inspectRevision.call(manager)!==revision)throw Error('The accepted modeling data changed during inspection; inspect again.');
+   return result;
   });host.onDispose(unregister);
   for(const opening of [false,true]){
    const id=opening?'open-project':'new-project',keys=opening?['revision','path']:['revision'];

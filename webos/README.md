@@ -6,7 +6,22 @@ Agent tools/New/Open are source work being qualified; the earlier6f CAD build
 is active on beta. Consult the desktop work queue for deployed pins. Original
 integration notes below retain their historical scope.
 
-## Native `.cad` source packet (not yet runtime-qualified)
+Current engine source is ACAD (`example.invalid:/srv/data/git/ACAD.git`), independently
+versioned from the frozen earlier JSketcher fork. The current acceptance matrix
+is `docs/evidence/CAD-GATE1-BASELINE-20261106.md` in the desktop repository.
+Named `.cad` R6, custom/source-plane frame R3 and ordinary Ellipse R1 workflows
+have bounded qualification; none is a complete Gate1 or beta-delivery signoff.
+
+The current wrapper `inspect` reads the **accepted authored definition** even
+at a settled history prefix or with an unapplied wizard draft. Its history
+includes retained future entries; its dirty comparison excludes draft values.
+Its opaque revision is an observation token, not permission to save. File-busy,
+evaluation and in-place sketch guards remain, and Save retains its separate
+full-tip/no-draft checks. This read-gate repair is source work awaiting the
+complete wizard workflow; C12R2 stopped at the former inspection gate before
+any Cancel gesture. Existing main-thread dirty/snapshot cost remains ARC23.
+
+## Native `.cad` integration (historical source-packet notes)
 
 The matching new Core/host packet uses a dedicated packaged archive Worker for
 `.cad` Save/Open around the same authored model/history/source envelope. New
@@ -25,7 +40,7 @@ remain subject to the composed whole workflow. Existing dirty/snapshot JSON
 comparisons on main remain the explicit ARC23 limitation. Details and historical
 qualified JSON evidence below retain their producing format/build scope.
 
-# jSketcher
+# Historical JSketcher integration notes
 
 Current shared-save work: the desktop `inspect` command returns an opaque
 document revision, and `save` accepts that revision plus a My files path for an
