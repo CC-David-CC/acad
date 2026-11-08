@@ -39,7 +39,7 @@ function declaration(sketch:any,external:any){
   }
   if(new Set(ordered).size!==4||used.size!==4)return null;
   const directions:Array<[string,number]>=[['Horizontal',0],['Vertical',90],['Horizontal',180],['Vertical',270]];
-  for(let i=0;i<4;i++){const matches=axes.filter(c=>c.objects.length===1&&c.objects[0]===ordered[i]);if(matches.length!==1||matches[0].schema!==ConstraintDefinitions[directions[i][0]])return null;const constants=exactConstants(matches[0],['angle']);if(literal(constants.angle)!==directions[i][1])return null;}
+  for(let i=0;i<4;i++){const matches=axes.filter(c=>c.objects.length===1&&c.objects[0]===ordered[i]);if(matches.length!==1||matches[0].schema!==ConstraintDefinitions[directions[i][0]])return null;const constants=exactConstants(matches[0],['angle']),degrees=literal(constants.angle);if(((degrees%360)+360)%360!==directions[i][1])return null;}
   const widthRows=lengths.filter(c=>c.objects.length===1&&c.objects[0]===ordered[0]),heightRows=lengths.filter(c=>c.objects.length===1&&c.objects[0]===ordered[1]);if(widthRows.length!==1||heightRows.length!==1)return null;
   const anchor=exactConstants(lock,['x','y']),x=literal(anchor.x),y=literal(anchor.y);exactConstants(widthRows[0],['length']);exactConstants(heightRows[0],['length']);
   const width=widthRows[0].resolvedConstants.length,height=heightRows[0].resolvedConstants.length;if(![width,height].every(n=>typeof n==='number'&&Number.isFinite(n)&&n>=0.001&&n<=1e6)||![x,y].every(n=>Math.abs(n)<=1e8))fail('TYPED_RECTANGLE_DOMAIN','Declared rectangle dimensions or anchor exceed the supported domain.');
