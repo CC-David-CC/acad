@@ -73,3 +73,9 @@ packet changes no geometry/equations/tolerance or native measurement policy.
 Prepared scalar volume/conservative-bound diagnostics and interior/exterior
 probes are not certification of that geometric budget; root coordinates the
 separate precision policy before any complete Gate1 claim.
+
+History preparation also binds the existing document token while still idle and
+the exact presentation metadata identity throughout. A display-unit edit during
+cooperative preparation cannot evade currentness by leaving geometry unchanged.
+Once the candidate scope starts, the existing processing guard excludes those
+metadata writes; no duplicate presentation counter/state authority is created.
