@@ -1,3 +1,4 @@
+import {addEqualRadiusGroup} from './equalRadiusOperation';
 import {capturePointLineDistanceAction} from './pointLineDistanceOperation';
 import {addPointCoincidenceGroup} from './pointCoincidenceOperation';
 import {addRadiusBatch,inspectRadiusTargets,addRadiusByIdAtRevision} from './radiusOperation';
@@ -202,12 +203,7 @@ export default [
 
     invoke: (ctx, matchedObjects) => {
 
-      const {viewer} = ctx;
-
-      const pm = viewer.parametricManager;
-      addConstraintGroup(pm, matchedObjects.slice(1).map((object, i) =>
-        new AlgNumConstraint(ConstraintDefinitions.EqualRadius, [matchedObjects[i], object])
-      ));
+      addEqualRadiusGroup(ctx.viewer, matchedObjects);
     }
 
   },

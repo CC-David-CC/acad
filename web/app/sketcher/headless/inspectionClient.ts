@@ -1,3 +1,4 @@
+import {equalRadiusLocator} from './equalRadiusEnvelope.mjs';
 import {captureFixedEntityInspection} from './fixedEntityReply.mjs';
 import {capturePointLineSupport} from './pointLineDistanceEnvelope.mjs';
 import {pointLineSide,pointLineConstantsValid} from '../constr/pointLineDistanceDomain.mjs';
@@ -54,7 +55,7 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
     text(error.code,64);if(typeof error.message!=='string'||error.message.length>512)return invalid();
     const output=Object.freeze({revision,ok:false,error:Object.freeze(error)});current();return output;
   }
-  const data=record(result,['revision','ok','objects','points','constraints','curves','ellipses','slots','mirror','dimensionTargets','fixedEntities','stageCount','boundaryFrame','emptyBoundary']);
+  const data=record(result,['revision','ok','objects','points','constraints','curves','ellipses','slots','mirror','dimensionTargets','equalRadiusTargets','fixedEntities','stageCount','boundaryFrame','emptyBoundary']);
   if(data.revision!==revision||data.ok!==true||typeof data.emptyBoundary!=='boolean'||!Number.isSafeInteger(data.stageCount)||data.stageCount<1||data.stageCount>32)return invalid();
   const rawObjects=array(data.objects,10000),rawConstraints=array(data.constraints,10000),objects=[],constraints=[],ids=new Set();
   let characters=0,referenceCount=0;
@@ -133,6 +134,16 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
     dimensionTargets.push(Object.freeze({...row,objects:Object.freeze(refs)}));
     if(i%128===127){await new Promise(resolve=>setTimeout(resolve,0));current();}
   }
+  const rawEqual=array(data.equalRadiusTargets,10000),equalRadiusTargets=[],declaredEqual=constraints.filter(c=>c.typeId==='EqualRadius');
+  if(rawEqual.length!==declaredEqual.length)return invalid();
+  for(let i=0;i<rawEqual.length;i++){
+    const row=record(rawEqual[i],['relationId','typeId','stage','index','objects','status','canRemove','reason']),c=declaredEqual[i],refs=array(row.objects,2);
+    if(row.typeId!=='EqualRadius'||row.stage!==c.stage||row.index!==c.index||row.status!==c.admission.state||refs.length!==c.objects.length||refs.some((id,j)=>id!==c.objects[j])||typeof row.canRemove!=='boolean')return invalid();
+    if(row.canRemove){if(refs.length!==2||refs[0]===refs[1]||refs.some(id=>!['Circle','Arc'].includes(byId.get(id)?.type))||Object.keys(c.constants).length||row.relationId!==equalRadiusLocator(c.stage,c.index,c)||row.reason!==null)return invalid();}
+    else if(row.relationId!==null||typeof row.reason!=='string'||row.reason.length>256)return invalid();
+    equalRadiusTargets.push(Object.freeze({...row,objects:Object.freeze(refs)}));
+    if(i%128===127){await new Promise(resolve=>setTimeout(resolve,0));current();}
+  }
   const frame=record(data.boundaryFrame,['origin','x','y','z']);
   for(const key of Object.keys(frame)){const values=array(frame[key],3);if(values.length!==3||values.some(value=>typeof value!=='number'||!Number.isFinite(value)))return invalid();frame[key]=Object.freeze(values);}
   const rawSlots=array(data.slots,2000),slots=[],declared=constraints.filter(c=>c.typeId==='StraightSlot'),slotObjects=new Map(objects.map(o=>[o.id,o])),slotPoints=new Map(points.map(p=>[p.id,p])),slotConstraints=new Map(constraints.map(c=>[c.stage+':'+c.index,c]));
@@ -140,5 +151,5 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
   const seenSlots=new Set();for(let i=0;i<rawSlots.length;i++){const slot=captureSlotInspection(rawSlots[i],slotObjects,slotPoints,slotConstraints);if(seenSlots.has(slot.slotId))return invalid();seenSlots.add(slot.slotId);characters+=JSON.stringify(slot).length;if(characters>1048576)return invalid();slots.push(slot);if(i%32===31){await new Promise(resolve=>setTimeout(resolve,0));current();}}
   const mirror=captureMirrorInspection(data.mirror,slotObjects,slotPoints);characters+=JSON.stringify(mirror).length;if(characters>2097152)return invalid();
   const fixedEntities=await captureFixedEntityInspection(data.fixedEntities,slotObjects,slotConstraints,current);current();
-  const output=Object.freeze({revision,ok:true,objects:Object.freeze(objects),points:Object.freeze(points),constraints:Object.freeze(constraints),mirror,slots:Object.freeze(slots),curves:Object.freeze(curves),ellipses:Object.freeze(ellipses),dimensionTargets:Object.freeze(dimensionTargets),fixedEntities,stageCount:data.stageCount,boundaryFrame:Object.freeze(frame),emptyBoundary:data.emptyBoundary});current();return output;
+  const output=Object.freeze({revision,ok:true,objects:Object.freeze(objects),points:Object.freeze(points),constraints:Object.freeze(constraints),mirror,slots:Object.freeze(slots),curves:Object.freeze(curves),ellipses:Object.freeze(ellipses),equalRadiusTargets:Object.freeze(equalRadiusTargets),dimensionTargets:Object.freeze(dimensionTargets),fixedEntities,stageCount:data.stageCount,boundaryFrame:Object.freeze(frame),emptyBoundary:data.emptyBoundary});current();return output;
 }
