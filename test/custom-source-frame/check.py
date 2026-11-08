@@ -49,8 +49,10 @@ def check_source(model,sketches,receipt):
         if sid==receipt['binding']['child']['faceId']:
             value=json.loads(json.dumps(source));value['metadata']['boundaryFrame']=None;require(value==receipt['baselineLocal'],'exact complete local intent across frames')
     return frames
-def rewrite_row(row,value):
-    raw=json.dumps(value,ensure_ascii=False,separators=(',',':')).encode();encoder=zlib.compressobj(6,zlib.DEFLATED,-15);row.update(compressed=encoder.compress(raw)+encoder.flush(),bytes=len(raw),crc=binascii.crc32(raw)&0xffffffff);return raw
+def rewrite_row(row,value,canonical_metadata=False):
+    # Raw sketch bytes retain authored order. Model metadata must use the
+    # independent canonical writer so a semantic negative reaches preflight.
+    raw=arc.canonical(value) if canonical_metadata else json.dumps(value,ensure_ascii=False,separators=(',',':')).encode();encoder=zlib.compressobj(6,zlib.DEFLATED,-15);row.update(compressed=encoder.compress(raw)+encoder.flush(),bytes=len(raw),crc=binascii.crc32(raw)&0xffffffff);return raw
 def make_bad(source,destination):
     source=Path(source);destination=Path(destination);destination.mkdir(parents=True,exist_ok=False);info=arc.read_archive(source);proof=json.loads((source.parent/'receipt.json').read_text());result=[]
     for kind,code in [('cache','STALE_FRAME'),('parent','INVALID_FRAME_DEPENDENCY')]:
@@ -59,7 +61,7 @@ def make_bad(source,destination):
             descriptor=next(e for e in manifest['entries'] if e['role']=='sketch' and e['logicalId']==parent['faceId']);value=json.loads(info['rawSketches'][parent['faceId']]);value['metadata']['boundaryFrame']['origin'][0]+=1
         else:
             descriptor=next(e for e in manifest['entries'] if e['role']=='model');value=info['envelope']['project']['model'];target=next(e for e in value['history'] if int(e['params']['featureId'])==parent['featureId']);target['params']['parent']={'featureId':child['featureId'],'faceId':child['faceId']}
-        row=next(r for r in rows if r['path']==descriptor['path']);raw=rewrite_row(row,value);descriptor.update(bytes=len(raw),sha256=arc.sha(raw));manifest['designRevision']=arc.sha(arc.canonical(arc.root_record(manifest)));rows[-1]=arc.manifest_row(manifest);file=destination/(kind+'.cad');file.write_bytes(arc.rebuild(rows));arc.read_archive(file);result.append({'kind':kind,'code':code,'file':str(file.resolve()),'sourceSha256':info['sha256']})
+        row=next(r for r in rows if r['path']==descriptor['path']);raw=rewrite_row(row,value,canonical_metadata=descriptor['role']=='model');descriptor.update(bytes=len(raw),sha256=arc.sha(raw));manifest['designRevision']=arc.sha(arc.canonical(arc.root_record(manifest)));rows[-1]=arc.manifest_row(manifest);file=destination/(kind+'.cad');file.write_bytes(arc.rebuild(rows));arc.read_archive(file);result.append({'kind':kind,'code':code,'file':str(file.resolve()),'sourceSha256':info['sha256']})
     return result
 def check(directory):
     directory=Path(directory);r=json.loads((directory/'receipt.json').read_text());require(r['status']=='PASS','whole run must pass before oracle');require(r['ownedContextClosed'] and r['sharedBrowserDisconnectedOnly'] and r['sourceUnchanged'] and r['remainingOwnedTargets']==[] and len(r['ownedContextIds'])>=5,'cleanup/source pins');require(not r['privateAuthoring'] and not r['sourceSeeds'],'public authoring only');require(len(r['saves'])==4 and len(r['malformed'])==2,'complete normal files and own negatives');require('phaseB OPEN' in r['scope'],'no C08 closure claim')
