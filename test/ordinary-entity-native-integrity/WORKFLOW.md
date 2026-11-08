@@ -1,4 +1,7 @@
-# Complete ordinary primitive/native Open workflow (prepared)
+# Complete ordinary primitive/native Open workflow
+
+Root subsequently ran this unchanged full workflow: [R1 PASS](evidence-r1/README.md).
+The preparation instructions and exact proof limits follow.
 
 Run `desktop-driver.mjs` only after root stages one coherent normal composed
 runtime containing the new project validation code. There have been no per-step

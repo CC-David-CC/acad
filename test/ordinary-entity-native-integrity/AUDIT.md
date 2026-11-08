@@ -2,7 +2,9 @@
 
 Source inspection and coherent source preparation only. No per-step tests,
 probes, TypeScript, build or browser execution was run. Historical receipts
-retain their original scopes. The complete public workflow below is pending.
+retain their original scopes. The complete public workflow was subsequently qualified by root on the normally
+composed application; see [frozen full result](evidence-r1/README.md). The
+inspection findings below retain their original source-evidence scope.
 
 ## Five separate questions
 
