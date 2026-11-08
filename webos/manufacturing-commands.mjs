@@ -39,7 +39,7 @@ export function registerManufacturingCommands(host,{getTarget,inspect,exportMode
    if(!/\.3mf$/i.test(captured.path))throw Error('Use a .3mf filename.');
    const session=host.session(),valid=()=>!!session&&!host.signal.aborted&&host.session()===session;
    if(!valid())throw Error('The window or account changed.');
-   if(inspect().revision!==captured.revision)throw Error('The document changed; inspect it again.');
+   if(inspect().revision!==captured.revision)throw Object.assign(Error('The document changed; inspect it again.'),{code:'STALE_DOCUMENT'});
    const result=await settleScopedCommand(exportModel(Object.freeze(captured)),{signal:host.signal,valid});
    if(!valid()||!result)throw Error('The export outcome is unavailable; inspect My files before retrying.');
    return result;

@@ -31,8 +31,12 @@ export function captureStepInspection(value){
  const ids=new Set(),features=new Set();r.bodies=Object.freeze(dense(r.bodies,16384,'INVALID_RESPONSE').map(value=>{const row=fields(value,['bodyId','featureId','solidCount','canExport','reason'],'INVALID_RESPONSE');bodyPair({bodyId:row.bodyId,featureId:row.featureId},'INVALID_RESPONSE');if(ids.has(row.bodyId)||features.has(row.featureId)||typeof row.canExport!=='boolean'||!(row.solidCount===null||Number.isSafeInteger(row.solidCount)&&row.solidCount>=0)||!(row.reason===null||text(row.reason,1024))||row.canExport&&(row.solidCount<1||row.reason!==null))fail('INVALID_RESPONSE','Invalid STEP output metadata.');ids.add(row.bodyId);features.add(row.featureId);return Object.freeze(row)}));
  if(r.ready&&(!r.availableBuilds.some(build=>build.engineRevision===r.engineRevision)||!r.bodies.some(body=>body.canExport)))fail('INVALID_RESPONSE','A ready STEP inspection needs an available build and current exportable output.');return Object.freeze(r);
 }
+function selectionRefusal(code){const error=aborted();Object.defineProperty(error,'code',{value:code,enumerable:true});return error;}
 function selection(info,request){
- if(!info.ready)fail('UNAVAILABLE',info.reason||'STEP export is unavailable.');if(info.revision!==request.revision||info.geometryRevision!==request.geometryRevision||info.engine!==request.engine||info.engineRevision!==request.engineRevision)throw aborted();
+ if(!info.ready)fail('UNAVAILABLE',info.reason||'STEP export is unavailable.');
+ // These are known predicates, not diagnoses inferred from an AbortError message.
+ if(info.revision!==request.revision||info.geometryRevision!==request.geometryRevision)throw selectionRefusal('STALE_DOCUMENT');
+ if(info.engine!==request.engine||info.engineRevision!==request.engineRevision)throw selectionRefusal('ENGINE_REVISION_MISMATCH');
  return request.bodies.map(body=>{const found=info.bodies.filter(row=>row.bodyId===body.bodyId&&row.featureId===body.featureId&&row.canExport);if(found.length!==1)fail('UNSUPPORTED_TARGET','Select current exportable outputs from this part.');return found[0]});
 }
 export function captureStepArtifact(value,request,selected,blobPrototype){

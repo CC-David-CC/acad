@@ -7,7 +7,8 @@ export function registerDrawingExportCommand(host,{inspect,exportDrawing}) {
   const copy={};for(const key of ['revision','path']){const d=Object.getOwnPropertyDescriptor(args,key);if(!d?.enumerable||!Object.hasOwn(d,'value')||typeof d.value!=='string'||!d.value||d.value.length>(key==='path'?1024:256))throw Error('Invalid drawing export arguments.');copy[key]=d.value;}
   if(!/\.svg$/i.test(copy.path))throw Error('Use a .svg filename.');
   const session=host.session(),valid=()=>!!session&&!host.signal.aborted&&host.session()===session;
-  if(!valid()||inspect().revision!==copy.revision)throw Error('The document changed; inspect it again.');
+  if(!valid())throw Error('The document changed; inspect it again.');
+  if(inspect().revision!==copy.revision)throw Object.assign(Error('The document changed; inspect it again.'),{code:'STALE_DOCUMENT'});
   return settleScopedCommand(exportDrawing(Object.freeze(copy)),{signal:host.signal,valid});
  });
 }

@@ -440,7 +440,7 @@ export function mount(host){
  async function export3mf(command=null){return exportDerivedModel(command,{label:'3MF',extension:'3mf',method:'exportCore3mfResearch'});}
  async function exportDrawingSvg(command){return exportDerivedModel(command,{label:'SVG drawing',extension:'svg',method:'exportLinkedPartDrawingSvg'});}
  async function exportDerivedModel(command,{label,extension,method}){
-  if(command&&inspectSaveTarget().revision!==command.revision)throw Error('The model changed; inspect it before exporting.');
+  if(command&&inspectSaveTarget().revision!==command.revision)throw Object.assign(Error('The model changed; inspect it before exporting.'),{code:'STALE_DOCUMENT'});
   if(!valid()||!active)return;const token=begin('export-'+extension);if(!token)return;
   return settleCadFileExport(token,{command:!!command,tell,isCurrent:valid,label},async write=>{
    const frame=active,prior=snapshot(frame),manager=frame.contentWindow?.__CAD_APP?.projectManager;
