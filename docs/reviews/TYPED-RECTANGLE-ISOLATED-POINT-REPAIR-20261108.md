@@ -1,0 +1,28 @@
+# Measurement workflow: typed rectangle with an unrelated Point
+
+Source repair only; no tests, reproduction runs, probes, typechecks, builds or browser execution. The preserved full workflow R1 remains FAIL at Desktop `53363ab16`; a complete composed rerun is required.
+
+## Actual failure and source-confirmed cause
+
+`test/length-measurement-public-workflow/evidence-r1/receipt.json` records actual Core `32ae9c8a10659e43a3c5a5f4f51602b8aad64161` / Desktop `60ec30ee9ea30790162e61b5e5e43e5696d00034`, 56 completed checkpoints, three normal native Saves, fresh Opens and mixed travel. The last successful row is `final-driving130 normal native Save and server sync`. The next normal `apply-physical-configurations` call at driver line44 returned `INVALID_INPUT`, `Invalid worker request.`, with neither committed nor possiblyCommitted set.
+
+The actual final saved file is `test/length-measurement-public-workflow/evidence-r1/final-driving130.jsketcher.json`, 3599 bytes, SHA-256 `428114111782b2910c022ae95737b41756d4ece2f7c404563b251eb622069811`. It contains the four original `rect-0..3` Segments, the public-created standalone Point at (300,200), one genuine LinearDimension ruler, eleven literal rectangle constraints, no stage generators/local constants, and the selected 20 mm extrusion. No saved source, primitive ID, ruler ID or driver expectation is changed by this packet.
+
+The actual configuration arguments are one length definition `measurementWidth = mm(130)`, configurations `[]`, activeId `null`, with the current physical discovery revision. `craftBundle.ts:physicalSharedOperation` captures real history/source inventory and sends the established exact `{version,revision,source,manifest,sketches}` request. Its derived manifest contains the selected extrusion feature/depth and `selected-rectangle` identity. No envelope-key mismatch was found.
+
+Source trace: `physicalQuantitiesWorker.mjs` evaluates quantities, calls `discoverTypedSketchConsumers` (this saved source has only numeric literals, so no typed consumers), then `resolvePhysicalBindings` → `modernPhysicalBindings.mjs:resolveSelectedRectangleTarget` → `typedRectangleBindings.mjs:prepareTypedRectangle`. The final helper previously required `sketch.objects.length === 4`. The actual fifth Point therefore selects its plain-Error refusal, `Only the supported authored rectangle is available.` The Worker catches every non-QuantityError as invalid input, erasing that actual contract boundary. This diagnosis follows the saved source and branch predicates; no new runtime invocation is claimed.
+
+The same preparation helper is also used by subsequent `typed-rectangle-bind` and `typed-selected-profile-solve`. Merely changing the initial Worker error message would leave the requested final typed-binding discovery/refusal step blocked later.
+
+## Coherent bounded change
+
+Only two producer modules change:
+
+- `web/app/cad/parameters/typedRectangleBindings.mjs`: retain the original four ordered rectangle sides and all original binding rules; additionally admit appended standalone Point records with exact root fields, role null, stage 0, unique nonempty IDs, and exact finite x/y data within the existing 1e9 mm source coordinate domain. Extra Points must be unreferenced by every authored constraint, and the stage must have no generators. All extra geometry types, constrained/generated Points, duplicate IDs and malformed data refuse explicitly. No tolerance, coordinate repair or source-order rewrite is introduced.
+- `web/app/cad/parameters/physicalQuantitiesWorker.mjs`: preserve existing QuantityError codes/messages. Capture only errors actually issued by typed rectangle preparation through a private WeakMap of detached fixed contract metadata; no error-string parsing or arbitrary exception property reads. Known shape/domain/input failures have bounded explicit codes/messages. Unknown exceptions remain unclassified as `PHYSICAL_WORKER_FAILED` with an owned phase (`request-capture`, `source-decoding`, `quantity-evaluation`, `sketch-consumer-discovery`, `binding-resolution`, `response`), rather than falsely calling every internal failure invalid caller input. The normal success envelope is unchanged; failure replies additionally identify their owned phase.
+
+Source-shape admission does not pretend that a raw type name proves runtime ownership. The existing full sketch Worker decoder, registered Point constructor, solver, original-equation/domain checks, replay/source/currentness guards and prepared publication still prove the complete candidate before acceptance. The exact canonical eleven-row reconstruction helper remains restricted to four objects; the retained generic solver path handles Point extras. This packet does not widen canonical reconstruction, parse opaque region IDs, ignore unsupported curves, remove the unrelated Point/ruler, alter raw intent, or change Craft/C08 schemas, native builds, budgets or journal formats.
+
+## Complete qualification still required
+
+Root must compose this source and rerun the unchanged complete ordinary length-measurement driver, including the final public physical definition, actual formula binding, derived measurement discovery and explicit typed role-conversion refusal. Retain the original 56-checkpoint R1 failure unchanged. Require the previously passing ordinary roles/travel/three Saves/Open prefix again and exact unrelated Point/ruler/ID preservation. Any later solver, binding, native-feature or lifetime failure must remain a real failure at its own layer; this source diagnosis does not predict a PASS or authorize a weaker terminal expectation.
