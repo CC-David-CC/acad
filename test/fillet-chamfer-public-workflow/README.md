@@ -1,5 +1,10 @@
 # E11 fillet/chamfer creation, travel and native persistence
 
+Current finite whole workflow is qualified. See [QUALIFICATION.md](QUALIFICATION.md)
+for exact runtime, counts, independent evidence and remaining scope. The initial
+source-only preparation text below is historical; frozen source snapshots remain
+unchanged in evidence-r1.
+
 Source-ready acceptance packet. **Not executed or qualified.** This fills the
 specific missing observation in the E10–E13 exercise evidence map: immediate Undo
 of the actual **fillet creation**, restoring its corner-holed predecessor, followed

@@ -1,5 +1,10 @@
 # Genuine typed Circle Native workflow
 
+Current finite whole workflow is qualified. See [QUALIFICATION.md](QUALIFICATION.md)
+for exact runtime, counts, independent evidence and remaining scope. The initial
+source-only preparation text below is historical; frozen source snapshots remain
+unchanged in evidence-r1.
+
 SOURCE ONLY. Neither driver nor oracle has been executed. Root runs one complete
 workflow on a frozen composed normal app, followed by this independent checker.
 The separate complete DistancePL workflow stays unchanged and must qualify on

@@ -1,5 +1,20 @@
 # Active CAD1 acceptance scope — user revision2026-11-06
 
+## Ordinary E14 accepted after actual evidence review
+
+Root inspected actual retained four-case curved-sweep receipt/source/independent
+artifact checks: Coref21f91b/Desktopdea2518a3,113records/twelve nativeJSONfiles/
+thirteen Native queries/77point classes. Both quarter-Arc traversal cases have
+DIRECT sweep creation Undo to source planes/zero bodies and Redo original IDs,
+then positive source/path edits, refusals and native reopen/reedit. See
+ORDINARY-E14-SIGNOFF-20261108.md and SWEEP-LOFT-BOOLEAN-EXERCISE-MAP-20261108.md.
+This reconciles existing finite ordinary evidence; it is not a new run or.cad
+migration. Final combined G10 remains mandatory.
+
+**15of21 ordinary contracts Qualified (E01–E14/E21); six Partial
+(E15/E16/E18/E19/E20/E22).22recent scoped workflows remain separate.**
+PL redundancy source repair and remaining broader11competencies are open.
+
 ## Ordinary E10–E13 accepted; E11 current archive workflow qualified
 
 NEW full E11 Chrome14232 +FIRST independent actual source/Native/archive oracle
