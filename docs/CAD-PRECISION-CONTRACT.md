@@ -64,3 +64,28 @@ clamp, rescale authored dimensions or claim success.
 This informs existing C05/C09 precision competencies and later CAD work. It does
 not claim current mechanical Gate1 proofs satisfy nanoscale accuracy or that all
 physical phenomena can use continuum CAD representations.
+
+## Required explanation when the target is not established
+
+User instruction2026-11-07: if picometer geometric accuracy cannot be
+established, state why. A success flag, matching kernels or repeated coordinates
+cannot substitute for an independent accuracy argument and measured evidence.
+
+For each assessed operation/backend/representation, record:
+
+- Exact target, feature size, overall extent, coordinate offsets, units and build.
+- Independent reference and measurement method, error metric and its uncertainty.
+- Observed maximum error and cases exercised; do not extrapolate beyond them.
+- Outcome: qualified within that envelope; measured target failure; unsupported
+  feature scale; or unqualified because evidence/reference coverage is missing.
+- Specific limiting cause with evidence: declared admission floor, configured
+  kernel/solver tolerance, numerical conditioning/representation, algorithmic
+  instability, export approximation or insufficient independent measurement.
+- Whether a software/policy change can address the observed limit, or whether
+  an inherent limit has actually been demonstrated. Do not claim impossibility
+  merely because the current implementation fails or has not been tested.
+
+A100nm profile admission floor establishes lack of current subnanometer feature
+support. It does not by itself establish the coordinate accuracy of larger
+admitted geometry. Conversely, stable serialization does not establish accurate
+geometry. These claims must be reported separately, with honest unresolved cases.
