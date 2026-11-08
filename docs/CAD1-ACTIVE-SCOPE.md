@@ -48,3 +48,12 @@ shared-operation implementation lane. Full dimensional families, history/frame
 coverage, drawings, fine-scale geometry and final one-build beta qualification
 remain open. Untouched human default-dialog precision still needs its real UI
 workflow. Files remains accepted; no race tests or external relay are resumed.
+
+Latest composition2157a85 includes reviewed archive-owner repair774c779 and
+bounded rectangle diagnostics. Whole orientation R9 (evidence-r9, frozen
+7a2c802) still fails first rectangle: INVALID, independent-solve phase,
+"Degenerate sketch segment." Both pre/post-solve geometry validation use that
+message; the exact collapse point is not established. No later assertions or
+saves run. Original equations and all acceptance bounds remain unchanged.
+Shared reference/driving conversion and finite history suppress/prefix/branch
+controls are independent implementation lanes; neither is qualified yet.

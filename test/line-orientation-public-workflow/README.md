@@ -142,8 +142,9 @@ claim or remedy. No acceptance bounds/cases are changed.
 
 R9/evidence-r9 on2157a85/Desktop640279b9f pins97 assets and again fails first
 rectangle creation. Bounded diagnostic propagation now preserves INVALID,
-"Rectangle independent-solve failed: Degenerate sketch segment.", with the
-invalid-domain admission cause. The independent solver checks geometry both
+"Rectangle independent-solve failed: Degenerate sketch segment." The existing
+workflow adapter does not record admission-cause metadata, so the receipt
+proves the code/message/phase rather than that metadata. The independent solver checks geometry both
 before and after solving, so this alone does NOT establish whether collapse
 occurred during the earlier strict load or the independent solve itself.
 No orientation groups or native saves are reached. All original equations,
