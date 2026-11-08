@@ -1,5 +1,14 @@
 # CAD Modeler (JSketcher inspired)
 
+Genuine shared sketch Mirror now has finite R2 qualification ACAD24f4269
+(actualCore104c24e/Desktop9bdb3a512): Point/Segment/Circle/minor-major Arc,
+on-axis/overlap copies, source/diameter/axis edits, mixed travel and3.cad file
+cycles pass. Generated outputs retain IDs and readonly ownership; six malformed
+native files refuse before adoption. Independent Fraction/90-digit locus/archive
+analysis passes with first checker error/correction retained. See
+examples/sketch-mirror.mjs; ellipse/cubic/Slot/solid Mirror remain unsupported.
+
+
 Numeric principal Apply now has finite whole R4 qualification ACAD25fc19e,
 actualCore6f6ccef/Desktopc8779dd83:6real Apply cases/18UI travels/4.cad file
 cycles/Native child regeneration/reopened agent editing/64-entry trim recovery

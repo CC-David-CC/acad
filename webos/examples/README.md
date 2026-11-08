@@ -403,3 +403,16 @@ corresponding command workflow has finite R4 qualification ACAD25fc19e on
 Core6f6ccef/Desktopc8779dd83, including Native closure/4file cycles/64-entry trim
 and independent oracle. This recipe is transport guidance, no separate geometry
 proof or promise for unsupported families.
+
+
+`sketch-mirror.mjs` exports createSketchMirrorExample for one explicitly chosen
+signed CAD window. Nothing runs on import. Its build() recipe requires a normal
+empty document and authors actual supported primitives and one real generator
+through registered shared commands. Keep its returned binding for point,
+diameter, arc, axis, travel, save and open methods; never fabricate/parse IDs.
+The same actual recipe participates in finite whole R2 qualification24f4269,
+Core104c24e/Desktop9bdb3a512, with3.cad files/two fresh Opens, ordinary source
+edits/conflict recovery and six malformed-file refusals. Stored/cold geometry
+are independently checked against Fraction/90-digit reflected-locus truth.
+Scope is Point/Segment/Circle/Arc sketch generation; no BRep/ellipse/cubic/Slot
+or all-C01 promise. Source-producing/checker failure history remains frozen.
