@@ -1,6 +1,7 @@
 import {captureLengthMeasurementReply} from './lengthMeasurementIntent.mjs';
 import {captureConstraintGroupEnvelope} from './constraintGroupEnvelope.mjs';
 import {captureSourcePlaneReply} from './sourcePlaneDepthEnvelope.mjs';
+import {captureSourceFrameReply} from './sourceFrameEnvelope.mjs';
 import {captureSignedDistanceEnvelope,captureSignedDistanceVerificationEnvelope} from './signedDistanceEnvelope.mjs';
 import {capturePointDistanceEnvelope} from './pointDistanceEnvelope.mjs';
 import {captureLineRelationEnvelope} from './lineRelationEnvelope.mjs';
@@ -116,6 +117,7 @@ export async function runSketchSolve(workerUrl: string, request: any, options: S
               }
               let result;try{result=captureWorkerReplyRecord(event.data);if(result.ok===false)result.error=captureSketchFailure(result.error);}catch{return finish(new Error('Invalid sketch Worker reply fields.'));}
               if(request.task==='sketch-length-measurement'||request.task==='sketch-length-measurement-verify'){try{return finish(null,captureLengthMeasurementReply(result,request.revision,request.task==='sketch-length-measurement-verify'));}catch(error){return finish(error);}}
+              if(request.task==='source-frame-transition'){try{return finish(null,captureSourceFrameReply(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='sketch-source-plane-depth'||request.task==='sketch-source-plane-depth-verify'){try{return finish(null,captureSourcePlaneReply(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='sketch-transition-constraint-group'){try{return finish(null,captureConstraintGroupEnvelope(result,request.revision,request.intent));}catch{return finish(new Error('Invalid constraint group response.'));}}
               if(request.task==='sketch-transition-verify-constraint-group'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch{return finish(new Error('Invalid constraint group verification.'));}}

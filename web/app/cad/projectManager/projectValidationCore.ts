@@ -1,3 +1,5 @@
+import {captureSourceFrameParameters} from 'engine/source/sourceFrameIntent.mjs';
+import {validateProjectSourceFrames} from 'sketcher/headless/sourceFrameValidation';
 import {decodeProjectEnvelope, validateProjectTree} from './projectEnvelope.mjs';
 import {validateProjectSketch} from 'sketcher/io';
 import {parseMathDefinitions} from 'gems/safeExpression.mjs';
@@ -17,7 +19,7 @@ export function preflight(value, parameterState?: {source?: string, result?: any
   // Native documents bypass the live command allocator. Validate the complete
   // producer roster here in the existing validation Worker, before any replay.
   const featureIds=new Set<number>();
-  for(const operation of project.model.history)claimAuthoredFeatureIdentity(operation,featureIds);
+  for(const operation of project.model.history){claimAuthoredFeatureIdentity(operation,featureIds);if(operation.type==='SOURCE_FRAME_V1'){const p=captureSourceFrameParameters(operation.params);if(p.parent&&!featureIds.has(p.parent.featureId))throw Object.assign(Error('Source attachment requires an earlier producer.'),{code:'INVALID_FRAME_DEPENDENCY'});}}
   const physical=decodePhysicalSource(project.model.expressions);
   if (physical) {
     const result=evaluatePhysicalSource(physical);
@@ -42,5 +44,6 @@ export function preflight(value, parameterState?: {source?: string, result?: any
     validateProjectSketch(data);
     if (data.constants !== undefined && parseMathDefinitions(data.constants).errors.length) throw new Error('A sketch contains invalid constants');
   }
+  validateProjectSourceFrames(project);
   return value;
 }

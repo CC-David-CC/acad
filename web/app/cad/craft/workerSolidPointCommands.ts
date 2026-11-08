@@ -1,3 +1,4 @@
+import {isSourcePlaneType,isRegisteredSourcePlane} from './sourcePlanePolicy';
 import {requireModernPhysicalHistory} from '../parameters/modernPhysicalBindings.mjs';
 import {MWorkerSolid} from '../model/mworkerSolid';
 import {MOpenFaceShell} from '../model/mopenFace';
@@ -9,7 +10,6 @@ import {AUTHORED_SOLID_KINDS} from 'engine/solid/authoredSolidKinds.mjs';
 import {OCC_SWEEP_PROFILE_BUILD,requireCadEngineBuild} from 'engine/mount/engineCatalog.mjs';
 import {genericHistoryBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {selectedProfileHistoryBudget} from 'engine/mount/selectedProfileBudget.mjs';
-import standardPlaneOperation from 'workbenches/modeler/features/plane/simplePlaneOperation';
 const fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
 const abort=()=>new DOMException('Point observation was cancelled or superseded.','AbortError');
 // Capture the native EventTarget remover through the already required native
@@ -46,7 +46,7 @@ export function createWorkerSolidPointCommands(ctx:any,evaluateReadOnly:(input:a
    // add may register and then throw; unwind every attempted subscription.
    for(const signal of signals){subscriptions.push(signal);signal.addEventListener('abort',stop,{once:true});if(signal.aborted)stop();}
    timer=setTimeout(stop,60000);poll=setInterval(()=>{try{check();}catch{stop();}},100);check();const history=await capturePipelineHistory(before.history,check);check();
-   const operations=new Map();for(const entry of history){const type=entry.type,op=ctx.operationService.get(type);if(type==='PLANE'?(op.run!==standardPlaneOperation.run||!!op.admitGeometry):!AUTHORED_SOLID_KINDS.includes(type))fail('UNSUPPORTED_HISTORY','Only standard planes and registered owned-solid features can be observed.');operations.set(type,Object.freeze({descriptor:op,run:op.run,admit:op.admitGeometry}));}
+   const operations=new Map();for(const entry of history){const type=entry.type,op=ctx.operationService.get(type);if(isSourcePlaneType(type)?!isRegisteredSourcePlane(type,op):!AUTHORED_SOLID_KINDS.includes(type))fail('UNSUPPORTED_HISTORY','Only standard planes and registered owned-solid features can be observed.');operations.set(type,Object.freeze({descriptor:op,run:op.run,admit:op.admitGeometry}));}
    const inventory=sketches.getAllSketches();if(!Array.isArray(inventory)||inventory.length>64)fail('RESOURCE_LIMIT','The sketch inventory exceeds the observation bound.');const captured=new Map<string,string>(),frames=[];
    for(const item of inventory){check();const id=item?.id,face=registry.findFace(id),data=sketches.getSketchData(id);if(typeof id!=='string'||!id||id.length>256||captured.has(id)||!(face?.root instanceof MOpenFaceShell)||face.defaultSketchId!==id||!face.isPlaneBased||typeof data!=='string'||data.length>65536||new TextEncoder().encode(data).byteLength>65536)fail('UNSUPPORTED_SOURCE','Every native source must be bounded and own a current independent plane.');captured.set(id,data);const frame=sketchBoundaryFrame(face);sourceFaces.set(id,{face,frame});frames.push(Object.freeze({id,frame:Object.freeze(Object.fromEntries(Object.entries(frame).map(([key,value]:any)=>[key,Object.freeze([...value])])))}));}
    const entries=Object.freeze([...captured].map(([id,data])=>Object.freeze({id,data}))),get=(id:string)=>{if(!captured.has(id))fail('STALE_SOURCE','Replay attempted an uncaptured source.');return captured.get(id)!;};

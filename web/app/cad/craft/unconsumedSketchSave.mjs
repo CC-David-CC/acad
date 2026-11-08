@@ -1,3 +1,5 @@
+import {canonicalAuthoredFeatureId} from './authoredFeatureIdentity.mjs';
+import {captureSourceFrameParameters} from '../../../../modules/engine/source/sourceFrameIntent.mjs';
 import {isAuthoredLength,captureAuthoredHoleIntent} from '../../../../modules/engine/solid/authoredLengthBinding.mjs';
 import {captureOwnedLoftFeature} from '../../../../modules/engine/solid/ownedLoftFeature.mjs';
 import {captureOwnedSweepFeature} from '../../../../modules/engine/solid/ownedSweepFeature.mjs';
@@ -13,7 +15,7 @@ const registrations=new WeakMap();
 export function registerUnconsumedSketchSave(ctx,begin){if(!ctx||typeof begin!=='function'||registrations.has(ctx))throw Error('Invalid sketch save registration.');registrations.set(ctx,begin)}
 export function beginUnconsumedSketchSave(ctx,face){return registrations.get(ctx)?.(face)||null}
 const plain=(v,keys)=>{if(!v||typeof v!=='object'||Array.isArray(v)||Reflect.ownKeys(v).some(k=>typeof k!=='string'||!keys.includes(k)))return false;return Object.keys(v).every(k=>{const d=Object.getOwnPropertyDescriptor(v,k);return d?.enumerable&&Object.hasOwn(d,'value')})};
-const fid=v=>{if(!(typeof v==='number'&&Number.isSafeInteger(v)&&v>0||typeof v==='string'&&/^[1-9][0-9]{0,14}$/.test(v)&&Number.isSafeInteger(Number(v))))return null;return String(v)};
+const fid=v=>{try{return String(canonicalAuthoredFeatureId(v));}catch{return null;}};
 const field=v=>typeof v==='string'&&v.length>0&&v.length<=8192;
 const numberField=v=>typeof v==='number'&&Number.isFinite(v)||typeof v==='string'&&v.length>0&&v.length<=128;
 const semantic=v=>{if(typeof v!=='string'||v.length>1024||!v.startsWith('worker-prism:1:'))return null;try{const tuple=JSON.parse(v.slice(15));return Array.isArray(tuple)&&JSON.stringify(tuple)===v.slice(15)?tuple:null}catch{return null}};
@@ -29,6 +31,7 @@ export function hasOnlyUnconsumedSketchHistory(history,faceId){
  const build=data=>{if(!genericCommon(data))return null;try{const spec=requireCadEngineBuild(data.engine,data.engineRevision);return spec.revision===data.engineRevision&&(!genericBuild||genericBuild.id===spec.id&&genericBuild.revision===spec.revision)?spec:null;}catch{return null;}};
  for(const item of history){if(!item||typeof item!=='object')return false;const pd=Object.getOwnPropertyDescriptor(item,'params'),td=Object.getOwnPropertyDescriptor(item,'type');if(!pd?.enumerable||!Object.hasOwn(pd,'value')||!td?.enumerable||!Object.hasOwn(td,'value')||!pd.value||typeof pd.value!=='object'||Array.isArray(pd.value))return false;const p=pd.value,fd=Object.getOwnPropertyDescriptor(p,'featureId');if(!fd?.enumerable||!Object.hasOwn(fd,'value'))return false;const id=fid(fd.value);if(!id||features.has(id))return false;
   if(item.type==='PLANE'){if(!plain(p,['featureId','orientation','depth','datum'])||p.datum!==undefined&&p.datum!==null||p.orientation!==undefined&&!['XY','XZ','ZY'].includes(p.orientation)||p.depth!==undefined&&!numberField(p.depth))return false;features.set(id,{kind:'plane'});continue;}
+  if(item.type==='SOURCE_FRAME_V1'){let data;try{data=captureSourceFrameParameters(p);}catch{return false;}if(data.parent&&features.get(String(data.parent.featureId))?.kind!=='plane')return false;features.set(id,{kind:'plane'});continue;}
   if(item.type==='WORKER_ENCLOSURE_V1'||item.type==='WORKER_ENCLOSURE_V2'){const fields=physicalBindingFields[item.type];if(!plain(p,['featureId',...fields])||fields.some(k=>!numberField(p[k])))return false;features.set(id,{kind:'enclosure'});continue;}
   if(item.type==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'){
    const data=exactData(p,['version','unit','engine','engineRevision','featureId','faceId','regionId','depth','bodyPolicy']),spec=build(data);

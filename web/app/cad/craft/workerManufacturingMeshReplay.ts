@@ -1,3 +1,4 @@
+import {isSourcePlaneType,isRegisteredSourcePlane} from './sourcePlanePolicy';
 import {MWorkerSolid} from '../model/mworkerSolid';
 import {MOpenFaceShell} from '../model/mopenFace';
 import {ReadSketch} from '../sketch/sketchReader';
@@ -9,7 +10,6 @@ import {AUTHORED_SOLID_KINDS} from 'engine/solid/authoredSolidKinds.mjs';
 import {genericHistoryBuild,requireManufacturingMeshBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {selectedProfileHistoryBudget} from 'engine/mount/selectedProfileBudget.mjs';
 import {physicalReadUnsupportedReason} from '../parameters/modernPhysicalBindings.mjs';
-import standardPlaneOperation from 'workbenches/modeler/features/plane/simplePlaneOperation';
 import {issueWorkerManufacturingMeshes} from './manufacturingMeshReplayResult.mjs';
 const fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
 const abort=()=>new DOMException('Manufacturing replay was cancelled or superseded.','AbortError');
@@ -65,7 +65,7 @@ export function createWorkerManufacturingMeshReplay(ctx:any,evaluateReadOnly:(in
    const prepared=await save.call(manager,{signal:controller.signal,valid:()=>{try{check();return true;}catch{return false;}}});check();if(!prepared.isCurrent())throw abort();
    const admission=captureGenericManufacturingBodies(ctx);admission.requireCurrent();if(!admission.ready)fail('UNAVAILABLE',admission.reason);const metadata=prepared.envelope.manufacturing,plan=manifest(metadata,before.history,admission.targets,registry,a.engineRevision);selected=plan.selected;
    const history=await capturePipelineHistory(before.history,check);await assertPipelineHistoryCurrent(before.history,prepared.envelope.project.model.history,check);check();
-   const operations=new Map();for(const entry of history){const type=entry.type,op=operationService.get(type);if(type==='PLANE'?(op.run!==standardPlaneOperation.run||!!op.admitGeometry):!AUTHORED_SOLID_KINDS.includes(type))fail('UNSUPPORTED_HISTORY','Only standard source planes and registered owned-solid operations can be replayed.');operations.set(type,Object.freeze({descriptor:op,run:op.run,admit:op.admitGeometry}));}
+   const operations=new Map();for(const entry of history){const type=entry.type,op=operationService.get(type);if(isSourcePlaneType(type)?!isRegisteredSourcePlane(type,op):!AUTHORED_SOLID_KINDS.includes(type))fail('UNSUPPORTED_HISTORY','Only standard source planes and registered owned-solid operations can be replayed.');operations.set(type,Object.freeze({descriptor:op,run:op.run,admit:op.admitGeometry}));}
    const inventory=sketches.getAllSketches();if(!Array.isArray(inventory)||inventory.length>64||inventory.length!==prepared.envelope.project.sketches.length)fail('UNSUPPORTED_SOURCE','The captured source inventory differs.');const captured=new Map<string,string>(),frames=[];
    for(const item of inventory){check();const id=item?.id,face=registry.findFace(id),data=sketches.getSketchData(id);if(typeof id!=='string'||!id||id.length>256||captured.has(id)||!prepared.envelope.project.sketches.some((r:any)=>r.id===id)||!(face?.root instanceof MOpenFaceShell)||face.defaultSketchId!==id||!face.isPlaneBased||typeof data!=='string'||data.length>65536||new TextEncoder().encode(data).byteLength>65536)fail('UNSUPPORTED_SOURCE','Every source must own a bounded independent plane.');captured.set(id,data);const frame=sketchBoundaryFrame(face);sourceFaces.set(id,{face,frame});frames.push(Object.freeze({id,frame:Object.freeze(Object.fromEntries(Object.entries(frame).map(([key,v]:any)=>[key,Object.freeze([...v])])))}));}
    const entries=Object.freeze([...captured].map(([id,data])=>Object.freeze({id,data}))),get=(id:string)=>{if(!captured.has(id))fail('STALE_SOURCE','Replay attempted uncaptured source.');return captured.get(id)!;},frozenStorage=Object.freeze({getAllSketches:()=>entries.map(r=>Object.freeze({id:r.id})),getSketchData:get,hasSketch:(id:string)=>captured.has(id),readSketch:(id:string)=>ReadSketch(JSON.parse(get(id)),id,true),setSketchData:()=>fail('READ_ONLY','Manufacturing cannot write source.'),removeSketchData:()=>fail('READ_ONLY','Manufacturing cannot remove source.')});

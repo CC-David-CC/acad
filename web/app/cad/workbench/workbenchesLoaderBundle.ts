@@ -1,5 +1,6 @@
 import {WorkbenchRegistry} from "workbenches/registry";
 import planeOperation from "workbenches/modeler/features/plane/simplePlaneOperation";
+import sourceFrameOperation from 'workbenches/modeler/features/sourceFrame/sourceFrame.operation';
 import createDatumOperation from "cad/craft/datum/create/createDatumOperation";
 import moveDatumOperation from "cad/craft/datum/move/moveDatumOperation";
 import rotateDatumOperation from "cad/craft/datum/rotate/rotateDatumOperation";
@@ -34,6 +35,7 @@ function registerCoreOperations(ctx: WorkbenchesLoaderActivationContext) {
 
   ctx.operationService.registerOperations([
     planeOperation,
+    sourceFrameOperation,
     createDatumOperation,
     moveDatumOperation,
     rotateDatumOperation,
