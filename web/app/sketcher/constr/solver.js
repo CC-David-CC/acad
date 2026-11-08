@@ -4,6 +4,7 @@ import {ConstantWrapper, EqualsTo} from './solverConstraints'
 import {dog_leg} from 'math/optim/dogleg'
 import {newVector} from 'math/vec';
 import {fillArray} from "gems/iterables";
+import {attachSolveTermination} from './solverTermination.mjs';
 
 
 /** @constructor */
@@ -255,11 +256,15 @@ const prepare = function(constrs, locked) {
     // return solve_lm(sys, model, jacobian, rough);
 
     let result = dog_leg(sys, rough);
+    const attempts = [result.termination];
     if (!result.success) {
       console.log('dog leg failed, giving levenberg marquardt a shot');
       sys.rollback();
       result = solve_lm(sys, model, jacobian, rough)
+      attempts.push(result.termination);
     }
+    attachSolveTermination(result,attempts);
+    delete result.termination;
     return result;
   }
   const systemSolver = {
@@ -290,6 +295,7 @@ const solve_lm = function(sys, model, jacobian, rough) {
   try {
     res = opt.doOptimize();
   } catch (e) {
+    if (!opt.termination && opt.captureTermination) opt.captureTermination('exception',false);
     returnCode = 2;
   }
   if (returnCode === 1) {
@@ -305,7 +311,8 @@ const solve_lm = function(sys, model, jacobian, rough) {
     evalCount : opt.evalCount,
     error : sys.error(),
     success: returnCode === 1 && sys.error() < 1e-3,
-    returnCode : returnCode
+    returnCode : returnCode,
+    termination: opt.termination
   };
 };
 

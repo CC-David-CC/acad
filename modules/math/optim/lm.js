@@ -242,6 +242,24 @@ export default function LMOptimizer(startPoint, target, model, jacobian) {
         var nR = this.target.length; // Number of observed data.
         var currentPoint = this.startPoint;
         var nC = currentPoint.length; // Number of parameters.
+        this.termination = null;
+        this.captureTermination = (reason, acceptedState) => {
+            const finite = value => Number.isFinite(value) ? value : null;
+            let residualInf = null;
+            if (currentObjective && currentObjective.length === nR) {
+                residualInf = 0;
+                for (let i = 0; i < nR; i++) residualInf = Math.max(residualInf, Math.abs(this.target[i] - currentObjective[i]));
+            }
+            this.termination = {
+                method: 'lm', reason, iterations: iter || 0, evaluations: Math.min(this.evalCount,this.evalMaximalCount),
+                parameters: nC, rows: nR, residualInf: finite(residualInf),
+                gradientInf: null, orthogonality: finite(maxCosine),
+                acceptedStepNorm: finite(acceptedLmNorm), trustRadius: finite(delta),
+                costRelativeTolerance: this.costRelativeTolerance,
+                parameterRelativeTolerance: this.parRelativeTolerance,
+                orthogonalityTolerance: this.orthoTolerance, acceptedState
+            };
+        };
 
         // arrays shared with the other private methods
         this.solvedCols  = Math.min(nR, nC);
@@ -274,7 +292,7 @@ export default function LMOptimizer(startPoint, target, model, jacobian) {
         // Outer loop.
         this.lmPar = 0;
         var firstIteration = true;
-        var iter = 0;
+        var iter = 0, acceptedLmNorm = 0;
 
         while (true) {
             ++iter;
@@ -333,6 +351,7 @@ export default function LMOptimizer(startPoint, target, model, jacobian) {
                 }
             }
             if (maxCosine <= this.orthoTolerance) {
+                this.captureTermination('orthogonality', true);
                 // Convergence has been reached.
                 this.setCost(currentCost);
                 return current;
@@ -429,6 +448,7 @@ export default function LMOptimizer(startPoint, target, model, jacobian) {
 
                 // test for successful iteration.
                 if (ratio >= 1.0e-4) {
+                    acceptedLmNorm = lmNorm;
                     // successful iteration, update the norm
                     firstIteration = false;
                     xNorm = 0;
@@ -442,6 +462,7 @@ export default function LMOptimizer(startPoint, target, model, jacobian) {
                     if (this.checker != null) {
                         // we use the vectorial convergence checker
                         if (this.checker.call(iter, previous, current)) {
+                            this.captureTermination('checker', true);
                             this.setCost(currentCost);
                             return current;
                         }
@@ -468,6 +489,9 @@ export default function LMOptimizer(startPoint, target, model, jacobian) {
                      preRed <= this.costRelativeTolerance &&
                      ratio <= 2.0) ||
                     delta <= this.parRelativeTolerance * xNorm) {
+                    const costStop = Math.abs(actRed) <= this.costRelativeTolerance && preRed <= this.costRelativeTolerance && ratio <= 2.0;
+                    const parameterStop = delta <= this.parRelativeTolerance * xNorm;
+                    this.captureTermination(costStop && parameterStop ? 'cost-and-parameter-relative' : costStop ? 'cost-relative' : 'parameter-relative', true);
                     this.setCost(currentCost);
                     return current;
                 }
@@ -475,10 +499,13 @@ export default function LMOptimizer(startPoint, target, model, jacobian) {
                 // tests for termination and stringent tolerances
                 // (2.2204e-16 is the machine epsilon for IEEE754)
                 if ((Math.abs(actRed) <= 2.2204e-16) && (preRed <= 2.2204e-16) && (ratio <= 2.0)) {
+                    this.captureTermination('machine-cost-limit', false);
                     throw "TOO_SMALL_COST_RELATIVE_TOLERANCE: " + this.costRelativeTolerance;
                 } else if (delta <= 2.2204e-16 * xNorm) {
+                    this.captureTermination('machine-parameter-limit', false);
                     throw "TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE: " + this.parRelativeTolerance;
                 } else if (maxCosine <= 2.2204e-16)  {
+                    this.captureTermination('machine-orthogonality-limit', false);
                     throw "TOO_SMALL_ORTHOGONALITY_TOLERANCE: " + this.orthoTolerance;
                 }
             }
@@ -833,6 +860,7 @@ export default function LMOptimizer(startPoint, target, model, jacobian) {
                     norm2 += aki * aki;
                 }
                 if (!isFinite(norm2)) {
+                    if (this.captureTermination) this.captureTermination('nonfinite-jacobian', false);
                     throw "UNABLE_TO_PERFORM_QR_DECOMPOSITION_ON_JACOBIAN";
                 }
                 if (norm2 > ak2) {
@@ -1040,6 +1068,7 @@ export default function LMOptimizer(startPoint, target, model, jacobian) {
 
     this.computeObjectiveValue = function(params) {
         if (++this.evalCount > this.evalMaximalCount) {
+            if (this.captureTermination) this.captureTermination('evaluation-limit', false);
             throw "TOO MANY FUNCTION EVALUATION"
         }
         return this.model(params);

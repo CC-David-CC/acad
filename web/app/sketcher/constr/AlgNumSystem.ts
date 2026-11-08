@@ -1,5 +1,6 @@
 import {admissionCause,causeForSolveStatus,withAdmissionCause,clearSolveValidationCause,setSolveValidationCause,getSolveValidationCause} from './admissionCause.mjs';
 import {prepare} from "./solver";
+import {clearSolveTermination,mergeSolveTerminations} from './solverTermination.mjs';
 import {Polynomial, POW_1_FN} from "./polynomial";
 import {AlgNumConstraint, ConstraintDefinitions} from "./ANConstraints";
 import {SolverParam} from "./solverParam";
@@ -1012,6 +1013,7 @@ export class AlgNumSubSystem {
 
   solve(rough) {
 
+    clearSolveTermination(this.solveStatus);
     clearSolveValidationCause(this.solveStatus);
     const projected=this.projectedRelations();
     // Rough iterations can leave a valid direction's endpoint/polar values
@@ -1064,6 +1066,7 @@ export class AlgNumSubSystem {
         this.solveStatus.error = Math.max(this.solveStatus.error, iso.solveStatus.error);
         this.solveStatus.success = this.solveStatus.success && iso.solveStatus.success;
       });
+      mergeSolveTerminations(this.solveStatus,this.polynomialIsolations.map(iso=>iso.solveStatus));
 
       if (DEBUG) {
         console.log('numerical result: ' + this.solveStatus.success);

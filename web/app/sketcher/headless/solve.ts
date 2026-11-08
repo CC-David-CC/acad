@@ -7,6 +7,7 @@ import {HeadlessSketchWorkspace} from './workspace';
 import {validateSplineDerivedGeometry} from './splineDerivedValidation';
 import {captureSolvedAuxiliaryWitnesses} from './capturedParameterOwnership';
 import type {CapturedAuxiliaryWitnessBatch} from './capturedParameterOwnership';
+import {getSolveTermination} from '../constr/solverTermination.mjs';
 
 import {SketchSolveError,fail,record,only,inspectTree,typeIndex,assertSemantics,assertFixedBoundary,incomingIntent,validateConstraintGeometry} from './sketchValidation';
 
@@ -21,7 +22,7 @@ function authoredEvidenceSnapshot(row) {
   const freeze=value=>{if(value&&typeof value==='object'){for(const child of Object.values(value))freeze(child);Object.freeze(value);}return value;};
   return freeze(snapshot);
 }
-export function solveSketch(request, onAuthoredEvidence?: (row: any) => void, onAuxiliaryWitness?: (batch:CapturedAuxiliaryWitnessBatch)=>void) {
+export function solveSketch(request, onAuthoredEvidence?: (row: any) => void, onAuxiliaryWitness?: (batch:CapturedAuxiliaryWitnessBatch)=>void, onNumericalStop?: (observation:any)=>void) {
   try {
     if (!record(request) || typeof request.revision !== 'string' || !request.revision || request.revision.length > 256 || !record(request.sketch) || !record(request.externalParameters)) fail('INVALID','Invalid solve request.');
     inspectTree(request);
@@ -47,6 +48,10 @@ export function solveSketch(request, onAuthoredEvidence?: (row: any) => void, on
     const evidence=[], completed=[];
     for(const stage of workspace.parametricManager.stages){
       const sys=stage.solverSystem;sys.prepare();stage.solve(false);
+      // Internal bounded observation of this actual final solve, never saved or
+      // added to public success replies, and never admission/accuracy authority.
+      const termination=getSolveTermination(sys.solveStatus);
+      if(onNumericalStop&&termination)onNumericalStop(Object.freeze({stage:stage.index,termination}));
       for(const prior of completed) for(const [parameter,value] of prior) if(!Object.is(parameter.get(),value)) fail('STAGE_CHANGED','A later stage changed earlier geometry.');
       const snapshot=new Map(); for(const object of stage.objects) object.visitParams(p=>{if(!Number.isFinite(p.get())) fail('INVALID','Non-finite stage geometry.'); snapshot.set(p,p.get());}); completed.push(snapshot);
       if(!sys.solveStatus.success || !Number.isFinite(sys.solveStatus.error))fail('SOLVE_FAILED','Sketch solver did not establish a finite solution.',causeForSolveStatus(sys.solveStatus));

@@ -113,24 +113,24 @@ var dog_leg = function (subsys, rough) {
 
   var delta = 10;
   var alpha = 0.;
-  var iter = 0, returnCode = 0;
+  var iter = 0, returnCode = 0, stopReason = null, acceptedStepNorm = 0, residualEvaluations = 1;
   //var log = [];
 
   while (returnCode === 0) {
     dogleg.DEBUG_HANDLER(iter, err);
 
     if (fx_inf <= tolf) {
-      returnCode = SUCCESS;
+      returnCode = SUCCESS; stopReason = 'residual';
     } else if (g_inf <= tolg) {
-      returnCode = SUCCESS;
+      returnCode = SUCCESS; stopReason = 'gradient';
     } else if (iter >= iterLimit) {
-      returnCode = ITER_LIMIT;
+      returnCode = ITER_LIMIT; stopReason = 'iteration-limit';
     } else if (delta <= tolx * (tolx + n.norm2(x))) {
-      returnCode = SMALL_DELTA;
+      returnCode = SMALL_DELTA; stopReason = 'trust-radius';
     } else if (err > divergenceLimit) {
-      returnCode = DIVERGENCE;
+      returnCode = DIVERGENCE; stopReason = 'divergence';
     } else if (isNaN(err)) {
-      returnCode = INVALID_STATE;
+      returnCode = INVALID_STATE; stopReason = 'invalid-state';
     }
 
     if (returnCode !== 0) {
@@ -196,6 +196,7 @@ var dog_leg = function (subsys, rough) {
     x_new = n.add(x, dl_step);
     subsys.setParams(x_new);
     var err_new = subsys.calcResidual(fx_new);
+    residualEvaluations++;
     subsys.fillJacobian(J_new);
 
     var fxNormSq = n.norm2Squared(fx);
@@ -225,6 +226,7 @@ var dog_leg = function (subsys, rough) {
     //log.push([stepKind,err,  delta,rho]);
 
     if (acceptCandidate) {
+      acceptedStepNorm = dl_norm;
       x = n.clone(x_new);
       J = n.clone(J_new);
       fx = n.clone(fx_new);
@@ -235,13 +237,26 @@ var dog_leg = function (subsys, rough) {
       // get infinity norms
       g_inf = n.norminf(g);
       fx_inf = n.norminf(fx);
+    } else {
+      subsys.setParams(x);
     }
 
     iter++;
   }
   //log.push(returnCode);
   //window.___log(log);
-  return _result(iter, err, returnCode);
+  // A rejected trial already called setParams(x_new). Restore the accepted x
+  // represented by fx/J/err on every normal exit; a fallback still owns rollback.
+  subsys.setParams(x);
+  const finite = value => Number.isFinite(value) ? value : null;
+  return {..._result(iter, err, returnCode), termination: {
+    method: 'dogleg', reason: stopReason, iterations: iter,
+    evaluations: residualEvaluations, parameters: xsize, rows: csize,
+    residualInf: finite(fx_inf), gradientInf: finite(g_inf),
+    acceptedStepNorm: finite(acceptedStepNorm), trustRadius: finite(delta),
+    residualTolerance: tolf, gradientTolerance: tolg, stepTolerance: tolx,
+    acceptedState: true
+  }};
 };
 
 function gaussElimination(A) {

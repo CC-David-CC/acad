@@ -1,5 +1,6 @@
 import {HeadlessSketchWorkspace} from './workspace';
 import {solveSketch} from './solve';
+import {formatSolveTerminations} from '../constr/solverTermination.mjs';
 import {AlgNumConstraint,ConstraintDefinitions} from '../constr/ANConstraints';
 import {EndPoint} from '../shapes/point';
 import {Segment} from '../shapes/segment';
@@ -60,9 +61,9 @@ function capturePoints(value:any){
 }
 
 function boundedText(value:any){if(typeof value!=='string'||value.length>1048576||new TextEncoder().encode(value).byteLength>1048576)throw fail('LIMIT','Coordinate source exceeds1MiB.');return value;}
-function coordinateProofFailure(result:any,phase:string){return{...result,error:{...result.error,message:(phase+': '+result.error.message).slice(0,512)}};}
-function coldCoordinates(revision:string,sketch:any,bindings:any){let auxiliary:any;const result=solveSketch({revision,sketch:structuredClone(sketch),boundary:structuredClone(sketch.boundary),externalParameters:bindings},undefined,batch=>{auxiliary=batch;});return{result,auxiliary};}
-function proveCoordinateGeometry(before:any,after:any,evidence:any[],bindings:any,phase:string){try{assertVerifiedReplayGeometry(before,after,evidence,bindings);}catch(error){throw withAdmissionCause(fail(typeof error?.code==='string'?error.code:'CURRENT_GEOMETRY_MISMATCH',(phase+': '+(error?.message||'Coordinate geometry differs.')+' First difference: '+firstCapturedGeometryDifference(before,after)).slice(0,512)),failureCause(error));}}
+function coordinateProofFailure(result:any,phase:string,stops:any[]=[]){const diagnostic=formatSolveTerminations(stops);return{...result,error:{...result.error,message:(phase+': '+result.error.message).slice(0,512-diagnostic.length)+diagnostic}};}
+function coldCoordinates(revision:string,sketch:any,bindings:any){let auxiliary:any;const stops=[];const result=solveSketch({revision,sketch:structuredClone(sketch),boundary:structuredClone(sketch.boundary),externalParameters:bindings},undefined,batch=>{auxiliary=batch;},observation=>{if(stops.length<8)stops.push(observation);});return{result,auxiliary,stops};}
+function proveCoordinateGeometry(before:any,after:any,evidence:any[],bindings:any,phase:string,stops:any[]=[]){try{assertVerifiedReplayGeometry(before,after,evidence,bindings);}catch(error){const diagnostic=formatSolveTerminations(stops),detail=phase+': '+(error?.message||'Coordinate geometry differs.')+' First difference: '+firstCapturedGeometryDifference(before,after);throw withAdmissionCause(fail(typeof error?.code==='string'?error.code:'CURRENT_GEOMETRY_MISMATCH',detail.slice(0,512-diagnostic.length)+diagnostic),failureCause(error));}}
 function resolveTargets(pm:any,index:any,intents:any[]){
  const targets=intents.map(intent=>{const point=index[intent.id];
   if(!isInstanceOf(point,EndPoint)||!point.stage||!pm.stages.includes(point.stage))throw fail('INVALID_TARGET','The target is not an editable point in this sketch.');
@@ -90,8 +91,8 @@ function editCoordinatesTransition(request:any,batch:boolean) {
   const d=request&&typeof request==='object'?Object.getOwnPropertyDescriptor(request,'revision'):null;if(d?.enumerable&&Object.hasOwn(d,'value')&&typeof d.value==='string'&&d.value.length<=256)revision=d.value;
   const args=record(request,['revision','sketchJSON','externalParameters','intent']);if(typeof args.revision!=='string'||!args.revision||args.revision.length>256)throw fail('INVALID','Invalid coordinate revision.');revision=args.revision;
   const intents=batch?capturePoints(record(args.intent,['points']).points):[capturePoint(args.intent)],bindings=external(args.externalParameters),before=JSON.parse(boundedText(args.sketchJSON));if(before.objects.length>1024)throw fail('LIMIT','Too many sketch objects for this command.');
-  const original=coldCoordinates(revision,before,bindings);if(!original.result.ok)return coordinateProofFailure(original.result,'Original coordinate source solve');
-  proveCoordinateGeometry(before,original.result.sketch,original.result.evidence,bindings,'Original coordinate source replay');
+  const original=coldCoordinates(revision,before,bindings);if(!original.result.ok)return coordinateProofFailure(original.result,'Original coordinate source solve',original.stops);
+  proveCoordinateGeometry(before,original.result.sketch,original.result.evidence,bindings,'Original coordinate source replay',original.stops);
   const scope=captureCoordinateScope(before,bindings,intents,original.result.evidence,original.auxiliary),receipt=()=>batch?{points:intents.map(p=>({id:p.id,x:p.x,y:p.y}))}:{point:{id:intents[0].id,x:intents[0].x,y:intents[0].y}};
   if(intents.every(intent=>{const saved=nativePoint(before,intent.id);return saved.x===intent.x&&saved.y===intent.y;}))return{revision,ok:true as const,serializedSketch:args.sketchJSON,evidence:original.result.evidence,...receipt()};
   const workspace=new HeadlessSketchWorkspace(bindings);workspace.io._loadSketch(structuredClone(before),{strict:true});const pm=workspace.parametricManager,index=workspace.createIndex(),targets=resolveTargets(pm,index,intents),stage=targets[0].point.stage;
@@ -107,10 +108,10 @@ function editCoordinatesTransition(request:any,batch:boolean) {
   const authored=stage.algNumSystem.allConstraints.filter(c=>!c.internal),drivers=temporaries.map((c,i)=>({index:authored.indexOf(c),intent:intents[i],status:stage.algNumSystem.redundant.has(c)?'redundant':'accepted'}));if(drivers.some(d=>d.index<0))throw fail('INTENT_CHANGED','The temporary driver disappeared.');
   const warm=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));warm.boundary=structuredClone(before.boundary);removeTemporaryIntents(before,warm,stage.index,drivers);intents.forEach(intent=>verifyTarget(warm,intent));
   const candidate=structuredClone(before);candidate.objects=applyCapturedGeometry(before,warm,scope.fields,true,'Coordinate edit');assertCapturedGeometryScope(before,candidate,scope.fields,'Coordinate edit');intents.forEach(intent=>verifyTarget(candidate,intent));
-  const proof=coldCoordinates(revision,candidate,bindings);if(!proof.result.ok)return coordinateProofFailure(proof.result,'First coordinate cold proof');
-  proveCoordinateGeometry(candidate,proof.result.sketch,proof.result.evidence,bindings,'First coordinate cold proof');
-  const second=coldCoordinates(revision,proof.result.sketch,bindings);if(!second.result.ok)return coordinateProofFailure(second.result,'Independent coordinate cold replay');
-  proveCoordinateGeometry(proof.result.sketch,second.result.sketch,second.result.evidence,bindings,'Independent coordinate cold replay');proveCoordinateGeometry(candidate,second.result.sketch,second.result.evidence,bindings,'Original coordinate candidate bound');
+  const proof=coldCoordinates(revision,candidate,bindings);if(!proof.result.ok)return coordinateProofFailure(proof.result,'First coordinate cold proof',proof.stops);
+  proveCoordinateGeometry(candidate,proof.result.sketch,proof.result.evidence,bindings,'First coordinate cold proof',proof.stops);
+  const second=coldCoordinates(revision,proof.result.sketch,bindings);if(!second.result.ok)return coordinateProofFailure(second.result,'Independent coordinate cold replay',second.stops);
+  proveCoordinateGeometry(proof.result.sketch,second.result.sketch,second.result.evidence,bindings,'Independent coordinate cold replay',second.stops);proveCoordinateGeometry(candidate,second.result.sketch,second.result.evidence,bindings,'Original coordinate candidate bound',second.stops);
   if(proof.result.evidence.length!==second.result.evidence.length||proof.result.evidence.some((row,i)=>row.typeId!==second.result.evidence[i].typeId||row.state!==second.result.evidence[i].state))throw fail('ADMISSION_CHANGED','Coordinate cold classifications differ.');
   const checked=evaluateCapturedSketch(candidate,bindings,proof.result.evidence,undefined,proof.auxiliary);intents.forEach(intent=>verifyTarget(candidate,intent));
   return{revision,ok:true as const,serializedSketch:boundedText(JSON.stringify(candidate)),evidence:checked.evidence,...receipt()};
