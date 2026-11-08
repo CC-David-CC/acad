@@ -1,7 +1,7 @@
 import {HeadlessSketchWorkspace} from './workspace';
 import {sameRestoredSketch} from '../historyEquivalence.mjs';
-import {CURRENT_DIAGNOSTIC_POSITION_TOLERANCE_MM} from './diagnosticGeometry.mjs';
-const POSITION=CURRENT_DIAGNOSTIC_POSITION_TOLERANCE_MM,ANGLE=1e-8,MIN=1e-9,TAU=2*Math.PI,WORK=100000;
+import {PHYSICAL_COORDINATE_RECONSTRUCTION_BUDGET_MM,isPhysicalSketchCoordinate} from './physicalCoordinateReconstruction.mjs';
+const RETAINED_OTHER_NUMERIC_TOLERANCE=1e-9,ANGLE=1e-8,MIN=1e-9,TAU=2*Math.PI,WORK=100000;
 const fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
 const count=(value:number)=>{if(value>WORK)fail('LIMIT','Verified sketch replay exceeds its bounded geometry work.');};
 const withoutAdmission=(s:any)=>({...s,stages:s.stages.map(stage=>({...stage,constraints:stage.constraints.map(c=>{const row={...c};delete row.admission;return row;})}))});
@@ -63,7 +63,8 @@ function compareData(before:any,after:any,fields:Map<string,Set<string>>,bounded
     const name=path.join('.');
     if(!allowed.has(name))fail('CURRENT_GEOMETRY_MISMATCH','Replay changed an unrelated or unsupported authored field: '+a.id+'.'+name);
     if(typeof x!=='number'||typeof y!=='number'||!Number.isFinite(x)||!Number.isFinite(y))fail('CURRENT_GEOMETRY_MISMATCH','Replay produced nonfinite analytic geometry.');
-    if(bounded&&Math.abs(x-y)>POSITION)fail('CURRENT_GEOMETRY_MISMATCH','Replay analytic position differs beyond the existing1e-9mm save bound: '+a.id+'.'+name+' (before='+x+', after='+y+', delta='+Math.abs(x-y)+'mm)');
+    const coordinate=isPhysicalSketchCoordinate(a.type,path),budget=coordinate?PHYSICAL_COORDINATE_RECONSTRUCTION_BUDGET_MM:RETAINED_OTHER_NUMERIC_TOLERANCE;
+    if(bounded&&Math.abs(x-y)>budget)fail('CURRENT_GEOMETRY_MISMATCH',(coordinate?'Replay physical coordinate exceeds '+budget+'mm ('+(budget*1e9)+'pm) reconstruction budget: ':'Replay non-coordinate numeric field exceeds its retained '+budget+' comparison bound: ')+a.id+'.'+name+' (before='+x+', after='+y+', delta='+Math.abs(x-y)+(coordinate?'mm':'')+')');
     changed=true;continue;
    }
    if(x===null||y===null||typeof x!=='object'||typeof y!=='object'||Array.isArray(x)!==Array.isArray(y))fail('INTENT_CHANGED','Replay changed authored shape data.');
