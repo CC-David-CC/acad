@@ -1,0 +1,10 @@
+emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 2.0.30 (f782b50a7f8dded7cd0e2c7ee4fed41ab743f5c0)
+Copyright (C) 2014 the Emscripten authors (see AUTHORS.txt)
+This is free and open source software under the MIT license.
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/upstream/emscripten/em++
+/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/node/24.19.0_64bit/bin/node
+v24.19.0
+1c3bfb62c83910171d579173cac56a60ac23c65e
+846bea93aebfabb3e18c94672ed4c295ac1c1fa3

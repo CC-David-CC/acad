@@ -1,0 +1,218 @@
+{
+  "scope": "Separate same-OCCT STEP reader compilation only, no reader execution or artifact qualification",
+  "sourceCommit": "814fca91815c0aa82353442874bf3d350d950956",
+  "nativeSourceCommit": "1c3bfb62c83910171d579173cac56a60ac23c65e",
+  "occtHeaderSourceCommit": "846bea93aebfabb3e18c94672ed4c295ac1c1fa3",
+  "inputs": [
+    {
+      "path": "/mnt/data10tb/codi-acad-original-rectangle-20261107-r1/test/original-rectangle-workflow/step-reader.cpp",
+      "resolvedPath": "/mnt/data10tb/codi-acad-original-rectangle-20261107-r1/test/original-rectangle-workflow/step-reader.cpp",
+      "sha256": "0b3e4bbb1f3077858f6e9089e8d3cc5317eefa2ae0880ec45bb85f366cc8f83e",
+      "bytes": 4739
+    },
+    {
+      "path": "/mnt/data10tb/codi-acad-original-rectangle-20261107-r1/test/owned-step-worker/build-reader.sh",
+      "resolvedPath": "/mnt/data10tb/codi-acad-original-rectangle-20261107-r1/test/owned-step-worker/build-reader.sh",
+      "sha256": "ebfce7995ad8ed0589b14a3bd06358777413bda06f829fbdc3c20738e83dd522",
+      "bytes": 734
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-owned-step-adaptive-20261107/shape-io/ownedTopologyV1.hpp",
+      "resolvedPath": "/mnt/data10tb/codi-occ-owned-step-adaptive-20261107/shape-io/ownedTopologyV1.hpp",
+      "sha256": "227b19221b5645ad3d356fef27a07aa11c040c4b67ca386d6a08131a2517fb29",
+      "bytes": 9232
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-owned-step-adaptive-20261107/shape-io/ownedMassPropertiesV1.hpp",
+      "resolvedPath": "/mnt/data10tb/codi-occ-owned-step-adaptive-20261107/shape-io/ownedMassPropertiesV1.hpp",
+      "sha256": "e226cb6ead87bb37aa51ded1a7f0fa0e4c8d36fdca5508b81dda8e45fcbd63a8",
+      "bytes": 851
+    },
+    {
+      "path": "/mnt/data10tb/codi-original-rectangle-step-reader-20261107-r1/build.sh",
+      "resolvedPath": "/mnt/data10tb/codi-original-rectangle-step-reader-20261107-r1/build.sh",
+      "sha256": "b0b73f94003b710082c1dc29265443b8631c3ff8914df2685a1e731ccc342b07",
+      "bytes": 983
+    },
+    {
+      "path": "/mnt/data10tb/codi-original-rectangle-step-reader-20261107-r1/pin.py",
+      "resolvedPath": "/mnt/data10tb/codi-original-rectangle-step-reader-20261107-r1/pin.py",
+      "sha256": "6ad9695aa73aeac114b73f82e15c8d61bf4ddbfc967095ad502564f4e74f6ffb",
+      "bytes": 2978
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/emsdk_env.sh",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/emsdk_env.sh",
+      "sha256": "946b9f4201d86ceeeb8f4ae2deb34e5240d5207e9fd89901f2c1e036c2283dde",
+      "bytes": 1977
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/.emscripten",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/.emscripten",
+      "sha256": "c446070b698d96bed563dbead1f45b184126672811c131778b59fe3c371d5481",
+      "bytes": 272
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/upstream/emscripten/em++",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/upstream/emscripten/em++",
+      "sha256": "c91dc7ac7b447a01a3ab8a59b4ad72c500dbdb76128896e8e75fabb252951234",
+      "bytes": 897
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/upstream/emscripten/emcc.py",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/upstream/emscripten/emcc.py",
+      "sha256": "d2fc586c9b25a0fb09c2e296b8916bb5b8ae56bf999c8d728a50ae78d37425eb",
+      "bytes": 152610
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/upstream/bin/clang",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/upstream/bin/clang-14",
+      "sha256": "e2113cfe02737c39edc7b746f8d4bce1139c5d37a39660f68a368bff290a4cd4",
+      "bytes": 103444472
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/upstream/bin/wasm-ld",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/upstream/bin/lld",
+      "sha256": "4835ac897c16f3c820087375bbe7dfb0a0a5896c13aa7771904d5b03408d943e",
+      "bytes": 63380904
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKTopTest.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKTopTest.a",
+      "sha256": "5a3f4b317d6ed48cf5c881224bd60da50086adf4704f0a44a5c2e67d4278e4e2",
+      "bytes": 4274584
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKBool.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKBool.a",
+      "sha256": "199b5e3baafebcd6ec32f390919eacfb009365663a8b17c96c6fb2c8bec7bfb1",
+      "bytes": 14333202
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKBO.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKBO.a",
+      "sha256": "b393cacc75bb7ea39cb0d1d9b262caca55af4f098222db9b399e5bc797b16f44",
+      "bytes": 8572828
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKBRep.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKBRep.a",
+      "sha256": "0e26cbf845ac6576b782fcff94e09c667a41ec9dc527681d5ebe8274aac0dd62",
+      "bytes": 3792770
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKernel.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKernel.a",
+      "sha256": "5ccb85cf4649cf25b1febfec354458dde1cc7c61744ae6fd836f85792f458286",
+      "bytes": 3833160
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKFeat.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKFeat.a",
+      "sha256": "7732c31af4494601f0751a3b0750ef1b95dc959ad02cf5bc31b642943c4f2974",
+      "bytes": 4395420
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKFillet.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKFillet.a",
+      "sha256": "d4c19f502a4f82e98ebb60b58317017cb54ad38525eeb6d6e2a94e68ad43f8bb",
+      "bytes": 6621068
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKG2d.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKG2d.a",
+      "sha256": "cf952113c6ac6f582997585319a5d08b198d1d6a14b4ab8de0a22fd5f0ce7d23",
+      "bytes": 917228
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKG3d.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKG3d.a",
+      "sha256": "a3bf5f26cb192ef14ea0060aed5e021289493519b18b263aa230a6fd43c4ca10",
+      "bytes": 2725370
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKGeomAlgo.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKGeomAlgo.a",
+      "sha256": "904643447a8b02a3739b1f5cee781904aca8fe273a015ff31430f6d457b5ee2c",
+      "bytes": 12324140
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKGeomBase.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKGeomBase.a",
+      "sha256": "552f83a0ffaafa6f539cf1bcd5cba1fbcfcb9b70b0ee3da6d5eed49fb8796296",
+      "bytes": 10028396
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKHLR.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKHLR.a",
+      "sha256": "62e25a7f3f48057daa8d1cca1abe32493fab9a669bd1071bdd46b58967474bb5",
+      "bytes": 2618554
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKMath.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKMath.a",
+      "sha256": "75d98453df3ccff20ddc37c3b9e932b03e809a4d72545a6d6ca0e837c26914c3",
+      "bytes": 5382568
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKMesh.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKMesh.a",
+      "sha256": "56e04cb9a7c1b82be9119f33eddcc898a8a9159f832d868f7d02d2051c38fbb1",
+      "bytes": 2785470
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKOffset.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKOffset.a",
+      "sha256": "8a099fbc35ef72adfb66ecbf1dfee961831f5036b6507e3c36eadc6cb60102a4",
+      "bytes": 6037192
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKPrim.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKPrim.a",
+      "sha256": "f6a3507b823edb52649c10ccc2acaf9dfaae4333ce43a5799a89b6f8c2f65ead",
+      "bytes": 921056
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKShHealing.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKShHealing.a",
+      "sha256": "e4c39f913ad183615313ef69ec8943b25898ecab4ef8f83f63bd594f7ddb8a26",
+      "bytes": 10156380
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKTopAlgo.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKTopAlgo.a",
+      "sha256": "3c86701c470b649f7f15768be5871a44761674afa234f282c1dc2a11962cf913",
+      "bytes": 8235782
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKXSBase.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKXSBase.a",
+      "sha256": "b4f4f331ebc73d14d63f376e55945f811e6bd1d05e49edfe8bb11f50bfef5e2c",
+      "bytes": 8916436
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKSTEPBase.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKSTEPBase.a",
+      "sha256": "c939ac34c5483aabfb178f5275859e46b8c54f28316724dee1601ba47ed52a4b",
+      "bytes": 9603156
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKSTEPAttr.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKSTEPAttr.a",
+      "sha256": "6aaf33489e2f1446099348d28e8bd5491e181318c3e6d531c0dfc4b9799ff7fd",
+      "bytes": 6748758
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKSTEP209.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKSTEP209.a",
+      "sha256": "5d861ec9b634e175944e256939b21d9033bcf0bbbcf4a5623d39ed5c75e7c9d4",
+      "bytes": 2142044
+    },
+    {
+      "path": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKSTEP.a",
+      "resolvedPath": "/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib/libTKSTEP.a",
+      "sha256": "fc86b40b83b4b157b473c48d703e3795b671ea32e20eb4d0db20b774052ae8bc",
+      "bytes": 10429870
+    }
+  ]
+}
