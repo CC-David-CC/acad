@@ -1,5 +1,5 @@
-import {AlgNumConstraint,ConstraintDefinitions} from '../constr/ANConstraints';
-import {fixedGeometry,fixedEntityValid,fixedSchemaFor} from '../constr/fixedEntityDomain.mjs';
+import {prepareFixedEntity} from './fixedEntityAdmission';
+import {fixedSchemaFor} from '../constr/fixedEntityDomain.mjs';
 import {createSketchRevisionGuard} from './sketchRevisionGuard';
 import {runSketchTransaction} from './sketchTransaction';
 
@@ -25,28 +25,10 @@ function admit(viewer,object,beforeSubmit){
   if(!fixedSchemaFor(object))throw Error('Fix supports a segment, circle or arc.');
   if(!targets(viewer).includes(object))throw Error('The selected entity is no longer current.');
   if(object.generator&&object.stage===pm.stage)throw Error('Cannot fix a generated object in the same stage.');
-  const captured=fixedGeometry(object),constants=Object.fromEntries(Object.entries(captured.values).map(([key,value])=>[key,String(value)]));
-  const relation=new AlgNumConstraint(ConstraintDefinitions[captured.schema],[object],constants);
-  relation.validateCandidateConstants(constants,value=>value);
-  if(!fixedEntityValid(relation))throw Error('The entity geometry cannot be fixed.');
+  const prepared=prepareFixedEntity(pm,object),relation=prepared.constraint;
   if(beforeSubmit)beforeSubmit();
-  const duplicate=pm.stages.some(s=>s.algNumSystem.allConstraints.some(c=>{
-    if(c.schema.id!==captured.schema||c.objects[0]!==object||(s.algNumSystem.isConflicting(c)&&!s.algNumSystem.redundant.has(c)))return false;
-    if(!fixedEntityValid(c))throw Error('The existing fixed entity is inconsistent; recover it before continuing.');
-    return true;
-  }));
-  if(duplicate)return {objectId:object.id,type:object.TYPE,status:'redundant'};
-  runSketchTransaction(viewer,{
-    mutate:manager=>manager._add(relation),
-    validate:stages=>{
-      const system=relation.stage?.algNumSystem;
-      if(!system||!stages.includes(relation.stage)||!system.allConstraints.includes(relation))throw Error('The entity fix was not added.');
-      if(system.isConflicting(relation)&&!system.redundant.has(relation))throw Error('The entity fix conflicts with existing constraints.');
-      if(!fixedEntityValid(relation))throw Error('The fixed entity became inconsistent.');
-      for(const stage of stages)for(const c of stage.algNumSystem.allConstraints){const sys=stage.algNumSystem,prior=sys.transactionBefore;
-        if(!(prior.conflicting.has(c)&&!prior.redundant.has(c))&&sys.conflicting.has(c)&&!sys.redundant.has(c))throw Error('The entity fix would invalidate an existing constraint.');}
-    },
-  });
+  if(prepared.existing)return {objectId:object.id,type:object.TYPE,status:'redundant'};
+  runSketchTransaction(viewer,{mutate:manager=>manager._add(relation),validate:prepared.validate});
   try{pm.refresh();}catch(error){console.error('The entity fix was accepted, but sketch refresh failed:',error);}
   return {objectId:object.id,type:object.TYPE,status:relation.stage.algNumSystem.redundant.has(relation)?'redundant':'accepted'};
 }
