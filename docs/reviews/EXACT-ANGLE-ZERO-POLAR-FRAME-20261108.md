@@ -110,3 +110,19 @@ including distinct redundancy, real conflicts, zero, signed reversal, travel,
 named edits/removal and normal .cad Save/server equality/fresh Open. Prior R1
 remains a failure. Broader general arithmetic provenance and nonzero-angle frame
 certification remain separate work; this packet does not claim them repaired.
+
+
+## Source language compatibility correction
+
+Independent source review noted that1b8dbe3 placed BigInt literals, BigInt
+conversion and DataView.getBigUint64 in a TypeScript file despite the existing
+declared ES2015/es2018 contract. Babel is used by normal builds; no actual build
+failure was observed or newly claimed. The correction extracts the unchanged
+binary64 decoding, normalization, exact add/multiply/equality/negation and
+8192-bit/error policy into NEW constr/exactPolarFrameArithmetic.mjs. Model,
+ownership, ordered reduction and retained-verification types remain in
+exactAngleZeroPolarFrame.ts. Its zero test uses bigint truthiness, with the
+same meaning. The shared failure constructor retains identical code/message
+and admission-cause classification. No compiler target/lib change, ts-ignore,
+float conversion, arithmetic weakening, driver edit or execution accompanies
+this source-only extraction.

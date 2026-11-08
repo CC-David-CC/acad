@@ -4,39 +4,19 @@ import {Param} from '../shapes/param';
 import {SolverParam} from './solverParam';
 import {Segment} from '../shapes/segment';
 import {EndPoint} from '../shapes/point';
-import {admissionCause,withAdmissionCause} from './admissionCause.mjs';
+import {createExactPolarArithmetic as arithmetic,failExactPolarFrame as stop} from './exactPolarFrameArithmetic.mjs';
 
 // This is an optional finite algebraic certificate, not a second solver. The
 // ORIGINAL active registered linear rows must uniquely prove the endpoint
 // values proposed by ordinary elimination. Sampling current coordinates or
 // merely trusting usedApproximateReduction=false is never a fixed-value proof.
-const WORK=1000000,BITS=8192,MIN=1e-9;
+const WORK=1000000,MIN=1e-9;
 type Dyadic={n:bigint,e:number};
 type Binding={constraint:any,schema:any,internal:boolean,objects:any[],params:any[],constants:Array<[string,any]>};
 type Row={binding:Binding,index:number,constant:Dyadic,coefficients:Map<Param,Dyadic>};
 type Fixed={param:Param,value:number,row:Row,dependencies:Fixed[]};
-const stop=(message:string,resource=false):never=>{throw withAdmissionCause(Object.assign(Error(message),{code:resource?'RESOURCE_LIMIT':'POLAR_FRAME_PROOF_CHANGED'}),admissionCause(resource?'resource-limit':'retained-validation-failure'));};
 function budget(){let work=0;return()=>{if(++work>WORK)stop('Exact Polar-frame proof exceeds its bounded work.',true);};}
-function arithmetic(tick:()=>void){
- const view=new DataView(new ArrayBuffer(8));
- const normalize=(n:bigint,e:number):Dyadic=>{
-  tick();if(n===0n)return{n:0n,e:0};
-  const absolute=n<0n?-n:n;if(absolute.toString(2).length>BITS)stop('Exact Polar-frame arithmetic exceeds its bit bound.',true);
-  while((n&65535n)===0n){tick();n>>=16n;e+=16;}while((n&1n)===0n){tick();n>>=1n;e++;}
-  return{n,e};
- };
- const number=(value:number):Dyadic=>{
-  tick();if(!Number.isFinite(value))stop('Nonfinite fixed-value certificate input.');
-  if(value===0)return{n:0n,e:0};view.setFloat64(0,value,false);
-  const bits=view.getBigUint64(0,false),raw=Number((bits>>52n)&2047n);
-  let n=bits&((1n<<52n)-1n);if(raw)n|=1n<<52n;if(bits>>63n)n=-n;
-  return normalize(n,raw?raw-1075:-1074);
- };
- const add=(a:Dyadic,b:Dyadic):Dyadic=>{tick();if(!a.n)return b;if(!b.n)return a;const e=Math.min(a.e,b.e);return normalize((a.n<<BigInt(a.e-e))+(b.n<<BigInt(b.e-e)),e);};
- const multiply=(a:Dyadic,b:Dyadic):Dyadic=>{tick();return normalize(a.n*b.n,a.e+b.e);};
- const equal=(a:Dyadic,b:Dyadic)=>a.n===b.n&&(a.n===0n||a.e===b.e);
- return{number,add,multiply,equal,negate:(a:Dyadic)=>({n:-a.n,e:a.e})};
-}
+
 function backed(p:any){return p instanceof Param&&p.solverParam instanceof SolverParam&&p.solverParam.objectParam===p&&Number.isFinite(p.get());}
 function rootOwned(point:any,stage:any,tick:()=>void){
  if(!(point instanceof EndPoint)||point.stage!==stage||!backed(point.params.x)||!backed(point.params.y))return false;
@@ -65,7 +45,7 @@ function linearRow(binding:Binding,index:number,p:Polynomial,math:ReturnType<typ
  return coefficients.size?{binding,index,constant:math.number(p.constant),coefficients}:null;
 }
 function exactRow(row:Row,values:Map<Param,number>,math:ReturnType<typeof arithmetic>,tick:()=>void){
- let sum=row.constant;for(const [param,coefficient]of row.coefficients){tick();if(!values.has(param))return false;sum=math.add(sum,math.multiply(coefficient,math.number(values.get(param))));}return sum.n===0n;
+ let sum=row.constant;for(const [param,coefficient]of row.coefficients){tick();if(!values.has(param))return false;sum=math.add(sum,math.multiply(coefficient,math.number(values.get(param))));}return !sum.n;
 }
 function copyPolynomial(p:Polynomial,tick:()=>void){
  const copy=new Polynomial(p.constant);copy.usedApproximateReduction=p.usedApproximateReduction;
