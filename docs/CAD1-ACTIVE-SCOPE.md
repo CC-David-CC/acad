@@ -44,6 +44,20 @@ excluded from that qualified repair batch and is now the next source candidate.
 A four-of-four batch result does
 not close the remaining finite competencies or the final beta/agent delivery.
 
+### Next workflow: C08 Phase A first attempt
+
+Core `df70adf` / Desktop `9fd652f1b` completed the full normal build and
+signed app fixture construction. Whole-browser R1 then FAILED on the first
+registered custom source creation: `Sketch solve request must be a tree.`
+No source-creation checkpoint or native Save completed; the exact repeated
+request reference is not yet established. Retained evidence `146f460`,
+`test/custom-source-frame/evidence-r1`, has matching runtime/source pins and
+successful owned-context cleanup. See `test/custom-source-frame/QUALIFICATION.md`.
+The four repair passes and C09 pass remain scoped historical evidence; C08 is
+not qualified. Fix the actual request construction, rebuild normally, and run
+the complete workflow again without relaxing its expectations. Required C08
+Phase B native-solid-face attachment remains open.
+
 Repair composition source review:168c28a carries7ac46c53f5141e6fcc00ca32effddd9ac96d7d73
 from the isolated lane; root adds only the dedicated solveWorker task dispatch.
 Main drafts from current source; Worker proves actual original dimension-row
