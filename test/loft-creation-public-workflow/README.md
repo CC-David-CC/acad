@@ -1,5 +1,9 @@
 # E15 unequal-rectangle loft: creation travel and current .cad workflow
 
+Current finite workflow is qualified: see [QUALIFICATION.md](QUALIFICATION.md)
+for exact runtime, evidence and open G10 viewing issue. Initial source-only text
+below is historical; frozen source snapshots stay unchanged in evidence-r1.
+
 **Source-ready; not executed or qualified.** This finite packet addresses the
 missing direct loft-creation G6 observation identified in
 `docs/reviews/SWEEP-LOFT-BOOLEAN-EXERCISE-MAP-20261108.md`. It changes no product,

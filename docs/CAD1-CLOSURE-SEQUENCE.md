@@ -1,5 +1,23 @@
 # Gate 1: remaining work and execution sequence
 
+## Ordinary E15 qualified:16of21; final viewing remains open
+
+New whole Chrome42040 and FIRST independent after-whole source/archive/section
+oracle PASS on actualb097185/00e12613a, exact adaptive Nativeed06b634/bc8895ce.
+77records/25solid observations/three source-only states/250Native classes/
+four refusals/two no-ops/16travels/three.cad browser/server/fresh Open cycles.
+Actual loft-creation Undo removes its body and retains both editable sources;
+Redo restores same original feature/output/regions/seams/counters. Source/plane
+edits, refusals and reopened re-edits pass unchanged criteria. Exact evidence:
+test/loft-creation-public-workflow/QUALIFICATION.md and evidence-r1.
+
+**16of21 ordinary Qualified (E01–E15/E21); five Partial
+(E16/E18/E19/E20/E22).23recent scoped workflows is separate.**
+The unedited screenshot shows tiny part framing beside large source planes;
+G10 viewing/framing still needs work. No camera-cause assumption or human UI
+qualification. PL R2 unchanged failure/source correction and broader11competencies
+remain open; no beta/main promotion or final packaging.
+
 ## Ordinary E14 accepted after actual evidence review
 
 Root inspected actual retained four-case curved-sweep receipt/source/independent
