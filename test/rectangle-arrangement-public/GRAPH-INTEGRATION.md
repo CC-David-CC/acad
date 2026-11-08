@@ -137,3 +137,21 @@ This is the SHA256 of the actual composed canonical source. Native JS/WASM pairs
 are unchanged. Generated flat/embedded Workers and component manifests must still
 be rebuilt from this composition; no earlier runtime is relabeled. The complete
 arrangement application workflow remains unexecuted at this checkpoint.
+
+## First normal-build correction and known source limits
+
+The first normal application build at582db02 stopped in the default legacy
+embedder: its separate bootstrap hash was still old, and its flat rewrite ran
+before canonical verification. Main5e4c803 binds the actual canonical hash in
+that embedder and applies the generated flat rewrite only after verification.
+The complete normal build at7007f55 then succeeds; Native binary identities
+are unchanged. The original failed build log remains on R730 at
+`/mnt/data10tb/codi-acad-build-20261107-r2/.build/acad-arrangement-582db02-build.log`.
+
+Read-only review identified a real support limitation, not a wrong-cell result:
+any atomic span at/below1e-4mm currently refuses the whole arrangement discovery,
+even if another cell would be usable. Per-cell PROFILE_BELOW_RESOLUTION is also
+not currently mapped to an unsupported region row. The initial whole workflow
+qualifies only its declared ordinary proper-overlap fixtures; it must not be
+reported as per-cell near-contact support or general intersecting topology.
+These two resolution-policy gaps remain open for a coherent per-region repair.
