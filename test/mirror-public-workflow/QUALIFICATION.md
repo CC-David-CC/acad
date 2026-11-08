@@ -1,5 +1,43 @@
 # Shared Mirror qualification
 
+## Current finite R2 browser and corrected independent oracle PASS
+
+ActualCore104c24ec1f89f26393391412e4b5b1490b74a384 /
+Desktop9bdb3a512ef80e5233a3cee819385de001366fe4. Normal build20967,
+fixture20300 and complete Chrome driver25146 PASS:214records/194commands/
+21native-sketch observations/3.cad Save-server equality files/19refusals/
+6own malformed native Opens and2fresh signed Opens/reedit/travel. Eight real
+Point/Segment/Circle/minor90-major270 Arc/on-axis/overlap sources use the actual
+Mirror generator; source inputs/output/correspondence IDs survive creation,
+source/diameter/Arc/axis edits and mixed travel. Actual source lock conflict,
+explicit removal/recovery, readonly generated output refusals and exact no-op
+all pass. No private positive authors, fake replies or source seeds.
+
+Independent Fraction reflection and90-digit Decimal CCW locus analysis PASS on
+the unchanged complete outputs after a checker-only repair bde8e20. First checker
+NameError is retained. Original producing source snapshots/receipt pins remain
+unchanged; corrected checker/provenance are separate independent-analysis
+artifacts. Only missing point(v) extraction was added, using existing finite
+q() and exact Fraction; no acceptance equation or threshold changed.
+
+Stored source and cold native observations are each checked against the SAME
+retained-source truth at fixed50pm, independently of reconstruction agreement.
+Maximum observed coordinate error4.26325641456060111522674560546875e-15mm;
+derived Arc scalar comparison1e-9mm is separate. Standalone ZIP/CRC/SHA/source/
+history checks pass for all3actual files. Source hashes/owned context cleanup
+pass; shared Chrome remains. R1 failure and initial analysis failure remain.
+
+This is finite Point/Segment/Circle/Arc SKETCH Mirror and native editable file
+qualification. No ellipse/cubic/semantic Slot/group/cross-plane Mirror, general
+multistage convergence, BRep/region/extrusion, human GUI polish, physical-global
+accuracy, allC01 or allGate1 qualification follows. Native Open's private
+geometry-only factory projection validates regenerated cache/custody AFTER
+unchanged original constraint/reference/domain preflight; it does not solve or
+replace authored constraints or silently heal source. Unsupported legacy carry
+remains honestly unsupported. Source repair104c24e completes genuine ordered
+stage solve/generation before private candidate serialization; old no-generator
+behavior and strict stage/cache admission remain unchanged.
+
 ## R1 complete workflow failure
 
 Actual runtimeCore8a4bc6cd056f053a091615e05af548b2c6286506 /

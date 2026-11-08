@@ -1,6 +1,6 @@
 # Complete shared sketch Mirror workflow (source prepared)
 
-Not executed: no step tests, probes, TSC, build or browser in this packet.
+Current finite R2 full browser +corrected independent oracle PASS; see QUALIFICATION.md/evidence-r2 for exact producing pins, preserved first failures and scope. The source-preparation instructions below describe the original contract, now executed without loosening acceptance.
 Root composes the complete normal app, then runs ONE genuine public workflow.
 Use desktop-driver.mjs with CODI_DESKTOP_SOURCE_ROOT, CODI_TEST_URL,
 CODI_TEST_CDP, CODI_SIGNED_PINS, CODI_EXPECT_SOURCE, CODI_EXPECT_DESKTOP,
