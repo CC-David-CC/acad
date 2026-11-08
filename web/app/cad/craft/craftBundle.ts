@@ -1576,7 +1576,7 @@ export function activate(ctx: ApplicationContext) {
   }),epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();},requireAvailableSelectedProfileBuild);
   const {inspectWorkerHistoryControls,setWorkerFeatureSuppressed,setWorkerHistoryPrefix,commitWorkerHistoryBranch}=historyControlCommands;
   principalPlaneCommands=createPrincipalPlanePlacementCommands(ctx,()=>({
-    ready:ownedPipelineHistories.has(modifications$.value.history)&&journalHeadDefinition===modifications$.value.history&&journalHeadSignature===fullTipSignature&&!!fullTipSignature&&
+    ready:ownedPipelineHistories.has(modifications$.value.history)&&journalHeadDefinition===modifications$.value.history&&!!fullTipSignature&&
       fullTipSketchRevision===sketchRevision(ctx.storageService,(ctx.projectService as any).sketchStorageNamespace)&&fullTipMaterialSurfaceRevision===(ctx.projectManager as any).inspectMaterialSurfaceRevision(),
     state:modifications$.value,journal:authoredJournal$.value,signature:fullTipSignature
   }),input=>evaluateWorkerSolidRead(input,'principal-source-basis'),(input,permit)=>evaluateWorkerSolidRead(input,'principal-source-proof',permit),submitPrincipalPlacement,
