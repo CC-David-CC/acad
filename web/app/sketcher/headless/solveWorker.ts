@@ -7,7 +7,7 @@ const {evaluatePhysicalSource} = require('cad/parameters/evaluatePhysicalSource.
 const {decodePhysicalSource} = require('cad/parameters/physicalSource.mjs');
 const {prepareTypedRectangle} = require('cad/parameters/typedRectangleBindings.mjs');
 const {prepareTypedDependentSketch} = require('./typedDependentSketch.mjs');
-const {assertCurrentDiagnosticGeometry} = require('./diagnosticGeometry.mjs');
+const {assertVerifiedReplayGeometry} = require('./verifiedReplayGeometry');
 let used = false;
 self.onmessage = async event => {
   if (used) return;
@@ -112,7 +112,7 @@ self.onmessage = async event => {
           if(!validFrame(frame)||!validFrame(expected)||!['origin','x','y','z'].every(k=>frame[k].every((n,i)=>Math.abs(n-expected[k][i])<=1e-9)))throw Error('Sketch frame changed.');
           let external=request.externalParameters;
           if(request.parameterSource!==null){if(typeof request.parameterSource!=='string'||request.parameterSource.length>65536||!external||Object.keys(external).length)throw Error('Invalid typed parameter source.');const definitions=decodePhysicalSource(request.parameterSource);if(!definitions)throw Error('Typed parameters are required.');const result=evaluatePhysicalSource(definitions),values=new Map(result.values.map(row=>[row.name,row]));external=prepareTypedDependentSketch(sketch,name=>{const row:any=values.get(name);if(!row||row.dimension!=='length')throw Error('A typed length parameter is required.');return row.value;});}
-          const solved=solveSketch({revision,sketch,boundary:structuredClone(sketch.boundary),externalParameters:external});if(!solved.ok){self.postMessage(solved);return;}assertCurrentDiagnosticGeometry(sketch,solved.sketch);self.postMessage({revision,ok:true,validated:true});return;
+          const solved=solveSketch({revision,sketch,boundary:structuredClone(sketch.boundary),externalParameters:external});if(!solved.ok){self.postMessage(solved);return;}assertVerifiedReplayGeometry(sketch,solved.sketch,solved.evidence,external);self.postMessage({revision,ok:true,validated:true});return;
         }catch(_){self.postMessage({revision,ok:false,error:{code:'SKETCH_SAVE_INVALID',message:'The sketch could not be validated for saving.'}});return;}
       }
       if (request.task === 'typed-sketch-transaction') {
@@ -125,7 +125,7 @@ self.onmessage = async event => {
           const boundary={lines:[],arcs:[],circles:[],nurbses:[]};if(!sketch.boundary||Object.keys(boundary).some(k=>!Array.isArray(sketch.boundary[k])||sketch.boundary[k].length))throw Error('Referenced sketch boundary is unsupported.');
           const definitions=request.parameterSource===''?{version:1,definitions:[]}:decodePhysicalSource(request.parameterSource);if(!definitions)throw Error('Typed parameters are required.');const result=evaluatePhysicalSource(definitions),values=new Map(result.values.map(row=>[row.name,row]));
           const external=prepareTypedDependentSketch(sketch,name=>{const row:any=values.get(name);if(!row||row.dimension!=='length')throw Error('A typed length parameter is required.');return row.value;});
-          const solved=solveSketch({revision,sketch,boundary,externalParameters:external});if(!solved.ok){self.postMessage(solved);return;}if(request.verifyCurrent)assertCurrentDiagnosticGeometry(sketch,solved.sketch);
+          const solved=solveSketch({revision,sketch,boundary,externalParameters:external});if(!solved.ok){self.postMessage(solved);return;}if(request.verifyCurrent)assertVerifiedReplayGeometry(sketch,solved.sketch,solved.evidence,external);
           const serializedSketch=JSON.stringify(solved.sketch);if(serializedSketch.length>1048576||new TextEncoder().encode(serializedSketch).byteLength>1048576)throw Error('Solved sketch exceeds limit.');self.postMessage({revision,ok:true,serializedSketch});return;
         }catch(_){self.postMessage({revision,ok:false,error:{code:'TYPED_SKETCH_INVALID',message:'The sketch could not be regenerated with these parameters.'}});return;}
       }
@@ -148,7 +148,9 @@ self.onmessage = async event => {
         const result=evaluatePhysicalSource(definitions),values=new Map(result.values.map(row=>[row.name,row]));
         let sketch;try{sketch=JSON.parse(request.sketchJSON)}catch{throw Error('Invalid sketch JSON.')}
         const external=prepareTypedDependentSketch(sketch,name=>{const row:any=values.get(name);if(!row||row.dimension!=='length')throw Error('A typed length parameter is required.');return row.value;});
-        self.postMessage(solveSketch({revision,sketch,boundary:request.boundary,externalParameters:external,...(request.task==='typed-dependent-diagnostics'?{localJacobian:{version:1,...(sketch.stages.length>1?{scope:'per-stage'}:{})}}:{})}));return;
+        const solved=solveSketch({revision,sketch,boundary:request.boundary,externalParameters:external,...(request.task==='typed-dependent-diagnostics'?{localJacobian:{version:1,...(sketch.stages.length>1?{scope:'per-stage'}:{})}}:{})});
+        if(solved.ok&&request.task==='typed-dependent-diagnostics')assertVerifiedReplayGeometry({...sketch,boundary:request.boundary},solved.sketch,solved.evidence,external);
+        self.postMessage(solved);return;
         } catch (_) {self.postMessage({revision,ok:false,error:{code:'TYPED_SKETCH_INVALID',message:'Typed sketch fields or parameters are invalid or unsupported.'}});return;}
       }
       if (request.task === 'rectangle-extrusion-solve') {
@@ -184,7 +186,9 @@ self.onmessage = async event => {
       }
       return;
     }
-    self.postMessage(solveSketch(request));
+    const solved=solveSketch(request);
+    if(solved.ok&&request.localJacobian!==undefined)assertVerifiedReplayGeometry({...request.sketch,boundary:request.boundary},solved.sketch,solved.evidence,request.externalParameters);
+    self.postMessage(solved);
   } catch (_) {
     self.postMessage({revision,ok:false,error:{code:'WORKER_ERROR',message:'Sketch worker failed.'}});
   }

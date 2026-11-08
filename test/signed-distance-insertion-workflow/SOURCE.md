@@ -58,3 +58,65 @@ fresh-Worker reconstruction and actual endpoint/projection measurement remain
 unchanged. Admission hints are still persisted and checked in that reconstruction;
 they are not globally ignored or deleted from the candidate. No successful Native
 or signed qualification is claimed before the complete unchanged workflow rerun.
+
+## R2 whole-workflow observation and verified numerical replay contract
+
+Root reran the unchanged full public workflow on Core71be/Desktop359a. The
+actual insertion proof now passed. The same first endpoint lock then failed the
+later fresh-solve comparison with `CURRENT_GEOMETRY_MISMATCH`, "Signed distance
+verification changed the solved geometry." Original R2 receipt and log remain
+under `/tmp/codi-acad-midpoint-angle-proof-r2`. The private intermediate candidate
+was not recorded: this note does not assert a changed field or delta magnitude.
+
+That comparison had required bit-identical geometry between the incremental PM
+transaction and a fresh complete solve. Root approved a separate verified replay
+contract, retaining the **existing stricter1e-9mm save geometry bound**, not the
+1e-6mm solver residual tolerance. `sameRestoredSketch` remains unchanged globally.
+No coefficients/constants are rounded or coerced; no locks are fabricated.
+
+The Worker-only helper checks exact authored schema, IDs, source order, constants,
+annotations, stage/object membership, metadata, frames, boundary and generators.
+The authoritative result is the actual complete solve output with genuine
+per-row solved evidence. Serialized admission must exactly match that evidence;
+retained input hints must be admitted, and failed/rejected states do not become
+success. The existing solver also independently checks every original residual,
+finite/domain constraints, stage ownership and generator intent. The signed
+transport verifier still recomputes the entire operation from the original
+captured request in another real Worker and compares its final bytes and status
+exactly. Thus the geometry-comparison guard cannot authorize a caller's merely
+valid alternate candidate.
+
+For numerical geometry equivalence, actual model parameters and original
+polynomial dependencies determine the supported fields. Authored equations seed
+that graph; definitional internal Polar/ArcConsistency equations can propagate
+support but cannot seed it. Unused schema parameters do not qualify a field:
+the graph reads each original polynomial's visited parameters, not every object
+or declared parameter in a constraint signature. Unreferenced/free unrelated
+analytic geometry remains bit-exact. Unknown/carried nonanalytic geometry has
+no new equivalence permission. Signed insertion additionally checks unrelated
+fields exactly against the original source using only the newly inserted real
+constraint as the dependency seed.
+
+Only supported finite analytic point coordinates/radii may differ, at most
+1e-9mm per field. Segment nondegeneracy, A-to-B direction and normalized angular
+branch are checked at the existing1e-8rad angular tolerance in addition to that
+stricter positional bound. Arcs preserve positive endpoint radii, CCW interval,
+exact full-circle predicate, major/minor classification and angular branch.
+No projection, snapping, interpolation or minor-arc choice occurs. This graph is
+not a rank or uniquely-determined-DOF certificate. Work is bounded at100000
+visits; unsupported/excessive cases refuse rather than broaden the policy.
+
+The same guard now composes the downstream Worker replay used by inspection,
+next edits and sketch-byte travel, accepted sketch-view projection, explicit
+save validation, typed current-source validation and actual diagnostic requests.
+The pure/main diagnostic helper keeps its original1e-9 bound; only its constant
+is shared, and no solver/model/graph construction was added to the UI. Ordinary
+non-read solve requests still may solve their requested geometry without a
+current-state comparison. No PM/Craft/history/point-command/native-kernel source
+was changed. Existing accepted source-byte/currentness checks and journal targets
+remain exact; read-only reconstruction does not write the numerical result back.
+
+No tests, probes, type checks, build or browser were launched for this repair.
+The unchanged complete public driver is the next qualification, including both
+real endpoint locks, contradictory group edit, exact refusal preservation,
+removal of only those locks via Undo, no-op and normal native Save/Open/reedit.

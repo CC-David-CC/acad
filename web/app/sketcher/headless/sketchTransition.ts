@@ -2,6 +2,7 @@ import {solveSketch} from './solve';
 import {HeadlessSketchWorkspace} from './workspace';
 import {prepareLengthRelation} from '../actions/lengthRelationAdmission';
 import {sameRestoredSketch} from '../historyEquivalence.mjs';
+import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
 import {assertAllowedSolverGeometry} from './transitionGeometryPolicy.mjs';
 
 const MAX_SKETCH_BYTES=1024*1024;
@@ -52,9 +53,10 @@ export function replaySketchTransition(request:any) {
     if(authored.length!==solved.evidence.length||authored.some((constraint,index)=>{const hint=constraint.admission;return constraint.typeId!==solved.evidence[index].typeId||(hint!==undefined && (!hint||hint.version!==1||hint.state!==solved.evidence[index].state))}))throw fail('ADMISSION_CHANGED','The reconstructed admission differs from the saved classification.');
     const serializedSketch=JSON.stringify(solved.sketch);
     if(!boundedText(serializedSketch))throw fail('LIMIT','The solved sketch exceeds the transition limit.');
-    // History replay must reconstruct the captured state, not silently solve a
-    // different geometry. This is the same equality rule used by live history.
-    if(!sameRestoredSketch(request.sketchJSON,serializedSketch))throw fail('CURRENT_GEOMETRY_MISMATCH','The solved sketch differs from the captured native state.');
+    // Keep exact authored state, constrained numerical geometry within the existing
+    // save bound and exact unrelated geometry. Return the genuine full solved
+    // output; inspection does not write it back into the captured document.
+    assertVerifiedReplayGeometry(sketch,solved.sketch,solved.evidence,external);
     return {revision,ok:true as const,serializedSketch,evidence:solved.evidence};
   } catch(error) {
     return {revision,ok:false as const,error:{code:typeof error?.code==='string'?error.code:'INVALID',message:typeof error?.message==='string'?error.message:'Sketch transition failed.'}};

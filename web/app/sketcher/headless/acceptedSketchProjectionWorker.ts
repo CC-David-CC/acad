@@ -1,5 +1,5 @@
 import {solveSketch} from './solve';
-import {sameRestoredSketch} from '../historyEquivalence.mjs';
+import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
 import {buildProjectionWitness} from './projectionWitness.mjs';
 
 // Private task entry: invoke in a disposable Worker with the pinned solver.
@@ -14,7 +14,8 @@ export function prepareAcceptedSketchProjection(request:any) {
     const rows:any[]=[],solved=solveSketch({revision,sketch,boundary:structuredClone(sketch.boundary),externalParameters:request.externalParameters},row=>rows.push(row));
     if(!solved.ok)return solved;
     const serializedSketch=JSON.stringify(solved.sketch);
-    if(serializedSketch.length>1048576||new TextEncoder().encode(serializedSketch).byteLength>1048576||!sameRestoredSketch(request.sketchJSON,serializedSketch))throw Error('The current sketch geometry changed.');
+    if(serializedSketch.length>1048576||new TextEncoder().encode(serializedSketch).byteLength>1048576)throw Error('The current sketch geometry changed.');
+    assertVerifiedReplayGeometry(sketch,solved.sketch,solved.evidence,request.externalParameters);
     const witness=buildProjectionWitness(serializedSketch,rows,request.frame);
     return {revision,source:request.sketchJSON,ok:true as const,serializedSketch,witness};
   } catch(error) {return {revision,ok:false as const,error:{code:'PROJECTION_INVALID',message:typeof error?.message==='string'?error.message:'Sketch projection failed.'}};}
