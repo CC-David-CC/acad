@@ -516,3 +516,14 @@ edits/conflict recovery and six malformed-file refusals. Stored/cold geometry
 are independently checked against Fraction/90-digit reflected-locus truth.
 Scope is Point/Segment/Circle/Arc sketch generation; no BRep/ellipse/cubic/Slot
 or all-C01 promise. Source-producing/checker failure history remains frozen.
+
+
+point-line-distance.mjs exports createPointLineDistanceExample for one explicitly
+chosen current CAD agent. Nothing runs on import. Numeric DistancePL creation
+uses actual inspected Point/Segment IDs, nonnegative canonical millimeters and
+literal inverted (opposite native polar normal). Existing inspected edit/remove
+supports named lengths while retaining the original side. This is an infinite
+supporting line, not finite-Segment proximity or a parallel-line offset.
+Source/host/whole workflow/oracle are PREPARED ONLY; no qualification follows
+from this recipe. Root must compose normal assets and run the complete shared
+source/Native suffix/travel/.cad workflow before its independent checker.
