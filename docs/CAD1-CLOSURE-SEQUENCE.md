@@ -31,7 +31,7 @@ viewable output and one authoritative shared person/agent operation model remain
    cycles/14Native observations/42points/2.cad saves and independent oracle PASS.
    Wrapper accepted-definition reads are separated from save readiness; the
    original cohort-selection and wrapper-read failures remain frozen. Actual
-   Apply, raw timeline migration and prefix UI Undo enablement remain open.
+   Real navigation/prefix UI Undo now passes its complete R1 chain on Core2e14280/Desktop18c621383:18events/16Native observations/48points/2.cad saves/fresh Opens and independent checker PASS. Principal Apply and broader legacy/insertion/stale gestures remain open.
 4. Complete finite sketch/constraint/region gaps fromC01–C05. Basic primitives,
    many constraints, disjoint/nested/crossing rectangle workflows already pass.
    Required remaining cases include missing shared primitive/edit targets and
@@ -82,7 +82,7 @@ D. Complete remaining finite sketch/constraint/region operations in bounded
    20observations/4.cad saves/10refusals/3fresh Opens, independent oracle PASS.
    General spline/Bezier contract preparation remains a separate C01 lane.
    C12 owned
-   same-prefix Cancel is now scoped qualified; navigation/UI Undo source work,
+   same-prefix Cancel is now scoped qualified; navigation/UI Undo now has bounded R1 qualification;
    native-face attachment and cubic curve author/edit/read source work remain
    independent lanes. C12 Apply remains an explicit separate missing transaction.
 E. Complete remaining solid/reference/frame and drawing/quantity packets using
