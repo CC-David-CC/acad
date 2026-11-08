@@ -1,5 +1,25 @@
 # Active CAD1 acceptance scope — user revision2026-11-06
 
+## Current exit — principal Apply R4 qualified, 2026-11-08
+
+Whole Chrome workflow AND independent after-whole oracle PASS25fc19e.
+ActualCore6f6ccef/Desktopc8779dd83:199records,6real Apply paths,18UI travels,
+30Native sets/153points,9refusals,4.cad Save/server/freshOpen cycles and64
+real trim edits. Native-child regeneration/reopened agent edit and retained-D
+Cancel/Undo/Redo after P eviction pass. R1/R2/R3 remain frozen; two source
+repairs preserve currentness and derive restored readiness from owned data.
+
+THIRTEEN recent named browser workflows now pass. These are NOT13of21
+complete exercises: all21 formal exercise signoffs remain Partial. E17/C10 is
+Gate2. Files stays accepted. Broader formula/datum/legacy/insertion/stale Apply
+families, full C12/Gate1 and delivery remain open. No global Native50pm claim.
+
+Next source lanes: genuine C01 Mirror; C02 circular arrangement/Native; finite
+C03/C04 constraints. Earlier Apply source-era/open/failure notes below are
+historical and superseded only by this finite proof. See
+[test/principal-plane-apply-public-workflow/QUALIFICATION.md](../test/principal-plane-apply-public-workflow/QUALIFICATION.md).
+
+
 The user explicitly moved exercise E17 (hinged assembly) from Gate1 to Gate2.
 Assembly-specific competency C10 is therefore not a Gate1 blocker. Preserve
 original identifiers; E17/C10 remain required later, not completed or deleted.

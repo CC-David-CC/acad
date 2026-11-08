@@ -1,5 +1,25 @@
 # Gate 1: remaining work and execution sequence
 
+## Current exit — principal Apply R4 qualified, 2026-11-08
+
+Whole Chrome workflow AND independent after-whole oracle PASS25fc19e.
+ActualCore6f6ccef/Desktopc8779dd83:199records,6real Apply paths,18UI travels,
+30Native sets/153points,9refusals,4.cad Save/server/freshOpen cycles and64
+real trim edits. Native-child regeneration/reopened agent edit and retained-D
+Cancel/Undo/Redo after P eviction pass. R1/R2/R3 remain frozen; two source
+repairs preserve currentness and derive restored readiness from owned data.
+
+THIRTEEN recent named browser workflows now pass. These are NOT13of21
+complete exercises: all21 formal exercise signoffs remain Partial. E17/C10 is
+Gate2. Files stays accepted. Broader formula/datum/legacy/insertion/stale Apply
+families, full C12/Gate1 and delivery remain open. No global Native50pm claim.
+
+Next source lanes: genuine C01 Mirror; C02 circular arrangement/Native; finite
+C03/C04 constraints. Earlier Apply source-era/open/failure notes below are
+historical and superseded only by this finite proof. See
+[test/principal-plane-apply-public-workflow/QUALIFICATION.md](../test/principal-plane-apply-public-workflow/QUALIFICATION.md).
+
+
 Current2026-11-08. Gate1 only; E17 assemblies/C10 is Gate2. Detailed authority is
 Desktop docs/CAD-ENGINE-GATE-1.md and docs/evidence/CAD-GATE1-BASELINE-20261106.md;
 finite case inventory is docs/reviews/GATE1-FINITE-CLOSURE-AUDIT-20261107.md.
@@ -7,7 +27,7 @@ This guide sequences that scope; it neither adds later CAD work nor removes
 unconditional Gate1 requirements. Human authoring UI redesign remains deferred;
 viewable output and one authoritative shared person/agent operation model remain.
 
-## Principal Apply integration checkpoint — 2026-11-08
+## Historical principal Apply integration checkpoint — 2026-11-08
 
 Latest R3 frozen be03c89: the owned-epoch fix advances6 real Apply paths,18 UI
 travels and3 .cad save/fresh Opens. Whole workflow remains FAILED at fresh-Open
@@ -118,7 +138,7 @@ assembly, future physics, future CAD generations, new AI provider or human UI
 redesign is part of this sequence. No completion percentage/calendar promise is
 inferred from number of commands or isolated passing examples.
 
-## Current bounded source queues — after native attachment R2
+## Historical source queue — before principal Apply R4
 
 The most recent frozen proof is5c82504: StraightSlot R1 on Core79c9c86/
 Desktopddab73b45, with independent geometry/source/archive oracle PASS. Native
