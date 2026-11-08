@@ -640,9 +640,11 @@ export function validateProjectSketch(sketch: any) {
       for (const value of Object.values(constants)) {
         if (typeof value !== 'string' && typeof value !== 'number' && typeof value !== 'boolean') throw new Error('Invalid constraint constant');
       }
-      // Axis orientation is a read-only numeric branch, not an expression.
-      // Validate it during project preflight, before any workspace mutation.
-      if (constraint.typeId === 'Horizontal' || constraint.typeId === 'Vertical') validateConstraintConstantValues(schema, constants, value => value);
+      // Named orientation classes are numeric branches, not arbitrary angles
+      // or expression names. Enforce each schema's declared class during native
+      // preflight, before workspace mutation; full-turn literal aliases remain
+      // authored verbatim and are canonicalized only for evaluation.
+      if (Object.values(definitions).some((definition:any) => definition.axisAngles)) validateConstraintConstantValues(schema, constants, value => value);
       if (constraint.annotations !== undefined && !Array.isArray(constraint.annotations)) throw new Error('Invalid constraint annotations');
       validateStrictConstraint(constraint, index);
       if (constraint.typeId === 'RigidGroup') {

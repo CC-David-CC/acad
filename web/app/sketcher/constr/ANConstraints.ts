@@ -59,11 +59,7 @@ const DIRECTION_SIGN = new FreeFunction(t=>Math.abs(t)>1e-9?Math.sign(t):NaN,()=
 // independently checking the current geometry derives a fresh chart. No lift is
 // persisted and no SolverParam iteration reads a stale captured object value.
 function collectPeriodicOrientation(polynomials,params,{angle},canonicalAngles) {
-  if (!canonicalAngles.includes(angle)) {
-    // Preserve legacy noncanonical angle constants outside this narrow repair.
-    polynomials.push(new Polynomial(-angle).monomial(1).term(params[1],POW_1_FN).monomial(-1).term(params[0],POW_1_FN));
-    return;
-  }
+  if (!canonicalAngles.includes(angle)) throw Error('The named orientation has an invalid angle class.');
   const delta=params[1].get()-params[0].get(),turns=Math.round((delta-angle)/(2*Math.PI));
   if (!Number.isFinite(delta)||!Number.isSafeInteger(turns)) throw Error('Invalid directed orientation branch.');
   polynomials.push(new Polynomial(-angle-2*Math.PI*turns).monomial(1).term(params[1],POW_1_FN).monomial(-1).term(params[0],POW_1_FN));
@@ -713,6 +709,7 @@ export const ConstraintDefinitions
     constants: {
       angle: {
         type: 'number',
+        axisAngles: [90,270],
         description: 'line angle',
         readOnly: true,
         initialValue: ([segment1, segment2]) => {
@@ -721,7 +718,7 @@ export const ConstraintDefinitions
           const deg = makeAngle0_360(a2 - a1) / DEG_RAD;
           return Math.abs(270 - deg) > Math.abs(90 - deg) ? 90 : 270;
         },
-        transform: degree => degree * DEG_RAD
+        transform: degree => ((degree % 360 + 360) % 360) * DEG_RAD
       }
     },
 
@@ -743,6 +740,7 @@ export const ConstraintDefinitions
     constants: {
       angle: {
         type: 'number',
+        axisAngles: [0,180],
         description: 'line angle',
         initialValue: ([segment1, segment2]) => {
           const a1 = segment1.params.ang.get();
@@ -750,11 +748,14 @@ export const ConstraintDefinitions
           const ang = makeAngle0_360(a2 - a1) / DEG_RAD;
           return Math.abs(180 - ang) < Math.min(Math.abs(360 - ang), Math.abs(ang)) ? 180 : 0;
         },
-        transform: degree => degree * DEG_RAD,
+        transform: degree => ((degree % 360 + 360) % 360) * DEG_RAD,
         presentation: {
           label: 'flip',
           type: 'boolean',
-          transformOut: value => value === '180',
+          transformOut: value => {
+            const degrees=typeof value==='number'||typeof value==='string'&&value.trim()?Number(value):NaN;
+            return Number.isSafeInteger(degrees)&&((degrees%360+360)%360)===180;
+          },
           transformIn: value => value ? '180' : '0',
         }
       },

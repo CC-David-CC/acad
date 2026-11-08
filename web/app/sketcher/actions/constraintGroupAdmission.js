@@ -14,6 +14,13 @@ export function prepareConstraintGroup(pm,kind,objects,angleDegrees,action='crea
  if(!pm||pm.inTransaction||!Array.isArray(objects)||new Set(objects).size!==objects.length||objects.some(o=>!o?.stage||!pm.stages.includes(o.stage)||o.isGenerated)||objects.some(o=>o.stage!==objects[0].stage))fail('INVALID_TARGET','Select distinct current nongenerated objects in one authored stage.');
  const rows=pm.stages.flatMap(s=>s.algNumSystem.allConstraints),created=[],edited=[],constraints=[],orientation=orientationGroupContract(kind);
  const direction=segment=>{if(!projectedDirectionValid(segment)||segment.params.t.get()<=0)fail('ORIENTATION_DOMAIN','Use a nondegenerate Segment retaining its authored endpoint direction.');return Math.atan2(segment.b.y-segment.a.y,segment.b.x-segment.a.x);};
+ // This is derived metadata from a real schema-validated current constraint.
+ // Use its own evaluation transform; never normalize the authored literal.
+ const angleFor=c=>{
+  const raw=c.constants?.angle;if(!orientation||!(typeof raw==='number'||typeof raw==='string'&&raw.trim())||!Number.isSafeInteger(Number(raw)))fail('ORIENTATION_DOMAIN','Invalid orientation literal.');
+  const radians=c.schema.constants.angle.transform(Number(raw)),degrees=orientation.angles.find(degree=>degree*(Math.PI/180)===radians);
+  if(degrees===undefined)fail('ORIENTATION_DOMAIN','The named orientation has an invalid angle class.');return degrees;
+ };
  if(kind==='midpoint'){
   if(action!=='create'||objects.length!==2||!isInstanceOf(objects[0],EndPoint)||!isInstanceOf(objects[1],Segment)||objects[0]===objects[1].a||objects[0]===objects[1].b||!projectedDirectionValid(objects[1]))fail('INVALID_TARGET','Choose one separate point and a nondegenerate segment.');
   const matches=rows.filter(c=>['PointInMiddle','Symmetry'].includes(c.schema.id)&&c.objects[0]===objects[0]&&c.objects[1]===objects[1]&&admitted(c));if(matches.length>1)fail('AMBIGUOUS_CONSTRAINT_GROUP','Several midpoint constraints already target this pair.');
@@ -38,7 +45,7 @@ export function prepareConstraintGroup(pm,kind,objects,angleDegrees,action='crea
    const angle=Number(candidate.constants.angle);if(!orientation.angles.includes(angle))fail('ORIENTATION_DOMAIN','The initialized orientation branch is unavailable.');
    const matches=rows.filter(c=>c.schema.id===orientation.typeId&&c.objects.length===refs.length&&c.objects.every((o,i)=>o===refs[i])&&admitted(c));
    if(matches.length>1)fail('AMBIGUOUS_CONSTRAINT_GROUP','Several orientation constraints already target this ordered member.');
-   if(matches.length){if(Number(matches[0].constants.angle)!==angle)fail('CONSTRAINT_GROUP_CONFLICT','The existing ordered orientation member has a different authored branch.');constraints.push(matches[0]);}
+   if(matches.length){if(angleFor(matches[0])!==angle)fail('CONSTRAINT_GROUP_CONFLICT','The existing ordered orientation member has a different authored branch.');constraints.push(matches[0]);}
    else{created.push(candidate);constraints.push(candidate);}
   }
  }else fail('INVALID_REQUEST','Unknown constraint group.');
@@ -46,11 +53,11 @@ export function prepareConstraintGroup(pm,kind,objects,angleDegrees,action='crea
   validateConstraintGroup(stages,constraints);
   if(kind==='midpoint'){const [p,s]=objects;if(Math.abs(p.x-(s.a.x+s.b.x)/2)>1e-6||Math.abs(p.y-(s.a.y+s.b.y)/2)>1e-6||!projectedDirectionValid(s))fail('RESIDUAL','The solved point is not the two-coordinate midpoint.');}
   else if(orientation){
-   for(const c of constraints){const actual=c.objects.map(direction),wanted=Number(c.constants.angle)*Math.PI/180,angle=orientation.arity===1?actual[0]:actual[1]-actual[0],residual=Math.atan2(Math.sin(angle-wanted),Math.cos(angle-wanted));
-    if(!orientation.angles.includes(Number(c.constants.angle))||Math.abs(residual)>1e-8)fail('RESIDUAL','Actual endpoint directions differ from the admitted orientation branch.');
+   for(const c of constraints){const actual=c.objects.map(direction),wanted=angleFor(c)*Math.PI/180,angle=orientation.arity===1?actual[0]:actual[1]-actual[0],residual=Math.atan2(Math.sin(angle-wanted),Math.cos(angle-wanted));
+    if(Math.abs(residual)>1e-8)fail('RESIDUAL','Actual endpoint directions differ from the admitted orientation branch.');
    }
   }
   else for(let i=1;i<objects.length;i++){const a=objects[i-1],b=objects[i];if(![a,b].every(s=>projectedDirectionValid(s)&&s.params.t.get()>0))fail('ANGLE_DOMAIN','A solved segment lost its admitted direction.');const actual=Math.atan2(b.b.y-b.a.y,b.b.x-b.a.x)-Math.atan2(a.b.y-a.a.y,a.b.x-a.a.x),degrees=((actual*180/Math.PI)%360+360)%360;if(Math.abs(degrees-angleDegrees)>1e-6)fail('RESIDUAL','Solved endpoint directions differ from the requested angle group.');}
  };
- return{constraints,created,edited,changed:created.length+edited.length>0,apply(manager){for(const c of edited)c.updateConstant('angle',String(angleDegrees));for(const c of created)manager._add(c);},validate};
+ return{constraints,created,edited,angleFor,changed:created.length+edited.length>0,apply(manager){for(const c of edited)c.updateConstant('angle',String(angleDegrees));for(const c of created)manager._add(c);},validate};
 }
