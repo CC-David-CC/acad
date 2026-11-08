@@ -1,4 +1,5 @@
-import {admissionCause,causeForSolveStatus,withAdmissionCause,clearSolveValidationCause,setSolveValidationCause,getSolveValidationCause} from './admissionCause.mjs';
+import {createExactAngleZeroPolarFrames} from './exactAngleZeroPolarFrame';
+import {admissionCause,causeForSolveStatus,withAdmissionCause,failureCause,clearSolveValidationCause,setSolveValidationCause,getSolveValidationCause} from './admissionCause.mjs';
 import {prepare} from "./solver";
 import {clearSolveTermination,mergeSolveTerminations} from './solverTermination.mjs';
 import {Polynomial, POW_1_FN} from "./polynomial";
@@ -35,7 +36,7 @@ export class AlgNumSubSystem {
   // Real source-owned rows which have no numerical variables after reduction.
   // Nonzero values never earn exact redundancy; complete original equations
   // receive the same final dimensional policy in human and Worker admission.
-  deferredConstantRows = new Map<AlgNumConstraint,{rows:Polynomial[],validation:any}>();
+  deferredConstantRows = new Map<AlgNumConstraint,{rows:Polynomial[],validation:any,verify?:()=>void}>();
   substitutedParams = new Map();
   substitutionOrder = [];
 
@@ -589,6 +590,7 @@ export class AlgNumSubSystem {
 
     const polynomialCounts = new Map();
     const redundantCounts = new Map();
+    const polarFrames = createExactAngleZeroPolarFrames(this);
     // Rebuilt for this retained/trial system, including active redundant
     // direction requirements. A current value alone is not a certificate.
     const nonzeroDirectionParams = new Set();
@@ -623,11 +625,14 @@ export class AlgNumSubSystem {
     this.validConstraints(c => {
       this.rejectionCauses.delete(c);
       let i = this.polynomials.length;
+      const firstOriginalRow = i;
       c.collectPolynomials(this.polynomials);
       polynomialCounts.set(c, this.polynomials.length - i);
       for (; i<this.polynomials.length; i++) {
         const polynomial = this.polynomials[i];
         this.polyToConstr.set(polynomial, c);
+        // Capture untouched original rows BEFORE fixed/external reductions.
+        polarFrames.capture(c,polynomial,i-firstOriginalRow);
 
         c.objects.forEach(obj => {
           if (!this.owns(obj)) {
@@ -651,7 +656,28 @@ export class AlgNumSubSystem {
 
     while (requirePass) {
       requirePass = false;
-      for (let i = 0; i < this.polynomials.length; ++i) {
+      // A fixed native frame must be certified before a LATER scalar row can
+      // take a pivot which the earlier nonlinear consumer actually implies.
+      // Proofs use original active equations and exact owned endpoint values;
+      // no current residual or small-angle snap is a certificate.
+      const polarFrame = polarFrames.next(this.polynomials,this.eliminatedParams,this.substitutedParams,approximateParams);
+      if (polarFrame) {
+        polarFrame.apply();
+        polarFrame.angle.set(0);
+        polarFrame.length.set(polarFrame.value);
+        this.eliminatedParams.set(polarFrame.angle,0);
+        this.eliminatedParams.set(polarFrame.length,polarFrame.value);
+        const previous=this.deferredConstantRows.get(polarFrame.constraint),verify=previous?.verify;
+        // These Polar rows are USED by the certificate, not redundant. Keep
+        // their original registered equation/domain and branch proof for the
+        // final human/Worker admission check after all back-substitution.
+        this.deferredConstantRows.set(polarFrame.constraint,{
+          rows:[...(previous?.rows||[]),...polarFrame.rows],validation:null,
+          verify:()=>{if(verify)verify();polarFrame.verify();}
+        });
+        requirePass = true;
+      }
+      for (let i = 0; !requirePass && i < this.polynomials.length; ++i) {
         const polynomial = this.polynomials[i];
         if (!polynomial) {
           continue;
@@ -1016,6 +1042,9 @@ export class AlgNumSubSystem {
     clearSolveTermination(this.solveStatus);
     clearSolveValidationCause(this.solveStatus);
     const projected=this.projectedRelations();
+    // This finite derived frame is published only with its retained original
+    // proof. Other rough-solve policies and stopping thresholds are unchanged.
+    if(rough&&[...this.deferredConstantRows.values()].some(row=>row.verify))rough=false;
     // Rough iterations can leave a valid direction's endpoint/polar values
     // temporarily inconsistent. Use the precise solve before enforcing the
     // directional domain rather than treating ordinary dragging as collapse.
@@ -1120,7 +1149,8 @@ export class AlgNumSubSystem {
         }
       }
       let cause = null;
-      if (constraint.params.some(p => !Number.isFinite(p.get()))) cause = admissionCause('nonfinite-result');
+      if(record.verify)try{record.verify();}catch(error){cause=failureCause(error)||admissionCause('retained-validation-failure');}
+      if (!cause && constraint.params.some(p => !Number.isFinite(p.get()))) cause = admissionCause('nonfinite-result');
       if (!cause) try {
         assertRegisteredConstraintDomain(constraint);
         if (directionalRelation(constraint) && !directionalRelationValid(constraint)) throw Error('Invalid original relation domain');
@@ -1129,7 +1159,7 @@ export class AlgNumSubSystem {
       const profile = registeredResidualProfile(constraint,values);
       if (!cause && (values.some(value => !Number.isFinite(value)) || profile.residuals.some(value => !Number.isFinite(value)))) cause = admissionCause('nonfinite-result');
       if (!cause && profile.residuals.some((value,i) => Math.abs(value) > profile.tolerances[i])) cause = admissionCause('original-residual-failure');
-      updated.set(constraint,{rows:record.rows,validation:Object.freeze({basis:'original-equations',
+      updated.set(constraint,{...record,validation:Object.freeze({basis:'original-equations',
         values:Object.freeze(values),residuals:Object.freeze([...profile.residuals]),units:Object.freeze([...profile.units]),
         tolerances:Object.freeze([...profile.tolerances]),state:cause?'rejected':'accepted',cause})});
       if (cause) failures.push({constraint,cause});
