@@ -1,5 +1,27 @@
 # Browser CAD command examples
 
+[Four-corner plate recipe](four-corner-plate.mjs) is the exact helper from qualified
+whole workflow ACAD6511510 (actualCore0133698/Desktop68d66e4f8). On a normal
+fresh project, pass the existing document-bound agent and an actually advertised,
+explicitly staged supported OCC engine revision:
+
+```js
+const recipe = createFourCornerPlateExample(agent, engineRevision);
+const part = await recipe.plate();
+part.corners = await recipe.createCorners(part);
+```
+
+Import `createFourCornerPlateExample` from this module. It creates a real
+100×50×20 plate, a centered D10 hole and four source-bound D4 corner holes as
+one semantic operation. Actual opaque source/region/body IDs are discovered.
+The complete test immediately undoes/redoes the CORNER creation, changes source/
+depth/diameter/offsets, checks343Native material/void points and independently
+checks three.cad Save/server/fresh Open cycles. Ordinary request validation is
+machine-readable; unsupported builds never trigger an automatic fallback.
+Normal Save/Open stays separate from this helper. No broader hole types or
+all-engine/physical-manufacturing/Gate1 completion claim follows.
+
+
 [Projected distance recipe](projected-distance.mjs) is the exact public-command
 helper used by qualified complete workflow ACAD4325ef1, actual
 Core0133698/Desktop95d8023b0. Start with a normal fresh project and its existing
