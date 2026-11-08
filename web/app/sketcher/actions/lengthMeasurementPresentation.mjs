@@ -4,28 +4,29 @@ import {sketchMutationEpoch} from '../sketchMutationEpoch.mjs';
 const rulerIndexes=new WeakMap(),constraintIndexes=new WeakMap();
 const MAX_RULERS=10000,MAX_CONSTRAINTS=100000;
 export const sameLengthPair=(d,s)=>(d.a===s.a&&d.b===s.b)||(d.a===s.b&&d.b===s.a);
+const ownedStage=(viewer,stage)=>!!stage&&stage.viewer===viewer&&(stage===viewer.parametricManager.groundStage||viewer.parametricManager.stages.includes(stage));
 function localSegment(viewer,pair){
  const s=pair.a?.parent;
  if(!s||s!==pair.b?.parent||s.TYPE!=='Segment'||!sameLengthPair(pair,s))return{segment:null,unresolved:false};
  // Segment constructs its own endpoints; a coincident point on a different
  // Segment has a different parent. No coordinate/ID matching or scene search.
  const stage=s.stage;
- if(s.parent||!s.children.has(s.a)||!s.children.has(s.b)||s.a.parent!==s||s.b.parent!==s||!stage||stage.viewer!==viewer||!stage.objects.has(s))return{segment:null,unresolved:true};
+ if(s.parent||!s.children.has(s.a)||!s.children.has(s.b)||s.a.parent!==s||s.b.parent!==s||!ownedStage(viewer,stage)||!stage.objects.has(s))return{segment:null,unresolved:true};
  return{segment:s,unresolved:false};
 }
 function rulers(viewer){
  const layer=viewer?.dimLayer,objects=layer?.objects,epoch=sketchMutationEpoch();
  if(!Array.isArray(objects)||objects.length>MAX_RULERS)return null;
  let index=rulerIndexes.get(viewer);
- if(index&&index.epoch===epoch&&index.layer===layer&&index.objects===objects&&index.length===objects.length)return index;
+ if(index&&index.epoch===epoch&&index.manager===viewer.parametricManager&&index.layer===layer&&index.objects===objects&&index.length===objects.length)return index;
  const members=new Set(),bySegment=new WeakMap();
  for(const d of objects){
   if(d.TYPE!=='LinearDimension'||d.isAnnotation)continue;
-  if(d.layer!==layer||!d.stage||d.stage.viewer!==viewer||!d.stage.objects.has(d))continue;
+  if(d.layer!==layer||!ownedStage(viewer,d.stage)||!d.stage.objects.has(d))continue;
   members.add(d);const local=localSegment(viewer,d);if(!local.segment)continue;
   const s=local.segment;bySegment.set(s,bySegment.has(s)?null:d);
  }
- index={epoch,layer,objects,length:objects.length,members,bySegment};rulerIndexes.set(viewer,index);return index;
+ index={epoch,manager:viewer.parametricManager,layer,objects,length:objects.length,members,bySegment};rulerIndexes.set(viewer,index);return index;
 }
 function membership(system){
  const rows=system?.allConstraints,epoch=sketchMutationEpoch();
