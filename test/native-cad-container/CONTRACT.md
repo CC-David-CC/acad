@@ -43,3 +43,17 @@ python3 test/native-cad-container/check.py EVIDENCE --desktop-source DESKTOP_SOU
 The independent Python standard-library ZIP/struct/zlib/hash reader validates exact local/central/descriptors/CRC/SHA/manifest/root/source bytes and compressed-span reuse. It then reuses the separately maintained independent typed source, analytic STEP-subset, core3MF mesh/XML and SVG/XML oracles. No production codec/validator/kernel is imported. The standard-library mutator is negative-file preparation, never a successful engine fixture.
 
 The generic original-rectangle/pattern/fillet family is supported by the unchanged history envelope, but a new `.cad` rerun of that additional chain remains explicit acceptance work; the typed artifact driver is not relabeled that pattern proof. No blanket N8/Gate1 completion claim precedes real composed runtime results.
+
+
+## Fixture pin recording after a composed normal build
+
+`pin-fixture.py` records actual builder output and selected served host bytes;
+it performs no geometry qualification. Supply `--apps`, clean `--core-source`
+(the actual built checkout), clean `--desktop-source`, `--previous-receipt`
+(a frozen runtime receipt such as orientationR11), and a fresh `--output`.
+It retains the previous explicit file selection while resolving changed Worker
+content-hash filenames against the actual new manifest, adds newly emitted
+`authoredHistoryState.mjs` modules, and streams actual selected bytes for SHA
+verification. It never copies old digests into the new result. Select CAD/Files
+by actual app IDs, not manifest array order. A recipe/manifest or source HEAD
+alone cannot establish that the CAD workflow or geometric accuracy passed.
