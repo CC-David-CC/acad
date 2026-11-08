@@ -39,8 +39,9 @@ implementation. Assemblies E17/C10 remain Gate2.
 Orientation/archive qualifications remain on Core32ae9c8/Desktop60ec30ee9;
 roles/history/C09 qualified scopes are on Core33b8aa3/Desktop4c4862b7b. They are
 not one final all-Gate1 signoff. Source fixes alone are not qualification.
-C08 custom source-frame work is
-isolated and excluded from this repair batch. A four-of-four batch result would
+C08 custom source-frame work was
+excluded from that qualified repair batch and is now the next source candidate.
+A four-of-four batch result does
 not close the remaining finite competencies or the final beta/agent delivery.
 
 Repair composition source review:168c28a carries7ac46c53f5141e6fcc00ca32effddd9ac96d7d73
@@ -105,9 +106,13 @@ Next source composition, not execution evidence:
   canonical row is lost. Full C09 quantity/units/refusal/travel/native workflow
   is prepared, not run. Additional malformed-ruler controls are source-only.
 
-C08 phase-A source remains isolated at36cd24a with Desktopcb821428e, including
-root registration/shared validation-code transport. It is excluded from the next
-repair build; required native-solid-face attachment phaseB remains open.
+C08 phase-A is now composed onto the current baseline: integration packet
+bb7e9cd3f786c7506f6daf66ffd5b497f577b979/0a61ba7d15e4f35541381445186c711fc752c27d
+merged as Core4e5023124842a84caf5c7bd16b585f92a423127d and
+Desktop9fd652f1b9a0d4b3a30a9b47c8e04f146ee1e177. Original source packets remain
+available. This is source review/integration only; next normal build and whole
+public frame workflow remain required. Current qualified runtime stays33b8aa3.
+Native-solid-face attachment phaseB remains open, not implemented by phaseA.
 
 Latest executed composition: normal Core33b8aa35a8dec970b4a02d440024e7ba3efee8df
 build and actual fixture/pin recording both completed successfully. Producing logs
