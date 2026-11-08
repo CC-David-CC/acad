@@ -106,8 +106,9 @@ curve or synthetic full-circle pair of endpoints.
 
 `fragment` exact fields:
 `{center:[u,v],a:[u,v],b:[u,v],first,last,orientation}` for ACTUAL Native
-`p(t)=center+a*cos(t)+b*sin(t)` on the original parameter interval; orientation
-FORWARD/REVERSED. Retain support phase/location, long arc and actual seam
+`p(t)=center+a*cos(t)+b*sin(t)` on the original parameter interval; canonical
+fragment orientation is FORWARD (increasing original parameter). Retain support
+phase/location, long arc and actual seam
 fragmentation. Never assume Native parameter equals source phase, shorten,
 sample or silently merge topological edges. Max2 fragments/span,16 total;
 first/last finite ordered interval of length≤2π, vectors finite domain-qualified.
@@ -115,12 +116,23 @@ Apply actual TopLoc before projection into the source-local orthonormal frame.
 
 `cells`:1..3 records
 `{mask,area,bounds:{min:[u,v],max:[u,v]},outer:[use...],holes:[[use...],...]}`.
-Use is `{span:slot,orientation}`, a bounded response-local slot only. Loop≤8
+Use is exactly `{span:slot,fragment:slot,orientation}`: both response-local
+indices are validated against actual spans/fragments. Loop≤8
 uses, holes≤1 for a strict annulus. OuterCCW/holesCW in source basis with actual
 fragment/use traversal. Native observed faces/wires, not approximating polygons.
 Positive area and complete directed interval/union/source coverage must also
 match independent source equations. Enumeration order is not persistent ID.
 Local area is diagnostic Native measurement, not another authoritative quantity.
+
+Orientation composition is explicit: underlying Native curve first→last is
+canonical fragment FORWARD, without altering its phase/interval. The Native
+wire occurrence's effective traversal in the source frame is retained ONLY in
+use.orientation. FORWARD visits first→last; REVERSED last→first. No multiplication
+by a second fragment reversal. Normalize any local face/wire orientation only
+with the corresponding use factor and order carried through; verify the full
+connected wire and outerCCW/holeCW. Preserve every actual seam occurrence and
+its fragment index. This is derived-record normalization, not source/BRep welding,
+silent interval merging, or public/persisted fragment identity.
 
 ## Create result / actual membership
 
