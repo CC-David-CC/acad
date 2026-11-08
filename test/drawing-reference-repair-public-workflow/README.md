@@ -64,9 +64,13 @@ The exact retained MFG Native family is:
 Actual runtime pins and advertised source/build/selection APIs must match. No
 Native/default/library change or alternative easier backend is introduced.
 `example.mjs` exports `createDrawingReferenceRepairExample(agent, build)`, where
-`agent.execute`, `agent.inspect` and readonly `agent.capture` are the existing
-actual public harness operations. It authors the part, discovers the genuine
-references and supplies drawing/source/depth/hole operations; it owns no model,
+`agent.execute` and `agent.inspect` use only registered public command operations.
+The actual edge feature/index comes from `inspect-edge-treatment-history`; its
+operation schema tag comes from public `inspect.operations[index]` with explicit
+nontruncation/current feature/build/parent checks. The declared tag is
+`WORKER_SOLID_EDGE_TREATMENT_V1`, not a guessed opaque identity. The recipe has no
+private capture requirement. It authors the part, discovers the genuine references
+and supplies drawing/source/depth/hole operations; it owns no model,
 cache, journal or successful private author.
 
 The same definition has a420×297mm sheet, scale1:1, top/front/right principal
@@ -201,6 +205,12 @@ python3 test/drawing-reference-repair-public-workflow/check.py \
   /absolute/new-drawing-repair-evidence-r1 \
   > /absolute/new-drawing-repair-evidence-r1/independent-oracle.json
 ```
+
+The original source checkpoint f7c1c361 is retained in Git. This follow-up removes
+its authoring-only use of private `h.capture` for the operation tag; private state
+captures remain ONLY readonly regression observations. No workflow, geometric
+criteria, tolerances, Native class count, oracle or persistence expectation is
+changed by that public-boundary correction.
 
 All executing acceptance/helper/independent-reader bytes and mounted assets are
 pinned. Raw replies precede assertions; first failures remain failures. Every
