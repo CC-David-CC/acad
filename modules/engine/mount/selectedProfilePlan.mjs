@@ -1,3 +1,4 @@
+import {captureArrangementBoundary} from '../extrusion/selectedArrangementDescriptor.mjs';
 // Common selected-region geometry contract. No sketch solving, document writes,
 // native allocation or implicit region selection takes place here.
 const fail=(code,message)=>{const e=new Error(message);e.code=code;throw e;};
@@ -21,7 +22,9 @@ function captureRequest(request,version,maxLoop,maxTotal,maxHoles){
 function captureGeometry(frame,inputRegion,version,maxLoop,maxTotal,maxHoles){
  const r={};
  const f=record(frame,['origin','x','y','z']);r.frame=Object.fromEntries(Object.entries(f).map(([key,v])=>[key,vector(v,3)]));
- const region=record(inputRegion,['id','outer','holes']),ids=new Set();let total=0;
+ const arranged=Object.getOwnPropertyDescriptor(inputRegion||{},'boundaryProvenance');
+ if(arranged&&version!==3)fail('UNSUPPORTED_PROFILE','Arrangement cells require an explicit V3 polygon path.');
+ const region=record(inputRegion,['id','outer','holes',...(arranged?['boundaryProvenance']:[])]),ids=new Set();let total=0;
  const loop=value=>array(value,1,maxLoop).map(value=>{
   const kind=Object.getOwnPropertyDescriptor(value||{},'kind');if(!kind?.enumerable||!Object.hasOwn(kind,'value'))fail('INVALID_REQUEST','Profile curves require a data kind.');
   if(!['segment','circle'].includes(kind.value))fail('UNSUPPORTED_PROFILE',version===3?'Only full circles and straight segments are supported.':'Only full circles and rectangle segments are currently supported.');
@@ -30,7 +33,8 @@ function captureGeometry(frame,inputRegion,version,maxLoop,maxTotal,maxHoles){
   if(c.kind==='segment'){c.a=vector(c.a,2);c.b=vector(c.b,2);}else{c.center=vector(c.center,2);if(typeof c.radius!=='number'||!Number.isFinite(c.radius)||c.radius<=0||c.radius>1e6)fail('INVALID_PROFILE','Circle radius must be positive and bounded.');}
   return c;
  });
- r.region={id:id(region.id,8192),outer:loop(region.outer),holes:array(region.holes,0,maxHoles).map(loop)};return r;
+ r.region={id:id(region.id,8192),outer:loop(region.outer),holes:array(region.holes,0,maxHoles).map(loop)};
+ if(arranged)r.region.boundaryProvenance=captureArrangementBoundary(region.boundaryProvenance,r.region);return r;
 }
 export function captureSelectedProfileRequest(request){return captureRequest(request,2,24,24,8);}
 export function capturePolygonProfileRequest(request){return captureRequest(request,3,512,4096,128);}

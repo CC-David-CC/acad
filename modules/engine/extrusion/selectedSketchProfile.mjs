@@ -6,6 +6,7 @@ import {deriveAuthoredRegions} from '../../workbenches/modeler/features/extrude/
 import {prepareSelectedProfileExtrusion} from '../mount/selectedProfilePlan.mjs';
 import {partitionSelectedSegments,analyzeIsolatedOpenComponents} from './isolatedOpenProfileComponents.mjs';
 import {preparePolygonProfileExtrusion,preparePolygonProfileFace} from '../mount/polygonProfilePlan.mjs';
+import {deriveRectangleArrangement} from './rectangularArrangement.mjs';
 
 const fail=(code,message)=>{throw Object.assign(new Error(message),{code});};
 const fields=(value,keys)=>{
@@ -90,6 +91,11 @@ async function extractSource({r,frame,faceOnly=false},allowIsolatedOpen=false){
   if(r.profileVersion===3)return loop;
   return loop.kind==='circle'?{kind:'circle',x:loop.center[0],y:loop.center[1],r:loop.radius}:{kind:'rectangle',minX:loop.minX,maxX:loop.maxX,minY:loop.minY,maxY:loop.maxY};
  });
+ // A derived arrangement is a different source contract, not a relaxed
+ // containment classification. Only this exact eight-Segment extrusion slice
+ // qualifies; source-face consumers retain their whole-curve contracts.
+ const arrangement=mixed&&!open.length&&segments.length===8?await deriveRectangleArrangement({faceId:r.faceId,loops,qualifiedToLocal,clearanceMm:0.0001}):null;
+ if(arrangement)return{r,frame,regions:arrangement.cells,byIds:new Map(),qualifiedToLocal,sketch,sourceAnalysis:arrangement.sourceAnalysis,arrangement};
  const sourceAnalysis=mixed?analyzeIsolatedOpenComponents({loops,profiles,open,qualifiedToLocal}):null;
  let regions;try{regions=deriveAuthoredRegions(r.faceId,loops.map(loop=>loop.map(c=>c.id)),profiles,r.profileVersion===3?3:2);}catch(error){fail('UNSUPPORTED_REGION_TOPOLOGY',error.message);}
  const byIds=new Map(loops.map(loop=>[JSON.stringify(loop.map(c=>c.id).sort()),loop]));
@@ -110,8 +116,9 @@ export function prepareSolvedPolygonSourceFace(context,regionId){
 }
 export function describeSolvedPolygonSourceRegion(context,region){return describeSelectedRegion(region,context.qualifiedToLocal);}
 
-function prepareRegion({r,frame,regions,byIds},regionId){
+function prepareRegion({r,frame,regions,byIds,arrangement},regionId){
  if(invalidRegionId(regionId))invalidIdentity();
+ if(arrangement){const cell=arrangement.cells.find(c=>c.regionId===regionId);if(!cell)fail('STALE_REGION','The selected arrangement cell is no longer available; select it again.');return preparePolygonProfileExtrusion({op:'solid.profile.extrude',version:3,unit:r.unit,frame,depth:r.depth,region:{id:regionId,outer:cell.outer,holes:[],boundaryProvenance:{version:1,kind:'axis-rectangle-arrangement',faceId:r.faceId,descriptor:cell.descriptor}}});}
  const region=regions.find(value=>'sketch-region:'+JSON.stringify(value)===regionId);
  if(!region)fail('STALE_REGION','The selected boundary membership changed; select the region again.');
  const request={op:'solid.profile.extrude',version:r.profileVersion===3?3:2,unit:r.unit,frame,depth:r.depth,region:{id:regionId,outer:byIds.get(JSON.stringify(region.outer)),holes:region.holes.map(ids=>byIds.get(JSON.stringify(ids)))}};
@@ -130,7 +137,7 @@ export async function prepareSolvedSelectedRegion(input){
 export async function inspectSolvedSelectedRegions(input){
  const context=await extractSource(capture(input,false),true),r=context.r;
  const regions=context.regions.map(region=>{
-  const regionId='sketch-region:'+JSON.stringify(region),descriptor=describeSelectedRegion(region,context.qualifiedToLocal);
+  const regionId=context.arrangement?region.regionId:'sketch-region:'+JSON.stringify(region),descriptor=context.arrangement?region.descriptor:describeSelectedRegion(region,context.qualifiedToLocal);
   try{prepareRegion(context,regionId);return{regionId,support:'supported',reason:null,descriptor};}
   catch(error){
    if(!['INVALID_REQUEST','INVALID_FRAME','INVALID_PROFILE','UNSUPPORTED_PROFILE','OPEN_OR_AMBIGUOUS_PROFILE'].includes(error?.code))throw error;

@@ -49,6 +49,7 @@ function sourceOrigins(selection:any,featureId:number){
  const plan=data(selection,'plan');
  if(!plan||!Object.isFrozen(plan)||data(plan,'version')!==2||data(plan,'featureId')!==featureId||data(plan,'scope')!=='authored-source'||Object.prototype.hasOwnProperty.call(plan,'regionId'))unavailable();
  const source=data(plan,'source'),contexts=data(plan,'sourceContexts');
+ for(const kind of ['edges','faces']){const rows=data(plan,kind);if(!Array.isArray(rows)||!Object.isFrozen(rows))unavailable();if(rows.some(row=>Object.prototype.hasOwnProperty.call(row,'boundaryRef')||Object.prototype.hasOwnProperty.call(row,'incidentBoundaryRefs')))fail('UNSUPPORTED_SOURCE','Derived arrangement spans are not the canonical authored rectangle hole source.');}
  if(!['prism-construction-history','kernel-operation-history'].includes(source)||!Array.isArray(contexts)||!Object.isFrozen(contexts)||contexts.length<1||contexts.length>32||Reflect.ownKeys(contexts).length!==contexts.length+1)unavailable();
  const seen=new Set(),origins:any[]=[];
  for(let i=0;i<contexts.length;i++){

@@ -282,6 +282,7 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
   async function extrudeSelectedProfile(request,options={}) {
     validOptions(options);if(!selectedProfile)throw err('UNSUPPORTED_OPERATION','Selected-profile extrusion is not bound by this mount');
     let copied;try{copied=captureSelectedProfile(request);}catch(e){throw err(e.code||'INVALID_REQUEST',e.message);}
+    if(copied.region.boundaryProvenance&&!booleanHistory)throw err('UNSUPPORTED_PROFILE','Arrangement cells require the recorded selection-plan-v2 runtime');
     if(options.signal?.aborted)throw err('CANCELLED','Engine request cancelled');
     const token=reserve(),response=await send({kind:'selected-profile-extrude',token,request:copied},'result',options.signal);
     let binding;try{binding=captureWorkerReplyRecord(response.binding);}catch{shutdown('ENGINE_FAILURE','Invalid selected-profile binding');throw err('ENGINE_FAILURE','Invalid selected-profile binding');}
@@ -291,6 +292,8 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     const result=solidResult('solid.profile.extrude',token,v);
     if(selectedProfileVersion===3){
       const p=response.constructionProvenance;
+      const boundaryKind=p?.status==='available'?Object.getOwnPropertyDescriptor(p.sourceBinding||{},'boundaryKind'):undefined;
+      if(p?.status==='available'&&(copied.region.boundaryProvenance?(!boundaryKind?.enumerable||!Object.hasOwn(boundaryKind,'value')||boundaryKind.value!=='source-spans'):boundaryKind!==undefined)){shutdown('ENGINE_FAILURE','Construction source-boundary kind changed');throw err('ENGINE_FAILURE','Construction source-boundary kind changed');}
       if(!p||!(p.status==='available'&&p.data?.scope==='response-local'&&p.data.persistentIds===false&&p.sourceBinding?.scope==='solved-request'&&p.sourceBinding.regionId===copied.region.id||p.status==='unavailable'&&['PROFILE_PROVENANCE_UNSUPPORTED','PROFILE_PROVENANCE_RESOURCE_LIMIT','PROFILE_PROVENANCE_FAILED'].includes(p.reason))){shutdown('ENGINE_FAILURE','Invalid construction provenance binding');throw err('ENGINE_FAILURE','Invalid construction provenance binding');}
       result.constructionProvenance=p;
     }

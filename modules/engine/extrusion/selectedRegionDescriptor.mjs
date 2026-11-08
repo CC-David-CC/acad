@@ -1,4 +1,5 @@
 // Small metadata contract only. No geometry, topology extraction or CAD handles.
+import {isArrangementDescriptor,captureArrangementDescriptor,arrangementRegionIdentity,captureArrangementAnalysis,arrangementPolicy} from './selectedArrangementDescriptor.mjs';
 const MAX_SOURCE_OBJECTS=4096,MAX_CURVES=4096,MAX_LOOPS=128,MAX_ID=256,MAX_RESPONSE=65536;
 const fail=message=>{throw Object.assign(Error(message),{code:'INVALID_RESPONSE'});};
 function data(value,keys){
@@ -26,16 +27,18 @@ export function describeSelectedRegion(region,qualifiedToLocal){
  return Object.freeze({outerCurveIds:Object.freeze(region.outer.map(local)),holeCurveIds:Object.freeze(region.holes.map(loop=>Object.freeze(loop.map(local))))});
 }
 function descriptor(value,faceId,sourceIds,charge){
+ if(isArrangementDescriptor(value))return captureArrangementDescriptor(value,sourceIds);
  const d=data(value,['outerCurveIds','holeCurveIds']),seen=new Set();let total=0;
  const loop=value=>{const ids=array(value,512);if(!ids.length||(total+=ids.length)>MAX_CURVES)fail('Region boundary curve count exceeds its limit.');for(let i=0;i<ids.length;i++){const id=ids[i];if(typeof id!=='string'||!id||id.length>MAX_ID||qualifySourceCurveId(faceId,id).length>MAX_ID||!sourceIds.has(id)||seen.has(id)||i&&ids[i-1]>=id)fail('Region curve IDs must be unique canonical ordinary source curves.');seen.add(id);charge(id);}return Object.freeze(ids);};
  const outerCurveIds=loop(d.outerCurveIds),rawHoles=array(d.holeCurveIds,MAX_LOOPS-1),holeCurveIds=rawHoles.map(loop);let previous=null;
  for(const ids of holeCurveIds){const key=JSON.stringify(ids.map(id=>qualifySourceCurveId(faceId,id)));if(previous!==null&&previous>=key)fail('Region holes must have canonical source ordering.');previous=key;}
  return Object.freeze({outerCurveIds,holeCurveIds:Object.freeze(holeCurveIds)});
 }
-function regionIdentity(faceId,d){return 'sketch-region:'+JSON.stringify({faceId,outer:d.outerCurveIds.map(id=>qualifySourceCurveId(faceId,id)),holes:d.holeCurveIds.map(ids=>ids.map(id=>qualifySourceCurveId(faceId,id)))});}
+function regionIdentity(faceId,d){return isArrangementDescriptor(d)?arrangementRegionIdentity(faceId,d):'sketch-region:'+JSON.stringify({faceId,outer:d.outerCurveIds.map(id=>qualifySourceCurveId(faceId,id)),holes:d.holeCurveIds.map(ids=>ids.map(id=>qualifySourceCurveId(faceId,id)))});}
 // Metadata admission only. The Worker owns exact graph/self-contact and
 // conservative geometry proof; this census prevents omitted/invented IDs.
 function captureSourceAnalysis(value,sourceIds,regions,charge){
+ if(Object.getOwnPropertyDescriptor(value||{},'policy')?.value===arrangementPolicy)return captureArrangementAnalysis(value,sourceIds,regions,charge);
  const r=data(value,['version','policy','clearanceMm','closedComponents','openComponents']);
  if(r.version!==1||r.policy!=='v3-extrusion-isolated-open-chains'||r.clearanceMm!==0.0001)fail('Unknown selected-source component policy.');
  const seen=new Set(),closed=new Map();

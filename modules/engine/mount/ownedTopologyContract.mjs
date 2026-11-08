@@ -1,3 +1,4 @@
+import {captureArrangementBoundary} from '../extrusion/selectedArrangementDescriptor.mjs';
 // Worker-side bounded observations; indices are response-local, never IDs.
 const fail=()=>{throw Object.assign(Error('Invalid native topology observation'),{code:'ENGINE_FAILURE'});};
 const record=(v,keys)=>{
@@ -67,14 +68,16 @@ export function validatePrismProvenance(value,topology,prepared){
 export function bindPrismSourceSlots(value,prepared){
  if(value.status!=='available')return value;
  const curves=[prepared.request.region.outer,...prepared.request.region.holes];
+ const boundary=prepared.request.region.boundaryProvenance?captureArrangementBoundary(prepared.request.region.boundaryProvenance,prepared.request.region):null;
+ const spans=boundary?new Map(boundary.descriptor.outerBoundaryRefs.map(r=>[r.id,r])):null;
  const equal=(a,b)=>a[0]===b[0]&&a[1]===b[1];
  const nativeSlotBindings=prepared.loops.map((loop,i)=>{
   if(loop.kind==='circle')return{loop:i,edges:[{source:0,curveId:curves[i][0].id,nativeReversed:false}],vertices:[]};
   const edges=loop.vertices.map((a,j)=>{
    const b=loop.vertices[(j+1)%loop.vertices.length],matches=curves[i].filter(c=>c.kind==='segment'&&(equal(c.a,a)&&equal(c.b,b)||equal(c.a,b)&&equal(c.b,a)));
-   if(matches.length!==1)fail();const c=matches[0];return{source:j,curveId:c.id,nativeReversed:!equal(c.a,a)};
+   if(matches.length!==1)fail();const c=matches[0];if(spans){if(!spans.has(c.id))fail();return{source:j,boundaryRef:spans.get(c.id),nativeReversed:!equal(c.a,a)};}return{source:j,curveId:c.id,nativeReversed:!equal(c.a,a)};
   });
-  return{loop:i,edges,vertices:edges.map((_,j)=>({source:j,incidentCurveIds:[edges[(j+edges.length-1)%edges.length].curveId,edges[j].curveId].sort()}))};
+  return{loop:i,edges,vertices:edges.map((_,j)=>spans?{source:j,incidentBoundaryRefs:[edges[(j+edges.length-1)%edges.length].boundaryRef,edges[j].boundaryRef].sort((a,b)=>a.id<b.id?-1:1)}:{source:j,incidentCurveIds:[edges[(j+edges.length-1)%edges.length].curveId,edges[j].curveId].sort()})};
  });
- return{...value,sourceBinding:{scope:'solved-request',regionId:prepared.request.region.id,nativeSlotBindings}};
+ return{...value,sourceBinding:{scope:'solved-request',regionId:prepared.request.region.id,nativeSlotBindings,...(boundary?{boundaryKind:'source-spans'}:{})}};
 }

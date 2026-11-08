@@ -71,7 +71,11 @@ export interface ExtrudeSelectedProfile {
  readonly region:Readonly<{id:string;outer:ReadonlyArray<ProfileCurve>;holes:ReadonlyArray<ReadonlyArray<ProfileCurve>>}>;
 }
 export interface ReadSolidMesh {readonly op:'solid.mesh.read';readonly version:1;readonly handle:TransientShapeHandle;}
-export interface ExtrudePolygonProfile extends Omit<ExtrudeSelectedProfile,'version'> {readonly version:3;}
+export interface SourceSpanReference {readonly kind:'source-span';readonly owners:readonly string[];readonly ends:readonly [Readonly<{incidentCurveIds:readonly string[]}>,Readonly<{incidentCurveIds:readonly string[]}>];}
+export interface ArrangementBoundaryReference {readonly id:string;readonly sourceSpan:SourceSpanReference;}
+export interface ArrangementCellDescriptor {readonly version:2;readonly kind:'axis-rectangle-arrangement-cell';readonly outerBoundaryRefs:readonly ArrangementBoundaryReference[];readonly holeBoundaryRefs:readonly [];readonly coveringSourceLoops:readonly (readonly string[])[];}
+export interface ArrangementBoundaryProvenance {readonly version:1;readonly kind:'axis-rectangle-arrangement';readonly faceId:string;readonly descriptor:ArrangementCellDescriptor;}
+export interface ExtrudePolygonProfile extends Omit<ExtrudeSelectedProfile,'version'|'region'> {readonly version:3;readonly region:ExtrudeSelectedProfile['region']&Readonly<{boundaryProvenance?:ArrangementBoundaryProvenance}>;}
 // Depth-free solved-region input. Authored history stores source/region/axis
 // identities and angle; this evaluated request and native handles are transient.
 export interface RevolveSelectedProfile extends Omit<ExtrudePolygonProfile,'op'|'version'|'depth'> {
@@ -128,6 +132,7 @@ export interface BoxConstructionSelectionContext {
 export interface SelectionDescriptorV2 {
  readonly id:string;readonly role:string;readonly geometry:string;readonly originFeatureId:number;
  readonly curveId?:string;readonly incidentCurveIds?:readonly [string,string];
+ readonly boundaryRef?:ArrangementBoundaryReference;readonly incidentBoundaryRefs?:readonly [ArrangementBoundaryReference,ArrangementBoundaryReference];
  readonly sourceEdgeId?:string;readonly kind?:'fillet'|'chamfer-equal';
 }
 export type SelectionDeletionEvidence=boolean|
@@ -175,9 +180,9 @@ export interface TopologyResult {readonly contractVersion:1;readonly op:'solid.t
 export interface PointClassificationResult {readonly contractVersion:1;readonly op:'solid.point.classify';readonly unit:'millimeter';readonly classification:'inside'|'outside'|'boundary'|'unknown';}
 export type ConstructionProvenance=
  Readonly<{status:'unavailable';reason:'PROFILE_PROVENANCE_UNSUPPORTED'|'PROFILE_PROVENANCE_RESOURCE_LIMIT'|'PROFILE_PROVENANCE_FAILED'}>|
- Readonly<{status:'available';data:Readonly<Record<string,unknown>>;sourceBinding:Readonly<{scope:'solved-request';regionId:string;nativeSlotBindings:ReadonlyArray<Readonly<{
-  loop:number;edges:ReadonlyArray<Readonly<{source:number;curveId:string;nativeReversed:boolean}>>;
-  vertices:ReadonlyArray<Readonly<{source:number;incidentCurveIds:readonly [string,string]}>>;
+ Readonly<{status:'available';data:Readonly<Record<string,unknown>>;sourceBinding:Readonly<{scope:'solved-request';regionId:string;boundaryKind?:'source-spans';nativeSlotBindings:ReadonlyArray<Readonly<{
+  loop:number;edges:ReadonlyArray<Readonly<{source:number;curveId:string;nativeReversed:boolean}>|Readonly<{source:number;boundaryRef:ArrangementBoundaryReference;nativeReversed:boolean}>>;
+  vertices:ReadonlyArray<Readonly<{source:number;incidentCurveIds:readonly [string,string]}>|Readonly<{source:number;incidentBoundaryRefs:readonly [ArrangementBoundaryReference,ArrangementBoundaryReference]}>>;
  }>>}>}>;
 export interface DisposeSolid {readonly op:'solid.dispose';readonly version:1;readonly handle:TransientShapeHandle;}
 export interface ExportOwnedSTEP {readonly op:'solid.step.export';readonly version:1;readonly unit:'millimeter';readonly handles:ReadonlyArray<TransientShapeHandle>;}

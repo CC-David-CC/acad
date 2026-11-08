@@ -447,7 +447,7 @@ async function readOwnedDrawingReferences(msg){
  const definition=drawingFactsAPI.captureDrawingDefinition(msg.definition),name=nameFor(msg.token);nameFor(msg.sourceToken);
  const target=selectedSelectionIndices.get(msg.token),source=selectedSelectionIndices.get(msg.sourceToken),sourceProfile=selectedSourceProfiles.get(msg.sourceToken);
  if(!target||target.featureId!==msg.producerFeatureId||definition.target.featureId!==msg.producerFeatureId||definition.target.engineRevision!==nativeRuntimeRevision)bad('Drawing target producer/runtime is not current');
- if(!sourceProfile||!source||source.featureId!==definition.datum.featureId||sourceProfile.region.id!==definition.datum.regionId)return drawingFactsAPI.unresolvedOwnedDrawingReferences(definition,'DRAWING_DATUM_UNAVAILABLE');
+ if(!sourceProfile||sourceProfile.region.boundaryProvenance||!source||source.featureId!==definition.datum.featureId||sourceProfile.region.id!==definition.datum.regionId)return drawingFactsAPI.unresolvedOwnedDrawingReferences(definition,'DRAWING_DATUM_UNAVAILABLE');
  const {validateOwnedTopology}=await import(new URL('./ownedTopologyContract.mjs',self.location.href)),topology=validateOwnedTopology(ownedJSON('_ReadOwnedTopologyV1',name));
  return drawingFactsAPI.resolveOwnedDrawingReferences({definition,topology,index:target.index,sourceProfile,sourceFeatureId:source.featureId,sourceRegionId:sourceProfile.region.id,cylinders:selectedDrawingCylinders.get(msg.token)||[]});
 }
@@ -606,7 +606,7 @@ self.onmessage = async event => {
       const method=selectedVersion===3?'_CreateSelectedProfileV3':'_CreateSelectedProfileV2';
       if(!safeOwnedMode||typeof Module[method]!=='function')bad('Native selected-profile capability unavailable');
       const planner=await import(new URL(selectedVersion===3?'./polygonProfilePlan.mjs':'./selectedProfilePlan.mjs',self.location.href));let prepared;
-      try{prepared=(selectedVersion===3?planner.preparePolygonProfileExtrusion:planner.prepareSelectedProfileExtrusion)(msg.request);}catch(e){self.postMessage({kind:'refused',seq:msg.seq,code:e?.code||'INVALID_REQUEST',error:String(e?.message||e)});return;}
+      try{prepared=(selectedVersion===3?planner.preparePolygonProfileExtrusion:planner.prepareSelectedProfileExtrusion)(msg.request);if(prepared.request.region.boundaryProvenance){if(!booleanHistoryMode)throw Object.assign(Error('Arrangement cells require selection-plan-v2 provenance.'),{code:'UNSUPPORTED_PROFILE'});const {verifyArrangementSpanKeys}=await import(new URL('../extrusion/selectedArrangementDescriptor.mjs',self.location.href));await verifyArrangementSpanKeys(prepared.request.region.boundaryProvenance);}}catch(e){self.postMessage({kind:'refused',seq:msg.seq,code:e?.code||'INVALID_REQUEST',error:String(e?.message||e)});return;}
       const name=allocateName(),{created,evidence}=createOwnedProfileResult(prepared,name,selectedVersion);
       let constructionProvenance;
       if(selectedVersion===3){
@@ -632,7 +632,7 @@ self.onmessage = async event => {
         if(provenance?.status==='available'){
           const {validateOwnedTopology}=await import(new URL('./ownedTopologyContract.mjs',self.location.href)),{createPrismSelectionIndex}=await import(new URL('./prismSelectionIndex.mjs',self.location.href)),{liftPrismSelectionIndexV2}=await import(new URL('./selectionLineageIndex.mjs',self.location.href));
           const topology=validateOwnedTopology(ownedJSON('_ReadOwnedTopologyV1',name));
-          try{index=liftPrismSelectionIndexV2({sourceIndex:createPrismSelectionIndex(msg.featureId,provenance,topology),featureId:msg.featureId,regionId:provenance.sourceBinding.regionId,topology});}
+          try{if(provenance.sourceBinding.boundaryKind==='source-spans'){const {createArrangedPrismSelectionIndexV2}=await import(new URL('./arrangedPrismSelectionIndex.mjs',self.location.href));index=createArrangedPrismSelectionIndexV2(msg.featureId,provenance,topology);}else index=liftPrismSelectionIndexV2({sourceIndex:createPrismSelectionIndex(msg.featureId,provenance,topology),featureId:msg.featureId,regionId:provenance.sourceBinding.regionId,topology});}
           catch(e){if(!['SELECTION_RESOURCE_LIMIT','SELECTION_UNAVAILABLE'].includes(e?.code))throw e;reason=e.code;}
         }
         selectedSelectionIndices.set(msg.token,{featureId:msg.featureId,index,reason:index?null:reason});

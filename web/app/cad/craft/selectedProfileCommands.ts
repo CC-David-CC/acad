@@ -13,6 +13,7 @@ import {captureSelectedProfileSolve} from 'workbenches/modeler/features/workerSe
 import {captureSketchFailure} from 'sketcher/constr/admissionCause.mjs';
 import {sketchRevision} from './sketchRevision.mjs';
 import {selectedProfileHistoryBudget} from 'engine/mount/selectedProfileBudget.mjs';
+import {admitArrangementRegionsForBuild} from 'engine/extrusion/selectedArrangementDescriptor.mjs';
 
 const OP='WORKER_SELECTED_PROFILE_EXTRUDE_V2',MAX_SOURCE=65536,MAX_RESPONSE=65536;
 function fail(code:string,message:string):never{throw Object.assign(Error(message),{code});}
@@ -96,7 +97,7 @@ export function createSelectedProfileCommands(ctx:any,submit:any,cancelEpoch:(ep
    const revision=crypto.randomUUID(),profile={unit:'millimeter',engine:'occ',...(job.profileVersion===3?{profileVersion:3}:{}),revision,sketchDigest:results[0].digest,faceId:args.faceId,frame:job.frame,depth:args.depth,sketchJSON:results[0].source},expected={revision,sketchDigest:profile.sketchDigest,faceId:args.faceId},verified=[];
    for(let i=0;i<2;i++){const result=await runPrismSemantic(assetPath(semanticWorker),{kind:'inspect-selected',profile},{signal:job.controller.signal,valid,timeoutMs:30000});job.current();verified.push(captureInspection(result,expected,results[0].curveIds,job.profileVersion));}
    if(JSON.stringify(verified[0])!==JSON.stringify(verified[1]))fail('INVALID_RESPONSE','Independent region discovery disagreed.');
-   job.current();return Object.freeze({revision:args.revision,faceId:args.faceId,sourceDigest:profile.sketchDigest,depth:args.depth,unit:'millimeter',engine:'occ',engineRevision:job.engineRevision,profileVersion:job.profileVersion,regions:verified[0].regions,...(verified[0].sourceAnalysis?{sourceAnalysis:verified[0].sourceAnalysis}:{})});
+   job.current();const regions=admitArrangementRegionsForBuild(verified[0].regions,requireSelectedProfileBuild('occ',job.engineRevision).selectionPlanVersion);return Object.freeze({revision:args.revision,faceId:args.faceId,sourceDigest:profile.sketchDigest,depth:args.depth,unit:'millimeter',engine:'occ',engineRevision:job.engineRevision,profileVersion:job.profileVersion,regions,...(verified[0].sourceAnalysis?{sourceAnalysis:verified[0].sourceAnalysis}:{})});
   }finally{inspecting--;job.dispose();}
  }
  async function createSelectedProfileExtrusion(input:any,rawOptions:any){

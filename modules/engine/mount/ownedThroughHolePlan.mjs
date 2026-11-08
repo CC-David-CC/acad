@@ -41,6 +41,7 @@ export function planOwnedThroughHoles(input){
  const args=exact(input,['request','sourceProfile','targetMetrics']),data=capture(args),request=captureOwnedHoleIntent(data.request);
  let prepared;try{prepared=preparePolygonProfileExtrusion(data.sourceProfile);}catch(error){if(error?.code==='INVALID_REQUEST')throw error;fail('UNSUPPORTED_PROFILE','The current source profile is outside the supported rectangle domain.');}
  const source=prepared.request,outer=prepared.loops[0];
+ if(source.region.boundaryProvenance)fail('UNSUPPORTED_PROFILE','A derived arrangement cell is not a qualified authored rectangle hole source.');
  if(request.sourceRegionId!==source.region.id)fail('STALE_SOURCE','The originating source region changed.');
  if(source.region.holes.length||outer.kind!=='polygon'||outer.vertices.length!==4||source.region.outer.length!==4)fail('UNSUPPORTED_PROFILE','A single four-segment rectangle with no source holes is required.');
  const vertices=outer.vertices,minX=Math.min(...vertices.map(p=>p[0])),maxX=Math.max(...vertices.map(p=>p[0])),minY=Math.min(...vertices.map(p=>p[1])),maxY=Math.max(...vertices.map(p=>p[1]));

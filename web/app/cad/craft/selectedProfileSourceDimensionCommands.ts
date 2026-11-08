@@ -4,6 +4,7 @@ import {captureDrivingDimensionIntent} from 'sketcher/headless/drivingDimensionT
 import {captureSketchFailure} from 'sketcher/constr/admissionCause.mjs';
 import {runPrismSemantic} from 'engine/extrusion/prismSemanticClient';
 import {captureSelectedRegionCurveIds,captureSelectedRegionInspection} from 'engine/extrusion/selectedRegionDescriptor.mjs';
+import {admitArrangementRegionsForBuild} from 'engine/extrusion/selectedArrangementDescriptor.mjs';
 import {captureSelectedProfileSolve} from 'workbenches/modeler/features/workerSelectedProfile/workerSelectedProfile.operation';
 import {requireSelectedProfileBuild,selectedProfileVersion} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {selectedProfileHistoryBudget} from 'engine/mount/selectedProfileBudget.mjs';
@@ -85,7 +86,7 @@ export function createSelectedProfileSourceDimensionCommands(ctx:any,submitPrepa
   if(solved[0].source!==solved[1].source||solved[0].digest!==solved[1].digest||solved[0].evidence!==solved[1].evidence)fail('INVALID_RESPONSE','Independent proposed source reconstructions disagree.');
   const revision=crypto.randomUUID(),profile={unit:'millimeter',engine:'occ',profileVersion:3,revision,sketchDigest:solved[0].digest,faceId:job.parameters.faceId,frame:job.frame,depth:job.parameters.depth,sketchJSON:solved[0].source},expected={revision,sketchDigest:profile.sketchDigest,faceId:profile.faceId},rows:any[]=[];
   for(let i=0;i<2;i++){const result=await runPrismSemantic(asset(semanticWorker),{kind:'inspect-selected',profile},{...job.solveOptions,timeoutMs:30000});job.current();rows.push(captureSelectedRegionInspection(result,expected,solved[0].curveIds,true));}
-  if(JSON.stringify(rows[0])!==JSON.stringify(rows[1]))fail('INVALID_RESPONSE','Independent proposed regions disagree.');await job.recheck();return{sourceDigest:profile.sketchDigest,regions:rows[0].regions,sourceAnalysis:rows[0].sourceAnalysis};
+  if(JSON.stringify(rows[0])!==JSON.stringify(rows[1]))fail('INVALID_RESPONSE','Independent proposed regions disagree.');await job.recheck();return{sourceDigest:profile.sketchDigest,regions:admitArrangementRegionsForBuild(rows[0].regions,requireSelectedProfileBuild('occ',job.parameters.engineRevision).selectionPlanVersion),sourceAnalysis:rows[0].sourceAnalysis};
  }
  async function proposed(a:any,opts:any){const job=begin(a,opts);try{
   await job.start();const inspected=await job.inspectMethod({revision:a.sourceRevision,faceId:job.parameters.faceId},{signal:job.solveOptions.signal,valid:job.solveOptions.valid});job.current();if(!inspected.dimensionTargets.some((r:any)=>r.constraintId===a.constraintId&&r.canEdit&&r.unit==='millimeter'))fail('INVALID_TARGET','Choose an actual supported driving source dimension.');
