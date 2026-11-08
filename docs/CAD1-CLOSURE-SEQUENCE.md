@@ -137,3 +137,13 @@ Principal Apply audit65bcf70 and pure capture62cbf2b are integrated but the
 helper remains unwired. Separate Apply implementation is in progress against
 the frozen PhaseB source checkpoint. Integration follows PhaseB qualification;
 no temporary accepted-tip hop or stale complete-model source basis is allowed.
+
+### Native-face R2 qualified exit
+
+Complete unchanged R2 on Coreeff8af0/Desktop719a4049a passes52records/19Native
+sets/95points/4native saves/5refusals/3discoveries/three fresh Opens and the
+independent source/frame/Native/ZIP oracle. Repair6e9 preserves fast-save
+dependencies; R1 remains frozen. Prefix Apply/arbitrary faces remain open.
+Next serial packet: reviewed Apply ecbe789 +Desktop48e91927/root spliceb45c8aeed,
+then its whole real UI/agent/reopen chain. StraightSlot source implementation
+and C02 circular-arrangement inventory are independent bounded C01/C02 lanes.

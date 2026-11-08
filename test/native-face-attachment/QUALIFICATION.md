@@ -1,5 +1,36 @@
 # Native face attachment qualification
 
+## Current R2 scoped PASS
+
+Complete unchanged Chrome driver60195 and independent after-whole oracle PASS.
+Actual Coreeff8af04bf5e2881052db92bd98036cc9ba7a13d /
+Desktop719a4049a0fd616c425f61e034859f5afe7a5377. Normal build60491 and signed
+fixture99546 passed first:489files/416CAD assets/97selected pins.
+
+52records/271commands/19Native observation sets/95material point replies/
+4.cad saves/5refusals/3attachment discoveries/three fresh signed Opens. Actual
+creation travel, parent20→25/mixed UndoRedo, non-origin pivot/orientation, stale
+revision/missing locator refusals, inch display, parent reedit, constructor
+region invalidation, explicit earlier-parent repair/UndoRedo, successful region
+change and repaired-parent15→18 all pass. Two own semantic bad native archives
+reject stale cache/dangling parent before adoption; healthy continuation passes.
+Owned contexts/targets retire, source hashes stay unchanged, shared Chrome stays.
+
+Independent standalone ZIP/source/analytic oracle checks persisted frames and
+lineage, exact local source/IDs/history/high-water/material/display intent,
+Native child250pi volume/bounds and actual child/parent material points.
+Position50pm, derived-cache1e-9mm, expanded Native bounds1e-6mm and volume1e-6mm3
+are separate checks, not50pm Native surface certification.
+
+Original R1 remains frozen below. Repair6e9 (composedeff8af0) updates the SAME
+structural policy with consumed-source fast-save guards and actual Native
+ledger authority intact. Driver, expected refusals, Native pair, bootstrap and
+tolerances are unchanged. No arbitrary-topology, typed native placement,
+prefix wizard Apply, allC08/Gate1 or beta delivery claim follows this bounded
+full-tip extrusion-last-cap workflow.
+
+## Historical R1 failure
+
 R1 complete Chrome driver terminal FAIL; no C08 Phase B qualification.
 Actual runtimeCore8ab73cf323423e10b46447343078f5cd46259146 /
 Desktop719a4049a0fd616c425f61e034859f5afe7a5377. Full normal build and

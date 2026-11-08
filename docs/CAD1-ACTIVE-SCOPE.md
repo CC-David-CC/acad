@@ -22,7 +22,7 @@ reinstate assembly acceptance in Gate1.
 ## Current qualification checkpoint — 2026-11-08
 
 The four-workflow repair batch now has FOUR scoped qualified passes. The next
-C09 quantity/native-ruler, C08 Phase A, ordinary Ellipse and real wizard Cancel whole workflows also passed. Real navigation/UI Undo now also passes, making ten recent named proofs including the newly qualified cubic-curve R2 chain
+C09 quantity/native-ruler, C08 Phase A, ordinary Ellipse and real wizard Cancel whole workflows also passed. Real navigation/UI Undo now also passes, making eleven recent named proofs including cubic R2 and native-face PhaseB R2
 are not the full Gate1 denominator: Gate1 contains21
 exercises, with no complete exercise-level signoffs yet. Existing scoped passes
 remain useful evidence toward those exercises; zero signoffs does not mean zero
@@ -53,6 +53,8 @@ controls/identity. Native-face candidate29e7df5 remains a separate source-only
 branch pending its whole workflow; no public/beta update follows these steps.
 
 | C01 cubic Bezier/CV-spline R2 | Scoped PASS:884records/456commands/24observations/672native points/3.cad saves/15refusals/5malformed Opens | Actual Core26d7a55/Desktopf6d1c07d1; independent Fraction/ZIP/source oracle PASS.50pm sample budget/exact control IDs separate. No BRep/region/tangency/3D/all-C01 claim |
+
+| C08 native extrusion-cap attachment R2 | Scoped PASS Coreeff8af0/Desktop719a4049a:52records/271commands/19Native sets/95points/4.cad saves/5refusals/3discoveries | Independent source/frame/Native/ZIP oracle PASS; parent edits and explicit repair persist. Full-tip last-cap scope only; prefix Apply remains open |
 
 Orientation/archive qualifications remain on Core32ae9c8/Desktop60ec30ee9;
 roles/history/C09 qualified scopes are on Core33b8aa3/Desktop4c4862b7b. They are
@@ -335,3 +337,8 @@ integration/native-attachment-candidate-20261108. Narrow provenance/dependency
 repair and full unchanged rerun remain required; no PhaseB signoff or source
 creation lifecycle claim follows. The current ten recent scoped passes and
 all21 Partial exercise statuses remain unchanged.
+
+Native PhaseB R2 now completes the unchanged full workflow and independent oracle
+on Coreeff8af0/Desktop719a4049a. OriginalR1e87d70e remains frozen. That named
+full-tip last-cap lifecycle is superseded; arbitrary faces/prefix Apply and
+all21 exercise signoffs remain open.
