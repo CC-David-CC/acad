@@ -74,8 +74,11 @@ C. Completed: full roles/history reruns and next C09 quantity/native-ruler chain
    microtest loop, threshold tuning or substitute positive geometry.
 D. Complete remaining finite sketch/constraint/region operations in bounded
    packets, each with the same public author/edit/refuse/travel/save/reopen exit.
-   Ellipse source is integrated as512d435/f8d4580 plus Desktop365fc7897;
-   normal build and complete application qualification are next. C12 owned
+   Ellipse source512d435/f8d4580 plus Desktop365fc7897 now has complete R1
+   source/browser/archive qualification on Cored4b4bfa/Desktopaa88fd4d6:
+   20observations/4.cad saves/10refusals/3fresh Opens, independent oracle PASS.
+   General spline/Bezier contract preparation remains a separate C01 lane.
+   C12 owned
    same-prefix Cancel source work and native-face attachment remain parallel
    isolated lanes. C12 Apply remains an explicit separate missing transaction.
 E. Complete remaining solid/reference/frame and drawing/quantity packets using

@@ -22,7 +22,7 @@ reinstate assembly acceptance in Gate1.
 ## Current qualification checkpoint — 2026-11-08
 
 The four-workflow repair batch now has FOUR scoped qualified passes. The next
-C09 quantity/native-ruler and C08 Phase A whole workflows also passed. These six named proofs
+C09 quantity/native-ruler, C08 Phase A and ordinary Ellipse whole workflows also passed. These seven named proofs
 are not the full Gate1 denominator: Gate1 contains21
 exercises, with no complete exercise-level signoffs yet. Existing scoped passes
 remain useful evidence toward those exercises; zero signoffs does not mean zero
@@ -36,6 +36,7 @@ implementation. Assemblies E17/C10 remain Gate2.
 | Feature history controls R3 | Scoped PASS d0964c8:78checkpoints/4.cad saves/25Native observations/3SVG/2malformed Opens | Browser cleanup/source hashes and independent artifact oracle PASS; original checker ID-domain mistake/corrected source97a7828 preserved separately |
 | C09 quantities/native ruler R1 (next finite workflow) | Scoped PASS4afbb06:50rows/3.cad saves/80Native point replies/12quantity refusals/2semantic ruler Opens | All7canonical quantity types/4public display families; independent Fraction/AST/ZIP/source/native oracle PASS; no whole-C09/Gate1 claim |
 | C08 custom/source-plane frames R3 | Scoped Phase A PASS:49rows/194command records/14Native observations/4.cad saves/7refusals/fresh Opens | Independent source/frame/Native/ZIP oracle PASS; runtimea9022ce/Desktop9fd652f1b. Native-solid-face Phase B remains required/open |
+| C01 ordinary shared Ellipse R1 | Scoped source PASS:147records/112commands/20observations/4.cad saves/10refusals/3fresh Opens | Independent source/archive/Decimal analytic oracle PASS; exact tiny semiaxes observed. No BRep/profile/tangency/Canvas or whole-C01 claim |
 
 Orientation/archive qualifications remain on Core32ae9c8/Desktop60ec30ee9;
 roles/history/C09 qualified scopes are on Core33b8aa3/Desktop4c4862b7b. They are
@@ -77,6 +78,10 @@ scoped proof, not an exercise-level or full-C08 signoff. Ellipse shared
 author/inspect/edit source is composed as Core `512d435`/`f8d4580` and Desktop
 `365fc7897`, backed on both LANs, but has no build/runtime qualification yet.
 The source packet preserves the frame replay repair and existing old routes.
+Ellipse now has complete R1 browser and independent oracle PASS on actual
+Core `d4b4bfa` / Desktop `aa88fd4d6`; see
+`test/ellipse-public-workflow/QUALIFICATION.md`. Earlier source-only statuses
+above describe the preceding checkpoint; this is the current finite result.
 
 Repair composition source review:168c28a carries7ac46c53f5141e6fcc00ca32effddd9ac96d7d73
 from the isolated lane; root adds only the dedicated solveWorker task dispatch.
