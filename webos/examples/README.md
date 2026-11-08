@@ -1,5 +1,10 @@
 # Browser CAD command examples
 
+[Loft creation recipe](loft-creation.mjs) is the exact qualified E15 helper
+(ACAD150f399): two unequal rectangle sections, actual creation UndoRedo,16travels,
+250Native classes and three.cad cycles. [Public adapter/usage](loft-creation.md).
+Default view framing still needs G10 qualification; geometry proof is separate.
+
 [Fillet/chamfer recipe](fillet-chamfer.mjs) is the exact qualified E11 helper
 (ACADfa6dc2b): actual creation UndoRedo, mixed edits, four refusals,975Native
 classes and three.cad cycles. [Usage and scope](fillet-chamfer.md).
