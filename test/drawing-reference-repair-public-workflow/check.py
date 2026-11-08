@@ -165,10 +165,27 @@ def check_svg(root,item,receipt,case):
         for side in (-1,1):need(any(c['hidden'] and c['line'] and abs(c['start'][0]-(center+side*r))<=1e-6 and abs(c['end'][0]-(center+side*r))<=1e-6 and all(abs(a-b)<=1e-6 for a,b in zip(sorted([c['start'][1],c['end'][1]]),[0,e['depth']])) for c in checked['curves'][view]),'actual hidden cylindrical wall spans depth')
     return {'file':item['savedFile'],'sha256':item['sha256'],'status':meta['status'],'nativeFragments':len(paths),'dimensions':checked['dimensions']}
 
-def normalize_refusal(s,candidate=False):
-    x=json.loads(json.dumps(s));x['capture']['solids'].pop('revision',None);x['capture']['journal'].pop('revision',None);x['host'].pop('revision',None);x['drawing'].pop('geometryRevision',None)
-    if candidate:x['lifecycle'].pop('epoch',None)
-    return x
+def check_refusal_state(before,after,candidate):
+    # Independently derive the six permitted differences from their actual
+    # currentness relationships; no imported production predicate or token map.
+    need(type(candidate) is bool,'explicit candidate-refusal classification');settled(before);settled(after)
+    if not candidate:
+        need(before==after,'pre-candidate refusal preserves full state, epoch and ALL tokens');return
+    prefixes=[]
+    for s in (before,after):
+        epoch=s['lifecycle']['epoch'];generation=s['lifecycle']['generation'];need(type(epoch) is int and 0<=epoch<=9007199254740991 and type(generation) is int and 0<=generation<=9007199254740991,'actual bounded lifecycle headers')
+        document=s['host']['revision'];geometry=s['capture']['solids']['revision']
+        for t in (document,geometry,s['drawing']['revision'],s['drawing']['geometryRevision']):need(type(t) is str and 0<len(t)<=256,'bounded actual inspection token')
+        need(s['drawing']['revision']==document and s['drawing']['geometryRevision']==geometry,'same current document and solids tokens in drawing inspection')
+        journal=s['capture']['journal']['revision'];need(type(journal) is str and journal.endswith(':'+document),'journal suffix binds actual current document token')
+        prefix=journal[:-len(document)];need(re.fullmatch(r'(?:0|[1-9][0-9]*):(?:0|[1-9][0-9]*):',prefix) is not None and prefix.startswith(str(generation)+':'),'source-bound journal generation/revision header');prefixes.append(prefix)
+    need(after['lifecycle']['epoch']==before['lifecycle']['epoch']+1,'exactly one isolated candidate attempt')
+    need(before['host']['revision']!=after['host']['revision'] and before['capture']['solids']['revision']!=after['capture']['solids']['revision'],'old document/geometry inspection tokens invalidated')
+    need(prefixes[0]==prefixes[1] and after['capture']['journal']['revision']==prefixes[0]+after['host']['revision'],'journal changes ONLY exact document suffix, not authored revision')
+    states=[]
+    for s in (before,after):
+        x=json.loads(json.dumps(s));del x['lifecycle']['epoch'];del x['capture']['solids']['revision'];del x['capture']['journal']['revision'];del x['host']['revision'];del x['drawing']['geometryRevision'];del x['drawing']['revision'];states.append(x)
+    need(states[0]==states[1],'exact remaining accepted source/definition/body/J/association/file/resources after candidate refusal')
 
 def check(directory):
     root=Path(directory);r=json.loads((root/'receipt.json').read_text());need(r['status']=='PASS' and r['engineRevision']==BUILD,'complete actual workflow first');need(r['sourcePins']==r['sourcePinsAfter'] and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'],'immutable source/owned cleanup');need(not any(r[k] for k in ('sourceSeeds','privateAuthoring','fakeReplies')),'genuine authoring');need([c['name'] for c in r['cases']]==['original','negative-datum'] and all(c['status']=='PASS' for c in r['cases']),'both actual datum cases')
@@ -183,7 +200,11 @@ def check(directory):
     need(len(r['refusals'])==6,'three precise refusals per case')
     for name in cases:
         rows=[x for x in r['refusals'] if x['case']==name];need([x['error']['code'] for x in rows]==['STALE_DOCUMENT','INVALID_REQUEST','HOLE_OUTSIDE_PROFILE'],'actual source-confirmed refusal layers')
-        for row in rows:need(not row['error']['committed'] and not row['error']['possiblyCommitted'] and normalize_refusal(row['before'],row['candidate'])==normalize_refusal(row['after'],row['candidate']),'atomic accepted state/definition/J preservation')
+        need([x['candidate'] for x in rows]==[False,False,True],'exact pre-candidate versus attempted-candidate cases')
+        for row in rows:
+            need(not row['error']['committed'] and not row['error']['possiblyCommitted'],'uncommitted precise refusal')
+            if row['candidate']:need(row['command']=='edit-through-hole' and row['error']['code']=='HOLE_OUTSIDE_PROFILE','actual single failed candidate scope')
+            check_refusal_state(row['before'],row['after'],row['candidate'])
     need(len(r['noops'])==2 and len(r['travels'])==26,'both no-ops and all actual shared travel events')
     for row in r['travels']:need(row['before']['capture']['native']['counters']==row['after']['capture']['native']['counters'],'shared travel original high-water')
     for row in r['noops']:need(row['result']['changed'] is False and row['before']==row['after'],'literal drawing no-op exact accepted state')

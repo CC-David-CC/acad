@@ -1,5 +1,36 @@
 # E22 linked drawing: actual reference repair travel and current .cad/SVG
 
+## Source correction after retained whole R4
+
+The retained R4 reached width150 edit and its Undo/Redo, then correctly refused
+the impossible hole with `HOLE_OUTSIDE_PROFILE`. The raw state differed at only
+epoch8→9 and five linked inspection revisions. Public `drawing.revision` is
+the current document token, not the private drawing-definition counter. See
+`docs/reviews/DRAWING-REFUSAL-REVISION-R4-20261108.md` (review61ae816); original
+R1–R4 evidence and their producing sources stay unchanged.
+
+This CURRENT full packet independently checks the following in both its driver
+and after-whole Python oracle, without importing a production predicate:
+
+* Old drawing revision and malformed scale are pre-candidate refusals: the
+  COMPLETE captured state, every token and epoch must remain exact.
+* The impossible hole is the sole candidate refusal: require exactly epoch+1,
+  nonempty bounded document/geometry tokens, actual host/drawing document-token
+  equality and solids/drawing geometry-token equality before AND after, and
+  invalidation of both old tokens. The journal must retain its exact source-bound
+  generation/revision header and change ONLY its document-token suffix to that
+  new document token. No arbitrary new journal revision is permitted.
+* Only after those checks may the six precise paths be excluded from the
+  remaining exact comparison. Definition/source/history/body/metrics, J travel
+  targets, counters, document identity, source versions, material, presentation,
+  file/dirty state and settled resources remain exact. Candidate failure is
+  uncommitted and subsequent commands obtain current inspections normally.
+
+No geometry or precision criterion changes. Both datum cases, all six `.cad`
+Save/Open cycles, twelve SVGs, forty-four Native observations and direct
+reference-repair Undo/Redo remain required. No product code changes and no
+preparation-time execution accompany this source correction.
+
 **Source-ready; unexecuted.** New finite acceptance packet only. No product,
 existing driver/oracle/evidence, status or deployment changes. Root performs the
 later single complete public application run, then the independent after-whole
