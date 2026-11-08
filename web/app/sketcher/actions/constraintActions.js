@@ -1,3 +1,4 @@
+import {addPointCoincidenceGroup} from './pointCoincidenceOperation';
 import {addRadiusBatch,inspectRadiusTargets,addRadiusByIdAtRevision} from './radiusOperation';
 import {toast} from 'react-toastify';
 import {AlgNumConstraint, ConstraintDefinitions} from "../constr/ANConstraints";
@@ -130,12 +131,7 @@ export default [
     },
 
     invoke: (ctx, matchedObjects) => {
-      const {viewer} = ctx;
-      const [first, ...others] = matchedObjects;
-      const pm = viewer.parametricManager;
-      addConstraintGroup(pm, others.map(obj =>
-        new AlgNumConstraint(ConstraintDefinitions.PCoincident, [first, obj])
-      ));
+      return addPointCoincidenceGroup(ctx.viewer,matchedObjects);
     }
   },
 
