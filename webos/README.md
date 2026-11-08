@@ -1,5 +1,13 @@
 # CAD Modeler (JSketcher inspired)
 
+Latest cubic curve qualification: ACAD e381b70, actualCore26d7a55/Desktopf6d1c07d1.
+Shared Bezier/cubic Clamped CV-spline creation, ordered control editing, native
+Worker point reads, travel and three native saves/fresh Open/reedit pass the
+whole R2 workflow and independent Fraction/ZIP/source oracle (672samples).
+Source controls/IDs are exact; observed coordinates meet the finite50pm budget.
+See examples/sketch-cubic-curves.mjs. Other spline modes, BRep/profile use and
+Canvas/tangency/3D workflows are outside this proof. First failure is retained.
+
 Latest2026-11-08: real timeline/selected EDIT/floating/shortcut navigation and
 passive-prefix keyboard UndoRedo have scoped complete R1 qualification
 (ACAD6895c51; runtimeCore2e14280/Desktop18c621383). Eighteen real events,
