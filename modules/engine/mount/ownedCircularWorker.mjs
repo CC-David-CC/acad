@@ -1,5 +1,5 @@
 // Actual Native calls ONLY in the production OCI Worker's private environment.
-import {captureNativeCircularObservation,circularFields,circularNativeStatus,CIRCULAR_NATIVE_ERRORS,CIRCULAR_LIMITS} from './ownedCircularArrangementProtocol.mjs';
+import {captureNativeCircularObservation,captureNativeCircularFailure,circularFields,circularNativeStatus,CIRCULAR_NATIVE_ERRORS,CIRCULAR_LIMITS} from './ownedCircularArrangementProtocol.mjs';
 import {circularBoundarySpecification,canonicalCircular,canonicalCircularCycle} from '../extrusion/circularArrangementDescriptor.mjs';
 import {circlePointSign,circularEventSide} from '../extrusion/circularTopology.mjs';
 import {validateOwnedTopology} from './ownedTopologyContract.mjs';
@@ -11,7 +11,7 @@ function native(env,prepared,name){
  try{data=malloc(152);if(!data)fail('Native circular scratch allocation failed.','RESOURCE_LIMIT');Module.HEAPF64.set(values,data/8);if(name!==undefined){text=stringPointer(name);if(!text)fail('Native circular name allocation failed.','RESOURCE_LIMIT');}globalThis.__OCI_EXCHANGE_VAL=null;status=name===undefined?Module._ReadCircularArrangementV1(data,19):Module._CreateOwnedCircularCellV1(text,data,19,prepared.depth,prepared.mask);value=globalThis.__OCI_EXCHANGE_VAL;if(values.some((n,i)=>!Object.is(Module.HEAPF64[data/8+i],n)))fail('Native circular input payload changed.','CIRCULAR_INPUT_CHANGED');}
  catch(cause){failure={cause};}
  finally{globalThis.__OCI_EXCHANGE_VAL=null;for(const pointer of[text,data])if(pointer)try{free(pointer);}catch(cause){cleanup ||= {cause};}}
- if(cleanup)fail('Native circular scratch cleanup failed.','ENGINE_CLEANUP_FAILED',Object.assign(Error('Uncertain scratch release'),{cause:cleanup.cause,operationError:failure?.cause}));if(failure)throw failure.cause;const code=circularNativeStatus(status);if(code)fail(code,code);return value;
+ if(cleanup)fail('Native circular scratch cleanup failed.','ENGINE_CLEANUP_FAILED',Object.assign(Error('Uncertain scratch release'),{cause:cleanup.cause,operationError:failure?.cause}));if(failure)throw failure.cause;const code=circularNativeStatus(status);if(code){const diagnostic=captureNativeCircularFailure(value,status);fail(diagnostic.error+' at '+diagnostic.stage,code);}return value;
 }
 function corroborate(prepared,value){
  const r=captureNativeCircularObservation(value),circles=prepared.request.region.circles,eps=CIRCULAR_LIMITS.supportIncidenceMm;if(r.relation!==prepared.request.region.descriptor.relation)fail('Native and represented source relation disagree.');const incidence=(c,p)=>Math.abs(Math.hypot(p[0]-c.center[0],p[1]-c.center[1])-c.radius)<=eps;

@@ -23,3 +23,8 @@ export function captureNativeCircularObservation(value:unknown):CircularNativeOb
 export function circularNativeStatus(code:number):string|null;
 
 export function captureCircularConstructionCertificate(input:unknown,request:CircularCellRequest):Readonly<{status:"available";data:Readonly<Record<string,unknown>>;sourceBinding:Readonly<{scope:"solved-request";regionId:string;boundaryKind:"circular-source-spans";circularArrangementVersion:1}>}>;
+
+export type CircularNativeFailureStage='capture'|'construct'|'observe'|'create'|'cap-mapping'|'source-edge-mapping'|'first-edge-mapping'|'last-edge-mapping'|'generated-history'|'swept-face-membership'|'fragment-closure'|'final-closure'|'receipt'|'input-verification'|'publication';
+export interface CircularNativeFailure {readonly version:1;readonly error:string;readonly stage:CircularNativeFailureStage;}
+export const CIRCULAR_NATIVE_FAILURE_STAGES:readonly CircularNativeFailureStage[];
+export function captureNativeCircularFailure(input:unknown,status:number):CircularNativeFailure;

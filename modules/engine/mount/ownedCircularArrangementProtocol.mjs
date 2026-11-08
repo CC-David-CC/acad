@@ -1,6 +1,8 @@
 // Capture is data-only; Native observation/equation validation runs in Workers.
 import {captureCircularDescriptor,circularRegionIdentity,circularCellMasks} from '../extrusion/circularArrangementDescriptor.mjs';
 export const CIRCULAR_NATIVE_ERRORS=Object.freeze(['CIRCULAR_INVALID_REQUEST','CIRCULAR_UNSUPPORTED_RELATION','CIRCULAR_GEOMETRY_UNQUALIFIED','CIRCULAR_CONSTRUCTION_FAILED','CIRCULAR_PROVENANCE_UNRESOLVED','CIRCULAR_RESOURCE_LIMIT','CIRCULAR_INPUT_CHANGED','CIRCULAR_NAME_COLLISION','CIRCULAR_PUBLICATION_FAILED','CIRCULAR_ALLOCATION_FAILED','CIRCULAR_BUSY','MEASUREMENT_PRECISION_UNRESOLVED']);
+// Per-call Native failure location, never a topology/member identifier.
+export const CIRCULAR_NATIVE_FAILURE_STAGES=Object.freeze(['capture','construct','observe','create','cap-mapping','source-edge-mapping','first-edge-mapping','last-edge-mapping','generated-history','swept-face-membership','fragment-closure','final-closure','receipt','input-verification','publication']);
 export const CIRCULAR_LIMITS=Object.freeze({inputValues:19,inputBytes:152,responseBytes:65536,circles:2,events:2,spans:8,fragmentsPerSpan:2,totalFragments:16,cells:3,usesPerLoop:8,holes:1,supportIncidenceMm:1e-9,directionEps:1e-12});
 const fail=(message,code='INVALID_REQUEST')=>{throw Object.assign(Error(message),{code});};
 export function circularFields(value,keys){const p=value&&typeof value==='object'?Object.getPrototypeOf(value):undefined;if(!value||typeof value!=='object'||Array.isArray(value)||(p!==null&&Object.getPrototypeOf(p)!==null)||Reflect.ownKeys(value).length!==keys.length)fail('Expected exact circular fields.');const out={};for(const key of keys){const d=Object.getOwnPropertyDescriptor(value,key);if(!d?.enumerable||!Object.hasOwn(d,'value'))fail('Circular fields must be own data.');out[key]=d.value;}return out;}
@@ -24,6 +26,20 @@ export function captureNativeCircularObservation(input){
  const seen=new Set(),used=new Set();r.cells=Object.freeze(circularArray(r.cells,masks.length,masks.length).map(value=>{const c=circularFields(value,['mask','area','bounds','outer','holes']);if(!masks.includes(c.mask)||seen.has(c.mask)||typeof c.area!=='number'||!Number.isFinite(c.area)||c.area<=0||c.area>2*Math.PI*1e12)fail('Native circular cell census is invalid.','INVALID_RESPONSE');seen.add(c.mask);const bounds=circularFields(c.bounds,['min','max']);bounds.min=vector(bounds.min,2);bounds.max=vector(bounds.max,2);if(bounds.min.some((v,i)=>v>bounds.max[i]))fail('Native circular bounds are inverted.','INVALID_RESPONSE');c.bounds=Object.freeze(bounds);const pairs=new Set(),loop=value=>Object.freeze(circularArray(value,1,8).map(value=>{const u=circularFields(value,['span','fragment','orientation']);u.span=slot(u.span,r.spans.length);u.fragment=slot(u.fragment,r.spans[u.span].fragments.length);u.orientation=orientation(u.orientation);const key=u.span+'/'+u.fragment;if(pairs.has(key))fail('Repeated Native cell boundary occurrence.','INVALID_RESPONSE');pairs.add(key);used.add(key);return Object.freeze(u);}));c.outer=loop(c.outer);c.holes=Object.freeze(circularArray(c.holes,0,1).map(loop));return Object.freeze(c);}));for(let i=0;i<r.spans.length;i++)for(let j=0;j<r.spans[i].fragments.length;j++)if(!used.has(i+'/'+j))fail('Native circular fragment was omitted.','INVALID_RESPONSE');return finish(r);
 }
 export function circularNativeStatus(code){if(!Number.isInteger(code)||code>0||code< -12)fail('Malformed Native circular return status.','ENGINE_FAILURE');return code===0?null:CIRCULAR_NATIVE_ERRORS[-code-1];}
+
+
+// Status remains authoritative. A missing/malformed diagnostic is integrity
+// failure, never a recoverable request merely because capture uses own-data rules.
+export function captureNativeCircularFailure(input,status){
+ let r;
+ try{
+  const expected=circularNativeStatus(status);
+  if(expected===null)throw Error('A Native failure requires a negative status.');
+  r=circularFields(input,['version','error','stage']);
+  if(r.version!==1||r.error!==expected||!CIRCULAR_NATIVE_FAILURE_STAGES.includes(r.stage))throw Error('Native circular failure version/code/stage changed.');
+ }catch(cause){throw Object.assign(Error('Malformed Native circular failure diagnostic.'),{code:'ENGINE_FAILURE',cause});}
+ return Object.freeze({version:1,error:r.error,stage:r.stage});
+}
 
 // Small main-bound certificate; actual graph/indices stay private Worker data.
 export function captureCircularConstructionCertificate(input,request){
