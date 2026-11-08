@@ -8,6 +8,7 @@ import {sketchRevision} from './sketchRevision.mjs';
 import {AUTHORED_SOLID_KINDS} from 'engine/solid/authoredSolidKinds.mjs';
 import {genericHistoryBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {selectedProfileHistoryBudget} from 'engine/mount/selectedProfileBudget.mjs';
+import {physicalReadUnsupportedReason} from '../parameters/modernPhysicalBindings.mjs';
 import standardPlaneOperation from 'workbenches/modeler/features/plane/simplePlaneOperation';
 
 const fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
@@ -45,7 +46,8 @@ export function createWorkerStepExportCommands(ctx:any,evaluateReadOnly:(input:a
   if(!Array.isArray(history.history)||history.history.length>256)fail('RESOURCE_LIMIT','The part exceeds the STEP history discovery bound.');
   const build=genericHistoryBuild(history.history);
   const available=buildPolicy.listBuilds();
-  let reason=!info.ready?info.reason||'The current part is unavailable.':!project.hasHostLifetime?'A current host-bound document is required.':manager.isRestoring?'Finish opening the document.':manager.unit!=='millimeter'?'Canonical millimeter geometry is required.':history.pointer!==history.history.length-1?'Select the complete authored tip.':e.isTyped||e.script$.value.trim()||Object.keys(e.table$.value||{}).length||e.errors$.value.length?'STEP export for named project parameters is not supported yet.':ctx.services.sketcher.inPlaceEditor.inEditMode||ctx.wizardService.workingRequest$.value?'Finish the active operation.':ctx.assemblyService.constraints$.value.length?'Assembly placement is unsupported.':!available.includes(build)?'STEP export is not available for this part’s modeling engine.':null;
+  const parameterReason=physicalReadUnsupportedReason(e,history.history);
+  let reason=!info.ready?info.reason||'The current part is unavailable.':!project.hasHostLifetime?'A current host-bound document is required.':manager.isRestoring?'Finish opening the document.':manager.unit!=='millimeter'?'Canonical millimeter geometry is required.':history.pointer!==history.history.length-1?'Select the complete authored tip.':parameterReason?parameterReason:ctx.services.sketcher.inPlaceEditor.inEditMode||ctx.wizardService.workingRequest$.value?'Finish the active operation.':ctx.assemblyService.constraints$.value.length?'Assembly placement is unsupported.':!available.includes(build)?'STEP export is not available for this part’s modeling engine.':null;
   if(!Array.isArray(info.bodies)||info.bodies.length>16384)fail('RESOURCE_LIMIT','STEP output discovery exceeds its bound.');
   const bodies=info.bodies.map((row:any)=>{
    let error=reason;const model=ctx.cadRegistry.find(row.id),metrics=model?.inspectKernelMetrics?.();
@@ -74,6 +76,7 @@ export function createWorkerStepExportCommands(ctx:any,evaluateReadOnly:(input:a
   const streamList=()=>[craft.modifications$,craft.models$,craft.pipelineFailure$,craft.engineCleanupFailure$,e.script$,e.table$,e.list$,e.errors$,ctx.streams.sketcher.sketchingFace,ctx.wizardService.workingRequest$,ctx.workbenchService.currentWorkbench$,ctx.assemblyService.constraints$],tracked=streamList(),versions=tracked.map(s=>s.revision),sourceFaces=new Map<string,any>();
   const controller=new AbortController(),stop=()=>controller.abort(),signals=[project.documentSignal,opts.signal].filter(Boolean),subscriptions:AbortSignal[]=[];let timer:any,poll:any;
   const check=()=>{
+   if(e.isTyped&&!e.hasCurrentPhysicalResult())throw abort();
    let host=false;try{host=!opts.valid||opts.valid()===true;}catch{}
    if(!host||controller.signal.aborted||ctx.projectService!==project||!project.hasHostLifetime||!project.isDocumentCurrent(generation)||ctx.craftService!==craft||craft.evaluationEpoch!==epoch||craft.modifications$.value!==before||craft.models$.value!==models||ctx.storageService!==storage||ctx.sketchStorageService!==sketches||ctx.cadRegistry!==registry||ctx.projectManager!==manager||manager.isRestoring||manager.unit!=='millimeter'||manager.inspectDocumentRevision()!==a.revision||craft.inspectWorkerSolids().revision!==a.geometryRevision||project.sketchStorageNamespace!==namespace||ctx.expressionService!==e||ctx.operationService!==operationService||streamList().some((s,i)=>s!==tracked[i]||s.revision!==versions[i])||sketchRevision(storage,namespace)!==stamp||counter!==project.counterGenerator||counter.projectCounters!==counters||counters.featureId!==counterValue)throw abort();
    for(const{body,model,metrics,placement:p}of selected)if(registry.find(body.bodyId)!==model||model.featureId!==body.featureId||model.inspectKernelMetrics()!==metrics||model.location$!==p.location||p.location.value!==p.matrix||model.csys!==p.csys||MATRIX_KEYS.some((key,i)=>!Object.is(p.matrix[key],IDENTITY[i]))||CSYS_KEYS.some((key,i)=>[p.csys[key].x,p.csys[key].y,p.csys[key].z].some((n,j)=>!Object.is(n,p.axes[i][j]))))throw abort();

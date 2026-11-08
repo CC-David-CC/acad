@@ -13,6 +13,16 @@ export function requireModernPhysicalHistory(history){
  for(const row of history)if(row.type===MODERN_PHYSICAL_TYPES[1]){const hole=captureAuthoredHoleIntent(row.params);if(hole.sourceFeatureId!==profile.featureId||hole.sourceFaceId!==profile.faceId||hole.sourceRegionId!==profile.regionId||hole.engine!==profile.engine||hole.engineRevision!==profile.engineRevision)throw Object.assign(Error('The typed hole source must be the actual selected rectangle in the same part build.'),{code:'UNSUPPORTED_PARAMETERS'});}
  return true;
 }
+// Pure admission over existing authority. No facade, quantity table, ticket or
+// new lifetime state: readers retain their captured service/stream guards.
+export function physicalReadUnsupportedReason(expressions,history){
+ if(expressions.errors$.value.length)return 'The accepted project parameters are invalid.';
+ if(!expressions.isTyped)return expressions.script$.value.trim()||Object.keys(expressions.table$.value||{}).length?'Nonempty legacy project expressions are unsupported by this reader.':null;
+ if(!expressions.hasCurrentPhysicalResult())return 'The accepted typed project parameters are stale.';
+ try{if(!requireModernPhysicalHistory(history))return 'Typed reads require the integrated selected rectangle and through-hole history.';}
+ catch(error){return error.message||'This typed feature history is unsupported.';}
+ return null;
+}
 // Worker-only: parse source constraints and resolve dimensions from the current
 // typed result; no inferred topology or caller-provided solved geometry.
 export function resolveSelectedRectangleTarget(target,readSketch,resolveLength){
