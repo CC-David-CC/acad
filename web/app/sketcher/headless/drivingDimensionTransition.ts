@@ -10,6 +10,10 @@ import {captureAdmissionCause,causeForSolveStatus,withAdmissionCause} from '../c
 import {validateConstraintGeometry} from './sketchValidation';
 import {sameRestoredSketch} from '../historyEquivalence.mjs';
 import {assertVerifiedReplayGeometry,assertUnrelatedSignedGeometry} from './verifiedReplayGeometry';
+import {firstCapturedGeometryDifference} from './capturedGeometryScope';
+import {ConstraintDefinitions} from '../constr/ANConstraints';
+import {Segment} from '../shapes/segment';
+import {EndPoint} from '../shapes/point';
 import {captureDrivingDimensionIntent,resolveDrivingDimension,drivingLengthField,classifyDrivingDimensionDelta,signedDrivingDimension,drivingDimensionValueValid} from './drivingDimensionTarget.mjs';
 const fail=(code:string,message:string)=>Object.assign(Error(message),{code});
 const failure=(error:any)=>({code:typeof error?.code==='string'?error.code.slice(0,64):'DIMENSION_INVALID',message:typeof error?.message==='string'?error.message.slice(0,512):'Existing dimension change failed.',...(error?.cause?{cause:captureAdmissionCause(error.cause)}:{})});
@@ -27,6 +31,38 @@ function dimensionPoints(sketch:any){
 function resolveDimension(sketch:any,id:string){return resolveDrivingDimension(sketch,id,dimensionPoints(sketch));}
 function geometry(before:any,after:any){if(before.objects.length!==after.objects.length)throw fail('INTENT_CHANGED','Sketch object membership changed.');after.objects.forEach((o,i)=>{if(before.objects[i]?.type!==o.type)throw fail('INTENT_CHANGED','Sketch object type changed.');assertAllowedSolverGeometry(o.type,before.objects[i].data,o.data);});}
 function evidence(sketch:any,rows:any[]){const c=sketch.stages.flatMap(s=>s.constraints);if(c.length!==rows.length||c.some((v,i)=>v.typeId!==rows[i].typeId||v.admission?.version!==1||v.admission.state!==rows[i].state))throw fail('ADMISSION_CHANGED','Dimension admission changed during verification.');}
+// Passive Worker-local evidence only. Do not reconstruct/solve a diagnostic
+// workspace or infer the cold native frame from its serialized endpoints.
+// Columns: actual stage/native-row, angle radians, signed t mm, inverted,
+// resolved distance mm, ORIGINAL DistancePL residual mm. No public IDs/source.
+function warmPointLineFrames(workspace:any,edited:any):string{
+ try{
+  const selected=new Set(edited.objects),rows:any[]=[];let visits=0,bytes=2,limited=false;
+  for(const stage of workspace.parametricManager.stages){
+   const constraints=stage.solverSystem.allConstraints;
+   for(let index=0;index<constraints.length;index++){
+    if(++visits>4096){limited=true;break;}
+    const c=constraints[index];if(c.schema!==ConstraintDefinitions.DistancePL||c.stage!==stage||c.objects.length!==2)continue;
+    const [point,line]=c.objects;
+    if(!(point instanceof EndPoint)||!(line instanceof Segment)||![point,line,line.a,line.b].some(o=>selected.has(o)))continue;
+    const angle=line.params.ang.get(),length=line.params.t.get(),distance=c.resolvedConstants?.distance,inverted=c.resolvedConstants?.inverted,polynomials=[];
+    c.collectPolynomials(polynomials);const residual=polynomials.length===1?polynomials[0].value():null;
+    if(![angle,length,distance,residual].every(n=>typeof n==='number'&&Number.isFinite(n))||typeof inverted!=='boolean')continue;
+    const row=[stage.index,index,angle,length,inverted,distance,residual],size=JSON.stringify(row).length+1;
+    if(rows.length===2||bytes+size>200){limited=true;break;}
+    rows.push(row);bytes+=size;
+   }
+   if(limited)break;
+  }
+  return(rows.length?JSON.stringify(rows):'unavailable')+(limited?':bounded':'');
+ }catch{return'unavailable';}
+}
+function replayMismatch(candidate:any,cold:any,warmFrames:string){
+ let difference='unavailable';try{difference=firstCapturedGeometryDifference(candidate,cold).slice(0,200);}catch{/* Preserve the original refusal. */}
+ // Existing error/DTO and acceptance criteria stay unchanged. This message is
+ // returned only to this request, never sent to a general-purpose log.
+ return fail('CURRENT_GEOMETRY_MISMATCH',('Dimension verification changed solved geometry. diff='+difference+' warmPL='+warmFrames+' coldNativeFrame=unavailable').slice(0,512));
+}
 function expectedDelta(before:any,after:any,intent:any,action:string){
  const row=resolveDimension(before,intent.constraintId),field=drivingLengthField(row.typeId),expected=structuredClone(before);
  if(action==='edit')expected.stages[row.stage].constraints[row.index].constants[field]=String(intent.value);else expected.stages[row.stage].constraints.splice(row.index,1);
@@ -92,9 +128,10 @@ export function changeDrivingDimension(request:any){let revision=revisionOf(requ
  }catch(error){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw error},false)}catch(_){}throw error;}
  const candidate=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));candidate.boundary=before.boundary;geometry(before,candidate);expectedDelta(before,candidate,intent,a.action);
  if(row.typeId==='DistancePP'&&a.action==='edit')assertUnrelatedSignedGeometry(before,candidate,bindings,{stage:row.stage,index:row.index});
+ const warmFrames=warmPointLineFrames(workspace,c);
  const solved=solveSketch({revision,sketch:candidate,boundary:structuredClone(candidate.boundary),externalParameters:bindings});if(!solved.ok)return solved;const serializedSketch=bounded(JSON.stringify(solved.sketch));
  if(row.typeId==='DistancePP')assertVerifiedReplayGeometry(candidate,solved.sketch,solved.evidence,bindings,a.action==='edit'?{stage:row.stage,index:row.index}:undefined);
- else if(!sameRestoredSketch(JSON.stringify(candidate),serializedSketch))throw fail('CURRENT_GEOMETRY_MISMATCH','Dimension verification changed solved geometry.');evidence(solved.sketch,solved.evidence);
+ else if(!sameRestoredSketch(JSON.stringify(candidate),serializedSketch))throw replayMismatch(candidate,solved.sketch,warmFrames);evidence(solved.sketch,solved.evidence);
  let next:any=null;if(a.action==='edit'){next=resolveDimension(solved.sketch,intent.constraintId);if(Math.abs(next.resolvedValue-value)>1e-6)throw fail('RESIDUAL','The edited dimension differs from actual solved geometry.');}
  return {revision,ok:true,changed:true,serializedSketch,evidence:solved.evidence,dimension:dimension(next?.rawValue??null,next?.resolvedValue??null,next?solved.sketch.stages[row.stage].constraints[row.index].admission.state:'removed')};
  }catch(error){return {revision,ok:false,error:failure(error)};}}
