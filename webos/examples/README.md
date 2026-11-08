@@ -1,5 +1,16 @@
 # Browser CAD command examples
 
+[RadiusLength recipe](radius-length.mjs) is the exact public-command helper used
+by the qualified finite Circle/quarter-Arc workflow (Core d0069f0, Desktop dd58df71e).
+It discovers actual identities, anchors centers, creates/edits/removes radius,
+and extrudes the Circle through an explicitly selected verified engine build.
+Import `createRadiusLengthExample`, pass the existing document-bound agent, then
+use `const part = await recipe.circle(); await recipe.create(part, 5);` and
+`await recipe.dimension(part, 'RadiusLength', 6)`. Normal public Save/Open remains
+separate. Three save/reopen cycles, mixed travel and dependent Circle solids
+passed; Arc BRep and generator-bearing radius transitions are not qualified.
+
+
 [Midpoint and directed angle groups](sketch-constraint-groups.md) provides a new
 source-only public example with actual inspected point/segment IDs, atomic
 constraint groups, source edits, shared travel and normal Save/Open. Composed

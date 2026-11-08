@@ -1,5 +1,14 @@
 # CAD Modeler (JSketcher inspired)
 
+Latest finite RadiusLength qualification: Cored0069f0/Desktopdd58df71e complete
+Chrome workflow and first independent artifact checker PASS. Actual Circle and
+quarter-Arc numeric radius creation/edit/removal, Diameter redundancy and
+reactivation, rejected conflict, mixed travel, dependent Circle Native replay,
+unit invariance and three .cad save/server/freshOpen cycles are qualified.
+See examples/radius-length.mjs. Generator-bearing Radius, Arc BRep and broader
+constraint/parameter coverage remain open. No public/beta deployment follows.
+
+
 Genuine shared sketch Mirror now has finite R2 qualification ACAD24f4269
 (actualCore104c24e/Desktop9bdb3a512): Point/Segment/Circle/minor-major Arc,
 on-axis/overlap copies, source/diameter/axis edits, mixed travel and3.cad file
