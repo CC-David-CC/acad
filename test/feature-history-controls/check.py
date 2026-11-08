@@ -118,7 +118,7 @@ def main():
     require(len(r['malformed'])==2 and all(row['sourceSha256']==archives['suppressed']['sha256'] and sha((folder/row['file']).read_bytes())==row['sha256'] for row in r['malformed']),'own negative archive lineage')
     pinrows=[row for row in r['rows'] if row['label']=='Exact frozen composed runtime'];require(len(pinrows)==5,'initial plus four fresh signed Opens')
     for row in pinrows:require({v['name']:v['sha256'] for v in row['assets']}==r['pins']['files'] and row['outer']['sha256']==r['pins']['outer']['sha256'],'exact composed assets')
-    print(json.dumps({'status':'PASS','scope':'Independent finite shared history/source/native quantities/material/derived SVG subset; no blanket C07/Native validity/interchange/performance claim','nativeObservations':len(bodies),'nativeArchives':[{'label':k,'sha256':v['sha256'],'bytes':v['bytes']} for k,v in archives.items()],'svg':svgs,'refusals':len(r['refusals'])},indent=2))
+    print(json.dumps({'status':'PASS','scope':'Independent finite shared history/source/native quantities/material/derived SVG subset; no blanket C07/Native validity/10pm geometric precision/interchange/performance claim','nativeObservations':len(bodies),'nativeArchives':[{'label':k,'sha256':v['sha256'],'bytes':v['bytes']} for k,v in archives.items()],'svg':svgs,'refusals':len(r['refusals'])},indent=2))
 if __name__=='__main__':
     if len(sys.argv)==4 and sys.argv[1]=='make-bad-state':print(json.dumps(make_bad_state(sys.argv[2],sys.argv[3])))
     else:main()

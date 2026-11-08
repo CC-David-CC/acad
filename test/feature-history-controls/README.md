@@ -42,8 +42,11 @@ python3 test/feature-history-controls/check.py "$CODI_EVIDENCE"
 ```
 
 Only execute after the complete product is assembled. Preserve every failed run;
-do not relax the absolute1e-6mm³/mm analytic tolerance or fabricate an unavailable
-native query. The Python standard-library oracle checks actual native volume,
+do not fabricate an unavailable native query. The historical1e-6mm³ volume
+diagnostic and1e-6mm conservative bounding-envelope check are not the user's
+updated10pm (1e-8mm) geometric acceptance budget. Source corner checks use the
+existing1e-9mm replay bound; root coordinates full native precision acceptance
+separately without rounding/clamping or changing this history operation. The Python standard-library oracle checks actual native volume,
 bounds and material/void observations against equations, all actual saved ZIP
 CRCs/SHA/manifest/source entries, explicit backend/source/opaque selector bindings,
 flags/marker/IDs/counters/materials/drawing intent, LIFO/source preservation,
@@ -55,7 +58,7 @@ and analytic expectations, never acts as a successful engine.
 
 The whole fixture remains finite: numeric standard planes/box/selected profile/
 through-hole/edge history, one source and unrelated box. Typed suppression,
-patterns, arbitrary source-plane branch deletion, reorder, true split/merge
+patterns, empty/no-constructor branches, arbitrary source-plane branch deletion, reorder, true split/merge
 reference repair, assembly, persistent Undo and human timeline GUI controls stay
 explicitly open. No blanket C07, native validity, performance or physical-memory
 claim follows. Existing ARC23 dirty comparison and cooperative hydration costs

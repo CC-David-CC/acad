@@ -1286,7 +1286,7 @@ export function activate(ctx: ApplicationContext) {
     ready:ownedPipelineHistories.has(modifications$.value.history)&&journalHeadDefinition===modifications$.value.history&&!!fullTipSignature&&fullTipSketchRevision===sketchRevision(ctx.storageService,(ctx.projectService as any).sketchStorageNamespace)&&fullTipMaterialSurfaceRevision===(ctx.projectManager as any).inspectMaterialSurfaceRevision(),
     history:modifications$.value.history,journal:authoredJournal$.value,signature:fullTipSignature,
     sourceModels:lastCompleteService===ctx.projectService&&lastCompleteGeneration===(ctx.projectService as any).documentGeneration?(lastComplete||models$.value):models$.value
-  }),epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();});
+  }),epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();},requireAvailableSelectedProfileBuild);
   const {inspectWorkerHistoryControls,setWorkerFeatureSuppressed,setWorkerHistoryPrefix,commitWorkerHistoryBranch}=historyControlCommands;
   Object.assign(ctx.craftService,{inspectWorkerHistoryControls,setWorkerFeatureSuppressed,setWorkerHistoryPrefix,commitWorkerHistoryBranch});
   Object.assign(ctx.craftService,createWorkerFeatureDeleteCommands(ctx,(args,options)=>authoredFeatureOperation('operation-remove',args,options)));

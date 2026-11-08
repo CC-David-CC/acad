@@ -57,3 +57,19 @@ the older plane-parameter validator, whose string branch is narrower than the
 shared ID domain. Only that validation argument is numeric; source histories,
 parameter records and saved numeric/string spelling remain exact and unchanged.
 This avoids excluding a valid16-digit canonical string ID from history controls.
+
+The history command factory receives the existing actual staged selected-profile
+build policy: a catalog entry alone cannot advertise unsuppression when all
+native operations are skipped. The exact recorded build must be staged. No
+native request, default selection or asset fallback is introduced.
+
+Root approved BRANCH_CONSTRUCTOR_REQUIRED when the retained prefix has no box or
+selected-profile constructor. It follows the existing source-plane suffix
+refusal priority. This avoids losing backend authority and breaking the branch's
+own Undo admission; empty/no-constructor branching remains explicitly unsupported.
+
+The user's updated small-design geometric budget is10pm (1e-8mm). This source
+packet changes no geometry/equations/tolerance or native measurement policy.
+Prepared scalar volume/conservative-bound diagnostics and interior/exterior
+probes are not certification of that geometric budget; root coordinates the
+separate precision policy before any complete Gate1 claim.

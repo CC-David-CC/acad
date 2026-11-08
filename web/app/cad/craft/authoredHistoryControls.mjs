@@ -64,6 +64,7 @@ export function planHistoryControl(history,pointer,rows,action,references){
   if(historyAnchorIndex(rows,action.afterFeatureId)!==pointer)fail('STALE_HISTORY','The branch anchor must match the current accepted prefix.');
   const suffix=history.slice(pointer+1);
   if(suffix.some(r=>r.type==='PLANE'))fail('BRANCH_SOURCE_OWNERSHIP','A branch cannot silently remove an independent source plane or its saved sketch.');
+  if(!history.slice(0,pointer+1).some(op=>['WORKER_SOLID_BOX_V1','WORKER_SELECTED_PROFILE_EXTRUDE_V2'].includes(op.type)))fail('BRANCH_CONSTRUCTOR_REQUIRED','The retained prefix must keep an authored solid constructor and its exact backend binding.');
   next=history.slice(0,pointer+1);delta={suffix};
  }else fail('INVALID_REQUEST','Unknown history control.');
  if(kind!=='history-position')assertProtectedHistoryOutputs(rows,next,references);
