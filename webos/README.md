@@ -1,5 +1,12 @@
 # CAD Modeler (JSketcher inspired)
 
+Native extrusion-cap attachment now has scoped whole R2 qualification
+(ACADd82b3c1; runtimeCoreeff8af0/Desktop719a4049a): actual parent edits,
+explicit repair, travel, four native saves/fresh Opens and independent
+source/frame/Native/ZIP checks pass. See examples/source-bound-native-frame.mjs.
+Native caches validate on Open; they are never silently healed. This is a
+full-tip last-cap capability, with arbitrary faces and prefix Apply still open.
+
 Latest cubic curve qualification: ACAD e381b70, actualCore26d7a55/Desktopf6d1c07d1.
 Shared Bezier/cubic Clamped CV-spline creation, ordered control editing, native
 Worker point reads, travel and three native saves/fresh Open/reedit pass the
