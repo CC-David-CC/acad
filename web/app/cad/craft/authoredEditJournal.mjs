@@ -34,6 +34,19 @@ export function planSourceFrameTravel(state,{document,revision,direction,history
  for(const row of entry.sketches)if(readSketch(row.faceId)!==row[undo?'after':'before'])throw Error('Source bytes no longer match their frame journal.');
  return Object.freeze({index:entry.index,featureId:entry.featureId,faceId:entry.faceId,beforeOperation:expected,afterOperation:operation,sketches:Object.freeze(entry.sketches.map(row=>Object.freeze({faceId:row.faceId,before:row[undo?'after':'before'],after:row[undo?'before':'after']}))),next:make(document,revision+1,state.entries,state.cursor+(undo?-1:1))});
 }
+export function planNativeSourceTravel(state,direction,readSketch){
+ if(!['undo','redo'].includes(direction)||typeof readSketch!=='function')throw Error('Invalid attachment travel.');const undo=direction==='undo',entry=state.entries[undo?state.cursor-1:state.cursor],rows=entry?.kind==='source-frame'?entry.sketches:entry?.attachmentSketches||[];
+ if(!Array.isArray(rows)||rows.length>64)throw Error('Invalid attachment journal.');return Object.freeze(rows.map(row=>{const before=row[undo?'after':'before'],after=row[undo?'before':'after'];if(readSketch(row.faceId)!==before)throw Error('Attached source no longer matches its journal.');return Object.freeze({faceId:row.faceId,before,after});}));
+}
+// Finalize the SAME existing event after real native replay, before publication.
+export function supplementNativeSourceJournal(state,proposal,rows,direction){
+ if(!proposal||proposal.document!==state.document||proposal.revision!==state.revision+1||!Array.isArray(rows)||rows.length>64)throw Error('Invalid native source journal publication.');
+ if(direction)return proposal;const entry=proposal.entries[proposal.cursor-1];if(!entry)throw Error('Native source edit has no authored journal event.');
+ if(entry.kind==='source-frame')return recordSourceFrameEdit(state,{document:state.document,revision:state.revision,...entry,sketches:rows});
+ if(!['selected-profile-depth','selected-profile-region'].includes(entry.kind))throw Error('Native source propagation is unsupported for this event.');
+ if(!rows.length)return proposal;let units=0,bytes=0;const seen=new Set(),captured=rows.map(value=>{const r=sourceFrameRecord(value,['faceId','before','after']);if(typeof r.faceId!=='string'||!r.faceId||r.faceId.length>256||seen.has(r.faceId)||r.before===r.after)throw Error('Invalid native source delta.');seen.add(r.faceId);bytes+=128+historySignatureBytes(r.faceId);for(const key of ['before','after']){if(r[key]===null)bytes+=4;else{sourceFrameText(r[key]);units+=r[key].length;bytes+=historySignatureBytes(r[key]);}}return Object.freeze(r);});
+ if(units>32768)throw Object.assign(Error('Native source delta exceeds64KiB retained UTF16.'),{code:'RESOURCE_LIMIT'});const nextEntry=Object.freeze({...entry,attachmentSketches:Object.freeze(captured),byteSize:entry.byteSize+bytes}),entries=bounded([...proposal.entries.slice(0,proposal.cursor-1),nextEntry]);return make(proposal.document,proposal.revision,entries,entries.length);
+}
 // Match the worker transition's native-source bound. The aggregate retained
 // string budget below still evicts old entries; this is not an unbounded log.
 const MAX_SKETCH_BYTES=1024*1024;

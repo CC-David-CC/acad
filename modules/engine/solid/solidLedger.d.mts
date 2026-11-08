@@ -4,6 +4,8 @@ export function inspectWorkerSolidPatternSeeds(model:any):Readonly<{status:'unav
 
 export function classifyCandidateWorkerSolidPoints(input:any):Promise<readonly Readonly<{point:readonly number[];classification:'inside'|'outside'|'boundary'|'unknown'}>[]>;
 export function readCandidateWorkerDrawing(input:any):Promise<Readonly<{observation:import('../mount/ownedDrawingReadProtocol.mjs').DrawingReferenceObservation;views:readonly any[];status:'available'|'unresolved'}>>;
+export function readCandidateWorkerPlanarFace(input:any):Promise<import('../mount/ownedPlanarAttachmentProtocol.mjs').PlanarAttachmentObservation>;
+export function readCandidateWorkerPlanarFaces(input:any):Promise<readonly any[]>;
 export function exportCandidateWorkerSTEP(input:any):Promise<any>;
 
 export interface CandidateManufacturingMeshRead {readonly owner:any;readonly registry:any;readonly engine:'occ';readonly engineRevision:string;readonly body:Readonly<{bodyId:string;featureId:number;expectedMetrics:any}>;readonly controls:Readonly<{linearDeflectionMm:0.01;angularDeflectionRadians:0.1;relative:false;maxVertices:number;maxTriangles:number}>;readonly valid:()=>boolean;}

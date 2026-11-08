@@ -18,6 +18,9 @@ const sourceFrameRun=async(params:any,ctx:any,raw:any)=>{
  if(params.featureId!==featureId||!owner||ctx.cadRegistry?.isEvaluating!==true)fail('INVALID_WORKSPACE','Source frames require a genuine candidate evaluation.');
  const history=ctx.authoredEvaluationHistory,index=history?.findIndex((entry:any)=>canonicalAuthoredFeatureId(entry.params.featureId)===featureId);
  if(!Array.isArray(history)||index<0||history[index].type!==SOURCE_FRAME_TYPE||history[index].params!==raw)fail('INVALID_FRAME_DEPENDENCY','The current source definition is unavailable.');
+ const attached=ctx.prepareNativeAttachedSource?await ctx.prepareNativeAttachedSource(raw,sourceFrameRun):null;
+ if(attached){owner.requireCurrent();const f=attached.frame,vector=(v:number[])=>new Vector(v[0],v[1],v[2]),csys=new CSys(vector(f.origin),vector(f.x),vector(f.y),vector(f.z)),plane=new Plane(csys.z as any,csys.z.dot(csys.origin));return{consumed:[],created:[new MOpenFaceShell(new PlaneSurfacePrototype(plane),csys,sourcePlaneShellId(raw,params.featureId))]};}
+ if(p.parent?.kind==='native-planar-face')fail('UNSUPPORTED_FRAME_PARENT','The current evaluator does not bind native planar attachment.');
  let parentFrame=null,parent:any=null;
  if(p.parent){
   parent=ctx.cadRegistry.findFace(p.parent.faceId);const source=parent?.root,at=source?.originatingOperation,entry=history[at],op=entry&&ctx.operationService.get(entry.type);

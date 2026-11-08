@@ -19,6 +19,8 @@ export interface PreparedSketchCommand {
   // Static removal only for a privately verified source-producer creation Undo.
   readonly sketchRemovedIds?: ReadonlyArray<string>;
   readonly expressionPublication?: any;
+  // Private one-use source-replay capability; never a caller/wire boolean.
+  readonly nativeSourceReplay?: object;
   requireCurrent(): void;
   prepare(models: any[], history: CraftHistory): Promise<PreparedWorkspaceWrites>;
   requireCommittedCurrent(): void;

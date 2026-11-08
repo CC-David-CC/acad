@@ -3,6 +3,11 @@ import {canonicalAuthoredFeatureId} from './authoredFeatureIdentity.mjs';
 import {readHistoryReviewCancel,discardHistoryReviewDraft} from './wizard/wizardBundle';
 import type {HistoryReviewCancelCapture} from './wizard/wizardBundle';
 import {AUTHORED_SOLID_KINDS} from 'engine/solid/authoredSolidKinds.mjs';
+import {nativeAttachmentDependents} from './workerFeatureDeleteCommands';
+import {createWorkerPlanarAttachmentReadCommands} from './workerPlanarAttachmentReadCommands';
+import {readCandidateWorkerPlanarFaces} from 'engine/solid/solidLedger.mjs';
+import {hasNativeSourceAttachments,issueNativeSourceReplay,isNativeSourceReplay,nativeSourceReplayRepair,nativeSourceReplayDirection,createNativeSourceReplay,preparedNativeSourceChanges} from './sourceFrameReplay';
+import {planNativeSourceTravel,supplementNativeSourceJournal} from './authoredEditJournal.mjs';
 import {createSourceFrameCommands} from './sourceFrameCommands';
 import {captureSourceFrameJournalOperation,recordSourceFrameEdit,planSourceFrameTravel} from './authoredEditJournal.mjs';
 import {captureSourceFrameParameters} from 'engine/source/sourceFrameIntent.mjs';
@@ -447,9 +452,9 @@ export function activate(ctx: ApplicationContext) {
         if(before===null){if(index!==captured.history.length||!after||after.type!=='SOURCE_FRAME_V1'||captured.history.some(entry=>Number(entry.params.featureId)===featureId))throw Error('Source creation is not a fresh append.');}
         else if(JSON.stringify(captureSourceFrameJournalOperation(captured.history[index]))!==JSON.stringify(before))throw superseded();
         if(after===null){const face=ctx.cadRegistry.findFace(faceId);if(!direction||before?.type!=='SOURCE_FRAME_V1'||index!==captured.history.length-1||!(face?.root instanceof MOpenFaceShell)||face.root.originatingOperation!==index||preparation.sketchRemovedIds?.length!==1||preparation.sketchRemovedIds[0]!==faceId)throw Error('Only the exact latest source creation can be undone.');}
-        else{if(Number(after.params.featureId)!==featureId||before&&before.type!==after.type)throw Error('Source producer identity changed.');if(before?.type==='SOURCE_FRAME_V1'&&JSON.stringify(captureSourceFrameParameters(before.params).parent)!==JSON.stringify(captureSourceFrameParameters(after.params).parent))throw Error('Source frame editing cannot reparent.');if(before?.type==='PLANE'){const a=captureSourcePlaneParameters(before.params),b=captureSourcePlaneParameters(after.params);if(a.featureId!==b.featureId||a.orientation!==b.orientation||a.datum!==b.datum)throw Error('Principal source identity changed.');}}
-        if(!Array.isArray(sketches)||sketches.length>64)throw Error('Invalid source delta.');for(const row of sketches){if(ctx.sketchStorageService.getSketchData(row.faceId)!==row.before)throw superseded();if(row.after===null){if(after!==null||row.faceId!==faceId)throw Error('Foreign source removal.');}else if(!preparation.sketchOverrides?.some(item=>item.id===row.faceId&&item.data===row.after))throw Error('Source override differs from journal.');}
-        if(before===null&&!sketches.some(row=>row.faceId===faceId&&row.before===null&&typeof row.after==='string'))throw Error('Source creation needs its actual prepared empty source.');
+        else{if(Number(after.params.featureId)!==featureId||before&&before.type!==after.type)throw Error('Source producer identity changed.');if(before?.type==='SOURCE_FRAME_V1'&&JSON.stringify(captureSourceFrameParameters(before.params).parent)!==JSON.stringify(captureSourceFrameParameters(after.params).parent)&&(!nativeSourceReplayRepair(preparation.nativeSourceReplay)||JSON.stringify(captureSourceFrameParameters(before.params).placement)!==JSON.stringify(captureSourceFrameParameters(after.params).placement)))throw Error('Source frame editing cannot reparent outside actual explicit repair.');if(before?.type==='PLANE'){const a=captureSourcePlaneParameters(before.params),b=captureSourcePlaneParameters(after.params);if(a.featureId!==b.featureId||a.orientation!==b.orientation||a.datum!==b.datum)throw Error('Principal source identity changed.');}}
+        if(!Array.isArray(sketches)||sketches.length>64)throw Error('Invalid source delta.');for(const row of sketches){if(ctx.sketchStorageService.getSketchData(row.faceId)!==row.before)throw superseded();if(row.after===null){if(after!==null||row.faceId!==faceId)throw Error('Foreign source removal.');}else if(!isNativeSourceReplay(preparation.nativeSourceReplay)&&!preparation.sketchOverrides?.some(item=>item.id===row.faceId&&item.data===row.after))throw Error('Source override differs from journal.');}
+        if(before===null&&!isNativeSourceReplay(preparation.nativeSourceReplay)&&!sketches.some(row=>row.faceId===faceId&&row.before===null&&typeof row.after==='string'))throw Error('Source creation needs its actual prepared empty source.');
         if(direction){const plan=planSourceFrameTravel(journal,{document,revision:journal.revision,direction,history:captured.history,readSketch:id=>ctx.sketchStorageService.getSketchData(id)});if(plan.index!==index||plan.featureId!==featureId||JSON.stringify(plan.afterOperation)!==JSON.stringify(after)||JSON.stringify(plan.sketches)!==JSON.stringify(sketches))throw Error('Source frame travel differs from its journal.');journalProposal=plan.next;}
         else journalProposal=recordSourceFrameEdit(journal,{document,revision:journal.revision,index,featureId,faceId,beforeOperation:before,afterOperation:after,sketches});
         if(after===null)captured.history.pop();else if(before===null)captured.history.push(after);else captured.history[index]=after;
@@ -1176,6 +1181,7 @@ export function activate(ctx: ApplicationContext) {
     const appendTravel=kind==='operation-append',removeOperation=kind==='operation-remove',removeUndo=removeOperation&&args.direction==='undo';
     if(appendTravel&&(!ownedPipelineHistories.has(before.history)||journalHeadDefinition!==before.history))throw Error('The accepted owned history is unavailable.');
     const captured = appendTravel?{history:before.history,signature:null}:await captureAuthoredHistory(before.history, check);
+    if(removeOperation&&!removeUndo&&nativeAttachmentDependents(captured.history,args.featureId).length)throw Object.assign(Error('Repair the attached source before removing its native parent.'),{code:'ACTIVE_DEPENDENTS'});
     if (!appendTravel&&(!fullTipSignature || captured.signature !== fullTipSignature)) throw new Error('The accepted full-tip history is unavailable or changed.');
     const index = args.index, request = captured.history[index];
     if(request)requireActiveFeature(request);
@@ -1290,7 +1296,9 @@ export function activate(ctx: ApplicationContext) {
     else if ((await captureAuthoredHistory(before.history, check)).signature !== expected) throw superseded();
     const nextState = {history:nextCapture.history, pointer:nextCapture.history.length-1};
     const scope:{epoch:number|null}={epoch:null};
+    const nativeSourceReplay=['selected-profile-depth','selected-profile-region'].includes(kind)&&hasNativeSourceAttachments(before.history)?issueNativeSourceReplay(ctx,{history:nextCapture.history,kind,direction:args.direction,expectedSketches:args.direction?planNativeSourceTravel(journal,args.direction,id=>ctx.sketchStorageService.getSketchData(id)):undefined,requireCurrent:check}):undefined;
     const preparation:PreparedSketchCommand = {
+      ...(nativeSourceReplay?{nativeSourceReplay}:{}),
       candidateScope:scope, requireCurrent:check,
       requireCommittedCurrent() {
         // Notification observers may queue caller loss after the synchronous
@@ -1460,7 +1468,7 @@ export function activate(ctx: ApplicationContext) {
     });
   Object.assign(ctx.craftService, closedSketchCommands);
   sourceFrameCommands=createSourceFrameCommands(ctx,submitPreparedReplay,epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();});
-  Object.assign(ctx.craftService,{inspectSourceFrames:sourceFrameCommands.inspectSourceFrames,createSourceFrame:sourceFrameCommands.createSourceFrame,editSourceFrame:sourceFrameCommands.editSourceFrame,inspectSourceFramePoints:sourceFrameCommands.inspectSourceFramePoints});
+  Object.assign(ctx.craftService,{inspectSourceFrames:sourceFrameCommands.inspectSourceFrames,createSourceFrame:sourceFrameCommands.createSourceFrame,editSourceFrame:sourceFrameCommands.editSourceFrame,repairSourceFrameParent:sourceFrameCommands.repairSourceFrameParent,inspectSourceFramePoints:sourceFrameCommands.inspectSourceFramePoints});
   sourcePlaneDepthCommands=createSourcePlaneDepthCommands(ctx,submitPreparedReplay,epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();},sourceFrameCommands.editPrincipalSourceDepth);
   Object.assign(ctx.craftService,{inspectSourcePlanes:sourcePlaneDepthCommands.inspectSourcePlanes,editSourcePlaneDepth:sourcePlaneDepthCommands.editSourcePlaneDepth});
   selectedProfileSourceDimensionCommands=createSelectedProfileSourceDimensionCommands(ctx,submitPreparedReplay,epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();});
@@ -1511,6 +1519,7 @@ export function activate(ctx: ApplicationContext) {
     submitModification(request,addModification,accepted,rejected,false,preparation),
     epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();},
     {listBuilds:listAvailableLoftBuilds,requireBuild:requireAvailableLoftBuild,historyBuild:genericHistoryBuild,budget:selectedProfileHistoryBudget}));
+  Object.assign(ctx.craftService,createWorkerPlanarAttachmentReadCommands(ctx,input=>evaluateWorkerSolidRead(input,'source-attachment')));
   Object.assign(ctx.craftService,createWorkerSolidPointCommands(ctx,input=>evaluateWorkerSolidRead(input,'points'),{requireBuild:requireAvailablePointBuild}));
   Object.assign(ctx.craftService,createWorkerManufacturingMeshReplay(ctx,input=>evaluateWorkerSolidRead(input,'manufacturing-meshes'),{requireBuild:requireAvailableManufacturingMeshBuild}));
   Object.assign(ctx.craftService,createWorkerDrawingReadCommands(ctx,input=>evaluateWorkerSolidRead(input,'drawing'),{requireBuild:requireAvailableManufacturingMeshBuild}));
@@ -1573,8 +1582,14 @@ export function activate(ctx: ApplicationContext) {
     try {
       MObjectIdGenerator.reset();
       const models = new Set<MObject>();
-      const sketchStorage = createCandidateSketchStorage(observation?.sketchStorage||ctx.sketchStorageService, preparation?.sketchOverrides, ReadSketch,preparation?.sketchRemovedIds);
+      const staticSketchStorage = createCandidateSketchStorage(observation?.sketchStorage||ctx.sketchStorageService, preparation?.sketchOverrides, ReadSketch,preparation?.sketchRemovedIds);
+      const needsSourceReplay=hasNativeSourceAttachments(history)||!!preparation?.nativeSourceReplay;
+      const sourceOperation=needsSourceReplay?ctx.operationService.get('SOURCE_FRAME_V1'):undefined;
+      if(needsSourceReplay&&!isRegisteredSourcePlane('SOURCE_FRAME_V1',sourceOperation))throw Error('The genuine source-frame producer changed.');
+      const sourceReplay=needsSourceReplay?await createNativeSourceReplay({ctx,history,owner:resources,source:staticSketchStorage,readSketch:ReadSketch,permit:observation?undefined:preparation?.nativeSourceReplay,requireCurrent:()=>{requireCurrent(epoch,documentGeneration,service);preparation?.requireCurrent();},expectedRun:sourceOperation?.run,overrideIds:preparation?.sketchOverrides?.map(row=>row.id)||[]}):null;
+      const sketchStorage=sourceReplay?.view||staticSketchStorage;
       const registry = ctx.cadRegistry.createEvaluationRegistry(sketchStorage);
+      sourceReplay?.bindRegistry(registry);
       const sourceFrames=new Map<string,any>(),observedFrames=new Map<string,number>();
       if(preparation?.sketchSourceFrames) {
         if(!preparation.sketchOverrides||preparation.sketchSourceFrames.length!==preparation.sketchOverrides.length||preparation.sketchSourceFrames.length>64)throw Error('Invalid candidate sketch frame coverage.');
@@ -1605,6 +1620,7 @@ export function activate(ctx: ApplicationContext) {
       }
       operationContext.engineEvaluation = resources;
       operationContext.authoredEvaluationHistory = history;
+      if(sourceReplay)operationContext.prepareNativeAttachedSource=sourceReplay.prepare;
       const patternReplay = {requestedSeed: null, seed: null};
       operationContext.patternReplay = patternReplay;
       operationContext.cadRegistry = registry;
@@ -1638,6 +1654,7 @@ export function activate(ctx: ApplicationContext) {
         if(observation&&!expectedOperation)throw Error('Uncaptured observation operation.');
         if (!independentPlane) registry.flushModels();
         let operationResult;
+        sourceReplay?.enter(i,operation);
         try { operationResult=await runRequest(history[i], operationContext, expectedOperation); }
         catch(error) {
           if(error&&typeof error==='object'&&Object.isExtensible(error)){
@@ -1646,6 +1663,7 @@ export function activate(ctx: ApplicationContext) {
           }
           throw error;
         }
+        finally { sourceReplay?.leave(); }
         const {consumed, created}=operationResult;
         if (history[i].type === 'PATTERN_CUT_LINEAR') patternReplay.seed = null;
         requireCurrent(epoch, documentGeneration, service);
@@ -1671,6 +1689,7 @@ export function activate(ctx: ApplicationContext) {
       if(endIndex===history.length-1)registry.assertSketchSourcesResolved(sketchStorage.getAllSketches().map(row=>row.id));
       requireCurrent(epoch,documentGeneration,service);
       preparation?.requireCurrent();
+      sourceReplay?.finish(endIndex);
       resources.seal();
       return {models:Array.from(models).sort((a,b)=>(a.id||'').localeCompare(b.id)), resources,history,registry};
     } catch (error) {
@@ -1682,8 +1701,8 @@ export function activate(ctx: ApplicationContext) {
 
   // An exclusive read uses the SAME evaluator and private ledger, without
   // accepting/publishing its resources or touching the accepted history epoch.
-  function evaluateWorkerSolidRead(input:any,observer:'points'|'step'|'manufacturing-meshes'|'drawing'='points'):Promise<any>{
-    if(observer!=='points'&&observer!=='step'&&observer!=='manufacturing-meshes'&&observer!=='drawing')throw Object.assign(Error('Unsupported native read operation.'),{code:'INVALID_REQUEST'});
+  function evaluateWorkerSolidRead(input:any,observer:'points'|'step'|'manufacturing-meshes'|'drawing'|'source-attachment'='points'):Promise<any>{
+    if(observer!=='points'&&observer!=='step'&&observer!=='manufacturing-meshes'&&observer!=='drawing'&&observer!=='source-attachment')throw Object.assign(Error('Unsupported native read operation.'),{code:'INVALID_REQUEST'});
     input.requireCurrent();requireEngineCleanup();
     if(pendingPipelines||pendingModifications)throw Object.assign(Error('Another evaluation is in progress.'),{code:'BUSY'});
     pendingPipelines++;
@@ -1705,6 +1724,7 @@ export function activate(ctx: ApplicationContext) {
           ?await classifyCandidateWorkerSolidPoints({owner:result.resources,registry:result.registry,...input.query,valid:input.valid})
           :observer==='step'?await exportCandidateWorkerSTEP({owner:result.resources,registry:result.registry,...input.query,valid:input.valid})
           :observer==='manufacturing-meshes'?await readManufacturingReplayBatch({owner:result.resources,registry:result.registry,...input.query,valid:input.valid},readCandidateWorkerManufacturingMesh)
+          :observer==='source-attachment'?await readCandidateWorkerPlanarFaces({owner:result.resources,registry:result.registry,...input.query,valid:input.valid})
           :await readCandidateWorkerDrawing({owner:result.resources,registry:result.registry,...input.query,valid:input.valid});
         input.requireCurrent();
       }catch(failure){error={cause:failure};}
@@ -1830,6 +1850,12 @@ export function activate(ctx: ApplicationContext) {
         }
         const callbacks=modificationCallbacks.get(curr);
         let nextJournal=callbacks?.journalProposal;
+        if(preparation?.nativeSourceReplay){
+          const changes=preparedNativeSourceChanges(preparation.nativeSourceReplay);
+          if(workspace)throw Error('Native source propagation must share one prepared workspace.');
+          if(changes.length)workspace=ctx.storageService.prepareWrites(changes.map(row=>({key:(service as any).sketchStorageKey(row.faceId),value:row.after})));
+          nextJournal=supplementNativeSourceJournal(authoredJournal$.value,nextJournal,changes,nativeSourceReplayDirection(preparation.nativeSourceReplay));
+        }
         let nextJournalSignature=callbacks?.operationAppend?nextTipSignature:callbacks?.journalSignature;
         if (!nextJournal && authoredJournal$.value.entries.length) {
           let keep=false;
@@ -2011,9 +2037,11 @@ export interface CraftHints {
 }
 
 interface CraftService {
+  inspectSourceFrameAttachments?:ReturnType<typeof createWorkerPlanarAttachmentReadCommands>['inspectSourceFrameAttachments'];
   inspectSourceFrames?:ReturnType<typeof createSourceFrameCommands>['inspectSourceFrames'];
   createSourceFrame?:ReturnType<typeof createSourceFrameCommands>['createSourceFrame'];
   editSourceFrame?:ReturnType<typeof createSourceFrameCommands>['editSourceFrame'];
+  repairSourceFrameParent?:ReturnType<typeof createSourceFrameCommands>['repairSourceFrameParent'];
   inspectSourceFramePoints?:ReturnType<typeof createSourceFrameCommands>['inspectSourceFramePoints'];
   inspectWorkerHistoryControls?:ReturnType<typeof createWorkerHistoryControlCommands>['inspectWorkerHistoryControls'];
   setWorkerFeatureSuppressed?:ReturnType<typeof createWorkerHistoryControlCommands>['setWorkerFeatureSuppressed'];

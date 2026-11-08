@@ -5,6 +5,8 @@ import {captureBoxSubtractConstruction,captureManufacturingConstruction} from '.
 import {captureManufacturingControls,captureManufacturingMetadata} from '../mount/ownedManufacturingMeshProtocol.mjs';
 import {captureLinkedPartDrawingDefinition} from '../../drawing/linkedPartDrawingDefinition.mjs';
 import {captureDrawingReadResult,unresolvedDrawingRead} from '../mount/ownedDrawingReadProtocol.mjs';
+import {captureNativeFaceParent} from '../source/sourceFrameIntent.mjs';
+import {capturePlanarAttachmentObservation} from '../mount/ownedPlanarAttachmentProtocol.mjs';
 import {qualifySourceCurveId} from '../extrusion/selectedRegionDescriptor.mjs';
 import {captureOwnedLoftEvaluation,captureLoftSectionReferences} from './ownedLoftFeature.mjs';
 import {captureOwnedSweepEvaluation,captureSweepPathReferences} from './ownedSweepFeature.mjs';
@@ -239,6 +241,23 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
 
 // Read-only use of a FRESH candidate's real private native output. Accepted
 // models have retired handles; no public caller can supply or receive one here.
+export async function readCandidateWorkerPlanarFace({owner,registry,parent,valid,expectedMetrics}){
+ const p=captureNativeFaceParent(parent),current=()=>{owner.requireCurrent();if(owner.state!=='candidate'||owner.signal.aborted||valid()!==true)throw cancelled();owner.requireCurrent();};
+ current();const s=ledgers.get(owner),item=s?.outputs.get(p.bodyId),source=s?.sources.get(p.sourceFeatureId),mount=s?.mount;
+ if(!s||!item||!source||!mount||s.engine!==p.engine||s.engineRevision!==p.engineRevision||item.featureId!==p.featureId||registry.find(p.bodyId)!==item.model||source.featureId!==p.sourceFeatureId||source.faceId!==p.sourceFaceId||source.engine!==p.engine||source.engineRevision!==p.engineRevision||registry.findFace(source.faceId)!==source.face)fail('The native attachment parent or constructor is no longer current.','UNRESOLVED_SOURCE');
+ if(source.regionId!==p.sourceRegionId)throw Object.assign(Error('The genuine native constructor now uses a different selected region.'),{code:'UNRESOLVED_SOURCE',attachmentReason:'DATUM_CHANGED',failedFeatureId:p.featureId,originFeatureId:p.originFeatureId});
+ const selection=selectionSnapshots.get(item.model);if(selection?.status==='unavailable'&&['PROFILE_PROVENANCE_RESOURCE_LIMIT','SELECTION_RESOURCE_LIMIT','BOOLEAN_HISTORY_RESOURCE_LIMIT'].includes(selection.reason))fail('Native attachment history exceeds its observation budget.','RESOURCE_LIMIT');const descriptor=selection?.status==='available'&&selection.plan.version===2?selection.plan.faces.find(row=>row.id===p.selectionId):null;
+ if(!descriptor||descriptor.originFeatureId!==p.originFeatureId||descriptor.role!=='last-cap'||descriptor.geometry!=='plane'){const prior=selection?.status==='available'?selection.plan.unresolved.find(row=>'id'in row&&row.id===p.selectionId):null;throw Object.assign(Error('The attachment selection has no unique current planar cap.'),{code:'UNRESOLVED_SOURCE',attachmentReason:prior?.reason||'REFERENCE_MISSING',...(prior&&'featureId'in prior?{failedFeatureId:prior.featureId,originFeatureId:prior.originFeatureId}:{})});}
+ if(!mount.descriptor.operations.some(op=>op.id==='solid.face.frame.read'&&op.version===1))fail('The exact staged runtime does not support native planar attachment.','UNSUPPORTED_FRAME_PARENT');
+ const metrics=item.model.inspectKernelMetrics();if(metrics.resultKind!=='single-solid'||metrics.solidCount!==1||metrics.nativeValidity?.valid!==true||!(metrics.nativeVolume>0))fail('Attachment requires one valid current native solid.','UNSUPPORTED_FRAME_PARENT');
+ if(expectedMetrics&&(!Object.isFrozen(expectedMetrics)||expectedMetrics.resultKind!=='single-solid'||expectedMetrics.solidCount!==1||expectedMetrics.nativeValidity?.valid!==true||!Object.is(metrics.nativeVolume,expectedMetrics.nativeVolume)||['min','max'].some(k=>metrics.nativeBounds[k].some((v,i)=>!Object.is(v,expectedMetrics.nativeBounds?.[k]?.[i])))||'sha256:'+expectedMetrics.runtime?.jsSha256+':'+expectedMetrics.runtime?.wasmSha256!==p.engineRevision))fail('Native attachment replay differs from the accepted measurement.','REPLAY_RESULT_MISMATCH');
+ const check=()=>{current();if(s.outputs.get(p.bodyId)!==item||s.sources.get(p.sourceFeatureId)!==source||registry.find(p.bodyId)!==item.model||registry.findFace(source.faceId)!==source.face||item.model.inspectKernelMetrics()!==metrics)throw cancelled();validateEngineMount(p.engine,mount,p.engineRevision);mount.assertSolidBinding(item.handle);mount.assertSolidBinding(source.handle);current();};
+ check();const result=await mount.execute({op:'solid.face.frame.read',version:1,unit:'millimeter',handle:item.handle,sourceHandle:source.handle,producerFeatureId:p.featureId,originFeatureId:p.originFeatureId,selectionId:p.selectionId,sourceFeatureId:p.sourceFeatureId,sourceRegionId:p.sourceRegionId,framePolicy:p.framePolicy},{signal:owner.signal});check();if(result?.op!=='solid.face.frame.read'||result.contractVersion!==1||result.unit!=='millimeter')fail('Malformed native plane observation.','ENGINE_FAILURE');return capturePlanarAttachmentObservation(result.observation);
+}
+export async function readCandidateWorkerPlanarFaces({owner,registry,parents,expectedMetrics,valid}){
+ owner.requireObservationOnly();if(!Array.isArray(parents)||parents.length<1||parents.length>16||!Object.isFrozen(expectedMetrics))fail('Invalid attachment observation batch.');const rows=[];for(const parent of parents){owner.requireObservationOnly();const observation=await readCandidateWorkerPlanarFace({owner,registry,parent,expectedMetrics,valid});owner.requireObservationOnly();rows.push(Object.freeze({parent:captureNativeFaceParent(parent),observation}));}return Object.freeze(rows);
+}
+
 export async function readCandidateWorkerDrawing({owner,registry,bodyId,definition,expectedMetrics,valid}){
  const def=captureLinkedPartDrawingDefinition(definition),engine=def.target.engine,engineRevision=def.target.engineRevision,featureId=def.target.featureId;
  if(!owner||typeof owner.requireObservationOnly!=='function'||typeof owner.requireCurrent!=='function'||typeof valid!=='function'||!registry||typeof registry.find!=='function'||bodyId!==solidBodyId(featureId))fail('Invalid drawing candidate observation.');

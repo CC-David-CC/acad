@@ -5,5 +5,6 @@ export function sourceFrameVector(value:any,limit?:number):readonly number[];
 export function captureSourceFrame(value:any):any;
 export function captureSourceFramePlacement(value:any):any;
 export function captureSourceFrameParent(value:any):any;
+export function captureNativeFaceParent(value:any):any;
 export function captureSourceFrameParameters(value:any):any;
 export function sourceFrameText(value:any):string;
