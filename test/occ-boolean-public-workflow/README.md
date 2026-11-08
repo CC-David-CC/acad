@@ -88,6 +88,50 @@ unchanged. No product counter reset, blanket omission or assertion skip exists.
 This correction was prepared by reading source and frozen evidence only. No
 driver, checker, test, probe, build or browser was executed during preparation.
 
+### R2 stale-history refusal and separate product correction (source-only)
+
+The complete R2 FAIL remains frozen with producing Core
+`baf95ccae09b915f1038286e01a674fb3a7fa6f2` and Desktop
+`78cc1694eca1a88623f33e7ff748673c909a6017`. It reached subtraction19000,
+genuine creation Undo/two parent point observations/Redo, later box24 and outer
+width35 Native observations. The actual old source-box edit then refused with
+`Error`, no code, and `Authored edit history is stale.` The driver incorrectly
+expected `AbortError`. Its recorded before/after state is exactly equal,
+including counter4; R2 performed no Save. No result from this later source
+correction is substituted into that evidence.
+
+Source tracing finds the uncoded error at the actual Craft
+authoredFeatureOperation revision/document preflight. workerSolidCommands
+delegates unchanged; Desktop solid-commands, settleScopedCommand and the command
+registry preserve that rejection. The signed harness records its actual code
+and name. No machine-readable code was stripped by transport. The producer
+lacked one. The separate product commit1bd2a2362994b807667ec6cf97bc379ab552a155
+adds own `code:'STALE_HISTORY'` to that existing throw and authoredEditTravel's
+same preflight; it preserves Error, message, condition/order and publication
+semantics. It does not wrap or infer codes from message strings and does not
+change internal journal invariants or arbitrary Native errors.
+
+The error layers stay distinct:
+
+- An already-stale authored revision in the current document is
+  `Error` + `STALE_HISTORY`, before candidate work or allocation.
+- A guarded Desktop document-token mismatch remains `AbortError` +
+  `STALE_DOCUMENT`; no such token mismatch is substituted into this fixture.
+- Actual cancellation/document-owner supersession remains its existing
+  `AbortError` path, preserving the explicit committed marker after publication.
+- Schema, target, solver and Native refusals retain their own existing errors;
+  they are not reclassified as stale history.
+
+This acceptance follow-up depends on that separate product repair. It requires
+the exact Error name and STALE_HISTORY code for the same captured old request,
+and exact unnormalized equality of ALL before/after state, revisions, counters
+and resources. The existing generic refusal preservation assertions remain.
+The after-whole independent checker repeats both the code/name requirement and
+full raw state equality. It never accepts an uncoded message match or every
+AbortError as equivalent. Counter high-water/geometry/refusal controls, all
+three .cad cycles and multi STEP checks are unchanged. Source review only;
+no driver/checker, tests, probes, build, browser or Native execution occurred.
+
 `example.mjs` invokes only existing registered commands. The driver authors all
 boxes normally, captures their actual feature/output receipts and uses those
 opaque IDs. Private frame reads are detached observations of source/resources,

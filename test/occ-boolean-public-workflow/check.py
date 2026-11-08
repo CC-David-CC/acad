@@ -186,6 +186,7 @@ def allocation_contract(r,facts):
     return {'everyTravelPreservesCounters':len(r['travels']),'parentHighWater':parent_high,'createdHighWater':created_high,'suffixHighWater':suffix_high,'creationUndoCounterRollback':'forbidden'}
 def refusals(r,facts):
     seen=set()
+    one([row for row in r['refusals'] if row['label']=='Actual stale source-box edit'],'required genuine old authored-revision refusal')
     for row in r['refusals']:
         error=row['error'];require(error and error['committed'] is False and error['possiblyCommitted'] is False,'real uncommitted refusal')
         require(normalized(row['before'],row['candidate'])==normalized(row['after'],row['candidate']),'exact accepted state/resources across refusal');settled(row['after']);history(row['case'],row['bindings'],row['before'],r,facts);seen.add(row['case']['label'])
@@ -193,7 +194,9 @@ def refusals(r,facts):
         if spec.get('refusalCodes') and row['label']==spec['label']:require(error['code'] in spec['refusalCodes'],'frozen strict Join refusal catalogue')
         if 'point-query' in row['label']:require(error['code']=='UNSUPPORTED_TARGET','explicit app multi/empty point limitation')
         if 'STEP-export' in row['label']:require(error['code']=='UNAVAILABLE','empty STEP export unavailable')
-        if 'stale' in row['label']:require(error['name']=='AbortError','actual stale box edit currentness')
+        if 'stale' in row['label']:
+            require(error['name']=='Error' and error['code']=='STALE_HISTORY','authored revision preflight retains exact machine-readable stale-history refusal')
+            require(row['before']==row['after'],'stale authored-history preflight retains ALL state/revisions/counters/resources, without normalization')
     for spec in facts['cases']:
         if spec.get('refusalCodes') or spec.get('expected',{}).get('solids') in (0,2):require(spec['label'] in seen,'required explicit strict/empty/multi refusal case')
 def void_contact(case,bindings,nodes):
