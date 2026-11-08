@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Run AFTER the complete public driver. No producer evaluator/geometry imports.
 Fraction-based dimensional arithmetic, saved intent/source, real Native metrics
-and point replies are independently checked. Does not claim missing format APIs.
+and point replies, including actual public formatted rows, are independently checked.
 """
 import ast, hashlib, importlib.util, json, math, sys
 from fractions import Fraction
@@ -15,9 +15,9 @@ def near(value,expected,budget,message):
 PREFIX='codi-physical-parameters:1\n'
 UNITS={'length':'millimeter','area':'square-millimeter','volume':'cubic-millimeter','angle':'radian','scalar':'dimensionless','count':'count','boolean':None}
 DIM={'scalar':(0,0),'length':(1,0),'area':(2,0),'volume':(3,0),'angle':(0,1)}
-BASE=[('width','length',None),('height','length','mm(20)'),('depth','length','mm(3)'),('inchArea','area','inch(1) * inch(1)'),('inchVolume','volume','inch(1) * inch(1) * inch(1)'),('quarterTurn','angle','deg(90)'),('rectangleArea','area','mm(10) * mm(20)'),('rectangleVolume','volume','rectangleArea * mm(3)'),('ratio','scalar','inch(2) / inch(1)'),('copies','count','3'),('lengthThree','length','mm(3)'),('enabled','boolean','true')]
+BASE=[('width','length',None),('height','length','mm(20)'),('depth','length','mm(3)'),('inchArea','area','inch(1) * inch(1)'),('inchVolume','volume','inch(1) * inch(1) * inch(1)'),('quarterTurn','angle','deg(90)'),('rectangleArea','area','mm(10) * mm(20)'),('rectangleVolume','volume','rectangleArea * mm(3)'),('ratio','scalar','inch(2) / inch(1)'),('copies','count','3'),('lengthThree','length','mm(3)'),('enabled','boolean','true'),('tinyLength','length','mm(5e-324)')]
 FAILURES={'length-plus-angle':'DIMENSION_MISMATCH','area-as-length':'DIMENSION_MISMATCH','unknown-unit':'INVALID_EXPRESSION','locale-comma':'INVALID_EXPRESSION','overflow-literal':'NUMERIC_DOMAIN','overflow-finite-domain':'NUMERIC_DOMAIN','division-by-zero':'NUMERIC_DOMAIN','length-as-count':'COUNT_DOMAIN','fractional-count':'COUNT_DOMAIN','length-as-boolean':'DIMENSION_MISMATCH','boolean-arithmetic':'DIMENSION_MISMATCH','unknown-parameter':'UNKNOWN_PARAMETER'}
-GAPS=['public-formatted-area-read','public-formatted-volume-read','public-formatted-angle-read']
+GAPS=[]
 BUDGET={'length':1e-10,'area':1e-9,'volume':1e-8,'angle':1e-14,'scalar':1e-14}
 
 def evaluate(definitions):
@@ -51,13 +51,24 @@ def evaluate(definitions):
     return {name:(row['dimension'],done[name][0]) for name,row in specs.items()}
 
 def expected_definitions(expression):return [{'name':n,'dimension':d,'expression':expression if n=='width' else text} for n,d,text in BASE]
-def check_quantities(rows,definitions):
+def check_quantities(rows,definitions,display):
     expected=evaluate(definitions);require(len(rows)==len(expected),'quantity census');seen=set()
     for row in rows:
         name=row['name'];require(name in expected and name not in seen,'quantity identity');seen.add(name);dimension,value=expected[name];require(row['dimension']==dimension and row['unit']==UNITS[dimension],'quantity dimension/unit')
         if dimension=='boolean':require(type(row['value']) is bool and row['value']==value,'boolean versus numeric identity')
         elif dimension=='count':require(type(row['value']) is int and row['value']==value,'integer count versus length identity')
         else:near(row['value'],value,BUDGET[dimension],'canonical '+name)
+        if dimension in ('scalar','count','boolean'):
+            require(row['display'] is None and row['displayStatus']=='not-applicable' and row['displayReason']=='NON_DIMENSIONED_QUANTITY','explicit no-display '+name);continue
+        if name=='tinyLength':
+            require(row['value']==float(Fraction('5e-324')) and row['value']>0,'tiny canonical value must remain nonzero')
+            if display=='inch':
+                require(row['display'] is None and row['displayStatus']=='unavailable' and row['displayReason']=='FORMATTER_REJECTED','actual underflow has no substituted display');continue
+        require(row['displayStatus']=='available' and row['displayReason'] is None,'actual public display '+name);shown=row['display'];require(set(shown)=={'canonicalValue','canonicalUnit','value','unit','text'} and shown['canonicalValue']==row['value'] and shown['canonicalUnit']==UNITS[dimension],'display retains canonical data '+name)
+        angle=dimension=='angle';inch=display=='inch';power=DIM[dimension][0];converted=float(value)*180/math.pi if angle else value/Fraction(127,5)**power if inch else value;unit='degree' if angle else {'length':'inch','area':'square-inch','volume':'cubic-inch'}[dimension] if inch else UNITS[dimension];symbol='°' if angle else {'length':'in','area':'in²','volume':'in³'}[dimension] if inch else {'length':'mm','area':'mm²','volume':'mm³'}[dimension]
+        require(shown['unit']==unit,'formatted unit '+name);near(shown['value'],converted,1e-12 if angle else BUDGET[dimension],'full converted value '+name);require(shown['text']==format(float(converted),'.2f')+('' if angle else ' ')+symbol,'actual human text '+name)
+        if name=='tinyLength':require(shown['value']==row['value'] and shown['value']>0 and shown['text']=='0.00 mm','text rounding must not zero tiny numeric data')
+        if inch and name in ('rectangleArea','rectangleVolume'):require(abs(shown['value']-round(shown['value'],2))>1e-9,'full converted number must not be text-rounded')
     # Exact rational truths, separate from the provider's numeric result.
     require(expected['inchArea'][1]==Fraction(16129,25),'1in² rational');require(expected['inchVolume'][1]==Fraction(2048383,125),'1in³ rational');require(expected['rectangleArea'][1]==200 and expected['rectangleVolume'][1]==600,'dimensional products');require(expected['ratio'][1]==2,'length quotient scalar');near(float(expected['quarterTurn'][1]),math.pi/2,1e-15,'90deg radians');return expected
 
@@ -78,9 +89,9 @@ def read_native(file,extension):
     require(extension=='.jsketcher.json','explicit native mode');return reader.parse_json(file.read_bytes())
 
 def main(directory):
-    directory=Path(directory);receipt=json.loads((directory/'receipt.json').read_text());require(receipt['status']=='SUPPORTED_CHAIN_PASS','complete supported chain must finish before independent oracle');require(receipt['remainingRequirements']==GAPS,'missing formatted APIs must remain explicit');require(receipt['sourcePins']==receipt['sourcePinsAfter'],'frozen executing source');require(receipt['ownedContextClosed'] and receipt['sharedBrowserDisconnectedOnly'],'owned browser cleanup');binding=receipt['binding'];build=receipt['engineRevision'];require(len(receipt['saves'])==3,'three whole native files');require(len(receipt['observations'])>=12,'whole edit/travel/reopen/read chain')
+    directory=Path(directory);receipt=json.loads((directory/'receipt.json').read_text());require(receipt['status']=='PASS','complete composed workflow must finish before independent oracle');require(receipt['remainingRequirements']==GAPS,'bounded projection requirements');require(receipt['sourcePins']==receipt['sourcePinsAfter'],'frozen executing source');require(receipt['ownedContextClosed'] and receipt['sharedBrowserDisconnectedOnly'],'owned browser cleanup');binding=receipt['binding'];build=receipt['engineRevision'];require(len(receipt['saves'])==3,'three whole native files');require(len(receipt['observations'])>=12,'whole edit/travel/reopen/read chain');require({r['display'] for r in receipt['observations']}=={'millimeter','inch'},'both document presentations')
     for observation in receipt['observations']:
-        defs=expected_definitions(observation['expression']);expected=check_quantities(observation['before']['physical']['quantities'],defs);require(observation['before']['physical']['definitions']==defs,'exact public expression intent');check_metrics(observation,binding,expected['width'][1],build)
+        defs=expected_definitions(observation['expression']);expected=check_quantities(observation['before']['physical']['quantities'],defs,observation['display']);require(observation['before']['physical']['definitions']==defs,'exact public expression intent');require(observation['before']['physical']['presentationRevision']==observation['before']['units']['revision'] and observation['before']['physical']['presentationRevision'],'current presentation token');check_metrics(observation,binding,expected['width'][1],build)
     require({r['label']:r['expectedCode'] for r in receipt['refusals']}==FAILURES,'all finite refusal requirements')
     for row in receipt['refusals']:
         failure=row['failure'];require(failure['code']==FAILURES[row['label']] and not failure['committed'] and not failure['possiblyCommitted'],'precise refusal layer');require(canonical(row['before'])==canonical(row['after']),'refusal preserves every captured accepted field/token')
@@ -100,7 +111,7 @@ def main(directory):
                 if row['typeId']=='SegmentLength':
                     require(len(row['objects'])==1,'original actual length locator');row['constants']['length']='width' if row['objects']==[binding['widthSegmentId']] else 'height';lengths+=1
         require(lengths==2 and sketch['stages']==wanted,'all original rows/classifications/refs retained except explicit width/height binding');require(all(sketch.get(k)==original.get(k) for k in ('dimensions','labels','constants','metadata','boundary')),'unrelated source/ruler/frame intent unchanged');require(canonical(item['before']['capture'])==canonical(item['after']['capture']),'native Save does not mutate authored/native/journal state');saved.append({'file':item['savedFile'],'sha256':item['sha256'],'widthMillimeters':float(width),'analyticNativeVolume':float(width*60)})
-    return {'status':'SUPPORTED_CHAIN_PASS','notFullC09Signoff':True,'remainingRequirements':GAPS,'canonicalQuantityDimensions':7,'refusals':len(receipt['refusals']),'actualNativePointObservations':5*len(receipt['observations']),'nativeFiles':saved,'readerScope':'Independent Fraction/AST quantity and analytic source/Native checks; existing independent ZIP32 reader for .cad only. No missing formatted area/volume/angle proof.'}
+    return {'status':'PASS','scope':'Finite C09 quantity/public formatted-read/native-persistence fixture only; not universal unit/locale/UI or wholeGate1 qualification.','canonicalQuantityDimensions':7,'publicDisplayDimensions':['length','area','volume','angle'],'tinyCanonicalValuePreservedWithExplicitInchDisplayUnavailability':True,'refusals':len(receipt['refusals']),'actualNativePointObservations':5*len(receipt['observations']),'nativeFiles':saved,'readerScope':'Independent Fraction/AST quantity/display and analytic source/Native checks; existing independent ZIP32 reader for .cad only.'}
 
 if __name__=='__main__':
     require(len(sys.argv)==2,'check.py EVIDENCE-DIRECTORY');print(json.dumps(main(sys.argv[1]),indent=2))

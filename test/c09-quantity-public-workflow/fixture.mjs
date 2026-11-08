@@ -11,9 +11,12 @@ export const definitions=width=>[
  {name:'ratio',dimension:'scalar',expression:'inch(2) / inch(1)'},
  {name:'copies',dimension:'count',expression:'3'},
  {name:'lengthThree',dimension:'length',expression:'mm(3)'},
- {name:'enabled',dimension:'boolean',expression:'true'}
+ {name:'enabled',dimension:'boolean',expression:'true'},
+ // A real accepted nonzero quantity which inch presentation cannot represent.
+ // It is deliberately not a geometric feature dimension.
+ {name:'tinyLength',dimension:'length',expression:'mm(5e-324)'}
 ];
-export const quantities=width=>({width:['length',width,'millimeter'],height:['length',20,'millimeter'],depth:['length',3,'millimeter'],inchArea:['area',645.16,'square-millimeter'],inchVolume:['volume',16387.064,'cubic-millimeter'],quarterTurn:['angle',Math.PI/2,'radian'],rectangleArea:['area',200,'square-millimeter'],rectangleVolume:['volume',600,'cubic-millimeter'],ratio:['scalar',2,'dimensionless'],copies:['count',3,'count'],lengthThree:['length',3,'millimeter'],enabled:['boolean',true,null]});
+export const quantities=width=>({width:['length',width,'millimeter'],height:['length',20,'millimeter'],depth:['length',3,'millimeter'],inchArea:['area',645.16,'square-millimeter'],inchVolume:['volume',16387.064,'cubic-millimeter'],quarterTurn:['angle',Math.PI/2,'radian'],rectangleArea:['area',200,'square-millimeter'],rectangleVolume:['volume',600,'cubic-millimeter'],ratio:['scalar',2,'dimensionless'],copies:['count',3,'count'],lengthThree:['length',3,'millimeter'],enabled:['boolean',true,null],tinyLength:['length',Number.MIN_VALUE,'millimeter']});
 export const failures=Object.freeze([
  ['length-plus-angle','length','mm(1) + deg(90)','DIMENSION_MISMATCH'],
  ['area-as-length','length','mm(10) * mm(20)','DIMENSION_MISMATCH'],
@@ -28,5 +31,5 @@ export const failures=Object.freeze([
  ['boolean-arithmetic','scalar','true + 1','DIMENSION_MISMATCH'],
  ['unknown-parameter','length','missingQuantity','UNKNOWN_PARAMETER']
 ]);
-export const gaps=Object.freeze(['public-formatted-area-read','public-formatted-volume-read','public-formatted-angle-read']);
+export const displayDimensions=Object.freeze(['length','area','volume','angle']);
 export const tolerance=Object.freeze({length:1e-10,area:1e-9,volume:1e-8,angle:1e-14,scalar:1e-14,sourceCoordinate:5e-8,nativeBounds:1e-6,nativeVolume:1e-6});

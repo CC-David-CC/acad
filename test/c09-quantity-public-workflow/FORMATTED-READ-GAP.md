@@ -1,17 +1,15 @@
-# Missing public formatted quantities: bounded follow-up contract
+# Public formatted quantities: source contract and prior gap
 
-Source observation only, not a reproduced rendering incident. `web/app/cad/craft/craftBundle.ts:inspectPhysicalParameters` currently returns canonical quantities with `{name,dimension,value,unit}`. Its returned rows do not carry formatted text. `web/app/cad/projectManager/projectManagerBundle.ts` already exposes document-scoped `formatDisplayQuantity(value,dimension,digits?)`, implemented by `displayUnits.mjs`; it supports length, area, volume and angle with actual inch powers and degree presentation. Only the normal closed-sketch measurement reader currently projects that formatter into a public quantity-like receipt, for length.
+**Source complete, unqualified.** The original63e3857 packet correctly recorded that public area/volume/angle formatting was absent. This follow-up implements that narrow projection in `craftBundle.ts:inspectPhysicalParameters`; no historical source/evidence is relabelled, and nothing is staged or executed by this source task. The whole updated workflow must qualify the composed source before any claim.
 
-Consequently the prepared current-supported workflow proves real public length output, all canonical quantities, saved authored definitions and Native replay. It **does not** prove public formatted area/volume/angle, painted annotations, an authoring UI, general physical-property providers, mass/density or locale parsing. The independent oracle must retain those three missing requirements even if every supported row passes.
+## Authoritative public read
 
-## Smallest proposed product seam — not implemented here
-
-Extend the SAME `inspectPhysicalParameters` rows with an optional immutable `display` projection for dimensioned length/area/volume/angle, using the SAME current manager formatter. Example shape:
+The SAME `inspect-physical-parameters` command retains canonical `{name,dimension,value,unit}` exactly. Rows add derived `display`, `displayStatus`, `displayReason`, and the root adds `presentationRevision` (null when no ready typed presentation was captured). Example:
 
 ```js
 {
   name: 'inchArea', dimension: 'area', value: 645.16,
-  unit: 'square-millimeter',
+  unit: 'square-millimeter', displayStatus: 'available', displayReason: null,
   display: {
     canonicalValue: 645.16, canonicalUnit: 'square-millimeter',
     value: 1, unit: 'square-inch', text: '1.00 in²'
@@ -19,10 +17,26 @@ Extend the SAME `inspectPhysicalParameters` rows with an optional immutable `dis
 }
 ```
 
-Use only the already accepted quantity table; do not re-evaluate expressions, persist formatted values, build another quantity table or relabel a canonical number as inch/degree. Capture and recheck actual manager/service identity, its formatter/inspect function identity, document/presentation revision and physical-result/source/history currentness around formatting, including a post-call reentrancy check. Return the current presentation revision so callers can detect a stale formatted read. Formatting may fail explicitly if its existing representability/metadata bounds are exceeded; do not round away a domain failure. Enforce the existing64KiB public metadata ceiling before returning.
+The literal example illustrates fields/units, not a promise of decimal-perfect binary multiplication. Actual canonical and converted numeric fields keep their full available Number values; only the formatter's human text rounds. The source uses the existing current manager's `formatDisplayQuantity(value,dimension)` with its normal2-digit text. Nothing evaluates formula arithmetic again, persists derived displays, creates a quantity table, dispatches geometry or relabels canonical millimeters/radians as inch/degree.
 
-For scalar/count/boolean, retain their exact canonical types/units; either omit `display` or define an explicit separate truthful textual contract. Do not call the dimensioned formatter with an invented unit. No new flag may turn a boolean into1, a length into count, or a count into length.
+| Dimension/condition | display | displayStatus | displayReason |
+| --- | --- | --- | --- |
+| length/area/volume/angle, representable | Detached frozen5-field formatter record | available | null |
+| scalar/count/boolean | null | not-applicable | NON_DIMENSIONED_QUANTITY |
+| Current captured formatter throws | null | unavailable | FORMATTER_REJECTED |
+| Formatter absent from captured manager | null | unavailable | FORMATTER_UNAVAILABLE |
+| Returned record malformed/wrong canonical/unit/nonfinite/zeroed/oversized | null | unavailable | INVALID_FORMATTER_RESULT |
 
-Then version/freeze an addition to the WHOLE workflow before observations: require real `quantities[].display` for the four dimensioned families in mm and inch. Check `1.00 in²`, `1.00 in³`, `90.00°` and correct metric counterparts from actual command replies, with independent canonical/display arithmetic, same-window exact read-only state, presentation-only invariance and final Save/Open retention. No private manager call or driver-generated summary counts as that missing public evidence. The current driver, fixture, frozen evidence and independent oracle must not be retroactively relabelled full C09 PASS.
+A formatter throw is not diagnosed by parsing error strings. `FORMATTER_REJECTED` reports the actual owned call outcome without inventing a more specific mathematical cause. Unit-conversion underflow is exercised by the complete workflow: `tinyLength = mm(5e-324)` stays a real nonzero canonical quantity. In mm, numeric display stays nonzero although human text is `0.00 mm`; in inch the real formatter rejects conversion to zero, leaving canonical value/unit intact and display explicitly unavailable. It never substitutes millimeter display as if inch succeeded. Existing absolute1e12 canonical evaluation bounds make conversion overflow unreachable for this fixture; the existing overflow refusal cases remain NUMERIC_DOMAIN, not fabricated positive display tests.
 
-Ownership proposal for later root review: narrow Craft inspector projection and its public type only; Desktop adapter already returns the same structured normal read result, so no second command/provider should be necessary. Existing document manager/formatter, geometry Worker, physical evaluator, saved format and authoritative journal need no new state for this read-only projection. Root must approve the actual source boundary and compose it before any qualification claim.
+## Custody and concrete work bound
+
+Capture actual manager and `ctx.services.projectManager` authority, formatter/inspection functions, project generation/signal/host state, Craft/storage/expression identities, physical resolver/current-result function identities, thirteen real stream identities/revisions, sketch namespace revision and pending pipeline/epoch state. Recheck constant-size captured facts around quantity resolution and actual formatter calls. Recheck actual PM presentation token/unit metadata before/after each formatter; a reentrant newer edit, unit switch (including switch-away-and-back), manager replacement, source/result change, pipeline or lifetime loss cannot return a stale projection. Keep the existing full authored revision checks at batch boundaries.
+
+For N≤256 definitions and D≤N dimensioned rows, there are at most D formatter calls and2D+3 presentation-token inspections on the normal ready path. Per-row guards compare fixed service/stream/version records; they do not enumerate sketch keys, serialize geometry, hash source, call an optimizer or create Workers. The five-field display capture permits text≤64 UTF-16 units and fixed known unit strings; canonical/converted values are finite Numbers. The added projection is conservatively bounded by1KiB UTF-8 bytes/row plus the single bounded presentation token (≤257KiB total added data). Existing real quantity values≤1e12 make actual formatter text much shorter. This is a structural work/data bound, not a latency or zero-main-work claim.
+
+No new aggregate output/source cap is introduced. Existing256-definition and64KiB accepted-source rules remain unchanged; an otherwise valid existing inspection is not rejected because added fields push a response over an arbitrary new64KiB threshold. Existing transport limits are unchanged. Every row preserves canonical facts even if formatting is unavailable. No private diagnostic result becomes mathematical authority.
+
+## Complete qualification boundary
+
+The ONE updated driver/oracle requires actual public display records for all four dimensioned families in mm and inch,90.00° in both, full non-text-rounded area/volume conversions, all seven canonical kinds, explicit no-display scalar/count/boolean and tiny-value availability behavior. It retains all original invalid cases, exact read/refusal state, units, shared travel, three native Saves/server equality/fresh Opens/reedits. After the whole driver, the independent Fraction/AST/artifact oracle checks the actual formatted reply values and text; it never calls the product formatter. GUI annotation paint, arbitrary units/locale syntax, manufacturing tolerance semantics and wholeGate1 signoff are outside this finite workflow. No new PM/Worker/Native/Files/index/format/journal state is added.
