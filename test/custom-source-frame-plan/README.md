@@ -13,5 +13,6 @@ Files:
 - CONTRACT.md: current source evidence, exact proposed schema/API, transaction and ownership.
 - ACCEPTANCE.md: one eventual complete public workflow and independent measurements. It is a plan, not an executed driver or a passing result.
 - NATIVE-ATTACHMENT.md: required genuine extruded-face attachment phase, existing protected evidence and minimal new reader/repair dependencies.
+- STORAGE-SEMANTICS.md: authoritative local intent/attachment versus the existing persisted derived boundaryFrame cache, strict validation and save/Open/writeback flow.
 
 Current user precision direction is 50 pm (`5e-8 mm`) for the small-design geometric acceptance budget. A proposed frame-validity tolerance is dimensionless and does not replace that geometric budget. Existing Native expanded BRep bounds and mass-integration estimates must be identified separately; they cannot certify point placement at 50 pm.
