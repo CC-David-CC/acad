@@ -6,7 +6,7 @@ import Vector from 'math/vector';
 import {Types} from 'cad/craft/schema/types';
 import standardPlaneOperation from '../plane/simplePlaneOperation';
 import {sourcePlaneShellId,sourcePlaneFaceId} from 'cad/craft/sourcePlaneIdentity.mjs';
-import {captureSourceFrameParameters,SOURCE_FRAME_TYPE,sourceFrameFail as fail} from 'engine/source/sourceFrameIntent.mjs';
+import {captureSourceFrame,captureSourceFrameParameters,SOURCE_FRAME_TYPE,sourceFrameFail as fail} from 'engine/source/sourceFrameIntent.mjs';
 import {canonicalAuthoredFeatureId} from 'cad/craft/authoredFeatureIdentity.mjs';
 import {captureSourcePlaneParameters} from 'sketcher/headless/sourcePlaneDepthEnvelope.mjs';
 import {runSourceFramePreparation} from 'sketcher/headless/sourceFrameClient';
@@ -34,7 +34,9 @@ const sourceFrameRun=async(params:any,ctx:any,raw:any)=>{
  const f=reply.frame,vector=(v:number[])=>new Vector(v[0],v[1],v[2]),csys=new CSys(vector(f.origin),vector(f.x),vector(f.y),vector(f.z)),plane=new Plane(csys.z as any,csys.z.dot(csys.origin));
  const model=new MOpenFaceShell(new PlaneSurfacePrototype(plane),csys,sourcePlaneShellId(raw,params.featureId)),source=ctx.sketchStorageService.getSketchData(model.face.id);
  if(source===null)fail('UNRESOLVED_SOURCE','The independent custom source has no saved sketch.');
- if(source!==null){await runSourceFramePreparation(workerUrl,{revision:crypto.randomUUID(),mode:'reframe',sketchJSON:source,beforeFrame:f,afterFrame:f,candidateJSON:source},{signal:owner.signal,valid:()=>{try{current();return true;}catch{return false;}}});current();}
+ // The two roles have equal values but must be distinct bounded records: the
+ // shared Worker request contract is a tree, including during unchanged replay.
+ if(source!==null){await runSourceFramePreparation(workerUrl,{revision:crypto.randomUUID(),mode:'reframe',sketchJSON:source,beforeFrame:f,afterFrame:captureSourceFrame(f),candidateJSON:source},{signal:owner.signal,valid:()=>{try{current();return true;}catch{return false;}}});current();}
  return{consumed:[],created:[model]};
 };
 export default {id:SOURCE_FRAME_TYPE,label:'Source frame',info:'Explicit numeric source frame and earlier source-plane attachment.',icon:standardPlaneOperation.icon,form:[],schema:{featureId:{type:Types.number}},admitGeometry:()=>{},paramsInfo:()=>'(source frame)',run:sourceFrameRun};

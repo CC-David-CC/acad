@@ -32,3 +32,17 @@ before it produced saved artifacts. No test expectation or guard was relaxed.
 Next: repair the actual request construction while retaining tree validation,
 perform a normal build, then repeat the complete workflow in a new evidence
 directory. Phase B native-solid-face attachment remains required and open.
+
+### Source-confirmed cause and repair candidate
+
+The actual source producer `sourceFrame.operation.ts` checks saved local intent
+during candidate evaluation with a reframe request. It supplied the same derived
+`f` object as both `beforeFrame` and `afterFrame`. The shared request tree guard
+therefore correctly rejected this internally constructed alias. Initial command
+placement/derive/empty requests were not the offending construction.
+
+The repair captures only `afterFrame` through existing `captureSourceFrame`,
+creating four independent bounded vectors with identical numeric values. No
+tree guard, geometry tolerance, currentness proof, solver result or test
+expectation changes. The existing complete workflow remains its regression;
+source correction is not a qualification pass until that workflow succeeds.
