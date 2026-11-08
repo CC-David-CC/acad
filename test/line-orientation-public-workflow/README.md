@@ -77,3 +77,18 @@ actual coordinate values and their displacement in its bounded failure message
 so the next complete run can distinguish actual numerical movement from a
 metadata mismatch. No additional solve, polishing loop or tolerance change was
 introduced by this diagnostic improvement.
+
+R3 is retained in evidence-r3: same.b.y changes80.00000002516768→
+80.0000000015683mm (2.3599383780492644e-8mm). Source review identifies
+warm internal Polar admission hints absent from serialized/cold reconstruction;
+this changes ordering of the coupled solve. Numerical stopping remains a
+hypothesis, not an assumed machine-roundoff explanation.
+
+The bounded phase repair now constructs the actual candidate through the normal
+cold solve first. A separate independent fresh solve must preserve that returned
+candidate within the unchanged1e-9mm bound and with identical authored admission
+classification. Exact authored intent, unrelated geometry and original-request
+reconstruction remain enforced. The returned source is the checked first cold
+candidate, not an unchecked last iterate. No retry/polish loop, global hint-order
+change, numerical tolerance change or unsupported success is introduced. The
+unchanged full orientation workflow must qualify this repair before any PASS.

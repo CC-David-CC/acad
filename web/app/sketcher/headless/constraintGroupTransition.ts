@@ -31,19 +31,26 @@ export function changeConstraintGroup(request:any){let revision='';try{
  if(!group.changed){group.validate(pm.stages);return{revision,ok:true,changed:false,serializedSketch:a.sketchJSON,evidence:captured.evidence,group:receipt()};}
  pm.startTransaction();try{group.apply(pm);pm.finishTransaction(group.validate,false);}catch(error){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw error},false);}catch{}throw error;}
  const candidate=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));candidate.boundary=before.boundary;
- if(candidate.objects.length!==before.objects.length||candidate.stages.length!==before.stages.length)fail('INTENT_CHANGED','The group changed sketch membership.');
- candidate.objects.forEach((object,i)=>{const old=before.objects[i];if(object.id!==old.id||object.type!==old.type)fail('INTENT_CHANGED','Object identity changed.');assertAllowedSolverGeometry(object.type,old.data,object.data);if(!affected.has(rootOf(index[old.id]))&&JSON.stringify(object)!==JSON.stringify(old))fail('UNRELATED_GEOMETRY_CHANGED','The group changed independently unrelated geometry.');});
+ const validateGeometry=(sketch:any)=>{
+  if(sketch.objects.length!==before.objects.length||sketch.stages.length!==before.stages.length)fail('INTENT_CHANGED','The group changed sketch membership.');
+  sketch.objects.forEach((object,i)=>{const old=before.objects[i];if(object.id!==old.id||object.type!==old.type)fail('INTENT_CHANGED','Object identity changed.');assertAllowedSolverGeometry(object.type,old.data,object.data);if(!affected.has(rootOf(index[old.id]))&&JSON.stringify(object)!==JSON.stringify(old))fail('UNRELATED_GEOMETRY_CHANGED','The group changed independently unrelated geometry.');});
+ };
+ validateGeometry(candidate);
  const restored=structuredClone(candidate);restored.objects=restored.objects.map((o,i)=>({...o,data:before.objects[i].data}));
  for(const c of group.edited){const row=originalRows.get(c);if(!row||restored.stages[row.stage].constraints[row.index].typeId!=='AngleBetween')fail('INTENT_CHANGED','Edited group member changed.');restored.stages[row.stage].constraints[row.index].constants=structuredClone(row.raw.constants);}
  const added=describe(group.created);for(const row of [...added].sort((a,b)=>b.stage-a.stage||b.index-a.index)){const c=restored.stages[row.stage].constraints[row.index];if(c.typeId!==row.typeId||JSON.stringify(c.objects)!==JSON.stringify(row.objects))fail('INTENT_CHANGED','Created group member changed.');restored.stages[row.stage].constraints.splice(row.index,1);}
  if(!sameRestoredSketch(JSON.stringify(stripAdmission(before)),JSON.stringify(stripAdmission(restored))))fail('INTENT_CHANGED','Other authored sketch intent changed.');
+ // Incremental admission is a draft, not the returned native candidate:
+ // its warm internal Polar hints are not serialized. Construct the candidate
+ // through the same cold path as Open, then verify THAT actual returned source
+ // independently. There is one construction and one verification, no retry or
+ // polishing loop, and neither source nor solver tolerances change.
  const solved=solveSketch({revision,sketch:candidate,boundary:structuredClone(candidate.boundary),externalParameters:external});if(!solved.ok)return solved;
+ validateGeometry(solved.sketch);
+ const verification=solveSketch({revision,sketch:structuredClone(solved.sketch),boundary:structuredClone(solved.sketch.boundary),externalParameters:external});if(!verification.ok)return verification;
+ assertVerifiedReplayGeometry(solved.sketch,verification.sketch,verification.evidence,external);
+ if(solved.evidence.length!==verification.evidence.length||solved.evidence.some((row,i)=>row.typeId!==verification.evidence[i].typeId||row.state!==verification.evidence[i].state))fail('ADMISSION_CHANGED','The returned cold candidate is not independently admission-stable.');
  const serializedSketch=bounded(JSON.stringify(solved.sketch));
- // Use the same verified replay contract as ordinary source reconstruction:
- // exact authored intent, original solved evidence, supported connected fields
- // within the existing save bound, and unchanged geometric branches. Global
- // history equality and independent requested-group reconstruction stay exact.
- assertVerifiedReplayGeometry(candidate,solved.sketch,solved.evidence,external);
  const verify=new HeadlessSketchWorkspace(external);verify.io._loadSketch(solved.sketch,{strict:true});const checked=verify.createIndex(),check=prepareConstraintGroup(verify.parametricManager,intent.kind,intent.ids.map(id=>checked[id]),intent.kind==='midpoint'?undefined:intent.angleDegrees,'create');if(check.changed)fail('INTENT_CHANGED','The reconstructed group is incomplete.');check.validate(verify.parametricManager.stages);
  const rows=solved.sketch.stages.flatMap(s=>s.constraints);if(rows.length!==solved.evidence.length||rows.some((c,i)=>c.typeId!==solved.evidence[i].typeId||c.admission?.state!==solved.evidence[i].state))fail('ADMISSION_CHANGED','Group replay admission changed.');
  // Classification is derived from the final independent reconstruction, not
