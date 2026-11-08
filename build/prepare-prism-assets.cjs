@@ -44,10 +44,10 @@ if (crypto.createHash('sha256').update(fs.readFileSync(wasm)).digest('hex') !== 
 fs.copyFileSync(wasm,path.join(out,'occ.wasm'));
 execFileSync(process.execPath,[path.join(root,'modules/engine/mount/build-headless-wrapper.mjs'),path.join(root,'node_modules/.cache/codi-oci-census/main.js'),path.join(out,'occ-portable.js')],{stdio:'inherit'});
 
-// Canonical bootstrap stays unchanged; this generated legacy location is flat.
-const bootstrap=fs.readFileSync(path.join(root,'modules/engine/mount/oci-verified-worker.js'),'utf8').split('../extrusion/selectedArrangementDescriptor.mjs').join('./selectedArrangementDescriptor.mjs');
+// Verify the canonical source before producing the generated legacy flat form.
+const bootstrap=fs.readFileSync(path.join(root,'modules/engine/mount/oci-verified-worker.js'),'utf8');
 const glue=fs.readFileSync(path.join(out,'occ-portable.js'),'utf8');
-const combined=embeddedWorker(bootstrap,glue);
+const combined=embeddedWorker(bootstrap,glue).split('../extrusion/selectedArrangementDescriptor.mjs').join('./selectedArrangementDescriptor.mjs');
 fs.writeFileSync(path.join(out,'oci-verified-worker.js'),combined,{flag:'wx'});
 console.log(JSON.stringify({embeddedWorkerSHA256:crypto.createHash('sha256').update(combined).digest('hex')}));
 // Source-built Manifold glue is embedded; WASM is verified at runtime.
