@@ -55,3 +55,39 @@ Scope: coherent human admission correction only. Existing closed create/remove,
 unchanged-original two-Worker proofs, typed travel, fixture and archive oracles
 are unchanged. Broader consumed typed Circle / ordinary Arc profile integration
 remains explicitly open, not repaired by these admission changes.
+
+
+## Closed discovery/consumer alignment — source review only
+
+Independent review after4ded782 found a source-confirmed eligibility mismatch,
+not a reproduced runtime incident. discoverEqualRadiusRows offered canRemove
+for any admitted source Circle/Arc pair with valid stage/constants, including
+roots listed in an original stage generator's generatedObjects. The actual
+changeEqualRadius removal independently restores Native ownership and rejects
+o.generator/o.isGenerated. A valid carried later-stage relation referring to an
+earlier generated root could therefore be offered an operation it cannot use.
+
+Closed discovery now derives an ephemeral generated-root Set from the same
+original, independently validated stage generator output records and withholds
+the locator/removal capability for those actual roots, with a precise reason.
+SketchGenerator.read uses those exact output references to install the native
+generator owner. This is the source-backed correspondence; it does not infer
+ownership from opaque IDs, coordinates or a new saved trust flag. Source/replay
+preflight remains authoritative and unchanged; malformed generator inventories
+are not silently treated as ordinary roots. Both discovery and locator
+resolution use this derived closed eligibility. The removal transition keeps
+its independent actual Native ownership checks.
+
+No human action/admission/domain code, schema equations, source cache, stage
+order, carry policy, solver, native IO or existing complete driver/oracle is
+changed by this follow-up. Nongenerated roots retain the prior discovery rule.
+Existing carried generated relations remain inspectable as rows with their
+original source/identities and an explicit unsupported closed removal reason;
+this does not turn valid carry into invalid geometry or expand mutation power.
+
+Qualification remains pending: root must run the frozen complete ordinary
+EqualRadius application workflow after coherent composition. The specific
+generated-carry boundary also needs a real admitted earlier-generated/later-row
+native model authored through existing model actions, then normal inspection,
+Save/Open and preserved-source checks. No synthetic successful source, edited
+test fixture, microtest, build, probe or browser result supplies that evidence.
