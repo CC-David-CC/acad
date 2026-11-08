@@ -160,7 +160,7 @@ function changeDeclaredRectangleDimension(revision:string,source:string,authored
   const fields=c.typeId==='LockPoint'?['x','y']:c.typeId==='Horizontal'||c.typeId==='Vertical'?['angle']:[];
   for(const field of fields){const raw=c.constants?.[field];if(typeof raw==='string'&&!placementLiteral.test(raw.trim()))return null;}
  }
- const request={revision,sketch:authored,boundary:authored.boundary,externalParameters:bindings},declaration=captureRectangleDimensionBindings(request);
+ const request={revision,sketch:authored,boundary:structuredClone(authored.boundary),externalParameters:bindings},declaration=captureRectangleDimensionBindings(request);
  if(!declaration)return null;
  const sameRow=(bound:any)=>bound.stage===row.stage&&bound.index===row.index;
  if(!sameRow(declaration.widthRow)&&!sameRow(declaration.heightRow))return null;

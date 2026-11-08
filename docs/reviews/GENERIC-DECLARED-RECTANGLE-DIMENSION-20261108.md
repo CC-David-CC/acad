@@ -93,3 +93,24 @@ custody is a separate coordinated source lane, not established by this mutation.
 Root must compose all required source, perform a normal build and run the
 UNCHANGED complete E22 workflow and after-whole artifact oracle. This checkpoint
 is a source repair, not a runtime or Gate1 qualification claim.
+
+## Request-tree custody follow-up after actual E22 R3
+
+The unchanged complete R3 on root62b27 refused the first generic width mutation
+with INVALID / “Sketch data must be a tree.” The new original-proof request
+contained the same boundary object twice: `request.sketch.boundary` and sibling
+`request.boundary`. The actual inspectTree anti-alias check correctly rejected
+that shared reference before any rectangle proof or publication.
+
+The mutation request now gives the sibling boundary its own structuredClone.
+Its values remain exact; no validator/proof guard is relaxed. Source parsing
+already creates an independent JSON tree; captured external bindings contain
+only bounded numeric values and do not alias that tree. The edited draft is a
+separate structuredClone of authored source; the spread prepared request uses
+that draft plus the already detached sibling boundary, so it has no analogous
+shared boundary reference. Existing reconstruction cold requests clone their
+sketch and boundary independently. No caller request is rewritten or healed,
+and no source/frame/geometry values change from this custody repair.
+
+This follow-up is source-only: no tests, solver/build/probes/browser execution.
+The whole R3 failure remains frozen, and root owns the unchanged full rerun.
