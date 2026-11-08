@@ -1,5 +1,19 @@
 # Gate 1: remaining work and execution sequence
 
+## Latest scoped qualification — point coincidence R4, 2026-11-08
+
+Complete Chrome41761 and FIRST independent artifact checker PASS on actual
+Core8353d12/Desktop8eac41c9e, existing Shell57b74074/60dc956b.47records/335public
+trace entries/28observations/140Native points/4refusals/3.cad Save/server/fresh
+Open cycles. Shared symmetric coincidence, genuine transitive redundant row,
+exact rational nullities6→4→2→2, rejected conflict, same-source mixed travel and
+Native suffix pass. Contexts retired/source unchanged; R1–R3 retained, including
+separate zero-constant writer/test-shape correction. Moving generator-dependent
+components/broad human UI and all C03/C04 remain open. SEVENTEEN recent scoped
+proofs pass; all21 formal exercise signoffs remain Partial. No deployment.
+See test/point-coincidence-public-workflow/QUALIFICATION.md.
+
+
 ## Latest scoped qualification — two-Circle cells R6, 2026-11-08
 
 Whole Chrome74062 and FIRST independent actual-artifact oracle PASS on exact

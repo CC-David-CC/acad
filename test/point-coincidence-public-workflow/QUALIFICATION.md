@@ -1,5 +1,49 @@
 # Point coincidence qualification — in progress
 
+## Latest finite R4 whole workflow — PASS
+
+ActualCore8353d12a195e65f71260bd495750d6205195a2cb;
+Desktop8eac41c9e173876180cb1d37d2bc3dbeee853799;
+explicit existing Shell Native57b74074/60dc956b. Full app build33446 and fixture
+33690 completed0. Whole real signed Chrome41761 completed0/PASS, then independent
+actual-artifact checker FIRST PASS. Complete receipts/source snapshots/three
+actual saved archives/checker stdout+stderr are frozen in evidence-r4.
+
+47records/335public trace entries/28observations/140actual Native point replies/
+4refusals/4local diagnostic observations/3.cad Save/server equality/fresh signed
+Open cycles. Owned contexts retired, driver source hashes unchanged and shared
+browser disconnected only. No per-step test or private positive authoring.
+
+Actual locked rectangle datum A and genuine B/C/Q Points are authored publicly.
+A-B moves only B; B-C follows without identity welding. Distinct A-C creates a
+genuine redundant row. Same/reversed requests preserve actual saved row order
+and exact source/J as no-ops. The finite original point formulation has exact
+rational nullities6→4→2→2; unrelated Q remains the only two freedoms. Actual
+public local reports and residuals agree, without a global physical-DOF claim.
+Conflicting signedX1, aliased/unknown target and stale source requests refuse
+without accepted-state drift. Genuine Q edits, complete source creation travel,
+mixed Native depth20→25→30 and same feature/output identities pass. Fresh saved
+native models accept further discovery, no-op, editing, travel and resave.
+
+Independent actual ZIP/CRC/entry SHA/design-revision/source/history checks,
+original coincidence equations, exact rational linear rank and actual Native
+volume/bounds/material classifications PASS. Producer observations/expected
+numbers are not treated as independent mathematical authority.
+
+R1 realm, R2 captured-transaction and R3 zero-constant writer failures remain
+frozen. Product08aed59 uses the genuine native serializer row; driver8353d12
+separately corrects only the same no-constants metadata assumption. Original
+geometry/source/rank/equation/history/tolerance requirements and Python oracle
+are unchanged. No global native-format or manual admission flag changes.
+
+Scope: ordinary current nongenerated Point/Segment/Circle/Arc point discovery,
+actual tested anchored datum/free Points, shared public agent path/native suffix
+and persistence. Moving generator-dependent components explicitly refuse;
+generator-specific coincidence, broad human multi-selection gestures and complete
+C03/C04/Gate1 are not qualified. This is the SEVENTEENTH recent scoped workflow,
+not17of21 completed exercises; all21 formal signoffs remain Partial. No deployment.
+
+
 No coincidence whole workflow PASS yet. Sixteen earlier scoped workflows remain
 qualified; all21 formal exercise signoffs remain Partial.
 

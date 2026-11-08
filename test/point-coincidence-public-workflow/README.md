@@ -1,9 +1,10 @@
 # One complete public point-coincidence workflow
 
-Prepared source only; no tests/probes/build/type/syntax check/browser execution.
-Root composes the entire Core/Desktop, freezes exact pins, then runs this workflow
-once. Keep first failures. No per-step unit positives replace whole acceptance.
-No complete C03/C04, exercise or Gate1 signoff is claimed by this packet.
+Latest R4 complete public browser workflow and FIRST independent artifact oracle
+PASS. See QUALIFICATION.md for exact producing source/host/Native pins, retained
+first failures and limitations. Complete evidence is frozen in evidence-r4.
+This finite coincidence path does not sign off all C03/C04, exercises or Gate1.
+Normal coherent builds and whole runs remain required for future modifications.
 
 Inputs match the normal signed harness: `CODI_DESKTOP_SOURCE_ROOT`, a FRESH
 `CODI_EVIDENCE`, `CODI_SIGNED_PINS`, `CODI_EXPECT_SOURCE`, `CODI_EXPECT_DESKTOP`,
