@@ -1,6 +1,7 @@
 import {makeEmptySketch} from './emptySketch';
 import {solveSketch} from './solve';
 import {HeadlessSketchWorkspace} from './workspace';
+import {typeIndex} from './sketchValidation';
 import {captureSketchFailure,failureCause,withAdmissionCause} from '../constr/admissionCause.mjs';
 
 export class RectangleInputError extends Error {
@@ -8,7 +9,7 @@ export class RectangleInputError extends Error {
   constructor(code: 'RECTANGLE_DOMAIN' | 'RECTANGLE_PRECISION', message: string) { super(message); this.name = 'RectangleInputError'; this.code = code; }
 }
 
-type RectangleDraftPhase='input'|'strict-load'|'canonical-serialization'|'independent-solve';
+type RectangleDraftPhase='input'|'strict-load'|'canonical-serialization'|'normalized-input-domain'|'independent-solve';
 function ownText(error:any,key:string):string|undefined {
   if(!error||(typeof error!=='object'&&typeof error!=='function'))return;
   const field=Object.getOwnPropertyDescriptor(error,key);
@@ -69,6 +70,8 @@ function createRectangleDraft(unit:string,frame:any,origin:number[],width:number
   setPhase('canonical-serialization');
   const normalized=JSON.parse(workspace.io.serializeSketch(sketch.metadata,{strict:true}));
   normalized.boundary=JSON.parse(JSON.stringify(sketch.boundary));
+  setPhase('normalized-input-domain');
+  typeIndex(normalized,normalized.boundary);
   setPhase('independent-solve');
   const solved=solveSketch({revision:'rectangle-draft',sketch:normalized,boundary:JSON.parse(JSON.stringify(normalized.boundary)),externalParameters:{}});
   if (!solved.ok) {

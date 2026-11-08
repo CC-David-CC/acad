@@ -670,7 +670,7 @@ export class AlgNumSubSystem {
             this.deferredConstantRows.set(constraint,{rows:[...(previous?.rows || []),polynomial],validation:null});
           }
           this.polynomials[i] = null;
-        } else if (polynomial.isLinear && polynomial.monomials.length === 1) {
+        } else if (!polynomial.usedApproximateReduction && polynomial.isLinear && polynomial.monomials.length === 1) {
           const monomial = polynomial.monomials[0];
           const terms = monomial.terms;
           if (terms.length === 1) {
@@ -701,7 +701,7 @@ export class AlgNumSubSystem {
             }
           }
 
-        } else if (polynomial.monomials.length === 2 && polynomial.isLinear) {
+        } else if (!polynomial.usedApproximateReduction && polynomial.monomials.length === 2 && polynomial.isLinear) {
           let [m1, m2] = polynomial.monomials;
 
           if (this.interactiveParams.has(m1.linearParam)) {
@@ -743,6 +743,8 @@ export class AlgNumSubSystem {
         // prior row before a later relation becomes the substitution pivot;
         // otherwise dependency credit can move to the earlier constraint.
         // Represented nonzero coefficients and offsets are never epsilon-zeroed.
+        // Uncertified computed-function rows stay numerical; they cannot force
+        // an exact parameter pivot/alias from rounded derived coefficients.
         if (requirePass) break;
       }
 

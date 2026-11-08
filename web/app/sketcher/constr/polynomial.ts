@@ -8,7 +8,11 @@ export class Polynomial {
   // Ephemeral proof provenance, never authored geometry. Legacy reductions
   // may carry an approximate ancestor; that derived row must not be
   // used to justify an exact, domain-dependent cancellation.
-  usedApproximateReduction = false;
+  private approximateReduction = false;
+  get usedApproximateReduction():boolean {
+    return this.approximateReduction || this.monomials.some(m => m?.usedApproximateReduction);
+  }
+  set usedApproximateReduction(value:boolean) {this.approximateReduction=value;}
 
   constructor(constant = 0) {
     this.constant = constant;
@@ -30,13 +34,20 @@ export class Polynomial {
 
   prepareElimination(param, value, approximateSource = false) {
     if (!Number.isFinite(value) || !Number.isFinite(this.constant)) return null;
-    const output = []; let touched = false;
+    const output = []; let touched = false, approximate = this.usedApproximateReduction;
     for (const source of this.monomials) {
       if (!Number.isFinite(source.constant)) return null;
       const monomial = new Monomial(source.constant);
+      monomial.usedApproximateReduction = source.usedApproximateReduction;
+      approximate ||= source.usedApproximateReduction;
       for (const term of source.terms) {
         if (term.param !== param) { monomial.terms.push({...term}); continue; }
         touched = true;
+        // Keep every computed value. Uncertified fixed-function evaluation
+        // cannot become an exact parameter pivot in a descendant row.
+        if (approximateSource || !term.fn.certifiesExactFixedValue(value)) {
+          approximate = true;monomial.usedApproximateReduction = true;
+        }
         let factor;
         try { factor = term.fn.apply(value); } catch (_) { return null; }
         if (!Number.isFinite(factor) || (term.fn instanceof ToThePowerFunction && value !== 0 && term.fn.degree > 0 && factor === 0)) return null;
@@ -49,7 +60,7 @@ export class Polynomial {
     return {touched, apply: () => {
       if (!touched) return;
       this.monomials = output;
-      if (approximateSource) this.usedApproximateReduction = true;
+      this.usedApproximateReduction = approximate;
     }};
   }
 
@@ -83,6 +94,7 @@ export class Polynomial {
       return value;
     };
     for (const source of this.monomials) {
+      approximate ||= source.usedApproximateReduction;
       let expanded = [new Monomial(source.constant)];
       for (const term of source.terms) {
         if (term.param !== param) {
@@ -97,6 +109,7 @@ export class Polynomial {
             // singleton identity used by domain certificates and compaction.
             replacement = new Polynomial().monomial().term(toParam, term.fn);
           } else if (k === 0) {
+            if (!term.fn.certifiesExactFixedValue(b)) approximate = true;
             const value = term.fn.apply(b);
             if (!Number.isFinite(value) || (term.fn instanceof ToThePowerFunction && b !== 0 && term.fn.degree > 0 && value === 0)) return null;
             replacement = new Polynomial(value);
@@ -142,6 +155,7 @@ export class Polynomial {
   }
 
   compact() {
+    if (this.monomials.some(m => m?.usedApproximateReduction)) this.usedApproximateReduction = true;
     for (let i = 0; i < this.monomials.length; ++i) {
       const m1 = this.monomials[i];
       if (m1 === null) {
@@ -173,7 +187,7 @@ export class Polynomial {
   }
 
   cancelCommonNonzeroFactors(certified: ReadonlySet<any>) {
-    if (this.usedApproximateReduction || this.constant !== 0 || !this.monomials.length || this.monomials.some(m => !Number.isFinite(m.constant))) return 0;
+    if (this.usedApproximateReduction || this.constant !== 0 || !this.monomials.length || this.monomials.some(m => m.usedApproximateReduction || !Number.isFinite(m.constant))) return 0;
     const candidates = this.monomials[0].terms
       .filter(t => t.fn === POW_1_FN && certified.has(t.param)).map(t => t.param);
     let cancelled = 0;
@@ -289,6 +303,7 @@ export class Polynomial {
 
 export class Monomial {
 
+  usedApproximateReduction = false;
   terms = [];
   constant = 1;
 
@@ -315,6 +330,7 @@ export class Monomial {
         (fn instanceof ToThePowerFunction && value !== 0 && fn.degree > 0 && factor === 0) ||
         (product === 0 && this.constant !== 0 && factor !== 0))
       throw Object.assign(Error('Fixed-value reduction cannot preserve the available numeric representation.'), {code:'UNSUPPORTED_NUMERIC_REDUCTION'});
+    if (!fn.certifiesExactFixedValue(value)) this.usedApproximateReduction = true;
     this.constant = product;
     this.terms.splice(i, 1);
   }
@@ -397,6 +413,9 @@ export abstract class PolynomialFunction {
   abstract apply(x: number): number;
   abstract merge(fn: PolynomialFunction): PolynomialFunction;
   abstract derivative1(x: number): number
+  // False means keep the computed coefficient but do not certify a derived
+  // algebraic pivot. The default covers opaque/affine composed functions.
+  certifiesExactFixedValue(x:number):boolean {return false;}
 }
 
 export class ToThePowerFunction extends PolynomialFunction {
@@ -425,6 +444,11 @@ export class ToThePowerFunction extends PolynomialFunction {
         }
       )
     }
+  }
+
+  certifiesExactFixedValue(x:number):boolean {
+    return Number.isSafeInteger(this.degree) && this.degree>=0 &&
+      (this.degree<=1 || x===0 || x===1 || x===-1);
   }
 
   _degree: number;
@@ -489,18 +513,22 @@ export class FreeFunction extends PolynomialFunction {
   fn: (number) => number;
   d1: (number) => number;
   linearSubstitutionFn: (k: number, param: any, b :number) => Polynomial;
+  private exactFixedValue: ((value:number)=>boolean) | undefined;
 
-  constructor(fn, d1, id, linearSubstitutionFn) {
+  constructor(fn, d1, id, linearSubstitutionFn, exactFixedValue?: (value:number)=>boolean) {
     super();
     this.fn = fn;
     this.d1 = d1;
     this.id = id;
     this.linearSubstitutionFn = linearSubstitutionFn || null;
+    this.exactFixedValue = exactFixedValue;
   }
 
   apply(x) {
     return this.fn(x);
   }
+
+  certifiesExactFixedValue(x:number):boolean {return this.exactFixedValue?.(x)===true;}
 
   get degree() {
     return Infinity;
@@ -605,7 +633,7 @@ export const POW_2_FN = new ToThePowerFunction(2, x => x*x, x => 2*x);
 export const POW_3_FN = new ToThePowerFunction(3, x => x*x*x, x => 3*x*x);
 export const POW_4_FN = new ToThePowerFunction(4, x => x*x*x*x, x => 4*x*x*x);
 
-export const COS_FN = new FreeFunction(x => Math.cos(x), x => -Math.sin(x) ,'cos', (k, x, b) => new Polynomial(0).monomial(1).term(x, new CosineOfSum(k, b)));
-export const SIN_FN = new FreeFunction(x => Math.sin(x), x =>  Math.cos(x), 'sin', (k, x, b) => new Polynomial(0).monomial(1).term(x, new SineOfSum(k, b)));
+export const COS_FN = new FreeFunction(x => Math.cos(x), x => -Math.sin(x) ,'cos', (k, x, b) => new Polynomial(0).monomial(1).term(x, new CosineOfSum(k, b)), x=>x===0);
+export const SIN_FN = new FreeFunction(x => Math.sin(x), x =>  Math.cos(x), 'sin', (k, x, b) => new Polynomial(0).monomial(1).term(x, new SineOfSum(k, b)), x=>x===0);
 
 
