@@ -42,14 +42,18 @@ function declaration(sketch:any,external:any){
   for(let i=0;i<4;i++){const matches=axes.filter(c=>c.objects.length===1&&c.objects[0]===ordered[i]);if(matches.length!==1||matches[0].schema!==ConstraintDefinitions[directions[i][0]])return null;const constants=exactConstants(matches[0],['angle']),degrees=literal(constants.angle);if(((degrees%360)+360)%360!==directions[i][1])return null;}
   const widthRows=lengths.filter(c=>c.objects.length===1&&c.objects[0]===ordered[0]),heightRows=lengths.filter(c=>c.objects.length===1&&c.objects[0]===ordered[1]);if(widthRows.length!==1||heightRows.length!==1)return null;
   const anchor=exactConstants(lock,['x','y']),x=literal(anchor.x),y=literal(anchor.y);exactConstants(widthRows[0],['length']);exactConstants(heightRows[0],['length']);
-  const width=widthRows[0].resolvedConstants.length,height=heightRows[0].resolvedConstants.length;if(![width,height].every(n=>typeof n==='number'&&Number.isFinite(n)&&n>=0.001&&n<=1e6)||![x,y].every(n=>Math.abs(n)<=1e8))fail('TYPED_RECTANGLE_DOMAIN','Declared rectangle dimensions or anchor exceed the supported domain.');
+  const width=widthRows[0].resolvedConstants.length,height=heightRows[0].resolvedConstants.length;
+  if(![width,height].every(n=>typeof n==='number'&&Number.isFinite(n)&&n>0))fail('TYPED_RECTANGLE_DOMAIN','Declared lengths violate the actual positive finite SegmentLength domain.');
+  // These are this helper's qualified envelope, not the generic source domain.
+  // In particular positive literal sides below0.001 remain generically eligible.
+  if(![width,height].every(n=>n>=0.001&&n<=1e6)||![x,y].every(n=>Math.abs(n)<=1e8)){ownership.unchanged();return null;}
   // Exact prior branch is ELIGIBILITY for this finite reconstruction, not
   // a new rejection of sources the pre-existing generic solver could admit.
   // No proximity matching, coordinate snap or vertex weld opts a source in.
   const prior=ordered.map(s=>({id:s.id,a:{x:s.a.x,y:s.a.y},b:{x:s.b.x,y:s.b.y}})),x1=prior[0].b.x,y1=prior[1].b.y,oldCorners=[[x,y],[x1,y],[x1,y1],[x,y1]];
   const badEdge=prior.findIndex((s,i)=>['x','y'].some((axis,j)=>s.a[axis]!==oldCorners[i][j]||s.b[axis]!==oldCorners[(i+1)%4][j]));
   if(!(x1>x&&y1>y)||badEdge>=0){ownership.unchanged();return null;}
-  const right=x+width,top=y+height;if(![right,top].every(n=>Number.isFinite(n)&&Math.abs(n)<=1e8)||!(right>x&&top>y))fail('TYPED_RECTANGLE_DOMAIN','The declared extent cannot be represented at this anchor.');
+  const right=x+width,top=y+height;if(![right,top].every(n=>Number.isFinite(n)&&Math.abs(n)<=1e8)||!(right>x&&top>y)){ownership.unchanged();return null;}
   ownership.unchanged();return{ids:ordered.map(s=>s.id),corners:[[x,y],[right,y],[right,top],[x,top]]};
  });
 }
