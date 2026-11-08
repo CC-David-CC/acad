@@ -38,3 +38,19 @@ Integration still required before the next normal build:
 No build, test, browser execution, public deployment or native ABI change was
 performed for this source-only packet. This is a required dependency of C08
 Phase B, not another Gate 1 pass.
+
+## Composed source checkpoint
+
+Root candidate branch integration/native-attachment-candidate-20261108 now
+composes product3536e49 as c5077a6 with runtime285ac13 as4f0050d over
+main62cbf2b. The only content conflict was additive Craft imports; both sets
+were retained. Actual common Worker SHA256 is
+12bc1ab499f3c4d6616ba5ed736f6c29f7ec7a62e48e8a02b4f104e701b024a9.
+All eight existing explicit build-only bootstrap pins now match those actual
+source bytes. Historical evidence is unchanged. Native JS/WASM pairs, default
+backend and other cohort capability declarations remain unchanged.
+
+The complete Phase B driver/example/oracle packet is still pending. No build,
+test or browser execution has been performed for this composed native-face
+candidate. Fresh native graph regeneration, matching Desktop transport and
+whole-workflow proof remain required before qualification or main integration.
