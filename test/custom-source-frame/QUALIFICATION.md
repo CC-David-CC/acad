@@ -71,3 +71,32 @@ files, the terminal failure, exact source/runtime pins and successful context
 cleanup. No artifact oracle pass is claimed for the failed complete workflow.
 Next: canonicalize only the mutated model metadata in the independent generator
 and repeat the entire unchanged-domain workflow in a fresh evidence directory.
+
+## R3 — 2026-11-08: scoped Phase A PASS
+
+The complete public workflow and the independent after-whole oracle both PASS.
+Actual compiled runtime remains Core `a9022cebebbab50c451bed48c2be49eae49ea8b6`
+and Desktop `9fd652f1b9a0d4b3a30a9b47c8e04f146ee1e177` on20988. Execution
+uses the canonical-negative-fixture correction `3283244`; no runtime, expected
+failure code, geometric tolerance or positive assertion changed for R3.
+
+`evidence-r3/receipt.json`:49 checkpoints/194 command records (including reads),
+14 actual Native observation sets, four real `.cad` saves/server-byte equality,
+five owned signed contexts with fresh Open/reedit, seven exact refusals including
+both own malformed archives, and healthy continuation. Source hashes unchanged;
+all owned contexts/targets retired; shared browser retained.
+
+`evidence-r3/independent-oracle-r1.json` PASS recomputes frames from the actual
+saved authored transforms/parents; checks exact local source preservation,
+Native volumes/bounds/material-point classifications, unrelated body retention,
+read-only state/resource preservation, ZIP CRC/SHA/root, exact saved history,
+source bytes/high-water and inch presentation. Coordinate comparison50pm,
+expanded Native bounds1e-6mm and volume1e-6mm³ are distinct declared tests.
+No Native-surface50pm or physical-accuracy certificate follows.
+
+Qualified: numeric custom frames and genuine earlier-source-plane attachment,
+creation/edit/mixed UndoRedo, pivot/composition, principal-depth propagation,
+no-op/redo retention, bounded failures and native persistence in this workflow.
+NOT qualified: attachment to generated Native solid faces, arbitrary mirrored/
+typed/assembly frames, arbitrary size/backend inputs, all C08 or full Gate1.
+Phase B remains required/open. R1/R2 failures remain unchanged.

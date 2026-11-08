@@ -42,9 +42,13 @@ viewable output and one authoritative shared person/agent operation model remain
    reference behavior and missing required semantic operations need completion.
    Advertised conditional capabilities need an honest supported/unsupported
    table. Do not require fake parity across different geometry engines.
-6. Frames/attachmentsC08. Principal frames and selected plane-depth edits pass;
-   modern shared custom frame/inverse/pivot/parent-transform/attached-sketch
-   regeneration still needs a coherent public operation and complete proof.
+6. Frames/attachmentsC08. Custom frames and genuine earlier-source-plane
+   attachment now have scoped Phase A R3 qualification:49rows/4.cad saves/
+   14Native observations/7refusals/fresh Opens, independent artifact oracle PASS
+   on runtimea9022ce/Desktop9fd652f1b. R1 request-alias failure and R2 invalid
+   fixture encoding remain frozen. Native-solid-face attachment remains required;
+   its approved source contract is PHASE-B-CURRENT-SOURCE-20261108.md in
+   test/custom-source-frame-plan. Implementation is an isolated lane, not a pass.
 7. Remaining quantity/drawing competenciesC09/C11. Typed units, expressions,
    configurations and ordinary linked orthographic drawing pass. Finish finite
    remaining measurement roles/targets and required isometric/section/detail/
@@ -70,6 +74,10 @@ C. Completed: full roles/history reruns and next C09 quantity/native-ruler chain
    microtest loop, threshold tuning or substitute positive geometry.
 D. Complete remaining finite sketch/constraint/region operations in bounded
    packets, each with the same public author/edit/refuse/travel/save/reopen exit.
+   Ellipse source is integrated as512d435/f8d4580 plus Desktop365fc7897;
+   normal build and complete application qualification are next. C12 owned
+   same-prefix Cancel source work and native-face attachment remain parallel
+   isolated lanes. C12 Apply remains an explicit separate missing transaction.
 E. Complete remaining solid/reference/frame and drawing/quantity packets using
    the same document and journal; parallelize disjoint source owners, serialize
    shared contracts and browser execution.

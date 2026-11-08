@@ -22,7 +22,7 @@ reinstate assembly acceptance in Gate1.
 ## Current qualification checkpoint — 2026-11-08
 
 The four-workflow repair batch now has FOUR scoped qualified passes. The next
-C09 quantity/native-ruler whole workflow also passed. These five named proofs
+C09 quantity/native-ruler and C08 Phase A whole workflows also passed. These six named proofs
 are not the full Gate1 denominator: Gate1 contains21
 exercises, with no complete exercise-level signoffs yet. Existing scoped passes
 remain useful evidence toward those exercises; zero signoffs does not mean zero
@@ -35,6 +35,7 @@ implementation. Assemblies E17/C10 remain Gate2.
 | Length measurement roles R3 | Scoped PASS Desktopc48a7fa8e:59checkpoints/3saves, fresh Open/reedit/travel plus final typed ruler discovery/refusal | Actual Core33b8aa3/Desktop4c4862b7b; source hashes/cleanup pass. Native JSON scope; relevant `.cad` IO regression still required |
 | Feature history controls R3 | Scoped PASS d0964c8:78checkpoints/4.cad saves/25Native observations/3SVG/2malformed Opens | Browser cleanup/source hashes and independent artifact oracle PASS; original checker ID-domain mistake/corrected source97a7828 preserved separately |
 | C09 quantities/native ruler R1 (next finite workflow) | Scoped PASS4afbb06:50rows/3.cad saves/80Native point replies/12quantity refusals/2semantic ruler Opens | All7canonical quantity types/4public display families; independent Fraction/AST/ZIP/source/native oracle PASS; no whole-C09/Gate1 claim |
+| C08 custom/source-plane frames R3 | Scoped Phase A PASS:49rows/194command records/14Native observations/4.cad saves/7refusals/fresh Opens | Independent source/frame/Native/ZIP oracle PASS; runtimea9022ce/Desktop9fd652f1b. Native-solid-face Phase B remains required/open |
 
 Orientation/archive qualifications remain on Core32ae9c8/Desktop60ec30ee9;
 roles/history/C09 qualified scopes are on Core33b8aa3/Desktop4c4862b7b. They are
@@ -69,6 +70,13 @@ expected `INVALID_FRAME_DEPENDENCY`. R3 complete workflow is the next proof;
 no complete C08 pass is claimed. The approved Phase B implementation contract is
 `test/custom-source-frame-plan/PHASE-B-CURRENT-SOURCE-20261108.md` (`a82ad84`);
 its protected read/replay/publication implementation remains an isolated lane.
+
+R3 now completed with browser and independent oracle PASS; see
+`test/custom-source-frame/QUALIFICATION.md` and `evidence-r3`. This adds one
+scoped proof, not an exercise-level or full-C08 signoff. Ellipse shared
+author/inspect/edit source is composed as Core `512d435`/`f8d4580` and Desktop
+`365fc7897`, backed on both LANs, but has no build/runtime qualification yet.
+The source packet preserves the frame replay repair and existing old routes.
 
 Repair composition source review:168c28a carries7ac46c53f5141e6fcc00ca32effddd9ac96d7d73
 from the isolated lane; root adds only the dedicated solveWorker task dispatch.
