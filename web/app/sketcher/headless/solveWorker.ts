@@ -187,15 +187,27 @@ self.onmessage = async event => {
         self.postMessage(solved);return;
         } catch (_) {self.postMessage({revision,ok:false,error:{code:'TYPED_SKETCH_INVALID',message:'Typed sketch fields or parameters are invalid or unsupported.'}});return;}
       }
+      if(request.task==='typed-selected-rectangle-bind') {
+        const {prepareSelectedRectangleBindings}=require('./selectedRectangleBinding');
+        const {task,...payload}=request;
+        const definitions=decodePhysicalSource(request.source);if(!definitions)throw Error('A current typed parameter source is required.');
+        const evaluated=evaluatePhysicalSource(definitions),values=new Map(evaluated.values.map(row=>[row.name,row]));
+        const prepared=await prepareSelectedRectangleBindings(payload,name=>{const q:any=values.get(name);if(!q||q.dimension!=='length')throw Error('A typed length is required.');return q.value;});
+        const solveRequest={revision,sketch:prepared.sketch,boundary:structuredClone(prepared.sketch.boundary),externalParameters:prepared.externalParameters},solved=reconstructTypedRectangle(solveRequest,{update:true})||solveSketch(solveRequest);
+        if(!solved.ok){self.postMessage(solved);return;}
+        const serializedSketch=JSON.stringify(solved.sketch);if(serializedSketch.length>65536||new TextEncoder().encode(serializedSketch).byteLength>65536)throw Error('Selected source exceeds64KiB.');
+        self.postMessage({...solved,serializedSketch,bindings:prepared.bindings});return;
+      }
       if(request.task==='typed-selected-profile-solve') {
         const fields=['boundary','parameterSource','revision','sketchJSON','task'];
         if(Reflect.ownKeys(request).sort().join(',')!==fields.join(',')||typeof request.sketchJSON!=='string'||request.sketchJSON.length>65536||typeof request.parameterSource!=='string'||request.parameterSource.length>65536||!revision||revision.length>256)throw Error('Invalid typed selected-profile source request.');
         const definitions=decodePhysicalSource(request.parameterSource);if(!definitions)throw Error('A typed parameter source is required.');
         const evaluated=evaluatePhysicalSource(definitions),values=new Map(evaluated.values.map(row=>[row.name,row]));
-        const prepared=prepareTypedRectangle(request.sketchJSON,[],name=>{const q:any=values.get(name);if(!q||q.dimension!=='length')throw Error('A typed rectangle length is required.');return q.value;});
-        const solveRequest={revision,sketch:JSON.parse(prepared.sketchJSON),boundary:request.boundary,externalParameters:prepared.externalParameters},solved=reconstructTypedRectangle(solveRequest)||solveSketch(solveRequest);
+        const {prepareTypedSelectedProfileSource}=require('cad/parameters/typedSelectedProfileBindings.mjs'),{solveTypedSelectedProfile}=require('./typedSelectedProfileRead');
+        const prepared=prepareTypedSelectedProfileSource(request.sketchJSON,name=>{const q:any=values.get(name);if(!q||q.dimension!=='length')throw Error('A typed selected-source length is required.');return q.value;});
+        const solved=solveTypedSelectedProfile({revision,sketch:prepared.sketch,boundary:request.boundary,externalParameters:prepared.externalParameters});
         if(!solved.ok){self.postMessage(solved);return;}
-        const serializedSketch=JSON.stringify(solved.sketch);if(serializedSketch.length>65536)throw Error('Typed selected source exceeds64KiB.');
+        const serializedSketch=JSON.stringify(solved.sketch);if(serializedSketch.length>65536||new TextEncoder().encode(serializedSketch).byteLength>65536)throw Error('Typed selected source exceeds64KiB.');
         const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(serializedSketch)),sketchDigest=Array.from(new Uint8Array(bytes),n=>n.toString(16).padStart(2,'0')).join('');
         self.postMessage({...solved,serializedSketch,sketchDigest});return;
       }
