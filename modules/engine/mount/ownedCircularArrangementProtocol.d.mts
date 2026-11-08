@@ -5,6 +5,7 @@ export interface CircularCellRequest {
  readonly frame:Readonly<{origin:readonly[number,number,number];x:readonly[number,number,number];y:readonly[number,number,number];z:readonly[number,number,number]}>;
  readonly region:Readonly<{id:string;faceId:string;circles:readonly Readonly<{id:string;center:Pair2;radius:number}>[];descriptor:Readonly<Record<string,unknown>>}>;
 }
+/** One actual edge occurrence in one cell; never a cross-cell geometric key. */
 export interface CircularFragment {readonly center:Pair2;readonly a:Pair2;readonly b:Pair2;readonly first:number;readonly last:number;readonly orientation:'FORWARD';}
 export interface CircularNativeUse {readonly span:number;readonly fragment:number;readonly orientation:'FORWARD'|'REVERSED';}
 export interface CircularNativeObservation {
