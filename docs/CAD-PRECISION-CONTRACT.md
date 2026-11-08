@@ -118,3 +118,34 @@ precision label. Use local conditioning/explicit frames and reliable predicates
 where appropriate; increased bit counts do not fix incorrect geometry semantics
 or an unqualified tolerance policy. Each operation still needs independent
 accuracy/validity evidence, explicit limits and truthful failure reporting.
+
+## Preserve precision throughout authoritative computation — 2026-11-07
+
+User directive: each geometry algorithm must preserve full available accuracy
+until the end; there is no authorization to deliberately cut it early.
+
+- Keep authored quantities/units/formulas exact under their source contract.
+- Do not deliberately round coordinates, narrow numeric types, quantize geometry
+  or discard small coefficients/intersections inside authoritative computations
+  merely for display or convenience. Formatting belongs at an explicit output
+  boundary and must not feed back into the design graph or geometric truth.
+- Derive numerical stopping/classification budgets from the required result and
+  declared conditioning/scale. A coarse hardcoded intermediate threshold cannot
+  silently consume the fine design's entire error budget.
+- Preserve source attribution and error/approximation provenance across each
+  conversion. Derived display/manufacturing/analysis representations have their
+  own explicit budgets and cannot overwrite the exact authored representation.
+- Audit every advertised operation/backend for premature rounding/casts, fixed
+  epsilon term dropping, early convergence and approximate intermediate geometry.
+  Qualify the resulting whole operation with an independent reference; retaining
+  a double type alone does not prove retained accuracy.
+- Floating-point operations round during arithmetic. Do not promise mathematically
+  exact real arithmetic until final output. Use better conditioning, reliable
+  predicates, extra precision or exact arithmetic where justified by evidence.
+  Report achieved error and limitations rather than equating bit width with proof.
+- Keep expensive precision work in Workers with measured resource/cancellation
+  behavior. Performance optimization must respect the declared accuracy contract.
+
+This directive does not silently change existing qualified algorithms or their
+thresholds. Identified premature-loss defects require coherent source repairs,
+complete workflow regression and documented before/after evidence.
