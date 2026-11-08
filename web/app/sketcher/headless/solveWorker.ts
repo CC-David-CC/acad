@@ -62,9 +62,9 @@ self.onmessage = async event => {
         const {editPointsCoordinatesTransition}=require('./coordinateTransition');
         const {task,...payload}=request;self.postMessage(editPointsCoordinatesTransition(payload));return;
       }
-      if (request.task === 'sketch-transition-verify-point-coordinates') {
-        const {verifyPointsCoordinatesCandidate}=require('./verifyCoordinateCandidate');
-        const {task,...payload}=request;self.postMessage(verifyPointsCoordinatesCandidate(payload));return;
+      if (request.task === 'sketch-transition-verify-point-coordinates'||request.task==='sketch-transition-verify-point-coordinate') {
+        const {verifyPointsCoordinatesCandidate,verifyPointCoordinatesCandidate}=require('./verifyCoordinateCandidate');
+        const {task,...payload}=request;self.postMessage(task==='sketch-transition-verify-point-coordinates'?verifyPointsCoordinatesCandidate(payload):verifyPointCoordinatesCandidate(payload));return;
       }
       if (request.task === 'sketch-transition-point-coordinate') {
         const {editPointCoordinatesTransition}=require('./coordinateTransition');
