@@ -58,6 +58,18 @@ not qualified. Fix the actual request construction, rebuild normally, and run
 the complete workflow again without relaxing its expectations. Required C08
 Phase B native-solid-face attachment remains open.
 
+Subsequent source repair `a9022ce` detaches the equal before/after frame roles
+in the actual producer's saved-source replay request; tree validation is intact.
+The normally rebuilt R2 reached47 checkpoints/13 Native observations/four real
+`.cad` saves and fresh Open/reedit cycles, then failed the final own invalid-parent
+control because its generator emitted noncanonical model metadata. Frozen
+`bb5f7c0` preserves that earlier archive rejection; it is not a geometry defect.
+Generator-only `3283244` canonicalizes that metadata without changing the
+expected `INVALID_FRAME_DEPENDENCY`. R3 complete workflow is the next proof;
+no complete C08 pass is claimed. The approved Phase B implementation contract is
+`test/custom-source-frame-plan/PHASE-B-CURRENT-SOURCE-20261108.md` (`a82ad84`);
+its protected read/replay/publication implementation remains an isolated lane.
+
 Repair composition source review:168c28a carries7ac46c53f5141e6fcc00ca32effddd9ac96d7d73
 from the isolated lane; root adds only the dedicated solveWorker task dispatch.
 Main drafts from current source; Worker proves actual original dimension-row
