@@ -34,3 +34,21 @@ workflow thresholds. This is a bundling fix, not a Native geometry fix.
 Required next evidence: normal coherent app build with this source; fresh staged
 fixture and exact asset pins; unchanged complete browser workflow followed by
 independent saved-artifact analysis. No public or beta deployment.
+
+## Second complete browser attempt R2
+
+Actual Corea26fbc62e139c5c32803ce246e6d6af8c753e5f4 and the same Desktop1298d63c4.
+Normal build86809 and fixture3091 both exit0. Whole Chrome78204 passes150 exact
+asset hashes, including correctly colocated circular WASM, then genuine source
+census. First Native cell creation refuses with ENGINE_FAILURE: Actual Native
+circular read failed its strict observation contract. Nine commands/two rows;
+no solid creation or .cad saves. Own contexts closed, source unchanged. Preserve
+complete original receipt/source snapshots in evidence-r2. The colocation fix
+is exercised, but the circular workflow remains FAIL.
+
+The public error boundary drops nested Error.cause, hiding which strict Native
+observation assertion rejected the data. Preserve a bounded256-character
+internal rejection message in the circular read failure, keeping ENGINE_FAILURE,
+the original cause and every validation assertion. No raw Native payload or
+source geometry is exposed. The next complete run must identify the actual
+underlying failure before any geometric repair; do not assume its cause.

@@ -24,7 +24,7 @@ function corroborate(prepared,value){
  return r;
 }
 export function inspectOwnedCircularSource(env,prepared){
- const {Module}=env;if(typeof Module._ReadCircularArrangementV1!=='function'||typeof Module._CreateOwnedCircularCellV1!=='function')fail('The exact Native circular ABI is unavailable.','ENGINE_CAPABILITY_UNAVAILABLE');const before=Module._OwnedShapeNamesV2();let value;try{value=native(env,prepared);}finally{if(Module._OwnedShapeNamesV2()!==before)fail('Native circular read changed persistent ownership.','CIRCULAR_INPUT_CHANGED');}try{return corroborate(prepared,value);}catch(cause){fail('Actual Native circular read failed its strict observation contract.','ENGINE_FAILURE',cause);}
+ const {Module}=env;if(typeof Module._ReadCircularArrangementV1!=='function'||typeof Module._CreateOwnedCircularCellV1!=='function')fail('The exact Native circular ABI is unavailable.','ENGINE_CAPABILITY_UNAVAILABLE');const before=Module._OwnedShapeNamesV2();let value;try{value=native(env,prepared);}finally{if(Module._OwnedShapeNamesV2()!==before)fail('Native circular read changed persistent ownership.','CIRCULAR_INPUT_CHANGED');}try{return corroborate(prepared,value);}catch(cause){const reason=typeof cause?.message==='string'?cause.message.slice(0,256):'Unspecified observation rejection';fail('Actual Native circular read failed its strict observation contract: '+reason,'ENGINE_FAILURE',cause);}
 }
 
 // The status-0 FFI contract proves exactly this new owned name; failures must
