@@ -1,5 +1,5 @@
 // Bounded metadata only. Disposable sketch Workers derive numerical frames.
-import {canonicalAuthoredFeatureId} from '../../../web/app/cad/craft/authoredFeatureIdentity.mjs';
+import {canonicalAuthoredFeatureId} from '../metadata/authoredFeatureIdentity.mjs';
 export const SOURCE_FRAME_TYPE='SOURCE_FRAME_V1';
 export const sourceFrameFail=(code,message)=>{throw Object.assign(Error(message),{code});};
 export function sourceFrameRecord(value,keys,code='INVALID_SOURCE_FRAME'){

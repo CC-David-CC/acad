@@ -78,3 +78,10 @@ Native parent frame is approximated; phaseB locators remain unadmitted. Root
 known-code forwarding should preserve STALE_FRAME, UNRESOLVED_SOURCE and
 UNSUPPORTED_FRAME_PARENT too. This is needed for own malformed-cache/parent
 NativeOpen controls; it does not change PM/codec/archive-owner/Files.
+
+Root source review: canonical identity code is moved unchanged into PURE
+modules/engine/metadata/authoredFeatureIdentity.mjs. The existing web module
+re-exports the same functions for all old consumers; sourceFrameIntent imports
+the engine leaf. No engine-to-web graph dependency, duplicate validator, stager
+allowlist change or altered canonical domain. Existing function references remain
+shared through re-export; currentness/feature claim behavior is unchanged.
