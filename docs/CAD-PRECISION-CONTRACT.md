@@ -2,8 +2,9 @@
 
 ## Current user requirement — 2026-11-08
 
-The user revised the small-design geometric error budget to **10 picometers**:
-**0.01 nm = 1e-8 mm = 1e-11 m**. This supersedes the earlier 1 pm target below.
+The user explicitly confirmed the small-design geometric error budget as
+**50 picometers = 0.05 nm = 5e-8 mm = 5e-11 m**. This supersedes the earlier
+1 pm target and the intervening 10 pm and 100 pm discussion.
 Preserve available computational precision throughout; this budget does not
 authorize rounding intermediate values, changing entity admission floors,
 relaxing dimensionless frame checks, or claiming manufacturing accuracy.
@@ -11,7 +12,7 @@ relaxing dimensionless frame checks, or claiming manufacturing accuracy.
 Historical receipts retain their original thresholds and outcomes. The R11
 orientation workflow failed its then-current 1 pm reconstruction guard with a
 4.5604338083649054 pm coordinate difference. That observed difference is within
-the revised 10 pm budget, but the failed run is not retroactively a PASS:
+the revised 50 pm budget, but the failed run is not retroactively a PASS:
 independent accuracy and a complete workflow under the revised contract still
 need qualification. Reconstruction repeatability and geometric accuracy remain
 separate requirements. Large-part and backend operating envelopes remain
