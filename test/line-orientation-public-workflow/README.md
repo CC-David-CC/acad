@@ -139,3 +139,12 @@ then fails the FIRST public10×10 rectangle preparation with the generic
 native saves are reached. The full failure is preserved. The cause is not
 established by that generic diagnostic; source investigation must precede any
 claim or remedy. No acceptance bounds/cases are changed.
+
+R9/evidence-r9 on2157a85/Desktop640279b9f pins97 assets and again fails first
+rectangle creation. Bounded diagnostic propagation now preserves INVALID,
+"Rectangle independent-solve failed: Degenerate sketch segment.", with the
+invalid-domain admission cause. The independent solver checks geometry both
+before and after solving, so this alone does NOT establish whether collapse
+occurred during the earlier strict load or the independent solve itself.
+No orientation groups or native saves are reached. All original equations,
+bounds and cases remain unchanged; actual root-cause repair is still pending.
