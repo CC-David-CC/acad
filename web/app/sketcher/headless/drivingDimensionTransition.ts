@@ -15,6 +15,7 @@ import {evaluateCapturedSketch} from './capturedSketchEvaluation';
 import type {CapturedAuxiliaryWitnessBatch} from './capturedParameterOwnership';
 import {ConstraintDefinitions} from '../constr/ANConstraints';
 import {Segment} from '../shapes/segment';
+import {captureRectangleDimensionBindings,reconstructTypedRectangle} from './typedRectangleReconstruction';
 import {EndPoint} from '../shapes/point';
 import {captureDrivingDimensionIntent,resolveDrivingDimension,drivingLengthField,classifyDrivingDimensionDelta,signedDrivingDimension,drivingDimensionValueValid} from './drivingDimensionTarget.mjs';
 const fail=(code:string,message:string)=>Object.assign(Error(message),{code});
@@ -145,9 +146,46 @@ function validateWarmDimension(workspace:any){
   }
  }
 }
+// Mutation-only construction for the actual owned eleven-row declaration.
+// Source coordinates do not select a rectangle by an AABB or proximity: the
+// existing helper authenticates registered ownership, ordered connectivity,
+// directed H/V branches, the actual anchor and both actual driving rows.
+function changeDeclaredRectangleDimension(revision:string,source:string,authored:any,row:any,intent:any,bindings:any){
+ const request={revision,sketch:authored,boundary:authored.boundary,externalParameters:bindings},declaration=captureRectangleDimensionBindings(request);
+ if(!declaration)return null;
+ const sameRow=(bound:any)=>bound.stage===row.stage&&bound.index===row.index;
+ if(!sameRow(declaration.widthRow)&&!sameRow(declaration.heightRow))return null;
+ if(typeof row.rawValue==='string'&&/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(row.rawValue.trim())&&typeof intent.value==='number')throw fail('BOUND_DIMENSION','A driving dimension bound to a typed name cannot be silently replaced by a literal. Edit the parameter or submit a named binding.');
+ const value=typeof intent.value==='number'?intent.value:bindings[intent.value];
+ if(!drivingDimensionValueValid('SegmentLength',value))throw fail('INVALID_VALUE','A current positive typed length or literal millimeters is required.');
+ // Prove the ORIGINAL captured source before constructing any mutation. The
+ // two cold reconstructions are evidence only; captured equations validate
+ // its exact declared coordinates without publishing optimizer coordinates.
+ const original=reconstructTypedRectangle(request);
+ if(original===null)throw fail('RECTANGLE_DECLARATION_BINDING','The captured rectangle lost its actual declaration.');
+ if(!original.ok)return original;
+ const dimension=(sketch:any)=>{const actual=resolveDimension(sketch,intent.constraintId);return{constraintId:intent.constraintId,action:'edit',typeId:actual.typeId,objects:[...actual.objects],rawValue:actual.rawValue,resolvedValue:actual.resolvedValue,status:sketch.stages[actual.stage].constraints[actual.index].admission.state};};
+ if(String(row.rawValue)===String(intent.value))return{revision,ok:true,changed:false,serializedSketch:source,evidence:original.evidence,dimension:dimension(authored)};
+ const draft=structuredClone(authored);draft.stages[row.stage].constraints[row.index].constants.length=String(intent.value);
+ const prepared=reconstructTypedRectangle({...request,sketch:draft},{update:true});
+ // Null is this helper's established numeric/declaration eligibility boundary,
+ // not a new restriction of generic positive SegmentLength capabilities. A
+ // recognized declaration's failed cold/captured proof NEVER falls back.
+ if(prepared===null)return null;
+ if(!prepared.ok)return prepared;
+ const candidate=prepared.sketch;
+ geometry(authored,candidate);expectedDelta(authored,candidate,intent,'edit');evidence(candidate,prepared.evidence);
+ const next=dimension(candidate);
+ if(next.typeId!=='SegmentLength'||next.objects.length!==row.objects.length||next.objects.some((id,i)=>id!==row.objects[i])||next.rawValue!==String(intent.value)||Math.abs(next.resolvedValue-value)>1e-6)throw fail('INTENT_CHANGED','The declared rectangle changed its requested driving row.');
+ return{revision,ok:true,changed:true,serializedSketch:bounded(prepared.serializedSketch),evidence:prepared.evidence,dimension:next};
+}
 export function changeDrivingDimension(request:any){let revision=revisionOf(request);try{
  const a=record(request,['revision','sketchJSON','externalParameters','action','intent']);if(!revision||revision.length>256)throw fail('INVALID','Invalid dimension revision.');const intent=captureDrivingDimensionIntent(a.intent,a.action),bindings=external(a.externalParameters);
  const authored=JSON.parse(bounded(a.sketchJSON)),authoredTarget=resolveDimension(authored,intent.constraintId);if(authoredTarget.typeId==='DistancePL')return changePointLineDistanceDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,intent},a.action);if(authoredTarget.typeId==='ProjectedDistance')return changeProjectedDistanceDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,action:a.action,intent});if(authoredTarget.typeId==='RadiusLength')return changeRadiusDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,intent},a.action);
+ if(a.action==='edit'&&authoredTarget.typeId==='SegmentLength'){
+  const declared=changeDeclaredRectangleDimension(revision,a.sketchJSON,authored,authoredTarget,intent,bindings);
+  if(declared!==null)return declared;
+ }
  const hasSideConsumer=authored.stages.some(stage=>stage.constraints.some(c=>c.typeId==='DistancePL'||c.typeId==='TangentLC'));
  let originalAuxiliary:CapturedAuxiliaryWitnessBatch|undefined;
  const captured=replay(revision,a.sketchJSON,bindings,hasSideConsumer?batch=>{originalAuxiliary=batch;}:undefined),before=JSON.parse(captured.serializedSketch),row=resolveDimension(before,intent.constraintId);
