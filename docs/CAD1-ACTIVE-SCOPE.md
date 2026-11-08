@@ -1,5 +1,19 @@
 # Active CAD1 acceptance scope — user revision2026-11-06
 
+## Latest scoped qualification — RadiusLength R1, 2026-11-08
+
+Actual Cored0069f0/Desktopdd58df71e whole Chrome75672 and first independent
+artifact oracle PASS:55records/495public trace entries/35observations/120Native
+points/5refusals/3.cad saves/server equality/fresh signed Opens. Circle/quarter
+Arc RadiusLength creation/edit/removal, real Diameter redundancy/reactivation,
+rejected contradiction, mixed UndoRedo, dependent Circle Native regeneration
+and display-unit invariance pass. See test/radius-length-public-workflow/QUALIFICATION.md.
+Generator-bearing Radius, Arc BRep and broader C03/C04 remain open. FIFTEEN scoped
+recent workflows pass; all21 formal Gate1 exercise signoffs remain Partial.
+Circular candidate has retained R1–R4 failures, latest source interval coverage;
+Native occurrence representation repair is in progress, not qualified.
+
+
 ## Current exit — shared sketch Mirror R2 qualified, 2026-11-08
 
 Complete browser +independent reflection/archive analysis PASS24f4269.
