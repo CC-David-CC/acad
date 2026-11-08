@@ -45,7 +45,17 @@ export function planOwnedThroughHoles(input){
  if(request.sourceRegionId!==source.region.id)fail('STALE_SOURCE','The originating source region changed.');
  if(source.region.holes.length||outer.kind!=='polygon'||outer.vertices.length!==4||source.region.outer.length!==4)fail('UNSUPPORTED_PROFILE','A single four-segment rectangle with no source holes is required.');
  const vertices=outer.vertices,minX=Math.min(...vertices.map(p=>p[0])),maxX=Math.max(...vertices.map(p=>p[0])),minY=Math.min(...vertices.map(p=>p[1])),maxY=Math.max(...vertices.map(p=>p[1]));
- if(vertices.some((p,i)=>{const q=vertices[(i+1)%4];return (p[0]===q[0])===(p[1]===q[1])||![minX,maxX].includes(p[0])||![minY,maxY].includes(p[1]);})||new Set(vertices.map(p=>JSON.stringify(p))).size!==4)fail('UNSUPPORTED_PROFILE','The source must be exactly axis-aligned in its own sketch frame.');
+ if(vertices.some((p,i)=>{const q=vertices[(i+1)%4];return (p[0]===q[0])===(p[1]===q[1])||![minX,maxX].includes(p[0])||![minY,maxY].includes(p[1]);})||new Set(vertices.map(p=>JSON.stringify(p))).size!==4){
+  let message='The source must be exactly axis-aligned in its own sketch frame.';
+  // Passive evidence from the four already-admitted vertices at this exact
+  // refusal. Columns: sameX, sameY, xIsMinMax, yIsMinMax. No reconstruction,
+  // tolerance, source mutation or second solve grants acceptance here.
+  try{
+   const edges=vertices.map((p,i)=>{const q=vertices[(i+1)%4];return[p[0]===q[0],p[1]===q[1],[minX,maxX].includes(p[0]),[minY,maxY].includes(p[1])];});
+   message=(message+' axis='+JSON.stringify({vertices,edges,unique:new Set(vertices.map(p=>JSON.stringify(p))).size})).slice(0,512);
+  }catch{/* Diagnostic formatting must never replace the original refusal. */}
+  fail('UNSUPPORTED_PROFILE',message);
+ }
  const radius=request.diameter/2,anchors=request.kind==='centered-through'?['center']:['MIN_X_MIN_Y','MAX_X_MIN_Y','MAX_X_MAX_Y','MIN_X_MAX_Y'];
  const centersLocal=request.kind==='centered-through'?[[minX+(maxX-minX)/2,minY+(maxY-minY)/2]]:[[minX+request.offsetX,minY+request.offsetY],[maxX-request.offsetX,minY+request.offsetY],[maxX-request.offsetX,maxY-request.offsetY],[minX+request.offsetX,maxY-request.offsetY]];
  const circles=centersLocal.map(center=>({kind:'circle',center,radius,area:Math.PI*radius*radius}));
