@@ -5,6 +5,7 @@ import {PreparedSketchCommand} from './rectangleCreation';
 import {MOpenFaceShell} from '../model/mopenFace';
 import {captureAuthoredHistory} from './captureAuthoredHistory.mjs';
 import {sketchRevision} from './sketchRevision.mjs';
+import {captureSketchFailure} from 'sketcher/constr/admissionCause.mjs';
 
 function aborted(committed=false) {
   const error=new DOMException(committed?'Accepted rectangle edit was superseded.':'Rectangle edit was cancelled or superseded.','AbortError');
@@ -117,10 +118,12 @@ export function createRectangleEditingCommands(ctx:any,submitReplay:any,cancelEp
       generation=project.documentGeneration,sketchNamespace=project.sketchStorageNamespace,sourceSketchRevision=sketchRevision(storage,sketchNamespace),tracked=streams(),versions=tracked.map(s=>s.revision),capturedServices=services(),history=craft.modifications$.value,
       key=project.sketchStorageKey(args.faceId),source=sketchStorage.getSketchData(args.faceId),historyEntries=history.history,historyPointer=history.pointer,table=ctx.expressionService.table$.value;
     if(travel&&source!==travel.expected)throw aborted();
-    const rectangle=travel?rectangleTravelSnapshots(source,travel.target).after:authoredRectangle(source);
+    const travelSnapshots=travel?rectangleTravelSnapshots(source,travel.target):null;
+    const rectangle=travelSnapshots?travelSnapshots.before:authoredRectangle(source),historical=travelSnapshots?.after;
     const {sketch,constraints,targets}=rectangle;
     const unchanged=!travel&&rectangle.width===args.width&&rectangle.height===args.height;
-    if(travel&&(rectangle.width!==args.width||rectangle.height!==args.height))throw Error('Rectangle journal dimensions do not match.');
+    if(travel&&(historical.width!==args.width||historical.height!==args.height))throw Error('Rectangle journal dimensions do not match.');
+    const edit={width:args.width,height:args.height,widthRow:{stage:0,index:constraints.indexOf(targets[0][0])},heightRow:{stage:0,index:constraints.indexOf(targets[1][0])}};
     targets[0][0].constants.length=String(args.width);targets[1][0].constants.length=String(args.height);
     const controller=new AbortController(),scope:{epoch:number|null}={epoch:null};let settled=false;
     const stop=()=>{controller.abort();if(!settled&&scope.epoch!==null)cancelEpoch(scope.epoch);};
@@ -138,18 +141,19 @@ export function createRectangleEditingCommands(ctx:any,submitReplay:any,cancelEp
       const names=Object.keys(table),params=Object.create(null);if(names.length>256||ctx.expressionService.errors$.value.length)throw Error('Shared expressions are invalid or exceed limits.');
       for(const name of names){const field=Object.getOwnPropertyDescriptor(table,name),value=field?.value;if(!field?.enumerable||!Object.prototype.hasOwnProperty.call(field,'value')||!/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(name)||typeof value!=='number'||!Number.isFinite(value))throw Error('Invalid shared sketch parameter.');params[name]=value;}
       const checkParams=()=>{current();const keys=Object.keys(table);if(keys.length!==names.length||keys.some(name=>!Object.prototype.hasOwnProperty.call(params,name)||!Object.is(Object.getOwnPropertyDescriptor(table,name)?.value,params[name])))throw aborted();};
-      const revision=crypto.randomUUID(),result=await runSketchSolve(rectangleWorkerUrl,{task:'rectangle-extrusion-solve',revision,sketchJSON:JSON.stringify(sketch),boundary:sketch.boundary,externalParameters:params},{signal:controller.signal,valid:()=>{try{current();return true}catch{return false}}});
-      current();if(!result?.ok)throw Object.assign(new Error(result?.error?.message||'Rectangle solve failed.'),{code:result?.error?.code||'SOLVE_ERROR'});
+      const revision=crypto.randomUUID(),result=await runSketchSolve(rectangleWorkerUrl,{task:'rectangle-dimensions-edit',revision,originalSketchJSON:source,draftSketchJSON:JSON.stringify(sketch),travelTargetSketchJSON:travel?travel.target:null,boundary:sketch.boundary,externalParameters:params,edit},{signal:controller.signal,valid:()=>{try{current();return true}catch{return false}}});
+      current();if(!result?.ok){const failure=captureSketchFailure(result?.error||{code:'SOLVE_ERROR',message:'Rectangle solve failed.'});throw Object.assign(new Error(failure.message),failure);}
       if(result.revision!==revision||typeof result.serializedSketch!=='string'||result.serializedSketch.length>65536||!Array.isArray(result.evidence)||result.evidence.length!==constraints.length||result.evidence.some(e=>!['accepted','redundant'].includes(e.state)||!Array.isArray(e.residuals)||!Number.isFinite(e.tolerance)||e.residuals.some(n=>!Number.isFinite(n)||Math.abs(n)>e.tolerance)))throw Error('Invalid rectangle solve evidence.');
-      const solved=JSON.parse(result.serializedSketch);validateProjectSketch(solved);
-      if(JSON.stringify(solved)!==JSON.stringify(result.sketch)||JSON.stringify(solved.stages)!==JSON.stringify(sketch.stages)||JSON.stringify(solved.objects.map(o=>[o.id,o.type,o.role,o.stage]))!==JSON.stringify(sketch.objects.map(o=>[o.id,o.type,o.role,o.stage])))throw Error('Rectangle solve changed authored intent.');
+      if(travel&&result.serializedSketch!==travel.target)throw Error('Rectangle travel did not preserve exact historical source bytes.');
+      const solved=JSON.parse(result.serializedSketch),expectedSolved=travel?historical.sketch:sketch;validateProjectSketch(solved);
+      if(JSON.stringify(solved)!==JSON.stringify(result.sketch)||JSON.stringify(solved.stages)!==JSON.stringify(expectedSolved.stages)||JSON.stringify(solved.objects.map(o=>[o.id,o.type,o.role,o.stage]))!==JSON.stringify(expectedSolved.objects.map(o=>[o.id,o.type,o.role,o.stage])))throw Error('Rectangle solve changed authored intent.');
       const verified=authoredRectangle(result.serializedSketch);
       verifyUnrelatedRectangleObjects(sketch,solved);
       for(const [i,expected] of [[0,args.width],[1,args.height]] as [number,number][]) {
         const segment=verified.segments[i].data,a=segment?.a,b=segment?.b;
         if(!a||!b||![a.x,a.y,b.x,b.y].every(Number.isFinite)||Math.abs(Math.hypot(b.x-a.x,b.y-a.y)-expected)>1e-6)throw Error('The solved rectangle does not match its driving dimensions.');
       }
-      if(travel)verifyRectangleTravelGeometry(sketch,solved);
+      if(travel)verifyRectangleTravelGeometry(historical.sketch,solved);
       const override=Object.freeze({id:args.faceId,data:travel?travel.target:result.serializedSketch});
       const committedAlive=()=>{try{return !controller.signal.aborted&&ctx.projectService===project&&project.isDocumentCurrent(generation)&&ctx.storageService===storage&&ctx.craftService===craft&&ctx.sketchStorageService===sketchStorage&&(!travel||travel.committedValid()===true)}catch{return false}};
       const preparation:PreparedSketchCommand={candidateScope:scope,sketchOverrides:Object.freeze([override]),requireCurrent:current,requireCommittedCurrent(){if(travel?!committedAlive():!alive())throw aborted(true);},async prepare(){current();const latest=await captureAuthoredHistory(historyEntries,current);if(latest.signature!==snapshot.signature)throw aborted();checkParams();current();prepared=storage.prepareWrites([{key,value:override.data}]);return prepared;}};

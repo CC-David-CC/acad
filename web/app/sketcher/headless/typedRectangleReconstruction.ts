@@ -54,8 +54,28 @@ function declaration(sketch:any,external:any){
   const badEdge=prior.findIndex((s,i)=>['x','y'].some((axis,j)=>s.a[axis]!==oldCorners[i][j]||s.b[axis]!==oldCorners[(i+1)%4][j]));
   if(!(x1>x&&y1>y)||badEdge>=0){ownership.unchanged();return null;}
   const right=x+width,top=y+height;if(![right,top].every(n=>Number.isFinite(n)&&Math.abs(n)<=1e8)||!(right>x&&top>y)){ownership.unchanged();return null;}
-  ownership.unchanged();return{ids:ordered.map(s=>s.id),corners:[[x,y],[right,y],[right,top],[x,top]]};
+  const sourceRows=sketch.stages[0].constraints;
+  const rowBinding=(c:any)=>{
+   const matches=sourceRows.map((row:any,index:number)=>({row,index})).filter(({row}:any)=>row.typeId===c.schema.id&&Array.isArray(row.objects)&&row.objects.length===1&&row.objects[0]===c.objects[0].id&&row.constants&&Object.keys(row.constants).length===1&&Object.is(row.constants.length,c.constants.length));
+   if(matches.length!==1)fail('RECTANGLE_DECLARATION_BINDING','The actual rectangle driving row has no unique captured source binding.');
+   return Object.freeze({stage:0,index:matches[0].index});
+  };
+  const widthRow=rowBinding(widthRows[0]),heightRow=rowBinding(heightRows[0]);
+  ownership.unchanged();return{ids:ordered.map(s=>s.id),corners:[[x,y],[right,y],[right,top],[x,top]],widthRow,heightRow};
  });
+}
+// Private edit-only source bindings. These are response-local authored-row
+// locators, not public identity grammar or permission to rewrite arbitrary rows.
+// Noncanonical current coordinates remain on the pre-existing generic path;
+// this does not change the typed helper's existing current-mismatch semantics.
+export function captureRectangleDimensionBindings(request:any){
+ inspectTree(request);const declared=declaration(request.sketch,request.externalParameters);
+ if(!declared)return null;
+ for(let i=0;i<4;i++){
+  const object=request.sketch.objects.find(o=>o.id===declared.ids[i]);
+  if(!object||['x','y'].some((axis,j)=>object.data.a[axis]!==declared.corners[i][j]||object.data.b[axis]!==declared.corners[(i+1)%4][j]))return null;
+ }
+ return Object.freeze({widthRow:declared.widthRow,heightRow:declared.heightRow});
 }
 function cold(revision:string,sketch:any,boundary:any,external:any){let auxiliary:any;const result=solveSketch({revision,sketch:structuredClone(sketch),boundary:structuredClone(boundary),externalParameters:external},undefined,batch=>{auxiliary=batch;});if(!result.ok)throw withAdmissionCause(Object.assign(Error(result.error.message),{code:result.error.code}),result.error.cause);return{result,auxiliary};}
 function replayProof(candidate:any,observation:any,external:any){try{assertVerifiedReplayGeometry(candidate,observation.result.sketch,observation.result.evidence,external);}catch(error){throw withAdmissionCause(Object.assign(Error(((error?.message||'Rectangle replay differs.')+' First actual endpoint difference: '+firstGeometryDifference(candidate,observation.result.sketch)).slice(0,512)),{code:typeof error?.code==='string'?error.code:'TYPED_RECTANGLE_REPLAY_MISMATCH'}),failureCause(error));}}
