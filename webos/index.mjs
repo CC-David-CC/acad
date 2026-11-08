@@ -38,6 +38,8 @@ import {createAgentToolsPanel} from './agent-tools-panel.mjs';
 export {createCadAgent} from './examples/cad-agent.mjs';
 export {createSourceBoundPatternExample} from './examples/source-bound-pattern.mjs';
 export {createSourceBoundShellExample,SHELL_ENGINE_REVISION} from './examples/source-bound-shell.mjs';
+export {createSourceBoundEnclosureExample} from './examples/source-bound-enclosure.mjs';
+export {createModernParametersExample,mechanicalParameterDefinitions} from './examples/source-bound-parameters.mjs';
 export {createSourceDimensionRegionExample} from './examples/source-dimension-region.mjs';
 export {createSourceBoundSweepExample} from './examples/source-bound-sweep.mjs';
 
