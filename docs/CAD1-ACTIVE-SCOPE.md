@@ -32,7 +32,7 @@ implementation. Assemblies E17/C10 remain Gate2.
 | Line orientation R12 | Scoped PASS618cf39; independent bounded50pm oracle PASS c702b49 | Retain frozen evidence; qualify affected changes on later builds |
 | Native `.cad` R6 | Scoped PASS49db2da; independent artifact oracle PASS | Retain frozen evidence; capacity/memory/ARC23 remain separate |
 | Length measurement roles R2 | FAIL Desktop505d40353 after56checkpoints/3saves, at typed discovery following successful setup | Old setup failure progressed; typed inspection refuses retained native dimension records. Narrow read repair underway; complete rerun still required |
-| Feature history controls R2 | RUNNING on repair build; prior FAIL3b8a32f retained | Explicit rectangle-dimension construction/travel repair integrated168c28a plus root Worker dispatch; unchanged complete workflow running, no new PASS |
+| Feature history controls R2 | FAIL697598a after45checkpoints/2.cad saves at passive prefix inspection | Old exact-axis rejection progressed; expected hole-clearance refusal/state retention and native reopen pass. Derived history wizard preview blocks next control inspection; bounded source repair underway |
 
 Actual last qualified composition remains Core32ae9c8/Desktop60ec30ee9. New
 source repairs are not qualification evidence. C08 custom source-frame work is
@@ -72,10 +72,14 @@ and post-configuration source were not captured. Source inspection establishes
 that typed discovery excludes every nonempty dimension array, including the
 native LinearDimension retained by this workflow. A bounded read repair is a
 new source lane; no test assertion was relaxed.
-History R2 is now running sequentially in Chrome19329 with owned driver2642,
-output `/tmp/codi-feature-history-controls-20261108-r2` and separate driver log.
-Do not infer PASS before terminal result, owned-context cleanup and unchanged
-source hashes. Earlier R1 failures remain frozen separately.
+History R2 terminal FAIL is frozen697598a:45checkpoints/2actual.cad saves,
+fresh Open/reedit/travel, old expected hole-clearance refusal now passes. Trace
+records accepted prefix(null), followed by UNAVAILABLE from controls inspection
+before the intended source-plane branch request. Wizard derives a workingRequest
+from the next history entry even for passive review; controls reject any such
+request. Actual remaining readiness flags/post-prefix snapshot were not captured.
+Owned context retired, shared browser retained, source hashes unchanged. Driver2642
+is terminal; no Chrome workflow is currently running. Earlier R1 remains frozen.
 
 The sections below retain chronological implementation and execution notes.
 Statements such as “running,” “queued,” and “not qualified yet” describe those
