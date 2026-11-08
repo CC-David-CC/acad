@@ -1,3 +1,4 @@
+import {registerViewCommands} from './view-commands.mjs';
 import {registerReferenceCommands} from './reference-commands.mjs';
 import {registerDrawingExportCommand} from './drawing-export-command.mjs';
 import {settleCadFileExport,fileErrorData,safeFileErrorMessage} from './file-export-outcome.mjs';
@@ -227,6 +228,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerPrincipalPlanePlacementCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSourceFrameCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSolidPointCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerViewCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerShellCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerThroughHoleCommands(host,()=>rectangle.target()));
