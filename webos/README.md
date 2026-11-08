@@ -17,9 +17,11 @@ at a settled history prefix or with an unapplied wizard draft. Its history
 includes retained future entries; its dirty comparison excludes draft values.
 Its opaque revision is an observation token, not permission to save. File-busy,
 evaluation and in-place sketch guards remain, and Save retains its separate
-full-tip/no-draft checks. This read-gate repair is source work awaiting the
-complete wizard workflow; C12R2 stopped at the former inspection gate before
-any Cancel gesture. Existing main-thread dirty/snapshot cost remains ARC23.
+full-tip/no-draft checks. C12R3 now qualifies this read boundary and two real
+draft/Cancel cycles, shared history and two native save/reopen chains
+(Core4f5b2ca/Desktop18c621383; evidenceACAD9e7b7ea). Earlier C12R2 stopped at
+the former inspection gate before a gesture. Apply/timeline/UI Undo integration
+remain open. Existing main-thread dirty/snapshot cost remains ARC23.
 
 ## Native `.cad` integration (historical source-packet notes)
 
