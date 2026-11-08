@@ -50,3 +50,42 @@ Next repair separates that read from save permission and explicitly excludes
 unapplied drafts from its metadata meaning. Processing/file-busy/editor guards
 and all save/mutation checks remain. Preserve the driver and all expectations.
 This is not yet runtime proof of Cancel or full C12 integration.
+
+## R3 — 2026-11-08: scoped browser and independent oracle PASS
+
+Actual compiled Core remains `4f5b2ca02e697ef1c425a597ec848078f565d25f`;
+Desktop is `18c621383dbecaad24d58b9b3a3475b29985a7b5`, which separates
+accepted-definition inspection from save readiness. Core binaries, frozen full
+driver, assertions, geometric tolerances and advertised shell cohort are unchanged.
+Normal host app construction/pinning passed; log
+`wizard-4f5b2ca-host18c621-fixture.log` under the R730 build checkout's `.build`.
+Private20991 uses fresh direct state `/tmp/codi-acad-fixture-state-20261108-r9`.
+All97 selected runtime pins match; Files bundle remains unchanged.
+
+`evidence-r3/receipt.json` PASS:25 checkpoints, two genuine PLANE wheel/draft/
+Cancel cycles (changed and exact round-trip no-op),14 Native observation sets/
+42 actual inside/outside/boundary classifications, two normal `.cad` saves with
+server-byte equality and fresh Open/reedit/travel. Competing registered history
+actions refuse exact UNAVAILABLE while each real draft remains intact. Cancel
+reissues the pristine SAME accepted prefix without source/model/counter/J
+mutation; ordinary registered Undo/Redo then preserves actual entry/cursor
+chronology. Width edits10→12→14, their shared travel and both reopens pass.
+Owned context closes/shared browser remains; source hashes unchanged;
+driver70332 is terminal exit0. No private authoring or simulated UI events.
+
+After-whole `independent-oracle-r1.json` / `independent-check.json` PASS verifies
+raw rejected-state retention, accepted prefix/J/source identity, actual applied
+position entry/cursor transitions,14 read-only Native observations and analytic
+box geometry/42 classifications, two ZIP/CRC/SHA/source/history artifacts and
+fresh-session Undo reset. UI draft/Cancel comparison normalizes only the three
+documented UI-dependent read tokens and separate wizard fields; raw evidence
+is retained. It does not parse opaque revision strings or import production
+geometry/codec implementations.
+
+Qualified finite scope: real no-op/changed draft versus accepted prefix, owned
+same-prefix Cancel, competing history refusal, shared travel, read-only wrapper
+inspection and subsequent ordinary box edits/native persistence on this cohort.
+No all-legacy/insertion/stale-handler gesture claim, source Apply, raw timeline
+migration, prefix UI Undo enablement, allC12 or fullGate1 signoff follows.
+Those remaining shared workflows are explicit work, not waived requirements.
+R1/R2 failures remain unchanged; no public deployment or external relay enabled.

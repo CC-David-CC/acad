@@ -26,9 +26,12 @@ viewable output and one authoritative shared person/agent operation model remain
    pass. The history oracle's original ID-domain failure and corrected separate
    analysis97a7828 remain preserved. All earlier runtime failures remain frozen.
    This closes the four-workflow repair batch plus one finite C09 chain, not
-   the whole Gate1 inventory. Genuine wizard draft/no-op/Cancel recovery remains
-   a C12 boundary: legacy Cancel can move pointer outside its authored journal;
-   source contract/whole-flow preparation is underway, no runtime proof yet.
+   the whole Gate1 inventory. Genuine wizard draft/no-op/Cancel recovery now
+   has bounded C12R3 qualification on Core4f5b2ca/Desktop18c621383:2real draft
+   cycles/14Native observations/42points/2.cad saves and independent oracle PASS.
+   Wrapper accepted-definition reads are separated from save readiness; the
+   original cohort-selection and wrapper-read failures remain frozen. Actual
+   Apply, raw timeline migration and prefix UI Undo enablement remain open.
 4. Complete finite sketch/constraint/region gaps fromC01–C05. Basic primitives,
    many constraints, disjoint/nested/crossing rectangle workflows already pass.
    Required remaining cases include missing shared primitive/edit targets and
@@ -79,8 +82,9 @@ D. Complete remaining finite sketch/constraint/region operations in bounded
    20observations/4.cad saves/10refusals/3fresh Opens, independent oracle PASS.
    General spline/Bezier contract preparation remains a separate C01 lane.
    C12 owned
-   same-prefix Cancel source work and native-face attachment remain parallel
-   isolated lanes. C12 Apply remains an explicit separate missing transaction.
+   same-prefix Cancel is now scoped qualified; navigation/UI Undo source work,
+   native-face attachment and cubic curve author/edit/read source work remain
+   independent lanes. C12 Apply remains an explicit separate missing transaction.
 E. Complete remaining solid/reference/frame and drawing/quantity packets using
    the same document and journal; parallelize disjoint source owners, serialize
    shared contracts and browser execution.
