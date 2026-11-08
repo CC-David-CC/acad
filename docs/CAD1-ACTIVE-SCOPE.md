@@ -31,8 +31,8 @@ implementation. Assemblies E17/C10 remain Gate2.
 |---|---|---|
 | Line orientation R12 | Scoped PASS618cf39; independent bounded50pm oracle PASS c702b49 | Retain frozen evidence; qualify affected changes on later builds |
 | Native `.cad` R6 | Scoped PASS49db2da; independent artifact oracle PASS | Retain frozen evidence; capacity/memory/ARC23 remain separate |
-| Length measurement roles R1 | FAIL Desktop53363ab16 after56 checkpoints/3saves, at final typed configuration setup | Isolated ordinary Point repair integrated01fe7c5/c7cca14/5c4e036; build and rerun unchanged full workflow |
-| Feature history controls R1 | FAIL3b8a32f after25 checkpoints, before save | Explicit rectangle-dimension construction/travel repair integrated168c28a plus root Worker dispatch; build and rerun unchanged full workflow |
+| Length measurement roles R2 | FAIL Desktop505d40353 after56checkpoints/3saves, at typed discovery following successful setup | Old setup failure progressed; typed inspection refuses retained native dimension records. Narrow read repair underway; complete rerun still required |
+| Feature history controls R2 | RUNNING on repair build; prior FAIL3b8a32f retained | Explicit rectangle-dimension construction/travel repair integrated168c28a plus root Worker dispatch; unchanged complete workflow running, no new PASS |
 
 Actual last qualified composition remains Core32ae9c8/Desktop60ec30ee9. New
 source repairs are not qualification evidence. C08 custom source-frame work is
@@ -64,10 +64,18 @@ is unchanged. Public code fixture has487files/414CAD assets/522364021innerbytes.
 Loopback20985 uses new direct private real-disk runtime
 `/tmp/codi-acad-fixture-state-20261108-r3` on R730; no account/key state copied,
 no external relay or public deployment. Earlier immutable fixture20984 remains.
-Measurement R2 is running sequentially in shared Chrome19329 with owned driver
-session13766; output `/tmp/codi-length-measurement-workflow-20261108-r2` and
-separate driver log. History R2 is queued. Do not infer PASS before terminal
-result, owned-context cleanup and unchanged source hashes.
+Measurement R2 terminal FAIL is frozen Desktop505d40353.56checkpoints/3saves,
+two fresh Open/edit cycles; owned context retired/shared browser retained and
+source hashes unchanged. The final physical setup returned, then the discovery
+candidate assertion stopped before formula editing/refusal. Returned discovery
+and post-configuration source were not captured. Source inspection establishes
+that typed discovery excludes every nonempty dimension array, including the
+native LinearDimension retained by this workflow. A bounded read repair is a
+new source lane; no test assertion was relaxed.
+History R2 is now running sequentially in Chrome19329 with owned driver2642,
+output `/tmp/codi-feature-history-controls-20261108-r2` and separate driver log.
+Do not infer PASS before terminal result, owned-context cleanup and unchanged
+source hashes. Earlier R1 failures remain frozen separately.
 
 The sections below retain chronological implementation and execution notes.
 Statements such as “running,” “queued,” and “not qualified yet” describe those
