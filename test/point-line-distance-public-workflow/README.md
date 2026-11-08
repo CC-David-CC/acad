@@ -14,6 +14,11 @@ CODI_ENGINE_REVISION and PUPPETEER_CORE_PATH. Source hashes and exact producing
 files are copied to the fresh receipt directory before authoring. URLs must be
 loopback; no account/state copying, shared service changes or deployments.
 
+The driver executes Desktop apps/system/jsketcher/examples/point-line-distance.mjs
+through the real registered command channel and requires exact byte equality
+to the frozen Core example.mjs. Both producer files are hashed and copied into
+evidence. This is one shared public recipe, not a private authoring/provider.
+
 The explicit installed engine revision must support isolated-open ordinary
 selected profiles and real owned Native point queries. The real rectangle at
 [100,100]..[110,110] extrudes20 into2000mm3; open source line/Points stay outside
