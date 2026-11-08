@@ -31,7 +31,8 @@ to actual same-stage LockPoint, PCoincident, SignedDistanceX/Y equations and
 their genuine EndPoint/Param/SolverParam identities. No public IDs, permission
 flags, raw arbitrary equations or optimizer status supply proof.
 
-Ordinary elimination must FIRST have proposed all four endpoint values.
+Ordinary reduction must FIRST have proposed all four endpoint values, directly
+or through the strict fixed-leaf aliases described in the R2 correction below.
 Private proof then propagates unique one-unknown ORIGINAL linear equations.
 The unknown coefficient must be nonzero. Every supporting known value has its
 own earlier proof. Substituting the proposed Number and all already proved
@@ -126,3 +127,55 @@ same meaning. The shared failure constructor retains identical code/message
 and admission-cause classification. No compiler target/lib change, ts-ignore,
 float conversion, arithmetic weakening, driver edit or execution accompanies
 this source-only extraction.
+
+## R2: fixed alias representatives were omitted
+
+The unchanged complete PL R2 on producing Core b097185/Desktop00e126 failed at
+the SAME distinct signed-Y redundancy assertion: 7 rows, 92 recorded commands,
+2 observations, no native saves. Its canonical receipt/source/log are retained
+in test/point-line-distance-public-workflow/evidence-r2 (proof d644662). Both
+DistancePL and the new signed-Y remain accepted. The actual public supporting
+line reports angleRadians0, polarLength10, anchor[0,0], normal[0,1] and
+signedDistance2. No positive repair claim is made for R2.
+
+Source tracing found an omitted reduction representation, not a new equation
+or geometric drift. The certificate used eliminatedParams.has(originalParam)
+both for proposing a value to its original-row witness DAG and for checking a
+frame endpoint. Ordinary reduction also fixes values through substitutedParams.
+For the actual rectangle datum, PCoincident aliases rect-0:B to rect-1:A;
+Horizontal rect-0 then makes the original Polar Y row
+rect-0:A.y - rect-1:A.y = 0. The ordered two-term reduction substitutes the
+datum's A.y before its LockPoint fixes the representative to100. The original
+LockPoint witness still contains the datum A.y, which need not be a key in
+eliminatedParams. The prior DAG cannot certify that datum or its downstream
+signed-distance witnesses solely from direct-map membership. This is a
+source-derived sufficient blocker; no runtime certificate activation trace was
+captured, and R2 alone does not prove which additional guards were reached.
+
+The corrective helper now resolves a candidate value from the actual private
+eliminated map OR from a strict linear POW_1 substituted expression whose leaves
+are fixed. It rejects ambiguous dual owners, approximate provenance, nonfinite
+numbers, unsupported/nonlinear functions, unfixed leaves, cycles and depth
+greater than256 to the unchanged numerical path. Each restart gets a fresh
+memoized view so later pivots can resolve earlier unknowns. The existing proof
+work and8192-bit budgets remain in force; resource exhaustion is not relabeled
+geometry invalidity.
+
+For every resolved alias, exact represented-binary64 dyadic products and sums
+must equal the proposed represented Number. Rounded multiplication/evaluation
+alone is insufficient. No current Param coordinate, current residual, nearest
+geometry or approximate flag supplies a value. Most importantly, a resolved
+proposal is still NOT authority: ORIGINAL active registered LockPoint,
+PCoincident and SignedDistanceX/Y rows must establish their unique one-unknown
+witness DAG with exact dyadic zero. Every frame endpoint must equal its own
+proved value. The existing post-back-substitution checks still validate actual
+source bindings/owned Params, every original witness equation/value, both Polar
+equations, the nondegenerate signed length and the captured angle-zero branch.
+
+No aliases or proof flags are persisted; no current geometry is copied back;
+no solver threshold, equation, angle/t gauge, human recovery policy, driver or
+expected classification changed. Other charts and inexact alias chains retain
+the numerical path. This source packet was prepared without executing tests,
+probes, builds, TSC, Native or browsers. Root must normal-build and run the
+ENTIRE unchanged PL workflow, including signed reversal; there is no new
+classification, accuracy or workflow qualification until that actual run.

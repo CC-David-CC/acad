@@ -52,6 +52,42 @@ function copyPolynomial(p:Polynomial,tick:()=>void){
  copy.monomials=p.monomials.map(source=>{tick();const m=new Monomial(source.constant);m.usedApproximateReduction=source.usedApproximateReduction;m.terms=source.terms.map(t=>{tick();return{...t};});return m;});return copy;
 }
 
+// Ordinary reduction can fix the representative of an original endpoint,
+// rather than the endpoint itself. Resolve those PRIVATE reduction proposals
+// without using current geometry as a seed. This is NOT the fixed-value proof:
+// every resulting Number must still satisfy the original unique-row DAG below.
+// Uncertified/nonlinear/unfixed/cyclic/inexact chains stay on the numerical path.
+function proposalResolver(eliminated:Map<Param,number>,substituted:Map<Param,Polynomial>,approximate:Set<Param>,math:ReturnType<typeof arithmetic>,tick:()=>void){
+ const cache=new Map<Param,number|null>(),active=new Set<Param>(),MAX_DEPTH=256;
+ const resolve=(param:Param,depth=0):number|null=>{
+  tick();if(cache.has(param))return cache.get(param);
+  if(depth>MAX_DEPTH||active.has(param)||!backed(param)||approximate.has(param))return null;
+  // There is no unambiguous proposal if two reduction owners claim this Param.
+  if(eliminated.has(param)){
+   const value=eliminated.get(param),result=!substituted.has(param)&&Number.isFinite(value)?value:null;
+   cache.set(param,result);return result;
+  }
+  const alias=substituted.get(param);
+  if(!(alias instanceof Polynomial)||alias.usedApproximateReduction||!Number.isFinite(alias.constant)){cache.set(param,null);return null;}
+  active.add(param);let result:number|null=null;
+  try{
+   let value=alias.constant,sum=math.number(alias.constant),supported=true;
+   for(const monomial of alias.monomials){
+    tick();if(monomial.usedApproximateReduction||!Number.isFinite(monomial.constant)||monomial.terms.length!==1||monomial.terms[0].fn!==POW_1_FN){supported=false;break;}
+    const leaf=resolve(monomial.terms[0].param,depth+1);if(leaf===null){supported=false;break;}
+    const product=monomial.constant*leaf;value+=product;
+    if(!Number.isFinite(product)||!Number.isFinite(value)){supported=false;break;}
+    sum=math.add(sum,math.multiply(math.number(monomial.constant),math.number(leaf)));
+   }
+   // Rounded evaluation is a candidate only. Equality is exact represented
+   // binary64/dyadic arithmetic, not equality after rounded multiplication.
+   if(supported&&math.equal(sum,math.number(value)))result=value;
+  }finally{active.delete(param);}
+  cache.set(param,result);return result;
+ };
+ return (param:Param)=>resolve(param);
+}
+
 // Request/build-local, never a wire or persisted authority. No angle other than
 // exact zero is certified. In that chart the unique regular Polar solution is
 // t=B.x-A.x, including NEGATIVE t; the pi/-t gauge twin is not substituted in.
@@ -74,22 +110,25 @@ export function createExactAngleZeroPolarFrames(system:any){
   if(c.internal||c.objects.length!==count||c.objects.some(o=>!rootOwned(o,system.stage,tick))||c.params.length!==count*2||c.objects.some((o,i)=>c.params[2*i]!==o.params.x||c.params[2*i+1]!==o.params.y))return;
   const row=linearRow(binding,index,p,math,tick);if(row)rows.push(row);
  };
- const certify=(proposals:Map<Param,number>)=>{
+ const certify=(proposal:(param:Param)=>number|null)=>{
   let changed=true;
   while(changed){changed=false;for(const row of rows){
    tick();const unknown=[...row.coefficients.keys()].filter(p=>!fixed.has(p));
-   if(unknown.length!==1||!proposals.has(unknown[0]))continue;
-   const parameter=unknown[0],value=proposals.get(parameter);if(!Number.isFinite(value))continue;
+   if(unknown.length!==1)continue;
+   const parameter=unknown[0],value=proposal(parameter);if(value===null||!Number.isFinite(value))continue;
    const values=new Map<Param,number>(),dependencies:Fixed[]=[];
    for(const p of row.coefficients.keys()){tick();if(p===parameter)values.set(p,value);else{const prior=fixed.get(p);values.set(p,prior.value);dependencies.push(prior);}}
    if(exactRow(row,values,math,tick)){fixed.set(parameter,{param:parameter,value,row,dependencies});changed=true;}
   }}
  };
  const next=(polynomials:Polynomial[],eliminated:Map<Param,number>,substituted:Map<any,any>,approximate:Set<any>)=>{
-  if(!frames.some(f=>{tick();return !f.done&&f.endpoints.every(p=>{tick();return eliminated.has(p);});}))return null;
-  certify(eliminated);
+  // Rebuild this memoized view on each ordered restart: later ordinary pivots
+  // can fix previously free alias leaves. No proposal cache survives a pass.
+  const proposal=proposalResolver(eliminated,substituted,approximate,math,tick);
+  if(!frames.some(f=>{tick();return !f.done&&f.endpoints.every(p=>{tick();return proposal(p)!==null;});}))return null;
+  certify(proposal);
   for(const frame of frames){
-   tick();if(frame.done||frame.angle.get()!==0||eliminated.has(frame.angle)||substituted.has(frame.angle)||substituted.has(frame.length)||approximate.has(frame.angle)||approximate.has(frame.length)||!frame.endpoints.every(p=>fixed.has(p)&&eliminated.has(p)&&Object.is(fixed.get(p).value,eliminated.get(p))))continue;
+   tick();if(frame.done||frame.angle.get()!==0||eliminated.has(frame.angle)||substituted.has(frame.angle)||substituted.has(frame.length)||approximate.has(frame.angle)||approximate.has(frame.length)||!frame.endpoints.every(p=>fixed.has(p)&&proposal(p)!==null&&Object.is(fixed.get(p).value,proposal(p))))continue;
    if((consumers.get(frame.angle)||[]).some(use=>use.constraint!==frame.binding.constraint&&use.fn!==SIN_FN&&use.fn!==COS_FN)||(consumers.get(frame.length)||[]).some(use=>use.constraint!==frame.binding.constraint))continue;
    const proofs:Fixed[]=frame.endpoints.map(p=>fixed.get(p)),[ax,ay,bx,by]=proofs.map(p=>p.value),value=bx-ax;
    if(!Number.isFinite(value)||Math.abs(value)<=MIN||!math.equal(math.number(ay),math.number(by))||!math.equal(math.add(math.number(bx),math.negate(math.number(ax))),math.number(value))||eliminated.has(frame.length)&&!Object.is(eliminated.get(frame.length),value))continue;
