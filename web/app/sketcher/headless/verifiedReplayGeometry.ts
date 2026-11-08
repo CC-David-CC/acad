@@ -63,7 +63,7 @@ function compareData(before:any,after:any,fields:Map<string,Set<string>>,bounded
     const name=path.join('.');
     if(!allowed.has(name))fail('CURRENT_GEOMETRY_MISMATCH','Replay changed an unrelated or unsupported authored field: '+a.id+'.'+name);
     if(typeof x!=='number'||typeof y!=='number'||!Number.isFinite(x)||!Number.isFinite(y))fail('CURRENT_GEOMETRY_MISMATCH','Replay produced nonfinite analytic geometry.');
-    if(bounded&&Math.abs(x-y)>POSITION)fail('CURRENT_GEOMETRY_MISMATCH','Replay analytic position differs beyond the existing1e-9mm save bound: '+a.id+'.'+name);
+    if(bounded&&Math.abs(x-y)>POSITION)fail('CURRENT_GEOMETRY_MISMATCH','Replay analytic position differs beyond the existing1e-9mm save bound: '+a.id+'.'+name+' (before='+x+', after='+y+', delta='+Math.abs(x-y)+'mm)');
     changed=true;continue;
    }
    if(x===null||y===null||typeof x!=='object'||typeof y!=='object'||Array.isArray(x)!==Array.isArray(y))fail('INTENT_CHANGED','Replay changed authored shape data.');

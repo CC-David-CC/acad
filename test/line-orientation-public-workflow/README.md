@@ -68,3 +68,12 @@ geometry and preserved branches, with no global history-equality relaxation.
 The reply derives row status from final independent reconstruction rather than
 the incremental precursor. This is source repair only until the unchanged full
 workflow passes. No claim that the failed diff was only roundoff is inferred.
+
+R2 on35a3606/Desktopd49071638 is retained in evidence-r2. The same mixed
+group reaches the existing verified replay guard, which identifies an already
+horizontal peer endpoint as moving beyond1e-9mm. This is not a successful fix;
+the bound and original tests remain unchanged. The guard now includes the two
+actual coordinate values and their displacement in its bounded failure message
+so the next complete run can distinguish actual numerical movement from a
+metadata mismatch. No additional solve, polishing loop or tolerance change was
+introduced by this diagnostic improvement.
