@@ -2,7 +2,9 @@ import {drivingLengthField,drivingDimensionValueValid} from './drivingDimensionT
 import {isBooleanSketchField,isBooleanSketchLiteral} from '../constr/booleanSketchFields.mjs';
 // A typed dependent sketch may currently bind names only in explicitly
 // length-valued SegmentLength, DiameterLength, nonnegative Euclidean DistancePP
-// and signed X/Y distance fields, all using the shared field/domain policy.
+// signed X/Y and live three-reference ProjectedDistance fields, all using the
+// shared field/domain policy. Ordered direction identity remains in source;
+// only the named distance resolves as a canonical typed length.
 // No length is exported as a scalar to
 // an unannotated consumer. The numerical solve remains in the sketch Worker.
 const numeric=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/;

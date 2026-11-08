@@ -338,3 +338,17 @@ export function verifyPointCoincidenceCandidate(workerUrl:string,input:any,optio
  const intent=capturePointCoincidenceIntent(a.intent),relation=capturePointCoincidenceReceipt(a.relation,intent);if(typeof a.changed!=='boolean'||a.changed===relation.existing)throw Error('Invalid coincidence no-op classification.');
  return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-coincidence',revision:a.revision,sketchJSON:a.sketchJSON,externalParameters:Object.freeze(external),intent,candidateJSON:a.candidateJSON,relation,changed:a.changed}),captureOptions(options));
 }
+
+// Existing edit/remove envelope, including its final three-reference receipt,
+// captured before queueing. The second Worker recomputes the original request.
+export function verifyProjectedDistanceDimensionCandidate(workerUrl:string,input:any,options:SketchSolveOptions={}){
+ const a=captureRecord(input,['revision','sketchJSON','externalParameters','action','intent','candidateJSON','dimension']);
+ if(typeof a.revision!=='string'||!a.revision||a.revision.length>256||![a.sketchJSON,a.candidateJSON].every(v=>typeof v==='string'&&v.length<=1048576)||!['edit','remove'].includes(a.action))throw Error('Invalid projected-distance verification source/action.');
+ const external=captureRecord(a.externalParameters,Reflect.ownKeys(a.externalParameters||{}) as string[]);
+ if(Object.keys(external).length>1024||Object.keys(external).some(k=>!k||k.length>256||typeof external[k]!=='number'||!Number.isFinite(external[k])||Math.abs(external[k])>1e9))throw Error('Invalid projected-distance bindings.');
+ const intent=captureDrivingDimensionIntent(a.intent,a.action),d=captureRecord(a.dimension,['constraintId','action','typeId','objects','rawValue','resolvedValue','status']),refs=captureArray(d.objects,3);
+ if(refs.length!==3||refs.some(id=>typeof id!=='string'||!id||id.length>256)||new Set(refs).size!==3||d.constraintId!==intent.constraintId||d.action!==a.action||d.typeId!=='ProjectedDistance')throw Error('Invalid projected-distance final identity.');
+ if(a.action==='remove'?(d.rawValue!==null||d.resolvedValue!==null||d.status!=='removed'):(!['accepted','redundant'].includes(d.status)||!['string','number'].includes(typeof d.rawValue)||String(d.rawValue)!==String(intent.value)||typeof d.resolvedValue!=='number'||!Number.isFinite(d.resolvedValue)||Math.abs(d.resolvedValue)>1e6))throw Error('Invalid projected-distance final value/status.');
+ const dimension=Object.freeze({...d,objects:Object.freeze(refs)});
+ return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-projected-distance-dimension',revision:a.revision,sketchJSON:a.sketchJSON,externalParameters:Object.freeze(external),action:a.action,intent,candidateJSON:a.candidateJSON,dimension}),captureOptions(options));
+}

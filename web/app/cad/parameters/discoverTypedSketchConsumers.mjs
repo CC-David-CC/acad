@@ -1,6 +1,8 @@
 import {drivingLengthField} from '../../sketcher/headless/drivingDimensionTarget.mjs';
 import {isBooleanSketchField,isBooleanSketchLiteral} from '../../sketcher/constr/booleanSketchFields.mjs';
-// Capture only authored names. This inventory is derived, never a document format.
+// Capture only authored names through the same field policy as Worker discovery,
+// including the distance (not direction) of live three-reference projection.
+// This inventory is derived, never a document format.
 const id=/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/;
 const numeric=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/;
 const encoder=new TextEncoder();

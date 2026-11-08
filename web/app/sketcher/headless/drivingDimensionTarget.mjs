@@ -1,11 +1,12 @@
 // Revision-bound discovery addresses. These are never persisted constraint IDs.
 const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
-export const signedDrivingDimension=type=>type==='SignedDistanceX'||type==='SignedDistanceY';
+export const projectedDrivingDimension=type=>type==='ProjectedDistance';
+export const signedDrivingDimension=type=>type==='SignedDistanceX'||type==='SignedDistanceY'||projectedDrivingDimension(type);
 export const pointDrivingDimension=type=>signedDrivingDimension(type)||type==='DistancePP';
 export const drivingLengthField=type=>(type==='SegmentLength'||type==='RadiusLength')?'length':type==='DiameterLength'?'diameter':pointDrivingDimension(type)?'distance':null;
-export const drivingDimensionObjectCount=type=>drivingLengthField(type)?pointDrivingDimension(type)?2:1:0;
+export const drivingDimensionObjectCount=type=>projectedDrivingDimension(type)?3:drivingLengthField(type)?pointDrivingDimension(type)?2:1:0;
 export const drivingDimensionValueValid=(type,v)=>typeof v==='number'&&Number.isFinite(v)&&!!drivingLengthField(type)&&(signedDrivingDimension(type)?Math.abs(v)<=1e6:type==='DistancePP'?v>=0&&v<=1e6:v>0&&v<=1e6);
-export const drivingPointDimensionValue=(type,a,b)=>type==='SignedDistanceX'?b.x-a.x:type==='SignedDistanceY'?b.y-a.y:type==='DistancePP'?Math.hypot(b.x-a.x,b.y-a.y):NaN;
+export const drivingPointDimensionValue=(type,a,b,direction)=>{if(projectedDrivingDimension(type)){const p=direction?.a,q=direction?.b;if(!p||!q||![a?.x,a?.y,b?.x,b?.y,p.x,p.y,q.x,q.y].every(Number.isFinite))return NaN;const dx=q.x-p.x,dy=q.y-p.y,length=Math.hypot(dx,dy);return length>1e-9?((b.x-a.x)*dx+(b.y-a.y)*dy)/length:NaN;}return type==='SignedDistanceX'?b.x-a.x:type==='SignedDistanceY'?b.y-a.y:type==='DistancePP'?Math.hypot(b.x-a.x,b.y-a.y):NaN;};
 const identifier=/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/;
 /** @returns {Readonly<{constraintId:string,value?:number|string}>} */
 export function captureDrivingDimensionIntent(value,action){
@@ -25,10 +26,11 @@ export function discoverDrivingDimensions(sketch,pointRows=[]){
   if(!Array.isArray(pointRows)||pointRows.length>30000)fail('INVALID_TARGET','Invalid authored point projection.');
   for(const p of pointRows){if(!p||typeof p.id!=='string'||!p.id||p.id.length>256||!Number.isFinite(p.x)||!Number.isFinite(p.y)||pointMap.has(p.id))fail('INVALID_TARGET','Ambiguous or invalid authored point identity.');pointMap.set(p.id,p);}return pointMap;};
  sketch.stages.forEach((stage,si)=>stage.constraints.forEach((c,index)=>{
-  const field=drivingLengthField(c.typeId),pair=pointDrivingDimension(c.typeId),o=c.objects?.length===1?objects.get(c.objects[0]):null;
+  const field=drivingLengthField(c.typeId),pair=pointDrivingDimension(c.typeId),projected=projectedDrivingDimension(c.typeId),o=c.objects?.length===1?objects.get(c.objects[0]):null;
   let supported=!!field&&c.constants&&Object.keys(c.constants).length===1&&Object.hasOwn(c.constants,field)&&['string','number'].includes(typeof c.constants[field]),resolvedValue=null;
-  if(pair){const refs=c.objects,p=points();supported=!!supported&&Array.isArray(refs)&&refs.length===2&&refs[0]!==refs[1]&&refs.every(id=>typeof id==='string'&&id.length>0&&id.length<=256&&p.has(id));
-   if(supported)resolvedValue=drivingPointDimensionValue(c.typeId,p.get(refs[0]),p.get(refs[1]));}
+  if(pair){const refs=c.objects,p=points();supported=!!supported&&Array.isArray(refs)&&refs.length===drivingDimensionObjectCount(c.typeId)&&refs[0]!==refs[1]&&refs.slice(0,2).every(id=>typeof id==='string'&&id.length>0&&id.length<=256&&p.has(id));
+   const direction=projected?objects.get(refs?.[2]):null;if(projected)supported=!!supported&&typeof refs[2]==='string'&&refs[2].length>0&&refs[2].length<=256&&direction?.type==='Segment'&&Number.isSafeInteger(direction.stage)&&direction.stage<=si;
+   if(supported)resolvedValue=drivingPointDimensionValue(c.typeId,p.get(refs[0]),p.get(refs[1]),direction?.data);}
   else{supported=!!supported&&!!o&&(c.typeId==='SegmentLength'?o.type==='Segment':['Circle','Arc'].includes(o.type));if(supported){const d=o.data;resolvedValue=o.type==='Segment'?Math.hypot(d.b.x-d.a.x,d.b.y-d.a.y):(c.typeId==='RadiusLength'?1:2)*(o.type==='Circle'?d.r:Math.hypot(d.a.x-d.c.x,d.a.y-d.c.y));}}
   const admitted=supported&&drivingDimensionValueValid(c.typeId,resolvedValue)&&['accepted','redundant'].includes(c.admission?.state);
   rows.push(Object.freeze({constraintId:admitted?dimensionLocator(si,index,c):null,stage:si,index,typeId:c.typeId,objects:Object.freeze([...c.objects]),unit:field?'millimeter':null,
@@ -60,7 +62,7 @@ export function classifyDrivingDimensionDelta(before,after,beforePoints=[],after
   if(a.length===b.length&&i===a.length)continue;
   if(change||Math.abs(a.length-b.length)>1)fail('INTENT_CHANGED','Exactly one existing dimension may change.');
   const action=a.length===b.length?'edit':a.length>b.length?'remove':'insert',c=action==='insert'?b[i]:a[i],field=drivingLengthField(c?.typeId);
-  if(!field||c.objects?.length!==drivingDimensionObjectCount(c.typeId)||!c.constants||Object.keys(c.constants).length!==1)fail('UNSUPPORTED','Only supported lengths, Euclidean point distance and ordered signed X/Y dimensions may change.');
+  if(!field||c.objects?.length!==drivingDimensionObjectCount(c.typeId)||!c.constants||Object.keys(c.constants).length!==1)fail('UNSUPPORTED','Only supported lengths, Euclidean point distance and ordered signed X/Y or live three-reference projected dimensions may change.');
   if(action==='edit'){
    const restored={...b[i],constants:{...b[i].constants,[field]:c.constants[field]}};
    if(!equal(semantic(c),semantic(restored)))fail('INTENT_CHANGED','The dimension identity or annotation changed.');

@@ -1,8 +1,8 @@
 # Finite C04 live projected driving distance
 
-PROPOSAL / source only, from qualified ACADaf4d131 and Desktop70f096c23.
-No product edit, test, probe, build, TSC or browser execution accompanies this
-contract. Root owns composed normal builds and one complete public workflow.
+IMPLEMENTATION CONTRACT / source only, from qualified ACADaf4d131 and Desktop70f096c23.
+Product source accompanies the subsequent checkpoint; no test, probe, build,
+TSC or browser execution accompanies this contract. Root owns composed normal builds and one complete public workflow.
 
 ## Existing equation and gap
 
@@ -69,7 +69,8 @@ Narrow existing files under web/app/sketcher:
    new coherent path; retain old Radius/DistancePP/length/diameter/X/Y paths.
 3. headless/inspectionClient.ts: exact three-reference envelope. First two IDs
    bind actual point rows, third actual Segment root; require its two actual
-   endpoint records/nondegenerate direction. Build a bounded parent index during
+   endpoint records. Worker alone checks nondegenerate directed geometry.
+   Build a bounded parent index during
    existing cooperative admission pass, not O(N²) scans or ID grammar. Projection
    value remains a Worker fact, as ordinary Circle/radius/length facts do; no new
    pose/value cache or wire geometry field.
