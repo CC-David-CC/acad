@@ -1,7 +1,35 @@
-# ProjectedDistance qualification — in progress
+# ProjectedDistance finite workflow — qualified R3
 
-No complete projected workflow PASS yet. Seventeen earlier scoped workflows
-remain qualified; all21 formal Gate1 exercise signoffs remain Partial.
+Current complete R3 and first independent artifact oracle PASS. Eighteen recent
+scoped workflows are qualified. Five ordinary exercise contracts are separately
+qualified (E01/E02/E03/E07/E21);16 remain Partial. Full Gate1 remains open.
+
+## Complete R3 — PASS, first independent artifact oracle PASS
+
+Actual Core013369861fad6123520065a4e06fafac752900e8 /
+Desktop95d8023b0209ad119ccfe92a34cdb6a55e87ef01; full normal build32673 and
+fresh fixture88551 completed0. Whole Chrome16184 completes52records/501public
+trace entries/37observations/7refusals/3.cad saves, own server equality and fresh
+signed Opens. Source unchanged; owned contexts retired. The first AFTER-WHOLE
+independent check passes original equations, actual live directions, all retained
+source/identity/binding/branch invariants,50pm finite coordinate checks and
+independent ZIP32/CRC/SHA/native source for all three actual archives.
+
+Actual live Segment rotation/reversal preserves driving value3; literal positive/
+zero/negative edits, genuine named formula edits, bound-value-erasure/stale/zero-
+direction/conflict/undefined/dimension/cycle refusal, no-op preserving redo,
+removal/Undo/Redo, subsequent typed point move and mixed Undo restoring named
+binding, inch/mm presentation and repeated reopen/reedit all pass.
+
+R1 unresolved original constants and R2 missing typed point admission remain
+frozen. Their fixes preserve the unchanged driver/oracle/numerical policy. Typed
+point publication additionally proves bounded actual-operation travel before
+publication (1..32 changed supported handles in one authored stage). The original
+coordinate producer remains unchanged. Other typed mutation classes remain
+explicitly unsupported. No arbitrary measurement/reference-role, global physical
+DOF, native BRep accuracy, all constraint families, beta deployment or Gate1
+completion claim follows. This workflow creates no Native solid.
+
 
 ## First complete browser attempt R1 — FAIL on removal after fresh Open
 

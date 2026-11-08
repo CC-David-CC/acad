@@ -1,5 +1,28 @@
 # Active CAD1 acceptance scope — user revision2026-11-06
 
+## Latest qualification — projected R3 and ordinary exercise review, 2026-11-08
+
+Whole Chrome16184 and FIRST independent actual-artifact oracle PASS on exact
+Core013369861fad6123520065a4e06fafac752900e8 /
+Desktop95d8023b0209ad119ccfe92a34cdb6a55e87ef01.52records/501public trace entries/
+37observations/7refusals/3.cad Save/server/fresh Open cycles. Live Segment
+rotation/reversal, positive/zero/negative driving edits, named formula edits,
+removal, typed point movement, mixed travel restoring raw binding, units and
+reopen/reedit pass. Original R1/R2 failures retained; no driver/oracle/tolerance
+changes. Contexts retired/source unchanged. See
+test/projected-distance-public-workflow/QUALIFICATION.md. No BRep construction
+is claimed by this source-geometry workflow.
+
+**18 recent scoped workflows qualified. Five of21 ordinary exercise contracts
+qualified: E01/E02/E03/E07/E21;16 Partial.** Root reviewed actual complete
+evidence mapped by docs/reviews/FIVE-EXERCISE-SIGNOFF-PROPOSAL-20261108.md;
+canonical Desktop baseline records acceptance. This corrects conflation of the
+ordinary exercises with broader11competencies, not an accuracy relaxation or
+new exercise execution. Earlier all21Partial counts below are historical.
+Full competencies, final composed beta/viewable-agent delivery and remaining
+exercise contracts stay open. No deployment or filesystem-race work.
+
+
 ## Latest scoped qualification — point coincidence R4, 2026-11-08
 
 Complete Chrome41761 and FIRST independent artifact checker PASS on actual
