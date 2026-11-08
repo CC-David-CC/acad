@@ -52,10 +52,9 @@ export class Circle extends SketchObject {
     dest.r.set(this.r.get());
   }
 
-  copy() {
-    const circle = new Circle(this.c.copy());
-    circle.r.set(this.r.get());
-    return circle;
+  copy(id) {
+    // Constructor takes numerical center coordinates, not an EndPoint.
+    return new Circle(this.c.x,this.c.y,this.r.get(),id);
   }
 
   write() {

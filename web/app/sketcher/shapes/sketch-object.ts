@@ -182,7 +182,7 @@ export abstract class SketchObject extends Shape implements SolvableObject {
     }
   }
 
-  copy() {
+  copy(id?:string) {
     throw "method not implemented";
   }
 

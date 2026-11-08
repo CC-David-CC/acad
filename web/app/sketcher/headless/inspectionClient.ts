@@ -1,3 +1,4 @@
+import {captureMirrorInspection} from './mirrorReply.mjs';
 import {captureSlotInspection} from './straightSlotReply.mjs';
 import {ELLIPSE_MIN_SEMIAXIS_MM} from '../shapes/ellipseRecord.mjs';
 import {runSketchSolve, SketchSolveOptions} from './client';
@@ -50,7 +51,7 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
     text(error.code,64);if(typeof error.message!=='string'||error.message.length>512)return invalid();
     const output=Object.freeze({revision,ok:false,error:Object.freeze(error)});current();return output;
   }
-  const data=record(result,['revision','ok','objects','points','constraints','curves','ellipses','slots','dimensionTargets','stageCount','boundaryFrame','emptyBoundary']);
+  const data=record(result,['revision','ok','objects','points','constraints','curves','ellipses','slots','mirror','dimensionTargets','stageCount','boundaryFrame','emptyBoundary']);
   if(data.revision!==revision||data.ok!==true||typeof data.emptyBoundary!=='boolean'||!Number.isSafeInteger(data.stageCount)||data.stageCount<1||data.stageCount>32)return invalid();
   const rawObjects=array(data.objects,10000),rawConstraints=array(data.constraints,10000),objects=[],constraints=[],ids=new Set();
   let characters=0,referenceCount=0;
@@ -126,5 +127,6 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
   const rawSlots=array(data.slots,2000),slots=[],declared=constraints.filter(c=>c.typeId==='StraightSlot'),slotObjects=new Map(objects.map(o=>[o.id,o])),slotPoints=new Map(points.map(p=>[p.id,p])),slotConstraints=new Map(constraints.map(c=>[c.stage+':'+c.index,c]));
   if(rawSlots.length!==declared.length)return invalid();
   const seenSlots=new Set();for(let i=0;i<rawSlots.length;i++){const slot=captureSlotInspection(rawSlots[i],slotObjects,slotPoints,slotConstraints);if(seenSlots.has(slot.slotId))return invalid();seenSlots.add(slot.slotId);characters+=JSON.stringify(slot).length;if(characters>1048576)return invalid();slots.push(slot);if(i%32===31){await new Promise(resolve=>setTimeout(resolve,0));current();}}
-  const output=Object.freeze({revision,ok:true,objects:Object.freeze(objects),points:Object.freeze(points),constraints:Object.freeze(constraints),slots:Object.freeze(slots),curves:Object.freeze(curves),ellipses:Object.freeze(ellipses),dimensionTargets:Object.freeze(dimensionTargets),stageCount:data.stageCount,boundaryFrame:Object.freeze(frame),emptyBoundary:data.emptyBoundary});current();return output;
+  const mirror=captureMirrorInspection(data.mirror,slotObjects,slotPoints);characters+=JSON.stringify(mirror).length;if(characters>2097152)return invalid();
+  const output=Object.freeze({revision,ok:true,objects:Object.freeze(objects),points:Object.freeze(points),constraints:Object.freeze(constraints),mirror,slots:Object.freeze(slots),curves:Object.freeze(curves),ellipses:Object.freeze(ellipses),dimensionTargets:Object.freeze(dimensionTargets),stageCount:data.stageCount,boundaryFrame:Object.freeze(frame),emptyBoundary:data.emptyBoundary});current();return output;
 }

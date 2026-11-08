@@ -1,3 +1,4 @@
+import {inspectMirrorSource} from './mirrorSourceValidation';
 import {inspectStraightSlotRows} from './straightSlotTransition';
 import {replaySketchTransition} from './sketchTransition';
 import {projectRenderSketch} from './renderSketchProjection.mjs';
@@ -29,7 +30,8 @@ export function inspectClosedSketchTransition(request:any) {
       constants:constraint.constants||{},admission:{version:constraint.admission.version,state:constraint.admission.state}
     })));
     if(objects.length>10000||constraints.length>10000)throw Error('Sketch inspection exceeds its limit.');
-    return {revision:request.revision,ok:true,objects,points,constraints,slots:inspectStraightSlotRows(original,sketch,request.externalParameters),curves:inspectCubicSourceRows(original,sketch,request.externalParameters),ellipses:inspectEllipseRows(original,sketch,request.externalParameters),dimensionTargets:discoverDrivingDimensions(sketch,points),stageCount:sketch.stages.length,boundaryFrame:frame,
+    const mirror=inspectMirrorSource(sketch,request.externalParameters);if(new TextEncoder().encode(JSON.stringify(mirror)).byteLength>1048576)throw Object.assign(Error('Mirror inspection exceeds its bounded reply envelope.'),{code:'LIMIT'});
+    return {revision:request.revision,ok:true,objects,points,constraints,mirror,slots:inspectStraightSlotRows(original,sketch,request.externalParameters),curves:inspectCubicSourceRows(original,sketch,request.externalParameters),ellipses:inspectEllipseRows(original,sketch,request.externalParameters),dimensionTargets:discoverDrivingDimensions(sketch,points),stageCount:sketch.stages.length,boundaryFrame:frame,
       emptyBoundary:['lines','arcs','circles','nurbses'].every(key=>Array.isArray(sketch.boundary?.[key])&&sketch.boundary[key].length===0)};
   } catch(error) {
     return {revision:request.revision,ok:false,error:{code:error?.code||'INSPECTION_INVALID',message:error?.message||'Sketch inspection failed.'}};

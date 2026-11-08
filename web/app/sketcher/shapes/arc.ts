@@ -166,8 +166,8 @@ export class Arc extends SketchObject {
     this.stage.addConstraint(constr);
   }
 
-  copy() {
-    return new Arc(this.a.x, this.a.y, this.b.x, this.b.y, this.c.x, this.c.y);
+  copy(id?:string) {
+    return new Arc(this.a.x, this.a.y, this.b.x, this.b.y, this.c.x, this.c.y,id);
   }
 
   mirror(dest: Arc, mirroringFunc: (x: number, y: number) => { x: number; y: number }) {

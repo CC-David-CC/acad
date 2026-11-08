@@ -165,8 +165,8 @@ export class Segment extends SketchObject {
     }
   }
 
-  copy() {
-    return new Segment(this.a.x, this.a.y, this.b.x, this.b.y);
+  copy(id?:string) {
+    return new Segment(this.a.x, this.a.y, this.b.x, this.b.y,id);
   }
 
   write(): SketchSegmentSerializationData {

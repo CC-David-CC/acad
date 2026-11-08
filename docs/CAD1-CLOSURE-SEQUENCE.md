@@ -1,31 +1,30 @@
 # Gate 1: remaining work and execution sequence
 
-## Current exit — principal Apply R4 qualified, 2026-11-08
+## Current exit — shared sketch Mirror R2 qualified, 2026-11-08
 
-Whole Chrome workflow AND independent after-whole oracle PASS25fc19e.
-ActualCore6f6ccef/Desktopc8779dd83:199records,6real Apply paths,18UI travels,
-30Native sets/153points,9refusals,4.cad Save/server/freshOpen cycles and64
-real trim edits. Native-child regeneration/reopened agent edit and retained-D
-Cancel/Undo/Redo after P eviction pass. R1/R2/R3 remain frozen; two source
-repairs preserve currentness and derive restored readiness from owned data.
+Complete browser +independent reflection/archive analysis PASS24f4269.
+ActualCore104c24e/Desktop9bdb3a512:214records/194commands/21native-sketch
+observations/3.cad saves/19refusals/6own malformed Opens/2fresh signed Opens.
+Eight genuine Point/Segment/Circle/minor-major Arc/on-axis/overlap sources retain
+IDs and regenerate after source/diameter/Arc/axis edits and mixed travel.
+Independent stored/cold observations each satisfy the SAME Fraction/90-digit
+Decimal truth at50pm; maximum observed coordinate error4.263256414560601e-15mm.
+R1 stage-order failure and first checker NameError stay frozen. Checker-only
+bde8e20 adds missing exact point extraction; no truth/data/budget changes.
+Geometry-only native Open cache proof does not replace original equations.
 
-THIRTEEN recent named browser workflows now pass. These are NOT13of21
-complete exercises: all21 formal exercise signoffs remain Partial. E17/C10 is
-Gate2. Files stays accepted. Broader formula/datum/legacy/insertion/stale Apply
-families, full C12/Gate1 and delivery remain open. No global Native50pm claim.
+Principal Apply25fc19e and all earlier producing scopes/pins remain retained.
+FOURTEEN recent named browser workflows pass, NOT14of21 completed exercises.
+All21 formal Gate1 exercise signoffs remain Partial; E17/C10 is Gate2. Files
+remains accepted. Mirror proof is sketch-only, not BRep/region/extrusion or allC01.
 
-Next source lanes: genuine C01 Mirror; C02 circular arrangement/Native; finite
-C03/C04 constraints. Earlier Apply source-era/open/failure notes below are
-historical and superseded only by this finite proof. See
-[test/principal-plane-apply-public-workflow/QUALIFICATION.md](../test/principal-plane-apply-public-workflow/QUALIFICATION.md).
+Next independent packets: C02 circular Native source/root registration f1cb134
+(source review +compile only; normal full app build/whole corpus/oracle pending),
+and C03 radius source1891c96/Desktop013b29d99 (root Craft/index composition,
+normal build/whole Circle/quarter-Arc/.cad qualification pending). Broader finite
+C01/C03/C04 cases stay on the checklist; no human UI/physics/packaging diversion.
+Earlier dated current/source-era notes below are historical, not current counts.
 
-
-Current2026-11-08. Gate1 only; E17 assemblies/C10 is Gate2. Detailed authority is
-Desktop docs/CAD-ENGINE-GATE-1.md and docs/evidence/CAD-GATE1-BASELINE-20261106.md;
-finite case inventory is docs/reviews/GATE1-FINITE-CLOSURE-AUDIT-20261107.md.
-This guide sequences that scope; it neither adds later CAD work nor removes
-unconditional Gate1 requirements. Human authoring UI redesign remains deferred;
-viewable output and one authoritative shared person/agent operation model remain.
 
 ## Historical principal Apply integration checkpoint — 2026-11-08
 
