@@ -31,3 +31,22 @@ Its declared capabilities include actual box construction, point observation,
 selected-profileV3 and modern history. The full driver, availability assertion,
 Native validity/volume/bounds/points and all chronology checks remain unchanged.
 R1 is retained; no independent artifact oracle ran without a whole PASS.
+
+## R2 — 2026-11-08: FAIL at accepted-prefix metadata read
+
+Same actual Core4f5b2ca/Desktop9d8f51061 fixture, unchanged driver, advertised
+owned-box shell cohort. Runtime pins, actual box creation and first full-tip
+Native observation passed. After the registered prefix operation, `state()`
+failed on wrapper `inspect`: `Finish the current sketch, operation or history
+edit before inspecting.` No draft cycle or Cancel gesture completed; no saves.
+Returned post-prefix state was not captured. Terminal driver82635 is exit1,
+owned context closed/shared browser retained, frozen source hashes unchanged.
+
+Source at Desktop9d8f51061 confirms `index.mjs`'s metadata inspection rejects
+`isEditingHistory` or any wizard request, then obtains its revision through
+the save-readiness gate. This blocks read-only accepted-definition observation
+even for an intentional settled prefix. It is distinct from mutation readiness.
+Next repair separates that read from save permission and explicitly excludes
+unapplied drafts from its metadata meaning. Processing/file-busy/editor guards
+and all save/mutation checks remain. Preserve the driver and all expectations.
+This is not yet runtime proof of Cancel or full C12 integration.
