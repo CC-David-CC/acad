@@ -19,7 +19,31 @@ Authoritative detailed definitions are in the desktop repository:
 Historical references to all22 exercises describe the prior scope and do not
 reinstate assembly acceptance in Gate1.
 
-## Current finite execution lanes — 2026-11-08
+## Current qualification checkpoint — 2026-11-08
+
+The current four-workflow batch has TWO scoped qualified passes and TWO complete
+workflow failures. These are not the full Gate1 denominator: Gate1 contains21
+exercises, with no complete exercise-level signoffs yet. Existing scoped passes
+remain useful evidence toward those exercises; zero signoffs does not mean zero
+implementation. Assemblies E17/C10 remain Gate2.
+
+| Workflow | Complete result | Next action |
+|---|---|---|
+| Line orientation R12 | Scoped PASS618cf39; independent bounded50pm oracle PASS c702b49 | Retain frozen evidence; qualify affected changes on later builds |
+| Native `.cad` R6 | Scoped PASS49db2da; independent artifact oracle PASS | Retain frozen evidence; capacity/memory/ARC23 remain separate |
+| Length measurement roles R1 | FAIL Desktop53363ab16 after56 checkpoints/3saves, at final typed configuration setup | Isolated ordinary Point repair integrated01fe7c5/c7cca14/5c4e036; build and rerun unchanged full workflow |
+| Feature history controls R1 | FAIL3b8a32f after25 checkpoints, before save | Explicit rectangle-dimension construction/travel repair in progress; build and rerun unchanged full workflow |
+
+Actual last qualified composition remains Core32ae9c8/Desktop60ec30ee9. New
+source repairs are not qualification evidence. C08 custom source-frame work is
+isolated and excluded from this repair batch. A four-of-four batch result would
+not close the remaining finite competencies or the final beta/agent delivery.
+
+The sections below retain chronological implementation and execution notes.
+Statements such as “running,” “queued,” and “not qualified yet” describe those
+earlier checkpoints; the table above and latest completed results supersede them.
+
+## Earlier finite execution lanes — 2026-11-08
 
 Latest orientationR12 PASS on Core32ae9c8/Desktop60ec30ee9, frozen618cf39
 under test/line-orientation-public-workflow/evidence-r12.150checkpoints,
