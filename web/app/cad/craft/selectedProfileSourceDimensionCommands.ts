@@ -5,6 +5,7 @@ import {captureDrivingDimensionIntent} from 'sketcher/headless/drivingDimensionT
 import {captureSketchFailure} from 'sketcher/constr/admissionCause.mjs';
 import {runPrismSemantic} from 'engine/extrusion/prismSemanticClient';
 import {captureSelectedRegionCurveIds,captureSelectedRegionInspection} from 'engine/extrusion/selectedRegionDescriptor.mjs';
+import {CIRCULAR_REGION_CAPTURE} from 'engine/extrusion/circularArrangementDescriptor.mjs';
 import {admitArrangementRegionsForBuild} from 'engine/extrusion/selectedArrangementDescriptor.mjs';
 import {captureSelectedProfileSolve} from 'workbenches/modeler/features/workerSelectedProfile/workerSelectedProfile.operation';
 import {requireSelectedProfileBuild,selectedProfileVersion} from 'engine/mount/selectedProfileBuildSelection.mjs';
@@ -77,7 +78,7 @@ export function createSelectedProfileSourceDimensionCommands(ctx:any,submitPrepa
    const preparation:PreparedSketchCommand={candidateScope:scope,sketchOverrides:Object.freeze([Object.freeze({id:parameters.faceId,data:after})]),sketchSourceFrames:Object.freeze([Object.freeze({id:parameters.faceId,frame})]),requireCurrent:current,requireCommittedCurrent(){if(!alive())throw abort(true);},async prepare(_models:any[],next:any){current();if((await captureAuthoredHistory(next.history,current)).signature!==candidate.signature)throw abort();current();workspace=storage.prepareWrites([{key,value:after}]);return workspace;}};
    return preparation;
   };
-  return{parameters,source,frame,boundary,current,alive,dispose,solveOptions,start,recheck,prepare,craft,inspectMethod};
+  return{parameters,source,frame,boundary,circularArrangementVersion:(build as any).circularArrangementVersion,current,alive,dispose,solveOptions,start,recheck,prepare,craft,inspectMethod};
  }
  async function discover(job:any,after:string){
   bounded(after);const solved:any[]=[];
@@ -86,8 +87,8 @@ export function createSelectedProfileSourceDimensionCommands(ctx:any,submitPrepa
    solved.push({...captureSelectedProfileSolve(r,revision),curveIds:captureSelectedRegionCurveIds(r.sketch)});
   }
   if(solved[0].source!==solved[1].source||solved[0].digest!==solved[1].digest||solved[0].evidence!==solved[1].evidence)fail('INVALID_RESPONSE','Independent proposed source reconstructions disagree.');
-  const revision=crypto.randomUUID(),profile={unit:'millimeter',engine:'occ',profileVersion:3,revision,sketchDigest:solved[0].digest,faceId:job.parameters.faceId,frame:job.frame,depth:job.parameters.depth,sketchJSON:solved[0].source},expected={revision,sketchDigest:profile.sketchDigest,faceId:profile.faceId},rows:any[]=[];
-  for(let i=0;i<2;i++){const result=await runPrismSemantic(asset(semanticWorker),{kind:'inspect-selected',profile},{...job.solveOptions,timeoutMs:30000});job.current();rows.push(captureSelectedRegionInspection(result,expected,solved[0].curveIds,true));}
+  const revision=crypto.randomUUID(),profile={unit:'millimeter',engine:'occ',profileVersion:3,...(job.circularArrangementVersion===1?{circularArrangementVersion:1}:{}),revision,sketchDigest:solved[0].digest,faceId:job.parameters.faceId,frame:job.frame,depth:job.parameters.depth,sketchJSON:solved[0].source},expected={revision,sketchDigest:profile.sketchDigest,faceId:profile.faceId},rows:any[]=[];
+  for(let i=0;i<2;i++){const result=await runPrismSemantic(asset(semanticWorker),{kind:'inspect-selected',profile},{...job.solveOptions,timeoutMs:30000});job.current();rows.push(captureSelectedRegionInspection(result,expected,solved[0].curveIds,true,job.circularArrangementVersion===1?CIRCULAR_REGION_CAPTURE:undefined));}
   if(JSON.stringify(rows[0])!==JSON.stringify(rows[1]))fail('INVALID_RESPONSE','Independent proposed regions disagree.');await job.recheck();return{sourceDigest:profile.sketchDigest,regions:admitArrangementRegionsForBuild(rows[0].regions,requireSelectedProfileBuild('occ',job.parameters.engineRevision).selectionPlanVersion),sourceAnalysis:rows[0].sourceAnalysis};
  }
  async function proposed(a:any,opts:any){const job=begin(a,opts);try{

@@ -44,14 +44,14 @@ function privateAPI(value,version){
  for(const name of names.filter(x=>x!=='plan'))if(typeof api[name]!=='function')fail('A genuine private selection resolver is required.');
  return api;
 }
-function descriptor(value,version,origin){
+function descriptor(value,version,origin,captureRef=captureBoundaryRef){
  if(!value||typeof value!=='object'||Array.isArray(value))fail('Expected a selection descriptor.');
  const allowed=['id','role','geometry','curveId','incidentCurveIds','sourceEdgeId','kind',...(version===2?['originFeatureId','boundaryRef','incidentBoundaryRefs']:[])],keys=Reflect.ownKeys(value);
  if(keys.some(k=>typeof k!=='string'||!allowed.includes(k))||!['id','role','geometry',...(version===2?['originFeatureId']:[])].every(k=>keys.includes(k)))fail('Unsupported selection descriptor.');
  const d=fields(value,keys);if(keys.some(k=>d[k]===undefined)||!key(d.id)||!text(d.role,64)||!text(d.geometry,64))fail('Invalid selection descriptor.');
  if(d.curveId!==undefined&&!text(d.curveId,256))fail('Invalid source curve identity.');
  if(d.incidentCurveIds!==undefined){const xs=array(d.incidentCurveIds,2);if(xs.length!==2||!xs.every(x=>text(x,256))||xs[0]>=xs[1])fail('Expected two canonical source curve identities.');d.incidentCurveIds=xs;}
- if(d.boundaryRef!==undefined||d.incidentBoundaryRefs!==undefined){if(d.curveId!==undefined||d.incidentCurveIds!==undefined||d.boundaryRef!==undefined&&d.incidentBoundaryRefs!==undefined)fail('Derived spans cannot masquerade as whole source curves.');if(d.boundaryRef!==undefined)d.boundaryRef=captureBoundaryRef(d.boundaryRef);else{const refs=array(d.incidentBoundaryRefs,2).map(x=>captureBoundaryRef(x));if(refs.length!==2||refs[0].id>=refs[1].id)fail('Expected two canonical source spans.');d.incidentBoundaryRefs=refs;}}
+ if(d.boundaryRef!==undefined||d.incidentBoundaryRefs!==undefined){if(d.curveId!==undefined||d.incidentCurveIds!==undefined||d.boundaryRef!==undefined&&d.incidentBoundaryRefs!==undefined)fail('Derived spans cannot masquerade as whole source curves.');if(d.boundaryRef!==undefined)d.boundaryRef=captureRef(d.boundaryRef);else{const refs=array(d.incidentBoundaryRefs,2).map(x=>captureRef(x));if(refs.length!==2||refs[0].id>=refs[1].id)fail('Expected two canonical source spans.');d.incidentBoundaryRefs=refs;}}
  if(d.sourceEdgeId!==undefined&&!key(d.sourceEdgeId)||d.kind!==undefined&&!['fillet','chamfer-equal'].includes(d.kind))fail('Invalid treatment source metadata.');
  if(version===1)d.originFeatureId=origin;if(!integer(d.originFeatureId))fail('Invalid origin feature identity.');return d;
 }
@@ -88,7 +88,8 @@ function priorRows(values,version,origin){
  }
  return result;
 }
-function readSource(api,plan,version){
+function readSource(api,plan,version,captureRef=captureBoundaryRef){
+ if(typeof captureRef!=='function')fail('A private source-boundary capture is required.');
  const p=fields(plan,version===1?['version','featureId','regionId','scope','source','edges','faces','unresolved']:['version','featureId','scope','source','sourceContexts','vertices','edges','faces','unresolved']);
  if(p.version!==version||!integer(p.featureId)||p.scope!=='authored-source'||!['prism-construction-history','box-construction-history','kernel-operation-history'].includes(p.source))fail('Unsupported source selection plan.');
  if(version===1&&(!text(p.regionId,8192)||p.source!=='prism-construction-history'))fail('Only an actual initial prism index may be lifted.');
@@ -96,7 +97,7 @@ function readSource(api,plan,version){
  if(['prism-construction-history','box-construction-history'].includes(p.source)&&(origins.length!==1||origins[0].featureId!==p.featureId||origins[0].kind!==(p.source==='box-construction-history'?'box':'sketch-profile')))fail('Initial construction origin must equal its producer and source kind.');
  const descriptors=new Map(),bindings=new Map(),claims=[],used={vertex:new Set(),edge:new Set(),face:new Set()};
  for(const type of kinds)for(const value of array(type==='vertex'&&version===1?[]:p[plural(type)],limit(type))){
-  const d=descriptor(value,version,p.featureId);if(descriptors.has(d.id)||!originIds.has(d.originFeatureId))fail('Selection identities require unique actual origins.');
+  const d=descriptor(value,version,p.featureId,captureRef);if(descriptors.has(d.id)||!originIds.has(d.originFeatureId))fail('Selection identities require unique actual origins.');
   let index;try{index=api['resolve'+type[0].toUpperCase()+type.slice(1)](d.id);}catch{fail('An advertised source selection does not resolve.');}
   if(!integer(index,limit(type))||used[type].has(index))fail('Source selections require unique native bindings.');
   used[type].add(index);descriptors.set(d.id,{type,descriptor:d});bindings.set(d.id,index);claims.push({kind:type,id:d.id,sourceIndex:index});
@@ -185,28 +186,28 @@ function derive(sources,data,edge,authoredRemoval=false){
  return finish({featureId,source:'kernel-operation-history',sourceContexts,topology,descriptors:resolved,unresolved,maps});
 }
 
-export function deriveBooleanSelectionIndexV2(input){
+export function deriveBooleanSelectionIndexV2(input,captureRef=captureBoundaryRef){
  const args=fields(input,['sources','ancestries','topology','featureId']),indices=array(args.sources,2),ancestries=array(args.ancestries,2);
  if(indices.length!==2||ancestries.length!==2)fail('Exactly two genuine Boolean inputs are required.');
  const apis=indices.map(x=>privateAPI(x,2)),data=snapshot({plans:apis.map(x=>x.plan),ancestries,topology:args.topology,featureId:args.featureId});
- return derive(apis.map((api,i)=>readSource(api,data.plans[i],2)),data,false);
+ return derive(apis.map((api,i)=>readSource(api,data.plans[i],2,captureRef)),data,false);
 }
-export function deriveEdgeSelectionIndexV2(input){
+export function deriveEdgeSelectionIndexV2(input,captureRef=captureBoundaryRef){
  const args=fields(input,['sourceIndex','ancestry','topology','featureId','kind','selectedEdgeIds']),api=privateAPI(args.sourceIndex,2),data=snapshot({plan:api.plan,ancestries:[args.ancestry],topology:args.topology,featureId:args.featureId,kind:args.kind,selectedEdgeIds:args.selectedEdgeIds});
- return derive([readSource(api,data.plan,2)],data,true);
+ return derive([readSource(api,data.plan,2,captureRef)],data,true);
 }
 
 // Inherit only the named target's identities (e.g. a semantic-hole Cut A).
 // The caller separately validates the real tool/other native input history;
 // it is not a named source here, and generated walls/rims acquire no new IDs.
-export function deriveInheritedSelectionIndexV2(input){
+export function deriveInheritedSelectionIndexV2(input,captureRef=captureBoundaryRef){
  const args=fields(input,['sourceIndex','ancestry','topology','featureId']),api=privateAPI(args.sourceIndex,2),data=snapshot({plan:api.plan,ancestries:[args.ancestry],topology:args.topology,featureId:args.featureId});
- return derive([readSource(api,data.plan,2)],data,false);
+ return derive([readSource(api,data.plan,2,captureRef)],data,false);
 }
 
 // Same genuine ancestry path as other v2 operations, with the shell's captured
 // authored removals applied to the new private binding map after reconciliation.
-export function deriveShellSelectionIndexV2(input){
+export function deriveShellSelectionIndexV2(input,captureRef=captureBoundaryRef){
  const args=fields(input,['sourceIndex','ancestry','topology','featureId','removedFaceIds']),api=privateAPI(args.sourceIndex,2),data=snapshot({plan:api.plan,ancestries:[args.ancestry],topology:args.topology,featureId:args.featureId,removedFaceIds:args.removedFaceIds});
- return derive([readSource(api,data.plan,2)],data,false,true);
+ return derive([readSource(api,data.plan,2,captureRef)],data,false,true);
 }

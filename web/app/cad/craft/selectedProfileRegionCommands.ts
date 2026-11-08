@@ -6,6 +6,7 @@ import {sketchBoundaryFrame} from '../sketch/boundaryValidity';
 import {MOpenFaceShell} from '../model/mopenFace';
 import {requireSelectedProfileBuild,selectedProfileVersion} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {captureSelectedRegionCurveIds,captureSelectedRegionInspection} from 'engine/extrusion/selectedRegionDescriptor.mjs';
+import {CIRCULAR_REGION_CAPTURE} from 'engine/extrusion/circularArrangementDescriptor.mjs';
 
 const PARAMS=['version','unit','engine','engineRevision','featureId','faceId','regionId','depth','bodyPolicy'];
 const fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
@@ -39,7 +40,7 @@ export function createSelectedProfileRegionCommands(ctx:any,submitRegionEdit:(ar
   if(!Number.isSafeInteger(version)||version<1)fail('UNSUPPORTED_SOURCE','A versioned source sketch is required.');
   const alive=()=>{try{return !opts.signal?.aborted&&(!opts.valid||opts.valid()===true)&&!opts.signal?.aborted&&ctx.craftService===craft&&ctx.projectService===project&&project.hasHostLifetime&&project.isDocumentCurrent(generation)&&ctx.storageService===storage&&ctx.sketchStorageService===sketches&&ctx.cadRegistry===registry&&ctx.expressionService===expressions&&ctx.projectManager===manager&&craft.inspectSelectedProfileHistory===historyMethod&&craft.inspectSelectedProfileRegions===regionMethod&&craft.inspectSelectedProfileCommands===sourceMethod;}catch{return false;}};
   const current=()=>{if(!alive()||craft.evaluationEpoch!==epoch||craft.modifications$.value!==state||state.history!==entries||state.pointer!==entries.length-1||project.sketchStorageNamespace!==namespace||storage.versionOf(key)!==version||sketchRevision(storage,namespace)!==namespaceVersion||sketches.getSketchData(parameters.faceId)!==source||registry.findFace(parameters.faceId)!==face||face.root!==plane||plane.face!==face||face.isPlaneBased!==true||face.defaultSketchId!==parameters.faceId||JSON.stringify(frameCopy(face))!==frameText||expressions.isTyped||expressions.script$.value!==script||expressions.table$.value!==table||Reflect.ownKeys(table).length||expressions.list$.value!==list||expressions.errors$.value!==errors)throw abort();const h=historyMethod(),s=sourceMethod();if(!h.ready||!s.ready||h.revision!==a.revision||s.revision!==creationInfo.revision||s.engineRevision!==parameters.engineRevision||s.profileVersion!==profileVersion)throw abort();const now:any=captureSelectedProfileDepthParameters(entries[a.index]?.params);if(PARAMS.some(key=>now[key]!==parameters[key]))throw abort();};
-  current();return{craft,parameters,profileVersion,source,frame,creationRevision:creationInfo.revision,entries,current,alive,regionMethod};
+  current();return{craft,parameters,profileVersion,circularArrangementVersion:(build as any).circularArrangementVersion,source,frame,creationRevision:creationInfo.revision,entries,current,alive,regionMethod};
  }
  async function discover(a:any,opts:any){
   const job=begin(a,opts),captured=await captureAuthoredHistory(job.entries,job.current);job.current();
@@ -51,7 +52,7 @@ export function createSelectedProfileRegionCommands(ctx:any,submitRegionEdit:(ar
   let source:any;try{source=JSON.parse(job.source);}catch{fail('UNSUPPORTED_SOURCE','The saved source is invalid.');}
   if(!Array.isArray(source.objects))fail('UNSUPPORTED_SOURCE','The saved source curve census is unavailable.');
   const ids=captureSelectedRegionCurveIds({objects:source.objects.map((o:any)=>({id:o.id,type:o.type,role:o.role??null,stage:o.stage??0}))});
-  const descriptors=captureSelectedRegionInspection({binding:{revision:r.revision,sketchDigest:r.sourceDigest,faceId:r.faceId},regions:r.regions,...(job.profileVersion===3?{sourceAnalysis:r.sourceAnalysis}:{})},{revision:job.creationRevision,sketchDigest:r.sourceDigest,faceId:job.parameters.faceId},ids,job.profileVersion===3);
+  const descriptors=captureSelectedRegionInspection({binding:{revision:r.revision,sketchDigest:r.sourceDigest,faceId:r.faceId},regions:r.regions,...(job.profileVersion===3?{sourceAnalysis:r.sourceAnalysis}:{})},{revision:job.creationRevision,sketchDigest:r.sourceDigest,faceId:job.parameters.faceId},ids,job.profileVersion===3,job.circularArrangementVersion===1?CIRCULAR_REGION_CAPTURE:undefined);
   if((await captureAuthoredHistory(job.entries,job.current)).signature!==captured.signature)throw abort();job.current();
   return{job,value:Object.freeze({revision:a.revision,regionRevision:job.creationRevision,index:a.index,...job.parameters,currentSourceDigest:r.sourceDigest,profileVersion:job.profileVersion,sourceFrame:job.frame,regions:descriptors.regions,...(descriptors.sourceAnalysis?{sourceAnalysis:descriptors.sourceAnalysis}:{}),dependencyCompatibility:'requires-full-replay'})};
  }

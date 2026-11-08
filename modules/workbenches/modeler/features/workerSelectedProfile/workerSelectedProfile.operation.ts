@@ -13,6 +13,7 @@ import {runPrismSemantic} from 'engine/extrusion/prismSemanticClient';
 import {captureSelectedProfileRequest,capturePolygonProfileRequest} from 'engine/mount/selectedProfilePlan.mjs';
 import {requireSelectedProfileBuild,selectedProfileVersion,genericHistoryBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {evaluateWorkerSolid} from 'engine/solid/solidLedger.mjs';
+import {captureCircularCellRequest} from 'engine/mount/ownedCircularArrangementProtocol.mjs';
 import sketchWorker from 'codi-headless-sketch-worker';
 import semanticWorker from 'codi-prism-semantic-worker';
 
@@ -47,7 +48,7 @@ export function captureSelectedProfileSolve(result:any,revision:string){
 function preparedResponse(result:any,input:any){
  const r=fields(result,['binding','request','expected'],'INVALID_RESPONSE'),binding=fields(r.binding,['revision','sketchDigest','faceId','regionId'],'INVALID_RESPONSE');
  if(['revision','sketchDigest','faceId','regionId'].some(k=>binding[k]!==input[k]))fail('INVALID_RESPONSE','Selected-profile semantic binding changed.');
- let request:any;try{request=(input.profileVersion===3?capturePolygonProfileRequest:captureSelectedProfileRequest)(r.request);}catch{fail('INVALID_RESPONSE','Invalid prepared selected-profile request.');}if(request.region.id!==input.regionId||request.depth!==input.depth||!sameFrame(request.frame,input.frame))fail('INVALID_RESPONSE','Selected-profile request changed its selection, depth or frame.');
+ let request:any;try{const circular=Object.getOwnPropertyDescriptor(r.request||{},'version')?.value===4;if(circular&&input.circularArrangementVersion!==1)fail('INVALID_RESPONSE','Circular preparation lacks its recorded build capability.');request=circular?captureCircularCellRequest(r.request):(input.profileVersion===3?capturePolygonProfileRequest:captureSelectedProfileRequest)(r.request);}catch{fail('INVALID_RESPONSE','Invalid prepared selected-profile request.');}if(request.region.id!==input.regionId||request.depth!==input.depth||!sameFrame(request.frame,input.frame)||request.version===4&&request.region.faceId!==input.faceId)fail('INVALID_RESPONSE','Selected-profile request changed its selection, source, depth or frame.');
  const expected=fields(r.expected,['volume','bounds'],'INVALID_RESPONSE'),b=fields(expected.bounds,['min','max'],'INVALID_RESPONSE'),min=vector(b.min),max=vector(b.max);
  if(typeof expected.volume!=='number'||!Number.isFinite(expected.volume)||expected.volume<=0||min.some((v,i)=>v>max[i]))fail('INVALID_RESPONSE','Invalid expected native measurements.');
  return {request,expected:Object.freeze({volume:expected.volume,bounds:Object.freeze({min:Object.freeze(min),max:Object.freeze(max)})}),signature:jsonData(r)};
@@ -85,9 +86,11 @@ export function createWorkerSelectedProfileOperation(createMount:(engine:string,
    try{
     current();const solve=async()=>{const revision=crypto.randomUUID(),value=await runSketchSolve(assetPath(sketchWorker),typed?{task:'typed-selected-profile-solve',revision,sketchJSON:source,boundary,parameterSource:script}:{task:'rectangle-extrusion-solve',revision,sketchJSON:source,boundary,externalParameters:{}},{signal:owner.signal,valid,timeoutMs:remaining()});current();if(value?.ok===false)fail(value.error?.code||'SOLVE_ERROR',value.error?.message||'Sketch solving failed.');return captureSelectedProfileSolve(value,revision);};
     const first=await solve(),second=await solve();if(first.source!==second.source||first.digest!==second.digest||first.evidence!==second.evidence)fail('INVALID_RESPONSE','Independent sketch Worker results differ.');
-    const revision=crypto.randomUUID(),input={unit:'millimeter',engine:'occ',profileVersion,revision,sketchDigest:first.digest,faceId:p.faceId,regionId:p.regionId,frame,depth:p.depth,sketchJSON:first.source};
+    const revision=crypto.randomUUID(),input={unit:'millimeter',engine:'occ',profileVersion,...((build as any).circularArrangementVersion===1?{circularArrangementVersion:1}:{}),revision,sketchDigest:first.digest,faceId:p.faceId,regionId:p.regionId,frame,depth:p.depth,sketchJSON:first.source};
     const prepare=async()=>{const value=await runPrismSemantic(assetPath(semanticWorker),{kind:'prepare-selected',profile:input},{signal:owner.signal,valid,timeoutMs:remaining()});current();return preparedResponse(value,input);};
     const prepared=await prepare(),verified=await prepare();if(prepared.signature!==verified.signature)fail('INVALID_RESPONSE','Independent selected-profile semantic results differ.');
+    if(prepared.request.version===4&&((build as any).circularArrangementVersion!==1||build.selectionPlanVersion!==2))fail('UNSUPPORTED_PROFILE_BUILD','Circular cells require the exact registered circular/selection-plan-v2 runtime.');
+    if(prepared.request.version===4&&typed)fail('UNSUPPORTED_PARAMETERS','Circular arrangement cells are outside the integrated canonical typed rectangle family.');
     if(prepared.request.region.boundaryProvenance&&build.selectionPlanVersion!==2)fail('UNSUPPORTED_PROFILE_BUILD','Arrangement cells require the recorded selection-plan-v2 build.');
     if(prepared.request.region.boundaryProvenance&&typed)fail('UNSUPPORTED_PARAMETERS','Derived arrangement cells are outside the qualified canonical typed rectangle family.');
     nativeStarted=true;const result=await evaluateWorkerSolid({owner,kind:'profile',sourceBinding:{featureId:p.featureId,faceId:p.faceId,regionId:p.regionId},request:{version:1,unit:p.unit,engine:p.engine,engineRevision:p.engineRevision,featureId:p.featureId,profile:prepared.request},registry,createMount,validateMount,createModel:(id:number,engine:'occ'|'manifold'|'smlib',display:Float64Array|WorkerSolidDisplay,runtime:Readonly<Record<string,string>>,metrics:Readonly<any>)=>new MWorkerSolid(id,engine,display,runtime,metrics),valid});

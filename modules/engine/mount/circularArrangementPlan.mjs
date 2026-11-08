@@ -1,0 +1,34 @@
+// Worker-only source preparation, never proof of successful Native construction.
+import {captureCircularCellRequest} from './ownedCircularArrangementProtocol.mjs';
+import {circularRelation,circlePointSign} from '../extrusion/circularTopology.mjs';
+import {CIRCULAR_ARRANGEMENT_POLICY,circularBoundarySpecification,circularCellMasks,circularSpanId,captureCircularSpan,captureCircularDescriptor,canonicalCircularCycle,circularRegionIdentity,captureCircularAnalysis,verifyCircularSpanKeys} from '../extrusion/circularArrangementDescriptor.mjs';
+const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
+export async function deriveCircularArrangement(faceId,circles){
+ const pair=circles.map(c=>c.id),relation=circularRelation(circles[0],circles[1]),masks=circularCellMasks(relation),references=new Map(),cells=[];
+ const ref=async edge=>{const ends=edge.range==='full'?[]:['left','right'].map(branch=>({sourceCircleIds:pair,branch})),span=captureCircularSpan({kind:'circle-source-span',owners:edge.owners,range:edge.range,ends}),id=await circularSpanId(span);if(!references.has(id))references.set(id,Object.freeze({id,sourceSpan:span}));return Object.freeze({boundaryRef:references.get(id),orientation:edge.orientation});};
+ for(const mask of masks){const specification=circularBoundarySpecification(pair,relation,mask),outer=[],holes=[];for(const edge of specification.outer)outer.push(await ref(edge));for(const loop of specification.holes){const rows=[];for(const edge of loop)rows.push(await ref(edge));holes.push(canonicalCircularCycle(rows));}const descriptor=captureCircularDescriptor({version:3,kind:'two-circle-arrangement-cell',sourceCircleIds:pair,relation,coveringCircleIds:pair.filter((_,i)=>mask&(1<<i)),outerBoundaryRefs:canonicalCircularCycle(outer),holeBoundaryRefs:holes}),regionId=circularRegionIdentity(faceId,descriptor);cells.push(Object.freeze({regionId,descriptor,mask}));}
+ cells.sort((a,b)=>a.regionId<b.regionId?-1:1);const spans=[...references.values()].sort((a,b)=>a.id<b.id?-1:1),analysis={version:3,policy:CIRCULAR_ARRANGEMENT_POLICY,qualification:'exact-represented-source-topology',sourceCircleIds:pair,relation,spans,sourceIntervals:pair.map(curveId=>({curveId,spanIds:spans.filter(r=>r.sourceSpan.owners.includes(curveId)).map(r=>r.id)})),cells:cells.map(c=>c.regionId)};
+ return Object.freeze({relation,cells:Object.freeze(cells),sourceAnalysis:captureCircularAnalysis(analysis,new Set(pair),cells)});
+}
+function intersections(a,b,relation){
+ if(!['proper-overlap','external-tangent'].includes(relation))return[];const dx=b.center[0]-a.center[0],dy=b.center[1]-a.center[1],d=Math.hypot(dx,dy);if(!Number.isFinite(d)||d<=0)fail('PROFILE_BELOW_RESOLUTION','Circular source intersection is numerically unqualified.');
+ if(relation==='external-tangent'){const fraction=a.radius/(a.radius+b.radius);return[[a.center[0]+dx*fraction,a.center[1]+dy*fraction]];}
+ const x=(d*d+(a.radius-b.radius)*(a.radius+b.radius))/(2*d),square=a.radius*a.radius-x*x;if(!Number.isFinite(square)||square<=0)fail('PROFILE_BELOW_RESOLUTION','The exact overlapping source needs a qualified numerical intersection.');const h=Math.sqrt(square),u=dx/d,v=dy/d;return[[a.center[0]+x*u-h*v,a.center[1]+x*v+h*u],[a.center[0]+x*u+h*v,a.center[1]+x*v-h*u]];
+}
+function area(circles,relation,mask){
+ const[a,b]=circles,A=Math.PI*a.radius*a.radius,B=Math.PI*b.radius*b.radius;let overlap=0;
+ if(relation==='coincident')overlap=A;else if(relation==='nested-0')overlap=B;else if(relation==='nested-1')overlap=A;else if(relation==='proper-overlap'){const d=Math.hypot(b.center[0]-a.center[0],b.center[1]-a.center[1]),x=(d*d+(a.radius-b.radius)*(a.radius+b.radius))/(2*d),square=a.radius*a.radius-x*x;if(!Number.isFinite(square)||square<=0)fail('PROFILE_BELOW_RESOLUTION','Circular cell quantity is numerically unqualified.');const h=Math.sqrt(square);overlap=a.radius*a.radius*Math.atan2(h,x)+b.radius*b.radius*Math.atan2(h,d-x)-d*h;}
+ const value=mask===1?A-overlap:mask===2?B-overlap:overlap;if(!Number.isFinite(value)||value<=0)fail('PROFILE_BELOW_RESOLUTION','Positive represented cell needs a qualified positive source quantity.');return value;
+}
+function expected(request,mask){
+ const {frame,depth,region:{circles,descriptor}}=request,[a,b]=circles,relation=descriptor.relation,points=intersections(a,b,relation),bounds={min:[],max:[]},world=(point,axis)=>frame.origin[axis]+frame.x[axis]*point[0]+frame.y[axis]*point[1];
+ const include=(owner,point)=>{const other=circlePointSign(circles[1-owner],point);return mask===3?other<=0:mask===1?(owner===0?other>=0:other<=0):(owner===1?other>=0:other<=0);};
+ for(let axis=0;axis<3;axis++){const candidates=points.slice(),length=Math.hypot(frame.x[axis],frame.y[axis]);for(let owner=0;owner<2;owner++){const c=circles[owner];if(length===0){if(include(owner,c.center))candidates.push(c.center);}else for(const direction of[-1,1]){const point=[c.center[0]+direction*c.radius*frame.x[axis]/length,c.center[1]+direction*c.radius*frame.y[axis]/length];if(include(owner,point))candidates.push(point);}}if(!candidates.length)fail('INVALID_PROFILE','Circular bounds have no qualified source extrema.');const values=candidates.map(p=>world(p,axis)),delta=frame.z[axis]*depth;bounds.min.push(Math.min(...values)+Math.min(0,delta));bounds.max.push(Math.max(...values)+Math.max(0,delta));}
+ const volume=area(circles,relation,mask)*depth;if(!Number.isFinite(volume)||volume<=0||[...bounds.min,...bounds.max].some(n=>!Number.isFinite(n)||Math.abs(n)>4e6))fail('INVALID_PROFILE','Circular extrusion exceeds the qualified numerical domain.');return Object.freeze({volume,bounds:Object.freeze({min:Object.freeze(bounds.min),max:Object.freeze(bounds.max)})});
+}
+export function prepareCircularCellExtrusion(input){
+ const request=captureCircularCellRequest(input),{frame,region}=request,relation=circularRelation(...region.circles);if(relation!==region.descriptor.relation)fail('STALE_REGION','Circular source relation changed; choose an actual current region.');const dot=(a,b)=>a.reduce((n,x,i)=>n+x*b[i],0),cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+ if(['x','y','z'].some(k=>Math.abs(dot(frame[k],frame[k])-1)>1e-12)||[['x','y'],['x','z'],['y','z']].some(([a,b])=>Math.abs(dot(frame[a],frame[b]))>1e-12)||Math.hypot(...cross(frame.x,frame.y).map((v,i)=>v-frame.z[i]))>1e-12)fail('INVALID_FRAME','A right-handed orthonormal source frame is required.');
+ const mask=region.circles.reduce((n,c,i)=>n+(region.descriptor.coveringCircleIds.includes(c.id)?1<<i:0),0);return{request,frame,depth:request.depth,mask,expected:expected(request,mask),nativeValues:[1,...frame.origin,...frame.x,...frame.y,...frame.z,...region.circles.flatMap(c=>[...c.center,c.radius])]};
+}
+export async function verifyCircularCellExtrusion(input){const prepared=prepareCircularCellExtrusion(input);await verifyCircularSpanKeys(prepared.request.region.descriptor);return prepared;}

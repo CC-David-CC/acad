@@ -66,7 +66,8 @@ function captureSourceAnalysis(value,sourceIds,regions,charge){
  if(outers.size!==closed.size)fail('Region discovery omitted a closed source component.');
  return Object.freeze(r);
 }
-export function captureSelectedRegionInspection(value,expected,sourceCurveIds,includeSourceAnalysis=false){
+export function captureSelectedRegionInspection(value,expected,sourceCurveIds,includeSourceAnalysis=false,circularCapture){
+ if(circularCapture!==undefined&&(!circularCapture||circularCapture.version!==1||circularCapture.policy!=='v3-extrusion-two-circle-arrangement-v1'||['isDescriptor','captureDescriptor','regionIdentity','captureAnalysis'].some(k=>typeof circularCapture[k]!=='function')))fail('Invalid private circular source capture.');
  const result=data(value,includeSourceAnalysis?['binding','regions','sourceAnalysis']:['binding','regions']),binding=data(result.binding,['revision','sketchDigest','faceId']);
  if(Object.keys(binding).some(k=>binding[k]!==expected[k]))fail('Invalid selected-region discovery binding.');
  const sourceValues=array(sourceCurveIds,MAX_SOURCE_OBJECTS);if(sourceValues.some(id=>typeof id!=='string'||!id||id.length>MAX_ID))fail('Invalid captured source curve census.');const sourceIds=new Set(sourceValues);if(sourceIds.size!==sourceValues.length)fail('Invalid captured source curve census.');
@@ -77,10 +78,11 @@ export function captureSelectedRegionInspection(value,expected,sourceCurveIds,in
   if(typeof row.regionId!=='string'||!row.regionId.startsWith('sketch-region:')||row.regionId.length>MAX_RESPONSE||seen.has(row.regionId)||!['supported','unsupported'].includes(row.support))fail('Invalid selected-region row.');seen.add(row.regionId);charge(row.regionId);
   if(row.support==='supported'){if(row.reason!==null||row.regionId.length>8192)fail('Invalid supported region.');}
   else{const reason=data(row.reason,['code','message']);if(typeof reason.code!=='string'||!/^[A-Z0-9_]{1,64}$/.test(reason.code)||typeof reason.message!=='string'||reason.message.length>512)fail('Invalid unsupported-region reason.');charge(reason.code);charge(reason.message);row.reason=Object.freeze(reason);}
-  row.descriptor=descriptor(row.descriptor,binding.faceId,sourceIds,charge);
-  if(regionIdentity(binding.faceId,row.descriptor)!==row.regionId)fail('Region descriptor does not belong to its opaque identity.');regions.push(Object.freeze(row));
+  const circular=circularCapture?.isDescriptor(row.descriptor)===true;row.descriptor=circular?circularCapture.captureDescriptor(row.descriptor,sourceIds):descriptor(row.descriptor,binding.faceId,sourceIds,charge);
+  if((circular?circularCapture.regionIdentity(binding.faceId,row.descriptor):regionIdentity(binding.faceId,row.descriptor))!==row.regionId)fail('Region descriptor does not belong to its opaque identity.');regions.push(Object.freeze(row));
  }
- const sourceAnalysis=includeSourceAnalysis?captureSourceAnalysis(result.sourceAnalysis,sourceIds,regions,charge):null;
+ const circularAnalysis=circularCapture&&Object.getOwnPropertyDescriptor(result.sourceAnalysis||{},'policy')?.value===circularCapture.policy;
+ const sourceAnalysis=includeSourceAnalysis?(circularAnalysis?circularCapture.captureAnalysis(result.sourceAnalysis,sourceIds,regions,charge):captureSourceAnalysis(result.sourceAnalysis,sourceIds,regions,charge)):null;
  const captured=Object.freeze({binding:Object.freeze(binding),regions:Object.freeze(regions),...(sourceAnalysis?{sourceAnalysis}:{})});
  if(new TextEncoder().encode(JSON.stringify(captured)).byteLength>MAX_RESPONSE)fail('Region metadata exceeds its encoded response budget.');return captured;
 }

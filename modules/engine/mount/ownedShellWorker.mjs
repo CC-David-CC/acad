@@ -26,7 +26,7 @@ export function createOwnedShellBox(env,input){
  const topology=validateOwnedTopology(env.query('_ReadOwnedTopologyV1',name)),index=createBoxSelectionIndex({featureId:request.featureId,construction:created.construction,topology});
  return {index,evidence:evidenceOf(env,name,created),binding:Object.freeze({version:1,featureId:request.featureId})};
 }
-export function applyOwnedShell(env,input){
+export function applyOwnedShell(env,input,captureBoundaryRef){
  const request=shellBinding(input),source=env.sourceIndex;
  if(!source)fail('The parent has no resolved authored face selections','SELECTION_UNAVAILABLE');
  if(source.plan.featureId!==request.producerFeatureId)fail('The parent producer changed','INVALID_SELECTION_BINDING');
@@ -39,6 +39,6 @@ export function applyOwnedShell(env,input){
  if(created?.error){if(Module._OwnedShapeNamesV2()!==before)fail('Refused shell published a native result');nativeFailure(created,SHELL_NATIVE_REFUSALS);}
  if(Module._OwnedShapeNamesV2()!==before+1)fail('Invalid native shell ownership');
  const topology=validateOwnedTopology(env.query('_ReadOwnedTopologyV1',name)),validation=validateOwnedShellResult(created,{sourceTopology,topology,indices,thickness:request.thickness});let index=null,reason=validation.reason;
- if(!reason)try{index=deriveShellSelectionIndexV2({sourceIndex:source,ancestry:created.ancestry.data,topology,featureId:request.featureId,removedFaceIds:request.removedFaceIds});}catch(error){if(!['SELECTION_RESOURCE_LIMIT','SELECTION_UNAVAILABLE'].includes(error?.code))throw error;reason=error.code;}
+ if(!reason)try{index=deriveShellSelectionIndexV2({sourceIndex:source,ancestry:created.ancestry.data,topology,featureId:request.featureId,removedFaceIds:request.removedFaceIds},captureBoundaryRef);}catch(error){if(!['SELECTION_RESOURCE_LIMIT','SELECTION_UNAVAILABLE'].includes(error?.code))throw error;reason=error.code;}
  return {index,reason,evidence:evidenceOf(env,name,created),binding:request,topology,ancestry:created.ancestry};
 }
