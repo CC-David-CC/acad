@@ -79,3 +79,20 @@ failed runs, live source lanes, finite remaining work and effort/difficulty.
 User confirmed50pm small-design budget. Gate1 first; qualify and freeze that
 candidate before later CAD generations on separate branches/projects. No pause
 has been requested; checkpoint publication does not pause the active goal.
+
+## Composed source update — 2026-11-08
+
+Corea2c7c55 integrates final50pm coordinate-only policy3300aba, bounded C07
+history controls throughc5f5e4a, root PM typed-code forwarding8ec83ac and actual
+numerical stop diagnostics/accepted-iterate repaira2c7c55. Desktop history
+adapter/registration2520c46f6/7d9951efe is integrated; fa0cd2156 adds actual
+fixture-login error capture to the test helper. These are source integrations,
+not new workflow passes. Historical checkpoint eb1a0ae remains a snapshot.
+
+ArchiveR5 startup now records actual UI `signal timed out`, no registered
+session, one diagnostic row/no CAD. Frozen491334d. R730 disk waits were observed;
+complete cause is not established. Next fresh20984 fixture has private real-disk
+runtime state on R730's separate root disk, without moving real accounts or
+stopping unrelated transfers. No server-disk Save proof will be replaced by RAM.
+Normal complete build requires fresh configured Native graph staging for C07;
+then actual affected workflows run sequentially. See CAD1-CLOSURE-SEQUENCE.md.
