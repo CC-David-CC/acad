@@ -27,6 +27,7 @@ declare module 'codi-enclosure-mesh-module' { const url:string; export default u
 declare module 'codi-manufacturing-hash-worker' { const url:string; export default url; }
 declare module 'codi-manufacturing-publication-worker' { const url:string; export default url; }
 declare module 'codi-controlled-3mf-worker' { const url:string; export default url; }
+declare module 'codi-native-archive-worker' { const url:string; export default url; }
 declare module 'codi-enclosure-manufacturing-module' { const url:string; export default url; }
 
 declare module 'codi-enclosure-contact-module' { const url:string; export default url; }

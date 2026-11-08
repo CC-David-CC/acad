@@ -35,6 +35,9 @@ import {assertPipelineHistoryCurrent} from '../craft/capturePipelineHistory.mjs'
 import type {GenericManufacturingTarget,GenericManufacturingSummary} from './genericManufacturingAssignment.mjs';
 import {captureLinkedPartDrawingRequest} from '../../../../modules/drawing/linkedPartDrawingOperation.mjs';
 import type {LinkedPartDrawingDefinition} from '../../../../modules/drawing/linkedPartDrawingDefinition.mjs';
+import {captureLinkedPartDrawingDefinition} from '../../../../modules/drawing/linkedPartDrawingDefinition.mjs';
+import nativeArchiveWorkerUrl from 'codi-native-archive-worker';
+import {createNativeArchiveOwner} from './nativeArchiveClient';
 
 const drawingAborted=Object.getOwnPropertyDescriptor(AbortSignal.prototype,'aborted').get;
 const drawingListen=EventTarget.prototype.addEventListener,drawingUnlisten=EventTarget.prototype.removeEventListener;
@@ -74,6 +77,14 @@ export function activate(ctx: ApplicationContext) {
   // This activation may only act through its own installed manager. Capturing
   // a later ctx.projectManager would let an orphaned service bless stale data.
   let managerAuthority: IProjectManager | null = null;
+  let archiveOwner: ReturnType<typeof createNativeArchiveOwner> | null = null;
+  let archiveCleanupFailure:any=null;
+  function closeNativeArchive(): void {if(archiveCleanupFailure)throw archiveCleanupFailure;const owner=archiveOwner;archiveOwner=null;try{owner?.close();}catch(error){archiveCleanupFailure=error;throw error;}}
+  function nativeArchiveOwner(job:DocumentJob){
+    job.guard();requireManagerAuthority();
+    if(!archiveOwner?.available)archiveOwner=createNativeArchiveOwner(nativeArchiveWorkerUrl,job.signal);
+    return archiveOwner;
+  }
   function managerIsCurrent(): boolean {
     return managerAuthority!==null&&ctx.projectManager===managerAuthority&&ctx.services.projectManager===managerAuthority;
   }
@@ -218,6 +229,7 @@ export function activate(ctx: ApplicationContext) {
   function resetDocumentState(generation: number): void {
     requireManagerAuthority();
     if (!ctx.projectService.isDocumentCurrent(generation)) throw new DOMException('Stale document reset.', 'AbortError');
+    closeNativeArchive();
     resetDrawingLifetime(generation);
     drawingDefinition = null; drawingRevision++;
     manufacturingMetadata = null; manufacturingRevision++;
@@ -643,6 +655,37 @@ export function activate(ctx: ApplicationContext) {
     return Object.freeze({envelope,isCurrent:captured.current});
   }
 
+  // Native archive bytes are prepared by one document-bound codec Worker.
+  // This intentionally does not call snapshotCurrentProject/JSON.stringify or
+  // structuredClone on the complete source. ARC23's host dirty comparator and
+  // cooperative source projection/hydration remain separately disclosed costs.
+  async function prepareHostNativeArchive(options:{signal?:AbortSignal,valid?:()=>boolean}={}){
+    options=captureDocumentJobOptions(options,true);
+    const job=documentJob(options),captured=capturedManufacturingJob(job,undefined,false),project=job.project;
+    const counter=project.counterGenerator,counters=counter.projectCounters,highWater=counters.featureId;
+    const current=()=>captured.current()&&project.counterGenerator===counter&&counter.projectCounters===counters&&counters.featureId===highWater;
+    if(!current())throw new DOMException('Project changed.','AbortError');
+    const model=project.captureModel(),namespace=project.sketchStorageNamespace,storage=job.storage;
+    // ProjectCounters is a real class on fresh documents; capture its exact
+    // supported schema rather than admitting arbitrary class prototypes.
+    if(Reflect.ownKeys(counters).length!==1||!Object.hasOwn(counters,'featureId'))throw new Error('Unsupported project counter fields.');
+    model.counters={featureId:highWater};
+    if(model.assembly===undefined)delete model.assembly;
+    const sketchIds=storage.getAllKeysFromNamespace(namespace).sort().map(key=>key.substring(namespace.length));
+    const surfacing=ctx.surfacingService?await ctx.surfacingService.saveCooperatively(()=>{if(!current())throw new DOMException('Project changed.','AbortError');}):null;
+    if(!current())throw new DOMException('Project changed.','AbortError');
+    const owner=nativeArchiveOwner(job);
+    const prepared=await owner.encode({model,...(surfacing?{surfacing}:{}),manufacturing:manufacturingMetadata,presentation:presentationMetadata,drawing:drawingDefinition,sketchIds,readSketch:id=>{if(!current())throw new DOMException('Project changed.','AbortError');return storage.get(namespace+id);}},
+      {signal:options.signal,valid:current});
+    if(!current()){await prepared.release();throw new DOMException('Project changed.','AbortError');}
+    return Object.freeze({blob:prepared.blob,receipt:prepared.receipt,isCurrent:current,
+      // The host obtains this Blob from the normal verified snapshot API only
+      // AFTER a committed write. Worker compares the actual complete bytes to
+      // its issued output before replacing its one prior span table.
+      rebase:(blob:Blob,rebaseOptions:{signal?:AbortSignal,valid?:()=>boolean}={})=>prepared.rebase(blob,rebaseOptions),
+      release:()=>prepared.release()});
+  }
+
   async function snapshotForHostSave(options: {signal?:AbortSignal,valid?:()=>boolean} = {}): Promise<ProjectEnvelope> {
     return (await prepareHostSave(options)).envelope;
   }
@@ -802,16 +845,44 @@ export function activate(ctx: ApplicationContext) {
     } finally { if (restorePending === job) restorePending = null; }
   }
 
-  async function restoreParsedSnapshotInEmptyWorkspace(parsed: any, workerStorage: any, job: DocumentJob, parameterState?: any): Promise<void> {
+  async function restoreNativeArchiveBytesInEmptyWorkspace(blob:Blob,options:{signal?:AbortSignal,valid?:()=>boolean}={}):Promise<any>{
+    const manager=ctx.projectManager;requireRestoreManager(manager);
+    options=captureDocumentJobOptions(options,true);
+    if(ownsDocument(restorePending)||restoreUnavailable())throw new Error('This workspace cannot accept a project.');
+    const previous=documentJob(options);requireEmptyWorkspace();previous.guard();
+    const job=documentJob(options,true),guard=()=>{job.guard();requireRestoreManager(manager);};
+    restorePending=job;
+    try{
+      const owner=nativeArchiveOwner(job),parsed=await owner.decode(blob,{signal:options.signal,valid:()=>{guard();return true;}});
+      guard();
+      // Only this private Worker result bypasses the old duplicate on-main
+      // manufacturing hash preparation; the same canonical domains/caps were
+      // verified in the codec BEFORE staging. Native replay is never bypassed.
+      await restoreParsedSnapshotInEmptyWorkspace(parsed.value,parsed.storage,job,parsed.parameterState,true);
+      guard();return parsed.receipt;
+    }catch(error){
+      let failure=error;
+      try{closeNativeArchive();}catch(cause){failure=Object.assign(new Error('Native archive cleanup failed.'),{code:'WORKER_CLEANUP_FAILED',cause,operationError:error});}
+      // Codec cleanup failure cannot skip exact-owner native replay revocation.
+      throw failOwnedRestore({job,currentProject:currentManagerProject,rollback:()=>{},error:failure});
+    }finally{if(restorePending===job)restorePending=null;}
+  }
+
+  async function restoreParsedSnapshotInEmptyWorkspace(parsed: any, workerStorage: any, job: DocumentJob, parameterState?: any,archiveManufacturingVerified=false): Promise<void> {
     const manager=ctx.projectManager,guard=()=>{job.guard();requireRestoreManager(manager);};
     guard();
     if (new URLSearchParams(window.location.search).get('webos') !== '1') throw new Error('A temporary workspace is required.');
     if (restoreUnavailable()) throw new Error('This workspace cannot accept a project.');
     // Validate the entire envelope before any workspace mutation.
     if (!workerStorage) validateProjectTree(parsed);
-    const decoded = decodeProjectEnvelope(parsed);
+    // The archive result is privately issued by the actual codec/preflight
+    // Worker. Avoid repeating its potentially 8MiB metadata clone/validation
+    // on the UI; other entry points retain the existing envelope admission.
+    const decoded = archiveManufacturingVerified ? {project:parsed.project,manufacturing:parsed.manufacturing||null,
+      ...(parsed.presentation?{presentation:captureDisplayUnitsMetadata(parsed.presentation)}:{}),
+      ...(parsed.drawings?{drawing:captureLinkedPartDrawingDefinition(parsed.drawings[0])}:{})} : decodeProjectEnvelope(parsed);
     const bundle: ModelBundle = decoded.project;
-    if (decoded.manufacturing) {
+    if (decoded.manufacturing&&!archiveManufacturingVerified) {
       // Experimental: the bounded helper recomputes the geometry revision
       // before staging any files in the hidden workspace.
       await prepareManufacturingSnapshot(() => { guard(); return {project: bundle, manufacturing: decoded.manufacturing}; }, () => ownsDocument(job) && !restoreUnavailable());
@@ -1090,7 +1161,7 @@ export function activate(ctx: ApplicationContext) {
     get isRestoring(): boolean { return ownsDocument(restoringSnapshot); },
     listProjects, openProject, newProject, renameProject, deleteProject, importBundle,
     exists, cloneProject, exportProject, importProjectAs, importProject, loadExternalProject,
-    snapshotCurrentProject, snapshotForHostSave, prepareHostSave, inspectDocumentRevision, inspectMaterialSurfaceRevision, inspectEnclosureMaterialRoles, assignEnclosureMaterialRoles, inspectGenericManufacturingParts, prepareGenericManufacturingAssignment,assignGenericManufacturingParts,travelManufacturingMetadata,readManufacturingPublication, restoreSnapshotInEmptyWorkspace, restoreSnapshotBytesInEmptyWorkspace, getManufacturingMetadata, hasManufacturingMetadata, verifyParentRepairAssignments, exportCore3mfResearch,
+    snapshotCurrentProject, snapshotForHostSave, prepareHostSave,prepareHostNativeArchive,restoreNativeArchiveBytesInEmptyWorkspace,closeNativeArchive, inspectDocumentRevision, inspectMaterialSurfaceRevision, inspectEnclosureMaterialRoles, assignEnclosureMaterialRoles, inspectGenericManufacturingParts, prepareGenericManufacturingAssignment,assignGenericManufacturingParts,travelManufacturingMetadata,readManufacturingPublication, restoreSnapshotInEmptyWorkspace, restoreSnapshotBytesInEmptyWorkspace, getManufacturingMetadata, hasManufacturingMetadata, verifyParentRepairAssignments, exportCore3mfResearch,
     proposeHostManufacturingRebind, confirmHostManufacturingRebind, cancelHostManufacturingRebind, resetDocumentState
   };
 
@@ -1197,6 +1268,9 @@ interface IProjectManager {
 
   snapshotForHostSave(options?: {signal?:AbortSignal,valid?:()=>boolean}): Promise<ProjectEnvelope>;
   prepareHostSave(options?: {signal?:AbortSignal,valid?:()=>boolean}): Promise<{envelope:ProjectEnvelope,isCurrent:()=>boolean}>;
+  prepareHostNativeArchive(options?:{signal?:AbortSignal,valid?:()=>boolean}):Promise<{blob:Blob,receipt:any,isCurrent:()=>boolean,rebase:(blob:Blob,options?:{signal?:AbortSignal,valid?:()=>boolean})=>Promise<{verifiedBytes:number}>,release:()=>Promise<void>}>;
+  restoreNativeArchiveBytesInEmptyWorkspace(blob:Blob,options?:{signal?:AbortSignal,valid?:()=>boolean}):Promise<any>;
+  closeNativeArchive():void;
   proposeHostManufacturingRebind(options?: {signal?:AbortSignal,valid?:()=>boolean}): Promise<any>;
   confirmHostManufacturingRebind(token: string): void;
   cancelHostManufacturingRebind(): void;

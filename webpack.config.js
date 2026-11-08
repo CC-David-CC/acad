@@ -81,6 +81,7 @@ module.exports = {
       'codi-manufacturing-publication-worker$': path.join(__dirname, '.build/manufacturing-publication-worker/worker.js'),
       'codi-controlled-3mf-worker$': path.join(__dirname, '.build/controlled-3mf-worker/worker.js'),
       'codi-project-validation-worker$': path.join(__dirname, 'node_modules/.cache/codi-project-worker/worker.js'),
+      'codi-native-archive-worker$': path.join(__dirname, '.build/native-archive-worker/worker.js'),
       ...(process.env.CODI_EMBED_NUMERIC === '1' ? {'numeric': path.join(__dirname, 'node_modules/.cache/codi-numeric/precompiled.js')} : {}),
       ...(process.env.CODI_EMBED_MANIFOLD === '1' ? {
         'manifold-3d$': path.join(__dirname, 'node_modules/.cache/codi-manifold/manifold.js'),
@@ -174,6 +175,7 @@ module.exports = {
       {test: /worker\.js$/, include: [path.join(__dirname, '.build/manufacturing-hash-worker')], type: 'asset/resource', generator: {filename: 'manufacturing-hash.[contenthash][ext]'}},
       {test: /worker\.js$/, include: [path.join(__dirname, '.build/manufacturing-publication-worker')], type: 'asset/resource', generator: {filename: 'manufacturing-publication.[contenthash][ext]'}},
       {test: /worker\.js$/, include: [path.join(__dirname, '.build/controlled-3mf-worker')], type: 'asset/resource', generator: {filename: 'controlled-3mf.[contenthash][ext]'}},
+      {test: /worker\.js$/, include: [path.join(__dirname, '.build/native-archive-worker')], type: 'asset/resource', generator: {filename: 'native-archive.[contenthash][ext]'}},
       {test: /worker\.js$/, include: [path.join(__dirname, 'node_modules/.cache/codi-project-worker')], type: 'asset/resource', generator: {filename: 'project-validator.[contenthash][ext]'}},
       {test: /worker\.js$/, include: [path.join(__dirname, '.build/physical-parameters-worker')], type: 'asset/resource', generator: {filename: 'physical-parameters.[contenthash][ext]'}},
       {test: /worker\.js$/, include: [path.join(__dirname, '.build/headless-sketch-worker')], type: 'asset/resource', generator: {filename: 'sketch-solver.[contenthash][ext]'}},

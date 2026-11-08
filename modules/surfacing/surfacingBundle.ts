@@ -29,6 +29,7 @@ export interface SurfacingService {
   addCylinder(radius?: number, height?: number): void;
   notifyChange(): void;
   save(): any;
+  saveCooperatively(requireCurrent:()=>void):Promise<any>;
   load(data: any): void;
   resetDocument(generation: number): void;
   scheduleSave(): void;
@@ -83,6 +84,14 @@ export function activate(ctx: any) {
     };
   }
 
+  async function saveCooperatively(requireCurrent:()=>void):Promise<any>{
+    requireCurrent();const scene=editor.scene,resolution=editor.resolution,revision=state$.value.revision;
+    const check=()=>{requireCurrent();if(editor.scene!==scene||editor.resolution!==resolution||state$.value.revision!==revision)throw new DOMException('Surfacing source changed.','AbortError');};
+    const data=await scene.serializeCooperatively(check);check();
+    // Same absence rule and exact serialized fields as save().
+    return data.patches.length===0?null:{scene:data,tessResolution:resolution};
+  }
+
   function load(data: any): void {
     if (!data) return;
     const sceneData = data.scene || data.cage;
@@ -117,6 +126,7 @@ export function activate(ctx: any) {
     addCylinder,
     notifyChange,
     save,
+    saveCooperatively,
     load,
     resetDocument,
     scheduleSave: () => scheduleSurfacingSave(),

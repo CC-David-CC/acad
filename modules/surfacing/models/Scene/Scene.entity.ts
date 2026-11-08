@@ -217,74 +217,68 @@ export class Scene extends GeometricEntity {
   // -----------------------------------------------------------------------
 
   serialize(): SerializedScene {
-    const vertexMap = new Map<Vertex, number>();
-    const vertices: Vec3[] = [];
-    const vertexIds: string[] = [];
-    for (const p of this.surfaces) {
-      for (const row of p.grid) {
-        for (const v of row) {
-          if (!vertexMap.has(v)) {
-            vertexMap.set(v, vertices.length);
-            vertices.push([...v.position] as Vec3);
-            vertexIds.push(v.id);
-          }
-        }
-      }
+    const parts=this.serializeSourceParts();
+    for(;;){const next=parts.next();if(next.done)return next.value as SerializedScene;}
+  }
+
+  /** Same source projection as serialize(), cooperatively consumed for native
+   * archive capture. No tessellation, fitted curves or new scene is created. */
+  async serializeCooperatively(requireCurrent:()=>void):Promise<SerializedScene>{
+    const parts=this.serializeSourceParts();let credits=0;
+    for(;;){
+      requireCurrent();const next=parts.next();
+      if(next.done){requireCurrent();return next.value as SerializedScene;}
+      if(++credits===256){credits=0;await new Promise(resolve=>setTimeout(resolve,0));requireCurrent();}
     }
+  }
 
-    const patches = this.surfaces.map(p => {
-      const arcConstraints: SerializedScene['patches'][number]['arcConstraints'] = [];
-      const sides = [p.boundingCurves.bottom, p.boundingCurves.right,
-                     p.boundingCurves.top, p.boundingCurves.left];
-      for (let side = 0; side < 4; side++) {
-        const arc = sides[side].constraints.arc;
-        if (!arc) continue;
-        arcConstraints.push({
-          side,
-          radius: arc.radius,
-          angle: arc.angle,
-          planeNormal: [...arc.planeNormal] as Vec3,
-          center: [...arc.center] as Vec3,
-          mode: arc.mode,
-        });
-      }
-      return {
-        id: p.id,
-        grid: p.grid.map(row => row.map(v => vertexMap.get(v)!)),
-        weights: p.getWeightsMatrix(),
-        rational: p.rational,
-        surfaceSetId: p.surfaceSet ? p.surfaceSet.id : undefined,
-        arcConstraints: arcConstraints.length > 0 ? arcConstraints : undefined,
-      };
-    });
-
-    const mirrorConstraints = this.globalConstraints.mirror.map(mc => ({
-      sourceId: mc.source.id,
-      mirrorId: mc.mirror.id,
-      planePoint: [...mc.planePoint] as Vec3,
-      planeNormal: [...mc.planeNormal] as Vec3,
-      cpPairs: mc.cpPairs.map(pair => ({
-        sourceVertexIdx: vertexMap.get(pair.source)!,
-        mirrorVertexIdx: vertexMap.get(pair.mirror)!,
-      })),
-    }));
-
-    const groups = this.groups.map(g => ({
-      id: g.id,
-      name: g.name,
-      surfaceIds: g.surfaces.map(s => s.id),
-    }));
-
-    const seenSets = new Set<SurfaceSet>();
-    const surfaceSets: {id: number, name: string}[] = [];
-    for (const s of this.surfaces) {
-      if (s.surfaceSet && !seenSets.has(s.surfaceSet)) {
-        seenSets.add(s.surfaceSet);
-        surfaceSets.push({id: s.surfaceSet.id, name: s.surfaceSet.name});
-      }
+  private *serializeSourceParts():Generator<void,SerializedScene,unknown>{
+    const surfaces:NurbsSurface[]=[],seenEntities=new Set<GeometricEntity>(),walk=[this.children[Symbol.iterator]()];
+    while(walk.length){
+      const next=walk[walk.length-1].next();
+      if(next.done){walk.pop();continue;}
+      const child=next.value;
+      if(seenEntities.has(child))throw new Error('Surfacing source contains an aliased or cyclic entity.');
+      seenEntities.add(child);
+      if(child instanceof NurbsSurface)surfaces.push(child);
+      else if(child instanceof Group)walk.push(child.children[Symbol.iterator]());
+      yield;
     }
-
-    return {id: this.id, vertices, vertexIds, patches, mirrorConstraints, groups, surfaceSets, idCounters: this.ctx.getIdCounters()};
+    const vertexMap=new Map<Vertex,number>(),vertices:Vec3[]=[],vertexIds:string[]=[];
+    for(const p of surfaces)for(const row of p.grid)for(const v of row){
+      if(!vertexMap.has(v)){vertexMap.set(v,vertices.length);vertices.push([...v.position] as Vec3);vertexIds.push(v.id);}
+      yield;
+    }
+    const patches:SerializedScene['patches']=[];
+    for(const p of surfaces){
+      const arcConstraints:SerializedScene['patches'][number]['arcConstraints']=[];
+      const sides=[p.boundingCurves.bottom,p.boundingCurves.right,p.boundingCurves.top,p.boundingCurves.left];
+      for(let side=0;side<4;side++){
+        const arc=sides[side].constraints.arc;
+        if(arc)arcConstraints.push({side,radius:arc.radius,angle:arc.angle,planeNormal:[...arc.planeNormal] as Vec3,center:[...arc.center] as Vec3,mode:arc.mode});
+        yield;
+      }
+      const grid:number[][]=[],weights:number[][]=[];let rational=false;
+      for(const row of p.grid){
+        const indices:number[]=[],values:number[]=[];
+        for(const cp of row){indices.push(vertexMap.get(cp)!);values.push(cp.weight.value);if(cp.weight.value!==1)rational=true;yield;}
+        grid.push(indices);weights.push(values);
+      }
+      patches.push({id:p.id,grid,weights,rational,surfaceSetId:p.surfaceSet?p.surfaceSet.id:undefined,arcConstraints:arcConstraints.length?arcConstraints:undefined});
+    }
+    const mirrorConstraints:SerializedScene['mirrorConstraints']=[];
+    for(const mc of this.globalConstraints.mirror){
+      const cpPairs=[];
+      for(const pair of mc.cpPairs){cpPairs.push({sourceVertexIdx:vertexMap.get(pair.source)!,mirrorVertexIdx:vertexMap.get(pair.mirror)!});yield;}
+      mirrorConstraints.push({sourceId:mc.source.id,mirrorId:mc.mirror.id,planePoint:[...mc.planePoint] as Vec3,planeNormal:[...mc.planeNormal] as Vec3,cpPairs});yield;
+    }
+    const groups:SerializedScene['groups']=[];
+    for(const child of this.children){
+      if(child instanceof Group){const surfaceIds=[];for(const member of child.children){if(member instanceof NurbsSurface)surfaceIds.push(member.id);yield;}groups.push({id:child.id,name:child.name,surfaceIds});}yield;
+    }
+    const seenSets=new Set<SurfaceSet>(),surfaceSets:{id:number,name:string}[]=[];
+    for(const surface of surfaces){if(surface.surfaceSet&&!seenSets.has(surface.surfaceSet)){seenSets.add(surface.surfaceSet);surfaceSets.push({id:surface.surfaceSet.id,name:surface.surfaceSet.name});}yield;}
+    return {id:this.id,vertices,vertexIds,patches,mirrorConstraints,groups,surfaceSets,idCounters:this.ctx.getIdCounters()};
   }
 
   static deserialize(ctx: SurfacingEditor, data: SerializedScene): Scene {
