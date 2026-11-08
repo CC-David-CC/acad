@@ -80,7 +80,7 @@ D. Complete remaining finite sketch/constraint/region operations in bounded
    Ellipse source512d435/f8d4580 plus Desktop365fc7897 now has complete R1
    source/browser/archive qualification on Cored4b4bfa/Desktopaa88fd4d6:
    20observations/4.cad saves/10refusals/3fresh Opens, independent oracle PASS.
-   General spline/Bezier contract preparation remains a separate C01 lane.
+   Cubic Bezier/Clamped CV-spline R2 now has complete bounded qualification on Core26d7a55/Desktopf6d1c07d1:672actual native samples,3.cad saves,15refusals/5malformed Opens and independent Fraction/source/archive oracle PASS. Broader C01 work remains.
    C12 owned
    same-prefix Cancel is now scoped qualified; navigation/UI Undo now has bounded R1 qualification;
    native-face attachment and cubic curve author/edit/read source work remain
@@ -109,7 +109,7 @@ source and is not copied into Git.
 
 | Independent lane | Approved bounded work | Latest frozen contract / serial boundary |
 |---|---|---|
-| Cubic source author/edit/read | Genuine Bezier/CV-spline ownership, native derived proof in Worker, shared commands, actual native point observations, full save/reopen workflow | `docs/reviews/SPLINE-BEZIER-SHARED-SOURCE-CONTRACT-20261108.md` + `CUBIC-CURVE-READ-AND-PLANAR-EVALUATION-20261108.md`; product source pending review. No generic point authority or BRep/tangency claim |
+| Cubic source author/edit/read | Genuine Bezier/CV-spline ownership, native derived proof in Worker, shared commands, actual native point observations, full save/reopen workflow | `docs/reviews/SPLINE-BEZIER-SHARED-SOURCE-CONTRACT-20261108.md` + `CUBIC-CURVE-READ-AND-PLANAR-EVALUATION-20261108.md`; finite R2 wholeflow qualified on Core26d7a55/Desktopf6d1c07d1 (24observations/672points/3.cad saves/15refusals); exact control identity and independent Fraction/archive oracle PASS. No generic point authority or BRep/tangency claim |
 | Native solid-face attachment | Protected native plane read, causal candidate-only source preparation, exact source/J publication, complete parent-edit/repair/reopen chain | `test/custom-source-frame-plan/PHASE-B-CURRENT-SOURCE-20261108.md`; source-frame replay/shared engine seams owned by this lane until its checkpoint; root runtime/closure packet285ac13 is frozen separately on `integrate/native-attachment-runtime-20261108`, pending composition/bootstrap pins. Desktop compact-parent/discovery/repair transporte74eae18b is separately frozen on `integrate/native-attachment-transport-20261108`; it must compose with the actual PhaseB service, not ship alone. PhaseA proof does not qualify PhaseB |
 | Navigation and UI journal travel | Replace live raw modern timeline/selected-edit/floating/usability pointer writes; enable actual Undo/Redo at owned passive prefix; retain current guard/refusal domains | Qualified finite R1 chain in `test/history-navigation-public-workflow/QUALIFICATION.md`; 18real events/48Native points/2native saves and independent checker PASS. Broader legacy/insertion/stale gestures and Apply remain open |
 | Principal wizard Apply (serial next) | Numeric depth AND orientation, one prefix→tip authored transaction, coherent source delta and pointer-aware Undo/Redo | Same Apply contract. Wait for native-attachment shared-source checkpoint and compose with qualified Cancel. Do not implement a temporary accepted-tip hop, second J or unowned allow-wizard flag |
