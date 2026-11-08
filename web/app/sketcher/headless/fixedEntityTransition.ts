@@ -1,3 +1,4 @@
+import {assertClosedFixedEntityTarget} from './closedFixedEntityTarget';
 import {HeadlessSketchWorkspace} from './workspace';
 import {solveSketch} from './solve';
 import {evaluateCapturedSketch} from './capturedSketchEvaluation';
@@ -25,11 +26,11 @@ export function changeFixedEntity(request:any){const revision=revisionOf(request
  const a=capture(request),before=JSON.parse(a.sketchJSON),original=cold(a.revision,before,a.externalParameters);assertVerifiedReplayGeometry(before,original.result.sketch,original.result.evidence,a.externalParameters);const originalChecked=evaluateCapturedSketch(before,a.externalParameters,original.result.evidence,undefined,original.auxiliary);
  const workspace=new HeadlessSketchWorkspace(a.externalParameters);workspace.io._loadSketch(structuredClone(before),{strict:true});const pm=workspace.parametricManager,index=workspace.createIndex();let constraint:any,stage:number,at:number,prepared:any;
  if(a.action==='create'){
-  prepared=prepareFixedEntity(pm,index[a.intent.id]);constraint=prepared.constraint;stage=prepared.stage.index;
+  assertClosedFixedEntityTarget(pm,index[a.intent.id],index);prepared=prepareFixedEntity(pm,index[a.intent.id]);constraint=prepared.constraint;stage=prepared.stage.index;
   if(prepared.existing){at=prepared.stage.solverSystem.allConstraints.filter(c=>!c.internal).indexOf(constraint);const c=before.stages[stage]?.constraints[at],offset=before.stages.slice(0,stage).reduce((n,s)=>n+s.constraints.length,0);if(!c||c.typeId!==constraint.schema.id||difference(c.objects,[a.intent.id])!=='no difference')fail('INVALID_TARGET','Existing Fix ownership changed.');return{revision:a.revision,ok:true as const,changed:false,serializedSketch:a.sketchJSON,evidence:originalChecked.evidence,fixed:receipt(stage,at,c,originalChecked.evidence[offset+at].state,true)};}
   at=before.stages[stage].constraints.length;
  }else{
-  const located=locate(before,a.intent.constraintId);stage=located.stage;at=located.index;constraint=pm.stages[stage]?.solverSystem.allConstraints.filter(c=>!c.internal)[at];if(!constraint||constraint.schema.id!==located.c.typeId||constraint.objects.length!==1||index[located.c.objects[0]]!==constraint.objects[0]||!fixedEntityValid(constraint))fail('INVALID_TARGET','The actual Fix row ownership changed.');inspectFixedEntity(pm,constraint.objects[0]);constraint.resolveConstants(pm.constantResolver);validateConstraintGeometry(constraint);
+  const located=locate(before,a.intent.constraintId);stage=located.stage;at=located.index;constraint=pm.stages[stage]?.solverSystem.allConstraints.filter(c=>!c.internal)[at];if(!constraint||constraint.schema.id!==located.c.typeId||constraint.objects.length!==1||index[located.c.objects[0]]!==constraint.objects[0]||!fixedEntityValid(constraint))fail('INVALID_TARGET','The actual Fix row ownership changed.');assertClosedFixedEntityTarget(pm,constraint.objects[0],index);inspectFixedEntity(pm,constraint.objects[0]);constraint.resolveConstants(pm.constantResolver);validateConstraintGeometry(constraint);
  }
  const expected=structuredClone(before),old=before.stages[stage]?.constraints[at];
  pm.startTransaction();try{

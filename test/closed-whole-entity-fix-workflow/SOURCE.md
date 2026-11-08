@@ -6,7 +6,7 @@ and independent after-whole artifact check after coherent composition.
 
 Existing FixSegment/FixCircle/FixArc schemas, literal readOnly fields, physical
 witness bounds and native Arc sweep convention are unchanged. Shared pure
-fixedEntityAdmission inspects actual root/stage/native-child ownership, captures
+fixedEntityAdmission preserves actual human ownership/recovery policy and captures
 full-precision literal geometry, detects an actual existing valid Fix and prepares
 the same schema. Mutable preparation keeps its active-transaction refusal.
 Human FixEntity delegates its existing runSketchTransaction admission to it.
@@ -25,7 +25,8 @@ names stay authoritative; conflicting parameter updates fail, not literalize.
 Discovery uses actual Worker object preparation and strict owned metadata reply
 admission; main validation yields between bounded batches. More than1024 source
 objects disables new Fix eligibility explicitly without removing existing sketch
-inspection. Generated/rigid/generator-dependent target roots refuse in this finite
+inspection. The SEPARATE closedFixedEntityTarget eligibility layer refuses generated/rigid/
+generator-dependent target roots in this finite
 ordinary operation. General generated Fix is not claimed. Existing numeric and
 new typed point-coordinate policy (1..32 affected supported handles/one stage)
 remain unchanged.
@@ -40,3 +41,10 @@ Central routing/coordinator/inspection/typed travel splices are a SEPARATE commi
 for serial composition with DistancePL. Root owns Craft optional service-type /
 Desktop index registration splices; the Desktop new command module and recipe
 are supplied independently. Source-ready is not runtime qualification.
+
+Human policy preservation: generated/prior-stage/descendant eligibility stays
+with the existing human admit preflight; the closed-only gate is separate.
+The common duplicate search skips actual rejected nonredundant rows before
+validity checks, and common transaction validation preserves already-rejected
+relationships via transactionBefore while refusing new conflicts. No active
+human recovery policy is silently narrowed for the closed fixture.
