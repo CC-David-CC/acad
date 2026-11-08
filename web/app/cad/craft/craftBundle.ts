@@ -666,10 +666,20 @@ export function activate(ctx: ApplicationContext) {
     const definition=targetSource===''?{definitions:[]}:decodePhysicalSource(targetSource);if(!definition)throw new Error('Only typed or empty parameter source is supported.');
     const readSketch=(id:string)=>id===faceId?baseSketch:ctx.sketchStorageService.getSketchData(id);
     const priorDefinitions=source?decodePhysicalSource(source)?.definitions||[]:[],parameterNames=Array.from(new Set([...priorDefinitions,...definition.definitions].map(d=>d.name)));
-    const manifest=deriveAuthoredPhysicalManifest(captured.history,parameterNames,readSketch);if(faceId&&!manifest.targets.some(t=>t.kind==='rectangle'&&t.faceId===faceId))throw Error('The selected rectangle is unavailable.');
-    const symbolic:any[]=manifest.targets.filter(t=>t.kind==='rectangle'&&[t.width,t.height].some(v=>typeof v==='string'&&/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(v)));
-    if(symbolic.length>1||faceId&&symbolic.some(t=>t.faceId!==faceId))throw new Error('Only one parameter-bound rectangle is supported in a transaction.');
-    if(!faceId&&symbolic.length){faceId=symbolic[0].faceId;sourceSketch=ctx.sketchStorageService.getSketchData(faceId);baseSketch=sourceSketch;}
+    const manifest=deriveAuthoredPhysicalManifest(captured.history,parameterNames,readSketch);
+    let selectedTarget:any=null;
+    if(modern){
+      // Selected rectangle manifests carry authored feature/source identity;
+      // their driving constants are read in the Worker, not legacy width fields.
+      const targets=manifest.targets.filter(t=>t.kind==='selected-rectangle'),index=captured.history.indexOf(selected),p=selected.params;
+      if(targets.length!==1||faceId!==p.faceId||targets[0].index!==index||targets[0].featureId!==p.featureId||targets[0].faceId!==p.faceId||targets[0].regionId!==p.regionId)throw Error('The selected rectangle is unavailable.');
+      selectedTarget=targets[0];
+    }else{
+      if(faceId&&!manifest.targets.some(t=>t.kind==='rectangle'&&t.faceId===faceId))throw Error('The selected rectangle is unavailable.');
+      const symbolic:any[]=manifest.targets.filter(t=>t.kind==='rectangle'&&[t.width,t.height].some(v=>typeof v==='string'&&/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(v)));
+      if(symbolic.length>1||faceId&&symbolic.some(t=>t.faceId!==faceId))throw new Error('Only one parameter-bound rectangle is supported in a transaction.');
+      if(!faceId&&symbolic.length){faceId=symbolic[0].faceId;sourceSketch=ctx.sketchStorageService.getSketchData(faceId);baseSketch=sourceSketch;}
+    }
     const sketchItems=ctx.sketchStorageService.getAllSketches();if(!Array.isArray(sketchItems)||sketchItems.length>64)throw new Error('Sketch inventory exceeds parameter editing limits.');const inventory:any[]=[],ids=new Set<string>();let totalChars=0;for(const item of sketchItems){const id=item?.id,bytes=id===faceId?baseSketch:ctx.sketchStorageService.getSketchData(id);if(typeof id!=='string'||!id||id.length>1024||ids.has(id)||typeof bytes!=='string'||bytes.length>1048576||(totalChars+=bytes.length)>4194304)throw new Error('Sketch inventory exceeds parameter editing limits.');ids.add(id);inventory.push(Object.freeze({id,source:bytes}));}Object.freeze(inventory);
     const genericFrames:any[]=[];const checkGeneric=()=>{check();for(const row of genericFrames){if(ctx.cadRegistry.findFace(row.id)!==row.face||storage.versionOf(service.sketchStorageKey(row.id))!==row.version||ctx.sketchStorageService.getSketchData(row.id)!==row.source||JSON.stringify(sketchBoundaryFrame(row.face))!==row.frameStamp)throw superseded();}};
     if(!input.direction&&!input.selectedRectangle&&targetSource===source&&!edits.length)return Object.freeze({changed:false,revision:inspectAuthoredEdits().revision});
@@ -679,7 +689,7 @@ export function activate(ctx: ApplicationContext) {
       check();const response=await evaluatePhysicalInWorker(physicalWorkerUrl,targetSource,{signal:controller.signal,valid:()=>{try{checkGeneric();return true}catch{return false}},manifest,sketches:inventory});checkGeneric();if(!response?.ok)throw Object.assign(new Error(response?.error?.message||'Parameter evaluation failed.'),{code:response?.error?.code,...(response?.error?.parameter?{parameter:response.error.parameter}:{})});
       const participant=prepareExpressionPublication(expressions,targetSource,targetSource===''?null:response,response?.revision||'empty');
       let solvedSketch=baseSketch;
-      if(!input.direction&&input.selectedRectangle&&targetSource===source&&!edits.length){const row=response.bindings.targets.find(row=>row.kind==='selected-rectangle'&&row.faceId===faceId);if(row?.widthBinding===input.selectedRectangle.width&&row?.heightBinding===input.selectedRectangle.height)return Object.freeze({changed:false,revision:inspectAuthoredEdits().revision});}
+      if(!input.direction&&input.selectedRectangle&&targetSource===source&&!edits.length){const row=response.bindings.targets.find(row=>row.kind==='selected-rectangle'&&selectedTarget&&row.index===selectedTarget.index&&row.featureId===selectedTarget.featureId&&row.faceId===selectedTarget.faceId&&row.regionId===selectedTarget.regionId);if(row?.widthBinding===input.selectedRectangle.width&&row?.heightBinding===input.selectedRectangle.height)return Object.freeze({changed:false,revision:inspectAuthoredEdits().revision});}
       if(faceId){
         const revision=crypto.randomUUID(),face=ctx.cadRegistry.findFace(faceId),frame=modern?sketchBoundaryFrame(face):null,boundary=modern?getSketchBoundaries(face):JSON.parse(baseSketch).boundary;
         const task=modern&&wantedSketch?{task:'typed-sketch-transaction',revision,sketchJSON:baseSketch,parameterSource:targetSource,frame,verifyCurrent:true}:targetSource===''?{task:'rectangle-extrusion-solve',revision,sketchJSON:baseSketch,boundary,externalParameters:{}}:{task:'typed-rectangle-bind',revision,sketchJSON:baseSketch,source:targetSource,bindings:input.selectedRectangle?[{segmentId:'rect-0',parameter:input.selectedRectangle.width},{segmentId:'rect-1',parameter:input.selectedRectangle.height}]:[]};
