@@ -101,3 +101,12 @@ Run only against a parent-frozen composed runtime. Required environment follows 
 ordinary public harness: `CODI_DESKTOP_SOURCE_ROOT`, `CODI_SIGNED_PINS`,
 `CODI_EXPECT_SOURCE`, `CODI_EXPECT_DESKTOP`, `CODI_ENGINE_REVISION`, `CODI_TEST_URL`,
 `CODI_TEST_CDP`, `PUPPETEER_CORE_PATH` (24.35.0), and fresh `CODI_EVIDENCE`.
+
+
+Whole-run refusal comparison scope: evaluated candidate failure may refresh the
+four recorded opaque inspection tokens (host, physical parameter inspection,
+solid inspection and journal inspection). Exact source/history/definitions,
+geometry, journal contents/targets, counters, association and resource counts
+must remain unchanged. A public Undo/Redo following failed candidates proves
+that no hidden authored undo step was inserted. No-op and read-only comparisons
+remain exact, including all inspection tokens. Historical failed runs are kept.
