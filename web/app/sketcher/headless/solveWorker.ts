@@ -35,6 +35,10 @@ self.onmessage = async event => {
         } catch (_) {self.postMessage({revision,ok:false,error:{code:'INVALID',message:'Empty sketch could not be prepared.'}});}
         return;
       }
+      if(request.task==='sketch-transition-slot'||request.task==='sketch-transition-verify-slot'){
+        const {changeStraightSlot,verifyStraightSlot}=require('./straightSlotTransition');
+        const {task,...payload}=request;self.postMessage(task==='sketch-transition-slot'?changeStraightSlot(payload):verifyStraightSlot(payload));return;
+      }
       if(['sketch-transition-control-points','sketch-transition-verify-control-points','sketch-transition-curve-points'].includes(request.task)){
         const {editCubicControlPoints,verifyCubicControlPoints,readCubicCurvePoints}=require('./cubicCurveTransition');
         const {task,...payload}=request;self.postMessage(task==='sketch-transition-control-points'?editCubicControlPoints(payload):task==='sketch-transition-verify-control-points'?verifyCubicControlPoints(payload):readCubicCurvePoints(payload));return;

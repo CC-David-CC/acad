@@ -1,3 +1,4 @@
+import {slotDeclarationRows,validateSlotNativeRow,validateSlotJunctions} from './constr/straightSlotSource.mjs';
 import {captureLinearDimensionRecord} from './shapes/linearDimensionRecord.mjs';
 import { Generator, numericSketchIdHighWater } from './id-generator';
 import {noteSketchMutation} from './sketchMutationEpoch.mjs';
@@ -618,6 +619,7 @@ export function validateStrictSketch(sketch: any) {
     strictRecord(stage, 'stage');
     if (!Array.isArray(stage.constraints) || !Array.isArray(stage.generators)) throw new Error('Invalid stage contents');
   }
+  slotDeclarationRows(sketch);
 }
 
 // Project revision 1 requires explicit replay intent for every authored
@@ -655,6 +657,7 @@ export function validateProjectSketch(sketch: any) {
     if(type==='BSpline')inspectBoundedSpline(obj.id,obj.data);
     const rebuilt=(ctor as any).read(obj.id,obj.data);
     if(['BezierCurve','BSpline'].includes(type))rebuilt.traverse(child=>child.visitParams(p=>{if(!Number.isFinite(p.get()))throw Object.assign(Error('Native curve construction has a nonfinite parameter.'),{code:'INVALID_SKETCH_ENTITY_DOMAIN'});}));
+    rebuilt.role=obj.role;
     register(rebuilt);
   }
   sketch.dimensions.forEach(obj => validateStrictDimension(obj, index));
@@ -706,6 +709,7 @@ export function validateProjectSketch(sketch: any) {
       validateStrictGeneratorParams(generator, instance, index);
     }
   }
+  validateSlotJunctions(sketch,index);
   if (seenGroups.size !== groupIds.size) throw new Error('Orphan rigid group');
   });
 }
@@ -766,6 +770,7 @@ function validateStrictConstraint(constr: any, index: any) {
   strictRecord(constr, 'constraint');
   if (typeof constr.typeId !== 'string' || !constr.typeId || !Array.isArray(constr.objects)) throw new Error('Invalid constraint');
   constr.objects.forEach(id => strictReference(id, index, 'constraint'));
+  validateSlotNativeRow(constr,index);
   if(['FixSegment','FixCircle','FixArc'].includes(constr.typeId)) {
     if(constr.objects.length!==1||!fixedEntityValid({schema:{id:constr.typeId},objects:[index[constr.objects[0]]],constants:constr.constants}))throw new Error('Invalid fixed entity intent or geometry');
   }

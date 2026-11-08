@@ -1,15 +1,17 @@
+import {assertSlotBranch} from './straightSlotRecord.mjs';
 // Explicit domains and dimensional residual profiles for registered UI schemas.
 import {projectedDirectionValid} from './projectedDistanceDomain.mjs';
 const LENGTH=1e-6,ANGLE=1e-8;
 // Explicit existing source-schema scope: deferred admission must not infer
 // millimeter units for arbitrary schemas from the historical default below.
-const registeredSchemas=new Set(['PCoincident','LockPoint','Horizontal','Vertical','SegmentLength','EqualLength','LengthRelation','RadiusLength','DiameterLength','DistancePL','PointOnLine','SignedDistanceX','SignedDistanceY','ProjectedDistance','Collinear','AxisSymmetry','Concentric','EqualRadius','Angle','AngleBetween','Parallel','Perpendicular','DistancePP','PointInMiddle','Symmetry','TangentLC','PointOnCircle','PointOnBezier','TangentLineBezier','PointOnEllipse','Polar','ArcConsistency','Fillet','FixSegment','FixCircle','FixArc','RigidGroup']);
+const registeredSchemas=new Set(['StraightSlot','PCoincident','LockPoint','Horizontal','Vertical','SegmentLength','EqualLength','LengthRelation','RadiusLength','DiameterLength','DistancePL','PointOnLine','SignedDistanceX','SignedDistanceY','ProjectedDistance','Collinear','AxisSymmetry','Concentric','EqualRadius','Angle','AngleBetween','Parallel','Perpendicular','DistancePP','PointInMiddle','Symmetry','TangentLC','PointOnCircle','PointOnBezier','TangentLineBezier','PointOnEllipse','Polar','ArcConsistency','Fillet','FixSegment','FixCircle','FixArc','RigidGroup']);
 export const hasRegisteredResidualPolicy=c=>!!c&&registeredSchemas.has(c.schema?.id);
 const angleSchemas=new Set(['Angle','AngleBetween','Parallel','Perpendicular','Horizontal','Vertical']);
 const fail=()=>{throw Error('A sketch constraint has a degenerate or invalid domain.');};
 const circle=o=>o?.c&&Number.isFinite(o.r?.get())&&o.r.get()>1e-9;
 export function assertRegisteredConstraintDomain(c){
  const id=c.schema.id,o=c.objects;
+ if(id==='StraightSlot')assertSlotBranch(o,c.resolvedConstants.radius);
  const lines=id==='Angle'||id==='Horizontal'||id==='Vertical'?[o[0]]:['AngleBetween','Parallel','Perpendicular'].includes(id)?o:['TangentLC','TangentLineBezier'].includes(id)?[o[0]]:id==='Fillet'?o.slice(0,2):[];
  if(lines.some(line=>!projectedDirectionValid(line)))fail();
  const circular=['RadiusLength','DiameterLength'].includes(id)?[o[0]]:['Concentric','EqualRadius'].includes(id)?o:id==='PointOnCircle'?[o[1]]:id==='TangentLC'?[o[1]]:id==='Fillet'?[o[2]]:[];

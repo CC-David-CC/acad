@@ -2104,6 +2104,8 @@ interface CraftService {
   applySketchConcentric?: ReturnType<typeof createClosedSketchTransitionCommands>['applySketchConcentric'];
   inspectClosedSketchCurvePoints?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketchCurvePoints'];
   editClosedSketchControlPoints?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchControlPoints'];
+  createClosedSketchSlot?: ReturnType<typeof createClosedSketchTransitionCommands>['createClosedSketchSlot'];
+  editClosedSketchSlot?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchSlot'];
   editClosedSketchEllipse?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchEllipse'];
   editClosedSketchPoint?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchPoint'];
   editClosedSketchPoints?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchPoints'];

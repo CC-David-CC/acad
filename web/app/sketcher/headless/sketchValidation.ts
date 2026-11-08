@@ -12,6 +12,7 @@ const LIMIT = 10000;
 const MAX_COORD = 1e9;
 const LENGTH_TOLERANCE_MM = 1e-6;
 const signature = {
+  StraightSlot:['Segment','Segment','Arc','Segment','Arc'],
   PCoincident: ['Point','Point'], LockPoint: ['Point'],
   Horizontal: ['Segment'], Vertical: ['Segment'], SegmentLength: ['Segment'], EqualLength: ['Segment','Segment'], LengthRelation: ['Segment','Segment'],
   RadiusLength: [['Circle','Arc']], DiameterLength: [['Circle','Arc']], DistancePL: ['Point','Segment'], PointOnLine: ['Point','Segment'],

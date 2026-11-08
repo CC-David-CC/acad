@@ -1,3 +1,4 @@
+import {StraightSlotSchema} from './straightSlotSchema';
 import {Param} from '../shapes/param';
 import {CollinearSchema,AxisSymmetrySchema} from './lineRelationSchemas';
 import {FixSegmentSchema,FixCircleSchema,FixArcSchema} from './fixedEntitySchemas';
@@ -70,6 +71,7 @@ export const ConstraintDefinitions
   //   [key: string]: ConstraintSchema
   // }
 = {
+  StraightSlot:StraightSlotSchema,
 
   PCoincident : {
     id: 'PCoincident',

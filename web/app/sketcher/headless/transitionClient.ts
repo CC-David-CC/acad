@@ -1,3 +1,4 @@
+import {captureSlotIntent,captureSlotReceipt} from '../constr/straightSlotRecord.mjs';
 import {captureCubicCreation,captureSplineIdentities,privateCurvePrimitiveKeys,captureCurveControlIntent,captureCurveSampleIntent} from '../shapes/cubicCurveRecord.mjs';
 import {captureCurveControlReceipt,captureCurvePointsReply} from './cubicCurveReply.mjs';
 import {captureConstraintGroupIntent,captureConstraintGroupReply} from './constraintGroupIntent.mjs';
@@ -10,7 +11,7 @@ import {capturePointDistanceIntent} from './pointDistanceEnvelope.mjs';
 let transitionOutstanding=0;
 const MAX_TRANSITIONS=2;
 
-type TransitionTask = 'sketch-transition-control-points' | 'sketch-transition-ellipse-parameters' | 'sketch-transition-constraint-group' | 'sketch-transition-remove-primitive' | 'sketch-transition-driving-dimension' | 'sketch-transition-replay' | 'sketch-transition-length-relation' | 'sketch-transition-primitive' | 'sketch-transition-point-coordinate' | 'sketch-transition-point-coordinates' | 'sketch-transition-diameter' | 'sketch-transition-point-distance' | 'sketch-transition-signed-distance' | 'sketch-transition-line-relation';
+type TransitionTask = 'sketch-transition-slot' | 'sketch-transition-control-points' | 'sketch-transition-ellipse-parameters' | 'sketch-transition-constraint-group' | 'sketch-transition-remove-primitive' | 'sketch-transition-driving-dimension' | 'sketch-transition-replay' | 'sketch-transition-length-relation' | 'sketch-transition-primitive' | 'sketch-transition-point-coordinate' | 'sketch-transition-point-coordinates' | 'sketch-transition-diameter' | 'sketch-transition-point-distance' | 'sketch-transition-signed-distance' | 'sketch-transition-line-relation';
 const own = (o: any, key: string) => Object.getOwnPropertyDescriptor(o,key);
 function plain(value: any) {
   if(!value || typeof value!=='object' || Array.isArray(value))return false;
@@ -38,7 +39,7 @@ function captureOptions(options: SketchSolveOptions) {
 // queue on its shared lock. This function is internal and does not publish.
 export function runSketchTransition(workerUrl: string, task: TransitionTask, request: any, options: SketchSolveOptions = {}) {
   if(typeof workerUrl!=='string')throw Error('Invalid sketch worker URL.');
-  if(!['sketch-transition-control-points','sketch-transition-ellipse-parameters','sketch-transition-constraint-group','sketch-transition-remove-primitive','sketch-transition-driving-dimension','sketch-transition-replay','sketch-transition-length-relation','sketch-transition-primitive','sketch-transition-point-coordinate','sketch-transition-point-coordinates','sketch-transition-diameter','sketch-transition-point-distance','sketch-transition-signed-distance','sketch-transition-line-relation'].includes(task))throw Error('Invalid sketch transition task.');
+  if(!['sketch-transition-slot','sketch-transition-control-points','sketch-transition-ellipse-parameters','sketch-transition-constraint-group','sketch-transition-remove-primitive','sketch-transition-driving-dimension','sketch-transition-replay','sketch-transition-length-relation','sketch-transition-primitive','sketch-transition-point-coordinate','sketch-transition-point-coordinates','sketch-transition-diameter','sketch-transition-point-distance','sketch-transition-signed-distance','sketch-transition-line-relation'].includes(task))throw Error('Invalid sketch transition task.');
   const input=captureRecord(request,task==='sketch-transition-driving-dimension'?['revision','sketchJSON','externalParameters','action','intent']:task==='sketch-transition-replay'?['revision','sketchJSON','externalParameters']:task==='sketch-transition-primitive'?['revision','sketchJSON','externalParameters','primitive']:['revision','sketchJSON','externalParameters','intent']);
   if(typeof input.revision!=='string'||!input.revision||input.revision.length>256||typeof input.sketchJSON!=='string'||input.sketchJSON.length>1048576)throw Error('Invalid sketch transition request.');
   if(!plain(input.externalParameters)||Reflect.ownKeys(input.externalParameters).length>1024)throw Error('Invalid sketch transition parameters.');
@@ -47,6 +48,7 @@ export function runSketchTransition(workerUrl: string, task: TransitionTask, req
     const d=own(input.externalParameters,key);if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value')||typeof d.value!=='number'||!Number.isFinite(d.value))throw Error('Invalid sketch transition parameters.');external[key]=d.value;
   }
   const payload:any={task,revision:input.revision,sketchJSON:input.sketchJSON,externalParameters:Object.freeze(external)};
+  if(task==='sketch-transition-slot')payload.intent=captureSlotIntent(input.intent);
   if(task==='sketch-transition-control-points')payload.intent=captureCurveControlIntent(input.intent);
   if(task==='sketch-transition-ellipse-parameters')payload.intent=captureEllipseEditIntent(input.intent);
   if(task==='sketch-transition-constraint-group')payload.intent=captureConstraintGroupIntent(input.intent);
@@ -115,7 +117,7 @@ export function runSketchTransition(workerUrl: string, task: TransitionTask, req
       bytes+=encoder.encode(text.slice(start,end)).byteLength;if(bytes>1048576)throw Error('Invalid sketch transition result.');start=end;
       if(start<text.length){await new Promise(resolve=>setTimeout(resolve,0));requireCurrent();requireDeadline();}
     }
-    const envelope=captureRecord(result,task==='sketch-transition-control-points'?['revision','ok','changed','serializedSketch','evidence','curve']:task==='sketch-transition-ellipse-parameters'?['revision','ok','changed','serializedSketch','evidence','ellipse']:task==='sketch-transition-constraint-group'?['revision','ok','changed','serializedSketch','evidence','group']:task==='sketch-transition-remove-primitive'?['revision','ok','serializedSketch','evidence','removed']:(task==='sketch-transition-driving-dimension'||task==='sketch-transition-point-distance')?['revision','ok','changed','serializedSketch','evidence','dimension']:task==='sketch-transition-replay'?['revision','ok','serializedSketch','evidence']:task==='sketch-transition-primitive'?['revision','ok','serializedSketch','evidence','primitive']:task==='sketch-transition-point-coordinate'?['revision','ok','serializedSketch','evidence','point']:task==='sketch-transition-point-coordinates'?['revision','ok','serializedSketch','evidence','points']:(task==='sketch-transition-diameter'||task==='sketch-transition-signed-distance')?['revision','ok','serializedSketch','evidence','dimension']:['revision','ok','serializedSketch','evidence','relation']);
+    const envelope=captureRecord(result,task==='sketch-transition-slot'?['revision','ok','changed','serializedSketch','evidence','slot']:task==='sketch-transition-control-points'?['revision','ok','changed','serializedSketch','evidence','curve']:task==='sketch-transition-ellipse-parameters'?['revision','ok','changed','serializedSketch','evidence','ellipse']:task==='sketch-transition-constraint-group'?['revision','ok','changed','serializedSketch','evidence','group']:task==='sketch-transition-remove-primitive'?['revision','ok','serializedSketch','evidence','removed']:(task==='sketch-transition-driving-dimension'||task==='sketch-transition-point-distance')?['revision','ok','changed','serializedSketch','evidence','dimension']:task==='sketch-transition-replay'?['revision','ok','serializedSketch','evidence']:task==='sketch-transition-primitive'?['revision','ok','serializedSketch','evidence','primitive']:task==='sketch-transition-point-coordinate'?['revision','ok','serializedSketch','evidence','point']:task==='sketch-transition-point-coordinates'?['revision','ok','serializedSketch','evidence','points']:(task==='sketch-transition-diameter'||task==='sketch-transition-signed-distance')?['revision','ok','serializedSketch','evidence','dimension']:['revision','ok','serializedSketch','evidence','relation']);
     let total=0;
     const rows=captureArray(envelope.evidence,10000),evidence=[];
     for(let index=0;index<rows.length;index++){const row=rows[index];
@@ -132,6 +134,7 @@ export function runSketchTransition(workerUrl: string, task: TransitionTask, req
       if(index%128===127&&index+1<rows.length){await new Promise(resolve=>setTimeout(resolve,0));requireCurrent();requireDeadline();}
     }
     const output:any={revision:captured.revision,ok:true,serializedSketch:envelope.serializedSketch,evidence:Object.freeze(evidence)};
+    if(task==='sketch-transition-slot'){output.slot=captureSlotReceipt(envelope.slot);output.changed=envelope.changed;}
     if(task==='sketch-transition-control-points'){if(typeof envelope.changed!=='boolean')throw Error('Invalid curve change outcome.');output.curve=captureCurveControlReceipt(envelope.curve,payload.intent);output.changed=envelope.changed;}
     if(task==='sketch-transition-ellipse-parameters'){const e=captureEllipseEditIntent(envelope.ellipse);if(typeof envelope.changed!=='boolean'||JSON.stringify(e)!==JSON.stringify(payload.intent))throw Error('Ellipse parameter result differs from captured intent.');output.changed=envelope.changed;output.ellipse=e;}
     if(task==='sketch-transition-constraint-group'){if(typeof envelope.changed!=='boolean')throw Error('Invalid group change classification.');output.group=captureConstraintGroupReply(envelope.group,payload.intent);output.changed=envelope.changed;if(output.group.existing===output.changed)throw Error('Invalid group no-op classification.');}
@@ -287,3 +290,11 @@ function captureCubicRequest(input:any,verify:boolean,read:boolean){
 }
 export function verifyCubicControlPointsCandidate(workerUrl:string,input:any,options:SketchSolveOptions={}){const a=captureCubicRequest(input,true,false);return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-control-points',...a}),captureOptions(options));}
 export function runCubicCurvePoints(workerUrl:string,input:any,options:SketchSolveOptions={}){const a=captureCubicRequest(input,false,true);return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-curve-points',...a}),captureOptions(options)).then(result=>captureCurvePointsReply(result,a.revision,a.intent));}
+
+export function verifyStraightSlotCandidate(workerUrl:string,input:any,options:SketchSolveOptions={}){
+ const a=captureRecord(input,['revision','sketchJSON','externalParameters','intent','candidateJSON','slot','changed']);
+ if(typeof a.revision!=='string'||!a.revision||a.revision.length>256||[a.sketchJSON,a.candidateJSON].some(v=>typeof v!=='string'||v.length>1048576)||typeof a.changed!=='boolean')throw Error('Invalid Slot verification source.');
+ if(!plain(a.externalParameters)||Reflect.ownKeys(a.externalParameters).length>1024)throw Error('Invalid Slot bindings.');
+ const external=captureRecord(a.externalParameters,Reflect.ownKeys(a.externalParameters) as string[]);if(Object.keys(external).some(k=>!k||k.length>256||typeof external[k]!=='number'||!Number.isFinite(external[k])))throw Error('Invalid Slot bindings.');
+ return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-slot',revision:a.revision,sketchJSON:a.sketchJSON,candidateJSON:a.candidateJSON,externalParameters:Object.freeze(external),intent:captureSlotIntent(a.intent),slot:captureSlotReceipt(a.slot),changed:a.changed}),captureOptions(options));
+}
