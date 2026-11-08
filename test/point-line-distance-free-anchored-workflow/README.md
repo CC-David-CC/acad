@@ -40,8 +40,10 @@ source equations, exact rational local rank and the existing independent native
 ZIP/CRC/entry-hash reader. It verifies actual free lack of B/P anchors; changed
 geometry limited to B/P/M with all other intent/geometry exact; actual old/new
 accepted source restored by UndoRedo; free source in the added native archive;
-and actual subsequent B anchors. Current free normals are independently derived
-from saved endpoints. Requested/anchored normals retain fixed independent truth.
+and actual subsequent B anchors. Stored original equations use the saved endpoints. Cold reported normals and
+signed distances are independently derived from the SAME inspected A/B/P, and
+every raw/cold point is compared within50pm. Requested/anchored phases retain
+their separate fixed-frame physical-coordinate/equation checks.
 All actual points are bound to source/owner identities, booleans/names retained,
 resources/readonly state/refusals and original finite inventory checked.
 
@@ -51,3 +53,30 @@ with permitted coupled freedom; final raw source and later Native observations
 were not retained, so R5 is not relabeled PASS or a new geometry qualification.
 This new complete packet closes that missing free/anchored distinction only
 when a genuine whole run and FIRST independent oracle actually pass.
+
+## Source-only observation-frame correction after frozen R1
+
+The first new whole run remains FAIL under evidence-r1, preserved by75f8f89.
+It reached actual free2→3, then compared a cold reported normal against a normal
+computed from stored endpoints. The inspected B differs slightly from stored B
+within the separate physical-coordinate contract; that does not permit mixing
+the two observations in the dimensionless1e-12 normal corroboration. The actual
+cold B=(-10.003170292301412,0.131880982312838) yields the reported cold normal
+within about1e-16. This does not establish the complete workflow as successful.
+
+This correction keeps the source/intent/five-cycle/free-before-anchor/Native
+criteria. The driver and independent oracle evaluate all original equations
+separately on stored geometry and actual cold inspection geometry. Reported
+cold anchor, polarLength, normal and signedDistance are checked using that SAME
+inspection's A/B/P. Actual point/parent identities, exact constraint stage/index/
+refs/constants/admission and every raw↔cold point within50pm remain required.
+The physical/equation50pm, dimensionless normal1e-12 and unrelated Native1e-6
+budgets are unchanged; no saved/cold mixed frame is used to produce expected
+free geometry. Requested/anchored phases additionally retain the independent
+frozen requested frame for BOTH stored and cold signed distances.
+
+The driver records raw accepted state and actual inspection before geometry or
+resource assertions, so another failure retains the relevant source and cold
+values. Captures remain read-only observations, not authoring inputs. Original
+point-line-distance-public-workflow files, R1–R5 and new-packet R1 evidence remain
+unchanged. This is source preparation only, with no product change or execution.

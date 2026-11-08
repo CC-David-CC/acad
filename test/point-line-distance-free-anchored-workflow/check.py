@@ -35,6 +35,27 @@ def value(raw,q):
 def signed(p,a,b):
     dx,dy=D(b['x'])-D(a['x']),D(b['y'])-D(a['y']);length=(dx*dx+dy*dy).sqrt();require(length>Decimal('1e-9'),'nonzero source line')
     return (-dy*(D(p['x'])-D(a['x']))+dx*(D(p['y'])-D(a['y'])))/length,(-dy/length,dx/length),length
+def validate_cold_equations(constraints,points,lines,q):
+    # This inventory contains only actual cold-inspected coordinates. All source
+    # equations below are also evaluated separately at the stored coordinates.
+    for c in constraints:
+        refs=c['objects'];k=c.get('constants',{});typ=c['typeId']
+        if typ=='PCoincident':
+            x,y=[points[id] for id in refs]
+            for key in ('x','y'):near(x[key],D(y[key]))
+        elif typ=='LockPoint':
+            p=points[one(refs,'cold lock')]
+            for key in ('x','y'):near(p[key],value(k[key],q))
+        elif typ in ('Horizontal','Vertical','SegmentLength'):
+            d=lines[one(refs,'cold Segment')];x,y=d['a'],d['b']
+            if typ=='SegmentLength':require(abs(signed(x,x,y)[2]-value(k['length'],q))<=BUDGET,'cold original length equation')
+            else:
+                angle=value(k['angle'],q);axes={Decimal(0):(1,0),Decimal(90):(0,1),Decimal(180):(-1,0),Decimal(270):(0,-1)};require(angle in axes,'cold original rectangle angle');ux,uy=axes[angle];dx,dy=D(y['x'])-D(x['x']),D(y['y'])-D(x['y']);require(abs(-uy*dx+ux*dy)<=BUDGET and ux*dx+uy*dy>0,'cold original ordered rectangle direction equation')
+        elif typ in ('SignedDistanceX','SignedDistanceY'):
+            x,y=[points[id] for id in refs];key='x' if typ=='SignedDistanceX' else 'y';require(abs(D(y[key])-D(x[key])-value(k['distance'],q))<=BUDGET,'cold original signed coordinate equation')
+        elif typ=='DistancePL':
+            line=lines[refs[1]];observed=signed(points[refs[0]],line['a'],line['b'])[0];target=value(k['distance'],q)*(-1 if k['inverted'] else 1);require(abs(observed-target)<=BUDGET,'cold ORIGINAL supporting-line equation within50pm')
+        else:raise ValueError('Unexpected cold finite fixture schema '+typ)
 def settled(state):
     r=state['ownership']['resources'];require(not state['ownership']['processing'] and not r['cleanupFailed'] and all(r[k]==0 for k in ('candidates','accepted','mounts')) and r['owners']==r['detached'],'scoped resources retired')
 def validate(row,build):
@@ -49,15 +70,20 @@ def validate(row,build):
     mode=row['frameMode'];require(mode in ('requested','free','anchored'),'explicit test expectation phase')
     if mode!='free':
         for key,want in zip(('x','y'),row['end']):near(z[key],D(want))
-    points={}
+    points={};cold_points={};cold_lines={}
     for p in i['points']:
+        require(p['id'] not in points,'unique actual cold point')
         o=objects[p['parentId']];data=o['data']
         if p['id']==b['aId']:require(p['parentId']==b['lineId'],'actual A parent');matched=a
         elif p['id']==b['bId']:require(p['parentId']==b['lineId'],'actual B parent');matched=z
         elif o['type']=='Point':matched=data
         else:matched=one([v for v in (data['a'],data['b']) if all(abs(D(v[k])-D(p[k]))<=BUDGET for k in ('x','y'))],'parent-owned source endpoint')
         for key in ('x','y'):near(p[key],D(matched[key]))
-        points[p['id']]=matched
+        points[p['id']]=matched;cold_points[p['id']]=p
+        if o['type']=='Segment':
+            line=cold_lines.setdefault(o['id'],{});end='a' if matched is data['a'] else 'b';require(end not in line,'unique actual cold endpoint');line[end]=p
+    for o in objects.values():
+        if o['type']=='Segment':require(set(cold_lines.get(o['id'],{}))=={'a','b'},'both actual cold Segment endpoints')
     wanted={}
     if row['hasDistance']:wanted[b['pointId']]=(D(row['distance']),False,row['rawDistance'])
     if row['minus']:wanted[row['minus']['id']]=(Decimal(2),True,'2')
@@ -65,7 +91,7 @@ def validate(row,build):
     found={}
     original=s['stages'][0]['constraints'];require(len(i['constraints'])==len(original),'actual cold constraint census')
     for index,c in enumerate(original):
-        cold=i['constraints'][index];require(cold['typeId']==c['typeId'] and cold['objects']==c['objects'] and cold['constants']==c.get('constants',{}) and cold['admission']==c['admission'],'actual cold source identity/constants/classification')
+        cold=i['constraints'][index];require(cold['typeId']==c['typeId'] and cold['stage']==c['stage'] and cold['index']==index and cold['objects']==c['objects'] and cold['constants']==c.get('constants',{}) and cold['admission']==c['admission'],'actual cold source identity/constants/classification')
         require(c['admission']['version']==1 and c['admission']['state'] in ('accepted','redundant'),'actual original admission');refs=c['objects'];k=c.get('constants',{});typ=c['typeId']
         if typ=='PCoincident':
             x,y=[points[id] for id in refs]
@@ -86,17 +112,20 @@ def validate(row,build):
             distance,inverted,raw=wanted[refs[0]];require(type(k['inverted']) is bool and k['inverted'] is inverted,'original literal side');require(str(k['distance'])==str(raw),'exact named/literal source');require(value(k['distance'],q)==distance,'actual authoritative distance')
             p=points[refs[0]];observed,normal,length=signed(p,a,z);target=-distance if inverted else distance
             require(abs(observed-target)<=BUDGET,'ORIGINAL stored source equation within50pm')
-            # Free phase uses actual source frame and original equations. Only requested
-            # or explicitly anchored phases assert a preselected geometric frame.
-            idealA={'x':0,'y':0};idealB=z if mode=='free' else dict(zip(('x','y'),row['end']))
-            idealSigned,idealNormal,_=signed(p,idealA,idealB);require(abs(idealSigned-target)<=BUDGET,'independent requested-frame normal distance within50pm')
-            replay=one([v for v in i['points'] if v['id']==refs[0]],'actual replay Point');require(abs(signed(replay,idealA,idealB)[0]-target)<=BUDGET,'replay observation meets SAME independent reference')
+            # Cold equation/metadata use the SAME inspected A, B and P. Raw
+            # source coordinates have their own original equation above.
+            replay=cold_points[refs[0]];cold_line=cold_lines[refs[1]];cold_a,cold_b=cold_line['a'],cold_line['b'];cold_signed,cold_normal,cold_length=signed(replay,cold_a,cold_b);require(abs(cold_signed-target)<=BUDGET,'cold original supporting-line distance within50pm')
+            if mode!='free':
+                idealA={'x':0,'y':0};idealB=dict(zip(('x','y'),row['end']))
+                for actual in (p,replay):require(abs(signed(actual,idealA,idealB)[0]-target)<=BUDGET,'stored/cold equation independently meets requested anchored frame within50pm')
             d=one([d for d in i['dimensionTargets'] if d['typeId']=='DistancePL' and d['objects']==refs],'actual inspected row');w=d['supportingLine']
             require(d['canEdit'] and d['canRemove'] and w['lineId']==refs[1] and w['inverted'] is inverted and w['normalBasis']=='native-polar-angle' and w['quality']=='source-local-supporting-line-mm','actual branch/normal binding')
-            require(w['polarLength']>0,'observed cold gauge positive');near(w['polarLength'],length)
-            for x,y in zip(w['normal'],idealNormal):near(x,y,Decimal('1e-12'))
-            near(w['signedDistance'],target)
+            require(w['polarLength']>0,'observed cold gauge positive');near(w['polarLength'],cold_length)
+            for axis,key in enumerate(('x','y')):near(w['anchor'][axis],D(cold_a[key]))
+            for x,y in zip(w['normal'],cold_normal):near(x,y,Decimal('1e-12'))
+            near(w['signedDistance'],cold_signed)
         else:raise ValueError('Unexpected finite fixture schema '+typ)
+    validate_cold_equations(original,cold_points,cold_lines,q)
     require(set(found)==set(wanted),'actual complete DistancePL census')
     locks=[c for stage in s['stages'] for c in stage['constraints'] if c['typeId']in('SignedDistanceX','SignedDistanceY') and c['objects']==[b['datumId'],b['bId']]]
     if mode=='free':
