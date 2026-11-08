@@ -82,6 +82,13 @@ export interface SketchFormat_V3 {
 
 class ExternalBoundary {}
 
+// Internal headless ownership, never a serialized request flag or an editor
+// loading option. Normal loads consume this one-use evaluation authority too.
+const capturedEvaluationOwners = new WeakSet<object>();
+export function registerHeadlessSketchEvaluationOwner(owner: object) {
+  capturedEvaluationOwners.add(owner);
+}
+
 export class IO {
   static exportTextData = exportTextData;
 
@@ -102,6 +109,39 @@ export class IO {
   }
 
   _loadSketch(sketch: SketchFormat_V3, options: {strict?: boolean} = {}) {
+    capturedEvaluationOwners.delete(this.viewer);
+    this.prepareSketchRead(sketch, options);
+    this.viewer.parametricManager.startTransaction();
+    try {
+      this.readSketchBody(sketch, options.strict === true);
+    } finally {
+      // Existing editor/load behavior: full admission and normal refresh.
+      this.viewer.parametricManager.finishTransaction();
+    }
+  }
+
+  // Internal Worker-only evaluation seam, NOT an option on normal IO. The
+  // supplied owner must be a fresh headless workspace and must be discarded
+  // after the synchronous visitor. No partially admitted model escapes it.
+  evaluateCapturedSketch<T>(sketch: SketchFormat_V3, evaluate: () => T): T {
+    if (!capturedEvaluationOwners.delete(this.viewer) || this.viewer.parametricManager.inTransaction) {
+      throw new Error('Captured-coordinate evaluation requires a fresh headless workspace.');
+    }
+    this.prepareSketchRead(sketch, {strict: true});
+    this.viewer.parametricManager.startTransaction();
+    try {
+      this.readSketchBody(sketch, true);
+      const result = evaluate();
+      if (result && typeof (result as any).then === 'function') throw new Error('Captured-coordinate evaluation is synchronous.');
+      return result;
+    } finally {
+      // No finishTransaction: that would run the optimizer. This workspace is
+      // single-use; clear references instead of publishing/normalizing it.
+      this.cleanUpData();
+    }
+  }
+
+  private prepareSketchRead(sketch: SketchFormat_V3, options: {strict?: boolean}) {
     const strict = options.strict === true;
     // Admission metadata controls deterministic replay priority. Reject a bad
     // hint before clearing the current sketch even in legacy/non-strict mode.
@@ -125,90 +165,111 @@ export class IO {
     this.cleanUpData();
     Generator.reserveThrough(highestSavedId);
 
-    this.viewer.parametricManager.startTransaction();
-    try {
-      const getStage = pointer => {
-        if (pointer === undefined) {
-          return this.viewer.parametricManager.stage;
+  }
+
+  private readSketchBody(sketch: SketchFormat_V3, strict: boolean) {
+    const getStage = pointer => {
+      if (pointer === undefined) {
+        return this.viewer.parametricManager.stage;
+      }
+      this.viewer.parametricManager.accommodateStages(pointer);
+      return this.viewer.parametricManager.getStage(pointer);
+    };
+
+    if (sketch.boundary) {
+      this.createBoundaryObjects(sketch.boundary);
+    }
+    this.viewer.createGroundObjects();
+
+    if (sketch.version !== 3) {
+      return;
+    }
+
+    const sketchLayer = this.viewer.findLayerByName('sketch');
+    for (const obj of sketch.objects) {
+      try {
+        let skobj: SketchObject = null;
+        const type = obj.type;
+
+        if (type === RigidGroup.prototype.TYPE) {
+          skobj = RigidGroup.read(obj.id, obj.data);
+        } else if (type === Segment.prototype.TYPE) {
+          skobj = Segment.read(obj.id, obj.data);
+        } else if (type === EndPoint.prototype.TYPE) {
+          skobj = EndPoint.read(obj.id, obj.data);
+        } else if (type === Arc.prototype.TYPE) {
+          skobj = Arc.read(obj.id, obj.data);
+        } else if (type === Circle.prototype.TYPE) {
+          skobj = Circle.read(obj.id, obj.data);
+        } else if (type === Ellipse.prototype.TYPE) {
+          skobj = Ellipse.read(obj.id, obj.data);
+        } else if (type === EllipticalArc.prototype.TYPE) {
+          skobj = EllipticalArc.read(obj.id, obj.data);
+        } else if (type === BezierCurve.prototype.TYPE) {
+          skobj = BezierCurve.read(obj.id, obj.data);
+        } else if (type === BSpline.prototype.TYPE) {
+          skobj = BSpline.read(obj.id, obj.data);
         }
-        this.viewer.parametricManager.accommodateStages(pointer);
-        return this.viewer.parametricManager.getStage(pointer);
-      };
-
-      if (sketch.boundary) {
-        this.createBoundaryObjects(sketch.boundary);
-      }
-      this.viewer.createGroundObjects();
-
-      if (sketch.version !== 3) {
-        return;
-      }
-
-      const sketchLayer = this.viewer.findLayerByName('sketch');
-      for (const obj of sketch.objects) {
-        try {
-          let skobj: SketchObject = null;
-          const type = obj.type;
-
-          if (type === RigidGroup.prototype.TYPE) {
-            skobj = RigidGroup.read(obj.id, obj.data);
-          } else if (type === Segment.prototype.TYPE) {
-            skobj = Segment.read(obj.id, obj.data);
-          } else if (type === EndPoint.prototype.TYPE) {
-            skobj = EndPoint.read(obj.id, obj.data);
-          } else if (type === Arc.prototype.TYPE) {
-            skobj = Arc.read(obj.id, obj.data);
-          } else if (type === Circle.prototype.TYPE) {
-            skobj = Circle.read(obj.id, obj.data);
-          } else if (type === Ellipse.prototype.TYPE) {
-            skobj = Ellipse.read(obj.id, obj.data);
-          } else if (type === EllipticalArc.prototype.TYPE) {
-            skobj = EllipticalArc.read(obj.id, obj.data);
-          } else if (type === BezierCurve.prototype.TYPE) {
-            skobj = BezierCurve.read(obj.id, obj.data);
-          } else if (type === BSpline.prototype.TYPE) {
-            skobj = BSpline.read(obj.id, obj.data);
-          }
-          if (strict && skobj == null) throw new Error('Unknown sketch object type: ' + type);
-          if (skobj != null) {
-            skobj.role = obj.role;
-            getStage(obj.stage).assignObject(skobj);
-            sketchLayer.add(skobj);
-            skobj.stabilize(this.viewer);
-          }
-        } catch (e) {
-          if (strict) throw e;
-          console.error(e);
-          console.error('Failed loading ' + obj.type + ' ' + obj.id);
+        if (strict && skobj == null) throw new Error('Unknown sketch object type: ' + type);
+        if (skobj != null) {
+          skobj.role = obj.role;
+          getStage(obj.stage).assignObject(skobj);
+          sketchLayer.add(skobj);
+          skobj.stabilize(this.viewer);
         }
+      } catch (e) {
+        if (strict) throw e;
+        console.error(e);
+        console.error('Failed loading ' + obj.type + ' ' + obj.id);
       }
+    }
 
-      const index = this.viewer.createIndex();
+    const index = this.viewer.createIndex();
 
-      for (const obj of sketch.dimensions) {
+    for (const obj of sketch.dimensions) {
+      try {
+        const type = obj.type;
+        let skobj = null;
+        if (strict) validateStrictDimension(obj, index);
+        if (type === HDimension.prototype.TYPE) {
+          skobj = LinearDimension.load(HDimension, obj.id, obj.data, index);
+        } else if (type === VDimension.prototype.TYPE) {
+          skobj = LinearDimension.load(VDimension, obj.id, obj.data, index);
+        } else if (type === LinearDimension.prototype.TYPE) {
+          skobj = LinearDimension.load(
+            LinearDimension,
+            obj.id,
+            obj.data,
+            index
+          );
+        } else if (type === DiameterDimension.prototype.TYPE) {
+          skobj = DiameterDimension.load(obj.id, obj.data, index);
+        } else if (type === AngleBetweenDimension.prototype.TYPE) {
+          skobj = AngleBetweenDimension.load(obj.id, obj.data, index);
+        }
+        if (strict && skobj === null) throw new Error('Unknown dimension type: ' + type);
+        if (skobj !== null) {
+          this.viewer.dimLayer.add(skobj);
+        }
+      } catch (e) {
+        if (strict) throw e;
+        console.error(e);
+        console.error('Failed loading ' + obj.type + ' ' + obj.id);
+      }
+    }
+
+    if (sketch.labels) {
+      for (const obj of sketch.labels) {
         try {
           const type = obj.type;
           let skobj = null;
-          if (strict) validateStrictDimension(obj, index);
-          if (type === HDimension.prototype.TYPE) {
-            skobj = LinearDimension.load(HDimension, obj.id, obj.data, index);
-          } else if (type === VDimension.prototype.TYPE) {
-            skobj = LinearDimension.load(VDimension, obj.id, obj.data, index);
-          } else if (type === LinearDimension.prototype.TYPE) {
-            skobj = LinearDimension.load(
-              LinearDimension,
-              obj.id,
-              obj.data,
-              index
-            );
-          } else if (type === DiameterDimension.prototype.TYPE) {
-            skobj = DiameterDimension.load(obj.id, obj.data, index);
-          } else if (type === AngleBetweenDimension.prototype.TYPE) {
-            skobj = AngleBetweenDimension.load(obj.id, obj.data, index);
+          if (strict) validateStrictLabel(obj, index);
+          if (type === Label.prototype.TYPE) {
+            skobj = Label.read(obj.id, obj.data, index);
           }
-          if (strict && skobj === null) throw new Error('Unknown dimension type: ' + type);
+          if (strict && skobj === null) throw new Error('Unknown label type: ' + type);
           if (skobj !== null) {
-            this.viewer.dimLayer.add(skobj);
+            this.viewer.labelLayer.add(skobj);
           }
         } catch (e) {
           if (strict) throw e;
@@ -216,67 +277,42 @@ export class IO {
           console.error('Failed loading ' + obj.type + ' ' + obj.id);
         }
       }
+    }
 
-      if (sketch.labels) {
-        for (const obj of sketch.labels) {
-          try {
-            const type = obj.type;
-            let skobj = null;
-            if (strict) validateStrictLabel(obj, index);
-            if (type === Label.prototype.TYPE) {
-              skobj = Label.read(obj.id, obj.data, index);
-            }
-            if (strict && skobj === null) throw new Error('Unknown label type: ' + type);
-            if (skobj !== null) {
-              this.viewer.labelLayer.add(skobj);
-            }
-          } catch (e) {
-            if (strict) throw e;
-            console.error(e);
-            console.error('Failed loading ' + obj.type + ' ' + obj.id);
-          }
+    for (let i = 0; i < sketch.stages.length; i++) {
+      const dataStage = sketch.stages[i];
+      const stage = getStage(i);
+      for (const constr of dataStage.constraints) {
+        try {
+          if (strict) validateStrictConstraint(constr, index);
+          const constraint = AlgNumConstraint.read(constr, index);
+          stage.addConstraint(constraint);
+        } catch (e) {
+          if (strict) throw e;
+          console.error(e);
+          console.error(
+            'skipping errant constraint: ' + constr && constr.typeId
+          );
         }
       }
-
-      for (let i = 0; i < sketch.stages.length; i++) {
-        const dataStage = sketch.stages[i];
-        const stage = getStage(i);
-        for (const constr of dataStage.constraints) {
-          try {
-            if (strict) validateStrictConstraint(constr, index);
-            const constraint = AlgNumConstraint.read(constr, index);
-            stage.addConstraint(constraint);
-          } catch (e) {
-            if (strict) throw e;
-            console.error(e);
-            console.error(
-              'skipping errant constraint: ' + constr && constr.typeId
-            );
-          }
-        }
-        for (const gen of dataStage.generators) {
-          try {
-            if (strict) validateStrictGenerator(gen, index);
-            const generator = SketchGenerator.read(gen, index);
-            if (strict) validateStrictGeneratorParams(gen, generator, index);
-            stage.addGenerator(generator);
-          } catch (e) {
-            if (strict) throw e;
-            console.error(e);
-            console.error('skipping errant generator: ' + gen && gen.typeId);
-          }
+      for (const gen of dataStage.generators) {
+        try {
+          if (strict) validateStrictGenerator(gen, index);
+          const generator = SketchGenerator.read(gen, index);
+          if (strict) validateStrictGeneratorParams(gen, generator, index);
+          stage.addGenerator(generator);
+        } catch (e) {
+          if (strict) throw e;
+          console.error(e);
+          console.error('skipping errant generator: ' + gen && gen.typeId);
         }
       }
+    }
 
-      const constants = sketch.constants;
-      if (constants !== undefined) {
-        noteSketchMutation();
-        this.viewer.parametricManager.$constantDefinition.next(constants);
-      }
-    } finally {
-      // Successful finish refreshes the constraint stream and viewer already.
-      // A second notification rebuilds the same final UI state again.
-      this.viewer.parametricManager.finishTransaction();
+    const constants = sketch.constants;
+    if (constants !== undefined) {
+      noteSketchMutation();
+      this.viewer.parametricManager.$constantDefinition.next(constants);
     }
   }
 

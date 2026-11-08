@@ -1,7 +1,4 @@
-import {HeadlessSketchWorkspace} from './workspace';
-import {replaySketchTransition} from './sketchTransition';
-import {solveSketch} from './solve';
-import {sameRestoredSketch} from '../historyEquivalence.mjs';
+import {prepareIndependentPrimitiveAppend} from './independentPrimitiveAppend';
 import {EndPoint} from '../shapes/point';
 import {Segment} from '../shapes/segment';
 import {Circle} from '../shapes/circle';
@@ -20,32 +17,27 @@ function primitive(input:any){const a=record(input,['id','kind','role','stage','
  shape.role=a.role;return {shape,id:a.id,kind:a.kind,role:a.role,stage:a.stage};
 }
 
-// Diagnostic only: acceptance still uses the unchanged exact comparison.
-function retainedDifference(expected:any,actual:any){
- const authored=new Set(expected.stages.flatMap(stage=>stage.constraints)),pending:any[]=[[expected,actual,'source']];let work=0;
- const brief=(v:any)=>v&&typeof v==='object'?(Array.isArray(v)?'[array]':'[object]'):String(v).slice(0,80);
- while(pending.length){if(++work>100000)return 'difference exceeds diagnostic budget';const[a,b,path]=pending.pop();if(a===b)continue;
-  if(!a||!b||typeof a!=='object'||typeof b!=='object'||Array.isArray(a)!==Array.isArray(b))return path.slice(-192)+': '+brief(a)+' -> '+brief(b);
-  const x=Object.keys(a).sort(),y=Object.keys(b).filter(k=>!(k==='admission'&&authored.has(a)&&!Object.hasOwn(a,'admission'))).sort();
-  if(x.length!==y.length||x.some((k,i)=>k!==y[i]))return path.slice(-192)+': retained field membership changed';
-  for(let i=x.length-1;i>=0;i--){const k=x[i];pending.push([a[k],b[k],path+'.'+k]);}
- }return 'retained state differs';
-}
-
-// An ID is minted by the private coordinator, never by a public caller. Run
-// this data-only transition in a disposable Worker realm; it does not publish.
+// Append and independent verification keep the ORIGINAL captured source. A
+// whole-candidate cold solve supplies fresh classification, never replacement
+// source coordinates. All parsing/model work stays inside disposable Workers.
 export function appendSketchPrimitive(request:any){let revision='';try{
  const d=request&&typeof request==='object'?Object.getOwnPropertyDescriptor(request,'revision'):null;if(d?.enumerable&&Object.prototype.hasOwnProperty.call(d,'value')&&typeof d.value==='string'&&d.value.length<=256)revision=d.value;
- const a=record(request,['revision','sketchJSON','externalParameters','primitive']);if(typeof a.revision!=='string'||!a.revision||a.revision.length>256||typeof a.sketchJSON!=='string'||a.sketchJSON.length>MAX||encoder.encode(a.sketchJSON).byteLength>MAX)throw fail('INVALID','Invalid primitive source.');revision=a.revision;const bindings=external(a.externalParameters),original=replaySketchTransition({revision,sketchJSON:a.sketchJSON,externalParameters:bindings});if(!original.ok||!('serializedSketch' in original))return original;
- const before=JSON.parse(original.serializedSketch),workspace=new HeadlessSketchWorkspace(bindings);workspace.io._loadSketch(before,{strict:true});const {shape,id,kind,role,stage}=primitive(a.primitive);if(stage!==workspace.parametricManager.stages.length-1)throw fail('UNSUPPORTED','Only the current last sketch stage is supported.');
- // Scan stored IDs and the native reference index; the solver also checks complete
- // object/child/boundary ownership after constructing the candidate.
- const suffixes=kind==='Segment'?[':A',':B']:kind==='Circle'?[':C']:kind==='Arc'?[':A',':B',':C']:[],names=new Set([id,...suffixes.map(s=>id+s)]),index=workspace.createIndex(),todo=[before];let visited=0;
- for(const name of names)if(Object.prototype.hasOwnProperty.call(index,name))throw fail('IDENTITY_COLLISION','Primitive identity is already in use.');
- while(todo.length){const v=todo.pop();if(++visited>100000)throw fail('LIMIT','Sketch identity inventory exceeds its limit.');if(v&&typeof v==='object')for(const [key,child] of Object.entries(v)){if(key==='id'&&typeof child==='string'&&names.has(child))throw fail('IDENTITY_COLLISION','Primitive identity is already in use.');todo.push(child);}}
- const requestedData=shape.write(),pm=workspace.parametricManager;pm.startTransaction();try{const target=pm.stages[stage];target.assignObject(shape);workspace.findLayerByName('sketch').add(shape);shape.stabilize(workspace as any);pm.finishTransaction(null,false);}catch(error){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw error},false)}catch(_){}throw error;}
- const candidate=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));candidate.boundary=before.boundary;
- const added=candidate.objects.filter(o=>o.id===id);if(added.length!==1||added[0].type!==kind||added[0].role!==role||added[0].stage!==stage||JSON.stringify(added[0].data)!==JSON.stringify(requestedData))throw fail('INTENT_CHANGED','The new primitive identity changed.');
- const restored={...candidate,objects:candidate.objects.filter(o=>o.id!==id)};if(!sameRestoredSketch(original.serializedSketch,JSON.stringify(restored)))throw fail('INTENT_CHANGED','Existing sketch state changed: '+retainedDifference(before,restored));
- const solved=solveSketch({revision,sketch:candidate,boundary:structuredClone(candidate.boundary),externalParameters:bindings});if(!solved.ok)return solved;const serializedSketch=JSON.stringify(solved.sketch);if(serializedSketch.length>MAX||encoder.encode(serializedSketch).byteLength>MAX)throw fail('LIMIT','The resulting sketch exceeds its limit.');if(!sameRestoredSketch(JSON.stringify(candidate),serializedSketch))throw fail('CURRENT_GEOMETRY_MISMATCH','Primitive verification changed geometry.');return {revision,ok:true as const,serializedSketch,evidence:solved.evidence,primitive:{id,kind,role,stage}};
+ const a=record(request,['revision','sketchJSON','externalParameters','primitive']);if(typeof a.revision!=='string'||!a.revision||a.revision.length>256||typeof a.sketchJSON!=='string'||a.sketchJSON.length>MAX||encoder.encode(a.sketchJSON).byteLength>MAX)throw fail('INVALID','Invalid primitive source.');revision=a.revision;
+ const bindings=external(a.externalParameters),before=JSON.parse(a.sketchJSON),{shape,id,kind,role,stage}=primitive(a.primitive);
+ const result=prepareIndependentPrimitiveAppend(revision,before,bindings,{id,type:kind,role,stage,data:shape.write()});
+ if(!result.ok)return result;
+ if(result.serializedSketch.length>MAX||encoder.encode(result.serializedSketch).byteLength>MAX)throw fail('LIMIT','The resulting sketch exceeds its limit.');
+ return {...result,primitive:{id,kind,role,stage}};
  }catch(error){return {revision,ok:false as const,error:{code:typeof error?.code==='string'?error.code:'INVALID',message:typeof error?.message==='string'?error.message:'Primitive transition failed.'}};}}
+
+// A separate genuine Worker recomputes the complete transition from the
+// ORIGINAL request. Unrelated finite geometry/intent changes cannot pass by
+// satisfying constraints alone or by borrowing the producer's evidence.
+export function verifyPrimitiveAppendCandidate(request:any){let revision='';try{
+ const a=record(request,['revision','sketchJSON','externalParameters','primitive','candidateJSON']);if(typeof a.revision==='string')revision=a.revision;
+ if(typeof a.candidateJSON!=='string'||a.candidateJSON.length>MAX||encoder.encode(a.candidateJSON).byteLength>MAX)throw fail('INVALID_CANDIDATE','Invalid primitive candidate source.');
+ const expected=appendSketchPrimitive({revision:a.revision,sketchJSON:a.sketchJSON,externalParameters:a.externalParameters,primitive:a.primitive});
+ if(!expected.ok)return expected;
+ if(!('serializedSketch' in expected)||expected.serializedSketch!==a.candidateJSON)throw fail('CANDIDATE_MISMATCH','The append candidate differs from the original independent operation.');
+ return {revision,ok:true as const,verified:true};
+ }catch(error){return {revision,ok:false as const,error:{code:typeof error?.code==='string'?error.code:'INVALID',message:typeof error?.message==='string'?error.message:'Primitive verification failed.'}};}}

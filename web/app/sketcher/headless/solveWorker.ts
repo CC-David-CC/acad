@@ -97,9 +97,9 @@ self.onmessage = async event => {
         const {removeSketchPrimitive,verifyPrimitiveRemovalCandidate}=require('./primitiveRemovalTransition');
         const {task,...payload}=request;self.postMessage(task==='sketch-transition-remove-primitive'?removeSketchPrimitive(payload):verifyPrimitiveRemovalCandidate(payload));return;
       }
-      if (request.task === 'sketch-transition-primitive') {
-        const {appendSketchPrimitive}=require('./primitiveTransition');
-        const {task,...payload}=request;self.postMessage(appendSketchPrimitive(payload));return;
+      if (request.task === 'sketch-transition-primitive'||request.task === 'sketch-transition-verify-primitive') {
+        const {appendSketchPrimitive,verifyPrimitiveAppendCandidate}=require('./primitiveTransition');
+        const {task,...payload}=request;self.postMessage(task==='sketch-transition-primitive'?appendSketchPrimitive(payload):verifyPrimitiveAppendCandidate(payload));return;
       }
       if(request.task==='legacy-expression-transaction'){const {legacyExpressionTransaction}=require('./legacyExpressionTransaction');const {task,...payload}=request;self.postMessage(legacyExpressionTransaction(payload));return;}
       if (request.task === 'sketch-transition-replay' || request.task === 'sketch-transition-length-relation') {

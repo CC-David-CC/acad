@@ -1,5 +1,5 @@
 import {ParametricManager} from '../parametric';
-import {IO} from '../io';
+import {IO,registerHeadlessSketchEvaluationOwner} from '../io';
 import {SketchGenerator} from '../generators/sketchGenerator';
 import {GroundObjectsGeneratorSchema} from '../generators/groundObjectsGenerator';
 
@@ -53,6 +53,7 @@ export class HeadlessSketchWorkspace {
     this.parametricManager.messageSink = message => { throw new Error(String(message)); };
     this.io = new IO(this as any);
     this.createGroundObjects();
+    registerHeadlessSketchEvaluationOwner(this);
   }
   createGroundObjects() {
     const generator = new SketchGenerator({}, GroundObjectsGeneratorSchema);

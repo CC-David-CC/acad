@@ -215,3 +215,21 @@ export function verifyConstraintGroupCandidate(workerUrl:string,input:any,option
  const external=captureRecord(a.externalParameters,Reflect.ownKeys(a.externalParameters) as string[]);if(Object.keys(external).length>1024||Object.keys(external).some(k=>!k||k.length>256||typeof external[k]!=='number'||!Number.isFinite(external[k])))throw Error('Invalid group verification bindings.');
  return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-constraint-group',revision:a.revision,sketchJSON:a.sketchJSON,externalParameters:Object.freeze(external),intent:captureConstraintGroupIntent(a.intent),candidateJSON:a.candidateJSON}),captureOptions(options));
 }
+
+
+// Internal append verifier: bounded own-data capture BEFORE queueing. The
+// public caller never supplies IDs or candidate bytes to this route.
+export function verifyPrimitiveAppendCandidate(workerUrl:string,input:any,options:SketchSolveOptions={}){
+ const a=captureRecord(input,['revision','sketchJSON','externalParameters','primitive','candidateJSON']);
+ if(typeof a.revision!=='string'||!a.revision||a.revision.length>256||[a.sketchJSON,a.candidateJSON].some(v=>typeof v!=='string'||v.length>1048576))throw Error('Invalid append verification source.');
+ if(!plain(a.externalParameters)||Reflect.ownKeys(a.externalParameters).length>1024)throw Error('Invalid append bindings.');
+ const external=captureRecord(a.externalParameters,Reflect.ownKeys(a.externalParameters) as string[]);if(Object.keys(external).some(k=>!k||k.length>256||typeof external[k]!=='number'||!Number.isFinite(external[k])))throw Error('Invalid append bindings.');
+ const primitive=captureRecord(a.primitive,['id','kind','role','stage','data']);
+ if(typeof primitive.id!=='string'||!/^agent-primitive-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(primitive.id)||!['Point','Segment','Circle','Arc'].includes(primitive.kind)||![null,'construction'].includes(primitive.role)||!Number.isSafeInteger(primitive.stage)||primitive.stage<0||primitive.stage>31)throw Error('Invalid append verification identity.');
+ const point=(value:any)=>{const q=captureRecord(value,['x','y']);if(![q.x,q.y].every(n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=1e8))throw Error('Invalid primitive coordinate.');return Object.freeze(q);};
+ let data:any;
+ if(primitive.kind==='Point')data=point(primitive.data);
+ else if(primitive.kind==='Circle'){const d=captureRecord(primitive.data,['c','r']);if(typeof d.r!=='number'||!Number.isFinite(d.r)||d.r<=1e-9||d.r>1e8)throw Error('Invalid circle radius.');data=Object.freeze({c:point(d.c),r:d.r});}
+ else{const d=captureRecord(primitive.data,primitive.kind==='Arc'?['a','b','c']:['a','b']);data=Object.freeze(primitive.kind==='Arc'?{a:point(d.a),b:point(d.b),c:point(d.c)}:{a:point(d.a),b:point(d.b)});}
+ return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-primitive',revision:a.revision,sketchJSON:a.sketchJSON,externalParameters:Object.freeze(external),primitive:Object.freeze({...primitive,data}),candidateJSON:a.candidateJSON}),captureOptions(options));
+}
