@@ -1,4 +1,5 @@
 import {captureFixedEntityEnvelope} from './fixedEntityReply.mjs';
+import {capturePointLineDistanceEnvelope} from './pointLineDistanceEnvelope.mjs';
 import {captureMirrorEnvelope} from './mirrorReply.mjs';
 import {captureSlotEnvelope} from './straightSlotReply.mjs';
 import {captureCurvePointsReply} from './cubicCurveReply.mjs';
@@ -139,6 +140,8 @@ export async function runSketchSolve(workerUrl: string, request: any, options: S
               if(request.task==='sketch-transition-verify-coincidence'||request.task==='sketch-transition-verify-projected-distance-dimension'||request.task==='sketch-transition-verify-radius'||request.task==='sketch-transition-verify-radius-dimension'||request.task==='sketch-transition-verify-line-relation'||request.task==='sketch-transition-verify-length-relation'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch{return finish(new Error('Invalid line relation verification response.'));}}
               if(request.task==='sketch-transition-line-relation'){try{return finish(null,captureLineRelationEnvelope(result,request.revision));}catch{return finish(new Error('Invalid line relation worker response.'));}}
               if(request.task==='sketch-transition-verify-signed-distance'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch{return finish(new Error('Invalid signed distance verification response.'));}}
+              if(request.task==='sketch-transition-verify-point-line-distance'||request.task==='sketch-transition-verify-point-line-dimension'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch{return finish(new Error('Invalid supporting-line verification response.'));}}
+              if(request.task==='sketch-transition-point-line-distance'){try{return finish(null,capturePointLineDistanceEnvelope(result,request.revision));}catch{return finish(new Error('Invalid supporting-line distance response.'));}}
               if(request.task==='sketch-transition-verify-point-distance'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch{return finish(new Error('Invalid Euclidean point distance verification response.'));}}
               if(request.task==='sketch-transition-point-distance'){try{return finish(null,capturePointDistanceEnvelope(result,request.revision));}catch{return finish(new Error('Invalid Euclidean point distance response.'));}}
               if(request.task==='sketch-transition-signed-distance'){try{return finish(null,captureSignedDistanceEnvelope(result,request.revision));}catch{return finish(new Error('Invalid signed distance worker response.'));}}

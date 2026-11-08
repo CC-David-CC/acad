@@ -2196,6 +2196,7 @@ interface CraftService {
   applyClosedSketchOrientation?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchOrientation'];
   applyClosedSketchMidpoint?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchMidpoint'];
   applyClosedSketchAngleGroup?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchAngleGroup'];
+  applyClosedSketchPointLineDistance?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchPointLineDistance'];
   applyClosedSketchPointDistance?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchPointDistance'];
   applySketchLengthRelation?: ReturnType<typeof createClosedSketchTransitionCommands>['applySketchLengthRelation'];
   applySketchConcentric?: ReturnType<typeof createClosedSketchTransitionCommands>['applySketchConcentric'];
