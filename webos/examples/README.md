@@ -326,3 +326,20 @@ selected rectangle/extrusion and modern through holes are integrated with typed
 parameters in this slice. Other generic families and typed STEP/3MF/drawing export
 remain explicit gaps. All feature/source/opaque region IDs come from actual
 receipts or discovery; importing the module performs no authoring or upload.
+
+`source-bound-history.mjs` provides `createSourceBoundHistoryExample` using only
+public commands and the existing document-pinned agent. Supply an actual staged
+modern `engineRevision`; it never substitutes an engine. `build()` authors a
+100×50×20 source rectangle/extrusion, an unrelated box, and a centered D10 hole.
+Use `inspect()` and the returned authentic feature IDs with `suppress(id,true|false)`.
+`prefix(id)` evaluates a prefix while retaining the future; `branch()` explicitly
+commits that inspected prefix before `createCenteredHole(...)` can append a new
+feature. `travel`, `save` and `open` remain the shared operations. No IDs or native
+geometry are seeded. Suppression and branch are **source-ready, unqualified**
+until the composed full public workflow runs. Only the finite numeric modern
+families advertised by actual discovery are supported; active-child, assigned
+output and source-plane suffix dependencies refuse rather than retarget/delete.
+The helper is not auto-executed or exported from the app index by this packet.
+Root registration: import `registerFeatureHistoryCommands` from
+`./feature-history-commands.mjs` and register it through the existing
+`host.onDispose(...(host,()=>rectangle.target()))` mount pattern.
