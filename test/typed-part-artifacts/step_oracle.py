@@ -33,6 +33,13 @@ def parameters(text):
         if token.startswith('.') and token.endswith('.'): return ('enum',token[1:-1])
         if token=='$': return None
         if token=='*': return '*'
+        # AP214 uncertainty uses a typed scalar rather than a bare number.
+        # Keep the wrapper explicit; it is not a geometric measurement or a
+        # reason to relax any of the shell/curve/unit checks below.
+        if token=='LENGTH_MEASURE':
+            args=value(depth+1)
+            require(isinstance(args,tuple) and len(args)==1 and isinstance(args[0],float) and math.isfinite(args[0]),'one finite typed length measure')
+            return ('typed',token,args)
         try:
             number=float(token.replace('D','E'));require(math.isfinite(number),'finite STEP number');return number
         except ValueError: raise ValueError('Unsupported STEP parameter token: '+token)
