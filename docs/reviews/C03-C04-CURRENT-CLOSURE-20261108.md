@@ -25,7 +25,7 @@ One supported engine/path suffices for an ordinary case; do not invent cross-eng
 | QTY | A:`test/c09-quantity-public-workflow/evidence-r1`; same33b8aa35/4c4862b7 |50 rows/3 `.cad` cycles/2 malformed-ruler refusals: current dimensional/formatted reads, source/Native/travel/persistence and genuine native ruler retention. Does not retroactively turn ROLE's JSON conversion workflow into a `.cad`-conversion run. |
 | PARAM | A:`test/typed-mechanical-parameters/evidence-r4`, `physical-quantity-public-workflow/evidence-r1`, `typed-part-artifacts/evidence-r1` |Existing named height=width/2, depth=width/5 and other true typed feature consumers, cycle/dimension/domain refusals, full typed Native part/travel/Open and actual artifacts. The exact second formula w=2*thickness and attached tolerance meaning need their own assertion; no code gap is inferred merely from that unrecorded spelling. |
 
-E02/E03/E07 ordinary assertions remain proved by their existing evidence; these competency gaps do not reopen those completed literal exercises. Current singular evidence is real. A new current genuine nonconvergence example was not established here and must not be manufactured by changing budgets or falsely rejecting the now-feasible seed.
+Existing scoped E02/E03/E07 assertions remain proved by their producing evidence. This does not change their formal Partial exercise status or supply a full exercise signoff. Current singular evidence is real. A new current genuine nonconvergence example was not established here and must not be manufactured by changing budgets or falsely rejecting the now-feasible seed.
 
 ## C03 finite family inventory
 
