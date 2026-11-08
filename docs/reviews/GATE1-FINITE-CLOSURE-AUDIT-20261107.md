@@ -18,9 +18,10 @@ must not override the following completed workflows or trigger duplicate work.
 | C01 mirror | [Mirror R2](../../test/mirror-public-workflow/QUALIFICATION.md), actual104c24e/9bdb3a512 | Genuine native generator/source dependence/branch and same retained-source truth; not arbitrary generated geometry |
 | C02 Circle cells | [Circular R6](../../test/circular-arrangement-workflow/QUALIFICATION.md), actualf2574ea/70f096c23 | Lens/crescents/tangent separate bodies/coincident ownership/nested/disjoint under explicit Native cohort; not all C02 arrangements |
 | C03 Radius/coincidence | [Radius R1](../../test/radius-length-public-workflow/QUALIFICATION.md), actuald0069f0/dd58df71e; [Coincidence R4](../../test/point-coincidence-public-workflow/QUALIFICATION.md), actual8353d12/8eac41c9e | Finite real creation/edit/remove or authoring/redundancy/conflict/travel/Open; neither ordinary route is still missing |
+| C03 whole-entity Fix | [Fix R1](../../test/closed-whole-entity-fix-workflow/QUALIFICATION.md), actualdb99774/bbf2d284b, proof2dbcc2b | Real whole Segment/Circle/quarter+major Arc snapshots, create/remove/travel/typed bindings and3.cad cycles; no generator/nested/near-endpoint Arc precision or human gesture claim |
 | C04 Projected distance | [Projected R3](../../test/projected-distance-public-workflow/QUALIFICATION.md), actual0133698/95d8023b0, proof4325ef1 | Live direction, signed edits, named binding, removal/typed point move/mixed travel, three .cad cycles and FIRST independent oracle; no BRep construction |
 
-**19 recent scoped whole workflows qualified. Ten of21 ordinary exercise
+**20 recent scoped whole workflows qualified. Ten of21 ordinary exercise
 contracts qualified (E01/E02/E03/E04/E05/E06/E07/E08/E09/E21);11 remain Partial;
 E17/C10 is Gate2.** E09 now has actual complete corner-creation UndoRedo/Native/
 three.cad lifecycle and FIRST independent oracle, proof6511510; its former gap
