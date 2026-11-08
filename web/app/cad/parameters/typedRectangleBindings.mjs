@@ -13,7 +13,7 @@ function isolatedPointExtras(sketch){
  const stage=sketch.stages[0],seen=new Set(sketch.objects.slice(0,4).map(o=>o.id)),ids=new Set();
  if(!Array.isArray(stage.generators)||stage.generators.length)fail('UNSUPPORTED_TYPED_RECTANGLE','Typed rectangle Point extras cannot have generators.');
  for(const point of extras){
-  if(!point||Reflect.ownKeys(point).sort().join(',')!=='data,id,role,stage,type'||point.type!=='Point'||point.role!==null||point.stage!==0||typeof point.id!=='string'||!point.id||seen.has(point.id)||!point.data||Reflect.ownKeys(point.data).sort().join(',')!=='x,y'||!['x','y'].every(axis=>typeof point.data[axis]==='number'&&Number.isFinite(point.data[axis])&&Math.abs(point.data[axis])<=1e9))fail('UNSUPPORTED_TYPED_RECTANGLE','Only isolated finite standalone Point extras are supported with a typed rectangle.');
+  if(!point||typeof point!=='object'||Array.isArray(point)||Reflect.ownKeys(point).sort().join(',')!=='data,id,role,stage,type'||point.type!=='Point'||point.role!==null||point.stage!==0||typeof point.id!=='string'||!point.id||seen.has(point.id)||!point.data||typeof point.data!=='object'||Array.isArray(point.data)||Reflect.ownKeys(point.data).sort().join(',')!=='x,y'||!['x','y'].every(axis=>typeof point.data[axis]==='number'&&Number.isFinite(point.data[axis])&&Math.abs(point.data[axis])<=1e9))fail('UNSUPPORTED_TYPED_RECTANGLE','Only isolated finite standalone Point extras are supported with a typed rectangle.');
   seen.add(point.id);ids.add(point.id);
  }
  for(const constraint of stage.constraints){
