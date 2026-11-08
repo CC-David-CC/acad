@@ -363,5 +363,17 @@ receipts. `parentPose`, `pivot`, `points`, `travel`, normal `.cad` Save/Open use
 registered shared commands and one pinned document token. It never invents a
 source, region, Native face ID or geometry model. Add primitives/selected
 extrusions using actual public discovery and returned source IDs. This is
-source-only preparation, not runtime qualification. Attachment to a Native
-extruded solid face is required C08 phase B and is NOT implemented here.
+the Phase A source-plane recipe. Its saved meanings remain unchanged. Native
+extruded-face attachment uses the separately staged Phase B path below; the
+Phase A recipe alone never establishes that capability.
+
+`source-bound-native-frame.mjs` prepares the separate Phase B example,
+`createSourceBoundNativeFrameExample`. It requires the new explicitly staged
+planar-attachment capability. Given an actual public extrusion/body receipt,
+`discover` obtains genuine native observations; `attach` selects the single
+measured last cap and creates an independent sketch source. `depth`, explicit
+`repair`, shared `travel` and ordinary `.cad` `save`/`open` use registered shared
+operations and the same pinned document helper. Author local primitives and
+selected extrusions with their normal public commands and actual returned IDs.
+No native IDs/face ordinals, geometry seeds, automatic execution or AI service.
+This example is source-only and unqualified until the complete application flow.
