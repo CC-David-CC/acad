@@ -1,4 +1,3 @@
-import {eqEps} from "geom/tolerance";
 import {SolverParam} from "./solverParam";
 
 export class Polynomial {
@@ -7,7 +6,7 @@ export class Polynomial {
   constant = 0;
 
   // Ephemeral proof provenance, never authored geometry. Legacy reductions
-  // may discard a small nonzero coefficient; that derived row must not be
+  // may carry an approximate ancestor; that derived row must not be
   // used to justify an exact, domain-dependent cancellation.
   usedApproximateReduction = false;
 
@@ -29,18 +28,36 @@ export class Polynomial {
     return this;
   }
 
-  eliminate(param, value, approximateSource = false) {
-    let touched = false;
-    for (const m of this.monomials) {
-      for (let i = 0; i < m.terms.length; ++i) {
-        if (m.terms[i].param === param) {
-          m.eliminate(i, value);
-          touched = true;
-        }
+  prepareElimination(param, value, approximateSource = false) {
+    if (!Number.isFinite(value) || !Number.isFinite(this.constant)) return null;
+    const output = []; let touched = false;
+    for (const source of this.monomials) {
+      if (!Number.isFinite(source.constant)) return null;
+      const monomial = new Monomial(source.constant);
+      for (const term of source.terms) {
+        if (term.param !== param) { monomial.terms.push({...term}); continue; }
+        touched = true;
+        let factor;
+        try { factor = term.fn.apply(value); } catch (_) { return null; }
+        if (!Number.isFinite(factor) || (term.fn instanceof ToThePowerFunction && value !== 0 && term.fn.degree > 0 && factor === 0)) return null;
+        const product = monomial.constant * factor;
+        if (!Number.isFinite(product) || (product === 0 && monomial.constant !== 0 && factor !== 0)) return null;
+        monomial.constant = product;
       }
+      output.push(monomial);
     }
-    if (touched && approximateSource) this.usedApproximateReduction = true;
-    return touched;
+    return {touched, apply: () => {
+      if (!touched) return;
+      this.monomials = output;
+      if (approximateSource) this.usedApproximateReduction = true;
+    }};
+  }
+
+  eliminate(param, value, approximateSource = false) {
+    const transaction = this.prepareElimination(param, value, approximateSource);
+    if (!transaction) throw Object.assign(Error('Fixed-value reduction cannot preserve the available numeric representation.'), {code:'UNSUPPORTED_NUMERIC_REDUCTION'});
+    transaction.apply();
+    return transaction.touched;
   }
 
   substitute(param, toParam, dotConstant, approximateSource = false) {
@@ -62,7 +79,7 @@ export class Polynomial {
     const multiply = (a, b) => {
       const value = a * b;
       if (!Number.isFinite(value)) return null;
-      if (value === 0 && a !== 0 && b !== 0) approximate = true;
+      if (value === 0 && a !== 0 && b !== 0) return null;
       return value;
     };
     for (const source of this.monomials) {
@@ -81,14 +98,14 @@ export class Polynomial {
             replacement = new Polynomial().monomial().term(toParam, term.fn);
           } else if (k === 0) {
             const value = term.fn.apply(b);
-            if (!Number.isFinite(value)) return null;
+            if (!Number.isFinite(value) || (term.fn instanceof ToThePowerFunction && b !== 0 && term.fn.degree > 0 && value === 0)) return null;
             replacement = new Polynomial(value);
           } else {
             replacement = typeof term.fn.linearSubstitution === 'function' ?
               term.fn.linearSubstitution(k, toParam, b) : null;
           }
         } catch (_) { return null; }
-        if (!(replacement instanceof Polynomial) || !Number.isFinite(replacement.constant)) return null;
+        if (!(replacement instanceof Polynomial) || !Number.isFinite(replacement.constant) || replacement.usedApproximateReduction) return null;
         approximate ||= approximateSource || replacement.usedApproximateReduction;
         const alternatives = replacement.monomials.slice();
         if (replacement.constant !== 0) alternatives.push(new Monomial(replacement.constant));
@@ -137,23 +154,26 @@ export class Polynomial {
         }
 
         if (m1.equalVars(m2)) {
-          m1.constant += m2.constant;
+          const sum = m1.constant + m2.constant;
+          // Combining like terms is optional; preserve the terms if the
+          // represented sum is nonfinite rather than corrupting the row.
+          if (!Number.isFinite(sum)) continue;
+          m1.constant = sum;
           this.monomials[j] = null;
         }
       }
-      if (eqEps(m1.constant, 0)) {
-        if (m1.constant !== 0) this.usedApproximateReduction = true;
+      if (m1.constant === 0) {
         this.monomials[i] = null;
       } else if (m1.terms.length === 0) {
-        this.constant += m1.constant;
-        this.monomials[i] = null;
+        const sum = this.constant + m1.constant;
+        if (Number.isFinite(sum)) { this.constant = sum; this.monomials[i] = null; }
       }
     }
     this.monomials = this.monomials.filter(m => m !== null);
   }
 
   cancelCommonNonzeroFactors(certified: ReadonlySet<any>) {
-    if (this.usedApproximateReduction || this.constant !== 0 || !this.monomials.length) return 0;
+    if (this.usedApproximateReduction || this.constant !== 0 || !this.monomials.length || this.monomials.some(m => !Number.isFinite(m.constant))) return 0;
     const candidates = this.monomials[0].terms
       .filter(t => t.fn === POW_1_FN && certified.has(t.param)).map(t => t.param);
     let cancelled = 0;
@@ -290,8 +310,12 @@ export class Monomial {
   }
 
   eliminate(i, value) {
-    const fn = this.terms[i].fn;
-    this.constant *= fn.apply(value);
+    const fn = this.terms[i].fn, factor = fn.apply(value), product = this.constant * factor;
+    if (!Number.isFinite(factor) || !Number.isFinite(product) ||
+        (fn instanceof ToThePowerFunction && value !== 0 && fn.degree > 0 && factor === 0) ||
+        (product === 0 && this.constant !== 0 && factor !== 0))
+      throw Object.assign(Error('Fixed-value reduction cannot preserve the available numeric representation.'), {code:'UNSUPPORTED_NUMERIC_REDUCTION'});
+    this.constant = product;
     this.terms.splice(i, 1);
   }
 
@@ -443,9 +467,13 @@ export class ToThePowerFunction extends PolynomialFunction {
     const result = new Polynomial();
     let choose = 1;
     for (let power = 0; power <= n; power++) {
-      const coefficient = choose * Math.pow(k, power) * Math.pow(b, n - power);
-      if (!Number.isFinite(coefficient)) return null;
-      if (coefficient === 0 && (power === 0 || k !== 0) && (n === power || b !== 0)) result.usedApproximateReduction = true;
+      const kp = Math.pow(k, power), bp = Math.pow(b, n - power);
+      if (!Number.isFinite(kp) || !Number.isFinite(bp) ||
+          (k !== 0 && power > 0 && kp === 0) || (b !== 0 && n - power > 0 && bp === 0)) return null;
+      const scaled = choose * kp, coefficient = scaled * bp;
+      if (!Number.isFinite(scaled) || !Number.isFinite(coefficient) ||
+          (scaled === 0 && choose !== 0 && kp !== 0) ||
+          (coefficient === 0 && scaled !== 0 && bp !== 0)) return null;
       if (power === 0) result.constant = coefficient;
       else if (coefficient !== 0) result.monomial(coefficient).term(x, ToThePowerFunction.get(power));
       choose = choose * (n - power) / (power + 1);

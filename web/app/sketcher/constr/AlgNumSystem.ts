@@ -1,10 +1,10 @@
-import {admissionCause,causeForSolveStatus,withAdmissionCause} from './admissionCause.mjs';
+import {admissionCause,causeForSolveStatus,withAdmissionCause,clearSolveValidationCause,setSolveValidationCause,getSolveValidationCause} from './admissionCause.mjs';
 import {prepare} from "./solver";
-import {eqEps} from "geom/tolerance";
 import {Polynomial, POW_1_FN} from "./polynomial";
 import {AlgNumConstraint, ConstraintDefinitions} from "./ANConstraints";
 import {SolverParam} from "./solverParam";
 import {initializeSingularPointDistance} from './distancePPSingularInitialization';
+import {assertRegisteredConstraintDomain,registeredResidualProfile,hasRegisteredResidualPolicy} from './registeredConstraintPolicy.mjs';
 import {directionalRelation,directionalSegments,directionalRelationValid,directionalSegmentNonzero} from './lineRelationDomain.mjs';
 import {noteSketchMutation} from '../sketchMutationEpoch.mjs';
 import {assertRetainedStageValid} from '../rigid/rigidGroupDomain.mjs';
@@ -30,6 +30,11 @@ export class AlgNumSubSystem {
   eliminatedParams = new Map();
 
   polynomials = [];
+
+  // Real source-owned rows which have no numerical variables after reduction.
+  // Nonzero values never earn exact redundancy; complete original equations
+  // receive the same final dimensional policy in human and Worker admission.
+  deferredConstantRows = new Map<AlgNumConstraint,{rows:Polynomial[],validation:any}>();
   substitutedParams = new Map();
   substitutionOrder = [];
 
@@ -267,7 +272,7 @@ export class AlgNumSubSystem {
       constraints: [...this.allConstraints], conflicting: new Set(this.conflicting), redundant: new Set(this.redundant),
       values: new Map(), solverParams: new Map(), objectStates: new Map(), hints: new Map(),
       derived: {
-        polynomials: this.polynomials, substitutedParams: new Map(this.substitutedParams),
+        polynomials: this.polynomials, deferredConstantRows: new Map(this.deferredConstantRows), substitutedParams: new Map(this.substitutedParams),
         substitutionOrder: this.substitutionOrder, eliminatedParams: new Map(this.eliminatedParams),
         paramToIsolation: new Map(this.paramToIsolation), polyToConstr: new Map(this.polyToConstr),
         polynomialIsolations: this.polynomialIsolations, interactiveParams: new Set(this.interactiveParams),
@@ -412,7 +417,7 @@ export class AlgNumSubSystem {
     const candidates = [...internal, ...hinted, ...legacy, ...retry];
     const original = new Map();
     const oldDerived = {
-      polynomials: this.polynomials, substitutedParams: new Map(this.substitutedParams),
+      polynomials: this.polynomials, deferredConstantRows: new Map(this.deferredConstantRows), substitutedParams: new Map(this.substitutedParams),
       substitutionOrder: this.substitutionOrder, eliminatedParams: new Map(this.eliminatedParams),
       paramToIsolation: new Map(this.paramToIsolation), polyToConstr: new Map(this.polyToConstr),
       polynomialIsolations: this.polynomialIsolations, interactiveParams: new Set(this.interactiveParams),
@@ -572,6 +577,8 @@ export class AlgNumSubSystem {
   }
 
   reset() {
+    clearSolveValidationCause(this.solveStatus);
+    this.deferredConstantRows = new Map();
     this.polyToConstr.clear();
     this.interactiveParams.clear();
     this.requiresHardSolve = false;
@@ -649,23 +656,21 @@ export class AlgNumSubSystem {
           continue;
         }
 
-        if (polynomial.monomials.length === 0) {
+        let hasVariables = false;
+        polynomial.visitParams(() => { hasVariables = true; });
+        if (!hasVariables) {
           const constraint = this.polyToConstr.get(polynomial);
           if (DEBUG) {
             console.log("CONFLICT: " + polynomial.toString());
           }
-          if (eqEps(polynomial.constant, 0)) {
-            if (polynomial.constant !== 0) {
-              polynomial.usedApproximateReduction = true;
-            }
+          if (polynomial.value() === 0 && !polynomial.usedApproximateReduction) {
             redundantCounts.set(constraint, (redundantCounts.get(constraint) || 0) + 1);
           } else {
-            this.conflicting.add(constraint);
-            this.rejectionCauses.set(constraint,admissionCause(!Number.isFinite(polynomial.constant) ? 'nonfinite-result' : polynomial.usedApproximateReduction ? 'approximate-reduction-rejection' : 'algebraic-contradiction'));
+            const previous = this.deferredConstantRows.get(constraint);
+            this.deferredConstantRows.set(constraint,{rows:[...(previous?.rows || []),polynomial],validation:null});
           }
           this.polynomials[i] = null;
         } else if (polynomial.isLinear && polynomial.monomials.length === 1) {
-          this.polynomials[i] = null;
           const monomial = polynomial.monomials[0];
           const terms = monomial.terms;
           if (terms.length === 1) {
@@ -673,18 +678,26 @@ export class AlgNumSubSystem {
             if (term.fn.degree === 1) {
               const p = term.param;
               const val = - polynomial.constant / monomial.constant;
-              p.set(val);
-
-              this.eliminatedParams.set(p, val);
-              if (polynomial.usedApproximateReduction) approximateParams.add(p);
-
-              for (const otherPolynomial of this.polynomials) {
-                if (otherPolynomial) {
-                  otherPolynomial.eliminate(p, val, polynomial.usedApproximateReduction);
+              // Optional reduction: retain the actual equation if its quotient
+              // or any affected rewrite would lose a nonzero numeric value.
+              if (monomial.constant !== 0 && Number.isFinite(val) && !(val === 0 && polynomial.constant !== 0)) {
+                const transactions = [];
+                let supported = true;
+                for (const otherPolynomial of this.polynomials) {
+                  if (!otherPolynomial || otherPolynomial === polynomial) continue;
+                  const transaction = otherPolynomial.prepareElimination(p,val,polynomial.usedApproximateReduction);
+                  if (!transaction) { supported = false; break; }
+                  transactions.push(transaction);
+                }
+                if (supported) {
+                  for (const transaction of transactions) transaction.apply();
+                  p.set(val);
+                  this.eliminatedParams.set(p, val);
+                  if (polynomial.usedApproximateReduction) approximateParams.add(p);
+                  this.polynomials[i] = null;
+                  requirePass = true;
                 }
               }
-
-              requirePass = true;
             }
           }
 
@@ -701,15 +714,13 @@ export class AlgNumSubSystem {
           const p2 = m2.linearParam;
 
           const constant = - m2.constant / m1.constant;
-          const discardOffset = eqEps(polynomial.constant, 0);
-          const b = discardOffset ? 0 : -polynomial.constant / m1.constant;
+          const b = polynomial.constant === 0 ? 0 : -polynomial.constant / m1.constant;
           // A nonzero ratio/offset which underflows must not become an exact
           // zero alias. Retain the original equation for numerical solving.
           if (Number.isFinite(constant) && Number.isFinite(b) &&
               !(constant === 0 && m2.constant !== 0) &&
-              !(b === 0 && !discardOffset && polynomial.constant !== 0)) {
-            const approximateSource = polynomial.usedApproximateReduction ||
-              (discardOffset && polynomial.constant !== 0);
+              !(b === 0 && polynomial.constant !== 0)) {
+            const approximateSource = polynomial.usedApproximateReduction;
             const transactions = [];
             let supported = true;
             for (const otherPolynomial of this.polynomials) {
@@ -731,7 +742,7 @@ export class AlgNumSubSystem {
         // A reduction can make an earlier polynomial linear. Revisit that
         // prior row before a later relation becomes the substitution pivot;
         // otherwise dependency credit can move to the earlier constraint.
-        // Admission retains the existing numerical-algebraic zero tolerance.
+        // Represented nonzero coefficients and offsets are never epsilon-zeroed.
         if (requirePass) break;
       }
 
@@ -795,7 +806,7 @@ export class AlgNumSubSystem {
     }
     const oldConflicting = new Set(this.conflicting), oldRedundant = new Set(this.redundant);
     const oldDerived = {
-      polynomials: this.polynomials, substitutedParams: new Map(this.substitutedParams),
+      polynomials: this.polynomials, deferredConstantRows: new Map(this.deferredConstantRows), substitutedParams: new Map(this.substitutedParams),
       substitutionOrder: this.substitutionOrder, eliminatedParams: new Map(this.eliminatedParams),
       paramToIsolation: new Map(this.paramToIsolation), polyToConstr: new Map(this.polyToConstr),
       polynomialIsolations: this.polynomialIsolations, interactiveParams: new Set(this.interactiveParams),
@@ -872,6 +883,7 @@ export class AlgNumSubSystem {
 
   evaluateAndBuildSolver() {
     this.polynomials = [];
+    this.deferredConstantRows = new Map();
     this.substitutedParams.clear();
     this.substitutionOrder = [];
     this.eliminatedParams.clear();
@@ -983,15 +995,22 @@ export class AlgNumSubSystem {
     return values;
   }
   rejectProjectedDomain(reason='PROJECTED_DIRECTION_DOMAIN') {
-    if(this.admissionSolve){this.solveStatus={success:false,error:Infinity,domainError:reason};return;}
-    if(!this.projectedLastValid)throw new Error(reason);
+    const originalCause=getSolveValidationCause(this.solveStatus);
+    if(this.admissionSolve){
+      this.solveStatus={success:false,error:Infinity,domainError:reason};
+      if(originalCause)setSolveValidationCause(this.solveStatus,originalCause);
+      return;
+    }
+    if(!this.projectedLastValid)throw withAdmissionCause(new Error(reason),originalCause);
     this.projectedLastValid.forEach((value,param)=>param.set(value));
     this.solveStatus={success:false,error:Infinity,domainError:reason};
+    if(originalCause)setSolveValidationCause(this.solveStatus,originalCause);
   }
 
 
   solve(rough) {
 
+    clearSolveValidationCause(this.solveStatus);
     const projected=this.projectedRelations();
     // Rough iterations can leave a valid direction's endpoint/polar values
     // temporarily inconsistent. Use the precise solve before enforcing the
@@ -1058,6 +1077,7 @@ export class AlgNumSubSystem {
       const expression = this.substitutedParams.get(param);
       param.set(expression.value());
     }
+    if (!rough) this.validateDeferredConstantRows();
     if(projected.length&&!rough&&!this.admissionSolve&&!this.solveStatus.success) {
       this.rejectProjectedDomain(projected.some(c=>c.schema.id!=='ProjectedDistance')?'DIRECTION_SOLVE_FAILED':'PROJECTED_SOLVE_FAILED');return;
     }
@@ -1068,6 +1088,55 @@ export class AlgNumSubSystem {
       catch (_) { this.rejectProjectedDomain('RIGID_CONSTRAINT_DOMAIN');return; }
     }
     if(!this.admissionSolve && this.solveStatus.success)this.rememberProjectedState();
+  }
+
+  validateDeferredConstantRows() {
+    if (!this.deferredConstantRows.size) return;
+    const updated = new Map(this.deferredConstantRows), failures = [];
+    const owned = new Set(this.allConstraints);
+    let work = 0, rows = 0;
+    const unsupported = (code,message,cause) => { throw withAdmissionCause(Object.assign(Error(message),{code}),admissionCause(cause)); };
+    for (const [constraint, record] of this.deferredConstantRows) {
+      if (this.conflicting.has(constraint) && !this.redundant.has(constraint)) continue;
+      if (!owned.has(constraint) || constraint.stage?.solverSystem !== this ||
+          ConstraintDefinitions[constraint.schema?.id] !== constraint.schema || !hasRegisteredResidualPolicy(constraint))
+        unsupported('UNSUPPORTED_CONSTRAINT_POLICY','A deferred original constraint has no registered dimensional residual policy.','retained-validation-failure');
+      work += constraint.params.length;
+      if (work > 100000) unsupported('RESOURCE_LIMIT','Deferred original equation validation exceeds its parameter budget.','resource-limit');
+      const equations = [];
+      constraint.collectPolynomials(equations);
+      rows += equations.length;
+      if (!equations.length || rows > 65536) unsupported('RESOURCE_LIMIT','Deferred original equation validation exceeds its row budget.','resource-limit');
+      for (const equation of equations) {
+        if (++work > 100000) unsupported('RESOURCE_LIMIT','Deferred original equation validation exceeds its work budget.','resource-limit');
+        for (const monomial of equation.monomials) {
+          work += 1 + monomial.terms.length;
+          if (work > 100000) unsupported('RESOURCE_LIMIT','Deferred original equation validation exceeds its work budget.','resource-limit');
+        }
+      }
+      let cause = null;
+      if (constraint.params.some(p => !Number.isFinite(p.get()))) cause = admissionCause('nonfinite-result');
+      if (!cause) try {
+        assertRegisteredConstraintDomain(constraint);
+        if (directionalRelation(constraint) && !directionalRelationValid(constraint)) throw Error('Invalid original relation domain');
+      } catch (_) { cause = admissionCause('invalid-domain'); }
+      const values = equations.map(equation => equation.value());
+      const profile = registeredResidualProfile(constraint,values);
+      if (!cause && (values.some(value => !Number.isFinite(value)) || profile.residuals.some(value => !Number.isFinite(value)))) cause = admissionCause('nonfinite-result');
+      if (!cause && profile.residuals.some((value,i) => Math.abs(value) > profile.tolerances[i])) cause = admissionCause('original-residual-failure');
+      updated.set(constraint,{rows:record.rows,validation:Object.freeze({basis:'original-equations',
+        values:Object.freeze(values),residuals:Object.freeze([...profile.residuals]),units:Object.freeze([...profile.units]),
+        tolerances:Object.freeze([...profile.tolerances]),state:cause?'rejected':'accepted',cause})});
+      if (cause) failures.push({constraint,cause});
+    }
+    this.deferredConstantRows = updated;
+    for (const {constraint,cause} of failures) {
+      this.conflicting.add(constraint);this.redundant.delete(constraint);this.rejectionCauses.set(constraint,cause);
+    }
+    if (failures.length) {
+      this.solveStatus.success = false;
+      setSolveValidationCause(this.solveStatus,failures[0].cause);
+    }
   }
 
   updateFullyConstrainedObjects() {

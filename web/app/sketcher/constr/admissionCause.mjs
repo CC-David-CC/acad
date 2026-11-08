@@ -32,7 +32,22 @@ export function captureSketchFailure(value) {
   if(hasCause)e.cause=captureAdmissionCause(e.cause);
   return Object.freeze(e);
 }
+// Private symbol metadata cannot arrive as a public JSON status flag. It is
+// enumerable so the existing owned status snapshots/spreads preserve rollback.
+const solveValidationCause=Symbol('internal-original-validation-cause');
+export function clearSolveValidationCause(status){if(status&&typeof status==='object')delete status[solveValidationCause];}
+export function setSolveValidationCause(status,cause){
+ const success=status&&typeof status==='object'&&Object.getOwnPropertyDescriptor(status,'success');
+ if(!success||!Object.hasOwn(success,'value')||success.value!==false)throw Error('Only a failed internal solve can carry validation cause.');
+ Object.defineProperty(status,solveValidationCause,{value:captureAdmissionCause(cause),enumerable:true,configurable:true});
+}
+export function getSolveValidationCause(status){
+ const ownCause=status&&typeof status==='object'&&Object.getOwnPropertyDescriptor(status,solveValidationCause);
+ const success=status&&typeof status==='object'&&Object.getOwnPropertyDescriptor(status,'success');
+ return success&&Object.hasOwn(success,'value')&&success.value===false&&ownCause&&Object.hasOwn(ownCause,'value')?captureAdmissionCause(ownCause.value):undefined;
+}
 export function causeForSolveStatus(status) {
+ const original=getSolveValidationCause(status);if(original)return original;
   const domain=status?.domainError;
   if(['DIRECTION_SOLVE_FAILED','PROJECTED_SOLVE_FAILED'].includes(domain))return admissionCause('numerical-convergence-failure');
   if(['DIRECTION_RESOURCE_LIMIT','PROJECTED_RESOURCE_LIMIT'].includes(domain))return admissionCause('resource-limit');
