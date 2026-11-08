@@ -71,8 +71,8 @@ for key, pin in inner.items():
     if key.endswith('/authoredHistoryState.mjs'):
         selected[key] = pin['sha256']
 for cohort in a.include_prefix:
-    if not re.fullmatch(r'[A-Za-z0-9_-]+/', cohort):
-        raise SystemExit('Require a single relative cohort directory ending in /')
+    if not re.fullmatch(r'(?:[A-Za-z0-9_-]+/)+', cohort):
+        raise SystemExit('Require relative cohort directory segments ending in /')
     matches = {key: pin['sha256'] for key, pin in inner.items() if key.startswith(cohort)}
     if not matches:
         raise SystemExit('Requested cohort has no emitted assets: ' + cohort)
