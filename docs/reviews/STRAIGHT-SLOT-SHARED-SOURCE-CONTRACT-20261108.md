@@ -269,3 +269,18 @@ CAD_ARCHIVE_INVALID. Optional private admissionCause records remain outside
 the existing archive error wire (code/message only); this is not a new public
 structured-cause transport claim. Review only; root ran the unchanged whole
 R2/independent oracle successfully afterward as separately recorded above.
+
+## Root implementation decision
+
+Initial bounded source implementation is authorized, not qualified. The actual
+constraint writer/reader representation remains authoritative. Use ten mm
+residuals: cap centers=A/B (four), actual Arc radii=r (two), each of four cap
+radial vectors dot actual signed-axis direction=0 (four). Keep four genuine
+PCoincident junctions and unchanged native intrinsics. Directed-side branch
+validation selects start a:+normal,b:-normal and end a:-normal,b:+normal.
+Avoid duplicate full-coordinate/radius equations or a singular dot(normal)=±r
+extremum. Freeze actual parameter mapping, Jacobian and units with source.
+Do not fabricate rank/DOF/admission or change solver policy. Full original-request
+verification, native-member source/admission proof and public Save/Open remain
+required. Coreb44de28→22ac378/Desktop1ab60d1ec are now frozen source candidates;
+no build, browser or Slot success is claimed.

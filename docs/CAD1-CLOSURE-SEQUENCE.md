@@ -49,9 +49,9 @@ viewable output and one authoritative shared person/agent operation model remain
    attachment now have scoped Phase A R3 qualification:49rows/4.cad saves/
    14Native observations/7refusals/fresh Opens, independent artifact oracle PASS
    on runtimea9022ce/Desktop9fd652f1b. R1 request-alias failure and R2 invalid
-   fixture encoding remain frozen. Native-solid-face attachment remains required;
-   its approved source contract is PHASE-B-CURRENT-SOURCE-20261108.md in
-   test/custom-source-frame-plan. Implementation is an isolated lane, not a pass.
+   fixture encoding remain frozen. Native-solid-face last-cap attachment now has scoped R2 qualification d82b3c1
+   on Coreeff8af0/Desktop719a4049a. Arbitrary-face and prefix Apply support remain
+   separate. See test/native-face-attachment/QUALIFICATION.md.
 7. Remaining quantity/drawing competenciesC09/C11. Typed units, expressions,
    configurations and ordinary linked orthographic drawing pass. Finish finite
    remaining measurement roles/targets and required isometric/section/detail/
@@ -98,12 +98,12 @@ assembly, future physics, future CAD generations, new AI provider or human UI
 redesign is part of this sequence. No completion percentage/calendar promise is
 inferred from number of commands or isolated passing examples.
 
-## Current bounded source queues — after cubic R2
+## Current bounded source queues — after native attachment R2
 
-The most recent frozen qualification is e381b70: actual Core26d7a55 with
-Desktopf6d1c07d1. It adds cubic curve author/edit/native sampling/persistence
-to the earlier navigation, Cancel, Ellipse, frame, quantity and repair proofs.
-It is not an all-Gate1 composed signoff. Desktop documentation is1d63d8566. Both repositories'
+The most recent frozen qualification is d82b3c1: actual Coreeff8af0 with
+Desktop719a4049a. It adds native extrusion-cap attachment/edit/repair/persistence
+to earlier cubic, navigation, Cancel, Ellipse, frame, quantity and repair proofs.
+It is not an all-Gate1 signoff. Both repositories'
 source/evidence/checklists are on example.invalid and R730; private fixture state is not
 source and is not copied into Git.
 

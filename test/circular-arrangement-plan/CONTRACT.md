@@ -196,3 +196,14 @@ Opaque selectors, source+J chronology, units and all output artifacts. No mesh
 approximation or agreeing-engine result is dimension truth. Native adaptation,
 exact preservation/resource/component controls and the eventual public whole
 workflow are all OPEN until implemented and actually qualified.
+
+## Root source implementation authorization
+
+Bounded source/Native implementation above is authorized, not qualified. Freeze
+exact FFI/schema/interval/owner/limit contracts first. Native C++ stays on a
+separate LAN source branch; root compiles coherent source, binds actual Native
+hashes/catalog/closed assets, builds normally and runs the complete workflow.
+No source-owner execution, global tolerance/default change or separate authored
+model is authorized. The existing Native LAN repository is occt-interpreter-codi.git
+on example.invalid:/srv/data/git and r730:/mnt/data10tb/git, with verified original shell
+source2f10f1e1 on feature/owned-shell-v1-20261107. No frozen source mutation.
