@@ -39,7 +39,7 @@ Authoritative detailed definitions are in the desktop repository:
 Historical references to all22 exercises describe the prior scope and do not
 reinstate assembly acceptance in Gate1.
 
-## Current qualification checkpoint — 2026-11-08
+## Historical checkpoint before principal Apply R4
 
 Latest principal Apply R3 progresses past the repaired owned-epoch failure:
 63 records,6 real Apply paths,18 UI travel events,26 Native observations,9
