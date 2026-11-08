@@ -38,6 +38,11 @@ export function changeProjectedDistanceDimension(request:any){const revision=rev
  const scope=captureConnectedGeometryScope(before,bindings,original.result.evidence,original.auxiliary,(_workspace,pm,index)=>{
   const c=pm.stages[row.stage]?.solverSystem.allConstraints.filter(c=>!c.internal)[row.index];
   if(!c||c.schema!==ConstraintDefinitions.ProjectedDistance||c.objects.length!==3||c.objects.some((o,i)=>o!==index[row.objects[i]])||!projectedDirectionValid(c.objects[2]))fail('INVALID_TARGET','The actual projected constraint/direction owner changed.');
+  // Captured IO deliberately leaves this decoder transaction open and does
+  // not optimize/resolve constants. Resolve the ACTUAL original row through
+  // its current authoritative resolver before validating/collecting equations;
+  // never borrow a cold constraint cache or manually materialize its binding.
+  c.resolveConstants(pm.constantResolver);validateConstraintGeometry(c);
   let originalSatisfied=true;const equations=[];
   if(a.action==='edit'){
    const proposed=new AlgNumConstraint(ConstraintDefinitions.ProjectedDistance,[...c.objects],{distance:String(a.intent.value)});proposed.resolveConstants(pm.constantResolver);
