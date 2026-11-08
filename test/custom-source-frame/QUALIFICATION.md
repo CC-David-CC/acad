@@ -46,3 +46,28 @@ creating four independent bounded vectors with identical numeric values. No
 tree guard, geometry tolerance, currentness proof, solver result or test
 expectation changes. The existing complete workflow remains its regression;
 source correction is not a qualification pass until that workflow succeeds.
+
+## R2 — 2026-11-08: FAIL, final negative fixture encoding
+
+Actual runtime Core `a9022cebebbab50c451bed48c2be49eae49ea8b6`, same Desktop
+`9fd652f1b`. Full normal build and fixture construction passed; private20988
+uses fresh R730 state `/tmp/codi-acad-fixture-state-20261108-r6`.
+The unchanged complete driver reached47 checkpoints,13 Native observations,
+four real `.cad` saves/server equality checks and fresh Open/reedit cycles.
+Creation/travel, transforms, principal depth propagation and stale-cache Open
+refusal passed up to the recorded checkpoint. No complete qualification follows.
+
+The final invalid-parent Open returned `CAD_ARCHIVE_INVALID` with message
+`Authored native metadata is not canonically encoded.`, instead of the expected
+`INVALID_FRAME_DEPENDENCY`. The own-file generator's shared `rewrite_row`
+serialized both raw sketches and model metadata without sorting keys. Sketch
+bytes may retain authored order, but native model metadata must be canonical.
+The archive guard correctly rejected that earlier encoding defect. This is a
+negative fixture construction error, not evidence that dependency validation
+or a geometry engine failed. Keep the precise expected dependency code.
+
+Frozen `evidence-r2` includes all four actual saved files, both own negative
+files, the terminal failure, exact source/runtime pins and successful context
+cleanup. No artifact oracle pass is claimed for the failed complete workflow.
+Next: canonicalize only the mutated model metadata in the independent generator
+and repeat the entire unchanged-domain workflow in a fresh evidence directory.
