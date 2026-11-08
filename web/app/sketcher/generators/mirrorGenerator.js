@@ -57,14 +57,16 @@ export const MirrorGeneratorSchema = {
     state.dir = new Vector();
   },
 
-  generate: (params, state) => {
+  generate: (params, state, generatedRootIds) => {
 
     const {reflectionLine: [reflectionLine], objects} = params;
 
     updateDir(state.dir, reflectionLine);
 
-    return objects.map(o => {
-      const copy = o.copy();
+    if(generatedRootIds!==undefined&&(!Array.isArray(generatedRootIds)||generatedRootIds.length!==objects.length||Reflect.ownKeys(generatedRootIds).length!==objects.length+1||new Set(generatedRootIds).size!==objects.length||generatedRootIds.some(id=>typeof id!=='string'||!id)))throw Error('Invalid private Mirror output identities.');
+    return objects.map((o,i) => {
+      const copy = o.copy(generatedRootIds?.[i]);
+      copy.role=o.role;
       reflect(state.dir, reflectionLine, o, copy);
       return copy;
     });

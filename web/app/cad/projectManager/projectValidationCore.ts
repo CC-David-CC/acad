@@ -1,3 +1,4 @@
+import {validateMirrorSourceGeometry} from 'sketcher/headless/mirrorSourceValidation';
 import {validateSplineDerivedGeometry} from 'sketcher/headless/splineDerivedValidation';
 import {captureSourceFrameParameters} from 'engine/source/sourceFrameIntent.mjs';
 import {validateProjectSourceFrames} from 'sketcher/headless/sourceFrameValidation';
@@ -47,6 +48,9 @@ export function preflight(value, parameterState?: {source?: string, result?: any
     // legacy preflight remains bounded structure/domain only.
     for(const object of data.objects)if(object.type==='BSpline')validateSplineDerivedGeometry(object.id,object.data);
     if (data.constants !== undefined && parseMathDefinitions(data.constants).errors.length) throw new Error('A sketch contains invalid constants');
+    // Geometry-only native regeneration after the unchanged source preflight.
+    // No authored constraint solve, source replacement, or binding conversion.
+    validateMirrorSourceGeometry(data);
   }
   validateProjectSourceFrames(project);
   return value;

@@ -1,3 +1,4 @@
+import {captureMirrorEnvelope} from './mirrorReply.mjs';
 import {captureSlotEnvelope} from './straightSlotReply.mjs';
 import {captureCurvePointsReply} from './cubicCurveReply.mjs';
 import {captureLengthMeasurementReply} from './lengthMeasurementIntent.mjs';
@@ -118,6 +119,8 @@ export async function runSketchSolve(workerUrl: string, request: any, options: S
                 return finish(stopReason);
               }
               let result;try{result=captureWorkerReplyRecord(event.data);if(result.ok===false)result.error=captureSketchFailure(result.error);}catch{return finish(new Error('Invalid sketch Worker reply fields.'));}
+              if(request.task==='sketch-transition-mirror'){try{return finish(null,captureMirrorEnvelope(result,request.revision,request.intent));}catch(error){return finish(error);}}
+              if(request.task==='sketch-transition-verify-mirror'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='sketch-transition-slot'){try{return finish(null,captureSlotEnvelope(result,request.revision,request.intent));}catch(error){return finish(error);}}
               if(request.task==='sketch-transition-verify-slot'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='sketch-transition-curve-points'){try{return finish(null,captureCurvePointsReply(result,request.revision,request.intent));}catch(error){return finish(error);}}

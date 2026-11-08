@@ -92,8 +92,8 @@ export class EndPoint extends SketchObject {
     return this.toVector();
   }
 
-  copy() {
-    return new EndPoint(this.x, this.y);
+  copy(id?:string) {
+    return new EndPoint(this.x, this.y,id);
   }
 
   mirror(dest: EndPoint, mirroringFunc: (x: number, y: number) => { x: number; y: number }) {
