@@ -149,3 +149,22 @@ until the end; there is no authorization to deliberately cut it early.
 This directive does not silently change existing qualified algorithms or their
 thresholds. Identified premature-loss defects require coherent source repairs,
 complete workflow regression and documented before/after evidence.
+
+## Bounded authoritative early-loss repair queue
+
+These are implementation requirements, not additional claimed qualification.
+Keep them separate from display formatting and final declared approximation.
+
+| Item | Current state | Required repair / complete-workflow proof |
+| --- | --- | --- |
+| Default constant two-decimal conversion | Source repaired1eaaed4; genuine UI/default workflow pending | Untouched noninteger Diameter default, actual commit, edit/travel/Save/Open; exact literal and independent radius relation. |
+| `Polynomial.compact()` nonzero coefficient removal under fixed epsilon | Confirmed source behavior; unrepaired | Combine like terms without deliberately dropping nonzero represented coefficients. Preserve explicit finite/overflow/underflow handling and bounded expansion. Whole ordinary/small-coefficient dimensional constraints must remain attributable to their original equations; no threshold reduction as a substitute. |
+| Two-term affine substitution replacing a small nonzero constant with zero | Confirmed source behavior; unrepaired | Preserve the represented nonzero offset through division or retain the original equation if substitution is not safely representable. Never introduce an exact-zero alias merely because the input falls under epsilon. Qualify positive/negative small offsets, real locks/aliases, contradictions, reedit/travel/native persistence. |
+| Constant-row redundancy near zero | Existing approximate classification with provenance | Keep satisfiability uncertainty, units/scaling and original residual checks explicit. Do not call a nonzero constant an exact algebraic identity. Derive any final acceptance from the declared physical-error policy; do not rewrite the authored equation. |
+| Repeated optimization of disconnected accepted geometry during append | Actual R6 difference~0.00196pm; unchanged guard rejects | Solve the genuinely new disconnected component and independently prove retained original equations/admission/ownership at exact captured coordinates, plus fresh whole-candidate replay bounds. No coordinate overwrite, quantization or relaxed exact preservation. |
+
+A repair to reduction affects every supported constraint family and therefore
+requires a coherent source composition followed by affected complete application
+workflows. It must not be slipped into a default-dialog or singular-initializer
+patch, whose narrower evidence could not qualify the shared change. The design
+remains one authoritative physical source; no rounded secondary truth is added.
