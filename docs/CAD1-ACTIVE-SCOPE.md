@@ -49,6 +49,26 @@ validates and returns exact historical source bytes. Ordinary extrusion/read/
 Open dispatch, exact-axis checks, expected HOLE_OUTSIDE_PROFILE and all existing
 publication/currentness guards remain unchanged. No execution PASS follows yet.
 
+Normal repair build4d5a0e319612d68844e7692552fedba349f8f8b9 completed successfully
+on R730, including all ordinary Worker/Native component stages, main webpack,
+resource copy and revision marking. Log `.build/gate1-repairs-4d5a0e3-build.log`
+under `/mnt/data10tb/codi-acad-build-20261107-r2`. Normal fixture build/pin
+recording also completed (`gate1-repairs-4d5a0e3-fixture.log`); this proves build
+and byte custody, not geometry qualification.
+
+Current repair fixture: Core4d5a0e3/Desktop4c4862b7b1f48eef1686dfafa837a93c9bd907b3,
+97 selected pins in `/mnt/data10tb/codi-acad-gate1-repair-pins-20261108-r2.json`,
+CAD bundle02044c13adb00c1707f9a0967808effc1c16eb9ca91cb0ef80271f6e508ce39f;
+Files bundleee2a712cabade0aad7a3b2c5bc4d8c311d7dc8f52963aadb14e210d9d54b010a
+is unchanged. Public code fixture has487files/414CAD assets/522364021innerbytes.
+Loopback20985 uses new direct private real-disk runtime
+`/tmp/codi-acad-fixture-state-20261108-r3` on R730; no account/key state copied,
+no external relay or public deployment. Earlier immutable fixture20984 remains.
+Measurement R2 is running sequentially in shared Chrome19329 with owned driver
+session13766; output `/tmp/codi-length-measurement-workflow-20261108-r2` and
+separate driver log. History R2 is queued. Do not infer PASS before terminal
+result, owned-context cleanup and unchanged source hashes.
+
 The sections below retain chronological implementation and execution notes.
 Statements such as “running,” “queued,” and “not qualified yet” describe those
 earlier checkpoints; the table above and latest completed results supersede them.
