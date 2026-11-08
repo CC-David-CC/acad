@@ -21,15 +21,21 @@ reinstate assembly acceptance in Gate1.
 
 ## Current finite execution lanes — 2026-11-08
 
-Latest composed complete run is orientationR11 on Corea5368ef/Desktopa0def557,
-frozen at2b92bdd, `test/line-orientation-public-workflow/evidence-r11`.
-It reaches109rows/no saves, failing first anti-parallel endpoint170→190.
-Actual candidate/coldY delta4.5604338084pm exceeds the executed1pm bound.
-Conditional independent expectedY errors are11.855235pm/7.294801pm; onlyY was
-captured. User explicitly accepts50pm=0.05nm=5e-8mm. Policy source change and
-whole-workflow qualification remain pending; historical FAIL stays unchanged.
-No full-vector/nanoscale-BRep/physical guarantee follows. Solver diagnostics
-and accepted-iterate ownership are a bounded separate source lane.
+Latest orientationR12 PASS on Core32ae9c8/Desktop60ec30ee9, frozen618cf39
+under test/line-orientation-public-workflow/evidence-r12.150checkpoints,
+2nativeJSON Save/server-sync/fresh-Open cycles,reopenededit/travel/secondOpen,
+source hashes unchanged,owned contexts retired. Earlier R11 remains2b92bdd.
+Functional analytic1e-6mm bound is distinct from50pm reconstruction/accuracy.
+Post-whole precision intake initially refused exact stored/replay equality:
+inspection returns a solved copy. Separate source/replay datasets must meet the
+SAME independent reference/budget; no accuracy PASS yet.
+
+ArchiveR6 and independent artifact oracle PASS, frozen49db2da.38checkpoints,
+4actual.cad saves/server-sync,12STEP/core3MF/SVG exports,freshOpen/reedit,
+6malformed Open refusals,realFilesUIOpen,healthycontinuation;10codecWorkers/all
+retired.956-byte unchanged drawing span survives Open/reedit. Named owner/width
+defects superseded in scope; capacity/memory/ARC23 remain separate. Role workflow
+running next; history queued. No final all-Gate1/beta signoff.
 
 Native archive repair774c779 is integrated: keep the decoded codec restore-local
 through same-generation metadata reset, then transfer custody after full guarded
