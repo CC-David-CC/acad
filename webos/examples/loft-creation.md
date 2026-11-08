@@ -20,6 +20,10 @@ const {result} = await recipe.create(sources);
 const part = {...sources, featureId:result.featureId, bodyId:result.outputId};
 await recipe.width(part, 100, 120);
 await recipe.plane(part, 40);
+const solids = await agent.execute('inspect-worker-solids');
+await agent.execute('fit-worker-solids', {
+  revision: solids.revision, bodyIds: [part.bodyId]
+});
 await agent.save('/Unequal-sections.cad');
 ```
 
@@ -33,5 +37,12 @@ The complete workflow proved immediate actual LOFT creation removal/restoration,
 and three.cad browser/server/fresh signed Open/reedit cycles. Canonical evidence:
 ACAD/test/loft-creation-public-workflow/evidence-r1. Native/source budgets are
 retained. This is not arbitrary topology conversion/typed loft/all-engine/human
-UI/Gate1 qualification. The unedited final screenshot exposes tiny default part
-framing; combined G10 viewing/framing remains open despite correct geometry.
+UI/Gate1 qualification. The original unedited screenshot exposed tiny default framing. Explicit shared
+fit-worker-solids is now qualified by whole45501 and FIRST independent geometry/
+archive and camera/matrix oracles (ACAD655db18, actualdb278/6f708). Six fits,
+three readonly refusals and three real .cad cycles preserve source/J/resources;
+root reviewed actual perspective/orthographic/final-Open PNGs with a large
+readable solid. Canonical evidence is ACAD/test/worker-solid-view/evidence-r1.
+Fitting changes only camera/controls and preserves view direction/up. It does
+not mark the design saved or automatically change the initial camera. Final
+composed beta/G10, other engines and phone/4K trials remain unqualified.
