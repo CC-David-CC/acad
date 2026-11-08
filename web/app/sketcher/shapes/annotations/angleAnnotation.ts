@@ -1,3 +1,4 @@
+import {hasLengthMeasurementRuler} from '../../actions/lengthMeasurementPresentation.mjs';
 import {AngleBetweenDimension, DiameterDimension, LinearDimension, HDimension, VDimension,formatDimensionValue} from "../dim";
 import {EndPoint} from '../point';
 import {Styles} from "../../styles";
@@ -105,6 +106,9 @@ AngleAbsoluteAnnotation.prototype._class = 'AngleAbsoluteAnnotation';
 
 
 export class LengthAnnotation extends LinearDimension implements ConstraintAnnotation<{offset: number}>  {
+
+  drawImpl(ctx,scale,viewer){if(!hasLengthMeasurementRuler(viewer,this))super.drawImpl(ctx,scale,viewer);}
+
 
   constraint: AlgNumConstraint;
 

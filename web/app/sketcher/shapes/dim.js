@@ -1,3 +1,4 @@
+import {lengthMeasurementRole} from '../actions/lengthMeasurementPresentation.mjs';
 import {formatDisplayQuantity} from '../../cad/projectManager/displayUnits.mjs';
 import {
   makeAngle0_360} from 'math/commons'
@@ -101,7 +102,10 @@ export class LinearDimension extends Dimension {
   
   getA() { return this.a }
   getB() { return this.b }
-  dimensionText(distance,viewer) { return formatDimensionValue(distance,'length',viewer); }
+  dimensionText(distance,viewer) {
+    const text=formatDimensionValue(distance,'length',viewer),role=lengthMeasurementRole(viewer,this);
+    return role==='reference'?'('+text+')':role==='unresolved'?'? '+text:text;
+  }
 
   dependsOn(obj) {
     return this.a === obj || this.b === obj;
