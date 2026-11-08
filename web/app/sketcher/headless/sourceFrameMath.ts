@@ -11,7 +11,7 @@ export function deriveSourceFrame(parameters:any,parentFrame:any,placementOnly=f
  const p=placementOnly?{placement:captureSourceFramePlacement(parameters),parent:parentFrame===null?null:{}}:captureSourceFrameParameters(parameters),f=checkedSourceFrame(p.placement.frame),parent=checkedSourceFrame(parentFrame||identity);if((p.parent===null)!==(parentFrame===null))fail('INVALID_FRAME_DEPENDENCY','Parent frame coverage differs.');
  let local:any=f;if(p.placement.kind==='rigid'){
   const r=p.placement,n=Math.hypot(...r.axis);if(!Number.isFinite(n)||n===0)fail('INVALID_SOURCE_FRAME','A nonzero finite rotation axis is required.');
-  const vector=(a:number[])=>new Vector(a[0],a[1],a[2]),rotation=new Matrix3x4().rotate(r.angleDegrees*Math.PI/180,vector(r.axis),vector(r.pivot));
+  const vector=(a:number[])=>new Vector(a[0],a[1],a[2]),rotation=new Matrix3x4().rotate(r.angleDegrees*Math.PI/180,vector(r.axis.map((v:number)=>v/n)),vector(r.pivot));
   const rotateBasis=(a:number[])=>rotation.__applyNoTranslation(vector(a),new Vector()).data();
   local={origin:rotation.__apply3(f.origin,[0,0,0]).map((v:number,i:number)=>v+r.translation[i]),x:rotateBasis(f.x),y:rotateBasis(f.y),z:rotateBasis(f.z)};
  }
