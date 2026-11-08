@@ -64,6 +64,13 @@ new `fit-workflow.mjs` into its frozen source inventory and existing full genuin
 creation/edit/refusal/travel/three .cad Save/server/freshOpen/reedit sequence.
 It does not replace or rerun a source-era packet here.
 
+The same whole driver separately records three view refusals: a genuine source
+plane ID is not a solid output (UNAVAILABLE), a duplicated actual body ID is
+INVALID_REQUEST, and a genuinely formerly-current revision after width edit is
+STALE_DOCUMENT. Each requires exact camera and accepted-state preservation.
+These new view-refusal records leave the original four geometry/source-refusal
+records and their criteria unchanged.
+
 After real creation UndoRedo, explicitly fit perspective; use the actual existing
 camera-mode toolbar control, fit orthographic, and toggle/fit perspective again.
 After EACH of the three real fresh .cad Opens, fit once more. All six fit calls

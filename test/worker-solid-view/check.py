@@ -11,6 +11,8 @@ def direction(c):
  v=[x-y for x,y in zip(c['position'],c['target'])];n=math.hypot(*v);require(n>0,'camera direction');return[x/n for x in v]
 def check(folder):
  root=Path(folder);r=json.loads((root/'receipt.json').read_text());require(r['status']=='PASS'and r['ownedContextsRetired']and r['sharedBrowserDisconnectedOnly'],'whole real workflow completed/retired')
+ refusals=r['viewRefusals'];require([x['expectedCode']for x in refusals]==['UNAVAILABLE','INVALID_REQUEST','STALE_DOCUMENT'],'three original-predicate refusal cases')
+ for x in refusals:require(x['error']['code']==x['expectedCode']and not x['error']['committed']and not x['error']['possiblyCommitted']and x['before']==x['after']and x['cameraBefore']==x['cameraAfter'],'exact refusal layer and unchanged camera/accepted state')
  fits=r['viewFits'];require(len(fits)==6,'three creation-mode fits and three genuine .cad Opens');require({f['fitted']['mode']for f in fits}=={'PERSPECTIVE','ORTHOGRAPHIC'},'both real projection modes');results=[]
  for f in fits:
   require(f['before']==f['after'],'source/body/history/J/counters/metadata/file tokens/resources exact');a,b=f['prior'],f['fitted'];require(a['mode']==b['mode']and a['up']==b['up'],'preserved camera mode/up');require(all(abs(x-y)<=1e-12 for x,y in zip(direction(a),direction(b))),'preserved orientation');require(b['viewport']['width']>0 and b['viewport']['height']>0,'visible viewport')
