@@ -1,6 +1,7 @@
 # Typed Circle source example
 
-Source-only; the complete composed application workflow has not run yet.
+Qualified finite workflow43021 and FIRST independent source/archive/cylinder
+oracle PASS, ACAD1e8856c actuald790011/3ce2fec55. Not full Gate1.
 Importing the example does nothing. It creates a real Circle on a genuine empty
 XY plane, discovers and consumes its actual region, then binds the existing
 RadiusLength and extrusion depth to named typed lengths. No rectangle surrogate,

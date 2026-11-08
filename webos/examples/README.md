@@ -1,5 +1,13 @@
 # Browser CAD command examples
 
+[Fillet/chamfer recipe](fillet-chamfer.mjs) is the exact qualified E11 helper
+(ACADfa6dc2b): actual creation UndoRedo, mixed edits, four refusals,975Native
+classes and three.cad cycles. [Usage and scope](fillet-chamfer.md).
+
+[Typed Circle recipe](source-bound-typed-circle.mjs) is qualified by43021 and
+FIRST independent oracle (ACAD1e8856c): named radius/depth, seven refusals,
+shared travel,100Native points and three.cad cycles. Rectangle controls refuse.
+
 [Whole-entity Fix recipe](whole-entity-fix.mjs) is the exact helper from qualified
 workflow ACAD2dbcc2b, actualCoredb99774/Desktopbbf2d284b. It uses genuine
 FixSegment/FixCircle/FixArc snapshots, not a point lock or caller-supplied pose.
