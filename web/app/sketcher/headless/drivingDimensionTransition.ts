@@ -5,6 +5,7 @@ import {projectRenderSketch} from './renderSketchProjection.mjs';
 import {assertAllowedSolverGeometry} from './transitionGeometryPolicy.mjs';
 import {captureAdmissionCause} from '../constr/admissionCause.mjs';
 import {sameRestoredSketch} from '../historyEquivalence.mjs';
+import {assertVerifiedReplayGeometry,assertUnrelatedSignedGeometry} from './verifiedReplayGeometry';
 import {captureDrivingDimensionIntent,resolveDrivingDimension,drivingLengthField,classifyDrivingDimensionDelta,signedDrivingDimension,drivingDimensionValueValid} from './drivingDimensionTarget.mjs';
 const fail=(code:string,message:string)=>Object.assign(Error(message),{code});
 const failure=(error:any)=>({code:typeof error?.code==='string'?error.code.slice(0,64):'DIMENSION_INVALID',message:typeof error?.message==='string'?error.message.slice(0,512):'Existing dimension change failed.',...(error?.cause?{cause:captureAdmissionCause(error.cause)}:{})});
@@ -15,11 +16,11 @@ function revisionOf(v:any){const d=v&&Object.getOwnPropertyDescriptor(v,'revisio
 function replay(revision:string,text:string,bindings:any){const r=replaySketchTransition({revision,sketchJSON:bounded(text),externalParameters:bindings});if(!r.ok||!('serializedSketch' in r))throw Object.assign(Error(r.error.message),r.error);return r;}
 // Resolve against canonical handles projected in this Worker from the same
 // captured/replayed source. No point rows are accepted from the public request.
-function resolveDimension(sketch:any,id:string){
+function dimensionPoints(sketch:any){
  const source={...sketch,objects:sketch.objects.filter(o=>['Point','Segment','Circle','Arc'].includes(o.type))};
- const points=projectRenderSketch(source).objects.flatMap(object=>object.handles);
- return resolveDrivingDimension(sketch,id,points);
+ return projectRenderSketch(source).objects.flatMap(object=>object.handles);
 }
+function resolveDimension(sketch:any,id:string){return resolveDrivingDimension(sketch,id,dimensionPoints(sketch));}
 function geometry(before:any,after:any){if(before.objects.length!==after.objects.length)throw fail('INTENT_CHANGED','Sketch object membership changed.');after.objects.forEach((o,i)=>{if(before.objects[i]?.type!==o.type)throw fail('INTENT_CHANGED','Sketch object type changed.');assertAllowedSolverGeometry(o.type,before.objects[i].data,o.data);});}
 function evidence(sketch:any,rows:any[]){const c=sketch.stages.flatMap(s=>s.constraints);if(c.length!==rows.length||c.some((v,i)=>v.typeId!==rows[i].typeId||v.admission?.version!==1||v.admission.state!==rows[i].state))throw fail('ADMISSION_CHANGED','Dimension admission changed during verification.');}
 function expectedDelta(before:any,after:any,intent:any,action:string){
@@ -34,7 +35,7 @@ export function changeDrivingDimension(request:any){let revision=revisionOf(requ
  let value:any=null;if(a.action==='edit'){
   if(typeof row.rawValue==='string'&&/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(row.rawValue.trim())&&typeof intent.value==='number')throw fail('BOUND_DIMENSION','A driving dimension bound to a typed name cannot be silently replaced by a literal. Edit the parameter or submit a named binding.');
   value=typeof intent.value==='number'?intent.value:bindings[intent.value];
-  if(!drivingDimensionValueValid(row.typeId,value))throw fail('INVALID_VALUE',signedDrivingDimension(row.typeId)?'A current signed length within plus or minus 1,000,000mm is required.':'A current positive typed length or literal millimeters is required.');
+  if(!drivingDimensionValueValid(row.typeId,value))throw fail('INVALID_VALUE',signedDrivingDimension(row.typeId)?'A current signed length within plus or minus 1,000,000mm is required.':row.typeId==='DistancePP'?'A current Euclidean typed length or literal from0 to1,000,000mm is required.':'A current positive typed length or literal millimeters is required.');
  }
  const dimension=(rawValue:any,resolvedValue:any,status:string)=>({constraintId:intent.constraintId,action:a.action,typeId:row.typeId,objects:[...row.objects],rawValue,resolvedValue,status});
  if(a.action==='edit'&&String(row.rawValue)===String(intent.value))return {revision,ok:true,changed:false,serializedSketch:a.sketchJSON,evidence:captured.evidence,dimension:dimension(row.rawValue,row.resolvedValue,before.stages[row.stage].constraints[row.index].admission.state)};
@@ -46,8 +47,10 @@ export function changeDrivingDimension(request:any){let revision=revisionOf(requ
   pm.finishTransaction(stages=>{for(const stage of stages)for(const constraint of stage.algNumSystem.allConstraints)if(stage.algNumSystem.conflicting.has(constraint)&&!stage.algNumSystem.redundant.has(constraint))throw Object.assign(fail('DIMENSION_REJECTED','The constraint change was rejected by the sketch solver.'),{cause:stage.algNumSystem.getAdmissionCause(constraint)});},false);
  }catch(error){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw error},false)}catch(_){}throw error;}
  const candidate=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));candidate.boundary=before.boundary;geometry(before,candidate);expectedDelta(before,candidate,intent,a.action);
+ if(row.typeId==='DistancePP'&&a.action==='edit')assertUnrelatedSignedGeometry(before,candidate,bindings,{stage:row.stage,index:row.index});
  const solved=solveSketch({revision,sketch:candidate,boundary:structuredClone(candidate.boundary),externalParameters:bindings});if(!solved.ok)return solved;const serializedSketch=bounded(JSON.stringify(solved.sketch));
- if(!sameRestoredSketch(JSON.stringify(candidate),serializedSketch))throw fail('CURRENT_GEOMETRY_MISMATCH','Dimension verification changed solved geometry.');evidence(solved.sketch,solved.evidence);
+ if(row.typeId==='DistancePP')assertVerifiedReplayGeometry(candidate,solved.sketch,solved.evidence,bindings,a.action==='edit'?{stage:row.stage,index:row.index}:undefined);
+ else if(!sameRestoredSketch(JSON.stringify(candidate),serializedSketch))throw fail('CURRENT_GEOMETRY_MISMATCH','Dimension verification changed solved geometry.');evidence(solved.sketch,solved.evidence);
  let next:any=null;if(a.action==='edit'){next=resolveDimension(solved.sketch,intent.constraintId);if(Math.abs(next.resolvedValue-value)>1e-6)throw fail('RESIDUAL','The edited dimension differs from actual solved geometry.');}
  return {revision,ok:true,changed:true,serializedSketch,evidence:solved.evidence,dimension:dimension(next?.rawValue??null,next?.resolvedValue??null,next?solved.sketch.stages[row.stage].constraints[row.index].admission.state:'removed')};
  }catch(error){return {revision,ok:false,error:failure(error)};}}
@@ -64,7 +67,7 @@ export function verifyDrivingDimension(request:any,travel=false){let revision=re
  }
  const before=JSON.parse(replay(revision,a.sketchJSON,bindings).serializedSketch),afterResult=replay(revision,a.candidateJSON,bindings),after=JSON.parse(afterResult.serializedSketch);geometry(before,after);evidence(after,afterResult.evidence);
  if(travel){
-  const delta=classifyDrivingDimensionDelta(before,after);if(!delta)throw fail('INTENT_CHANGED','Typed travel requires exactly one supported dimension edit or removal.');
+  const delta=classifyDrivingDimensionDelta(before,after,dimensionPoints(before),dimensionPoints(after));if(!delta)throw fail('INTENT_CHANGED','Typed travel requires exactly one supported dimension edit or removal.');
   const literal=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/;
   const replacement=(raw:any)=>typeof raw==='string'&&literal.test(raw.trim())?Number(raw):raw;
   const attempts:Array<{source:string,target:string,action:'edit'|'remove',constraintId:string,value?:number|string}>=delta.action==='remove'?[{source:a.sketchJSON,target:a.candidateJSON,action:'remove',constraintId:delta.constraintId}]:delta.action==='insert'?[{source:a.candidateJSON,target:a.sketchJSON,action:'remove',constraintId:delta.constraintId}]:[

@@ -1,5 +1,5 @@
 import {runSketchSolve, SketchSolveOptions} from './client';
-import {dimensionLocator,drivingLengthField,signedDrivingDimension,drivingDimensionObjectCount,drivingDimensionValueValid} from './drivingDimensionTarget.mjs';
+import {dimensionLocator,drivingLengthField,pointDrivingDimension,drivingPointDimensionValue,drivingDimensionObjectCount,drivingDimensionValueValid} from './drivingDimensionTarget.mjs';
 
 const invalid=():never=>{throw Error('Invalid closed sketch inspection data.');};
 const cancelled=()=>new DOMException('Sketch inspection cancelled or superseded.','AbortError');
@@ -83,9 +83,9 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
     if(row.stage!==c.stage||row.index!==c.index||row.typeId!==c.typeId||refs.length!==c.objects.length||refs.some((id,j)=>id!==c.objects[j])||typeof row.canEdit!=='boolean'||row.canRemove!==row.canEdit||row.unit!==(field?'millimeter':null)||row.rawValue!==(field&&Object.prototype.hasOwnProperty.call(c.constants,field)?c.constants[field]:null))return invalid();
     if(row.canEdit){
       if(row.constraintId!==dimensionLocator(c.stage,c.index,c)||row.constraintId.length>4096||refs.length!==drivingDimensionObjectCount(c.typeId)||!drivingDimensionValueValid(c.typeId,row.resolvedValue)||row.reason!==null)return invalid();
-      if(signedDrivingDimension(c.typeId)){
+      if(pointDrivingDimension(c.typeId)){
         if(refs[0]===refs[1]||refs.some(id=>typeof id!=='string'||id.length>256||!pointsById.has(id)))return invalid();
-        const a=pointsById.get(refs[0]),b=pointsById.get(refs[1]),actual=c.typeId==='SignedDistanceX'?b.x-a.x:b.y-a.y;
+        const a=pointsById.get(refs[0]),b=pointsById.get(refs[1]),actual=drivingPointDimensionValue(c.typeId,a,b);
         if(!Object.is(row.resolvedValue,actual))return invalid();
       }else if(!ids.has(refs[0]))return invalid();
     }

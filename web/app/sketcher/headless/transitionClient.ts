@@ -2,11 +2,12 @@ import {captureConstraintGroupIntent,captureConstraintGroupReply} from './constr
 import {captureSketchFailure} from '../constr/admissionCause.mjs';
 import {runSketchSolve, SketchSolveOptions} from './client';
 import {captureDrivingDimensionIntent,captureDrivingDimensionReply} from './drivingDimensionTarget.mjs';
+import {capturePointDistanceIntent} from './pointDistanceEnvelope.mjs';
 
 let transitionOutstanding=0;
 const MAX_TRANSITIONS=2;
 
-type TransitionTask = 'sketch-transition-constraint-group' | 'sketch-transition-remove-primitive' | 'sketch-transition-driving-dimension' | 'sketch-transition-replay' | 'sketch-transition-length-relation' | 'sketch-transition-primitive' | 'sketch-transition-point-coordinate' | 'sketch-transition-point-coordinates' | 'sketch-transition-diameter' | 'sketch-transition-signed-distance' | 'sketch-transition-line-relation';
+type TransitionTask = 'sketch-transition-constraint-group' | 'sketch-transition-remove-primitive' | 'sketch-transition-driving-dimension' | 'sketch-transition-replay' | 'sketch-transition-length-relation' | 'sketch-transition-primitive' | 'sketch-transition-point-coordinate' | 'sketch-transition-point-coordinates' | 'sketch-transition-diameter' | 'sketch-transition-point-distance' | 'sketch-transition-signed-distance' | 'sketch-transition-line-relation';
 const own = (o: any, key: string) => Object.getOwnPropertyDescriptor(o,key);
 function plain(value: any) {
   if(!value || typeof value!=='object' || Array.isArray(value))return false;
@@ -34,7 +35,7 @@ function captureOptions(options: SketchSolveOptions) {
 // queue on its shared lock. This function is internal and does not publish.
 export function runSketchTransition(workerUrl: string, task: TransitionTask, request: any, options: SketchSolveOptions = {}) {
   if(typeof workerUrl!=='string')throw Error('Invalid sketch worker URL.');
-  if(!['sketch-transition-constraint-group','sketch-transition-remove-primitive','sketch-transition-driving-dimension','sketch-transition-replay','sketch-transition-length-relation','sketch-transition-primitive','sketch-transition-point-coordinate','sketch-transition-point-coordinates','sketch-transition-diameter','sketch-transition-signed-distance','sketch-transition-line-relation'].includes(task))throw Error('Invalid sketch transition task.');
+  if(!['sketch-transition-constraint-group','sketch-transition-remove-primitive','sketch-transition-driving-dimension','sketch-transition-replay','sketch-transition-length-relation','sketch-transition-primitive','sketch-transition-point-coordinate','sketch-transition-point-coordinates','sketch-transition-diameter','sketch-transition-point-distance','sketch-transition-signed-distance','sketch-transition-line-relation'].includes(task))throw Error('Invalid sketch transition task.');
   const input=captureRecord(request,task==='sketch-transition-driving-dimension'?['revision','sketchJSON','externalParameters','action','intent']:task==='sketch-transition-replay'?['revision','sketchJSON','externalParameters']:task==='sketch-transition-primitive'?['revision','sketchJSON','externalParameters','primitive']:['revision','sketchJSON','externalParameters','intent']);
   if(typeof input.revision!=='string'||!input.revision||input.revision.length>256||typeof input.sketchJSON!=='string'||input.sketchJSON.length>1048576)throw Error('Invalid sketch transition request.');
   if(!plain(input.externalParameters)||Reflect.ownKeys(input.externalParameters).length>1024)throw Error('Invalid sketch transition parameters.');
@@ -46,6 +47,7 @@ export function runSketchTransition(workerUrl: string, task: TransitionTask, req
   if(task==='sketch-transition-constraint-group')payload.intent=captureConstraintGroupIntent(input.intent);
   if(task==='sketch-transition-remove-primitive'){const intent=captureRecord(input.intent,['id']);if(typeof intent.id!=='string'||!intent.id||intent.id.length>256)throw Error('Choose an inspected primitive identity.');payload.intent=Object.freeze({id:intent.id});}
   if(task==='sketch-transition-driving-dimension'){payload.action=input.action;payload.intent=captureDrivingDimensionIntent(input.intent,input.action);}
+  if(task==='sketch-transition-point-distance')payload.intent=capturePointDistanceIntent(input.intent);
   if(task==='sketch-transition-length-relation'){
     const intent=captureRecord(input.intent,['ids','factor','offset']);
     if(!Array.isArray(intent.ids)||Object.getPrototypeOf(intent.ids)!==Array.prototype||intent.ids.length!==2||Reflect.ownKeys(intent.ids).length!==3)throw Error('Invalid length relation intent.');
@@ -108,7 +110,7 @@ export function runSketchTransition(workerUrl: string, task: TransitionTask, req
       bytes+=encoder.encode(text.slice(start,end)).byteLength;if(bytes>1048576)throw Error('Invalid sketch transition result.');start=end;
       if(start<text.length){await new Promise(resolve=>setTimeout(resolve,0));requireCurrent();requireDeadline();}
     }
-    const envelope=captureRecord(result,task==='sketch-transition-constraint-group'?['revision','ok','changed','serializedSketch','evidence','group']:task==='sketch-transition-remove-primitive'?['revision','ok','serializedSketch','evidence','removed']:task==='sketch-transition-driving-dimension'?['revision','ok','changed','serializedSketch','evidence','dimension']:task==='sketch-transition-replay'?['revision','ok','serializedSketch','evidence']:task==='sketch-transition-primitive'?['revision','ok','serializedSketch','evidence','primitive']:task==='sketch-transition-point-coordinate'?['revision','ok','serializedSketch','evidence','point']:task==='sketch-transition-point-coordinates'?['revision','ok','serializedSketch','evidence','points']:(task==='sketch-transition-diameter'||task==='sketch-transition-signed-distance')?['revision','ok','serializedSketch','evidence','dimension']:['revision','ok','serializedSketch','evidence','relation']);
+    const envelope=captureRecord(result,task==='sketch-transition-constraint-group'?['revision','ok','changed','serializedSketch','evidence','group']:task==='sketch-transition-remove-primitive'?['revision','ok','serializedSketch','evidence','removed']:(task==='sketch-transition-driving-dimension'||task==='sketch-transition-point-distance')?['revision','ok','changed','serializedSketch','evidence','dimension']:task==='sketch-transition-replay'?['revision','ok','serializedSketch','evidence']:task==='sketch-transition-primitive'?['revision','ok','serializedSketch','evidence','primitive']:task==='sketch-transition-point-coordinate'?['revision','ok','serializedSketch','evidence','point']:task==='sketch-transition-point-coordinates'?['revision','ok','serializedSketch','evidence','points']:(task==='sketch-transition-diameter'||task==='sketch-transition-signed-distance')?['revision','ok','serializedSketch','evidence','dimension']:['revision','ok','serializedSketch','evidence','relation']);
     let total=0;
     const rows=captureArray(envelope.evidence,10000),evidence=[];
     for(let index=0;index<rows.length;index++){const row=rows[index];
@@ -152,6 +154,11 @@ export function runSketchTransition(workerUrl: string, task: TransitionTask, req
       if(d.axis!==expected.axis||d.typeId!==typeId||ids.length!==expected.ids.length||ids.some((id,i)=>id!==expected.ids[i])||d.distance!==expected.distance||!['accepted','redundant'].includes(d.status)||!evidence.some(row=>row.typeId===typeId&&row.state===d.status))throw Error('Invalid signed distance identity or evidence.');
       output.dimension=Object.freeze({axis:d.axis,typeId:d.typeId,objects:Object.freeze(ids),distance:d.distance,status:d.status});
     }
+    if(task==='sketch-transition-point-distance'){
+      const d=captureRecord(envelope.dimension,['typeId','objects','distance','status','stage','index']),intent=capturePointDistanceIntent({ids:d.objects,distance:d.distance}),expected=payload.intent;
+      if(typeof envelope.changed!=='boolean'||d.typeId!=='DistancePP'||intent.ids.some((id,i)=>id!==expected.ids[i])||d.distance!==expected.distance||d.stage!==0||!Number.isSafeInteger(d.index)||d.index<0||d.index>=evidence.length||!['accepted','redundant'].includes(d.status)||evidence[d.index].typeId!=='DistancePP'||evidence[d.index].state!==d.status)throw Error('Invalid Euclidean point distance identity or final evidence.');
+      output.changed=envelope.changed;output.dimension=Object.freeze({...d,objects:intent.ids});
+    }
     if(task==='sketch-transition-line-relation'){
       const r=captureRecord(envelope.relation,['kind','typeId','objects','stage','index','status','existing']),expected=payload.intent,ids=captureArray(r.objects,3),typeId=expected.kind==='collinear'?'Collinear':'AxisSymmetry';
       if(r.kind!==expected.kind||r.typeId!==typeId||ids.length!==expected.ids.length||ids.some((id,i)=>id!==expected.ids[i])||!Number.isSafeInteger(r.stage)||r.stage<0||r.stage>31||!Number.isSafeInteger(r.index)||r.index<0||r.index>=10000||!['accepted','redundant'].includes(r.status)||typeof r.existing!=='boolean'||(r.existing&&r.status!=='redundant')||(!r.existing&&!evidence.some(row=>row.typeId===r.typeId&&row.state===r.status)))throw Error('Invalid line relation identity or evidence.');
@@ -170,6 +177,9 @@ export function runSketchTransition(workerUrl: string, task: TransitionTask, req
 // Internal coordinator only; candidates do not gain authority by being valid JSON.
 export function verifySignedDistanceCandidate(workerUrl:string,request:any,options:SketchSolveOptions={}){
  return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-signed-distance',...request}),options);
+}
+export function verifyPointDistanceCandidate(workerUrl:string,request:any,options:SketchSolveOptions={}){
+ return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-point-distance',...request}),options);
 }
 export function verifyLineRelationCandidate(workerUrl:string,request:any,options:SketchSolveOptions={}){
  return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-line-relation',...request}),options);

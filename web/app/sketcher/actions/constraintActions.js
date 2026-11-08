@@ -4,6 +4,7 @@ import {addLengthRelation, addLengthRelationByIdsAtRevision, inspectLengthRelati
 import {addDiameter, addDiameterByIdAtRevision, inspectDiameterTargets} from './diameterOperation';
 import {addConcentric, addConcentricByIdsAtRevision, inspectConcentricTargets} from "./concentricOperation";
 import {addSignedDistance,addSignedDistanceByIdsAtRevision,inspectSignedDistanceTargets} from './signedDistanceOperation';
+import {preparePointDistance} from './pointDistanceAdmission';
 import {addLineRelation,addLineRelationByIdsAtRevision,inspectLineRelationTargets} from './lineRelationOperation';
 import {fixEntity,fixEntityByIdAtRevision,inspectFixEntityTargets,releaseFixEntityInspection} from './fixEntityOperation';
 import {createRigidGroup,createRigidGroupByIds,inspectRigidGroups,releaseRigidGroupInspection,editRigidGroupById,rigidGroupForMember} from '../rigid/rigidGroupOperation';
@@ -670,7 +671,9 @@ export default [
 
       editConstraint(ctx, constr, () => {
         const pm = viewer.parametricManager;
-        pm.add(constr);
+        const prepared=preparePointDistance(pm,[p1,p2],constr.constants.distance);
+        if(!prepared.existing)addConstraintGroup(pm,[prepared.constraint],prepared.validate);
+        else prepared.validate(pm.stages);
       });
     }
   },

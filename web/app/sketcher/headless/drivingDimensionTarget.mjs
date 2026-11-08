@@ -1,9 +1,11 @@
 // Revision-bound discovery addresses. These are never persisted constraint IDs.
 const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
 export const signedDrivingDimension=type=>type==='SignedDistanceX'||type==='SignedDistanceY';
-export const drivingLengthField=type=>type==='SegmentLength'?'length':type==='DiameterLength'?'diameter':signedDrivingDimension(type)?'distance':null;
-export const drivingDimensionObjectCount=type=>drivingLengthField(type)?signedDrivingDimension(type)?2:1:0;
-export const drivingDimensionValueValid=(type,v)=>typeof v==='number'&&Number.isFinite(v)&&!!drivingLengthField(type)&&(signedDrivingDimension(type)?Math.abs(v)<=1e6:v>0&&v<=1e6);
+export const pointDrivingDimension=type=>signedDrivingDimension(type)||type==='DistancePP';
+export const drivingLengthField=type=>type==='SegmentLength'?'length':type==='DiameterLength'?'diameter':pointDrivingDimension(type)?'distance':null;
+export const drivingDimensionObjectCount=type=>drivingLengthField(type)?pointDrivingDimension(type)?2:1:0;
+export const drivingDimensionValueValid=(type,v)=>typeof v==='number'&&Number.isFinite(v)&&!!drivingLengthField(type)&&(signedDrivingDimension(type)?Math.abs(v)<=1e6:type==='DistancePP'?v>=0&&v<=1e6:v>0&&v<=1e6);
+export const drivingPointDimensionValue=(type,a,b)=>type==='SignedDistanceX'?b.x-a.x:type==='SignedDistanceY'?b.y-a.y:type==='DistancePP'?Math.hypot(b.x-a.x,b.y-a.y):NaN;
 const identifier=/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/;
 /** @returns {Readonly<{constraintId:string,value?:number|string}>} */
 export function captureDrivingDimensionIntent(value,action){
@@ -16,17 +18,17 @@ export function captureDrivingDimensionIntent(value,action){
 }
 export function dimensionLocator(stage,index,constraint){return 'sketch-driving-constraint:1:'+JSON.stringify([stage,index,constraint.typeId,constraint.objects]);}
 // pointRows are private Worker projections of this exact verified source, never
-// caller geometry authority. Legacy metadata-only callers have no signed targets.
+// caller geometry authority. Metadata-only callers have no point-pair targets.
 export function discoverDrivingDimensions(sketch,pointRows=[]){
  const objects=new Map(sketch.objects.map(o=>[o.id,o])),rows=[];let pointMap=null;
  const points=()=>{if(pointMap)return pointMap;pointMap=new Map();
   if(!Array.isArray(pointRows)||pointRows.length>30000)fail('INVALID_TARGET','Invalid authored point projection.');
   for(const p of pointRows){if(!p||typeof p.id!=='string'||!p.id||p.id.length>256||!Number.isFinite(p.x)||!Number.isFinite(p.y)||pointMap.has(p.id))fail('INVALID_TARGET','Ambiguous or invalid authored point identity.');pointMap.set(p.id,p);}return pointMap;};
  sketch.stages.forEach((stage,si)=>stage.constraints.forEach((c,index)=>{
-  const field=drivingLengthField(c.typeId),signed=signedDrivingDimension(c.typeId),o=c.objects?.length===1?objects.get(c.objects[0]):null;
+  const field=drivingLengthField(c.typeId),pair=pointDrivingDimension(c.typeId),o=c.objects?.length===1?objects.get(c.objects[0]):null;
   let supported=!!field&&c.constants&&Object.keys(c.constants).length===1&&Object.hasOwn(c.constants,field)&&['string','number'].includes(typeof c.constants[field]),resolvedValue=null;
-  if(signed){const refs=c.objects,p=points();supported=!!supported&&Array.isArray(refs)&&refs.length===2&&refs[0]!==refs[1]&&refs.every(id=>typeof id==='string'&&id.length>0&&id.length<=256&&p.has(id));
-   if(supported){const a=p.get(refs[0]),b=p.get(refs[1]);resolvedValue=c.typeId==='SignedDistanceX'?b.x-a.x:b.y-a.y;}}
+  if(pair){const refs=c.objects,p=points();supported=!!supported&&Array.isArray(refs)&&refs.length===2&&refs[0]!==refs[1]&&refs.every(id=>typeof id==='string'&&id.length>0&&id.length<=256&&p.has(id));
+   if(supported)resolvedValue=drivingPointDimensionValue(c.typeId,p.get(refs[0]),p.get(refs[1]));}
   else{supported=!!supported&&!!o&&(c.typeId==='SegmentLength'?o.type==='Segment':['Circle','Arc'].includes(o.type));if(supported){const d=o.data;resolvedValue=o.type==='Segment'?Math.hypot(d.b.x-d.a.x,d.b.y-d.a.y):2*(o.type==='Circle'?d.r:Math.hypot(d.a.x-d.c.x,d.a.y-d.c.y));}}
   const admitted=supported&&drivingDimensionValueValid(c.typeId,resolvedValue)&&['accepted','redundant'].includes(c.admission?.state);
   rows.push(Object.freeze({constraintId:admitted?dimensionLocator(si,index,c):null,stage:si,index,typeId:c.typeId,objects:Object.freeze([...c.objects]),unit:field?'millimeter':null,
@@ -50,7 +52,7 @@ const equal=(a,b)=>{if(a===b)return true;if(!a||!b||typeof a!=='object'||typeof 
 const semantic=c=>{const x={...c};delete x.admission;return x;};
 function base(sketch){return {...sketch,objects:sketch.objects.map(o=>({...o,data:null})),stages:sketch.stages.map(s=>({...s,constraints:[]}))};}
 // Structural proof only; real solver and geometry/residual validation required.
-export function classifyDrivingDimensionDelta(before,after){
+export function classifyDrivingDimensionDelta(before,after,beforePoints=[],afterPoints=[]){
  if(!equal(base(before),base(after)))fail('INTENT_CHANGED','Unrelated sketch intent changed.');let change=null;
  for(let stage=0;stage<before.stages.length;stage++){
   const a=before.stages[stage].constraints,b=after.stages[stage].constraints;
@@ -58,14 +60,14 @@ export function classifyDrivingDimensionDelta(before,after){
   if(a.length===b.length&&i===a.length)continue;
   if(change||Math.abs(a.length-b.length)>1)fail('INTENT_CHANGED','Exactly one existing dimension may change.');
   const action=a.length===b.length?'edit':a.length>b.length?'remove':'insert',c=action==='insert'?b[i]:a[i],field=drivingLengthField(c?.typeId);
-  if(!field||c.objects?.length!==drivingDimensionObjectCount(c.typeId)||!c.constants||Object.keys(c.constants).length!==1)fail('UNSUPPORTED','Only supported lengths and ordered signed X/Y dimensions may change.');
+  if(!field||c.objects?.length!==drivingDimensionObjectCount(c.typeId)||!c.constants||Object.keys(c.constants).length!==1)fail('UNSUPPORTED','Only supported lengths, Euclidean point distance and ordered signed X/Y dimensions may change.');
   if(action==='edit'){
    const restored={...b[i],constants:{...b[i].constants,[field]:c.constants[field]}};
    if(!equal(semantic(c),semantic(restored)))fail('INTENT_CHANGED','The dimension identity or annotation changed.');
   }
   const offset=action==='remove'?1:0,other=action==='insert'?1:0;
   for(let j=i+(action==='edit'?1:0);j+offset<a.length;j++)if(!equal(semantic(a[j+offset]),semantic(b[j+other])))fail('INTENT_CHANGED','Other constraints changed.');
-  const source=action==='insert'?after:before,row=resolveDrivingDimension(source,dimensionLocator(stage,i,c));
+  const source=action==='insert'?after:before,row=resolveDrivingDimension(source,dimensionLocator(stage,i,c),action==='insert'?afterPoints:beforePoints);
   change={action,stage,index:i,typeId:c.typeId,objects:[...c.objects],field,beforeValue:action==='insert'?null:c.constants[field],afterValue:action==='remove'?null:b[i].constants[field],constraintId:row.constraintId};
  }
  return change?Object.freeze(change):null;

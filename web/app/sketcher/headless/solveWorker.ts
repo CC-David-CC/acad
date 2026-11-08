@@ -73,6 +73,10 @@ self.onmessage = async event => {
         const {verifySignedDistanceCandidate}=require('./verifySignedDistanceCandidate');
         const {task,...payload}=request;self.postMessage(verifySignedDistanceCandidate(payload));return;
       }
+      if(request.task==='sketch-transition-point-distance'||request.task==='sketch-transition-verify-point-distance'){
+        const {addPointDistanceTransition,verifyPointDistanceCandidate}=require('./pointDistanceTransition');
+        const {task,...payload}=request;self.postMessage(task==='sketch-transition-point-distance'?addPointDistanceTransition(payload):verifyPointDistanceCandidate(payload));return;
+      }
       if (request.task === 'sketch-transition-verify-line-relation') {
         const {verifyTransitionCandidate}=require('./verifyTransitionCandidate');
         const {task,...payload}=request;self.postMessage(verifyTransitionCandidate('line-relation',payload));return;

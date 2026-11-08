@@ -3,12 +3,12 @@
 export function addConstraintGroup(pm, constraints, validateExtra, mutate) {
   if (pm.inTransaction) throw new Error('Finish the current sketch operation first.');
   const history = pm.viewer.historyManager;
-  const before = Array.isArray(history.diffs) ? {
+  const before = Array.isArray(history?.diffs) ? {
     diffs: [...history.diffs], pointer: history.historyPointer,
     last: history.lastCheckpoint, counter: history._counter
   } : null;
   try {
-    history._checkpoint();
+    if (history) history._checkpoint();
     pm.startTransaction();
     if(mutate)mutate(pm);else for (const constraint of constraints) pm._add(constraint);
     pm.finishTransaction(stages => {
