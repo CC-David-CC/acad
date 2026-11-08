@@ -45,6 +45,49 @@ accepted Native handles or a display-mesh/manufacturing fallback.
 
 ## Complete prepared application workflow
 
+### R1 creation-Undo allocation correction (source-only)
+
+Frozen packet23858 and the complete R1 FAIL remain unchanged. The actual R1
+public receipts allocated parent feature IDs1/2 and subtraction ID3. Initial
+subtraction19000 and genuine creation Undo completed; the driver then compared
+Undo counters3 against the pre-creation counters2 and failed before parent point
+checks or any Save. Before/after that actual Undo were BOTH `{featureId:3}`.
+This is an incorrect harness expectation, not evidence of a product rollback
+defect or a completed E16 workflow.
+
+`web/app/cad/projectBundle.ts` ProjectCounterGenerator.generateFeatureId
+increments the high-water mark. releaseFeatureId only removes a reservation;
+it never decrements the mark. Consumed/skipped IDs stay unavailable for reuse.
+Craft's authored operation-append travel reconstructs history from the saved
+operation/feature ID; it does not allocate a replacement or reset counters.
+The native Save model explicitly captures that current high-water mark.
+
+The corrected assertions are deliberately separate:
+
+| Comparison | Exact expected counter |
+| --- | --- |
+| Actual two parent creations | actual returned TOOL feature ID (R1:2), consecutive to OUTER |
+| Actual subtraction creation | parent high-water+1, actual returned subtraction ID (R1:3) |
+| Immediate subtraction-creation Undo against original parents | subtraction-created snapshot high-water (R1:3), while exact earlier parent history/source is restored |
+| Immediate creation Redo against subtraction-created snapshot | exact entire source INCLUDING counter3 |
+| Actual later suffix creation | subtraction high-water+1, actual returned suffix ID (expected4 in this ordinary fresh project) |
+| Numeric source Undo against suffix snapshot | exact entire source INCLUDING suffix high-water |
+| Later mixed subtraction-creation Undo against original parents | exact suffix snapshot high-water (expected4), while exact earlier parent history/source is restored |
+| EVERY individual Undo/Redo, including append/suffix travel | exact equality with that travel's immediately-before counters; no allocation or decrement |
+| Save and each fresh Open | existing exact captured source/counters and archived model counters; no exception |
+
+Only the two creation-Undo comparisons use the separately named earlier-source/
+current-high-water helper. The existing sameSource comparison still includes
+counters at every other callsite. Actual feature IDs come from public receipts,
+not opaque-ID parsing. The after-whole independent checker repeats the creation
+sequence, both exact creation-Undo expectations, each travel's invariant and
+unchanged Redo/numeric/Save/Open requirements. Geometry, Native material/void
+queries, refusal preservation, all three .cad cycles and multi STEP checks are
+unchanged. No product counter reset, blanket omission or assertion skip exists.
+
+This correction was prepared by reading source and frozen evidence only. No
+driver, checker, test, probe, build or browser was executed during preparation.
+
 `example.mjs` invokes only existing registered commands. The driver authors all
 boxes normally, captures their actual feature/output receipts and uses those
 opaque IDs. Private frame reads are detached observations of source/resources,

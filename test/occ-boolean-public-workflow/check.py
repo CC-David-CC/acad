@@ -162,6 +162,28 @@ def observations(r,facts):
     require(any(t['kind']=='operation-append' and t['direction']=='undo' for t in r['travels']) and any(t['kind']=='operation-append' and t['direction']=='redo' for t in r['travels']),'actual append Undo AND Redo')
     require(sum(t['kind']=='solid-box' for t in r['travels'])>=8,'mixed original box/source edits, not only append travel')
     return observations,point_count
+def allocation_contract(r,facts):
+    initial=one([o for o in r['observations'] if o['label']=='Actual ordinary subtract19000 material/void'],'actual initial subtract observation')
+    suffix=one([o for o in r['observations'] if o['label']=='Actual unrelated suffix box24 retains Boolean and parent consumption'],'actual later suffix observation')
+    ids=initial['bindings'];parent_high=ids['tool']['featureId'];created_high=ids['result']['featureId'];suffix_high=suffix['bindings']['suffix']['featureId']
+    require(parent_high==ids['outer']['featureId']+1 and created_high==parent_high+1 and suffix_high==created_high+1,'actual public creation receipts advance allocation exactly once')
+    require(initial['before']['capture']['native']['counters']=={'featureId':created_high} and suffix['before']['capture']['native']['counters']=={'featureId':suffix_high},'exact allocated creation high-water snapshots')
+    for row in r['travels']:
+        before=row['before']['capture']['native']['counters'];after=row['after']['capture']['native']['counters']
+        require(set(before)=={'featureId'} and type(before['featureId']) is int and 0<=before['featureId']<=2**53-1,'actual finite allocation-counter contract')
+        require(after==before,'every actual Undo/Redo preserves exact already allocated high-water')
+    parents=initial['before']['capture']['native']['history'][:2]
+    for label,high in [('Immediate SUBTRACTION CREATION Undo',created_high),('Mixed Undo SUBTRACTION CREATION',suffix_high)]:
+        row=one([t for t in r['travels'] if t['label']==label],'required genuine creation Undo')
+        require(row['kind']=='operation-append' and row['direction']=='undo','creation Undo is actual shared append chronology')
+        native=row['after']['capture']['native'];require(native['history']==parents and native['counters']=={'featureId':high} and high>parent_high,'creation Undo restores exact earlier parents while retaining later allocation high-water')
+        for key in ('source','sketches','expressions','presentation'):require(native[key]==initial['before']['capture']['native'][key],'creation Undo retains all other authored source fields '+key)
+        history(row['case'],row['bindings'],row['after'],r,facts)
+    redo=one([t for t in r['travels'] if t['label']=='Immediate SUBTRACTION CREATION Redo'],'required immediate creation Redo')
+    mixed=one([t for t in r['travels'] if t['label']=='Mixed Undo outer dimensions'],'required numeric-edit Undo')
+    for actual,expected in [(redo['after'],initial['before']),(mixed['after'],suffix['before'])]:
+        for key in ('history','source','sketches','expressions','counters','presentation'):require(actual['capture']['native'][key]==expected['capture']['native'][key],'Redo/numeric travel retains exact source INCLUDING counters '+key)
+    return {'everyTravelPreservesCounters':len(r['travels']),'parentHighWater':parent_high,'createdHighWater':created_high,'suffixHighWater':suffix_high,'creationUndoCounterRollback':'forbidden'}
 def refusals(r,facts):
     seen=set()
     for row in r['refusals']:
@@ -283,8 +305,8 @@ def step_readback(root,r,facts):
 def main():
     require(len(sys.argv)==2,'usage: check.py COMPLETE_EVIDENCE_DIRECTORY');root=Path(sys.argv[1]).resolve();r=json.loads((root/'receipt.json').read_text());require(r['status']=='PASS','complete public workflow must PASS first; retain all original failures')
     archive=custody(root,r);facts=json.loads((HERE/'cases.json').read_text());require(facts['version']==1 and facts['unit']=='millimeter' and r['budgets']==facts['budgets'],'frozen analytic budgets/unit')
-    obs,points=observations(r,facts);refusals(r,facts);contact=contacts(r,facts);native=saves(root,r,facts,archive);step=step_readback(root,r,facts)
-    return {'status':'PASS','scope':'complete finite public OCC Boolean/source/creation travel/.cad and actual multi STEP geometry; no universal manifold/backend/precision/Gate1 signoff','observations':obs,'nativePointClassifications':points,'nativeArchives':native,'refusals':len(r['refusals']),'contactManifoldGate':'OPEN','contactControls':contact,'multiSTEP':step,'exactInterfaceSanity':{'fullFaceJoin_10_5_5':'inside','notchFaceOpening_10_7_7':'outside'}}
+    obs,points=observations(r,facts);allocation=allocation_contract(r,facts);refusals(r,facts);contact=contacts(r,facts);native=saves(root,r,facts,archive);step=step_readback(root,r,facts)
+    return {'status':'PASS','scope':'complete finite public OCC Boolean/source/creation travel/.cad and actual multi STEP geometry; no universal manifold/backend/precision/Gate1 signoff','observations':obs,'nativePointClassifications':points,'nativeArchives':native,'allocation':allocation,'refusals':len(r['refusals']),'contactManifoldGate':'OPEN','contactControls':contact,'multiSTEP':step,'exactInterfaceSanity':{'fullFaceJoin_10_5_5':'inside','notchFaceOpening_10_7_7':'outside'}}
 if __name__=='__main__':
     try:print(json.dumps(main(),indent=2))
     except Exception as error:print(json.dumps({'status':'ORACLE_REFUSED','error':type(error).__name__,'message':str(error)},indent=2));sys.exit(1)
