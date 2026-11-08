@@ -1,5 +1,9 @@
 # One original-rectangle integrated workflow
 
+Current qualification: [complete application and artifact PASS](evidence-r1/README.md),
+frozen ACAD9afec3f. The source-preparation description below retains its original
+status; actual runtime, scope, exported files and reader evidence are in that packet.
+
 SOURCE COMPLETE, UNTESTED. Prepared in a new R730 ACAD checkout from independent fresh main631ca61. No source, type, unit, build or browser checks were executed during implementation. Parent owns composition, exact served pins and whole-workflow qualification. No E17, UI, full Gate1, physical print/slicer or independent external STEP implementation claim.
 
 Existing registered public commands cover this chain; no new product bridge, alternate model, Native API, material provider or persistence format was added. Source ownership is ONLY new test/original-rectangle-workflow/. Native/ledger inset-label work and PM/io ordinary-validation work stay separate.
