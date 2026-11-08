@@ -1,5 +1,16 @@
 # Browser CAD command examples
 
+The finite two-Circle hardcoded public path is qualified in ACAD's
+`test/circular-arrangement-workflow/desktop-driver.mjs` with its README and
+QUALIFICATION.md (proof235b8de). It uses genuine source creation and actual
+`inspect-selected-profiles`/`inspect-selected-regions` results before
+`create-selected-extrusion`; never construct opaque region IDs yourself.
+Supply the explicitly staged9789a617/707facb3 engine revision. Source dimension
+and region repair require actual discovery/current revisions. Fifteen .cad
+Save/server/freshOpen checkpoints and the independent artifact checker pass.
+This is finite Circle-cell support, not general mixed-curve arrangements.
+
+
 [RadiusLength recipe](radius-length.mjs) is the exact public-command helper used
 by the qualified finite Circle/quarter-Arc workflow (Core d0069f0, Desktop dd58df71e).
 It discovers actual identities, anchors centers, creates/edits/removes radius,

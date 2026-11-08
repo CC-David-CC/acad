@@ -1,5 +1,15 @@
 # CAD Modeler (JSketcher inspired)
 
+Finite two-Circle region workflow now qualified (Coref2574ea/Desktop70f096c23,
+proof ACAD235b8de): lens/both crescents, externally tangent separate bodies,
+coincident source owners and retained nested/disjoint cells; dimension/depth
+edits, mixed travel, explicit lost-region repair and15native Save/server/fresh
+Open checkpoints. Independent analytic/archive/material queries PASS. Native
+cohort9789a617/707facb3 stays explicit/experimental; no default promotion. Near
+boundary cases are source-only; general Arc/multi-circle arrangements and ABI
+fault controls remain open. No public or beta deployment follows this proof.
+
+
 Latest finite RadiusLength qualification: Cored0069f0/Desktopdd58df71e complete
 Chrome workflow and first independent artifact checker PASS. Actual Circle and
 quarter-Arc numeric radius creation/edit/removal, Diameter redundancy and
