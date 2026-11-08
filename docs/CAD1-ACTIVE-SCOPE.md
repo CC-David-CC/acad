@@ -32,12 +32,22 @@ implementation. Assemblies E17/C10 remain Gate2.
 | Line orientation R12 | Scoped PASS618cf39; independent bounded50pm oracle PASS c702b49 | Retain frozen evidence; qualify affected changes on later builds |
 | Native `.cad` R6 | Scoped PASS49db2da; independent artifact oracle PASS | Retain frozen evidence; capacity/memory/ARC23 remain separate |
 | Length measurement roles R1 | FAIL Desktop53363ab16 after56 checkpoints/3saves, at final typed configuration setup | Isolated ordinary Point repair integrated01fe7c5/c7cca14/5c4e036; build and rerun unchanged full workflow |
-| Feature history controls R1 | FAIL3b8a32f after25 checkpoints, before save | Explicit rectangle-dimension construction/travel repair in progress; build and rerun unchanged full workflow |
+| Feature history controls R1 | FAIL3b8a32f after25 checkpoints, before save | Explicit rectangle-dimension construction/travel repair integrated168c28a plus root Worker dispatch; build and rerun unchanged full workflow |
 
 Actual last qualified composition remains Core32ae9c8/Desktop60ec30ee9. New
 source repairs are not qualification evidence. C08 custom source-frame work is
 isolated and excluded from this repair batch. A four-of-four batch result would
 not close the remaining finite competencies or the final beta/agent delivery.
+
+Repair composition source review:168c28a carries7ac46c53f5141e6fcc00ca32effddd9ac96d7d73
+from the isolated lane; root adds only the dedicated solveWorker task dispatch.
+Main drafts from current source; Worker proves actual original dimension-row
+ownership and only the two intended literal changes. The finite canonical
+constructor preserves declared corners and original-equation/cold proofs.
+Legacy noncanonical sources keep the generic path. Journal travel independently
+validates and returns exact historical source bytes. Ordinary extrusion/read/
+Open dispatch, exact-axis checks, expected HOLE_OUTSIDE_PROFILE and all existing
+publication/currentness guards remain unchanged. No execution PASS follows yet.
 
 The sections below retain chronological implementation and execution notes.
 Statements such as “running,” “queued,” and “not qualified yet” describe those
