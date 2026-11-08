@@ -11,6 +11,7 @@ import {registerClosedSketchCommands} from './closed-sketch-commands.mjs';
 import {registerLengthMeasurementCommands} from './length-measurement-commands.mjs';
 import {registerRadiusCommands} from './radius-commands.mjs';
 import {registerCoincidenceCommands} from './coincidence-commands.mjs';
+import {registerFixedEntityCommands} from './fixed-entity-commands.mjs';
 import {registerFeatureHistoryCommands} from './feature-history-commands.mjs';
 import {registerPrimitiveCommands} from './primitive-commands.mjs';
 import {createRectangleController} from './rectangle-commands.mjs';
@@ -212,6 +213,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerLengthMeasurementCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerRadiusCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerCoincidenceCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerFixedEntityCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerFeatureHistoryCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileRegionCommands(host,()=>rectangle.target()));
