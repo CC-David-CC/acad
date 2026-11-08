@@ -61,7 +61,10 @@ its constants using `c.resolveConstants(pm.constantResolver)` and check its real
 registered domain/original equations (`sketchValidation.ts:validateConstraintGeometry`
 and schema-specific direction checks). Decoding does not initialize
 `resolvedConstants`; the later shared scope pass cannot rescue an earlier selector
-read. Retain raw names/expressions, units and bindings—never seed a numeric cache
+read. A proposed row may have an unsatisfied original-coordinate residual;
+handle that through its authenticated moving branch, without suppressing domain
+failures or skipping original-row validation. Retain raw names/expressions, units
+and bindings—never seed a numeric cache
 or replace a formula with its present value.
 
 ## Authoritative rows, admission and proof
@@ -87,7 +90,8 @@ structural data substitution, self-membership or matching residual arrays is not
 independent intent proof. Keep existing replay/branch/unit policies; coordinate
 budgets do not relax radii/angles, minima or source identity. The shared coordinator
 still guards document/source/frame/history/J/lifetime around awaits and one
-full-suffix publication; every candidate is retired on failure/cancellation.
+full-suffix publication. Attempt every candidate retirement on failure/cancellation;
+unconfirmed cleanup remains explicit and cannot be reported as clean release.
 
 ## Qualification and domain limits
 
