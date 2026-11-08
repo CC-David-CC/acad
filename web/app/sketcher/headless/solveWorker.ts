@@ -38,6 +38,7 @@ self.onmessage = async event => {
         } catch (_) {self.postMessage({revision,ok:false,error:{code:'INVALID',message:'Empty sketch could not be prepared.'}});}
         return;
       }
+      if(['sketch-transition-fixed-entity','sketch-transition-verify-fixed-entity','sketch-transition-verify-fixed-travel'].includes(request.task)){const {changeFixedEntity,verifyFixedEntityCandidate,verifyFixedEntityTravel}=require('./fixedEntityTransition');const {task,...payload}=request;self.postMessage(task==='sketch-transition-fixed-entity'?changeFixedEntity(payload):task==='sketch-transition-verify-fixed-entity'?verifyFixedEntityCandidate(payload):verifyFixedEntityTravel(payload,true));return;}
       if(request.task==='sketch-transition-mirror'||request.task==='sketch-transition-verify-mirror'){
         const {createSketchMirror,verifySketchMirror}=require('./mirrorTransition');const {task,...payload}=request;self.postMessage(task==='sketch-transition-mirror'?createSketchMirror(payload):verifySketchMirror(payload));return;
       }
