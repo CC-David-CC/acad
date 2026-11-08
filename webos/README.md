@@ -1,5 +1,13 @@
 # CAD Modeler (JSketcher inspired)
 
+Latest2026-11-08: real timeline/selected EDIT/floating/shortcut navigation and
+passive-prefix keyboard UndoRedo have scoped complete R1 qualification
+(ACAD6895c51; runtimeCore2e14280/Desktop18c621383). Eighteen real events,
+16Native observations/48points and two .cad Save-sync-freshOpen cycles pass the
+independent checker. Active draft navigation correctly refuses without changing
+accepted state; actual Cancel retains its prefix. Principal Apply remains open.
+See docs/evidence/CAD-GATE1-BASELINE-20261106.md and docs/STATE-MACHINES.md.
+
 [JavaScript examples and README](examples/README.md) document the shared public
 command registry, explicit window selection and current revision/geometry IDs.
 Agent tools/New/Open are source work being qualified; the earlier6f CAD build
