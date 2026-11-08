@@ -6,7 +6,7 @@ import {PlaneSurfacePrototype} from '../../../../../web/app/cad/model/surfacePro
 import CSys from "math/csys";
 import {EntityKind} from "cad/model/entities";
 import icon from "./PLANE.svg";
-import {canonicalAuthoredFeatureId} from 'cad/craft/authoredFeatureIdentity.mjs';
+import {sourcePlaneShellId} from 'cad/craft/sourcePlaneIdentity.mjs';
 
 
 function paramsToPlane({ orientation, datum, depth }) {
@@ -26,19 +26,8 @@ function paramsToPlane({ orientation, datum, depth }) {
   return new Plane(axis, w);
 }
 
-// Source identity belongs to the saved authored producer, not to how many
-// unrelated shells happened to be constructed earlier during this replay.
-// Read the raw ID, so evaluating an expression cannot manufacture an identity.
-export function sourcePlaneShellId(raw, materializedFeatureId) {
-  const descriptor = raw && typeof raw === 'object' && !Array.isArray(raw)
-    ? Object.getOwnPropertyDescriptor(raw, 'featureId') : null;
-  const value = descriptor && Object.prototype.hasOwnProperty.call(descriptor, 'value') ? descriptor.value : undefined;
-  const featureId = canonicalAuthoredFeatureId(value);
-  if (!descriptor?.enumerable || !Number.isSafeInteger(featureId) || featureId <= 0 || materializedFeatureId !== featureId) {
-    throw Object.assign(new Error('Plane identity requires its canonical saved positive safe feature ID.'), {code:'INVALID_FEATURE_ID'});
-  }
-  return 'source-plane:1:' + JSON.stringify([featureId, 'body']);
-}
+// Stable authored source identity is shared with Worker preflight.
+export {sourcePlaneShellId} from 'cad/craft/sourcePlaneIdentity.mjs';
 
 
 function previewGeomProvider(params) {

@@ -4,7 +4,8 @@ import {Plane} from 'geom/impl/plane';
 import CSys from 'math/csys';
 import Vector from 'math/vector';
 import {Types} from 'cad/craft/schema/types';
-import standardPlaneOperation,{sourcePlaneShellId} from '../plane/simplePlaneOperation';
+import standardPlaneOperation from '../plane/simplePlaneOperation';
+import {sourcePlaneShellId,sourcePlaneFaceId} from 'cad/craft/sourcePlaneIdentity.mjs';
 import {captureSourceFrameParameters,SOURCE_FRAME_TYPE,sourceFrameFail as fail} from 'engine/source/sourceFrameIntent.mjs';
 import {canonicalAuthoredFeatureId} from 'cad/craft/authoredFeatureIdentity.mjs';
 import {captureSourcePlaneParameters} from 'sketcher/headless/sourcePlaneDepthEnvelope.mjs';
@@ -24,7 +25,7 @@ const sourceFrameRun=async(params:any,ctx:any,raw:any)=>{
   if(entry.type==='PLANE'){captureSourcePlaneParameters(entry.params);if(op.run!==PRINCIPAL_RUN||op.admitGeometry)fail('UNSUPPORTED_FRAME_PARENT','The principal source implementation changed.');}
   else if(entry.type===SOURCE_FRAME_TYPE){captureSourceFrameParameters(entry.params);if(op.run!==sourceFrameRun)fail('UNSUPPORTED_FRAME_PARENT','The custom source implementation changed.');}
   else fail('UNSUPPORTED_FRAME_PARENT','Only authored source-plane parents are supported.');
-  let depth=0,walk=entry;while(walk.type===SOURCE_FRAME_TYPE){if(++depth>16)fail('RESOURCE_LIMIT','Source attachment depth exceeds16.');const a=captureSourceFrameParameters(walk.params);if(!a.parent)break;const next=history.findIndex((v:any)=>canonicalAuthoredFeatureId(v.params.featureId)===a.parent.featureId);if(next<0||next>=history.indexOf(walk))fail('INVALID_FRAME_DEPENDENCY','Source parents must be earlier and acyclic.');walk=history[next];}
+  let depth=0,walk=entry;while(walk.type===SOURCE_FRAME_TYPE){if(++depth>16)fail('RESOURCE_LIMIT','Source attachment depth exceeds16.');const a=captureSourceFrameParameters(walk.params);if(!a.parent)break;const next=history.findIndex((v:any)=>canonicalAuthoredFeatureId(v.params.featureId)===a.parent.featureId);if(next<0||next>=history.indexOf(walk))fail('INVALID_FRAME_DEPENDENCY','Source parents must be earlier and acyclic.');walk=history[next];}if(walk.type==='PLANE'&&++depth>16)fail('RESOURCE_LIMIT','Source attachment depth exceeds16.');
   parentFrame=sketchBoundaryFrame(parent);
  }
  const parentText=parent?JSON.stringify(parentFrame):null,parameterText=JSON.stringify(p);
@@ -39,4 +40,4 @@ const sourceFrameRun=async(params:any,ctx:any,raw:any)=>{
 export default {id:SOURCE_FRAME_TYPE,label:'Source frame',info:'Explicit numeric source frame and earlier source-plane attachment.',icon:'img/cad/plane',form:[],schema:{featureId:{type:Types.number}},admitGeometry:()=>{},paramsInfo:()=>'(source frame)',run:sourceFrameRun};
 
 // Internal producer identity, never a caller-supplied native locator.
-export function sourceFrameFaceId(featureId:number){return sourcePlaneShellId({featureId},featureId)+'/SURFACE';}
+export const sourceFrameFaceId=sourcePlaneFaceId;

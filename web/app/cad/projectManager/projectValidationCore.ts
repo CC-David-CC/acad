@@ -1,4 +1,5 @@
 import {captureSourceFrameParameters} from 'engine/source/sourceFrameIntent.mjs';
+import {validateProjectSourceFrames} from 'sketcher/headless/sourceFrameValidation';
 import {decodeProjectEnvelope, validateProjectTree} from './projectEnvelope.mjs';
 import {validateProjectSketch} from 'sketcher/io';
 import {parseMathDefinitions} from 'gems/safeExpression.mjs';
@@ -43,5 +44,6 @@ export function preflight(value, parameterState?: {source?: string, result?: any
     validateProjectSketch(data);
     if (data.constants !== undefined && parseMathDefinitions(data.constants).errors.length) throw new Error('A sketch contains invalid constants');
   }
+  validateProjectSourceFrames(project);
   return value;
 }

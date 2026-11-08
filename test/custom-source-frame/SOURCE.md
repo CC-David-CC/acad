@@ -67,3 +67,14 @@ solid-face parent locators remain explicitly unavailable in this phase.
 Complete public driver/oracle is prepared separately. It must run once only on
 the composed normal app, retain actual failures and qualify real Native results,
 source preservation, creation/edit/mixed travel, refusals and `.cad` Save/Open.
+
+Follow-up source factoring shares unchanged stable source naming through pure
+sourcePlaneIdentity.mjs and frame math through Worker-only sourceFrameMath.ts.
+The project-validation Worker now checks phase-A source attachment causal order,
+actual constructor identity convention, depth bound and derived frame-cache
+relation before adoption, in addition to rechecking it in real candidate replay.
+Old histories without SOURCE_FRAME_V1 take no new frame-validation path. No
+Native parent frame is approximated; phaseB locators remain unadmitted. Root
+known-code forwarding should preserve STALE_FRAME, UNRESOLVED_SOURCE and
+UNSUPPORTED_FRAME_PARENT too. This is needed for own malformed-cache/parent
+NativeOpen controls; it does not change PM/codec/archive-owner/Files.
