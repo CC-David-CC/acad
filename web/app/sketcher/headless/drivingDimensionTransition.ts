@@ -10,7 +10,9 @@ import {captureAdmissionCause,causeForSolveStatus,withAdmissionCause} from '../c
 import {validateConstraintGeometry} from './sketchValidation';
 import {sameRestoredSketch} from '../historyEquivalence.mjs';
 import {assertVerifiedReplayGeometry,assertUnrelatedSignedGeometry} from './verifiedReplayGeometry';
-import {firstCapturedGeometryDifference} from './capturedGeometryScope';
+import {firstCapturedGeometryDifference,captureConnectedGeometryScope,applyCapturedGeometry,assertCapturedGeometryScope} from './capturedGeometryScope';
+import {evaluateCapturedSketch} from './capturedSketchEvaluation';
+import type {CapturedAuxiliaryWitnessBatch} from './capturedParameterOwnership';
 import {ConstraintDefinitions} from '../constr/ANConstraints';
 import {Segment} from '../shapes/segment';
 import {EndPoint} from '../shapes/point';
@@ -21,7 +23,7 @@ function record(v:any,keys:string[]){if(!v||typeof v!=='object'||Array.isArray(v
 function external(v:any){const o=record(v,Reflect.ownKeys(v||{}) as string[]),out=Object.create(null);if(Object.keys(o).length>1024)throw fail('LIMIT','Too many dimension parameters.');for(const k of Object.keys(o)){if(!k||k.length>256||typeof o[k]!=='number'||!Number.isFinite(o[k])||Math.abs(o[k])>1e9)throw fail('INVALID','Invalid dimension parameter.');out[k]=o[k];}return out;}
 function bounded(v:any){if(typeof v!=='string'||v.length>1048576||new TextEncoder().encode(v).byteLength>1048576)throw fail('LIMIT','The dimension source exceeds its limit.');return v;}
 function revisionOf(v:any){const d=v&&Object.getOwnPropertyDescriptor(v,'revision');return d?.enumerable&&Object.prototype.hasOwnProperty.call(d,'value')&&typeof d.value==='string'?d.value:'';}
-function replay(revision:string,text:string,bindings:any){const r=replaySketchTransition({revision,sketchJSON:bounded(text),externalParameters:bindings});if(!r.ok||!('serializedSketch' in r))throw Object.assign(Error(r.error.message),r.error);return r;}
+function replay(revision:string,text:string,bindings:any,onAuxiliaryWitness?:(batch:CapturedAuxiliaryWitnessBatch)=>void){const r=replaySketchTransition({revision,sketchJSON:bounded(text),externalParameters:bindings},onAuxiliaryWitness);if(!r.ok||!('serializedSketch' in r))throw Object.assign(Error(r.error.message),r.error);return r;}
 // Resolve against canonical handles projected in this Worker from the same
 // captured/replayed source. No point rows are accepted from the public request.
 function dimensionPoints(sketch:any){
@@ -105,10 +107,50 @@ function finishGeneratedDimensionStages(workspace:any,stages:any[]){
   }
  }
 }
+// A negative private Polar chart is not itself invalid. Only an affected actual
+// source Segment with a retained side-sensitive consumer needs this explicit
+// source-frame construction phase. Other raw angle/t equations remain original
+// constraints and may legitimately select a negative-t chart again on resolve.
+function sourceFrameSegments(workspace:any,source:any,fields:Map<string,Set<string>>){
+ const index=workspace.createIndex(),roots=new Map(source.objects.map(o=>[o.id,o])),selected=new Set<Segment>();let work=0;
+ for(const stage of workspace.parametricManager.stages)for(const c of stage.solverSystem.allConstraints){
+  if(++work>100000)throw fail('LIMIT','Dimension source-frame discovery exceeds its Worker bound.');
+  const line=c.schema===ConstraintDefinitions.DistancePL?c.objects[1]:c.schema===ConstraintDefinitions.TangentLC?c.objects[0]:null;
+  if(!(line instanceof Segment)||!(line.params.t.get()<0)||!(fields.get(line.id)?.size))continue;
+  const root:any=roots.get(line.id);
+  if(!root||root.type!=='Segment'||index[line.id]!==line||line.parent||!line.stage||!line.stage.objects.has(line)||c.stage!==stage)continue;
+  if(stage.solverSystem.conflicting.has(c)&&!stage.solverSystem.redundant.has(c))continue;
+  selected.add(line);
+ }
+ return [...selected];
+}
+function dimensionComponentScope(source:any,bindings:any,rows:any[],auxiliary:CapturedAuxiliaryWitnessBatch|undefined,row:any){
+ return captureConnectedGeometryScope(source,bindings,rows,auxiliary,(_workspace,pm,index)=>{
+  const stage=pm.stages[row.stage],constraint=stage?.solverSystem.allConstraints.filter(c=>!c.internal)[row.index];
+  if(!constraint||constraint.schema!==ConstraintDefinitions[row.typeId]||constraint.objects.length!==row.objects.length||constraint.objects.some((o,i)=>index[row.objects[i]]!==o))throw fail('INVALID_TARGET','The original dimension component lost its registered row or owned targets.');
+  constraint.resolveConstants(pm.constantResolver);validateConstraintGeometry(constraint);
+  const equations=[];constraint.collectPolynomials(equations);
+  return{equations,value:null};
+ },'Dimension source-frame construction');
+}
+function validateWarmDimension(workspace:any){
+ let work=0;const index=workspace.createIndex();
+ for(const stage of workspace.parametricManager.stages){const sys=stage.solverSystem;
+  if(!sys.solveStatus.success||!Number.isFinite(sys.solveStatus.error))throw withAdmissionCause(fail('DIMENSION_REJECTED','Dimension construction did not establish a finite native stage.'),causeForSolveStatus(sys.solveStatus));
+  for(const constraint of sys.allConstraints){
+   if(++work>100000)throw fail('LIMIT','Dimension original-equation validation exceeds its Worker bound.');
+   if(constraint.stage!==stage||constraint.objects.some(o=>index[o.id]!==o))throw fail('INTENT_CHANGED','Dimension construction lost original constraint ownership.');
+   if(sys.conflicting.has(constraint)&&!sys.redundant.has(constraint))throw withAdmissionCause(fail('DIMENSION_REJECTED','Dimension construction rejected an original equation.'),sys.getAdmissionCause(constraint));
+   constraint.resolveConstants(workspace.parametricManager.constantResolver);validateConstraintGeometry(constraint);
+  }
+ }
+}
 export function changeDrivingDimension(request:any){let revision=revisionOf(request);try{
  const a=record(request,['revision','sketchJSON','externalParameters','action','intent']);if(!revision||revision.length>256)throw fail('INVALID','Invalid dimension revision.');const intent=captureDrivingDimensionIntent(a.intent,a.action),bindings=external(a.externalParameters);
  const authored=JSON.parse(bounded(a.sketchJSON)),authoredTarget=resolveDimension(authored,intent.constraintId);if(authoredTarget.typeId==='DistancePL')return changePointLineDistanceDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,intent},a.action);if(authoredTarget.typeId==='ProjectedDistance')return changeProjectedDistanceDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,action:a.action,intent});if(authoredTarget.typeId==='RadiusLength')return changeRadiusDimension({revision,sketchJSON:a.sketchJSON,externalParameters:bindings,intent},a.action);
- const captured=replay(revision,a.sketchJSON,bindings),before=JSON.parse(captured.serializedSketch),row=resolveDimension(before,intent.constraintId);
+ const hasSideConsumer=authored.stages.some(stage=>stage.constraints.some(c=>c.typeId==='DistancePL'||c.typeId==='TangentLC'));
+ let originalAuxiliary:CapturedAuxiliaryWitnessBatch|undefined;
+ const captured=replay(revision,a.sketchJSON,bindings,hasSideConsumer?batch=>{originalAuxiliary=batch;}:undefined),before=JSON.parse(captured.serializedSketch),row=resolveDimension(before,intent.constraintId);
  let value:any=null;if(a.action==='edit'){
   if(typeof row.rawValue==='string'&&/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(row.rawValue.trim())&&typeof intent.value==='number')throw fail('BOUND_DIMENSION','A driving dimension bound to a typed name cannot be silently replaced by a literal. Edit the parameter or submit a named binding.');
   value=typeof intent.value==='number'?intent.value:bindings[intent.value];
@@ -116,6 +158,7 @@ export function changeDrivingDimension(request:any){let revision=revisionOf(requ
  }
  const dimension=(rawValue:any,resolvedValue:any,status:string)=>({constraintId:intent.constraintId,action:a.action,typeId:row.typeId,objects:[...row.objects],rawValue,resolvedValue,status});
  if(a.action==='edit'&&String(row.rawValue)===String(intent.value))return {revision,ok:true,changed:false,serializedSketch:a.sketchJSON,evidence:captured.evidence,dimension:dimension(row.rawValue,row.resolvedValue,before.stages[row.stage].constraints[row.index].admission.state)};
+ const scope=hasSideConsumer?dimensionComponentScope(authored,bindings,captured.evidence,originalAuxiliary,authoredTarget):null;
  const workspace=new HeadlessSketchWorkspace(bindings);workspace.io._loadSketch(before,{strict:true});const pm=workspace.parametricManager,c=pm.stages[row.stage]?.algNumSystem.allConstraints.filter(c=>!c.internal)[row.index];
  if(!c||c.schema.id!==row.typeId||c.objects.length!==row.objects.length||c.objects.some((object,i)=>object.id!==row.objects[i]))throw fail('INVALID_TARGET','The reconstructed dimension identity changed.');
  const field=drivingLengthField(row.typeId);if(a.action==='edit')c.validateCandidateConstants({...c.constants,[field]:String(intent.value)},pm.constantResolver);
@@ -126,14 +169,37 @@ export function changeDrivingDimension(request:any){let revision=revisionOf(requ
    else for(const stage of stages)for(const constraint of stage.algNumSystem.allConstraints)if(stage.algNumSystem.conflicting.has(constraint)&&!stage.algNumSystem.redundant.has(constraint))throw Object.assign(fail('DIMENSION_REJECTED','The constraint change was rejected by the sketch solver.'),{cause:stage.algNumSystem.getAdmissionCause(constraint)});
   },false);
  }catch(error){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw error},false)}catch(_){}throw error;}
- const candidate=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));candidate.boundary=before.boundary;geometry(before,candidate);expectedDelta(before,candidate,intent,a.action);
+ let candidate=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));candidate.boundary=before.boundary;geometry(before,candidate);expectedDelta(before,candidate,intent,a.action);
+ const frames=scope?sourceFrameSegments(workspace,authored,scope.fields):[];
+ if(frames.length){
+  // Check the actual whole warm result BEFORE changing any derived frame;
+  // never repair an invalid optimizer result by restoring unrelated fields.
+  validateWarmDimension(workspace);expectedDelta(authored,candidate,intent,a.action);assertCapturedGeometryScope(authored,candidate,scope.fields,'Dimension source-frame construction');
+  for(const line of frames)line.syncGeometry();
+  // ONE explicit construction resolve, not a retry/polish loop. Full original
+  // stage/generator equations retain their authority over the initialized chart.
+  finishGeneratedDimensionStages(workspace,pm.stages);
+  const resolved=JSON.parse(workspace.io.serializeSketch(authored.metadata,{strict:true}));resolved.boundary=structuredClone(authored.boundary);
+  geometry(authored,resolved);expectedDelta(authored,resolved,intent,a.action);assertCapturedGeometryScope(authored,resolved,scope.fields,'Dimension source-frame construction');
+  candidate={...resolved,objects:applyCapturedGeometry(authored,resolved,scope.fields,true,'Dimension source-frame construction')};
+  geometry(authored,candidate);expectedDelta(authored,candidate,intent,a.action);assertCapturedGeometryScope(authored,candidate,scope.fields,'Dimension source-frame construction');
+ }
  if(row.typeId==='DistancePP'&&a.action==='edit')assertUnrelatedSignedGeometry(before,candidate,bindings,{stage:row.stage,index:row.index});
  const warmFrames=warmPointLineFrames(workspace,c);
- const solved=solveSketch({revision,sketch:candidate,boundary:structuredClone(candidate.boundary),externalParameters:bindings});if(!solved.ok)return solved;const serializedSketch=bounded(JSON.stringify(solved.sketch));
+ let candidateAuxiliary:CapturedAuxiliaryWitnessBatch|undefined;
+ const solved=solveSketch({revision,sketch:candidate,boundary:structuredClone(candidate.boundary),externalParameters:bindings},undefined,frames.length?batch=>{candidateAuxiliary=batch;}:undefined);if(!solved.ok)return solved;const coldSerialized=bounded(JSON.stringify(solved.sketch));
  if(row.typeId==='DistancePP')assertVerifiedReplayGeometry(candidate,solved.sketch,solved.evidence,bindings,a.action==='edit'?{stage:row.stage,index:row.index}:undefined);
- else if(!sameRestoredSketch(JSON.stringify(candidate),serializedSketch))throw replayMismatch(candidate,solved.sketch,warmFrames);evidence(solved.sketch,solved.evidence);
- let next:any=null;if(a.action==='edit'){next=resolveDimension(solved.sketch,intent.constraintId);if(Math.abs(next.resolvedValue-value)>1e-6)throw fail('RESIDUAL','The edited dimension differs from actual solved geometry.');}
- return {revision,ok:true,changed:true,serializedSketch,evidence:solved.evidence,dimension:dimension(next?.rawValue??null,next?.resolvedValue??null,next?solved.sketch.stages[row.stage].constraints[row.index].admission.state:'removed')};
+ else if(!sameRestoredSketch(JSON.stringify(candidate),coldSerialized))throw replayMismatch(candidate,solved.sketch,warmFrames);evidence(solved.sketch,solved.evidence);
+ let published=solved.sketch,publicationEvidence=solved.evidence,serializedSketch=coldSerialized;
+ if(frames.length){
+  assertCapturedGeometryScope(authored,candidate,scope.fields,'Dimension source-frame construction');
+  const checked=evaluateCapturedSketch(candidate,bindings,solved.evidence,undefined,candidateAuxiliary);
+  // Publish the actual constructed/captured-equation-validated source, never
+  // copy the verification optimizer output into its authoritative geometry.
+  published=candidate;publicationEvidence=checked.evidence;serializedSketch=bounded(JSON.stringify(candidate));
+ }
+ let next:any=null;if(a.action==='edit'){next=resolveDimension(published,intent.constraintId);if(Math.abs(next.resolvedValue-value)>1e-6)throw fail('RESIDUAL','The edited dimension differs from actual solved geometry.');}
+ return {revision,ok:true,changed:true,serializedSketch,evidence:publicationEvidence,dimension:dimension(next?.rawValue??null,next?.resolvedValue??null,next?published.stages[row.stage].constraints[row.index].admission.state:'removed')};
  }catch(error){return {revision,ok:false,error:failure(error)};}}
 
 // Second disposable Worker: no result obtains publication authority by itself.

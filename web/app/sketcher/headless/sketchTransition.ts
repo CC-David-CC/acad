@@ -1,5 +1,6 @@
 import {solveSketch} from './solve';
 import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
+import type {CapturedAuxiliaryWitnessBatch} from './capturedParameterOwnership';
 
 const MAX_SKETCH_BYTES=1024*1024;
 const encoder=new TextEncoder();
@@ -34,7 +35,7 @@ function boundedText(value:any) {
 // This data-only operation does not publish into a live editor. The caller must
 // bind its result to the captured editor revision and perform its own guarded
 // publication. Run in a disposable Worker: solver model IDs are realm-local.
-export function replaySketchTransition(request:any) {
+export function replaySketchTransition(request:any,onAuxiliaryWitness?:(batch:CapturedAuxiliaryWitnessBatch)=>void) {
   let revision='';
   try {
     revision=capturedRevision(request);
@@ -43,7 +44,10 @@ export function replaySketchTransition(request:any) {
     const external=capturedExternal(request.externalParameters);
     const sketch=JSON.parse(request.sketchJSON);
     if(!sketch||typeof sketch!=='object'||Array.isArray(sketch)||!sketch.boundary)throw fail('INVALID','A complete native sketch is required.');
-    const solved=solveSketch({revision,sketch,boundary:structuredClone(sketch.boundary),externalParameters:external});
+    // Internal observer only: no request/reply field or caller-owned witness.
+    // The existing successful solve issues the same private frozen batch;
+    // all original replay validation below still precedes a successful return.
+    const solved=solveSketch({revision,sketch,boundary:structuredClone(sketch.boundary),externalParameters:external},undefined,onAuxiliaryWitness);
     if(!solved.ok)return solved;
     const serializedSketch=JSON.stringify(solved.sketch);
     if(!boundedText(serializedSketch))throw fail('LIMIT','The solved sketch exceeds the transition limit.');
