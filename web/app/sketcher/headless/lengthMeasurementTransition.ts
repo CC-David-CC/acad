@@ -5,11 +5,11 @@ import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
 import {capturedParameterOwnership,installCapturedAuxiliaryWitnesses} from './capturedParameterOwnership';
 import {inspectLengthMeasurementModel,prepareLengthMeasurement} from '../actions/lengthMeasurementPreparation';
 import {captureLengthMeasurementRequest,captureLengthMeasurementReply} from './lengthMeasurementIntent.mjs';
-import {failureCause} from '../constr/admissionCause.mjs';
+import {failureCause,withAdmissionCause} from '../constr/admissionCause.mjs';
 const fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
 const text=(v:any)=>{const s=JSON.stringify(v);if(s.length>1048576||new TextEncoder().encode(s).byteLength>1048576)fail('RESOURCE_LIMIT','Length measurement source exceeds 1MiB.');return s;};
-const failure=(revision:string,e:any)=>({revision,ok:false as const,error:{code:typeof e?.code==='string'?e.code.slice(0,64):'MEASUREMENT_INVALID',message:typeof e?.message==='string'?e.message.slice(0,512):'Length measurement failed.',...(failureCause(e)?{cause:failureCause(e)}:{})}});
-function cold(revision:string,sketch:any,external:any){let auxiliary:any;const result=solveSketch({revision,sketch:structuredClone(sketch),boundary:structuredClone(sketch.boundary),externalParameters:external},undefined,batch=>{auxiliary=batch;});if(!result.ok)throw Object.assign(Error(result.error.message),{code:result.error.code,admissionCause:result.error.cause});return{result,auxiliary};}
+const failure=(revision:string,e:any)=>{const cause=failureCause(e);return{revision,ok:false as const,error:{code:typeof e?.code==='string'?e.code.slice(0,64):'MEASUREMENT_INVALID',message:typeof e?.message==='string'?e.message.slice(0,512):'Length measurement failed.',...(cause?{cause}:{})}};};
+function cold(revision:string,sketch:any,external:any){let auxiliary:any;const result=solveSketch({revision,sketch:structuredClone(sketch),boundary:structuredClone(sketch.boundary),externalParameters:external},undefined,batch=>{auxiliary=batch;});if(!result.ok)throw withAdmissionCause(Object.assign(Error(result.error.message),{code:result.error.code}),result.error.cause);return{result,auxiliary};}
 function coordinateProof(sketch:any,external:any,observation:any){assertVerifiedReplayGeometry(sketch,observation.result.sketch,observation.result.evidence,external);return evaluateCapturedSketch(sketch,external,observation.result.evidence,undefined,observation.auxiliary);}
 function decode<T>(sketch:any,external:any,observation:any,visit:(w:HeadlessSketchWorkspace)=>T):T{
  const w=new HeadlessSketchWorkspace(external);return w.io.evaluateCapturedSketch(structuredClone(sketch),()=>{const own=capturedParameterOwnership(w);installCapturedAuxiliaryWitnesses(w,own,observation.auxiliary);const result=visit(w);own.unchanged();return result;});
