@@ -100,9 +100,9 @@ inferred from number of commands or isolated passing examples.
 
 ## Current bounded source queues — after native attachment R2
 
-The most recent frozen qualification is d82b3c1: actual Coreeff8af0 with
-Desktop719a4049a. It adds native extrusion-cap attachment/edit/repair/persistence
-to earlier cubic, navigation, Cancel, Ellipse, frame, quantity and repair proofs.
+The most recent complete source workflow is StraightSlot R1 on Core79c9c86/
+Desktopddab73b45, with independent geometry/source/archive oracle PASS. Native
+attachment d82b3c1 and earlier cubic/navigation/Cancel/frame proofs remain.
 It is not an all-Gate1 signoff. Both repositories'
 source/evidence/checklists are on example.invalid and R730; private fixture state is not
 source and is not copied into Git.
@@ -113,7 +113,7 @@ source and is not copied into Git.
 | Native solid-face attachment | Protected native plane read, causal candidate source preparation, one source/J publication and parent edit/repair/reopen | QUALIFIED scoped R2 d82b3c1, actualeff8af0/Desktop719a4049a;19Native sets/95points/4.cad saves/independent oracle PASS. Full-tip extrusion-last-cap only; arbitrary faces/prefix Apply separate |
 | Navigation and UI journal travel | Replace live raw modern timeline/selected-edit/floating/usability pointer writes; enable actual Undo/Redo at owned passive prefix; retain current guard/refusal domains | Qualified finite R1 chain in `test/history-navigation-public-workflow/QUALIFICATION.md`; 18real events/48Native points/2native saves and independent checker PASS. Broader legacy/insertion/stale gestures and Apply remain open |
 | Principal wizard Apply (serial next) | Numeric depth+orientation, one prefix→tip authored transaction, coherent source delta and pointer-aware Undo/Redo | Core sourceecbe789 and Desktop adapter48e91927/root spliceb45c8aeed frozen separately; whole packet/driver pending. Native-family Cancel must discard even invalid draft values via captured origin, without parsing them. No temporary accepted tip/second J |
-| StraightSlot | Actual registered relation over native axis/segments/arcs, original-request proof and existing J | Sourceb44de28→22ac378/Desktop1ab60d1ec frozen, pending review/build/full workflow. Ten mm residuals plus native intrinsics/junctions; no C02/profile claim |
+| StraightSlot | Actual registered relation over native axis/segments/arcs, original-request proof and existing J | QUALIFIED scoped R1 on Core79c9c86/Desktopddab73b45:137records/17observations/3.cad saves/12refusals/5malformed Opens, independent oracle PASS. No C02/profile/extrusion claim |
 | C02 circular arrangements | Bounded two-circle source census, true Native cells/provenance and one selected-feature history | Contract25c0f5a integrated; source/Native implementation authorized. Explicit new cohort/ABI; no polyline approximation, topology epsilon weld or automatic region retarget |
 
 Root alone integrates the coherent packets and runs normal builds and whole
