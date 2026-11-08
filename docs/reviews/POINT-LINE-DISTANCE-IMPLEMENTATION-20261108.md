@@ -34,13 +34,38 @@ publication. A later actual failure must retain bounded first-difference/cause.
 
 ## Ownership and construction
 
-Pure inspectPointLineDistance is usable during IO's captured open transaction;
-mutable preparePointLineDistance separately rejects an open mutation transaction.
-Actual Point/Segment instances, current stage/root membership and actual ground
-generator identity are checked, never ID grammar or caller flags. Initial target
-owner classes are ordinary Point/Segment/Circle/Arc and a nongenerated Segment.
-Other carried forms retain their native read domains and are undiscoverable as
-new targets; moving generator-linked components explicitly refuse.
+Shared inspectPointLineDistance checks actual native EndPoint/Segment instances,
+current SolveStage roots and parent/child ownership, and the unchanged Polar
+domain/math. It is usable during IO's captured transaction. It has no closed
+shape-owner whitelist, no global nongenerated restriction, and no new sketch
+index scan per row. Real earlier generated stages, ground references and native
+endpoints of other shapes remain available to the human native action. Native
+pm._add retains its existing highest-stage and same-stage generated restrictions.
+
+Only inspectClosedPointLineDistance/prepareClosedPointLineDistance impose the
+new ordinary closed eligibility: Point/Segment/Circle/Arc owner, ordinary
+nongenerated Segment, allowed real ground Point, existing bounded parent walk.
+Closed creation keeps its literal dedup/no-op policy and full Worker proofs.
+Other carried forms retain their native read domains and remain undiscoverable
+as new closed targets; moving generator-linked components explicitly refuse.
+
+The human dialog again submits its ORIGINAL AlgNumConstraint through pm.add,
+as before this packet: no human dedup, new atomic rejection policy, replacement
+constraint, scan rejecting historical rejected rows, or blanket group/curve/
+generated-owner exclusion. Its actual native Point/Segment, immediate parent,
+Segment endpoints, source stages, PM and ground/stage identities are captured
+before opening the editor and rechecked at Apply (including after constant
+validation). Disposed/replaced views, source reloads and changed associations
+cannot silently retarget by ID. Ordinary in-place geometry changes on the same
+native identities are not falsely classified as replacement; candidate constants
+still pass the real schema and current resolver. A closure prevents double
+submission. Human admission/recovery behavior remains pm.add's behavior; the
+new closed workflow is not a claim of newly qualified human multistage coverage.
+
+Closed transaction validation checks the new row and newly rejected old rows,
+using actual transactionBefore, rather than rejecting every historical rejected
+row. Closed original-source/equation proof still independently requires the
+accepted source policy; this does not permit rejected rows into publication.
 
 Creation/edit/remove use actual native schema admission, original polynomial/
 Param dependency scope, original source plus actual authorized warm delta,
@@ -83,3 +108,13 @@ test/point-line-distance-public-workflow. Native body checks mean an unaffected
 real source-bound solid; point-line source math itself is not a BRep feature.
 C03/C04 finite states/branches, generator/human limits and larger Gate1 counts
 remain as maintained by root, with no inference from this preparation.
+
+
+## Source-review correction (unexecuted)
+
+Root review of7384555 found that a closed-owner whitelist and all-conflicting
+scan had accidentally narrowed the human action. The separation above corrects
+that source regression without changing the DistancePL schema, equations,
+constants, side/gauge meaning, native IO domain, solver or complete workflow.
+No source-only success assertion substitutes for the pending whole application
+run. Existing driver/oracle and prior evidence remain unchanged.

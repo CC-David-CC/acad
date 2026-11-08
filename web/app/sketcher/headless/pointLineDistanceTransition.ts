@@ -3,7 +3,7 @@ import {solveSketch} from './solve';
 import {evaluateCapturedSketch} from './capturedSketchEvaluation';
 import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
 import {captureConnectedGeometryScope,applyCapturedGeometry,assertCapturedGeometryScope,firstCapturedGeometryDifference as difference} from './capturedGeometryScope';
-import {preparePointLineDistance,inspectPointLineDistance} from '../actions/pointLineDistanceAdmission';
+import {prepareClosedPointLineDistance,inspectClosedPointLineDistance} from '../actions/pointLineDistanceAdmission';
 import {pointLineConstantsValid,pointLineSide,pointLineDistanceValid} from '../constr/pointLineDistanceDomain.mjs';
 import {AlgNumConstraint,ConstraintDefinitions} from '../constr/ANConstraints';
 import {validateConstraintGeometry} from './sketchValidation';
@@ -23,7 +23,7 @@ function withoutAdmission(s:any){return{...s,stages:s.stages.map(stage=>({...sta
 function classifications(candidate:any,rows:any[]){let i=0;for(const stage of candidate.stages)for(const c of stage.constraints){const row=rows[i++];if(!row||row.typeId!==c.typeId||!['accepted','redundant'].includes(row.state))fail('ADMISSION_CHANGED','Point-line classification membership changed.');c.admission={version:1,state:row.state};}if(i!==rows.length)fail('ADMISSION_CHANGED','Point-line evidence membership changed.');}
 function target(sketch:any,id:string){const points=projectRenderSketch({...sketch,objects:sketch.objects.filter(o=>['Point','Segment','Circle','Arc'].includes(o.type))}).objects.flatMap(o=>o.handles),row=resolveDrivingDimension(sketch,id,points);if(row.typeId!=='DistancePL')fail('INVALID_TARGET','Choose an inspected supporting-line dimension.');return row;}
 function rowAt(pm:any,stage:number,index:number,ids:string[],objects:any){const c=pm.stages[stage]?.solverSystem.allConstraints.filter(c=>!c.internal)[index];if(!c||c.schema!==ConstraintDefinitions.DistancePL||c.objects.length!==2||c.objects.some((o,i)=>o!==objects[ids[i]])||!pointLineConstantsValid(c.constants))fail('INVALID_TARGET','The actual point-line row or two-constant authority changed.');return c;}
-function inspectFinal(sketch:any,bindings:any,stage:number,at:number){const w=new HeadlessSketchWorkspace(bindings);w.io._loadSketch(structuredClone(sketch),{strict:true});const row=sketch.stages[stage].constraints[at],c=rowAt(w.parametricManager,stage,at,row.objects,w.createIndex());c.resolveConstants(w.parametricManager.constantResolver);validateConstraintGeometry(c);return{c,...inspectPointLineDistance(w.parametricManager,c.objects[0],c.objects[1])};}
+function inspectFinal(sketch:any,bindings:any,stage:number,at:number){const w=new HeadlessSketchWorkspace(bindings);w.io._loadSketch(structuredClone(sketch),{strict:true});const row=sketch.stages[stage].constraints[at],c=rowAt(w.parametricManager,stage,at,row.objects,w.createIndex());c.resolveConstants(w.parametricManager.constantResolver);validateConstraintGeometry(c);return{c,...inspectClosedPointLineDistance(w.parametricManager,c.objects[0],c.objects[1])};}
 
 // Original source plus actual owned component delta; no optimizer copyback.
 function change(request:any,action:'create'|'edit'|'remove'){
@@ -35,7 +35,7 @@ function change(request:any,action:'create'|'edit'|'remove'){
  const raw=action==='create'?a.intent.distance:action==='edit'?a.intent.value:null,value=action==='remove'?null:typeof raw==='number'?raw:bindings[raw],inverted=old?pointLineSide(oldRow.constants.inverted):a.intent.inverted;
  if(action!=='remove'&&(!pointLineDistanceValid(value)||value>1e6))fail('INVALID_VALUE','Use a current nonnegative length at most1,000,000mm.');
  const scope=captureConnectedGeometryScope(before,bindings,original.result.evidence,original.auxiliary,(_w,pm,index)=>{
-  const inspected=inspectPointLineDistance(pm,index[ids[0]],index[ids[1]]),stage=old?old.stage:inspected.stage.index;
+  const inspected=inspectClosedPointLineDistance(pm,index[ids[0]],index[ids[1]]),stage=old?old.stage:inspected.stage.index;
   if(old){const c=rowAt(pm,stage,old.index,ids,index);c.resolveConstants(pm.constantResolver);validateConstraintGeometry(c);}
   let originalSatisfied=true;const equations=[];
   if(action!=='remove'){const proposed=new AlgNumConstraint(ConstraintDefinitions.DistancePL,[inspected.point,inspected.line],{distance:String(raw),inverted:old?oldRow.constants.inverted:inverted});proposed.resolveConstants(pm.constantResolver);try{validateConstraintGeometry(proposed);}catch(e){if(e?.code!=='RESIDUAL')throw e;originalSatisfied=false;}proposed.collectPolynomials(equations);}
@@ -45,7 +45,7 @@ function change(request:any,action:'create'|'edit'|'remove'){
  if(scope.selection.generated.some(id=>(scope.fields.get(id)?.size||0)>0))fail('UNSUPPORTED_TARGET','Moving a generator-dependent component is not supported by this point-line operation.');
  const stage=scope.selection.stage,expected=structuredClone(before),workspace=new HeadlessSketchWorkspace(bindings);workspace.io._loadSketch(structuredClone(before),{strict:true});const pm=workspace.parametricManager,index=workspace.createIndex();let constraint:any,indexInStage:number;
  if(action==='create'){
-  const prepared=preparePointLineDistance(pm,index[ids[0]],index[ids[1]],String(value),inverted);constraint=prepared.constraint;
+  const prepared=prepareClosedPointLineDistance(pm,index[ids[0]],index[ids[1]],String(value),inverted);constraint=prepared.constraint;
   if(prepared.existing){indexInStage=constraint.stage.solverSystem.allConstraints.filter(c=>!c.internal).indexOf(constraint);const row=before.stages[stage].constraints[indexInStage];constraint.resolveConstants(pm.constantResolver);validateConstraintGeometry(constraint);if(indexInStage<0||!row||!['accepted','redundant'].includes(row.admission?.state))fail('ADMISSION_CHANGED','Existing point-line row is unavailable.');
    return{revision:a.revision,ok:true as const,changed:false,serializedSketch:a.sketchJSON,evidence:checkedOriginal.evidence,dimension:{typeId:'DistancePL',objects:ids,distance:value,inverted,status:row.admission.state,stage,index:indexInStage}};
   }

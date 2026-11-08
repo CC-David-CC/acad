@@ -1,4 +1,4 @@
-import {addPointLineDistance} from './pointLineDistanceOperation';
+import {capturePointLineDistanceAction} from './pointLineDistanceOperation';
 import {addPointCoincidenceGroup} from './pointCoincidenceOperation';
 import {addRadiusBatch,inspectRadiusTargets,addRadiusByIdAtRevision} from './radiusOperation';
 import {toast} from 'react-toastify';
@@ -617,8 +617,11 @@ export default [
       const constr = new AlgNumConstraint(ConstraintDefinitions.DistancePL, [pt, seg]);
       constr.initConstants();
 
+      let applyDistance;
+      try { applyDistance=capturePointLineDistanceAction(viewer,pt,seg); }
+      catch(error){toast(error?.message||'The point-line targets are no longer current.');return;}
       editConstraint(ctx, constr, () => {
-        try{addPointLineDistance(viewer,pt,seg,constr.constants.distance,constr.constants.inverted);}catch(error){toast(error?.message||'The point-line distance could not be applied.');}
+        try{if(ctx.viewer!==viewer)throw Error('The sketch window changed while the distance dialog was open.');applyDistance(constr);}catch(error){toast(error?.message||'The point-line distance could not be applied.');}
       });
     }
   },
