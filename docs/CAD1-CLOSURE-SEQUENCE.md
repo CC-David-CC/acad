@@ -1,5 +1,26 @@
 # Gate 1: remaining work and execution sequence
 
+## Latest scoped qualification — whole-entity Fix R1,2026-11-08
+
+Whole Chrome37811 and FIRST independent source/archive oracle PASS on exact
+Coredb997744bcdd25cb0c18f2b4895886c9422f19e5 /
+Desktopbbf2d284b281188d8d59cbf593225f356b588a25.72records/769public trace entries/
+50observations/9refusals/5local reports/3.cad Save/server/fresh Open cycles.
+Whole Segment/Circle/quarter+major Arc snapshots, distinct Circle redundancy,
+no-op retaining redo, geometry conflicts, Unfix/edit/Refix, raw typed binding/
+formula refusal and positive update, mixed travel and repeated Open all pass.
+Source unchanged/owned contexts retired. No post-run criterion or code repair.
+See test/closed-whole-entity-fix-workflow/QUALIFICATION.md. No Native3D,
+near-coincident full-Arc50pm or active-human-gesture qualification is claimed.
+
+**20recent scoped workflows;10of21 ordinary exercise contracts Qualified**
+(E01–E09/E21),11Partial; broader11competencies and final beta/viewable-agent
+release remain open. Fix closes a shared C03 route gap, not all C03 or another
+ordinary exercise. DistancePL source packet ready for serial composition;
+EqualRadius source work and explicit Arc branch contract remain separate.
+No deployment/canceled race/UI/source-packaging diversion.
+
+
 ## Latest qualification — four-corner creation R2,2026-11-08
 
 Whole Chrome61817 and FIRST independent source/Native/archive oracle PASS on
