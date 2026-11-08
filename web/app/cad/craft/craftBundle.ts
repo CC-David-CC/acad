@@ -685,6 +685,16 @@ export function activate(ctx: ApplicationContext) {
   }
   function inspectPhysicalParameters() {
     const info=inspectAuthoredEdits(), readiness=(ctx.craftService as any).inspectRectangleCreation(),service:any=ctx.projectService,expressions:any=ctx.expressionService,history=modifications$.value,source=expressions.script$.value;
+    const manager:any=ctx.projectManager,craft=ctx.craftService,storage=ctx.storageService,wizard=ctx.wizardService,workbench=ctx.workbenchService,assembly=ctx.assemblyService,streamRoot=ctx.streams,sketcherStreams=ctx.streams.sketcher,document=service.documentGeneration,signal=service.documentSignal,hostBound=service.hasHostLifetime,documentCurrent=service.isDocumentCurrent(document),aborted=HISTORY_SIGNAL_ABORTED(signal),namespace=service.sketchStorageNamespace;
+    const format=manager.formatDisplayQuantity,inspectPresentation=manager.inspectDisplayUnits,resolveQuantity=expressions.resolveQuantity,physicalCurrent=expressions.hasCurrentPhysicalResult,namespaceRevision=storage.namespaceRevision,storageRevision=namespaceRevision.call(storage,namespace);
+    const tracked=[modifications$,models$,authoredJournal$,pipelineFailure$,engineCleanupFailure$,expressions.script$,expressions.list$,expressions.errors$,expressions.table$,sketcherStreams.sketchingFace,wizard.workingRequest$,workbench.currentWorkbench$,assembly.constraints$],versions=tracked.map(s=>s.revision),pending=[pendingPipelines,pendingModifications,evaluationEpoch];
+    // Constant-sized identity/version checks around external quantity/formatter
+    // calls. Do not scan/hash every sketch/history for each of up to256 rows.
+    const current=()=>{
+      if(ctx.wizardService!==wizard||ctx.workbenchService!==workbench||ctx.assemblyService!==assembly||ctx.streams!==streamRoot||ctx.streams.sketcher!==sketcherStreams)throw superseded();
+      const streams=[modifications$,models$,authoredJournal$,pipelineFailure$,engineCleanupFailure$,expressions.script$,expressions.list$,expressions.errors$,expressions.table$,sketcherStreams.sketchingFace,wizard.workingRequest$,workbench.currentWorkbench$,assembly.constraints$];
+      if(ctx.projectService!==service||ctx.projectManager!==manager||ctx.services.projectManager!==manager||ctx.craftService!==craft||ctx.storageService!==storage||ctx.expressionService!==expressions||manager.formatDisplayQuantity!==format||manager.inspectDisplayUnits!==inspectPresentation||expressions.resolveQuantity!==resolveQuantity||expressions.hasCurrentPhysicalResult!==physicalCurrent||modifications$.value!==history||expressions.script$.value!==source||service.documentGeneration!==document||service.documentSignal!==signal||HISTORY_SIGNAL_ABORTED(signal)!==aborted||service.hasHostLifetime!==hostBound||service.isDocumentCurrent(document)!==documentCurrent||service.sketchStorageNamespace!==namespace||storage.namespaceRevision!==namespaceRevision||namespaceRevision.call(storage,namespace)!==storageRevision||streams.some((s,i)=>s!==tracked[i]||s.revision!==versions[i])||pendingPipelines!==pending[0]||pendingModifications!==pending[1]||evaluationEpoch!==pending[2])throw superseded();
+    };
     let reason=readiness.ready?null:(readiness.reason||'Finish the current operation first.');
     if(!service.hasHostLifetime||!service.isDocumentCurrent(service.documentGeneration))reason='A current host-bound workspace is required.';
     if(typeof source!=='string'||source.length>65536)reason='Parameter source exceeds the supported bound.';
@@ -708,9 +718,37 @@ export function activate(ctx: ApplicationContext) {
     // Project only the already accepted Worker result. Inspection never parses
     // or evaluates formula arithmetic and introduces no second quantity table.
     const units={scalar:'dimensionless',length:'millimeter',area:'square-millimeter',volume:'cubic-millimeter',angle:'radian',count:'count',boolean:null};
-    const quantities=!reason&&decoded?definitions.map(row=>Object.freeze({name:row.name,dimension:row.dimension,value:expressions.resolveQuantity(row.name,row.dimension),unit:units[row.dimension]})):[];
+    let presentation:any=null;
+    const presentationCurrent=()=>{
+      current();if(!presentation)return;
+      const observed=inspectPresentation.call(manager);current();
+      if(observed.revision!==presentation.revision||observed.lengthUnit!==presentation.lengthUnit||observed.angleUnit!==presentation.angleUnit||observed.canonicalLengthUnit!==presentation.canonicalLengthUnit||observed.canonicalAngleUnit!==presentation.canonicalAngleUnit)throw superseded();
+    };
+    if(!reason&&decoded&&typeof inspectPresentation==='function'){
+      current();const observed=inspectPresentation.call(manager);current();
+      if(!observed||typeof observed.revision!=='string'||!observed.revision||observed.revision.length>256||!['millimeter','inch'].includes(observed.lengthUnit)||observed.angleUnit!=='degree'||observed.canonicalLengthUnit!=='millimeter'||observed.canonicalAngleUnit!=='radian')throw superseded();
+      presentation=Object.freeze({revision:observed.revision,lengthUnit:observed.lengthUnit,angleUnit:observed.angleUnit,canonicalLengthUnit:observed.canonicalLengthUnit,canonicalAngleUnit:observed.canonicalAngleUnit});current();
+    }
+    const displayFor=(value:number,dimension:string):any=>{
+      if(!['length','area','volume','angle'].includes(dimension))return {display:null,displayStatus:'not-applicable',displayReason:'NON_DIMENSIONED_QUANTITY'};
+      if(!presentation||typeof format!=='function')return {display:null,displayStatus:'unavailable',displayReason:'FORMATTER_UNAVAILABLE'};
+      presentationCurrent();let raw:any;
+      try{raw=format.call(manager,value,dimension);}catch(_){presentationCurrent();return {display:null,displayStatus:'unavailable',displayReason:'FORMATTER_REJECTED'};}
+      presentationCurrent();
+      // Preserve the formatter's full numeric value; only its human text rounds.
+      // Capture five bounded own data fields. Invalid formatting cannot erase a
+      // valid canonical quantity or substitute another unit/value for it.
+      const result:any={},keys=['canonicalValue','canonicalUnit','value','unit','text'];let valid=!!raw&&typeof raw==='object'&&!Array.isArray(raw);
+      try{if(valid){const ownKeys=Reflect.ownKeys(raw);valid=ownKeys.length===keys.length&&ownKeys.every(k=>typeof k==='string'&&keys.includes(k));for(const key of keys){const d=Object.getOwnPropertyDescriptor(raw,key);if(!d?.enumerable||!Object.hasOwn(d,'value')){valid=false;break;}result[key]=d.value;}}}catch(_){valid=false;}
+      current();
+      const imperial={length:'inch',area:'square-inch',volume:'cubic-inch'},expectedUnit=dimension==='angle'?'degree':presentation.lengthUnit==='inch'?imperial[dimension]:units[dimension];
+      if(!valid||!Object.is(result.canonicalValue,value)||result.canonicalUnit!==units[dimension]||typeof result.value!=='number'||!Number.isFinite(result.value)||value!==0&&result.value===0||result.unit!==expectedUnit||typeof result.text!=='string'||result.text.length>64)return {display:null,displayStatus:'unavailable',displayReason:'INVALID_FORMATTER_RESULT'};
+      return {display:Object.freeze(result),displayStatus:'available',displayReason:null};
+    };
+    const quantities=!reason&&decoded?definitions.map(row=>{current();const value=resolveQuantity.call(expressions,row.name,row.dimension);current();return Object.freeze({name:row.name,dimension:row.dimension,value,unit:units[row.dimension],...displayFor(value,row.dimension)});}):[];
+    presentationCurrent();
     if(ctx.projectService!==service||ctx.expressionService!==expressions||modifications$.value!==history||expressions.script$.value!==source||inspectAuthoredEdits().revision!==info.revision)throw superseded();
-    return Object.freeze({ready:!reason,reason,revision:info.revision,unit:'millimeter',definitions:Object.freeze(definitions),quantities:Object.freeze(quantities),configurations:decoded?.version===2?decoded.configurations:Object.freeze([]),activeConfigurationId:decoded?.version===2?decoded.activeId:null,targets:Object.freeze(targets),brackets:Object.freeze(brackets),enclosures:Object.freeze(enclosures),selectedRectangles:Object.freeze(selectedRectangles),features:Object.freeze(features)});
+    presentationCurrent();return Object.freeze({ready:!reason,reason,revision:info.revision,presentationRevision:presentation?.revision||null,unit:'millimeter',definitions:Object.freeze(definitions),quantities:Object.freeze(quantities),configurations:decoded?.version===2?decoded.configurations:Object.freeze([]),activeConfigurationId:decoded?.version===2?decoded.activeId:null,targets:Object.freeze(targets),brackets:Object.freeze(brackets),enclosures:Object.freeze(enclosures),selectedRectangles:Object.freeze(selectedRectangles),features:Object.freeze(features)});
   }
 
   // One candidate-only transaction for supported authored physical bindings.
