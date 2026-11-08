@@ -641,8 +641,9 @@ export function activate(ctx: ApplicationContext) {
           wizard.state$.value!==wizardState||wizard.state$.revision!==wizardStateVersion||ctx.services.sketcher.inPlaceEditor.inEditMode)throw refusal();
     };
     requireDraft();
-    const applied=journal.cursor>0?journal.entries[journal.cursor-1]:null,
-      modern=history.history.some(entry=>AUTHORED_SOLID_KINDS.includes(entry.type))||HISTORY_CONTROL_KINDS.includes(applied?.kind);
+    const applied=journal.cursor>0?journal.entries[journal.cursor-1]:null,nextSource=journal.entries[journal.cursor],
+      retainedSourceBefore=journal.cursor===0&&nextSource?.kind==='source-frame'&&!!nextSource.reviewPosition&&nextSource.beforeOperation?.type==='PLANE'&&nextSource.afterOperation?.type==='PLANE'&&nextSource.index===history.pointer+1,
+      modern=history.history.some(entry=>AUTHORED_SOLID_KINDS.includes(entry.type))||HISTORY_CONTROL_KINDS.includes(applied?.kind)||retainedSourceBefore;
     if(!modern){
       // Positive fixed historical vocabulary, not "any registered non-Worker".
       // A shared-journal entry (including a Redo tail) is never a legacy lease:
@@ -656,10 +657,10 @@ export function activate(ctx: ApplicationContext) {
     if(!noFocus?.enumerable||!Object.hasOwn(noFocus,'value')||noFocus.value!==true||Reflect.ownKeys(history.hints).length!==1||
         !ownedPipelineHistories.has(history.history)||head!==history.history||!signature||headSignature!==signature||
         fullTipSketchRevision!==sketch||fullTipMaterialSurfaceRevision!==material||history.pointer< -1||history.pointer>=history.history.length-1||
-        applied?.kind!=='history-position'||applied.afterPointer!==history.pointer||applied.beforeSignature!==signature||applied.afterSignature!==signature)
+        !retainedSourceBefore&&(applied?.kind!=='history-position'||applied.afterPointer!==history.pointer||applied.beforeSignature!==signature||applied.afterSignature!==signature))
       throw refusal();
     try{
-      if(history.history.some(entry=>entry.type==='SOURCE_FRAME_V1')){
+      if(history.history.some(entry=>entry.type==='SOURCE_FRAME_V1')||retainedSourceBefore){
         // Only this explicitly supported new source family uses its own
         // accepted-custody validator. Invalid form params are never parsed.
         principalPlaneCommands.validateSourceFrameReview(capture);

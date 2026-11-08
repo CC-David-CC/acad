@@ -1,3 +1,4 @@
+import {planSourceFrameTravel} from './authoredEditJournal.mjs';
 import {capturePrincipalPlanePlacementRequest,capturePrincipalPlanePlacementDraft,capturePrincipalPlaneReviewPosition} from './principalPlanePlacementIntent.mjs';
 import {readHistoryReviewApply} from './wizard/wizardBundle';
 import {captureAuthoredHistory} from './captureAuthoredHistory.mjs';
@@ -38,7 +39,7 @@ export function createPrincipalPlanePlacementCommands(ctx:any,readContext:()=>an
   if(expressions.isTyped||expressions.script$.value.trim()||Reflect.ownKeys(expressions.table$.value||{}).length||expressions.errors$.value.length)fail('UNSUPPORTED_PARAMETERS','Principal placement preserves typed/formula intent; this operation requires numeric source history.');
   if(ctx.assemblyService.getConstraints().length||ctx.surfacingService?.scene?.surfaces.length)fail('UNSUPPORTED_HISTORY','Principal placement requires an ordinary part.');
   if(!context.ready||context.state!==state||journal.document!==generation||!Array.isArray(history)||history.length>256)fail('UNAVAILABLE','The complete authored definition is unavailable.');
-  const opBindings=new Map();for(const entry of history){if(Object.hasOwn(entry,'suppressed'))fail('UNSUPPORTED_HISTORY','Unsuppressed numeric source history is required.');const op=operations.get(entry.type);if(isSourcePlaneType(entry.type)?!isRegisteredSourcePlane(entry.type,op):!AUTHORED_SOLID_KINDS.includes(entry.type)||typeof op?.run!=='function')fail('UNSUPPORTED_HISTORY','Use registered source and owned-solid operations.');opBindings.set(entry.type,{op,run:op.run,admit:op.admitGeometry});}
+  const opBindings=new Map<string,any>();for(const entry of history){if(Object.hasOwn(entry,'suppressed'))fail('UNSUPPORTED_HISTORY','Unsuppressed numeric source history is required.');const op=operations.get(entry.type);if(isSourcePlaneType(entry.type)?!isRegisteredSourcePlane(entry.type,op):!AUTHORED_SOLID_KINDS.includes(entry.type)||typeof op?.run!=='function')fail('UNSUPPORTED_HISTORY','Use registered source and owned-solid operations.');opBindings.set(entry.type,{op,run:op.run,admit:op.admitGeometry});}
   if(!hasOnlyUnconsumedSketchHistory(history,'\u0000'))fail('UNSUPPORTED_HISTORY','The shared structural source provenance guard refused this part.');
   sourceAttachmentDepths(history);const build=genericHistoryBuild(history);
   if(build&&(build.id!=='occ'||build.selectedProfileVersion!==3||requireBuild(build.id,build.revision)!==build))fail('ENGINE_CAPABILITY_UNAVAILABLE','Retain the actual staged modern OCC part build.');
@@ -65,10 +66,21 @@ export function createPrincipalPlanePlacementCommands(ctx:any,readContext:()=>an
   const stop=()=>{controller.abort();if(!settled&&scope.epoch!==null)cancelEpoch(scope.epoch);};
   try{for(const s of signals){added.push(s);listen(s,'abort',stop,{once:true});if(aborted(s))stop();}poll=setInterval(()=>{try{current();}catch{stop();}},100);current();}catch(error){for(const s of added)unlisten(s,'abort',stop);clearInterval(poll);throw error;}
   return {ctx,craft,project,manager,storage,sketches,state,history,models,context,journal,generation,epoch,scope,signal:controller.signal,sources,build,stamp,material,current,alive,review,
-    input(captured:any){return{history:captured.history,endIndex:captured.history.length-1,epoch,generation,project,signal:controller.signal,valid:()=>{try{current();return true;}catch{return false;}},operations:new Map([...opBindings].map(([type,r]:any)=>[type,{descriptor:r.op,run:r.run,admit:r.admit}])),requireCurrent:current};},
+    input(captured:any){return{history:captured.history,endIndex:captured.history.length-1,epoch,generation,project,signal:controller.signal,valid:()=>{try{current();return true;}catch{return false;}},operations:new Map<string,any>([...opBindings].map(([type,r])=>[type,{descriptor:r.op,run:r.run,admit:r.admit}] as [string,any])),requireCurrent:current};},
     dispose(){settled=true;clearInterval(poll);for(const s of added)unlisten(s,'abort',stop);}};
  }
- function reviewed(j:any){if(j.state.pointer===j.history.length-1)return;const p=j.journal.entries[j.journal.cursor-1];if(p?.kind!=='history-position'||p.afterPointer!==j.state.pointer||p.beforeSignature!==j.context.signature||p.afterSignature!==j.context.signature)fail('STALE_HISTORY','Use the actual applied registered history position.');}
+ function reviewed(j:any,retainedBeforeSide=false){
+  if(j.state.pointer===j.history.length-1)return;
+  const p=j.journal.entries[j.journal.cursor-1];if(p?.kind==='history-position'&&p.afterPointer===j.state.pointer&&p.beforeSignature===j.context.signature&&p.afterSignature===j.context.signature)return;
+  // A retained first D after FIFO trim still authenticates its actual S0/p
+  // Undo result. This is NOT an arbitrary prefix or edited-draft predicate.
+  const d=j.journal.entries[j.journal.cursor];
+  if(retainedBeforeSide&&j.journal.cursor===0&&d?.kind==='source-frame'&&d.reviewPosition&&d.beforeOperation?.type==='PLANE'&&d.afterOperation?.type==='PLANE'&&d.index===j.state.pointer+1){
+   const plan=planSourceFrameTravel(j.journal,{document:j.generation,revision:j.journal.revision,direction:'redo',history:j.history,readSketch:id=>j.sketches.getSketchData(id),currentSignature:j.context.signature,currentPointer:j.state.pointer});
+   if(plan.index===d.index&&plan.featureId===fid(j.history[d.index].params.featureId)&&plan.reviewPosition===d.reviewPosition&&plan.beforeOperation===d.beforeOperation)return;
+  }
+  fail('STALE_HISTORY','Use an authenticated registered history review.');
+ }
  const run=(j:any,input:any)=>runSourceFramePreparation(workerUrl,{revision:crypto.randomUUID(),...input},{signal:j.signal,valid:()=>{try{j.current();return true;}catch{return false;}}});
  async function sources(j:any,next:any[],rows:any[],targets:any[]=[]){
   const frames=new Map(),changes:any[]=[],prepared:any[]=[],deferred=nativeSourceDescendants(next);
@@ -100,7 +112,7 @@ export function createPrincipalPlanePlacementCommands(ctx:any,readContext:()=>an
  function inspectSourcePlanePlacements(){
   let j:any;try{if(pending)fail('BUSY','A principal placement is pending.');j=job();const revision=j.craft.inspectAuthoredEdits().revision,features=j.history.flatMap((entry:any,index:number)=>{
    if(entry.type!=='PLANE')return[];const featureId=fid(entry.params.featureId),faceId=sourcePlaneFaceId(featureId);let p:any,reason:any=null;try{p=captureSourcePlaneParameters(entry.params);if(j.state.pointer<j.history.length-1){reviewed(j);if(j.state.pointer!==index-1)reason='REVIEW_DIFFERENT_FEATURE';}}catch{reason='UNSUPPORTED_PARAMETERS';}
-   return[Object.freeze({index,featureId,faceId,orientation:p?.orientation??null,depth:p?.depth??null,canEdit:!reason,reason})];
+   return[Object.freeze({index,featureId,faceId,orientation:p?.orientation??(['XY','XZ','ZY'].includes(entry.params?.orientation)?entry.params.orientation:null),depth:p?.depth??null,canEdit:!reason,reason})];
   });j.current();return Object.freeze({version:1,unit:'millimeter',revision,ready:features.some(r=>r.canEdit),reason:features.some(r=>r.canEdit)?null:'NO_SUPPORTED_PRINCIPAL_SOURCE',pointer:j.state.pointer,features:Object.freeze(features),scope:'numeric-principal-placement-v1'});
   }catch{const craft=ctx.craftService,state=craft.modifications$.value,features=Array.isArray(state.history)&&state.history.length<=256?state.history.flatMap((e:any,index:number)=>{if(e.type!=='PLANE')return[];let featureId:any=null,faceId:any=null;try{featureId=fid(e.params.featureId);faceId=sourcePlaneFaceId(featureId);}catch{}return[Object.freeze({index,featureId,faceId,orientation:['XY','XZ','ZY'].includes(e.params?.orientation)?e.params.orientation:null,depth:typeof e.params?.depth==='number'?e.params.depth:null,canEdit:false,reason:'PRINCIPAL_PLACEMENT_UNAVAILABLE'})];}):[];return Object.freeze({version:1,unit:'millimeter',revision:craft.inspectAuthoredEdits().revision,ready:false,reason:'PRINCIPAL_PLACEMENT_UNAVAILABLE',pointer:state.pointer,features:Object.freeze(features),scope:'numeric-principal-placement-v1'});}finally{j?.dispose();}}
  async function setSourceFrameHistoryPrefix(input:any,opts:any={}){
@@ -109,7 +121,7 @@ export function createPrincipalPlanePlacementCommands(ctx:any,readContext:()=>an
  function inspectSourceFramePositionHistory(){let j:any;try{if(pending)fail('BUSY','A principal source/history preparation is pending.');j=job();const revision=j.craft.inspectAuthoredEdits().revision,features=j.history.map((entry:any,index:number)=>Object.freeze({index,featureId:fid(entry.params.featureId),type:entry.type,state:'active',canSuppress:false,canUnsuppress:false,reason:'POSITION_ONLY_SOURCE_FRAME_HISTORY'}));j.current();return Object.freeze({version:1,revision,geometryRevision:j.craft.inspectWorkerSolids().revision,ready:true,unit:'millimeter',engine:j.build?.id??null,engineRevision:j.build?.revision??null,pointer:j.state.pointer,afterFeatureId:j.state.pointer<0?null:fid(j.history[j.state.pointer].params.featureId),fullTipIndex:j.history.length-1,canBranch:false,branchReason:'SOURCE_FRAME_POSITION_ONLY',features:Object.freeze(features),authoredUndo:'shared-session-journal-v1',scope:'numeric-source-frame-position-v1'});}finally{j?.dispose();}}
  // Cancel authenticates accepted origin/head only. It intentionally does NOT
  // capture, parse, materialize or validate any edited placement field.
- function validateSourceFrameReview(capture:any){let j:any;try{j=job({},capture);reviewed(j);j.current();}finally{j?.dispose();}}
+ function validateSourceFrameReview(capture:any){let j:any;try{j=job({},capture);reviewed(j,true);j.current();}finally{j?.dispose();}}
  async function travelSourceFrameHistoryPosition(args:any,opts:any,plan:any){
   if(pending)fail('BUSY','A source/history request is pending.');pending=true;let j:any;
   try{j=job(opts);if(args.revision!==j.craft.inspectAuthoredEdits().revision||plan.entry?.kind!=='history-position'||plan.signature!==j.context.signature)fail('STALE_HISTORY','The registered position changed.');
