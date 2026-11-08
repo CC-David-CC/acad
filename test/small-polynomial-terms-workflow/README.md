@@ -1,4 +1,9 @@
-# Complete small-equation preservation workflow — SOURCE PREPARED, NOT RUN
+# Complete small-equation preservation workflow
+
+Scoped R1 PASS is frozen in [evidence-r1](evidence-r1/README.md):70rows,
+6 native save/open cycles, independent1pm-budget checker PASS. Read its exact
+source/production/test-helper boundaries and limitations. The original source
+preparation description below is historical.
 
 This is a complete public application acceptance packet for product `d038cfb819812c580a4396ba54c5943689523b01`. No tests, probes, syntax/type checks, build, browser, services or accounts were run while preparing it. Existing tests/evidence remain untouched. Root must integrate the source, create one normal source-matched package and run the whole workflow after composition. First failures must survive unchanged.
 

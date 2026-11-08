@@ -168,3 +168,20 @@ requires a coherent source composition followed by affected complete application
 workflows. It must not be slipped into a default-dialog or singular-initializer
 patch, whose narrower evidence could not qualify the shared change. The design
 remains one authoritative physical source; no rounded secondary truth is added.
+
+## Scoped source/coefficient accuracy qualified — 2026-11-08
+
+`test/small-polynomial-terms-workflow/evidence-r1` freezes a complete70-row,
+three-setup/six-native-save/open PASS on actual84fe435/Desktop640279b9f.
+Independent Fraction/source analysis checks26 observations against the frozen
+1e-9mm=0.001nm=1pm geometry budget; maximum measured error is0mm in this corpus.
+Tiny2^-43mm signed offsets/aliases and named edits persist; factor2^-40 times
+1,000,000/500,000/750,000mm preserves the independently derived subnanometer
+short Segment. Exact-zero redundancy differs from accepted nonzero residual;
+out-of-policy constants retain actual original-equation refusal causes.
+
+This qualifies these source arithmetic/persistence cases, not nanoscale Native/
+BRep/topology/intersection/mesh geometry, all coordinate envelopes, nonlinear
+convergence, underflow/high-power cases or physical accuracy. The existing
+1e-6mm residual policy is separate from the stricter geometry-budget check.
+The broader nanoscale limitations above remain open.
