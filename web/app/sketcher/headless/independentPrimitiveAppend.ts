@@ -3,6 +3,7 @@ import {evaluateCapturedSketch} from './capturedSketchEvaluation';
 import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
 import {sameRestoredSketch} from '../historyEquivalence.mjs';
 import {fail} from './sketchValidation';
+import type {CapturedAuxiliaryWitnessBatch} from './capturedParameterOwnership';
 
 // Private, request-local source construction. The retained source is never
 // reserialized from a solver model, and no optimizer output is copied over it.
@@ -28,9 +29,10 @@ export function prepareIndependentPrimitiveAppend(revision:string,before:any,ext
   // Fresh admission and a real whole-candidate solve are proof ONLY. Keep the
   // existing constrained displacement and branch bounds; no numerical failure
   // or rejected/changed classification becomes accepted through this path.
-  const cold=solveSketch({revision,sketch:structuredClone(candidate),boundary:structuredClone(candidate.boundary),externalParameters:external});
+  let auxiliaryWitness:CapturedAuxiliaryWitnessBatch|undefined;
+  const cold=solveSketch({revision,sketch:structuredClone(candidate),boundary:structuredClone(candidate.boundary),externalParameters:external},undefined,batch=>{auxiliaryWitness=batch;});
   if(!cold.ok)return cold;
   assertVerifiedReplayGeometry(candidate,cold.sketch,cold.evidence,external);
-  const checked=evaluateCapturedSketch(candidate,external,cold.evidence,added.id);
+  const checked=evaluateCapturedSketch(candidate,external,cold.evidence,added.id,auxiliaryWitness);
   return {revision,ok:true as const,serializedSketch:JSON.stringify(candidate),evidence:checked.evidence};
 }

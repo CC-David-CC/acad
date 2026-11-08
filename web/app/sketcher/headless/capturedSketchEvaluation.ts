@@ -4,10 +4,12 @@ import {inspectStageGenerators} from './stageGeneratorPolicy.mjs';
 import {validateSplineDerivedGeometry} from './splineDerivedValidation';
 import {sameRestoredSketch} from '../historyEquivalence.mjs';
 import {assertSemantics,assertFixedBoundary,inspectTree,typeIndex,validateConstraintGeometry,fail} from './sketchValidation';
+import {capturedParameterOwnership,installCapturedAuxiliaryWitnesses} from './capturedParameterOwnership';
+import type {CapturedAuxiliaryWitnessBatch} from './capturedParameterOwnership';
 
 // These are observations of original equations AT the captured coordinates,
 // paired with independent cold-admission evidence. This is not solve success.
-export function evaluateCapturedSketch(sketch:any,external:any,coldEvidence:any[],newPrimitiveId?:string) {
+export function evaluateCapturedSketch(sketch:any,external:any,coldEvidence:any[],newPrimitiveId?:string,auxiliaryWitness?:CapturedAuxiliaryWitnessBatch) {
   inspectTree(sketch);assertSemantics(sketch,sketch.boundary,sketch.boundary);
   validateProjectSketch(sketch);typeIndex(sketch,sketch.boundary);inspectStageGenerators(sketch);
   for(const o of sketch.objects)if(o.type==='BSpline')validateSplineDerivedGeometry(o.id,o.data);
@@ -16,17 +18,19 @@ export function evaluateCapturedSketch(sketch:any,external:any,coldEvidence:any[
     const pm=workspace.parametricManager,index=workspace.createIndex(),stages=pm.stages;
     const restored=JSON.parse(workspace.io.serializeSketch(sketch.metadata,{strict:true}));restored.boundary=structuredClone(sketch.boundary);
     if(!sameRestoredSketch(JSON.stringify(sketch),JSON.stringify(restored)))fail('CURRENT_GEOMETRY_MISMATCH','Decoding changed captured sketch geometry or intent.');
-    const roots=new Set<any>(),params=new Set<any>();
+    const roots=new Set<any>();
     for(const row of sketch.objects){
       const object=index[row.id];if(!object||object.id!==row.id||object.TYPE!==row.type||object.role!==row.role||object.stage!==stages[row.stage]||!object.stage.objects.has(object))fail('INVALID','Captured object ownership differs from its actual source.');
-      roots.add(object);object.visitParams(p=>{if(!Number.isFinite(p.get()))fail('INVALID','Captured parameters must be finite.');params.add(p);});
+      roots.add(object);object.visitParams(p=>{if(!Number.isFinite(p.get()))fail('INVALID','Captured parameters must be finite.');});
     }
-    for(const layer of workspace.layers)for(const object of layer.objects)object.visitParams(p=>params.add(p));
+    const ownership=capturedParameterOwnership(workspace);
+    installCapturedAuxiliaryWitnesses(workspace,ownership,auxiliaryWitness);
     let fresh=0;const evidence=[];
     for(const [si,stage] of stages.entries()){
       let authored=0;
       for(const c of stage.solverSystem.allConstraints){
-        if(c.stage!==stage||c.objects.some(o=>index[o.id]!==o||!o.stage||(!stages.includes(o.stage)&&o.stage!==pm.groundStage)||o.stage!==pm.groundStage&&stages.indexOf(o.stage)>si)||c.params.some(p=>!params.has(p)||!Number.isFinite(p.get())))fail('INVALID','Constraint parameter or source ownership is invalid.');
+        if(c.stage!==stage||c.objects.some(o=>index[o.id]!==o||!o.stage||(!stages.includes(o.stage)&&o.stage!==pm.groundStage)||o.stage!==pm.groundStage&&stages.indexOf(o.stage)>si))fail('INVALID','Constraint source ownership is invalid.');
+        ownership.constraint(c,stage);
         c.resolveConstants(pm.constantResolver);
         const profile=validateConstraintGeometry(c);
         if(!c.internal){
@@ -40,6 +44,7 @@ export function evaluateCapturedSketch(sketch:any,external:any,coldEvidence:any[
       if(authored!==sketch.stages[si].constraints.length)fail('INTENT_CHANGED','Captured constraint membership changed.');
     }
     if(fresh!==coldEvidence.length)fail('ADMISSION_CHANGED','Fresh admission evidence membership differs.');
+    ownership.unchanged();
     assertFixedBoundary(index,sketch.boundary);
     if(newPrimitiveId){
       const root=index[newPrimitiveId];if(!root||!roots.has(root)||root.parent||root.isGenerated||root.generators.size)fail('INVALID_TARGET','The appended primitive must be independently owned.');

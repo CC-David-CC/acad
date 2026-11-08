@@ -5,6 +5,8 @@ import {inspectLocalJacobian,inspectStageLocalJacobians} from './localJacobian.m
 import {validExternalParameterName} from 'gems/safeExpression.mjs';
 import {HeadlessSketchWorkspace} from './workspace';
 import {validateSplineDerivedGeometry} from './splineDerivedValidation';
+import {captureSolvedAuxiliaryWitnesses} from './capturedParameterOwnership';
+import type {CapturedAuxiliaryWitnessBatch} from './capturedParameterOwnership';
 
 import {SketchSolveError,fail,record,only,inspectTree,typeIndex,assertSemantics,assertFixedBoundary,incomingIntent,validateConstraintGeometry} from './sketchValidation';
 
@@ -19,7 +21,7 @@ function authoredEvidenceSnapshot(row) {
   const freeze=value=>{if(value&&typeof value==='object'){for(const child of Object.values(value))freeze(child);Object.freeze(value);}return value;};
   return freeze(snapshot);
 }
-export function solveSketch(request, onAuthoredEvidence?: (row: any) => void) {
+export function solveSketch(request, onAuthoredEvidence?: (row: any) => void, onAuxiliaryWitness?: (batch:CapturedAuxiliaryWitnessBatch)=>void) {
   try {
     if (!record(request) || typeof request.revision !== 'string' || !request.revision || request.revision.length > 256 || !record(request.sketch) || !record(request.externalParameters)) fail('INVALID','Invalid solve request.');
     inspectTree(request);
@@ -76,6 +78,9 @@ export function solveSketch(request, onAuthoredEvidence?: (row: any) => void) {
     if(JSON.stringify([solved.dimensions,solved.labels,solved.constants,solved.metadata])!==JSON.stringify([sketch.dimensions,sketch.labels,sketch.constants,sketch.metadata]))fail('INTENT_CHANGED','Sketch non-geometric state changed during solving.');
     inspectTree(solved);
     const localJacobian=diagnostic===undefined?undefined:perStage?inspectStageLocalJacobians(workspace.parametricManager.stages,workspace.parametricManager.groundStage):inspectLocalJacobian(workspace.parametricManager.stages);
+    // Internal-only actual solved observation. Never add this to the public
+    // request/reply, saved sketch, diagnostics, or caller-provided flags.
+    if(onAuxiliaryWitness)onAuxiliaryWitness(captureSolvedAuxiliaryWitnesses(workspace));
     return {revision:request.revision,ok:true as const,sketch:solved,evidence,...(localJacobian?{localJacobian}:{})};
   } catch(error) {
     return {revision:typeof request?.revision==='string'?request.revision:'',ok:false as const,error:{code:error instanceof SketchSolveError?error.code:'SOLVE_ERROR',message:error instanceof Error?error.message:'Sketch solve failed.',...(failureCause(error)?{cause:failureCause(error)}:{})}};
