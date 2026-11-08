@@ -16,6 +16,9 @@ def require(v,text):
     if not v:raise ValueError(text)
 def one(v,text):require(len(v)==1,text);return v[0]
 def q(v):require(type(v) in (int,float) and math.isfinite(v),'finite actual Number');return Fraction(v)
+def point(v):
+    require(type(v) is dict and 'x' in v and 'y' in v,'actual XY point record')
+    return (q(v['x']),q(v['y']))
 def d(v):
     if isinstance(v,Fraction):return Decimal(v.numerator)/Decimal(v.denominator)
     return d(q(v))
