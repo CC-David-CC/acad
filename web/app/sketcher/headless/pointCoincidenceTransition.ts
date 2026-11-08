@@ -3,7 +3,7 @@ import {solveSketch} from './solve';
 import {evaluateCapturedSketch} from './capturedSketchEvaluation';
 import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
 import {captureConnectedGeometryScope,applyCapturedGeometry,assertCapturedGeometryScope,firstCapturedGeometryDifference as difference} from './capturedGeometryScope';
-import {preparePointCoincidence} from '../actions/pointCoincidenceAdmission';
+import {preparePointCoincidence,inspectPointCoincidence} from '../actions/pointCoincidenceAdmission';
 import {validateConstraintGeometry} from './sketchValidation';
 import {projectRenderSketch} from './renderSketchProjection.mjs';
 import {capturePointCoincidenceIntent,capturePointCoincidenceReceipt,coincidenceRecord as record} from './pointCoincidenceEnvelope.mjs';
@@ -26,7 +26,7 @@ function noMovingGenerator(workspace:any,fields:Map<string,Set<string>>){for(con
 
 export function addPointCoincidenceTransition(request:any){const revision=revisionOf(request);try{const a=capture(request),before=JSON.parse(a.sketchJSON),bindings=a.externalParameters,original=cold(a.revision,before,bindings);verified(before,original.result.sketch,original.result.evidence,bindings);evaluateCapturedSketch(before,bindings,original.result.evidence,undefined,original.auxiliary);
  const ids=projectedIds(before);if(a.intent.ids.some(id=>!ids.has(id)))fail('COINCIDENCE_TARGET','Choose two current inspected authored points.');
- const scope=captureConnectedGeometryScope(before,bindings,original.result.evidence,original.auxiliary,(_workspace,pm,index)=>{const prepared=preparePointCoincidence(pm,a.intent.ids.map(id=>index[id]));prepared.constraint.resolveConstants(pm.constantResolver);let originalSatisfied=true;try{validateConstraintGeometry(prepared.constraint);}catch(e){if(e?.code!=='RESIDUAL')throw e;originalSatisfied=false;}const equations=[];prepared.constraint.collectPolynomials(equations);return{equations,value:{stage:prepared.stage.index,originalSatisfied}};},'Point coincidence');
+ const scope=captureConnectedGeometryScope(before,bindings,original.result.evidence,original.auxiliary,(_workspace,pm,index)=>{const inspected=inspectPointCoincidence(pm,a.intent.ids.map(id=>index[id]));inspected.constraint.resolveConstants(pm.constantResolver);let originalSatisfied=true;try{validateConstraintGeometry(inspected.constraint);}catch(e){if(e?.code!=='RESIDUAL')throw e;originalSatisfied=false;}const equations=[];inspected.constraint.collectPolynomials(equations);return{equations,value:{stage:inspected.stage.index,originalSatisfied}};},'Point coincidence');
  const workspace=new HeadlessSketchWorkspace(bindings);workspace.io._loadSketch(structuredClone(before),{strict:true});const pm=workspace.parametricManager,index=workspace.createIndex(),prepared=preparePointCoincidence(pm,a.intent.ids.map(id=>index[id])),constraint=prepared.constraint,stage=prepared.stage.index;
  if(stage!==scope.selection.stage)fail('COINCIDENCE_TARGET','Coincidence stage ownership changed.');
  const receipt=(at:number,status:string,existing:boolean)=>({typeId:'PCoincident',objects:constraint.objects.map(o=>o.id),status,stage,index:at,existing});
