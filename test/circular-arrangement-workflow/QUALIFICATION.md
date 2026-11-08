@@ -52,3 +52,20 @@ internal rejection message in the circular read failure, keeping ENGINE_FAILURE,
 the original cause and every validation assertion. No raw Native payload or
 source geometry is exposed. The next complete run must identify the actual
 underlying failure before any geometric repair; do not assume its cause.
+
+## Third complete browser attempt R3
+
+Actual Coreb7d6590627f28a18568fc5330c542480415ebcf2/Desktop1298d63c4.
+Normal build85515 and fixture94247 completed0. Whole Chrome63998 verified150
+runtime assets and actual source census; first create-selected-extrusion failed
+with typed CIRCULAR_PROVENANCE_UNRESOLVED instead of the earlier outer generic
+read rejection. Nine public commands/two rows/no solids or saves qualified.
+Original receipt and snapshots retained in evidence-r3; own contexts closed,
+driver sources unchanged. No assumption that R2 and R3 failed the same check.
+
+Source-reviewed semantic seam-order repair0cf3482 is composed separately: merge
+adjacent/cyclic semantic uses before rotating the cycle. The explicit permitted
+[A/fragment0,B/fragment0,A/fragment1] counterexample previously rotated to[A,A,B]
+and was incorrectly rejected. Full Native fragments, parameters, coverage,
+source equations and orientation checks remain intact. This source fix is not
+claimed as the observed cause of R2 or R3. Native C++ provenance review continues.
