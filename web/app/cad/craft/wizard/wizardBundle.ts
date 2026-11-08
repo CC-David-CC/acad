@@ -115,6 +115,10 @@ export function readHistoryReviewCancel(capture: HistoryReviewCancelCapture, ctx
   if (!origin || !currentHistoryOrigin(origin, ctx)) throw staleHistoryReview();
   return origin;
 }
+// Apply and Cancel authenticate the same actual wizard-origin lineage. Apply
+// reads the live draft only after this private capture has been revalidated.
+export const captureHistoryReviewApply = captureHistoryReviewCancel;
+export const readHistoryReviewApply = readHistoryReviewCancel;
 export function discardHistoryReviewDraft(capture: HistoryReviewCancelCapture, ctx: ApplicationContext): void {
   const origin = readHistoryReviewCancel(capture, ctx), before = origin.wizard.workingRequest$.value;
   // Retire this handler before stream notifications can reenter. All effects
@@ -346,7 +350,21 @@ export function activate(ctx: ApplicationContext) {
     cancel,
     
     applyWorkingRequest: () => {
+      const working=getWorkingRequest(), placement=working?.type==='PLANE'&&!insertOperation$.value
+        ?captureHistoryReviewApply(ctx,working):null;
       invalidatePassivePreview();
+      if(working?.type==='PLANE'&&!insertOperation$.value){
+        // A stale modern origin must never fall through to the raw history edit.
+        const wizard=actualWizard,project=ctx.projectService,signal=project.documentSignal,generation=project.documentGeneration;
+        const revision=workingRequest$.revision;
+        const stillDraft=()=>ctx.wizardService===wizard&&ctx.projectService===project&&project.documentSignal===signal&&
+          project.isDocumentCurrent(generation)&&!signalAborted(signal)&&workingRequest$.value===working&&workingRequest$.revision===revision;
+        Promise.resolve().then(()=>{
+          if(!placement||!stillDraft()||typeof ctx.craftService.applyPrincipalPlaneDraft!=='function')throw staleHistoryReview();
+          return ctx.craftService.applyPrincipalPlaneDraft(placement);
+        }).catch(error=>{if(stillDraft())updateState(state=>{state.error=error;});});
+        return;
+      }
       const {type, params} = getWorkingRequest();
       const request = clone({type, params});
       const setError = error => updateState(state => state.error = error);
