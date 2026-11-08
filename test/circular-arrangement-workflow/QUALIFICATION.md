@@ -69,3 +69,25 @@ adjacent/cyclic semantic uses before rotating the cycle. The explicit permitted
 and was incorrectly rejected. Full Native fragments, parameters, coverage,
 source equations and orientation checks remain intact. This source fix is not
 claimed as the observed cause of R2 or R3. Native C++ provenance review continues.
+
+## Fourth complete browser attempt R4
+
+Actual Core25fc6c96ce67381d851aff0b6f252269e00cf500/Desktop1298d63c4, Native5a4f0a82
+with explicit9789a617/ad06c43b pair. Normal app build71071 and fixture79329 exit0.
+Whole Chrome28237 verifies150 assets and source census; first cell request fails
+strict read corroboration with the now-retained cause:
+`Actual Native intervals do not cover each original source circle.` Native read
+returned status0; no accepted solid or save is qualified. Nine commands/two rows;
+owned contexts closed and all driver source snapshots unchanged. Original
+receipt/snapshots retained in evidence-r4. The semantic seam-order repair is
+composed but this independent interval-coverage check still correctly refuses.
+
+Important correction: R3's typed CIRCULAR_PROVENANCE_UNRESOLVED did NOT establish
+that owned construction was reached. Native read itself can return that status
+before corroboration; its error is outside the read-corroboration wrapper. R3's
+specific Native stage remains unknown. R4 positively identifies the independent
+source-circle interval coverage check. Do not attribute either to Copy=true,
+face orientation, the underlying kernel, or a particular numerical cause without
+further evidence. Source review now considers how independent Common/Cut cell
+boundaries retain actual fragment representations. No tolerance, count, timing,
+geometry or qualification standard is waived.
