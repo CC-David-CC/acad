@@ -1,3 +1,4 @@
+import {assertHistoryControlAppendAllowed,historyControlAppendReason} from 'engine/solid/authoredHistoryState.mjs';
 import {MOpenFaceShell} from '../model/mopenFace';
 import {MWorkerSolid} from '../model/mworkerSolid';
 import {sketchBoundaryFrame} from '../sketch/boundaryValidity';
@@ -31,6 +32,7 @@ export function createWorkerLoftCommands(ctx:any,submit:any,cancelEpoch:(epoch:n
  let inspecting=0;
  function inspectWorkerLofts(){
   const base=ctx.craftService.inspectRectangleCreation(),project=ctx.projectService,registry=ctx.cadRegistry,models=ctx.craftService.models$.value;let reason=base.ready?base.reason:base.reason||'Workspace is unavailable.';
+  if(!reason)reason=historyControlAppendReason(ctx.craftService.modifications$.value.history,OP);
   if(!reason&&(!project.hasHostLifetime||ctx.projectManager.unit!=='millimeter'))reason='A current millimeter host workspace is required.';
   if(!reason)try{ctx.operationService.get(OP);}catch{reason='Selected-region loft is unavailable in this build.';}
   const e=ctx.expressionService;if(!reason&&(e.isTyped||e.script$.value.trim()||Object.keys(e.table$.value||{}).length||!Array.isArray(e.errors$.value)||e.errors$.value.length))reason='Loft currently supports native local constants without typed/project bindings.';
@@ -89,6 +91,7 @@ export function createWorkerLoftCommands(ctx:any,submit:any,cancelEpoch:(epoch:n
   return captureLoftSectionReferences(rows.map(value=>{const r=fields(value,['faceId','regionId','seam']),d=Object.getOwnPropertyDescriptor(r.seam||{},'kind');if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value')||!['vertex','circle-angle'].includes(d.value))fail('INVALID_REQUEST','Choose an explicit source seam.');const seam=fields(r.seam,d.value==='vertex'?['kind','pointId','reversed']:['kind','curveId','angleRadians','reversed']);return{faceId:r.faceId,regionId:r.regionId,seam};}));
  }
  async function createWorkerLoft(input:any,rawOptions:any={}){
+  assertHistoryControlAppendAllowed(ctx.craftService.modifications$.value.history,OP);
   const a=fields(input,['revision','version','unit','engine','engineRevision','sections','construction','bodyPolicy']),opts=options(rawOptions);if(a.version!==1||a.unit!=='millimeter'||a.engine!=='occ'||a.construction!=='ruled-solid'||a.bodyPolicy!=='separate')fail('INVALID_REQUEST','Select an explicit separate millimeter ruled-solid loft.');a.sections=commandSections(a.sections);requireBuild(a.engineRevision);
   const job=begin(a.revision,a.sections.map(s=>s.faceId),a.engineRevision,opts,true),project=ctx.projectService;let featureId:string=null,receipt:any=null,committed=false;
   try{job.current();featureId=project.counterGenerator.generateFeatureId();const params=captureOwnedLoftFeature({version:1,unit:a.unit,engine:a.engine,engineRevision:a.engineRevision,featureId:Number(featureId),sections:a.sections,construction:a.construction,bodyPolicy:a.bodyPolicy}),outputId=solidBodyId(params.featureId);

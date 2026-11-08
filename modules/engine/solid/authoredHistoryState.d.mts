@@ -4,3 +4,5 @@ export function featureSuppressed(entry:any):boolean;
 export function historyStateVersion(history:any[]):1|undefined;
 export function validateModelHistoryState(model:any):1|undefined;
 export function requireActiveFeature<T>(entry:T):T;
+export function historyControlAppendReason(history:any[],type:string):'UNSUPPORTED_HISTORY'|null;
+export function assertHistoryControlAppendAllowed(history:any[],type:string):void;

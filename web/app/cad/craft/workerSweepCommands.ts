@@ -1,3 +1,4 @@
+import {assertHistoryControlAppendAllowed,historyControlAppendReason} from 'engine/solid/authoredHistoryState.mjs';
 import {MOpenFaceShell} from '../model/mopenFace';
 import {MWorkerSolid} from '../model/mworkerSolid';
 import {sketchBoundaryFrame} from '../sketch/boundaryValidity';
@@ -32,6 +33,7 @@ export function createWorkerSweepCommands(ctx:any,submit:any,cancelEpoch:(epoch:
  let inspecting=0;
  function inspectWorkerSweeps(){
   const base=ctx.craftService.inspectRectangleCreation(),project=ctx.projectService,registry=ctx.cadRegistry,models=ctx.craftService.models$.value;let reason=base.ready?base.reason:base.reason||'Workspace is unavailable.';
+  if(!reason)reason=historyControlAppendReason(ctx.craftService.modifications$.value.history,OP);
   if(!reason&&!project.hasHostLifetime)reason='A current host workspace is required.';
   if(!reason)try{ctx.operationService.get(OP);}catch{reason='Selected-region sweep is unavailable in this build.';}
   const e=ctx.expressionService;if(!reason&&(e.isTyped||e.script$.value.trim()||Object.keys(e.table$.value||{}).length||!Array.isArray(e.errors$.value)||e.errors$.value.length))reason='Sweep currently supports native local constants without typed/project bindings.';
@@ -89,6 +91,7 @@ export function createWorkerSweepCommands(ctx:any,submit:any,cancelEpoch:(epoch:
   }finally{inspecting--;job.dispose();}
  }
  async function createWorkerSweep(input:any,rawOptions:any={}){
+  assertHistoryControlAppendAllowed(ctx.craftService.modifications$.value.history,OP);
   const a=fields(input,['revision','version','unit','engine','engineRevision','faceId','regionId','pathFaceId','pathCurves','transport','bodyPolicy']),opts=options(rawOptions);id(a.regionId,8192);a.pathCurves=pathReferences(a.pathCurves);if(a.version!==1||a.unit!=='millimeter'||a.engine!=='occ'||a.transport!=='corrected-frenet'||a.bodyPolicy!=='separate'||!a.regionId.startsWith('sketch-region:'))fail('INVALID_REQUEST','Select a separate millimeter OCC region sweep with explicit transport.');requireBuild(a.engineRevision);
   const job=begin(a.revision,a.faceId,a.pathFaceId,a.engineRevision,opts,true),project=ctx.projectService;let featureId:string=null,receipt:any=null,committed=false;
   try{job.current();featureId=project.counterGenerator.generateFeatureId();const params=captureOwnedSweepFeature({version:1,unit:a.unit,engine:a.engine,engineRevision:a.engineRevision,featureId:Number(featureId),faceId:a.faceId,regionId:a.regionId,pathFaceId:a.pathFaceId,pathCurves:a.pathCurves,transport:a.transport,bodyPolicy:a.bodyPolicy}),outputId=solidBodyId(params.featureId);

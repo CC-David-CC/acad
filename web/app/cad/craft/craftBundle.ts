@@ -1,4 +1,4 @@
-import {featureSuppressed,historyStateVersion,HISTORY_CONTROL_TYPES,requireActiveFeature} from 'engine/solid/authoredHistoryState.mjs';
+import {featureSuppressed,historyStateVersion,assertHistoryControlAppendAllowed,requireActiveFeature} from 'engine/solid/authoredHistoryState.mjs';
 import {createWorkerHistoryControlCommands} from './workerHistoryControlCommands';
 import {validateControlledHistory,assertActiveHistoryDependencies,assertProtectedHistoryOutputs,applyHistoryControlTravel} from './authoredHistoryControls.mjs';
 import {HISTORY_CONTROL_KINDS,recordHistoryControl,planHistoryControlTravel} from './authoredEditJournal.mjs';
@@ -185,7 +185,7 @@ export function activate(ctx: ApplicationContext) {
       if (previous.history.some((entry, index) => index !== target && Number(entry.params?.featureId) === id)) {
         throw new Error('Duplicate feature ID.');
       }
-      if(historyStateVersion(previous.history)===1&&!HISTORY_CONTROL_TYPES.includes(normalized.type))throw Object.assign(Error('This operation is not integrated with suppressed feature history.'),{code:'UNSUPPORTED_HISTORY'});
+      assertHistoryControlAppendAllowed(previous.history,normalized.type);
       if (!editingHistory) ctx.projectService.counterGenerator.claimNewFeatureId(id);
       const project:any=ctx.projectService,document=project.documentGeneration,sourceEpoch=evaluationEpoch,
         sourceRevision=modifications$.revision,sourceTip=fullTipSignature,sourceModels=models$.value,sourceModelsRevision=models$.revision;

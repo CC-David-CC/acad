@@ -1,3 +1,4 @@
+import {assertHistoryControlAppendAllowed,historyControlAppendReason} from 'engine/solid/authoredHistoryState.mjs';
 import {MOpenFaceShell} from '../model/mopenFace';
 import {MWorkerSolid} from '../model/mworkerSolid';
 import {sketchBoundaryFrame} from '../sketch/boundaryValidity';
@@ -29,6 +30,7 @@ export function createWorkerRevolveCommands(ctx:any,submit:any,cancelEpoch:(epoc
  let inspecting=0;
  function inspectWorkerRevolves(){
   const base=ctx.craftService.inspectRectangleCreation(),project=ctx.projectService,registry=ctx.cadRegistry,models=ctx.craftService.models$.value;let reason=base.reason;
+  if(!reason)reason=historyControlAppendReason(ctx.craftService.modifications$.value.history,OP);
   if(!reason&&!project.hasHostLifetime)reason='A current host workspace is required.';
   if(!reason)try{ctx.operationService.get(OP);}catch{reason='Selected-region revolve is unavailable in this build.';}
   const e=ctx.expressionService;if(!reason&&(e.isTyped||e.script$.value.trim()||Object.keys(e.table$.value||{}).length))reason='Revolve currently supports native local constants without typed/project bindings.';
@@ -71,6 +73,7 @@ export function createWorkerRevolveCommands(ctx:any,submit:any,cancelEpoch:(epoc
   }finally{inspecting--;job.dispose();}
  }
  async function createWorkerRevolve(input:any,rawOptions:any={}){
+  assertHistoryControlAppendAllowed(ctx.craftService.modifications$.value.history,OP);
   const a=fields(input,['revision','unit','engine','engineRevision','faceId','regionId','axisSegmentId','angleRadians','bodyPolicy']),opts=options(rawOptions);id(a.regionId,8192);id(a.axisSegmentId,256);angle(a.angleRadians);if(a.unit!=='millimeter'||a.engine!=='occ'||a.bodyPolicy!=='separate'||!a.regionId.startsWith('sketch-region:'))fail('INVALID_REQUEST','Select a separate millimeter OCC region revolve.');requireBuild(a.engineRevision);
   const job=begin(a.revision,a.faceId,a.engineRevision,opts,true),project=ctx.projectService;let featureId:string=null,receipt:any=null,committed=false;
   try{job.current();featureId=project.counterGenerator.generateFeatureId();const params=captureOwnedRevolveFeature({version:1,unit:a.unit,engine:a.engine,engineRevision:a.engineRevision,featureId:Number(featureId),faceId:a.faceId,regionId:a.regionId,axisSegmentId:a.axisSegmentId,angleRadians:a.angleRadians,bodyPolicy:a.bodyPolicy}),outputId=solidBodyId(params.featureId);

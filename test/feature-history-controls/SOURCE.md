@@ -42,3 +42,12 @@ explicit committed-error envelope (`HISTORY_PUBLICATION_FAILED`, exact cause)
 if its lifetime or revision inspection throws. Native signal intrinsics for
 this new private submit path are captured once, avoiding listener overrides
 across awaits. This additional root source finding has no asserted live incident.
+
+
+The same metadata-only append policy now guards the explicitly unintegrated
+pattern/shell/revolve/sweep/loft and Boolean facades before feature-ID reservation,
+and their creation discovery reports refusal. This closes a source-confirmed
+late-admission seam: a facade could otherwise advertise creation and advance
+high-water before Core's final guard refused. Box/profile/hole/edge appends stay
+allowed, and every no-state path retains its prior capability. This is not new
+family support and has no asserted runtime incident or executed test.

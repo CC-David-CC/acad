@@ -1,3 +1,4 @@
+import {assertHistoryControlAppendAllowed,historyControlAppendReason} from 'engine/solid/authoredHistoryState.mjs';
 import {MWorkerSolid} from 'cad/model/mworkerSolid';
 import {solidBodyId} from 'engine/solid/solidIntent.mjs';
 import {captureOwnedShellFeature} from 'engine/solid/ownedShellFeature.mjs';
@@ -58,6 +59,7 @@ export function createWorkerShellCommands(ctx:any,submit:any,cancelEpoch:(epoch:
   const craft=ctx.craftService,registry=ctx.cadRegistry,project=ctx.projectService,storage=ctx.storageService,manager=ctx.projectManager,unit=manager.unit,info=craft.inspectWorkerSolids(),state=craft.modifications$.value,generation=project.documentGeneration,storageRevision=storage.revision;
   if(!id(info.revision)||!Array.isArray(info.bodies)||info.bodies.length>16384||!Array.isArray(info.outputs)||info.outputs.length>16384)fail('UNAVAILABLE','Current solid inspection is unavailable.');
   let reason=info.ready?null:info.reason||'Finish the current operation before creating a shell.';
+  if(!reason)reason=historyControlAppendReason(ctx.craftService.modifications$.value.history,OP);
   if(!reason&&(!project.hasHostLifetime||!project.isDocumentCurrent(generation)))reason='A current host-bound workspace is required.';
   if(!reason&&unit!=='millimeter')reason='Shells require a millimeter document.';
   if(!reason)try{ctx.operationService.get(OP);}catch{reason='The shell operation is unavailable in this build.';}
@@ -80,6 +82,7 @@ export function createWorkerShellCommands(ctx:any,submit:any,cancelEpoch:(epoch:
  }
  function inspectWorkerShells(){return discover().info;}
  async function createWorkerShell(input:any,rawOptions:any={}){
+  assertHistoryControlAppendAllowed(ctx.craftService.modifications$.value.history,OP);
   const args=fields(input,['revision','version','unit','engine','engineRevision','bodyId','removedFaceIds','thickness','direction']),opts=options(rawOptions);
   if(!id(args.revision)||!id(args.bodyId,1024)||args.version!==1||args.unit!=='millimeter'||args.engine!=='occ'||typeof args.engineRevision!=='string'||!/^sha256:[a-f0-9]{64}:[a-f0-9]{64}$/.test(args.engineRevision))fail('INVALID_REQUEST','Use a current inspected OCC body and explicit runtime revision.');
   const discovery=discover(),info=discovery.info;if(!info.ready)fail('UNAVAILABLE',info.reason);if(args.revision!==info.revision)throw abort();

@@ -1,3 +1,4 @@
+import {assertHistoryControlAppendAllowed,historyControlAppendReason} from 'engine/solid/authoredHistoryState.mjs';
 import {MWorkerSolid} from 'cad/model/mworkerSolid';
 import {solidBodyId} from 'engine/solid/solidIntent.mjs';
 import {inspectWorkerSolidPatternSeeds} from 'engine/solid/solidLedger.mjs';
@@ -35,6 +36,7 @@ export function createWorkerLinearHolePatternCommands(ctx:any,submit:any,cancelE
   const craft=ctx.craftService,registry=ctx.cadRegistry,project=ctx.projectService,storage=ctx.storageService,manager=ctx.projectManager,unit=manager.unit,info=craft.inspectWorkerSolids(),state=craft.modifications$.value,generation=project.documentGeneration,sketches=ctx.sketchStorageService,namespace=project.sketchStorageNamespace,sourceRevision=sketchRevision(storage,namespace);
   if(!id(info.revision)||!Array.isArray(info.bodies)||info.bodies.length>16384||!Array.isArray(info.outputs)||info.outputs.length>16384)fail('UNAVAILABLE','Current solid inspection is unavailable.');
   let reason=info.ready?null:info.reason||'Finish the current operation before creating linear hole patterns.';
+  if(!reason)reason=historyControlAppendReason(ctx.craftService.modifications$.value.history,OP);
   if(!reason&&(!project.hasHostLifetime||!project.isDocumentCurrent(generation)))reason='A current host-bound workspace is required.';
   if(!reason&&unit!=='millimeter')reason='Linear hole patterns require a millimeter document.';
   if(!reason&&(ctx.expressionService.isTyped||ctx.expressionService.script$.value.trim()||Object.keys(ctx.expressionService.table$.value||{}).length))reason='Linear hole patterns currently support native local constants without project parameter bindings.';
@@ -67,6 +69,7 @@ export function createWorkerLinearHolePatternCommands(ctx:any,submit:any,cancelE
  }
  function inspectWorkerLinearHolePatterns(){return discover().info;}
  async function createWorkerLinearHolePattern(input:any,rawOptions:any={}){
+  assertHistoryControlAppendAllowed(ctx.craftService.modifications$.value.history,OP);
   const args=fields(input,['revision','version','unit','engine','engineRevision','bodyId','seedFeatureId','axis','count','spacing']),opts=options(rawOptions);
   if(!id(args.revision)||!id(args.bodyId,1024)||!Number.isSafeInteger(args.seedFeatureId)||args.seedFeatureId<1||args.version!==1||args.unit!=='millimeter'||args.engine!=='occ'||typeof args.engineRevision!=='string'||!/^sha256:[a-f0-9]{64}:[a-f0-9]{64}$/.test(args.engineRevision))fail('INVALID_REQUEST','Use a current inspected OCC body and explicit runtime revision.');
   const discovery=discover(),info=discovery.info;if(!info.ready)fail('UNAVAILABLE',info.reason);if(args.revision!==info.revision)throw abort();

@@ -18,7 +18,11 @@ export function historyStateVersion(history){
 }
 export function validateModelHistoryState(model){
  const state=historyStateVersion(model.history),marker=Object.getOwnPropertyDescriptor(model,'historyStateVersion');
+ if(!marker&&'historyStateVersion' in model)fail('INVALID_HISTORY_STATE','The authored history state marker must be own data.');
  if(state===1?(!marker?.enumerable||!Object.hasOwn(marker,'value')||marker.value!==1):!!marker)fail('INVALID_HISTORY_STATE','The authored history state marker must exactly match its suppressed entries.');
  return state;
 }
 export function requireActiveFeature(entry){if(featureSuppressed(entry))fail('FEATURE_SUPPRESSED','Unsuppress this authored feature before editing its parameters.');return entry;}
+
+export function historyControlAppendReason(history,type){return historyStateVersion(history)===1&&!HISTORY_CONTROL_TYPES.includes(type)?'UNSUPPORTED_HISTORY':null;}
+export function assertHistoryControlAppendAllowed(history,type){if(historyControlAppendReason(history,type))fail('UNSUPPORTED_HISTORY','This operation is not integrated with suppressed feature history.');}

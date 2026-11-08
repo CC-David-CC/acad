@@ -1,3 +1,4 @@
+import {assertHistoryControlAppendAllowed,historyControlAppendReason} from 'engine/solid/authoredHistoryState.mjs';
 import {MWorkerSolid} from 'cad/model/mworkerSolid';
 import {MWorkerEmpty} from 'cad/model/mworkerEmpty';
 import {captureSolidBox,captureSolidBoolean,solidBodyId} from 'engine/solid/solidIntent.mjs';
@@ -28,10 +29,11 @@ export function createWorkerSolidCommands(ctx:any,submit:any,cancelEpoch:(epoch:
   const historyBuild=genericHistoryBuild(craft.modifications$.value.history),budgetBuild=historyBuild||OCC_BOOLEAN_HISTORY_BUILD;
   const selectedOwnedBudget=Object.freeze({engine:budgetBuild.id,engineRevision:budgetBuild.revision,applies:selectedProfileVersion(budgetBuild)!==null,...selectedProfileHistoryBudget(craft.modifications$.value.history,budgetBuild.revision)});
   const boxEngineBindings=Object.freeze(engines.map((entry:any)=>{try{const build=selectSolidContinuationBuild(outputs,entry.id,entry.revision);if(historyBuild&&historyBuild!==build)throw Object.assign(Error('The authored part backend differs from its current outputs.'),{code:'ENGINE_REVISION_MISMATCH'});return Object.freeze({engine:entry.id,engineRevision:build.revision,compatible:true,reason:null});}catch(error){return Object.freeze({engine:entry.id,engineRevision:null,compatible:false,reason:error.code||'ENGINE_BINDING_MISMATCH'});}}));
-  return Object.freeze({ready:end.ready,reason:end.reason||null,revision:end.revision,unit:'millimeter',selectedOwnedBudget,boxEngineBindings,engines:Object.freeze(engines.map((entry:any)=>Object.freeze({...entry}))),bodies:Object.freeze(bodies),outputs:Object.freeze(outputs)});
+  return Object.freeze({ready:end.ready,reason:end.reason||null,revision:end.revision,unit:'millimeter',selectedOwnedBudget,boxEngineBindings,engines:Object.freeze(engines.map((entry:any)=>Object.freeze(historyControlAppendReason(craft.modifications$.value.history,'WORKER_SOLID_BOOLEAN_V1')?{...entry,operations:Object.freeze({...entry.operations,boolean:false}),booleanCreationReason:'UNSUPPORTED_HISTORY'}:{...entry}))),bodies:Object.freeze(bodies),outputs:Object.freeze(outputs)});
  }
 
  async function execute(kind:'box'|'boolean',input:any,options:any={}){
+  assertHistoryControlAppendAllowed(ctx.craftService.modifications$.value.history,kind==='box'?'WORKER_SOLID_BOX_V1':'WORKER_SOLID_BOOLEAN_V1');
   const explicitBuild=kind==='box'&&Object.prototype.hasOwnProperty.call(input||{},'engineRevision');
   const keys=kind==='box'?['revision','version','unit','engine','origin','dimensions',...(explicitBuild?['engineRevision']:[])]:['revision','version','unit','engine','kind','a','b'],args=capture(input,keys),opts=capture(options,Object.keys(options));
   if(explicitBuild&&(typeof args.engineRevision!=='string'||!/^sha256:[a-f0-9]{64}:[a-f0-9]{64}$/.test(args.engineRevision)))throw invalid('Select an exact registered solid engine revision.');
