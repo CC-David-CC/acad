@@ -100,7 +100,7 @@ inferred from number of commands or isolated passing examples.
 
 ## Current bounded source queues — after native attachment R2
 
-The most recent complete source workflow is StraightSlot R1 on Core79c9c86/
+The most recent frozen proof is5c82504: StraightSlot R1 on Core79c9c86/
 Desktopddab73b45, with independent geometry/source/archive oracle PASS. Native
 attachment d82b3c1 and earlier cubic/navigation/Cancel/frame proofs remain.
 It is not an all-Gate1 signoff. Both repositories'
