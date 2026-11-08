@@ -13,7 +13,7 @@ export async function prepareManufacturingForSave(captured,{worker,signal,getGen
   check();
   const geometryRevision=await hashCanonicalInWorker({kind:'codi-jsketcher-geometry-v1',project},worker,signal,getGeneration,maxBytes);
   check();
-  if(manufacturing.revision!==geometryRevision)throw new Error('Model changed; review material assignments before saving');
+  if(manufacturing.revision!==geometryRevision)throw Object.assign(new Error('Model changed; review material assignments before saving'),{code:'MANUFACTURING_REVIEW_REQUIRED'});
   // The legacy limit applies to canonical {project, manufacturing}. The
   // digest domain adds this fixed ASCII field; account for it without changing
   // the accepted payload bound or serializing that document into one string.
