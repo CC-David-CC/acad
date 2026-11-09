@@ -1,6 +1,6 @@
 import {HeadlessSketchWorkspace} from './workspace';
 import {OffsetGeneratorSchema} from '../generators/offsetGenerator';
-import {offsetSourceRows,validateOffsetCaches,offsetDistance,offsetFail as fail} from '../generators/offsetSource.mjs';
+import {offsetSourceRows,validateOffsetCaches,offsetDistance,offsetInputData,offsetFail as fail} from '../generators/offsetSource.mjs';
 import {capturedParameterOwnership} from './capturedParameterOwnership';
 import {assertMirrorRoot} from './mirrorSourceValidation';
 export function validateOffsetSources(source:any,external:any={}){
@@ -10,7 +10,7 @@ export function validateOffsetSources(source:any,external:any={}){
 }
 export function inspectOffsetSource(source:any,external:any={}){
  const rows=validateOffsetSources(source,external),generated=new Set(source.stages.flatMap(s=>s.generators.flatMap(g=>g.generatedObjects))),semantic=new Set(source.stages.flatMap(s=>s.constraints.filter(c=>['StraightSlot','RigidGroup'].includes(c.typeId)).flatMap(c=>c.objects)));
- const sources=source.objects.map(o=>{let reason=!['Segment','Circle'].includes(o.type)?'OFFSET_TYPE':generated.has(o.id)?'OFFSET_READONLY':semantic.has(o.id)?'OFFSET_SEMANTIC_GROUP':null;if(!reason)try{const data=o.data;if(o.type==='Segment'){const L=Math.hypot(data.b.x-data.a.x,data.b.y-data.a.y);if(!Number.isFinite(L)||L<=1e-9)reason='OFFSET_DOMAIN';}else if(!Number.isFinite(data.r)||data.r<=1e-9)reason='OFFSET_DOMAIN';}catch{reason='OFFSET_DOMAIN';}return{id:o.id,type:o.type,stage:o.stage,canOffset:reason===null,reason,sides:reason?[]:o.type==='Segment'?['left','right']:['outward','inward']};});
+ const sources=source.objects.map(o=>{let reason=!['Segment','Circle'].includes(o.type)?'OFFSET_TYPE':generated.has(o.id)?'OFFSET_READONLY':semantic.has(o.id)?'OFFSET_SEMANTIC_GROUP':null;if(!reason)try{offsetInputData(o.type,o.data);}catch(error){reason=error?.code||'OFFSET_DOMAIN';}return{id:o.id,type:o.type,stage:o.stage,canOffset:reason===null,reason,sides:reason?[]:o.type==='Segment'?['left','right']:['outward','inward']};});
  return {version:1,sources,offsets:rows.map(r=>({sourceId:r.source.id,outputId:r.output.id,stage:r.stage,index:r.index,distance:r.g.params.distance,resolvedDistance:offsetDistance(r.g.params.distance,name=>external[name]),side:r.g.params.side,type:r.source.type,status:'available',canEdit:true,canRemove:canRemove(source,r.output.id)}))};
 }
 function canRemove(source:any,id:string){const row=source.objects.find(o=>o.id===id),ids=new Set(row?.type==='Segment'?[id,id+':A',id+':B']:[id,id+':C']),candidate={...source,objects:source.objects.filter(o=>o.id!==id),stages:source.stages.map(s=>({...s,generators:s.generators.filter(g=>!(g.typeId==='Offset'&&g.generatedObjects[0]===id))}))},todo:any[]=[candidate];let visits=0;while(todo.length){const value=todo.pop();if(++visits>100000)fail('OFFSET_LIMIT','Offset dependency inventory exceeds its bound.');if(typeof value==='string'&&ids.has(value))return false;if(value&&typeof value==='object')todo.push(...Object.values(value));}return true;}
