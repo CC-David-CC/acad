@@ -16,7 +16,7 @@ may change. Available views always have the complete census before placement.
 NEW linkedPartDrawingCaptionLayout.mjs is Worker-only pure presentation math.
 Each caption retains full ASCII role text;3mm monospace is fixed,1.8mm advance
 is explicit through SVG textLength/lengthAdjust=spacing (never glyph scaling or
-font shrinking). One-mm side padding and6mm conservative line box use baseline
+font shrinking). One-mm side padding and6mm declared paper line box use baseline
 4mm below the top,2mm below it. All caption boxes fit8mm side margins, stay below
 the16mm title band and above the16mm footer band and actual warning legend band.
 Own geometry clears the ENTIRE line box by at least5mm; the extra.25mm gutter is
@@ -61,3 +61,25 @@ current oracle migration before that workflow runs on this renderer; its
 geometry and every old frozen artifact remain authoritative and untouched.
 Root owns that integration decision; this packet changes only the complete C11
 acceptance/oracle, not a currently executing counterbore packet.
+
+## Exact changed caption families and text-box scope
+
+The same renderer serves definition versions1/2/3. Derived view caption families
+are top/front/right, isometric, bore-center-section and detail with its unchanged
+2:1 role label. Unavailable views retain the exact `basis: unresolved` value/red
+status; available-empty detail retains its exact separate message. These are
+the only moved text families. Authored dimensions, annotations, leaders, title,
+footer and warning content/coordinates retain their original contracts. Every
+caption now has data-view-caption-id/data-caption-role/data-caption-layout,
+monospace font-family, font-size3, textLength and lengthAdjust=spacing, plus the
+existing red fill only for unresolved. Coordinates are derived choices, not
+persisted definition fields or caller-provided layout flags.
+
+The padded paper box is an explicit physical presentation contract, NOT a
+universal ink-bound proof for arbitrary installed fonts. Fixed3mm type and
+spacing-only advance avoid shrinking/truncation, but actual browser font glyph
+ink and legibility must still be reviewed in all genuine final SVG renders.
+The independent oracle does not read a claimed renderer box; it derives the
+box from actual XML coordinates/physical typography and authentic observed
+geometry, keeping existing1e-6 paper serialization and.02mm chord budgets.
+No current product or artifact is qualified by source review alone.

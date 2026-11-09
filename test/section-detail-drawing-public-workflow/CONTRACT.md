@@ -47,3 +47,18 @@ Native provenance/validity are observations of the actual pinned production
 Native candidate. The AFTER-WHOLE Python checker is independent analytic/source/
 archive/SVG arithmetic, not a second independent kernel implementation. No
 Native/browser/whole success is claimed by committing these files.
+
+## Derived cross-view caption presentation regression
+
+Every available top/front/right/isometric/section/detail caption in all eight
+SVG phases of BOTH original/translated cases must keep its full label/status
+and fixed3mm typography. Its declared padded paper box must clear its own
+authentic geometry/stroke by>=5mm and every other actual observed view/caption,
+fit8mm side margins and16mm header/footer plus actual warning exclusion.
+Unavailable derived captions/available-empty detail retain exact text/status,
+with placement under the same finite policy. No exact search algorithm or
+chosen coordinate is prescribed to the independent checker. No metadata/Native
+geometry/source/J/definition/scale change is permitted. Actual font ink and
+readability require final Chrome renders; this paper-box policy does not prove
+arbitrary installed-font metrics or general authored dimension/leader layout.
+Existing same16SVG/8.cad and all phase/refusal/travel/quotas remain mandatory.

@@ -1,6 +1,6 @@
 // Worker-only derived presentation. No authored pose/source/view is modified.
 // Caption boxes use fixed3mm monospace,1.8mm advance,1mm side padding and a
-// 6mm-high conservative line box (baseline4mm below its top). No font shrinking.
+// 6mm-high declared paper line box (baseline4mm below its top). No font shrinking.
 const resource=message=>{throw Object.assign(Error(message),{code:'RESOURCE_LIMIT'});};
 const finite=n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=1e9;
 const overlap=(a,b)=>a.min[0]<b.max[0]&&a.max[0]>b.min[0]&&a.min[1]<b.max[1]&&a.max[1]>b.min[1];

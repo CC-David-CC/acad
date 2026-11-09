@@ -32,6 +32,17 @@ def physical_facts(row,objects,bore,iso):
  def source_point(r):
   need(r=={'kind':'source-point','featureId':b['profile']['featureId'],'faceId':b['faceId'],'regionId':b['regionId'],'curveId':r['curveId'],'curveType':'segment','point':r['point']} and r['curveId'] in objects and r['point'] in ('a','b'),'source endpoint actual owner/type')
   p=objects[r['curveId']]['data'][r['point']];return[p['x'],p['y'],0]
+ # Independent actual geometry/caption inequalities over ALL views; the
+ # observed geometry has already been reconciled with original analytic truth.
+ envelopes=[caption_bounds(v) for v in d['views'] if one([p for p in read['views'] if p['viewId']==v['viewId']],'view availability')['status']=='available']
+ def intersects(a,b):return a[0]<b[2] and a[2]>b[0] and a[1]<b[3] and a[3]>b[1]
+ for i,(view_id,role,box) in enumerate(caption_boxes):
+  for b in envelopes:
+   if b is not None:need(not intersects(box,[b[0]-.125,b[1]-.125,b[2]+.125,b[3]+.125]),'actual caption box does not intersect ANY actual analytic/cap/aperture view or its stroke')
+  for _,_,other in caption_boxes[:i]:need(not intersects(box,other),'distinct derived caption boxes never overlap')
+  for warning in texts:
+   if warning.get('data-warning-layout')=='sheet-legend-v1':
+    spans=warning.findall('s:tspan',NS);need(spans,'actual warning legend lines');first=min(float(t.get('y','nan')) for t in spans);need(math.isfinite(first) and box[3]<=first-5+1e-6,'caption box clears the actual full warning band')
  for a,f in zip(d['dimensions'],o['dimensions']):
   need(f['dimensionId']==a['dimensionId'] and f['kind']==a['kind'],'dimension row identity')
   if f['status']=='unresolved':
@@ -117,11 +128,26 @@ def verify_svg(root,item,row,facts,iso,bore):
   if not points:return None
   mapped=[paper(view,p) for p in points];need(all(all(math.isfinite(z) for z in p) for p in mapped),'finite authentic caption envelope')
   return [min(p[0] for p in mapped),min(p[1] for p in mapped),max(p[0] for p in mapped),max(p[1] for p in mapped)]
+ caption_boxes=[]
+ def captioncheck(view,value,role='view',unresolved=False):
+  # Read the actual emitted choice. No search/candidate/ordering algorithm is
+  # reproduced here and no declared renderer bounding box is trusted.
+  node=one([t for t in texts if id(t) not in usedtexts and t.get('data-view-caption-id')==view['viewId'] and t.get('data-caption-role')==role],'exact complete view caption')
+  attrs={'data-view-caption-id':view['viewId'],'data-caption-role':role,'data-caption-layout':'observed-sheet-v1','font-family':'monospace','font-size':'3','lengthAdjust':'spacing'}|({'fill':'#a00'} if unresolved else {})
+  need(not list(node) and (node.text or '')==value and set(node.attrib)==set(attrs)|{'x','y','textLength'} and all(node.get(k)==v for k,v in attrs.items()),'full unchanged caption value/status and fixed legible physical font, no shrinking or hidden style')
+  x,y,length=(float(node.get(k,'nan')) for k in ('x','y','textLength'));need(all(math.isfinite(n) for n in (x,y,length)) and length>0,'actual finite physical caption placement/advance');near(length,len(value)*1.8)
+  box=[x-1,y-4,x+length+1,y+2]
+  # Same existing1e-6 paper-coordinate serialization budget; geometry/source
+  # budgets and the .02mm independent conic chord bound remain unchanged.
+  need(box[0]>=8-1e-6 and box[1]>=16-1e-6 and box[2]<=d['sheet']['width']-8+1e-6 and box[3]<=d['sheet']['height']-16+1e-6,'complete padded caption box inside physical margins/header/footer')
+  bound=None if unresolved else caption_bounds(view)
+  need(box[1]>=(bound[3]+.125+5 if bound else view['paperOrigin'][1]+5),'entire caption box clears OWN actual view/stroke by at least5mm')
+  caption_boxes.append((view['viewId'],role,box));usedtexts.add(id(node));return node
  textcheck([8,8],d['title'] or d['drawingId'])
  for index,v in enumerate(d['views']):
   role=v['basis'];observed=one([p for p in read['views'] if p['viewId']==v['viewId']],'view');group=[p for p in paths if p.get('data-view-id')==v['viewId']]
   if observed['status']!='available':
-   need(not group and frames[v['viewId']] is None,'no stale unresolved geometry/hatching/aperture');textcheck(v['paperOrigin'],role+': unresolved',{'fill':'#a00'});continue
+   need(not group and frames[v['viewId']] is None,'no stale unresolved geometry/hatching/aperture');captioncheck(v,role+': unresolved',unresolved=True);continue
   if role=='bore-center-section':
    patches,edges=facts['section'];hatch=[p for p in group if p.get('data-presentation')=='section-hatch'];cut=[p for p in group if p.get('data-cut-boundary')=='true'];need(len(group)==len(hatch)+len(cut) and len(hatch)==len(patches) and len(cut)==len(edges),'all and only cap patches/cut boundaries')
    pid='drawing-section-hatch-'+str(index);pattern=one([p for p in patterns if p.get('id')==pid],'actual referenced hatch pattern');usedpatterns.add(id(pattern))
@@ -134,15 +160,25 @@ def verify_svg(root,item,row,facts,iso,bore):
     expected=facts['detail'][0];offset=bore.centers(item['dimensions'])[1];hw,hh=v['aperture']['halfWidth'],v['aperture']['halfHeight'];aperture=one([p for p in group if p.get('data-presentation')=='detail-aperture'],'actual aperture')
     pathcheck(aperture,[paper(v,p) for p in ((-hw,-hh),(hw,-hh),(hw,hh),(-hw,hh),(-hw,-hh))],{'data-view-id':v['viewId'],'data-presentation':'detail-aperture','stroke':'#777','stroke-dasharray':'1 1'})
     need(len(group)==len(actual)+1,'detail has no ghost presentation geometry')
-    if not expected:textcheck([v['paperOrigin'][0],v['paperOrigin'][1]+9],'detail: available-empty')
+    if not expected:captioncheck(v,'detail: available-empty','empty')
    else:expected=[(c,*c['range']) for c in facts[role]];offset=[0,0];need(len(group)==len(actual),'ordinary projection has no injected presentation')
    need(len(actual)==len(expected),'every actual analytic occurrence reaches SVG')
    for p,(c,a,b) in zip(actual,expected):
     attrs={'data-view-id':v['viewId'],'data-view-basis':role}|({'stroke-dasharray':'2 1','stroke':'#777'} if c['hidden'] else {})
     need(set(p.attrib)==set(attrs)|{'d'} and all(p.get(k)==z for k,z in attrs.items()),'analytic view/visibility identity');need('Z' not in p.get('d',''),'open analytic path');used.add(id(p))
     chord_certificate(c,a,b,ps(p),lambda q:paper(v,[q[j]-offset[j] for j in (0,1)]),scale(v),iso.evaluate)
-  bounds=caption_bounds(v);position=[bounds[0],bounds[3]+5] if bounds else [v['paperOrigin'][0],v['paperOrigin'][1]+5];caption=textcheck(position,role+(' 2:1' if role=='detail' else ''))
-  if bounds:need(float(caption.get('y'))>=bounds[3]+5-1e-6,'caption baseline clears actual conservative paper geometry by5mm, without clamping')
+  captioncheck(v,role+(' 2:1' if role=='detail' else ''))
+ # Independent actual geometry/caption inequalities over ALL views; the
+ # observed geometry has already been reconciled with original analytic truth.
+ envelopes=[caption_bounds(v) for v in d['views'] if one([p for p in read['views'] if p['viewId']==v['viewId']],'view availability')['status']=='available']
+ def intersects(a,b):return a[0]<b[2] and a[2]>b[0] and a[1]<b[3] and a[3]>b[1]
+ for i,(view_id,role,box) in enumerate(caption_boxes):
+  for b in envelopes:
+   if b is not None:need(not intersects(box,[b[0]-.125,b[1]-.125,b[2]+.125,b[3]+.125]),'actual caption box does not intersect ANY actual analytic/cap/aperture view or its stroke')
+  for _,_,other in caption_boxes[:i]:need(not intersects(box,other),'distinct derived caption boxes never overlap')
+  for warning in texts:
+   if warning.get('data-warning-layout')=='sheet-legend-v1':
+    spans=warning.findall('s:tspan',NS);need(spans,'actual warning legend lines');first=min(float(t.get('y','nan')) for t in spans);need(math.isfinite(first) and box[3]<=first-5+1e-6,'caption box clears the actual full warning band')
  for a,f in zip(d['dimensions'],o['dimensions']):
   v=one([v for v in d['views'] if v['viewId']==a['viewId']],'dimension view')
   if f['status']!='available' or frames[v['viewId']] is None:textcheck(a['label'],'UNRESOLVED: '+a['dimensionId'],{'fill':'#a00'});continue

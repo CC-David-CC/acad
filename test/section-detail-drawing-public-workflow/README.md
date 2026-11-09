@@ -47,24 +47,41 @@ six-role discovery is an explicit capability expansion; any separate retained
 workflow with exact old view-capability-list assertions needs a root-owned
 current-source compatibility copy, not edits to historical receipts.
 
-Acceptance closure and the exact19-file producer/helper roster are documented
+Acceptance closure and the exact21-file producer/helper roster are documented
 in [SOURCE.md](SOURCE.md). The checker reconciles finite geometric cap ownership;
 public packets do not carry Native edge IDs, so it does not pretend to establish
 private Native identity independently. Exact producer commit/path/blob custody,
 whole phase/format/code/work31+32 rosters, issued highwater and candidate epoch/
 five-token provenance are required. Root composes the product fixes separately.
 
-## Derived caption regression (source-only follow-up)
+## Cross-view derived caption regression (source-only follow-up)
 
-The root-reviewed current16renders exposed captions at paperOrigin+5 lying
-on translated/isometric geometry. The caption repair keeps all existing whole
-steps, .cad/SVG submissions and physical geometry criteria. Its Worker places
-each available caption below actual projected analytic bounds, actual section
-cap-patch bounds or the detail aperture. The after-whole oracle independently
-derives the same physical bound relation, rather than retaining a literal
-origin+5 assumption. Unavailable placeholders and all authored labels/leaders
-remain unchanged; label/leader/other-view collisions and sheet auto-layout are
-not claimed fixed. See docs/reviews/C11-DERIVED-VIEW-CAPTIONS-20261109.md.
-No new execution accompanies this source follow-up; old receipts/renders remain
-frozen. Root must run this complete affected workflow on the composed candidate
-and review the actual artifacts after the independent checker.
+The retained evidence-r3 visual review confirms own-bound captions can still
+cross another view (original-edited/original-actual-roof isometric/right).
+Current product gathers ALL actual analytic/cap/aperture envelopes before a
+bounded Worker-only layout. Fixed3mm monospace with explicit1.8mm advance and
+spacing-only textLength uses padded6mm paper boxes; own-view clearance>=5mm,
+8mm side margins,16mm header/footer bands, actual warning area and other view/
+caption boxes constrain placement. No font shrinking/truncation/clipping,
+authored origin/label edits, geometry changes or nominal-bound substitutions.
+Unsupported fixed-size placement explicitly refuses RESOURCE_LIMIT.
+
+The AFTER-WHOLE oracle reads each actual derived caption's full role/status/
+font/advance and chosen XML coordinates, independently checks its complete box
+against EVERY independently qualified analytic/cap/aperture envelope, other
+caption boxes, margins/header/footer/warning bands and own-view clearance. It
+does not reproduce the placement search or insist on one selected coordinate.
+All previous Native/source/definition/crop/chord/scale/translated/J/travel/
+refusal/quota/.cad/write-settlement criteria and all sixteen SVG phases remain.
+The exact executing/helper roster retains the old19 plus both actual runtime
+renderer/caption-helper sources, independently bound to the producing Git tuple.
+
+The paper box is a declared physical typography policy, not a universal bound
+on arbitrary installed-font ink. Root still runs the COMPLETE genuine workflow,
+then FIRST independent checker and reviews every actual Chrome SVG render for
+font ink/legibility. No execution accompanies this packet. Historical evidence
+and the currently running immutable root packet remain untouched. General
+authored leaders/dimension labels layout stays OPEN; no automatic overall sheet
+layout or arbitrary off-sheet view fitting is claimed. See
+`docs/reviews/C11-CROSS-VIEW-CAPTION-SOURCE-20261109.md` for exact changed caption
+families/attributes and current counterbore-oracle migration prerequisite.
