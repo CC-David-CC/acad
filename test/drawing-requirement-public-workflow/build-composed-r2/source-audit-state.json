@@ -1,0 +1,18 @@
+{
+  "phase": "source-audit",
+  "command": [
+    "python3",
+    "/mnt/data10tb/codi-acad-drawing-requirements-evidence-20261109-r2/source-audit.py",
+    "/mnt/data10tb/codi-acad-drawing-requirements-build-20261109-r2",
+    "82f9f01b7a6fbc5e2bfc25183a72da87a8e31e97",
+    "/mnt/data10tb/codi-acad-drawing-requirements-evidence-20261109-r2/component-source-custody.json"
+  ],
+  "source": "82f9f01b7a6fbc5e2bfc25183a72da87a8e31e97",
+  "desktop": "33fc809e3900b3a00b26859b69c5f63dcbbdffb6",
+  "status": "PASS",
+  "startedAtUnix": 1794260157.0639608,
+  "pid": 2939206,
+  "exitCode": 0,
+  "finishedAtUnix": 1794260159.4137545,
+  "logSHA256": "a12f1808a864ed88ba59995d54b940c815454753a639f8ea4b9121459393dbe4"
+}

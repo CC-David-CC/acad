@@ -1,0 +1,126 @@
+{
+  "scope": "C11 corrected public producer complete build/stage/exact source-byte custody only; workflow RUNNING, not qualification",
+  "core": "82f9f01b7a6fbc5e2bfc25183a72da87a8e31e97",
+  "desktop": "33fc809e3900b3a00b26859b69c5f63dcbbdffb6",
+  "records": {
+    "build": {
+      "phase": "build",
+      "command": [
+        "bash",
+        "/mnt/data10tb/codi-acad-drawing-requirements-evidence-20261109-r2/run-build.sh",
+        "82f9f01b7a6fbc5e2bfc25183a72da87a8e31e97"
+      ],
+      "source": "82f9f01b7a6fbc5e2bfc25183a72da87a8e31e97",
+      "desktop": "33fc809e3900b3a00b26859b69c5f63dcbbdffb6",
+      "status": "PASS",
+      "startedAtUnix": 1794259999.5620441,
+      "pid": 2936984,
+      "exitCode": 0,
+      "finishedAtUnix": 1794260124.502517,
+      "logSHA256": "e3d97a9b64ade81c6b801c446c2e7b41420459ea7b7de7df02b2a47d8d4fb625"
+    },
+    "stage": {
+      "phase": "stage",
+      "command": [
+        "bash",
+        "/mnt/data10tb/codi-acad-drawing-requirements-evidence-20261109-r2/run-stage.sh",
+        "82f9f01b7a6fbc5e2bfc25183a72da87a8e31e97",
+        "33fc809e3900b3a00b26859b69c5f63dcbbdffb6"
+      ],
+      "source": "82f9f01b7a6fbc5e2bfc25183a72da87a8e31e97",
+      "desktop": "33fc809e3900b3a00b26859b69c5f63dcbbdffb6",
+      "status": "PASS",
+      "startedAtUnix": 1794260130.2820249,
+      "pid": 2938791,
+      "exitCode": 0,
+      "finishedAtUnix": 1794260144.536523,
+      "logSHA256": "1e927c5d0b2f433c7254f42f002b8c8e7f8f25d53c39f7ea3959e596937ac93e"
+    },
+    "source-audit": {
+      "phase": "source-audit",
+      "command": [
+        "python3",
+        "/mnt/data10tb/codi-acad-drawing-requirements-evidence-20261109-r2/source-audit.py",
+        "/mnt/data10tb/codi-acad-drawing-requirements-build-20261109-r2",
+        "82f9f01b7a6fbc5e2bfc25183a72da87a8e31e97",
+        "/mnt/data10tb/codi-acad-drawing-requirements-evidence-20261109-r2/component-source-custody.json"
+      ],
+      "source": "82f9f01b7a6fbc5e2bfc25183a72da87a8e31e97",
+      "desktop": "33fc809e3900b3a00b26859b69c5f63dcbbdffb6",
+      "status": "PASS",
+      "startedAtUnix": 1794260157.0639608,
+      "pid": 2939206,
+      "exitCode": 0,
+      "finishedAtUnix": 1794260159.4137545,
+      "logSHA256": "a12f1808a864ed88ba59995d54b940c815454753a639f8ea4b9121459393dbe4"
+    }
+  },
+  "sessions": {
+    "build": 33313,
+    "stage": 67896,
+    "sourceAudit": 92655
+  },
+  "dependenciesRehashed": false,
+  "nativePairsChanged": false,
+  "webpackSuccessfulCompletions": 10,
+  "componentManifests": 12,
+  "uniqueSourceGitBlobs": 116,
+  "fixture": {
+    "port": 21057,
+    "serviceSession": 45095,
+    "forwardSession": 81017,
+    "reverseCDPPort": 19551,
+    "browser": "Chrome/155.0.8059.79",
+    "externalRelay": false
+  },
+  "files": {
+    "run-build.sh": {
+      "bytes": 2871,
+      "sha256": "0a4947e21d0047f42c02ab30cf9d3b0c0a274c8e60d494f55bfb61de6a412162"
+    },
+    "run-stage.sh": {
+      "bytes": 1740,
+      "sha256": "7f17ffd443edf5b81aa83d7b3f7821a38918a64b9e4f7bc93cf19662ee2aa54b"
+    },
+    "run-phase.py": {
+      "bytes": 752,
+      "sha256": "d3a62ed6c61aca8e385fa0045fd4878f6010e423ad8ee1673715ed35bf4cecc6"
+    },
+    "build-state.json": {
+      "bytes": 517,
+      "sha256": "bb9b9ff7f2cfba64c3c961ecae426d0bef79b2428c138fd5acdcab39cc5c62c5"
+    },
+    "build.log": {
+      "bytes": 232677,
+      "sha256": "e3d97a9b64ade81c6b801c446c2e7b41420459ea7b7de7df02b2a47d8d4fb625"
+    },
+    "stage-state.json": {
+      "bytes": 565,
+      "sha256": "996d79ff11e1a33eaed29671e468be98c2295fb0dbd0768bcb718fc0f64e6da1"
+    },
+    "stage.log": {
+      "bytes": 2073,
+      "sha256": "1e927c5d0b2f433c7254f42f002b8c8e7f8f25d53c39f7ea3959e596937ac93e"
+    },
+    "source-audit.py": {
+      "bytes": 4725,
+      "sha256": "548ee1ed8538f9463a5318a856ec4cb456a28cbbb9e86d12a3c1a34a46fbd161"
+    },
+    "source-audit-state.json": {
+      "bytes": 704,
+      "sha256": "213cb04d9db37eae46d458ced07a73cac0cad26fae770219c672ea001f605f4e"
+    },
+    "source-audit.log": {
+      "bytes": 291,
+      "sha256": "a12f1808a864ed88ba59995d54b940c815454753a639f8ea4b9121459393dbe4"
+    },
+    "component-source-custody.json": {
+      "bytes": 21862,
+      "sha256": "54ea105efc636cdce7d37164f917affe8c3f4b161208dadcd8993cfc2e731f9e"
+    },
+    "runtime-pins.json": {
+      "bytes": 42485,
+      "sha256": "b75e2d8047886f907e88ad5fb9c3e016329b8a15f41e84c4ceee669f93bb09be"
+    }
+  }
+}
