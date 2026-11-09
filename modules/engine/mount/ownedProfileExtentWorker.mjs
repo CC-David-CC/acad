@@ -4,9 +4,9 @@ import {validateOwnedTopology,validatePrismProvenance,bindPrismSourceSlots} from
 import {createProfileExtentSelectionIndex} from './profileExtentSelectionIndex.mjs';
 const fail=(message,code='ENGINE_FAILURE')=>{throw Object.assign(Error(message),{code});};
 export function createOwnedProfileExtentResult(env,prepared,name){
- const {Module,stringPointer,malloc,free,heap,query,summarize,interrogate}=env;
+ const {Module,stringPointer,malloc,free,heap,query,summarize,interrogate,chargeResult}=env;
  const before=Module._OwnedShapeNamesV2(),values=prepared.nativeValues;let pointer=0,data=0,attempted=false,output,failure=null;
- if(!Number.isSafeInteger(before)||before<0||!Array.isArray(values)||values.length<18||values.length>9000)fail('The bound Native extent payload is unavailable.');
+ if(!Number.isSafeInteger(before)||before<0||!Array.isArray(values)||values.length<18||values.length>9000||typeof chargeResult!=='function')fail('The bound Native extent payload/budget is unavailable.');
  const cleanupFailure=(message,cause)=>{failure={cause:Object.assign(Error(message),{code:'ENGINE_CLEANUP_FAILED',cause,operationError:failure?.cause})};};
  try{
   pointer=stringPointer(name);if(!pointer)fail('Native extent name allocation failed.','RESOURCE_LIMIT');
@@ -26,10 +26,12 @@ export function createOwnedProfileExtentResult(env,prepared,name){
   const expected=prepared.expected,tolerance=Math.max(1e-7,expected.volume*1e-9);
   if(!Number.isFinite(created.nativeVolume)||created.nativeVolume<=0||Math.abs(created.nativeVolume-expected.volume)>tolerance||['min','max'].some(key=>!Array.isArray(created.nativeBounds?.[key])||created.nativeBounds[key].length!==3||created.nativeBounds[key].some((n,i)=>!Number.isFinite(n)||Math.abs(n-expected.bounds[key][i])>1e-6)))fail('Native extent measurements differ from the original source interval.');
   const evidence=summarize(name,interrogate(name));if(!evidence||evidence.solidCount!==1||evidence.nativeValidity?.valid!==true||!(evidence.nativeVolume>0))fail('The observed extent is not one valid positive Native solid.');
+  if(Number.isSafeInteger(evidence.faces)&&evidence.faces>1000)fail('The actual extent result exceeds the existing Native face budget.','RESOURCE_LIMIT');
   const topology=created.constructionProvenance?.status==='available'?validateOwnedTopology(query('_ReadOwnedTopologyV1',name)):null;
   const provenance=bindPrismSourceSlots(validatePrismProvenance(created.constructionProvenance,topology,prepared),prepared);
   let index=null,reason=provenance.reason||null;
   if(provenance.status==='available')try{index=createProfileExtentSelectionIndex({featureId:prepared.binding.featureId,provenance,topology,prepared});}catch(error){if(!['SELECTION_UNAVAILABLE','SELECTION_RESOURCE_LIMIT'].includes(error?.code))throw error;reason=error.code;}
+  chargeResult(name,evidence);
   output={name,evidence,provenance,index,reason:index?null:reason,binding:prepared.binding};
  }catch(cause){failure={cause};}
  finally{

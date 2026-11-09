@@ -3,6 +3,8 @@
 import {capturePolygonProfileFaceRequest} from './selectedProfilePlan.mjs';
 import {preparePolygonProfileFace} from './polygonProfilePlan.mjs';
 import {captureProfileExtent,profileExtentFields,profileExtentInterval} from '../solid/ownedProfileExtentFeature.mjs';
+export const PROFILE_EXTENT_REFUSALS=Object.freeze(['INVALID_REQUEST','INVALID_FRAME','INVALID_PROFILE','UNSUPPORTED_PROFILE','UNSUPPORTED_REGION_TOPOLOGY','PROFILE_BELOW_RESOLUTION','OPEN_OR_AMBIGUOUS_PROFILE','ZERO_LENGTH_EDGE','OVERLAPPING_EDGES','SELF_INTERSECTION','SELF_TOUCHING_BOUNDARY','ZERO_AREA_PROFILE','UNREPRESENTABLE_AREA','RESOURCE_LIMIT','PROFILE_EXTENT_UNREPRESENTABLE','PROFILE_EXTENT_CONSTRUCTION_FAILED']);
+export const PROFILE_EXTENT_OPERATION=Object.freeze({id:'solid.profile.extrude.extents',version:1,input:'source-owned-profile-extents-mm-v1',output:'oci-shape-result-v1',nativeProfileVersion:3,nativeResultCost:1,variants:Object.freeze(['one-sided','symmetric','two-sided']),capRoles:Object.freeze(['lower-cap','upper-cap']),qualification:'workflow-unqualified'});
 const fail=(message,code='INVALID_REQUEST')=>{throw Object.assign(Error(message),{code});};
 function fields(value,keys){
  if(!value||typeof value!=='object'||Array.isArray(value)||![null,Object.prototype].includes(Object.getPrototypeOf(value))||Reflect.ownKeys(value).length!==keys.length)fail('Expected exact profile-extent preparation fields.');

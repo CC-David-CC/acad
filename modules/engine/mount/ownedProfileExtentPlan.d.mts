@@ -1,4 +1,6 @@
 import type {ProfileExtent} from '../solid/ownedProfileExtentFeature.mjs';
+export const PROFILE_EXTENT_REFUSALS:readonly string[];
+export const PROFILE_EXTENT_OPERATION:Readonly<{id:'solid.profile.extrude.extents';version:1;input:'source-owned-profile-extents-mm-v1';output:'oci-shape-result-v1';nativeProfileVersion:3;nativeResultCost:1;variants:readonly ['one-sided','symmetric','two-sided'];capRoles:readonly ['lower-cap','upper-cap'];qualification:'workflow-unqualified'}>;
 export interface ProfileExtentBinding {
  readonly version:1;readonly featureId:number;readonly faceId:string;readonly sourceSha256:string;readonly regionId:string;readonly requestSha256:string;
  readonly authoredExtent:ProfileExtent;readonly extent:ProfileExtent<number>;

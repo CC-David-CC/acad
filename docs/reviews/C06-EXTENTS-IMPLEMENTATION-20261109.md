@@ -4,7 +4,7 @@ Base: `24ad11cbf24b771ff54da2a0df78e84c38a6b601`. Approved design: `C06-SELECTED
 
 ## Current source checkpoint
 
-This first checkpoint adds private intent/constructor helpers only. They are **not yet registered, advertised, dispatched or reachable as an application feature**. No old positive-depth feature, blind helper, derived drawing path, default, Native pair or root source has been changed.
+The first checkpoint `08d0d2e` added private intent/constructor helpers. The next source checkpoint adds the private Worker/controller protocol, semantic dispatch and v2 lineage admission. They are **not yet enabled by a registered factory/catalog capability or reachable as an application feature**. No old positive-depth feature, blind helper, derived drawing path, default, Native pair or root source has been changed.
 
 | New helper | Implemented source contract |
 | --- | --- |
@@ -16,11 +16,21 @@ This first checkpoint adds private intent/constructor helpers only. They are **n
 
 The existing semantic preparation already supplies an independent request digest, so the new Native call does not need a second public job or a separate progress protocol. The controller must compare the final construction binding with that captured semantic binding; it must not hash or derive geometry on Main. The Native planner must use the same captured request for the hash and payload. A structurally valid request or helper import alone does not certify live application source membership: the private candidate ledger/current source operation must establish that boundary.
 
+## Private transport checkpoint
+
+`worker-controller.mjs` captures exact own-data request/binding fields, matches the explicit primary MFG pair, and only enables the new operation from an internal `profileExtents:true` factory option. The existing factory does not yet set that option. Caller cancellation uses native AbortSignal/EventTarget access and a private forwarding signal; cleanup failures preserve the exact operation cause and fence the realm.
+
+The Native Worker independently captures the semantic request hash before allocation, verifies the complete binding, makes one charged actual V3 result, and stores the original extent preparation in a separate private map. It never inserts a translated fake old selected-source profile. Its root `ownedKinds` Map receives one gated producing task; blind tasks and all nonproducing derived reads remain unchanged. Source-causal carry distinguishes the real old/new constructor maps. Disposal releases the extent map entry with the normal owned result.
+
+Depth-free inspect/prepare semantic jobs use the existing dedicated Worker and 64KiB whole-reply limit. The v2 lineage reader accepts the new exact source/context tag while retaining old prism/box/kernel-operation identities and unresolved rules. Four new MFG resource roots are included in the normal preparer, emitter, and factory list; all five blind roots and four drawing roots remain. All nine bootstrap guards now pin source `4d24a303b373da30d97926179c1056b6b48ffeecea612e909ee550f460bf6bda`; Native JS/WASM pins are unchanged. No stager/build or runtime was executed.
+
+The typed field-dimension dependency `00babda3` was cherry-picked as `c40014b`; its length/angle roles remain unchanged. Variant-active fields and signed extent domains are still an integration obligation.
+
 ## Integration still required before exposure
 
 | Seam | Required closure; no completion claim yet |
 | --- | --- |
-| Native Worker/controller/cohort | Explicit primary-MFG `profileExtentsVersion:1` / mount capability, same original Native bytes. One producing entry in the root closed `ownedKinds` Map, expected semantic digest/final-binding comparison, refusal/fatal classification, source facts cached only after actual publication, release cleanup, actual one-result budget and metadata. Preserve blind and derived drawing dispatch/cleanup. Refresh all9 bootstrap guards together and include actual new MFG resource roots/emitter closure. |
+| Native Worker/controller/cohort | Remaining: enable explicit primary-MFG `profileExtentsVersion:1` / factory capability after consumer closure. Implemented private transport: one producing entry in the root closed `ownedKinds` Map, expected semantic digest/final-binding comparison, refusal/fatal classification, source facts cached only after actual publication, release cleanup, actual one-result budget and metadata. Preserve blind and derived drawing dispatch/cleanup. Refresh all9 bootstrap guards together and include actual new MFG resource roots/emitter closure. |
 | Selection/ledger/types | New exact request/evaluation types and `profile-extents` ledger kind; actual original source/face/region ownership/currentness, native positive one-solid/result/mesh binding; new contexts/source tag in strict v2 snapshots and lineage without broad source guessing. Preserve every existing kind and source namespace. |
 | Registered operation | New operation alongside old selected-profile operation; raw/materialized active fields; original source/frame/definitions captured before awaits; two genuine sketch reconstructions and independent depth-free semantic preparations; exact currentness/publication checks. No optimizer-output self-proof. |
 | Create/discovery/edit/J | Actual region discovery without height sentinel, explicit mode, separate-body creation, full suffix replay, exact raw before/after variants, no-op/stale/refusal/travel and ID highwater. Bound-name erasure or bound-mode replacement must refuse rather than silently convert to literals. One existing journal,64 entries/8MiB. |
