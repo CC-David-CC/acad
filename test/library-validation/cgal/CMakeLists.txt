@@ -14,3 +14,12 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
   target_compile_options(codi-cgal-readonly-mesh PRIVATE
     -Wall -Wextra -Wpedantic -fno-fast-math -ffp-contract=off -frounding-math)
 endif()
+
+# Separate offline planar-set target; old raw3D adapter/source is unchanged.
+add_executable(codi-cgal-planar-coverage planar_coverage.cpp)
+target_compile_features(codi-cgal-planar-coverage PRIVATE cxx_std_17)
+target_link_libraries(codi-cgal-planar-coverage PRIVATE CGAL::CGAL)
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  target_compile_options(codi-cgal-planar-coverage PRIVATE
+    -Wall -Wextra -Wpedantic -fno-fast-math -ffp-contract=off -frounding-math)
+endif()
