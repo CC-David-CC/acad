@@ -1,3 +1,4 @@
+import {discoverLengthFamilyRows} from './lengthFamilyDiscovery.mjs';
 import {inspectTangencyRows} from './tangencyInspection';
 import {discoverEqualRadiusRows} from './equalRadiusDiscovery.mjs';
 import {inspectFixedEntityRows} from './fixedEntityInspection';
@@ -35,7 +36,7 @@ export function inspectClosedSketchTransition(request:any) {
     })));
     if(objects.length>10000||constraints.length>10000)throw Error('Sketch inspection exceeds its limit.');
     const mirror=inspectMirrorSource(sketch,request.externalParameters);if(new TextEncoder().encode(JSON.stringify(mirror)).byteLength>1048576)throw Object.assign(Error('Mirror inspection exceeds its bounded reply envelope.'),{code:'LIMIT'});
-    return {revision:request.revision,ok:true,objects,points,constraints,mirror,slots:inspectStraightSlotRows(original,sketch,request.externalParameters),curves:inspectCubicSourceRows(original,sketch,request.externalParameters),ellipses:inspectEllipseRows(original,sketch,request.externalParameters),tangencies:inspectTangencyRows(sketch,request.externalParameters),equalRadiusTargets:discoverEqualRadiusRows(sketch),dimensionTargets:discoverDrivingDimensions(sketch,points,inspectPointLineSupports(sketch,request.externalParameters)),fixedEntities:inspectFixedEntityRows(sketch,request.externalParameters),stageCount:sketch.stages.length,boundaryFrame:frame,
+    return {revision:request.revision,ok:true,objects,points,constraints,mirror,slots:inspectStraightSlotRows(original,sketch,request.externalParameters),curves:inspectCubicSourceRows(original,sketch,request.externalParameters),ellipses:inspectEllipseRows(original,sketch,request.externalParameters),tangencies:inspectTangencyRows(sketch,request.externalParameters),lengthRelations:discoverLengthFamilyRows(sketch),equalRadiusTargets:discoverEqualRadiusRows(sketch),dimensionTargets:discoverDrivingDimensions(sketch,points,inspectPointLineSupports(sketch,request.externalParameters)),fixedEntities:inspectFixedEntityRows(sketch,request.externalParameters),stageCount:sketch.stages.length,boundaryFrame:frame,
       emptyBoundary:['lines','arcs','circles','nurbses'].every(key=>Array.isArray(sketch.boundary?.[key])&&sketch.boundary[key].length===0)};
   } catch(error) {
     return {revision:request.revision,ok:false,error:{code:error?.code||'INSPECTION_INVALID',message:error?.message||'Sketch inspection failed.'}};
