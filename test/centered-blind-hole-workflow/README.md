@@ -74,3 +74,19 @@ counterbore/countersink/draft/rib/body mirror/radial pattern/split/solid
 thicken/offset and broader C06 remain outside this finite packet. Existing
 historical proofs and failures are unchanged. No tests, builds, probes, browser
 or Native executions were performed while preparing these source files.
+
+Independent review follow-up: each submitted export/Save/own malformed write is
+settled through its actual acknowledgment plus browser/server SHA byte readback
+before the next write. Unknown settlement retains the owned window/context/path
+and stops; it is never retried or forcibly closed. The after-whole oracle now
+requires exact phase/format/negative/source-helper Git rosters, precise creation
+high-water increments and full malformed-Open accepted-state preservation. Its
+finite triangle/rim/patch checks reject noncircular equal-area pockets; actual
+STEP LINE supports must agree with endpoints, same_sense and face supports.
+
+If acceptance source is frozen after the immutable runtime build, pass
+`CODI_ACCEPTANCE_SOURCE=FULL_FROZEN_ACCEPTANCE_COMMIT` as well. Local acceptance
+files bind that exact Git commit; imported Core archive and Desktop helpers bind
+the producing source/Desktop tuple. Default is CODI_EXPECT_SOURCE. The oracle
+needs those same Core/Desktop Git object databases available for independent
+commit/path/blob readback after the whole run. This does not change runtime pins.

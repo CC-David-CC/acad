@@ -181,3 +181,67 @@ optional; this Boolean result advertises no new constructor provenance, floor
 ordinal, saved frame or public private-facts field. SolidKernel.execute already
 returns ShapeResult, so no additional result union or ABI/schema change is
 needed for this operation. Source interface review only, no TSC/build/runtime.
+
+## Independent acceptance review follow-up (source only)
+
+Read-only review5344b84b163d110f227acf5e03c0a81d74653c85 identified acceptance
+omissions before first execution. Original packet c7b91e8/0e7e118 history stays
+unchanged; this follow-up changes only acceptance source/docs, no product code.
+
+Each successful STEP/3MF/SVG command is now separately recorded submitted,
+acknowledged, then settled by actual own browser/server whole-byte SHA readback
+BEFORE the next export/write. Native Save uses the same custody. Each own
+malformed fixture write also records the real mirror path/version/status/hash
+receipt and independent byte readback before Open. Submission here means the
+command/write Promise was submitted, not an observed low-level filesystem begin.
+Any unknown/committed-but-unread outcome retains the exact owned context/window,
+path and receipt in pendingWrite; no write retry or forced close. Polling retries
+only existing readback reads. The deliberate material-review export refusal is
+settled only by its exact authoritative noncommitted code and own-path absence.
+Every required write/refusal and context/path is independently checked afterward.
+
+The new standalone mesh_oracle.py checks EVERY actual triangle against finite
+outer planes, top-minus-opening, circular floor disk or finite inward cylinder
+band. It checks actual orientations, shared oriented edges, one-cycle vertex
+links, connected shell/patches, and actual single top/floor rim cycles with full
+consistent angular winding. Entire chords/triangles must remain in the declared
+.01mm curved tessellation band, so an equal-area rectangular recess cannot pass
+by lying on infinite top/floor planes or matching aggregate volume. Floor/top
+coverage must match their actual circular rim polygons; side/wall area and finite
+span are checked independently. Mesh plane incidence1e-6mm, existing .01mm curved
+deflection, dimensionless winding1e-9rad and floating area accounting bounds are
+artifact checks, NOT changes to product/source/Native50pm or other policies.
+Actual public export requests bind their exact accepted document revision and
+complete read-only export set. Actual 3MF XML SourceRevision/provenance.revision
+bind that set's accepted manufacturing metadata revision, with the exact existing
+Worker mapping encodingRevision=metadata.revision.slice(7), NOT a fabricated
+equality between opaque document and encoding revisions. This mapping is in
+workerManufacturingMeshReplay.ts→workerGeneric3mf.ts. Mere presence is insufficient.
+
+STEP actual LINE vectors must have finite positive magnitude and unit direction;
+both real EDGE_CURVE endpoints must be incident on that actual infinite line,
+reconstructed from finite parameters, with actual same_sense traversal. Every
+used endpoint and LINE/CIRCLE support must also be incident with its actual
+planar/cylindrical face, including the cylindrical seam's axis/radial position.
+Existing finite cap/floor/rim/adjacency checks remain. Topology endpoints cannot
+stand in for a contradictory LINE support. These are independent analytic STEP
+subset checks, not a general interchange validator or new production geometry.
+
+Complete exact rosters now include29 unique observation phases with independent
+expected dimensions/binding states, both artifact sets with all3unique formats,
+both Save/Open phases,13 exact refusals and2 exact malformed semantic negatives.
+Creation must advance ONLY featureId by exactly1, use that exact issued feature
+ID, preserve every other high-water counter, and retain that mark through
+creation Undo/Redo. Own malformed Open must preserve the FULL accepted state,
+including host/path/dirty/J/material/drawing/parameters/resources and tokens;
+no broad normalization or silent token waiver is added.
+
+The executed-source roster is exact and transitive: eight local acceptance
+files, the independent archive helper, Desktop signed harness, its strict-join
+canonical helper, and the actual Desktop example. Each snapshot binds a full
+producer commit/path and Git blob object, exact file bytes and SHA-256. The
+independent oracle recomputes the Git blob identity and reads that exact commit
+object itself. Runtime pins still bind the actual composed application; optional
+CODI_ACCEPTANCE_SOURCE selects a separately frozen acceptance-only commit if it
+postdates that immutable runtime. It never substitutes product/runtime pins.
+No tests/probes/TSC/build/browser/Native execution during preparation.

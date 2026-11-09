@@ -84,7 +84,37 @@ def inspect_step(raw, truth):
         require(typ in ('LINE','CIRCLE'),'No approximated/unsupported STEP curve')
         if typ=='CIRCLE':
             center,axis=placement(a[1]);require(a[2]>0,'positive circle');return {'kind':typ,'center':center,'axis':axis,'radius':a[2]}
-        _,v=record(a[2],'VECTOR');return {'kind':typ,'origin':xyz(a[1]),'direction':direction(v[1],None),'scale':v[2]}
+        _,v=record(a[2],'VECTOR');require(isinstance(v[2],float) and math.isfinite(v[2]) and v[2]>0,'finite positive LINE vector magnitude');return {'kind':typ,'origin':xyz(a[1]),'direction':direction(v[1],None),'scale':v[2]}
+    def dot(a,b):return math.fsum(x*y for x,y in zip(a,b))
+    def sub(a,b):return tuple(x-y for x,y in zip(a,b))
+    def cross(a,b):return(a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0])
+    def curve_incidence(c,p,q,same_sense):
+        require(same_sense in (('enum','T'),('enum','F')),'actual EDGE_CURVE same_sense')
+        if c['kind']=='LINE':
+            parameters=[]
+            for point in (p,q):
+                relative=sub(point,c['origin']);require(math.hypot(*cross(relative,c['direction']))<=1e-6,'actual LINE support contains actual endpoint')
+                parameter=dot(relative,c['direction'])/c['scale'];require(math.isfinite(parameter),'finite LINE endpoint parameter');parameters.append(parameter)
+                vector(tuple(c['origin'][i]+parameter*c['scale']*c['direction'][i] for i in range(3)),point)
+            require(parameters[0]!=parameters[1] and ((parameters[1]>parameters[0])==(same_sense==('enum','T'))),'actual finite LINE endpoint traversal agrees with same_sense')
+        else:
+            for point in (p,q):
+                relative=sub(point,c['center']);require(abs(dot(relative,c['axis']))<=1e-6,'actual CIRCLE endpoint plane incidence');near(math.hypot(*relative),c['radius'])
+    def surface_incidence(loops,typ,origin,axis,radius):
+        for loop in loops:
+            for edge in loop:
+                c=edge['curve']
+                for point in edge['points']:
+                    relative=sub(point,origin)
+                    if typ=='PLANE':require(abs(dot(relative,axis))<=1e-6,'actual edge endpoint lies on its actual planar face support')
+                    else:near(math.hypot(*cross(relative,axis)),radius)
+                if typ=='PLANE':
+                    if c['kind']=='LINE':require(abs(dot(c['direction'],axis))<=1e-9 and abs(dot(sub(c['origin'],origin),axis))<=1e-6,'actual LINE is incident with its actual planar face')
+                    else:require(math.hypot(*cross(c['axis'],axis))<=1e-9 and abs(dot(sub(c['center'],origin),axis))<=1e-6,'actual CIRCLE is incident with its actual planar face')
+                elif c['kind']=='LINE':
+                    require(math.hypot(*cross(c['direction'],axis))<=1e-9,'actual cylindrical seam LINE follows actual cylinder axis');near(math.hypot(*cross(sub(c['origin'],origin),axis)),radius)
+                else:
+                    require(math.hypot(*cross(c['axis'],axis))<=1e-9 and math.hypot(*cross(sub(c['center'],origin),axis))<=1e-6,'actual circular rim follows actual cylinder support');near(c['radius'],radius)
     solids=[('ref',i) for i,(kind,_) in records.items() if kind=='MANIFOLD_SOLID_BREP'];require(len(solids)==1,'exactly one STEP manifold solid')
     shell=record(solids[0],'MANIFOLD_SOLID_BREP')[1][1];faces=record(shell,'CLOSED_SHELL')[1][1];require(0<len(faces)<=256 and len(set(faces))==len(faces),'bounded unique actual face roster')
     edge_use=collections.Counter();used_vertices=set();used_edges=set();planar=[];cylindrical=[];face_contribution=0
@@ -95,11 +125,12 @@ def inspect_step(raw, truth):
             for oriented in loop[1]:
                 _,o=record(oriented,'ORIENTED_EDGE');edge=o[3];_,e=record(edge,'EDGE_CURVE');require(o[4] in (('enum','T'),('enum','F')),'oriented edge sense')
                 start,end=e[1],e[2];used_vertices.update((start,end));used_edges.add(edge);edge_use[edge]+=1
-                p,q=vertex(start),vertex(end);ends=(start,end) if o[4]==('enum','T') else (end,start)
-                edges.append({'ref':edge,'vertices':(start,end),'points':(p,q),'ends':ends,'curve':curve(e[3])})
+                p,q=vertex(start),vertex(end);ends=(start,end) if o[4]==('enum','T') else (end,start);support=curve(e[3]);curve_incidence(support,p,q,e[4])
+                edges.append({'ref':edge,'vertices':(start,end),'points':(p,q),'ends':ends,'curve':support,'sameSense':e[4]})
             require(edges and all(edges[j]['ends'][1]==edges[(j+1)%len(edges)]['ends'][0] for j in range(len(edges))),'closed actual edge loop');loops.append(edges)
         typ,s=record(surface);require(typ in ('PLANE','CYLINDRICAL_SURFACE'),'only actual analytic plane/cylinder surfaces')
         origin,axis=placement(s[1]);normal=tuple(x*(1 if sense==('enum','T') else -1) for x in axis)
+        surface_incidence(loops,typ,origin,axis,None if typ=='PLANE' else s[2])
         row={'origin':origin,'axis':axis,'normal':normal,'loops':loops}
         if typ=='PLANE':planar.append(row)
         else:require(s[2]>0 and sense==('enum','F'),'inward cylindrical hole face');row['radius']=s[2];cylindrical.append(row)
