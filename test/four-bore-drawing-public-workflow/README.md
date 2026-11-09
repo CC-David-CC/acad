@@ -50,3 +50,9 @@ See CONTRACT.md for finite states, valid/unresolved meanings, inputs and budgets
 see docs/reviews/C11-FOUR-BORE-IMPLEMENTATION-20261108.md for actual source guards,
 owner retirement and the dependency lifecycle table. No GD&T/fit/finish,
 section/detail, arbitrary rotated slab, full C11 or final Gate1 claim.
+
+Warning-layout follow-up: see CAD-DRAWING-ERROR-LAYOUT-01 and
+docs/reviews/C11-DERIVED-WARNING-LAYOUT-20261108.md. Only no-authored-label
+unresolved bore-center presentation moves to a bounded derived legend. Run this
+SAME complete current workflow and extended artifact oracle after composition;
+no isolated rendering probe substitutes for actual whole application artifacts.

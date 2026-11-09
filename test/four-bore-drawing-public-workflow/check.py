@@ -190,9 +190,27 @@ def check_svg(root,item,rows):
   for j,q in enumerate(ps):
    t=c['range'][0]+(c['range'][1]-c['range'][0])*j/(len(ps)-1);at=iso.evaluate(c,t);vector(q,[v['paperOrigin'][0]+at[0],v['paperOrigin'][1]-at[1]],1e-6)
  texts=xml.findall('.//s:text',NS);annpaths=[p for p in xml.findall('.//s:path',NS) if p.get('data-annotation-id')]
+ # Independent physical legend contract: authored-order, full message membership,
+ # 3mm monospace /1.8mm advance /4mm baseline /8mm margins /10mm footer.
+ fallback=[(a,f) for a,f in zip(d['annotations'],meta['annotationFacts']) if a['kind']=='bore-center' and f['status']=='unresolved'];capacity=min(120,math.floor((d['sheet']['width']-16)/1.8));need(capacity>=1,'bounded legend width');wrapped=[]
+ for a,f in fallback:
+  message='UNRESOLVED: '+a['annotationId']+' ('+f['reason']+')';wrapped.append((a,message,[message[i:i+capacity] for i in range(0,len(message),capacity)]))
+ count=sum(len(lines) for _,_,lines in wrapped);first=d['sheet']['height']-10-(count-1)*4;need(not fallback or count<=256 and first>=16,'legible bounded warning legend');legend={};line=0;positions=[]
+ for a,message,lines in wrapped:
+  legend[a['annotationId']]={'firstY':first+line*4,'message':message,'lines':[(value,first+(line+j)*4) for j,value in enumerate(lines)]};positions.extend((8,first+(line+j)*4) for j in range(len(lines)));line+=len(lines)
+ need(len(positions)==len(set(positions)),'all derived warning baselines are distinct')
+ if item['label']=='invalid-reference':need(set(legend)=={'corner-mark-'+str(i) for i in range(4)},'all FOUR actual unresolved center-mark errors, not one representative')
  for a,fact in zip(d['annotations'],meta['annotationFacts']):
   group=[t for t in texts if t.get('data-annotation-id')==a['annotationId']];segments=[p for p in annpaths if p.get('data-annotation-id')==a['annotationId']]
-  if fact['status']=='unresolved':need(len(group)==1 and group[0].text=='UNRESOLVED: '+a['annotationId']+' ('+fact['reason']+')' and not segments,'no decorative ghost numeric annotation');continue
+  if fact['status']=='unresolved':
+   message='UNRESOLVED: '+a['annotationId']+' ('+fact['reason']+')';need(len(group)==1 and ''.join(group[0].itertext())==message and not segments,'full error membership, no ghost numeric annotation');node=group[0]
+   if a['kind']=='bore-center':
+    wanted=legend[a['annotationId']];need(node.get('data-warning-layout')=='sheet-legend-v1' and node.get('data-warning-view-id')==a['viewId'] and node.get('font-family')=='monospace' and node.get('font-size')=='3' and node.get('fill')=='#a00' and node.get('aria-label')==message,'derived legible error legend');vector([float(node.attrib['x']),float(node.attrib['y'])],[8,wanted['firstY']],0);spans=node.findall('s:tspan',NS);need(len(spans)==len(wanted['lines']),'complete bounded wrapping, no truncation')
+    for span,(text,y) in zip(spans,wanted['lines']):
+     need(span.text==text and span.get('lengthAdjust')=='spacingAndGlyphs','exact wrapped error line');vector([float(span.attrib['x']),float(span.attrib['y'])],[8,y],0);near(float(span.attrib['textLength']),len(text)*1.8,1e-12);need(8+float(span.attrib['textLength'])<=d['sheet']['width']-8+1e-12 and 16<=y<=d['sheet']['height']-10,'all fallback text physically within margins/footer')
+   else:
+    need(node.get('data-warning-layout') is None,'authored error label is not auto-moved');vector([float(node.attrib['x']),float(node.attrib['y'])],a['label'] if a['kind']=='hole-callout' else a['labels'][0],0)
+   continue
   f=fact['facts'];view=one([v for v in d['views'] if v['viewId']==a['viewId']],'annotation view');u,v,_=iso.FRAMES[view['basis']];project=lambda p:[view['paperOrigin'][0]+sum(p[i]*u[i] for i in range(3)),view['paperOrigin'][1]-sum(p[i]*v[i] for i in range(3))]
   if a['kind']=='hole-callout':need(len(group)==1 and group[0].text==f"4×Ø{f['diameter']:.3f} THRU" and len(segments)==4,'actual qualified group text and four real leaders')
   elif a['kind']=='bore-center':

@@ -96,3 +96,25 @@ supports and global projected extents; all five whole top rims are observed
 (except the genuinely removed member), not a count-only test. SVG carries each
 actual Native fragment plus true measured marks/lines/labels, unavailable labels
 contain no values. No production CAD math/provider output supplies expectations.
+
+## Affected complete warning-layout regression (after qualified R3)
+
+CAD-DRAWING-ERROR-LAYOUT-01 is confirmed from actual R3 SVG/PNG artifacts: the
+four invalid bore-center refs used the same view.paperOrigin and stacked text.
+The same whole source/Native/lifecycle cases and physical budgets remain. The
+AFTER-WHOLE oracle now requires exact membership of ALL FOUR corner-mark errors
+in each invalid-reference SVG, complete untruncated reason/identity text, unique
+bounded fallback baselines and physical text extents. Actual split/consume
+single-center warnings obey the same rule. Authored callout/baseline/ordinate
+label positions and every original positive center mark/axis/physical label/HLR
+curve remain exactly as previously frozen. No warning is authored or saved.
+
+Fallback is a derived bottom-sheet legend: 8mm margins,3mm monospace glyph height,
+1.8mm declared advance (SVG textLength),4mm baseline spacing,10mm footer reserve;
+wrap at min(120,floor((width−16)/1.8)) Unicode code points in authored annotation
+order. Cap256 lines; top baseline≥16mm. Tiny sheets without a legible area return
+RESOURCE_LIMIT at presentation before any My files write; never clip, hide,
+truncate, shrink vertically or stack. That additional tiny-paper refusal branch
+is source-defined, not separately runtime-qualified by this finite594×420 case.
+The actual six .cad/14SVG whole flow plus independent artifact checks must run
+after root composition; old R3 receipts/PNGs/checker failures remain immutable.
