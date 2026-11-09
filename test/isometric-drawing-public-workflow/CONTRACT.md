@@ -61,7 +61,11 @@ wrong hole-reference producer for explicit unresolved/repair; this is definition
 reference invalidation, not topology deletion or fake native failure.
 
 The independent source oracle derives which corners are filleted from actual
-selected edge incidentCurveIds and saved source endpoints, then derives all
+selected edge incidentCurveIds and saved source endpoints. It constructs the
+explicit source namespace faceId+'/'+localId from actual saved identities,
+exact-matches discovered incidentCurveIds, never splits opaque IDs and never
+uses this construction as positive authoring input. The actual qualification
+schema source is snapshotted with the executing packet. It then derives all
 trimmed outline line/arc intervals and their extrusion vertices. It does not
 select a convenient geometry after observing Native output. Both permitted
 opposite diagonals have the same analytic volume

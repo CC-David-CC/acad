@@ -5,9 +5,11 @@ Definitionv2 deliberately means exactly top/front/right/isometric; v1's original
 orthographic subsequence and every valid old dimension remain. Operation wire1,
 drawing metadata journal1, envelope3 and actual .cad codec do not change.
 No new Native ABI/default/engine/capability shortcut: same MFG32eec/abbf pair.
-The actual current .cad validation, manager Save/Open and host admission already
-delegate to the shared definition capture; they retain v2 through that same
-path, rather than a second serializer. There is no migration/legacy importer.
+The actual current .cad validation and manager Save/Open delegate to the shared
+definition capture. Desktop index.mjs additionally has a shallow version1-only
+supportedEnvelope whitelist; its narrow followup admits definitions1/2 while
+retaining envelope3/mm/single-drawing and all remaining checks. Together these
+retain v2 through the same path, rather than a second serializer. There is no migration/legacy importer.
 
 Source ownership:
 - modules/drawing/linkedPartDrawingDefinition.{mjs,d.mts}: explicit v2; dimensions
@@ -24,7 +26,8 @@ Source ownership:
 - projectManagerBundle.ts: ONLY read-only capability/limit metadata advertises
   definition versions1/2 and four bases. No manager custody change.
 - Desktop drawing-commands.mjs: existing public operation schema advertises v2;
-  same manager preparation/J, target and scoped settlement. No index splice.
+  same manager preparation/J, target and scoped settlement. The only index change is that shallow supportedEnvelope definition-version
+  whitelist; no command registration or UI splice.
 
 No new runtime import path is introduced, and OCI common-bootstrap source and
 Native bytes are untouched. Existing stagers must regenerate actual changed
