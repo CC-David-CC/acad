@@ -8,6 +8,7 @@ import argparse
 import collections
 import hashlib
 import importlib.metadata
+import io
 import json
 import math
 from pathlib import Path, PurePosixPath
@@ -26,6 +27,8 @@ IDENTITY = [1., 0., 0., 0., 1., 0., 0., 0., 1., 0., 0., 0.]
 MAX_FILE = 128 * 1024 * 1024
 MAX_ARRAY = 8 * 1024 * 1024
 MAX_VERTICES, MAX_TRIANGLES = 150000, 100000
+STANDARD_METADATA = {'Title', 'Designer', 'Description', 'Copyright', 'LicenseTerms',
+                     'Rating', 'CreationDate', 'ModificationDate', 'Application'}
 
 
 def sha(raw):
@@ -57,7 +60,55 @@ def raw_model(path):
         check(archive.testzip() is None, 'ZIP CRC failure')
         xml = archive.read('3D/3dmodel.model')
     check(b'<!DOCTYPE' not in xml.upper() and b'<!ENTITY' not in xml.upper(), 'XML entities')
-    root = ET.fromstring(xml)
+    # QName-valued metadata names carry the in-scope namespace, not the spelling
+    # of its prefix. ElementTree does not retain those declarations on elements.
+    pending_namespaces, scopes, metadata = [], [], []
+    root = None
+    for event, node in ET.iterparse(io.BytesIO(xml), events=('start-ns', 'start', 'end')):
+        if event == 'start-ns':
+            check(len(pending_namespaces) < 128 and len(node[1]) <= 4096,
+                  'namespace declaration limit')
+            pending_namespaces.append(node)
+        elif event == 'start':
+            check(len(scopes) < 128, 'XML nesting limit')
+            scope = scopes[-1].copy() if scopes else {
+                'xml': 'http://www.w3.org/XML/1998/namespace'}
+            scope.update(pending_namespaces)
+            check(len(scope) <= 128, 'in-scope namespace limit')
+            pending_namespaces.clear()
+            scopes.append(scope)
+            if root is None:
+                root = node
+        else:
+            if len(scopes) == 2 and node.tag == '{'+NS['m']+'}metadata':
+                name = node.attrib.get('name', '')
+                parts = name.split(':')
+                check(len(parts) in (1, 2) and all(parts), 'invalid metadata QName')
+                check(len(name) <= 256, 'metadata name limit')
+                for part in parts:
+                    # Reuse the XML parser's Unicode Name grammar, rather than a
+                    # partial ASCII identifier regex. These are unprefixed parts.
+                    element = ET.fromstring('<'+part+'/>')
+                    check(element.tag == part and not element.attrib and len(element) == 0,
+                          'invalid metadata NCName')
+                namespace = ''
+                if len(parts) == 2:
+                    check(parts[0] in scopes[-1] and scopes[-1][parts[0]],
+                          'unbound metadata QName prefix')
+                    namespace = scopes[-1][parts[0]]
+                else:
+                    check(name in STANDARD_METADATA, 'unknown unprefixed metadata')
+                preserve = node.attrib.get('preserve')
+                check(preserve in (None, '0', '1', 'false', 'true'), 'invalid metadata boolean')
+                check(len(metadata) < 128 and len((node.text or '').encode()) <= 65536,
+                      'metadata census/value limit')
+                metadata.append({'name': name, 'namespace': namespace,
+                                 'localName': parts[-1], 'value': node.text or '',
+                                 'typeAttribute': node.attrib.get('type'),
+                                 'preserveAttribute': preserve,
+                                 'normativePreserve': preserve in ('1', 'true')})
+            scopes.pop()
+    check(root is not None, 'missing XML root')
     check(root.tag == '{' + NS['m'] + '}model', 'unsupported model namespace')
     objects, materials, meshes = {}, {}, {}
     raw_charge = 0
@@ -114,8 +165,6 @@ def raw_model(path):
             visit(c['objectId'], stack + [identity])
     for build in builds:
         visit(build['objectId'], [])
-    metadata = [{ 'name': n.attrib.get('name'), 'value': n.text or '' }
-                for n in root.findall('m:metadata', NS)]
     return {'xmlSHA256': sha(xml), 'unit': root.attrib.get('unit', 'millimeter'),
             'objects': objects, 'materials': materials, 'builds': builds,
             'metadata': metadata}, meshes
@@ -293,15 +342,22 @@ def lib3mf_assessment(path, raw, meshes):
         for i in range(group.GetMetaDataCount()):
             entry = group.GetMetaData(i)
             namespace, name = entry.GetNameSpace(), entry.GetName()
-            observed_metadata.append({'name': namespace+':'+name if namespace else name,
-                                      'value': entry.GetValue()})
+            observed_metadata.append({'namespace': namespace, 'localName': name,
+                                      'value': entry.GetValue(), 'type': entry.GetType(),
+                                      'preserve': entry.GetMustPreserve()})
         observed['metadata'] = observed_metadata
-        check(collections.Counter((m['name'], m['value']) for m in observed_metadata) ==
-              collections.Counter((m['name'], m['value']) for m in raw['metadata']),
+        check(collections.Counter((m['namespace'], m['localName'], m['value'])
+                                  for m in observed_metadata) ==
+              collections.Counter((m['namespace'], m['localName'], m['value'])
+                                  for m in raw['metadata']),
               'library metadata differs from raw package')
+        check(len({(m['namespace'], m['localName']) for m in raw['metadata']}) ==
+              len(raw['metadata']), 'duplicate expanded metadata name')
         result.update(status='PASS', objects=objects, builds=builds, materials=groups,
                       maximumFloat32CoordinateChange=maximum_conversion,
-                      metadataReconciliation='PASS', trianglePropertyReconciliation='PASS')
+                      metadataReconciliation='PASS: expanded names/counts/exact string values',
+                      metadataPreserveSemantics='UNCERTAIN: v2.5.0 default differs from Core1.3; no roundtrip claim',
+                      trianglePropertyReconciliation='PASS')
     except Exception as error:
         result.update(status='UNCERTAIN', error=repr(error), traceback=traceback.format_exc())
     if reader is not None:
