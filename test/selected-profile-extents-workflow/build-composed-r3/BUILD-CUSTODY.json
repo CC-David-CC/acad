@@ -1,0 +1,61 @@
+{
+  "scope": "Canonical candidate target plus derived warning coherent normal build/stage and source-byte custody; runtime qualification separate",
+  "core": "0afb07fe8e216ba9a03cf21923e0ab70aed72546",
+  "desktop": "be24fbc232c967912f529053d34a9d407b369a39",
+  "build": {
+    "session": 42930,
+    "terminalExitCode": 0,
+    "webpackSuccessfulCompletions": 10,
+    "log": "build.log"
+  },
+  "stage": {
+    "session": 15292,
+    "terminalExitCode": 0,
+    "cadAssets": 579,
+    "assetBytes": 605244145,
+    "apps": 2,
+    "appFiles": 652,
+    "signedPins": 285,
+    "log": "stage.log"
+  },
+  "sourceByteAudit": {
+    "session": 17139,
+    "terminalExitCode": 0,
+    "componentManifests": 12,
+    "uniqueSources": 114,
+    "bootstrapSourceSha256": "8a150c70c5efa6461916c50310bd0d9cb0d34356a5d05087cb231cb703c2645a",
+    "actualScript": "source-audit.py",
+    "actualScriptSha256": "548ee1ed8538f9463a5318a856ec4cb456a28cbbb9e86d12a3c1a34a46fbd161",
+    "details": "component-source-custody.json",
+    "allListedFileSizesDigestsAndExactSourceGitBlobsChecked": true,
+    "trackedProducerClean": true
+  },
+  "runtime": {
+    "privateLoopbackPort": 21055,
+    "serviceSession": 86185,
+    "siteForwardSession": 54596,
+    "reverseCDPSession": 16681,
+    "runtimeRoot": "/mnt/data10tb/codi-acad-drawing-contract-state-20261109-r1",
+    "producerRoot": "/mnt/data10tb/codi-acad-drawing-contract-build-20261109-r1",
+    "hostRoot": "/mnt/data10tb/codi-acad-drawing-contract-desktop-20261109-r1",
+    "appsRoot": "/mnt/data10tb/codi-acad-drawing-contract-stage-20261109-r1-apps",
+    "externalRelay": false
+  },
+  "limits": [
+    "Reused dependency tree was not independently rehashed before/after build.",
+    "Complete extent, countersink and affected drawing families are separate qualification requirements.",
+    "No runtime assets, SDK or dependencies are packaged here.",
+    "Prior D7 and 7f results are not qualifications of this producer."
+  ],
+  "files": {
+    "README.md": "38854f5b2662fcb97b937d989ffe4892b07f26ec479b55e3613affdf4b74b663",
+    "build.log": "8876ef8a750d7a4efa7f42c1a1cdbe5044a317cbf28f912fc1f70c8afab3b296",
+    "component-source-custody.json": "2ff0ee4446b4374a026a405609211223948118b2ce70717b2728f694e89a5570",
+    "run-build.sh": "dd213ce2cb11ce763f275f5136c5f20609e8c0f6e1f83c416b74f6479250c824",
+    "run-stage.sh": "8223ae799c22f83ae3a15ea9623736d1559672bcbad939397b62d39684a5ef99",
+    "runtime-pins.json": "989e9494e798fabc5a8f5ea8a30a17d77de86fa66d9dd4d083f5ad34fde8823f",
+    "source-audit.log": "affba2fd3491149ef2f4e907220900facf77b1ba0363d6168794d9e32b0faac4",
+    "source-audit.py": "548ee1ed8538f9463a5318a856ec4cb456a28cbbb9e86d12a3c1a34a46fbd161",
+    "stage.log": "3ef0df32639520cc28095271750e2e11a39f1f2c7df8744502e072655eb62082"
+  }
+}
