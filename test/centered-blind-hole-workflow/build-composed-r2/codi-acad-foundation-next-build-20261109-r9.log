@@ -1,0 +1,45 @@
+From /mnt/data10tb/git/ACAD
+ * branch                323ee19168a6850ec368eb5ac92846976e8ad32a -> FETCH_HEAD
+Previous HEAD position was 3ed8815ed docs: retain pre-dispatch blind build custody without a functional claim
+HEAD is now at 323ee1916 Emit the actual blind-hole primary manufacturing resource closure
+
+> acad@0.1.0 build:manufacturing-mesh
+> node build/prepare-manufacturing-mesh-assets.cjs
+
+{"available":true,"entry":"/mnt/data10tb/codi-acad-build-20261107-r2/.build/manufacturing-mesh-entry.mjs","jsSha256":"32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08","wasmSha256":"abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc"}
+assets by status 86.1 MiB [cached] 12 assets
+assets by status 280 MiB [compared for emit]
+  assets by chunk 280 MiB (auxiliary name: index) 271 assets
+  asset vendors-node_modules_cache_codi-manifold_manifold_js.bundle.js 78.4 KiB [compared for emit] (id hint: vendors)
+  asset modules_brep_operations_mesh_browserNodeModuleStub_js.bundle.js 982 bytes [compared for emit]
+assets by status 35.2 MiB [emitted]
+  assets by path manufacturing-mesh/modules/engine/mount/ 15.3 KiB
+    asset manufacturing-mesh/modules/engine/mount/nativePlanarAttachmentFacts.mjs 4.13 KiB [emitted] [from: .build/manufacturing-mesh-assets/modules/engine/mount/nativePlanarAttachmentFacts.mjs] (auxiliary name: index)
+    asset manufacturing-mesh/modules/engine/mount/blindHoleFacts.mjs 3.92 KiB [emitted] [from: .build/manufacturing-mesh-assets/modules/engine/mount/blindHoleFacts.mjs] (auxiliary name: index)
+    asset manufacturing-mesh/modules/engine/mount/ownedBlindHolePlan.mjs 3.81 KiB [emitted] [from: .build/manufacturing-mesh-assets/modules/engine/mount/ownedBlindHolePlan.mjs] (auxiliary name: index)
+    asset manufacturing-mesh/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs 3.46 KiB [emitted] [from: .build/manufacturing-mesh-assets/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs] (auxiliary name: index)
+  asset index.bundle.js 35.2 MiB [emitted] (name: index)
+  asset manufacturing-mesh/modules/engine/solid/ownedBlindHoleIntent.mjs 2.51 KiB [emitted] [from: .build/manufacturing-mesh-assets/modules/engine/solid/ownedBlindHoleIntent.mjs] (auxiliary name: index)
+runtime modules 7.15 KiB 12 modules
+orphan modules 22.7 KiB [orphan] 8 modules
+javascript modules 30.5 MiB
+  modules by path ./ 30.5 MiB
+    modules by path ./node_modules/ 21.5 MiB 900 modules
+    modules by path ./web/app/ 6.14 MiB 637 modules
+    modules by path ./modules/ 2.78 MiB 434 modules
+    modules by path ./.build/ 34.7 KiB 14 modules
+  modules by path ../codi-four-corner-clean-integrated-20261104/node_modules/ 12 KiB
+    ../codi-four-corner-clean-integrated-20261104/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.64 KiB [built] [code generated]
+    ../codi-four-corner-clean-integrated-20261104/node_modules/css-loader/dist/runtime/api.js 2.46 KiB [built] [code generated]
+    ../codi-four-corner-clean-integrated-20261104/node_modules/component-emitter/index.js 2.93 KiB [built] [code generated]
+asset modules 11.8 KiB (javascript) 295 MiB (asset) 287 modules
+webpack 5.74.0 compiled successfully in 47386 ms
+Running "copy:resources" (copy) task
+Created 5 directories, copied 102 files
+
+Running "copy:lib_assets" (copy) task
+Copied 9 files
+
+Running "mark-revision" task
+
+Done.

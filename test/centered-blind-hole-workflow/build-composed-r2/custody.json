@@ -1,0 +1,95 @@
+{
+  "scope": "build/stage only; first blind whole48398 FAIL1 separately retained7420e82",
+  "source": "323ee19168a6850ec368eb5ac92846976e8ad32a",
+  "desktop": "ef45ae4783841cdcf90c60e31a9434229ef8d9e9",
+  "prerequisiteBuild": {
+    "source": "3ed8815ed0b46c136977e437220a932e2ff9bc5d",
+    "handle": 53398,
+    "exitCode": 0,
+    "sourceDeltaToFinal": [
+      "build/manufacturing-mesh-assets-entry.cjs",
+      "docs/reviews/C06-BLIND-RESOURCE-CLOSURE-20261109.md"
+    ]
+  },
+  "incrementalBuild": {
+    "handle": 49658,
+    "exitCode": 0,
+    "launcherDefect": "omitted optional loft/adaptive/STEP aliases"
+  },
+  "failedStage": {
+    "handle": 99395,
+    "exitCode": 1,
+    "failure": "Requested cohort has no emitted assets: static/adaptive-metrology/",
+    "workflowRun": false
+  },
+  "correctedBuild": {
+    "handle": 34193,
+    "exitCode": 0,
+    "fullCohortEnvironment": true,
+    "compilerWarningErrorMatches": 0
+  },
+  "finalStage": {
+    "handle": 82355,
+    "exitCode": 0,
+    "runtimePins": 194,
+    "bundleFiles": 556,
+    "assetFiles": 483
+  },
+  "files": [
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r8.sh",
+      "sha256": "5b5434df63d5078876af5275f439857d6a50e8e57bab912b3ee5d498038d72ba",
+      "bytes": 2507
+    },
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r8.log",
+      "sha256": "4b31719109ca266128eaa51ad4fc5dbf3dd08a992620f630448c8c3f882556ee",
+      "bytes": 161280
+    },
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r9.sh",
+      "sha256": "e9b3aeea82fff9c65c26d1358fd86eb7b487825c1d63d1fe3c1f0bbae4d004b3",
+      "bytes": 1241
+    },
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r9.log",
+      "sha256": "5f74fb98c6d97f86e4e450b822db3eae5bf3aa26ffa389d29672bd395b5f0401",
+      "bytes": 3353
+    },
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r10.sh",
+      "sha256": "c5ed4b34d7e9197ba2056cf2f60f9335f70e7edb640c53160e349a01cd513d0f",
+      "bytes": 1825
+    },
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r10.log",
+      "sha256": "4a5aa3ca7ed0e1fd9d313d89b12c236b78e960ca366d2d39e6c4492f4181622d",
+      "bytes": 1971
+    },
+    {
+      "file": "codi-acad-foundation-next-fixture-20261109-r6.sh",
+      "sha256": "f1afa4a90bddbb07fb43bd460846e5ee6ca535f1d88c905d4a1aca5199e1ba57",
+      "bytes": 1585
+    },
+    {
+      "file": "codi-acad-foundation-next-stage-20261109-r6.log",
+      "sha256": "d3d5841cb29264e568e263c9cee0611bd90b3c9abb5623b86662c3c67b0f2ab0",
+      "bytes": 631
+    },
+    {
+      "file": "codi-acad-foundation-next-fixture-20261109-r7.sh",
+      "sha256": "5d9d0904c6c5f20703de606d43f576010efd5ba321a4b0ee56ca400580e73f22",
+      "bytes": 1585
+    },
+    {
+      "file": "codi-acad-foundation-next-stage-20261109-r7.log",
+      "sha256": "029271dc090a3e8f0150257dfb6786cb1a22d74ba58c49f8d48f8c3fd503d89b",
+      "bytes": 745
+    },
+    {
+      "file": "codi-acad-foundation-next-pins-20261109-r7.json",
+      "sha256": "145453c677d2de3c50ad2428221522a159ed5b1e819e989ccd2d6f2303cdab16",
+      "bytes": 27850
+    }
+  ]
+}
