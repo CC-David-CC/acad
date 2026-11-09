@@ -1,3 +1,4 @@
+import {registerProfileExtentCommands} from './profile-extent-commands.mjs';
 import {registerViewCommands} from './view-commands.mjs';
 import {registerReferenceCommands} from './reference-commands.mjs';
 import {registerDrawingExportCommand} from './drawing-export-command.mjs';
@@ -230,6 +231,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerFixedEntityCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerFeatureHistoryCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerProfileExtentCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileRegionCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSelectedProfileSourceDimensionCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerRevolveCommands(host,()=>rectangle.target()));
