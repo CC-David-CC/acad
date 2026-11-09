@@ -16,6 +16,38 @@ sha=lambda b:hashlib.sha256(b).hexdigest()
 LOCAL=set('CONTRACT.md README.md example.mjs desktop-driver.mjs check.py truth.py requirement_math.py native_record.py svg_oracle.py negative_archive.py'.split())
 PRODUCT=set('modules/drawing/linkedPartDrawingDefinition.mjs modules/engine/extrusion/selectedArrangementDescriptor.mjs modules/engine/extrusion/selectedRegionDescriptor.mjs modules/engine/mount/booleanSelectionClaims.mjs modules/engine/mount/drawingDetailClip.mjs modules/engine/mount/drawingReferenceFacts.mjs modules/engine/mount/drawingRequirementFacts.mjs modules/engine/mount/drawingRequirementProtocol.mjs modules/engine/mount/orthographicAnalyticRecord.mjs modules/engine/mount/ownedBoreAnnotationProtocol.mjs modules/engine/mount/ownedBoreReadProtocol.mjs modules/engine/mount/ownedDrawingReadProtocol.mjs modules/engine/mount/ownedDrawingSectionProtocol.mjs modules/engine/mount/ownedOrthographicReadProtocol.mjs modules/engine/mount/ownedTopologyContract.mjs modules/engine/mount/prismaticBoreFacts.mjs web/app/cad/export/linkedPartDrawingCaptionLayout.mjs web/app/cad/export/linkedPartDrawingRequirementForms.mjs web/app/cad/export/linkedPartDrawingSvg.mjs web/app/cad/export/linkedPartDrawingWarningLayout.mjs web/app/cad/craft/workerDrawingReadCommands.ts web/app/cad/craft/workerSolidCommands.ts test/native-cad-container/archive_oracle.py'.split())
 HOST=set('test/agent-cad-corpus/sweep/signed-harness.mjs test/agent-cad-corpus/strict-join/oracle.mjs apps/system/jsketcher/drawing-commands.mjs apps/system/jsketcher/drawing-requirement-commands.mjs apps/system/jsketcher/drawing-export-command.mjs apps/system/jsketcher/index.mjs apps/system/jsketcher/inspect-state.mjs apps/system/jsketcher/file-export-outcome.mjs apps/system/jsketcher/scoped-command.mjs apps/system/jsketcher/examples/linked-drawing-requirements.mjs'.split())
+def receipt_actor(r,receipt_sha):
+ # A present future summary is usable ONLY with its actual post-launch
+ # registry/session observation. Never turn malformed present data into legacy.
+ if 'windowId'in r:
+  window=r['windowId'];launch=r.get('launchActor')
+  need(type(window)is str and bool(window) and type(launch)is dict and set(launch)=={'username','windowId','commandIds'} and launch['username']==r['username'] and launch['windowId']==window,'future actor captured after actual public launch')
+  ids=launch['commandIds'];need(type(ids)is list and bool(ids) and all(type(v)is str and bool(v)for v in ids) and len(ids)==len(set(ids)) and ids==sorted(ids),'complete actual launched registry command IDs')
+  need({'inspect-worker-drawing-requirement-targets','read-linked-part-drawing-requirements','export-linked-part-drawing-svg','save','open-project'}<=set(ids),'actual launch provides required scoped read/write commands')
+  return window,{'basis':'post-launch-public-registry','expectedPageLocalWindowLabel':window,'launchCommandCount':len(ids),'scope':'page-local actor labels; not persistent global-window identity'}
+ # This ONE historical receipt has a source-confirmed prelaunch omission.
+ # Baseline contemporaneous writes/proofs are evidence, not a synthesized field.
+ expected={'source':'82866bf0ee852f1d3b3892972f07d8af4cd8b9b0','hostSource':'796c9051331054746d81ea4ea0bb8ec8e8cf2bbd','acceptanceSource':'615716f87f74efc34ed6cd41660db07aa377f4a1','exampleSource':'796c9051331054746d81ea4ea0bb8ec8e8cf2bbd','engineRevision':'sha256:57b74074e0a249b917ac68357fbd003c37d1ab61897206886b575088e6995858:60dc956b08e01f43d08a48035a384e478e63bb34fb55f21a152c8cd12e8b8947'}
+ need(receipt_sha=='7e063f524b934f245d90ab7c75e8f403e08fa94276612cfd190568cdf39787cb'and all(r.get(k)==v for k,v in expected.items()),'missing actor summary allowed ONLY for exact immutable R5 receipt and full producing tuple')
+ need(r['pins']['source']==expected['source']and r['pins']['desktop']==expected['hostSource'],'exact actual R5 runtime pin sources')
+ sources={('core','test/drawing-requirement-public-workflow/desktop-driver.mjs'):(expected['acceptanceSource'],'6d68571cfff6743e9bb95d7ab15f4f9247a13451','1efd089441f9bf781681c1c6e66d198ccfbce25d2f8016cc285268118ce4bcdd'),('desktop','test/agent-cad-corpus/sweep/signed-harness.mjs'):(expected['hostSource'],'0ddb1781ed2ee57e91153e2f20fabb70183f2c9f','1ba491dc1d3ba32518a7476445aa8178bacac14af33cb0b4604969543d514d10')}
+ for (repository,relative),identity in sources.items():
+  row=one([v for v in r['sourceSnapshots']if(v['repository'],v['relative'])==(repository,relative)],'exact historical executed actor-source anchor')
+  need((row['commit'],row['gitBlobOID'],row['sha256'])==identity,'actual frozen prelaunch driver and public launch/getter/command harness identities')
+ writes=r['writes'];need(type(writes)is list and len(writes)==15,'ALL15 actual R5 write actors required')
+ baseline=writes[0];window=baseline['windowId'];need(type(window)is str and bool(window) and baseline['kind']=='svg'and baseline['label']=='baseline'and baseline['phase']=='settled'and baseline['username']==r['username'],'actor derives only from actual settled baseline write')
+ need(all(w['sequence']==i and type(w['windowId'])is str and w['windowId']==window and w['username']==baseline['username']for i,w in enumerate(writes)),'all actual contemporaneous R5 actors agree with baseline, not a constant/default')
+ refused=[w for w in writes if w['kind']=='expected-prewrite-refusal'];need(len(refused)==2 and {w['label']for w in refused}=={'Complete form outside paper','Repaired anchor inside declared height text'},'both actual guarded prewrite controls')
+ proofs=[]
+ for w in refused:
+  for side in('beforeAbsence','afterAbsence'):
+   proof=w[side];need(proof['username']==baseline['username']and type(proof['windowId'])is str and proof['windowId']==window and proof['file']==w['file']and proof['absent']is True and proof['method']=='browser-server-root-list','actual registered-window/session-root proof agrees with baseline actor')
+   for inventory in('browserEntries','serverEntries'):
+    entries=proof[inventory];need(type(entries)is list and len(entries)<=4096 and all(type(v)is dict for v in entries),'complete bounded own-root proof inventory')
+    need(not any(v.get('path')==w['file']or v.get('name')==w['file'][1:]for v in entries),'independent historical browser/server membership absence')
+   proofs.append(proof)
+ need(len(proofs)==4 and all(v['owner']==proofs[0]['owner']for v in proofs),'all FOUR actual registered-window and current Files-owner proofs agree')
+ return window,{'basis':'exact-historical-r5-baseline-write-and-four-source-bound-registry-proofs','receiptSHA256':receipt_sha,'expectedPageLocalWindowLabel':window,'writeActors':len(writes),'registeredRootProofs':len(proofs),'scope':'reader-local only; original summary remains absent; page-local recurrence is not global-window identity'}
 def custody(directory,r):
  expected={('core','test/drawing-requirement-public-workflow/'+p)for p in LOCAL}|{('core',p)for p in PRODUCT}|{('desktop',p)for p in HOST}
  need(len(r['sourceSnapshots'])==len(expected) and {(p['repository'],p['relative'])for p in r['sourceSnapshots']}==expected,'complete exact executed acceptance/runtime/render transitive-leaf/Host-helper/example roster')
@@ -39,9 +71,10 @@ def metadata_invariant(a,b):
  need(a['host']['documentToken']==b['host']['documentToken']and a['host']['path']==b['host']['path']and a['manufacturing']['metadata']==b['manufacturing']['metadata'],'metadata retains lifetime/path/material authority')
 
 def check(directory):
- directory=Path(directory);r=json.loads((directory/'receipt.json').read_text())
+ directory=Path(directory);receipt_raw=(directory/'receipt.json').read_bytes();r=json.loads(receipt_raw)
  need(r['status']=='PASS'and r['ownedContextsRetired']and r['sharedBrowserDisconnectedOnly']and r['pendingWrite']is None and not any(r[k]for k in('sourceSeeds','privateAuthoring','fakeReplies')),'entire real whole PASS +settled owned cleanup precedes oracle')
  need(r['budgets']=={'sourceMm':FINE,'nativeVolumeMm3':1e-6,'nativeBoundsMm':1e-6,'nativeReferenceMm':INCIDENCE,'nativeDirection':DIRECTION,'projectionMm':1e-6,'svgPaperChordMm':.02},'unchanged independently frozen accuracy/derived-presentation budgets');custody(directory,r)
+ window_id,actor_evidence=receipt_actor(r,sha(receipt_raw))
  labels=[x['label']for x in r['observations']]
  required={'Real plain source and centered bore','Actual baseline A B C position finish fit','Actual removal retains physical model','Removal Undo exact v4','Removal Redo absent','Second removal Undo same v4','Edited position is authored intent only','Requirement value Undo0.20','Requirement value Redo0.25','Restore required position0.20','Original source resize150x30','Source resize Undo100x50','Source resize Redo150x30','Actual parent depth25','Parent depth Undo20','Parent depth Redo25','Actual live nominal12 clearance unchanged','Bore diameter Undo10','Bore diameter Redo12','Display inches retains raw millimeter and micrometer requirements','Display millimeters restores presentation only','Crowded layout retains real resolved geometry','Layout Undo restores exact authored label','Healthy protected read after finite layout refusal','Fresh Open normal','Healthy continuation after malformed wrong-ra-unit','Healthy continuation after malformed nonfinite-json-quantity','OWN reference is unresolved membership not another account','OWN membership Undo restores actual target','Real upstream union consumes original target','Actual upper cap loss retains unresolved intent','Fresh Open unresolved','Actual discovered repair resolves finite bore end','Repair Undo SAME actual upper-cap loss','Repair Redo SAME discovered reference','Fresh Open repaired','Actual live nominal14 after third native Open','Post-Open authored zone0.25 remains a requirement','Post-Open requirement Undo restores required0.20','Actual healthy continuation after third native cycle'}
  required|={'Blocked height label retains available repaired Native facts','Blocked-anchor layout Undo restores fixed initial height label'}
@@ -74,7 +107,7 @@ def check(directory):
   if codes[f['label']]is None:need(f['error']['name']=='AbortError','actual stale token machine layer')
   if f['label']=='Complete form outside paper':need(f['error']['message']=='The authored requirement label has no complete supported legible paper box.','actual finite complete-form policy, not relaxed SVG criteria')
  for i,w in enumerate(r['writes']):
-  need(w['sequence']==i and w['username']==r['username']and str(w['windowId'])==str(r['windowId']),'every submitted write exact owned actor/chronology')
+  need(w['sequence']==i and w['username']==r['username']and type(w['windowId'])is str and w['windowId']==window_id,'every submitted write exact owned actor/chronology')
   if w['kind']=='expected-prewrite-refusal':
    need(w['phase']=='settled-prewrite-refusal'and w['error']['code']=='RESOURCE_LIMIT'and not w['error']['committed']and not w['error']['possiblyCommitted'],'actual known prewrite outcome')
    for x in(w['beforeAbsence'],w['afterAbsence']):need(x['absent']is True and x['method']=='browser-server-root-list'and x['file']==w['file']and x['username']==r['username'],'actual complete own-file absence, not inferred from error/count')
@@ -144,7 +177,7 @@ def check(directory):
   if s['label']=='repaired':need(inspected['repairedNontrivialLeader']is not None and inspected['repairedNontrivialLeader']['vertices']>2,'actual repaired SVG contains necessary routed leader, no straight-path shortcut')
   artifacts.append({'file':s['savedFile'],'result':inspected})
  last=r['observations'][-1];need(last['expected']['diameter']==14 and last['definition']['requirements'][0]['zone']['value']==.20 and last['expected']['datumLevel']==0,'genuine healthy source/requirement reedit AFTER third native Open')
- return{'status':'PASS','scope':'finite native-linked datum/position/Ra/DECLARED clearance authoring, geometry-binding lifecycle/three native cycles/actual visible SVG; NOT manufactured conformance, standards compliance or whole Gate1','sourceCoordinateBudgetMm':FINE,'sourceCoordinateBudgetPm':50,'observations':len(observed),'refusals':len(r['refusals']),'blockedAnchor':{'declaredHeightBox':B,'actualProjectedAnchors':projected,'recoveredBySharedUndo':True},'archives':archives,'artifacts':artifacts,'requirementsAreAuthoredIntent':True,'manufacturedConformance':False}
+ return{'status':'PASS','scope':'finite native-linked datum/position/Ra/DECLARED clearance authoring, geometry-binding lifecycle/three native cycles/actual visible SVG; NOT manufactured conformance, standards compliance or whole Gate1','sourceCoordinateBudgetMm':FINE,'sourceCoordinateBudgetPm':50,'observations':len(observed),'refusals':len(r['refusals']),'actorCustody':actor_evidence,'blockedAnchor':{'declaredHeightBox':B,'actualProjectedAnchors':projected,'recoveredBySharedUndo':True},'archives':archives,'artifacts':artifacts,'requirementsAreAuthoredIntent':True,'manufacturedConformance':False}
 if __name__=='__main__':
  need(len(sys.argv)==3,'WHOLE NEW_FIRST_ORACLE_JSON');out=Path(sys.argv[2]);need(not out.exists(),'preserve FIRST oracle report')
  try:result=check(sys.argv[1])

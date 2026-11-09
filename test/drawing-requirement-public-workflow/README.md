@@ -211,3 +211,20 @@ reuse the unchanged producing Core runtime while staging the new Host public
 example and separate current acceptance identities; actual source/pins must
 record that distinction rather than relabel the producing runtime. No tests,
 builds or execution occurred in this source packet.
+
+## Actor receipt lifecycle and exact historical R5 reader
+
+Future receipt actor capture occurs only AFTER actual public CAD launch and
+registered session/window/command-registry validation. Login does not yet
+define the harness window. Per-write actors remain actual contemporaneous
+getters; local labels may recur across fresh contexts without global identity.
+
+Original R5 whole PASS has its unchanged omitted summary and immutable FIRST
+KeyError report. A later reader may derive a LOCAL expected actor from its
+actual baseline write ONLY under exact R5 receiptSHA/full producer+acceptance+
+example/runtime tuple/frozen driver+harness identities, with all15 actual
+write actors and all four guarded registered-window/root proofs consistent.
+It never adds r.windowId or supplies a constant/general fallback. Unknown or
+malformed receipts still refuse, and all original independent geometry/state/
+source/archive/SVG criteria remain mandatory. Root must record the later
+verifier's actual source/input custody and new AFTER report separately.
