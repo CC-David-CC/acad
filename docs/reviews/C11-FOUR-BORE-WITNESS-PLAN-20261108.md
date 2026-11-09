@@ -220,6 +220,16 @@ centerØ10 separate, four bores remainØ4; volume112500-1025pi if center staysD1
 If a later explicit centerD14 edit is included, freeze its distinct volume
 112500-1625pi before execution. No shared formula between independent edits.
 
+The centered witness carried through the subsequent four-corner subtraction
+already exercises genuine A propagation; the four tool unions/B subtraction
+exercise the new member composition. Add one actual outer vertical fillet3
+away from the bores, discover all five records on its REAL new producer, and
+verify unchanged bore facts/through status. Its separate volume delta is
+9*(1-pi/4)*depth. The old fixed drawing target is consumed at this phase and
+must report unavailable, not silently follow latest. Undo that creation restores
+the exact original target; do not keep the fillet active in the quoted plain-
+plate volume phases or borrow a retired parent's handles.
+
 Real source/diameter/offset edits and mixed travel; three normal.cad browser/
 server-equality/fresh signed Open/reedit/SVG cycles, full read-only before/after
 state/tokens/resources, actual native bore/near-wall/cap/exterior classifications.
@@ -232,7 +242,12 @@ enlarge/consume one bore (missing old wall), fill a bore or add a top cover
 (through unavailable even if diameter survives). Genuine merged/ambiguous
 ancestry needs a real construction producing that observation; if no supported
 public case is found, record that missing case, never fabricate Native maps.
-Exact current ancestry/status must be captured before assertions. Geometry
+For each Boolean negative, explicitly replace ONLY the drawing target with the
+ACTUAL returned current Boolean producer/output (public operation type), retaining
+all old bore refs. Otherwise a consumed-target error would mask the intended
+member-lineage observation. Keep a separate consumed-target control that does
+not retarget and honestly reports target unavailable. Exact current ancestry/
+status must be captured before assertions. Geometry
 Undo/Redo must restore the same refs or same unresolved reason. Structurally
 valid unresolved definitions persist with no fake measured values; explicit
 reference repair uses actual new discovery, never a nearest cylinder.
