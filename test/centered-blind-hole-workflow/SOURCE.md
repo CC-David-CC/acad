@@ -170,3 +170,14 @@ failure to survive the existing generic error mapping, not a new ABI/schema.
 
 Follow-up bootstrap source SHA-256: `9d3823b386516cedbdb0e1567559a2fb0650210e74f5543641caf0f148d9fce8` (replaces `d4e678f52245229991a3c8709f46b4226dbe512b6412171eadc3cb0af2e43932`
 in all the same nine source guards). Root must repin after its additive merge.
+
+## Root review follow-up: shared shape-result operation type
+
+ShapeResult.op now includes KernelBlindHole['op'], matching the already admitted
+SolidRequest and actual controller solidResult('solid.holes.blind', token,
+evidence). Its result contract remains exactly contractVersion1, private
+TransientShapeHandle and SolidEvidence. Optional constructionProvenance remains
+optional; this Boolean result advertises no new constructor provenance, floor
+ordinal, saved frame or public private-facts field. SolidKernel.execute already
+returns ShapeResult, so no additional result union or ABI/schema change is
+needed for this operation. Source interface review only, no TSC/build/runtime.

@@ -207,7 +207,7 @@ export interface ManufacturingMeshResult {readonly contractVersion:1;readonly op
 export type ExtrudeCircularCell=import('../mount/ownedCircularArrangementProtocol.mjs').CircularCellRequest;
 export type SolidRequest=ReadOwnedBores|ExtrudeCircularCell|ReadPlanarAttachment|ReadOwnedDrawingReferences|ReadOwnedManufacturingMesh|ReadOwnedOrthographic|ExportOwnedSTEP|CreateBox|CreateAuthoredBox|BooleanSolid|BooleanHistorySolid|ExtrudeSelectedProfile|ExtrudePolygonProfile|RevolveSelectedProfile|SweepSelectedProfile|LoftSelectedProfiles|ReadSolidMesh|ReadSolidTopology|ClassifySolidPoint|ReadPrismSelections|ReadSolidSelections|TreatSolidEdges|ShellSolid|KernelBlindHole|KernelThroughHole|KernelLinearHolePattern|DisposeSolid;
 export interface ShapeResult {
- readonly contractVersion:1;readonly op:CreateBox['op']|BooleanSolid['op']|ExtrudeSelectedProfile['op']|RevolveSelectedProfile['op']|SweepSelectedProfile['op']|LoftSelectedProfiles['op']|TreatSolidEdges['op']|ShellSolid['op']|KernelThroughHole['op']|KernelLinearHolePattern['op'];
+ readonly contractVersion:1;readonly op:CreateBox['op']|BooleanSolid['op']|ExtrudeSelectedProfile['op']|RevolveSelectedProfile['op']|SweepSelectedProfile['op']|LoftSelectedProfiles['op']|TreatSolidEdges['op']|ShellSolid['op']|KernelBlindHole['op']|KernelThroughHole['op']|KernelLinearHolePattern['op'];
  readonly handle:TransientShapeHandle;readonly evidence:SolidEvidence;
  readonly constructionProvenance?:ConstructionProvenance;
 }
