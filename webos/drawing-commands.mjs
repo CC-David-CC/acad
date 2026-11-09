@@ -21,11 +21,12 @@ export function registerDrawingCommands(host,getTarget){
  dimension.required=['dimensionId','viewId','kind','label'];
  Object.assign(dimension.properties,{axis:{enum:['datum-x','datum-y','datum-normal']},from:ref('source'),to:ref('source'),first:ref('face'),second:ref('face'),edge:ref('edge'),hole:ref('hole')});
  dimension.description='Exact variants add: source-distance axis datum-x|datum-y +from/to; plane-distance axis datum-normal +first/second (front/right only); edge-length edge; hole-diameter hole; hole-offset axis datum-x|datum-y +hole. Components are datum-axis magnitudes, not diagonal lengths. Labels are paper mm.';
- const definition=record({version:{enum:[1]},unit:{enum:['millimeter']},drawingId:text(128),title:{type:'string',maxLength:256},
+ const definition=record({version:{enum:[1,2]},unit:{enum:['millimeter']},drawingId:text(128),title:{type:'string',maxLength:256},
   target:record({featureId:integer,operationType:text(128),engine:{enum:['occ']},engineRevision:{type:'string',pattern:'^sha256:[a-f0-9]{64}:[a-f0-9]{64}$'},output:{enum:['complete-native-result']}}),
   datum:record({featureId:integer,faceId:text(256),regionId:text(8192)}),
   sheet:record({width:{type:'number',exclusiveMinimum:0,maximum:10000},height:{type:'number',exclusiveMinimum:0,maximum:10000},scale:record({numerator:{type:'integer',minimum:1,maximum:10000},denominator:{type:'integer',minimum:1,maximum:10000}})}),
-  views:{type:'array',minItems:1,maxItems:3,items:record({viewId:text(128),basis:{enum:['top','front','right']},paperOrigin:ref('point'),visibility:{enum:['visible-and-hidden']}})},dimensions:{type:'array',maxItems:16,items:dimension}});
+  views:{type:'array',minItems:1,maxItems:4,items:record({viewId:text(128),basis:{enum:['top','front','right','isometric']},paperOrigin:ref('point'),visibility:{enum:['visible-and-hidden']}})},dimensions:{type:'array',maxItems:16,items:dimension}});
+ definition.description='Definition v1 retains1..3 top/front/right views in subsequence order. Definition v2 requires exactly top/front/right/isometric, preserving physical reference dimensions on the original three views. Isometric is source-relative orthographic geometry, never a saved camera or a foreshortened dimension.';
  function plain(value){const p=Object.getPrototypeOf(value);if(p===null)return true;const c=Object.getOwnPropertyDescriptor(p,'constructor');return Object.getPrototypeOf(p)===null&&c&&Object.hasOwn(c,'value')&&typeof c.value==='function'&&c.value.prototype===p;}
  function own(value,keys){
   if(!value||typeof value!=='object'||Array.isArray(value)||!plain(value)||Reflect.ownKeys(value).length!==keys.length)throw Error('Expected exact drawing command fields.');
