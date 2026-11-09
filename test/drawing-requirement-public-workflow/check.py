@@ -172,7 +172,11 @@ def check(directory):
   raw=(directory/s['savedFile']).read_bytes();need(len(raw)==s['byteLength']and sha(raw)==s['sha256'],'actual SVG server-byte artifact custody')
   candidates=[x for x in r['observations']if x['before']==s['before']and x['definition']==s['definition']]
   row=one(candidates[-1:],'actual same-state protected Native metadata/projection read BEFORE SVG')
-  need(s['result']['revision']==s['before']['host']['revision'],'actual issued SVG document revision')
+  result=s['result'];need(type(result)is dict and set(result)==set('path version status sourceRevision dirty persistence serverStatus committed'.split()),'actual closed Host derived-export receipt grammar')
+  write=one([w for w in r['writes']if w['kind']=='svg'and w['label']==s['label']],'actual SVG write associated with artifact')
+  command=one([c for c in r['commands']if c['command']=='export-linked-part-drawing-svg'and c['args'].get('path')==write['file']],'actual registered SVG command associated with write')
+  need(result==write['result']==command['result']and command['args']=={'revision':s['before']['host']['revision'],'path':write['file']}and result['path']==write['file']and result['sourceRevision']==s['before']['host']['revision'],'actual Host sourceRevision binds exact registered export request, write and artifact')
+  need(result['committed']is True and result['dirty']is False and result['persistence']=='browser'and result['serverStatus']=='not-verified'and result['status']in('pending','synced'),'browser commit and independent server equality remain distinct')
   inspected=inspect_svg(raw,s,row)
   if s['label']=='repaired':need(inspected['repairedNontrivialLeader']is not None and inspected['repairedNontrivialLeader']['vertices']>2,'actual repaired SVG contains necessary routed leader, no straight-path shortcut')
   artifacts.append({'file':s['savedFile'],'result':inspected})
