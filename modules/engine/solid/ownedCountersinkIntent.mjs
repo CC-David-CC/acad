@@ -3,6 +3,9 @@ import {solidBodyId} from './solidBodyIdentity.mjs';
 const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
 export const COUNTERSINK_NUMERIC_KEYS=Object.freeze(['version','unit','engine','engineRevision','featureId','target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId','entryFaceId','kind','throughDiameter','entryDiameter','includedAngleRadians']);
 export const COUNTERSINK_LENGTH_KEYS=Object.freeze(['throughDiameter','entryDiameter']);
+export const COUNTERSINK_DIMENSION_KEYS=Object.freeze([...COUNTERSINK_LENGTH_KEYS,'includedAngleRadians']);
+export const COUNTERSINK_GEOMETRY_CODES=Object.freeze(['PROFILE_BELOW_RESOLUTION','UNSUPPORTED_COUNTERSINK_BUILD','COUNTERSINK_UNSUPPORTED_TARGET','COUNTERSINK_ENTRY_UNRESOLVED','COUNTERSINK_DIAMETER_ORDER','COUNTERSINK_DEPTH_NOT_INTERIOR','COUNTERSINK_OUTSIDE_PROFILE','COUNTERSINK_TOOL_UNQUALIFIED','COUNTERSINK_CONE_UNQUALIFIED']);
+export const COUNTERSINK_CODES=Object.freeze(['INVALID_REQUEST','STALE_SOURCE','INVALID_OPERAND','ENGINE_REVISION_MISMATCH',...COUNTERSINK_GEOMETRY_CODES,'RESOURCE_LIMIT']);
 export function assertCountersinkDiameterOrder(through,entry){if(!(through<entry))fail('COUNTERSINK_DIAMETER_ORDER','The entry diameter must exceed the through diameter.');}
 function numericFields(value){
  const p=value&&typeof value==='object'?Object.getPrototypeOf(value):undefined;

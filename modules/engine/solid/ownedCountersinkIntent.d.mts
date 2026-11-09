@@ -6,5 +6,8 @@ export interface OwnedCountersinkIntent {
 }
 export const COUNTERSINK_NUMERIC_KEYS:readonly string[];
 export const COUNTERSINK_LENGTH_KEYS:readonly ['throughDiameter','entryDiameter'];
+export const COUNTERSINK_DIMENSION_KEYS:readonly ['throughDiameter','entryDiameter','includedAngleRadians'];
+export const COUNTERSINK_GEOMETRY_CODES:readonly string[];
+export const COUNTERSINK_CODES:readonly string[];
 export function assertCountersinkDiameterOrder(through:number,entry:number):void;
 export function captureNumericCountersinkIntent(value:unknown):Readonly<OwnedCountersinkIntent>;
