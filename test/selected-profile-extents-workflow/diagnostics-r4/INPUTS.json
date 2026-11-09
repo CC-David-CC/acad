@@ -1,0 +1,106 @@
+{
+  "role": "custody-only; diagnostic inputs, not acceptance results",
+  "baseCommit": "f3da26bbe150524e99d3173bc2ac6458b47dd8cd",
+  "evidenceCommit": "1991418d35b0a156fb906d6b81f57e3d5ce25457",
+  "evidenceRoot": "/tmp/codi-acad-foundation-next-20261109/test/selected-profile-extents-workflow/evidence-r4",
+  "inputs": {
+    "whole/receipt.json": {
+      "bytes": 40528814,
+      "sha256": "8e9013107d62d0f3797b465ba0c39ed9c283cd7e59e3e74c62f0078475b36bcd"
+    },
+    "first-oracle.json": {
+      "bytes": 94,
+      "sha256": "30272bc02d3570171c2c6a305b3541f8b956ef1e464fde0cdc07d71de5865695"
+    },
+    "after-whole-first.log": {
+      "bytes": 847,
+      "sha256": "45744ba03e4fad95117d0b3cdbaa0a41d2bb0cfa8e5fb7fbf3f3dd27341eed14"
+    },
+    "reader-node24-r2.json": {
+      "bytes": 43409,
+      "sha256": "65e298872b2648c86bf3f1a116c239d42b0c22880f249c36788eecb1e0c9d39e"
+    },
+    "reader-source.json": {
+      "bytes": 2283,
+      "sha256": "1db0802560c5b086dce7a6ec24b98e783167592b0b44ff636ce7d283a404f3a6"
+    },
+    "FIRST-READER-FAILURE.json": {
+      "bytes": 7782,
+      "sha256": "ed050aea4448a977b83550cf49a43ce93be15aa8973ff53c8978a336565e4431"
+    },
+    "whole/two-sided-initial.3mf": {
+      "bytes": 3251,
+      "sha256": "b8884a177d371e20217a2396dbd8deda480dcb495eab4348c8314d148dcf8698"
+    },
+    "whole/two-sided-reedited.3mf": {
+      "bytes": 3251,
+      "sha256": "c8a67130081002ae34aa70005c6f9e8c115e5690682837e8bd8f7c73f9b18456"
+    },
+    "whole/circle-XZ.3mf": {
+      "bytes": 36559,
+      "sha256": "27c077d654dd5437719fca9d27c47121e290dde44c06ce9a397e3710289adb83"
+    },
+    "whole/annulus-ZY.3mf": {
+      "bytes": 71481,
+      "sha256": "d9a7172d2388a6f0fe890390a7decde6d24a3c6cb2bc8d75ac5fd8dbc39ad4e6"
+    },
+    "whole/through-pattern.3mf": {
+      "bytes": 105167,
+      "sha256": "ad33255b7072cb6ee62eb87f4803523384f2e5c67f4233024cd1ded5d53c5e65"
+    },
+    "whole/blind-interval.3mf": {
+      "bytes": 36853,
+      "sha256": "2828be13b5920edc89152c86d3a9845c2a0d79ce135014f112a77276dbd5cdda"
+    }
+  },
+  "diagnosticFiles": {
+    "diagnose_mesh.py": {
+      "bytes": 9774,
+      "sha256": "72b0b78bcb72171fcc00e490e19b8816bb49a68f53ca73959258e4700cfca950"
+    },
+    "actual-report.json": {
+      "bytes": 81710,
+      "sha256": "39c980f8200962022510f0741951075cd7718c03495b48656538d492796e38f7"
+    },
+    "summarize_wall.py": {
+      "bytes": 6978,
+      "sha256": "a1339452dad03a5b1e000f4f626f9678e52e3ac8244fb8efd589bd229e2588f1"
+    },
+    "wall-statistics.json": {
+      "bytes": 9558,
+      "sha256": "a0c492823da7e6cf9c2ee3fabb4e454a4395a03991a862e81de5d5bb09eeac47"
+    },
+    "freeze_inputs.py": {
+      "bytes": 2636,
+      "sha256": "6712a619ee5924b2e8f61699be44f5957bc7e17500ba86e98f68efb2ab7a45ba"
+    }
+  },
+  "oracleSource": {
+    "test/selected-profile-extents-workflow/mesh_oracle.py": {
+      "gitBlob": "a3bef6dfd185e1fb1b487aa4b4bb07a61353bafc",
+      "bytes": 10955,
+      "sha256": "808b2ef98aac23a7c24cebf722691a548bf067b0904fcb4b27336b53658ff543"
+    },
+    "test/selected-profile-extents-workflow/check.py": {
+      "gitBlob": "2957fba514b5cd8b819ac93232e6a71c5703bc8f",
+      "bytes": 41967,
+      "sha256": "a0858766b071f39cc87731ccc93ae4ab9bde8dd6e7175fd0867d4d769d9525b0"
+    },
+    "test/selected-profile-extents-workflow/desktop-driver.mjs": {
+      "gitBlob": "f249e01f512cbf666dabd448e874f30c226ade73",
+      "bytes": 50209,
+      "sha256": "3794d1bc0d4fd8adea00ea8a277e16190fa6c53c9ab355abd559f5495129c2ea"
+    },
+    "test/selected-profile-extents-workflow/CONTRACT.md": {
+      "gitBlob": "b0444bf64963e6cb0766b146d6f2c3304013cd9e",
+      "bytes": 6074,
+      "sha256": "f4897222e391822fc85fad54d97062c2a255afb234092fa783b0bcf0d854ed62"
+    }
+  },
+  "producingTuple": {
+    "source": "0afb07fe8e216ba9a03cf21923e0ab70aed72546",
+    "hostSource": "be24fbc232c967912f529053d34a9d407b369a39",
+    "acceptance": "7e1e2b6d8eafac4411f1cc63d5b5dc67c5de994a",
+    "engineRevision": "sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc"
+  }
+}
