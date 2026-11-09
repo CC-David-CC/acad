@@ -73,25 +73,31 @@ prerelease; native and WASM versions need separate qualification.
 
 Pinned isolated dependencies1f1090f and adapter829962e built on R730. First
 configure failed on Root's singular GMP/MPFR CMake variables; unchanged source
-built successfully with the documented plural variables. First actual six-mesh
-batch9340 and corrected observer batch97661 are terminal, not running.
+built successfully with the documented plural variables. First batches9340 and
+97661 are retained, terminal, not running.
 
-All six original meshes pass raw indexed topology/vertex links, Trimesh winding/
-watertightness and exact-input CGAL complete graph/degeneracy/self-intersection/
-volume-boundary checks. First evidence is retained at test/library-validation/
-evidence-first/ (dc27a53); observer2355b7c fixes the confirmed resource/PropertyID
-namespace mismatch. Its complete R2 retains six geometric passes and passes the
-material/structure comparisons before a metadata reconciliation mismatch.
-Package semantics remain UNCERTAIN; actual metadata observations were missing
-before the assertion. Added observability has not run. Do not call this an
-exporter defect, waive metadata requirements or infer full-surface accuracy.
+The coherent R3 observer32700df completed all six original files under55504,
+terminal0. Scoped package units/material/scene/metadata-content comparisons,
+raw indexed topology/vertex links, Trimesh and CGAL graph/degeneracy/complete
+self-intersection/volume-boundary checks PASS all six. Original files and arrays
+are unchanged. Actual evidence: test/library-validation/evidence-r3/0523b3f.
+The prior material and metadata mismatches were observer namespace errors,
+explained in3665ff8/782164d; no exporter or geometry change was needed.
 
-See [operation inventory](../reviews/CAD1-OCCT-LIBRARY-FIT-INVENTORY-20261109.md)
-and [reader namespace review](../reviews/LIB3MF-RESOURCE-PROPERTY-NAMESPACE-REVIEW-20261109.md).
-Existing Native/production runtime is unchanged. Next: source review of metadata
-namespace/advisory semantics, then one coherent complete observation; close L3
-full-surface proof. The source-bound finite-curve binding contract is being
-prepared separately for quick reuse of existing OCCT algorithms.
+Known library limits remain explicit: Float32 geometry is nonauthoritative, and
+API preserve=true differs from the raw Core1.3 false default on these records.
+No roundtrip/preservation or arbitrary type-validation claim is made. This is
+scoped six-file native evidence, not browser adoption, full intended finite-
+surface/accuracy proof, broad scene coverage or full Gate1 qualification.
+
+See [operation inventory](../reviews/CAD1-OCCT-LIBRARY-FIT-INVENTORY-20261109.md),
+[reader identity review](../reviews/LIB3MF-RESOURCE-PROPERTY-NAMESPACE-REVIEW-20261109.md)
+and [QName review](../reviews/LIB3MF-METADATA-QNAME-REVIEW-20261109.md).
+L3 remains OPEN: a general analytic-surface/coverage certificate must replace the
+invalid exact-strip assumption without welding, skipped triangles or new budgets.
+Existing production runtime is unchanged. In parallel Root approved the small
+finite-curve binding source packet8f1a17a; a Native adapter is being implemented,
+not yet mounted, executed, actionable or qualified.
 
 ## Work queue and dependencies
 
@@ -99,7 +105,7 @@ prepared separately for quick reuse of existing OCCT algorithms.
 |---|---|---|---|---|
 | L0 | Freeze actual inputs, failures and candidate roles | Existing whole output | Immutable original manifests/reports; this plan | DONE for current extent corpus |
 | L1 | Inventory OCCT binding gaps and drawing algorithms | L0 | Capability-to-API/source matrix; reuse/adapter/custom decision for each missing competency | SOURCE INVENTORY DONE41f7189; bindings unimplemented |
-| L2 | Pin and assess native validators on R730 | L0 | One complete six-mesh comparison report, raw-data custody and measured costs | PARTIAL: six geometric checks PASS; package metadata UNCERTAIN after ID correction |
+| L2 | Pin and assess native validators on R730 | L0 | One complete six-mesh comparison report, raw-data custody and measured costs | FIRST CORPUS PASS0523b3f; broader scene/material coverage and browser fit pending |
 | L3 | Close general finite-surface accuracy proof | L2 plus source-intent contract | Full-surface/coverage proof with explicit error terms; original failure retained | OPEN, blocking extent qualification |
 | L4 | Integrate selected general operations and drawing pieces | L1, existing source packets | Small Worker adapters and shared commands with precise ownership/failures | QUEUED; existing C11 work continues |
 | L5 | Qualify browser cost/lifecycle for selected shipped pieces | L2/L4 | Initialization, peak memory, responsiveness, cancellation, retirement and isolation evidence | QUEUED |
