@@ -1,5 +1,6 @@
 import {layoutDrawingViewCaptions} from './linkedPartDrawingCaptionLayout.mjs';
 import {layoutDrawingWarnings} from './linkedPartDrawingWarningLayout.mjs';
+import {renderDrawingRequirementForms} from './linkedPartDrawingRequirementForms.mjs';
 import {unpackDrawingSection} from '../../../../modules/engine/mount/ownedDrawingSectionProtocol.mjs';
 import {unpackDrawingDetail} from '../../../../modules/engine/mount/drawingDetailClip.mjs';
 // Worker-only presentation of observed geometry. Authored references remain in
@@ -154,12 +155,15 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
     annotations.push(text([c.x,c.y],c.value,attrs));
   }
   const geometryBounds=captions.filter(c=>c.bounds).map(c=>c.bounds),captionBoxes=placedCaptions.map(c=>({min:[c.x-1,c.y-4],max:[c.x+c.textLength+1,c.y+2]}));
+  const requirementForms=renderDrawingRequirementForms({definition:d,observation:o,views:read.views,geometryBounds,strokeBounds,labelBoxes,captionBoxes});
+  paths.push(...requirementForms.paths);annotations.push(...requirementForms.annotations);warnings.push(...requirementForms.warnings);strokeBounds.push(...requirementForms.strokeBounds);labelBoxes.push(...requirementForms.labelBoxes);
+  if(requirementForms.warnings.length)status='unresolved';
   for(const warning of layoutDrawingWarnings({sheet:d.sheet,warnings,geometryBounds,strokeBounds,labelBoxes,captionBoxes})){
     const first=warning.lines[0],spans=warning.lines.map(line=>`<tspan x="${num(line.x)}" y="${num(line.y)}" textLength="${num(line.textLength)}" lengthAdjust="spacing">${escape(line.value)}</tspan>`).join('');
     annotations.push(`<text x="${num(first.x)}" y="${num(first.y)}" ${warning.tag||''} data-warning-layout="observed-sheet-v1" data-warning-role="${warning.role}" data-warning-id="${escape(warning.id)}" data-warning-view-id="${escape(warning.viewId)}" font-family="monospace" font-size="3" fill="#a00" aria-label="${escape(warning.message)}">${spans}</text>`);
   }
   const title=text([8,8],d.title||d.drawingId),notice=text([8,d.sheet.height-5],`Reference drawing · ${status} · scale ${d.sheet.scale.numerator}:${d.sheet.scale.denominator}`);
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${num(d.sheet.width)}mm" height="${num(d.sheet.height)}mm" viewBox="0 0 ${num(d.sheet.width)} ${num(d.sheet.height)}"><title>${escape(d.title)}</title><metadata>${escape(JSON.stringify({version:1,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,quality:o.quality,status,...(d.version>=2?{definitionVersion:d.version,viewCount:d.views.length,projection:d.views.some(v=>v.basis==='isometric')?'source-relative-isometric-v1':'source-relative-orthographic-v1'}:{}),...(d.version===3?{annotationFacts:o.annotations,annotationRole:'derived-native-bore-reference',ordinateRole:'signed-datum-coordinate'}:{}),curvePresentationTolerancePaperMm:.02,dimensionRole:'reference'}))}</metadata><defs>${patterns.join('')}</defs><rect width="100%" height="100%" fill="white"/><g fill="none" stroke="#111" stroke-width=".25">${paths.join('')}</g><g font-family="sans-serif" font-size="3">${title}${annotations.join('')}${notice}</g></svg>`;
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${num(d.sheet.width)}mm" height="${num(d.sheet.height)}mm" viewBox="0 0 ${num(d.sheet.width)} ${num(d.sheet.height)}"><title>${escape(d.title)}</title><metadata>${escape(JSON.stringify({version:1,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,quality:o.quality,status,...(d.version>=2?{definitionVersion:d.version,viewCount:d.views.length,projection:d.views.some(v=>v.basis==='isometric')?'source-relative-isometric-v1':'source-relative-orthographic-v1'}:{}),...(d.version>=3?{annotationFacts:o.annotations,annotationRole:'derived-native-bore-reference',ordinateRole:'signed-datum-coordinate'}:{}),...(d.version===4?{datumFeatureFacts:o.datumFeatures,requirementFacts:o.requirements,manufacturingRequirementRole:'authored-manufacturing-requirement',measurementScope:'nominal-cad-reference-only'}:{}),curvePresentationTolerancePaperMm:.02,dimensionRole:'reference'}))}</metadata><defs>${patterns.join('')}</defs><rect width="100%" height="100%" fill="white"/><g fill="none" stroke="#111" stroke-width=".25">${paths.join('')}</g><g font-family="sans-serif" font-size="3">${title}${annotations.join('')}${notice}</g></svg>`;
   const bytes=new TextEncoder().encode(svg);
   if(bytes.byteLength>16*1024*1024)throw Object.assign(Error('Drawing SVG exceeds its byte budget.'),{code:'RESOURCE_LIMIT'});
   return {format:'svg',mime:'image/svg+xml',status,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,buffer:bytes.buffer};
