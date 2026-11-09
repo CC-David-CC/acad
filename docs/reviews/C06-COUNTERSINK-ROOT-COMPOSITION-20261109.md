@@ -50,4 +50,24 @@ relay, filesystem race, foreign-account testing or runtime asset packaging.
 
 ## Result
 
-Composition in progress. No new feature/build/runtime qualification is claimed.
+All nine reviewed Core commits composed without conflicts: authored BEFORE
+fe36d4d, pure intent8233453, authored77c8419, registry/shared edit2d71f7d,
+backend BEFORE048350c, backend94710ba, authored review94e5a59, native signal
+repair30fa70d and backend reviewf10d231. The equivalent backend constants cherry
+was deliberately omitted. Host commands composed081d09995; root then added the
+single import and onDispose registration beside the existing semantic holes.
+
+Actual composed OCI SHA256 remains
+`8a150c70c5efa6461916c50310bd0d9cb0d34356a5d05087cb231cb703c2645a`.
+All ten existing strict guard sites already match these bytes; no speculative
+repin or source rewriting was necessary. The exact new cohort remains separate
+from the primary manufacturing extent cohort. Main and backend kind/request,
+history cost four, typed ANGLE binding, exact source/entry authority and accepted
+publication semantics retain the reviewed unions. Existing native signal
+intrinsics are used at all six changed shared edit/travel sites.
+
+This is source composition only. Normal coherent build/stage, emitted-source
+custody, actual command registration and complete public geometry/artifact
+qualification remain pending. No runtime result from frozen D7 extends to this
+new source. The separate extent acceptance worktree was successfully created at
+exact7750d400 before this composition, with no product-source substitution.
