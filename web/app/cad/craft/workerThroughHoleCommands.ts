@@ -1,3 +1,4 @@
+import {captureExtentMechanicalSource,extentMechanicalSourceCurrent} from './profileExtentMechanicalSource';
 import {featureSuppressed} from 'engine/solid/authoredHistoryState.mjs';
 import {captureAuthoredHoleIntent} from 'engine/solid/authoredLengthBinding.mjs';
 import {MWorkerSolid} from 'cad/model/mworkerSolid';
@@ -51,15 +52,15 @@ function sourceOrigins(selection:any,featureId:number){
  if(!plan||!Object.isFrozen(plan)||data(plan,'version')!==2||data(plan,'featureId')!==featureId||data(plan,'scope')!=='authored-source'||Object.prototype.hasOwnProperty.call(plan,'regionId'))unavailable();
  const source=data(plan,'source'),contexts=data(plan,'sourceContexts');
  for(const kind of ['edges','faces']){const rows=data(plan,kind);if(!Array.isArray(rows)||!Object.isFrozen(rows))unavailable();if(rows.some(row=>Object.prototype.hasOwnProperty.call(row,'boundaryRef')||Object.prototype.hasOwnProperty.call(row,'incidentBoundaryRefs')))fail('UNSUPPORTED_SOURCE','Derived arrangement spans are not the canonical authored rectangle hole source.');}
- if(!['prism-construction-history','kernel-operation-history'].includes(source)||!Array.isArray(contexts)||!Object.isFrozen(contexts)||contexts.length<1||contexts.length>32||Reflect.ownKeys(contexts).length!==contexts.length+1)unavailable();
+ if(!['prism-construction-history','profile-extent-construction-history','kernel-operation-history'].includes(source)||!Array.isArray(contexts)||!Object.isFrozen(contexts)||contexts.length<1||contexts.length>32||Reflect.ownKeys(contexts).length!==contexts.length+1)unavailable();
  const seen=new Set(),origins:any[]=[];
  for(let i=0;i<contexts.length;i++){
   const c=data(contexts,String(i));if(!c||!Object.isFrozen(c)||Reflect.ownKeys(c).length!==3)unavailable();
-  const origin=data(c,'featureId'),regionId=data(c,'regionId');
-  if(data(c,'kind')!=='sketch-profile'||!Number.isSafeInteger(origin)||origin<1||seen.has(origin)||!id(regionId,8192))unavailable();
-  seen.add(origin);origins.push(Object.freeze({featureId:origin,regionId}));
+  const origin=data(c,'featureId'),regionId=data(c,'regionId'),kind=data(c,'kind');
+  if(!['sketch-profile','sketch-profile-extent'].includes(kind)||!Number.isSafeInteger(origin)||origin<1||seen.has(origin)||!id(regionId,8192))unavailable();
+  seen.add(origin);origins.push(Object.freeze({featureId:origin,regionId,kind}));
  }
- if(source==='prism-construction-history'&&(origins.length!==1||origins[0].featureId!==featureId))unavailable();
+ if(['prism-construction-history','profile-extent-construction-history'].includes(source)&&(origins.length!==1||origins[0].featureId!==featureId||origins[0].kind!==(source==='profile-extent-construction-history'?'sketch-profile-extent':'sketch-profile')))unavailable();
  return origins;
 }
 const capacity=(b:any,cost:number)=>b.supported===true&&b.compatible===true&&b.withinLimit===true&&Number.isSafeInteger(b.remainingNativeResults)&&b.remainingNativeResults>=cost;
@@ -86,6 +87,7 @@ export function sourceRecord(ctx:any,history:any[],origin:any,build:any){
  return {...r,face,root:face.root,source,frameText,parameterText:JSON.stringify(p)};
 }
 export function sourceCurrent(ctx:any,r:any){
+ if(r.extent===true)return extentMechanicalSourceCurrent(ctx,r);
  try{return ctx.cadRegistry.findFace(r.captured.faceId)===r.face&&ctx.craftService.models$.value.includes(r.face.root)&&r.face.root===r.root&&r.root instanceof MOpenFaceShell&&r.face.isPlaneBased&&r.face.defaultSketchId===r.captured.faceId&&ctx.sketchStorageService.getSketchData(r.captured.faceId)===r.source&&JSON.stringify(sketchBoundaryFrame(r.face))===r.frameText&&Object.getOwnPropertyDescriptor(r.entry,'type')?.enumerable===true&&Object.getOwnPropertyDescriptor(r.entry,'type')?.value==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'&&Object.getOwnPropertyDescriptor(r.entry,'params')?.enumerable===true&&Object.getOwnPropertyDescriptor(r.entry,'params')?.value===r.params&&JSON.stringify(captureSelectedProfileDepthParameters(r.params))===r.parameterText;}catch{return false;}
 }
 
@@ -111,9 +113,9 @@ export function createWorkerThroughHoleCommands(ctx:any,submit:any,cancelEpoch:(
     if(historyBuild!==build||outputBuild!==build)fail('ENGINE_REVISION_MISMATCH','The whole authored part must retain one backend build.');
     const budget=selectedProfileHistoryBudget(state.history,build.revision);
     for(const origin of origins){try{
-     const source=sourceRecord(ctx,state.history,origin,build),creation:any={};
+     const source=origin.kind==='sketch-profile-extent'?captureExtentMechanicalSource(ctx,state.history,origin,build,model):sourceRecord(ctx,state.history,origin,build),creation:any={};
      for(const kind of KINDS){const canCreate=!reason&&capacity(budget,COST[kind]);creation[kind]=Object.freeze({nativeResultCost:COST[kind],canCreate,reason:reason||budget.reason||(!canCreate?'RESOURCE_LIMIT':null)});}
-     const row=Object.freeze({sourceProfile:'selected-rectangle',sourceQualification:'requires-worker-validation',bodyId:body.id,featureId:body.featureId,sourceFeatureId:origin.featureId,sourceFaceId:source.captured.faceId,sourceRegionId:origin.regionId,engine:'occ',engineRevision:build.revision,budget,creation:Object.freeze(creation),canCreate:KINDS.some(k=>creation[k].canCreate)});
+     const row=Object.freeze({sourceProfile:'selected-rectangle',sourceQualification:source.extent?'published-worker-source-descriptor':'requires-worker-validation',bodyId:body.id,featureId:body.featureId,sourceFeatureId:origin.featureId,sourceFaceId:source.captured.faceId,sourceRegionId:origin.regionId,engine:'occ',engineRevision:build.revision,budget,creation:Object.freeze(creation),canCreate:KINDS.some(k=>creation[k].canCreate)});
      targets.push(row);records.set(body.id+'#'+origin.featureId,{row,model,ext:model.ext,tag:model.ext.workerGeometry,method:model.inspectKernelMetrics,metrics:body.metrics,selections:body.selections,build,source});
     }catch(error){unsupported.push(Object.freeze({bodyId:body.id,sourceFeatureId:origin.featureId,engine:body.engine,code:error.code||'UNAVAILABLE',reason:String(error.message||error)}));}}
 

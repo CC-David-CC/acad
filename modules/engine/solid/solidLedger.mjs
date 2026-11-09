@@ -1,3 +1,5 @@
+import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature} from './ownedProfileExtentFeature.mjs';
+import {captureProfileMechanicalSource} from '../mount/profileMechanicalSource.mjs';
 import {captureProfileExtentEvaluation} from '../mount/ownedProfileExtentPlan.mjs';
 import {captureOwnedBlindHoleIntent} from './ownedBlindHoleIntent.mjs';
 import {captureBoreReadResult,unresolvedBoreRead} from '../mount/ownedBoreReadProtocol.mjs';
@@ -24,6 +26,7 @@ import {captureSolidMetrics} from './solidMetrics.mjs';
 import {captureSolidBox,captureSolidBoolean,captureSolidProfile,captureSolidEdgeTreatment,solidBodyId} from './solidIntent.mjs';
 const ledgers=new WeakMap();
 const selectionSnapshots=new WeakMap();
+const mechanicalSourceSnapshots=new WeakMap();
 const holeSeedSnapshots=new WeakMap();
 const STEP_BLOB_SIZE=typeof Blob==='function'?Object.getOwnPropertyDescriptor(Blob.prototype,'size').get:null;
 const STEP_BLOB_TYPE=typeof Blob==='function'?Object.getOwnPropertyDescriptor(Blob.prototype,'type').get:null;
@@ -32,6 +35,33 @@ const STEP_BLOB_TYPE=typeof Blob==='function'?Object.getOwnPropertyDescriptor(Bl
 const freezeSelection=value=>{if(value&&typeof value==='object'){for(const child of Object.values(value))freezeSelection(child);Object.freeze(value);}return value;};
 export function inspectWorkerSolidSelections(model){return selectionSnapshots.get(model)||Object.freeze({status:'unavailable',reason:'NO_AUTHORED_PRISM_SELECTIONS'});}
 export function inspectWorkerSolidPatternSeeds(model){return holeSeedSnapshots.get(model)||Object.freeze({status:'unavailable',reason:'NO_QUALIFIED_HOLE_PATH'});}
+// Read-only observational eligibility, never a public write flag or a bore
+// success certificate. The caller supplies actual internal source accessors.
+function sameMechanicalFrame(actual,expected){
+ if(!actual||typeof actual!=='object'||Array.isArray(actual)||Reflect.ownKeys(actual).length!==4)return false;
+ for(const key of ['origin','x','y','z']){const d=Object.getOwnPropertyDescriptor(actual,key),v=d?.value;if(!d?.enumerable||!Object.hasOwn(d,'value')||!Array.isArray(v)||v.length!==3||Reflect.ownKeys(v).length!==4)return false;for(let i=0;i<3;i++){const n=Object.getOwnPropertyDescriptor(v,String(i));if(!n?.enumerable||!Object.hasOwn(n,'value')||!Object.is(n.value,expected[key][i]))return false;}}return true;
+}
+export function inspectWorkerMechanicalSource(model,sourceFeatureId,{registry,history,readSketch,readFrame,readParameterSource,valid}){
+ const unavailable=reason=>Object.freeze({status:'unavailable',reason}),snapshot=mechanicalSourceSnapshots.get(model);
+ if(!snapshot)return unavailable('NO_SOURCE_DESCRIPTOR');
+ if(typeof valid!=='function'||!registry||typeof registry.find!=='function'||typeof registry.findFace!=='function'||registry.isEvaluating===true||!Array.isArray(history)||history.length>256||Reflect.ownKeys(history).length!==history.length+1||typeof readSketch!=='function'||typeof readFrame!=='function'||typeof readParameterSource!=='function')return unavailable('STALE_SOURCE');
+ const current=()=>{try{return valid()===true;}catch{return false;}};if(!current())return unavailable('STALE_SOURCE');
+ const registered=()=>registry.find(snapshot.bodyId)===model&&model.id===snapshot.bodyId&&model.featureId===snapshot.featureId&&model.ext===snapshot.ext&&model.ext.workerGeometry===snapshot.tag&&model.inspectKernelMetrics===snapshot.method&&snapshot.method.call(model)===snapshot.metrics;
+ if(!registered())return unavailable('STALE_NATIVE_MODEL');
+ const rows=snapshot.observations.filter(row=>row.feature.featureId===sourceFeatureId);if(rows.length!==1)return unavailable('NO_SOURCE_DESCRIPTOR');const observation=rows[0],expected=observation.feature;
+ let feature=null;
+ for(let i=0;i<history.length;i++){
+  const d=Object.getOwnPropertyDescriptor(history,String(i)),entry=d?.value,t=entry&&Object.getOwnPropertyDescriptor(entry,'type'),p=entry&&Object.getOwnPropertyDescriptor(entry,'params');
+  if(!d?.enumerable||!Object.hasOwn(d,'value')||!t?.enumerable||!Object.hasOwn(t,'value')||!p?.enumerable||!Object.hasOwn(p,'value'))return unavailable('STALE_SOURCE');
+  if(t.value!==PROFILE_EXTENT_TYPE)continue;
+  let captured;try{captured=captureOwnedProfileExtentFeature(p.value);}catch(error){if(Object.getOwnPropertyDescriptor(error||{},'code')?.value!=='INVALID_REQUEST')throw error;return unavailable('STALE_SOURCE');}
+  if(captured.featureId===sourceFeatureId){const suppressed=Object.getOwnPropertyDescriptor(entry,'suppressed');if(feature||suppressed&&(!suppressed.enumerable||!Object.hasOwn(suppressed,'value')||suppressed.value!==false))return unavailable('STALE_SOURCE');feature=captured;}
+ }
+ if(!feature||Object.keys(feature).length!==Object.keys(expected).length||Object.keys(expected).some(key=>!Object.is(feature[key],expected[key]))||registry.findFace(expected.faceId)!==observation.face||readSketch(expected.faceId)!==observation.sourceSnapshot||readParameterSource()!==observation.parameterSource||!sameMechanicalFrame(readFrame(observation.face),observation.frame))return unavailable('STALE_SOURCE');
+ if(!current()||!registered()||registry.findFace(expected.faceId)!==observation.face)return unavailable('STALE_NATIVE_MODEL');
+ return Object.freeze({status:'available',engine:snapshot.engine,engineRevision:snapshot.engineRevision,bodyId:snapshot.bodyId,featureId:snapshot.featureId,sourceFeatureId,sourceFaceId:expected.faceId,sourceRegionId:expected.regionId,sourceSha256:observation.sourceSha256,requestSha256:observation.requestSha256,source:observation.descriptor});
+}
+
 const fail=(message,code='INVALID_REQUEST')=>{throw Object.assign(new Error(message),{code});};
 const cancelled=()=>new DOMException('Solid evaluation was cancelled or superseded.','AbortError');
 function state(owner){let s=ledgers.get(owner);if(!s){s={engine:null,engineRevision:null,mount:null,outputs:new Map(),sources:new Map()};ledgers.set(owner,s);}return s;}
@@ -69,9 +99,10 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
   }));
  }
  if(sourceBinding!==undefined&&kind!=='loft'){
-  const bindingKeys=kind==='sweep'?['featureId','faceId','regionId','pathFaceId','pathCurves']:kind==='revolve'?['featureId','faceId','regionId','axisSegmentId']:['featureId','faceId','regionId'];
+  const bindingKeys=kind==='sweep'?['featureId','faceId','regionId','pathFaceId','pathCurves']:kind==='revolve'?['featureId','faceId','regionId','axisSegmentId']:kind==='profile-extents'?['featureId','faceId','regionId','sourceSnapshot','parameterSource']:['featureId','faceId','regionId'];
   if(!['profile','profile-extents','revolve','sweep'].includes(kind)||!sourceBinding||typeof sourceBinding!=='object'||Array.isArray(sourceBinding)||Reflect.ownKeys(sourceBinding).length!==bindingKeys.length)fail('Invalid profile source binding.');
   binding={};for(const key of bindingKeys){const d=Object.getOwnPropertyDescriptor(sourceBinding,key);if(!d?.enumerable||!Object.hasOwn(d,'value'))fail('Profile source binding must be own data.');binding[key]=d.value;}
+  if(kind==='profile-extents'&&(typeof binding.sourceSnapshot!=='string'||binding.sourceSnapshot.length>65536||typeof binding.parameterSource!=='string'||binding.parameterSource.length>65536))fail('The captured original extent source bytes are required.','STALE_SOURCE');
   const region=kind==='sweep'?intent.sweep.region.id:kind==='revolve'?intent.revolve.region.id:kind==='profile-extents'?intent.profileExtent.region.id:intent.profile.region.id;
   if(binding.featureId!==intent.featureId||binding.regionId!==region||typeof binding.faceId!=='string'||!binding.faceId||binding.faceId.length>256||typeof registry.findFace!=='function'||!registry.findFace(binding.faceId)||kind==='profile-extents'&&binding.faceId!==intent.profileExtent.source.faceId||circularProfile&&binding.faceId!==intent.profile.region.faceId||kind==='revolve'&&(binding.faceId!==intent.revolve.source.faceId||binding.axisSegmentId!==intent.revolve.axis.id))fail('The selected profile source is unavailable.','STALE_SOURCE');
   if(kind==='sweep'){
@@ -234,7 +265,7 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
   // Revolve, sweep and loft have no qualified prism lineage or hole constructor. Keep only
   // its source-lifetime check, never fabricate extrusion selection provenance.
   if(binding&&(kind==='profile'||kind==='profile-extents')){
-   const constructor=Object.freeze({...binding,engine:intent.engine,engineRevision:intent.engineRevision,handle:result.handle,...(kind==='profile-extents'?{kind:'profile-extents',extentBinding:intent.extentBinding}:{})});
+   const constructor=Object.freeze({...binding,engine:intent.engine,engineRevision:intent.engineRevision,handle:result.handle,...(kind==='profile-extents'?{kind:'profile-extents',extentBinding:intent.extentBinding,mechanicalObservation:Object.freeze({feature:captureOwnedProfileExtentFeature({version:1,unit:intent.unit,engine:intent.engine,engineRevision:intent.engineRevision,featureId:intent.featureId,faceId:binding.faceId,regionId:binding.regionId,bodyPolicy:'separate',...intent.profileExtent.authoredExtent}),sourceSnapshot:binding.sourceSnapshot,parameterSource:binding.parameterSource,face:binding.face,frame:intent.profileExtent.frame,sourceSha256:intent.extentBinding.sourceSha256,requestSha256:intent.extentBinding.requestSha256,descriptor:captureProfileMechanicalSource(intent.extentBinding.mechanicalSource)})}:{})});
    s.sources.set(intent.featureId,constructor);holeState=Object.freeze({source:constructor,records:Object.freeze([])});
   }else if(kind==='through-hole'&&parents[0].holeState?.source===source){
    const prior=parents[0].holeState.records;
@@ -258,6 +289,17 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
    subtractConstruction=captureBoxSubtractConstruction({version:1,kind:'authored-box-subtract',unit:intent.unit,engine:intent.engine,engineRevision:intent.engineRevision,bodyId:id,featureId:intent.featureId,operation:'subtract',a:parents[0].boxConstruction,b:parents[1].boxConstruction,native:{volume:metrics.nativeVolume,bounds:metrics.nativeBounds}});
   }catch{/* No witness: material-interface export remains explicitly unqualified. */}
   s.outputs.set(id,Object.freeze({engine:intent.engine,featureId:intent.featureId,kind,model,handle:result.handle,holeState,boxConstruction,subtractConstruction}));
+  // Real Native output, publication checks, source ledger and actual selection
+  // origins precede this derived metadata. No handle is copied into the model
+  // observation; the read API below additionally requires accepted membership.
+  if(selections?.status==='available'&&selections.plan.version===2){
+   const observations=[];for(const origin of selections.plan.sourceContexts)if(origin.kind==='sketch-profile-extent'){
+    const source=s.sources.get(origin.featureId),observation=source?.mechanicalObservation;
+    if(observation&&source.regionId===origin.regionId)observations.push(observation);
+   }
+   if(observations.length)mechanicalSourceSnapshots.set(model,Object.freeze({engine:intent.engine,engineRevision:intent.engineRevision,bodyId:id,featureId:intent.featureId,method:inspect,metrics,ext,tag,observations:Object.freeze(observations)}));
+  }
+
   return Object.freeze({model,resultKind:metrics.resultKind,outputId:id,consumed:Object.freeze(parents.map(x=>x.model)),publicationCheck});
  } catch(error){if(mount)owner.close();throw error;}
 }

@@ -1,3 +1,4 @@
+import {captureProfileMechanicalSource,deriveProfileMechanicalSource} from './profileMechanicalSource.mjs';
 // Worker-only. The original selected face is authored source; the placed face
 // and positive height below are private inputs to ONE existing Native V3 prism.
 import {capturePolygonProfileFaceRequest} from './selectedProfilePlan.mjs';
@@ -26,11 +27,12 @@ export function captureProfileExtentIntent(input){
  r.frame=face.frame;r.region=face.region;return freeze(r);
 }
 export function captureProfileExtentBinding(input){
- const r=fields(input,['version','featureId','faceId','sourceSha256','regionId','requestSha256','authoredExtent','extent','interval']);
+ const r=fields(input,['version','featureId','faceId','sourceSha256','regionId','requestSha256','authoredExtent','extent','interval','mechanicalSource']);
  if(r.version!==1||!Number.isSafeInteger(r.featureId)||r.featureId<1||!identity(r.faceId,256)||!identity(r.regionId,8192)||!r.regionId.startsWith('sketch-region:')||!hex(r.sourceSha256)||!hex(r.requestSha256))fail('Invalid profile-extent result binding.');
  r.authoredExtent=captureProfileExtent(r.authoredExtent);r.extent=captureProfileExtent(r.extent,{numeric:true});
  const keys=profileExtentFields(r.extent);
  if(r.extent.extent!==r.authoredExtent.extent||keys.some(key=>typeof r.authoredExtent[key]==='number'&&!Object.is(r.authoredExtent[key],r.extent[key])))fail('Invalid resolved profile-extent binding.');
+ r.mechanicalSource=captureProfileMechanicalSource(r.mechanicalSource);
  r.interval=fields(r.interval,['lower','upper','span','sourcePlane']);
  // Scalar association only; geometry/derivation is independently repeated in
  // the semantic/native Workers. Main never derives a translated source frame.
@@ -82,7 +84,7 @@ export function prepareProfileExtentGeometry(input){
  const volume=originalFace.area*interval.span;
  if(!Number.isFinite(volume)||!(volume>0))fail('Extent volume is not representable in the Native numeric domain.','PROFILE_EXTENT_UNREPRESENTABLE');
  const nativeValues=originalFace.nativeValues.slice();nativeValues[0]=interval.span;for(let i=0;i<3;i++)nativeValues[1+i]=workingFrame.origin[i];
- return freeze({originalFace,frame:workingFrame,depth:interval.span,loops:originalFace.loops,nativeValues,expected:{volume,bounds:expectedBounds},interval});
+ return freeze({originalFace,frame:workingFrame,depth:interval.span,loops:originalFace.loops,nativeValues,expected:{volume,bounds:expectedBounds},interval,mechanicalSource:deriveProfileMechanicalSource(originalFace)});
 }
 export async function prepareOwnedProfileExtent(input,expectedRequestSha256){
  // Detach every caller array BEFORE the first suspension. Both the digest
@@ -93,6 +95,6 @@ export async function prepareOwnedProfileExtent(input,expectedRequestSha256){
  const digest=await crypto.subtle.digest('SHA-256',encoded),requestSha256=Array.from(new Uint8Array(digest),n=>n.toString(16).padStart(2,'0')).join('');
  if(expectedRequestSha256!==undefined&&requestSha256!==expectedRequestSha256)fail('Profile-extent input changed from independent semantic preparation.','PROFILE_EXTENT_INPUT_CHANGED');
  const geometry=prepareProfileExtentGeometry({version:1,unit:request.unit,frame:request.frame,region:request.region,extent:request.extent}),interval=geometry.interval,sourcePlane=interval.lower===0?'lower-boundary':interval.upper===0?'upper-boundary':'interior';
- const binding=captureProfileExtentBinding({version:1,...request.source,regionId:request.region.id,requestSha256,authoredExtent:request.authoredExtent,extent:request.extent,interval:{...interval,sourcePlane}});
+ const binding=captureProfileExtentBinding({version:1,...request.source,regionId:request.region.id,requestSha256,authoredExtent:request.authoredExtent,extent:request.extent,interval:{...interval,sourcePlane},mechanicalSource:geometry.mechanicalSource});
  return freeze({request,binding,...geometry});
 }

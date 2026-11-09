@@ -1,3 +1,5 @@
+import {profileExtentDimensions,resolveProfileExtent,profileExtentInterval} from 'engine/solid/ownedProfileExtentFeature.mjs';
+import {captureExtentMechanicalSource,extentMechanicalSourceCurrent} from './profileExtentMechanicalSource';
 import {featureSuppressed,historyControlAppendReason,assertHistoryControlAppendAllowed} from 'engine/solid/authoredHistoryState.mjs';
 import {captureAuthoredBlindHoleIntent,materializeAuthoredBlindHoleIntent} from 'engine/solid/authoredBlindHoleIntent.mjs';
 import {resolveAuthoredLength} from 'engine/solid/authoredLengthBinding.mjs';
@@ -53,15 +55,15 @@ function sourceOrigins(selection:any,featureId:number){
  if(!plan||!Object.isFrozen(plan)||data(plan,'version')!==2||data(plan,'featureId')!==featureId||data(plan,'scope')!=='authored-source'||Object.prototype.hasOwnProperty.call(plan,'regionId'))unavailable();
  const source=data(plan,'source'),contexts=data(plan,'sourceContexts');
  for(const kind of ['edges','faces']){const rows=data(plan,kind);if(!Array.isArray(rows)||!Object.isFrozen(rows))unavailable();if(rows.some(row=>Object.prototype.hasOwnProperty.call(row,'boundaryRef')||Object.prototype.hasOwnProperty.call(row,'incidentBoundaryRefs')))fail('UNSUPPORTED_SOURCE','Derived arrangement spans are not the canonical authored rectangle hole source.');}
- if(!['prism-construction-history','kernel-operation-history'].includes(source)||!Array.isArray(contexts)||!Object.isFrozen(contexts)||contexts.length<1||contexts.length>32||Reflect.ownKeys(contexts).length!==contexts.length+1)unavailable();
+ if(!['prism-construction-history','profile-extent-construction-history','kernel-operation-history'].includes(source)||!Array.isArray(contexts)||!Object.isFrozen(contexts)||contexts.length<1||contexts.length>32||Reflect.ownKeys(contexts).length!==contexts.length+1)unavailable();
  const seen=new Set(),origins:any[]=[];
  for(let i=0;i<contexts.length;i++){
   const c=data(contexts,String(i));if(!c||!Object.isFrozen(c)||Reflect.ownKeys(c).length!==3)unavailable();
-  const origin=data(c,'featureId'),regionId=data(c,'regionId');
-  if(data(c,'kind')!=='sketch-profile'||!Number.isSafeInteger(origin)||origin<1||seen.has(origin)||!id(regionId,8192))unavailable();
-  seen.add(origin);origins.push(Object.freeze({featureId:origin,regionId}));
+  const origin=data(c,'featureId'),regionId=data(c,'regionId'),kind=data(c,'kind');
+  if(!['sketch-profile','sketch-profile-extent'].includes(kind)||!Number.isSafeInteger(origin)||origin<1||seen.has(origin)||!id(regionId,8192))unavailable();
+  seen.add(origin);origins.push(Object.freeze({featureId:origin,regionId,kind}));
  }
- if(source==='prism-construction-history'&&(origins.length!==1||origins[0].featureId!==featureId))unavailable();
+ if(['prism-construction-history','profile-extent-construction-history'].includes(source)&&(origins.length!==1||origins[0].featureId!==featureId||origins[0].kind!==(source==='profile-extent-construction-history'?'sketch-profile-extent':'sketch-profile')))unavailable();
  return origins;
 }
 const capacity=(b:any,cost:number)=>b.supported===true&&b.compatible===true&&b.withinLimit===true&&Number.isSafeInteger(b.remainingNativeResults)&&b.remainingNativeResults>=cost;
@@ -88,6 +90,7 @@ export function sourceRecord(ctx:any,history:any[],origin:any,build:any){
  return {...r,face,root:face.root,source,frameText,parameterText:JSON.stringify(p)};
 }
 export function sourceCurrent(ctx:any,r:any){
+ if(r.extent===true)return extentMechanicalSourceCurrent(ctx,r);
  try{return ctx.cadRegistry.findFace(r.captured.faceId)===r.face&&ctx.craftService.models$.value.includes(r.face.root)&&r.face.root===r.root&&r.root instanceof MOpenFaceShell&&r.face.isPlaneBased&&r.face.defaultSketchId===r.captured.faceId&&ctx.sketchStorageService.getSketchData(r.captured.faceId)===r.source&&JSON.stringify(sketchBoundaryFrame(r.face))===r.frameText&&Object.getOwnPropertyDescriptor(r.entry,'type')?.enumerable===true&&Object.getOwnPropertyDescriptor(r.entry,'type')?.value==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'&&Object.getOwnPropertyDescriptor(r.entry,'params')?.enumerable===true&&Object.getOwnPropertyDescriptor(r.entry,'params')?.value===r.params&&JSON.stringify(captureSelectedProfileDepthParameters(r.params))===r.parameterText;}catch{return false;}
 }
 
@@ -115,10 +118,10 @@ export function createWorkerBlindHoleCommands(ctx:any,submit:any,cancelEpoch:(ep
     const budget=selectedProfileHistoryBudget(state.history,build.revision);
     for(const origin of origins){try{
      if(origin.featureId!==body.featureId)fail('BLIND_UNSUPPORTED_TARGET','Select the genuine unconsumed rectangular constructor.');
-     const entryRows=body.selections.plan.faces.filter(r=>r.role==='last-cap'&&r.originFeatureId===origin.featureId);if(entryRows.length!==1)fail('BLIND_ENTRY_UNRESOLVED','Select the unique actual constructor last cap.');
-     const source=sourceRecord(ctx,state.history,origin,build),creation:any={};
+     const entryRole=origin.kind==='sketch-profile-extent'?'upper-cap':'last-cap',entryRows=body.selections.plan.faces.filter(r=>r.role===entryRole&&r.originFeatureId===origin.featureId);if(entryRows.length!==1)fail('BLIND_ENTRY_UNRESOLVED','Select the unique actual constructor entry cap.');
+     const source=origin.kind==='sketch-profile-extent'?captureExtentMechanicalSource(ctx,state.history,origin,build,model):sourceRecord(ctx,state.history,origin,build),creation:any={};
      for(const kind of KINDS){const canCreate=!reason&&capacity(budget,COST[kind]);creation[kind]=Object.freeze({nativeResultCost:COST[kind],canCreate,reason:reason||budget.reason||(!canCreate?'RESOURCE_LIMIT':null)});}
-     const row=Object.freeze({sourceProfile:'selected-rectangle',sourceQualification:'requires-worker-validation',bodyId:body.id,featureId:body.featureId,sourceFeatureId:origin.featureId,sourceFaceId:source.captured.faceId,sourceRegionId:origin.regionId,entryFaceId:entryRows[0].id,engine:'occ',engineRevision:build.revision,budget,creation:Object.freeze(creation),canCreate:KINDS.some(k=>creation[k].canCreate)});
+     const row=Object.freeze({sourceProfile:'selected-rectangle',sourceQualification:source.extent?'published-worker-source-descriptor':'requires-worker-validation',bodyId:body.id,featureId:body.featureId,sourceFeatureId:origin.featureId,sourceFaceId:source.captured.faceId,sourceRegionId:origin.regionId,entryFaceId:entryRows[0].id,engine:'occ',engineRevision:build.revision,budget,creation:Object.freeze(creation),canCreate:KINDS.some(k=>creation[k].canCreate)});
      targets.push(row);records.set(body.id+'#'+origin.featureId,{row,model,ext:model.ext,tag:model.ext.workerGeometry,method:model.inspectKernelMetrics,metrics:body.metrics,selections:body.selections,build,source});
     }catch(error){unsupported.push(Object.freeze({bodyId:body.id,sourceFeatureId:origin.featureId,engine:body.engine,code:error.code||'UNAVAILABLE',reason:String(error.message||error)}));}}
 
@@ -138,7 +141,7 @@ export function createWorkerBlindHoleCommands(ctx:any,submit:any,cancelEpoch:(ep
   if(['sourceFaceId','sourceRegionId','entryFaceId'].some(k=>args[k]!==target.row[k]))fail('BLIND_ENTRY_UNRESOLVED','The selected source/entry differs from the current actual constructor.');
   const producerFeatureId=target.model.featureId,sourceFeatureId=args.sourceFeatureId,temporaryFeatureId=[1,2,3].find(n=>n!==producerFeatureId);
   const preflight=captureAuthoredBlindHoleIntent({version:1,unit:'millimeter',engine:'occ',engineRevision:target.build.revision,featureId:temporaryFeatureId,target:args.bodyId,producerFeatureId,sourceFeatureId,sourceFaceId:args.sourceFaceId,sourceRegionId:args.sourceRegionId,entryFaceId:args.entryFaceId,kind:'centered-blind-flat',diameter:args.diameter,depth:args.depth});
-  const numeric=materializeAuthoredBlindHoleIntent(preflight,ctx.expressionService),thickness=resolveAuthoredLength(target.source.captured.depth,ctx.expressionService);
+  const numeric=materializeAuthoredBlindHoleIntent(preflight,ctx.expressionService),thickness=target.source.extent?profileExtentInterval(resolveProfileExtent(profileExtentDimensions(target.source.captured),ctx.expressionService)).span:resolveAuthoredLength(target.source.captured.depth,ctx.expressionService);
   if(!(numeric.depth<thickness))fail('BLIND_DEPTH_NOT_INTERIOR','Blind depth must be strictly less than the current part thickness.');
   if(!capacity(target.row.budget,2))fail('RESOURCE_LIMIT','The complete two-result blind operation exceeds its budget.');
   const project=ctx.projectService,craft=ctx.craftService,registry=ctx.cadRegistry,storage=ctx.storageService,manager=ctx.projectManager,generation=project.documentGeneration,documentSignal=project.documentSignal,history=craft.modifications$.value,sketches=ctx.sketchStorageService,namespace=project.sketchStorageNamespace,sourceRevision=sketchRevision(storage,namespace),epoch=craft.evaluationEpoch,scope:{epoch:number|null}={epoch:null};
