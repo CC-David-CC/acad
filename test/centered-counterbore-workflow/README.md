@@ -154,3 +154,15 @@ read protocol are added to the explicit producer anchors. Existing revision,
 finite path/circle/axial-span/shoulder/chord/coverage and physical leader checks
 are unchanged. No product or thresholds are changed, and neither rendered
 artifacts nor parser/mutation probes were generated/executed in this lane.
+
+## Public source-inspection revision correction
+
+First whole51937 failed at the first width edit after13 successful ordinary
+Native observations, creation and mixed dimension Undo/Redo. The reusable
+setSide example omitted the required revision on inspect-closed-sketch.
+Original runtime/receipt/helper bytes are retained8e76fa5/evidence-r1; no oracle
+was run after that failure. The correction first calls inspect-closed-sketches
+and supplies its actual current revision, then uses the resulting face-specific
+revision and actual opaque driving row for edit. Core and Desktop example bytes
+remain identical. No private authoring, geometry/domain, API/schema, journal,
+phase/oracle or tolerance changes. A complete fresh whole remains required.
