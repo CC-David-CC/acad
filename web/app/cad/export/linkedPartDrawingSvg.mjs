@@ -1,3 +1,4 @@
+import {layoutDrawingViewCaptions} from './linkedPartDrawingCaptionLayout.mjs';
 import {unpackDrawingSection} from '../../../../modules/engine/mount/ownedDrawingSectionProtocol.mjs';
 import {unpackDrawingDetail} from '../../../../modules/engine/mount/drawingDetailClip.mjs';
 // Worker-only presentation of observed geometry. Authored references remain in
@@ -24,7 +25,8 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
     if(row.viewId!==d.views[i].viewId||!['available','unavailable'].includes(row.status))fail('Drawing view order or identity changed.');
     if(row.status==='available'?row.reason!==null:typeof row.reason!=='string'||!row.reason||row.reason.length>256||row.metadata!==null||(detail?row.intervals!==null:row.values!==null||row.tags!==null))fail('Invalid drawing view availability.');
   }
-  const scale=d.sheet.scale.numerator/d.sheet.scale.denominator,paths=[],annotations=[],fallbackWarnings=[],patterns=[];
+  const scale=d.sheet.scale.numerator/d.sheet.scale.denominator,paths=[],annotations=[],fallbackWarnings=[],patterns=[],captions=[];
+  let captionBottom=d.sheet.height-16;
   let segments=0,status=read.status==='available'&&o.status==='available'?'available':'unresolved';
   const viewScale=view=>view.basis==='detail'?view.scale.numerator/view.scale.denominator:scale;
   const paper=(view,p)=>[view.paperOrigin[0]+p[0]*viewScale(view),view.paperOrigin[1]-p[1]*viewScale(view)];
@@ -32,19 +34,19 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
   for(let index=0;index<d.views.length;index++) {
     const view=d.views[index],observed=read.views[index],frame=o.viewFrames.find(f=>f.viewId===view.viewId)?.frame;
     if(!observed||observed.viewId!==view.viewId||observed.status!=='available'||!frame) {
-      status='unresolved';annotations.push(text(view.paperOrigin,view.basis+': unresolved','fill="#a00"'));continue;
+      status='unresolved';captions.push({viewId:view.viewId,role:'view',value:view.basis+': unresolved',origin:view.paperOrigin,bounds:null,unresolved:true});continue;
     }
     // Caption placement is derived presentation only. Bounds come from the
     // actual admitted analytic projection/cap packet, never mesh or nominal
     // feature dimensions. A conic's full ellipse envelope conservatively
     // contains its finite trim; detail uses its actual authored aperture.
-    let viewBounds=null;
+    let viewBounds=null,emptyDetail=false;
     const boundPoint=p=>{const q=paper(view,p);if(!viewBounds)viewBounds={min:[...q],max:[...q]};else for(let j=0;j<2;j++){viewBounds.min[j]=Math.min(viewBounds.min[j],q[j]);viewBounds.max[j]=Math.max(viewBounds.max[j],q[j]);}};
     const boundCurve=curve=>{
       if(curve.kind==='line'){boundPoint(curve.start);boundPoint(curve.end);}
       else{const extent=curve.a.map((n,j)=>Math.hypot(n,curve.b[j]));boundPoint(curve.center.map((n,j)=>n-extent[j]));boundPoint(curve.center.map((n,j)=>n+extent[j]));}
     };
-    const caption=value=>annotations.push(text(viewBounds?[viewBounds.min[0],viewBounds.max[1]+5]:[view.paperOrigin[0],view.paperOrigin[1]+5],value));
+    const caption=(value,role='view')=>captions.push({viewId:view.viewId,role,value,origin:view.paperOrigin,bounds:viewBounds,unresolved:false});
     if(view.basis==='bore-center-section'){
       const section=unpackDrawingSection({metadata:observed.metadata,values:observed.values,tags:observed.tags},[...frame.origin,...frame.u,...frame.v,...frame.n]),id='drawing-section-hatch-'+index;
       patterns.push(`<pattern id="${id}" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(45)"><path d="M0,0 L0,4" stroke="#777" stroke-width=".2"/></pattern>`);
@@ -66,7 +68,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
       const hw=view.aperture.halfWidth,hh=view.aperture.halfHeight,corners=[[-hw,-hh],[hw,-hh],[hw,hh],[-hw,hh],[-hw,-hh]].map(p=>paper(view,p));
       for(const point of [[-hw,-hh],[hw,hh]])boundPoint(point);
       paths.push(`<path data-view-id="${escape(view.viewId)}" data-presentation="detail-aperture" d="M${corners.map(p=>p.map(num).join(',')).join(' L')}" stroke="#777" stroke-dasharray="1 1"/>`);
-      if(packed.empty)annotations.push(text([view.paperOrigin[0],view.paperOrigin[1]+9],'detail: available-empty'));
+      emptyDetail=packed.empty;
     }else packed=unpackOrthographicRecord({metadata:observed.metadata,values:observed.values,tags:observed.tags},[...frame.origin,...frame.u,...frame.v,...frame.n]);
     for(const group of packed.groups)for(const curve of group.curves) {
       if(view.basis!=='detail')boundCurve(curve);
@@ -87,6 +89,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
       paths.push(`<path d="${path}"${d.version>=2?' data-view-id="'+escape(view.viewId)+'" data-view-basis="'+view.basis+'"':''}${group.visibility==='hidden'?' stroke-dasharray="2 1" stroke="#777"':''}/>`);
     }
     caption(view.basis+(view.basis==='detail'?' 2:1':''));
+    if(emptyDetail)caption('detail: available-empty','empty');
   }
   for(let i=0;i<d.dimensions.length;i++) {
     const dimension=d.dimensions[i],fact=o.dimensions[i],view=d.views.find(v=>v.viewId===dimension.viewId),frame=o.viewFrames.find(v=>v.viewId===dimension.viewId)?.frame;
@@ -133,10 +136,17 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
     const rows=fallbackWarnings.map(w=>{const chars=Array.from(w.message),lines=[];for(let at=0;at<chars.length;at+=capacity)lines.push(chars.slice(at,at+capacity).join(''));return{...w,lines};});
     const count=rows.reduce((n,w)=>n+w.lines.length,0),first=d.sheet.height-10-(count-1)*lineHeight;
     if(count>256||first<16)throw Object.assign(Error('The sheet has no legible warning legend area.'),{code:'RESOURCE_LIMIT'});
+    captionBottom=Math.min(captionBottom,first-5);
     let line=0;
     for(const warning of rows){const y=first+line*lineHeight,spans=warning.lines.map(value=>{const at=first+line++*lineHeight;return`<tspan x="${margin}" y="${num(at)}" textLength="${num(Array.from(value).length*advance)}" lengthAdjust="spacingAndGlyphs">${escape(value)}</tspan>`;}).join('');
       annotations.push(`<text x="${margin}" y="${num(y)}" ${warning.tag} data-warning-layout="sheet-legend-v1" data-warning-view-id="${escape(warning.viewId)}" font-family="monospace" font-size="3" fill="#a00" aria-label="${escape(warning.message)}">${spans}</text>`);
     }
+  }
+  // Layout only AFTER every actual view envelope and warning band is known.
+  // textLength adjusts spacing only; fixed3mm glyph size never shrinks.
+  for(const c of layoutDrawingViewCaptions({sheet:d.sheet,captions,bottom:captionBottom})){
+    const attrs=`data-view-caption-id="${escape(c.viewId)}" data-caption-role="${c.role}" data-caption-layout="observed-sheet-v1" font-family="monospace" font-size="3" textLength="${num(c.textLength)}" lengthAdjust="spacing"${c.unresolved?' fill="#a00"':''}`;
+    annotations.push(text([c.x,c.y],c.value,attrs));
   }
   const title=text([8,8],d.title||d.drawingId),notice=text([8,d.sheet.height-5],`Reference drawing · ${status} · scale ${d.sheet.scale.numerator}:${d.sheet.scale.denominator}`);
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${num(d.sheet.width)}mm" height="${num(d.sheet.height)}mm" viewBox="0 0 ${num(d.sheet.width)} ${num(d.sheet.height)}"><title>${escape(d.title)}</title><metadata>${escape(JSON.stringify({version:1,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,quality:o.quality,status,...(d.version>=2?{definitionVersion:d.version,viewCount:d.views.length,projection:d.views.some(v=>v.basis==='isometric')?'source-relative-isometric-v1':'source-relative-orthographic-v1'}:{}),...(d.version===3?{annotationFacts:o.annotations,annotationRole:'derived-native-bore-reference',ordinateRole:'signed-datum-coordinate'}:{}),curvePresentationTolerancePaperMm:.02,dimensionRole:'reference'}))}</metadata><defs>${patterns.join('')}</defs><rect width="100%" height="100%" fill="white"/><g fill="none" stroke="#111" stroke-width=".25">${paths.join('')}</g><g font-family="sans-serif" font-size="3">${title}${annotations.join('')}${notice}</g></svg>`;
