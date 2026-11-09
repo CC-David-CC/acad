@@ -72,7 +72,9 @@ def physical_facts(row,objects,bore,iso):
 def verify_svg(root,item,row,facts,iso,bore):
  need,near,vector,one=iso.need,iso.near,iso.vector,iso.one;NS=iso.NS
  raw=(root/item['savedFile']).read_bytes();need(hashlib.sha256(raw).hexdigest()==item['sha256'] and len(raw)==item['byteLength'] and item['before']==item['after'],'actual settled immutable SVG bytes')
- d=item['definition'];read=row['read'];o=read['observation'];xml=ET.fromstring(raw)
+ need(0<len(raw)<=16*1024*1024,'same actual SVG byte cap')
+ text=raw.decode('utf-8');need('\x00' not in text and '<!' not in text and '<?' not in text,'UTF-8 fixed exporter form only; no NUL, DTD, entities, processing instructions or comments')
+ d=item['definition'];read=row['read'];o=read['observation'];xml=ET.fromstring(text)
  need(xml.tag=='{'+NS['s']+'}svg' and xml.attrib=={'width':'594mm','height':'420mm','viewBox':'0 0 594 420'},'physical SVG mm sheet')
  need([n.tag.split('}')[-1] for n in xml]==['title','metadata','defs','rect','g','g'],'closed SVG structure, no foreign image/script/extra geometry')
  for n in xml.iter():need(not (set(n.attrib)&{'transform','style','opacity','display','visibility','clip-path','mask'}),'no hidden/transformed/unverified geometry')

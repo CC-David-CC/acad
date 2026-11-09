@@ -10,7 +10,7 @@ def visible_scaffold(raw,definition,e):
  # reader does not implement general SVG/CSS, so no effect-bearing vocabulary
  # may be ignored while checking raw path coordinates.
  require(isinstance(raw,bytes) and 0<len(raw)<=16*1024*1024,'same actual SVG byte cap')
- text=raw.decode('utf-8');require('<!' not in text and '<?' not in text,'no DTD/entity declarations/processing instructions/comments outside the fixed exporter form')
+ text=raw.decode('utf-8');require('\x00' not in text and '<!' not in text and '<?' not in text,'UTF-8 fixed exporter form only; no NUL, DTD, entities, processing instructions or comments')
  root=ET.fromstring(text);namespace='{http://www.w3.org/2000/svg}';tag=lambda name:namespace+name
  blank=lambda value:value is None or not value.strip()
  require(root.tag==tag('svg') and root.attrib=={'width':'420mm','height':'297mm','viewBox':'0 0 420 297'} and blank(root.text) and blank(root.tail),'exact physical root with no transforms/style/visibility/effect attributes')
