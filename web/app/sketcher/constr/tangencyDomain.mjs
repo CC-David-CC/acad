@@ -1,3 +1,4 @@
+import {classifyFiniteTangency} from './finiteTangencyPredicates.mjs';
 // Registered sketch semantics. No persisted frame/contact or endpoint-ID grammar.
 export const TANGENT_CC_BRANCHES=Object.freeze(['external','first-contains-second','second-contains-first']);
 export const TANGENCY_SCHEMAS=Object.freeze(['TangentLC','FiniteTangentLC','TangentCC']);
@@ -29,25 +30,24 @@ export function lineCircularContact(line,curve,inverted,finiteContact=false){
  if(!tangentBoolean(inverted))fail('INVALID_TANGENCY_BRANCH','Tangency inversion is a literal boolean.');
  const angle=line.params.ang.get(),t=line.params.t.get(),nx=-Math.sin(angle),ny=Math.cos(angle),r=curve.r.get(),dx=line.b.x-line.a.x,dy=line.b.y-line.a.y,len2=dx*dx+dy*dy;
  if(!finite(angle,t,nx,ny,r,dx,dy,len2)||r<=1e-9||len2<=1e-18||Math.abs(t)<=1e-9)fail('TANGENCY_DOMAIN','A current nondegenerate line and positive circular curve are required.');
- const signed=nx*(curve.c.x-line.a.x)+ny*(curve.c.y-line.a.y),q=[curve.c.x-signed*nx,curve.c.y-signed*ny],lambda=((q[0]-line.a.x)*dx+(q[1]-line.a.y)*dy)/len2;
+ const signed=nx*(curve.c.x-line.a.x)+ny*(curve.c.y-line.a.y),q=[curve.c.x-signed*nx,curve.c.y-signed*ny];
+ let lambda=((q[0]-line.a.x)*dx+(q[1]-line.a.y)*dy)/len2;
  if(!finite(signed,...q,lambda))fail('TANGENCY_DOMAIN','Nonfinite tangent contact.');
  let arcParameter=null;
  if(finiteContact){
-  if(!(lambda>=0&&lambda<=1))fail('FINITE_CONTACT_OUTSIDE','The solved tangent contact is outside the actual finite Segment; no infeasibility is claimed.');
+  const classification=classifyFiniteTangency(line,curve);
+  if(!classification.inside)fail('FINITE_CONTACT_OUTSIDE','The endpoint-defined tangent foot is outside the actual finite Segment or CCW Arc; no infeasibility is claimed.');
+  // Exact predicate decisions above are authority. The following ordinary
+  // rounded coordinates/parameters are read-only observations, never source.
+  lambda=classification.segmentAt!==null?classification.segmentAt:((curve.c.x-line.a.x)*dx+(curve.c.y-line.a.y)*dy)/len2;
+  if(!Number.isFinite(lambda)||lambda<0||lambda>1)fail('FINITE_CONTACT_UNCERTAIN','A rounded finite contact observation is not qualified.');
+  q[0]=classification.segmentAt===0?line.a.x:classification.segmentAt===1?line.b.x:line.a.x+lambda*dx;
+  q[1]=classification.segmentAt===0?line.a.y:classification.segmentAt===1?line.b.y:line.a.y+lambda*dy;
   if(curve.TYPE==='Arc'){
-   const ax=curve.a.x-curve.c.x,ay=curve.a.y-curve.c.y,bx=curve.b.x-curve.c.x,by=curve.b.y-curve.c.y;
-   // Exact coincident native endpoints do not distinguish zero/full turn in
-   // this source encoding. Carry remains legacy; new finite intent refuses.
-   if(ax===bx&&ay===by)fail('UNSUPPORTED_FINITE_ARC','Coincident Arc endpoints have no qualified finite full-turn encoding.');
-   const start=Math.atan2(ay,ax),end=Math.atan2(by,bx),at=Math.atan2(q[1]-curve.c.y,q[0]-curve.c.x),turn=2*Math.PI,
-    sweep=((end-start)%turn+turn)%turn,delta=((at-start)%turn+turn)%turn;
-   if(!finite(sweep,delta)||!(sweep>0&&sweep<turn))fail('UNSUPPORTED_FINITE_ARC','The actual CCW Arc branch is not qualified.');
-   // Exact actual endpoints are included without an angular snap. Otherwise
-   // the actual positive CCW parameter must be inside the saved interval.
-   const endpointA=q[0]===curve.a.x&&q[1]===curve.a.y,endpointB=q[0]===curve.b.x&&q[1]===curve.b.y;
-   if(!endpointA&&!endpointB&&!(delta<=sweep))fail('FINITE_CONTACT_OUTSIDE','The solved tangent contact is outside the actual CCW Arc; its supporting circle is not the finite curve.');
-   arcParameter=endpointA?0:endpointB?1:delta/sweep;
+   if(classification.arcAt!==null)arcParameter=classification.arcAt;
+   else{const turn=2*Math.PI,start=Math.atan2(curve.a.y-curve.c.y,curve.a.x-curve.c.x),end=Math.atan2(curve.b.y-curve.c.y,curve.b.x-curve.c.x),at=Math.atan2(q[1]-curve.c.y,q[0]-curve.c.x),sweep=((end-start)%turn+turn)%turn,delta=((at-start)%turn+turn)%turn,value=delta/sweep;arcParameter=Number.isFinite(value)&&value>=0&&value<=1?value:null;}
   }
  }
+
  return{normal:[nx,ny],angleRadians:angle,polarLength:t,signedDistance:signed,radius:r,residual:signed-tangentSide(inverted)*r,contact:q,segmentParameter:lambda,arcParameter};
 }
