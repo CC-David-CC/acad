@@ -1,0 +1,21 @@
+{
+  "scope": "normal compilation only, unqualified runtime",
+  "sourceCommit": "fc1654ee5d4471584073d4d8e3363d8c9b324566",
+  "sourceTree": "0a1c04ad89f2fa1a4f732f6550639a321fc4f7d8",
+  "buildExitCode": 0,
+  "inputsUnchanged": true,
+  "changedInputs": [],
+  "sourceClean": true,
+  "compilerVersionFile": "compiler-version.txt",
+  "exactCommandLog": "build.log",
+  "outputs": {
+    "main.js": {
+      "sha256": "5783cd8900f94e4661bec7f7b65a1e24dfa48ffa3cce695c9314994c7a6eba09",
+      "bytes": 316448
+    },
+    "main.wasm": {
+      "sha256": "688c9d11ececf67d5187445491b4269647d810528e37161bcd7e676bc8d9125c",
+      "bytes": 36199368
+    }
+  }
+}
