@@ -210,3 +210,32 @@ unknown/alias/stale/cancel/refusal cases, then certified query and genuine
 trim/extend travel/.cad/freshOpen. Independent equations/finite membership and
 artifact truth follow terminal whole success. No microtests, injected positives,
 raw Native flags or stored query answers substitute for that acceptance.
+
+## Initialization, seed137 and branch interpretation
+
+The existing user policy remains `docs/reviews/SOLVER-SEED-POLICY-137-20261108.md`:
+137 is the chosen default for a future explicitly introduced stochastic solver,
+not an active project/runtime setting. Current AlgNumSystem Isolation.solve calls
+actual constraint initialGuess(), deterministic initializeSingularPointDistance,
+then the current reduced numerical system. ANConstraints PointOnBezier/
+TangentLineBezier and PointOnEllipse supply geometry-derived auxiliary guesses;
+solver.js/optim dogleg/lm do not supply a seeded random restart. This extraction
+uses that existing solveSketch path unchanged, with identical original request
+ordering in each independent Worker. It introduces neither a PRNG/seed field nor
+an assertion that137 makes the two solves bit-identical. UUID/security identities
+are not numerical initialization and remain untouched.
+
+Cold solve validates fresh admission/convergence and allowed replay drift; the
+full original-coordinate evaluator independently checks actual original equations,
+ownership and retained classification. Neither cold success nor the137 policy
+authorizes replacing original source by a solver/render position. Independent
+extractions must agree on original-coordinate DTO bits, not arbitrary optimized
+free coordinates or bit-exact residual-array ordering.
+
+An actual Circle remains a full circular SUPPORT with the codec's canonical
+periodic seam, not a proper Arc with guessed endpoints. A saved Arc that means a
+full circle, has equal endpoints/zero sweep, or cannot retain an unambiguous
+proper finite CCW lift is unsupported/deferred for this initial query. Do not
+convert it to Circle or erase its authored Arc type. Clockwise/full-Arc and later
+finite periodic certification remain explicit required domain work; this first
+leaf does not declare that broader Gate1 requirement satisfied or removed.
