@@ -1,6 +1,6 @@
 // Explicit component native build; existing assets/defaults are unchanged.
 const path=require('node:path'),fs=require('node:fs'),crypto=require('node:crypto');
-const bootstrapSha='d7ef4d7789dcc9f797f56ac4bd9247a9aa4832b79214505dbe790d2e659cff41';
+const bootstrapSha='a3baeaba27a596511d205de81babada5366159b5812c026decee9d2b7890b5b8';
 if(crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'../modules/engine/mount/oci-verified-worker.js'))).digest('hex')!==bootstrapSha)throw Error('Unexpected step-export bootstrap');
 const {stageOwnedProfileComponent}=require('./stage-owned-profile-component.cjs');
 const defaultOutput=path.resolve(__dirname,'../.build/step-export-assets');

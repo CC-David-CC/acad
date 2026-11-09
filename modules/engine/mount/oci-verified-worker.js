@@ -49,12 +49,22 @@ function carryHoleState(parentToken,token,producerFeatureId,featureId,hole=null,
 const selectedResultTriangles=new Map();let selectedTriangleTotal=0;const selectedTriangleLimit=100000;
 const resourceLimit=message=>{throw Object.assign(Error(message),{code:'RESOURCE_LIMIT'});};
 function releaseSelectedName(name){const before=Module._OwnedShapeNamesV2(),ptr=str2C(name);let released;try{released=Module._ReleaseOwnedShapeV2(ptr);}finally{_free(ptr);}if(released!==1||Module._OwnedShapeNamesV2()!==before-1)bad('Native budget-refusal release failed');}
-function chargeSelectedResult(name,evidence){
- if(!safeOwnedMode)return;const triangles=evidence?.triangles;
+// Pure work-accounting step. It never mutates Native name ownership.
+function recordSelectedResultCharge(name,evidence){
+ if(!safeOwnedMode)return true;const triangles=evidence?.triangles;
  if(!Number.isSafeInteger(triangles)||triangles<0)bad('Invalid selected result triangle count');
- if(selectedResultTriangles.has(name)){if(selectedResultTriangles.get(name)!==triangles)bad('Selected result tessellation changed');return;}
- if(triangles>selectedTriangleLimit-selectedTriangleTotal){releaseSelectedName(name);resourceLimit('Selected candidate cumulative result triangle budget exhausted');}
- selectedResultTriangles.set(name,triangles);selectedTriangleTotal+=triangles;
+ if(selectedResultTriangles.has(name)){if(selectedResultTriangles.get(name)!==triangles)bad('Selected result tessellation changed');return true;}
+ if(triangles>selectedTriangleLimit-selectedTriangleTotal)return false;
+ selectedResultTriangles.set(name,triangles);selectedTriangleTotal+=triangles;return true;
+}
+function chargeSelectedResult(name,evidence){
+ // Retain every existing caller's actual release-on-quota policy unchanged.
+ if(!recordSelectedResultCharge(name,evidence)){releaseSelectedName(name);resourceLimit('Selected candidate cumulative result triangle budget exhausted');}
+}
+function chargeProfileExtentResult(name,evidence){
+ // Only the extent helper owns its positively established fresh result.
+ // A quota refusal does not retire it or transfer an uncertain obligation.
+ if(!recordSelectedResultCharge(name,evidence))resourceLimit('Selected candidate cumulative result triangle budget exhausted');
 }
 function checkSelectedMesh(name,evidence){if(safeOwnedMode&&(!selectedResultTriangles.has(name)||selectedResultTriangles.get(name)!==evidence.triangles))bad('Selected mesh does not match its charged result');}
 const bad = message => { throw Error(message); };
@@ -811,7 +821,7 @@ self.onmessage = async event => {
       if(Reflect.ownKeys(msg).sort().join(',')!=='expectedBinding,kind,request,seq,token')bad('Invalid private profile-extent request');
       const expected=profileExtentAPI.captureProfileExtentBinding(msg.expectedBinding),prepared=await profileExtentAPI.prepareOwnedProfileExtent(msg.request,expected.requestSha256);
       if(!profileExtentAPI.sameProfileExtentBinding(prepared.binding,expected))throw Object.assign(Error('Extent request changed its independently captured source/construction binding'),{code:'PROFILE_EXTENT_INPUT_CHANGED'});
-      const name=allocateName(),result=profileExtentNative.createOwnedProfileExtentResult({Module,stringPointer:str2C,malloc:_malloc,free:_free,heap:()=>HEAPF64,query:ownedJSON,summarize,interrogate,chargeResult:chargeSelectedResult},prepared,name);
+      const name=allocateName(),result=profileExtentNative.createOwnedProfileExtentResult({Module,stringPointer:str2C,malloc:_malloc,free:_free,heap:()=>HEAPF64,byteHeap:()=>HEAP8,query:ownedJSON,summarize,interrogate,chargeResult:chargeProfileExtentResult},prepared,name);
       shapes.set(msg.token,name);selectedExtentProfiles.set(msg.token,prepared);selectedPrismProvenance.set(msg.token,result.provenance);selectedSelectionIndices.set(msg.token,{featureId:prepared.binding.featureId,index:result.index,reason:result.reason});
       if(throughHoleMode){const source=Object.freeze({token:msg.token,extent:prepared});selectedHoleStates.set(msg.token,Object.freeze({source,producerFeatureId:null,featureIds:Object.freeze([]),holes:Object.freeze([])}));}
       if(drawingReferencesMode)selectedDrawingCylinders.set(msg.token,Object.freeze([]));
