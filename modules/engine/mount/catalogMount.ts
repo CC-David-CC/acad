@@ -1,3 +1,6 @@
+import {createMechanicalNativeOccMount} from './occ-mechanical-native-mount.mjs';
+import {MECHANICAL_NATIVE_RESOURCE_MODULES} from './ownedMechanicalNativeResources.mjs';
+import mechanicalNativeAssets from 'codi-mechanical-native-assets';
 import {createCircularOccMount} from './occ-circular-mount.mjs';
 import circularAssets from 'codi-circular-assets';
 import {createShellOccMount} from './occ-shell-mount.mjs';
@@ -15,7 +18,7 @@ import {createSweepProfileOccMount} from './occ-sweep-profile-mount.mjs';
 import {createRevolveProfileOccMount} from './occ-revolve-profile-mount.mjs';
 import {createVerifiedManifoldMount} from './manifold-verified-mount.mjs';
 import {createRawSmlibMount} from '../raw-smlib/rawMount.mjs';
-import {CAD_ENGINES,preferredCadEngineBuild,requireCadEngineBuild,OCC_SELECTED_PROFILE_BUILD,OCC_POLYGON_PROFILE_BUILD,OCC_MECHANICAL_PROFILE_BUILD,OCC_BOOLEAN_HISTORY_BUILD,OCC_REVOLVE_PROFILE_BUILD,OCC_SWEEP_PROFILE_BUILD,OCC_LOFT_PROFILE_BUILD,OCC_ADAPTIVE_METROLOGY_BUILD,OCC_STEP_EXPORT_BUILD,OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD} from './engineCatalog.mjs';
+import {CAD_ENGINES,preferredCadEngineBuild,requireCadEngineBuild,OCC_SELECTED_PROFILE_BUILD,OCC_POLYGON_PROFILE_BUILD,OCC_MECHANICAL_PROFILE_BUILD,OCC_BOOLEAN_HISTORY_BUILD,OCC_REVOLVE_PROFILE_BUILD,OCC_SWEEP_PROFILE_BUILD,OCC_LOFT_PROFILE_BUILD,OCC_ADAPTIVE_METROLOGY_BUILD,OCC_STEP_EXPORT_BUILD,OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD,OCC_MECHANICAL_NATIVE_BUILD} from './engineCatalog.mjs';
 import polygonAssets from 'codi-polygon-profile-assets';
 import mechanicalAssets from 'codi-mechanical-profile-assets';
 import booleanAssets from 'codi-boolean-history-assets';
@@ -65,8 +68,23 @@ function loftMountOptions(assets=loftAssets,prefix='loft-profile',extras:string[
   if(Object.keys(assets.modules).sort().join(',')!==required.slice().sort().join(',')||required.some(name=>assetPath(assets.modules[name])!==base+name)||assetPath(assets.js)!==base+prefix+'-occ-portable.js'||assetPath(assets.wasm)!==base+prefix+'-occ.wasm')throw Error('Loft Worker module graph is not colocated');
   return {workerUrl:workerPath,jsPath:assetPath(assets.js),wasmPath:assetPath(assets.wasm),timeoutMs:30000};
 }
+// This specific roster is shared with the stage/entry producer. No Worker is
+// allocated and no Native work/hash runs while inspecting availability.
+function mechanicalNativeMountOptions(){
+ const assets=mechanicalNativeAssets,spec=OCC_MECHANICAL_NATIVE_BUILD;
+ if(!assets)throw Object.assign(Error('The optional mechanical Native cohort is not staged.'),{code:'ENGINE_BUILD_UNAVAILABLE'});
+ if(assets.format!=='mechanical-native-component/1'||assets.profileSourceBindingVersion!==1||assets.selectedRegionArrangementVersion!==1||assets.jsSha256!==spec.runtimeAssets.jsSha256||assets.wasmSha256!==spec.runtimeAssets.wasmSha256||![assets.bootstrapSha256,assets.workerSha256].every(value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value)))throw Error('Mechanical Native entry does not bind its exact source/pair contract');
+ const workerPath=assetPath(assets.worker),suffix='modules/engine/mount/mechanical-native-worker.js';
+ if(!workerPath.endsWith('/'+suffix))throw Error('Unexpected mechanical Native Worker package path');
+ const base=workerPath.slice(0,-suffix.length),required=MECHANICAL_NATIVE_RESOURCE_MODULES;
+ if(!assets.modules||Object.keys(assets.modules).sort().join(',')!==required.slice().sort().join(',')||required.some(name=>assetPath(assets.modules[name])!==base+name)||assetPath(assets.js)!==base+'mechanical-native-occ-portable.js'||assetPath(assets.wasm)!==base+'mechanical-native-occ.wasm')throw Error('The exact mechanical Native emitted graph is not colocated');
+ return {workerUrl:workerPath,jsPath:assetPath(assets.js),wasmPath:assetPath(assets.wasm),timeoutMs:30000};
+}
+export function requireAvailableMechanicalNativeBuild(engine:string,revision:string){const spec=requireCadEngineBuild(engine,revision);if(spec!==OCC_MECHANICAL_NATIVE_BUILD)throw Object.assign(Error('Select the explicit bound mechanical Native cohort.'),{code:'ENGINE_REVISION_MISMATCH'});mechanicalNativeMountOptions();return spec;}
+export function listAvailableMechanicalNativeBuilds(){if(!mechanicalNativeAssets)return Object.freeze([]);return Object.freeze([requireAvailableMechanicalNativeBuild('occ',OCC_MECHANICAL_NATIVE_BUILD.revision)]);}
 export function createCatalogMount(id:string,revision?:string):SolidKernel{
  const build=requireCadEngineBuild(id,revision);
+ if(build===OCC_MECHANICAL_NATIVE_BUILD){requireAvailableMechanicalNativeBuild(id,build.revision);return createMechanicalNativeOccMount(mechanicalNativeMountOptions()) as SolidKernel;}
  if(build===OCC_CIRCULAR_BUILD){requireAvailableShellBuild(id,build.revision);return createCircularOccMount(loftMountOptions(circularAssets,'circular',circularModules)) as SolidKernel;}
  if(build===OCC_SHELL_BUILD){requireAvailableShellBuild(id,build.revision);return createShellOccMount(loftMountOptions(shellAssets,'shell',shellModules)) as SolidKernel;}
  if(build===OCC_MANUFACTURING_MESH_BUILD){requireAvailableManufacturingMeshBuild(id,build.revision);return createManufacturingMeshOccMount(loftMountOptions(manufacturingAssets,'manufacturing-mesh',blindManufacturingModules)) as SolidKernel;}
@@ -133,7 +151,7 @@ const shellModules=[...manufacturingModules,'modules/engine/mount/ownedShellProt
 const circularModules=[...shellModules,"modules/engine/mount/ownedCircularNativeContract.mjs","modules/engine/mount/ownedCircularWorker.mjs","modules/engine/mount/ownedCircularArrangementProtocol.mjs","modules/engine/mount/circularArrangementPlan.mjs","modules/engine/mount/circularPrismSelectionIndex.mjs","modules/engine/extrusion/circularArrangementDescriptor.mjs","modules/engine/extrusion/circularTopology.mjs"];
 export function listAvailableShellBuilds(){const out=[];if(shellAssets){requireAvailableShellBuild('occ',OCC_SHELL_BUILD.revision);out.push(OCC_SHELL_BUILD);}if(circularAssets){requireAvailableShellBuild('occ',OCC_CIRCULAR_BUILD.revision);out.push(OCC_CIRCULAR_BUILD);}return Object.freeze(out);}
 export function requireAvailableShellBuild(engine:string,revision:string){const spec=requireShellBuild(engine,revision);if(spec===OCC_CIRCULAR_BUILD){if(!circularAssets||circularAssets.circularArrangementVersion!==1)throw Object.assign(Error('The circular cohort is not staged.'),{code:'ENGINE_BUILD_UNAVAILABLE'});loftMountOptions(circularAssets,'circular',circularModules);return spec;}if(spec!==OCC_SHELL_BUILD)throw Object.assign(Error('The registered shell cohort is not installed.'),{code:'ENGINE_BUILD_UNAVAILABLE'});loftMountOptions(shellAssets,'shell',shellModules);return spec;}
-export function listAvailableLoftBuilds(){const out=[];if(loftAssets){loftMountOptions();out.push(OCC_LOFT_PROFILE_BUILD);}if(adaptiveAssets){loftMountOptions(adaptiveAssets,'adaptive-metrology');out.push(OCC_ADAPTIVE_METROLOGY_BUILD);}if(stepAssets){requireAvailableStepExportBuild('occ',OCC_STEP_EXPORT_BUILD.revision);out.push(OCC_STEP_EXPORT_BUILD);}if(manufacturingAssets){requireAvailableManufacturingMeshBuild('occ',OCC_MANUFACTURING_MESH_BUILD.revision);out.push(OCC_MANUFACTURING_MESH_BUILD);}return Object.freeze([...out,...listAvailableShellBuilds()]);}
+export function listAvailableLoftBuilds(){const out=[];if(loftAssets){loftMountOptions();out.push(OCC_LOFT_PROFILE_BUILD);}if(adaptiveAssets){loftMountOptions(adaptiveAssets,'adaptive-metrology');out.push(OCC_ADAPTIVE_METROLOGY_BUILD);}if(stepAssets){requireAvailableStepExportBuild('occ',OCC_STEP_EXPORT_BUILD.revision);out.push(OCC_STEP_EXPORT_BUILD);}if(manufacturingAssets){requireAvailableManufacturingMeshBuild('occ',OCC_MANUFACTURING_MESH_BUILD.revision);out.push(OCC_MANUFACTURING_MESH_BUILD);}return Object.freeze([...out,...listAvailableShellBuilds(),...listAvailableMechanicalNativeBuilds()]);}
 export function requireAvailableLoftBuild(engine:string,revision:string){
  const spec=requireCadEngineBuild(engine,revision);
  if(spec.loftVersion!==1)throw Object.assign(Error('Select a registered loft build explicitly.'),{code:'UNSUPPORTED_LOFT_BUILD'});
@@ -151,7 +169,7 @@ export function listAvailableRevolveBuilds(){return Object.freeze([...listRevolv
 export function requireAvailableSweepBuild(engine:string,revision:string){const spec=requireSweepBuild(engine,revision);if(spec.loftVersion===1)requireAvailableLoftBuild(engine,revision);return spec;}
 export function requireAvailableRevolveBuild(engine:string,revision:string){const spec=requireRevolveBuild(engine,revision);if(spec.loftVersion===1)requireAvailableLoftBuild(engine,revision);return spec;}
 export function requireAvailablePointBuild(engine:string,revision:string){const spec=requireCadEngineBuild(engine,revision);if(spec.pointObservationVersion!==1)throw Object.assign(Error('Select an exact registered native point-observation build.'),{code:'ENGINE_REVISION_MISMATCH'});if(spec.loftVersion===1)requireAvailableLoftBuild(engine,revision);return spec;}
-export function listAvailableBoxBuilds(){return Object.freeze([...Object.values(CAD_ENGINES).map((entry:any)=>preferredCadEngineBuild(entry.id)),...listAvailableShellBuilds()]);}
+export function listAvailableBoxBuilds(){return Object.freeze([...Object.values(CAD_ENGINES).map((entry:any)=>preferredCadEngineBuild(entry.id)),...listAvailableShellBuilds(),...listAvailableMechanicalNativeBuilds()]);}
 export function requireAvailableBoxBuild(engine:string,revision:string){const spec=requireCadEngineBuild(engine,revision);if(spec.shellVersion===1)return requireAvailableShellBuild(engine,revision);if(spec===CAD_ENGINES[engine]||spec===preferredCadEngineBuild(engine))return spec;return requireAvailableSelectedProfileBuild(engine,revision);}
 export function inspectCatalogSolidCapabilities(){
  const boxes=listAvailableBoxBuilds();
@@ -162,10 +180,10 @@ export function inspectCatalogSolidCapabilities(){
   note:spec.id==='smlib'?'Experimental patched kernel; whole multi-material results with voids retain native geometry with preview unavailable. Some partial cavity fills fail native validation. Preview winding and manufacturing remain unqualified. No automatic fallback.':spec.id==='occ'?'New parts use this declared native-evidence build. Existing parts retain their saved build. No automatic fallback, conversion or STEP export.':'Explicit kernel; no automatic fallback, conversion, STEP or arbitrary sketch extrusion.'});}));
 }
 
-export function listAvailableStepExportBuilds(){const out=[];if(stepAssets){requireAvailableStepExportBuild('occ',OCC_STEP_EXPORT_BUILD.revision);out.push(OCC_STEP_EXPORT_BUILD);}if(manufacturingAssets){requireAvailableManufacturingMeshBuild('occ',OCC_MANUFACTURING_MESH_BUILD.revision);out.push(OCC_MANUFACTURING_MESH_BUILD);}return Object.freeze([...out,...listAvailableShellBuilds()]);}
+export function listAvailableStepExportBuilds(){const out=[];if(stepAssets){requireAvailableStepExportBuild('occ',OCC_STEP_EXPORT_BUILD.revision);out.push(OCC_STEP_EXPORT_BUILD);}if(manufacturingAssets){requireAvailableManufacturingMeshBuild('occ',OCC_MANUFACTURING_MESH_BUILD.revision);out.push(OCC_MANUFACTURING_MESH_BUILD);}return Object.freeze([...out,...listAvailableShellBuilds(),...listAvailableMechanicalNativeBuilds()]);}
 export function requireAvailableStepExportBuild(engine:string,revision:string){const spec=requireCadEngineBuild(engine,revision);if(spec.stepExportVersion!==1)throw Object.assign(Error('Select an owned STEP native build.'),{code:'UNSUPPORTED_STEP_BUILD'});if(spec.shellVersion===1)return requireAvailableShellBuild(engine,revision);if(spec.manufacturingMeshVersion===1)return requireAvailableManufacturingMeshBuild(engine,revision);if(spec!==OCC_STEP_EXPORT_BUILD)throw Object.assign(Error('The registered STEP cohort is not installed.'),{code:'ENGINE_BUILD_UNAVAILABLE'});loftMountOptions(stepAssets,'step-export',['modules/engine/mount/ownedStepExportProtocol.mjs']);return spec;}
-export function listAvailableManufacturingMeshBuilds(){const out=[];if(manufacturingAssets){requireAvailableManufacturingMeshBuild('occ',OCC_MANUFACTURING_MESH_BUILD.revision);out.push(OCC_MANUFACTURING_MESH_BUILD);}return Object.freeze([...out,...listAvailableShellBuilds()]);}
-export function requireAvailableManufacturingMeshBuild(engine:string,revision:string){const spec=requireCadEngineBuild(engine,revision);if(spec.manufacturingMeshVersion!==1)throw Object.assign(Error('Select a controlled manufacturing mesh build explicitly.'),{code:'UNSUPPORTED_MANUFACTURING_MESH_BUILD'});if(spec.shellVersion===1)return requireAvailableShellBuild(engine,revision);if(spec!==OCC_MANUFACTURING_MESH_BUILD)throw Object.assign(Error('The registered manufacturing cohort is not installed.'),{code:'ENGINE_BUILD_UNAVAILABLE'});loftMountOptions(manufacturingAssets,'manufacturing-mesh',blindManufacturingModules);return spec;}
+export function listAvailableManufacturingMeshBuilds(){const out=[];if(manufacturingAssets){requireAvailableManufacturingMeshBuild('occ',OCC_MANUFACTURING_MESH_BUILD.revision);out.push(OCC_MANUFACTURING_MESH_BUILD);}return Object.freeze([...out,...listAvailableShellBuilds(),...listAvailableMechanicalNativeBuilds()]);}
+export function requireAvailableManufacturingMeshBuild(engine:string,revision:string){const spec=requireCadEngineBuild(engine,revision);if(spec.manufacturingMeshVersion!==1)throw Object.assign(Error('Select a controlled manufacturing mesh build explicitly.'),{code:'UNSUPPORTED_MANUFACTURING_MESH_BUILD'});if(spec===OCC_MECHANICAL_NATIVE_BUILD)return requireAvailableMechanicalNativeBuild(engine,revision);if(spec.shellVersion===1)return requireAvailableShellBuild(engine,revision);if(spec!==OCC_MANUFACTURING_MESH_BUILD)throw Object.assign(Error('The registered manufacturing cohort is not installed.'),{code:'ENGINE_BUILD_UNAVAILABLE'});loftMountOptions(manufacturingAssets,'manufacturing-mesh',blindManufacturingModules);return spec;}
 
 // Discovery allocates no Worker. Optional cohorts validate their closed graph
 // before advertising authoring; selecting one never migrates existing history.

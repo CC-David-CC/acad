@@ -1,6 +1,6 @@
 // Explicit component native build; existing assets/defaults are unchanged.
 const path=require('node:path'),fs=require('node:fs'),crypto=require('node:crypto');
-const bootstrapSha='27ca268a2f372bcfac7e0e03f8b6a9d9874a7f967f61f49cb2d27e06189b7e0e';
+const bootstrapSha='e0ea091678a8e0f21616e1ade1fff27d14233733a5adcff917299aaca20099fd';
 if(crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'../modules/engine/mount/oci-verified-worker.js'))).digest('hex')!==bootstrapSha)throw Error('Unexpected manufacturing-mesh bootstrap');
 const {stageOwnedProfileComponent}=require('./stage-owned-profile-component.cjs');
 const defaultOutput=path.resolve(__dirname,'../.build/manufacturing-mesh-assets');

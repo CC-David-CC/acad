@@ -53,3 +53,5 @@ declare module 'codi-circular-assets' {
  const assets:null|{circularArrangementVersion:1;selectedRegionArrangementVersion:1;worker:string;js:string;wasm:string;modules:Record<string,string>};
  export default assets;
 }
+
+declare module 'codi-mechanical-native-assets' {const assets:null|{format:'mechanical-native-component/1';profileSourceBindingVersion:1;selectedRegionArrangementVersion:1;jsSha256:string;wasmSha256:string;bootstrapSha256:string;workerSha256:string;worker:string;js:string;wasm:string;modules:Record<string,string>};export default assets;}

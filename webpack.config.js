@@ -65,6 +65,7 @@ module.exports = {
       'codi-adaptive-metrology-assets$': process.env.CODI_ADAPTIVE_METROLOGY_NATIVE_DIR?.trim()?path.join(__dirname,'.build/adaptive-metrology-entry.mjs'):path.join(__dirname,'modules/engine/mount/unavailable-loft-assets.mjs'),
       'codi-manufacturing-mesh-assets$': path.join(__dirname,'.build/manufacturing-mesh-entry.mjs'),
       'codi-circular-assets$': path.join(__dirname,'.build/circular-entry.mjs'),
+      'codi-mechanical-native-assets$': process.env.CODI_MECHANICAL_COHORT_NATIVE_DIR?.trim()?path.join(__dirname,'.build/mechanical-native-entry.mjs'):path.join(__dirname,'build/mechanical-native-candidate-entry.mjs'),
       'codi-shell-assets$': path.join(__dirname,'.build/shell-entry.mjs'),
       'codi-step-export-assets$': process.env.CODI_STEP_NATIVE_DIR?.trim()?path.join(__dirname,'.build/step-export-entry.mjs'):path.join(__dirname,'modules/engine/mount/unavailable-loft-assets.mjs'),
       'codi-prism-topology-module$': path.join(__dirname, '.build/prism-assets/profile-topology.mjs'),
@@ -160,6 +161,11 @@ module.exports = {
         if(relative.startsWith('..')||path.isAbsolute(relative))throw Error('Unexpected manufacturing mesh asset path');
         return 'manufacturing-mesh/'+relative.split(path.sep).join('/');
       }}},
+      {include: [path.join(__dirname, '.build/mechanical-native-assets')], type: 'asset/resource', generator: {filename: data => {
+        const relative=path.relative(path.join(__dirname,'.build/mechanical-native-assets'),path.resolve(__dirname,data.filename));
+        if(relative.startsWith('..')||path.isAbsolute(relative))throw Error('Unexpected mechanical Native asset path');
+        return 'mechanical-native/'+relative.split(path.sep).join('/');
+      }}},
       {include: [path.join(__dirname, '.build/circular-assets')], type: 'asset/resource', generator: {filename: data => {
         const relative=path.relative(path.join(__dirname,'.build/circular-assets'),path.resolve(__dirname,data.filename));
         if(relative.startsWith('..')||path.isAbsolute(relative))throw Error('Unexpected circular asset path');
@@ -235,7 +241,7 @@ module.exports = {
       },
       {
         test: /\.wasm$/,
-        exclude: [path.join(__dirname, '.build/polygon-profile-assets'),path.join(__dirname, '.build/mechanical-profile-assets'),path.join(__dirname, '.build/boolean-history-assets'),path.join(__dirname, '.build/revolve-profile-assets'),path.join(__dirname, '.build/sweep-profile-assets'),path.join(__dirname, '.build/loft-profile-assets'),path.join(__dirname, '.build/adaptive-metrology-assets'),path.join(__dirname, '.build/step-export-assets'),path.join(__dirname, '.build/manufacturing-mesh-assets'),path.join(__dirname, '.build/shell-assets'),path.join(__dirname, '.build/circular-assets')],
+        exclude: [path.join(__dirname, '.build/polygon-profile-assets'),path.join(__dirname, '.build/mechanical-profile-assets'),path.join(__dirname, '.build/boolean-history-assets'),path.join(__dirname, '.build/revolve-profile-assets'),path.join(__dirname, '.build/sweep-profile-assets'),path.join(__dirname, '.build/loft-profile-assets'),path.join(__dirname, '.build/adaptive-metrology-assets'),path.join(__dirname, '.build/step-export-assets'),path.join(__dirname, '.build/manufacturing-mesh-assets'),path.join(__dirname, '.build/shell-assets'),path.join(__dirname, '.build/circular-assets'),path.join(__dirname, '.build/mechanical-native-assets')],
         type: "javascript/auto",
         loader: "file-loader",
         options: {name: '[sha256:hash:hex:20].[ext]'}

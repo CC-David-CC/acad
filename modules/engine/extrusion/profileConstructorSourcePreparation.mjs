@@ -1,3 +1,4 @@
+export {MECHANICAL_NATIVE_INITIAL_PORTS} from '../mount/ownedMechanicalNativeResources.mjs';
 // Dedicated semantic / OCI Worker only. Main imports the bounded protocol only.
 import {prepareSolvedSelectedRegion} from './selectedSketchProfile.mjs';
 import {preparePolygonProfileExtrusion} from '../mount/polygonProfilePlan.mjs';

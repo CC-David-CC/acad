@@ -1,5 +1,5 @@
 import {AUTHORED_SOLID_KINDS} from '../solid/authoredSolidKinds.mjs';
-import {requireCadEngineBuild,OCC_SELECTED_PROFILE_BUILD,OCC_POLYGON_PROFILE_BUILD,OCC_MECHANICAL_PROFILE_BUILD,OCC_BOOLEAN_HISTORY_BUILD,OCC_REVOLVE_PROFILE_BUILD,OCC_SWEEP_PROFILE_BUILD,OCC_LOFT_PROFILE_BUILD,OCC_ADAPTIVE_METROLOGY_BUILD,OCC_STEP_EXPORT_BUILD,OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD} from './engineCatalog.mjs';
+import {requireCadEngineBuild,OCC_SELECTED_PROFILE_BUILD,OCC_POLYGON_PROFILE_BUILD,OCC_MECHANICAL_PROFILE_BUILD,OCC_BOOLEAN_HISTORY_BUILD,OCC_REVOLVE_PROFILE_BUILD,OCC_SWEEP_PROFILE_BUILD,OCC_LOFT_PROFILE_BUILD,OCC_ADAPTIVE_METROLOGY_BUILD,OCC_STEP_EXPORT_BUILD,OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD,OCC_MECHANICAL_NATIVE_BUILD} from './engineCatalog.mjs';
 
 const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
 const genericTypes=new Set(AUTHORED_SOLID_KINDS);
@@ -64,13 +64,13 @@ export function requireLoftBuild(engine,revision){
  if(build.loftVersion!==1)fail('UNSUPPORTED_LOFT_BUILD','Select a registered loft-capable backend explicitly.');
  return build;
 }
-export function listLoftBuilds(){return Object.freeze([OCC_LOFT_PROFILE_BUILD,OCC_ADAPTIVE_METROLOGY_BUILD,OCC_STEP_EXPORT_BUILD,OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD]);}
+export function listLoftBuilds(){return Object.freeze([OCC_LOFT_PROFILE_BUILD,OCC_ADAPTIVE_METROLOGY_BUILD,OCC_STEP_EXPORT_BUILD,OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD,OCC_MECHANICAL_NATIVE_BUILD]);}
 
 export function requireStepExportBuild(engine,revision){const build=requireCadEngineBuild(engine,revision);if(build.stepExportVersion!==1)fail('UNSUPPORTED_STEP_BUILD','Select a registered owned STEP export build explicitly.');return build;}
-export function listStepExportBuilds(){return Object.freeze([OCC_STEP_EXPORT_BUILD,OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD]);}
+export function listStepExportBuilds(){return Object.freeze([OCC_STEP_EXPORT_BUILD,OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD,OCC_MECHANICAL_NATIVE_BUILD]);}
 
 export function requireManufacturingMeshBuild(engine,revision){const build=requireCadEngineBuild(engine,revision);if(build.manufacturingMeshVersion!==1)fail('UNSUPPORTED_MANUFACTURING_MESH_BUILD','Select the controlled manufacturing mesh build explicitly.');return build;}
-export function listManufacturingMeshBuilds(){return Object.freeze([OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD]);}
+export function listManufacturingMeshBuilds(){return Object.freeze([OCC_MANUFACTURING_MESH_BUILD,OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD,OCC_MECHANICAL_NATIVE_BUILD]);}
 
 export function requireShellBuild(engine,revision){const build=requireCadEngineBuild(engine,revision);if(build.shellVersion!==1||build.boxConstructionVersion!==1)fail('UNSUPPORTED_SHELL_BUILD','Select the explicit owned-shell build.');return build;}
 export function listShellBuilds(){return Object.freeze([OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD]);}
