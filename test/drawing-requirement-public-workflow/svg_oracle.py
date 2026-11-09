@@ -6,6 +6,7 @@ supply geometry. Authored requirement text is never a conformance measurement.
 import math,json,re
 import xml.etree.ElementTree as ET
 from collections import Counter
+from fractions import Fraction
 from truth import need,one,near,vector,AXES
 from native_record import record_curves,evaluate,extrema,covered_segment,full_circle,path_points,TOKEN
 S='{http://www.w3.org/2000/svg}'
@@ -29,6 +30,35 @@ def crosses(a,z,b):
    u,v=sorted(((lower-p)/delta,(upper-p)/delta));lo=max(lo,u);hi=min(hi,v)
    if lo>=hi:return False
  return lo<hi and hi>0 and lo<1
+def closed_contact(a,z,b):
+ # Exact represented closed-box intersection: even a tangent prefix contact
+ # with the owning form is forbidden, independently of producer route search.
+ lo,hi=Fraction(0),Fraction(1)
+ for k in range(2):
+  p,delta=Fraction(a[k]),Fraction(z[k])-Fraction(a[k]);lower,upper=Fraction(b[k]),Fraction(b[k+2])
+  if not delta:
+   if p<lower or p>upper:return False
+  else:
+   u,v=sorted(((lower-p)/delta,(upper-p)/delta));lo=max(lo,u);hi=min(hi,v)
+   if lo>hi:return False
+ return lo<=hi
+def leader_geometry(points,B,anchor,d):
+ need(2<=len(points)<=64 and all(len(p)==2 and all(type(n)in(int,float) and math.isfinite(n)for n in p)for p in points),'bounded complete finite leader polyline')
+ need(all(a!=z for a,z in zip(points,points[1:])),'every leader segment has distinct endpoints')
+ vector(points[0],anchor)
+ pad=Fraction(1,8);bounds=[Fraction(d['sheet']['width']),Fraction(d['sheet']['height'])]
+ need(all(pad<=Fraction(p[k])<=bounds[k]-pad for p in points for k in range(2)),'entire leader stroke stays in physical sheet inset by convexity, not samples')
+ # Independently characterize the unchanged old target-side midpoint from the
+ # observed start (already corroborated against the projected Native anchor).
+ start=points[0]
+ if start[0]<B[0]:axis,level,mid,lower=0,B[0],(B[1]+B[3])/2,True
+ elif start[0]>B[2]:axis,level,mid,lower=0,B[2],(B[1]+B[3])/2,False
+ elif start[1]<B[1]:axis,level,mid,lower=1,B[1],(B[0]+B[2])/2,True
+ elif start[1]>B[3]:axis,level,mid,lower=1,B[3],(B[0]+B[2])/2,False
+ else:need(False,'Native leader anchor is strictly exterior to its own frame')
+ need(points[-1][axis]==level,'only final leader endpoint contacts the exact original selected frame side');near(points[-1][1-axis],mid,1e-9)
+ need(points[-2][axis]<level if lower else points[-2][axis]>level,'last segment approaches unchanged target side from strict exterior half-plane')
+ need(all(not closed_contact(a,z,B)for a,z in zip(points[:-2],points[1:-1])),'all prefix segments avoid the CLOSED owning frame')
 def number(n,places=0,signed=False):
  need(type(n)in(int,float) and math.isfinite(n),'finite visible quantity')
  if n==0:s='0'
@@ -136,11 +166,16 @@ def inspect_svg(raw,item,row):
   base={'data-annotation-id':a['annotationId'],'data-annotation-kind':kind,'data-requirement-role':'authored-manufacturing-requirement','data-geometry-binding':'resolved'}
   pp=[]
   while cursor<len(paths) and paths[cursor].get('data-annotation-id')==a['annotationId']:
-   p=paths[cursor];cursor+=1;need(set(p.attrib)==set(base)|{'data-presentation','d','stroke'}and all(p.get(k)==v for k,v in base.items())and p.get('stroke')=='#357','closed complete new requirement path grammar')
+   p=paths[cursor];cursor+=1;role=p.get('data-presentation');extra={'stroke-linejoin'}if role=='requirement-leader'and p.get('stroke-linejoin')=='round'else set()
+   need(set(p.attrib)==set(base)|{'data-presentation','d','stroke'}|extra and all(p.get(k)==v for k,v in base.items())and p.get('stroke')=='#357','closed complete new requirement path grammar')
+   if role=='requirement-leader':need(type(p.get('d'))is str and 0<len(p.get('d'))<=8192,'raw leader grammar bounded before coordinate decoding')
    points=path_points(p.get('d'));need([x for x in TOKEN.findall(p.get('d'))if x in('M','L')]==['M']+['L']*(len(points)-1),'explicit complete new form path')
-   new_strokes.append(box(points));pp.append(p)
+   if role=='requirement-leader':need(2<=len(points)<=64 and (p.get('stroke-linejoin')=='round'if len(points)>2 else 'stroke-linejoin'not in p.attrib),'routed leader joins have bounded round ink; direct two-point attributes unchanged')
+   if role=='requirement-leader':new_strokes.extend(box([a,z])for a,z in zip(points,points[1:]))
+   else:new_strokes.append(box(points))
+   pp.append(p)
   frame=one([p for p in pp if p.get('data-presentation')=='requirement-frame'],'form frame');fp=path_points(frame.get('d'));need(len(fp)==5,'complete explicit closed rectangular form');B=box(fp);[vector(x,y)for x,y in zip(fp,[[B[0],B[1]],[B[2],B[1]],[B[2],B[3]],[B[0],B[3]],[B[0],B[1]]])];vector(B[:2],[a['label'][0]-1,a['label'][1]-4]);contained(B,d)
-  leader=one([p for p in pp if p.get('data-presentation')=='requirement-leader'],'actual fact leader');lp=path_points(leader.get('d'));need(len(lp)==2,'single complete finite leader');view=one([v for v in d['views']if v['viewId']==a['viewId']],'form view');vector(lp[0],project(view,frames[a['viewId']],f['facts']['anchor'],scale));end=lp[1];need((abs(end[0]-B[0])<=1e-9 or abs(end[0]-B[2])<=1e-9)and B[1]-1e-9<=end[1]<=B[3]+1e-9 or(abs(end[1]-B[1])<=1e-9 or abs(end[1]-B[3])<=1e-9)and B[0]-1e-9<=end[0]<=B[2]+1e-9,'actual leader terminates on its complete frame, no placement-search replay')
+  leader=one([p for p in pp if p.get('data-presentation')=='requirement-leader'],'actual fact leader');lp=path_points(leader.get('d'));view=one([v for v in d['views']if v['viewId']==a['viewId']],'form view');leader_geometry(lp,B,project(view,frames[a['viewId']],f['facts']['anchor'],scale),d)
   if kind=='datum-feature':lines=[('datum-symbol',a['symbol'])];width=8;height=6;wantpoints=[[a['label'][0]+2,a['label'][1]]]
   elif kind=='position-tolerance':
    lines=[('kind','POS REQ'),('zone','Ø'+number(a['zone']['value'],2)+' mm')]+[('datum-'+s,s)for s in a['datumSymbols']];widths=[max(6,len(s)*1.8+2)for _,s in lines];width=sum(widths);height=6;x=B[0];wantpoints=[]
@@ -159,7 +194,13 @@ def inspect_svg(raw,item,row):
   need(not any(overlap(B,expanded(q,2.125))for q in geometry_boxes+stroke_boxes)and not any(overlap(B,expanded(q,2))for q in oldlabels+captions+forms),'complete fixed-size form clears actual view/strokes/all text, without running placement search')
   forms.append(B);leaders.append((lp,B))
  need(cursor==len(paths),'no extra paths outside actual Native/dimension/center/new-form roster')
- for lp,B in leaders:need(not any(crosses(*lp,expanded(q,.125))for q in oldlabels+captions+[x for x in forms if x is not B]),'all new leaders clear every other declared text box')
+ for lp,B in leaders:
+  direct_clear=True
+  for q in oldlabels+captions+[x for x in forms if x is not B]:
+   expanded_q=[Fraction(q[0])-Fraction(1,8),Fraction(q[1])-Fraction(1,8),Fraction(q[2])+Fraction(1,8),Fraction(q[3])+Fraction(1,8)]
+   need(all(not crosses(a,z,expanded_q)for a,z in zip(lp,lp[1:])),'EVERY full leader segment clears each expanded other declared text box')
+   if crosses(lp[0],lp[-1],expanded_q):direct_clear=False
+  if direct_clear:need(len(lp)==2,'unchanged original direct segment is retained when mathematically clear, without any route search')
  for a,f in zip(d['dimensions'],o['dimensions']):
   if f['status']!='available':unavailable.append(('dimension',a['dimensionId'],a['viewId'],'UNRESOLVED: '+a['dimensionId'],None))
  for a,f in zip(d['annotations'],o['annotations']):
@@ -179,4 +220,4 @@ def inspect_svg(raw,item,row):
   need(combined==want[3],'visible complete untruncated warning reason');membership[id]=combined
  need(set(membership)=={x[1]for x in unavailable},'every actual unresolved member visibly represented, no ghost success')
  notice=texts[-1];need(not len(notice)and notice.attrib=={'x':'8','y':'415'}and notice.text=='Reference drawing · '+r['status']+' · scale 1:1','exact factual footer')
- return{'quality':'independent-source/Native-analytic-record/complete-visible-SVG-membership','fragments':sum(map(len,cc)),'resolvedForms':len(forms),'unresolvedWarnings':membership,'manufacturedConformance':False}
+ return{'quality':'independent-source/Native-analytic-record/complete-visible-SVG-membership','fragments':sum(map(len,cc)),'resolvedForms':len(forms),'leaderVertices':[len(lp)for lp,_ in leaders],'leaderSegments':sum(len(lp)-1 for lp,_ in leaders),'unresolvedWarnings':membership,'manufacturedConformance':False}

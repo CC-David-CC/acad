@@ -152,3 +152,28 @@ Available means a nominal CAD geometry binding resolved. No position-error/Ra/
 actual shaft measurement, manufactured conformance, standards certification,
 assembly, printer or physics result is created. General professional annotation
 layout/leader routing and full Gate1 remain outside this finite qualification.
+
+## Bounded requirement-leader SVG grammar — source-only follow-up
+
+The actual R3 repaired-sheet first failure remains retained. The new producer
+may route a requirement leader around declared text without moving its actual
+Native anchor, authored label/frame or original chosen frame midpoint.
+The independent oracle accepts only one M with explicit Ls, 2..64 finite
+vertices and at most8192 path characters; >2-point leaders alone require exact
+round joins, while clear direct2-point leaders retain their original attributes.
+
+Raw leader text is bounded before coordinate decoding. Every segment is checked
+against all old dimension-label/caption/OTHER-form boxes expanded by the actual
+.125mm half-stroke, using exact represented Fraction clipping. Prefix segments
+cannot touch the closed owning frame; the final segment must approach its
+unchanged selected side from the strict exterior half-plane. All vertices lie
+within physical sheet inset.125mm, which proves all segments remain inside by
+convexity. The original direct path must remain direct whenever it is clear.
+
+This verifies actual output properties, not a producer visibility graph,
+shortest path or predetermined waypoint set. Native/source/visible quantities,
+all old grammar/refusal/travel/archive/write criteria and budgets remain.
+In particular the expected prewrite complete-form-box refusal is unchanged;
+a routing failure cannot substitute for it. General layout/leader intersections,
+manufactured conformance and full Gate1 remain unqualified. Root alone owns
+the complete new whole, FIRST checker after PASS and individual SVG review.
