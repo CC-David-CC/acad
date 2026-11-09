@@ -54,6 +54,8 @@ function preparedResponse(result:any,input:any){
  return {request,expected:Object.freeze({volume:expected.volume,bounds:Object.freeze({min:Object.freeze(min),max:Object.freeze(max)})}),signature:jsonData(r)};
 }
 
+export const selectedProfileDataAdmission=Object.freeze({fields,boundedText,jsonData,assetPath,sameFrame,vector});
+
 export function createWorkerSelectedProfileOperation(createMount:(engine:string,revision?:string)=>any,validateMount:(engine:string,mount:any,revision?:string)=>void):OperationDescriptor<any>{
  if(typeof createMount!=='function'||typeof validateMount!=='function')fail('INVALID_REQUEST','Checked runtime factory and validator are required.');
  const schema:any={version:{type:Types.number},unit:{type:Types.string},engine:{type:Types.string},engineRevision:{type:Types.string},featureId:{type:Types.number},faceId:{type:Types.string},regionId:{type:Types.string},depth:{type:Types.number,dimension:'length'},bodyPolicy:{type:Types.string}},keys=Object.keys(schema);

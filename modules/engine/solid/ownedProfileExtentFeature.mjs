@@ -30,6 +30,16 @@ export function captureProfileExtent(input,{numeric=false}={}){
  if(r.extent==='two-sided'&&typeof r.positive==='number'&&typeof r.negative==='number'&&(!(r.positive+r.negative>0)||r.positive+r.negative>1e6))fail('Two-sided extents require a positive total span no greater than one million millimeters.');
  return Object.freeze(r);
 }
+// Derived physical manifests already contain only active numeric fields. The
+// three disjoint exact field sets identify their authored variant without an
+// extra saved flag, guessed value/sign, or a second extent representation.
+export function profileExtentFromFields(input,options){
+ if(!input||typeof input!=='object'||Array.isArray(input)||![null,Object.prototype].includes(Object.getPrototypeOf(input)))fail('Expected own active extent fields.');
+ const keys=Reflect.ownKeys(input);if(keys.some(k=>typeof k!=='string'))fail('Expected literal extent field names.');
+ const mode=Object.keys(PROFILE_EXTENT_FIELDS).find(mode=>PROFILE_EXTENT_FIELDS[mode].length===keys.length&&PROFILE_EXTENT_FIELDS[mode].every(key=>keys.includes(key)));
+ if(!mode)fail('Expected exactly one active extent field set.');
+ const captured=record(input,PROFILE_EXTENT_FIELDS[mode]);return captureProfileExtent({extent:mode,...captured},options);
+}
 export function profileExtentInterval(input){
  const e=captureProfileExtent(input,{numeric:true});
  const lower=e.extent==='one-sided'?Math.min(0,e.distance):e.extent==='symmetric'?-e.length/2:-e.negative;

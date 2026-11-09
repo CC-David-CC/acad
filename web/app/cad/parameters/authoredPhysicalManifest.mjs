@@ -1,4 +1,4 @@
-import {physicalBindingFields} from './physicalBindingFields.mjs';
+import {physicalBindingFields,activePhysicalBindingFields} from './physicalBindingFields.mjs';
 import {requireModernPhysicalHistory} from './modernPhysicalBindings.mjs';
 import {prepareTypedRectangle} from './typedRectangleBindings.mjs';
 import {assertNoUnsupportedPhysicalNames} from './physicalLiteralFields.mjs';
@@ -15,13 +15,13 @@ export function deriveAuthoredPhysicalManifest(history,parameterNames,readSketch
 
  for(let index=0;index<history.length;index++){
   const request=history[index];if(!request||typeof request!=='object'||typeof request.type!=='string'||!request.params||typeof request.params!=='object')throw Error('Invalid captured feature.');
-  const list=own(physicalBindingFields,request.type)?physicalBindingFields[request.type].filter(key=>request.type!=='WORKER_THROUGH_HOLES_V1'||request.params.kind!=='centered-through'||key==='diameter'):null;
+  const list=own(physicalBindingFields,request.type)?activePhysicalBindingFields(request.type,request.params).filter(key=>request.type!=='WORKER_THROUGH_HOLES_V1'||request.params.kind!=='centered-through'||key==='diameter'):null;
   assertNoUnsupportedPhysicalNames(request.type,request.params,list||[],names);
   if(!list)continue;
   const featureId=Number(request.params.featureId);if(!Number.isSafeInteger(featureId)||featureId<1||features.has(featureId))throw Error('Duplicate or invalid feature identity.');features.add(featureId);
   const fields=Object.create(null);for(const key of list){if(!own(request.params,key))throw Error('A supported feature field is missing.');fields[key]=request.params[key];}
   targets.push(Object.freeze({kind:'feature',index,featureId,type:request.type,fields:Object.freeze(fields)}));
-  if(request.type==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'){
+  if(['WORKER_SELECTED_PROFILE_EXTRUDE_V2','WORKER_SELECTED_PROFILE_EXTENT_EXTRUDE_V1'].includes(request.type)){
    const {faceId,regionId}=request.params;if(typeof faceId!=='string'||!faceId||faceId.length>256||typeof regionId!=='string'||!regionId.startsWith('sketch-region:')||regionId.length>8192||faces.has(faceId))throw Error('Invalid selected profile source.');faces.add(faceId);
    targets.push(Object.freeze({kind:'selected-profile',index,featureId,faceId,regionId}));
   }

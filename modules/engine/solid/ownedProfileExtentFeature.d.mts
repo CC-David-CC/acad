@@ -14,3 +14,4 @@ export function profileExtentInterval(input:unknown):Readonly<{lower:number;uppe
 export function captureOwnedProfileExtentFeature(input:unknown):OwnedProfileExtentFeature;
 export function profileExtentDimensions(input:unknown):ProfileExtent;
 export function materializeOwnedProfileExtentFeature(input:unknown,expressions:any,materialized?:any):Readonly<{authored:OwnedProfileExtentFeature;resolved:OwnedProfileExtentFeature<number>}>;
+export function profileExtentFromFields(input:unknown,options?:{numeric?:boolean}):ProfileExtent;
