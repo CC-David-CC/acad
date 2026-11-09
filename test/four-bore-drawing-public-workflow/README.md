@@ -52,7 +52,8 @@ owner retirement and the dependency lifecycle table. No GD&T/fit/finish,
 section/detail, arbitrary rotated slab, full C11 or final Gate1 claim.
 
 Warning-layout follow-up: see CAD-DRAWING-ERROR-LAYOUT-01 and
-docs/reviews/C11-DERIVED-WARNING-LAYOUT-20261108.md. Only no-authored-label
-unresolved bore-center presentation moves to a bounded derived legend. Run this
+docs/reviews/C11-DERIVED-WARNING-LAYOUT-20261108.md. All unavailable dimension/annotation diagnostics use a bounded derived legend
+with exact visible text membership and actual geometry/caption/label collision
+checks; successful authored label positions and anchors remain unchanged. Run this
 SAME complete current workflow and extended artifact oracle after composition;
 no isolated rendering probe substitutes for actual whole application artifacts.

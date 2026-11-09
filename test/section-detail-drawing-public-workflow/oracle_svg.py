@@ -84,7 +84,7 @@ def verify_svg(root,item,row,facts,iso,bore):
  rect=one(xml.findall('s:rect',NS),'paper background');need(rect.attrib=={'width':'100%','height':'100%','fill':'white'},'unobscured white paper')
  geometry,textgroup=xml.findall('s:g',NS);need(geometry.attrib=={'fill':'none','stroke':'#111','stroke-width':'.25'} and textgroup.attrib=={'font-family':'sans-serif','font-size':'3'},'visible geometry/legible physical typography')
  paths=list(geometry);texts=list(textgroup);need(all(p.tag=='{'+NS['s']+'}path' for p in paths) and all(t.tag=='{'+NS['s']+'}text' for t in texts),'closed path/text roles')
- used=set();usedtexts=set();defs=one(xml.findall('s:defs',NS),'defs');need(defs.attrib=={},'bare defs cannot alter inherited hatch presentation');patterns=list(defs);usedpatterns=set()
+ used=set();usedtexts=set();stroke_boxes=[];label_boxes=[];expected_warnings=[];defs=one(xml.findall('s:defs',NS),'defs');need(defs.attrib=={},'bare defs cannot alter inherited hatch presentation');patterns=list(defs);usedpatterns=set()
  def ps(node,moves=(0,),closed=False):
   value=node.get('d','');need(not re.search(r'[^MLZ0-9eE+.,\s-]',value),'only finite supported M/L/Z geometry')
   need(value.count('Z')==int(closed) and value.rstrip().endswith('Z')==closed,'actual finite closed/open path grammar');value=value[:-1].rstrip() if closed else value
@@ -95,9 +95,15 @@ def verify_svg(root,item,row,facts,iso,bore):
   return iso.path_points(value)
  def pathcheck(node,expected,attrs,closed=False,moves=(0,)):
   need(set(node.attrib)==set(attrs)|{'d'} and all(node.get(k)==v for k,v in attrs.items()),'exact path role/style');p=ps(node,moves,closed);need(len(p)==len(expected),'complete path membership');[vector(x,y) for x,y in zip(p,expected)];used.add(id(node))
+  if 'data-view-id' not in attrs:
+   for j in range(1,len(expected)):
+    if j not in moves:
+     a,b=expected[j-1:j+1];stroke_boxes.append([min(a[0],b[0]),min(a[1],b[1]),max(a[0],b[0]),max(a[1],b[1])])
  def textcheck(position,value,attrs={}):
   matches=[t for t in texts if id(t) not in usedtexts and (t.text or '')==value and math.dist([float(t.get('x','nan')),float(t.get('y','nan'))],position)<=1e-6]
-  node=one(matches,'exact full physical label '+value);need(not list(node) and set(node.attrib)==set(attrs)|{'x','y'} and all(node.get(k)==v for k,v in attrs.items()),'full visible text role/style');usedtexts.add(id(node));return node
+  node=one(matches,'exact full physical label '+value);need(not list(node) and set(node.attrib)==set(attrs)|{'x','y'} and all(node.get(k)==v for k,v in attrs.items()),'full visible text role/style');usedtexts.add(id(node))
+  if attrs.get('fill')=='#124':label_boxes.append([position[0]-1,position[1]-4,position[0]+len(value)*3+1,position[1]+2])
+  return node
  frames={v['viewId']:v.get('frame') for v in o['viewFrames']};sheet=d['sheet']['scale']['numerator']/d['sheet']['scale']['denominator']
  def scale(v):return v['scale']['numerator']/v['scale']['denominator'] if v['basis']=='detail' else sheet
  def paper(v,p):return[v['paperOrigin'][0]+scale(v)*p[0],v['paperOrigin'][1]-scale(v)*p[1]]
@@ -169,12 +175,9 @@ def verify_svg(root,item,row,facts,iso,bore):
   for b in envelopes:
    if b is not None:need(not intersects(box,[b[0]-.125,b[1]-.125,b[2]+.125,b[3]+.125]),'actual caption box does not intersect ANY actual analytic/cap/aperture view or its stroke')
   for _,_,other in caption_boxes[:i]:need(not intersects(box,other),'distinct derived caption boxes never overlap')
-  for warning in texts:
-   if warning.get('data-warning-layout')=='sheet-legend-v1':
-    spans=warning.findall('s:tspan',NS);need(spans,'actual warning legend lines');first=min(float(t.get('y','nan')) for t in spans);need(math.isfinite(first) and box[3]<=first-5+1e-6,'caption box clears the actual full warning band')
  for a,f in zip(d['dimensions'],o['dimensions']):
   v=one([v for v in d['views'] if v['viewId']==a['viewId']],'dimension view')
-  if f['status']!='available' or frames[v['viewId']] is None:textcheck(a['label'],'UNRESOLVED: '+a['dimensionId'],{'fill':'#a00'});continue
+  if f['status']!='available' or frames[v['viewId']] is None:expected_warnings.append({'role':'dimension','id':a['dimensionId'],'viewId':a['viewId'],'message':'UNRESOLVED: '+a['dimensionId']});continue
   ends=[project(v,p) for p in f['anchors']];lines=[p for p in paths if id(p) not in used and p.get('stroke')=='#246'];leaders=[p for p in paths if id(p) not in used and p.get('stroke')=='#789'];need(lines and leaders,'actual dimension line and paired leaders')
   pathcheck(lines[0],ends,{'stroke':'#246'});pathcheck(leaders[0],[ends[0],a['label'],ends[1],a['label']],{'stroke':'#789','stroke-dasharray':'1 1'},moves=(0,2))
   semantics='Ø' if a['kind']=='hole-diameter' else 'L ' if a['kind']=='edge-length' else 'ΔZ ' if a['kind']=='plane-distance' else 'ΔX ' if a['axis']=='datum-x' else 'ΔY '
@@ -182,7 +185,7 @@ def verify_svg(root,item,row,facts,iso,bore):
  for a,f in zip(d['annotations'],o['annotations']):
   tag={'data-annotation-id':a['annotationId'],'data-annotation-kind':a['kind']};group=[p for p in paths if p.get('data-annotation-id')==a['annotationId']];v=one([v for v in d['views'] if v['viewId']==a['viewId']],'annotation view')
   if f['status']=='unresolved':
-   need(a['kind']=='hole-callout' and not group,'finite roof error has no ghost annotation');textcheck(a['label'],'UNRESOLVED: '+a['annotationId']+' ('+f['reason']+')',tag|{'fill':'#a00'});continue
+   need(a['kind']=='hole-callout' and not group,'finite roof error has no ghost annotation');expected_warnings.append({'role':'annotation','id':a['annotationId'],'viewId':a['viewId'],'message':'UNRESOLVED: '+a['annotationId']+' ('+f['reason']+')','attributes':tag});continue
   value=f['facts'];expected=[]
   if a['kind']=='bore-center':
    if v['basis'] in ('top','detail'):
@@ -197,6 +200,7 @@ def verify_svg(root,item,row,facts,iso,bore):
     ends=[project(v,p) for p in pair];expected.extend([(ends,None),([ends[1],a['labels'][j]],'1 1')]);prefix=('+' if vals[j]>=0 else '') if a['kind']=='ordinate' else 'Δ';textcheck(a['labels'][j],prefix+f'{vals[j]:.3f} mm',tag|{'data-member-index':str(j),'fill':'#124'})
   need(len(group)==len(expected),'complete annotation lines/leader membership')
   for p,(points,dash) in zip(group,expected):pathcheck(p,points,tag|{'stroke':'#357'}|({'stroke-dasharray':dash} if dash else {}))
+ warning_ids,warning_boxes=bore.warning_layout(texts,expected_warnings,d['sheet'],envelopes,stroke_boxes,label_boxes,[box for _,_,box in caption_boxes],need);usedtexts.update(warning_ids)
  textcheck([8,d['sheet']['height']-5],f"Reference drawing · {read['status']} · scale {d['sheet']['scale']['numerator']}:{d['sheet']['scale']['denominator']}")
  need(len(used)==len(paths) and len(usedtexts)==len(texts) and len(usedpatterns)==len(patterns),'no stale/extra unverified lines, labels, patterns or hidden geometry')
  return item['savedFile']

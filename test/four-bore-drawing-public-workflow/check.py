@@ -8,6 +8,7 @@ from collections import Counter
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'native-cad-container'))
 from archive_oracle import read_archive
 spec=importlib.util.spec_from_file_location('retained_iso_oracle',ROOT/'isometric-drawing-public-workflow'/'check.py');iso=importlib.util.module_from_spec(spec);spec.loader.exec_module(iso)
+spec=importlib.util.spec_from_file_location('drawing_warning_oracle',ROOT/'drawing-warning-oracle.py');warnings=importlib.util.module_from_spec(spec);spec.loader.exec_module(warnings);warning_layout=warnings.check_warnings
 need,near,vector,one=iso.need,iso.near,iso.vector,iso.one;sha=lambda b:hashlib.sha256(b).hexdigest()
 BUILD='sha256:57b74074e0a249b917ac68357fbd003c37d1ab61897206886b575088e6995858:60dc956b08e01f43d08a48035a384e478e63bb34fb55f21a152c8cd12e8b8947'
 SLOTS=['MIN_X_MIN_Y','MAX_X_MIN_Y','MAX_X_MAX_Y','MIN_X_MAX_Y'];NS=iso.NS
@@ -190,26 +191,13 @@ def check_svg(root,item,rows):
   for j,q in enumerate(ps):
    t=c['range'][0]+(c['range'][1]-c['range'][0])*j/(len(ps)-1);at=iso.evaluate(c,t);vector(q,[v['paperOrigin'][0]+at[0],v['paperOrigin'][1]-at[1]],1e-6)
  texts=xml.findall('.//s:text',NS);annpaths=[p for p in xml.findall('.//s:path',NS) if p.get('data-annotation-id')]
- # Independent physical legend contract: authored-order, full message membership,
- # 3mm monospace /1.8mm advance /4mm baseline /8mm margins /10mm footer.
- fallback=[(a,f) for a,f in zip(d['annotations'],meta['annotationFacts']) if a['kind']=='bore-center' and f['status']=='unresolved'];capacity=min(120,math.floor((d['sheet']['width']-16)/1.8));need(capacity>=1,'bounded legend width');wrapped=[]
- for a,f in fallback:
-  message='UNRESOLVED: '+a['annotationId']+' ('+f['reason']+')';wrapped.append((a,message,[message[i:i+capacity] for i in range(0,len(message),capacity)]))
- count=sum(len(lines) for _,_,lines in wrapped);first=d['sheet']['height']-10-(count-1)*4;need(not fallback or count<=256 and first>=16,'legible bounded warning legend');legend={};line=0;positions=[]
- for a,message,lines in wrapped:
-  legend[a['annotationId']]={'firstY':first+line*4,'message':message,'lines':[(value,first+(line+j)*4) for j,value in enumerate(lines)]};positions.extend((8,first+(line+j)*4) for j in range(len(lines)));line+=len(lines)
- need(len(positions)==len(set(positions)),'all derived warning baselines are distinct')
- if item['label']=='invalid-reference':need(set(legend)=={'corner-mark-'+str(i) for i in range(4)},'all FOUR actual unresolved center-mark errors, not one representative')
+ expected_warnings=[{'role':'dimension','id':a['dimensionId'],'viewId':a['viewId'],'message':'UNRESOLVED: '+a['dimensionId']} for a,f in zip(d['dimensions'],row['read']['observation']['dimensions']) if f['status']=='unresolved']
+ if item['label']=='invalid-reference':need({a['annotationId'] for a,f in zip(d['annotations'],meta['annotationFacts']) if a['kind']=='bore-center' and f['status']=='unresolved'}=={'corner-mark-'+str(i) for i in range(4)},'all FOUR actual unresolved center-mark errors, not one representative')
  for a,fact in zip(d['annotations'],meta['annotationFacts']):
   group=[t for t in texts if t.get('data-annotation-id')==a['annotationId']];segments=[p for p in annpaths if p.get('data-annotation-id')==a['annotationId']]
   if fact['status']=='unresolved':
    message='UNRESOLVED: '+a['annotationId']+' ('+fact['reason']+')';need(len(group)==1 and ''.join(group[0].itertext())==message and not segments,'full error membership, no ghost numeric annotation');node=group[0]
-   if a['kind']=='bore-center':
-    wanted=legend[a['annotationId']];need(node.get('data-warning-layout')=='sheet-legend-v1' and node.get('data-warning-view-id')==a['viewId'] and node.get('font-family')=='monospace' and node.get('font-size')=='3' and node.get('fill')=='#a00' and node.get('aria-label')==message,'derived legible error legend');vector([float(node.attrib['x']),float(node.attrib['y'])],[8,wanted['firstY']],0);spans=node.findall('s:tspan',NS);need(len(spans)==len(wanted['lines']),'complete bounded wrapping, no truncation')
-    for span,(text,y) in zip(spans,wanted['lines']):
-     need(span.text==text and span.get('lengthAdjust')=='spacingAndGlyphs','exact wrapped error line');vector([float(span.attrib['x']),float(span.attrib['y'])],[8,y],0);near(float(span.attrib['textLength']),len(text)*1.8,1e-12);need(8+float(span.attrib['textLength'])<=d['sheet']['width']-8+1e-12 and 16<=y<=d['sheet']['height']-10,'all fallback text physically within margins/footer')
-   else:
-    need(node.get('data-warning-layout') is None,'authored error label is not auto-moved');vector([float(node.attrib['x']),float(node.attrib['y'])],a['label'] if a['kind']=='hole-callout' else a['labels'][0],0)
+   expected_warnings.append({'role':'annotation','id':a['annotationId'],'viewId':a['viewId'],'message':message,'attributes':{'data-annotation-id':a['annotationId'],'data-annotation-kind':a['kind']}})
    continue
   f=fact['facts'];view=one([v for v in d['views'] if v['viewId']==a['viewId']],'annotation view');u,v,_=iso.FRAMES[view['basis']];project=lambda p:[view['paperOrigin'][0]+sum(p[i]*u[i] for i in range(3)),view['paperOrigin'][1]-sum(p[i]*v[i] for i in range(3))]
   if a['kind']=='hole-callout':need(len(group)==1 and group[0].text==f"4×Ø{f['diameter']:.3f} THRU" and len(segments)==4,'actual qualified group text and four real leaders')
@@ -223,11 +211,28 @@ def check_svg(root,item,rows):
   else:
    need(len(group)==4 and len(segments)==8,'four actual datum lines/leaders/labels');values=f['coordinates' if a['kind']=='ordinate' else 'values']
    for j,t in enumerate(group):need(t.get('data-member-index')==str(j),'canonical member binding');need(t.text==(('+' if values[j]>=0 else '') if a['kind']=='ordinate' else 'Δ')+f'{values[j]:.3f} mm','actual signed ordinate/nonnegative baseline');vector([float(t.attrib['x']),float(t.attrib['y'])],a['labels'][j])
+ envelopes=[]
+ for view,cc in zip(d['views'],curves):
+  points=[]
+  for c in cc:
+   if c['line']:points.extend(iso.evaluate(c,t) for t in c['range'])
+   else:
+    radius=[math.hypot(c['a'][j],c['b'][j]) for j in (0,1)];points.extend([[c['c'][j]+sign*radius[j] for j in (0,1)] for sign in (-1,1)])
+  mapped=[[view['paperOrigin'][0]+p[0],view['paperOrigin'][1]-p[1]] for p in points];need(mapped,'actual warning view envelope');envelopes.append([min(p[0] for p in mapped),min(p[1] for p in mapped),max(p[0] for p in mapped),max(p[1] for p in mapped)])
+ stroke_boxes=[]
+ for p in xml.findall('.//s:path',NS):
+  if p.get('data-view-id'):continue
+  stroke_boxes.extend(warnings.overlay_line_boxes(p.attrib['d'],need))
+ caption_boxes=[]
+ for view in d['views']:
+  n=one([n for n in texts if n.get('data-view-caption-id')==view['viewId']],'actual unchanged view caption');attrs={'data-view-caption-id':view['viewId'],'data-caption-role':'view','data-caption-layout':'observed-sheet-v1','font-family':'monospace','font-size':'3','lengthAdjust':'spacing'};need(not list(n) and n.text==view['basis'] and set(n.attrib)==set(attrs)|{'x','y','textLength'} and all(n.get(k)==v for k,v in attrs.items()),'exact visible caption fields');x,y,length=(float(n.get(k,'nan')) for k in ('x','y','textLength'));need(all(math.isfinite(z) for z in (x,y,length)) and abs(length-len(n.text)*1.8)<1e-9,'caption full physical advance');caption_boxes.append([x-1,y-4,x+length+1,y+2])
+ label_boxes=[[float(n.get('x'))-1,float(n.get('y'))-4,float(n.get('x'))+len(n.text or '')*3+1,float(n.get('y'))+2] for n in texts if n.get('fill')=='#124']
+ warning_layout(texts,expected_warnings,d['sheet'],envelopes,stroke_boxes,label_boxes,caption_boxes,need)
  return item['savedFile']
 
 def main(root):
  packet=json.loads((root/'receipt.json').read_text());need(packet['status']=='PASS' and packet['ownedContextsRetired'] and packet['sharedBrowserDisconnectedOnly'],'whole application/cleanup PASS required');need(packet['sourcePins']==packet['sourcePinsAfter'],'frozen whole source');need(packet['engineRevision']==BUILD and not packet['sourceSeeds'] and not packet['privateAuthoring'] and not packet['fakeReplies'],'genuine public authoring only');need(packet['tolerances']=={'sourceMm':5e-8,'nativeVolumeMm3':1e-6,'nativeBoundsMm':1e-6,'dimensionMm':1e-6,'projectionMm':1e-6,'svgPaperChordMm':.02},'unchanged physical/native budgets');need([c['name'] for c in packet['cases']]==['original','translated-negative'] and all(c['status']=='PASS' for c in packet['cases']),'both actual datum families')
- for item in packet['sourceSnapshots']:need(sha((root/item['file']).read_bytes())==item['sha256']==packet['sourcePins'][item['originalFile']],'exact retained source artifact')
+ warnings.verify_warning_sources(root,packet,need)
  need(len(packet['observations'])==56,'all finite current observations')
  for c in packet['cases']:
   m=c['binding']['preFillet']['metrics'];need(m['nativeValidity']['valid'] is True and m['solidCount']==1 and m['nativeTopology']['counts']['faces']==11,'actual earlier complete slab');near(m['nativeVolume'],100000-820*math.pi)

@@ -62,3 +62,20 @@ geometry/source/J/definition/scale change is permitted. Actual font ink and
 readability require final Chrome renders; this paper-box policy does not prove
 arbitrary installed-font metrics or general authored dimension/leader layout.
 Existing same16SVG/8.cad and all phase/refusal/travel/quotas remain mandatory.
+
+## Derived unresolved diagnostics, current follow-up
+
+In BOTH actual-roof SVGs require the exact unresolved depth, section-depth and
+four-thru message/ID/reason roster in fully visible fixed3mm text. Their derived
+line boxes must clear every actual analytic/cap/hatch/aperture view envelope,
+physical strokes/leaders, successful-label/caption boxes, each other and the
+8mm side/16mm title/footer bands. The independent oracle checks actual emitted
+coordinates and inequalities, not the layout search or an aria-only label.
+Successful authored dimensions/physical anchors/labels and qualified captions
+remain fixed. No source, definition, reference, Native, scale, journal, archive,
+refusal, state or 50pm/.02mm criteria change. Rendering may refuse prewrite with
+RESOURCE_LIMIT when complete bounded legible diagnostic placement is impossible;
+it must never hide, clip, erase, shrink or omit a warning. General successful
+leader routing and installed-font ink certification remain open. Retain every
+existing phase, artifact, read-only state and write-settlement assertion, followed
+by FIRST independent oracle and individual real SVG renders after the WHOLE run.

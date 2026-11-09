@@ -97,24 +97,30 @@ supports and global projected extents; all five whole top rims are observed
 actual Native fragment plus true measured marks/lines/labels, unavailable labels
 contain no values. No production CAD math/provider output supplies expectations.
 
-## Affected complete warning-layout regression (after qualified R3)
+## Current derived warning-layout regression
 
-CAD-DRAWING-ERROR-LAYOUT-01 is confirmed from actual R3 SVG/PNG artifacts: the
-four invalid bore-center refs used the same view.paperOrigin and stacked text.
-The same whole source/Native/lifecycle cases and physical budgets remain. The
-AFTER-WHOLE oracle now requires exact membership of ALL FOUR corner-mark errors
-in each invalid-reference SVG, complete untruncated reason/identity text, unique
-bounded fallback baselines and physical text extents. Actual split/consume
-single-center warnings obey the same rule. Authored callout/baseline/ordinate
-label positions and every original positive center mark/axis/physical label/HLR
-curve remain exactly as previously frozen. No warning is authored or saved.
+CAD-DRAWING-ERROR-LAYOUT-01 includes the retained R3 stacked bore-center
+warnings and the later C11 roof depth/section-depth outline/hatch collision.
+Historical evidence remains unchanged. The same full source/Native/lifecycle
+cases, all four missing corner-mark identities and physical budgets remain.
+Successful authored callout/baseline/ordinate labels, physical anchors, positive
+center marks/axes/HLR and qualified captions stay unchanged. Only unavailable
+dimension/annotation diagnostics receive derived SVG positions; no warning is
+authored or saved.
 
-Fallback is a derived bottom-sheet legend: 8mm margins,3mm monospace glyph height,
-1.8mm declared advance (SVG textLength),4mm baseline spacing,10mm footer reserve;
-wrap at min(120,floor((width−16)/1.8)) Unicode code points in authored annotation
-order. Cap256 lines; top baseline≥16mm. Tiny sheets without a legible area return
-RESOURCE_LIMIT at presentation before any My files write; never clip, hide,
-truncate, shrink vertically or stack. That additional tiny-paper refusal branch
-is source-defined, not separately runtime-qualified by this finite594×420 case.
-The actual six .cad/14SVG whole flow plus independent artifact checks must run
-after root composition; old R3 receipts/PNGs/checker failures remain immutable.
+The current independent AFTER-WHOLE oracle requires every full identity/reason
+character in visible tspan content, not aria-label alone, exact diagnostic
+role/ID/view membership and fixed3mm monospace/1.8mm advance/6mm line boxes.
+All boxes must fit8mm side margins and16mm title/footer exclusions and clear
+all actual source-reconciled view/stroke envelopes, visible leaders, declared
+successful-label/caption boxes and one another. No chosen coordinate or search
+algorithm is copied. The one derived legend has at most32 records/256 lines,
+wraps without loss at at most120 Unicode code points and refuses prewrite with
+RESOURCE_LIMIT if complete legible placement cannot be established. No clipping,
+hiding, erasure, glyph/font shrinking, truncation or invented leader is allowed.
+The no-space branch is source-defined, not separately runtime-qualified by the
+finite594×420 flow. Successful professional leader routing/typography remains
+open. Run the SAME complete current six.cad/14SVG flow after coherent composition;
+no isolated render probe replaces the actual whole and independent artifact
+checks. Current driver/oracle/helper/product anchors are bound to exact producer
+Git objects; old receipts/checker bytes remain immutable.

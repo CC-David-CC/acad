@@ -74,3 +74,25 @@ the entire genuine original/translated flow then FIRST checker/render review.
 No tests/parser/probes/build or Native/browser calls ran here. The caption paper
 box does not establish arbitrary browser-font ink or solve authored leader/
 annotation layout; those remain explicitly separate review boundaries.
+
+## Current diagnostic layout and exact transitive source custody
+
+BEFORE contract0b0df97 records the qualified evidence-r5 roof warnings against
+outlines/hatching. The current follow-up changes only derived unavailable
+dimension/annotation diagnostic positions/attributes. It retains the existing
+caption helper/placements, all successful authored labels/anchors and the whole
+geometry/state/lifecycle criteria. `linkedPartDrawingWarningLayout.mjs` is a
+static import of the real exporter Worker. No Native resource graph is changed.
+
+The independent `test/drawing-warning-oracle.py` validates all visible text,
+finite paper obstacles/inequalities and full membership without importing the
+production helper or reproducing its placement search. It is transitively
+imported by the current four-bore and isometric source oracles used here.
+Driver and lifecycle rosters explicitly include that file and the new exporter
+leaf; all Core test/helper rows now bind `CODI_ACCEPTANCE_SOURCE`, while actual
+product anchors bind `CODI_EXPECT_SOURCE` and Desktop anchors bind
+`CODI_EXPECT_DESKTOP`. This supersedes the earlier helper-as-runtime-source
+paragraph above; no tuple is inferred or substituted. Exact commit:path bytes
+and Git object IDs remain checked before execution and after the complete run.
+Frozen producing evidence/source snapshots are unchanged. No execution was
+performed while preparing this packet.

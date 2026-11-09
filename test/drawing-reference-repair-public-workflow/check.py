@@ -9,6 +9,8 @@ from collections import Counter
 import xml.etree.ElementTree as ET
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'native-cad-container'))
 from archive_oracle import read_archive
+import importlib.util
+_spec=importlib.util.spec_from_file_location('drawing_warning_oracle',Path(__file__).resolve().parents[1]/'drawing-warning-oracle.py');_warning=importlib.util.module_from_spec(_spec);_spec.loader.exec_module(_warning)
 PI=Decimal('3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651')
 BUILD='sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc'
 FRAMES={'top':([1,0,0],[0,1,0],[0,0,1]),'front':([1,0,0],[0,0,1],[0,-1,0]),'right':([0,1,0],[0,0,1],[1,0,0])}
@@ -149,8 +151,10 @@ def path_points(text):
 def check_svg(root,item,receipt,case):
     raw=(root/item['savedFile']).read_bytes();need(sha(raw)==item['sha256'] and len(raw)==item['byteLength'],'actual SVG server bytes');need(item['before']==item['after'],'SVG export exact readonly state/dirty/tokens');matches=[r for r in receipt['observations'] if r['case']==case['name'] and r['before']['drawing']['revision']==item['before']['drawing']['revision'] and r['before']['drawing']['geometryRevision']==item['before']['drawing']['geometryRevision'] and r['definition']==item['definition'] and geometry(r['before'])==geometry(item['before'])];need(matches,'actual prior Native read for SVG binding');row=matches[-1];checked=check_observation(row,case);d=item['definition'];xml=ET.fromstring(raw);need(xml.tag=='{'+NS['s']+'}svg' and xml.attrib=={'width':'420mm','height':'297mm','viewBox':'0 0 420 297'},'physical SVG sheet/units');need(all('transform' not in e.attrib for e in xml.iter()),'no hidden scale/transform');meta=json.loads(one(xml.findall('s:metadata',NS),'SVG metadata').text);need(meta['drawingId']==d['drawingId'] and meta['revision']==item['before']['drawing']['revision'] and meta['geometryRevision']==item['before']['drawing']['geometryRevision'] and meta['status']==('unresolved' if item['unresolved'] else 'available') and meta['dimensionRole']=='reference' and meta['quality']=='native-bound-drawing-references' and meta['curvePresentationTolerancePaperMm']==.02,'exact current derived SVG binding/semantics');texts=xml.findall('.//s:text',NS);need([t.text for t in texts][0]==d['title'],'same authored title')
     for dim in d['dimensions']:
-        prefix='Ø' if dim['kind']=='hole-diameter' else 'ΔZ ' if dim['kind']=='plane-distance' else 'ΔX ' if dim['axis']=='datum-x' else 'ΔY ';label='UNRESOLVED: '+dim['dimensionId'] if item['unresolved'] and 'hole' in dim else prefix+f"{checked['dimensions'][dim['dimensionId']]:.3f} mm";t=one([t for t in texts if t.text==label and [float(t.attrib['x']),float(t.attrib['y'])]==dim['label']],'actual six label/value positions');need(t.get('fill')==('#a00' if label.startswith('UNRESOLVED') else '#124'),'truthful unresolved/factual appearance')
-    need(len([t for t in texts if (t.text or '').startswith('UNRESOLVED:')])==(3 if item['unresolved'] else 0),'no ghost numeric hole values');need(all(any(t.text==v['basis'] for t in texts) for v in d['views']),'all three named views')
+        prefix='Ø' if dim['kind']=='hole-diameter' else 'ΔZ ' if dim['kind']=='plane-distance' else 'ΔX ' if dim['axis']=='datum-x' else 'ΔY ';label='UNRESOLVED: '+dim['dimensionId'] if item['unresolved'] and 'hole' in dim else prefix+f"{checked['dimensions'][dim['dimensionId']]:.3f} mm"
+        if label.startswith('UNRESOLVED:'):continue
+        t=one([t for t in texts if t.text==label and [float(t.attrib['x']),float(t.attrib['y'])]==dim['label']],'actual six label/value positions');need(t.get('fill')==('#a00' if label.startswith('UNRESOLVED') else '#124'),'truthful unresolved/factual appearance')
+    need(len([t for t in texts if ''.join(t.itertext()).startswith('UNRESOLVED:')])==(3 if item['unresolved'] else 0),'no ghost numeric hole values');need(all(any(t.text==v['basis'] for t in texts) for v in d['views']),'all three named views')
     groups=xml.findall('s:g',NS);need(len(groups)==2,'geometry/annotation groups');paths=[p for p in groups[0] if p.tag=='{'+NS['s']+'}path' and p.get('stroke') in (None,'#777')];expected=[(view,c) for view,curves in zip(d['views'],checked['curves']) for c in curves];need(len(paths)==len(expected),'every actual Native analytic fragment reaches SVG')
     for path,(view,c) in zip(paths,expected):
         ps=path_points(path.attrib['d']);need((path.get('stroke-dasharray')=='2 1')==c['hidden'],'actual visibility category');need(len(ps)==2 if c['line'] else len(ps)>=2,'line endpoint/conic presentation');start,end=c['range']
@@ -158,6 +162,7 @@ def check_svg(root,item,receipt,case):
             theta=start+(end-start)*j/(len(ps)-1);q=evaluate(c,theta);vector(p,[view['paperOrigin'][0]+q[0],view['paperOrigin'][1]-q[1]])
         if not c['line']:
             curvature=math.hypot(*c['a'])+math.hypot(*c['b']);need(curvature*((end-start)/(len(ps)-1))**2/8<=.02+1e-12,'bounded SVG chord error in paper mm')
+    _warning.check_dimension_diagnostics(xml,d,row['read']['observation'],checked['curves'],evaluate,path_points,need)
     # Independent source-to-view checks supplement Native-packet/SVG agreement.
     e=item['dimensions'];cx=e['origin'][0]+e['width']/2;cy=e['origin'][1]+e['height']/2;r=e['diameter']/2;top=checked['curves'][0]
     need(any(not c['line'] and abs(c['c'][0]-cx)<=1e-6 and abs(c['c'][1]-cy)<=1e-6 and abs(math.hypot(*c['a'])-r)<=1e-6 and abs(math.hypot(*c['b'])-r)<=1e-6 and abs(c['range'][1]-c['range'][0]-2*math.pi)<=1e-9 for c in top),'real complete projected bore circle independent of label')
@@ -189,7 +194,7 @@ def check_refusal_state(before,after,candidate):
 
 def check(directory):
     root=Path(directory);r=json.loads((root/'receipt.json').read_text());need(r['status']=='PASS' and r['engineRevision']==BUILD,'complete actual workflow first');need(r['sourcePins']==r['sourcePinsAfter'] and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'],'immutable source/owned cleanup');need(not any(r[k] for k in ('sourceSeeds','privateAuthoring','fakeReplies')),'genuine authoring');need([c['name'] for c in r['cases']]==['original','negative-datum'] and all(c['status']=='PASS' for c in r['cases']),'both actual datum cases')
-    for p in r['sourceSnapshots']:need(sha((root/p['file']).read_bytes())==p['sha256'],'executed source snapshots')
+    _warning.verify_warning_sources(root,r,need)
     cases={c['name']:c for c in r['cases']};reads=[]
     for row in r['observations']:reads.append({'case':row['case'],'label':row['label'],'volumeMM3':check_observation(row,cases[row['case']])['volume'],'unresolved':row['unresolved']})
     need(len(reads)==44,'all 44 actual Native drawing and point observations');need(len(r['repairs'])==2,'actual repair in both cases')
