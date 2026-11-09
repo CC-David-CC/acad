@@ -26,7 +26,11 @@ function assertRefusalState(before,after,candidate){
   a(Number.isSafeInteger(s.lifecycle.epoch)&&s.lifecycle.epoch>=0);
   a(Number.isSafeInteger(s.lifecycle.generation)&&s.lifecycle.generation>=0);
   for(const token of[s.host.revision,s.drawing.revision,s.capture.solids.revision,s.drawing.geometryRevision])a(typeof token==='string'&&token.length>0&&token.length<=256,'Bounded actual inspection token');
-  a.equal(s.physical.revision,s.capture.journal.revision,'Physical inspection binds actual J');a.equal(s.physical.presentationRevision,s.host.revision,'Physical presentation binds actual document');a.equal(s.manufacturing.revision,s.host.revision,'Manufacturing wrapper binds actual document');
+  a.equal(s.physical.revision,s.capture.journal.revision,'Physical inspection binds actual J');a.equal(s.physical.ready,true);a.equal(s.physical.reason,null);
+  const physicalSource=s.capture.native.expressions;
+  if(physicalSource===''){a.equal(s.physical.presentationRevision,null,'Literal-empty source has no captured physical presentation');a.deepEqual(s.physical.definitions,[]);a.deepEqual(s.physical.quantities,[]);}
+  else{a(typeof physicalSource==='string'&&['codi-physical-parameters:1\n','codi-physical-parameters:2\n'].some(prefix=>physicalSource.startsWith(prefix)),'Actual supported typed source');a.equal(s.physical.presentationRevision,s.host.revision,'Typed-ready physical presentation binds actual document');}
+  a.equal(s.manufacturing.revision,s.host.revision,'Manufacturing wrapper binds actual document');
   a.equal(s.host.revision,s.drawing.revision,'Drawing revision is the actual current document token');
   a.equal(s.capture.solids.revision,s.drawing.geometryRevision,'Drawing geometry token is actual solids inspection');
   const journal=s.capture.journal.revision,suffix=':'+s.host.revision;
@@ -40,7 +44,7 @@ function assertRefusalState(before,after,candidate){
  a.notEqual(after.capture.solids.revision,before.capture.solids.revision,'Old geometry inspection token invalidated');
  const prefix=before.capture.journal.revision.slice(0,-before.host.revision.length);
  a.equal(after.capture.journal.revision,prefix+after.host.revision,'Only document-token suffix changes; same journal generation/revision');
- const accepted=s=>{const x=structuredClone(s);delete x.lifecycle.epoch;delete x.capture.solids.revision;delete x.capture.journal.revision;delete x.host.revision;delete x.drawing.geometryRevision;delete x.drawing.revision;delete x.physical.revision;delete x.physical.presentationRevision;delete x.manufacturing.revision;return x;};
+ const accepted=s=>{const x=structuredClone(s);delete x.lifecycle.epoch;delete x.capture.solids.revision;delete x.capture.journal.revision;delete x.host.revision;delete x.drawing.geometryRevision;delete x.drawing.revision;delete x.physical.revision;if(x.physical.presentationRevision!==null)delete x.physical.presentationRevision;delete x.manufacturing.revision;return x;};
  a.deepEqual(accepted(after),accepted(before),'Refusal changed accepted source/definition/J/body/association/resources');
 }
 async function refuse(label,work,code,candidate=false){const before=await state();let error;try{await work();}catch(r){error={name:r.name,code:r?.code??null,message:r?.message??null,committed:r?.committed===true,possiblyCommitted:r?.possiblyCommitted===true};}const after=await state(),row={label,error:error??null,before,after,candidate};receipt.refusals.push(row);record(label+' raw refusal',row);a(error);a.equal(error.code,code);a(!error.committed&&!error.possiblyCommitted);assertRefusalState(before,after,candidate);}

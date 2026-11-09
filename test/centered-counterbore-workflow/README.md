@@ -84,3 +84,9 @@ frozen before execution. Root preserves the FIRST failure. This is a bounded
 counterbore family, not general countersinks, circular sources, C07 controlled
 history, arbitrary placed/multi-solid parents, arbitrary STEP interchange, a
 THRU-cylinder annotation or complete C06/Gate1 qualification.
+
+Acceptance follow-up: PRESENTATION-REVISION-CONTRACT.md documents the actual
+literal-empty null versus typed-ready presentation-token contract. The original
+ff820574 packet remains frozen; the correction affects only refusal assertions,
+retains all exact source/J/token/epoch and full other-state requirements, and has
+not been executed. Geometry/typed/artifact/roster/write criteria are unchanged.

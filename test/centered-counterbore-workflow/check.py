@@ -79,14 +79,18 @@ def check_refusal(row):
  before,after=row['before'],row['after'];need(row['error'] and not row['error']['committed'] and not row['error']['possiblyCommitted'],'actual typed refusal');settled(before);settled(after)
  if not row['candidate']:need(after==before,'pre-candidate full state exact');return
  for s in (before,after):
-  need(s['drawing']['revision']==s['host']['revision']==s['manufacturing']['revision']==s['physical']['presentationRevision'],'actual document token links')
+  need(s['drawing']['revision']==s['host']['revision']==s['manufacturing']['revision'],'actual document token links');need(s['physical']['ready'] is True and s['physical']['reason'] is None,'ready physical inspection')
+  source=s['capture']['native']['expressions']
+  if source=='':need(s['physical']['presentationRevision'] is None and s['physical']['definitions']==[] and s['physical']['quantities']==[],'literal-empty source has no captured physical presentation')
+  else:need(isinstance(source,str) and source.startswith(('codi-physical-parameters:1\n','codi-physical-parameters:2\n')) and s['physical']['presentationRevision']==s['host']['revision'],'typed-ready source binds actual physical presentation')
   need(s['drawing']['geometryRevision']==s['capture']['solids']['revision'],'actual geometry token link');need(s['physical']['revision']==s['capture']['journal']['revision'],'actual physical/J link')
   j=s['capture']['journal']['revision'];need(j.endswith(':'+s['host']['revision']) and re.fullmatch(r'[0-9]+:[0-9]+:',j[:-len(s['host']['revision'])]),'actual J generation/revision/document suffix')
  need(after['lifecycle']['epoch']==before['lifecycle']['epoch']+1 and after['host']['revision']!=before['host']['revision'] and after['capture']['solids']['revision']!=before['capture']['solids']['revision'],'exact one candidate invalidation')
  need(after['capture']['journal']['revision']==before['capture']['journal']['revision'][:-len(before['host']['revision'])]+after['host']['revision'],'same exact J chronology')
  def accepted(s):
   q=json.loads(json.dumps(s));q['lifecycle'].pop('epoch')
-  for parent,key in ((q['capture']['solids'],'revision'),(q['capture']['journal'],'revision'),(q['host'],'revision'),(q['drawing'],'revision'),(q['drawing'],'geometryRevision'),(q['physical'],'revision'),(q['physical'],'presentationRevision'),(q['manufacturing'],'revision')):parent.pop(key)
+  for parent,key in ((q['capture']['solids'],'revision'),(q['capture']['journal'],'revision'),(q['host'],'revision'),(q['drawing'],'revision'),(q['drawing'],'geometryRevision'),(q['physical'],'revision'),(q['manufacturing'],'revision')):parent.pop(key)
+  if q['physical']['presentationRevision'] is not None:q['physical'].pop('presentationRevision')
   return q
  need(accepted(before)==accepted(after),'all other accepted state exact, no broad normalization')
 
