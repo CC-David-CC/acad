@@ -339,3 +339,57 @@ actual absence, exact roster and unchanged complete state. Unknown/incomplete
 observations still retain context. Every original geometry/source/typed/phase/
 file/precision requirement remains. Fresh ENTIRE run on unchanged runtime323/ef
 and194pins; separate acceptance Git identity, first oracle only after wholePASS.
+
+## R3 malformed fixture dependency repair — source only
+
+Root's complete R3 used immutable producing Core323ee19168a6850ec368eb5ac92846976e8ad32a,
+reached49 rows/656commands/27Native observations/13refusals/two .cad Save/freshOpen
+cycles/six exports, and stopped on the first own semantic negative. Expected
+`BLIND_DEPTH_NOT_INTERIOR`, actual `MANUFACTURING_REVIEW_REQUIRED`. The original
+receipt and bytes are preserved; no oracle on that failed whole is claimed.
+
+The authoritative source is `nativeArchiveCodec.worker.ts::checkManufacturing`:
+it hashes canonical `{kind:'codi-jsketcher-geometry-v1',project}` and requires the
+manufacturing revision to match before later Open work. `make_bad` formerly
+rewrote only model.json and archive manifest, leaving that revision stale. The
+source repair is exclusively in this acceptance packet. It does not weaken
+archive integrity, material review, Native preflight or last-valid custody.
+
+New `negative_archive.py` constructs its domain hash independently from the
+actual healthy archive's model, sorted sketch inventory and optional surfacing.
+It preserves original JSON number lexemes verbatim, sorts record keys in UTF-16
+order, and changes only a STRING depth binding or actual discovered wrong-role
+cap locator. `SketchIO.serializeSketch` returns `JSON.stringify(sketch)`;
+`incrementalCanonical.mjs` likewise uses JSON.stringify for numbers, sorts keys
+and preserves arrays. Read-only inspection of the retained R3 receipt shows the
+real rectangle's source values as exact0/100/50 and its actual boundary basis,
+with source constraints' constants retained as strings. Nevertheless, the helper
+does NOT assume all future numeric spellings match Python json.dumps: it keeps
+all original number tokens (including any actual finite floating values) and
+requires the reconstructed BASE geometry hash to match its saved authoritative
+manufacturing revision before emitting a negative. Model/manufacturing canonical
+bytes are also checked against their original role bytes. Failure to establish
+that finite spelling/role binding refuses fixture construction, without changing
+or normalizing source. This is not a new general ECMAScript float formatter.
+
+For each own negative, only `authored/model.json`,
+`authored/manufacturing.json` and `manifest.json` change. The model differs at
+exactly history[actual blind index].params.depth (`recess`→`plate`) or
+entryFaceId (actual last cap→distinct actual public first cap). Manufacturing
+changes ONLY its domain-separated revision; material definitions, bindings,
+accepted bounds/volume/counts and other witnesses are untouched. They are NOT
+represented as successful evidence for the invalid model. Descriptors change
+only bytes/SHA for those two roles; designRevision follows the required-entry
+root. All unchanged members retain exact original raw content, compressed bytes
+and local headers/descriptors. These are strictly negative files; they never
+seed positive public authoring or substitute for real Native regeneration.
+
+The after-whole independent path does not call the rewriter: it reparses the
+actual server-readback negative and original healthy archive, independently
+compares full source trees/numeric spellings/rosters and each allowed difference,
+and recomputes both geometry revisions and exact manifest deltas. Its ledger is
+bound to actual submitted path/readback SHA and stored in the final independent
+result. No actual malformed artifact generation or runtime execution occurred
+in this source lane. All29 observation phases,13refusals, two exact semantic
+negative codes, full state equality and prior write/listing custody remain.
+The exact transitive acceptance roster adds this new helper:13 files total.

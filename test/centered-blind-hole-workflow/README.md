@@ -144,3 +144,30 @@ actual absence, exact roster and unchanged complete state. Unknown/incomplete
 observations still retain context. Every original geometry/source/typed/phase/
 file/precision requirement remains. Fresh ENTIRE run on unchanged runtime323/ef
 and194pins; separate acceptance Git identity, first oracle only after wholePASS.
+
+## R3 negative-fixture revision isolation (source only)
+
+The retained R3 whole reached both normal .cad cycles and exports, then its own
+first malformed Open returned `MANUFACTURING_REVIEW_REQUIRED` before the expected
+`BLIND_DEPTH_NOT_INTERIOR`. The old fixture changed the model and archive root
+but left manufacturing bound to the old geometry hash. That refusal was correct;
+no production guard or expected semantic error is relaxed here.
+
+`negative_archive.py` now changes only the intended authored string leaf and
+its dependent manufacturing revision, two role descriptors and manifest root.
+It preserves every original numeric token, sketch source, material assignment,
+accepted metric, drawing, presentation and unrelated compressed member. Before
+writing ANY negative, its independent full original project hash under
+`codi-jsketcher-geometry-v1` MUST equal the actual saved manufacturing revision.
+It does not approximate ECMAScript number formatting, invoke a production
+serializer, recalculate positive geometry or fabricate a Native witness.
+
+After the WHOLE succeeds, the independent checker inspects the actual
+server-identical rejected bytes against the actual second healthy saved .cad:
+exact entry/role/order roster, one project string leaf, only metadata.revision,
+exact dependent descriptor/root changes, ZIP CRC/SHA and unchanged unrelated
+compressed spans/local bytes. Both original negative codes and the full
+accepted-state equality remain mandatory. The source-helper Git roster is now
+nine local files plus the archive helper and three Desktop helpers (13 total).
+No negative archive was generated or opened while preparing this source packet;
+R3 remains unchanged and has no qualification oracle.

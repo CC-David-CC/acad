@@ -14,6 +14,7 @@ from archive_oracle import read_archive,structure,rebuild,manifest_row,canonical
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from step_oracle import inspect_step
 from mesh_oracle import inspect_finite_blind_mesh
+from negative_archive import rewrite as rewrite_negative_archive,inspect as inspect_negative_archive
 PI=Decimal('3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651')
 sha=lambda b:hashlib.sha256(b).hexdigest()
 KEYS={'version','unit','engine','engineRevision','featureId','target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId','entryFaceId','kind','diameter','depth'}
@@ -123,18 +124,17 @@ def mesh(raw,e,b,build,encoding_revision):
 def svg(raw,e,definition):
  ns={'s':'http://www.w3.org/2000/svg'};root=ET.fromstring(raw);need(root.attrib['width']=='420mm' and root.attrib['height']=='297mm' and root.attrib['viewBox']=='0 0 420 297','physical sheet/scale');meta=json.loads(root.find('s:metadata',ns).text);need(meta['drawingId']==definition['drawingId'] and meta['status']=='available' and meta['dimensionRole']=='reference','actual available source/reference drawing');texts=[n.text or '' for n in root.findall('.//s:text',ns)];need(not any('UNRESOLVED' in t or 'THRU' in t for t in texts),'no failed reference/false through label');need('ΔX 100.000 mm' in texts and 'ΔY 50.000 mm' in texts and f"ΔZ {e['thickness']:.3f} mm" in texts,'actual source-axis/thickness semantics');need(root.findall('.//s:path',ns),'real projected paths');need(len(definition['dimensions'])==3 and not any(d['kind'].startswith('hole') for d in definition['dimensions']),'no unsupported blind measurement masquerade');return meta
 
+def negative_archive_api():return(read_archive,structure,rebuild,manifest_row,canonical,root_record)
+
 def make_bad(source,dest,receipt_path):
- source,dest=Path(source),Path(dest);dest.mkdir(parents=True,exist_ok=False);receipt=json.loads(Path(receipt_path).read_text());saved=receipt['saves'][1];body=one(saved['before']['capture']['solids']['bodies'],'actual saved body');wrong=one([f['id'] for f in body['selections']['plan']['faces'] if f['role']=='first-cap' and f['originFeatureId']==receipt['binding']['profile']['featureId']],'actual wrong-role cap');need(wrong!=receipt['binding']['blind']['entryFaceId'],'genuinely distinct discovered cap');info=read_archive(source);output=[]
+ source,dest=Path(source),Path(dest);dest.mkdir(parents=True,exist_ok=False);receipt=json.loads(Path(receipt_path).read_text());need(source.read_bytes()==(Path(receipt_path).parent/receipt['saves'][1]['savedFile']).read_bytes(),'negative derives ONLY from actual second healthy saved file');output=[]
  for name,code in [('equal-depth','BLIND_DEPTH_NOT_INTERIOR'),('wrong-entry','BLIND_ENTRY_UNRESOLVED')]:
-  model=json.loads(json.dumps(info['envelope']['project']['model']));p=one([r['params'] for r in model['history'] if r['type']=='WORKER_CENTERED_BLIND_HOLE_V1'],'semantic native feature')
-  if name=='equal-depth':p['depth']='plate'
-  else:p['entryFaceId']=wrong
-  raw=canonical(model);compressor=zlib.compressobj(6,zlib.DEFLATED,-15);compressed=compressor.compress(raw)+compressor.flush();rows=[dict(r) for r in structure(source.read_bytes())];row=one([r for r in rows if r['path']=='authored/model.json'],'model entry');row.update(bytes=len(raw),crc=binascii.crc32(raw)&0xffffffff,compressed=compressed);manifest=json.loads(json.dumps(info['manifest']));descriptor=one([r for r in manifest['entries'] if r['role']=='model'],'model descriptor');descriptor.update(bytes=len(raw),sha256=sha(raw));manifest['designRevision']=sha(canonical(root_record(manifest)));rows[-1]=manifest_row(manifest);file=dest/(name+'.cad');file.write_bytes(rebuild(rows));read_archive(file);output.append({'name':name,'path':str(file),'code':code,'negativeOnly':True})
+  file=dest/(name+'.cad');proof=rewrite_negative_archive(source,file,receipt,name,negative_archive_api());output.append({'name':name,'path':str(file),'code':code,'negativeOnly':True,'negativeProof':proof})
  return output
 
 def check(directory):
  directory=Path(directory);r=json.loads((directory/'receipt.json').read_text());need(r['status']=='PASS' and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'],'complete genuine whole/context cleanup');need(not r['sourceSeeds'] and not r['privateAuthoring'] and not r['fakeReplies'],'no fake Native/source');need(r['sourcePins']==r['sourcePinsAfter'],'unchanged executed source');build=r['engineRevision'];need(build=='sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc','actual approved primary MFG pair')
- local_names=['desktop-driver.mjs','example.mjs','check.py','step_oracle.py','mesh_oracle.py','README.md','CONTRACT.md','SOURCE.md'];roster={('core','test/centered-blind-hole-workflow/'+n) for n in local_names}|{('core','test/native-cad-container/archive_oracle.py'),('desktop','test/agent-cad-corpus/sweep/signed-harness.mjs'),('desktop','test/agent-cad-corpus/strict-join/oracle.mjs'),('desktop','apps/system/jsketcher/examples/source-bound-blind-hole.mjs')}
+ local_names=['desktop-driver.mjs','example.mjs','check.py','step_oracle.py','mesh_oracle.py','negative_archive.py','README.md','CONTRACT.md','SOURCE.md'];roster={('core','test/centered-blind-hole-workflow/'+n) for n in local_names}|{('core','test/native-cad-container/archive_oracle.py'),('desktop','test/agent-cad-corpus/sweep/signed-harness.mjs'),('desktop','test/agent-cad-corpus/strict-join/oracle.mjs'),('desktop','apps/system/jsketcher/examples/source-bound-blind-hole.mjs')}
  need(len(r['sourceSnapshots'])==len(roster) and {(x['repository'],x['relative']) for x in r['sourceSnapshots']}==roster,'exact source and transitive producer-helper roster');need(len(r['sourcePins'])==len(roster),'exact source pin roster')
  for row in r['sourceSnapshots']:
   raw=(directory/row['file']).read_bytes();need(len(raw)<=8388608 and sha(raw)==row['sha256']==r['sourcePins'][row['originalFile']],'exact executing source snapshot/pin');need(row['originalFile']==str(Path(row['root'])/row['relative']),'actual source path binding')
@@ -200,8 +200,14 @@ def check(directory):
   else:detail=svg(raw,e,r['definition'])
   artifacts.append({'file':row['savedFile'],'format':row['format'],'detail':detail})
  need([(x['name'],x['code']) for x in r['malformed']]==[('equal-depth','BLIND_DEPTH_NOT_INTERIOR'),('wrong-entry','BLIND_ENTRY_UNRESOLVED')],'exact malformed semantic roster')
- for row in r['malformed']:need(row['error']['code']==row['code'] and not row['error']['committed'] and not row['error']['possiblyCommitted'] and row['before']==row['after'],'typed pre-adoption negative preserves full host/path/dirty/J/material/drawing/parameter/source/resource state')
- return {'status':'PASS','scope':'finite semantic centered flat-bottom blind hole, not all C06 or general interchange','observations':len(r['observations']),'nativePoints':points,'refusals':len(r['refusals']),'archives':archives,'artifacts':artifacts,'sourceMmBudget':5e-8,'nativeVolumeMm3Budget':1e-6,'nativeBoundsMmBudget':1e-6,'nativeFloorNotMeshAuthority':True}
+ negative_proofs=[]
+ for row in r['malformed']:
+  need(row['negativeOnly'] is True and row['error']['code']==row['code'] and not row['error']['committed'] and not row['error']['possiblyCommitted'] and row['before']==row['after'],'typed pre-adoption negative preserves full host/path/dirty/J/material/drawing/parameter/source/resource state')
+  write=one([x for x in r['writes'] if x['kind']=='negative-fixture' and x['label']=='negative-'+row['name']],'actual unique submitted negative/readback')
+  need(write['file']==row['own'] and write['readback']['sha256']==row['sha256'],'public rejected path binds actual server-identical negative bytes')
+  file=directory/write['readback']['savedFile'];need(sha(file.read_bytes())==row['sha256'],'actual owned negative artifact')
+  proof=inspect_negative_archive(directory/r['saves'][1]['savedFile'],file,r,row['name'],negative_archive_api());need(proof==row['negativeProof'],'independent after-whole original/negative exact source/number/role/span/metadata/manifest difference proof');negative_proofs.append(proof)
+ return {'status':'PASS','scope':'finite semantic centered flat-bottom blind hole, not all C06 or general interchange','observations':len(r['observations']),'nativePoints':points,'refusals':len(r['refusals']),'archives':archives,'artifacts':artifacts,'negativeArchiveProofs':negative_proofs,'sourceMmBudget':5e-8,'nativeVolumeMm3Budget':1e-6,'nativeBoundsMmBudget':1e-6,'nativeFloorNotMeshAuthority':True}
 
 if __name__=='__main__':
  if len(sys.argv)>1 and sys.argv[1]=='make-bad':print(json.dumps(make_bad(sys.argv[2],sys.argv[3],sys.argv[4])));sys.exit(0)
