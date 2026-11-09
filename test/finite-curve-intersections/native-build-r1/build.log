@@ -1,0 +1,75 @@
++ set -euo pipefail
+++ realpath /mnt/data10tb/codi-occ-finite-curve-export-source-20261109
++ codi_profile_source=/mnt/data10tb/codi-occ-finite-curve-export-source-20261109
+++ realpath /mnt/data10tb/codi-occ-four-corner-clean-20261104/build/include/opencascade
++ codi_profile_include=/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/include/opencascade
+++ realpath /mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib
++ codi_profile_libraries=/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib
+++ realpath /mnt/data10tb/codi-occ-finite-curve-native-build-20261109-r1
++ codi_profile_output=/mnt/data10tb/codi-occ-finite-curve-native-build-20261109-r1
++ cd /mnt/data10tb/codi-occ-finite-curve-native-build-20261109-r1
++ em++ -I/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/occt/src/CommandInterpreter -I/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/include/opencascade -L/mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib -lTKTopTest -lTKBool -lTKBO -lTKBRep -lTKernel -lTKFeat -lTKFillet -lTKG2d -lTKG3d -lTKGeomAlgo -lTKGeomBase -lTKHLR -lTKMath -lTKMesh -lTKOffset -lTKPrim -lTKShHealing -lTKTopAlgo -lTKXSBase -lTKSTEPBase -lTKSTEPAttr -lTKSTEP209 -lTKSTEP /mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/main.cpp -o main.html -DIGNORE_NO_ATOMICS -DOCC_CONVERT_SIGNALS -DHAVE_LIMITS_H -DHAVE_IOSTREAM -DHAVE_IOMANIP -DNDEBUG -s ALLOW_MEMORY_GROWTH=1 -s WASM=1 -std=c++0x -Wall -Wextra -s LLD_REPORT_UNDEFINED -s ASSERTIONS=1 -s NO_DISABLE_EXCEPTION_CATCHING -s 'EXPORTED_RUNTIME_METHODS=['\''setValue'\'']' --extern-post-js /mnt/data10tb/codi-occ-finite-curve-export-source-20261109/scripts/call.js -ffile-prefix-map=/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io=/shape-io -ffile-prefix-map=/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/occt=/occt -ffile-prefix-map=/mnt/data10tb/codi-occ-four-corner-clean-20261104/build=/build -ffile-prefix-map=/mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk=/emsdk -O2
+In file included from /mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/main.cpp:6:
+In file included from /mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/interrogate.hpp:37:
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/data.hpp:384:28: warning: self-comparison always evaluates to false [-Wtautological-compare]
+          if (Internal.Int != Internal.Int) {
+                           ^
+In file included from /mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/main.cpp:6:
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/interrogate.hpp:97:49: warning: 'Triangles' is deprecated: Deprecated method, Triangle() should be used instead [-Wdeprecated-declarations]
+  const Poly_Array1OfTriangle& triangles = aTr->Triangles();  
+                                                ^
+/mnt/data10tb/codi-occ-four-corner-source-20261104/occt/src/Poly/Poly_Triangulation.hxx:317:3: note: 'Triangles' has been explicitly marked deprecated here
+  Standard_DEPRECATED("Deprecated method, Triangle() should be used instead")
+  ^
+/mnt/data10tb/codi-occ-four-corner-source-20261104/occt/src/Standard/Standard_Macro.hxx:154:54: note: expanded from macro 'Standard_DEPRECATED'
+  #define Standard_DEPRECATED(theMsg) __attribute__((deprecated(theMsg)))
+                                                     ^
+In file included from /mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/main.cpp:6:
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/interrogate.hpp:134:49: warning: 'Triangles' is deprecated: Deprecated method, Triangle() should be used instead [-Wdeprecated-declarations]
+  const Poly_Array1OfTriangle& triangles = aTr->Triangles();  
+                                                ^
+/mnt/data10tb/codi-occ-four-corner-source-20261104/occt/src/Poly/Poly_Triangulation.hxx:317:3: note: 'Triangles' has been explicitly marked deprecated here
+  Standard_DEPRECATED("Deprecated method, Triangle() should be used instead")
+  ^
+/mnt/data10tb/codi-occ-four-corner-source-20261104/occt/src/Standard/Standard_Macro.hxx:154:54: note: expanded from macro 'Standard_DEPRECATED'
+  #define Standard_DEPRECATED(theMsg) __attribute__((deprecated(theMsg)))
+                                                     ^
+In file included from /mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/main.cpp:8:
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/classify.hpp:64:51: warning: 'Triangles' is deprecated: Deprecated method, Triangle() should be used instead [-Wdeprecated-declarations]
+    const Poly_Array1OfTriangle& triangles = aTr->Triangles();  
+                                                  ^
+/mnt/data10tb/codi-occ-four-corner-source-20261104/occt/src/Poly/Poly_Triangulation.hxx:317:3: note: 'Triangles' has been explicitly marked deprecated here
+  Standard_DEPRECATED("Deprecated method, Triangle() should be used instead")
+  ^
+/mnt/data10tb/codi-occ-four-corner-source-20261104/occt/src/Standard/Standard_Macro.hxx:154:54: note: expanded from macro 'Standard_DEPRECATED'
+  #define Standard_DEPRECATED(theMsg) __attribute__((deprecated(theMsg)))
+                                                     ^
+In file included from /mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/main.cpp:9:
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/step.hpp:39:22: warning: unused variable 'i' [-Wunused-variable]
+    Standard_Integer i = 0;
+                     ^
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/step.hpp:17:25: warning: unused variable 'stat' [-Wunused-variable]
+  IFSelect_ReturnStatus stat = reader.ReadFile(fileName);
+                        ^
+In file included from /mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/main.cpp:32:
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/ownedCircularArrangementV1.hpp:209:518: warning: '&&' within '||' [-Wlogical-op-parentheses]
+inline std::string captureName(const char*value){const std::uintptr_t start=reinterpret_cast<std::uintptr_t>(value);const std::size_t size=emscripten_get_heap_size();require(value&&start<size,"CIRCULAR_INVALID_REQUEST");std::string name;for(unsigned i=0;i<=64;i++){require(i<size-start,"CIRCULAR_INVALID_REQUEST");const unsigned char c=*reinterpret_cast<const unsigned char*>(start+i);if(!c){require(!name.empty(),"CIRCULAR_INVALID_REQUEST");return name;}require(i<64&&((c>='a'&&c<='z')||(c>='A'&&c<='Z')||c=='_'||i>0&&((c>='0'&&c<='9')||c=='-')),"CIRCULAR_INVALID_REQUEST");name.push_back(char(c));}throw Error("CIRCULAR_INVALID_REQUEST");}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/ownedCircularArrangementV1.hpp:209:518: note: place parentheses around the '&&' expression to silence this warning
+inline std::string captureName(const char*value){const std::uintptr_t start=reinterpret_cast<std::uintptr_t>(value);const std::size_t size=emscripten_get_heap_size();require(value&&start<size,"CIRCULAR_INVALID_REQUEST");std::string name;for(unsigned i=0;i<=64;i++){require(i<size-start,"CIRCULAR_INVALID_REQUEST");const unsigned char c=*reinterpret_cast<const unsigned char*>(start+i);if(!c){require(!name.empty(),"CIRCULAR_INVALID_REQUEST");return name;}require(i<64&&((c>='a'&&c<='z')||(c>='A'&&c<='Z')||c=='_'||i>0&&((c>='0'&&c<='9')||c=='-')),"CIRCULAR_INVALID_REQUEST");name.push_back(char(c));}throw Error("CIRCULAR_INVALID_REQUEST");}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  (                              )
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/ownedCircularArrangementV1.hpp:218:202: warning: '&&' within '||' [-Wlogical-op-parentheses]
+ const auto inputUnchanged=[&](){return !captured||(memory(values,sizeof(double)*19)&&std::memcmp(values,input.raw.data(),sizeof(double)*19)==0&&(!owned||name.empty()||memory(namePointer,name.size()+1)&&std::memcmp(namePointer,name.c_str(),name.size()+1)==0));};
+                                                                                                                                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/ownedCircularArrangementV1.hpp:218:202: note: place parentheses around the '&&' expression to silence this warning
+ const auto inputUnchanged=[&](){return !captured||(memory(values,sizeof(double)*19)&&std::memcmp(values,input.raw.data(),sizeof(double)*19)==0&&(!owned||name.empty()||memory(namePointer,name.size()+1)&&std::memcmp(namePointer,name.c_str(),name.size()+1)==0));};
+                                                                                                                                                                                                         ^
+                                                                                                                                                                        (                                                                                        )
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/ownedCircularArrangementV1.hpp:223:85: warning: comparison of integers of different signs: 'size_t' (aka 'unsigned long') and 'const int' [-Wsign-compare]
+  stage=Stage::InputVerification;require(inputUnchanged()&&DBRep::OwnedNameCountV2()==before,"CIRCULAR_INPUT_CHANGED");stage=Stage::Publication;if(owned){require(DBRep::InsertOwnedNameV2(name.c_str(),allocation),"CIRCULAR_NAME_COLLISION");inserted=true;}
+                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~^ ~~~~~~
+/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/ownedCircularArrangementV1.hpp:224:171: warning: comparison of integers of different signs: 'size_t' (aka 'unsigned long') and 'int' [-Wsign-compare]
+  const bool published=publish(json);require(inputUnchanged(),"CIRCULAR_INPUT_CHANGED");require(published,"CIRCULAR_PUBLICATION_FAILED");require(DBRep::OwnedNameCountV2()==before+(owned?1:0)&&(!owned||named(name).IsEqual(allocation)),"CIRCULAR_INPUT_CHANGED");return 0;
+                                                                                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~^ ~~~~~~~~~~~~~~~~~~
+10 warnings generated.

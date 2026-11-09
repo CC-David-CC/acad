@@ -1,0 +1,605 @@
+{
+  "version": 1,
+  "status": "source-only-uncompiled-unexecuted",
+  "baselineCommit": "eea7128b329557984b87bcf1d4f4fb5a67862bd4",
+  "consolidatedMechanicalSourceCommit": "fc1654ee5d4471584073d4d8e3363d8c9b324566",
+  "newExport": {
+    "cName": "ReadFiniteCurveIntersectionsV1",
+    "emscriptenName": "_ReadFiniteCurveIntersectionsV1",
+    "returnType": "void",
+    "arguments": [
+      "const double* values",
+      "int count"
+    ],
+    "retention": "EMSCRIPTEN_KEEPALIVE",
+    "inputCapacityDoubles": 64,
+    "actualMaximumDoubles": 24,
+    "maximumRawPoints": 8,
+    "maximumResponseBytes": 65536,
+    "nativeResultShapes": 0,
+    "terminalThrow": "after private helper frame returns"
+  },
+  "translationUnit": "shape-io/main.cpp",
+  "sourceClosureScope": "local quoted include closure of the actual translation unit; SDK/toolchain separately captured at build; not linked ABI evidence",
+  "translationUnitLocalSourceClosure": [
+    {
+      "path": "shape-io/analyticV1.hpp",
+      "bytes": 2963,
+      "sha256": "1ae48331434643e688c9764866ef0c70eae1df7776622f3d9ff7ec521448751f",
+      "gitBlob": "104eb1b179141b5fe542594f57cd0af4558a371b"
+    },
+    {
+      "path": "shape-io/classify.hpp",
+      "bytes": 4673,
+      "sha256": "b8f1db97ffecea7812e7162ea229413a7c8ff0b714812de71952070c847ccf6f",
+      "gitBlob": "a27941ff5ae3784d0080b2286dbf9d288b172329"
+    },
+    {
+      "path": "shape-io/commonIO.hpp",
+      "bytes": 2202,
+      "sha256": "971cd33096853131fed510ffacb0d350805e1dbb73c48cf26c383ffc8cac53d9",
+      "gitBlob": "cbf97a8d20993a3194ba7e8f5bd5aaea1e4a47fd"
+    },
+    {
+      "path": "shape-io/curveIO.hpp",
+      "bytes": 3048,
+      "sha256": "c16893c6de4d3e7725ebc68dbfc5cb5ee6f4e257c003f6754fb10bc7c4cb86e9",
+      "gitBlob": "97f4e468048aa42006391e17b740a61011d6c7c4"
+    },
+    {
+      "path": "shape-io/data.hpp",
+      "bytes": 19064,
+      "sha256": "11298c963ecbd7b4309765e9bcc9e6ef83b3fd5f2ae62507f3300e51ff19b368",
+      "gitBlob": "c364f79cba86edcd4406946ed019464899c62954"
+    },
+    {
+      "path": "shape-io/drilledTopologyV1.hpp",
+      "bytes": 7588,
+      "sha256": "6e2b15e5d4415134705e73dd9cdc78482d8572d7b206641c2850efbaa8da4630",
+      "gitBlob": "f0a23933ecf691b7d8d776df3e4de76ea58845c3"
+    },
+    {
+      "path": "shape-io/edgeIO.hpp",
+      "bytes": 1715,
+      "sha256": "bb0548eada0b22b850065c14a0716ef324ffc0b1e93aa0309965aba9b5592223",
+      "gitBlob": "703da44d91a47682c9732397286e00b958d6c71e"
+    },
+    {
+      "path": "shape-io/finiteCurveIntersectionsV1.hpp",
+      "bytes": 12030,
+      "sha256": "8228887d4890218fefaf4516b8b9866e18be3a5a03ad4047051946a0b61a9f28",
+      "gitBlob": "039f2ae14ab8a85d8c9c8e156672647b177ba3e1"
+    },
+    {
+      "path": "shape-io/fourCornerTopologyV1.hpp",
+      "bytes": 2173,
+      "sha256": "c6359c6795b2e3af90abc3bb0c6673c180e1fef8ef467666cce7575b884ee2ae",
+      "gitBlob": "1cf336078dd635e4dd47a26982da3f260b262570"
+    },
+    {
+      "path": "shape-io/historyIO.hpp",
+      "bytes": 2008,
+      "sha256": "ab6808c91036f5e0aaf7efd253d3611736b3dcda72956e99f85ed783e8289726",
+      "gitBlob": "8e257f777ccaf0bdce8287e57de55c7adc32f86b"
+    },
+    {
+      "path": "shape-io/interrogate.hpp",
+      "bytes": 16610,
+      "sha256": "fb7c382c99234a811194dd5b44625d06667d170e8faae14bd206cd3325070010",
+      "gitBlob": "bcccb2abb01d34513a1a5615afd9e7794abc6a01"
+    },
+    {
+      "path": "shape-io/main.cpp",
+      "bytes": 22993,
+      "sha256": "5e857484b181b35165e62d6bd151bd1a6b4d7545c3892456ee667d14c9de8ea3",
+      "gitBlob": "425225358c1965eff3aafb506e0b105a1686c518"
+    },
+    {
+      "path": "shape-io/ownedBooleanHistoryV1.hpp",
+      "bytes": 14705,
+      "sha256": "ad6e08d373c6638375e550081bb665e5106e48e3e7dc3cd82d0b3a4adc7e45e6",
+      "gitBlob": "c9f55d55ccb77429076ac1b60ce6d43bed0c5a58"
+    },
+    {
+      "path": "shape-io/ownedCircularArrangementV1.hpp",
+      "bytes": 35722,
+      "sha256": "0f7d748f1c2d87ba4caa015614480ae94e3431c06788272a70b0f80cab140e0a",
+      "gitBlob": "767ccf053c44e443d796e0881ce66387aff63652"
+    },
+    {
+      "path": "shape-io/ownedConeTopologyV1.hpp",
+      "bytes": 8808,
+      "sha256": "465b473be1d0ed8ddc0c9382560944d8d3a882d1fb7f665a1dc08160f6677081",
+      "gitBlob": "6ae6816a995c9f0b23deadb1b9cdc8f00398a406"
+    },
+    {
+      "path": "shape-io/ownedConicalFrustumV1.hpp",
+      "bytes": 10045,
+      "sha256": "f1d1a0b0fa6748bb1995a6380f9e55b8c92e87b4c06351a31091e2a8d2348c11",
+      "gitBlob": "31c6852c6e2771385c0db484582c1ada1f539a75"
+    },
+    {
+      "path": "shape-io/ownedEdgeTreatmentV1.hpp",
+      "bytes": 7074,
+      "sha256": "5056292e410b7ad780d4fa7424f13c347825178e16ded1b574ca6750ead6d160",
+      "gitBlob": "dae2b62a2c36496e86c6346f325f5d85a91cb0d1"
+    },
+    {
+      "path": "shape-io/ownedLoftV1.hpp",
+      "bytes": 6893,
+      "sha256": "2796bb99e38f32bcc7c8cc111eac280d3a627a44308cbbfc5a9485615a357ee5",
+      "gitBlob": "75009c81095ac3bcabf022e5a50758c5641e4aa8"
+    },
+    {
+      "path": "shape-io/ownedManufacturingMeshFFIV1.hpp",
+      "bytes": 8277,
+      "sha256": "1408d3e410cc57e52799f85248a0b436e959397cf90c735d56837e0b7a1fafe0",
+      "gitBlob": "724b219dd091577de138562060897b1227954562"
+    },
+    {
+      "path": "shape-io/ownedManufacturingMeshV1.hpp",
+      "bytes": 20104,
+      "sha256": "600a5caf087ac408fd7718928e48cc77b8d954ba6410588e888e6b8e72e685d1",
+      "gitBlob": "b9e7abf23beda36399215aefaab97f9580d5843f"
+    },
+    {
+      "path": "shape-io/ownedMassPropertiesV1.hpp",
+      "bytes": 851,
+      "sha256": "e226cb6ead87bb37aa51ded1a7f0fa0e4c8d36fdca5508b81dda8e45fcbd63a8",
+      "gitBlob": "5f994944883ff5c5da5284dd914e11dc7d9ccaa5"
+    },
+    {
+      "path": "shape-io/ownedOrthographicReadFFIV1.hpp",
+      "bytes": 6831,
+      "sha256": "3f97e4d5e31317e41ea34cee1159507e49728b1904c3242ea671e89eba7e21a6",
+      "gitBlob": "6d62b289c55f6afe6396792a00bfc77ff432100d"
+    },
+    {
+      "path": "shape-io/ownedOrthographicReadV1.hpp",
+      "bytes": 9583,
+      "sha256": "4cd54defccceb55b665e8edff77efddda19bad09ff6ea8e31d6fe5824c9be856",
+      "gitBlob": "40862fa9de8eeea6f8ddeaf13f8be0509329806d"
+    },
+    {
+      "path": "shape-io/ownedRevolveV1.hpp",
+      "bytes": 7384,
+      "sha256": "c0831b49788b36b3c113b899de08fbebb5cd4da69b1e170ab27436f6c20f1db3",
+      "gitBlob": "3bd7b763122cbe59fca47add6f5b3d5592dec4fe"
+    },
+    {
+      "path": "shape-io/ownedShellFFIV1.hpp",
+      "bytes": 3836,
+      "sha256": "460eb432e90161f7c8f29f50acc8c539922527022de3ac91006ea863539ed0ae",
+      "gitBlob": "d04fbce0c581e844fdd2ca7e4fc205a02be03d29"
+    },
+    {
+      "path": "shape-io/ownedShellV1.hpp",
+      "bytes": 7355,
+      "sha256": "5eb37c235db5e08d719d1a74d923c7da1fbe337b7f3cf10937cd9968d0cadaf5",
+      "gitBlob": "831c2b397139d069a9671dd2424e2c95f936b6d3"
+    },
+    {
+      "path": "shape-io/ownedStepExportFFIV1.hpp",
+      "bytes": 7095,
+      "sha256": "80fed2667b6b6b15d06fbb0a5e8b1d35855d4ec49fc758e8c6cb97547ffb5461",
+      "gitBlob": "c8535d77c26eecb1533fe541a652e18622c3056c"
+    },
+    {
+      "path": "shape-io/ownedStepExportV1.hpp",
+      "bytes": 13856,
+      "sha256": "f53d1f0626aa720c60b666ff077d60c1c1f05eb3800a9745e0b34d1e2d93c4a4",
+      "gitBlob": "2c6d0a70ffa32500b6a6c30331c32a47e87f69aa"
+    },
+    {
+      "path": "shape-io/ownedSweepV1.hpp",
+      "bytes": 8949,
+      "sha256": "1ff8fc54a0ac71a5e0d8146e4a89824977e3e2b343e3b41ab493c7bfd69fd471",
+      "gitBlob": "2921d33acefe6fb235a47d888954e24db857e817"
+    },
+    {
+      "path": "shape-io/ownedTopologyV1.hpp",
+      "bytes": 9416,
+      "sha256": "6c4ea61ec8b9890bf20c713bdb058701ff2928bd6f76ff397d9179cff419943f",
+      "gitBlob": "34e31fcd779523c742d8ba03fc90db515d641d57"
+    },
+    {
+      "path": "shape-io/profilePrismProvenanceV1.hpp",
+      "bytes": 6116,
+      "sha256": "a7c803833b3657a74e80ab678a59d02af889beb6c055d911acf4a1f835a5e637",
+      "gitBlob": "f74661dd3a532276502e70b904e406cba276b070"
+    },
+    {
+      "path": "shape-io/selectedProfileV2.hpp",
+      "bytes": 11054,
+      "sha256": "1f09d137d9cf542b2ca0c5f8c82cae78b4e3f3a8bf3c66bd53b9728a0dbb1a2b",
+      "gitBlob": "c337187f6ad7b55eec9926876e0a3ef435e4debc"
+    },
+    {
+      "path": "shape-io/step.hpp",
+      "bytes": 1313,
+      "sha256": "f59ca11c4a9bb35e2d67ec4cc773c437d008695f9190cb23e47d0fdd9bd46653",
+      "gitBlob": "b97c8ad7bbb1aa24906bb2b2a8f2ee843ecd9905"
+    },
+    {
+      "path": "shape-io/surfaceIO.hpp",
+      "bytes": 3825,
+      "sha256": "8545fcd8513cb7d4e051471ba6b740520bc71f299ab8b38b4e95427c644c2313",
+      "gitBlob": "4b152f9ab7a1a962f815bbd50aaa7993d32c4b9e"
+    }
+  ],
+  "queryLocalHeaderClosure": [
+    {
+      "path": "shape-io/finiteCurveIntersectionsV1.hpp",
+      "bytes": 12030,
+      "sha256": "8228887d4890218fefaf4516b8b9866e18be3a5a03ad4047051946a0b61a9f28",
+      "gitBlob": "039f2ae14ab8a85d8c9c8e156672647b177ba3e1"
+    },
+    {
+      "path": "shape-io/ownedConeTopologyV1.hpp",
+      "bytes": 8808,
+      "sha256": "465b473be1d0ed8ddc0c9382560944d8d3a882d1fb7f665a1dc08160f6677081",
+      "gitBlob": "6ae6816a995c9f0b23deadb1b9cdc8f00398a406"
+    },
+    {
+      "path": "shape-io/selectedProfileV2.hpp",
+      "bytes": 11054,
+      "sha256": "1f09d137d9cf542b2ca0c5f8c82cae78b4e3f3a8bf3c66bd53b9728a0dbb1a2b",
+      "gitBlob": "c337187f6ad7b55eec9926876e0a3ef435e4debc"
+    },
+    {
+      "path": "shape-io/ownedTopologyV1.hpp",
+      "bytes": 9416,
+      "sha256": "6c4ea61ec8b9890bf20c713bdb058701ff2928bd6f76ff397d9179cff419943f",
+      "gitBlob": "34e31fcd779523c742d8ba03fc90db515d641d57"
+    },
+    {
+      "path": "shape-io/ownedMassPropertiesV1.hpp",
+      "bytes": 851,
+      "sha256": "e226cb6ead87bb37aa51ded1a7f0fa0e4c8d36fdca5508b81dda8e45fcbd63a8",
+      "gitBlob": "5f994944883ff5c5da5284dd914e11dc7d9ccaa5"
+    },
+    {
+      "path": "shape-io/profilePrismProvenanceV1.hpp",
+      "bytes": 6116,
+      "sha256": "a7c803833b3657a74e80ab678a59d02af889beb6c055d911acf4a1f835a5e637",
+      "gitBlob": "f74661dd3a532276502e70b904e406cba276b070"
+    }
+  ],
+  "sourceDeclaredKeepaliveExports": [
+    {
+      "cName": "ReadFiniteCurveIntersectionsV1",
+      "emscriptenName": "_ReadFiniteCurveIntersectionsV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "CreateOwnedConicalFrustumV1",
+      "emscriptenName": "_CreateOwnedConicalFrustumV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "ReadOwnedConeTopologyV1",
+      "emscriptenName": "_ReadOwnedConeTopologyV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "CreateOwnedLoftV1",
+      "emscriptenName": "_CreateOwnedLoftV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "CreateOwnedSweepV1",
+      "emscriptenName": "_CreateOwnedSweepV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "CreateOwnedRevolveV1",
+      "emscriptenName": "_CreateOwnedRevolveV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "ApplyOwnedBooleanHistoryV1",
+      "emscriptenName": "_ApplyOwnedBooleanHistoryV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "ApplyOwnedEdgeTreatmentV1",
+      "emscriptenName": "_ApplyOwnedEdgeTreatmentV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "ReadOwnedTopologyV1",
+      "emscriptenName": "_ReadOwnedTopologyV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "Interogate",
+      "emscriptenName": "_Interogate",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "InspectAnalyticV1",
+      "emscriptenName": "_InspectAnalyticV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "InspectTopologyCensusV1",
+      "emscriptenName": "_InspectTopologyCensusV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "InspectDrilledTopologyV1",
+      "emscriptenName": "_InspectDrilledTopologyV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "ResearchShapeType",
+      "emscriptenName": "_ResearchShapeType",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "ResearchFourCornerCut",
+      "emscriptenName": "_ResearchFourCornerCut",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "PerformDrilledCutV1",
+      "emscriptenName": "_PerformDrilledCutV1",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "GetProductionHistory",
+      "emscriptenName": "_GetProductionHistory",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "GetRef",
+      "emscriptenName": "_GetRef",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "ClassifyPointToFace",
+      "emscriptenName": "_ClassifyPointToFace",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "ClassifyFaceToFace",
+      "emscriptenName": "_ClassifyFaceToFace",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "ClassifyEdgeToFace",
+      "emscriptenName": "_ClassifyEdgeToFace",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "IsEdgesOverlap",
+      "emscriptenName": "_IsEdgesOverlap",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "UpdateTessellation",
+      "emscriptenName": "_UpdateTessellation",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "SetLocation",
+      "emscriptenName": "_SetLocation",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "AddLocation",
+      "emscriptenName": "_AddLocation",
+      "source": "shape-io/main.cpp"
+    },
+    {
+      "cName": "ReadCircularArrangementV1",
+      "emscriptenName": "_ReadCircularArrangementV1",
+      "source": "shape-io/ownedCircularArrangementV1.hpp"
+    },
+    {
+      "cName": "CreateOwnedCircularCellV1",
+      "emscriptenName": "_CreateOwnedCircularCellV1",
+      "source": "shape-io/ownedCircularArrangementV1.hpp"
+    },
+    {
+      "cName": "BeginOwnedManufacturingMeshV1",
+      "emscriptenName": "_BeginOwnedManufacturingMeshV1",
+      "source": "shape-io/ownedManufacturingMeshFFIV1.hpp"
+    },
+    {
+      "cName": "ReadOwnedManufacturingMeshV1",
+      "emscriptenName": "_ReadOwnedManufacturingMeshV1",
+      "source": "shape-io/ownedManufacturingMeshFFIV1.hpp"
+    },
+    {
+      "cName": "ReleaseOwnedManufacturingMeshV1",
+      "emscriptenName": "_ReleaseOwnedManufacturingMeshV1",
+      "source": "shape-io/ownedManufacturingMeshFFIV1.hpp"
+    },
+    {
+      "cName": "BeginOwnedOrthographicReadV1",
+      "emscriptenName": "_BeginOwnedOrthographicReadV1",
+      "source": "shape-io/ownedOrthographicReadFFIV1.hpp"
+    },
+    {
+      "cName": "ReadOwnedOrthographicReadV1",
+      "emscriptenName": "_ReadOwnedOrthographicReadV1",
+      "source": "shape-io/ownedOrthographicReadFFIV1.hpp"
+    },
+    {
+      "cName": "ReleaseOwnedOrthographicReadV1",
+      "emscriptenName": "_ReleaseOwnedOrthographicReadV1",
+      "source": "shape-io/ownedOrthographicReadFFIV1.hpp"
+    },
+    {
+      "cName": "CreateOwnedBoxWithFacesV1",
+      "emscriptenName": "_CreateOwnedBoxWithFacesV1",
+      "source": "shape-io/ownedShellFFIV1.hpp"
+    },
+    {
+      "cName": "ApplyOwnedShellV1",
+      "emscriptenName": "_ApplyOwnedShellV1",
+      "source": "shape-io/ownedShellFFIV1.hpp"
+    },
+    {
+      "cName": "BeginOwnedStepExportV1",
+      "emscriptenName": "_BeginOwnedStepExportV1",
+      "source": "shape-io/ownedStepExportFFIV1.hpp"
+    },
+    {
+      "cName": "ReadOwnedStepExportV1",
+      "emscriptenName": "_ReadOwnedStepExportV1",
+      "source": "shape-io/ownedStepExportFFIV1.hpp"
+    },
+    {
+      "cName": "ReleaseOwnedStepExportV1",
+      "emscriptenName": "_ReleaseOwnedStepExportV1",
+      "source": "shape-io/ownedStepExportFFIV1.hpp"
+    },
+    {
+      "cName": "CreateSelectedProfileV2",
+      "emscriptenName": "_CreateSelectedProfileV2",
+      "source": "shape-io/selectedProfileV2.hpp"
+    },
+    {
+      "cName": "CreateSelectedProfileV3",
+      "emscriptenName": "_CreateSelectedProfileV3",
+      "source": "shape-io/selectedProfileV2.hpp"
+    },
+    {
+      "cName": "InspectOwnedSolidV2",
+      "emscriptenName": "_InspectOwnedSolidV2",
+      "source": "shape-io/selectedProfileV2.hpp"
+    },
+    {
+      "cName": "ReleaseOwnedShapeV2",
+      "emscriptenName": "_ReleaseOwnedShapeV2",
+      "source": "shape-io/selectedProfileV2.hpp"
+    },
+    {
+      "cName": "OwnedShapeNamesV2",
+      "emscriptenName": "_OwnedShapeNamesV2",
+      "source": "shape-io/selectedProfileV2.hpp"
+    },
+    {
+      "cName": "ClassifyOwnedPointV2",
+      "emscriptenName": "_ClassifyOwnedPointV2",
+      "source": "shape-io/selectedProfileV2.hpp"
+    },
+    {
+      "cName": "ReadOwnedMeshV2",
+      "emscriptenName": "_ReadOwnedMeshV2",
+      "source": "shape-io/selectedProfileV2.hpp"
+    },
+    {
+      "cName": "ImportStepFile",
+      "emscriptenName": "_ImportStepFile",
+      "source": "shape-io/step.hpp"
+    }
+  ],
+  "exportInventoryScope": "source-declared keepalive functions only; actual final linker exports require the later normal build",
+  "normalBuildInputs": [
+    {
+      "path": "scripts/build-selected-profile-v2.sh",
+      "bytes": 1289,
+      "sha256": "9abb996bb9bb8cac31580c08867ad2ec9a062e65ca3b50c91e07bc93cb45f878",
+      "gitBlob": "06af94809ba8fec1915c505d57b64f32ed16bd73"
+    },
+    {
+      "path": "scripts/call.js",
+      "bytes": 1046,
+      "sha256": "3c7db216a9ffabba8307d65f2cac6698e5f77721d097bde8e857238bdb1769b2",
+      "gitBlob": "0089ecd48a62eeb5f9636bfafa124b93ff530045"
+    },
+    {
+      "path": "occt/src/CommandInterpreter/DBRep.hxx",
+      "bytes": 4855,
+      "sha256": "4d41b0f2a6df9526531aa88b7fa58818a1f18e5951a65ef850f132823770e4fe",
+      "gitBlob": "4b322dc397141a02d9f01a310ae6bce2bbcbf82a"
+    },
+    {
+      "path": "occt/src/TKGeomBase/PACKAGES",
+      "bytes": 182,
+      "sha256": "301d68b8d76e3a201fc1912f4e19717fb3facbd46bfd2d6b7d25f62d679b9334",
+      "gitBlob": "15f92f394b0e994ee1d24426a729c10a8afa1550"
+    },
+    {
+      "path": "occt/src/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "bytes": 5286,
+      "sha256": "8591ec3a735413750495fbe8066ef0afc16e4ad2cd401b0e2f8a331c039bcddf",
+      "gitBlob": "d35d9c974a266d7e8b8ff4d999a87f8e5b3f6995"
+    },
+    {
+      "path": "occt/src/IntAna2d/IntAna2d_IntPoint.hxx",
+      "bytes": 2915,
+      "sha256": "e5711c9ad176e371843555cb8408e5a2a0c1151701ee2ff1ff77c1844c79e9c5",
+      "gitBlob": "216514c3e7942e23c602a307f1e63730f7b9d7cd"
+    },
+    {
+      "path": "occt/src/CommandInterpreter/Draw.cxx",
+      "bytes": 6181,
+      "sha256": "144cafe7e3e0604dba8aaa7b8ee85fe8670724a6dd1f7216df010cb4fe0d439f",
+      "gitBlob": "c8c74f0581a09530afcb7b2d2a33e412ef538b41"
+    },
+    {
+      "path": "occt/src/IntAna2d/IntAna2d_AnaIntersection.cxx",
+      "bytes": 2207,
+      "sha256": "ffa1458c47f4f493c8d05138394ddc07c2b2fc04c6af33acf64df8ca8fee58b0",
+      "gitBlob": "b645b3361d55d43e83c0d96be08c6cc737c90ff6"
+    },
+    {
+      "path": "occt/src/IntAna2d/IntAna2d_AnaIntersection.lxx",
+      "bytes": 1703,
+      "sha256": "f9cc51a0278b7dd4076235c22d2006a970b8523917a4bfc9914eddd2a80d16d7",
+      "gitBlob": "5da53cfb86b2bcb7a3d7ec90f5d781929e527183"
+    }
+  ],
+  "sdk": "retained /mnt/data10tb/codi-occ-four-corner-clean-20261104; build must independently capture actual include/archive/toolchain bytes",
+  "unchangedBuildPolicy": "existing23TK archives and KEEPALIVE retention; no EXPORTED_FUNCTIONS replacement or EXPORTED_RUNTIME_METHODS change",
+  "runtimeIdentity": "none; no JS/WASM generated, inferred or aliased",
+  "retainedArchiveSourceKeepaliveExports": [
+    {
+      "cName": "InitCommands",
+      "emscriptenName": "_InitCommands",
+      "source": "occt/src/CommandInterpreter/Draw.cxx",
+      "linkedArchive": "TKTopTest"
+    },
+    {
+      "cName": "CallCommand",
+      "emscriptenName": "_CallCommand",
+      "source": "occt/src/CommandInterpreter/Draw.cxx",
+      "linkedArchive": "TKTopTest"
+    },
+    {
+      "cName": "GenerateTypescriptInterface",
+      "emscriptenName": "_GenerateTypescriptInterface",
+      "source": "occt/src/CommandInterpreter/Draw.cxx",
+      "linkedArchive": "TKTopTest"
+    }
+  ],
+  "linkedTkArchives": [
+    "TKTopTest",
+    "TKBool",
+    "TKBO",
+    "TKBRep",
+    "TKernel",
+    "TKFeat",
+    "TKFillet",
+    "TKG2d",
+    "TKG3d",
+    "TKGeomAlgo",
+    "TKGeomBase",
+    "TKHLR",
+    "TKMath",
+    "TKMesh",
+    "TKOffset",
+    "TKPrim",
+    "TKShHealing",
+    "TKTopAlgo",
+    "TKXSBase",
+    "TKSTEPBase",
+    "TKSTEPAttr",
+    "TKSTEP209",
+    "TKSTEP"
+  ]
+}

@@ -1,0 +1,1824 @@
+{
+  "scope": "static compiled ABI inventory only; no JS/WASM/Native execution",
+  "runtimeExecuted": false,
+  "status": "PASS",
+  "meaning": "static expected symbol/type declarations found; not functional qualification",
+  "rawJS": {
+    "bytes": 316580,
+    "sha256": "5f1730c347eb3edeb8b6d5e06eeeedcdf04b2348aac0c92b04001bd5edd5b7de"
+  },
+  "rawWASM": {
+    "bytes": 36216184,
+    "sha256": "746da919c8457e98daa821fae98c62c0a6c9ad1acafd1c3d5412e0207d6b6325"
+  },
+  "sourceDeclaredFunctions": 49,
+  "bindings": [
+    {
+      "cName": "ReadFiniteCurveIntersectionsV1",
+      "moduleName": "_ReadFiniteCurveIntersectionsV1",
+      "jsSourceExcerpt": "Module[\"_ReadFiniteCurveIntersectionsV1\"]=createExportWrapper(\"ReadFiniteCurveIntersectionsV1\")",
+      "wasm": {
+        "name": "ReadFiniteCurveIntersectionsV1",
+        "kind": 0,
+        "index": 29283,
+        "parameters": [
+          "i32",
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "CreateOwnedConicalFrustumV1",
+      "moduleName": "_CreateOwnedConicalFrustumV1",
+      "jsSourceExcerpt": "Module[\"_CreateOwnedConicalFrustumV1\"]=createExportWrapper(\"CreateOwnedConicalFrustumV1\")",
+      "wasm": {
+        "name": "CreateOwnedConicalFrustumV1",
+        "kind": 0,
+        "index": 29291,
+        "parameters": [
+          "i32",
+          "i32",
+          "f64",
+          "f64",
+          "f64"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "ReadOwnedConeTopologyV1",
+      "moduleName": "_ReadOwnedConeTopologyV1",
+      "jsSourceExcerpt": "Module[\"_ReadOwnedConeTopologyV1\"]=createExportWrapper(\"ReadOwnedConeTopologyV1\")",
+      "wasm": {
+        "name": "ReadOwnedConeTopologyV1",
+        "kind": 0,
+        "index": 29302,
+        "parameters": [
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "CreateOwnedLoftV1",
+      "moduleName": "_CreateOwnedLoftV1",
+      "jsSourceExcerpt": "Module[\"_CreateOwnedLoftV1\"]=createExportWrapper(\"CreateOwnedLoftV1\")",
+      "wasm": {
+        "name": "CreateOwnedLoftV1",
+        "kind": 0,
+        "index": 29305,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32",
+          "i32",
+          "i32",
+          "i32",
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "CreateOwnedSweepV1",
+      "moduleName": "_CreateOwnedSweepV1",
+      "jsSourceExcerpt": "Module[\"_CreateOwnedSweepV1\"]=createExportWrapper(\"CreateOwnedSweepV1\")",
+      "wasm": {
+        "name": "CreateOwnedSweepV1",
+        "kind": 0,
+        "index": 29316,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32",
+          "i32",
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "CreateOwnedRevolveV1",
+      "moduleName": "_CreateOwnedRevolveV1",
+      "jsSourceExcerpt": "Module[\"_CreateOwnedRevolveV1\"]=createExportWrapper(\"CreateOwnedRevolveV1\")",
+      "wasm": {
+        "name": "CreateOwnedRevolveV1",
+        "kind": 0,
+        "index": 29325,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32",
+          "f64",
+          "f64",
+          "f64",
+          "f64",
+          "f64",
+          "f64",
+          "f64"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "ApplyOwnedBooleanHistoryV1",
+      "moduleName": "_ApplyOwnedBooleanHistoryV1",
+      "jsSourceExcerpt": "Module[\"_ApplyOwnedBooleanHistoryV1\"]=createExportWrapper(\"ApplyOwnedBooleanHistoryV1\")",
+      "wasm": {
+        "name": "ApplyOwnedBooleanHistoryV1",
+        "kind": 0,
+        "index": 29332,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32",
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "ApplyOwnedEdgeTreatmentV1",
+      "moduleName": "_ApplyOwnedEdgeTreatmentV1",
+      "jsSourceExcerpt": "Module[\"_ApplyOwnedEdgeTreatmentV1\"]=createExportWrapper(\"ApplyOwnedEdgeTreatmentV1\")",
+      "wasm": {
+        "name": "ApplyOwnedEdgeTreatmentV1",
+        "kind": 0,
+        "index": 29340,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32",
+          "i32",
+          "i32",
+          "f64"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "ReadOwnedTopologyV1",
+      "moduleName": "_ReadOwnedTopologyV1",
+      "jsSourceExcerpt": "Module[\"_ReadOwnedTopologyV1\"]=createExportWrapper(\"ReadOwnedTopologyV1\")",
+      "wasm": {
+        "name": "ReadOwnedTopologyV1",
+        "kind": 0,
+        "index": 29346,
+        "parameters": [
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "Interogate",
+      "moduleName": "_Interogate",
+      "jsSourceExcerpt": "Module[\"_Interogate\"]=createExportWrapper(\"Interogate\")",
+      "wasm": {
+        "name": "Interogate",
+        "kind": 0,
+        "index": 29349,
+        "parameters": [
+          "i32",
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "InspectAnalyticV1",
+      "moduleName": "_InspectAnalyticV1",
+      "jsSourceExcerpt": "Module[\"_InspectAnalyticV1\"]=createExportWrapper(\"InspectAnalyticV1\")",
+      "wasm": {
+        "name": "InspectAnalyticV1",
+        "kind": 0,
+        "index": 29350,
+        "parameters": [
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "InspectTopologyCensusV1",
+      "moduleName": "_InspectTopologyCensusV1",
+      "jsSourceExcerpt": "Module[\"_InspectTopologyCensusV1\"]=createExportWrapper(\"InspectTopologyCensusV1\")",
+      "wasm": {
+        "name": "InspectTopologyCensusV1",
+        "kind": 0,
+        "index": 29353,
+        "parameters": [
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "InspectDrilledTopologyV1",
+      "moduleName": "_InspectDrilledTopologyV1",
+      "jsSourceExcerpt": "Module[\"_InspectDrilledTopologyV1\"]=createExportWrapper(\"InspectDrilledTopologyV1\")",
+      "wasm": {
+        "name": "InspectDrilledTopologyV1",
+        "kind": 0,
+        "index": 29358,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "ResearchShapeType",
+      "moduleName": "_ResearchShapeType",
+      "jsSourceExcerpt": "Module[\"_ResearchShapeType\"]=createExportWrapper(\"ResearchShapeType\")",
+      "wasm": {
+        "name": "ResearchShapeType",
+        "kind": 0,
+        "index": 29361,
+        "parameters": [
+          "i32"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ResearchFourCornerCut",
+      "moduleName": "_ResearchFourCornerCut",
+      "jsSourceExcerpt": "Module[\"_ResearchFourCornerCut\"]=createExportWrapper(\"ResearchFourCornerCut\")",
+      "wasm": {
+        "name": "ResearchFourCornerCut",
+        "kind": 0,
+        "index": 29362,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32",
+          "i32",
+          "i32",
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "PerformDrilledCutV1",
+      "moduleName": "_PerformDrilledCutV1",
+      "jsSourceExcerpt": "Module[\"_PerformDrilledCutV1\"]=createExportWrapper(\"PerformDrilledCutV1\")",
+      "wasm": {
+        "name": "PerformDrilledCutV1",
+        "kind": 0,
+        "index": 29367,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "GetProductionHistory",
+      "moduleName": "_GetProductionHistory",
+      "jsSourceExcerpt": "Module[\"_GetProductionHistory\"]=createExportWrapper(\"GetProductionHistory\")",
+      "wasm": {
+        "name": "GetProductionHistory",
+        "kind": 0,
+        "index": 29368,
+        "parameters": [],
+        "results": []
+      }
+    },
+    {
+      "cName": "GetRef",
+      "moduleName": "_GetRef",
+      "jsSourceExcerpt": "Module[\"_GetRef\"]=createExportWrapper(\"GetRef\")",
+      "wasm": {
+        "name": "GetRef",
+        "kind": 0,
+        "index": 29369,
+        "parameters": [
+          "i32"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ClassifyPointToFace",
+      "moduleName": "_ClassifyPointToFace",
+      "jsSourceExcerpt": "Module[\"_ClassifyPointToFace\"]=createExportWrapper(\"ClassifyPointToFace\")",
+      "wasm": {
+        "name": "ClassifyPointToFace",
+        "kind": 0,
+        "index": 29370,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32",
+          "i32",
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ClassifyFaceToFace",
+      "moduleName": "_ClassifyFaceToFace",
+      "jsSourceExcerpt": "Module[\"_ClassifyFaceToFace\"]=createExportWrapper(\"ClassifyFaceToFace\")",
+      "wasm": {
+        "name": "ClassifyFaceToFace",
+        "kind": 0,
+        "index": 29371,
+        "parameters": [
+          "i32",
+          "i32",
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ClassifyEdgeToFace",
+      "moduleName": "_ClassifyEdgeToFace",
+      "jsSourceExcerpt": "Module[\"_ClassifyEdgeToFace\"]=createExportWrapper(\"ClassifyEdgeToFace\")",
+      "wasm": {
+        "name": "ClassifyEdgeToFace",
+        "kind": 0,
+        "index": 29372,
+        "parameters": [
+          "i32",
+          "i32",
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "IsEdgesOverlap",
+      "moduleName": "_IsEdgesOverlap",
+      "jsSourceExcerpt": "Module[\"_IsEdgesOverlap\"]=createExportWrapper(\"IsEdgesOverlap\")",
+      "wasm": {
+        "name": "IsEdgesOverlap",
+        "kind": 0,
+        "index": 29373,
+        "parameters": [
+          "i32",
+          "i32",
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "UpdateTessellation",
+      "moduleName": "_UpdateTessellation",
+      "jsSourceExcerpt": "Module[\"_UpdateTessellation\"]=createExportWrapper(\"UpdateTessellation\")",
+      "wasm": {
+        "name": "UpdateTessellation",
+        "kind": 0,
+        "index": 29374,
+        "parameters": [
+          "i32",
+          "f64"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "SetLocation",
+      "moduleName": "_SetLocation",
+      "jsSourceExcerpt": "Module[\"_SetLocation\"]=createExportWrapper(\"SetLocation\")",
+      "wasm": {
+        "name": "SetLocation",
+        "kind": 0,
+        "index": 29375,
+        "parameters": [
+          "i32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "AddLocation",
+      "moduleName": "_AddLocation",
+      "jsSourceExcerpt": "Module[\"_AddLocation\"]=createExportWrapper(\"AddLocation\")",
+      "wasm": {
+        "name": "AddLocation",
+        "kind": 0,
+        "index": 29378,
+        "parameters": [
+          "i32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32",
+          "f32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "ReadCircularArrangementV1",
+      "moduleName": "_ReadCircularArrangementV1",
+      "jsSourceExcerpt": "Module[\"_ReadCircularArrangementV1\"]=createExportWrapper(\"ReadCircularArrangementV1\")",
+      "wasm": {
+        "name": "ReadCircularArrangementV1",
+        "kind": 0,
+        "index": 29266,
+        "parameters": [
+          "i32",
+          "i32"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "CreateOwnedCircularCellV1",
+      "moduleName": "_CreateOwnedCircularCellV1",
+      "jsSourceExcerpt": "Module[\"_CreateOwnedCircularCellV1\"]=createExportWrapper(\"CreateOwnedCircularCellV1\")",
+      "wasm": {
+        "name": "CreateOwnedCircularCellV1",
+        "kind": 0,
+        "index": 29282,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32",
+          "f64",
+          "i32"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "BeginOwnedManufacturingMeshV1",
+      "moduleName": "_BeginOwnedManufacturingMeshV1",
+      "jsSourceExcerpt": "Module[\"_BeginOwnedManufacturingMeshV1\"]=createExportWrapper(\"BeginOwnedManufacturingMeshV1\")",
+      "wasm": {
+        "name": "BeginOwnedManufacturingMeshV1",
+        "kind": 0,
+        "index": 29226,
+        "parameters": [
+          "f64",
+          "f64",
+          "f64",
+          "f64",
+          "f64",
+          "f64",
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ReadOwnedManufacturingMeshV1",
+      "moduleName": "_ReadOwnedManufacturingMeshV1",
+      "jsSourceExcerpt": "Module[\"_ReadOwnedManufacturingMeshV1\"]=createExportWrapper(\"ReadOwnedManufacturingMeshV1\")",
+      "wasm": {
+        "name": "ReadOwnedManufacturingMeshV1",
+        "kind": 0,
+        "index": 29244,
+        "parameters": [
+          "f64",
+          "f64",
+          "f64",
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ReleaseOwnedManufacturingMeshV1",
+      "moduleName": "_ReleaseOwnedManufacturingMeshV1",
+      "jsSourceExcerpt": "Module[\"_ReleaseOwnedManufacturingMeshV1\"]=createExportWrapper(\"ReleaseOwnedManufacturingMeshV1\")",
+      "wasm": {
+        "name": "ReleaseOwnedManufacturingMeshV1",
+        "kind": 0,
+        "index": 29245,
+        "parameters": [
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "BeginOwnedOrthographicReadV1",
+      "moduleName": "_BeginOwnedOrthographicReadV1",
+      "jsSourceExcerpt": "Module[\"_BeginOwnedOrthographicReadV1\"]=createExportWrapper(\"BeginOwnedOrthographicReadV1\")",
+      "wasm": {
+        "name": "BeginOwnedOrthographicReadV1",
+        "kind": 0,
+        "index": 29208,
+        "parameters": [
+          "f64",
+          "f64",
+          "f64",
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ReadOwnedOrthographicReadV1",
+      "moduleName": "_ReadOwnedOrthographicReadV1",
+      "jsSourceExcerpt": "Module[\"_ReadOwnedOrthographicReadV1\"]=createExportWrapper(\"ReadOwnedOrthographicReadV1\")",
+      "wasm": {
+        "name": "ReadOwnedOrthographicReadV1",
+        "kind": 0,
+        "index": 29224,
+        "parameters": [
+          "f64",
+          "f64",
+          "f64",
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ReleaseOwnedOrthographicReadV1",
+      "moduleName": "_ReleaseOwnedOrthographicReadV1",
+      "jsSourceExcerpt": "Module[\"_ReleaseOwnedOrthographicReadV1\"]=createExportWrapper(\"ReleaseOwnedOrthographicReadV1\")",
+      "wasm": {
+        "name": "ReleaseOwnedOrthographicReadV1",
+        "kind": 0,
+        "index": 29225,
+        "parameters": [
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "CreateOwnedBoxWithFacesV1",
+      "moduleName": "_CreateOwnedBoxWithFacesV1",
+      "jsSourceExcerpt": "Module[\"_CreateOwnedBoxWithFacesV1\"]=createExportWrapper(\"CreateOwnedBoxWithFacesV1\")",
+      "wasm": {
+        "name": "CreateOwnedBoxWithFacesV1",
+        "kind": 0,
+        "index": 29246,
+        "parameters": [
+          "i32",
+          "f64",
+          "f64",
+          "f64",
+          "f64",
+          "f64",
+          "f64"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "ApplyOwnedShellV1",
+      "moduleName": "_ApplyOwnedShellV1",
+      "jsSourceExcerpt": "Module[\"_ApplyOwnedShellV1\"]=createExportWrapper(\"ApplyOwnedShellV1\")",
+      "wasm": {
+        "name": "ApplyOwnedShellV1",
+        "kind": 0,
+        "index": 29257,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32",
+          "i32",
+          "f64"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "BeginOwnedStepExportV1",
+      "moduleName": "_BeginOwnedStepExportV1",
+      "jsSourceExcerpt": "Module[\"_BeginOwnedStepExportV1\"]=createExportWrapper(\"BeginOwnedStepExportV1\")",
+      "wasm": {
+        "name": "BeginOwnedStepExportV1",
+        "kind": 0,
+        "index": 29184,
+        "parameters": [
+          "f64",
+          "f64",
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ReadOwnedStepExportV1",
+      "moduleName": "_ReadOwnedStepExportV1",
+      "jsSourceExcerpt": "Module[\"_ReadOwnedStepExportV1\"]=createExportWrapper(\"ReadOwnedStepExportV1\")",
+      "wasm": {
+        "name": "ReadOwnedStepExportV1",
+        "kind": 0,
+        "index": 29205,
+        "parameters": [
+          "f64",
+          "f64",
+          "f64",
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ReleaseOwnedStepExportV1",
+      "moduleName": "_ReleaseOwnedStepExportV1",
+      "jsSourceExcerpt": "Module[\"_ReleaseOwnedStepExportV1\"]=createExportWrapper(\"ReleaseOwnedStepExportV1\")",
+      "wasm": {
+        "name": "ReleaseOwnedStepExportV1",
+        "kind": 0,
+        "index": 29207,
+        "parameters": [
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "CreateSelectedProfileV2",
+      "moduleName": "_CreateSelectedProfileV2",
+      "jsSourceExcerpt": "Module[\"_CreateSelectedProfileV2\"]=createExportWrapper(\"CreateSelectedProfileV2\")",
+      "wasm": {
+        "name": "CreateSelectedProfileV2",
+        "kind": 0,
+        "index": 29160,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "CreateSelectedProfileV3",
+      "moduleName": "_CreateSelectedProfileV3",
+      "jsSourceExcerpt": "Module[\"_CreateSelectedProfileV3\"]=createExportWrapper(\"CreateSelectedProfileV3\")",
+      "wasm": {
+        "name": "CreateSelectedProfileV3",
+        "kind": 0,
+        "index": 29174,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "InspectOwnedSolidV2",
+      "moduleName": "_InspectOwnedSolidV2",
+      "jsSourceExcerpt": "Module[\"_InspectOwnedSolidV2\"]=createExportWrapper(\"InspectOwnedSolidV2\")",
+      "wasm": {
+        "name": "InspectOwnedSolidV2",
+        "kind": 0,
+        "index": 29175,
+        "parameters": [
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "ReleaseOwnedShapeV2",
+      "moduleName": "_ReleaseOwnedShapeV2",
+      "jsSourceExcerpt": "Module[\"_ReleaseOwnedShapeV2\"]=createExportWrapper(\"ReleaseOwnedShapeV2\")",
+      "wasm": {
+        "name": "ReleaseOwnedShapeV2",
+        "kind": 0,
+        "index": 29177,
+        "parameters": [
+          "i32"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "OwnedShapeNamesV2",
+      "moduleName": "_OwnedShapeNamesV2",
+      "jsSourceExcerpt": "Module[\"_OwnedShapeNamesV2\"]=createExportWrapper(\"OwnedShapeNamesV2\")",
+      "wasm": {
+        "name": "OwnedShapeNamesV2",
+        "kind": 0,
+        "index": 29180,
+        "parameters": [],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ClassifyOwnedPointV2",
+      "moduleName": "_ClassifyOwnedPointV2",
+      "jsSourceExcerpt": "Module[\"_ClassifyOwnedPointV2\"]=createExportWrapper(\"ClassifyOwnedPointV2\")",
+      "wasm": {
+        "name": "ClassifyOwnedPointV2",
+        "kind": 0,
+        "index": 29181,
+        "parameters": [
+          "i32",
+          "f64",
+          "f64",
+          "f64"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "ReadOwnedMeshV2",
+      "moduleName": "_ReadOwnedMeshV2",
+      "jsSourceExcerpt": "Module[\"_ReadOwnedMeshV2\"]=createExportWrapper(\"ReadOwnedMeshV2\")",
+      "wasm": {
+        "name": "ReadOwnedMeshV2",
+        "kind": 0,
+        "index": 29183,
+        "parameters": [
+          "i32"
+        ],
+        "results": []
+      }
+    },
+    {
+      "cName": "ImportStepFile",
+      "moduleName": "_ImportStepFile",
+      "jsSourceExcerpt": "Module[\"_ImportStepFile\"]=createExportWrapper(\"ImportStepFile\")",
+      "wasm": {
+        "name": "ImportStepFile",
+        "kind": 0,
+        "index": 29156,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "InitCommands",
+      "moduleName": "_InitCommands",
+      "jsSourceExcerpt": "Module[\"_InitCommands\"]=createExportWrapper(\"InitCommands\")",
+      "wasm": {
+        "name": "InitCommands",
+        "kind": 0,
+        "index": 28505,
+        "parameters": [],
+        "results": []
+      }
+    },
+    {
+      "cName": "CallCommand",
+      "moduleName": "_CallCommand",
+      "jsSourceExcerpt": "Module[\"_CallCommand\"]=createExportWrapper(\"CallCommand\")",
+      "wasm": {
+        "name": "CallCommand",
+        "kind": 0,
+        "index": 28510,
+        "parameters": [
+          "i32",
+          "i32",
+          "i32"
+        ],
+        "results": [
+          "i32"
+        ]
+      }
+    },
+    {
+      "cName": "GenerateTypescriptInterface",
+      "moduleName": "_GenerateTypescriptInterface",
+      "jsSourceExcerpt": "Module[\"_GenerateTypescriptInterface\"]=createExportWrapper(\"GenerateTypescriptInterface\")",
+      "wasm": {
+        "name": "GenerateTypescriptInterface",
+        "kind": 0,
+        "index": 28511,
+        "parameters": [],
+        "results": []
+      }
+    }
+  ],
+  "allStaticExports": [
+    {
+      "name": "memory",
+      "kind": 2,
+      "index": 0
+    },
+    {
+      "name": "__wasm_call_ctors",
+      "kind": 0,
+      "index": 590,
+      "parameters": [],
+      "results": []
+    },
+    {
+      "name": "InitCommands",
+      "kind": 0,
+      "index": 28505,
+      "parameters": [],
+      "results": []
+    },
+    {
+      "name": "CallCommand",
+      "kind": 0,
+      "index": 28510,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "GenerateTypescriptInterface",
+      "kind": 0,
+      "index": 28511,
+      "parameters": [],
+      "results": []
+    },
+    {
+      "name": "main",
+      "kind": 0,
+      "index": 691,
+      "parameters": [
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "malloc",
+      "kind": 0,
+      "index": 30573,
+      "parameters": [
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "free",
+      "kind": 0,
+      "index": 30574,
+      "parameters": [
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "__errno_location",
+      "kind": 0,
+      "index": 29748,
+      "parameters": [],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "__indirect_function_table",
+      "kind": 1,
+      "index": 0
+    },
+    {
+      "name": "saveSetjmp",
+      "kind": 0,
+      "index": 29806,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ImportStepFile",
+      "kind": 0,
+      "index": 29156,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "fflush",
+      "kind": 0,
+      "index": 29681,
+      "parameters": [
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "CreateSelectedProfileV2",
+      "kind": 0,
+      "index": 29160,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "CreateSelectedProfileV3",
+      "kind": 0,
+      "index": 29174,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "InspectOwnedSolidV2",
+      "kind": 0,
+      "index": 29175,
+      "parameters": [
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "ReleaseOwnedShapeV2",
+      "kind": 0,
+      "index": 29177,
+      "parameters": [
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "OwnedShapeNamesV2",
+      "kind": 0,
+      "index": 29180,
+      "parameters": [],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ClassifyOwnedPointV2",
+      "kind": 0,
+      "index": 29181,
+      "parameters": [
+        "i32",
+        "f64",
+        "f64",
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ReadOwnedMeshV2",
+      "kind": 0,
+      "index": 29183,
+      "parameters": [
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "BeginOwnedStepExportV1",
+      "kind": 0,
+      "index": 29184,
+      "parameters": [
+        "f64",
+        "f64",
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ReadOwnedStepExportV1",
+      "kind": 0,
+      "index": 29205,
+      "parameters": [
+        "f64",
+        "f64",
+        "f64",
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ReleaseOwnedStepExportV1",
+      "kind": 0,
+      "index": 29207,
+      "parameters": [
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "BeginOwnedOrthographicReadV1",
+      "kind": 0,
+      "index": 29208,
+      "parameters": [
+        "f64",
+        "f64",
+        "f64",
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ReadOwnedOrthographicReadV1",
+      "kind": 0,
+      "index": 29224,
+      "parameters": [
+        "f64",
+        "f64",
+        "f64",
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ReleaseOwnedOrthographicReadV1",
+      "kind": 0,
+      "index": 29225,
+      "parameters": [
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "BeginOwnedManufacturingMeshV1",
+      "kind": 0,
+      "index": 29226,
+      "parameters": [
+        "f64",
+        "f64",
+        "f64",
+        "f64",
+        "f64",
+        "f64",
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ReadOwnedManufacturingMeshV1",
+      "kind": 0,
+      "index": 29244,
+      "parameters": [
+        "f64",
+        "f64",
+        "f64",
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ReleaseOwnedManufacturingMeshV1",
+      "kind": 0,
+      "index": 29245,
+      "parameters": [
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "CreateOwnedBoxWithFacesV1",
+      "kind": 0,
+      "index": 29246,
+      "parameters": [
+        "i32",
+        "f64",
+        "f64",
+        "f64",
+        "f64",
+        "f64",
+        "f64"
+      ],
+      "results": []
+    },
+    {
+      "name": "ApplyOwnedShellV1",
+      "kind": 0,
+      "index": 29257,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "f64"
+      ],
+      "results": []
+    },
+    {
+      "name": "ReadCircularArrangementV1",
+      "kind": 0,
+      "index": 29266,
+      "parameters": [
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "CreateOwnedCircularCellV1",
+      "kind": 0,
+      "index": 29282,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "f64",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ReadFiniteCurveIntersectionsV1",
+      "kind": 0,
+      "index": 29283,
+      "parameters": [
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "CreateOwnedConicalFrustumV1",
+      "kind": 0,
+      "index": 29291,
+      "parameters": [
+        "i32",
+        "i32",
+        "f64",
+        "f64",
+        "f64"
+      ],
+      "results": []
+    },
+    {
+      "name": "ReadOwnedConeTopologyV1",
+      "kind": 0,
+      "index": 29302,
+      "parameters": [
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "CreateOwnedLoftV1",
+      "kind": 0,
+      "index": 29305,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "CreateOwnedSweepV1",
+      "kind": 0,
+      "index": 29316,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "CreateOwnedRevolveV1",
+      "kind": 0,
+      "index": 29325,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "f64",
+        "f64",
+        "f64",
+        "f64",
+        "f64",
+        "f64",
+        "f64"
+      ],
+      "results": []
+    },
+    {
+      "name": "ApplyOwnedBooleanHistoryV1",
+      "kind": 0,
+      "index": 29332,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "ApplyOwnedEdgeTreatmentV1",
+      "kind": 0,
+      "index": 29340,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "f64"
+      ],
+      "results": []
+    },
+    {
+      "name": "ReadOwnedTopologyV1",
+      "kind": 0,
+      "index": 29346,
+      "parameters": [
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "Interogate",
+      "kind": 0,
+      "index": 29349,
+      "parameters": [
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "InspectAnalyticV1",
+      "kind": 0,
+      "index": 29350,
+      "parameters": [
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "InspectTopologyCensusV1",
+      "kind": 0,
+      "index": 29353,
+      "parameters": [
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "InspectDrilledTopologyV1",
+      "kind": 0,
+      "index": 29358,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "ResearchShapeType",
+      "kind": 0,
+      "index": 29361,
+      "parameters": [
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ResearchFourCornerCut",
+      "kind": 0,
+      "index": 29362,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "PerformDrilledCutV1",
+      "kind": 0,
+      "index": 29367,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "GetProductionHistory",
+      "kind": 0,
+      "index": 29368,
+      "parameters": [],
+      "results": []
+    },
+    {
+      "name": "GetRef",
+      "kind": 0,
+      "index": 29369,
+      "parameters": [
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ClassifyPointToFace",
+      "kind": 0,
+      "index": 29370,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ClassifyFaceToFace",
+      "kind": 0,
+      "index": 29371,
+      "parameters": [
+        "i32",
+        "i32",
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "ClassifyEdgeToFace",
+      "kind": 0,
+      "index": 29372,
+      "parameters": [
+        "i32",
+        "i32",
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "IsEdgesOverlap",
+      "kind": 0,
+      "index": 29373,
+      "parameters": [
+        "i32",
+        "i32",
+        "f64"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "UpdateTessellation",
+      "kind": 0,
+      "index": 29374,
+      "parameters": [
+        "i32",
+        "f64"
+      ],
+      "results": []
+    },
+    {
+      "name": "SetLocation",
+      "kind": 0,
+      "index": 29375,
+      "parameters": [
+        "i32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32"
+      ],
+      "results": []
+    },
+    {
+      "name": "AddLocation",
+      "kind": 0,
+      "index": 29378,
+      "parameters": [
+        "i32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32",
+        "f32"
+      ],
+      "results": []
+    },
+    {
+      "name": "emscripten_main_thread_process_queued_calls",
+      "kind": 0,
+      "index": 29667,
+      "parameters": [],
+      "results": []
+    },
+    {
+      "name": "emscripten_stack_get_end",
+      "kind": 0,
+      "index": 29805,
+      "parameters": [],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "htons",
+      "kind": 0,
+      "index": 30601,
+      "parameters": [
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "_get_tzname",
+      "kind": 0,
+      "index": 29783,
+      "parameters": [],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "_get_daylight",
+      "kind": 0,
+      "index": 29784,
+      "parameters": [],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "_get_timezone",
+      "kind": 0,
+      "index": 29785,
+      "parameters": [],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "stackSave",
+      "kind": 0,
+      "index": 30598,
+      "parameters": [],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "stackRestore",
+      "kind": 0,
+      "index": 30599,
+      "parameters": [
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "stackAlloc",
+      "kind": 0,
+      "index": 30600,
+      "parameters": [
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "emscripten_stack_init",
+      "kind": 0,
+      "index": 29803,
+      "parameters": [],
+      "results": []
+    },
+    {
+      "name": "emscripten_stack_get_free",
+      "kind": 0,
+      "index": 29804,
+      "parameters": [],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "setThrew",
+      "kind": 0,
+      "index": 29809,
+      "parameters": [
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "__cxa_can_catch",
+      "kind": 0,
+      "index": 30571,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "__cxa_is_pointer_type",
+      "kind": 0,
+      "index": 30572,
+      "parameters": [
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "memalign",
+      "kind": 0,
+      "index": 30577,
+      "parameters": [
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "dynCall_viiiiji",
+      "kind": 0,
+      "index": 30602,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "dynCall_iiji",
+      "kind": 0,
+      "index": 30603,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "dynCall_viijii",
+      "kind": 0,
+      "index": 30604,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "dynCall_jiji",
+      "kind": 0,
+      "index": 30605,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "dynCall_jiiii",
+      "kind": 0,
+      "index": 30606,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "dynCall_iiiiij",
+      "kind": 0,
+      "index": 30607,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "dynCall_iiiiijj",
+      "kind": 0,
+      "index": 30608,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "dynCall_iiiiiijj",
+      "kind": 0,
+      "index": 30609,
+      "parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    }
+  ]
+}

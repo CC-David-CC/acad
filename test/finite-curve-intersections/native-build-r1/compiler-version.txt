@@ -1,0 +1,10 @@
+emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 2.0.30 (f782b50a7f8dded7cd0e2c7ee4fed41ab743f5c0)
+Copyright (C) 2014 the Emscripten authors (see AUTHORS.txt)
+This is free and open source software under the MIT license.
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+clang version 14.0.0 (https://github.com/llvm/llvm-project c4048d8f50aaf2c4c13b8d3e138abc34a22da754)
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /mnt/data10tb/codi-occ-four-corner-clean-20261104/emsdk/upstream/bin
+LLD 14.0.0

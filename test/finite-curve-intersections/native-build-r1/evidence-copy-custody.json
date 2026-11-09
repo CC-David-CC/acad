@@ -1,0 +1,112 @@
+{
+  "scope": "small exact evidence copies only; binaries remain R730; no Native runtime execution",
+  "sourceCommit": "d3b2afa0524807d04021eeeba3ca37298dabd160",
+  "files": {
+    "normal-build.sh": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/normal-build.sh",
+      "bytes": 1875,
+      "sha256": "e5f4a3807163d5dcfb02a2efb99eb5d7ddea12f1cfed4af9b94d70d80bfff319",
+      "copyExact": true
+    },
+    "capture-inputs.py": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/capture-inputs.py",
+      "bytes": 2964,
+      "sha256": "96abb8384cbd29901b76aa5dc42008a5ddcde49f3b1808a10b0ce7b27e8b2caf",
+      "copyExact": true
+    },
+    "compiler-version.txt": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/compiler-version.txt",
+      "bytes": 579,
+      "sha256": "4a340d0b8b484632f58905ff9e17858f51857081cfe9ce5f2fb108b6e751264c",
+      "copyExact": true
+    },
+    "build.log": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/build.log",
+      "bytes": 12025,
+      "sha256": "9faf5581042692d53b48c4e7a00d6cc3abc54292458936a8f1012acb04312593",
+      "copyExact": true
+    },
+    "launcher.log": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/launcher.log",
+      "bytes": 687,
+      "sha256": "8fc6b44f86039eb1cb2535c7adfbabd0c76eeb4c5f08bf7794ba1a1d8a7cdb72",
+      "copyExact": true
+    },
+    "status.txt": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/status.txt",
+      "bytes": 99,
+      "sha256": "1e8778b841a31d11aded227b52ca3a829cf3526e1d7a2f9c231a9829c0f5d4f8",
+      "copyExact": true
+    },
+    "wrapper.pid": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/wrapper.pid",
+      "bytes": 8,
+      "sha256": "e21a757fdf76b5d4486f6eff35d10601d903b40432573e5376aeb93ad1c55579",
+      "copyExact": true
+    },
+    "compiler-shell.pid": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/compiler-shell.pid",
+      "bytes": 8,
+      "sha256": "c962e58f4eb2e7b5772e321dc49815e8c369584c0abc4cfb6429ff243a41f731",
+      "copyExact": true
+    },
+    "build-exit-code.txt": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/build-exit-code.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copyExact": true
+    },
+    "native-build-result.json": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/native-build-result.json",
+      "bytes": 660,
+      "sha256": "66a804d920eb6eb9746ec677d079a4e515761d064e8861cda3c8fc54da8216d5",
+      "copyExact": true
+    },
+    "inspect-static-abi.py": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/inspect-static-abi.py",
+      "bytes": 5133,
+      "sha256": "1e2c44bbc85494a65b7389d69a81a2514c2d2b0313b7dbbb68722b8e825cf66a",
+      "copyExact": true
+    },
+    "abi-static.json": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/abi-static.json",
+      "bytes": 37620,
+      "sha256": "4ae6850b91c49a731a6a3f1464202ca2c91219dc22e342cc95be19ff0fabbab8",
+      "copyExact": true
+    },
+    "abi-static.stdout": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/abi-static.stdout",
+      "bytes": 253,
+      "sha256": "f1156fa4c3c8d634ab1799ada37b239cb27266db26ffbc3b15fb0b155356a96b",
+      "copyExact": true
+    },
+    "abi-static.stderr": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/abi-static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copyExact": true
+    },
+    "abi-static-exit-code.txt": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/abi-static-exit-code.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copyExact": true
+    },
+    "build-inputs-before.json.gz": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-native-evidence-20261109-r1/build-inputs-before.json.gz",
+      "bytes": 2070969,
+      "sha256": "b5a08721a5f0299492873569738d0c1edb52c6c992f36e367a1fb65443870343",
+      "copyExact": true,
+      "uncompressed": {
+        "bytes": 9464194,
+        "sha256": "08458d6c74ab112c39faa928fb036e0bb58f27f5880386bc67ee5ec6cfaf77fd"
+      }
+    },
+    "finite-curve-native-export-v1-inputs.json": {
+      "source": "/mnt/data10tb/codi-occ-finite-curve-export-source-20261109/shape-io/finite-curve-native-export-v1-inputs.json",
+      "bytes": 20343,
+      "sha256": "b5d2fdbf1c6718e2cafb61177cdfc2e54d3c3e9d904e010a9d4acae099a2d791",
+      "copyExact": true
+    }
+  }
+}

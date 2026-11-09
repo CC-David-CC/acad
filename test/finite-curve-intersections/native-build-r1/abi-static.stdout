@@ -1,0 +1,1 @@
+{"status": "PASS", "scope": "static compiled ABI inventory only; no JS/WASM/Native execution", "sourceDeclaredFunctions": 49, "newPort": {"name": "ReadFiniteCurveIntersectionsV1", "kind": 0, "index": 29283, "parameters": ["i32", "i32"], "results": []}}
