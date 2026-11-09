@@ -14,7 +14,9 @@ and nonnegative physical dimensions keep their domains.
 
 `drawingReferenceFacts` resolves actual finite current bore witnesses into
 section/detail frames. Unresolved references keep definition intent and no old
-geometry. `solidLedger` still reconstructs one current owner, verifies actual
+geometry. New-role origins outside the existing Native frame1e6 bound are
+reported DRAWING_VIEW_FRAME_UNQUALIFIED in that Worker row, preserving old
+views instead of failing the whole read at the later controller boundary. `solidLedger` still reconstructs one current owner, verifies actual
 valid positive single-solid metrics/producer/registry/source/build and releases
 it before returning. No accepted model or second drawing truth is installed.
 

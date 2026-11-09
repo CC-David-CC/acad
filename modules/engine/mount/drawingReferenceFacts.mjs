@@ -49,6 +49,10 @@ export function resolveOwnedDrawingReferences({definition,topology,index,sourceP
    const h=hole(v.basis==='detail'?v.focus:v.hole);
    if(norm(cross(h.axis,f.z))>dirTol)unavailable('DRAWING_BORE_AXIS_UNSUPPORTED');
    const frame={origin:[...h.intersection],...viewFrame(v.basis==='detail'?'top':'front')};
+   // The existing Native frame transport is bounded at1e6. A valid source
+   // outside that new-role envelope keeps its old views, never a blanket read
+   // failure from the controller after advertising this derived frame.
+   if(frame.origin.some(n=>!Number.isFinite(n)||Math.abs(n)>1e6))unavailable('DRAWING_VIEW_FRAME_UNQUALIFIED');
    return{viewId:v.viewId,status:'available',reason:null,frame};
   }catch(e){if(typeof e?.code!=='string'||!(/^(DRAWING_|SELECTION_|UNRESOLVED_)/.test(e.code)))throw e;return{viewId:v.viewId,status:'unresolved',reason:e.code,frame:null};}
  });
