@@ -1,3 +1,4 @@
+import {offsetSourceRows} from './generators/offsetSource.mjs';
 import {tangencyConstantsValid} from './constr/tangencyDomain.mjs';
 import {slotDeclarationRows,validateSlotNativeRow,validateSlotJunctions} from './constr/straightSlotSource.mjs';
 import {captureLinearDimensionRecord} from './shapes/linearDimensionRecord.mjs';
@@ -710,6 +711,7 @@ export function validateProjectSketch(sketch: any) {
       validateStrictGeneratorParams(generator, instance, index);
     }
   }
+  offsetSourceRows(sketch);
   validateSlotJunctions(sketch,index);
   if (seenGroups.size !== groupIds.size) throw new Error('Orphan rigid group');
   });

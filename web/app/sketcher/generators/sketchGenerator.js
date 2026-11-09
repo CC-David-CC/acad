@@ -1,4 +1,5 @@
 import {NOOP} from "gems/func";
+import {OffsetGeneratorSchema} from './offsetGenerator';
 import {MirrorGeneratorSchema} from "./mirrorGenerator";
 import {memoize} from "lodash/function";
 import {indexArray} from "gems/iterables";
@@ -6,6 +7,7 @@ import {PREDEFINED_LAYERS} from "../layerNames";
 
 const SCHEMAS = [
   MirrorGeneratorSchema,
+  OffsetGeneratorSchema,
 ];
 
 const SCHEMAS_INDEX = indexArray(SCHEMAS, schema => schema.id);
@@ -36,7 +38,7 @@ export class SketchGenerator {
   generate(viewer,generatedRootIds) {
     this.init();
     const layer = viewer.findLayerByName(PREDEFINED_LAYERS.SKETCH);
-    this.generatedObjects = this.schema.generate(this.params, this.internalState,generatedRootIds);
+    this.generatedObjects = this.schema.generate(this.params, this.internalState,generatedRootIds,viewer);
     this.generatedObjects.forEach(obj => {
       obj.generator = this;
       this.stage.assignObject(obj);
@@ -47,7 +49,7 @@ export class SketchGenerator {
   }
 
   regenerate(viewer) {
-    this.schema.regenerate(this.params, this.generatedObjects, this.internalState);
+    this.schema.regenerate(this.params, this.generatedObjects, this.internalState,viewer);
     this.generatedObjects.forEach(obj => obj.syncGeometry());
   }
 
@@ -82,6 +84,7 @@ export class SketchGenerator {
         throw 'generator refers to non existent object';
       }
       restoredObject.generator = sketchGenerator;
+      if(schema===OffsetGeneratorSchema)restoredObject.readOnly=true;
       return restoredObject;
     });
     sketchGenerator.init();

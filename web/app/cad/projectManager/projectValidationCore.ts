@@ -1,3 +1,5 @@
+import {validateOffsetSources} from 'sketcher/headless/offsetSourceValidation';
+import {prepareTypedDependentSketch} from 'sketcher/headless/typedDependentSketch.mjs';
 import {validateMirrorSourceGeometry} from 'sketcher/headless/mirrorSourceValidation';
 import {validateSplineDerivedGeometry} from 'sketcher/headless/splineDerivedValidation';
 import {captureSourceFrameParameters} from 'engine/source/sourceFrameIntent.mjs';
@@ -23,8 +25,10 @@ export function preflight(value, parameterState?: {source?: string, result?: any
   const featureIds=new Set<number>();
   for(const operation of project.model.history){claimAuthoredFeatureIdentity(operation,featureIds);if(operation.type==='SOURCE_FRAME_V1'){const p=captureSourceFrameParameters(operation.params);if(p.parent&&!featureIds.has(p.parent.featureId))throw Object.assign(Error('Source attachment requires an earlier producer.'),{code:'INVALID_FRAME_DEPENDENCY'});}}
   const physical=decodePhysicalSource(project.model.expressions);
+  let physicalValues:Map<string,any>=null;
   if (physical) {
     const result=evaluatePhysicalSource(physical);
+    physicalValues=new Map(result.values.map(row=>[row.name,row]));
     if (parameterState) {parameterState.source=project.model.expressions;parameterState.result=result;}
   }
   else if (parseMathDefinitions(project.model.expressions).errors.length) throw new Error('Project contains invalid expressions');
@@ -51,6 +55,7 @@ export function preflight(value, parameterState?: {source?: string, result?: any
     // Geometry-only native regeneration after the unchanged source preflight.
     // No authored constraint solve, source replacement, or binding conversion.
     validateMirrorSourceGeometry(data);
+    if(data.stages.some(s=>s.generators.some(g=>g.typeId==='Offset'))){const external=physicalValues?prepareTypedDependentSketch(data,name=>{const row=physicalValues.get(name);if(!row||row.dimension!=='length')throw Object.assign(Error('Offset requires a current typed length.'),{code:'OFFSET_DISTANCE'});return row.value;}):{};validateOffsetSources(data,external);}
   }
   validateProjectSourceFrames(project);
   return value;

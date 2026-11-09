@@ -1,3 +1,4 @@
+import {validateOffsetCaches} from '../generators/offsetSource.mjs';
 import {HeadlessSketchWorkspace} from './workspace';
 import {validateProjectSketch} from '../io';
 import {inspectStageGenerators} from './stageGeneratorPolicy.mjs';
@@ -10,6 +11,7 @@ import type {CapturedAuxiliaryWitnessBatch} from './capturedParameterOwnership';
 // These are observations of original equations AT the captured coordinates,
 // paired with independent cold-admission evidence. This is not solve success.
 export function evaluateCapturedSketch(sketch:any,external:any,coldEvidence:any[],newPrimitiveId?:string,auxiliaryWitness?:CapturedAuxiliaryWitnessBatch) {
+  validateOffsetCaches(sketch,name=>external[name]);
   inspectTree(sketch);assertSemantics(sketch,sketch.boundary,sketch.boundary);
   validateProjectSketch(sketch);typeIndex(sketch,sketch.boundary);inspectStageGenerators(sketch);
   for(const o of sketch.objects)if(o.type==='BSpline')validateSplineDerivedGeometry(o.id,o.data);

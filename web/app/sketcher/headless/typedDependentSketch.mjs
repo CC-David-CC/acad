@@ -1,3 +1,4 @@
+import {offsetSourceRows,offsetNamed,offsetDistance} from '../generators/offsetSource.mjs';
 import {drivingLengthField,drivingDimensionValueValid} from './drivingDimensionTarget.mjs';
 import {isBooleanSketchField,isBooleanSketchLiteral,isEnumSketchField,isEnumSketchLiteral} from '../constr/booleanSketchFields.mjs';
 // A typed dependent sketch may currently bind names only in explicitly
@@ -28,5 +29,6 @@ export function prepareTypedDependentSketch(sketch,resolveLength) {
    }
   }
  }
+ for(const row of offsetSourceRows(sketch))if(offsetNamed(row.g.params.distance)){const name=row.g.params.distance;external[name]=offsetDistance(name,resolveLength);}
  return Object.freeze(external);
 }

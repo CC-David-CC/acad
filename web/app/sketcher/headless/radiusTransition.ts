@@ -1,3 +1,5 @@
+import {materializeOffsetCaches} from '../generators/offsetSource.mjs';
+import {OffsetGeneratorSchema} from '../generators/offsetGenerator';
 import {HeadlessSketchWorkspace} from './workspace';
 import {solveSketch} from './solve';
 import {evaluateCapturedSketch} from './capturedSketchEvaluation';
@@ -42,7 +44,7 @@ function change(request:any,action:'create'|'edit'|'remove'){
  const id=target?target.objects[0]:a.intent.id,raw=action==='create'?a.intent.radius:action==='edit'?a.intent.value:null,value=typeof raw==='number'?raw:typeof raw==='string'?bindings[raw]:null;
  if(action!=='remove'&&!positive(value))fail('INVALID_VALUE','Radius must be a current positive finite typed length or literal millimeters at most1,000,000.');
  const scope=captureConnectedGeometryScope(before,bindings,original.result.evidence,original.auxiliary,(_workspace,pm,index)=>{
-  const object=index[id];if(!(isInstanceOf(object,Circle)||isInstanceOf(object,Arc))||!object.stage||!pm.stages.includes(object.stage)||object.generator&&object.stage===pm.stage)fail('INVALID_TARGET','Choose a current owned Circle or Arc.');
+  const object=index[id];if(!(isInstanceOf(object,Circle)||isInstanceOf(object,Arc))||!object.stage||!pm.stages.includes(object.stage)||object.generator&&(object.stage===pm.stage||object.generator.schema===OffsetGeneratorSchema))fail('INVALID_TARGET','Choose a current owned Circle or Arc.');
   if(target&&object.stage.index>target.stage)fail('INVALID_TARGET','Radius stage ownership changed.');
   let originalSatisfied=true;const equations=[];
   if(action!=='remove'){const proposed=new AlgNumConstraint(ConstraintDefinitions.RadiusLength,[object],{length:String(raw)});proposed.resolveConstants(pm.constantResolver);try{validateConstraintGeometry(proposed);}catch(e){if(e?.code!=='RESIDUAL')throw e;originalSatisfied=false;}proposed.collectPolynomials(equations);}
@@ -59,7 +61,7 @@ function change(request:any,action:'create'|'edit'|'remove'){
   pm.startTransaction();try{if(action==='edit'){constraint.updateConstant('length',String(raw));expected.stages[stage].constraints[indexInStage].constants.length=String(raw);}else{pm._removeConstraint(constraint);expected.stages[stage].constraints.splice(indexInStage,1);}pm.finishTransaction(stages=>{for(const s of stages)for(const c of s.solverSystem.allConstraints){const sys=s.solverSystem;if(sys.conflicting.has(c)&&!sys.redundant.has(c))throw withAdmissionCause(Object.assign(Error('Radius change was rejected by actual sketch admission.'),{code:'DIMENSION_REJECTED'}),sys.getAdmissionCause(c));}},false);}catch(e){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw e},false);}catch{}throw e;}}
  const warm=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));warm.boundary=structuredClone(before.boundary);
  const restored={...warm,objects:warm.objects.map((o,i)=>({...o,data:before.objects[i]?.data}))};if(difference(withoutAdmission(expected),withoutAdmission(restored))!=='no difference')fail('INTENT_CHANGED','Radius admission changed retained intent: '+difference(withoutAdmission(expected),withoutAdmission(restored)));
- const candidate=expected;candidate.objects=applyCapturedGeometry(before,warm,scope.fields,!scope.selection.originalSatisfied,'Radius');assertCapturedGeometryScope(before,candidate,scope.fields,'Radius');
+ const candidate=expected;candidate.objects=applyCapturedGeometry(before,warm,scope.fields,!scope.selection.originalSatisfied,'Radius');materializeOffsetCaches(candidate,name=>bindings[name]);assertCapturedGeometryScope(before,candidate,scope.fields,'Radius');
  // Classification changes on removal (including reactivated redundant rows)
  // derive from fresh admission, not copied saved status hints.
  copyClassifications(candidate,warm.stages.flatMap(s=>s.constraints.map(c=>({typeId:c.typeId,state:c.admission?.state}))));

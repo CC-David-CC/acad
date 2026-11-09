@@ -35,7 +35,7 @@ export function inspectMirrorSource(source:any,external:any={}){
   // Unsupported existing domains remain native carry, with derived reason only.
   const sources=source.objects.map(row=>{charge();const o=index[row.id];let reason=mirrorSourceReason(o,semantic);if(!reason)try{assertMirrorArc(o);}catch(error){reason=error?.code||'UNSUPPORTED_MIRROR_ARC';}return{id:row.id,type:row.type,stage:o.stage.index,role:o.role??null,canMirror:reason===null,reason};});
   const axes=sources.filter(s=>s.type==='Segment').map(s=>{let reason=s.reason;if(!reason)try{assertMirrorAxis(index[s.id]);}catch(error){reason=error?.code||'UNSUPPORTED_MIRROR_AXIS';}return{...s,canMirror:reason===null,reason,geometry:geometry(index[s.id])};});
-  const descriptions=roster.map(entry=>{
+  const descriptions=roster.filter(entry=>entry.g.schema===MirrorGeneratorSchema).map(entry=>{
    const {g,stage,index:at}=entry;if(g.schema!==MirrorGeneratorSchema)return{stage,index:at,supported:false,reason:'UNSUPPORTED_GENERATOR',record:structuredClone(g.write()),sources:[],outputs:[]};
    const inputs=g.params.objects,axis=g.params.reflectionLine?.[0],outputs=g.generatedObjects;
    const supported=Array.isArray(inputs)&&Array.isArray(outputs)&&g.params.reflectionLine?.length===1&&axis instanceof Segment&&saved.has(axis.id)&&inputs.every(o=>saved.has(o?.id)&&mirrorNativePrimitive(o))&&outputs.every(mirrorNativePrimitive)&&![axis,...inputs].some(o=>semantic.has(o?.id));

@@ -1,3 +1,4 @@
+import {offsetSourceRows,offsetNamed} from '../../sketcher/generators/offsetSource.mjs';
 import {drivingLengthField} from '../../sketcher/headless/drivingDimensionTarget.mjs';
 import {isBooleanSketchField,isBooleanSketchLiteral,isEnumSketchField,isEnumSketchLiteral} from '../../sketcher/constr/booleanSketchFields.mjs';
 // Capture only authored names through the same field policy as Worker discovery,
@@ -17,6 +18,7 @@ export function discoverTypedSketchConsumers(items,readSketch){
   const names=new Set();for(const stage of sketch.stages)for(const c of stage.constraints){if(!c||typeof c!=='object'||Array.isArray(c)||(c.constants!=null&&(typeof c.constants!=='object'||Array.isArray(c.constants))))throw Error('Invalid sketch constraint.');const fields=Object.entries(c.constants||{});if(fields.length>32)throw Error('Sketch constraint exceeds parameter editing limits.');for(const [field,value] of fields){if(isEnumSketchField(c.typeId,field)){if(!isEnumSketchLiteral(value))throw Error('Invalid sketch enum literal.');continue;}if(isBooleanSketchField(c.typeId,field)){if(!isBooleanSketchLiteral(value))throw Error('Invalid sketch boolean literal.');continue;}if(typeof value==='boolean')throw Error('Unregistered sketch boolean field.');if(typeof value==='number'&&Number.isFinite(value))continue;if(typeof value!=='string')throw Error('Invalid sketch constant.');const text=value.trim();if(numeric.test(text))continue;
    if(!id.test(text)||drivingLengthField(c.typeId)!==field)throw Error('Typed sketch field is not dimension-aware.');names.add(text);if(names.size>128)throw Error('Sketch parameter inventory exceeds limits.');
   }}
+  for(const row of offsetSourceRows(sketch))if(offsetNamed(row.g.params.distance)){names.add(row.g.params.distance);if(names.size>128)throw Error('Sketch parameter inventory exceeds limits.');}
   if(names.size)out.push(Object.freeze({faceId,names:Object.freeze([...names].sort())}));
  }
  return Object.freeze(out);

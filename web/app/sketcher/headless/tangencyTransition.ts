@@ -1,3 +1,5 @@
+import {offsetTravelDelta} from './offsetSourceValidation';
+import {verifyOffsetTravel} from './offsetTransition';
 import {verifyFixedEntityTravel} from './fixedEntityTransition';
 import {HeadlessSketchWorkspace} from './workspace';import {solveSketch} from './solve';import {evaluateCapturedSketch} from './capturedSketchEvaluation';import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
 import {captureConnectedGeometryScope,applyCapturedGeometry,assertCapturedGeometryScope,firstCapturedGeometryDifference as difference} from './capturedGeometryScope';
@@ -43,4 +45,4 @@ export function verifyTangencyTravel(request:any){const revision=revisionOf(requ
 
 // Add the actual tangency operation proof to the existing non-typed Fix
 // boundary; unrelated journal families keep their previous replay policy.
-export function verifyTangencyTravelBoundary(request:any){try{const before=JSON.parse(text(request.sketchJSON)),after=JSON.parse(text(request.candidateJSON));if(tangencyTravelIntent(before,after))return verifyTangencyTravel(request);const strip=(s:any)=>s.stages.map(stage=>stage.constraints.filter(c=>['TangentLC','FiniteTangentLC','TangentCC'].includes(c.typeId)).map(c=>{const r={...c};delete r.admission;return r;}));if(difference(strip(before),strip(after))!=='no difference')fail('INTENT_CHANGED','Tangency branches are changed only by explicit remove/create journal operations.');return verifyFixedEntityTravel(request,true);}catch(e){return outcome(revisionOf(request),e);}}
+export function verifyTangencyTravelBoundary(request:any){try{const before=JSON.parse(text(request.sketchJSON)),after=JSON.parse(text(request.candidateJSON));if(offsetTravelDelta(before,after))return verifyOffsetTravel(request);if(tangencyTravelIntent(before,after))return verifyTangencyTravel(request);const strip=(s:any)=>s.stages.map(stage=>stage.constraints.filter(c=>['TangentLC','FiniteTangentLC','TangentCC'].includes(c.typeId)).map(c=>{const r={...c};delete r.admission;return r;}));if(difference(strip(before),strip(after))!=='no difference')fail('INTENT_CHANGED','Tangency branches are changed only by explicit remove/create journal operations.');return verifyFixedEntityTravel(request,true);}catch(e){return outcome(revisionOf(request),e);}}
