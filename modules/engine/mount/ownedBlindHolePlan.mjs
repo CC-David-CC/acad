@@ -22,5 +22,5 @@ export function planOwnedBlindHole({request,sourceProfile,entry,targetMetrics}){
  if(!(a>0&&a<p.depth&&b>p.depth)||Math.abs(a-floor)>1e-9)fail('BLIND_FLOOR_UNQUALIFIED','The represented tool does not retain the actual interior floor.');
  const expectedRemovedVolume=Math.PI*radius*radius*intent.depth;
  if(!Number.isFinite(expectedRemovedVolume)||expectedRemovedVolume<=0)fail('BLIND_FLOOR_UNQUALIFIED','Blind removal exceeds the numeric domain.');
- return freeze({toolProfile,expectedRemovedVolume,centerLocal:center,radius,sourceDepth:p.depth,blindDepth:intent.depth,floorLevel:floor,entryLevel:p.depth,frame:f,expectedBounds:source.expected.bounds});
+ return freeze({toolProfile,expectedRemovedVolume,centerLocal:center,radius,sourceDepth:p.depth,blindDepth:intent.depth,lowerLevel:0,floorLevel:floor,entryLevel:p.depth,frame:f,expectedBounds:source.expected.bounds});
 }

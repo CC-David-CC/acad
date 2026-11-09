@@ -456,11 +456,12 @@ async function applyOwnedBooleanResult(aName,bName,name,kind){
 async function readOwnedDrawingReferences(msg){
  if(!drawingReferencesMode||!msg||Reflect.ownKeys(msg).sort().join(',')!=='definition,kind,producerFeatureId,seq,sourceToken,token')bad('Invalid owned drawing read');
  const definition=drawingFactsAPI.captureDrawingDefinition(msg.definition),name=nameFor(msg.token);nameFor(msg.sourceToken);
- const target=selectedSelectionIndices.get(msg.token),source=selectedSelectionIndices.get(msg.sourceToken),sourceProfile=selectedSourceProfiles.get(msg.sourceToken);
+ const target=selectedSelectionIndices.get(msg.token),source=selectedSelectionIndices.get(msg.sourceToken),sourceProfile=selectedSourceProfiles.get(msg.sourceToken),sourceExtent=selectedExtentProfiles.get(msg.sourceToken),profile=sourceExtent?.request||sourceProfile;
+ if(sourceExtent&&(!profileExtentsMode||sourceProfile!==undefined||sourceExtent.binding.featureId!==source?.featureId))bad('Conflicting private drawing constructor source');
  if(!target||target.featureId!==msg.producerFeatureId||definition.target.featureId!==msg.producerFeatureId||definition.target.engineRevision!==nativeRuntimeRevision)bad('Drawing target producer/runtime is not current');
- if(!sourceProfile||sourceProfile.version===4||sourceProfile.region.boundaryProvenance||!source||source.featureId!==definition.datum.featureId||sourceProfile.region.id!==definition.datum.regionId)return drawingFactsAPI.unresolvedOwnedDrawingReferences(definition,'DRAWING_DATUM_UNAVAILABLE');
+ if(!profile||profile.version===4||profile.region.boundaryProvenance||!source||source.featureId!==definition.datum.featureId||profile.region.id!==definition.datum.regionId)return drawingFactsAPI.unresolvedOwnedDrawingReferences(definition,'DRAWING_DATUM_UNAVAILABLE');
  const {validateOwnedTopology}=await import(new URL('./ownedTopologyContract.mjs',self.location.href)),topology=validateOwnedTopology(ownedJSON('_ReadOwnedTopologyV1',name));
- const ptr=str2C(name);try{return drawingFactsAPI.resolveOwnedDrawingReferences({definition,topology,index:target.index,sourceProfile,sourceFeatureId:source.featureId,sourceRegionId:sourceProfile.region.id,cylinders:selectedDrawingCylinders.get(msg.token)||[],classify:point=>{const code=Module._ClassifyOwnedPointV2(ptr,...point);if(!Number.isInteger(code)||code<0||code>3)bad('Native bore corroboration failed');return['inside','outside','boundary','unknown'][code];}});}finally{_free(ptr);}
+ const ptr=str2C(name);try{return drawingFactsAPI.resolveOwnedDrawingReferences({definition,topology,index:target.index,...(sourceExtent?{sourceExtent}:{sourceProfile}),sourceFeatureId:source.featureId,sourceRegionId:profile.region.id,cylinders:selectedDrawingCylinders.get(msg.token)||[],classify:point=>{const code=Module._ClassifyOwnedPointV2(ptr,...point);if(!Number.isInteger(code)||code<0||code>3)bad('Native bore corroboration failed');return['inside','outside','boundary','unknown'][code];}});}finally{_free(ptr);}
 }
 // Derive a new role only from this same candidate's actual bound source facts.
 async function readOwnedDrawingDerived(msg){
@@ -493,21 +494,24 @@ async function readOwnedDrawingDerived(msg){
 async function readOwnedBoreReferences(msg){
  if(!drawingReferencesMode||!msg||Reflect.ownKeys(msg).sort().join(',')!=='kind,producerFeatureId,query,seq,sourceToken,token')bad('Invalid owned bore read');
  const {captureLinkedPartBoreQuery}=await import(new URL('../../drawing/linkedPartDrawingDefinition.mjs',self.location.href)),{unresolvedBoreRead}=await import(new URL('./ownedBoreReadProtocol.mjs',self.location.href)),query=captureLinkedPartBoreQuery(msg.query),name=nameFor(msg.token);nameFor(msg.sourceToken);
- const target=selectedSelectionIndices.get(msg.token),source=selectedSelectionIndices.get(msg.sourceToken),sourceProfile=selectedSourceProfiles.get(msg.sourceToken);
+ const target=selectedSelectionIndices.get(msg.token),source=selectedSelectionIndices.get(msg.sourceToken),sourceProfile=selectedSourceProfiles.get(msg.sourceToken),sourceExtent=selectedExtentProfiles.get(msg.sourceToken),profile=sourceExtent?.request||sourceProfile;
+ if(sourceExtent&&(!profileExtentsMode||sourceProfile!==undefined||sourceExtent.binding.featureId!==source?.featureId))bad('Conflicting private drawing constructor source');
  if(!target||target.featureId!==msg.producerFeatureId||query.target.featureId!==msg.producerFeatureId||query.target.engineRevision!==nativeRuntimeRevision)bad('Bore target producer/runtime is not current');
- if(!sourceProfile||sourceProfile.version===4||sourceProfile.region.boundaryProvenance||!source||source.featureId!==query.datum.featureId||sourceProfile.region.id!==query.datum.regionId)return unresolvedBoreRead(query,'DRAWING_DATUM_UNAVAILABLE');
+ if(!profile||profile.version===4||profile.region.boundaryProvenance||!source||source.featureId!==query.datum.featureId||profile.region.id!==query.datum.regionId)return unresolvedBoreRead(query,'DRAWING_DATUM_UNAVAILABLE');
  const {validateOwnedTopology}=await import(new URL('./ownedTopologyContract.mjs',self.location.href)),topology=validateOwnedTopology(ownedJSON('_ReadOwnedTopologyV1',name)),ptr=str2C(name);
- try{return drawingFactsAPI.resolveOwnedBoreReferences({query,topology,index:target.index,sourceProfile,sourceFeatureId:source.featureId,sourceRegionId:sourceProfile.region.id,cylinders:selectedDrawingCylinders.get(msg.token)||[],classify:point=>{const code=Module._ClassifyOwnedPointV2(ptr,...point);if(!Number.isInteger(code)||code<0||code>3)bad('Native bore corroboration failed');return['inside','outside','boundary','unknown'][code];}});}finally{_free(ptr);}
+ try{return drawingFactsAPI.resolveOwnedBoreReferences({query,topology,index:target.index,...(sourceExtent?{sourceExtent}:{sourceProfile}),sourceFeatureId:source.featureId,sourceRegionId:profile.region.id,cylinders:selectedDrawingCylinders.get(msg.token)||[],classify:point=>{const code=Module._ClassifyOwnedPointV2(ptr,...point);if(!Number.isInteger(code)||code<0||code>3)bad('Native bore corroboration failed');return['inside','outside','boundary','unknown'][code];}});}finally{_free(ptr);}
 }
 async function createOwnedBlindHoleResult(msg){
  const {captureOwnedBlindHoleIntent}=await import(new URL('../solid/ownedBlindHoleIntent.mjs',self.location.href)),request=captureOwnedBlindHoleIntent(msg.request),refuse=(code,message)=>{throw Object.assign(Error(message),{code});};
  if(request.engineRevision!==nativeRuntimeRevision)refuse('ENGINE_REVISION_MISMATCH','Blind-hole intent requires its recorded runtime');
- const parent=nameFor(msg.parentToken),sourceName=nameFor(msg.sourceToken),target=selectedSelectionIndices.get(msg.parentToken),source=selectedSelectionIndices.get(msg.sourceToken),sourceProfile=selectedSourceProfiles.get(msg.sourceToken);
- if(parent!==sourceName||target!==source||target?.featureId!==request.producerFeatureId||source?.featureId!==request.sourceFeatureId||source?.index?.plan.source!=='prism-construction-history'||sourceProfile?.version!==3||sourceProfile.region.id!==request.sourceRegionId)refuse('BLIND_UNSUPPORTED_TARGET','Blind holes require the actual earlier selected constructor');
+ const parent=nameFor(msg.parentToken),sourceName=nameFor(msg.sourceToken),target=selectedSelectionIndices.get(msg.parentToken),source=selectedSelectionIndices.get(msg.sourceToken),sourceProfile=selectedSourceProfiles.get(msg.sourceToken),sourceExtent=selectedExtentProfiles.get(msg.sourceToken);
+ const extent=sourceExtent!==undefined;if(extent&&(!profileExtentsMode||sourceProfile!==undefined||sourceExtent.binding.featureId!==request.sourceFeatureId))bad('Conflicting private blind source constructors');
+ if(parent!==sourceName||target!==source||target?.featureId!==request.producerFeatureId||source?.featureId!==request.sourceFeatureId||source?.index?.plan.source!==(extent?'profile-extent-construction-history':'prism-construction-history')||(extent?sourceExtent.request.region.id!==request.sourceRegionId:sourceProfile?.version!==3||sourceProfile.region.id!==request.sourceRegionId))refuse('BLIND_UNSUPPORTED_TARGET','Blind holes require the actual earlier selected constructor');
  const {validateOwnedTopology}=await import(new URL('./ownedTopologyContract.mjs',self.location.href)),beforeTopology=ownedJSON('_ReadOwnedTopologyV1',parent),topology=validateOwnedTopology(beforeTopology),beforeMetrics=ownedJSON('_InspectOwnedSolidV2',parent);
  const {resolveNativePlanarAttachment}=await import(new URL('./nativePlanarAttachmentFacts.mjs',self.location.href));let entry;
- try{entry=resolveNativePlanarAttachment({topology,index:target.index,sourceProfile,request:{sourceRegionId:request.sourceRegionId,framePolicy:'extrusion-cap-source-datum-v1',selectionId:request.entryFaceId,originFeatureId:request.sourceFeatureId,sourceFeatureId:request.sourceFeatureId}});}catch(e){if(!['UNRESOLVED_SOURCE','UNSUPPORTED_FRAME_PARENT'].includes(e?.code))throw e;refuse('BLIND_ENTRY_UNRESOLVED','The actual blind top entry is unresolved: '+String(e.reason||e.code));}
- const {planOwnedBlindHole}=await import(new URL('./ownedBlindHolePlan.mjs',self.location.href)),plan=planOwnedBlindHole({request,sourceProfile,entry,targetMetrics:beforeMetrics}),{preparePolygonProfileExtrusion}=await import(new URL('./polygonProfilePlan.mjs',self.location.href)),prepared=preparePolygonProfileExtrusion(plan.toolProfile),attempts=new Map(),counts=[],cleanupFailures=[],dispatchFailures=[];let complete=false,finalName,operationFailed=false,operationError;
+ try{entry=resolveNativePlanarAttachment({topology,index:target.index,...(extent?{sourceExtent}:{sourceProfile}),request:{sourceRegionId:request.sourceRegionId,framePolicy:extent?'profile-extent-cap-source-datum-v1':'extrusion-cap-source-datum-v1',selectionId:request.entryFaceId,originFeatureId:request.sourceFeatureId,sourceFeatureId:request.sourceFeatureId}});}catch(e){if(!['UNRESOLVED_SOURCE','UNSUPPORTED_FRAME_PARENT'].includes(e?.code))throw e;refuse('BLIND_ENTRY_UNRESOLVED','The actual blind top entry is unresolved: '+String(e.reason||e.code));}
+ let plan;if(extent){const {planExtentBlindHole}=await import(new URL('./profileExtentHolePlan.mjs',self.location.href));plan=planExtentBlindHole({request,prepared:sourceExtent,entry,targetMetrics:beforeMetrics});}else{const {planOwnedBlindHole}=await import(new URL('./ownedBlindHolePlan.mjs',self.location.href));plan=planOwnedBlindHole({request,sourceProfile,entry,targetMetrics:beforeMetrics});}
+ const {preparePolygonProfileExtrusion}=await import(new URL('./polygonProfilePlan.mjs',self.location.href)),prepared=preparePolygonProfileExtrusion(plan.toolProfile),attempts=new Map(),counts=[],cleanupFailures=[],dispatchFailures=[];let complete=false,finalName,operationFailed=false,operationError;
  const cleanupError=(message,cause)=>{const e=Object.assign(Error(message),{code:'ENGINE_CLEANUP_FAILED',cause});complete=false;if(cleanupFailures.length<8)cleanupFailures.push(e);return e;};
  const census=()=>{try{const n=Module._OwnedShapeNamesV2();if(!Number.isSafeInteger(n)||n<0||n>maxNames)throw Error('Invalid Native owned-name census');return n;}catch(cause){throw cleanupError('Blind Native owned-name census is unavailable',cause);}};
  const baseline=census();
@@ -579,13 +583,16 @@ async function createOwnedThroughHoleResult(msg){
   const {captureOwnedHoleIntent}=await import(new URL('../solid/ownedHoleIntent.mjs',self.location.href));
   const request=captureOwnedHoleIntent(msg.request),refuse=(code,message)=>{throw Object.assign(Error(message),{code});};
   if(request.engineRevision!==nativeRuntimeRevision)refuse('INVALID_REQUEST','Hole intent belongs to another native runtime');
-  const targetName=nameFor(msg.parentToken),sourceName=nameFor(msg.sourceToken),target=selectedSelectionIndices.get(msg.parentToken),source=selectedSelectionIndices.get(msg.sourceToken),sourceProfile=selectedSourceProfiles.get(msg.sourceToken);
+  const targetName=nameFor(msg.parentToken),sourceName=nameFor(msg.sourceToken),target=selectedSelectionIndices.get(msg.parentToken),source=selectedSelectionIndices.get(msg.sourceToken),sourceProfile=selectedSourceProfiles.get(msg.sourceToken),sourceExtent=selectedExtentProfiles.get(msg.sourceToken);
+  const extent=sourceExtent!==undefined;if(extent&&(!profileExtentsMode||sourceProfile!==undefined||sourceExtent.binding.featureId!==request.sourceFeatureId))bad('The private extent source identity differs');
   if(!target||!source||target.featureId!==request.producerFeatureId||source.featureId!==request.sourceFeatureId)refuse('INVALID_SELECTION_BINDING','Hole source or target producer is stale');
   if(sourceProfile?.version===4)refuse('UNSUPPORTED_PROFILE','Through holes require the supported whole rectangle source, not a circular arrangement cell');
-  if(!target.index||!source.index||!sourceProfile)refuse('SELECTION_UNAVAILABLE','A genuine selected source extrusion is required');
-  if(source.index.plan.source!=='prism-construction-history'||sourceProfile.region.id!==request.sourceRegionId||!target.index.plan.sourceContexts.some(c=>c.kind==='sketch-profile'&&c.featureId===request.sourceFeatureId&&c.regionId===request.sourceRegionId))refuse('STALE_SOURCE','The current target has no matching source construction');
+  if(!target.index||!source.index||!sourceProfile&&!extent)refuse('SELECTION_UNAVAILABLE','A genuine selected source extrusion is required');
+  if(source.index.plan.source!==(extent?'profile-extent-construction-history':'prism-construction-history')||(extent?sourceExtent.request.region.id:sourceProfile.region.id)!==request.sourceRegionId||!target.index.plan.sourceContexts.some(c=>c.kind===(extent?'sketch-profile-extent':'sketch-profile')&&c.featureId===request.sourceFeatureId&&c.regionId===request.sourceRegionId))refuse('STALE_SOURCE','The current target has no matching source construction');
   if(target.index.plan.sourceContexts.some(c=>c.featureId===request.featureId))refuse('INVALID_REQUEST','A hole feature cannot reuse a construction identity');
-  const targetMetrics=ownedJSON('_InspectOwnedSolidV2',targetName),{planOwnedThroughHoles}=await import(new URL('./ownedThroughHolePlan.mjs',self.location.href)),plan=planOwnedThroughHoles({request,sourceProfile,targetMetrics});
+  const targetMetrics=ownedJSON('_InspectOwnedSolidV2',targetName);let plan;
+  if(extent){const {planExtentThroughHoles}=await import(new URL('./profileExtentHolePlan.mjs',self.location.href));plan=planExtentThroughHoles({request,prepared:sourceExtent,targetMetrics});}
+  else{const {planOwnedThroughHoles}=await import(new URL('./ownedThroughHolePlan.mjs',self.location.href));plan=planOwnedThroughHoles({request,sourceProfile,targetMetrics});}
   const cost=request.kind==='centered-through'?2:8;return{...await cutOwnedBoreTools(targetName,target,plan,targetMetrics,request.featureId,cost,{prior:selectedDrawingCylinders.get(msg.parentToken)||[],intent:request}),request};
 }
 async function cutOwnedBoreTools(targetName,target,plan,targetMetrics,featureId,cost,drawing=null){
@@ -642,17 +649,20 @@ async function createOwnedLinearHolePattern(msg){
  const request=captureOwnedLinearHolePatternIntent(msg.request),cost=linearHolePatternNativeCost(request.count),refuse=(code,message)=>{throw Object.assign(Error(message),{code});};
  if(request.engineRevision!==nativeRuntimeRevision)refuse('INVALID_REQUEST','Pattern belongs to another native runtime');
  const targetName=nameFor(msg.parentToken);nameFor(msg.sourceToken);
- const target=selectedSelectionIndices.get(msg.parentToken),source=selectedSelectionIndices.get(msg.sourceToken),state=selectedHoleStates.get(msg.parentToken),sourceProfile=selectedSourceProfiles.get(msg.sourceToken);
+ const target=selectedSelectionIndices.get(msg.parentToken),source=selectedSelectionIndices.get(msg.sourceToken),state=selectedHoleStates.get(msg.parentToken),sourceProfile=selectedSourceProfiles.get(msg.sourceToken),sourceExtent=selectedExtentProfiles.get(msg.sourceToken);
+ const extent=sourceExtent!==undefined;if(extent&&(!profileExtentsMode||sourceProfile!==undefined))bad('Conflicting private pattern source constructors');
  if(!target||target.featureId!==request.producerFeatureId)refuse('INVALID_SELECTION_BINDING','Pattern target producer is stale');
- if(!state||state.producerFeatureId!==request.producerFeatureId||state.source.token!==msg.sourceToken||state.source.profile!==sourceProfile)refuse('UNSUPPORTED_TARGET_PATH','The target has no authenticated supported source/hole/edge path');
+ if(!state||state.producerFeatureId!==request.producerFeatureId||state.source.token!==msg.sourceToken||!sourceConstructorStillOwned(state.source)||(extent?state.source.extent!==sourceExtent:state.source.profile!==sourceProfile))refuse('UNSUPPORTED_TARGET_PATH','The target has no authenticated supported source/hole/edge path');
  const seeds=state.holes.filter(h=>h.intent.featureId===request.seedFeatureId);
  if(seeds.length!==1||seeds[0].source!==state.source||seeds[0].intent.kind!=='centered-through')refuse('UNSUPPORTED_SEED','The target has no unique successful centered seed witness');
  const seed=seeds[0].intent;
  if(sourceProfile?.version===4)refuse('UNSUPPORTED_PROFILE','Linear hole patterns require the supported whole rectangle source');
- if(!source||source.featureId!==seed.sourceFeatureId||!sourceProfile||sourceProfile.region.id!==seed.sourceRegionId)refuse('STALE_SOURCE','The live constructor differs from the successful seed source');
+ if(!source||source.featureId!==seed.sourceFeatureId||(!sourceProfile&&!extent)||(extent?sourceExtent.request.region.id:sourceProfile.region.id)!==seed.sourceRegionId||extent&&sourceExtent.binding.featureId!==seed.sourceFeatureId)refuse('STALE_SOURCE','The live constructor differs from the successful seed source');
  if(!target.index||!source.index)refuse('SELECTION_UNAVAILABLE','The current target/source inherited selections are unavailable');
  if(state.featureIds.includes(request.featureId)||request.featureId===seed.sourceFeatureId)refuse('INVALID_REQUEST','A new pattern cannot reuse causal feature identity');
- const targetMetrics=ownedJSON('_InspectOwnedSolidV2',targetName),{planOwnedLinearHolePattern}=await import(new URL('./ownedLinearHolePatternPlan.mjs',self.location.href)),plan=planOwnedLinearHolePattern({request,seed,existingHoles:state.holes.map(h=>h.intent),sourceProfile,targetMetrics});
+ const targetMetrics=ownedJSON('_InspectOwnedSolidV2',targetName);let plan;
+ if(extent){const {planExtentLinearHolePattern}=await import(new URL('./profileExtentHolePlan.mjs',self.location.href));plan=planExtentLinearHolePattern({request,seed,existingHoles:state.holes.map(h=>h.intent),prepared:sourceExtent,targetMetrics});}
+ else{const {planOwnedLinearHolePattern}=await import(new URL('./ownedLinearHolePatternPlan.mjs',self.location.href));plan=planOwnedLinearHolePattern({request,seed,existingHoles:state.holes.map(h=>h.intent),sourceProfile,targetMetrics});}
  return{...await cutOwnedBoreTools(targetName,target,plan,targetMetrics,request.featureId,cost,{prior:selectedDrawingCylinders.get(msg.parentToken)||[]}),request};
 }
 
@@ -890,11 +900,12 @@ self.onmessage = async event => {
     }
     if(msg?.kind==='solid-face-frame'&&planarAttachmentsMode){
       if(Reflect.ownKeys(msg).sort().join(',')!=='framePolicy,kind,originFeatureId,producerFeatureId,selectionId,seq,sourceFeatureId,sourceRegionId,sourceToken,token')bad('Invalid attachment read');
-      const name=nameFor(msg.token);nameFor(msg.sourceToken);const target=selectedSelectionIndices.get(msg.token),source=selectedSelectionIndices.get(msg.sourceToken),profile=selectedSourceProfiles.get(msg.sourceToken);
-      if(!target||target.featureId!==msg.producerFeatureId||!source||source.featureId!==msg.sourceFeatureId||msg.originFeatureId!==msg.sourceFeatureId||!profile||profile.region.id!==msg.sourceRegionId)throw Object.assign(Error('The actual attachment constructor is unavailable'),{code:'UNRESOLVED_SOURCE',reason:'DATUM_CHANGED'});
+      const name=nameFor(msg.token);nameFor(msg.sourceToken);const target=selectedSelectionIndices.get(msg.token),source=selectedSelectionIndices.get(msg.sourceToken),profile=selectedSourceProfiles.get(msg.sourceToken),sourceExtent=selectedExtentProfiles.get(msg.sourceToken),constructorProfile=sourceExtent?.request||profile;
+      if(sourceExtent&&(!profileExtentsMode||profile!==undefined||sourceExtent.binding.featureId!==msg.sourceFeatureId))bad('Conflicting private attachment constructor source');
+      if(!target||target.featureId!==msg.producerFeatureId||!source||source.featureId!==msg.sourceFeatureId||msg.originFeatureId!==msg.sourceFeatureId||!constructorProfile||constructorProfile.region.id!==msg.sourceRegionId)throw Object.assign(Error('The actual attachment constructor is unavailable'),{code:'UNRESOLVED_SOURCE',reason:'DATUM_CHANGED'});
       const {validateOwnedTopology}=await import(new URL('./ownedTopologyContract.mjs',self.location.href)),topology=validateOwnedTopology(ownedJSON('_ReadOwnedTopologyV1',name));
       if(topology.solidCount!==1)throw Object.assign(Error('Attachment requires one current valid native solid'),{code:'UNSUPPORTED_FRAME_PARENT',reason:'UNSUPPORTED_CAP'});
-      const observation=planarAttachmentFacts.resolveNativePlanarAttachment({topology,index:target.index,sourceProfile:profile,request:msg});
+      const observation=planarAttachmentFacts.resolveNativePlanarAttachment({topology,index:target.index,...(sourceExtent?{sourceExtent}:{sourceProfile:profile}),request:msg});
       self.postMessage({kind:'result',seq:msg.seq,token:msg.token,producerFeatureId:msg.producerFeatureId,observation});return;
     }
     if(msg?.kind==='solid-drawing-derived'&&drawingReferencesMode){

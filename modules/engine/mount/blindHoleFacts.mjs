@@ -7,6 +7,7 @@ import {inspectFiniteCylinder,FINITE_CYLINDER_REFUSAL_CODES} from './prismaticBo
 const fail=message=>{throw Object.assign(Error(message),{code:'BLIND_FLOOR_UNQUALIFIED'});};
 const dot=(a,b)=>a.reduce((n,x,i)=>n+x*b[i],0),sub=(a,b)=>a.map((n,i)=>n-b[i]),cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
 export function qualifyBlindHoleFacts({sourceTopologies,result,topology,toolConstruction,toolRequest,plan,classify}){
+ if(!Number.isFinite(plan.lowerLevel)||!Number.isFinite(plan.floorLevel)||!(plan.lowerLevel<plan.floorLevel))fail('The actual constructor lower level and interior floor are required.');
  let cylinder;
  try{cylinder=deriveCylinderCutWitness({operation:'subtract',sourceTopologies,result,topology,toolConstruction,toolRequest});}
  catch(e){if(!['DRAWING_WITNESS_UNAVAILABLE','DRAWING_WITNESS_UNSUPPORTED_TOOL','DRAWING_WITNESS_INPUT_MISMATCH'].includes(e?.code))throw e;fail('The actual blind cylinder has no unique qualified descendant.');}
@@ -25,6 +26,6 @@ export function qualifyBlindHoleFacts({sourceTopologies,result,topology,toolCons
  const lower=rims.filter(i=>{const edge=topology.edges[i-1];return edge.type==='circle'&&Math.abs(dot(sub(edge.analytic.center,origin),f.z))<=1e-9;});
  if(lower.length!==1||floorEdges.length!==1||floorEdges[0]!==lower[0]||topology.edges[lower[0]-1].vertices.some(i=>Math.abs(dot(sub(topology.vertices[i-1].point,a.origin),a.normal))>1e-9))fail('The blind floor boundary is not the actual lower cylindrical rim.');
  const point=z=>f.origin.map((n,i)=>n+f.x[i]*plan.centerLocal[0]+f.y[i]*plan.centerLocal[1]+f.z[i]*z);
- if(typeof classify!=='function'||classify(point(plan.floorLevel))!=='boundary'||classify(point(plan.floorLevel+depth/2))!=='outside'||classify(point(plan.floorLevel/2))!=='inside')fail('Native blind floor/material/void classifications did not corroborate the cut.');
+ if(typeof classify!=='function'||classify(point(plan.floorLevel))!=='boundary'||classify(point(plan.floorLevel+depth/2))!=='outside'||classify(point(plan.lowerLevel+(plan.floorLevel-plan.lowerLevel)/2))!=='inside')fail('Native blind floor/material/void classifications did not corroborate the cut.');
  return Object.freeze({version:1,unit:'millimeter',scope:'response-local',persistentIds:false,termination:'flat-bottom',cylinder,floorFace:floorIndex,entryLevel:plan.entryLevel,floorLevel:plan.floorLevel,depth,extent:Object.freeze(extent)});
 }

@@ -4,7 +4,7 @@
 const crypto=require('crypto');
 const {embedDisplayProjection}=require('./embedded-display.cjs');
 const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
-const bootstrapHash='4d24a303b373da30d97926179c1056b6b48ffeecea612e909ee550f460bf6bda';
+const bootstrapHash='d7ef4d7789dcc9f797f56ac4bd9247a9aa4832b79214505dbe790d2e659cff41';
 const glueHash='a84b31900e58e61a1d7e3f8d04978408455764ad149923359e7fba19d3d07884';
 function replaceOnce(source,before,after){if(source.split(before).length!==2)throw Error('Unexpected OCI bootstrap shape.');return source.replace(before,after);}
 function embeddedWorker(bootstrap,glue){

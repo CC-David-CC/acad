@@ -1,3 +1,4 @@
+import {PROFILE_EXTENT_ATTACHMENT_POLICY} from './ownedPlanarAttachmentProtocol.mjs';
 import {captureDrawingDerivedRequest,DRAWING_DERIVED_REFUSALS} from './ownedDrawingDerivedProtocol.mjs';
 import {captureProfileExtentIntent,captureProfileExtentEvaluation,sameProfileExtentBinding,PROFILE_EXTENT_REFUSALS,PROFILE_EXTENT_OPERATION} from './ownedProfileExtentPlan.mjs';
 import {captureDrawingSectionTransfer} from './ownedDrawingSectionProtocol.mjs';
@@ -482,10 +483,10 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
 
   async function readPlanarAttachment(request,options={}){
     if(!planarAttachments)throw err('UNSUPPORTED_FRAME_PARENT','This runtime does not bind native planar attachments');
-    validOptions(options);const r=capturePlanarAttachmentRequest(request);assertSolidBinding(r.handle);assertSolidBinding(r.sourceHandle);
+    validOptions(options);const r=capturePlanarAttachmentRequest(request);if(r.framePolicy===PROFILE_EXTENT_ATTACHMENT_POLICY&&!profileExtents)throw err('UNSUPPORTED_FRAME_PARENT','This runtime does not bind extent cap attachments');assertSolidBinding(r.handle);assertSolidBinding(r.sourceHandle);
     const target=solidRecords.get(r.handle.id),source=solidRecords.get(r.sourceHandle.id);
     const response=await send({kind:'solid-face-frame',token:target.token,sourceToken:source.token,producerFeatureId:r.producerFeatureId,originFeatureId:r.originFeatureId,selectionId:r.selectionId,sourceFeatureId:r.sourceFeatureId,sourceRegionId:r.sourceRegionId,framePolicy:r.framePolicy},'result',options.signal);
-    let observation;try{if(Reflect.ownKeys(response).sort().join(',')!=='kind,observation,producerFeatureId,seq,token'||response.token!==target.token||response.producerFeatureId!==r.producerFeatureId)throw Error('Attachment reply binding changed');observation=capturePlanarAttachmentObservation(response.observation);}catch(cause){shutdown('ENGINE_FAILURE','Malformed native attachment observation',cause);throw err('ENGINE_FAILURE','Malformed native attachment observation',cause);}
+    let observation;try{if(Reflect.ownKeys(response).sort().join(',')!=='kind,observation,producerFeatureId,seq,token'||response.token!==target.token||response.producerFeatureId!==r.producerFeatureId)throw Error('Attachment reply binding changed');observation=capturePlanarAttachmentObservation(response.observation);if(observation.framePolicy!==r.framePolicy)throw Error('Attachment policy changed');}catch(cause){shutdown('ENGINE_FAILURE','Malformed native attachment observation',cause);throw err('ENGINE_FAILURE','Malformed native attachment observation',cause);}
     assertSolidBinding(r.handle);assertSolidBinding(r.sourceHandle);if(solidRecords.get(r.handle.id)!==target||solidRecords.get(r.sourceHandle.id)!==source)throw err('INVALID_BINDING','Attachment input changed');
     return Object.freeze({contractVersion:1,op:'solid.face.frame.read',unit:'millimeter',observation});
   }
