@@ -1,0 +1,8 @@
+# Countersink acceptance review disposition
+
+BEFORE review `bf39ffa4619c0c8f306147972776a95344724495` and original acceptance `97728e06efb88c81a2208d3ed7a46c7199c4f711` remain unchanged. This is the separate source-only acceptance correction; no product/Host example, Root/frozen evidence or geometry criterion changes. No execution, parser, probes, tests, builds, Native or browser work was performed.
+
+1. `check.py::plane_identity` requires a genuine safe-positive public integer and an exact canonical saved PLANE string spelling. Only the two PLANE comparisons use it. Numeric selected-profile/countersink feature fields and all source/history identities/frames/equations retain their exact checks. This repairs a known writer/public dialect mismatch, not an observed invalid geometry result.
+2. `check.py::mesh` now admits only actual namespace triangle elements containing exactly v1/v2/v3 attributes, no descendants and no non-whitespace text. It then passes the SAME actual integer index vectors and vertices to the unchanged complete conical mesh oracle. Actual object/resource/material checks remain; p1/p2/p3/pid overrides cannot silently contradict them. This matches the finite exporter grammar at core3mf.mjs:100 and closes a material acceptance blind spot.
+
+README documents both changes. The driver, reusable example, original full CONTRACT/BEFORE-ACCEPTANCE, negative archive producer/check, independent trigonometry/STEP/mesh/SVG oracle sources and every budget remain byte-unchanged in this correction. Root must bind this new acceptance commit in the existing source/helper roster before the complete whole; the original failed-source packet is not overwritten. Whole success, FIRST independent oracle and actual rendered SVG review remain pending.
