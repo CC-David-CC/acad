@@ -20,9 +20,19 @@ Exact context fields:
 - `Module`, `malloc`, `free`: the actual initialized current Native instance and
   allocator functions; no generic DRAW/eval interface or injected native writer.
 - `runtimeRevision`, `parentName`, `sourceName`, `parentRecord`, `sourceRecord`,
-  `sourceProfile`: actual captured private values. Parent and source must be the
+  `sourceProfile`, `sourceConstruction`, `sourceCreationBinding`: actual captured
+  private values. Parent and source must be the
   SAME genuine earlier selected constructor, with the original actual record/
   index and numeric V3 rectangular source profile bound to the requested IDs.
+  sourceConstruction is the actual retained selectedPrismProvenance record.
+  sourceCreationBinding is a future immutable constructor-input binding with
+  exact featureId/faceId/sourceSha256/regionId/requestSha256, issued by the
+  validated actual creation path, following the extent-source convention.
+  These are document input identities, NOT Native topology identity. Current
+  old-profile maps do not retain this binding; they cannot mint this context.
+  A later countersink caller cannot supply it or authenticate it by shape.
+  Main/ledger must bind actual registered face/source/frame/history to the
+  constructor input before the future private Worker binding is installed.
 - `requireCurrent()`: a lexical READ-ONLY guard for the SAME busy operation,
   Module/runtime and original parent/source map/record/index/profile bindings.
   It is called before/after Native operations and across every bounded yield.
