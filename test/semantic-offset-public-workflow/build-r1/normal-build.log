@@ -1,0 +1,55 @@
+From /mnt/data10tb/git/ACAD
+ * branch              82dd6926b6be9bb0c7bebe53661f1f642975adbd -> FETCH_HEAD
+Previous HEAD position was e2a3027f Require complete distinct bounded warning rows in the whole drawing oracle
+HEAD is now at 82dd6926 Qualify bore warning legend with complete workflow first oracle and fourteen actual sheet reviews
+
+> acad@0.1.0 build:physical-parameters-worker
+> webpack --config build/webpack.physical-parameters-worker.cjs
+
+asset worker.js 137 KiB [emitted] [minimized] (name: main)
+orphan modules 266 KiB [orphan] 17 modules
+./web/app/cad/parameters/physicalQuantitiesWorker.mjs + 15 modules 266 KiB [built] [code generated]
+webpack 5.74.0 compiled successfully in 1888 ms
+
+> acad@0.1.0 build:sketch-worker
+> node build/precompile-numeric.cjs && webpack --config build/webpack.headless-sketch-worker.cjs
+
+{"sourceSHA256":"5dcaba2016fd237091e3a17b0dc272fb21f0e2b15d7628f95a0ad0cd4cdf4020","factories":308,"operators":19,"output":"/mnt/data10tb/codi-acad-build-20261107-r2/node_modules/.cache/codi-numeric/precompiled.js"}
+asset worker.js 4.88 MiB [emitted] (name: main) 1 related asset
+orphan modules 22.7 KiB [orphan] 7 modules
+runtime modules 1.25 KiB 6 modules
+modules by path ./ 2.38 MiB
+  modules by path ./web/app/ 1.98 MiB
+    modules by path ./web/app/sketcher/ 1.92 MiB 203 modules
+    modules by path ./web/app/cad/ 61.3 KiB
+      modules by path ./web/app/cad/parameters/*.mjs 28.4 KiB 8 modules
+      modules by path ./web/app/cad/craft/*.mjs 20.2 KiB 3 modules
+      + 3 modules
+    ./web/app/utils/utils.js 2.81 KiB [built] [code generated]
+  modules by path ./modules/ 404 KiB 72 modules
+modules by path ../ 1.88 MiB 231 modules
+
+ERROR in ./web/app/sketcher/headless/offsetTransition.ts
+Module build failed (from ../codi-four-corner-clean-integrated-20261104/node_modules/babel-loader/lib/index.js):
+SyntaxError: /mnt/data10tb/codi-acad-build-20261107-r2/web/app/sketcher/headless/offsetTransition.ts: Unexpected token, expected "," (15:281)
+
+  13 | const text=(s:any)=>{if(typeof s!=='string'||s.length>1048576||new TextEncoder().encode(s).byteLength>1048576)fail('OFFSET_LIMIT','Offset source exceeds1MiB.');return s;};
+  14 | function capture(v:any,verify=false){const r=record(v,verify?['revision','sketchJSON','externalParameters','intent','candidateJSON','offset','changed']:['revision','sketchJSON','externalParameters','intent']);if(typeof r.revision!=='string'||!r.revision||r.revision.length>256)fail('OFFSET_INVALID','Invalid Offset revision.');text(r.sketchJSON);const p=record(r.externalParameters,Reflect.ownKeys(r.externalParameters||{})),external=Object.create(null);if(Object.keys(p).length>1024)fail('OFFSET_LIMIT','Offset parameter inventory exceeds1024.');for(const[k,n]of Object.entries(p)){if(!k||k.length>256||typeof n!=='number'||!Number.isFinite(n)||Math.abs(n)>1e9)fail('OFFSET_INVALID','Offset requires current numeric bindings.');external[k]=n;}return{...r,externalParameters:external,intent:captureOffsetIntent(r.intent)};}
+> 15 | const outcome=(revision:string,error:any)=>({revision,ok:false as const,error:{code:typeof error?.code==='string'?error.code.slice(0,64):'OFFSET_FAILED',message:String(error?.message||'Offset operation failed.').slice(0,512),...(failureCause(error)?{cause:failureCause(error)}:{})});
+     |                                                                                                                                                                                                                                                                                          ^
+  16 | function proof(revision:string,source:any,external:any){validateOffsetSources(source,external);let auxiliary:any;const solved=solveSketch({revision,sketch:structuredClone(source),boundary:structuredClone(source.boundary),externalParameters:external},undefined,b=>auxiliary=b);if(!solved.ok)throw Object.assign(Error(solved.error.message),solved.error);assertVerifiedReplayGeometry(source,solved.sketch,solved.evidence,external);const checked=evaluateCapturedSketch(source,external,solved.evidence,undefined,auxiliary);return{solved,checked};}
+  17 | const same=(a:any,b:any)=>{if(difference(a,b)!=='no difference')fail('OFFSET_INTENT','Offset changed unrelated authored source: '+difference(a,b));};
+  18 | function removalDependency(candidate:any,members:Set<string>){const todo:any[]=[candidate];let visits=0;while(todo.length){const value=todo.pop();if(++visits>100000)fail('OFFSET_LIMIT','Offset reference inventory exceeds its bound.');if(typeof value==='string'&&members.has(value))fail('OFFSET_DEPENDENCY','A retained source relation depends on this Offset output.');if(value&&typeof value==='object')todo.push(...Object.values(value));}}
+    at instantiate (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:72:32)
+    at constructor (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:366:12)
+    at TypeScriptParserMixin.raise (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:3453:19)
+    at TypeScriptParserMixin.unexpected (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:3491:16)
+    at TypeScriptParserMixin.expect (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:4128:28)
+    at TypeScriptParserMixin.parseObjectLike (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:13730:14)
+    at TypeScriptParserMixin.parseExprAtom (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:13135:23)
+    at TypeScriptParserMixin.parseExprSubscripts (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:12785:23)
+    at TypeScriptParserMixin.parseUpdate (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:12764:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/mnt/data10tb/codi-four-corner-clean-integrated-20261104/node_modules/@babel/parser/lib/index.js:12734:23)
+ @ ./web/app/sketcher/headless/solveWorker.ts 124:24-53 798:63-124
+
+webpack 5.74.0 compiled with 1 error in 13669 ms

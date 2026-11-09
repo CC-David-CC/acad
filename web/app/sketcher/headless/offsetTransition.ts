@@ -12,7 +12,14 @@ import {firstCapturedGeometryDifference as difference} from './capturedGeometryS
 import {failureCause} from '../constr/admissionCause.mjs';
 const text=(s:any)=>{if(typeof s!=='string'||s.length>1048576||new TextEncoder().encode(s).byteLength>1048576)fail('OFFSET_LIMIT','Offset source exceeds1MiB.');return s;};
 function capture(v:any,verify=false){const r=record(v,verify?['revision','sketchJSON','externalParameters','intent','candidateJSON','offset','changed']:['revision','sketchJSON','externalParameters','intent']);if(typeof r.revision!=='string'||!r.revision||r.revision.length>256)fail('OFFSET_INVALID','Invalid Offset revision.');text(r.sketchJSON);const p=record(r.externalParameters,Reflect.ownKeys(r.externalParameters||{})),external=Object.create(null);if(Object.keys(p).length>1024)fail('OFFSET_LIMIT','Offset parameter inventory exceeds1024.');for(const[k,n]of Object.entries(p)){if(!k||k.length>256||typeof n!=='number'||!Number.isFinite(n)||Math.abs(n)>1e9)fail('OFFSET_INVALID','Offset requires current numeric bindings.');external[k]=n;}return{...r,externalParameters:external,intent:captureOffsetIntent(r.intent)};}
-const outcome=(revision:string,error:any)=>({revision,ok:false as const,error:{code:typeof error?.code==='string'?error.code.slice(0,64):'OFFSET_FAILED',message:String(error?.message||'Offset operation failed.').slice(0,512),...(failureCause(error)?{cause:failureCause(error)}:{})});
+const outcome=(revision:string,error:any)=>({
+ revision,ok:false as const,
+ error:{
+  code:typeof error?.code==='string'?error.code.slice(0,64):'OFFSET_FAILED',
+  message:String(error?.message||'Offset operation failed.').slice(0,512),
+  ...(failureCause(error)?{cause:failureCause(error)}:{})
+ }
+});
 function proof(revision:string,source:any,external:any){validateOffsetSources(source,external);let auxiliary:any;const solved=solveSketch({revision,sketch:structuredClone(source),boundary:structuredClone(source.boundary),externalParameters:external},undefined,b=>auxiliary=b);if(!solved.ok)throw Object.assign(Error(solved.error.message),solved.error);assertVerifiedReplayGeometry(source,solved.sketch,solved.evidence,external);const checked=evaluateCapturedSketch(source,external,solved.evidence,undefined,auxiliary);return{solved,checked};}
 const same=(a:any,b:any)=>{if(difference(a,b)!=='no difference')fail('OFFSET_INTENT','Offset changed unrelated authored source: '+difference(a,b));};
 function removalDependency(candidate:any,members:Set<string>){const todo:any[]=[candidate];let visits=0;while(todo.length){const value=todo.pop();if(++visits>100000)fail('OFFSET_LIMIT','Offset reference inventory exceeds its bound.');if(typeof value==='string'&&members.has(value))fail('OFFSET_DEPENDENCY','A retained source relation depends on this Offset output.');if(value&&typeof value==='object')todo.push(...Object.values(value));}}

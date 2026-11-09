@@ -1,0 +1,3 @@
+# First composed normal build failure
+
+Actual Core82dd6926b6be9bb0c7bebe53661f1f642975adbd. Root normal build63243 terminated exit1 in headless sketch Worker compilation. Babel reports missing object-closing brace in offsetTransition.ts outcome at line15; inherited from the initial source packet. No browser workflow was started, no stage was accepted. The retained log is unchanged. Fix closes the nested error object and outer result separately, formatting the expression for review. No failure code/meaning, solver equation or tolerance changes. Next validation is a fresh complete normal build and complete public workflow; no microprobes/per-step tests.
