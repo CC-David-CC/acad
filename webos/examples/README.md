@@ -540,3 +540,13 @@ supporting line, not finite-Segment proximity or a parallel-line offset.
 Source/host/whole workflow/oracle are PREPARED ONLY; no qualification follows
 from this recipe. Root must compose normal assets and run the complete shared
 source/Native suffix/travel/.cad workflow before its independent checker.
+
+`source-bound-blind-hole.mjs` is a **source-ready, unqualified** semantic centered
+flat-bottom blind-hole example. Supply the existing public `createCadAgent`
+instance and explicit staged `BLIND_ENGINE_REVISION`; call `build`, `create`,
+`edit`, `setThickness`, shared `travel`, and normal agent Save/Open separately.
+`bind` uses the existing directed physical parameter document for both blind
+lengths and parent thickness. Depth is positive from the current actual top,
+strictly less than thickness, never THRU. Generated tools/native names/frames
+are private; the authentic entry comes from current discovery. No autoexecute,
+AI provider or new file coordinator. No runtime/geometry qualification yet.
