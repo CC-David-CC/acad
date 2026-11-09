@@ -1,6 +1,6 @@
 # Tangency implementation and lifecycle review
 
-Source-only implementation based Core `fcb39803a5412aa1ebe4f32cd85cd665b66e99fe` and Desktop `caa9c50e6`. Proposal `f0e6cf2` supplies the original contract/math. No source checks, tests, builds, probes or browser runs have been executed. The prepared complete application workflow and after-whole oracle, not this source packet, must establish qualification.
+Source-only implementation based Core `fcb39803a5412aa1ebe4f32cd85cd665b66e99fe` and Desktop `caa9c50e6`. Proposal `f0e6cf2` supplies the original contract/math. No tests, builds, probes or browser runs have been executed by this lane; source reading and Git custody only. The prepared complete application workflow and after-whole oracle, not this source packet, must establish qualification.
 
 ## One authored model
 
@@ -56,3 +56,8 @@ Same-ray Arc endpoints or zero radial direction are unqualified, and a collapsed
 
 
 The narrow taxonomy/normalization follow-up uses one pure own-data code selector at the existing direct/deferred domain catch sites: RESOURCE_LIMIT retains resource-limit, finite uncertainty/unsupported retains retained-validation-failure, ordinary invalid domains retain invalid-domain. No success, equation, order or threshold changes. Direct errors keep their code/message. New prepared tangency validation rechecks the actual original domain before generic conflict reporting, preserving actual finite/resource reason on rollback. Circle-Circle residual normalization derives a numeric scale directly from raw native centers/radii/literal branch without invoking its domain guard a second time; a bad/nonfinite scale yields nonfinite residual diagnostics while an already captured domain cause remains authoritative.
+
+
+## Prepared whole-run coverage index
+
+`test/tangency-public-workflow/desktop-driver.mjs` is source-ready, not an observed PASS. Its `support` case maps absent/prepared/admitted, genuine distinct redundant signed row, normal/radius contradiction recovery, signed reversal/free rotation, actual nonfinite Number at the public boundary, stale/no-op and two normal .cad cycles. `finite` maps supporting versus finite extent, actual CCW interior/quarter endpoint, exact3–4–5 rotated endpoint/interior, actual public near-seam edit followed by uncertain refusal, radius travel and one .cad cycle. `circle-circle` maps all three literal branches, movable-center creation, regular independent/full/redundant rows, reversed external/internal no-ops retaining redo/source order, containment/coincident refusals, named radius formula travel/removal, three .cad cycles and three own malformed source-domain Open controls. Each observation checks readonly state, unchanged real Native suffix/material queries, unrelated source and settled resources. Source-first exact Fraction/100-digit Decimal/ZIP checker runs only after full terminal PASS. Budget exhaustion and moving generators are explicitly not runtime-qualified by this finite workflow.
