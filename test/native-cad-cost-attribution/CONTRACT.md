@@ -39,3 +39,23 @@ Large genuine authored-source/scene capacity remains a separate missing input ga
 ## Source ownership and invocation
 
 NEW `test/native-cad-cost-attribution/{CONTRACT.md,README.md,desktop-driver.mjs,observe.mjs,process-memory.mjs,check.py}` only. Retained native-container/typed-artifact/harness/examples/oracles are dependencies, pinned before/after; none is edited. No product/runtime/driver already executing elsewhere is changed. Contract and source implementation are separate commits. Root sets explicit Chrome custody/profile/PID/user-data-dir, source tuple, normal signed pins, explicit engine and output before the complete run; `README.md` records the exact command template. No test/probe/build/native/browser execution is part of preparing this source.
+
+## R1 ordinary layout finding and coherent lifecycle repair
+
+The first complete attempt is retained in evidence-r1. Ordinary profiles keep
+account window layout; the private-context launch helper can see two newly
+registered CAD windows if restored registration races its menu click. No
+product or persistence error is inferred. The whole workflow now explicitly
+closes its actual saved clean CAD window using the visible title-bar Close
+control before retiring the ordinary page and logging in again. It verifies
+clean=false is NOT present (dirty must be exactlyfalse), actual DOM removal
+and command unregistration; no discard confirmation, localStorage clearing,
+window count waiver, automatic second launch or fabricated restore state.
+The fresh login still launches through the unchanged menu helper, then performs
+the same real public native Open/reedit/artifact checks. Final successful close
+uses the same clean-window path. Uncertain-write context retention and existing
+settled-failure page cleanup remain unchanged. This is the normal Save→close
+window→close page→sign in→Open route; automatic restored-document acceptance
+is a different unqualified route. All original geometry/archive criteria stay.
+The next run reuses the dedicated ordinary profile warmed by R1, explicitly
+not cold and without cache clear/forced GC. No per-step tests were executed.

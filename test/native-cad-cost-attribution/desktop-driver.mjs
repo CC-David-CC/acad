@@ -56,8 +56,17 @@ async function save(file,label,width){
  receipt.nativeSaves.push({label,...artifact,width,result,commandPhase:lastCommandPhase,definitions:structuredClone(definitions),before,acceptedEnvelope});flush();record('Actual .cad native Save and whole-file server synchronization',{label,result,artifact});return{...artifact,acceptedEnvelope,result};
 }
 async function login(){await h.login();await cost.attachPage(h.page);}
-async function retire(){if(h?.page&&!h.page.isClosed())await cost.beforeClose(h.page);await h.retire();}
-async function freshOpen(file){await retire();await login();await h.launch();const info=await h.command('inspect'),result=await h.command('open-project',{revision:info.revision,path:file});assert.equal(result.status,'opened');await h.refreshFrame();return result;}
+async function retire({closeSavedWindow=false}={}){
+ if(closeSavedWindow&&profileMode==='ordinary')await cost.run('ordinary-saved-window-close',async()=>{
+  const before=await h.command('inspect');assert.equal(before.dirty,false,'Only normally close the actual saved clean window');
+  const id=h.windowId;await h.page.locator('[data-window="'+id+'"] [aria-label="Close"]').click();
+  await h.page.waitForFunction(id=>!document.querySelector('[data-window="'+id+'"]'),{},id);
+  assert.equal(await h.page.evaluate(id=>(globalThis.codiDesktopCommands?.list?.()||[]).some(c=>c.windowId===id),id),false,'Closed owned window unregisters its commands');
+  record('Ordinary saved window closed through its actual public title-bar control',{windowId:id,path:before.path,dirty:before.dirty});
+ },{role:'public-window-close'});
+ if(h?.page&&!h.page.isClosed())await cost.beforeClose(h.page);await h.retire();
+}
+async function freshOpen(file){await retire({closeSavedWindow:true});await login();await h.launch();const info=await h.command('inspect'),result=await h.command('open-project',{revision:info.revision,path:file});assert.equal(result.status,'opened');await h.refreshFrame();return result;}
 
 async function editWidth(width){recipe=await makeRecipe();const next=definitions.map(row=>row.name==='width'?{...row,expression:`mm(${width})`}:row);const result=await cost.run('authored-width:'+width,()=>recipe.replaceDefinitions(next),{role:'public-authoring'});definitions=next;assert.equal(result.changed,true);}
 try{
@@ -76,7 +85,7 @@ try{
  await freshOpen(file);await pin();const final=await observe('Second fresh Open preserves reedited typed manufacturing document',130);assert.deepEqual(final.drawing.definition,definition);assert.deepEqual(final.manufacturing.metadata,reedited.acceptedEnvelope.manufacturing);assert.deepEqual(final.capture.native.history,reedited.acceptedEnvelope.project.model.history);assert.equal(final.capture.native.expressions,reedited.acceptedEnvelope.project.model.expressions);receipt.status='PASS';
 }catch(error){receipt.status='FAIL';receipt.error={name:error.name,code:error.code??null,message:error.message,stack:error.stack};console.error(error.stack);process.exitCode=1;}
 finally{
- try{if(retainOwnedContext){receipt.ownedContextClosed=false;receipt.ownedContextRetainedForRoot=true;receipt.codecWorkers=[...codecTargets.values()].map(record=>record.row);}else{if(h)await retire();receipt.ownedContextClosed=true;await finishCodecs();if(cost)await cost.run('post-normal-close-idle',()=>new Promise(resolve=>setTimeout(resolve,postCloseMS)),{role:'post-close-idle'});}}
+ try{if(retainOwnedContext){receipt.ownedContextClosed=false;receipt.ownedContextRetainedForRoot=true;receipt.codecWorkers=[...codecTargets.values()].map(record=>record.row);}else{if(h)await retire({closeSavedWindow:receipt.status==='PASS'});receipt.ownedContextClosed=true;await finishCodecs();if(cost)await cost.run('post-normal-close-idle',()=>new Promise(resolve=>setTimeout(resolve,postCloseMS)),{role:'post-close-idle'});}}
  catch(error){receipt.status='FAIL';receipt.cleanupError={name:error.name,code:error.code??null,message:error.message};process.exitCode=1;}
  finally{if(cost)try{receipt.cost=await cost.stop();}catch(error){receipt.costObservationFailure={name:error.name,message:error.message};}receipt.sourcePinsAfter=hashes();if(canonical(receipt.sourcePinsAfter)!==canonical(receipt.sourcePins)){receipt.status='FAIL';receipt.sourceChanged=true;process.exitCode=1;}flush();await browser.disconnect();receipt.sharedBrowserDisconnectedOnly=true;flush();}
 }

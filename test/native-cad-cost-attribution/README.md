@@ -71,3 +71,23 @@ representation, never shell-evaluating the title. Whitespace-containing paths
 in a flattened title remain unsupported rather than guessed. Root PID3051121,
 port19330, profile /tmp/codi-cad-cost-chrome-20261108-r1 is the selected first
 ordinary profile; default TLS/cache policy, no forced GC.
+
+## R1 ordinary layout finding and coherent lifecycle repair
+
+The first complete attempt is retained in evidence-r1. Ordinary profiles keep
+account window layout; the private-context launch helper can see two newly
+registered CAD windows if restored registration races its menu click. No
+product or persistence error is inferred. The whole workflow now explicitly
+closes its actual saved clean CAD window using the visible title-bar Close
+control before retiring the ordinary page and logging in again. It verifies
+clean=false is NOT present (dirty must be exactlyfalse), actual DOM removal
+and command unregistration; no discard confirmation, localStorage clearing,
+window count waiver, automatic second launch or fabricated restore state.
+The fresh login still launches through the unchanged menu helper, then performs
+the same real public native Open/reedit/artifact checks. Final successful close
+uses the same clean-window path. Uncertain-write context retention and existing
+settled-failure page cleanup remain unchanged. This is the normal Save→close
+window→close page→sign in→Open route; automatic restored-document acceptance
+is a different unqualified route. All original geometry/archive criteria stay.
+The next run reuses the dedicated ordinary profile warmed by R1, explicitly
+not cold and without cache clear/forced GC. No per-step tests were executed.
