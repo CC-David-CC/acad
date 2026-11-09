@@ -18,7 +18,9 @@ function clipCurve(c,low,high){
  }
  if(c.a.every(n=>n===0)&&c.b.every(n=>n===0))return[];
  if(last-first>2*Math.PI)fail('Detail supports one actual conic turn per parent trim');
- const events=[first,last];
+ // Keep event occurrences until their order is resolved. Equal computed
+ // numbers from different boundaries are not an identity certificate.
+ const events=[{t:first,uncertainty:0},{t:last,uncertainty:0}],turn=2*Math.PI;
  for(let i=0;i<2;i++)for(const limit of [low[i],high[i]]){
   const a=c.a[i],b=c.b[i],radius=Math.hypot(a,b),delta=limit-c.center[i],uncertainty=error(a,b,c.center[i],limit);
   if(uncertainty>1e-7)fail('Detail boundary arithmetic is outside its coordinate budget');
@@ -28,14 +30,29 @@ function clipCurve(c,low,high){
   // certificate. Refuse this detail, never clamp acos or merge close roots.
   if(Math.abs(Math.abs(delta)-radius)<=uncertainty)fail('Detail conic boundary is numerically ambiguous');
   if(Math.abs(delta)>=radius)continue;
-  const phase=Math.atan2(b,a),angle=Math.acos(delta/radius);
+  const ratio=delta/radius,ratioUncertainty=2*uncertainty/(radius-uncertainty)+error(ratio);
+  if(!(radius>uncertainty)||!Number.isFinite(ratioUncertainty)||ratio-ratioUncertainty<=-1||ratio+ratioUncertainty>=1)fail('Detail root sensitivity is unresolved');
+  const phase=Math.atan2(b,a),angle=Math.acos(ratio);
+  // Propagate the existing coordinate resolution envelope through acos;
+  // near-tangent roots cannot use only an ulp budget on their final t value.
+  // This is the finite floating analytic domain, not an exact-trig claim.
+  const rootUncertainty=Math.max(Math.acos(ratio-ratioUncertainty)-angle,angle-Math.acos(ratio+ratioUncertainty))+2*uncertainty/radius+error(phase,angle);
+  if(!Number.isFinite(rootUncertainty))fail('Detail root arithmetic is unresolved');
   for(const root of [phase-angle,phase+angle]){
-   const lo=Math.ceil((first-root)/(2*Math.PI)),hi=Math.floor((last-root)/(2*Math.PI));
-   for(let k=lo;k<=hi;k++){const t=root+k*2*Math.PI;if(t>first&&t<last)events.push(t);}
+   // Include one lift on either side BEFORE trim filtering. Otherwise a root
+   // rounded onto/outside an endpoint could disappear without an order check.
+   const lo=Math.ceil((first-root)/turn)-1,hi=Math.floor((last-root)/turn)+1;
+   if(!Number.isSafeInteger(lo)||!Number.isSafeInteger(hi)||hi-lo>3)fail('Detail periodic event census is unresolved');
+   for(let k=lo;k<=hi;k++){
+    const t=root+k*turn,resolution=rootUncertainty+error(t,root,k*turn,first,last);
+    if(Math.abs(t-first)<=resolution||Math.abs(t-last)<=resolution)fail('Detail boundary event cannot be ordered against its original trim');
+    if(t>first&&t<last)events.push({t,uncertainty:resolution});
+   }
   }
  }
- events.sort((a,b)=>a-b);const unique=[];
- for(const t of events){if(unique.length&&t===unique[unique.length-1])continue;if(unique.length&&t-unique[unique.length-1]<=error(t,unique[unique.length-1]))fail('Distinct detail events cannot be ordered reliably');unique.push(t);}
+ events.sort((a,b)=>a.t-b.t);const ordered=[];
+ for(const event of events){const previous=ordered[ordered.length-1];if(previous&&event.t-previous.t<=previous.uncertainty+event.uncertainty+error(event.t,previous.t))fail('Detail event occurrences cannot be ordered reliably');ordered.push(event);}
+ const unique=ordered.map(event=>event.t);
  const kept=[];
  for(let i=0;i+1<unique.length;i++){
   const a=unique[i],b=unique[i+1],p=at(c,a+(b-a)/2);let outside=false;
