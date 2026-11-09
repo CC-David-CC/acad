@@ -1,4 +1,6 @@
 import {offsetFailureCodes} from 'sketcher/generators/offsetSource.mjs';
+import {captureCounterboreParameters,recordCounterboreEdit,planCounterboreTravel} from './authoredEditJournal.mjs';
+import {createWorkerCounterboreCommands} from './workerCounterboreCommands';
 import {captureBlindHoleParameters,recordBlindHoleEdit,planBlindHoleTravel} from './authoredEditJournal.mjs';
 import {createWorkerBlindHoleCommands} from './workerBlindHoleCommands';
 import {createPrincipalPlanePlacementCommands} from './principalPlanePlacementCommands';
@@ -913,6 +915,7 @@ export function activate(ctx: ApplicationContext) {
     if(target.kind==='selected-profile-depth')return authoredSelectedProfileDepthOperation(request,options);
     if(target.kind==='selected-profile-region')return authoredSelectedProfileRegionOperation(request,options);
     if(target.kind==='linear-hole-pattern')return authoredLinearHolePatternOperation(request,options);
+    if(target.kind==='counterbore')return authoredCounterboreOperation(request,options);
     if(target.kind==='blind-hole')return authoredBlindHoleOperation(request,options);
     if(target.kind==='through-hole')return authoredThroughHoleOperation(request,options);
     if(target.kind==='solid-edge-treatment')return authoredSolidEdgeTreatmentOperation(request,options);
@@ -1147,6 +1150,7 @@ export function activate(ctx: ApplicationContext) {
   function authoredSelectedProfileDepthOperation(args:any, options:any = {}) { return authoredFeatureOperation('selected-profile-depth',args,options); }
   function authoredSelectedProfileRegionOperation(args:any, options:any = {}) { return authoredFeatureOperation('selected-profile-region',args,options); }
   function authoredLinearHolePatternOperation(args:any, options:any = {}) { return authoredFeatureOperation('linear-hole-pattern',args,options); }
+  function authoredCounterboreOperation(args:any,options:any={}){return authoredFeatureOperation('counterbore',args,options);}
   function authoredBlindHoleOperation(args:any,options:any={}){return authoredFeatureOperation('blind-hole',args,options);}
   function authoredThroughHoleOperation(args:any, options:any = {}) { return authoredFeatureOperation('through-hole',args,options); }
   function authoredSolidEdgeTreatmentOperation(args:any, options:any = {}) { return authoredFeatureOperation('solid-edge-treatment',args,options); }
@@ -1197,11 +1201,11 @@ export function activate(ctx: ApplicationContext) {
     } finally {try{prepared?.dispose?.()}catch(error){console.error('Sketch travel cleanup failed:',error)}}
   }
   async function authoredFeatureOperation(kind:string,args: any, options: any = {}) {
-    if(!['revolve-angle','extrusion','centered','corners','solid-box','selected-profile-depth','selected-profile-region','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent'].includes(kind))throw new Error('Unsupported authored edit.');
+    if(!['revolve-angle','extrusion','centered','corners','solid-box','selected-profile-depth','selected-profile-region','solid-edge-treatment','solid-shell','counterbore','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent'].includes(kind))throw new Error('Unsupported authored edit.');
     const ownKeys = args && typeof args === 'object' && !Array.isArray(args) ? Reflect.ownKeys(args) : [];
     if (ownKeys.some(k=>typeof k!=='string' || !Object.getOwnPropertyDescriptor(args,k)?.enumerable || !Object.prototype.hasOwnProperty.call(Object.getOwnPropertyDescriptor(args,k),'value'))) throw new Error('Invalid authored depth command.');
     const keys = ownKeys.sort().join(',');
-    const editKeys=kind==='blind-hole'?'depth,diameter,featureId,index,revision':kind==='solid-shell'?'featureId,index,revision,thickness':kind==='operation-remove'?'featureId,index,revision':kind==='through-hole-parent'?['revision','index','featureId','target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId'].sort().join(','):kind==='revolve-angle'?'angleRadians,featureId,index,revision':kind==='selected-profile-region'?'featureId,index,regionId,revision':kind==='linear-hole-pattern'?'count,featureId,index,revision,spacing':kind==='operation-append'?'direction,featureId,index,revision':kind==='through-hole'?(ownKeys.includes('offsetX')||ownKeys.includes('offsetY')?'diameter,featureId,index,offsetX,offsetY,revision':'diameter,featureId,index,revision'):kind==='solid-edge-treatment'?'featureId,index,revision,size':kind==='solid-box'?'depth,engine,featureId,height,index,revision,width,x,y,z':['extrusion','selected-profile-depth'].includes(kind)?'depth,featureId,index,revision':kind==='centered'?'diameter,featureId,index,revision':'diameter,featureId,index,offsetX,offsetY,revision';
+    const editKeys=kind==='counterbore'?'featureId,index,revision,stepDepth,stepDiameter,throughDiameter':kind==='blind-hole'?'depth,diameter,featureId,index,revision':kind==='solid-shell'?'featureId,index,revision,thickness':kind==='operation-remove'?'featureId,index,revision':kind==='through-hole-parent'?['revision','index','featureId','target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId'].sort().join(','):kind==='revolve-angle'?'angleRadians,featureId,index,revision':kind==='selected-profile-region'?'featureId,index,regionId,revision':kind==='linear-hole-pattern'?'count,featureId,index,revision,spacing':kind==='operation-append'?'direction,featureId,index,revision':kind==='through-hole'?(ownKeys.includes('offsetX')||ownKeys.includes('offsetY')?'diameter,featureId,index,offsetX,offsetY,revision':'diameter,featureId,index,revision'):kind==='solid-edge-treatment'?'featureId,index,revision,size':kind==='solid-box'?'depth,engine,featureId,height,index,revision,width,x,y,z':['extrusion','selected-profile-depth'].includes(kind)?'depth,featureId,index,revision':kind==='centered'?'diameter,featureId,index,revision':'diameter,featureId,index,offsetX,offsetY,revision';
     if (![editKeys,'direction,featureId,index,revision'].includes(keys) ||
         (Object.prototype.hasOwnProperty.call(args,'direction') && !['undo','redo'].includes(args.direction))) {
       throw new Error('Invalid authored depth command.');
@@ -1223,7 +1227,7 @@ export function activate(ctx: ApplicationContext) {
     const sourceSketchRevision=sketchRevision(storage,sketchNamespace);
     const trackedStreams=()=>[modifications$,models$,pipelineFailure$,engineCleanupFailure$,
       ctx.expressionService.script$,ctx.expressionService.list$,ctx.expressionService.errors$,
-      ...(['revolve-angle','selected-profile-depth','selected-profile-region','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent'].includes(kind)?[ctx.expressionService.table$]:[]),
+      ...(['revolve-angle','selected-profile-depth','selected-profile-region','solid-edge-treatment','solid-shell','counterbore','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent'].includes(kind)?[ctx.expressionService.table$]:[]),
       ctx.streams.sketcher.sketchingFace,ctx.wizardService.workingRequest$,
       ctx.workbenchService.currentWorkbench$,ctx.assemblyService.constraints$];
     const capturedStreams=trackedStreams(), streamRevisions=capturedStreams.map(s=>s.revision);
@@ -1265,7 +1269,7 @@ export function activate(ctx: ApplicationContext) {
     if (!appendTravel&&(!fullTipSignature || captured.signature !== fullTipSignature)) throw new Error('The accepted full-tip history is unavailable or changed.');
     const index = args.index, request = captured.history[index];
     if(request)requireActiveFeature(request);
-    const expectedType=kind==='blind-hole'?'WORKER_CENTERED_BLIND_HOLE_V1':kind==='solid-shell'?'WORKER_SOLID_SHELL_V1':removeOperation?'WORKER_SELECTED_PROFILE_EXTRUDE_V2':kind==='through-hole-parent'?'WORKER_THROUGH_HOLES_V1':kind==='revolve-angle'?'WORKER_SELECTED_PROFILE_REVOLVE_V1':kind==='linear-hole-pattern'?'WORKER_LINEAR_HOLE_PATTERN_V1':kind==='through-hole'?'WORKER_THROUGH_HOLES_V1':kind==='solid-edge-treatment'?'WORKER_SOLID_EDGE_TREATMENT_V1':['selected-profile-depth','selected-profile-region'].includes(kind)?'WORKER_SELECTED_PROFILE_EXTRUDE_V2':kind==='solid-box'?'WORKER_SOLID_BOX_V1':kind==='extrusion'?'WORKER_RECTANGLE_EXTRUDE_V1':kind==='centered'?'WORKER_CENTERED_THROUGH_HOLE_V1':'WORKER_FOUR_CORNER_THROUGH_HOLES_V1';
+    const expectedType=kind==='counterbore'?'WORKER_CENTERED_COUNTERBORE_V1':kind==='blind-hole'?'WORKER_CENTERED_BLIND_HOLE_V1':kind==='solid-shell'?'WORKER_SOLID_SHELL_V1':removeOperation?'WORKER_SELECTED_PROFILE_EXTRUDE_V2':kind==='through-hole-parent'?'WORKER_THROUGH_HOLES_V1':kind==='revolve-angle'?'WORKER_SELECTED_PROFILE_REVOLVE_V1':kind==='linear-hole-pattern'?'WORKER_LINEAR_HOLE_PATTERN_V1':kind==='through-hole'?'WORKER_THROUGH_HOLES_V1':kind==='solid-edge-treatment'?'WORKER_SOLID_EDGE_TREATMENT_V1':['selected-profile-depth','selected-profile-region'].includes(kind)?'WORKER_SELECTED_PROFILE_EXTRUDE_V2':kind==='solid-box'?'WORKER_SOLID_BOX_V1':kind==='extrusion'?'WORKER_RECTANGLE_EXTRUDE_V1':kind==='centered'?'WORKER_CENTERED_THROUGH_HOLE_V1':'WORKER_FOUR_CORNER_THROUGH_HOLES_V1';
     if (!appendTravel&&!removeUndo&&(!Number.isSafeInteger(index) || index < 0 || !request || request.type !== expectedType ||
         Number(request.params?.featureId) !== args.featureId)) throw new Error('The selected feature is unavailable.');
     if(kind==='extrusion' && typeof request.params.length==='string')throw new Error('This extrusion depth is parameter-bound. Edit its typed parameter instead.');
@@ -1304,6 +1308,16 @@ export function activate(ctx: ApplicationContext) {
       if(args.direction){const plan=planLinearHolePatternTravel(journal,{document,revision:journal.revision,direction:args.direction,index,featureId:args.featureId,parameters});proposal=plan.next;nextDimensions=plan.dimensions;}
       else {nextDimensions={count:args.count,spacing:args.spacing};captureLinearHolePatternParameters({...parameters,...nextDimensions});if(nextDimensions.count===parameters.count&&nextDimensions.spacing===parameters.spacing)return Object.freeze({changed:false,revision:inspectAuthoredEdits().revision});proposal=recordLinearHolePatternEdit(journal,{document,revision:journal.revision,index,featureId:args.featureId,parameters,after:nextDimensions});}
       request.params.count=nextDimensions.count;request.params.spacing=nextDimensions.spacing;
+    } else if(kind==='counterbore') {
+      const parameters:any=captureCounterboreParameters(request.params);
+      if(args.direction){const plan=planCounterboreTravel(journal,{document,revision:journal.revision,direction:args.direction,index,featureId:args.featureId,parameters});proposal=plan.next;nextDimensions=plan.dimensions;}
+      else{
+        if(['throughDiameter','stepDiameter','stepDepth'].some(key=>typeof parameters[key]!=='number'))throw Object.assign(Error('Edit the authoritative named counterbore length rather than erasing its binding.'),{code:'BOUND_DIMENSION'});
+        nextDimensions={throughDiameter:args.throughDiameter,stepDiameter:args.stepDiameter,stepDepth:args.stepDepth};captureCounterboreParameters({...parameters,...nextDimensions});
+        if(['throughDiameter','stepDiameter','stepDepth'].every(key=>Object.is(parameters[key],nextDimensions[key])))return Object.freeze({changed:false,revision:inspectAuthoredEdits().revision});
+        proposal=recordCounterboreEdit(journal,{document,revision:journal.revision,index,featureId:args.featureId,parameters,after:nextDimensions});
+      }
+      request.params.throughDiameter=nextDimensions.throughDiameter;request.params.stepDiameter=nextDimensions.stepDiameter;request.params.stepDepth=nextDimensions.stepDepth;
     } else if(kind==='blind-hole') {
       const parameters:any=captureBlindHoleParameters(request.params);
       if(args.direction){const plan=planBlindHoleTravel(journal,{document,revision:journal.revision,direction:args.direction,index,featureId:args.featureId,parameters});proposal=plan.next;nextDimensions=plan.dimensions;}
@@ -1429,6 +1443,10 @@ export function activate(ctx: ApplicationContext) {
               !service.isDocumentCurrent(document)) stop();
         } catch (_) {stop();}
       });
+      if(kind==='counterbore'){
+        try{preparation.requireCommittedCurrent();return Object.freeze({changed:true,revision:inspectAuthoredEdits().revision,featureId:args.featureId,index,dimensions:nextDimensions});}
+        catch(cause){throw Object.assign(Error('Counterbore edit committed but its receipt/lifetime is unavailable.'),{code:'COUNTERBORE_PUBLICATION_FAILED',committed:true,cause});}
+      }
       if(kind==='blind-hole'){
         try{preparation.requireCommittedCurrent();return Object.freeze({changed:true,revision:inspectAuthoredEdits().revision,featureId:args.featureId,index,dimensions:nextDimensions});}
         catch(cause){throw Object.assign(Error('Blind edit committed but its receipt/lifetime is unavailable.'),{code:'BLIND_PUBLICATION_FAILED',committed:true,cause});}
@@ -1517,7 +1535,7 @@ export function activate(ctx: ApplicationContext) {
     cancelHistoryReviewDraft,navigateHistoryPosition,
     modifications$, models$, update$, pipelineFailure$, engineCleanupFailure$
   };
-  Object.assign(ctx.craftService, {captureManufacturingEditContext,commitManufacturingMetadata,authoredRevolveAngleOperation,inspectAuthoredEdits, authoredDepthOperation, authoredHoleOperation, authoredSolidBoxOperation, authoredSelectedProfileDepthOperation, authoredSolidEdgeTreatmentOperation, authoredSolidShellOperation, authoredLinearHolePatternOperation, authoredBlindHoleOperation, authoredThroughHoleOperation, authoredEditTravel, applyPhysicalDepth, inspectPhysicalParameters, applyPhysicalConfigurations, applyPhysicalBracket, applyPhysicalEnclosure, applyPhysicalSelectedProfile, applyPhysicalBindings});
+  Object.assign(ctx.craftService, {captureManufacturingEditContext,commitManufacturingMetadata,authoredRevolveAngleOperation,inspectAuthoredEdits, authoredDepthOperation, authoredHoleOperation, authoredSolidBoxOperation, authoredSelectedProfileDepthOperation, authoredSolidEdgeTreatmentOperation, authoredSolidShellOperation, authoredLinearHolePatternOperation, authoredCounterboreOperation, authoredBlindHoleOperation, authoredThroughHoleOperation, authoredEditTravel, applyPhysicalDepth, inspectPhysicalParameters, applyPhysicalConfigurations, applyPhysicalBracket, applyPhysicalEnclosure, applyPhysicalSelectedProfile, applyPhysicalBindings});
   registerUnconsumedSketchSave(ctx,face=>{
     const service:any=ctx.projectService,storage=ctx.storageService,manager:any=ctx.projectManager,document=service.documentGeneration,history=modifications$.value,journal=authoredJournal$.value,namespace=service.sketchStorageNamespace;
     if(!face||typeof face.id!=='string'||face.defaultSketchId!==face.id||!fullTipSignature||!hasOnlyUnconsumedSketchHistory(history.history,face.id)||history.pointer!==history.history.length-1||pendingPipelines||pendingModifications||pipelineFailure$.value||engineCleanupFailure$.value||!service.hasHostLifetime||!service.isDocumentCurrent(document)||ctx.cadRegistry.findFace(face.id)!==face)return null;
@@ -1607,6 +1625,9 @@ export function activate(ctx: ApplicationContext) {
     inspectSourcePlanePlacements:principalPlaneCommands.inspectSourcePlanePlacements,editSourcePlanePlacement:principalPlaneCommands.editSourcePlanePlacement,applyPrincipalPlaneDraft:principalPlaneCommands.applyPrincipalPlaneDraft});
   Object.assign(ctx.craftService,createWorkerFeatureDeleteCommands(ctx,(args,options)=>authoredFeatureOperation('operation-remove',args,options)));
   Object.assign(ctx.craftService,createWorkerThroughHoleParentCommands(ctx,(args,options)=>authoredFeatureOperation('through-hole-parent',args,options)));
+  Object.assign(ctx.craftService,createWorkerCounterboreCommands(ctx,(request,accepted,rejected,preparation)=>
+    submitModification(request,addModification,accepted,rejected,false,preparation),
+    epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();}));
   Object.assign(ctx.craftService,createWorkerBlindHoleCommands(ctx,(request,accepted,rejected,preparation)=>
     submitModification(request,addModification,accepted,rejected,false,preparation),
     epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();}));
@@ -2290,6 +2311,11 @@ interface CraftService {
   inspectWorkerShellHistory?: ReturnType<typeof createWorkerShellCommands>['inspectWorkerShellHistory'];
   editWorkerShell?: ReturnType<typeof createWorkerShellCommands>['editWorkerShell'];
   authoredSolidShellOperation?: (args:{revision:string;index:number;featureId:number;thickness?:number;direction?:'undo'|'redo'},options?:{signal?:AbortSignal;valid?:()=>boolean;beforePublish?:()=>boolean})=>Promise<Readonly<{changed:boolean;revision:string;thickness?:number;featureId?:number;index?:number}>>;
+  authoredCounterboreOperation?: (args:any,options?:any)=>Promise<any>;
+  inspectWorkerCounterbores?:ReturnType<typeof createWorkerCounterboreCommands>['inspectWorkerCounterbores'];
+  createWorkerCounterbore?:ReturnType<typeof createWorkerCounterboreCommands>['createWorkerCounterbore'];
+  inspectWorkerCounterboreHistory?:ReturnType<typeof createWorkerCounterboreCommands>['inspectWorkerCounterboreHistory'];
+  editWorkerCounterbore?:ReturnType<typeof createWorkerCounterboreCommands>['editWorkerCounterbore'];
   authoredBlindHoleOperation?: (args:any,options?:any)=>Promise<any>;
   inspectWorkerBlindHoles?:ReturnType<typeof createWorkerBlindHoleCommands>['inspectWorkerBlindHoles'];
   createWorkerBlindHole?:ReturnType<typeof createWorkerBlindHoleCommands>['createWorkerBlindHole'];

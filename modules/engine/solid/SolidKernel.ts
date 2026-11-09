@@ -1,3 +1,4 @@
+import type {OwnedCounterboreIntent} from './ownedCounterboreIntent.mjs';
 import type {OwnedBlindHoleIntent} from './ownedBlindHoleIntent.mjs';
 // The bounded common solid API. The application owns authored graph/history;
 // a kernel owns transient shapes for one candidate evaluation. Additional
@@ -122,6 +123,7 @@ export interface TreatSolidEdges {readonly op:'solid.edge.treat';readonly versio
 export interface ShellSolid {readonly op:'solid.shell';readonly version:1;readonly unit:'millimeter';readonly handle:TransientShapeHandle;readonly featureId:number;readonly producerFeatureId:number;readonly removedFaceIds:readonly string[];readonly thickness:number;readonly direction:'inward';}
 // Authored hole fields remain exactly the shared intent. Handles are private
 // runtime inputs; tool coordinates/depth are derived anew for every replay.
+export type KernelCounterbore=OwnedCounterboreIntent&Readonly<{op:'solid.holes.counterbore';handle:TransientShapeHandle;sourceHandle:TransientShapeHandle}>;
 export type KernelBlindHole=OwnedBlindHoleIntent&Readonly<{op:'solid.holes.blind';handle:TransientShapeHandle;sourceHandle:TransientShapeHandle}>;
 export type KernelThroughHole=OwnedHoleIntent&Readonly<{op:'solid.holes.through';handle:TransientShapeHandle;sourceHandle:TransientShapeHandle}>;
 export type KernelLinearHolePattern=OwnedLinearHolePatternIntent&Readonly<{op:'solid.holes.pattern.linear';handle:TransientShapeHandle;sourceHandle:TransientShapeHandle}>;
@@ -208,9 +210,9 @@ export interface OrthographicReadResult {readonly contractVersion:1;readonly op:
 export interface ReadOwnedManufacturingMesh {readonly op:'solid.manufacturing.mesh.read';readonly version:1;readonly unit:'millimeter';readonly handle:TransientShapeHandle;readonly linearDeflectionMm:0.01;readonly angularDeflectionRadians:0.1;readonly relative:false;readonly maxVertices:number;readonly maxTriangles:number;}
 export interface ManufacturingMeshResult {readonly contractVersion:1;readonly op:'solid.manufacturing.mesh.read';readonly unit:'millimeter';readonly buffer:ArrayBuffer;readonly metadata:Readonly<{version:1;quality:'native-controlled-tessellation';format:'owned-manufacturing-mesh-v1';byteLength:number;vertexCount:number;triangleCount:number;positionsOffset:32;indicesOffset:number;linearDeflectionMm:0.01;angularDeflectionRadians:0.1;relative:false;correspondence:'native-topology-parameters-v1';maxBoundaryDiscrepancyMm:number;sourcePreserved:true}>;}
 export type ExtrudeCircularCell=import('../mount/ownedCircularArrangementProtocol.mjs').CircularCellRequest;
-export type SolidRequest=ReadOwnedDrawingDerived|ReadOwnedBores|ExtrudeCircularCell|ReadPlanarAttachment|ReadOwnedDrawingReferences|ReadOwnedManufacturingMesh|ReadOwnedOrthographic|ExportOwnedSTEP|CreateBox|CreateAuthoredBox|BooleanSolid|BooleanHistorySolid|ExtrudeSelectedProfile|ExtrudePolygonProfile|RevolveSelectedProfile|SweepSelectedProfile|LoftSelectedProfiles|ReadSolidMesh|ReadSolidTopology|ClassifySolidPoint|ReadPrismSelections|ReadSolidSelections|TreatSolidEdges|ShellSolid|KernelBlindHole|KernelThroughHole|KernelLinearHolePattern|DisposeSolid;
+export type SolidRequest=ReadOwnedDrawingDerived|ReadOwnedBores|ExtrudeCircularCell|ReadPlanarAttachment|ReadOwnedDrawingReferences|ReadOwnedManufacturingMesh|ReadOwnedOrthographic|ExportOwnedSTEP|CreateBox|CreateAuthoredBox|BooleanSolid|BooleanHistorySolid|ExtrudeSelectedProfile|ExtrudePolygonProfile|RevolveSelectedProfile|SweepSelectedProfile|LoftSelectedProfiles|ReadSolidMesh|ReadSolidTopology|ClassifySolidPoint|ReadPrismSelections|ReadSolidSelections|TreatSolidEdges|ShellSolid|KernelCounterbore|KernelBlindHole|KernelThroughHole|KernelLinearHolePattern|DisposeSolid;
 export interface ShapeResult {
- readonly contractVersion:1;readonly op:CreateBox['op']|BooleanSolid['op']|ExtrudeSelectedProfile['op']|RevolveSelectedProfile['op']|SweepSelectedProfile['op']|LoftSelectedProfiles['op']|TreatSolidEdges['op']|ShellSolid['op']|KernelBlindHole['op']|KernelThroughHole['op']|KernelLinearHolePattern['op'];
+ readonly contractVersion:1;readonly op:CreateBox['op']|BooleanSolid['op']|ExtrudeSelectedProfile['op']|RevolveSelectedProfile['op']|SweepSelectedProfile['op']|LoftSelectedProfiles['op']|TreatSolidEdges['op']|ShellSolid['op']|KernelCounterbore['op']|KernelBlindHole['op']|KernelThroughHole['op']|KernelLinearHolePattern['op'];
  readonly handle:TransientShapeHandle;readonly evidence:SolidEvidence;
  readonly constructionProvenance?:ConstructionProvenance;
 }

@@ -1,5 +1,6 @@
 // Explicit allowlist of dimension-aware authored feature fields.
 export const physicalBindingFields=Object.freeze({
+ WORKER_CENTERED_COUNTERBORE_V1:Object.freeze(['throughDiameter','stepDiameter','stepDepth']),
  WORKER_CENTERED_BLIND_HOLE_V1:Object.freeze(['diameter','depth']),
  WORKER_SELECTED_PROFILE_EXTRUDE_V2:Object.freeze(['depth']),
  WORKER_THROUGH_HOLES_V1:Object.freeze(['diameter','offsetX','offsetY']),

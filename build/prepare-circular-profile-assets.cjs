@@ -1,6 +1,6 @@
 // Explicit component native build; existing assets/defaults are unchanged.
 const path=require('node:path'),fs=require('node:fs'),crypto=require('node:crypto');
-const bootstrapSha='ec84bbdc710bfdb1478b1af959895472ef5585643309691631adcb40877b5ad1';
+const bootstrapSha='7864b6ca0e29ccc3a985d4950e02b0faf720d83f95b71e2f7e388310b4525945';
 if(crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'../modules/engine/mount/oci-verified-worker.js'))).digest('hex')!==bootstrapSha)throw Error('Unexpected circular bootstrap');
 const {stageOwnedProfileComponent}=require('./stage-owned-profile-component.cjs');
 const defaultOutput=path.resolve(__dirname,'../.build/circular-assets');

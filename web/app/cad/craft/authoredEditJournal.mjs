@@ -1,3 +1,5 @@
+import {captureAuthoredCounterboreIntent} from '../../../../modules/engine/solid/authoredCounterboreIntent.mjs';
+import {COUNTERBORE_KEYS} from '../../../../modules/engine/solid/ownedCounterboreIntent.mjs';
 import {captureAuthoredBlindHoleIntent} from '../../../../modules/engine/solid/authoredBlindHoleIntent.mjs';
 import {BLIND_HOLE_KEYS} from '../../../../modules/engine/solid/ownedBlindHoleIntent.mjs';
 import {capturePrincipalPlaneReviewPosition,principalPlaneReviewPositionByteSize} from './principalPlanePlacementIntent.mjs';
@@ -65,10 +67,10 @@ function checkIdentity(index,id) { if(!integer(index,0,255)||!integer(id,1,Numbe
 function make(document,revision,entries,cursor) {return Object.freeze({document,revision,entries:Object.freeze(entries),cursor});}
 function bounded(entries) {
   entries=entries.slice(-LIMIT);
-  let bytes=entries.reduce((sum,entry)=>sum+(['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(entry.kind) ? entry.byteSize : 256),0);
+  let bytes=entries.reduce((sum,entry)=>sum+(['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','counterbore','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(entry.kind) ? entry.byteSize : 256),0);
   while(bytes>MAX_JOURNAL_BYTES && entries.length>1) {
     const removed=entries.shift();
-    bytes-=['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(removed.kind) ? removed.byteSize : 256;
+    bytes-=['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','counterbore','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(removed.kind) ? removed.byteSize : 256;
   }
   if(bytes>MAX_JOURNAL_BYTES)throw Error('The authored edit exceeds the undo limit.');
   return entries;
@@ -486,6 +488,23 @@ export function planThroughHoleTravel(state,{document,revision,direction,index,f
   return Object.freeze({index,featureId,dimensions:direction==='undo'?entry.before:entry.after,next:make(document,revision+1,state.entries,state.cursor+(direction==='undo'?-1:1))});
 }
 
+// Counterbore dimensions share this journal; every authored identity stays exact.
+export const captureCounterboreParameters=captureAuthoredCounterboreIntent;
+const counterboreIdentityKeys=COUNTERBORE_KEYS.filter(key=>!['throughDiameter','stepDiameter','stepDepth'].includes(key));
+function counterboreDimensions(current){return Object.freeze({throughDiameter:current.throughDiameter,stepDiameter:current.stepDiameter,stepDepth:current.stepDepth});}
+export function recordCounterboreEdit(state,{document,revision,index,featureId,parameters,after}){
+ checkCurrent(state,document,revision);checkIdentity(index,featureId);const current=captureCounterboreParameters(parameters),next=captureCounterboreParameters({...current,...after}),before=counterboreDimensions(current),dimensions=counterboreDimensions(next);
+ if(current.featureId!==featureId||Reflect.ownKeys(after).sort().join(',')!=='stepDepth,stepDiameter,throughDiameter'||counterboreIdentityKeys.some(key=>current[key]!==next[key])||['throughDiameter','stepDiameter','stepDepth'].every(key=>Object.is(before[key],dimensions[key])))throw Error('Invalid counterbore dimension edit.');
+ const identity=Object.freeze(Object.fromEntries(counterboreIdentityKeys.map(key=>[key,current[key]]))),charge=value=>{const text=JSON.stringify(value);return Math.max(text.length*2,new TextEncoder().encode(text).byteLength);};
+ const entry=Object.freeze({kind:'counterbore',index,featureId,identity,before,after:dimensions,byteSize:256+charge(identity)+charge(before)+charge(dimensions)}),entries=bounded([...state.entries.slice(0,state.cursor),entry]);return make(document,revision+1,entries,entries.length);
+}
+export function planCounterboreTravel(state,{document,revision,direction,index,featureId,parameters}){
+ checkCurrent(state,document,revision);checkIdentity(index,featureId);if(!['undo','redo'].includes(direction))throw Error('Invalid counterbore travel direction.');
+ const current=captureCounterboreParameters(parameters),entry=state.entries[direction==='undo'?state.cursor-1:state.cursor],expected=direction==='undo'?entry?.after:entry?.before;
+ if(!entry||entry.kind!=='counterbore'||entry.index!==index||entry.featureId!==featureId||current.featureId!==featureId||counterboreIdentityKeys.some(key=>current[key]!==entry.identity[key])||['throughDiameter','stepDiameter','stepDepth'].some(key=>!Object.is(current[key],expected[key])))throw Error('The counterbore intent no longer matches this journal entry.');
+ return Object.freeze({index,featureId,dimensions:direction==='undo'?entry.before:entry.after,next:make(document,revision+1,state.entries,state.cursor+(direction==='undo'?-1:1))});
+}
+
 // Blind dimensions share this journal; every authored identity stays exact.
 export const captureBlindHoleParameters=captureAuthoredBlindHoleIntent;
 const blindIdentityKeys=BLIND_HOLE_KEYS.filter(key=>!['diameter','depth'].includes(key));
@@ -549,6 +568,7 @@ export function planRevolveAngleTravel(state,{document,revision,direction,index,
 
 // Capture and Craft chronology admission use one closed local registry.
 const appendDefinitions=Object.freeze({
+ WORKER_CENTERED_COUNTERBORE_V1:{capture:captureCounterboreParameters,keys:COUNTERBORE_KEYS},
  WORKER_CENTERED_BLIND_HOLE_V1:{capture:captureBlindHoleParameters,keys:BLIND_HOLE_KEYS},
  WORKER_SELECTED_PROFILE_EXTRUDE_V2:{capture:captureSelectedProfileDepthParameters,keys:selectedProfileKeys},
  WORKER_THROUGH_HOLES_V1:{capture:captureThroughHoleParameters,keys:params=>[...throughHoleIdentityKeys,'diameter',...(params.kind==='four-corner-through'?['offsetX','offsetY']:[])]},

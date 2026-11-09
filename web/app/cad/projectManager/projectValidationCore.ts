@@ -1,5 +1,6 @@
 import {validateOffsetSources} from 'sketcher/headless/offsetSourceValidation';
 import {prepareTypedDependentSketch} from 'sketcher/headless/typedDependentSketch.mjs';
+import {captureAuthoredCounterboreIntent} from 'engine/solid/authoredCounterboreIntent.mjs';
 import {captureAuthoredBlindHoleIntent} from 'engine/solid/authoredBlindHoleIntent.mjs';
 import {validateMirrorSourceGeometry} from 'sketcher/headless/mirrorSourceValidation';
 import {validateSplineDerivedGeometry} from 'sketcher/headless/splineDerivedValidation';
@@ -30,6 +31,11 @@ export function preflight(value, parameterState?: {source?: string, result?: any
   // the existing physical evaluator below and actual feature materialization.
   const blindSources=new Map<number,any>();
   for(const operation of project.model.history){
+    if(operation.type==='WORKER_CENTERED_COUNTERBORE_V1'){
+      const p=captureAuthoredCounterboreIntent(operation.params),parent=blindSources.get(p.sourceFeatureId),q=parent?.params;
+      if(parent?.type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2'||q.engine!==p.engine||q.engineRevision!==p.engineRevision||q.faceId!==p.sourceFaceId||q.regionId!==p.sourceRegionId)throw Object.assign(Error('Counterbore native intent requires its genuine earlier selected constructor.'),{code:'COUNTERBORE_UNSUPPORTED_TARGET'});
+      if(typeof p.stepDepth==='number'&&typeof q.depth==='number'&&p.stepDepth>=q.depth)throw Object.assign(Error('Counterbore step depth must remain strictly less than current part thickness.'),{code:'COUNTERBORE_STEP_NOT_INTERIOR'});
+    }
     if(operation.type==='WORKER_CENTERED_BLIND_HOLE_V1'){
       const p=captureAuthoredBlindHoleIntent(operation.params),parent=blindSources.get(p.sourceFeatureId),q=parent?.params;
       if(parent?.type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2'||q.engine!==p.engine||q.engineRevision!==p.engineRevision||q.faceId!==p.sourceFaceId||q.regionId!==p.sourceRegionId)throw Object.assign(Error('Blind native intent requires its genuine earlier selected constructor.'),{code:'BLIND_UNSUPPORTED_TARGET'});

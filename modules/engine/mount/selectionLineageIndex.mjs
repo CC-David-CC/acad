@@ -211,3 +211,28 @@ export function deriveShellSelectionIndexV2(input,captureRef=captureBoundaryRef)
  const args=fields(input,['sourceIndex','ancestry','topology','featureId','removedFaceIds']),api=privateAPI(args.sourceIndex,2),data=snapshot({plan:api.plan,ancestries:[args.ancestry],topology:args.topology,featureId:args.featureId,removedFaceIds:args.removedFaceIds});
  return derive([readSource(api,data.plan,2,captureRef)],data,false,true);
 }
+
+// EXACTLY two real A-input continuations of ONE semantic authored operation.
+// No intermediate authored producer/plan is fabricated. The caller binds both
+// Native invocations and supplies their actual topology/source catalogs.
+export function deriveSequentialInheritedSelectionIndexV2(input,captureRef=captureBoundaryRef){
+ const args=fields(input,['sourceIndex','sourceTopology','firstAncestry','firstTopology','finalAncestry','finalSourceTopology','finalTopology','featureId']),api=privateAPI(args.sourceIndex,2);
+ const data=snapshot({plan:api.plan,sourceTopology:args.sourceTopology,firstAncestry:args.firstAncestry,firstTopology:args.firstTopology,finalAncestry:args.finalAncestry,finalSourceTopology:args.finalSourceTopology,finalTopology:args.finalTopology,featureId:args.featureId}),source=readSource(api,data.plan,2,captureRef);
+ if(!integer(data.featureId)||data.featureId===source.plan.featureId||source.contexts.some(c=>c.featureId===data.featureId))fail('Sequential result requires its one fresh authored producer.','INVALID_REQUEST');
+ const original=validateOwnedTopology(data.sourceTopology),first=validateOwnedTopology(data.firstTopology),secondSource=validateOwnedTopology(data.finalSourceTopology),final=validateOwnedTopology(data.finalTopology);
+ const same=(a,b)=>{if(a===null||b===null||typeof a!=='object'||typeof b!=='object')return Object.is(a,b);if(Array.isArray(a)!==Array.isArray(b))return false;const ka=Object.keys(a).sort(),kb=Object.keys(b).sort();return ka.length===kb.length&&ka.every((k,i)=>k===kb[i]&&same(a[k],b[k]));};
+ if(!same(first,secondSource))fail('The final A source catalog differs from the actual first result.');
+ for(const [history,a,b]of [[data.firstAncestry,original,first],[data.finalAncestry,secondSource,final]]){
+  if(history?.version!==2)fail('Sequential inheritance requires complete original-input Native history.');
+  for(const kind of kinds){const name=plural(kind);if(history.sourceCounts?.[name]!==a[name].length||history.resultCounts?.[name]!==b[name].length)fail('Sequential Native ancestry counts differ from its actual catalogs.');}
+ }
+ const firstCore=reconcileNativeSelectionClaims({sources:[{claims:source.claims,ancestry:data.firstAncestry}],topology:first});
+ const nextClaims=firstCore.resolved.map(row=>({kind:row.kind,id:row.id,sourceIndex:firstCore['resolve'+row.kind[0].toUpperCase()+row.kind.slice(1)](row.id)}));
+ const finalCore=reconcileNativeSelectionClaims({sources:[{claims:nextClaims,ancestry:data.finalAncestry}],topology:final}),maps=emptyMaps(),descriptors=new Map();
+ for(const row of finalCore.resolved){const item=source.descriptors.get(row.id);if(!item||item.type!==row.kind)fail('Sequential result lost its actual authored descriptor.');maps[row.kind].set(row.id,finalCore['resolve'+row.kind[0].toUpperCase()+row.kind.slice(1)](row.id));descriptors.set(row.id,item);}
+ const lost=rows=>rows.map(row=>{const item=source.descriptors.get(row.id);if(!item)fail('Sequential failure has no original authored identity.');return{...row,featureId:data.featureId,originFeatureId:item.descriptor.originFeatureId};});
+ // First loss remains a loss even if later geometry happens to coincide or
+ // merge back. No failed claim is offered to the second reconciliation.
+ const unresolved=[...source.prior.values(),...lost(firstCore.unresolved),...lost(finalCore.unresolved)];
+ return finish({featureId:data.featureId,source:'kernel-operation-history',sourceContexts:source.contexts,topology:final,descriptors,unresolved,maps});
+}

@@ -1,3 +1,4 @@
+import {createWorkerCounterboreOperation} from './features/workerCounterbore/workerCounterbore.operation';
 import {createWorkerBlindHoleOperation} from './features/workerBlindHole/workerBlindHole.operation';
 import {createWorkerShellOperation} from './features/workerShell/workerShell.operation';
 import {createWorkerSelectedLoftOperation} from './features/workerSelectedLoft/workerSelectedLoft.operation';
@@ -81,6 +82,7 @@ export const ModelerWorkspace: WorkbenchConfig = {
     createWorkerSolidOperation('box',createCatalogMount,validateEngineMount),
     createWorkerSolidOperation('boolean',createCatalogMount,validateEngineMount),
     createWorkerSolidOperation('edge-treatment',createCatalogMount,validateEngineMount),
+    createWorkerCounterboreOperation(createCatalogMount,validateEngineMount),
     createWorkerBlindHoleOperation(createCatalogMount,validateEngineMount),
     createWorkerThroughHolesOperation(createCatalogMount,validateEngineMount),
     createWorkerLinearHolePatternOperation(createCatalogMount,validateEngineMount),
