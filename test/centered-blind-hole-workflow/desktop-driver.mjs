@@ -29,7 +29,17 @@ function assertRefusalState(before,after,candidate){
   a(Number.isSafeInteger(s.lifecycle.epoch)&&s.lifecycle.epoch>=0);
   a(Number.isSafeInteger(s.lifecycle.generation)&&s.lifecycle.generation>=0);
   for(const token of[s.host.revision,s.drawing.revision,s.capture.solids.revision,s.drawing.geometryRevision])a(typeof token==='string'&&token.length>0&&token.length<=256,'Bounded actual inspection token');
-  a.equal(s.physical.revision,s.capture.journal.revision,'Physical inspection binds actual J');a.equal(s.physical.presentationRevision,s.host.revision,'Physical presentation binds actual document');a.equal(s.manufacturing.revision,s.host.revision,'Manufacturing wrapper binds actual document');
+  a.equal(s.physical.revision,s.capture.journal.revision,'Physical inspection binds actual J');const parameterSource=s.capture.native.expressions;
+  a.equal(s.physical.ready,true);a.equal(s.physical.reason,null);
+  if(parameterSource===''){
+   a.equal(s.physical.presentationRevision,null,'Literal-empty source has no typed quantity presentation');
+   for(const key of['definitions','quantities','configurations'])a.deepEqual(s.physical[key],[]);
+   a.equal(s.physical.activeConfigurationId,null);
+  }else{
+   a(typeof parameterSource==='string'&&/^codi-physical-parameters:[12]\n/.test(parameterSource),'Actual supported typed source');
+   a.equal(s.physical.presentationRevision,s.host.revision,'Typed quantity presentation binds actual document');
+  }
+  a.equal(s.manufacturing.revision,s.host.revision,'Manufacturing wrapper binds actual document');
   a.equal(s.host.revision,s.drawing.revision,'Drawing revision is the actual current document token');
   a.equal(s.capture.solids.revision,s.drawing.geometryRevision,'Drawing geometry token is actual solids inspection');
   const journal=s.capture.journal.revision,suffix=':'+s.host.revision;
@@ -43,7 +53,7 @@ function assertRefusalState(before,after,candidate){
  a.notEqual(after.capture.solids.revision,before.capture.solids.revision,'Old geometry inspection token invalidated');
  const prefix=before.capture.journal.revision.slice(0,-before.host.revision.length);
  a.equal(after.capture.journal.revision,prefix+after.host.revision,'Only document-token suffix changes; same journal generation/revision');
- const accepted=s=>{const x=structuredClone(s);delete x.lifecycle.epoch;delete x.capture.solids.revision;delete x.capture.journal.revision;delete x.host.revision;delete x.drawing.geometryRevision;delete x.drawing.revision;delete x.physical.revision;delete x.physical.presentationRevision;delete x.manufacturing.revision;return x;};
+ const accepted=s=>{const x=structuredClone(s);delete x.lifecycle.epoch;delete x.capture.solids.revision;delete x.capture.journal.revision;delete x.host.revision;delete x.drawing.geometryRevision;delete x.drawing.revision;delete x.physical.revision;if(typeof x.physical.presentationRevision==='string')delete x.physical.presentationRevision;delete x.manufacturing.revision;return x;};
  a.deepEqual(accepted(after),accepted(before),'Refusal changed accepted source/definition/J/body/association/resources');
 }
 function beginWrite(kind,file,label){a.equal(pendingWrite,null,'Settle each submitted own write before another');const row={sequence:receipt.writes.length,kind,file,label,windowId:h.windowId,username:h.username,phase:'submitted'};receipt.writes.push(row);pendingWrite=row;flush();return row;}

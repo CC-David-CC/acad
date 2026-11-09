@@ -96,3 +96,27 @@ uses; face same_sense separately orients surface normals. Opposite effective
 shell edge uses and analytic outer/inner/cylinder-rim traversal are required.
 Retained writer/reader source and an actual same-cohort STEP artifact establish
 the convention; no bound.T assumption or double face reversal is used.
+
+## Literal-empty versus typed presentation: first whole correction
+
+First whole48398 FAIL1 is retained in evidence-r1 (proof7420e82), not qualified.
+At the real equal-thickness refusal the product returned the expected code and
+kept all accepted state; the driver assumed presentationRevision was a document
+token even for an empty numeric physical source. Root and independent reviewer
+read actual craftBundle933..998 and the complete before/after capture: typed
+presentation is captured only for decoded, ready physical source. Numeric-empty
+source intentionally returns null, with empty definitions/quantities/configs.
+The only actual eight differences were the documented candidate epoch/token
+invalidations. No product behavior was changed to satisfy the checker.
+
+Both driver and independent oracle now use ACTUAL saved expressions to select
+this state: literal-empty requires ready/reason-null, exact null presentation
+and empty physical quantity/configuration data; actual ready typed v1/v2 source
+requires its current document presentation token. They never infer this from a
+bound flag or definition count. Physical/J and document/geometry links, exact
+epoch+1, old-token invalidation, unchanged J prefix and every other accepted
+state remain mandatory. Literal null stays in exact comparison; only a proved
+typed token may vary with the actual document token. All original geometry,
+refusal, phase, artifact, source and precision criteria remain. Rerun the ENTIRE
+workflow against the same immutable runtime with a separately frozen new
+CODI_ACCEPTANCE_SOURCE; FIRST independent oracle only after whole PASS.
