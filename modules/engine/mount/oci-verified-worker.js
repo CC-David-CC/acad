@@ -476,15 +476,26 @@ async function cutOwnedBoreTools(targetName,target,plan,targetMetrics,featureId,
   const charge=(name,evidence)=>{try{chargeSelectedResult(name,evidence);}catch(e){if(e?.code==='RESOURCE_LIMIT')live.delete(name);throw e;}counts.push(evidence.triangles);};
   let complete=false,finalName;
   try{
-    const tools=[];
-    for(const profile of plan.toolProfiles){
-      const prepared=preparePolygonProfileExtrusion(profile),name=allocateName(),result=createOwnedProfileResult(prepared,name,3);live.add(name);charge(name,result.evidence);tools.push({name,volume:result.created.nativeVolume,...(drawingReferencesMode?{prepared,construction:result.created.constructionProvenance}:{})});
+    const tools=[],trackBores=drawingReferencesMode&&drawing?.intent&&['centered-through','four-corner-through'].includes(drawing.intent.kind);
+    if(trackBores&&(!Array.isArray(plan.slots)||plan.slots.length!==plan.toolProfiles.length))bad('Semantic bore slots differ from actual tool invocations');
+    for(const [toolIndex,profile] of plan.toolProfiles.entries()){
+      const prepared=preparePolygonProfileExtrusion(profile),name=allocateName(),result=createOwnedProfileResult(prepared,name,3);live.add(name);charge(name,result.evidence);tools.push({name,volume:result.created.nativeVolume,...(trackBores?{slot:plan.slots[toolIndex],prepared,construction:result.created.constructionProvenance}:{})});
     }
+    const seed=async(t,topology)=>{
+      try{const {captureCylinderToolWitness}=await import(new URL('./cylinderCutWitness.mjs',self.location.href));return Object.freeze({slot:t.slot,status:'available',reason:null,intent:drawing.intent,witness:captureCylinderToolWitness({topology,toolConstruction:t.construction,toolRequest:t.prepared.request})});}
+      catch(e){if(!['DRAWING_WITNESS_UNAVAILABLE','DRAWING_WITNESS_UNSUPPORTED_TOOL'].includes(e?.code))throw e;return Object.freeze({slot:t.slot,status:'unresolved',reason:e.code,failedFeatureId:featureId,intent:drawing.intent});}
+    };
+    const carry=(rows,observation,topology)=>observation.status==='available'?drawingFactsAPI.propagateDrawingCylinders(rows,observation.data,topology,featureId):Object.freeze(rows.map(row=>row.status==='available'?Object.freeze({...row,status:'unresolved',reason:'DRAWING_REFERENCE_UNRESOLVED',failedFeatureId:featureId}):row));
     let tool=tools[0],expectedToolVolume=tool.volume;
     for(let i=1;i<tools.length;i++){
       const name=allocateName(),result=await applyOwnedBooleanResult(tool.name,tools[i].name,name,'union');live.add(name);charge(name,result.evidence);expectedToolVolume+=tools[i].volume;
       if(result.created.solidCount!==i+1||Math.abs(result.created.nativeVolume-expectedToolVolume)>Math.max(1e-7,expectedToolVolume*1e-9))refuse('TOOL_DOMAIN','Native tools did not retain the requested disjoint bores');
-      release(tool.name);release(tools[i].name);tool={name,volume:result.created.nativeVolume};
+      let cylinders;
+      if(trackBores){
+       const prior=tool.cylinders||Object.freeze([await seed(tool,result.sourceTopologies[0])]),next=Object.freeze([await seed(tools[i],result.sourceTopologies[1])]);
+       cylinders=Object.freeze([...carry(prior,result.created.ancestryA,result.topology),...carry(next,result.created.ancestryB,result.topology)]);
+      }
+      release(tool.name);release(tools[i].name);tool={name,volume:result.created.nativeVolume,...(trackBores?{cylinders}:{})};
     }
     finalName=allocateName();const result=await applyOwnedBooleanResult(targetName,tool.name,finalName,'subtract');live.add(finalName);charge(finalName,result.evidence);
     const expected=plan.expectedRemovedVolume,removed=targetMetrics.nativeVolume-result.created.nativeVolume,tolerance=Math.max(128*Number.EPSILON*Math.max(Math.abs(targetMetrics.nativeVolume),Math.abs(result.created.nativeVolume)),expected*1e-8);
@@ -496,11 +507,11 @@ async function cutOwnedBoreTools(targetName,target,plan,targetMetrics,featureId,
     if(counts.length!==cost)bad('Hole work accounting differs from native results');
     let cylinders=null;
     if(drawingReferencesMode){
-      cylinders=result.created.ancestryA.status==='available'?drawingFactsAPI.propagateDrawingCylinders(drawing?.prior||[],result.created.ancestryA.data,result.topology,featureId):Object.freeze((drawing?.prior||[]).map(r=>Object.freeze({...r,status:'unresolved',reason:'DRAWING_REFERENCE_UNRESOLVED',failedFeatureId:featureId})));
-      if(drawing?.intent?.kind==='centered-through'){
-        let record;try{const {deriveCylinderCutWitness}=await import(new URL('./cylinderCutWitness.mjs',self.location.href));const witness=deriveCylinderCutWitness({operation:'subtract',sourceTopologies:result.sourceTopologies,result:result.created,topology:result.topology,toolConstruction:tools[0].construction,toolRequest:tools[0].prepared.request});record=Object.freeze({status:'available',reason:null,intent:drawing.intent,witness});}
-        catch(e){if(!['DRAWING_WITNESS_UNAVAILABLE','DRAWING_WITNESS_UNSUPPORTED_TOOL'].includes(e?.code))throw e;record=Object.freeze({status:'unresolved',reason:e.code,failedFeatureId:featureId,intent:drawing.intent});}
-        cylinders=Object.freeze([...cylinders,record]);
+      cylinders=result.created.ancestryA.status==='available'?drawingFactsAPI.propagateDrawingCylinders(drawing?.prior||[],result.created.ancestryA.data,result.topology,featureId):Object.freeze((drawing?.prior||[]).map(r=>r.status==='available'?Object.freeze({...r,status:'unresolved',reason:'DRAWING_REFERENCE_UNRESOLVED',failedFeatureId:featureId}):r));
+      if(trackBores){
+        const members=tool.cylinders||Object.freeze([await seed(tool,result.sourceTopologies[1])]);
+        const current=carry(members,result.created.ancestryB,result.topology).map(row=>row.status==='available'?Object.freeze({...row,witness:Object.freeze({...row.witness,method:'native-prism-cut-b-ancestry'})}):row);
+        cylinders=Object.freeze([...cylinders,...current]);
       }
     }
     complete=true;return{name:finalName,index,reason,cylinders,evidence:result.evidence,work:{version:1,nativeResults:cost,resultTriangles:counts}};
@@ -815,7 +826,7 @@ self.onmessage = async event => {
       if(shapes.get(msg.parentToken)!==parent||selectedSelectionIndices.get(msg.parentToken)!==source)bad('Shell parent changed during Native operation');
       chargeSelectedResult(name,result.evidence);shapes.set(msg.token,name);selectedSelectionIndices.set(msg.token,{featureId:request.featureId,index:result.index,reason:result.reason});
       // An offset does not preserve an authored through-hole/pattern constructor.
-      if(drawingReferencesMode){const prior=selectedDrawingCylinders.get(msg.parentToken)||[];selectedDrawingCylinders.set(msg.token,result.ancestry.status==='available'?drawingFactsAPI.propagateDrawingCylinders(prior,result.ancestry.data,result.topology,request.featureId):Object.freeze(prior.map(row=>Object.freeze({...row,status:'unresolved',reason:'DRAWING_REFERENCE_UNRESOLVED',failedFeatureId:request.featureId}))));}
+      if(drawingReferencesMode){const prior=selectedDrawingCylinders.get(msg.parentToken)||[];selectedDrawingCylinders.set(msg.token,result.ancestry.status==='available'?drawingFactsAPI.propagateDrawingCylinders(prior,result.ancestry.data,result.topology,request.featureId):Object.freeze(prior.map(row=>row.status==='available'?Object.freeze({...row,status:'unresolved',reason:'DRAWING_REFERENCE_UNRESOLVED',failedFeatureId:request.featureId}):row)));}
       self.postMessage({kind:'result',seq:msg.seq,evidence:result.evidence,shell:result.binding});return;
     }
     if(booleanHistoryMode&&['common','union','subtract'].includes(msg?.kind)){
@@ -832,7 +843,7 @@ self.onmessage = async event => {
         catch(e){if(!['SELECTION_RESOURCE_LIMIT','SELECTION_UNAVAILABLE'].includes(e?.code))throw e;reason=e.code;}
       }else if(!reason)reason=sourceA.reason||sourceB.reason||'NO_AUTHORED_SOURCE_SELECTIONS';
       chargeSelectedResult(name,evidence);shapes.set(msg.token,name);selectedSelectionIndices.set(msg.token,{featureId:msg.featureId,index,reason});
-      if(drawingReferencesMode){const inherited=[];for(const [token,observation]of [[msg.a,created.ancestryA],[msg.b,created.ancestryB]]){const prior=selectedDrawingCylinders.get(token)||[];inherited.push(...(observation.status==='available'?drawingFactsAPI.propagateDrawingCylinders(prior,observation.data,topology,msg.featureId):prior.map(r=>Object.freeze({...r,status:'unresolved',reason:'DRAWING_REFERENCE_UNRESOLVED',failedFeatureId:msg.featureId}))));}const seen=new Map();for(const row of inherited){const old=seen.get(row.intent.featureId);seen.set(row.intent.featureId,old?Object.freeze({...old,status:'unresolved',reason:'DRAWING_AMBIGUOUS_ANCESTRY',failedFeatureId:msg.featureId}):row);}const faces=new Map();for(const row of seen.values())if(row.status==='available')faces.set(row.witness.resultFace,(faces.get(row.witness.resultFace)||0)+1);selectedDrawingCylinders.set(msg.token,Object.freeze([...seen.values()].map(row=>row.status==='available'&&faces.get(row.witness.resultFace)>1?Object.freeze({...row,status:'unresolved',reason:'DRAWING_AMBIGUOUS_ANCESTRY',failedFeatureId:msg.featureId}):row)));}
+      if(drawingReferencesMode){const inherited=[];for(const [token,observation]of [[msg.a,created.ancestryA],[msg.b,created.ancestryB]]){const prior=selectedDrawingCylinders.get(token)||[];inherited.push(...(observation.status==='available'?drawingFactsAPI.propagateDrawingCylinders(prior,observation.data,topology,msg.featureId):prior.map(r=>r.status==='available'?Object.freeze({...r,status:'unresolved',reason:'DRAWING_REFERENCE_UNRESOLVED',failedFeatureId:msg.featureId}):r)));}const seen=new Map();for(const row of inherited){const key=drawingFactsAPI.drawingCylinderKey(row),old=seen.get(key);seen.set(key,old?Object.freeze({...old,status:'unresolved',reason:'DRAWING_AMBIGUOUS_ANCESTRY',failedFeatureId:msg.featureId}):row);}const faces=new Map();for(const row of seen.values())if(row.status==='available')faces.set(row.witness.resultFace,(faces.get(row.witness.resultFace)||0)+1);selectedDrawingCylinders.set(msg.token,Object.freeze([...seen.values()].map(row=>row.status==='available'&&faces.get(row.witness.resultFace)>1?Object.freeze({...row,status:'unresolved',reason:'DRAWING_AMBIGUOUS_ANCESTRY',failedFeatureId:msg.featureId}):row)));}
       self.postMessage({kind:'result',seq:msg.seq,evidence,boolean:{version:1,featureId:msg.featureId,producerAFeatureId:msg.producerAFeatureId,producerBFeatureId:msg.producerBFeatureId,kind:msg.kind}});return;
     }
     if (['common','union','subtract'].includes(msg?.kind)) {

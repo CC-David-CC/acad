@@ -1,3 +1,4 @@
+import {inspectFiniteCylinder as finiteCylinder,createPrismaticBoreObserver} from './prismaticBoreFacts.mjs';
 // Worker-only geometric facts. Every slot stays private to its current owned
 // result; no caller flag, mesh, HLR fragment or nominal dimension is evidence.
 import {captureLinkedPartDrawingDefinition} from '../../drawing/linkedPartDrawingDefinition.mjs';
@@ -10,19 +11,17 @@ const unavailable=reason=>{throw Object.assign(Error(reason),{code:reason});};
 const freeze=v=>{if(v&&typeof v==='object'){for(const x of Object.values(v))freeze(x);Object.freeze(v);}return v;};
 export const captureDrawingDefinition=captureLinkedPartDrawingDefinition;
 export const unresolvedOwnedDrawingReferences=unresolvedDrawingRead;
+export function drawingCylinderKey(record){
+ const slot=record.slot||(record.intent.kind==='centered-through'?'center':null);
+ if(!slot)throw Object.assign(Error('A private semantic bore slot is missing.'),{code:'ENGINE_FAILURE'});
+ return 'bore:'+record.intent.featureId+':'+slot;
+}
 export function propagateDrawingCylinders(records,ancestry,topology,featureId){
  if(!records?.length)return Object.freeze([]);validateOwnedTopology(topology);
  const available=records.filter(r=>r.status==='available'),counts=new Map();for(const r of available)counts.set(r.witness.resultFace,(counts.get(r.witness.resultFace)||0)+1);
- const unique=available.filter(r=>counts.get(r.witness.resultFace)===1),id=r=>'center:'+r.intent.featureId;
+ const unique=available.filter(r=>counts.get(r.witness.resultFace)===1),id=drawingCylinderKey;
  let claims;try{claims=reconcileNativeSelectionClaims({sources:[{claims:unique.map(r=>({kind:'face',id:id(r),sourceIndex:r.witness.resultFace})),ancestry}],topology});}catch(e){if(!['SELECTION_RESOURCE_LIMIT','SELECTION_UNAVAILABLE'].includes(e?.code))throw e;return Object.freeze(records.map(r=>r.status==='available'?freeze({...r,status:'unresolved',reason:e.code,failedFeatureId:featureId}):r));}
  return Object.freeze(records.map(record=>{if(record.status!=='available')return record;const missing=reason=>freeze({...record,status:'unresolved',reason,failedFeatureId:featureId});if(counts.get(record.witness.resultFace)!==1)return missing('DRAWING_AMBIGUOUS_ANCESTRY');const resolved=claims.resolved.find(x=>x.id===id(record));if(!resolved)return missing('DRAWING_'+(claims.unresolved.find(x=>x.id===id(record))?.reason||'REFERENCE_MISSING'));const index=claims.resolveFace(id(record)),face=topology.faces[index-1],prior=record.witness.cylinder;if(face.type!=='cylinder'||Math.abs(face.analytic.radius-prior.radius)>tol||norm(cross(face.analytic.axis,prior.axis))>dirTol||norm(cross(sub(face.analytic.origin,prior.origin),prior.axis))>tol)return missing('DRAWING_TYPE_CHANGED');return freeze({...record,witness:{...record.witness,resultFace:index,cylinder:{origin:[...face.analytic.origin],axis:[...face.analytic.axis],radius:face.analytic.radius},diameter:2*face.analytic.radius}});}));
-}
-function finiteCylinder(topology,witness,frame){
- const face=topology.faces[witness.resultFace-1],c=face?.analytic;if(face?.type!=='cylinder'||face.wires.length!==1||face.wires[0].length!==4)unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');const uses=face.wires[0],rims=uses.filter(x=>!x.seam),seams=uses.filter(x=>x.seam);
- if(rims.length!==2||rims[0].edge===rims[1].edge||seams.length!==2||seams[0].edge!==seams[1].edge||!['FORWARD','REVERSED'].every(o=>seams.some(x=>x.orientation===o)))unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');
- const circles=rims.map(u=>topology.edges[u.edge-1]),line=topology.edges[seams[0].edge-1];for(const edge of circles){const a=edge.analytic;if(edge.degenerated||edge.type!=='circle'||edge.vertices[0]!==edge.vertices[1]||Math.abs(edge.range[1]-edge.range[0]-2*Math.PI)>dirTol||Math.abs(a.radius-c.radius)>tol||norm(cross(a.axis,c.axis))>dirTol||norm(cross(sub(a.center,c.origin),c.axis))>tol)unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');const p=a.center.map((n,i)=>n+a.radius*(a.x[i]*Math.cos(edge.range[0])+a.y[i]*Math.sin(edge.range[0])));if(!near(p,topology.vertices[edge.vertices[0]-1].point))unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');}
- if(line.degenerated||line.type!=='line'||norm(cross(line.analytic.direction,c.axis))>dirTol||JSON.stringify([...line.vertices].sort((a,b)=>a-b))!==JSON.stringify(circles.map(e=>e.vertices[0]).sort((a,b)=>a-b)))unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');const ends=line.range.map(t=>add(line.analytic.origin,mul(line.analytic.direction,t)));if(!line.vertices.every(i=>ends.some(p=>near(p,topology.vertices[i-1].point))))unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');
- const span=circles.map(e=>dot(sub(e.analytic.center,frame.origin),frame.z)).sort((a,b)=>a-b);if(Math.abs(span[0])>tol||Math.abs(span[1]-frame.depth)>tol||norm(cross(c.axis,frame.z))>dirTol)unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');const denominator=dot(c.axis,frame.z);if(Math.abs(denominator)<=dirTol)unavailable('DRAWING_AXIS_UNSUPPORTED');const intersection=add(c.origin,mul(c.axis,dot(sub(frame.origin,c.origin),frame.z)/denominator)),mid=mul(add(circles[0].analytic.center,circles[1].analytic.center),.5);let x=sub(frame.x,mul(c.axis,dot(frame.x,c.axis)));if(norm(x)<=dirTol)unavailable('DRAWING_AXIS_UNSUPPORTED');x=mul(x,1/norm(x));return{radius:c.radius,intersection,diameterAnchors:[add(mid,mul(x,-c.radius)),add(mid,mul(x,c.radius))]};
 }
 export function resolveOwnedDrawingReferences({definition,topology,index,sourceProfile,sourceFeatureId,sourceRegionId,cylinders}){
  const def=captureLinkedPartDrawingDefinition(definition);validateOwnedTopology(topology);

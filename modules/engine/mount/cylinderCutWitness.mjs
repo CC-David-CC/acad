@@ -1,7 +1,7 @@
 // Worker-only, response-local evidence. Caller must separately authenticate the
 // actual tool creation/request and current source/owner/build. Never save slots.
 import {validateOwnedBooleanResult} from './ownedBooleanContract.mjs';
-import {validatePrismProvenance} from './ownedTopologyContract.mjs';
+import {validatePrismProvenance,validateOwnedTopology} from './ownedTopologyContract.mjs';
 import {preparePolygonProfileExtrusion} from './polygonProfilePlan.mjs';
 import {reconcileNativeSelectionClaims} from './booleanSelectionClaims.mjs';
 const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
@@ -65,4 +65,20 @@ export function deriveCylinderCutWitness(value){
  if(face.type!=='cylinder'||!sameSupport(tool.analytic,face.analytic))fail('ENGINE_FAILURE','The selected native descendant changed cylindrical support.');
  const cylinder=Object.freeze({origin:Object.freeze([...face.analytic.origin]),axis:Object.freeze([...face.analytic.axis]),radius:face.analytic.radius});
  return Object.freeze({version:1,unit:'millimeter',scope:'response-local',persistentIds:false,sourceCurveId:prepared.request.region.outer[0].id,sourceFace,resultFace,cylinder,diameter:2*cylinder.radius,method:'native-prism-cut-b-ancestry'});
+}
+
+// Actual single-prism seed; the owning Worker binds the constructor invocation.
+// Used before that tool's real Native union inputs are released.
+export function captureCylinderToolWitness(value){
+ const input=fields(value,['topology','toolConstruction','toolRequest']);
+ validateOwnedTopology(input.topology);
+ const construction=captureConstruction(input.toolConstruction),prepared=preparePolygonProfileExtrusion(input.toolRequest);
+ if(prepared.loops.length!==1||prepared.loops[0].kind!=='circle')fail('DRAWING_WITNESS_UNSUPPORTED_TOOL','A single circular prism tool is required.');
+ const proof=validatePrismProvenance(construction,input.topology,prepared);
+ if(proof.status!=='available')fail('DRAWING_WITNESS_UNAVAILABLE','Tool prism provenance is unavailable.');
+ const sourceFace=proof.data.sourceLoops[0].edges[0].sweptFace,face=input.topology.faces[sourceFace-1],circle=prepared.loops[0],frame=prepared.frame;
+ const origin=frame.origin.map((n,i)=>n+frame.x[i]*circle.center[0]+frame.y[i]*circle.center[1]);
+ if(face?.type!=='cylinder'||!sameSupport(face.analytic,{origin,axis:frame.z,radius:circle.radius}))fail('DRAWING_WITNESS_INPUT_MISMATCH','The actual tool cylinder differs from its captured construction.');
+ const cylinder=Object.freeze({origin:Object.freeze([...face.analytic.origin]),axis:Object.freeze([...face.analytic.axis]),radius:face.analytic.radius});
+ return Object.freeze({version:1,unit:'millimeter',scope:'response-local',persistentIds:false,sourceCurveId:prepared.request.region.outer[0].id,sourceFace,resultFace:sourceFace,cylinder,diameter:2*cylinder.radius,method:'native-prism-construction'});
 }

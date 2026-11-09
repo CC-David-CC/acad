@@ -76,5 +76,5 @@ export function planOwnedThroughHoles(input){
   const first=frame.origin.map((n,axis)=>n+f.x[axis]*center[0]+f.y[axis]*center[1]),last=first.map((n,axis)=>n+f.z[axis]*depth),a=dot(first.map((n,axis)=>n-f.origin[axis]),f.z),b=dot(last.map((n,axis)=>n-f.origin[axis]),f.z);
   if(![...first,...last,a,b].every(Number.isFinite)||!(a<min&&b>max))fail('TOOL_DOMAIN','Floating-point tool endpoints do not fully cross the measured target.');return profile;
  });
- return freeze({version:1,sourceRegionId:source.region.id,centersLocal,radius,toolProfiles,expectedRemovedVolume,axialSpan:{min,max},scope:'rectangle-source-native-aabb-through'});
+ return freeze({version:1,sourceRegionId:source.region.id,slots:anchors.slice(),centersLocal,radius,toolProfiles,expectedRemovedVolume,axialSpan:{min,max},scope:'rectangle-source-native-aabb-through'});
 }
