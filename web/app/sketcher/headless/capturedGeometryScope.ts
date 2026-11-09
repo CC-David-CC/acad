@@ -1,3 +1,4 @@
+import {offsetDependencyGroups} from '../generators/offsetGenerator';
 import {HeadlessSketchWorkspace} from './workspace';
 import {AlgNumConstraint,ConstraintDefinitions} from '../constr/ANConstraints';
 import {GroundObjectsGeneratorSchema} from '../generators/groundObjectsGenerator';
@@ -39,7 +40,7 @@ export function captureConnectedGeometryScope(before:any,external:any,freshEvide
   const link=(group:any[])=>{for(const p of group){charge();const rows=adjacency.get(p)||[];rows.push(group);adjacency.set(p,rows);}};
   for(const c of all){const equations=[];if(c===replaced)equations.push(...replacementEquations);else c.collectPolynomials(equations);for(const equation of equations)link(parameters(equation));}
   // Real generator source/output identities are dependencies too.
-  for(const stage of pm.stages)for(const generator of stage.generators){const group=new Set<any>(),add=(o:any)=>o.visitParams(p=>{charge();if(!known.has(p))fail('INVALID_SCOPE','Generator parameter ownership is unavailable.');if(!fixed.has(p))group.add(p);});generator.sourceObjects(add);for(const output of generator.generatedObjects||[])add(output);link([...group]);}
+  for(const stage of pm.stages)for(const generator of stage.generators){const offsetGroups=offsetDependencyGroups(generator);if(offsetGroups){for(const row of offsetGroups){for(const p of row){charge();if(!known.has(p))fail('INVALID_SCOPE','Offset dependency has no actual captured ownership.');}link(row.filter(p=>!fixed.has(p)));}continue;}const group=new Set<any>(),add=(o:any)=>o.visitParams(p=>{charge();if(!known.has(p))fail('INVALID_SCOPE','Generator parameter ownership is unavailable.');if(!fixed.has(p))group.add(p);});generator.sourceObjects(add);for(const output of generator.generatedObjects||[])add(output);link([...group]);}
   const reached=new Set<any>();for(const equation of replacementEquations||(selection.equations||[]))for(const p of parameters(equation))reached.add(p);
   for(const p of selection.parameters||[]){charge();if(!known.has(p)||!Number.isFinite(p.get()))fail('INVALID_SCOPE','An operation seed has no actual captured ownership.');if(!fixed.has(p))reached.add(p);}
   const pending=[...reached];for(let at=0;at<pending.length;at++)for(const group of adjacency.get(pending[at])||[])for(const p of group){charge();if(!reached.has(p)){reached.add(p);pending.push(p);}}
