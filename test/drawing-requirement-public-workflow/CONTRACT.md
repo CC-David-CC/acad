@@ -3,17 +3,19 @@
 SOURCE ONLY. Core base aab4c2e0a574c589cf408869291a1a9645659373;
 Host base d8488ac44 (product remains be24). Approved Root contract:
 docs/reviews/C11-LINKED-REQUIREMENTS-ROOT-CONTRACT-20261109.md and
-BEFORE08b6cb50. This draft freezes the finite intent and acceptance obligations;
-it is not implementation, execution or qualification. Root owns compilation,
+BEFORE08b6cb50. The original66ea54cc BEFORE freezes the finite intent and acceptance obligations;
+the complete source packet now implements that preparation, without execution or qualification. Root owns compilation,
 composition, one complete public workflow, FIRST independent artifacts and
 individual actual SVG review. No tests/parser/probes/build/Native/browser here.
 
 Dependencies now frozen:
 - Pure definition/types78519cd6c1cdee5f00e400d69fa3cb7460747b9c.
 - Protected read DTO contract b031e057e739dea13adb1b35c64265df0a952021.
-Actual backend known-reason predicates and renderer visible grammar are still
-pending their owners' coherent source. Final machine-error/SVG assertions must
-wait for those exact implementations; no guessed codes or success fields.
+- Protected read product21904c50a998e857fb0835c5609a0008de4649f9.
+- Metadata0019894da96da89baef4b045b449270f19f5b295 and
+  renderer4293c30f47c4fe9dd2a6ad42bd5705de8e864d8a.
+The final source assertions use these exact predicates/visible grammar; the
+initial66ea54cc historical BEFORE retains its then-pending dependency labels.
 
 ## One authority and owned source changes
 
@@ -74,6 +76,7 @@ is a current target member.
 | --- | --- | --- | --- |
 | 10 | [10,10.015] | [9.980,9.995] | [0.005,0.035] |
 | 12 | [12,12.015] | [11.980,11.995] | [0.005,0.035] |
+| 14 (post-third-Open reedit) | [14,14.015] | [13.980,13.995] | [0.005,0.035] |
 
 Clearance cancels COMMON live nominal before subtraction:
 minimum=hole.lowerDeviation-shaft.upperDeviation;
@@ -155,7 +158,7 @@ paper box and actual current issued definition/revisions; not aria-label alone.
 Retain old view/path/visibility/chord/caption/warning/geometry checks. Unresolved
 messages must be complete visible actual reasons with null facts and no stale
 geometry/conformance. Do not reproduce placement search. Exact visible grammar
-waits for Timeline's frozen renderer before final oracle code.
+is now bound to the frozen4293 renderer; no actual artifact result is assumed.
 
 Freeze explicit complete transitive source rosters with repository/path/commit/
 Git blob/SHA before/after. Core tests belong to acceptanceSource, actual product
