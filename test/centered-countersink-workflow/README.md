@@ -66,3 +66,23 @@ This packet does not sign off all C06/Gate1, arbitrary conical solids, sink-on-e
 ## Source-review acceptance corrections before execution
 
 Independent BEFORE review `bf39ffa4619c0c8f306147972776a95344724495` records two source-level checker defects in original packet `97728e06`; no runtime/artifact failure or parser probe was used to find them. Saved PLANE feature IDs must be canonical strings exactly matching their safe-positive public creation integers; this explicit documented dialect comparison does not parse opaque selectors or relax modern numeric feature IDs. Controlled 3MF triangles must have exactly the actual exporter's v1/v2/v3 attributes and no child/text content, so per-triangle material overrides cannot escape the existing object/resource/material truth checks. These two corrections preserve every original source/equation/finite cone/LINE/mesh/SVG budget, lifecycle, refusal, three-native-cycle and nine-artifact requirement. Original packet and BEFORE review remain immutable; run only after Root reviews the separate acceptance correction.
+
+
+## Future warning-layout source roster
+
+This acceptance-only follow-up is based on root34346ab and is for a later
+runtime that includes the reviewed derived-warning product leaf. Freeze the
+actual linkedPartDrawingSvg.mjs, linkedPartDrawingCaptionLayout.mjs and
+linkedPartDrawingWarningLayout.mjs under the runtime CODI_EXPECT_SOURCE, with
+their existing Git commit:path/blob/SHA and before/after custody checks.
+Acceptance source remains independently CODI_ACCEPTANCE_SOURCE. A runtime
+without the new warning leaf cannot satisfy this future roster and must use
+its original frozen acceptance packet instead.
+
+No unresolved drawing, new warning fixture or warning-layout success is added
+to this countersink flow. Its available-only strict SVG oracle, accepted
+definition/revision binding, finite cone/shared rim/generatrix/no-annular-floor,
+FULL ANGLE, source/material, three native cycles and nine artifacts remain
+unchanged. The separate warning packet still needs its own complete drawing
+workflows and real individual SVG reviews. No functional execution occurred
+for this roster correction.
