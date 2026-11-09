@@ -237,7 +237,7 @@ def check(directory,readerFile,evidenceAnchors=None,planarAnchors=None):
  names=['desktop-driver.mjs','example.mjs','check.py','mesh_oracle.py','svg_oracle.py','negative_archive.py','step_oracle.py','run-reader.mjs','reader-offline.cjs','read-step.cpp','build-reader.sh','CONTRACT.md','README.md']
  if original_r4:names.remove('reader-offline.cjs')
  expected={('core','test/selected-profile-extents-workflow/'+name) for name in names}|{('core','web/app/cad/export/linkedPartDrawingSvg.mjs'),('core','web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),('core','web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),('core','test/native-cad-container/archive_oracle.py'),('desktop','test/agent-cad-corpus/sweep/signed-harness.mjs'),('desktop','test/agent-cad-corpus/strict-join/oracle.mjs')}
- if not original_r4:expected.update(('core',name) for name in VALIDATION_SOURCES)
+ if not original_r4:expected.update(('core',name) for name in (*VALIDATION_SOURCES,'web/app/cad/export/linkedPartDrawingRequirementForms.mjs'))
  need({(s['repository'],s['relative']) for s in r['sourceSnapshots']}==expected and len(r['sourceSnapshots'])==len(expected),'complete executed/helper/transitive source roster')
  if evidenceAnchors is None:
   need(original_r4,'a new whole requires its separately reviewed matching mesh-evidence anchors')

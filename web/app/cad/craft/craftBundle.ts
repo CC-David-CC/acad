@@ -67,7 +67,7 @@ import {createWorkerSolidPointCommands} from './workerSolidPointCommands';
 import {createWorkerManufacturingMeshReplay} from './workerManufacturingMeshReplay';
 import {createWorkerDrawingReadCommands} from './workerDrawingReadCommands';
 import {readManufacturingReplayBatch} from './manufacturingMeshReplayResult.mjs';
-import {classifyCandidateWorkerSolidPoints,exportCandidateWorkerSTEP,readCandidateWorkerManufacturingMesh,readCandidateWorkerDrawing,readCandidateWorkerBores} from 'engine/solid/solidLedger.mjs';
+import {classifyCandidateWorkerSolidPoints,exportCandidateWorkerSTEP,readCandidateWorkerManufacturingMesh,readCandidateWorkerDrawing,readCandidateWorkerBores,readCandidateWorkerDrawingRequirementTargets,readCandidateWorkerDrawingRequirements} from 'engine/solid/solidLedger.mjs';
 import {createWorkerStepExportCommands} from './workerStepExportCommands';
 import {createWorkerLinearHolePatternCommands} from './workerLinearHolePatternCommands';
 import {createWorkerThroughHoleCommands} from './workerThroughHoleCommands';
@@ -1922,6 +1922,8 @@ export function activate(ctx: ApplicationContext) {
           :observer==='step'?await exportCandidateWorkerSTEP({owner:result.resources,registry:result.registry,...input.query,valid:input.valid})
           :observer==='manufacturing-meshes'?await readManufacturingReplayBatch({owner:result.resources,registry:result.registry,...input.query,valid:input.valid},readCandidateWorkerManufacturingMesh)
           :observer==='source-attachment'?await readCandidateWorkerPlanarFaces({owner:result.resources,registry:result.registry,...input.query,valid:input.valid})
+          :input.query.requirementQuery?await readCandidateWorkerDrawingRequirementTargets({owner:result.resources,registry:result.registry,...input.query,valid:input.valid})
+          :input.query.requirementDefinition?await readCandidateWorkerDrawingRequirements({owner:result.resources,registry:result.registry,...input.query,valid:input.valid})
           :input.query.boreQuery?await readCandidateWorkerBores({owner:result.resources,registry:result.registry,...input.query,valid:input.valid}):await readCandidateWorkerDrawing({owner:result.resources,registry:result.registry,...input.query,valid:input.valid});
         input.requireCurrent();
       }catch(failure){error={cause:failure};}
@@ -2268,6 +2270,8 @@ interface CraftService {
   exportWorkerSTEPBlob?: ReturnType<typeof createWorkerStepExportCommands>['exportWorkerSTEPBlob'];
   inspectWorkerLinkedPartBores?: ReturnType<typeof createWorkerDrawingReadCommands>['inspectWorkerLinkedPartBores'];
   readWorkerLinkedPartDrawing?: ReturnType<typeof createWorkerDrawingReadCommands>['readWorkerLinkedPartDrawing'];
+  inspectWorkerDrawingRequirementTargets?: ReturnType<typeof createWorkerDrawingReadCommands>['inspectWorkerDrawingRequirementTargets'];
+  readWorkerLinkedPartDrawingRequirements?: ReturnType<typeof createWorkerDrawingReadCommands>['readWorkerLinkedPartDrawingRequirements'];
   prepareWorkerManufacturingMeshes?: ReturnType<typeof createWorkerManufacturingMeshReplay>['prepareWorkerManufacturingMeshes'];
   authoredProfileExtentOperation?: (args:any,options?:any)=>Promise<any>;
   authoredLinearHolePatternOperation?: (args:{revision:string;index:number;featureId:number;count?:number;spacing?:number;direction?:'undo'|'redo'},options?:{signal?:AbortSignal;valid?:()=>boolean;beforePublish?:()=>boolean})=>Promise<Readonly<{changed:boolean;revision:string;dimensions?:Readonly<Record<string,number>>;featureId?:number;index?:number}>>;

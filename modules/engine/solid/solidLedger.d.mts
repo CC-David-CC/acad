@@ -14,3 +14,6 @@ export function readCandidateWorkerManufacturingMesh(input:CandidateManufacturin
 export function readCandidateWorkerBores(input:any):Promise<Readonly<{observation:import('../mount/ownedBoreReadProtocol.mjs').BoreReferenceObservation;status:'available'|'unresolved'}>>;
 
 export function inspectWorkerMechanicalSource(model:any,sourceFeatureId:number,access:Readonly<{registry:any;history:readonly any[];readSketch:(faceId:string)=>unknown;readFrame:(face:any)=>unknown;readParameterSource:()=>unknown;valid:()=>boolean}>):Readonly<{status:'unavailable';reason:string}>|Readonly<{status:'available';engine:string;engineRevision:string;bodyId:string;featureId:number;sourceFeatureId:number;sourceFaceId:string;sourceRegionId:string;sourceSha256:string;requestSha256:string;source:import('../mount/profileMechanicalSource.mjs').ProfileMechanicalSource}>;
+
+export function readCandidateWorkerDrawingRequirementTargets(input:any):Promise<Readonly<{observation:import('../mount/ownedDrawingReadProtocol.mjs').DrawingRequirementTargetsObservation;status:'available'|'unresolved'}>>;
+export function readCandidateWorkerDrawingRequirements(input:any):Promise<Readonly<{observation:import('../mount/ownedDrawingReadProtocol.mjs').DrawingReferenceObservation;status:'available'|'unresolved'}>>;

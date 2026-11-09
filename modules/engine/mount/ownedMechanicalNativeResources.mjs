@@ -58,7 +58,7 @@ export const MECHANICAL_NATIVE_RESOURCE_MODULES=Object.freeze([
  'modules/engine/mount/ownedOrthographicReadProtocol.mjs',
  'modules/engine/mount/orthographicAnalyticRecord.mjs',
  'modules/engine/mount/ownedDrawingReadProtocol.mjs',
- 'modules/engine/mount/drawingReferenceFacts.mjs',
+ 'modules/engine/mount/drawingReferenceFacts.mjs','modules/engine/mount/drawingRequirementFacts.mjs','modules/engine/mount/drawingRequirementProtocol.mjs',
  'modules/engine/mount/prismaticBoreFacts.mjs',
  'modules/engine/mount/ownedBoreReadProtocol.mjs',
  'modules/engine/mount/ownedBoreAnnotationProtocol.mjs',
