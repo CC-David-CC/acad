@@ -2,7 +2,9 @@ import {PROFILE_EXTENT_TYPE,profileExtentFields,profileExtentFromFields} from '.
 // One canonical dimension per actual authored field. This is metadata, not a
 // feature/runtime capability declaration; variant/domain guards remain owned
 // by each existing feature consumer. Compatibility name lists are derived.
+export const centeredCountersinkBindingFieldRoles=Object.freeze({throughDiameter:'length',entryDiameter:'length',includedAngleRadians:'angle'});
 export const physicalBindingFieldRoles=Object.freeze({
+ WORKER_CENTERED_COUNTERSINK_V1:centeredCountersinkBindingFieldRoles,
  WORKER_CENTERED_COUNTERBORE_V1:Object.freeze({throughDiameter:'length',stepDiameter:'length',stepDepth:'length'}),
  [PROFILE_EXTENT_TYPE]:Object.freeze({distance:'length',length:'length',positive:'length',negative:'length'}),
  WORKER_CENTERED_BLIND_HOLE_V1:Object.freeze({diameter:'length',depth:'length'}),
@@ -15,11 +17,6 @@ export const physicalBindingFieldRoles=Object.freeze({
  WORKER_ENCLOSURE_V2:Object.freeze({width:'length',length:'length',height:'length',wall:'length',clearance:'length',lidThickness:'length',lipDepth:'length',labelWidth:'length',labelLength:'length',labelDepth:'length'})
 });
 export const physicalBindingFields=Object.freeze(Object.fromEntries(Object.entries(physicalBindingFieldRoles).map(([type,roles])=>[type,Object.freeze(Object.keys(roles))])));
-// Frozen prerequisite ONLY: deliberately absent from the active map above.
-// Future coherent countersink product composition can insert this SAME record;
-// until then unknown-target/history and actual Native availability stay intact.
-export const centeredCountersinkBindingFieldRoles=Object.freeze({throughDiameter:'length',entryDiameter:'length',includedAngleRadians:'angle'});
-
 // For the new family this is the authoritative variant selector; old callers
 // retain their existing field order and optional through-hole filtering.
 export function activePhysicalBindingFields(type,params){return type===PROFILE_EXTENT_TYPE?profileExtentFields(params):Object.hasOwn(physicalBindingFields,type)?physicalBindingFields[type]:null;}

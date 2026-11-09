@@ -1,4 +1,4 @@
-// Unregistered authored metadata: raw names stay source intent; only the actual
+// Shared authored metadata: raw names stay source intent; only the actual
 // accepted/candidate typed facade materializes canonical mm and FULL radians.
 import {captureNumericCountersinkIntent,COUNTERSINK_NUMERIC_KEYS,COUNTERSINK_LENGTH_KEYS,assertCountersinkDiameterOrder} from './ownedCountersinkIntent.mjs';
 import {isAuthoredLength,resolveAuthoredLength} from './authoredLengthQuantity.mjs';
@@ -38,4 +38,11 @@ export function captureAuthoredCountersinkDimensions(input){return Object.freeze
 export function materializeAuthoredCountersinkDimensions(input,expressions){
  const raw=captureAuthoredCountersinkDimensions(input),out={};for(const key of COUNTERSINK_LENGTH_KEYS)out[key]=resolveAuthoredLength(raw[key],expressions);
  out.includedAngleRadians=resolveAuthoredIncludedAngleRadians(raw.includedAngleRadians,expressions);assertCountersinkDiameterOrder(out.throughDiameter,out.entryDiameter);return Object.freeze(out);
+}
+// Direct edits may retain or introduce a current named quantity, but may not
+// erase/rebind an existing name. The shared physical transaction owns that edit.
+export function assertCountersinkBindingsPreserved(before,after){
+ const a=captureAuthoredCountersinkDimensions(before),b=captureAuthoredCountersinkDimensions(after);
+ for(const key of dimensionKeys)if(typeof a[key]==='string'&&!Object.is(a[key],b[key]))fail('Edit the authoritative physical binding rather than erasing or rebinding a countersink name.','BOUND_DIMENSION');
+ return b;
 }

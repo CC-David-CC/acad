@@ -1,3 +1,4 @@
+import {captureAuthoredCountersinkIntent} from 'engine/solid/authoredCountersinkIntent.mjs';
 import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature,profileExtentFields,profileExtentDimensions,profileExtentInterval} from 'engine/solid/ownedProfileExtentFeature.mjs';
 import {requireProfileExtentBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {validateOffsetSources} from 'sketcher/headless/offsetSourceValidation';
@@ -36,6 +37,16 @@ export function preflight(value, parameterState?: {source?: string, result?: any
   for(const operation of project.model.history)if(operation.type===PROFILE_EXTENT_TYPE){const p=captureOwnedProfileExtentFeature(operation.params);requireProfileExtentBuild(p.engine,p.engineRevision);if(profileExtentFields(p).every(key=>typeof p[key]==='number'))profileExtentInterval(profileExtentDimensions(p));}
   const blindSources=new Map<number,any>();
   for(const operation of project.model.history){
+    if(operation.type==='WORKER_CENTERED_COUNTERSINK_V1'){
+      const p=captureAuthoredCountersinkIntent(operation.params),parent=blindSources.get(p.sourceFeatureId),q=parent?.params;
+      if(parent?.type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2'||q.engine!==p.engine||q.engineRevision!==p.engineRevision||q.faceId!==p.sourceFaceId||q.regionId!==p.sourceRegionId)throw Object.assign(Error('Countersink native intent requires its genuine earlier selected constructor.'),{code:'COUNTERSINK_UNSUPPORTED_TARGET'});
+      // Literal source math only, in this validation Worker. Named values use
+      // the actual prepared expression service and complete candidate replay.
+      if(typeof p.throughDiameter==='number'&&typeof p.entryDiameter==='number'&&typeof p.includedAngleRadians==='number'&&typeof q.depth==='number'){
+        const small=p.throughDiameter/2,large=p.entryDiameter/2,slope=Math.tan(p.includedAngleRadians/2),depth=(large-small)/slope;
+        if(!Number.isFinite(slope)||!(slope>0)||!Number.isFinite(depth)||!(depth>0&&depth<q.depth))throw Object.assign(Error('Countersink conical depth must remain strictly interior.'),{code:'COUNTERSINK_DEPTH_NOT_INTERIOR'});
+      }
+    }
     if(operation.type==='WORKER_CENTERED_COUNTERBORE_V1'){
       const p=captureAuthoredCounterboreIntent(operation.params),parent=blindSources.get(p.sourceFeatureId),q=parent?.params;
       if(parent?.type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2'||q.engine!==p.engine||q.engineRevision!==p.engineRevision||q.faceId!==p.sourceFaceId||q.regionId!==p.sourceRegionId)throw Object.assign(Error('Counterbore native intent requires its genuine earlier selected constructor.'),{code:'COUNTERBORE_UNSUPPORTED_TARGET'});

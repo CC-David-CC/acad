@@ -1,3 +1,4 @@
+import {captureAuthoredCountersinkIntent} from '../../../../modules/engine/solid/authoredCountersinkIntent.mjs';
 import {captureAuthoredCounterboreIntent} from '../../../../modules/engine/solid/authoredCounterboreIntent.mjs';
 import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature} from '../../../../modules/engine/solid/ownedProfileExtentFeature.mjs';
 import {captureAuthoredBlindHoleIntent} from '../../../../modules/engine/solid/authoredBlindHoleIntent.mjs';
@@ -90,6 +91,11 @@ export function hasOnlyUnconsumedSketchHistory(history,faceId){
    let data;try{data=captureAuthoredCounterboreIntent(p);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target),source=features.get(fid(data.sourceFeatureId));
    if(!spec||spec.counterboreVersion!==1||fid(data.featureId)!==id||!parent||parent.build!==spec||parent.producer!==fid(data.producerFeatureId)||!source||source.kind!=='selected-profile'||parent.producer!==fid(data.sourceFeatureId)||source.sourceFace!==data.sourceFaceId||source.regionId!==data.sourceRegionId||!parent.sources.has(data.sourceFaceId)||parent.sources.has(faceId))return false;
    liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set(parent.sources),origins:new Set(parent.origins)});features.set(id,{kind:'generic-counterbore'});genericBuild=spec;continue;
+  }
+  if(item.type==='WORKER_CENTERED_COUNTERSINK_V1'){
+   let data;try{data=captureAuthoredCountersinkIntent(p);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target),source=features.get(fid(data.sourceFeatureId));
+   if(!spec||spec.countersinkVersion!==1||fid(data.featureId)!==id||!parent||parent.build!==spec||parent.producer!==fid(data.producerFeatureId)||!source||source.kind!=='selected-profile'||parent.producer!==fid(data.sourceFeatureId)||source.sourceFace!==data.sourceFaceId||source.regionId!==data.sourceRegionId||!parent.sources.has(data.sourceFaceId)||parent.sources.has(faceId))return false;
+   liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set(parent.sources),origins:new Set(parent.origins)});features.set(id,{kind:'generic-countersink'});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_CENTERED_BLIND_HOLE_V1'){
    let data;try{data=captureAuthoredBlindHoleIntent(p);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target),source=features.get(fid(data.sourceFeatureId));

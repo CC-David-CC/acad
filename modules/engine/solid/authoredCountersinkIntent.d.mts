@@ -7,3 +7,4 @@ export function captureAuthoredCountersinkIntent(input:unknown):AuthoredCounters
 export function materializeAuthoredCountersinkIntent(input:unknown,expressions?:CurrentAuthoredQuantityFacade,materialized?:unknown):Readonly<OwnedCountersinkIntent>;
 export function captureAuthoredCountersinkDimensions(input:unknown):AuthoredCountersinkDimensions;
 export function materializeAuthoredCountersinkDimensions(input:unknown,expressions?:CurrentAuthoredQuantityFacade):Readonly<{throughDiameter:number;entryDiameter:number;includedAngleRadians:number}>;
+export function assertCountersinkBindingsPreserved(before:unknown,after:unknown):AuthoredCountersinkDimensions;

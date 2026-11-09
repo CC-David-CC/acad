@@ -1,3 +1,5 @@
+import {captureAuthoredCountersinkIntent,assertCountersinkBindingsPreserved} from '../../../../modules/engine/solid/authoredCountersinkIntent.mjs';
+import {COUNTERSINK_NUMERIC_KEYS,COUNTERSINK_DIMENSION_KEYS} from '../../../../modules/engine/solid/ownedCountersinkIntent.mjs';
 import {captureAuthoredCounterboreIntent} from '../../../../modules/engine/solid/authoredCounterboreIntent.mjs';
 import {COUNTERBORE_KEYS} from '../../../../modules/engine/solid/ownedCounterboreIntent.mjs';
 import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature,captureProfileExtent,profileExtentDimensions,profileExtentValueValid,assertProfileExtentBindingsPreserved} from '../../../../modules/engine/solid/ownedProfileExtentFeature.mjs';
@@ -68,10 +70,10 @@ function checkIdentity(index,id) { if(!integer(index,0,255)||!integer(id,1,Numbe
 function make(document,revision,entries,cursor) {return Object.freeze({document,revision,entries:Object.freeze(entries),cursor});}
 function bounded(entries) {
   entries=entries.slice(-LIMIT);
-  let bytes=entries.reduce((sum,entry)=>sum+(['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','profile-extents','selected-profile-source-dimension','solid-edge-treatment','solid-shell','counterbore','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(entry.kind) ? entry.byteSize : 256),0);
+  let bytes=entries.reduce((sum,entry)=>sum+(['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','profile-extents','selected-profile-source-dimension','solid-edge-treatment','solid-shell','counterbore','countersink','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(entry.kind) ? entry.byteSize : 256),0);
   while(bytes>MAX_JOURNAL_BYTES && entries.length>1) {
     const removed=entries.shift();
-    bytes-=['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','profile-extents','selected-profile-source-dimension','solid-edge-treatment','solid-shell','counterbore','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(removed.kind) ? removed.byteSize : 256;
+    bytes-=['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','profile-extents','selected-profile-source-dimension','solid-edge-treatment','solid-shell','counterbore','countersink','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(removed.kind) ? removed.byteSize : 256;
   }
   if(bytes>MAX_JOURNAL_BYTES)throw Error('The authored edit exceeds the undo limit.');
   return entries;
@@ -507,6 +509,23 @@ export function planCounterboreTravel(state,{document,revision,direction,index,f
  return Object.freeze({index,featureId,dimensions:direction==='undo'?entry.before:entry.after,next:make(document,revision+1,state.entries,state.cursor+(direction==='undo'?-1:1))});
 }
 
+// Countersink dimensions share this journal; every authored identity stays exact.
+export const captureCountersinkParameters=captureAuthoredCountersinkIntent;
+const countersinkIdentityKeys=COUNTERSINK_NUMERIC_KEYS.filter(key=>!COUNTERSINK_DIMENSION_KEYS.includes(key));
+function countersinkDimensions(current){return Object.freeze({throughDiameter:current.throughDiameter,entryDiameter:current.entryDiameter,includedAngleRadians:current.includedAngleRadians});}
+export function recordCountersinkEdit(state,{document,revision,index,featureId,parameters,after}){
+ checkCurrent(state,document,revision);checkIdentity(index,featureId);const current=captureCountersinkParameters(parameters),before=countersinkDimensions(current),admitted=assertCountersinkBindingsPreserved(before,after),next=captureCountersinkParameters({...current,...admitted}),dimensions=countersinkDimensions(next);
+ if(current.featureId!==featureId||Reflect.ownKeys(after).sort().join(',')!=='entryDiameter,includedAngleRadians,throughDiameter'||countersinkIdentityKeys.some(key=>current[key]!==next[key])||COUNTERSINK_DIMENSION_KEYS.every(key=>Object.is(before[key],dimensions[key])))throw Error('Invalid countersink dimension edit.');
+ const identity=Object.freeze(Object.fromEntries(countersinkIdentityKeys.map(key=>[key,current[key]]))),charge=value=>{const text=JSON.stringify(value);return Math.max(text.length*2,new TextEncoder().encode(text).byteLength);};
+ const entry=Object.freeze({kind:'countersink',index,featureId,identity,before,after:dimensions,byteSize:256+charge(identity)+charge(before)+charge(dimensions)}),entries=bounded([...state.entries.slice(0,state.cursor),entry]);return make(document,revision+1,entries,entries.length);
+}
+export function planCountersinkTravel(state,{document,revision,direction,index,featureId,parameters}){
+ checkCurrent(state,document,revision);checkIdentity(index,featureId);if(!['undo','redo'].includes(direction))throw Error('Invalid countersink travel direction.');
+ const current=captureCountersinkParameters(parameters),entry=state.entries[direction==='undo'?state.cursor-1:state.cursor],expected=direction==='undo'?entry?.after:entry?.before;
+ if(!entry||entry.kind!=='countersink'||entry.index!==index||entry.featureId!==featureId||current.featureId!==featureId||countersinkIdentityKeys.some(key=>current[key]!==entry.identity[key])||COUNTERSINK_DIMENSION_KEYS.some(key=>!Object.is(current[key],expected[key])))throw Error('The countersink intent no longer matches this journal entry.');
+ return Object.freeze({index,featureId,dimensions:direction==='undo'?entry.before:entry.after,next:make(document,revision+1,state.entries,state.cursor+(direction==='undo'?-1:1))});
+}
+
 // Blind dimensions share this journal; every authored identity stays exact.
 export const captureBlindHoleParameters=captureAuthoredBlindHoleIntent;
 const blindIdentityKeys=BLIND_HOLE_KEYS.filter(key=>!['diameter','depth'].includes(key));
@@ -571,6 +590,7 @@ export function planRevolveAngleTravel(state,{document,revision,direction,index,
 // Capture and Craft chronology admission use one closed local registry.
 const appendDefinitions=Object.freeze({
  WORKER_CENTERED_COUNTERBORE_V1:{capture:captureCounterboreParameters,keys:COUNTERBORE_KEYS},
+ WORKER_CENTERED_COUNTERSINK_V1:{capture:captureCountersinkParameters,keys:COUNTERSINK_NUMERIC_KEYS},
  [PROFILE_EXTENT_TYPE]:{capture:captureOwnedProfileExtentFeature,keys:params=>Object.keys(captureOwnedProfileExtentFeature(params))},
  WORKER_CENTERED_BLIND_HOLE_V1:{capture:captureBlindHoleParameters,keys:BLIND_HOLE_KEYS},
  WORKER_SELECTED_PROFILE_EXTRUDE_V2:{capture:captureSelectedProfileDepthParameters,keys:selectedProfileKeys},

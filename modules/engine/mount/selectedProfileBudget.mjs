@@ -34,6 +34,7 @@ export function selectedProfileHistoryBudget(history,engineRevision){
    if(type.value==='WORKER_SELECTED_PROFILE_EXTENT_EXTRUDE_V1'){const feature=captureOwnedProfileExtentFeature(params),build=requireCadEngineBuild(feature.engine,feature.engineRevision);if(build.profileExtentsVersion!==1)fail('UNSUPPORTED_PROFILE_EXTENT_BUILD','The saved extent feature requires its exact capable build.');cost=1;}
    if(type.value==='WORKER_CENTERED_BLIND_HOLE_V1'){const build=requireCadEngineBuild(engine.value,revision.value);if(build.blindHoleVersion!==1)fail('UNSUPPORTED_BLIND_HOLE_BUILD','The saved blind hole requires its exact capable build.');cost=2;}
    if(type.value==='WORKER_CENTERED_COUNTERBORE_V1'){const build=requireCadEngineBuild(engine.value,revision.value);if(build.counterboreVersion!==1)fail('UNSUPPORTED_COUNTERBORE_BUILD','The saved counterbore requires its exact capable build.');cost=4;}
+   if(type.value==='WORKER_CENTERED_COUNTERSINK_V1'){const build=requireCadEngineBuild(engine.value,revision.value);if(build.countersinkVersion!==1)fail('UNSUPPORTED_COUNTERSINK_BUILD','The saved countersink requires its exact capable build.');cost=4;}
    if(type.value==='WORKER_THROUGH_HOLES_V1'){
     const kind=Object.getOwnPropertyDescriptor(params,'kind');
     if(!kind?.enumerable||!Object.hasOwn(kind,'value')||!['centered-through','four-corner-through'].includes(kind.value))fail('INVALID_REQUEST','Through-hole result cost requires a supported data kind.');
