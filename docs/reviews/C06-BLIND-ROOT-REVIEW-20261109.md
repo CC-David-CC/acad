@@ -1,5 +1,40 @@
 # Root blind-hole review checkpoint
 
+## Root composition for the first complete run
+
+Product and complete corrected acceptance are now additively integrated as
+62db6b4/245af67/d15f315/2e669db/6da7679/11dca31, from originals
+6ef1b014/c7b91e8/907764f8/0e7e1183/030fe10/baceaf3. This is not runtime
+qualification. Three conflicts were import/finite-code union seams only:
+Craft retains offsetFailureCodes plus blind imports; PM retains Offset and
+typed-dependent-sketch validation imports plus blind capture; known validation
+codes retain the Offset roster plus explicit blind and bounded capture codes.
+No newer Offset/constraint/cold-replay logic was replaced.
+
+Root read the strengthened finite triangle/patch/rim oracle, LINE endpoint and
+surface support checks, full effective FACE_BOUND/ORIENTED_EDGE incidence and
+analytic planar/cylindrical loop winding. The retained same32e/abb STEP artifact
+SHA and all three cited c15e49df Native exporter/importer source blob IDs were
+independently checked. Bound orientation cannot be assumed true or multiplied
+by face sense a second time. This source/artifact review is not a new execution.
+The original product/geometry/precision requirements remain; no completed export
+is alleged from checker source alone.
+
+All writes now retain pending operation/path/window through acknowledgement and
+own browser/server readback; the single known prewrite refusal additionally
+checks own-path absence. Whole phase/artifact/refusal/negative/source rosters,
+creation high-water and malformed-Open full accepted state are explicit. The
+12-file transitive source/helper roster binds actual producing Git objects;
+runtime and acceptance commit identities remain separate if needed.
+
+Common OCI source after composition is actually
+9d3823b386516cedbdb0e1567559a2fb0650210e74f5543641caf0f148d9fce8;
+all NINE existing bootstrap pin sites match. Normal full graph regeneration and
+compiler review precede fresh immutable staging and the entire blind workflow.
+FIRST independent oracle only after whole PASS; retain first failure. Existing
+EqualRadius b2b8117 and Tangency4b8026c qualifications stay on actual8771a56/7fc.
+No public/main promotion or new Native binary/ABI/quota/default.
+
 ## Current review disposition
 
 The product source sequence6ef1b014/c7b91e8/907764f8/0e7e1183 and Hosted07e228
