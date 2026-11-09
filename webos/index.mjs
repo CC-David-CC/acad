@@ -63,6 +63,7 @@ export {createModernParametersExample,mechanicalParameterDefinitions} from './ex
 export {createSourceDimensionRegionExample} from './examples/source-dimension-region.mjs';
 export {createSourceBoundSweepExample} from './examples/source-bound-sweep.mjs';
 export {createSourceBoundFrameExample} from './examples/source-bound-frame.mjs';
+export {createDrawingRequirementExample} from './examples/linked-drawing-requirements.mjs';
 
 const APP_NAME='CAD Modeler (JSketcher inspired)';
 
