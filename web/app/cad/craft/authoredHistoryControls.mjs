@@ -1,3 +1,4 @@
+import {PROFILE_EXTENT_TYPE,profileExtentFields} from '../../../../modules/engine/solid/ownedProfileExtentFeature.mjs';
 import {HISTORY_CONTROL_TYPES, SUPPRESSIBLE_FEATURE_TYPES,featureSuppressed} from '../../../../modules/engine/solid/authoredHistoryState.mjs';
 import {canonicalAuthoredFeatureId} from './authoredFeatureIdentity.mjs';
 import {captureSourcePlaneParameters} from '../../sketcher/headless/sourcePlaneDepthEnvelope.mjs';
@@ -25,18 +26,18 @@ export function validateControlledHistory(history,sourceParents=null){
   const p=type.value==='PLANE'?captureSourcePlaneParameters({...params.value,featureId:canonicalAuthoredFeatureId(Object.getOwnPropertyDescriptor(params.value,'featureId')?.value)}):captureOperationAppend(entry).params;
   const featureId=canonicalAuthoredFeatureId(p.featureId);if(indices.has(featureId))fail('DUPLICATE_FEATURE_ID','Duplicate authored producer.');indices.set(featureId,index);
   // This capability is numeric, even if a broader operation supports bindings.
-  if(type.value==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'&&typeof p.depth!=='number'||type.value==='WORKER_THROUGH_HOLES_V1'&&['diameter',...(p.kind==='four-corner-through'?['offsetX','offsetY']:[])].some(k=>typeof p[k]!=='number'))fail('UNSUPPORTED_PARAMETERS','History controls require literal local dimensions.');
+  if(type.value===PROFILE_EXTENT_TYPE&&profileExtentFields(p).some(key=>typeof p[key]!=='number')||type.value==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'&&typeof p.depth!=='number'||type.value==='WORKER_THROUGH_HOLES_V1'&&['diameter',...(p.kind==='four-corner-through'?['offsetX','offsetY']:[])].some(k=>typeof p[k]!=='number'))fail('UNSUPPORTED_PARAMETERS','History controls require literal local dimensions.');
   rows.push({index,featureId,type:type.value,params:p,suppressed,dependencies:[],sourceFeatureIds:[]});
  }
  const parent=(row,id)=>{const index=indices.get(id);if(index===undefined||index>=row.index)fail('INVALID_FEATURE_DEPENDENCY','An authored parent must exist before its child.',{featureId:row.featureId,parentFeatureId:id});if(!row.dependencies.includes(id))row.dependencies.push(id);return rows[index];};
  for(const row of rows){const p=row.params;
-  if(row.type==='WORKER_SELECTED_PROFILE_EXTRUDE_V2')row.sourceFeatureIds=[row.featureId];
-  if(row.type==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'&&sourceParents){const id=sourceParents.get(p.faceId);if(id===undefined||parent(row,id).type!=='PLANE')fail('UNRESOLVED_SOURCE','The selected profile needs its actual source-plane producer.');}
+  if(['WORKER_SELECTED_PROFILE_EXTRUDE_V2',PROFILE_EXTENT_TYPE].includes(row.type))row.sourceFeatureIds=[row.featureId];
+  if(['WORKER_SELECTED_PROFILE_EXTRUDE_V2',PROFILE_EXTENT_TYPE].includes(row.type)&&sourceParents){const id=sourceParents.get(p.faceId);if(id===undefined||parent(row,id).type!=='PLANE')fail('UNRESOLVED_SOURCE','The selected profile needs its actual source-plane producer.');}
   if(row.type==='WORKER_THROUGH_HOLES_V1'){
    const producer=parent(row,p.producerFeatureId),source=parent(row,p.sourceFeatureId);
    if(!producer.sourceFeatureIds.includes(p.sourceFeatureId))fail('INVALID_FEATURE_DEPENDENCY','The target producer does not inherit this source profile.');
    row.sourceFeatureIds=producer.sourceFeatureIds.slice();
-   if(source.type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2'||source.params.faceId!==p.sourceFaceId||source.params.regionId!==p.sourceRegionId)fail('INVALID_FEATURE_DEPENDENCY','Hole source identity differs from its authored selected profile.');
+   if(!['WORKER_SELECTED_PROFILE_EXTRUDE_V2',PROFILE_EXTENT_TYPE].includes(source.type)||source.params.faceId!==p.sourceFaceId||source.params.regionId!==p.sourceRegionId)fail('INVALID_FEATURE_DEPENDENCY','Hole source identity differs from its authored selected profile.');
   }
   if(row.type==='WORKER_SOLID_EDGE_TREATMENT_V1'){const producer=parent(row,p.producerFeatureId);if(producer.type==='PLANE')fail('INVALID_FEATURE_DEPENDENCY','An edge treatment requires an authored solid producer.');row.sourceFeatureIds=producer.sourceFeatureIds.slice();}
  }
@@ -64,7 +65,7 @@ export function planHistoryControl(history,pointer,rows,action,references){
   if(historyAnchorIndex(rows,action.afterFeatureId)!==pointer)fail('STALE_HISTORY','The branch anchor must match the current accepted prefix.');
   const suffix=history.slice(pointer+1);
   if(suffix.some(r=>r.type==='PLANE'))fail('BRANCH_SOURCE_OWNERSHIP','A branch cannot silently remove an independent source plane or its saved sketch.');
-  if(!history.slice(0,pointer+1).some(op=>['WORKER_SOLID_BOX_V1','WORKER_SELECTED_PROFILE_EXTRUDE_V2'].includes(op.type)))fail('BRANCH_CONSTRUCTOR_REQUIRED','The retained prefix must keep an authored solid constructor and its exact backend binding.');
+  if(!history.slice(0,pointer+1).some(op=>['WORKER_SOLID_BOX_V1','WORKER_SELECTED_PROFILE_EXTRUDE_V2',PROFILE_EXTENT_TYPE].includes(op.type)))fail('BRANCH_CONSTRUCTOR_REQUIRED','The retained prefix must keep an authored solid constructor and its exact backend binding.');
   next=history.slice(0,pointer+1);delta={suffix};
  }else fail('INVALID_REQUEST','Unknown history control.');
  if(kind!=='history-position')assertProtectedHistoryOutputs(rows,next,references);

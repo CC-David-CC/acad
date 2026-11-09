@@ -761,8 +761,8 @@ export function planPreparedManufacturingTravel(state,input){
 // Modern E19: retain exactly one removed extrusion, not a history/model copy.
 export function captureOperationRemove(value) {
  const operation=appendData(value,['type','params']);
- if(operation.type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2')throw Error('Only selected-profile extrusion deletion is supported.');
- return Object.freeze({type:operation.type,params:captureSelectedProfileDepthParameters(operation.params)});
+ if(!['WORKER_SELECTED_PROFILE_EXTRUDE_V2',PROFILE_EXTENT_TYPE].includes(operation.type))throw Error('Only selected-profile extrusion deletion is supported.');
+ return Object.freeze({type:operation.type,params:operation.type===PROFILE_EXTENT_TYPE?captureOwnedProfileExtentFeature(operation.params):captureSelectedProfileDepthParameters(operation.params)});
 }
 function primitiveRecordCharge(value){
  let bytes=256;const encoder=new TextEncoder();
@@ -786,7 +786,7 @@ export function planOperationRemoveTravel(state,input){
  const undo=direction==='undo',entry=state.entries[undo?state.cursor-1:state.cursor];
  if(!entry||entry.kind!=='operation-remove'||entry.index!==index||entry.featureId!==featureId||currentLength!==entry.currentLength-(undo?1:0)||previousFeatureId!==entry.previousFeatureId||nextFeatureId!==entry.nextFeatureId)throw Error('Deletion history length or adjacent identities changed.');
  if(undo){if(currentOperation!==null)throw Error('Undo deletion requires the removed operation to remain absent.');}
- else{const current=captureOperationRemove(currentOperation);if(current.type!==entry.operation.type||selectedProfileKeys.some(k=>!Object.is(current.params[k],entry.operation.params[k])))throw Error('The restored operation differs from the original deletion.');}
+ else{const current=captureOperationRemove(currentOperation);if(current.type!==entry.operation.type||Object.keys(current.params).length!==Object.keys(entry.operation.params).length||Object.keys(entry.operation.params).some(k=>!Object.is(current.params[k],entry.operation.params[k])))throw Error('The restored operation differs from the original deletion.');}
  return Object.freeze({index,featureId,operation:entry.operation,next:make(document,revision+1,state.entries,state.cursor+(undo?-1:1))});
 }
 const throughHoleParentKeys=Object.freeze(['target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId']);
