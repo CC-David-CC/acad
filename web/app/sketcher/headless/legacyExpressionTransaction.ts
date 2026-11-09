@@ -4,7 +4,7 @@ import {replaySketchTransition} from './sketchTransition';
 import {solveSketch} from './solve';
 import {assertAllowedSolverGeometry} from './transitionGeometryPolicy.mjs';
 import {sameSketchSaveFrame} from 'cad/craft/unconsumedSketchSave.mjs';
-import {isBooleanSketchField,isBooleanSketchLiteral} from '../constr/booleanSketchFields.mjs';
+import {isBooleanSketchField,isBooleanSketchLiteral,isEnumSketchField,isEnumSketchLiteral} from '../constr/booleanSketchFields.mjs';
 
 const fail=(code:string,message:string)=>Object.assign(Error(message),{code});
 const numeric=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/;
@@ -15,6 +15,7 @@ function inspectConstants(sketch:any){
  // explicitly rather than substitute numbers into authored constraint strings.
  const id=/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/;
  for(const stage of sketch.stages||[])for(const constraint of stage.constraints||[])for(const [field,value] of Object.entries(constraint.constants||{})){
+  if(isEnumSketchField(constraint.typeId,field)){if(!isEnumSketchLiteral(value))throw fail('UNSUPPORTED','Invalid legacy enum field.');continue;}
   if(isBooleanSketchField(constraint.typeId,field)){if(!isBooleanSketchLiteral(value))throw fail('UNSUPPORTED','Invalid legacy boolean field.');continue;}
   if(typeof value==='number'&&Number.isFinite(value))continue;
   if(typeof value==='string'&&(numeric.test(value.trim())||id.test(value.trim())))continue;

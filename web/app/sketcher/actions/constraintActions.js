@@ -1,3 +1,4 @@
+import {addMechanicalTangency} from './tangencyOperation';
 import {addEqualRadiusGroup} from './equalRadiusOperation';
 import {capturePointLineDistanceAction} from './pointLineDistanceOperation';
 import {addPointCoincidenceGroup} from './pointCoincidenceOperation';
@@ -44,6 +45,11 @@ import {addConstraintGroup} from './addConstraintGroup';
 import {prepareConstraintGroup} from './constraintGroupAdmission';
 
 export default [
+  {id:'FiniteTangent',shortName:'Finite Tangent',kind:'Constraint',description:'Tangency on actual finite Segment and Circle/CCW Arc',icon:TangentConstraintIcon,
+   selectionMatcher:{selector:'matchSequence',sequence:[{types:[Circle,Arc],quantity:1},{types:[Segment],quantity:1}]},
+   invoke:(ctx,[curve,line])=>addMechanicalTangency(ctx.viewer,[line,curve],'FiniteTangentLC',{inverted:line.nx*curve.c.x+line.ny*curve.c.y<line.w})},
+  ...[['TangentCirclesExternal','external'],['TangentCirclesFirstContains','first-contains-second'],['TangentCirclesSecondContains','second-contains-first']].map(([id,branch])=>({id,shortName:branch,kind:'Constraint',description:'Ordered Circle-Circle tangency: '+branch,icon:TangentConstraintIcon,
+   selectionMatcher:{selector:'matchSequence',sequence:[{types:[Circle],quantity:2}]},invoke:(ctx,objects)=>addMechanicalTangency(ctx.viewer,objects,'TangentCC',{branch})})),
 
   {id:'CreateRigidGroup',shortName:'Create Rigid Group',kind:'Constraint',icon:LockConstraintIcon,
     description:'Group selected segments into one movable planar rigid profile',

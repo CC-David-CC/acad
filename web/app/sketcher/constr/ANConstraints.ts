@@ -1,3 +1,4 @@
+import {TANGENT_CC_BRANCHES} from './tangencyDomain.mjs';
 import {StraightSlotSchema} from './straightSlotSchema';
 import {Param} from '../shapes/param';
 import {CollinearSchema,AxisSymmetrySchema} from './lineRelationSchemas';
@@ -127,6 +128,28 @@ export const ConstraintDefinitions
     collectPolynomials: (polynomials, [ang, ax, ay, cx, cy, r], {inverted}) => {
       polynomials.push(tangentLCPolynomial(ang, ax, ay, cx, cy, r, inverted));
     },
+  },
+
+  FiniteTangentLC: {
+    id:'FiniteTangentLC', name:'Finite Line & Circular Tangency', icon:TangentConstraintIcon,
+    constants:{inverted:{type:'boolean',readOnly:true,description:'Retained actual polar-normal side',initialValue:([line,circle])=>line.nx*circle.c.x+line.ny*circle.c.y<line.w}},
+    defineParamsScope:([segment,circle],callback)=>{callback(segment.params.ang);segment.a.visitParams(callback);circle.c.visitParams(callback);callback(circle.r);},
+    // Same original supporting equation; finite membership is a durable domain
+    // validated from actual owned A/B and CCW Arc source, never another value.
+    collectPolynomials:(polynomials,[ang,ax,ay,cx,cy,r],{inverted})=>{polynomials.push(tangentLCPolynomial(ang,ax,ay,cx,cy,r,inverted));}
+  },
+  TangentCC: {
+    id:'TangentCC', name:'Circle & Circle Tangency', icon:TangentConstraintIcon,
+    constants:{branch:{type:'string',readOnly:true,literalValues:[...TANGENT_CC_BRANCHES],description:'External or explicit ordered containment',initialValue:()=> 'external'}},
+    defineParamsScope:([first,second],callback)=>{first.c.visitParams(callback);second.c.visitParams(callback);callback(first.r);callback(second.r);},
+    collectPolynomials:(polynomials,[ax,ay,bx,by,rA,rB],{branch})=>{
+      const sign=branch==='external'?1:-1;
+      // |B-A|²-(rA+sign*rB)², original mm² polynomial. Registered residual
+      // policy converts it to radial mm; internal radius ORDER is a domain.
+      polynomials.push(new Polynomial().monomial(1).term(bx,POW_2_FN).monomial(-2).term(bx,POW_1_FN).term(ax,POW_1_FN).monomial(1).term(ax,POW_2_FN)
+        .monomial(1).term(by,POW_2_FN).monomial(-2).term(by,POW_1_FN).term(ay,POW_1_FN).monomial(1).term(ay,POW_2_FN)
+        .monomial(-1).term(rA,POW_2_FN).monomial(-2*sign).term(rA,POW_1_FN).term(rB,POW_1_FN).monomial(-1).term(rB,POW_2_FN));
+    }
   },
 
   PointOnLine: {
@@ -1090,6 +1113,7 @@ export interface ConstraintSchema {
       finite?: boolean;
       dimension?: 'length';
       axisAngles?: number[];
+      literalValues?: string[];
       type: string,
       description?: string,
       transform?: (string) => any,
@@ -1110,6 +1134,11 @@ export interface ConstraintSchema {
 
 export function validateConstraintConstantValues(schema: ConstraintSchema, values, expressionResolver, allNumeric = true) {
     for (const [name, def] of Object.entries(schema.constants || {})) {
+      if (def.literalValues) {
+        const descriptor=values&&Object.getOwnPropertyDescriptor(values,name);
+        if(!descriptor?.enumerable||!Object.prototype.hasOwnProperty.call(descriptor,'value')||typeof descriptor.value!=='string'||!def.literalValues.includes(descriptor.value))throw Error((def.description||name)+' must be an exact registered literal.');
+        continue;
+      }
       if (def.type === 'boolean') {
         const input = values && values[name];
         if (input !== true && input !== false && input !== 'true' && input !== 'false') {
@@ -1189,6 +1218,11 @@ export class AlgNumConstraint {
       Object.keys(this.constants).map(name => {
         const def = this.schema.constants[name];
         let val: any = this.constants[name];
+        if (def.literalValues) {
+          // Approved literal enum is authored verbatim, never an expression/name.
+          this.resolvedConstants[name]=val;
+          return;
+        }
         if (def.type === 'boolean') {
           // Flags are literals, not numeric expressions or global variables.
           val = val === 'true' || val === true;

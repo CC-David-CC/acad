@@ -77,7 +77,7 @@ function expectedDelta(before:any,after:any,intent:any,action:string){
 // is not a stage result: real generators run only through SolveStage.solve.
 // Finish that actual lifecycle before serializing a dimension candidate.
 // This is one ordered construction pass, not a retry/polishing loop.
-function finishGeneratedDimensionStages(workspace:any,stages:any[]){
+export function finishGeneratedDimensionStages(workspace:any,stages:any[]){
  const index=workspace.createIndex(),roster=stages.map(stage=>({stage,objects:[...stage.objects],generators:[...stage.generators].map((generator:any)=>{
   const sources:any[]=[];generator.sourceObjects(o=>sources.push(o));
   return{generator,sources,outputs:[...generator.generatedObjects],record:JSON.stringify(generator.write())};
@@ -112,11 +112,11 @@ function finishGeneratedDimensionStages(workspace:any,stages:any[]){
 // source Segment with a retained side-sensitive consumer needs this explicit
 // source-frame construction phase. Other raw angle/t equations remain original
 // constraints and may legitimately select a negative-t chart again on resolve.
-function sourceFrameSegments(workspace:any,source:any,fields:Map<string,Set<string>>){
+export function sourceFrameSegments(workspace:any,source:any,fields:Map<string,Set<string>>){
  const index=workspace.createIndex(),roots=new Map(source.objects.map(o=>[o.id,o])),selected=new Set<Segment>();let work=0;
  for(const stage of workspace.parametricManager.stages)for(const c of stage.solverSystem.allConstraints){
   if(++work>100000)throw fail('LIMIT','Dimension source-frame discovery exceeds its Worker bound.');
-  const line=c.schema===ConstraintDefinitions.DistancePL?c.objects[1]:c.schema===ConstraintDefinitions.TangentLC?c.objects[0]:null;
+  const line=c.schema===ConstraintDefinitions.DistancePL?c.objects[1]:[ConstraintDefinitions.TangentLC,ConstraintDefinitions.FiniteTangentLC].includes(c.schema)?c.objects[0]:null;
   if(!(line instanceof Segment)||!(line.params.t.get()<0)||!(fields.get(line.id)?.size))continue;
   const root:any=roots.get(line.id);
   if(!root||root.type!=='Segment'||index[line.id]!==line||line.parent||!line.stage||!line.stage.objects.has(line)||c.stage!==stage)continue;
@@ -134,7 +134,7 @@ function dimensionComponentScope(source:any,bindings:any,rows:any[],auxiliary:Ca
   return{equations,value:null};
  },'Dimension source-frame construction');
 }
-function validateWarmDimension(workspace:any){
+export function validateWarmDimension(workspace:any){
  let work=0;const index=workspace.createIndex();
  for(const stage of workspace.parametricManager.stages){const sys=stage.solverSystem;
   if(!sys.solveStatus.success||!Number.isFinite(sys.solveStatus.error))throw withAdmissionCause(fail('DIMENSION_REJECTED','Dimension construction did not establish a finite native stage.'),causeForSolveStatus(sys.solveStatus));
@@ -195,7 +195,7 @@ export function changeDrivingDimension(request:any){let revision=revisionOf(requ
   const declared=changeDeclaredRectangleDimension(revision,a.sketchJSON,authored,authoredTarget,intent,bindings);
   if(declared!==null)return declared;
  }
- const hasSideConsumer=authored.stages.some(stage=>stage.constraints.some(c=>c.typeId==='DistancePL'||c.typeId==='TangentLC'));
+ const hasSideConsumer=authored.stages.some(stage=>stage.constraints.some(c=>c.typeId==='DistancePL'||c.typeId==='TangentLC'||c.typeId==='FiniteTangentLC'));
  let originalAuxiliary:CapturedAuxiliaryWitnessBatch|undefined;
  const captured=replay(revision,a.sketchJSON,bindings,hasSideConsumer?batch=>{originalAuxiliary=batch;}:undefined),before=JSON.parse(captured.serializedSketch),row=resolveDimension(before,intent.constraintId);
  let value:any=null;if(a.action==='edit'){

@@ -1,3 +1,4 @@
+import {tangencyConstantsValid} from './constr/tangencyDomain.mjs';
 import {slotDeclarationRows,validateSlotNativeRow,validateSlotJunctions} from './constr/straightSlotSource.mjs';
 import {captureLinearDimensionRecord} from './shapes/linearDimensionRecord.mjs';
 import { Generator, numericSketchIdHighWater } from './id-generator';
@@ -688,7 +689,7 @@ export function validateProjectSketch(sketch: any) {
       // or expression names. Enforce each schema's declared class during native
       // preflight, before workspace mutation; full-turn literal aliases remain
       // authored verbatim and are canonicalized only for evaluation.
-      if (Object.values(definitions).some((definition:any) => definition.axisAngles)) validateConstraintConstantValues(schema, constants, value => value);
+      if (Object.values(definitions).some((definition:any) => definition.axisAngles||definition.literalValues)) validateConstraintConstantValues(schema, constants, value => value);
       if (constraint.annotations !== undefined && !Array.isArray(constraint.annotations)) throw new Error('Invalid constraint annotations');
       validateStrictConstraint(constraint, index);
       if (constraint.typeId === 'RigidGroup') {
@@ -771,6 +772,11 @@ function validateStrictConstraint(constr: any, index: any) {
   if (typeof constr.typeId !== 'string' || !constr.typeId || !Array.isArray(constr.objects)) throw new Error('Invalid constraint');
   constr.objects.forEach(id => strictReference(id, index, 'constraint'));
   validateSlotNativeRow(constr,index);
+  if(['FiniteTangentLC','TangentCC'].includes(constr.typeId)){
+    const objects=constr.objects.map(id=>index[id]);
+    if(objects.length!==2||objects[0]===objects[1]||!tangencyConstantsValid(constr.typeId,constr.constants)||
+      (constr.typeId==='TangentCC'?objects.some(o=>o.TYPE!=='Circle'):objects[0].TYPE!=='Segment'||!['Circle','Arc'].includes(objects[1].TYPE)))throw Object.assign(Error('Invalid registered tangent source identities or literal branch.'),{code:'INVALID_TANGENCY_SOURCE'});
+  }
   if(['FixSegment','FixCircle','FixArc'].includes(constr.typeId)) {
     if(constr.objects.length!==1||!fixedEntityValid({schema:{id:constr.typeId},objects:[index[constr.objects[0]]],constants:constr.constants}))throw new Error('Invalid fixed entity intent or geometry');
   }

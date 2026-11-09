@@ -2213,6 +2213,8 @@ interface CraftService {
   editClosedSketchPoints?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchPoints'];
   editClosedSketchDimension?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchDimension'];
   removeClosedSketchDimension?: ReturnType<typeof createClosedSketchTransitionCommands>['removeClosedSketchDimension'];
+  applyClosedSketchTangency?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchTangency'];
+  removeClosedSketchTangency?: ReturnType<typeof createClosedSketchTransitionCommands>['removeClosedSketchTangency'];
   applyClosedSketchEqualRadius?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchEqualRadius'];
   removeClosedSketchEqualRadius?: ReturnType<typeof createClosedSketchTransitionCommands>['removeClosedSketchEqualRadius'];
   applyClosedSketchCoincidence?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchCoincidence'];

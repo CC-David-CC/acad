@@ -21,7 +21,7 @@ const signature = {
   Concentric:[['Circle','Arc'],['Circle','Arc']],EqualRadius:[['Circle','Arc'],['Circle','Arc']],
   Angle:['Segment'],AngleBetween:['Segment','Segment'],Parallel:['Segment','Segment'],Perpendicular:['Segment','Segment'],
   DistancePP:['Point','Point'],PointInMiddle:['Point','Segment'],Symmetry:['Point','Segment'],
-  TangentLC:['Segment',['Circle','Arc']],PointOnCircle:['Point',['Circle','Arc']],
+  TangentLC:['Segment',['Circle','Arc']],FiniteTangentLC:['Segment',['Circle','Arc']],TangentCC:['Circle','Circle'],PointOnCircle:['Point',['Circle','Arc']],
   PointOnBezier:['Point','BezierCurve'],TangentLineBezier:['Segment','BezierCurve'],PointOnEllipse:['Point',['Ellipse','EllipticalArc']],
   Polar:['Segment','Point','Point'],ArcConsistency:['Arc'],Fillet:['Segment','Segment','Arc'],
   FixSegment:['Segment'],FixCircle:['Circle'],FixArc:['Arc']

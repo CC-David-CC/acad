@@ -1,5 +1,5 @@
 import {drivingLengthField,drivingDimensionValueValid} from './drivingDimensionTarget.mjs';
-import {isBooleanSketchField,isBooleanSketchLiteral} from '../constr/booleanSketchFields.mjs';
+import {isBooleanSketchField,isBooleanSketchLiteral,isEnumSketchField,isEnumSketchLiteral} from '../constr/booleanSketchFields.mjs';
 // A typed dependent sketch may currently bind names only in explicitly
 // length-valued SegmentLength, DiameterLength, nonnegative Euclidean DistancePP
 // signed X/Y, live three-reference ProjectedDistance and nonnegative
@@ -17,6 +17,7 @@ export function prepareTypedDependentSketch(sketch,resolveLength) {
  for(const stage of sketch.stages){if(!stage||!Array.isArray(stage.constraints))throw Error('Invalid typed sketch stage.');
   for(const constraint of stage.constraints){if(!constraint||typeof constraint!=='object'||Array.isArray(constraint))throw Error('Invalid typed constraint.');
    for(const [name,value] of Object.entries(constraint.constants||{})){
+    if(isEnumSketchField(constraint.typeId,name)){if(!isEnumSketchLiteral(value))throw Error('Invalid sketch enum literal.');continue;}
     if(isBooleanSketchField(constraint.typeId,name)){if(!isBooleanSketchLiteral(value))throw Error('Invalid sketch boolean literal.');continue;}
     if(typeof value==='number'){if(!Number.isFinite(value))throw Error('Nonfinite sketch constant.');continue;}
     if(typeof value==='boolean')throw Error('Unregistered sketch boolean field.');
