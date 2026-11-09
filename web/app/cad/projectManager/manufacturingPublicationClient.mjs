@@ -1,4 +1,4 @@
-import {captureLinkedPartDrawingDefinition} from '../../../../modules/drawing/linkedPartDrawingDefinition.mjs';
+import {captureLinkedPartDrawingDefinition,LINKED_DRAWING_MAX_VIEWS,LINKED_DRAWING_MAX_DIMENSIONS} from '../../../../modules/drawing/linkedPartDrawingDefinition.mjs';
 import {bindManufacturingWorkerPreparation} from './documentMetadataPreparation.mjs';
 let nextJob=1,failedCleanup=null;
 const active=new Set(),LIMIT=8388608;
@@ -45,6 +45,9 @@ export function prepareManufacturingInWorker(url,{action,before,args},options={}
     // Structured clone does not freeze. Bounded drawing recapture is required
     // for the public getter; large manufacturing trees remain alias-excluded.
     if(drawing&&travel&&value.changed&&after!==null)after=captureLinkedPartDrawingDefinition(after);
+    // Summary counts are derived from the actual prepared/travel/no-op result,
+    // never an independently synchronized view-count state or publication grant.
+    if(drawing&&(value.summary.viewCount!==(after===null?0:after.views.length)||value.summary.dimensionCount!==(after===null?0:after.dimensions.length)))throw fail('Drawing preparation summary differs from its authored definition.','INVALID_RESPONSE');
     const entry=travel?binding.entry:value.changed?Object.freeze({kind:'document-metadata',version:1,domain,key,before,after,byteSize:value.byteSize}):null;
     resolve(bindManufacturingWorkerPreparation({action,domain,key,changed:value.changed,before,after,entry,direction:travel?binding.direction:null,summary:Object.freeze(value.summary)}));
    }catch(cause){reject(operationFailure(cause));}
@@ -63,7 +66,7 @@ export function prepareManufacturingInWorker(url,{action,before,args},options={}
     if(travel&&r.byteSize!==binding.entry.byteSize)throw fail('Manufacturing travel charge changed.','INVALID_RESPONSE');
     if(drawing){
      r.summary=fields(r.summary,['drawingId','viewCount','dimensionCount','quality']);
-     if(r.summary.drawingId!==key||r.summary.quality!=='authored-definition-only'||!Number.isInteger(r.summary.viewCount)||r.summary.viewCount<0||r.summary.viewCount>3||!Number.isInteger(r.summary.dimensionCount)||r.summary.dimensionCount<0||r.summary.dimensionCount>16)throw fail('Invalid drawing preparation summary.','INVALID_RESPONSE');
+     if(r.summary.drawingId!==key||r.summary.quality!=='authored-definition-only'||!Number.isInteger(r.summary.viewCount)||r.summary.viewCount<0||r.summary.viewCount>LINKED_DRAWING_MAX_VIEWS||!Number.isInteger(r.summary.dimensionCount)||r.summary.dimensionCount<0||r.summary.dimensionCount>LINKED_DRAWING_MAX_DIMENSIONS)throw fail('Invalid drawing preparation summary.','INVALID_RESPONSE');
     }else{
      r.summary=fields(r.summary,['partCount','regionCount','bindingCount','details','warning']);if(['partCount','regionCount','bindingCount'].some(k=>!Number.isSafeInteger(r.summary[k])||r.summary[k]<0||r.summary[k]>1000000)||typeof r.summary.warning!=='string'||r.summary.warning.length>256)throw fail('Invalid manufacturing summary.','INVALID_RESPONSE');r.summary.details=details(r.summary.details);
     }
