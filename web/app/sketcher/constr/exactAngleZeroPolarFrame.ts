@@ -161,3 +161,7 @@ export function createExactAngleZeroPolarFrames(system:any){
  };
  return{capture,next};
 }
+
+// PRIVATE native-solver reuse only: real registered row/Param authentication,
+// not serialized/public authority. Angle-zero frame behavior above is unchanged.
+export const exactFixedInputInternals=Object.freeze({backed,rootOwned,captureBinding,sameBinding,linearRow,exactRow,proposalResolver});

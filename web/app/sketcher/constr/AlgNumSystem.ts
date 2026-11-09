@@ -1,4 +1,5 @@
 import {createLengthEqualityCertificate} from './lengthEqualityCertificate';
+import {createExactTangentCCFixedInputs} from './exactTangentCCFixedInput';
 import {createExactAngleZeroPolarFrames} from './exactAngleZeroPolarFrame';
 import {admissionCause,causeForSolveStatus,withAdmissionCause,failureCause,clearSolveValidationCause,setSolveValidationCause,getSolveValidationCause} from './admissionCause.mjs';
 import {prepare} from "./solver";
@@ -593,6 +594,7 @@ export class AlgNumSubSystem {
     const redundantCounts = new Map();
     const polarFrames = createExactAngleZeroPolarFrames(this);
     const lengthEqualities = createLengthEqualityCertificate(this,ConstraintDefinitions);
+    const tangentFixedInputs = createExactTangentCCFixedInputs(this);
     // Rebuilt for this retained/trial system, including active redundant
     // direction requirements. A current value alone is not a certificate.
     const nonzeroDirectionParams = new Set();
@@ -642,6 +644,7 @@ export class AlgNumSubSystem {
         this.polyToConstr.set(polynomial, c);
         // Capture untouched original rows BEFORE fixed/external reductions.
         polarFrames.capture(c,polynomial,i-firstOriginalRow);
+        tangentFixedInputs.capture(c,polynomial,i-firstOriginalRow);
 
         c.objects.forEach(obj => {
           if (!this.owns(obj)) {
@@ -655,12 +658,19 @@ export class AlgNumSubSystem {
     });
 
     for(const c of this.redundant){
-      if(c.schema!==ConstraintDefinitions.EqualLength&&c.schema!==ConstraintDefinitions.LengthRelation)continue;
+      if(c.schema===ConstraintDefinitions.EqualLength||c.schema===ConstraintDefinitions.LengthRelation){
       if(this.deferredConstantRows.has(c))continue;
       const rows=[];c.collectPolynomials(rows);
       // Previously redundant original equality rows still need final domain/
       // residual validation when prepareRaw excludes their numerical rows.
       this.deferredConstantRows.set(c,{rows,validation:null});
+      }else if(c.schema===ConstraintDefinitions.TangentCC){
+      const original=[];c.collectPolynomials(original);
+      // Rebuild fixedness from current original support rows for retained
+      // redundant tangencies too; never reuse a prior prepare's proof closure.
+      original.forEach((p,i)=>tangentFixedInputs.capture(c,p,i));
+      this.deferredConstantRows.set(c,{rows:original,validation:null});
+      }
     }
     inheritReductionProvenance();
 
@@ -693,6 +703,15 @@ export class AlgNumSubSystem {
           verify:()=>{if(verify)verify();polarFrame.verify();}
         });
         requirePass = true;
+      }
+      if(!requirePass){
+        // Certify BEFORE disposing a constant approximate squared row, using
+        // original fixed-input equations rather than rounded coefficient math.
+        const tangent=tangentFixedInputs.next(this.polynomials,this.eliminatedParams,this.substitutedParams,approximateParams);
+        if(tangent){tangent.apply();const previous=this.deferredConstantRows.get(tangent.constraint),verify=previous?.verify;
+          this.deferredConstantRows.set(tangent.constraint,{rows:previous?.rows||tangent.rows,validation:null,verify:(pass?:object)=>{if(verify)verify(pass);tangent.verify(pass);}});
+          if(!tangent.retained)redundantCounts.set(tangent.constraint,(redundantCounts.get(tangent.constraint)||0)+tangent.rows.length);requirePass=true;
+        }
       }
       for (let i = 0; !requirePass && i < this.polynomials.length; ++i) {
         const polynomial = this.polynomials[i];
