@@ -53,6 +53,7 @@ def cost_ledger(folder,r):
     network=[e for e in events if e['kind']=='network-completed'];gaps=[]
     if summary['eventDropped'] or summary['processSummary']['overflow']:gaps.append('observer/process bounded record overflow')
     if summary['errors']:gaps.append('top-level passive observation errors')
+    if any(e['kind'] in ('main-observation-error','main-final-unavailable','hook-remove-error','process-error','heap-unavailable','target-overflow') for e in events):gaps.append('one or more bounded passive reads or target/process observations unavailable')
     if not process:gaps.append('no process samples')
     for e in process:
         require(finite(e['endedMS']) and e['endedMS']>=e['atMS'] and isinstance(e['records'],list),'process sampling interval')

@@ -63,10 +63,10 @@ export async function createAttribution({browser,out,base,profileMode,pid,profil
    for(const row of pageRecords.values())if(!row.closed)for(const frame of row.page.frames()){
     try{if(new URL(frame.url()).origin!==origin)continue;}catch{continue;}
     let info=row.frames.get(frame);if(!info){info={id:row.id+':'+row.frames.size,url:null,lastDrainMS:null};row.frames.set(frame,info);}info.url=frame.url();
-    try{const data=await frame.evaluate(key=>{
+    try{const data=await boundedRead(frame.evaluate(key=>{
      const observation=globalThis[key]?.drain(false)??{unavailable:true};
      try{const craft=globalThis.__CAD_APP?.craftService;if(craft){const value=craft.engineResourceUsage,resources={};for(const name of ['owners','accepted','candidates','detached','mounts','cleanupFailed'])resources[name]=value[name];observation.logicalResources={resources,processing:craft.isProcessing,epoch:craft.evaluationEpoch,modelCount:craft.models$?.value?.length??null,historyLength:craft.modifications$?.value?.history?.length??null,pointer:craft.modifications$?.value?.pointer??null};}}catch(error){observation.logicalResourceUnavailable=String(error.message).slice(0,256);}return observation;
-    },key);info.lastDrainMS=performance.now();emit('main-scope',{pageId:row.id,frameId:info.id,url:info.url,observation:data});}catch(error){emit('main-observation-error',{pageId:row.id,frameId:info.id,message:error.message});}
+    },key));info.lastDrainMS=performance.now();emit('main-scope',{pageId:row.id,frameId:info.id,url:info.url,observation:data});}catch(error){emit('main-observation-error',{pageId:row.id,frameId:info.id,message:error.message});}
    }
    for(const row of targetRecords.values())if(row.session&&!row.destroyed){
     const observationStartedMS=performance.now();
@@ -81,7 +81,7 @@ export async function createAttribution({browser,out,base,profileMode,pid,profil
   try{return await work();}catch(error){row.error={name:error.name,code:error.code??null,message:error.message,committed:error.committed===true,possiblyCommitted:error.possiblyCommitted===true};throw error;}
   finally{row.endMS=performance.now();row.wallMS=row.endMS-row.startMS;phases.push(row);emit('phase-end',row);await memory.sample();await sample();phase=previous;}
  }
- async function beforeClose(page){await sample();const row=pageRecords.get(page);if(!row)return;for(const frame of page.frames()){const info=row.frames.get(frame);try{const result=await frame.evaluate(key=>globalThis[key]?.drain(true)??{unavailable:true},key);emit('main-final-drain',{pageId:row.id,frameId:info?.id??null,url:frame.url(),observation:result});}catch(error){emit('main-final-unavailable',{pageId:row.id,message:error.message});}}try{await page.removeScriptToEvaluateOnNewDocument(row.hook.identifier);}catch(error){emit('hook-remove-error',{pageId:row.id,message:error.message});}}
+ async function beforeClose(page){await sample();const row=pageRecords.get(page);if(!row)return;for(const frame of page.frames()){const info=row.frames.get(frame);try{const result=await boundedRead(frame.evaluate(key=>globalThis[key]?.drain(true)??{unavailable:true},key));emit('main-final-drain',{pageId:row.id,frameId:info?.id??null,url:frame.url(),observation:result});}catch(error){emit('main-final-unavailable',{pageId:row.id,message:error.message});}}try{await page.removeScriptToEvaluateOnNewDocument(row.hook.identifier);}catch(error){emit('hook-remove-error',{pageId:row.id,message:error.message});}}
  async function stop(){
   clearInterval(timer);browser.off('targetcreated',onTarget);browser.off('targetchanged',onChanged);browser.off('targetdestroyed',onDestroyed);while(sampling)await new Promise(r=>setTimeout(r,10));await Promise.allSettled([...pending]);await sample();const processSummary=await memory.stop();
   for(const row of targetRecords.values()){for(const request of row.network.values())emit('network-unfinished',{scope:row.id,request,reason:'observer finished; encoded bytes unknown'});if(row.session)try{await row.session.detach();}catch(error){emit('session-detach',{scope:row.id,alreadyDestroyed:row.destroyed,message:error.message});}}

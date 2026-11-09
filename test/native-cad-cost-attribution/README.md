@@ -27,7 +27,7 @@ PUPPETEER_CORE_PATH="$QUALIFIED_PUPPETEER_PACKAGE" CODI_EVIDENCE="$NEW_EVIDENCE"
 "$QUALIFIED_NODE" test/native-cad-cost-attribution/desktop-driver.mjs
 ```
 
-Only after the **whole workflow is terminal**, run the independent artifact/cost oracle once:
+Only after the **whole workflow is terminal PASS**, run the independent artifact/cost oracle once:
 
 ```sh
 python3 test/native-cad-cost-attribution/check.py "$NEW_EVIDENCE" \
@@ -51,3 +51,13 @@ It parses actual ZIP32 records/CRC/SHA/entry bytes and source equations, authent
 All existing128MiB/native/per-format bounds and1GiB installed-code inventory stay unchanged; no new RAM/SLA threshold. Encode changed-entry UTF8, reused compressed spans, whole prepared SHA and committed rebase SHA are distinct. Actual uploaded/wire/delta/OPFS/full-integrity scan totals are marked `notObserved` rather than inferred from ZIP savings. Optional caches are not produced here. Large meaningful authored-source/surfacing and actual128MiB CAD capacity remain a separate missing input/qualification gate.
 
 On ordinary success/failure with settled commands, the driver closes its own pages/contexts, waits for observed codecs and samples post-close idle; root retains Chrome process custody. On an uncertain write or write-command transport timeout, it preserves the owned context for root settlement review, records that fact, detaches passive observers and disconnects; it does not retry, rollback or falsely report clean retirement. Root must resolve any such retained context before other work.
+
+Root source review before first execution: frame sampling/final drains now use
+the same bounded1.5s observation read wrapper as CDP heap reads. A timed-out
+read records unavailable coverage and does not cancel, retry or change the
+product command. Process discovery enumerates children of every observed
+thread (bounded512threads/process,4096/sample), verifies child parent identity,
+and reports a changing thread inventory as incomplete. Reading only the
+process leader children would miss processes forked by another thread. These
+are source-review corrections, not reproduced runtime incidents or proof of
+full/atomic process discovery. No extra probes or standalone tests were run.
