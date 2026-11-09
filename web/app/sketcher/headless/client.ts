@@ -1,3 +1,4 @@
+import {captureOffsetEnvelope,captureOffsetInspectionEnvelope} from './offsetReply.mjs';
 import {captureFixedEntityEnvelope} from './fixedEntityReply.mjs';
 import {capturePointLineDistanceEnvelope} from './pointLineDistanceEnvelope.mjs';
 import {captureMirrorEnvelope} from './mirrorReply.mjs';
@@ -121,6 +122,9 @@ export async function runSketchSolve(workerUrl: string, request: any, options: S
                 return finish(stopReason);
               }
               let result;try{result=captureWorkerReplyRecord(event.data);if(result.ok===false)result.error=captureSketchFailure(result.error);}catch{return finish(new Error('Invalid sketch Worker reply fields.'));}
+              if(request.task==='sketch-transition-offset'){try{return finish(null,captureOffsetEnvelope(result,request.revision));}catch(error){return finish(error);}}
+              if(request.task==='sketch-offset-inspection'){try{return finish(null,captureOffsetInspectionEnvelope(result,request.revision));}catch(error){return finish(error);}}
+              if(request.task==='sketch-transition-verify-offset'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='sketch-transition-fixed-entity'){try{return finish(null,captureFixedEntityEnvelope(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='sketch-transition-verify-fixed-entity'||request.task==='sketch-transition-verify-fixed-travel'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='sketch-transition-mirror'){try{return finish(null,captureMirrorEnvelope(result,request.revision,request.intent));}catch(error){return finish(error);}}

@@ -2193,6 +2193,10 @@ interface CraftService {
   createEmptySketchPlane?: ReturnType<typeof createEmptySketchCreationCommands>['createEmptySketchPlane'];
   inspectSketchTransitions?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectSketchTransitions'];
   inspectClosedSketch?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketch'];
+  inspectSketchOffsets?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectSketchOffsets'];
+  createSketchOffset?: ReturnType<typeof createClosedSketchTransitionCommands>['createSketchOffset'];
+  editSketchOffset?: ReturnType<typeof createClosedSketchTransitionCommands>['editSketchOffset'];
+  removeSketchOffset?: ReturnType<typeof createClosedSketchTransitionCommands>['removeSketchOffset'];
   inspectClosedSketchMeasurements?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketchMeasurements'];
   createClosedSketchLengthMeasurement?: ReturnType<typeof createClosedSketchTransitionCommands>['createClosedSketchLengthMeasurement'];
   convertClosedSketchLengthRole?: ReturnType<typeof createClosedSketchTransitionCommands>['convertClosedSketchLengthRole'];
