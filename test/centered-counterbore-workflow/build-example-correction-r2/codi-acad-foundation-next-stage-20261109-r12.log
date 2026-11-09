@@ -1,0 +1,7 @@
+Preparing worktree (detached HEAD 9ea4a1993)
+Updating files:  98% (7697/7777)Updating files:  99% (7700/7777)Updating files: 100% (7777/7777)Updating files: 100% (7777/7777), done.
+HEAD is now at 9ea4a1993 Fix reusable counterbore source edit recipe to use discovered revision
+{"assets": 498, "assetBytes": 566729483, "excluded": [".rev", "css/app.less", "index.html", "lib-assets/font-awesome/fonts/FontAwesome.otf", "sketcher.html"]}
+{"scope": "actual native CAD plus Files integration fixture; no qualification", "apps": ["jsketcher", "files"]}
+{"version":"codi-public-apps/2","hostAPI":2,"apps":2,"files":571,"output":"/mnt/data10tb/codi-acad-foundation-next-stage-20261109-r12-apps"}
+{"scope": "actual build metadata only; no qualification", "files": 209, "source": "e521860d342aa0f133a72585604dbaeafa98d37d", "desktop": "9ea4a1993ad8afa10ea9a24e9c9a4f7955e47420"}

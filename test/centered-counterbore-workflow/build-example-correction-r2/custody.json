@@ -1,0 +1,23 @@
+{
+  "status": "STAGE_PASS_WHOLE_RUNNING_NOT_QUALIFICATION",
+  "core": "e521860d342aa0f133a72585604dbaeafa98d37d",
+  "desktop": "9ea4a1993ad8afa10ea9a24e9c9a4f7955e47420",
+  "acceptanceSource": "7b451c24a0753fd55a24946b10029d0a17b28051",
+  "stageSession": 24457,
+  "stageExitCode": 0,
+  "pinCount": 209,
+  "coreRebuilt": false,
+  "reason": "Only public example adds required live discovery revision. New host stage; separately frozen acceptance checkout.",
+  "acceptanceWorktreeSession": 21105,
+  "acceptanceWorktreeExitCode": 0,
+  "wholeSession": 54341,
+  "serviceSession": 76446,
+  "site": "http://127.0.0.1:21051/",
+  "siteForwardSession": 32185,
+  "reverseCDPForwardSession": 16681,
+  "cdp": "http://127.0.0.1:19551",
+  "evidence": "/mnt/data10tb/codi-acad-foundation-next-counterbore-20261109-r2",
+  "log": "/tmp/codi-acad-foundation-next-counterbore-20261109-r2.log",
+  "firstFailure": "8e76fa5/evidence-r1",
+  "publicMainBetaPromoted": false
+}
