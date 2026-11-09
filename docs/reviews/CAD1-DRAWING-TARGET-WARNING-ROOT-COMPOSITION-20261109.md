@@ -54,3 +54,20 @@ failures and qualifications keep their actual producer identities. No parser,
 microtest, Native probe, fake UI or relaxed geometry substitutes for these runs.
 
 Composition is not runtime qualification. Full Gate1 remains open.
+
+## Root source result
+
+All reviewed packets composed without conflicts: canonical target identity
+mapd778da4, warning producta6c1aed, full-family acceptance2a26956, warning
+handoff0d5d003, product review68ddb27, acceptance closurec7c4ce7 and countersink
+runtime-leaf rosterf259255. The current countersink plane-ID and per-triangle
+material guards remain intact. Its corrected README keeps the ten actual
+bootstrap guards. Actual OCI remains8a150c70 with all ten strict guards matching;
+the map/export changes do not alter that bootstrap or the Native ABI/pairs.
+
+The source graph will be regenerated in a fresh normal build. The new static
+warning leaf is included through the real encoding Worker import and through
+every relevant runtime/helper Git roster; current extent and drawing-family
+acceptance now have explicit runtime versus acceptance source roles. Frozen
+producer7f/Hostf23, acceptance7750 and their original failed output remain
+unchanged. No artifact checker was run against their failed whole.
