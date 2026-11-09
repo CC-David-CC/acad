@@ -1,0 +1,17 @@
+{
+  "phase": "stage",
+  "command": [
+    "bash",
+    "/mnt/data10tb/codi-acad-drawing-requirements-evidence-20261109-r3/run-stage.sh",
+    "82866bf0ee852f1d3b3892972f07d8af4cd8b9b0",
+    "6b2a1fbe806175bddafa6c0e0f54c486487d1749"
+  ],
+  "source": "82866bf0ee852f1d3b3892972f07d8af4cd8b9b0",
+  "desktop": "6b2a1fbe806175bddafa6c0e0f54c486487d1749",
+  "status": "PASS",
+  "startedAtUnix": 1794262332.1527863,
+  "pid": 2955019,
+  "exitCode": 0,
+  "finishedAtUnix": 1794262348.0731473,
+  "logSHA256": "fc037e1fb4541f62bf6106969b05973afe8aaf6c411b34a07b99d918a82094aa"
+}

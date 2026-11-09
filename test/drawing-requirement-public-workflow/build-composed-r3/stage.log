@@ -1,0 +1,7 @@
+Preparing worktree (detached HEAD 6b2a1fbe8)
+Updating files:  94% (7349/7786)Updating files:  95% (7397/7786)Updating files:  96% (7475/7786)Updating files:  97% (7553/7786)Updating files:  98% (7631/7786)Updating files:  99% (7709/7786)Updating files: 100% (7786/7786)Updating files: 100% (7786/7786), done.
+HEAD is now at 6b2a1fbe8 Document C11 producer identity reference and prewrite presentation transitions
+{"assets": 587, "assetBytes": 605478574, "excluded": [".rev", "css/app.less", "index.html", "lib-assets/font-awesome/fonts/FontAwesome.otf", "sketcher.html"]}
+{"scope": "actual native CAD plus Files integration fixture; no qualification", "apps": ["jsketcher", "files"]}
+{"version":"codi-public-apps/2","hostAPI":2,"apps":2,"files":660,"output":"/mnt/data10tb/codi-acad-drawing-requirements-stage-20261109-r3-apps"}
+{"scope": "actual build metadata only; no qualification", "files": 293, "source": "82866bf0ee852f1d3b3892972f07d8af4cd8b9b0", "desktop": "6b2a1fbe806175bddafa6c0e0f54c486487d1749"}

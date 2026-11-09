@@ -1,0 +1,16 @@
+{
+  "phase": "build",
+  "command": [
+    "bash",
+    "/mnt/data10tb/codi-acad-drawing-requirements-evidence-20261109-r3/run-build.sh",
+    "82866bf0ee852f1d3b3892972f07d8af4cd8b9b0"
+  ],
+  "source": "82866bf0ee852f1d3b3892972f07d8af4cd8b9b0",
+  "desktop": "6b2a1fbe806175bddafa6c0e0f54c486487d1749",
+  "status": "PASS",
+  "startedAtUnix": 1794262188.006265,
+  "pid": 2953974,
+  "exitCode": 0,
+  "finishedAtUnix": 1794262320.3005586,
+  "logSHA256": "ce739cf18032f1fdfb3732681c8ad57109671c0a55f446b69cea3985f4bfec8f"
+}

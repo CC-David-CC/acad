@@ -1,0 +1,19 @@
+{
+  "oldPid": 2939519,
+  "exactOldCommand": [
+    "/mnt/data10tb/codi-mirror-sync-venv/bin/python",
+    "/mnt/data10tb/codi-acad-drawing-requirements-desktop-20261109-r2/active-system/scripts/run-simplified-local.py",
+    "--port",
+    "21057",
+    "--isolated",
+    "--apps-bundle",
+    "/mnt/data10tb/codi-acad-drawing-requirements-stage-20261109-r2-apps",
+    "--runtime-root",
+    "/mnt/data10tb/codi-acad-drawing-requirements-state-20261109-r2"
+  ],
+  "signal": "SIGINT",
+  "ownBrowserPages": 0,
+  "oldWriteSettled": true,
+  "replacementSource": "82866bf0ee852f1d3b3892972f07d8af4cd8b9b0",
+  "replacementDesktop": "6b2a1fbe806175bddafa6c0e0f54c486487d1749"
+}
