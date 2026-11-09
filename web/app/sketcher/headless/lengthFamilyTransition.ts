@@ -26,7 +26,21 @@ export function changeLengthFamily(request:any){const revision=revisionOf(reques
   const row=before.stages[stage].constraints[at],offset=before.stages.slice(0,stage).reduce((n,s)=>n+s.constraints.length,0),actual=original.result.evidence[offset+at];if(!actual||actual.typeId!==row.typeId||actual.state!==row.admission?.state)fail('ADMISSION_CHANGED','Current length-family admission changed.');return{revision:a.revision,ok:true as const,changed:false,serializedSketch:a.sketchJSON,evidence:original.result.evidence,relation:makeReceipt(row,actual.state,true)};
  }
  if(a.intent.action==='remove'){
-  const candidate=structuredClone(before);candidate.stages[stage].constraints.splice(at,1);const checked=proof(a,candidate);return{revision:a.revision,ok:true as const,changed:true,serializedSketch:text(JSON.stringify(candidate)),evidence:checked.evidence,relation:makeReceipt(before.stages[stage].constraints[at],'removed')};
+  // Removing an independent row may promote a retained redundant row. Obtain
+  // that transition from the actual native transaction before strict cold
+  // reconstruction; ordinary read/replay must still reject stale admission.
+  pm.startTransaction();
+  try{prepared.mutate();pm.finishTransaction(prepared.validate,false);}
+  catch(error){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw error},false);}catch{}throw error;}
+  const warm=JSON.parse(w.io.serializeSketch(before.metadata,{strict:true}));warm.boundary=structuredClone(before.boundary);
+  // Removal grants no geometry authority. Construct the candidate from ORIGINAL
+  // coordinates plus exactly the selected row deletion, retaining every other
+  // authored field. Warm optimizer coordinates cannot become saved intent.
+  const candidate=structuredClone(before);candidate.stages[stage].constraints.splice(at,1);
+  const restored={...warm,objects:warm.objects.map((o,i)=>({...o,data:before.objects[i]?.data}))};
+  if(difference(withoutAdmission(candidate),withoutAdmission(restored))!=='no difference')fail('INTENT_CHANGED','Length-family removal changed retained source: '+difference(withoutAdmission(candidate),withoutAdmission(restored)));
+  classify(candidate,warm.stages.flatMap(s=>s.constraints.map(c=>({typeId:c.typeId,state:c.admission?.state}))));
+  const checked=proof(a,candidate);return{revision:a.revision,ok:true as const,changed:true,serializedSketch:text(JSON.stringify(candidate)),evidence:checked.evidence,relation:makeReceipt(before.stages[stage].constraints[at],'removed')};
  }
  const ids=c.objects.map(o=>o.id),proposedConstants=a.intent.action==='edit'?{factor:String(a.intent.factor),offset:String(a.intent.offset)}:undefined,schema=c.schema;
  const scope=captureConnectedGeometryScope(before,a.externalParameters,original.result.evidence,original.auxiliary,(_w,manager,objects)=>{

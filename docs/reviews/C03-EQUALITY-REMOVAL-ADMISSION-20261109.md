@@ -1,0 +1,9 @@
+# Length-family removal and admission transition
+
+Confirmed failure: `test/equal-length-public-workflow/evidence-r1`, whole92872 on7683eb2/7fc7a508f. Actual retained ratio1/0 has redundant admission before deleting the final independent AB equality. Source path deleted AB then called strict cold solve with old retained admission hints. That correctly refuses changed constraint intent, because the ratio becomes independently necessary. Deleting the preceding AC and BC rows already succeeded; ratio edits beyond this point remain unqualified.
+
+Repair uses the already prepared current native length-family removal transaction. After native validation it captures the actual remaining-row classification. Candidate is ORIGINAL source plus exactly one selected row deletion; warm geometry is not publication authority. Complete non-admission intent must match, then actual classifications are applied before original/cold/second-cold/captured proof. Cold reconstruction still must retain all original geometry and stable actual membership/classification. No changes to incomingIntent, ordinary Save/Open, equality equations, numerical tolerance, proof budgets or undo format.
+
+This follows the existing Fix/unfix transition pattern. Related EqualRadius/Tangency source removal paths have a similar shape and deserve grouped regression review, but this failed whole alone does not prove a runtime failure in those families. Do not claim all removal paths fixed from this one change.
+
+No per-step tests/probes. The existing unchanged complete public equality workflow is the regression: real transitive redundancy, removal after save/reopen, retained ratio promotion followed by ratio edits, mixed undo/redo and all three native archive cycles. Rebuild normally before running; this source repair is NOT qualified yet. Keep first failure and unchanged driver/checker.
