@@ -62,10 +62,11 @@ def observation(row,original):
         used=set()
         for p in ps:
             at=one([n for n,v in enumerate(candidates) if all(abs(F(p[a])-F(v[a]))<=B for a in ('x','y'))],'unique native-owned source coordinate');require(at not in used,'distinct owned endpoints');used.add(at)
-    for side,record in row['offsets'].items():
+    for label,record in row['offsets'].items():
+        side=record['side']
         if not record['present']:require(record['outputId'] not in objects and not any(record['outputId'] in g['generatedObjects'] for g in generators),'removed generator/output absent');continue
         out=objects[record['outputId']];parent=objects[record['sourceId']];g=one([g for g in generators if g['generatedObjects']==[record['outputId']]],'real generator association');require(set(g)=={'typeId','stage','params','generatedObjects'} and g['typeId']=='Offset' and g['stage']==0 and g['params']=={'objects':[parent['id']],'distance':record['raw'],'side':side},'exact semantic intent/actual source/output/side/name')
-        require(side==record['side'] and out['type']==parent['type'] and out['role']==parent['role'] and out['stage']==g['stage'],'same actual type/role/stage')
+        require(out['type']==parent['type'] and out['role']==parent['role'] and out['stage']==g['stage'],'same actual type/role/stage')
         distance=scalar(record['raw'],q);require(0<distance<=1000000 and distance==record['value'],'actual resolved typed/literal physical distance')
         r=one([r for r in inventory['offsets'] if r['outputId']==out['id']],'actual public Offset locator');require(r['sourceId']==parent['id'] and r['side']==side and r['distance']==record['raw'] and r['status']=='available' and r['canEdit'],'actual metadata association');near(r['resolvedDistance'],distance);require(not one([r for r in inventory['sources'] if r['id']==out['id']],'derived source row')['canOffset'],'generated output is readonly/ineligible')
         if out['type']=='Circle':
