@@ -7,6 +7,35 @@ is required before this source can replace any acceptance predicate.
 """
 from collections import Counter, defaultdict
 from fractions import Fraction as Q
+import math
+
+
+class CertificateResourceLimit(RuntimeError):
+    """Input/work domain exceeded; does not assert invalid geometry."""
+
+
+def bounded_number(value):
+    # All represented binary64 values and exact signed-permutation differences
+    # of two such values fit these dyadic bounds. No arbitrary rational source.
+    if type(value) is float:
+        require(math.isfinite(value), 'nonfinite numeric input')
+    elif type(value) is int:
+        if value.bit_length() > 2100:
+            raise CertificateResourceLimit('integer input bit limit')
+    elif type(value) is Q:
+        n, d = value.numerator, value.denominator
+        if n.bit_length() > 2100 or d.bit_length() > 1075 or d & (d-1):
+            raise CertificateResourceLimit('exact input must be a bounded represented dyadic')
+    else:
+        raise ValueError('cylindrical surface certificate: unsupported numeric input type')
+    return Q(value)
+
+
+def bounded_sequence(value, maximum, label):
+    require(type(value) in (list, tuple), label+' must be a bounded concrete sequence')
+    if len(value) > maximum:
+        raise CertificateResourceLimit(label+' count limit')
+    return value
 
 
 def require(condition, reason):
@@ -76,18 +105,31 @@ def certify_full_cylinder(vertices, triangles, triangle_ids, center, radius,
     Radial projection plus an affine axial map must cover the finite target once
     within the original Euclidean deflection budget. No welding or mesh repair.
     """
-    radius, low, high, epsilon, incidence = map(Q, (radius, low, high, deflection, plane_incidence))
-    center = tuple(map(Q, center))
+    bounded_sequence(vertices, 150000, 'vertices')
+    bounded_sequence(triangles, 100000, 'triangles')
+    bounded_sequence(triangle_ids, 100000, 'wall face IDs')
+    bounded_sequence(center, 2, 'center')
+    if 32+24*len(vertices)+12*len(triangles) > 8388608:
+        raise CertificateResourceLimit('original decoded mesh byte limit')
+    radius, low, high, epsilon, incidence = map(bounded_number,
+        (radius, low, high, deflection, plane_incidence))
+    center = tuple(map(bounded_number, center))
     require(len(center) == 2 and radius > 0 and high > low and epsilon > 0 and
             incidence >= 0 and type(orientation) is int and orientation in (-1, 1),
             'invalid support/budget')
     ids = list(triangle_ids)
-    require(0 < len(ids) <= 100000 and len(set(ids)) == len(ids), 'face census')
     require(all(type(i) is int and 0 <= i < len(triangles) for i in ids), 'face index')
-    require(all(len(triangles[i]) == 3 and len(set(triangles[i])) == 3 and
-                all(type(v) is int and 0 <= v < len(vertices) for v in triangles[i])
-                for i in ids), 'original vertex indices')
-    points = {v: tuple(map(Q, vertices[v])) for i in ids for v in triangles[i]}
+    require(0 < len(ids) <= 100000 and len(set(ids)) == len(ids), 'face census')
+    for i in ids:
+        tri = bounded_sequence(triangles[i], 3, 'triangle')
+        require(len(tri) == 3 and
+                all(type(v) is int and 0 <= v < len(vertices) for v in tri) and
+                len(set(tri)) == 3, 'original vertex indices')
+    used_vertices = {v for i in ids for v in triangles[i]}
+    for v in used_vertices:
+        bounded_sequence(vertices[v], 3, 'vertex')
+        require(len(vertices[v]) == 3, 'vertex arity')
+    points = {v: tuple(map(bounded_number, vertices[v])) for v in used_vertices}
     require(len(points) <= 150000 and all(len(p) == 3 for p in points.values()), 'vertex census')
     edges, links, ranges = defaultdict(list), defaultdict(dict), []
     for face in ids:
