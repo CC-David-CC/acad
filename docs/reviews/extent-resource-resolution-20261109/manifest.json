@@ -1,0 +1,243 @@
+{
+  "scope": "source-only resolution proposals; no root edits/build/generator/parser/tests",
+  "rootWorktree": "/tmp/codi-acad-foundation-next-20261109",
+  "outputRoot": "/tmp/codi-acad-extent-resource-resolution-20261109",
+  "parents": [
+    "12de85e84f212e1ec7338b3525d543a89a58856f",
+    "8678c35b770855fa3978abfeab789c76f303bfd1"
+  ],
+  "temporaryBootstrapSha256": "7864b6ca0e29ccc3a985d4950e02b0faf720d83f95b71e2f7e388310b4525945",
+  "finalBootstrapDigestOwner": "root recomputes all9 only after final OCI merge",
+  "extentModulesAddedToMfgOnly": [
+    "modules/engine/mount/ownedProfileExtentPlan.mjs",
+    "modules/engine/mount/ownedProfileExtentWorker.mjs",
+    "modules/engine/mount/profileExtentHolePlan.mjs",
+    "modules/engine/mount/profileMechanicalSource.mjs",
+    "modules/engine/mount/profileExtentSelectionIndex.mjs",
+    "modules/engine/solid/ownedProfileExtentFeature.mjs"
+  ],
+  "files": [
+    {
+      "path": "build/embedded-oci-worker.cjs",
+      "inputSha256": "925826fff2f56b114fc46418a1f393d839f5ca727589a1d6ef48c7f0775ff789",
+      "inputBytes": 2204,
+      "outputSha256": "565108b778be09d50139b89e7ada8bf8a8a08a5f701fa4adc7c31bfc6a645e31",
+      "outputBytes": 2046,
+      "stageBlobs": {
+        "2": {
+          "sha256": "565108b778be09d50139b89e7ada8bf8a8a08a5f701fa4adc7c31bfc6a645e31",
+          "bytes": 2046
+        },
+        "3": {
+          "sha256": "4ed5d3689692530b33a7822fb82c277a440204c9f6f5b69166c6eff3ef8601b3",
+          "bytes": 2046
+        }
+      },
+      "decisions": [
+        "retain current-root temporary common bootstrap guard"
+      ]
+    },
+    {
+      "path": "build/prepare-adaptive-metrology-profile-assets.cjs",
+      "inputSha256": "6bb8e813523814e36c9b6c89411f12b28711b39f3d5b900990bfc91380eb5d2d",
+      "inputBytes": 1770,
+      "outputSha256": "da6a35c118cb0c56152a09a868c764282122d4026c6fbd8a6561ea23d43d0ac6",
+      "outputBytes": 1613,
+      "stageBlobs": {
+        "2": {
+          "sha256": "da6a35c118cb0c56152a09a868c764282122d4026c6fbd8a6561ea23d43d0ac6",
+          "bytes": 1613
+        },
+        "3": {
+          "sha256": "39107c3bbb30cadefb0ddf1d76ddddba8bd14fdb48d0827be10a5e4704c7b504",
+          "bytes": 1613
+        }
+      },
+      "decisions": [
+        "retain current-root temporary common bootstrap guard"
+      ]
+    },
+    {
+      "path": "build/prepare-circular-profile-assets.cjs",
+      "inputSha256": "5e8543c01b17479e8451db911596d3d7a5fcab85d5164825aeb51c846a21fd94",
+      "inputBytes": 3039,
+      "outputSha256": "3c7f0550dc61f77243a9030db869f5a7aa9e533c214e455676e36fa3a57629fa",
+      "outputBytes": 2882,
+      "stageBlobs": {
+        "2": {
+          "sha256": "3c7f0550dc61f77243a9030db869f5a7aa9e533c214e455676e36fa3a57629fa",
+          "bytes": 2882
+        },
+        "3": {
+          "sha256": "d956a4754a416586bf4df21664ed63acce99f1fc46e92b03456be59610b32c42",
+          "bytes": 2882
+        }
+      },
+      "decisions": [
+        "retain current-root temporary common bootstrap guard"
+      ]
+    },
+    {
+      "path": "build/prepare-loft-profile-assets.cjs",
+      "inputSha256": "17ac0733ae2c5e4ab5bda67ab50d0d1e161ddf892f50fff55c99e2ecf9f9c49b",
+      "inputBytes": 1712,
+      "outputSha256": "f87d4226c66c664fe7111a8352aa35dd68ae77440966f08beea30d3478b139c8",
+      "outputBytes": 1555,
+      "stageBlobs": {
+        "2": {
+          "sha256": "f87d4226c66c664fe7111a8352aa35dd68ae77440966f08beea30d3478b139c8",
+          "bytes": 1555
+        },
+        "3": {
+          "sha256": "3fb534029b65c2f838c434c802b32005cb4d3068f344cd4db74e3bbfc22ea80b",
+          "bytes": 1555
+        }
+      },
+      "decisions": [
+        "retain current-root temporary common bootstrap guard"
+      ]
+    },
+    {
+      "path": "build/prepare-manufacturing-mesh-profile-assets.cjs",
+      "inputSha256": "5d6da78eb59879eccda47145b8a98ed04df4128bad33ca61bdc8ff10f9f82a3b",
+      "inputBytes": 4734,
+      "outputSha256": "64eec7abb87de7be90c17aa08f0c98bef76efb870374343b79e2eac2ffb0f6b8",
+      "outputBytes": 3090,
+      "stageBlobs": {
+        "2": {
+          "sha256": "5e3ee7a55e535ebd5cb2075aa9e84e0bcd9a68119aa5893a7e49db93d495ed9e",
+          "bytes": 2780
+        },
+        "3": {
+          "sha256": "db8a39e709bfa7f5ea38566dd3a19695d161b7047ec7742940734df8e4ff36a9",
+          "bytes": 2948
+        }
+      },
+      "decisions": [
+        "retain current-root temporary common bootstrap guard",
+        "keep entire root MFG list order and UNION exact extent6 immediately after blind5"
+      ]
+    },
+    {
+      "path": "build/prepare-orthographic-profile-assets.cjs",
+      "inputSha256": "8ae1aac8d274c4f42556588919eaceeeb89117f1a5f57bf3a9938769fb550eb3",
+      "inputBytes": 1803,
+      "outputSha256": "cb010b5cb80afff1aa32ecbebbe467664611fd43fd9874f3e3d6881e912898e3",
+      "outputBytes": 1646,
+      "stageBlobs": {
+        "2": {
+          "sha256": "cb010b5cb80afff1aa32ecbebbe467664611fd43fd9874f3e3d6881e912898e3",
+          "bytes": 1646
+        },
+        "3": {
+          "sha256": "ad092eadeed183bc8648a40777ff3c39836d3588eddcdd30a1aae1bc47922004",
+          "bytes": 1646
+        }
+      },
+      "decisions": [
+        "retain current-root temporary common bootstrap guard"
+      ]
+    },
+    {
+      "path": "build/prepare-selected-profile-assets.cjs",
+      "inputSha256": "ce64a477337253243e9cc36d89ed4885312ce8ba2e4528a4d059b8d878fed6f3",
+      "inputBytes": 4268,
+      "outputSha256": "7c80bde6fb5e0f1bb573d6fb689bcce614674440db0b75de23625987730a678d",
+      "outputBytes": 4111,
+      "stageBlobs": {
+        "2": {
+          "sha256": "7c80bde6fb5e0f1bb573d6fb689bcce614674440db0b75de23625987730a678d",
+          "bytes": 4111
+        },
+        "3": {
+          "sha256": "805b3908e82adb5ee24298c58561ea1a1f7954d276e210111bcfa9ad1a7de9a8",
+          "bytes": 4111
+        }
+      },
+      "decisions": [
+        "retain current-root temporary common bootstrap guard"
+      ]
+    },
+    {
+      "path": "build/prepare-shell-profile-assets.cjs",
+      "inputSha256": "f75fd3ba35f666a99c3a5428176cf9fb96a31ae3a249a850bacff6b47bcdde60",
+      "inputBytes": 2612,
+      "outputSha256": "5f52887bb92d53ab3a93f6f94e0309de9c76af8320a5c7ec35f06b3ad2a1b40a",
+      "outputBytes": 2455,
+      "stageBlobs": {
+        "2": {
+          "sha256": "5f52887bb92d53ab3a93f6f94e0309de9c76af8320a5c7ec35f06b3ad2a1b40a",
+          "bytes": 2455
+        },
+        "3": {
+          "sha256": "6e471bf6e64c4123ed962ec462a395cfbd14cb6682b8707afaf2f85cee955e9b",
+          "bytes": 2455
+        }
+      },
+      "decisions": [
+        "retain current-root temporary common bootstrap guard"
+      ]
+    },
+    {
+      "path": "build/prepare-step-export-profile-assets.cjs",
+      "inputSha256": "71fdce6fa9c971ca0ad349caace51dbf51ce314f4d8588bbff05ce9270575aa1",
+      "inputBytes": 1721,
+      "outputSha256": "5186c90335f7a9d63f5d950b387a6ad3033ad51393c227cdce2022b6d6ac2a07",
+      "outputBytes": 1564,
+      "stageBlobs": {
+        "2": {
+          "sha256": "5186c90335f7a9d63f5d950b387a6ad3033ad51393c227cdce2022b6d6ac2a07",
+          "bytes": 1564
+        },
+        "3": {
+          "sha256": "944014785aa374871877b7be8d8bd0b406775a54e97c735204fa60f245f4bbca",
+          "bytes": 1564
+        }
+      },
+      "decisions": [
+        "retain current-root temporary common bootstrap guard"
+      ]
+    },
+    {
+      "path": "build/manufacturing-mesh-assets-entry.cjs",
+      "inputSha256": "4b8b1ad2c6fc23e53c047450c6508042afc21ca9168e8ab701c0fb8e0b99e0e3",
+      "inputBytes": 6975,
+      "outputSha256": "28226555f80430de686e228c6ea525d3a23f464b04025616fc87cbf00fa1eb3c",
+      "outputBytes": 4451,
+      "stageBlobs": {
+        "2": {
+          "sha256": "0d4c054dab007654573f59b3add5fc483e2664ec2da908b674b35cac1a8c2389",
+          "bytes": 4141
+        },
+        "3": {
+          "sha256": "5884e2e15b710f84ce39a6402fc30deb955d80f20a47dfb46dd27248dcbe2138",
+          "bytes": 4264
+        }
+      },
+      "decisions": [
+        "keep entire root MFG list order and UNION exact extent6 immediately after blind5"
+      ]
+    },
+    {
+      "path": "modules/engine/mount/catalogMount.ts",
+      "inputSha256": "bd28ac351de282fd02ec7f555f19615d09145c5b82e47466c8cf9e3f77e88c8b",
+      "inputBytes": 30143,
+      "outputSha256": "7222f828824a2db7c8b2e236e3f4d358efd3d7090b34289191cec3870da62bde",
+      "outputBytes": 29766,
+      "stageBlobs": {
+        "2": {
+          "sha256": "73f22ebde06385650d0fee68fc98f64575eee9de7048abc907bd96271bb78e26",
+          "bytes": 28805
+        },
+        "3": {
+          "sha256": "d2382e95d71ef9c101bff238d0432185b5d2eba432d51a23020d13c7ac29504b",
+          "bytes": 29444
+        }
+      },
+      "decisions": [
+        "keep entire root MFG list order and UNION exact extent6 immediately after blind5"
+      ]
+    }
+  ],
+  "rootOwnedInputsUnchangedAfterCapture": true
+}
