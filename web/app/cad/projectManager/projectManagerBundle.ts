@@ -434,7 +434,7 @@ export function activate(ctx: ApplicationContext) {
   function inspectLinkedPartDrawing():any {
     const job=documentJob();job.guard();const revision=inspectDocumentRevision(),geometryRevision=ctx.craftService.inspectWorkerSolids().revision,definition=drawingDefinition;
     let ready=true,reason='';try{(ctx.craftService as any).captureManufacturingEditContext();}catch{ready=false;reason='Wait for a complete current authored tip.';}
-    const result=Object.freeze({version:1,unit:'millimeter',revision,geometryRevision,definition,ready,reason,quality:'authored-definition-only',authoredUndo:'shared-session-journal-v1',definitionVersions:Object.freeze([1,2,3]),viewBases:Object.freeze(['top','front','right','isometric']),limits:Object.freeze({definitionBytes:65536,requestBytes:65536,views:4,dimensions:16,annotations:16})});
+    const result=Object.freeze({version:1,unit:'millimeter',revision,geometryRevision,definition,ready,reason,quality:'authored-definition-only',authoredUndo:'shared-session-journal-v1',definitionVersions:Object.freeze([1,2,3]),viewBases:Object.freeze(['top','front','right','isometric','bore-center-section','detail']),limits:Object.freeze({definitionBytes:65536,requestBytes:65536,views:6,projections:4,sections:1,details:1,dimensions:16,annotations:16,projectionBytes:3276800,sectionBytes:51200,detailBytes:98304,packedBytes:3426304,transferBuffers:11})});
     job.guard();if(drawingDefinition!==definition||inspectDocumentRevision()!==revision||ctx.craftService.inspectWorkerSolids().revision!==geometryRevision)throw new DOMException('Drawing inspection changed.','AbortError');return result;
   }
   async function exportLinkedPartDrawingSvg(options:{signal?:AbortSignal,valid?:()=>boolean}={}):Promise<Uint8Array> {

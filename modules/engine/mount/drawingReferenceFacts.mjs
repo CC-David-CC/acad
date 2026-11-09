@@ -31,7 +31,7 @@ export function resolveOwnedDrawingReferences({definition,topology,index,sourceP
  function sourcePoint(r){const id=qualifySourceCurveId(r.faceId,r.curveId),curve=curves.find(c=>c.id===id);if(r.featureId!==sourceFeatureId||r.faceId!==def.datum.faceId||r.regionId!==sourceRegionId||!curve)unavailable('DRAWING_SOURCE_CHANGED');if(curve.kind!==r.curveType)unavailable('DRAWING_TYPE_CHANGED');const p=curve.kind==='circle'?curve.center:curve[r.point];if(!p)unavailable('DRAWING_REFERENCE_MISSING');return world(p);}
  function nativeRef(r,kind){const list=kind==='face'?index.plan.faces:index.plan.edges,descriptor=list.find(x=>x.id===r.selectionId);if(!descriptor||descriptor.originFeatureId!==r.originFeatureId)unavailable('DRAWING_REFERENCE_UNRESOLVED');let i;try{i=kind==='face'?index.resolveFace(r.selectionId):index.resolveEdge(r.selectionId);}catch{unavailable('DRAWING_REFERENCE_UNRESOLVED');}const entity=(kind==='face'?topology.faces:topology.edges)[i-1];if(entity.type!==r.geometry)unavailable('DRAWING_TYPE_CHANGED');return entity;}
  const boreReader=createBoreReader({topology,frame:f,cylinders,classify});
- function hole(r){return boreReader.finite({...r,holeKind:'centered-through'});}
+ function hole(r){return boreReader.finite(r.kind==='through-hole'?r:{...r,holeKind:'centered-through'});}
  const facePoints=face=>[...new Set(face.wires.flat().flatMap(u=>topology.edges[u.edge-1].vertices))].filter(i=>i>0).map(i=>topology.vertices[i-1].point);
  const dimensions=def.dimensions.map(d=>{try{let value,anchors,quality='native-brep-analytic';if(d.kind==='source-distance'){anchors=[sourcePoint(d.from),sourcePoint(d.to)];value=Math.abs(dot(sub(anchors[1],anchors[0]),d.axis==='datum-x'?f.x:f.y));quality='solved-source-datum';}else if(d.kind==='edge-length'){const edge=nativeRef(d.edge,'edge');anchors=edge.range.map(t=>add(edge.analytic.origin,mul(edge.analytic.direction,t)));if(!edge.vertices.every(i=>i>0&&anchors.some(p=>near(p,topology.vertices[i-1].point))))unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');value=norm(sub(anchors[1],anchors[0]));}else if(d.kind==='plane-distance'){const a=nativeRef(d.first,'face'),b=nativeRef(d.second,'face');if(norm(cross(a.analytic.normal,b.analytic.normal))>dirTol||norm(cross(a.analytic.normal,f.z))>dirTol)unavailable('DRAWING_CAP_ALIGNMENT_UNSUPPORTED');const distance=dot(sub(b.analytic.origin,a.analytic.origin),a.analytic.normal);value=Math.abs(distance);for(const p of facePoints(a)){const q=add(p,mul(a.analytic.normal,distance));const actual=facePoints(b).find(x=>near(x,q));if(actual){anchors=[p,actual];break;}}if(!anchors)unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');}else{const h=hole(d.hole);quality='native-prism-cut-lineage';if(d.kind==='hole-diameter'){value=2*h.radius;anchors=h.diameterAnchors;}else{const delta=sub(h.intersection,f.origin),x=dot(delta,f.x),y=dot(delta,f.y);value=Math.abs(d.axis==='datum-x'?x:y);anchors=[add(f.origin,mul(d.axis==='datum-x'?f.y:f.x,d.axis==='datum-x'?y:x)),h.intersection];}}return{dimensionId:d.dimensionId,kind:d.kind,status:'available',reason:null,quality,value,anchors};}catch(e){if(typeof e?.code!=='string'||!(/^(DRAWING_|SELECTION_|UNRESOLVED_)/.test(e.code)))throw e;return{dimensionId:d.dimensionId,kind:d.kind,status:'unresolved',reason:e.code,quality:null,value:null,anchors:[]};}});
  // Source-relative, nonperspective isometric; no saved axes/camera or
@@ -43,7 +43,15 @@ export function resolveOwnedDrawingReferences({definition,topology,index,sourceP
   if(basis==='isometric'&&def.version>=2)return{u:mul(sub(f.x,f.y),1/Math.sqrt(2)),v:mul(add(mul(add(f.x,f.y),-1),mul(f.z,2)),1/Math.sqrt(6)),n:mul(add(add(f.x,f.y),f.z),-1/Math.sqrt(3))};
   unavailable('DRAWING_VIEW_UNSUPPORTED');
  }
- const viewFrames=def.views.map(v=>({viewId:v.viewId,frame:{origin:[...f.origin],...viewFrame(v.basis)}}));
+ const viewFrames=def.views.map(v=>{
+  if(!['detail','bore-center-section'].includes(v.basis))return{viewId:v.viewId,frame:{origin:[...f.origin],...viewFrame(v.basis)}};
+  try{
+   const h=hole(v.basis==='detail'?v.focus:v.hole);
+   if(norm(cross(h.axis,f.z))>dirTol)unavailable('DRAWING_BORE_AXIS_UNSUPPORTED');
+   const frame={origin:[...h.intersection],...viewFrame(v.basis==='detail'?'top':'front')};
+   return{viewId:v.viewId,status:'available',reason:null,frame};
+  }catch(e){if(typeof e?.code!=='string'||!(/^(DRAWING_|SELECTION_|UNRESOLVED_)/.test(e.code)))throw e;return{viewId:v.viewId,status:'unresolved',reason:e.code,frame:null};}
+ });
  const annotations=def.version===3?def.annotations.map(a=>{try{
   let facts;
   const refs=a.kind==='bore-center'?[a.hole]:a.holes,rows=refs.map(ref=>boreReader.observe(ref));
@@ -59,7 +67,7 @@ export function resolveOwnedDrawingReferences({definition,topology,index,sourceP
   }
   return{annotationId:a.annotationId,kind:a.kind,status:'available',reason:null,quality:'native-prism-cut-lineage',facts};
  }catch(e){if(typeof e?.code!=='string'||!(/^(DRAWING_|SELECTION_|UNRESOLVED_)/.test(e.code)))throw e;return{annotationId:a.annotationId,kind:a.kind,status:'unresolved',reason:e.code,quality:null,facts:null};}}):[];
- const available=dimensions.every(d=>d.status==='available')&&annotations.every(a=>a.status==='available');
+ const available=dimensions.every(d=>d.status==='available')&&annotations.every(a=>a.status==='available')&&viewFrames.every(v=>v.frame!==null);
  return captureDrawingReadResult({version:1,unit:'millimeter',scope:'response-local',quality:'native-bound-drawing-references',drawingId:def.drawingId,featureId:def.target.featureId,status:available?'available':'unresolved',reason:available?null:'DRAWING_REFERENCES_UNRESOLVED',datumFrame:sourceProfile.frame,viewFrames,dimensions,...(def.version===3?{annotations}:{})},def);
 }
 

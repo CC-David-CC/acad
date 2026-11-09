@@ -1,3 +1,5 @@
+import {unpackDrawingSection} from '../../../../modules/engine/mount/ownedDrawingSectionProtocol.mjs';
+import {unpackDrawingDetail} from '../../../../modules/engine/mount/drawingDetailClip.mjs';
 // Worker-only presentation of observed geometry. Authored references remain in
 // the native document; an SVG is a revision-specific, read-only handoff.
 import {captureLinkedPartDrawingDefinition} from '../../../../modules/drawing/linkedPartDrawingDefinition.mjs';
@@ -18,27 +20,48 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
   }else if(read.status==='available'||o.status==='available'||read.views.length)fail('Available drawing has no target.');
   for(let i=0;i<read.views.length;i++){
     const descriptor=Object.getOwnPropertyDescriptor(read.views,String(i));if(!descriptor?.enumerable||!Object.hasOwn(descriptor,'value'))fail('Drawing views must be dense own data.');
-    const row=drawingFields(descriptor.value,['viewId','status','reason','metadata','values','tags']);
+    const detail=d.views[i].basis==='detail',row=drawingFields(descriptor.value,['viewId','status','reason','metadata',...(detail?['intervals']:['values','tags'])]);
     if(row.viewId!==d.views[i].viewId||!['available','unavailable'].includes(row.status))fail('Drawing view order or identity changed.');
-    if(row.status==='available'?row.reason!==null:typeof row.reason!=='string'||!row.reason||row.reason.length>256||row.metadata!==null||row.values!==null||row.tags!==null)fail('Invalid drawing view availability.');
+    if(row.status==='available'?row.reason!==null:typeof row.reason!=='string'||!row.reason||row.reason.length>256||row.metadata!==null||(detail?row.intervals!==null:row.values!==null||row.tags!==null))fail('Invalid drawing view availability.');
   }
-  const scale=d.sheet.scale.numerator/d.sheet.scale.denominator,paths=[],annotations=[],fallbackWarnings=[];
+  const scale=d.sheet.scale.numerator/d.sheet.scale.denominator,paths=[],annotations=[],fallbackWarnings=[],patterns=[];
   let segments=0,status=read.status==='available'&&o.status==='available'?'available':'unresolved';
-  const paper=(view,p)=>[view.paperOrigin[0]+p[0]*scale,view.paperOrigin[1]-p[1]*scale];
+  const viewScale=view=>view.basis==='detail'?view.scale.numerator/view.scale.denominator:scale;
+  const paper=(view,p)=>[view.paperOrigin[0]+p[0]*viewScale(view),view.paperOrigin[1]-p[1]*viewScale(view)];
   const text=(p,value,attributes='')=>`<text x="${num(p[0])}" y="${num(p[1])}" ${attributes}>${escape(value)}</text>`;
   for(let index=0;index<d.views.length;index++) {
     const view=d.views[index],observed=read.views[index],frame=o.viewFrames.find(f=>f.viewId===view.viewId)?.frame;
     if(!observed||observed.viewId!==view.viewId||observed.status!=='available'||!frame) {
       status='unresolved';annotations.push(text(view.paperOrigin,view.basis+': unresolved','fill="#a00"'));continue;
     }
-    const packed=unpackOrthographicRecord({metadata:observed.metadata,values:observed.values,tags:observed.tags},[...frame.origin,...frame.u,...frame.v,...frame.n]);
+    if(view.basis==='bore-center-section'){
+      const section=unpackDrawingSection({metadata:observed.metadata,values:observed.values,tags:observed.tags},[...frame.origin,...frame.u,...frame.v,...frame.n]),id='drawing-section-hatch-'+index;
+      patterns.push(`<pattern id="${id}" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(45)"><path d="M0,0 L0,4" stroke="#777" stroke-width=".2"/></pattern>`);
+      for(const patch of section.patches){
+        const polygon=patch.map((edge,i)=>{const p=paper(view,edge.start);return(i?'L':'M')+p.map(num).join(',');}).join(' ')+' Z';
+        paths.push(`<path data-view-id="${escape(view.viewId)}" data-view-basis="bore-center-section" data-presentation="section-hatch" data-section-area="${num(section.area)}" d="${polygon}" fill="url(#${id})" stroke="none"/>`);
+        for(const edge of patch)if(edge.boundary){const a=paper(view,edge.start),b=paper(view,edge.end);paths.push(`<path data-view-id="${escape(view.viewId)}" data-view-basis="bore-center-section" data-cut-boundary="true" d="M${a.map(num).join(',')} L${b.map(num).join(',')}"/>`);}
+        segments+=patch.length*2;
+      }
+      if(segments>200000)throw Object.assign(Error('Drawing section exceeds its presentation segment budget.'),{code:'RESOURCE_LIMIT'});
+      annotations.push(text([view.paperOrigin[0],view.paperOrigin[1]+5],'bore-center-section'));continue;
+    }
+    let packed;
+    if(view.basis==='detail'){
+      const parent=read.views.find(v=>v.viewId===view.parentViewId),parentFrame=o.viewFrames.find(v=>v.viewId===view.parentViewId)?.frame;
+      if(parent?.status!=='available'||!parentFrame)fail('An available detail has no actual parent projection.');
+      packed=unpackDrawingDetail({packet:{metadata:observed.metadata,intervals:observed.intervals},parent:{metadata:parent.metadata,values:parent.values,tags:parent.tags},parentFrame,frame,view});
+      const hw=view.aperture.halfWidth,hh=view.aperture.halfHeight,corners=[[-hw,-hh],[hw,-hh],[hw,hh],[-hw,hh],[-hw,-hh]].map(p=>paper(view,p));
+      paths.push(`<path data-view-id="${escape(view.viewId)}" data-presentation="detail-aperture" d="M${corners.map(p=>p.map(num).join(',')).join(' L')}" stroke="#777" stroke-dasharray="1 1"/>`);
+      if(packed.empty)annotations.push(text([view.paperOrigin[0],view.paperOrigin[1]+9],'detail: available-empty'));
+    }else packed=unpackOrthographicRecord({metadata:observed.metadata,values:observed.values,tags:observed.tags},[...frame.origin,...frame.u,...frame.v,...frame.n]);
     for(const group of packed.groups)for(const curve of group.curves) {
       let points;
       if(curve.kind==='line')points=[curve.start,curve.end];
       else {
         // This approximation is solely SVG presentation. Bound chord error in
         // paper units by ||a||+||b||; measurements use separate Native facts.
-        const radius=(Math.hypot(...curve.a)+Math.hypot(...curve.b))*scale;
+        const radius=(Math.hypot(...curve.a)+Math.hypot(...curve.b))*viewScale(view);
         const sweep=curve.range[1]-curve.range[0],step=radius>0?Math.min(Math.PI/8,Math.sqrt(.16/radius)):Math.PI/8;
         const count=Math.max(1,Math.ceil(sweep/step));
         if(count>65536||segments+count>200000)throw Object.assign(Error('Drawing presentation exceeds its segment budget.'),{code:'RESOURCE_LIMIT'});
@@ -49,7 +72,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
       const path=points.map((p,i)=>{const q=paper(view,p);return(i?'L':'M')+num(q[0])+','+num(q[1]);}).join(' ');
       paths.push(`<path d="${path}"${d.version>=2?' data-view-id="'+escape(view.viewId)+'" data-view-basis="'+view.basis+'"':''}${group.visibility==='hidden'?' stroke-dasharray="2 1" stroke="#777"':''}/>`);
     }
-    annotations.push(text([view.paperOrigin[0],view.paperOrigin[1]+5],view.basis));
+    annotations.push(text([view.paperOrigin[0],view.paperOrigin[1]+5],view.basis+(view.basis==='detail'?' 2:1':'')));
   }
   for(let i=0;i<d.dimensions.length;i++) {
     const dimension=d.dimensions[i],fact=o.dimensions[i],view=d.views.find(v=>v.viewId===dimension.viewId),frame=o.viewFrames.find(v=>v.viewId===dimension.viewId)?.frame;
@@ -76,7 +99,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
     const path=(points,attributes='')=>paths.push(`<path ${tag} d="M${points.map(p=>p.map(num).join(',')).join(' L')}" stroke="#357" ${attributes}/>`);
     const f=row.facts;
     if(a.kind==='bore-center'){
-      if(view.basis==='top'){const c=project(f.center),extent=f.diameter*scale/2+a.extension;path([[c[0]-extent,c[1]],[c[0]+extent,c[1]]],'stroke-dasharray="4 1 1 1"');path([[c[0],c[1]-extent],[c[0],c[1]+extent]],'stroke-dasharray="4 1 1 1"');}
+      if(view.basis==='top'||view.basis==='detail'){const c=project(f.center),extent=f.diameter*viewScale(view)/2+a.extension;path([[c[0]-extent,c[1]],[c[0]+extent,c[1]]],'stroke-dasharray="4 1 1 1"');path([[c[0],c[1]-extent],[c[0],c[1]+extent]],'stroke-dasharray="4 1 1 1"');}
       else{const ends=f.ends.map(project),delta=ends[1].map((n,k)=>n-ends[0][k]),length=Math.hypot(...delta);if(!(length>0))fail('A measured bore axis has no extent in the selected view.');const extra=delta.map(n=>n/length*a.extension);path([ends[0].map((n,k)=>n-extra[k]),ends[1].map((n,k)=>n+extra[k])],'stroke-dasharray="4 1 1 1"');}
     }else if(a.kind==='hole-callout'){
       for(const center of f.centers)path([project(center),a.label],'stroke-dasharray="1 1"');
@@ -102,7 +125,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
     }
   }
   const title=text([8,8],d.title||d.drawingId),notice=text([8,d.sheet.height-5],`Reference drawing · ${status} · scale ${d.sheet.scale.numerator}:${d.sheet.scale.denominator}`);
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${num(d.sheet.width)}mm" height="${num(d.sheet.height)}mm" viewBox="0 0 ${num(d.sheet.width)} ${num(d.sheet.height)}"><title>${escape(d.title)}</title><metadata>${escape(JSON.stringify({version:1,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,quality:o.quality,status,...(d.version>=2?{definitionVersion:d.version,viewCount:d.views.length,projection:d.views.some(v=>v.basis==='isometric')?'source-relative-isometric-v1':'source-relative-orthographic-v1'}:{}),...(d.version===3?{annotationFacts:o.annotations,annotationRole:'derived-native-bore-reference',ordinateRole:'signed-datum-coordinate'}:{}),curvePresentationTolerancePaperMm:.02,dimensionRole:'reference'}))}</metadata><rect width="100%" height="100%" fill="white"/><g fill="none" stroke="#111" stroke-width=".25">${paths.join('')}</g><g font-family="sans-serif" font-size="3">${title}${annotations.join('')}${notice}</g></svg>`;
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${num(d.sheet.width)}mm" height="${num(d.sheet.height)}mm" viewBox="0 0 ${num(d.sheet.width)} ${num(d.sheet.height)}"><title>${escape(d.title)}</title><metadata>${escape(JSON.stringify({version:1,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,quality:o.quality,status,...(d.version>=2?{definitionVersion:d.version,viewCount:d.views.length,projection:d.views.some(v=>v.basis==='isometric')?'source-relative-isometric-v1':'source-relative-orthographic-v1'}:{}),...(d.version===3?{annotationFacts:o.annotations,annotationRole:'derived-native-bore-reference',ordinateRole:'signed-datum-coordinate'}:{}),curvePresentationTolerancePaperMm:.02,dimensionRole:'reference'}))}</metadata><defs>${patterns.join('')}</defs><rect width="100%" height="100%" fill="white"/><g fill="none" stroke="#111" stroke-width=".25">${paths.join('')}</g><g font-family="sans-serif" font-size="3">${title}${annotations.join('')}${notice}</g></svg>`;
   const bytes=new TextEncoder().encode(svg);
   if(bytes.byteLength>16*1024*1024)throw Object.assign(Error('Drawing SVG exceeds its byte budget.'),{code:'RESOURCE_LIMIT'});
   return {format:'svg',mime:'image/svg+xml',status,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,buffer:bytes.buffer};

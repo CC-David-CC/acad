@@ -3,7 +3,7 @@
 export const LINKED_DRAWING_MAX_BYTES = 65536;
 export const LINKED_DRAWING_MAX_DIMENSIONS = 16;
 export const LINKED_DRAWING_MAX_ANNOTATIONS = 16;
-export const LINKED_DRAWING_MAX_VIEWS = 4;
+export const LINKED_DRAWING_MAX_VIEWS = 6;
 const orthographicBases = ['top', 'front', 'right'];
 const isometricBases = [...orthographicBases, 'isometric'];
 const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
@@ -158,18 +158,32 @@ export function captureLinkedPartDrawingDefinition(value) {
   if (![n, d].every(x => Number.isSafeInteger(x) && x >= 1 && x <= 10000)) fail('Expected a bounded rational drawing scale.');
   let a = n, b = d; while (b) [a, b] = [b, a % b];
   if (a !== 1) fail('Scale must use a canonical coprime fraction.');
-  const viewIds = new Map(); let last = -1;
-  // Version1 retains its original orthographic subsequence. Version2 means
-  // exactly the same three bases plus one source-derived isometric view.
-  r.views = list(r.views, r.version === 1 ? 1 : r.version===2?4:3, r.version === 1 ? 3 : LINKED_DRAWING_MAX_VIEWS).map(value => {
-    const v = record(value, ['viewId', 'basis', 'paperOrigin', 'visibility']), index = bases.indexOf(v.basis);
-    text(v.viewId, 128);
-    if (viewIds.has(v.viewId) || index <= last || v.visibility !== 'visible-and-hidden') fail('Views require unique IDs and a canonical named-basis subsequence.');
-    last = index; v.paperOrigin = paper(v.paperOrigin, r.sheet); viewIds.set(v.viewId, v.basis); return v;
+  const viewIds = new Map(), holes = new Map(); let last = -1;
+  // Existing version1/2 remain exact. Version3 adds at most one section and
+  // one linked detail after its canonical orthographic/isometric projection set.
+  const roles = r.version===3?[...isometricBases,'bore-center-section','detail']:bases;
+  r.views = list(r.views,r.version===1?1:r.version===2?4:3,r.version===1?3:r.version===2?4:LINKED_DRAWING_MAX_VIEWS).map(value=>{
+    const basis=discriminator(value,'basis'),extra=basis==='bore-center-section'?['hole','retainedSide']:basis==='detail'?['parentViewId','focus','aperture','scale']:[];
+    const v=record(value,['viewId','basis',...extra,'paperOrigin','visibility']),index=roles.indexOf(basis);
+    text(v.viewId,128);if(v.basis!==basis||index<0||index<=last||viewIds.has(v.viewId))fail('Views require unique IDs and canonical role order.');
+    last=index;v.paperOrigin=paper(v.paperOrigin,r.sheet);
+    if(basis==='bore-center-section'){
+      if(r.version!==3||v.visibility!=='cut-boundary-only'||v.retainedSide!=='positive-datum-y')fail('Unsupported section definition.');
+      v.hole=bore(v.hole,r.datum,holes);viewIds.set(v.viewId,'front');
+    }else if(basis==='detail'){
+      if(r.version!==3||v.visibility!=='inherit')fail('Unsupported detail definition.');
+      text(v.parentViewId,128);
+      if(viewIds.get(v.parentViewId)!=='top')fail('A detail requires the actual canonical top parent.');
+      v.focus=bore(v.focus,r.datum,holes);if(v.focus.holeKind!=='four-corner-through')fail('This detail requires a source-bound corner bore.');
+      v.aperture=record(v.aperture,['kind','halfWidth','halfHeight']);if(v.aperture.kind!=='rectangle')fail('Unsupported detail aperture.');
+      number(v.aperture.halfWidth,0,1e6);number(v.aperture.halfHeight,0,1e6);
+      v.scale=record(v.scale,['numerator','denominator']);if(v.scale.numerator!==2||v.scale.denominator!==1)fail('The detail uses absolute paper scale2:1.');viewIds.set(v.viewId,'top');
+    }else{if(v.visibility!=='visible-and-hidden')fail('Unsupported projection visibility.');viewIds.set(v.viewId,basis);}
+    return v;
   });
-  if(r.version===3&&orthographicBases.some((basis,i)=>r.views[i].basis!==basis))fail('Definition version3 retains top/front/right before optional isometric.');
+  if(r.version===3&&orthographicBases.some((basis,i)=>r.views[i].basis!==basis))fail('Definition version3 retains top/front/right before derived views.');
   const newAnnotationIds=new Set();
-  const dimensionIds = new Set(), nativeSeen = new Map(), holes = new Map(), curves = new Map();
+  const dimensionIds = new Set(), nativeSeen = new Map(), curves = new Map();
   const fields = {
     'source-distance': ['axis', 'from', 'to'], 'plane-distance': ['axis', 'first', 'second'],
     'edge-length': ['edge'], 'hole-diameter': ['hole'], 'hole-offset': ['axis', 'hole']
@@ -194,7 +208,7 @@ export function captureLinkedPartDrawingDefinition(value) {
     } else if (kind === 'edge-length') v.edge = nativeRef(v.edge, 'edge', nativeSeen);
     else {
       if (kind === 'hole-offset') axisView(v.axis, basis);
-      v.hole = centerHole(v.hole, r.datum, holes);
+      v.hole = r.version===3&&kind==='hole-diameter'&&discriminator(v.hole,'kind')==='through-hole'?bore(v.hole,r.datum,holes):centerHole(v.hole,r.datum,holes);
     }
     return v;
   });

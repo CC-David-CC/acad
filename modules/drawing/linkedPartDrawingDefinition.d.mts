@@ -2,7 +2,7 @@
 export const LINKED_DRAWING_MAX_BYTES: 65536;
 export const LINKED_DRAWING_MAX_DIMENSIONS: 16;
 export const LINKED_DRAWING_MAX_ANNOTATIONS: 16;
-export const LINKED_DRAWING_MAX_VIEWS: 4;
+export const LINKED_DRAWING_MAX_VIEWS: 6;
 export type PaperPoint = readonly [number, number];
 export type DatumAxis = 'datum-x' | 'datum-y';
 export type SourcePoint = Readonly<{kind:'source-point';featureId:number;faceId:string;regionId:string;curveId:string} & (
@@ -15,9 +15,12 @@ export type LinkedPartDrawingDimension = DimensionBase & (
   Readonly<{kind:'source-distance';axis:DatumAxis;from:SourcePoint;to:SourcePoint}> |
   Readonly<{kind:'plane-distance';axis:'datum-normal';first:NativeFace;second:NativeFace}> |
   Readonly<{kind:'edge-length';edge:NativeEdge}> |
-  Readonly<{kind:'hole-diameter';hole:CenterHole}> |
+  Readonly<{kind:'hole-diameter';hole:CenterHole|BoreReference}> |
   Readonly<{kind:'hole-offset';axis:DatumAxis;hole:CenterHole}>);
-export type LinkedPartDrawingView = Readonly<{viewId:string;basis:'top'|'front'|'right'|'isometric';paperOrigin:PaperPoint;visibility:'visible-and-hidden'}>;
+export type LinkedPartDrawingView = Readonly<{viewId:string;paperOrigin:PaperPoint} & (
+ {basis:'top'|'front'|'right'|'isometric';visibility:'visible-and-hidden'} |
+ {basis:'bore-center-section';hole:BoreReference;retainedSide:'positive-datum-y';visibility:'cut-boundary-only'} |
+ {basis:'detail';parentViewId:string;focus:BoreReference;aperture:Readonly<{kind:'rectangle';halfWidth:number;halfHeight:number}>;scale:Readonly<{numerator:2;denominator:1}>;visibility:'inherit'})>;
 export type BoreReference = Readonly<{kind:'through-hole';featureId:number;sourceFeatureId:number;faceId:string;regionId:string;geometry:'cylinder'} & ({holeKind:'centered-through';slot:'center'}|{holeKind:'four-corner-through';slot:'MIN_X_MIN_Y'|'MAX_X_MIN_Y'|'MAX_X_MAX_Y'|'MIN_X_MAX_Y'})>;
 export type BoreAnnotation = Readonly<{annotationId:string;viewId:string} & ({kind:'bore-center';hole:BoreReference;extension:number}|{kind:'baseline'|'ordinate';axis:DatumAxis;holes:readonly BoreReference[];labels:readonly PaperPoint[]}|{kind:'hole-callout';holes:readonly BoreReference[];label:PaperPoint})>;
 export type LinkedPartDrawingDefinition = Readonly<{

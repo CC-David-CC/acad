@@ -294,9 +294,49 @@ async function readCandidateWorkerDrawingOrBores({owner,registry,bodyId,definiti
   if(!source||source.engine!==engine||source.engineRevision!==engineRevision||source.faceId!==def.datum.faceId||source.regionId!==def.datum.regionId||registry.findFace(source.faceId)!==source.face||source.face.isPlaneBased!==true)observation=bores?unresolvedBoreRead(def,'DRAWING_DATUM_UNAVAILABLE'):unresolvedDrawingRead(def,'DRAWING_DATUM_UNAVAILABLE');
   else{mount.assertSolidBinding(source.handle);const op=bores?'solid.drawing.bores.read':'solid.drawing.references.read',result=await mount.execute({op,version:1,unit:'millimeter',handle:item.handle,sourceHandle:source.handle,producerFeatureId:featureId,...(bores?{query:def}:{definition:def})},{signal:owner.signal});check();if(result?.contractVersion!==1||result.op!==op||result.unit!=='millimeter')fail('Malformed drawing references.','ENGINE_FAILURE');observation=bores?captureBoreReadResult(result.observation,def):captureDrawingReadResult(result.observation,def);}
   if(bores){check();return Object.freeze({observation,status:observation.status});}
-  const views=[],buffers=new Set();let packedBytes=0;
-  if(def.views.length>DRAWING_PROJECTION_LIMITS.views||def.views.length*DRAWING_PROJECTION_LIMITS.perViewPackedBytes>DRAWING_PROJECTION_LIMITS.packedBytes)fail('Drawing projection aggregate exceeds its bound.','RESOURCE_LIMIT');
-  for(const row of observation.viewFrames){check();if(packedBytes+DRAWING_PROJECTION_LIMITS.perViewPackedBytes>DRAWING_PROJECTION_LIMITS.packedBytes)fail('Drawing projection aggregate exceeds its bound.','RESOURCE_LIMIT');try{const result=await mount.execute({op:'solid.drawing.orthographic.read',version:1,unit:'millimeter',handle:item.handle,frame:row.frame},{signal:owner.signal});check();if(result?.contractVersion!==1||result.op!=='solid.drawing.orthographic.read'||result.unit!=='millimeter')fail('Malformed drawing projection.','ENGINE_FAILURE');const bytes=drawingBufferBytes(result.values)+drawingBufferBytes(result.tags);if(bytes>DRAWING_PROJECTION_LIMITS.perViewPackedBytes||packedBytes+bytes>DRAWING_PROJECTION_LIMITS.packedBytes)fail('Drawing projection aggregate exceeds its bound.','RESOURCE_LIMIT');if(result.values===result.tags||buffers.has(result.values)||buffers.has(result.tags))fail('Drawing projection buffers alias.','ENGINE_FAILURE');buffers.add(result.values);buffers.add(result.tags);packedBytes+=bytes;views.push(Object.freeze({viewId:row.viewId,status:'available',reason:null,metadata:result.metadata,values:result.values,tags:result.tags}));}catch(error){if(!['ORTHOGRAPHIC_INVALID_REQUEST','ORTHOGRAPHIC_INVALID_FRAME','ORTHOGRAPHIC_INVALID_INPUT','ORTHOGRAPHIC_RESOURCE_LIMIT','ORTHOGRAPHIC_CURVE_UNSUPPORTED','ORTHOGRAPHIC_NUMERIC_RANGE','ORTHOGRAPHIC_FAILED'].includes(error?.code))throw error;check();views.push(Object.freeze({viewId:row.viewId,status:'unavailable',reason:error.code,metadata:null,values:null,tags:null}));}}
+  const views=[],byView=new Map(),buffers=new Set();let packedBytes=0,projectionBytes=0;
+  if(def.views.length>DRAWING_PROJECTION_LIMITS.views||def.views.filter(v=>!['detail','bore-center-section'].includes(v.basis)).length>4)fail('Drawing role aggregate exceeds its bound.','RESOURCE_LIMIT');
+  const frames=new Map(observation.viewFrames.map(row=>[row.viewId,row])),detail=def.views.find(v=>v.basis==='detail');
+  const unavailable=(view,reason)=>Object.freeze({viewId:view.viewId,status:'unavailable',reason,metadata:null,...(view.basis==='detail'?{intervals:null}:{values:null,tags:null})});
+  const charge=(packet,keys,max,projection=false)=>{
+   let bytes=0;for(const key of keys){const buffer=packet[key],size=drawingBufferBytes(buffer);new DataView(buffer);if(buffers.has(buffer))fail('Drawing role buffers alias.','ENGINE_FAILURE');buffers.add(buffer);bytes+=size;}
+   if(bytes>max||packedBytes+bytes>DRAWING_PROJECTION_LIMITS.packedBytes||buffers.size>DRAWING_PROJECTION_LIMITS.transferBuffers||projection&&projectionBytes+bytes>DRAWING_PROJECTION_LIMITS.projectionBytes)fail('Drawing role transfer aggregate exceeds its bound.','RESOURCE_LIMIT');
+   packedBytes+=bytes;if(projection)projectionBytes+=bytes;
+  };
+  const readDerived=async(view,frame,parentFrame=null)=>{
+   if(!source)fail('Drawing source is unavailable.','ENGINE_FAILURE');
+   return await mount.execute({op:'solid.drawing.derived.read',version:1,unit:'millimeter',handle:item.handle,sourceHandle:source.handle,producerFeatureId:featureId,definition:def,viewId:view.viewId,frame,parentFrame},{signal:owner.signal});
+  };
+  for(const view of def.views.filter(v=>!['detail','bore-center-section'].includes(v.basis))){
+   const row=frames.get(view.viewId);if(!row?.frame)continue;check();
+   try{
+    let result;
+    const detailFrame=detail?.parentViewId===view.viewId?frames.get(detail.viewId):null;
+    if(detailFrame?.frame&&build.drawingDetailVersion===1){
+     const derived=await readDerived(detail,detailFrame.frame,row.frame);check();
+     if(derived?.op!=='solid.drawing.derived.read'||derived.contractVersion!==1||derived.unit!=='millimeter'||derived.viewId!==detail.viewId||!derived.projection)fail('Malformed analytic detail result.','ENGINE_FAILURE');result=derived.projection;
+     if(derived.status==='available'){
+      charge(derived.geometry,['intervals'],DRAWING_PROJECTION_LIMITS.detailBytes);
+      byView.set(detail.viewId,Object.freeze({viewId:detail.viewId,status:'available',reason:null,metadata:derived.geometry.metadata,intervals:derived.geometry.intervals}));
+     }else byView.set(detail.viewId,unavailable(detail,derived.reason));
+    }else result=await mount.execute({op:'solid.drawing.orthographic.read',version:1,unit:'millimeter',handle:item.handle,frame:row.frame},{signal:owner.signal});
+    check();if(result?.contractVersion!==1||result.op!=='solid.drawing.orthographic.read'||result.unit!=='millimeter')fail('Malformed drawing projection.','ENGINE_FAILURE');
+    charge(result,['values','tags'],DRAWING_PROJECTION_LIMITS.perViewPackedBytes,true);
+    byView.set(view.viewId,Object.freeze({viewId:view.viewId,status:'available',reason:null,metadata:result.metadata,values:result.values,tags:result.tags}));
+   }catch(error){if(!['ORTHOGRAPHIC_INVALID_REQUEST','ORTHOGRAPHIC_INVALID_FRAME','ORTHOGRAPHIC_INVALID_INPUT','ORTHOGRAPHIC_RESOURCE_LIMIT','ORTHOGRAPHIC_CURVE_UNSUPPORTED','ORTHOGRAPHIC_NUMERIC_RANGE','ORTHOGRAPHIC_FAILED'].includes(error?.code))throw error;check();byView.set(view.viewId,unavailable(view,error.code));if(detail?.parentViewId===view.viewId)byView.set(detail.viewId,unavailable(detail,error.code));}
+  }
+  for(const view of def.views.filter(v=>['detail','bore-center-section'].includes(v.basis))){
+   if(byView.has(view.viewId))continue;const row=frames.get(view.viewId);check();
+   if(!row?.frame){byView.set(view.viewId,unavailable(view,row?.reason||observation.reason||'DRAWING_REFERENCE_UNRESOLVED'));continue;}
+   if(view.basis==='detail'||build.drawingSectionVersion!==1){byView.set(view.viewId,unavailable(view,'ENGINE_CAPABILITY_UNAVAILABLE'));continue;}
+   try{
+    const result=await readDerived(view,row.frame);check();
+    if(result?.contractVersion!==1||result.op!=='solid.drawing.derived.read'||result.unit!=='millimeter'||result.viewId!==view.viewId||result.status!=='available'||result.projection!==null)fail('Malformed cap-set section result.','ENGINE_FAILURE');
+    charge(result.geometry,['values','tags'],DRAWING_PROJECTION_LIMITS.sectionBytes);
+    byView.set(view.viewId,Object.freeze({viewId:view.viewId,status:'available',reason:null,metadata:result.geometry.metadata,values:result.geometry.values,tags:result.geometry.tags}));
+   }catch(error){if(!['DRAWING_SECTION_UNQUALIFIED','RESOURCE_LIMIT','ENGINE_CAPABILITY_UNAVAILABLE'].includes(error?.code))throw error;check();byView.set(view.viewId,unavailable(view,error.code));}
+  }
+  if(observation.viewFrames.length)for(const view of def.views){const result=byView.get(view.viewId);if(!result)fail('Drawing view role was not resolved.','ENGINE_FAILURE');views.push(result);}
   check();return Object.freeze({observation,views:Object.freeze(views),status:observation.status==='available'&&views.length===def.views.length&&views.every(v=>v.status==='available')?'available':'unresolved'});
  }catch(operationError){if(owner.state==='candidate')try{owner.close();}catch(cause){throw Object.assign(Error('Drawing observation cleanup failed'),{code:'ENGINE_CLEANUP_FAILED',cause,operationError});}throw operationError;}
 }

@@ -33,11 +33,13 @@ export async function workerLinkedDrawingSvg({craft,definition,revision,geometry
   if(url.origin!==location.origin||url.search||url.hash)throw Error('Invalid drawing encoder location.');
   const transfers:ArrayBuffer[]=[];let transferredBytes=0;
   for(const view of read.views)if(view.status==='available') {
-    attachedBuffer(view.values,786432);attachedBuffer(view.tags,32768);
-    if(transfers.includes(view.values)||transfers.includes(view.tags)||view.values===view.tags)throw Error('Invalid drawing view buffers.');
-    transferredBytes+=bufferBytes(view.values)+bufferBytes(view.tags);
-    if(transferredBytes>DRAWING_PROJECTION_LIMITS.packedBytes||transfers.length+2>DRAWING_PROJECTION_LIMITS.transferBuffers)throw Object.assign(Error('Drawing projection transfer aggregate exceeds its bound.'),{code:'RESOURCE_LIMIT'});
-    transfers.push(view.values,view.tags);
+    const authored=d.views.find(v=>v.viewId===view.viewId);if(!authored)throw Error('Unknown drawing view.');
+    const role=authored.basis,keys=role==='detail'?['intervals']:['values','tags'];
+    if(role==='detail')attachedBuffer(view.intervals,DRAWING_PROJECTION_LIMITS.detailBytes);
+    else if(role==='bore-center-section'){attachedBuffer(view.values,49152);attachedBuffer(view.tags,2048);}
+    else{attachedBuffer(view.values,786432);attachedBuffer(view.tags,32768);}
+    for(const key of keys){const buffer=view[key];if(transfers.includes(buffer))throw Error('Drawing role buffers alias.');transferredBytes+=bufferBytes(buffer);transfers.push(buffer);}
+    if(transferredBytes>DRAWING_PROJECTION_LIMITS.packedBytes||transfers.length>DRAWING_PROJECTION_LIMITS.transferBuffers)throw Object.assign(Error('Drawing role transfer aggregate exceeds its bound.'),{code:'RESOURCE_LIMIT'});
   }
   check();
   return await new Promise((resolve,reject)=>{

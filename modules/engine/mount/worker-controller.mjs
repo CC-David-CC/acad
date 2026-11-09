@@ -1,3 +1,6 @@
+import {captureDrawingDerivedRequest,DRAWING_DERIVED_REFUSALS} from './ownedDrawingDerivedProtocol.mjs';
+import {captureDrawingSectionTransfer} from './ownedDrawingSectionProtocol.mjs';
+import {captureDrawingDetailTransfer} from './drawingDetailClip.mjs';
 import {captureBoreReadRequest,captureBoreReadResult} from './ownedBoreReadProtocol.mjs';
 import {SHELL_JS_SHA,SHELL_WASM_SHA,SHELL_OPERATION,SHELL_REFUSALS,BOX_CONSTRUCTION_REFUSALS,captureShellRequest,captureShellBinding,captureShellBoxRequest} from './ownedShellProtocol.mjs';
 import {SWEEP_NATIVE_REFUSALS,SWEEP_PREPARATION_REFUSALS} from '../solid/ownedSweepIntent.mjs';
@@ -38,6 +41,8 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
   if(typeof blindHoles!=='boolean'||blindHoles&&(!primaryManufacturingRuntime||!manufacturingMesh||!planarAttachments||selectedProfileVersion!==3||!booleanHistory||typeof captureOwnedBlindHoleIntent!=='function'||!Array.isArray(BLIND_HOLE_CODES)||BLIND_HOLE_CODES.length>32))throw err('INVALID_MOUNT','Blind holes require the exact entry-bound manufacturing cohort');
   const drawingReferences=config.drawingReferences===true;
   if(config.drawingReferences!==undefined&&typeof config.drawingReferences!=='boolean'||drawingReferences&&(!orthographicRead||!throughHoles||!booleanHistory))throw err('INVALID_MOUNT','Drawing references require the explicit owned orthographic/hole runtime');
+  const drawingDetails=config.drawingDetails===true,drawingSections=config.drawingSections===true;
+  if(config.drawingDetails!==undefined&&typeof config.drawingDetails!=='boolean'||config.drawingSections!==undefined&&typeof config.drawingSections!=='boolean'||drawingDetails&&!drawingReferences||drawingSections&&(!drawingDetails||!shell||JS_SHA!==SHELL_JS_SHA||WASM_SHA!==SHELL_WASM_SHA))throw err('INVALID_MOUNT','Derived drawing roles require their exact reviewed owned source graph');
   if(typeof manufacturingMesh!=='boolean'||manufacturingMesh&&(!manufacturingRuntime||!orthographicRead||!stepExport||!adaptiveMetrology||!loft||![captureManufacturingMeshRequest,captureManufacturingMeshResult].every(fn=>typeof fn==='function')||!Array.isArray(manufacturingNativeCodes)||!Array.isArray(manufacturingRefusalCodes)))throw err('INVALID_MOUNT','Manufacturing mesh requires its exact owned cohort and captures');
   const orthographicRuntime=manufacturingMesh&&manufacturingRuntime||JS_SHA==='2f2e9f92b2b57024b372143c3f2f4aa3dc4999bad7f6636c36f0b0f599f04cb7'&&WASM_SHA==='26d94303a8561b0922acae5b921f486e857083d8febaa9638d1ebd0eff590018';
   if(typeof orthographicRead!=='boolean'||orthographicRead&&(!orthographicRuntime||!stepExport||!adaptiveMetrology||!loft||![captureOrthographicReadRequest,captureOrthographicReadResult,orthographicFrameValues].every(fn=>typeof fn==='function')||!Array.isArray(orthographicNativeCodes)||!Array.isArray(orthographicRefusalCodes)))throw err('INVALID_MOUNT','Orthographic read requires its exact owned cohort and captures');
@@ -76,6 +81,7 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
       ...(planarAttachments?[Object.freeze({id:'solid.face.frame.read',version:1,input:'owned-source-bound-last-cap-v1',output:'owned-planar-attachment-v1',maxBytes:4096,nativeResultCost:0,qualification:'workflow-unqualified'})]:[]),
       ...(manufacturingMesh?[Object.freeze({id:'solid.manufacturing.mesh.read',version:1,input:'owned-current-single-solid-controls-v1',output:'owned-manufacturing-mesh-buffer-v1',maxBytes:8388608,maxChunkBytes:65536,maxVertices:150000,maxTriangles:100000,linearDeflectionMm:0.01,angularDeflectionRadians:0.1,relative:false,nativeResultCost:0,scope:'response-local',qualification:'native-component'})]:[]),
       ...(orthographicRead?[Object.freeze({id:'solid.drawing.orthographic.read',version:1,input:'owned-orthographic-frame-mm-v1',output:'orthographic-analytic-buffers-v1',maxFragments:8192,maxNativeJsonBytes:4194304,maxChunkBytes:65536,maxTransferBytes:819200,nativeResultCost:0,scope:'response-local',qualification:'component-research'})]:[]),
+      ...(drawingDetails?[Object.freeze({id:'solid.drawing.derived.read',version:1,roles:Object.freeze(['detail',...(drawingSections?['bore-center-section']:[])]),detailNativeResultCost:0,sectionNativeResultCost:drawingSections?2:null,maxViews:6,maxPackedBytes:3426304,scope:'response-local',qualification:'workflow-unqualified'})]:[]),
       ...(drawingReferences?[Object.freeze({id:'solid.drawing.bores.read',version:1,input:'owned-source-datum-bore-query-v1',output:'bounded-bore-facts-v1',maxMembers:16,maxBytes:65536,nativeResultCost:0,scope:'response-local',qualification:'workflow-unqualified'}),Object.freeze({id:'solid.drawing.references.read',version:1,input:'owned-semantic-drawing-definition-v1',output:'bounded-drawing-reference-facts-v1',maxDimensions:16,maxPrimitiveReferences:32,maxAnnotations:16,maxAnnotationReferences:64,maxBytes:65536,nativeResultCost:0,scope:'response-local',qualification:'workflow-unqualified'})]:[]),
       ...(stepExport?[Object.freeze({id:'solid.step.export',version:1,input:'owned-current-solids-v1',output:'step-blob-v1',maxInputs:32,maxBytes:8388608,maxChunkBytes:65536,schema:'AP214IS',structure:'geometric-solid-set',qualification:'native-component'})]:[]),
       Object.freeze({id:'solid.box.create',version:1,input:shell?'oci-authored-box-mm-v1':'oci-box-mm-v1',output:mesh?'manifold-shape-result-v1':'oci-shape-result-v1',qualification:shell?'workflow-unqualified':'scoped-browser-evidence'}),
@@ -157,7 +163,7 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     }
     if(msg.kind==='orthographic-read-begun'){
       const p=pending;
-      if(!orthographicRead||state!=='ready'||!p||p.kind!=='solid-orthographic-read'||msg.seq!==p.seq||p.orthographicBegan||Object.keys(msg).sort().join(',')!=='kind,op,seq'||msg.op!=='solid.drawing.orthographic.read'){shutdown('ENGINE_FAILURE','Unexpected orthographic lease phase');return;}
+      if(!orthographicRead||state!=='ready'||!p||!(p.kind==='solid-orthographic-read'||p.kind==='solid-drawing-derived'&&p.drawingProjection)||msg.seq!==p.seq||p.orthographicBegan||Object.keys(msg).sort().join(',')!=='kind,op,seq'||msg.op!=='solid.drawing.orthographic.read'){shutdown('ENGINE_FAILURE','Unexpected orthographic lease phase');return;}
       let aborted;try{aborted=p.signal?.aborted;}catch(cause){shutdown('ENGINE_FAILURE','Orthographic cancellation state failed',cause);return;}
       if(state!=='ready'||pending!==p)return;
       if(performance.now()>=p.deadline||aborted){shutdown(aborted?'CANCELLED':'TIMEOUT','Orthographic read expired');return;}
@@ -183,9 +189,11 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     pending=null;clearTimeout(p.timer);
     if(!listenerRemoved||cancellationStateFailure)shutdown('ENGINE_FAILURE','Engine cancellation cleanup failed');
     if (performance.now()>=p.deadline || aborted) {p.reject(err('TIMEOUT','Engine request expired'));shutdown('MOUNT_CLOSED','Engine request expired');return;}
-    if (msg.kind==='error') {p.reject(err(blindHoles&&p.kind==='solid-blind-hole'&&msg.code==='ENGINE_CLEANUP_FAILED'?msg.code:manufacturingMesh&&p.kind==='solid-manufacturing-mesh'&&(manufacturingNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:orthographicRead&&p.kind==='solid-orthographic-read'&&(orthographicNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:stepExport&&p.kind==='solid-step-export'&&(stepNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:circularArrangementVersion===1&&p.kind==='selected-profile-extrude'&&(circularNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:msg.code==='MEASUREMENT_PRECISION_UNRESOLVED'?'MEASUREMENT_PRECISION_UNRESOLVED':msg.code==='MESH_VOLUME_NUMERIC_RANGE'?'MESH_VOLUME_NUMERIC_RANGE':loft&&p.kind==='selected-profile-loft'&&msg.code==='LOFT_INPUT_CHANGED'?'LOFT_INPUT_CHANGED':'ENGINE_FAILURE',String(msg.error)));shutdown('MOUNT_CLOSED','Engine job failed');return;}
+    if (msg.kind==='error') {p.reject(err(drawingDetails&&p.kind==='solid-drawing-derived'&&msg.code==='ENGINE_CLEANUP_FAILED'?'ENGINE_CLEANUP_FAILED':blindHoles&&p.kind==='solid-blind-hole'&&msg.code==='ENGINE_CLEANUP_FAILED'?msg.code:manufacturingMesh&&p.kind==='solid-manufacturing-mesh'&&(manufacturingNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:orthographicRead&&p.kind==='solid-orthographic-read'&&(orthographicNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:stepExport&&p.kind==='solid-step-export'&&(stepNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:circularArrangementVersion===1&&p.kind==='selected-profile-extrude'&&(circularNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:msg.code==='MEASUREMENT_PRECISION_UNRESOLVED'?'MEASUREMENT_PRECISION_UNRESOLVED':msg.code==='MESH_VOLUME_NUMERIC_RANGE'?'MESH_VOLUME_NUMERIC_RANGE':loft&&p.kind==='selected-profile-loft'&&msg.code==='LOFT_INPUT_CHANGED'?'LOFT_INPUT_CHANGED':'ENGINE_FAILURE',String(msg.error)));shutdown('MOUNT_CLOSED','Engine job failed');return;}
     if (msg.kind==='refused') {
       const allowed=['INVALID_REQUEST','UNSUPPORTED_ENGINE','INVALID_FRAME','UNSUPPORTED_FRAME','STALE_SKETCH','INVALID_SKETCH','UNSUPPORTED_SKETCH','UNSUPPORTED_CONSTRAINT','STALE_FRAME','UNSUPPORTED_PROFILE','OPEN_OR_AMBIGUOUS_PROFILE','INVALID_PROFILE','STALE_REGION',...(selectedProfileVersion===3?['PROFILE_BELOW_RESOLUTION','UNSUPPORTED_REGION_TOPOLOGY','ZERO_LENGTH_EDGE','OVERLAPPING_EDGES','SELF_INTERSECTION','SELF_TOUCHING_BOUNDARY','ZERO_AREA_PROFILE','UNREPRESENTABLE_AREA']:[])];
+      const derivedRefused=drawingDetails&&p.kind==='solid-drawing-derived'&&[...DRAWING_DERIVED_REFUSALS,...orthographicRefusalCodes].includes(msg.code);
+      if(derivedRefused&&(Object.keys(msg).sort().join(',')!=='code,error,kind,seq'||typeof msg.error!=='string'||msg.error.length>512)){p.reject(err('ENGINE_FAILURE','Malformed derived drawing refusal'));shutdown('MOUNT_CLOSED','Malformed derived drawing refusal');return;}
       const circularRefused=circularArrangementVersion===1&&p.kind==='selected-profile-extrude'&&circularNativeCodes.includes(msg.code)&&!['CIRCULAR_INPUT_CHANGED','CIRCULAR_PUBLICATION_FAILED','MEASUREMENT_PRECISION_UNRESOLVED'].includes(msg.code);
       if(circularRefused&&(Object.keys(msg).sort().join(',')!=='code,error,kind,seq'||typeof msg.error!=='string'||msg.error.length>512)){p.reject(err('ENGINE_FAILURE','Malformed circular refusal'));shutdown('MOUNT_CLOSED','Malformed circular refusal');return;}
       let loftRefused=false;
@@ -214,9 +222,9 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
       const patternRefused=linearHolePatterns&&p.kind==='solid-linear-hole-pattern'&&['INVALID_REQUEST','UNSUPPORTED_IDENTITY_OPERATION','UNSUPPORTED_SEED','UNSUPPORTED_TARGET_PATH','STALE_SOURCE','PATTERN_OVERLAP','PATTERN_OUTSIDE_PROFILE','PATTERN_DOMAIN','UNSUPPORTED_PROFILE','HOLE_OUTSIDE_PROFILE','HOLES_OVERLAP','UNSUPPORTED_TARGET','TOOL_DOMAIN','SELECTION_UNAVAILABLE','INVALID_SELECTION_BINDING','SELECTION_RESOURCE_LIMIT','RESOURCE_LIMIT','BOOLEAN_INVALID_REQUEST','BOOLEAN_INVALID_INPUT','BOOLEAN_NON_SOLID_INPUT','BOOLEAN_NON_SOLID_RESULT','BOOLEAN_FAILED','BOOLEAN_INVALID_RESULT','BOOLEAN_RESOURCE_LIMIT','BOOLEAN_COPY_FAILED'].includes(msg.code);
       const blindRefused=blindHoles&&p.kind==='solid-blind-hole'&&[...BLIND_HOLE_CODES,'BOOLEAN_INVALID_REQUEST','BOOLEAN_INVALID_INPUT','BOOLEAN_NON_SOLID_INPUT','BOOLEAN_NON_SOLID_RESULT','BOOLEAN_FAILED','BOOLEAN_INVALID_RESULT','BOOLEAN_RESOURCE_LIMIT','BOOLEAN_COPY_FAILED'].includes(msg.code);
       const throughRefused=throughHoles&&p.kind==='solid-through-holes'&&['INVALID_REQUEST','STALE_SOURCE','UNSUPPORTED_PROFILE','HOLE_OUTSIDE_PROFILE','HOLES_OVERLAP','UNSUPPORTED_TARGET','TOOL_DOMAIN','SELECTION_UNAVAILABLE','INVALID_SELECTION_BINDING','SELECTION_RESOURCE_LIMIT','RESOURCE_LIMIT','BOOLEAN_INVALID_REQUEST','BOOLEAN_INVALID_INPUT','BOOLEAN_NON_SOLID_INPUT','BOOLEAN_NON_SOLID_RESULT','BOOLEAN_FAILED','BOOLEAN_INVALID_RESULT','BOOLEAN_RESOURCE_LIMIT','BOOLEAN_COPY_FAILED'].includes(msg.code);
-      if (!(profile||selectedProfile) || !(circularRefused||planarRefused||shellRefused||manufacturingRefused||orthographicRefused||stepRefused||loftRefused||sweepRefused||revolveRefused||patternRefused||blindRefused||throughRefused||booleanRefused||edgeRefused||(selectedProfile&&msg.code==='RESOURCE_LIMIT'&&['selected-profile-extrude','box','common','union','subtract'].includes(p.kind))||(p.kind==='selected-profile-extrude'&&selectedProfile&&allowed.includes(msg.code))||(p.kind==='profile-extrude'&&allowed.includes(msg.code))||(p.kind==='research-centered-cut'&&holeAllowed.includes(msg.code))||(p.kind==='research-four-corner-cut'&&cornerAllowed.includes(msg.code)))) {p.reject(err('ENGINE_FAILURE','Invalid profile refusal'));shutdown('MOUNT_CLOSED','Invalid refusal');return;}
+      if (!(profile||selectedProfile) || !(derivedRefused||circularRefused||planarRefused||shellRefused||manufacturingRefused||orthographicRefused||stepRefused||loftRefused||sweepRefused||revolveRefused||patternRefused||blindRefused||throughRefused||booleanRefused||edgeRefused||(selectedProfile&&msg.code==='RESOURCE_LIMIT'&&['selected-profile-extrude','box','common','union','subtract'].includes(p.kind))||(p.kind==='selected-profile-extrude'&&selectedProfile&&allowed.includes(msg.code))||(p.kind==='profile-extrude'&&allowed.includes(msg.code))||(p.kind==='research-centered-cut'&&holeAllowed.includes(msg.code))||(p.kind==='research-four-corner-cut'&&cornerAllowed.includes(msg.code)))) {p.reject(err('ENGINE_FAILURE','Invalid profile refusal'));shutdown('MOUNT_CLOSED','Invalid refusal');return;}
       if(planarRefused){p.reject(Object.assign(err(msg.code,msg.error),{attachmentReason:msg.reason}));return;}
-      p.reject(err(msg.code,circularRefused||planarRefused||shellRefused||manufacturingRefused||orthographicRefused||stepRefused||loftRefused||sweepRefused||revolveRefused||patternRefused||blindRefused||throughRefused||edgeRefused||booleanRefused?String(msg.error||'Edge treatment was refused').slice(0,512):p.kind==='selected-profile-extrude'||selectedProfile&&msg.code==='RESOURCE_LIMIT'?String(msg.error||'Selected-profile request was refused').slice(0,512):'Profile request was refused'));return;
+      p.reject(err(msg.code,derivedRefused||circularRefused||planarRefused||shellRefused||manufacturingRefused||orthographicRefused||stepRefused||loftRefused||sweepRefused||revolveRefused||patternRefused||blindRefused||throughRefused||edgeRefused||booleanRefused?String(msg.error||'Edge treatment was refused').slice(0,512):p.kind==='selected-profile-extrude'||selectedProfile&&msg.code==='RESOURCE_LIMIT'?String(msg.error||'Selected-profile request was refused').slice(0,512):'Profile request was refused'));return;
     }
     if (msg.kind==='unsupported') {
       if (mesh || p.expected!=='result' || msg.code!=='EMPTY_OR_NON_SOLID_UNSUPPORTED') {p.reject(err('ENGINE_FAILURE','Invalid refusal'));shutdown('MOUNT_CLOSED','Invalid refusal');return;}
@@ -227,6 +235,7 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     if(!listenerRemoved||cancellationStateFailure){p.reject(err('ENGINE_FAILURE','Engine cancellation cleanup failed',(cancellationStateFailure||cleanupFailure).cause));return;}
     if(p.kind==='solid-manufacturing-mesh'&&!p.manufacturingBegan){p.reject(err('ENGINE_FAILURE','Missing manufacturing lease phase'));shutdown('MOUNT_CLOSED','Missing manufacturing lease phase');return;}
     if(p.kind==='solid-orthographic-read'&&!p.orthographicBegan){p.reject(err('ENGINE_FAILURE','Missing orthographic lease phase'));shutdown('MOUNT_CLOSED','Missing orthographic lease phase');return;}
+    if(p.kind==='solid-drawing-derived'&&p.drawingProjection&&!p.orthographicBegan){p.reject(err('ENGINE_FAILURE','Missing detail parent projection lease phase'));shutdown('MOUNT_CLOSED','Missing detail parent projection lease phase');return;}
     if(p.kind==='solid-step-export'&&!p.stepBegan){p.reject(err('ENGINE_FAILURE','Missing STEP lease phase'));shutdown('MOUNT_CLOSED','Missing STEP lease phase');return;}
     if(p.kind==='selected-profile-loft'){
       if(!p.loftBinding){p.reject(err('ENGINE_FAILURE','Missing loft preparation binding'));shutdown('MOUNT_CLOSED','Missing loft preparation');return;}
@@ -257,7 +266,7 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
       const s=++seq, deadline=performance.now()+timeoutMs;
       const abort=()=>shutdown('CANCELLED','Engine request cancelled');
       const timer=setTimeout(()=>shutdown('TIMEOUT','Engine request timed out'),timeoutMs);
-      pending={seq:s,resolve,reject,signal,abort,timer,deadline,expected,kind:message.kind,loftExpected};
+      pending={seq:s,resolve,reject,signal,abort,timer,deadline,expected,kind:message.kind,loftExpected,drawingProjection:message.kind==='solid-drawing-derived'&&message.parentFrame!==null};
       const p=pending;
       try {
         signal?.addEventListener('abort',abort,{once:true});
@@ -454,6 +463,33 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     let observation;try{if(Reflect.ownKeys(response).sort().join(',')!=='kind,observation,producerFeatureId,seq,token'||response.token!==target.token||response.producerFeatureId!==captured.producerFeatureId)throw Error('Drawing result binding differs');observation=captureDrawingReadResult(response.observation,captured.definition);}catch(cause){shutdown('ENGINE_FAILURE','Malformed drawing observation',cause);throw err('ENGINE_FAILURE','Malformed drawing observation',cause);}
     assertSolidBinding(captured.handle);assertSolidBinding(captured.sourceHandle);if(solidRecords.get(captured.handle.id)!==target||solidRecords.get(captured.sourceHandle.id)!==source)throw err('INVALID_BINDING','Drawing input changed');
     return{contractVersion:1,op:'solid.drawing.references.read',unit:'millimeter',observation};
+  }
+
+  async function readDrawingDerived(request,options={}){
+    if(!drawingDetails)throw err('UNSUPPORTED_OPERATION','Derived drawing observations are unavailable');
+    validOptions(options);const r=captureDrawingDerivedRequest(request),view=r.definition.views.find(v=>v.viewId===r.viewId);
+    if(view.basis==='bore-center-section'&&!drawingSections)throw err('ENGINE_CAPABILITY_UNAVAILABLE','This exact build does not bind section caps');
+    assertSolidBinding(r.handle);assertSolidBinding(r.sourceHandle);const target=solidRecords.get(r.handle.id),source=solidRecords.get(r.sourceHandle.id),facts=JSON.parse(target.evidence);
+    if(facts.nativeValidity?.valid!==true||facts.resultKind!=='single-solid'||facts.solidCount!==1||!(facts.nativeVolume>0))throw err('UNSUPPORTED_TARGET','Derived drawing reads require a current valid native single solid');
+    const response=await send({kind:'solid-drawing-derived',token:target.token,sourceToken:source.token,producerFeatureId:r.producerFeatureId,definition:r.definition,viewId:r.viewId,frame:r.frame,parentFrame:r.parentFrame},'result',options.signal);
+    let geometry=null,projection=null;
+    try{
+      const keys=['kind','seq','token','producerFeatureId','viewId','projection','geometry','status','reason'];
+      if(Reflect.ownKeys(response).length!==keys.length||keys.some(k=>!Object.hasOwn(response,k))||response.token!==target.token||response.producerFeatureId!==r.producerFeatureId||response.viewId!==r.viewId||!['available','unavailable'].includes(response.status)||response.status==='available'&&response.reason!==null||response.status==='unavailable'&&(!['DRAWING_DETAIL_UNQUALIFIED','RESOURCE_LIMIT'].includes(response.reason)||response.geometry!==null))throw Error('Derived drawing binding differs');
+      const frame=[...r.frame.origin,...r.frame.u,...r.frame.v,...r.frame.n];
+      if(view.basis==='detail'){
+        if(!response.projection)throw Error('A detail has no actual parent projection');
+        const pf=[...r.parentFrame.origin,...r.parentFrame.u,...r.parentFrame.v,...r.parentFrame.n];
+        projection=captureOrthographicReadResult({kind:'orthographic-read-result',seq:response.seq,...response.projection},pf);
+        if(response.status==='available')geometry=captureDrawingDetailTransfer(response.geometry,view,r.frame,projection);
+        if(geometry&&(geometry.intervals===projection.values||geometry.intervals===projection.tags))throw Error('Detail aliases a parent buffer');
+      }else{
+        if(response.projection!==null||response.status!=='available')throw Error('Invalid section result role');
+        geometry=captureDrawingSectionTransfer(response.geometry,frame);
+      }
+    }catch(cause){shutdown('ENGINE_FAILURE','Malformed derived drawing observation',cause);throw err('ENGINE_FAILURE','Malformed derived drawing observation',cause);}
+    assertSolidBinding(r.handle);assertSolidBinding(r.sourceHandle);if(solidRecords.get(r.handle.id)!==target||solidRecords.get(r.sourceHandle.id)!==source)throw err('INVALID_BINDING','Derived drawing input changed');
+    return Object.freeze({contractVersion:1,op:r.op,unit:'millimeter',viewId:r.viewId,status:response.status,reason:response.reason,projection,geometry});
   }
 
   async function readDrawingBores(request,options={}){
@@ -844,6 +880,7 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     if (op==='solid.drawing.orthographic.read') return readOrthographic(request,options);
     if (op==='solid.face.frame.read') return readPlanarAttachment(request,options);
     if (op==='solid.drawing.bores.read') return readDrawingBores(request,options);
+    if (op==='solid.drawing.derived.read') return readDrawingDerived(request,options);
     if (op==='solid.drawing.references.read') return readDrawingReferences(request,options);
     if (op==='solid.step.export') return exportSTEP(request,options);
     if (op==='solid.mesh.read') return readSolidMesh(request,options);
@@ -872,5 +909,5 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     return Promise.reject(err('UNSUPPORTED_OPERATION','Operation is not bound by this mount'));
   }
   function close(){clearTimeout(initTimer);shutdown('MOUNT_CLOSED','Engine mount closed');if(cleanupFailure)throw cleanupFailure.cause;}
-  return Object.freeze({descriptor,ready,execute,box,boolean,dispose,treatSolidEdges,shellSolid,blindSolidHole,throughSolidHoles,readSolidMesh,exportSTEP,readOrthographic,readDrawingReferences,readDrawingBores,readManufacturingMesh,readSolidTopology,classifySolidPoint,readPrismSelections,readSolidSelections,assertSolidBinding,createEnclosure,readEnclosureMesh,readEnclosureManufacturingMesh,readEnclosureInterface,assertEnclosureBinding,centeredThroughHole,fourCornerThroughHoles,assertPortableBinding,assertCenteredHoleBinding,assertFourCornerBinding,close});
+  return Object.freeze({descriptor,ready,execute,box,boolean,dispose,treatSolidEdges,shellSolid,blindSolidHole,throughSolidHoles,readSolidMesh,exportSTEP,readOrthographic,readDrawingDerived,readDrawingReferences,readDrawingBores,readManufacturingMesh,readSolidTopology,classifySolidPoint,readPrismSelections,readSolidSelections,assertSolidBinding,createEnclosure,readEnclosureMesh,readEnclosureManufacturingMesh,readEnclosureInterface,assertEnclosureBinding,centeredThroughHole,fourCornerThroughHoles,assertPortableBinding,assertCenteredHoleBinding,assertFourCornerBinding,close});
 }
