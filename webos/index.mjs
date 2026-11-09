@@ -11,6 +11,7 @@ import {registerSketchCommands} from './sketch-commands.mjs';
 import {registerClosedSketchCommands} from './closed-sketch-commands.mjs';
 import {registerLengthMeasurementCommands} from './length-measurement-commands.mjs';
 import {registerRadiusCommands} from './radius-commands.mjs';
+import {registerEqualRadiusCommands} from './equal-radius-commands.mjs';
 import {registerPointLineDistanceCommands} from './point-line-distance-commands.mjs';
 import {registerCoincidenceCommands} from './coincidence-commands.mjs';
 import {registerFixedEntityCommands} from './fixed-entity-commands.mjs';
@@ -214,6 +215,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerReferenceCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLengthMeasurementCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerRadiusCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerEqualRadiusCommands(host,()=>rectangle.target()));
   if(host.commands)host.onDispose(registerPointLineDistanceCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerCoincidenceCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerFixedEntityCommands(host,()=>rectangle.target()));
