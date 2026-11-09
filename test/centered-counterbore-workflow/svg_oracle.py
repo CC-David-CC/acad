@@ -5,11 +5,53 @@ from xml.etree import ElementTree as ET
 def require(value,message):
  if not value:raise ValueError(message)
 def near(a,b,t=1e-6):require(math.isfinite(a) and abs(a-b)<=t,f'{a} != {b}')
+def visible_scaffold(raw,definition,e):
+ # The actual v1 exporter emits a closed, untransformed visible sheet. This
+ # reader does not implement general SVG/CSS, so no effect-bearing vocabulary
+ # may be ignored while checking raw path coordinates.
+ require(isinstance(raw,bytes) and 0<len(raw)<=16*1024*1024,'same actual SVG byte cap')
+ text=raw.decode('utf-8');require('<!' not in text and '<?' not in text,'no DTD/entity declarations/processing instructions/comments outside the fixed exporter form')
+ root=ET.fromstring(text);namespace='{http://www.w3.org/2000/svg}';tag=lambda name:namespace+name
+ blank=lambda value:value is None or not value.strip()
+ require(root.tag==tag('svg') and root.attrib=={'width':'420mm','height':'297mm','viewBox':'0 0 420 297'} and blank(root.text) and blank(root.tail),'exact physical root with no transforms/style/visibility/effect attributes')
+ children=list(root);names=[n.tag for n in children];without=['title','metadata','rect','g','g'];with_defs=['title','metadata','defs','rect','g','g']
+ require(names in ([tag(n) for n in without],[tag(n) for n in with_defs]),'exact closed title/metadata/optional-empty-defs/background/path/text scaffold')
+ require(all(blank(n.tail) for n in children),'no extra root character content')
+ title,metadata=children[:2];require(not title.attrib and not list(title) and (title.text or '')==definition['title'],'exact escaped title, no nested/external content')
+ require(not metadata.attrib and not list(metadata) and isinstance(metadata.text,str),'plain metadata only')
+ if len(children)==6:
+  defs=children[2];require(not defs.attrib and not list(defs) and blank(defs.text),'only bare EMPTY defs, no patterns/clips/masks/styles/links')
+ background,geometry,labels=children[-3:]
+ require(background.attrib=={'width':'100%','height':'100%','fill':'white'} and not list(background) and blank(background.text),'exact white sheet background')
+ require(geometry.attrib=={'fill':'none','stroke':'#111','stroke-width':'.25'} and blank(geometry.text),'exact visible untransformed geometry style')
+ paths=list(geometry)
+ for node in paths:
+  require(node.tag==tag('path') and not list(node) and blank(node.text) and blank(node.tail),'plain path leaves in actual geometry group only')
+  a=node.attrib;keys=set(a)
+  require('d' in a and isinstance(a['d'],str) and bool(a['d']),'actual finite path data')
+  allowed=(keys=={'d'} or keys=={'d','stroke','stroke-dasharray'} and (a['stroke'],a['stroke-dasharray']) in (('#777','2 1'),('#789','1 1')) or keys=={'d','stroke'} and a['stroke']=='#246')
+  require(allowed,'only exact solid/hidden/dimension/leader path styles; no local transforms, opacity, events or external effects')
+ require(labels.attrib=={'font-family':'sans-serif','font-size':'3'} and blank(labels.text),'exact visible untransformed text style')
+ expected=[((8,8),definition['title'] or definition['drawingId'],None)]
+ expected += [((v['paperOrigin'][0],v['paperOrigin'][1]+5),v['basis'],None) for v in definition['views']]
+ for d in definition['dimensions']:
+  if d['kind']=='plane-distance':name,value='ΔZ ',e['thickness']
+  elif d['kind']=='source-distance' and d['axis']=='datum-x':name,value='ΔX ',e['width']
+  else:require(d['kind']=='source-distance' and d['axis']=='datum-y','same finite source/cap dimension family');name,value='ΔY ',e['height']
+  expected.append((tuple(d['label']),name+f'{value:.3f} mm','#124'))
+ expected.append(((8,292),'Reference drawing · available · scale 1:1',None))
+ texts=list(labels);require(len(texts)==len(expected),'exact title/view/dimension/footer text roster, no hidden/extra text')
+ for node,(position,value,fill) in zip(texts,expected):
+  require(node.tag==tag('text') and not list(node) and blank(node.tail) and (node.text or '')==value,'exact plain actual visible text and order')
+  require(set(node.attrib)==({'x','y'} if fill is None else {'x','y','fill'}) and (fill is None or node.attrib['fill']==fill),'only exact text placement/fill; no style, transforms, opacity, events, tspan or external content')
+  xy=tuple(float(node.attrib[k]) for k in ('x','y'));require(all(math.isfinite(n) for n in xy) and xy==tuple(position) and 0<=xy[0]<=420 and 0<=xy[1]<=297,'exact authored/current derived text position on sheet')
+ return root,paths,texts
+
 def inspect_counterbore_svg(raw,e,definition,context):
- ns={'s':'http://www.w3.org/2000/svg'};root=ET.fromstring(raw);require(root.attrib.get('width')=='420mm' and root.attrib.get('height')=='297mm' and root.attrib.get('viewBox')=='0 0 420 297','physical sheet/viewBox')
- meta=json.loads(root.find('s:metadata',ns).text);require(meta['drawingId']==definition['drawingId'] and meta['status']=='available' and meta['dimensionRole']=='reference','current available reference drawing');require(meta['revision']==context['host']['revision'] and meta['geometryRevision']==context['capture']['solids']['revision']==context['drawing']['geometryRevision'],'actual current document/geometry SVG binding');require(meta['curvePresentationTolerancePaperMm']==.02,'same declared chord budget')
+ ns={'s':'http://www.w3.org/2000/svg'};root,geometry_paths,text_nodes=visible_scaffold(raw,definition,e);require(root.attrib.get('width')=='420mm' and root.attrib.get('height')=='297mm' and root.attrib.get('viewBox')=='0 0 420 297','physical sheet/viewBox')
+ meta=json.loads(root.find('s:metadata',ns).text);require(set(meta)=={'version','drawingId','revision','geometryRevision','quality','status','curvePresentationTolerancePaperMm','dimensionRole'} and meta['version']==1 and meta['quality']=='native-bound-drawing-references','exact actual v1 metadata vocabulary');require(meta['drawingId']==definition['drawingId'] and meta['status']=='available' and meta['dimensionRole']=='reference','current available reference drawing');require(meta['revision']==context['host']['revision'] and meta['geometryRevision']==context['capture']['solids']['revision']==context['drawing']['geometryRevision'],'actual current document/geometry SVG binding');require(meta['curvePresentationTolerancePaperMm']==.02,'same declared chord budget')
  require(definition['version']==1 and [v['basis'] for v in definition['views']]==['top','front','right'] and len(definition['dimensions'])==3,'unchanged three-view/source-dimension definition')
- texts=[''.join(n.itertext()) for n in root.findall('.//s:text',ns)];require(not any('UNRESOLVED' in t or 'THRU' in t for t in texts),'no unresolved or fabricated through annotation')
+ texts=[n.text or '' for n in text_nodes];require(not any('UNRESOLVED' in t or 'THRU' in t for t in texts),'no unresolved or fabricated through annotation')
  for text in [f"ΔX {e['width']:.3f} mm",f"ΔY {e['height']:.3f} mm",f"ΔZ {e['thickness']:.3f} mm"]:require(text in texts,'actual physical source/cap dimension '+text)
  require({d['kind'] for d in definition['dimensions']}=={'source-distance','plane-distance'},'no invented counterbore measurement')
  W,H,T=e['width'],e['height'],e['thickness'];s=T-e['stepDepth'];r,R=e['throughDiameter']/2,e['stepDiameter']/2;scale=definition['sheet']['scale']['numerator']/definition['sheet']['scale']['denominator'];require(scale==1,'frozen1:1 physical paper mapping');chord=.02/scale;inc=1e-6
@@ -23,7 +65,7 @@ def inspect_counterbore_svg(raw,e,definition,context):
    require(chains,'move before line');chains[-1].append(p);i+=3
   require(all(2<=len(ps)<=65537 and all(0<=p[0]<=420 and 0<=p[1]<=297 for p in ps) for ps in chains),'bounded physical paper curve');return chains
  views={v['viewId']:{'view':v,'curves':[]} for v in definition['views']};segments=0;dimension_paths=[];leaders=[]
- for node in root.findall('.//s:path',ns):
+ for node in geometry_paths:
   stroke=node.attrib.get('stroke');chains=path_chains(node.attrib['d'])
   if stroke=='#246':dimension_paths.append(chains);continue
   if stroke=='#789':leaders.append(chains);continue

@@ -53,7 +53,9 @@
     "web/app/cad/projectManager/projectValidationCodes.mjs",
     "build/prepare-manufacturing-mesh-profile-assets.cjs",
     "build/manufacturing-mesh-assets-entry.cjs",
-    "test/native-cad-container/archive_oracle.py"
+    "test/native-cad-container/archive_oracle.py",
+    "web/app/cad/export/linkedPartDrawingSvg.mjs",
+    "modules/engine/mount/ownedDrawingReadProtocol.mjs"
   ],
   "desktop": [
     "apps/system/jsketcher/index.mjs",

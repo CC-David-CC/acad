@@ -57,3 +57,32 @@ write custody forbids a normal context-retired PASS; root reconciles that exact
 context/path before cleanup. These finite counterbore assertions do not qualify
 all C06, arbitrary interchange, placed/multi-solid parents, circular sources,
 countersinks or general professional drawing layout.
+
+## Follow-up to independent repair review d08853eb
+
+The original0813 and reviewd08853eb remain frozen. Its one material finding
+was valid: raw path/text incidence alone did not bind effective visible paper
+placement. An ancestor translate or stroke-opacity override would not change
+the old inputs to the mathematical checks. No such artifact was generated or
+executed here; this was a source-derived checker counterexample.
+
+The separate follow-up adds `visible_scaffold` in svg_oracle.py. It admits only
+the actual v1 exporter XML element order, exact root/group/background styles,
+closed plain path/text leaves, exact allowed path styles, text membership,
+authored/derived text positions and fills. The original geometry parser and
+all finite incidence/coverage/dimension/revision criteria still run against
+those admitted nodes. Unknown attributes/nodes/CSS/effect/visibility/event or
+external-content mechanisms fail instead of silently being ignored. No general
+SVG interpreter or new product sanitization layer is introduced.
+
+Source reference: actual linkedPartDrawingSvg.mjs in C11 sourced321917a
+(plus ownedDrawingReadProtocol's unchanged native-bound quality). It appends
+`<defs>${patterns.join('')}</defs>`; v1 has no section patterns, so bare empty
+defs is valid alongside the prior no-defs form. Contentful/attributed defs is
+explicitly outside this counterbore three-view format. Both producer source
+paths are now explicit Git anchors in the same existing roster.
+
+No parser/fixture/mutation test, browser, build or Native call was run. Root
+must review this source change and compose it before the one complete genuine
+counterbore workflow and first independent artifact oracle. This source repair
+does not claim the counterbore or its actual rendered SVG has qualified yet.

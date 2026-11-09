@@ -132,3 +132,25 @@ update exact ZIP descriptors/root/CRCs. Their actual server-readback bytes are
 independently diffed after the whole. Reversed named diameters swap BOTH names;
 they do not collapse to the distinct equal-diameter case. Full accepted state,
 tokens, journal and false commit flags remain exact after each rejected Open.
+
+## Closed visible SVG source follow-up
+
+Independent review d08853eb found that0813 read raw path coordinates without
+rejecting inherited transforms or visibility overrides. This follow-up requires
+the actual v1 exporter's closed SVG scaffold: exact physical root, title/plain
+metadata, full white background, visible untransformed geometry and text groups,
+and only its exact solid/hidden/dimension/leader path attributes. Every text
+leaf has its exact title/view/physical-value/footer role, position and fill;
+dimension text remains at its authored label. Extra style/CSS, opacity, transforms,
+clip/mask/marker/filter references, event/external content or nested nodes fail
+rather than having effects ignored. DTD/entity declarations/processing instructions and
+comments are outside this finite exporter form.
+
+The prior renderer omits defs; the source-composed C11 renderer
+d321917a08058b2f88c62c28bf8b6ec547200f45 emits a bare empty defs element even
+for v1 three-view sheets. The oracle permits either absence or exactly bare
+empty defs, never attributes, content or effects. The actual renderer and drawing
+read protocol are added to the explicit producer anchors. Existing revision,
+finite path/circle/axial-span/shoulder/chord/coverage and physical leader checks
+are unchanged. No product or thresholds are changed, and neither rendered
+artifacts nor parser/mutation probes were generated/executed in this lane.
