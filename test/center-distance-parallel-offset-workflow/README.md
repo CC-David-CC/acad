@@ -29,3 +29,11 @@ python3 test/center-distance-parallel-offset-workflow/check.py /absolute/NEW-who
 This imports only the retained standalone ZIP32/CRC/hash reader, not product codec/solver/validator modules. It checks every original stored and cold-inspected constraint, actual Circle-center ownership and exact raw names/literal side, both support endpoints and actual Parallel branch, source/ID/frame/order/other-source invariants, current archive bytes and all source members, refusal/no-op and travel custody. It does not infer a global DOF/solvability result or promote unobserved human gestures. Current stale dimension admission reports inherited `AbortError` with no string machine code; that limitation is disclosed rather than inventing one.
 
 The driver pins/source-snapshots its recipe, contract, oracle, harness and itself before/after. Normal Save is awaited; browser/server byte equality uses only its own created files/account. Fresh Open uses the existing signed public host path, reacquires discovery and verifies exact source/formulas/history/counters/presentation with a fresh session journal. Failures stay retained. No automatic retries of Save, forced close during an unsettled write, shared browser close, deployment, account/race/security probes or UI redesign.
+
+Root pre-execution custody review: a submitted Save or pending server-byte
+confirmation keeps its owned context open if settlement is unknown. The driver
+marks unknownWriteSettlement/FAIL and disconnects its observation connection
+without retiring that context; root reconciles it before cleanup or retry. The
+guard clears only after actual browser/server equality and content SHA proof.
+This is source-defined failure custody, not executed crash/race evidence; no
+physical/geometry/source/travel/refusal or normal cleanup criterion changed.
