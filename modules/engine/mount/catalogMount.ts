@@ -175,3 +175,7 @@ export function listAvailableSelectedProfileBuilds(){
  return Object.freeze([...out,...listAvailableLoftBuilds()]);
 }
 export function requireAvailableSelectedProfileBuild(engine:string,revision:string){const spec=requireSelectedProfileBuild(engine,revision);if(!listAvailableSelectedProfileBuilds().includes(spec))throw Object.assign(Error('The selected profile runtime is not available in this app.'),{code:'ENGINE_BUILD_UNAVAILABLE'});return spec;}
+
+
+export function requireAvailableProfileExtentBuild(engine:string,revision:string){const spec=requireCadEngineBuild(engine,revision);if(spec!==OCC_MANUFACTURING_MESH_BUILD||spec.profileExtentsVersion!==1)throw Object.assign(Error('Select the explicit source-owned extent build.'),{code:'UNSUPPORTED_PROFILE_EXTENT_BUILD'});return requireAvailableManufacturingMeshBuild(engine,revision);}
+export function listAvailableProfileExtentBuilds(){if(OCC_MANUFACTURING_MESH_BUILD.profileExtentsVersion!==1||!manufacturingAssets)return Object.freeze([]);return Object.freeze([requireAvailableProfileExtentBuild('occ',OCC_MANUFACTURING_MESH_BUILD.revision)]);}

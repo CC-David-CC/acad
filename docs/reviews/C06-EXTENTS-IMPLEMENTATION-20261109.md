@@ -50,6 +50,12 @@ Before monotone feature allocation, creation needs a genuine geometric preflight
 
 Root counterbore/countersink work is a separate future interval domain: its exact old positive-profile parent refusal must remain. Final root resource composition must retain the three newer counter roots in addition to blind5/derived4/extent5; this24ad-based branch never replaces their unavailable source or silently advertises extent counter support.
 
+## Public-service source and explicit availability foundation
+
+`profileExtentCommands.ts` now defines the five planned shared methods, still not registered/exposed. It uses the installed build policy, actual source/frame/definitions, paired sketch+semantic discovery, and paired no-provisional-ID geometry preflight before a real allocator reservation. Current source/build/service/stream checks surround suspension and facade callbacks. Feature reservation cleanup retains the original captured allocator and method, so document replacement cannot redirect release. Native AbortSignal/EventTarget intrinsics, complete owned cleanup attempts, exact falsey operation records and known committed receipt custody are explicit. Read/create preflight work uses the existing bounds, two-outstanding inspection fence and30s Worker policy.
+
+Known identity, strict capability descriptor and optional installed availability helpers now exist. Only the exact primary MFG cohort can declare the new capability; unexpected new descriptors on other cohorts refuse. The actual factory/catalog **flag is still OFF**, and the operation/service are still unregistered. Authored vocabulary membership and budget capture do not enable them: cost1 requires the actual declared extent build. The new transaction/state review documents live authority vs derived observations and the remaining full workflow requirements.
+
 ## Integration still required before exposure
 
 | Seam | Required closure; no completion claim yet |

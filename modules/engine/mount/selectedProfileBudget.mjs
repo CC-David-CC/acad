@@ -1,3 +1,4 @@
+import {captureOwnedProfileExtentFeature} from '../solid/ownedProfileExtentFeature.mjs';
 import {captureSourceFrameParameters} from '../source/sourceFrameIntent.mjs';
 import {featureSuppressed} from '../solid/authoredHistoryState.mjs';
 import {AUTHORED_SOLID_KINDS} from '../solid/authoredSolidKinds.mjs';
@@ -30,6 +31,7 @@ export function selectedProfileHistoryBudget(history,engineRevision){
     // not additional persistent result names or another authored model.
     cost=1;
    }
+   if(type.value==='WORKER_SELECTED_PROFILE_EXTENT_EXTRUDE_V1'){const feature=captureOwnedProfileExtentFeature(params),build=requireCadEngineBuild(feature.engine,feature.engineRevision);if(build.profileExtentsVersion!==1)fail('UNSUPPORTED_PROFILE_EXTENT_BUILD','The saved extent feature requires its exact capable build.');cost=1;}
    if(type.value==='WORKER_CENTERED_BLIND_HOLE_V1'){const build=requireCadEngineBuild(engine.value,revision.value);if(build.blindHoleVersion!==1)fail('UNSUPPORTED_BLIND_HOLE_BUILD','The saved blind hole requires its exact capable build.');cost=2;}
    if(type.value==='WORKER_THROUGH_HOLES_V1'){
     const kind=Object.getOwnPropertyDescriptor(params,'kind');
