@@ -1,0 +1,8 @@
+Preparing worktree (detached HEAD 796c90513)
+Updating files:  83% (6464/7786)Updating files:  84% (6541/7786)Updating files:  85% (6619/7786)Updating files:  86% (6696/7786)Updating files:  87% (6774/7786)Updating files:  88% (6852/7786)Updating files:  89% (6930/7786)Updating files:  90% (7008/7786)Updating files:  91% (7086/7786)Updating files:  92% (7164/7786)Updating files:  93% (7241/7786)Updating files:  94% (7319/7786)Updating files:  95% (7397/7786)Updating files:  96% (7475/7786)Updating files:  97% (7553/7786)Updating files:  98% (7631/7786)Updating files:  99% (7709/7786)Updating files: 100% (7786/7786)Updating files: 100% (7786/7786), done.
+HEAD is now at 796c90513 Place initial linked requirement height label conventionally left of projection
+{"assets": 587, "assetBytes": 605478574, "excluded": [".rev", "css/app.less", "index.html", "lib-assets/font-awesome/fonts/FontAwesome.otf", "sketcher.html"]}
+{"scope": "actual native CAD plus Files integration fixture; no qualification", "apps": ["jsketcher", "files"]}
+{"version":"codi-public-apps/2","hostAPI":2,"apps":2,"files":660,"output":"/mnt/data10tb/codi-acad-drawing-requirements-stage-20261109-r4-apps"}
+{"scope": "actual build metadata only; no qualification", "files": 293, "source": "82866bf0ee852f1d3b3892972f07d8af4cd8b9b0", "desktop": "796c9051331054746d81ea4ea0bb8ec8e8cf2bbd"}
+{"scope": "exact reused Core frame/native asset equality only", "core": "82866bf0ee852f1d3b3892972f07d8af4cd8b9b0", "desktop": "796c9051331054746d81ea4ea0bb8ec8e8cf2bbd", "pins": 293, "allCorePinsUnchanged": true}

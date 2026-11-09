@@ -1,0 +1,17 @@
+{
+  "phase": "stage-reuse",
+  "command": [
+    "bash",
+    "/mnt/data10tb/codi-acad-drawing-requirements-evidence-20261109-r4/run-stage.sh",
+    "796c9051331054746d81ea4ea0bb8ec8e8cf2bbd"
+  ],
+  "source": "82866bf0ee852f1d3b3892972f07d8af4cd8b9b0",
+  "desktop": "796c9051331054746d81ea4ea0bb8ec8e8cf2bbd",
+  "acceptance": "615716f87f74efc34ed6cd41660db07aa377f4a1",
+  "status": "PASS",
+  "startedAtUnix": 1794264852.8956404,
+  "pid": 2967785,
+  "exitCode": 0,
+  "finishedAtUnix": 1794264867.273282,
+  "logSHA256": "53f48fc7d5728fa0111e0a18af5ed0e6677be3d2ce492d93c1a970c0ed881135"
+}

@@ -1,0 +1,76 @@
+{
+  "scope": "new Host example stage and exact unchanged compiled Core asset reuse only; whole R5 RUNNING, not qualification",
+  "coreActualProducer": "82866bf0ee852f1d3b3892972f07d8af4cd8b9b0",
+  "desktopActualProducer": "796c9051331054746d81ea4ea0bb8ec8e8cf2bbd",
+  "acceptance": "615716f87f74efc34ed6cd41660db07aa377f4a1",
+  "coreOriginalBuildCustody": "test/drawing-requirement-public-workflow/build-composed-r3/BUILD-CUSTODY.json",
+  "stageSession": 72466,
+  "stage": {
+    "phase": "stage-reuse",
+    "command": [
+      "bash",
+      "/mnt/data10tb/codi-acad-drawing-requirements-evidence-20261109-r4/run-stage.sh",
+      "796c9051331054746d81ea4ea0bb8ec8e8cf2bbd"
+    ],
+    "source": "82866bf0ee852f1d3b3892972f07d8af4cd8b9b0",
+    "desktop": "796c9051331054746d81ea4ea0bb8ec8e8cf2bbd",
+    "acceptance": "615716f87f74efc34ed6cd41660db07aa377f4a1",
+    "status": "PASS",
+    "startedAtUnix": 1794264852.8956404,
+    "pid": 2967785,
+    "exitCode": 0,
+    "finishedAtUnix": 1794264867.273282,
+    "logSHA256": "53f48fc7d5728fa0111e0a18af5ed0e6677be3d2ce492d93c1a970c0ed881135"
+  },
+  "allCoreFrameNativePinsUnchanged": true,
+  "pinCount": 293,
+  "coreRecompiled": false,
+  "dependenciesRehashed": false,
+  "newCurvePairAdopted": false,
+  "service": {
+    "port": 21057,
+    "session": 87004,
+    "forwardSession": 81017,
+    "oldServiceSession": 95125,
+    "oldWriteSettledAndOwnBrowserAbsentBeforeGracefulStop": true,
+    "externalRelay": false
+  },
+  "files": {
+    "run-stage.sh": {
+      "bytes": 3011,
+      "sha256": "368411a6450988b086c0a983cbc5bb438c32323308be64b7016839882f854510"
+    },
+    "run-phase.py": {
+      "bytes": 808,
+      "sha256": "66a8f20154a264bc05022167cab277120d4aa4dd9194e1adc1c9d7e5783abd26"
+    },
+    "run-whole.sh": {
+      "bytes": 1158,
+      "sha256": "a8081e5830a858a3912d7874249727d049cdcfc74fe8a372d1c7cb918b85d389"
+    },
+    "stage-reuse-state.json": {
+      "bytes": 583,
+      "sha256": "d8a178a1070139dbf6c7250240ffcd3f07d4a240d39000dfc4250016d231a2c5"
+    },
+    "stage-reuse.log": {
+      "bytes": 1595,
+      "sha256": "53f48fc7d5728fa0111e0a18af5ed0e6677be3d2ce492d93c1a970c0ed881135"
+    },
+    "runtime-pins.json": {
+      "bytes": 42485,
+      "sha256": "362be14bf359c51ac7b3910f346164d7ad1dbf9e71c212d8ce82e5889db3306e"
+    },
+    "previous-runtime-pins.json": {
+      "bytes": 42485,
+      "sha256": "93756779df0e85dc7376d8be5e0834f0363669076a9351aa6c09aa57430c6d6b"
+    },
+    "old-fixture-browser-proof.json": {
+      "bytes": 109,
+      "sha256": "edfb3420e71043f4a6bd3886f8c9ce0cbab2735755cac6614c8c67772085edd7"
+    },
+    "old-fixture-stop.json": {
+      "bytes": 668,
+      "sha256": "21ad68a810f6585c6c054986c04958b525627378ced3494700b79dca7446e26a"
+    }
+  }
+}
