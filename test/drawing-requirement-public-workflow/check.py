@@ -70,6 +70,31 @@ def metadata_invariant(a,b):
  need(a['capture']['native']==b['capture']['native']and a['capture']['solids']==b['capture']['solids']and a['ownership']==b['ownership']and a['lifecycle']==b['lifecycle'],'metadata changes no authored geometric source/history/material/Native resource/token')
  need(a['host']['documentToken']==b['host']['documentToken']and a['host']['path']==b['host']['path']and a['manufacturing']['metadata']==b['manufacturing']['metadata'],'metadata retains lifetime/path/material authority')
 
+def saved_projection_bridge(r,s):
+ # A real native Save can clear persistence dirty state after a protected read.
+ # Retain that ORIGINAL read: this is not a new projection or dirty-insensitive
+ # match. Only the recorded final Save is a supported explicit bridge here.
+ need(s['label']=='resaved-final','only final recorded native Save may bridge an otherwise unequal observation state')
+ save=one([v for v in r['saves']if v['label']==s['label']],'actual final native Save before SVG')
+ need(save['after']==s['before']==s['after'],'actual post-Save state equals both SVG states exactly')
+ before,after=save['before'],save['after'];settled(before);settled(after)
+ need(before.keys()==after.keys()and all(before[k]==after[k]for k in before if k!='host'),'Save bridge preserves EVERY non-Host field including complete Native/J/source/ownership/lifecycle')
+ a,b=before['host'],after['host']
+ need(a.keys()==b.keys()and a['dirty']is True and b['dirty']is False and all(a[k]==b[k]for k in a if k!='dirty'),'sole exact Save transition is Host dirty True to False; all tokens/path/revision unchanged')
+ candidates=[v for v in r['observations']if v['before']==before and v['after']==before and all(v[k]==save[k]==s[k]for k in('definition','binding','expected'))]
+ row=one(candidates[-1:],'original protected Native read exactly matches actual Save input and complete authored interpretation')
+ write=one([w for w in r['writes']if w['kind']=='save'and w['label']==s['label']],'actual settled final native Save write')
+ svg_write=one([w for w in r['writes']if w['kind']=='svg'and w['label']==s['label']],'actual final SVG write after native Save')
+ commands=[(i,c)for i,c in enumerate(r['commands'])if c['command']=='save'and c.get('result')==save['result']]
+ ordinal,command=one(commands,'unique actual registered native Save command')
+ export_ordinal,_=one([(i,c)for i,c in enumerate(r['commands'])if c['command']=='export-linked-part-drawing-svg'and c['args'].get('path')==svg_write['file']],'unique subsequent registered SVG command')
+ result=save['result']
+ need(write['phase']=='settled'and write['result']==result==command['result']and command['args']=={'revision':before['host']['revision']}and result['path']==before['host']['path']==write['file'],'exact issued Save revision/path/result and original current document')
+ need(write['sequence']<svg_write['sequence']and ordinal<export_ordinal,'actual Save precedes final SVG in both write and registered-command chronology')
+ need(write['readback']=={k:save[k]for k in('savedFile','sha256','byteLength')},'same independently archived native Save bytes, no inferred write acknowledgement')
+ need(result['committed']is True and result['dirty']is False and result['persistence']=='browser'and result['serverStatus']=='not-verified'and result['status']in('pending','synced'),'Save bridge has actual browser commit, distinct from independently read server bytes')
+ return row,{'basis':'actual-final-native-save-preserves-protected-read','originalObservation':row['label'],'saveWriteSequence':write['sequence'],'saveCommandOrdinal':ordinal,'svgWriteSequence':svg_write['sequence'],'svgCommandOrdinal':export_ordinal,'onlyChangedField':'host.dirty: true -> false','freshNativeRead':False}
+
 def check(directory):
  directory=Path(directory);receipt_raw=(directory/'receipt.json').read_bytes();r=json.loads(receipt_raw)
  need(r['status']=='PASS'and r['ownedContextsRetired']and r['sharedBrowserDisconnectedOnly']and r['pendingWrite']is None and not any(r[k]for k in('sourceSeeds','privateAuthoring','fakeReplies')),'entire real whole PASS +settled owned cleanup precedes oracle')
@@ -171,7 +196,9 @@ def check(directory):
  for s in r['svgs']:
   raw=(directory/s['savedFile']).read_bytes();need(len(raw)==s['byteLength']and sha(raw)==s['sha256'],'actual SVG server-byte artifact custody')
   candidates=[x for x in r['observations']if x['before']==s['before']and x['definition']==s['definition']]
-  row=one(candidates[-1:],'actual same-state protected Native metadata/projection read BEFORE SVG')
+  if candidates:
+   row=one(candidates[-1:],'actual same-state protected Native metadata/projection read BEFORE SVG');association={'basis':'exact-observed-state','originalObservation':row['label']}
+  else:row,association=saved_projection_bridge(r,s)
   result=s['result'];need(type(result)is dict and set(result)==set('path version status sourceRevision dirty persistence serverStatus committed'.split()),'actual closed Host derived-export receipt grammar')
   write=one([w for w in r['writes']if w['kind']=='svg'and w['label']==s['label']],'actual SVG write associated with artifact')
   command=one([c for c in r['commands']if c['command']=='export-linked-part-drawing-svg'and c['args'].get('path')==write['file']],'actual registered SVG command associated with write')
@@ -179,7 +206,7 @@ def check(directory):
   need(result['committed']is True and result['dirty']is False and result['persistence']=='browser'and result['serverStatus']=='not-verified'and result['status']in('pending','synced'),'browser commit and independent server equality remain distinct')
   inspected=inspect_svg(raw,s,row)
   if s['label']=='repaired':need(inspected['repairedNontrivialLeader']is not None and inspected['repairedNontrivialLeader']['vertices']>2,'actual repaired SVG contains necessary routed leader, no straight-path shortcut')
-  artifacts.append({'file':s['savedFile'],'result':inspected})
+  artifacts.append({'file':s['savedFile'],'protectedReadAssociation':association,'result':inspected})
  last=r['observations'][-1];need(last['expected']['diameter']==14 and last['definition']['requirements'][0]['zone']['value']==.20 and last['expected']['datumLevel']==0,'genuine healthy source/requirement reedit AFTER third native Open')
  return{'status':'PASS','scope':'finite native-linked datum/position/Ra/DECLARED clearance authoring, geometry-binding lifecycle/three native cycles/actual visible SVG; NOT manufactured conformance, standards compliance or whole Gate1','sourceCoordinateBudgetMm':FINE,'sourceCoordinateBudgetPm':50,'observations':len(observed),'refusals':len(r['refusals']),'actorCustody':actor_evidence,'blockedAnchor':{'declaredHeightBox':B,'actualProjectedAnchors':projected,'recoveredBySharedUndo':True},'archives':archives,'artifacts':artifacts,'requirementsAreAuthoredIntent':True,'manufacturedConformance':False}
 if __name__=='__main__':
