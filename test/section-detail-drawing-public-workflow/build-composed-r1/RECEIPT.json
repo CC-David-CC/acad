@@ -1,0 +1,45 @@
+{
+  "status": "BUILD-AND-STAGE-PASS",
+  "qualification": false,
+  "core": "725c3806050ea639455f55e58d23e1b88e02eab0",
+  "desktop": "2633c23a4bab630f19d4ea66e537306d6036ce21",
+  "normalBuildSession": 16850,
+  "normalBuildExitCode": 0,
+  "successfulWebpackFinishes": 10,
+  "compilerWarningErrorMissingExportLines": 0,
+  "stageSession": 46813,
+  "stageExitCode": 0,
+  "assets": 495,
+  "appBundleFiles": 568,
+  "pinCount": 206,
+  "ociSourceSHA256": "ec84bbdc710bfdb1478b1af959895472ef5585643309691631adcb40877b5ad1",
+  "nativePairsUnchanged": true,
+  "files": [
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r11.sh",
+      "bytes": 2508,
+      "sha256": "ee16519bc2c821a8308249ed29bcd1eb3bd0fcd7c7bf4c7e0b3bc643b32798d7"
+    },
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r11.log",
+      "bytes": 174931,
+      "sha256": "319ae82fa5a5cb4a9cec04fc00634442c33fadd74fdb7c89941710de23f3f29d"
+    },
+    {
+      "file": "codi-acad-foundation-next-fixture-20261109-r8.sh",
+      "bytes": 1585,
+      "sha256": "a2fd8090c413d86881e2d17ec91eae4b1b5e213daf49bafc86592523ded933ab"
+    },
+    {
+      "file": "codi-acad-foundation-next-stage-20261109-r8.log",
+      "bytes": 1119,
+      "sha256": "698c68c8aadd8eb1257d13c80901081a8b8f97ff1107ddbc668e61eef755d262"
+    },
+    {
+      "file": "codi-acad-foundation-next-pins-20261109-r8.json",
+      "bytes": 29570,
+      "sha256": "1c4da9c33b357b7ab474f39e46c4cbeed062f92b6d40214261c4c8dcfe05336a"
+    }
+  ],
+  "scope": "Normal coherent source build/stage custody only. Whole31686 running separately; no runtime/geometry/resource qualification from build success."
+}

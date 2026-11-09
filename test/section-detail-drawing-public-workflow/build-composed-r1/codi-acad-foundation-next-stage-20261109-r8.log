@@ -1,0 +1,7 @@
+Preparing worktree (detached HEAD 2633c23a4)
+Updating files:  90% (7040/7773)Updating files:  91% (7074/7773)Updating files:  92% (7152/7773)Updating files:  93% (7229/7773)Updating files:  94% (7307/7773)Updating files:  95% (7385/7773)Updating files:  96% (7463/7773)Updating files:  97% (7540/7773)Updating files:  98% (7618/7773)Updating files:  99% (7696/7773)Updating files: 100% (7773/7773)Updating files: 100% (7773/7773), done.
+HEAD is now at 2633c23a4 Admit bounded v3 section and detail drawing transport
+{"assets": 495, "assetBytes": 566328251, "excluded": [".rev", "css/app.less", "index.html", "lib-assets/font-awesome/fonts/FontAwesome.otf", "sketcher.html"]}
+{"scope": "actual native CAD plus Files integration fixture; no qualification", "apps": ["jsketcher", "files"]}
+{"version":"codi-public-apps/2","hostAPI":2,"apps":2,"files":568,"output":"/mnt/data10tb/codi-acad-foundation-next-stage-20261109-r8-apps"}
+{"scope": "actual build metadata only; no qualification", "files": 206, "source": "725c3806050ea639455f55e58d23e1b88e02eab0", "desktop": "2633c23a4bab630f19d4ea66e537306d6036ce21"}
