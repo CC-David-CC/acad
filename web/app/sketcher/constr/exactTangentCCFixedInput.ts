@@ -19,7 +19,7 @@ export function createExactTangentCCFixedInputs(system:any){
  let work=0,validationPass:any=null;const tick=()=>{if(++work>WORK)stop('Exact tangent fixed-input proof exceeds its work budget.',true);},math=arithmetic(tick),rows:any[]=[],targets:any[]=[],fixed=new Map<any,any>(),resolver=system.expressionResolver;
  const pointSchemas=new Set([ConstraintDefinitions.LockPoint,ConstraintDefinitions.PCoincident,ConstraintDefinitions.SignedDistanceX,ConstraintDefinitions.SignedDistanceY]),radiusSchemas=new Set([ConstraintDefinitions.RadiusLength,ConstraintDefinitions.DiameterLength,ConstraintDefinitions.EqualRadius]);
  function ownCircle(o:any,charge=tick){charge();return o instanceof Circle&&o.stage===system.stage&&system.stage.objects.has(o)&&o.c instanceof EndPoint&&o.c.parent===o&&o.children.has(o.c)&&shared.rootOwned(o.c,system.stage,charge)&&shared.backed(o.r);}
- function domain(c:any){try{domain(c);}catch(error){throw withAdmissionCause(error,registeredDomainFailureCause(error));}}
+ function domain(c:any){try{assertRegisteredConstraintDomain(c);}catch(error){throw withAdmissionCause(error,registeredDomainFailureCause(error));}}
  function supportOwned(c:any,charge=tick){
   charge();if(c.internal||c.schema===ConstraintDefinitions.TangentCC)return false;
   if(pointSchemas.has(c.schema)){const count=c.schema===ConstraintDefinitions.LockPoint?1:2;return c.objects.length===count&&c.params.length===count*2&&c.objects.every((o,i)=>shared.rootOwned(o,system.stage,charge)&&c.params[2*i]===o.params.x&&c.params[2*i+1]===o.params.y);}

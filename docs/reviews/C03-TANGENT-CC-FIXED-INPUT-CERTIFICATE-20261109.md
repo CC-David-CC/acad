@@ -107,3 +107,26 @@ composition: same fixed8/5/3 distinct redundancy, later unlock/edit/no-op/travel
 branch/refusal/currentness/named radius and .cad cycles, then FIRST independent
 oracle only after wholePASS. Source alone is no after-pass claim. Preserve R1,
 R2 and any next failure. No Bore/C04 rerun or performance attribution follows.
+
+
+## Pre-integration source correction
+
+Root's full source review caught a direct programming error in6298314 before
+integration/execution: the local `domain(c)` wrapper called itself because an
+editing replacement selected the wrapper rather than the intended call site.
+The follow-up changes that ONE call to the existing authoritative
+`assertRegisteredConstraintDomain(c)`. Its catch still preserves the original
+error and registered domain cause. No equation, tolerance, schema, state policy
+or acceptance criterion changes. This is a confirmed source defect, not a new
+observed runtime failure or a successful qualification claim.
+
+The complete helper was reread after correction, including capture, support/
+target ownership, original polynomial snapshot/evaluation, monotone fixed-value
+DAG, ordered next plan, post-solve verifier, per-pass budget and apply closure.
+No other accidental self-call substitution was found in that bounded source
+read. Pre-plan domain admission intentionally calls the authoritative helper
+directly before ordinary numerical fallback; post-solve witness/target calls
+use the corrected cause-preserving wrapper. Existing private alias resolver
+recursion remains its original depth/cycle-bounded implementation, unchanged.
+No tests/probes/TSC/build/runtime were run for this correction. Root must compose
+BOTH commits, retain equality hooks as above, and run the unchanged whole.
