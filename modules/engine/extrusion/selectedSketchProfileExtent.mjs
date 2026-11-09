@@ -13,7 +13,7 @@ export async function inspectSolvedProfileExtentRegions(input){
   try{prepareSolvedPolygonSourceFace(context,regionId);return{regionId,support:'supported',reason:null,descriptor};}
   catch(error){if(!['INVALID_REQUEST','INVALID_FRAME','INVALID_PROFILE','UNSUPPORTED_PROFILE','UNSUPPORTED_REGION_TOPOLOGY','OPEN_OR_AMBIGUOUS_PROFILE','PROFILE_BELOW_RESOLUTION'].includes(error?.code))throw error;return{regionId,support:'unsupported',reason:{code:error.code,message:error.message},descriptor};}
  });
- return freeze({binding:{revision:r.revision,sketchDigest:r.sketchDigest,faceId:r.faceId},regions});
+ return freeze({binding:{revision:r.revision,sketchDigest:r.sketchDigest,faceId:r.faceId},regions,sourceAnalysis:context.sourceAnalysis});
 }
 export async function prepareSolvedProfileExtent(input){
  const r=fields(input,['profile','featureId','authoredExtent','extent']);

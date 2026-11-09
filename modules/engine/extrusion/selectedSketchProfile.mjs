@@ -112,7 +112,10 @@ async function extractSource({r,frame,faceOnly=false},allowIsolatedOpen=false){
   const ordinary=['disjoint','nested-0','nested-1'].includes(relation)&&['contains','inside','separate'].includes(polygonProfileRelation(profiles[0],profiles[1]));
   if(!ordinary){const circular=await deriveCircularArrangement(r.faceId,circles);return{r,frame,regions:circular.cells,byIds:new Map(),qualifiedToLocal,sketch,sourceAnalysis:circular.sourceAnalysis,circular:{...circular,circles}};}
  }
- const sourceAnalysis=mixed?analyzeIsolatedOpenComponents({loops,profiles,open,qualifiedToLocal}):null;
+ // Depth-free faces retain their closed whole-curve contract, but discovery
+ // still needs the complete real source census. With faceOnly, mixed is false
+ // and open is empty: this does not admit arrangements or open-chain repair.
+ const sourceAnalysis=mixed||faceOnly?analyzeIsolatedOpenComponents({loops,profiles,open,qualifiedToLocal}):null;
  let regions;try{regions=deriveAuthoredRegions(r.faceId,loops.map(loop=>loop.map(c=>c.id)),profiles,r.profileVersion===3?3:2);}catch(error){fail('UNSUPPORTED_REGION_TOPOLOGY',error.message);}
  const byIds=new Map(loops.map(loop=>[JSON.stringify(loop.map(c=>c.id).sort()),loop]));
  return{r,frame,regions,byIds,qualifiedToLocal,sketch,sourceAnalysis};
