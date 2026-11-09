@@ -176,3 +176,10 @@ revision before face-specific inspection and checks both public methods at
 startup. Original phase/geometry/source/format/lifecycle criteria remain; full
 fresh whole required. Packet-wide public callsite source review accompanies
 this grouped correction rather than changing host API or relaxing a check.
+
+## Cross-view caption policy follow-up (source only)
+
+`CAPTION-POLICY-MIGRATION.md` records the intentional derived-caption-only
+contract migration for the next coherent build. All geometry, source, history,
+Native, archive, write and export acceptance remains. Existing qualified
+artifacts use their frozen old oracle; this revised packet is not executed.

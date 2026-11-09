@@ -33,18 +33,43 @@ def visible_scaffold(raw,definition,e):
   require(allowed,'only exact solid/hidden/dimension/leader path styles; no local transforms, opacity, events or external effects')
  require(labels.attrib=={'font-family':'sans-serif','font-size':'3'} and blank(labels.text),'exact visible untransformed text style')
  expected=[((8,8),definition['title'] or definition['drawingId'],None)]
- expected += [((v['paperOrigin'][0],v['paperOrigin'][1]+5),v['basis'],None) for v in definition['views']]
  for d in definition['dimensions']:
   if d['kind']=='plane-distance':name,value='ΔZ ',e['thickness']
   elif d['kind']=='source-distance' and d['axis']=='datum-x':name,value='ΔX ',e['width']
   else:require(d['kind']=='source-distance' and d['axis']=='datum-y','same finite source/cap dimension family');name,value='ΔY ',e['height']
   expected.append((tuple(d['label']),name+f'{value:.3f} mm','#124'))
  expected.append(((8,292),'Reference drawing · available · scale 1:1',None))
- texts=list(labels);require(len(texts)==len(expected),'exact title/view/dimension/footer text roster, no hidden/extra text')
- for node,(position,value,fill) in zip(texts,expected):
+ texts=list(labels);captions=[node for node in texts if 'data-view-caption-id' in node.attrib];fixed=[node for node in texts if node not in captions]
+ require(len(texts)==len(expected)+len(definition['views']) and len(captions)==len(definition['views']) and len(fixed)==len(expected),'exact title/view/dimension/footer text roster, no hidden/extra text')
+ for node in texts:require(node.tag==tag('text') and not list(node) and blank(node.tail),'all actual labels are plain visible text leaves')
+ for node,(position,value,fill) in zip(fixed,expected):
   require(node.tag==tag('text') and not list(node) and blank(node.tail) and (node.text or '')==value,'exact plain actual visible text and order')
   require(set(node.attrib)==({'x','y'} if fill is None else {'x','y','fill'}) and (fill is None or node.attrib['fill']==fill),'only exact text placement/fill; no style, transforms, opacity, events, tspan or external content')
   xy=tuple(float(node.attrib[k]) for k in ('x','y'));require(all(math.isfinite(n) for n in xy) and xy==tuple(position) and 0<=xy[0]<=420 and 0<=xy[1]<=297,'exact authored/current derived text position on sheet')
+ # The finite counterbore has an independently checked rectangular outer
+ # boundary in these three projections. Reconstruct its physical paper boxes
+ # from the authored dimensions, not a renderer-declared layout box or search.
+ scale=definition['sheet']['scale']['numerator']/definition['sheet']['scale']['denominator'];geometry={}
+ for view in definition['views']:
+  role=view['basis'];require(role in ('top','front','right'),'same finite orthographic caption family')
+  width,height=(e['width'],e['height']) if role=='top' else (e['width'],e['thickness']) if role=='front' else (e['height'],e['thickness'])
+  x,y=view['paperOrigin'];geometry[view['viewId']]=[x,y-height*scale,x+width*scale,y]
+ require(len(geometry)==len(definition['views']),'unique actual view identities')
+ def intersects(a,b):return a[0]<b[2] and a[2]>b[0] and a[1]<b[3] and a[3]>b[1]
+ boxes=[];used=set()
+ for view in definition['views']:
+  matches=[node for node in captions if node.get('data-view-caption-id')==view['viewId']]
+  require(len(matches)==1,'one complete derived caption per actual view');node=matches[0];used.add(id(node))
+  attrs={'data-view-caption-id':view['viewId'],'data-caption-role':'view','data-caption-layout':'observed-sheet-v1','font-family':'monospace','font-size':'3','lengthAdjust':'spacing'}
+  value=view['basis'];require((node.text or '')==value and set(node.attrib)==set(attrs)|{'x','y','textLength'} and all(node.get(k)==v for k,v in attrs.items()),'full unchanged caption value and fixed physical typography; no hidden/extra attributes')
+  x,y,length=(float(node.get(k,'nan')) for k in ('x','y','textLength'));require(all(math.isfinite(n) for n in (x,y,length)) and length>0,'finite actual caption placement/advance');near(length,len(value)*1.8)
+  box=[x-1,y-4,x+length+1,y+2];own=geometry[view['viewId']]
+  require(box[0]>=8-1e-6 and box[1]>=16-1e-6 and box[2]<=420-8+1e-6 and box[3]<=297-16+1e-6,'complete padded caption within sheet margins/header/footer')
+  require(box[1]>=own[3]+.125+5-1e-6,'entire caption clears its actual view/stroke by at least5mm')
+  for observed in geometry.values():require(not intersects(box,[observed[0]-.125,observed[1]-.125,observed[2]+.125,observed[3]+.125]),'caption clears EVERY actual projected view and stroke')
+  for prior in boxes:require(not intersects(box,prior),'all complete derived caption boxes are disjoint')
+  boxes.append(box)
+ require(len(used)==len(captions),'no unverified extra or duplicate derived caption')
  return root,paths,texts
 
 def inspect_counterbore_svg(raw,e,definition,context):
