@@ -1,5 +1,5 @@
 // Small metadata contract only. No geometry, topology extraction or CAD handles.
-import {isArrangementDescriptor,captureArrangementDescriptor,arrangementRegionIdentity,captureArrangementAnalysis,arrangementPolicy} from './selectedArrangementDescriptor.mjs';
+import {isArrangementDescriptor,captureArrangementDescriptor,arrangementRegionIdentity,captureArrangementAnalysis,arrangementPolicy,contactArrangementPolicy} from './selectedArrangementDescriptor.mjs';
 const MAX_SOURCE_OBJECTS=4096,MAX_CURVES=4096,MAX_LOOPS=128,MAX_ID=256,MAX_RESPONSE=65536;
 const fail=message=>{throw Object.assign(Error(message),{code:'INVALID_RESPONSE'});};
 function data(value,keys){
@@ -38,7 +38,7 @@ function regionIdentity(faceId,d){return isArrangementDescriptor(d)?arrangementR
 // Metadata admission only. The Worker owns exact graph/self-contact and
 // conservative geometry proof; this census prevents omitted/invented IDs.
 function captureSourceAnalysis(value,sourceIds,regions,charge){
- if(Object.getOwnPropertyDescriptor(value||{},'policy')?.value===arrangementPolicy)return captureArrangementAnalysis(value,sourceIds,regions,charge);
+ if([arrangementPolicy,contactArrangementPolicy].includes(Object.getOwnPropertyDescriptor(value||{},'policy')?.value))return captureArrangementAnalysis(value,sourceIds,regions,charge);
  const r=data(value,['version','policy','clearanceMm','closedComponents','openComponents']);
  if(r.version!==1||r.policy!=='v3-extrusion-isolated-open-chains'||r.clearanceMm!==0.0001)fail('Unknown selected-source component policy.');
  const seen=new Set(),closed=new Map();

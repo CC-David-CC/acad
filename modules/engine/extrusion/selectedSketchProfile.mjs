@@ -7,6 +7,7 @@ import {prepareSelectedProfileExtrusion} from '../mount/selectedProfilePlan.mjs'
 import {partitionSelectedSegments,analyzeIsolatedOpenComponents} from './isolatedOpenProfileComponents.mjs';
 import {preparePolygonProfileExtrusion,preparePolygonProfileFace,polygonProfileRelation} from '../mount/polygonProfilePlan.mjs';
 import {deriveRectangleArrangement} from './rectangularArrangement.mjs';
+import {deriveRectangleContactArrangement} from './rectangularContactArrangement.mjs';
 import {deriveCircularArrangement,prepareCircularCellExtrusion} from '../mount/circularArrangementPlan.mjs';
 import {circularRelation} from './circularTopology.mjs';
 
@@ -64,6 +65,11 @@ async function extractSource({r,frame,faceOnly=false},allowIsolatedOpen=false){
    const data=fields(object.data,['c','r']);loops.push([{kind:'circle',id,center:point(data.c),radius:data.r}]);
   }else fail('UNSUPPORTED_PROFILE',r.profileVersion===3?'Only ordinary polygon segments and full circles are qualified.':'Only ordinary rectangle segments and full circles are qualified.');
  }
+ // Whole-source contact proof precedes the old shared-edge refusal. The
+ // helper returns only the exact two-rectangle contact domain; all other
+ // sources retain the original partition/overlap/circle policy below.
+ const contact=mixed&&!loops.length&&segments.length===8?await deriveRectangleContactArrangement({faceId:r.faceId,segments,qualifiedToLocal,clearanceMm:0.0001}):null;
+ if(contact)return{r,frame,regions:contact.cells,byIds:new Map(),qualifiedToLocal,sketch,sourceAnalysis:contact.sourceAnalysis,arrangement:contact};
  // Use exact endpoint identities, never proximity welding. V3 separates
  // simple articulation blocks; other branches/gaps/duplicates still refuse.
  // Explicit V3 admits simple linear

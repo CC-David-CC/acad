@@ -73,7 +73,9 @@ export interface ExtrudeSelectedProfile {
 export interface ReadSolidMesh {readonly op:'solid.mesh.read';readonly version:1;readonly handle:TransientShapeHandle;}
 export interface SourceSpanReference {readonly kind:'source-span';readonly owners:readonly string[];readonly ends:readonly [Readonly<{incidentCurveIds:readonly string[]}>,Readonly<{incidentCurveIds:readonly string[]}>];}
 export interface ArrangementBoundaryReference {readonly id:string;readonly sourceSpan:SourceSpanReference;}
-export interface ArrangementCellDescriptor {readonly version:2;readonly kind:'axis-rectangle-arrangement-cell';readonly outerBoundaryRefs:readonly ArrangementBoundaryReference[];readonly holeBoundaryRefs:readonly [];readonly coveringSourceLoops:readonly (readonly string[])[];}
+export interface RectangleArrangementCellDescriptor {readonly version:2;readonly kind:'axis-rectangle-arrangement-cell';readonly outerBoundaryRefs:readonly ArrangementBoundaryReference[];readonly holeBoundaryRefs:readonly [];readonly coveringSourceLoops:readonly (readonly string[])[];}
+export interface RectangleContactCellDescriptor {readonly version:3;readonly kind:'axis-rectangle-contact-cell';readonly sourceCurveIds:readonly string[];readonly outerBoundaryRefs:readonly ArrangementBoundaryReference[];readonly holeBoundaryRefs:readonly [];}
+export type ArrangementCellDescriptor=RectangleArrangementCellDescriptor|RectangleContactCellDescriptor;
 export interface ArrangementBoundaryProvenance {readonly version:1;readonly kind:'axis-rectangle-arrangement';readonly faceId:string;readonly descriptor:ArrangementCellDescriptor;}
 export interface ExtrudePolygonProfile extends Omit<ExtrudeSelectedProfile,'version'|'region'> {readonly version:3;readonly region:ExtrudeSelectedProfile['region']&Readonly<{boundaryProvenance?:ArrangementBoundaryProvenance}>;}
 // Depth-free solved-region input. Authored history stores source/region/axis
