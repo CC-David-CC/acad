@@ -1233,7 +1233,7 @@ export function activate(ctx: ApplicationContext) {
     options=Object.fromEntries(Reflect.ownKeys(options).map(key=>[key,Object.getOwnPropertyDescriptor(options,key).value]));
     if(options.valid!==undefined&&typeof options.valid!=='function')throw new Error('Invalid lifetime guard.');
     if(options.beforePublish!==undefined&&typeof options.beforePublish!=='function')throw new Error('Invalid publication guard.');
-    if(options.signal!==undefined)try {Object.getOwnPropertyDescriptor(AbortSignal.prototype,'aborted').get.call(options.signal);}catch{throw new Error('Invalid cancellation signal.');}
+    if(options.signal!==undefined)try {HISTORY_SIGNAL_ABORTED(options.signal);}catch{throw new Error('Invalid cancellation signal.');}
     const service:any = ctx.projectService, document = service.documentGeneration;
     const manager:any=ctx.projectManager, storage=ctx.storageService;
     const sketchNamespace=service.sketchStorageNamespace;
@@ -1265,7 +1265,7 @@ export function activate(ctx: ApplicationContext) {
     const check = () => {
       const callbacksValid=(!options.valid || options.valid()===true) &&
         (!options.beforePublish || options.beforePublish()===true);
-      if (!callbacksValid || options.signal?.aborted || ctx.projectService !== service ||
+      if (!callbacksValid || (options.signal!==undefined&&HISTORY_SIGNAL_ABORTED(options.signal)) || ctx.projectService !== service ||
           ctx.projectManager!==manager || ctx.storageService!==storage || service.sketchStorageNamespace!==sketchNamespace ||
           sketchRevision(storage,sketchNamespace)!==sourceSketchRevision ||
           manager.inspectMaterialSurfaceRevision()!==materialSurfaceRevision ||
@@ -1450,7 +1450,7 @@ export function activate(ctx: ApplicationContext) {
         // publication guard but before the awaited command continuation.
         // Publication already happened: reject honestly without rolling back.
         let current=false;
-        try {current=!options.signal?.aborted && (!options.valid || options.valid()===true) && ctx.projectService===service && service.hasHostLifetime && ctx.projectManager===manager && ctx.storageService===storage && service.isDocumentCurrent(document);} catch (_) { /* caller loss is a committed refusal */ }
+        try {current=!(options.signal!==undefined&&HISTORY_SIGNAL_ABORTED(options.signal)) && (!options.valid || options.valid()===true) && ctx.projectService===service && service.hasHostLifetime && ctx.projectManager===manager && ctx.storageService===storage && service.isDocumentCurrent(document);} catch (_) { /* caller loss is a committed refusal */ }
         if(!current)throw Object.assign(superseded(true),{publication:publicationReceipt});
       },
       async prepare() {
@@ -1477,7 +1477,7 @@ export function activate(ctx: ApplicationContext) {
     const stop=()=>{if(!settled && scope.epoch!==null && scope.epoch===evaluationEpoch)engineResources.cancelCandidates();};
     const timer=setInterval(()=>{
       try {
-        if (options.signal?.aborted || (options.valid && options.valid()!==true) || !service.isDocumentCurrent(document) ||
+        if ((options.signal!==undefined&&HISTORY_SIGNAL_ABORTED(options.signal)) || (options.valid && options.valid()!==true) || !service.isDocumentCurrent(document) ||
             ctx.storageService!==storage || sketchRevision(storage,sketchNamespace)!==sourceSketchRevision ||
             manager.inspectMaterialSurfaceRevision()!==materialSurfaceRevision ||
             trackedStreams().some((s,i)=>s!==capturedStreams[i] || s.revision!==streamRevisions[i])) stop();
@@ -1485,7 +1485,7 @@ export function activate(ctx: ApplicationContext) {
       catch (_) { stop(); }
     },100);
     try {
-      if(options.signal){listening=true;options.signal.addEventListener('abort',stop,{once:true});}
+      if(options.signal!==undefined){listening=true;HISTORY_LISTEN(options.signal,'abort',stop,{once:true});}
       check();
       if (pendingPipelines || pendingModifications) throw new Error('Another operation is still in progress.');
       await new Promise<void>((yes,no)=>{
@@ -1505,7 +1505,7 @@ export function activate(ctx: ApplicationContext) {
     finally {
       settled=true;const cleanup:any[]=[];
       try{clearInterval(timer);}catch(cause){cleanup.push(cause);}
-      if(listening)try{options.signal.removeEventListener('abort',stop);}catch(cause){cleanup.push(cause);}
+      if(listening)try{HISTORY_UNLISTEN(options.signal,'abort',stop);}catch(cause){cleanup.push(cause);}
       if(cleanup.length)failure={cause:Object.assign(Error('Authored edit listener/timer cleanup is unconfirmed.'),{
         code:'WORKER_CLEANUP_FAILED',committed:accepted||wasCommitted(failure?.cause),
         cause:cleanup[0],cleanupErrors:Object.freeze(cleanup),
