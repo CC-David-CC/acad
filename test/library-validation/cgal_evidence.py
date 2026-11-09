@@ -296,10 +296,16 @@ _ISSUER = object()
 
 class _BoundCGALAssessment:
     """Only load_cgal_evidence issues this detached, bounded offline index."""
+    __slots__ = ('_rows', '_provenance')
+
     def __init__(self, rows, provenance, issuer):
         _need(issuer is _ISSUER, 'assessment must be issued by complete intake')
-        self._rows = MappingProxyType(rows)
-        self._provenance = MappingProxyType(provenance)
+        object.__setattr__(self, '_rows', MappingProxyType({
+            key: MappingProxyType(dict(row)) for key, row in rows.items()}))
+        object.__setattr__(self, '_provenance', MappingProxyType(dict(provenance)))
+
+    def __setattr__(self, name, value):
+        raise AttributeError('bound CGAL evidence is immutable')
 
     def bind_mesh(self, artifact_path, object_id, vertices, triangles):
         """Bind ORIGINAL raw F64 arrays, before any source-frame mapping."""

@@ -1,13 +1,18 @@
 """Independent finite controlled-mesh audit for the authored prism domains.
 
 Actual indices are authoritative connectivity: NO welding. Planar overlap uses
-exact represented-binary64 Fraction predicates. Curved strips must be genuine
-straight generator strips, with finite .01mm circle/chord coverage. This is an
-artifact approximation proof, never a 50pm BRep claim or general mesh validator.
+represented-binary64 Fraction predicates; cylindrical walls use complete exact
+radial-projection coverage rather than identical-coordinate strips. Integration
+is SOURCE ONLY until the full CGAL/planar/source/artifact packet is qualified.
+This is an artifact approximation proof, never a 50pm BRep claim.
 """
 import math
+from pathlib import Path
+import sys
 from collections import Counter,defaultdict
 from fractions import Fraction as Q
+sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'library-validation'))
+from cylindrical_surface_certificate import certify_full_cylinder
 INC=1e-6
 DEFL=.01
 def need(v,m):
@@ -44,12 +49,17 @@ def inspect_mesh(vertices,triangles,e,frame,lo,hi,truth_volume):
  # All frozen placements are exact orthonormal signed permutations. Refuse a
  # different readback contract rather than use an ill-conditioned inverse.
  axes=[frame[k] for k in ('x','y','z')];need(all(sum(v*v for v in a)==1 and all(v in (-1,0,1) for v in a) for a in axes) and all(sum(x*y for x,y in zip(a,b))==0 for i,a in enumerate(axes) for b in axes[:i]),'frozen axis-permutation frame')
- local=[[sum((p[j]-frame['origin'][j])*axis[j] for j in range(3)) for axis in axes] for p in vertices];need(all(lo-INC<=p[2]<=hi+INC for p in local),'complete actual mesh interval');kind=e['kind'];rectangle=kind=='rectangle';outer=e.get('outer');inner=e.get('inner',0)
+ need(cross(axes[0],axes[1])==tuple(axes[2]),'source frame has preserved right handedness')
+ # Keep original represented world coordinates exact BEFORE frame subtraction.
+ # The float view is only the retained classifier/diagnostic path; the surface
+ # certificate consumes these exact rational transformed values.
+ local_exact=[tuple(sum((Q(p[j])-Q(frame['origin'][j]))*Q(axis[j]) for j in range(3)) for axis in axes) for p in vertices]
+ local=[[float(x) for x in p] for p in local_exact];need(all(lo-INC<=p[2]<=hi+INC for p in local),'complete actual mesh interval');kind=e['kind'];rectangle=kind=='rectangle';outer=e.get('outer');inner=e.get('inner',0)
  cylinders=[]
  if not rectangle:cylinders.append({'id':'outer','c':(0,0),'r':outer,'low':lo,'high':hi,'sign':1})
  if inner:cylinders.append({'id':'inner','c':(0,0),'r':inner,'low':lo,'high':hi,'sign':-1})
  for i,h in enumerate(e.get('holes',[])):cylinders.append({'id':'hole'+str(i),'c':(h['u'],h['v']),'r':h['radius'],'low':lo if h['depth'] is None else hi-h['depth'],'high':hi,'sign':-1,'blind':h['depth'] is not None})
- labels=[];patches=defaultdict(list);areas=defaultdict(list);edge=defaultdict(list);incident=defaultdict(set);strip=defaultdict(list);budget=[0];volumes=[]
+ labels=[];patches=defaultdict(list);areas=defaultdict(list);edge=defaultdict(list);incident=defaultdict(set);wall_faces=defaultdict(list);budget=[0];volumes=[]
  for i,tri in enumerate(triangles):
   need(len(set(tri))==3 and all(type(x) is int and 0<=x<len(local) for x in tri),'actual unique triangle indices');ps=[local[j] for j in tri];normal=cross(sub(ps[1],ps[0]),sub(ps[2],ps[0]));area=math.hypot(*normal)/2;need(area>0 and math.isfinite(area),'nonzero finite triangle area');label=None
   if rectangle:
@@ -62,11 +72,9 @@ def inspect_mesh(vertices,triangles,e,frame,lo,hi,truth_volume):
   if label is None:
    cs=[c for c in cylinders if all(c['low']-INC<=p[2]<=c['high']+INC for p in ps) and max(math.hypot(p[0]-c['c'][0],p[1]-c['c'][1]) for p in ps)<=c['r']+INC and radial_min(ps,c['c'])>=c['r']-DEFL-INC];candidates=[]
    for c in cs:
-    xy=sorted(set((p[0],p[1]) for p in ps))
-    if len(xy)!=2:continue
     mid=[sum(p[k] for p in ps)/3 for k in range(3)]
-    if c['sign']*(normal[0]*(mid[0]-c['c'][0])+normal[1]*(mid[1]-c['c'][1]))>0:candidates.append((c,xy))
-   c,xy=one(candidates,'actual complete straight cylindrical generator strip');label='wall-'+c['id'];a,b=xy;d=math.dist(a,b);need(d>0,'nonzero actual chord');projected=[(0. if (p[0],p[1])==a else d,p[2]) for p in ps];strip[(c['id'],tuple(a),tuple(b))].append(projected)
+    if c['sign']*(normal[0]*(mid[0]-c['c'][0])+normal[1]*(mid[1]-c['c'][1]))>0:candidates.append(c)
+   c=one(candidates,'actual source cylindrical patch');label='wall-'+c['id'];wall_faces[c['id']].append(i)
   labels.append(label);areas[label].append(area)
   # Entire cap triangle stays in the appropriate finite material domain.
   if label in ('bottom','top'):
@@ -111,8 +119,7 @@ def inspect_mesh(vertices,triangles,e,frame,lo,hi,truth_volume):
  expected.update({'floor-'+c['id']:rims[c['id']]['lower'] for c in cylinders if c.get('blind')});roundoff=max(1e-6,128*math.ulp(max(actual.values())))
  for key,value in expected.items():need(key in actual and abs(actual[key]-value)<=roundoff,'complete nonoverlapping planar patch area '+key)
  for key,rows in patches.items():disjoint_triangles(rows,budget)
- for (identity,a,b),rows in strip.items():
-  c=one([x for x in cylinders if x['id']==identity],'cylinder');disjoint_triangles(rows,budget);area=math.fsum(abs(area2(p))/2 for p in rows);need(abs(area-math.dist(a,b)*(c['high']-c['low']))<=roundoff,'complete nonoverlapping straight-generator rectangle')
+ wall_certificates={c['id']:certify_full_cylinder(local_exact,triangles,wall_faces[c['id']],c['c'],c['r'],c['low'],c['high'],c['sign'],DEFL,INC) for c in cylinders}
  volume=math.fsum(volumes);allowance=sum(math.pi*(2*c['r']*DEFL+DEFL**2)*(c['high']-c['low']) for c in cylinders)+max(1e-5,abs(truth_volume)*1e-12);need(volume>0 and abs(volume-truth_volume)<=allowance,'positive volume within independent declared tessellation budget');need(set(actual)==set(expected)|{'wall-'+c['id'] for c in cylinders},'no missing or unclassified patches');euler=len(vertices)-len(edge)+len(triangles);expectedEuler=2-2*(int(bool(inner))+sum(h['depth'] is None for h in e.get('holes',[])));need(euler==expectedEuler,'actual independent shell genus matches authored through-void topology')
- return {'quality':'independent-indexed-manifold/finite-patch/chord-coverage','vertices':len(vertices),'triangles':len(triangles),'euler':len(vertices)-len(edge)+len(triangles),'signedVolume':volume,'volumeAllowance':allowance,'deflectionMm':DEFL,'planeIncidenceMm':INC,'patchAreas':actual,'circularRims':rims,'exactCoplanarPairTests':budget[0]}
+ return {'quality':'independent-indexed-manifold/finite-patch/exact-cylinder-coverage','vertices':len(vertices),'triangles':len(triangles),'euler':len(vertices)-len(edge)+len(triangles),'signedVolume':volume,'volumeAllowance':allowance,'deflectionMm':DEFL,'planeIncidenceMm':INC,'patchAreas':actual,'circularRims':rims,'cylindricalCertificates':wall_certificates,'exactCoplanarPairTests':budget[0]}
 def one(xs,label):need(len(xs)==1,'one '+label);return xs[0]
