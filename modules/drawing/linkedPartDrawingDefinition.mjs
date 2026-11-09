@@ -2,7 +2,9 @@
 // measured geometry, a staged build, publication, or drawing completeness.
 export const LINKED_DRAWING_MAX_BYTES = 65536;
 export const LINKED_DRAWING_MAX_DIMENSIONS = 16;
-const bases = ['top', 'front', 'right'];
+export const LINKED_DRAWING_MAX_VIEWS = 4;
+const orthographicBases = ['top', 'front', 'right'];
+const isometricBases = [...orthographicBases, 'isometric'];
 const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
 const fail = (message, code = 'INVALID_REQUEST') => { throw Object.assign(Error(message), {code}); };
 // Same-origin host and CAD iframe have distinct Object/Array intrinsics.
@@ -113,7 +115,8 @@ function axisView(axis, basis) {
 }
 export function captureLinkedPartDrawingDefinition(value) {
   const r = record(value, ['version', 'unit', 'drawingId', 'title', 'target', 'datum', 'sheet', 'views', 'dimensions']);
-  if (r.version !== 1 || r.unit !== 'millimeter') fail('Select drawing version1 and canonical millimeters.');
+  if (![1,2].includes(r.version) || r.unit !== 'millimeter') fail('Select drawing definition version1 or2 and canonical millimeters.');
+  const bases = r.version === 1 ? orthographicBases : isometricBases;
   text(r.drawingId, 128); text(r.title, 256, true);
   r.target = record(r.target, ['featureId', 'operationType', 'engine', 'engineRevision', 'output']);
   feature(r.target.featureId); text(r.target.operationType, 128);
@@ -128,7 +131,9 @@ export function captureLinkedPartDrawingDefinition(value) {
   let a = n, b = d; while (b) [a, b] = [b, a % b];
   if (a !== 1) fail('Scale must use a canonical coprime fraction.');
   const viewIds = new Map(); let last = -1;
-  r.views = list(r.views, 1, 3).map(value => {
+  // Version1 retains its original orthographic subsequence. Version2 means
+  // exactly the same three bases plus one source-derived isometric view.
+  r.views = list(r.views, r.version === 1 ? 1 : 4, r.version === 1 ? 3 : LINKED_DRAWING_MAX_VIEWS).map(value => {
     const v = record(value, ['viewId', 'basis', 'paperOrigin', 'visibility']), index = bases.indexOf(v.basis);
     text(v.viewId, 128);
     if (viewIds.has(v.viewId) || index <= last || v.visibility !== 'visible-and-hidden') fail('Views require unique IDs and a canonical named-basis subsequence.');
@@ -147,6 +152,7 @@ export function captureLinkedPartDrawingDefinition(value) {
     text(v.dimensionId, 128); text(v.viewId, 128);
     const basis = viewIds.get(v.viewId);
     if (dimensionIds.has(v.dimensionId) || basis === undefined) fail('Dimension IDs must be unique and name an admitted view.');
+    if (basis === 'isometric') fail('Physical reference dimensions remain on the orthographic views in definition version2.');
     dimensionIds.add(v.dimensionId); v.label = paper(v.label, r.sheet);
     if (kind === 'source-distance') {
       axisView(v.axis, basis); v.from = sourcePoint(v.from, r.datum, curves); v.to = sourcePoint(v.to, r.datum, curves);

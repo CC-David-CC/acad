@@ -434,7 +434,7 @@ export function activate(ctx: ApplicationContext) {
   function inspectLinkedPartDrawing():any {
     const job=documentJob();job.guard();const revision=inspectDocumentRevision(),geometryRevision=ctx.craftService.inspectWorkerSolids().revision,definition=drawingDefinition;
     let ready=true,reason='';try{(ctx.craftService as any).captureManufacturingEditContext();}catch{ready=false;reason='Wait for a complete current authored tip.';}
-    const result=Object.freeze({version:1,unit:'millimeter',revision,geometryRevision,definition,ready,reason,quality:'authored-definition-only',authoredUndo:'shared-session-journal-v1',limits:Object.freeze({definitionBytes:65536,requestBytes:65536,views:3,dimensions:16})});
+    const result=Object.freeze({version:1,unit:'millimeter',revision,geometryRevision,definition,ready,reason,quality:'authored-definition-only',authoredUndo:'shared-session-journal-v1',definitionVersions:Object.freeze([1,2]),viewBases:Object.freeze(['top','front','right','isometric']),limits:Object.freeze({definitionBytes:65536,requestBytes:65536,views:4,dimensions:16})});
     job.guard();if(drawingDefinition!==definition||inspectDocumentRevision()!==revision||ctx.craftService.inspectWorkerSolids().revision!==geometryRevision)throw new DOMException('Drawing inspection changed.','AbortError');return result;
   }
   async function exportLinkedPartDrawingSvg(options:{signal?:AbortSignal,valid?:()=>boolean}={}):Promise<Uint8Array> {

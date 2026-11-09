@@ -1,5 +1,6 @@
 import encoderWorkerUrl from 'codi-controlled-3mf-worker';
 import {captureLinkedPartDrawingDefinition} from 'drawing/linkedPartDrawingDefinition.mjs';
+import {DRAWING_PROJECTION_LIMITS} from 'engine/mount/ownedDrawingReadProtocol.mjs';
 const aborted=Function.call.bind(Object.getOwnPropertyDescriptor(AbortSignal.prototype,'aborted').get);
 const listen=Function.call.bind(EventTarget.prototype.addEventListener),unlisten=Function.call.bind(EventTarget.prototype.removeEventListener);
 const bufferBytes=Function.call.bind(Object.getOwnPropertyDescriptor(ArrayBuffer.prototype,'byteLength').get);
@@ -30,10 +31,12 @@ export async function workerLinkedDrawingSvg({craft,definition,revision,geometry
   if(read.revision!==revision||read.geometryRevision!==geometryRevision||read.drawingId!==d.drawingId||!Array.isArray(read.views)||read.views.length>d.views.length)throw Error('Drawing export observation changed.');
   const url=new URL(encoderWorkerUrl,location.href);
   if(url.origin!==location.origin||url.search||url.hash)throw Error('Invalid drawing encoder location.');
-  const transfers:ArrayBuffer[]=[];
+  const transfers:ArrayBuffer[]=[];let transferredBytes=0;
   for(const view of read.views)if(view.status==='available') {
     attachedBuffer(view.values,786432);attachedBuffer(view.tags,32768);
     if(transfers.includes(view.values)||transfers.includes(view.tags)||view.values===view.tags)throw Error('Invalid drawing view buffers.');
+    transferredBytes+=bufferBytes(view.values)+bufferBytes(view.tags);
+    if(transferredBytes>DRAWING_PROJECTION_LIMITS.packedBytes||transfers.length+2>DRAWING_PROJECTION_LIMITS.transferBuffers)throw Object.assign(Error('Drawing projection transfer aggregate exceeds its bound.'),{code:'RESOURCE_LIMIT'});
     transfers.push(view.values,view.tags);
   }
   check();

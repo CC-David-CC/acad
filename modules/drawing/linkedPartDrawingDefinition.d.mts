@@ -1,6 +1,7 @@
 /** Metadata admission only; no source/native membership or measured fact proof. */
 export const LINKED_DRAWING_MAX_BYTES: 65536;
 export const LINKED_DRAWING_MAX_DIMENSIONS: 16;
+export const LINKED_DRAWING_MAX_VIEWS: 4;
 export type PaperPoint = readonly [number, number];
 export type DatumAxis = 'datum-x' | 'datum-y';
 export type SourcePoint = Readonly<{kind:'source-point';featureId:number;faceId:string;regionId:string;curveId:string} & (
@@ -15,13 +16,13 @@ export type LinkedPartDrawingDimension = DimensionBase & (
   Readonly<{kind:'edge-length';edge:NativeEdge}> |
   Readonly<{kind:'hole-diameter';hole:CenterHole}> |
   Readonly<{kind:'hole-offset';axis:DatumAxis;hole:CenterHole}>);
-export type LinkedPartDrawingView = Readonly<{viewId:string;basis:'top'|'front'|'right';paperOrigin:PaperPoint;visibility:'visible-and-hidden'}>;
+export type LinkedPartDrawingView = Readonly<{viewId:string;basis:'top'|'front'|'right'|'isometric';paperOrigin:PaperPoint;visibility:'visible-and-hidden'}>;
 export type LinkedPartDrawingDefinition = Readonly<{
-  version:1;unit:'millimeter';drawingId:string;title:string;
+  version:1|2;unit:'millimeter';drawingId:string;title:string;
   target:Readonly<{featureId:number;operationType:string;engine:'occ';engineRevision:string;output:'complete-native-result'}>;
   datum:Readonly<{featureId:number;faceId:string;regionId:string}>;
   sheet:Readonly<{width:number;height:number;scale:Readonly<{numerator:number;denominator:number}>}>;
-  /** One to three unique named bases in top/front/right subsequence order. */
+  /** v1: original1..3 orthographic subsequence; v2: exactly top/front/right/isometric. */
   views:readonly LinkedPartDrawingView[];
   dimensions:readonly LinkedPartDrawingDimension[];
 }>;

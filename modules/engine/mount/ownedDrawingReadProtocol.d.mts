@@ -1,4 +1,5 @@
 import type {LinkedPartDrawingDefinition,LinkedPartDrawingDimension} from '../../drawing/linkedPartDrawingDefinition.mjs';
+export const DRAWING_PROJECTION_LIMITS:Readonly<{views:4;perViewPackedBytes:819200;packedBytes:3276800;transferBuffers:8}>;
 type V=readonly [number,number,number];
 type H=Readonly<{mountId:string;generation:1;representation:'occ-brep-worker-owned';id:string}>;
 export type DrawingDimensionObservation=Readonly<{dimensionId:string;kind:LinkedPartDrawingDimension['kind']}&({status:'available';reason:null;quality:'solved-source-datum'|'native-brep-analytic'|'native-prism-cut-lineage';value:number;anchors:readonly [V,V]}|{status:'unresolved';reason:string;quality:null;value:null;anchors:readonly []})>;
