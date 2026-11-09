@@ -315,3 +315,27 @@ typed token may vary with the actual document token. All original geometry,
 refusal, phase, artifact, source and precision criteria remain. Rerun the ENTIRE
 workflow against the same immutable runtime with a separately frozen new
 CODI_ACCEPTANCE_SOURCE; FIRST independent oracle only after whole PASS.
+
+## Known prewrite refusal: actual own directory absence
+
+Whole48911 FAIL1 is retained in evidence-r2/dd62e52, not qualified. It reached
+25Native observations, typed travel, three protected exports and one native
+Save/freshOpen, then correctly refused unreviewed3MF before writing. The test
+expected Files.stat to return null; actual mirror213 throws plain Error for
+absence. It has no NOT_FOUND code. No production filesystem change or message
+matching was introduced. The driver retained its context on incomplete readback.
+
+A separately retained passive reconciliation checked the exact original test
+account/window and matching valid browser/server owners, read both COMPLETE own
+root listings and established absence of that exact path. Only afterward was
+that owned context retired; historical receipt remains unchanged. No write or
+retry, synthetic race, timeout/cancel injection, foreign access or CAD mutation.
+
+The corrected whole now performs that same guarded browser/server root-list
+read after the exact noncommitted MANUFACTURING_REVIEW_REQUIRED refusal. It
+records actual bounded directory entries, account/window/path/owner binding and
+a full accepted state observation after the read; the independent oracle checks
+actual absence, exact roster and unchanged complete state. Unknown/incomplete
+observations still retain context. Every original geometry/source/typed/phase/
+file/precision requirement remains. Fresh ENTIRE run on unchanged runtime323/ef
+and194pins; separate acceptance Git identity, first oracle only after wholePASS.

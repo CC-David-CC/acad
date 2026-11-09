@@ -170,7 +170,19 @@ def check(directory):
  owner=r['writes'][0]['username'];need(owner and all(x['username']==owner for x in r['writes']),'same actual own account through fresh contexts')
  for i,row in enumerate(r['writes']):
   need(row['sequence']==i and row['phase']=='settled' and row['file'].startswith('/Blind-'+owner) and row['windowId'],'same owned context/path settled before the next write')
-  if row['kind']=='expected-prewrite-refusal':need(row['readback']=={'absent':True} and row['failure']['code']=='MANUFACTURING_REVIEW_REQUIRED' and not row['failure']['committed'] and not row['failure']['possiblyCommitted'],'actual authoritative prewrite refusal plus own absence readback');continue
+  if row['kind']=='expected-prewrite-refusal':
+   absence=row['readback'];need(set(absence)=={'absent','method','file','username','windowId','owner','browserEntries','serverEntries'} and absence['absent'] is True and absence['method']=='browser-server-root-list' and absence['file']==row['file'] and absence['username']==row['username'] and absence['windowId']==str(row['windowId']) and isinstance(absence['owner'],str) and 0<len(absence['owner'])<=256,'actual scoped account/path directory-list absence evidence')
+   need(row['failure']['code']=='MANUFACTURING_REVIEW_REQUIRED' and not row['failure']['committed'] and not row['failure']['possiblyCommitted'],'actual authoritative noncommitted prewrite refusal')
+   for side in ('browserEntries','serverEntries'):
+    entries=absence[side];need(isinstance(entries,list) and len(entries)<=4096,'bounded complete own directory listing');names=[]
+    for entry in entries:
+     need(set(entry)==({'path','name','directory'} if side=='browserEntries' else {'name','directory','bytes'}) and isinstance(entry['name'],str) and 0<len(entry['name'].encode())<=255 and '/' not in entry['name'] and type(entry['directory']) is bool,'actual own directory entry fields')
+     if side=='browserEntries':need(entry['path']=='/'+entry['name'],'actual root path/name binding')
+     else:need(entry['bytes'] is None if entry['directory'] else type(entry['bytes']) is int and entry['bytes']>=0,'actual server listing size')
+     names.append(entry['name'])
+    need(len(names)==len(set(names)) and row['file'][1:] not in names,'actual requested file absent from both own root listings')
+   refused=one([x for x in r['refusals'] if x['label']==row['label']],'same material prewrite refusal');need(row['afterAbsence']==refused['after'],'directory observation preserves every accepted model/token/resource field')
+   continue
   artifact=row['readback'];raw=(directory/artifact['savedFile']).read_bytes();need(artifact['file']==row['file'] and sha(raw)==artifact['sha256'] and len(raw)==artifact['bytes'],'actual submitted path readback/whole bytes')
   if row['kind']=='negative-fixture':need(row['result']['path']==row['file'] and row['result']['version'] and row['result']['status']=='pending' and row['result']['sha256']==artifact['sha256'],'actual negative write acknowledgment binds independently read bytes')
   else:need(row['result']['committed'] and row['result']['persistence']=='browser','actual submitted browser write acknowledgment')
