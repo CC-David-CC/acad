@@ -1423,6 +1423,7 @@ export function activate(ctx: ApplicationContext) {
     const nextState = {history:nextCapture.history, pointer:nextCapture.history.length-1};
     const scope:{epoch:number|null}={epoch:null};
     const nativeSourceReplay=['profile-extents','selected-profile-depth','selected-profile-region'].includes(kind)&&hasNativeSourceAttachments(before.history)?issueNativeSourceReplay(ctx,{history:nextCapture.history,kind,direction:args.direction,expectedSketches:args.direction?planNativeSourceTravel(journal,args.direction,id=>ctx.sketchStorageService.getSketchData(id)):undefined,requireCurrent:check}):undefined;
+    const publicationReceipt=Object.freeze({documentGeneration:document,journalRevision:proposal.revision,featureId:args.featureId,index});
     const preparation:PreparedSketchCommand = {
       ...(nativeSourceReplay?{nativeSourceReplay}:{}),
       candidateScope:scope, requireCurrent:check,
@@ -1432,7 +1433,7 @@ export function activate(ctx: ApplicationContext) {
         // Publication already happened: reject honestly without rolling back.
         let current=false;
         try {current=!options.signal?.aborted && (!options.valid || options.valid()===true) && ctx.projectService===service && service.hasHostLifetime && ctx.projectManager===manager && ctx.storageService===storage && service.isDocumentCurrent(document);} catch (_) { /* caller loss is a committed refusal */ }
-        if(!current)throw superseded(true);
+        if(!current)throw Object.assign(superseded(true),{publication:publicationReceipt});
       },
       async prepare() {
         if(appendTravel){check();if(journalHeadDefinition!==before.history)throw superseded();}
@@ -1440,7 +1441,21 @@ export function activate(ctx: ApplicationContext) {
         return null;
       }
     };
-    let settled=false;
+    // Only this request's real acceptance callback establishes publication.
+    // A rejected callback may already carry a committed error from the pipeline.
+    let settled=false,accepted=false,listening=false,receipt:any=null,failure:{cause:any}|null=null;
+    const wasCommitted=(error:any)=>{
+      try{return error!==null&&(typeof error==='object'||typeof error==='function')&&Object.getOwnPropertyDescriptor(error,'committed')?.value===true;}
+      catch{return false;}
+    };
+    const receiptFailure=(cause:any)=>{
+      // Preserve the existing family-specific public classification. Other
+      // already-committed errors (including cancellation) retain their identity.
+      if(kind!=='counterbore'&&kind!=='blind-hole'&&wasCommitted(cause))return cause;
+      const code=kind==='counterbore'?'COUNTERBORE_PUBLICATION_FAILED':kind==='blind-hole'?'BLIND_PUBLICATION_FAILED':'AUTHORED_PUBLICATION_FAILED';
+      const message=kind==='counterbore'?'Counterbore edit committed but its receipt/lifetime is unavailable.':kind==='blind-hole'?'Blind edit committed but its receipt/lifetime is unavailable.':'Authored edit committed but its receipt/lifetime is unavailable.';
+      return Object.assign(Error(message),{code,committed:true,cause,publication:publicationReceipt,...(receipt?{receipt}:{})});
+    };
     const stop=()=>{if(!settled && scope.epoch!==null && scope.epoch===evaluationEpoch)engineResources.cancelCandidates();};
     const timer=setInterval(()=>{
       try {
@@ -1451,13 +1466,13 @@ export function activate(ctx: ApplicationContext) {
       }
       catch (_) { stop(); }
     },100);
-    options.signal?.addEventListener('abort',stop,{once:true});
     try {
+      if(options.signal){listening=true;options.signal.addEventListener('abort',stop,{once:true});}
       check();
       if (pendingPipelines || pendingModifications) throw new Error('Another operation is still in progress.');
       await new Promise<void>((yes,no)=>{
         pendingModifications++;
-        modificationCallbacks.set(nextState,{onAccepted:yes,onError:no,preparation,journalProposal:proposal,journalSignature:nextCapture.signature});
+        modificationCallbacks.set(nextState,{onAccepted(){accepted=true;yes();},onError:no,preparation,journalProposal:proposal,journalSignature:nextCapture.signature});
         modifications$.next(nextState);
         try {
           if (ctx.projectService!==service || ctx.projectManager!==manager || ctx.storageService!==storage ||
@@ -1465,18 +1480,23 @@ export function activate(ctx: ApplicationContext) {
               !service.isDocumentCurrent(document)) stop();
         } catch (_) {stop();}
       });
-      if(kind==='counterbore'){
-        try{preparation.requireCommittedCurrent();return Object.freeze({changed:true,revision:inspectAuthoredEdits().revision,featureId:args.featureId,index,dimensions:nextDimensions});}
-        catch(cause){throw Object.assign(Error('Counterbore edit committed but its receipt/lifetime is unavailable.'),{code:'COUNTERBORE_PUBLICATION_FAILED',committed:true,cause});}
-      }
-      if(kind==='blind-hole'){
-        try{preparation.requireCommittedCurrent();return Object.freeze({changed:true,revision:inspectAuthoredEdits().revision,featureId:args.featureId,index,dimensions:nextDimensions});}
-        catch(cause){throw Object.assign(Error('Blind edit committed but its receipt/lifetime is unavailable.'),{code:'BLIND_PUBLICATION_FAILED',committed:true,cause});}
-      }
       preparation.requireCommittedCurrent();
-      return Object.freeze({changed:true,revision:inspectAuthoredEdits().revision,featureId:args.featureId,index,
+      receipt=Object.freeze({changed:true,revision:inspectAuthoredEdits().revision,featureId:args.featureId,index,
         ...(['operation-remove','through-hole-parent'].includes(kind)?{}:appendTravel?{operationType:appendPlan.operation.type,direction:args.direction}:kind==='profile-extents'?{...nextExtent}:kind==='revolve-angle'?{angleRadians:nextAngle}:kind==='selected-profile-region'?{regionId:nextRegion}:kind==='solid-shell'?{thickness:nextThickness}:kind==='solid-edge-treatment'?{size:nextSize}:['extrusion','selected-profile-depth'].includes(kind)?{depth:nextDepth}:{dimensions:nextDimensions})});
-    } finally {settled=true;clearInterval(timer);options.signal?.removeEventListener('abort',stop);}
+    } catch(cause) {failure={cause:accepted?receiptFailure(cause):cause};}
+    finally {
+      settled=true;const cleanup:any[]=[];
+      try{clearInterval(timer);}catch(cause){cleanup.push(cause);}
+      if(listening)try{options.signal.removeEventListener('abort',stop);}catch(cause){cleanup.push(cause);}
+      if(cleanup.length)failure={cause:Object.assign(Error('Authored edit listener/timer cleanup is unconfirmed.'),{
+        code:'WORKER_CLEANUP_FAILED',committed:accepted||wasCommitted(failure?.cause),
+        cause:cleanup[0],cleanupErrors:Object.freeze(cleanup),
+        ...(failure?{operationError:failure.cause}:{}),
+        ...(accepted?{publication:publicationReceipt}:{}),...(receipt?{receipt}:{})
+      })};
+    }
+    if(failure!==null)throw failure.cause;
+    return receipt;
   }
 
   function reset(modifications: OperationRequest[], options?: {documentGeneration: number}) {
