@@ -32,6 +32,14 @@ VALIDATION_SOURCES=('test/library-validation/cgal_evidence.py','test/library-val
 sha=lambda b:hashlib.sha256(b).hexdigest()
 def need(v,m):
  if not v:raise ValueError(m)
+def reviewed_json(path):
+ path=Path(path);need(path.stat().st_size<=65536,'reviewed configuration file bound')
+ def pairs(items):
+  result={}
+  for key,value in items:need(key not in result,'duplicate reviewed configuration key '+key);result[key]=value
+  return result
+ def constant(value):raise ValueError('nonfinite reviewed configuration '+value)
+ return json.loads(path.read_text(encoding='utf-8'),object_pairs_hook=pairs,parse_constant=constant)
 def one(xs,m):need(len(xs)==1,'one '+m);return xs[0]
 def near(a,b,t=FINE):need(type(a) in (int,float) and math.isfinite(a) and abs(a-float(b))<=t,f'{a} != {b} within declared {t}mm')
 def interval(e):
@@ -201,7 +209,7 @@ def mesh(raw,e,b,build,encoding,truth,mesh_evidence,artifact_path):
 
 svg=inspect_extent_svg
 
-def check(directory,readerFile):
+def check(directory,readerFile,evidenceAnchors=None):
  directory=Path(directory);r=json.loads((directory/'receipt.json').read_text());need(r['status']=='PASS' and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'] and not r['sourceSeeds'] and not r['fakeReplies'],'whole terminal complete public/source/context custody');need(r['sourcePins']==r['sourcePinsAfter'] and r['engineRevision']==BUILD,'immutable source and explicit approved cohort')
  # R4 captured eighteen ORIGINAL producer/acceptance sources. Corrected
  # post-whole verifier sources have separate before/after Git custody; they
@@ -212,7 +220,12 @@ def check(directory,readerFile):
  expected={('core','test/selected-profile-extents-workflow/'+name) for name in names}|{('core','web/app/cad/export/linkedPartDrawingSvg.mjs'),('core','web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),('core','web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),('core','test/native-cad-container/archive_oracle.py'),('desktop','test/agent-cad-corpus/sweep/signed-harness.mjs'),('desktop','test/agent-cad-corpus/strict-join/oracle.mjs')}
  if not original_r4:expected.update(('core',name) for name in VALIDATION_SOURCES)
  need({(s['repository'],s['relative']) for s in r['sourceSnapshots']}==expected and len(r['sourceSnapshots'])==len(expected),'complete executed/helper/transitive source roster')
- mesh_evidence=load_cgal_evidence(os.environ.get('CODI_ORACLE_CORE_GIT',str(Path(__file__).resolve().parents[2])),evidence_commit=EVIDENCE_COMMIT,report_path='test/library-validation/evidence-r3/assessment/report.json',build_custody_path='test/library-validation/evidence-first/build-custody.json',acquisition_path='test/library-validation/acquisition-r1/acquisition.json',observer_commit=OBSERVER_COMMIT,build_source_commit=BUILD_SOURCE_COMMIT,input_manifest_path='test/selected-profile-extents-workflow/diagnostics-r4/INPUTS.json',executable_key='cgal-build-r2/codi-cgal-readonly-mesh',receipt_bytes=(directory/'receipt.json').read_bytes())
+ if evidenceAnchors is None:
+  need(original_r4,'a new whole requires its separately reviewed matching mesh-evidence anchors')
+  evidenceAnchors={'evidence_commit':EVIDENCE_COMMIT,'report_path':'test/library-validation/evidence-r3/assessment/report.json','build_custody_path':'test/library-validation/evidence-first/build-custody.json','acquisition_path':'test/library-validation/acquisition-r1/acquisition.json','observer_commit':OBSERVER_COMMIT,'build_source_commit':BUILD_SOURCE_COMMIT,'input_manifest_commit':BUILD_SOURCE_COMMIT,'input_manifest_path':'test/selected-profile-extents-workflow/diagnostics-r4/INPUTS.json','executable_key':'cgal-build-r2/codi-cgal-readonly-mesh'}
+ anchor_keys={'evidence_commit','report_path','build_custody_path','acquisition_path','observer_commit','build_source_commit','input_manifest_commit','input_manifest_path','executable_key'}
+ need(type(evidenceAnchors) is dict and set(evidenceAnchors)==anchor_keys and all(type(v) is str for v in evidenceAnchors.values()),'exact reviewed mesh-evidence caller anchors; never report-selected identities')
+ mesh_evidence=load_cgal_evidence(os.environ.get('CODI_ORACLE_CORE_GIT',str(Path(__file__).resolve().parents[2])),**evidenceAnchors,receipt_bytes=(directory/'receipt.json').read_bytes())
  for s in r['sourceSnapshots']:
   raw=(directory/s['file']).read_bytes();need(sha(raw)==s['sha256']==r['sourcePins'][s['repository']+':'+s['relative']],'actual immutable snapshot SHA');commit=r['acceptance'] if s['relative'].startswith('test/selected-profile-extents-workflow/') or s['relative'] in VALIDATION_SOURCES else r['source'] if s['repository']=='core' else r['hostSource'];need(s['commit']==commit,'separate driver/runtime source custody');gitRoot=os.environ.get('CODI_ORACLE_'+s['repository'].upper()+'_GIT',s['root']);blob=subprocess.run(['git','-C',gitRoot,'show',commit+':'+s['relative']],capture_output=True);need(blob.returncode==0 and blob.stdout==raw,'exact frozen Git object, not current path assumption');oid=subprocess.run(['git','-C',gitRoot,'rev-parse',commit+':'+s['relative']],capture_output=True,text=True);need(oid.returncode==0 and oid.stdout.strip()==s['gitBlobOID'],'actual Git blob identity')
  cases={c['name'] for c in r['cases']};need(cases=={'rectangle-main','circle-XZ','annulus-ZY','placed-rectangle','large-private-origin','literal-through-pattern','literal-blind'},'complete source/placement/consumer domain roster');need(len(r['allocations'])==4,'two actual through seeds, one pattern and one blind reservation');need(len(r['exportSets'])==6 and len(r['saves'])==len(r['reopens'])>=9 and len(r['malformed'])==3 and len(r['consumers'])==2,'complete artifacts/native cycles/negative/consumer phases')
@@ -274,7 +287,11 @@ def check(directory,readerFile):
   artifacts.append({'file':item['savedFile'],'format':kind,'result':result})
  need(Counter(x['format'] for x in artifacts)=={'3mf':6,'step':6,'svg':2},'complete actual artifact roster, no missing consumers');return {'status':'PASS','scope':'finite C06 authored extents/source/caps/consumers/persistence/material/artifacts; no universal BRep/physics/UI qualification','sourceCoordinateBudgetMm':FINE,'sourceCoordinateBudgetPm':50,'observations':len(observations),'refusals':len(r['refusals']),'archives':archives,'artifacts':artifacts,'stepLimitation':'separate SAME-OCCT reader, not external kernel'}
 if __name__=='__main__':
- need(len(sys.argv)==4,'WHOLE FIRST_READER_REPORT NEW_ORACLE_REPORT');output=Path(sys.argv[3]);need(not output.exists(),'preserve FIRST oracle report')
- try:result=check(sys.argv[1],sys.argv[2])
+ need(len(sys.argv) in (4,5),'WHOLE FIRST_READER_REPORT NEW_ORACLE_REPORT [REVIEWED_MESH_EVIDENCE_ANCHORS_JSON]');output=Path(sys.argv[3]);need(not output.exists(),'preserve FIRST oracle report')
+ try:
+  anchors=None
+  if len(sys.argv)==5:
+   anchors=reviewed_json(sys.argv[4])
+  result=check(sys.argv[1],sys.argv[2],anchors)
  except Exception as e:result={'status':'FAIL','error':str(e)};output.write_text(json.dumps(result,indent=2)+'\n');raise
  output.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))

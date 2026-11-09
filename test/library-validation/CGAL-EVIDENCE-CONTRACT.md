@@ -22,6 +22,7 @@ bound = load_cgal_evidence(
     acquisition_path=reviewed_acquisition_record_path,
     observer_commit=reviewed_executed_observer_commit,
     build_source_commit=reviewed_compiled_source_commit,
+    input_manifest_commit=reviewed_input_manifest_commit,
     input_manifest_path=reviewed_input_manifest_path,
     executable_key=reviewed_build_artifact_key,
     receipt_bytes=original_immutable_whole_receipt_bytes,
@@ -49,6 +50,7 @@ branch exists in the helper):
 | acquisition_path | `test/library-validation/acquisition-r1/acquisition.json` |
 | observer_commit | `32700df4e38e34269a0a9892e00f0220f5daf0eb` |
 | build_source_commit | `829962e9ebcbe11be8b240008ba6be6340b5483f` |
+| input_manifest_commit | `829962e9ebcbe11be8b240008ba6be6340b5483f` for this original R4 manifest; later data is independently pinned |
 | input_manifest_path | `test/selected-profile-extents-workflow/diagnostics-r4/INPUTS.json` |
 | executable_key | `cgal-build-r2/codi-cgal-readonly-mesh` |
 
@@ -64,7 +66,9 @@ omitted member of that assessed batch.
    commit. Build sourceCommit must match the separately supplied reviewed source
    commit, clean-state record and successful same-sources corrected build.
    Every source inventory record is checked against its Git blob/SHA256, including
-   actual C++/CMake/input-manifest sources. The executed observer SHA is checked
+   actual C++/CMake and all recorded build sources. The assessed data manifest
+   has its own explicit Git commit; later datasets do not require an unchanged
+   C++ validator to be rebuilt or the old build record to be rewritten. The executed observer SHA is checked
    against the separate reviewed observer Git commit, rather than assuming the
    first build's old observer is the later R3 observer.
 2. Report executableSHA must equal the actual selected completed-build artifact

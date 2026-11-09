@@ -347,7 +347,7 @@ class _BoundCGALAssessment:
 
 def load_cgal_evidence(repository, *, evidence_commit, report_path, build_custody_path,
                        acquisition_path, observer_commit, build_source_commit,
-                       input_manifest_path, executable_key, receipt_bytes):
+                       input_manifest_commit, input_manifest_path, executable_key, receipt_bytes):
     """Load a Root-pinned complete assessment, not caller-supplied valid flags.
 
     All commits/paths are reviewed caller anchors. No library/tool is executed;
@@ -371,7 +371,7 @@ def load_cgal_evidence(repository, *, evidence_commit, report_path, build_custod
           build.get('sourceStatus') == '', 'build source/clean-state provenance')
     source_snapshot = _GitSnapshot(repository, build_source_commit)
     sources = _mapping(build.get('sources'), 'build source inventory')
-    _need({SOURCE_CPP, SOURCE_CMAKE, input_manifest_path} <= set(sources) and
+    _need({SOURCE_CPP, SOURCE_CMAKE} <= set(sources) and
           0 < len(sources) <= 32, 'build source inventory incomplete/unbounded')
     for name, record in sources.items():
         _mapping(record, 'build source record')
@@ -409,7 +409,9 @@ def load_cgal_evidence(repository, *, evidence_commit, report_path, build_custod
           report.get('sourceAndEvidenceInputsUnchanged') is True and
           report.get('sourceIntentAndDeviation') ==
           'NOT_CERTIFIED; full-surface proof remains required', 'assessment is not complete/scoped')
-    manifest_bytes = source_snapshot.blob(input_manifest_path, MAX_SMALL)
+    # Data manifests are not compiler inputs: unchanged code can assess a later
+    # whole with its separately reviewed and pinned input-manifest commit.
+    manifest_bytes = _GitSnapshot(repository, input_manifest_commit).blob(input_manifest_path, MAX_SMALL)
     _need(report.get('inputManifestSHA256') == _sha(manifest_bytes), 'assessment input-manifest identity')
     manifest = _mapping(_json(manifest_bytes, MAX_SMALL), 'input manifest')
     inputs = _mapping(manifest.get('inputs'), 'manifest input inventory')
@@ -496,6 +498,7 @@ def load_cgal_evidence(repository, *, evidence_commit, report_path, build_custod
         'cgalCMakeSHA256': sources[SOURCE_CMAKE]['sha256'],
         'cgalExecutableSHA256': executable_sha,
         'executableProvenance': 'frozen completed build custody; not a fresh binary rehash',
+        'inputManifestCommit': _oid(input_manifest_commit),
         'inputManifestSHA256': _sha(manifest_bytes), 'receiptSHA256': receipt_sha,
         'producerSource': producer['source'], 'producerHostSource': producer['hostSource'],
         'producerAcceptance': producer['acceptance'], 'engineRevision': producer['engineRevision'],
