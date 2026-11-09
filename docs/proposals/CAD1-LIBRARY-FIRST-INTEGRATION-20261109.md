@@ -1,5 +1,17 @@
 # CAD 1 library integration plan
 
+## Latest finite-curve Native ingredient — 2026-11-09
+
+Native d3b2afa thin export compiled normally with unchanged captured inputs;
+Core b45d9a0 preserves build/static ABI custody. All49 expected exports and
+(i32,i32)->void for the new query are statically present. No module/query
+execution, portable adaptation, mounting, certified finite event or trim/extend
+command is claimed. The private invocation adapter is source work next; normal
+WASM growth boundary is recorded in CAD1-FINITE-CURVE-GROWTH-BOUNDARY-20261109.
+C11 actual R3 repaired SVG leader/text collision remains the serial qualification
+blocker; ordinary21/21 do not close full Gate1.
+
+
 Status: accepted direction; native library assessment PARTIAL. Browser library
 integrations remain unqualified; no runtime adoption is claimed.
 Owner: Root integrator. Updated 2026-11-09. This changes the implementation
