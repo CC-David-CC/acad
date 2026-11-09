@@ -10,6 +10,25 @@ from archive_oracle import read_archive
 spec=importlib.util.spec_from_file_location('retained_iso_oracle',ROOT/'isometric-drawing-public-workflow'/'check.py');iso=importlib.util.module_from_spec(spec);spec.loader.exec_module(iso)
 spec=importlib.util.spec_from_file_location('drawing_warning_oracle',ROOT/'drawing-warning-oracle.py');warnings=importlib.util.module_from_spec(spec);spec.loader.exec_module(warnings);warning_layout=warnings.check_warnings
 need,near,vector,one=iso.need,iso.near,iso.vector,iso.one;sha=lambda b:hashlib.sha256(b).hexdigest()
+WARNING_SOURCE_ROSTER={
+ ('core', 'modules/engine/extrusion/selectedRegionDescriptor.mjs'),
+ ('core', 'test/drawing-warning-oracle.py'),
+ ('core', 'test/four-bore-drawing-public-workflow/CONTRACT.md'),
+ ('core', 'test/four-bore-drawing-public-workflow/README.md'),
+ ('core', 'test/four-bore-drawing-public-workflow/check.py'),
+ ('core', 'test/four-bore-drawing-public-workflow/desktop-driver.mjs'),
+ ('core', 'test/four-bore-drawing-public-workflow/example.mjs'),
+ ('core', 'test/isometric-drawing-public-workflow/check.py'),
+ ('core', 'test/native-cad-container/archive_oracle.py'),
+ ('core', 'web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),
+ ('core', 'web/app/cad/export/linkedPartDrawingSvg.mjs'),
+ ('core', 'web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),
+ ('desktop', 'apps/system/jsketcher/drawing-bore-commands.mjs'),
+ ('desktop', 'apps/system/jsketcher/drawing-commands.mjs'),
+ ('desktop', 'apps/system/jsketcher/index.mjs'),
+ ('desktop', 'test/agent-cad-corpus/strict-join/oracle.mjs'),
+ ('desktop', 'test/agent-cad-corpus/sweep/signed-harness.mjs'),
+}
 BUILD='sha256:57b74074e0a249b917ac68357fbd003c37d1ab61897206886b575088e6995858:60dc956b08e01f43d08a48035a384e478e63bb34fb55f21a152c8cd12e8b8947'
 SLOTS=['MIN_X_MIN_Y','MAX_X_MIN_Y','MAX_X_MAX_Y','MIN_X_MAX_Y'];NS=iso.NS
 
@@ -184,7 +203,7 @@ def observation(row):
  need(request['revision']==s['capture']['solids']['revision'] and request['bodyId']==body['id'] and request['featureId']==body['featureId'] and request['engineRevision']==BUILD,'current points producer/build');need(q['points']==[{'point':p,'classification':classify(p,e,corner,mode)} for p in request['points']],'independent analytic material/void/cap classes');return curves
 
 def check_svg(root,item,rows):
- raw=(root/item['savedFile']).read_bytes();need(sha(raw)==item['sha256'] and len(raw)==item['byteLength'],'own acknowledged SVG/server bytes');need(item['before']==item['after'],'SVG exact readonly state');matches=[r for r in rows if r['case']==item['case'] and r['definition']==item['definition'] and r['before']['host']['revision']==item['before']['host']['revision'] and r['before']['capture']==item['before']['capture']];row=one(matches[-1:],'current Native observation for SVG');curves=observation(row);d=item['definition'];xml=ET.fromstring(raw);need(xml.tag=='{'+NS['s']+'}svg' and xml.attrib=={'width':'594mm','height':'420mm','viewBox':'0 0 594 420'},'physical SVG sheet');meta=json.loads(one(xml.findall('s:metadata',NS),'actual SVG metadata').text);need(meta['drawingId']==d['drawingId'] and meta['revision']==item['before']['host']['revision'] and meta['geometryRevision']==item['before']['drawing']['geometryRevision'] and meta['definitionVersion']==3 and meta['viewCount']==4 and meta['dimensionRole']=='reference' and meta['annotationRole']=='derived-native-bore-reference' and meta['ordinateRole']=='signed-datum-coordinate' and meta['status']==row['read']['status'],'SVG source/native/typed fact binding');need(meta['annotationFacts']==row['read']['observation']['annotations'],'actual derived annotation facts reach SVG');need(all('transform' not in node.attrib for node in xml.iter()),'no hidden geometry transforms')
+ raw=(root/item['savedFile']).read_bytes();need(sha(raw)==item['sha256'] and len(raw)==item['byteLength'],'own acknowledged SVG/server bytes');need(item['before']==item['after'],'SVG exact readonly state');matches=[r for r in rows if r['case']==item['case'] and r['definition']==item['definition'] and r['before']['host']['revision']==item['before']['host']['revision'] and r['before']['capture']==item['before']['capture']];row=one(matches[-1:],'current Native observation for SVG');curves=observation(row);d=item['definition'];xml=ET.fromstring(raw);warnings.check_warning_presentation(xml,need);need(xml.tag=='{'+NS['s']+'}svg' and xml.attrib=={'width':'594mm','height':'420mm','viewBox':'0 0 594 420'},'physical SVG sheet');meta=json.loads(one(xml.findall('s:metadata',NS),'actual SVG metadata').text);need(meta['drawingId']==d['drawingId'] and meta['revision']==item['before']['host']['revision'] and meta['geometryRevision']==item['before']['drawing']['geometryRevision'] and meta['definitionVersion']==3 and meta['viewCount']==4 and meta['dimensionRole']=='reference' and meta['annotationRole']=='derived-native-bore-reference' and meta['ordinateRole']=='signed-datum-coordinate' and meta['status']==row['read']['status'],'SVG source/native/typed fact binding');need(meta['annotationFacts']==row['read']['observation']['annotations'],'actual derived annotation facts reach SVG');need(all('transform' not in node.attrib for node in xml.iter()),'no hidden geometry transforms')
  paths=[p for p in xml.findall('.//s:path',NS) if p.get('data-view-id')];expected=[(v,c) for v,cc in zip(d['views'],curves) for c in cc];need(len(paths)==len(expected),'all actual Native fragments reach SVG, not count-only')
  for p,(v,c) in zip(paths,expected):
   need(p.get('data-view-id')==v['viewId'] and p.get('data-view-basis')==v['basis'],'fragment/view binding');ps=iso.path_points(p.attrib['d']);need((p.get('stroke-dasharray')=='2 1')==c['hidden'],'Native visibility');need(len(ps)==2 if c['line'] else len(ps)>=2,'line/conic SVG')
@@ -232,7 +251,7 @@ def check_svg(root,item,rows):
 
 def main(root):
  packet=json.loads((root/'receipt.json').read_text());need(packet['status']=='PASS' and packet['ownedContextsRetired'] and packet['sharedBrowserDisconnectedOnly'],'whole application/cleanup PASS required');need(packet['sourcePins']==packet['sourcePinsAfter'],'frozen whole source');need(packet['engineRevision']==BUILD and not packet['sourceSeeds'] and not packet['privateAuthoring'] and not packet['fakeReplies'],'genuine public authoring only');need(packet['tolerances']=={'sourceMm':5e-8,'nativeVolumeMm3':1e-6,'nativeBoundsMm':1e-6,'dimensionMm':1e-6,'projectionMm':1e-6,'svgPaperChordMm':.02},'unchanged physical/native budgets');need([c['name'] for c in packet['cases']]==['original','translated-negative'] and all(c['status']=='PASS' for c in packet['cases']),'both actual datum families')
- warnings.verify_warning_sources(root,packet,need)
+ warnings.verify_warning_sources(root,packet,need,WARNING_SOURCE_ROSTER)
  need(len(packet['observations'])==56,'all finite current observations')
  for c in packet['cases']:
   m=c['binding']['preFillet']['metrics'];need(m['nativeValidity']['valid'] is True and m['solidCount']==1 and m['nativeTopology']['counts']['faces']==11,'actual earlier complete slab');near(m['nativeVolume'],100000-820*math.pi)

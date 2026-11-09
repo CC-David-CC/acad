@@ -11,6 +11,19 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'native-cad-container'
 from archive_oracle import read_archive
 import importlib.util
 _spec=importlib.util.spec_from_file_location('drawing_warning_oracle',Path(__file__).resolve().parents[1]/'drawing-warning-oracle.py');_warning=importlib.util.module_from_spec(_spec);_spec.loader.exec_module(_warning)
+WARNING_SOURCE_ROSTER={
+ ('core', 'test/drawing-reference-repair-public-workflow/README.md'),
+ ('core', 'test/drawing-reference-repair-public-workflow/check.py'),
+ ('core', 'test/drawing-reference-repair-public-workflow/desktop-driver.mjs'),
+ ('core', 'test/drawing-reference-repair-public-workflow/example.mjs'),
+ ('core', 'test/drawing-warning-oracle.py'),
+ ('core', 'test/native-cad-container/archive_oracle.py'),
+ ('core', 'web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),
+ ('core', 'web/app/cad/export/linkedPartDrawingSvg.mjs'),
+ ('core', 'web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),
+ ('desktop', 'test/agent-cad-corpus/strict-join/oracle.mjs'),
+ ('desktop', 'test/agent-cad-corpus/sweep/signed-harness.mjs'),
+}
 PI=Decimal('3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651')
 BUILD='sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc'
 FRAMES={'top':([1,0,0],[0,1,0],[0,0,1]),'front':([1,0,0],[0,0,1],[0,-1,0]),'right':([0,1,0],[0,0,1],[1,0,0])}
@@ -194,7 +207,7 @@ def check_refusal_state(before,after,candidate):
 
 def check(directory):
     root=Path(directory);r=json.loads((root/'receipt.json').read_text());need(r['status']=='PASS' and r['engineRevision']==BUILD,'complete actual workflow first');need(r['sourcePins']==r['sourcePinsAfter'] and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'],'immutable source/owned cleanup');need(not any(r[k] for k in ('sourceSeeds','privateAuthoring','fakeReplies')),'genuine authoring');need([c['name'] for c in r['cases']]==['original','negative-datum'] and all(c['status']=='PASS' for c in r['cases']),'both actual datum cases')
-    _warning.verify_warning_sources(root,r,need)
+    _warning.verify_warning_sources(root,r,need,WARNING_SOURCE_ROSTER)
     cases={c['name']:c for c in r['cases']};reads=[]
     for row in r['observations']:reads.append({'case':row['case'],'label':row['label'],'volumeMM3':check_observation(row,cases[row['case']])['volume'],'unresolved':row['unresolved']})
     need(len(reads)==44,'all 44 actual Native drawing and point observations');need(len(r['repairs'])==2,'actual repair in both cases')

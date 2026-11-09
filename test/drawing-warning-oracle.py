@@ -17,16 +17,31 @@ def overlay_line_boxes(value,need):
   previous=point
  need(out,'actual nonempty overlay');return out
 
-def verify_warning_sources(root,receipt,need):
+def verify_warning_sources(root,receipt,need,expected_sources):
  rows=receipt['sourceSnapshots'];identities={(r['repository'],r['relative']) for r in rows}
  required={('core','test/drawing-warning-oracle.py'),('core','web/app/cad/export/linkedPartDrawingSvg.mjs'),('core','web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),('core','web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),('desktop','test/agent-cad-corpus/strict-join/oracle.mjs')}
- need(len(identities)==len(rows) and required<=identities and {r['originalFile'] for r in rows}==set(receipt['sourcePins']),'complete new transitive warning/helper producer custody, no duplicates')
+ need(len(identities)==len(rows) and identities==expected_sources and required<=identities and {r['originalFile'] for r in rows}==set(receipt['sourcePins']),'exact complete family/transitive warning/helper producer custody, no omissions or duplicates')
  for row in rows:
   raw=(root/row['file']).read_bytes();need(len(raw)<=8388608 and hashlib.sha256(raw).hexdigest()==row['sha256']==receipt['sourcePins'][row['originalFile']],'actual before/after frozen helper snapshot bytes')
   commit=receipt['pins']['desktop'] if row['repository']=='desktop' else receipt['acceptanceSource'] if row['relative'].startswith('test/') else receipt['pins']['source']
   need(row['commit']==commit and re.fullmatch('[a-f0-9]{40}',commit) and row['originalFile']==str(Path(row['root'])/row['relative']),'actual producer commit and path binding')
   need(hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()==row['gitBlobOID'],'independent source Git blob identity')
   original=subprocess.run(['git','-C',row['root'],'show',commit+':'+row['relative']],stdout=subprocess.PIPE,stderr=subprocess.PIPE);need(original.returncode==0 and original.stdout==raw,'independent frozen producer commit:path bytes')
+
+def check_warning_presentation(xml,need):
+ # These ordinary three/four-view families emit no hatch patterns. Close the
+ # actual presentation ancestry as well as each warning node: local attributes
+ # alone cannot prove visibility through an opaque/hidden parent or CSS defs.
+ ns='{http://www.w3.org/2000/svg}'
+ need([n.tag for n in xml]==[ns+n for n in ('title','metadata','defs','rect','g','g')],'closed visible SVG hierarchy; no late erasure, style, foreign content or extra groups')
+ title,metadata,defs,paper,geometry,textgroup=list(xml)
+ need(not title.attrib and not list(title) and not metadata.attrib and not list(metadata),'plain title/metadata cannot change presentation')
+ need(not defs.attrib and not list(defs),'bare empty ordinary-view defs cannot hide or restyle warnings')
+ need(paper.attrib=={'width':'100%','height':'100%','fill':'white'} and not list(paper),'single unobscured background before actual geometry/text')
+ need(geometry.attrib=={'fill':'none','stroke':'#111','stroke-width':'.25'} and textgroup.attrib=={'font-family':'sans-serif','font-size':'3'},'exact visible geometry/text ancestry without hidden inherited effects')
+ need(all(n.tag==ns+'path' and not list(n) and n.text in (None,'') for n in geometry) and all(n.tag==ns+'text' for n in textgroup),'closed path/text membership')
+ need(xml.text in (None,'') and all(n.tail in (None,'') for n in xml) and geometry.text in (None,'') and textgroup.text in (None,''),'no extra presentation content outside verified roles')
+ for n in xml.iter():need(not (set(n.attrib)&{'transform','style','opacity','display','visibility','clip-path','mask','filter'}),'no hidden/transformed/filter effects on actual visible warning ancestry or strokes')
 
 def check_warnings(texts,expected,sheet,view_bounds,stroke_bounds,label_boxes,caption_boxes,need):
  ns='{http://www.w3.org/2000/svg}';nodes=[n for n in texts if 'data-warning-layout' in n.attrib]
@@ -60,6 +75,7 @@ def check_warnings(texts,expected,sheet,view_bounds,stroke_bounds,label_boxes,ca
 
 def check_dimension_diagnostics(xml,d,observation,curves,evaluate,path_points,need):
  """Current three/four-view dimension-only families; no placement prediction."""
+ check_warning_presentation(xml,need)
  ns='{http://www.w3.org/2000/svg}';texts=xml.findall('.//'+ns+'text');scale=d['sheet']['scale']['numerator']/d['sheet']['scale']['denominator'];envelopes=[]
  for view,cc in zip(d['views'],curves):
   points=[]
