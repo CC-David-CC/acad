@@ -11,7 +11,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'native-cad-container'
 from archive_oracle import read_archive
 from truth import need,one,settled,requirement_observation,discovery,height_layout,FINE,INCIDENCE,DIRECTION
 from svg_oracle import inspect_svg,project
-from negative_archive import inspect as negative
+from negative_archive import inspect as inspect_negative_archive
 sha=lambda b:hashlib.sha256(b).hexdigest()
 LOCAL=set('CONTRACT.md README.md example.mjs desktop-driver.mjs check.py truth.py requirement_math.py native_record.py svg_oracle.py negative_archive.py'.split())
 PRODUCT=set('modules/drawing/linkedPartDrawingDefinition.mjs modules/engine/extrusion/selectedArrangementDescriptor.mjs modules/engine/extrusion/selectedRegionDescriptor.mjs modules/engine/mount/booleanSelectionClaims.mjs modules/engine/mount/drawingDetailClip.mjs modules/engine/mount/drawingReferenceFacts.mjs modules/engine/mount/drawingRequirementFacts.mjs modules/engine/mount/drawingRequirementProtocol.mjs modules/engine/mount/orthographicAnalyticRecord.mjs modules/engine/mount/ownedBoreAnnotationProtocol.mjs modules/engine/mount/ownedBoreReadProtocol.mjs modules/engine/mount/ownedDrawingReadProtocol.mjs modules/engine/mount/ownedDrawingSectionProtocol.mjs modules/engine/mount/ownedOrthographicReadProtocol.mjs modules/engine/mount/ownedTopologyContract.mjs modules/engine/mount/prismaticBoreFacts.mjs web/app/cad/export/linkedPartDrawingCaptionLayout.mjs web/app/cad/export/linkedPartDrawingRequirementForms.mjs web/app/cad/export/linkedPartDrawingSvg.mjs web/app/cad/export/linkedPartDrawingWarningLayout.mjs web/app/cad/craft/workerDrawingReadCommands.ts web/app/cad/craft/workerSolidCommands.ts test/native-cad-container/archive_oracle.py'.split())
@@ -129,7 +129,7 @@ def check(directory):
  base=r['saves'][0];need(len(r['malformed'])==2 and {x['name']for x in r['malformed']}=={'wrong-ra-unit','nonfinite-json-quantity'},'actual own malformed archive scope')
  for f in r['malformed']:
   need(f['before']==f['after']and f['error']['code']==f['code']and not f['error']['committed']and not f['error']['possiblyCommitted'],'pre-adoption malformed Open exact complete state')
-  proof=negative(directory/base['savedFile'],directory/'malformed'/(f['name']+'.cad'),f['name']);need(proof==f['proof']and proof['negativeSha256']==f['sha256'],'negative-only actual saved drawings/manifest mutation proof')
+  proof=inspect_negative_archive(directory/base['savedFile'],directory/'malformed'/(f['name']+'.cad'),f['name']);need(proof==f['proof']and proof['negativeSha256']==f['sha256'],'negative-only actual saved drawings/manifest mutation proof')
  for before,after in ((r['tool']['before'],r['tool']['after']),(r['cover']['before'],one([x for x in r['observations']if x['label']=='Real upstream union consumes original target'],'actual union publication')['before'])):
   counter=copy.deepcopy(before['capture']['native']['counters']);counter['featureId']+=1
   need(after['capture']['native']['counters']==counter and after['ownership']['counters']==counter,'each genuine appended roof/union allocates EXACTLY one feature, other counters unchanged')
