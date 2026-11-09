@@ -13,6 +13,8 @@ def one(rows,message):need(len(rows)==1,'one '+message);return rows[0]
 def blank(value):return value is None or not value.strip()
 def pair_equal(a,b):return len(a)==len(b)==2 and (all(math.dist(x,y)<=INC for x,y in zip(a,b)) or all(math.dist(x,y)<=INC for x,y in zip(a,reversed(b))))
 def path_chains(value):
+ number=r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?'
+ need(re.fullmatch('M'+number+','+number+'(?: [ML]'+number+','+number+')*',value),'exact explicit ML exporter subset; no positional comma or implicit command')
  token=re.compile(r'[ML]|[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?');parts=[];end=0
  for m in token.finditer(value):need(not value[end:m.start()].strip(' ,\t\r\n'),'closed finite SVG polyline grammar');parts.append(m[0]);end=m.end()
  need(not value[end:].strip(' ,\t\r\n') and len(parts)>=6 and len(parts)%3==0,'complete bounded SVG path');chains=[]
@@ -23,6 +25,7 @@ def path_chains(value):
  need(all(2<=len(ps)<=65537 and all(0<=p[0]<=420 and 0<=p[1]<=297 for p in ps) for ps in chains),'bounded actual sheet geometry');return chains
 
 def inspect_extent_svg(raw,e,definition,context):
+ need(definition==context['drawing']['definition'],'proposed drawing equals actual accepted current authored definition')
  need(type(raw) is bytes and 0<len(raw)<=16*1024*1024,'actual16MiB SVG cap');text=raw.decode('utf-8');need('\x00' not in text and '<!' not in text and '<?' not in text,'fixed UTF8 exporter form, no declarations/PIs/comments/NUL')
  root=ET.fromstring(text);need(root.tag==NS+'svg' and root.attrib=={'width':'420mm','height':'297mm','viewBox':'0 0 420 297'} and blank(root.text) and blank(root.tail),'exact visible physical root')
  children=list(root);need([n.tag for n in children]==[NS+n for n in ('title','metadata','defs','rect','g','g')] and all(blank(n.tail) for n in children),'closed visible SVG scaffold')

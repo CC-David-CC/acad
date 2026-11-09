@@ -81,6 +81,8 @@ def inspect_counterbore_svg(raw,e,definition,context):
  require({d['kind'] for d in definition['dimensions']}=={'source-distance','plane-distance'},'no invented counterbore measurement')
  W,H,T=e['width'],e['height'],e['thickness'];s=T-e['stepDepth'];r,R=e['throughDiameter']/2,e['stepDiameter']/2;scale=definition['sheet']['scale']['numerator']/definition['sheet']['scale']['denominator'];require(scale==1,'frozen1:1 physical paper mapping');chord=.02/scale;inc=1e-6
  def path_chains(text):
+  number=r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?'
+  require(re.fullmatch('M'+number+','+number+'(?: [ML]'+number+','+number+')*',text),'exact explicit ML exporter subset; no positional comma or implicit command')
   token=re.compile(r'[ML]|[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?');parts=[];end=0
   for m in token.finditer(text):require(not text[end:m.start()].strip(' ,\t\r\n'),'exact SVG polyline grammar');parts.append(m[0]);end=m.end()
   require(not text[end:].strip(' ,\t\r\n') and len(parts)>=6 and parts[0]=='M','complete actual SVG polyline');chains=[];i=0

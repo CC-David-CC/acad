@@ -196,7 +196,9 @@ def check(directory,readerFile):
   if kind=='3mf':need(item['issued']['revision']==before['host']['revision'],'actual public export doc revision');metadata=before['manufacturing']['metadata'];need(metadata['revision'].startswith('sha256-'),'actual canonical encoding revision');result=mesh(raw,item['expected'],item['binding'],BUILD,metadata['revision'][7:],t)
   elif kind=='step':
    actual=one([x for x in reader['artifacts'] if x['file']==item['savedFile'] and x['artifactSHA256']==item['sha256']],'actual STEP reader record');need(actual['exitCode']==0 and actual['observation']['readerSourceSha256']==cpp['sha256'],'actual matching reader');need(item['issued']['revision']==before['host']['revision'] and item['issued']['geometryRevision']==before['capture']['solids']['revision'],'real issued STEP currentness');result=inspect_step(actual['observation'],item['expected'],t['frame'],t['lo'],t['hi'],float(t['volume']),t['bounds'],t['points'],t['classes'])
-  elif kind=='svg':result=svg(raw,item['expected'],one([x['definition'] for x in r['definitions'] if x['case']==item['case']],'actual source/cap definition'),before)
+  elif kind=='svg':
+   need(item['issued']['revision']==before['host']['revision'],'actual public SVG issued revision')
+   result=svg(raw,item['expected'],one([x['definition'] for x in r['definitions'] if x['case']==item['case']],'actual source/cap definition'),before)
   else:raise ValueError('unknown actual artifact')
   artifacts.append({'file':item['savedFile'],'format':kind,'result':result})
  need(Counter(x['format'] for x in artifacts)=={'3mf':6,'step':6,'svg':2},'complete actual artifact roster, no missing consumers');return {'status':'PASS','scope':'finite C06 authored extents/source/caps/consumers/persistence/material/artifacts; no universal BRep/physics/UI qualification','sourceCoordinateBudgetMm':FINE,'sourceCoordinateBudgetPm':50,'observations':len(observations),'refusals':len(r['refusals']),'archives':archives,'artifacts':artifacts,'stepLimitation':'separate SAME-OCCT reader, not external kernel'}

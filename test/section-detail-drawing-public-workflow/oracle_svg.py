@@ -88,6 +88,8 @@ def verify_svg(root,item,row,facts,iso,bore):
  def ps(node,moves=(0,),closed=False):
   value=node.get('d','');need(not re.search(r'[^MLZ0-9eE+.,\s-]',value),'only finite supported M/L/Z geometry')
   need(value.count('Z')==int(closed) and value.rstrip().endswith('Z')==closed,'actual finite closed/open path grammar');value=value[:-1].rstrip() if closed else value
+  number=r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?'
+  need(re.fullmatch('M'+number+','+number+'(?: [ML]'+number+','+number+')*',value),'exact explicit ML exporter subset after the declared final Z')
   tokens=iso.TOKEN.findall(value);need(len(tokens)%3==0 and len(tokens)>=6,'explicit complete M/L coordinate commands')
   for i in range(0,len(tokens),3):need(tokens[i]==('M' if i//3 in moves else 'L') and tokens[i+1] not in ('M','L') and tokens[i+2] not in ('M','L'),'actual path connectivity/subpath grammar')
   return iso.path_points(value)
