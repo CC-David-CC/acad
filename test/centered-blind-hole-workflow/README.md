@@ -90,3 +90,9 @@ files bind that exact Git commit; imported Core archive and Desktop helpers bind
 the producing source/Desktop tuple. Default is CODI_EXPECT_SOURCE. The oracle
 needs those same Core/Desktop Git object databases available for independent
 commit/path/blob readback after the whole run. This does not change runtime pins.
+
+STEP orientation is checked after composing actual FACE_BOUND and ORIENTED_EDGE
+uses; face same_sense separately orients surface normals. Opposite effective
+shell edge uses and analytic outer/inner/cylinder-rim traversal are required.
+Retained writer/reader source and an actual same-cohort STEP artifact establish
+the convention; no bound.T assumption or double face reversal is used.

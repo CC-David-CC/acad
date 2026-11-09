@@ -245,3 +245,49 @@ object itself. Runtime pins still bind the actual composed application; optional
 CODI_ACCEPTANCE_SOURCE selects a separately frozen acceptance-only commit if it
 postdates that immutable runtime. It never substitutes product/runtime pins.
 No tests/probes/TSC/build/browser/Native execution during preparation.
+
+## STEP bound/face/edge orientation follow-up
+
+The independent reader now validates FACE_BOUND/FACE_OUTER_BOUND.orientation,
+composes it with each ORIENTED_EDGE orientation, and reverses effective loop
+order/endpoints when required. Every shell edge must have TWO OPPOSITE effective
+uses, including the cylinder seam's two occurrences. Mere count2 is insufficient.
+EDGE_CURVE.same_sense separately binds natural LINE/CIRCLE parameter traversal;
+it is not a second topological edge reversal.
+
+ADVANCED_FACE.same_sense orients the analytic face normal. It does NOT implicitly
+reverse the STEP topology again. Retained source evidence at Native repository
+c15e49dfbb5bb5fcf7b5c81e7c63724c81807ae0:
+
+- occt/src/TopoDSToStep/TopoDSToStep_MakeStepFace.cxx, blob
+  5cf564b01fd25f524575f569d8cab224b7fdbb6b: Init uses a forward face for
+  exploration, explicitly chooses bound orientation for reversed faces, then
+  emits actual face same_sense. Its comment distinguishes STEP from TopoDS's
+  implicit subshape reversal.
+- occt/src/TopoDSToStep/TopoDSToStep_MakeStepWire.cxx, blob
+  5ee5a6e1242f522af0b2077429515fcdf2b08b6c: edge-loop path normalizes the wire
+  forward and emits actual CurrentEdge orientation in ORIENTED_EDGE.
+- occt/src/StepToTopoDS/StepToTopoDS_TranslateFace.cxx, blob
+  b31b6e5812c2f63d681a54735fca2b288d0bcf14: reader separately combines bound
+  and face sense when restoring TopoDS wires to compensate its implicit rule.
+
+Actual retained same32e/abb artifact
+ test/native-cad-container/evidence-r1/initial.step, Git blob
+f693e8f2eec8a364d82714d36686ed7e2c36137d, SHA256
+0f21601033bc45a75792ee598219156b827a45b17eb1ad59acc2f28b2914ed24,
+contains #17 ADVANCED_FACE(...,.F.) with #18 FACE_BOUND(...,.F.) and underlying
+forward edge uses. It therefore cannot be interpreted by assuming bound.T or
+multiplying face sense twice. Its receipt binds the exact MFG pair; these are
+source/artifact reads, NOT a new Native run or a newly compiled SDK claim.
+
+For each supported planar loop, actual effective LINE endpoint area or complete
+CIRCLE natural-axis traversal must agree with the oriented face: positive for
+actual outer rectangle/disk, negative for the real top opening. A declared
+FACE_OUTER_BOUND cannot masquerade as the inner hole. On the finite cylinder,
+rim natural traversal is checked against its actual axial ordering and face
+sense: positive at the low axial bound/negative at the high for outward UV,
+reversed for the actual inward pocket wall. Existing support/incidence/span and
+closed-seam checks remain. No Native ordinal, guessed bound orientation, change
+to geometry tolerances or product parser is involved. Unsupported loop/surface
+representations still refuse; this is a finite analytic STEP subset rather than
+a general oriented-shell/interchange certification. No tests/probes/build/runtime.

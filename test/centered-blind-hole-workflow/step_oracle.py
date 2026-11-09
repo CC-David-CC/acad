@@ -117,28 +117,52 @@ def inspect_step(raw, truth):
                     require(math.hypot(*cross(c['axis'],axis))<=1e-9 and math.hypot(*cross(sub(c['center'],origin),axis))<=1e-6,'actual circular rim follows actual cylinder support');near(c['radius'],radius)
     solids=[('ref',i) for i,(kind,_) in records.items() if kind=='MANIFOLD_SOLID_BREP'];require(len(solids)==1,'exactly one STEP manifold solid')
     shell=record(solids[0],'MANIFOLD_SOLID_BREP')[1][1];faces=record(shell,'CLOSED_SHELL')[1][1];require(0<len(faces)<=256 and len(set(faces))==len(faces),'bounded unique actual face roster')
-    edge_use=collections.Counter();used_vertices=set();used_edges=set();planar=[];cylindrical=[];face_contribution=0
+    edge_use=collections.Counter();edge_incidence=collections.defaultdict(list);used_vertices=set();used_edges=set();planar=[];cylindrical=[];face_contribution=0
     for face_ref in faces:
         _,a=record(face_ref,'ADVANCED_FACE');bounds,surface,sense=a[1:];require(sense in (('enum','T'),('enum','F')),'face orientation');loops=[];face_contribution+=2-len(bounds)
         for bound in bounds:
-            typ,b=record(bound);require(typ in ('FACE_BOUND','FACE_OUTER_BOUND'),'face loop bound');_,loop=record(b[1],'EDGE_LOOP');edges=[]
+            typ,b=record(bound);require(typ in ('FACE_BOUND','FACE_OUTER_BOUND') and len(b)==3 and b[2] in (('enum','T'),('enum','F')),'actual face-bound kind/orientation');bound_kind=typ;bound_sign=1 if b[2]==('enum','T') else -1;_,loop=record(b[1],'EDGE_LOOP');edges=[]
             for oriented in loop[1]:
                 _,o=record(oriented,'ORIENTED_EDGE');edge=o[3];_,e=record(edge,'EDGE_CURVE');require(o[4] in (('enum','T'),('enum','F')),'oriented edge sense')
                 start,end=e[1],e[2];used_vertices.update((start,end));used_edges.add(edge);edge_use[edge]+=1
                 p,q=vertex(start),vertex(end);ends=(start,end) if o[4]==('enum','T') else (end,start);support=curve(e[3]);curve_incidence(support,p,q,e[4])
-                edges.append({'ref':edge,'vertices':(start,end),'points':(p,q),'ends':ends,'curve':support,'sameSense':e[4]})
-            require(edges and all(edges[j]['ends'][1]==edges[(j+1)%len(edges)]['ends'][0] for j in range(len(edges))),'closed actual edge loop');loops.append(edges)
+                edges.append({'ref':edge,'vertices':(start,end),'points':(p,q),'ends':ends,'curve':support,'sameSense':e[4],'effectiveSign':(1 if o[4]==('enum','T') else -1)*bound_sign,'boundKind':bound_kind})
+            require(edges and all(edges[j]['ends'][1]==edges[(j+1)%len(edges)]['ends'][0] for j in range(len(edges))),'closed underlying edge loop')
+            # STEP bounds explicitly orient their loop in the face. Unlike
+            # TopoDS, ADVANCED_FACE.same_sense does NOT implicitly flip these
+            # edge uses again; it sets the geometric normal separately below.
+            if bound_sign<0:edges=[{**edge,'ends':edge['ends'][::-1]} for edge in reversed(edges)]
+            require(all(edges[j]['ends'][1]==edges[(j+1)%len(edges)]['ends'][0] for j in range(len(edges))),'closed effective face-bound loop')
+            for edge in edges:edge_incidence[edge['ref']].append((face_ref,bound,edge['effectiveSign']))
+            loops.append(edges)
         typ,s=record(surface);require(typ in ('PLANE','CYLINDRICAL_SURFACE'),'only actual analytic plane/cylinder surfaces')
         origin,axis=placement(s[1]);normal=tuple(x*(1 if sense==('enum','T') else -1) for x in axis)
         surface_incidence(loops,typ,origin,axis,None if typ=='PLANE' else s[2])
-        row={'origin':origin,'axis':axis,'normal':normal,'loops':loops}
+        require(sum(loop[0]['boundKind']=='FACE_OUTER_BOUND' for loop in loops)<=1,'at most one declared outer bound per analytic face')
+        row={'origin':origin,'axis':axis,'normal':normal,'loops':loops,'sameSense':sense}
         if typ=='PLANE':planar.append(row)
         else:require(s[2]>0 and sense==('enum','F'),'inward cylindrical hole face');row['radius']=s[2];cylindrical.append(row)
     require(len(cylindrical)==1,'one actual cylindrical blind wall in this finite subset')
     require(all(n==2 for n in edge_use.values()),'actual closed shell edge membership')
+    require(all(len(uses)==2 and uses[0][2]==-uses[1][2] for uses in edge_incidence.values()),'each actual shell edge has opposite effective oriented uses including seam occurrences')
     require(len(used_vertices)-len(used_edges)+face_contribution==2,'blind recess does not create a through handle')
     vertices=[vertex(v) for v in used_vertices];lo=[min(p[i] for p in vertices) for i in range(3)];hi=[max(p[i] for p in vertices) for i in range(3)]
     vector(lo,[0,0,0]);vector(hi,[100,50,truth['thickness']]);floor=truth['thickness']-truth['depth'];radius=truth['diameter']/2;require(0<floor<truth['thickness'],'actual interior floor')
+    def planar_loop_orientation(loop,normal,outer):
+        require(outer or loop[0]['boundKind']!='FACE_OUTER_BOUND','declared outer bound cannot be an actual inner hole')
+        if all(edge['curve']['kind']=='LINE' for edge in loop):
+            area_vector=tuple(math.fsum(cross(vertex(edge['ends'][0]),vertex(edge['ends'][1]))[i] for edge in loop)/2 for i in range(3));oriented_area=dot(area_vector,normal)
+        elif len(loop)==1 and loop[0]['curve']['kind']=='CIRCLE' and loop[0]['vertices'][0]==loop[0]['vertices'][1]:
+            edge=loop[0];c=edge['curve'];natural_sign=edge['effectiveSign']*(1 if edge['sameSense']==('enum','T') else -1);oriented_area=math.pi*c['radius']**2*dot(c['axis'],normal)*natural_sign
+        else:raise ValueError('Unsupported finite planar loop for independent orientation proof')
+        require(math.isfinite(oriented_area) and (oriented_area>0 if outer else oriented_area<0),'effective planar outer/inner loop orientation agrees with actual oriented face normal')
+    def cylinder_rim_orientation(face,circles):
+        # Cylinder UV orientation: increasing angle at the low axial bound,
+        # decreasing angle at the high bound, reversed for an inward face.
+        ordered=sorted(circles,key=lambda edge:dot(sub(edge['curve']['center'],face['origin']),face['axis']));sense=1 if face['sameSense']==('enum','T') else -1
+        require(dot(sub(ordered[1]['curve']['center'],ordered[0]['curve']['center']),face['axis'])>0,'distinct actual cylindrical axial bounds')
+        for edge,expected in zip(ordered,(sense,-sense)):
+            natural_sign=edge['effectiveSign']*(1 if edge['sameSense']==('enum','T') else -1);actual=dot(edge['curve']['axis'],face['axis'])*natural_sign;near(actual,expected,1e-9)
     def circle_loop(loop,z):
         require(len(loop)==1,'one actual closed rim edge');e=loop[0];c=e['curve'];require(c['kind']=='CIRCLE' and e['vertices'][0]==e['vertices'][1],'closed circular rim')
         vector(c['center'],[50,25,z]);near(c['radius'],radius);near(abs(c['axis'][2]),1,1e-9);near(math.dist(e['points'][0],c['center']),radius);return e['ref']
@@ -153,17 +177,18 @@ def inspect_step(raw, truth):
     for f in planar:
         axes=[i for i,n in enumerate(f['normal']) if abs(abs(n)-1)<=1e-9];require(len(axes)==1 and all(abs(f['normal'][j])<=1e-9 for j in range(3) if j!=axes[0]),'actual axis-aligned analytic support');axis=axes[0];sign=1 if f['normal'][axis]>0 else -1
         if axis==2 and abs(f['origin'][2]-floor)<=1e-6:
-            require(sign==1 and floor_face is None and len(f['loops'])==1,'one true upward flat blind floor');floor_face=f;floor_rim=circle_loop(f['loops'][0],floor);continue
+            require(sign==1 and floor_face is None and len(f['loops'])==1,'one true upward flat blind floor');floor_face=f;floor_rim=circle_loop(f['loops'][0],floor);planar_loop_orientation(f['loops'][0],f['normal'],True);continue
         key=(axis,sign);require(key not in outer,'no overlapping duplicate outer support in finite subset');outer.add(key);near(f['origin'][axis],hi[axis] if sign>0 else lo[axis])
         if axis==2:
-            rect=[r for r in f['loops'] if len(r)==4 and all(e['curve']['kind']=='LINE' for e in r)];require(len(rect)==1,'one actual outer cap rectangle');rectangle(rect[0],f['origin'][2]);others=[r for r in f['loops'] if r is not rect[0]]
-            if sign>0:require(len(others)==1,'one blind opening on the entry cap');top_rim=circle_loop(others[0],hi[2])
+            rect=[r for r in f['loops'] if len(r)==4 and all(e['curve']['kind']=='LINE' for e in r)];require(len(rect)==1,'one actual outer cap rectangle');rectangle(rect[0],f['origin'][2]);planar_loop_orientation(rect[0],f['normal'],True);others=[r for r in f['loops'] if r is not rect[0]]
+            if sign>0:require(len(others)==1,'one blind opening on the entry cap');top_rim=circle_loop(others[0],hi[2]);planar_loop_orientation(others[0],f['normal'],False)
             else:require(not others,'bottom is closed material, not THRU')
-        else:require(len(f['loops'])==1 and len(f['loops'][0])==4 and all(e['curve']['kind']=='LINE' for e in f['loops'][0]),'actual untouched rectangular outer side')
+        else:require(len(f['loops'])==1 and len(f['loops'][0])==4 and all(e['curve']['kind']=='LINE' for e in f['loops'][0]),'actual untouched rectangular outer side');planar_loop_orientation(f['loops'][0],f['normal'],True)
     require(outer=={(i,s) for i in range(3) for s in (-1,1)} and floor_face is not None,'complete source boundary plus genuine interior floor')
     f=cylindrical[0];near(abs(f['axis'][2]),1,1e-9);near(f['origin'][0],50);near(f['origin'][1],25);near(f['radius'],radius);require(len(f['loops'])==1 and len(f['loops'][0])==4,'actual finite cylinder boundary')
     circles=[e for e in f['loops'][0] if e['curve']['kind']=='CIRCLE'];lines=[e for e in f['loops'][0] if e['curve']['kind']=='LINE'];require(len(circles)==2 and len(lines)==2 and lines[0]['ref']==lines[1]['ref'],'two rims and genuine repeated seam')
+    cylinder_rim_orientation(f,circles)
     require({e['ref'] for e in circles}=={top_rim,floor_rim},'same actual top/floor edges shared by cylinder and planes');vector(sorted(c['curve']['center'][2] for c in circles),[floor,hi[2]]);vector(sorted(p[2] for p in lines[0]['points']),[floor,hi[2]])
     for edge in circles:vector(edge['curve']['center'][:2],[50,25]);near(edge['curve']['radius'],radius)
     volume=(hi[0]-lo[0])*(hi[1]-lo[1])*(hi[2]-lo[2])-math.pi*radius**2*(hi[2]-floor);near(volume,truth['volume'])
-    return {'quality':'independent-analytic-STEP21-centered-blind-subset','solidCount':1,'actualFaceCount':len(faces),'actualEdgeCount':len(used_edges),'bounds':{'min':lo,'max':hi},'floorLevel':floor,'depthFromEntry':hi[2]-floor,'diameter':2*radius,'analyticVolume':volume,'generalInterchangeQualified':False}
+    return {'quality':'independent-analytic-STEP21-centered-blind-subset','solidCount':1,'actualFaceCount':len(faces),'actualEdgeCount':len(used_edges),'bounds':{'min':lo,'max':hi},'floorLevel':floor,'depthFromEntry':hi[2]-floor,'diameter':2*radius,'analyticVolume':volume,'orientedShell':'opposite-effective-edge-uses-and-analytic-loop-winding','generalInterchangeQualified':False}
