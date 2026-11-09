@@ -1,0 +1,43 @@
+{
+  "scope": "normal build and immutable private staging only; whole qualification pending",
+  "source": "8771a5699c3a0e6d89fa6e840000803b921b175e",
+  "desktop": "7fc7a508f4d6d90b846227ee5feb8d3b93109261",
+  "build": {
+    "handle": 71026,
+    "exitCode": 0,
+    "compilerWarningErrorMatches": []
+  },
+  "stage": {
+    "handle": 89185,
+    "exitCode": 0,
+    "runtimePins": 189,
+    "bundleFiles": 551
+  },
+  "files": [
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r6.sh",
+      "sha256": "b32cfa79af16253d2a05f837c2accd72367c383490bdf290639ebdc1ca9e74e1",
+      "bytes": 2507
+    },
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r6.log",
+      "sha256": "c5644e7a2db2fc5e56193f860ab3b65b4c37801242f32366acc1bb3e84e531a9",
+      "bytes": 159549
+    },
+    {
+      "file": "codi-acad-foundation-next-fixture-20261109-r4.sh",
+      "sha256": "961639d7f544f399c2103024e07ac2f5cf539f0017351b0e985d65edc2222e50",
+      "bytes": 1585
+    },
+    {
+      "file": "codi-acad-foundation-next-stage-20261109-r4.log",
+      "sha256": "c5f462cc22d677aaad896f5076447ea71fa53e985312f3da08f0efabf18306fb",
+      "bytes": 1514
+    },
+    {
+      "file": "codi-acad-foundation-next-pins-20261109-r4.json",
+      "sha256": "970170a846da213ad252865490ad9ad1ba3b4de67e5b75a84d797d431c5b6737",
+      "bytes": 27107
+    }
+  ]
+}
