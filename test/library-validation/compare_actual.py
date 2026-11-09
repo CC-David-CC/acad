@@ -295,6 +295,7 @@ def lib3mf_assessment(path, raw, meshes):
             namespace, name = entry.GetNameSpace(), entry.GetName()
             observed_metadata.append({'name': namespace+':'+name if namespace else name,
                                       'value': entry.GetValue()})
+        observed['metadata'] = observed_metadata
         check(collections.Counter((m['name'], m['value']) for m in observed_metadata) ==
               collections.Counter((m['name'], m['value']) for m in raw['metadata']),
               'library metadata differs from raw package')
