@@ -113,7 +113,7 @@ def verify_svg(root,item,row,facts,iso,bore):
     if curve['line']:points.extend(iso.evaluate(curve,t) for t in curve['range'])
     else:
      radii=[math.hypot(curve['a'][j],curve['b'][j]) for j in (0,1)]
-     points.extend([[curve['c'][j]+sign*radii[j] for j in (0,1)] for sign in (-1,1))
+     points.extend([[curve['c'][j]+sign*radii[j] for j in (0,1)] for sign in (-1,1)])
   if not points:return None
   mapped=[paper(view,p) for p in points];need(all(all(math.isfinite(z) for z in p) for p in mapped),'finite authentic caption envelope')
   return [min(p[0] for p in mapped),min(p[1] for p in mapped),max(p[0] for p in mapped),max(p[1] for p in mapped)]
