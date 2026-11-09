@@ -1,3 +1,4 @@
+import {createDrawingRequirementResolver,drawingRequirementReferenceReason} from './drawingRequirementFacts.mjs';
 import {captureBoreReadResult,unresolvedBoreRead,BORE_DISCOVERY_LIMIT} from './ownedBoreReadProtocol.mjs';
 import {inspectFiniteCylinder as finiteCylinder,createPrismaticBoreObserver} from './prismaticBoreFacts.mjs';
 // Worker-only geometric facts. Every slot stays private to its current owned
@@ -6,9 +7,11 @@ import {captureLinkedPartDrawingDefinition} from '../../drawing/linkedPartDrawin
 import {qualifySourceCurveId} from '../extrusion/selectedRegionDescriptor.mjs';
 import {validateOwnedTopology} from './ownedTopologyContract.mjs';
 import {reconcileNativeSelectionClaims} from './booleanSelectionClaims.mjs';
-import {captureDrawingReadResult,unresolvedDrawingRead} from './ownedDrawingReadProtocol.mjs';
+import {captureDrawingReadResult,unresolvedDrawingRead,captureDrawingRequirementTargetsResult,unresolvedDrawingRequirementTargets} from './ownedDrawingReadProtocol.mjs';
 const tol=1e-7,dirTol=1e-8,sub=(a,b)=>a.map((n,i)=>n-b[i]),add=(a,b)=>a.map((n,i)=>n+b[i]),mul=(a,n)=>a.map(x=>x*n),dot=(a,b)=>a.reduce((n,x,i)=>n+x*b[i],0),norm=a=>Math.hypot(...a),cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],near=(a,b)=>norm(sub(a,b))<=tol;
-const unavailable=reason=>{throw Object.assign(Error(reason),{code:reason});};
+const unavailableReasons=new WeakMap();
+const unavailable=reason=>{const error=Object.assign(Error(reason),{code:reason});unavailableReasons.set(error,reason);throw error;};
+const requirementReason=error=>unavailableReasons.get(error)||drawingRequirementReferenceReason(error);
 const freeze=v=>{if(v&&typeof v==='object'){for(const x of Object.values(v))freeze(x);Object.freeze(v);}return v;};
 export const captureDrawingDefinition=captureLinkedPartDrawingDefinition;
 export const unresolvedOwnedDrawingReferences=unresolvedDrawingRead;
@@ -37,11 +40,11 @@ export function resolveOwnedDrawingReferences({definition,topology,index,sourceP
  if(!index||def.datum.featureId!==sourceFeatureId||def.datum.regionId!==sourceRegionId||profile.region.id!==sourceRegionId||!index.plan.sourceContexts?.some(c=>c.kind===datum.kind&&c.featureId===sourceFeatureId&&c.regionId===sourceRegionId))return unresolvedDrawingRead(def,'DRAWING_DATUM_UNAVAILABLE');
  const f=datum.frame,world=p=>add(f.origin,add(mul(f.x,p[0]),mul(f.y,p[1]))),curves=[...profile.region.outer,...profile.region.holes.flat()];
  function sourcePoint(r){const id=qualifySourceCurveId(r.faceId,r.curveId),curve=curves.find(c=>c.id===id);if(r.featureId!==sourceFeatureId||r.faceId!==def.datum.faceId||r.regionId!==sourceRegionId||!curve)unavailable('DRAWING_SOURCE_CHANGED');if(curve.kind!==r.curveType)unavailable('DRAWING_TYPE_CHANGED');const p=curve.kind==='circle'?curve.center:curve[r.point];if(!p)unavailable('DRAWING_REFERENCE_MISSING');return world(p);}
- function nativeRef(r,kind){const list=kind==='face'?index.plan.faces:index.plan.edges,descriptor=list.find(x=>x.id===r.selectionId);if(!descriptor||descriptor.originFeatureId!==r.originFeatureId)unavailable('DRAWING_REFERENCE_UNRESOLVED');let i;try{i=kind==='face'?index.resolveFace(r.selectionId):index.resolveEdge(r.selectionId);}catch{unavailable('DRAWING_REFERENCE_UNRESOLVED');}const entity=(kind==='face'?topology.faces:topology.edges)[i-1];if(entity.type!==r.geometry)unavailable('DRAWING_TYPE_CHANGED');return entity;}
+ function nativeRef(r,kind){const list=kind==='face'?index.plan.faces:index.plan.edges,descriptor=list.find(x=>x.id===r.selectionId);if(!descriptor||descriptor.originFeatureId!==r.originFeatureId)unavailable('DRAWING_REFERENCE_UNRESOLVED');let i;try{i=kind==='face'?index.resolveFace(r.selectionId):index.resolveEdge(r.selectionId);}catch(error){if(def.version===4&&error?.code!=='UNRESOLVED_SELECTION')throw error;unavailable('DRAWING_REFERENCE_UNRESOLVED');}const entity=(kind==='face'?topology.faces:topology.edges)[i-1];if(entity.type!==r.geometry)unavailable('DRAWING_TYPE_CHANGED');return entity;}
  const boreReader=createBoreReader({topology,frame:f,cylinders,classify});
  function hole(r){return boreReader.finite(r.kind==='through-hole'?r:{...r,holeKind:'centered-through'});}
  const facePoints=face=>[...new Set(face.wires.flat().flatMap(u=>topology.edges[u.edge-1].vertices))].filter(i=>i>0).map(i=>topology.vertices[i-1].point);
- const dimensions=def.dimensions.map(d=>{try{let value,anchors,quality='native-brep-analytic';if(d.kind==='source-distance'){anchors=[sourcePoint(d.from),sourcePoint(d.to)];value=Math.abs(dot(sub(anchors[1],anchors[0]),d.axis==='datum-x'?f.x:f.y));quality='solved-source-datum';}else if(d.kind==='edge-length'){const edge=nativeRef(d.edge,'edge');anchors=edge.range.map(t=>add(edge.analytic.origin,mul(edge.analytic.direction,t)));if(!edge.vertices.every(i=>i>0&&anchors.some(p=>near(p,topology.vertices[i-1].point))))unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');value=norm(sub(anchors[1],anchors[0]));}else if(d.kind==='plane-distance'){const a=nativeRef(d.first,'face'),b=nativeRef(d.second,'face');if(norm(cross(a.analytic.normal,b.analytic.normal))>dirTol||norm(cross(a.analytic.normal,f.z))>dirTol)unavailable('DRAWING_CAP_ALIGNMENT_UNSUPPORTED');const distance=dot(sub(b.analytic.origin,a.analytic.origin),a.analytic.normal);value=Math.abs(distance);for(const p of facePoints(a)){const q=add(p,mul(a.analytic.normal,distance));const actual=facePoints(b).find(x=>near(x,q));if(actual){anchors=[p,actual];break;}}if(!anchors)unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');}else{const h=hole(d.hole);quality='native-prism-cut-lineage';if(d.kind==='hole-diameter'){value=2*h.radius;anchors=h.diameterAnchors;}else{const delta=sub(h.intersection,f.origin),x=dot(delta,f.x),y=dot(delta,f.y);value=Math.abs(d.axis==='datum-x'?x:y);anchors=[add(f.origin,mul(d.axis==='datum-x'?f.y:f.x,d.axis==='datum-x'?y:x)),h.intersection];}}return{dimensionId:d.dimensionId,kind:d.kind,status:'available',reason:null,quality,value,anchors};}catch(e){if(typeof e?.code!=='string'||!(/^(DRAWING_|SELECTION_|UNRESOLVED_)/.test(e.code)))throw e;return{dimensionId:d.dimensionId,kind:d.kind,status:'unresolved',reason:e.code,quality:null,value:null,anchors:[]};}});
+ const dimensions=def.dimensions.map(d=>{try{let value,anchors,quality='native-brep-analytic';if(d.kind==='source-distance'){anchors=[sourcePoint(d.from),sourcePoint(d.to)];value=Math.abs(dot(sub(anchors[1],anchors[0]),d.axis==='datum-x'?f.x:f.y));quality='solved-source-datum';}else if(d.kind==='edge-length'){const edge=nativeRef(d.edge,'edge');anchors=edge.range.map(t=>add(edge.analytic.origin,mul(edge.analytic.direction,t)));if(!edge.vertices.every(i=>i>0&&anchors.some(p=>near(p,topology.vertices[i-1].point))))unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');value=norm(sub(anchors[1],anchors[0]));}else if(d.kind==='plane-distance'){const a=nativeRef(d.first,'face'),b=nativeRef(d.second,'face');if(norm(cross(a.analytic.normal,b.analytic.normal))>dirTol||norm(cross(a.analytic.normal,f.z))>dirTol)unavailable('DRAWING_CAP_ALIGNMENT_UNSUPPORTED');const distance=dot(sub(b.analytic.origin,a.analytic.origin),a.analytic.normal);value=Math.abs(distance);for(const p of facePoints(a)){const q=add(p,mul(a.analytic.normal,distance));const actual=facePoints(b).find(x=>near(x,q));if(actual){anchors=[p,actual];break;}}if(!anchors)unavailable('DRAWING_FINITE_EXTENT_UNQUALIFIED');}else{const h=hole(d.hole);quality='native-prism-cut-lineage';if(d.kind==='hole-diameter'){value=2*h.radius;anchors=h.diameterAnchors;}else{const delta=sub(h.intersection,f.origin),x=dot(delta,f.x),y=dot(delta,f.y);value=Math.abs(d.axis==='datum-x'?x:y);anchors=[add(f.origin,mul(d.axis==='datum-x'?f.y:f.x,d.axis==='datum-x'?y:x)),h.intersection];}}return{dimensionId:d.dimensionId,kind:d.kind,status:'available',reason:null,quality,value,anchors};}catch(e){if(def.version===4?!requirementReason(e):typeof e?.code!=='string'||!(/^(DRAWING_|SELECTION_|UNRESOLVED_)/.test(e.code)))throw e;return{dimensionId:d.dimensionId,kind:d.kind,status:'unresolved',reason:e.code,quality:null,value:null,anchors:[]};}});
  // Source-relative, nonperspective isometric; no saved axes/camera or
  // rectangle-minimum origin. All frames are derived in this owning Worker.
  function viewFrame(basis){
@@ -62,9 +65,9 @@ export function resolveOwnedDrawingReferences({definition,topology,index,sourceP
    // failure from the controller after advertising this derived frame.
    if(frame.origin.some(n=>!Number.isFinite(n)||Math.abs(n)>1e6))unavailable('DRAWING_VIEW_FRAME_UNQUALIFIED');
    return{viewId:v.viewId,status:'available',reason:null,frame};
-  }catch(e){if(typeof e?.code!=='string'||!(/^(DRAWING_|SELECTION_|UNRESOLVED_)/.test(e.code)))throw e;return{viewId:v.viewId,status:'unresolved',reason:e.code,frame:null};}
+  }catch(e){if(def.version===4?!requirementReason(e):typeof e?.code!=='string'||!(/^(DRAWING_|SELECTION_|UNRESOLVED_)/.test(e.code)))throw e;return{viewId:v.viewId,status:'unresolved',reason:e.code,frame:null};}
  });
- const annotations=def.version===3?def.annotations.map(a=>{try{
+ const annotations=def.version>=3?def.annotations.map(a=>{try{
   let facts;
   const refs=a.kind==='bore-center'?[a.hole]:a.holes,rows=refs.map(ref=>boreReader.observe(ref));
   if(a.kind==='bore-center'){const h=rows[0];facts={center:h.center,ends:h.ends,diameter:h.diameter};}
@@ -78,19 +81,23 @@ export function resolveOwnedDrawingReferences({definition,topology,index,sourceP
    facts=a.kind==='ordinate'?{coordinates,anchors}:{values:coordinates.map(Math.abs),anchors};
   }
   return{annotationId:a.annotationId,kind:a.kind,status:'available',reason:null,quality:'native-prism-cut-lineage',facts};
- }catch(e){if(typeof e?.code!=='string'||!(/^(DRAWING_|SELECTION_|UNRESOLVED_)/.test(e.code)))throw e;return{annotationId:a.annotationId,kind:a.kind,status:'unresolved',reason:e.code,quality:null,facts:null};}}):[];
- const available=dimensions.every(d=>d.status==='available')&&annotations.every(a=>a.status==='available')&&viewFrames.every(v=>v.frame!==null);
- return captureDrawingReadResult({version:1,unit:'millimeter',scope:'response-local',quality:'native-bound-drawing-references',drawingId:def.drawingId,featureId:def.target.featureId,status:available?'available':'unresolved',reason:available?null:'DRAWING_REFERENCES_UNRESOLVED',datumFrame:profile.frame,viewFrames,dimensions,...(def.version===3?{annotations}:{})},def);
+ }catch(e){if(def.version===4?!requirementReason(e):typeof e?.code!=='string'||!(/^(DRAWING_|SELECTION_|UNRESOLVED_)/.test(e.code)))throw e;return{annotationId:a.annotationId,kind:a.kind,status:'unresolved',reason:e.code,quality:null,facts:null};}}):[];
+ const requirements=def.version===4?createDrawingRequirementResolver({topology,index,frame:f,readBore:boreReader.requirement}).resolve(def,dimensions):null;
+ const available=(!requirements||[...requirements.datumFeatures,...requirements.requirements].every(r=>r.status==='available'))&&dimensions.every(d=>d.status==='available')&&annotations.every(a=>a.status==='available')&&viewFrames.every(v=>v.frame!==null);
+ return captureDrawingReadResult({version:1,unit:'millimeter',scope:'response-local',quality:'native-bound-drawing-references',drawingId:def.drawingId,featureId:def.target.featureId,status:available?'available':'unresolved',reason:available?null:'DRAWING_REFERENCES_UNRESOLVED',datumFrame:profile.frame,viewFrames,dimensions,...(def.version>=3?{annotations}:{}),...(requirements||{})},def);
 }
 
 function createBoreReader({topology,frame,cylinders,classify}){
  let observer;const cache=new Map();
- function row(ref){const rows=(cylinders||[]).filter(r=>r.intent.featureId===ref.featureId&&(r.slot||(r.intent.kind==='centered-through'?'center':null))===ref.slot);
+ function lookup(ref){const rows=(cylinders||[]).filter(r=>r.intent.featureId===ref.featureId&&(r.slot||(r.intent.kind==='centered-through'?'center':null))===ref.slot);
   if(rows.length!==1)unavailable(rows.length?'DRAWING_AMBIGUOUS_ANCESTRY':'DRAWING_HOLE_WITNESS_UNAVAILABLE');
   const r=rows[0],i=r.intent;if(i.kind!==ref.holeKind||i.sourceFeatureId!==ref.sourceFeatureId||i.sourceFaceId!==ref.faceId||i.sourceRegionId!==ref.regionId)unavailable('DRAWING_SOURCE_CHANGED');
-  if(r.status!=='available')unavailable(r.reason||'DRAWING_REFERENCE_UNRESOLVED');return r;
+  return r;
  }
- return Object.freeze({finite(ref){return finiteCylinder(topology,row(ref).witness,frame);},observe(ref){
+ function row(ref){const r=lookup(ref);if(r.status!=='available')unavailable(r.reason||'DRAWING_REFERENCE_UNRESOLVED');return r;}
+ function inherited(ref){const r=lookup(ref);if(r.status==='available')return null;if(r.status!=='unresolved'||typeof r.reason!=='string'||!r.reason||r.reason.length>256)throw Object.assign(Error('Invalid private inherited bore outcome'),{code:'ENGINE_FAILURE'});return r.reason;}
+
+ return Object.freeze({requirement(ref){const normalized=ref.kind==='center-hole'?{...ref,holeKind:'centered-through'}:ref,reason=inherited(normalized);return reason?{status:'unresolved',reason}:{status:'available',reason:null,finite:finiteCylinder(topology,row(normalized).witness,frame),resultFace:row(normalized).witness.resultFace};},discovery(ref){const reason=inherited(ref);if(reason)return{reference:ref,status:'unresolved',reason,quality:null,diameter:null,center:null,axis:null,ends:[],through:null};return this.observe(ref);},finite(ref){return finiteCylinder(topology,row(ref).witness,frame);},observe(ref){
   const r=row(ref),key=drawingCylinderKey(r);if(cache.has(key))return cache.get(key);
   observer ||= createPrismaticBoreObserver(topology,frame,classify);const h=observer.read(r.witness),facts=freeze({reference:ref,status:'available',reason:null,quality:'native-prism-cut-lineage',diameter:2*h.radius,center:h.intersection,axis:h.axis,ends:h.ends,through:h.through});cache.set(key,facts);return facts;
  }});
@@ -106,4 +113,14 @@ export function resolveOwnedBoreReferences({query,topology,index,sourceProfile,s
   try{return reader.observe(reference);}catch(e){if(typeof e?.code!=='string'||!(/^(DRAWING_|SELECTION_|UNRESOLVED_)/.test(e.code)))throw e;return{reference,status:'unresolved',reason:e.code,quality:null,diameter:null,center:null,axis:null,ends:[],through:null};}
  });
  const available=bores.every(r=>r.status==='available');return captureBoreReadResult({version:1,unit:'millimeter',scope:'response-local',quality:'native-bound-bore-references',featureId:query.target.featureId,datum:query.datum,status:available?'available':'unresolved',reason:available?null:'DRAWING_REFERENCES_UNRESOLVED',bores},query);
+}
+// Discovery exposes only already-indexed current Native plane identities and
+// genuine semantic bore lineage. It does not mint selectors from topology.
+export function resolveOwnedDrawingRequirementTargets({query,topology,index,sourceProfile,sourceExtent,sourceFeatureId,sourceRegionId,cylinders,classify}){
+ validateOwnedTopology(topology);const datum=constructorDatum(sourceProfile,sourceExtent),profile=datum.profile;
+ if(!index||query.datum.featureId!==sourceFeatureId||query.datum.regionId!==sourceRegionId||profile.region.id!==sourceRegionId||!index.plan.sourceContexts?.some(c=>c.kind===datum.kind&&c.featureId===sourceFeatureId&&c.regionId===sourceRegionId))return unresolvedDrawingRequirementTargets(query,"DRAWING_DATUM_UNAVAILABLE");
+ const rows=(cylinders||[]).filter(r=>r.intent.sourceFeatureId===sourceFeatureId&&r.intent.sourceFaceId===query.datum.faceId&&r.intent.sourceRegionId===sourceRegionId);if(rows.length>BORE_DISCOVERY_LIMIT)throw Object.assign(Error("Current requirement bore discovery exceeds16 members"),{code:"RESOURCE_LIMIT"});
+ const reader=createBoreReader({topology,frame:datum.frame,cylinders,classify}),resolver=createDrawingRequirementResolver({topology,index,frame:datum.frame,readBore:reader.requirement}),planes=resolver.discover(),seen=new Set();
+ const bores=rows.map(r=>{const reference={kind:"through-hole",featureId:r.intent.featureId,sourceFeatureId:r.intent.sourceFeatureId,faceId:r.intent.sourceFaceId,regionId:r.intent.sourceRegionId,holeKind:r.intent.kind,slot:r.slot||(r.intent.kind==="centered-through"?"center":null),geometry:"cylinder"},key=drawingCylinderKey(r);if(seen.has(key))throw Object.assign(Error("Duplicate private requirement bore identity"),{code:"ENGINE_FAILURE"});seen.add(key);try{return reader.discovery(reference);}catch(error){const reason=requirementReason(error);if(!reason)throw error;return{reference,status:"unresolved",reason,quality:null,diameter:null,center:null,axis:null,ends:[],through:null};}});
+ const available=[...planes,...bores].every(r=>r.status==="available"),f=datum.frame;return captureDrawingRequirementTargetsResult({version:1,unit:"millimeter",scope:"response-local",quality:"native-bound-drawing-requirement-targets",featureId:query.target.featureId,datum:query.datum,status:available?"available":"unresolved",reason:available?null:"DRAWING_REFERENCES_UNRESOLVED",sourceFrame:{origin:f.origin,x:f.x,y:f.y,z:f.z},planes,bores},query);
 }
