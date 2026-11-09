@@ -61,3 +61,13 @@ and reports a changing thread inventory as incomplete. Reading only the
 process leader children would miss processes forked by another thread. These
 are source-review corrections, not reproduced runtime incidents or proof of
 full/atomic process discovery. No extra probes or standalone tests were run.
+
+Root preflight observed that this installed Chromium rewrites its browser
+cmdline to a single process-title argv item. The first external PID inventory
+that expected NUL-separated individual flags found no match; the browser
+remained live, and no workflow had started. Custody now validates the actual
+/proc executable and exact unique profile/port flags in either observed argv
+representation, never shell-evaluating the title. Whitespace-containing paths
+in a flattened title remain unsupported rather than guessed. Root PID3051121,
+port19330, profile /tmp/codi-cad-cost-chrome-20261108-r1 is the selected first
+ordinary profile; default TLS/cache policy, no forced GC.

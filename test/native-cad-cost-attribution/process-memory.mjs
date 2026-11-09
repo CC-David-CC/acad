@@ -8,12 +8,21 @@ async function stat(pid){
  const text=await fs.readFile(`/proc/${pid}/stat`,'utf8'),end=text.lastIndexOf(')'),fields=text.slice(end+2).trim().split(/\s+/);
  return {pid,startTimeTicks:fields[19],parentPid:Number(fields[1])};
 }
-function portFlag(argv){return argv.find(v=>v.startsWith('--remote-debugging-port='))?.slice(24);}
+function commandFlag(argv,name){
+ const prefix='--'+name+'=',direct=argv.filter(value=>value.startsWith(prefix));
+ if(direct.length)return direct.length===1?direct[0].slice(prefix.length):undefined;
+ // Chromium rewrites the browser's process title into one argv item on some
+ // builds. Read only whitespace-delimited flag values in that representation;
+ // never evaluate it as shell text or guess paths containing whitespace.
+ if(argv.length!==1)return undefined;
+ const matches=[...argv[0].matchAll(/(?:^|\s)--([a-z-]+)=([^\s]+)/g)].filter(match=>match[1]===name);
+ return matches.length===1?matches[0][2]:undefined;
+}
 export async function createProcessMemory({pid,profilePath,cdpURL,intervalMS,emit,phase}){
  if(process.platform!=='linux'||!Number.isSafeInteger(pid)||pid<=1||![250,500,1000].includes(intervalMS))throw Error('Explicit Linux Chrome PID and250/500/1000ms sampling required');
- const initial=await stat(pid),argv=(await fs.readFile(`/proc/${pid}/cmdline`,'utf8')).split('\0').filter(Boolean),actualProfile=argv.find(v=>v.startsWith('--user-data-dir='))?.slice(16);
- if(!/chrome|chromium/i.test(argv[0]||'')||actualProfile!==profilePath||portFlag(argv)!==(new URL(cdpURL).port||'80'))throw Error('Chrome PID/profile/CDP-port custody does not match explicit invocation');
- const metadata={pid,startTimeTicks:initial.startTimeTicks,profilePath,cdpURL,intervalMS,limits:{processes:MAX_PROCESSES,samples:MAX_SAMPLES,processRows:MAX_ROWS,threadsPerProcess:MAX_THREADS_PER_PROCESS,threadsPerSample:MAX_THREADS_PER_SAMPLE},scope:'Owned Chrome process tree only; enumerate children of every observed thread, not only leaders. Traversal is not an atomic process-tree snapshot; excludes Node/server/OS cache; no forced GC; sampled maxima are lower bounds on continuous maxima'};
+ const initial=await stat(pid),argv=(await fs.readFile(`/proc/${pid}/cmdline`,'utf8')).split('\0').filter(Boolean),executable=await fs.readlink(`/proc/${pid}/exe`),actualProfile=commandFlag(argv,'user-data-dir');
+ if(!/\/(chrome|chromium|chromium-browser)$/.test(executable)||actualProfile!==profilePath||commandFlag(argv,'remote-debugging-port')!==(new URL(cdpURL).port||'80')||commandFlag(argv,'type')!==undefined)throw Error('Chrome PID/profile/CDP-port custody does not match explicit invocation');
+ const metadata={pid,startTimeTicks:initial.startTimeTicks,executable,commandLineRepresentation:argv.length===1?'single process title; exact whitespace-delimited flags':'nul-delimited argv',profilePath,cdpURL,intervalMS,limits:{processes:MAX_PROCESSES,samples:MAX_SAMPLES,processRows:MAX_ROWS,threadsPerProcess:MAX_THREADS_PER_PROCESS,threadsPerSample:MAX_THREADS_PER_SAMPLE},scope:'Owned Chrome process tree only; enumerate children of every observed thread, not only leaders. Traversal is not an atomic process-tree snapshot; excludes Node/server/OS cache; no forced GC; sampled maxima are lower bounds on continuous maxima'};
  emit('process-custody',metadata);
  let busy=null,stopped=false,timer=null,samples=0,rows=0,overflow=false;
  async function collect(){
@@ -44,7 +53,7 @@ export async function createProcessMemory({pid,profilePath,cdpURL,intervalMS,emi
      const after=await stat(item);if(after.startTimeTicks!==before.startTimeTicks)throw Error('Child PID reused while sampling');
      const values={};for(const name of ['Rss','Pss','Private_Clean','Private_Dirty','Private_Hugetlb']){const match=rollup.match(new RegExp('^'+name+':\\s+(\\d+) kB$','m'));values[name]=match?Number(match[1])*1024:null;}
      if(values.Rss===null||values.Pss===null||values.Private_Clean===null||values.Private_Dirty===null)throw Error('Required smaps counters unavailable');
-     records.push({...before,type:item===pid?'browser':(cmdline.find(v=>v.startsWith('--type='))?.slice(7)||'unclassified'),rssBytes:values.Rss,pssBytes:values.Pss,privateBytes:values.Private_Clean+values.Private_Dirty+(values.Private_Hugetlb||0)});
+     records.push({...before,type:item===pid?'browser':(commandFlag(cmdline.filter(Boolean),'type')||'unclassified'),rssBytes:values.Rss,pssBytes:values.Pss,privateBytes:values.Private_Clean+values.Private_Dirty+(values.Private_Hugetlb||0)});
     }catch(error){missing.push({pid:item,message:error.message});}
    }
    rows+=records.length;if(rows>MAX_ROWS){overflow=true;emit('process-overflow',{atMS,phase:current,reason:'process row cap'});stopped=true;clearInterval(timer);return;}
