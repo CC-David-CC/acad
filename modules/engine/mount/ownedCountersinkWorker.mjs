@@ -9,7 +9,9 @@ import {resolveNativePlanarAttachment} from './nativePlanarAttachmentFacts.mjs';
 import {validateOwnedBooleanResult} from './ownedBooleanContract.mjs';
 import {qualifyConicalTool,qualifyCountersinkFirst,qualifyCountersinkFinal} from './countersinkFacts.mjs';
 import {deriveSequentialInheritedSelectionIndexV2} from './selectionLineageIndex.mjs';
-const error=(code,message,cause)=>Object.assign(Error(message),{code,cause});
+// Owned cleanup uncertainty has the same disposition during admission as
+// during result retirement; this is not inferred from a caller error string.
+const error=(code,message,cause)=>Object.assign(Error(message),{code,cause},code==='ENGINE_CLEANUP_FAILED'?{terminateWorker:true}:{});
 const fail=(code,message,cause)=>{throw error(code,message,cause);};
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const tick=()=>new Promise(resolve=>setTimeout(resolve,0));
@@ -20,6 +22,18 @@ const workKeys=['maxNames','nextName','triangleLimit','triangleTotal','chargedRe
 // these fields is necessary data validation, never authentication of a caller.
 // The old Worker cannot issue sourceCreationBinding: integration is pending.
 export async function runOwnedCountersinkWorker(value,numericIntent){
+ try{return await runCapturedCountersink(value,numericIntent);}
+ catch(cause){
+  if(countersinkCallFailure(cause)?.terminal===true){
+   // The adapter's actual error remains authoritative, including code/cause.
+   // Native or strict decoding errors are not ordinary reusable-realm refusal.
+   try{if(Object.getOwnPropertyDescriptor(cause,'terminateWorker')?.value!==true)Object.defineProperty(cause,'terminateWorker',{value:true,writable:true,enumerable:true,configurable:true});}
+   catch{throw Object.assign(error('ENGINE_CLEANUP_FAILED','Terminal Native error disposition is unconfirmed.',cause),{operationFailed:true,operationError:cause});}
+  }
+  throw cause;
+ }
+}
+async function runCapturedCountersink(value,numericIntent){
  const c=conicalFields(value,contextKeys),request=captureNumericCountersinkIntent(numericIntent);
  if(['malloc','free','requireCurrent','allocateName','inspectWork','chargeSelectedResult'].some(k=>typeof c[k]!=='function'))fail('ENGINE_CAPABILITY_UNAVAILABLE','A private countersink busy owner is required.');
  const source=c.sourceRecord,index=source?.index,binding=conicalFields(c.sourceCreationBinding,['featureId','faceId','sourceSha256','regionId','requestSha256']);

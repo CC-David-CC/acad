@@ -7,20 +7,31 @@ import {measureExactSignedMeshVolume} from './exactMeshVolume.mjs';
 const callFailures=new WeakMap();
 function failure(code,message,{cause,invoked=false,terminal=true}={}){const e=Object.assign(Error(message),{code,cause});callFailures.set(e,Object.freeze({invoked,terminal}));return e;}
 export const countersinkCallFailure=value=>callFailures.get(value)||null;
+// Strict post-return decoders are part of this actual invocation. Preserve
+// their original exception while retaining terminal transport classification.
+function decodedFailure(cause){
+ if(countersinkCallFailure(cause))return cause;
+ if(cause!==null&&(typeof cause==='object'||typeof cause==='function')){callFailures.set(cause,Object.freeze({invoked:true,terminal:true}));return cause;}
+ return failure('ENGINE_FAILURE','Native response decoding failed.',{cause,invoked:true});
+}
 const required=['_CreateSelectedProfileV3','_ApplyOwnedBooleanHistoryV1','_CreateOwnedConicalFrustumV1','_ReadOwnedConeTopologyV1','_ReadOwnedTopologyV1','_InspectOwnedSolidV2','_InspectTopologyCensusV1','_ReadOwnedMeshV2','_ClassifyOwnedPointV2','_ReleaseOwnedShapeV2','_OwnedShapeNamesV2'];
 const limits=Object.freeze({topology:524288,cone:524288,profile:16384,boolean:4194304,metrics:4096,census:4096,mesh:33554432});
 const own=(v,k)=>Object.prototype.hasOwnProperty.call(v,k);
 const ordinary=(code,message)=>failure(code,message,{terminal:false,invoked:true});
 function nativeError(value,version,codes){
+ try{
  if(!value||!own(value,'error'))return;
- const r=conicalFields(value,['version','error']);if(r.version!==version||typeof r.error!=='string'||r.error.length<1||r.error.length>128)throw failure('ENGINE_FAILURE','Malformed Native failure.');
+ const r=conicalFields(value,['version','error']);if(r.version!==version||typeof r.error!=='string'||r.error.length<1||r.error.length>128)throw failure('ENGINE_FAILURE','Malformed Native failure.',{invoked:true});
  if(r.error==='MEASUREMENT_PRECISION_UNRESOLVED')throw failure(r.error,r.error,{invoked:true});
  if(!codes.includes(r.error))throw failure('ENGINE_FAILURE','Unqualified Native failure: '+r.error,{invoked:true});throw ordinary(r.error,r.error);
+ }catch(cause){throw decodedFailure(cause);}
 }
 function metrics(value){
+ try{
  nativeError(value,2,['PROFILE_INSPECTION_FAILED']);const r=conicalFields(value,['version','valid','solidCount','nativeVolume','nativeBounds']);
  const b=conicalFields(r.nativeBounds,['min','max']);
  if(r.version!==2||r.valid!==true||r.solidCount!==1||typeof r.nativeVolume!=='number'||!Number.isFinite(r.nativeVolume)||r.nativeVolume<=0||['min','max'].some(k=>!Array.isArray(b[k])||b[k].length!==3||b[k].some(n=>typeof n!=='number'||!Number.isFinite(n)||Math.abs(n)>4e6))||b.min.some((n,i)=>n>=b.max[i]))throw failure('ENGINE_FAILURE','Invalid actual Native solid metrics.',{invoked:true});return r;
+ }catch(cause){throw decodedFailure(cause);}
 }
 export function createCountersinkNativeCalls(context){
  const {Module,malloc,free,requireCurrent}=context;
@@ -76,9 +87,10 @@ export function createCountersinkNativeCalls(context){
  }
  function query(method,name,maxBytes){return invoke(method,p=>[p.name(name)],{maxBytes});}
  function readMetrics(name){return metrics(query('_InspectOwnedSolidV2',name,limits.metrics));}
- function readTopology(name){const value=query('_ReadOwnedTopologyV1',name,limits.topology);nativeError(value,1,[]);return validateOwnedTopology(value);}
- function readCone(name){const value=query('_ReadOwnedConeTopologyV1',name,limits.cone);if(value?.error){const r=captureConicalNativeFailure(value);throw failure(r.error,r.error,{invoked:true});}return captureOwnedConeObservation(value);}
+ function readTopology(name){const value=query('_ReadOwnedTopologyV1',name,limits.topology);try{nativeError(value,1,[]);return validateOwnedTopology(value);}catch(cause){throw decodedFailure(cause);}}
+ function readCone(name){const value=query('_ReadOwnedConeTopologyV1',name,limits.cone);try{if(value?.error){const r=captureConicalNativeFailure(value);throw failure(r.error,r.error,{invoked:true});}return captureOwnedConeObservation(value);}catch(cause){throw decodedFailure(cause);}}
  function evidence(name){
+  try{
   const before=readMetrics(name),topology=readTopology(name),mesh=query('_ReadOwnedMeshV2',name,limits.mesh);if(mesh?.error)throw failure('ENGINE_FAILURE','Actual Native result mesh is unavailable.',{invoked:true});const root=conicalFields(mesh,['faces']);
   if(!Array.isArray(root.faces)||root.faces.length<1||root.faces.length>1000)throw failure('ENGINE_FAILURE','Native mesh face count is invalid.',{invoked:true});if(!scratch)scratch=new Float64Array(900000);let offset=0,triangles=0;const min=[Infinity,Infinity,Infinity],max=[-Infinity,-Infinity,-Infinity];
   for(const value of root.faces){const face=conicalFields(value,['inverted','tess']);if(typeof face.inverted!=='boolean'||!Array.isArray(face.tess))throw failure('ENGINE_FAILURE','Native mesh face data is malformed.',{invoked:true});for(const item of face.tess){if(!Array.isArray(item)||item.length!==1||!Array.isArray(item[0])||item[0].length!==3||++triangles>100000)throw failure('ENGINE_FAILURE','Native result mesh exceeds its triangle domain.',{invoked:true});const tri=item[0];for(let j=0;j<3;j++){const point=tri[face.inverted&&j!==0?3-j:j];if(!Array.isArray(point)||point.length!==3||point.some(n=>typeof n!=='number'||!Number.isFinite(n)||Math.abs(n)>4e6))throw failure('ENGINE_FAILURE','Native mesh coordinate is unqualified.',{invoked:true});for(let k=0;k<3;k++){scratch[offset++]=point[k];min[k]=Math.min(min[k],point[k]);max[k]=Math.max(max[k],point[k]);}}}}
@@ -87,12 +99,13 @@ export function createCountersinkNativeCalls(context){
   const census=query('_InspectTopologyCensusV1',name,limits.census),c=conicalFields(census,['version','scope','isNull','shapeType','directChildren','counts']),keys=['compounds','compsolids','solids','shells','faces','wires','edges','vertices'],counts=conicalFields(c.counts,keys);
   if(c.version!==1||c.scope!=='response-local'||c.isNull!==false||!Number.isSafeInteger(c.shapeType)||c.shapeType<0||c.shapeType>8||!Number.isSafeInteger(c.directChildren)||c.directChildren<0||c.directChildren>100000||keys.some(k=>!Number.isSafeInteger(counts[k])||counts[k]<0||counts[k]>100000)||counts.solids!==1||counts.faces!==root.faces.length)throw failure('ENGINE_FAILURE','Actual Native solid census is unqualified.',{invoked:true});
   return {nativeVolume:after.nativeVolume,nativeBounds:after.nativeBounds,faces:root.faces.length,triangles,bounds:{min,max},signedVolume:measureExactSignedMeshVolume(scratch.subarray(0,offset)).signedVolume,empty:false,resultKind:'single-solid',solidCount:1,nativeValidity:{method:'occ-owned-solid-v2',valid:after.valid},nativeTopology:{version:1,method:'occ-topology-census-v1',shapeType:c.shapeType,directChildren:c.directChildren,counts},materialRegions:null,voidRegions:null,validLevel0:null,validLevel2:null,manifoldPredicate:null,volumeQuality:'tessellation-signed-integral'};
+  }catch(cause){throw decodedFailure(cause);}
  }
  return Object.freeze({
   census(){const n=invoke('_OwnedShapeNamesV2',()=>[],{exchanges:0});if(!Number.isSafeInteger(n)||n<0||n>32)throw failure('ENGINE_CLEANUP_FAILED','Native owned-name census is unqualified.',{invoked:true});return n;},
   profile(name,prepared){const value=invoke('_CreateSelectedProfileV3',p=>[p.name(name),p.doubles(prepared.nativeValues),prepared.nativeValues.length],{maxBytes:limits.profile});nativeError(value,3,['PROFILE_CONSTRUCTION_FAILED']);return value;},
   subtract(a,b,name){const value=invoke('_ApplyOwnedBooleanHistoryV1',p=>[p.name(a),p.name(b),p.name(name),1],{maxBytes:limits.boolean});nativeError(value,1,BOOLEAN_REFUSAL_CODES);return value;},
-  frustum(name,request){const value=invoke('_CreateOwnedConicalFrustumV1',p=>[p.name(name),p.doubles(request.frame),request.bottomRadius,request.topRadius,request.height],{maxBytes:4096});if(value?.error){const r=captureConicalNativeFailure(value),terminal=['CONICAL_INPUT_CHANGED','CONICAL_PUBLICATION_FAILED','ENGINE_CLEANUP_FAILED','MEASUREMENT_PRECISION_UNRESOLVED','CONICAL_INSPECTION_FAILED'].includes(r.error);throw failure(r.error,r.error,{invoked:true,terminal});}return value;},
+  frustum(name,request){const value=invoke('_CreateOwnedConicalFrustumV1',p=>[p.name(name),p.doubles(request.frame),request.bottomRadius,request.topRadius,request.height],{maxBytes:4096});try{if(value?.error){const r=captureConicalNativeFailure(value),terminal=['CONICAL_INPUT_CHANGED','CONICAL_PUBLICATION_FAILED','ENGINE_CLEANUP_FAILED','MEASUREMENT_PRECISION_UNRESOLVED','CONICAL_INSPECTION_FAILED'].includes(r.error);throw failure(r.error,r.error,{invoked:true,terminal});}return value;}catch(cause){throw decodedFailure(cause);}},
   classify(name,point){if(!Array.isArray(point)||point.length!==3||point.some(n=>typeof n!=='number'||!Number.isFinite(n)||Math.abs(n)>4e6))throw failure('ENGINE_FAILURE','Invalid actual Native query point.');const n=invoke('_ClassifyOwnedPointV2',p=>[p.name(name),...point],{exchanges:0});if(!Number.isInteger(n)||n<0||n>3)throw failure('ENGINE_FAILURE','Native point classification failed.',{invoked:true});return ['inside','outside','boundary','unknown'][n];},
   release(name){const n=invoke('_ReleaseOwnedShapeV2',p=>[p.name(name)],{exchanges:0});if(n!==1)throw failure('ENGINE_CLEANUP_FAILED','Native exact-name release was not acknowledged.',{invoked:true});},
   topology:readTopology,metrics:readMetrics,cone:readCone,evidence
