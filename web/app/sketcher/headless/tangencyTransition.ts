@@ -3,7 +3,7 @@ import {verifyOffsetTravel} from './offsetTransition';
 import {verifyFixedEntityTravel} from './fixedEntityTransition';
 import {HeadlessSketchWorkspace} from './workspace';import {solveSketch} from './solve';import {evaluateCapturedSketch} from './capturedSketchEvaluation';import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
 import {captureConnectedGeometryScope,applyCapturedGeometry,assertCapturedGeometryScope,firstCapturedGeometryDifference as difference} from './capturedGeometryScope';
-import {inspectClosedTangency,prepareTangency} from '../actions/tangencyAdmission';
+import {inspectClosedTangency,prepareTangency,validateTangencyStages} from '../actions/tangencyAdmission';
 import {sourceFrameSegments,validateWarmDimension,finishGeneratedDimensionStages} from './drivingDimensionTransition';import {validateConstraintGeometry} from './sketchValidation';import {ConstraintDefinitions} from '../constr/ANConstraints';
 import {captureTangencyIntent,captureTangencyReceipt,tangentRecord as record,tangentLocator as tangencyLocator,tangentSpec,tangentCreation,tangencyConstantsValid,sameTangency} from './tangencyEnvelope.mjs';import {resolveTangencyRow} from './tangencyInspection';import {failureCause,withAdmissionCause} from '../constr/admissionCause.mjs';
 const MAX=1048576,fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
@@ -22,9 +22,23 @@ function proof(a:any,candidate:any){const first=cold(a.revision,candidate,a.exte
 export function changeTangency(request:any){const revision=revisionOf(request);try{const a=capture(request),before=JSON.parse(a.sketchJSON),original=cold(a.revision,before,a.externalParameters);verified(before,original.result.sketch,original.result.evidence,a.externalParameters);evaluateCapturedSketch(before,a.externalParameters,original.result.evidence,undefined,original.auxiliary);
  if(a.intent.action==='remove'){
   const row=resolveTangencyRow(before,a.intent.relationId,a.externalParameters),w=new HeadlessSketchWorkspace(a.externalParameters);w.io._loadSketch(structuredClone(before),{strict:true});const pm=w.parametricManager,c=pm.stages[row.stage]?.algNumSystem.allConstraints.filter(c=>!c.internal)[row.index];if(!c||c.schema!==ConstraintDefinitions[row.typeId]||difference(c.objects.map(o=>o.id),row.objects)!=='no difference')fail('INVALID_TARGET','Tangency reconstruction changed row identity.');inspectClosedTangency(pm,c.objects,tangentSpec(tangentCreation(row)),false);
-  // Removing an equation needs no optimizer-authorized geometry change. Publish
-  // ORIGINAL coordinates only after fresh full cold and original-equation proof.
-  const candidate=structuredClone(before);candidate.stages[row.stage].constraints.splice(row.index,1);const checked=proof(a,candidate),relation={typeId:row.typeId,objects:[...row.objects],constants:{...row.constants},status:'removed',stage:row.stage,index:row.index,relationId:a.intent.relationId,existing:false};return{revision:a.revision,ok:true as const,changed:true,serializedSketch:text(JSON.stringify(candidate)),evidence:checked.evidence,relation};
+  // Native mutation must derive survivor promotion before strict read/replay.
+  // Admission hints are not permanent exemptions from an original equation.
+  pm.startTransaction();try{pm._removeConstraint(c);pm.finishTransaction(stages=>{
+   validateTangencyStages(pm,stages);
+   if(stages.some(stage=>stage.algNumSystem.allConstraints.includes(c)))fail('INVALID_TARGET','Tangency removal retained the selected native row.');
+   // The closed source was independently validated above; require every real
+   // retained row's original equations/domain after this actual removal solve.
+   for(const stage of stages)for(const retained of stage.algNumSystem.allConstraints)validateConstraintGeometry(retained);
+  },false);}catch(error){if(pm.inTransaction)try{pm.finishTransaction(()=>{throw error},false);}catch{}throw error;}
+  const warm=JSON.parse(w.io.serializeSketch(before.metadata,{strict:true}));warm.boundary=structuredClone(before.boundary);
+  // Removal grants NO geometry authority. The transaction supplies only actual
+  // classification changes; original coordinates still need both cold proofs.
+  const candidate=structuredClone(before);candidate.stages[row.stage].constraints.splice(row.index,1);
+  const restored={...warm,objects:warm.objects.map((o,i)=>({...o,data:before.objects[i]?.data}))};
+  if(difference(withoutAdmission(candidate),withoutAdmission(restored))!=='no difference')fail('INTENT_CHANGED','Tangency removal changed retained authored source: '+difference(withoutAdmission(candidate),withoutAdmission(restored)));
+  classify(candidate,warm.stages.flatMap(stage=>stage.constraints.map(retained=>({typeId:retained.typeId,state:retained.admission?.state}))));
+  const checked=proof(a,candidate),relation={typeId:row.typeId,objects:[...row.objects],constants:{...row.constants},status:'removed',stage:row.stage,index:row.index,relationId:a.intent.relationId,existing:false};return{revision:a.revision,ok:true as const,changed:true,serializedSketch:text(JSON.stringify(candidate)),evidence:checked.evidence,relation};
  }
  const spec=tangentSpec(a.intent);
  const scope=captureConnectedGeometryScope(before,a.externalParameters,original.result.evidence,original.auxiliary,(_w,pm,index)=>{const r=inspectClosedTangency(pm,spec.objects.map(id=>index[id]),spec);r.constraint.resolveConstants(pm.constantResolver);let originalSatisfied=true;try{validateConstraintGeometry(r.constraint);}catch(e){if(!['RESIDUAL','FINITE_CONTACT_OUTSIDE','TANGENCY_BRANCH_DOMAIN'].includes(e?.code))throw e;originalSatisfied=false;}const equations=[];r.constraint.collectPolynomials(equations);return{equations,value:{stage:r.stage.index,originalSatisfied}};},'Tangency');
