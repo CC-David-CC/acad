@@ -48,7 +48,13 @@ export function prepareManufacturingInWorker(url,{action,before,args},options={}
     // Summary counts are derived from the actual prepared/travel/no-op result,
     // never an independently synchronized view-count state or publication grant.
     if(drawing&&(value.summary.viewCount!==(after===null?0:after.views.length)||value.summary.dimensionCount!==(after===null?0:after.dimensions.length)))throw fail('Drawing preparation summary differs from its authored definition.','INVALID_RESPONSE');
-    if(drawing){const annotated=(after||before)?.version===3;fields(value.summary,['drawingId','viewCount','dimensionCount','quality',...(annotated?['annotationCount']:[])]);if(annotated&&value.summary.annotationCount!==(after===null?0:after.annotations.length))throw fail('Drawing annotation summary differs from its authored definition.','INVALID_RESPONSE');}
+    if(drawing){
+     const annotated=(after||before)?.version>=3,requirements=(after||before)?.version===4;
+     fields(value.summary,['drawingId','viewCount','dimensionCount','quality',...(annotated?['annotationCount']:[]),...(requirements?['datumFeatureCount','requirementCount','requirementRole']:[])]);
+     const datumFeatureCount=requirements&&after!==null?after.datumFeatures.length:0,requirementCount=requirements&&after!==null?after.requirements.length:0;
+     if(annotated&&value.summary.annotationCount!==((after===null?0:after.annotations.length)+datumFeatureCount+requirementCount))throw fail('Drawing annotation summary differs from its authored definition.','INVALID_RESPONSE');
+     if(requirements&&(value.summary.datumFeatureCount!==datumFeatureCount||value.summary.requirementCount!==requirementCount||value.summary.requirementRole!=='authored-manufacturing-requirement'))throw fail('Drawing requirement summary differs from its authored definition.','INVALID_RESPONSE');
+    }
     const entry=travel?binding.entry:value.changed?Object.freeze({kind:'document-metadata',version:1,domain,key,before,after,byteSize:value.byteSize}):null;
     resolve(bindManufacturingWorkerPreparation({action,domain,key,changed:value.changed,before,after,entry,direction:travel?binding.direction:null,summary:Object.freeze(value.summary)}));
    }catch(cause){reject(operationFailure(cause));}
@@ -66,8 +72,10 @@ export function prepareManufacturingInWorker(url,{action,before,args},options={}
     if(r.kind!=='manufacturing-prepared'||r.version!==1||r.id!==id||r.action!==action||typeof r.changed!=='boolean'||!Number.isSafeInteger(r.byteSize)||r.byteSize<0||r.byteSize>(drawing?262144:LIMIT)||r.changed!==(r.byteSize>0)||travel&&!r.changed)throw fail('Invalid manufacturing preparation binding.','INVALID_RESPONSE');
     if(travel&&r.byteSize!==binding.entry.byteSize)throw fail('Manufacturing travel charge changed.','INVALID_RESPONSE');
     if(drawing){
-     r.summary=fields(r.summary,['drawingId','viewCount','dimensionCount','quality',...(Object.hasOwn(r.summary||{},'annotationCount')?['annotationCount']:[])]);
+     const requirements=Object.hasOwn(r.summary||{},'requirementCount');
+     r.summary=fields(r.summary,['drawingId','viewCount','dimensionCount','quality',...(Object.hasOwn(r.summary||{},'annotationCount')?['annotationCount']:[]),...(requirements?['datumFeatureCount','requirementCount','requirementRole']:[])]);
      if(Object.hasOwn(r.summary,'annotationCount')&&(!Number.isInteger(r.summary.annotationCount)||r.summary.annotationCount<0||r.summary.annotationCount>LINKED_DRAWING_MAX_ANNOTATIONS))throw fail('Invalid drawing annotation summary.','INVALID_RESPONSE');
+     if(requirements&&(r.summary.requirementRole!=='authored-manufacturing-requirement'||['datumFeatureCount','requirementCount'].some(k=>!Number.isInteger(r.summary[k])||r.summary[k]<0||r.summary[k]>3)||!Object.hasOwn(r.summary,'annotationCount')||r.summary.datumFeatureCount+r.summary.requirementCount>r.summary.annotationCount))throw fail('Invalid drawing requirement summary.','INVALID_RESPONSE');
      if(r.summary.drawingId!==key||r.summary.quality!=='authored-definition-only'||!Number.isInteger(r.summary.viewCount)||r.summary.viewCount<0||r.summary.viewCount>LINKED_DRAWING_MAX_VIEWS||!Number.isInteger(r.summary.dimensionCount)||r.summary.dimensionCount<0||r.summary.dimensionCount>LINKED_DRAWING_MAX_DIMENSIONS)throw fail('Invalid drawing preparation summary.','INVALID_RESPONSE');
     }else{
      r.summary=fields(r.summary,['partCount','regionCount','bindingCount','details','warning']);if(['partCount','regionCount','bindingCount'].some(k=>!Number.isSafeInteger(r.summary[k])||r.summary[k]<0||r.summary[k]>1000000)||typeof r.summary.warning!=='string'||r.summary.warning.length>256)throw fail('Invalid manufacturing summary.','INVALID_RESPONSE');r.summary.details=details(r.summary.details);
