@@ -22,12 +22,14 @@ export type LinkedPartDrawingView = Readonly<{viewId:string;paperOrigin:PaperPoi
  {basis:'bore-center-section';hole:BoreReference;retainedSide:'positive-datum-y';visibility:'cut-boundary-only'} |
  {basis:'detail';parentViewId:string;focus:BoreReference;aperture:Readonly<{kind:'rectangle';halfWidth:number;halfHeight:number}>;scale:Readonly<{numerator:2;denominator:1}>;visibility:'inherit'})>;
 export type BoreReference = Readonly<{kind:'through-hole';featureId:number;sourceFeatureId:number;faceId:string;regionId:string;geometry:'cylinder'} & ({holeKind:'centered-through';slot:'center'}|{holeKind:'four-corner-through';slot:'MIN_X_MIN_Y'|'MAX_X_MIN_Y'|'MAX_X_MAX_Y'|'MIN_X_MAX_Y'})>;
+/** Position admits the actual centered-through variant, not legacy CenterHole or corner bores. */
+export type CenteredThroughBoreReference = BoreReference & Readonly<{holeKind:'centered-through';slot:'center'}>;
 export type BoreAnnotation = Readonly<{annotationId:string;viewId:string} & ({kind:'bore-center';hole:BoreReference;extension:number}|{kind:'baseline'|'ordinate';axis:DatumAxis;holes:readonly BoreReference[];labels:readonly PaperPoint[]}|{kind:'hole-callout';holes:readonly BoreReference[];label:PaperPoint})>;
 export type DatumFeatureSymbol = 'A'|'B'|'C';
 export type LinkedDatumFeature = Readonly<{annotationId:string;symbol:DatumFeatureSymbol;viewId:string;label:PaperPoint;reference:NativeFace}>;
 type RequirementBase = Readonly<{annotationId:string;viewId:string;label:PaperPoint}>;
 export type LinkedManufacturingRequirement = RequirementBase & (
- Readonly<{kind:'position-tolerance';target:BoreReference;zone:Readonly<{kind:'diameter';value:number;unit:'millimeter'}>;datumSymbols:readonly ['A','B','C']}> |
+ Readonly<{kind:'position-tolerance';target:CenteredThroughBoreReference;zone:Readonly<{kind:'diameter';value:number;unit:'millimeter'}>;datumSymbols:readonly ['A','B','C']}> |
  Readonly<{kind:'surface-finish';target:NativeFace;parameter:'Ra';maximum:Readonly<{value:number;unit:'micrometer'}>}> |
  Readonly<{kind:'clearance-fit';nominalDimensionId:string;hole:Readonly<{lowerDeviation:number;upperDeviation:number}>;declaredShaft:Readonly<{lowerDeviation:number;upperDeviation:number}>;unit:'millimeter'}>);
 export type LinkedPartDrawingDefinition = Readonly<{
