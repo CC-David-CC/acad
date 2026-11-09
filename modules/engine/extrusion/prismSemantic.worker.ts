@@ -1,4 +1,4 @@
-import {prepareSolvedProfileExtent,inspectSolvedProfileExtentRegions} from './selectedSketchProfileExtent.mjs';
+import {prepareSolvedProfileExtent,validateSolvedProfileExtent,inspectSolvedProfileExtentRegions} from './selectedSketchProfileExtent.mjs';
 import {PROFILE_EXTENT_REFUSALS} from '../mount/ownedProfileExtentPlan.mjs';
 import {prepareSolvedLoft,inspectSolvedLoftSources} from './selectedSketchLoft.mjs';
 import {LOFT_PREPARATION_REFUSALS} from '../solid/ownedLoftIntent.mjs';
@@ -15,10 +15,10 @@ self.onmessage = async event => {
  const m=event.data,loftJob=m?.kind==='prepare-loft'||m?.kind==='inspect-loft';
  try {
   if(!m||typeof m.jobId!=='string'||m.jobId.length>128||loftJob&&!m.jobId)throw loftJob?Object.assign(Error('Invalid semantic job'),{code:'INVALID_REQUEST'}):Error('Invalid semantic job');
-  if(m.kind==='prepare-profile-extents'||m.kind==='inspect-profile-extent-regions'){
-   const prepare=m.kind==='prepare-profile-extents',key=prepare?'extent':'profile';
+  if(['prepare-profile-extents','validate-profile-extents','inspect-profile-extent-regions'].includes(m.kind)){
+   const prepare=m.kind!=='inspect-profile-extent-regions',key=prepare?'extent':'profile';
    if(!m.jobId||Object.keys(m).sort().join(',')!==['jobId','kind',key].sort().join(','))throw Object.assign(Error('Invalid profile-extent semantic job'),{code:'INVALID_REQUEST'});
-   const value=await (prepare?prepareSolvedProfileExtent(m.extent):inspectSolvedProfileExtentRegions(m.profile));
+   const value=await (prepare?(m.kind==='prepare-profile-extents'?prepareSolvedProfileExtent:validateSolvedProfileExtent)(m.extent):inspectSolvedProfileExtentRegions(m.profile));
    const reply={jobId:m.jobId,ok:true,value};
    if(new TextEncoder().encode(JSON.stringify(reply)).byteLength>65536)throw Object.assign(Error('Profile-extent reply exceeds the existing semantic budget'),{code:'RESOURCE_LIMIT'});
    self.postMessage(reply);return;

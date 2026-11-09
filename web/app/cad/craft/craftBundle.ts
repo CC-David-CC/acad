@@ -1,3 +1,5 @@
+import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature,captureProfileExtent,profileExtentFields,profileExtentDimensions,materializeOwnedProfileExtentFeature,assertProfileExtentBindingsPreserved} from 'engine/solid/ownedProfileExtentFeature.mjs';
+import {recordProfileExtentEdit,planProfileExtentTravel} from './authoredEditJournal.mjs';
 import {offsetFailureCodes} from 'sketcher/generators/offsetSource.mjs';
 import {captureBlindHoleParameters,recordBlindHoleEdit,planBlindHoleTravel} from './authoredEditJournal.mjs';
 import {createWorkerBlindHoleCommands} from './workerBlindHoleCommands';
@@ -91,7 +93,7 @@ import sketchWorkerUrl from 'codi-headless-sketch-worker';
 import {runSketchSolve} from 'sketcher/headless/client';
 import {prepareTypedRectangle} from '../parameters/typedRectangleBindings.mjs';
 import {deriveAuthoredPhysicalManifest} from '../parameters/authoredPhysicalManifest.mjs';
-import {physicalBindingFields} from '../parameters/physicalBindingFields.mjs';
+import {physicalBindingFields,activePhysicalBindingFields} from '../parameters/physicalBindingFields.mjs';
 import {ReadSketch} from '../sketch/sketchReader';
 import {MOpenFaceShell} from '../model/mopenFace';
 import {getSketchBoundaries} from '../sketch/sketchBoundaries';
@@ -910,6 +912,7 @@ export function activate(ctx: ApplicationContext) {
     if(target.kind==='extrusion-depth')return authoredDepthOperation(request,options);
     if(target.kind==='solid-box')return authoredSolidBoxOperation(request,options);
     if(target.kind==='revolve-angle')return authoredRevolveAngleOperation(request,options);
+    if(target.kind==='profile-extents')return authoredProfileExtentOperation(request,options);
     if(target.kind==='selected-profile-depth')return authoredSelectedProfileDepthOperation(request,options);
     if(target.kind==='selected-profile-region')return authoredSelectedProfileRegionOperation(request,options);
     if(target.kind==='linear-hole-pattern')return authoredLinearHolePatternOperation(request,options);
@@ -961,7 +964,7 @@ export function activate(ctx: ApplicationContext) {
     if(ctx.projectService!==service||ctx.expressionService!==expressions||modifications$.value!==history||expressions.script$.value!==source||inspectAuthoredEdits().revision!==info.revision)throw superseded();
     const enclosures:any[]=[];if(!reason)history.history.forEach((entry,index)=>{if(['WORKER_ENCLOSURE_V1','WORKER_ENCLOSURE_V2'].includes(entry.type)&&Number.isSafeInteger(Number(entry.params?.featureId))&&Number(entry.params.featureId)>0){const fields=physicalBindingFields[entry.type];enclosures.push(Object.freeze({index,featureId:Number(entry.params.featureId),type:entry.type,bindings:Object.freeze(Object.fromEntries(fields.map(field=>[field,entry.params[field]])))}));}});
     const selectedProfiles:any[]=[];if(!reason)history.history.forEach((entry,index)=>{if(entry.type==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'){const p:any=captureSelectedProfileDepthParameters(entry.params);selectedProfiles.push(Object.freeze({index,featureId:p.featureId,faceId:p.faceId,regionId:p.regionId,engine:p.engine,engineRevision:p.engineRevision,depth:p.depth,sourceProfile:'selected-source',sourceQualification:'requires-worker-validation'}));}});
-    const features:any[]=[];if(!reason)history.history.forEach((entry,index)=>{if(Object.prototype.hasOwnProperty.call(physicalBindingFields,entry.type)&&Number.isSafeInteger(Number(entry.params?.featureId))&&Number(entry.params.featureId)>0){const fields=physicalBindingFields[entry.type].filter(field=>entry.type!=='WORKER_THROUGH_HOLES_V1'||entry.params.kind!=='centered-through'||field==='diameter');features.push(Object.freeze({index,featureId:Number(entry.params.featureId),type:entry.type,bindings:Object.freeze(Object.fromEntries(fields.map(field=>[field,entry.params[field]])))}));}});
+    const features:any[]=[];if(!reason)history.history.forEach((entry,index)=>{if(Object.prototype.hasOwnProperty.call(physicalBindingFields,entry.type)&&Number.isSafeInteger(Number(entry.params?.featureId))&&Number(entry.params.featureId)>0){const fields=activePhysicalBindingFields(entry.type,entry.params).filter(field=>entry.type!=='WORKER_THROUGH_HOLES_V1'||entry.params.kind!=='centered-through'||field==='diameter');features.push(Object.freeze({index,featureId:Number(entry.params.featureId),type:entry.type,bindings:Object.freeze(Object.fromEntries(fields.map(field=>[field,entry.params[field]])))}));}});
     // Project only the already accepted Worker result. Inspection never parses
     // or evaluates formula arithmetic and introduces no second quantity table.
     const units={scalar:'dimensionless',length:'millimeter',area:'square-millimeter',volume:'cubic-millimeter',angle:'radian',count:'count',boolean:null};
@@ -1013,10 +1016,11 @@ export function activate(ctx: ApplicationContext) {
     if(source!==''&&(!decodePhysicalSource(source)||!expressions.hasCurrentPhysicalResult()))throw new Error('Nonempty legacy or stale parameter sources are unsupported.');
     check();const captured=await captureAuthoredHistory(before.history,check);if(!fullTipSignature||captured.signature!==fullTipSignature)throw new Error('The accepted history is stale.');
     let targetSource=input.source,changes=input.changes||[],wantedSketches:any[]=[],wantedSketch=null,proposal:any=null;
-    if(input.direction){const travel=planPhysicalTravel(journal,{document,revision:journal.revision,direction:input.direction,currentSource:source,history:captured.history,readSketch:(id:string)=>ctx.sketchStorageService.getSketchData(id)});targetSource=travel.source;changes=travel.changes.map(c=>({index:c.index,featureId:c.featureId,type:c.type,field:c.field,value:c.value}));wantedSketches=travel.sketches;wantedSketch=wantedSketches.find(x=>captured.history.some(h=>h.type==='WORKER_RECTANGLE_EXTRUDE_V1'&&h.params?.face===x.faceId||h.type==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'&&h.params?.faceId===x.faceId))||null;proposal=travel.next;}
-    const edits:any[]=[],seen=new Set<string>();for(const change of changes){const request=captured.history[change.index],allowed=Object.prototype.hasOwnProperty.call(physicalBindingFields,change.type)?physicalBindingFields[change.type]:null,key=change.index+':'+change.field;if(!request||request.type!==change.type||Number(request.params?.featureId)!==change.featureId||!allowed?.includes(change.field)||seen.has(key))throw new Error('A physical binding target is unavailable.');seen.add(key);const previous=request.params[change.field];if(previous!==change.value){edits.push({index:change.index,featureId:change.featureId,type:change.type,field:change.field,before:previous,after:change.value});request.params[change.field]=change.value;}}
+    if(input.direction){const travel=planPhysicalTravel(journal,{document,revision:journal.revision,direction:input.direction,currentSource:source,history:captured.history,readSketch:(id:string)=>ctx.sketchStorageService.getSketchData(id)});targetSource=travel.source;changes=travel.changes.map(c=>({index:c.index,featureId:c.featureId,type:c.type,field:c.field,value:c.value}));wantedSketches=travel.sketches;wantedSketch=wantedSketches.find(x=>captured.history.some(h=>h.type==='WORKER_RECTANGLE_EXTRUDE_V1'&&h.params?.face===x.faceId||['WORKER_SELECTED_PROFILE_EXTRUDE_V2',PROFILE_EXTENT_TYPE].includes(h.type)&&h.params?.faceId===x.faceId))||null;proposal=travel.next;}
+    const edits:any[]=[],seen=new Set<string>();for(const change of changes){const request=captured.history[change.index],allowed=Object.prototype.hasOwnProperty.call(physicalBindingFields,change.type)?activePhysicalBindingFields(change.type,request?.params):null,key=change.index+':'+change.field;if(!request||request.type!==change.type||Number(request.params?.featureId)!==change.featureId||!allowed?.includes(change.field)||seen.has(key))throw new Error('A physical binding target is unavailable.');seen.add(key);const previous=request.params[change.field];if(previous!==change.value){edits.push({index:change.index,featureId:change.featureId,type:change.type,field:change.field,before:previous,after:change.value});request.params[change.field]=change.value;}}
     if(input.rectangle&&(captured.history.filter(h=>h.type==='WORKER_RECTANGLE_EXTRUDE_V1').length!==1||captured.history.filter(h=>h.type==='WORKER_FOUR_CORNER_THROUGH_HOLES_V1').length!==1))throw Error('Only one unambiguous bracket is supported.');
-    const modern=requireModernPhysicalHistory(captured.history),selected=modern?captured.history.find(row=>row.type==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'):null;
+    const modern=requireModernPhysicalHistory(captured.history),selected=modern?captured.history.find(row=>['WORKER_SELECTED_PROFILE_EXTRUDE_V2',PROFILE_EXTENT_TYPE].includes(row.type)):null;
+    if(input.selectedRectangle&&selected?.type===PROFILE_EXTENT_TYPE)throw Object.assign(Error('The existing depth-specific rectangle convenience does not bind extent variants; use their inspected active physical fields.'),{code:'UNSUPPORTED_PARAMETERS'});
     if(input.selectedRectangle&&(!selected||selected.params.featureId!==input.featureId||captured.history[input.index]!==selected))throw Error('The selected rectangle identity changed.');
     let faceId=input.rectangle?.faceId||wantedSketch?.faceId||selected?.params.faceId||null,sourceSketch:string=null,baseSketch:string=null;
     if(faceId){sourceSketch=ctx.sketchStorageService.getSketchData(faceId);if(typeof sourceSketch!=='string')throw new Error('The rectangle source is unavailable.');baseSketch=wantedSketch?wantedSketch.data:modern?sourceSketch:prepareTypedRectangle(sourceSketch,[{segmentId:'rect-0',parameter:input.rectangle.width},{segmentId:'rect-1',parameter:input.rectangle.height}],()=>1).sketchJSON;}
@@ -1144,6 +1148,7 @@ export function activate(ctx: ApplicationContext) {
 
   function authoredDepthOperation(args:any, options:any = {}) { return authoredFeatureOperation('extrusion',args,options); }
   function authoredRevolveAngleOperation(args:any,options:any={}) {return authoredFeatureOperation('revolve-angle',args,options);}
+  function authoredProfileExtentOperation(args:any,options:any={}){return authoredFeatureOperation('profile-extents',args,options);}
   function authoredSelectedProfileDepthOperation(args:any, options:any = {}) { return authoredFeatureOperation('selected-profile-depth',args,options); }
   function authoredSelectedProfileRegionOperation(args:any, options:any = {}) { return authoredFeatureOperation('selected-profile-region',args,options); }
   function authoredLinearHolePatternOperation(args:any, options:any = {}) { return authoredFeatureOperation('linear-hole-pattern',args,options); }
@@ -1197,11 +1202,11 @@ export function activate(ctx: ApplicationContext) {
     } finally {try{prepared?.dispose?.()}catch(error){console.error('Sketch travel cleanup failed:',error)}}
   }
   async function authoredFeatureOperation(kind:string,args: any, options: any = {}) {
-    if(!['revolve-angle','extrusion','centered','corners','solid-box','selected-profile-depth','selected-profile-region','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent'].includes(kind))throw new Error('Unsupported authored edit.');
+    if(!['profile-extents','revolve-angle','extrusion','centered','corners','solid-box','selected-profile-depth','selected-profile-region','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent'].includes(kind))throw new Error('Unsupported authored edit.');
     const ownKeys = args && typeof args === 'object' && !Array.isArray(args) ? Reflect.ownKeys(args) : [];
     if (ownKeys.some(k=>typeof k!=='string' || !Object.getOwnPropertyDescriptor(args,k)?.enumerable || !Object.prototype.hasOwnProperty.call(Object.getOwnPropertyDescriptor(args,k),'value'))) throw new Error('Invalid authored depth command.');
     const keys = ownKeys.sort().join(',');
-    const editKeys=kind==='blind-hole'?'depth,diameter,featureId,index,revision':kind==='solid-shell'?'featureId,index,revision,thickness':kind==='operation-remove'?'featureId,index,revision':kind==='through-hole-parent'?['revision','index','featureId','target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId'].sort().join(','):kind==='revolve-angle'?'angleRadians,featureId,index,revision':kind==='selected-profile-region'?'featureId,index,regionId,revision':kind==='linear-hole-pattern'?'count,featureId,index,revision,spacing':kind==='operation-append'?'direction,featureId,index,revision':kind==='through-hole'?(ownKeys.includes('offsetX')||ownKeys.includes('offsetY')?'diameter,featureId,index,offsetX,offsetY,revision':'diameter,featureId,index,revision'):kind==='solid-edge-treatment'?'featureId,index,revision,size':kind==='solid-box'?'depth,engine,featureId,height,index,revision,width,x,y,z':['extrusion','selected-profile-depth'].includes(kind)?'depth,featureId,index,revision':kind==='centered'?'diameter,featureId,index,revision':'diameter,featureId,index,offsetX,offsetY,revision';
+    const editKeys=kind==='profile-extents'?(ownKeys.includes('direction')?'direction,featureId,index,revision':['revision','index','featureId','extent',...profileExtentFields(args)].sort().join(',')):kind==='blind-hole'?'depth,diameter,featureId,index,revision':kind==='solid-shell'?'featureId,index,revision,thickness':kind==='operation-remove'?'featureId,index,revision':kind==='through-hole-parent'?['revision','index','featureId','target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId'].sort().join(','):kind==='revolve-angle'?'angleRadians,featureId,index,revision':kind==='selected-profile-region'?'featureId,index,regionId,revision':kind==='linear-hole-pattern'?'count,featureId,index,revision,spacing':kind==='operation-append'?'direction,featureId,index,revision':kind==='through-hole'?(ownKeys.includes('offsetX')||ownKeys.includes('offsetY')?'diameter,featureId,index,offsetX,offsetY,revision':'diameter,featureId,index,revision'):kind==='solid-edge-treatment'?'featureId,index,revision,size':kind==='solid-box'?'depth,engine,featureId,height,index,revision,width,x,y,z':['extrusion','selected-profile-depth'].includes(kind)?'depth,featureId,index,revision':kind==='centered'?'diameter,featureId,index,revision':'diameter,featureId,index,offsetX,offsetY,revision';
     if (![editKeys,'direction,featureId,index,revision'].includes(keys) ||
         (Object.prototype.hasOwnProperty.call(args,'direction') && !['undo','redo'].includes(args.direction))) {
       throw new Error('Invalid authored depth command.');
@@ -1223,7 +1228,7 @@ export function activate(ctx: ApplicationContext) {
     const sourceSketchRevision=sketchRevision(storage,sketchNamespace);
     const trackedStreams=()=>[modifications$,models$,pipelineFailure$,engineCleanupFailure$,
       ctx.expressionService.script$,ctx.expressionService.list$,ctx.expressionService.errors$,
-      ...(['revolve-angle','selected-profile-depth','selected-profile-region','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent'].includes(kind)?[ctx.expressionService.table$]:[]),
+      ...(['profile-extents','revolve-angle','selected-profile-depth','selected-profile-region','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent'].includes(kind)?[ctx.expressionService.table$]:[]),
       ctx.streams.sketcher.sketchingFace,ctx.wizardService.workingRequest$,
       ctx.workbenchService.currentWorkbench$,ctx.assemblyService.constraints$];
     const capturedStreams=trackedStreams(), streamRevisions=capturedStreams.map(s=>s.revision);
@@ -1265,11 +1270,11 @@ export function activate(ctx: ApplicationContext) {
     if (!appendTravel&&(!fullTipSignature || captured.signature !== fullTipSignature)) throw new Error('The accepted full-tip history is unavailable or changed.');
     const index = args.index, request = captured.history[index];
     if(request)requireActiveFeature(request);
-    const expectedType=kind==='blind-hole'?'WORKER_CENTERED_BLIND_HOLE_V1':kind==='solid-shell'?'WORKER_SOLID_SHELL_V1':removeOperation?'WORKER_SELECTED_PROFILE_EXTRUDE_V2':kind==='through-hole-parent'?'WORKER_THROUGH_HOLES_V1':kind==='revolve-angle'?'WORKER_SELECTED_PROFILE_REVOLVE_V1':kind==='linear-hole-pattern'?'WORKER_LINEAR_HOLE_PATTERN_V1':kind==='through-hole'?'WORKER_THROUGH_HOLES_V1':kind==='solid-edge-treatment'?'WORKER_SOLID_EDGE_TREATMENT_V1':['selected-profile-depth','selected-profile-region'].includes(kind)?'WORKER_SELECTED_PROFILE_EXTRUDE_V2':kind==='solid-box'?'WORKER_SOLID_BOX_V1':kind==='extrusion'?'WORKER_RECTANGLE_EXTRUDE_V1':kind==='centered'?'WORKER_CENTERED_THROUGH_HOLE_V1':'WORKER_FOUR_CORNER_THROUGH_HOLES_V1';
+    const expectedType=kind==='profile-extents'?PROFILE_EXTENT_TYPE:kind==='blind-hole'?'WORKER_CENTERED_BLIND_HOLE_V1':kind==='solid-shell'?'WORKER_SOLID_SHELL_V1':removeOperation?'WORKER_SELECTED_PROFILE_EXTRUDE_V2':kind==='through-hole-parent'?'WORKER_THROUGH_HOLES_V1':kind==='revolve-angle'?'WORKER_SELECTED_PROFILE_REVOLVE_V1':kind==='linear-hole-pattern'?'WORKER_LINEAR_HOLE_PATTERN_V1':kind==='through-hole'?'WORKER_THROUGH_HOLES_V1':kind==='solid-edge-treatment'?'WORKER_SOLID_EDGE_TREATMENT_V1':['selected-profile-depth','selected-profile-region'].includes(kind)?'WORKER_SELECTED_PROFILE_EXTRUDE_V2':kind==='solid-box'?'WORKER_SOLID_BOX_V1':kind==='extrusion'?'WORKER_RECTANGLE_EXTRUDE_V1':kind==='centered'?'WORKER_CENTERED_THROUGH_HOLE_V1':'WORKER_FOUR_CORNER_THROUGH_HOLES_V1';
     if (!appendTravel&&!removeUndo&&(!Number.isSafeInteger(index) || index < 0 || !request || request.type !== expectedType ||
         Number(request.params?.featureId) !== args.featureId)) throw new Error('The selected feature is unavailable.');
     if(kind==='extrusion' && typeof request.params.length==='string')throw new Error('This extrusion depth is parameter-bound. Edit its typed parameter instead.');
-    let proposal, nextAngle, nextDepth, nextRegion, nextDimensions, nextSize, nextThickness, appendPlan, appendDefinition, removedDefinition;
+    let proposal, nextExtent, nextAngle, nextDepth, nextRegion, nextDimensions, nextSize, nextThickness, appendPlan, appendDefinition, removedDefinition;
     if(appendTravel){
       appendPlan=planOperationAppendTravel(journal,{document,revision:journal.revision,direction:args.direction,index,featureId:args.featureId,currentLength:before.history.length,currentOperation:args.direction==='undo'?request:null,previousFeatureId:index?Number(before.history[index-1]?.params.featureId):null});
       appendDefinition=Object.freeze(args.direction==='undo'?before.history.slice(0,-1):[...before.history,appendPlan.operation]);
@@ -1342,6 +1347,21 @@ export function activate(ctx: ApplicationContext) {
       if(args.direction){const plan=planSelectedProfileRegionTravel(journal,{document,revision:journal.revision,direction:args.direction,index,featureId:args.featureId,parameters});proposal=plan.next;nextRegion=plan.regionId;}
       else {nextRegion=args.regionId;captureSelectedProfileDepthParameters({...parameters,regionId:nextRegion});if(nextRegion===parameters.regionId)return Object.freeze({changed:false,revision:inspectAuthoredEdits().revision});proposal=recordSelectedProfileRegionEdit(journal,{document,revision:journal.revision,index,featureId:args.featureId,parameters,after:nextRegion});}
       request.params.regionId=nextRegion;
+    } else if(kind==='profile-extents') {
+      const parameters:any=captureOwnedProfileExtentFeature(request.params);
+      if(ctx.expressionService.isTyped)requireModernPhysicalHistory(captured.history);
+      else if(ctx.expressionService.script$.value.trim()||Reflect.ownKeys(ctx.expressionService.table$.value||{}).length)throw Object.assign(Error('Extent edits require an empty or current typed parameter source.'),{code:'UNSUPPORTED_PARAMETERS'});
+      let following:any;
+      if(args.direction){const plan=planProfileExtentTravel(journal,{document,revision:journal.revision,direction:args.direction,index,featureId:args.featureId,parameters});proposal=plan.next;nextExtent=plan.extent;following=plan.parameters;}
+      else{
+        nextExtent=captureProfileExtent(Object.fromEntries(['extent',...profileExtentFields(args)].map(key=>[key,args[key]])));
+        assertProfileExtentBindingsPreserved(profileExtentDimensions(parameters),nextExtent);
+        const common=Object.fromEntries(['version','unit','engine','engineRevision','featureId','faceId','regionId','bodyPolicy'].map(key=>[key,parameters[key]]));following=captureOwnedProfileExtentFeature({...common,...nextExtent});
+        check();materializeOwnedProfileExtentFeature(following,ctx.expressionService);check();
+        const previous=profileExtentDimensions(parameters),keys=Object.keys(previous);if(keys.length===Object.keys(nextExtent).length&&keys.every(key=>Object.is(previous[key],nextExtent[key])))return Object.freeze({changed:false,revision:inspectAuthoredEdits().revision});
+        proposal=recordProfileExtentEdit(journal,{document,revision:journal.revision,index,featureId:args.featureId,parameters,after:nextExtent});
+      }
+      check();materializeOwnedProfileExtentFeature(following,ctx.expressionService);check();request.params={...following};
     } else if(kind==='selected-profile-depth') {
       const parameters:any=captureSelectedProfileDepthParameters(request.params);
       if(!args.direction&&typeof parameters.depth!=='number')throw Object.assign(Error('Edit the authoritative typed parameter rather than replacing its depth binding.'),{code:'UNSUPPORTED_PARAMETERS'});
@@ -1386,7 +1406,7 @@ export function activate(ctx: ApplicationContext) {
     else if ((await captureAuthoredHistory(before.history, check)).signature !== expected) throw superseded();
     const nextState = {history:nextCapture.history, pointer:nextCapture.history.length-1};
     const scope:{epoch:number|null}={epoch:null};
-    const nativeSourceReplay=['selected-profile-depth','selected-profile-region'].includes(kind)&&hasNativeSourceAttachments(before.history)?issueNativeSourceReplay(ctx,{history:nextCapture.history,kind,direction:args.direction,expectedSketches:args.direction?planNativeSourceTravel(journal,args.direction,id=>ctx.sketchStorageService.getSketchData(id)):undefined,requireCurrent:check}):undefined;
+    const nativeSourceReplay=['profile-extents','selected-profile-depth','selected-profile-region'].includes(kind)&&hasNativeSourceAttachments(before.history)?issueNativeSourceReplay(ctx,{history:nextCapture.history,kind,direction:args.direction,expectedSketches:args.direction?planNativeSourceTravel(journal,args.direction,id=>ctx.sketchStorageService.getSketchData(id)):undefined,requireCurrent:check}):undefined;
     const preparation:PreparedSketchCommand = {
       ...(nativeSourceReplay?{nativeSourceReplay}:{}),
       candidateScope:scope, requireCurrent:check,
@@ -1435,7 +1455,7 @@ export function activate(ctx: ApplicationContext) {
       }
       preparation.requireCommittedCurrent();
       return Object.freeze({changed:true,revision:inspectAuthoredEdits().revision,featureId:args.featureId,index,
-        ...(['operation-remove','through-hole-parent'].includes(kind)?{}:appendTravel?{operationType:appendPlan.operation.type,direction:args.direction}:kind==='revolve-angle'?{angleRadians:nextAngle}:kind==='selected-profile-region'?{regionId:nextRegion}:kind==='solid-shell'?{thickness:nextThickness}:kind==='solid-edge-treatment'?{size:nextSize}:['extrusion','selected-profile-depth'].includes(kind)?{depth:nextDepth}:{dimensions:nextDimensions})});
+        ...(['operation-remove','through-hole-parent'].includes(kind)?{}:appendTravel?{operationType:appendPlan.operation.type,direction:args.direction}:kind==='profile-extents'?{...nextExtent}:kind==='revolve-angle'?{angleRadians:nextAngle}:kind==='selected-profile-region'?{regionId:nextRegion}:kind==='solid-shell'?{thickness:nextThickness}:kind==='solid-edge-treatment'?{size:nextSize}:['extrusion','selected-profile-depth'].includes(kind)?{depth:nextDepth}:{dimensions:nextDimensions})});
     } finally {settled=true;clearInterval(timer);options.signal?.removeEventListener('abort',stop);}
   }
 
@@ -1517,7 +1537,7 @@ export function activate(ctx: ApplicationContext) {
     cancelHistoryReviewDraft,navigateHistoryPosition,
     modifications$, models$, update$, pipelineFailure$, engineCleanupFailure$
   };
-  Object.assign(ctx.craftService, {captureManufacturingEditContext,commitManufacturingMetadata,authoredRevolveAngleOperation,inspectAuthoredEdits, authoredDepthOperation, authoredHoleOperation, authoredSolidBoxOperation, authoredSelectedProfileDepthOperation, authoredSolidEdgeTreatmentOperation, authoredSolidShellOperation, authoredLinearHolePatternOperation, authoredBlindHoleOperation, authoredThroughHoleOperation, authoredEditTravel, applyPhysicalDepth, inspectPhysicalParameters, applyPhysicalConfigurations, applyPhysicalBracket, applyPhysicalEnclosure, applyPhysicalSelectedProfile, applyPhysicalBindings});
+  Object.assign(ctx.craftService, {captureManufacturingEditContext,commitManufacturingMetadata,authoredProfileExtentOperation,authoredRevolveAngleOperation,inspectAuthoredEdits, authoredDepthOperation, authoredHoleOperation, authoredSolidBoxOperation, authoredSelectedProfileDepthOperation, authoredSolidEdgeTreatmentOperation, authoredSolidShellOperation, authoredLinearHolePatternOperation, authoredBlindHoleOperation, authoredThroughHoleOperation, authoredEditTravel, applyPhysicalDepth, inspectPhysicalParameters, applyPhysicalConfigurations, applyPhysicalBracket, applyPhysicalEnclosure, applyPhysicalSelectedProfile, applyPhysicalBindings});
   registerUnconsumedSketchSave(ctx,face=>{
     const service:any=ctx.projectService,storage=ctx.storageService,manager:any=ctx.projectManager,document=service.documentGeneration,history=modifications$.value,journal=authoredJournal$.value,namespace=service.sketchStorageNamespace;
     if(!face||typeof face.id!=='string'||face.defaultSketchId!==face.id||!fullTipSignature||!hasOnlyUnconsumedSketchHistory(history.history,face.id)||history.pointer!==history.history.length-1||pendingPipelines||pendingModifications||pipelineFailure$.value||engineCleanupFailure$.value||!service.hasHostLifetime||!service.isDocumentCurrent(document)||ctx.cadRegistry.findFace(face.id)!==face)return null;
@@ -2181,6 +2201,7 @@ interface CraftService {
   inspectWorkerLinkedPartBores?: ReturnType<typeof createWorkerDrawingReadCommands>['inspectWorkerLinkedPartBores'];
   readWorkerLinkedPartDrawing?: ReturnType<typeof createWorkerDrawingReadCommands>['readWorkerLinkedPartDrawing'];
   prepareWorkerManufacturingMeshes?: ReturnType<typeof createWorkerManufacturingMeshReplay>['prepareWorkerManufacturingMeshes'];
+  authoredProfileExtentOperation?: (args:any,options?:any)=>Promise<any>;
   authoredLinearHolePatternOperation?: (args:{revision:string;index:number;featureId:number;count?:number;spacing?:number;direction?:'undo'|'redo'},options?:{signal?:AbortSignal;valid?:()=>boolean;beforePublish?:()=>boolean})=>Promise<Readonly<{changed:boolean;revision:string;dimensions?:Readonly<Record<string,number>>;featureId?:number;index?:number}>>;
   inspectWorkerLinearHolePatterns?: ReturnType<typeof createWorkerLinearHolePatternCommands>['inspectWorkerLinearHolePatterns'];
   createWorkerLinearHolePattern?: ReturnType<typeof createWorkerLinearHolePatternCommands>['createWorkerLinearHolePattern'];

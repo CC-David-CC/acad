@@ -1,3 +1,4 @@
+import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature,captureProfileExtent,profileExtentDimensions,profileExtentValueValid,assertProfileExtentBindingsPreserved} from '../../../../modules/engine/solid/ownedProfileExtentFeature.mjs';
 import {captureAuthoredBlindHoleIntent} from '../../../../modules/engine/solid/authoredBlindHoleIntent.mjs';
 import {BLIND_HOLE_KEYS} from '../../../../modules/engine/solid/ownedBlindHoleIntent.mjs';
 import {capturePrincipalPlaneReviewPosition,principalPlaneReviewPositionByteSize} from './principalPlanePlacementIntent.mjs';
@@ -50,7 +51,7 @@ export function supplementNativeSourceJournal(state,proposal,rows,direction){
  if(!proposal||proposal.document!==state.document||proposal.revision!==state.revision+1||!Array.isArray(rows)||rows.length>64)throw Error('Invalid native source journal publication.');
  if(direction)return proposal;const entry=proposal.entries[proposal.cursor-1];if(!entry)throw Error('Native source edit has no authored journal event.');
  if(entry.kind==='source-frame')return recordSourceFrameEdit(state,{document:state.document,revision:state.revision,...entry,sketches:rows});
- if(!['selected-profile-depth','selected-profile-region'].includes(entry.kind))throw Error('Native source propagation is unsupported for this event.');
+ if(!['selected-profile-depth','selected-profile-region','profile-extents'].includes(entry.kind))throw Error('Native source propagation is unsupported for this event.');
  if(!rows.length)return proposal;let units=0,bytes=0;const seen=new Set(),captured=rows.map(value=>{const r=sourceFrameRecord(value,['faceId','before','after']);if(typeof r.faceId!=='string'||!r.faceId||r.faceId.length>256||seen.has(r.faceId)||r.before===r.after)throw Error('Invalid native source delta.');seen.add(r.faceId);bytes+=128+historySignatureBytes(r.faceId);for(const key of ['before','after']){if(r[key]===null)bytes+=4;else{sourceFrameText(r[key]);units+=r[key].length;bytes+=historySignatureBytes(r[key]);}}return Object.freeze(r);});
  if(units>32768)throw Object.assign(Error('Native source delta exceeds64KiB retained UTF16.'),{code:'RESOURCE_LIMIT'});const nextEntry=Object.freeze({...entry,attachmentSketches:Object.freeze(captured),byteSize:entry.byteSize+bytes}),entries=bounded([...proposal.entries.slice(0,proposal.cursor-1),nextEntry]);return make(proposal.document,proposal.revision,entries,entries.length);
 }
@@ -65,10 +66,10 @@ function checkIdentity(index,id) { if(!integer(index,0,255)||!integer(id,1,Numbe
 function make(document,revision,entries,cursor) {return Object.freeze({document,revision,entries:Object.freeze(entries),cursor});}
 function bounded(entries) {
   entries=entries.slice(-LIMIT);
-  let bytes=entries.reduce((sum,entry)=>sum+(['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(entry.kind) ? entry.byteSize : 256),0);
+  let bytes=entries.reduce((sum,entry)=>sum+(['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','profile-extents','selected-profile-source-dimension','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(entry.kind) ? entry.byteSize : 256),0);
   while(bytes>MAX_JOURNAL_BYTES && entries.length>1) {
     const removed=entries.shift();
-    bytes-=['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','selected-profile-source-dimension','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(removed.kind) ? removed.byteSize : 256;
+    bytes-=['sketch-bytes','parameter-depth','parameter-bracket','physical-transaction','centered-parent-repair','selected-profile-depth','selected-profile-region','profile-extents','selected-profile-source-dimension','solid-edge-treatment','solid-shell','blind-hole','through-hole','linear-hole-pattern','operation-append','operation-remove','through-hole-parent','revolve-angle','source-plane-depth','source-frame','document-metadata','feature-suppression','history-position','history-branch'].includes(removed.kind) ? removed.byteSize : 256;
   }
   if(bytes>MAX_JOURNAL_BYTES)throw Error('The authored edit exceeds the undo limit.');
   return entries;
@@ -162,6 +163,7 @@ export function planSketchTravel(state,{document,revision,direction,faceId,curre
 // Exact authored parameter source and one explicit extrusion binding; never
 // stores evaluated geometry or engine handles.
 const parameterBinding=value=>typeof value==='number'&&depth(value)||typeof value==='string'&&value.length<=128&&(/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(value)||/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/.test(value.trim())&&depth(Number(value)));
+const extentParameterBinding=(field,value)=>profileExtentValueValid(field==='distance'?'one-sided':field==='length'?'symmetric':'two-sided',field,value);
 export function recordParameterDepthEdit(state,{document,revision,index,featureId,beforeSource,afterSource,beforeBinding,afterBinding}) {
   checkCurrent(state,document,revision);checkIdentity(index,featureId);
   if(typeof beforeSource!=='string'||typeof afterSource!=='string'||beforeSource.length>65536||afterSource.length>65536||!parameterBinding(beforeBinding)||!parameterBinding(afterBinding)||(beforeSource===afterSource&&beforeBinding===afterBinding))throw Error('Invalid parameter edit.');
@@ -199,7 +201,7 @@ export function recordPhysicalTransaction(state,{document,revision,beforeSource,
   if(typeof beforeSource!=='string'||typeof afterSource!=='string'||beforeSource.length>65536||afterSource.length>65536||!Array.isArray(changes)||changes.length>256||Reflect.ownKeys(changes).length!==changes.length+1)throw Error('Invalid physical transaction.');
   if(parameterKind!==undefined&&!['legacy-numeric-v1','typed-physical-v1'].includes(parameterKind))throw Error('Invalid expression source format.');
   const encoder=new TextEncoder(),measure=s=>{const bytes=encoder.encode(s).byteLength;if(bytes>65536)throw Error('Physical source exceeds journal limits.');return Math.max(bytes,s.length*2);};let byteSize=512+measure(beforeSource)+measure(afterSource);
-  const seen=new Set(),items=[];for(let i=0;i<changes.length;i++){const d=Object.getOwnPropertyDescriptor(changes,String(i)),item=d?.value;if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value')||!item||typeof item!=='object'||Array.isArray(item)||Reflect.ownKeys(item).sort().join(',')!=='after,before,featureId,field,index,type')throw Error('Invalid physical binding change.');const copy={};for(const key of ['index','featureId','type','field','before','after']){const p=Object.getOwnPropertyDescriptor(item,key);if(!p?.enumerable||!Object.prototype.hasOwnProperty.call(p,'value'))throw Error('Invalid physical binding change.');copy[key]=p.value;}checkIdentity(copy.index,copy.featureId);if(typeof copy.type!=='string'||copy.type.length>128||typeof copy.field!=='string'||copy.field.length>128||!parameterBinding(copy.before)||!parameterBinding(copy.after)||copy.before===copy.after)throw Error('Invalid physical binding change.');const id=copy.index+':'+copy.field;if(seen.has(id))throw Error('Duplicate physical binding change.');seen.add(id);for(const value of [copy.type,copy.field,copy.before,copy.after])if(typeof value==='string')byteSize+=Math.max(encoder.encode(value).byteLength,value.length*2);byteSize+=128;items.push(Object.freeze(copy));}
+  const seen=new Set(),items=[];for(let i=0;i<changes.length;i++){const d=Object.getOwnPropertyDescriptor(changes,String(i)),item=d?.value;if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value')||!item||typeof item!=='object'||Array.isArray(item)||Reflect.ownKeys(item).sort().join(',')!=='after,before,featureId,field,index,type')throw Error('Invalid physical binding change.');const copy={};for(const key of ['index','featureId','type','field','before','after']){const p=Object.getOwnPropertyDescriptor(item,key);if(!p?.enumerable||!Object.prototype.hasOwnProperty.call(p,'value'))throw Error('Invalid physical binding change.');copy[key]=p.value;}checkIdentity(copy.index,copy.featureId);if(typeof copy.type!=='string'||copy.type.length>128||typeof copy.field!=='string'||copy.field.length>128||!(copy.type===PROFILE_EXTENT_TYPE?extentParameterBinding(copy.field,copy.before):parameterBinding(copy.before))||!(copy.type===PROFILE_EXTENT_TYPE?extentParameterBinding(copy.field,copy.after):parameterBinding(copy.after))||copy.before===copy.after)throw Error('Invalid physical binding change.');const id=copy.index+':'+copy.field;if(seen.has(id))throw Error('Duplicate physical binding change.');seen.add(id);for(const value of [copy.type,copy.field,copy.before,copy.after])if(typeof value==='string')byteSize+=Math.max(encoder.encode(value).byteLength,value.length*2);byteSize+=128;items.push(Object.freeze(copy));}
   const input=sketches;if(!Array.isArray(input)||input.length>64||Reflect.ownKeys(input).length!==input.length+1)throw Error('Invalid physical sketch change.');const capturedSketches=[],faceIds=new Set();for(let i=0;i<input.length;i++){const item=Object.getOwnPropertyDescriptor(input,String(i));if(!item?.enumerable||!Object.hasOwn(item,'value'))throw Error('Invalid physical sketch change.');const value=item.value;if(!value||typeof value!=='object'||Array.isArray(value)||Reflect.ownKeys(value).sort().join(',')!=='after,before,faceId')throw Error('Invalid physical sketch change.');const copy={};for(const key of ['faceId','before','after']){const d=Object.getOwnPropertyDescriptor(value,key);if(!d?.enumerable||!Object.hasOwn(d,'value')||typeof d.value!=='string')throw Error('Invalid physical sketch change.');copy[key]=d.value;}if(!copy.faceId||copy.faceId.length>1024||faceIds.has(copy.faceId)||copy.before.length>1048576||copy.after.length>1048576||copy.before===copy.after)throw Error('Invalid physical sketch change.');faceIds.add(copy.faceId);const measureSketch=v=>{const size=encoder.encode(v).byteLength;if(size>1048576)throw Error('Physical sketch exceeds journal limits.');return Math.max(size,v.length*2)};byteSize+=measure(copy.faceId)+measureSketch(copy.before)+measureSketch(copy.after)+(capturedSketches.length?64:0);capturedSketches.push(Object.freeze(copy));}
   if(beforeSource===afterSource&&!items.length&&!capturedSketches.length)throw Error('The physical transaction is unchanged.');const frozen=Object.freeze(capturedSketches),entry=Object.freeze({kind:'physical-transaction',...(parameterKind===undefined?{}:{parameterKind}),beforeSource,afterSource,changes:Object.freeze(items),sketches:frozen,byteSize});const entries=bounded([...state.entries.slice(0,state.cursor),entry]);return make(document,revision+1,entries,entries.length);
 }
@@ -549,6 +551,7 @@ export function planRevolveAngleTravel(state,{document,revision,direction,index,
 
 // Capture and Craft chronology admission use one closed local registry.
 const appendDefinitions=Object.freeze({
+ [PROFILE_EXTENT_TYPE]:{capture:captureOwnedProfileExtentFeature,keys:params=>Object.keys(captureOwnedProfileExtentFeature(params))},
  WORKER_CENTERED_BLIND_HOLE_V1:{capture:captureBlindHoleParameters,keys:BLIND_HOLE_KEYS},
  WORKER_SELECTED_PROFILE_EXTRUDE_V2:{capture:captureSelectedProfileDepthParameters,keys:selectedProfileKeys},
  WORKER_THROUGH_HOLES_V1:{capture:captureThroughHoleParameters,keys:params=>[...throughHoleIdentityKeys,'diameter',...(params.kind==='four-corner-through'?['offsetX','offsetY']:[])]},
@@ -843,4 +846,25 @@ export function planHistoryControlTravel(state,{document,revision,direction,curr
  const entry=state.entries[direction==='undo'?state.cursor-1:state.cursor],undo=direction==='undo';
  if(!entry||!HISTORY_CONTROL_KINDS.includes(entry.kind)||currentSignature!==entry[undo?'afterSignature':'beforeSignature']||currentPointer!==entry[undo?'afterPointer':'beforePointer'])throw Error('The authored history control is stale.');
  return Object.freeze({entry,pointer:entry[undo?'beforePointer':'afterPointer'],signature:entry[undo?'beforeSignature':'afterSignature'],next:make(document,revision+1,state.entries,state.cursor+(undo?-1:1))});
+}
+
+
+// The same bounded journal records the complete RAW active variant. It never
+// stores an evaluated span, frame, Native cap index or current formula value.
+const extentIdentityKeys=['version','unit','engine','engineRevision','featureId','faceId','regionId','bodyPolicy'];
+function extentIdentity(parameters){return Object.freeze(Object.fromEntries(extentIdentityKeys.map(key=>[key,parameters[key]])));}
+function sameExtent(a,b){const x=captureProfileExtent(a),y=captureProfileExtent(b),keys=Object.keys(x);return keys.length===Object.keys(y).length&&keys.every(key=>Object.is(x[key],y[key]));}
+export function recordProfileExtentEdit(state,{document,revision,index,featureId,parameters,after}){
+ checkCurrent(state,document,revision);checkIdentity(index,featureId);
+ const current=captureOwnedProfileExtentFeature(parameters),before=profileExtentDimensions(current),next=assertProfileExtentBindingsPreserved(before,after),identity=extentIdentity(current);
+ if(current.featureId!==featureId||sameExtent(before,next))throw Error('Invalid profile extent journal edit.');
+ const following=captureOwnedProfileExtentFeature({...identity,...next}),byteSize=256+operationAppendBytes({type:PROFILE_EXTENT_TYPE,params:current})+operationAppendBytes({type:PROFILE_EXTENT_TYPE,params:following});
+ const entry=Object.freeze({kind:'profile-extents',index,featureId,identity,before,after:next,byteSize}),entries=bounded([...state.entries.slice(0,state.cursor),entry]);return make(document,revision+1,entries,entries.length);
+}
+export function planProfileExtentTravel(state,{document,revision,direction,index,featureId,parameters}){
+ checkCurrent(state,document,revision);checkIdentity(index,featureId);if(!['undo','redo'].includes(direction))throw Error('Invalid profile extent travel.');
+ const current=captureOwnedProfileExtentFeature(parameters),entry=state.entries[direction==='undo'?state.cursor-1:state.cursor],undo=direction==='undo';
+ if(entry?.kind!=='profile-extents'||entry.index!==index||entry.featureId!==featureId||current.featureId!==featureId||extentIdentityKeys.some(key=>!Object.is(current[key],entry.identity[key]))||!sameExtent(profileExtentDimensions(current),entry[undo?'after':'before']))throw Error('The authored extent no longer matches this journal event.');
+ const extent=captureProfileExtent(entry[undo?'before':'after']),next=make(document,revision+1,state.entries,state.cursor+(undo?-1:1));
+ return Object.freeze({index,featureId,parameters:captureOwnedProfileExtentFeature({...entry.identity,...extent}),extent,next});
 }

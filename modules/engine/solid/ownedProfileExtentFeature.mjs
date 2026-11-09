@@ -60,7 +60,12 @@ export function profileExtentDimensions(input){
  return captureProfileExtent(Object.fromEntries(['extent',...profileExtentFields(feature)].map(key=>[key,feature[key]])));
 }
 export function materializeOwnedProfileExtentFeature(input,expressions,materialized){
- const authored=captureOwnedProfileExtentFeature(input),resolved={...authored};
+ const authored=captureOwnedProfileExtentFeature(input),extent=resolveProfileExtent(profileExtentDimensions(authored),expressions),resolved={...authored,...extent};
+ for(const key of profileExtentFields(authored))if(materialized&&!Object.is(materialized[key],resolved[key]))fail('Materialized extent differs from its captured current typed source.');
+ return Object.freeze({authored,resolved:captureOwnedProfileExtentFeature(resolved)});
+}
+export function resolveProfileExtent(input,expressions){
+ const authored=captureProfileExtent(input),resolved={...authored};
  for(const key of profileExtentFields(authored)){
   let value=authored[key];
   if(typeof value==='string'){
@@ -68,9 +73,12 @@ export function materializeOwnedProfileExtentFeature(input,expressions,materiali
    value=expressions.resolveQuantity(value,'length');
   }
   if(!profileExtentValueValid(authored.extent,key,value,false))fail('The resolved profile extent is outside its active millimeter domain.');
-  if(materialized&&!Object.is(materialized[key],value))fail('Materialized extent differs from its captured current typed source.');
   resolved[key]=value;
  }
- profileExtentInterval(profileExtentDimensions(resolved));
- return Object.freeze({authored,resolved:captureOwnedProfileExtentFeature(resolved)});
+ const extent=captureProfileExtent(resolved,{numeric:true});profileExtentInterval(extent);return extent;
+}
+export function assertProfileExtentBindingsPreserved(before,after){
+ const a=captureProfileExtent(before),b=captureProfileExtent(after),keys=profileExtentFields(a);
+ if(keys.some(key=>typeof a[key]==='string')&&(a.extent!==b.extent||keys.some(key=>typeof a[key]==='string'&&!Object.is(a[key],b[key]))))fail('Edit the authoritative typed parameter rather than erasing or reinterpreting its extent binding.','UNSUPPORTED_PARAMETERS');
+ return b;
 }

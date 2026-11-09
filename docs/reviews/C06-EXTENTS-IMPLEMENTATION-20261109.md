@@ -40,6 +40,16 @@ Physical binding role metadata includes all four potential LENGTH fields, while 
 
 The new planar policy preserves original datum/actual Native lower+upper caps and is independently bound in the controller response. Bore frames use explicit lower/upper interval WITHOUT depth for this family. Root exact Shell-only sections, current blind result cleanup/Boolean costs, old cohort defaults and Native bytes remain unchanged. Five new extent MFG roots (the initial four plus the interval tool adapter) preserve all five blind and four drawing roots. Nine guards now pin OCI source `d7ef4d7789dcc9f797f56ac4bd9247a9aa4832b79214505dbe790d2e659cff41` together. Main service/persistence/source-parent consumer adoption is still required before the factory/catalog flag can be enabled.
 
+## Authored edit/journal foundation
+
+The same Craft authored-feature transaction now has an internal `profile-extents` branch and one existing-journal event. It stores exact raw before/after active variants and immutable source/backend/feature identity; no derived interval, frame or Native cap is stored. Numeric mode changes remain explicit intent even for equivalent geometry. Replacing/reinterpreting an existing named active value through this edit refuses; actual physical parameter transactions remain the binding authority. Scalar resolution checks current callbacks on both sides before a no-op return or candidate replay. Full suffix publication, material/source revision guards and actual attached-source replay remain the existing transaction. Journal byte accounting includes the new event in64-entry/8MiB trimming; native attachment deltas supplement that same event. Travel validates exact current raw identity/variant and restores the historical raw target.
+
+Physical feature discovery and mutation now select active fields instead of publishing undefined inactive slots. Generic physical definition updates identify the new selected source and use the actual existing typed-sketch transaction; the old depth-specific rectangle-binding convenience remains explicitly old-feature-only. New signed/nonnegative physical journal values use only their exact per-field variant domain, without weakening any old positive parameter path.
+
+Before monotone feature allocation, creation needs a genuine geometric preflight without a made-up authored ID. `prepareProfileExtentGeometry` is the SAME Worker geometry preparation used by the Native-bound constructor; the new depth-free `validate-profile-extents` semantic job binds it to captured actual source and raw/resolved values. It grants no Native/source membership authority or successful feature flag. The registered operation still repeats actual feature-ID/source/digest preparation and Native construction afterward. Public create/discovery service hookup remains pending.
+
+Root counterbore/countersink work is a separate future interval domain: its exact old positive-profile parent refusal must remain. Final root resource composition must retain the three newer counter roots in addition to blind5/derived4/extent5; this24ad-based branch never replaces their unavailable source or silently advertises extent counter support.
+
 ## Integration still required before exposure
 
 | Seam | Required closure; no completion claim yet |

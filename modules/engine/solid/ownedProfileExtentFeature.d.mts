@@ -15,3 +15,5 @@ export function captureOwnedProfileExtentFeature(input:unknown):OwnedProfileExte
 export function profileExtentDimensions(input:unknown):ProfileExtent;
 export function materializeOwnedProfileExtentFeature(input:unknown,expressions:any,materialized?:any):Readonly<{authored:OwnedProfileExtentFeature;resolved:OwnedProfileExtentFeature<number>}>;
 export function profileExtentFromFields(input:unknown,options?:{numeric?:boolean}):ProfileExtent;
+export function resolveProfileExtent(input:unknown,expressions:any):ProfileExtent<number>;
+export function assertProfileExtentBindingsPreserved(before:unknown,after:unknown):ProfileExtent;

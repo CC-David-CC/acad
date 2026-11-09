@@ -65,16 +65,14 @@ function bounds(face,frame,lower,upper){
  if([...min,...max].some(n=>!Number.isFinite(n)||Math.abs(n)>4e6))fail('Extent geometry exceeds the existing Native world domain.','INVALID_PROFILE');
  return {min,max};
 }
-export async function prepareOwnedProfileExtent(input,expectedRequestSha256){
- // Detach every caller array BEFORE the first suspension. Both the digest
- // and Native values derive from this immutable capture, never a reread.
- const request=captureProfileExtentIntent(input),encoded=new TextEncoder().encode(JSON.stringify(request));
- if(encoded.byteLength>1048576)fail('Profile-extent request exceeds its Worker byte budget.','RESOURCE_LIMIT');
- if(expectedRequestSha256!==undefined&&!hex(expectedRequestSha256))fail('Invalid independent profile-extent request digest.');
- const digest=await crypto.subtle.digest('SHA-256',encoded),requestSha256=Array.from(new Uint8Array(digest),n=>n.toString(16).padStart(2,'0')).join('');
- if(expectedRequestSha256!==undefined&&requestSha256!==expectedRequestSha256)fail('Profile-extent input changed from independent semantic preparation.','PROFILE_EXTENT_INPUT_CHANGED');
- const originalFace=preparePolygonProfileFace({version:1,unit:request.unit,frame:request.frame,region:request.region});
- const interval=profileExtentInterval(request.extent),sourcePlane=interval.lower===0?'lower-boundary':interval.upper===0?'upper-boundary':'interior';
+// Pure Worker geometry preflight has NO provisional authored feature ID.
+// Creation can refuse malformed/unrepresentable geometry before reserving its
+// monotone feature identity; Native construction still repeats the full proof.
+export function prepareProfileExtentGeometry(input){
+ const r=fields(input,['version','unit','frame','region','extent']),face=capturePolygonProfileFaceRequest({version:r.version,unit:r.unit,frame:r.frame,region:r.region}),extent=captureProfileExtent(r.extent,{numeric:true});
+ if(Object.hasOwn(face.region,'boundaryProvenance'))fail('Extent extrusion currently requires whole ordinary source boundaries.','UNSUPPORTED_PROFILE');
+ const originalFace=preparePolygonProfileFace(face);
+ const interval=profileExtentInterval(extent);
  const workingFrame={...originalFace.frame,origin:originalFace.frame.origin.map((n,i)=>n+originalFace.frame.z[i]*interval.lower)};
  if(workingFrame.origin.some(n=>!Number.isFinite(n)||Math.abs(n)>4e6)||workingFrame.origin.every((n,i)=>Object.is(n,n+workingFrame.z[i]*interval.span)))fail('The private placed prism endpoints cannot be represented.','PROFILE_EXTENT_UNREPRESENTABLE');
  const expectedBounds=bounds(originalFace,originalFace.frame,interval.lower,interval.upper),workingBounds=bounds(originalFace,workingFrame,0,interval.span);
@@ -84,6 +82,17 @@ export async function prepareOwnedProfileExtent(input,expectedRequestSha256){
  const volume=originalFace.area*interval.span;
  if(!Number.isFinite(volume)||!(volume>0))fail('Extent volume is not representable in the Native numeric domain.','PROFILE_EXTENT_UNREPRESENTABLE');
  const nativeValues=originalFace.nativeValues.slice();nativeValues[0]=interval.span;for(let i=0;i<3;i++)nativeValues[1+i]=workingFrame.origin[i];
+ return freeze({originalFace,frame:workingFrame,depth:interval.span,loops:originalFace.loops,nativeValues,expected:{volume,bounds:expectedBounds},interval});
+}
+export async function prepareOwnedProfileExtent(input,expectedRequestSha256){
+ // Detach every caller array BEFORE the first suspension. Both the digest
+ // and Native values derive from this immutable capture, never a reread.
+ const request=captureProfileExtentIntent(input),encoded=new TextEncoder().encode(JSON.stringify(request));
+ if(encoded.byteLength>1048576)fail('Profile-extent request exceeds its Worker byte budget.','RESOURCE_LIMIT');
+ if(expectedRequestSha256!==undefined&&!hex(expectedRequestSha256))fail('Invalid independent profile-extent request digest.');
+ const digest=await crypto.subtle.digest('SHA-256',encoded),requestSha256=Array.from(new Uint8Array(digest),n=>n.toString(16).padStart(2,'0')).join('');
+ if(expectedRequestSha256!==undefined&&requestSha256!==expectedRequestSha256)fail('Profile-extent input changed from independent semantic preparation.','PROFILE_EXTENT_INPUT_CHANGED');
+ const geometry=prepareProfileExtentGeometry({version:1,unit:request.unit,frame:request.frame,region:request.region,extent:request.extent}),interval=geometry.interval,sourcePlane=interval.lower===0?'lower-boundary':interval.upper===0?'upper-boundary':'interior';
  const binding=captureProfileExtentBinding({version:1,...request.source,regionId:request.region.id,requestSha256,authoredExtent:request.authoredExtent,extent:request.extent,interval:{...interval,sourcePlane}});
- return freeze({request,binding,originalFace,frame:workingFrame,depth:interval.span,loops:originalFace.loops,nativeValues,expected:{volume,bounds:expectedBounds}});
+ return freeze({request,binding,...geometry});
 }
