@@ -8,29 +8,55 @@ import {OCC_BOOLEAN_HISTORY_BUILD} from 'engine/mount/engineCatalog.mjs';
 import {genericHistoryBuild,selectedProfileVersion} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {selectedProfileHistoryBudget} from 'engine/mount/selectedProfileBudget.mjs';
 import {inspectWorkerSolidSelections} from 'engine/solid/solidLedger.mjs';
+import {AUTHORED_SOLID_KINDS} from 'engine/solid/authoredSolidKinds.mjs';
 const invalid=(message:string)=>Object.assign(new Error(message),{code:'INVALID_REQUEST'});
 const aborted=(committed=false)=>{const error=new DOMException(committed?'Accepted solid command was superseded.':'Solid command was cancelled or superseded.','AbortError');Object.defineProperty(error,'committed',{value:committed,enumerable:true});return error;};
 function capture(input:any,keys:string[]){if(!input||typeof input!=='object'||Array.isArray(input)||Reflect.ownKeys(input).length!==keys.length)throw invalid('Invalid solid command fields.');const out:any={};for(const k of keys){const d=Object.getOwnPropertyDescriptor(input,k);if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value'))throw invalid('Solid command fields must be data.');out[k]=d.value;}return out;}
 // Root integration owns registration of these methods and the capability source.
 export function createWorkerSolidCommands(ctx:any,submit:any,cancelEpoch:(epoch:number)=>void,capabilities:()=>any){
  function inspect(){
-  const craft=ctx.craftService,registry=ctx.cadRegistry,project=ctx.projectService,base=craft.inspectRectangleCreation(),engines=capabilities(),fromModels=Array.isArray(registry.models),source=fromModels?registry.models:registry.shells;
+  const craft=ctx.craftService,registry=ctx.cadRegistry,project=ctx.projectService;
+  const ownData=(value:any,key:string)=>{const d=value&&typeof value==='object'?Object.getOwnPropertyDescriptor(value,key):null;if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value'))throw Error('Feature output producer fields must be own data.');return d.value;};
+  const modifications=craft.modifications$,state=modifications.value,history=ownData(state,'history'),pointer=ownData(state,'pointer'),historyRevision=modifications.revision;
+  if(!Array.isArray(history)||!Number.isSafeInteger(pointer)||pointer< -1||pointer>=history.length)throw Error('Feature output history is unavailable.');
+  const historyLength=history.length,creationMethod=craft.inspectRectangleCreation,base=creationMethod.call(craft),engines=capabilities(),fromModels=Array.isArray(registry.models),source=fromModels?registry.models:registry.shells;
   if(!Array.isArray(engines)||!Array.isArray(source)||source.length>16384)throw Error('Engine capabilities or bodies are unavailable.');
-  const names=['mxx','mxy','mxz','tx','myx','myy','myz','ty','mzx','mzy','mzz','tz'],checks:any[]=[],bodies:any[]=[],outputs:any[]=[];
-  for(const body of source){const empty=body instanceof MWorkerEmpty;if(!empty&&!(body instanceof MWorkerSolid))continue;if(registry.find(body.id)!==body)throw Error('Feature output identity is unavailable.');
+  const sourceLength=source.length,names=['mxx','mxy','mxz','tx','myx','myy','myz','ty','mzx','mzy','mzz','tz'],checks:any[]=[],bodies:any[]=[],outputs:any[]=[];
+  function captureProducer(body:any){
+   const index=ownData(body,'originatingOperation'),featureId=ownData(body,'featureId');
+   if(!Number.isSafeInteger(index)||index<0||index>pointer||index>=historyLength||!Number.isSafeInteger(featureId)||featureId<1)throw Error('Feature output producer is unavailable.');
+   const row=ownData(history,String(index)),operationType=ownData(row,'type'),params=ownData(row,'params');
+   if(Array.isArray(row)||!params||typeof params!=='object'||Array.isArray(params)||typeof operationType!=='string'||!AUTHORED_SOLID_KINDS.includes(operationType)||ownData(params,'featureId')!==featureId)throw Error('Feature output differs from its authored producer.');
+   return {index,featureId,operationType,row,params,producer:Object.freeze({index,featureId,operationType})};
+  }
+  function producerStateCurrent(){
+   try{
+    const currentSource=fromModels?registry.models:registry.shells;
+    if(ctx.craftService!==craft||ctx.cadRegistry!==registry||ctx.projectService!==project||craft.inspectRectangleCreation!==creationMethod||craft.modifications$!==modifications||modifications.value!==state||modifications.revision!==historyRevision||ownData(state,'history')!==history||ownData(state,'pointer')!==pointer||history.length!==historyLength||currentSource!==source||source.length!==sourceLength)return false;
+    return checks.every(({body,index,featureId,operationType,row,params})=>ownData(body,'originatingOperation')===index&&ownData(body,'featureId')===featureId&&ownData(history,String(index))===row&&ownData(row,'type')===operationType&&ownData(row,'params')===params&&ownData(params,'featureId')===featureId);
+   }catch{return false;}
+  }
+  // Capture EVERY retained producer before any model measurement/display callback.
+  const candidates:any[]=[];for(const body of source){const empty=body instanceof MWorkerEmpty;if(empty||body instanceof MWorkerSolid)candidates.push({body,empty,provenance:captureProducer(body)});}
+  for(const {body,empty,provenance} of candidates){if(registry.find(body.id)!==body)throw Error('Feature output identity is unavailable.');
    const ext=body.ext,tag=ext.workerGeometry,method=body.inspectKernelMetrics,metrics=method.call(body),location=empty?null:body.location$,matrix=location?.value,placement=empty?null:names.map(k=>(matrix as any)[k]),displayMethod=empty?null:body.inspectDisplayProjection,display=empty?null:displayMethod.call(body);
    if(!metrics||!Object.isFrozen(metrics)||!Object.isFrozen(metrics.bounds)||!Object.isFrozen(metrics.runtime)||metrics.runtime!==tag.runtime||metrics.resultKind!==tag.resultKind||(empty?(metrics.resultKind!=='empty'||metrics.bounds!==null):(metrics.resultKind==='empty'||!Object.isFrozen(display)||placement.some(v=>typeof v!=='number'||!Number.isFinite(v)))))throw Error('Native output measurements or placement are unavailable.');
-   const frozenPlacement=placement===null?null:Object.freeze(placement);
+   const frozenPlacement=placement===null?null:Object.freeze(placement),producer=provenance.producer;
    const selections=inspectWorkerSolidSelections(body);
-   outputs.push(Object.freeze({id:body.id,outputId:body.id,bodyId:empty?null:body.id,resultKind:metrics.resultKind,engine:tag.engine,featureId:body.featureId,metrics,placement:frozenPlacement,displayProjection:display,selections}));
-   if(!empty)bodies.push(Object.freeze({id:body.id,engine:tag.engine,featureId:body.featureId,metrics,placement:frozenPlacement,selections}));checks.push({body,ext,tag,location,matrix,method,metrics,placement,displayMethod,display});
+   outputs.push(Object.freeze({id:body.id,outputId:body.id,bodyId:empty?null:body.id,resultKind:metrics.resultKind,engine:tag.engine,featureId:provenance.featureId,producer,metrics,placement:frozenPlacement,displayProjection:display,selections}));
+   if(!empty)bodies.push(Object.freeze({id:body.id,engine:tag.engine,featureId:provenance.featureId,producer,metrics,placement:frozenPlacement,selections}));checks.push({body,...provenance,ext,tag,location,matrix,method,metrics,placement,displayMethod,display});
   }
-  const end=craft.inspectRectangleCreation();
-  if(ctx.craftService!==craft||ctx.cadRegistry!==registry||ctx.projectService!==project||(fromModels?registry.models:registry.shells)!==source||end.revision!==base.revision||checks.some(({body,ext,tag,location,matrix,method,metrics,placement,displayMethod,display})=>registry.find(body.id)!==body||body.ext!==ext||ext.workerGeometry!==tag||body.inspectKernelMetrics!==method||method.call(body)!==metrics||(location&&(body.location$!==location||location.value!==matrix||body.inspectDisplayProjection!==displayMethod||displayMethod.call(body)!==display||names.some((key,i)=>!Object.is(matrix[key],placement[i]))))))throw aborted();
-  const historyBuild=genericHistoryBuild(craft.modifications$.value.history),budgetBuild=historyBuild||OCC_BOOLEAN_HISTORY_BUILD;
-  const selectedOwnedBudget=Object.freeze({engine:budgetBuild.id,engineRevision:budgetBuild.revision,applies:selectedProfileVersion(budgetBuild)!==null,...selectedProfileHistoryBudget(craft.modifications$.value.history,budgetBuild.revision)});
+  function current(){
+   const end=creationMethod.call(craft);
+   if(!producerStateCurrent()||end.revision!==base.revision||checks.some(({body,ext,tag,location,matrix,method,metrics,placement,displayMethod,display})=>registry.find(body.id)!==body||body.ext!==ext||ext.workerGeometry!==tag||body.inspectKernelMetrics!==method||method.call(body)!==metrics||(location&&(body.location$!==location||location.value!==matrix||body.inspectDisplayProjection!==displayMethod||displayMethod.call(body)!==display||names.some((key,i)=>!Object.is(matrix[key],placement[i])))))||!producerStateCurrent())throw aborted();
+   return end;
+  }
+  current();
+  const historyBuild=genericHistoryBuild(history),budgetBuild=historyBuild||OCC_BOOLEAN_HISTORY_BUILD;
+  const selectedOwnedBudget=Object.freeze({engine:budgetBuild.id,engineRevision:budgetBuild.revision,applies:selectedProfileVersion(budgetBuild)!==null,...selectedProfileHistoryBudget(history,budgetBuild.revision)});
   const boxEngineBindings=Object.freeze(engines.map((entry:any)=>{try{const build=selectSolidContinuationBuild(outputs,entry.id,entry.revision);if(historyBuild&&historyBuild!==build)throw Object.assign(Error('The authored part backend differs from its current outputs.'),{code:'ENGINE_REVISION_MISMATCH'});return Object.freeze({engine:entry.id,engineRevision:build.revision,compatible:true,reason:null});}catch(error){return Object.freeze({engine:entry.id,engineRevision:null,compatible:false,reason:error.code||'ENGINE_BINDING_MISMATCH'});}}));
-  return Object.freeze({ready:end.ready,reason:end.reason||null,revision:end.revision,unit:'millimeter',selectedOwnedBudget,boxEngineBindings,engines:Object.freeze(engines.map((entry:any)=>Object.freeze(historyControlAppendReason(craft.modifications$.value.history,'WORKER_SOLID_BOOLEAN_V1')?{...entry,operations:Object.freeze({...entry.operations,boolean:false}),booleanCreationReason:'UNSUPPORTED_HISTORY'}:{...entry}))),bodies:Object.freeze(bodies),outputs:Object.freeze(outputs)});
+  const availableEngines=Object.freeze(engines.map((entry:any)=>Object.freeze(historyControlAppendReason(history,'WORKER_SOLID_BOOLEAN_V1')?{...entry,operations:Object.freeze({...entry.operations,boolean:false}),booleanCreationReason:'UNSUPPORTED_HISTORY'}:{...entry}))),end=current();
+  return Object.freeze({ready:end.ready,reason:end.reason||null,revision:end.revision,unit:'millimeter',selectedOwnedBudget,boxEngineBindings,engines:availableEngines,bodies:Object.freeze(bodies),outputs:Object.freeze(outputs)});
  }
 
  async function execute(kind:'box'|'boolean',input:any,options:any={}){
