@@ -32,7 +32,14 @@ cherry-picked. Current Shell implementations have exact same Git blobs as2f10:
 | --- | --- |
 | shape-io/ownedShellFFIV1.hpp | d04fbce0c581e844fdd2ca7e4fc205a02be03d29 |
 | shape-io/ownedShellV1.hpp | 831c2b397139d069a9671dd2424e2c95f936b6d3 |
-| shape-io/ownedTopologyV1.hpp | 34e31fcd779523c742d8ba03fc90db515d641d57 (unchanged from conicalc181; includes pure same-Maps overload) |
+
+The table covers ONLY the two actual Shell headers. The topology helper is NOT
+byte-identical: qualified2f10 has blob
+`6620cf8fa859f448eac97a787c91595a5af4c679`, whereas conicalc181/mechanicalc29
+has `34e31fcd779523c742d8ba03fc90db515d641d57`, with the deliberate pure
+same-Maps overload. Preserved single-argument serializer semantics do not mean
+equal Git objects or inherited binary qualification. This corrects the prior
+table's inaccurate combined identity heading; the source itself is unchanged.
 
 Conical headers and their two exports stay unchanged. Old catalog(shape)
 serialization/body remains behind the pure overload. No SDK/lib/build script,
@@ -171,3 +178,21 @@ Relay used trusted configured aliases without changing SSH trust or cloning
 Native into ACAD. No tests/probes/compiler/Native/browser calls occurred.
 Root source review precedes any build/new exact cohort; ordinary histories must
 use that one actual pair explicitly, never conversions or automatic fallback.
+
+## New-port publication follow-up
+
+The precedingc29 composition inventory remains historical source custody.
+Independent review62b301 identified a synchronous receiver boundary in the two
+NEW conical ports. Follow-up Native
+`04ad4cd070a3b42137a9c67cd53280a91ec0c7df`, branch
+`fix/conical-publication-fences-20261109`, is now backed on BOTH Native LANs.
+NATIVE-SOURCE.md records exact changed files/hashes, caught publication,
+post-publication name/frame/census/result/snapshot guards, owned-only rollback
+and fatal error transport after C++ local destruction. Only the new conical
+headers/export wrappers and Native source notes changed. Old ports/shared
+publisher/Shell/Box/circular/same-Maps serializer are unchanged.
+
+The corrected topology blob distinction above is documentation-only; no topology
+helper was edited in04ad. This follow-up is still UNCOMPILED/UNQUALIFIED and root
+review precedes any build/new registered pair. No callback mutation probes or
+other execution was used to claim the source repair.

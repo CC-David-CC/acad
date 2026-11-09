@@ -109,6 +109,7 @@ Failures are exactly `{version:1,error:<closed code>}`. Proposed closed codes:
 `CONICAL_INVALID_REQUEST`, `CONICAL_UNSUPPORTED_DOMAIN`, `CONICAL_INVALID_SHAPE`,
 `CONICAL_CONSTRUCTION_FAILED`, `CONICAL_PROVENANCE_UNRESOLVED`,
 `CONICAL_RESOURCE_LIMIT`, `CONICAL_INPUT_CHANGED`, `CONICAL_INSPECTION_FAILED`,
+`CONICAL_PUBLICATION_FAILED`,
 `MEASUREMENT_PRECISION_UNRESOLVED`, `ENGINE_CLEANUP_FAILED`.
 Only the actual constructor's known Standard_DomainError maps to the domain
 code; unknown inspection/ownership/allocation failures are never relabeled as
@@ -186,3 +187,64 @@ clone/object insertion into ACAD. Bundle SHA256 matched R730/local/box copies:
 Both Native refs read backc181. The old qualified worktrees/builds were untouched.
 No compiler, test/probe, Native function, browser, mesh or successful artifact was
 executed/created. Root alone owns compilation and future actual qualification.
+
+## Post-publication custody repair (source only)
+
+Independent source review62b301 found that the new ports' previous final call to
+the shared publisher could invoke returning/throwing JS after the last input
+fence. No public incident was established. Native follow-up
+`04ad4cd070a3b42137a9c67cd53280a91ec0c7df` starts at the frozen complete
+mechanical sourcec29 and is backed on BOTH Native LANs under
+`fix/conical-publication-fences-20261109`. The originalc181/c29 branches remain.
+
+Only the two conical headers, their two NEW void main.cpp export wrappers and
+the two Native source notes change. Old ports/shared `selected_profile_v2::publish`,
+same-Maps overload, Shell/Box/circular code, numerical domains, wire success
+schemas, old pairs/defaults/SDK/libraries/build scripts are unchanged. A private
+caught `EM_ASM_INT` publisher acknowledges actual synchronous receiver return.
+The new closed error is `CONICAL_PUBLICATION_FAILED`; arbitrary receiver text is
+never serialized.
+
+Before accepting constructor success, AFTER that receiver returns, require exact
+captured name/frame bytes, baseline+1 owned count, same actual named result and
+unchanged bounded result BRep/catalog/tolerances. Read success similarly requires
+the original name, census, exact named input and complete snapshot after the
+callback, not only beforehand. The same8MiB snapshot limit applies; at most one
+retained and one temporary snapshot coexist. Comparisons check current heap
+ranges and the exact captured name terminator. Scalar dimensions remain values.
+
+On a failed fence or thrown receiver, constructor rollback attempts release ONLY
+its exact original allocation still under the exact owned name; missing/replaced
+identity, failed release or unreconciled census is terminal cleanup uncertainty.
+It never releases a replacement, retries cleanup or claims caller input changes
+were undone. Read never modifies/restores/removes its input. Neither port claims
+all unrelated named shapes were snapshotted; future semantic Worker parent/source
+preservation remains required.
+
+Error publication is caught and fenced too. If it cannot be acknowledged or the
+post-error integrity fence fails, the private C++ function returns a static
+terminal-code pointer. Its TopoDS/snapshot/exception locals destruct before the
+thin void export throws a bounded JS Error with that code. Uncertain constructor
+cleanup takes priority, then input preservation, otherwise publication failure.
+The original failure is held privately through cleanup/error reporting, not
+converted to arbitrary public text. The external C signatures remain void.
+
+The future Worker MUST treat a thrown invocation as terminal regardless of any
+positive payload already received, discard all responses and retire/latch the
+evaluation's actual ownership failure. Missing, duplicate or malformed exchange
+also refuses; success is provisional until Native returns normally and all
+fences pass. A callback may store a positive payload and then throw, so silently
+returning from a failed error receiver would not suffice. No wrapper is claimed
+implemented here.
+
+| Repaired Native file | SHA256 |
+| --- | --- |
+| ownedConeTopologyV1.hpp | d6414f7785bd4d734a8bb6a1944612d64900d001a21afa7973a6817a29388f0b |
+| ownedConicalFrustumV1.hpp | a2082b2d26a774efc703e8b0e18128a1f10dd055b09568943d7125206413e038 |
+| main.cpp | 64e26dd2e00c9241d02cfdf6d5234f7bd365f5be1c3b0854e2fe6f4f11794ca3 |
+
+Incremental bundlec29→04ad SHA256:
+`aaf1baad646564cc9a803f64ba33c0ef22032ff47be997ea865c9b3e705c01ec`,
+matched R730/local/box and both Native refs read back04ad. No compiler, parser,
+test/probe, callback mutation, Native function or browser execution occurred.
+This fixes the reviewed source boundary; it is not runtime qualification.
