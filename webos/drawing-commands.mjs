@@ -9,23 +9,21 @@ export function registerDrawingCommands(host,getTarget){
  // Descriptions are bounded registry metadata, not a second semantic
  // validator. The shared manager captures the full exact definition schema.
  const ref=name=>({$ref:'#/$defs/'+name});
- const refs={
-  source:{type:'object',description:'Exact {kind:source-point,featureId,faceId,regionId,curveId,curveType,point}. curveType segment uses point a|b; circle uses center. Must retain declared datum binding.'},
-  face:{type:'object',description:'Exact {kind:native-face,originFeatureId,selectionId,geometry:plane}. Inspected authored selection only; no Native ordinal.'},
-  edge:{type:'object',description:'Exact {kind:native-edge,originFeatureId,selectionId,geometry:line}. Inspected authored selection only; no Native ordinal.'},
-  hole:{type:'object',description:'Exact {kind:center-hole,featureId,sourceFeatureId,faceId,regionId,slot:center,geometry:cylinder}. Retain datum/source identity.'},
-  point
- };
+ const refs={source:{type:'object'},face:{type:'object'},edge:{type:'object'},hole:{type:'object'},point};
+ // Exact source/native/BoreReference fieldsets remain in shared Core. Compact
+ // transport metadata preserves the registry's existing4KiB schema ceiling.
+ const view=record({viewId:text(128),basis:{enum:['top','front','right','isometric','bore-center-section','detail']},paperOrigin:ref('point'),visibility:{enum:['visible-and-hidden','cut-boundary-only','inherit']}});
+ Object.assign(view.properties,{hole:ref('hole'),retainedSide:{enum:['positive-datum-y']},parentViewId:text(128),focus:ref('hole'),aperture:{type:'object'},scale:{type:'object'}});
  const dimension=record({dimensionId:text(128),viewId:text(128),kind:{enum:['source-distance','plane-distance','edge-length','hole-diameter','hole-offset']},label:ref('point')});
  // Variant fields are conditional; actual fieldsets are enforced by PM.
  dimension.required=['dimensionId','viewId','kind','label'];
  Object.assign(dimension.properties,{axis:{enum:['datum-x','datum-y','datum-normal']},from:ref('source'),to:ref('source'),first:ref('face'),second:ref('face'),edge:ref('edge'),hole:ref('hole')});
- dimension.description='Exact kind-specific references; physical nonnegative orthographic dimensions. Shared Core captures full variants.';
+ // Canonical physical values and references are admitted by the shared PM.
  const definition=record({version:{enum:[1,2,3]},unit:{enum:['millimeter']},drawingId:text(128),title:{type:'string',maxLength:256},
   target:record({featureId:integer,operationType:text(128),engine:{enum:['occ']},engineRevision:{type:'string',pattern:'^sha256:[a-f0-9]{64}:[a-f0-9]{64}$'},output:{enum:['complete-native-result']}}),
   datum:record({featureId:integer,faceId:text(256),regionId:text(8192)}),
   sheet:record({width:{type:'number',exclusiveMinimum:0,maximum:10000},height:{type:'number',exclusiveMinimum:0,maximum:10000},scale:record({numerator:{type:'integer',minimum:1,maximum:10000},denominator:{type:'integer',minimum:1,maximum:10000}})}),
-  views:{type:'array',minItems:1,maxItems:4,items:record({viewId:text(128),basis:{enum:['top','front','right','isometric']},paperOrigin:ref('point'),visibility:{enum:['visible-and-hidden']}})},dimensions:{type:'array',maxItems:16,items:dimension}});
+  views:{type:'array',minItems:1,maxItems:6,items:view},dimensions:{type:'array',maxItems:16,items:dimension}});
  definition.properties.annotations={type:'array',maxItems:16,items:{type:'object'}};
  function plain(value){const p=Object.getPrototypeOf(value);if(p===null)return true;const c=Object.getOwnPropertyDescriptor(p,'constructor');return Object.getPrototypeOf(p)===null&&c&&Object.hasOwn(c,'value')&&typeof c.value==='function'&&c.value.prototype===p;}
  function own(value,keys){
@@ -67,7 +65,7 @@ export function registerDrawingCommands(host,getTarget){
   }));
   for(const [id,op] of [['create-linked-part-drawing','drawing.create'],['replace-linked-part-drawing','drawing.replace'],['remove-linked-part-drawing','drawing.remove']]){
    const properties={version:{enum:[1]},unit:{enum:['millimeter']},revision:text(256),geometryRevision:text(256),...(op==='drawing.create'?{}:{drawingId:text(128)}),...(op==='drawing.remove'?{}:{definition})};
-   stops.push(host.commands.register({id,description:'Publish a linked drawing in the shared journal. Definition v1/v2 views retained; v3 adds up to16 typed bore annotations (same physical dimensions). Use both revisions; Save separately. References may be unresolved.',parameters:{...record(properties),...(op==='drawing.remove'?{}:{$defs:refs})}},args=>{
+   stops.push(host.commands.register({id,description:'Publish a linked drawing in the shared journal. V1/v2 views retained; v3 allows up to6 role-bound views and16 typed bore annotations. Section requires exact Shell Native caps; detail is absolute2:1. Values remain physical reference dimensions. Section adds hole:BoreReference, retainedSide:positive-datum-y, visibility:cut-boundary-only. Detail adds parentViewId:TOP, focus:corner BoreReference, aperture:{kind:rectangle,halfWidth,halfHeight}, scale:{numerator:2,denominator:1}, visibility:inherit. V3 hole-diameter accepts an actual discovered BoreReference. Use both revisions; Save separately. References may be unresolved.',parameters:{...record(properties),...(op==='drawing.remove'?{}:{$defs:refs})}},args=>{
     const request=detach({op,...own(args,Object.keys(properties))}),t=target('applyLinkedPartDrawingOperation'),scope={signal:host.signal,valid:t.valid};
     return settleScopedCommand(t.manager.applyLinkedPartDrawingOperation(request,scope),scope);
    }));
