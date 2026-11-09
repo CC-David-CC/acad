@@ -36,6 +36,10 @@ def main(root, commit, output):
         require(not git('status', '--porcelain', '--untracked-files=no'), 'Tracked producer modified')
 
     current()
+    bootstrap_path = 'modules/engine/mount/oci-verified-worker.js'
+    bootstrap = digest(root / bootstrap_path)
+    require(hashlib.sha256(git('show', commit + ':' + bootstrap_path)).hexdigest() == bootstrap,
+            'Exact bootstrap Git blob differs')
     names = ('polygon-profile mechanical-profile boolean-history revolve-profile '
              'sweep-profile loft-profile adaptive-metrology step-export '
              'manufacturing-mesh shell circular mechanical-native').split()
@@ -45,6 +49,7 @@ def main(root, commit, output):
         manifest_path = directory / 'component.json'
         manifest_digest = digest(manifest_path)
         manifest = json.loads(manifest_path.read_text())
+        require(manifest['bootstrapSha256'] == bootstrap, 'Component bootstrap source differs')
         require(isinstance(manifest.get('files'), dict) and manifest['files'], 'Missing file roster')
         require(isinstance(manifest.get('sources'), dict) and manifest['sources'], 'Missing source roster')
         for relative, metadata in manifest['files'].items():
@@ -72,6 +77,7 @@ def main(root, commit, output):
     current()
     report = dict(scope='completed build source/byte custody only; no Native or browser qualification',
                   core=commit, trackedSourceClean=True, components=components,
+                  bootstrapSourceSha256=bootstrap,
                   actualSourceGitBlobSha256=sources, sourceCount=len(sources),
                   auditSourceSha256=digest(Path(__file__).resolve()))
     with output.open('x') as stream:
