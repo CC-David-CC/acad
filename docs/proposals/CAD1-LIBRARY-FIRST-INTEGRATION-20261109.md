@@ -8,9 +8,10 @@
   whole66328, independent artifact28626, seven actual full-sheet visual reviews.
   Original FIRST and three AFTER observer failures remain immutable. This is
   authored intent/geometry/persistence evidence, not manufactured conformance.
-- Affected legacy drawing regression1 is currently running6481 on unchanged
-  producing Core82866bf / Host796c90513, acceptance82866bf,293pins/MFG32e/abb.
-  Follow current handoff for exact job/context/write custody; no duplicate run.
+- Affected legacy isometric regression is QUALIFIED (whole6481/FIRST66458/six
+  actual SVG reviews PASS), on unchanged producing Core82866bf / Host796c90513,
+  acceptance82866bf,293pins/MFG32e/abb. Complete reference-repair18059 is now
+  running; follow current handoff for exact job/context/write custody.
 - Native finite-support source d3b2afa compiled with static ABI custody b45d9a0.
   Private adapter10dcb60 is source only. Actual lossless portable pair
   479f0620b6dfe131dac05131a3798fc533e05a2bd11e8074ef240284f61bbe86 /
