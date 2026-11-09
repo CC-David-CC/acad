@@ -1,3 +1,4 @@
+import {createLengthEqualityCertificate} from './lengthEqualityCertificate';
 import {createExactAngleZeroPolarFrames} from './exactAngleZeroPolarFrame';
 import {admissionCause,causeForSolveStatus,withAdmissionCause,failureCause,clearSolveValidationCause,setSolveValidationCause,getSolveValidationCause} from './admissionCause.mjs';
 import {prepare} from "./solver";
@@ -36,7 +37,7 @@ export class AlgNumSubSystem {
   // Real source-owned rows which have no numerical variables after reduction.
   // Nonzero values never earn exact redundancy; complete original equations
   // receive the same final dimensional policy in human and Worker admission.
-  deferredConstantRows = new Map<AlgNumConstraint,{rows:Polynomial[],validation:any,verify?:()=>void}>();
+  deferredConstantRows = new Map<AlgNumConstraint,{rows:Polynomial[],validation:any,verify?:(validationPass?:object)=>void}>();
   substitutedParams = new Map();
   substitutionOrder = [];
 
@@ -591,6 +592,7 @@ export class AlgNumSubSystem {
     const polynomialCounts = new Map();
     const redundantCounts = new Map();
     const polarFrames = createExactAngleZeroPolarFrames(this);
+    const lengthEqualities = createLengthEqualityCertificate(this,ConstraintDefinitions);
     // Rebuilt for this retained/trial system, including active redundant
     // direction requirements. A current value alone is not a certificate.
     const nonzeroDirectionParams = new Set();
@@ -626,6 +628,13 @@ export class AlgNumSubSystem {
       this.rejectionCauses.delete(c);
       let i = this.polynomials.length;
       const firstOriginalRow = i;
+      const equalityProof = lengthEqualities.capture(c);
+      if(equalityProof){
+        const rows=[];c.collectPolynomials(rows);
+        polynomialCounts.set(c,rows.length);redundantCounts.set(c,rows.length);
+        this.deferredConstantRows.set(c,{rows,validation:null,verify:equalityProof});
+        return;
+      }
       c.collectPolynomials(this.polynomials);
       polynomialCounts.set(c, this.polynomials.length - i);
       for (; i<this.polynomials.length; i++) {
@@ -645,6 +654,14 @@ export class AlgNumSubSystem {
       }
     });
 
+    for(const c of this.redundant){
+      if(c.schema!==ConstraintDefinitions.EqualLength&&c.schema!==ConstraintDefinitions.LengthRelation)continue;
+      if(this.deferredConstantRows.has(c))continue;
+      const rows=[];c.collectPolynomials(rows);
+      // Previously redundant original equality rows still need final domain/
+      // residual validation when prepareRaw excludes their numerical rows.
+      this.deferredConstantRows.set(c,{rows,validation:null});
+    }
     inheritReductionProvenance();
 
     if (DEBUG) {
@@ -1149,7 +1166,7 @@ export class AlgNumSubSystem {
         }
       }
       let cause = null;
-      if(record.verify)try{record.verify();}catch(error){cause=failureCause(error)||admissionCause('retained-validation-failure');}
+      if(record.verify)try{record.verify(updated);}catch(error){cause=failureCause(error)||admissionCause('retained-validation-failure');}
       if (!cause && constraint.params.some(p => !Number.isFinite(p.get()))) cause = admissionCause('nonfinite-result');
       if (!cause) try {
         assertRegisteredConstraintDomain(constraint);

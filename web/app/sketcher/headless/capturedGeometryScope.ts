@@ -1,5 +1,5 @@
 import {HeadlessSketchWorkspace} from './workspace';
-import {ConstraintDefinitions} from '../constr/ANConstraints';
+import {AlgNumConstraint,ConstraintDefinitions} from '../constr/ANConstraints';
 import {GroundObjectsGeneratorSchema} from '../generators/groundObjectsGenerator';
 import {evaluateCapturedSketch} from './capturedSketchEvaluation';
 import {capturedParameterOwnership,installCapturedAuxiliaryWitnesses} from './capturedParameterOwnership';
@@ -9,7 +9,7 @@ export function firstCapturedGeometryDifference(expected:any,actual:any){const p
 
 // Private source proof, never a public permission bitmap. Original equations
 // are collected before reductions; only represented-zero monomials are absent.
-export function captureConnectedGeometryScope(before:any,external:any,freshEvidence:any[],auxiliaryWitnessBatch:any,select:(workspace:any,pm:any,index:any)=>{parameters?:any[],equations?:any[],value:any},label='Length relation'){
+export function captureConnectedGeometryScope(before:any,external:any,freshEvidence:any[],auxiliaryWitnessBatch:any,select:(workspace:any,pm:any,index:any)=>{parameters?:any[],equations?:any[],replacement?:{constraint:any,constants:{factor:string,offset:string}},value:any},label='Length relation'){
  evaluateCapturedSketch(before,external,freshEvidence,undefined,auxiliaryWitnessBatch);
  const workspace=new HeadlessSketchWorkspace(external);
  return workspace.io.evaluateCapturedSketch(structuredClone(before),()=>{
@@ -26,18 +26,28 @@ export function captureConnectedGeometryScope(before:any,external:any,freshEvide
    // No rank, epsilon, reduced row or solved-looking-coordinate inference.
    if(c.schema===ConstraintDefinitions.LockPoint&&c.objects.length===1)for(const key of['x','y']){const p=c.objects[0].params?.[key],value=c.resolvedConstants?.[key];if(p&&known.has(p)&&typeof value==='number'&&Number.isFinite(value)&&Object.is(p.get(),value))fixed.add(p);}
   }
+  // PRIVATE ratio-edit seam: never accept replacement polynomials or a public
+  // exclusion flag. Derive equations from the actual captured registered row
+  // with validated new constants and the exact same native objects/Params.
+  let replaced:any=null,replacementEquations:any[]|null=null,replacementSnapshot:any=null;
+  if(selection.replacement){const r=selection.replacement,c=r.constraint;
+   if(!all.includes(c)||c.internal||c.schema!==ConstraintDefinitions.LengthRelation||!pm.stages.includes(c.stage)||c.stage.algNumSystem.allConstraints.filter(row=>row===c).length!==1||c.objects.length!==2||c.params.length!==2||c.objects.some((o,i)=>o.TYPE!=='Segment'||o.params.t!==c.params[i])||!r.constants||Object.keys(r.constants).sort().join(',')!=='factor,offset')fail('INVALID_SCOPE','The edited original LengthRelation identity changed.');
+   replacementSnapshot={constraint:c,schema:c.schema,stage:c.stage,objects:[...c.objects],params:[...c.params],constants:{...c.constants}};
+   const proposed=new AlgNumConstraint(c.schema,[...c.objects],{...r.constants});proposed.validateCandidateConstants(proposed.constants,pm.constantResolver);proposed.resolveConstants(pm.constantResolver);if(proposed.params.some((p,i)=>p!==c.params[i]))fail('INVALID_SCOPE','Replacement row parameter ownership changed.');replacementEquations=[];proposed.collectPolynomials(replacementEquations);if(replacementEquations.length!==1)fail('INVALID_SCOPE','Replacement requires the actual scalar LengthRelation equation.');replaced=c;
+  }
   function parameters(poly:any){charge();if(!poly||!Number.isFinite(poly.constant)||!Array.isArray(poly.monomials))fail('INVALID_SCOPE','Expected original finite polynomial data.');const result=new Set<any>();for(const m of poly.monomials){charge();if(!m||!Number.isFinite(m.constant)||!Array.isArray(m.terms))fail('INVALID_SCOPE','Expected original finite monomial data.');if(m.constant===0)continue;for(const term of m.terms){charge();const p=term.param;if(!known.has(p)||!Number.isFinite(p.get()))fail('INVALID_SCOPE','An original equation has an unowned parameter.');if(!fixed.has(p))result.add(p);}}return[...result];}
   const link=(group:any[])=>{for(const p of group){charge();const rows=adjacency.get(p)||[];rows.push(group);adjacency.set(p,rows);}};
-  for(const c of all){const equations=[];c.collectPolynomials(equations);for(const equation of equations)link(parameters(equation));}
+  for(const c of all){const equations=[];if(c===replaced)equations.push(...replacementEquations);else c.collectPolynomials(equations);for(const equation of equations)link(parameters(equation));}
   // Real generator source/output identities are dependencies too.
   for(const stage of pm.stages)for(const generator of stage.generators){const group=new Set<any>(),add=(o:any)=>o.visitParams(p=>{charge();if(!known.has(p))fail('INVALID_SCOPE','Generator parameter ownership is unavailable.');if(!fixed.has(p))group.add(p);});generator.sourceObjects(add);for(const output of generator.generatedObjects||[])add(output);link([...group]);}
-  const reached=new Set<any>();for(const equation of selection.equations||[])for(const p of parameters(equation))reached.add(p);
+  const reached=new Set<any>();for(const equation of replacementEquations||(selection.equations||[]))for(const p of parameters(equation))reached.add(p);
   for(const p of selection.parameters||[]){charge();if(!known.has(p)||!Number.isFinite(p.get()))fail('INVALID_SCOPE','An operation seed has no actual captured ownership.');if(!fixed.has(p))reached.add(p);}
   const pending=[...reached];for(let at=0;at<pending.length;at++)for(const group of adjacency.get(pending[at])||[])for(const p of group){charge();if(!reached.has(p)){reached.add(p);pending.push(p);}}
   const fields=new Map<string,Set<string>>();
   for(const row of before.objects){charge();const o=index[row.id],allowed=new Set<string>(),point=(p:any,prefix:string)=>{for(const k of['x','y'])if(p?.params?.[k]&&reached.has(p.params[k]))allowed.add(prefix+k);},parameter=(p:any,name:string)=>{if(p&&reached.has(p))allowed.add(name);};if(!o||o.TYPE!==row.type||o.stage!==pm.stages[row.stage])fail('INVALID_SCOPE','Current source object ownership changed.');
    if(row.type==='Point')point(o,'');else if(row.type==='Segment'){point(o.a,'a.');point(o.b,'b.');}else if(row.type==='Circle'){point(o.c,'c.');parameter(o.r,'r');}else if(row.type==='Arc'){point(o.a,'a.');point(o.b,'b.');point(o.c,'c.');}else if(row.type==='Ellipse'||row.type==='EllipticalArc'){point(o.c,'c.');for(const k of['rx','ry','rot'])parameter(o[k],k);if(row.type==='EllipticalArc'){point(o.a,'a.');point(o.b,'b.');}}else if(row.type==='BezierCurve'){point(o.a,'cp1.');point(o.cp1,'cp2.');point(o.cp2,'cp3.');point(o.b,'cp4.');}else if(row.type==='BSpline')o.cPoints.forEach((p:any,i:number)=>point(p,'cPoints.'+i+'.'));else if(row.type==='RigidGroup'){parameter(o.tx,'transform.x');parameter(o.ty,'transform.y');parameter(o.angle,'transform.angle');}fields.set(row.id,allowed);
   }
+  if(replacementSnapshot){const r=replacementSnapshot,c=r.constraint;if(c.schema!==r.schema||c.stage!==r.stage||!c.stage.algNumSystem.allConstraints.includes(c)||c.objects.length!==r.objects.length||c.params.length!==r.params.length||c.objects.some((o,i)=>o!==r.objects[i])||c.params.some((p,i)=>p!==r.params[i])||Object.keys(c.constants).sort().join(',')!==Object.keys(r.constants).sort().join(',')||Object.keys(r.constants).some(k=>c.constants[k]!==r.constants[k]))fail('INVALID_SCOPE','Captured original replacement witness changed.');}
   ownership.unchanged();return{fields,selection:selection.value};
  });
 }

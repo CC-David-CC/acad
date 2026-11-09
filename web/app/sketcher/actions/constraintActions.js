@@ -1,3 +1,4 @@
+import {addEqualLengthGroup} from './lengthFamilyOperation';
 import {addMechanicalTangency} from './tangencyOperation';
 import {addEqualRadiusGroup} from './equalRadiusOperation';
 import {capturePointLineDistanceAction} from './pointLineDistanceOperation';
@@ -226,11 +227,7 @@ export default [
       minQuantity: 2
     },
     invoke: (ctx, matchedObjects) => {
-      const {viewer} = ctx;
-      const pm = viewer.parametricManager;
-      addConstraintGroup(pm, matchedObjects.slice(1).map((object, i) =>
-        new AlgNumConstraint(ConstraintDefinitions.EqualLength, [matchedObjects[i], object])
-      ));
+      addEqualLengthGroup(ctx.viewer,matchedObjects);
     }
 
   },
