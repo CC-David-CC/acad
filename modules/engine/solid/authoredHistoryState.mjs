@@ -1,6 +1,7 @@
+import {PROFILE_EXTENT_TYPE} from './ownedProfileExtentFeature.mjs';
 // Authored state only. No kernel geometry, handles, registry or model cache.
 const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
-export const SUPPRESSIBLE_FEATURE_TYPES=Object.freeze(['WORKER_SELECTED_PROFILE_EXTRUDE_V2','WORKER_THROUGH_HOLES_V1','WORKER_SOLID_EDGE_TREATMENT_V1']);
+export const SUPPRESSIBLE_FEATURE_TYPES=Object.freeze(['WORKER_SELECTED_PROFILE_EXTRUDE_V2',PROFILE_EXTENT_TYPE,'WORKER_THROUGH_HOLES_V1','WORKER_SOLID_EDGE_TREATMENT_V1']);
 export const HISTORY_CONTROL_TYPES=Object.freeze(['PLANE','WORKER_SOLID_BOX_V1',...SUPPRESSIBLE_FEATURE_TYPES]);
 export function featureSuppressed(entry){
  if(!entry||typeof entry!=='object'||Array.isArray(entry))fail('INVALID_HISTORY_STATE','Expected an authored feature record.');

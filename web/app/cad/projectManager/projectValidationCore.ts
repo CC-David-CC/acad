@@ -1,3 +1,5 @@
+import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature,profileExtentFields,profileExtentDimensions,profileExtentInterval} from 'engine/solid/ownedProfileExtentFeature.mjs';
+import {requireProfileExtentBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {validateOffsetSources} from 'sketcher/headless/offsetSourceValidation';
 import {prepareTypedDependentSketch} from 'sketcher/headless/typedDependentSketch.mjs';
 import {captureAuthoredCounterboreIntent} from 'engine/solid/authoredCounterboreIntent.mjs';
@@ -29,6 +31,9 @@ export function preflight(value, parameterState?: {source?: string, result?: any
   // Schema + earlier-source relation only; actual entry/floor authority is the
   // owned Native candidate during ordinary restore. Named lengths resolve through
   // the existing physical evaluator below and actual feature materialization.
+  // Bounded raw intent admission only; no placed frame/mesh is read from file.
+  // Actual source/region/current Native construction remains candidate-owned.
+  for(const operation of project.model.history)if(operation.type===PROFILE_EXTENT_TYPE){const p=captureOwnedProfileExtentFeature(operation.params);requireProfileExtentBuild(p.engine,p.engineRevision);if(profileExtentFields(p).every(key=>typeof p[key]==='number'))profileExtentInterval(profileExtentDimensions(p));}
   const blindSources=new Map<number,any>();
   for(const operation of project.model.history){
     if(operation.type==='WORKER_CENTERED_COUNTERBORE_V1'){
@@ -38,7 +43,8 @@ export function preflight(value, parameterState?: {source?: string, result?: any
     }
     if(operation.type==='WORKER_CENTERED_BLIND_HOLE_V1'){
       const p=captureAuthoredBlindHoleIntent(operation.params),parent=blindSources.get(p.sourceFeatureId),q=parent?.params;
-      if(parent?.type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2'||q.engine!==p.engine||q.engineRevision!==p.engineRevision||q.faceId!==p.sourceFaceId||q.regionId!==p.sourceRegionId)throw Object.assign(Error('Blind native intent requires its genuine earlier selected constructor.'),{code:'BLIND_UNSUPPORTED_TARGET'});
+      if(!['WORKER_SELECTED_PROFILE_EXTRUDE_V2',PROFILE_EXTENT_TYPE].includes(parent?.type)||q.engine!==p.engine||q.engineRevision!==p.engineRevision||q.faceId!==p.sourceFaceId||q.regionId!==p.sourceRegionId)throw Object.assign(Error('Blind native intent requires its genuine earlier selected constructor.'),{code:'BLIND_UNSUPPORTED_TARGET'});
+      if(parent.type===PROFILE_EXTENT_TYPE&&typeof p.depth==='number'&&profileExtentFields(q).every(key=>typeof q[key]==='number')&&p.depth>=profileExtentInterval(profileExtentDimensions(q)).span)throw Object.assign(Error('Blind depth must remain strictly below the actual source-owned total span.'),{code:'BLIND_DEPTH_NOT_INTERIOR'});
       if(typeof p.depth==='number'&&typeof q.depth==='number'&&p.depth>=q.depth)throw Object.assign(Error('Blind depth must remain strictly less than current part thickness.'),{code:'BLIND_DEPTH_NOT_INTERIOR'});
     }
     blindSources.set(Number(operation.params.featureId),operation);

@@ -1,4 +1,5 @@
 import type {OwnedCounterboreIntent} from './ownedCounterboreIntent.mjs';
+import type {ProfileExtentIntent,ProfileExtentBinding} from '../mount/ownedProfileExtentPlan.mjs';
 import type {OwnedBlindHoleIntent} from './ownedBlindHoleIntent.mjs';
 // The bounded common solid API. The application owns authored graph/history;
 // a kernel owns transient shapes for one candidate evaluation. Additional
@@ -132,6 +133,7 @@ export type SelectionKind='vertex'|'edge'|'face';
 export interface SketchProfileSelectionContext {
  readonly kind:'sketch-profile';readonly featureId:number;readonly regionId:string;
 }
+export interface SketchProfileExtentSelectionContext {readonly kind:'sketch-profile-extent';readonly featureId:number;readonly regionId:string;}
 export interface BoxConstructionSelectionContext {
  readonly kind:'box';readonly featureId:number;readonly regionId:null;
 }
@@ -162,8 +164,8 @@ export interface AuthoredRemovalSelectionV2 {
 }
 export interface SelectionPlanV2 {
  readonly version:2;readonly featureId:number;readonly scope:'authored-source';
- readonly source:'prism-construction-history'|'box-construction-history'|'kernel-operation-history';
- readonly sourceContexts:ReadonlyArray<SketchProfileSelectionContext|BoxConstructionSelectionContext>;
+ readonly source:'prism-construction-history'|'profile-extent-construction-history'|'box-construction-history'|'kernel-operation-history';
+ readonly sourceContexts:ReadonlyArray<SketchProfileSelectionContext|SketchProfileExtentSelectionContext|BoxConstructionSelectionContext>;
  readonly vertices:ReadonlyArray<SelectionDescriptorV2>;readonly edges:ReadonlyArray<SelectionDescriptorV2>;readonly faces:ReadonlyArray<SelectionDescriptorV2>;
  readonly unresolved:ReadonlyArray<UnresolvedSelectionV2|AuthoredRemovalSelectionV2|UnclaimedSelectionV2>;
 }
@@ -194,7 +196,7 @@ export type ConstructionProvenance=
 export interface DisposeSolid {readonly op:'solid.dispose';readonly version:1;readonly handle:TransientShapeHandle;}
 export interface ExportOwnedSTEP {readonly op:'solid.step.export';readonly version:1;readonly unit:'millimeter';readonly handles:ReadonlyArray<TransientShapeHandle>;}
 export interface STEPBlobResult {readonly contractVersion:1;readonly op:'solid.step.export';readonly unit:'millimeter';readonly blob:Blob;readonly metadata:Readonly<{format:'step';schema:'AP214IS';structure:'geometric-solid-set';byteLength:number;inputShapeCount:number;inputSolidCounts:readonly number[];transferCount:number}>;}
-export interface ReadPlanarAttachment {readonly op:'solid.face.frame.read';readonly version:1;readonly unit:'millimeter';readonly handle:TransientShapeHandle;readonly sourceHandle:TransientShapeHandle;readonly producerFeatureId:number;readonly originFeatureId:number;readonly selectionId:string;readonly sourceFeatureId:number;readonly sourceRegionId:string;readonly framePolicy:'extrusion-cap-source-datum-v1';}
+export interface ReadPlanarAttachment {readonly op:'solid.face.frame.read';readonly version:1;readonly unit:'millimeter';readonly handle:TransientShapeHandle;readonly sourceHandle:TransientShapeHandle;readonly producerFeatureId:number;readonly originFeatureId:number;readonly selectionId:string;readonly sourceFeatureId:number;readonly sourceRegionId:string;readonly framePolicy:'extrusion-cap-source-datum-v1'|'profile-extent-cap-source-datum-v1';}
 export interface PlanarAttachmentResult {readonly contractVersion:1;readonly op:'solid.face.frame.read';readonly unit:'millimeter';readonly observation:import('../mount/ownedPlanarAttachmentProtocol.mjs').PlanarAttachmentObservation;}
 export interface ReadOwnedBores {readonly op:'solid.drawing.bores.read';readonly version:1;readonly unit:'millimeter';readonly handle:TransientShapeHandle;readonly sourceHandle:TransientShapeHandle;readonly producerFeatureId:number;readonly query:import('../../drawing/linkedPartDrawingDefinition.mjs').LinkedPartBoreQuery;}
 export interface BoreReferenceReadResult {readonly contractVersion:1;readonly op:'solid.drawing.bores.read';readonly unit:'millimeter';readonly observation:import('../mount/ownedBoreReadProtocol.mjs').BoreReferenceObservation;}
@@ -210,9 +212,10 @@ export interface OrthographicReadResult {readonly contractVersion:1;readonly op:
 export interface ReadOwnedManufacturingMesh {readonly op:'solid.manufacturing.mesh.read';readonly version:1;readonly unit:'millimeter';readonly handle:TransientShapeHandle;readonly linearDeflectionMm:0.01;readonly angularDeflectionRadians:0.1;readonly relative:false;readonly maxVertices:number;readonly maxTriangles:number;}
 export interface ManufacturingMeshResult {readonly contractVersion:1;readonly op:'solid.manufacturing.mesh.read';readonly unit:'millimeter';readonly buffer:ArrayBuffer;readonly metadata:Readonly<{version:1;quality:'native-controlled-tessellation';format:'owned-manufacturing-mesh-v1';byteLength:number;vertexCount:number;triangleCount:number;positionsOffset:32;indicesOffset:number;linearDeflectionMm:0.01;angularDeflectionRadians:0.1;relative:false;correspondence:'native-topology-parameters-v1';maxBoundaryDiscrepancyMm:number;sourcePreserved:true}>;}
 export type ExtrudeCircularCell=import('../mount/ownedCircularArrangementProtocol.mjs').CircularCellRequest;
-export type SolidRequest=ReadOwnedDrawingDerived|ReadOwnedBores|ExtrudeCircularCell|ReadPlanarAttachment|ReadOwnedDrawingReferences|ReadOwnedManufacturingMesh|ReadOwnedOrthographic|ExportOwnedSTEP|CreateBox|CreateAuthoredBox|BooleanSolid|BooleanHistorySolid|ExtrudeSelectedProfile|ExtrudePolygonProfile|RevolveSelectedProfile|SweepSelectedProfile|LoftSelectedProfiles|ReadSolidMesh|ReadSolidTopology|ClassifySolidPoint|ReadPrismSelections|ReadSolidSelections|TreatSolidEdges|ShellSolid|KernelCounterbore|KernelBlindHole|KernelThroughHole|KernelLinearHolePattern|DisposeSolid;
+export interface ExtrudeProfileExtents {readonly op:'solid.profile.extrude.extents';readonly version:1;readonly unit:'millimeter';readonly request:ProfileExtentIntent;readonly extentBinding:ProfileExtentBinding;}
+export type SolidRequest=ExtrudeProfileExtents|ReadOwnedDrawingDerived|ReadOwnedBores|ExtrudeCircularCell|ReadPlanarAttachment|ReadOwnedDrawingReferences|ReadOwnedManufacturingMesh|ReadOwnedOrthographic|ExportOwnedSTEP|CreateBox|CreateAuthoredBox|BooleanSolid|BooleanHistorySolid|ExtrudeSelectedProfile|ExtrudePolygonProfile|RevolveSelectedProfile|SweepSelectedProfile|LoftSelectedProfiles|ReadSolidMesh|ReadSolidTopology|ClassifySolidPoint|ReadPrismSelections|ReadSolidSelections|TreatSolidEdges|ShellSolid|KernelCounterbore|KernelBlindHole|KernelThroughHole|KernelLinearHolePattern|DisposeSolid;
 export interface ShapeResult {
- readonly contractVersion:1;readonly op:CreateBox['op']|BooleanSolid['op']|ExtrudeSelectedProfile['op']|RevolveSelectedProfile['op']|SweepSelectedProfile['op']|LoftSelectedProfiles['op']|TreatSolidEdges['op']|ShellSolid['op']|KernelCounterbore['op']|KernelBlindHole['op']|KernelThroughHole['op']|KernelLinearHolePattern['op'];
+ readonly contractVersion:1;readonly op:CreateBox['op']|BooleanSolid['op']|ExtrudeProfileExtents['op']|ExtrudeSelectedProfile['op']|RevolveSelectedProfile['op']|SweepSelectedProfile['op']|LoftSelectedProfiles['op']|TreatSolidEdges['op']|ShellSolid['op']|KernelCounterbore['op']|KernelBlindHole['op']|KernelThroughHole['op']|KernelLinearHolePattern['op'];
  readonly handle:TransientShapeHandle;readonly evidence:SolidEvidence;
  readonly constructionProvenance?:ConstructionProvenance;
 }

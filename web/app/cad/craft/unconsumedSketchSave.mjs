@@ -1,4 +1,5 @@
 import {captureAuthoredCounterboreIntent} from '../../../../modules/engine/solid/authoredCounterboreIntent.mjs';
+import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature} from '../../../../modules/engine/solid/ownedProfileExtentFeature.mjs';
 import {captureAuthoredBlindHoleIntent} from '../../../../modules/engine/solid/authoredBlindHoleIntent.mjs';
 import {canonicalAuthoredFeatureId} from './authoredFeatureIdentity.mjs';
 import {sourcePlaneFaceId} from './sourcePlaneIdentity.mjs';
@@ -40,11 +41,16 @@ export function hasOnlyUnconsumedSketchHistory(history,faceId){
     const parent=data.parent,producer=fid(parent.featureId),originId=fid(parent.originFeatureId),origin=features.get(originId),target=liveGeneric.get(parent.bodyId),owner=origin&&features.get(origin.sourceOwner);
     // Structural causal proof only. The current candidate ledger separately
     // resolves this exact opaque face against actual owned Native topology.
-    if(!producer||!originId||!features.has(producer)||!target||target.producer!==producer||target.build!==genericBuild||target.build.id!=='occ'||target.build.planarAttachmentVersion!==1||parent.engine!==target.build.id||parent.engineRevision!==target.build.revision||fid(parent.sourceFeatureId)!==originId||!target.origins?.has(originId)||!origin||origin.kind!=='selected-profile'||origin.build!==target.build||origin.sourceFace!==parent.sourceFaceId||origin.regionId!==parent.sourceRegionId||!owner||owner.kind!=='plane'||owner.sourceFace!==parent.sourceFaceId||!target.sources.has(parent.sourceFaceId))return false;
+    if(!producer||!originId||!features.has(producer)||!target||target.producer!==producer||target.build!==genericBuild||target.build.id!=='occ'||target.build.planarAttachmentVersion!==1||parent.engine!==target.build.id||parent.engineRevision!==target.build.revision||fid(parent.sourceFeatureId)!==originId||!target.origins?.has(originId)||!origin||!['selected-profile','selected-profile-extent'].includes(origin.kind)||(origin.kind==='selected-profile-extent'?parent.framePolicy!=='profile-extent-cap-source-datum-v1'||target.build.profileExtentsVersion!==1:parent.framePolicy!=='extrusion-cap-source-datum-v1')||origin.build!==target.build||origin.sourceFace!==parent.sourceFaceId||origin.regionId!==parent.sourceRegionId||!owner||owner.kind!=='plane'||owner.sourceFace!==parent.sourceFaceId||!target.sources.has(parent.sourceFaceId))return false;
    }else if(data.parent&&features.get(String(data.parent.featureId))?.kind!=='plane')return false;
    const sourceFace=sourcePlaneFaceId(data.featureId);features.set(id,{kind:'plane',sourceFace});sourceOwners.set(sourceFace,id);continue;
   }
   if(item.type==='WORKER_ENCLOSURE_V1'||item.type==='WORKER_ENCLOSURE_V2'){const fields=physicalBindingFields[item.type];if(!plain(p,['featureId',...fields])||fields.some(k=>!numberField(p[k])))return false;features.set(id,{kind:'enclosure'});continue;}
+  if(item.type===PROFILE_EXTENT_TYPE){
+   let data;try{data=captureOwnedProfileExtentFeature(p);}catch{return false;}const spec=build(data),sourceOwner=sourceOwners.get(data.faceId);
+   if(!spec||spec.profileExtentsVersion!==1||fid(data.featureId)!==id||!sourceOwner||data.faceId===faceId)return false;
+   features.set(id,{kind:'selected-profile-extent',build:spec,sourceFace:data.faceId,regionId:data.regionId,sourceOwner});liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set([data.faceId]),origins:new Set([id]),holeSource:data.featureId,seeds:new Set()});genericBuild=spec;continue;
+  }
   if(item.type==='WORKER_SELECTED_PROFILE_EXTRUDE_V2'){
    const data=exactData(p,['version','unit','engine','engineRevision','featureId','faceId','regionId','depth','bodyPolicy']),spec=build(data);
    if(!spec||selectedProfileVersion(spec)===null||fid(data.featureId)!==id||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>256||typeof data.regionId!=='string'||!data.regionId.startsWith('sketch-region:')||data.regionId.length>8192||!isAuthoredLength(data.depth)||data.bodyPolicy!=='separate'||data.faceId===faceId)return false;
@@ -87,12 +93,12 @@ export function hasOnlyUnconsumedSketchHistory(history,faceId){
   }
   if(item.type==='WORKER_CENTERED_BLIND_HOLE_V1'){
    let data;try{data=captureAuthoredBlindHoleIntent(p);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target),source=features.get(fid(data.sourceFeatureId));
-   if(!spec||spec.blindHoleVersion!==1||fid(data.featureId)!==id||!parent||parent.build!==spec||parent.producer!==fid(data.producerFeatureId)||!source||source.kind!=='selected-profile'||parent.producer!==fid(data.sourceFeatureId)||source.sourceFace!==data.sourceFaceId||source.regionId!==data.sourceRegionId||!parent.sources.has(data.sourceFaceId)||parent.sources.has(faceId))return false;
+   if(!spec||spec.blindHoleVersion!==1||fid(data.featureId)!==id||!parent||parent.build!==spec||parent.producer!==fid(data.producerFeatureId)||!source||!['selected-profile','selected-profile-extent'].includes(source.kind)||parent.producer!==fid(data.sourceFeatureId)||source.sourceFace!==data.sourceFaceId||source.regionId!==data.sourceRegionId||!parent.sources.has(data.sourceFaceId)||parent.sources.has(faceId))return false;
    liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set(parent.sources),origins:new Set(parent.origins)});features.set(id,{kind:'generic-blind-hole'});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_THROUGH_HOLES_V1'){
    let data;try{data=captureAuthoredHoleIntent(p);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target),source=features.get(fid(data.sourceFeatureId));
-   if(!spec||spec.throughHoleVersion!==1||fid(data.featureId)!==id||!parent||parent.build!==spec||!source||source.kind!=='selected-profile'||source.sourceFace!==data.sourceFaceId||source.regionId!==data.sourceRegionId||!parent.sources.has(data.sourceFaceId)||parent.sources.has(faceId))return false;
+   if(!spec||spec.throughHoleVersion!==1||fid(data.featureId)!==id||!parent||parent.build!==spec||!source||!['selected-profile','selected-profile-extent'].includes(source.kind)||source.sourceFace!==data.sourceFaceId||source.regionId!==data.sourceRegionId||!parent.sources.has(data.sourceFaceId)||parent.sources.has(faceId))return false;
    liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set(parent.sources),origins:new Set(parent.origins),holeSource:parent.holeSource===data.sourceFeatureId?parent.holeSource:null,seeds:parent.holeSource===data.sourceFeatureId?new Set([...parent.seeds,...(data.kind==='centered-through'?[data.featureId]:[])]):new Set()});features.set(id,{kind:'generic-through-hole'});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_SOLID_EDGE_TREATMENT_V1'){

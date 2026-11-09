@@ -74,3 +74,9 @@ export function listManufacturingMeshBuilds(){return Object.freeze([OCC_MANUFACT
 
 export function requireShellBuild(engine,revision){const build=requireCadEngineBuild(engine,revision);if(build.shellVersion!==1||build.boxConstructionVersion!==1)fail('UNSUPPORTED_SHELL_BUILD','Select the explicit owned-shell build.');return build;}
 export function listShellBuilds(){return Object.freeze([OCC_SHELL_BUILD,OCC_CIRCULAR_BUILD]);}
+
+
+export function requireProfileExtentBuild(engine,revision){
+ const build=requireCadEngineBuild(engine,revision);if(build!==OCC_MANUFACTURING_MESH_BUILD||build.profileExtentsVersion!==1||build.selectedProfileVersion!==3||build.selectionPlanVersion!==2)fail('UNSUPPORTED_PROFILE_EXTENT_BUILD','Select the explicit source-owned profile-extent cohort.');return build;
+}
+export function listProfileExtentBuilds(){return Object.freeze(OCC_MANUFACTURING_MESH_BUILD.profileExtentsVersion===1?[OCC_MANUFACTURING_MESH_BUILD]:[]);}

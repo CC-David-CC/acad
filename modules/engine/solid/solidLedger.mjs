@@ -1,4 +1,7 @@
 import {captureOwnedCounterboreIntent} from './ownedCounterboreIntent.mjs';
+import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature} from './ownedProfileExtentFeature.mjs';
+import {captureProfileMechanicalSource} from '../mount/profileMechanicalSource.mjs';
+import {captureProfileExtentEvaluation} from '../mount/ownedProfileExtentPlan.mjs';
 import {captureOwnedBlindHoleIntent} from './ownedBlindHoleIntent.mjs';
 import {captureBoreReadResult,unresolvedBoreRead} from '../mount/ownedBoreReadProtocol.mjs';
 import {requireCadEngineBuild,validateEngineMount} from '../mount/engineCatalog.mjs';
@@ -24,6 +27,7 @@ import {captureSolidMetrics} from './solidMetrics.mjs';
 import {captureSolidBox,captureSolidBoolean,captureSolidProfile,captureSolidEdgeTreatment,solidBodyId} from './solidIntent.mjs';
 const ledgers=new WeakMap();
 const selectionSnapshots=new WeakMap();
+const mechanicalSourceSnapshots=new WeakMap();
 const holeSeedSnapshots=new WeakMap();
 const STEP_BLOB_SIZE=typeof Blob==='function'?Object.getOwnPropertyDescriptor(Blob.prototype,'size').get:null;
 const STEP_BLOB_TYPE=typeof Blob==='function'?Object.getOwnPropertyDescriptor(Blob.prototype,'type').get:null;
@@ -32,6 +36,33 @@ const STEP_BLOB_TYPE=typeof Blob==='function'?Object.getOwnPropertyDescriptor(Bl
 const freezeSelection=value=>{if(value&&typeof value==='object'){for(const child of Object.values(value))freezeSelection(child);Object.freeze(value);}return value;};
 export function inspectWorkerSolidSelections(model){return selectionSnapshots.get(model)||Object.freeze({status:'unavailable',reason:'NO_AUTHORED_PRISM_SELECTIONS'});}
 export function inspectWorkerSolidPatternSeeds(model){return holeSeedSnapshots.get(model)||Object.freeze({status:'unavailable',reason:'NO_QUALIFIED_HOLE_PATH'});}
+// Read-only observational eligibility, never a public write flag or a bore
+// success certificate. The caller supplies actual internal source accessors.
+function sameMechanicalFrame(actual,expected){
+ if(!actual||typeof actual!=='object'||Array.isArray(actual)||Reflect.ownKeys(actual).length!==4)return false;
+ for(const key of ['origin','x','y','z']){const d=Object.getOwnPropertyDescriptor(actual,key),v=d?.value;if(!d?.enumerable||!Object.hasOwn(d,'value')||!Array.isArray(v)||v.length!==3||Reflect.ownKeys(v).length!==4)return false;for(let i=0;i<3;i++){const n=Object.getOwnPropertyDescriptor(v,String(i));if(!n?.enumerable||!Object.hasOwn(n,'value')||!Object.is(n.value,expected[key][i]))return false;}}return true;
+}
+export function inspectWorkerMechanicalSource(model,sourceFeatureId,{registry,history,readSketch,readFrame,readParameterSource,valid}){
+ const unavailable=reason=>Object.freeze({status:'unavailable',reason}),snapshot=mechanicalSourceSnapshots.get(model);
+ if(!snapshot)return unavailable('NO_SOURCE_DESCRIPTOR');
+ if(typeof valid!=='function'||!registry||typeof registry.find!=='function'||typeof registry.findFace!=='function'||registry.isEvaluating===true||!Array.isArray(history)||history.length>256||Reflect.ownKeys(history).length!==history.length+1||typeof readSketch!=='function'||typeof readFrame!=='function'||typeof readParameterSource!=='function')return unavailable('STALE_SOURCE');
+ const current=()=>{try{return valid()===true;}catch{return false;}};if(!current())return unavailable('STALE_SOURCE');
+ const registered=()=>registry.find(snapshot.bodyId)===model&&model.id===snapshot.bodyId&&model.featureId===snapshot.featureId&&model.ext===snapshot.ext&&model.ext.workerGeometry===snapshot.tag&&model.inspectKernelMetrics===snapshot.method&&snapshot.method.call(model)===snapshot.metrics;
+ if(!registered())return unavailable('STALE_NATIVE_MODEL');
+ const rows=snapshot.observations.filter(row=>row.feature.featureId===sourceFeatureId);if(rows.length!==1)return unavailable('NO_SOURCE_DESCRIPTOR');const observation=rows[0],expected=observation.feature;
+ let feature=null;
+ for(let i=0;i<history.length;i++){
+  const d=Object.getOwnPropertyDescriptor(history,String(i)),entry=d?.value,t=entry&&Object.getOwnPropertyDescriptor(entry,'type'),p=entry&&Object.getOwnPropertyDescriptor(entry,'params');
+  if(!d?.enumerable||!Object.hasOwn(d,'value')||!t?.enumerable||!Object.hasOwn(t,'value')||!p?.enumerable||!Object.hasOwn(p,'value'))return unavailable('STALE_SOURCE');
+  if(t.value!==PROFILE_EXTENT_TYPE)continue;
+  let captured;try{captured=captureOwnedProfileExtentFeature(p.value);}catch(error){if(Object.getOwnPropertyDescriptor(error||{},'code')?.value!=='INVALID_REQUEST')throw error;return unavailable('STALE_SOURCE');}
+  if(captured.featureId===sourceFeatureId){if(feature||Object.hasOwn(entry,'suppressed'))return unavailable('STALE_SOURCE');feature=captured;}
+ }
+ if(!feature||Object.keys(feature).length!==Object.keys(expected).length||Object.keys(expected).some(key=>!Object.is(feature[key],expected[key]))||registry.findFace(expected.faceId)!==observation.face||readSketch(expected.faceId)!==observation.sourceSnapshot||readParameterSource()!==observation.parameterSource||!sameMechanicalFrame(readFrame(observation.face),observation.frame))return unavailable('STALE_SOURCE');
+ if(!current()||!registered()||registry.findFace(expected.faceId)!==observation.face)return unavailable('STALE_NATIVE_MODEL');
+ return Object.freeze({status:'available',engine:snapshot.engine,engineRevision:snapshot.engineRevision,bodyId:snapshot.bodyId,featureId:snapshot.featureId,sourceFeatureId,sourceFaceId:expected.faceId,sourceRegionId:expected.regionId,sourceSha256:observation.sourceSha256,requestSha256:observation.requestSha256,source:observation.descriptor});
+}
+
 const fail=(message,code='INVALID_REQUEST')=>{throw Object.assign(new Error(message),{code});};
 const cancelled=()=>new DOMException('Solid evaluation was cancelled or superseded.','AbortError');
 function state(owner){let s=ledgers.get(owner);if(!s){s={engine:null,engineRevision:null,mount:null,outputs:new Map(),sources:new Map()};ledgers.set(owner,s);}return s;}
@@ -40,8 +71,9 @@ function state(owner){let s=ledgers.get(owner);if(!s){s={engine:null,engineRevis
 export async function evaluateWorkerSolid({owner,kind,request,registry,createMount,validateMount,createModel,createEmptyModel,valid,sourceBinding}) {
  if(!owner||typeof owner.requireCurrent!=='function'||typeof owner.getOrCreateMount!=='function'||typeof createMount!=='function'||typeof validateMount!=='function'||typeof createModel!=='function'||typeof valid!=='function'||!registry||typeof registry.find!=='function')fail('Invalid solid evaluation.');
  const profileData=kind==='profile'?Object.getOwnPropertyDescriptor(request||{},'profile'):null,profileVersion=profileData?.enumerable&&Object.hasOwn(profileData,'value')?Object.getOwnPropertyDescriptor(profileData.value||{},'version'):null,circularProfile=kind==='profile'&&profileVersion?.enumerable&&Object.hasOwn(profileVersion,'value')&&profileVersion.value===4;
- const intent=kind==='box'?captureSolidBox(request):kind==='boolean'?captureSolidBoolean(request):kind==='profile'?(circularProfile?captureCircularProfileEvaluation(request):captureSolidProfile(request)):kind==='revolve'?captureOwnedRevolveEvaluation(request):kind==='sweep'?captureOwnedSweepEvaluation(request):kind==='loft'?captureOwnedLoftEvaluation(request):kind==='edge-treatment'?captureSolidEdgeTreatment(request):kind==='shell'?captureOwnedShellFeature(request):kind==='counterbore'?captureOwnedCounterboreIntent(request):kind==='blind-hole'?captureOwnedBlindHoleIntent(request):kind==='through-hole'?captureOwnedHoleIntent(request):kind==='linear-hole-pattern'?captureOwnedLinearHolePatternIntent(request):fail('Unsupported solid operation.');
+ const intent=kind==='box'?captureSolidBox(request):kind==='boolean'?captureSolidBoolean(request):kind==='profile'?(circularProfile?captureCircularProfileEvaluation(request):captureSolidProfile(request)):kind==='profile-extents'?captureProfileExtentEvaluation(request):kind==='revolve'?captureOwnedRevolveEvaluation(request):kind==='sweep'?captureOwnedSweepEvaluation(request):kind==='loft'?captureOwnedLoftEvaluation(request):kind==='edge-treatment'?captureSolidEdgeTreatment(request):kind==='shell'?captureOwnedShellFeature(request):kind==='counterbore'?captureOwnedCounterboreIntent(request):kind==='blind-hole'?captureOwnedBlindHoleIntent(request):kind==='through-hole'?captureOwnedHoleIntent(request):kind==='linear-hole-pattern'?captureOwnedLinearHolePatternIntent(request):fail('Unsupported solid operation.');
  if(circularProfile){const build=requireCadEngineBuild(intent.engine,intent.engineRevision);if(sourceBinding===undefined||build.circularArrangementVersion!==1||build.selectionPlanVersion!==2)fail('The exact authored circular source/build binding is required.','UNSUPPORTED_PROFILE_BUILD');}
+ if(kind==='profile-extents'){const build=requireCadEngineBuild(intent.engine,intent.engineRevision);if(sourceBinding===undefined||build.profileExtentsVersion!==1||build.selectedProfileVersion!==3||build.selectionPlanVersion!==2)fail('The exact original-source extent build and binding are required.','UNSUPPORTED_PROFILE_EXTENT_BUILD');}
  if(kind==='linear-hole-pattern')linearHolePatternNativeCost(intent.count);
  const alive=()=>{try{return owner.state==='candidate'&&!owner.signal.aborted&&valid()===true}catch{return false}};
  const current=()=>{owner.requireCurrent();if(!alive())throw cancelled();owner.requireCurrent();};current();
@@ -68,11 +100,12 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
   }));
  }
  if(sourceBinding!==undefined&&kind!=='loft'){
-  const bindingKeys=kind==='sweep'?['featureId','faceId','regionId','pathFaceId','pathCurves']:kind==='revolve'?['featureId','faceId','regionId','axisSegmentId']:['featureId','faceId','regionId'];
-  if(!['profile','revolve','sweep'].includes(kind)||!sourceBinding||typeof sourceBinding!=='object'||Array.isArray(sourceBinding)||Reflect.ownKeys(sourceBinding).length!==bindingKeys.length)fail('Invalid profile source binding.');
+  const bindingKeys=kind==='sweep'?['featureId','faceId','regionId','pathFaceId','pathCurves']:kind==='revolve'?['featureId','faceId','regionId','axisSegmentId']:kind==='profile-extents'?['featureId','faceId','regionId','sourceSnapshot','parameterSource']:['featureId','faceId','regionId'];
+  if(!['profile','profile-extents','revolve','sweep'].includes(kind)||!sourceBinding||typeof sourceBinding!=='object'||Array.isArray(sourceBinding)||Reflect.ownKeys(sourceBinding).length!==bindingKeys.length)fail('Invalid profile source binding.');
   binding={};for(const key of bindingKeys){const d=Object.getOwnPropertyDescriptor(sourceBinding,key);if(!d?.enumerable||!Object.hasOwn(d,'value'))fail('Profile source binding must be own data.');binding[key]=d.value;}
-  const region=kind==='sweep'?intent.sweep.region.id:kind==='revolve'?intent.revolve.region.id:intent.profile.region.id;
-  if(binding.featureId!==intent.featureId||binding.regionId!==region||typeof binding.faceId!=='string'||!binding.faceId||binding.faceId.length>256||typeof registry.findFace!=='function'||!registry.findFace(binding.faceId)||circularProfile&&binding.faceId!==intent.profile.region.faceId||kind==='revolve'&&(binding.faceId!==intent.revolve.source.faceId||binding.axisSegmentId!==intent.revolve.axis.id))fail('The selected profile source is unavailable.','STALE_SOURCE');
+  if(kind==='profile-extents'&&(typeof binding.sourceSnapshot!=='string'||binding.sourceSnapshot.length>65536||typeof binding.parameterSource!=='string'||binding.parameterSource.length>65536))fail('The captured original extent source bytes are required.','STALE_SOURCE');
+  const region=kind==='sweep'?intent.sweep.region.id:kind==='revolve'?intent.revolve.region.id:kind==='profile-extents'?intent.profileExtent.region.id:intent.profile.region.id;
+  if(binding.featureId!==intent.featureId||binding.regionId!==region||typeof binding.faceId!=='string'||!binding.faceId||binding.faceId.length>256||typeof registry.findFace!=='function'||!registry.findFace(binding.faceId)||kind==='profile-extents'&&binding.faceId!==intent.profileExtent.source.faceId||circularProfile&&binding.faceId!==intent.profile.region.faceId||kind==='revolve'&&(binding.faceId!==intent.revolve.source.faceId||binding.axisSegmentId!==intent.revolve.axis.id))fail('The selected profile source is unavailable.','STALE_SOURCE');
   if(kind==='sweep'){
    binding.pathCurves=captureSweepPathReferences(binding.pathCurves);
    if(binding.faceId!==intent.sweep.source.faceId||binding.pathFaceId!==intent.sweep.path.source.faceId||!registry.findFace(binding.pathFaceId)||JSON.stringify(binding.pathCurves)!==JSON.stringify(intent.sweep.path.curves.map(curve=>({curveId:curve.id,reversed:curve.reversed}))))fail('The selected sweep source path changed.','STALE_SOURCE');
@@ -84,9 +117,9 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
   const item=s.outputs.get(intent.target);source=s.sources.get(intent.sourceFeatureId);
   const build=requireCadEngineBuild(intent.engine,intent.engineRevision),model=item?.model,metrics=model?.inspectKernelMetrics?.(),location=model?.location$,matrix=location?.value,csys=model?.csys,keys=['mxx','mxy','mxz','tx','myx','myy','myz','ty','mzx','mzy','mzz','tz'],identity=[1,0,0,0,0,1,0,0,0,0,1,0];
   if(build.blindHoleVersion!==1||build.planarAttachmentVersion!==1)fail('The recorded build does not support blind holes.','UNSUPPORTED_BLIND_HOLE_BUILD');
-  if(!item||item.kind!=='profile'||item.featureId!==intent.producerFeatureId||!source||item.handle!==source.handle||registry.find(intent.target)!==model||source.engineRevision!==intent.engineRevision||source.faceId!==intent.sourceFaceId||source.regionId!==intent.sourceRegionId||registry.findFace(source.faceId)!==source.face)fail('The current selected constructor/source is unavailable.','BLIND_UNSUPPORTED_TARGET');
+  if(!item||item.kind!==(source?.kind==='profile-extents'?'profile-extents':'profile')||item.featureId!==intent.producerFeatureId||!source||item.handle!==source.handle||registry.find(intent.target)!==model||source.engineRevision!==intent.engineRevision||source.faceId!==intent.sourceFaceId||source.regionId!==intent.sourceRegionId||registry.findFace(source.faceId)!==source.face)fail('The current selected constructor/source is unavailable.','BLIND_UNSUPPORTED_TARGET');
   const selections=selectionSnapshots.get(model),plan=selections?.plan;
-  if(selections?.status!=='available'||plan.version!==2||plan.featureId!==intent.producerFeatureId||plan.source!=='prism-construction-history'||!plan.faces.some(f=>f.id===intent.entryFaceId&&f.role==='last-cap'&&f.originFeatureId===intent.sourceFeatureId)||plan.sourceContexts.length!==1||plan.sourceContexts[0].featureId!==intent.sourceFeatureId||plan.sourceContexts[0].regionId!==intent.sourceRegionId)fail('The actual last-cap entry is unavailable.','BLIND_ENTRY_UNRESOLVED');
+  if(selections?.status!=='available'||plan.version!==2||plan.featureId!==intent.producerFeatureId||plan.source!==(source.kind==='profile-extents'?'profile-extent-construction-history':'prism-construction-history')||!plan.faces.some(f=>f.id===intent.entryFaceId&&f.role===(source.kind==='profile-extents'?'upper-cap':'last-cap')&&f.originFeatureId===intent.sourceFeatureId)||plan.sourceContexts.length!==1||plan.sourceContexts[0].kind!==(source.kind==='profile-extents'?'sketch-profile-extent':'sketch-profile')||plan.sourceContexts[0].featureId!==intent.sourceFeatureId||plan.sourceContexts[0].regionId!==intent.sourceRegionId)fail('The actual bound constructor entry cap is unavailable.','BLIND_ENTRY_UNRESOLVED');
   const unplaced=()=>!!matrix&&keys.every((k,i)=>Object.is(matrix[k],identity[i]))&&!!csys&&['origin','x','y','z'].every((key,i)=>[csys[key]?.x,csys[key]?.y,csys[key]?.z].every((n,j)=>Object.is(n,i===0?0:i-1===j?1:0)));
   if(!unplaced()||metrics?.resultKind!=='single-solid'||metrics.solidCount!==1||metrics.nativeValidity?.valid!==true||!(metrics.nativeVolume>0))fail('Blind holes require the actual unplaced measured constructor.','BLIND_UNSUPPORTED_TARGET');
   shellParentCheck=(membership=false)=>{if(model.inspectKernelMetrics()!==metrics||model.location$!==location||location.value!==matrix||model.csys!==csys||!unplaced()||selectionSnapshots.get(model)!==selections||s.sources.get(intent.sourceFeatureId)!==source||registry.findFace(source.faceId)!==source.face||membership&&(s.outputs.get(intent.target)!==item||registry.find(intent.target)!==model))fail('The captured blind constructor changed.','INVALID_OPERAND');};shellParentCheck(true);parents=[item];
@@ -107,7 +140,7 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
   if(!item||item.engine!==intent.engine||registry.find(intent.target)!==item.model||item.featureId!==intent.producerFeatureId||item.model.featureId!==intent.producerFeatureId)fail('Through-hole target is missing, stale or belongs to another producer.','INVALID_OPERAND');
   if(!source||source.engine!==intent.engine||source.engineRevision!==intent.engineRevision||source.faceId!==intent.sourceFaceId||source.regionId!==intent.sourceRegionId||typeof registry.findFace!=='function'||registry.findFace(source.faceId)!==source.face)fail('The owned selected-profile source is unavailable.','STALE_SOURCE');
   const selections=selectionSnapshots.get(item.model);
-  if(selections?.status!=='available'||selections.plan.version!==2||selections.plan.featureId!==intent.producerFeatureId||!selections.plan.sourceContexts.some(c=>c.kind==='sketch-profile'&&c.featureId===intent.sourceFeatureId&&c.regionId===intent.sourceRegionId))fail('The target no longer carries its selected-profile origin.','UNRESOLVED_SELECTION');
+  if(selections?.status!=='available'||selections.plan.version!==2||selections.plan.featureId!==intent.producerFeatureId||!selections.plan.sourceContexts.some(c=>c.kind===(source.kind==='profile-extents'?'sketch-profile-extent':'sketch-profile')&&c.featureId===intent.sourceFeatureId&&c.regionId===intent.sourceRegionId))fail('The target no longer carries its selected-profile origin.','UNRESOLVED_SELECTION');
   parents=[item];
  }
  if(kind==='linear-hole-pattern'){
@@ -152,6 +185,7 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
  try {
   if(!mount){mount=owner.getOrCreateMount('worker-solid:'+intent.engine,()=>createMount(intent.engine,intent.engineRevision));s.engine=intent.engine;s.engineRevision=intent.engineRevision;s.mount=mount;}
   validateMount(intent.engine,mount,intent.engineRevision);
+  if(kind==='profile-extents'&&(!mount?.descriptor?.operations?.some(op=>op.id==='solid.profile.extrude.extents'&&op.version===1&&op.nativeProfileVersion===3)||!mount?.descriptor?.operations?.some(op=>op.id==='solid.selections.read'&&op.version===1&&op.selectionPlanVersion===2)))fail('The installed runtime does not bind source-owned extents and v2 selections.','ENGINE_CAPABILITY_UNAVAILABLE');
   if(kind==='loft'&&!mount?.descriptor?.operations?.some(op=>op.id==='solid.profile.loft'&&op.version===1))fail('The selected part runtime does not support loft.','ENGINE_CAPABILITY_UNAVAILABLE');
   if(kind==='sweep'&&!mount?.descriptor?.operations?.some(op=>op.id==='solid.profile.sweep'&&op.version===1))fail('The selected part runtime does not support sweep.','ENGINE_CAPABILITY_UNAVAILABLE');
   if(kind==='revolve'&&!mount?.descriptor?.operations?.some(op=>op.id==='solid.profile.revolve'&&op.version===1))fail('The selected part runtime does not support revolve.','ENGINE_CAPABILITY_UNAVAILABLE');
@@ -167,7 +201,7 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
   const d=mount.descriptor,assets=d?.runtimeAssets;if(typeof d?.engine!=='string'||typeof d?.representation!=='string'||!['jsSha256','wasmSha256'].every(k=>typeof assets?.[k]==='string'&&/^[a-f0-9]{64}$/.test(assets[k]))||(assets?.workerSha256!==undefined&&(typeof assets.workerSha256!=='string'||!/^[a-f0-9]{64}$/.test(assets.workerSha256))))fail('Runtime provenance is unavailable.','ENGINE_BINDING_MISMATCH');if(intent.engineRevision!==`sha256:${assets.jsSha256}:${assets.wasmSha256}`)fail('The saved solid requires a different engine build.','ENGINE_REVISION_MISMATCH');const provenance=Object.freeze({mountEngine:d.engine,representation:d.representation,jsSha256:assets.jsSha256,wasmSha256:assets.wasmSha256,...(assets.workerSha256?{workerSha256:assets.workerSha256}:{})});
   await mount.ready;current();shellParentCheck?.(true);
   const modernSelections=mount.descriptor.operations?.some(op=>op.id==='solid.selections.read'&&op.version===1&&op.selectionPlanVersion===2);
-  const message=kind==='counterbore'?{...intent,op:'solid.holes.counterbore',handle:parents[0].handle,sourceHandle:source.handle}:kind==='blind-hole'?{...intent,op:'solid.holes.blind',handle:parents[0].handle,sourceHandle:source.handle}:kind==='linear-hole-pattern'?{...intent,op:'solid.holes.pattern.linear',handle:parents[0].handle,sourceHandle:source.handle}:kind==='through-hole'?{...intent,op:'solid.holes.through',handle:parents[0].handle,sourceHandle:source.handle}:kind==='profile'?intent.profile:kind==='revolve'?intent.revolve:kind==='sweep'?intent.sweep:kind==='loft'?intent.loft:kind==='box'?{op:'solid.box.create',version:1,unit:'millimeter',origin:intent.origin.slice(),dimensions:intent.dimensions.slice(),...(constructionBuild.boxConstructionVersion===1?{featureId:intent.featureId}:{})}:kind==='shell'?{op:'solid.shell',version:1,unit:'millimeter',handle:parents[0].handle,featureId:intent.featureId,producerFeatureId:intent.producerFeatureId,removedFaceIds:intent.removedFaceIds.slice(),thickness:intent.thickness,direction:intent.direction}:kind==='edge-treatment'?{op:'solid.edge.treat',version:1,unit:'millimeter',handle:parents[0].handle,producerFeatureId:intent.producerFeatureId,featureId:intent.featureId,kind:intent.kind,edgeIds:intent.edgeIds.slice(),size:intent.size}:{op:'solid.boolean.'+(intent.kind==='join'?'union':intent.kind),version:1,unit:'millimeter',a:parents[0].handle,b:parents[1].handle,...(modernSelections?{featureId:intent.featureId,producerAFeatureId:parents[0].featureId,producerBFeatureId:parents[1].featureId}:{})};
+  const message=kind==='counterbore'?{...intent,op:'solid.holes.counterbore',handle:parents[0].handle,sourceHandle:source.handle}:kind==='blind-hole'?{...intent,op:'solid.holes.blind',handle:parents[0].handle,sourceHandle:source.handle}:kind==='linear-hole-pattern'?{...intent,op:'solid.holes.pattern.linear',handle:parents[0].handle,sourceHandle:source.handle}:kind==='through-hole'?{...intent,op:'solid.holes.through',handle:parents[0].handle,sourceHandle:source.handle}:kind==='profile'?intent.profile:kind==='profile-extents'?{op:'solid.profile.extrude.extents',version:1,unit:'millimeter',request:intent.profileExtent,extentBinding:intent.extentBinding}:kind==='revolve'?intent.revolve:kind==='sweep'?intent.sweep:kind==='loft'?intent.loft:kind==='box'?{op:'solid.box.create',version:1,unit:'millimeter',origin:intent.origin.slice(),dimensions:intent.dimensions.slice(),...(constructionBuild.boxConstructionVersion===1?{featureId:intent.featureId}:{})}:kind==='shell'?{op:'solid.shell',version:1,unit:'millimeter',handle:parents[0].handle,featureId:intent.featureId,producerFeatureId:intent.producerFeatureId,removedFaceIds:intent.removedFaceIds.slice(),thickness:intent.thickness,direction:intent.direction}:kind==='edge-treatment'?{op:'solid.edge.treat',version:1,unit:'millimeter',handle:parents[0].handle,producerFeatureId:intent.producerFeatureId,featureId:intent.featureId,kind:intent.kind,edgeIds:intent.edgeIds.slice(),size:intent.size}:{op:'solid.boolean.'+(intent.kind==='join'?'union':intent.kind),version:1,unit:'millimeter',a:parents[0].handle,b:parents[1].handle,...(modernSelections?{featureId:intent.featureId,producerAFeatureId:parents[0].featureId,producerBFeatureId:parents[1].featureId}:{})};
   const result=await mount.execute(message,{signal:owner.signal});current();
   shellParentCheck?.(true);
   if(!result?.handle||result.op!==message.op||result.contractVersion!==1)fail('Invalid engine result.','ENGINE_FAILURE');
@@ -182,6 +216,7 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
     if(modernSelections){
      let expected=null;
      if(kind==='profile')expected=[{kind:'sketch-profile',featureId:intent.featureId,regionId:intent.profile.region.id}];
+     else if(kind==='profile-extents')expected=[{kind:'sketch-profile-extent',featureId:intent.featureId,regionId:intent.profileExtent.region.id}];
      else if(kind==='box'&&constructionBuild.boxConstructionVersion===1)expected=[{kind:'box',featureId:intent.featureId,regionId:null}];
      else if(kind==='boolean'||kind==='edge-treatment'||kind==='shell'||kind==='counterbore'||kind==='blind-hole'||kind==='through-hole'||kind==='linear-hole-pattern'){
       const plans=parents.map(p=>selectionSnapshots.get(p.model));
@@ -209,11 +244,11 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
   if(modern&&(!(mesh.displayBuffer instanceof ArrayBuffer)||!['available','unavailable'].includes(mesh.displayStatus)||(mesh.displayStatus==='available'?(mesh.displayReason!==null||mesh.displayBuffer.byteLength/36!==mesh.triangleCount):(mesh.displayBuffer.byteLength!==0||!['float32-overflow','float32-collapsed-triangle','material-orientation-unqualified'].includes(mesh.displayReason)))))fail('Invalid verified Worker display projection.','ENGINE_FAILURE');
   const metrics=captureSolidMetrics(intent.engine,mesh.evidence,mesh.triangleCount,provenance),empty=metrics.resultKind==='empty';
   if(kind==='boolean'&&intent.kind==='join')requireSingleGeometricSolid({engine:intent.engine,engineRevision:intent.engineRevision,metrics});
-  if(['profile','revolve','sweep','loft','edge-treatment','shell','counterbore','blind-hole','through-hole','linear-hole-pattern'].includes(kind)&&(metrics.resultKind!=='single-solid'||metrics.solidCount!==1||metrics.nativeValidity?.valid!==true||metrics.nativeVolume===null||metrics.nativeBounds===null))fail('The authored feature requires one measured valid native solid.','ENGINE_FAILURE');
+  if(['profile','profile-extents','revolve','sweep','loft','edge-treatment','shell','counterbore','blind-hole','through-hole','linear-hole-pattern'].includes(kind)&&(metrics.resultKind!=='single-solid'||metrics.solidCount!==1||metrics.nativeValidity?.valid!==true||metrics.nativeVolume===null||metrics.nativeBounds===null))fail('The authored feature requires one measured valid native solid.','ENGINE_FAILURE');
   if(intent.engine==='smlib'&&metrics.materialRegions>1&&metrics.voidRegions>0&&(!modern||mesh.displayStatus!=='unavailable'||mesh.displayReason!=='material-orientation-unqualified'))fail('Material-side preview orientation is unqualified.','ENGINE_FAILURE');
   if(mesh.displayReason==='material-orientation-unqualified'&&(intent.engine!=='smlib'||metrics.resultKind!=='multi-material'||metrics.materialRegions<2||metrics.voidRegions<1))fail('Orientation qualification does not match the native result.','ENGINE_FAILURE');
   if(kind==='box'&&empty)fail('A positive box cannot produce an empty native result.','ENGINE_FAILURE');
-  if(['revolve','sweep','loft','shell'].includes(kind)&&!(metrics.nativeVolume>0))fail('An authored solid requires positive measured native volume.','ENGINE_FAILURE');
+  if(['profile-extents','revolve','sweep','loft','shell'].includes(kind)&&!(metrics.nativeVolume>0))fail('An authored solid requires positive measured native volume.','ENGINE_FAILURE');
   let model,checkProjection;
   if(empty){
    if(typeof createEmptyModel!=='function'||modern&&mesh.displayStatus!=='available')fail('Empty metadata output is unavailable.','ENGINE_CAPABILITY_UNAVAILABLE');
@@ -242,8 +277,8 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
   let holeState=null;
   // Revolve, sweep and loft have no qualified prism lineage or hole constructor. Keep only
   // its source-lifetime check, never fabricate extrusion selection provenance.
-  if(binding&&kind==='profile'){
-   const constructor=Object.freeze({...binding,engine:intent.engine,engineRevision:intent.engineRevision,handle:result.handle});
+  if(binding&&(kind==='profile'||kind==='profile-extents')){
+   const constructor=Object.freeze({...binding,engine:intent.engine,engineRevision:intent.engineRevision,handle:result.handle,...(kind==='profile-extents'?{kind:'profile-extents',extentBinding:intent.extentBinding,mechanicalObservation:Object.freeze({feature:captureOwnedProfileExtentFeature({version:1,unit:intent.unit,engine:intent.engine,engineRevision:intent.engineRevision,featureId:intent.featureId,faceId:binding.faceId,regionId:binding.regionId,bodyPolicy:'separate',...intent.profileExtent.authoredExtent}),sourceSnapshot:binding.sourceSnapshot,parameterSource:binding.parameterSource,face:binding.face,frame:intent.profileExtent.frame,sourceSha256:intent.extentBinding.sourceSha256,requestSha256:intent.extentBinding.requestSha256,descriptor:captureProfileMechanicalSource(intent.extentBinding.mechanicalSource)})}:{})});
    s.sources.set(intent.featureId,constructor);holeState=Object.freeze({source:constructor,records:Object.freeze([])});
   }else if(kind==='through-hole'&&parents[0].holeState?.source===source){
    const prior=parents[0].holeState.records;
@@ -267,6 +302,17 @@ export async function evaluateWorkerSolid({owner,kind,request,registry,createMou
    subtractConstruction=captureBoxSubtractConstruction({version:1,kind:'authored-box-subtract',unit:intent.unit,engine:intent.engine,engineRevision:intent.engineRevision,bodyId:id,featureId:intent.featureId,operation:'subtract',a:parents[0].boxConstruction,b:parents[1].boxConstruction,native:{volume:metrics.nativeVolume,bounds:metrics.nativeBounds}});
   }catch{/* No witness: material-interface export remains explicitly unqualified. */}
   s.outputs.set(id,Object.freeze({engine:intent.engine,featureId:intent.featureId,kind,model,handle:result.handle,holeState,boxConstruction,subtractConstruction}));
+  // Real Native output, publication checks, source ledger and actual selection
+  // origins precede this derived metadata. No handle is copied into the model
+  // observation; the read API below additionally requires accepted membership.
+  if(selections?.status==='available'&&selections.plan.version===2){
+   const observations=[];for(const origin of selections.plan.sourceContexts)if(origin.kind==='sketch-profile-extent'){
+    const source=s.sources.get(origin.featureId),observation=source?.mechanicalObservation;
+    if(observation&&source.regionId===origin.regionId)observations.push(observation);
+   }
+   if(observations.length)mechanicalSourceSnapshots.set(model,Object.freeze({engine:intent.engine,engineRevision:intent.engineRevision,bodyId:id,featureId:intent.featureId,method:inspect,metrics,ext,tag,observations:Object.freeze(observations)}));
+  }
+
   return Object.freeze({model,resultKind:metrics.resultKind,outputId:id,consumed:Object.freeze(parents.map(x=>x.model)),publicationCheck});
  } catch(error){if(mount)owner.close();throw error;}
 }
@@ -279,7 +325,7 @@ export async function readCandidateWorkerPlanarFace({owner,registry,parent,valid
  if(!s||!item||!source||!mount||s.engine!==p.engine||s.engineRevision!==p.engineRevision||item.featureId!==p.featureId||registry.find(p.bodyId)!==item.model||source.featureId!==p.sourceFeatureId||source.faceId!==p.sourceFaceId||source.engine!==p.engine||source.engineRevision!==p.engineRevision||registry.findFace(source.faceId)!==source.face)fail('The native attachment parent or constructor is no longer current.','UNRESOLVED_SOURCE');
  if(source.regionId!==p.sourceRegionId)throw Object.assign(Error('The genuine native constructor now uses a different selected region.'),{code:'UNRESOLVED_SOURCE',attachmentReason:'DATUM_CHANGED',failedFeatureId:p.featureId,originFeatureId:p.originFeatureId});
  const selection=selectionSnapshots.get(item.model);if(selection?.status==='unavailable'&&['PROFILE_PROVENANCE_RESOURCE_LIMIT','SELECTION_RESOURCE_LIMIT','BOOLEAN_HISTORY_RESOURCE_LIMIT'].includes(selection.reason))fail('Native attachment history exceeds its observation budget.','RESOURCE_LIMIT');const descriptor=selection?.status==='available'&&selection.plan.version===2?selection.plan.faces.find(row=>row.id===p.selectionId):null;
- if(!descriptor||descriptor.originFeatureId!==p.originFeatureId||descriptor.role!=='last-cap'||descriptor.geometry!=='plane'){const prior=selection?.status==='available'?selection.plan.unresolved.find(row=>'id'in row&&row.id===p.selectionId):null;throw Object.assign(Error('The attachment selection has no unique current planar cap.'),{code:'UNRESOLVED_SOURCE',attachmentReason:prior?.reason||'REFERENCE_MISSING',...(prior&&'featureId'in prior?{failedFeatureId:prior.featureId,originFeatureId:prior.originFeatureId}:{})});}
+ if(!descriptor||descriptor.originFeatureId!==p.originFeatureId||(source.kind==='profile-extents'?p.framePolicy!=='profile-extent-cap-source-datum-v1'||!['lower-cap','upper-cap'].includes(descriptor.role):p.framePolicy!=='extrusion-cap-source-datum-v1'||descriptor.role!=='last-cap')||descriptor.geometry!=='plane'){const prior=selection?.status==='available'?selection.plan.unresolved.find(row=>'id'in row&&row.id===p.selectionId):null;throw Object.assign(Error('The attachment selection has no unique current planar cap.'),{code:'UNRESOLVED_SOURCE',attachmentReason:prior?.reason||'REFERENCE_MISSING',...(prior&&'featureId'in prior?{failedFeatureId:prior.featureId,originFeatureId:prior.originFeatureId}:{})});}
  if(!mount.descriptor.operations.some(op=>op.id==='solid.face.frame.read'&&op.version===1))fail('The exact staged runtime does not support native planar attachment.','UNSUPPORTED_FRAME_PARENT');
  const metrics=item.model.inspectKernelMetrics();if(metrics.resultKind!=='single-solid'||metrics.solidCount!==1||metrics.nativeValidity?.valid!==true||!(metrics.nativeVolume>0))fail('Attachment requires one valid current native solid.','UNSUPPORTED_FRAME_PARENT');
  if(expectedMetrics&&(!Object.isFrozen(expectedMetrics)||expectedMetrics.resultKind!=='single-solid'||expectedMetrics.solidCount!==1||expectedMetrics.nativeValidity?.valid!==true||!Object.is(metrics.nativeVolume,expectedMetrics.nativeVolume)||['min','max'].some(k=>metrics.nativeBounds[k].some((v,i)=>!Object.is(v,expectedMetrics.nativeBounds?.[k]?.[i])))||'sha256:'+expectedMetrics.runtime?.jsSha256+':'+expectedMetrics.runtime?.wasmSha256!==p.engineRevision))fail('Native attachment replay differs from the accepted measurement.','REPLAY_RESULT_MISMATCH');

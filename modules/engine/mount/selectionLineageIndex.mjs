@@ -57,7 +57,7 @@ function descriptor(value,version,origin,captureRef=captureBoundaryRef){
 }
 function contexts(values,maxInput=32){
  if(Array.isArray(values)&&values.length>maxInput)fail('Source contexts exceed their bound.','SELECTION_RESOURCE_LIMIT');
- const map=new Map();for(const value of array(values,maxInput)){const c=fields(value,['kind','featureId','regionId']);if(!['sketch-profile','box'].includes(c.kind))unavailable('Only real sketch-profile or box origins are supported.');if(!integer(c.featureId)||(c.kind==='box'?c.regionId!==null:!text(c.regionId,8192)))fail('Invalid source construction context.');const prior=map.get(c.featureId);if(prior&&(prior.kind!==c.kind||prior.regionId!==c.regionId))unavailable('One origin cannot name conflicting source constructions.');map.set(c.featureId,c);}
+ const map=new Map();for(const value of array(values,maxInput)){const c=fields(value,['kind','featureId','regionId']);if(!['sketch-profile','sketch-profile-extent','box'].includes(c.kind))unavailable('Only real selected-profile, extent-profile or box origins are supported.');if(!integer(c.featureId)||(c.kind==='box'?c.regionId!==null:!text(c.regionId,8192)))fail('Invalid source construction context.');const prior=map.get(c.featureId);if(prior&&(prior.kind!==c.kind||prior.regionId!==c.regionId))unavailable('One origin cannot name conflicting source constructions.');map.set(c.featureId,c);}
  if(map.size>32)fail('Source contexts exceed their bound.','SELECTION_RESOURCE_LIMIT');
  if(!map.size)unavailable('A real source construction context is required.');return [...map.values()].sort((a,b)=>a.featureId-b.featureId||compare(a.regionId,b.regionId));
 }
@@ -91,10 +91,10 @@ function priorRows(values,version,origin){
 function readSource(api,plan,version,captureRef=captureBoundaryRef){
  if(typeof captureRef!=='function')fail('A private source-boundary capture is required.');
  const p=fields(plan,version===1?['version','featureId','regionId','scope','source','edges','faces','unresolved']:['version','featureId','scope','source','sourceContexts','vertices','edges','faces','unresolved']);
- if(p.version!==version||!integer(p.featureId)||p.scope!=='authored-source'||!['prism-construction-history','box-construction-history','kernel-operation-history'].includes(p.source))fail('Unsupported source selection plan.');
+ if(p.version!==version||!integer(p.featureId)||p.scope!=='authored-source'||!['prism-construction-history','profile-extent-construction-history','box-construction-history','kernel-operation-history'].includes(p.source))fail('Unsupported source selection plan.');
  if(version===1&&(!text(p.regionId,8192)||p.source!=='prism-construction-history'))fail('Only an actual initial prism index may be lifted.');
  const origins=version===1?[{kind:'sketch-profile',featureId:p.featureId,regionId:p.regionId}]:contexts(p.sourceContexts),originIds=new Set(origins.map(x=>x.featureId));
- if(['prism-construction-history','box-construction-history'].includes(p.source)&&(origins.length!==1||origins[0].featureId!==p.featureId||origins[0].kind!==(p.source==='box-construction-history'?'box':'sketch-profile')))fail('Initial construction origin must equal its producer and source kind.');
+ if(['prism-construction-history','profile-extent-construction-history','box-construction-history'].includes(p.source)&&(origins.length!==1||origins[0].featureId!==p.featureId||origins[0].kind!==(p.source==='box-construction-history'?'box':p.source==='profile-extent-construction-history'?'sketch-profile-extent':'sketch-profile')))fail('Initial construction origin must equal its producer and source kind.');
  const descriptors=new Map(),bindings=new Map(),claims=[],used={vertex:new Set(),edge:new Set(),face:new Set()};
  for(const type of kinds)for(const value of array(type==='vertex'&&version===1?[]:p[plural(type)],limit(type))){
   const d=descriptor(value,version,p.featureId,captureRef);if(descriptors.has(d.id)||!originIds.has(d.originFeatureId))fail('Selection identities require unique actual origins.');
