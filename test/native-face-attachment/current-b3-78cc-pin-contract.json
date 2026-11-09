@@ -1,0 +1,34 @@
+{
+  "scope": "Exact current fixture pin extension only; no runtime or CAD qualification",
+  "source": "b3a7bb227da38524309e8cc0c6c8a8646d00b854",
+  "desktop": "78cc1694eca1a88623f33e7ff748673c909a6017",
+  "basePinsSHA256": "5dc9276d7f3f2056f68410e6294e106fc3582121cdafaf3acce43d13f1ad8cd2",
+  "outer": {
+    "bundleSHA256": "ed8d72d1975c69318bc297255ff3d38a54624b024e74cb4c0c8f744a8ef89ceb",
+    "sha256": "79a29a1f8c13d1536d3ce48c22c2243bb1b748f8f1f5acc082b21ad89fa93113",
+    "path": "assets/desktop/apps/jsketcher/ed8d72d1975c69318bc297255ff3d38a54624b024e74cb4c0c8f744a8ef89ceb/index.mjs"
+  },
+  "filesApp": {
+    "bundleSHA256": "ee2a712cabade0aad7a3b2c5bc4d8c311d7dc8f52963aadb14e210d9d54b010a",
+    "sha256": "96b36034f3c165aa83c6cd98b180ca0971c6e44a90f396a7c1aa12b6e24bf96c",
+    "path": "assets/desktop/apps/files/ee2a712cabade0aad7a3b2c5bc4d8c311d7dc8f52963aadb14e210d9d54b010a/index.mjs"
+  },
+  "engineRevision": "sha256:57b74074e0a249b917ac68357fbd003c37d1ab61897206886b575088e6995858:60dc956b08e01f43d08a48035a384e478e63bb34fb55f21a152c8cd12e8b8947",
+  "provenance": {
+    "stagedCatalog": "/mnt/data10tb/codi-acad-typed-signed-pl-stage-20261108-r1-apps/apps.json",
+    "componentManifest": "/mnt/data10tb/codi-acad-build-20261107-r2/.build/shell-assets/component.json",
+    "sourceEmissionList": "build/shell-assets-entry.cjs",
+    "sourceCatalog": "modules/engine/mount/engineCatalog.mjs",
+    "observation": "Catalog and component-manifest metadata agree on both additions. Artifact streaming verification is deliberately deferred to root's later explicit invocation."
+  },
+  "extensions": {
+    "static/shell/modules/engine/mount/nativePlanarAttachmentFacts.mjs": {
+      "sha256": "a6946e1c29a7ed273d0049f6bc363e004691e01683dbc5ebddf810bb3c58d01d",
+      "bytes": 4224
+    },
+    "static/shell/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": {
+      "sha256": "9beeb2754425235e96e4db85c04fbeac8dab7d6ffe39c1651e1a0efcb0bcbf31",
+      "bytes": 3547
+    }
+  }
+}
