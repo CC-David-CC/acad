@@ -99,6 +99,24 @@ def verify_svg(root,item,row,facts,iso,bore):
  def paper(v,p):return[v['paperOrigin'][0]+scale(v)*p[0],v['paperOrigin'][1]-scale(v)*p[1]]
  def project(v,p):
   f=frames[v['viewId']];q=[p[i]-f['origin'][i] for i in range(3)];return paper(v,[sum(q[i]*f[k][i] for i in range(3)) for k in ('u','v')])
+ def caption_bounds(view):
+  # Independent paper-space bounds of already checked authentic geometry.
+  # Conic coefficients are reconciled against actual source/body supports by
+  # observation(); full ellipse envelopes conservatively contain finite trims.
+  role=view['basis'];points=[]
+  if role=='detail':
+   hw,hh=view['aperture']['halfWidth'],view['aperture']['halfHeight'];points=[[-hw,-hh],[hw,hh]]
+  elif role=='bore-center-section':
+   points=[p for patch in facts['section'][0] for pair in patch for p in pair]
+  else:
+   for curve in facts[role]:
+    if curve['line']:points.extend(iso.evaluate(curve,t) for t in curve['range'])
+    else:
+     radii=[math.hypot(curve['a'][j],curve['b'][j]) for j in (0,1)]
+     points.extend([[curve['c'][j]+sign*radii[j] for j in (0,1)] for sign in (-1,1))
+  if not points:return None
+  mapped=[paper(view,p) for p in points];need(all(all(math.isfinite(z) for z in p) for p in mapped),'finite authentic caption envelope')
+  return [min(p[0] for p in mapped),min(p[1] for p in mapped),max(p[0] for p in mapped),max(p[1] for p in mapped)]
  textcheck([8,8],d['title'] or d['drawingId'])
  for index,v in enumerate(d['views']):
   role=v['basis'];observed=one([p for p in read['views'] if p['viewId']==v['viewId']],'view');group=[p for p in paths if p.get('data-view-id')==v['viewId']]
@@ -123,7 +141,8 @@ def verify_svg(root,item,row,facts,iso,bore):
     attrs={'data-view-id':v['viewId'],'data-view-basis':role}|({'stroke-dasharray':'2 1','stroke':'#777'} if c['hidden'] else {})
     need(set(p.attrib)==set(attrs)|{'d'} and all(p.get(k)==z for k,z in attrs.items()),'analytic view/visibility identity');need('Z' not in p.get('d',''),'open analytic path');used.add(id(p))
     chord_certificate(c,a,b,ps(p),lambda q:paper(v,[q[j]-offset[j] for j in (0,1)]),scale(v),iso.evaluate)
-  textcheck([v['paperOrigin'][0],v['paperOrigin'][1]+5],role+(' 2:1' if role=='detail' else ''))
+  bounds=caption_bounds(v);position=[bounds[0],bounds[3]+5] if bounds else [v['paperOrigin'][0],v['paperOrigin'][1]+5];caption=textcheck(position,role+(' 2:1' if role=='detail' else ''))
+  if bounds:need(float(caption.get('y'))>=bounds[3]+5-1e-6,'caption baseline clears actual conservative paper geometry by5mm, without clamping')
  for a,f in zip(d['dimensions'],o['dimensions']):
   v=one([v for v in d['views'] if v['viewId']==a['viewId']],'dimension view')
   if f['status']!='available' or frames[v['viewId']] is None:textcheck(a['label'],'UNRESOLVED: '+a['dimensionId'],{'fill':'#a00'});continue

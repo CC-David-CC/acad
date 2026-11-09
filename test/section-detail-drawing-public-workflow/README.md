@@ -53,3 +53,18 @@ public packets do not carry Native edge IDs, so it does not pretend to establish
 private Native identity independently. Exact producer commit/path/blob custody,
 whole phase/format/code/work31+32 rosters, issued highwater and candidate epoch/
 five-token provenance are required. Root composes the product fixes separately.
+
+## Derived caption regression (source-only follow-up)
+
+The root-reviewed current16renders exposed captions at paperOrigin+5 lying
+on translated/isometric geometry. The caption repair keeps all existing whole
+steps, .cad/SVG submissions and physical geometry criteria. Its Worker places
+each available caption below actual projected analytic bounds, actual section
+cap-patch bounds or the detail aperture. The after-whole oracle independently
+derives the same physical bound relation, rather than retaining a literal
+origin+5 assumption. Unavailable placeholders and all authored labels/leaders
+remain unchanged; label/leader/other-view collisions and sheet auto-layout are
+not claimed fixed. See docs/reviews/C11-DERIVED-VIEW-CAPTIONS-20261109.md.
+No new execution accompanies this source follow-up; old receipts/renders remain
+frozen. Root must run this complete affected workflow on the composed candidate
+and review the actual artifacts after the independent checker.
