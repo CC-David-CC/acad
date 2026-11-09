@@ -110,8 +110,9 @@ successful actual STEP reads only.
 
 The original R4 browser whole retains its original eighteen source snapshots.
 New verifier helpers must have separate before/after Git custody; they were not
-retroactively used in that run. A new browser whole captures twenty-three
-sources, including all four general evidence/surface helpers.
+retroactively used in that run. A new browser whole captures twenty-four
+sources, including all four general evidence/surface helpers and the statically
+imported requirement-forms renderer leaf.
 
 The verifier now requires explicit, bounded, duplicate-key-rejecting JSON
 configuration files. Mesh anchors use the nine fields in
