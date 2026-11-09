@@ -1,0 +1,28 @@
+{
+  "status": "WHOLE_RUNNING_NOT_QUALIFIED",
+  "wholeSession": 28480,
+  "applicationProducer": "e521860d342aa0f133a72585604dbaeafa98d37d",
+  "desktopProducer": "9ea4a1993ad8afa10ea9a24e9c9a4f7955e47420",
+  "acceptanceSource": "a09073071ca2cebb7446d8329d8c1f8563165a16",
+  "sourceReview": "95817ae6d1adbcbad4b75ee24d520f5122fbe1a0",
+  "acceptanceWorktreeSession": 99567,
+  "acceptanceWorktreeExitCode": 0,
+  "coreRebuilt": false,
+  "hostRestaged": false,
+  "pins": 209,
+  "stageReuse": "build-example-correction-r2",
+  "site": "http://127.0.0.1:21051/",
+  "serviceSession": 76446,
+  "siteForwardSession": 32185,
+  "reverseCDPForwardSession": 16681,
+  "cdp": "http://127.0.0.1:19551",
+  "evidence": "/mnt/data10tb/codi-acad-foundation-next-counterbore-20261109-r3",
+  "log": "/tmp/codi-acad-foundation-next-counterbore-20261109-r3.log",
+  "retainedFailures": [
+    "8e76fa5/evidence-r1",
+    "8b8618d/evidence-r2"
+  ],
+  "oraclePermittedOnlyAfter": "terminal whole PASS",
+  "geometryAPIOrCriteriaChanged": false,
+  "publicMainBetaPromoted": false
+}
