@@ -13,6 +13,7 @@ import {registerLengthMeasurementCommands} from './length-measurement-commands.m
 import {registerRadiusCommands} from './radius-commands.mjs';
 import {registerTangencyCommands} from './tangency-commands.mjs';
 import {registerLengthFamilyCommands} from './length-family-commands.mjs';
+import {registerOffsetCommands} from './offset-commands.mjs';
 import {registerEqualRadiusCommands} from './equal-radius-commands.mjs';
 import {registerPointLineDistanceCommands} from './point-line-distance-commands.mjs';
 import {registerCoincidenceCommands} from './coincidence-commands.mjs';
@@ -220,6 +221,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerRadiusCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerTangencyCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLengthFamilyCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerOffsetCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerEqualRadiusCommands(host,()=>rectangle.target()));
   if(host.commands)host.onDispose(registerPointLineDistanceCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerCoincidenceCommands(host,()=>rectangle.target()));
