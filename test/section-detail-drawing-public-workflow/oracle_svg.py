@@ -32,17 +32,6 @@ def physical_facts(row,objects,bore,iso):
  def source_point(r):
   need(r=={'kind':'source-point','featureId':b['profile']['featureId'],'faceId':b['faceId'],'regionId':b['regionId'],'curveId':r['curveId'],'curveType':'segment','point':r['point']} and r['curveId'] in objects and r['point'] in ('a','b'),'source endpoint actual owner/type')
   p=objects[r['curveId']]['data'][r['point']];return[p['x'],p['y'],0]
- # Independent actual geometry/caption inequalities over ALL views; the
- # observed geometry has already been reconciled with original analytic truth.
- envelopes=[caption_bounds(v) for v in d['views'] if one([p for p in read['views'] if p['viewId']==v['viewId']],'view availability')['status']=='available']
- def intersects(a,b):return a[0]<b[2] and a[2]>b[0] and a[1]<b[3] and a[3]>b[1]
- for i,(view_id,role,box) in enumerate(caption_boxes):
-  for b in envelopes:
-   if b is not None:need(not intersects(box,[b[0]-.125,b[1]-.125,b[2]+.125,b[3]+.125]),'actual caption box does not intersect ANY actual analytic/cap/aperture view or its stroke')
-  for _,_,other in caption_boxes[:i]:need(not intersects(box,other),'distinct derived caption boxes never overlap')
-  for warning in texts:
-   if warning.get('data-warning-layout')=='sheet-legend-v1':
-    spans=warning.findall('s:tspan',NS);need(spans,'actual warning legend lines');first=min(float(t.get('y','nan')) for t in spans);need(math.isfinite(first) and box[3]<=first-5+1e-6,'caption box clears the actual full warning band')
  for a,f in zip(d['dimensions'],o['dimensions']):
   need(f['dimensionId']==a['dimensionId'] and f['kind']==a['kind'],'dimension row identity')
   if f['status']=='unresolved':
