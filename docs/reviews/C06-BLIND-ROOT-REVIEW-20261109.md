@@ -1,5 +1,39 @@
 # Root blind-hole review checkpoint
 
+## Current review disposition
+
+The product source sequence6ef1b014/c7b91e8/907764f8/0e7e1183 and Hosted07e228
+remains unintegrated and unqualified. Root has now reviewed the actual ledger,
+full Craft/shared-J, modeler, typed field/history and PM consumer changes in
+addition to the earlier numeric intent, plan, facts, Native dispatch, catalog,
+controller and cleanup review. Followups907764f8/0e7e1183 address the explicit
+finite-code catch, attempted-name/unknown-cleanup reconciliation and ShapeResult
+op-union issues recorded below. No additional product blocker was confirmed in
+those source reads; this is not runtime evidence.
+
+Independent final review5344b84 is retained as
+`C06-BLIND-CONSUMER-ACCEPTANCE-REVIEW-20261109.md`. It identifies three material
+acceptance defects: unknown-settlement ownership around exports/own malformed
+file writes; a volume/infinite-support-only mesh check that cannot establish a
+circular recess; and STEP LINE geometry not checked against actual endpoints
+and face supports. It also records incomplete malformed-Open state retention,
+executed-source Git custody, creation high-water specificity and unique required
+phase/format/refusal rosters. Timeline owns source-only acceptance corrections.
+The first complete run is blocked on their review/integration, not on an
+observed bad product export. No proof criterion is relaxed.
+
+Root read the complete frozen counterbore designf547814 and approved bounded
+source implementation separately: two real sequential cuts, four charged
+results, actual small/large cylinders and annular shoulder ancestry, unchanged
+primary pair/quota/ABI, one semantic history operation. It is not implemented
+or qualified by this approval. That contract is retained under
+`test/centered-counterbore-workflow/CONTRACT.md`; its eventual artifact oracle
+must meet the same finite geometry, LINE consistency and write-custody criteria.
+
+Historical review checkpoint below is retained; its pending product-review and
+follow-up labels are superseded by this disposition. Current root whole runs
+57233/38715 use frozen8771a56/7fc7a508f, not blind product source.
+
 SOURCE REVIEW IN PROGRESS; packet6ef1b014/c7b91e8 and Hosted07e228 are NOT integrated or qualified. Current running equality/tangency fixtures stay on2039a0d/7fc7a508f with frozen source/helper bytes.
 
 Read full SOURCE.md and pure fourteen-field numeric/authored intent, plan and floor/cylinder facts; read Native dispatch/custody and source-bound Craft command sections. Main commands/ledger/catalog/PM/J/export consumers and complete acceptance packet still need full review. This note is not signoff.
