@@ -1,0 +1,6 @@
+Preparing worktree (detached HEAD f23c5164b)
+HEAD is now at f23c5164b Record qualified blind regression and independently reviewed extent census repair
+{"assets": 579, "assetBytes": 605238503, "excluded": [".rev", "css/app.less", "index.html", "lib-assets/font-awesome/fonts/FontAwesome.otf", "sketcher.html"]}
+{"scope": "actual native CAD plus Files integration fixture; no qualification", "apps": ["jsketcher", "files"]}
+{"version":"codi-public-apps/2","hostAPI":2,"apps":2,"files":652,"output":"/mnt/data10tb/codi-acad-extent-census-stage-20261109-r1-apps"}
+{"scope": "actual build metadata only; no qualification", "files": 285, "source": "7f20b38140eabe0ae393c2def20f952ac3290088", "desktop": "f23c5164b5bf747d7b55f8550ac7b260bcfc7aec"}
