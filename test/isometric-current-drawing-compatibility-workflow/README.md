@@ -1,19 +1,24 @@
-# Current drawing-v3 compatibility regression of the finite isometric workflow
+# Current drawing-v4 compatibility regression of the finite isometric workflow
 
-Root-owned NEW copy of the complete frozen isometric workflow. The historical
-folder/evidence remains unchanged. Sole executable expectation change:
-inspect-linked-part-drawing.definitionVersions must now advertise[1,2,3].
-The actual authored drawing remains v1→v2, exactlyfour views/six physical
-references; source/Native/projection/ellipse/travel/refusal/.cad/SVG/ownership
-and independent math/tolerance criteria are unchanged. This is an affected
-regression because the composed C11 source changes actual cylinder lineage,
-drawing facts and metadata consumers; it does not qualify new v3 annotations.
+Current acceptance refresh from the preserved v3 compatibility packet. Manager
+inspection now advertises EXACT definitionVersions[1,2,3,4] and overall views6;
+the original public authored geometry remains v1 three-view -> v2 four-view,
+with exactly six physical references and unchanged per-family limits.
+The driver and independent checker additionally capture the actual pure
+definition and PM metadata producer sources. Historical original isometric and
+v3-compatibility receipts, rosters, versions and snapshots remain unchanged.
 
-Run once through the complete public workflow on normal composed f4189e75/
-c6d2bfe91 with actual189pins/private21035, then FIRST independent artifact
-oracle ONLY after whole terminalPASS. Preserve first failure and source custody;
-no component/probe checks or new geometry seed. Original invocation template
-below remains structurally valid with this new directory/evidence/cohort.
+Source/Native/projection/ellipse/travel/refusal/.cad/SVG/ownership math and all
+budgets are unchanged. This packet does not author v3/v4 annotations or require
+new manufacturing conformance. Root supplies a coherent current producer and
+separate frozen acceptance commit, runs ONE complete existing lifecycle, then
+FIRST independent oracle only after terminal whole PASS. No current success is
+claimed; original first failures must remain retained.
+
+The body below retains the actual v1/v2 authoring contract. Its <=4 views and
+projection aggregate are NOT enlarged by the current manager's later-format
+capability6. Use this directory's current driver/checker, not the historical
+isometric-drawing-public-workflow executable.
 
 # Linked isometric drawing — source-ready, not qualified
 
@@ -74,12 +79,13 @@ CODI_EVIDENCE=NEW_EVIDENCE_DIRECTORY \
 CODI_SIGNED_PINS=EXACT_NEW_RUNTIME_PINS \
 CODI_EXPECT_SOURCE=EXACT_COMPOSED_CORE_COMMIT \
 CODI_EXPECT_DESKTOP=EXACT_COMPOSED_DESKTOP_COMMIT \
+CODI_ACCEPTANCE_SOURCE=EXACT_CURRENT_ACCEPTANCE_COMMIT \
 CODI_TEST_URL=http://127.0.0.1:ROOT_FIXTURE_PORT/ \
 CODI_TEST_CDP=http://127.0.0.1:19329/ \
 PUPPETEER_CORE_PATH=ROOT_RETAINED_PACKAGE \
-node test/isometric-drawing-public-workflow/desktop-driver.mjs
+node test/isometric-current-drawing-compatibility-workflow/desktop-driver.mjs
 # Only AFTER the whole workflow terminal PASS:
-python3 test/isometric-drawing-public-workflow/check.py NEW_EVIDENCE_DIRECTORY
+python3 test/isometric-current-drawing-compatibility-workflow/check.py NEW_EVIDENCE_DIRECTORY
 ```
 
 Protect submitted Save/SVG/server readback settlement; never forcibly close an

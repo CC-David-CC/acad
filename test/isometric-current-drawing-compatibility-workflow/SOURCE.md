@@ -39,3 +39,15 @@ runtime unchanged. Root owns normal regeneration/pins/qualification.
 
 No tests/probes/TSC/build/browser or Native execution have been performed.
 Section/detail/annotation/fit scope remains the explicit next C11 inventory.
+
+## Current advertised-schema refresh — source only
+
+The later manager capability is definitionVersions[1,2,3,4]/views6, while this
+authored flow remains exactly v1->v2/four views and six physical references.
+Both producer/independent expected inventories now also bind
+modules/drawing/linkedPartDrawingDefinition.mjs and
+web/app/cad/projectManager/projectManagerBundle.ts to the actual runtime Core
+Git commit:path/blob/SHA. Every before/after Native observation independently
+checks the current advertised metadata. No geometry/domain/projection budget,
+source/history/repair/travel/archive/custody criterion changed. Historical
+producing acceptance and reports remain immutable; no execution here.

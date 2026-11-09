@@ -13,6 +13,8 @@ import importlib.util
 _spec=importlib.util.spec_from_file_location('drawing_warning_oracle',Path(__file__).resolve().parents[1]/'drawing-warning-oracle.py');_warning=importlib.util.module_from_spec(_spec);_spec.loader.exec_module(_warning)
 WARNING_SOURCE_ROSTER={
  ('core', 'modules/engine/extrusion/selectedRegionDescriptor.mjs'),
+ ('core', 'modules/drawing/linkedPartDrawingDefinition.mjs'),
+ ('core', 'web/app/cad/projectManager/projectManagerBundle.ts'),
  ('core', 'test/drawing-reference-repair-public-workflow/example.mjs'),
  ('core', 'test/drawing-warning-oracle.py'),
  ('core', 'test/isometric-current-drawing-compatibility-workflow/CONTRACT.md'),
@@ -346,7 +348,9 @@ def check(directory):
     root=Path(directory);r=json.loads((root/'receipt.json').read_text());need(r['status']=='PASS' and r['engineRevision']==BUILD,'complete actual workflow first');need(r['sourcePins']==r['sourcePinsAfter'] and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'],'immutable source/owned cleanup');need(not any(r[k] for k in ('sourceSeeds','privateAuthoring','fakeReplies')),'genuine authoring');need([c['name'] for c in r['cases']]==['original'] and all(c['status']=='PASS' for c in r['cases']),'one complete actual linked isometric case')
     _warning.verify_warning_sources(root,r,need,WARNING_SOURCE_ROSTER)
     cases={c['name']:c for c in r['cases']};reads=[]
-    for row in r['observations']:reads.append({'case':row['case'],'label':row['label'],'volumeMM3':check_observation(row,cases[row['case']])['volume'],'unresolved':row['unresolved']})
+    for row in r['observations']:
+        for side in ('before','after'):need(row[side]['drawing']['definitionVersions']==[1,2,3,4] and row[side]['drawing']['limits']['views']==6,'actual current manager capability list/capacity, distinct from unchanged authored legacy four-view domain')
+        reads.append({'case':row['case'],'label':row['label'],'volumeMM3':check_observation(row,cases[row['case']])['volume'],'unresolved':row['unresolved']})
     need(len(reads)==25,'all25 Native drawing/point observations');need(len(r['repairs'])==1,'actual same-reference repair');need(len(r['isometricReplacements'])==1,'actual fourth-view replacement')
     replacement=r['isometricReplacements'][0];need(replacement['before']['drawing']['definition']==replacement['orthographic'] and replacement['applied']['drawing']['definition']==replacement['definition'] and replacement['undone']['drawing']['definition']==replacement['orthographic'] and replacement['redone']['drawing']['definition']==replacement['definition'],'immediate actual isometric replacement UndoRedo exact definitions');need(geometry(replacement['before'])==geometry(replacement['applied'])==geometry(replacement['undone'])==geometry(replacement['redone']),'replacement preserves actual part/source/IDs/counters/resources');prior=json.loads(json.dumps(replacement['definition']));prior['version']=1;prior['views']=prior['views'][:3];need(prior==replacement['orthographic'],'ONLY fourth view/version changes; physical dimensions/layout retained')
     for t in r['repairs']:
