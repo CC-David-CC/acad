@@ -16,10 +16,12 @@ export function inspectTangency(pm,objects,spec,deduplicate=true){const stage=in
 export function inspectClosedTangency(pm,objects,spec,deduplicate=true){const r=inspectTangency(pm,objects,spec,deduplicate);for(const o of objects)if(!pm.stages.includes(o.stage)||!o.stage.objects.has(o)||o.parent||o.generator||o.isGenerated||typeof o.id!=='string'||o.id.length>256)fail('GENERATED_TARGET','Closed tangency requires actual nongenerated authored roots.');return r;}
 export function prepareTangency(pm,objects,spec,deduplicate=true){if(!pm||pm.inTransaction)fail('TANGENCY_TARGET','Finish the current sketch transaction.');const result=inspectTangency(pm,objects,spec,deduplicate);return{...result,validate:stages=>{
  const c=result.constraint,sys=c.stage?.algNumSystem;if(c.stage!==result.stage||!sys?.allConstraints.includes(c))fail('TANGENCY_TARGET','The actual tangent row lost stage ownership.');
+ // Preserve the actual new domain/uncertainty/resource code and cause before
+ // reporting a generic algebraic-admission rejection of this prepared row.
+ assertRegisteredConstraintDomain(c);
  // Do not turn a prior human rejected row into a new global policy restriction.
  for(const stage of stages)for(const row of stage.algNumSystem.allConstraints){const s=stage.algNumSystem;if(s.conflicting.has(row)&&!s.redundant.has(row)&&!(s.transactionBefore?.conflicting.has(row)&&!s.transactionBefore?.redundant.has(row)))throw withAdmissionCause(Object.assign(Error('Tangency was rejected by actual native admission.'),{code:'TANGENCY_REJECTED'}),s.getAdmissionCause(row));}
  if(sys.conflicting.has(c)&&!sys.redundant.has(c))throw withAdmissionCause(Object.assign(Error('Tangency conflicts with retained constraints.'),{code:'TANGENCY_REJECTED'}),sys.getAdmissionCause(c));
- assertRegisteredConstraintDomain(c);
  }};}
 // Existing human TangentLC/Bezier action is untouched. This preparation is used
 // only by new explicit mechanical finite/circle-circle human variants.

@@ -1,3 +1,4 @@
+import {admissionCause} from './admissionCause.mjs';
 import {lineCircularContact,circleCircleContact,tangencyConstantsValid} from './tangencyDomain.mjs';
 import {assertSlotBranch} from './straightSlotRecord.mjs';
 // Explicit domains and dimensional residual profiles for registered UI schemas.
@@ -6,6 +7,8 @@ const LENGTH=1e-6,ANGLE=1e-8;
 // Explicit existing source-schema scope: deferred admission must not infer
 // millimeter units for arbitrary schemas from the historical default below.
 const registeredSchemas=new Set(['StraightSlot','PCoincident','LockPoint','Horizontal','Vertical','SegmentLength','EqualLength','LengthRelation','RadiusLength','DiameterLength','DistancePL','PointOnLine','SignedDistanceX','SignedDistanceY','ProjectedDistance','Collinear','AxisSymmetry','Concentric','EqualRadius','Angle','AngleBetween','Parallel','Perpendicular','DistancePP','PointInMiddle','Symmetry','TangentLC','FiniteTangentLC','TangentCC','PointOnCircle','PointOnBezier','TangentLineBezier','PointOnEllipse','Polar','ArcConsistency','Fillet','FixSegment','FixCircle','FixArc','RigidGroup']);
+// Keep refusal classification distinct from a mathematical domain failure.
+export function registeredDomainFailureCause(error){const d=error&&typeof error==='object'?Object.getOwnPropertyDescriptor(error,'code'):null,code=d&&Object.hasOwn(d,'value')?d.value:null;return admissionCause(code==='RESOURCE_LIMIT'?'resource-limit':['FINITE_CONTACT_UNCERTAIN','UNSUPPORTED_FINITE_ARC'].includes(code)?'retained-validation-failure':'invalid-domain');}
 export const hasRegisteredResidualPolicy=c=>!!c&&registeredSchemas.has(c.schema?.id);
 const angleSchemas=new Set(['Angle','AngleBetween','Parallel','Perpendicular','Horizontal','Vertical']);
 const fail=()=>{throw Error('A sketch constraint has a degenerate or invalid domain.');};
@@ -35,7 +38,7 @@ export function assertRegisteredConstraintDomain(c){
 }
 export function registeredResidualProfile(c,polynomialValues){
  let residuals=[...polynomialValues];const units=residuals.map(()=>angleSchemas.has(c.schema.id)?'radian':'millimeter');
- if(c.schema.id==='TangentCC'){const [a,b]=c.objects,contact=circleCircleContact(a,b,c.constants.branch),scale=contact.distance+contact.target;residuals=residuals.map(v=>v/scale);}
+ if(c.schema.id==='TangentCC'){const [a,b]=c.objects,rA=a?.r?.get?.(),rB=b?.r?.get?.(),branch=c.constants?.branch,d=Math.hypot(b?.c?.x-a?.c?.x,b?.c?.y-a?.c?.y),target=branch==='external'?rA+rB:['first-contains-second','second-contains-first'].includes(branch)?Math.abs(rA-rB):NaN,scale=d+target;residuals=residuals.map(v=>Number.isFinite(scale)&&scale>0?v/scale:NaN);}
  if(c.schema.id==='DistancePP'||c.schema.id==='PointOnCircle'){
   const [a,b]=c.objects,p=c.schema.id==='DistancePP'?b:b.c,r=c.schema.id==='DistancePP'?Math.abs(c.resolvedConstants.distance):b.r.get(),scale=Math.hypot(a.x-p.x,a.y-p.y)+r;
   // Squared-distance equations become radial/point distance errors in mm.

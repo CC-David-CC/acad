@@ -6,7 +6,7 @@ import {Polynomial, POW_1_FN} from "./polynomial";
 import {AlgNumConstraint, ConstraintDefinitions} from "./ANConstraints";
 import {SolverParam} from "./solverParam";
 import {initializeSingularPointDistance} from './distancePPSingularInitialization';
-import {assertRegisteredConstraintDomain,registeredResidualProfile,hasRegisteredResidualPolicy} from './registeredConstraintPolicy.mjs';
+import {assertRegisteredConstraintDomain,registeredResidualProfile,hasRegisteredResidualPolicy,registeredDomainFailureCause} from './registeredConstraintPolicy.mjs';
 import {directionalRelation,directionalSegments,directionalRelationValid,directionalSegmentNonzero} from './lineRelationDomain.mjs';
 import {noteSketchMutation} from '../sketchMutationEpoch.mjs';
 import {assertRetainedStageValid} from '../rigid/rigidGroupDomain.mjs';
@@ -1154,7 +1154,7 @@ export class AlgNumSubSystem {
       if (!cause) try {
         assertRegisteredConstraintDomain(constraint);
         if (directionalRelation(constraint) && !directionalRelationValid(constraint)) throw Error('Invalid original relation domain');
-      } catch (_) { cause = admissionCause('invalid-domain'); }
+      } catch (error) { cause = registeredDomainFailureCause(error); }
       const values = equations.map(equation => equation.value());
       const profile = registeredResidualProfile(constraint,values);
       if (!cause && (values.some(value => !Number.isFinite(value)) || profile.residuals.some(value => !Number.isFinite(value)))) cause = admissionCause('nonfinite-result');

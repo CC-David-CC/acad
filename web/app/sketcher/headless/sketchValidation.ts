@@ -5,7 +5,7 @@ import {rigidGroupValid} from '../rigid/rigidGroupDomain.mjs';
 import {validateCurvedBoundary,referencedCurvedBoundaries,assertUnchangedCurvedBoundaries,assertFixedCurvedBoundary} from './curvedBoundaryPolicy.mjs';
 import {inspectBoundedSpline,SPLINE_WORK_LIMIT} from './splinePolicy.mjs';
 import {inspectCarriedCurve} from './carriedCurvePolicy.mjs';
-import {assertRegisteredConstraintDomain,registeredResidualProfile} from './registeredConstraintPolicy.mjs';
+import {assertRegisteredConstraintDomain,registeredResidualProfile,registeredDomainFailureCause} from './registeredConstraintPolicy.mjs';
 import {ordinarySketchEntityDomainValid} from '../constr/ordinaryEntityDomain.mjs';
 
 const LIMIT = 10000;
@@ -148,7 +148,7 @@ export function validateConstraintGeometry(c: any) {
   if(directionalRelation(c)&&!directionalRelationValid(c))fail('DIRECTION_DOMAIN','A relation direction is degenerate or inconsistent.',admissionCause('invalid-domain'));
   if(c.schema.id==='RigidGroup'&&!rigidGroupValid(c.objects[0],c.objects.slice(1)))fail('RIGID_DOMAIN','A rigid group has inconsistent transformed geometry.',admissionCause('invalid-domain'));
   const polynomials=[];c.collectPolynomials(polynomials);
-  try {assertRegisteredConstraintDomain(c);} catch(error) {throw withAdmissionCause(error,admissionCause('invalid-domain'));}
+  try {assertRegisteredConstraintDomain(c);} catch(error) {throw withAdmissionCause(error,registeredDomainFailureCause(error));}
   const profile=registeredResidualProfile(c,polynomials.map(p=>p.value()));
   if(!profile.residuals.every((value,i)=>Number.isFinite(value)&&Math.abs(value)<=profile.tolerances[i]))fail('RESIDUAL','A constraint residual exceeds its numerical tolerance.',admissionCause('original-residual-failure'));
   return profile;
