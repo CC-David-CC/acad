@@ -1,5 +1,19 @@
 # One-part Native source consolidation
 
+## Current root checkpoint: early-failure publication repair still open
+
+All Native source below remains UNCOMPILED and UNQUALIFIED. Follow-up independent
+source review of04ad4cd found CONICAL-EARLY-FAILURE-PUBLICATION-01: full capture
+flags can bypass already-known name/frame or census/lookup post-error fences
+when admission/snapshot fails early. Root confirmed the source and authorized a
+separate staged-capture repair on a new issue branch. Ordinary success-path
+source fences do not close this related failure-path gap. No callback mutation
+probe, public incident or runtime result is claimed. Old qualified binaries and
+current Coree521860/Host843aee31a private fixture do not contain these new ports.
+The later repair, independent review, actual compilation/pair/graph registration
+and full shared workflow remain separate outstanding gates.
+
+
 SOURCE ONLY: no compiler, tests/probes, Native calls, browser or qualification.
 This follow-up preserves the frozen conicalc181 and historical qualified pairs.
 No conversion, automatic fallback, new default or per-feature pair substitution.

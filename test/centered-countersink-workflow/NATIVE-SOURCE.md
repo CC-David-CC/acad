@@ -1,5 +1,19 @@
 # Conical Native foundation — exact source contract
 
+## Current root checkpoint: early-failure publication repair still open
+
+All Native source below remains UNCOMPILED and UNQUALIFIED. Follow-up independent
+source review of04ad4cd found CONICAL-EARLY-FAILURE-PUBLICATION-01: full capture
+flags can bypass already-known name/frame or census/lookup post-error fences
+when admission/snapshot fails early. Root confirmed the source and authorized a
+separate staged-capture repair on a new issue branch. Ordinary success-path
+source fences do not close this related failure-path gap. No callback mutation
+probe, public incident or runtime result is claimed. Old qualified binaries and
+current Coree521860/Host843aee31a private fixture do not contain these new ports.
+The later repair, independent review, actual compilation/pair/graph registration
+and full shared workflow remain separate outstanding gates.
+
+
 SOURCE ONLY, no compilation, tests, Native/browser calls or qualification.
 This is the bounded dependency approved after `c2c8b21a`, not a countersink
 feature implementation, public raw topology API or a replacement cohort.
