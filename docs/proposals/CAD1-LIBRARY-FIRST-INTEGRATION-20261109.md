@@ -96,17 +96,21 @@ and [QName review](../reviews/LIB3MF-METADATA-QNAME-REVIEW-20261109.md).
 L3 remains OPEN: a general analytic-surface/coverage certificate must replace the
 invalid exact-strip assumption without welding, skipped triangles or new budgets.
 Existing production runtime is unchanged. In parallel Root approved the small
-finite-curve binding source packet8f1a17a; a Native adapter is being implemented,
-not yet mounted, executed, actionable or qualified.
+finite-curve binding source packet8f1a17a. Native header eea7128b and Core
+protocol56eeb1c are frozen on both LANs, not mounted, executed, actionable or
+qualified. Exact cylinder proof/source reviews are complete. Planar adapter
+420ea4e built under90308; actual build custody2e95108 and bounded invoker
+fe502d8 are retained. Indexed patch-role composition and complete corrected
+artifact execution still block L3; no tolerance or geometry changes were made.
 
 ## Work queue and dependencies
 
 | ID | Work package | Depends on | Completion evidence | State |
 |---|---|---|---|---|
 | L0 | Freeze actual inputs, failures and candidate roles | Existing whole output | Immutable original manifests/reports; this plan | DONE for current extent corpus |
-| L1 | Inventory OCCT binding gaps and drawing algorithms | L0 | Capability-to-API/source matrix; reuse/adapter/custom decision for each missing competency | SOURCE INVENTORY DONE41f7189; bindings unimplemented |
+| L1 | Inventory OCCT binding gaps and drawing algorithms | L0 | Capability-to-API/source matrix; reuse/adapter/custom decision for each missing competency | SOURCE INVENTORY DONE41f7189; header/protocol frozen, protected mounting pending |
 | L2 | Pin and assess native validators on R730 | L0 | One complete six-mesh comparison report, raw-data custody and measured costs | FIRST CORPUS PASS0523b3f; broader scene/material coverage and browser fit pending |
-| L3 | Close general finite-surface accuracy proof | L2 plus source-intent contract | Full-surface/coverage proof with explicit error terms; original failure retained | OPEN, blocking extent qualification |
+| L3 | Close general finite-surface accuracy proof | L2 plus source-intent contract | Full-surface/coverage proof with explicit error terms; original failure retained | SOURCE PROOF/BUILD READY; complete composed artifact execution pending, blocking extent qualification |
 | L4 | Integrate selected general operations and drawing pieces | L1, existing source packets | Small Worker adapters and shared commands with precise ownership/failures | QUEUED; existing C11 work continues |
 | L5 | Qualify browser cost/lifecycle for selected shipped pieces | L2/L4 | Initialization, peak memory, responsiveness, cancellation, retirement and isolation evidence | QUEUED |
 | L6 | Composed functional qualification and final beta | L3/L4/L5 and remaining Gate 1 competencies | Whole workflows, independent artifacts, actual SVG reviews, handoff and both LAN copies | OPEN |

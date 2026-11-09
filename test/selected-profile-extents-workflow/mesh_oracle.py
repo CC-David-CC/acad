@@ -13,6 +13,7 @@ from collections import Counter,defaultdict
 from fractions import Fraction as Q
 sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'library-validation'))
 from cylindrical_surface_certificate import certify_full_cylinder
+from planar_patch_certificate import certify_planar_patches
 INC=1e-6
 DEFL=.01
 def need(v,m):
@@ -44,7 +45,7 @@ def radial_min(ps,c):
  for a,b in zip(points,points[1:]+points[:1]):
   v=(b[0]-a[0],b[1]-a[1]);den=v[0]**2+v[1]**2;t=max(0,min(1,-(a[0]*v[0]+a[1]*v[1])/den)) if den else 0;d.append(math.hypot(a[0]+t*v[0],a[1]+t*v[1]))
  return min(d)
-def inspect_mesh(vertices,triangles,e,frame,lo,hi,truth_volume):
+def inspect_mesh(vertices,triangles,e,frame,lo,hi,truth_volume,planar_config):
  need(0<len(vertices)<=150000 and 0<len(triangles)<=100000,'qualified per-artifact count limits');need(all(len(p)==3 and all(math.isfinite(v) for v in p) for p in vertices),'finite actual vertices');need(set(frame)=={'origin','x','y','z'},'actual original frame')
  # All frozen placements are exact orthonormal signed permutations. Refuse a
  # different readback contract rather than use an ill-conditioned inverse.
@@ -120,6 +121,8 @@ def inspect_mesh(vertices,triangles,e,frame,lo,hi,truth_volume):
  for key,value in expected.items():need(key in actual and abs(actual[key]-value)<=roundoff,'complete nonoverlapping planar patch area '+key)
  for key,rows in patches.items():disjoint_triangles(rows,budget)
  wall_certificates={c['id']:certify_full_cylinder(local_exact,triangles,wall_faces[c['id']],c['c'],c['r'],c['low'],c['high'],c['sign'],DEFL,INC) for c in cylinders}
+ planar_certificates=certify_planar_patches(vertices,triangles,labels,local_exact,frame,e,cylinders,lo,hi,planar_config)
+ need(planar_certificates['status']=='PASS' and planar_certificates['complete'] is True,'every expected indexed planar patch has complete current exact coverage')
  volume=math.fsum(volumes);allowance=sum(math.pi*(2*c['r']*DEFL+DEFL**2)*(c['high']-c['low']) for c in cylinders)+max(1e-5,abs(truth_volume)*1e-12);need(volume>0 and abs(volume-truth_volume)<=allowance,'positive volume within independent declared tessellation budget');need(set(actual)==set(expected)|{'wall-'+c['id'] for c in cylinders},'no missing or unclassified patches');euler=len(vertices)-len(edge)+len(triangles);expectedEuler=2-2*(int(bool(inner))+sum(h['depth'] is None for h in e.get('holes',[])));need(euler==expectedEuler,'actual independent shell genus matches authored through-void topology')
- return {'quality':'independent-indexed-manifold/finite-patch/exact-cylinder-coverage','vertices':len(vertices),'triangles':len(triangles),'euler':len(vertices)-len(edge)+len(triangles),'signedVolume':volume,'volumeAllowance':allowance,'deflectionMm':DEFL,'planeIncidenceMm':INC,'patchAreas':actual,'circularRims':rims,'cylindricalCertificates':wall_certificates,'exactCoplanarPairTests':budget[0]}
+ return {'quality':'independent-indexed-manifold/finite-patch/exact-cylinder-coverage','vertices':len(vertices),'triangles':len(triangles),'euler':len(vertices)-len(edge)+len(triangles),'signedVolume':volume,'volumeAllowance':allowance,'deflectionMm':DEFL,'planeIncidenceMm':INC,'patchAreas':actual,'circularRims':rims,'cylindricalCertificates':wall_certificates,'planarCertificates':planar_certificates,'exactCoplanarPairTests':budget[0]}
 def one(xs,label):need(len(xs)==1,'one '+label);return xs[0]

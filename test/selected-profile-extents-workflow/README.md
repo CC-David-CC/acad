@@ -50,14 +50,14 @@ The separate actual STEP reader is a **same-OCCT** SDK build, not an independent
 source /EXACT_REVIEWED_EMSDK/emsdk_env.sh
 bash test/selected-profile-extents-workflow/build-reader.sh EXACT_NATIVE_SOURCE EXACT_SDK_INCLUDE EXACT_23_ARCHIVE_DIRECTORY NEW_READER_OUTPUT
 /tmp/codi-files-move-node/bin/node test/selected-profile-extents-workflow/run-reader.mjs "$CODI_EVIDENCE" NEW_READER_OUTPUT/reader.js /tmp/codi-acad-profile-extents-NEW/first-reader.json
-python3 test/selected-profile-extents-workflow/check.py "$CODI_EVIDENCE" /tmp/codi-acad-profile-extents-NEW/first-reader.json /tmp/codi-acad-profile-extents-NEW/first-oracle.json
+python3 test/selected-profile-extents-workflow/check.py "$CODI_EVIDENCE" /tmp/codi-acad-profile-extents-NEW/first-reader.json /tmp/codi-acad-profile-extents-NEW/first-oracle.json /path/to/reviewed-mesh-evidence.json /path/to/reviewed-planar-build.json
 ```
 
 The runner uses `--no-experimental-fetch` for the reviewed Emscripten2.0.30 Node-loading convention. It only consumes actual whole-exported bytes and actual recorded full vectors, freezes the reader JS/WASM/manifest before/after, and preserves its FIRST result. No artifact proof runs after a failed whole. Canonical evidence may move as a complete directory; the checker uses relative artifact/negative paths. If an old source worktree is retired, `CODI_ORACLE_CORE_GIT` and `CODI_ORACLE_DESKTOP_GIT` may name retained repositories containing the exact recorded commits/blob objects; current working-file contents never substitute for those objects.
 
-`check.py` independently verifies exact raw variants/active keys/names and all source IDs; actual11-row rectangle equations and independent corners; Circle radii/annular region; original frames and cap offsets; Decimal90 volumes and Fraction represented-coordinate material cells; observed Native/runtime/request bindings and separate inherited bounds/volume budgets; all refusals/travel/allocation highwater; exact saved raw sources/history/expressions/counters/material/drawing/presentation and fresh replay; negative-only exact-diff custody; actual ZIP/XML units/resource/material/output/source associations; indexed closed topology/vertex links, full nonoverlapping planar patches, straight-generator circular strips and complete rim/chord coverage at .01mm; source/cap SVG values; and actual STEP per-surface/area/orientation/material observations. Neither a Native `valid` flag nor a mesh volume alone supplies the geometry proof. No source flag is taken as truth.
+`check.py` independently verifies exact raw variants/active keys/names and all source IDs; actual11-row rectangle equations and independent corners; Circle radii/annular region; original frames and cap offsets; Decimal90 volumes and Fraction represented-coordinate material cells; observed Native/runtime/request bindings and separate inherited bounds/volume budgets; all refusals/travel/allocation highwater; exact saved raw sources/history/expressions/counters/material/drawing/presentation and fresh replay; negative-only exact-diff custody; actual ZIP/XML units/resource/material/output/source associations; indexed closed topology/vertex links, full nonoverlapping planar patches, exact full-cylinder radial-projection certificates and complete rim/chord coverage at .01mm; source/cap SVG values; and actual STEP per-surface/area/orientation/material observations. Neither a Native `valid` flag nor a mesh volume alone supplies the geometry proof. No source flag is taken as truth.
 
-The independent mesh audit deliberately requires the ordinary straight generator strips actually expected from these finite prismatic surfaces. If a genuine different triangulation falls outside that audit, preserve the first refusal and report the evidence limitation; do not silently relax it or call the artifact invalid. Fraction pair work is bounded at2million and reports an independent-oracle resource limit. Native/source/derived budgets remain distinct.50pm source-coordinate checks do not establish50pm BRep, mesh, material physics or manufacturing accuracy.
+The historical R4 audit required exact straight-generator strips; its preserved FIRST refusal exposed an invalid two-XY assumption. The corrected audit instead requires complete exact cylindrical coverage and separately bound general and planar CGAL evidence, with original coordinates and budgets unchanged. Any unsupported certificate domain remains an evidence limitation, not automatic proof of invalid CAD. Fraction pair work is bounded at2million and reports an independent-oracle resource limit. Native/source/derived budgets remain distinct.50pm source-coordinate checks do not establish50pm BRep, mesh, material physics or manufacturing accuracy.
 
 Counterbore/countersink retain their separate old-positive-profile-only policy; neither is claimed here. No arrangement V4, arbitrary curved regions, source topology repair, generic automatic parent/region migration, human UI, secondary engine or multi-material interface qualification is implied. Old positive blind and counter/C11 source/whole regressions remain root composition obligations in addition to this new family.
 
@@ -105,3 +105,28 @@ source snapshots remain immutable. This tooling correction does not require
 repeating an already passing browser workflow. Use separate new reader reports
 and retain the first prelaunch failure; first Python artifact proof follows
 successful actual STEP reads only.
+
+## Corrected post-whole artifact verification
+
+The original R4 browser whole retains its original eighteen source snapshots.
+New verifier helpers must have separate before/after Git custody; they were not
+retroactively used in that run. A new browser whole captures twenty-three
+sources, including all four general evidence/surface helpers.
+
+The verifier now requires explicit, bounded, duplicate-key-rejecting JSON
+configuration files. Mesh anchors use the nine fields in
+`../library-validation/CGAL-EVIDENCE-CONTRACT.md`; the assessed input manifest
+commit is independent of the unchanged compiled checker source commit.
+
+The planar file has exactly `build_custody_commit`, `build_custody_path`,
+`executable`, `cpp_source`, `output_dir`. The first two pin the actual completed
+Git build receipt. That receipt supplies the expected executable hash and
+compiled source identity; they are not selected from native success reports.
+The final three paths are absolute, and output_dir must be new with an existing
+owned parent. Every artifact and planar patch receives its own new subdirectory.
+The native invoker rehashes actual executable and source bytes before and after.
+
+Planar polygon coverage, cylindrical projection, global mesh validity, authored
+source association, approximation budgets, STEP and SVG checks remain separate
+mandatory obligations. No exact projected-set PASS alone certifies a CAD part.
+See `../library-validation/PLANAR-INVOKER.md` for process/resource ownership.

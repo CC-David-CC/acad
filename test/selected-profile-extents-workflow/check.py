@@ -28,7 +28,7 @@ R4_HOST='be24fbc232c967912f529053d34a9d407b369a39'
 EVIDENCE_COMMIT='0523b3f6dff5d28d568490bba06fc4c55a148896'
 OBSERVER_COMMIT='32700df4e38e34269a0a9892e00f0220f5daf0eb'
 BUILD_SOURCE_COMMIT='829962e9ebcbe11be8b240008ba6be6340b5483f'
-VALIDATION_SOURCES=('test/library-validation/cgal_evidence.py','test/library-validation/cylindrical_surface_certificate.py')
+VALIDATION_SOURCES=('test/library-validation/cgal_evidence.py','test/library-validation/cylindrical_surface_certificate.py','test/library-validation/planar_coverage.py','test/library-validation/planar_patch_certificate.py')
 sha=lambda b:hashlib.sha256(b).hexdigest()
 def need(v,m):
  if not v:raise ValueError(m)
@@ -40,6 +40,24 @@ def reviewed_json(path):
   return result
  def constant(value):raise ValueError('nonfinite reviewed configuration '+value)
  return json.loads(path.read_text(encoding='utf-8'),object_pairs_hook=pairs,parse_constant=constant)
+def load_planar_config(configuration):
+ keys={'build_custody_commit','build_custody_path','executable','cpp_source','output_dir'}
+ need(type(configuration) is dict and set(configuration)==keys and all(type(v) is str for v in configuration.values()),'closed independently reviewed planar configuration')
+ repository=os.environ.get('CODI_ORACLE_CORE_GIT',str(Path(__file__).resolve().parents[2]))
+ def blob(commit,path):
+  need(len(commit)==40 and all(c in '0123456789abcdef' for c in commit),'exact reviewed planar Git commit')
+  need(path and not path.startswith('/') and all(p not in ('','..','.') for p in path.split('/')),'exact reviewed planar Git path')
+  return subprocess.run(['git','-C',repository,'show',commit+':'+path],check=True,capture_output=True).stdout
+ commit=configuration['build_custody_commit'];path=configuration['build_custody_path'];raw=blob(commit,path);need(len(raw)<=65536,'bounded planar build custody');record=json.loads(raw)
+ need(record['role']=='completed-planar-build-custody' and record['build']['exitCode']==0 and record['build']['target']=='codi-cgal-planar-coverage','actual completed planar build')
+ source=record['sourceCommit'];cpp='test/library-validation/cgal/planar_coverage.cpp'
+ for name,item in record['sources'].items():need(sha(blob(source,name))==item['sha256'],'planar compiled Git source '+name)
+ prefix=str(Path(path).parent)
+ for name,item in record['artifacts'].items():
+  if name.startswith('planar-source-r1/') or name=='cgal-planar-build-first/codi-cgal-planar-coverage':continue
+  content=blob(commit,prefix+'/'+name);need(len(content)==item['bytes'] and sha(content)==item['sha256'],'retained actual planar build artifact '+name)
+ output=Path(configuration['output_dir']);need(output.is_absolute(),'absolute owned planar output root');output.mkdir(mode=0o700,parents=False,exist_ok=False)
+ return {'executable':configuration['executable'],'expected_executable_sha256':record['artifacts']['cgal-planar-build-first/codi-cgal-planar-coverage']['sha256'],'cpp_source':configuration['cpp_source'],'build_source':{'commit':source,'cppRelativePath':cpp,'cppSha256':record['sources'][cpp]['sha256'],'cgalVersion':'5.6'},'output_dir':str(output)}
 def one(xs,m):need(len(xs)==1,'one '+m);return xs[0]
 def near(a,b,t=FINE):need(type(a) in (int,float) and math.isfinite(a) and abs(a-float(b))<=t,f'{a} != {b} within declared {t}mm')
 def interval(e):
@@ -195,7 +213,7 @@ def refusal(row):
   return s
  need(a['capture']['journal']['revision'][:-len(a['host']['revision'])]==b['capture']['journal']['revision'][:-len(b['host']['revision'])] and accepted(a)==accepted(b),'all accepted state exact, only actual documented invalidated token family')
 
-def mesh(raw,e,b,build,encoding,truth,mesh_evidence,artifact_path):
+def mesh(raw,e,b,build,encoding,truth,mesh_evidence,artifact_path,planar_config):
  ns={'m':'http://schemas.microsoft.com/3dmanufacturing/core/2015/02'}
  with zipfile.ZipFile(io.BytesIO(raw)) as z:need(z.testzip() is None,'independent3MF CRC');root=ET.fromstring(z.read('3D/3dmodel.model'))
  need(root.attrib['unit']=='millimeter','real3MF units');metadata=lambda key:one(root.findall('m:metadata[@name="'+key+'"]',ns),'actual metadata '+key).text;need(metadata('codi:SourceRevision')==encoding,'XML actual accepted encoding revision');provenance=json.loads(metadata('codi:ManufacturingBindings'));need(provenance['revision']==encoding,'same provenance source');part=one(provenance['parts'],'actual part');region=one(part['regions'],'actual region');target=b.get('current') or b['profile'];need(part['id']=='part' and region['id']=='main' and region['bodyId']==target['outputId'] and region['featureId']==target['featureId'] and region['engineRevision']==build and region['materialId']=='pla' and region['appearanceId']=='blue','full actual authored provenance/material/output association')
@@ -205,11 +223,12 @@ def mesh(raw,e,b,build,encoding,truth,mesh_evidence,artifact_path):
   if m is not None:leaves.append((identity,obj,m));return
   components=obj.find('m:components',ns);need(components is not None,'actual mesh or component')
   for c in components:need('transform' not in c.attrib or list(map(float,c.attrib['transform'].split()))==[1,0,0,0,1,0,0,0,1,0,0,0],'no hidden assembly placement');visit(c.attrib['objectid'])
- buildItems=list(root.find('m:build',ns));item=one(buildItems,'one printable object');need('transform' not in item.attrib or list(map(float,item.attrib['transform'].split()))==[1,0,0,0,1,0,0,0,1,0,0,0],'actual build placement');visit(item.attrib['objectid']);identity,obj,m=one(leaves,'actual printed mesh');need(identity==str(region['meshResourceId']) and obj.attrib['pid']==str(region['materialResourceId']) and obj.attrib['pindex']==str(region['materialIndex']),'writer-derived actual resource associations');material=resources.find('m:basematerials[@id="'+str(region['materialResourceId'])+'"]',ns);need(material is not None and 0<=region['materialIndex']<len(material) and material[region['materialIndex']].attrib['displaycolor'].upper()=='#3366FF','actual Blue material');need(item.attrib['objectid']==str(part['buildResourceId']) and str(region['componentResourceId']) in objects and one(list(objects[str(region['componentResourceId'])].find('m:components',ns)),'region component').attrib['objectid']==identity,'part/region resource reciprocity');v=[[float(x.attrib[k]) for k in ('x','y','z')] for x in m.find('m:vertices',ns)];t=[[int(x.attrib[k]) for k in ('v1','v2','v3')] for x in m.find('m:triangles',ns)];need(32+24*len(v)+12*len(t)<=8388608,'actual controlled binary budget');bound=mesh_evidence.bind_mesh(artifact_path,int(identity),v,t);result=inspect_mesh(v,t,e,truth['frame'],truth['lo'],truth['hi'],float(truth['volume']));result['generalMeshEvidence']=dict(bound);return result
+ buildItems=list(root.find('m:build',ns));item=one(buildItems,'one printable object');need('transform' not in item.attrib or list(map(float,item.attrib['transform'].split()))==[1,0,0,0,1,0,0,0,1,0,0,0],'actual build placement');visit(item.attrib['objectid']);identity,obj,m=one(leaves,'actual printed mesh');need(identity==str(region['meshResourceId']) and obj.attrib['pid']==str(region['materialResourceId']) and obj.attrib['pindex']==str(region['materialIndex']),'writer-derived actual resource associations');material=resources.find('m:basematerials[@id="'+str(region['materialResourceId'])+'"]',ns);need(material is not None and 0<=region['materialIndex']<len(material) and material[region['materialIndex']].attrib['displaycolor'].upper()=='#3366FF','actual Blue material');need(item.attrib['objectid']==str(part['buildResourceId']) and str(region['componentResourceId']) in objects and one(list(objects[str(region['componentResourceId'])].find('m:components',ns)),'region component').attrib['objectid']==identity,'part/region resource reciprocity');v=[[float(x.attrib[k]) for k in ('x','y','z')] for x in m.find('m:vertices',ns)];t=[[int(x.attrib[k]) for k in ('v1','v2','v3')] for x in m.find('m:triangles',ns)];need(32+24*len(v)+12*len(t)<=8388608,'actual controlled binary budget');bound=mesh_evidence.bind_mesh(artifact_path,int(identity),v,t);actual_planar={**planar_config,'output_dir':str(Path(planar_config['output_dir'])/sha(str(artifact_path).encode()))};result=inspect_mesh(v,t,e,truth['frame'],truth['lo'],truth['hi'],float(truth['volume']),actual_planar);result['generalMeshEvidence']=dict(bound);return result
 
 svg=inspect_extent_svg
 
-def check(directory,readerFile,evidenceAnchors=None):
+def check(directory,readerFile,evidenceAnchors=None,planarAnchors=None):
+ need(planarAnchors is not None,'reviewed planar build/output configuration required');planar_config=load_planar_config(planarAnchors)
  directory=Path(directory);r=json.loads((directory/'receipt.json').read_text());need(r['status']=='PASS' and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'] and not r['sourceSeeds'] and not r['fakeReplies'],'whole terminal complete public/source/context custody');need(r['sourcePins']==r['sourcePinsAfter'] and r['engineRevision']==BUILD,'immutable source and explicit approved cohort')
  # R4 captured eighteen ORIGINAL producer/acceptance sources. Corrected
  # post-whole verifier sources have separate before/after Git custody; they
@@ -277,7 +296,7 @@ def check(directory,readerFile,evidenceAnchors=None):
  reader=json.loads(Path(readerFile).read_text());need(reader['status']=='PASS' and reader['wholeReceiptSHA256']==sha((directory/'receipt.json').read_bytes()) and reader['readerFiles']==reader['readerFilesAfter'],'FIRST separate-reader whole/artifact/custody');cpp=one([x for x in r['sourceSnapshots'] if x['relative'].endswith('/read-step.cpp')],'reader source');need(reader['readerSourceSHA256']==cpp['sha256']==reader['sourceManifest']['readerSourceSha256'],'compiled reader binds frozen source');need(len(reader['sourceManifest']['libraries'])==23,'reviewed same-OCCT23-archive SDK roster');artifacts=[]
  for item in r['artifacts']:
   raw=(directory/item['savedFile']).read_bytes();need(len(raw)==item['bytes'] and sha(raw)==item['sha256'],'actual exported artifact bytes');export=one([x for x in r['exportSets'] if x['label']==item['label'] and x['case']==item['case']],'actual export captured state');need(export['before']==export['after'],'all export state exact');before=export['before'];candidate=[(o,t) for o,t in zip(r['observations'],observations) if o['case']==item['case'] and o['expected']==item['expected'] and o['before']['capture']['native']==before['capture']['native']];need(candidate,'actual complete vector/source bound exported state');o,t=candidate[-1];kind=item['format']
-  if kind=='3mf':need(item['issued']['revision']==before['host']['revision'],'actual public export doc revision');metadata=before['manufacturing']['metadata'];need(metadata['revision'].startswith('sha256-'),'actual canonical encoding revision');result=mesh(raw,item['expected'],item['binding'],BUILD,metadata['revision'][7:],t,mesh_evidence,directory/item['savedFile'])
+  if kind=='3mf':need(item['issued']['revision']==before['host']['revision'],'actual public export doc revision');metadata=before['manufacturing']['metadata'];need(metadata['revision'].startswith('sha256-'),'actual canonical encoding revision');result=mesh(raw,item['expected'],item['binding'],BUILD,metadata['revision'][7:],t,mesh_evidence,directory/item['savedFile'],planar_config)
   elif kind=='step':
    actual=one([x for x in reader['artifacts'] if x['file']==item['savedFile'] and x['artifactSHA256']==item['sha256']],'actual STEP reader record');need(actual['exitCode']==0 and actual['observation']['readerSourceSha256']==cpp['sha256'],'actual matching reader');need(item['issued']['revision']==before['host']['revision'] and item['issued']['geometryRevision']==before['capture']['solids']['revision'],'real issued STEP currentness');result=inspect_step(actual['observation'],item['expected'],t['frame'],t['lo'],t['hi'],float(t['volume']),t['bounds'],t['points'],t['classes'])
   elif kind=='svg':
@@ -287,11 +306,11 @@ def check(directory,readerFile,evidenceAnchors=None):
   artifacts.append({'file':item['savedFile'],'format':kind,'result':result})
  need(Counter(x['format'] for x in artifacts)=={'3mf':6,'step':6,'svg':2},'complete actual artifact roster, no missing consumers');return {'status':'PASS','scope':'finite C06 authored extents/source/caps/consumers/persistence/material/artifacts; no universal BRep/physics/UI qualification','sourceCoordinateBudgetMm':FINE,'sourceCoordinateBudgetPm':50,'observations':len(observations),'refusals':len(r['refusals']),'archives':archives,'artifacts':artifacts,'stepLimitation':'separate SAME-OCCT reader, not external kernel'}
 if __name__=='__main__':
- need(len(sys.argv) in (4,5),'WHOLE FIRST_READER_REPORT NEW_ORACLE_REPORT [REVIEWED_MESH_EVIDENCE_ANCHORS_JSON]');output=Path(sys.argv[3]);need(not output.exists(),'preserve FIRST oracle report')
+ need(len(sys.argv)==6,'WHOLE FIRST_READER_REPORT NEW_ORACLE_REPORT REVIEWED_MESH_EVIDENCE_ANCHORS_JSON REVIEWED_PLANAR_BUILD_JSON');output=Path(sys.argv[3]);need(not output.exists(),'preserve FIRST oracle report')
  try:
   anchors=None
-  if len(sys.argv)==5:
+  if len(sys.argv)>=5:
    anchors=reviewed_json(sys.argv[4])
-  result=check(sys.argv[1],sys.argv[2],anchors)
+  result=check(sys.argv[1],sys.argv[2],anchors,reviewed_json(sys.argv[5]))
  except Exception as e:result={'status':'FAIL','error':str(e)};output.write_text(json.dumps(result,indent=2)+'\n');raise
  output.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
