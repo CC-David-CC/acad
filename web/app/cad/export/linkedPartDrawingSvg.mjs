@@ -22,7 +22,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
     if(row.viewId!==d.views[i].viewId||!['available','unavailable'].includes(row.status))fail('Drawing view order or identity changed.');
     if(row.status==='available'?row.reason!==null:typeof row.reason!=='string'||!row.reason||row.reason.length>256||row.metadata!==null||row.values!==null||row.tags!==null)fail('Invalid drawing view availability.');
   }
-  const scale=d.sheet.scale.numerator/d.sheet.scale.denominator,paths=[],annotations=[];
+  const scale=d.sheet.scale.numerator/d.sheet.scale.denominator,paths=[],annotations=[],fallbackWarnings=[];
   let segments=0,status=read.status==='available'&&o.status==='available'?'available':'unresolved';
   const paper=(view,p)=>[view.paperOrigin[0]+p[0]*scale,view.paperOrigin[1]-p[1]*scale];
   const text=(p,value,attributes='')=>`<text x="${num(p[0])}" y="${num(p[1])}" ${attributes}>${escape(value)}</text>`;
@@ -64,7 +64,14 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
   for(let i=0;i<(d.annotations?.length||0);i++){
     const a=d.annotations[i],row=o.annotations[i],view=d.views.find(v=>v.viewId===a.viewId),frame=o.viewFrames.find(v=>v.viewId===a.viewId)?.frame;
     const tag=`data-annotation-id="${escape(a.annotationId)}" data-annotation-kind="${a.kind}"`;
-    if(row.status!=='available'||!frame){status='unresolved';const p=a.kind==='bore-center'?view.paperOrigin:a.kind==='hole-callout'?a.label:a.labels[0];annotations.push(text(p,'UNRESOLVED: '+a.annotationId+' ('+row.reason+')',tag+' fill="#a00"'));continue;}
+    if(row.status!=='available'||!frame){
+      status='unresolved';const message='UNRESOLVED: '+a.annotationId+' ('+row.reason+')';
+      // Center marks/axes have no authored paper label. Do not stack their
+      // errors at one view origin; this bounded legend is derived SVG only.
+      if(a.kind==='bore-center')fallbackWarnings.push({tag,viewId:a.viewId,message});
+      else annotations.push(text(a.kind==='hole-callout'?a.label:a.labels[0],message,tag+' fill="#a00"'));
+      continue;
+    }
     const project=p=>{const v=p.map((n,k)=>n-frame.origin[k]);return paper(view,[v.reduce((n,x,k)=>n+x*frame.u[k],0),v.reduce((n,x,k)=>n+x*frame.v[k],0)]);};
     const path=(points,attributes='')=>paths.push(`<path ${tag} d="M${points.map(p=>p.map(num).join(',')).join(' L')}" stroke="#357" ${attributes}/>`);
     const f=row.facts;
@@ -77,6 +84,21 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
     }else{
       const values=a.kind==='ordinate'?f.coordinates:f.values;
       for(let j=0;j<4;j++){const ends=f.anchors[j].map(project);path(ends);path([ends[1],a.labels[j]],'stroke-dasharray="1 1"');annotations.push(text(a.labels[j],(a.kind==='ordinate'?(values[j]>=0?'+':''):'Δ')+values[j].toFixed(3)+' mm',tag+` data-member-index="${j}" fill="#124"`));}
+    }
+  }
+  if(fallbackWarnings.length){
+    // Physical paper units: 3mm glyph height, fixed 1.8mm monospace advance,
+    // 4mm baselines, 8mm margins and a 10mm footer exclusion. Wrapping never
+    // changes or truncates actual identity/reason membership. Tiny sheets
+    // refuse this presentation instead of emitting clipped/stacked warnings.
+    const margin=8,advance=1.8,lineHeight=4,capacity=Math.min(120,Math.floor((d.sheet.width-2*margin)/advance));
+    if(capacity<1)throw Object.assign(Error('The sheet has no bounded warning legend width.'),{code:'RESOURCE_LIMIT'});
+    const rows=fallbackWarnings.map(w=>{const chars=Array.from(w.message),lines=[];for(let at=0;at<chars.length;at+=capacity)lines.push(chars.slice(at,at+capacity).join(''));return{...w,lines};});
+    const count=rows.reduce((n,w)=>n+w.lines.length,0),first=d.sheet.height-10-(count-1)*lineHeight;
+    if(count>256||first<16)throw Object.assign(Error('The sheet has no legible warning legend area.'),{code:'RESOURCE_LIMIT'});
+    let line=0;
+    for(const warning of rows){const y=first+line*lineHeight,spans=warning.lines.map(value=>{const at=first+line++*lineHeight;return`<tspan x="${margin}" y="${num(at)}" textLength="${num(Array.from(value).length*advance)}" lengthAdjust="spacingAndGlyphs">${escape(value)}</tspan>`;}).join('');
+      annotations.push(`<text x="${margin}" y="${num(y)}" ${warning.tag} data-warning-layout="sheet-legend-v1" data-warning-view-id="${escape(warning.viewId)}" font-family="monospace" font-size="3" fill="#a00" aria-label="${escape(warning.message)}">${spans}</text>`);
     }
   }
   const title=text([8,8],d.title||d.drawingId),notice=text([8,d.sheet.height-5],`Reference drawing · ${status} · scale ${d.sheet.scale.numerator}:${d.sheet.scale.denominator}`);
