@@ -28,3 +28,20 @@ codec grants no source authority or finite-contact certificate. No dummy shape,
 public positive flag, new registry/framework or automatic backend fallback.
 Actual growth/cleanup/Native behavior still needs later complete qualification;
 this decision does not invoke or emulate any of those transitions.
+
+## Packet2a source review/composition
+
+Root reviewed the complete bf444ec adapter/declarations and its preceding
+099aba4 boundary. No confirmed blocker was found. It captures actual Module /
+asm / memory / method / allocator / private owner identities, same-memory growth,
+original LE input bits, counted exclusive exchange custody and once-only scratch
+cleanup before strict decoding. Known-looking packets after throws or uncertain
+cleanup cannot authorize a result. Private WeakMap classification distinguishes
+attempted invocation and terminal revocation. Only the frozen protocol is imported.
+
+These two NEW leaves are composed as unmounted SOURCE only. No existing module,
+closed graph, build/cohort/default/capability/controller or C11 producer82866bf
+changes through this composition. No import/parser/test/TSC/Native/module/browser
+execution of the adapter occurred. Next remains actual portable-loader review,
+new-pair/ABI/graph admission, protected source-query owner, semantic extractions
+and finite-event certification; a valid raw response is not a source certificate.
