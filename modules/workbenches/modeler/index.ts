@@ -1,3 +1,4 @@
+import {createWorkerProfileExtentOperation} from './features/workerProfileExtent/workerProfileExtent.operation';
 import {createWorkerBlindHoleOperation} from './features/workerBlindHole/workerBlindHole.operation';
 import {createWorkerShellOperation} from './features/workerShell/workerShell.operation';
 import {createWorkerSelectedLoftOperation} from './features/workerSelectedLoft/workerSelectedLoft.operation';
@@ -74,6 +75,7 @@ export const ModelerWorkspace: WorkbenchConfig = {
     ExtrudeOperation,
     WorkerRectangleExtrudeOperation,
     createWorkerSelectedProfileOperation(createCatalogMount,validateEngineMount),
+    createWorkerProfileExtentOperation(createCatalogMount,validateEngineMount),
     createWorkerSelectedRevolveOperation({evaluate:input=>evaluateWorkerSolid({...input,createMount:createCatalogMount,validateMount:validateEngineMount}),buildPolicy:{requireBuild:requireAvailableRevolveBuild,historyBuild:genericHistoryBuild}}),
     createWorkerSelectedLoftOperation({evaluate:input=>evaluateWorkerSolid({...input,createMount:createCatalogMount,validateMount:validateEngineMount}),buildPolicy:{requireBuild:requireAvailableLoftBuild,historyBuild:genericHistoryBuild}}),
     createWorkerSelectedSweepOperation({evaluate:input=>evaluateWorkerSolid({...input,createMount:createCatalogMount,validateMount:validateEngineMount}),buildPolicy:{requireBuild:requireAvailableSweepBuild,historyBuild:genericHistoryBuild}}),

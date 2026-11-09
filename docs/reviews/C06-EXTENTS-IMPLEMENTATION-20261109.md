@@ -2,7 +2,7 @@
 
 Base: `24ad11cbf24b771ff54da2a0df78e84c38a6b601`. Approved design: `C06-SELECTED-PROFILE-EXTENTS-CONTRACT-20261109.md` at `e22dd693e95a24264123930b54df0685fa3d42ca`. Source-only work on the isolated R730 branch `feature/selected-profile-extents-20261109`; no tests, probes, TSC, build, Native or browser calls. Root owns compilation and full application qualification.
 
-## Current source checkpoint
+## Historical foundation checkpoint
 
 The first checkpoint `08d0d2e` added private intent/constructor helpers. The next source checkpoint adds the private Worker/controller protocol, semantic dispatch and v2 lineage admission. They are **not yet enabled by a registered factory/catalog capability or reachable as an application feature**. No old positive-depth feature, blind helper, derived drawing path, default, Native pair or root source has been changed.
 
@@ -56,7 +56,7 @@ Root counterbore/countersink work is a separate future interval domain: its exac
 
 Known identity, strict capability descriptor and optional installed availability helpers now exist. Only the exact primary MFG cohort can declare the new capability; unexpected new descriptors on other cohorts refuse. The actual factory/catalog **flag is still OFF**, and the operation/service are still unregistered. Authored vocabulary membership and budget capture do not enable them: cost1 requires the actual declared extent build. The new transaction/state review documents live authority vs derived observations and the remaining full workflow requirements.
 
-## Integration still required before exposure
+## Integration requirements (reconcile with subsequent source checkpoints)
 
 | Seam | Required closure; no completion claim yet |
 | --- | --- |
@@ -95,3 +95,12 @@ The existing suppression vocabulary, bounded dependency proof, branch-constructo
 The existing selected-extrusion deletion transaction/J now also captures the raw new feature. Its restoration proof compares the exact dynamic raw field set, preserving extent mode and every active named/literal value, feature/backend/source identity and ordinary adjacent IDs. Actual delete discovery remains the existing bounded unbound/unassigned reference-edit slice and still refuses native attachment dependents; candidate replay decides actual full-suffix compatibility. No new counter allocation, source deletion, material remapping or tolerant intent comparison is introduced. Whole deletion/refusal/UndoRedo/Open evidence is still required after full composition.
 
 Old depth-specific region/source-dimension repair convenience commands remain explicitly old-feature-only. Ordinary shared sketch/source dimension changes keep the SAME curve-based region identity and trigger actual full suffix replay for new extents; they do not need a fake positive-depth feature. Automatic changing of selected region topology is not advertised by this finite extent family. The final workflow must distinguish same-identity source dimension edits from separately unsupported automatic region/topology repair.
+
+
+## Shared registration checkpoint (capability still OFF)
+
+The new operation is now registered additively in `modules/workbenches/modeler/index.ts`, and Craft installs the five guarded shared methods with the actual `listAvailableProfileExtentBuilds` / `requireAvailableProfileExtentBuild` policy and existing submit/candidate cancellation. The corresponding optional Craft interface methods refer to the same implementation. No toolbar, alternate UI/model or default engine choice is introduced. Actual discovery still reports unavailable because the explicit capability/factory flags remain OFF pending complete source/acceptance closure; a registered vocabulary name is not installed availability.
+
+The thin Desktop adapter uses exact scalar own-data active variants and the same window/account lifetime plus scoped settlement. It publishes `inspect-profile-extents`, `inspect-profile-extent-regions`, `create-profile-extent-extrusion`, `inspect-profile-extent-history`, `edit-profile-extents`. Create/edit schema variants preserve existing length identifiers; coupled side/span and binding authority remain Core/Worker checks. Registry description512-character and independent schema4096-character ceilings remain applicable. The public whole startup is still required to qualify the metadata and route; no private handler call is evidence.
+
+Remaining before enablement: complete actual source/source-frame/typed/persistence/export/observation and history-control acceptance packet, resolve any further finite consumer discovery seam, and root serially compose the newer counter/pure-leaf additions with all9 exact closed resource graphs. No runtime or build has run from this lane.

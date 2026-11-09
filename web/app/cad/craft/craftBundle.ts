@@ -1,3 +1,5 @@
+import {createProfileExtentCommands} from './profileExtentCommands';
+import {listAvailableProfileExtentBuilds,requireAvailableProfileExtentBuild} from 'engine/mount/catalogMount';
 import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature,captureProfileExtent,profileExtentFields,profileExtentDimensions,materializeOwnedProfileExtentFeature,assertProfileExtentBindingsPreserved} from 'engine/solid/ownedProfileExtentFeature.mjs';
 import {recordProfileExtentEdit,planProfileExtentTravel} from './authoredEditJournal.mjs';
 import {offsetFailureCodes} from 'sketcher/generators/offsetSource.mjs';
@@ -1656,6 +1658,10 @@ export function activate(ctx: ApplicationContext) {
     epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();},
     {listBuilds:()=>listAvailableSelectedProfileBuilds().map(build=>({engine:build.id,engineRevision:build.revision})),requireBuild:requireAvailableSelectedProfileBuild}));
   Object.assign(ctx.craftService,createSelectedProfileRegionCommands(ctx,authoredSelectedProfileRegionOperation));
+  Object.assign(ctx.craftService,createProfileExtentCommands(ctx,(request,accepted,rejected,preparation)=>
+    submitModification(request,addModification,accepted,rejected,false,preparation),
+    epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();},
+    {listBuilds:listAvailableProfileExtentBuilds,requireBuild:requireAvailableProfileExtentBuild}));
   // @ts-ignore
   ctx.streams.craft = {
     modifications: modifications$,
@@ -2223,6 +2229,11 @@ interface CraftService {
   createWorkerSweep?: ReturnType<typeof createWorkerSweepCommands>['createWorkerSweep'];
   inspectWorkerSweepHistory?: ReturnType<typeof createWorkerSweepCommands>['inspectWorkerSweepHistory'];
   authoredRevolveAngleOperation?: (args:any,options?:any)=>Promise<any>;
+  inspectWorkerProfileExtents?: ReturnType<typeof createProfileExtentCommands>['inspectWorkerProfileExtents'];
+  inspectWorkerProfileExtentRegions?: ReturnType<typeof createProfileExtentCommands>['inspectWorkerProfileExtentRegions'];
+  createWorkerProfileExtentExtrusion?: ReturnType<typeof createProfileExtentCommands>['createWorkerProfileExtentExtrusion'];
+  inspectWorkerProfileExtentHistory?: ReturnType<typeof createProfileExtentCommands>['inspectWorkerProfileExtentHistory'];
+  editWorkerProfileExtent?: ReturnType<typeof createProfileExtentCommands>['editWorkerProfileExtent'];
   inspectSelectedProfileHistory?: ReturnType<typeof createSelectedProfileDepthCommands>['inspectSelectedProfileHistory'];
   editSelectedProfileDepth?: ReturnType<typeof createSelectedProfileDepthCommands>['editSelectedProfileDepth'];
   inspectSelectedProfileRegionChoices?: ReturnType<typeof createSelectedProfileRegionCommands>['inspectSelectedProfileRegionChoices'];
