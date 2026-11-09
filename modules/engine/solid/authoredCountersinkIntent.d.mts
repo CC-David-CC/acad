@@ -1,0 +1,9 @@
+import type {OwnedCountersinkIntent} from './ownedCountersinkIntent.mjs';
+import type {CurrentAuthoredQuantityFacade} from './authoredLengthQuantity.mjs';
+export type {CurrentAuthoredQuantityFacade} from './authoredLengthQuantity.mjs';
+export type AuthoredCountersinkDimensions=Readonly<{throughDiameter:number|string;entryDiameter:number|string;includedAngleRadians:number|string}>;
+export type AuthoredCountersinkIntent=Readonly<Omit<OwnedCountersinkIntent,keyof AuthoredCountersinkDimensions>&AuthoredCountersinkDimensions>;
+export function captureAuthoredCountersinkIntent(input:unknown):AuthoredCountersinkIntent;
+export function materializeAuthoredCountersinkIntent(input:unknown,expressions?:CurrentAuthoredQuantityFacade,materialized?:unknown):Readonly<OwnedCountersinkIntent>;
+export function captureAuthoredCountersinkDimensions(input:unknown):AuthoredCountersinkDimensions;
+export function materializeAuthoredCountersinkDimensions(input:unknown,expressions?:CurrentAuthoredQuantityFacade):Readonly<{throughDiameter:number;entryDiameter:number;includedAngleRadians:number}>;
