@@ -6,10 +6,11 @@ the app, geometry kernel, production parser or solver. No placement-search reuse
 import copy,hashlib,json,math,subprocess,sys
 from pathlib import Path
 from collections import Counter
+from fractions import Fraction
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'native-cad-container'))
 from archive_oracle import read_archive
-from truth import need,one,settled,requirement_observation,discovery,FINE,INCIDENCE,DIRECTION
-from svg_oracle import inspect_svg
+from truth import need,one,settled,requirement_observation,discovery,height_layout,FINE,INCIDENCE,DIRECTION
+from svg_oracle import inspect_svg,project
 from negative_archive import inspect as negative
 sha=lambda b:hashlib.sha256(b).hexdigest()
 LOCAL=set('CONTRACT.md README.md example.mjs desktop-driver.mjs check.py truth.py requirement_math.py native_record.py svg_oracle.py negative_archive.py'.split())
@@ -43,6 +44,7 @@ def check(directory):
  need(r['budgets']=={'sourceMm':FINE,'nativeVolumeMm3':1e-6,'nativeBoundsMm':1e-6,'nativeReferenceMm':INCIDENCE,'nativeDirection':DIRECTION,'projectionMm':1e-6,'svgPaperChordMm':.02},'unchanged independently frozen accuracy/derived-presentation budgets');custody(directory,r)
  labels=[x['label']for x in r['observations']]
  required={'Real plain source and centered bore','Actual baseline A B C position finish fit','Actual removal retains physical model','Removal Undo exact v4','Removal Redo absent','Second removal Undo same v4','Edited position is authored intent only','Requirement value Undo0.20','Requirement value Redo0.25','Restore required position0.20','Original source resize150x30','Source resize Undo100x50','Source resize Redo150x30','Actual parent depth25','Parent depth Undo20','Parent depth Redo25','Actual live nominal12 clearance unchanged','Bore diameter Undo10','Bore diameter Redo12','Display inches retains raw millimeter and micrometer requirements','Display millimeters restores presentation only','Crowded layout retains real resolved geometry','Layout Undo restores exact authored label','Healthy protected read after finite layout refusal','Fresh Open normal','Healthy continuation after malformed wrong-ra-unit','Healthy continuation after malformed nonfinite-json-quantity','OWN reference is unresolved membership not another account','OWN membership Undo restores actual target','Real upstream union consumes original target','Actual upper cap loss retains unresolved intent','Fresh Open unresolved','Actual discovered repair resolves finite bore end','Repair Undo SAME actual upper-cap loss','Repair Redo SAME discovered reference','Fresh Open repaired','Actual live nominal14 after third native Open','Post-Open authored zone0.25 remains a requirement','Post-Open requirement Undo restores required0.20','Actual healthy continuation after third native cycle'}
+ required|={'Blocked height label retains available repaired Native facts','Blocked-anchor layout Undo restores fixed initial height label'}
  need(required<=set(labels)and len(labels)==len(set(labels)),'all complete source/value/branch/repair/persistence/healthy continuation phases, no omitted positive step')
  first=r['observations'][0]['binding'];need(all(x['binding']['faceId']==first['faceId']and x['binding']['curveIds']==first['curveIds']and x['binding']['profile']==first['profile']and x['binding']['center']==first['center']for x in r['observations']),'one actual original source/member/constructor/hole identity through every replay')
  observed=[{'label':x['label'],'result':requirement_observation(x,r['engineRevision'])}for x in r['observations']]
@@ -65,7 +67,7 @@ def check(directory):
  need(len([x for x in r['travels']if x['kind']=='geometry-source'])==6,'all three upstream source edits have actual Undo AND Redo')
  need(r['noop']['result']['changed']is False and r['noop']['before']==r['noop']['after'],'exact accepted metadata no-op, no J/token churn')
  codes={name:'INVALID_REQUEST'for name in('Duplicate datum symbol','Duplicate cross-collection ID','Duplicate requirement kind','Missing required datum C','Ordered datum precedence','Position quantity unit','Ra quantity unit','Zero position zone','Zero Ra maximum','Ra canonical conversion underflow','Null is not a numeric requirement','No modifier widening','Reversed hole deviations','Positive-clearance domain excludes interference','Source width is not live bore nominal','New form ordinary-view policy','Hypothetical definition is not accepted read authority')}
- codes.update({'Combined annotation17 preserves existing limit':'RESOURCE_LIMIT','Complete form outside paper':'RESOURCE_LIMIT','Actual old discovery tokens':None,'Actual old accepted-definition read tokens':None})
+ codes.update({'Repaired anchor inside declared height text':'RESOURCE_LIMIT','Combined annotation17 preserves existing limit':'RESOURCE_LIMIT','Complete form outside paper':'RESOURCE_LIMIT','Actual old discovery tokens':None,'Actual old accepted-definition read tokens':None})
  need(len(r['refusals'])==len(codes)and set(x['label']for x in r['refusals'])==set(codes),'complete exact negative schema/unit/limit/membership/currentness/layout roster')
  for f in r['refusals']:
   need(f['before']==f['after']and f['error']['code']==codes[f['label']]and not f['error']['committed']and not f['error']['possiblyCommitted'],'precise actual refusal +ALL retained accepted state')
@@ -78,7 +80,7 @@ def check(directory):
    for x in(w['beforeAbsence'],w['afterAbsence']):need(x['absent']is True and x['method']=='browser-server-root-list'and x['file']==w['file']and x['username']==r['username'],'actual complete own-file absence, not inferred from error/count')
   else:
    b=w['readback'];raw=(directory/b['savedFile']).read_bytes();need(w['phase']=='settled'and'error'not in w and len(raw)==b['byteLength']and sha(raw)==b['sha256'],'EVERY acknowledged write server-byte readback, unknown never closed')
- need(Counter(w['kind']for w in r['writes'])=={'svg':7,'save':4,'own-negative-fixture':2,'expected-prewrite-refusal':1},'all14 actual write attempts accounted for')
+ need(Counter(w['kind']for w in r['writes'])=={'svg':7,'save':4,'own-negative-fixture':2,'expected-prewrite-refusal':2},'all15 actual write attempts accounted for: original14 plus blocked-anchor prewrite control')
  need([s['label']for s in r['saves']]==['normal','unresolved','repaired','resaved-final']and[x['label']for x in r['reopens']]==['normal','unresolved','repaired'],'three exact native cycles and final post-Open resave')
  archives=[]
  for s in r['saves']:
@@ -86,6 +88,7 @@ def check(directory):
   need(info['sha256']==s['sha256']and info['bytes']==s['byteLength'],'actual public server .cad bytes');need(model['history']==n['history']and model['expressions']==n['expressions']and model['counters']==n['counters'],'same original authored source/history/quantity/counters, no duplicate derived state')
   need(info['rawSketches']=={x['id']:x['source']for x in n['sketches']}and env['drawings']==[s['definition']]and env.get('presentation')==n['presentation']and env.get('manufacturing')is None,'exact ALL source bytes and raw v4/unit/label/ref intent, no stored resolved facts')
   need(s['before']['capture']==s['after']['capture']and s['before']['drawing']==s['after']['drawing'],'native Save preserves accepted source/J/metadata/geometry')
+  need(one([v for v in env['drawings'][0]['dimensions']if v['dimensionId']=='height'],'saved original height')['label']==[40,70],'every actual native archive retains initial good height label, never transient obstruction')
   if s['label']!='resaved-final':
    op=one([x for x in r['reopens']if x['label']==s['label']],'actual fresh native Open');need(all(op['opened']['capture']['native'][k]==n[k]for k in('history','source','sketches','expressions','counters','presentation'))and op['opened']['drawing']['definition']==s['definition'],'fresh Open exact original model and authored refs')
    need(not op['opened']['capture']['journal']['canUndo']and not op['opened']['capture']['journal']['canRedo'],'Open does not restore fabricated session journal')
@@ -107,6 +110,29 @@ def check(directory):
  actualrefs=[x['reference']for x in repair['discovery']['result']['observation']['planes']if x['status']=='available']
  need(all(x['reference']in actualrefs for x in new['datumFeatures'])and next(x for x in new['requirements']if x['kind']=='surface-finish')['target']in actualrefs,'repair references actually discovered before publication')
  need(repair['undone']['drawing']['definition']==old and repair['redone']['drawing']['definition']==new and repair['repaired']['capture']['native']==repair['undone']['capture']['native']==repair['redone']['capture']['native'],'repair shared Undo/Redo SAME unresolved source and SAME Native model')
+ control=r['blockedAnchor'];bad=copy.deepcopy(control['good']);one([v for v in bad['dimensions']if v['dimensionId']=='height'],'layout-only height edit')['label']=[80,70]
+ need(control['good']==repair['definition']and control['bad']==bad and control['prior']==repair['repaired'],'obstruction is a SEPARATE exact one-label metadata edit after real Native repair')
+ negative=one([x for x in r['observations']if x['label']==control['observationLabel']=='Blocked height label retains available repaired Native facts'],'actual blocked-layout Native read')
+ need(negative['definition']==bad and negative['before']==negative['after']==control['published']==control['before']==control['after'] and negative['read']['status']=='available'and all(v['status']=='available'for key in('datumFeatures','requirements')for v in negative['read']['observation'][key]),'layout obstruction preserves actual available repaired geometry and all accepted state')
+ publication=one([m for m in r['metadata']if m['label']=='Deliberate original height obstruction as separate layout edit'],'actual layout publication')
+ need(publication['action']=='replace'and publication['before']==control['prior']and publication['after']==control['published']and publication['definition']==bad,'ordinary separate shared metadata transaction, not hidden repair rewrite')
+ layout=height_layout(negative);B=layout['box'];top=one([v for v in bad['views']if v['basis']=='top'],'actual obstruction view');frame=one([v['frame']for v in negative['read']['observation']['viewFrames']if v['viewId']==top['viewId']],'actual protected top frame');scale=bad['sheet']['scale']['numerator']/bad['sheet']['scale']['denominator']
+ anchors=[one([v for v in negative['read']['observation']['datumFeatures']if v['symbol']=='A'],'actual A')['facts']['anchor'],one([v for v in negative['read']['observation']['requirements']if v['kind']=='surface-finish'],'actual finish')['facts']['anchor']]
+ projected=[project(top,frame,p,scale)for p in anchors]
+ need(all(Fraction(B[0])<Fraction(p[0])<Fraction(B[2])and Fraction(B[1])<Fraction(p[1])<Fraction(B[3])for p in projected),'BOTH actual repaired Native anchors lie strictly INSIDE actual declared height text box, independently proving original obstruction')
+ w=one([v for v in r['writes']if v['sequence']==control['writeSequence']],'actual submitted blocked-anchor export');error={'name':'Error','code':'RESOURCE_LIMIT','message':'The actual requirement anchor or port has no clear supported paper domain.','committed':False,'possiblyCommitted':False}
+ need(w['kind']=='expected-prewrite-refusal'and w['label']=='Repaired anchor inside declared height text'and w['phase']=='settled-prewrite-refusal'and w['error']==error and w['before']==control['before']and w['after']==control['after']and'result'not in w,'precise actual no-clear-domain refusal without accepted write/state change')
+ need(type(w['commandOrdinal'])is int and 0<=w['commandOrdinal']<len(r['commands']),'actual bounded export command ordinal')
+ command=r['commands'][w['commandOrdinal']];need(command['command']=='export-linked-part-drawing-svg'and command['args']=={'revision':control['before']['host']['revision'],'path':w['file']}and command['error']==error and'result'not in command,'error belongs to the exact actual public export request')
+ for absence in(w['beforeAbsence'],w['afterAbsence']):
+  need(str(absence['windowId'])==str(w['windowId'])and absence['owner']==w['beforeAbsence']['owner'],'same actual owned window/Files owner across complete absence proofs')
+  for inventory in('browserEntries','serverEntries'):
+   entries=absence[inventory];need(type(entries)is list and len(entries)<=4096 and all(type(v)is dict for v in entries),'actual complete bounded own root inventory')
+   need(not any(v.get('path')==w['file']or v.get('name')==w['file'][1:]for v in entries),'independent actual browser/server inventory membership proves blocked-anchor file absent, not a status flag')
+ refusal=one([v for v in r['refusals']if v['label']==w['label']],'precise layout refusal');need(refusal['before']==control['before']and refusal['after']==control['after']and refusal['error']==error,'all-state refusal evidence agrees with real submitted write')
+ undo=one([v for v in r['travels']if v['label']=='Blocked-anchor layout Undo restores fixed initial height label'],'real layout Undo')
+ need(undo['direction']=='undo'and undo['kind']=='metadata'and undo['before']==control['after']and undo['after']==control['undone']and control['undone']['drawing']['definition']==control['good'],'actual shared Undo restores initial40 before unchanged repair travel')
+ metadata_invariant(control['prior'],control['undone'])
  expected_svgs=['baseline','edited','consumed-target','cap-loss','repaired','final','resaved-final'];need([s['label']for s in r['svgs']]==expected_svgs,'all actual baseline/current/unresolved/repaired/post-Open SVGs')
  artifacts=[]
  for s in r['svgs']:
@@ -114,9 +140,11 @@ def check(directory):
   candidates=[x for x in r['observations']if x['before']==s['before']and x['definition']==s['definition']]
   row=one(candidates[-1:],'actual same-state protected Native metadata/projection read BEFORE SVG')
   need(s['result']['revision']==s['before']['host']['revision'],'actual issued SVG document revision')
-  artifacts.append({'file':s['savedFile'],'result':inspect_svg(raw,s,row)})
+  inspected=inspect_svg(raw,s,row)
+  if s['label']=='repaired':need(inspected['repairedNontrivialLeader']is not None and inspected['repairedNontrivialLeader']['vertices']>2,'actual repaired SVG contains necessary routed leader, no straight-path shortcut')
+  artifacts.append({'file':s['savedFile'],'result':inspected})
  last=r['observations'][-1];need(last['expected']['diameter']==14 and last['definition']['requirements'][0]['zone']['value']==.20 and last['expected']['datumLevel']==0,'genuine healthy source/requirement reedit AFTER third native Open')
- return{'status':'PASS','scope':'finite native-linked datum/position/Ra/DECLARED clearance authoring, geometry-binding lifecycle/three native cycles/actual visible SVG; NOT manufactured conformance, standards compliance or whole Gate1','sourceCoordinateBudgetMm':FINE,'sourceCoordinateBudgetPm':50,'observations':len(observed),'refusals':len(r['refusals']),'archives':archives,'artifacts':artifacts,'requirementsAreAuthoredIntent':True,'manufacturedConformance':False}
+ return{'status':'PASS','scope':'finite native-linked datum/position/Ra/DECLARED clearance authoring, geometry-binding lifecycle/three native cycles/actual visible SVG; NOT manufactured conformance, standards compliance or whole Gate1','sourceCoordinateBudgetMm':FINE,'sourceCoordinateBudgetPm':50,'observations':len(observed),'refusals':len(r['refusals']),'blockedAnchor':{'declaredHeightBox':B,'actualProjectedAnchors':projected,'recoveredBySharedUndo':True},'archives':archives,'artifacts':artifacts,'requirementsAreAuthoredIntent':True,'manufacturedConformance':False}
 if __name__=='__main__':
  need(len(sys.argv)==3,'WHOLE NEW_FIRST_ORACLE_JSON');out=Path(sys.argv[2]);need(not out.exists(),'preserve FIRST oracle report')
  try:result=check(sys.argv[1])

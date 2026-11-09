@@ -120,6 +120,20 @@ def geometry_observation(row,build):
 REASONS=set('DRAWING_REFERENCE_UNRESOLVED DRAWING_REFERENCE_MISSING DRAWING_TYPE_CHANGED DRAWING_SOURCE_CHANGED DRAWING_HOLE_WITNESS_UNAVAILABLE DRAWING_AMBIGUOUS_ANCESTRY DRAWING_FINITE_EXTENT_UNQUALIFIED DRAWING_AXIS_UNSUPPORTED DRAWING_NO_DESCENDANT DRAWING_MULTIPLE_DESCENDANTS DRAWING_MERGED_DESCENDANT NO_DESCENDANT MULTIPLE_DESCENDANTS MERGED_DESCENDANT AUTHORED_REMOVAL UNRESOLVED_SELECTION DRAWING_PLANE_UNQUALIFIED DRAWING_DATUM_FRAME_UNQUALIFIED DRAWING_POSITION_AXIS_UNQUALIFIED DRAWING_FIT_NOMINAL_UNAVAILABLE DRAWING_FIT_LIMIT_DOMAIN DRAWING_SURFACE_UNQUALIFIED DRAWING_TARGET_UNAVAILABLE'.split())
 FRAME={'origin':[0,0,0],'x':[1,0,0],'y':[0,1,0],'z':[0,0,1]}
 AXES={'top':([1,0,0],[0,1,0],[0,0,1]),'front':([1,0,0],[0,0,1],[0,-1,0]),'right':([0,1,0],[0,0,1],[1,0,0])}
+def height_layout(row):
+ d=row['definition'];height=one([v for v in d['dimensions']if v['dimensionId']=='height'],'original height dimension');top=one([v for v in d['views']if v['basis']=='top'],'original top view')
+ blocked=row['label']=='Blocked height label retains available repaired Native facts'
+ need(height['label']==([80,70]if blocked else[40,70]) and height['viewId']==top['viewId'] and height['kind']=='source-distance' and height['axis']=='datum-y','one fixed initial height layout, with ONLY explicit named obstruction edit')
+ text='ΔY '+format(row['expected']['height'],'.3f')+' mm';x,y=height['label'];bounds=[x-1,y-4,x+len(text)*3+1,y+2];scale=d['sheet']['scale']['numerator']/d['sheet']['scale']['denominator']
+ stored=one([s for s in row['before']['capture']['native']['sketches']if s['id']==row['binding']['faceId']],'actual original source for label clearance');objects=json.loads(stored['source'])['objects'];points=[o['data'][end]for o in objects for end in('a','b')]
+ left=top['paperOrigin'][0]+scale*min(p['x']for p in points)
+ if not blocked:
+  need(Q(bounds[2])+Fraction(1,8)<Q(left),'whole declared height text box remains left of actual original top-view source bound')
+  observed=one([v for v in row['read']['observation']['dimensions']if v['dimensionId']=='height'],'current actual height fact')
+  if observed['status']=='available':
+   need(all(Q(bounds[2])+Fraction(1,8)<Q(top['paperOrigin'][0]+scale*p[0])for p in observed['anchors']),'whole height text clears actual projected source anchors, not just its label point')
+ else:need(row['expected']['cover']==2 and row['expected']['datumLevel']==0 and row['read']['status']=='available','deliberate obstruction uses actual repaired complete Native facts')
+ return{'box':bounds,'text':text,'sourceLeft':left,'deliberateBlocked':blocked}
 def face_member(ref,body):
  fields(ref,('kind','originFeatureId','selectionId','geometry'));need(ref['kind']=='native-face' and ref['geometry']=='plane','actual NativeFace reference kind')
  matches=[r for r in body['selections']['plan']['faces'] if r['id']==ref['selectionId'] and r['originFeatureId']==ref['originFeatureId'] and r['geometry']=='plane']
@@ -133,6 +147,7 @@ def requirement_observation(row,build):
  if row['geometryOnly']:
   need(row['definition'] is None and row['read'] is None and row['projection'] is None,'actual no-definition phase, no invented read');return derived
  d,r,p,e=row['definition'],row['read'],row['projection'],row['expected'];before=row['before'];body=derived['body']
+ derived['heightLayout']=height_layout(row)
  fields(d['target'],('featureId','operationType','engine','engineRevision','output'));authored=d['target'];original=one([entry for entry in before['capture']['native']['history']if type(entry['params'].get('featureId'))is int and entry['params']['featureId']==authored['featureId']],'actual historical target producer')
  need(authored['operationType']==original['type'] and authored['engine']=='occ' and authored['engineRevision']==build and authored['output']=='complete-native-result','authored target type is actual original history, even when consumed')
  if not row['targetMissing']:need(authored['featureId']==body['producer']['featureId'] and authored['operationType']==body['producer']['operationType'],'resolved current target is actual body producer')

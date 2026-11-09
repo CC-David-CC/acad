@@ -117,7 +117,7 @@ def inspect_svg(raw,item,row):
  need(m=={'version':1,'drawingId':d['drawingId'],'revision':item['before']['host']['revision'],'geometryRevision':item['before']['capture']['solids']['revision'],'quality':'native-bound-drawing-references','status':r['status'],'definitionVersion':4,'viewCount':3,'projection':'source-relative-orthographic-v1','annotationFacts':o['annotations'],'annotationRole':'derived-native-bore-reference','ordinateRole':'signed-datum-coordinate','datumFeatureFacts':o['datumFeatures'],'requirementFacts':o['requirements'],'manufacturingRequirementRole':'authored-manufacturing-requirement','measurementScope':'nominal-cad-reference-only','curvePresentationTolerancePaperMm':.02,'dimensionRole':'reference'},'issued read/revision/accepted definition and explicit authored roles')
  need(item['definition']==d and item['before']['drawing']['definition']==d and item['before']==item['after'],'SVG exact accepted definition and all readonly state')
  paths=list(g);need(all(p.tag==S+'path' and not len(p) and not(p.text or'').strip() for p in paths),'only complete finite path children')
- cursor=0;scale=d['sheet']['scale']['numerator']/d['sheet']['scale']['denominator'];geometry_boxes=[];stroke_boxes=[];oldlabels=[];frames={x['viewId']:x['frame']for x in o['viewFrames']}
+ cursor=0;scale=d['sheet']['scale']['numerator']/d['sheet']['scale']['denominator'];geometry_boxes=[];stroke_boxes=[];oldlabels=[];oldlabel_boxes={};frames={x['viewId']:x['frame']for x in o['viewFrames']}
  for view,curves in zip(d['views'],cc):
   envelope=[]
   for c in curves:
@@ -142,7 +142,11 @@ def inspect_svg(raw,item,row):
    ps=path_points(path.get('d'));need(len(ps)==len(want) and[x for x in TOKEN.findall(path.get('d'))if x in('M','L')]==cmd,'original span/leader syntax');[vector(p,q)for p,q in zip(ps,want)]
   stroke_boxes.extend((box(ends),box([ends[0],a['label']]),box([ends[1],a['label']])))
   txt=texts[ti];ti+=1;prefix='Ø'if a['kind']=='hole-diameter'else'ΔZ 'if a['kind']=='plane-distance'else'ΔX 'if a['axis']=='datum-x'else'ΔY ';value=prefix+format(f['value'],'.3f')+' mm'
-  need(set(txt.attrib)=={'x','y','fill'}and txt.get('fill')=='#124'and not len(txt)and txt.text==value,'unchanged actual physical dimension label');vector([float(txt.get('x')),float(txt.get('y'))],a['label']);oldlabels.append(text_box(*a['label'],len(value)*3))
+  need(set(txt.attrib)=={'x','y','fill'}and txt.get('fill')=='#124'and not len(txt)and txt.text==value,'unchanged actual physical dimension label');vector([float(txt.get('x')),float(txt.get('y'))],a['label']);oldlabels.append(text_box(*a['label'],len(value)*3));actual_label_box=text_box(float(txt.get('x')),float(txt.get('y')),len(value)*3);oldlabel_boxes[a['dimensionId']]=actual_label_box
+  if a['dimensionId']=='height':
+   need(a['label']==[40,70],'successful SVG retains the fixed initial left height label')
+   top_index=one([i for i,v in enumerate(d['views'])if v['basis']=='top'],'actual top projection index')
+   need(Fraction(actual_label_box[2])+Fraction(1,8)<Fraction(geometry_boxes[top_index][0]) and all(Fraction(actual_label_box[2])+Fraction(1,8)<Fraction(p[0])for p in ends),'whole actual visible height text box is left of full Native top bound AND actual source anchors')
  for a,f in zip(d['annotations'],o['annotations']):
   if f['status']!='available':continue
   need(a['kind']=='bore-center','finite original center-mark scope');view=one([v for v in d['views']if v['viewId']==a['viewId']],'mark view');c=project(view,frames[a['viewId']],f['facts']['center'],scale);extent=f['facts']['diameter']*scale/2+a['extension']
@@ -158,7 +162,7 @@ def inspect_svg(raw,item,row):
   if not unavailable:
    own=geometry_boxes[len(captions)];need(b[1]-own[3]>=5-1e-9,'complete caption clears OWN actual projection')
   captions.append(b)
- forms=[];leaders=[];unavailable=[];new_strokes=[]
+ forms=[];leaders=[];leader_by_id={};unavailable=[];new_strokes=[]
  rows=list(zip(d['datumFeatures'],o['datumFeatures']))+list(zip(d['requirements'],o['requirements']))
  for a,f in rows:
   kind='datum-feature'if 'symbol'in a else a['kind']
@@ -193,6 +197,7 @@ def inspect_svg(raw,item,row):
    txt=texts[ti];ti+=1;need(set(txt.attrib)==set(base)|set('x y data-requirement-text font-family font-size textLength lengthAdjust fill'.split())and all(txt.get(k)==v for k,v in base.items())and txt.get('data-requirement-text')==role and txt.get('font-family')=='monospace'and txt.get('font-size')=='3'and txt.get('lengthAdjust')=='spacing'and txt.get('fill')=='#124'and txt.text==value and not len(txt),'complete visible exact raw/canonical/declared quantity line');vector([float(txt.get('x')),float(txt.get('y'))],want);near(float(txt.get('textLength')),len(value)*1.8,1e-9)
   need(not any(overlap(B,expanded(q,2.125))for q in geometry_boxes+stroke_boxes)and not any(overlap(B,expanded(q,2))for q in oldlabels+captions+forms),'complete fixed-size form clears actual view/strokes/all text, without running placement search')
   forms.append(B);leaders.append((lp,B))
+  leader_by_id[a['annotationId']]=(lp,B)
  need(cursor==len(paths),'no extra paths outside actual Native/dimension/center/new-form roster')
  for lp,B in leaders:
   direct_clear=True
@@ -201,6 +206,13 @@ def inspect_svg(raw,item,row):
    need(all(not crosses(a,z,expanded_q)for a,z in zip(lp,lp[1:])),'EVERY full leader segment clears each expanded other declared text box')
    if crosses(lp[0],lp[-1],expanded_q):direct_clear=False
   if direct_clear:need(len(lp)==2,'unchanged original direct segment is retained when mathematically clear, without any route search')
+ repaired_route=None
+ if item['label']=='repaired':
+  need(row['expected']['cover']==2 and row['expected']['datumLevel']==0,'nontrivial leader belongs to actual lower-end repair')
+  A=one([v for v in d['datumFeatures']if v['symbol']=='A'],'actual repaired datum A');lp,B=leader_by_id[A['annotationId']];need(len(lp)>2,'actual post-repair datum A requires a genuine routed polyline')
+  nominal=oldlabel_boxes['nominal-hole'];obstacle=[Fraction(nominal[0])-Fraction(1,8),Fraction(nominal[1])-Fraction(1,8),Fraction(nominal[2])+Fraction(1,8),Fraction(nominal[3])+Fraction(1,8)]
+  need(crosses(lp[0],lp[-1],obstacle),'original direct repaired A segment crosses ACTUAL nominal-hole text, no hardcoded waypoint/search')
+  repaired_route={'annotationId':A['annotationId'],'vertices':len(lp),'directObstacleDimensionId':'nominal-hole'}
  for a,f in zip(d['dimensions'],o['dimensions']):
   if f['status']!='available':unavailable.append(('dimension',a['dimensionId'],a['viewId'],'UNRESOLVED: '+a['dimensionId'],None))
  for a,f in zip(d['annotations'],o['annotations']):
@@ -220,4 +232,4 @@ def inspect_svg(raw,item,row):
   need(combined==want[3],'visible complete untruncated warning reason');membership[id]=combined
  need(set(membership)=={x[1]for x in unavailable},'every actual unresolved member visibly represented, no ghost success')
  notice=texts[-1];need(not len(notice)and notice.attrib=={'x':'8','y':'415'}and notice.text=='Reference drawing · '+r['status']+' · scale 1:1','exact factual footer')
- return{'quality':'independent-source/Native-analytic-record/complete-visible-SVG-membership','fragments':sum(map(len,cc)),'resolvedForms':len(forms),'leaderVertices':[len(lp)for lp,_ in leaders],'leaderSegments':sum(len(lp)-1 for lp,_ in leaders),'unresolvedWarnings':membership,'manufacturedConformance':False}
+ return{'quality':'independent-source/Native-analytic-record/complete-visible-SVG-membership','fragments':sum(map(len,cc)),'resolvedForms':len(forms),'leaderVertices':[len(lp)for lp,_ in leaders],'leaderSegments':sum(len(lp)-1 for lp,_ in leaders),'repairedNontrivialLeader':repaired_route,'unresolvedWarnings':membership,'manufacturedConformance':False}

@@ -177,3 +177,37 @@ In particular the expected prewrite complete-form-box refusal is unchanged;
 a routing failure cannot substitute for it. General layout/leader intersections,
 manufactured conformance and full Gate1 remain unqualified. Root alone owns
 the complete new whole, FIRST checker after PASS and individual SVG review.
+
+## Fixed initial height placement and original obstruction regression
+
+The public example initially declares height label[40,70], conventionally left
+of this finite top projection. It stays fixed through every ordinary source/
+reference edit, repair and native cycle. The checker independently proves the
+WHOLE declared height text box is left of actual original source bounds/anchors;
+successful SVGs also check actual visible text against the full Native outline.
+
+The actual R4 anchor-domain obstruction remains an enduring complete-flow
+negative: AFTER genuine lower-A repair, a separately named ordinary metadata
+edit changes only height label to[80,70]. Full protected Native facts must stay
+available. A submitted own blocked-anchor.svg must refuse EXACT RESOURCE_LIMIT
+'The actual requirement anchor or port has no clear supported paper domain.',
+preserving all state and complete browser/server absence before+after. Actual
+shared Undo restores initial40; original Repair Undo/Redo and all later steps
+continue unchanged. An unknown submitted write retains its exact owned context.
+This label edit is never hidden in repair() or accompanied by a geometry change.
+
+The independent checker binds the exact export command, error, inventories,
+shared J event and Undo; actual protected A AND finish anchors must lie inside
+the declared obstructing height box. Repaired successful SVG must contain a
+nontrivial datum-A polyline whose original direct segment intersects the ACTUAL
+nominal-hole text box, independently proving the general router remains needed.
+No route/waypoint search is replayed. Still7 successful SVGs,4 saves/3 fresh
+Opens and2 malformed copies; exactly15 writes include the old14 plus this one
+proven-prewrite refusal. Original complete-form-box refusal and all geometry/
+collision/reference/source/counter/travel/persistence criteria remain.
+
+R3/R4 first failures and original source/rosters remain immutable. Root can
+reuse the unchanged producing Core runtime while staging the new Host public
+example and separate current acceptance identities; actual source/pins must
+record that distinction rather than relabel the producing runtime. No tests,
+builds or execution occurred in this source packet.
