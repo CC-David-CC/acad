@@ -4,7 +4,7 @@ export function inspectedProjectIsDirty(project, baseline, getManufacturing, uni
   if(prior?.format!=='codi-jsketcher-project'||![2,3].includes(prior.version)||prior.unit!=='millimeter'||unit!==prior.unit)throw Error('Supported project units and format are unavailable.');
   const drawingWrapped=Object.hasOwn(prior,'drawings');
   function drawing(value){
-    if(!value||typeof value!=='object'||Array.isArray(value)||value.version!==1||value.unit!=='millimeter')throw Error('Drawing metadata is unavailable.');
+    if(!value||typeof value!=='object'||Array.isArray(value)||![1,2].includes(value.version)||value.unit!=='millimeter')throw Error('Drawing metadata is unavailable.');
     return value;
   }
   if(prior.version===3){
