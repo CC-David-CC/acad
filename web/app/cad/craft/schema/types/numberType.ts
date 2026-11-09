@@ -6,7 +6,7 @@ export interface NumberTypeSchema extends BaseSchemaField {
 
   type: Types.number,
 
-  dimension?: 'length';
+  dimension?: 'length' | 'angle';
 
   min: number;
 

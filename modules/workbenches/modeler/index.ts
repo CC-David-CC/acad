@@ -1,3 +1,4 @@
+import {createWorkerCountersinkOperation} from './features/workerCountersink/workerCountersink.operation';
 import {createWorkerCounterboreOperation} from './features/workerCounterbore/workerCounterbore.operation';
 import {createWorkerProfileExtentOperation} from './features/workerProfileExtent/workerProfileExtent.operation';
 import {createWorkerBlindHoleOperation} from './features/workerBlindHole/workerBlindHole.operation';
@@ -85,6 +86,7 @@ export const ModelerWorkspace: WorkbenchConfig = {
     createWorkerSolidOperation('boolean',createCatalogMount,validateEngineMount),
     createWorkerSolidOperation('edge-treatment',createCatalogMount,validateEngineMount),
     createWorkerCounterboreOperation(createCatalogMount,validateEngineMount),
+    createWorkerCountersinkOperation(createCatalogMount,validateEngineMount),
     createWorkerBlindHoleOperation(createCatalogMount,validateEngineMount),
     createWorkerThroughHolesOperation(createCatalogMount,validateEngineMount),
     createWorkerLinearHolePatternOperation(createCatalogMount,validateEngineMount),
