@@ -24,6 +24,7 @@ WARNING_SOURCE_ROSTER={
  ('core', 'test/native-cad-container/archive_oracle.py'),
  ('core', 'web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),
  ('core', 'web/app/cad/export/linkedPartDrawingSvg.mjs'),
+ ('core', 'web/app/cad/export/linkedPartDrawingRequirementForms.mjs'),
  ('core', 'web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),
  ('desktop', 'apps/system/jsketcher/drawing-commands.mjs'),
  ('desktop', 'apps/system/jsketcher/index.mjs'),

@@ -57,6 +57,7 @@
     "test/native-cad-container/archive_oracle.py",
     "web/app/cad/export/linkedPartDrawingSvg.mjs",
     "web/app/cad/export/linkedPartDrawingCaptionLayout.mjs",
+    "web/app/cad/export/linkedPartDrawingRequirementForms.mjs",
     "web/app/cad/export/linkedPartDrawingWarningLayout.mjs",
     "modules/engine/mount/ownedDrawingReadProtocol.mjs"
   ],
