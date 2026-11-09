@@ -1,0 +1,97 @@
+{
+  "role": "isolated native validator acquisition; no CAD runtime change",
+  "python": "3.12.3",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+  "artifacts": [
+    {
+      "file": "debs/libboost1.83-dev_1.83.0-2.1ubuntu3.2_amd64.deb",
+      "bytes": 10745362,
+      "sha256": "519ecf2c64308527e15b6582955681d192a832250baa4bc424967aaf7d02d68f",
+      "package": "libboost1.83-dev",
+      "version": "1.83.0-2.1ubuntu3.2",
+      "aptIndexHashMatches": true
+    },
+    {
+      "file": "debs/libcgal-dev_5.6-1build3_amd64.deb",
+      "bytes": 4969708,
+      "sha256": "4ad9d51506d42089b3cf14adfb8b9d9d79a9d32fc08f649feaf4b95f6e28cfb0",
+      "package": "libcgal-dev",
+      "version": "5.6-1build3",
+      "aptIndexHashMatches": true
+    },
+    {
+      "file": "debs/libgmp-dev_2%3a6.3.0+dfsg-2ubuntu6.1_amd64.deb",
+      "bytes": 340090,
+      "sha256": "a9847b5ecfff791a46cb198f29a06d9d23a20afdfdd434812f2b44ccfb61d46a",
+      "package": "libgmp-dev",
+      "version": "2:6.3.0+dfsg-2ubuntu6.1",
+      "aptIndexHashMatches": true
+    },
+    {
+      "file": "debs/libmpfr-dev_4.2.1-1build1.1_amd64.deb",
+      "bytes": 287642,
+      "sha256": "362fcdeb7dff545af83e65a3a972519185efd4a231c23e13d519cf97a5c8e3e4",
+      "package": "libmpfr-dev",
+      "version": "4.2.1-1build1.1",
+      "aptIndexHashMatches": true
+    },
+    {
+      "file": "wheels/lib3mf-2.5.0-py3-none-manylinux2014_x86_64.whl",
+      "bytes": 1575000,
+      "sha256": "b4c00033c47cfeac93b7daa069fb46e8dea4391d5522b79cd6e9f6af75e33013"
+    },
+    {
+      "file": "wheels/networkx-3.4.2-py3-none-any.whl",
+      "bytes": 1723263,
+      "sha256": "df5d4365b724cf81b8c6a7312509d0c22386097011ad1abe274afd5e9d3bbc5f"
+    },
+    {
+      "file": "wheels/numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 16527618,
+      "sha256": "fd83c01228a688733f1ded5201c678f0c53ecc1006ffbc404db9f7a899ac6249"
+    },
+    {
+      "file": "wheels/trimesh-4.11.2-py3-none-any.whl",
+      "bytes": 740328,
+      "sha256": "25e3ab2620f9eca5c9376168c67aabdd32205dad1c4eea09cd45cd4a3edf775a"
+    }
+  ],
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "cmake": "cmake version 3.28.3",
+  "pythonDistributions": [
+    {
+      "name": "lib3mf",
+      "version": "2.5.0"
+    },
+    {
+      "name": "networkx",
+      "version": "3.4.2"
+    },
+    {
+      "name": "numpy",
+      "version": "2.2.6"
+    },
+    {
+      "name": "pip",
+      "version": "24.0"
+    },
+    {
+      "name": "trimesh",
+      "version": "4.11.2"
+    }
+  ],
+  "existingRuntimeLibraries": [
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgmp.so.10.5.0",
+      "sha256": "0ccdfb6d6f5c039465f6d002cf7e4c072d48ac6a2cffc8dd6c748dec31592804"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libmpfr.so.6.2.1",
+      "sha256": "2156351fa3dedd04a7381c6ac7a8a26efa2d6fb08b80f8a2d644ccdd653710ae"
+    }
+  ],
+  "cgalConfigs": [
+    "/mnt/data10tb/codi-acad-library-validation-native-20261109-r1/prefix/usr/lib/x86_64-linux-gnu/cmake/CGAL/CGALConfig.cmake"
+  ],
+  "scriptSHA256": "1ee8723ac1a4117cddd6a1a097803aa44183a7160e5d7ace3db0d3164d0c4407"
+}

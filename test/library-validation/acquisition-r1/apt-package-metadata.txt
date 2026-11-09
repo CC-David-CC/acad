@@ -1,0 +1,142 @@
+Package: libcgal-dev
+Architecture: amd64
+Version: 5.6-1build3
+Multi-Arch: same
+Priority: optional
+Section: universe/libdevel
+Source: cgal
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Joachim Reichel <reichel@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 41090
+Depends: libboost-dev, libboost-program-options-dev, libboost-system-dev, libboost-thread-dev, libgmp-dev, libmpfr-dev, zlib1g-dev
+Suggests: libmpfi-dev, libntl-dev, libtbb-dev
+Filename: pool/universe/c/cgal/libcgal-dev_5.6-1build3_amd64.deb
+Size: 4969708
+MD5sum: fbe1114a12cd88378487a11b14be1555
+SHA1: 948fba9566d8917c83f1e6f93a654f3abd04ebbb
+SHA256: 4ad9d51506d42089b3cf14adfb8b9d9d79a9d32fc08f649feaf4b95f6e28cfb0
+SHA512: fc4096fab72c22ca4cf69331929d44c125a3faa77630b7dbce2bf7692e3e79cd24feda2e1962585c8dd0cd1fe024a5fc4a62a498bbd16ac88039ce72767ba994
+Homepage: https://www.cgal.org/
+Description-en: C++ library for computational geometry (development files)
+ CGAL (Computational Geometry Algorithms Library) makes the most important
+ of the solutions and methods developed in computational geometry available
+ to users in industry and academia in a C++ library. The goal is to provide
+ easy access to useful, reliable geometric algorithms.
+ .
+ This package contains most of the header files. The header files for
+ visualization with Qt can be found in the package libcgal-qt5-dev.
+Description-md5: 3a1c6355daea1137fb786b6ea3ee790b
+
+Package: libboost1.83-dev
+Source: boost1.83
+Priority: optional
+Section: libdevel
+Installed-Size: 157219
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 1.83.0-2.1ubuntu3.2
+Replaces: libleatherman-dev (<< 1.12.1+dfsg-1.1~)
+Suggests: libboost1.83-doc, libboost-atomic1.83-dev, libboost-chrono1.83-dev, libboost-container1.83-dev, libboost-context1.83-dev, libboost-contract1.83-dev, libboost-coroutine1.83-dev, libboost-date-time1.83-dev, libboost-exception1.83-dev, libboost-fiber1.83-dev, libboost-filesystem1.83-dev, libboost-graph-parallel1.83-dev, libboost-graph1.83-dev, libboost-iostreams1.83-dev, libboost-json1.83-dev, libboost-locale1.83-dev, libboost-log1.83-dev, libboost-math1.83-dev, libboost-mpi-python1.83-dev, libboost-mpi1.83-dev, libboost-nowide1.83-dev, libboost-numpy1.83-dev, libboost-program-options1.83-dev, libboost-python1.83-dev, libboost-random1.83-dev, libboost-regex1.83-dev, libboost-serialization1.83-dev, libboost-stacktrace1.83-dev, libboost-system1.83-dev, libboost-test1.83-dev, libboost-thread1.83-dev, libboost-timer1.83-dev, libboost-type-erasure1.83-dev, libboost-url1.83-dev, libboost-wave1.83-dev, libboost1.83-tools-dev, libmpfrc++-dev, libntl-dev
+Depends: libstdc++-13-dev
+Conflicts: bjam, boost-build, libboost1.42-dev, libboost1.46-dev, libboost1.48-dev, libboost1.49-dev, libboost1.50-dev, libboost1.52-dev, libboost1.53-dev, libboost1.54-dev, libboost1.55-dev, libboost1.57-dev, libboost1.58-dev, libboost1.60-dev, libboost1.61-dev, libboost1.62-dev, libboost1.63-dev, libboost1.65-dev, libboost1.67-dev, libboost1.70-dev, libboost1.71-dev, libboost1.74-dev, libboost1.80-dev, libboost1.81-dev
+Breaks: libleatherman-dev (<< 1.12.1+dfsg-1.1~)
+Filename: pool/main/b/boost1.83/libboost1.83-dev_1.83.0-2.1ubuntu3.2_amd64.deb
+Size: 10745362
+MD5sum: 9c5a26f0608ca7726b5a006fb1e5301c
+SHA1: b71ef12a6b37f21422c1a27dc1a202a469fa28ad
+SHA256: 519ecf2c64308527e15b6582955681d192a832250baa4bc424967aaf7d02d68f
+SHA512: 662937f0bb21159afe7bd79f200a6bda9d1c61c2308d69137292369c6a24c0e570dab25ed21a7df2f88e17e99fdc8970f35be04b2f818af7e4bbe87ad33a6ac8
+Homepage: https://www.boost.org/
+Description-en: Boost C++ Libraries development files
+ The Boost web site provides free, peer-reviewed, portable C++ source
+ libraries. The emphasis is on libraries which work well with the C++
+ Standard Library. One goal is to establish "existing practice" and
+ provide reference implementations so that the Boost libraries are
+ suitable for eventual standardization. Some of the libraries have
+ already been proposed for inclusion in the C++ Standards Committee's
+ upcoming C++ Standard Library Technical Report.
+ .
+ This package provides headers for all Boost libraries.
+ .
+ Extended precision arithmetic package libmpfrc++-dev or libntl-dev is
+ required to use the Boost.Multiprecision wrapping of the respective
+ library.
+Description-md5: 5a4757456b06ec2c205f53eaa244f371
+Multi-Arch: same
+Original-Maintainer: Debian Boost Team <team+boost@tracker.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+Package: libgmp-dev
+Source: gmp
+Priority: optional
+Section: libdevel
+Installed-Size: 1594
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 2:6.3.0+dfsg-2ubuntu6.1
+Replaces: libgmp10-dev, libgmp3-dev
+Suggests: gmp-doc, libgmp10-doc, libmpfr-dev
+Provides: libgmp10-dev
+Depends: libgmp10 (= 2:6.3.0+dfsg-2ubuntu6.1), libgmpxx4ldbl (= 2:6.3.0+dfsg-2ubuntu6.1)
+Conflicts: libgmp10-dev
+Filename: pool/main/g/gmp/libgmp-dev_6.3.0+dfsg-2ubuntu6.1_amd64.deb
+Size: 340090
+MD5sum: 8c447e615335b472a7fd169a58ee8518
+SHA1: 00ded27466385a576f2f739a8d05d5696f485835
+SHA256: a9847b5ecfff791a46cb198f29a06d9d23a20afdfdd434812f2b44ccfb61d46a
+SHA512: a917b629ee274ca85c09ed3b99d84dc79641a42a4ca02f59932f3a96a0051c8ee5a9f5000149ad4fc3a71d1b20ba425ab1c3292df27ca75333151ba0c7348c8c
+Homepage: https://gmplib.org/
+Description-en: Multiprecision arithmetic library developers tools
+ This development package provides the header files and the symbolic
+ links to allow compilation and linking of programs that use the libraries
+ provided in the libgmp10 package.
+ .
+ Both C and C++ bindings are present in this package.  Package
+ libstdc++-dev is required to use the C++ bindings.
+ .
+ The MPFR library (multiple-precision floating-point) used to be
+ included, but has since been moved to package libmpfr-dev.
+Description-md5: db56254d94fec9ce85e93ebf60b032a9
+Multi-Arch: same
+Original-Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+Package: libmpfr-dev
+Source: mpfr4
+Priority: optional
+Section: libdevel
+Installed-Size: 1320
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 4.2.1-1build1.1
+Replaces: libgmp3-dev (<< 4.1.4-3)
+Suggests: libmpfr-doc
+Depends: libgmp-dev, libmpfr6 (= 4.2.1-1build1.1)
+Breaks: libgmp3-dev (<< 4.1.4-3)
+Filename: pool/main/m/mpfr4/libmpfr-dev_4.2.1-1build1.1_amd64.deb
+Size: 287642
+MD5sum: 54e7839ca61c8c352c89773b220bce57
+SHA1: 179756a5f26b01c780a1cf559eedb6ce5b7d73b8
+SHA256: 362fcdeb7dff545af83e65a3a972519185efd4a231c23e13d519cf97a5c8e3e4
+SHA512: 8bce79227b7f895af7e9c0d0cac40c35bad119a1a0e0c0643e44bc5e8855dd92f44a27a77326bc6382e9528cec82cd8242d151d0eed0167134226fd71f3a5e57
+Homepage: https://www.mpfr.org/
+Description-en: multiple precision floating-point computation developers tools
+ This development package provides the header files and the symbolic
+ links to allow compilation and linking of programs that use the libraries
+ provided in the libmpfr4 package.
+ .
+ MPFR provides a library for multiple-precision floating-point computation
+ with correct rounding.  The computation is both efficient and has a
+ well-defined semantics. It copies the good ideas from the
+ ANSI/IEEE-754 standard for double-precision floating-point arithmetic
+ (53-bit mantissa).
+Description-md5: a2580b68a7c6f1fcadeefc6b17102b32
+Multi-Arch: same
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+

@@ -1,0 +1,5 @@
+Get:1 http://us.archive.ubuntu.com/ubuntu noble/universe amd64 libcgal-dev amd64 5.6-1build3 [4970 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 libboost1.83-dev amd64 1.83.0-2.1ubuntu3.2 [10.7 MB]
+Get:3 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgmp-dev amd64 2:6.3.0+dfsg-2ubuntu6.1 [340 kB]
+Get:4 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpfr-dev amd64 4.2.1-1build1.1 [288 kB]
+Fetched 16.3 MB in 1s (27.5 MB/s)

@@ -1,0 +1,17 @@
+Collecting lib3mf==2.5.0 (from -r /mnt/data10tb/codi-acad-library-validation-native-20261109-r1/requirements-native.txt (line 2))
+  Downloading lib3mf-2.5.0-py3-none-manylinux2014_x86_64.whl (1.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 14.0 MB/s eta 0:00:00
+Collecting trimesh==4.11.2 (from -r /mnt/data10tb/codi-acad-library-validation-native-20261109-r1/requirements-native.txt (line 3))
+  Downloading trimesh-4.11.2-py3-none-any.whl (740 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 740.3/740.3 kB 45.8 MB/s eta 0:00:00
+Collecting numpy==2.2.6 (from -r /mnt/data10tb/codi-acad-library-validation-native-20261109-r1/requirements-native.txt (line 4))
+  Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.5/16.5 MB 66.4 MB/s eta 0:00:00
+Collecting networkx==3.4.2 (from -r /mnt/data10tb/codi-acad-library-validation-native-20261109-r1/requirements-native.txt (line 5))
+  Downloading networkx-3.4.2-py3-none-any.whl (1.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 63.2 MB/s eta 0:00:00
+Saved /mnt/data10tb/codi-acad-library-validation-native-20261109-r1/wheels/lib3mf-2.5.0-py3-none-manylinux2014_x86_64.whl
+Saved /mnt/data10tb/codi-acad-library-validation-native-20261109-r1/wheels/trimesh-4.11.2-py3-none-any.whl
+Saved /mnt/data10tb/codi-acad-library-validation-native-20261109-r1/wheels/numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Saved /mnt/data10tb/codi-acad-library-validation-native-20261109-r1/wheels/networkx-3.4.2-py3-none-any.whl
+Successfully downloaded lib3mf trimesh numpy networkx
