@@ -1,5 +1,7 @@
 // Data-only intent. Runtime handles and derived geometry are forbidden.
 import {captureSelectedProfileRequest,capturePolygonProfileRequest} from '../mount/selectedProfilePlan.mjs';
+import {solidBodyId} from './solidBodyIdentity.mjs';
+export {solidBodyId} from './solidBodyIdentity.mjs';
 const fail=message=>{throw Object.assign(new Error(message),{code:'INVALID_REQUEST'});};
 function fields(value,keys) {
  if(!value||typeof value!=='object'||Array.isArray(value)||Reflect.ownKeys(value).length!==keys.length)fail('Invalid solid request fields.');
@@ -29,4 +31,3 @@ export function captureSolidProfile(input){
  const profile=(version.value===3?capturePolygonProfileRequest:captureSelectedProfileRequest)(p.profile),freeze=value=>{if(value&&typeof value==='object'){for(const child of Object.values(value))freeze(child);Object.freeze(value);}return value;};
  return Object.freeze({...p,profile:freeze(profile)});
 }
-export function solidBodyId(featureId){if(!Number.isSafeInteger(featureId)||featureId<1)fail('Invalid feature identity.');return 'worker-solid:1:'+JSON.stringify([featureId,'body']);}

@@ -1,16 +1,8 @@
 // Authored metadata only. Native intent parsers remain strictly numeric.
 import {captureOwnedHoleIntent} from './ownedHoleIntent.mjs';
-const name=/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/;
+import {isAuthoredLength,resolveAuthoredLength} from './authoredLengthQuantity.mjs';
+export {isAuthoredLength,resolveAuthoredLength} from './authoredLengthQuantity.mjs';
 const fail=message=>{throw Object.assign(Error(message),{code:'INVALID_REQUEST'});};
-export const isAuthoredLength=value=>typeof value==='number'&&Number.isFinite(value)&&value>0&&value<=1e6||typeof value==='string'&&name.test(value);
-export function resolveAuthoredLength(value,expressions){
- if(!isAuthoredLength(value))fail('Expected a positive millimeter value or a named typed length.');
- if(typeof value==='number')return value;
- if(expressions?.isTyped!==true||!expressions.hasCurrentPhysicalResult())fail('A current typed parameter source is required.');
- const number=expressions.resolveQuantity(value,'length');
- if(typeof number!=='number'||!Number.isFinite(number)||number<=0||number>1e6)fail('Resolved length is outside the supported domain.');
- return number;
-}
 export function captureAuthoredHoleIntent(input){
  if(!input||typeof input!=='object'||Array.isArray(input))fail('Expected authored through-hole data.');
  const keys=Reflect.ownKeys(input);if(![12,14].includes(keys.length))fail('Unexpected authored through-hole fields.');
