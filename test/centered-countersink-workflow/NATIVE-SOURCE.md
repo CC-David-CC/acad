@@ -145,3 +145,44 @@ refusal/typed/travel/.cad/export criteria plus a genuine Native component whole
 for role/coupled-read completeness, preservation/rollback/resource refusals,
 healthy continuation and retained old ports on the NEW pair. No success,
 publication, whole result, latency or memory claim accompanies source freezing.
+
+## Frozen Native source handoff
+
+Implemented source checkpoint (UNCOMPILED/UNQUALIFIED):
+`c181811c9e9dd20985875386555659f7ad81de44`, exact parentc15 above, branch
+`feature/owned-conical-support-v1-20261109` in the authorized Native repository.
+Five source files changed: the two headers, two narrow existing-file splices and
+`shape-io/CONICAL-SOURCE-V1-20261109.md` (the pre-code contract77d97b copy).
+No SDK source/header, library, build script or binary was changed.
+
+| Actual Native source file | SHA256 |
+| --- | --- |
+| ownedConeTopologyV1.hpp | a2162da34f568e993b24ba791e447394a3990bc80bff93ae3af97a0b5b8d8ab5 |
+| ownedConicalFrustumV1.hpp | af1635ad03852967dbaa6451187f4a3fed4025302bcd2158c034d8131ef9a7d1 |
+| ownedTopologyV1.hpp | 6c4ea61ec8b9890bf20c713bdb058701ff2928bd6f76ff397d9179cff419943f |
+| main.cpp | 011f7ee18326b0eb06c946e90a4b9ef9f92a9c57821c847dd878fb91b72dc564 |
+
+The constructor enforces one remaining slot inside32 current owned names and
+only its own one final allocation; the future semantic operation still charges
+four actual results in the one existing cumulative work/triangle budget. Dot
+(`.`) is rejected as the SDK's special selection token; no name grammar/public
+selector is introduced. All constructor faces must be the distinct actual three
+builder roles and both actual rim edges belong to the corresponding wall/cap;
+counts remain actual map counts. Actual solid mass/bounds come from the retained
+Native measurement implementation, never a nominal frustum formula.
+
+Both read and constructor emit only the frozen closed fields/codes. Actual
+reference origin/x/y/axis, radius, signed semiangle and handedness are read from
+gp_Cone without apex inference. Read never allocates an owned result; named-input
+snapshot/census is checked after a captured read even when observation fails.
+Fresh construction does not touch any prior BRep; future wrapper snapshots of
+its real source/parent remain REQUIRED (root confirmed that boundary). Initial
+snapshot/resource inability is not a successful preservation certificate.
+
+R730 source was relayed to example.invalid through an incremental bundle fromc15, using
+only configured trusted local aliases; no host-key bypass/new trust or Native
+clone/object insertion into ACAD. Bundle SHA256 matched R730/local/box copies:
+`3b49e36147abe66afe372aada686582b50539f1b67877254cbacef1cc1085e28`.
+Both Native refs read backc181. The old qualified worktrees/builds were untouched.
+No compiler, test/probe, Native function, browser, mesh or successful artifact was
+executed/created. Root alone owns compilation and future actual qualification.
