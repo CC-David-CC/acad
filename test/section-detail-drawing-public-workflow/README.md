@@ -23,6 +23,7 @@ PUPPETEER_CORE_PATH=/absolute/puppeteer-core \
 CODI_TEST_URL=http://127.0.0.1:PORT/ CODI_TEST_CDP=http://127.0.0.1:19329 \
 CODI_SIGNED_PINS=/absolute/exact-pins.json \
 CODI_EXPECT_SOURCE=EXACT_CORE CODI_EXPECT_DESKTOP=EXACT_DESKTOP \
+CODI_ACCEPTANCE_SOURCE=EXACT_ACCEPTANCE_COMMIT \
 CODI_EVIDENCE=/absolute/NEW-evidence \
 node test/section-detail-drawing-public-workflow/desktop-driver.mjs
 ```
@@ -45,3 +46,10 @@ The existing isometric/four-bore folders and evidence are untouched. New
 six-role discovery is an explicit capability expansion; any separate retained
 workflow with exact old view-capability-list assertions needs a root-owned
 current-source compatibility copy, not edits to historical receipts.
+
+Acceptance closure and the exact19-file producer/helper roster are documented
+in [SOURCE.md](SOURCE.md). The checker reconciles finite geometric cap ownership;
+public packets do not carry Native edge IDs, so it does not pretend to establish
+private Native identity independently. Exact producer commit/path/blob custody,
+whole phase/format/code/work31+32 rosters, issued highwater and candidate epoch/
+five-token provenance are required. Root composes the product fixes separately.
