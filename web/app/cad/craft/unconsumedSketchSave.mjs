@@ -1,3 +1,4 @@
+import {captureAuthoredBlindHoleIntent} from '../../../../modules/engine/solid/authoredBlindHoleIntent.mjs';
 import {canonicalAuthoredFeatureId} from './authoredFeatureIdentity.mjs';
 import {sourcePlaneFaceId} from './sourcePlaneIdentity.mjs';
 import {captureSourceFrameParameters} from '../../../../modules/engine/source/sourceFrameIntent.mjs';
@@ -77,6 +78,11 @@ export function hasOnlyUnconsumedSketchHistory(history,faceId){
    if(!a||!b||a.build!==spec||b.build!==spec)return false;
    const sources=new Set([...a.sources,...b.sources]);if(sources.has(faceId))return false;
    liveGeneric.delete(data.a);liveGeneric.delete(data.b);liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources,origins:new Set([...a.origins,...b.origins])});features.set(id,{kind:'generic-boolean'});genericBuild=spec;continue;
+  }
+  if(item.type==='WORKER_CENTERED_BLIND_HOLE_V1'){
+   let data;try{data=captureAuthoredBlindHoleIntent(p);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target),source=features.get(fid(data.sourceFeatureId));
+   if(!spec||spec.blindHoleVersion!==1||fid(data.featureId)!==id||!parent||parent.build!==spec||parent.producer!==fid(data.producerFeatureId)||!source||source.kind!=='selected-profile'||parent.producer!==fid(data.sourceFeatureId)||source.sourceFace!==data.sourceFaceId||source.regionId!==data.sourceRegionId||!parent.sources.has(data.sourceFaceId)||parent.sources.has(faceId))return false;
+   liveGeneric.delete(data.target);liveGeneric.set(solidBodyId(data.featureId),{producer:id,build:spec,sources:new Set(parent.sources),origins:new Set(parent.origins)});features.set(id,{kind:'generic-blind-hole'});genericBuild=spec;continue;
   }
   if(item.type==='WORKER_THROUGH_HOLES_V1'){
    let data;try{data=captureAuthoredHoleIntent(p);}catch{return false;}const spec=build(data),parent=liveGeneric.get(data.target),source=features.get(fid(data.sourceFeatureId));

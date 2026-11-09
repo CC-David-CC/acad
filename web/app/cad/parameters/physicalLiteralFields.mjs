@@ -4,6 +4,7 @@
 const common=['featureId'];
 const generic=['version','unit','engine','engineRevision','featureId'];
 const fields=Object.freeze({
+ WORKER_CENTERED_BLIND_HOLE_V1:Object.freeze([...generic,'target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId','entryFaceId','kind']),
  PLANE:Object.freeze([...common,'orientation','datum']),
  WORKER_SELECTED_PROFILE_EXTRUDE_V2:Object.freeze([...generic,'faceId','regionId','bodyPolicy']),
  WORKER_THROUGH_HOLES_V1:Object.freeze([...generic,'target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId','kind']),

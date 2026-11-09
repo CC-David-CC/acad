@@ -30,6 +30,7 @@ export function selectedProfileHistoryBudget(history,engineRevision){
     // not additional persistent result names or another authored model.
     cost=1;
    }
+   if(type.value==='WORKER_CENTERED_BLIND_HOLE_V1'){const build=requireCadEngineBuild(engine.value,revision.value);if(build.blindHoleVersion!==1)fail('UNSUPPORTED_BLIND_HOLE_BUILD','The saved blind hole requires its exact capable build.');cost=2;}
    if(type.value==='WORKER_THROUGH_HOLES_V1'){
     const kind=Object.getOwnPropertyDescriptor(params,'kind');
     if(!kind?.enumerable||!Object.hasOwn(kind,'value')||!['centered-through','four-corner-through'].includes(kind.value))fail('INVALID_REQUEST','Through-hole result cost requires a supported data kind.');

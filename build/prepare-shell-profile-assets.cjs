@@ -1,6 +1,6 @@
 // Explicit component native build; existing assets/defaults are unchanged.
 const path=require('node:path'),fs=require('node:fs'),crypto=require('node:crypto');
-const bootstrapSha='975a33cde4949b2f70e90fe2de7186f792454f16a41545c3c2723822d399e4d0';
+const bootstrapSha='d4e678f52245229991a3c8709f46b4226dbe512b6412171eadc3cb0af2e43932';
 if(crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'../modules/engine/mount/oci-verified-worker.js'))).digest('hex')!==bootstrapSha)throw Error('Unexpected shell bootstrap');
 const {stageOwnedProfileComponent}=require('./stage-owned-profile-component.cjs');
 const defaultOutput=path.resolve(__dirname,'../.build/shell-assets');

@@ -1,5 +1,6 @@
 import {validateOffsetSources} from 'sketcher/headless/offsetSourceValidation';
 import {prepareTypedDependentSketch} from 'sketcher/headless/typedDependentSketch.mjs';
+import {captureAuthoredBlindHoleIntent} from 'engine/solid/authoredBlindHoleIntent.mjs';
 import {validateMirrorSourceGeometry} from 'sketcher/headless/mirrorSourceValidation';
 import {validateSplineDerivedGeometry} from 'sketcher/headless/splineDerivedValidation';
 import {captureSourceFrameParameters} from 'engine/source/sourceFrameIntent.mjs';
@@ -24,6 +25,18 @@ export function preflight(value, parameterState?: {source?: string, result?: any
   // producer roster here in the existing validation Worker, before any replay.
   const featureIds=new Set<number>();
   for(const operation of project.model.history){claimAuthoredFeatureIdentity(operation,featureIds);if(operation.type==='SOURCE_FRAME_V1'){const p=captureSourceFrameParameters(operation.params);if(p.parent&&!featureIds.has(p.parent.featureId))throw Object.assign(Error('Source attachment requires an earlier producer.'),{code:'INVALID_FRAME_DEPENDENCY'});}}
+  // Schema + earlier-source relation only; actual entry/floor authority is the
+  // owned Native candidate during ordinary restore. Named lengths resolve through
+  // the existing physical evaluator below and actual feature materialization.
+  const blindSources=new Map<number,any>();
+  for(const operation of project.model.history){
+    if(operation.type==='WORKER_CENTERED_BLIND_HOLE_V1'){
+      const p=captureAuthoredBlindHoleIntent(operation.params),parent=blindSources.get(p.sourceFeatureId),q=parent?.params;
+      if(parent?.type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2'||q.engine!==p.engine||q.engineRevision!==p.engineRevision||q.faceId!==p.sourceFaceId||q.regionId!==p.sourceRegionId)throw Object.assign(Error('Blind native intent requires its genuine earlier selected constructor.'),{code:'BLIND_UNSUPPORTED_TARGET'});
+      if(typeof p.depth==='number'&&typeof q.depth==='number'&&p.depth>=q.depth)throw Object.assign(Error('Blind depth must remain strictly less than current part thickness.'),{code:'BLIND_DEPTH_NOT_INTERIOR'});
+    }
+    blindSources.set(Number(operation.params.featureId),operation);
+  }
   const physical=decodePhysicalSource(project.model.expressions);
   let physicalValues:Map<string,any>=null;
   if (physical) {
