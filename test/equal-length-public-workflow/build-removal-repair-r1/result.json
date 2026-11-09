@@ -1,0 +1,19 @@
+{
+  "status": "BUILD_AND_STAGE_PASS_NOT_WORKFLOW_QUALIFICATION",
+  "buildSession": 3605,
+  "buildExitCode": 0,
+  "stageSession": 47323,
+  "stageExitCode": 0,
+  "source": "a5343ddf0ee3b1757321c615fc8df3384d2d6d5b",
+  "desktop": "7fc7a508f4d6d90b846227ee5feb8d3b93109261",
+  "actualCompilerWarningReview": "no warning/error/missing-export matches; full log retained",
+  "wholeSession": 7031,
+  "wholeStatus": "RUNNING",
+  "hashes": {
+    "normal-build.log": "bcdddd7ddd400ec661e9b532c788729828eea0f8e7f0b6a47b9156212ad6a61a",
+    "build.sh": "77c4ab4da145ff30df8e789479dae933d7f60de2420d0cc99ab0317a46f7830f",
+    "stage.log": "663becf44ff8563a7c9f4ad74b897550aa8198528debd65da444c71502b27168",
+    "stage.sh": "1c5be78e329ceb4ffbbf36039a9199a14226a678803dc649692303702e8045d9",
+    "runtime-pins.json": "a63ea50013b2404d7d03995d1be5fd53747a8ddfa5856f8a9433b3a74c92664f"
+  }
+}
