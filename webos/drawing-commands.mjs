@@ -20,12 +20,13 @@ export function registerDrawingCommands(host,getTarget){
  // Variant fields are conditional; actual fieldsets are enforced by PM.
  dimension.required=['dimensionId','viewId','kind','label'];
  Object.assign(dimension.properties,{axis:{enum:['datum-x','datum-y','datum-normal']},from:ref('source'),to:ref('source'),first:ref('face'),second:ref('face'),edge:ref('edge'),hole:ref('hole')});
- dimension.description='source-distance:axis/from/to; plane-distance:datum-normal/first/second (front/right); edge-length:edge; hole-diameter:hole; hole-offset:axis/hole. Source/offset axes:datum-x|datum-y. Nonnegative axis magnitudes, not diagonals; labels:paper mm.';
- const definition=record({version:{enum:[1,2]},unit:{enum:['millimeter']},drawingId:text(128),title:{type:'string',maxLength:256},
+ dimension.description='Exact kind-specific references; physical nonnegative orthographic dimensions. Shared Core captures full variants.';
+ const definition=record({version:{enum:[1,2,3]},unit:{enum:['millimeter']},drawingId:text(128),title:{type:'string',maxLength:256},
   target:record({featureId:integer,operationType:text(128),engine:{enum:['occ']},engineRevision:{type:'string',pattern:'^sha256:[a-f0-9]{64}:[a-f0-9]{64}$'},output:{enum:['complete-native-result']}}),
   datum:record({featureId:integer,faceId:text(256),regionId:text(8192)}),
   sheet:record({width:{type:'number',exclusiveMinimum:0,maximum:10000},height:{type:'number',exclusiveMinimum:0,maximum:10000},scale:record({numerator:{type:'integer',minimum:1,maximum:10000},denominator:{type:'integer',minimum:1,maximum:10000}})}),
   views:{type:'array',minItems:1,maxItems:4,items:record({viewId:text(128),basis:{enum:['top','front','right','isometric']},paperOrigin:ref('point'),visibility:{enum:['visible-and-hidden']}})},dimensions:{type:'array',maxItems:16,items:dimension}});
+ definition.properties.annotations={type:'array',maxItems:16,items:{type:'object'}};
  function plain(value){const p=Object.getPrototypeOf(value);if(p===null)return true;const c=Object.getOwnPropertyDescriptor(p,'constructor');return Object.getPrototypeOf(p)===null&&c&&Object.hasOwn(c,'value')&&typeof c.value==='function'&&c.value.prototype===p;}
  function own(value,keys){
   if(!value||typeof value!=='object'||Array.isArray(value)||!plain(value)||Reflect.ownKeys(value).length!==keys.length)throw Error('Expected exact drawing command fields.');
@@ -66,7 +67,7 @@ export function registerDrawingCommands(host,getTarget){
   }));
   for(const [id,op] of [['create-linked-part-drawing','drawing.create'],['replace-linked-part-drawing','drawing.replace'],['remove-linked-part-drawing','drawing.remove']]){
    const properties={version:{enum:[1]},unit:{enum:['millimeter']},revision:text(256),geometryRevision:text(256),...(op==='drawing.create'?{}:{drawingId:text(128)}),...(op==='drawing.remove'?{}:{definition})};
-   stops.push(host.commands.register({id,description:'Publish a linked drawing in the shared journal. Definition v1:1-3 top/front/right views; v2:exact top/front/right/isometric. Dimensions stay physical on orthographic views. Use both revisions; Save separately. References may be unresolved.',parameters:{...record(properties),...(op==='drawing.remove'?{}:{$defs:refs})}},args=>{
+   stops.push(host.commands.register({id,description:'Publish a linked drawing in the shared journal. Definition v1/v2 views retained; v3 adds up to16 typed bore annotations (same physical dimensions). Use both revisions; Save separately. References may be unresolved.',parameters:{...record(properties),...(op==='drawing.remove'?{}:{$defs:refs})}},args=>{
     const request=detach({op,...own(args,Object.keys(properties))}),t=target('applyLinkedPartDrawingOperation'),scope={signal:host.signal,valid:t.valid};
     return settleScopedCommand(t.manager.applyLinkedPartDrawingOperation(request,scope),scope);
    }));

@@ -28,6 +28,7 @@ import {registerParameterCommands} from './parameter-commands.mjs';
 import {registerLegacyExpressionCommands} from './legacy-expression-commands.mjs';
 import {registerDisplayUnitCommands} from './display-unit-commands.mjs';
 import {registerMaterialCommands} from './material-commands.mjs';
+import {registerDrawingBoreCommands} from './drawing-bore-commands.mjs';
 import {registerDrawingCommands} from './drawing-commands.mjs';
 import {registerManufacturingCommands} from './manufacturing-commands.mjs';
 import {registerDocumentSaveCommand} from './document-commands.mjs';
@@ -127,7 +128,7 @@ export function mount(host){
   // Full definition validation belongs to the CAD validation Worker/manager.
   // Never accept a mismatched version that could silently discard metadata.
   const hasDrawings=Object.hasOwn(value,'drawings');
-  if(value.version===2?hasDrawings:!hasDrawings||!Array.isArray(value.drawings)||value.drawings.length!==1||Reflect.ownKeys(value.drawings).length!==2||!Object.hasOwn(value.drawings,0)||!value.drawings[0]||typeof value.drawings[0]!=='object'||Array.isArray(value.drawings[0])||![1,2].includes(value.drawings[0].version)||value.drawings[0].unit!=='millimeter')throw Error('The CAD runtime returned unsupported drawing metadata.');
+  if(value.version===2?hasDrawings:!hasDrawings||!Array.isArray(value.drawings)||value.drawings.length!==1||Reflect.ownKeys(value.drawings).length!==2||!Object.hasOwn(value.drawings,0)||!value.drawings[0]||typeof value.drawings[0]!=='object'||Array.isArray(value.drawings[0])||![1,2,3].includes(value.drawings[0].version)||value.drawings[0].unit!=='millimeter')throw Error('The CAD runtime returned unsupported drawing metadata.');
   return value;
  }
  function snapshot(frame=active){if(!valid()||!frame||!frames.has(frame))throw Error('The modeling window is unavailable.');const ctx=frame.contentWindow?.__CAD_APP;if(!ctx?.projectManager)throw Error('The model is still loading.');return JSON.stringify(supportedEnvelope(ctx.projectManager.snapshotCurrentProject()));}
@@ -250,6 +251,7 @@ export function mount(host){
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
   return {manager,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.projectManager===manager};
  }));
+ if(host.commands)host.onDispose(registerDrawingBoreCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerDrawingExportCommand(host,{inspect:inspectSaveTarget,exportDrawing:exportDrawingSvg}));
  if(host.commands)host.onDispose(registerDrawingCommands(host,()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
