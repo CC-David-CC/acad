@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+"""AFTER-WHOLE independent source/equations/Decimal/Fraction/ZIP/XML/STEP audit.
+No production codec/validator/solver/geometry executor. make-bad creates only own
+negative files during the complete workflow; never a positive authoring source.
+"""
+import binascii,hashlib,json,math,re,sys,zipfile,zlib
+from collections import Counter
+from decimal import Decimal,localcontext
+from fractions import Fraction
+from pathlib import Path
+from xml.etree import ElementTree as ET
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'native-cad-container'))
+from archive_oracle import read_archive,structure,rebuild,manifest_row,canonical,root_record
+from step_oracle import inspect_step
+PI=Decimal('3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651')
+sha=lambda b:hashlib.sha256(b).hexdigest()
+KEYS={'version','unit','engine','engineRevision','featureId','target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId','entryFaceId','kind','throughDiameter','stepDiameter','stepDepth'}
+PREFIX='codi-physical-parameters:1\n'
+def need(v,msg):
+ if not v:raise ValueError(msg)
+def one(xs,label):need(len(xs)==1,'one '+label);return xs[0]
+def near(x,y,t=5e-8):need(type(x) in (int,float) and math.isfinite(x) and abs(x-float(y))<=t,f'{x} differs from {y}, budget {t}')
+def settled(s):
+ r=s['ownership']['resources'];need(not s['ownership']['processing'] and not r['cleanupFailed'] and all(r[k]==0 for k in ('candidates','accepted','mounts')) and r['owners']==r['detached'],'retired actual Native resources');need(not s['lifecycle']['pipelineFailed'] and not s['lifecycle']['cleanupFailed'],'healthy candidate continuation')
+def expected_volume(e):
+ with localcontext() as c:
+  c.prec=90;T=Decimal(str(e['thickness']));r=Decimal(str(e['throughDiameter']))/2;R=Decimal(str(e['stepDiameter']))/2;h=Decimal(str(e['stepDepth']));return Decimal(str(e['width']))*Decimal(str(e['height']))*T-PI*(r*r*T+(R*R-r*r)*h)
+def point_class(p,e):
+ x,y,z=map(lambda v:Fraction(str(v)),p);W,H,T=[Fraction(str(e[k])) for k in ('width','height','thickness')];r,R=[Fraction(str(e[k]))/2 for k in ('throughDiameter','stepDiameter')];h=Fraction(str(e['stepDepth']));s=T-h;q=(x-W/2)**2+(y-H/2)**2
+ if not(0<=x<=W and 0<=y<=H and 0<=z<=T):return 'outside'
+ if r and(q<r*r or z>s and q<R*R):return 'outside'
+ if x in (0,W) or y in (0,H):return 'boundary'
+ if r and(q==r*r and z<=s or q==R*R and z>=s or r*r<=q<=R*R and z==s):return 'boundary'
+ if z in (0,T):return 'boundary'
+ return 'inside'
+def rectangle(s,b,inspection,e):
+ need(s['version']==3 and len(s['objects'])==4 and len(s['stages'])==1 and not s['stages'][0]['generators'] and len(s['stages'][0]['constraints'])==11,'genuine four-Segment/eleven-row source')
+ need(all(not x for x in s['boundary'].values()),'no external source seed');need(s['metadata']['boundaryFrame']=={'origin':[0,0,0],'x':[1,0,0],'y':[0,1,0],'z':[0,0,1]},'actual source frame')
+ objects={o['id']:o for o in s['objects']};need(set(objects)==set(b['sourceCurveIds']) and len(objects)==4,'actual discovered source curve IDs');corners=[(0,0),(e['width'],0),(e['width'],e['height']),(0,e['height'])];counts={p:0 for p in corners};edges=set()
+ for o in objects.values():
+  need(o['type']=='Segment' and o['role'] is None and o['stage']==0,'ordinary actual Segment');ends=[]
+  for p in (o['data']['a'],o['data']['b']):
+   q=one([q for q in corners if abs(q[0]-p['x'])<=5e-8 and abs(q[1]-p['y'])<=5e-8],'source coordinate budget');counts[q]+=1;ends.append(q)
+  edges.add(frozenset(ends))
+ need(all(n==2 for n in counts.values()) and edges=={frozenset([corners[i],corners[(i+1)%4]]) for i in range(4)},'actual complete rectangular boundary')
+ points={}
+ for p in inspection['points']:
+  o=objects[p['parentId']];points[p['id']]=one([q for q in o['data'].values() if abs(q['x']-p['x'])<=5e-8 and abs(q['y']-p['y'])<=5e-8],'actual public endpoint/parent ownership')
+ for c in s['stages'][0]['constraints']:
+  need(c['admission']['state'] in ('accepted','redundant'),'actual solved admission');t=c['typeId'];refs=c['objects'];k=c.get('constants',{})
+  if t=='PCoincident':
+   a,bp=[points[i] for i in refs]
+   for axis in ('x','y'):near(a[axis],bp[axis])
+  elif t=='LockPoint':
+   p=points[one(refs,'actual point lock')]
+   for axis in ('x','y'):near(p[axis],float(k[axis]))
+  elif t in ('Horizontal','Vertical','SegmentLength'):
+   o=objects[one(refs,'actual constrained Segment')];a,bp=o['data']['a'],o['data']['b']
+   if t=='SegmentLength':near(math.dist((a['x'],a['y']),(bp['x'],bp['y'])),float(k['length']))
+   else:near(a['y' if t=='Horizontal' else 'x'],bp['y' if t=='Horizontal' else 'x'])
+  else:raise ValueError('Unexpected source equation '+t)
+ return s
+
+def intents(state,b,e,bound,build):
+ h=state['capture']['native']['history'];p=one([r['params'] for r in h if r['type']=='WORKER_SELECTED_PROFILE_EXTRUDE_V2'],'actual profile');need(p['featureId']==b['profile']['featureId'] and p['faceId']==b['faceId'] and p['regionId']==b['regionId'] and p['engineRevision']==build,'same actual constructor/source/build');need(p['depth']==('plate' if bound else e['thickness']),'raw thickness binding')
+ rows=[r for r in h if r['type']=='WORKER_CENTERED_COUNTERBORE_V1'];need(len(rows)==bool(e['throughDiameter']),'no private tool/Boolean feature recipe')
+ if rows:
+  q=one(rows,'counterbore')['params'];need(set(q)==KEYS and q['version']==1 and q['unit']=='millimeter' and q['engine']=='occ' and q['engineRevision']==build and q['kind']=='centered-counterbore-flat','exact fifteen-field semantic intent')
+  need(q['featureId']==b['counterbore']['featureId'] and q['target']==b['profile']['outputId'] and q['producerFeatureId']==q['sourceFeatureId']==b['profile']['featureId'] and q['sourceFaceId']==b['faceId'] and q['sourceRegionId']==b['regionId'] and q['entryFaceId']==b['counterbore']['entryFaceId'],'actual authentic parent/source/entry identity; no ID parsing')
+  need(q['throughDiameter']==('bore' if bound else e['throughDiameter']) and q['stepDiameter']==('step' if bound else e['stepDiameter']) and q['stepDepth']==('recess' if bound else e['stepDepth']),'raw counterbore bindings retained')
+ need(all(r['type'] in ('PLANE','WORKER_SELECTED_PROFILE_EXTRUDE_V2','WORKER_CENTERED_COUNTERBORE_V1') for r in h),'one authored graph, no fake tool history')
+ expression=state['capture']['native']['expressions']
+ if bound:
+  need(expression.startswith(PREFIX),'actual typed source');defs=json.loads(expression[len(PREFIX):]);need(defs==state['physical']['definitions'],'actual inspected/saved directed parameter state');need([d['name'] for d in defs]==['plate','bore','step','recess'],'exact finite named lengths')
+  for d,value in zip(defs,[e['thickness'],e['throughDiameter'],e['stepDiameter'],e['stepDepth']]):need(d['dimension']=='length' and d['expression']==f'mm({value})','unchanged authoritative definition');row=one([r for r in state['physical']['quantities'] if r['name']==d['name']],'actual evaluated quantity');near(row['value'],value,1e-12)
+ else:need(expression=='','literal source remains literal')
+
+def check_refusal(row):
+ before,after=row['before'],row['after'];need(row['error'] and not row['error']['committed'] and not row['error']['possiblyCommitted'],'actual typed refusal');settled(before);settled(after)
+ if not row['candidate']:need(after==before,'pre-candidate full state exact');return
+ for s in (before,after):
+  need(s['drawing']['revision']==s['host']['revision']==s['manufacturing']['revision']==s['physical']['presentationRevision'],'actual document token links')
+  need(s['drawing']['geometryRevision']==s['capture']['solids']['revision'],'actual geometry token link');need(s['physical']['revision']==s['capture']['journal']['revision'],'actual physical/J link')
+  j=s['capture']['journal']['revision'];need(j.endswith(':'+s['host']['revision']) and re.fullmatch(r'[0-9]+:[0-9]+:',j[:-len(s['host']['revision'])]),'actual J generation/revision/document suffix')
+ need(after['lifecycle']['epoch']==before['lifecycle']['epoch']+1 and after['host']['revision']!=before['host']['revision'] and after['capture']['solids']['revision']!=before['capture']['solids']['revision'],'exact one candidate invalidation')
+ need(after['capture']['journal']['revision']==before['capture']['journal']['revision'][:-len(before['host']['revision'])]+after['host']['revision'],'same exact J chronology')
+ def accepted(s):
+  q=json.loads(json.dumps(s));q['lifecycle'].pop('epoch')
+  for parent,key in ((q['capture']['solids'],'revision'),(q['capture']['journal'],'revision'),(q['host'],'revision'),(q['drawing'],'revision'),(q['drawing'],'geometryRevision'),(q['physical'],'revision'),(q['physical'],'presentationRevision'),(q['manufacturing'],'revision')):parent.pop(key)
+  return q
+ need(accepted(before)==accepted(after),'all other accepted state exact, no broad normalization')
+
+def mesh(raw,e,b,build):
+ ns={'m':'http://schemas.microsoft.com/3dmanufacturing/core/2015/02'}
+ with zipfile.ZipFile(__import__('io').BytesIO(raw)) as z:
+  need(z.testzip() is None,'3MF CRC');root=ET.fromstring(z.read('3D/3dmodel.model'));need(root.attrib['unit']=='millimeter','3MF physical unit')
+ need(root.find('m:metadata[@name="codi:SourceRevision"]',ns) is not None,'real source revision');provenance=json.loads(root.find('m:metadata[@name="codi:ManufacturingBindings"]',ns).text);part=one(provenance['parts'],'actual printable part');region=one(part['regions'],'actual printable region');need(part['id']=='plate' and region['id']=='main' and region['bodyId']==b['counterbore']['outputId'] and region['featureId']==b['counterbore']['featureId'] and region['engineRevision']==build and region['materialId']=='pla' and region['appearanceId']=='blue','derived metadata binds actual authored source/producer/material')
+ resources=root.find('m:resources',ns);objects={x.attrib['id']:x for x in resources.findall('m:object',ns)};leaves=[];visited=set()
+ def visit(identity):
+  need(identity in objects and identity not in visited,'actual unique build component');visited.add(identity);o=objects[identity];m=o.find('m:mesh',ns)
+  if m is not None:leaves.append((identity,o,m));return
+  cs=o.find('m:components',ns);need(cs is not None,'mesh or actual components')
+  for c in cs:
+   need('transform' not in c.attrib or [float(v) for v in c.attrib['transform'].split()]==[1,0,0,0,1,0,0,0,1,0,0,0],'no unreported component placement');visit(c.attrib['objectid'])
+ for item in root.find('m:build',ns):need('transform' not in item.attrib or [float(v) for v in item.attrib['transform'].split()]==[1,0,0,0,1,0,0,0,1,0,0,0],'actual build identity');visit(item.attrib['objectid'])
+ identity,obj,m=one(leaves,'actual mesh');need(identity==str(region['meshResourceId']) and obj.attrib.get('pid')==str(region['materialResourceId']) and obj.attrib.get('pindex')==str(region['materialIndex']),'actual mesh/material resource binding');base=resources.find('m:basematerials[@id="'+str(region['materialResourceId'])+'"]',ns);need(base is not None and 0<=region['materialIndex']<len(base),'actual material resource/index');need(base[region['materialIndex']].attrib['displaycolor'].upper()=='#3366FF','actual Blue material color');need(str(part['buildResourceId']) in objects and str(region['componentResourceId']) in objects,'actual build/component resource binding');need(one(list(root.find('m:build',ns)),'actual build item').attrib['objectid']==str(part['buildResourceId']),'actual named part build');need(one(list(objects[str(region['componentResourceId'])].find('m:components',ns)),'actual region component').attrib['objectid']==identity,'actual region-to-mesh component');vertices=[[float(v.attrib[k]) for k in ('x','y','z')] for v in m.find('m:vertices',ns)];triangles=[[int(v.attrib[k]) for k in ('v1','v2','v3')] for v in m.find('m:triangles',ns)];need(0<len(vertices)<=150000 and 0<len(triangles)<=250000,'controlled aggregate bounds');r=e['throughDiameter']/2;R=e['stepDiameter']/2;floor=e['thickness']-e['stepDepth'];W=e['width'];H=e['height'];T=e['thickness'];edge_use=Counter();edge_orientation=Counter();volumes=[]
+ def surface(p):
+  x,y,z=p;rho=math.hypot(x-W/2,y-H/2);tol=.010001
+  if not(-tol<=x<=W+tol and -tol<=y<=H+tol and -tol<=z<=T+tol):return False
+  candidates=[abs(x),abs(x-W),abs(y),abs(y-H)]
+  if rho>=r-tol:candidates.append(abs(z))
+  if rho>=R-tol:candidates.append(abs(z-T))
+  if r-tol<=rho<=R+tol:candidates.append(abs(z-floor))
+  if -tol<=z<=floor+tol:candidates.append(abs(rho-r))
+  if floor-tol<=z<=T+tol:candidates.append(abs(rho-R))
+  return min(candidates)<=tol
+ for p in vertices:need(all(math.isfinite(v) for v in p) and surface(p),'actual mesh vertex belongs to finite source/cylinder/annulus boundary')
+ for tri in triangles:
+  need(len(set(tri))==3 and all(0<=i<len(vertices) for i in tri),'actual triangle indices')
+  for i in range(3):u,v=tri[i],tri[(i+1)%3];key=tuple(sorted((u,v)));edge_use[key]+=1;edge_orientation[key]+=1 if u<v else -1
+  p,q,s=[vertices[i] for i in tri];need(surface([math.fsum(v[k] for v in (p,q,s))/3 for k in range(3)]),'actual triangle centroid belongs to finite boundary, no invented floor disk');volumes.append((p[0]*(q[1]*s[2]-q[2]*s[1])+p[1]*(q[2]*s[0]-q[0]*s[2])+p[2]*(q[0]*s[1]-q[1]*s[0]))/6)
+ need(all(n==2 for n in edge_use.values()) and all(n==0 for n in edge_orientation.values()),'independent closed oriented mesh');volume=math.fsum(volumes);allowance=math.pi*((2*r*.01+.01**2)*floor+(2*R*.01+.01**2)*e['stepDepth'])+1e-5;need(volume>0 and abs(volume-float(expected_volume(e)))<=allowance,'mesh versus independently bounded cylindrical tessellation error')
+ return {'vertices':len(vertices),'triangles':len(triangles),'signedVolume':volume,'volumeAllowance':allowance,'quality':'derived-controlled-mesh-not-exact-BRep'}
+
+def svg(raw,e,definition):
+ ns={'s':'http://www.w3.org/2000/svg'};root=ET.fromstring(raw);need(root.attrib['width']=='420mm' and root.attrib['height']=='297mm' and root.attrib['viewBox']=='0 0 420 297','physical sheet/scale');meta=json.loads(root.find('s:metadata',ns).text);need(meta['drawingId']==definition['drawingId'] and meta['status']=='available' and meta['dimensionRole']=='reference','actual available source/reference drawing');texts=[n.text or '' for n in root.findall('.//s:text',ns)];need(not any('UNRESOLVED' in t or 'THRU' in t for t in texts),'no failed reference/false through label');need(f"ΔX {e['width']:.3f} mm" in texts and f"ΔY {e['height']:.3f} mm" in texts and f"ΔZ {e['thickness']:.3f} mm" in texts,'actual source-axis/thickness semantics');need(root.findall('.//s:path',ns),'real projected paths');need(len(definition['dimensions'])==3 and not any(d['kind'].startswith('hole') for d in definition['dimensions']),'no unsupported blind measurement masquerade');return meta
+
+def make_bad(source,dest,receipt_path):
+ source,dest=Path(source),Path(dest);dest.mkdir(parents=True,exist_ok=False);receipt=json.loads(Path(receipt_path).read_text());saved=receipt['saves'][1];body=one(saved['before']['capture']['solids']['bodies'],'actual saved body');wrong=one([f['id'] for f in body['selections']['plan']['faces'] if f['role']=='first-cap' and f['originFeatureId']==receipt['binding']['profile']['featureId']],'actual wrong-role cap');need(wrong!=receipt['binding']['counterbore']['entryFaceId'],'genuinely distinct discovered cap');info=read_archive(source);output=[]
+ for name,code in [('equal-depth','COUNTERBORE_STEP_NOT_INTERIOR'),('reversed-diameters','COUNTERBORE_DIAMETER_ORDER'),('wrong-entry','COUNTERBORE_ENTRY_UNRESOLVED')]:
+  model=json.loads(json.dumps(info['envelope']['project']['model']));p=one([r['params'] for r in model['history'] if r['type']=='WORKER_CENTERED_COUNTERBORE_V1'],'semantic native feature')
+  if name=='equal-depth':p['stepDepth']='plate'
+  elif name=='reversed-diameters':p['throughDiameter'],p['stepDiameter']='step','bore'
+  else:p['entryFaceId']=wrong
+  raw=canonical(model);compressor=zlib.compressobj(6,zlib.DEFLATED,-15);compressed=compressor.compress(raw)+compressor.flush();rows=[dict(r) for r in structure(source.read_bytes())];row=one([r for r in rows if r['path']=='authored/model.json'],'model entry');row.update(bytes=len(raw),crc=binascii.crc32(raw)&0xffffffff,compressed=compressed);manifest=json.loads(json.dumps(info['manifest']));descriptor=one([r for r in manifest['entries'] if r['role']=='model'],'model descriptor');descriptor.update(bytes=len(raw),sha256=sha(raw));manifest['designRevision']=sha(canonical(root_record(manifest)));rows[-1]=manifest_row(manifest);file=dest/(name+'.cad');file.write_bytes(rebuild(rows));read_archive(file);output.append({'name':name,'path':str(file),'code':code,'negativeOnly':True})
+ return output
+
+def check(directory):
+ directory=Path(directory);r=json.loads((directory/'receipt.json').read_text());need(r['status']=='PASS' and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'],'complete genuine whole/context cleanup');need(not r['sourceSeeds'] and not r['privateAuthoring'] and not r['fakeReplies'],'no fake Native/source');need(r['sourcePins']==r['sourcePinsAfter'],'unchanged executed source');build=r['engineRevision'];need(build=='sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc','actual approved primary MFG pair')
+ need(r['producerRoster']['core']==r['pins']['source'] and r['producerRoster']['desktop']==r['pins']['desktop'],'exact producing Git tuple');need(all(re.fullmatch('[0-9a-f]{40}',row['gitBlob']) for row in r['producerRoster']['rows']),'actual Git blob roster');need(all(w['state']=='settled-and-server-identical' or w['state']=='rejected' and not w['error']['committed'] and not w['error']['possiblyCommitted'] for w in r['writes']),'every own write reached actual known settlement/sync');
+ for row in r['sourceSnapshots']:need(sha((directory/row['file']).read_bytes())==row['sha256'],'exact executing source snapshot')
+ for row in r['producerRoster']['rows']:
+  source=one([s for s in r['sourceSnapshots'] if s['originalFile']==row['repository']+'@'+row['commit']+':'+row['path']],'producer/helper Git snapshot');need(source['sha256']==row['sha256'] and (directory/source['file']).stat().st_size==row['bytes'],'exact producer/helper bytes')
+ need(len(r['creationTravel'])==1 and len(r['saves'])==2 and len(r['reopens'])==2 and len(r['artifacts'])==6 and len(r['malformed'])==3,'complete required lifecycle/artifact/negative roster');need(len(r['observations'])>=20,'actual creation/source/edit/travel/read observations');points=0
+ for row in r['observations']:
+  s,b,e=row['before'],row['binding'],row['dimensions'];settled(s);need(row['workBudget']['plannedNativeResults']==(5 if e['throughDiameter'] else 1) and row['workBudget']['maxLifetimeNames']==32,'unchanged authored work budget, four genuine results required by bound receipt');need(row['after']==s,'actual readonly equality');src=json.loads(one([x for x in s['capture']['native']['sketches'] if x['id']==b['faceId']],'source')['source']);rectangle(src,b,row['inspection'],e);intents(s,b,e,row['bound'],build);body=one(s['capture']['solids']['bodies'],'actual body');m=body['metrics'];need(m['nativeValidity']['valid'] and m['solidCount']==1 and m['resultKind']=='single-solid','actual measured valid solid');near(m['nativeVolume'],expected_volume(e),1e-6)
+  for key,expected in [('min',[0,0,0]),('max',[e['width'],e['height'],e['thickness']])]:
+   for actual,wanted in zip(m['nativeBounds'][key],expected):near(actual,wanted,1e-6)
+  need(row['query']['quality']=='native-re-evaluation-observation' and row['query']['bodyId']==body['id'] and row['query']['engineRevision']==build,'actual same-body/build Native points');need([p['point'] for p in row['query']['points']]==row['input']['points'],'actual issued queries');need([p['classification'] for p in row['query']['points']]==[point_class(p,e) for p in row['input']['points']],'independent Fraction material/void/annular shoulder equations');points+=len(row['input']['points'])
+ travel=r['creationTravel'][0]
+ def authored(s):
+  n=json.loads(json.dumps(s['capture']['native']));n.pop('materialRevision',None);return n
+ original=authored(travel['before']);original['counters']=travel['created']['capture']['native']['counters'];need(authored(travel['undone'])==original,'actual immediate creation Undo restores exact original intent with retained high water');need(authored(travel['redone'])==authored(travel['created']),'actual immediate creation Redo restores exact fifteen-field intent and IDs');need(travel['redone']['capture']['solids']['bodies'][0]['selections']==travel['created']['capture']['solids']['bodies'][0]['selections'],'same actual inherited selections/explicit unresolved identities')
+ control=r['controlPlane']['faceId'];control_source=one([s['source'] for s in travel['before']['capture']['native']['sketches'] if s['id']==control],'actual independently authored control source')
+ for observation in r['observations']:
+  need(one([s['source'] for s in observation['before']['capture']['native']['sketches'] if s['id']==control],'retained independent source')==control_source,'unrelated authored control source remains exact')
+ for row in r['refusals']:check_refusal(row)
+ archives=[]
+ for saved in r['saves']:
+  p=directory/saved['savedFile'];info=read_archive(p);need(info['sha256']==saved['sha256'] and info['bytes']==saved['bytes'],'actual browser/server archive bytes');project=info['envelope']['project'];need(project['model']['history']==saved['before']['capture']['native']['history'] and project['model']['expressions']==saved['before']['capture']['native']['expressions'],'actual archived authored intent/formulas');actual={s['id']:json.loads(s['source']) for s in saved['before']['capture']['native']['sketches']};need({s['id']:s['data'] for s in project['sketches']}==actual,'exact all saved source, no dropped unrelated control');need(info['envelope']['drawings']==[r['definition']],'exact persisted genuine drawing definition');need(info['envelope']['manufacturing']==saved['before']['manufacturing']['metadata'],'exact material state');archives.append({'file':saved['savedFile'],'sha256':info['sha256'],'designRevision':info['manifest']['designRevision']})
+ for opened in r['reopens']:
+  for k in ('history','source','sketches','expressions','counters','presentation'):need(opened['before']['capture']['native'][k]==opened['opened']['capture']['native'][k],'actual fresh Open '+k)
+  need(not opened['opened']['capture']['journal']['canUndo'] and not opened['opened']['capture']['journal']['canRedo'],'journal is honestly session-local')
+ artifacts=[]
+ for row in r['artifacts']:
+  raw=(directory/row['savedFile']).read_bytes();need(sha(raw)==row['sha256'] and len(raw)==row['bytes'],'actual artifact bytes');e=row['dimensions']
+  if row['format']=='step':detail=inspect_step(raw,{**e,'volume':float(expected_volume(e))})
+  elif row['format']=='3mf':detail=mesh(raw,e,row['binding'],build)
+  else:detail=svg(raw,e,r['definition'])
+  artifacts.append({'file':row['savedFile'],'format':row['format'],'detail':detail})
+ for row in r['malformed']:need(row['error']['code']==row['code'] and row['before']['capture']['native']==row['after']['capture']['native'],'typed pre-adoption negative/healthy source preservation')
+ return {'status':'PASS','scope':'finite semantic centered counterbore, not all C06 or general interchange','observations':len(r['observations']),'nativePoints':points,'refusals':len(r['refusals']),'archives':archives,'artifacts':artifacts,'sourceMmBudget':5e-8,'nativeVolumeMm3Budget':1e-6,'nativeBoundsMmBudget':1e-6,'finiteBRepNotMeshAuthority':True}
+
+if __name__=='__main__':
+ if len(sys.argv)>1 and sys.argv[1]=='make-bad':print(json.dumps(make_bad(sys.argv[2],sys.argv[3],sys.argv[4])));sys.exit(0)
+ directory=Path(sys.argv[1]);result=check(directory);(directory/'independent-oracle.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
