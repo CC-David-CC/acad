@@ -637,3 +637,12 @@ Root transport regression:27 combined loft/sweep/revolve controls pass (8 loft,
 geometry or a full app acceptance. CAD coordinator/factory components pass
 separately; complete signed application create/edit/UndoRedo/Save/Open remains
 unqualified. No deployment follows from adding these registrations.
+
+## Source-ready semantic sketch Offset
+
+The finite shared Segment/Circle Offset transport is in `offset-commands.mjs`;
+root integration registers its four commands through the existing scoped CAD
+window/document target. `examples/source-bound-offset.mjs` and its `.md` show
+caller-supplied actual root/output IDs, explicit sides and separate Save/Open.
+This source packet is not runtime qualification, general chain/Arc offsetting,
+associative source projection, generated-profile flattening or a new file path.
