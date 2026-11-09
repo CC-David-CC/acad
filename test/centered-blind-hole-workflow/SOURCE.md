@@ -374,7 +374,7 @@ or normalizing source. This is not a new general ECMAScript float formatter.
 
 For each own negative, only `authored/model.json`,
 `authored/manufacturing.json` and `manifest.json` change. The model differs at
-exactly history[actual blind index].params.depth (`recess`→`plate`) or
+exactly history[actual blind index].params.depth (`blind`→`plate`) or
 entryFaceId (actual last cap→distinct actual public first cap). Manufacturing
 changes ONLY its domain-separated revision; material definitions, bindings,
 accepted bounds/volume/counts and other witnesses are untouched. They are NOT
@@ -393,3 +393,10 @@ result. No actual malformed artifact generation or runtime execution occurred
 in this source lane. All29 observation phases,13refusals, two exact semantic
 negative codes, full state equality and prior write/listing custody remain.
 The exact transitive acceptance roster adds this new helper:13 files total.
+
+Root source review caught the preceding helper's wrong `recess` precondition
+before execution. The actual immutable public recipe and `check.py::intents`
+use the exact names `plate/bore/blind`; the equal-depth negative must replace
+`blind` with `plate`. The narrow follow-up corrects that string precondition
+and this note, preserving the prior commit and every other criterion. No test,
+probe, archive generation or runtime execution was performed for this repair.

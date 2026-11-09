@@ -80,7 +80,7 @@ def semantic_change(base,receipt,name):
  history=base['model']['history'];indices=[i for i,r in enumerate(history) if r['type']=='WORKER_CENTERED_BLIND_HOLE_V1'];need(len(indices)==1,'one genuine semantic blind feature')
  index=indices[0];p=history[index]['params'];binding=receipt['binding'];need(str(p['featureId'])==str(binding['blind']['featureId']),'actual saved blind feature binding')
  if name=='equal-depth':
-  parent=[r['params'] for r in history if r['type']=='WORKER_SELECTED_PROFILE_EXTRUDE_V2' and str(r['params']['featureId'])==str(binding['profile']['featureId'])];need(len(parent)==1 and parent[0]['depth']=='plate' and p['depth']=='recess','actual named independent parent/blind depths')
+  parent=[r['params'] for r in history if r['type']=='WORKER_SELECTED_PROFILE_EXTRUDE_V2' and str(r['params']['featureId'])==str(binding['profile']['featureId'])];need(len(parent)==1 and parent[0]['depth']=='plate' and p['depth']=='blind','actual named independent parent/blind depths')
   return ('model','history',index,'params','depth'),'plate'
  need(name=='wrong-entry','exact finite negative family')
  saved=receipt['saves'][1];body=saved['before']['capture']['solids']['bodies'];need(len(body)==1,'actual saved body');rows=[r['id'] for r in body[0]['selections']['plan']['faces'] if r['role']=='first-cap' and r['originFeatureId']==binding['profile']['featureId']]
