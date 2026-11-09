@@ -82,7 +82,7 @@ def verify_svg(root,item,row,facts,iso,bore):
  rect=one(xml.findall('s:rect',NS),'paper background');need(rect.attrib=={'width':'100%','height':'100%','fill':'white'},'unobscured white paper')
  geometry,textgroup=xml.findall('s:g',NS);need(geometry.attrib=={'fill':'none','stroke':'#111','stroke-width':'.25'} and textgroup.attrib=={'font-family':'sans-serif','font-size':'3'},'visible geometry/legible physical typography')
  paths=list(geometry);texts=list(textgroup);need(all(p.tag=='{'+NS['s']+'}path' for p in paths) and all(t.tag=='{'+NS['s']+'}text' for t in texts),'closed path/text roles')
- used=set();usedtexts=set();patterns=list(one(xml.findall('s:defs',NS),'defs'));usedpatterns=set()
+ used=set();usedtexts=set();defs=one(xml.findall('s:defs',NS),'defs');need(defs.attrib=={},'bare defs cannot alter inherited hatch presentation');patterns=list(defs);usedpatterns=set()
  def ps(node,moves=(0,),closed=False):
   value=node.get('d','');need(not re.search(r'[^MLZ0-9eE+.,\s-]',value),'only finite supported M/L/Z geometry')
   need(value.count('Z')==int(closed) and value.rstrip().endswith('Z')==closed,'actual finite closed/open path grammar');value=value[:-1].rstrip() if closed else value
