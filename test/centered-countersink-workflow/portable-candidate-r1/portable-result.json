@@ -1,0 +1,21 @@
+{
+  "scope": "portable source transformation only; unregistered/unqualified",
+  "sourceCommit": "fc1654ee5d4471584073d4d8e3363d8c9b324566",
+  "rawJS": {
+    "sha256": "5783cd8900f94e4661bec7f7b65a1e24dfa48ffa3cce695c9314994c7a6eba09",
+    "bytes": 316448
+  },
+  "wasm": {
+    "sha256": "688c9d11ececf67d5187445491b4269647d810528e37161bcd7e676bc8d9125c",
+    "bytes": 36199368
+  },
+  "portableJS": {
+    "sha256": "04fc776837d6e87e7ddf9c31b66428ec191f3120600fd0794c86a5fd533c0a7b",
+    "bytes": 316398
+  },
+  "replacementCount": 1,
+  "beforeSha256": "ef56cb734c41b010b0132d905f51ea8062e399225b96677783c7075cf0443276",
+  "afterSha256": "b2c1805e9758bad6ada5fcae7d41ed4ccbe83ecf26b155f594f5c19415f323ec",
+  "adapterSha256": "849163b0385d80f95a526128622d1d3229126db47d93ae10037714fb40e4acd0",
+  "inputOutputUnchangedAfterTransfer": true
+}

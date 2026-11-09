@@ -1,0 +1,650 @@
+{
+  "format": "unregistered-mechanical-source-inventory/1",
+  "available": false,
+  "composed": false,
+  "scope": "exact source snapshot only; no executable component/worker/factory",
+  "sourceBasis": "d76ced64140929b6c82b6e43113ca6983974fb5e",
+  "rosters": {
+    "build/manufacturing-mesh-assets-entry.cjs": "0d4c054dab007654573f59b3add5fc483e2664ec2da908b674b35cac1a8c2389",
+    "build/shell-assets-entry.cjs": "8d74b6e194dac896836897c96ea171bb6ae48eb4010806bb8e9c81e0566f122e",
+    "build/circular-assets-entry.cjs": "04a7ae2fbcfd7a1c76a485c8c11f89427e64673fcb775022cf35ddfc707a9a90"
+  },
+  "roots": [
+    "modules/drawing/linkedPartDrawingDefinition.mjs",
+    "modules/engine/extrusion/articulatedRegionSegments.mjs",
+    "modules/engine/extrusion/circularArrangementDescriptor.mjs",
+    "modules/engine/extrusion/circularTopology.mjs",
+    "modules/engine/extrusion/exactExternalVertexContact.mjs",
+    "modules/engine/extrusion/isolatedOpenProfileComponents.mjs",
+    "modules/engine/extrusion/selectedArrangementDescriptor.mjs",
+    "modules/engine/extrusion/selectedRegionDescriptor.mjs",
+    "modules/engine/extrusion/simplePolygon.mjs",
+    "modules/engine/mount/arrangedPrismSelectionIndex.mjs",
+    "modules/engine/mount/blindHoleFacts.mjs",
+    "modules/engine/mount/booleanSelectionClaims.mjs",
+    "modules/engine/mount/boxSelectionIndex.mjs",
+    "modules/engine/mount/circularArrangementPlan.mjs",
+    "modules/engine/mount/circularPrismSelectionIndex.mjs",
+    "modules/engine/mount/counterboreFacts.mjs",
+    "modules/engine/mount/countersinkFacts.mjs",
+    "modules/engine/mount/countersinkNativeCalls.mjs",
+    "modules/engine/mount/cylinderCutWitness.mjs",
+    "modules/engine/mount/drawingDetailClip.mjs",
+    "modules/engine/mount/drawingReferenceFacts.mjs",
+    "modules/engine/mount/exactMeshVolume.mjs",
+    "modules/engine/mount/manufacturingMeshRecord.mjs",
+    "modules/engine/mount/nativePlanarAttachmentFacts.mjs",
+    "modules/engine/mount/orthographicAnalyticRecord.mjs",
+    "modules/engine/mount/ownedBlindHolePlan.mjs",
+    "modules/engine/mount/ownedBooleanContract.mjs",
+    "modules/engine/mount/ownedBoreAnnotationProtocol.mjs",
+    "modules/engine/mount/ownedBoreReadProtocol.mjs",
+    "modules/engine/mount/ownedCircularArrangementProtocol.mjs",
+    "modules/engine/mount/ownedCircularNativeContract.mjs",
+    "modules/engine/mount/ownedCircularWorker.mjs",
+    "modules/engine/mount/ownedConicalContract.mjs",
+    "modules/engine/mount/ownedCounterborePlan.mjs",
+    "modules/engine/mount/ownedCountersinkPlan.mjs",
+    "modules/engine/mount/ownedCountersinkWorker.mjs",
+    "modules/engine/mount/ownedDrawingDerivedProtocol.mjs",
+    "modules/engine/mount/ownedDrawingReadProtocol.mjs",
+    "modules/engine/mount/ownedDrawingSectionProtocol.mjs",
+    "modules/engine/mount/ownedDrawingSectionWorker.mjs",
+    "modules/engine/mount/ownedLinearHolePatternPlan.mjs",
+    "modules/engine/mount/ownedLoftPlan.mjs",
+    "modules/engine/mount/ownedManufacturingMeshProtocol.mjs",
+    "modules/engine/mount/ownedMechanicalNativeCandidate.mjs",
+    "modules/engine/mount/ownedOrthographicReadProtocol.mjs",
+    "modules/engine/mount/ownedPlanarAttachmentProtocol.mjs",
+    "modules/engine/mount/ownedRevolvePlan.mjs",
+    "modules/engine/mount/ownedShellNativeContract.mjs",
+    "modules/engine/mount/ownedShellProtocol.mjs",
+    "modules/engine/mount/ownedShellWorker.mjs",
+    "modules/engine/mount/ownedStepExportProtocol.mjs",
+    "modules/engine/mount/ownedSweepPlan.mjs",
+    "modules/engine/mount/ownedThroughHolePlan.mjs",
+    "modules/engine/mount/ownedTopologyContract.mjs",
+    "modules/engine/mount/polygonProfilePlan.mjs",
+    "modules/engine/mount/prismSelectionIndex.mjs",
+    "modules/engine/mount/prismaticBoreFacts.mjs",
+    "modules/engine/mount/selectedProfilePlan.mjs",
+    "modules/engine/mount/selectionAncestryIndex.mjs",
+    "modules/engine/mount/selectionLineageIndex.mjs",
+    "modules/engine/solid/ownedBlindHoleIntent.mjs",
+    "modules/engine/solid/ownedCounterboreIntent.mjs",
+    "modules/engine/solid/ownedCountersinkIntent.mjs",
+    "modules/engine/solid/ownedHoleIntent.mjs",
+    "modules/engine/solid/ownedLinearHolePatternIntent.mjs",
+    "modules/engine/solid/ownedLoftIntent.mjs",
+    "modules/engine/solid/ownedRevolveIntent.mjs",
+    "modules/engine/solid/ownedSweepIntent.mjs",
+    "modules/engine/solid/solidBodyIdentity.mjs",
+    "modules/engine/solid/solidIntent.mjs",
+    "modules/engine/solid/sweepLimits.mjs"
+  ],
+  "sources": {
+    "modules/drawing/linkedPartDrawingDefinition.mjs": {
+      "sha256": "1a67a05d0894a5b7c9bbfbd93156468121d43a05a582ab5ff2690b67897bc535",
+      "bytes": 17294,
+      "dependencies": []
+    },
+    "modules/engine/extrusion/articulatedRegionSegments.mjs": {
+      "sha256": "77b589efda2c0cd1bb0c66bb6ace5b44d9e0da3f3b39c4a4cc698bce6c2e28c8",
+      "bytes": 3807,
+      "dependencies": []
+    },
+    "modules/engine/extrusion/circularArrangementDescriptor.mjs": {
+      "sha256": "67bb74a4f7c1508072a8465dacbd26df354005ebb1c343d81028140f77d6c90d",
+      "bytes": 10609,
+      "dependencies": []
+    },
+    "modules/engine/extrusion/circularTopology.mjs": {
+      "sha256": "95a0627c0c5ed9695bcdd98e3a7169f8bb07fc3a43981483e4b742b39e0cda10",
+      "bytes": 2413,
+      "dependencies": []
+    },
+    "modules/engine/extrusion/exactExternalVertexContact.mjs": {
+      "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+      "bytes": 1780,
+      "dependencies": [
+        "modules/engine/extrusion/simplePolygon.mjs"
+      ]
+    },
+    "modules/engine/extrusion/isolatedOpenProfileComponents.mjs": {
+      "sha256": "5360137d9c39d46367964a8a8c4c08af1e76a7060258cdbb8897ce74eff77824",
+      "bytes": 5600,
+      "dependencies": [
+        "modules/engine/extrusion/simplePolygon.mjs",
+        "modules/engine/extrusion/articulatedRegionSegments.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs"
+      ]
+    },
+    "modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+      "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+      "bytes": 12003,
+      "dependencies": []
+    },
+    "modules/engine/extrusion/selectedRegionDescriptor.mjs": {
+      "sha256": "a6af77978ce6dfa2dadccbd0dc65becb74f46f5d47901833635b7cfd60104cca",
+      "bytes": 9872,
+      "dependencies": [
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs"
+      ]
+    },
+    "modules/engine/extrusion/simplePolygon.mjs": {
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+      "bytes": 5128,
+      "dependencies": []
+    },
+    "modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+      "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+      "bytes": 4203,
+      "dependencies": [
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs",
+        "modules/engine/mount/ownedTopologyContract.mjs"
+      ]
+    },
+    "modules/engine/mount/blindHoleFacts.mjs": {
+      "sha256": "68c7778a3c89e4c59cc6755debca36e7419a70caa825e698112a86e4eb6b2445",
+      "bytes": 4015,
+      "dependencies": [
+        "modules/engine/mount/cylinderCutWitness.mjs",
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/booleanSelectionClaims.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs",
+        "modules/engine/mount/prismaticBoreFacts.mjs"
+      ]
+    },
+    "modules/engine/mount/booleanSelectionClaims.mjs": {
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+      "bytes": 9413,
+      "dependencies": [
+        "modules/engine/mount/ownedTopologyContract.mjs"
+      ]
+    },
+    "modules/engine/mount/boxSelectionIndex.mjs": {
+      "sha256": "1561afacf78e048c59956c4b6d5b03a2114a47d9ac05fe9ad0701bc08ed320db",
+      "bytes": 2557,
+      "dependencies": [
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/ownedShellProtocol.mjs"
+      ]
+    },
+    "modules/engine/mount/circularArrangementPlan.mjs": {
+      "sha256": "9a3e26d75d56ed391c5154116d860d103838a6f0df550a48fe882d3d370e70d4",
+      "bytes": 6932,
+      "dependencies": [
+        "modules/engine/mount/ownedCircularArrangementProtocol.mjs",
+        "modules/engine/extrusion/circularTopology.mjs",
+        "modules/engine/extrusion/circularArrangementDescriptor.mjs"
+      ]
+    },
+    "modules/engine/mount/circularPrismSelectionIndex.mjs": {
+      "sha256": "51aa54e990fc9204e073d4ba75b77443daed8c01b0d684b6087756ec002b79a5",
+      "bytes": 8330,
+      "dependencies": [
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/ownedCircularArrangementProtocol.mjs",
+        "modules/engine/extrusion/circularArrangementDescriptor.mjs",
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs"
+      ]
+    },
+    "modules/engine/mount/counterboreFacts.mjs": {
+      "sha256": "4b92568c83c37e4650e85091677eeda832e5f93fbf563ca40e66e763cf3b0e8c",
+      "bytes": 11321,
+      "dependencies": [
+        "modules/engine/mount/cylinderCutWitness.mjs",
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/booleanSelectionClaims.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs",
+        "modules/engine/mount/prismaticBoreFacts.mjs"
+      ]
+    },
+    "modules/engine/mount/countersinkFacts.mjs": {
+      "sha256": "8a5303f993e2f283b9813cd2c7cb090d74676c777b853d01e9fcb391e99c0a31",
+      "bytes": 16822,
+      "dependencies": [
+        "modules/engine/mount/ownedConicalContract.mjs",
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/ownedBooleanContract.mjs",
+        "modules/engine/mount/booleanSelectionClaims.mjs",
+        "modules/engine/mount/cylinderCutWitness.mjs",
+        "modules/engine/mount/prismaticBoreFacts.mjs",
+        "modules/engine/mount/ownedCountersinkPlan.mjs"
+      ]
+    },
+    "modules/engine/mount/countersinkNativeCalls.mjs": {
+      "sha256": "8544945bbfdae744acb2db7042c71e42dd7ffe880008504c3472bd386ca3b093",
+      "bytes": 14199,
+      "dependencies": [
+        "modules/engine/mount/ownedConicalContract.mjs",
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/ownedBooleanContract.mjs",
+        "modules/engine/mount/exactMeshVolume.mjs"
+      ]
+    },
+    "modules/engine/mount/cylinderCutWitness.mjs": {
+      "sha256": "b1d384bb17e005b9d1a37e449503dac7bf23c9f55079aea2415ae36674cd1bc1",
+      "bytes": 8354,
+      "dependencies": [
+        "modules/engine/mount/ownedBooleanContract.mjs",
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs",
+        "modules/engine/mount/booleanSelectionClaims.mjs"
+      ]
+    },
+    "modules/engine/mount/drawingDetailClip.mjs": {
+      "sha256": "cce1aa150886968930f66272c36fefc708452663936aaebd2758020d3b11e0b3",
+      "bytes": 10256,
+      "dependencies": [
+        "modules/engine/mount/orthographicAnalyticRecord.mjs"
+      ]
+    },
+    "modules/engine/mount/drawingReferenceFacts.mjs": {
+      "sha256": "829417ecf9c00946383a169f6e096b4f792c408373977ad30c682aba213a133a",
+      "bytes": 14032,
+      "dependencies": [
+        "modules/engine/mount/ownedBoreReadProtocol.mjs",
+        "modules/engine/mount/prismaticBoreFacts.mjs",
+        "modules/drawing/linkedPartDrawingDefinition.mjs",
+        "modules/engine/extrusion/selectedRegionDescriptor.mjs",
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/booleanSelectionClaims.mjs",
+        "modules/engine/mount/ownedDrawingReadProtocol.mjs"
+      ]
+    },
+    "modules/engine/mount/exactMeshVolume.mjs": {
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+      "bytes": 4760,
+      "dependencies": []
+    },
+    "modules/engine/mount/manufacturingMeshRecord.mjs": {
+      "sha256": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+      "bytes": 3505,
+      "dependencies": [
+        "modules/engine/mount/ownedManufacturingMeshProtocol.mjs"
+      ]
+    },
+    "modules/engine/mount/nativePlanarAttachmentFacts.mjs": {
+      "sha256": "a6946e1c29a7ed273d0049f6bc363e004691e01683dbc5ebddf810bb3c58d01d",
+      "bytes": 4224,
+      "dependencies": [
+        "modules/engine/mount/ownedPlanarAttachmentProtocol.mjs"
+      ]
+    },
+    "modules/engine/mount/orthographicAnalyticRecord.mjs": {
+      "sha256": "8454077795e4c92099523435ed4a32cc86c1264b80d881e590667adc8fd517ae",
+      "bytes": 7869,
+      "dependencies": [
+        "modules/engine/mount/ownedOrthographicReadProtocol.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedBlindHolePlan.mjs": {
+      "sha256": "46f20dee7e2895790347775c4bd552584f88298de3cd287332c1192374992c21",
+      "bytes": 3900,
+      "dependencies": [
+        "modules/engine/solid/ownedBlindHoleIntent.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs",
+        "modules/engine/mount/ownedPlanarAttachmentProtocol.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedBooleanContract.mjs": {
+      "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+      "bytes": 7736,
+      "dependencies": [
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/booleanSelectionClaims.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedBoreAnnotationProtocol.mjs": {
+      "sha256": "845ef094746223612d89bdf736c70af84418f3ce21753c2d33d00b9e578071a9",
+      "bytes": 2044,
+      "dependencies": []
+    },
+    "modules/engine/mount/ownedBoreReadProtocol.mjs": {
+      "sha256": "def65f7139ef71a9af63c49f56a6364cbc158c88a4ac05482043d10ec22214df",
+      "bytes": 3848,
+      "dependencies": [
+        "modules/drawing/linkedPartDrawingDefinition.mjs",
+        "modules/engine/mount/ownedDrawingReadProtocol.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedCircularArrangementProtocol.mjs": {
+      "sha256": "e5ecb3bef8a8d4fe13dde03720837f8c4a024ac1866fe01682508b52adeaec08",
+      "bytes": 12098,
+      "dependencies": [
+        "modules/engine/extrusion/circularArrangementDescriptor.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedCircularNativeContract.mjs": {
+      "sha256": "a8d05c013cb55ffc0f297f9ca805e617239ca63e6209ea53e374fd510df6f86f",
+      "bytes": 379,
+      "dependencies": []
+    },
+    "modules/engine/mount/ownedCircularWorker.mjs": {
+      "sha256": "cfd8db103e4207c582a98744f585577fbb8032e4ee2a90a0b28853a33ae9fe96",
+      "bytes": 12635,
+      "dependencies": [
+        "modules/engine/mount/ownedCircularArrangementProtocol.mjs",
+        "modules/engine/extrusion/circularArrangementDescriptor.mjs",
+        "modules/engine/extrusion/circularTopology.mjs",
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/circularPrismSelectionIndex.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedConicalContract.mjs": {
+      "sha256": "0be2f8c51e02ca3045b4bac4ebff80d1f87ab4f1cfbc52eb90a7553075cb5579",
+      "bytes": 8734,
+      "dependencies": [
+        "modules/engine/mount/ownedTopologyContract.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedCounterborePlan.mjs": {
+      "sha256": "977c1797c18e61e9496465b852ece27201e0ea9321ba62fb2496735e0365acf7",
+      "bytes": 4458,
+      "dependencies": [
+        "modules/engine/solid/ownedCounterboreIntent.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs",
+        "modules/engine/mount/ownedPlanarAttachmentProtocol.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedCountersinkPlan.mjs": {
+      "sha256": "acf832456f17a07c46ed8aa97b61fd19ae6be7f5fbe3cf90c6d2e4d679471e30",
+      "bytes": 5122,
+      "dependencies": [
+        "modules/engine/solid/ownedCountersinkIntent.mjs",
+        "modules/engine/solid/ownedCountersinkIntent.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs",
+        "modules/engine/mount/ownedPlanarAttachmentProtocol.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedCountersinkWorker.mjs": {
+      "sha256": "dfcd98f5ace46940c68029268095fc8ff77d413684af800b9c52674698dde6a4",
+      "bytes": 19566,
+      "dependencies": [
+        "modules/engine/mount/ownedCountersinkPlan.mjs",
+        "modules/engine/mount/countersinkNativeCalls.mjs",
+        "modules/engine/mount/ownedConicalContract.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs",
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/nativePlanarAttachmentFacts.mjs",
+        "modules/engine/mount/ownedBooleanContract.mjs",
+        "modules/engine/mount/countersinkFacts.mjs",
+        "modules/engine/mount/selectionLineageIndex.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedDrawingDerivedProtocol.mjs": {
+      "sha256": "30ef895908c39deb92ad76ab11fef413cc51761be996030e2c3124ee672514d5",
+      "bytes": 1479,
+      "dependencies": [
+        "modules/engine/mount/ownedDrawingReadProtocol.mjs",
+        "modules/engine/mount/ownedOrthographicReadProtocol.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedDrawingReadProtocol.mjs": {
+      "sha256": "d795fad5bcd35e3da2c4bc6a1d6e50532d18c3b1db4d8c573bbfbc8c32d33824",
+      "bytes": 7542,
+      "dependencies": [
+        "modules/engine/mount/ownedBoreAnnotationProtocol.mjs",
+        "modules/drawing/linkedPartDrawingDefinition.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedDrawingSectionProtocol.mjs": {
+      "sha256": "8376fdf38823595a89655be33fbce9c6bd3e983815fa02787092562f25ceb23d",
+      "bytes": 3781,
+      "dependencies": []
+    },
+    "modules/engine/mount/ownedDrawingSectionWorker.mjs": {
+      "sha256": "44f260430e697ef16dd495daf5320292debb82dc7728da658a8c99820f0bb703",
+      "bytes": 18134,
+      "dependencies": [
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/ownedBooleanContract.mjs",
+        "modules/engine/mount/ownedDrawingSectionProtocol.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+      "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+      "bytes": 6918,
+      "dependencies": [
+        "modules/engine/solid/ownedLinearHolePatternIntent.mjs",
+        "modules/engine/solid/ownedHoleIntent.mjs",
+        "modules/engine/mount/ownedThroughHolePlan.mjs",
+        "modules/engine/mount/selectedProfilePlan.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedLoftPlan.mjs": {
+      "sha256": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+      "bytes": 1616,
+      "dependencies": [
+        "modules/engine/solid/ownedLoftIntent.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedManufacturingMeshProtocol.mjs": {
+      "sha256": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+      "bytes": 8192,
+      "dependencies": []
+    },
+    "modules/engine/mount/ownedMechanicalNativeCandidate.mjs": {
+      "sha256": "c4dabfc0aa713a662667b7fae1f5426956472269c14e13057c58abcfb58348b7",
+      "bytes": 1835,
+      "dependencies": []
+    },
+    "modules/engine/mount/ownedOrthographicReadProtocol.mjs": {
+      "sha256": "52ae654d5df0f593a2354b3196577804a508069b055a5c52ee0f55416f553087",
+      "bytes": 7291,
+      "dependencies": []
+    },
+    "modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": {
+      "sha256": "9beeb2754425235e96e4db85c04fbeac8dab7d6ffe39c1651e1a0efcb0bcbf31",
+      "bytes": 3547,
+      "dependencies": []
+    },
+    "modules/engine/mount/ownedRevolvePlan.mjs": {
+      "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+      "bytes": 980,
+      "dependencies": [
+        "modules/engine/solid/ownedRevolveIntent.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedShellNativeContract.mjs": {
+      "sha256": "c92ba75b7f150bbb949d09170409358af375c81853184df793ddb713514f21af",
+      "bytes": 6053,
+      "dependencies": [
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/booleanSelectionClaims.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedShellProtocol.mjs": {
+      "sha256": "b733fba75855db5d5a923cd42b61b3eefa761f8f79c4b5f0dbc286553eb5ce3d",
+      "bytes": 4931,
+      "dependencies": []
+    },
+    "modules/engine/mount/ownedShellWorker.mjs": {
+      "sha256": "b27bad4cb61f584067c734176fd1a76bf63937f2a5d38f5cf9a68838c9785c3c",
+      "bytes": 5842,
+      "dependencies": [
+        "modules/engine/mount/ownedShellProtocol.mjs",
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/boxSelectionIndex.mjs",
+        "modules/engine/mount/ownedShellNativeContract.mjs",
+        "modules/engine/mount/selectionLineageIndex.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedStepExportProtocol.mjs": {
+      "sha256": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+      "bytes": 6517,
+      "dependencies": []
+    },
+    "modules/engine/mount/ownedSweepPlan.mjs": {
+      "sha256": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+      "bytes": 1856,
+      "dependencies": [
+        "modules/engine/solid/ownedSweepIntent.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedThroughHolePlan.mjs": {
+      "sha256": "d45eaf266be1071d1527b6b24c93d8dfbb2d24d33ac3f53e18bdc5f2852d0046",
+      "bytes": 8850,
+      "dependencies": [
+        "modules/engine/solid/ownedHoleIntent.mjs",
+        "modules/engine/mount/polygonProfilePlan.mjs"
+      ]
+    },
+    "modules/engine/mount/ownedTopologyContract.mjs": {
+      "sha256": "19d798e773d3fb14b4a06e8b06ced79383c2f4f0be2c0d73dd4d5e8f6f8ff99f",
+      "bytes": 7703,
+      "dependencies": [
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs"
+      ]
+    },
+    "modules/engine/mount/polygonProfilePlan.mjs": {
+      "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+      "bytes": 8418,
+      "dependencies": [
+        "modules/engine/mount/selectedProfilePlan.mjs",
+        "modules/engine/extrusion/simplePolygon.mjs",
+        "modules/engine/extrusion/exactExternalVertexContact.mjs"
+      ]
+    },
+    "modules/engine/mount/prismSelectionIndex.mjs": {
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+      "bytes": 4753,
+      "dependencies": []
+    },
+    "modules/engine/mount/prismaticBoreFacts.mjs": {
+      "sha256": "22d558b2d0efe4062aa574a70de3976faf318c9a662b94cac017767a46e7c4d4",
+      "bytes": 9370,
+      "dependencies": [
+        "modules/engine/mount/ownedTopologyContract.mjs"
+      ]
+    },
+    "modules/engine/mount/selectedProfilePlan.mjs": {
+      "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+      "bytes": 9190,
+      "dependencies": [
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs"
+      ]
+    },
+    "modules/engine/mount/selectionAncestryIndex.mjs": {
+      "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+      "bytes": 11394,
+      "dependencies": [
+        "modules/engine/mount/ownedTopologyContract.mjs"
+      ]
+    },
+    "modules/engine/mount/selectionLineageIndex.mjs": {
+      "sha256": "0f571bae0ebf3ef3605a7a6a90209e5328efd30281c72da19f294070730de25e",
+      "bytes": 25894,
+      "dependencies": [
+        "modules/engine/mount/ownedTopologyContract.mjs",
+        "modules/engine/mount/booleanSelectionClaims.mjs",
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs"
+      ]
+    },
+    "modules/engine/solid/ownedBlindHoleIntent.mjs": {
+      "sha256": "42731a760fa4495322e6b7948b542b1294e08ecc259fe7565c8fba0efedd982d",
+      "bytes": 2573,
+      "dependencies": [
+        "modules/engine/solid/solidIntent.mjs"
+      ]
+    },
+    "modules/engine/solid/ownedCounterboreIntent.mjs": {
+      "sha256": "2d21f05f10cf5d9a4d45e63c82f967d7f0026f52815f5221ae9d8419972b5ac1",
+      "bytes": 2924,
+      "dependencies": [
+        "modules/engine/solid/solidIntent.mjs"
+      ]
+    },
+    "modules/engine/solid/ownedCountersinkIntent.mjs": {
+      "sha256": "47299b7a5325ad54823c6289a96c1cf4d054baf918430c6039d782a43cad9b52",
+      "bytes": 2814,
+      "dependencies": [
+        "modules/engine/solid/solidBodyIdentity.mjs"
+      ]
+    },
+    "modules/engine/solid/ownedHoleIntent.mjs": {
+      "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+      "bytes": 2877,
+      "dependencies": [
+        "modules/engine/solid/solidIntent.mjs"
+      ]
+    },
+    "modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+      "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+      "bytes": 1913,
+      "dependencies": [
+        "modules/engine/solid/solidIntent.mjs"
+      ]
+    },
+    "modules/engine/solid/ownedLoftIntent.mjs": {
+      "sha256": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+      "bytes": 6231,
+      "dependencies": [
+        "modules/engine/mount/selectedProfilePlan.mjs"
+      ]
+    },
+    "modules/engine/solid/ownedRevolveIntent.mjs": {
+      "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+      "bytes": 3529,
+      "dependencies": [
+        "modules/engine/mount/selectedProfilePlan.mjs"
+      ]
+    },
+    "modules/engine/solid/ownedSweepIntent.mjs": {
+      "sha256": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+      "bytes": 5194,
+      "dependencies": [
+        "modules/engine/mount/selectedProfilePlan.mjs",
+        "modules/engine/solid/sweepLimits.mjs"
+      ]
+    },
+    "modules/engine/solid/solidBodyIdentity.mjs": {
+      "sha256": "e68c0c9bbbcfa992758576f49db3edd3af9336d58912a95dcba6deae18a67500",
+      "bytes": 352,
+      "dependencies": []
+    },
+    "modules/engine/solid/solidIntent.mjs": {
+      "sha256": "87bc656224ccefb8ce0f9ac75927f6649285d239b394fa03af09caa05e3e5685",
+      "bytes": 4198,
+      "dependencies": [
+        "modules/engine/mount/selectedProfilePlan.mjs",
+        "modules/engine/solid/solidBodyIdentity.mjs",
+        "modules/engine/solid/solidBodyIdentity.mjs"
+      ]
+    },
+    "modules/engine/solid/sweepLimits.mjs": {
+      "sha256": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13",
+      "bytes": 104,
+      "dependencies": []
+    }
+  },
+  "entry": {
+    "path": "build/mechanical-native-candidate-entry.mjs",
+    "sha256": "6fe1a00feaf9a0b20deb87ed326860d57bcce9940a24980605ad8527cf96ba87",
+    "state": "literal-null"
+  },
+  "pendingComposition": [
+    "actual current root source batch and caption/C11 fixes, preserving all old cohort inventories",
+    "coordinator terminal preflight/decode repair after d5a5c0d",
+    "actual immutable constructor-time source binding issuer, not a caller flag",
+    "explicit new-pair OCI/controller/ledger/private-factory admission and exact compiled-source closure",
+    "extent source roots below are not yet composed; extent admission remains OFF"
+  ],
+  "pendingExtentSource": {
+    "commit": "9f9bac866390f5698c34f12864e99f190f8935a3",
+    "roots": [
+      "modules/engine/mount/ownedProfileExtentPlan.mjs",
+      "modules/engine/mount/ownedProfileExtentWorker.mjs",
+      "modules/engine/mount/profileExtentHolePlan.mjs",
+      "modules/engine/mount/profileMechanicalSource.mjs",
+      "modules/engine/mount/profileExtentSelectionIndex.mjs",
+      "modules/engine/solid/ownedProfileExtentFeature.mjs"
+    ],
+    "admission": false
+  }
+}
