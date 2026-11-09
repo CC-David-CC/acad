@@ -60,3 +60,16 @@ The runner uses `--no-experimental-fetch` for the reviewed Emscripten2.0.30 Node
 The independent mesh audit deliberately requires the ordinary straight generator strips actually expected from these finite prismatic surfaces. If a genuine different triangulation falls outside that audit, preserve the first refusal and report the evidence limitation; do not silently relax it or call the artifact invalid. Fraction pair work is bounded at2million and reports an independent-oracle resource limit. Native/source/derived budgets remain distinct.50pm source-coordinate checks do not establish50pm BRep, mesh, material physics or manufacturing accuracy.
 
 Counterbore/countersink retain their separate old-positive-profile-only policy; neither is claimed here. No arrangement V4, arbitrary curved regions, source topology repair, generic automatic parent/region migration, human UI, secondary engine or multi-material interface qualification is implied. Old positive blind and counter/C11 source/whole regressions remain root composition obligations in addition to this new family.
+
+## Root SVG acceptance strengthening (source only)
+
+Root BEFORE08313b3 records the original verifier coverage gap. New svg_oracle.py
+is included in the actual frozen driver/helper Git roster. In the two ordinary
+rectangular exports it verifies strict rawUTF8/closed visible SVG vocabulary,
+actual current metadata, complete finite top/front/right outlines at the true
+signed lower/upper levels, all source/cap dimension and leader anchors, and
+whole derived-caption box clearances without replaying the production layout
+search. This is an AFTER-WHOLE artifact proof, not a production renderer import,
+new visual UI, parser probe or generic SVG/CSS qualification. Native/source/
+mesh/STEP/archive/refusal/write criteria and actual render-review obligations
+remain unchanged. The original source packet stays retained ata527efc.
