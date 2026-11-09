@@ -91,3 +91,17 @@ Use a separate frozen acceptance checkout and CODI_ACCEPTANCE_SOURCE against
 unchanged runtime0af/Hostbe24; preserve R3, then one complete whole and FIRST
 oracle only after whole PASS. Details and exact current refusal ordering:
 docs/reviews/C06-EXTENT-PREFIX-OBSERVATION-CORRECTION-20261109.md.
+
+
+## Node24 offline artifact reader
+
+The separately built Emscripten2.0.30 reader uses its real filesystem loader.
+`run-reader.mjs` starts it with `--require reader-offline.cjs`; that child-only
+preload disables fetch without the removed Node24 `--no-experimental-fetch`
+flag. Reader JS/WASM/C++/queries, artifact bytes and every geometry assertion
+remain unchanged. Actual runner/preload hashes are recorded before/after.
+The preload joins both future whole source rosters; old failed receipts and
+source snapshots remain immutable. This tooling correction does not require
+repeating an already passing browser workflow. Use separate new reader reports
+and retain the first prelaunch failure; first Python artifact proof follows
+successful actual STEP reads only.
