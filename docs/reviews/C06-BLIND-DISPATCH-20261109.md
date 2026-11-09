@@ -29,3 +29,22 @@ its FIRST independent after-whole oracle. Its real creation/edits/travel/export/
 native Open phases exercise normal dispatch and retained result ownership; no
 standalone injection/probe or unsupported claim of duplicate-token fault
 coverage is made. Previous radius/tangent qualifications remain separate.
+
+## Eliminate the duplicated policy
+
+The follow-up replaces the two parallel kind arrays with ONE closed local
+kind-to-creates-result policy. Every admitted kind explicitly declares whether
+it produces a new owned token; the same lookup controls admission and freshness.
+It is derived from the existing initialized capability modes per request, never
+persisted as another flag or supplied by the caller. The old operation set and
+every old result/read distinction are retained exactly, plus the repaired blind
+entry. Initialization, handler dispatch and capability validation are unchanged.
+There is no plugin framework or generic execution route.
+
+This prevents a partial future repair that admits an operation while omitting
+its ownership requirement from a separate list. Root reviewed every original
+kind against the new table. Normal complete rebuild and public workflow remain
+required; source repair does not qualify injected private messages or all other
+capability modes. Later derived-drawing/counterbore integrations must extend
+this same table instead of restoring parallel arrays. All nine guards track
+the actual OCI source after this change.

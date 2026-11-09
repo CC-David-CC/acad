@@ -6,7 +6,7 @@ if(!input)throw Error('Provide the approved selected-profile native artifact dir
 const nativeRoot=fs.realpathSync(input),output=path.join(root,'.build/selected-profile-assets');
 const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
 const jsSha='cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9',wasmSha='a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637';
-const bootstrapSha='a0c1390260f2fe50401a0f08a60b3c22eb7f10df2fb9e2947718c378c945b4ca';
+const bootstrapSha='37922cb83902d42dec4cb7b3ab9391fbac804e97a990c7d83e4240bc9f48dc11';
 const glue=fs.readFileSync(path.join(nativeRoot,'occ-portable.js'),'utf8'),wasm=fs.readFileSync(path.join(nativeRoot,'main.wasm'));
 let bootstrap=fs.readFileSync(path.join(root,'modules/engine/mount/oci-verified-worker.js'),'utf8');
 if(hash(glue)!==jsSha||hash(wasm)!==wasmSha||hash(bootstrap)!==bootstrapSha)throw Error('Selected-profile native/worker source does not match reviewed pins.');

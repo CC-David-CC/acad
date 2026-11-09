@@ -697,7 +697,31 @@ self.onmessage = async event => {
       try {importScripts(blob);} finally {URL.revokeObjectURL(blob);}
       return;
     }
-    if(safeOwnedMode){if(!['selected-profile-extrude','box','common','union','subtract','solid-mesh','dispose',...(shellMode?['solid-shell']:[]),...(planarAttachmentsMode?['solid-face-frame']:[]),...(selectedVersion===3?['solid-topology','solid-point-classify','solid-prism-selections']:[]),...(edgeTreatmentMode?['solid-edge-treatment']:[]),...(booleanHistoryMode?['solid-selections']:[]),...(throughHoleMode?['solid-through-holes']:[]),...(blindHoleMode?['solid-blind-hole']:[]),...(linearHolePatternMode?['solid-linear-hole-pattern']:[]),...(revolveMode?['selected-profile-revolve']:[]),...(sweepMode?['selected-profile-sweep']:[]),...(loftMode?['selected-profile-loft']:[]),...(stepExportMode?['solid-step-export']:[]),...(orthographicReadMode?['solid-orthographic-read']:[]),...(drawingReferencesMode?['solid-drawing-references','solid-drawing-bores']:[]),...(manufacturingMeshMode?['solid-manufacturing-mesh']:[])].includes(msg?.kind))bad('Unsupported selected-owned operation');if(['selected-profile-extrude','selected-profile-revolve','selected-profile-sweep','selected-profile-loft','box','common','union','subtract','solid-edge-treatment','solid-through-holes','solid-blind-hole','solid-linear-hole-pattern','solid-shell'].includes(msg.kind)&&(typeof msg.token!=='string'||!msg.token||msg.token.length>256||shapes.has(msg.token)))bad('Invalid or already owned result token');}
+    if(safeOwnedMode){
+      // One closed policy owns both admission and fresh-result requirements.
+      const ownedKinds=new Map([
+        ...["selected-profile-extrude", "box", "common", "union", "subtract"].map(kind=>[kind,true]),
+        ...["solid-mesh", "dispose"].map(kind=>[kind,false]),
+        ...(shellMode?["solid-shell"].map(kind=>[kind,true]):[]),
+        ...(planarAttachmentsMode?["solid-face-frame"].map(kind=>[kind,false]):[]),
+        ...(selectedVersion===3?["solid-topology", "solid-point-classify", "solid-prism-selections"].map(kind=>[kind,false]):[]),
+        ...(edgeTreatmentMode?["solid-edge-treatment"].map(kind=>[kind,true]):[]),
+        ...(booleanHistoryMode?["solid-selections"].map(kind=>[kind,false]):[]),
+        ...(throughHoleMode?["solid-through-holes"].map(kind=>[kind,true]):[]),
+        ...(blindHoleMode?["solid-blind-hole"].map(kind=>[kind,true]):[]),
+        ...(linearHolePatternMode?["solid-linear-hole-pattern"].map(kind=>[kind,true]):[]),
+        ...(revolveMode?["selected-profile-revolve"].map(kind=>[kind,true]):[]),
+        ...(sweepMode?["selected-profile-sweep"].map(kind=>[kind,true]):[]),
+        ...(loftMode?["selected-profile-loft"].map(kind=>[kind,true]):[]),
+        ...(stepExportMode?["solid-step-export"].map(kind=>[kind,false]):[]),
+        ...(orthographicReadMode?["solid-orthographic-read"].map(kind=>[kind,false]):[]),
+        ...(drawingReferencesMode?["solid-drawing-references", "solid-drawing-bores"].map(kind=>[kind,false]):[]),
+        ...(manufacturingMeshMode?["solid-manufacturing-mesh"].map(kind=>[kind,false]):[])
+      ]);
+      const createsResult=ownedKinds.get(msg?.kind);
+      if(createsResult===undefined)bad('Unsupported selected-owned operation');
+      if(createsResult&&(typeof msg.token!=='string'||!msg.token||msg.token.length>256||shapes.has(msg.token)))bad('Invalid or already owned result token');
+    }
     if(msg?.kind==='solid-manufacturing-mesh'&&manufacturingMeshMode){const result=await readOwnedManufacturingMesh(msg);try{self.postMessage({kind:'manufacturing-mesh-result',seq:msg.seq,token:msg.token,...result},[result.buffer]);if(result.buffer.byteLength!==0)throw Error('Manufacturing buffer was not detached');}catch(cause){throw Object.assign(Error('Manufacturing result publication failed'),{code:'MANUFACTURING_MESH_PUBLICATION_FAILED',cause});}return;}
     if(msg?.kind==='solid-orthographic-read'&&orthographicReadMode){const result=await readOwnedOrthographic(msg);try{self.postMessage({kind:'orthographic-read-result',seq:msg.seq,...result},[result.values,result.tags]);}catch(cause){throw Object.assign(Error('Orthographic result publication failed'),{code:'ORTHOGRAPHIC_PUBLICATION_FAILED',cause});}return;}
     if(msg?.kind==='solid-step-export'&&stepExportMode){const result=await exportOwnedSTEP(msg);try{self.postMessage({kind:'step-exported',seq:msg.seq,...result});}catch(cause){throw Object.assign(Error('STEP result publication failed'),{code:'STEP_EXPORT_PUBLICATION_FAILED',cause});}return;}
