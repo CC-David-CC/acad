@@ -1,0 +1,54 @@
+{
+  "scope": "Normal composed build/stage and actual source/byte custody; not a Native behavior or full Gate 1 qualification",
+  "core": "d7b478ae9b0d679223240674ea43beada4b2f099",
+  "desktop": "eabff28ae7dea4946fa81a576f37eac55acad509",
+  "build": {
+    "session": 28218,
+    "terminalExitCode": 0,
+    "webpackSuccessfulCompletions": 10,
+    "log": "build.log"
+  },
+  "stage": {
+    "session": 57584,
+    "terminalExitCode": 0,
+    "cadAssets": 570,
+    "assetBytes": 604864676,
+    "apps": 2,
+    "appFiles": 643,
+    "signedPins": 276,
+    "log": "stage.log"
+  },
+  "sourceByteAudit": {
+    "session": 41896,
+    "terminalExitCode": 0,
+    "componentManifests": 12,
+    "uniqueSources": 107,
+    "exactGitBlobsAndStagedSourceDigestsChecked": true,
+    "allComponentFileSizesAndDigestsChecked": true,
+    "trackedProducerClean": true,
+    "details": "component-source-custody.json"
+  },
+  "runtime": {
+    "site": "http://127.0.0.1:21053/",
+    "runtimeRoot": "/mnt/data10tb/codi-acad-extent-caption-state-20261109-r1",
+    "serverExternalRelay": false,
+    "producerRoot": "/mnt/data10tb/codi-acad-extent-caption-build-20261109-r1",
+    "hostRoot": "/mnt/data10tb/codi-acad-extent-caption-desktop-20261109-r1",
+    "appsRoot": "/mnt/data10tb/codi-acad-extent-caption-stage-20261109-r1-apps",
+    "pins": "runtime-pins.json"
+  },
+  "limits": [
+    "Reused dependencies were not independently rehashed before and after execution.",
+    "Initial optional mechanical cohort is staged; countersink backend/authored packets are not in this producer.",
+    "Primary extent capability is admitted in this private candidate but its complete new workflow is not yet qualified.",
+    "No final runtime assets or SDK/dependencies are included in this Git evidence directory."
+  ],
+  "files": {
+    "build.log": "c35792d002ef69a35cd00ae3145e3a56a514b444a4d4e7da8a2cc821afa8ad99",
+    "stage.log": "1abaef8a5c43bdde26db75727d898cf555d0419e0d9566abceef93a91ec09639",
+    "run-build.sh": "9dbcf5b91c4faa2d6776280cfa836fbdff10fdb399ee7df7eb2eec0c92ce568e",
+    "run-stage.sh": "4f851da8388b1e5a30817a56413996f68389e8b56633b2f0c3dd234ad61abf90",
+    "component-source-custody.json": "b86f2065ca886312ff6806892d37988870b033852473d72d5181010ee78798e0",
+    "runtime-pins.json": "4a01a7504589520bfc7cd247265e26fe73b755eb6b4910c9aee78fa499ad4f1f"
+  }
+}
