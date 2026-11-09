@@ -1,15 +1,30 @@
 # CAD 1 library integration plan
 
-## Latest finite-curve Native ingredient — 2026-11-09
+## Current library integration checkpoint — 2026-11-09
 
-Native d3b2afa thin export compiled normally with unchanged captured inputs;
-Core b45d9a0 preserves build/static ABI custody. All49 expected exports and
-(i32,i32)->void for the new query are statically present. No module/query
-execution, portable adaptation, mounting, certified finite event or trim/extend
-command is claimed. The private invocation adapter is source work next; normal
-WASM growth boundary is recorded in CAD1-FINITE-CURVE-GROWTH-BOUNDARY-20261109.
-C11 actual R3 repaired SVG leader/text collision remains the serial qualification
-blocker; ordinary21/21 do not close full Gate1.
+- Finite extent corpus remains qualified d68ecb2, including general CGAL mesh
+  checks, exact finite-surface coverage, actual STEP reads and SVG reviews.
+- Finite C11 datum/position/Ra/declared-clearance lifecycle now QUALIFIED37a8736:
+  whole66328, independent artifact28626, seven actual full-sheet visual reviews.
+  Original FIRST and three AFTER observer failures remain immutable. This is
+  authored intent/geometry/persistence evidence, not manufactured conformance.
+- Affected legacy drawing regression1 is currently running6481 on unchanged
+  producing Core82866bf / Host796c90513, acceptance82866bf,293pins/MFG32e/abb.
+  Follow current handoff for exact job/context/write custody; no duplicate run.
+- Native finite-support source d3b2afa compiled with static ABI custody b45d9a0.
+  Private adapter10dcb60 is source only. Actual lossless portable pair
+  479f0620b6dfe131dac05131a3798fc533e05a2bd11e8074ef240284f61bbe86 /
+  746da919c8457e98daa821fae98c62c0a6c9ad1acafd1c3d5412e0207d6b6325
+  is preserved on R730 with raw/source/toolchain/transformation custody f2545dd.
+  It remains UNMOUNTED/UNEXECUTED/UNQUALIFIED and is not an old-pair alias.
+- Three isolated source lanes now prepare precise extraction, finite-event/
+  extension semantics and common-splice inventories for Root approval. These
+  do not change the frozen runtime or grant authority to raw support answers.
+
+The full Gate1 goal remains OPEN. Retain mature library algorithms, one authored
+model and shared operations. Curve/ref/reference, resource and final combined
+beta obligations are still required. Historical assessment details below retain
+their actual evidence and dates; this is the current coordination state.
 
 
 Status: accepted direction; native library assessment PARTIAL. Browser library
