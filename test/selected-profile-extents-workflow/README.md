@@ -73,3 +73,21 @@ search. This is an AFTER-WHOLE artifact proof, not a production renderer import,
 new visual UI, parser probe or generic SVG/CSS qualification. Native/source/
 mesh/STEP/archive/refusal/write criteria and actual render-review obligations
 remain unchanged. The original source packet stays retained ata527efc.
+
+
+## Settled prefix observations (R3 acceptance correction)
+
+The three retained-history review phases (initial prefix, branch Undo, prefix
+Redo) use actual history-control pointer/fullTip/source/J and Native body
+metrics. They explicitly record the current public manufacturing and Native
+point guard refusals plus unavailable closed-sketch discovery. They never
+substitute null metadata, successful points or a cold inspection. An explicitly
+identified prior genuine full-tip endpoint inventory is usable only after exact
+current source-byte/member equality, for unchanged original-source equations.
+
+Full-tip observation, geometry/read-only/ownership/branch/travel, assignment,
+exports, write settlement and all native Save/fresh-Open criteria remain.
+Use a separate frozen acceptance checkout and CODI_ACCEPTANCE_SOURCE against
+unchanged runtime0af/Hostbe24; preserve R3, then one complete whole and FIRST
+oracle only after whole PASS. Details and exact current refusal ordering:
+docs/reviews/C06-EXTENT-PREFIX-OBSERVATION-CORRECTION-20261109.md.

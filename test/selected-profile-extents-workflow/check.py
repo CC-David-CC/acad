@@ -96,8 +96,41 @@ def source_oracle(s,b,e,inspection):
    else:near(a['y' if kind=='Horizontal' else 'x'],bp['y' if kind=='Horizontal' else 'x'])
  return frame
 
-def inspect_observation(row,build):
- before,after=row['before'],row['after'];need(before==after,'Native and source reads preserve complete state');settled(before);e,b=row['expected'],row['binding'];s=json.loads(before['capture']['native']['source']);f=source_oracle(s,b,e,row['inspection']);lo,hi,volume,bounds=geometry(e,f);p=one([r['params'] for r in before['capture']['native']['history'] if r['type']==TYPE],'one authoritative extent');need(set(p)==set(['version','unit','engine','engineRevision','featureId','faceId','regionId','bodyPolicy','extent']+fields(e)),'exact variant raw source keys');need(p['featureId']==b['profile']['featureId'] and p['faceId']==b['faceId'] and p['regionId']==b['regionId'] and p['engineRevision']==build and p['extent']==e['extent'] and p['version']==1 and p['unit']=='millimeter' and p['engine']=='occ' and p['bodyPolicy']=='separate','actual constructor/source/build/variant')
+PREFIX_LABELS={'Prefix retains actual interval constructor','Branch Undo restores hidden suffix','Prefix Redo'}
+PREFIX_MANUFACTURING_ERROR={'name':'Error','code':None,'message':'Finish the current sketch, operation or history edit before saving.','committed':False,'possiblyCommitted':False}
+PREFIX_POINT_ERROR={'name':'Error','code':'UNAVAILABLE','message':'Return to a valid latest history first.','committed':False,'possiblyCommitted':False}
+
+def prefix_observation(row,receipt,index):
+ need(row['case']=='literal-through-pattern' and row['label'] in PREFIX_LABELS,'only declared real prefix phases use unavailable read contracts')
+ before,after=row['before'],row['after'];need(before==after,'real prefix read/refusal/discovery preserves ALL captured state');history=before['capture']['native']['history'];b=row['binding'];review=before['historyReview']
+ need([x['type'] for x in history]==['PLANE',TYPE,'WORKER_THROUGH_HOLES_V1'] and history[1]['params']['featureId']==b['profile']['featureId'] and history[2]['params']['featureId']==b['through']['featureId'],'real retained constructor and original through suffix')
+ need(before['lifecycle']['pointer']==review['pointer']==1 and review['fullTipIndex']==len(history)-1==2 and review['afterFeatureId']==b['profile']['featureId'],'actual prefix pointer/full tip and current producer identity')
+ need(review['ready'] is True and review['canBranch'] is True and review['branchReason'] is None and review['engineRevision']==BUILD and review['revision']==before['capture']['journal']['revision'] and review['geometryRevision']==before['capture']['solids']['revision'],'actual history discovery/J/geometry/build binding')
+ need(before['host']['operationCount']==len(history) and len(review['features'])==len(history),'retained source inventory is not silently truncated')
+ for j,(feature,raw) in enumerate(zip(review['features'],history)):
+  need(feature['index']==j and str(feature['featureId'])==str(raw['params']['featureId']) and feature['type']==raw['type'] and feature['state']=='active' and feature['reason']=='PREFIX_MODE' and feature['canSuppress'] is False and feature['canUnsuppress'] is False,'actual unsuppressed row policy; execution prefix is determined by pointer, not invented inactive flags')
+ need(before['capture']['solids']['ready'] is False and before['capture']['solids']['reason']=='Return to a valid latest history first.' and before['physical']['ready'] is False and before['physical']['reason']=='Return to a valid latest history first.' and before['drawing']['ready'] is False and before['drawing']['reason']=='Wait for a complete current authored tip.','actual prefix read-only availability, never fake ready')
+ need(before['manufacturing']=={'observation':'command-refusal','command':'inspect-manufacturing','error':PREFIX_MANUFACTURING_ERROR},'actual prefix manufacturing guard refusal, no metadata substitute')
+ discovery=row['inspection'];need(set(discovery)=={'observation','command','result'} and discovery['observation']=='discovery-unavailable' and discovery['command']=='inspect-closed-sketches','actual unavailable discovery, no cold sketch success')
+ result=discovery['result'];need(set(result)=={'ready','reason','revision','candidates'} and result['ready'] is False and result['reason']=='Return to a valid latest history first.' and result['candidates']==[] and isinstance(result['revision'],str) and result['revision'],'exact registered prefix source discovery response')
+ ref=row['sourceInspectionReference'];need(set(ref)=={'observation','index','label','sourceSHA256'} and ref['observation']=='prior-full-tip-source-endpoints' and type(ref['index']) is int and 0<=ref['index']<index and ref['label']=='Through creation Redo same IDs','explicit earlier genuine endpoint inventory, not a new prefix cold inspection')
+ prior=receipt['observations'][ref['index']];need(prior['case']==row['case'] and prior['label']==ref['label'] and 'sourceInspectionReference' not in prior and prior['query']['quality']=='native-re-evaluation-observation','genuine independently checked full-tip reference')
+ need(prior['binding']['curveIds']==b['curveIds'] and prior['binding']['faceId']==b['faceId'] and prior['before']['capture']['native']['source']==before['capture']['native']['source'] and sha(before['capture']['native']['source'].encode())==ref['sourceSHA256'],'exact same source bytes/member IDs authenticate retained endpoint associations')
+ for key in ('history','source','expressions','counters','sketches','presentation'):need(before['capture']['native'][key]==prior['before']['capture']['native'][key],'prefix preserves exact original retained '+key)
+ commands=receipt['commands'];ranges=row['prefixCommands'];need(set(ranges)=={'before','point','discovery','after'},'complete actual prefix command references')
+ def command(at,name,args,result=None,error=None):
+  need(type(at) is int and 0<=at<len(commands),'actual issued command ordinal');c=commands[at];need(c['case']==row['case'] and c['command']==name and c['args']==args,'actual prefix issued request binding')
+  if error is not None:need(c.get('error')==error and 'result' not in c,'actual refused command cannot have success')
+  else:need(c.get('result')==result and 'error' not in c,'actual discovery result')
+ command(ranges['point'],'classify-worker-solid-points',row['input'],error=PREFIX_POINT_ERROR);command(ranges['discovery'],'inspect-closed-sketches',{},result=result)
+ for phase in ('before','after'):
+  span=ranges[phase];need(isinstance(span,list) and len(span)==2 and all(type(n) is int for n in span) and 0<=span[0]<span[1]<=len(commands),'actual complete prefix state capture range')
+  matches=[i for i in range(*span) if commands[i]['command']=='inspect-manufacturing'];need(len(matches)==1,'one real manufacturing refusal in EACH state capture');command(matches[0],'inspect-manufacturing',{},error=PREFIX_MANUFACTURING_ERROR)
+ need(ranges['before'][1]<=ranges['point']<ranges['discovery']<ranges['after'][0],'real prefix before/point/discovery/after chronology')
+ return prior
+
+def inspect_observation(row,build,retained_source=None):
+ before,after=row['before'],row['after'];need(before==after,'Native and source reads preserve complete state');settled(before);e,b=row['expected'],row['binding'];s=json.loads(before['capture']['native']['source']);f=source_oracle(s,b,e,row['inspection'] if retained_source is None else retained_source['inspection']);lo,hi,volume,bounds=geometry(e,f);p=one([r['params'] for r in before['capture']['native']['history'] if r['type']==TYPE],'one authoritative extent');need(set(p)==set(['version','unit','engine','engineRevision','featureId','faceId','regionId','bodyPolicy','extent']+fields(e)),'exact variant raw source keys');need(p['featureId']==b['profile']['featureId'] and p['faceId']==b['faceId'] and p['regionId']==b['regionId'] and p['engineRevision']==build and p['extent']==e['extent'] and p['version']==1 and p['unit']=='millimeter' and p['engine']=='occ' and p['bodyPolicy']=='separate','actual constructor/source/build/variant')
  for field in fields(e):
   raw=e.get('raw') or {};need(p[field]==raw.get(field,e[field]),'exact raw active authored value/name')
   if field in raw:
@@ -120,11 +153,17 @@ def inspect_observation(row,build):
  body=one(before['capture']['solids']['bodies'],'actual observed output');target=b.get('current') or b['profile'];need((body['id'],body['featureId'])==(target['outputId'],target['featureId']),'actual successor identity');m=body['metrics'];need(m['resultKind']=='single-solid' and m['solidCount']==1 and m['nativeValidity']['valid'],'actual valid single Native body');need('sha256:'+m['runtime']['jsSha256']+':'+m['runtime']['wasmSha256']==build,'actual Native pair');near(m['nativeVolume'],volume,max(1e-6,float(abs(volume))*1e-9))
  for key in ('min','max'):
   for a,b in zip(m['nativeBounds'][key],bounds[key]):near(a,b,1e-6)
- query=row['query'];request=row['input'];need(query['quality']=='native-re-evaluation-observation','genuine Native observation')
- for key in ('revision','version','unit','engine','engineRevision','bodyId','featureId'):need(query[key]==request[key],'actual point response input binding')
- need(request['revision']==before['capture']['solids']['revision'] and request['bodyId']==body['id'] and request['featureId']==body['featureId'],'issued actual current body binding');need([p['point'] for p in query['points']]==request['points'],'actual queried point coordinates')
- expected=[classify(p,e,f) for p in request['points']];need(expected==[p['classification'] for p in query['points']],'independent exact represented source-domain point truth')
- return {'case':row['case'],'label':row['label'],'volume':str(volume),'lo':lo,'hi':hi,'frame':f,'bounds':bounds,'points':request['points'],'classes':expected}
+ query=row['query'];request=row['input']
+ if retained_source is None:
+  need(query['quality']=='native-re-evaluation-observation','genuine Native observation')
+  for key in ('revision','version','unit','engine','engineRevision','bodyId','featureId'):need(query[key]==request[key],'actual point response input binding')
+ need(request['revision']==before['capture']['solids']['revision'] and request['bodyId']==body['id'] and request['featureId']==body['featureId'],'issued actual current body binding');need(request['engineRevision']==build,'explicit point observation runtime')
+ expected=[classify(p,e,f) for p in request['points']]
+ if retained_source is None:
+  need([p['point'] for p in query['points']]==request['points'],'actual queried point coordinates')
+  need(expected==[p['classification'] for p in query['points']],'independent exact represented source-domain point truth')
+ else:need(query=={'observation':'command-refusal','command':'classify-worker-solid-points','error':PREFIX_POINT_ERROR},'real prefix point refusal, never successful classifications')
+ return {'case':row['case'],'label':row['label'],'volume':str(volume),'lo':lo,'hi':hi,'frame':f,'bounds':bounds,'points':request['points'],'classes':expected,**({'pointObservation':'refused-prefix-analytic-expectations-only'} if retained_source is not None else {})}
 
 def refusal(row):
  a,b=row['before'],row['after'];settled(a);settled(b);need(row['error'] and not row['error']['committed'] and not row['error']['possiblyCommitted'],'typed atomic refusal')
@@ -160,7 +199,15 @@ def check(directory,readerFile):
   raw=(directory/s['file']).read_bytes();need(sha(raw)==s['sha256']==r['sourcePins'][s['repository']+':'+s['relative']],'actual immutable snapshot SHA');commit=r['acceptance'] if s['relative'].startswith('test/selected-profile-extents-workflow/') else r['source'] if s['repository']=='core' else r['hostSource'];need(s['commit']==commit,'separate driver/runtime source custody');gitRoot=os.environ.get('CODI_ORACLE_'+s['repository'].upper()+'_GIT',s['root']);blob=subprocess.run(['git','-C',gitRoot,'show',commit+':'+s['relative']],capture_output=True);need(blob.returncode==0 and blob.stdout==raw,'exact frozen Git object, not current path assumption');oid=subprocess.run(['git','-C',gitRoot,'rev-parse',commit+':'+s['relative']],capture_output=True,text=True);need(oid.returncode==0 and oid.stdout.strip()==s['gitBlobOID'],'actual Git blob identity')
  cases={c['name'] for c in r['cases']};need(cases=={'rectangle-main','circle-XZ','annulus-ZY','placed-rectangle','large-private-origin','literal-through-pattern','literal-blind'},'complete source/placement/consumer domain roster');need(len(r['allocations'])==4,'two actual through seeds, one pattern and one blind reservation');need(len(r['exportSets'])==6 and len(r['saves'])==len(r['reopens'])>=9 and len(r['malformed'])==3 and len(r['consumers'])==2,'complete artifacts/native cycles/negative/consumer phases')
  observed={o['label'] for o in r['observations']};required={'Same interval retains distinct two-sided authored intent','Same-geometry mode Undo restores exact one-sided source','Positive8 actual constructor','Negative8 shifts real material','Symmetric TOTAL10','Symmetric TOTAL12','Sides7/3','Equal-volume sides6/4 move caps','Zero positive side valid','Zero negative side valid','Actual source width12 replays same region','Original plane depth20 replays interval','Independent named sides9/5','Actual circle-XZ','Actual annulus-ZY','Actual placed-rectangle','Actual large-private-origin','Prefix retains actual interval constructor','Branch drops through suffix only','Through creation Undo retains extent','Actual extent three-hole pattern','Real blind floor14 in interval0..20','Blind interval6..16 floor10 retains material','Healthy blind continuation interval4..16','Original custom frame edit regenerates cap and attached source','Second two-sided native Open'};need(required<=observed,'every frozen substantive phase observed')
- observations=[inspect_observation(o,BUILD) for o in r['observations']]
+ prefix_rows=[o for o in r['observations'] if o['label'] in PREFIX_LABELS];need(len(prefix_rows)==3 and {o['label'] for o in prefix_rows}==PREFIX_LABELS,'all THREE genuine prefix/branch travel observations retained')
+ observations=[]
+ for index,o in enumerate(r['observations']):
+  if o['label'] in PREFIX_LABELS:retained=prefix_observation(o,r,index)
+  else:
+   need('historyReview' not in o['before'] and 'prefixCommands' not in o and 'sourceInspectionReference' not in o and o['before']['lifecycle']['pointer']==len(o['before']['capture']['native']['history'])-1,'all ordinary full-tip observations retain original actual read path')
+   need(o['before']['manufacturing']['revision']==o['before']['host']['revision'] and 'metadata' in o['before']['manufacturing'],'full-tip metadata is real and unchanged');retained=None
+  observations.append(inspect_observation(o,BUILD,retained))
+ need(sum(c['command']=='inspect-manufacturing' and c.get('error')==PREFIX_MANUFACTURING_ERROR for c in r['commands'])==6 and sum(c['command']=='classify-worker-solid-points' and c.get('error')==PREFIX_POINT_ERROR for c in r['commands'])==3,'all six manufacturing and three point prefix refusals explicitly recorded')
  expectedRefusals={'Real other cohort cannot acquire extent capability':('UNSUPPORTED_PROFILE_EXTENT_BUILD',False),'Actual output identity cannot replace source plane':('UNSUPPORTED_FACE',False),'Actual source curve is not a region identity':('INVALID_REQUEST',False),'Signed zero':('INVALID_REQUEST',False),'Negative zero':('INVALID_REQUEST',False),'Nonpositive total':('INVALID_REQUEST',False),'Both zero':('INVALID_REQUEST',False),'Negative side':('INVALID_REQUEST',False),'Over span':('INVALID_REQUEST',False),'Inactive field':('INVALID_REQUEST',False),'Genuine stale authored revision':('STALE_HISTORY',False),'Named value cannot be erased':('UNSUPPORTED_PARAMETERS',False),'Named mode cannot be erased':('UNSUPPORTED_PARAMETERS',False),'Named signed zero':('NUMERIC_DOMAIN',False),'Named side negative':('NUMERIC_DOMAIN',False),'Wrong-dimensional active length':('DIMENSION_MISMATCH',False),'Unknown active name':('UNKNOWN_PARAMETER',False),'Actual extent collapse through blind floor':('BLIND_DEPTH_NOT_INTERIOR',True)};need(len(r['refusals'])==len(expectedRefusals),'exact finite refusal roster')
  for row in r['refusals']:need((row['error']['code'],row['candidate'])==expectedRefusals[row['label']],'precise code/candidate phase');refusal(row)
  for write in r['writes']:
@@ -187,6 +234,12 @@ def check(directory,readerFile):
   for i in range(3):
    center=f['origin'][i]+f['x'][i]*e['width']/2+f['y'][i]*e['height']/2;near(actual['center'][i],center,1e-6)
    for k,level in enumerate((lo,hi)):near(actual['ends'][k][i],center+f['z'][i]*level,1e-6)
+ consumer=one([x for x in r['consumers'] if x['case']=='literal-through-pattern'],'complete actual through prefix/branch family')
+ for key in ('prefix','branchUndo','prefixRedo'):
+  expected=one([o['before'] for o in prefix_rows if o['label']=={'prefix':'Prefix retains actual interval constructor','branchUndo':'Branch Undo restores hidden suffix','prefixRedo':'Prefix Redo'}[key]],'actual recorded '+key);need(consumer[key]==expected,'prefix consumer retains actual state, not reconstructed receipt')
+ need(consumer['prefixUndo']['capture']['native']==consumer['created']['capture']['native'],'prefix Undo restores real through original source')
+ need(consumer['branchRedo']['capture']['native']==consumer['branch']['capture']['native'],'branch Redo restores exact committed branch')
+ need([x['type'] for x in consumer['branch']['capture']['native']['history']]==['PLANE',TYPE] and consumer['branch']['lifecycle']['pointer']==1,'actual branch removes only real through suffix')
  for row in r['allocations']:
   before,after=row['before'],row['after'];expected=copy.deepcopy(before['capture']['native']['counters']);expected['featureId']+=1;need(after['capture']['native']['counters']==after['ownership']['counters']==expected and after['capture']['native']['sketches']==before['capture']['native']['sketches'],'successful consumer reserves exactly one feature without changing source')
  for row in r['travels']:need(row['before']['capture']['native']['counters']==row['after']['capture']['native']['counters'],'all edit travel retains highwater')
