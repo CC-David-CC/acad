@@ -84,39 +84,86 @@ def inspect_step(raw, truth):
         require(typ in ('LINE','CIRCLE'),'No approximated/unsupported STEP curve')
         if typ=='CIRCLE':
             center,axis=placement(a[1]);require(a[2]>0,'positive circle');return {'kind':typ,'center':center,'axis':axis,'radius':a[2]}
-        _,v=record(a[2],'VECTOR');return {'kind':typ,'origin':xyz(a[1]),'direction':direction(v[1],None),'scale':v[2]}
+        _,v=record(a[2],'VECTOR');require(isinstance(v[2],float) and math.isfinite(v[2]) and v[2]>0,'finite positive LINE vector magnitude');return {'kind':typ,'origin':xyz(a[1]),'direction':direction(v[1],None),'scale':v[2]}
+    def dot(a,b):return math.fsum(x*y for x,y in zip(a,b))
+    def sub(a,b):return tuple(x-y for x,y in zip(a,b))
+    def cross(a,b):return(a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0])
+    def curve_incidence(c,p,q,same_sense):
+        require(same_sense in (('enum','T'),('enum','F')),'actual EDGE_CURVE same_sense')
+        if c['kind']=='LINE':
+            parameters=[]
+            for point in (p,q):
+                relative=sub(point,c['origin']);require(math.hypot(*cross(relative,c['direction']))<=1e-6,'actual LINE support contains actual endpoint')
+                parameter=dot(relative,c['direction'])/c['scale'];require(math.isfinite(parameter),'finite LINE endpoint parameter');parameters.append(parameter)
+                vector(tuple(c['origin'][i]+parameter*c['scale']*c['direction'][i] for i in range(3)),point)
+            require(parameters[0]!=parameters[1] and ((parameters[1]>parameters[0])==(same_sense==('enum','T'))),'actual finite LINE endpoint traversal agrees with same_sense')
+        else:
+            for point in (p,q):
+                relative=sub(point,c['center']);require(abs(dot(relative,c['axis']))<=1e-6,'actual CIRCLE endpoint plane incidence');near(math.hypot(*relative),c['radius'])
+    def surface_incidence(loops,typ,origin,axis,radius):
+        for loop in loops:
+            for edge in loop:
+                c=edge['curve']
+                for point in edge['points']:
+                    relative=sub(point,origin)
+                    if typ=='PLANE':require(abs(dot(relative,axis))<=1e-6,'actual edge endpoint lies on its actual planar face support')
+                    else:near(math.hypot(*cross(relative,axis)),radius)
+                if typ=='PLANE':
+                    if c['kind']=='LINE':require(abs(dot(c['direction'],axis))<=1e-9 and abs(dot(sub(c['origin'],origin),axis))<=1e-6,'actual LINE is incident with its actual planar face')
+                    else:require(math.hypot(*cross(c['axis'],axis))<=1e-9 and abs(dot(sub(c['center'],origin),axis))<=1e-6,'actual CIRCLE is incident with its actual planar face')
+                elif c['kind']=='LINE':
+                    require(math.hypot(*cross(c['direction'],axis))<=1e-9,'actual cylindrical seam LINE follows actual cylinder axis');near(math.hypot(*cross(sub(c['origin'],origin),axis)),radius)
+                else:
+                    require(math.hypot(*cross(c['axis'],axis))<=1e-9 and math.hypot(*cross(sub(c['center'],origin),axis))<=1e-6,'actual circular rim follows actual cylinder support');near(c['radius'],radius)
     solids=[('ref',i) for i,(kind,_) in records.items() if kind=='MANIFOLD_SOLID_BREP'];require(len(solids)==1,'exactly one STEP manifold solid')
     shell=record(solids[0],'MANIFOLD_SOLID_BREP')[1][1];faces=record(shell,'CLOSED_SHELL')[1][1];require(0<len(faces)<=256 and len(set(faces))==len(faces),'bounded unique actual face roster')
-    edge_use=collections.Counter();edge_direction=collections.Counter();used_vertices=set();used_edges=set();planar=[];cylindrical=[];face_contribution=0
+    edge_use=collections.Counter();edge_incidence=collections.defaultdict(list);used_vertices=set();used_edges=set();planar=[];cylindrical=[];face_contribution=0
     for face_ref in faces:
         _,a=record(face_ref,'ADVANCED_FACE');bounds,surface,sense=a[1:];require(sense in (('enum','T'),('enum','F')),'face orientation');loops=[];face_contribution+=2-len(bounds)
         for bound in bounds:
-            typ,b=record(bound);require(typ in ('FACE_BOUND','FACE_OUTER_BOUND') and b[2] in (('enum','T'),('enum','F')),'face loop bound/sense');_,loop=record(b[1],'EDGE_LOOP');edges=[]
+            typ,b=record(bound);require(typ in ('FACE_BOUND','FACE_OUTER_BOUND') and len(b)==3 and b[2] in (('enum','T'),('enum','F')),'actual face-bound kind/orientation');bound_kind=typ;bound_sign=1 if b[2]==('enum','T') else -1;_,loop=record(b[1],'EDGE_LOOP');edges=[]
             for oriented in loop[1]:
                 _,o=record(oriented,'ORIENTED_EDGE');edge=o[3];_,e=record(edge,'EDGE_CURVE');require(o[4] in (('enum','T'),('enum','F')),'oriented edge sense')
                 start,end=e[1],e[2];used_vertices.update((start,end));used_edges.add(edge);edge_use[edge]+=1
-                p,q=vertex(start),vertex(end);ends=(start,end) if o[4]==('enum','T') else (end,start)
-                edge_direction[edge]+=(1 if o[4]==('enum','T') else -1)*(1 if b[2]==('enum','T') else -1)
-                c=curve(e[3])
-                if c['kind']=='LINE':
-                    require(math.isfinite(c['scale']) and c['scale']>0,'actual LINE finite positive vector scale')
-                    require(math.dist(p,q)>0,'noncollapsed LINE edge')
-                    for endpoint in (p,q):
-                        d=tuple(endpoint[i]-c['origin'][i] for i in range(3));t=sum(d[i]*c['direction'][i] for i in range(3));vector(endpoint,tuple(c['origin'][i]+t*c['direction'][i] for i in range(3)))
-                edges.append({'ref':edge,'vertices':(start,end),'points':(p,q),'ends':ends,'curve':c})
-            require(edges and all(edges[j]['ends'][1]==edges[(j+1)%len(edges)]['ends'][0] for j in range(len(edges))),'closed actual edge loop');loops.append(edges)
+                p,q=vertex(start),vertex(end);ends=(start,end) if o[4]==('enum','T') else (end,start);support=curve(e[3]);curve_incidence(support,p,q,e[4])
+                edges.append({'ref':edge,'vertices':(start,end),'points':(p,q),'ends':ends,'curve':support,'sameSense':e[4],'effectiveSign':(1 if o[4]==('enum','T') else -1)*bound_sign,'boundKind':bound_kind})
+            require(edges and all(edges[j]['ends'][1]==edges[(j+1)%len(edges)]['ends'][0] for j in range(len(edges))),'closed underlying edge loop')
+            # STEP bounds explicitly orient their loop in the face. Unlike
+            # TopoDS, ADVANCED_FACE.same_sense does NOT implicitly flip these
+            # edge uses again; it sets the geometric normal separately below.
+            if bound_sign<0:edges=[{**edge,'ends':edge['ends'][::-1]} for edge in reversed(edges)]
+            require(all(edges[j]['ends'][1]==edges[(j+1)%len(edges)]['ends'][0] for j in range(len(edges))),'closed effective face-bound loop')
+            for edge in edges:edge_incidence[edge['ref']].append((face_ref,bound,edge['effectiveSign']))
+            loops.append(edges)
         typ,s=record(surface);require(typ in ('PLANE','CYLINDRICAL_SURFACE'),'only actual analytic plane/cylinder surfaces')
         origin,axis=placement(s[1]);normal=tuple(x*(1 if sense==('enum','T') else -1) for x in axis)
-        row={'origin':origin,'axis':axis,'normal':normal,'loops':loops}
+        surface_incidence(loops,typ,origin,axis,None if typ=='PLANE' else s[2])
+        require(sum(loop[0]['boundKind']=='FACE_OUTER_BOUND' for loop in loops)<=1,'at most one declared outer bound per analytic face')
+        row={'origin':origin,'axis':axis,'normal':normal,'loops':loops,'sameSense':sense}
         if typ=='PLANE':planar.append(row)
         else:require(s[2]>0 and sense==('enum','F'),'inward cylindrical hole face');row['radius']=s[2];cylindrical.append(row)
     require(len(cylindrical)==2,'exactly two actual inward cylindrical intervals')
     require(all(n==2 for n in edge_use.values()),'actual closed shell two-use incidence')
-    require(all(n==0 for n in edge_direction.values()),'actual opposite oriented EDGE_LOOP occurrences')
+    require(all(len(uses)==2 and uses[0][2]==-uses[1][2] for uses in edge_incidence.values()),'actual opposite effective face-bound uses including seam occurrences')
     require(len(used_vertices)-len(used_edges)+face_contribution==0,'one genuine through handle, annular shoulder is not a floor disk')
     vertices=[vertex(v) for v in used_vertices];lo=[min(p[i] for p in vertices) for i in range(3)];hi=[max(p[i] for p in vertices) for i in range(3)]
     W,H,T=truth['width'],truth['height'],truth['thickness'];r,R=truth['throughDiameter']/2,truth['stepDiameter']/2;s=T-truth['stepDepth'];cx,cy=W/2,H/2
     vector(lo,[0,0,0]);vector(hi,[W,H,T]);require(0<r<R and 0<s<T,'strict finite step domain')
+    def planar_loop_orientation(loop,normal,outer):
+        require(outer or loop[0]['boundKind']!='FACE_OUTER_BOUND','declared outer bound cannot be an actual inner hole')
+        if all(edge['curve']['kind']=='LINE' for edge in loop):
+            area_vector=tuple(math.fsum(cross(vertex(edge['ends'][0]),vertex(edge['ends'][1]))[i] for edge in loop)/2 for i in range(3));oriented_area=dot(area_vector,normal)
+        elif len(loop)==1 and loop[0]['curve']['kind']=='CIRCLE' and loop[0]['vertices'][0]==loop[0]['vertices'][1]:
+            edge=loop[0];c=edge['curve'];natural_sign=edge['effectiveSign']*(1 if edge['sameSense']==('enum','T') else -1);oriented_area=math.pi*c['radius']**2*dot(c['axis'],normal)*natural_sign
+        else:raise ValueError('Unsupported finite planar loop for independent orientation proof')
+        require(math.isfinite(oriented_area) and (oriented_area>0 if outer else oriented_area<0),'effective planar outer/inner loop orientation agrees with actual oriented face normal')
+    def cylinder_rim_orientation(face,circles):
+        # Cylinder UV orientation: increasing angle at the low axial bound,
+        # decreasing angle at the high bound, reversed for an inward face.
+        ordered=sorted(circles,key=lambda edge:dot(sub(edge['curve']['center'],face['origin']),face['axis']));sense=1 if face['sameSense']==('enum','T') else -1
+        require(dot(sub(ordered[1]['curve']['center'],ordered[0]['curve']['center']),face['axis'])>0,'distinct actual cylindrical axial bounds')
+        for edge,expected in zip(ordered,(sense,-sense)):
+            natural_sign=edge['effectiveSign']*(1 if edge['sameSense']==('enum','T') else -1);actual=dot(edge['curve']['axis'],face['axis'])*natural_sign;near(actual,expected,1e-9)
     def circle_loop(loop,z,radius):
         require(len(loop)==1,'one genuine closed rim edge');e=loop[0];c=e['curve'];require(c['kind']=='CIRCLE' and e['vertices'][0]==e['vertices'][1],'actual closed circular rim')
         vector(c['center'],[cx,cy,z]);near(c['radius'],radius);near(abs(c['axis'][2]),1,1e-9);near(math.dist(e['points'][0],c['center']),radius);return e['ref']
@@ -138,14 +185,16 @@ def inspect_step(raw, truth):
                 for p in edge['points']:near(sum((p[i]-f['origin'][i])*f['axis'][i] for i in range(3)),0)
         if axis==2 and abs(f['origin'][2]-s)<=1e-6:
             require(sign==1 and shoulder is None and len(f['loops'])==2,'one actual upward TWO-wire annular shoulder');shoulder=f
-            radii=sorted((loop[0]['curve'].get('radius',-1),loop) for loop in f['loops']);inner=circle_loop(radii[0][1],s,r);outer_rim=circle_loop(radii[1][1],s,R);require(inner!=outer_rim,'distinct inner/outer shoulder edges');continue
+            radii=sorted((loop[0]['curve'].get('radius',-1),loop) for loop in f['loops']);inner=circle_loop(radii[0][1],s,r);outer_rim=circle_loop(radii[1][1],s,R);require(inner!=outer_rim,'distinct inner/outer shoulder edges');planar_loop_orientation(radii[1][1],f['normal'],True);planar_loop_orientation(radii[0][1],f['normal'],False);continue
         key=(axis,sign);require(key not in outer,'unique outer support');outer.add(key);near(f['origin'][axis],hi[axis] if sign>0 else lo[axis])
         if axis==2:
-            rect=[q for q in f['loops'] if len(q)==4 and all(e['curve']['kind']=='LINE' for e in q)];require(len(rect)==1,'one outer source rectangle');rectangle(rect[0],f['origin'][2]);holes=[q for q in f['loops'] if q is not rect[0]];require(len(holes)==1,'both actual source caps have one opening')
+            rect=[q for q in f['loops'] if len(q)==4 and all(e['curve']['kind']=='LINE' for e in q)];require(len(rect)==1,'one outer source rectangle');rectangle(rect[0],f['origin'][2]);planar_loop_orientation(rect[0],f['normal'],True);holes=[q for q in f['loops'] if q is not rect[0]];require(len(holes)==1,'both actual source caps have one opening')
             if sign>0:top=circle_loop(holes[0],T,R)
             else:bottom=circle_loop(holes[0],0,r)
+            planar_loop_orientation(holes[0],f['normal'],False)
         else:
             require(len(f['loops'])==1 and len(f['loops'][0])==4 and all(e['curve']['kind']=='LINE' for e in f['loops'][0]),'untouched rectangular side')
+            planar_loop_orientation(f['loops'][0],f['normal'],True)
             points={tuple(p) for edge in f['loops'][0] for p in edge['points']};require(len(points)==4,'four real outer-side vertices')
             for p in points:require(all(any(abs(p[i]-v)<=1e-6 for v in (lo[i],hi[i])) for i in range(3)),'outer side endpoints belong to source box')
     require(outer=={(i,j) for i in range(3) for j in (-1,1)} and shoulder is not None and bottom!=top,'complete source boundary and annular shoulder')
@@ -153,6 +202,7 @@ def inspect_step(raw, truth):
         near(abs(f['axis'][2]),1,1e-9);near(f['origin'][0],cx);near(f['origin'][1],cy);near(f['radius'],rad);require(len(f['loops'])==1 and len(f['loops'][0])==4,'finite cylindrical four-use boundary')
         circles=[e for e in f['loops'][0] if e['curve']['kind']=='CIRCLE'];lines=[e for e in f['loops'][0] if e['curve']['kind']=='LINE'];require(len(circles)==2 and len(lines)==2 and lines[0]['ref']==lines[1]['ref'],'two real rims and repeated LINE seam')
         near(abs(lines[0]['curve']['direction'][2]),1,1e-9);near(lines[0]['curve']['direction'][0],0,1e-9);near(lines[0]['curve']['direction'][1],0,1e-9)
+        cylinder_rim_orientation(f,circles)
         require({e['ref'] for e in circles}==expected,'SAME actual rim edges shared by corresponding cylinder/caps/annulus');vector(sorted(e['curve']['center'][2] for e in circles),[z0,z1]);vector(sorted(p[2] for p in lines[0]['points']),[z0,z1])
         for edge in circles:vector(edge['curve']['center'][:2],[cx,cy]);near(edge['curve']['radius'],rad)
         for edge in f['loops'][0]:

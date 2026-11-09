@@ -1,14 +1,32 @@
-// Test-only Git custody during the ONE future whole workflow. No geometry/API.
-import a from node:assert/strict;import fs from node:fs;import path from node:path;import crypto from node:crypto;import{execFileSync}fromnode:child_process;
-const sha=b=>crypto.createHash(sha256).update(b).digest(hex);
-const coreFiles=[
- modules/engine/solid/ownedCounterboreIntent.mjs,modules/engine/solid/authoredCounterboreIntent.mjs,modules/engine/mount/ownedCounterborePlan.mjs,modules/engine/mount/counterboreFacts.mjs,modules/engine/mount/selectionLineageIndex.mjs,modules/engine/mount/booleanSelectionClaims.mjs,modules/engine/mount/ownedBooleanContract.mjs,modules/engine/mount/ownedTopologyContract.mjs,modules/engine/mount/nativePlanarAttachmentFacts.mjs,modules/engine/mount/ownedPlanarAttachmentProtocol.mjs,modules/engine/mount/cylinderCutWitness.mjs,modules/engine/mount/prismaticBoreFacts.mjs,modules/engine/mount/polygonProfilePlan.mjs,modules/engine/mount/selectedProfilePlan.mjs,modules/engine/mount/oci-verified-worker.js,modules/engine/mount/worker-controller.mjs,modules/engine/mount/engineCatalog.mjs,modules/engine/mount/catalogMount.ts,modules/engine/mount/occ-manufacturing-mesh-mount.mjs,modules/engine/mount/selectedProfileBudget.mjs,modules/engine/solid/solidLedger.mjs,modules/engine/solid/authoredSolidKinds.mjs,modules/workbenches/modeler/features/workerCounterbore/workerCounterbore.operation.ts,modules/workbenches/modeler/index.ts,web/app/cad/craft/workerCounterboreCommands.ts,web/app/cad/craft/authoredEditJournal.mjs,web/app/cad/craft/craftBundle.ts,web/app/cad/craft/unconsumedSketchSave.mjs,web/app/cad/parameters/modernPhysicalBindings.mjs,web/app/cad/parameters/physicalBindingFields.mjs,web/app/cad/parameters/physicalLiteralFields.mjs,web/app/cad/projectManager/projectValidationCore.ts,web/app/cad/projectManager/projectValidationCodes.mjs,build/prepare-manufacturing-mesh-profile-assets.cjs,build/manufacturing-mesh-assets-entry.cjs];
-const hostFiles=[apps/system/jsketcher/index.mjs,apps/system/jsketcher/counterbore-commands.mjs,apps/system/jsketcher/examples/source-bound-counterbore.mjs,apps/system/jsketcher/scoped-command.mjs,test/agent-cad-corpus/sweep/signed-harness.mjs];
-const nativeFiles=[shape-io/main.cpp,shape-io/ownedTopologyV1.hpp,shape-io/profilePrismProvenanceV1.hpp,shape-io/ownedBooleanHistoryV1.hpp,shape-io/selectedProfileV2.hpp,shape-io/ownedManufacturingMeshV1.hpp,shape-io/ownedStepExportV1.hpp,shape-io/ownedOrthographicReadV1.hpp];
-export function captureProducerRoster({core,desktop,pins,nativeGit}){
- const rows=[],files=[],worktreePaths=[];function capture(repository,location,commit,names,bare=false,compare=false){a.match(commit,/^[0-9a-f]{40}$/);const prefix=bare?[--git-dir=+location]:[-C,location];for(const name of names){const raw=execFileSync(git,[...prefix,show,commit+:+name],{maxBuffer:16*1024*1024}),blob=execFileSync(git,[...prefix,rev-parse,commit+:+name],{encoding:utf8}).trim();if(compare){const current=path.join(location,name);a.equal(sha(fs.readFileSync(current)),sha(raw),Source differs from actual producing Git +name);worktreePaths.push(current);}rows.push({repository,commit,path:name,gitBlob:blob,bytes:raw.length,sha256:sha(raw)});files.push({originalFile:repository+@+commit+:+name,raw});}}
- capture(ACAD,core,pins.source,coreFiles,false,true);capture(Desktop,desktop,pins.desktop,hostFiles,false,true);
- const nativeSource=0e429519e97a29e991ec4aa42b5ea6ddab24ddbb,nativeQualification=c15e49dfbb5bb5fcf7b5c81e7c63724c81807ae0;capture(Native,nativeGit,nativeSource,nativeFiles,true);const receipt=shape-io/owned-manufacturing-mesh-v1-probe/ffi-evidence-r1/runtime-pins.json;capture(Native,nativeGit,nativeQualification,[receipt],true);const proof=JSON.parse(files.at(-1).raw);a.equal(proof.sourceCapture,nativeSource);a.equal(proof.compiledInputsIdenticalToCommit,true);a.equal(proof.sourceBeforeAfterIdentical,true);a.equal(proof.wasmSha256,abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc);
- capture(ACAD,core,pins.source,[test/owned-manufacturing-mesh-worker/evidence-r3/receipt.json]);
- return{metadata:{version:1,scope:actual-producing-Git-and-readonly-helper-custody,core:pins.source,desktop:pins.desktop,nativeSource,nativeQualification,rows},files,worktreePaths};
+// Read-only Git custody at startup of the ONE future whole workflow.
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const sha=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
+const roster=JSON.parse(fs.readFileSync(new URL('./producer-roster.json',import.meta.url)));
+export function captureProducerRoster({core,desktop,pins,nativeGit,acceptanceSource}) {
+ assert.equal(roster.version,1);assert.match(acceptanceSource,/^[a-f0-9]{40}$/);
+ const rows=[],files=[],worktreePaths=[],seen=new Set();
+ function capture(repository,root,commit,names,{bare=false,compare=false,role}={}) {
+  assert.match(commit,/^[a-f0-9]{40}$/);const args=bare?['--git-dir='+root]:['-C',root];
+  for(const relative of names){
+   assert.equal(typeof relative,'string');assert(relative&&!path.isAbsolute(relative)&&!relative.split('/').includes('..'));
+   const identity=repository+'@'+commit+':'+relative;assert(!seen.has(identity));seen.add(identity);
+   const raw=execFileSync('git',[...args,'show',commit+':'+relative],{maxBuffer:16*1024*1024});
+   const gitBlob=execFileSync('git',[...args,'rev-parse',commit+':'+relative],{encoding:'utf8'}).trim();assert.match(gitBlob,/^[a-f0-9]{40}$/);
+   let worktreePath=null;
+   if(compare){worktreePath=path.join(root,relative);assert.deepEqual(fs.readFileSync(worktreePath),raw,'Executed source differs from frozen Git '+identity);worktreePaths.push(worktreePath);}
+   rows.push({repository,root,commit,path:relative,bare,role,gitBlob,bytes:raw.length,sha256:sha(raw),worktreePath,originalFile:identity});files.push({originalFile:identity,raw});
+  }
+ }
+ capture('ACAD',core,acceptanceSource,roster.acceptance,{role:'acceptance',compare:true});
+ capture('ACAD',core,pins.source,roster.core,{role:'product-anchor',compare:true});
+ capture('Desktop',desktop,pins.desktop,roster.desktop,{role:'product-and-helper',compare:true});
+ capture('Native',nativeGit,roster.nativeSource,roster.native,{bare:true,role:'native-source'});
+ capture('Native',nativeGit,roster.nativeQualification,roster.nativeProof,{bare:true,role:'native-proof'});
+ const nativeProof=JSON.parse(files.at(-1).raw);assert.equal(nativeProof.sourceCapture,roster.nativeSource);assert.equal(nativeProof.compiledInputsIdenticalToCommit,true);assert.equal(nativeProof.sourceBeforeAfterIdentical,true);assert.equal(nativeProof.wasmSha256,'abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc');
+ capture('ACAD',core,pins.source,roster.componentProof,{role:'component-proof'});
+ return {metadata:{version:1,scope:'exact-transitive-acceptance-Git-custody-with-product-anchors',acceptanceSource,core:pins.source,desktop:pins.desktop,nativeSource:roster.nativeSource,nativeQualification:roster.nativeQualification,rows},files,worktreePaths:[...new Set(worktreePaths)]};
 }

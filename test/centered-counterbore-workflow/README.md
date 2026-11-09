@@ -70,6 +70,7 @@ CODI_NATIVE_GIT=/mnt/data10tb/git/occt-interpreter-codi.git \
 CODI_EVIDENCE=/absolute/NEW-counterbore-whole-evidence \
 CODI_SIGNED_PINS=/absolute/exact-composed-pins.json \
 CODI_ENGINE_REVISION=sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc \
+CODI_ACCEPTANCE_SOURCE=FULL_ACTUAL_ACCEPTANCE_COMMIT \
 CODI_EXPECT_SOURCE=FULL_ACTUAL_CORE_PRODUCER \
 CODI_EXPECT_DESKTOP=FULL_ACTUAL_HOST_PRODUCER \
 CODI_TEST_URL=http://127.0.0.1:ROOT_FIXTURE/ \
@@ -90,3 +91,44 @@ literal-empty null versus typed-ready presentation-token contract. The original
 ff820574 packet remains frozen; the correction affects only refusal assertions,
 retains all exact source/J/token/epoch and full other-state requirements, and has
 not been executed. Geometry/typed/artifact/roster/write criteria are unchanged.
+
+## Acceptance audit repair (source-only)
+
+ACCEPTANCE-AUDIT-DISPOSITION.md maps the independent 2a3b917 review to the
+precise changes. The original ff820574/66c6d3ce packets remain in Git. This
+follow-up changes acceptance custody and independent observation coverage only;
+it neither changes product geometry nor claims that the earlier packet ran.
+The source-positive recipe remains byte-identical to the Desktop example.
+
+CODI_ACCEPTANCE_SOURCE identifies the commit containing the exact local driver,
+all its own oracle helpers, roster and documentation. It may differ from the
+immutable compiled CODI_EXPECT_SOURCE. The roster also binds the actual host
+signed harness AND its strict-join canonical helper, independent archive reader,
+Native source/proof and retained component proof. Product paths are explicit
+anchors, not a claim of an exhaustive compiled dependency closure. After the
+whole, Python recomputes each Git blob SHA1 and reads each commit/path back from
+its actual repository in addition to checking captured bytes/SHA256.
+
+Every STEP/3MF/SVG export settles and reaches exact browser/server byte equality
+before the next export is submitted. An unknown rejected write retains custody
+even without committed flags. Only the exact known material-review prewrite
+refusal can settle via complete, current, scoped own browser AND server root
+listings plus unchanged accepted state. Fresh Open may replace the window; each
+write/absence record binds its own actual window and the same account.
+
+The after-whole oracle requires the exact32 positive phases,16 negative cases,
+14 travel directions,12 sequential writes and both format triples. Creation
+allocates exactly one feature ID with every other counter exact. It checks the
+entire finite mesh triangles (not centroids alone), nine connected patches, four
+full rim cycles and a complete annulus; STEP effective loop/shell and geometric
+curve traversal orientation; current SVG source/geometry revisions, complete
+three-view outlines, both circular rims, both axial spans, shoulder span and
+actual dimension/leader anchors; and 3MF's exact accepted SourceRevision.
+
+All three own malformed .cad derivatives authenticate the healthy base's actual
+geometry-domain hash, retain its original JSON numeric spellings, change only
+the specified authored STRING leaves and dependent manufacturing revision, and
+update exact ZIP descriptors/root/CRCs. Their actual server-readback bytes are
+independently diffed after the whole. Reversed named diameters swap BOTH names;
+they do not collapse to the distinct equal-diameter case. Full accepted state,
+tokens, journal and false commit flags remain exact after each rejected Open.

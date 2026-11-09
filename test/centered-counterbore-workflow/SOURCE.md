@@ -136,3 +136,16 @@ public workflow including all current .cad and own negative Open cases, then FIR
 independent full-artifact oracle. Preserve any first failure. No runtime success,
 Native exactness beyond named policies, general C06 coverage or new Gate signoff
 is claimed by these source files.
+
+## Acceptance repair boundary
+
+The separate acceptance follow-up uses producer-roster.json plus exact Git
+associations in producer-roster.mjs/acceptance_oracle.py. The runtime producer
+source and own acceptance commit are distinct inputs. Own helper/doc source,
+archive oracle, actual host harness and its canonical strict-join dependency
+are mandatory executing/acceptance custody; product/Native entries are explicit
+review anchors and retained compiled-input linkage, not exhaustive runtime
+closure claims. The source-positive example is unchanged. See
+ACCEPTANCE-AUDIT-DISPOSITION.md for every audit disposition, write ownership,
+finite full-artifact criteria and the negative archive geometry-hash prerequisite.
+No product/Native code, pair, quota, threshold or first evidence is changed.
