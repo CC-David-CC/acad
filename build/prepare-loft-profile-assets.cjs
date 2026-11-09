@@ -1,6 +1,6 @@
 // Explicit component native build; existing assets/defaults are unchanged.
 const path=require('node:path'),fs=require('node:fs'),crypto=require('node:crypto');
-const bootstrapSha='b5dc2d70389cc0c7b2b206b48f292ae17d654dcff8c8b9615f9cb2b4d5f43831';
+const bootstrapSha='27ca268a2f372bcfac7e0e03f8b6a9d9874a7f967f61f49cb2d27e06189b7e0e';
 if(crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'../modules/engine/mount/oci-verified-worker.js'))).digest('hex')!==bootstrapSha)throw Error('Unexpected loft bootstrap');
 const {stageOwnedProfileComponent}=require('./stage-owned-profile-component.cjs');
 const defaultOutput=path.resolve(__dirname,'../.build/loft-profile-assets');

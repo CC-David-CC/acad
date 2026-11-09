@@ -1,5 +1,6 @@
 import {prepareSolvedProfileExtent,validateSolvedProfileExtent,inspectSolvedProfileExtentRegions} from './selectedSketchProfileExtent.mjs';
 import {PROFILE_EXTENT_REFUSALS} from '../mount/ownedProfileExtentPlan.mjs';
+import {prepareProfileConstructorSource} from './profileConstructorSourcePreparation.mjs';
 import {prepareSolvedLoft,inspectSolvedLoftSources} from './selectedSketchLoft.mjs';
 import {LOFT_PREPARATION_REFUSALS} from '../solid/ownedLoftIntent.mjs';
 import {deriveRectanglePrismRoles} from 'engine/provenance/rectanglePrismRoles';
@@ -43,6 +44,12 @@ self.onmessage = async event => {
    if(new TextEncoder().encode(JSON.stringify(value)).byteLength>65536)throw Object.assign(Error('Revolve source response exceeds limit'),{code:'RESOURCE_LIMIT'});
    self.postMessage({jobId:m.jobId,ok:true,value});return;
   }
+  if(m.kind==='prepare-selected-bound'){
+   if(Object.keys(m).sort().join(',')!=='featureId,jobId,kind,profile')throw Error('Invalid bound constructor semantic job');
+   const value=await prepareProfileConstructorSource(m.profile,m.featureId);
+   if(new TextEncoder().encode(JSON.stringify(value)).byteLength>65536)throw Object.assign(Error('Bound constructor response exceeds limit'),{code:'RESOURCE_LIMIT'});
+   self.postMessage({jobId:m.jobId,ok:true,value});return;
+  }
   if(m.kind==='prepare-selected'||m.kind==='inspect-selected'){
    if(Object.keys(m).sort().join(',')!=='jobId,kind,profile')throw Error('Invalid selected-region semantic job');
    const value=await (m.kind==='prepare-selected'?prepareSolvedSelectedRegion(m.profile):inspectSolvedSelectedRegions(m.profile));
@@ -59,5 +66,5 @@ self.onmessage = async event => {
   const roles=await deriveRectanglePrismRoles(m.featureId,m.profile,m.result);
   if(new TextEncoder().encode(JSON.stringify(roles)).byteLength>65536)throw Error('Semantic response exceeds limit');
   self.postMessage({jobId:m.jobId,ok:true,value:roles});
- } catch(error) { const allowed=['INVALID_REQUEST','UNSUPPORTED_ENGINE','INVALID_FRAME','UNSUPPORTED_FRAME','STALE_SKETCH','INVALID_SKETCH','UNSUPPORTED_SKETCH','UNSUPPORTED_CONSTRAINT','STALE_FRAME','UNSUPPORTED_PROFILE','UNSUPPORTED_REGION_TOPOLOGY','RESOURCE_LIMIT','OPEN_OR_AMBIGUOUS_PROFILE','INVALID_PROFILE','STALE_REGION','STALE_SOURCE','STALE_SEAM','STALE_AXIS','REVOLVE_INVALID_AXIS','REVOLVE_INVALID_ANGLE','PROFILE_BELOW_RESOLUTION','ZERO_LENGTH_EDGE','OVERLAPPING_EDGES','SELF_INTERSECTION','SELF_TOUCHING_BOUNDARY','ZERO_AREA_PROFILE','UNREPRESENTABLE_AREA',...SWEEP_PREPARATION_REFUSALS,...LOFT_PREPARATION_REFUSALS,...PROFILE_EXTENT_REFUSALS];const code=allowed.includes(error?.code)?error.code:'PRISM_VALIDATION_FAILED';self.postMessage({jobId:loftJob?(typeof m?.jobId==='string'&&m.jobId.length<=128?m.jobId:undefined):m?.jobId,ok:false,code,error:String(error?.message||'Prism validation failed').slice(0,512)}); }
+ } catch(error) { const allowed=['PROFILE_CONSTRUCTOR_BINDING_MISMATCH','INVALID_REQUEST','UNSUPPORTED_ENGINE','INVALID_FRAME','UNSUPPORTED_FRAME','STALE_SKETCH','INVALID_SKETCH','UNSUPPORTED_SKETCH','UNSUPPORTED_CONSTRAINT','STALE_FRAME','UNSUPPORTED_PROFILE','UNSUPPORTED_REGION_TOPOLOGY','RESOURCE_LIMIT','OPEN_OR_AMBIGUOUS_PROFILE','INVALID_PROFILE','STALE_REGION','STALE_SOURCE','STALE_SEAM','STALE_AXIS','REVOLVE_INVALID_AXIS','REVOLVE_INVALID_ANGLE','PROFILE_BELOW_RESOLUTION','ZERO_LENGTH_EDGE','OVERLAPPING_EDGES','SELF_INTERSECTION','SELF_TOUCHING_BOUNDARY','ZERO_AREA_PROFILE','UNREPRESENTABLE_AREA',...SWEEP_PREPARATION_REFUSALS,...LOFT_PREPARATION_REFUSALS,...PROFILE_EXTENT_REFUSALS];const code=allowed.includes(error?.code)?error.code:'PRISM_VALIDATION_FAILED';self.postMessage({jobId:loftJob?(typeof m?.jobId==='string'&&m.jobId.length<=128?m.jobId:undefined):m?.jobId,ok:false,code,error:String(error?.message||'Prism validation failed').slice(0,512)}); }
 };

@@ -1,3 +1,4 @@
+import type {BoundProfileConstructor,ProfileConstructorBinding} from '../mount/profileConstructorSourceBinding.mjs';
 import type {OwnedCounterboreIntent} from './ownedCounterboreIntent.mjs';
 import type {ProfileExtentIntent,ProfileExtentBinding} from '../mount/ownedProfileExtentPlan.mjs';
 import type {OwnedBlindHoleIntent} from './ownedBlindHoleIntent.mjs';
@@ -213,11 +214,13 @@ export interface ReadOwnedManufacturingMesh {readonly op:'solid.manufacturing.me
 export interface ManufacturingMeshResult {readonly contractVersion:1;readonly op:'solid.manufacturing.mesh.read';readonly unit:'millimeter';readonly buffer:ArrayBuffer;readonly metadata:Readonly<{version:1;quality:'native-controlled-tessellation';format:'owned-manufacturing-mesh-v1';byteLength:number;vertexCount:number;triangleCount:number;positionsOffset:32;indicesOffset:number;linearDeflectionMm:0.01;angularDeflectionRadians:0.1;relative:false;correspondence:'native-topology-parameters-v1';maxBoundaryDiscrepancyMm:number;sourcePreserved:true}>;}
 export type ExtrudeCircularCell=import('../mount/ownedCircularArrangementProtocol.mjs').CircularCellRequest;
 export interface ExtrudeProfileExtents {readonly op:'solid.profile.extrude.extents';readonly version:1;readonly unit:'millimeter';readonly request:ProfileExtentIntent;readonly extentBinding:ProfileExtentBinding;}
-export type SolidRequest=ExtrudeProfileExtents|ReadOwnedDrawingDerived|ReadOwnedBores|ExtrudeCircularCell|ReadPlanarAttachment|ReadOwnedDrawingReferences|ReadOwnedManufacturingMesh|ReadOwnedOrthographic|ExportOwnedSTEP|CreateBox|CreateAuthoredBox|BooleanSolid|BooleanHistorySolid|ExtrudeSelectedProfile|ExtrudePolygonProfile|RevolveSelectedProfile|SweepSelectedProfile|LoftSelectedProfiles|ReadSolidMesh|ReadSolidTopology|ClassifySolidPoint|ReadPrismSelections|ReadSolidSelections|TreatSolidEdges|ShellSolid|KernelCounterbore|KernelBlindHole|KernelThroughHole|KernelLinearHolePattern|DisposeSolid;
+export type SolidRequest=BoundProfileConstructor|ExtrudeProfileExtents|ReadOwnedDrawingDerived|ReadOwnedBores|ExtrudeCircularCell|ReadPlanarAttachment|ReadOwnedDrawingReferences|ReadOwnedManufacturingMesh|ReadOwnedOrthographic|ExportOwnedSTEP|CreateBox|CreateAuthoredBox|BooleanSolid|BooleanHistorySolid|ExtrudeSelectedProfile|ExtrudePolygonProfile|RevolveSelectedProfile|SweepSelectedProfile|LoftSelectedProfiles|ReadSolidMesh|ReadSolidTopology|ClassifySolidPoint|ReadPrismSelections|ReadSolidSelections|TreatSolidEdges|ShellSolid|KernelCounterbore|KernelBlindHole|KernelThroughHole|KernelLinearHolePattern|DisposeSolid;
 export interface ShapeResult {
- readonly contractVersion:1;readonly op:CreateBox['op']|BooleanSolid['op']|ExtrudeProfileExtents['op']|ExtrudeSelectedProfile['op']|RevolveSelectedProfile['op']|SweepSelectedProfile['op']|LoftSelectedProfiles['op']|TreatSolidEdges['op']|ShellSolid['op']|KernelCounterbore['op']|KernelBlindHole['op']|KernelThroughHole['op']|KernelLinearHolePattern['op'];
+ readonly contractVersion:1;readonly op:BoundProfileConstructor['op']|CreateBox['op']|BooleanSolid['op']|ExtrudeProfileExtents['op']|ExtrudeSelectedProfile['op']|RevolveSelectedProfile['op']|SweepSelectedProfile['op']|LoftSelectedProfiles['op']|TreatSolidEdges['op']|ShellSolid['op']|KernelCounterbore['op']|KernelBlindHole['op']|KernelThroughHole['op']|KernelLinearHolePattern['op'];
  readonly handle:TransientShapeHandle;readonly evidence:SolidEvidence;
  readonly constructionProvenance?:ConstructionProvenance;
+ // Private constructor receipt; not persisted model metadata or a handle.
+ readonly sourceCreationBinding?:Readonly<ProfileConstructorBinding>;
 }
 export interface MeshResult {
  readonly contractVersion:1;readonly op:'solid.mesh.read';readonly unit:'millimeter';

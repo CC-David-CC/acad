@@ -22,6 +22,10 @@ const circularCapture=()=>circularMode?circularWorker.captureCircularSelectionBo
 const selectedSelectionIndices=new Map();
 const selectedSourceProfiles=new Map();
 const selectedExtentProfiles=new Map();
+// Only independently source-verified constructor completion may issue these.
+// Scoped to the current Native realm and exact transient result token.
+const selectedSourceCreationBindings=new Map(),boundProfileInputs=new WeakSet();
+let profileSourceBindingMode=false,profileSourceBindingAPI=null;
 // Ephemeral authenticated causal witnesses, never sourceContexts or saved
 // geometry. Descendants may retain a witness after its old result is disposed.
 const selectedHoleStates=new Map();
@@ -273,7 +277,7 @@ function createOwnedProfileResult(prepared,name,version){
   const f=prepared.frame,values=[prepared.depth,...f.origin,...f.x,...f.y,...f.z,prepared.loops.length];
   if(version===3){values.length=0;values.push(...prepared.nativeValues);}else for(const loop of prepared.loops)if(loop.kind==='circle')values.push(1,...loop.center,loop.radius);else values.push(0,...loop.vertices.flat());
   const beforeNames=Module._OwnedShapeNamesV2(),ptr=str2C(name),data=_malloc(values.length*8);if(!data){_free(ptr);bad('Native profile allocation failed');}
-  let created;try{HEAPF64.set(values,data/8);globalThis.__OCI_EXCHANGE_VAL=null;Module[version===3?'_CreateSelectedProfileV3':'_CreateSelectedProfileV2'](ptr,data,values.length);created=globalThis.__OCI_EXCHANGE_VAL;}finally{_free(data);_free(ptr);globalThis.__OCI_EXCHANGE_VAL=null;}
+  let created;try{HEAPF64.set(values,data/8);if(boundProfileInputs.has(prepared)&&values.some((v,i)=>!Object.is(HEAPF64[data/8+i],v)))bad('Bound constructor input copy differs');globalThis.__OCI_EXCHANGE_VAL=null;Module[version===3?'_CreateSelectedProfileV3':'_CreateSelectedProfileV2'](ptr,data,values.length);created=globalThis.__OCI_EXCHANGE_VAL;if(boundProfileInputs.has(prepared)&&values.some((v,i)=>!Object.is(HEAPF64[data/8+i],v)))bad('Bound constructor input bytes changed');}finally{_free(data);_free(ptr);globalThis.__OCI_EXCHANGE_VAL=null;}
   if(created?.error==='MEASUREMENT_PRECISION_UNRESOLVED'){if(Module._OwnedShapeNamesV2()!==beforeNames)bad('Refused profile published an owned name');throwNativeMeasurementFailure(created);}
   if(!created||created.error||created.version!==version||created.valid!==true||created.solidCount!==1||Module._OwnedShapeNamesV2()!==beforeNames+1)bad('Native selected-profile construction failed');
   const expected=prepared.expected,tol=Math.max(1e-7,expected.volume*1e-9);
@@ -768,7 +772,7 @@ async function createOwnedLinearHolePattern(msg){
 }
 
 self.onmessage = async event => {
-  const msg=event.data;let loftPreparedBinding=null;
+  const msg=event.data;let loftPreparedBinding=null;let boundConstructorStarted=false;
   if(workerPhase==='closed')return;
   if(workerPhase==='initializing'||workerPhase==='busy'||workerPhase==='ready'&&msg?.kind==='init'){
     self.postMessage({kind:'refused',seq:msg?.seq,code:'BUSY',error:workerPhase==='initializing'?'Native runtime initialization is already in progress.':workerPhase==='busy'?'A native operation is already in progress.':'Native runtime initialization already completed.'});return;
@@ -784,6 +788,11 @@ self.onmessage = async event => {
       profileExtentsMode=msg.profileExtents===1;if(msg.profileExtents!==undefined&&msg.profileExtents!==1)bad('Invalid profile-extent mode');
       if(msg.selectedProfileVersion!==undefined&&msg.selectedProfileVersion!==3)bad('Unsupported selected profile version');
       selectedVersion=msg.selectedProfileVersion===3?3:2;if(selectedVersion===3&&!safeOwnedMode)bad('Polygon profiles require owned native shapes');
+      const mechanicalProfileRuntime=msg.manifest.js?.sha256==='04fc776837d6e87e7ddf9c31b66428ec191f3120600fd0794c86a5fd533c0a7b'&&msg.manifest.wasm?.sha256==='688c9d11ececf67d5187445491b4269647d810528e37161bcd7e676bc8d9125c';
+      if(msg.profileSourceBindingVersion!==undefined&&msg.profileSourceBindingVersion!==1)bad('Unsupported constructor source binding version');
+      profileSourceBindingMode=msg.profileSourceBindingVersion===1;
+      if(profileSourceBindingMode?(!mechanicalProfileRuntime||!safeOwnedMode||selectedVersion!==3):mechanicalProfileRuntime)bad('Mechanical constructor requires its exact explicit source-binding mode');
+      if(profileSourceBindingMode)profileSourceBindingAPI=await import(new URL('../extrusion/profileConstructorSourcePreparation.mjs',self.location.href));
       if(msg.edgeTreatments!==undefined&&msg.edgeTreatments!==1)bad('Unsupported edge treatment version');
       edgeTreatmentMode=msg.edgeTreatments===1;if(edgeTreatmentMode&&(!safeOwnedMode||selectedVersion!==3))bad('Edge treatments require owned polygon shapes');
       if(msg.booleanHistory!==undefined&&msg.booleanHistory!==1)bad('Unsupported Boolean history version');
@@ -853,7 +862,7 @@ self.onmessage = async event => {
       // One closed policy owns both admission and fresh-result requirements.
       const ownedKinds=new Map([
         ...(counterboreMode?[["solid-counterbore",true]]:[]),
-        ...["selected-profile-extrude", "box", "common", "union", "subtract"].map(kind=>[kind,true]),
+        ...[...(profileSourceBindingMode?["selected-profile-bound"]:["selected-profile-extrude"]), "box", "common", "union", "subtract"].map(kind=>[kind,true]),
         ...["solid-mesh", "dispose"].map(kind=>[kind,false]),
         ...(shellMode?["solid-shell"].map(kind=>[kind,true]):[]),
         ...(planarAttachmentsMode?["solid-face-frame"].map(kind=>[kind,false]):[]),
@@ -900,6 +909,30 @@ self.onmessage = async event => {
       const evidence=createOwnedRevolveResult(prepared,name);
       shapes.set(msg.token,name);self.postMessage({kind:'result',seq:msg.seq,evidence,binding:prepared.binding});return;
     }
+    if(msg?.kind==='selected-profile-bound'&&profileSourceBindingMode){
+      if(Reflect.ownKeys(msg).sort().join(',')!=='kind,request,seq,token')bad('Invalid bound constructor routing');
+      const native=Module,revision=nativeRuntimeRevision,beforeNext=nextName,beforeNames=Module._OwnedShapeNamesV2(),beforeShapes=shapes.size,beforeTriangles=selectedTriangleTotal;
+      const current=()=>{if(workerPhase!=='busy'||Module!==native||nativeRuntimeRevision!==revision||revision!=='sha256:04fc776837d6e87e7ddf9c31b66428ec191f3120600fd0794c86a5fd533c0a7b:688c9d11ececf67d5187445491b4269647d810528e37161bcd7e676bc8d9125c'||shapes.size!==beforeShapes||selectedTriangleTotal!==beforeTriangles)bad('Bound constructor Native owner changed');};
+      // Independent OCI-Worker source SHA, selected region, numeric V3 request
+      // and Native-input SHA derivation finishes BEFORE name/scratch allocation.
+      const checked=await profileSourceBindingAPI.verifyProfileConstructorSource(msg.request);current();
+      if(nextName!==beforeNext||native._OwnedShapeNamesV2()!==beforeNames||shapes.has(msg.token))bad('Bound constructor allocation state changed during verification');
+      const prepared=checked.native;boundProfileInputs.add(prepared);
+      let result,name;
+      try{name=allocateName();boundConstructorStarted=true;result=createOwnedProfileResult(prepared,name,3);}finally{boundProfileInputs.delete(prepared);}
+      current();
+      const {validateOwnedTopology,validatePrismProvenance,bindPrismSourceSlots}=await import(new URL('./ownedTopologyContract.mjs',self.location.href));current();
+      if(nextName!==beforeNext+1||native._OwnedShapeNamesV2()!==beforeNames+1)bad('Bound constructor result ownership differs');
+      const topology=result.created.constructionProvenance?.status==='available'?validateOwnedTopology(ownedJSON('_ReadOwnedTopologyV1',name)):null;
+      const provenance=bindPrismSourceSlots(validatePrismProvenance(result.created.constructionProvenance,topology,prepared),prepared);current();
+      // Existing quota adapter alone retires its known fresh name on refusal.
+      // No second release is attempted here; unknown outcomes retire the realm.
+      chargeSelectedResult(name,result.evidence);
+      const sourceCreationBinding=checked.sourceCreationBinding;
+      shapes.set(msg.token,name);selectedPrismProvenance.set(msg.token,provenance);freezeOwnedData(prepared.request);selectedSourceProfiles.set(msg.token,prepared.request);selectedSourceCreationBindings.set(msg.token,sourceCreationBinding);
+      if(throughHoleMode){const source=Object.freeze({token:msg.token,profile:prepared.request});selectedHoleStates.set(msg.token,Object.freeze({source,producerFeatureId:sourceCreationBinding.featureId,featureIds:Object.freeze([sourceCreationBinding.featureId]),holes:Object.freeze([])}));}
+      self.postMessage({kind:'result',seq:msg.seq,evidence:result.evidence,binding:{regionId:prepared.request.region.id,unit:'millimeter',profileVersion:3},constructionProvenance:provenance,sourceCreationBinding});return;
+    }
     if(msg?.kind==='selected-profile-extrude'&&msg.request?.version===4){
       if(!circularMode)throw Object.assign(Error('Circular cells require the explicitly registered cohort.'),{code:'UNSUPPORTED_PROFILE'});
       const prepared=await circularPlan.verifyCircularCellExtrusion(msg.request),env={Module,malloc:_malloc,free:_free,stringPointer:str2C,query:ownedJSON,interrogate,summarize};
@@ -943,6 +976,7 @@ self.onmessage = async event => {
     if(msg?.kind==='solid-linear-hole-pattern'&&linearHolePatternMode){const result=await createOwnedLinearHolePattern(msg);shapes.set(msg.token,result.name);selectedSelectionIndices.set(msg.token,{featureId:result.request.featureId,index:result.index,reason:result.reason});if(drawingReferencesMode)selectedDrawingCylinders.set(msg.token,result.cylinders||Object.freeze([]));self.postMessage({kind:'result',seq:msg.seq,evidence:result.evidence,pattern:result.request,work:result.work});return;}
     if(msg?.kind==='solid-selections'&&booleanHistoryMode){
       const name=nameFor(msg.token);if(!Number.isSafeInteger(msg.featureId)||msg.featureId<1)bad('Invalid authored feature identity');
+      const constructorBinding=selectedSourceCreationBindings.get(msg.token);if(constructorBinding&&constructorBinding.featureId!==msg.featureId)throw Object.assign(Error('Selection differs from its actual constructor producer'),{code:'INVALID_SELECTION_BINDING'});
       const provenance=selectedPrismProvenance.get(msg.token),cached=selectedSelectionIndices.get(msg.token);let selection;
       if(cached&&cached.featureId!==msg.featureId)throw Object.assign(Error('The result has a different producing feature'),{code:'INVALID_SELECTION_BINDING'});
       if(cached)selection=cached.index?{status:'available',plan:cached.index.plan}:{status:'unavailable',reason:cached.reason};
@@ -961,6 +995,7 @@ self.onmessage = async event => {
     }
     if(msg?.kind==='solid-prism-selections'&&selectedVersion===3&&!booleanHistoryMode){
       const name=nameFor(msg.token);if(!Number.isSafeInteger(msg.featureId)||msg.featureId<1)bad('Invalid authored prism feature identity');
+      const constructorBinding=selectedSourceCreationBindings.get(msg.token);if(constructorBinding&&constructorBinding.featureId!==msg.featureId)throw Object.assign(Error('Selection differs from its actual constructor producer'),{code:'INVALID_SELECTION_BINDING'});
       const provenance=selectedPrismProvenance.get(msg.token),cached=edgeTreatmentMode?selectedSelectionIndices.get(msg.token):null;let selection;
       if(cached&&cached.featureId!==msg.featureId)throw Object.assign(Error('The result has a different producing feature'),{code:'INVALID_SELECTION_BINDING'});
       if(cached)selection=cached.index?{status:'available',plan:cached.index.plan}:{status:'unavailable',reason:cached.reason};
@@ -1219,9 +1254,9 @@ self.onmessage = async event => {
       const {createDisplayProjection}=await import(new URL('./displayProjection.mjs',self.location.href)),display=createDisplayProjection(buffer,evidence.triangles);
       self.postMessage({kind:'result',seq:msg.seq,token:msg.token,triangleCount:evidence.triangles,buffer,evidence,displayBuffer:display.buffer,displayStatus:display.status,displayReason:display.reason},[buffer,display.buffer]);return;
     }
-    if (msg?.kind==='dispose') {const name=nameFor(msg.token);if(safeOwnedMode){const before=Module._OwnedShapeNamesV2(),ptr=str2C(name);let released;try{released=Module._ReleaseOwnedShapeV2(ptr);}finally{_free(ptr);}if(released!==1||Module._OwnedShapeNamesV2()!==before-1)bad('Native owned-shape release failed');} shapes.delete(msg.token);selectedPrismProvenance.delete(msg.token);circularPrismConstruction.delete(msg.token);selectedSelectionIndices.delete(msg.token);selectedSourceProfiles.delete(msg.token);selectedExtentProfiles.delete(msg.token);selectedHoleStates.delete(msg.token);selectedDrawingCylinders.delete(msg.token);enclosureShapes.delete(msg.token);prismProfiles.delete(msg.token);centeredResults.delete(msg.token);self.postMessage({kind:'disposed',seq:msg.seq,...(safeOwnedMode?{released:true}:{})});return;}
+    if (msg?.kind==='dispose') {const name=nameFor(msg.token);if(safeOwnedMode){const before=Module._OwnedShapeNamesV2(),ptr=str2C(name);let released;try{released=Module._ReleaseOwnedShapeV2(ptr);}finally{_free(ptr);}if(released!==1||Module._OwnedShapeNamesV2()!==before-1)bad('Native owned-shape release failed');} shapes.delete(msg.token);selectedPrismProvenance.delete(msg.token);circularPrismConstruction.delete(msg.token);selectedSelectionIndices.delete(msg.token);selectedSourceProfiles.delete(msg.token);selectedExtentProfiles.delete(msg.token);selectedSourceCreationBindings.delete(msg.token);selectedHoleStates.delete(msg.token);selectedDrawingCylinders.delete(msg.token);enclosureShapes.delete(msg.token);prismProfiles.delete(msg.token);centeredResults.delete(msg.token);self.postMessage({kind:'disposed',seq:msg.seq,...(safeOwnedMode?{released:true}:{})});return;}
     bad('Unsupported request');
-  } catch(e) {if(profileExtentsMode&&msg?.kind==='selected-profile-extents'){
+  } catch(e) {if(profileSourceBindingMode&&msg?.kind==='selected-profile-bound'){const ordinaryBeforeNative=['INVALID_REQUEST','UNSUPPORTED_ENGINE','INVALID_FRAME','UNSUPPORTED_FRAME','STALE_SKETCH','INVALID_SKETCH','UNSUPPORTED_SKETCH','UNSUPPORTED_CONSTRAINT','STALE_FRAME','UNSUPPORTED_PROFILE','UNSUPPORTED_REGION_TOPOLOGY','OPEN_OR_AMBIGUOUS_PROFILE','INVALID_PROFILE','STALE_REGION','PROFILE_BELOW_RESOLUTION','ZERO_LENGTH_EDGE','OVERLAPPING_EDGES','SELF_INTERSECTION','SELF_TOUCHING_BOUNDARY','ZERO_AREA_PROFILE','UNREPRESENTABLE_AREA'];if(e?.code==='RESOURCE_LIMIT'||!boundConstructorStarted&&ordinaryBeforeNative.includes(e?.code)){self.postMessage({kind:'refused',seq:msg.seq,code:e.code,error:String(e.message).slice(0,512)});return;}try{self.postMessage({kind:'error',seq:msg.seq,code:e?.code==='MEASUREMENT_PRECISION_UNRESOLVED'?e.code:'ENGINE_FAILURE',error:String(e?.message||e).slice(0,512)});}finally{closeWorker();}return;}if(profileExtentsMode&&msg?.kind==='selected-profile-extents'){
     if(profileExtentAPI.PROFILE_EXTENT_REFUSALS.includes(e?.code)){self.postMessage({kind:'refused',seq:msg.seq,code:e.code,error:String(e.message).slice(0,512)});return;}
     try{self.postMessage({kind:'error',seq:msg.seq,code:['PROFILE_EXTENT_INPUT_CHANGED','ENGINE_CLEANUP_FAILED','MEASUREMENT_PRECISION_UNRESOLVED'].includes(e?.code)?e.code:'ENGINE_FAILURE',error:String(e?.message||e).slice(0,512)});}finally{closeWorker();}return;
   }if(drawingReferencesMode&&msg?.kind==='solid-drawing-derived'&&['DRAWING_SECTION_UNQUALIFIED','DRAWING_DETAIL_UNQUALIFIED','RESOURCE_LIMIT','ENGINE_CAPABILITY_UNAVAILABLE',...(orthographicAPI?.ORTHOGRAPHIC_REFUSAL_CODES||[])].includes(e?.code)){self.postMessage({kind:'refused',seq:msg.seq,code:e.code,error:String(e.message).slice(0,512)});return;}if(drawingReferencesMode&&msg?.kind==='solid-drawing-derived'){try{self.postMessage({kind:'error',seq:msg.seq,...(typeof e?.code==='string'?{code:e.code}:{}),error:String(e?.message||e).slice(0,512)});}finally{closeWorker();}return;}if(blindHoleMode&&msg?.kind==='solid-blind-hole'){const {BLIND_HOLE_CODES}=await import(new URL('../solid/ownedBlindHoleIntent.mjs',self.location.href));if([...BLIND_HOLE_CODES,'BOOLEAN_INVALID_REQUEST','BOOLEAN_INVALID_INPUT','BOOLEAN_NON_SOLID_INPUT','BOOLEAN_NON_SOLID_RESULT','BOOLEAN_FAILED','BOOLEAN_INVALID_RESULT','BOOLEAN_RESOURCE_LIMIT','BOOLEAN_COPY_FAILED'].includes(e?.code)){self.postMessage({kind:'refused',seq:msg.seq,code:e.code,error:String(e.message).slice(0,512)});return;}try{self.postMessage({kind:'error',seq:msg.seq,code:e?.code==='ENGINE_CLEANUP_FAILED'?'ENGINE_CLEANUP_FAILED':e?.code==='MEASUREMENT_PRECISION_UNRESOLVED'?'MEASUREMENT_PRECISION_UNRESOLVED':'ENGINE_FAILURE',error:String(e?.message||e).slice(0,512)});}finally{closeWorker();}return;}if(counterboreMode&&msg?.kind==='solid-counterbore'){const {COUNTERBORE_CODES}=await import(new URL('../solid/ownedCounterboreIntent.mjs',self.location.href));if([...COUNTERBORE_CODES,'BOOLEAN_INVALID_REQUEST','BOOLEAN_INVALID_INPUT','BOOLEAN_NON_SOLID_INPUT','BOOLEAN_NON_SOLID_RESULT','BOOLEAN_FAILED','BOOLEAN_INVALID_RESULT','BOOLEAN_RESOURCE_LIMIT','BOOLEAN_COPY_FAILED'].includes(e?.code)){self.postMessage({kind:'refused',seq:msg.seq,code:e.code,error:String(e.message).slice(0,512)});return;}try{self.postMessage({kind:'error',seq:msg.seq,code:e?.code==='ENGINE_CLEANUP_FAILED'?'ENGINE_CLEANUP_FAILED':e?.code==='MEASUREMENT_PRECISION_UNRESOLVED'?'MEASUREMENT_PRECISION_UNRESOLVED':'ENGINE_FAILURE',error:String(e?.message||e).slice(0,512)});}finally{closeWorker();}return;}if(circularMode&&msg?.kind==='selected-profile-extrude'&&msg.request?.version===4){const recoverable=['INVALID_REQUEST','INVALID_FRAME','INVALID_PROFILE','UNSUPPORTED_PROFILE','STALE_REGION','PROFILE_BELOW_RESOLUTION','RESOURCE_LIMIT','CIRCULAR_INVALID_REQUEST','CIRCULAR_UNSUPPORTED_RELATION','CIRCULAR_GEOMETRY_UNQUALIFIED','CIRCULAR_CONSTRUCTION_FAILED','CIRCULAR_PROVENANCE_UNRESOLVED','CIRCULAR_RESOURCE_LIMIT','CIRCULAR_NAME_COLLISION','CIRCULAR_ALLOCATION_FAILED','CIRCULAR_BUSY'];if(recoverable.includes(e?.code)){self.postMessage({kind:'refused',seq:msg.seq,code:e.code,error:String(e.message).slice(0,512)});return;}try{self.postMessage({kind:'error',seq:msg.seq,...(typeof e?.code==='string'?{code:e.code}:{}),error:String(e?.message||e).slice(0,512)});}finally{closeWorker();}return;}if(planarAttachmentsMode&&msg?.kind==='solid-face-frame'&&['UNRESOLVED_SOURCE','UNSUPPORTED_FRAME_PARENT','INVALID_FRAME_DEPENDENCY','STALE_FRAME','RESOURCE_LIMIT'].includes(e?.code)){self.postMessage({kind:'refused',seq:msg.seq,code:e.code,error:String(e.message).slice(0,512),reason:e.reason||'REFERENCE_MISSING'});return;}if(initializing){self.postMessage({kind:'error',error:String(e)});closeWorker();return;}if(shellMode&&['solid-shell','box'].includes(msg?.kind)){const codes=msg.kind==='box'?[...shellAPI.BOX_CONSTRUCTION_REFUSALS,'RESOURCE_LIMIT','INVALID_REQUEST']:shellAPI.SHELL_REFUSALS;if(codes.includes(e?.code)){self.postMessage({kind:'refused',seq:msg.seq,code:e.code,error:String(e.message).slice(0,512)});return;}try{self.postMessage({kind:'error',seq:msg.seq,...(typeof e?.code==='string'?{code:e.code}:{}),error:String(e?.message||e).slice(0,512)});}finally{closeWorker();}return;}if(manufacturingMeshMode&&msg?.kind==='solid-manufacturing-mesh'){if(manufacturingAPI.MANUFACTURING_MESH_REFUSAL_CODES.includes(e?.code)){self.postMessage({kind:'refused',seq:msg.seq,code:e.code,error:String(e.message).slice(0,512)});return;}try{self.postMessage({kind:'error',seq:msg.seq,...(typeof e?.code==='string'?{code:e.code}:{}),error:String(e?.message||e).slice(0,512)});}finally{closeWorker();}return;}if(orthographicReadMode&&msg?.kind==='solid-orthographic-read'){if(orthographicAPI.ORTHOGRAPHIC_REFUSAL_CODES.includes(e?.code)){self.postMessage({kind:'refused',seq:msg.seq,code:e.code,error:String(e.message).slice(0,512)});return;}try{self.postMessage({kind:'error',seq:msg.seq,...(typeof e?.code==='string'?{code:e.code}:{}),error:String(e?.message||e).slice(0,512)});}finally{closeWorker();}return;}if(stepExportMode&&msg?.kind==='solid-step-export'){const codes=['STEP_EXPORT_INVALID_REQUEST','STEP_EXPORT_EMPTY_INPUT','STEP_EXPORT_UNSUPPORTED_SHAPE','STEP_EXPORT_INVALID_SHAPE','STEP_EXPORT_ALIAS_INPUT','STEP_EXPORT_RESOURCE_LIMIT','STEP_EXPORT_FAILED'];if(codes.includes(e?.code)){self.postMessage({kind:'refused',seq:msg.seq,code:e.code,error:String(e.message).slice(0,512)});return;}try{self.postMessage({kind:'error',seq:msg.seq,...(typeof e?.code==='string'?{code:e.code}:{}),error:String(e?.message||e).slice(0,512)});}finally{closeWorker();}return;}if(e?.code==='MEASUREMENT_PRECISION_UNRESOLVED'){self.postMessage({kind:'error',seq:msg?.seq,code:e.code,error:String(e.message)});closeWorker();return;}if(loftMode&&msg?.kind==='selected-profile-loft'&&e?.code==='LOFT_INPUT_CHANGED'){self.postMessage({kind:'error',seq:msg.seq,code:e.code,error:String(e.message)});closeWorker();return;}if(loftMode&&msg?.kind==='selected-profile-loft'){
