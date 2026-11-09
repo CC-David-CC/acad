@@ -166,3 +166,13 @@ and supplies its actual current revision, then uses the resulting face-specific
 revision and actual opaque driving row for edit. Core and Desktop example bytes
 remain identical. No private authoring, geometry/domain, API/schema, journal,
 phase/oracle or tolerance changes. A complete fresh whole remains required.
+
+Second whole54341 reached23 Native observations/587commands/fifteen refusals,
+source width/height edits, named bindings and inch display, then the driver's
+drawing setup repeated the same missing discovery revision. Original retained
+8b8618d/evidence-r2; no durable writes or post-failure oracle, own contexts
+retired and packet sources unchanged. Driver now obtains the real discovery
+revision before face-specific inspection and checks both public methods at
+startup. Original phase/geometry/source/format/lifecycle criteria remain; full
+fresh whole required. Packet-wide public callsite source review accompanies
+this grouped correction rather than changing host API or relaxing a check.
