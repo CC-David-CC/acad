@@ -83,7 +83,8 @@ def raw_model(path):
                      for t in mesh.findall('m:triangles/m:triangle', NS)]
             row.update(kind='mesh', vertices=len(vertices), triangles=len(faces),
                        propertyId=int(obj.attrib.get('pid', 0)),
-                       propertyIndex=int(obj.attrib.get('pindex', 0)))
+                       propertyIndex=int(obj.attrib.get('pindex', 0)),
+                       hasPid='pid' in obj.attrib, hasPindex='pindex' in obj.attrib)
             meshes[identity] = {'tokens': tokens, 'vertices': vertices, 'faces': faces,
                                 'triangleProperties': props}
         else:
@@ -165,22 +166,79 @@ def lib3mf_assessment(path, raw, meshes):
         reader = model.QueryReader('3mf')
         reader.SetStrictModeActive(True)
         reader.ReadFromFile(str(path))
+        # API package IDs/PropertyIDs are not XML model IDs/positional indices.
+        # Retain actual namespaces; reconcile enumerations, never add an offset.
+        observed = {'resources': [], 'materials': [], 'objects': [], 'builds': []}
+        result['observations'] = observed
+        resources_by_unique, resources_by_model = {}, {}
+        iterator = model.GetResources()
+        while iterator.MoveNext():
+            resource = iterator.GetCurrent()
+            entry = {'uniqueId': resource.GetUniqueResourceID(),
+                     'modelId': resource.GetModelResourceID(),
+                     'part': resource.PackagePart().GetPath()}
+            observed['resources'].append(entry)
+            check(len(observed['resources']) <= 1024, 'library resource census limit')
+            check(entry['part'].lstrip('/') == '3D/3dmodel.model',
+                  'unassessed resource in another model part')
+            check(entry['uniqueId'] not in resources_by_unique and
+                  entry['modelId'] not in resources_by_model, 'duplicate resource identity')
+            resources_by_unique[entry['uniqueId']] = entry
+            resources_by_model[entry['modelId']] = entry
+        check(set(resources_by_model) == set(raw['objects']) | set(raw['materials']),
+              'unsupported or differing resource roster')
+        property_indices, groups = {}, []
+        for identity, expected in raw['materials'].items():
+            unique_id = resources_by_model[identity]['uniqueId']
+            group = model.GetBaseMaterialGroupByID(unique_id)
+            property_ids = list(group.GetAllPropertyIDs())
+            material_row = {'id': identity, 'uniqueId': unique_id, 'propertyIds': property_ids}
+            observed['materials'].append(material_row)
+            check(group.GetCount() == len(expected) == len(property_ids) and
+                  len(set(property_ids)) == len(property_ids), 'material enumeration differs')
+            property_indices[unique_id] = {pid: i for i, pid in enumerate(property_ids)}
+            names = [group.GetName(pid) for pid in property_ids]
+            colors = []
+            for pid in property_ids:
+                color = group.GetDisplayColor(pid)
+                colors.append([color.Red, color.Green, color.Blue, color.Alpha])
+            material_row.update(names=names, colorsRGBA=colors)
+            check(names == [m['name'] for m in expected], 'material names differ')
+            for actual, material in zip(colors, expected):
+                token = material['displaycolor'].lstrip('#')
+                check(actual == list(bytes.fromhex(token + ('FF' if len(token) == 6 else ''))),
+                      'material appearance differs')
+            groups.append(material_row)
+
+        def material_reference(unique_id, property_id):
+            if unique_id == 0:
+                return (0, property_id)
+            return (resources_by_unique[unique_id]['modelId'],
+                    property_indices[unique_id][property_id])
+
         objects = []
         maximum_conversion = 0.
         iterator = model.GetObjects()
         while iterator.MoveNext():
             obj = iterator.GetCurrentObject()
-            identity = obj.GetResourceID()
+            identity = obj.GetModelResourceID()
             expected = raw['objects'][identity]
-            row = {'id': identity, 'name': obj.GetName()}
+            row = {'id': identity, 'uniqueId': obj.GetUniqueResourceID(), 'name': obj.GetName()}
+            observed['objects'].append(row)
             check(row['name'] == expected['name'], 'library object name differs')
             if obj.IsMeshObject():
                 check(expected['kind'] == 'mesh', 'library object kind differs')
                 check(obj.GetVertexCount() == expected['vertices'] and
                       obj.GetTriangleCount() == expected['triangles'], 'library counts differ')
                 pid, index, has_prop = obj.GetObjectLevelProperty()
-                check((pid, index) == (expected['propertyId'], expected['propertyIndex']),
-                      'library material assignment differs')
+                row['observedObjectProperty'] = {'uniqueId': pid, 'propertyId': index,
+                                                'hasProperty': has_prop}
+                check(has_prop == expected['hasPid'], 'library object-property presence differs')
+                if has_prop:
+                    mapped = material_reference(pid, index)
+                    row['observedObjectProperty']['xmlReference'] = list(mapped)
+                    check(mapped == (expected['propertyId'], expected['propertyIndex']),
+                          'library material assignment differs')
                 for i, p in enumerate(meshes[identity]['vertices']):
                     converted = obj.GetVertex(i).Coordinates
                     check(all(float(converted[k]) == struct.unpack('<f', struct.pack('<f', p[k]))[0]
@@ -192,9 +250,10 @@ def lib3mf_assessment(path, raw, meshes):
                     prop = obj.GetTriangleProperties(i)
                     authored = meshes[identity]['triangleProperties'][i]
                     first = authored.get('p1', expected['propertyIndex'])
-                    check(prop.ResourceID == authored.get('pid', expected['propertyId']) and
-                          list(prop.PropertyIDs) == [first, authored.get('p2', first),
-                                                     authored.get('p3', first)],
+                    mapped = [material_reference(prop.ResourceID, pid) for pid in prop.PropertyIDs]
+                    check(mapped == [(authored.get('pid', expected['propertyId']), p)
+                                     for p in [first, authored.get('p2', first),
+                                               authored.get('p3', first)]],
                           'library triangle material association differs')
                 row.update(kind='mesh', vertices=obj.GetVertexCount(),
                            triangles=obj.GetTriangleCount(), propertyId=pid,
@@ -207,7 +266,7 @@ def lib3mf_assessment(path, raw, meshes):
                 for i, child in enumerate(expected['components']):
                     component = obj.GetComponent(i)
                     values = [float(v) for col in component.GetTransform().Fields for v in col]
-                    check(component.GetObjectResource().GetResourceID() == child['objectId'],
+                    check(component.GetObjectResource().GetModelResourceID() == child['objectId'],
                           'component target differs')
                     check(values == [struct.unpack('<f', struct.pack('<f', v))[0]
                                      for v in child['transform']], 'component placement differs')
@@ -219,28 +278,14 @@ def lib3mf_assessment(path, raw, meshes):
         iterator = model.GetBuildItems()
         while iterator.MoveNext():
             item = iterator.GetCurrent()
-            builds.append({'objectId': item.GetObjectResourceID(),
+            builds.append({'objectId': item.GetObjectResource().GetModelResourceID(),
                            'transform': [float(v) for col in item.GetObjectTransform().Fields for v in col]})
+        observed['builds'] = builds
         check(len(builds) == len(raw['builds']), 'library build count differs')
         for actual, expected in zip(builds, raw['builds']):
             check(actual['objectId'] == expected['objectId'] and actual['transform'] ==
                   [struct.unpack('<f', struct.pack('<f', v))[0] for v in expected['transform']],
                   'library build target/placement differs')
-        groups = []
-        for identity, expected in raw['materials'].items():
-            group = model.GetBaseMaterialGroupByID(identity)
-            check(group.GetCount() == len(expected), 'material count differs')
-            names = [group.GetName(i) for i in range(group.GetCount())]
-            check(names == [m['name'] for m in expected], 'material names differ')
-            colors = []
-            for i, material in enumerate(expected):
-                color = group.GetDisplayColor(i)
-                actual = [color.Red, color.Green, color.Blue, color.Alpha]
-                token = material['displaycolor'].lstrip('#')
-                check(actual == list(bytes.fromhex(token + ('FF' if len(token) == 6 else ''))),
-                      'material appearance differs')
-                colors.append(actual)
-            groups.append({'id': identity, 'names': names, 'colorsRGBA': colors})
         check(raw['unit'] == 'millimeter' and model.GetUnit() == lib3mf.ModelUnit.MilliMeter,
               'unassessed unit conversion')
         group = model.GetMetaDataGroup()
