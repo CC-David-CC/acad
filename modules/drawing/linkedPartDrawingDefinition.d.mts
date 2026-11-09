@@ -23,16 +23,26 @@ export type LinkedPartDrawingView = Readonly<{viewId:string;paperOrigin:PaperPoi
  {basis:'detail';parentViewId:string;focus:BoreReference;aperture:Readonly<{kind:'rectangle';halfWidth:number;halfHeight:number}>;scale:Readonly<{numerator:2;denominator:1}>;visibility:'inherit'})>;
 export type BoreReference = Readonly<{kind:'through-hole';featureId:number;sourceFeatureId:number;faceId:string;regionId:string;geometry:'cylinder'} & ({holeKind:'centered-through';slot:'center'}|{holeKind:'four-corner-through';slot:'MIN_X_MIN_Y'|'MAX_X_MIN_Y'|'MAX_X_MAX_Y'|'MIN_X_MAX_Y'})>;
 export type BoreAnnotation = Readonly<{annotationId:string;viewId:string} & ({kind:'bore-center';hole:BoreReference;extension:number}|{kind:'baseline'|'ordinate';axis:DatumAxis;holes:readonly BoreReference[];labels:readonly PaperPoint[]}|{kind:'hole-callout';holes:readonly BoreReference[];label:PaperPoint})>;
+export type DatumFeatureSymbol = 'A'|'B'|'C';
+export type LinkedDatumFeature = Readonly<{annotationId:string;symbol:DatumFeatureSymbol;viewId:string;label:PaperPoint;reference:NativeFace}>;
+type RequirementBase = Readonly<{annotationId:string;viewId:string;label:PaperPoint}>;
+export type LinkedManufacturingRequirement = RequirementBase & (
+ Readonly<{kind:'position-tolerance';target:BoreReference;zone:Readonly<{kind:'diameter';value:number;unit:'millimeter'}>;datumSymbols:readonly ['A','B','C']}> |
+ Readonly<{kind:'surface-finish';target:NativeFace;parameter:'Ra';maximum:Readonly<{value:number;unit:'micrometer'}>}> |
+ Readonly<{kind:'clearance-fit';nominalDimensionId:string;hole:Readonly<{lowerDeviation:number;upperDeviation:number}>;declaredShaft:Readonly<{lowerDeviation:number;upperDeviation:number}>;unit:'millimeter'}>);
 export type LinkedPartDrawingDefinition = Readonly<{
-  version:1|2|3;unit:'millimeter';drawingId:string;title:string;
+  version:1|2|3|4;unit:'millimeter';drawingId:string;title:string;
   target:Readonly<{featureId:number;operationType:string;engine:'occ';engineRevision:string;output:'complete-native-result'}>;
   datum:Readonly<{featureId:number;faceId:string;regionId:string}>;
   sheet:Readonly<{width:number;height:number;scale:Readonly<{numerator:number;denominator:number}>}>;
   /** v1: original1..3 orthographic subsequence; v2: exactly top/front/right/isometric. */
   views:readonly LinkedPartDrawingView[];
   dimensions:readonly LinkedPartDrawingDimension[];
-  /** Present exactly in v3. Signed ordinate facts are distinct from dimensions. */
+  /** Present exactly in v3/v4. Signed ordinate facts are distinct from dimensions. */
   annotations?:readonly BoreAnnotation[];
+  /** Present exactly in v4. Combined bore/datum/requirement annotation count<=16. */
+  datumFeatures?:readonly LinkedDatumFeature[];
+  requirements?:readonly LinkedManufacturingRequirement[];
 }>;
 export function captureLinkedPartDrawingDefinition(value:unknown):LinkedPartDrawingDefinition;
 

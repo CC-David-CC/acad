@@ -139,11 +139,45 @@ function annotation(value,datum,holes,viewIds,ids,sheet){
 function axisView(axis, basis) {
   if (!['datum-x', 'datum-y'].includes(axis) || !(axis === 'datum-x' ? ['top', 'front'] : ['top', 'right']).includes(basis)) fail('Datum component is not visible in this named view.');
 }
+function requirementBase(r,ids,views,sheet){
+ text(r.annotationId,128);text(r.viewId,128);
+ if(ids.has(r.annotationId)||!views.has(r.viewId))fail('Requirement annotation IDs must be unique and name an ordinary orthographic view.');
+ ids.add(r.annotationId);r.label=paper(r.label,sheet);
+}
+function datumFeature(value,ids,views,sheet,symbols,nativeSeen){
+ const r=record(value,['annotationId','symbol','viewId','label','reference']);requirementBase(r,ids,views,sheet);
+ if(!['A','B','C'].includes(r.symbol)||symbols.has(r.symbol))fail('Datum feature symbols must be unique A, B or C.');symbols.add(r.symbol);
+ r.reference=nativeRef(r.reference,'face',nativeSeen);return r;
+}
+function centeredBore(r){return r.kind==='center-hole'||r.kind==='through-hole'&&r.holeKind==='centered-through'&&r.slot==='center';}
+function requirement(value,datum,holes,ids,views,sheet,symbols,dimensions,kinds,nativeSeen){
+ const kind=discriminator(value,'kind'),extra=kind==='position-tolerance'?['target','zone','datumSymbols']:kind==='surface-finish'?['target','parameter','maximum']:kind==='clearance-fit'?['nominalDimensionId','hole','declaredShaft','unit']:null;
+ if(!extra)fail('Unsupported linked manufacturing requirement kind.');
+ const r=record(value,['annotationId','kind','viewId','label',...extra]);if(r.kind!==kind)fail('Requirement kind changed during capture.');requirementBase(r,ids,views,sheet);
+ if(kinds.has(kind))fail('The finite drawing supports one requirement of each kind.');kinds.add(kind);
+ if(kind==='position-tolerance'){
+  r.target=bore(r.target,datum,holes);if(!centeredBore(r.target))fail('Position requires the actual semantic centered bore.');
+  r.zone=record(r.zone,['kind','value','unit']);if(r.zone.kind!=='diameter'||r.zone.unit!=='millimeter')fail('Position uses an explicit millimeter diameter zone.');number(r.zone.value,0,1e6);
+  r.datumSymbols=list(r.datumSymbols,3,3);if(r.datumSymbols.some((symbol,i)=>symbol!==['A','B','C'][i]||!symbols.has(symbol)))fail('Position requires the ordered authored datum features A, B and C.');
+ }else if(kind==='surface-finish'){
+  r.target=nativeRef(r.target,'face',nativeSeen);r.maximum=record(r.maximum,['value','unit']);
+  if(r.parameter!=='Ra'||r.maximum.unit!=='micrometer')fail('Surface finish requires Ra and an explicit micrometer maximum.');number(r.maximum.value,0,1e6);
+  if(!(r.maximum.value/1000>0))fail('The Ra requirement has no positive representable millimeter quantity.');
+ }else{
+  text(r.nominalDimensionId,128);const dimension=dimensions.find(d=>d.dimensionId===r.nominalDimensionId);
+  if(!dimension||dimension.kind!=='hole-diameter'||!centeredBore(dimension.hole))fail('Clearance requires the same drawing actual centered hole-diameter dimension.');
+  if(r.unit!=='millimeter')fail('Clearance deviations use canonical millimeters.');
+  for(const key of ['hole','declaredShaft']){r[key]=record(r[key],['lowerDeviation','upperDeviation']);for(const field of ['lowerDeviation','upperDeviation'])number(r[key][field],-1e6,1e6,true);if(r[key].lowerDeviation>r[key].upperDeviation)fail('Required size deviations must be ordered.');}
+  const minimum=r.hole.lowerDeviation-r.declaredShaft.upperDeviation,maximum=r.hole.upperDeviation-r.declaredShaft.lowerDeviation;
+  if(!(minimum>0)||!Number.isFinite(maximum)||maximum<minimum)fail('The initial clearance requirement needs a positive ordered clearance interval.');
+ }
+ return r;
+}
 export function captureLinkedPartDrawingDefinition(value) {
   const version=discriminator(value,'version');
-  const r = record(value, ['version', 'unit', 'drawingId', 'title', 'target', 'datum', 'sheet', 'views', 'dimensions',...(version===3?['annotations']:[])]);
+  const r = record(value, ['version', 'unit', 'drawingId', 'title', 'target', 'datum', 'sheet', 'views', 'dimensions',...(version===3||version===4?['annotations']:[]),...(version===4?['datumFeatures','requirements']:[])]);
   if(r.version!==version)fail('Drawing version changed during capture.');
-  if (![1,2,3].includes(r.version) || r.unit !== 'millimeter') fail('Select drawing definition version1,2 or3 and canonical millimeters.');
+  if (![1,2,3,4].includes(r.version) || r.unit !== 'millimeter') fail('Select drawing definition version1,2,3 or4 and canonical millimeters.');
   const bases = r.version === 1 ? orthographicBases : isometricBases;
   text(r.drawingId, 128); text(r.title, 256, true);
   r.target = record(r.target, ['featureId', 'operationType', 'engine', 'engineRevision', 'output']);
@@ -161,17 +195,17 @@ export function captureLinkedPartDrawingDefinition(value) {
   const viewIds = new Map(), holes = new Map(); let last = -1;
   // Existing version1/2 remain exact. Version3 adds at most one section and
   // one linked detail after its canonical orthographic/isometric projection set.
-  const roles = r.version===3?[...isometricBases,'bore-center-section','detail']:bases;
+  const roles = r.version>=3?[...isometricBases,'bore-center-section','detail']:bases;
   r.views = list(r.views,r.version===1?1:r.version===2?4:3,r.version===1?3:r.version===2?4:LINKED_DRAWING_MAX_VIEWS).map(value=>{
     const basis=discriminator(value,'basis'),extra=basis==='bore-center-section'?['hole','retainedSide']:basis==='detail'?['parentViewId','focus','aperture','scale']:[];
     const v=record(value,['viewId','basis',...extra,'paperOrigin','visibility']),index=roles.indexOf(basis);
     text(v.viewId,128);if(v.basis!==basis||index<0||index<=last||viewIds.has(v.viewId))fail('Views require unique IDs and canonical role order.');
     last=index;v.paperOrigin=paper(v.paperOrigin,r.sheet);
     if(basis==='bore-center-section'){
-      if(r.version!==3||v.visibility!=='cut-boundary-only'||v.retainedSide!=='positive-datum-y')fail('Unsupported section definition.');
+      if(r.version<3||v.visibility!=='cut-boundary-only'||v.retainedSide!=='positive-datum-y')fail('Unsupported section definition.');
       v.hole=bore(v.hole,r.datum,holes);viewIds.set(v.viewId,'front');
     }else if(basis==='detail'){
-      if(r.version!==3||v.visibility!=='inherit')fail('Unsupported detail definition.');
+      if(r.version<3||v.visibility!=='inherit')fail('Unsupported detail definition.');
       text(v.parentViewId,128);
       if(viewIds.get(v.parentViewId)!=='top')fail('A detail requires the actual canonical top parent.');
       v.focus=bore(v.focus,r.datum,holes);if(v.focus.holeKind!=='four-corner-through')fail('This detail requires a source-bound corner bore.');
@@ -181,7 +215,7 @@ export function captureLinkedPartDrawingDefinition(value) {
     }else{if(v.visibility!=='visible-and-hidden')fail('Unsupported projection visibility.');viewIds.set(v.viewId,basis);}
     return v;
   });
-  if(r.version===3&&orthographicBases.some((basis,i)=>r.views[i].basis!==basis))fail('Definition version3 retains top/front/right before derived views.');
+  if(r.version>=3&&orthographicBases.some((basis,i)=>r.views[i].basis!==basis))fail(r.version===3?'Definition version3 retains top/front/right before derived views.':'Definition version4 retains top/front/right before derived views.');
   const newAnnotationIds=new Set();
   const dimensionIds = new Set(), nativeSeen = new Map(), curves = new Map();
   const fields = {
@@ -208,11 +242,17 @@ export function captureLinkedPartDrawingDefinition(value) {
     } else if (kind === 'edge-length') v.edge = nativeRef(v.edge, 'edge', nativeSeen);
     else {
       if (kind === 'hole-offset') axisView(v.axis, basis);
-      v.hole = r.version===3&&kind==='hole-diameter'&&discriminator(v.hole,'kind')==='through-hole'?bore(v.hole,r.datum,holes):centerHole(v.hole,r.datum,holes);
+      v.hole = r.version>=3&&kind==='hole-diameter'&&discriminator(v.hole,'kind')==='through-hole'?bore(v.hole,r.datum,holes):centerHole(v.hole,r.datum,holes);
     }
     return v;
   });
-  if(r.version===3)r.annotations=list(r.annotations,0,LINKED_DRAWING_MAX_ANNOTATIONS).map(v=>annotation(v,r.datum,holes,viewIds,newAnnotationIds,r.sheet));
+  if(r.version>=3)r.annotations=list(r.annotations,0,LINKED_DRAWING_MAX_ANNOTATIONS).map(v=>annotation(v,r.datum,holes,viewIds,newAnnotationIds,r.sheet));
+  if(r.version===4){
+   const symbols=new Set(),views=new Set(r.views.filter(v=>orthographicBases.includes(v.basis)).map(v=>v.viewId)),kinds=new Set();
+   r.datumFeatures=list(r.datumFeatures,0,3).map(v=>datumFeature(v,newAnnotationIds,views,r.sheet,symbols,nativeSeen));
+   r.requirements=list(r.requirements,0,3).map(v=>requirement(v,r.datum,holes,newAnnotationIds,views,r.sheet,symbols,r.dimensions,kinds,nativeSeen));
+   if(r.annotations.length+r.datumFeatures.length+r.requirements.length>LINKED_DRAWING_MAX_ANNOTATIONS)fail('The combined bore/datum/requirement annotation count exceeds16.','RESOURCE_LIMIT');
+  }
   if (new TextEncoder().encode(canonical(r)).byteLength > LINKED_DRAWING_MAX_BYTES) fail('Drawing definition exceeds64KiB UTF-8.', 'RESOURCE_LIMIT');
   return deepFreeze(r);
 }
