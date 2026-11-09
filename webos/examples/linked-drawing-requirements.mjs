@@ -55,7 +55,7 @@ export function createDrawingRequirementExample(agent,build){
    const point=(r,end)=>({kind:'source-point',featureId:b.profile.featureId,faceId:b.faceId,regionId:b.regionId,curveId:r.id,curveType:'segment',point:end}),reference=clone(center.reference);
    const definition={version:4,unit:'millimeter',drawingId,title:'Linked datum position finish and declared clearance',target:found.request.target,datum:sourceDatum(b),sheet:{width:594,height:420,scale:{numerator:1,denominator:1}},views:[{viewId:'top',basis:'top',paperOrigin:[100,100],visibility:'visible-and-hidden'},{viewId:'front',basis:'front',paperOrigin:[100,240],visibility:'visible-and-hidden'},{viewId:'right',basis:'right',paperOrigin:[350,240],visibility:'visible-and-hidden'}],dimensions:[
     {dimensionId:'width',viewId:'top',kind:'source-distance',axis:'datum-x',from:point(horizontal,'a'),to:point(horizontal,'b'),label:[175,120]},
-    {dimensionId:'height',viewId:'top',kind:'source-distance',axis:'datum-y',from:point(vertical,'a'),to:point(vertical,'b'),label:[80,70]},
+    {dimensionId:'height',viewId:'top',kind:'source-distance',axis:'datum-y',from:point(vertical,'a'),to:point(vertical,'b'),label:[40,70]},
     {dimensionId:'depth',viewId:'front',kind:'plane-distance',axis:'datum-normal',first:clone(lower.reference),second:clone(A.reference),label:[270,220]},
     {dimensionId:'nominal-hole',viewId:'top',kind:'hole-diameter',hole:clone(reference),label:[180,60]}],
     annotations:[{annotationId:'original-center-mark',kind:'bore-center',viewId:'top',hole:clone(reference),extension:3}],
