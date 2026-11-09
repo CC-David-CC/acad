@@ -1,0 +1,121 @@
+{
+  "scope": "complete C11 producer build/stage and exact source-byte custody only; runtime workflow qualification pending",
+  "core": "4a6ff8efa0984d587d1530e9a58f69b8ed1933ee",
+  "desktop": "c2ba7ef85626d42c77f1a99efc705eca6e6a90c5",
+  "build": {
+    "phase": "build",
+    "status": "PASS",
+    "source": "4a6ff8efa0984d587d1530e9a58f69b8ed1933ee",
+    "recipeSHA256": "f7794b2b65aac317162aee84ed2c352e7fd4c60c1a6a94a494ff58e8e0298ab0",
+    "dependenciesRehashed": false,
+    "nativePairsChanged": false,
+    "pid": 2926523,
+    "startedAtUnix": 1794257355.0844793,
+    "exitCode": 0,
+    "finishedAtUnix": 1794257505.7891033,
+    "logSHA256": "ca0640bb0257bc4e1d010196b3ab564baacb636b64948d4ef3ffee8e3c0b57c4",
+    "session": 9763,
+    "webpackSuccessfulCompletions": 10
+  },
+  "stage": {
+    "phase": "stage",
+    "status": "PASS",
+    "source": "4a6ff8efa0984d587d1530e9a58f69b8ed1933ee",
+    "desktop": "c2ba7ef85626d42c77f1a99efc705eca6e6a90c5",
+    "recipeSHA256": "9f5ed5705bc2c0a16e71427b3e9dfe094dabcdc5f866651b91780f94dbadcd00",
+    "pinFixtureHelperSHA256Before": "6074b3eda548591c42edc86a3b08e036a4c91f0a31680ba25ae67b6c7c05251f",
+    "pid": 2927742,
+    "startedAtUnix": 1794257611.1883123,
+    "exitCode": 0,
+    "finishedAtUnix": 1794257626.8386517,
+    "pinFixtureHelperSHA256After": "6074b3eda548591c42edc86a3b08e036a4c91f0a31680ba25ae67b6c7c05251f",
+    "logSHA256": "2e0c470e91a494ef8a696bc042da4efd0e3fa1a4ee86e02a7e9c48e5bc0b6d9c",
+    "session": 93557,
+    "cadAssets": 587,
+    "cadAssetBytes": 605470168,
+    "appFiles": 660,
+    "apps": 2,
+    "signedPins": 293
+  },
+  "sourceByteAudit": {
+    "phase": "source-byte-audit",
+    "source": "4a6ff8efa0984d587d1530e9a58f69b8ed1933ee",
+    "scriptSHA256": "548ee1ed8538f9463a5318a856ec4cb456a28cbbb9e86d12a3c1a34a46fbd161",
+    "startedAtUnix": 1794257658.7000885,
+    "status": "PASS",
+    "exitCode": 0,
+    "finishedAtUnix": 1794257660.9372766,
+    "session": 22087,
+    "componentManifests": 12,
+    "uniqueSources": 116,
+    "allListedFilesAndSourceGitBlobsChecked": true
+  },
+  "fixture": {
+    "port": 21056,
+    "serviceSession": 69707,
+    "forwardSession": 82108,
+    "reverseCDPPort": 19551,
+    "existingCDPBrowser": "Chrome/155.0.8059.79",
+    "runtimeRoot": "/mnt/data10tb/codi-acad-drawing-requirements-state-20261109-r1",
+    "externalRelay": false
+  },
+  "limitations": [
+    "Reused dependency tree not independently rehashed.",
+    "Build custody is not Native functionality or whole Gate1 qualification.",
+    "Only public code/tool records are copied; no runtime binaries, SDK, account/key/browser state."
+  ],
+  "files": {
+    "build-state.json": {
+      "bytes": 446,
+      "sha256": "3ca63816cb24a0c2b67bc024136e812ed317170d931c224af9981fdf965b8969"
+    },
+    "build.log": {
+      "bytes": 232639,
+      "sha256": "ca0640bb0257bc4e1d010196b3ab564baacb636b64948d4ef3ffee8e3c0b57c4"
+    },
+    "component-source-custody.json": {
+      "bytes": 21862,
+      "sha256": "7924ba3342b3f6d2c5573f5182dc4a3f5e154628aab44ec657b7cd6a82fcf090"
+    },
+    "pin-fixture.py": {
+      "bytes": 4433,
+      "sha256": "6074b3eda548591c42edc86a3b08e036a4c91f0a31680ba25ae67b6c7c05251f"
+    },
+    "run-build.sh": {
+      "bytes": 2871,
+      "sha256": "f7794b2b65aac317162aee84ed2c352e7fd4c60c1a6a94a494ff58e8e0298ab0"
+    },
+    "run-stage.sh": {
+      "bytes": 1740,
+      "sha256": "9f5ed5705bc2c0a16e71427b3e9dfe094dabcdc5f866651b91780f94dbadcd00"
+    },
+    "runtime-pins.json": {
+      "bytes": 42485,
+      "sha256": "6a803b1b1cb35d2a927d80fee9c37bd5e893a877775566f024516cc720969c2c"
+    },
+    "selection-r2.json": {
+      "bytes": 592,
+      "sha256": "4329ee83b5070c712a9579e55b70db17a16578e365d22d672aec4d78c4fe531b"
+    },
+    "source-audit-state.json": {
+      "bytes": 293,
+      "sha256": "d2afd10bb25778f97e053e6c1177aff147f3910c72de013bfc66d3984b17c9df"
+    },
+    "source-audit.log": {
+      "bytes": 291,
+      "sha256": "534cffffb65cd75140d02c07d5c3276c1c53ab900373e3b152e794fc82726ee3"
+    },
+    "source-audit.py": {
+      "bytes": 4725,
+      "sha256": "548ee1ed8538f9463a5318a856ec4cb456a28cbbb9e86d12a3c1a34a46fbd161"
+    },
+    "stage-state.json": {
+      "bytes": 642,
+      "sha256": "c58fcf52e4697b1755609038a6bbc1b0d2a89ad75d137fecc65f7ee80d0030dc"
+    },
+    "stage.log": {
+      "bytes": 1623,
+      "sha256": "2e0c470e91a494ef8a696bc042da4efd0e3fa1a4ee86e02a7e9c48e5bc0b6d9c"
+    }
+  }
+}

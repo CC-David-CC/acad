@@ -45,7 +45,11 @@ Root supplies:
 - CODI_DESKTOP_SOURCE_ROOT: actual readonly Host source root.
 - CODI_SIGNED_PINS: actual staged pin receipt with source/desktop and files/outer.
 - CODI_ENGINE_REVISION: exact installed requirement-capable selected-profile V3
-  Native pair from public availability; no hardcoded invented cohort identity.
+  Native pair from public availability. This recipe ALSO creates an actual box:
+  select the uniquely intended row in inspect-worker-solids engines[].availableBuilds
+  with boxConstructionVersion1 and drawingRequirementVersion1 (the current
+  explicit Shell cohort). Drawing support alone is not this recipe's box-build
+  admission. No invented identity or automatic backend fallback.
 - CODI_TEST_URL / CODI_TEST_CDP: separate owned loopback fixture/Chrome endpoints.
 - PUPPETEER_CORE_PATH: existing reviewed Puppeteer24.35.0 installation.
 - Optional PYTHON: existing Python3 executable. No new runtime/dependencies.

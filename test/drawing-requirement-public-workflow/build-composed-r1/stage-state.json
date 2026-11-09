@@ -1,0 +1,14 @@
+{
+  "phase": "stage",
+  "status": "PASS",
+  "source": "4a6ff8efa0984d587d1530e9a58f69b8ed1933ee",
+  "desktop": "c2ba7ef85626d42c77f1a99efc705eca6e6a90c5",
+  "recipeSHA256": "9f5ed5705bc2c0a16e71427b3e9dfe094dabcdc5f866651b91780f94dbadcd00",
+  "pinFixtureHelperSHA256Before": "6074b3eda548591c42edc86a3b08e036a4c91f0a31680ba25ae67b6c7c05251f",
+  "pid": 2927742,
+  "startedAtUnix": 1794257611.1883123,
+  "exitCode": 0,
+  "finishedAtUnix": 1794257626.8386517,
+  "pinFixtureHelperSHA256After": "6074b3eda548591c42edc86a3b08e036a4c91f0a31680ba25ae67b6c7c05251f",
+  "logSHA256": "2e0c470e91a494ef8a696bc042da4efd0e3fa1a4ee86e02a7e9c48e5bc0b6d9c"
+}

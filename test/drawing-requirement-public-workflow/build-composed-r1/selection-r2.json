@@ -1,0 +1,14 @@
+{
+  "scope": "corrected fixture cohort selection, no product/acceptance source change",
+  "originalReceiptSHA256": "da93f4a0c6bdd64fb1c7ff8bee75ae83bbef9d7c040f2c98595a127b491a77cc",
+  "selectedActualPublicBuild": {
+    "engine": "occ",
+    "engineRevision": "sha256:57b74074e0a249b917ac68357fbd003c37d1ab61897206886b575088e6995858:60dc956b08e01f43d08a48035a384e478e63bb34fb55f21a152c8cd12e8b8947",
+    "boxConstructionVersion": 1,
+    "shellVersion": 1,
+    "drawingDetailVersion": 1,
+    "drawingSectionVersion": 1,
+    "drawingRequirementVersion": 1
+  },
+  "firstFailurePreserved": true
+}
