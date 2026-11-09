@@ -301,11 +301,19 @@ bash test/occ-boolean-public-workflow/build-reader.sh \
   /mnt/data10tb/codi-occ-four-corner-clean-20261104/build/include/opencascade \
   /mnt/data10tb/codi-occ-four-corner-clean-20261104/build/lin32/clang/lib \
   /fresh/owned/r730/e16-step-reader
+NODE_OPTIONS="${NODE_OPTIONS:+$NODE_OPTIONS }--require=$PWD/test/occ-boolean-public-workflow/evidence-r4/disable-fetch.cjs" \
 node test/occ-boolean-public-workflow/run-reader.mjs \
   "$CODI_EVIDENCE" /fresh/owned/r730/e16-step-reader
 python3 test/occ-boolean-public-workflow/check.py "$CODI_EVIDENCE" \
   > "$CODI_EVIDENCE/independent-oracle.json"
 ```
+
+The retained R4 preload disables fetch ONLY in these verification processes so
+Emscripten2.0.30 reads filesystem WASM paths under modern Node. NODE_OPTIONS
+also reaches the spawned reader child. Do not use --no-experimental-fetch:
+Node24 rejected that obsolete flag before reading geometry; R4 preserves the
+failed launch and subsequent successful preload/readback. Compiled geometric
+reader, actual STEP bytes and acceptance checks are unchanged.
 
 This is a separate SAME-OCCT STEP reader, not an independent external kernel.
 It transfers the actual public bytes, records both solids' topology/bounds/
