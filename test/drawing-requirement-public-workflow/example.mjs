@@ -6,13 +6,20 @@ export function createDrawingRequirementExample(agent,build){
  let busy=false;const serial=async work=>{if(busy)throw Error('Wait for the current recipe operation.');busy=true;try{return await work();}finally{busy=false;}};
  const dot=(a,b)=>a.reduce((s,n,i)=>s+n*b[i],0),near=(a,b,t=1e-7)=>Math.abs(a-b)<=t;
  function sourceDatum(b){return{featureId:b.profile.featureId,faceId:b.faceId,regionId:b.regionId};}
- async function target(b){
-  const last=b.last||b.center,info=await call('inspect-worker-history-controls'),accepted=await call('inspect'),row=one(info.features.filter(r=>r.featureId===last.featureId),'actual current target history row');
-  if(!info.ready||info.pointer!==info.fullTipIndex||accepted.operationsTruncated||accepted.operations[row.index]!==row.type)throw Error('Current genuine target history is unavailable.');
-  return{featureId:last.featureId,operationType:row.type,engine:'occ',engineRevision:build,output:'complete-native-result'};
+ async function target(b,expectedGeometryRevision){
+  const last=b.last||b.center,before=await call('inspect-worker-solids'),accepted=await call('inspect'),after=await call('inspect-worker-solids');
+  if(!before.ready||!after.ready||typeof before.revision!=='string'||before.revision!==after.revision||expectedGeometryRevision!==undefined&&before.revision!==expectedGeometryRevision||accepted.operationsTruncated||!Array.isArray(accepted.operations)||accepted.operationCount!==accepted.operations.length)throw Error('Current genuine target history is unavailable.');
+  function current(info){
+   const body=one(info.bodies.filter(r=>r.id===last.outputId&&r.featureId===last.featureId),'actual current target body'),output=one(info.outputs.filter(r=>r.id===last.outputId&&r.featureId===last.featureId),'actual current target output'),p=body.producer,q=output.producer;
+   for(const row of [p,q])if(!row||Object.keys(row).sort().join(',')!=='featureId,index,operationType'||!Number.isSafeInteger(row.index)||row.index<0||!Number.isSafeInteger(row.featureId)||row.featureId<1||row.featureId!==last.featureId||typeof row.operationType!=='string'||accepted.operations[row.index]!==row.operationType)throw Error('Actual target producer differs from its accepted operation.');
+   if(p.index!==q.index||p.featureId!==q.featureId||p.operationType!==q.operationType||body.engine!=='occ'||output.engine!=='occ'||'sha256:'+body.metrics.runtime.jsSha256+':'+body.metrics.runtime.wasmSha256!==build||'sha256:'+output.metrics.runtime.jsSha256+':'+output.metrics.runtime.wasmSha256!==build)throw Error('Current target body and output bindings differ.');
+   return p;
+  }
+  const producer=current(before),confirmed=current(after);if(producer.index!==confirmed.index||producer.featureId!==confirmed.featureId||producer.operationType!==confirmed.operationType)throw Error('Actual target producer changed during inspection.');
+  return{featureId:producer.featureId,operationType:producer.operationType,engine:'occ',engineRevision:build,output:'complete-native-result'};
  }
  async function discover(b){
-  const info=await call('inspect-linked-part-drawing'),request={version:1,unit:'millimeter',revision:info.revision,geometryRevision:info.geometryRevision,target:await target(b),datum:sourceDatum(b)},result=await call('inspect-worker-drawing-requirement-targets',request);
+  const info=await call('inspect-linked-part-drawing'),request={version:1,unit:'millimeter',revision:info.revision,geometryRevision:info.geometryRevision,target:await target(b,info.geometryRevision),datum:sourceDatum(b)},result=await call('inspect-worker-drawing-requirement-targets',request);
   if(result.revision!==request.revision||result.geometryRevision!==request.geometryRevision||result.observation.quality!=='native-bound-drawing-requirement-targets')throw Error('Requirement discovery changed source binding.');
   return{request,result};
  }

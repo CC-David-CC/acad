@@ -17,7 +17,22 @@ def vector(a,b,t=1e-6):need(len(a)==len(b),'vector dimension');[near(x,y,t) for 
 def norm_vector(a,b,t):need(len(a)==len(b) and all(type(x) in (int,float) and math.isfinite(x) for x in a) and math.dist(a,b)<=t,'bounded actual vector error')
 def fields(v,keys):need(type(v) is dict and set(v)==set(keys),'exact source/fact fieldset')
 def Q(x):need(type(x) in (int,float) and math.isfinite(x),'finite actual represented coordinate');return Fraction.from_float(float(x))
+def producer_metadata(s):
+ history=s['capture']['native']['history'];solids=s['capture']['solids'];pointer=s['lifecycle']['pointer'];public=s['host']
+ need(type(history)is list and type(pointer)is int and public['operationsTruncated'] is False and public['operationCount']==len(history) and public['operations']==[row['type']for row in history],'actual complete public operation list agrees with captured native history')
+ indexed={}
+ for collection in ('bodies','outputs'):
+  rows=solids[collection];need(type(rows)is list,'actual public solid inventory');seen=set();indexed[collection]={}
+  for row in rows:
+   need(type(row)is dict and type(row['id'])is str and bool(row['id']) and row['id']not in seen,'unique actual observed body/output identity');seen.add(row['id']);p=row['producer'];fields(p,('index','featureId','operationType'))
+   need(type(p['index'])is int and 0<=p['index']<=pointer and p['index']<len(history) and type(p['featureId'])is int and 0<p['featureId']<=9007199254740991 and type(row['featureId'])is int and row['featureId']==p['featureId'] and type(p['operationType'])is str,'bounded active actual producer tuple')
+   original=history[p['index']];params=original['params'];need(type(params)is dict and type(params['featureId'])is int and params['featureId']==p['featureId'] and original['type']==p['operationType']==public['operations'][p['index']],'producer derives from the actual original history row and owned feature, not ID grammar')
+   indexed[collection][row['id']]=row
+ for identity,body in indexed['bodies'].items():
+  need(identity in indexed['outputs'],'every actual observed body has its output row');output=indexed['outputs'][identity]
+  need(body['producer']==output['producer'] and body['featureId']==output['featureId'] and body['engine']==output['engine'] and output['outputId']==output['bodyId']==identity,'body/output producer aliases agree without invented output identity')
 def settled(s):
+ producer_metadata(s)
  r=s['ownership']['resources'];need(s['ownership']['processing'] is False and all(r[k]==0 for k in ('accepted','candidates','mounts')) and r['owners']==r['detached'] and r['cleanupFailed'] is False,'actual retired Native ownership')
  need(not s['lifecycle']['pipelineFailed'] and not s['lifecycle']['cleanupFailed'] and s['lifecycle']['pointer']==len(s['capture']['native']['history'])-1 and s['manufacturing']['metadata'] is None,'healthy full-tip unassigned source')
 def source(row,build):
@@ -118,6 +133,9 @@ def requirement_observation(row,build):
  if row['geometryOnly']:
   need(row['definition'] is None and row['read'] is None and row['projection'] is None,'actual no-definition phase, no invented read');return derived
  d,r,p,e=row['definition'],row['read'],row['projection'],row['expected'];before=row['before'];body=derived['body']
+ fields(d['target'],('featureId','operationType','engine','engineRevision','output'));authored=d['target'];original=one([entry for entry in before['capture']['native']['history']if type(entry['params'].get('featureId'))is int and entry['params']['featureId']==authored['featureId']],'actual historical target producer')
+ need(authored['operationType']==original['type'] and authored['engine']=='occ' and authored['engineRevision']==build and authored['output']=='complete-native-result','authored target type is actual original history, even when consumed')
+ if not row['targetMissing']:need(authored['featureId']==body['producer']['featureId'] and authored['operationType']==body['producer']['operationType'],'resolved current target is actual body producer')
  b=row['binding'];bore={'kind':'through-hole','featureId':b['center']['featureId'],'sourceFeatureId':b['profile']['featureId'],'faceId':b['faceId'],'regionId':b['regionId'],'holeKind':'centered-through','slot':'center','geometry':'cylinder'}
  need(next(x for x in d['requirements']if x['kind']=='position-tolerance')['target']==bore and next(x for x in d['dimensions']if x['kind']=='hole-diameter')['hole']==bore and d['annotations'][0]['hole']==bore,'all original actual cylinder source/slot/producer references, never source flags')
  fields(r,('version','unit','revision','geometryRevision','drawingId','target','status','observation'))
@@ -187,9 +205,11 @@ def requirement_observation(row,build):
 
 def discovery(row,build,binding,expected):
  need(row['before']==row['after'],'actual discovery preserves complete source/model/J/resources');q,r=row['request'],row['result'];o=r['observation']
+ producer_metadata(row['before'])
  need(q['revision']==r['revision']==row['before']['host']['revision'] and q['geometryRevision']==r['geometryRevision']==row['before']['capture']['solids']['revision'] and r['target']['featureId']==q['target']['featureId'],'actual issued discovery binding')
  need(o['version']==1 and o['unit']=='millimeter' and o['scope']=='response-local' and o['quality']=='native-bound-drawing-requirement-targets' and o['featureId']==q['target']['featureId'] and o['sourceFrame']==FRAME and o['datum']==q['datum'],'actual bounded original frame, not a new authored datum')
  body=one([b for b in row['before']['capture']['solids']['bodies'] if b['featureId']==q['target']['featureId']],'actual discovery target');seen=set()
+ need(q['target']=={'featureId':body['producer']['featureId'],'operationType':body['producer']['operationType'],'engine':'occ','engineRevision':build,'output':'complete-native-result'},'discovery query names the actual current original producer')
  for p in o['planes']:
   need(p['reference']['selectionId'] not in seen,'each actual plane once');seen.add(p['reference']['selectionId']);face_member(p['reference'],body)
   if p['status']=='available':need(p['quality']=='native-brep-analytic' and p['reason'] is None,'actual plane quality');plane_facts(p['facts'],expected)
