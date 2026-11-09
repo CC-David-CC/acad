@@ -1,4 +1,4 @@
-// UNREGISTERED, private OCI busy-owner coordinator. This is not an entry point,
+// Private OCI busy-owner coordinator. This is not itself an entry point,
 // context issuer, pair/capability admission, transport decoder or token publisher.
 import {captureNumericCountersinkIntent,planOwnedCountersink} from './ownedCountersinkPlan.mjs';
 import {createCountersinkNativeCalls,countersinkCallFailure} from './countersinkNativeCalls.mjs';
@@ -20,7 +20,7 @@ const workKeys=['maxNames','nextName','triangleLimit','triangleTotal','chargedRe
 
 // ONLY a future lexical busy-operation owner may call this function. Matching
 // these fields is necessary data validation, never authentication of a caller.
-// The old Worker cannot issue sourceCreationBinding: integration is pending.
+// The exact mechanical dispatcher supplies its actual constructor-token binding.
 export async function runOwnedCountersinkWorker(value,numericIntent){
  try{return await runCapturedCountersink(value,numericIntent);}
  catch(cause){

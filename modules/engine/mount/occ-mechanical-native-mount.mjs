@@ -1,3 +1,5 @@
+import {captureNumericCountersinkIntent,COUNTERSINK_CODES} from '../solid/ownedCountersinkIntent.mjs';
+import {COUNTERSINK_NATIVE_REFUSALS} from './ownedCountersinkProtocol.mjs';
 import {MECHANICAL_NATIVE_CANDIDATE} from './ownedMechanicalNativeCandidate.mjs';
 import {captureManufacturingMeshRequest,captureManufacturingMeshResult,MANUFACTURING_MESH_NATIVE_CODES,MANUFACTURING_MESH_REFUSAL_CODES} from './ownedManufacturingMeshProtocol.mjs';
 import {captureOrthographicReadRequest,captureOrthographicReadResult,orthographicFrameValues,ORTHOGRAPHIC_NATIVE_CODES,ORTHOGRAPHIC_REFUSAL_CODES} from './ownedOrthographicReadProtocol.mjs';
@@ -12,6 +14,7 @@ import {createWorkerMount} from './worker-controller.mjs';
 export function createMechanicalNativeOccMount(options){
  return createWorkerMount(options,Object.freeze({engine:'occ-mechanical-native-v1-component',representation:'occ-brep-worker-owned',mesh:false,profile:false,
   selectedProfile:true,selectedProfileVersion:3,profileSourceBindingVersion:1,selectedRegionArrangementVersion:1,
+  countersinks:true,captureCountersinkIntent:captureNumericCountersinkIntent,countersinkCodes:Object.freeze([...COUNTERSINK_CODES,...COUNTERSINK_NATIVE_REFUSALS]),
   edgeTreatments:true,booleanHistory:true,throughHoles:true,linearHolePatterns:true,revolve:true,sweep:true,loft:true,adaptiveMetrology:true,stepExport:true,orthographicRead:true,drawingReferences:true,manufacturingMesh:true,
   captureManufacturingMeshRequest,captureManufacturingMeshResult,manufacturingNativeCodes:MANUFACTURING_MESH_NATIVE_CODES,manufacturingRefusalCodes:MANUFACTURING_MESH_REFUSAL_CODES,
   captureOrthographicReadRequest,captureOrthographicReadResult,orthographicFrameValues,orthographicNativeCodes:ORTHOGRAPHIC_NATIVE_CODES,orthographicRefusalCodes:ORTHOGRAPHIC_REFUSAL_CODES,

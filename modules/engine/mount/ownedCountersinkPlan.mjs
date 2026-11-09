@@ -1,4 +1,4 @@
-// UNREGISTERED numeric-only Worker plan, not a feature/capability/owner issuer.
+// Private numeric-only Worker plan, not a feature/capability/owner issuer.
 import {captureNumericCountersinkIntent} from '../solid/ownedCountersinkIntent.mjs';
 export {captureNumericCountersinkIntent,COUNTERSINK_NUMERIC_KEYS} from '../solid/ownedCountersinkIntent.mjs';
 import {preparePolygonProfileExtrusion,polygonProfileRelation} from './polygonProfilePlan.mjs';

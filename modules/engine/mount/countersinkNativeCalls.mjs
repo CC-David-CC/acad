@@ -1,4 +1,4 @@
-// UNREGISTERED OCI-Worker-only fixed C ABI adapter. No generic native callback,
+// Private OCI-Worker-only fixed C ABI adapter. No generic native callback,
 // caller trust flag, token publication, capability/pair admission or fallback.
 import {captureConicalNativeFailure,captureOwnedConeObservation,conicalFields} from './ownedConicalContract.mjs';
 import {validateOwnedTopology} from './ownedTopologyContract.mjs';

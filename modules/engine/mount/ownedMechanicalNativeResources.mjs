@@ -3,6 +3,15 @@
 export const MECHANICAL_NATIVE_RESOURCE_MODULES=Object.freeze([
  'modules/engine/mount/ownedMechanicalNativeResources.mjs',
  'modules/engine/mount/ownedMechanicalNativeCandidate.mjs',
+ 'modules/engine/solid/ownedCountersinkIntent.mjs',
+ 'modules/engine/mount/ownedCountersinkProtocol.mjs',
+ 'modules/engine/mount/ownedCountersinkWorker.mjs',
+ 'modules/engine/mount/countersinkNativeCalls.mjs',
+ 'modules/engine/mount/ownedCountersinkPlan.mjs',
+ 'modules/engine/mount/countersinkFacts.mjs',
+ 'modules/engine/mount/ownedConicalContract.mjs',
+ 'modules/engine/mount/nativePlanarAttachmentFacts.mjs',
+ 'modules/engine/mount/ownedPlanarAttachmentProtocol.mjs',
  'modules/engine/mount/profileConstructorSourceBinding.mjs',
  'modules/engine/extrusion/profileConstructorSourcePreparation.mjs',
  'modules/engine/extrusion/selectedSketchProfile.mjs',
@@ -57,7 +66,8 @@ export const MECHANICAL_NATIVE_RESOURCE_MODULES=Object.freeze([
  'modules/drawing/linkedPartDrawingDefinition.mjs'
 ]);
 // Actual initial enabled calls, including empty/native-census legacy support.
-// Later compiled Shell/circular/conical ports do NOT enable those operations.
+// Compiled Shell/circular ports do NOT enable those operations. Countersink
+// adds its own separately gated two-port list in ownedCountersinkProtocol.
 export const MECHANICAL_NATIVE_INITIAL_PORTS=Object.freeze([
  '_InitCommands','_CallCommand','_CreateSelectedProfileV3','_InspectAnalyticV1',
  '_ReadOwnedTopologyV1','_InspectOwnedSolidV2','_InspectTopologyCensusV1',
@@ -71,6 +81,6 @@ export const MECHANICAL_NATIVE_INITIAL_PORTS=Object.freeze([
 ]);
 export const MECHANICAL_NATIVE_PENDING_ADMISSIONS=Object.freeze([
  'shell-and-box-construction-v1','native-circular-cells','planar-source-attachments',
- 'blind-holes','counterbores','profile-extents','centered-countersink',
+ 'blind-holes','counterbores','profile-extents','countersink-shared-public-workflow-and-qualification',
  'drawing-section-and-detail'
 ]);
