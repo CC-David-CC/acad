@@ -24,6 +24,7 @@ import {createRectangleController} from './rectangle-commands.mjs';
 import {registerFeatureCommands} from './feature-commands.mjs';
 import {registerSolidCommands} from './solid-commands.mjs';
 import {registerThroughHoleCommands} from './through-hole-commands.mjs';
+import {registerBlindHoleCommands} from './blind-hole-commands.mjs';
 import {registerLinearHolePatternCommands} from './linear-hole-pattern-commands.mjs';
 import {registerEdgeTreatmentCommands} from './edge-treatment-commands.mjs';
 import {registerShellCommands} from './shell-commands.mjs';
@@ -241,6 +242,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerShellCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerThroughHoleCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerBlindHoleCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLinearHolePatternCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerDisplayUnitCommands(host,()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading or saving.');
