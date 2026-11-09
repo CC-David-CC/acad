@@ -10,3 +10,5 @@ export function exportCandidateWorkerSTEP(input:any):Promise<any>;
 
 export interface CandidateManufacturingMeshRead {readonly owner:any;readonly registry:any;readonly engine:'occ';readonly engineRevision:string;readonly body:Readonly<{bodyId:string;featureId:number;expectedMetrics:any}>;readonly controls:Readonly<{linearDeflectionMm:0.01;angularDeflectionRadians:0.1;relative:false;maxVertices:number;maxTriangles:number}>;readonly valid:()=>boolean;}
 export function readCandidateWorkerManufacturingMesh(input:CandidateManufacturingMeshRead):Promise<Readonly<{op:'solid.manufacturing.mesh.read';contractVersion:1;unit:'millimeter';body:Readonly<{bodyId:string;featureId:number}>;engine:'occ';engineRevision:string;metadata:import('./SolidKernel').ManufacturingMeshResult['metadata'];buffer:ArrayBuffer;sourceConstruction?:ReturnType<typeof import('./rectilinearConstructionWitness.mjs').captureManufacturingConstruction>}>>;
+
+export function readCandidateWorkerBores(input:any):Promise<Readonly<{observation:import('../mount/ownedBoreReadProtocol.mjs').BoreReferenceObservation;status:'available'|'unresolved'}>>;

@@ -1,5 +1,6 @@
 // Worker-only, response-local evidence. Caller must separately authenticate the
-// actual tool creation/request and current source/owner/build. Never save slots.
+// actual tool creation/request and current source/owner/build. Never save Native
+// face slots; authored semantic feature+corner slots are a different namespace.
 import {validateOwnedBooleanResult} from './ownedBooleanContract.mjs';
 import {validatePrismProvenance,validateOwnedTopology} from './ownedTopologyContract.mjs';
 import {preparePolygonProfileExtrusion} from './polygonProfilePlan.mjs';

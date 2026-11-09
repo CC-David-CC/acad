@@ -2,6 +2,7 @@
 // measured geometry, a staged build, publication, or drawing completeness.
 export const LINKED_DRAWING_MAX_BYTES = 65536;
 export const LINKED_DRAWING_MAX_DIMENSIONS = 16;
+export const LINKED_DRAWING_MAX_ANNOTATIONS = 16;
 export const LINKED_DRAWING_MAX_VIEWS = 4;
 const orthographicBases = ['top', 'front', 'right'];
 const isometricBases = [...orthographicBases, 'isometric'];
@@ -100,22 +101,49 @@ function nativeRef(value, type, nativeSeen) {
   if (prior !== undefined && prior !== binding) fail('One selection cannot contradict its kind or origin.');
   nativeSeen.set(r.selectionId, binding); return r;
 }
+const cornerSlots = ["MIN_X_MIN_Y","MAX_X_MIN_Y","MAX_X_MAX_Y","MIN_X_MAX_Y"];
 function centerHole(value, datum, holes) {
   const r = record(value, ['kind', 'featureId', 'sourceFeatureId', 'faceId', 'regionId', 'slot', 'geometry']);
   if (r.kind !== 'center-hole' || r.slot !== 'center' || r.geometry !== 'cylinder') fail('Unsupported semantic hole reference.');
   feature(r.featureId); feature(r.sourceFeatureId); text(r.faceId, 256); text(r.regionId, 8192);
   sameDatum({featureId: r.sourceFeatureId, faceId: r.faceId, regionId: r.regionId}, datum);
   if (r.featureId === r.sourceFeatureId) fail('Hole and source producer identities must differ.');
-  const binding = canonical(r), prior = holes.get(r.featureId);
+  const binding = canonical({featureId:r.featureId,sourceFeatureId:r.sourceFeatureId,faceId:r.faceId,regionId:r.regionId,holeKind:'centered-through',slot:r.slot,geometry:r.geometry}), key = r.featureId+':center', prior = holes.get(key);
   if (prior !== undefined && prior !== binding) fail('One hole cannot contradict its source binding.');
-  holes.set(r.featureId, binding); return r;
+  holes.set(key, binding); return r;
+}
+function bore(value, datum, holes) {
+  const r=record(value,['kind','featureId','sourceFeatureId','faceId','regionId','holeKind','slot','geometry']);
+  if(r.kind!=='through-hole'||r.geometry!=='cylinder'||!(r.holeKind==='centered-through'?r.slot==='center':r.holeKind==='four-corner-through'&&cornerSlots.includes(r.slot)))fail('Unsupported semantic bore reference.');
+  feature(r.featureId);feature(r.sourceFeatureId);text(r.faceId,256);text(r.regionId,8192);
+  sameDatum({featureId:r.sourceFeatureId,faceId:r.faceId,regionId:r.regionId},datum);
+  if(r.featureId===r.sourceFeatureId)fail('Bore and source producer identities must differ.');
+  const key=r.featureId+':'+r.slot,binding=canonical({featureId:r.featureId,sourceFeatureId:r.sourceFeatureId,faceId:r.faceId,regionId:r.regionId,holeKind:r.holeKind,slot:r.slot,geometry:r.geometry}),prior=holes.get(key);
+  if(prior!==undefined&&prior!==binding)fail('One semantic bore cannot contradict its source binding.');
+  holes.set(key,binding);return r;
+}
+function boreGroup(value,datum,holes){
+  const rows=list(value,4,4).map(v=>bore(v,datum,holes)),first=rows[0];
+  if(rows.some((r,i)=>r.holeKind!=='four-corner-through'||r.slot!==cornerSlots[i]||r.featureId!==first.featureId||r.sourceFeatureId!==first.sourceFeatureId||r.faceId!==first.faceId||r.regionId!==first.regionId))fail('A bore group requires the four actual semantic slots in canonical order from one source-bound feature.');
+  return rows;
+}
+function annotation(value,datum,holes,viewIds,ids,sheet){
+ const kind=discriminator(value,'kind'),extra=kind==='bore-center'?['hole','extension']:kind==='baseline'||kind==='ordinate'?['axis','holes','labels']:kind==='hole-callout'?['holes','label']:null;
+ if(!extra)fail('Unsupported bore annotation kind.');
+ const r=record(value,['annotationId','viewId','kind',...extra]);if(r.kind!==kind)fail('Annotation variant changed during capture.');text(r.annotationId,128);text(r.viewId,128);
+ const basis=viewIds.get(r.viewId);if(ids.has(r.annotationId)||basis===undefined)fail('Annotation IDs must be unique and name an admitted view.');ids.add(r.annotationId);
+ if(kind==='bore-center'){r.hole=bore(r.hole,datum,holes);number(r.extension,0,100,true);}
+ else{r.holes=boreGroup(r.holes,datum,holes);if(kind==='hole-callout'){if(basis!=='top')fail('A bore group callout requires its top view.');r.label=paper(r.label,sheet);}else{axisView(r.axis,basis);r.labels=list(r.labels,4,4).map(p=>paper(p,sheet));}}
+ return r;
 }
 function axisView(axis, basis) {
   if (!['datum-x', 'datum-y'].includes(axis) || !(axis === 'datum-x' ? ['top', 'front'] : ['top', 'right']).includes(basis)) fail('Datum component is not visible in this named view.');
 }
 export function captureLinkedPartDrawingDefinition(value) {
-  const r = record(value, ['version', 'unit', 'drawingId', 'title', 'target', 'datum', 'sheet', 'views', 'dimensions']);
-  if (![1,2].includes(r.version) || r.unit !== 'millimeter') fail('Select drawing definition version1 or2 and canonical millimeters.');
+  const version=discriminator(value,'version');
+  const r = record(value, ['version', 'unit', 'drawingId', 'title', 'target', 'datum', 'sheet', 'views', 'dimensions',...(version===3?['annotations']:[])]);
+  if(r.version!==version)fail('Drawing version changed during capture.');
+  if (![1,2,3].includes(r.version) || r.unit !== 'millimeter') fail('Select drawing definition version1,2 or3 and canonical millimeters.');
   const bases = r.version === 1 ? orthographicBases : isometricBases;
   text(r.drawingId, 128); text(r.title, 256, true);
   r.target = record(r.target, ['featureId', 'operationType', 'engine', 'engineRevision', 'output']);
@@ -133,12 +161,14 @@ export function captureLinkedPartDrawingDefinition(value) {
   const viewIds = new Map(); let last = -1;
   // Version1 retains its original orthographic subsequence. Version2 means
   // exactly the same three bases plus one source-derived isometric view.
-  r.views = list(r.views, r.version === 1 ? 1 : 4, r.version === 1 ? 3 : LINKED_DRAWING_MAX_VIEWS).map(value => {
+  r.views = list(r.views, r.version === 1 ? 1 : r.version===2?4:3, r.version === 1 ? 3 : LINKED_DRAWING_MAX_VIEWS).map(value => {
     const v = record(value, ['viewId', 'basis', 'paperOrigin', 'visibility']), index = bases.indexOf(v.basis);
     text(v.viewId, 128);
     if (viewIds.has(v.viewId) || index <= last || v.visibility !== 'visible-and-hidden') fail('Views require unique IDs and a canonical named-basis subsequence.');
     last = index; v.paperOrigin = paper(v.paperOrigin, r.sheet); viewIds.set(v.viewId, v.basis); return v;
   });
+  if(r.version===3&&orthographicBases.some((basis,i)=>r.views[i].basis!==basis))fail('Definition version3 retains top/front/right before optional isometric.');
+  const newAnnotationIds=new Set();
   const dimensionIds = new Set(), nativeSeen = new Map(), holes = new Map(), curves = new Map();
   const fields = {
     'source-distance': ['axis', 'from', 'to'], 'plane-distance': ['axis', 'first', 'second'],
@@ -152,7 +182,7 @@ export function captureLinkedPartDrawingDefinition(value) {
     text(v.dimensionId, 128); text(v.viewId, 128);
     const basis = viewIds.get(v.viewId);
     if (dimensionIds.has(v.dimensionId) || basis === undefined) fail('Dimension IDs must be unique and name an admitted view.');
-    if (basis === 'isometric') fail('Physical reference dimensions remain on the orthographic views in definition version2.');
+    if (basis === 'isometric') fail('Physical reference dimensions remain on the orthographic views.');
     dimensionIds.add(v.dimensionId); v.label = paper(v.label, r.sheet);
     if (kind === 'source-distance') {
       axisView(v.axis, basis); v.from = sourcePoint(v.from, r.datum, curves); v.to = sourcePoint(v.to, r.datum, curves);
@@ -168,6 +198,16 @@ export function captureLinkedPartDrawingDefinition(value) {
     }
     return v;
   });
+  if(r.version===3)r.annotations=list(r.annotations,0,LINKED_DRAWING_MAX_ANNOTATIONS).map(v=>annotation(v,r.datum,holes,viewIds,newAnnotationIds,r.sheet));
   if (new TextEncoder().encode(canonical(r)).byteLength > LINKED_DRAWING_MAX_BYTES) fail('Drawing definition exceeds64KiB UTF-8.', 'RESOURCE_LIMIT');
   return deepFreeze(r);
 }
+
+// Same actual bindings as authored drawings; discovery has no dummy definition.
+export function captureLinkedPartBoreQuery(value){
+ const q=record(value,['version','unit','target','datum']);if(q.version!==1||q.unit!=='millimeter')fail('Unsupported bore discovery version/unit.');
+ q.target=record(q.target,['featureId','operationType','engine','engineRevision','output']);feature(q.target.featureId);text(q.target.operationType,128);
+ if(q.target.engine!=='occ'||typeof q.target.engineRevision!=='string'||!/^sha256:[a-f0-9]{64}:[a-f0-9]{64}$/.test(q.target.engineRevision)||q.target.output!=='complete-native-result')fail('Select an explicit OCC complete native target.');
+ q.datum=record(q.datum,['featureId','faceId','regionId']);feature(q.datum.featureId);text(q.datum.faceId,256);text(q.datum.regionId,8192);return deepFreeze(q);
+}
+export function captureLinkedPartBoreReference(value,datum){return deepFreeze(bore(value,datum,new Map()));}

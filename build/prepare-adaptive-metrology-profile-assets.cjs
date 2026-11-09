@@ -1,6 +1,6 @@
 // Explicit component native build; existing assets/defaults are unchanged.
 const path=require('node:path'),fs=require('node:fs'),crypto=require('node:crypto');
-const bootstrapSha='44ad4cff5b13e3585e8a00a0c16c61f3be212d0f3dced71de6ed2287ae530214';
+const bootstrapSha='67ba5dc70e506ad967bd43f96b52f2facf8240cf699ef920de0352a93b0dc99a';
 if(crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'../modules/engine/mount/oci-verified-worker.js'))).digest('hex')!==bootstrapSha)throw Error('Unexpected adaptive-metrology bootstrap');
 const {stageOwnedProfileComponent}=require('./stage-owned-profile-component.cjs');
 const defaultOutput=path.resolve(__dirname,'../.build/adaptive-metrology-assets');

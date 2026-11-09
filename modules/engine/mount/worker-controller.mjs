@@ -1,3 +1,4 @@
+import {captureBoreReadRequest,captureBoreReadResult} from './ownedBoreReadProtocol.mjs';
 import {SHELL_JS_SHA,SHELL_WASM_SHA,SHELL_OPERATION,SHELL_REFUSALS,BOX_CONSTRUCTION_REFUSALS,captureShellRequest,captureShellBinding,captureShellBoxRequest} from './ownedShellProtocol.mjs';
 import {SWEEP_NATIVE_REFUSALS,SWEEP_PREPARATION_REFUSALS} from '../solid/ownedSweepIntent.mjs';
 import {captureOwnedLinearHolePatternIntent,linearHolePatternNativeCost} from '../solid/ownedLinearHolePatternIntent.mjs';
@@ -72,7 +73,7 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
       ...(planarAttachments?[Object.freeze({id:'solid.face.frame.read',version:1,input:'owned-source-bound-last-cap-v1',output:'owned-planar-attachment-v1',maxBytes:4096,nativeResultCost:0,qualification:'workflow-unqualified'})]:[]),
       ...(manufacturingMesh?[Object.freeze({id:'solid.manufacturing.mesh.read',version:1,input:'owned-current-single-solid-controls-v1',output:'owned-manufacturing-mesh-buffer-v1',maxBytes:8388608,maxChunkBytes:65536,maxVertices:150000,maxTriangles:100000,linearDeflectionMm:0.01,angularDeflectionRadians:0.1,relative:false,nativeResultCost:0,scope:'response-local',qualification:'native-component'})]:[]),
       ...(orthographicRead?[Object.freeze({id:'solid.drawing.orthographic.read',version:1,input:'owned-orthographic-frame-mm-v1',output:'orthographic-analytic-buffers-v1',maxFragments:8192,maxNativeJsonBytes:4194304,maxChunkBytes:65536,maxTransferBytes:819200,nativeResultCost:0,scope:'response-local',qualification:'component-research'})]:[]),
-      ...(drawingReferences?[Object.freeze({id:'solid.drawing.references.read',version:1,input:'owned-semantic-drawing-definition-v1',output:'bounded-drawing-reference-facts-v1',maxDimensions:16,maxPrimitiveReferences:32,maxBytes:65536,nativeResultCost:0,scope:'response-local',qualification:'workflow-unqualified'})]:[]),
+      ...(drawingReferences?[Object.freeze({id:'solid.drawing.bores.read',version:1,input:'owned-source-datum-bore-query-v1',output:'bounded-bore-facts-v1',maxMembers:16,maxBytes:65536,nativeResultCost:0,scope:'response-local',qualification:'workflow-unqualified'}),Object.freeze({id:'solid.drawing.references.read',version:1,input:'owned-semantic-drawing-definition-v1',output:'bounded-drawing-reference-facts-v1',maxDimensions:16,maxPrimitiveReferences:32,maxAnnotations:16,maxAnnotationReferences:64,maxBytes:65536,nativeResultCost:0,scope:'response-local',qualification:'workflow-unqualified'})]:[]),
       ...(stepExport?[Object.freeze({id:'solid.step.export',version:1,input:'owned-current-solids-v1',output:'step-blob-v1',maxInputs:32,maxBytes:8388608,maxChunkBytes:65536,schema:'AP214IS',structure:'geometric-solid-set',qualification:'native-component'})]:[]),
       Object.freeze({id:'solid.box.create',version:1,input:shell?'oci-authored-box-mm-v1':'oci-box-mm-v1',output:mesh?'manifold-shape-result-v1':'oci-shape-result-v1',qualification:shell?'workflow-unqualified':'scoped-browser-evidence'}),
       Object.freeze({id:'solid.mesh.read',version:1,input:'owned-solid-mesh-request-v1',output:'owned-solid-mesh-result-v1',qualification:'unqualified',purpose:'display-only'}),
@@ -443,10 +444,22 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     if(!drawingReferences)throw err('UNSUPPORTED_OPERATION','This runtime does not bind semantic drawing reads');
     validOptions(options);const captured=captureDrawingReadRequest(request);assertSolidBinding(captured.handle);assertSolidBinding(captured.sourceHandle);
     const target=solidRecords.get(captured.handle.id),source=solidRecords.get(captured.sourceHandle.id);
+    const facts=JSON.parse(target.evidence);if(facts.nativeValidity?.valid!==true||facts.resultKind!=='single-solid'||facts.solidCount!==1||!(facts.nativeVolume>0))throw err('UNSUPPORTED_TARGET','Drawing reads require a current valid native single solid');
     const response=await send({kind:'solid-drawing-references',token:target.token,sourceToken:source.token,producerFeatureId:captured.producerFeatureId,definition:captured.definition},'result',options.signal);
     let observation;try{if(Reflect.ownKeys(response).sort().join(',')!=='kind,observation,producerFeatureId,seq,token'||response.token!==target.token||response.producerFeatureId!==captured.producerFeatureId)throw Error('Drawing result binding differs');observation=captureDrawingReadResult(response.observation,captured.definition);}catch(cause){shutdown('ENGINE_FAILURE','Malformed drawing observation',cause);throw err('ENGINE_FAILURE','Malformed drawing observation',cause);}
     assertSolidBinding(captured.handle);assertSolidBinding(captured.sourceHandle);if(solidRecords.get(captured.handle.id)!==target||solidRecords.get(captured.sourceHandle.id)!==source)throw err('INVALID_BINDING','Drawing input changed');
     return{contractVersion:1,op:'solid.drawing.references.read',unit:'millimeter',observation};
+  }
+
+  async function readDrawingBores(request,options={}){
+    if(!drawingReferences)throw err('UNSUPPORTED_OPERATION','This runtime does not bind bore observations');
+    validOptions(options);const r=captureBoreReadRequest(request);assertSolidBinding(r.handle);assertSolidBinding(r.sourceHandle);
+    const target=solidRecords.get(r.handle.id),source=solidRecords.get(r.sourceHandle.id),facts=JSON.parse(target.evidence);
+    if(facts.nativeValidity?.valid!==true||facts.resultKind!=='single-solid'||facts.solidCount!==1||!(facts.nativeVolume>0))throw err('UNSUPPORTED_TARGET','Bore reads require a current valid native single solid');
+    const response=await send({kind:'solid-drawing-bores',token:target.token,sourceToken:source.token,producerFeatureId:r.producerFeatureId,query:r.query},'result',options.signal);
+    let observation;try{if(Reflect.ownKeys(response).sort().join(',')!=='kind,observation,producerFeatureId,seq,token'||response.token!==target.token||response.producerFeatureId!==r.producerFeatureId)throw Error('Bore result binding differs');observation=captureBoreReadResult(response.observation,r.query);}catch(cause){shutdown('ENGINE_FAILURE','Malformed bore observation',cause);throw err('ENGINE_FAILURE','Malformed bore observation',cause);}
+    assertSolidBinding(r.handle);assertSolidBinding(r.sourceHandle);if(solidRecords.get(r.handle.id)!==target||solidRecords.get(r.sourceHandle.id)!==source)throw err('INVALID_BINDING','Bore input changed');
+    return Object.freeze({contractVersion:1,op:'solid.drawing.bores.read',unit:'millimeter',observation});
   }
 
   async function exportSTEP(request,options={}) {
@@ -802,6 +815,7 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     if (op==='solid.manufacturing.mesh.read') return readManufacturingMesh(request,options);
     if (op==='solid.drawing.orthographic.read') return readOrthographic(request,options);
     if (op==='solid.face.frame.read') return readPlanarAttachment(request,options);
+    if (op==='solid.drawing.bores.read') return readDrawingBores(request,options);
     if (op==='solid.drawing.references.read') return readDrawingReferences(request,options);
     if (op==='solid.step.export') return exportSTEP(request,options);
     if (op==='solid.mesh.read') return readSolidMesh(request,options);
@@ -829,5 +843,5 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     return Promise.reject(err('UNSUPPORTED_OPERATION','Operation is not bound by this mount'));
   }
   function close(){clearTimeout(initTimer);shutdown('MOUNT_CLOSED','Engine mount closed');if(cleanupFailure)throw cleanupFailure.cause;}
-  return Object.freeze({descriptor,ready,execute,box,boolean,dispose,treatSolidEdges,shellSolid,throughSolidHoles,readSolidMesh,exportSTEP,readOrthographic,readDrawingReferences,readManufacturingMesh,readSolidTopology,classifySolidPoint,readPrismSelections,readSolidSelections,assertSolidBinding,createEnclosure,readEnclosureMesh,readEnclosureManufacturingMesh,readEnclosureInterface,assertEnclosureBinding,centeredThroughHole,fourCornerThroughHoles,assertPortableBinding,assertCenteredHoleBinding,assertFourCornerBinding,close});
+  return Object.freeze({descriptor,ready,execute,box,boolean,dispose,treatSolidEdges,shellSolid,throughSolidHoles,readSolidMesh,exportSTEP,readOrthographic,readDrawingReferences,readDrawingBores,readManufacturingMesh,readSolidTopology,classifySolidPoint,readPrismSelections,readSolidSelections,assertSolidBinding,createEnclosure,readEnclosureMesh,readEnclosureManufacturingMesh,readEnclosureInterface,assertEnclosureBinding,centeredThroughHole,fourCornerThroughHoles,assertPortableBinding,assertCenteredHoleBinding,assertFourCornerBinding,close});
 }

@@ -47,7 +47,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
       segments+=points.length-1;
       if(segments>200000)throw Object.assign(Error('Drawing presentation exceeds its segment budget.'),{code:'RESOURCE_LIMIT'});
       const path=points.map((p,i)=>{const q=paper(view,p);return(i?'L':'M')+num(q[0])+','+num(q[1]);}).join(' ');
-      paths.push(`<path d="${path}"${d.version===2?' data-view-id="'+escape(view.viewId)+'" data-view-basis="'+view.basis+'"':''}${group.visibility==='hidden'?' stroke-dasharray="2 1" stroke="#777"':''}/>`);
+      paths.push(`<path d="${path}"${d.version>=2?' data-view-id="'+escape(view.viewId)+'" data-view-basis="'+view.basis+'"':''}${group.visibility==='hidden'?' stroke-dasharray="2 1" stroke="#777"':''}/>`);
     }
     annotations.push(text([view.paperOrigin[0],view.paperOrigin[1]+5],view.basis));
   }
@@ -61,8 +61,26 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
     const semantics=dimension.kind==='hole-diameter'?'Ø':dimension.kind==='edge-length'?'L ':dimension.kind==='plane-distance'?'ΔZ ':dimension.axis==='datum-x'?'ΔX ':'ΔY ';
     annotations.push(text(label,semantics+fact.value.toFixed(3)+' mm','fill="#124"'));
   }
+  for(let i=0;i<(d.annotations?.length||0);i++){
+    const a=d.annotations[i],row=o.annotations[i],view=d.views.find(v=>v.viewId===a.viewId),frame=o.viewFrames.find(v=>v.viewId===a.viewId)?.frame;
+    const tag=`data-annotation-id="${escape(a.annotationId)}" data-annotation-kind="${a.kind}"`;
+    if(row.status!=='available'||!frame){status='unresolved';const p=a.kind==='bore-center'?view.paperOrigin:a.kind==='hole-callout'?a.label:a.labels[0];annotations.push(text(p,'UNRESOLVED: '+a.annotationId+' ('+row.reason+')',tag+' fill="#a00"'));continue;}
+    const project=p=>{const v=p.map((n,k)=>n-frame.origin[k]);return paper(view,[v.reduce((n,x,k)=>n+x*frame.u[k],0),v.reduce((n,x,k)=>n+x*frame.v[k],0)]);};
+    const path=(points,attributes='')=>paths.push(`<path ${tag} d="M${points.map(p=>p.map(num).join(',')).join(' L')}" stroke="#357" ${attributes}/>`);
+    const f=row.facts;
+    if(a.kind==='bore-center'){
+      if(view.basis==='top'){const c=project(f.center),extent=f.diameter*scale/2+a.extension;path([[c[0]-extent,c[1]],[c[0]+extent,c[1]]],'stroke-dasharray="4 1 1 1"');path([[c[0],c[1]-extent],[c[0],c[1]+extent]],'stroke-dasharray="4 1 1 1"');}
+      else{const ends=f.ends.map(project),delta=ends[1].map((n,k)=>n-ends[0][k]),length=Math.hypot(...delta);if(!(length>0))fail('A measured bore axis has no extent in the selected view.');const extra=delta.map(n=>n/length*a.extension);path([ends[0].map((n,k)=>n-extra[k]),ends[1].map((n,k)=>n+extra[k])],'stroke-dasharray="4 1 1 1"');}
+    }else if(a.kind==='hole-callout'){
+      for(const center of f.centers)path([project(center),a.label],'stroke-dasharray="1 1"');
+      annotations.push(text(a.label,`${f.count}×Ø${f.diameter.toFixed(3)} THRU`,tag+' fill="#124"'));
+    }else{
+      const values=a.kind==='ordinate'?f.coordinates:f.values;
+      for(let j=0;j<4;j++){const ends=f.anchors[j].map(project);path(ends);path([ends[1],a.labels[j]],'stroke-dasharray="1 1"');annotations.push(text(a.labels[j],(a.kind==='ordinate'?(values[j]>=0?'+':''):'Δ')+values[j].toFixed(3)+' mm',tag+` data-member-index="${j}" fill="#124"`));}
+    }
+  }
   const title=text([8,8],d.title||d.drawingId),notice=text([8,d.sheet.height-5],`Reference drawing · ${status} · scale ${d.sheet.scale.numerator}:${d.sheet.scale.denominator}`);
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${num(d.sheet.width)}mm" height="${num(d.sheet.height)}mm" viewBox="0 0 ${num(d.sheet.width)} ${num(d.sheet.height)}"><title>${escape(d.title)}</title><metadata>${escape(JSON.stringify({version:1,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,quality:o.quality,status,...(d.version===2?{definitionVersion:2,viewCount:4,projection:'source-relative-isometric-v1'}:{}),curvePresentationTolerancePaperMm:.02,dimensionRole:'reference'}))}</metadata><rect width="100%" height="100%" fill="white"/><g fill="none" stroke="#111" stroke-width=".25">${paths.join('')}</g><g font-family="sans-serif" font-size="3">${title}${annotations.join('')}${notice}</g></svg>`;
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${num(d.sheet.width)}mm" height="${num(d.sheet.height)}mm" viewBox="0 0 ${num(d.sheet.width)} ${num(d.sheet.height)}"><title>${escape(d.title)}</title><metadata>${escape(JSON.stringify({version:1,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,quality:o.quality,status,...(d.version>=2?{definitionVersion:d.version,viewCount:d.views.length,projection:d.views.some(v=>v.basis==='isometric')?'source-relative-isometric-v1':'source-relative-orthographic-v1'}:{}),...(d.version===3?{annotationFacts:o.annotations,annotationRole:'derived-native-bore-reference',ordinateRole:'signed-datum-coordinate'}:{}),curvePresentationTolerancePaperMm:.02,dimensionRole:'reference'}))}</metadata><rect width="100%" height="100%" fill="white"/><g fill="none" stroke="#111" stroke-width=".25">${paths.join('')}</g><g font-family="sans-serif" font-size="3">${title}${annotations.join('')}${notice}</g></svg>`;
   const bytes=new TextEncoder().encode(svg);
   if(bytes.byteLength>16*1024*1024)throw Object.assign(Error('Drawing SVG exceeds its byte budget.'),{code:'RESOURCE_LIMIT'});
   return {format:'svg',mime:'image/svg+xml',status,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,buffer:bytes.buffer};

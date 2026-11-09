@@ -16,18 +16,26 @@ export function inspectFiniteCylinder(topology,witness,frame){
 function slabDomain(topology,frame){
  validateOwnedTopology(topology);
  if(topology.solidCount!==1||!(frame.depth>2*tol))unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
- const level=p=>{const h=dot(sub(p,frame.origin),frame.z);if(Math.abs(h)<=tol)return 0;if(Math.abs(h-frame.depth)<=tol)return 1;unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');};
+ // A qualitative THRU certificate must not merge two distinct cap levels by
+ // tolerance (a thin later cover could otherwise look like the old end plane).
+ // Initial supported family: exact principal signed-permutation source frame.
+ const basis=[frame.x,frame.y,frame.z],axes=basis.map(v=>{const at=v.findIndex(n=>Math.abs(n)===1);if(at<0||v.some((n,i)=>i!==at&&n!==0))unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');return at;});
+ if(new Set(axes).size!==3)unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
+ const axis=axes[2],first=frame.origin[axis],last=first+frame.z[axis]*frame.depth;
+ if(!Number.isFinite(last)||first===last)unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
+ const level=p=>{if(p[axis]===first)return 0;if(p[axis]===last)return 1;unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');};
  const caps=new Map(),owners=new Map(),usedVertices=new Set();
  for(const vertex of topology.vertices)level(vertex.point);
  for(const face of topology.faces){
   if(!['FORWARD','REVERSED'].includes(face.orientation)||!face.wires.length||face.wires.some(w=>!w.length))unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
   if(face.type==='plane'){
    const n=face.analytic.normal;
-   if(norm(cross(n,frame.z))<=dirTol)caps.set(face.index,level(face.analytic.origin));
-   else if(Math.abs(dot(n,frame.z))>dirTol)unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
-  }else if(face.type!=='cylinder'||norm(cross(face.analytic.axis,frame.z))>dirTol)unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
+   if(norm(cross(n,frame.z))===0)caps.set(face.index,level(face.analytic.origin));
+   else if(dot(n,frame.z)!==0)unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
+  }else if(face.type!=='cylinder'||norm(cross(face.analytic.axis,frame.z))!==0)unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
   for(const wire of face.wires)for(const use of wire){
    if(!['FORWARD','REVERSED'].includes(use.orientation))unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
+   if(caps.has(face.index)&&topology.edges[use.edge-1].vertices.some(i=>i<1||level(topology.vertices[i-1].point)!==caps.get(face.index)))unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
    if(!owners.has(use.edge))owners.set(use.edge,[]);
    owners.get(use.edge).push({face:face.index,seam:use.seam,orientation:use.orientation});
   }
@@ -40,15 +48,15 @@ function slabDomain(topology,frame){
   const ends=edge.vertices.map(i=>{usedVertices.add(i);return topology.vertices[i-1].point;}),levels=ends.map(level);
   if(edge.type==='line'){
    const p=edge.range.map(t=>add(edge.analytic.origin,mul(edge.analytic.direction,t)));
-   if(!ends.every(v=>p.some(q=>near(v,q))))unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
-   if(norm(cross(edge.analytic.direction,frame.z))<=dirTol){if(levels[0]===levels[1])unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');}
-   else if(Math.abs(dot(edge.analytic.direction,frame.z))>dirTol||levels[0]!==levels[1])unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
+   if(!ends.every(v=>p.some(q=>near(v,q))))unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');p.forEach(level);
+   if(norm(cross(edge.analytic.direction,frame.z))===0){if(levels[0]===levels[1])unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');}
+   else if(dot(edge.analytic.direction,frame.z)!==0||levels[0]!==levels[1])unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
   }else if(edge.type==='circle'){
    const a=edge.analytic;
-   if(norm(cross(a.axis,frame.z))>dirTol||Math.abs(dot(a.x,a.axis))>dirTol||Math.abs(dot(a.y,a.axis))>dirTol||Math.abs(dot(a.x,a.y))>dirTol||norm(sub(cross(a.x,a.y),a.axis))>dirTol||edge.range[1]-edge.range[0]>2*Math.PI+dirTol)unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
+   if(norm(cross(a.axis,frame.z))!==0||dot(a.x,frame.z)!==0||dot(a.y,frame.z)!==0||Math.abs(dot(a.x,a.y))>dirTol||norm(sub(cross(a.x,a.y),a.axis))>dirTol||edge.range[1]-edge.range[0]>2*Math.PI+dirTol)unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
    const cap=level(a.center);if(levels.some(n=>n!==cap))unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
    const p=edge.range.map(t=>add(a.center,mul(add(mul(a.x,Math.cos(t)),mul(a.y,Math.sin(t))),a.radius)));
-   if(!ends.every(v=>p.some(q=>near(v,q))))unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
+   if(!ends.every(v=>p.some(q=>near(v,q))))unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');p.forEach(level);
   }else unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');
  }
  if(usedVertices.size!==topology.vertices.length)unavailable('DRAWING_THROUGH_EXTENT_UNQUALIFIED');

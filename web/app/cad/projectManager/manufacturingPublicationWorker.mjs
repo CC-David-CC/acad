@@ -41,6 +41,7 @@ self.addEventListener('message',event=>{
    if(changed){record=prepareManufacturingJournalRecord(r.before,after);after=record.after;}
   }
   const summary=drawing?{drawingId:(after||r.before).drawingId,viewCount:after?.views.length||0,dimensionCount:after?.dimensions.length||0,quality:'authored-definition-only'}:{partCount:after?.objects.length||0,regionCount:after?.objects.reduce((n,o)=>n+o.regions.length,0)||0,bindingCount:after?.bindings.length||0,details:[],warning:''};
+  if(drawing&&(after||r.before).version===3)summary.annotationCount=after?.annotations.length||0;
   if(r.action==='rebind'){
    if(summary.regionCount>10)fail('Review of more than10 regions is not available.','RESOURCE_LIMIT');
    const materials=new Map(after.materials.map(m=>[m.id,m.name])),appearances=new Map(after.appearances.map(m=>[m.id,m.name]));
