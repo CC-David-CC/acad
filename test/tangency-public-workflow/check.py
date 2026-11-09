@@ -49,6 +49,13 @@ def verify_source(row):
         else:need(o['id'] in b['rectangleIds'],'no endpoint-ID parsing');q=one([d[k] for k in ('a','b') if abs(d[k]['x']-point['x'])<=5e-8 and abs(d[k]['y']-point['y'])<=5e-8],'actual original rectangle endpoint in known parent')
         for axis in ('x','y'):near(point[axis],q[axis])
         points[point['id']]=q
+    context=row.get('promotionContext')
+    if context:
+        d=objects[b['objects']['C']['id']]['data'];radius=context['radius'];near(d['c']['x'],5);near(d['c']['y'],radius)
+        if context['arc']:
+            for actual,expected in [(d['a']['x'],5-radius),(d['a']['y'],radius),(d['b']['x'],5),(d['b']['y'],0)]:near(actual,expected)
+            need(cross(sub(p(d['a']),p(d['c'])),sub(p(d['b']),p(d['c'])))>0,'retained lower-left CCW quarter branch')
+        else:near(d['r'],radius)
     definition=row['definition'];values={} if definition is None else {'baseTangentRadius':definition,'tangentRadius':definition}
     if definition is not None:
         raw=row['before']['capture']['native']['expressions'];prefix='codi-physical-parameters:1\n';need(raw.startswith(prefix) and json.loads(raw[len(prefix):])==[{'name':'baseTangentRadius','dimension':'length','expression':'mm('+str(definition)+')'},{'name':'tangentRadius','dimension':'length','expression':'baseTangentRadius'}],'actual named parameter provenance');need(one([c for c in s['stages'][0]['constraints'] if c['typeId']=='RadiusLength' and c['objects']==[b['objects']['B']['id']]],'named RadiusLength')['constants']['length']=='tangentRadius','no literal substitution')
@@ -113,6 +120,46 @@ def component_nullity(row,s,obj):
         elif t=='TangentCC' and ids[1]==id:
             need(k['branch']=='external','actual external rank fixture');A,B=[obj[id]['data'] for id in ids];delta=sub(p(B['c']),p(A['c']));matrix.append([2*delta[0],2*delta[1],-2*(F(A['r'])+F(B['r']))])
     return 3-rank(matrix)+2
+def promotion_matrix(sketch,binding,inspection):
+    # Exact original equations in this specifically proved +X/positive-radius
+    # chart. Not a general tangent rank certificate or current-residual test.
+    rows=sketch['stages'][0]['constraints'];objects={o['id']:o for o in sketch['objects']};curve=binding['objects']['C'];matrix=[]
+    lock=one([c for c in rows if c['typeId']=='LockPoint' and c['objects']==[binding['datumId']]],'actual retained datum LockPoint');need({k:float(v) for k,v in lock['constants'].items()}=={'x':100,'y':100},'exact datum witness')
+    for c in rows:
+        t,ids,k=c['typeId'],c['objects'],c.get('constants',{})
+        if t=='RadiusLength' and ids==[curve['id']]:matrix.append([Fraction(0),Fraction(0),Fraction(1)])
+        elif t in ('SignedDistanceX','SignedDistanceY') and ids==[binding['datumId'],curve['roles']['c']]:matrix.append([Fraction(t=='SignedDistanceX'),Fraction(t=='SignedDistanceY'),Fraction(0)])
+        elif t in ('TangentLC','FiniteTangentLC') and ids[1]==curve['id']:
+            line=objects[ids[0]]['data'];need(line['a']['y']==line['b']['y']==0 and line['b']['x']>line['a']['x'],'actual exact +X source line')
+            owned=one([o for o in binding['objects'].values() if o['id']==ids[0]],'actual line binding')
+            for endpoint in ('a','b'):
+                for axis in ('x','y'):
+                    target=owned['roles'][endpoint];w=one([x for x in rows if x['typeId']==('SignedDistanceX' if axis=='x' else 'SignedDistanceY') and x['objects']==[binding['datumId'],target]],'original fixed endpoint witness');need(F(float(w['constants']['distance']))==F(line[endpoint][axis])-100,'exact original endpoint constant, not only current frame')
+            frame=one([r for r in inspection['tangencies']['rows'] if same(r,c)],'actual native chart observation')['geometry'];need(frame['angleRadians']==0 and frame['polarLength']>0 and frame['normal']==[0,1],'actual angle-zero positive native chart, no snapping')
+            need(k['inverted'] in (False,'false'),'retained approved polar side');matrix.append([Fraction(0),Fraction(1),Fraction(-1)])
+    need(any(c['typeId']=='RadiusLength' and c['objects']==[curve['id']] for c in rows),'real retained radius driver')
+    if curve['kind']=='Arc':
+        for axis,endpoint in [('y','a'),('x','b')]:
+            c=one([c for c in rows if c['typeId']==('SignedDistanceY' if axis=='y' else 'SignedDistanceX') and c['objects']==[curve['roles']['c'],curve['roles'][endpoint]]],'actual quarter-Arc endpoint axis equation');need(F(float(c['constants']['distance']))==0,'original zero relative endpoint equation')
+    return matrix
+
+def promotion_check(item):
+    b=item['binding'];before=source(item['before'],b['faceId']);after=source(item['after'],b['faceId']);wanted=item['promoted']
+    def target(s):return one([c for c in s['stages'][0]['constraints'] if same(c,wanted)],'distinct actual promoted tangent')
+    prior=target(before);need(prior['admission']['state']=='redundant' and target(after)['admission']['state']=='accepted','actual redundant to accepted')
+    expected=copy.deepcopy(before);rows=expected['stages'][0]['constraints'];removed=one([c for c in rows if c==item['removed']],'actual original removed witness');need(removed!=prior,'no duplicate row substitution');rows.remove(removed);target(expected)['admission']['state']='accepted';need(after==expected,'EXACT original geometry/source and one deletion plus required promotion')
+    for state,inspection in [(item['before'],item['inspectionBefore']),(item['after'],item['inspectionAfter'])]:
+        verify_source({'binding':b,'before':state,'inspection':inspection,'definition':None,'protectedGeometry':{},'promotionContext':item['promotionContext']})
+    m0=promotion_matrix(before,b,item['inspectionBefore']);m1=promotion_matrix(after,b,item['inspectionAfter']);need(rank(m0)==rank(m1)==3,'unchanged regular center/radius restrictions')
+    # Remove this exact source row from each matrix reconstruction: dependent
+    # before deletion, necessary afterward. No production rank/certificate used.
+    def without(s,inspection):
+        reduced=copy.deepcopy(s);reduced['stages'][0]['constraints'].remove(target(reduced));return promotion_matrix(reduced,b,inspection)
+    need(rank(without(before,item['inspectionBefore']))==3 and rank(without(after,item['inspectionAfter']))==2,'original row loses its exact alternate witness and must be independent')
+    for k in ('history','expressions','counters','presentation'):need(item['before']['capture']['native'][k]==item['after']['capture']['native'][k],'retained native '+k)
+    need(item['result']['changed'] and item['result']['authoredUndo'] and item['result']['relation']['status']=='removed','one genuine journaled removal')
+    return {'case':item['case'],'label':item['label'],'promotedType':wanted['typeId'],'originalChartRank':3,'remainingChartRank':3}
+
 def make_bad(file,destination,face):
     base=read_archive(file);original=json.loads(base['rawSketches'][face]);healthy=one([c for stage in original['stages'] for c in stage['constraints'] if c['typeId']=='TangentCC' and c['constants']['branch']=='external'],'genuine healthy external row');entry=one([e for e in base['manifest']['entries'] if e['role']=='sketch' and e['logicalId']==face],'original actual entry');rows=structure(Path(file).read_bytes());dest=Path(destination);dest.mkdir(exist_ok=False);result=[]
     for kind in ('unknown-branch','named-branch','extra-field'):
@@ -128,7 +175,7 @@ def check(folder):
     for item in r['sourceSnapshots']:
         p=(root/item['file']).resolve();need(p.is_relative_to(root.resolve()) and sha(p.read_bytes())==item['sha256']==r['sourcePins'][item['originalFile']],'exact executed bytes');need(item['commit']==r['desktopHelperCommit' if item['gitPath'].startswith('test/agent-cad-corpus/') else 'driverSourceCommit'],'source Git-object binding')
         if item['gitPath'].startswith('test/tangency-public-workflow/'):need(sha((Path(__file__).parent/Path(item['gitPath']).name).read_bytes())==item['sha256'],'use frozen acceptance/checker')
-    need({x['case'] for x in r['observations']}=={'support','finite','circle-circle'},'all ordinary mechanical domains');schemas=set();branches=set();points=0
+    need({x['case'] for x in r['observations']}=={'support','finite','circle-circle','promotion-support','promotion-finite-after-support','promotion-support-after-finite','promotion-arc-finite'},'all original mechanical domains plus complete retained-row promotion companions');schemas=set();branches=set();points=0
     for row in r['observations']:
         need(row['before']==row['after'],'read-only exact state');resource=row['before']['ownership']['resources'];need(not row['before']['ownership']['processing'] and not resource['cleanupFailed'] and all(resource[k]==0 for k in ('candidates','accepted','mounts')) and resource['owners']==resource['detached'],'settled actual resources');s,obj=verify_source(row);body=one(row['before']['capture']['solids']['bodies'],'actual preserved Native rectangle');m=body['metrics'];need(body['id']==row['binding']['body']['outputId'] and body['featureId']==row['binding']['body']['featureId'],'actual producer/body');need(m['nativeValidity']['valid'] and m['solidCount']==1 and m['resultKind']=='single-solid' and 'sha256:'+m['runtime']['jsSha256']+':'+m['runtime']['wasmSha256']==r['engineRevision'],'genuine bound Native output');near(m['nativeVolume'],2000,'1e-6')
         for key,values in {'min':[100,100,0],'max':[110,110,20]}.items():
@@ -150,14 +197,22 @@ def check(folder):
     for label,code in [('Supporting tangent outside finite Segment is not finite contact','FINITE_CONTACT_OUTSIDE'),('Arc supporting circle does not imply trimmed contact','FINITE_CONTACT_OUTSIDE'),('Actual publicly edited collapsed native sweep is uncertain','FINITE_CONTACT_UNCERTAIN'),('Wrong containing order is a branch-domain refusal','TANGENCY_BRANCH_DOMAIN'),('Coincident equal circles do not have a unique internal tangent','TANGENCY_DOMAIN')]:need(failures[label]['error']['code']==code,'outside/uncertain/domain distinctions')
     rotated=one([o for o in r['observations'] if o['label']=='Exact 3-4-5 rotated finite endpoint and interior'],'actual rotated witness');b=rotated['binding'];er=one([x for x in rotated['inspection']['tangencies']['rows'] if x['objects'][1]==b['objects']['rotatedEndpoint']['id']],'rotated endpoint');ir=one([x for x in rotated['inspection']['tangencies']['rows'] if x['objects'][1]==b['objects']['rotatedInterior']['id']],'rotated interior');need(er['geometry']['contact']==[20,0] and er['geometry']['segmentParameter']==er['geometry']['arcParameter']==0 and ir['geometry']['contact']==[23,4] and ir['geometry']['segmentParameter']==.5,'actual exact3-4-5 finite witnesses')
     redundant=one([o for o in r['observations'] if o['label']=='Distinct normal coordinate is actually redundant'],'distinct redundancy');b=redundant['binding'];need(one([c for c in redundant['inspection']['constraints'] if c['typeId']=='SignedDistanceY' and c['objects']==[b['datumId'],b['objects']['C']['roles']['c']]],'actual distinct signed row')['admission']['state']=='redundant','redundancy is not a duplicate command')
-    need(len(r['saves'])==len(r['reopens'])==6,'six actual native cycles');archives=[]
+    promotion_cases={'promotion-support','promotion-finite-after-support','promotion-support-after-finite','promotion-arc-finite'}
+    need(len(r['promotions'])==4 and {x['case'] for x in r['promotions']}==promotion_cases,'both support/finite orders, distinct disjoint supports and real Arc')
+    promotions=[promotion_check(item) for item in r['promotions']]
+    for case in promotion_cases:
+        for label in ('Promoted tangent radius6 '+case,'Reopened promoted tangent radius7 '+case):one([o for o in r['observations'] if o['label']==label and o['case']==case],'actual propagated and reopened edit')
+    need(len(r['saves'])==len(r['reopens'])==14,'original six plus eight real promotion native cycles');archives=[]
     for saved in r['saves']:
         arc=read_archive(root/saved['savedFile']);native=saved['before']['capture']['native'];model=arc['envelope']['project']['model'];need(arc['sha256']==saved['sha256'] and arc['bytes']==saved['bytes'],'actual server bytes/CRC/descriptor SHA');need(arc['rawSketches']=={s['id']:s['source'] for s in native['sketches']},'EXACT retained archive source bytes');need(all(model[k]==native[k] for k in ('history','counters','expressions')) and saved['before']['capture']==saved['after']['capture'],'same authoritative graph/formulas/highwater/no Save mutation');need(len(model['history'])==2,'one genuine plane and retained original body');op=one([x for x in model['history'] if x['type']=='WORKER_SELECTED_PROFILE_EXTRUDE_V2'],'actual Native source feature')['params'];need(op['faceId']==saved['binding']['faceId'] and op['regionId']==saved['binding']['regionId'] and op['featureId']==saved['binding']['body']['featureId'] and op['engineRevision']==r['engineRevision'] and op['depth']==20,'same actual selected source/build/producer intent');archives.append({'file':saved['savedFile'],'sha256':arc['sha256'],'designRevision':arc['manifest']['designRevision']})
+    for item in r['promotions']:
+        for suffix in ('-first','-reedited'):
+            saved=one([x for x in r['saves'] if x['label']==item['case']+suffix],'actual promoted row archive');sketch=source(saved['before'],saved['binding']['faceId']);need(one([c for c in sketch['stages'][0]['constraints'] if same(c,item['promoted'])],'saved promoted tangent')['admission']['state']=='accepted','native persistence of actual promotion')
     for opened in r['reopens']:
         need(all(opened['before']['capture']['native'][k]==opened['opened']['capture']['native'][k] for k in ('history','source','sketches','expressions','counters','presentation')),'fresh Open exact native source/IDs');need(not opened['opened']['capture']['journal']['canUndo'] and not opened['opened']['capture']['journal']['canRedo'],'fresh journal')
     need({x['kind'] for x in r['negativeArchives']}=={'unknown-branch','named-branch','extra-field'},'genuine own malformed native branches/fields')
     for item in r['negativeArchives']:need(item['sourceSha256'] in {x['sha256'] for x in r['saves']} and sha((root/item['file']).read_bytes())==item['sha256']==sha((root/item['serverFile']).read_bytes()),'actual malformed My files bytes from a genuine completed Save')
-    return {'status':'PASS','scope':'finite sketch tangent equations/contact/branches/source/travel/native archives; retained Native rectangle only, not BRep tangency/full C03/Gate1','observations':len(r['observations']),'nativeSuffixPoints':points,'archives':archives,'coordinateBudgetMm':'5e-8','originalResidualPolicyMm':'1e-6 (not achieved accuracy)'}
+    return {'status':'PASS','scope':'finite sketch tangent equations/contact/branches/source/travel/native archives; retained Native rectangle only, not BRep tangency/full C03/Gate1','observations':len(r['observations']),'nativeSuffixPoints':points,'archives':archives,'coordinateBudgetMm':'5e-8','originalResidualPolicyMm':'1e-6 (not achieved accuracy)','promotions':promotions}
 if __name__=='__main__':
     with localcontext() as ctx:
         ctx.prec=100

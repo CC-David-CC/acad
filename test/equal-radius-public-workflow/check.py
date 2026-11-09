@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Independent AFTER-WHOLE source/equation/Native/ZIP oracle; no production imports."""
-import json,math,hashlib,sys,re
+import json,math,hashlib,sys,re,copy
 from fractions import Fraction
 from decimal import Decimal,localcontext
 from pathlib import Path
@@ -95,6 +95,22 @@ def radius_component_rank(sketch,binding):
                 factor=matrix[i][column];matrix[i]=[x-factor*y for x,y in zip(matrix[i],matrix[rank])]
         rank+=1
     return rank
+def promotion_check(item):
+    b=item['binding'];before=source(item['before'],b['faceId']);after=source(item['after'],b['faceId']);promoted=item['promoted']
+    def target(sketch):return one([c for c in sketch['stages'][0]['constraints'] if c['typeId']==promoted['typeId'] and c['objects']==promoted['objects']],'actual distinct promoted row')
+    old=target(before);need(old['admission']['state']=='redundant' and target(after)['admission']['state']=='accepted','actual redundant to accepted promotion')
+    expected=copy.deepcopy(before);rows=expected['stages'][0]['constraints'];removed=one([c for c in rows if c==item['removed']],'actual removed original EqualRadius');need(removed['typeId']=='EqualRadius' and removed!=old,'distinct actual removed witness');rows.remove(removed);target(expected)['admission']['state']='accepted';need(after==expected,'EXACT one original row deletion and only required admission transition, no geometry authority')
+    # Original rA-rB/radius-anchor matrix over Fraction, not a production rank
+    # or an inference from tiny residuals. Candidate edge never witnesses itself.
+    def without_target(sketch):
+        reduced=copy.deepcopy(sketch);reduced['stages'][0]['constraints'].remove(target(reduced));return reduced
+    rank_before=radius_component_rank(before,b);rank_after=radius_component_rank(after,b)
+    need(radius_component_rank(without_target(before),b)==rank_before,'original promoted row was exactly dependent')
+    need(rank_after==rank_before and radius_component_rank(without_target(after),b)==rank_after-1,'surviving original row is now genuinely necessary')
+    equations(before,item['inspectionBefore'],{});equations(after,item['inspectionAfter'],{})
+    for k in ('history','expressions','counters','presentation'):need(item['before']['capture']['native'][k]==item['after']['capture']['native'][k],'unchanged native '+k)
+    need(item['result']['changed'] and item['result']['authoredUndo'] and item['result']['relation']['status']=='removed','one real journaled removal');settled(item['before']);settled(item['after'])
+    return {'label':item['label'],'originalRadiusRank':rank_before,'remainingRadiusRank':rank_after,'promotedType':promoted['typeId']}
 def check(directory):
     root=Path(directory);r=json.loads((root/'receipt.json').read_text());need(r['status']=='PASS','whole public workflow PASS first');need(r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'] and r['sourcePins']==r['sourcePinsAfter'],'immutable execution and owned cleanup');need(not any(r[k] for k in ('sourceSeeds','privateAuthoring','fakeReplies')),'genuine source')
     need(re.fullmatch('[a-f0-9]{40}',r['driverSourceCommit']) and re.fullmatch('[a-f0-9]{40}',r['desktopHelperCommit']),'separate frozen driver/helper Git commits, not assumed runtime source')
@@ -116,6 +132,9 @@ def check(directory):
         for k in ('revision','version','unit','engine','engineRevision','bodyId','featureId'):need(q[k]==request[k],'query binding')
         points+=len(request['points']);observations.append({'label':row['label'],'typed':row['typed'],'volumeMM3':str(volume)})
     redundant=one([o for o in r['observations'] if o['label']=='Distinct transitive A-C is actual redundant row'],'real distinct redundant observation');b=redundant['binding'];row=one([c for c in source(redundant['before'],b['faceId'])['stages'][0]['constraints'] if c['typeId']=='EqualRadius' and set(c['objects'])=={b['objects']['A']['id'],b['objects']['C']['id']}],'distinct A-C');need(row['admission']['state']=='redundant','not duplicate no-op as redundancy proof');noop=one([x for x in r['rows'] if x['label'].startswith('Reversed unordered pair')],'actual symmetric no-op');need(noop['before']==noop['after'] and noop['noop']['changed'] is False and noop['before']['capture']['journal']['canRedo'] is True,'actual reversed no-op preserves a genuine existing redo tail')
+    need({x['label'] for x in r['promotions']}=={'Promote A-C after removal of A-B','Promote A-Q after removal of A-B','Promote RadiusLength B after removal of A-B'} and len(r['promotions'])==3,'complete Circle/quarter-Arc/retained-dimension promotion cases')
+    promotions=[promotion_check(item) for item in r['promotions']]
+    for label in ('Promoted Circle graph propagates radius6','Promoted Arc graph propagates radius7 with original quarter branch','Reopened promoted B radius remains7 while A becomes8','Healthy continuation preserves promoted B7 and unrelated C6 Q7'):one([o for o in r['observations'] if o['label']==label],'actual post-promotion continuation')
     for row in r['refusals']:need(normalized(row['before'])==normalized(row['after']) and not row['error']['committed'] and not row['error']['possiblyCommitted'],'atomic refusal')
     need([d['nullity'] for d in r['diagnostics']]==[5,3,2],'independent finite radius/Point freedoms, not global DOF')
     numeric=one([o for o in r['observations'] if o['label']=='Numeric Circle Native with explicitly construction quarter Arc'],'actual numeric radius fixture')['binding']
@@ -123,11 +142,13 @@ def check(directory):
         need(d['before']==d['after'] and d['result']['localJacobian']['localNullity']==d['nullity'],'actual local rank observation')
         need(any(not o['typed'] and source(o['before'],numeric['faceId'])==source(d['before'],numeric['faceId']) for o in r['observations']),'rank assumptions use the actual same source already checked for centers/quarter/unrelated geometry')
         rank=radius_component_rank(source(d['before'],numeric['faceId']),numeric);need(4-rank+2==d['nullity'],'independent exact radius-component rank plus retained unrelated Point2; not global physical DOF')
-    need(len(r['saves'])==5 and len(r['reopens'])==5 and sum(s['typed'] for s in r['saves'])==2,'three numeric plus two typed real archive cycles');archives=[]
+    need(len(r['saves'])==9 and len(r['reopens'])==9 and sum(s['typed'] for s in r['saves'])==2,'original three numeric/two typed plus four real promotion archive cycles');archives=[]
     for item in r['saves']:
         arc=read_archive(root/item['savedFile']);need(arc['sha256']==item['sha256'] and arc['bytes']==item['bytes'],'independent actual archive CRC/SHA/manifest');env=arc['envelope'];model=env['project']['model'];native=item['before']['capture']['native'];need(model['history']==native['history'] and model['expressions']==native['expressions'] and model['counters']==native['counters'],'one saved graph/formulas/highwater');need(env.get('manufacturing')==item['before']['manufacturing'] and env.get('presentation')==native['presentation'],'saved metadata');need({s['id']:s['data'] for s in env['project']['sketches']}=={s['id']:json.loads(s['source']) for s in native['sketches']},'all native source/IDs/roles/equalities retained');need(len(model['history'])==(3 if item['typed'] else 2),'only actual planes and one original feature');op=one([x for x in model['history'] if x['type']=='WORKER_SELECTED_PROFILE_EXTRUDE_V2'],'actual Native profile');b=item['binding'];need(op['params']['featureId']==b['native']['body']['featureId'] and op['params']['faceId']==b['native']['faceId'] and op['params']['regionId']==b['native']['regionId'] and op['params']['engineRevision']==r['engineRevision'] and op['params']['depth']==20,'actual recorded source/build/producer intent');need(item['after']['capture']==item['before']['capture'],'Save does not mutate authored model');archives.append({'file':item['savedFile'],'sha256':arc['sha256'],'designRevision':arc['manifest']['designRevision']})
+    for label,promoted_label in [('promotion-circle','Promote A-C after removal of A-B'),('promotion-arc','Promote A-Q after removal of A-B'),('promotion-radius','Promote RadiusLength B after removal of A-B')]:
+        saved=one([x for x in r['saves'] if x['label']==label],'promoted native archive');item=one([x for x in r['promotions'] if x['label']==promoted_label],'actual promotion');wanted=item['promoted'];sketch=source(saved['before'],saved['binding']['faceId']);need(one([c for c in sketch['stages'][0]['constraints'] if c['typeId']==wanted['typeId'] and c['objects']==wanted['objects']],'saved promoted row')['admission']['state']=='accepted','promoted classification saved before fresh Open')
     for row in r['reopens']:
         for k in ('history','source','sketches','expressions','counters','presentation'):need(row['opened']['capture']['native'][k]==row['before']['capture']['native'][k],'fresh Open exact '+k)
         need(not row['opened']['capture']['journal']['canUndo'] and not row['opened']['capture']['journal']['canRedo'],'fresh session J reset')
-    return {'status':'PASS','scope':'finite EqualRadius genuine numeric/construction-Arc and typed ordinary-Arc/source plus Native circle/rectangle, not typed consumed Circle capability/full C03','observations':len(observations),'nativePoints':points,'native':observations,'archives':archives}
+    return {'status':'PASS','scope':'finite EqualRadius genuine numeric/construction-Arc and typed ordinary-Arc/source plus Native circle/rectangle, not typed consumed Circle capability/full C03','observations':len(observations),'nativePoints':points,'native':observations,'archives':archives,'promotions':promotions}
 if __name__=='__main__':print(json.dumps(check(sys.argv[1]),indent=2))

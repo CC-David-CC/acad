@@ -2,7 +2,7 @@
 
 Prepared source, **not executed or qualified**. Root runs one coherent normal application workflow, then this independent artifact checker. No unit/probe/partial browser execution is part of this packet. Preserve the first complete failure and its exact producer pins; do not loosen expected states, side/domain rules or precision to obtain a pass.
 
-Product order: Core `b44eba9` → `15372d2` → `d004437`; Desktop `0ea3de829`. Root composed these into the normal build; use its actual new fixture/source/host pins, not the original base commits as alleged producers. `docs/reviews/C03-TANGENCY-IMPLEMENTATION-20261108.md` records exact source consumers, original equations/derivatives, authored-versus-derived authority and lifecycle transition/invariant table. Existing source schemas, numeric/boolean fields and old human TangentLC remain intact. The new public branch changes are explicit remove then create operations only.
+Historical product order: Core `b44eba9` → `15372d2` → `d004437`; Desktop `0ea3de829`. Root composed these into the normal build; use its actual new fixture/source/host pins, not the original base commits as alleged producers. `docs/reviews/C03-TANGENCY-IMPLEMENTATION-20261108.md` records exact source consumers, original equations/derivatives, authored-versus-derived authority and lifecycle transition/invariant table. Existing source schemas, numeric/boolean fields and old human TangentLC remain intact. The new public branch changes are explicit remove then create operations only.
 
 The whole flow authors an actual100..110 ×100..110 ×0..20 Native rectangle through public commands. All tangency shapes are explicitly construction geometry in that SAME actual saved source, leaving one stable real body V2000mm³ to verify complete suffix replay, material/boundary queries and resource ownership. No private source/model write or Native successful reply is used. The retained body is not a BRep tangency claim.
 
@@ -11,7 +11,28 @@ The whole flow authors an actual100..110 ×100..110 ×0..20 Native rectangle thr
 | support | Ordinary fixed Segment, initially unsatisfied free Circle, actual supporting tangent, creation Undo/Redo, RadiusLength and signed center constraints, actual distinct redundant SignedY, incompatible radius refusal and healthy edit. Signed endpoint reversal exercises negative-T construction with raw inversion retained; free-coordinate rotate/reverse, opposite side, meaningful no-op with redo, collapse/nonpositive/nonfinite actual Number/unknown/stale refusal. Two normal native Save/server-byte equality/fresh login Open cycles and reedit. |
 | finite | Actual finite Circle, interior semicircular Arc and quarter-Arc endpoint. A tangent foot outside finite Segment and an Arc excluding contact keep their supporting relation but refuse finite intent. Rotated3–4–5 line tests EXACT endpoint contact(20,0) and interior(23,4), no q equality/snap authority. A publicly created healthy Arc is publicly point-edited into a real near-seam source; exact observed B=(35,1e-30) and collapsed native sweep must refuse as uncertain, not outside/full turn. Radius edit/travel and native Save/Open preserve all unrelated source. |
 | circle-circle | External and two independently authored ordered internal branches, real movable center/radius edits, regular under/full local reports, remove→literal center lock→genuinely redundant new external row. Reversed external/internal no-op transforms the containment branch, preserves the original source order and a nonempty redo tail. Wrong containing order and coincident equal circles refuse. Actual typed RadiusLength with base→name formula3/4 preserves literal branch; named-erasure refusal, explicit external→internal remove/create travel, actual independent center motion after removal/mixed travel, three native Save/Open cycles/reedit. |
+| removal promotion companions | Keep the entire original support/finite/CircleCircle flow and its six archives. Add four NEW public projects: two disjoint fixed collinear supporting Segments; support→finite same pair; finite→support same pair; real lower-left quarter-Arc support→finite. In each, C.x5/radius5 are actual dimensions and normal coordinate is initially free. The first relation is accepted, a distinct original second row must be redundant, removal of the first must promote the survivor without any geometry/source delta beyond that row deletion and actual admission. Shared Undo/Redo, real radius6/7 propagation, Save/Open/reedit/resave/Open yield eight additional archives. Exact initial status/chart prerequisites must be observed or retain FAIL. |
 | native domain | Three malformed copies derive ONLY from the actual healthy public saved Circle-Circle archive. Unknown branch, a real typed-name string used as branch, and extra unknown constant must refuse normal Open before adoption. They are test-owned invalid files, never successful authoring seeds. Archive CRC/content SHA/design root are independently rebuilt so source-domain validation is reached. Accepted model/path/dirty/J/resources survive and healthy final Save/Open continues. |
+
+The removal companions use authenticated exact +X positive native charts observed
+from the actual two-endpoint dimension locks; no near-angle snapping or t flag.
+TangentLC and FiniteTangentLC retain the same original polynomial but finite
+membership remains a separately checked durable domain. Redundant here is the
+original-equation classification at a valid finite configuration, not global
+entailment of finite contact. The Arc's actual relative endpoint zero dimensions,
+original intrinsics and CCW quarter branch remain active. Independent source/
+Fraction checks prove the original promoted row dependent before and necessary
+after deletion; full source equality permits exactly one deletion plus its actual
+admission change. Existing fully-fixed TCC certificate and all three branches
+stay unchanged; arbitrary TCC transitive cycles are not claimed by this packet.
+
+Only the actual remove mutation derives new admission through a real PM
+transaction with retained-stage validation. Original geometry is authoritative;
+independent cold/second-cold/captured/original-request checks still precede
+publication. Read/Open do not heal mismatched admission. The source-derived
+related gap has not been reproduced in a workflow. Current augmentation is
+unexecuted; historical tangency R1/R2 failures and original producing pins remain
+unchanged. See `docs/reviews/C03-RELATED-REMOVAL-READMISSION-20261109.md`.
 
 One unrelated Point(7,9) stays genuinely free and bit-exact throughout. Independent local component rank uses actual original rows and exact derivatives at regular fixtures: support freedoms5→4→2; external4→3→2→2, including Point2. These are local Jacobian nullities, not a general physical DOF or nonlinear uniqueness claim. Duplicate no-op is separate from a genuinely new redundant row.
 
@@ -46,4 +67,5 @@ After the complete driver terminates successfully, root runs once:
 python3 test/tangency-public-workflow/check.py "$CODI_EVIDENCE" > "$CODI_EVIDENCE/oracle.json"
 ```
 
-The `make-bad` mode is invoked only inside the whole driver against its actual own saved file, not as a standalone probe. A submitted/uncertain Save or own invalid-file write/server readback keeps the own context/window for reconciliation rather than forced close or blind retry. Normal completion closes only owned contexts and disconnects from the shared browser; fixture/service ownership stays with root. Final receipt PASS and independent oracle PASS are both required, and only certify this declared finite scope.
+The `make-bad` mode is invoked only inside the whole driver against its actual own saved file, not as a standalone probe. A submitted/uncertain Save or own invalid-file write/server readback keeps the own context/window for reconciliation rather than forced close or blind retry. Normal completion closes only owned contexts and disconnects from the shared browser; fixture/service ownership stays with root. All FOURTEEN actual native archive cycles (the original six plus eight
+promotion companions), final receipt PASS and independent oracle PASS are required, and only certify this declared finite scope.

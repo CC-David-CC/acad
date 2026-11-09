@@ -6,8 +6,10 @@ application run and the FIRST independent AFTER-WHOLE oracle. No new PASS,
 exercise status, full C03/Gate1 or consumed typed Circle support is claimed.
 Current acceptance refresh is anchored to qualified actual Coreb3a7bb2 /
 Desktop78cc169 and evidence56bfc01: ordinary21/21 qualified, fullGate1 OPEN.
-Original prepared packet24ce2ab/47e2da2 is retained and reused; no complete
-EqualRadius qualifying receipt exists yet. Exact ordered product/central-merge/
+Historical complete EqualRadius R2 is preserved in evidence-r2: actual
+Core1d8fa59/Desktopfab1, whole plus FIRST oracle PASS in its stated scope.
+This new removal-promotion augmentation is SOURCE ONLY and has not run.
+Original prepared packet24ce2ab/47e2da2 and its producing receipts stay retained. Exact ordered product/central-merge/
 Desktop prerequisites and independent finite state contract are frozen in
 `docs/reviews/EQUAL-RADIUS-B3-ACCEPTANCE-CONTRACT-20261108.md` (4c89cf2).
 Reuse057dae3/a156810/883b063, final human4ded782 (byte-identical6460 helper,
@@ -107,6 +109,30 @@ on an explicit staged/advertised OCC point-observation build.
    remove A–B, update named7, prove B6 independent, mixed travel and reopen.
    Raw name/formula remain stored; the rectangle Native output stays unchanged.
 
+6. A NEW public numeric companion repeats the real Circle/Arc/Point setup.
+   AB+BC then distinct redundant AC; remove AB while AC remains. Exact actual AC
+   must promote redundant→accepted with no geometry or other source changes.
+   Undo/Redo and A6 propagation must retain the remaining original graph; Save/
+   server equality/fresh Open with AC accepted. Next AB+BQ+redundant AQ; remove
+   AB, require AQ promotion with unchanged quarter branch, travel and A7 update,
+   then Save/Open. Finally AB plus an actually redundant new B RadiusLength7;
+   remove AB and require that retained dimension to promote. If that prerequisite
+   is not observed, retain FAIL rather than bypassing it. Save/Open, A8 while B7
+   remains fixed, conflicting AB refusal, healthy A9 and resave/Open complete the
+   four additional archives. The independent Fraction original-row matrix proves
+   the promoted row dependent before deletion and necessary afterward. This is
+   not a production-rank inference or a forced classification. All old phases,
+   refusals, formulas, source roles and precision budgets remain above.
+
+Removal mutation now obtains actual survivor classifications from one real PM
+transaction before strict cold reconstruction. It publishes original geometry
+plus exactly the selected deletion and actual admissions, with original-domain,
+first/second/total cold and captured proof. Native read/Open do not heal hints;
+incomingIntent remains exact. See
+`docs/reviews/C03-RELATED-REMOVAL-READMISSION-20261109.md` for the lifecycle and
+complete packet limits. The source-derived related gap is not a reproduced
+EqualRadius failure; the augmented whole remains unqualified until run.
+
 All observations query the actual current owner-bound Native point API with
 exact source/body/producer/revision/build binding. Numeric cylinder material,
 exterior and planar-cap boundary differ from typed rectangle probes. Full
@@ -122,7 +148,7 @@ owned context cleanup. Shared browser/services remain root-owned.
 ## Independent arithmetic and artifact oracle
 
 Current acceptance preserves the original geometry, equations, roles, typed
-companion and all five native cycles. The reversed existing pair is now checked
+companion and all original five native cycles, then adds four promotion cycles. The reversed existing pair is now checked
 after genuine Undo of A-C, with a NONEMPTY redo tail; the exact same source/J/
 tokens must remain, and real Redo then restores that distinct redundant row.
 The independent oracle derives the radius subsystem rank from ACTUAL original
@@ -145,7 +171,7 @@ submission or unfinished server equality retains its own context/window for
 root reconciliation; the driver only disconnects the shared browser. It never
 blindly retries, starts a timeout write/cancel probe, rolls back committed bytes
 or forces that unsettled window closed. Normal successful runs still require
-all five actual server readbacks, fresh Opens and owned-context cleanup.
+all NINE actual server readbacks, fresh Opens and owned-context cleanup.
 
 `check.py` runs ONLY after the complete driver terminal PASS. It imports only
 standard Python and the existing independent archive_oracle (no production
@@ -154,7 +180,7 @@ entry SHA/designRevision/bytes, all saved source roles/IDs/constants/formulas,
 actual original Circle radius/equality and Arc radial/quarter equations,
 PCoincident/Lock/H/V/SegmentLength/signed equations, exact unrelated data,
 row/redundancy/no-op claims, actual same-window preservation, local report
-claims, Native volume/bounds/material point classes and FIVE saved reopen cycles.
+claims, Native volume/bounds/material point classes and NINE saved reopen cycles.
 
 Physical coordinate reconstruction budget: **50 pm=5e−8 mm**; directed quarter
 angle1e−8 rad; Native volume absolute1e−6 mm³ / bounds1e−6 mm. These are separate
@@ -169,8 +195,10 @@ truth by themselves.
 ## Integration and eventual execution
 
 Prepared product commits add the optional methods to CraftService and inherit
-them from createClosedSketchTransitionCommands; current b3 has not yet integrated
-this route. Root serially composes with CURRENT Fix/DistancePL/typed signed-point/
+them from createClosedSketchTransitionCommands; the route is already integrated
+on the removal review base2039a0d. Historical prerequisites below are not a
+request to reapply old files. Root composes the new narrow removal packet with
+CURRENT Fix/DistancePL/typed signed-point/
 travel/READ/writer guards; do not replace their newer files wholesale. Use the
 minimal ordered prerequisite list in the separately frozen4c89cf2 contract.
 Desktop registration remains a TWO-line root splice, no index edit in this lane:
