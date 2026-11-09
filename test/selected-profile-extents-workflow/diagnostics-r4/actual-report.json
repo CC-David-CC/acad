@@ -1,0 +1,3085 @@
+{
+  "role": "diagnostic-only; NOT acceptance/qualification",
+  "receiptSHA256": "8e9013107d62d0f3797b465ba0c39ed9c283cd7e59e3e74c62f0078475b36bcd",
+  "source": "0afb07fe8e216ba9a03cf21923e0ab70aed72546",
+  "hostSource": "be24fbc232c967912f529053d34a9d407b369a39",
+  "acceptance": "7e1e2b6d8eafac4411f1cc63d5b5dc67c5de994a",
+  "engineRevision": "sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc",
+  "thresholdsCopiedForAttributionOnly": {
+    "INC": 1e-06,
+    "DEFL": 0.01
+  },
+  "files": [
+    {
+      "file": "two-sided-initial.3mf",
+      "artifactOrder0": 1,
+      "case": "rectangle-main",
+      "label": "two-sided-initial",
+      "artifact": {
+        "sha256": "b8884a177d371e20217a2396dbd8deda480dcb495eab4348c8314d148dcf8698",
+        "bytes": 3251,
+        "modelXMLSHA256": "551be7bc4511957e49732123c90b1a776ce4c585388005ff5c8133de172b247b",
+        "meshObjectId": "2",
+        "metadata": {
+          "codi:SourceRevision": "f1f4b464034c2f7a64f0ab5781e92d728fbd6fb5f3a6d4b6d191095ba4cd1673",
+          "codi:ManufacturingBindings": "{\"version\":1,\"revision\":\"f1f4b464034c2f7a64f0ab5781e92d728fbd6fb5f3a6d4b6d191095ba4cd1673\",\"parts\":[{\"id\":\"part\",\"name\":\"Source-owned extent part\",\"buildResourceId\":4,\"regions\":[{\"id\":\"main\",\"bodyId\":\"worker-solid:1:[2,\\\"body\\\"]\",\"featureId\":2,\"engine\":\"occ\",\"engineRevision\":\"sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"objectId\":\"region-0\",\"meshResourceId\":2,\"componentResourceId\":3,\"materialResourceId\":1,\"materialIndex\":0}]}],\"materialPairs\":[{\"id\":\"pair-0\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"resourceId\":1,\"index\":0}]}"
+        }
+      },
+      "sourceRawSHA256": "0771c497c09742fab4295873bcceed609f0ede9fb370f8e0d7be32cea69650e3",
+      "frame": {
+        "origin": [
+          0,
+          0,
+          20
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "expected": {
+        "kind": "rectangle",
+        "width": 12,
+        "height": 6,
+        "sourceDepth": 20,
+        "extent": "two-sided",
+        "distance": -8,
+        "positive": 9,
+        "negative": 5,
+        "raw": {
+          "positive": "pos",
+          "negative": "neg"
+        },
+        "length": 10
+      },
+      "interval": [
+        -5,
+        9
+      ],
+      "cylinders": [],
+      "vertices": 8,
+      "triangles": 12,
+      "invalidIndexTriangles": [],
+      "indexedEdges": 18,
+      "badIndexedOppositeEdges": [],
+      "badIndexedOppositeEdgeCount": 0,
+      "euler": 2,
+      "signedVolumeDiagnostic": 1008.0,
+      "triangleLabels": {
+        "ymin": 2,
+        "xmax": 2,
+        "ymax": 2,
+        "xmin": 2,
+        "bottom": 2,
+        "top": 2
+      },
+      "wallCandidateCensus": {},
+      "oldStripFailureCount": 0,
+      "oldStripFailures": []
+    },
+    {
+      "file": "two-sided-reedited.3mf",
+      "artifactOrder0": 4,
+      "case": "rectangle-main",
+      "label": "two-sided-reedited",
+      "artifact": {
+        "sha256": "c8a67130081002ae34aa70005c6f9e8c115e5690682837e8bd8f7c73f9b18456",
+        "bytes": 3251,
+        "modelXMLSHA256": "c7aeeec73669b4b0f18dbcd90775a3e83e183dc12092257ba51d2c828682c022",
+        "meshObjectId": "2",
+        "metadata": {
+          "codi:SourceRevision": "59407e82560d81294657c299c1a6e779e76c66ecc020f20311bbf43dfea5bd71",
+          "codi:ManufacturingBindings": "{\"version\":1,\"revision\":\"59407e82560d81294657c299c1a6e779e76c66ecc020f20311bbf43dfea5bd71\",\"parts\":[{\"id\":\"part\",\"name\":\"Source-owned extent part\",\"buildResourceId\":4,\"regions\":[{\"id\":\"main\",\"bodyId\":\"worker-solid:1:[2,\\\"body\\\"]\",\"featureId\":2,\"engine\":\"occ\",\"engineRevision\":\"sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"objectId\":\"region-0\",\"meshResourceId\":2,\"componentResourceId\":3,\"materialResourceId\":1,\"materialIndex\":0}]}],\"materialPairs\":[{\"id\":\"pair-0\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"resourceId\":1,\"index\":0}]}"
+        }
+      },
+      "sourceRawSHA256": "0771c497c09742fab4295873bcceed609f0ede9fb370f8e0d7be32cea69650e3",
+      "frame": {
+        "origin": [
+          0,
+          0,
+          20
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "expected": {
+        "kind": "rectangle",
+        "width": 12,
+        "height": 6,
+        "sourceDepth": 20,
+        "extent": "two-sided",
+        "distance": -8,
+        "positive": 10,
+        "negative": 6,
+        "raw": {
+          "positive": "pos",
+          "negative": "neg"
+        },
+        "length": 10
+      },
+      "interval": [
+        -6,
+        10
+      ],
+      "cylinders": [],
+      "vertices": 8,
+      "triangles": 12,
+      "invalidIndexTriangles": [],
+      "indexedEdges": 18,
+      "badIndexedOppositeEdges": [],
+      "badIndexedOppositeEdgeCount": 0,
+      "euler": 2,
+      "signedVolumeDiagnostic": 1152.0,
+      "triangleLabels": {
+        "ymin": 2,
+        "xmax": 2,
+        "ymax": 2,
+        "xmin": 2,
+        "bottom": 2,
+        "top": 2
+      },
+      "wallCandidateCensus": {},
+      "oldStripFailureCount": 0,
+      "oldStripFailures": []
+    },
+    {
+      "file": "circle-XZ.3mf",
+      "artifactOrder0": 7,
+      "case": "circle-XZ",
+      "label": "circle-XZ",
+      "artifact": {
+        "sha256": "27c077d654dd5437719fca9d27c47121e290dde44c06ce9a397e3710289adb83",
+        "bytes": 36559,
+        "modelXMLSHA256": "d73552f7bc4ab597d9ad52b0d98339dbc1b382d30dff6a9b8398a066a8a5bbc7",
+        "meshObjectId": "2",
+        "metadata": {
+          "codi:SourceRevision": "90f03284e9b37a8f4d49b9559f5ac4759fda7b8004736449e15c8c5b0c840ef6",
+          "codi:ManufacturingBindings": "{\"version\":1,\"revision\":\"90f03284e9b37a8f4d49b9559f5ac4759fda7b8004736449e15c8c5b0c840ef6\",\"parts\":[{\"id\":\"part\",\"name\":\"Source-owned extent part\",\"buildResourceId\":4,\"regions\":[{\"id\":\"main\",\"bodyId\":\"worker-solid:1:[2,\\\"body\\\"]\",\"featureId\":2,\"engine\":\"occ\",\"engineRevision\":\"sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"objectId\":\"region-0\",\"meshResourceId\":2,\"componentResourceId\":3,\"materialResourceId\":1,\"materialIndex\":0}]}],\"materialPairs\":[{\"id\":\"pair-0\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"resourceId\":1,\"index\":0}]}"
+        }
+      },
+      "sourceRawSHA256": "46f10e843ebd4f1c430f8cb5c3d341b8bea8f881d47b8c2c059930b790ba7630",
+      "frame": {
+        "origin": [
+          0,
+          10,
+          0
+        ],
+        "x": [
+          -1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          0,
+          1
+        ],
+        "z": [
+          0,
+          1,
+          0
+        ]
+      },
+      "expected": {
+        "kind": "circle",
+        "outer": 2,
+        "sourceDepth": 10,
+        "extent": "one-sided",
+        "distance": -6
+      },
+      "interval": [
+        -6,
+        0
+      ],
+      "cylinders": [
+        {
+          "id": "outer",
+          "c": [
+            0,
+            0
+          ],
+          "r": 2,
+          "low": -6,
+          "high": 0,
+          "sign": 1
+        }
+      ],
+      "vertices": 252,
+      "triangles": 500,
+      "invalidIndexTriangles": [],
+      "indexedEdges": 750,
+      "badIndexedOppositeEdges": [],
+      "badIndexedOppositeEdgeCount": 0,
+      "euler": 2,
+      "signedVolumeDiagnostic": 75.3669791189741,
+      "triangleLabels": {
+        "wall": 252,
+        "bottom": 124,
+        "top": 124
+      },
+      "wallCandidateCensus": {
+        "(1, 1, (2,))": 252
+      },
+      "oldStripFailureCount": 0,
+      "oldStripFailures": []
+    },
+    {
+      "file": "annulus-ZY.3mf",
+      "artifactOrder0": 9,
+      "case": "annulus-ZY",
+      "label": "annulus-ZY",
+      "artifact": {
+        "sha256": "d9a7172d2388a6f0fe890390a7decde6d24a3c6cb2bc8d75ac5fd8dbc39ad4e6",
+        "bytes": 71481,
+        "modelXMLSHA256": "f6604fd42b6acebc22e1aa7aab8ebde7c305da45ef6882d854e53d26a07c8d06",
+        "meshObjectId": "2",
+        "metadata": {
+          "codi:SourceRevision": "4d4ee2e39c7c781a7e689a2696a42e55b28235c2e610d640885d19303343bab8",
+          "codi:ManufacturingBindings": "{\"version\":1,\"revision\":\"4d4ee2e39c7c781a7e689a2696a42e55b28235c2e610d640885d19303343bab8\",\"parts\":[{\"id\":\"part\",\"name\":\"Source-owned extent part\",\"buildResourceId\":4,\"regions\":[{\"id\":\"main\",\"bodyId\":\"worker-solid:1:[2,\\\"body\\\"]\",\"featureId\":2,\"engine\":\"occ\",\"engineRevision\":\"sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"objectId\":\"region-0\",\"meshResourceId\":2,\"componentResourceId\":3,\"materialResourceId\":1,\"materialIndex\":0}]}],\"materialPairs\":[{\"id\":\"pair-0\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"resourceId\":1,\"index\":0}]}"
+        }
+      },
+      "sourceRawSHA256": "1003e8b09f6672eabf8c7c81049b8af32ba22cb4d06e99b630baf7d51f22910b",
+      "frame": {
+        "origin": [
+          10,
+          0,
+          0
+        ],
+        "x": [
+          0,
+          0,
+          -1
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          1,
+          0,
+          0
+        ]
+      },
+      "expected": {
+        "kind": "annulus",
+        "outer": 3,
+        "inner": 1,
+        "sourceDepth": 10,
+        "extent": "two-sided",
+        "positive": 4,
+        "negative": 2
+      },
+      "interval": [
+        -2,
+        4
+      ],
+      "cylinders": [
+        {
+          "id": "outer",
+          "c": [
+            0,
+            0
+          ],
+          "r": 3,
+          "low": -2,
+          "high": 4,
+          "sign": 1
+        },
+        {
+          "id": "inner",
+          "c": [
+            0,
+            0
+          ],
+          "r": 1,
+          "low": -2,
+          "high": 4,
+          "sign": -1
+        }
+      ],
+      "vertices": 504,
+      "triangles": 1008,
+      "invalidIndexTriangles": [],
+      "indexedEdges": 1512,
+      "badIndexedOppositeEdges": [],
+      "badIndexedOppositeEdgeCount": 0,
+      "euler": 0,
+      "signedVolumeDiagnostic": 150.73395823794823,
+      "triangleLabels": {
+        "wall": 504,
+        "bottom": 252,
+        "top": 252
+      },
+      "wallCandidateCensus": {
+        "(1, 1, (2,))": 504
+      },
+      "oldStripFailureCount": 0,
+      "oldStripFailures": []
+    },
+    {
+      "file": "through-pattern.3mf",
+      "artifactOrder0": 11,
+      "case": "literal-through-pattern",
+      "label": "through-pattern",
+      "artifact": {
+        "sha256": "ad33255b7072cb6ee62eb87f4803523384f2e5c67f4233024cd1ded5d53c5e65",
+        "bytes": 105167,
+        "modelXMLSHA256": "9dd1153e86d899121538d062e7aba7f83cc3a0f1c1e771b8a63b4e0129af80cd",
+        "meshObjectId": "2",
+        "metadata": {
+          "codi:SourceRevision": "f62169ac9a805907b225122f9d8ce24446a57c8f5e17dbe2e7fbae042868d617",
+          "codi:ManufacturingBindings": "{\"version\":1,\"revision\":\"f62169ac9a805907b225122f9d8ce24446a57c8f5e17dbe2e7fbae042868d617\",\"parts\":[{\"id\":\"part\",\"name\":\"Source-owned extent part\",\"buildResourceId\":4,\"regions\":[{\"id\":\"main\",\"bodyId\":\"worker-solid:1:[5,\\\"body\\\"]\",\"featureId\":5,\"engine\":\"occ\",\"engineRevision\":\"sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"objectId\":\"region-0\",\"meshResourceId\":2,\"componentResourceId\":3,\"materialResourceId\":1,\"materialIndex\":0}]}],\"materialPairs\":[{\"id\":\"pair-0\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"resourceId\":1,\"index\":0}]}"
+        }
+      },
+      "sourceRawSHA256": "68ffe4943ed028ff61e715e487677bb39727c237502239ce29b272838e4abe90",
+      "frame": {
+        "origin": [
+          0,
+          0,
+          10
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "expected": {
+        "kind": "rectangle",
+        "width": 100,
+        "height": 50,
+        "sourceDepth": 10,
+        "extent": "symmetric",
+        "positive": 6,
+        "negative": 6,
+        "holes": [
+          {
+            "u": 50,
+            "v": 25,
+            "radius": 2,
+            "depth": null
+          },
+          {
+            "u": 60,
+            "v": 25,
+            "radius": 2,
+            "depth": null
+          },
+          {
+            "u": 70,
+            "v": 25,
+            "radius": 2,
+            "depth": null
+          }
+        ],
+        "length": 14
+      },
+      "interval": [
+        -7.0,
+        7.0
+      ],
+      "cylinders": [
+        {
+          "id": "hole0",
+          "c": [
+            50,
+            25
+          ],
+          "r": 2,
+          "low": -7.0,
+          "high": 7.0,
+          "sign": -1,
+          "blind": false
+        },
+        {
+          "id": "hole1",
+          "c": [
+            60,
+            25
+          ],
+          "r": 2,
+          "low": -7.0,
+          "high": 7.0,
+          "sign": -1,
+          "blind": false
+        },
+        {
+          "id": "hole2",
+          "c": [
+            70,
+            25
+          ],
+          "r": 2,
+          "low": -7.0,
+          "high": 7.0,
+          "sign": -1,
+          "blind": false
+        }
+      ],
+      "vertices": 764,
+      "triangles": 1536,
+      "invalidIndexTriangles": [],
+      "indexedEdges": 2304,
+      "badIndexedOppositeEdges": [],
+      "badIndexedOppositeEdgeCount": 0,
+      "euler": -4,
+      "signedVolumeDiagnostic": 69472.43114616718,
+      "triangleLabels": {
+        "ymin": 2,
+        "xmin": 2,
+        "xmax": 2,
+        "bottom": 386,
+        "top": 386,
+        "ymax": 2,
+        "wall": 756
+      },
+      "wallCandidateCensus": {
+        "(1, 1, (2,))": 756
+      },
+      "oldStripFailureCount": 0,
+      "oldStripFailures": []
+    },
+    {
+      "file": "blind-interval.3mf",
+      "artifactOrder0": 13,
+      "case": "literal-blind",
+      "label": "blind-interval",
+      "artifact": {
+        "sha256": "2828be13b5920edc89152c86d3a9845c2a0d79ce135014f112a77276dbd5cdda",
+        "bytes": 36853,
+        "modelXMLSHA256": "3bb675f987fab6d4d4be9145fa4dca1a9976db4c1e488d2cd3650781654e891b",
+        "meshObjectId": "2",
+        "metadata": {
+          "codi:SourceRevision": "747a6b9d86fea8b356b02fccf251a41acc66450c27466e41d6a9ea763694bea4",
+          "codi:ManufacturingBindings": "{\"version\":1,\"revision\":\"747a6b9d86fea8b356b02fccf251a41acc66450c27466e41d6a9ea763694bea4\",\"parts\":[{\"id\":\"part\",\"name\":\"Source-owned extent part\",\"buildResourceId\":4,\"regions\":[{\"id\":\"main\",\"bodyId\":\"worker-solid:1:[3,\\\"body\\\"]\",\"featureId\":3,\"engine\":\"occ\",\"engineRevision\":\"sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"objectId\":\"region-0\",\"meshResourceId\":2,\"componentResourceId\":3,\"materialResourceId\":1,\"materialIndex\":0}]}],\"materialPairs\":[{\"id\":\"pair-0\",\"materialId\":\"pla\",\"appearanceId\":\"blue\",\"resourceId\":1,\"index\":0}]}"
+        }
+      },
+      "sourceRawSHA256": "68ffe4943ed028ff61e715e487677bb39727c237502239ce29b272838e4abe90",
+      "frame": {
+        "origin": [
+          0,
+          0,
+          10
+        ],
+        "x": [
+          1,
+          0,
+          0
+        ],
+        "y": [
+          0,
+          1,
+          0
+        ],
+        "z": [
+          0,
+          0,
+          1
+        ]
+      },
+      "expected": {
+        "kind": "rectangle",
+        "width": 100,
+        "height": 50,
+        "sourceDepth": 10,
+        "extent": "two-sided",
+        "length": 20,
+        "holes": [
+          {
+            "u": 50,
+            "v": 25,
+            "radius": 2,
+            "depth": 6
+          }
+        ],
+        "positive": 6,
+        "negative": 6
+      },
+      "interval": [
+        -6,
+        6
+      ],
+      "cylinders": [
+        {
+          "id": "hole0",
+          "c": [
+            50,
+            25
+          ],
+          "r": 2,
+          "low": 0,
+          "high": 6,
+          "sign": -1,
+          "blind": true
+        }
+      ],
+      "vertices": 260,
+      "triangles": 516,
+      "invalidIndexTriangles": [],
+      "indexedEdges": 774,
+      "badIndexedOppositeEdges": [],
+      "badIndexedOppositeEdgeCount": 0,
+      "euler": 2,
+      "signedVolumeDiagnostic": 59924.633020881025,
+      "triangleLabels": {
+        "ymin": 2,
+        "xmin": 2,
+        "xmax": 2,
+        "bottom": 2,
+        "top": 130,
+        "ymax": 2,
+        "wall": 252,
+        "floor-hole0": 124
+      },
+      "wallCandidateCensus": {
+        "(1, 1, (2,))": 2,
+        "(1, 0, (3,))": 250
+      },
+      "oldStripFailureCount": 250,
+      "oldStripFailures": [
+        {
+          "triangleOrdinal0": 141,
+          "indices0": [
+            135,
+            132,
+            131
+          ],
+          "world": [
+            [
+              51.99751384243785,
+              25.099691771321396,
+              10.0
+            ],
+            [
+              51.99751384243785,
+              25.099691771321364,
+              16.0
+            ],
+            [
+              51.99006155073081,
+              25.199135693191604,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.99751384243785",
+              "25.099691771321396",
+              "10"
+            ],
+            [
+              "51.99751384243785",
+              "25.099691771321364",
+              "16"
+            ],
+            [
+              "51.99006155073081",
+              "25.199135693191604",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.99751384243785,
+              25.099691771321396,
+              0.0
+            ],
+            [
+              51.99751384243785,
+              25.099691771321364,
+              6.0
+            ],
+            [
+              51.99006155073081,
+              25.199135693191604,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.99751384243785,
+                "hex": "0x1.9ffae889949f7p+5"
+              },
+              {
+                "value": 25.099691771321396,
+                "hex": "0x1.9198566618176p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.99751384243785,
+                "hex": "0x1.9ffae889949f7p+5"
+              },
+              {
+                "value": 25.099691771321364,
+                "hex": "0x1.919856661816dp+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ],
+            [
+              {
+                "value": 51.99006155073081,
+                "hex": "0x1.9feba563eb53bp+5"
+              },
+              {
+                "value": 25.199135693191604,
+                "hex": "0x1.932fa8e89b967p+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.99006155073081,
+                    25.199135693191604
+                  ],
+                  [
+                    51.99751384243785,
+                    25.099691771321364
+                  ],
+                  [
+                    51.99751384243785,
+                    25.099691771321396
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  2.6645352591003757e-15,
+                  8.881784197001252e-16,
+                  1.7763568394002505e-15
+                ],
+                "triangleMinimumRadius": 1.9993783640016338,
+                "maximumRadialDeflection": 0.0006216359983661768,
+                "orientationDot": 1.196301255856739,
+                "z": [
+                  0.0,
+                  6.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.5966635312214379,
+              -0.04471375024223789,
+              -2.3828272817410166e-16
+            ],
+            "crossLength": 0.5983366017137519
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                135,
+                132
+              ],
+              "distanceXY": 3.197442310920451e-14,
+              "deltaXY": [
+                0.0,
+                -3.197442310920451e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                135,
+                131
+              ],
+              "distanceXY": 0.09972276695226011,
+              "deltaXY": [
+                -0.007452291707039649,
+                0.09944392187020767
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                132,
+                131
+              ],
+              "distanceXY": 0.09972276695229199,
+              "deltaXY": [
+                -0.007452291707039649,
+                0.09944392187023965
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        },
+        {
+          "triangleOrdinal0": 142,
+          "indices0": [
+            135,
+            134,
+            132
+          ],
+          "world": [
+            [
+              51.99751384243785,
+              25.099691771321396,
+              10.0
+            ],
+            [
+              52.0,
+              25.0,
+              10.0
+            ],
+            [
+              51.99751384243785,
+              25.099691771321364,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.99751384243785",
+              "25.099691771321396",
+              "10"
+            ],
+            [
+              "52",
+              "25",
+              "10"
+            ],
+            [
+              "51.99751384243785",
+              "25.099691771321364",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.99751384243785,
+              25.099691771321396,
+              0.0
+            ],
+            [
+              52.0,
+              25.0,
+              0.0
+            ],
+            [
+              51.99751384243785,
+              25.099691771321364,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.99751384243785,
+                "hex": "0x1.9ffae889949f7p+5"
+              },
+              {
+                "value": 25.099691771321396,
+                "hex": "0x1.9198566618176p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 52.0,
+                "hex": "0x1.a000000000000p+5"
+              },
+              {
+                "value": 25.0,
+                "hex": "0x1.9000000000000p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.99751384243785,
+                "hex": "0x1.9ffae889949f7p+5"
+              },
+              {
+                "value": 25.099691771321364,
+                "hex": "0x1.919856661816dp+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.99751384243785,
+                    25.099691771321364
+                  ],
+                  [
+                    51.99751384243785,
+                    25.099691771321396
+                  ],
+                  [
+                    52.0,
+                    25.0
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  2.6645352591003757e-15,
+                  0.0,
+                  8.881784197001252e-16
+                ],
+                "triangleMinimumRadius": 1.9993783640016334,
+                "maximumRadialDeflection": 0.0006216359983666209,
+                "orientationDot": 1.1963012558567554,
+                "z": [
+                  0.0,
+                  0.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.5981506279283764,
+              -0.014916945372917212,
+              -7.949345380842423e-17
+            ],
+            "crossLength": 0.598336601713759
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                135,
+                132
+              ],
+              "distanceXY": 3.197442310920451e-14,
+              "deltaXY": [
+                0.0,
+                -3.197442310920451e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                134,
+                132
+              ],
+              "distanceXY": 0.0997227669522612,
+              "deltaXY": [
+                -0.0024861575621528686,
+                0.09969177132136409
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                135,
+                134
+              ],
+              "distanceXY": 0.09972276695229318,
+              "deltaXY": [
+                0.0024861575621528686,
+                -0.09969177132139606
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        },
+        {
+          "triangleOrdinal0": 143,
+          "indices0": [
+            136,
+            131,
+            130
+          ],
+          "world": [
+            [
+              51.9900615507308,
+              25.199135693191632,
+              10.0
+            ],
+            [
+              51.99006155073081,
+              25.199135693191604,
+              16.0
+            ],
+            [
+              51.97766165245026,
+              25.29808453235232,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.9900615507308",
+              "25.199135693191632",
+              "10"
+            ],
+            [
+              "51.99006155073081",
+              "25.199135693191604",
+              "16"
+            ],
+            [
+              "51.97766165245026",
+              "25.29808453235232",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.9900615507308,
+              25.199135693191632,
+              0.0
+            ],
+            [
+              51.99006155073081,
+              25.199135693191604,
+              6.0
+            ],
+            [
+              51.97766165245026,
+              25.29808453235232,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.9900615507308,
+                "hex": "0x1.9feba563eb53ap+5"
+              },
+              {
+                "value": 25.199135693191632,
+                "hex": "0x1.932fa8e89b96fp+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.99006155073081,
+                "hex": "0x1.9feba563eb53bp+5"
+              },
+              {
+                "value": 25.199135693191604,
+                "hex": "0x1.932fa8e89b967p+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ],
+            [
+              {
+                "value": 51.97766165245026,
+                "hex": "0x1.9fd24045be9e1p+5"
+              },
+              {
+                "value": 25.29808453235232,
+                "hex": "0x1.94c4f4495e58cp+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.97766165245026,
+                    25.29808453235232
+                  ],
+                  [
+                    51.9900615507308,
+                    25.199135693191632
+                  ],
+                  [
+                    51.99006155073081,
+                    25.199135693191604
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  -2.4424906541753444e-15,
+                  1.7763568394002505e-15,
+                  -2.886579864025407e-15
+                ],
+                "triangleMinimumRadius": 1.9993783640016303,
+                "maximumRadialDeflection": 0.0006216359983697295,
+                "orientationDot": 1.196301255856744,
+                "z": [
+                  0.0,
+                  6.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.5936930349642964,
+              -0.0743993896832933,
+              3.5064748287908666e-16
+            ],
+            "crossLength": 0.5983366017137542
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                136,
+                131
+              ],
+              "distanceXY": 2.929642751054232e-14,
+              "deltaXY": [
+                7.105427357601002e-15,
+                -2.842170943040401e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                136,
+                130
+              ],
+              "distanceXY": 0.09972276695226329,
+              "deltaXY": [
+                -0.012399898280541777,
+                0.09894883916068764
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                131,
+                130
+              ],
+              "distanceXY": 0.09972276695229237,
+              "deltaXY": [
+                -0.012399898280548882,
+                0.09894883916071606
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        },
+        {
+          "triangleOrdinal0": 144,
+          "indices0": [
+            136,
+            135,
+            131
+          ],
+          "world": [
+            [
+              51.9900615507308,
+              25.199135693191632,
+              10.0
+            ],
+            [
+              51.99751384243785,
+              25.099691771321396,
+              10.0
+            ],
+            [
+              51.99006155073081,
+              25.199135693191604,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.9900615507308",
+              "25.199135693191632",
+              "10"
+            ],
+            [
+              "51.99751384243785",
+              "25.099691771321396",
+              "10"
+            ],
+            [
+              "51.99006155073081",
+              "25.199135693191604",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.9900615507308,
+              25.199135693191632,
+              0.0
+            ],
+            [
+              51.99751384243785,
+              25.099691771321396,
+              0.0
+            ],
+            [
+              51.99006155073081,
+              25.199135693191604,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.9900615507308,
+                "hex": "0x1.9feba563eb53ap+5"
+              },
+              {
+                "value": 25.199135693191632,
+                "hex": "0x1.932fa8e89b96fp+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.99751384243785,
+                "hex": "0x1.9ffae889949f7p+5"
+              },
+              {
+                "value": 25.099691771321396,
+                "hex": "0x1.9198566618176p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.99006155073081,
+                "hex": "0x1.9feba563eb53bp+5"
+              },
+              {
+                "value": 25.199135693191604,
+                "hex": "0x1.932fa8e89b967p+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.9900615507308,
+                    25.199135693191632
+                  ],
+                  [
+                    51.99006155073081,
+                    25.199135693191604
+                  ],
+                  [
+                    51.99751384243785,
+                    25.099691771321396
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  -2.4424906541753444e-15,
+                  2.6645352591003757e-15,
+                  1.7763568394002505e-15
+                ],
+                "triangleMinimumRadius": 1.9993783640016325,
+                "maximumRadialDeflection": 0.000621635998367509,
+                "orientationDot": 1.196301255856704,
+                "z": [
+                  0.0,
+                  0.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.5966635312214166,
+              -0.044713750242280526,
+              4.947846935156198e-16
+            ],
+            "crossLength": 0.5983366017137338
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                136,
+                131
+              ],
+              "distanceXY": 2.929642751054232e-14,
+              "deltaXY": [
+                7.105427357601002e-15,
+                -2.842170943040401e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                135,
+                131
+              ],
+              "distanceXY": 0.09972276695226011,
+              "deltaXY": [
+                -0.007452291707039649,
+                0.09944392187020767
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                136,
+                135
+              ],
+              "distanceXY": 0.09972276695228897,
+              "deltaXY": [
+                0.007452291707046754,
+                -0.0994439218702361
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        },
+        {
+          "triangleOrdinal0": 145,
+          "indices0": [
+            137,
+            130,
+            129
+          ],
+          "world": [
+            [
+              51.97766165245026,
+              25.298084532352348,
+              10.0
+            ],
+            [
+              51.97766165245026,
+              25.29808453235232,
+              16.0
+            ],
+            [
+              51.96034497569709,
+              25.396292286398765,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.97766165245026",
+              "25.298084532352348",
+              "10"
+            ],
+            [
+              "51.97766165245026",
+              "25.29808453235232",
+              "16"
+            ],
+            [
+              "51.96034497569709",
+              "25.396292286398765",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.97766165245026,
+              25.298084532352348,
+              0.0
+            ],
+            [
+              51.97766165245026,
+              25.29808453235232,
+              6.0
+            ],
+            [
+              51.96034497569709,
+              25.396292286398765,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.97766165245026,
+                "hex": "0x1.9fd24045be9e1p+5"
+              },
+              {
+                "value": 25.298084532352348,
+                "hex": "0x1.94c4f4495e594p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.97766165245026,
+                "hex": "0x1.9fd24045be9e1p+5"
+              },
+              {
+                "value": 25.29808453235232,
+                "hex": "0x1.94c4f4495e58cp+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ],
+            [
+              {
+                "value": 51.96034497569709,
+                "hex": "0x1.9faec958bbf9bp+5"
+              },
+              {
+                "value": 25.396292286398765,
+                "hex": "0x1.965736949bd61p+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.96034497569709,
+                    25.396292286398765
+                  ],
+                  [
+                    51.97766165245026,
+                    25.29808453235232
+                  ],
+                  [
+                    51.97766165245026,
+                    25.298084532352348
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  1.3322676295501878e-15,
+                  -2.886579864025407e-15,
+                  -3.3306690738754696e-15
+                ],
+                "triangleMinimumRadius": 1.9993783640016294,
+                "maximumRadialDeflection": 0.0006216359983706177,
+                "orientationDot": 1.1963012558567134,
+                "z": [
+                  0.0,
+                  6.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.5892465242786713,
+              -0.10390006051900968,
+              -4.921695549787808e-16
+            ],
+            "crossLength": 0.5983366017137416
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                137,
+                130
+              ],
+              "distanceXY": 2.842170943040401e-14,
+              "deltaXY": [
+                0.0,
+                -2.842170943040401e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                137,
+                129
+              ],
+              "distanceXY": 0.09972276695226227,
+              "deltaXY": [
+                -0.01731667675316828,
+                0.0982077540464168
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                130,
+                129
+              ],
+              "distanceXY": 0.09972276695229026,
+              "deltaXY": [
+                -0.01731667675316828,
+                0.09820775404644522
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        },
+        {
+          "triangleOrdinal0": 146,
+          "indices0": [
+            137,
+            136,
+            130
+          ],
+          "world": [
+            [
+              51.97766165245026,
+              25.298084532352348,
+              10.0
+            ],
+            [
+              51.9900615507308,
+              25.199135693191632,
+              10.0
+            ],
+            [
+              51.97766165245026,
+              25.29808453235232,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.97766165245026",
+              "25.298084532352348",
+              "10"
+            ],
+            [
+              "51.9900615507308",
+              "25.199135693191632",
+              "10"
+            ],
+            [
+              "51.97766165245026",
+              "25.29808453235232",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.97766165245026,
+              25.298084532352348,
+              0.0
+            ],
+            [
+              51.9900615507308,
+              25.199135693191632,
+              0.0
+            ],
+            [
+              51.97766165245026,
+              25.29808453235232,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.97766165245026,
+                "hex": "0x1.9fd24045be9e1p+5"
+              },
+              {
+                "value": 25.298084532352348,
+                "hex": "0x1.94c4f4495e594p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.9900615507308,
+                "hex": "0x1.9feba563eb53ap+5"
+              },
+              {
+                "value": 25.199135693191632,
+                "hex": "0x1.932fa8e89b96fp+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.97766165245026,
+                "hex": "0x1.9fd24045be9e1p+5"
+              },
+              {
+                "value": 25.29808453235232,
+                "hex": "0x1.94c4f4495e58cp+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.97766165245026,
+                    25.29808453235232
+                  ],
+                  [
+                    51.97766165245026,
+                    25.298084532352348
+                  ],
+                  [
+                    51.9900615507308,
+                    25.199135693191632
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  1.3322676295501878e-15,
+                  -2.4424906541753444e-15,
+                  -2.886579864025407e-15
+                ],
+                "triangleMinimumRadius": 1.9993783640016303,
+                "maximumRadialDeflection": 0.0006216359983697295,
+                "orientationDot": 1.1963012558567307,
+                "z": [
+                  0.0,
+                  0.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.5936930349642964,
+              -0.07439938968325066,
+              -3.5242630589612465e-16
+            ],
+            "crossLength": 0.5983366017137489
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                137,
+                130
+              ],
+              "distanceXY": 2.842170943040401e-14,
+              "deltaXY": [
+                0.0,
+                -2.842170943040401e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                136,
+                130
+              ],
+              "distanceXY": 0.09972276695226329,
+              "deltaXY": [
+                -0.012399898280541777,
+                0.09894883916068764
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                137,
+                136
+              ],
+              "distanceXY": 0.09972276695229149,
+              "deltaXY": [
+                0.012399898280541777,
+                -0.09894883916071606
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        },
+        {
+          "triangleOrdinal0": 147,
+          "indices0": [
+            138,
+            129,
+            128
+          ],
+          "world": [
+            [
+              51.96034497569709,
+              25.396292286398793,
+              10.0
+            ],
+            [
+              51.96034497569709,
+              25.396292286398765,
+              16.0
+            ],
+            [
+              51.93815457245816,
+              25.49351479538056,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.96034497569709",
+              "25.396292286398793",
+              "10"
+            ],
+            [
+              "51.96034497569709",
+              "25.396292286398765",
+              "16"
+            ],
+            [
+              "51.93815457245816",
+              "25.49351479538056",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.96034497569709,
+              25.396292286398793,
+              0.0
+            ],
+            [
+              51.96034497569709,
+              25.396292286398765,
+              6.0
+            ],
+            [
+              51.93815457245816,
+              25.49351479538056,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.96034497569709,
+                "hex": "0x1.9faec958bbf9bp+5"
+              },
+              {
+                "value": 25.396292286398793,
+                "hex": "0x1.965736949bd69p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.96034497569709,
+                "hex": "0x1.9faec958bbf9bp+5"
+              },
+              {
+                "value": 25.396292286398765,
+                "hex": "0x1.965736949bd61p+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ],
+            [
+              {
+                "value": 51.93815457245816,
+                "hex": "0x1.9f81572f3a67cp+5"
+              },
+              {
+                "value": 25.49351479538056,
+                "hex": "0x1.97e56fc52406bp+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.93815457245816,
+                    25.49351479538056
+                  ],
+                  [
+                    51.96034497569709,
+                    25.396292286398765
+                  ],
+                  [
+                    51.96034497569709,
+                    25.396292286398793
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  2.220446049250313e-15,
+                  -3.3306690738754696e-15,
+                  -3.1086244689504383e-15
+                ],
+                "triangleMinimumRadius": 1.9993783640016292,
+                "maximumRadialDeflection": 0.0006216359983708397,
+                "orientationDot": 1.1963012558567452,
+                "z": [
+                  0.0,
+                  6.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.5833350538907638,
+              -0.1331424194335824,
+              -6.306891930003758e-16
+            ],
+            "crossLength": 0.598336601713758
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                138,
+                129
+              ],
+              "distanceXY": 2.842170943040401e-14,
+              "deltaXY": [
+                0.0,
+                -2.842170943040401e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                138,
+                128
+              ],
+              "distanceXY": 0.09972276695226528,
+              "deltaXY": [
+                -0.0221904032389304,
+                0.09722250898176554
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                129,
+                128
+              ],
+              "distanceXY": 0.099722766952293,
+              "deltaXY": [
+                -0.0221904032389304,
+                0.09722250898179396
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        },
+        {
+          "triangleOrdinal0": 148,
+          "indices0": [
+            138,
+            137,
+            129
+          ],
+          "world": [
+            [
+              51.96034497569709,
+              25.396292286398793,
+              10.0
+            ],
+            [
+              51.97766165245026,
+              25.298084532352348,
+              10.0
+            ],
+            [
+              51.96034497569709,
+              25.396292286398765,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.96034497569709",
+              "25.396292286398793",
+              "10"
+            ],
+            [
+              "51.97766165245026",
+              "25.298084532352348",
+              "10"
+            ],
+            [
+              "51.96034497569709",
+              "25.396292286398765",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.96034497569709,
+              25.396292286398793,
+              0.0
+            ],
+            [
+              51.97766165245026,
+              25.298084532352348,
+              0.0
+            ],
+            [
+              51.96034497569709,
+              25.396292286398765,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.96034497569709,
+                "hex": "0x1.9faec958bbf9bp+5"
+              },
+              {
+                "value": 25.396292286398793,
+                "hex": "0x1.965736949bd69p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.97766165245026,
+                "hex": "0x1.9fd24045be9e1p+5"
+              },
+              {
+                "value": 25.298084532352348,
+                "hex": "0x1.94c4f4495e594p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.96034497569709,
+                "hex": "0x1.9faec958bbf9bp+5"
+              },
+              {
+                "value": 25.396292286398765,
+                "hex": "0x1.965736949bd61p+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.96034497569709,
+                    25.396292286398765
+                  ],
+                  [
+                    51.96034497569709,
+                    25.396292286398793
+                  ],
+                  [
+                    51.97766165245026,
+                    25.298084532352348
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  2.220446049250313e-15,
+                  1.3322676295501878e-15,
+                  -3.3306690738754696e-15
+                ],
+                "triangleMinimumRadius": 1.999378364001632,
+                "maximumRadialDeflection": 0.0006216359983679531,
+                "orientationDot": 1.19630125585672,
+                "z": [
+                  0.0,
+                  0.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.5892465242786713,
+              -0.10390006051900968,
+              -4.921695549787808e-16
+            ],
+            "crossLength": 0.5983366017137416
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                138,
+                129
+              ],
+              "distanceXY": 2.842170943040401e-14,
+              "deltaXY": [
+                0.0,
+                -2.842170943040401e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                137,
+                129
+              ],
+              "distanceXY": 0.09972276695226227,
+              "deltaXY": [
+                -0.01731667675316828,
+                0.0982077540464168
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                138,
+                137
+              ],
+              "distanceXY": 0.09972276695229026,
+              "deltaXY": [
+                0.01731667675316828,
+                -0.09820775404644522
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        },
+        {
+          "triangleOrdinal0": 149,
+          "indices0": [
+            139,
+            128,
+            127
+          ],
+          "world": [
+            [
+              51.93815457245815,
+              25.493514795380587,
+              10.0
+            ],
+            [
+              51.93815457245816,
+              25.49351479538056,
+              16.0
+            ],
+            [
+              51.91114561157229,
+              25.58951034882178,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.93815457245815",
+              "25.493514795380587",
+              "10"
+            ],
+            [
+              "51.93815457245816",
+              "25.49351479538056",
+              "16"
+            ],
+            [
+              "51.91114561157229",
+              "25.58951034882178",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.93815457245815,
+              25.493514795380587,
+              0.0
+            ],
+            [
+              51.93815457245816,
+              25.49351479538056,
+              6.0
+            ],
+            [
+              51.91114561157229,
+              25.58951034882178,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.93815457245815,
+                "hex": "0x1.9f81572f3a67bp+5"
+              },
+              {
+                "value": 25.493514795380587,
+                "hex": "0x1.97e56fc524073p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.93815457245816,
+                "hex": "0x1.9f81572f3a67cp+5"
+              },
+              {
+                "value": 25.49351479538056,
+                "hex": "0x1.97e56fc52406bp+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ],
+            [
+              {
+                "value": 51.91114561157229,
+                "hex": "0x1.9f4a06b5dcc67p+5"
+              },
+              {
+                "value": 25.58951034882178,
+                "hex": "0x1.996ea2674d7d5p+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.91114561157229,
+                    25.58951034882178
+                  ],
+                  [
+                    51.93815457245815,
+                    25.493514795380587
+                  ],
+                  [
+                    51.93815457245816,
+                    25.49351479538056
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  -2.886579864025407e-15,
+                  -3.1086244689504383e-15,
+                  -2.886579864025407e-15
+                ],
+                "triangleMinimumRadius": 1.9993783640016294,
+                "maximumRadialDeflection": 0.0006216359983706177,
+                "orientationDot": 1.1963012558567179,
+                "z": [
+                  0.0,
+                  6.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.5759733206473214,
+              -0.1620537653152354,
+              -8.555140668612207e-17
+            ],
+            "crossLength": 0.5983366017137407
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                139,
+                128
+              ],
+              "distanceXY": 2.929642751054232e-14,
+              "deltaXY": [
+                7.105427357601002e-15,
+                -2.842170943040401e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                139,
+                127
+              ],
+              "distanceXY": 0.09972276695226083,
+              "deltaXY": [
+                -0.027008960885865463,
+                0.09599555344119182
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                128,
+                127
+              ],
+              "distanceXY": 0.09972276695229011,
+              "deltaXY": [
+                -0.02700896088587257,
+                0.09599555344122024
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        },
+        {
+          "triangleOrdinal0": 150,
+          "indices0": [
+            139,
+            138,
+            128
+          ],
+          "world": [
+            [
+              51.93815457245815,
+              25.493514795380587,
+              10.0
+            ],
+            [
+              51.96034497569709,
+              25.396292286398793,
+              10.0
+            ],
+            [
+              51.93815457245816,
+              25.49351479538056,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.93815457245815",
+              "25.493514795380587",
+              "10"
+            ],
+            [
+              "51.96034497569709",
+              "25.396292286398793",
+              "10"
+            ],
+            [
+              "51.93815457245816",
+              "25.49351479538056",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.93815457245815,
+              25.493514795380587,
+              0.0
+            ],
+            [
+              51.96034497569709,
+              25.396292286398793,
+              0.0
+            ],
+            [
+              51.93815457245816,
+              25.49351479538056,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.93815457245815,
+                "hex": "0x1.9f81572f3a67bp+5"
+              },
+              {
+                "value": 25.493514795380587,
+                "hex": "0x1.97e56fc524073p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.96034497569709,
+                "hex": "0x1.9faec958bbf9bp+5"
+              },
+              {
+                "value": 25.396292286398793,
+                "hex": "0x1.965736949bd69p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.93815457245816,
+                "hex": "0x1.9f81572f3a67cp+5"
+              },
+              {
+                "value": 25.49351479538056,
+                "hex": "0x1.97e56fc52406bp+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.93815457245815,
+                    25.493514795380587
+                  ],
+                  [
+                    51.93815457245816,
+                    25.49351479538056
+                  ],
+                  [
+                    51.96034497569709,
+                    25.396292286398793
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  -2.886579864025407e-15,
+                  2.220446049250313e-15,
+                  -3.1086244689504383e-15
+                ],
+                "triangleMinimumRadius": 1.9993783640016323,
+                "maximumRadialDeflection": 0.0006216359983677311,
+                "orientationDot": 1.196301255856766,
+                "z": [
+                  0.0,
+                  0.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.5833350538907638,
+              -0.13314241943362504,
+              6.011828209327021e-17
+            ],
+            "crossLength": 0.5983366017137675
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                139,
+                128
+              ],
+              "distanceXY": 2.929642751054232e-14,
+              "deltaXY": [
+                7.105427357601002e-15,
+                -2.842170943040401e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                138,
+                128
+              ],
+              "distanceXY": 0.09972276695226528,
+              "deltaXY": [
+                -0.0221904032389304,
+                0.09722250898176554
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                139,
+                138
+              ],
+              "distanceXY": 0.09972276695229458,
+              "deltaXY": [
+                0.022190403238937506,
+                -0.09722250898179396
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        },
+        {
+          "triangleOrdinal0": 151,
+          "indices0": [
+            140,
+            127,
+            126
+          ],
+          "world": [
+            [
+              51.91114561157228,
+              25.589510348821808,
+              10.0
+            ],
+            [
+              51.91114561157229,
+              25.58951034882178,
+              16.0
+            ],
+            [
+              51.879385241571825,
+              25.68404028665131,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.91114561157228",
+              "25.589510348821808",
+              "10"
+            ],
+            [
+              "51.91114561157229",
+              "25.58951034882178",
+              "16"
+            ],
+            [
+              "51.879385241571825",
+              "25.68404028665131",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.91114561157228,
+              25.589510348821808,
+              0.0
+            ],
+            [
+              51.91114561157229,
+              25.58951034882178,
+              6.0
+            ],
+            [
+              51.879385241571825,
+              25.68404028665131,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.91114561157228,
+                "hex": "0x1.9f4a06b5dcc66p+5"
+              },
+              {
+                "value": 25.589510348821808,
+                "hex": "0x1.996ea2674d7ddp+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.91114561157229,
+                "hex": "0x1.9f4a06b5dcc67p+5"
+              },
+              {
+                "value": 25.58951034882178,
+                "hex": "0x1.996ea2674d7d5p+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ],
+            [
+              {
+                "value": 51.879385241571825,
+                "hex": "0x1.9f08fb212916ap+5"
+              },
+              {
+                "value": 25.68404028665131,
+                "hex": "0x1.9af1d43a45058p+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.879385241571825,
+                    25.68404028665131
+                  ],
+                  [
+                    51.91114561157228,
+                    25.589510348821808
+                  ],
+                  [
+                    51.91114561157229,
+                    25.58951034882178
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  -1.3322676295501878e-15,
+                  -2.886579864025407e-15,
+                  -1.7763568394002505e-15
+                ],
+                "triangleMinimumRadius": 1.99937836400163,
+                "maximumRadialDeflection": 0.0006216359983699515,
+                "orientationDot": 1.1963012558567458,
+                "z": [
+                  0.0,
+                  6.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.567179626977186,
+              -0.190562220002775,
+              -2.310084011889941e-16
+            ],
+            "crossLength": 0.598336601713756
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                140,
+                127
+              ],
+              "distanceXY": 2.929642751054232e-14,
+              "deltaXY": [
+                7.105427357601002e-15,
+                -2.842170943040401e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                140,
+                126
+              ],
+              "distanceXY": 0.09972276695226347,
+              "deltaXY": [
+                -0.031760370000455396,
+                0.09452993782950259
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                127,
+                126
+              ],
+              "distanceXY": 0.09972276695229268,
+              "deltaXY": [
+                -0.0317603700004625,
+                0.09452993782953101
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        },
+        {
+          "triangleOrdinal0": 152,
+          "indices0": [
+            140,
+            139,
+            127
+          ],
+          "world": [
+            [
+              51.91114561157228,
+              25.589510348821808,
+              10.0
+            ],
+            [
+              51.93815457245815,
+              25.493514795380587,
+              10.0
+            ],
+            [
+              51.91114561157229,
+              25.58951034882178,
+              16.0
+            ]
+          ],
+          "worldXMLTokens": [
+            [
+              "51.91114561157228",
+              "25.589510348821808",
+              "10"
+            ],
+            [
+              "51.93815457245815",
+              "25.493514795380587",
+              "10"
+            ],
+            [
+              "51.91114561157229",
+              "25.58951034882178",
+              "16"
+            ]
+          ],
+          "local": [
+            [
+              51.91114561157228,
+              25.589510348821808,
+              0.0
+            ],
+            [
+              51.93815457245815,
+              25.493514795380587,
+              0.0
+            ],
+            [
+              51.91114561157229,
+              25.58951034882178,
+              6.0
+            ]
+          ],
+          "localBinary64": [
+            [
+              {
+                "value": 51.91114561157228,
+                "hex": "0x1.9f4a06b5dcc66p+5"
+              },
+              {
+                "value": 25.589510348821808,
+                "hex": "0x1.996ea2674d7ddp+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.93815457245815,
+                "hex": "0x1.9f81572f3a67bp+5"
+              },
+              {
+                "value": 25.493514795380587,
+                "hex": "0x1.97e56fc524073p+4"
+              },
+              {
+                "value": 0.0,
+                "hex": "0x0.0p+0"
+              }
+            ],
+            [
+              {
+                "value": 51.91114561157229,
+                "hex": "0x1.9f4a06b5dcc67p+5"
+              },
+              {
+                "value": 25.58951034882178,
+                "hex": "0x1.996ea2674d7d5p+4"
+              },
+              {
+                "value": 6.0,
+                "hex": "0x1.8000000000000p+2"
+              }
+            ]
+          ],
+          "classification": {
+            "label": "wall",
+            "orientation": true,
+            "candidates": [
+              {
+                "cylinder": {
+                  "id": "hole0",
+                  "c": [
+                    50,
+                    25
+                  ],
+                  "r": 2,
+                  "low": 0,
+                  "high": 6,
+                  "sign": -1,
+                  "blind": true
+                },
+                "uniqueXY": 3,
+                "xy": [
+                  [
+                    51.91114561157228,
+                    25.589510348821808
+                  ],
+                  [
+                    51.91114561157229,
+                    25.58951034882178
+                  ],
+                  [
+                    51.93815457245815,
+                    25.493514795380587
+                  ]
+                ],
+                "vertexRadiusResiduals": [
+                  -1.3322676295501878e-15,
+                  -2.886579864025407e-15,
+                  -2.886579864025407e-15
+                ],
+                "triangleMinimumRadius": 1.99937836400163,
+                "maximumRadialDeflection": 0.0006216359983699515,
+                "orientationDot": 1.1963012558567137,
+                "z": [
+                  0.0,
+                  0.0,
+                  6.0
+                ]
+              }
+            ],
+            "oldCandidates": 0,
+            "normal": [
+              -0.5759733206473214,
+              -0.1620537653152354,
+              -8.555140668612207e-17
+            ],
+            "crossLength": 0.5983366017137407
+          },
+          "pairsByXYDistance": [
+            {
+              "positions": [
+                0,
+                2
+              ],
+              "indices": [
+                140,
+                127
+              ],
+              "distanceXY": 2.929642751054232e-14,
+              "deltaXY": [
+                7.105427357601002e-15,
+                -2.842170943040401e-14
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                1,
+                2
+              ],
+              "indices": [
+                139,
+                127
+              ],
+              "distanceXY": 0.09972276695226083,
+              "deltaXY": [
+                -0.027008960885865463,
+                0.09599555344119182
+              ],
+              "deltaZ": 6.0
+            },
+            {
+              "positions": [
+                0,
+                1
+              ],
+              "indices": [
+                140,
+                139
+              ],
+              "distanceXY": 0.09972276695229011,
+              "deltaXY": [
+                0.02700896088587257,
+                -0.09599555344122024
+              ],
+              "deltaZ": 0.0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "firstOldStripFailure": {
+    "file": "blind-interval.3mf",
+    "artifactOrder0": 13,
+    "triangleOrdinal0": 141,
+    "indices0": [
+      135,
+      132,
+      131
+    ]
+  },
+  "diagnosticScriptSHA256": "72b0b78bcb72171fcc00e490e19b8816bb49a68f53ca73959258e4700cfca950"
+}
