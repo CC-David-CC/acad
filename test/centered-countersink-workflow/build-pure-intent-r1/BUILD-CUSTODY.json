@@ -1,0 +1,61 @@
+{
+  "status": "BUILT_NOT_RUNTIME_QUALIFIED",
+  "source": "ad5bb96eb7ce0ff5d22b5b93b5b0266bd906f830",
+  "desktop": "9ea4a1993ad8afa10ea9a24e9c9a4f7955e47420",
+  "normalBuildSession": 75654,
+  "normalBuildExitCode": 0,
+  "webpackSuccessfulCompletions": 10,
+  "stageSession": 35919,
+  "stageExitCode": 0,
+  "pins": 213,
+  "stagedAssets": 507,
+  "appFiles": 580,
+  "currentWhole": {
+    "session": 17458,
+    "statusAtCapture": "RUNNING",
+    "evidence": "/mnt/data10tb/codi-acad-foundation-next-counterbore-20261109-r4"
+  },
+  "privateFixture": {
+    "port": 21052,
+    "serviceSession": 21333,
+    "forwardSession": 18344,
+    "reverseCdpPort": 19551,
+    "browserCdpPort": 19331,
+    "relayEnabled": false
+  },
+  "files": [
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r13.sh",
+      "bytes": 2508,
+      "sha256": "3da70c50f51f00a4266accc837c42fb28542360ad322b2223a53b935932b3d4f"
+    },
+    {
+      "file": "codi-acad-foundation-next-build-20261109-r13.log",
+      "bytes": 177775,
+      "sha256": "94dc6cf4b317c50461ce1ac84757ce14ea9f0367a442a93a10e25c600d15fbce"
+    },
+    {
+      "file": "codi-acad-foundation-next-fixture-20261109-r13.sh",
+      "bytes": 1588,
+      "sha256": "892df7fdc6e4c09f2e78a78aaa9be3d46c23a8d7bb8a5c95de3aaa9bae3aa8f8"
+    },
+    {
+      "file": "codi-acad-foundation-next-stage-20261109-r13.log",
+      "bytes": 1962,
+      "sha256": "847d4e6cecf22c8fb11a1d12f6eb6037c7f007142f5b51b408a2c8c407ba46ae"
+    },
+    {
+      "file": "codi-acad-foundation-next-pins-20261109-r13.json",
+      "bytes": 30562,
+      "sha256": "053af03a7998dd8812bd76031c01a3009801f43f9bbd68a9254543cb23e68e1d"
+    },
+    {
+      "file": "codi-acad-counterbore-whole-20261109-r4.sh",
+      "bytes": 1223,
+      "sha256": "7d27effbcaae075f21d0cd3213b6b4533deaf8dc8b326f99d7fd498ade92d8ff"
+    }
+  ],
+  "countersinkEnabled": false,
+  "nativePairChanged": false,
+  "publicMainBetaPromoted": false
+}
