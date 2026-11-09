@@ -93,15 +93,18 @@ surface/accuracy proof, broad scene coverage or full Gate1 qualification.
 See [operation inventory](../reviews/CAD1-OCCT-LIBRARY-FIT-INVENTORY-20261109.md),
 [reader identity review](../reviews/LIB3MF-RESOURCE-PROPERTY-NAMESPACE-REVIEW-20261109.md)
 and [QName review](../reviews/LIB3MF-METADATA-QNAME-REVIEW-20261109.md).
-L3 remains OPEN: a general analytic-surface/coverage certificate must replace the
-invalid exact-strip assumption without welding, skipped triangles or new budgets.
+L3 finite extent corpus is now QUALIFIED: corrected complete artifact session15053
+PASS0 on95af055 plus both original SVG reviews.29 exact planar invocations/seven
+exact cylinder certificates retain original geometry and budgets. Evidence lives
+in test/selected-profile-extents-workflow/evidence-r5. This closes the invalid
+exact-strip assumption for the stated finite family, not every CAD surface.
 Existing production runtime is unchanged. In parallel Root approved the small
 finite-curve binding source packet8f1a17a. Native header eea7128b and Core
 protocol56eeb1c are frozen on both LANs, not mounted, executed, actionable or
 qualified. Exact cylinder proof/source reviews are complete. Planar adapter
 420ea4e built under90308; actual build custody2e95108 and bounded invoker
-fe502d8 are retained. Indexed patch-role composition and complete corrected
-artifact execution still block L3; no tolerance or geometry changes were made.
+fe502d8 are retained. Indexed patch-role composition74bf6b4 and complete corrected artifact execution
+now pass; no tolerance or geometry changes were made.
 
 ## Work queue and dependencies
 
@@ -110,7 +113,7 @@ artifact execution still block L3; no tolerance or geometry changes were made.
 | L0 | Freeze actual inputs, failures and candidate roles | Existing whole output | Immutable original manifests/reports; this plan | DONE for current extent corpus |
 | L1 | Inventory OCCT binding gaps and drawing algorithms | L0 | Capability-to-API/source matrix; reuse/adapter/custom decision for each missing competency | SOURCE INVENTORY DONE41f7189; header/protocol frozen, protected mounting pending |
 | L2 | Pin and assess native validators on R730 | L0 | One complete six-mesh comparison report, raw-data custody and measured costs | FIRST CORPUS PASS0523b3f; broader scene/material coverage and browser fit pending |
-| L3 | Close general finite-surface accuracy proof | L2 plus source-intent contract | Full-surface/coverage proof with explicit error terms; original failure retained | SOURCE PROOF/BUILD READY; complete composed artifact execution pending, blocking extent qualification |
+| L3 | Close general finite-surface accuracy proof | L2 plus source-intent contract | Full-surface/coverage proof with explicit error terms; original failure retained | DONE for current finite extent corpus: full artifact15053 and actual SVG reviews PASS; broader surfaces remain separate |
 | L4 | Integrate selected general operations and drawing pieces | L1, existing source packets | Small Worker adapters and shared commands with precise ownership/failures | QUEUED; existing C11 work continues |
 | L5 | Qualify browser cost/lifecycle for selected shipped pieces | L2/L4 | Initialization, peak memory, responsiveness, cancellation, retirement and isolation evidence | QUEUED |
 | L6 | Composed functional qualification and final beta | L3/L4/L5 and remaining Gate 1 competencies | Whole workflows, independent artifacts, actual SVG reviews, handoff and both LAN copies | OPEN |
