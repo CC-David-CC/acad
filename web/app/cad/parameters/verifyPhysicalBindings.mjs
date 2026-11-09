@@ -1,4 +1,4 @@
-import {physicalBindingFields} from './physicalBindingFields.mjs';
+import {physicalBindingFields,physicalBindingFieldRoles} from './physicalBindingFields.mjs';
 // Structural and identity check only. Dimensional evaluation and coupled
 // geometry validation occur in the pinned Worker, not on the UI thread.
 export function verifyPhysicalBindings(manifest,bindings){
@@ -8,7 +8,8 @@ export function verifyPhysicalBindings(manifest,bindings){
   if(expected.kind==='feature'){
    if(expected.index!==actual.index||expected.featureId!==actual.featureId||expected.type!==actual.type||!expected.fields||!actual.fields||!actual.dimensions)throw Error('The parameter binding identity changed.');
    const keys=Object.keys(expected.fields).sort();if(keys.length>10||Object.keys(actual.fields).sort().join(',')!==keys.join(',')||Object.keys(actual.dimensions).sort().join(',')!==keys.join(','))throw Error('The parameter field set changed.');
-   for(const key of keys)if(actual.dimensions[key]!=='length'||typeof actual.fields[key]!=='number'||!Number.isFinite(actual.fields[key]))throw Error('Invalid resolved parameter field.');
+   const roles=Object.hasOwn(physicalBindingFieldRoles,expected.type)?physicalBindingFieldRoles[expected.type]:null;
+   for(const key of keys)if(!roles||!Object.hasOwn(roles,key)||actual.dimensions[key]!==roles[key]||typeof actual.fields[key]!=='number'||!Number.isFinite(actual.fields[key]))throw Error('Invalid resolved parameter field.');
   }else if(expected.kind==='selected-profile'){
    if(Reflect.ownKeys(actual).sort().join(',')!=='faceId,featureId,index,kind,regionId'||['index','featureId','faceId','regionId'].some(key=>expected[key]!==actual[key]))throw Error('The selected profile binding identity changed.');
   }else if(expected.kind==='rectangle'){
