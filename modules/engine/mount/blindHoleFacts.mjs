@@ -3,7 +3,7 @@ import {deriveCylinderCutWitness} from './cylinderCutWitness.mjs';
 import {validatePrismProvenance} from './ownedTopologyContract.mjs';
 import {reconcileNativeSelectionClaims} from './booleanSelectionClaims.mjs';
 import {preparePolygonProfileExtrusion} from './polygonProfilePlan.mjs';
-import {inspectFiniteCylinder} from './prismaticBoreFacts.mjs';
+import {inspectFiniteCylinder,FINITE_CYLINDER_REFUSAL_CODES} from './prismaticBoreFacts.mjs';
 const fail=message=>{throw Object.assign(Error(message),{code:'BLIND_FLOOR_UNQUALIFIED'});};
 const dot=(a,b)=>a.reduce((n,x,i)=>n+x*b[i],0),sub=(a,b)=>a.map((n,i)=>n-b[i]),cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
 export function qualifyBlindHoleFacts({sourceTopologies,result,topology,toolConstruction,toolRequest,plan,classify}){
@@ -20,7 +20,7 @@ export function qualifyBlindHoleFacts({sourceTopologies,result,topology,toolCons
  if(floor.type!=='plane'||floor.support!=='analytic-descriptor'||!['FORWARD','REVERSED'].includes(floor.orientation)||floor.wires.length!==1)fail('The actual blind floor is not an ordinary analytic plane.');
  const a=floor.analytic,normal=a.normal.map(n=>n*(floor.orientation==='FORWARD'?1:-1));
  if(Math.hypot(...cross(normal,f.z))>1e-12||dot(normal,f.z)<=0||Math.abs(dot(sub(origin,a.origin),a.normal))>1e-9)fail('The actual blind floor plane differs from the derived floor.');
- let extent;try{extent=inspectFiniteCylinder(topology,cylinder,{...f,origin,depth});}catch(e){if(!String(e?.code||'').startsWith('DRAWING_'))throw e;fail('The actual blind cylinder does not have the requested finite extent.');}
+ let extent;try{extent=inspectFiniteCylinder(topology,cylinder,{...f,origin,depth});}catch(e){if(!FINITE_CYLINDER_REFUSAL_CODES.includes(e?.code))throw e;fail('The actual blind cylinder does not have the requested finite extent.');}
  const rims=topology.faces[cylinder.resultFace-1].wires.flat().filter(use=>!use.seam).map(use=>use.edge),floorEdges=floor.wires[0].map(use=>use.edge);
  const lower=rims.filter(i=>{const edge=topology.edges[i-1];return edge.type==='circle'&&Math.abs(dot(sub(edge.analytic.center,origin),f.z))<=1e-9;});
  if(lower.length!==1||floorEdges.length!==1||floorEdges[0]!==lower[0]||topology.edges[lower[0]-1].vertices.some(i=>Math.abs(dot(sub(topology.vertices[i-1].point,a.origin),a.normal))>1e-9))fail('The blind floor boundary is not the actual lower cylindrical rim.');

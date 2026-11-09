@@ -120,3 +120,53 @@ No Native JS/WASM pair changed.
 - `build/prepare-selected-profile-assets.cjs`
 - `build/prepare-shell-profile-assets.cjs`
 - `build/prepare-step-export-profile-assets.cjs`
+
+## Root review follow-up: finite failures and allocation custody
+
+Source review found two real contract gaps, not runtime incidents. Finite
+cylinder observations now export their two exact qualification refusal codes
+from prismaticBoreFacts; blindHoleFacts forwards ONLY that finite list into
+BLIND_FLOOR_UNQUALIFIED. Unknown, resource, ownership and integrity failures
+propagate unchanged. The producer's actual mathematical/domain checks are
+unchanged; this additive leaf export also changes closed-graph source bytes.
+
+The blind operation records each fresh monotone attempted name BEFORE dispatch,
+with bounded state attempting/owned/absent/releasing/released/unknown. Count+1
+alone no longer authorizes release: actual owned-topology lookup must bind the
+exact attempted name. A failed dispatch with that proven publication leaves an
+owned cleanup obligation to outer finally. Count unchanged establishes no new
+allocation; any other count or unavailable lookup is fatal unconfirmed custody,
+never authority to release a guessed/unrelated name. Actual dispatch failures,
+including falsey thrown values, remain captured separately from cleanup faults.
+
+Every exact-name release is marked pending before calling the existing Native
+release, and requires the existing success flag plus exact count decrement.
+A throwing/potentially partial release becomes unknown and is NOT retried; other
+positively owned attempted results are still retired. Existing triangle-budget
+refusal is special only because its helper confirms that same exact release
+BEFORE throwing RESOURCE_LIMIT: the local obligation retires only with that code
+and the exact decrement. Its unknown/throwing release stays terminal instead.
+Lifetime names/triangle work are not refunded, and all existing limits remain.
+
+Finally rereads original input topology/metrics and both source/target bindings,
+retires owned nonfinal attempts, and reconciles the complete native name census
+against the initial baseline plus exactly ONE successful final result, or zero
+on refusal. A failed final census revokes and retires any positively owned final
+rather than returning it. Any unknown attempt, release/census failure is latched
+ENGINE_CLEANUP_FAILED, retaining original operation/dispatch/preservation causes;
+it cannot be returned as a recoverable geometry refusal or success. Unknown
+extra names are never blindly released. Fatal Worker termination remains the
+existing module ownership revocation boundary, not a claim of Native Release or
+immediate OS memory reclamation. No ABI/pair/quota/acceptance criteria changed.
+
+This follow-up is source-only: no tests, builds, probes or runtime execution.
+
+The existing Worker terminal boundary and controller now preserve precisely
+ENGINE_CLEANUP_FAILED for the blind job; unknown codes still become terminal
+ENGINE_FAILURE and checked measurement precision retains its existing code.
+The blind terminal branch always closes the Worker; no cleanup code is added
+to recoverable refusals. This narrow forwarding is required for typed custody
+failure to survive the existing generic error mapping, not a new ABI/schema.
+
+Follow-up bootstrap source SHA-256: `9d3823b386516cedbdb0e1567559a2fb0650210e74f5543641caf0f148d9fce8` (replaces `d4e678f52245229991a3c8709f46b4226dbe512b6412171eadc3cb0af2e43932`
+in all the same nine source guards). Root must repin after its additive merge.

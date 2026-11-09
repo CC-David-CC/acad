@@ -2,6 +2,8 @@
 // Caller authenticates actual owner/build/topology/source before invoking.
 // No public proof flag, Native ordinal, cached geometry or persistent handle.
 import {validateOwnedTopology} from './ownedTopologyContract.mjs';
+// Finite cylinder qualification only; other bore observation failures are separate.
+export const FINITE_CYLINDER_REFUSAL_CODES=Object.freeze(['DRAWING_FINITE_EXTENT_UNQUALIFIED','DRAWING_AXIS_UNSUPPORTED']);
 const tol=1e-7,dirTol=1e-8;
 const sub=(a,b)=>a.map((n,i)=>n-b[i]),add=(a,b)=>a.map((n,i)=>n+b[i]),mul=(a,n)=>a.map(x=>x*n),dot=(a,b)=>a.reduce((n,x,i)=>n+x*b[i],0),norm=a=>Math.hypot(...a),cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],near=(a,b)=>norm(sub(a,b))<=tol;
 const unavailable=reason=>{throw Object.assign(Error(reason),{code:reason});};
