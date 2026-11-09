@@ -1,0 +1,33 @@
+{
+  "status": "STAGE-PASS",
+  "qualification": false,
+  "core": "725c3806050ea639455f55e58d23e1b88e02eab0",
+  "desktop": "5ea92e084e8d74111a07e3d1ffac0a204af0c5ff",
+  "coreRebuild": false,
+  "stageSession": 1359,
+  "stageExitCode": 0,
+  "assets": 495,
+  "bundleFiles": 568,
+  "pinCount": 206,
+  "descriptionChars": 472,
+  "registryDescriptionLimit": 512,
+  "files": [
+    {
+      "file": "codi-acad-foundation-next-fixture-20261109-r9.sh",
+      "sha256": "2de3c37eb5a4316fb8374f0df8924a276a0c9710c47f84a83b3cf900968a6591",
+      "bytes": 1585
+    },
+    {
+      "file": "codi-acad-foundation-next-stage-20261109-r9.log",
+      "sha256": "b7e11eed7a666094cb76d1316a8745cc59be28a72310ee6d3ec520147af8c1fa",
+      "bytes": 840
+    },
+    {
+      "file": "codi-acad-foundation-next-pins-20261109-r9.json",
+      "sha256": "23aab1600e5a20c41920c1414589f4ac2d744e780ad33dfbea993180791a611b",
+      "bytes": 29570
+    }
+  ],
+  "nextWhole": 61449,
+  "nextWholeScope": "Complete original two-datum section/detail workflow; no independent oracle before whole PASS."
+}
