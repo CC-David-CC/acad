@@ -55,7 +55,7 @@ export function inspectWorkerMechanicalSource(model,sourceFeatureId,{registry,hi
   if(!d?.enumerable||!Object.hasOwn(d,'value')||!t?.enumerable||!Object.hasOwn(t,'value')||!p?.enumerable||!Object.hasOwn(p,'value'))return unavailable('STALE_SOURCE');
   if(t.value!==PROFILE_EXTENT_TYPE)continue;
   let captured;try{captured=captureOwnedProfileExtentFeature(p.value);}catch(error){if(Object.getOwnPropertyDescriptor(error||{},'code')?.value!=='INVALID_REQUEST')throw error;return unavailable('STALE_SOURCE');}
-  if(captured.featureId===sourceFeatureId){const suppressed=Object.getOwnPropertyDescriptor(entry,'suppressed');if(feature||suppressed&&(!suppressed.enumerable||!Object.hasOwn(suppressed,'value')||suppressed.value!==false))return unavailable('STALE_SOURCE');feature=captured;}
+  if(captured.featureId===sourceFeatureId){if(feature||Object.hasOwn(entry,'suppressed'))return unavailable('STALE_SOURCE');feature=captured;}
  }
  if(!feature||Object.keys(feature).length!==Object.keys(expected).length||Object.keys(expected).some(key=>!Object.is(feature[key],expected[key]))||registry.findFace(expected.faceId)!==observation.face||readSketch(expected.faceId)!==observation.sourceSnapshot||readParameterSource()!==observation.parameterSource||!sameMechanicalFrame(readFrame(observation.face),observation.frame))return unavailable('STALE_SOURCE');
  if(!current()||!registered()||registry.findFace(expected.faceId)!==observation.face)return unavailable('STALE_NATIVE_MODEL');

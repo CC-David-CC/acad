@@ -1,7 +1,8 @@
+import {captureExtentMechanicalSource} from './profileExtentMechanicalSource';
 import {assertHistoryControlAppendAllowed,historyControlAppendReason} from 'engine/solid/authoredHistoryState.mjs';
 import {MWorkerSolid} from 'cad/model/mworkerSolid';
 import {solidBodyId} from 'engine/solid/solidIntent.mjs';
-import {inspectWorkerSolidPatternSeeds} from 'engine/solid/solidLedger.mjs';
+import {inspectWorkerSolidPatternSeeds,inspectWorkerSolidSelections} from 'engine/solid/solidLedger.mjs';
 import {requireCadEngineBuild} from 'engine/mount/engineCatalog.mjs';
 import {genericHistoryBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {selectedProfileHistoryBudget} from 'engine/mount/selectedProfileBudget.mjs';
@@ -55,9 +56,11 @@ export function createWorkerLinearHolePatternCommands(ctx:any,submit:any,cancelE
     if(historyBuild!==build||outputBuild!==build)fail('ENGINE_REVISION_MISMATCH','The whole authored part must retain one backend build.');
     const budget=selectedProfileHistoryBudget(state.history,build.revision);
     for(const origin of origins){try{
-     const source=sourceRecord(ctx,state.history,origin,build);
+     const selection=inspectWorkerSolidSelections(model),contexts=selection.status==='available'&&selection.plan.version===2?selection.plan.sourceContexts:[],extentContexts=contexts.filter(c=>c.kind==='sketch-profile-extent'&&c.featureId===origin.featureId&&c.regionId===origin.regionId);
+     if(extentContexts.length>1)fail('UNRESOLVED_SOURCE','The pattern extent constructor context is ambiguous.');
+     const source=extentContexts.length===1?captureExtentMechanicalSource(ctx,state.history,{...origin,kind:'sketch-profile-extent'},build,model):sourceRecord(ctx,state.history,origin,build);
      if(source.captured.faceId!==witness.sourceFaceId)fail('UNRESOLVED_SOURCE','The authenticated constructor differs from current source history.');
-     const canCreate=!reason&&capacity(budget,2),row=Object.freeze({sourceProfile:'selected-rectangle',sourceQualification:'requires-worker-validation',bodyId:body.id,featureId:body.featureId,seedFeatureId:origin.seedFeatureId,sourceFeatureId:origin.featureId,sourceFaceId:witness.sourceFaceId,sourceRegionId:origin.regionId,engine:'occ',engineRevision:build.revision,budget,minimumNativeResultCost:2,canCreate,reason:reason||budget.reason||(!canCreate?'RESOURCE_LIMIT':null)});
+     const canCreate=!reason&&capacity(budget,2),row=Object.freeze({sourceProfile:'selected-rectangle',sourceQualification:source.extent?'published-worker-source-descriptor':'requires-worker-validation',bodyId:body.id,featureId:body.featureId,seedFeatureId:origin.seedFeatureId,sourceFeatureId:origin.featureId,sourceFaceId:witness.sourceFaceId,sourceRegionId:origin.regionId,engine:'occ',engineRevision:build.revision,budget,minimumNativeResultCost:2,canCreate,reason:reason||budget.reason||(!canCreate?'RESOURCE_LIMIT':null)});
      targets.push(row);records.set(body.id+'#'+origin.seedFeatureId,{row,model,ext:model.ext,tag:model.ext.workerGeometry,method:model.inspectKernelMetrics,metrics:body.metrics,witness,build,source});
     }catch(error){unsupported.push(Object.freeze({bodyId:body.id,sourceFeatureId:origin.featureId,engine:body.engine,code:error.code||'UNAVAILABLE',reason:String(error.message||error)}));}}
 
