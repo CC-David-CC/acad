@@ -1,0 +1,41 @@
+{
+  "status": "BUILD_AND_STAGE_PASS_NOT_WORKFLOW_QUALIFICATION",
+  "core": "e521860d342aa0f133a72585604dbaeafa98d37d",
+  "desktop": "843aee31ad7c7e72b74a64b0cb37967bb09ee78f",
+  "buildSession": 12568,
+  "buildExitCode": 0,
+  "webpackSuccessfulCompletions": 10,
+  "warningErrorMissingExportLines": [],
+  "stageSession": 85873,
+  "stageExitCode": 0,
+  "assets": 498,
+  "appFiles": 571,
+  "pinCount": 209,
+  "ociSHA256": "7864b6ca0e29ccc3a985d4950e02b0faf720d83f95b71e2f7e388310b4525945",
+  "bootstrapGuards": 9,
+  "firstStageLauncher": {
+    "session": 84729,
+    "exitCode": 128,
+    "result": "invalid reference rejected before fixture creation",
+    "incorrectDesktopArgument": "843aee31a71c9c3c660bdbf136427dc198d5ebd8",
+    "correction": "Use actual verified 843aee31ad7c7e72b74a64b0cb37967bb09ee78f; new stage85873."
+  },
+  "wholeSession": 38312,
+  "wholeStatusAtCapture": "RUNNING",
+  "wholeEvidence": "/tmp/codi-acad-foundation-next-section-20261109-r3",
+  "privateFixture": "http://127.0.0.1:21050/",
+  "serviceSession": 2503,
+  "forwardSession": 16681,
+  "externalRelayEnabled": false,
+  "nativePairsChanged": false,
+  "publicMainBetaPromoted": false,
+  "files": {
+    "codi-acad-foundation-next-build-20261109-r12.sh": "d0239f3dee3c7b5f1868388806ffa342b5bcbdd3b56e246863dad2d2d4bf34f6",
+    "codi-acad-foundation-next-build-20261109-r12.log": "d06e3b2790290234fc7ff5191981b2cbc506f8f63a7cb92784583734041e07d8",
+    "codi-acad-foundation-next-fixture-20261109-r10.sh": "58c96c938b8ca6eb0bd923d65cfc766d0f104e3a102d031052585abe850bab6b",
+    "codi-acad-foundation-next-stage-20261109-r10.log": "600d82c55bdd3fed8b76df3311da85e78e1d3abe65c5274472077fc62a4e94a1",
+    "codi-acad-foundation-next-fixture-20261109-r11.sh": "2588ff71545c14778d515761d5a03f20136cea1ac618a990297abdd45fba35b6",
+    "codi-acad-foundation-next-stage-20261109-r11.log": "d8bffd729ab3f62a8eaf5ed166e628352d08726f6d541a60887106c7233dd3b8",
+    "codi-acad-foundation-next-pins-20261109-r11.json": "c1e3e705b982a1d50a40bcf3fdf5a5d4c7aa2f420e31f30ac492a92e98fe9d78"
+  }
+}
