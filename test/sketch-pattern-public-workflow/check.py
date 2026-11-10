@@ -51,6 +51,32 @@ def inspect_source(s,b,control,inventory=None):
             row=one([x for x in inventory['patterns'] if x['outputId']==ids[0]],'actual pattern locator');require(row=={'outputId':ids[0],'sourceIds':p['objects'],'generatedIds':ids,'stage':stage,'index':index,'count':p['count'],'step':{'x':p['stepX'],'y':p['stepY']},'status':'available','canEdit':True,'canRemove':True},'exact current native generator correspondence')
     return src
 
+# Independent literal original fixture, before any derived pattern.
+INITIAL_PRIMITIVES=[('Point',{'x':3,'y':4}),('Segment',{'a':{'x':0,'y':0},'b':{'x':2,'y':1}}),('Circle',{'c':{'x':2,'y':8},'r':1}),('Arc',{'a':{'x':1,'y':15},'b':{'x':-1,'y':15},'c':{'x':0,'y':15},'branch':'proper-ccw'})]
+INITIAL_FRAME={'kind':'basis','frame':{'origin':[0,0,0],'x':[1,0,0],'y':[0,1,0],'z':[0,0,1]}}
+def bind_initial_authoring(r):
+    b,control=r['binding'],r['control'];s=one([x for x in r['phases'] if x['label']=='source-original'],'initial phase')['state']
+    require({x['id'] for x in s['capture']['native']['sketches']}=={b['faceId'],control['faceId']} and b['faceId']!=control['faceId'],'exact two genuine source stores')
+    appends=[x for x in r['commands'] if x['command']=='append-sketch-primitive'];frames=[x for x in r['commands'] if x['command']=='create-source-frame'];history=s['capture']['native']['history']
+    require(len(appends)==8 and len(frames)==len(history)==2,'exact actual public source-authoring census')
+    for face,binding in [(b['faceId'],b),(control['faceId'],None)]:
+        frame=one([x for x in frames if x.get('result',{}).get('faceId')==face],'actual face creation');args,result=frame['args'],frame['result']
+        require(set(args)=={'revision','unit','parent','placement'} and args['unit']=='millimeter' and args['parent'] is None and args['placement']==INITIAL_FRAME and result['changed'] is True and result['committed'] is True and result['authoredUndo'] is True,'actual original XY placement request/result')
+        if binding is not None:require(result==binding['source'],'original source receipt binding')
+        feature,index=result['featureId'],result['index'];require(type(feature) is int and type(index) is int and 0<=index<len(history),'actual safe source feature/index')
+        require(history[index]=={'type':'SOURCE_FRAME_V1','params':{'version':1,'unit':'millimeter','featureId':feature,'parent':None,'placement':INITIAL_FRAME}},'retained source-frame history matches public request')
+        commands=[x for x in appends if x['args']['faceId']==face];require(len(commands)==4,'four genuine requests for each source');raw=source_at(s,face)
+        require(raw['version']==3 and raw['constants']=='' and raw['dimensions']==[] and raw['labels']==[] and raw['stages']==[{'constraints':[],'generators':[]}],'initial literal source has no extra equations/rulers/generators')
+        actual=[]
+        for command,(kind,data) in zip(commands,INITIAL_PRIMITIVES):
+            args,response=command['args'],command.get('result',{});require('error' not in command and set(args)=={'revision','faceId','stage','role','kind','data'} and args['stage']==0 and args['role'] is None and args['kind']==kind and args['data']==data,'exact original primitive request')
+            require(response.get('changed') is True and response.get('authoredUndo') is True and response['primitive']['kind']==kind,'actual admitted primitive result');identity=response['primitive']['id'];require(type(identity) is str and identity,'actual public root identity')
+            actual.append({'id':identity,'type':kind,'role':None,'stage':0,'data':data})
+        require(raw['objects']==actual and len({o['id'] for o in actual})==4,'initial root records match genuine requests/results')
+        if binding is not None:require(binding['roots']==[{'id':o['id'],'type':o['type']} for o in actual],'original seed identity/kind order')
+        else:require(json.loads(control['source'])==raw and one([x for x in s['capture']['native']['sketches'] if x['id']==face],'control store')['source']==control['source'],'control geometry is actual authored source')
+    return history
+
 def run(directory):
     d=Path(directory);raw=(d/'receipt.json').read_bytes();r=json.loads(raw);require(r['status']=='PASS' and r['qualification']=='REACHABLE_SCOPE_ONLY_REQUIRED_DEPENDENCY_OPEN','complete reachable whole only');require(r['requiredOpen']==['genuine-public-dependent-shrink'],'do not waive missing dependency workflow');require(not r['sourceSeeds'] and not r['privateAuthoring'] and not r['fakeReplies'] and r['totalInstancesIncludeSeed'] is True and r['sourceBudgetMm']==5e-8,'unchanged authority/budget');require(r['sourcePins']==r['sourcePinsAfter'] and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'] and not r.get('pendingOpen') and not r.get('pendingDirect') and not r.get('retainedOutcome'),'source/cleanup custody')
     require(r['pins']['source']==r['source'] and r['pins']['desktop']==r['hostSource'],'exact actual compiled pin identities')
@@ -66,9 +92,9 @@ def run(directory):
         data=(d/s['snapshot']).read_bytes();require(hashlib.sha256(data).hexdigest()==s['sha256']==r['sourcePins'][s['role']+':'+s['relative']],'original producer source bytes');require(hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()==s['gitBlobOID'],'actual producer Git blob');require(s['root']==before_roots[s['role']]['root'] and s['commit']==r['acceptanceSource' if s['role']=='acceptance' else 'source' if s['role']=='core' else 'hostSource'],'exact source role commit')
         if s['role']=='acceptance':require(data==(Path(__file__).resolve().parents[2]/s['relative']).read_bytes(),'executing independent reader frozen source')
         if s['relative']=='test/native-cad-container/archive_oracle.py':require(data==archive_path.read_bytes(),'executing transitive archive helper exact source')
-    require([x['label'] for x in r['phases']]==PHASES==r['requiredPhases'] and [x['label'] for x in r['travels']]==TRAVELS==r['requiredTravels'] and [x['label'] for x in r['operations']]==OPERATIONS,'unique exact lifecycle rosters');require([x['label'] for x in r['refusals']]==list(REFUSALS)==r['requiredRefusals'],'exact negative roster');b=r['binding'];control=r['control'];observations={}
+    require([x['label'] for x in r['phases']]==PHASES==r['requiredPhases'] and [x['label'] for x in r['travels']]==TRAVELS==r['requiredTravels'] and [x['label'] for x in r['operations']]==OPERATIONS,'unique exact lifecycle rosters');require([x['label'] for x in r['refusals']]==list(REFUSALS)==r['requiredRefusals'],'exact negative roster');b=r['binding'];control=r['control'];initial_history=bind_initial_authoring(r);observations={}
     for row in r['observations']:
-        require(row['label'] not in observations and row['before']==row['after'],'unique read-only observations');observations[row['label']]=inspect_source(row['before'],b,control,row['inventory'])
+        require(row['label'] not in observations and row['before']==row['after'],'unique read-only observations');require(row['before']['capture']['native']['history']==initial_history,'original source-frame history exact');observations[row['label']]=inspect_source(row['before'],b,control,row['inventory'])
     require(set(observations)==set(PHASES),'all required actual source phases');base=observations['source-original'];require(len(base['objects'])==4 and not base['stages'][0]['generators'],'actual four seed roots');created=observations['created-four'];require(created['stages'][0]['generators'][0]['params']['count']==4 and len(created['objects'])==16,'seed plus THREE additional copies')
     commands=r['commands'];require([x['index'] for x in commands]==list(range(len(commands))),'ordered actual command trace');
     for row in r['operations']:
