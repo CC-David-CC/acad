@@ -1,0 +1,9 @@
+# Analytic R4 second reader refusal — BEFORE
+
+Source base25839ea9171dfbbb5a79aa5a68070d5799968d75; independent verifier R4b. Original whole and both reader outputs remain unchanged. No third reader, test, import/parser probe, build, Native or browser execution.
+
+Retained AFTER2/oracle.stderr.log at `/mnt/data10tb/codi-acad-assembled-analytic-20261110-r4/` SHA256ab62a0253d0c3487d5a46685a7ca4b2e9ff6675213c4e82363faf234d67eb0ed. FIRST-ORACLE.json records ORACLE_REFUSED, `exact input must be a bounded represented dyadic`, no geometry certification. AFTER retains the first distinct strict-original-Number reader failure. User requires notes/notification after two failures; both are preserved and Root notified. A source fix authorizes no new execution.
+
+Confirmed call: analytic mesh_oracle full-cylinder certificate passes local exact dyadic geometry, radius integer, low0, highQ(depth), and DECLARED deflectionQ(1,100)/incidenceQ(1,1000000). Certificate line114 maps bounded_number over all five. That geometry helper requires a Fraction denominator be a power of two; exact1/100 is first refused and1/1e6 would also refuse. This is a caller/certificate tolerance-domain mismatch before wall coverage predicates, not an observed geometry failure. Existing extent caller uses float.01/1e-6 and therefore preserves its different represented binary64 budgets.
+
+Approved source repair: keep geometry bounded_number and its current 2100numerator/1075denominator-bit dyadic domain unchanged. Add separate exact-rational admission for ONLY declared deflection/incidence, at those same existing bit bounds; float/int delegate to existing helper. Preserve exact1/100 and1/1e6, sign guards, topology/coverage/radial/Jacobian/index/resource predicates and all thresholds. Do not float-round these declarations, widen rational geometry admission or claim a surface PASS. Dxf independently confirms the source path and proposed boundary.
