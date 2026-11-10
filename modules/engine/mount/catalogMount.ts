@@ -1,6 +1,12 @@
 import {createMechanicalNativeOccMount} from './occ-mechanical-native-mount.mjs';
 import {MECHANICAL_NATIVE_RESOURCE_MODULES} from './ownedMechanicalNativeResources.mjs';
 import mechanicalNativeAssets from 'codi-mechanical-native-assets';
+import finiteCurveSupportAssets from 'codi-finite-curve-support-assets';
+import {createFiniteCurveSupportOccMount} from './occ-finite-curve-support-mount.mjs';
+import {FINITE_CURVE_SUPPORT_CANDIDATE} from './ownedFiniteCurveSupportCandidate.mjs';
+import {FINITE_CURVE_SUPPORT_RESOURCE_MODULES} from './ownedFiniteCurveSupportResources.mjs';
+import {OCC_FINITE_CURVE_SUPPORT_BUILD,requireFiniteCurveSupportBuild} from './engineCatalog.mjs';
+import type {FiniteCurveSupportMount,FiniteCurveSupportMountOptions} from './finiteCurveSupportRequest.mjs';
 import {createCircularOccMount} from './occ-circular-mount.mjs';
 import circularAssets from 'codi-circular-assets';
 import {createShellOccMount} from './occ-shell-mount.mjs';
@@ -48,6 +54,54 @@ function assetPath(asset:string):string{
  const url=new URL(asset,globalThis.location.href);
  if(url.origin!==globalThis.location.origin||url.search||url.hash)throw Error('Engine assets must be same-origin package files.');
  return url.pathname;
+}
+// Build entry validation has already hashed the exact emitted bytes. Discovery
+// only checks its bounded metadata/closed paths; it never starts a Worker or
+// hashes Native files on Main. This cohort has no part/history registration.
+function finiteCurveSupportMountOptions():FiniteCurveSupportMountOptions{
+ const assets=finiteCurveSupportAssets,candidate=FINITE_CURVE_SUPPORT_CANDIDATE;
+ if(!assets)throw Object.assign(Error('The optional analytic query component is not staged.'),{code:'ENGINE_BUILD_UNAVAILABLE'});
+ const digest=(value:unknown)=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value);
+ const pin=(value:any)=>!!value&&Object.keys(value).length===2&&digest(value.sha256)&&Number.isSafeInteger(value.bytes)&&value.bytes>=0;
+ if(assets.format!=='finite-curve-support-component/1'||assets.sourceQueryOnly!==true||assets.finiteCurveSupportReadVersion!==1||
+  assets.sourceCommit!==candidate.sourceCommit||assets.sourceTree!==candidate.sourceTree||
+  assets.jsSha256!==candidate.jsSha256||assets.wasmSha256!==candidate.wasmSha256||
+  assets.jsBytes!==candidate.jsBytes||assets.wasmBytes!==candidate.wasmBytes||
+  !digest(assets.bootstrapSha256)||!digest(assets.workerSha256))throw Error('Analytic query entry does not bind its exact Native/source contract');
+ const workerName='modules/engine/mount/finite-curve-support-worker.js';
+ const jsName='finite-curve-support-occ-portable.js',wasmName='finite-curve-support-occ.wasm';
+ const required=FINITE_CURVE_SUPPORT_RESOURCE_MODULES,files=[workerName,jsName,wasmName,...required];
+ const workerPath=assetPath(assets.worker);
+ if(!workerPath.endsWith('/'+workerName))throw Error('Unexpected analytic query Worker package path');
+ const base=workerPath.slice(0,-workerName.length);
+ if(!assets.modules||Object.keys(assets.modules).sort().join(',')!==required.slice().sort().join(',')||
+  required.some(name=>assetPath(assets.modules[name])!==base+name)||
+  assetPath(assets.js)!==base+jsName||assetPath(assets.wasm)!==base+wasmName)
+  throw Error('Analytic query emitted graph is not exactly colocated');
+ if(!assets.files||Object.keys(assets.files).sort().join(',')!==files.slice().sort().join(',')||
+  files.some(name=>!pin(assets.files[name]))||assets.files[workerName].sha256!==assets.workerSha256||
+  assets.files[jsName].sha256!==candidate.jsSha256||assets.files[jsName].bytes!==candidate.jsBytes||
+  assets.files[wasmName].sha256!==candidate.wasmSha256||assets.files[wasmName].bytes!==candidate.wasmBytes||
+  !assets.sources||Object.keys(assets.sources).sort().join(',')!==required.slice().sort().join(',')||
+  required.some(name=>assets.sources[name]!==assets.files[name].sha256))throw Error('Analytic query emitted file census is unbound');
+ const roots=assets.queryImportRoots;
+ if(!Array.isArray(roots)||roots.length!==1||Object.keys(roots[0]).sort().join(',')!=='literal,module'||
+  roots[0].module!==required[0]||roots[0].literal!=="await import(new URL('./finiteCurveNativeCalls.mjs',self.location.href))")
+  throw Error('Analytic query import root is not the admitted source-only closure');
+ return {workerUrl:workerPath,jsPath:assetPath(assets.js),wasmPath:assetPath(assets.wasm),timeoutMs:30000};
+}
+export function requireAvailableFiniteCurveSupportBuild(engine:string,revision:string){
+ const spec=requireFiniteCurveSupportBuild(engine,revision);finiteCurveSupportMountOptions();return spec;
+}
+export function listAvailableFiniteCurveSupportBuilds(){
+ if(!finiteCurveSupportAssets)return Object.freeze([]);
+ return Object.freeze([requireAvailableFiniteCurveSupportBuild('occ',OCC_FINITE_CURVE_SUPPORT_BUILD.revision)]);
+}
+// The caller owns close() immediately, including a later readiness rejection.
+// Do not cast this result to SolidKernel or silently replace a part's backend.
+export function createCatalogFiniteCurveSupportMount(engine:string,revision:string):Readonly<FiniteCurveSupportMount>{
+ requireFiniteCurveSupportBuild(engine,revision);
+ return createFiniteCurveSupportOccMount(finiteCurveSupportMountOptions());
 }
 // This is availability/colocation admission, not a Native operation. The entry
 // producer already binds every emitted module and Worker byte to its source.

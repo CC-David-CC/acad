@@ -5,9 +5,9 @@ const {pathToFileURL}=require('node:url');
 const ROOT=path.resolve(__dirname,'..');
 const DEFAULT_OUTPUT=path.join(ROOT,'.build/finite-curve-support-assets');
 const DEFAULT_ENTRY=path.join(ROOT,'.build/finite-curve-support-entry.mjs');
-// ACTUAL current source guard, temporarily retained before Root common splice.
-// Root must replace it with the actual coherently reviewed bootstrap identity.
-const BOOTSTRAP_SHA='a595182ee91dd0b91e400be5334c5c60f111b79168c4c50075eb97d09570e7cc';
+// Actual reviewed common query-only bootstrap; all normal cohort guards use
+// this same source identity. Native pair identities remain cohort-specific.
+const BOOTSTRAP_SHA='9254d17d4e73c83f12e3ed748c2fcabfd914faa2374b20b36eb55b093c7736f3';
 const FORMAT='finite-curve-support-component/1';
 const JS_SHA='479f0620b6dfe131dac05131a3798fc533e05a2bd11e8074ef240284f61bbe86';
 const WASM_SHA='746da919c8457e98daa821fae98c62c0a6c9ad1acafd1c3d5412e0207d6b6325';

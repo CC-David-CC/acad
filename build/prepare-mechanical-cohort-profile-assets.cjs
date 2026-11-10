@@ -1,6 +1,6 @@
 // Exact optional mechanical Native component; never changes an old cohort.
 const path=require('node:path'),fs=require('node:fs'),crypto=require('node:crypto'),{pathToFileURL}=require('node:url');
-const bootstrapSha='a595182ee91dd0b91e400be5334c5c60f111b79168c4c50075eb97d09570e7cc';
+const bootstrapSha='9254d17d4e73c83f12e3ed748c2fcabfd914faa2374b20b36eb55b093c7736f3';
 if(crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'../modules/engine/mount/oci-verified-worker.js'))).digest('hex')!==bootstrapSha)throw Error('Unexpected mechanical Native bootstrap');
 const {stageOwnedProfileComponent}=require('./stage-owned-profile-component.cjs');
 async function main(){

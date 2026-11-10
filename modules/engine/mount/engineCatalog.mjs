@@ -1,4 +1,30 @@
 import {MECHANICAL_NATIVE_CANDIDATE} from './ownedMechanicalNativeCandidate.mjs';
+import {FINITE_CURVE_SUPPORT_CANDIDATE} from './ownedFiniteCurveSupportCandidate.mjs';
+import {captureFiniteCurveSupportDescriptor} from './finiteCurveSupportRequest.mjs';
+
+// Analytic source observations are not solid-modeling builds. Do not add this
+// record to CAD_ENGINES, part preferences or the normal saved-revision resolver.
+export const OCC_FINITE_CURVE_SUPPORT_BUILD = Object.freeze({
+ id:'occ',name:'OpenCascade analytic support queries (experimental)',
+ mountEngine:FINITE_CURVE_SUPPORT_CANDIDATE.engine,
+ representation:FINITE_CURVE_SUPPORT_CANDIDATE.representation,
+ revision:FINITE_CURVE_SUPPORT_CANDIDATE.revision,
+ runtimeAssets:Object.freeze({jsSha256:FINITE_CURVE_SUPPORT_CANDIDATE.jsSha256,
+  wasmSha256:FINITE_CURVE_SUPPORT_CANDIDATE.wasmSha256}),
+ sourceQueryOnly:true,finiteCurveSupportReadVersion:1,experimental:true
+});
+export function requireFiniteCurveSupportBuild(id,revision){
+ if(id!=='occ'||revision!==OCC_FINITE_CURVE_SUPPORT_BUILD.revision)
+  throw Object.assign(Error('Select the explicit analytic source-query revision.'),{code:'ENGINE_REVISION_MISMATCH'});
+ return OCC_FINITE_CURVE_SUPPORT_BUILD;
+}
+export function validateFiniteCurveSupportMount(id,mount,revision){
+ const spec=requireFiniteCurveSupportBuild(id,revision);
+ captureFiniteCurveSupportDescriptor(mount?.descriptor);
+ if(typeof mount?.execute!=='function'||typeof mount?.readFiniteCurveSupportIntersections!=='function'||typeof mount?.close!=='function')
+  throw Object.assign(Error('The query-only mount interface is incomplete.'),{code:'ENGINE_MOUNT_MISMATCH'});
+ return spec;
+}
 // Authoritative engine identity vocabulary for authored operations. Runtime
 // handles and render meshes never belong in this catalogue or saved intent.
 // Capability detail comes from the selected, verified mount's descriptor.
