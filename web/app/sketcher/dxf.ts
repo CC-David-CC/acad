@@ -1,3 +1,4 @@
+import {ArcLengthDimension} from './shapes/arcLengthDimension';
 import {arcDataFromObject,requireArcInterval} from './shapes/arcBranch.mjs';
 import {
   ArcEntity,
@@ -254,6 +255,7 @@ export class DxfWriterAdapter {
         else if (shape instanceof BezierCurve) this._bezier(shape);
         else if (shape instanceof Label) this._label(shape);
         else if (shape instanceof VDimension) this._vdim(shape);
+        else if (shape instanceof ArcLengthDimension) throw Object.assign(Error('DXF arc-length annotation export is not supported; use the editable native project.'),{code:'UNSUPPORTED_ARC_LENGTH_DXF'});
         else if (shape instanceof HDimension) this._hdim(shape);
         else if (shape instanceof LinearDimension) this._linearDim(shape);
         else if (shape instanceof DiameterDimension) this._ddim(shape);

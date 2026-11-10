@@ -1,3 +1,4 @@
+import {createReferenceArcLengthMeasurement,removeReferenceArcLengthMeasurement,convertReferenceArcLengthToDriving,convertDrivingArcLengthToReference,inspectArcLengthMeasurementRoles} from './arcLengthMeasurementRoles';
 import {createReferenceLengthMeasurement,removeReferenceLengthMeasurement,convertReferenceLengthToDriving, convertDrivingLengthToReference, inspectLengthMeasurementRoles, convertLengthMeasurementById} from './lengthMeasurementRoles';
 import {toast} from 'react-toastify';
 import {BiPencil} from "react-icons/bi";
@@ -7,6 +8,10 @@ import {isConstraintAnnotation} from "sketcher/constr/constraintAnnotation";
 import {editConstraint} from "sketcher/actions/constraintActions";
 
 export default [
+  {id:'CreateReferenceArcLengthRuler',shortName:'Reference arc length',kind:'Misc',description:'Measure the full authored circular Arc interval, not its endpoint chord.',icon:BiPencil,selectionMatcher:{selector:'function',match:s=>s.length===1&&s[0]?.TYPE==='Arc'},invoke:ctx=>createReferenceArcLengthMeasurement(ctx.viewer,ctx.viewer.selected[0])},
+  {id:'RemoveReferenceArcLengthRuler',shortName:'Remove reference arc length',kind:'Misc',description:'Remove only the reference ruler; preserve the Arc.',icon:BiPencil,selectionMatcher:{selector:'function',match:s=>s.length===1&&s[0]?.TYPE==='ArcLengthDimension'},invoke:ctx=>removeReferenceArcLengthMeasurement(ctx.viewer,ctx.viewer.selected[0])},
+  {id:'ArcLengthMeasurementRole',shortName:'Toggle reference/driving arc length',kind:'Misc',description:'Convert one native Arc ruler between reference and driving roles without changing geometry.',icon:BiPencil,selectionMatcher:{selector:'function',match:s=>s.length===1&&s[0]?.TYPE==='ArcLengthDimension'},invoke:ctx=>{const d=ctx.viewer.selected[0],row=inspectArcLengthMeasurementRoles(ctx.viewer).items.find(r=>r.dimensionId===d.id);if(!row)throw Error('Choose a current Arc ruler.');return row.role==='driving'?convertDrivingArcLengthToReference(ctx.viewer,d.arc):convertReferenceArcLengthToDriving(ctx.viewer,d);}},
+
   {id:'CreateReferenceLengthRuler',shortName:'Reference length ruler',kind:'Misc',description:'Add a native read-only length measurement to an ordinary Segment or associative pattern output; never adds a driving equation.',icon:BiPencil,selectionMatcher:{selector:'function',match:s=>s.length===1&&s[0]?.TYPE==='Segment'},invoke:ctx=>createReferenceLengthMeasurement(ctx.viewer,ctx.viewer.selected[0])},
   {id:'RemoveReferenceLengthRuler',shortName:'Remove reference ruler',kind:'Misc',description:'Remove a native reference ruler while preserving its actual source and generated geometry.',icon:BiPencil,selectionMatcher:{selector:'function',match:s=>s.length===1&&s[0]?.TYPE==='LinearDimension'},invoke:ctx=>removeReferenceLengthMeasurement(ctx.viewer,ctx.viewer.selected[0])},
 

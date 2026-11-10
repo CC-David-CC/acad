@@ -1,3 +1,5 @@
+import {ArcLengthDimension} from './shapes/arcLengthDimension';
+import {captureArcLengthDimensionRecord} from './shapes/arcLengthDimensionRecord.mjs';
 import {captureArcData,requireArcInterval,arcDataFromObject} from './shapes/arcBranch.mjs';
 import {offsetSourceRows} from './generators/offsetSource.mjs';
 import {patternSourceRows} from './generators/patternSource.mjs';
@@ -257,6 +259,8 @@ export class IO {
             obj.data,
             index
           );
+        } else if (type === ArcLengthDimension.prototype.TYPE) {
+          skobj=ArcLengthDimension.load(obj.id,obj.data,index);
         } else if (type === DiameterDimension.prototype.TYPE) {
           skobj = DiameterDimension.load(obj.id, obj.data, index);
         } else if (type === AngleBetweenDimension.prototype.TYPE) {
@@ -756,7 +760,10 @@ function validateStrictObject(obj: any) {
 }
 function validateStrictDimension(obj: any, index: any) {
   const d = obj.data;
-  if (obj.type === DiameterDimension.prototype.TYPE) {
+  if (obj.type === ArcLengthDimension.prototype.TYPE) {
+    const row=captureArcLengthDimensionRecord(obj);strictReference(row.data.arc,index,'arc length dimension');const arc=index[row.data.arc];
+    if(!(arc instanceof Arc)||arc.id!==row.data.arc||index[arc.id]!==arc)throw Error('ArcLengthDimension must reference its actual registered Arc.');
+  } else if (obj.type === DiameterDimension.prototype.TYPE) {
     strictReference(d.obj, index, 'dimension');
     strictNumber(d.angle, 'dimension angle');
   } else if (obj.type === LinearDimension.prototype.TYPE) {

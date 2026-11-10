@@ -1,3 +1,4 @@
+import {arcLengthFromData} from '../constr/arcLengthDomain.mjs';
 import {pointLineConstantsValid,pointLineSourceValue,pointLineSide} from '../constr/pointLineDistanceDomain.mjs';
 // Revision-bound discovery addresses. These are never persisted constraint IDs.
 const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
@@ -6,7 +7,7 @@ export const drivingDimensionConstantsValid=(type,c)=>pointLineDrivingDimension(
 export const projectedDrivingDimension=type=>type==='ProjectedDistance';
 export const signedDrivingDimension=type=>type==='SignedDistanceX'||type==='SignedDistanceY'||projectedDrivingDimension(type);
 export const pointDrivingDimension=type=>signedDrivingDimension(type)||type==='DistancePP';
-export const drivingLengthField=type=>(type==='SegmentLength'||type==='RadiusLength')?'length':type==='DiameterLength'?'diameter':(pointDrivingDimension(type)||pointLineDrivingDimension(type))?'distance':null;
+export const drivingLengthField=type=>(type==='SegmentLength'||type==='RadiusLength'||type==='ArcLength')?'length':type==='DiameterLength'?'diameter':(pointDrivingDimension(type)||pointLineDrivingDimension(type))?'distance':null;
 export const drivingDimensionObjectCount=type=>pointLineDrivingDimension(type)?2:projectedDrivingDimension(type)?3:drivingLengthField(type)?pointDrivingDimension(type)?2:1:0;
 export const drivingDimensionValueValid=(type,v)=>typeof v==='number'&&Number.isFinite(v)&&!!drivingLengthField(type)&&(signedDrivingDimension(type)?Math.abs(v)<=1e6:type==='DistancePL'?v>=0:type==='DistancePP'?v>=0&&v<=1e6:v>0&&v<=1e6);
 export const drivingPointDimensionValue=(type,a,b,direction)=>{if(projectedDrivingDimension(type)){const p=direction?.a,q=direction?.b;if(!p||!q||![a?.x,a?.y,b?.x,b?.y,p.x,p.y,q.x,q.y].every(Number.isFinite))return NaN;const dx=q.x-p.x,dy=q.y-p.y,length=Math.hypot(dx,dy);return length>1e-9?((b.x-a.x)*dx+(b.y-a.y)*dy)/length:NaN;}return type==='SignedDistanceX'?b.x-a.x:type==='SignedDistanceY'?b.y-a.y:type==='DistancePP'?Math.hypot(b.x-a.x,b.y-a.y):NaN;};
@@ -37,7 +38,7 @@ export function discoverDrivingDimensions(sketch,pointRows=[],supportingLines=un
   }else if(pair){const refs=c.objects,p=points();supported=!!supported&&Array.isArray(refs)&&refs.length===drivingDimensionObjectCount(c.typeId)&&refs[0]!==refs[1]&&refs.slice(0,2).every(id=>typeof id==='string'&&id.length>0&&id.length<=256&&p.has(id));
    const direction=projected?objects.get(refs?.[2]):null;if(projected)supported=!!supported&&typeof refs[2]==='string'&&refs[2].length>0&&refs[2].length<=256&&direction?.type==='Segment'&&Number.isSafeInteger(direction.stage)&&direction.stage<=si;
    if(supported)resolvedValue=drivingPointDimensionValue(c.typeId,p.get(refs[0]),p.get(refs[1]),direction?.data);}
-  else{supported=!!supported&&!!o&&(c.typeId==='SegmentLength'?o.type==='Segment':['Circle','Arc'].includes(o.type));if(supported){const d=o.data;resolvedValue=o.type==='Segment'?Math.hypot(d.b.x-d.a.x,d.b.y-d.a.y):(c.typeId==='RadiusLength'?1:2)*(o.type==='Circle'?d.r:Math.hypot(d.a.x-d.c.x,d.a.y-d.c.y));}}
+  else{supported=!!supported&&!!o&&(c.typeId==='SegmentLength'?o.type==='Segment':c.typeId==='ArcLength'?o.type==='Arc':['Circle','Arc'].includes(o.type));if(supported){const d=o.data;resolvedValue=c.typeId==='ArcLength'?arcLengthFromData(d).length:o.type==='Segment'?Math.hypot(d.b.x-d.a.x,d.b.y-d.a.y):(c.typeId==='RadiusLength'?1:2)*(o.type==='Circle'?d.r:Math.hypot(d.a.x-d.c.x,d.a.y-d.c.y));}}
   const admitted=supported&&drivingDimensionValueValid(c.typeId,resolvedValue)&&['accepted','redundant'].includes(c.admission?.state);
   rows.push(Object.freeze({constraintId:admitted?dimensionLocator(si,index,c):null,stage:si,index,typeId:c.typeId,objects:Object.freeze([...c.objects]),unit:field?'millimeter':null,
    rawValue:field&&c.constants&&Object.hasOwn(c.constants,field)?c.constants[field]:null,resolvedValue:admitted?resolvedValue:null,canEdit:admitted,canRemove:admitted,

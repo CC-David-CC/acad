@@ -1,0 +1,3 @@
+const fail=()=>{throw Error('Invalid native ArcLengthDimension record.');};
+function record(v,keys){if(!v||typeof v!=='object'||Array.isArray(v)||![null,Object.prototype].includes(Object.getPrototypeOf(v))||Reflect.ownKeys(v).length!==keys.length)fail();const r={};for(const k of keys){const d=Object.getOwnPropertyDescriptor(v,k);if(!d?.enumerable||!Object.hasOwn(d,'value'))fail();r[k]=d.value;}return r;}
+export function captureArcLengthDimensionRecord(v){const r=record(v,['id','type','data']),d=record(r.data,['arc','offset']);if(r.type!=='ArcLengthDimension'||typeof r.id!=='string'||!r.id||r.id.length>256||typeof d.arc!=='string'||!d.arc||d.arc.length>256||!Number.isFinite(d.offset))fail();return Object.freeze({id:r.id,type:r.type,data:Object.freeze(d)});}

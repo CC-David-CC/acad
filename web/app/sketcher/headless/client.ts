@@ -1,3 +1,4 @@
+import {captureArcLengthMeasurementReply} from './arcLengthMeasurementIntent.mjs';
 import {captureProjectionPreparationReply,captureProjectionInspectionReply} from './sourceProjectionEnvelope.mjs';
 import {captureOffsetEnvelope,captureOffsetInspectionEnvelope} from './offsetReply.mjs';
 import {capturePatternEnvelope} from './patternReply.mjs';
@@ -142,6 +143,7 @@ export async function runSketchSolve(workerUrl: string, request: any, options: S
               if(request.task==='sketch-transition-verify-slot'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='sketch-transition-curve-points'){try{return finish(null,captureCurvePointsReply(result,request.revision,request.intent));}catch(error){return finish(error);}}
               if(request.task==='sketch-length-measurement'||request.task==='sketch-length-measurement-verify'){try{return finish(null,captureLengthMeasurementReply(result,request.revision,request.task==='sketch-length-measurement-verify'));}catch(error){return finish(error);}}
+              if(request.task==='sketch-arc-length-measurement'||request.task==='sketch-arc-length-measurement-verify'){try{return finish(null,captureArcLengthMeasurementReply(result,request.revision,request.task==='sketch-arc-length-measurement-verify'));}catch(error){return finish(error);}}
               if(request.task==='source-projection-inspect'){try{return finish(null,captureProjectionInspectionReply(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='source-projection-prepare'||request.task==='source-projection-verify'){try{return finish(null,captureProjectionPreparationReply(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='source-frame-transition'){try{return finish(null,captureSourceFrameReply(result,request.revision));}catch(error){return finish(error);}}

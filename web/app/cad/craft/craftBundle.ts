@@ -2406,6 +2406,10 @@ interface CraftService {
   editSketchOffset?: ReturnType<typeof createClosedSketchTransitionCommands>['editSketchOffset'];
   removeSketchOffset?: ReturnType<typeof createClosedSketchTransitionCommands>['removeSketchOffset'];
   inspectClosedSketchMeasurements?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketchMeasurements'];
+  inspectClosedSketchArcMeasurements?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketchArcMeasurements'];
+  createClosedSketchArcLengthMeasurement?: ReturnType<typeof createClosedSketchTransitionCommands>['createClosedSketchArcLengthMeasurement'];
+  removeClosedSketchArcLengthMeasurement?: ReturnType<typeof createClosedSketchTransitionCommands>['removeClosedSketchArcLengthMeasurement'];
+  convertClosedSketchArcLengthRole?: ReturnType<typeof createClosedSketchTransitionCommands>['convertClosedSketchArcLengthRole'];
   createClosedSketchLengthMeasurement?: ReturnType<typeof createClosedSketchTransitionCommands>['createClosedSketchLengthMeasurement'];
   removeClosedSketchLengthMeasurement?: ReturnType<typeof createClosedSketchTransitionCommands>['removeClosedSketchLengthMeasurement'];
   convertClosedSketchLengthRole?: ReturnType<typeof createClosedSketchTransitionCommands>['convertClosedSketchLengthRole'];
