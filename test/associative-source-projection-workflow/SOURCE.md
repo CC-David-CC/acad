@@ -1,0 +1,9 @@
+# Producer source inputs
+
+Core base9d6bd5bb8ad83f0a644a77139cbbe3890e2469fc; source BEFORE77444592. This packet modifies ordinary application/Worker source only. Runtime pair/bootstrap/asset hashes remain Root-owned and must be computed from the genuinely regenerated graph; no previously qualified runtime is claimed to contain it.
+
+Public recipe example.mjs must equal Desktop apps/system/jsketcher/examples/associative-source-projection.mjs byte-for-byte. Authoring calls only public commands. Future regression observations may detach read-only h.capture data; they must not supply positive source/model/ID inputs.
+
+Root integration source roster must include new sourceProjectionIntent, operation, command/replay, sourceProjectionClient/Envelope/Math/Transition/Validation leaves and the actual changed Craft/J/storage/project-validation/sketch/physical/Worker/registration consumers. In particular selectedProfileBudget's new pure intent import requires retained module emission and dependency closure on every configured graph; do not stage only prepare roots while omitting entry/factory inventories. The helper's existing sourceFrameIntent and authoredFeatureIdentity dependencies must retain real paths/legacy-flat rewrites. Headless math imports the exact existing finiteCurveCertificateArithmetic and shared physicalCoordinateReconstruction policy.
+
+Future full acceptance must snapshot its eventual driver/checker/helpers/CONTRACT/README/SOURCE/example, actual Desktop adapter/example/index, signed harness and strict-join canonical transitive helper, independent native-cad-container/archive_oracle.py, producer repo+commit+path+blob custody and actual immutable staged runtime pins. Producer anchors alone are not exhaustive compiled closure. No such runtime/acceptance producer roster is issued by this source-only checkpoint.
