@@ -733,7 +733,7 @@ export function activate(ctx: ApplicationContext) {
   }
   async function compareHostSavedContent(options:{signal?:AbortSignal,valid?:()=>boolean}={}){
     options=captureDocumentJobOptions(options,true);const lifetime=documentJob(options);lifetime.guard();
-    const known=inspectHostSavedContent();if(known.equal!==null){lifetime.guard();if(inspectDocumentRevision()!==known.revision)throw new DOMException('Saved-content inspection changed.','AbortError');return known;}
+    const known=inspectHostSavedContent();if(known.equal!==null){lifetime.guard();const after=inspectHostSavedContent();if(after.revision!==known.revision||after.generation!==known.generation||after.equal!==known.equal)throw new DOMException('Saved-content inspection changed.','AbortError');return known;}
     const generation=savedContentGeneration,work=await captureHostProjectSourceJob(options,true),{job,current}=work,owner=nativeArchiveOwner(job);
     const prepared=await owner.prepareContent(work.source,{signal:work.options.signal,valid:()=>{try{job.guard();return true;}catch{return false;}}},current);
     try{
