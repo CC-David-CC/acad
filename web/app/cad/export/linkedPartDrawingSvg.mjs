@@ -1,6 +1,7 @@
 import {layoutDrawingViewCaptions} from './linkedPartDrawingCaptionLayout.mjs';
 import {layoutDrawingWarnings} from './linkedPartDrawingWarningLayout.mjs';
 import {renderDrawingRequirementForms} from './linkedPartDrawingRequirementForms.mjs';
+import {layoutDrawingDimensions,DRAWING_DIMENSION_LAYOUT_LIMITS} from './linkedPartDrawingDimensionLayout.mjs';
 import {unpackDrawingSection} from '../../../../modules/engine/mount/ownedDrawingSectionProtocol.mjs';
 import {unpackDrawingDetail} from '../../../../modules/engine/mount/drawingDetailClip.mjs';
 // Worker-only presentation of observed geometry. Authored references remain in
@@ -27,7 +28,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
     if(row.viewId!==d.views[i].viewId||!['available','unavailable'].includes(row.status))fail('Drawing view order or identity changed.');
     if(row.status==='available'?row.reason!==null:typeof row.reason!=='string'||!row.reason||row.reason.length>256||row.metadata!==null||(detail?row.intervals!==null:row.values!==null||row.tags!==null))fail('Invalid drawing view availability.');
   }
-  const scale=d.sheet.scale.numerator/d.sheet.scale.denominator,paths=[],annotations=[],warnings=[],fallbackWarnings=[],patterns=[],captions=[],strokeBounds=[],labelBoxes=[];
+  const scale=d.sheet.scale.numerator/d.sheet.scale.denominator,paths=[],annotations=[],warnings=[],fallbackWarnings=[],patterns=[],captions=[],strokeBounds=[],labelBoxes=[],dimensionRows=[],geometrySegments=[],annotationLeaders=[];
   let captionBottom=d.sheet.height-16;
   let segments=0,status=read.status==='available'&&o.status==='available'?'available':'unresolved';
   const viewScale=view=>view.basis==='detail'?view.scale.numerator/view.scale.denominator:scale;
@@ -60,7 +61,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
         for(const edge of patch){boundPoint(edge.start);boundPoint(edge.end);}
         const polygon=patch.map((edge,i)=>{const p=paper(view,edge.start);return(i?'L':'M')+p.map(num).join(',');}).join(' ')+' Z';
         paths.push(`<path data-view-id="${escape(view.viewId)}" data-view-basis="bore-center-section" data-presentation="section-hatch" data-section-area="${num(section.area)}" d="${polygon}" fill="url(#${id})" stroke="none"/>`);
-        for(const edge of patch)if(edge.boundary){const a=paper(view,edge.start),b=paper(view,edge.end);paths.push(`<path data-view-id="${escape(view.viewId)}" data-view-basis="bore-center-section" data-cut-boundary="true" d="M${a.map(num).join(',')} L${b.map(num).join(',')}"/>`);}
+        for(const edge of patch)if(edge.boundary){const a=paper(view,edge.start),b=paper(view,edge.end);geometrySegments.push([a,b]);paths.push(`<path data-view-id="${escape(view.viewId)}" data-view-basis="bore-center-section" data-cut-boundary="true" d="M${a.map(num).join(',')} L${b.map(num).join(',')}"/>`);}
         segments+=patch.length*2;
       }
       if(segments>200000)throw Object.assign(Error('Drawing section exceeds its presentation segment budget.'),{code:'RESOURCE_LIMIT'});
@@ -72,6 +73,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
       if(parent?.status!=='available'||!parentFrame)fail('An available detail has no actual parent projection.');
       packed=unpackDrawingDetail({packet:{metadata:observed.metadata,intervals:observed.intervals},parent:{metadata:parent.metadata,values:parent.values,tags:parent.tags},parentFrame,frame,view});
       const hw=view.aperture.halfWidth,hh=view.aperture.halfHeight,corners=[[-hw,-hh],[hw,-hh],[hw,hh],[-hw,hh],[-hw,-hh]].map(p=>paper(view,p));
+      for(let i=1;i<corners.length;i++)geometrySegments.push([corners[i-1],corners[i]]);
       for(const point of [[-hw,-hh],[hw,hh]])boundPoint(point);
       paths.push(`<path data-view-id="${escape(view.viewId)}" data-presentation="detail-aperture" d="M${corners.map(p=>p.map(num).join(',')).join(' L')}" stroke="#777" stroke-dasharray="1 1"/>`);
       emptyDetail=packed.empty;
@@ -92,6 +94,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
       segments+=points.length-1;
       if(segments>200000)throw Object.assign(Error('Drawing presentation exceeds its segment budget.'),{code:'RESOURCE_LIMIT'});
       const path=points.map((p,i)=>{const q=paper(view,p);return(i?'L':'M')+num(q[0])+','+num(q[1]);}).join(' ');
+      for(let i=1;i<points.length;i++)geometrySegments.push([paper(view,points[i-1]),paper(view,points[i])]);
       paths.push(`<path d="${path}"${d.version>=2?' data-view-id="'+escape(view.viewId)+'" data-view-basis="'+view.basis+'"':''}${group.visibility==='hidden'?' stroke-dasharray="2 1" stroke="#777"':''}/>`);
     }
     caption(view.basis+(view.basis==='detail'?' 2:1':''));
@@ -102,11 +105,9 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
     if(fact.status!=='available'||!frame) {status='unresolved';warnings.push({role:'dimension',id:dimension.dimensionId,viewId:dimension.viewId,message:'UNRESOLVED: '+dimension.dimensionId});continue;}
     const anchor=p=>{const v=p.map((x,k)=>x-frame.origin[k]);return paper(view,[v.reduce((s,x,k)=>s+x*frame.u[k],0),v.reduce((s,x,k)=>s+x*frame.v[k],0)]);};
     const ends=fact.anchors.map(anchor),label=dimension.label;
-    stroke(ends);stroke([ends[0],label]);stroke([ends[1],label]);
-    paths.push(`<path d="M${ends.map(p=>p.map(num).join(',')).join(' L')}" stroke="#246"/>`);
-    paths.push(`<path d="M${ends[0].map(num).join(',')} L${label.map(num).join(',')} M${ends[1].map(num).join(',')} L${label.map(num).join(',')}" stroke="#789" stroke-dasharray="1 1"/>`);
     const semantics=dimension.kind==='hole-diameter'?'Ø':dimension.kind==='edge-length'?'L ':dimension.kind==='plane-distance'?'ΔZ ':dimension.axis==='datum-x'?'ΔX ':'ΔY ';
-    annotations.push(authoredText(label,semantics+fact.value.toFixed(3)+' mm','fill="#124"'));
+    const valueText=semantics+fact.value.toFixed(3)+' mm',labelBox={min:[label[0]-1,label[1]-4],max:[label[0]+Array.from(valueText).length*3+1,label[1]+2]};
+    labelBoxes.push(labelBox);dimensionRows.push({dimensionId:dimension.dimensionId,viewId:dimension.viewId,ends,label,labelBox,valueText,pathIndex:paths.length,textIndex:annotations.length});paths.push(null);annotations.push(null);
   }
   for(let i=0;i<(d.annotations?.length||0);i++){
     const a=d.annotations[i],row=o.annotations[i],view=d.views.find(v=>v.viewId===a.viewId),frame=o.viewFrames.find(v=>v.viewId===a.viewId)?.frame;
@@ -120,7 +121,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
       continue;
     }
     const project=p=>{const v=p.map((n,k)=>n-frame.origin[k]);return paper(view,[v.reduce((n,x,k)=>n+x*frame.u[k],0),v.reduce((n,x,k)=>n+x*frame.v[k],0)]);};
-    const path=(points,attributes='')=>{stroke(points);paths.push(`<path ${tag} d="M${points.map(p=>p.map(num).join(',')).join(' L')}" stroke="#357" ${attributes}/>`);};
+    const path=(points,attributes='')=>{stroke(points);if(attributes==='stroke-dasharray="1 1"')for(let i=1;i<points.length;i++)annotationLeaders.push([points[i-1],points[i]]);paths.push(`<path ${tag} d="M${points.map(p=>p.map(num).join(',')).join(' L')}" stroke="#357" ${attributes}/>`);};
     const f=row.facts;
     if(a.kind==='bore-center'){
       if(view.basis==='top'||view.basis==='detail'){const c=project(f.center),extent=f.diameter*viewScale(view)/2+a.extension;path([[c[0]-extent,c[1]],[c[0]+extent,c[1]]],'stroke-dasharray="4 1 1 1"');path([[c[0],c[1]-extent],[c[0],c[1]+extent]],'stroke-dasharray="4 1 1 1"');}
@@ -158,12 +159,34 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
   const requirementForms=renderDrawingRequirementForms({definition:d,observation:o,views:read.views,geometryBounds,strokeBounds,labelBoxes,captionBoxes});
   paths.push(...requirementForms.paths);annotations.push(...requirementForms.annotations);warnings.push(...requirementForms.warnings);strokeBounds.push(...requirementForms.strokeBounds);labelBoxes.push(...requirementForms.labelBoxes);
   if(requirementForms.warnings.length)status='unresolved';
+  const dimensionLayout=layoutDrawingDimensions({sheet:d.sheet,dimensions:dimensionRows,labelBoxes,captionBoxes,geometrySegments,geometryBounds,existingLeaders:[...annotationLeaders,...requirementForms.leaderSegments]});
+  for(let i=0;i<dimensionRows.length;i++){
+    const row=dimensionRows[i],placed=dimensionLayout[i],attrs=`data-dimension-id="${escape(row.dimensionId)}" data-dimension-layout="${placed.paths?'aligned-v1':'uncertain-original-v1'}" data-dimension-layout-status="${placed.status}"${placed.reason?' data-dimension-layout-reason="'+placed.reason+'"':''}`;
+    if(placed.paths){
+      paths[row.pathIndex]=placed.paths.map(part=>{
+        const data='M'+part.points.map(p=>p.map(num).join(',')).join(' L');if(data.length>DRAWING_DIMENSION_LAYOUT_LIMITS.pathCharacters)throw Object.assign(Error('Dimension paper path exceeds its bounded serialization domain.'),{code:'RESOURCE_LIMIT'});
+        for(let j=1;j<part.points.length;j++)stroke([part.points[j-1],part.points[j]]);
+        return `<path ${attrs} data-dimension-role="${part.role}" d="${data}" stroke="${part.role==='extension-line'?'#789':'#246'}"${part.role==='extension-line'?' stroke-width=".18"':''} stroke-linejoin="round"/>`;
+      }).join('');
+    }else{
+      // Preserve all original reference information, but never present a
+      // failed bounded layout as an established legible arrangement.
+      stroke(row.ends);stroke([row.ends[0],row.label]);stroke([row.ends[1],row.label]);
+      paths[row.pathIndex]=`<path ${attrs} data-dimension-role="reference-span" d="M${row.ends.map(p=>p.map(num).join(',')).join(' L')}" stroke="#246"/><path ${attrs} data-dimension-role="fallback-leader" d="M${row.ends[0].map(num).join(',')} L${row.label.map(num).join(',')} M${row.ends[1].map(num).join(',')} L${row.label.map(num).join(',')}" stroke="#789" stroke-dasharray="1 1"/>`;
+    }
+    annotations[row.textIndex]=text(row.label,row.valueText,attrs+' fill="#124"');
+  }
+  const dimensionPresentation={version:1,role:'derived-paper-layout',status:dimensionLayout.some(row=>row.status==='uncertain')?'uncertain':'available',dimensions:dimensionLayout.map(({dimensionId,status,reason})=>({dimensionId,status,reason}))};
   for(const warning of layoutDrawingWarnings({sheet:d.sheet,warnings,geometryBounds,strokeBounds,labelBoxes,captionBoxes})){
     const first=warning.lines[0],spans=warning.lines.map(line=>`<tspan x="${num(line.x)}" y="${num(line.y)}" textLength="${num(line.textLength)}" lengthAdjust="spacing">${escape(line.value)}</tspan>`).join('');
     annotations.push(`<text x="${num(first.x)}" y="${num(first.y)}" ${warning.tag||''} data-warning-layout="observed-sheet-v1" data-warning-role="${warning.role}" data-warning-id="${escape(warning.id)}" data-warning-view-id="${escape(warning.viewId)}" font-family="monospace" font-size="3" fill="#a00" aria-label="${escape(warning.message)}">${spans}</text>`);
   }
-  const title=text([8,8],d.title||d.drawingId),notice=text([8,d.sheet.height-5],`Reference drawing · ${status} · scale ${d.sheet.scale.numerator}:${d.sheet.scale.denominator}`);
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${num(d.sheet.width)}mm" height="${num(d.sheet.height)}mm" viewBox="0 0 ${num(d.sheet.width)} ${num(d.sheet.height)}"><title>${escape(d.title)}</title><metadata>${escape(JSON.stringify({version:1,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,quality:o.quality,status,...(d.version>=2?{definitionVersion:d.version,viewCount:d.views.length,projection:d.views.some(v=>v.basis==='isometric')?'source-relative-isometric-v1':'source-relative-orthographic-v1'}:{}),...(d.version>=3?{annotationFacts:o.annotations,annotationRole:'derived-native-bore-reference',ordinateRole:'signed-datum-coordinate'}:{}),...(d.version===4?{datumFeatureFacts:o.datumFeatures,requirementFacts:o.requirements,manufacturingRequirementRole:'authored-manufacturing-requirement',measurementScope:'nominal-cad-reference-only'}:{}),curvePresentationTolerancePaperMm:.02,dimensionRole:'reference'}))}</metadata><defs>${patterns.join('')}</defs><rect width="100%" height="100%" fill="white"/><g fill="none" stroke="#111" stroke-width=".25">${paths.join('')}</g><g font-family="sans-serif" font-size="3">${title}${annotations.join('')}${notice}</g></svg>`;
+  // A conservative layout uncertainty must not add a mandatory legend whose
+  // own search could turn an otherwise valid drawing into a refusal. Its
+  // complete per-dimension reasons remain in metadata/label attributes; the
+  // fixed footer visibly distinguishes them from physical reference status.
+  const title=text([8,8],d.title||d.drawingId),notice=text([8,d.sheet.height-5],`Reference drawing · ${status} · scale ${d.sheet.scale.numerator}:${d.sheet.scale.denominator}${dimensionPresentation.status==='uncertain'?' · LAYOUT UNCERTAIN ('+dimensionLayout.filter(row=>row.status==='uncertain').length+')':''}`);
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${num(d.sheet.width)}mm" height="${num(d.sheet.height)}mm" viewBox="0 0 ${num(d.sheet.width)} ${num(d.sheet.height)}"><title>${escape(d.title)}</title><metadata>${escape(JSON.stringify({version:1,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,quality:o.quality,status,dimensionPresentation,...(d.version>=2?{definitionVersion:d.version,viewCount:d.views.length,projection:d.views.some(v=>v.basis==='isometric')?'source-relative-isometric-v1':'source-relative-orthographic-v1'}:{}),...(d.version>=3?{annotationFacts:o.annotations,annotationRole:'derived-native-bore-reference',ordinateRole:'signed-datum-coordinate'}:{}),...(d.version===4?{datumFeatureFacts:o.datumFeatures,requirementFacts:o.requirements,manufacturingRequirementRole:'authored-manufacturing-requirement',measurementScope:'nominal-cad-reference-only'}:{}),curvePresentationTolerancePaperMm:.02,dimensionRole:'reference'}))}</metadata><defs>${patterns.join('')}</defs><rect width="100%" height="100%" fill="white"/><g fill="none" stroke="#111" stroke-width=".25">${paths.join('')}</g><g font-family="sans-serif" font-size="3">${title}${annotations.join('')}${notice}</g></svg>`;
   const bytes=new TextEncoder().encode(svg);
   if(bytes.byteLength>16*1024*1024)throw Object.assign(Error('Drawing SVG exceeds its byte budget.'),{code:'RESOURCE_LIMIT'});
   return {format:'svg',mime:'image/svg+xml',status,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,buffer:bytes.buffer};

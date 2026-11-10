@@ -1,7 +1,7 @@
 // Worker-only presentation of captured v4 requirements and protected read facts.
 // No source, geometry, reference, authored label or conformance state is written.
 const fail=message=>{throw Object.assign(Error(message),{code:'INVALID_REQUEST'});};
-const resource=message=>{throw Object.assign(Error(message),{code:'RESOURCE_LIMIT'});};
+const resource=(message,layoutReason=undefined)=>{throw Object.assign(Error(message),{code:'RESOURCE_LIMIT',...(layoutReason?{layoutReason}:{})});};
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
 const finite=n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=1e9;
 const num=n=>{if(!finite(n))resource('Requirement paper coordinates exceed their supported domain.');return String(Object.is(n,-0)?0:n);};
@@ -19,7 +19,7 @@ const attrs=(a,kind)=>`data-annotation-id="${escape(a.annotationId)}" data-annot
 const ROUTE_LIMITS=Object.freeze({boxes:128,nodes:514,leaders:6,vertices:64,pathCharacters:8192,work:8000000,integerBits:1200});
 // Visibility graph over declared paper rectangles, then deterministic Dijkstra.
 // Distances choose a route; exact dyadic predicates alone decide its legality.
-function routeRequirementLeader(start,end,ownBox,side,otherBoxes,sheet,budget){
+export function routeDrawingLeader(start,end,ownBox,side,otherBoxes,sheet,budget){
  const charge=(n=1)=>{budget.used+=n;if(budget.used>ROUTE_LIMITS.work)resource('Requirement leader routing exceeds its bounded work domain.');};
  if(otherBoxes.length+1>ROUTE_LIMITS.boxes)resource('Requirement leader text obstacles exceed their bounded domain.');
  const point=p=>Array.isArray(p)&&p.length===2&&p.every(finite);
@@ -57,7 +57,7 @@ function routeRequirementLeader(start,end,ownBox,side,otherBoxes,sheet,budget){
  const vertex=p=>({p,q:p.map(exact)});
  const allowed=(n,goal=false)=>{charge();return inSheet(n.q)&&(goal||!inside(n.q,own,true))&&!obstacles.some(b=>{charge();return inside(n.q,b,false);});};
  const first=vertex(rawPoints[0]),last=vertex(rawPoints[1]);
- if(!allowed(first)||!allowed(last,true))resource('The actual requirement anchor or port has no clear supported paper domain.');
+ if(!allowed(first)||!allowed(last,true))resource('The actual requirement anchor or port has no clear supported paper domain.','ANCHOR_OR_PORT_BLOCKED');
  const orient=(a,b,p)=>{charge();return(b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]);};
  function intersects(a,b,r,closed){
   charge();
@@ -80,7 +80,7 @@ function routeRequirementLeader(start,end,ownBox,side,otherBoxes,sheet,budget){
  for(let iteration=0;iteration<nodes.length;iteration++){
   let at=-1;
   for(let i=0;i<nodes.length;i++){charge();if(!visited[i]&&Number.isFinite(distances[i])&&(at<0||distances[i]<distances[at]||distances[i]===distances[at]&&(hops[i]<hops[at]||hops[i]===hops[at]&&i<at)))at=i;}
-  if(at<0)resource('No supported obstacle-avoiding requirement leader route is available.');
+  if(at<0)resource('No supported obstacle-avoiding requirement leader route is available.','NO_ROUTE_IN_BOUNDED_GRAPH');
   if(at===1)break;visited[at]=true;
   for(let to=0;to<nodes.length;to++){
    charge();if(to===at||visited[to]||!visible(nodes[at],nodes[to],to===1))continue;
@@ -91,13 +91,13 @@ function routeRequirementLeader(start,end,ownBox,side,otherBoxes,sheet,budget){
  }
  const route=[],used=new Set();let at=1;
  while(at!==-1){charge();if(used.has(at)||route.length===ROUTE_LIMITS.vertices)resource('Requirement leader output exceeds its bounded path domain.');used.add(at);route.push(nodes[at]);if(at===0)break;at=previous[at];}
- if(at!==0)resource('No complete requirement leader path was established.');route.reverse();
+ if(at!==0)resource('No complete requirement leader path was established.','NO_ROUTE_IN_BOUNDED_GRAPH');route.reverse();
  for(let i=1;i<route.length;i++)if(!visible(route[i-1],route[i],i===route.length-1))resource('Requirement leader route failed its exact final visibility check.');
  return route.map(n=>n.p);
 }
 export function renderDrawingRequirementForms({definition:d,observation:o,views,geometryBounds,strokeBounds,labelBoxes,captionBoxes}){
- const paths=[],annotations=[],warnings=[],newLabels=[],newStrokes=[];
- if(d.version!==4)return{paths,annotations,warnings,labelBoxes:newLabels,strokeBounds:newStrokes};
+ const paths=[],annotations=[],warnings=[],newLabels=[],newStrokes=[],leaderSegments=[];
+ if(d.version!==4)return{paths,annotations,warnings,labelBoxes:newLabels,strokeBounds:newStrokes,leaderSegments};
  if(!Array.isArray(d.datumFeatures)||!Array.isArray(d.requirements)||!Array.isArray(o.datumFeatures)||!Array.isArray(o.requirements)||o.datumFeatures.length!==d.datumFeatures.length||o.requirements.length!==d.requirements.length)fail('Requirement observation differs from the complete authored v4 definition.');
  const frames=new Map(o.viewFrames.map(v=>[v.viewId,v.frame])),scale=d.sheet.scale.numerator/d.sheet.scale.denominator;
  const obstacles=[...geometryBounds,...strokeBounds].map(b=>expand(b,2.125)).concat([...labelBoxes,...captionBoxes].map(b=>expand(b,2))),forms=[],leaders=[];
@@ -161,13 +161,13 @@ export function renderDrawingRequirementForms({definition:d,observation:o,views,
  const routingBudget={used:0};
  for(const leader of leaders){
   const textObstacles=[...labelBoxes,...captionBoxes,...forms.filter(f=>f.annotationId!==leader.a.annotationId).map(f=>f.box)];
-  const points=routeRequirementLeader(leader.start,leader.end,leader.box,leader.side,textObstacles,d.sheet,routingBudget);
+  const points=routeDrawingLeader(leader.start,leader.end,leader.box,leader.side,textObstacles,d.sheet,routingBudget);
   const data='M'+points.map(p=>p.map(num).join(',')).join(' L');
   if(data.length>ROUTE_LIMITS.pathCharacters)resource('Requirement leader path exceeds its bounded serialization domain.');
   // Round joins bound all routed stroke ink by the .125-expanded segments.
   // Original direct leaders preserve their original attributes exactly.
   paths[leader.pathIndex]=`<path ${attrs(leader.a,leader.kind)} data-presentation="requirement-leader" d="${data}" stroke="#357"${points.length>2?' stroke-linejoin="round"':''}/>`;
-  for(let i=1;i<points.length;i++)newStrokes.push(boxOf([points[i-1],points[i]]));
+  for(let i=1;i<points.length;i++){const segment=[points[i-1],points[i]];newStrokes.push(boxOf(segment));leaderSegments.push(segment);}
  }
- return{paths,annotations,warnings,labelBoxes:newLabels,strokeBounds:newStrokes};
+ return{paths,annotations,warnings,labelBoxes:newLabels,strokeBounds:newStrokes,leaderSegments};
 }
