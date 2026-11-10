@@ -1,3 +1,4 @@
+import {arcLengthFromObject,arcLengthConstantValid} from './arcLengthDomain.mjs';
 import {arcBranchFacts,arcDataFromObject} from '../shapes/arcBranch.mjs';
 import {admissionCause} from './admissionCause.mjs';
 import {lineCircularContact,circleCircleContact,tangencyConstantsValid} from './tangencyDomain.mjs';
@@ -7,7 +8,7 @@ import {projectedDirectionValid} from './projectedDistanceDomain.mjs';
 const LENGTH=1e-6,ANGLE=1e-8;
 // Explicit existing source-schema scope: deferred admission must not infer
 // millimeter units for arbitrary schemas from the historical default below.
-const registeredSchemas=new Set(['StraightSlot','PCoincident','LockPoint','Horizontal','Vertical','SegmentLength','EqualLength','LengthRelation','RadiusLength','DiameterLength','DistancePL','PointOnLine','SignedDistanceX','SignedDistanceY','ProjectedDistance','Collinear','AxisSymmetry','Concentric','EqualRadius','Angle','AngleBetween','Parallel','Perpendicular','DistancePP','PointInMiddle','Symmetry','TangentLC','FiniteTangentLC','TangentCC','PointOnCircle','PointOnBezier','TangentLineBezier','PointOnEllipse','Polar','ArcConsistency','Fillet','FixSegment','FixCircle','FixArc','RigidGroup']);
+const registeredSchemas=new Set(['StraightSlot','PCoincident','LockPoint','Horizontal','Vertical','SegmentLength','ArcLength','EqualLength','LengthRelation','RadiusLength','DiameterLength','DistancePL','PointOnLine','SignedDistanceX','SignedDistanceY','ProjectedDistance','Collinear','AxisSymmetry','Concentric','EqualRadius','Angle','AngleBetween','Parallel','Perpendicular','DistancePP','PointInMiddle','Symmetry','TangentLC','FiniteTangentLC','TangentCC','PointOnCircle','PointOnBezier','TangentLineBezier','PointOnEllipse','Polar','ArcConsistency','Fillet','FixSegment','FixCircle','FixArc','RigidGroup']);
 // Keep refusal classification distinct from a mathematical domain failure.
 export function registeredDomainFailureCause(error){const d=error&&typeof error==='object'?Object.getOwnPropertyDescriptor(error,'code'):null,code=d&&Object.hasOwn(d,'value')?d.value:null;return admissionCause(code==='RESOURCE_LIMIT'?'resource-limit':['FINITE_CONTACT_UNCERTAIN','UNSUPPORTED_FINITE_ARC'].includes(code)?'retained-validation-failure':'invalid-domain');}
 export const hasRegisteredResidualPolicy=c=>!!c&&registeredSchemas.has(c.schema?.id);
@@ -16,6 +17,7 @@ const fail=()=>{throw Error('A sketch constraint has a degenerate or invalid dom
 const circle=o=>o?.c&&Number.isFinite(o.r?.get())&&o.r.get()>1e-9;
 export function assertRegisteredConstraintDomain(c){
  const id=c.schema.id,o=c.objects;
+ if(id==='ArcLength'){arcLengthFromObject(o[0]);if(!circle(o[0])||!arcLengthConstantValid(c.resolvedConstants.length))fail();}
  if(id==='ArcConsistency'){arcBranchFacts(arcDataFromObject(o[0]));if(!circle(o[0]))fail();}
  if(['FiniteTangentLC','TangentCC'].includes(id)){
   if(!tangencyConstantsValid(id,c.constants))throw Object.assign(Error('Invalid exact tangent constants.'),{code:'INVALID_TANGENCY_BRANCH'});
@@ -39,7 +41,9 @@ export function assertRegisteredConstraintDomain(c){
  }
 }
 export function registeredResidualProfile(c,polynomialValues){
- let residuals=[...polynomialValues];const units=residuals.map(()=>angleSchemas.has(c.schema.id)?'radian':'millimeter');
+ // ArcLength admission checks the ORIGINAL endpoint/branch measurement,
+ // independently of the solver's ephemeral periodic-angle chart.
+ let residuals=c.schema.id==='ArcLength'?[arcLengthFromObject(c.objects[0]).length-c.resolvedConstants.length]:[...polynomialValues];const units=residuals.map(()=>angleSchemas.has(c.schema.id)?'radian':'millimeter');
  if(c.schema.id==='TangentCC'){const [a,b]=c.objects,rA=a?.r?.get?.(),rB=b?.r?.get?.(),branch=c.constants?.branch,d=Math.hypot(b?.c?.x-a?.c?.x,b?.c?.y-a?.c?.y),target=branch==='external'?rA+rB:['first-contains-second','second-contains-first'].includes(branch)?Math.abs(rA-rB):NaN,scale=d+target;residuals=residuals.map(v=>Number.isFinite(scale)&&scale>0?v/scale:NaN);}
  if(c.schema.id==='DistancePP'||c.schema.id==='PointOnCircle'){
   const [a,b]=c.objects,p=c.schema.id==='DistancePP'?b:b.c,r=c.schema.id==='DistancePP'?Math.abs(c.resolvedConstants.distance):b.r.get(),scale=Math.hypot(a.x-p.x,a.y-p.y)+r;

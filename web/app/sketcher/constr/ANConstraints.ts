@@ -1,3 +1,4 @@
+import {ArcLengthSchema} from './arcLengthSchema';
 import {TANGENT_CC_BRANCHES} from './tangencyDomain.mjs';
 import {StraightSlotSchema} from './straightSlotSchema';
 import {Param} from '../shapes/param';
@@ -73,6 +74,7 @@ export const ConstraintDefinitions
   // }
 = {
   StraightSlot:StraightSlotSchema,
+  ArcLength:{...ArcLengthSchema,icon:GenericConstraintIcon},
 
   PCoincident : {
     id: 'PCoincident',

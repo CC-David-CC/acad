@@ -15,7 +15,7 @@ const signature = {
   StraightSlot:['Segment','Segment','Arc','Segment','Arc'],
   PCoincident: ['Point','Point'], LockPoint: ['Point'],
   Horizontal: ['Segment'], Vertical: ['Segment'], SegmentLength: ['Segment'], EqualLength: ['Segment','Segment'], LengthRelation: ['Segment','Segment'],
-  RadiusLength: [['Circle','Arc']], DiameterLength: [['Circle','Arc']], DistancePL: ['Point','Segment'], PointOnLine: ['Point','Segment'],
+  ArcLength: ['Arc'], RadiusLength: [['Circle','Arc']], DiameterLength: [['Circle','Arc']], DistancePL: ['Point','Segment'], PointOnLine: ['Point','Segment'],
   SignedDistanceX: ['Point','Point'], SignedDistanceY: ['Point','Point'], ProjectedDistance: ['Point','Point','Segment'],
   Collinear: ['Segment','Segment'], AxisSymmetry: ['Point','Point','Segment'],
   Concentric:[['Circle','Arc'],['Circle','Arc']],EqualRadius:[['Circle','Arc'],['Circle','Arc']],
