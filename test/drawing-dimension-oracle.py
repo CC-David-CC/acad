@@ -81,13 +81,14 @@ class DimensionPresentation:
         need(all(n in self.paths for n in groups[0] if n.get('stroke') in ('#246','#789')), 'no untagged dimension/leader paths outside the independently checked roster')
         need(all(n in self.texts for n in groups[1] if n.get('fill')=='#124' and not n.get('data-annotation-id')), 'no ghost untagged physical dimension text')
         self.checked, self.stroke_boxes = set(), []
-        self.main_segments, self.connector_segments = [], []
+        self.main_segments, self.connector_segments, self.reference_segments, self.reference_marks = [], [], [], []
 
     def base_metadata(self):
         return {k:v for k,v in self.meta.items() if k != 'dimensionPresentation'}
 
     def footer(self, original):
-        return original + (f' · LAYOUT UNCERTAIN ({self.uncertain})' if self.uncertain else '')
+        routed=sum(n.get('data-dimension-role')=='reference-connector' for n in self.paths)
+        return original + (f' · LAYOUT UNCERTAIN ({self.uncertain})' if self.uncertain else '') + (f' · ROUTED REFERENCES ({routed})' if routed else '')
 
     def common_attributes(self, dimension_id):
         r = self.rows[dimension_id]
@@ -157,21 +158,25 @@ class DimensionPresentation:
         roles={}
         for n in nodes:
             role=n.get('data-dimension-role');roles.setdefault(role,[]).append((n,self.points(n)))
-            attrs=common|{'data-dimension-role':role,'stroke':'#789' if role in ('extension-line','fallback-leader') else '#246'}
-            if role=='extension-line':attrs['stroke-width']='.18'
+            attrs=common|{'data-dimension-role':role,'stroke':'#789' if role in ('extension-line','reference-anchor','reference-connector','fallback-leader') else '#246'}
+            if role in ('extension-line','reference-anchor','reference-connector'):
+                anchor=n.get('data-dimension-anchor-index');need(anchor in ('0','1'), 'exact actual endpoint index for every witness/reference')
+                attrs['data-dimension-anchor-index']=anchor
+            if role in ('extension-line','reference-anchor'):attrs['stroke-width']='.18'
+            if role=='reference-connector':attrs['stroke-dasharray']='1 1'
             if common['data-dimension-layout']=='aligned-v1':attrs['stroke-linejoin']='round'
             elif role=='fallback-leader':attrs['stroke-dasharray']='1 1'
             need(n.tag==S+'path' and not list(n) and not(n.text or '').strip() and set(n.attrib)==set(attrs)|{'d'} and all(n.get(k)==v for k,v in attrs.items()), 'exact dimension role/style, no opacity/transforms/hidden marks')
             if common['data-dimension-layout']=='aligned-v1':
                 need(len(roles[role][-1][1])==1, 'one connected chain per new dimension path')
-                count=len(roles[role][-1][1][0]);need(count==3 if role=='arrowhead' else 2<=count<=64 if role=='label-connector' else count==2, 'exact finite dimension path arity')
+                count=len(roles[role][-1][1][0]);need(count==3 if role=='arrowhead' else 2<=count<=64 if role in ('label-connector','reference-connector') else count==2, 'exact finite dimension path arity')
         if common['data-dimension-layout']=='uncertain-original-v1':
             need(self.rows[dimension_id]['status']=='uncertain' and set(roles)=={'reference-span','fallback-leader'} and all(len(v)==1 for v in roles.values()), 'complete original fallback explicitly uncertain')
             span,leaders=roles['reference-span'][0][1],roles['fallback-leader'][0][1]
             need(any(len(span)==1 and len(leaders)==2 and all(self.near_point(x,y) for x,y in zip(span[0],pair)) and all(len(c)==2 and self.near_point(c[0],pair[i]) and self.near_point(c[1],label) for i,c in enumerate(leaders)) for pair in anchor_candidates), 'complete fallback keeps genuine original anchors and rays')
             need(all(a==b for a,b in anchor_candidates), 'ordinary noncollapsed acceptance cases must produce aligned dimensions, not succeed via an uncertain fan fallback')
         else:
-            need(set(roles)<= {'dimension-line','extension-line','arrowhead','label-connector'} and len(roles.get('arrowhead',[]))==2 and len(roles.get('dimension-line',[]))<=2 and 2<=len(roles.get('extension-line',[]))<=4 and len(roles.get('label-connector',[]))<=1, 'complete aligned dimension role roster')
+            need(set(roles)<= {'dimension-line','extension-line','reference-connector','reference-anchor','arrowhead','label-connector'} and len(roles.get('arrowhead',[]))==2 and len(roles.get('dimension-line',[]))<=2 and len(roles.get('extension-line',[]))<=4 and len(roles.get('reference-connector',[]))<=2 and len(roles.get('reference-anchor',[]))<=4 and len(roles.get('label-connector',[]))<=1, 'complete aligned dimension role roster')
             heads=[c[0] for _,c in roles['arrowhead']]
             need(all(len(c)==3 for c in heads), 'two complete open arrowheads')
             qa,qb=heads[0][1],heads[1][1];matched=[]
@@ -188,19 +193,40 @@ class DimensionPresentation:
                 if not all(self.near_point(x,y) for actual,want in zip(heads,expected_heads) for x,y in zip(actual,want)):continue
                 main=[c[0] for _,c in roles.get('dimension-line',[])]
                 if not self._coverage(main,qa,qb,own):continue
-                extensions=[c[0] for _,c in roles['extension-line']]
-                valid=False
-                for cut in (1,2):
-                    if not 1<=len(extensions)-cut<=2:continue
-                    if all(self._coverage(cs,[anchor[k]+n[k]*side*1.5 for k in range(2)],[tip[k]+n[k]*side*1.5 for k in range(2)],own) for cs,anchor,tip in ((extensions[:cut],a,qa),(extensions[cut:],b,qb))):valid=True;break
+                valid=True
+                for index,anchor,tip in ((0,a,qa),(1,b,qb)):
+                    belongs=lambda node:node.get('data-dimension-anchor-index')==str(index)
+                    extensions=[c[0] for node,c in roles.get('extension-line',[]) if belongs(node)]
+                    refs=[c[0] for node,c in roles.get('reference-connector',[]) if belongs(node)]
+                    marks=[c[0] for node,c in roles.get('reference-anchor',[]) if belongs(node)]
+                    if refs:
+                        expected_marks=[[[anchor[0]-.6,anchor[1]],[anchor[0]+.6,anchor[1]]],[[anchor[0],anchor[1]-.6],[anchor[0],anchor[1]+.6]]]
+                        valid=valid and not extensions and len(refs)==1 and len(marks)==2 and self.near_point(refs[0][0],anchor) and self.near_point(refs[0][-1],tip) and all(self.near_point(x,y) for actual,want in zip(marks,expected_marks) for x,y in zip(actual,want))
+                    else:
+                        valid=valid and not marks and 1<=len(extensions)<=2 and self._coverage(extensions,[anchor[k]+n[k]*side*1.5 for k in range(2)],[tip[k]+n[k]*side*1.5 for k in range(2)],own)
                 if valid:matched.append((qa,qb,u,length))
             need(len(matched)==1, 'actual complete aligned span/extensions/arrows match one independently source-bound anchor pair')
             qa,qb,u,length=matched[0]
             connectors=roles.get('label-connector',[])
+            # A remote actual label needs a real visible association. This
+            # is an endpoint/box inequality, never a replay of the route.
+            if clipped_interval(qa,qb,own,closed=True) is None:
+                need(len(connectors)==1, 'disconnected finite dimension span requires its actual label connector')
+            for _,chains in roles.get('reference-connector',[]):
+                points=chains[0];need(all(x!=y for x,y in zip(points,points[1:])), 'no collapsed routed reference segments')
+                need(not any(crosses(x,y,c[0],c[1]) for x,y in zip(points,points[1:]) for _,cc in roles.get('dimension-line',[]) for c in cc), 'routed reference meets its own finite dimension line only at the true endpoint')
+                self.reference_segments.extend((dimension_id,x,y) for x,y in zip(points,points[1:]))
+            self.reference_marks.extend((dimension_id,*c[0]) for _,c in roles.get('reference-anchor',[]))
             if connectors:
                 connector=connectors[0][1];need(len(connector)==1, 'one connected visible label leader');points=connector[0]
                 delta=[points[0][k]-qa[k] for k in range(2)]
                 need(abs(delta[0]*u[1]-delta[1]*u[0])<=PAPER and -PAPER<=sum(delta[k]*u[k] for k in range(2))<=length+PAPER, 'connector starts on this actual dimension span')
+                def on_visible_segment(x,a,b):
+                    distance=math.dist(a,b)
+                    if not distance:return self.near_point(x,a)
+                    direction=[(b[k]-a[k])/distance for k in range(2)];v=[x[k]-a[k] for k in range(2)]
+                    return abs(v[0]*direction[1]-v[1]*direction[0])<=PAPER and -PAPER<=sum(v[k]*direction[k] for k in range(2))<=distance+PAPER
+                need(self.near_point(points[0],qa) or self.near_point(points[0],qb) or any(on_visible_segment(points[0],c[0],c[1]) for _,cc in roles.get('dimension-line',[]) for c in cc), 'label connector actually touches emitted finite span ink or a complete arrow tip')
                 ports=[(own[0],(own[1]+own[3])/2),(own[2],(own[1]+own[3])/2),((own[0]+own[2])/2,own[1]),((own[0]+own[2])/2,own[3])]
                 valid_sides=[i for i,p in enumerate(ports) if self.near_point(points[-1],p)]
                 need(any((points[-2][0]<own[0],points[-2][0]>own[2],points[-2][1]<own[1],points[-2][1]>own[3])[i] for i in valid_sides), 'connector ends at a physical port from its strict exterior side')
@@ -267,10 +293,10 @@ class DimensionPresentation:
                     if n.get('data-dimension-id')!=dimension_id:continue
                     for chain in self.points(n):
                         for a,b in zip(chain,chain[1:]):need(all(other_id==dimension_id or clipped_interval(a,b,rect,F(1,8)) is None for other_id,rect in labels), 'every actual new line/arrow/connector clears all other declared text/form/caption boxes')
-        need(not any(aid!=bid and crosses(a,b,c,d) for i,(aid,a,b) in enumerate(self.main_segments) for bid,c,d in self.main_segments[i+1:]+self.connector_segments), 'no actual cross-dimension line/connector crossing')
-        need(not any(crosses(a,b,c,d) for i,(_,a,b) in enumerate(self.connector_segments) for _,c,d in self.connector_segments[i+1:]), 'actual connectors do not cross one another')
+        need(not any(aid!=bid and crosses(a,b,c,d) for i,(aid,a,b) in enumerate(self.main_segments) for bid,c,d in self.main_segments[i+1:]+self.connector_segments+self.reference_segments+self.reference_marks), 'no actual cross-dimension line/connector crossing')
+        need(not any(crosses(a,b,c,d) for i,(_,a,b) in enumerate(self.connector_segments+self.reference_segments) for _,c,d in (self.connector_segments+self.reference_segments)[i+1:]), 'actual label/reference connectors do not self-cross or cross one another')
         need(not any(crosses(a,b,c,d) for _,a,b in self.main_segments for c,d in geometry), 'dimension lines clear actual projected geometry without an AABB being geometry authority')
-        need(not any(crosses(a,b,c,d) for _,a,b in self.main_segments+self.connector_segments for c,d in legacy_leaders), 'new dimension lines/connectors clear actual pre-existing bore/ordinate/requirement leaders')
+        need(not any(crosses(a,b,c,d) for _,a,b in self.main_segments+self.connector_segments+self.reference_segments for c,d in legacy_leaders), 'new dimension lines/connectors clear actual pre-existing bore/ordinate/requirement leaders')
         footer=self.footer('Reference drawing · '+self.meta['status']+' · scale '+str(self.d['sheet']['scale']['numerator'])+':'+str(self.d['sheet']['scale']['denominator']))
         notices=[n for n in self.xml.findall('.//'+S+'text') if n.text==footer and n.attrib=={'x':'8','y':str(self.d['sheet']['height']-5)} and not list(n)]
         need(len(notices)==1,'one exact visible reference/layout-uncertainty footer, no hidden diagnostic substitution')
