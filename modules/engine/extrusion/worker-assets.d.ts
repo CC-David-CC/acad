@@ -80,3 +80,9 @@ declare module 'codi-finite-curve-support-assets' {
  }>;
  export default assets;
 }
+
+// Optional analytic source-owned prism; null until a genuine new pair is staged.
+declare module 'codi-analytic-profile-assets' {
+ const value:null|Readonly<{format:'analytic-profile-component/1';jsSha256:string;wasmSha256:string;nativeSourceCommit:string;nativeHeaderSha256:string;bootstrapSha256:string;workerSha256:string;worker:string;js:string;wasm:string;modules:Readonly<Record<string,string>>;files:Readonly<Record<string,Readonly<{sha256:string;bytes:number}>>>;sources:Readonly<Record<string,string>>;producerSources:Readonly<Record<string,string>>}>;
+ export default value;
+}

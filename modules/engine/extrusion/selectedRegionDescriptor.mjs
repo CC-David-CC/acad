@@ -1,3 +1,15 @@
+// Metadata-only source component census for the explicit analytic slice.
+export const ANALYTIC_SOURCE_POLICY='v5-analytic-single-loop';
+export function captureAnalyticSourceAnalysis(value,sourceIds,regions,charge){
+ const fail=()=>{throw Object.assign(Error('Invalid analytic source component census'),{code:'INVALID_RESPONSE'});};
+ const keys=['version','policy','curveIds'];if(!value||typeof value!=='object'||Array.isArray(value)||Reflect.ownKeys(value).length!==keys.length)fail();
+ const r={};for(const k of keys){const d=Object.getOwnPropertyDescriptor(value,k);if(!d?.enumerable||!Object.hasOwn(d,'value'))fail();r[k]=d.value;}
+ if(r.version!==1||r.policy!==ANALYTIC_SOURCE_POLICY||!Array.isArray(r.curveIds)||!r.curveIds.length||r.curveIds.length>170||Reflect.ownKeys(r.curveIds).length!==r.curveIds.length+1||regions.length!==1)fail();
+ const ids=[];for(let i=0;i<r.curveIds.length;i++){const d=Object.getOwnPropertyDescriptor(r.curveIds,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value')||typeof d.value!=='string'||!sourceIds.has(d.value)||i&&ids[i-1]>=d.value)fail();charge(d.value);ids.push(d.value);}
+ if(ids.length!==sourceIds.size||regions[0].descriptor.holeCurveIds.length||JSON.stringify(regions[0].descriptor.outerCurveIds)!==JSON.stringify(ids))fail();
+ return Object.freeze({version:1,policy:ANALYTIC_SOURCE_POLICY,curveIds:Object.freeze(ids)});
+}
+
 // Small metadata contract only. No geometry, topology extraction or CAD handles.
 import {isArrangementDescriptor,captureArrangementDescriptor,arrangementRegionIdentity,captureArrangementAnalysis,arrangementPolicy,contactArrangementPolicy} from './selectedArrangementDescriptor.mjs';
 const MAX_SOURCE_OBJECTS=4096,MAX_CURVES=4096,MAX_LOOPS=128,MAX_ID=256,MAX_RESPONSE=65536;
@@ -13,7 +25,7 @@ function array(value,max){
 function own(value,key){const d=value&&typeof value==='object'?Object.getOwnPropertyDescriptor(value,key):null;if(!d?.enumerable||!Object.hasOwn(d,'value'))fail('Invalid solved source metadata.');return d.value;}
 export function captureSelectedRegionCurveIds(sketch){
  const objects=array(own(sketch,'objects'),MAX_SOURCE_OBJECTS),seen=new Set(),ids=[];
- for(const object of objects){const id=own(object,'id'),type=own(object,'type'),role=own(object,'role'),stage=own(object,'stage');if(typeof id!=='string'||!id||id.length>MAX_ID||seen.has(id))fail('Invalid solved source curve identity.');seen.add(id);if(stage===0&&role===null&&['Segment','Circle'].includes(type))ids.push(id);}
+ for(const object of objects){const id=own(object,'id'),type=own(object,'type'),role=own(object,'role'),stage=own(object,'stage');if(typeof id!=='string'||!id||id.length>MAX_ID||seen.has(id))fail('Invalid solved source curve identity.');seen.add(id);if(stage===0&&role===null&&['Segment','Circle','Arc'].includes(type))ids.push(id);}
  return Object.freeze(ids);
 }
 // Producer and consumers share this source namespace. The local native ID
@@ -38,6 +50,7 @@ function regionIdentity(faceId,d){return isArrangementDescriptor(d)?arrangementR
 // Metadata admission only. The Worker owns exact graph/self-contact and
 // conservative geometry proof; this census prevents omitted/invented IDs.
 function captureSourceAnalysis(value,sourceIds,regions,charge){
+ if(Object.getOwnPropertyDescriptor(value||{},'policy')?.value===ANALYTIC_SOURCE_POLICY)return captureAnalyticSourceAnalysis(value,sourceIds,regions,charge);
  if([arrangementPolicy,contactArrangementPolicy].includes(Object.getOwnPropertyDescriptor(value||{},'policy')?.value))return captureArrangementAnalysis(value,sourceIds,regions,charge);
  const r=data(value,['version','policy','clearanceMm','closedComponents','openComponents']);
  if(r.version!==1||r.policy!=='v3-extrusion-isolated-open-chains'||r.clearanceMm!==0.0001)fail('Unknown selected-source component policy.');

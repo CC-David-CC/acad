@@ -1,7 +1,9 @@
+import {captureArcData} from './authoredArcBranch.mjs';
+import {prepareAnalyticProfileExtrusion,orderAnalyticProfileLoop} from '../mount/analyticProfilePlan.mjs';
 // Worker-only geometry preparation. This does not solve or admit constraints.
 // The caller must bind these bytes to a genuine current sketch-Worker result
 // and retain document/host currentness through native publication.
-import {describeSelectedRegion,qualifySourceCurveId} from './selectedRegionDescriptor.mjs';
+import {describeSelectedRegion,qualifySourceCurveId,ANALYTIC_SOURCE_POLICY} from './selectedRegionDescriptor.mjs';
 import {deriveAuthoredRegions} from '../../workbenches/modeler/features/extrude/authoredRegions.mjs';
 import {prepareSelectedProfileExtrusion} from '../mount/selectedProfilePlan.mjs';
 import {partitionSelectedSegments,analyzeIsolatedOpenComponents} from './isolatedOpenProfileComponents.mjs';
@@ -30,6 +32,7 @@ function capture(input,selected,faceOnly=false){
  const version=Object.getOwnPropertyDescriptor(input||{},'profileVersion'),keys=selected?['unit','engine','revision','sketchDigest','faceId','regionId','frame',...(faceOnly?[]:['depth']),'sketchJSON']:['unit','engine','revision','sketchDigest','faceId','frame',...(faceOnly?[]:['depth']),'sketchJSON'];
  if(version){if(!version.enumerable||!Object.hasOwn(version,'value')||version.value!==3)fail('INVALID_REQUEST','Only explicit profileVersion3 selects polygon preparation.');keys.push('profileVersion');}
  const circular=Object.getOwnPropertyDescriptor(input||{},'circularArrangementVersion');if(circular){if(faceOnly||!version||!circular.enumerable||!Object.hasOwn(circular,'value')||circular.value!==1)fail('INVALID_REQUEST','Circular arrangement requires explicit extrusion-only capability1.');keys.push('circularArrangementVersion');}
+ const analytic=Object.getOwnPropertyDescriptor(input||{},'analyticProfileVersion');if(analytic){if(faceOnly||!version||!analytic.enumerable||!Object.hasOwn(analytic,'value')||analytic.value!==1)fail('INVALID_REQUEST','Analytic profiles require explicit extrusion-only capability1.');keys.push('analyticProfileVersion');}
  const r=fields(input,keys);
  if(faceOnly&&r.profileVersion!==3)fail('INVALID_REQUEST','Depth-free source faces require explicit polygon version3.');
  if(r.unit!=='millimeter'||r.engine!=='occ')fail('UNSUPPORTED_ENGINE','Selected profiles currently require the qualified OCC millimeter path.');
@@ -53,7 +56,7 @@ async function extractSource({r,frame,faceOnly=false},allowIsolatedOpen=false){
  if(sketch?.version!==3||!Array.isArray(sketch.objects)||sketch.objects.length>4096||!Array.isArray(sketch.stages)||sketch.stages.length!==1||!Array.isArray(sketch.stages[0]?.constraints)||!Array.isArray(sketch.stages[0]?.generators)||sketch.stages[0].generators.length)fail('UNSUPPORTED_SKETCH','One bounded generator-free source stage is required.');
  const sourceFrame=sketch.metadata?.boundaryFrame;
  if(!sourceFrame||Object.keys(sourceFrame).sort().join(',')!=='origin,x,y,z'||Object.keys(frame).some(k=>!Array.isArray(sourceFrame[k])||sourceFrame[k].length!==3||sourceFrame[k].some((v,i)=>v!==frame[k][i])))fail('STALE_FRAME','Source frame does not match the captured current plane.');
- const segments=[],loops=[],seen=new Set(),qualifiedToLocal=new Map();
+ const arcs=[],segments=[],loops=[],seen=new Set(),qualifiedToLocal=new Map();
  for(const object of sketch.objects){
   if(!object||typeof object.id!=='string'||!object.id||object.id.length>256||seen.has(object.id)||object.stage!==0||![null,'construction'].includes(object.role))fail('INVALID_SKETCH','Invalid or duplicate authored primitive identity.');
   seen.add(object.id);
@@ -61,9 +64,18 @@ async function extractSource({r,frame,faceOnly=false},allowIsolatedOpen=false){
   const id=qualifySourceCurveId(r.faceId,object.id);qualifiedToLocal.set(id,object.id);
   if(object.type==='Segment'){
    const data=fields(object.data,['a','b']),a=point(data.a),b=point(data.b);if(same(a,b))fail('INVALID_PROFILE','A zero-length edge cannot bound a region.');segments.push({kind:'segment',id,a,b});
+  }else if(object.type==='Arc'&&r.analyticProfileVersion===1){
+   const data=captureArcData(object.data);arcs.push({kind:'arc',id,a:[data.a.x,data.a.y],b:[data.b.x,data.b.y],center:[data.c.x,data.c.y],branch:data.branch});
   }else if(object.type==='Circle'){
    const data=fields(object.data,['c','r']);loops.push([{kind:'circle',id,center:point(data.c),radius:data.r}]);
   }else fail('UNSUPPORTED_PROFILE',r.profileVersion===3?'Only ordinary polygon segments and full circles are qualified.':'Only ordinary rectangle segments and full circles are qualified.');
+ }
+ if(arcs.length){
+  if(loops.length)fail('UNSUPPORTED_PROFILE','Multiple Arc/Circle components and holes require a later explicit analytic region contract.');
+  const outer=orderAnalyticProfileLoop([...segments,...arcs]),descriptor={faceId:r.faceId,outer:outer.map(c=>c.id).sort(),holes:[]},regionId='sketch-region:'+JSON.stringify(descriptor);
+  const request={op:'solid.profile.extrude',version:5,unit:r.unit,frame,depth:r.depth,region:{id:regionId,outer,holes:[]}};
+  prepareAnalyticProfileExtrusion(request);
+  return{r,frame,regions:[descriptor],byIds:new Map(),qualifiedToLocal,sketch,sourceAnalysis:{version:1,policy:ANALYTIC_SOURCE_POLICY,curveIds:outer.map(c=>qualifiedToLocal.get(c.id)).sort()},analytic:{request}};
  }
  // Whole-source contact proof precedes the old shared-edge refusal. The
  // helper returns only the exact two-rectangle contact domain; all other
@@ -135,8 +147,9 @@ export function prepareSolvedPolygonSourceFace(context,regionId){
 }
 export function describeSolvedPolygonSourceRegion(context,region){return describeSelectedRegion(region,context.qualifiedToLocal);}
 
-function prepareRegion({r,frame,regions,byIds,arrangement,circular},regionId){
+function prepareRegion({r,frame,regions,byIds,arrangement,circular,analytic},regionId){
  if(invalidRegionId(regionId))invalidIdentity();
+ if(analytic){if(analytic.request.region.id!==regionId)fail('STALE_REGION','The actual original analytic boundary selection changed.');return prepareAnalyticProfileExtrusion(analytic.request);}
  if(circular){const cell=circular.cells.find(c=>c.regionId===regionId);if(!cell)fail('STALE_REGION','The selected circular cell changed; choose its actual current replacement.');return prepareCircularCellExtrusion({op:'solid.profile.extrude',version:4,unit:r.unit,frame,depth:r.depth,region:{id:regionId,faceId:r.faceId,circles:circular.circles,descriptor:cell.descriptor}});}
  if(arrangement){const cell=arrangement.cells.find(c=>c.regionId===regionId);if(!cell)fail('STALE_REGION','The selected arrangement cell is no longer available; select it again.');return preparePolygonProfileExtrusion({op:'solid.profile.extrude',version:3,unit:r.unit,frame,depth:r.depth,region:{id:regionId,outer:cell.outer,holes:[],boundaryProvenance:{version:1,kind:'axis-rectangle-arrangement',faceId:r.faceId,descriptor:cell.descriptor}}});}
  const region=regions.find(value=>'sketch-region:'+JSON.stringify(value)===regionId);

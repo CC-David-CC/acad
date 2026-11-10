@@ -49,7 +49,7 @@ export function validatePrismProvenance(value,topology,prepared){
  list(v.sourceLoops,129);if(v.sourceLoops.length!==prepared.loops.length)fail();
  const capEdges=new Set(),sideFaces=new Set(),connectors=new Set(),capVertices=new Set();
  for(let i=0;i<v.sourceLoops.length;i++){
-  const row=record(v.sourceLoops[i],['loop','edges','vertices']),loop=prepared.loops[i],circle=loop.kind==='circle',n=circle?1:loop.vertices.length;
+  const row=record(v.sourceLoops[i],['loop','edges','vertices']),loop=prepared.loops[i],circle=loop.kind==='circle',n=circle?1:loop.kind==='analytic'?loop.curves.length:loop.vertices.length;
   if(row.loop!==i)fail();list(row.edges,512);list(row.vertices,512);if(row.edges.length!==n||row.vertices.length!==(circle?0:n))fail();
   for(let j=0;j<row.edges.length;j++){
    const e=record(row.edges[j],['source','firstEdge','lastEdge','sweptFace']);if(e.source!==j)fail();
@@ -72,6 +72,7 @@ export function bindPrismSourceSlots(value,prepared){
  const spans=boundary?new Map(boundary.descriptor.outerBoundaryRefs.map(r=>[r.id,r])):null;
  const equal=(a,b)=>a[0]===b[0]&&a[1]===b[1];
  const nativeSlotBindings=prepared.loops.map((loop,i)=>{
+  if(loop.kind==='analytic'){const edges=loop.curves.map((c,j)=>({source:j,curveId:c.id,nativeReversed:c.orientation==='reversed'}));return{loop:i,edges,vertices:edges.map((_,j)=>({source:j,incidentCurveIds:[edges[(j+edges.length-1)%edges.length].curveId,edges[j].curveId].sort(),endpointRoles:[{curveId:loop.curves[(j+edges.length-1)%edges.length].id,endpoint:loop.curves[(j+edges.length-1)%edges.length].orientation==='forward'?'b':'a'},{curveId:loop.curves[j].id,endpoint:loop.curves[j].orientation==='forward'?'a':'b'}]}))};}
   if(loop.kind==='circle')return{loop:i,edges:[{source:0,curveId:curves[i][0].id,nativeReversed:false}],vertices:[]};
   const edges=loop.vertices.map((a,j)=>{
    const b=loop.vertices[(j+1)%loop.vertices.length],matches=curves[i].filter(c=>c.kind==='segment'&&(equal(c.a,a)&&equal(c.b,b)||equal(c.a,b)&&equal(c.b,a)));
