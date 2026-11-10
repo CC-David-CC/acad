@@ -1,4 +1,9 @@
 """Independent finite source-frame projection, paper and chord audit."""
+from pathlib import Path as _DimensionPath
+import importlib.util as _dimension_import
+_dimension_spec=_dimension_import.spec_from_file_location('drawing_dimension_oracle',_DimensionPath(__file__).resolve().parents[1]/'drawing-dimension-oracle.py')
+_dimension_oracle=_dimension_import.module_from_spec(_dimension_spec);_dimension_spec.loader.exec_module(_dimension_oracle)
+
 import json,math,re
 from xml.etree import ElementTree as ET
 
@@ -24,10 +29,12 @@ def visible_scaffold(raw,definition,e):
  background,geometry,labels=children[-3:]
  require(background.attrib=={'width':'100%','height':'100%','fill':'white'} and not list(background) and blank(background.text),'exact white sheet background')
  require(geometry.attrib=={'fill':'none','stroke':'#111','stroke-width':'.25'} and blank(geometry.text),'exact visible untransformed geometry style')
+ layout=_dimension_oracle.DimensionPresentation(root,definition,require)
  paths=list(geometry)
  for node in paths:
   require(node.tag==tag('path') and not list(node) and blank(node.text) and blank(node.tail),'plain path leaves in actual geometry group only')
   a=node.attrib;keys=set(a)
+  if node in layout.paths:continue
   require('d' in a and isinstance(a['d'],str) and bool(a['d']),'actual finite path data')
   allowed=(keys=={'d'} or keys=={'d','stroke','stroke-dasharray'} and (a['stroke'],a['stroke-dasharray']) in (('#777','2 1'),('#789','1 1')) or keys=={'d','stroke'} and a['stroke']=='#246')
   require(allowed,'only exact solid/hidden/dimension/leader path styles; no local transforms, opacity, events or external effects')
@@ -38,13 +45,13 @@ def visible_scaffold(raw,definition,e):
   elif d['kind']=='source-distance' and d['axis']=='datum-x':name,value='ΔX ',e['width']
   else:require(d['kind']=='source-distance' and d['axis']=='datum-y','same finite source/cap dimension family');name,value='ΔY ',e['height']
   expected.append((tuple(d['label']),name+f'{value:.3f} mm','#124'))
- expected.append(((8,292),'Reference drawing · available · scale 1:1',None))
+ expected.append(((8,292),layout.footer('Reference drawing · available · scale 1:1'),None))
  texts=list(labels);captions=[node for node in texts if 'data-view-caption-id' in node.attrib];fixed=[node for node in texts if node not in captions]
  require(len(texts)==len(expected)+len(definition['views']) and len(captions)==len(definition['views']) and len(fixed)==len(expected),'exact title/view/dimension/footer text roster, no hidden/extra text')
  for node in texts:require(node.tag==tag('text') and not list(node) and blank(node.tail),'all actual labels are plain visible text leaves')
  for node,(position,value,fill) in zip(fixed,expected):
   require(node.tag==tag('text') and not list(node) and blank(node.tail) and (node.text or '')==value,'exact plain actual visible text and order')
-  require(set(node.attrib)==({'x','y'} if fill is None else {'x','y','fill'}) and (fill is None or node.attrib['fill']==fill),'only exact text placement/fill; no style, transforms, opacity, events, tspan or external content')
+  require(set(node.attrib)==({'x','y'} if fill is None else {'x','y'}|set(layout.text_attributes(node.get('data-dimension-id')))) and (fill is None or node.attrib['fill']==fill),'only exact text placement/fill; no style, transforms, opacity, events, tspan or external content')
   xy=tuple(float(node.attrib[k]) for k in ('x','y'));require(all(math.isfinite(n) for n in xy) and xy==tuple(position) and 0<=xy[0]<=420 and 0<=xy[1]<=297,'exact authored/current derived text position on sheet')
  # The finite counterbore has an independently checked rectangular outer
  # boundary in these three projections. Reconstruct its physical paper boxes
@@ -70,11 +77,11 @@ def visible_scaffold(raw,definition,e):
   for prior in boxes:require(not intersects(box,prior),'all complete derived caption boxes are disjoint')
   boxes.append(box)
  require(len(used)==len(captions),'no unverified extra or duplicate derived caption')
- return root,paths,texts
+ return root,paths,texts,layout
 
 def inspect_counterbore_svg(raw,e,definition,context):
- ns={'s':'http://www.w3.org/2000/svg'};root,geometry_paths,text_nodes=visible_scaffold(raw,definition,e);require(root.attrib.get('width')=='420mm' and root.attrib.get('height')=='297mm' and root.attrib.get('viewBox')=='0 0 420 297','physical sheet/viewBox')
- meta=json.loads(root.find('s:metadata',ns).text);require(set(meta)=={'version','drawingId','revision','geometryRevision','quality','status','curvePresentationTolerancePaperMm','dimensionRole'} and meta['version']==1 and meta['quality']=='native-bound-drawing-references','exact actual v1 metadata vocabulary');require(meta['drawingId']==definition['drawingId'] and meta['status']=='available' and meta['dimensionRole']=='reference','current available reference drawing');require(meta['revision']==context['host']['revision'] and meta['geometryRevision']==context['capture']['solids']['revision']==context['drawing']['geometryRevision'],'actual current document/geometry SVG binding');require(meta['curvePresentationTolerancePaperMm']==.02,'same declared chord budget')
+ ns={'s':'http://www.w3.org/2000/svg'};root,geometry_paths,text_nodes,layout=visible_scaffold(raw,definition,e);require(root.attrib.get('width')=='420mm' and root.attrib.get('height')=='297mm' and root.attrib.get('viewBox')=='0 0 420 297','physical sheet/viewBox')
+ meta=layout.base_metadata();require(set(meta)=={'version','drawingId','revision','geometryRevision','quality','status','curvePresentationTolerancePaperMm','dimensionRole'} and meta['version']==1 and meta['quality']=='native-bound-drawing-references','exact actual v1 metadata vocabulary');require(meta['drawingId']==definition['drawingId'] and meta['status']=='available' and meta['dimensionRole']=='reference','current available reference drawing');require(meta['revision']==context['host']['revision'] and meta['geometryRevision']==context['capture']['solids']['revision']==context['drawing']['geometryRevision'],'actual current document/geometry SVG binding');require(meta['curvePresentationTolerancePaperMm']==.02,'same declared chord budget')
  require(definition['version']==1 and [v['basis'] for v in definition['views']]==['top','front','right'] and len(definition['dimensions'])==3,'unchanged three-view/source-dimension definition')
  texts=[n.text or '' for n in text_nodes];require(not any('UNRESOLVED' in t or 'THRU' in t for t in texts),'no unresolved or fabricated through annotation')
  for text in [f"ΔX {e['width']:.3f} mm",f"ΔY {e['height']:.3f} mm",f"ΔZ {e['thickness']:.3f} mm"]:require(text in texts,'actual physical source/cap dimension '+text)
@@ -93,6 +100,7 @@ def inspect_counterbore_svg(raw,e,definition,context):
   require(all(2<=len(ps)<=65537 and all(0<=p[0]<=420 and 0<=p[1]<=297 for p in ps) for ps in chains),'bounded physical paper curve');return chains
  views={v['viewId']:{'view':v,'curves':[]} for v in definition['views']};segments=0;dimension_paths=[];leaders=[]
  for node in geometry_paths:
+  if node in layout.paths:continue
   stroke=node.attrib.get('stroke');chains=path_chains(node.attrib['d'])
   if stroke=='#246':dimension_paths.append(chains);continue
   if stroke=='#789':leaders.append(chains);continue
@@ -141,7 +149,7 @@ def inspect_counterbore_svg(raw,e,definition,context):
   summary[key]={'basis':basis,'curves':len(data['curves']),'completeOuterOutline':True,'completeCircularRims':basis=='top','finiteStepIntervals':basis!='top'}
  # Source dimensions use actual saved curve identities; no ID grammar or provider values.
  source_rows=[x for x in context['capture']['native']['sketches'] if x['id']==definition['datum']['faceId']];require(len(source_rows)==1,'actual drawing datum source');source=json.loads(source_rows[0]['source']);objects={o['id']:o for o in source['objects']}
- require(len(dimension_paths)==len(leaders)==3,'actual three reference dimensions and leaders')
+ require(len(layout.rows)==3,'actual three source-bound dimension identities')
  def pair_equal(actual,expected):return len(actual)==2 and (all(math.dist(p,q)<=inc for p,q in zip(actual,expected)) or all(math.dist(p,q)<=inc for p,q in zip(actual,reversed(expected))))
  used_dimensions=set();used_leaders=set()
  for dimension in definition['dimensions']:
@@ -156,10 +164,11 @@ def inspect_counterbore_svg(raw,e,definition,context):
    # The authentic cap fact may select either genuine source corner column;
    # no interior arbitrary anchor or another measurement is permitted.
    candidates=[[(ox+x*scale,oy),(ox+x*scale,oy-T*scale)] for x in (0,W)]
-  matching=[(i,candidate) for i,chains in enumerate(dimension_paths) if i not in used_dimensions and len(chains)==1 for candidate in candidates if pair_equal(chains[0],candidate)];require(len(matching)==1,'actual dimension path matches its own physical anchors');i,ends=matching[0];used_dimensions.add(i)
-  label=tuple(dimension['label']);matching=[]
-  for j,chains in enumerate(leaders):
-   if j in used_leaders or len(chains)!=2 or any(len(c)!=2 or math.dist(c[1],label)>inc for c in chains):continue
-   if pair_equal([c[0] for c in chains],ends):matching.append(j)
-  require(len(matching)==1,'actual leaders bind same dimension anchors to authored label');used_leaders.add(matching[0])
- return {'metadata':meta,'views':summary,'geometrySegments':segments,'paperChordMm':.02,'nativeProjectedIncidenceMm':inc,'actualSourceDimensionPaths':3}
+  prefix='ΔZ ' if dimension['kind']=='plane-distance' else 'ΔX ' if dimension['axis']=='datum-x' else 'ΔY '
+  value=T if dimension['kind']=='plane-distance' else W if dimension['axis']=='datum-x' else H
+  layout.verify(dimension['dimensionId'],candidates,prefix+format(value,'.3f')+' mm')
+ bounds=[]
+ for v in definition['views']:
+  ox,oy=v['paperOrigin'];width,height=(W,H) if v['basis']=='top' else (W,T) if v['basis']=='front' else (H,T);bounds.append([ox,oy-height,ox+width,oy])
+ dimension_proof=layout.finish(bounds)
+ return {'metadata':meta,'views':summary,'geometrySegments':segments,'paperChordMm':.02,'nativeProjectedIncidenceMm':inc,'actualSourceDimensions':3,'dimensionLayout':{'dimensions':dimension_proof['dimensions'],'uncertain':dimension_proof['uncertain'],'segments':len(dimension_proof['strokeBoxes'])}}

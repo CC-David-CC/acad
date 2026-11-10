@@ -2,6 +2,11 @@
 
 AFTER-WHOLE only. No production renderer, layout search or geometry import.
 """
+from pathlib import Path as _DimensionPath
+import importlib.util as _dimension_import
+_dimension_spec=_dimension_import.spec_from_file_location('drawing_dimension_oracle',_DimensionPath(__file__).resolve().parents[1]/'drawing-dimension-oracle.py')
+_dimension_oracle=_dimension_import.module_from_spec(_dimension_spec);_dimension_spec.loader.exec_module(_dimension_oracle)
+
 import json,math,re
 from xml.etree import ElementTree as ET
 NS='{http://www.w3.org/2000/svg}'
@@ -30,7 +35,7 @@ def inspect_extent_svg(raw,e,definition,context):
  root=ET.fromstring(text);need(root.tag==NS+'svg' and root.attrib=={'width':'420mm','height':'297mm','viewBox':'0 0 420 297'} and blank(root.text) and blank(root.tail),'exact visible physical root')
  children=list(root);need([n.tag for n in children]==[NS+n for n in ('title','metadata','defs','rect','g','g')] and all(blank(n.tail) for n in children),'closed visible SVG scaffold')
  title,meta_node,defs,paper,geometry,labels=children
- need(not title.attrib and not list(title) and title.text==definition['title'],'exact authored title');need(not meta_node.attrib and not list(meta_node),'plain metadata');meta=json.loads(meta_node.text)
+ need(not title.attrib and not list(title) and title.text==definition['title'],'exact authored title');need(not meta_node.attrib and not list(meta_node),'plain metadata');layout=_dimension_oracle.DimensionPresentation(root,definition,need);meta=layout.base_metadata()
  need(meta=={'version':1,'drawingId':definition['drawingId'],'revision':context['host']['revision'],'geometryRevision':context['capture']['solids']['revision'],'quality':'native-bound-drawing-references','status':'available','curvePresentationTolerancePaperMm':.02,'dimensionRole':'reference'},'exact actual revision/geometry/reference metadata')
  need(not defs.attrib and not list(defs) and blank(defs.text),'bare empty defs; no hidden pattern/clip/mask');need(paper.attrib=={'width':'100%','height':'100%','fill':'white'} and not list(paper) and blank(paper.text),'exact white paper')
  need(geometry.attrib=={'fill':'none','stroke':'#111','stroke-width':'.25'} and labels.attrib=={'font-family':'sans-serif','font-size':'3'} and blank(geometry.text) and blank(labels.text),'exact visible untransformed groups')
@@ -43,6 +48,7 @@ def inspect_extent_svg(raw,e,definition,context):
  dimensions=[];leaders=[];segments=0
  for n in geometry:
   need(n.tag==NS+'path' and not list(n) and blank(n.text) and blank(n.tail),'plain geometry path only');a=n.attrib;stroke=a.get('stroke');keys=set(a)
+  if n in layout.paths:continue
   allowed=keys=={'d'} or keys=={'d','stroke','stroke-dasharray'} and (stroke,a['stroke-dasharray']) in (('#777','2 1'),('#789','1 1')) or keys=={'d','stroke'} and stroke=='#246'
   need(allowed,'no transform/style/visibility/external/local effect');chains=path_chains(a['d']);segments+=sum(len(ps)-1 for ps in chains);need(segments<=200000,'same actual segment budget')
   if stroke=='#246':dimensions.append(chains);continue
@@ -81,11 +87,11 @@ def inspect_extent_svg(raw,e,definition,context):
   value=W if d['dimensionId']=='width' else H if d['dimensionId']=='height' else hi-lo
   prefix='ΔX ' if d['dimensionId']=='width' else 'ΔY ' if d['dimensionId']=='height' else 'ΔZ '
   expected.append((tuple(d['label']),prefix+format(value,'.3f')+' mm','#124'))
- expected.append(((8,292),'Reference drawing · available · scale 1:1',None));need(len(texts)==len(expected),'only exact title/source-cap dimensions/footer')
+ expected.append(((8,292),layout.footer('Reference drawing · available · scale 1:1'),None));need(len(texts)==len(expected),'only exact title/source-cap dimensions/footer')
  for node,(point,value,fill) in zip(texts,expected):
-  need(node.attrib=={'x':str(point[0]),'y':str(point[1]),**({'fill':fill} if fill else {})} and node.text==value,'actual authored label position/value/style')
+  need(node.attrib=={'x':str(point[0]),'y':str(point[1]),**(layout.text_attributes(node.get('data-dimension-id')) if fill else {})} and node.text==value,'actual authored label position/value/style')
  source=one([s for s in context['capture']['native']['sketches'] if s['id']==definition['datum']['faceId']],'actual accepted source sketch');objects={o['id']:o for o in json.loads(source['source'])['objects']};body=one([b for b in context['capture']['solids']['bodies'] if b['featureId']==definition['target']['featureId']],'actual current drawing target');faces=body['selections']['plan']['faces']
- need(len(dimensions)==len(leaders)==3,'all and only real dimension/leader paths');used=set();used_leaders=set()
+ need(len(layout.rows)==3,'all and only actual source/cap dimension identities')
  for d in definition['dimensions']:
   view=one([v for v in definition['views'] if v['viewId']==d['viewId']],'dimension view');ox,oy=view['paperOrigin']
   if d['kind']=='source-distance':
@@ -98,8 +104,8 @@ def inspect_extent_svg(raw,e,definition,context):
    for ref,role in ((d['first'],'lower-cap'),(d['second'],'upper-cap')):
     need(ref['kind']=='native-face' and ref['geometry']=='plane' and ref['originFeatureId']==definition['datum']['featureId'],'actual original cap source');one([f for f in faces if f['id']==ref['selectionId'] and f['role']==role and f['originFeatureId']==ref['originFeatureId']],'actual current '+role+' selection')
    need(d['first']['selectionId']!=d['second']['selectionId'],'distinct genuine lower/upper caps');candidates=[[(ox+x,oy-lo),(ox+x,oy-hi)] for x in (0,W)]
-  matches=[(i,ends) for i,chains in enumerate(dimensions) if i not in used and len(chains)==1 for ends in candidates if pair_equal(chains[0],ends)];i,ends=one(matches,'actual physical source/cap dimension anchors');used.add(i);label=tuple(d['label']);matches=[]
-  for j,chains in enumerate(leaders):
-   if j not in used_leaders and len(chains)==2 and all(len(c)==2 and math.dist(c[1],label)<=INC for c in chains) and pair_equal([c[0] for c in chains],ends):matches.append(j)
-  used_leaders.add(one(matches,'same physical dimension anchors and authored leader label'))
- return {'metadata':meta,'nativeProjectedIncidenceMm':INC,'actualDimensionPaths':3,'actualLeaderPaths':3,'geometrySegments':segments,'views':{key:{'basis':d['view']['basis'],'paperBounds':list(d['box']),'curves':d['curves'],'completeOutline':True} for key,d in views.items()},'captionBoxes':{key:list(box) for key,box in captions.items()}}
+  prefix='ΔX ' if d['dimensionId']=='width' else 'ΔY ' if d['dimensionId']=='height' else 'ΔZ '
+  value=W if d['dimensionId']=='width' else H if d['dimensionId']=='height' else hi-lo
+  layout.verify(d['dimensionId'],candidates,prefix+format(value,'.3f')+' mm')
+ dimension_proof=layout.finish([list(data['box'])for data in views.values()])
+ return {'metadata':meta,'nativeProjectedIncidenceMm':INC,'actualSourceDimensions':3,'dimensionLayout':{'dimensions':dimension_proof['dimensions'],'uncertain':dimension_proof['uncertain'],'segments':len(dimension_proof['strokeBoxes'])},'geometrySegments':segments,'views':{key:{'basis':d['view']['basis'],'paperBounds':list(d['box']),'curves':d['curves'],'completeOutline':True} for key,d in views.items()},'captionBoxes':{key:list(box) for key,box in captions.items()}}

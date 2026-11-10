@@ -14,7 +14,7 @@ _spec=importlib.util.spec_from_file_location('drawing_warning_oracle',Path(__fil
 WARNING_SOURCE_ROSTER={
  ('core', 'modules/engine/extrusion/selectedRegionDescriptor.mjs'),
  ('core', 'test/drawing-reference-repair-public-workflow/example.mjs'),
- ('core', 'test/drawing-warning-oracle.py'),
+ ('core', 'test/drawing-warning-oracle.py'), ('core', 'test/drawing-dimension-oracle.py'),
  ('core', 'test/isometric-drawing-public-workflow/CONTRACT.md'),
  ('core', 'test/isometric-drawing-public-workflow/README.md'),
  ('core', 'test/isometric-drawing-public-workflow/SOURCE.md'),
@@ -23,7 +23,7 @@ WARNING_SOURCE_ROSTER={
  ('core', 'test/isometric-drawing-public-workflow/example.mjs'),
  ('core', 'test/native-cad-container/archive_oracle.py'),
  ('core', 'web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),
- ('core', 'web/app/cad/export/linkedPartDrawingSvg.mjs'),
+ ('core', 'web/app/cad/export/linkedPartDrawingSvg.mjs'), ('core', 'web/app/cad/export/linkedPartDrawingDimensionLayout.mjs'),
  ('core', 'web/app/cad/export/linkedPartDrawingRequirementForms.mjs'),
  ('core', 'web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),
  ('desktop', 'apps/system/jsketcher/drawing-commands.mjs'),

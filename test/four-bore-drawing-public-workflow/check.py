@@ -12,7 +12,7 @@ spec=importlib.util.spec_from_file_location('drawing_warning_oracle',ROOT/'drawi
 need,near,vector,one=iso.need,iso.near,iso.vector,iso.one;sha=lambda b:hashlib.sha256(b).hexdigest()
 WARNING_SOURCE_ROSTER={
  ('core', 'modules/engine/extrusion/selectedRegionDescriptor.mjs'),
- ('core', 'test/drawing-warning-oracle.py'),
+ ('core', 'test/drawing-warning-oracle.py'), ('core', 'test/drawing-dimension-oracle.py'),
  ('core', 'test/four-bore-drawing-public-workflow/CONTRACT.md'),
  ('core', 'test/four-bore-drawing-public-workflow/README.md'),
  ('core', 'test/four-bore-drawing-public-workflow/check.py'),
@@ -21,7 +21,7 @@ WARNING_SOURCE_ROSTER={
  ('core', 'test/isometric-drawing-public-workflow/check.py'),
  ('core', 'test/native-cad-container/archive_oracle.py'),
  ('core', 'web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),
- ('core', 'web/app/cad/export/linkedPartDrawingSvg.mjs'),
+ ('core', 'web/app/cad/export/linkedPartDrawingSvg.mjs'), ('core', 'web/app/cad/export/linkedPartDrawingDimensionLayout.mjs'),
  ('core', 'web/app/cad/export/linkedPartDrawingRequirementForms.mjs'),
  ('core', 'web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),
  ('desktop', 'apps/system/jsketcher/drawing-bore-commands.mjs'),
@@ -247,6 +247,7 @@ def check_svg(root,item,rows):
  for view in d['views']:
   n=one([n for n in texts if n.get('data-view-caption-id')==view['viewId']],'actual unchanged view caption');attrs={'data-view-caption-id':view['viewId'],'data-caption-role':'view','data-caption-layout':'observed-sheet-v1','font-family':'monospace','font-size':'3','lengthAdjust':'spacing'};need(not list(n) and n.text==view['basis'] and set(n.attrib)==set(attrs)|{'x','y','textLength'} and all(n.get(k)==v for k,v in attrs.items()),'exact visible caption fields');x,y,length=(float(n.get(k,'nan')) for k in ('x','y','textLength'));need(all(math.isfinite(z) for z in (x,y,length)) and abs(length-len(n.text)*1.8)<1e-9,'caption full physical advance');caption_boxes.append([x-1,y-4,x+length+1,y+2])
  label_boxes=[[float(n.get('x'))-1,float(n.get('y'))-4,float(n.get('x'))+len(n.text or '')*3+1,float(n.get('y'))+2] for n in texts if n.get('fill')=='#124']
+ warnings._dimension_oracle.from_observation(xml,d,row['read']['observation'],need,envelopes)
  warning_layout(texts,expected_warnings,d['sheet'],envelopes,stroke_boxes,label_boxes,caption_boxes,need)
  return item['savedFile']
 

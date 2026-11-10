@@ -3,6 +3,11 @@
 No production codec/validator/solver/geometry executor. make-bad creates only own
 negative files during the complete workflow; never a positive authoring source.
 """
+from pathlib import Path as _DimensionPath
+import importlib.util as _dimension_import
+_dimension_spec=_dimension_import.spec_from_file_location('drawing_dimension_oracle',_DimensionPath(__file__).resolve().parents[1]/'drawing-dimension-oracle.py')
+_dimension_oracle=_dimension_import.module_from_spec(_dimension_spec);_dimension_spec.loader.exec_module(_dimension_oracle)
+
 import binascii,hashlib,json,math,re,subprocess,sys,zipfile,zlib
 from collections import Counter
 from decimal import Decimal,localcontext
@@ -121,8 +126,22 @@ def mesh(raw,e,b,build,encoding_revision):
  finite=inspect_finite_blind_mesh(vertices,triangles,e)
  return {'vertices':len(vertices),'triangles':len(triangles),'signedVolume':volume,'volumeAllowance':allowance,'quality':'derived-controlled-mesh-not-exact-BRep','finiteGeometry':finite}
 
-def svg(raw,e,definition):
- ns={'s':'http://www.w3.org/2000/svg'};root=ET.fromstring(raw);need(root.attrib['width']=='420mm' and root.attrib['height']=='297mm' and root.attrib['viewBox']=='0 0 420 297','physical sheet/scale');meta=json.loads(root.find('s:metadata',ns).text);need(meta['drawingId']==definition['drawingId'] and meta['status']=='available' and meta['dimensionRole']=='reference','actual available source/reference drawing');texts=[n.text or '' for n in root.findall('.//s:text',ns)];need(not any('UNRESOLVED' in t or 'THRU' in t for t in texts),'no failed reference/false through label');need('ΔX 100.000 mm' in texts and 'ΔY 50.000 mm' in texts and f"ΔZ {e['thickness']:.3f} mm" in texts,'actual source-axis/thickness semantics');need(root.findall('.//s:path',ns),'real projected paths');need(len(definition['dimensions'])==3 and not any(d['kind'].startswith('hole') for d in definition['dimensions']),'no unsupported blind measurement masquerade');return meta
+def svg(raw,e,definition,context):
+ ns={'s':'http://www.w3.org/2000/svg'};root=ET.fromstring(raw);need(root.attrib['width']=='420mm' and root.attrib['height']=='297mm' and root.attrib['viewBox']=='0 0 420 297','physical sheet/scale');meta=json.loads(root.find('s:metadata',ns).text);need(meta['drawingId']==definition['drawingId'] and meta['status']=='available' and meta['dimensionRole']=='reference','actual available source/reference drawing');texts=[n.text or '' for n in root.findall('.//s:text',ns)];need(not any('UNRESOLVED' in t or 'THRU' in t for t in texts),'no failed reference/false through label');need('ΔX 100.000 mm' in texts and 'ΔY 50.000 mm' in texts and f"ΔZ {e['thickness']:.3f} mm" in texts,'actual source-axis/thickness semantics');need(root.findall('.//s:path',ns),'real projected paths');need(len(definition['dimensions'])==3 and not any(d['kind'].startswith('hole') for d in definition['dimensions']),'no unsupported blind measurement masquerade');dimension_proof=_dimension_oracle.DimensionPresentation(root,definition,need);objects={o['id']:o for o in json.loads(one([row for row in context['capture']['native']['sketches']if row['id']==definition['datum']['faceId']],'actual SVG datum source')['source'])['objects']};bounds=[]
+ for dim in definition['dimensions']:
+  view=one([v for v in definition['views']if v['viewId']==dim['viewId']],'actual source dimension view');ox,oy=view['paperOrigin']
+  if dim['kind']=='source-distance':
+   ends=[]
+   for ref in(dim['from'],dim['to']):
+    need(ref['kind']=='source-point'and ref['faceId']==definition['datum']['faceId']and ref['curveId']in objects and ref['point']in('a','b'),'actual saved source-point identity');q=objects[ref['curveId']]['data'][ref['point']];ends.append([ox+q['x'],oy-q['y']])
+   candidates=[ends];prefix='ΔX 'if dim['axis']=='datum-x'else'ΔY ';value=100 if dim['axis']=='datum-x'else 50
+  else:
+   need(dim['kind']=='plane-distance'and view['basis']=='front','actual finite source/cap depth reference');candidates=[[[ox+x,oy],[ox+x,oy-e['thickness']]]for x in(0,100)];prefix='ΔZ ';value=e['thickness']
+  dimension_proof.verify(dim['dimensionId'],candidates,prefix+format(value,'.3f')+' mm')
+ for view in definition['views']:
+  width,height=(100,50)if view['basis']=='top'else(100,e['thickness'])if view['basis']=='front'else(50,e['thickness']);ox,oy=view['paperOrigin'];bounds.append([ox,oy-height,ox+width,oy])
+ dimension_proof.finish(bounds)
+ return meta
 
 def negative_archive_api():return(read_archive,structure,rebuild,manifest_row,canonical,root_record)
 
@@ -134,11 +153,11 @@ def make_bad(source,dest,receipt_path):
 
 def check(directory):
  directory=Path(directory);r=json.loads((directory/'receipt.json').read_text());need(r['status']=='PASS' and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'],'complete genuine whole/context cleanup');need(not r['sourceSeeds'] and not r['privateAuthoring'] and not r['fakeReplies'],'no fake Native/source');need(r['sourcePins']==r['sourcePinsAfter'],'unchanged executed source');build=r['engineRevision'];need(build=='sha256:32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08:abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc','actual approved primary MFG pair')
- local_names=['desktop-driver.mjs','example.mjs','check.py','step_oracle.py','mesh_oracle.py','negative_archive.py','README.md','CONTRACT.md','SOURCE.md'];roster={('core','test/centered-blind-hole-workflow/'+n) for n in local_names}|{('core','web/app/cad/export/linkedPartDrawingSvg.mjs'),('core','web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),('core','web/app/cad/export/linkedPartDrawingRequirementForms.mjs'),('core','web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),('core','test/native-cad-container/archive_oracle.py'),('desktop','test/agent-cad-corpus/sweep/signed-harness.mjs'),('desktop','test/agent-cad-corpus/strict-join/oracle.mjs'),('desktop','apps/system/jsketcher/examples/source-bound-blind-hole.mjs')}
+ local_names=['desktop-driver.mjs','example.mjs','check.py','step_oracle.py','mesh_oracle.py','negative_archive.py','README.md','CONTRACT.md','SOURCE.md'];roster={('core','test/centered-blind-hole-workflow/'+n) for n in local_names}|{('core','web/app/cad/export/linkedPartDrawingSvg.mjs'), ('core','web/app/cad/export/linkedPartDrawingDimensionLayout.mjs'),('core','web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),('core','web/app/cad/export/linkedPartDrawingRequirementForms.mjs'),('core','web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),('core','test/drawing-dimension-oracle.py'),('core','test/native-cad-container/archive_oracle.py'),('desktop','test/agent-cad-corpus/sweep/signed-harness.mjs'),('desktop','test/agent-cad-corpus/strict-join/oracle.mjs'),('desktop','apps/system/jsketcher/examples/source-bound-blind-hole.mjs')}
  need(len(r['sourceSnapshots'])==len(roster) and {(x['repository'],x['relative']) for x in r['sourceSnapshots']}==roster,'exact source and transitive producer-helper roster');need(len(r['sourcePins'])==len(roster),'exact source pin roster')
  for row in r['sourceSnapshots']:
   raw=(directory/row['file']).read_bytes();need(len(raw)<=8388608 and sha(raw)==row['sha256']==r['sourcePins'][row['originalFile']],'exact executing source snapshot/pin');need(row['originalFile']==str(Path(row['root'])/row['relative']),'actual source path binding')
-  expected=r['acceptanceSource'] if row['relative'].startswith('test/centered-blind-hole-workflow/') else r['pins']['source'] if row['repository']=='core' else r['pins']['desktop'];need(row['commit']==expected and re.fullmatch('[a-f0-9]{40}',expected),'exact frozen producer commit')
+  expected=r['acceptanceSource'] if (row['relative'].startswith('test/centered-blind-hole-workflow/') or row['relative']=='test/drawing-dimension-oracle.py') else r['pins']['source'] if row['repository']=='core' else r['pins']['desktop'];need(row['commit']==expected and re.fullmatch('[a-f0-9]{40}',expected),'exact frozen producer commit')
   blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest();need(blob==row['gitBlobOID'],'actual Git blob identity of executed snapshot');frozen=subprocess.run(['git','-C',row['root'],'show',row['commit']+':'+row['relative']],stdout=subprocess.PIPE,stderr=subprocess.PIPE);need(frozen.returncode==0 and frozen.stdout==raw,'independent exact producer commit/path/blob readback')
  need(len(r['creationTravel'])==1 and len(r['saves'])==2 and len(r['reopens'])==2 and len(r['artifacts'])==6 and len(r['malformed'])==2,'complete required lifecycle/artifact/negative roster');need(len(r['observations'])>=20,'actual creation/source/edit/travel/read observations');points=0
  phases=['literal-constructor', 'blind-create', 'creation-undo', 'creation-redo', 'depth8', 'diameter6', 'parent25', 'undo-parent', 'undo-diameter', 'undo-depth', 'redo-depth', 'redo-diameter', 'redo-parent', 'post-refusal-undo-parent', 'post-refusal-redo-parent', 'healthy-depth7', 'restore-depth8', 'named-bind', 'named-binding-undo', 'named-binding-redo', 'inch-display', 'first-fresh-open', 'reopened-named-edit', 'reopened-named-undo', 'reopened-named-redo', 'second-fresh-open', 'second-open-continuation', 'malformed-equal-depth-continuation', 'malformed-wrong-entry-continuation']
@@ -197,7 +216,7 @@ def check(directory):
   raw=(directory/row['savedFile']).read_bytes();need(sha(raw)==row['sha256'] and len(raw)==row['bytes'],'actual artifact bytes');e=row['dimensions'];operation={'step':'export-worker-step','3mf':'export-core-3mf','svg':'export-linked-part-drawing-svg'}[row['format']];issued=one([x for x in r['commands'] if x['command']==operation and x['args']==row['issued']],'actual unique public export issuance');need(issued['result']==row['result'],'actual public export receipt binds recorded artifact');context=one([x for x in r['exportSets'] if x['label']==row['label']],'actual accepted export context')['before'];need(row['issued']['revision']==context['host']['revision'],'actual public export document revision');manufacturing_revision=context['manufacturing']['metadata']['revision'];need(re.fullmatch('sha256-[a-f0-9]{64}',manufacturing_revision),'actual accepted manufacturing source revision')
   if row['format']=='step':detail=inspect_step(raw,{**e,'volume':float(expected_volume(e))})
   elif row['format']=='3mf':detail=mesh(raw,e,row['binding'],build,manufacturing_revision[7:])
-  else:detail=svg(raw,e,r['definition'])
+  else:detail=svg(raw,e,r['definition'],context)
   artifacts.append({'file':row['savedFile'],'format':row['format'],'detail':detail})
  need([(x['name'],x['code']) for x in r['malformed']]==[('equal-depth','BLIND_DEPTH_NOT_INTERIOR'),('wrong-entry','BLIND_ENTRY_UNRESOLVED')],'exact malformed semantic roster')
  negative_proofs=[]

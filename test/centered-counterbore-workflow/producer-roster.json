@@ -16,7 +16,8 @@
     "test/centered-counterbore-workflow/ACCEPTANCE-AUDIT-DISPOSITION.md",
     "test/centered-counterbore-workflow/negative_archive.py",
     "test/centered-counterbore-workflow/acceptance_oracle.py",
-    "test/centered-counterbore-workflow/CAPTION-POLICY-MIGRATION.md"
+    "test/centered-counterbore-workflow/CAPTION-POLICY-MIGRATION.md",
+    "test/drawing-dimension-oracle.py"
   ],
   "core": [
     "modules/engine/solid/ownedCounterboreIntent.mjs",
@@ -56,6 +57,7 @@
     "build/manufacturing-mesh-assets-entry.cjs",
     "test/native-cad-container/archive_oracle.py",
     "web/app/cad/export/linkedPartDrawingSvg.mjs",
+    "web/app/cad/export/linkedPartDrawingDimensionLayout.mjs",
     "web/app/cad/export/linkedPartDrawingCaptionLayout.mjs",
     "web/app/cad/export/linkedPartDrawingRequirementForms.mjs",
     "web/app/cad/export/linkedPartDrawingWarningLayout.mjs",

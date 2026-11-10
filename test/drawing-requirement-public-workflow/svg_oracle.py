@@ -3,6 +3,11 @@ visible requirement membership. No production imports or placement-search replay
 Only independently known finite source surfaces and actual protected records
 supply geometry. Authored requirement text is never a conformance measurement.
 """
+from pathlib import Path as _DimensionPath
+import importlib.util as _dimension_import
+_dimension_spec=_dimension_import.spec_from_file_location('drawing_dimension_oracle',_DimensionPath(__file__).resolve().parents[1]/'drawing-dimension-oracle.py')
+_dimension_oracle=_dimension_import.module_from_spec(_dimension_spec);_dimension_spec.loader.exec_module(_dimension_oracle)
+
 import math,json,re
 import xml.etree.ElementTree as ET
 from collections import Counter
@@ -113,7 +118,8 @@ def inspect_svg(raw,item,row):
  need(title.attrib=={} and len(title)==0 and title.text==d['title'],'authored title')
  need(meta.attrib=={} and len(meta)==0 and defs.attrib=={} and len(defs)==0,'bare metadata/defs; no CSS/masking/clip substitutions')
  need(bg.attrib=={'width':'100%','height':'100%','fill':'white'} and not len(bg) and g.attrib=={'fill':'none','stroke':'#111','stroke-width':'.25'} and t.attrib=={'font-family':'sans-serif','font-size':'3'},'sole background and fixed geometry/text grammar')
- m=json.loads(meta.text);need(set(m)==set('version drawingId revision geometryRevision quality status definitionVersion viewCount projection annotationFacts annotationRole ordinateRole datumFeatureFacts requirementFacts manufacturingRequirementRole measurementScope curvePresentationTolerancePaperMm dimensionRole'.split()),'complete exact metadata fields')
+ dimension_proof=_dimension_oracle.DimensionPresentation(root,d,need)
+ m=dimension_proof.base_metadata();need(set(m)==set('version drawingId revision geometryRevision quality status definitionVersion viewCount projection annotationFacts annotationRole ordinateRole datumFeatureFacts requirementFacts manufacturingRequirementRole measurementScope curvePresentationTolerancePaperMm dimensionRole'.split()),'complete exact metadata fields')
  need(m=={'version':1,'drawingId':d['drawingId'],'revision':item['before']['host']['revision'],'geometryRevision':item['before']['capture']['solids']['revision'],'quality':'native-bound-drawing-references','status':r['status'],'definitionVersion':4,'viewCount':3,'projection':'source-relative-orthographic-v1','annotationFacts':o['annotations'],'annotationRole':'derived-native-bore-reference','ordinateRole':'signed-datum-coordinate','datumFeatureFacts':o['datumFeatures'],'requirementFacts':o['requirements'],'manufacturingRequirementRole':'authored-manufacturing-requirement','measurementScope':'nominal-cad-reference-only','curvePresentationTolerancePaperMm':.02,'dimensionRole':'reference'},'issued read/revision/accepted definition and explicit authored roles')
  need(item['definition']==d and item['before']['drawing']['definition']==d and item['before']==item['after'],'SVG exact accepted definition and all readonly state')
  paths=list(g);need(all(p.tag==S+'path' and not len(p) and not(p.text or'').strip() for p in paths),'only complete finite path children')
@@ -137,12 +143,12 @@ def inspect_svg(raw,item,row):
  for a,f in zip(d['dimensions'],o['dimensions']):
   if f['status']!='available':continue
   view=one([v for v in d['views']if v['viewId']==a['viewId']],'dimension view');ends=[project(view,frames[a['viewId']],p,scale)for p in f['anchors']]
-  span,leaders=paths[cursor:cursor+2];cursor+=2;need(set(span.attrib)=={'d','stroke'} and span.get('stroke')=='#246' and set(leaders.attrib)=={'d','stroke','stroke-dasharray'}and leaders.get('stroke')=='#789'and leaders.get('stroke-dasharray')=='1 1','actual complete original dimension paths')
-  for path,want,cmd in((span,ends,['M','L']),(leaders,[ends[0],a['label'],ends[1],a['label']],['M','L','M','L'])):
-   ps=path_points(path.get('d'));need(len(ps)==len(want) and[x for x in TOKEN.findall(path.get('d'))if x in('M','L')]==cmd,'original span/leader syntax');[vector(p,q)for p,q in zip(ps,want)]
-  stroke_boxes.extend((box(ends),box([ends[0],a['label']]),box([ends[1],a['label']])))
+  own_paths=[]
+  while cursor<len(paths) and paths[cursor].get('data-dimension-id')==a['dimensionId']:own_paths.append(paths[cursor]);cursor+=1
+  need(own_paths==[p for p in dimension_proof.paths if p.get('data-dimension-id')==a['dimensionId']],'complete actual ordered dimension path roster')
   txt=texts[ti];ti+=1;prefix='Ø'if a['kind']=='hole-diameter'else'ΔZ 'if a['kind']=='plane-distance'else'ΔX 'if a['axis']=='datum-x'else'ΔY ';value=prefix+format(f['value'],'.3f')+' mm'
-  need(set(txt.attrib)=={'x','y','fill'}and txt.get('fill')=='#124'and not len(txt)and txt.text==value,'unchanged actual physical dimension label');vector([float(txt.get('x')),float(txt.get('y'))],a['label']);oldlabels.append(text_box(*a['label'],len(value)*3));actual_label_box=text_box(float(txt.get('x')),float(txt.get('y')),len(value)*3);oldlabel_boxes[a['dimensionId']]=actual_label_box
+  need(set(txt.attrib)=={'x','y'}|set(dimension_proof.text_attributes(a['dimensionId']))and txt.get('fill')=='#124'and not len(txt)and txt.text==value,'unchanged actual physical dimension label and verified derived identity');vector([float(txt.get('x')),float(txt.get('y'))],a['label']);oldlabels.append(text_box(*a['label'],len(value)*3));actual_label_box=text_box(float(txt.get('x')),float(txt.get('y')),len(value)*3);oldlabel_boxes[a['dimensionId']]=actual_label_box
+  previous_strokes=len(dimension_proof.stroke_boxes);dimension_proof.verify(a['dimensionId'],[ends],value);stroke_boxes.extend(dimension_proof.stroke_boxes[previous_strokes:])
   if a['dimensionId']=='height':
    need(a['label']==[40,70],'successful SVG retains the fixed initial left height label')
    top_index=one([i for i,v in enumerate(d['views'])if v['basis']=='top'],'actual top projection index')
@@ -231,5 +237,6 @@ def inspect_svg(raw,item,row):
    if j==0:vector([x,y],[float(txt.get('x')),float(txt.get('y'))])
   need(combined==want[3],'visible complete untruncated warning reason');membership[id]=combined
  need(set(membership)=={x[1]for x in unavailable},'every actual unresolved member visibly represented, no ghost success')
- notice=texts[-1];need(not len(notice)and notice.attrib=={'x':'8','y':'415'}and notice.text=='Reference drawing · '+r['status']+' · scale 1:1','exact factual footer')
+ dimension_proof.finish(geometry_boxes)
+ notice=texts[-1];need(not len(notice)and notice.attrib=={'x':'8','y':'415'}and notice.text==dimension_proof.footer('Reference drawing · '+r['status']+' · scale 1:1'),'exact factual footer and visible separate layout status')
  return{'quality':'independent-source/Native-analytic-record/complete-visible-SVG-membership','fragments':sum(map(len,cc)),'resolvedForms':len(forms),'leaderVertices':[len(lp)for lp,_ in leaders],'leaderSegments':sum(len(lp)-1 for lp,_ in leaders),'repairedNontrivialLeader':repaired_route,'unresolvedWarnings':membership,'manufacturedConformance':False}

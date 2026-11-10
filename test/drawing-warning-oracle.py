@@ -5,6 +5,9 @@ reconcile actual view/path/source facts, then supply those independent obstacles
 """
 import math,hashlib,re,subprocess
 from pathlib import Path
+import importlib.util
+_dimension_spec=importlib.util.spec_from_file_location('drawing_dimension_oracle',Path(__file__).with_name('drawing-dimension-oracle.py'))
+_dimension_oracle=importlib.util.module_from_spec(_dimension_spec);_dimension_spec.loader.exec_module(_dimension_oracle)
 
 def overlay_line_boxes(value,need):
  number=r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?'
@@ -19,7 +22,7 @@ def overlay_line_boxes(value,need):
 
 def verify_warning_sources(root,receipt,need,expected_sources):
  rows=receipt['sourceSnapshots'];identities={(r['repository'],r['relative']) for r in rows}
- required={('core','test/drawing-warning-oracle.py'),('core','web/app/cad/export/linkedPartDrawingSvg.mjs'),('core','web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),('core','web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),('desktop','test/agent-cad-corpus/strict-join/oracle.mjs')}
+ required={('core','test/drawing-warning-oracle.py'),('core','test/drawing-dimension-oracle.py'),('core','web/app/cad/export/linkedPartDrawingDimensionLayout.mjs'),('core','web/app/cad/export/linkedPartDrawingSvg.mjs'),('core','web/app/cad/export/linkedPartDrawingCaptionLayout.mjs'),('core','web/app/cad/export/linkedPartDrawingWarningLayout.mjs'),('desktop','test/agent-cad-corpus/strict-join/oracle.mjs')}
  need(len(identities)==len(rows) and identities==expected_sources and required<=identities and {r['originalFile'] for r in rows}==set(receipt['sourcePins']),'exact complete family/transitive warning/helper producer custody, no omissions or duplicates')
  for row in rows:
   raw=(root/row['file']).read_bytes();need(len(raw)<=8388608 and hashlib.sha256(raw).hexdigest()==row['sha256']==receipt['sourcePins'][row['originalFile']],'actual before/after frozen helper snapshot bytes')
@@ -84,6 +87,7 @@ def check_dimension_diagnostics(xml,d,observation,curves,evaluate,path_points,ne
    else:
     radius=[math.hypot(c['a'][j],c['b'][j]) for j in (0,1)];points.extend([[c['c'][j]+sign*radius[j] for j in (0,1)] for sign in (-1,1)])
   points=[[view['paperOrigin'][0]+p[0]*scale,view['paperOrigin'][1]-p[1]*scale] for p in points];need(points,'actual source-reconciled view envelope');envelopes.append([min(p[0] for p in points),min(p[1] for p in points),max(p[0] for p in points),max(p[1] for p in points)])
+ dimension_proof,dimension_summary=_dimension_oracle.from_observation(xml,d,observation,need,envelopes)
  stroke_boxes=[];groups=xml.findall(ns+'g');need(len(groups)==2,'actual geometry/text groups')
  for p in groups[0]:
   if p.get('stroke') not in ('#246','#789','#357'):continue
@@ -99,8 +103,8 @@ def check_dimension_diagnostics(xml,d,observation,curves,evaluate,path_points,ne
  for a,f in zip(d['dimensions'],observation['dimensions']):
   if f['status']!='available' or frames[a['viewId']] is None:continue
   matches=[n for n in texts if n.get('fill')=='#124' and [float(n.get('x','nan')),float(n.get('y','nan'))]==a['label']];need(len(matches)==1,'same successful authored dimension label, no ghost numeric duplicates');n=matches[0]
-  need(set(n.attrib)=={'x','y','fill'} and not list(n) and isinstance(n.text,str) and n.text,'unchanged visible successful label fields');verified.add(id(n))
- for point,value in (([8,8],d['title'] or d['drawingId']),([8,d['sheet']['height']-5],"Reference drawing · "+observation['status']+" · scale "+str(d['sheet']['scale']['numerator'])+':'+str(d['sheet']['scale']['denominator']))):
+  need(set(n.attrib)=={'x','y'}|set(dimension_proof.text_attributes(a['dimensionId'])) and not list(n) and isinstance(n.text,str) and n.text,'unchanged visible successful label fields plus independently verified dimension layout');verified.add(id(n))
+ for point,value in (([8,8],d['title'] or d['drawingId']),([8,d['sheet']['height']-5],dimension_proof.footer("Reference drawing · "+observation['status']+" · scale "+str(d['sheet']['scale']['numerator'])+':'+str(d['sheet']['scale']['denominator'])))):
   matches=[n for n in texts if n.text==value and [float(n.get('x','nan')),float(n.get('y','nan'))]==point];need(len(matches)==1,'unchanged title/footer');n=matches[0];need(set(n.attrib)=={'x','y'} and not list(n),'visible fixed title/footer');verified.add(id(n))
  need(len(verified)==len(texts),'no extra/hidden stale numeric text outside complete dimension/caption/warning roster')
  return result

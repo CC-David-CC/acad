@@ -3,6 +3,11 @@
 No production renderer/provider import. Presentation paths are reconciled with
 independently checked observed analytic geometry, not metadata alone.
 """
+from pathlib import Path as _DimensionPath
+import importlib.util as _dimension_import
+_dimension_spec=_dimension_import.spec_from_file_location('drawing_dimension_oracle',_DimensionPath(__file__).resolve().parents[1]/'drawing-dimension-oracle.py')
+_dimension_oracle=_dimension_import.module_from_spec(_dimension_spec);_dimension_spec.loader.exec_module(_dimension_oracle)
+
 import json,math,re,hashlib,xml.etree.ElementTree as ET
 from oracle_geometry import chord_certificate
 
@@ -78,7 +83,8 @@ def verify_svg(root,item,row,facts,iso,bore):
  need(xml.tag=='{'+NS['s']+'}svg' and xml.attrib=={'width':'594mm','height':'420mm','viewBox':'0 0 594 420'},'physical SVG mm sheet')
  need([n.tag.split('}')[-1] for n in xml]==['title','metadata','defs','rect','g','g'],'closed SVG structure, no foreign image/script/extra geometry')
  for n in xml.iter():need(not (set(n.attrib)&{'transform','style','opacity','display','visibility','clip-path','mask'}),'no hidden/transformed/unverified geometry')
- meta=json.loads(one(xml.findall('s:metadata',NS),'metadata').text)
+ dimension_proof=_dimension_oracle.DimensionPresentation(xml,d,need)
+ meta=dimension_proof.base_metadata()
  need(meta=={'version':1,'drawingId':d['drawingId'],'revision':item['before']['host']['revision'],'geometryRevision':item['before']['drawing']['geometryRevision'],'quality':o['quality'],'status':read['status'],'definitionVersion':3,'viewCount':len(d['views']),'projection':'source-relative-isometric-v1','annotationFacts':o['annotations'],'annotationRole':'derived-native-bore-reference','ordinateRole':'signed-datum-coordinate','curvePresentationTolerancePaperMm':.02,'dimensionRole':'reference'},'exact current source/read/units/physical metadata')
  need(one(xml.findall('s:title',NS),'title').text==d['title'],'authored title')
  rect=one(xml.findall('s:rect',NS),'paper background');need(rect.attrib=={'width':'100%','height':'100%','fill':'white'},'unobscured white paper')
@@ -178,10 +184,10 @@ def verify_svg(root,item,row,facts,iso,bore):
  for a,f in zip(d['dimensions'],o['dimensions']):
   v=one([v for v in d['views'] if v['viewId']==a['viewId']],'dimension view')
   if f['status']!='available' or frames[v['viewId']] is None:expected_warnings.append({'role':'dimension','id':a['dimensionId'],'viewId':a['viewId'],'message':'UNRESOLVED: '+a['dimensionId']});continue
-  ends=[project(v,p) for p in f['anchors']];lines=[p for p in paths if id(p) not in used and p.get('stroke')=='#246'];leaders=[p for p in paths if id(p) not in used and p.get('stroke')=='#789'];need(lines and leaders,'actual dimension line and paired leaders')
-  pathcheck(lines[0],ends,{'stroke':'#246'});pathcheck(leaders[0],[ends[0],a['label'],ends[1],a['label']],{'stroke':'#789','stroke-dasharray':'1 1'},moves=(0,2))
+  ends=[project(v,p) for p in f['anchors']]
   semantics='Ø' if a['kind']=='hole-diameter' else 'L ' if a['kind']=='edge-length' else 'ΔZ ' if a['kind']=='plane-distance' else 'ΔX ' if a['axis']=='datum-x' else 'ΔY '
-  textcheck(a['label'],semantics+f"{f['value']:.3f} mm",{'fill':'#124'})
+  value_text=semantics+f"{f['value']:.3f} mm";dimension_proof.verify(a['dimensionId'],[ends],value_text)
+  textcheck(a['label'],value_text,dimension_proof.text_attributes(a['dimensionId']))
  for a,f in zip(d['annotations'],o['annotations']):
   tag={'data-annotation-id':a['annotationId'],'data-annotation-kind':a['kind']};group=[p for p in paths if p.get('data-annotation-id')==a['annotationId']];v=one([v for v in d['views'] if v['viewId']==a['viewId']],'annotation view')
   if f['status']=='unresolved':
@@ -200,7 +206,8 @@ def verify_svg(root,item,row,facts,iso,bore):
     ends=[project(v,p) for p in pair];expected.extend([(ends,None),([ends[1],a['labels'][j]],'1 1')]);prefix=('+' if vals[j]>=0 else '') if a['kind']=='ordinate' else 'Δ';textcheck(a['labels'][j],prefix+f'{vals[j]:.3f} mm',tag|{'data-member-index':str(j),'fill':'#124'})
   need(len(group)==len(expected),'complete annotation lines/leader membership')
   for p,(points,dash) in zip(group,expected):pathcheck(p,points,tag|{'stroke':'#357'}|({'stroke-dasharray':dash} if dash else {}))
+ dimension_summary=dimension_proof.finish(envelopes);used.update(dimension_summary['paths']);stroke_boxes.extend(dimension_summary['strokeBoxes'])
  warning_ids,warning_boxes=bore.warning_layout(texts,expected_warnings,d['sheet'],envelopes,stroke_boxes,label_boxes,[box for _,_,box in caption_boxes],need);usedtexts.update(warning_ids)
- textcheck([8,d['sheet']['height']-5],f"Reference drawing · {read['status']} · scale {d['sheet']['scale']['numerator']}:{d['sheet']['scale']['denominator']}")
+ textcheck([8,d['sheet']['height']-5],dimension_proof.footer(f"Reference drawing · {read['status']} · scale {d['sheet']['scale']['numerator']}:{d['sheet']['scale']['denominator']}"))
  need(len(used)==len(paths) and len(usedtexts)==len(texts) and len(usedpatterns)==len(patterns),'no stale/extra unverified lines, labels, patterns or hidden geometry')
  return item['savedFile']
