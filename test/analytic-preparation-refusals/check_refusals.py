@@ -1,6 +1,6 @@
 """After-WHOLE independent grouped real analytic refusal checks; no CAD imports."""
 import math,json,copy
-BUILD='sha256:717767d46f3f260b1458d702e1e61d2a1a90f6e3c48400ac5943a11db577c484:47c9d4c96b61ba1a2792c72ccf1b7f2e22d5faa5b50948db144032436edeba25'
+BUILD='sha256:717767d46f3f260b1458d702e1e61d2a1a90f6e3c48400ac5943a11db577c484:97ea6162af031859dce14ee500be2a9bffef8eac129139b5462a1f8907a4157c'
 def need(v,s):
     if not v:raise ValueError(s)
 def one(rows,s):need(len(rows)==1,'one '+s);return rows[0]

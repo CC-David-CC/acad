@@ -1,7 +1,7 @@
 // Called ONLY inside the complete normal signed analytic-Arc whole.
 // No product imports, fake Workers, source seeds or private positive writes.
 import assert from 'node:assert/strict';
-export const ANALYTIC_REFUSAL_BUILD='sha256:717767d46f3f260b1458d702e1e61d2a1a90f6e3c48400ac5943a11db577c484:47c9d4c96b61ba1a2792c72ccf1b7f2e22d5faa5b50948db144032436edeba25';
+export const ANALYTIC_REFUSAL_BUILD='sha256:717767d46f3f260b1458d702e1e61d2a1a90f6e3c48400ac5943a11db577c484:97ea6162af031859dce14ee500be2a9bffef8eac129139b5462a1f8907a4157c';
 const one=(rows,label)=>{assert.equal(rows.length,1,label);return rows[0];};
 function candidateRegistryRetention(before,after){
  assert(Number.isSafeInteger(before.lifecycle.epoch));assert.equal(after.lifecycle.epoch,before.lifecycle.epoch+1,'ONE actual candidate evaluation, no accepted publication');
