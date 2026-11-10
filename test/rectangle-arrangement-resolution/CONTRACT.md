@@ -27,3 +27,7 @@ runPerCellResolution({call,state,record,flush,engineRevision,persist}) in public
 ## Product SOURCE disposition
 
 The repair changes three existing semantic-Worker source modules only: rectangularArrangement (source-only positive-span test and exact grid-rank witness), rectangularContactArrangement (source-only nonzero-span test, consistent with the same arrangement response), selectedSketchProfile (known per-cell Native resolution status for arrangement contexts only). The current numeric-area boundary remains in analyzeSimplePolygon; Native polygonProfilePlan tolerances and every request/descriptor/census/budget/owner/currentness/selection path remain unchanged. No changed source is evaluated on the UI thread. No Native binary, bootstrap, registry, schema version, fallback or new static module/import is introduced; normal rebuilding must honestly pin the changed semantic/app bytes.
+
+## Frozen additive acceptance census
+
+19 full read observations, 45 genuine Native point sets /135points, 6actual travels, 3eligible real creations, 2pre-submit UNSUPPORTED_REGION refusals and 3normal .cad cycles. Exact persistence labels: per-cell-tiny-represented, per-cell-native-eligible, per-cell-native-reedited. See README and source-only shared fragment/oracle; no execution or qualification claim.
