@@ -7,6 +7,7 @@ import {inspectTree} from './sketchValidation';
 import {evaluateCapturedSketch} from './capturedSketchEvaluation';
 import {assertVerifiedReplayGeometry} from './verifiedReplayGeometry';
 import {captureSketchFailure,failureCause,withAdmissionCause} from '../constr/admissionCause.mjs';
+import {sameRestoredSketch} from '../historyEquivalence.mjs';
 
 const numeric=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/;
 const own=(value:any,key:string)=>Object.prototype.hasOwnProperty.call(value,key);
@@ -98,6 +99,99 @@ export function reconstructTypedRectangle(request:any,{update=false}:{update?:bo
   const checked=evaluateCapturedSketch(candidate,external,second.result.evidence,undefined,second.auxiliary);
   if(first.result.evidence.length!==checked.evidence.length||first.result.evidence.some((e,i)=>e.typeId!==checked.evidence[i].typeId||e.state!==checked.evidence[i].state))fail('ADMISSION_CHANGED','Independent rectangle classifications differ.');
   const serializedSketch=JSON.stringify(candidate);if(serializedSketch.length>1048576||new TextEncoder().encode(serializedSketch).byteLength>1048576)fail('LIMIT','The rectangle source exceeds its existing Worker bound.');
+  return{revision,ok:true as const,sketch:candidate,evidence:checked.evidence,serializedSketch};
+ }catch(error){return failure(revision,error);}
+}
+
+
+// Edit-only construction of an independently authenticated rectangle component.
+// The strict whole-source functions above retain their existing eligibility.
+type RectangleSubsetTarget={stage:number,index:number};
+function rectangleSubset(request:any,target:RectangleSubsetTarget){
+ inspectTree(request);
+ const sketch=request.sketch;
+ if(!target||target.stage!==0||!Number.isSafeInteger(target.index)||target.index<0||
+    !Array.isArray(sketch?.objects)||sketch.objects.length<=4||sketch.objects.length>1024||
+    sketch.objects.some(o=>!['Point','Segment','Circle','Arc'].includes(o?.type)||o.stage!==0||![null,'construction'].includes(o.role))||
+    !Array.isArray(sketch.stages)||sketch.stages.length!==1||
+    !Array.isArray(sketch.stages[0]?.constraints)||sketch.stages[0].constraints.length>4096||
+    !Array.isArray(sketch.stages[0].generators)||sketch.stages[0].generators.length||
+    !Array.isArray(sketch.dimensions)||sketch.dimensions.length||
+    !Array.isArray(sketch.labels)||sketch.labels.length||
+    !sketch.boundary||['lines','arcs','circles','nurbses'].some(k=>!Array.isArray(sketch.boundary[k])||sketch.boundary[k].length))return null;
+ const workspace=new HeadlessSketchWorkspace(request.externalParameters);
+ return workspace.io.evaluateCapturedSketch(structuredClone(sketch),()=>{
+  const pm=workspace.parametricManager,stage=pm.stages[0],index=workspace.createIndex(),ownership=capturedParameterOwnership(workspace);
+  const restored=JSON.parse(workspace.io.serializeSketch(sketch.metadata,{strict:true}));restored.boundary=structuredClone(sketch.boundary);
+  if(!sameRestoredSketch(JSON.stringify(sketch),JSON.stringify(restored)))fail('RECTANGLE_DECLARATION_BINDING','Rectangle component decoding changed original source.');
+  const roots=new Set<any>(),objectOwner=new Map<any,any>(),parameterOwner=new Map<any,any>();let work=0;
+  const charge=()=>{if(++work>100000)fail('LIMIT','Rectangle component ownership exceeds its Worker work bound.');};
+  for(const row of sketch.objects){
+   charge();const root=index[row.id];
+   if(!root||root.parent||root.TYPE!==row.type||root.role!==row.role||root.stage!==stage||!stage.objects.has(root)||root.isGenerated||root.generator||root.generators.size)return null;
+   roots.add(root);
+   root.traverse(object=>{
+    charge();if(index[object.id]!==object||object.stage!==stage||objectOwner.has(object)&&objectOwner.get(object)!==root)fail('RECTANGLE_DECLARATION_BINDING','Rectangle component descendant ownership is ambiguous.');
+    objectOwner.set(object,root);
+    object.visitParams(parameter=>{charge();if(!ownership.geometry.has(parameter)||parameterOwner.has(parameter)&&parameterOwner.get(parameter)!==root)fail('RECTANGLE_DECLARATION_BINDING','Rectangle component geometry Params alias another source root.');parameterOwner.set(parameter,root);});
+   });
+  }
+  const all=stage.solverSystem.allConstraints,rows=all.filter(c=>!c.internal),neighbors=new Map<any,Set<any>>();
+  if(rows.length!==sketch.stages[0].constraints.length||target.index>=rows.length)return null;
+  const chosen=rows[target.index];
+  if(!(chosen instanceof AlgNumConstraint)||chosen.schema!==ConstraintDefinitions.SegmentLength||chosen.objects.length!==1||!(chosen.objects[0] instanceof Segment)||!roots.has(chosen.objects[0]))return null;
+  // Graph edges come from the original registered factory's actual owned
+  // objects AND Params. A shared equation cannot disappear when projecting a
+  // four-root component; no caller grouping or opaque-ID grammar is consulted.
+  const memberships=new Map<any,Set<any>>();
+  for(const c of all){
+   charge();ownership.constraint(c,stage);const members=new Set<any>();
+   for(const object of c.objects){charge();const owner=objectOwner.get(object);if(!owner)return null;members.add(owner);}
+   for(const parameter of c.params){charge();const owner=parameterOwner.get(parameter);if(!owner)return null;members.add(owner);}
+   memberships.set(c,members);
+   for(const member of members){let peers=neighbors.get(member);if(!peers){peers=new Set<any>();neighbors.set(member,peers);}for(const other of members){charge();peers.add(other);}}
+  }
+  const selected=new Set<any>([chosen.objects[0]]),pending=[chosen.objects[0]];
+  for(let at=0;at<pending.length;at++)for(const other of neighbors.get(pending[at])||[]){charge();if(!selected.has(other)){selected.add(other);if(selected.size>4)return null;pending.push(other);}}
+  if(selected.size!==4||[...selected].some(root=>!(root instanceof Segment)||root.role!==null))return null;
+  const rowIndices:number[]=[];
+  for(let i=0;i<rows.length;i++){charge();const members=memberships.get(rows[i]),touches=[...members].some(root=>selected.has(root));if(!touches)continue;if([...members].some(root=>!selected.has(root)))fail('RECTANGLE_DECLARATION_BINDING','Rectangle component has a cross-source constraint.');rowIndices.push(i);}
+  if(rowIndices.length!==11)return null;
+  const selectedIds=new Set([...selected].map(root=>root.id)),subset=structuredClone(sketch);
+  subset.objects=subset.objects.filter(o=>selectedIds.has(o.id));
+  subset.stages[0].constraints=rowIndices.map(i=>structuredClone(sketch.stages[0].constraints[i]));
+  ownership.unchanged();return{subset,rowIndices,selectedIds};
+ });
+}
+export function captureRectangleSubsetDimensionBindings(request:any,target:RectangleSubsetTarget){
+ const component=rectangleSubset(request,target);if(!component)return null;
+ const captured=captureRectangleDimensionBindings({...request,sketch:component.subset});if(!captured)return null;
+ const row=(value:any)=>Object.freeze({stage:0,index:component.rowIndices[value.index]});
+ return Object.freeze({widthRow:row(captured.widthRow),heightRow:row(captured.heightRow)});
+}
+export function reconstructRectangleSubset(request:any,{update=false,target}:{update?:boolean,target:RectangleSubsetTarget}){
+ const revision=request.revision;try{
+  const component=rectangleSubset(request,target);if(!component)return null;
+  const declared=declaration(component.subset,request.externalParameters);if(!declared)return null;
+  const candidate=structuredClone(request.sketch);
+  for(let i=0;i<4;i++){
+   const object=candidate.objects.find(o=>o.id===declared.ids[i]);
+   object.data.a.x=declared.corners[i][0];object.data.a.y=declared.corners[i][1];
+   object.data.b.x=declared.corners[(i+1)%4][0];object.data.b.y=declared.corners[(i+1)%4][1];
+  }
+  if(!update&&JSON.stringify(candidate.objects)!==JSON.stringify(request.sketch.objects))fail('TYPED_RECTANGLE_CURRENT_MISMATCH','The captured rectangle component differs from its declared dimensions.');
+  // An exact whole-source relation: only this component's coordinate data may
+  // have been constructed. Every other authored field remains original.
+  const expected=structuredClone(request.sketch);
+  for(const object of expected.objects)if(component.selectedIds.has(object.id))object.data=structuredClone(candidate.objects.find(o=>o.id===object.id).data);
+  if(JSON.stringify(expected)!==JSON.stringify(candidate))fail('INTENT_CHANGED','Rectangle component construction changed unrelated source.');
+  // ORIGINAL full equations and every spectator retain authority. Cold output
+  // only supplies independently checked evidence, never publication geometry.
+  const first=cold(revision,candidate,request.boundary,request.externalParameters);replayProof(candidate,first,request.externalParameters);
+  const second=cold(revision,candidate,request.boundary,request.externalParameters);replayProof(candidate,second,request.externalParameters);
+  const checked=evaluateCapturedSketch(candidate,request.externalParameters,second.result.evidence,undefined,second.auxiliary);
+  if(first.result.evidence.length!==checked.evidence.length||first.result.evidence.some((e,i)=>e.typeId!==checked.evidence[i].typeId||e.state!==checked.evidence[i].state))fail('ADMISSION_CHANGED','Independent whole-source rectangle classifications differ.');
+  const serializedSketch=JSON.stringify(candidate);if(serializedSketch.length>1048576||new TextEncoder().encode(serializedSketch).byteLength>1048576)fail('LIMIT','The rectangle component source exceeds its existing Worker bound.');
   return{revision,ok:true as const,sketch:candidate,evidence:checked.evidence,serializedSketch};
  }catch(error){return failure(revision,error);}
 }

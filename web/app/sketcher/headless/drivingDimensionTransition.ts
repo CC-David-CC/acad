@@ -15,7 +15,7 @@ import {evaluateCapturedSketch} from './capturedSketchEvaluation';
 import type {CapturedAuxiliaryWitnessBatch} from './capturedParameterOwnership';
 import {ConstraintDefinitions} from '../constr/ANConstraints';
 import {Segment} from '../shapes/segment';
-import {captureRectangleDimensionBindings,reconstructTypedRectangle} from './typedRectangleReconstruction';
+import {captureRectangleDimensionBindings,reconstructTypedRectangle,captureRectangleSubsetDimensionBindings,reconstructRectangleSubset} from './typedRectangleReconstruction';
 import {EndPoint} from '../shapes/point';
 import {captureDrivingDimensionIntent,resolveDrivingDimension,drivingLengthField,classifyDrivingDimensionDelta,signedDrivingDimension,drivingDimensionValueValid} from './drivingDimensionTarget.mjs';
 const fail=(code:string,message:string)=>Object.assign(Error(message),{code});
@@ -160,8 +160,12 @@ function changeDeclaredRectangleDimension(revision:string,source:string,authored
   const fields=c.typeId==='LockPoint'?['x','y']:c.typeId==='Horizontal'||c.typeId==='Vertical'?['angle']:[];
   for(const field of fields){const raw=c.constants?.[field];if(typeof raw==='string'&&!placementLiteral.test(raw.trim()))return null;}
  }
- const request={revision,sketch:authored,boundary:structuredClone(authored.boundary),externalParameters:bindings},declaration=captureRectangleDimensionBindings(request);
+ const request={revision,sketch:authored,boundary:structuredClone(authored.boundary),externalParameters:bindings},target={stage:row.stage,index:row.index};
+ const whole=captureRectangleDimensionBindings(request),declaration=whole||captureRectangleSubsetDimensionBindings(request,target);
  if(!declaration)return null;
+ // Only the edited actual registered row selects an isolated component. The
+ // original strict whole-rectangle path and generic fallback retain their scope.
+ const reconstruct=(input:any,options?:{update?:boolean})=>whole?reconstructTypedRectangle(input,options):reconstructRectangleSubset(input,{...options,target});
  const sameRow=(bound:any)=>bound.stage===row.stage&&bound.index===row.index;
  if(!sameRow(declaration.widthRow)&&!sameRow(declaration.heightRow))return null;
  if(typeof row.rawValue==='string'&&/^[A-Za-z_$][A-Za-z0-9_$]{0,127}$/.test(row.rawValue.trim())&&typeof intent.value==='number')throw fail('BOUND_DIMENSION','A driving dimension bound to a typed name cannot be silently replaced by a literal. Edit the parameter or submit a named binding.');
@@ -170,13 +174,13 @@ function changeDeclaredRectangleDimension(revision:string,source:string,authored
  // Prove the ORIGINAL captured source before constructing any mutation. The
  // two cold reconstructions are evidence only; captured equations validate
  // its exact declared coordinates without publishing optimizer coordinates.
- const original=reconstructTypedRectangle(request);
+ const original=reconstruct(request);
  if(original===null)throw fail('RECTANGLE_DECLARATION_BINDING','The captured rectangle lost its actual declaration.');
  if(!original.ok)return original;
  const dimension=(sketch:any)=>{const actual=resolveDimension(sketch,intent.constraintId);return{constraintId:intent.constraintId,action:'edit',typeId:actual.typeId,objects:[...actual.objects],rawValue:actual.rawValue,resolvedValue:actual.resolvedValue,status:sketch.stages[actual.stage].constraints[actual.index].admission.state};};
  if(String(row.rawValue)===String(intent.value))return{revision,ok:true,changed:false,serializedSketch:source,evidence:original.evidence,dimension:dimension(authored)};
  const draft=structuredClone(authored);draft.stages[row.stage].constraints[row.index].constants.length=String(intent.value);
- const prepared=reconstructTypedRectangle({...request,sketch:draft},{update:true});
+ const prepared=reconstruct({...request,sketch:draft},{update:true});
  // Null is this helper's established numeric/declaration eligibility boundary,
  // not a new restriction of generic positive SegmentLength capabilities. A
  // recognized declaration's failed cold/captured proof NEVER falls back.
