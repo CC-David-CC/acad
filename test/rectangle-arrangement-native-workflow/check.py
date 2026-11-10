@@ -174,6 +174,13 @@ def main(directory):
  for q in r['refusals']:refusal(q)
  need(collections.Counter(q['expectedCode']for q in r['refusals'])=={'STALE_REGION':2,'STALE_HISTORY':1,'STALE_PROPOSAL':1,'UNRESOLVED_SELECTION':2,'UNSUPPORTED_REGION_TOPOLOGY':2,'SELF_INTERSECTION':1,'OPEN_OR_AMBIGUOUS_PROFILE':1},'all ordinary precise refusal layers retained')
  for t in r['travels']:need(t['before']['capture']['native']['counters']==t['after']['capture']['native']['counters'],'all genuine mixed travel preserves highwater')
+ expected_mutation_refusals=[q for q in r['refusals']if q['command']!='inspect-selected-regions']+[dict(q,command='edit-selected-profile-region',expectedCode='UNSUPPORTED_REGION',replayed=False)for q in r['perCellResolution']['refusals']]
+ need(len(r['mutationOutcomes'])==len(expected_mutation_refusals)==8,'every actual failed mutation is settled by real refusal proof')
+ seen=set()
+ for outcome in r['mutationOutcomes']:
+  need(outcome['phase']=='settled-refusal'and outcome['commandIndex']not in seen,'no unknown/duplicate mutation outcome');seen.add(outcome['commandIndex']);command=r['commands'][outcome['commandIndex']]
+  need(command['command']==outcome['command']and command['args']==outcome['args']and command['error']==outcome['error']and command['commitEvidence']==outcome['commitEvidence'],'raw actual mutation error and flag-presence binding')
+  proof=one([q for q in expected_mutation_refusals if q['command']==outcome['command']and q['args']==outcome['args']],'actual expected failed mutation');need(outcome['proof']==proof,'full actual before/after refusal proof, not false flags');refusal(proof)
  for q in r['filletQueries']:
   need(q['before']==q['after'],'real treated reads preserve source/J/owners');proxy={'options':q['options'],'aw':10,'bx':5};t=expected(proxy,{'label':'middle'});need(q['input']['points']==[[5.05,.05,1],[5.6,.6,1],[9.95,.05,1],[5.5,0,1]]and q['result']['points']==[{'point':p,'classification':classify(p,t)}for p in q['input']['points']],'actual rounded-corner material, not only untrimmed box/metrics')
  ordinary=[('three-cells','three-edited'),('three-cells','three-reedited'),('repair-child','repair-edited'),('repair-child','repair-reedited'),('incompatible-child','incompatible-preserved'),('incompatible-child','incompatible-reedited')];need([(s['case'],s['label'])for s in r['saves']if s['case']!='per-cell-resolution']==ordinary,'all six current ordinary .cad cycles');need(len(r['saves'])==len(r['reopens'])==len(r['writes'])==len(r['opens'])==9,'six ordinary plus three real per-cell native cycles, every write settled');archives=[]
