@@ -20,6 +20,12 @@ def thaw(v):
  if hasattr(v,'items'):return{k:thaw(x)for k,x in v.items()}
  if type(v)in(list,tuple):return[thaw(x)for x in v]
  return v
+def source_rectangle(corners,orientation):
+ # The independent source rectangle must carry the same declared orientation
+ # that CGAL separately requires of EVERY original projected triangle. This
+ # changes no actual vertex, triangle, selected ID or indexed boundary loop.
+ need(orientation in (-1,1),'source-derived rectangle orientation')
+ return {'kind':'source-rectangle','corners':corners if orientation>0 else list(reversed(corners))}
 def boundary(ids,triangles):
  edges=collections.defaultdict(list)
  for i in ids:
@@ -106,10 +112,10 @@ def inspect_mesh(vertices,triangles,e,config,directory):
   for kind,intervals in line_intervals.items():
    intervals.sort();need(intervals[0][0]==0 and intervals[-1][1]==1 and all(a[1]==b[0]for a,b in zip(intervals,intervals[1:])),'entire exact original Segment rim once, without gap/overlap')
  for p in planes:
-  key='plane-'+p['id'];a,b=p['a'],p['b'];axis=0 if a[0]!=b[0]else 1;other=1-axis;d=b[axis]-a[axis];need(a[other]==b[other],'frozen cardinal Segment artifact domain');sign=1 if d>0 else -1;corners=[[min(a[axis],b[axis]),0],[max(a[axis],b[axis]),0],[max(a[axis],b[axis]),float(T)],[min(a[axis],b[axis]),float(T)]];reports[key]=planar(key,[axis,2],sign,{'kind':'source-rectangle','corners':corners})
+  key='plane-'+p['id'];a,b=p['a'],p['b'];axis=0 if a[0]!=b[0]else 1;other=1-axis;d=b[axis]-a[axis];need(a[other]==b[other],'frozen cardinal Segment artifact domain');sign=1 if d>0 else -1;corners=[[min(a[axis],b[axis]),0],[max(a[axis],b[axis]),0],[max(a[axis],b[axis]),float(T)],[min(a[axis],b[axis]),float(T)]];reports[key]=planar(key,[axis,2],sign,source_rectangle(corners,sign))
  for c in cylinders:
   key='wall-'+c['id']
   if c.get('full'):reports[key]=certify_full_cylinder(local,triangles,groups[key],c['c'],c['r'],0,T,c['orientation'],DEFL,INC);continue
-  axis=1-c['halfAxis'];normal_axis=c['halfAxis'];sign=(1 if normal_axis==0 else -1)*c['halfSign']*c['orientation'];need(all(normals[i][normal_axis]*c['halfSign']*c['orientation']>0 for i in groups[key]),'strict linear half-cylinder projection regularity');center=c['c'][axis];radius=c['r'];corners=[[center-radius,0],[center+radius,0],[center+radius,float(T)],[center-radius,float(T)]];reports[key]=planar(key,[axis,2],sign,{'kind':'source-rectangle','corners':corners})
+  axis=1-c['halfAxis'];normal_axis=c['halfAxis'];sign=(1 if normal_axis==0 else -1)*c['halfSign']*c['orientation'];need(all(normals[i][normal_axis]*c['halfSign']*c['orientation']>0 for i in groups[key]),'strict linear half-cylinder projection regularity');center=c['c'][axis];radius=c['r'];corners=[[center-radius,0],[center+radius,0],[center+radius,float(T)],[center-radius,float(T)]];reports[key]=planar(key,[axis,2],sign,source_rectangle(corners,sign))
  volume=float(sum(volumes));truth=float(facts(e)['volume']);allowance=sum(math.pi*(2*c['r']*float(DEFL)+float(DEFL)**2)*float(T)for c in cylinders)+max(1e-5,abs(truth)*1e-12);need(volume>0 and abs(volume-truth)<=allowance,'positive actual volume within independently declared tessellation displacement budget')
  return{'quality':'original-index-complete-CGAL3D/exact-planar-union/analytic-half/full-cylinder','global':global_report,'patches':reports,'patchTriangleCounts':{k:len(v)for k,v in groups.items()},'originalVertices':len(vertices),'originalTriangles':len(triangles),'signedVolumeMm3':volume,'volumeAllowanceMm3':allowance,'artifactDeflectionMm':str(DEFL),'planeIncidenceMm':str(INC),'sourceAccuracyClaim':False}
