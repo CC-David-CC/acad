@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """After-WHOLE independent equation/frame/cache/ZIP/DXF check. No product imports."""
-import hashlib,json,math,struct,sys,subprocess
+import hashlib,json,math,struct,sys,subprocess,re
 from fractions import Fraction
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'native-cad-container'))
@@ -20,7 +20,7 @@ def captured_intent(p):
 def raw(state,id):return one([r for r in state['capture']['native']['sketches'] if r['id']==id],'actual saved source')['source']
 def parse(text):return archive.parse_json(text.encode('utf-8'))
 def stable(s):
-    s=json.loads(json.dumps(s));s['capture']['solids'].pop('revision',None);s['capture']['journal'].pop('revision',None)
+    s=json.loads(json.dumps(s));s['capture']['solids'].pop('revision',None);j=re.fullmatch(r'(\d+):(\d+):(.+)',s['capture']['journal']['revision']);require(j is not None,'actual public document:Jrevision:PMrevision schema');s['capture']['journal']['revision']=j.group(1)+':'+j.group(2)
     for key in ('host','frames','discovery','physical','units'):s[key].pop('revision',None)
     return s
 def native_equal(a,b):
