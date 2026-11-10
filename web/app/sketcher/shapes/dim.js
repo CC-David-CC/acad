@@ -1,14 +1,13 @@
 import {lengthMeasurementRole} from '../actions/lengthMeasurementPresentation.mjs';
-import {formatDisplayQuantity} from '../../cad/projectManager/displayUnits.mjs';
+import {Dimension,formatDimensionValue} from './dimensionBase';
+export {Dimension,formatDimensionValue} from './dimensionBase';
 import {
   makeAngle0_360} from 'math/commons'
 import * as vec from 'math/vec'
 import Vector from 'math/vector';
 import {Styles} from "../styles";
 import {TextHelper} from "./textHelper";
-import {isInstanceOf} from "../actions/matchUtils";
-import {Arc} from "./arc";
-import {SketchObject} from "./sketch-object";
+import {ARC_CLASS} from "./arcClass.mjs";
 import {distance, distanceAB} from "math/distance";
 import {lineLineIntersection2d, pointToLineSignedDistance} from "geom/euclidean";
 
@@ -20,11 +19,6 @@ const OUTER_ARROW_TO_TEXT_PAD_PX = 6;
 const EXT_LINEAR_WIDTH_PX = 7;
 const EXT_ANGULAR_WIDTH_PX = 10;
 
-// Presentation only; all geometry and serialized dimensions remain canonical.
-export function formatDimensionValue(value,dimension,viewer){
-  const manager=viewer?.applicationContext?.projectManager;
-  return (manager?.formatDisplayQuantity?manager.formatDisplayQuantity(value,dimension):formatDisplayQuantity(value,dimension)).text;
-}
 
 function drawArrow(ctx, x, y, nx, ny, arrowW, arrowH) {
   ctx.beginPath();
@@ -54,12 +48,6 @@ function drawExtensionLine(ctx, x, y, nx, ny, width, tip, arrowW) {
   ctx.stroke();
 }
 
-export class Dimension extends SketchObject {
-
-  constructor(id) {
-    super(id);
-  }
-}
 
 export class LinearDimension extends Dimension {
   
@@ -335,7 +323,7 @@ export class DiameterDimension extends Dimension {
     let hyn = Math.sin(this.angle);
 
     //fix angle if needed
-    if (isInstanceOf(this.obj, Arc) &&  !this.obj.isPointInsideSector(this.obj.c.x + hxn, this.obj.c.y + hyn)) {
+    if (this.obj?._class === ARC_CLASS &&  !this.obj.isPointInsideSector(this.obj.c.x + hxn, this.obj.c.y + hyn)) {
       const cosA = hxn * (this.obj.a.x - this.obj.c.x) + hyn * (this.obj.a.y - this.obj.c.y);
       const cosB = hxn * (this.obj.b.x - this.obj.c.x) + hyn * (this.obj.b.y - this.obj.c.y);
       if (cosA - hxn > cosB - hxn) {

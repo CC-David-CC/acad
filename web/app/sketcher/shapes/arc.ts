@@ -1,3 +1,4 @@
+import {ARC_CLASS} from './arcClass.mjs';
 import Vector from "math/vector";
 import { SketchObject, SketchObjectSerializationData } from "./sketch-object";
 import { Param } from "./param";
@@ -182,4 +183,4 @@ export interface SketchArcSerializationData extends SketchObjectSerializationDat
 
 Arc.prototype.TYPE = "Arc";
 
-Arc.prototype._class = "TCAD.TWO.Arc";
+Arc.prototype._class = ARC_CLASS;

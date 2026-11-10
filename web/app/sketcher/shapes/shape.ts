@@ -1,4 +1,4 @@
-import {Viewer} from "../viewer2d";
+import type {Viewer} from "../viewer2d";
 import {noteSketchMutation} from '../sketchMutationEpoch.mjs';
 
 export class Shape {

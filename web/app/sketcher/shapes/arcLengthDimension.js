@@ -1,4 +1,4 @@
-import {Dimension,formatDimensionValue} from './dim';
+import {Dimension,formatDimensionValue} from './dimensionBase';
 import {TextHelper} from './textHelper';
 import {arcLengthFromObject} from '../constr/arcLengthDomain.mjs';
 import {requireArcInterval,arcDataFromObject} from './arcBranch.mjs';

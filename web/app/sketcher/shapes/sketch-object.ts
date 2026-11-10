@@ -1,12 +1,12 @@
 import { Generator } from "../id-generator";
 import {noteSketchMutation} from '../sketchMutationEpoch.mjs';
 import { Shape } from "./shape";
-import { Param } from "./param";
+import type { Param } from "./param";
 import { Styles } from "../styles";
 import { NoIcon } from "../icons/NoIcon";
-import { Layer, Viewer } from "../viewer2d";
+import type { Layer, Viewer } from "../viewer2d";
 import { NOOP } from "gems/func";
-import { SolvableObject } from "../constr/solvableObject";
+import type { SolvableObject } from "../constr/solvableObject";
 
 export abstract class SketchObject extends Shape implements SolvableObject {
   ref: string;

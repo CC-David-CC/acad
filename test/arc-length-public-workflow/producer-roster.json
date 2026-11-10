@@ -68,7 +68,12 @@
     "web/app/cad/projectManager/nativeArchiveFormat.mjs",
     "web/app/cad/projectManager/nativeArchiveCodec.worker.ts",
     "web/app/cad/projectManager/projectManagerBundle.ts",
-    "web/app/sketcher/constr/fixedEntitySchemas.ts"
+    "web/app/sketcher/constr/fixedEntitySchemas.ts",
+    "web/app/sketcher/shapes/dimensionBase.js",
+    "web/app/sketcher/shapes/sketch-object.ts",
+    "web/app/sketcher/shapes/shape.ts",
+    "web/app/sketcher/shapes/arcClass.mjs",
+    "web/app/sketcher/shapes/arc.ts"
   ],
   "desktop": [
     "test/agent-cad-corpus/sweep/signed-harness.mjs",
