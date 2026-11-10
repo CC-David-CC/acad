@@ -1,25 +1,37 @@
 """After-WHOLE independent grouped real analytic refusal checks; no CAD imports."""
-import math,json
+import math,json,copy
 BUILD='sha256:717767d46f3f260b1458d702e1e61d2a1a90f6e3c48400ac5943a11db577c484:47c9d4c96b61ba1a2792c72ccf1b7f2e22d5faa5b50948db144032436edeba25'
 def need(v,s):
     if not v:raise ValueError(s)
 def one(rows,s):need(len(rows)==1,'one '+s);return rows[0]
+def candidate_registry_retention(before,after):
+    need(type(before['lifecycle']['epoch']) is int and after['lifecycle']['epoch']==before['lifecycle']['epoch']+1,'ONE actual candidate epoch')
+    def aliases(s):
+        host=s['host']['revision'];geometry=s['capture']['solids']['revision'];journal=s['capture']['journal']['revision'];need(all(isinstance(v,str) and v for v in (host,geometry,journal)) and journal.endswith(':'+host),'actual document:Jrevision:PMrevision alias');prefix=journal[:-len(host)-1];parts=prefix.split(':');need(len(parts)==2 and all(p.isdecimal() for p in parts),'declared journal prefix grammar');need(s['manufacturing']['revision']==s['drawing']['revision']==host and s['drawing']['geometryRevision']==geometry and s['physical']['revision']==s['frames']['revision']==journal,'EXACT actual currentness alias table');need(not s['lifecycle']['pipelineFailed'] and not s['lifecycle']['cleanupFailed'] and not s['ownership']['processing'] and not s['ownership']['resources']['cleanupFailed'],'accepted validity/ownership settled');resources=s['ownership']['resources'];need(all(resources[k]==0 for k in ('candidates','accepted','mounts')) and resources['owners']==resources['detached'],'all private candidate resources retired');return prefix
+    need(aliases(before)==aliases(after) and before['host']['revision']!=after['host']['revision'] and before['capture']['solids']['revision']!=after['capture']['solids']['revision'],'actual candidate token retirement with document/J prefix unchanged')
+    def remaining(s):
+        s=copy.deepcopy(s)
+        for obj,key in [(s['lifecycle'],'epoch'),(s['host'],'revision'),(s['capture']['solids'],'revision'),(s['capture']['journal'],'revision'),(s['manufacturing'],'revision'),(s['drawing'],'revision'),(s['drawing'],'geometryRevision'),(s['physical'],'revision'),(s['frames'],'revision')]:need(key in obj,'required candidate observation field');del obj[key]
+        return s
+    need(remaining(before)==remaining(after),'EVERY other accepted Native/source/H/J/counter/material/owner/dirty/source-version field exact')
+
 def check_analytic_preparation_refusals(rows,commands):
-    need([(r['label'],r['code']) for r in rows]==[('Actual invalid full branch admission','INVALID_ARC_BRANCH'),('Actual analytic radius-domain preparation','ANALYTIC_PROFILE_UNQUALIFIED'),('Actual unrepresentable proper-major interval','ARC_INTERVAL_UNREPRESENTABLE')],'EXACT real grouped source/admission/semantic cases')
+    need([(r['label'],r['code']) for r in rows]==[('Actual invalid full branch admission','INVALID_ARC_BRANCH'),('Actual analytic radius-domain preparation','ANALYTIC_PROFILE_UNQUALIFIED'),('Actual unrepresentable proper-major publication','ARC_INTERVAL_UNREPRESENTABLE')],'EXACT real grouped source/admission/semantic cases')
     consumed=set();positions=[]
     for index,r in enumerate(rows):
-        need(r['error'] and r['error']['code']==r['code'] and not r['error']['committed'] and not r['error']['possiblyCommitted'] and r['before']==r['after'],'actual refusal exact full-state preservation')
+        need(r['error'] and r['error']['code']==r['code'] and not r['error']['committed'] and not r['error']['possiblyCommitted'],'actual refusal code/commit outcome')
+        if index==2:candidate_registry_retention(r['before'],r['after'])
+        else:need(r['before']==r['after'],'actual pre-candidate refusal exact full-state preservation')
         matches=[(i,c) for i,c in enumerate(commands) if i not in consumed and c['command']==r['command'] and c['args']==r['args'] and c.get('error',{}).get('code')==r['code']];at,c=one(matches,'actual rejected public command');consumed.add(at);positions.append(at)
         native=r['before']['capture']['native'];solids=r['before']['capture']['solids'];need(solids['ready'] and len(solids['bodies'])>=1,'full ordinary positive analytic part already exists, not an isolated error probe')
         need(all('sha256:'+b['metrics']['runtime']['jsSha256']+':'+b['metrics']['runtime']['wasmSha256']==BUILD and b['metrics']['nativeValidity']['valid'] for b in solids['bodies']),'real exact-cohort valid positive Native baseline retained')
         extra=r['extra'];owner=extra['plane'] if index==0 else extra['owner'];history=native['history'];producer=one([h for h in history if h['type']=='SOURCE_FRAME_V1' and h['params']['featureId']==owner['featureId']],'actual independent source producer');need(producer['params']['parent'] is None,'genuine independent source authority');text=one([s['source'] for s in native['sketches'] if s['id']==owner['faceId']],'actual authored source bytes');sketch=json.loads(text)
         if index==0:
             need(extra['stage']=='primitive-admission' and r['args']['kind']=='Arc' and r['args']['data']=={'a':{'x':1,'y':0},'b':{'x':0,'y':1},'c':{'x':0,'y':0},'branch':'full-ccw'} and sketch['objects']==[],'invalid full branch was NOT inserted into accepted source');continue
+        if index==2:
+            delta=2.0**-60;data=r['args']['data'];need(extra['stage']=='candidate-registry' and extra['semanticWorkerTransport']=='unqualified' and r['command']=='append-sketch-primitive' and r['args']['kind']=='Arc' and r['args']['faceId']==owner['faceId'] and r['args']['role'] is None and r['args']['stage']==0 and data==extra['data']=={'a':{'x':1,'y':0},'b':{'x':1,'y':-delta},'c':{'x':0,'y':0},'branch':'proper-ccw'} and sketch['objects']==[],'unrepresentable proper Arc rejected at candidate registry; NOT accepted source or Worker-transport proof');need(data['a']!=data['b'] and data['b']['y']<0 and math.atan2(-delta,1)+2*math.pi==2*math.pi,'mathematically distinct major endpoint rays with unrepresentable binary64 proper interval');continue
         need(extra['stage']=='semantic-preparation' and r['args']['engineRevision']==BUILD and r['args']['faceId']==owner['faceId'] and r['args']['depth']==1 and r['args']['revision']==extra['choice']['revision'] and extra['choice']['analyticProfileVersion']==1,'actual explicit analytic semantic discovery binding')
         need(len(sketch['objects'])==3 and len(sketch['stages'])==1 and sketch['stages'][0]['constraints']==sketch['stages'][0]['generators']==[],'three genuinely authored nongenerated source curves');objects={o['id']:o for o in sketch['objects']};need(set(objects)=={extra['arcId'],extra['firstId'],extra['secondId']} and all(o['stage']==0 and o['role'] is None for o in objects.values()),'actual returned root identity ownership');arc=objects[extra['arcId']];data=arc['data'];need(arc['type']=='Arc' and data==extra['data'] and data['branch']=='proper-ccw','actual original proper branch, no normalization');need(objects[extra['firstId']]['type']==objects[extra['secondId']]['type']=='Segment' and objects[extra['firstId']]['data']=={'a':data['b'],'b':data['c']} and objects[extra['secondId']]['data']=={'a':data['c'],'b':data['a']},'actual exact closed radial-loop source, no fabricated geometry')
-        if index==1:
-            need(data=={'a':{'x':1000000,'y':-1000000},'b':{'x':-1000000,'y':1000000},'c':{'x':-1000000,'y':-1000000},'branch':'proper-ccw'} and math.hypot(data['a']['x']-data['c']['x'],data['a']['y']-data['c']['y'])==2000000,'genuine source radius outside analytic constructor domain with bounded original coordinates')
-        else:
-            delta=2.0**-60;need(data=={'a':{'x':1,'y':0},'b':{'x':1,'y':-delta},'c':{'x':0,'y':0},'branch':'proper-ccw'} and data['a']!=data['b'] and data['b']['y']<0 and math.atan2(-delta,1)+2*math.pi==2*math.pi,'mathematically distinct major endpoint rays, actual binary64 proper interval cannot be represented')
+        need(index==1 and data=={'a':{'x':1000000,'y':-1000000},'b':{'x':-1000000,'y':1000000},'c':{'x':-1000000,'y':-1000000},'branch':'proper-ccw'} and math.hypot(data['a']['x']-data['c']['x'],data['a']['y']-data['c']['y'])==2000000,'genuine source radius outside analytic constructor domain with bounded original coordinates')
     need(len(consumed)==3 and positions==sorted(positions),'three distinct actual command joins in frozen case order')
-    return {'status':'PASS','scope':'three genuine grouped public analytic source/admission/preparation refusal layers; no Native negative input or fake Worker reply','cases':len(rows)}
+    return {'status':'PASS','scope':'three genuine grouped public primitive-admission/semantic-radius/candidate-registry refusal layers; no Native negative input or fake Worker reply','cases':len(rows),'semanticIntervalTransport':'UNQUALIFIED'}
