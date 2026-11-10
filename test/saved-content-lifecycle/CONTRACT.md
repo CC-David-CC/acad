@@ -61,3 +61,16 @@ expression encoding length; it never assumes an empty default expression.
 The stale Save refusal is settled only after exact original accepted source
 and actual own saved-file version/status remain unchanged. Public normalized
 commit flags alone are insufficient refusal evidence.
+
+Source review closure: every fresh Open now records its actual command index,
+selected saved artifact SHA and complete detached authored source. Runner and
+independent reader compare all histories, original sketches, expression source,
+counters, presentation, materials and drawing definitions against the actual
+saved file. Ephemeral journal/material-revision tokens are not authored data.
+The same Unicode box is saved natively using actual File > Save As to My files
+and the themed filename dialog. Its observed browser path/version publication
+is the local acknowledgement, then actual browser/server settlement and native
+archive readback bind it. The native file must match the JSON authored document
+and survive a fresh Open. This is not inferred from the rectangle .cad cases.
+Pending mutation clears only on its own acknowledged result or explicit fully
+proved refusal; successful read-only inspection cannot clear unknown custody.

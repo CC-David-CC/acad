@@ -7,30 +7,43 @@ sha=lambda x:hashlib.sha256(x).hexdigest()
 def need(ok,msg):
  if not ok:raise ValueError(msg)
 def load(p):return json.loads(Path(p).read_text())
+def capture_matches(capture,e):
+ n=capture['native'];need(e['project']['model']['history']==n['history'] and e['project']['model']['expressions']==n['expressions'] and e['project']['model']['counters']==n['counters'],'Exact authored history/expression/counters')
+ source={x['id']:x['data'] for x in e['project']['sketches']};actual={x['id']:json.loads(x['source']) for x in n['sketches']};need(source==actual,'Exact persisted/reopened authored sketches')
+ need(e.get('manufacturing')==capture['manufacturing'] and e.get('presentation')==n['presentation'] and e.get('drawings',[None])[0]==capture['drawing'],'Exact materials/presentation/drawing intent')
 def main(root,output):
  root=Path(root);out=Path(output);need(not out.exists(),'New FIRST output');r=load(root/'receipt.json')
  need(r['status']=='PASS' and r['ownedContextsRetired'] and r['pendingMutation'] is None,'Terminal settled whole')
  need(r['sourcePins']==r['sourcePinsAfter'] and r['checkoutsBefore']==r['checkoutsAfter'],'Source custody unchanged')
+ roster=load(Path(__file__).parent/'producer-roster.json');commits={'core':r['source'],'desktop':r['hostSource'],'acceptance':r['acceptanceSource']};expected_sources={(role,str(Path('test/saved-content-lifecycle',name)) if role=='acceptance' else name) for role,names in roster.items() for name in names};expected_sources={(role,__import__('posixpath').normpath(relative)) for role,relative in expected_sources}
+ actual_sources=[(row['role'],row['relative']) for row in r['sourceSnapshots']];need(len(actual_sources)==len(set(actual_sources)) and set(actual_sources)==expected_sources,'Complete exact producer roster role/path set')
+ need(set(r['sourcePins'])=={role+':'+relative for role,relative in expected_sources},'Complete exact before/after source hash roster')
+ for row in r['sourceSnapshots']:need(row['commit']==commits[row['role']],'Actual source role/full commit tuple')
  for row in r['sourceSnapshots']:
   data=(root/row['snapshot']).read_bytes();need(sha(data)==row['sha256']==r['sourcePins'][row['role']+':'+row['relative']],'Frozen source bytes and before/after roster');need(len(data)<=8388608,'Bounded static producer source');blob=subprocess.run(['git','-C',row['root'],'show',row['commit']+':'+row['relative']],capture_output=True,check=True).stdout;need(blob==data,'Independent actual Git producer blob')
  need(r['workers'] and all(w['destroyed'] for w in r['workers']),'Actual observed owned codec retirement');need(not r['browserDialogs'],'No browser-native modals')
- observations={x['label']:x for x in r['observations']};expected={'Fresh empty model':False,'Authored representative project':True,'Width edit':True,'Refused stale save retains dirty content':True,'Undo returns exactly to saved content':False,'Redo restores unsaved content':True,'Fresh native Open':False,'Reopened edit':True,'Accepted New baseline':False,'Original own source restored after New':False,'Fresh Unicode JSON Open':False}
+ observations={x['label']:x for x in r['observations']};expected={'Fresh empty model':False,'Authored representative project':True,'Width edit':True,'Refused stale save retains dirty content':True,'Undo returns exactly to saved content':False,'Redo restores unsaved content':True,'Fresh native Open':False,'Reopened edit':True,'Accepted New baseline':False,'Original own source restored after New':False,'Fresh Unicode JSON Open':False,'Fresh Unicode native Open':False}
  for label,dirty in expected.items():
   row=observations[label];need(row['expected'] is dirty and row['info']['dirty'] is dirty and row['guard']['guard'] is dirty and row['guard']['cache']['equal'] is (not dirty),'Actual dirty and close cache '+label)
- labels={s['label']:s for s in r['saves']};need(set(labels)=={'rectangles-initial','rectangles-edited','unicode-initial','unicode-boundary'},'All saved revision families')
+ labels={s['label']:s for s in r['saves']};need(set(labels)=={'rectangles-initial','rectangles-edited','unicode-initial','unicode-boundary','unicode-native'},'All saved revision families')
  spec=importlib.util.spec_from_file_location('independent_native_archive',Path(__file__).resolve().parents[1]/'native-cad-container/archive_oracle.py');archive=importlib.util.module_from_spec(spec);spec.loader.exec_module(archive)
  artifacts={}
  for label,s in labels.items():
   p=root/s['artifact']['savedFile'];raw=p.read_bytes();need(len(raw)==s['artifact']['bytes'] and sha(raw)==s['artifact']['sha256'],'Actual complete saved file hash')
-  writes=[w for w in r['writes'] if w['submission']['label']==label];need(len(writes)==1 and writes[0]['acknowledged']==s['result'] and writes[0]['settled']==s['artifact'],'Submitted/acknowledged/server-settled file')
-  need(s['result']['persistence']=='browser' and s['result']['dirty'] is False,'Known browser save')
+  writes=[w for w in r['writes'] if w['submission']['label']==label];need(len(writes)==1 and writes[0]['settled']==s['artifact'],'Submitted/server-settled file');w=writes[0]
+  if s['result'] is not None:
+   need(w['acknowledged']==s['result'] and s['result']['persistence']=='browser' and s['result']['dirty'] is False,'Known browser command Save')
+   c=r['commands'][s['commandIndex']];need(c['command']=='save' and c['result']==s['result'] and c['args']['revision']==w['submission']['revision'] and w['submission']['commandIndex']==s['commandIndex'],'Actual Save command/result binding')
+  else:
+   need(label=='unicode-native' and w['submission']['route']=='real File menu Save As to My files','Actual Unicode native Save As route')
+   ack=s['uiAcknowledgement'];need(w['acknowledged']==ack and ack['kind']=='ui-published-browser-generation' and ack['path']==s['artifact']['path'] and ack['version']==s['artifact']['localVersion'] and ack['status'].startswith('Saved on this device'),'Actual UI known browser generation/settled file association')
   if s['format']=='cad':
    decoded=archive.read_archive(p);e=decoded['envelope'];need(decoded['sha256']==s['artifact']['sha256'],'Independent native container readback')
   else:e=archive.parse_json(raw)
   need(e['format']=='codi-jsketcher-project' and e['unit']=='millimeter' and e['version'] in (2,3),'Supported persisted authored envelope')
   before=s['before']['native'];need(e['project']['model']['history']==before['history'] and e['project']['model']['expressions']==before['expressions'] and e['project']['model']['counters']==before['counters'],'Preserved authored history/expression/counters')
   actual={x['id']:x['data'] for x in e['project']['sketches']};expected_source={x['id']:archive.parse_json(x['source'].encode()) for x in before['sketches']};need(actual==expected_source,'Independent exact original source sketch readback')
-  artifacts[label]={'sha256':sha(raw),'bytes':len(raw),'envelope':e}
+  capture_matches(s['before'],e);artifacts[label]={'sha256':sha(raw),'bytes':len(raw),'envelope':e}
  need(len(artifacts['rectangles-initial']['envelope']['project']['sketches'])==16 and len(artifacts['rectangles-edited']['envelope']['project']['sketches'])==16,'Representative16sketch source retained')
  for label,width in [('rectangles-initial',100),('rectangles-edited',120)]:
   e=artifacts[label]['envelope'];by_id={x['id']:x['data'] for x in e['project']['sketches']}
@@ -47,10 +60,15 @@ def main(root,output):
  need(index%16384==16383 and index==unicode['boundaryIndex'] and initial==unicode['initialIndex'],'Independent real surrogate-boundary position')
  script=unicode['script'];initial_script=artifacts['unicode-initial']['envelope']['project']['model']['expressions'];encoded_length=len(json.dumps(initial_script,ensure_ascii=False,separators=(',',':')))-2;need(encoded_length==unicode['initialEncodedLength'],'Actual old expression encoding length');padding=(16383-(initial+len('pad = 1')-encoded_length)%16384+32768)%16384;need(unicode['padding']==padding and script=='pad = '+' '*padding+'1','One independently derived valid whitespace-only expression pad')
  need(artifacts['unicode-boundary']['envelope']['project']['model']['expressions']==script,'Exact padded authored expression persisted')
- for label in ['unicode-initial','unicode-boundary']:
+ for label in ['unicode-initial','unicode-boundary','unicode-native']:
   need(any(x.get('name')==name for x in artifacts[label]['envelope']['manufacturing']['materials']),'Original assigned Unicode material preserved')
+ need(artifacts['unicode-native']['envelope']==artifacts['unicode-boundary']['envelope'],'Same exact Unicode box authored document across JSON and native handoff')
  need(len(r['refusals'])==1,'One real stale Save refusal')
  refusal=r['refusals'][0];need(refusal['error']['message']=='The model changed; inspect it before saving.' and refusal['before']==refusal['after'] and refusal['fileBefore']==refusal['fileAfter'],'Exact refused Save preserves authored state and own file generation')
+ need({x['label'] for x in r['opens']}=={'Fresh native Open','Original own source restored after New','Fresh Unicode JSON Open','Fresh Unicode native Open'},'All required fresh Open source proofs')
+ for opened in r['opens']:
+  saved=artifacts[opened['sourceLabel']];need(saved['sha256']==opened['artifactSha256'],'Exact source artifact selected for fresh Open');capture_matches(opened['after'],saved['envelope'])
+  command=r['commands'][opened['commandIndex']];need(command['command']=='open-project' and command['args']['path']==opened['path']==labels[opened['sourceLabel']]['artifact']['path'] and command['result']==opened['result'] and command['result']['status']=='opened','Actual Open command/result/source-artifact binding')
  dialogs=r['dialogs'];need(any(x['label']=='Cancel actual New' and x['result']['status']=='cancelled' for x in dialogs),'Cancelled New');need(any(x['label']=='Cancel actual Open' and x['result']['status']=='cancelled' for x in dialogs),'Cancelled Open');need(any(x['label']=='Explicitly discard to new model' and x['result']['status']=='opened' for x in dialogs),'Explicit discard New');need(any(x['label']=='Actual dirty window close cancelled' and x['preserved'] for x in dialogs),'Dirty close cancel');need(sum(x['label']=='Actual clean close without discard dialog' and x['closed'] for x in dialogs)>=2,'Actual clean close after cache adoption')
  need(len(r['resources'])>=4,'Representative passive resource observations')
  for row in r['resources']:
