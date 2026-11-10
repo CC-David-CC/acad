@@ -19,6 +19,7 @@ import {captureArcData} from '../shapes/arcBranch.mjs';
 import {captureFiniteCurveSourceRequest,captureFiniteCurveSourceReceipt} from './finiteCurveSourceEnvelope.mjs';
 import type {FiniteCurveSourceReceipt} from './finiteCurveSourceEnvelope.mjs';
 import {captureFiniteCurveCertificateRequest,captureFiniteCurveCertificateReply} from './finiteCurveCertificateEnvelope.mjs';
+import {captureFiniteCurveEndpointRequest,captureFiniteCurveEndpointReply} from './finiteCurveEndpointEnvelope.mjs';
 
 let transitionOutstanding=0;
 const MAX_TRANSITIONS=2;
@@ -71,6 +72,14 @@ export function runFiniteCurveCertificate(workerUrl:string,value:unknown,options
  return runSketchSolve(workerUrl,Object.freeze({task:'sketch-finite-curve-certificate',...original}),opts).then(result=>{
   if(opts.signal?.aborted||opts.valid&&opts.valid()!==true)throw new DOMException('Finite certificate cancelled','AbortError');
   return captureFiniteCurveCertificateReply(result,original);
+ });
+}
+export function runFiniteCurveEndpoint(workerUrl:string,value:unknown,options:SketchSolveOptions={},verify=false){
+ const original=captureFiniteCurveEndpointRequest(value,verify),opts=captureOptions(options);
+ const task=verify?'sketch-finite-curve-verify-endpoint':'sketch-finite-curve-endpoint';
+ return runSketchSolve(workerUrl,Object.freeze({task,...original}),opts).then(result=>{
+  if(opts.signal?.aborted||opts.valid&&opts.valid()!==true)throw new DOMException('Finite endpoint operation cancelled','AbortError');
+  return captureFiniteCurveEndpointReply(result,original,verify);
  });
 }
 // Capture only bounded immutable plain data before runSketchSolve can yield or

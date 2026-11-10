@@ -2,6 +2,7 @@
 // Mathematical certification and source reconstruction remain in Workers.
 import {captureFiniteCurveSourceReceipt,captureFiniteCurveSourceRequest} from './finiteCurveSourceEnvelope.mjs';
 import {captureFiniteCurveCertificateRequest} from './finiteCurveCertificateEnvelope.mjs';
+import {captureSketchFailure} from '../constr/admissionCause.mjs';
 
 const own=(v,k)=>Object.prototype.hasOwnProperty.call(v,k);
 const invalid=()=>{throw Error('Invalid private finite-curve endpoint request.');};
@@ -25,4 +26,18 @@ export function captureFiniteCurveEndpointRequest(value,verify=false){
  if(!['trim','extend'].includes(intent.action)||!['a','b'].includes(target.endpoint)||!Number.isSafeInteger(intent.nativeIndex)||intent.nativeIndex<0||intent.nativeIndex>7||!['ordinary','typed-lengths'].includes(a.coordinatePolicy))return invalid();
  id(target.curveId);
  return Object.freeze({revision:original.revision,sketchJSON:original.sketchJSON,externalParameters:original.externalParameters,expectedSource:source,raw:certificate.raw,domain:certificate.domain,intent:Object.freeze({action:intent.action,target:Object.freeze(target),nativeIndex:intent.nativeIndex}),coordinatePolicy:a.coordinatePolicy,...(verify?{candidateJSON:text(a.candidateJSON),resultPoint:point(a.resultPoint)}:{})});
+}
+
+// Structural binding only; the second Worker independently proves the edit.
+export function captureFiniteCurveEndpointReply(value,request,verify=false){
+ const original=captureFiniteCurveEndpointRequest(request,verify);
+ const outcome=value&&typeof value==='object'?Object.getOwnPropertyDescriptor(value,'ok'):null;
+ if(!outcome?.enumerable||!own(outcome,'value')||typeof outcome.value!=='boolean')return invalid();
+ if(!outcome.value){const r=record(value,['revision','ok','error']);if(r.revision!==original.revision)return invalid();return Object.freeze({revision:r.revision,ok:false,error:captureSketchFailure(r.error)});}
+ if(verify){const r=record(value,['revision','ok','verified']);if(r.revision!==original.revision||r.verified!==true)return invalid();return Object.freeze({revision:r.revision,ok:true,verified:true});}
+ const r=record(value,['revision','ok','changed','serializedSketch','point','endpoint']);
+ if(r.revision!==original.revision||typeof r.changed!=='boolean')return invalid();
+ const serializedSketch=text(r.serializedSketch),p=point(r.point),endpoint=record(r.endpoint,['action','target','nativeIndex']),target=record(endpoint.target,['curveId','endpoint']),expected=original.intent;
+ if(endpoint.action!==expected.action||endpoint.nativeIndex!==expected.nativeIndex||target.curveId!==expected.target.curveId||target.endpoint!==expected.target.endpoint||r.changed!==(serializedSketch!==original.sketchJSON))return invalid();
+ return Object.freeze({revision:r.revision,ok:true,changed:r.changed,serializedSketch,point:p,endpoint:Object.freeze({action:endpoint.action,target:Object.freeze(target),nativeIndex:endpoint.nativeIndex})});
 }

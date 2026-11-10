@@ -47,7 +47,11 @@ self.onmessage = async event => {
       if(request.task==='sketch-finite-curve-endpoint'||request.task==='sketch-finite-curve-verify-endpoint'){
         const {changeFiniteCurveEndpoint,verifyFiniteCurveEndpointCandidate}=require('./finiteCurveEndpointTransition');
         const {task,...payload}=request;
-        self.postMessage(await (task==='sketch-finite-curve-endpoint'?changeFiniteCurveEndpoint(payload):verifyFiniteCurveEndpointCandidate(payload)));
+        const result:any=await (task==='sketch-finite-curve-endpoint'?changeFiniteCurveEndpoint(payload):verifyFiniteCurveEndpointCandidate(payload));
+        // Evidence remains Worker-local; the independently verified candidate
+        // and exact endpoint are the bounded data needed by the coordinator.
+        if(task==='sketch-finite-curve-endpoint'&&result.ok){const {evidence,...reply}=result;self.postMessage(reply);}
+        else self.postMessage(result);
         return;
       }
       if(['sketch-transition-offset','sketch-transition-verify-offset','sketch-offset-inspection'].includes(request.task)){const {changeSketchOffset,verifySketchOffset,inspectSketchOffsets}=require('./offsetTransition');const {task,...payload}=request;self.postMessage(task==='sketch-transition-offset'?changeSketchOffset(payload):task==='sketch-transition-verify-offset'?verifySketchOffset(payload):inspectSketchOffsets(payload));return;}
