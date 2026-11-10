@@ -3,7 +3,8 @@
 SOURCE PLAN ONLY; no implemented-command claim, seeds, product/common changes,
 parser/import/tests/build/Native/browser execution. Isolated base
 `e91d24056547628a37a2fd4d339aadcbf5ff7b3c`; source census additionally read
-Root3160501 and Host4d555e1. Root must choose/freeze this API BEFORE code.
+Root3160501 and Host4d555e1, revised for explicit Arc approval
+`8fda31f614244fd829a73594f5c102e6c8e46860`. Root must choose/freeze this API BEFORE code.
 Packets3/5, current-source orchestration, actual backend activation and mutation
 verification must all compose; mathematical/raw replies alone confer no authority.
 
@@ -13,13 +14,18 @@ verification must all compose; mathematical/raw replies alone confer no authorit
 |---|---|
 |inspect-sketch-creation / create-empty-sketch-plane|Genuine XY plane at depth0; actual returned faceId, never source JSON.|
 |inspect-closed-sketches / inspect-closed-sketch|Current revision, actual roots/child parent IDs, stage and existing constraints.|
-|append-sketch-primitive|Literal Segment a/b; Circle c/r; Arc a/b/c; role null or construction; stage0..31. CAD assigns IDs.|
+|append-sketch-primitive|Literal Segment a/b; Circle c/r; after the approved Arc packet, mandatory Arc a/b/c/branch with branch proper-ccw or full-ccw; role null or construction, stage0..31. CAD assigns IDs.|
 |edit-closed-sketch-point(s)|Ordinary edits that revoke query tickets; actual inspected children, not parsed ID suffixes.|
 |apply-closed-sketch-coincidence, apply/remove-closed-sketch-fix-entity|Genuine connected-neighbor positive and constrained refusal.|
 |apply-closed-sketch-radius; edit-closed-sketch-dimension; apply-physical-bindings|Actual RadiusLength/name binding, mm(...) definitions and later stale-parameter case; no literal erasure.|
 |inspect/create rectangle; inspect-selected-profiles/regions; create-selected-extrusion|Real unrelated prism and later trimmed generic polygon consumption.|
 |inspect-authored-edits / travel-authored-edit|Actual sketch-bytes J and exact source travel, not a new operation graph.|
 |save / open-project, existing signed harness/freshOpen/Files sync|Normal .cad lifecycle and submitted-write custody.|
+
+Every authored Arc record in this packet has exact data keys ['a','b','c','branch']
+with explicit proper-ccw/full-ccw. Defaulting during new intent capture is not
+used to hide a missing saved branch; raw-query consumers must compose that
+source distinction without claiming an unreviewed Native wire change.
 
 Actual shared implementation seams: `closedSketchTransitions.ts:captureJob`,
 `applyTransition`, `job.prepare`, `submitPreparedReplay`; headless
@@ -45,7 +51,10 @@ Engine rows `{engine:'occ',engineRevision,rawSupportVersion:1,certificateVersion
 scope:'source-query-only'}` list only actually admitted loaded factories/graphs;
 none if unavailable. Limits expose2 curves/8 raw rows/2 isolated events/5 overlap
 records/64KiB response, not a promise every original Arc is supported. Existing
-64-source/1MiB source/1024-parameter caps remain. This new read is not implemented.
+64-source/1MiB source/1024-parameter caps remain. Arc proper/full availability must
+be advertised separately according to the actual composed query consumers;
+source enum support alone does not advertise full-Arc raw queries. This new
+read is not implemented.
 
 2. Proposed `inspect-closed-sketch-intersections` request:
 `{revision,faceId,engine:'occ',engineRevision,curveIds:[idA,idB],domain}`.
@@ -119,8 +128,16 @@ one existing bounded original-source string reference; no new model/cache graph)
 Opaque query/event IDs only select this privately issued receipt, never decode
 geometry. It contains no live Worker, mount, Params, DB name or persisted witness.
 
-New query replaces it; attempted edit consumes it; ordinary edit, parameter
-change, Undo/Redo, namespace/Open/new document, abort or host disposal revokes it.
+New query replaces it. Revoke on attempted mutation ENTERING the actual shared
+transaction, or on actual abort/disposal, ordinary source/parameter edit,
+Undo/Redo, namespace/Open/new document or any captured revision/J/lifetime anchor
+change. A refused pure preflight with no source/job/owner change does not consume
+the ticket: retain it only after positively checking EVERY original revision,
+namespace/version, J, parameter, generation, host and service/owner anchor is
+still current and all preflight resources are acknowledged settled. Exact no-op
+before any mutable transaction can likewise retain it under those predicates.
+Do not infer retention merely from committed:false, unchanged coordinates or a
+familiar error code; a failed candidate can legitimately invalidate epoch/tokens.
 Undo restoring the SAME bytes does not restore an old ticket. Readonly ordinary
 inspection does not invalidate it. Edit redoes both original-request source and
 certificate proofs under its actual current job before one source/J/full-suffix
@@ -128,6 +145,23 @@ publication. Only the private producer supplies the retained actual Native packe
 a public raw reply/copied JSON/boolean can never issue it. No requery/fallback is
 used to choose another root. This pending-selection policy needs explicit Root
 approval; the pure mathematical result remains nonauthoritative.
+
+Proposed bounded machine failure metadata is failureLayer
+(request/preflight/source/mutation/publication/settlement) plus
+selectionDisposition (retained/revoked/unavailable), scoped to the submitted
+query ID. Actual private phase/currentness/settlement evidence determines it,
+never a caller flag or code/message classification. A known pure request/domain/
+degeneracy/fixed-scope preflight refusal may say retained only with the exact
+predicate above; the SAME COORDINATE_CONFLICT reached after transaction entry
+must say revoked. Unknown/not-issued IDs say unavailable and do not revoke a
+different valid current receipt. Actual source/job/owner change, abort, transaction
+entry or unknown invocation/cleanup/write outcome revokes; no ticket facts are
+retained after uncertainty. Preserve original code/cause and truthful committed
+settlement independently. Root must approve the strict Host transport for this
+metadata; no such response field is claimed implemented here.
+Actual phase tracking belongs at the trusted shared mutation-entry seam after
+pure preflight; it cannot be reconstructed from an error's public properties.
+Readonly cold proof work does not by itself mean requested mutation occurred.
 
 ## Bounded case roster: actual public authoring, independent truth
 
@@ -150,14 +184,16 @@ counter/host/revision state and settled resource ownership before/after.
 |True circle tangent|Same radii, center distance10: one(5,0), multiplicity2.|
 |Circle10±1e-6|Exact represented distance test gives2/0 respectively. Complete certified proof OR explicit bounded uncertainty, never tangent/false empty. This row tests honest conditioning, not near-contact authoring closure.|
 |Coincident/nested/disjoint|Identical circles: full overlap; concentric r5/r3: empty; centers20 apart/r5: empty.|
-|Quarter/major|c0,r5, a(5,0),b(0,5), and reversed endpoints CCW-major; line y3 gives only(4,3)/(−4,3), while both support roots remain proved.|
-|Arc seam|a(3,-4),b(3,4),c0; vertical x4 gives both(4,±3) inside CCW sector crossing canonical seam.|
+|Quarter/major|Explicit branch proper-ccw, c0,r5, a(5,0),b(0,5), and reversed endpoints CCW-major; line y3 gives only(4,3)/(−4,3), while both support roots remain proved.|
+|Arc seam|Explicit proper-ccw, a(3,-4),b(3,4),c0; vertical x4 gives both(4,±3) inside CCW sector crossing canonical seam.|
 |Coincident Arc domains|Quarter and complementary major on same circle: two owned endpoint contacts; Circle+quarter: complete quarter interval. No fabricated numeric root.|
 |Guaranteed numeric uncertainty|S1(0,0)→(1,0), S2(0,2^-54)→(1,2^-53): exact determinant2^-54≠0, while actual OCCT epsilon branch reports identical/0 roots. Require NATIVE_ROOT_CENSUS uncertainty and no IDs.|
-|Source uncertainty|Actual proper radius1e-7 quarter Arc: inherited full-branch ambiguity must return FINITE_CURVE_SOURCE_UNCERTAIN, not promote to Circle; CAD-ARC-01 remains open.|
+|Explicit tiny proper|After Arc packet composition, mandatory branch proper-ccw with a(1e-7,0),b(0,1e-7),c0; x-axis Segment(-2e-7,0)→(2e-7,0) has two support roots and ONLY positive endpoint(1e-7,0) in the proper quarter. Do not freeze the inherited1e-6 refusal/full interpretation as correct future behavior.|
+|Explicit full/invalid zero|Full-ccw requires exact genuine seam equality and stays Arc; proper-ccw with collapsed a=b refuses BEFORE publication. Full-Arc query remains precisely unsupported until genuine full-branch raw/query binding composes; no Circle promotion. Its required positive query coverage stays open.|
+|Actual source uncertainty|An ACTUALLY admitted explicit proper Arc failing the strong exact-radius/representable-domain gate returns FINITE_CURVE_SOURCE_UNCERTAIN; no injected source or inherited proximity classification is used to force this case. Report any missing real authoring route rather than fabricate one.|
 |Finite vs ray|Target(0,0)→(2,0), Circle c(5,0),r1: finite pair empty; b-ray gives BOTH(4,0),(6,0). Explicitly choose6, resulting length6. Undo/requery/explicitly choose4, length4.|
-|No-op/collapse|Trim own selected endpoint: exact no-op/no J; opposite endpoint: CURVE_ENDPOINT_DEGENERATE, all accepted state exact.|
-|Constraint refusal|Public Fix target Segment, THEN fresh query/interior trim: COORDINATE_CONFLICT from actual shared fixed scope; retain real cause, all accepted state exact.|
+|No-op/collapse|Trim own selected endpoint: exact no-op/no J; opposite endpoint: CURVE_ENDPOINT_DEGENERATE, all accepted state exact. Prove ticket remains usable only when this was pure preflight with every original anchor unchanged.|
+|Constraint refusal|Public Fix target Segment, THEN fresh query/interior trim: COORDINATE_CONFLICT from actual shared fixed scope; retain real cause, all accepted state exact. Retention/revocation follows actual phase/anchors, not this code alone.|
 |Stale/foreign-own|Ticket after ordinary point/parameter edit, after Undo restoring bytes, and after fresh Open must refuse. Use a curve from another OWN sketch to prove wrong-face refusal; no account/security probe.|
 
 ## One complete author/edit/travel/native lifecycle
@@ -168,7 +204,10 @@ counter/host/revision state and settled resource ownership before/after.
    plane plus unrelated Point(7,9). Query raw-support cohort is explicit and
    source-query-only; it does not convert/switch the part's Native history.
    Actual discovered runtime capabilities are prerequisites, never guessed pairs.
-2. Author/read the bounded roster. Trim a free Segment against chosen boundary;
+2. Author/read the bounded roster; EVERY newly authored Arc explicitly supplies
+   branch proper-ccw/full-ccw as intended. Missing/unknown saved branches refuse
+   before adoption under the approved Arc contract, not an old-format migration.
+   Trim a free Segment against chosen boundary;
    immediate shared Undo/Redo restores exact bytes/IDs/constants/branches. Run
    ray4/6 choices, no-op/constraint/stale controls; never infer closest intent.
 3. Required real profile chain on another genuine plane: four Segments
