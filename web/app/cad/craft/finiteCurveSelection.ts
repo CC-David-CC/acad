@@ -2,14 +2,17 @@
 // must call clear at a new query, actual mutation entry, travel, Open, disposal,
 // or an unknown settlement. An equal restored sketch does not restore a slot.
 export function createFiniteCurveSelectionSlot(){
- let slot:any=null;
+ let slot:any=null,signal:AbortSignal|null=null;
  const unavailable=()=>Object.assign(Error('The curve selection is unavailable.'),{code:'STALE_CURVE_QUERY',selectionDisposition:'unavailable'});
- function clear(){slot=null;}
+ function clear(){if(signal)signal.removeEventListener('abort',clear);signal=null;slot=null;}
  function issue(job:any,faceId:string,revision:string,prepared:any,described:any,domain:any){
   clear();job.current();
   if(!Array.isArray(described.selections)||described.selections.length===0)return null;
   const queryId=crypto.randomUUID();
   slot=Object.freeze({queryId,job,faceId,revision,prepared,domain,selections:described.selections});
+  const docSignal:AbortSignal=job.documentSignal;signal=docSignal;
+  docSignal.addEventListener('abort',clear,{once:true});
+  if(docSignal.aborted){clear();throw unavailable();}
   return queryId;
  }
  function resolve(queryId:string,eventId:string,faceId:string,revision:string){
