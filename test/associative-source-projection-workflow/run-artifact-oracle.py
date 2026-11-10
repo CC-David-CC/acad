@@ -175,6 +175,9 @@ def main(whole, output, producer_root, producer_commit, verifier_commit):
                 if r['repo'] == str(producer_root) and r['path'] == relative]
         need(len(rows) == 1 and rows[0]['commit'] == producer_commit,
              'unchanged checker/import bound to actual original producer roster')
+    # The frozen child loads its own receipt; retain only bounded custody
+    # metadata in this parent while it runs, not a duplicate parsed tree.
+    del receipt, rows
     output.mkdir()
     custody = {'scope': 'AFTER independent projection checker only; no product execution',
                'sourcesBefore': sources_before, 'sourceRecords': records,
