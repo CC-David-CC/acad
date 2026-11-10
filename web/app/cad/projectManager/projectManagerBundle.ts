@@ -626,14 +626,14 @@ export function activate(ctx: ApplicationContext) {
     if(!Number.isSafeInteger(namespaceRevision)||namespaceRevision<0)throw new Error('A versioned sketch namespace is required.');
     const models=registry.shells, metadata=manufacturingMetadata, materialRevision=manufacturingRevision,display=presentationMetadata,displayRevision=presentationRevision,drawing=drawingDefinition,definitionRevision=drawingRevision;
     const expressionRevision=[expressions.script$.revision,expressions.list$.revision,(expressions.errors$ as any).value];
-    const surfacing=ctx.surfacingService, surfaceRevision=surfacing?.state$.value.revision, workbench=ctx.workbenchService.currentWorkbench$.value;
+    const surfacing=ctx.surfacingService, surfaceRevision=surfacing?.state$.value.revision, workbench=ctx.workbenchService.currentWorkbench$.value, wizardDraft=ctx.wizardService.workingRequest$.value;
     const unchanged=(expectedMetadata=metadata,expectedRevision=materialRevision,expectedDrawing=drawing,expectedDrawingRevision=definitionRevision)=>{try { return managerIsCurrent()&&ctx.projectManager===manager&&!restoreUnavailable() && ctx.craftService===craft && ctx.storageService===storage &&
       ctx.cadRegistry===registry && ctx.expressionService===expressions && ctx.surfacingService===surfacing && surfacing?.state$.value.revision===surfaceRevision &&
       ctx.workbenchService.currentWorkbench$.value===workbench && ctx.assemblyService.getConstraints().length===0 && craft.evaluationEpoch===epoch && job.project.sketchStorageNamespace===namespace && storage.namespaceRevision(namespace)===namespaceRevision &&
       craft.modifications$.value.history===history && registry.shells===models && manufacturingMetadata===expectedMetadata && manufacturingRevision===expectedRevision && presentationMetadata===display && presentationRevision===displayRevision && drawingDefinition===expectedDrawing && drawingRevision===expectedDrawingRevision &&
       expressions.script$.revision===expressionRevision[0] && expressions.list$.revision===expressionRevision[1] &&
       (expressions.errors$ as any).value===expressionRevision[2] && !craft.isProcessing && (!craft.isEditingHistory || allowHistoryReview) &&
-      !craft.pipelineFailure$.value && !ctx.services.sketcher.inPlaceEditor.inEditMode && !ctx.wizardService.workingRequest$.value;
+      !craft.pipelineFailure$.value && !ctx.services.sketcher.inPlaceEditor.inEditMode && (allowHistoryReview?ctx.wizardService.workingRequest$.value===wizardDraft:!ctx.wizardService.workingRequest$.value);
     } catch {return false;}};
     const current=()=>{try{job.guard();return unchanged();}catch{return false;}};
     if(!current())throw new DOMException('Project changed','AbortError');
@@ -733,7 +733,7 @@ export function activate(ctx: ApplicationContext) {
   }
   async function compareHostSavedContent(options:{signal?:AbortSignal,valid?:()=>boolean}={}){
     options=captureDocumentJobOptions(options,true);const lifetime=documentJob(options);lifetime.guard();
-    const known=inspectHostSavedContent();if(known.equal!==null){lifetime.guard();return known;}
+    const known=inspectHostSavedContent();if(known.equal!==null){lifetime.guard();if(inspectDocumentRevision()!==known.revision)throw new DOMException('Saved-content inspection changed.','AbortError');return known;}
     const generation=savedContentGeneration,work=await captureHostProjectSourceJob(options,true),{job,current}=work,owner=nativeArchiveOwner(job);
     const prepared=await owner.prepareContent(work.source,{signal:work.options.signal,valid:()=>{try{job.guard();return true;}catch{return false;}}},current);
     try{
