@@ -51,6 +51,6 @@
     "shape-io/ownedAnalyticProfileV1.hpp",
     "shape-io/selectedProfileV2.hpp",
     "shape-io/ownedMassPropertiesV1.hpp",
-    "main.cpp"
+    "shape-io/main.cpp"
   ]
 }
