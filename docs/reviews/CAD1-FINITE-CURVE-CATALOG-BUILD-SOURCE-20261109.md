@@ -20,6 +20,11 @@ the existing explicit null entry. Webpack emits the closed graph under
 finite-curve-support/ and excludes those bytes from its normal source loader.
 No runtime binary or distribution archive is added to Git.
 
+Independent review identified the new virtual import's missing TypeScript
+declaration before any build. worker-assets.d.ts now declares null or the exact
+generated query entry, including the fourteen source bindings, two leaves and
+five emitted files. No SolidKernel or editable-part type is attached.
+
 All eleven existing/new OCI bootstrap source guards now bind the actual reviewed
 9254d17d4e73c83f12e3ed748c2fcabfd914faa2374b20b36eb55b093c7736f3 source.
 Only the common source digest changes; every Native pair and the existing a84

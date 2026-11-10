@@ -55,3 +55,28 @@ declare module 'codi-circular-assets' {
 }
 
 declare module 'codi-mechanical-native-assets' {const assets:null|{format:'mechanical-native-component/1';profileSourceBindingVersion:1;selectedRegionArrangementVersion:1;jsSha256:string;wasmSha256:string;bootstrapSha256:string;workerSha256:string;worker:string;js:string;wasm:string;modules:Record<string,string>};export default assets;}
+
+declare module 'codi-finite-curve-support-assets' {
+ type Leaf='modules/engine/mount/finiteCurveNativeCalls.mjs'|'modules/engine/mount/finiteCurveReadProtocol.mjs';
+ type File=Leaf|'modules/engine/mount/finite-curve-support-worker.js'|'finite-curve-support-occ-portable.js'|'finite-curve-support-occ.wasm';
+ type Source=Leaf|'modules/engine/mount/oci-verified-worker.js'|'build/embedded-display.cjs'|
+  'modules/engine/mount/displayProjection.mjs'|'build/owned-profile-resource-closure.cjs'|
+  'build/prepare-finite-curve-support-assets.cjs'|'build/finite-curve-support-assets-entry.cjs'|
+  'build/finite-curve-support-candidate-entry.mjs'|'build/prepare-finite-curve-support-cohort.cjs'|
+  'modules/engine/mount/ownedFiniteCurveSupportCandidate.mjs'|'modules/engine/mount/ownedFiniteCurveSupportResources.mjs'|
+  'modules/engine/mount/finiteCurveSupportRequest.mjs'|'modules/engine/mount/occ-finite-curve-support-mount.mjs';
+ type Pin=Readonly<{sha256:string;bytes:number}>;
+ const assets:null|Readonly<{
+  format:'finite-curve-support-component/1';sourceQueryOnly:true;finiteCurveSupportReadVersion:1;
+  sourceCommit:'d3b2afa0524807d04021eeeba3ca37298dabd160';sourceTree:'b3800d4e4c858b003b8a3cdead4b77e8e8918ba5';
+  jsSha256:'479f0620b6dfe131dac05131a3798fc533e05a2bd11e8074ef240284f61bbe86';
+  wasmSha256:'746da919c8457e98daa821fae98c62c0a6c9ad1acafd1c3d5412e0207d6b6325';
+  jsBytes:316530;wasmBytes:36216184;bootstrapSha256:string;workerSha256:string;
+  worker:string;js:string;wasm:string;modules:Readonly<Record<Leaf,string>>;
+  sources:Readonly<Record<Leaf,string>>;files:Readonly<Record<File,Pin>>;
+  sourceBindings:Readonly<Record<Source,Pin>>;
+  queryImportRoots:readonly [Readonly<{module:'modules/engine/mount/finiteCurveNativeCalls.mjs';
+   literal:"await import(new URL('./finiteCurveNativeCalls.mjs',self.location.href))"}>];
+ }>;
+ export default assets;
+}
