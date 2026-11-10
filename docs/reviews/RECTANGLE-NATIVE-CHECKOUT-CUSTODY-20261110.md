@@ -13,3 +13,7 @@ Coverage review: six ordinary native cycles plus three per-cell cycles remain, i
 ## SOURCE repair disposition
 
 Driver/checker bind actual three clean checkout root/HEADs before/after and acceptance cwd, retaining original blob/pin checks. Fresh Open records actual submission, acknowledged result, observed state and old/new actors before settlement; pending Open or actual mutating error flags prevent final context retirement. Independent reader checks all9settled Open rows and existing9Save rows. All accepted geometry/phase/refusal/50pm/Native budgets and fragment APIs remain unchanged. No code imported or executed; no runtime success claim.
+
+## Follow-up BEFORE: normalized application flags
+
+Exact0db659d0 still treats both false flags as a negative result. Actual signed-harness.command synthesizes both booleans inside its renderer error envelope even when the original application error lacked them, while transport errors may omit them altogether. Therefore false flags alone cannot establish precommit. Root requires tracking ALL submitted mutation errors until actual frozen expected-refusal code/layer and complete before/after source/history/J/geometry/currentness/owner checks establish the precise no-publication outcome. Unexpected errors remain unknown and retain context. Per-cell refusal integration needs only a narrow acceptance callback after its existing exact assertions; no product authority changes or tests.
