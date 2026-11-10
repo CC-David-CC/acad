@@ -1,6 +1,6 @@
 # Whole mixed projection/native read qualification
 
-Unexecuted source. Root normal-builds/stages the composed Core/Host; no extra Native pair or bootstrap change is required. Retain primary manufacturing graph/Native assets and app-bundled headless Workers already required by the standalone projection packet. Native engine is fixed in mixed-runner.mjs to actual primary32e/abb, not an engine alias. Use current signed pin metadata and source checkouts whose HEAD includes this committed acceptance folder. Existing `PUPPETEER_CORE_PATH` must be24.35.0.
+Unexecuted source. Root normal-builds/stages the composed Core/Host; no extra Native pair or bootstrap change is required. Retain primary manufacturing graph/Native assets and app-bundled headless Workers already required by the standalone projection packet. Native engine is fixed in mixed-runner.mjs to actual primary32e/abb, not an engine alias. Use current signed pin metadata and immutable compiled Core/Host checkouts at their exact pinned HEADs. The acceptance folder and its imported archive helper run from a separate clean reviewed checkout with explicit CODI_ACCEPTANCE_SOURCE; they need not be part of the compiled runtime commit. Existing `PUPPETEER_CORE_PATH` must be24.35.0.
 
 Set the same `CODI_DESKTOP_SOURCE_ROOT`, `CODI_CORE_SOURCE_ROOT`, `CODI_EVIDENCE` (exclusive NEW path), `CODI_SIGNED_PINS`, `CODI_EXPECT_SOURCE`, `CODI_EXPECT_DESKTOP`, `CODI_TEST_URL`, `CODI_TEST_CDP` as the normal signed application harness. Run `node test/projection-protected-reads-workflow/desktop-driver.mjs` ONCE for the complete chain. Only after terminalPASS run `python3 test/projection-protected-reads-workflow/check.py "$CODI_EVIDENCE"`, retaining stdout/stderr separately. No live Native/module execution is performed by the independent artifact checker.
 
@@ -10,7 +10,26 @@ Unknown writes retain the owned browser context/window and pending path; no retr
 
 Before each mixed export set use the existing actual public `inspect-manufacturing` -> `propose-material-rebind({revision})` -> explicit `confirm-material-rebind({token})` -> `inspect-manufacturing` path. Preserve the original PLA/blue part/region and every assignment value. Initial already-current review is a real no-op; reviews after radius/source-frame changes must update the full-project geometry binding digest, actual material/document tokens and SAME shared journal by exactly one metadata event. Pending proposal leaves the complete accepted state exact. Record and independently join each public command/request/result and pre/post state; geometry/source/history/counters/physical values/Native ownership remain exact. Printable discovery/repeated assign is never substituted for review, and STALE_ASSIGNMENTS remains authoritative. Exports bind the actual post-review state to the explicit pre-review geometry observation. Fresh Open checks retain actual saved metadata and reset only session J.
 
-Actual source checkout custody is strict: Core `git rev-parse HEAD` MUST equal `pins.source`, and Host HEAD MUST equal `pins.desktop`, before launch/source capture and after the whole. Every retained acceptance/product/helper snapshot is taken from that exact corresponding committed checkout; no guessed acceptance commit, unbound newer helper or content-only substitute. Both actual repository paths/HEADs are retained in `compiledSourceCheckouts`; independent after-whole checking joins every roster entry to those exact compiled identities. Compile a candidate containing the committed acceptance first, then use its exact source checkouts. A source HEAD change during the whole makes it FAIL even if bytes happen to match. Read failure at final custody is recorded as FAIL while own cleanup/disconnection still completes. Existing frozen workflows/artifacts remain unchanged.
+Source custody has three explicit roles. Actual compiled Core HEAD MUST equal pins.source and Host HEAD MUST equal pins.desktop before/after, with clean tracked sources and every existing product/Host anchor retained. Acceptance is a separate clean checkout at explicit CODI_ACCEPTANCE_SOURCE; launch from its repository root, and run its driver/checker/local artifact helpers plus its actual imported test/native-cad-container/archive_oracle.py. No inferred acceptance commit or fallback to a runtime copy. Receipt compiledSourceCheckouts and acceptanceSourceCheckout retain before/after repo/HEAD; each sourceRoster row records exact role/repo/commit/path/blob/bytes. The independent checker requires the complete closed role roster, live checkout HEAD/cleanliness, actual imported Python helper locations/bytes and all retained Git blobs. Changed HEAD/bytes/cwd, missing helper or role substitution fails even when runtime pins themselves match. Final custody failure still records FAIL and completes own cleanup/disconnection. All prior runtime/Host checks remain; no app rebuild is needed for acceptance-only source changes. Historical receipts remain frozen.
+
+For the already corrected immutable r2 runtime, after Root review only (these commands were NOT executed here):
+
+```sh
+cd /mnt/data10tb/codi-acad-source-projection-20261109
+export CODI_ACCEPTANCE_SOURCE=<exact-reviewed-installed-acceptance-commit>
+export CODI_CORE_SOURCE_ROOT=/mnt/data10tb/codi-acad-assembled-20261110-r2
+export CODI_DESKTOP_SOURCE_ROOT=/mnt/data10tb/codi-desktop-assembled-20261110-r1
+export CODI_EXPECT_SOURCE=0fec154c4e4d190987695c61b45cd00febc6953a
+export CODI_EXPECT_DESKTOP=0fee14964910613df24df860369a22f751c6b92a
+export CODI_SIGNED_PINS=/mnt/data10tb/codi-acad-assembled-pins-20261110-r2.json
+# Root supplies the existing private fixture/CDP/Puppeteer and NEW exclusive
+# CODI_EVIDENCE path. Do not reuse either failed attempt or auto-retry.
+node test/projection-protected-reads-workflow/desktop-driver.mjs
+# ONLY after whole terminal PASS:
+python3 test/projection-protected-reads-workflow/check.py "$CODI_EVIDENCE"
+```
+
+A separately installed acceptance worktree is equally valid: cd to its exact clean root and set CODI_ACCEPTANCE_SOURCE to its reviewed full40-character commit. Do not change the immutable compiled Core/Host or fixture. Running checker from a different checkout/cwd is a custody failure. This source packet does not authorize a third whole run; Root retains the two-failure stop/notification decision.
 
 
 This acceptance-only follow-up preserves both complete first failures: R1 Core556cc/Host0fee refused first unrelated rectangle at the projection journal boundary (receipt SHA256 a2e4ee0cd805dfc061582dedf7a84cf74383450dd9fe251bd264acde88e7a63e); R2 Core0fec/sameHost passed that repair and reached radius Undo/Redo plus initial mixed .cad/three exports, then correctly refused repeated assignment with STALE_ASSIGNMENTS (receipt SHA256 a0120d20c922cad0bb1c36f9088a3f63c3a9832f32200edab2222ddbfee47e91). R2 had zero actual material-review proposal/confirm commands. See docs/reviews/PROJECTION-MIXED-MATERIAL-REVIEW-20261110.md for exact producer/receipt paths and source diagnosis. Old artifacts/source remain unchanged; no rerun or PASS is claimed. Root decides any future grouped full qualification.
