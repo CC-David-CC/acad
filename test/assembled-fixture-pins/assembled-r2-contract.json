@@ -1,0 +1,3295 @@
+{
+  "version": 1,
+  "scope": "exact assembled fixture metadata custody, not CAD qualification",
+  "source": "0fec154c4e4d190987695c61b45cd00febc6953a",
+  "desktop": "0fee14964910613df24df860369a22f751c6b92a",
+  "paths": {
+    "basePins": "/mnt/data10tb/codi-acad-multiprofile-pins-20261109-r1.json",
+    "apps": "/mnt/data10tb/codi-acad-assembled-stage-20261110-r2-apps",
+    "stage": "/mnt/data10tb/codi-acad-assembled-stage-20261110-r2",
+    "coreSource": "/mnt/data10tb/codi-acad-assembled-20261110-r2",
+    "desktopSource": "/mnt/data10tb/codi-desktop-assembled-20261110-r1"
+  },
+  "base": {
+    "sha256": "2b5368247522dc75099c8ced55c2ce510fac2a95a5f8c3d79e15d2b6bcb54808",
+    "bytes": 43252,
+    "files": 298,
+    "source": "14299d0f9038cee40d7a985d4e7827215234479c",
+    "desktop": "1a2435fee7cb70210645d2600109ba665e0d63c5",
+    "outer": {
+      "bundleSHA256": "43940b2c43115353eba494eaf4c491466ad8c58ab5259d56093fce038f05c3f9",
+      "sha256": "b21a5100289a1a9d09b7b8762d83fcce6f60ae9704d07bc5077dddf8be56201e",
+      "path": "assets/desktop/apps/jsketcher/43940b2c43115353eba494eaf4c491466ad8c58ab5259d56093fce038f05c3f9/index.mjs"
+    },
+    "filesApp": {
+      "bundleSHA256": "ee2a712cabade0aad7a3b2c5bc4d8c311d7dc8f52963aadb14e210d9d54b010a",
+      "sha256": "96b36034f3c165aa83c6cd98b180ca0971c6e44a90f396a7c1aa12b6e24bf96c",
+      "path": "assets/desktop/apps/files/ee2a712cabade0aad7a3b2c5bc4d8c311d7dc8f52963aadb14e210d9d54b010a/index.mjs"
+    }
+  },
+  "metadata": {
+    "catalog": {
+      "path": "/mnt/data10tb/codi-acad-assembled-stage-20261110-r2-apps/apps.json",
+      "sha256": "c50bdf36b1908ee8d5d395e6ef21327dd269ae8016ba833cd3f5a30c57108129",
+      "bytes": 161609
+    },
+    "stagePins": {
+      "path": "/mnt/data10tb/codi-acad-assembled-stage-20261110-r2/stage-pins.json",
+      "sha256": "ac7aaf74490da7da323750f2bee6e995a46636f2c404e1c54684b531ce9e4a8f",
+      "bytes": 137413
+    },
+    "builderConfig": {
+      "path": "/mnt/data10tb/codi-acad-assembled-stage-20261110-r2/builder-config.json",
+      "sha256": "2e22c7390a3e94343883edf5576673f438a43f20690793d29399a65e0b8b925c",
+      "bytes": 293
+    }
+  },
+  "outer": {
+    "bundleSHA256": "4c0b090f14755c758c98b03c15114d7dbc549a45201cadd0cf0f31cfb61c60b7",
+    "sha256": "47f954f77c9ab28cfacabd36669f518b82e177d3e7c824ec271e330b2a180fb5",
+    "path": "assets/desktop/apps/jsketcher/4c0b090f14755c758c98b03c15114d7dbc549a45201cadd0cf0f31cfb61c60b7/index.mjs"
+  },
+  "filesApp": {
+    "bundleSHA256": "ee2a712cabade0aad7a3b2c5bc4d8c311d7dc8f52963aadb14e210d9d54b010a",
+    "sha256": "96b36034f3c165aa83c6cd98b180ca0971c6e44a90f396a7c1aa12b6e24bf96c",
+    "path": "assets/desktop/apps/files/ee2a712cabade0aad7a3b2c5bc4d8c311d7dc8f52963aadb14e210d9d54b010a/index.mjs"
+  },
+  "sourceInnerPrefix": "node_modules/jsketcher-build/",
+  "inheritedMappings": {
+    "index-webos.html": "index-webos.html",
+    "static/controlled-3mf.45c441ad39ba28aa7779.js": "static/controlled-3mf.17a71316c694c0ba8714.js",
+    "static/index.bundle.js": "static/index.bundle.js",
+    "static/manufacturing-hash.b9be312ee7d9ee44402a.js": "static/manufacturing-hash.b9be312ee7d9ee44402a.js",
+    "static/manufacturing-mesh/manufacturing-mesh-occ-portable.js": "static/manufacturing-mesh/manufacturing-mesh-occ-portable.js",
+    "static/manufacturing-mesh/manufacturing-mesh-occ.wasm": "static/manufacturing-mesh/manufacturing-mesh-occ.wasm",
+    "static/manufacturing-mesh/modules/drawing/linkedPartDrawingDefinition.mjs": "static/manufacturing-mesh/modules/drawing/linkedPartDrawingDefinition.mjs",
+    "static/manufacturing-mesh/modules/engine/extrusion/articulatedRegionSegments.mjs": "static/manufacturing-mesh/modules/engine/extrusion/articulatedRegionSegments.mjs",
+    "static/manufacturing-mesh/modules/engine/extrusion/exactExternalVertexContact.mjs": "static/manufacturing-mesh/modules/engine/extrusion/exactExternalVertexContact.mjs",
+    "static/manufacturing-mesh/modules/engine/extrusion/isolatedOpenProfileComponents.mjs": "static/manufacturing-mesh/modules/engine/extrusion/isolatedOpenProfileComponents.mjs",
+    "static/manufacturing-mesh/modules/engine/extrusion/selectedRegionDescriptor.mjs": "static/manufacturing-mesh/modules/engine/extrusion/selectedRegionDescriptor.mjs",
+    "static/manufacturing-mesh/modules/engine/extrusion/simplePolygon.mjs": "static/manufacturing-mesh/modules/engine/extrusion/simplePolygon.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/booleanSelectionClaims.mjs": "static/manufacturing-mesh/modules/engine/mount/booleanSelectionClaims.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/cylinderCutWitness.mjs": "static/manufacturing-mesh/modules/engine/mount/cylinderCutWitness.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/drawingReferenceFacts.mjs": "static/manufacturing-mesh/modules/engine/mount/drawingReferenceFacts.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/exactMeshVolume.mjs": "static/manufacturing-mesh/modules/engine/mount/exactMeshVolume.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/manufacturing-mesh-worker.js": "static/manufacturing-mesh/modules/engine/mount/manufacturing-mesh-worker.js",
+    "static/manufacturing-mesh/modules/engine/mount/manufacturingMeshRecord.mjs": "static/manufacturing-mesh/modules/engine/mount/manufacturingMeshRecord.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/orthographicAnalyticRecord.mjs": "static/manufacturing-mesh/modules/engine/mount/orthographicAnalyticRecord.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedBooleanContract.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedBooleanContract.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedDrawingReadProtocol.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedDrawingReadProtocol.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedLinearHolePatternPlan.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedLinearHolePatternPlan.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedLoftPlan.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedLoftPlan.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedManufacturingMeshProtocol.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedManufacturingMeshProtocol.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedOrthographicReadProtocol.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedOrthographicReadProtocol.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedRevolvePlan.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedRevolvePlan.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedStepExportProtocol.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedStepExportProtocol.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedSweepPlan.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedSweepPlan.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedThroughHolePlan.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedThroughHolePlan.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedTopologyContract.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedTopologyContract.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/polygonProfilePlan.mjs": "static/manufacturing-mesh/modules/engine/mount/polygonProfilePlan.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/prismSelectionIndex.mjs": "static/manufacturing-mesh/modules/engine/mount/prismSelectionIndex.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/selectedProfilePlan.mjs": "static/manufacturing-mesh/modules/engine/mount/selectedProfilePlan.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/selectionAncestryIndex.mjs": "static/manufacturing-mesh/modules/engine/mount/selectionAncestryIndex.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/selectionLineageIndex.mjs": "static/manufacturing-mesh/modules/engine/mount/selectionLineageIndex.mjs",
+    "static/manufacturing-mesh/modules/engine/solid/ownedHoleIntent.mjs": "static/manufacturing-mesh/modules/engine/solid/ownedHoleIntent.mjs",
+    "static/manufacturing-mesh/modules/engine/solid/ownedLinearHolePatternIntent.mjs": "static/manufacturing-mesh/modules/engine/solid/ownedLinearHolePatternIntent.mjs",
+    "static/manufacturing-mesh/modules/engine/solid/ownedLoftIntent.mjs": "static/manufacturing-mesh/modules/engine/solid/ownedLoftIntent.mjs",
+    "static/manufacturing-mesh/modules/engine/solid/ownedRevolveIntent.mjs": "static/manufacturing-mesh/modules/engine/solid/ownedRevolveIntent.mjs",
+    "static/manufacturing-mesh/modules/engine/solid/ownedSweepIntent.mjs": "static/manufacturing-mesh/modules/engine/solid/ownedSweepIntent.mjs",
+    "static/manufacturing-mesh/modules/engine/solid/solidIntent.mjs": "static/manufacturing-mesh/modules/engine/solid/solidIntent.mjs",
+    "static/manufacturing-mesh/modules/engine/solid/sweepLimits.mjs": "static/manufacturing-mesh/modules/engine/solid/sweepLimits.mjs",
+    "static/manufacturing-publication.b14247355720e4f88922.js": "static/manufacturing-publication.1d38fdbdc96eb2fdcb46.js",
+    "static/project-validator.1b524117aa7920433586.js": "static/project-validator.1067ac64410cacad7207.js",
+    "static/shell/modules/drawing/linkedPartDrawingDefinition.mjs": "static/shell/modules/drawing/linkedPartDrawingDefinition.mjs",
+    "static/shell/modules/engine/extrusion/articulatedRegionSegments.mjs": "static/shell/modules/engine/extrusion/articulatedRegionSegments.mjs",
+    "static/shell/modules/engine/extrusion/exactExternalVertexContact.mjs": "static/shell/modules/engine/extrusion/exactExternalVertexContact.mjs",
+    "static/shell/modules/engine/extrusion/isolatedOpenProfileComponents.mjs": "static/shell/modules/engine/extrusion/isolatedOpenProfileComponents.mjs",
+    "static/shell/modules/engine/extrusion/selectedRegionDescriptor.mjs": "static/shell/modules/engine/extrusion/selectedRegionDescriptor.mjs",
+    "static/shell/modules/engine/extrusion/simplePolygon.mjs": "static/shell/modules/engine/extrusion/simplePolygon.mjs",
+    "static/shell/modules/engine/mount/booleanSelectionClaims.mjs": "static/shell/modules/engine/mount/booleanSelectionClaims.mjs",
+    "static/shell/modules/engine/mount/boxSelectionIndex.mjs": "static/shell/modules/engine/mount/boxSelectionIndex.mjs",
+    "static/shell/modules/engine/mount/cylinderCutWitness.mjs": "static/shell/modules/engine/mount/cylinderCutWitness.mjs",
+    "static/shell/modules/engine/mount/drawingReferenceFacts.mjs": "static/shell/modules/engine/mount/drawingReferenceFacts.mjs",
+    "static/shell/modules/engine/mount/exactMeshVolume.mjs": "static/shell/modules/engine/mount/exactMeshVolume.mjs",
+    "static/shell/modules/engine/mount/manufacturingMeshRecord.mjs": "static/shell/modules/engine/mount/manufacturingMeshRecord.mjs",
+    "static/shell/modules/engine/mount/orthographicAnalyticRecord.mjs": "static/shell/modules/engine/mount/orthographicAnalyticRecord.mjs",
+    "static/shell/modules/engine/mount/ownedBooleanContract.mjs": "static/shell/modules/engine/mount/ownedBooleanContract.mjs",
+    "static/shell/modules/engine/mount/ownedDrawingReadProtocol.mjs": "static/shell/modules/engine/mount/ownedDrawingReadProtocol.mjs",
+    "static/shell/modules/engine/mount/ownedLinearHolePatternPlan.mjs": "static/shell/modules/engine/mount/ownedLinearHolePatternPlan.mjs",
+    "static/shell/modules/engine/mount/ownedLoftPlan.mjs": "static/shell/modules/engine/mount/ownedLoftPlan.mjs",
+    "static/shell/modules/engine/mount/ownedManufacturingMeshProtocol.mjs": "static/shell/modules/engine/mount/ownedManufacturingMeshProtocol.mjs",
+    "static/shell/modules/engine/mount/ownedOrthographicReadProtocol.mjs": "static/shell/modules/engine/mount/ownedOrthographicReadProtocol.mjs",
+    "static/shell/modules/engine/mount/ownedRevolvePlan.mjs": "static/shell/modules/engine/mount/ownedRevolvePlan.mjs",
+    "static/shell/modules/engine/mount/ownedShellNativeContract.mjs": "static/shell/modules/engine/mount/ownedShellNativeContract.mjs",
+    "static/shell/modules/engine/mount/ownedShellProtocol.mjs": "static/shell/modules/engine/mount/ownedShellProtocol.mjs",
+    "static/shell/modules/engine/mount/ownedShellWorker.mjs": "static/shell/modules/engine/mount/ownedShellWorker.mjs",
+    "static/shell/modules/engine/mount/ownedStepExportProtocol.mjs": "static/shell/modules/engine/mount/ownedStepExportProtocol.mjs",
+    "static/shell/modules/engine/mount/ownedSweepPlan.mjs": "static/shell/modules/engine/mount/ownedSweepPlan.mjs",
+    "static/shell/modules/engine/mount/ownedThroughHolePlan.mjs": "static/shell/modules/engine/mount/ownedThroughHolePlan.mjs",
+    "static/shell/modules/engine/mount/ownedTopologyContract.mjs": "static/shell/modules/engine/mount/ownedTopologyContract.mjs",
+    "static/shell/modules/engine/mount/polygonProfilePlan.mjs": "static/shell/modules/engine/mount/polygonProfilePlan.mjs",
+    "static/shell/modules/engine/mount/prismSelectionIndex.mjs": "static/shell/modules/engine/mount/prismSelectionIndex.mjs",
+    "static/shell/modules/engine/mount/selectedProfilePlan.mjs": "static/shell/modules/engine/mount/selectedProfilePlan.mjs",
+    "static/shell/modules/engine/mount/selectionAncestryIndex.mjs": "static/shell/modules/engine/mount/selectionAncestryIndex.mjs",
+    "static/shell/modules/engine/mount/selectionLineageIndex.mjs": "static/shell/modules/engine/mount/selectionLineageIndex.mjs",
+    "static/shell/modules/engine/mount/shell-worker.js": "static/shell/modules/engine/mount/shell-worker.js",
+    "static/shell/modules/engine/solid/ownedHoleIntent.mjs": "static/shell/modules/engine/solid/ownedHoleIntent.mjs",
+    "static/shell/modules/engine/solid/ownedLinearHolePatternIntent.mjs": "static/shell/modules/engine/solid/ownedLinearHolePatternIntent.mjs",
+    "static/shell/modules/engine/solid/ownedLoftIntent.mjs": "static/shell/modules/engine/solid/ownedLoftIntent.mjs",
+    "static/shell/modules/engine/solid/ownedRevolveIntent.mjs": "static/shell/modules/engine/solid/ownedRevolveIntent.mjs",
+    "static/shell/modules/engine/solid/ownedSweepIntent.mjs": "static/shell/modules/engine/solid/ownedSweepIntent.mjs",
+    "static/shell/modules/engine/solid/solidIntent.mjs": "static/shell/modules/engine/solid/solidIntent.mjs",
+    "static/shell/modules/engine/solid/sweepLimits.mjs": "static/shell/modules/engine/solid/sweepLimits.mjs",
+    "static/shell/shell-occ-portable.js": "static/shell/shell-occ-portable.js",
+    "static/shell/shell-occ.wasm": "static/shell/shell-occ.wasm",
+    "static/sketch-solver.91a775864b48cc005362.js": "static/sketch-solver.32f7797c0e65fbdfccdf.js",
+    "/storage/browser/mirror.mjs": "/storage/browser/mirror.mjs",
+    "/storage/browser/account-context.mjs": "/storage/browser/account-context.mjs",
+    "/storage/browser/verified-content.mjs": "/storage/browser/verified-content.mjs",
+    "static/physical-parameters.9021fe8b4bb5756067b1.js": "static/physical-parameters.9021fe8b4bb5756067b1.js",
+    "static/manufacturing-mesh/modules/engine/extrusion/selectedArrangementDescriptor.mjs": "static/manufacturing-mesh/modules/engine/extrusion/selectedArrangementDescriptor.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/arrangedPrismSelectionIndex.mjs": "static/manufacturing-mesh/modules/engine/mount/arrangedPrismSelectionIndex.mjs",
+    "static/shell/modules/engine/extrusion/selectedArrangementDescriptor.mjs": "static/shell/modules/engine/extrusion/selectedArrangementDescriptor.mjs",
+    "static/shell/modules/engine/mount/arrangedPrismSelectionIndex.mjs": "static/shell/modules/engine/mount/arrangedPrismSelectionIndex.mjs",
+    "static/native-archive.bb8de4557c96b5b649ea.js": "static/native-archive.bf518d319317ad290c86.js",
+    "/desktop-apps.js": "/desktop-apps.js",
+    "static/manufacturing-mesh/modules/engine/mount/blindHoleFacts.mjs": "static/manufacturing-mesh/modules/engine/mount/blindHoleFacts.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/counterboreFacts.mjs": "static/manufacturing-mesh/modules/engine/mount/counterboreFacts.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/drawingDetailClip.mjs": "static/manufacturing-mesh/modules/engine/mount/drawingDetailClip.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/drawingRequirementFacts.mjs": "static/manufacturing-mesh/modules/engine/mount/drawingRequirementFacts.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/drawingRequirementProtocol.mjs": "static/manufacturing-mesh/modules/engine/mount/drawingRequirementProtocol.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/nativePlanarAttachmentFacts.mjs": "static/manufacturing-mesh/modules/engine/mount/nativePlanarAttachmentFacts.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedBlindHolePlan.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedBlindHolePlan.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedBoreAnnotationProtocol.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedBoreAnnotationProtocol.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedBoreReadProtocol.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedBoreReadProtocol.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedCounterborePlan.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedCounterborePlan.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedDrawingDerivedProtocol.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedDrawingDerivedProtocol.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedDrawingSectionProtocol.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedDrawingSectionProtocol.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedDrawingSectionWorker.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedDrawingSectionWorker.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedProfileExtentPlan.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedProfileExtentPlan.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/ownedProfileExtentWorker.mjs": "static/manufacturing-mesh/modules/engine/mount/ownedProfileExtentWorker.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/prismaticBoreFacts.mjs": "static/manufacturing-mesh/modules/engine/mount/prismaticBoreFacts.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/profileExtentHolePlan.mjs": "static/manufacturing-mesh/modules/engine/mount/profileExtentHolePlan.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/profileExtentSelectionIndex.mjs": "static/manufacturing-mesh/modules/engine/mount/profileExtentSelectionIndex.mjs",
+    "static/manufacturing-mesh/modules/engine/mount/profileMechanicalSource.mjs": "static/manufacturing-mesh/modules/engine/mount/profileMechanicalSource.mjs",
+    "static/manufacturing-mesh/modules/engine/solid/ownedBlindHoleIntent.mjs": "static/manufacturing-mesh/modules/engine/solid/ownedBlindHoleIntent.mjs",
+    "static/manufacturing-mesh/modules/engine/solid/ownedCounterboreIntent.mjs": "static/manufacturing-mesh/modules/engine/solid/ownedCounterboreIntent.mjs",
+    "static/manufacturing-mesh/modules/engine/solid/ownedProfileExtentFeature.mjs": "static/manufacturing-mesh/modules/engine/solid/ownedProfileExtentFeature.mjs",
+    "static/manufacturing-mesh/modules/engine/solid/solidBodyIdentity.mjs": "static/manufacturing-mesh/modules/engine/solid/solidBodyIdentity.mjs",
+    "static/shell/modules/engine/mount/drawingDetailClip.mjs": "static/shell/modules/engine/mount/drawingDetailClip.mjs",
+    "static/shell/modules/engine/mount/drawingRequirementFacts.mjs": "static/shell/modules/engine/mount/drawingRequirementFacts.mjs",
+    "static/shell/modules/engine/mount/drawingRequirementProtocol.mjs": "static/shell/modules/engine/mount/drawingRequirementProtocol.mjs",
+    "static/shell/modules/engine/mount/nativePlanarAttachmentFacts.mjs": "static/shell/modules/engine/mount/nativePlanarAttachmentFacts.mjs",
+    "static/shell/modules/engine/mount/ownedBoreAnnotationProtocol.mjs": "static/shell/modules/engine/mount/ownedBoreAnnotationProtocol.mjs",
+    "static/shell/modules/engine/mount/ownedBoreReadProtocol.mjs": "static/shell/modules/engine/mount/ownedBoreReadProtocol.mjs",
+    "static/shell/modules/engine/mount/ownedDrawingDerivedProtocol.mjs": "static/shell/modules/engine/mount/ownedDrawingDerivedProtocol.mjs",
+    "static/shell/modules/engine/mount/ownedDrawingSectionProtocol.mjs": "static/shell/modules/engine/mount/ownedDrawingSectionProtocol.mjs",
+    "static/shell/modules/engine/mount/ownedDrawingSectionWorker.mjs": "static/shell/modules/engine/mount/ownedDrawingSectionWorker.mjs",
+    "static/shell/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": "static/shell/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs",
+    "static/shell/modules/engine/mount/prismaticBoreFacts.mjs": "static/shell/modules/engine/mount/prismaticBoreFacts.mjs",
+    "static/shell/modules/engine/solid/solidBodyIdentity.mjs": "static/shell/modules/engine/solid/solidBodyIdentity.mjs",
+    "static/circular/circular-occ-portable.js": "static/circular/circular-occ-portable.js",
+    "static/circular/circular-occ.wasm": "static/circular/circular-occ.wasm",
+    "static/circular/modules/drawing/linkedPartDrawingDefinition.mjs": "static/circular/modules/drawing/linkedPartDrawingDefinition.mjs",
+    "static/circular/modules/engine/extrusion/articulatedRegionSegments.mjs": "static/circular/modules/engine/extrusion/articulatedRegionSegments.mjs",
+    "static/circular/modules/engine/extrusion/circularArrangementDescriptor.mjs": "static/circular/modules/engine/extrusion/circularArrangementDescriptor.mjs",
+    "static/circular/modules/engine/extrusion/circularTopology.mjs": "static/circular/modules/engine/extrusion/circularTopology.mjs",
+    "static/circular/modules/engine/extrusion/exactExternalVertexContact.mjs": "static/circular/modules/engine/extrusion/exactExternalVertexContact.mjs",
+    "static/circular/modules/engine/extrusion/isolatedOpenProfileComponents.mjs": "static/circular/modules/engine/extrusion/isolatedOpenProfileComponents.mjs",
+    "static/circular/modules/engine/extrusion/selectedArrangementDescriptor.mjs": "static/circular/modules/engine/extrusion/selectedArrangementDescriptor.mjs",
+    "static/circular/modules/engine/extrusion/selectedRegionDescriptor.mjs": "static/circular/modules/engine/extrusion/selectedRegionDescriptor.mjs",
+    "static/circular/modules/engine/extrusion/simplePolygon.mjs": "static/circular/modules/engine/extrusion/simplePolygon.mjs",
+    "static/circular/modules/engine/mount/arrangedPrismSelectionIndex.mjs": "static/circular/modules/engine/mount/arrangedPrismSelectionIndex.mjs",
+    "static/circular/modules/engine/mount/booleanSelectionClaims.mjs": "static/circular/modules/engine/mount/booleanSelectionClaims.mjs",
+    "static/circular/modules/engine/mount/boxSelectionIndex.mjs": "static/circular/modules/engine/mount/boxSelectionIndex.mjs",
+    "static/circular/modules/engine/mount/circular-worker.js": "static/circular/modules/engine/mount/circular-worker.js",
+    "static/circular/modules/engine/mount/circularArrangementPlan.mjs": "static/circular/modules/engine/mount/circularArrangementPlan.mjs",
+    "static/circular/modules/engine/mount/circularPrismSelectionIndex.mjs": "static/circular/modules/engine/mount/circularPrismSelectionIndex.mjs",
+    "static/circular/modules/engine/mount/cylinderCutWitness.mjs": "static/circular/modules/engine/mount/cylinderCutWitness.mjs",
+    "static/circular/modules/engine/mount/drawingDetailClip.mjs": "static/circular/modules/engine/mount/drawingDetailClip.mjs",
+    "static/circular/modules/engine/mount/drawingReferenceFacts.mjs": "static/circular/modules/engine/mount/drawingReferenceFacts.mjs",
+    "static/circular/modules/engine/mount/drawingRequirementFacts.mjs": "static/circular/modules/engine/mount/drawingRequirementFacts.mjs",
+    "static/circular/modules/engine/mount/drawingRequirementProtocol.mjs": "static/circular/modules/engine/mount/drawingRequirementProtocol.mjs",
+    "static/circular/modules/engine/mount/exactMeshVolume.mjs": "static/circular/modules/engine/mount/exactMeshVolume.mjs",
+    "static/circular/modules/engine/mount/manufacturingMeshRecord.mjs": "static/circular/modules/engine/mount/manufacturingMeshRecord.mjs",
+    "static/circular/modules/engine/mount/nativePlanarAttachmentFacts.mjs": "static/circular/modules/engine/mount/nativePlanarAttachmentFacts.mjs",
+    "static/circular/modules/engine/mount/orthographicAnalyticRecord.mjs": "static/circular/modules/engine/mount/orthographicAnalyticRecord.mjs",
+    "static/circular/modules/engine/mount/ownedBooleanContract.mjs": "static/circular/modules/engine/mount/ownedBooleanContract.mjs",
+    "static/circular/modules/engine/mount/ownedBoreAnnotationProtocol.mjs": "static/circular/modules/engine/mount/ownedBoreAnnotationProtocol.mjs",
+    "static/circular/modules/engine/mount/ownedBoreReadProtocol.mjs": "static/circular/modules/engine/mount/ownedBoreReadProtocol.mjs",
+    "static/circular/modules/engine/mount/ownedCircularArrangementProtocol.mjs": "static/circular/modules/engine/mount/ownedCircularArrangementProtocol.mjs",
+    "static/circular/modules/engine/mount/ownedCircularNativeContract.mjs": "static/circular/modules/engine/mount/ownedCircularNativeContract.mjs",
+    "static/circular/modules/engine/mount/ownedCircularWorker.mjs": "static/circular/modules/engine/mount/ownedCircularWorker.mjs",
+    "static/circular/modules/engine/mount/ownedDrawingDerivedProtocol.mjs": "static/circular/modules/engine/mount/ownedDrawingDerivedProtocol.mjs",
+    "static/circular/modules/engine/mount/ownedDrawingReadProtocol.mjs": "static/circular/modules/engine/mount/ownedDrawingReadProtocol.mjs",
+    "static/circular/modules/engine/mount/ownedDrawingSectionProtocol.mjs": "static/circular/modules/engine/mount/ownedDrawingSectionProtocol.mjs",
+    "static/circular/modules/engine/mount/ownedDrawingSectionWorker.mjs": "static/circular/modules/engine/mount/ownedDrawingSectionWorker.mjs",
+    "static/circular/modules/engine/mount/ownedLinearHolePatternPlan.mjs": "static/circular/modules/engine/mount/ownedLinearHolePatternPlan.mjs",
+    "static/circular/modules/engine/mount/ownedLoftPlan.mjs": "static/circular/modules/engine/mount/ownedLoftPlan.mjs",
+    "static/circular/modules/engine/mount/ownedManufacturingMeshProtocol.mjs": "static/circular/modules/engine/mount/ownedManufacturingMeshProtocol.mjs",
+    "static/circular/modules/engine/mount/ownedOrthographicReadProtocol.mjs": "static/circular/modules/engine/mount/ownedOrthographicReadProtocol.mjs",
+    "static/circular/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": "static/circular/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs",
+    "static/circular/modules/engine/mount/ownedRevolvePlan.mjs": "static/circular/modules/engine/mount/ownedRevolvePlan.mjs",
+    "static/circular/modules/engine/mount/ownedShellNativeContract.mjs": "static/circular/modules/engine/mount/ownedShellNativeContract.mjs",
+    "static/circular/modules/engine/mount/ownedShellProtocol.mjs": "static/circular/modules/engine/mount/ownedShellProtocol.mjs",
+    "static/circular/modules/engine/mount/ownedShellWorker.mjs": "static/circular/modules/engine/mount/ownedShellWorker.mjs",
+    "static/circular/modules/engine/mount/ownedStepExportProtocol.mjs": "static/circular/modules/engine/mount/ownedStepExportProtocol.mjs",
+    "static/circular/modules/engine/mount/ownedSweepPlan.mjs": "static/circular/modules/engine/mount/ownedSweepPlan.mjs",
+    "static/circular/modules/engine/mount/ownedThroughHolePlan.mjs": "static/circular/modules/engine/mount/ownedThroughHolePlan.mjs",
+    "static/circular/modules/engine/mount/ownedTopologyContract.mjs": "static/circular/modules/engine/mount/ownedTopologyContract.mjs",
+    "static/circular/modules/engine/mount/polygonProfilePlan.mjs": "static/circular/modules/engine/mount/polygonProfilePlan.mjs",
+    "static/circular/modules/engine/mount/prismaticBoreFacts.mjs": "static/circular/modules/engine/mount/prismaticBoreFacts.mjs",
+    "static/circular/modules/engine/mount/prismSelectionIndex.mjs": "static/circular/modules/engine/mount/prismSelectionIndex.mjs",
+    "static/circular/modules/engine/mount/selectedProfilePlan.mjs": "static/circular/modules/engine/mount/selectedProfilePlan.mjs",
+    "static/circular/modules/engine/mount/selectionAncestryIndex.mjs": "static/circular/modules/engine/mount/selectionAncestryIndex.mjs",
+    "static/circular/modules/engine/mount/selectionLineageIndex.mjs": "static/circular/modules/engine/mount/selectionLineageIndex.mjs",
+    "static/circular/modules/engine/solid/ownedHoleIntent.mjs": "static/circular/modules/engine/solid/ownedHoleIntent.mjs",
+    "static/circular/modules/engine/solid/ownedLinearHolePatternIntent.mjs": "static/circular/modules/engine/solid/ownedLinearHolePatternIntent.mjs",
+    "static/circular/modules/engine/solid/ownedLoftIntent.mjs": "static/circular/modules/engine/solid/ownedLoftIntent.mjs",
+    "static/circular/modules/engine/solid/ownedRevolveIntent.mjs": "static/circular/modules/engine/solid/ownedRevolveIntent.mjs",
+    "static/circular/modules/engine/solid/ownedSweepIntent.mjs": "static/circular/modules/engine/solid/ownedSweepIntent.mjs",
+    "static/circular/modules/engine/solid/solidBodyIdentity.mjs": "static/circular/modules/engine/solid/solidBodyIdentity.mjs",
+    "static/circular/modules/engine/solid/solidIntent.mjs": "static/circular/modules/engine/solid/solidIntent.mjs",
+    "static/circular/modules/engine/solid/sweepLimits.mjs": "static/circular/modules/engine/solid/sweepLimits.mjs",
+    "static/adaptive-metrology/adaptive-metrology-occ-portable.js": "static/adaptive-metrology/adaptive-metrology-occ-portable.js",
+    "static/adaptive-metrology/adaptive-metrology-occ.wasm": "static/adaptive-metrology/adaptive-metrology-occ.wasm",
+    "static/adaptive-metrology/modules/engine/extrusion/exactExternalVertexContact.mjs": "static/adaptive-metrology/modules/engine/extrusion/exactExternalVertexContact.mjs",
+    "static/adaptive-metrology/modules/engine/extrusion/selectedArrangementDescriptor.mjs": "static/adaptive-metrology/modules/engine/extrusion/selectedArrangementDescriptor.mjs",
+    "static/adaptive-metrology/modules/engine/extrusion/simplePolygon.mjs": "static/adaptive-metrology/modules/engine/extrusion/simplePolygon.mjs",
+    "static/adaptive-metrology/modules/engine/mount/adaptive-metrology-worker.js": "static/adaptive-metrology/modules/engine/mount/adaptive-metrology-worker.js",
+    "static/adaptive-metrology/modules/engine/mount/arrangedPrismSelectionIndex.mjs": "static/adaptive-metrology/modules/engine/mount/arrangedPrismSelectionIndex.mjs",
+    "static/adaptive-metrology/modules/engine/mount/booleanSelectionClaims.mjs": "static/adaptive-metrology/modules/engine/mount/booleanSelectionClaims.mjs",
+    "static/adaptive-metrology/modules/engine/mount/exactMeshVolume.mjs": "static/adaptive-metrology/modules/engine/mount/exactMeshVolume.mjs",
+    "static/adaptive-metrology/modules/engine/mount/ownedBooleanContract.mjs": "static/adaptive-metrology/modules/engine/mount/ownedBooleanContract.mjs",
+    "static/adaptive-metrology/modules/engine/mount/ownedLinearHolePatternPlan.mjs": "static/adaptive-metrology/modules/engine/mount/ownedLinearHolePatternPlan.mjs",
+    "static/adaptive-metrology/modules/engine/mount/ownedLoftPlan.mjs": "static/adaptive-metrology/modules/engine/mount/ownedLoftPlan.mjs",
+    "static/adaptive-metrology/modules/engine/mount/ownedRevolvePlan.mjs": "static/adaptive-metrology/modules/engine/mount/ownedRevolvePlan.mjs",
+    "static/adaptive-metrology/modules/engine/mount/ownedSweepPlan.mjs": "static/adaptive-metrology/modules/engine/mount/ownedSweepPlan.mjs",
+    "static/adaptive-metrology/modules/engine/mount/ownedThroughHolePlan.mjs": "static/adaptive-metrology/modules/engine/mount/ownedThroughHolePlan.mjs",
+    "static/adaptive-metrology/modules/engine/mount/ownedTopologyContract.mjs": "static/adaptive-metrology/modules/engine/mount/ownedTopologyContract.mjs",
+    "static/adaptive-metrology/modules/engine/mount/polygonProfilePlan.mjs": "static/adaptive-metrology/modules/engine/mount/polygonProfilePlan.mjs",
+    "static/adaptive-metrology/modules/engine/mount/prismSelectionIndex.mjs": "static/adaptive-metrology/modules/engine/mount/prismSelectionIndex.mjs",
+    "static/adaptive-metrology/modules/engine/mount/selectedProfilePlan.mjs": "static/adaptive-metrology/modules/engine/mount/selectedProfilePlan.mjs",
+    "static/adaptive-metrology/modules/engine/mount/selectionAncestryIndex.mjs": "static/adaptive-metrology/modules/engine/mount/selectionAncestryIndex.mjs",
+    "static/adaptive-metrology/modules/engine/mount/selectionLineageIndex.mjs": "static/adaptive-metrology/modules/engine/mount/selectionLineageIndex.mjs",
+    "static/adaptive-metrology/modules/engine/solid/ownedHoleIntent.mjs": "static/adaptive-metrology/modules/engine/solid/ownedHoleIntent.mjs",
+    "static/adaptive-metrology/modules/engine/solid/ownedLinearHolePatternIntent.mjs": "static/adaptive-metrology/modules/engine/solid/ownedLinearHolePatternIntent.mjs",
+    "static/adaptive-metrology/modules/engine/solid/ownedLoftIntent.mjs": "static/adaptive-metrology/modules/engine/solid/ownedLoftIntent.mjs",
+    "static/adaptive-metrology/modules/engine/solid/ownedRevolveIntent.mjs": "static/adaptive-metrology/modules/engine/solid/ownedRevolveIntent.mjs",
+    "static/adaptive-metrology/modules/engine/solid/ownedSweepIntent.mjs": "static/adaptive-metrology/modules/engine/solid/ownedSweepIntent.mjs",
+    "static/adaptive-metrology/modules/engine/solid/solidBodyIdentity.mjs": "static/adaptive-metrology/modules/engine/solid/solidBodyIdentity.mjs",
+    "static/adaptive-metrology/modules/engine/solid/solidIntent.mjs": "static/adaptive-metrology/modules/engine/solid/solidIntent.mjs",
+    "static/adaptive-metrology/modules/engine/solid/sweepLimits.mjs": "static/adaptive-metrology/modules/engine/solid/sweepLimits.mjs",
+    "static/mechanical-native/mechanical-native-occ-portable.js": "static/mechanical-native/mechanical-native-occ-portable.js",
+    "static/mechanical-native/mechanical-native-occ.wasm": "static/mechanical-native/mechanical-native-occ.wasm",
+    "static/mechanical-native/modules/drawing/linkedPartDrawingDefinition.mjs": "static/mechanical-native/modules/drawing/linkedPartDrawingDefinition.mjs",
+    "static/mechanical-native/modules/engine/extrusion/articulatedRegionSegments.mjs": "static/mechanical-native/modules/engine/extrusion/articulatedRegionSegments.mjs",
+    "static/mechanical-native/modules/engine/extrusion/circularArrangementDescriptor.mjs": "static/mechanical-native/modules/engine/extrusion/circularArrangementDescriptor.mjs",
+    "static/mechanical-native/modules/engine/extrusion/circularTopology.mjs": "static/mechanical-native/modules/engine/extrusion/circularTopology.mjs",
+    "static/mechanical-native/modules/engine/extrusion/exactExternalVertexContact.mjs": "static/mechanical-native/modules/engine/extrusion/exactExternalVertexContact.mjs",
+    "static/mechanical-native/modules/engine/extrusion/isolatedOpenProfileComponents.mjs": "static/mechanical-native/modules/engine/extrusion/isolatedOpenProfileComponents.mjs",
+    "static/mechanical-native/modules/engine/extrusion/profileConstructorSourcePreparation.mjs": "static/mechanical-native/modules/engine/extrusion/profileConstructorSourcePreparation.mjs",
+    "static/mechanical-native/modules/engine/extrusion/rectangularArrangement.mjs": "static/mechanical-native/modules/engine/extrusion/rectangularArrangement.mjs",
+    "static/mechanical-native/modules/engine/extrusion/rectangularContactArrangement.mjs": "static/mechanical-native/modules/engine/extrusion/rectangularContactArrangement.mjs",
+    "static/mechanical-native/modules/engine/extrusion/selectedArrangementDescriptor.mjs": "static/mechanical-native/modules/engine/extrusion/selectedArrangementDescriptor.mjs",
+    "static/mechanical-native/modules/engine/extrusion/selectedRegionDescriptor.mjs": "static/mechanical-native/modules/engine/extrusion/selectedRegionDescriptor.mjs",
+    "static/mechanical-native/modules/engine/extrusion/selectedSketchProfile.mjs": "static/mechanical-native/modules/engine/extrusion/selectedSketchProfile.mjs",
+    "static/mechanical-native/modules/engine/extrusion/simplePolygon.mjs": "static/mechanical-native/modules/engine/extrusion/simplePolygon.mjs",
+    "static/mechanical-native/modules/engine/mount/arrangedPrismSelectionIndex.mjs": "static/mechanical-native/modules/engine/mount/arrangedPrismSelectionIndex.mjs",
+    "static/mechanical-native/modules/engine/mount/booleanSelectionClaims.mjs": "static/mechanical-native/modules/engine/mount/booleanSelectionClaims.mjs",
+    "static/mechanical-native/modules/engine/mount/circularArrangementPlan.mjs": "static/mechanical-native/modules/engine/mount/circularArrangementPlan.mjs",
+    "static/mechanical-native/modules/engine/mount/countersinkFacts.mjs": "static/mechanical-native/modules/engine/mount/countersinkFacts.mjs",
+    "static/mechanical-native/modules/engine/mount/countersinkNativeCalls.mjs": "static/mechanical-native/modules/engine/mount/countersinkNativeCalls.mjs",
+    "static/mechanical-native/modules/engine/mount/cylinderCutWitness.mjs": "static/mechanical-native/modules/engine/mount/cylinderCutWitness.mjs",
+    "static/mechanical-native/modules/engine/mount/drawingReferenceFacts.mjs": "static/mechanical-native/modules/engine/mount/drawingReferenceFacts.mjs",
+    "static/mechanical-native/modules/engine/mount/drawingRequirementFacts.mjs": "static/mechanical-native/modules/engine/mount/drawingRequirementFacts.mjs",
+    "static/mechanical-native/modules/engine/mount/drawingRequirementProtocol.mjs": "static/mechanical-native/modules/engine/mount/drawingRequirementProtocol.mjs",
+    "static/mechanical-native/modules/engine/mount/exactMeshVolume.mjs": "static/mechanical-native/modules/engine/mount/exactMeshVolume.mjs",
+    "static/mechanical-native/modules/engine/mount/manufacturingMeshRecord.mjs": "static/mechanical-native/modules/engine/mount/manufacturingMeshRecord.mjs",
+    "static/mechanical-native/modules/engine/mount/mechanical-native-worker.js": "static/mechanical-native/modules/engine/mount/mechanical-native-worker.js",
+    "static/mechanical-native/modules/engine/mount/nativePlanarAttachmentFacts.mjs": "static/mechanical-native/modules/engine/mount/nativePlanarAttachmentFacts.mjs",
+    "static/mechanical-native/modules/engine/mount/orthographicAnalyticRecord.mjs": "static/mechanical-native/modules/engine/mount/orthographicAnalyticRecord.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedBooleanContract.mjs": "static/mechanical-native/modules/engine/mount/ownedBooleanContract.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedBoreAnnotationProtocol.mjs": "static/mechanical-native/modules/engine/mount/ownedBoreAnnotationProtocol.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedBoreReadProtocol.mjs": "static/mechanical-native/modules/engine/mount/ownedBoreReadProtocol.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedCircularArrangementProtocol.mjs": "static/mechanical-native/modules/engine/mount/ownedCircularArrangementProtocol.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedConicalContract.mjs": "static/mechanical-native/modules/engine/mount/ownedConicalContract.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedCountersinkPlan.mjs": "static/mechanical-native/modules/engine/mount/ownedCountersinkPlan.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedCountersinkProtocol.mjs": "static/mechanical-native/modules/engine/mount/ownedCountersinkProtocol.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedCountersinkWorker.mjs": "static/mechanical-native/modules/engine/mount/ownedCountersinkWorker.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedDrawingReadProtocol.mjs": "static/mechanical-native/modules/engine/mount/ownedDrawingReadProtocol.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedLinearHolePatternPlan.mjs": "static/mechanical-native/modules/engine/mount/ownedLinearHolePatternPlan.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedLoftPlan.mjs": "static/mechanical-native/modules/engine/mount/ownedLoftPlan.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedManufacturingMeshProtocol.mjs": "static/mechanical-native/modules/engine/mount/ownedManufacturingMeshProtocol.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedMechanicalNativeCandidate.mjs": "static/mechanical-native/modules/engine/mount/ownedMechanicalNativeCandidate.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedMechanicalNativeResources.mjs": "static/mechanical-native/modules/engine/mount/ownedMechanicalNativeResources.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedOrthographicReadProtocol.mjs": "static/mechanical-native/modules/engine/mount/ownedOrthographicReadProtocol.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": "static/mechanical-native/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedRevolvePlan.mjs": "static/mechanical-native/modules/engine/mount/ownedRevolvePlan.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedStepExportProtocol.mjs": "static/mechanical-native/modules/engine/mount/ownedStepExportProtocol.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedSweepPlan.mjs": "static/mechanical-native/modules/engine/mount/ownedSweepPlan.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedThroughHolePlan.mjs": "static/mechanical-native/modules/engine/mount/ownedThroughHolePlan.mjs",
+    "static/mechanical-native/modules/engine/mount/ownedTopologyContract.mjs": "static/mechanical-native/modules/engine/mount/ownedTopologyContract.mjs",
+    "static/mechanical-native/modules/engine/mount/polygonProfilePlan.mjs": "static/mechanical-native/modules/engine/mount/polygonProfilePlan.mjs",
+    "static/mechanical-native/modules/engine/mount/prismaticBoreFacts.mjs": "static/mechanical-native/modules/engine/mount/prismaticBoreFacts.mjs",
+    "static/mechanical-native/modules/engine/mount/prismSelectionIndex.mjs": "static/mechanical-native/modules/engine/mount/prismSelectionIndex.mjs",
+    "static/mechanical-native/modules/engine/mount/profileConstructorSourceBinding.mjs": "static/mechanical-native/modules/engine/mount/profileConstructorSourceBinding.mjs",
+    "static/mechanical-native/modules/engine/mount/selectedProfilePlan.mjs": "static/mechanical-native/modules/engine/mount/selectedProfilePlan.mjs",
+    "static/mechanical-native/modules/engine/mount/selectionAncestryIndex.mjs": "static/mechanical-native/modules/engine/mount/selectionAncestryIndex.mjs",
+    "static/mechanical-native/modules/engine/mount/selectionLineageIndex.mjs": "static/mechanical-native/modules/engine/mount/selectionLineageIndex.mjs",
+    "static/mechanical-native/modules/engine/solid/ownedCountersinkIntent.mjs": "static/mechanical-native/modules/engine/solid/ownedCountersinkIntent.mjs",
+    "static/mechanical-native/modules/engine/solid/ownedHoleIntent.mjs": "static/mechanical-native/modules/engine/solid/ownedHoleIntent.mjs",
+    "static/mechanical-native/modules/engine/solid/ownedLinearHolePatternIntent.mjs": "static/mechanical-native/modules/engine/solid/ownedLinearHolePatternIntent.mjs",
+    "static/mechanical-native/modules/engine/solid/ownedLoftIntent.mjs": "static/mechanical-native/modules/engine/solid/ownedLoftIntent.mjs",
+    "static/mechanical-native/modules/engine/solid/ownedRevolveIntent.mjs": "static/mechanical-native/modules/engine/solid/ownedRevolveIntent.mjs",
+    "static/mechanical-native/modules/engine/solid/ownedSweepIntent.mjs": "static/mechanical-native/modules/engine/solid/ownedSweepIntent.mjs",
+    "static/mechanical-native/modules/engine/solid/solidBodyIdentity.mjs": "static/mechanical-native/modules/engine/solid/solidBodyIdentity.mjs",
+    "static/mechanical-native/modules/engine/solid/solidIntent.mjs": "static/mechanical-native/modules/engine/solid/solidIntent.mjs",
+    "static/mechanical-native/modules/engine/solid/sweepLimits.mjs": "static/mechanical-native/modules/engine/solid/sweepLimits.mjs",
+    "static/mechanical-native/modules/workbenches/modeler/features/extrude/authoredRegions.mjs": "static/mechanical-native/modules/workbenches/modeler/features/extrude/authoredRegions.mjs",
+    "static/mechanical-native/modules/workbenches/modeler/features/extrude/profilePlan.mjs": "static/mechanical-native/modules/workbenches/modeler/features/extrude/profilePlan.mjs",
+    "static/finite-curve-support/finite-curve-support-occ-portable.js": "static/finite-curve-support/finite-curve-support-occ-portable.js",
+    "static/finite-curve-support/finite-curve-support-occ.wasm": "static/finite-curve-support/finite-curve-support-occ.wasm",
+    "static/finite-curve-support/modules/engine/mount/finite-curve-support-worker.js": "static/finite-curve-support/modules/engine/mount/finite-curve-support-worker.js",
+    "static/finite-curve-support/modules/engine/mount/finiteCurveNativeCalls.mjs": "static/finite-curve-support/modules/engine/mount/finiteCurveNativeCalls.mjs",
+    "static/finite-curve-support/modules/engine/mount/finiteCurveReadProtocol.mjs": "static/finite-curve-support/modules/engine/mount/finiteCurveReadProtocol.mjs"
+  },
+  "workerRoles": {
+    "controlled-3mf": "static/controlled-3mf.17a71316c694c0ba8714.js",
+    "manufacturing-publication": "static/manufacturing-publication.1d38fdbdc96eb2fdcb46.js",
+    "project-validator": "static/project-validator.1067ac64410cacad7207.js",
+    "sketch-solver": "static/sketch-solver.32f7797c0e65fbdfccdf.js",
+    "native-archive": "static/native-archive.bf518d319317ad290c86.js",
+    "prism-semantic": "static/prism-semantic.2c7ddc8f111c86ec063b.js"
+  },
+  "cohortPrefixes": [
+    "static/manufacturing-mesh/",
+    "static/shell/",
+    "static/circular/",
+    "static/adaptive-metrology/",
+    "static/mechanical-native/",
+    "static/finite-curve-support/",
+    "static/analytic-profile/"
+  ],
+  "projectionResources": [
+    "static/adaptive-metrology/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/adaptive-metrology/modules/engine/source/sourceFrameIntent.mjs",
+    "static/adaptive-metrology/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/analytic-profile/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/analytic-profile/modules/engine/source/sourceFrameIntent.mjs",
+    "static/analytic-profile/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/authoredFeatureIdentity.mjs",
+    "static/boolean-history/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/boolean-history/modules/engine/source/sourceFrameIntent.mjs",
+    "static/boolean-history/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/circular/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/circular/modules/engine/source/sourceFrameIntent.mjs",
+    "static/circular/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/loft-profile/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/loft-profile/modules/engine/source/sourceFrameIntent.mjs",
+    "static/loft-profile/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/manufacturing-mesh/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/manufacturing-mesh/modules/engine/source/sourceFrameIntent.mjs",
+    "static/manufacturing-mesh/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/mechanical-native/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/mechanical-native/modules/engine/source/sourceFrameIntent.mjs",
+    "static/mechanical-native/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/mechanical-profile/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/mechanical-profile/modules/engine/source/sourceFrameIntent.mjs",
+    "static/mechanical-profile/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/polygon-profile/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/polygon-profile/modules/engine/source/sourceFrameIntent.mjs",
+    "static/polygon-profile/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/revolve-profile/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/revolve-profile/modules/engine/source/sourceFrameIntent.mjs",
+    "static/revolve-profile/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/shell/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/shell/modules/engine/source/sourceFrameIntent.mjs",
+    "static/shell/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/sourceFrameIntent.mjs",
+    "static/sourceProjectionIntent.mjs",
+    "static/step-export/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/step-export/modules/engine/source/sourceFrameIntent.mjs",
+    "static/step-export/modules/engine/source/sourceProjectionIntent.mjs",
+    "static/sweep-profile/modules/engine/metadata/authoredFeatureIdentity.mjs",
+    "static/sweep-profile/modules/engine/source/sourceFrameIntent.mjs",
+    "static/sweep-profile/modules/engine/source/sourceProjectionIntent.mjs"
+  ],
+  "components": {
+    "static/manufacturing-mesh/": {
+      "path": ".build/manufacturing-mesh-assets/component.json",
+      "sha256": "75cfbf8999587593755d98678aa4483a32543c3d760be7c5b524625d81960969",
+      "bytes": 27804,
+      "emittedFiles": {
+        "manufacturing-mesh-occ-portable.js": {
+          "sha256": "32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08",
+          "bytes": 313745
+        },
+        "manufacturing-mesh-occ.wasm": {
+          "sha256": "abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc",
+          "bytes": 36011152
+        },
+        "modules/drawing/linkedPartDrawingDefinition.mjs": {
+          "sha256": "f91cb3ff6cfdf429451d5e10e0dde9596a0c7150be62192dcf8cca9cef4af13c",
+          "bytes": 21461
+        },
+        "modules/engine/extrusion/articulatedRegionSegments.mjs": {
+          "sha256": "77b589efda2c0cd1bb0c66bb6ace5b44d9e0da3f3b39c4a4cc698bce6c2e28c8",
+          "bytes": 3807
+        },
+        "modules/engine/extrusion/exactExternalVertexContact.mjs": {
+          "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+          "bytes": 1780
+        },
+        "modules/engine/extrusion/isolatedOpenProfileComponents.mjs": {
+          "sha256": "5360137d9c39d46367964a8a8c4c08af1e76a7060258cdbb8897ce74eff77824",
+          "bytes": 5600
+        },
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+          "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+          "bytes": 12003
+        },
+        "modules/engine/extrusion/selectedRegionDescriptor.mjs": {
+          "sha256": "5eccdb30e733e9c263aa9459affb81907ecae580c89a980032d295a15c6a010a",
+          "bytes": 11412
+        },
+        "modules/engine/extrusion/simplePolygon.mjs": {
+          "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+          "bytes": 5128
+        },
+        "modules/engine/metadata/authoredFeatureIdentity.mjs": {
+          "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+          "bytes": 1202
+        },
+        "modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+          "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+          "bytes": 4203
+        },
+        "modules/engine/mount/blindHoleFacts.mjs": {
+          "sha256": "3b597d00292e72ddb1a3886504d4f81c8effbda8b052791bc50edcaca8fac112",
+          "bytes": 4235
+        },
+        "modules/engine/mount/booleanSelectionClaims.mjs": {
+          "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+          "bytes": 9413
+        },
+        "modules/engine/mount/counterboreFacts.mjs": {
+          "sha256": "4b92568c83c37e4650e85091677eeda832e5f93fbf563ca40e66e763cf3b0e8c",
+          "bytes": 11321
+        },
+        "modules/engine/mount/cylinderCutWitness.mjs": {
+          "sha256": "b1d384bb17e005b9d1a37e449503dac7bf23c9f55079aea2415ae36674cd1bc1",
+          "bytes": 8354
+        },
+        "modules/engine/mount/drawingDetailClip.mjs": {
+          "sha256": "cce1aa150886968930f66272c36fefc708452663936aaebd2758020d3b11e0b3",
+          "bytes": 10256
+        },
+        "modules/engine/mount/drawingReferenceFacts.mjs": {
+          "sha256": "b305b857674e0afcbc0ad52279583cda042e5002750cc8b13da034a36feccbc5",
+          "bytes": 18786
+        },
+        "modules/engine/mount/drawingRequirementFacts.mjs": {
+          "sha256": "8d54b5881b9d0613bfa98ea5598c434d2599744b8280b34d2b52bc6fcf15f106",
+          "bytes": 11873
+        },
+        "modules/engine/mount/drawingRequirementProtocol.mjs": {
+          "sha256": "42ea997b48d7cf673a4acc842086b6d09aebfd96273b2499ed35e5a6fd6338f4",
+          "bytes": 4840
+        },
+        "modules/engine/mount/exactMeshVolume.mjs": {
+          "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+          "bytes": 4760
+        },
+        "modules/engine/mount/manufacturing-mesh-worker.js": {
+          "sha256": "0bf174e29f3517a172e067a830de64d76f81b080398f3196fdf497e218bc7840",
+          "bytes": 502774
+        },
+        "modules/engine/mount/manufacturingMeshRecord.mjs": {
+          "sha256": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+          "bytes": 3505
+        },
+        "modules/engine/mount/nativePlanarAttachmentFacts.mjs": {
+          "sha256": "d4053f1a622bd789258034a5b2e296104960d790d8a7e7925d8ed4c2e3c6d55d",
+          "bytes": 4799
+        },
+        "modules/engine/mount/orthographicAnalyticRecord.mjs": {
+          "sha256": "8454077795e4c92099523435ed4a32cc86c1264b80d881e590667adc8fd517ae",
+          "bytes": 7869
+        },
+        "modules/engine/mount/ownedBlindHolePlan.mjs": {
+          "sha256": "61c1abb7dd487cfdc93f2dd010638920dac83a1603b7402af957480ebee787be",
+          "bytes": 3913
+        },
+        "modules/engine/mount/ownedBooleanContract.mjs": {
+          "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+          "bytes": 7736
+        },
+        "modules/engine/mount/ownedBoreAnnotationProtocol.mjs": {
+          "sha256": "845ef094746223612d89bdf736c70af84418f3ce21753c2d33d00b9e578071a9",
+          "bytes": 2044
+        },
+        "modules/engine/mount/ownedBoreReadProtocol.mjs": {
+          "sha256": "def65f7139ef71a9af63c49f56a6364cbc158c88a4ac05482043d10ec22214df",
+          "bytes": 3848
+        },
+        "modules/engine/mount/ownedCounterborePlan.mjs": {
+          "sha256": "977c1797c18e61e9496465b852ece27201e0ea9321ba62fb2496735e0365acf7",
+          "bytes": 4458
+        },
+        "modules/engine/mount/ownedDrawingDerivedProtocol.mjs": {
+          "sha256": "7e485a074a8d29ad35ce4fb4ade9677981f94be7c8d73fb487d6952d34042dfc",
+          "bytes": 1492
+        },
+        "modules/engine/mount/ownedDrawingReadProtocol.mjs": {
+          "sha256": "dad14f7b91a179612d04723f5267dc819fa8610213a23b4c162050661463ab8e",
+          "bytes": 11926
+        },
+        "modules/engine/mount/ownedDrawingSectionProtocol.mjs": {
+          "sha256": "8376fdf38823595a89655be33fbce9c6bd3e983815fa02787092562f25ceb23d",
+          "bytes": 3781
+        },
+        "modules/engine/mount/ownedDrawingSectionWorker.mjs": {
+          "sha256": "44f260430e697ef16dd495daf5320292debb82dc7728da658a8c99820f0bb703",
+          "bytes": 18134
+        },
+        "modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+          "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+          "bytes": 6918
+        },
+        "modules/engine/mount/ownedLoftPlan.mjs": {
+          "sha256": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+          "bytes": 1616
+        },
+        "modules/engine/mount/ownedManufacturingMeshProtocol.mjs": {
+          "sha256": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+          "bytes": 8192
+        },
+        "modules/engine/mount/ownedOrthographicReadProtocol.mjs": {
+          "sha256": "52ae654d5df0f593a2354b3196577804a508069b055a5c52ee0f55416f553087",
+          "bytes": 7291
+        },
+        "modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": {
+          "sha256": "9020974d40745bc35f72bc895204383a32c4cd012b85f48c0e6376ff3f2da9a8",
+          "bytes": 3806
+        },
+        "modules/engine/mount/ownedProfileExtentPlan.mjs": {
+          "sha256": "79bde288433126977863f52b11f2eed3d297b80d64399adef8d0156690cbbb70",
+          "bytes": 11165
+        },
+        "modules/engine/mount/ownedProfileExtentWorker.mjs": {
+          "sha256": "77630a6b0c7814444b4387682a8949e0a6a5492880f0ed52a2580c5c26d093a8",
+          "bytes": 7826
+        },
+        "modules/engine/mount/ownedRevolvePlan.mjs": {
+          "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+          "bytes": 980
+        },
+        "modules/engine/mount/ownedStepExportProtocol.mjs": {
+          "sha256": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+          "bytes": 6517
+        },
+        "modules/engine/mount/ownedSweepPlan.mjs": {
+          "sha256": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+          "bytes": 1856
+        },
+        "modules/engine/mount/ownedThroughHolePlan.mjs": {
+          "sha256": "d45eaf266be1071d1527b6b24c93d8dfbb2d24d33ac3f53e18bdc5f2852d0046",
+          "bytes": 8850
+        },
+        "modules/engine/mount/ownedTopologyContract.mjs": {
+          "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+          "bytes": 8275
+        },
+        "modules/engine/mount/polygonProfilePlan.mjs": {
+          "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+          "bytes": 8418
+        },
+        "modules/engine/mount/prismaticBoreFacts.mjs": {
+          "sha256": "fdaea1207e54d87b85b6f45164061009574f9e5e9a422a6d2a96627966b307f5",
+          "bytes": 10475
+        },
+        "modules/engine/mount/prismSelectionIndex.mjs": {
+          "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+          "bytes": 4753
+        },
+        "modules/engine/mount/profileExtentHolePlan.mjs": {
+          "sha256": "c2ef682505f76fcb1f29d7586feac6b2af19ac2f190d65fc22adab3fa8fcac36",
+          "bytes": 12483
+        },
+        "modules/engine/mount/profileExtentSelectionIndex.mjs": {
+          "sha256": "2233984573f6ea3435ac82b169ccfcbb2dd18f4d8dda8202606e5af3146957b9",
+          "bytes": 4068
+        },
+        "modules/engine/mount/profileMechanicalSource.mjs": {
+          "sha256": "e7e4b166ab8dbe4d22315ebba2b80b9c17c11e3799a3cb7beac54ffb33f8a799",
+          "bytes": 4138
+        },
+        "modules/engine/mount/selectedProfilePlan.mjs": {
+          "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+          "bytes": 9190
+        },
+        "modules/engine/mount/selectionAncestryIndex.mjs": {
+          "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+          "bytes": 11394
+        },
+        "modules/engine/mount/selectionLineageIndex.mjs": {
+          "sha256": "540eeb3ca87007dc63cd8f8b6721ef9d72bd9f78b8524a46da79944b154be82f",
+          "bytes": 26085
+        },
+        "modules/engine/solid/ownedBlindHoleIntent.mjs": {
+          "sha256": "42731a760fa4495322e6b7948b542b1294e08ecc259fe7565c8fba0efedd982d",
+          "bytes": 2573
+        },
+        "modules/engine/solid/ownedCounterboreIntent.mjs": {
+          "sha256": "2d21f05f10cf5d9a4d45e63c82f967d7f0026f52815f5221ae9d8419972b5ac1",
+          "bytes": 2924
+        },
+        "modules/engine/solid/ownedHoleIntent.mjs": {
+          "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+          "bytes": 2877
+        },
+        "modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+          "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+          "bytes": 1913
+        },
+        "modules/engine/solid/ownedLoftIntent.mjs": {
+          "sha256": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+          "bytes": 6231
+        },
+        "modules/engine/solid/ownedProfileExtentFeature.mjs": {
+          "sha256": "e6b9874e612354e9f8eb73d0fac4daa94c2d194d60d16d2f83a6085a83fe0802",
+          "bytes": 6769
+        },
+        "modules/engine/solid/ownedRevolveIntent.mjs": {
+          "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+          "bytes": 3529
+        },
+        "modules/engine/solid/ownedSweepIntent.mjs": {
+          "sha256": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+          "bytes": 5194
+        },
+        "modules/engine/solid/solidBodyIdentity.mjs": {
+          "sha256": "e68c0c9bbbcfa992758576f49db3edd3af9336d58912a95dcba6deae18a67500",
+          "bytes": 352
+        },
+        "modules/engine/solid/solidIntent.mjs": {
+          "sha256": "87bc656224ccefb8ce0f9ac75927f6649285d239b394fa03af09caa05e3e5685",
+          "bytes": 4198
+        },
+        "modules/engine/solid/sweepLimits.mjs": {
+          "sha256": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13",
+          "bytes": 104
+        },
+        "modules/engine/source/sourceFrameIntent.mjs": {
+          "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+          "bytes": 4942
+        },
+        "modules/engine/source/sourceProjectionIntent.mjs": {
+          "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+          "bytes": 3592
+        }
+      },
+      "preparedFileCount": 95,
+      "bootstrapSha256": "92bf651cb26a0ced09b91bb8bd2734bc09b9795fbdfc34271828a4024eb29b5f",
+      "workerSha256": "0bf174e29f3517a172e067a830de64d76f81b080398f3196fdf497e218bc7840",
+      "jsSha256": "32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08",
+      "wasmSha256": "abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc"
+    },
+    "static/shell/": {
+      "path": ".build/shell-assets/component.json",
+      "sha256": "27feeb3f0642edf4bf787b07e6c0e7be38f025bbe231ba45ebced7c7917ec4c1",
+      "bytes": 25979,
+      "emittedFiles": {
+        "modules/drawing/linkedPartDrawingDefinition.mjs": {
+          "sha256": "f91cb3ff6cfdf429451d5e10e0dde9596a0c7150be62192dcf8cca9cef4af13c",
+          "bytes": 21461
+        },
+        "modules/engine/extrusion/articulatedRegionSegments.mjs": {
+          "sha256": "77b589efda2c0cd1bb0c66bb6ace5b44d9e0da3f3b39c4a4cc698bce6c2e28c8",
+          "bytes": 3807
+        },
+        "modules/engine/extrusion/exactExternalVertexContact.mjs": {
+          "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+          "bytes": 1780
+        },
+        "modules/engine/extrusion/isolatedOpenProfileComponents.mjs": {
+          "sha256": "5360137d9c39d46367964a8a8c4c08af1e76a7060258cdbb8897ce74eff77824",
+          "bytes": 5600
+        },
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+          "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+          "bytes": 12003
+        },
+        "modules/engine/extrusion/selectedRegionDescriptor.mjs": {
+          "sha256": "5eccdb30e733e9c263aa9459affb81907ecae580c89a980032d295a15c6a010a",
+          "bytes": 11412
+        },
+        "modules/engine/extrusion/simplePolygon.mjs": {
+          "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+          "bytes": 5128
+        },
+        "modules/engine/metadata/authoredFeatureIdentity.mjs": {
+          "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+          "bytes": 1202
+        },
+        "modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+          "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+          "bytes": 4203
+        },
+        "modules/engine/mount/booleanSelectionClaims.mjs": {
+          "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+          "bytes": 9413
+        },
+        "modules/engine/mount/boxSelectionIndex.mjs": {
+          "sha256": "1561afacf78e048c59956c4b6d5b03a2114a47d9ac05fe9ad0701bc08ed320db",
+          "bytes": 2557
+        },
+        "modules/engine/mount/cylinderCutWitness.mjs": {
+          "sha256": "b1d384bb17e005b9d1a37e449503dac7bf23c9f55079aea2415ae36674cd1bc1",
+          "bytes": 8354
+        },
+        "modules/engine/mount/drawingDetailClip.mjs": {
+          "sha256": "cce1aa150886968930f66272c36fefc708452663936aaebd2758020d3b11e0b3",
+          "bytes": 10256
+        },
+        "modules/engine/mount/drawingReferenceFacts.mjs": {
+          "sha256": "b305b857674e0afcbc0ad52279583cda042e5002750cc8b13da034a36feccbc5",
+          "bytes": 18786
+        },
+        "modules/engine/mount/drawingRequirementFacts.mjs": {
+          "sha256": "8d54b5881b9d0613bfa98ea5598c434d2599744b8280b34d2b52bc6fcf15f106",
+          "bytes": 11873
+        },
+        "modules/engine/mount/drawingRequirementProtocol.mjs": {
+          "sha256": "42ea997b48d7cf673a4acc842086b6d09aebfd96273b2499ed35e5a6fd6338f4",
+          "bytes": 4840
+        },
+        "modules/engine/mount/exactMeshVolume.mjs": {
+          "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+          "bytes": 4760
+        },
+        "modules/engine/mount/manufacturingMeshRecord.mjs": {
+          "sha256": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+          "bytes": 3505
+        },
+        "modules/engine/mount/nativePlanarAttachmentFacts.mjs": {
+          "sha256": "d4053f1a622bd789258034a5b2e296104960d790d8a7e7925d8ed4c2e3c6d55d",
+          "bytes": 4799
+        },
+        "modules/engine/mount/orthographicAnalyticRecord.mjs": {
+          "sha256": "8454077795e4c92099523435ed4a32cc86c1264b80d881e590667adc8fd517ae",
+          "bytes": 7869
+        },
+        "modules/engine/mount/ownedBooleanContract.mjs": {
+          "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+          "bytes": 7736
+        },
+        "modules/engine/mount/ownedBoreAnnotationProtocol.mjs": {
+          "sha256": "845ef094746223612d89bdf736c70af84418f3ce21753c2d33d00b9e578071a9",
+          "bytes": 2044
+        },
+        "modules/engine/mount/ownedBoreReadProtocol.mjs": {
+          "sha256": "def65f7139ef71a9af63c49f56a6364cbc158c88a4ac05482043d10ec22214df",
+          "bytes": 3848
+        },
+        "modules/engine/mount/ownedDrawingDerivedProtocol.mjs": {
+          "sha256": "7e485a074a8d29ad35ce4fb4ade9677981f94be7c8d73fb487d6952d34042dfc",
+          "bytes": 1492
+        },
+        "modules/engine/mount/ownedDrawingReadProtocol.mjs": {
+          "sha256": "dad14f7b91a179612d04723f5267dc819fa8610213a23b4c162050661463ab8e",
+          "bytes": 11926
+        },
+        "modules/engine/mount/ownedDrawingSectionProtocol.mjs": {
+          "sha256": "8376fdf38823595a89655be33fbce9c6bd3e983815fa02787092562f25ceb23d",
+          "bytes": 3781
+        },
+        "modules/engine/mount/ownedDrawingSectionWorker.mjs": {
+          "sha256": "44f260430e697ef16dd495daf5320292debb82dc7728da658a8c99820f0bb703",
+          "bytes": 18134
+        },
+        "modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+          "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+          "bytes": 6918
+        },
+        "modules/engine/mount/ownedLoftPlan.mjs": {
+          "sha256": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+          "bytes": 1616
+        },
+        "modules/engine/mount/ownedManufacturingMeshProtocol.mjs": {
+          "sha256": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+          "bytes": 8192
+        },
+        "modules/engine/mount/ownedOrthographicReadProtocol.mjs": {
+          "sha256": "52ae654d5df0f593a2354b3196577804a508069b055a5c52ee0f55416f553087",
+          "bytes": 7291
+        },
+        "modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": {
+          "sha256": "9020974d40745bc35f72bc895204383a32c4cd012b85f48c0e6376ff3f2da9a8",
+          "bytes": 3806
+        },
+        "modules/engine/mount/ownedRevolvePlan.mjs": {
+          "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+          "bytes": 980
+        },
+        "modules/engine/mount/ownedShellNativeContract.mjs": {
+          "sha256": "c92ba75b7f150bbb949d09170409358af375c81853184df793ddb713514f21af",
+          "bytes": 6053
+        },
+        "modules/engine/mount/ownedShellProtocol.mjs": {
+          "sha256": "b733fba75855db5d5a923cd42b61b3eefa761f8f79c4b5f0dbc286553eb5ce3d",
+          "bytes": 4931
+        },
+        "modules/engine/mount/ownedShellWorker.mjs": {
+          "sha256": "b27bad4cb61f584067c734176fd1a76bf63937f2a5d38f5cf9a68838c9785c3c",
+          "bytes": 5842
+        },
+        "modules/engine/mount/ownedStepExportProtocol.mjs": {
+          "sha256": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+          "bytes": 6517
+        },
+        "modules/engine/mount/ownedSweepPlan.mjs": {
+          "sha256": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+          "bytes": 1856
+        },
+        "modules/engine/mount/ownedThroughHolePlan.mjs": {
+          "sha256": "d45eaf266be1071d1527b6b24c93d8dfbb2d24d33ac3f53e18bdc5f2852d0046",
+          "bytes": 8850
+        },
+        "modules/engine/mount/ownedTopologyContract.mjs": {
+          "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+          "bytes": 8275
+        },
+        "modules/engine/mount/polygonProfilePlan.mjs": {
+          "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+          "bytes": 8418
+        },
+        "modules/engine/mount/prismaticBoreFacts.mjs": {
+          "sha256": "fdaea1207e54d87b85b6f45164061009574f9e5e9a422a6d2a96627966b307f5",
+          "bytes": 10475
+        },
+        "modules/engine/mount/prismSelectionIndex.mjs": {
+          "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+          "bytes": 4753
+        },
+        "modules/engine/mount/selectedProfilePlan.mjs": {
+          "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+          "bytes": 9190
+        },
+        "modules/engine/mount/selectionAncestryIndex.mjs": {
+          "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+          "bytes": 11394
+        },
+        "modules/engine/mount/selectionLineageIndex.mjs": {
+          "sha256": "540eeb3ca87007dc63cd8f8b6721ef9d72bd9f78b8524a46da79944b154be82f",
+          "bytes": 26085
+        },
+        "modules/engine/mount/shell-worker.js": {
+          "sha256": "7e1b893a18aa59c556d2f2eb41fed8ed8da4819c8b71c1b50c597c26f84d995f",
+          "bytes": 503968
+        },
+        "modules/engine/solid/ownedHoleIntent.mjs": {
+          "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+          "bytes": 2877
+        },
+        "modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+          "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+          "bytes": 1913
+        },
+        "modules/engine/solid/ownedLoftIntent.mjs": {
+          "sha256": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+          "bytes": 6231
+        },
+        "modules/engine/solid/ownedRevolveIntent.mjs": {
+          "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+          "bytes": 3529
+        },
+        "modules/engine/solid/ownedSweepIntent.mjs": {
+          "sha256": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+          "bytes": 5194
+        },
+        "modules/engine/solid/solidBodyIdentity.mjs": {
+          "sha256": "e68c0c9bbbcfa992758576f49db3edd3af9336d58912a95dcba6deae18a67500",
+          "bytes": 352
+        },
+        "modules/engine/solid/solidIntent.mjs": {
+          "sha256": "87bc656224ccefb8ce0f9ac75927f6649285d239b394fa03af09caa05e3e5685",
+          "bytes": 4198
+        },
+        "modules/engine/solid/sweepLimits.mjs": {
+          "sha256": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13",
+          "bytes": 104
+        },
+        "modules/engine/source/sourceFrameIntent.mjs": {
+          "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+          "bytes": 4942
+        },
+        "modules/engine/source/sourceProjectionIntent.mjs": {
+          "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+          "bytes": 3592
+        },
+        "shell-occ-portable.js": {
+          "sha256": "57b74074e0a249b917ac68357fbd003c37d1ab61897206886b575088e6995858",
+          "bytes": 314939
+        },
+        "shell-occ.wasm": {
+          "sha256": "60dc956b08e01f43d08a48035a384e478e63bb34fb55f21a152c8cd12e8b8947",
+          "bytes": 36048090
+        }
+      },
+      "preparedFileCount": 89,
+      "bootstrapSha256": "92bf651cb26a0ced09b91bb8bd2734bc09b9795fbdfc34271828a4024eb29b5f",
+      "workerSha256": "7e1b893a18aa59c556d2f2eb41fed8ed8da4819c8b71c1b50c597c26f84d995f",
+      "jsSha256": "57b74074e0a249b917ac68357fbd003c37d1ab61897206886b575088e6995858",
+      "wasmSha256": "60dc956b08e01f43d08a48035a384e478e63bb34fb55f21a152c8cd12e8b8947"
+    },
+    "static/circular/": {
+      "path": ".build/circular-assets/component.json",
+      "sha256": "b5df6f8647e3a1895aaf988571d1b5ffae9f2fefa84522cce61ecdf9aec18870",
+      "bytes": 28128,
+      "emittedFiles": {
+        "circular-occ-portable.js": {
+          "sha256": "9789a61709dc680cce64dfa29030a3862ee636319594bdc839c0ed92e9d3571b",
+          "bytes": 315975
+        },
+        "circular-occ.wasm": {
+          "sha256": "707facb3d09aa4f84d7e0d2690141ceaf90315d2f69d110f9f763f52dc192649",
+          "bytes": 36159052
+        },
+        "modules/drawing/linkedPartDrawingDefinition.mjs": {
+          "sha256": "f91cb3ff6cfdf429451d5e10e0dde9596a0c7150be62192dcf8cca9cef4af13c",
+          "bytes": 21461
+        },
+        "modules/engine/extrusion/articulatedRegionSegments.mjs": {
+          "sha256": "77b589efda2c0cd1bb0c66bb6ace5b44d9e0da3f3b39c4a4cc698bce6c2e28c8",
+          "bytes": 3807
+        },
+        "modules/engine/extrusion/circularArrangementDescriptor.mjs": {
+          "sha256": "67bb74a4f7c1508072a8465dacbd26df354005ebb1c343d81028140f77d6c90d",
+          "bytes": 10609
+        },
+        "modules/engine/extrusion/circularTopology.mjs": {
+          "sha256": "95a0627c0c5ed9695bcdd98e3a7169f8bb07fc3a43981483e4b742b39e0cda10",
+          "bytes": 2413
+        },
+        "modules/engine/extrusion/exactExternalVertexContact.mjs": {
+          "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+          "bytes": 1780
+        },
+        "modules/engine/extrusion/isolatedOpenProfileComponents.mjs": {
+          "sha256": "5360137d9c39d46367964a8a8c4c08af1e76a7060258cdbb8897ce74eff77824",
+          "bytes": 5600
+        },
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+          "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+          "bytes": 12003
+        },
+        "modules/engine/extrusion/selectedRegionDescriptor.mjs": {
+          "sha256": "5eccdb30e733e9c263aa9459affb81907ecae580c89a980032d295a15c6a010a",
+          "bytes": 11412
+        },
+        "modules/engine/extrusion/simplePolygon.mjs": {
+          "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+          "bytes": 5128
+        },
+        "modules/engine/metadata/authoredFeatureIdentity.mjs": {
+          "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+          "bytes": 1202
+        },
+        "modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+          "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+          "bytes": 4203
+        },
+        "modules/engine/mount/booleanSelectionClaims.mjs": {
+          "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+          "bytes": 9413
+        },
+        "modules/engine/mount/boxSelectionIndex.mjs": {
+          "sha256": "1561afacf78e048c59956c4b6d5b03a2114a47d9ac05fe9ad0701bc08ed320db",
+          "bytes": 2557
+        },
+        "modules/engine/mount/circular-worker.js": {
+          "sha256": "4d9039b9c977f7c22ea70b3e0d2cbc981a65a5db78bffe7672f37c4580f92f47",
+          "bytes": 505004
+        },
+        "modules/engine/mount/circularArrangementPlan.mjs": {
+          "sha256": "9a3e26d75d56ed391c5154116d860d103838a6f0df550a48fe882d3d370e70d4",
+          "bytes": 6932
+        },
+        "modules/engine/mount/circularPrismSelectionIndex.mjs": {
+          "sha256": "51aa54e990fc9204e073d4ba75b77443daed8c01b0d684b6087756ec002b79a5",
+          "bytes": 8330
+        },
+        "modules/engine/mount/cylinderCutWitness.mjs": {
+          "sha256": "b1d384bb17e005b9d1a37e449503dac7bf23c9f55079aea2415ae36674cd1bc1",
+          "bytes": 8354
+        },
+        "modules/engine/mount/drawingDetailClip.mjs": {
+          "sha256": "cce1aa150886968930f66272c36fefc708452663936aaebd2758020d3b11e0b3",
+          "bytes": 10256
+        },
+        "modules/engine/mount/drawingReferenceFacts.mjs": {
+          "sha256": "b305b857674e0afcbc0ad52279583cda042e5002750cc8b13da034a36feccbc5",
+          "bytes": 18786
+        },
+        "modules/engine/mount/drawingRequirementFacts.mjs": {
+          "sha256": "8d54b5881b9d0613bfa98ea5598c434d2599744b8280b34d2b52bc6fcf15f106",
+          "bytes": 11873
+        },
+        "modules/engine/mount/drawingRequirementProtocol.mjs": {
+          "sha256": "42ea997b48d7cf673a4acc842086b6d09aebfd96273b2499ed35e5a6fd6338f4",
+          "bytes": 4840
+        },
+        "modules/engine/mount/exactMeshVolume.mjs": {
+          "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+          "bytes": 4760
+        },
+        "modules/engine/mount/manufacturingMeshRecord.mjs": {
+          "sha256": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+          "bytes": 3505
+        },
+        "modules/engine/mount/nativePlanarAttachmentFacts.mjs": {
+          "sha256": "d4053f1a622bd789258034a5b2e296104960d790d8a7e7925d8ed4c2e3c6d55d",
+          "bytes": 4799
+        },
+        "modules/engine/mount/orthographicAnalyticRecord.mjs": {
+          "sha256": "8454077795e4c92099523435ed4a32cc86c1264b80d881e590667adc8fd517ae",
+          "bytes": 7869
+        },
+        "modules/engine/mount/ownedBooleanContract.mjs": {
+          "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+          "bytes": 7736
+        },
+        "modules/engine/mount/ownedBoreAnnotationProtocol.mjs": {
+          "sha256": "845ef094746223612d89bdf736c70af84418f3ce21753c2d33d00b9e578071a9",
+          "bytes": 2044
+        },
+        "modules/engine/mount/ownedBoreReadProtocol.mjs": {
+          "sha256": "def65f7139ef71a9af63c49f56a6364cbc158c88a4ac05482043d10ec22214df",
+          "bytes": 3848
+        },
+        "modules/engine/mount/ownedCircularArrangementProtocol.mjs": {
+          "sha256": "e5ecb3bef8a8d4fe13dde03720837f8c4a024ac1866fe01682508b52adeaec08",
+          "bytes": 12098
+        },
+        "modules/engine/mount/ownedCircularNativeContract.mjs": {
+          "sha256": "a8d05c013cb55ffc0f297f9ca805e617239ca63e6209ea53e374fd510df6f86f",
+          "bytes": 379
+        },
+        "modules/engine/mount/ownedCircularWorker.mjs": {
+          "sha256": "cfd8db103e4207c582a98744f585577fbb8032e4ee2a90a0b28853a33ae9fe96",
+          "bytes": 12635
+        },
+        "modules/engine/mount/ownedDrawingDerivedProtocol.mjs": {
+          "sha256": "7e485a074a8d29ad35ce4fb4ade9677981f94be7c8d73fb487d6952d34042dfc",
+          "bytes": 1492
+        },
+        "modules/engine/mount/ownedDrawingReadProtocol.mjs": {
+          "sha256": "dad14f7b91a179612d04723f5267dc819fa8610213a23b4c162050661463ab8e",
+          "bytes": 11926
+        },
+        "modules/engine/mount/ownedDrawingSectionProtocol.mjs": {
+          "sha256": "8376fdf38823595a89655be33fbce9c6bd3e983815fa02787092562f25ceb23d",
+          "bytes": 3781
+        },
+        "modules/engine/mount/ownedDrawingSectionWorker.mjs": {
+          "sha256": "44f260430e697ef16dd495daf5320292debb82dc7728da658a8c99820f0bb703",
+          "bytes": 18134
+        },
+        "modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+          "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+          "bytes": 6918
+        },
+        "modules/engine/mount/ownedLoftPlan.mjs": {
+          "sha256": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+          "bytes": 1616
+        },
+        "modules/engine/mount/ownedManufacturingMeshProtocol.mjs": {
+          "sha256": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+          "bytes": 8192
+        },
+        "modules/engine/mount/ownedOrthographicReadProtocol.mjs": {
+          "sha256": "52ae654d5df0f593a2354b3196577804a508069b055a5c52ee0f55416f553087",
+          "bytes": 7291
+        },
+        "modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": {
+          "sha256": "9020974d40745bc35f72bc895204383a32c4cd012b85f48c0e6376ff3f2da9a8",
+          "bytes": 3806
+        },
+        "modules/engine/mount/ownedRevolvePlan.mjs": {
+          "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+          "bytes": 980
+        },
+        "modules/engine/mount/ownedShellNativeContract.mjs": {
+          "sha256": "c92ba75b7f150bbb949d09170409358af375c81853184df793ddb713514f21af",
+          "bytes": 6053
+        },
+        "modules/engine/mount/ownedShellProtocol.mjs": {
+          "sha256": "b733fba75855db5d5a923cd42b61b3eefa761f8f79c4b5f0dbc286553eb5ce3d",
+          "bytes": 4931
+        },
+        "modules/engine/mount/ownedShellWorker.mjs": {
+          "sha256": "b27bad4cb61f584067c734176fd1a76bf63937f2a5d38f5cf9a68838c9785c3c",
+          "bytes": 5842
+        },
+        "modules/engine/mount/ownedStepExportProtocol.mjs": {
+          "sha256": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+          "bytes": 6517
+        },
+        "modules/engine/mount/ownedSweepPlan.mjs": {
+          "sha256": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+          "bytes": 1856
+        },
+        "modules/engine/mount/ownedThroughHolePlan.mjs": {
+          "sha256": "d45eaf266be1071d1527b6b24c93d8dfbb2d24d33ac3f53e18bdc5f2852d0046",
+          "bytes": 8850
+        },
+        "modules/engine/mount/ownedTopologyContract.mjs": {
+          "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+          "bytes": 8275
+        },
+        "modules/engine/mount/polygonProfilePlan.mjs": {
+          "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+          "bytes": 8418
+        },
+        "modules/engine/mount/prismaticBoreFacts.mjs": {
+          "sha256": "fdaea1207e54d87b85b6f45164061009574f9e5e9a422a6d2a96627966b307f5",
+          "bytes": 10475
+        },
+        "modules/engine/mount/prismSelectionIndex.mjs": {
+          "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+          "bytes": 4753
+        },
+        "modules/engine/mount/selectedProfilePlan.mjs": {
+          "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+          "bytes": 9190
+        },
+        "modules/engine/mount/selectionAncestryIndex.mjs": {
+          "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+          "bytes": 11394
+        },
+        "modules/engine/mount/selectionLineageIndex.mjs": {
+          "sha256": "540eeb3ca87007dc63cd8f8b6721ef9d72bd9f78b8524a46da79944b154be82f",
+          "bytes": 26085
+        },
+        "modules/engine/solid/ownedHoleIntent.mjs": {
+          "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+          "bytes": 2877
+        },
+        "modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+          "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+          "bytes": 1913
+        },
+        "modules/engine/solid/ownedLoftIntent.mjs": {
+          "sha256": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+          "bytes": 6231
+        },
+        "modules/engine/solid/ownedRevolveIntent.mjs": {
+          "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+          "bytes": 3529
+        },
+        "modules/engine/solid/ownedSweepIntent.mjs": {
+          "sha256": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+          "bytes": 5194
+        },
+        "modules/engine/solid/solidBodyIdentity.mjs": {
+          "sha256": "e68c0c9bbbcfa992758576f49db3edd3af9336d58912a95dcba6deae18a67500",
+          "bytes": 352
+        },
+        "modules/engine/solid/solidIntent.mjs": {
+          "sha256": "87bc656224ccefb8ce0f9ac75927f6649285d239b394fa03af09caa05e3e5685",
+          "bytes": 4198
+        },
+        "modules/engine/solid/sweepLimits.mjs": {
+          "sha256": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13",
+          "bytes": 104
+        },
+        "modules/engine/source/sourceFrameIntent.mjs": {
+          "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+          "bytes": 4942
+        },
+        "modules/engine/source/sourceProjectionIntent.mjs": {
+          "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+          "bytes": 3592
+        }
+      },
+      "preparedFileCount": 96,
+      "bootstrapSha256": "92bf651cb26a0ced09b91bb8bd2734bc09b9795fbdfc34271828a4024eb29b5f",
+      "workerSha256": "4d9039b9c977f7c22ea70b3e0d2cbc981a65a5db78bffe7672f37c4580f92f47",
+      "jsSha256": "9789a61709dc680cce64dfa29030a3862ee636319594bdc839c0ed92e9d3571b",
+      "wasmSha256": "707facb3d09aa4f84d7e0d2690141ceaf90315d2f69d110f9f763f52dc192649"
+    },
+    "static/adaptive-metrology/": {
+      "path": ".build/adaptive-metrology-assets/component.json",
+      "sha256": "3e15421ea0f3a39572f60e0df3e2ca38ff51db63d4d704f3b600c62e385a7ddf",
+      "bytes": 21650,
+      "emittedFiles": {
+        "adaptive-metrology-occ-portable.js": {
+          "sha256": "ed06b634a3e81f9a51c89f75b3d65e03b8ace1fc483900ea2858eae8eff970a4",
+          "bytes": 311464
+        },
+        "adaptive-metrology-occ.wasm": {
+          "sha256": "bc8895ceb123e33aad68c8a1cf6322b5c0ccef9bfb129207defe1b8a5a7c893a",
+          "bytes": 35232229
+        },
+        "modules/engine/extrusion/exactExternalVertexContact.mjs": {
+          "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+          "bytes": 1780
+        },
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+          "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+          "bytes": 12003
+        },
+        "modules/engine/extrusion/simplePolygon.mjs": {
+          "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+          "bytes": 5128
+        },
+        "modules/engine/metadata/authoredFeatureIdentity.mjs": {
+          "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+          "bytes": 1202
+        },
+        "modules/engine/mount/adaptive-metrology-worker.js": {
+          "sha256": "1d8734791c7d95856abd633886438a58caa4eb093e4452eda0bb6b1a3f254725",
+          "bytes": 500493
+        },
+        "modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+          "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+          "bytes": 4203
+        },
+        "modules/engine/mount/booleanSelectionClaims.mjs": {
+          "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+          "bytes": 9413
+        },
+        "modules/engine/mount/exactMeshVolume.mjs": {
+          "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+          "bytes": 4760
+        },
+        "modules/engine/mount/ownedBooleanContract.mjs": {
+          "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+          "bytes": 7736
+        },
+        "modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+          "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+          "bytes": 6918
+        },
+        "modules/engine/mount/ownedLoftPlan.mjs": {
+          "sha256": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+          "bytes": 1616
+        },
+        "modules/engine/mount/ownedRevolvePlan.mjs": {
+          "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+          "bytes": 980
+        },
+        "modules/engine/mount/ownedSweepPlan.mjs": {
+          "sha256": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+          "bytes": 1856
+        },
+        "modules/engine/mount/ownedThroughHolePlan.mjs": {
+          "sha256": "d45eaf266be1071d1527b6b24c93d8dfbb2d24d33ac3f53e18bdc5f2852d0046",
+          "bytes": 8850
+        },
+        "modules/engine/mount/ownedTopologyContract.mjs": {
+          "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+          "bytes": 8275
+        },
+        "modules/engine/mount/polygonProfilePlan.mjs": {
+          "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+          "bytes": 8418
+        },
+        "modules/engine/mount/prismSelectionIndex.mjs": {
+          "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+          "bytes": 4753
+        },
+        "modules/engine/mount/selectedProfilePlan.mjs": {
+          "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+          "bytes": 9190
+        },
+        "modules/engine/mount/selectionAncestryIndex.mjs": {
+          "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+          "bytes": 11394
+        },
+        "modules/engine/mount/selectionLineageIndex.mjs": {
+          "sha256": "540eeb3ca87007dc63cd8f8b6721ef9d72bd9f78b8524a46da79944b154be82f",
+          "bytes": 26085
+        },
+        "modules/engine/solid/ownedHoleIntent.mjs": {
+          "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+          "bytes": 2877
+        },
+        "modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+          "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+          "bytes": 1913
+        },
+        "modules/engine/solid/ownedLoftIntent.mjs": {
+          "sha256": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+          "bytes": 6231
+        },
+        "modules/engine/solid/ownedRevolveIntent.mjs": {
+          "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+          "bytes": 3529
+        },
+        "modules/engine/solid/ownedSweepIntent.mjs": {
+          "sha256": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+          "bytes": 5194
+        },
+        "modules/engine/solid/solidBodyIdentity.mjs": {
+          "sha256": "e68c0c9bbbcfa992758576f49db3edd3af9336d58912a95dcba6deae18a67500",
+          "bytes": 352
+        },
+        "modules/engine/solid/solidIntent.mjs": {
+          "sha256": "87bc656224ccefb8ce0f9ac75927f6649285d239b394fa03af09caa05e3e5685",
+          "bytes": 4198
+        },
+        "modules/engine/solid/sweepLimits.mjs": {
+          "sha256": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13",
+          "bytes": 104
+        },
+        "modules/engine/source/sourceFrameIntent.mjs": {
+          "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+          "bytes": 4942
+        },
+        "modules/engine/source/sourceProjectionIntent.mjs": {
+          "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+          "bytes": 3592
+        }
+      },
+      "preparedFileCount": 74,
+      "bootstrapSha256": "92bf651cb26a0ced09b91bb8bd2734bc09b9795fbdfc34271828a4024eb29b5f",
+      "workerSha256": "1d8734791c7d95856abd633886438a58caa4eb093e4452eda0bb6b1a3f254725",
+      "jsSha256": "ed06b634a3e81f9a51c89f75b3d65e03b8ace1fc483900ea2858eae8eff970a4",
+      "wasmSha256": "bc8895ceb123e33aad68c8a1cf6322b5c0ccef9bfb129207defe1b8a5a7c893a"
+    },
+    "static/mechanical-native/": {
+      "path": ".build/mechanical-native-assets/component.json",
+      "sha256": "8a1fa6515df0227aed66d71291c641f8a569e65e35a3d38d9f6e1d06f0e167ea",
+      "bytes": 29774,
+      "emittedFiles": {
+        "mechanical-native-occ-portable.js": {
+          "sha256": "04fc776837d6e87e7ddf9c31b66428ec191f3120600fd0794c86a5fd533c0a7b",
+          "bytes": 316398
+        },
+        "mechanical-native-occ.wasm": {
+          "sha256": "688c9d11ececf67d5187445491b4269647d810528e37161bcd7e676bc8d9125c",
+          "bytes": 36199368
+        },
+        "modules/drawing/linkedPartDrawingDefinition.mjs": {
+          "sha256": "f91cb3ff6cfdf429451d5e10e0dde9596a0c7150be62192dcf8cca9cef4af13c",
+          "bytes": 21461
+        },
+        "modules/engine/extrusion/articulatedRegionSegments.mjs": {
+          "sha256": "77b589efda2c0cd1bb0c66bb6ace5b44d9e0da3f3b39c4a4cc698bce6c2e28c8",
+          "bytes": 3807
+        },
+        "modules/engine/extrusion/authoredArcBranch.mjs": {
+          "sha256": "b1afd4e30c3d10446433b1aaf15e0db3e89a76f555ad91d96b0ed1c29863f57c",
+          "bytes": 4650
+        },
+        "modules/engine/extrusion/circularArrangementDescriptor.mjs": {
+          "sha256": "67bb74a4f7c1508072a8465dacbd26df354005ebb1c343d81028140f77d6c90d",
+          "bytes": 10609
+        },
+        "modules/engine/extrusion/circularTopology.mjs": {
+          "sha256": "95a0627c0c5ed9695bcdd98e3a7169f8bb07fc3a43981483e4b742b39e0cda10",
+          "bytes": 2413
+        },
+        "modules/engine/extrusion/exactExternalVertexContact.mjs": {
+          "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+          "bytes": 1780
+        },
+        "modules/engine/extrusion/isolatedOpenProfileComponents.mjs": {
+          "sha256": "5360137d9c39d46367964a8a8c4c08af1e76a7060258cdbb8897ce74eff77824",
+          "bytes": 5600
+        },
+        "modules/engine/extrusion/profileConstructorSourcePreparation.mjs": {
+          "sha256": "50779ae952a05f080d9b75247438ea3431fe903e09998b83ebdab5c84d26c9ea",
+          "bytes": 3340
+        },
+        "modules/engine/extrusion/rectangularArrangement.mjs": {
+          "sha256": "bbad81ee566850606e68f217d7ee0c6c6bb05aec54cd2377e295b74407685e22",
+          "bytes": 7408
+        },
+        "modules/engine/extrusion/rectangularContactArrangement.mjs": {
+          "sha256": "83724b03c3fcfbec81eae5cc82c789365d306cd6e1a1497d7e1145ab2c33fa1c",
+          "bytes": 7209
+        },
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+          "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+          "bytes": 12003
+        },
+        "modules/engine/extrusion/selectedRegionDescriptor.mjs": {
+          "sha256": "5eccdb30e733e9c263aa9459affb81907ecae580c89a980032d295a15c6a010a",
+          "bytes": 11412
+        },
+        "modules/engine/extrusion/selectedSketchProfile.mjs": {
+          "sha256": "d8fd5999c955c10d50bf5b5fa76ac33a1a9513d289cf263640116533c36796cf",
+          "bytes": 18042
+        },
+        "modules/engine/extrusion/simplePolygon.mjs": {
+          "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+          "bytes": 5128
+        },
+        "modules/engine/metadata/authoredFeatureIdentity.mjs": {
+          "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+          "bytes": 1202
+        },
+        "modules/engine/mount/analyticProfilePlan.mjs": {
+          "sha256": "57826d7f9ee07a8f13a434aec019e2a91bc49b29a5fc6c6ed70f9cf0386604ca",
+          "bytes": 10014
+        },
+        "modules/engine/mount/analyticProfileWorldBudget.mjs": {
+          "sha256": "377b39e3667c94bf7490faa37c4e08c7022b87c26abfea7dcbaaa8a12293b0ab",
+          "bytes": 3717
+        },
+        "modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+          "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+          "bytes": 4203
+        },
+        "modules/engine/mount/booleanSelectionClaims.mjs": {
+          "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+          "bytes": 9413
+        },
+        "modules/engine/mount/circularArrangementPlan.mjs": {
+          "sha256": "9a3e26d75d56ed391c5154116d860d103838a6f0df550a48fe882d3d370e70d4",
+          "bytes": 6932
+        },
+        "modules/engine/mount/countersinkFacts.mjs": {
+          "sha256": "8a5303f993e2f283b9813cd2c7cb090d74676c777b853d01e9fcb391e99c0a31",
+          "bytes": 16822
+        },
+        "modules/engine/mount/countersinkNativeCalls.mjs": {
+          "sha256": "ed30fbc1c17440092f8de0805b38c9e736a9d1c042a12adc60f7d10b6aec236c",
+          "bytes": 14988
+        },
+        "modules/engine/mount/cylinderCutWitness.mjs": {
+          "sha256": "b1d384bb17e005b9d1a37e449503dac7bf23c9f55079aea2415ae36674cd1bc1",
+          "bytes": 8354
+        },
+        "modules/engine/mount/drawingReferenceFacts.mjs": {
+          "sha256": "b305b857674e0afcbc0ad52279583cda042e5002750cc8b13da034a36feccbc5",
+          "bytes": 18786
+        },
+        "modules/engine/mount/drawingRequirementFacts.mjs": {
+          "sha256": "8d54b5881b9d0613bfa98ea5598c434d2599744b8280b34d2b52bc6fcf15f106",
+          "bytes": 11873
+        },
+        "modules/engine/mount/drawingRequirementProtocol.mjs": {
+          "sha256": "42ea997b48d7cf673a4acc842086b6d09aebfd96273b2499ed35e5a6fd6338f4",
+          "bytes": 4840
+        },
+        "modules/engine/mount/exactMeshVolume.mjs": {
+          "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+          "bytes": 4760
+        },
+        "modules/engine/mount/finiteCurveCertificateArithmetic.mjs": {
+          "sha256": "75fb5aeeb7c112027d0002b54623f2103bd0e351df15fd2051ce5deddccbd5b5",
+          "bytes": 4786
+        },
+        "modules/engine/mount/manufacturingMeshRecord.mjs": {
+          "sha256": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+          "bytes": 3505
+        },
+        "modules/engine/mount/mechanical-native-worker.js": {
+          "sha256": "2d944588adb81901cf8befc498a012c7e79238d497f7c144ad69cf49e415b268",
+          "bytes": 505427
+        },
+        "modules/engine/mount/nativePlanarAttachmentFacts.mjs": {
+          "sha256": "d4053f1a622bd789258034a5b2e296104960d790d8a7e7925d8ed4c2e3c6d55d",
+          "bytes": 4799
+        },
+        "modules/engine/mount/orthographicAnalyticRecord.mjs": {
+          "sha256": "8454077795e4c92099523435ed4a32cc86c1264b80d881e590667adc8fd517ae",
+          "bytes": 7869
+        },
+        "modules/engine/mount/ownedBooleanContract.mjs": {
+          "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+          "bytes": 7736
+        },
+        "modules/engine/mount/ownedBoreAnnotationProtocol.mjs": {
+          "sha256": "845ef094746223612d89bdf736c70af84418f3ce21753c2d33d00b9e578071a9",
+          "bytes": 2044
+        },
+        "modules/engine/mount/ownedBoreReadProtocol.mjs": {
+          "sha256": "def65f7139ef71a9af63c49f56a6364cbc158c88a4ac05482043d10ec22214df",
+          "bytes": 3848
+        },
+        "modules/engine/mount/ownedCircularArrangementProtocol.mjs": {
+          "sha256": "e5ecb3bef8a8d4fe13dde03720837f8c4a024ac1866fe01682508b52adeaec08",
+          "bytes": 12098
+        },
+        "modules/engine/mount/ownedConicalContract.mjs": {
+          "sha256": "0be2f8c51e02ca3045b4bac4ebff80d1f87ab4f1cfbc52eb90a7553075cb5579",
+          "bytes": 8734
+        },
+        "modules/engine/mount/ownedCountersinkPlan.mjs": {
+          "sha256": "11aae7de0aa86b8746bd495cb555a9aa48cbcf541f9b56712002de0685ee7f40",
+          "bytes": 5117
+        },
+        "modules/engine/mount/ownedCountersinkProtocol.mjs": {
+          "sha256": "b264fc4ab5c0edfd216a7dcba442a2168bb35e35f442ca587b01f90a04219afa",
+          "bytes": 1478
+        },
+        "modules/engine/mount/ownedCountersinkWorker.mjs": {
+          "sha256": "28b335c5ca119c1ebf685a937c41e9189e52fa4dbd919e71da21c455beef4dfc",
+          "bytes": 20503
+        },
+        "modules/engine/mount/ownedDrawingReadProtocol.mjs": {
+          "sha256": "dad14f7b91a179612d04723f5267dc819fa8610213a23b4c162050661463ab8e",
+          "bytes": 11926
+        },
+        "modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+          "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+          "bytes": 6918
+        },
+        "modules/engine/mount/ownedLoftPlan.mjs": {
+          "sha256": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+          "bytes": 1616
+        },
+        "modules/engine/mount/ownedManufacturingMeshProtocol.mjs": {
+          "sha256": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+          "bytes": 8192
+        },
+        "modules/engine/mount/ownedMechanicalNativeCandidate.mjs": {
+          "sha256": "c4dabfc0aa713a662667b7fae1f5426956472269c14e13057c58abcfb58348b7",
+          "bytes": 1835
+        },
+        "modules/engine/mount/ownedMechanicalNativeResources.mjs": {
+          "sha256": "8e48c79d730b3e6ee5f3e6203b42c935c967d5bf6f44ff9e57ce18bc8a272945",
+          "bytes": 5313
+        },
+        "modules/engine/mount/ownedOrthographicReadProtocol.mjs": {
+          "sha256": "52ae654d5df0f593a2354b3196577804a508069b055a5c52ee0f55416f553087",
+          "bytes": 7291
+        },
+        "modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": {
+          "sha256": "9020974d40745bc35f72bc895204383a32c4cd012b85f48c0e6376ff3f2da9a8",
+          "bytes": 3806
+        },
+        "modules/engine/mount/ownedRevolvePlan.mjs": {
+          "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+          "bytes": 980
+        },
+        "modules/engine/mount/ownedStepExportProtocol.mjs": {
+          "sha256": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+          "bytes": 6517
+        },
+        "modules/engine/mount/ownedSweepPlan.mjs": {
+          "sha256": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+          "bytes": 1856
+        },
+        "modules/engine/mount/ownedThroughHolePlan.mjs": {
+          "sha256": "d45eaf266be1071d1527b6b24c93d8dfbb2d24d33ac3f53e18bdc5f2852d0046",
+          "bytes": 8850
+        },
+        "modules/engine/mount/ownedTopologyContract.mjs": {
+          "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+          "bytes": 8275
+        },
+        "modules/engine/mount/polygonProfilePlan.mjs": {
+          "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+          "bytes": 8418
+        },
+        "modules/engine/mount/prismaticBoreFacts.mjs": {
+          "sha256": "fdaea1207e54d87b85b6f45164061009574f9e5e9a422a6d2a96627966b307f5",
+          "bytes": 10475
+        },
+        "modules/engine/mount/prismSelectionIndex.mjs": {
+          "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+          "bytes": 4753
+        },
+        "modules/engine/mount/profileConstructorSourceBinding.mjs": {
+          "sha256": "b9fda8681cd04c328edd86fd8f0d8032a79e71d82c17e40f65ba18ceababea86",
+          "bytes": 4828
+        },
+        "modules/engine/mount/selectedProfilePlan.mjs": {
+          "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+          "bytes": 9190
+        },
+        "modules/engine/mount/selectionAncestryIndex.mjs": {
+          "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+          "bytes": 11394
+        },
+        "modules/engine/mount/selectionLineageIndex.mjs": {
+          "sha256": "540eeb3ca87007dc63cd8f8b6721ef9d72bd9f78b8524a46da79944b154be82f",
+          "bytes": 26085
+        },
+        "modules/engine/solid/ownedCountersinkIntent.mjs": {
+          "sha256": "73395e597aee3010dc047b0d0b4520b6f356e93ae6f33c5816d8c936c8e4ac0a",
+          "bytes": 3431
+        },
+        "modules/engine/solid/ownedHoleIntent.mjs": {
+          "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+          "bytes": 2877
+        },
+        "modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+          "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+          "bytes": 1913
+        },
+        "modules/engine/solid/ownedLoftIntent.mjs": {
+          "sha256": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+          "bytes": 6231
+        },
+        "modules/engine/solid/ownedRevolveIntent.mjs": {
+          "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+          "bytes": 3529
+        },
+        "modules/engine/solid/ownedSweepIntent.mjs": {
+          "sha256": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+          "bytes": 5194
+        },
+        "modules/engine/solid/solidBodyIdentity.mjs": {
+          "sha256": "e68c0c9bbbcfa992758576f49db3edd3af9336d58912a95dcba6deae18a67500",
+          "bytes": 352
+        },
+        "modules/engine/solid/solidIntent.mjs": {
+          "sha256": "87bc656224ccefb8ce0f9ac75927f6649285d239b394fa03af09caa05e3e5685",
+          "bytes": 4198
+        },
+        "modules/engine/solid/sweepLimits.mjs": {
+          "sha256": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13",
+          "bytes": 104
+        },
+        "modules/engine/source/sourceFrameIntent.mjs": {
+          "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+          "bytes": 4942
+        },
+        "modules/engine/source/sourceProjectionIntent.mjs": {
+          "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+          "bytes": 3592
+        },
+        "modules/workbenches/modeler/features/extrude/authoredRegions.mjs": {
+          "sha256": "bf524fdab34d6ead706a8f6f5a3d89843dfd40aae873c74294efbe8da5e42f19",
+          "bytes": 3286
+        },
+        "modules/workbenches/modeler/features/extrude/profilePlan.mjs": {
+          "sha256": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237",
+          "bytes": 6134
+        }
+      },
+      "preparedFileCount": 101,
+      "bootstrapSha256": "92bf651cb26a0ced09b91bb8bd2734bc09b9795fbdfc34271828a4024eb29b5f",
+      "workerSha256": "2d944588adb81901cf8befc498a012c7e79238d497f7c144ad69cf49e415b268",
+      "jsSha256": "04fc776837d6e87e7ddf9c31b66428ec191f3120600fd0794c86a5fd533c0a7b",
+      "wasmSha256": "688c9d11ececf67d5187445491b4269647d810528e37161bcd7e676bc8d9125c"
+    },
+    "static/finite-curve-support/": {
+      "path": ".build/finite-curve-support-assets/component.json",
+      "sha256": "c8c0ce7db490ceac5f971e831d492d15967e5f0dbe287295d49a43be1e210b11",
+      "bytes": 4396,
+      "emittedFiles": {
+        "finite-curve-support-occ-portable.js": {
+          "sha256": "479f0620b6dfe131dac05131a3798fc533e05a2bd11e8074ef240284f61bbe86",
+          "bytes": 316530
+        },
+        "finite-curve-support-occ.wasm": {
+          "sha256": "746da919c8457e98daa821fae98c62c0a6c9ad1acafd1c3d5412e0207d6b6325",
+          "bytes": 36216184
+        },
+        "modules/engine/mount/finite-curve-support-worker.js": {
+          "sha256": "d414e57bf121ae205e3887143fc822d0ff2a720a392f2d3b89dab958c3bab0e1",
+          "bytes": 505559
+        },
+        "modules/engine/mount/finiteCurveNativeCalls.mjs": {
+          "sha256": "8f5199ae1f2d91ee72837f688029221d8af91b148f7f309ef3e797a424bc2ea1",
+          "bytes": 14257
+        },
+        "modules/engine/mount/finiteCurveReadProtocol.mjs": {
+          "sha256": "05b7fb043ce313321f7c72865705b3023ecc8aa87eec518ee247df49a743ac3c",
+          "bytes": 10832
+        }
+      },
+      "preparedFileCount": 5,
+      "bootstrapSha256": "92bf651cb26a0ced09b91bb8bd2734bc09b9795fbdfc34271828a4024eb29b5f",
+      "workerSha256": "d414e57bf121ae205e3887143fc822d0ff2a720a392f2d3b89dab958c3bab0e1",
+      "jsSha256": "479f0620b6dfe131dac05131a3798fc533e05a2bd11e8074ef240284f61bbe86",
+      "wasmSha256": "746da919c8457e98daa821fae98c62c0a6c9ad1acafd1c3d5412e0207d6b6325"
+    },
+    "static/analytic-profile/": {
+      "path": ".build/analytic-profile-assets/component.json",
+      "sha256": "3d4f35a4135f3853d9d6841a73a1146216bfcb5cd64e70ff710ae804b223c54d",
+      "bytes": 7507,
+      "emittedFiles": {
+        "analytic-profile-occ-portable.js": {
+          "sha256": "717767d46f3f260b1458d702e1e61d2a1a90f6e3c48400ac5943a11db577c484",
+          "bytes": 316524
+        },
+        "analytic-profile-occ.wasm": {
+          "sha256": "47c9d4c96b61ba1a2792c72ccf1b7f2e22d5faa5b50948db144032436edeba25",
+          "bytes": 36245632
+        },
+        "modules/engine/extrusion/authoredArcBranch.mjs": {
+          "sha256": "b1afd4e30c3d10446433b1aaf15e0db3e89a76f555ad91d96b0ed1c29863f57c",
+          "bytes": 4650
+        },
+        "modules/engine/extrusion/exactExternalVertexContact.mjs": {
+          "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+          "bytes": 1780
+        },
+        "modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+          "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+          "bytes": 12003
+        },
+        "modules/engine/extrusion/simplePolygon.mjs": {
+          "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+          "bytes": 5128
+        },
+        "modules/engine/metadata/authoredFeatureIdentity.mjs": {
+          "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+          "bytes": 1202
+        },
+        "modules/engine/mount/analytic-profile-worker.js": {
+          "sha256": "28511423ff960e5236e2094b52beea6f1d5dc5468bbca7751ddb38dc4c510933",
+          "bytes": 505553
+        },
+        "modules/engine/mount/analyticProfileNativeContract.mjs": {
+          "sha256": "a6a6def71ee131ca38041b932c60ce6a317d578c98aba27ff45b4f4b8500dcaf",
+          "bytes": 717
+        },
+        "modules/engine/mount/analyticProfilePlan.mjs": {
+          "sha256": "57826d7f9ee07a8f13a434aec019e2a91bc49b29a5fc6c6ed70f9cf0386604ca",
+          "bytes": 10014
+        },
+        "modules/engine/mount/analyticProfileProvenance.mjs": {
+          "sha256": "d8ec15a83a4aae4d047d9f76ab4b98723cbc83e0190611dd782da713c6788a56",
+          "bytes": 4794
+        },
+        "modules/engine/mount/analyticProfileWorldBudget.mjs": {
+          "sha256": "377b39e3667c94bf7490faa37c4e08c7022b87c26abfea7dcbaaa8a12293b0ab",
+          "bytes": 3717
+        },
+        "modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+          "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+          "bytes": 4203
+        },
+        "modules/engine/mount/exactMeshVolume.mjs": {
+          "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+          "bytes": 4760
+        },
+        "modules/engine/mount/finiteCurveCertificateArithmetic.mjs": {
+          "sha256": "75fb5aeeb7c112027d0002b54623f2103bd0e351df15fd2051ce5deddccbd5b5",
+          "bytes": 4786
+        },
+        "modules/engine/mount/manufacturingMeshRecord.mjs": {
+          "sha256": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+          "bytes": 3505
+        },
+        "modules/engine/mount/ownedAnalyticProfileWorker.mjs": {
+          "sha256": "d35434d88d849fe494a07c0e412836f1def96fdb32036af9057e7d8b7fe9e9fc",
+          "bytes": 7934
+        },
+        "modules/engine/mount/ownedManufacturingMeshProtocol.mjs": {
+          "sha256": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+          "bytes": 8192
+        },
+        "modules/engine/mount/ownedStepExportProtocol.mjs": {
+          "sha256": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+          "bytes": 6517
+        },
+        "modules/engine/mount/ownedTopologyContract.mjs": {
+          "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+          "bytes": 8275
+        },
+        "modules/engine/mount/polygonProfilePlan.mjs": {
+          "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+          "bytes": 8418
+        },
+        "modules/engine/mount/prismSelectionIndex.mjs": {
+          "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+          "bytes": 4753
+        },
+        "modules/engine/mount/selectedProfilePlan.mjs": {
+          "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+          "bytes": 9190
+        },
+        "modules/engine/source/sourceFrameIntent.mjs": {
+          "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+          "bytes": 4942
+        },
+        "modules/engine/source/sourceProjectionIntent.mjs": {
+          "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+          "bytes": 3592
+        }
+      },
+      "preparedFileCount": 25,
+      "bootstrapSha256": "92bf651cb26a0ced09b91bb8bd2734bc09b9795fbdfc34271828a4024eb29b5f",
+      "workerSha256": "28511423ff960e5236e2094b52beea6f1d5dc5468bbca7751ddb38dc4c510933",
+      "jsSha256": "717767d46f3f260b1458d702e1e61d2a1a90f6e3c48400ac5943a11db577c484",
+      "wasmSha256": "47c9d4c96b61ba1a2792c72ccf1b7f2e22d5faa5b50948db144032436edeba25"
+    }
+  },
+  "files": {
+    "/desktop-apps.js": {
+      "sha256": "86b40a377598227ef3310eeb22fc5d2ed9f94c7bfb4db27545caf4b86f0df73f",
+      "bytes": 23887
+    },
+    "/storage/browser/account-context.mjs": {
+      "sha256": "dd19562a1a13e2ac79142b9cb7a2cf0a3cba77ff03fa5407c0ced4e5c6a518e9",
+      "bytes": 1308
+    },
+    "/storage/browser/mirror.mjs": {
+      "sha256": "512a5a3a68c30a9ef60d0b0f0f2ee095781c872085ad4cb2320e49c18b6bbd38",
+      "bytes": 64729
+    },
+    "/storage/browser/verified-content.mjs": {
+      "sha256": "ac1803f4c19b0758fcab53034d800d332e19ccbe8f9e6fb0bb145d6ce10d5ec6",
+      "bytes": 5653
+    },
+    "index-webos.html": {
+      "sha256": "fd42181f1f5e0630d06bacc5362a404f927c179cbed3b1eea8aa1e752da59e80",
+      "bytes": 760
+    },
+    "static/adaptive-metrology/adaptive-metrology-occ-portable.js": {
+      "sha256": "ed06b634a3e81f9a51c89f75b3d65e03b8ace1fc483900ea2858eae8eff970a4",
+      "bytes": 311464
+    },
+    "static/adaptive-metrology/adaptive-metrology-occ.wasm": {
+      "sha256": "bc8895ceb123e33aad68c8a1cf6322b5c0ccef9bfb129207defe1b8a5a7c893a",
+      "bytes": 35232229
+    },
+    "static/adaptive-metrology/modules/engine/extrusion/exactExternalVertexContact.mjs": {
+      "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+      "bytes": 1780
+    },
+    "static/adaptive-metrology/modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+      "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+      "bytes": 12003
+    },
+    "static/adaptive-metrology/modules/engine/extrusion/simplePolygon.mjs": {
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+      "bytes": 5128
+    },
+    "static/adaptive-metrology/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/adaptive-metrology/modules/engine/mount/adaptive-metrology-worker.js": {
+      "sha256": "1d8734791c7d95856abd633886438a58caa4eb093e4452eda0bb6b1a3f254725",
+      "bytes": 500493
+    },
+    "static/adaptive-metrology/modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+      "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+      "bytes": 4203
+    },
+    "static/adaptive-metrology/modules/engine/mount/booleanSelectionClaims.mjs": {
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+      "bytes": 9413
+    },
+    "static/adaptive-metrology/modules/engine/mount/exactMeshVolume.mjs": {
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+      "bytes": 4760
+    },
+    "static/adaptive-metrology/modules/engine/mount/ownedBooleanContract.mjs": {
+      "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+      "bytes": 7736
+    },
+    "static/adaptive-metrology/modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+      "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+      "bytes": 6918
+    },
+    "static/adaptive-metrology/modules/engine/mount/ownedLoftPlan.mjs": {
+      "sha256": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+      "bytes": 1616
+    },
+    "static/adaptive-metrology/modules/engine/mount/ownedRevolvePlan.mjs": {
+      "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+      "bytes": 980
+    },
+    "static/adaptive-metrology/modules/engine/mount/ownedSweepPlan.mjs": {
+      "sha256": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+      "bytes": 1856
+    },
+    "static/adaptive-metrology/modules/engine/mount/ownedThroughHolePlan.mjs": {
+      "sha256": "d45eaf266be1071d1527b6b24c93d8dfbb2d24d33ac3f53e18bdc5f2852d0046",
+      "bytes": 8850
+    },
+    "static/adaptive-metrology/modules/engine/mount/ownedTopologyContract.mjs": {
+      "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+      "bytes": 8275
+    },
+    "static/adaptive-metrology/modules/engine/mount/polygonProfilePlan.mjs": {
+      "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+      "bytes": 8418
+    },
+    "static/adaptive-metrology/modules/engine/mount/prismSelectionIndex.mjs": {
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+      "bytes": 4753
+    },
+    "static/adaptive-metrology/modules/engine/mount/selectedProfilePlan.mjs": {
+      "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+      "bytes": 9190
+    },
+    "static/adaptive-metrology/modules/engine/mount/selectionAncestryIndex.mjs": {
+      "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+      "bytes": 11394
+    },
+    "static/adaptive-metrology/modules/engine/mount/selectionLineageIndex.mjs": {
+      "sha256": "540eeb3ca87007dc63cd8f8b6721ef9d72bd9f78b8524a46da79944b154be82f",
+      "bytes": 26085
+    },
+    "static/adaptive-metrology/modules/engine/solid/ownedHoleIntent.mjs": {
+      "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+      "bytes": 2877
+    },
+    "static/adaptive-metrology/modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+      "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+      "bytes": 1913
+    },
+    "static/adaptive-metrology/modules/engine/solid/ownedLoftIntent.mjs": {
+      "sha256": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+      "bytes": 6231
+    },
+    "static/adaptive-metrology/modules/engine/solid/ownedRevolveIntent.mjs": {
+      "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+      "bytes": 3529
+    },
+    "static/adaptive-metrology/modules/engine/solid/ownedSweepIntent.mjs": {
+      "sha256": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+      "bytes": 5194
+    },
+    "static/adaptive-metrology/modules/engine/solid/solidBodyIdentity.mjs": {
+      "sha256": "e68c0c9bbbcfa992758576f49db3edd3af9336d58912a95dcba6deae18a67500",
+      "bytes": 352
+    },
+    "static/adaptive-metrology/modules/engine/solid/solidIntent.mjs": {
+      "sha256": "87bc656224ccefb8ce0f9ac75927f6649285d239b394fa03af09caa05e3e5685",
+      "bytes": 4198
+    },
+    "static/adaptive-metrology/modules/engine/solid/sweepLimits.mjs": {
+      "sha256": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13",
+      "bytes": 104
+    },
+    "static/adaptive-metrology/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/adaptive-metrology/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/analytic-profile/analytic-profile-occ-portable.js": {
+      "sha256": "717767d46f3f260b1458d702e1e61d2a1a90f6e3c48400ac5943a11db577c484",
+      "bytes": 316524
+    },
+    "static/analytic-profile/analytic-profile-occ.wasm": {
+      "sha256": "47c9d4c96b61ba1a2792c72ccf1b7f2e22d5faa5b50948db144032436edeba25",
+      "bytes": 36245632
+    },
+    "static/analytic-profile/modules/engine/extrusion/authoredArcBranch.mjs": {
+      "sha256": "b1afd4e30c3d10446433b1aaf15e0db3e89a76f555ad91d96b0ed1c29863f57c",
+      "bytes": 4650
+    },
+    "static/analytic-profile/modules/engine/extrusion/exactExternalVertexContact.mjs": {
+      "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+      "bytes": 1780
+    },
+    "static/analytic-profile/modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+      "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+      "bytes": 12003
+    },
+    "static/analytic-profile/modules/engine/extrusion/simplePolygon.mjs": {
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+      "bytes": 5128
+    },
+    "static/analytic-profile/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/analytic-profile/modules/engine/mount/analytic-profile-worker.js": {
+      "sha256": "28511423ff960e5236e2094b52beea6f1d5dc5468bbca7751ddb38dc4c510933",
+      "bytes": 505553
+    },
+    "static/analytic-profile/modules/engine/mount/analyticProfileNativeContract.mjs": {
+      "sha256": "a6a6def71ee131ca38041b932c60ce6a317d578c98aba27ff45b4f4b8500dcaf",
+      "bytes": 717
+    },
+    "static/analytic-profile/modules/engine/mount/analyticProfilePlan.mjs": {
+      "sha256": "57826d7f9ee07a8f13a434aec019e2a91bc49b29a5fc6c6ed70f9cf0386604ca",
+      "bytes": 10014
+    },
+    "static/analytic-profile/modules/engine/mount/analyticProfileProvenance.mjs": {
+      "sha256": "d8ec15a83a4aae4d047d9f76ab4b98723cbc83e0190611dd782da713c6788a56",
+      "bytes": 4794
+    },
+    "static/analytic-profile/modules/engine/mount/analyticProfileWorldBudget.mjs": {
+      "sha256": "377b39e3667c94bf7490faa37c4e08c7022b87c26abfea7dcbaaa8a12293b0ab",
+      "bytes": 3717
+    },
+    "static/analytic-profile/modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+      "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+      "bytes": 4203
+    },
+    "static/analytic-profile/modules/engine/mount/exactMeshVolume.mjs": {
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+      "bytes": 4760
+    },
+    "static/analytic-profile/modules/engine/mount/finiteCurveCertificateArithmetic.mjs": {
+      "sha256": "75fb5aeeb7c112027d0002b54623f2103bd0e351df15fd2051ce5deddccbd5b5",
+      "bytes": 4786
+    },
+    "static/analytic-profile/modules/engine/mount/manufacturingMeshRecord.mjs": {
+      "sha256": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+      "bytes": 3505
+    },
+    "static/analytic-profile/modules/engine/mount/ownedAnalyticProfileWorker.mjs": {
+      "sha256": "d35434d88d849fe494a07c0e412836f1def96fdb32036af9057e7d8b7fe9e9fc",
+      "bytes": 7934
+    },
+    "static/analytic-profile/modules/engine/mount/ownedManufacturingMeshProtocol.mjs": {
+      "sha256": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+      "bytes": 8192
+    },
+    "static/analytic-profile/modules/engine/mount/ownedStepExportProtocol.mjs": {
+      "sha256": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+      "bytes": 6517
+    },
+    "static/analytic-profile/modules/engine/mount/ownedTopologyContract.mjs": {
+      "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+      "bytes": 8275
+    },
+    "static/analytic-profile/modules/engine/mount/polygonProfilePlan.mjs": {
+      "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+      "bytes": 8418
+    },
+    "static/analytic-profile/modules/engine/mount/prismSelectionIndex.mjs": {
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+      "bytes": 4753
+    },
+    "static/analytic-profile/modules/engine/mount/selectedProfilePlan.mjs": {
+      "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+      "bytes": 9190
+    },
+    "static/analytic-profile/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/analytic-profile/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/boolean-history/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/boolean-history/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/boolean-history/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/circular/circular-occ-portable.js": {
+      "sha256": "9789a61709dc680cce64dfa29030a3862ee636319594bdc839c0ed92e9d3571b",
+      "bytes": 315975
+    },
+    "static/circular/circular-occ.wasm": {
+      "sha256": "707facb3d09aa4f84d7e0d2690141ceaf90315d2f69d110f9f763f52dc192649",
+      "bytes": 36159052
+    },
+    "static/circular/modules/drawing/linkedPartDrawingDefinition.mjs": {
+      "sha256": "f91cb3ff6cfdf429451d5e10e0dde9596a0c7150be62192dcf8cca9cef4af13c",
+      "bytes": 21461
+    },
+    "static/circular/modules/engine/extrusion/articulatedRegionSegments.mjs": {
+      "sha256": "77b589efda2c0cd1bb0c66bb6ace5b44d9e0da3f3b39c4a4cc698bce6c2e28c8",
+      "bytes": 3807
+    },
+    "static/circular/modules/engine/extrusion/circularArrangementDescriptor.mjs": {
+      "sha256": "67bb74a4f7c1508072a8465dacbd26df354005ebb1c343d81028140f77d6c90d",
+      "bytes": 10609
+    },
+    "static/circular/modules/engine/extrusion/circularTopology.mjs": {
+      "sha256": "95a0627c0c5ed9695bcdd98e3a7169f8bb07fc3a43981483e4b742b39e0cda10",
+      "bytes": 2413
+    },
+    "static/circular/modules/engine/extrusion/exactExternalVertexContact.mjs": {
+      "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+      "bytes": 1780
+    },
+    "static/circular/modules/engine/extrusion/isolatedOpenProfileComponents.mjs": {
+      "sha256": "5360137d9c39d46367964a8a8c4c08af1e76a7060258cdbb8897ce74eff77824",
+      "bytes": 5600
+    },
+    "static/circular/modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+      "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+      "bytes": 12003
+    },
+    "static/circular/modules/engine/extrusion/selectedRegionDescriptor.mjs": {
+      "sha256": "5eccdb30e733e9c263aa9459affb81907ecae580c89a980032d295a15c6a010a",
+      "bytes": 11412
+    },
+    "static/circular/modules/engine/extrusion/simplePolygon.mjs": {
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+      "bytes": 5128
+    },
+    "static/circular/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/circular/modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+      "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+      "bytes": 4203
+    },
+    "static/circular/modules/engine/mount/booleanSelectionClaims.mjs": {
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+      "bytes": 9413
+    },
+    "static/circular/modules/engine/mount/boxSelectionIndex.mjs": {
+      "sha256": "1561afacf78e048c59956c4b6d5b03a2114a47d9ac05fe9ad0701bc08ed320db",
+      "bytes": 2557
+    },
+    "static/circular/modules/engine/mount/circular-worker.js": {
+      "sha256": "4d9039b9c977f7c22ea70b3e0d2cbc981a65a5db78bffe7672f37c4580f92f47",
+      "bytes": 505004
+    },
+    "static/circular/modules/engine/mount/circularArrangementPlan.mjs": {
+      "sha256": "9a3e26d75d56ed391c5154116d860d103838a6f0df550a48fe882d3d370e70d4",
+      "bytes": 6932
+    },
+    "static/circular/modules/engine/mount/circularPrismSelectionIndex.mjs": {
+      "sha256": "51aa54e990fc9204e073d4ba75b77443daed8c01b0d684b6087756ec002b79a5",
+      "bytes": 8330
+    },
+    "static/circular/modules/engine/mount/cylinderCutWitness.mjs": {
+      "sha256": "b1d384bb17e005b9d1a37e449503dac7bf23c9f55079aea2415ae36674cd1bc1",
+      "bytes": 8354
+    },
+    "static/circular/modules/engine/mount/drawingDetailClip.mjs": {
+      "sha256": "cce1aa150886968930f66272c36fefc708452663936aaebd2758020d3b11e0b3",
+      "bytes": 10256
+    },
+    "static/circular/modules/engine/mount/drawingReferenceFacts.mjs": {
+      "sha256": "b305b857674e0afcbc0ad52279583cda042e5002750cc8b13da034a36feccbc5",
+      "bytes": 18786
+    },
+    "static/circular/modules/engine/mount/drawingRequirementFacts.mjs": {
+      "sha256": "8d54b5881b9d0613bfa98ea5598c434d2599744b8280b34d2b52bc6fcf15f106",
+      "bytes": 11873
+    },
+    "static/circular/modules/engine/mount/drawingRequirementProtocol.mjs": {
+      "sha256": "42ea997b48d7cf673a4acc842086b6d09aebfd96273b2499ed35e5a6fd6338f4",
+      "bytes": 4840
+    },
+    "static/circular/modules/engine/mount/exactMeshVolume.mjs": {
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+      "bytes": 4760
+    },
+    "static/circular/modules/engine/mount/manufacturingMeshRecord.mjs": {
+      "sha256": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+      "bytes": 3505
+    },
+    "static/circular/modules/engine/mount/nativePlanarAttachmentFacts.mjs": {
+      "sha256": "d4053f1a622bd789258034a5b2e296104960d790d8a7e7925d8ed4c2e3c6d55d",
+      "bytes": 4799
+    },
+    "static/circular/modules/engine/mount/orthographicAnalyticRecord.mjs": {
+      "sha256": "8454077795e4c92099523435ed4a32cc86c1264b80d881e590667adc8fd517ae",
+      "bytes": 7869
+    },
+    "static/circular/modules/engine/mount/ownedBooleanContract.mjs": {
+      "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+      "bytes": 7736
+    },
+    "static/circular/modules/engine/mount/ownedBoreAnnotationProtocol.mjs": {
+      "sha256": "845ef094746223612d89bdf736c70af84418f3ce21753c2d33d00b9e578071a9",
+      "bytes": 2044
+    },
+    "static/circular/modules/engine/mount/ownedBoreReadProtocol.mjs": {
+      "sha256": "def65f7139ef71a9af63c49f56a6364cbc158c88a4ac05482043d10ec22214df",
+      "bytes": 3848
+    },
+    "static/circular/modules/engine/mount/ownedCircularArrangementProtocol.mjs": {
+      "sha256": "e5ecb3bef8a8d4fe13dde03720837f8c4a024ac1866fe01682508b52adeaec08",
+      "bytes": 12098
+    },
+    "static/circular/modules/engine/mount/ownedCircularNativeContract.mjs": {
+      "sha256": "a8d05c013cb55ffc0f297f9ca805e617239ca63e6209ea53e374fd510df6f86f",
+      "bytes": 379
+    },
+    "static/circular/modules/engine/mount/ownedCircularWorker.mjs": {
+      "sha256": "cfd8db103e4207c582a98744f585577fbb8032e4ee2a90a0b28853a33ae9fe96",
+      "bytes": 12635
+    },
+    "static/circular/modules/engine/mount/ownedDrawingDerivedProtocol.mjs": {
+      "sha256": "7e485a074a8d29ad35ce4fb4ade9677981f94be7c8d73fb487d6952d34042dfc",
+      "bytes": 1492
+    },
+    "static/circular/modules/engine/mount/ownedDrawingReadProtocol.mjs": {
+      "sha256": "dad14f7b91a179612d04723f5267dc819fa8610213a23b4c162050661463ab8e",
+      "bytes": 11926
+    },
+    "static/circular/modules/engine/mount/ownedDrawingSectionProtocol.mjs": {
+      "sha256": "8376fdf38823595a89655be33fbce9c6bd3e983815fa02787092562f25ceb23d",
+      "bytes": 3781
+    },
+    "static/circular/modules/engine/mount/ownedDrawingSectionWorker.mjs": {
+      "sha256": "44f260430e697ef16dd495daf5320292debb82dc7728da658a8c99820f0bb703",
+      "bytes": 18134
+    },
+    "static/circular/modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+      "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+      "bytes": 6918
+    },
+    "static/circular/modules/engine/mount/ownedLoftPlan.mjs": {
+      "sha256": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+      "bytes": 1616
+    },
+    "static/circular/modules/engine/mount/ownedManufacturingMeshProtocol.mjs": {
+      "sha256": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+      "bytes": 8192
+    },
+    "static/circular/modules/engine/mount/ownedOrthographicReadProtocol.mjs": {
+      "sha256": "52ae654d5df0f593a2354b3196577804a508069b055a5c52ee0f55416f553087",
+      "bytes": 7291
+    },
+    "static/circular/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": {
+      "sha256": "9020974d40745bc35f72bc895204383a32c4cd012b85f48c0e6376ff3f2da9a8",
+      "bytes": 3806
+    },
+    "static/circular/modules/engine/mount/ownedRevolvePlan.mjs": {
+      "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+      "bytes": 980
+    },
+    "static/circular/modules/engine/mount/ownedShellNativeContract.mjs": {
+      "sha256": "c92ba75b7f150bbb949d09170409358af375c81853184df793ddb713514f21af",
+      "bytes": 6053
+    },
+    "static/circular/modules/engine/mount/ownedShellProtocol.mjs": {
+      "sha256": "b733fba75855db5d5a923cd42b61b3eefa761f8f79c4b5f0dbc286553eb5ce3d",
+      "bytes": 4931
+    },
+    "static/circular/modules/engine/mount/ownedShellWorker.mjs": {
+      "sha256": "b27bad4cb61f584067c734176fd1a76bf63937f2a5d38f5cf9a68838c9785c3c",
+      "bytes": 5842
+    },
+    "static/circular/modules/engine/mount/ownedStepExportProtocol.mjs": {
+      "sha256": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+      "bytes": 6517
+    },
+    "static/circular/modules/engine/mount/ownedSweepPlan.mjs": {
+      "sha256": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+      "bytes": 1856
+    },
+    "static/circular/modules/engine/mount/ownedThroughHolePlan.mjs": {
+      "sha256": "d45eaf266be1071d1527b6b24c93d8dfbb2d24d33ac3f53e18bdc5f2852d0046",
+      "bytes": 8850
+    },
+    "static/circular/modules/engine/mount/ownedTopologyContract.mjs": {
+      "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+      "bytes": 8275
+    },
+    "static/circular/modules/engine/mount/polygonProfilePlan.mjs": {
+      "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+      "bytes": 8418
+    },
+    "static/circular/modules/engine/mount/prismSelectionIndex.mjs": {
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+      "bytes": 4753
+    },
+    "static/circular/modules/engine/mount/prismaticBoreFacts.mjs": {
+      "sha256": "fdaea1207e54d87b85b6f45164061009574f9e5e9a422a6d2a96627966b307f5",
+      "bytes": 10475
+    },
+    "static/circular/modules/engine/mount/selectedProfilePlan.mjs": {
+      "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+      "bytes": 9190
+    },
+    "static/circular/modules/engine/mount/selectionAncestryIndex.mjs": {
+      "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+      "bytes": 11394
+    },
+    "static/circular/modules/engine/mount/selectionLineageIndex.mjs": {
+      "sha256": "540eeb3ca87007dc63cd8f8b6721ef9d72bd9f78b8524a46da79944b154be82f",
+      "bytes": 26085
+    },
+    "static/circular/modules/engine/solid/ownedHoleIntent.mjs": {
+      "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+      "bytes": 2877
+    },
+    "static/circular/modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+      "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+      "bytes": 1913
+    },
+    "static/circular/modules/engine/solid/ownedLoftIntent.mjs": {
+      "sha256": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+      "bytes": 6231
+    },
+    "static/circular/modules/engine/solid/ownedRevolveIntent.mjs": {
+      "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+      "bytes": 3529
+    },
+    "static/circular/modules/engine/solid/ownedSweepIntent.mjs": {
+      "sha256": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+      "bytes": 5194
+    },
+    "static/circular/modules/engine/solid/solidBodyIdentity.mjs": {
+      "sha256": "e68c0c9bbbcfa992758576f49db3edd3af9336d58912a95dcba6deae18a67500",
+      "bytes": 352
+    },
+    "static/circular/modules/engine/solid/solidIntent.mjs": {
+      "sha256": "87bc656224ccefb8ce0f9ac75927f6649285d239b394fa03af09caa05e3e5685",
+      "bytes": 4198
+    },
+    "static/circular/modules/engine/solid/sweepLimits.mjs": {
+      "sha256": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13",
+      "bytes": 104
+    },
+    "static/circular/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/circular/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/controlled-3mf.17a71316c694c0ba8714.js": {
+      "sha256": "0e16a023a6996c45725d11049d070924a601b564dfc0d933ebd153be1d07bc14",
+      "bytes": 248046
+    },
+    "static/finite-curve-support/finite-curve-support-occ-portable.js": {
+      "sha256": "479f0620b6dfe131dac05131a3798fc533e05a2bd11e8074ef240284f61bbe86",
+      "bytes": 316530
+    },
+    "static/finite-curve-support/finite-curve-support-occ.wasm": {
+      "sha256": "746da919c8457e98daa821fae98c62c0a6c9ad1acafd1c3d5412e0207d6b6325",
+      "bytes": 36216184
+    },
+    "static/finite-curve-support/modules/engine/mount/finite-curve-support-worker.js": {
+      "sha256": "d414e57bf121ae205e3887143fc822d0ff2a720a392f2d3b89dab958c3bab0e1",
+      "bytes": 505559
+    },
+    "static/finite-curve-support/modules/engine/mount/finiteCurveNativeCalls.mjs": {
+      "sha256": "8f5199ae1f2d91ee72837f688029221d8af91b148f7f309ef3e797a424bc2ea1",
+      "bytes": 14257
+    },
+    "static/finite-curve-support/modules/engine/mount/finiteCurveReadProtocol.mjs": {
+      "sha256": "05b7fb043ce313321f7c72865705b3023ecc8aa87eec518ee247df49a743ac3c",
+      "bytes": 10832
+    },
+    "static/index.bundle.js": {
+      "sha256": "95792a17ac99c9976d67145dcc5bf94f8f8a681abb44d12a3fbbbed585e062f1",
+      "bytes": 38179196
+    },
+    "static/loft-profile/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/loft-profile/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/loft-profile/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/manufacturing-hash.b9be312ee7d9ee44402a.js": {
+      "sha256": "3f7cf784c31276d9cca6f700bb524fd3ecf6cf39763c686e43b5d350fdf08125",
+      "bytes": 5163
+    },
+    "static/manufacturing-mesh/manufacturing-mesh-occ-portable.js": {
+      "sha256": "32eec74e3019d9e2d767c9016f05aa3daa49441c6102423a269d67b9c7f02a08",
+      "bytes": 313745
+    },
+    "static/manufacturing-mesh/manufacturing-mesh-occ.wasm": {
+      "sha256": "abbf2aa02a6f2101c600aa1eedd20fa80ab2db206e677ca860d9c5103cdfbfcc",
+      "bytes": 36011152
+    },
+    "static/manufacturing-mesh/modules/drawing/linkedPartDrawingDefinition.mjs": {
+      "sha256": "f91cb3ff6cfdf429451d5e10e0dde9596a0c7150be62192dcf8cca9cef4af13c",
+      "bytes": 21461
+    },
+    "static/manufacturing-mesh/modules/engine/extrusion/articulatedRegionSegments.mjs": {
+      "sha256": "77b589efda2c0cd1bb0c66bb6ace5b44d9e0da3f3b39c4a4cc698bce6c2e28c8",
+      "bytes": 3807
+    },
+    "static/manufacturing-mesh/modules/engine/extrusion/exactExternalVertexContact.mjs": {
+      "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+      "bytes": 1780
+    },
+    "static/manufacturing-mesh/modules/engine/extrusion/isolatedOpenProfileComponents.mjs": {
+      "sha256": "5360137d9c39d46367964a8a8c4c08af1e76a7060258cdbb8897ce74eff77824",
+      "bytes": 5600
+    },
+    "static/manufacturing-mesh/modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+      "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+      "bytes": 12003
+    },
+    "static/manufacturing-mesh/modules/engine/extrusion/selectedRegionDescriptor.mjs": {
+      "sha256": "5eccdb30e733e9c263aa9459affb81907ecae580c89a980032d295a15c6a010a",
+      "bytes": 11412
+    },
+    "static/manufacturing-mesh/modules/engine/extrusion/simplePolygon.mjs": {
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+      "bytes": 5128
+    },
+    "static/manufacturing-mesh/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/manufacturing-mesh/modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+      "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+      "bytes": 4203
+    },
+    "static/manufacturing-mesh/modules/engine/mount/blindHoleFacts.mjs": {
+      "sha256": "3b597d00292e72ddb1a3886504d4f81c8effbda8b052791bc50edcaca8fac112",
+      "bytes": 4235
+    },
+    "static/manufacturing-mesh/modules/engine/mount/booleanSelectionClaims.mjs": {
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+      "bytes": 9413
+    },
+    "static/manufacturing-mesh/modules/engine/mount/counterboreFacts.mjs": {
+      "sha256": "4b92568c83c37e4650e85091677eeda832e5f93fbf563ca40e66e763cf3b0e8c",
+      "bytes": 11321
+    },
+    "static/manufacturing-mesh/modules/engine/mount/cylinderCutWitness.mjs": {
+      "sha256": "b1d384bb17e005b9d1a37e449503dac7bf23c9f55079aea2415ae36674cd1bc1",
+      "bytes": 8354
+    },
+    "static/manufacturing-mesh/modules/engine/mount/drawingDetailClip.mjs": {
+      "sha256": "cce1aa150886968930f66272c36fefc708452663936aaebd2758020d3b11e0b3",
+      "bytes": 10256
+    },
+    "static/manufacturing-mesh/modules/engine/mount/drawingReferenceFacts.mjs": {
+      "sha256": "b305b857674e0afcbc0ad52279583cda042e5002750cc8b13da034a36feccbc5",
+      "bytes": 18786
+    },
+    "static/manufacturing-mesh/modules/engine/mount/drawingRequirementFacts.mjs": {
+      "sha256": "8d54b5881b9d0613bfa98ea5598c434d2599744b8280b34d2b52bc6fcf15f106",
+      "bytes": 11873
+    },
+    "static/manufacturing-mesh/modules/engine/mount/drawingRequirementProtocol.mjs": {
+      "sha256": "42ea997b48d7cf673a4acc842086b6d09aebfd96273b2499ed35e5a6fd6338f4",
+      "bytes": 4840
+    },
+    "static/manufacturing-mesh/modules/engine/mount/exactMeshVolume.mjs": {
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+      "bytes": 4760
+    },
+    "static/manufacturing-mesh/modules/engine/mount/manufacturing-mesh-worker.js": {
+      "sha256": "0bf174e29f3517a172e067a830de64d76f81b080398f3196fdf497e218bc7840",
+      "bytes": 502774
+    },
+    "static/manufacturing-mesh/modules/engine/mount/manufacturingMeshRecord.mjs": {
+      "sha256": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+      "bytes": 3505
+    },
+    "static/manufacturing-mesh/modules/engine/mount/nativePlanarAttachmentFacts.mjs": {
+      "sha256": "d4053f1a622bd789258034a5b2e296104960d790d8a7e7925d8ed4c2e3c6d55d",
+      "bytes": 4799
+    },
+    "static/manufacturing-mesh/modules/engine/mount/orthographicAnalyticRecord.mjs": {
+      "sha256": "8454077795e4c92099523435ed4a32cc86c1264b80d881e590667adc8fd517ae",
+      "bytes": 7869
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedBlindHolePlan.mjs": {
+      "sha256": "61c1abb7dd487cfdc93f2dd010638920dac83a1603b7402af957480ebee787be",
+      "bytes": 3913
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedBooleanContract.mjs": {
+      "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+      "bytes": 7736
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedBoreAnnotationProtocol.mjs": {
+      "sha256": "845ef094746223612d89bdf736c70af84418f3ce21753c2d33d00b9e578071a9",
+      "bytes": 2044
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedBoreReadProtocol.mjs": {
+      "sha256": "def65f7139ef71a9af63c49f56a6364cbc158c88a4ac05482043d10ec22214df",
+      "bytes": 3848
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedCounterborePlan.mjs": {
+      "sha256": "977c1797c18e61e9496465b852ece27201e0ea9321ba62fb2496735e0365acf7",
+      "bytes": 4458
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedDrawingDerivedProtocol.mjs": {
+      "sha256": "7e485a074a8d29ad35ce4fb4ade9677981f94be7c8d73fb487d6952d34042dfc",
+      "bytes": 1492
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedDrawingReadProtocol.mjs": {
+      "sha256": "dad14f7b91a179612d04723f5267dc819fa8610213a23b4c162050661463ab8e",
+      "bytes": 11926
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedDrawingSectionProtocol.mjs": {
+      "sha256": "8376fdf38823595a89655be33fbce9c6bd3e983815fa02787092562f25ceb23d",
+      "bytes": 3781
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedDrawingSectionWorker.mjs": {
+      "sha256": "44f260430e697ef16dd495daf5320292debb82dc7728da658a8c99820f0bb703",
+      "bytes": 18134
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+      "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+      "bytes": 6918
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedLoftPlan.mjs": {
+      "sha256": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+      "bytes": 1616
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedManufacturingMeshProtocol.mjs": {
+      "sha256": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+      "bytes": 8192
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedOrthographicReadProtocol.mjs": {
+      "sha256": "52ae654d5df0f593a2354b3196577804a508069b055a5c52ee0f55416f553087",
+      "bytes": 7291
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": {
+      "sha256": "9020974d40745bc35f72bc895204383a32c4cd012b85f48c0e6376ff3f2da9a8",
+      "bytes": 3806
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedProfileExtentPlan.mjs": {
+      "sha256": "79bde288433126977863f52b11f2eed3d297b80d64399adef8d0156690cbbb70",
+      "bytes": 11165
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedProfileExtentWorker.mjs": {
+      "sha256": "77630a6b0c7814444b4387682a8949e0a6a5492880f0ed52a2580c5c26d093a8",
+      "bytes": 7826
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedRevolvePlan.mjs": {
+      "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+      "bytes": 980
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedStepExportProtocol.mjs": {
+      "sha256": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+      "bytes": 6517
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedSweepPlan.mjs": {
+      "sha256": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+      "bytes": 1856
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedThroughHolePlan.mjs": {
+      "sha256": "d45eaf266be1071d1527b6b24c93d8dfbb2d24d33ac3f53e18bdc5f2852d0046",
+      "bytes": 8850
+    },
+    "static/manufacturing-mesh/modules/engine/mount/ownedTopologyContract.mjs": {
+      "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+      "bytes": 8275
+    },
+    "static/manufacturing-mesh/modules/engine/mount/polygonProfilePlan.mjs": {
+      "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+      "bytes": 8418
+    },
+    "static/manufacturing-mesh/modules/engine/mount/prismSelectionIndex.mjs": {
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+      "bytes": 4753
+    },
+    "static/manufacturing-mesh/modules/engine/mount/prismaticBoreFacts.mjs": {
+      "sha256": "fdaea1207e54d87b85b6f45164061009574f9e5e9a422a6d2a96627966b307f5",
+      "bytes": 10475
+    },
+    "static/manufacturing-mesh/modules/engine/mount/profileExtentHolePlan.mjs": {
+      "sha256": "c2ef682505f76fcb1f29d7586feac6b2af19ac2f190d65fc22adab3fa8fcac36",
+      "bytes": 12483
+    },
+    "static/manufacturing-mesh/modules/engine/mount/profileExtentSelectionIndex.mjs": {
+      "sha256": "2233984573f6ea3435ac82b169ccfcbb2dd18f4d8dda8202606e5af3146957b9",
+      "bytes": 4068
+    },
+    "static/manufacturing-mesh/modules/engine/mount/profileMechanicalSource.mjs": {
+      "sha256": "e7e4b166ab8dbe4d22315ebba2b80b9c17c11e3799a3cb7beac54ffb33f8a799",
+      "bytes": 4138
+    },
+    "static/manufacturing-mesh/modules/engine/mount/selectedProfilePlan.mjs": {
+      "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+      "bytes": 9190
+    },
+    "static/manufacturing-mesh/modules/engine/mount/selectionAncestryIndex.mjs": {
+      "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+      "bytes": 11394
+    },
+    "static/manufacturing-mesh/modules/engine/mount/selectionLineageIndex.mjs": {
+      "sha256": "540eeb3ca87007dc63cd8f8b6721ef9d72bd9f78b8524a46da79944b154be82f",
+      "bytes": 26085
+    },
+    "static/manufacturing-mesh/modules/engine/solid/ownedBlindHoleIntent.mjs": {
+      "sha256": "42731a760fa4495322e6b7948b542b1294e08ecc259fe7565c8fba0efedd982d",
+      "bytes": 2573
+    },
+    "static/manufacturing-mesh/modules/engine/solid/ownedCounterboreIntent.mjs": {
+      "sha256": "2d21f05f10cf5d9a4d45e63c82f967d7f0026f52815f5221ae9d8419972b5ac1",
+      "bytes": 2924
+    },
+    "static/manufacturing-mesh/modules/engine/solid/ownedHoleIntent.mjs": {
+      "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+      "bytes": 2877
+    },
+    "static/manufacturing-mesh/modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+      "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+      "bytes": 1913
+    },
+    "static/manufacturing-mesh/modules/engine/solid/ownedLoftIntent.mjs": {
+      "sha256": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+      "bytes": 6231
+    },
+    "static/manufacturing-mesh/modules/engine/solid/ownedProfileExtentFeature.mjs": {
+      "sha256": "e6b9874e612354e9f8eb73d0fac4daa94c2d194d60d16d2f83a6085a83fe0802",
+      "bytes": 6769
+    },
+    "static/manufacturing-mesh/modules/engine/solid/ownedRevolveIntent.mjs": {
+      "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+      "bytes": 3529
+    },
+    "static/manufacturing-mesh/modules/engine/solid/ownedSweepIntent.mjs": {
+      "sha256": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+      "bytes": 5194
+    },
+    "static/manufacturing-mesh/modules/engine/solid/solidBodyIdentity.mjs": {
+      "sha256": "e68c0c9bbbcfa992758576f49db3edd3af9336d58912a95dcba6deae18a67500",
+      "bytes": 352
+    },
+    "static/manufacturing-mesh/modules/engine/solid/solidIntent.mjs": {
+      "sha256": "87bc656224ccefb8ce0f9ac75927f6649285d239b394fa03af09caa05e3e5685",
+      "bytes": 4198
+    },
+    "static/manufacturing-mesh/modules/engine/solid/sweepLimits.mjs": {
+      "sha256": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13",
+      "bytes": 104
+    },
+    "static/manufacturing-mesh/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/manufacturing-mesh/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/manufacturing-publication.1d38fdbdc96eb2fdcb46.js": {
+      "sha256": "416140c03f6dbb2e57954725ec29352f463c1460ea320e50964ae9f579b02b75",
+      "bytes": 76197
+    },
+    "static/mechanical-native/mechanical-native-occ-portable.js": {
+      "sha256": "04fc776837d6e87e7ddf9c31b66428ec191f3120600fd0794c86a5fd533c0a7b",
+      "bytes": 316398
+    },
+    "static/mechanical-native/mechanical-native-occ.wasm": {
+      "sha256": "688c9d11ececf67d5187445491b4269647d810528e37161bcd7e676bc8d9125c",
+      "bytes": 36199368
+    },
+    "static/mechanical-native/modules/drawing/linkedPartDrawingDefinition.mjs": {
+      "sha256": "f91cb3ff6cfdf429451d5e10e0dde9596a0c7150be62192dcf8cca9cef4af13c",
+      "bytes": 21461
+    },
+    "static/mechanical-native/modules/engine/extrusion/articulatedRegionSegments.mjs": {
+      "sha256": "77b589efda2c0cd1bb0c66bb6ace5b44d9e0da3f3b39c4a4cc698bce6c2e28c8",
+      "bytes": 3807
+    },
+    "static/mechanical-native/modules/engine/extrusion/authoredArcBranch.mjs": {
+      "sha256": "b1afd4e30c3d10446433b1aaf15e0db3e89a76f555ad91d96b0ed1c29863f57c",
+      "bytes": 4650
+    },
+    "static/mechanical-native/modules/engine/extrusion/circularArrangementDescriptor.mjs": {
+      "sha256": "67bb74a4f7c1508072a8465dacbd26df354005ebb1c343d81028140f77d6c90d",
+      "bytes": 10609
+    },
+    "static/mechanical-native/modules/engine/extrusion/circularTopology.mjs": {
+      "sha256": "95a0627c0c5ed9695bcdd98e3a7169f8bb07fc3a43981483e4b742b39e0cda10",
+      "bytes": 2413
+    },
+    "static/mechanical-native/modules/engine/extrusion/exactExternalVertexContact.mjs": {
+      "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+      "bytes": 1780
+    },
+    "static/mechanical-native/modules/engine/extrusion/isolatedOpenProfileComponents.mjs": {
+      "sha256": "5360137d9c39d46367964a8a8c4c08af1e76a7060258cdbb8897ce74eff77824",
+      "bytes": 5600
+    },
+    "static/mechanical-native/modules/engine/extrusion/profileConstructorSourcePreparation.mjs": {
+      "sha256": "50779ae952a05f080d9b75247438ea3431fe903e09998b83ebdab5c84d26c9ea",
+      "bytes": 3340
+    },
+    "static/mechanical-native/modules/engine/extrusion/rectangularArrangement.mjs": {
+      "sha256": "bbad81ee566850606e68f217d7ee0c6c6bb05aec54cd2377e295b74407685e22",
+      "bytes": 7408
+    },
+    "static/mechanical-native/modules/engine/extrusion/rectangularContactArrangement.mjs": {
+      "sha256": "83724b03c3fcfbec81eae5cc82c789365d306cd6e1a1497d7e1145ab2c33fa1c",
+      "bytes": 7209
+    },
+    "static/mechanical-native/modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+      "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+      "bytes": 12003
+    },
+    "static/mechanical-native/modules/engine/extrusion/selectedRegionDescriptor.mjs": {
+      "sha256": "5eccdb30e733e9c263aa9459affb81907ecae580c89a980032d295a15c6a010a",
+      "bytes": 11412
+    },
+    "static/mechanical-native/modules/engine/extrusion/selectedSketchProfile.mjs": {
+      "sha256": "d8fd5999c955c10d50bf5b5fa76ac33a1a9513d289cf263640116533c36796cf",
+      "bytes": 18042
+    },
+    "static/mechanical-native/modules/engine/extrusion/simplePolygon.mjs": {
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+      "bytes": 5128
+    },
+    "static/mechanical-native/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/mechanical-native/modules/engine/mount/analyticProfilePlan.mjs": {
+      "sha256": "57826d7f9ee07a8f13a434aec019e2a91bc49b29a5fc6c6ed70f9cf0386604ca",
+      "bytes": 10014
+    },
+    "static/mechanical-native/modules/engine/mount/analyticProfileWorldBudget.mjs": {
+      "sha256": "377b39e3667c94bf7490faa37c4e08c7022b87c26abfea7dcbaaa8a12293b0ab",
+      "bytes": 3717
+    },
+    "static/mechanical-native/modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+      "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+      "bytes": 4203
+    },
+    "static/mechanical-native/modules/engine/mount/booleanSelectionClaims.mjs": {
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+      "bytes": 9413
+    },
+    "static/mechanical-native/modules/engine/mount/circularArrangementPlan.mjs": {
+      "sha256": "9a3e26d75d56ed391c5154116d860d103838a6f0df550a48fe882d3d370e70d4",
+      "bytes": 6932
+    },
+    "static/mechanical-native/modules/engine/mount/countersinkFacts.mjs": {
+      "sha256": "8a5303f993e2f283b9813cd2c7cb090d74676c777b853d01e9fcb391e99c0a31",
+      "bytes": 16822
+    },
+    "static/mechanical-native/modules/engine/mount/countersinkNativeCalls.mjs": {
+      "sha256": "ed30fbc1c17440092f8de0805b38c9e736a9d1c042a12adc60f7d10b6aec236c",
+      "bytes": 14988
+    },
+    "static/mechanical-native/modules/engine/mount/cylinderCutWitness.mjs": {
+      "sha256": "b1d384bb17e005b9d1a37e449503dac7bf23c9f55079aea2415ae36674cd1bc1",
+      "bytes": 8354
+    },
+    "static/mechanical-native/modules/engine/mount/drawingReferenceFacts.mjs": {
+      "sha256": "b305b857674e0afcbc0ad52279583cda042e5002750cc8b13da034a36feccbc5",
+      "bytes": 18786
+    },
+    "static/mechanical-native/modules/engine/mount/drawingRequirementFacts.mjs": {
+      "sha256": "8d54b5881b9d0613bfa98ea5598c434d2599744b8280b34d2b52bc6fcf15f106",
+      "bytes": 11873
+    },
+    "static/mechanical-native/modules/engine/mount/drawingRequirementProtocol.mjs": {
+      "sha256": "42ea997b48d7cf673a4acc842086b6d09aebfd96273b2499ed35e5a6fd6338f4",
+      "bytes": 4840
+    },
+    "static/mechanical-native/modules/engine/mount/exactMeshVolume.mjs": {
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+      "bytes": 4760
+    },
+    "static/mechanical-native/modules/engine/mount/finiteCurveCertificateArithmetic.mjs": {
+      "sha256": "75fb5aeeb7c112027d0002b54623f2103bd0e351df15fd2051ce5deddccbd5b5",
+      "bytes": 4786
+    },
+    "static/mechanical-native/modules/engine/mount/manufacturingMeshRecord.mjs": {
+      "sha256": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+      "bytes": 3505
+    },
+    "static/mechanical-native/modules/engine/mount/mechanical-native-worker.js": {
+      "sha256": "2d944588adb81901cf8befc498a012c7e79238d497f7c144ad69cf49e415b268",
+      "bytes": 505427
+    },
+    "static/mechanical-native/modules/engine/mount/nativePlanarAttachmentFacts.mjs": {
+      "sha256": "d4053f1a622bd789258034a5b2e296104960d790d8a7e7925d8ed4c2e3c6d55d",
+      "bytes": 4799
+    },
+    "static/mechanical-native/modules/engine/mount/orthographicAnalyticRecord.mjs": {
+      "sha256": "8454077795e4c92099523435ed4a32cc86c1264b80d881e590667adc8fd517ae",
+      "bytes": 7869
+    },
+    "static/mechanical-native/modules/engine/mount/ownedBooleanContract.mjs": {
+      "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+      "bytes": 7736
+    },
+    "static/mechanical-native/modules/engine/mount/ownedBoreAnnotationProtocol.mjs": {
+      "sha256": "845ef094746223612d89bdf736c70af84418f3ce21753c2d33d00b9e578071a9",
+      "bytes": 2044
+    },
+    "static/mechanical-native/modules/engine/mount/ownedBoreReadProtocol.mjs": {
+      "sha256": "def65f7139ef71a9af63c49f56a6364cbc158c88a4ac05482043d10ec22214df",
+      "bytes": 3848
+    },
+    "static/mechanical-native/modules/engine/mount/ownedCircularArrangementProtocol.mjs": {
+      "sha256": "e5ecb3bef8a8d4fe13dde03720837f8c4a024ac1866fe01682508b52adeaec08",
+      "bytes": 12098
+    },
+    "static/mechanical-native/modules/engine/mount/ownedConicalContract.mjs": {
+      "sha256": "0be2f8c51e02ca3045b4bac4ebff80d1f87ab4f1cfbc52eb90a7553075cb5579",
+      "bytes": 8734
+    },
+    "static/mechanical-native/modules/engine/mount/ownedCountersinkPlan.mjs": {
+      "sha256": "11aae7de0aa86b8746bd495cb555a9aa48cbcf541f9b56712002de0685ee7f40",
+      "bytes": 5117
+    },
+    "static/mechanical-native/modules/engine/mount/ownedCountersinkProtocol.mjs": {
+      "sha256": "b264fc4ab5c0edfd216a7dcba442a2168bb35e35f442ca587b01f90a04219afa",
+      "bytes": 1478
+    },
+    "static/mechanical-native/modules/engine/mount/ownedCountersinkWorker.mjs": {
+      "sha256": "28b335c5ca119c1ebf685a937c41e9189e52fa4dbd919e71da21c455beef4dfc",
+      "bytes": 20503
+    },
+    "static/mechanical-native/modules/engine/mount/ownedDrawingReadProtocol.mjs": {
+      "sha256": "dad14f7b91a179612d04723f5267dc819fa8610213a23b4c162050661463ab8e",
+      "bytes": 11926
+    },
+    "static/mechanical-native/modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+      "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+      "bytes": 6918
+    },
+    "static/mechanical-native/modules/engine/mount/ownedLoftPlan.mjs": {
+      "sha256": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+      "bytes": 1616
+    },
+    "static/mechanical-native/modules/engine/mount/ownedManufacturingMeshProtocol.mjs": {
+      "sha256": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+      "bytes": 8192
+    },
+    "static/mechanical-native/modules/engine/mount/ownedMechanicalNativeCandidate.mjs": {
+      "sha256": "c4dabfc0aa713a662667b7fae1f5426956472269c14e13057c58abcfb58348b7",
+      "bytes": 1835
+    },
+    "static/mechanical-native/modules/engine/mount/ownedMechanicalNativeResources.mjs": {
+      "sha256": "8e48c79d730b3e6ee5f3e6203b42c935c967d5bf6f44ff9e57ce18bc8a272945",
+      "bytes": 5313
+    },
+    "static/mechanical-native/modules/engine/mount/ownedOrthographicReadProtocol.mjs": {
+      "sha256": "52ae654d5df0f593a2354b3196577804a508069b055a5c52ee0f55416f553087",
+      "bytes": 7291
+    },
+    "static/mechanical-native/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": {
+      "sha256": "9020974d40745bc35f72bc895204383a32c4cd012b85f48c0e6376ff3f2da9a8",
+      "bytes": 3806
+    },
+    "static/mechanical-native/modules/engine/mount/ownedRevolvePlan.mjs": {
+      "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+      "bytes": 980
+    },
+    "static/mechanical-native/modules/engine/mount/ownedStepExportProtocol.mjs": {
+      "sha256": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+      "bytes": 6517
+    },
+    "static/mechanical-native/modules/engine/mount/ownedSweepPlan.mjs": {
+      "sha256": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+      "bytes": 1856
+    },
+    "static/mechanical-native/modules/engine/mount/ownedThroughHolePlan.mjs": {
+      "sha256": "d45eaf266be1071d1527b6b24c93d8dfbb2d24d33ac3f53e18bdc5f2852d0046",
+      "bytes": 8850
+    },
+    "static/mechanical-native/modules/engine/mount/ownedTopologyContract.mjs": {
+      "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+      "bytes": 8275
+    },
+    "static/mechanical-native/modules/engine/mount/polygonProfilePlan.mjs": {
+      "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+      "bytes": 8418
+    },
+    "static/mechanical-native/modules/engine/mount/prismSelectionIndex.mjs": {
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+      "bytes": 4753
+    },
+    "static/mechanical-native/modules/engine/mount/prismaticBoreFacts.mjs": {
+      "sha256": "fdaea1207e54d87b85b6f45164061009574f9e5e9a422a6d2a96627966b307f5",
+      "bytes": 10475
+    },
+    "static/mechanical-native/modules/engine/mount/profileConstructorSourceBinding.mjs": {
+      "sha256": "b9fda8681cd04c328edd86fd8f0d8032a79e71d82c17e40f65ba18ceababea86",
+      "bytes": 4828
+    },
+    "static/mechanical-native/modules/engine/mount/selectedProfilePlan.mjs": {
+      "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+      "bytes": 9190
+    },
+    "static/mechanical-native/modules/engine/mount/selectionAncestryIndex.mjs": {
+      "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+      "bytes": 11394
+    },
+    "static/mechanical-native/modules/engine/mount/selectionLineageIndex.mjs": {
+      "sha256": "540eeb3ca87007dc63cd8f8b6721ef9d72bd9f78b8524a46da79944b154be82f",
+      "bytes": 26085
+    },
+    "static/mechanical-native/modules/engine/solid/ownedCountersinkIntent.mjs": {
+      "sha256": "73395e597aee3010dc047b0d0b4520b6f356e93ae6f33c5816d8c936c8e4ac0a",
+      "bytes": 3431
+    },
+    "static/mechanical-native/modules/engine/solid/ownedHoleIntent.mjs": {
+      "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+      "bytes": 2877
+    },
+    "static/mechanical-native/modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+      "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+      "bytes": 1913
+    },
+    "static/mechanical-native/modules/engine/solid/ownedLoftIntent.mjs": {
+      "sha256": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+      "bytes": 6231
+    },
+    "static/mechanical-native/modules/engine/solid/ownedRevolveIntent.mjs": {
+      "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+      "bytes": 3529
+    },
+    "static/mechanical-native/modules/engine/solid/ownedSweepIntent.mjs": {
+      "sha256": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+      "bytes": 5194
+    },
+    "static/mechanical-native/modules/engine/solid/solidBodyIdentity.mjs": {
+      "sha256": "e68c0c9bbbcfa992758576f49db3edd3af9336d58912a95dcba6deae18a67500",
+      "bytes": 352
+    },
+    "static/mechanical-native/modules/engine/solid/solidIntent.mjs": {
+      "sha256": "87bc656224ccefb8ce0f9ac75927f6649285d239b394fa03af09caa05e3e5685",
+      "bytes": 4198
+    },
+    "static/mechanical-native/modules/engine/solid/sweepLimits.mjs": {
+      "sha256": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13",
+      "bytes": 104
+    },
+    "static/mechanical-native/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/mechanical-native/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/mechanical-native/modules/workbenches/modeler/features/extrude/authoredRegions.mjs": {
+      "sha256": "bf524fdab34d6ead706a8f6f5a3d89843dfd40aae873c74294efbe8da5e42f19",
+      "bytes": 3286
+    },
+    "static/mechanical-native/modules/workbenches/modeler/features/extrude/profilePlan.mjs": {
+      "sha256": "610daacf923196789440d4460b76d11b864b169d4defc133bb62ea1b2e39c237",
+      "bytes": 6134
+    },
+    "static/mechanical-profile/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/mechanical-profile/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/mechanical-profile/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/native-archive.bf518d319317ad290c86.js": {
+      "sha256": "f607a92264fa7992c50537382bc226f97ec872041e07ace9f0001d3133731dae",
+      "bytes": 4594632
+    },
+    "static/physical-parameters.9021fe8b4bb5756067b1.js": {
+      "sha256": "1b6691fed558f2fec6195a6eadd0357b3992dea541300bf5fea79fdc351deb25",
+      "bytes": 144869
+    },
+    "static/polygon-profile/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/polygon-profile/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/polygon-profile/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/prism-semantic.2c7ddc8f111c86ec063b.js": {
+      "sha256": "54619b672f44bec958ec6df0544dadbd0a08c0a4cd4e94a263f52ad728124b1e",
+      "bytes": 2244009
+    },
+    "static/project-validator.1067ac64410cacad7207.js": {
+      "sha256": "609762847b6e7c12491ea862df55773ff747652c60aa1486e9c7e14b41353216",
+      "bytes": 3840623
+    },
+    "static/revolve-profile/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/revolve-profile/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/revolve-profile/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/shell/modules/drawing/linkedPartDrawingDefinition.mjs": {
+      "sha256": "f91cb3ff6cfdf429451d5e10e0dde9596a0c7150be62192dcf8cca9cef4af13c",
+      "bytes": 21461
+    },
+    "static/shell/modules/engine/extrusion/articulatedRegionSegments.mjs": {
+      "sha256": "77b589efda2c0cd1bb0c66bb6ace5b44d9e0da3f3b39c4a4cc698bce6c2e28c8",
+      "bytes": 3807
+    },
+    "static/shell/modules/engine/extrusion/exactExternalVertexContact.mjs": {
+      "sha256": "478c049374f411e266c047b73ece2b53127b5c22f7842f162550ded96499261e",
+      "bytes": 1780
+    },
+    "static/shell/modules/engine/extrusion/isolatedOpenProfileComponents.mjs": {
+      "sha256": "5360137d9c39d46367964a8a8c4c08af1e76a7060258cdbb8897ce74eff77824",
+      "bytes": 5600
+    },
+    "static/shell/modules/engine/extrusion/selectedArrangementDescriptor.mjs": {
+      "sha256": "bd88b08c1e0d3bfaf2812314d458cc4fb3a5173f1c277f5c80dc105a05281ae9",
+      "bytes": 12003
+    },
+    "static/shell/modules/engine/extrusion/selectedRegionDescriptor.mjs": {
+      "sha256": "5eccdb30e733e9c263aa9459affb81907ecae580c89a980032d295a15c6a010a",
+      "bytes": 11412
+    },
+    "static/shell/modules/engine/extrusion/simplePolygon.mjs": {
+      "sha256": "4a022a7dd18073804ca2042a65692e2ddad2ba7a9f31355bc3652e5fdfc196df",
+      "bytes": 5128
+    },
+    "static/shell/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/shell/modules/engine/mount/arrangedPrismSelectionIndex.mjs": {
+      "sha256": "97b9862fc1809b91de545da6990cecf61e57d33f976fdb84d2caa638cd070195",
+      "bytes": 4203
+    },
+    "static/shell/modules/engine/mount/booleanSelectionClaims.mjs": {
+      "sha256": "4e94d155a20c6eb422f72afe7d315bf8300ef67afed9c3ae030b0fe58a8bd5c5",
+      "bytes": 9413
+    },
+    "static/shell/modules/engine/mount/boxSelectionIndex.mjs": {
+      "sha256": "1561afacf78e048c59956c4b6d5b03a2114a47d9ac05fe9ad0701bc08ed320db",
+      "bytes": 2557
+    },
+    "static/shell/modules/engine/mount/cylinderCutWitness.mjs": {
+      "sha256": "b1d384bb17e005b9d1a37e449503dac7bf23c9f55079aea2415ae36674cd1bc1",
+      "bytes": 8354
+    },
+    "static/shell/modules/engine/mount/drawingDetailClip.mjs": {
+      "sha256": "cce1aa150886968930f66272c36fefc708452663936aaebd2758020d3b11e0b3",
+      "bytes": 10256
+    },
+    "static/shell/modules/engine/mount/drawingReferenceFacts.mjs": {
+      "sha256": "b305b857674e0afcbc0ad52279583cda042e5002750cc8b13da034a36feccbc5",
+      "bytes": 18786
+    },
+    "static/shell/modules/engine/mount/drawingRequirementFacts.mjs": {
+      "sha256": "8d54b5881b9d0613bfa98ea5598c434d2599744b8280b34d2b52bc6fcf15f106",
+      "bytes": 11873
+    },
+    "static/shell/modules/engine/mount/drawingRequirementProtocol.mjs": {
+      "sha256": "42ea997b48d7cf673a4acc842086b6d09aebfd96273b2499ed35e5a6fd6338f4",
+      "bytes": 4840
+    },
+    "static/shell/modules/engine/mount/exactMeshVolume.mjs": {
+      "sha256": "c5de24049a5b1ba1bcd0fd1c99c17be0fe34aed492f2e791087c3be9b8c3031c",
+      "bytes": 4760
+    },
+    "static/shell/modules/engine/mount/manufacturingMeshRecord.mjs": {
+      "sha256": "e8362fc1b12d571eda4e8f72a116037feb34b4c36bc1c5f55bb4bf75bf208d85",
+      "bytes": 3505
+    },
+    "static/shell/modules/engine/mount/nativePlanarAttachmentFacts.mjs": {
+      "sha256": "d4053f1a622bd789258034a5b2e296104960d790d8a7e7925d8ed4c2e3c6d55d",
+      "bytes": 4799
+    },
+    "static/shell/modules/engine/mount/orthographicAnalyticRecord.mjs": {
+      "sha256": "8454077795e4c92099523435ed4a32cc86c1264b80d881e590667adc8fd517ae",
+      "bytes": 7869
+    },
+    "static/shell/modules/engine/mount/ownedBooleanContract.mjs": {
+      "sha256": "a7ba4e3058d41e5523bfa504df942acc534c07404e321bf73cc0d30df548bb39",
+      "bytes": 7736
+    },
+    "static/shell/modules/engine/mount/ownedBoreAnnotationProtocol.mjs": {
+      "sha256": "845ef094746223612d89bdf736c70af84418f3ce21753c2d33d00b9e578071a9",
+      "bytes": 2044
+    },
+    "static/shell/modules/engine/mount/ownedBoreReadProtocol.mjs": {
+      "sha256": "def65f7139ef71a9af63c49f56a6364cbc158c88a4ac05482043d10ec22214df",
+      "bytes": 3848
+    },
+    "static/shell/modules/engine/mount/ownedDrawingDerivedProtocol.mjs": {
+      "sha256": "7e485a074a8d29ad35ce4fb4ade9677981f94be7c8d73fb487d6952d34042dfc",
+      "bytes": 1492
+    },
+    "static/shell/modules/engine/mount/ownedDrawingReadProtocol.mjs": {
+      "sha256": "dad14f7b91a179612d04723f5267dc819fa8610213a23b4c162050661463ab8e",
+      "bytes": 11926
+    },
+    "static/shell/modules/engine/mount/ownedDrawingSectionProtocol.mjs": {
+      "sha256": "8376fdf38823595a89655be33fbce9c6bd3e983815fa02787092562f25ceb23d",
+      "bytes": 3781
+    },
+    "static/shell/modules/engine/mount/ownedDrawingSectionWorker.mjs": {
+      "sha256": "44f260430e697ef16dd495daf5320292debb82dc7728da658a8c99820f0bb703",
+      "bytes": 18134
+    },
+    "static/shell/modules/engine/mount/ownedLinearHolePatternPlan.mjs": {
+      "sha256": "098b7ca225765b966df31f250f40191da5caf84d2c7c1a08ce599fb279f17f81",
+      "bytes": 6918
+    },
+    "static/shell/modules/engine/mount/ownedLoftPlan.mjs": {
+      "sha256": "eadd3af452bbe8a0495a356ea95d535d6aa779ae4766c03023047b7e71c9e8d4",
+      "bytes": 1616
+    },
+    "static/shell/modules/engine/mount/ownedManufacturingMeshProtocol.mjs": {
+      "sha256": "32201b7529339d554775e3b728a4d9007b715fb0b4eeba418a21485dd2548645",
+      "bytes": 8192
+    },
+    "static/shell/modules/engine/mount/ownedOrthographicReadProtocol.mjs": {
+      "sha256": "52ae654d5df0f593a2354b3196577804a508069b055a5c52ee0f55416f553087",
+      "bytes": 7291
+    },
+    "static/shell/modules/engine/mount/ownedPlanarAttachmentProtocol.mjs": {
+      "sha256": "9020974d40745bc35f72bc895204383a32c4cd012b85f48c0e6376ff3f2da9a8",
+      "bytes": 3806
+    },
+    "static/shell/modules/engine/mount/ownedRevolvePlan.mjs": {
+      "sha256": "940828b2627d0fbbc54a55ccf82ed6931724ffcc014d8031accab28caf566fbb",
+      "bytes": 980
+    },
+    "static/shell/modules/engine/mount/ownedShellNativeContract.mjs": {
+      "sha256": "c92ba75b7f150bbb949d09170409358af375c81853184df793ddb713514f21af",
+      "bytes": 6053
+    },
+    "static/shell/modules/engine/mount/ownedShellProtocol.mjs": {
+      "sha256": "b733fba75855db5d5a923cd42b61b3eefa761f8f79c4b5f0dbc286553eb5ce3d",
+      "bytes": 4931
+    },
+    "static/shell/modules/engine/mount/ownedShellWorker.mjs": {
+      "sha256": "b27bad4cb61f584067c734176fd1a76bf63937f2a5d38f5cf9a68838c9785c3c",
+      "bytes": 5842
+    },
+    "static/shell/modules/engine/mount/ownedStepExportProtocol.mjs": {
+      "sha256": "4a98c4bfc35bb9f430bb55cde5108890c07e4953c21bd9da67d7e57135bd1381",
+      "bytes": 6517
+    },
+    "static/shell/modules/engine/mount/ownedSweepPlan.mjs": {
+      "sha256": "57b1c431cbf5a433ce773680fc03961b7492fee539a7f65d2d478c5bc1361a99",
+      "bytes": 1856
+    },
+    "static/shell/modules/engine/mount/ownedThroughHolePlan.mjs": {
+      "sha256": "d45eaf266be1071d1527b6b24c93d8dfbb2d24d33ac3f53e18bdc5f2852d0046",
+      "bytes": 8850
+    },
+    "static/shell/modules/engine/mount/ownedTopologyContract.mjs": {
+      "sha256": "ba9e2119f9433d39fe5894fc6498506ee22ec251d76df0bc2a2f5298aad1889f",
+      "bytes": 8275
+    },
+    "static/shell/modules/engine/mount/polygonProfilePlan.mjs": {
+      "sha256": "cb311c6eed55f98d724cd2b0add1ffbaedb4a1fcb84a2ab7fca82c469dd0335f",
+      "bytes": 8418
+    },
+    "static/shell/modules/engine/mount/prismSelectionIndex.mjs": {
+      "sha256": "8382092e2e1c0df343a6e4b0ebbe1ae3c0f09baa9895684648b4aca2db1ce44c",
+      "bytes": 4753
+    },
+    "static/shell/modules/engine/mount/prismaticBoreFacts.mjs": {
+      "sha256": "fdaea1207e54d87b85b6f45164061009574f9e5e9a422a6d2a96627966b307f5",
+      "bytes": 10475
+    },
+    "static/shell/modules/engine/mount/selectedProfilePlan.mjs": {
+      "sha256": "c541d315db2abffbfb56ba9cbaae2f8f149977216eca774231b93e0c8ed57a3e",
+      "bytes": 9190
+    },
+    "static/shell/modules/engine/mount/selectionAncestryIndex.mjs": {
+      "sha256": "3898dab04d18e19ee0f4744024e28e155e41393a33a927b4e180a9cb52e847c6",
+      "bytes": 11394
+    },
+    "static/shell/modules/engine/mount/selectionLineageIndex.mjs": {
+      "sha256": "540eeb3ca87007dc63cd8f8b6721ef9d72bd9f78b8524a46da79944b154be82f",
+      "bytes": 26085
+    },
+    "static/shell/modules/engine/mount/shell-worker.js": {
+      "sha256": "7e1b893a18aa59c556d2f2eb41fed8ed8da4819c8b71c1b50c597c26f84d995f",
+      "bytes": 503968
+    },
+    "static/shell/modules/engine/solid/ownedHoleIntent.mjs": {
+      "sha256": "8bf04075a3e34e6bb49ea3fcccb46d68fbe4664777ed6c1f8f481842dc26d39c",
+      "bytes": 2877
+    },
+    "static/shell/modules/engine/solid/ownedLinearHolePatternIntent.mjs": {
+      "sha256": "e8bb536826d6244d1849b968a70711d8f5ae2225ffd11cecbf4d24e5d40cfaff",
+      "bytes": 1913
+    },
+    "static/shell/modules/engine/solid/ownedLoftIntent.mjs": {
+      "sha256": "a9dff8d3c0d5e2bf2bdd8a8d753827ade2af0b9f6787d7eae1272468f9083d7e",
+      "bytes": 6231
+    },
+    "static/shell/modules/engine/solid/ownedRevolveIntent.mjs": {
+      "sha256": "62035d822311f287f1bff5227cf8b2a2556a97d82522e186c6197407e2c35c8e",
+      "bytes": 3529
+    },
+    "static/shell/modules/engine/solid/ownedSweepIntent.mjs": {
+      "sha256": "d4e48f5e1af5b00ae55cff279c89090223d0045e8a0161aa880d9f95497bdb58",
+      "bytes": 5194
+    },
+    "static/shell/modules/engine/solid/solidBodyIdentity.mjs": {
+      "sha256": "e68c0c9bbbcfa992758576f49db3edd3af9336d58912a95dcba6deae18a67500",
+      "bytes": 352
+    },
+    "static/shell/modules/engine/solid/solidIntent.mjs": {
+      "sha256": "87bc656224ccefb8ce0f9ac75927f6649285d239b394fa03af09caa05e3e5685",
+      "bytes": 4198
+    },
+    "static/shell/modules/engine/solid/sweepLimits.mjs": {
+      "sha256": "602a2a5521c2c565e034b19fe619ea0d0ce6165f5d3b14d59f669d43a6fbbf13",
+      "bytes": 104
+    },
+    "static/shell/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/shell/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/shell/shell-occ-portable.js": {
+      "sha256": "57b74074e0a249b917ac68357fbd003c37d1ab61897206886b575088e6995858",
+      "bytes": 314939
+    },
+    "static/shell/shell-occ.wasm": {
+      "sha256": "60dc956b08e01f43d08a48035a384e478e63bb34fb55f21a152c8cd12e8b8947",
+      "bytes": 36048090
+    },
+    "static/sketch-solver.32f7797c0e65fbdfccdf.js": {
+      "sha256": "772cfb5357983f38ae83a887ed31db03842d63be387a9d16272a4490a673335c",
+      "bytes": 5515200
+    },
+    "static/sourceFrameIntent.mjs": {
+      "sha256": "11038a864e3d10dce363a0ec04f2fbdda72e86d0ee6209f07c270f94205f1adc",
+      "bytes": 4932
+    },
+    "static/sourceProjectionIntent.mjs": {
+      "sha256": "b237b2f61a88258ca312370d057ca664f33c3259c5a7645bee9767a72a190f88",
+      "bytes": 3582
+    },
+    "static/step-export/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/step-export/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/step-export/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    },
+    "static/sweep-profile/modules/engine/metadata/authoredFeatureIdentity.mjs": {
+      "sha256": "a20f0e76e7244919a4fdc55ab57540475ec5a7608de186e238b0aa1bb7d3682a",
+      "bytes": 1202
+    },
+    "static/sweep-profile/modules/engine/source/sourceFrameIntent.mjs": {
+      "sha256": "f358477c1bdaefa2079f8dc1bff51896aa470e511a87647d282ab71d074a5833",
+      "bytes": 4942
+    },
+    "static/sweep-profile/modules/engine/source/sourceProjectionIntent.mjs": {
+      "sha256": "a8a6bcdccafac5f3977994d4699e074bf4b2457ab4905f303887f8685b0f31b5",
+      "bytes": 3592
+    }
+  },
+  "selectedFileCount": 367,
+  "selectedBytes": 314932152,
+  "manifestInnerFileCount": 660,
+  "manifestInnerBytes": 681004220
+}
