@@ -7,6 +7,9 @@ const freeze=value=>{if(value&&typeof value==='object'){for(const item of Object
 const dot=(a,b)=>a.reduce((sum,n,i)=>sum+n*b[i],0),sub=(a,b)=>a.map((n,i)=>n-b[i]);
 export function createProfileExtentSelectionIndex({featureId,provenance,topology,prepared}){
  if(prepared?.binding?.featureId!==featureId||prepared.request.source.featureId!==featureId)fail('Extent selection origin differs from its bound request.');
+ // This constructor admits NativeV3 polygon/Circle only. Do not silently
+ // collapse a future analytic endpoint occurrence to its incident curve pair.
+ if(provenance?.sourceBinding?.nativeSlotBindings?.some(loop=>loop.vertices?.some(vertex=>vertex&&Object.hasOwn(vertex,'endpointRoles'))))fail('Analytic endpoint-role provenance is unsupported by the extent constructor.');
  const native=validateOwnedTopology(topology),source=createPrismSelectionIndex(featureId,provenance,native),regionId=prepared.request.region.id;
  if(native.solidCount!==1)fail('Extent constructor selections require one actual Native solid.');
  const f=prepared.originalFace.frame,z=f.z;

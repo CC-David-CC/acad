@@ -11,6 +11,22 @@ const point=v=>{list(v,3);if(v.length!==3||v.some(n=>typeof n!=='number'||!Numbe
 const direction=v=>{point(v);if(Math.abs(Math.hypot(...v)-1)>1e-8)fail();};
 const positive=n=>{if(typeof n!=='number'||!Number.isFinite(n)||n<=0||n>4e6)fail();};
 const orientation=v=>{if(!['FORWARD','REVERSED','INTERNAL','EXTERNAL'].includes(v))fail();};
+// Authored endpoint occurrences, not coordinates or Native catalog slots.
+// Producer canonicalization and strict descendant capture share one grammar.
+function prismEndpointRoles(value,canonicalize){
+ if(!Array.isArray(value)||value.length!==2||Reflect.ownKeys(value).length!==3)fail();
+ const rows=[0,1].map(i=>{const d=Object.getOwnPropertyDescriptor(value,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value'))fail();const r=record(d.value,['curveId','endpoint']);if(typeof r.curveId!=='string'||!r.curveId||r.curveId.length>256||!['a','b'].includes(r.endpoint))fail();return{curveId:r.curveId,endpoint:r.endpoint};});
+ const compare=(a,b)=>a.curveId<b.curveId?-1:a.curveId>b.curveId?1:a.endpoint<b.endpoint?-1:a.endpoint>b.endpoint?1:0;
+ if(compare(rows[0],rows[1])===0)fail();if(canonicalize)rows.sort(compare);else if(compare(rows[0],rows[1])>=0)fail();return Object.freeze(rows.map(Object.freeze));
+}
+export function canonicalPrismEndpointRoles(value){return prismEndpointRoles(value,true);}
+export function capturePrismEndpointRoles(value){return prismEndpointRoles(value,false);}
+// The currently admitted connector slice has two distinct source curves.
+// Full-Arc periodic seam roles remain private provenance, not public selectors.
+export function capturePrismConnectorEndpointRoles(value,incidentCurveIds){
+ const roles=capturePrismEndpointRoles(value);if(!Array.isArray(incidentCurveIds)||incidentCurveIds.length!==2||Reflect.ownKeys(incidentCurveIds).length!==3||roles[0].curveId===roles[1].curveId)fail();
+ for(let i=0;i<2;i++){const d=Object.getOwnPropertyDescriptor(incidentCurveIds,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value')||d.value!==roles[i].curveId)fail();}return roles;
+}
 export function validateOwnedTopology(value){
  const v=record(value,['version','scope','persistentIds','valid','solidCount','vertices','edges','faces']);
  if(v.version!==1||v.scope!=='response-local'||v.persistentIds!==false||v.valid!==true)fail();count(v.solidCount,256);
@@ -72,7 +88,18 @@ export function bindPrismSourceSlots(value,prepared){
  const spans=boundary?new Map(boundary.descriptor.outerBoundaryRefs.map(r=>[r.id,r])):null;
  const equal=(a,b)=>a[0]===b[0]&&a[1]===b[1];
  const nativeSlotBindings=prepared.loops.map((loop,i)=>{
-  if(loop.kind==='analytic'){const edges=loop.curves.map((c,j)=>({source:j,curveId:c.id,nativeReversed:c.orientation==='reversed'}));return{loop:i,edges,vertices:edges.map((_,j)=>({source:j,incidentCurveIds:[edges[(j+edges.length-1)%edges.length].curveId,edges[j].curveId].sort(),endpointRoles:[{curveId:loop.curves[(j+edges.length-1)%edges.length].id,endpoint:loop.curves[(j+edges.length-1)%edges.length].orientation==='forward'?'b':'a'},{curveId:loop.curves[j].id,endpoint:loop.curves[j].orientation==='forward'?'a':'b'}]}))};}
+  if(loop.kind==='analytic'){
+   list(loop.curves,512);list(curves[i],512);if(!loop.curves.length||loop.curves.length!==curves[i].length)fail();const sourceIds=new Set();for(let j=0;j<loop.curves.length;j++){
+    const c=loop.curves[j];
+    if(typeof c.id!=='string'||!c.id||c.id.length>256||sourceIds.has(c.id)||!['segment','arc'].includes(c.kind)||!['forward','reversed'].includes(c.orientation)||![c.a,c.b].every(p=>Array.isArray(p)&&p.length===2&&p.every(n=>typeof n==='number'&&Number.isFinite(n))))fail();sourceIds.add(c.id);
+    const originals=curves[i].filter(original=>original.id===c.id);if(originals.length!==1)fail();const original=originals[0],samePoint=(a,b)=>Array.isArray(a)&&Array.isArray(b)&&a.length===2&&b.length===2&&a.every((n,k)=>Object.is(n,b[k]));
+    if(c.kind!==original.kind||!samePoint(c.a,original.a)||!samePoint(c.b,original.b)||c.kind==='arc'&&(c.branch!==original.branch||!samePoint(c.center,original.center)))fail();
+    if(c.kind==='arc'&&(!['proper-ccw','full-ccw'].includes(c.branch)||c.branch==='full-ccw'&&(loop.curves.length!==1||!equal(c.a,c.b))))fail();
+   }
+   for(let j=0;j<loop.curves.length;j++){const c=loop.curves[j],next=loop.curves[(j+1)%loop.curves.length];if(!equal(c.orientation==='forward'?c.b:c.a,next.orientation==='forward'?next.a:next.b))fail();}
+   const edges=loop.curves.map((c,j)=>({source:j,curveId:c.id,nativeReversed:c.orientation==='reversed'}));
+   return{loop:i,edges,vertices:edges.map((_,j)=>({source:j,incidentCurveIds:[edges[(j+edges.length-1)%edges.length].curveId,edges[j].curveId].sort(),endpointRoles:canonicalPrismEndpointRoles([{curveId:loop.curves[(j+edges.length-1)%edges.length].id,endpoint:loop.curves[(j+edges.length-1)%edges.length].orientation==='forward'?'b':'a'},{curveId:loop.curves[j].id,endpoint:loop.curves[j].orientation==='forward'?'a':'b'}])}))};
+  }
   if(loop.kind==='circle')return{loop:i,edges:[{source:0,curveId:curves[i][0].id,nativeReversed:false}],vertices:[]};
   const edges=loop.vertices.map((a,j)=>{
    const b=loop.vertices[(j+1)%loop.vertices.length],matches=curves[i].filter(c=>c.kind==='segment'&&(equal(c.a,a)&&equal(c.b,b)||equal(c.a,b)&&equal(c.b,a)));

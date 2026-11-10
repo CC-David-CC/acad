@@ -1,7 +1,7 @@
 // Pure Worker-side naming from one captured native operation. Native indices
 // exist only in private resolver closures; neither this plan nor history owns
 // a native shape, guessed geometric match or alternate authored document.
-import {validateOwnedTopology} from './ownedTopologyContract.mjs';
+import {validateOwnedTopology,capturePrismConnectorEndpointRoles} from './ownedTopologyContract.mjs';
 const MAX_BYTES=524288,MAX_KEY=16384,MAX_UNRESOLVED=4096;
 const fail=(message,code='ENGINE_FAILURE')=>{throw Object.assign(Error(message),{code});};
 const key=v=>typeof v==='string'&&v.length>0&&v.length<=MAX_KEY;
@@ -18,12 +18,13 @@ const array=(v,max)=>{
 const freeze=v=>{if(v&&typeof v==='object'){for(const x of Object.values(v))freeze(x);Object.freeze(v);}return v;};
 function descriptor(v){
  if(!v||typeof v!=='object'||Array.isArray(v))fail('Expected an authored selection descriptor.');
- const allowed=['id','role','geometry','curveId','incidentCurveIds','sourceEdgeId','kind'],keys=Reflect.ownKeys(v);
+ const allowed=['id','role','geometry','curveId','incidentCurveIds','endpointRoles','sourceEdgeId','kind'],keys=Reflect.ownKeys(v);
  if(keys.some(k=>typeof k!=='string'||!allowed.includes(k))||!['id','role','geometry'].every(k=>keys.includes(k)))fail('Unsupported authored selection descriptor.');
  const d=record(v,keys);if(!key(d.id)||typeof d.role!=='string'||!d.role||d.role.length>64||typeof d.geometry!=='string'||!d.geometry||d.geometry.length>64)fail('Invalid authored selection identity.');
  if(keys.some(k=>d[k]===undefined))fail('Selection descriptor fields must have explicit values.');
  if(d.curveId!==undefined&&(typeof d.curveId!=='string'||!d.curveId||d.curveId.length>256))fail('Invalid source curve identity.');
  if(d.incidentCurveIds!==undefined){d.incidentCurveIds=array(d.incidentCurveIds,2);if(d.incidentCurveIds.length!==2||!d.incidentCurveIds.every(x=>typeof x==='string'&&x&&x.length<=256)||d.incidentCurveIds[0]>=d.incidentCurveIds[1])fail('Expected two canonical incident curve identities.');}
+ if(d.endpointRoles!==undefined){if(d.role!=='connector'||d.curveId!==undefined||d.boundaryRef!==undefined||d.incidentBoundaryRefs!==undefined)fail('Endpoint occurrences require an actual whole-curve connector.');d.endpointRoles=capturePrismConnectorEndpointRoles(d.endpointRoles,d.incidentCurveIds);}
  if(d.sourceEdgeId!==undefined&&!key(d.sourceEdgeId)||d.kind!==undefined&&!['fillet','chamfer-equal'].includes(d.kind))fail('Invalid treatment source identity.');return d;
 }
 function captureAncestry(input,topology){

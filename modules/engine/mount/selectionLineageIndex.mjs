@@ -1,6 +1,6 @@
 // Private Worker-side lineage only. No kernel, geometric matching, authored
 // model, persistent native ordinal, or implied capability lives in this module.
-import {validateOwnedTopology} from './ownedTopologyContract.mjs';
+import {validateOwnedTopology,capturePrismConnectorEndpointRoles} from './ownedTopologyContract.mjs';
 import {reconcileNativeSelectionClaims} from './booleanSelectionClaims.mjs';
 import {captureBoundaryRef} from '../extrusion/selectedArrangementDescriptor.mjs';
 const MAX_BYTES=524288,MAX_KEY=16384,MAX_UNRESOLVED=4096;
@@ -46,12 +46,13 @@ function privateAPI(value,version){
 }
 function descriptor(value,version,origin,captureRef=captureBoundaryRef){
  if(!value||typeof value!=='object'||Array.isArray(value))fail('Expected a selection descriptor.');
- const allowed=['id','role','geometry','curveId','incidentCurveIds','sourceEdgeId','kind',...(version===2?['originFeatureId','boundaryRef','incidentBoundaryRefs']:[])],keys=Reflect.ownKeys(value);
+ const allowed=['id','role','geometry','curveId','incidentCurveIds','endpointRoles','sourceEdgeId','kind',...(version===2?['originFeatureId','boundaryRef','incidentBoundaryRefs']:[])],keys=Reflect.ownKeys(value);
  if(keys.some(k=>typeof k!=='string'||!allowed.includes(k))||!['id','role','geometry',...(version===2?['originFeatureId']:[])].every(k=>keys.includes(k)))fail('Unsupported selection descriptor.');
  const d=fields(value,keys);if(keys.some(k=>d[k]===undefined)||!key(d.id)||!text(d.role,64)||!text(d.geometry,64))fail('Invalid selection descriptor.');
  if(d.curveId!==undefined&&!text(d.curveId,256))fail('Invalid source curve identity.');
  if(d.incidentCurveIds!==undefined){const xs=array(d.incidentCurveIds,2);if(xs.length!==2||!xs.every(x=>text(x,256))||xs[0]>=xs[1])fail('Expected two canonical source curve identities.');d.incidentCurveIds=xs;}
  if(d.boundaryRef!==undefined||d.incidentBoundaryRefs!==undefined){if(d.curveId!==undefined||d.incidentCurveIds!==undefined||d.boundaryRef!==undefined&&d.incidentBoundaryRefs!==undefined)fail('Derived spans cannot masquerade as whole source curves.');if(d.boundaryRef!==undefined)d.boundaryRef=captureRef(d.boundaryRef);else{const refs=array(d.incidentBoundaryRefs,2).map(x=>captureRef(x));if(refs.length!==2||refs[0].id>=refs[1].id)fail('Expected two canonical source spans.');d.incidentBoundaryRefs=refs;}}
+ if(d.endpointRoles!==undefined){if(d.role!=='connector'||d.curveId!==undefined||d.boundaryRef!==undefined||d.incidentBoundaryRefs!==undefined)fail('Endpoint occurrences require an actual whole-curve connector.');d.endpointRoles=capturePrismConnectorEndpointRoles(d.endpointRoles,d.incidentCurveIds);}
  if(d.sourceEdgeId!==undefined&&!key(d.sourceEdgeId)||d.kind!==undefined&&!['fillet','chamfer-equal'].includes(d.kind))fail('Invalid treatment source metadata.');
  if(version===1)d.originFeatureId=origin;if(!integer(d.originFeatureId))fail('Invalid origin feature identity.');return d;
 }

@@ -131,7 +131,16 @@ export type KernelCounterbore=OwnedCounterboreIntent&Readonly<{op:'solid.holes.c
 export type KernelBlindHole=OwnedBlindHoleIntent&Readonly<{op:'solid.holes.blind';handle:TransientShapeHandle;sourceHandle:TransientShapeHandle}>;
 export type KernelThroughHole=OwnedHoleIntent&Readonly<{op:'solid.holes.through';handle:TransientShapeHandle;sourceHandle:TransientShapeHandle}>;
 export type KernelLinearHolePattern=OwnedLinearHolePatternIntent&Readonly<{op:'solid.holes.pattern.linear';handle:TransientShapeHandle;sourceHandle:TransientShapeHandle}>;
-export interface PrismSelectionsResult {readonly contractVersion:1;readonly op:'solid.prism.selections.read';readonly unit:'millimeter';readonly selection:Readonly<{status:'available';plan:Readonly<{version:1;featureId:number;regionId:string;scope:'authored-source';edges:ReadonlyArray<Readonly<Record<string,unknown>>>;faces:ReadonlyArray<Readonly<Record<string,unknown>>>;unresolved:ReadonlyArray<Readonly<Record<string,unknown>>>}>}>|Readonly<{status:'unavailable';reason:string}>;}
+/** Actual authored source roles, canonical by curveId then a before b. */
+export interface PrismEndpointRole {readonly curveId:string;readonly endpoint:'a'|'b';}
+export type PrismConnectorEndpointRoles=readonly [Readonly<PrismEndpointRole>,Readonly<PrismEndpointRole>];
+export interface SelectionDescriptorV1 {
+ readonly id:string;readonly role:string;readonly geometry:string;
+ readonly curveId?:string;readonly incidentCurveIds?:readonly [string,string];
+ readonly endpointRoles?:PrismConnectorEndpointRoles;
+ readonly sourceEdgeId?:string;readonly kind?:'fillet'|'chamfer-equal';
+}
+export interface PrismSelectionsResult {readonly contractVersion:1;readonly op:'solid.prism.selections.read';readonly unit:'millimeter';readonly selection:Readonly<{status:'available';plan:Readonly<{version:1;featureId:number;regionId:string;scope:'authored-source';edges:ReadonlyArray<Readonly<SelectionDescriptorV1>>;faces:ReadonlyArray<Readonly<SelectionDescriptorV1>>;unresolved:ReadonlyArray<Readonly<Record<string,unknown>>>}>}>|Readonly<{status:'unavailable';reason:string}>;}
 export type SelectionKind='vertex'|'edge'|'face';
 export interface SketchProfileSelectionContext {
  readonly kind:'sketch-profile';readonly featureId:number;readonly regionId:string;
@@ -143,6 +152,7 @@ export interface BoxConstructionSelectionContext {
 export interface SelectionDescriptorV2 {
  readonly id:string;readonly role:string;readonly geometry:string;readonly originFeatureId:number;
  readonly curveId?:string;readonly incidentCurveIds?:readonly [string,string];
+ readonly endpointRoles?:PrismConnectorEndpointRoles;
  readonly boundaryRef?:ArrangementBoundaryReference;readonly incidentBoundaryRefs?:readonly [ArrangementBoundaryReference,ArrangementBoundaryReference];
  readonly sourceEdgeId?:string;readonly kind?:'fillet'|'chamfer-equal';
 }
@@ -194,7 +204,7 @@ export type ConstructionProvenance=
  Readonly<{status:'unavailable';reason:'PROFILE_PROVENANCE_UNSUPPORTED'|'PROFILE_PROVENANCE_RESOURCE_LIMIT'|'PROFILE_PROVENANCE_FAILED'}>|
  Readonly<{status:'available';data:Readonly<Record<string,unknown>>;sourceBinding:Readonly<{scope:'solved-request';regionId:string;boundaryKind?:'source-spans';nativeSlotBindings:ReadonlyArray<Readonly<{
   loop:number;edges:ReadonlyArray<Readonly<{source:number;curveId:string;nativeReversed:boolean}>|Readonly<{source:number;boundaryRef:ArrangementBoundaryReference;nativeReversed:boolean}>>;
-  vertices:ReadonlyArray<Readonly<{source:number;incidentCurveIds:readonly [string,string]}>|Readonly<{source:number;incidentBoundaryRefs:readonly [ArrangementBoundaryReference,ArrangementBoundaryReference]}>>;
+  vertices:ReadonlyArray<Readonly<{source:number;incidentCurveIds:readonly [string,string];endpointRoles?:PrismConnectorEndpointRoles}>|Readonly<{source:number;incidentBoundaryRefs:readonly [ArrangementBoundaryReference,ArrangementBoundaryReference]}>>;
  }>>}>}>;
 export interface DisposeSolid {readonly op:'solid.dispose';readonly version:1;readonly handle:TransientShapeHandle;}
 export interface ExportOwnedSTEP {readonly op:'solid.step.export';readonly version:1;readonly unit:'millimeter';readonly handles:ReadonlyArray<TransientShapeHandle>;}

@@ -1,3 +1,4 @@
+import {canonicalPrismEndpointRoles,capturePrismConnectorEndpointRoles} from './ownedTopologyContract.mjs';
 // Worker-only source identities. Native ordinals stay inside this index and
 // are regenerated from the current prism's actual construction history.
 const fail=(code,message)=>{throw Object.assign(Error(message),{code});};
@@ -14,7 +15,8 @@ export function createPrismSelectionIndex(featureId,provenance,topology){
   if(!Number.isSafeInteger(nativeIndex)||nativeIndex<1||nativeIndex>catalog.length||used.has(nativeIndex))fail('ENGINE_FAILURE','Prism selection ancestry must be unique.');
   const id='worker-prism-selection:1:'+JSON.stringify([featureId,regionId,kind,role,source]);
   if(!identity(id))fail('SELECTION_RESOURCE_LIMIT','Encoded prism selection identity exceeds its lookup budget.');
-  bytes+=id.length*3+256;if(bytes>524288)fail('SELECTION_RESOURCE_LIMIT','Prism selection identities exceed their bounded observation budget.');
+  const endpointBytes=Object.hasOwn(extra,'endpointRoles')?new TextEncoder().encode(JSON.stringify({endpointRoles:extra.endpointRoles})).byteLength:0;
+  bytes+=id.length*3+256+endpointBytes;if(bytes>524288)fail('SELECTION_RESOURCE_LIMIT','Prism selection identities exceed their bounded observation budget.');
   if(map.has(id))fail('ENGINE_FAILURE','Duplicate authored prism selection.');
   const descriptor={id,role,...extra,geometry:catalog[nativeIndex-1].type};
   map.set(id,nativeIndex);used.add(nativeIndex);(kind==='edge'?edges:faces).push(descriptor);
@@ -23,16 +25,22 @@ export function createPrismSelectionIndex(featureId,provenance,topology){
  for(let i=0;i<graph.sourceLoops.length;i++){
   const native=graph.sourceLoops[i],authored=binding.nativeSlotBindings[i];
   if(native.loop!==i||authored.loop!==i||native.edges.length!==authored.edges.length||native.vertices.length!==authored.vertices.length)fail('ENGINE_FAILURE','Prism source slots differ.');
+  const endpointAware=authored.vertices.some(vertex=>vertex&&Object.hasOwn(vertex,'endpointRoles'));
   for(let j=0;j<native.edges.length;j++){
    const e=native.edges[j],source=authored.edges[j];
-   if(e.source!==j||source.source!==j||!identity(source.curveId)||source.curveId.length>256)fail('ENGINE_FAILURE','Invalid authored boundary identity.');
+   if(e.source!==j||source.source!==j||!identity(source.curveId)||source.curveId.length>256||endpointAware&&typeof source.nativeReversed!=='boolean')fail('ENGINE_FAILURE','Invalid authored boundary identity.');
    const extra={curveId:source.curveId};
    add('edge','first-boundary',source.curveId,e.firstEdge,extra);add('edge','last-boundary',source.curveId,e.lastEdge,extra);add('face','swept-boundary',source.curveId,e.sweptFace,extra);
   }
   for(let j=0;j<native.vertices.length;j++){
    const v=native.vertices[j],source=authored.vertices[j],pair=source.incidentCurveIds;
    if(v.source!==j||source.source!==j||!Array.isArray(pair)||pair.length!==2||!pair.every(n=>identity(n)&&n.length<=256)||pair[0]>=pair[1])fail('ENGINE_FAILURE','A connector requires two distinct canonical authored boundary identities.');
-   add('edge','connector',pair,v.sweptEdge,{incidentCurveIds:pair.slice()});
+   if(endpointAware){
+    const field=Object.getOwnPropertyDescriptor(source,'endpointRoles');if(!field?.enumerable||!Object.hasOwn(field,'value'))fail('ENGINE_FAILURE','Analytic connector endpoint roles must cover every actual source junction.');
+    const roles=capturePrismConnectorEndpointRoles(field.value,pair),previous=authored.edges[(j+authored.edges.length-1)%authored.edges.length],outgoing=authored.edges[j],expected=canonicalPrismEndpointRoles([{curveId:previous.curveId,endpoint:previous.nativeReversed?'a':'b'},{curveId:outgoing.curveId,endpoint:outgoing.nativeReversed?'b':'a'}]);
+    if(JSON.stringify(roles)!==JSON.stringify(expected))fail('ENGINE_FAILURE','Connector endpoint roles differ from the actual bound source edges.');
+    add('edge','connector',{endpointRoles:roles},v.sweptEdge,{incidentCurveIds:pair.slice(),endpointRoles:roles});
+   }else add('edge','connector',pair,v.sweptEdge,{incidentCurveIds:pair.slice()});
   }
  }
  const unresolvedEdges=topology.edges.length-usedEdges.size,unresolvedFaces=topology.faces.length-usedFaces.size;
