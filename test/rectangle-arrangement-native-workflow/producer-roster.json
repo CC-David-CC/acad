@@ -24,6 +24,7 @@
     "modules/engine/mount/selectionAncestryIndex.mjs",
     "modules/engine/mount/selectionLineageIndex.mjs",
     "modules/engine/mount/selectedProfileBuildSelection.mjs",
+    "modules/engine/mount/ownedMechanicalNativeResources.mjs",
     "modules/engine/mount/engineCatalog.mjs",
     "modules/engine/mount/catalogMount.ts",
     "modules/engine/mount/worker-controller.mjs",

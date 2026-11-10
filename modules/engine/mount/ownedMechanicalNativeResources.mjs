@@ -23,6 +23,7 @@ export const MECHANICAL_NATIVE_RESOURCE_MODULES=Object.freeze([
  'modules/engine/extrusion/selectedRegionDescriptor.mjs',
  'modules/engine/extrusion/isolatedOpenProfileComponents.mjs',
  'modules/engine/extrusion/articulatedRegionSegments.mjs',
+ 'modules/engine/extrusion/rectangleArrangementDiagnostic.mjs',
  'modules/engine/extrusion/rectangularArrangement.mjs',
  'modules/engine/extrusion/rectangularContactArrangement.mjs',
  'modules/engine/extrusion/selectedArrangementDescriptor.mjs',

@@ -46,7 +46,8 @@
   "additionalVerbatimCopies": [
     "modules/engine/extrusion/selectedArrangementDescriptor.mjs",
     "modules/engine/extrusion/selectedRegionDescriptor.mjs",
-    "modules/engine/mount/arrangedPrismSelectionIndex.mjs"
+    "modules/engine/mount/arrangedPrismSelectionIndex.mjs",
+    "modules/engine/extrusion/rectangleArrangementDiagnostic.mjs"
   ],
   "coreSources": [
     "webpack.config.js",
@@ -56,6 +57,9 @@
     "build/prepare-selected-profile-assets.cjs",
     "build/embedded-display.cjs",
     "modules/engine/extrusion/prismSemanticClient.ts",
+    "modules/engine/extrusion/rectangleArrangementDiagnostic.mjs",
+    "modules/engine/extrusion/rectangleArrangementDiagnostic.d.mts",
+    "modules/engine/mount/ownedMechanicalNativeResources.mjs",
     "modules/engine/extrusion/selectedSketchProfile.mjs",
     "modules/engine/mount/catalogMount.ts",
     "web/app/sketcher/generators/patternSource.mjs",

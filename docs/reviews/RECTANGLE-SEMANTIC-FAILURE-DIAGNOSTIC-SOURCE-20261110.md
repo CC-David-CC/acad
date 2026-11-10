@@ -49,9 +49,9 @@ consume the same roster, with all old assertions preserved. Original R4
 producing snapshots/reports are unchanged. Do not apply a new producer roster
 to an old whole as if those files had been compiled then.
 
-Root must add the new two source files to the NEXT actual assembled input
-matrix/source roster, retain all changed existing modules, normal-build all
-affected bundles/Workers, and derive fresh cache/dist/stage/Host/pin identities.
+The NEXT input matrix/source roster now binds the new two files and changed
+mechanical resource roster. Root must retain all changed modules, normal-build
+all affected bundles/Workers, and derive fresh cache/dist/stage/Host/pin identities.
 This is a bundled Main/semantic-Worker leaf; no OCI/default/Native ABI or pair
 change is introduced, and old guards/quotas stay. Any future analytic whole on
 that changed compiled source also needs the new producer closure, separately
@@ -64,3 +64,25 @@ Native/census/nine native-cycle criteria, any actual failure, and unknown
 outcome context. No diagnostic value establishes acceptance or permits retry.
 No tests, parser/import, build, CGAL/Native, browser or workflow execution was
 performed for this source packet.
+
+## Resource closure follow-up
+
+Independent Gate review caught a real composition omission in797487b4:
+mechanical constructor-source preparation already imports selectedSketchProfile
+and rectangularArrangement, so their NEW static diagnostic dependency must be
+in the authoritative MECHANICAL_NATIVE_RESOURCE_MODULES roster. This follow-up
+adds the mjs leaf once there. Existing entry/stager/factory all derive the same
+closed graph; no duplicate lists, OCI source/guard or Native pair changes. The
+declaration remains source-only and is NOT a runtime resource. A bounded source
+search found no other authoritative resource roster directly containing either
+changed source root. No closure helper was executed.
+
+NEXT assembled input matrix now explicitly binds leaf+declaration+changed
+resource roster to actual Core Git bytes; the mjs leaf also joins the all-actual
+verbatim-copy list so a newly derived contract checks every emitted copy. The
+rectangle producer roster retains both new sources and adds the changed
+authoritative roster; driver/checker read that same exact JSON inventory. A
+fresh component/Worker/build/stage/pin contract remains required. Existing R4
+contracts, pins, snapshots/evidence and historical after-reader remain frozen.
+Future analytic producer closure is a separate follow-up commit because it
+must never be retroactively imposed on the actual old R4 producer roster.
