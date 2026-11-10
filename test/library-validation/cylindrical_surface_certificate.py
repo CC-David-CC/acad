@@ -31,6 +31,16 @@ def bounded_number(value):
     return Q(value)
 
 
+def bounded_declared_budget(value):
+    # Declared tolerances may be exact decimal rationals, unlike represented
+    # geometry. Keep the same bit bounds, without rounding either budget.
+    if type(value) is Q:
+        if value.numerator.bit_length() > 2100 or value.denominator.bit_length() > 1075:
+            raise CertificateResourceLimit('declared budget rational input bit limit')
+        return value
+    return bounded_number(value)
+
+
 def bounded_sequence(value, maximum, label):
     require(type(value) in (list, tuple), label+' must be a bounded concrete sequence')
     if len(value) > maximum:
@@ -111,8 +121,8 @@ def certify_full_cylinder(vertices, triangles, triangle_ids, center, radius,
     bounded_sequence(center, 2, 'center')
     if 32+24*len(vertices)+12*len(triangles) > 8388608:
         raise CertificateResourceLimit('original decoded mesh byte limit')
-    radius, low, high, epsilon, incidence = map(bounded_number,
-        (radius, low, high, deflection, plane_incidence))
+    radius, low, high = map(bounded_number, (radius, low, high))
+    epsilon, incidence = map(bounded_declared_budget, (deflection, plane_incidence))
     center = tuple(map(bounded_number, center))
     require(len(center) == 2 and radius > 0 and high > low and epsilon > 0 and
             incidence >= 0 and type(orientation) is int and orientation in (-1, 1),

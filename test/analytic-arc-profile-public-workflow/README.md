@@ -143,3 +143,11 @@ exact Fraction; all original tolerances/comparisons remain. Retain FIRST type
 refusal and use a NEW after directory/explicit clean verifier commit for any
 later reviewed reader against the unchanged whole. No artifact PASS is claimed.
 See docs/reviews/ANALYTIC-R4-READER-DERIVED-NUMBERS-20261110.md.
+
+Second R4 reader refusal is also retained: exact decimal rational artifact
+budgets were incorrectly sent through the shared represented-dyadic geometry
+admission. The source repair admits bounded exact rationals ONLY for declared
+deflection/incidence; geometry remains dyadic-only and thresholds unchanged.
+Both failures require notes/notification and no automatic third invocation.
+See docs/reviews/ANALYTIC-R4-SECOND-READER-REFUSAL-20261110.md. No artifact PASS
+or reader rerun is claimed by this source packet.
