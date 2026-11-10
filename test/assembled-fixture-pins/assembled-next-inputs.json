@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "scope": "additive source/Worker custody matrix for next assembled candidate; no generated hashes or runtime authority",
+  "workers": {
+    "controlled-3mf": {
+      "cache": ".build/controlled-3mf-worker/worker.js",
+      "config": "build/webpack.controlled-3mf-worker.cjs",
+      "entry": "web/app/cad/export/controlledMesh3mf.worker.mjs"
+    },
+    "manufacturing-publication": {
+      "cache": ".build/manufacturing-publication-worker/worker.js",
+      "config": "build/webpack.manufacturing-publication-worker.cjs",
+      "entry": "web/app/cad/projectManager/manufacturingPublicationWorker.mjs"
+    },
+    "project-validator": {
+      "cache": "node_modules/.cache/codi-project-worker/worker.js",
+      "config": "build/webpack.project-validation-worker.cjs",
+      "entry": "web/app/cad/projectManager/projectValidationWorker.ts"
+    },
+    "sketch-solver": {
+      "cache": ".build/headless-sketch-worker/worker.js",
+      "config": "build/webpack.headless-sketch-worker.cjs",
+      "entry": "web/app/sketcher/headless/solveWorker.ts"
+    },
+    "native-archive": {
+      "cache": ".build/native-archive-worker/worker.js",
+      "config": "build/webpack.native-archive-worker.cjs",
+      "entry": "web/app/cad/projectManager/nativeArchiveCodec.worker.ts"
+    },
+    "prism-semantic": {
+      "cache": ".build/prism-semantic-worker/worker.js",
+      "config": "build/webpack.prism-semantic-worker.cjs",
+      "entry": "modules/engine/extrusion/prismSemantic.worker.ts"
+    },
+    "physical-parameters": {
+      "cache": ".build/physical-parameters-worker/worker.js",
+      "config": "build/webpack.physical-parameters-worker.cjs",
+      "entry": "web/app/cad/parameters/physicalQuantitiesWorker.mjs"
+    },
+    "manufacturing-hash": {
+      "cache": ".build/manufacturing-hash-worker/worker.js",
+      "config": "build/webpack.manufacturing-hash-worker.cjs",
+      "entry": "web/app/cad/projectManager/incrementalHashWorker.mjs"
+    }
+  },
+  "additionalVerbatimCopies": [
+    "modules/engine/extrusion/selectedArrangementDescriptor.mjs",
+    "modules/engine/extrusion/selectedRegionDescriptor.mjs",
+    "modules/engine/mount/arrangedPrismSelectionIndex.mjs"
+  ],
+  "coreSources": [
+    "webpack.config.js",
+    "test/polygon-profile-app-history/webpack.app.cjs",
+    "Gruntfile.js",
+    "package.json",
+    "build/prepare-selected-profile-assets.cjs",
+    "build/embedded-display.cjs",
+    "modules/engine/extrusion/prismSemanticClient.ts",
+    "modules/engine/extrusion/selectedSketchProfile.mjs",
+    "modules/engine/mount/catalogMount.ts",
+    "web/app/sketcher/generators/patternSource.mjs",
+    "web/app/sketcher/generators/patternGenerator.js",
+    "web/app/sketcher/generators/sketchGenerator.js",
+    "web/app/sketcher/headless/patternTransition.ts",
+    "web/app/sketcher/headless/patternSourceValidation.ts",
+    "web/app/sketcher/headless/patternReply.mjs",
+    "web/app/sketcher/headless/patternClient.ts",
+    "web/app/sketcher/headless/stageGeneratorPolicy.mjs",
+    "web/app/sketcher/headless/client.ts",
+    "web/app/sketcher/headless/solveWorker.ts",
+    "web/app/sketcher/headless/solve.ts",
+    "web/app/sketcher/headless/capturedSketchEvaluation.ts",
+    "web/app/sketcher/headless/capturedGeometryScope.ts",
+    "web/app/sketcher/headless/capturedParameterOwnership.ts",
+    "web/app/sketcher/headless/verifiedReplayGeometry.ts",
+    "web/app/sketcher/headless/coordinateTransition.ts",
+    "web/app/sketcher/headless/coordinateTravel.ts",
+    "web/app/sketcher/headless/radiusTransition.ts",
+    "web/app/sketcher/headless/lengthFamilyTransition.ts",
+    "web/app/sketcher/headless/lengthMeasurementTransition.ts",
+    "web/app/sketcher/headless/lengthMeasurementIntent.mjs",
+    "web/app/sketcher/headless/lengthMeasurementClient.ts",
+    "web/app/sketcher/actions/operationActions.js",
+    "web/app/sketcher/actions/objectActions.js",
+    "web/app/sketcher/actions/lengthMeasurementPreparation.js",
+    "web/app/sketcher/actions/lengthMeasurementRoles.js",
+    "web/app/sketcher/actions/lengthMeasurementPresentation.mjs",
+    "web/app/sketcher/actions/sketchTransaction.js",
+    "web/app/sketcher/io.ts",
+    "web/app/sketcher/shapes/dim.js",
+    "web/app/sketcher/shapes/linearDimensionRecord.mjs",
+    "web/app/cad/craft/closedSketchTransitions.ts",
+    "web/app/cad/craft/craftBundle.ts",
+    "web/app/cad/projectManager/projectValidationCore.ts",
+    "web/app/cad/projectManager/projectValidationCodes.mjs",
+    "modules/engine/mount/oci-verified-worker.js",
+    "build/stage-owned-profile-component.cjs",
+    "build/embedded-oci-worker.cjs",
+    "build/prepare-polygon-profile-assets.cjs",
+    "build/prepare-mechanical-profile-assets.cjs",
+    "build/prepare-boolean-history-assets.cjs",
+    "build/prepare-boolean-history-cohort.cjs",
+    "build/prepare-revolve-profile-assets.cjs",
+    "build/prepare-sweep-profile-assets.cjs",
+    "build/prepare-loft-profile-assets.cjs",
+    "build/prepare-adaptive-metrology-assets.cjs",
+    "build/prepare-adaptive-metrology-profile-assets.cjs",
+    "build/prepare-step-export-assets.cjs",
+    "build/prepare-step-export-profile-assets.cjs",
+    "build/prepare-manufacturing-mesh-assets.cjs",
+    "build/prepare-manufacturing-mesh-profile-assets.cjs",
+    "build/prepare-shell-assets.cjs",
+    "build/prepare-shell-profile-assets.cjs",
+    "build/prepare-circular-assets.cjs",
+    "build/prepare-circular-profile-assets.cjs",
+    "build/prepare-mechanical-cohort-profile-assets.cjs",
+    "build/prepare-finite-curve-support-assets.cjs",
+    "build/prepare-finite-curve-support-cohort.cjs",
+    "build/prepare-analytic-profile-cohort.cjs",
+    "modules/engine/extrusion/rectangularArrangement.mjs",
+    "modules/engine/extrusion/rectangularContactArrangement.mjs"
+  ],
+  "hostSources": [
+    "apps/system/jsketcher/index.mjs",
+    "apps/system/jsketcher/sketch-pattern-commands.mjs",
+    "apps/system/jsketcher/length-measurement-commands.mjs",
+    "apps/system/jsketcher/selected-profile-commands.mjs",
+    "apps/system/jsketcher/inspect-state.mjs",
+    "apps/system/jsketcher/scoped-command.mjs",
+    "apps/system/jsketcher/examples/associative-sketch-pattern.mjs",
+    "active-system/scripts/build-public-apps.py",
+    "active-system/tools/app-builder/build.mjs",
+    "active-system/tools/app-builder/inventory-limits.mjs",
+    "test/agent-cad-corpus/manufacturing-shared/stage.py"
+  ],
+  "flatSelected": {
+    "selected-profile-occ-portable.js": {
+      "kind": "native-js"
+    },
+    "selected-profile-occ.wasm": {
+      "kind": "native-wasm"
+    },
+    "selected-profile-worker.js": {
+      "kind": "embedded-worker"
+    },
+    "selectedProfilePlan.mjs": {
+      "kind": "literal-rewrite",
+      "source": "modules/engine/mount/selectedProfilePlan.mjs",
+      "before": "../extrusion/selectedArrangementDescriptor.mjs",
+      "after": "./selectedArrangementDescriptor.mjs"
+    },
+    "selectedArrangementDescriptor.mjs": {
+      "kind": "verbatim",
+      "source": "modules/engine/extrusion/selectedArrangementDescriptor.mjs"
+    },
+    "sourceProjectionIntent.mjs": {
+      "kind": "literal-rewrite",
+      "source": "modules/engine/source/sourceProjectionIntent.mjs",
+      "before": "../metadata/authoredFeatureIdentity.mjs",
+      "after": "./authoredFeatureIdentity.mjs"
+    },
+    "sourceFrameIntent.mjs": {
+      "kind": "literal-rewrite",
+      "source": "modules/engine/source/sourceFrameIntent.mjs",
+      "before": "../metadata/authoredFeatureIdentity.mjs",
+      "after": "./authoredFeatureIdentity.mjs"
+    },
+    "authoredFeatureIdentity.mjs": {
+      "kind": "verbatim",
+      "source": "modules/engine/metadata/authoredFeatureIdentity.mjs"
+    },
+    "exactMeshVolume.mjs": {
+      "kind": "verbatim",
+      "source": "modules/engine/mount/exactMeshVolume.mjs"
+    }
+  },
+  "bundledSourceAssociations": {
+    "arrangementProducers": {
+      "sources": [
+        "modules/engine/extrusion/rectangularArrangement.mjs",
+        "modules/engine/extrusion/rectangularContactArrangement.mjs",
+        "modules/engine/extrusion/selectedSketchProfile.mjs"
+      ],
+      "workerRoles": [
+        "prism-semantic",
+        "project-validator",
+        "sketch-solver",
+        "native-archive"
+      ],
+      "scope": "source/entry/config and actual emitted/cache custody; not a compiler transitive inclusion certificate"
+    },
+    "patternLifecycle": {
+      "sources": [
+        "web/app/sketcher/generators/patternGenerator.js",
+        "web/app/sketcher/generators/patternSource.mjs",
+        "web/app/sketcher/headless/patternTransition.ts",
+        "web/app/sketcher/headless/patternSourceValidation.ts",
+        "web/app/sketcher/actions/lengthMeasurementPreparation.js",
+        "web/app/sketcher/headless/lengthMeasurementTransition.ts"
+      ],
+      "workerRoles": [
+        "sketch-solver",
+        "project-validator",
+        "native-archive"
+      ],
+      "scope": "source/entry/config and actual emitted/cache custody; not a compiler transitive inclusion certificate"
+    }
+  }
+}
