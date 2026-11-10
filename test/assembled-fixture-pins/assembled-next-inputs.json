@@ -125,7 +125,11 @@
     "build/prepare-finite-curve-support-cohort.cjs",
     "build/prepare-analytic-profile-cohort.cjs",
     "modules/engine/extrusion/rectangularArrangement.mjs",
-    "modules/engine/extrusion/rectangularContactArrangement.mjs"
+    "modules/engine/extrusion/rectangularContactArrangement.mjs",
+    "web/app/cad/projectManager/exactSavedContent.mjs",
+    "web/app/cad/projectManager/nativeArchiveClient.ts",
+    "web/app/cad/projectManager/nativeArchiveCodec.worker.ts",
+    "web/app/cad/projectManager/projectManagerBundle.ts"
   ],
   "hostSources": [
     "apps/system/jsketcher/index.mjs",
@@ -211,6 +215,15 @@
         "native-archive"
       ],
       "scope": "source/entry/config and actual emitted/cache custody; not a compiler transitive inclusion certificate"
+    },
+    "savedContentComparison": {
+      "sources": [
+        "web/app/cad/projectManager/exactSavedContent.mjs"
+      ],
+      "workerRoles": [
+        "native-archive"
+      ],
+      "scope": "exact comparison implementation and emitted Worker custody; not compiler transitive inclusion or runtime qualification"
     }
   }
 }
