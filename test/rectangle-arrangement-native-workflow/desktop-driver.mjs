@@ -31,13 +31,17 @@ const flush=()=>fs.writeFileSync(path.join(out,'receipt.json'),JSON.stringify(re
 fs.mkdirSync(path.join(out,'source'));receipt.sourceSnapshots=snapshots.map(({raw,...row})=>{const file='source/'+sha(raw)+'-'+path.basename(row.relative);fs.writeFileSync(path.join(out,file),raw);return{...row,file,sha256:sha(raw),bytes:raw.length};});flush();
 const browser=await require(pp).connect({browserURL:need('CODI_TEST_CDP'),protocolTimeout:300000});let h=null,b=null,models=[],aw=10,bx=5,options={depth:2},name=null,pending=null,pendingOpen=null,uncertainMutation=null;const pendingMutations=[];
 const mutatingCommands=new Set(['create-rectangle-sketch','create-empty-sketch-plane','append-sketch-primitive','edit-closed-sketch-point','edit-closed-sketch-points','edit-closed-sketch-dimension','create-selected-extrusion','edit-selected-profile-region','edit-selected-profile-depth','edit-selected-profile-source-dimension-region','create-worker-solid-box','create-worker-solid-boolean','create-edge-treatment','travel-authored-edit','save','open-project']);
+// These own data fields come from the actual acknowledged page-evaluation
+// error envelope in the pinned signed harness, not normalized commit flags.
+function acknowledgedHarnessError(error){try{const value={};for(const key of ['name','message','code','committed','possiblyCommitted','work']){const d=Object.getOwnPropertyDescriptor(error,key);if(!d||!Object.hasOwn(d,'value'))return null;value[key]=d.value;}if(typeof value.name!=='string'||typeof value.message!=='string'||!(value.code===null||typeof value.code==='string')||typeof value.committed!=='boolean'||typeof value.possiblyCommitted!=='boolean'||!(value.work===null||typeof value.work==='object'&&!Array.isArray(value.work)))return null;return structuredClone(value);}catch{return null;}}
 async function call(command,args={}){
  const row={case:name,command,args:structuredClone(args)};receipt.commands.push(row);const commandIndex=receipt.commands.length-1;flush();
  try{row.result=structuredClone(await h.command(command,args));return row.result;}
  catch(e){
   row.error={name:e.name,code:e.code??null,message:e.message,committed:e.committed===true,possiblyCommitted:e.possiblyCommitted===true,...(e.cause?{cause:structuredClone(e.cause)}:{})};
   row.commitEvidence=Object.fromEntries(['committed','possiblyCommitted'].map(k=>{const d=Object.getOwnPropertyDescriptor(e,k);return[k,!d?{kind:'absent'}:Object.hasOwn(d,'value')&&typeof d.value==='boolean'?{kind:'boolean',value:d.value}:{kind:'unproved'}];}));
-  if(mutatingCommands.has(command)){const outcome={case:name,commandIndex,command,args:structuredClone(args),error:structuredClone(row.error),commitEvidence:structuredClone(row.commitEvidence),username:h.username,windowId:String(h.windowId),phase:'unknown'};receipt.mutationOutcomes.push(outcome);pendingMutations.push(outcome);uncertainMutation=pendingMutations[0];receipt.uncertainMutation=uncertainMutation;}
+  row.acknowledgedError=acknowledgedHarnessError(e);
+  if(mutatingCommands.has(command)){const outcome={case:name,commandIndex,command,args:structuredClone(args),error:structuredClone(row.error),commitEvidence:structuredClone(row.commitEvidence),acknowledgedError:structuredClone(row.acknowledgedError),username:h.username,windowId:String(h.windowId),phase:'unknown'};receipt.mutationOutcomes.push(outcome);pendingMutations.push(outcome);uncertainMutation=pendingMutations[0];receipt.uncertainMutation=uncertainMutation;}
   throw e;
  }finally{flush();}
 }
@@ -51,7 +55,7 @@ function settleRefusal(row){
  if(!mutatingCommands.has(row.command))return;
  a(row.error&&!row.error.committed&&!row.error.possiblyCommitted);a.equal(row.error.code,row.expectedCode);refusedState(row.before,row.after,row.replayed);
  const candidates=pendingMutations.filter(x=>x.command===row.command&&canonical(x.args)===canonical(row.args));a.equal(candidates.length,1,'One actual pending failed mutation');
- const outcome=candidates[0],command=receipt.commands[outcome.commandIndex];for(const k of ['name','code','message','committed','possiblyCommitted'])a.equal(command.error[k],row.error[k],'Actual refused command '+k);
+ const outcome=candidates[0],command=receipt.commands[outcome.commandIndex];a(outcome.acknowledgedError!==null,'Unknown transport outcome cannot settle from state/normalized flags');a.deepEqual(outcome.acknowledgedError,command.acknowledgedError);for(const k of ['name','code','message','committed','possiblyCommitted'])a.equal(command.error[k],row.error[k],'Actual refused command '+k);
  outcome.phase='settled-refusal';outcome.proof=structuredClone(row);pendingMutations.splice(pendingMutations.indexOf(outcome),1);receipt.uncertainMutation=pendingMutations[0]||null;flush();
 }
 async function rejection(label,command,args,code,{replayed=false,name:errorName='Error'}={}){const before=await state();let error=null;try{await call(command,args);}catch(e){error={name:e.name,code:e.code??null,message:e.message,committed:e.committed===true,possiblyCommitted:e.possiblyCommitted===true};}const after=await state(),row={case:name,label,command,args,expectedCode:code,error,before,after,replayed};receipt.refusals.push(structuredClone(row));record(label+' raw refusal',row);a(error,'Expected refusal');a.equal(error.code,code);a.equal(error.name,errorName);a(!error.committed&&!error.possiblyCommitted);refusedState(before,after,replayed);settleRefusal(row);}

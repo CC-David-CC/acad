@@ -23,3 +23,11 @@ This packet qualifies, if and only if the future whole/independent reader pass, 
 Source custody follow-up: actual distinct clean Core/Host/acceptance Git top-level and HEAD must equal their explicit full producer commits before/after, with actual acceptance cwd/root; original snapshots/served pins remain unchanged. Fresh Open now has a separate submitted/acknowledged/settled ledger and actual resulting state/old+new actors, before clearing custody. Actual mutating errors carrying committed/possiblyCommitted retain the own context and raw row without retry. These are source-level guards, not demonstrated runtime incidents. All nine cycles and geometry/source criteria remain unchanged.
 
 Every submitted mutation error is now unknown until its actual frozen refusal helper proves the exact code/layer and complete accepted before/after state. Normalized false flags alone never settle it. The two shared per-cell refusals notify an optional acceptance-only refusalSettled callback only AFTER their unchanged exact assertions; the enclosing whole matches the actual pending command and retains its full proof. Unknown/unexpected outcomes retain context and fail terminal status. Read-only failures remain distinct.
+
+Before the first current rectangle whole, acknowledged-refusal hardening also
+requires the actual pinned signed-harness own-data error envelope (including
+its `work` field), in addition to every existing nonnull exact-code/name and
+full-state proof. All raw flags/causes/outcomes stay recorded; missing envelope
+retains unknown custody. This adds no refusal-code fallback, public flag,
+geometry change, extra authority, skipped phase or altered tolerance. The
+independent reader binds the same actual trace/envelope/outcome/proof.

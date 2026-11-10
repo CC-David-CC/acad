@@ -58,3 +58,11 @@ The persistence adapter explicitly preserves two different real phases: saves[].
 The driver requires three separate clean actual checkouts, executing acceptance cwd/root, and exact Core/Host/acceptance HEADs before/after (tracked and untracked status empty; ignored build assets preserved). All original file/Git/runtime pins remain. Own freshOpen submission/acknowledgment/settlement and actual mutating errors with committed/possiblyCommitted now retain custody until established; no automatic retry or unknown close. Use a fresh output and the reviewed acceptance commit; no product rebuild is needed for this acceptance-only correction.
 
 Mutation flag follow-up: signed-harness synthesizes false flags in an application envelope, so every failed mutation is retained until real expected-refusal before/after proof settles it. Raw delivered flag descriptor presence is diagnostic only. The enclosing whole supplies the shared fragment optional refusalSettled callback; it is invoked only after exact existing per-cell refusal assertions. No preflight success is inferred from flags and no unexpected outcome is retried/closed.
+
+Before the first current rectangle whole, acknowledged-refusal hardening also
+requires the actual pinned signed-harness own-data error envelope (including
+its `work` field), in addition to every existing nonnull exact-code/name and
+full-state proof. All raw flags/causes/outcomes stay recorded; missing envelope
+retains unknown custody. This adds no refusal-code fallback, public flag,
+geometry change, extra authority, skipped phase or altered tolerance. The
+independent reader binds the same actual trace/envelope/outcome/proof.
