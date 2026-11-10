@@ -1,0 +1,5 @@
+# Rectangle semantic failure diagnostic — BEFORE
+
+Actual R4 rectangle whole receipt `/mnt/data10tb/codi-acad-rectangle-native-20261110-r4/whole/receipt.json`, SHA25681cd508729d758fadac5ff060faed61adc4904e4f452519c46d755a9900bdd0d, records a failed original SegmentLength width11 edit after genuine Save/Open. Its last accepted source has exact A[0,10]×[0,10], B[6,15]×[0,10], unrelatedPoint(30,40), and the canonical11 A rows. The failed candidate is absent; no concrete coordinate drift is established. Work is null because prism semantic failure transport retains only code/message.
+
+Root approved a bounded observational diagnostic only at the actual failed two-loop/eight-Segment rectangle recognizer. Carry closed counts/reason/ordinal/equality flags and a single edge dx/dy through existing own-data work transport; never publish source, coordinates, user IDs/paths/expressions, handles or logs. No solver/preparation replay, state mutation, authority flag, semantic/tolerance change or original error replacement. The existing Host harness supports this data shape; acceptance already records acknowledgedError.work. No test/retry or retained context/evidence mutation.
