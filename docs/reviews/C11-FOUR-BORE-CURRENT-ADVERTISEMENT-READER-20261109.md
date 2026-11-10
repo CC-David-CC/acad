@@ -28,5 +28,10 @@ original source snapshot, AND every actual executing first-party Python verifier
 leaf against its own frozen Git commit before/after. It does not mutate receipt
 acceptanceSource/sourceSnapshots or fabricate original reader provenance.
 
+Independent review found a custody omission before AFTER execution: the wrapper
+itself had only a one-time hash. Its resolved executing path must now equal the
+frozen worktree path, and its Git blob/bytes join the verifier before/after
+comparison. This repairs source custody without changing the artifact criteria.
+
 The next execution uses a new detached reader worktree and new AFTER output/
 custody. No result is anticipated by this source note. Full C11/Gate1 OPEN.
