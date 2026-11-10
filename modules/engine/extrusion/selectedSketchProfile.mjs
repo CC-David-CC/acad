@@ -80,7 +80,7 @@ async function extractSource({r,frame,faceOnly=false},allowIsolatedOpen=false){
  // Whole-source contact proof precedes the old shared-edge refusal. The
  // helper returns only the exact two-rectangle contact domain; all other
  // sources retain the original partition/overlap/circle policy below.
- const contact=mixed&&!loops.length&&segments.length===8?await deriveRectangleContactArrangement({faceId:r.faceId,segments,qualifiedToLocal,clearanceMm:0.0001}):null;
+ const contact=mixed&&!loops.length&&segments.length===8?await deriveRectangleContactArrangement({faceId:r.faceId,segments,qualifiedToLocal}):null;
  if(contact)return{r,frame,regions:contact.cells,byIds:new Map(),qualifiedToLocal,sketch,sourceAnalysis:contact.sourceAnalysis,arrangement:contact};
  // Use exact endpoint identities, never proximity welding. V3 separates
  // simple articulation blocks; other branches/gaps/duplicates still refuse.
@@ -115,7 +115,7 @@ async function extractSource({r,frame,faceOnly=false},allowIsolatedOpen=false){
  // A derived arrangement is a different source contract, not a relaxed
  // containment classification. Only this exact eight-Segment extrusion slice
  // qualifies; source-face consumers retain their whole-curve contracts.
- const arrangement=mixed&&!open.length&&segments.length===8?await deriveRectangleArrangement({faceId:r.faceId,loops,qualifiedToLocal,clearanceMm:0.0001}):null;
+ const arrangement=mixed&&!open.length&&segments.length===8?await deriveRectangleArrangement({faceId:r.faceId,loops,qualifiedToLocal}):null;
  if(arrangement)return{r,frame,regions:arrangement.cells,byIds:new Map(),qualifiedToLocal,sketch,sourceAnalysis:arrangement.sourceAnalysis,arrangement};
  if(r.circularArrangementVersion===1&&mixed&&!open.length&&!segments.length&&loops.length===2&&loops.every(loop=>loop.length===1&&loop[0].kind==='circle')){
   const circles=loops.map(loop=>({id:qualifiedToLocal.get(loop[0].id),center:loop[0].center.slice(),radius:loop[0].radius})).sort((a,b)=>a.id<b.id?-1:1),relation=circularRelation(circles[0],circles[1]);
@@ -173,7 +173,8 @@ export async function inspectSolvedSelectedRegions(input){
   const derived=context.arrangement||context.circular,regionId=derived?region.regionId:'sketch-region:'+JSON.stringify(region),descriptor=derived?region.descriptor:describeSelectedRegion(region,context.qualifiedToLocal);
   try{prepareRegion(context,regionId);return{regionId,support:'supported',reason:null,descriptor};}
   catch(error){
-   if(!['INVALID_REQUEST','INVALID_FRAME','INVALID_PROFILE','UNSUPPORTED_PROFILE','OPEN_OR_AMBIGUOUS_PROFILE'].includes(error?.code))throw error;
+   const perCellResolution=context.arrangement&&error?.code==='PROFILE_BELOW_RESOLUTION';
+   if(!perCellResolution&&!['INVALID_REQUEST','INVALID_FRAME','INVALID_PROFILE','UNSUPPORTED_PROFILE','OPEN_OR_AMBIGUOUS_PROFILE'].includes(error?.code))throw error;
    return{regionId,support:'unsupported',reason:{code:error.code,message:error.message},descriptor};
   }
  });

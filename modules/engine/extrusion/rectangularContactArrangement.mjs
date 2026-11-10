@@ -12,7 +12,7 @@ function rectangle(walk){
  if(corners.some(c=>!points.some(p=>p[0]===c[0]&&p[1]===c[1])))return null;
  return {min,max,sides:corners.map((p,i)=>edgeKey(p,corners[(i+1)%4]))};
 }
-export async function deriveRectangleContactArrangement({faceId,segments,qualifiedToLocal,clearanceMm}){
+export async function deriveRectangleContactArrangement({faceId,segments,qualifiedToLocal}){
  if(segments.length!==8||segments.some(c=>c.kind!=='segment'||!((c.a[0]===c.b[0])!==(c.a[1]===c.b[1]))))return null;
  const local=c=>qualifiedToLocal.get(c.id),curves=segments.slice().sort((a,b)=>cmp(local(a),local(b))),sourceCurveIds=curves.map(local);
  if(sourceCurveIds.some(id=>typeof id!=='string'||!id)||new Set(sourceCurveIds).size!==8)fail('Contact source must retain all eight actual identities.');
@@ -52,7 +52,7 @@ export async function deriveRectangleContactArrangement({faceId,segments,qualifi
  if([...spans.values()].some(s=>s.cells.length<1||s.cells.length>2||s.owners.length!==s.cells.length)||[...spans.values()].filter(s=>s.cells.length===2).length!==1)fail('Contact incidence or shared-owner coverage is ambiguous.');
  const eventRefs=new Map(),seen=new Set();for(const [k,p]of events){const ref={incidentCurveIds:curves.filter(c=>on(p,c)).map(local).sort()},identity=canonicalArrangement(ref);if(ref.incidentCurveIds.length<2||seen.has(identity))fail('Actual source incidence does not uniquely bind a contact event.');seen.add(identity);eventRefs.set(k,ref);}
  const refs=[];for(const span of spans.values()){
-  if(Math.hypot(span.b[0]-span.a[0],span.b[1]-span.a[1])<=clearanceMm)fail('An actual contact span is below the existing profile resolution.','PROFILE_BELOW_RESOLUTION');
+  if(span.a[0]===span.b[0]&&span.a[1]===span.b[1])fail('Source contact spans require distinct represented endpoints.');
   const sourceSpan={kind:'source-span',owners:span.owners.slice().sort(),ends:[eventRefs.get(key(span.a)),eventRefs.get(key(span.b))].sort((a,b)=>cmp(canonicalArrangement(a),canonicalArrangement(b)))},id=await sourceSpanId(sourceSpan);span.ref={id,sourceSpan};refs.push(span.ref);
  }
  refs.sort((a,b)=>cmp(a.id,b.id));
