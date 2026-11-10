@@ -10,6 +10,7 @@ import {acquireVersionedSnapshot} from './file-read.mjs';
 import {nativeProjectExtensions,nativeProjectFormat,requireNativeArchive,restoreNativeProjectFile,createNativeProjectBackings,validateNativeArchivePreparation} from './native-project-file.mjs';
 import {registerSketchCommands} from './sketch-commands.mjs';
 import {registerClosedSketchCommands} from './closed-sketch-commands.mjs';
+import {registerCurveQueryCommands} from './curve-query-commands.mjs';
 import {registerLengthMeasurementCommands} from './length-measurement-commands.mjs';
 import {registerRadiusCommands} from './radius-commands.mjs';
 import {registerTangencyCommands} from './tangency-commands.mjs';
@@ -221,6 +222,7 @@ export function mount(host){
  }});
  host.onDispose(stepExport.dispose);if(host.commands)host.onDispose(stepExport.register());
  if(host.commands){host.onDispose(rectangle.register());host.onDispose(registerFeatureCommands(host,()=>rectangle.target()));host.onDispose(registerClosedSketchCommands(host,()=>rectangle.target()));host.onDispose(registerPrimitiveCommands(host,()=>rectangle.target()));host.onDispose(registerSolidCommands(host,()=>rectangle.target()));host.onDispose(registerParameterCommands(host,()=>rectangle.target()));host.onDispose(registerLegacyExpressionCommands(host,()=>rectangle.target()));}
+ if(host.commands)host.onDispose(registerCurveQueryCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSketchExportCommands(host,{getTarget:()=>rectangle.target(),exportDxf:args=>exportDxf(args)}));
  if(host.commands)host.onDispose(registerReferenceCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLengthMeasurementCommands(host,()=>rectangle.target()));
