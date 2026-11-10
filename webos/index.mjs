@@ -1,3 +1,4 @@
+import {registerArcLengthMeasurementCommands} from './arc-length-measurement-commands.mjs';
 import {registerSourceProjectionCommands} from './source-projection-commands.mjs';
 import {registerProfileExtentCommands} from './profile-extent-commands.mjs';
 import {registerViewCommands} from './view-commands.mjs';
@@ -252,6 +253,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerSketchExportCommands(host,{getTarget:()=>rectangle.target(),exportDxf:args=>exportDxf(args)}));
  if(host.commands)host.onDispose(registerReferenceCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLengthMeasurementCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerArcLengthMeasurementCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerRadiusCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerTangencyCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerLengthFamilyCommands(host,()=>rectangle.target()));
