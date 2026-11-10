@@ -1,0 +1,5 @@
+# Analytic R4 reader derived-number separation — BEFORE
+
+Frozen acceptance27c163111a759d07060efc87a9dd7cbdd8732356. FIRST independent oracle at /mnt/data10tb/codi-acad-assembled-analytic-20261110-r4/AFTER refuses finite original Number; no geometry certification is established by that refusal.
+
+Confirmed source: source_oracle converts original radius to Fraction, derives endpoint tuples, then endpoint calls truth.near(raw_coordinate,derived_fraction). near sends BOTH arguments through number(), which intentionally accepts only finite original int/float and rejects Fraction. This is an internal reader type mismatch, not observed geometry failure. number() must stay strict for actual source/cold/Native values; only the mathematical expectation side may accept an exact Fraction. All budgets, finite geometry/source/branch/ownership/artifact rules remain unchanged. Related STEP/mesh/negative readers have separate declared derived arithmetic paths; inspect those without broadening actual numeric admission. No test/import/parser/build/Native/browser execution or evidence modification.
