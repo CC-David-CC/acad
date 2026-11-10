@@ -122,7 +122,9 @@ export function layoutDrawingDimensions({sheet,dimensions,labelBoxes,captionBoxe
  // Short dimensions take the nearer lanes first. Stable authored identity is
  // the tie breaker, independent of definition/source array traversal order.
  const ordered=[...dimensions].sort((a,b)=>Math.hypot(a.ends[1][0]-a.ends[0][0],a.ends[1][1]-a.ends[0][1])-Math.hypot(b.ends[1][0]-b.ends[0][0],b.ends[1][1]-b.ends[0][1])||(a.dimensionId<b.dimensionId?-1:a.dimensionId>b.dimensionId?1:0));
- const inSheet=p=>point(p)&&p.every((n,i)=>n>=.125&&n<=(i?sheet.height:sheet.width)-.125);
+ // Existing caption policy reserves the top/bottom16mm for title/footer.
+ const reservedBands=[{min:[0,0],max:[sheet.width,16]},{min:[0,sheet.height-16],max:[sheet.width,sheet.height]}];
+ const inSheet=p=>point(p)&&p[0]>=.125&&p[0]<=sheet.width-.125&&p[1]>=16.125&&p[1]<=sheet.height-16.125;
  for(const row of ordered){
   const a=row.ends[0],b=row.ends[1],delta=b.map((n,i)=>n-a[i]),length=Math.hypot(...delta),others=[...labelBoxes.filter(r=>r!==row.labelBox),...captionBoxes];
   const uncertain=reason=>{
@@ -131,6 +133,7 @@ export function layoutDrawingDimensions({sheet,dimensions,labelBoxes,captionBoxe
   };
   let labelIssue=null;
   if(row.labelBox.min.some(n=>n<.125)||row.labelBox.max.some((n,i)=>n>(i?sheet.height:sheet.width)-.125))labelIssue='DECLARED_TEXT_OUTSIDE_SHEET';
+  else if(reservedBands.some(r=>overlap(row.labelBox,r)))labelIssue='RESERVED_SHEET_BAND_CONFLICT';
   else if(others.some(r=>overlap(row.labelBox,r)))labelIssue='DECLARED_TEXT_BOX_CONFLICT';
   // This .25 broad-phase gutter contains the exact .125 stroke test even
   // after binary64 addition rounding in the finite <=1e9 paper domain.
@@ -155,7 +158,7 @@ export function layoutDrawingDimensions({sheet,dimensions,labelBoxes,captionBoxe
     const root=tip.map((n,i)=>n+u[i]*direction*2),points=[root.map((n,i)=>n+normal[i]*.65),tip,root.map((n,i)=>n-normal[i]*.65)];paths.push({role:'arrowhead',points});
    }
    if(paths.some(p=>p.points.some(q=>!inSheet(q)))){reason='DIMENSION_LANE_OUTSIDE_SHEET';continue;}
-   if(paths.some(p=>p.points.slice(1).some((q,i)=>[...others,row.labelBox].some(r=>exact.rectangle(p.points[i],q,r,forms.has(r)?2.25:.125))))){reason='DECLARED_TEXT_STROKE_CONFLICT';continue;}
+   if(paths.some(p=>p.points.slice(1).some((q,i)=>[...others,...reservedBands,row.labelBox].some(r=>exact.rectangle(p.points[i],q,r,forms.has(r)?2.25:.125))))){reason='DECLARED_TEXT_STROKE_CONFLICT';continue;}
    if(paths.filter(p=>p.role==='dimension-line').some(p=>lines.some(line=>exact.crossing(p.points[0],p.points[1],line[0],line[1])))){reason='DIMENSION_LINE_CROSSING';continue;}
    const geometryCrossing=paths.filter(p=>p.role==='dimension-line').some(p=>geometryIndex.some(boxOf(p.points),segment=>exact.crossing(p.points[0],p.points[1],segment[0],segment[1])));
    if(geometryCrossing){reason='PROJECTED_GEOMETRY_LINE_CROSSING';continue;}
@@ -163,7 +166,7 @@ export function layoutDrawingDimensions({sheet,dimensions,labelBoxes,captionBoxe
    if(target){
     // Existing requirement-frame acceptance reserves >=2.125mm from strokes;
     // preserve it after deferred dimension planning, with a paper gutter.
-    const obstacles=[...others.map(b=>forms.has(b)?{min:b.min.map(n=>n-2.25),max:b.max.map(n=>n+2.25)}:b),...leaderStrokes];
+    const obstacles=[...reservedBands,...others.map(b=>forms.has(b)?{min:b.min.map(n=>n-2.25),max:b.max.map(n=>n+2.25)}:b),...leaderStrokes];
     if(obstacles.length+1>LIMIT.boxes)resource('Dimension leader obstacles exceed their bounded inventory.');
     try{
      const points=routeDrawingLeader(start,target.end,row.labelBox,target.side,obstacles,sheet,budget);
