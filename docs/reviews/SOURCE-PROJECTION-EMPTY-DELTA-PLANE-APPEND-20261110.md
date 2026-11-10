@@ -17,3 +17,9 @@ The established later Craft path resets the prior shared journal when an unjourn
 3. A supplied proposal always retains document/revision validation, including zero rows. Historical travel always retains direction and exact historical delta validation; an empty actual result cannot bypass an expected nonempty historical delta.
 4. Preserve replay, source/frame/admission/currentness proofs, workspace cleanup, exact before/after cache comparisons, byte budgets and atomic publication. No Native, solver, format, transport, public API or feature allocation changes.
 5. Requalify the complete unchanged mixed runner and its after-whole independent archive/equation/DXF/STEP/mesh oracle on a normal rebuilt candidate. No isolated probes or source-only PASS claim.
+
+## SOURCE repair disposition
+
+The follow-up changes only the supplement guard order. It validates `Array.isArray(rows)` and `rows.length<=64`, returns a null/undefined proposal only for `rows.length===0`, then applies the unchanged supplied-proposal identity/revision and historical-travel checks. False or other malformed supplied proposals still refuse. Nonempty rows with no proposal still refuse before publication. Existing Craft reset logic, cache replay/change production, workspace writes and all publication/currentness code are untouched.
+
+No code import, parser, test, build, Native or browser execution was performed. Actual zero-delta success and retained nonempty/travel behavior remain obligations of the grouped whole qualification.
