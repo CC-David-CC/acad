@@ -14,9 +14,9 @@ empty document, and reopening the own saved document must restore it.
 A refused stale revision must preserve source and dirty state.
 
 A separate genuine10x20x30mm OCCT box receives one public material assignment
-named `Boundary-🌐-material`. A valid numeric expression source contains only
-`pad = `, spaces and `1`. Whitespace length is calculated once from an actual
-first saved JSON file so the astral high surrogate lies at the final16384-code
+named `Boundary-🌐-material`. A valid numeric expression source has an ignored
+whitespace-only first line followed by `pad = 1`. Whitespace length is calculated
+once from an actual first saved JSON file so the astral high surrogate lies at the final16384-code
 unit fragment boundary. Material rebind uses the real propose/confirm commands.
 The second JSON must contain that exact uncorrupted string, with the pair
 crossing the intended UTF16 boundary. No adjustment/retry after a failed run.
