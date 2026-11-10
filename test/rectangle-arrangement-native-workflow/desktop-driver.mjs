@@ -4,21 +4,42 @@ import {createRequire} from 'node:module';import {fileURLToPath,pathToFileURL} f
 import {canonical,discover,inspectSource,measured} from './oracle.mjs';
 import {runPerCellResolution} from '../rectangle-arrangement-resolution/public-fragment.mjs';
 const need=k=>{a(process.env[k],k+' required');return process.env[k];},sha=b=>crypto.createHash('sha256').update(b).digest('hex');
-const here=path.dirname(fileURLToPath(import.meta.url)),acceptanceRoot=path.resolve(here,'../..'),core=path.resolve(need('CODI_RUNTIME_SOURCE_ROOT')),desktop=path.resolve(need('CODI_DESKTOP_SOURCE_ROOT')),out=path.resolve(need('CODI_EVIDENCE'));
+const here=path.dirname(fileURLToPath(import.meta.url)),acceptanceRoot=fs.realpathSync(path.resolve(here,'../..')),core=fs.realpathSync(path.resolve(need('CODI_RUNTIME_SOURCE_ROOT'))),desktop=fs.realpathSync(path.resolve(need('CODI_DESKTOP_SOURCE_ROOT'))),out=path.resolve(need('CODI_EVIDENCE'));
 const source=need('CODI_EXPECT_SOURCE'),hostSource=need('CODI_EXPECT_DESKTOP'),acceptanceSource=need('CODI_ACCEPTANCE_SOURCE'),build=need('CODI_ARRANGEMENT_ENGINE_REVISION'),pins=JSON.parse(fs.readFileSync(need('CODI_SIGNED_PINS')));
 const SHELL='sha256:57b74074e0a249b917ac68357fbd003c37d1ab61897206886b575088e6995858:60dc956b08e01f43d08a48035a384e478e63bb34fb55f21a152c8cd12e8b8947';a.equal(build,SHELL,'The frozen whole targets the genuine Shell cohort; other arrangement domains have separate contracts');
 a.match(build,/^sha256:[a-f0-9]{64}:[a-f0-9]{64}$/);a.equal(pins.source,source);a.equal(pins.desktop,hostSource);for(const k of ['CODI_TEST_URL','CODI_TEST_CDP'])a(['127.0.0.1','localhost'].includes(new URL(need(k)).hostname));a(!fs.existsSync(out),'Preserve FIRST whole evidence');
+const sourceRoots={acceptance:acceptanceRoot,core,desktop},sourceCommits={acceptance:acceptanceSource,core:source,desktop:hostSource};
+function captureCheckouts(){
+ a.equal(fs.realpathSync(process.cwd()),acceptanceRoot,'Execute from the real separate acceptance checkout');a.equal(new Set(Object.values(sourceRoots)).size,3,'Distinct compiled Core, Host and acceptance roots');
+ return Object.fromEntries(Object.entries(sourceRoots).map(([repository,root])=>{
+  a.match(sourceCommits[repository],/^[a-f0-9]{40}$/);
+  const git=args=>{const r=spawnSync('git',['-C',root,...args],{encoding:'utf8',maxBuffer:8388608});a.equal(r.status,0,'Actual source checkout '+repository);return r.stdout;};
+  const top=fs.realpathSync(git(['rev-parse','--show-toplevel']).trim()),head=git(['rev-parse','HEAD']).trim(),status=git(['status','--porcelain=v1','--untracked-files=all']);
+  a.equal(top,root);a.equal(head,sourceCommits[repository],'Actual HEAD '+repository);a.equal(status,'','Actual tracked/untracked source clean '+repository);
+  return[repository,{root,head,expectedCommit:sourceCommits[repository],status}];
+ }));
+}
+const sourceCheckoutsBefore=captureCheckouts();
 const files=['CONTRACT.md','README.md','desktop-driver.mjs','oracle.mjs','check.py','run-artifact-oracle.py','producer-roster.json'],roster=JSON.parse(fs.readFileSync(path.join(here,'producer-roster.json')));
 const origins=[...files.map(n=>({repository:'acceptance',root:acceptanceRoot,relative:'test/rectangle-arrangement-native-workflow/'+n,commit:acceptanceSource})),...(roster.acceptance||[]).map(relative=>({repository:'acceptance',root:acceptanceRoot,relative,commit:acceptanceSource})),...roster.core.map(relative=>({repository:'core',root:core,relative,commit:source})),...roster.desktop.map(relative=>({repository:'desktop',root:desktop,relative,commit:hostSource}))];
 a.equal(new Set(origins.map(r=>r.repository+':'+r.relative)).size,origins.length,'Exact source roster, no duplicate roots');
 const snapshots=origins.map(row=>{a.match(row.commit,/^[a-f0-9]{40}$/);const raw=fs.readFileSync(path.join(row.root,row.relative)),g=spawnSync('git',['-C',row.root,'show',row.commit+':'+row.relative],{maxBuffer:8388608});a.equal(g.status,0,g.stderr.toString());a.deepEqual(raw,g.stdout,'Actual source equals its separate frozen Git producer '+row.relative);const oid=spawnSync('git',['-C',row.root,'rev-parse',row.commit+':'+row.relative],{encoding:'utf8'});a.equal(oid.status,0);return{...row,gitBlobOID:oid.stdout.trim(),raw};});
 const hashes=()=>Object.fromEntries(origins.map(row=>[row.repository+':'+row.relative,sha(fs.readFileSync(path.join(row.root,row.relative)))]));
 const require=createRequire(import.meta.url),pp=need('PUPPETEER_CORE_PATH');a.equal(require(path.join(pp,'package.json')).version,'24.35.0');const helper=path.join(desktop,'test/agent-cad-corpus/sweep/signed-harness.mjs'),{harness}=await import(pathToFileURL(helper));
-fs.mkdirSync(out,{recursive:true});const receipt={status:'RUNNING',scope:'Current finite original rectangle arrangement .cad Save/server/freshOpen, original equations/source spans/Native observations and six ordinary archive cycles; no STEP/mesh/global CAD qualification',source,hostSource,acceptanceSource,pins,build,sourcePins:hashes(),sourceSeeds:false,privateAuthoring:false,fakeReplies:false,rows:[],commands:[],observations:[],refusals:[],cases:[],saves:[],reopens:[],writes:[],travels:[],discoveries:[],noops:[]};
+fs.mkdirSync(out,{recursive:true});const receipt={status:'RUNNING',scope:'Current finite original rectangle arrangement .cad Save/server/freshOpen, original equations/source spans/Native observations and six ordinary archive cycles; no STEP/mesh/global CAD qualification',source,hostSource,acceptanceSource,pins,build,sourcePins:hashes(),sourceCheckoutsBefore,sourceSeeds:false,privateAuthoring:false,fakeReplies:false,rows:[],commands:[],observations:[],refusals:[],cases:[],saves:[],reopens:[],writes:[],travels:[],discoveries:[],noops:[],opens:[],pendingOpen:null,uncertainMutation:null};
 const flush=()=>fs.writeFileSync(path.join(out,'receipt.json'),JSON.stringify(receipt,null,2)+'\n'),record=(label,data={})=>{receipt.rows.push({case:name,label,...structuredClone(data)});flush();console.log(label);},one=(rows,label)=>{a.equal(rows.length,1,'One '+label);return rows[0];};
 fs.mkdirSync(path.join(out,'source'));receipt.sourceSnapshots=snapshots.map(({raw,...row})=>{const file='source/'+sha(raw)+'-'+path.basename(row.relative);fs.writeFileSync(path.join(out,file),raw);return{...row,file,sha256:sha(raw),bytes:raw.length};});flush();
-const browser=await require(pp).connect({browserURL:need('CODI_TEST_CDP'),protocolTimeout:300000});let h=null,b=null,models=[],aw=10,bx=5,options={depth:2},name=null,pending=null;
-async function call(command,args={}){const row={case:name,command,args:structuredClone(args)};receipt.commands.push(row);flush();try{row.result=structuredClone(await h.command(command,args));return row.result;}catch(e){row.error={name:e.name,code:e.code??null,message:e.message,committed:e.committed===true,possiblyCommitted:e.possiblyCommitted===true,...(e.cause?{cause:structuredClone(e.cause)}:{})};throw e;}finally{flush();}}
+const browser=await require(pp).connect({browserURL:need('CODI_TEST_CDP'),protocolTimeout:300000});let h=null,b=null,models=[],aw=10,bx=5,options={depth:2},name=null,pending=null,pendingOpen=null,uncertainMutation=null;
+const mutatingCommands=new Set(['create-rectangle-sketch','create-empty-sketch-plane','append-sketch-primitive','edit-closed-sketch-point','edit-closed-sketch-points','edit-closed-sketch-dimension','create-selected-extrusion','edit-selected-profile-region','edit-selected-profile-depth','edit-selected-profile-source-dimension-region','create-worker-solid-box','create-worker-solid-boolean','create-edge-treatment','travel-authored-edit','save','open-project']);
+async function call(command,args={}){
+ const row={case:name,command,args:structuredClone(args)};receipt.commands.push(row);const commandIndex=receipt.commands.length-1;flush();
+ try{row.result=structuredClone(await h.command(command,args));return row.result;}
+ catch(e){
+  row.error={name:e.name,code:e.code??null,message:e.message,committed:e.committed===true,possiblyCommitted:e.possiblyCommitted===true,...(e.cause?{cause:structuredClone(e.cause)}:{})};
+  if(mutatingCommands.has(command)&&(row.error.committed||row.error.possiblyCommitted)){uncertainMutation={case:name,commandIndex,command,error:structuredClone(row.error),username:h.username,windowId:String(h.windowId)};receipt.uncertainMutation=structuredClone(uncertainMutation);}
+  throw e;
+ }finally{flush();}
+}
 async function pinsNow(){const assets=await h.pinFiles(Object.keys(pins.files));for(const row of assets)a.equal(row.sha256,pins.files[row.name]);const outer=await h.pinOuter({bundle:pins.outer.bundleSHA256});a.equal(outer.sha256,pins.outer.sha256);a(h.windowId!==undefined&&h.windowId!==null&&String(h.windowId).length>0);record('Actual served compiled Core Host Worker and Native pins',{case:name,assets,outer,username:h.username,windowId:String(h.windowId)});}
 async function state(faceId=b?.faceId){return{capture:await h.capture(faceId),host:await call('inspect'),physical:await call('inspect-physical-parameters'),drawing:await call('inspect-linked-part-drawing'),manufacturing:await call('inspect-manufacturing'),frames:await call('inspect-source-frames'),ownership:await h.ownership(),lifecycle:await h.frame.evaluate(()=>{const c=__CAD_APP,p=c.projectService,s=c.craftService.modifications$.value;return{generation:p.documentGeneration,namespace:p.sketchStorageNamespace,epoch:c.craftService.evaluationEpoch,pointer:s.pointer,pipelineFailed:!!c.craftService.pipelineFailure$.value,cleanupFailed:!!c.craftService.engineCleanupFailure$.value,sourceVersions:c.sketchStorageService.getAllSketches().map(x=>({id:x.id,key:p.sketchStorageKey(x.id),version:c.storageService.versionOf(p.sketchStorageKey(x.id))})).sort((a,b)=>a.id.localeCompare(b.id))};})};}
 function settled(s){a(!s.ownership.processing&&!s.ownership.resources.cleanupFailed&&!s.lifecycle.pipelineFailed&&!s.lifecycle.cleanupFailed);for(const k of ['candidates','accepted','mounts'])a.equal(s.ownership.resources[k],0);a.equal(s.ownership.resources.owners,s.ownership.resources.detached);a.equal(s.lifecycle.pointer,s.capture.native.history.length-1);a.deepEqual(s.ownership.counters,s.capture.native.counters);}
@@ -37,10 +58,14 @@ async function persistNative({label,faceId,binding,context=null}){
  try{write.result=structuredClone(await call('save',issued));write.phase='acknowledged';flush();a.equal(write.result.committed,true);a.equal(write.result.persistence,'browser');a.equal(write.result.nativeArchive.format,'codi-cad-project');write.readback=await synchronize(file,label);write.phase='settled';pending=null;flush();}
  catch(e){write.error={name:e.name,code:e.code??null,message:e.message,committed:e.committed===true,possiblyCommitted:e.possiblyCommitted===true};flush();throw e;}
  const after=await state(faceId);a.deepEqual(after.capture,before.capture);const row={case:name,label,faceId,binding:structuredClone(binding),context:structuredClone(context),before,after,issued,result:write.result,writeSequence:write.sequence,...write.readback};receipt.saves.push(row);flush();
- await h.freshOpen(file);await pinsNow();const opened=await state(faceId);settled(opened);a.deepEqual(durable(opened.capture.native),durable(before.capture.native));a.deepEqual(sourceSelections(opened.capture),sourceSelections(before.capture));a.deepEqual(opened.capture.solids.outputs.map(x=>({outputId:x.outputId,featureId:x.featureId})),before.capture.solids.outputs.map(x=>({outputId:x.outputId,featureId:x.featureId})));a(!opened.capture.journal.canUndo&&!opened.capture.journal.canRedo);
- // Fragment API names after as the actual fresh-Open state. Preserve the
- // different post-Save observation explicitly; saves[].after stays post-Save.
- const result={...row,afterSave:after,after:opened,opened,username:h.username,windowId:String(h.windowId)};receipt.reopens.push(result);flush();return result;
+ const open={sequence:receipt.opens.length,case:name,label,file,username:h.username,windowIdBefore:String(h.windowId),phase:'submitted'};receipt.opens.push(open);pendingOpen=open;receipt.pendingOpen=open;flush();
+ try{
+  open.result=structuredClone(await h.freshOpen(file));open.phase='acknowledged';open.windowIdAfter=String(h.windowId);flush();
+  await pinsNow();const opened=await state(faceId);open.opened=opened;flush();settled(opened);a.deepEqual(durable(opened.capture.native),durable(before.capture.native));a.deepEqual(sourceSelections(opened.capture),sourceSelections(before.capture));a.deepEqual(opened.capture.solids.outputs.map(x=>({outputId:x.outputId,featureId:x.featureId})),before.capture.solids.outputs.map(x=>({outputId:x.outputId,featureId:x.featureId})));a(!opened.capture.journal.canUndo&&!opened.capture.journal.canRedo);
+  // Preserve post-Save and actual fresh-Open as two distinct observations.
+  const result={...row,afterSave:after,after:opened,opened,openSequence:open.sequence,username:h.username,windowId:String(h.windowId)};receipt.reopens.push(result);open.phase='settled';pendingOpen=null;receipt.pendingOpen=null;flush();return result;
+ }catch(e){open.error={name:e.name,code:e.code??null,message:e.message,committed:e.committed===true,possiblyCommitted:e.possiblyCommitted===true};flush();throw e;}
+
 }
 async function persist(label,dir,file){await observe(label+' before Save',{points:!options.fillet});const result=await persistNative({label,faceId:b.faceId,binding:b,context:{models,aw,bx,options}});a.equal(result.file,file);await observe(label+' fresh signed Open',{points:!options.fillet});return file;}
 
@@ -68,8 +93,11 @@ async function perCellResolution(){
 try{await threeCells();await repairWithChild();await incompatibleChild();await unsupportedSources();await perCellResolution();receipt.status='PASS';}
 catch(e){receipt.status='FAIL';receipt.error={name:e?.name,code:e?.code??null,message:e?.message,committed:e?.committed===true,possiblyCommitted:e?.possiblyCommitted===true,stack:e?.stack};console.error(e?.stack);process.exitCode=1;}
 finally{
- try{if(pending){receipt.pendingWrite=pending;receipt.ownedContextsRetired=false;receipt.ownedContextRetainedForWriteSettlement={case:name,username:h?.username,windowId:h?.windowId===undefined?null:String(h.windowId)};}else{if(h)await h.retire();h=null;receipt.pendingWrite=null;receipt.ownedContextsRetired=true;}}
- catch(e){receipt.status='FAIL';receipt.ownedContextsRetired=false;receipt.cleanupError={name:e?.name,message:e?.message};process.exitCode=1;}
- receipt.sourcePinsAfter=hashes();if(canonical(receipt.sourcePinsAfter)!==canonical(receipt.sourcePins)){receipt.status='FAIL';receipt.sourceChanged=true;process.exitCode=1;}
+ try{
+  if(pending||pendingOpen||uncertainMutation){receipt.pendingWrite=pending;receipt.pendingOpen=pendingOpen;receipt.uncertainMutation=uncertainMutation;receipt.ownedContextsRetired=false;receipt.ownedContextRetirementDeferredForSettlement={case:name,username:h?.username,lastKnownWindowId:h?.windowId===undefined?null:String(h.windowId)};if(pending)receipt.ownedContextRetainedForWriteSettlement={case:name,username:h?.username,windowId:h?.windowId===undefined?null:String(h.windowId)};}
+  else{if(h)await h.retire();h=null;receipt.pendingWrite=null;receipt.pendingOpen=null;receipt.uncertainMutation=null;receipt.ownedContextsRetired=true;}
+ }catch(e){receipt.status='FAIL';receipt.ownedContextsRetired=false;receipt.cleanupError={name:e?.name,message:e?.message};process.exitCode=1;}
+ try{receipt.sourceCheckoutsAfter=captureCheckouts();a.deepEqual(receipt.sourceCheckoutsAfter,receipt.sourceCheckoutsBefore);}catch(e){receipt.status='FAIL';receipt.sourceChanged=true;receipt.sourceCustodyError={name:e.name,message:e.message};process.exitCode=1;}
+ try{receipt.sourcePinsAfter=hashes();a.equal(canonical(receipt.sourcePinsAfter),canonical(receipt.sourcePins));}catch(e){receipt.status='FAIL';receipt.sourceChanged=true;receipt.sourceHashError={name:e.name,message:e.message};process.exitCode=1;}
  await browser.disconnect();receipt.sharedBrowserDisconnectedOnly=true;flush();
 }
