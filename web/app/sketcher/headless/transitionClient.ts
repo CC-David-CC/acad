@@ -15,6 +15,7 @@ import {runSketchSolve, SketchSolveOptions} from './client';
 import {captureDrivingDimensionIntent,captureDrivingDimensionReply} from './drivingDimensionTarget.mjs';
 import {captureEllipseParameters,captureEllipseEditIntent} from '../shapes/ellipseRecord.mjs';
 import {capturePointDistanceIntent} from './pointDistanceEnvelope.mjs';
+import {captureArcData} from '../shapes/arcBranch.mjs';
 import {captureFiniteCurveSourceRequest,captureFiniteCurveSourceReceipt} from './finiteCurveSourceEnvelope.mjs';
 import type {FiniteCurveSourceReceipt} from './finiteCurveSourceEnvelope.mjs';
 import {captureFiniteCurveCertificateRequest,captureFiniteCurveCertificateReply} from './finiteCurveCertificateEnvelope.mjs';
@@ -138,7 +139,7 @@ export function runSketchTransition(workerUrl: string, task: TransitionTask, req
     const p=captureRecord(input.primitive,privateCurvePrimitiveKeys(input.primitive));
     if(typeof p.id!=='string'||!/^agent-primitive-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(p.id)||!['Point','Segment','Circle','Arc','Ellipse','BezierCurve','BSpline'].includes(p.kind)||![null,'construction'].includes(p.role)||!Number.isSafeInteger(p.stage)||p.stage<0||p.stage>31)throw Error('Invalid primitive intent.');
     const point=(value:any)=>{const q=captureRecord(value,['x','y']);if(![q.x,q.y].every(n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=1e8))throw Error('Invalid primitive coordinate.');return Object.freeze({x:q.x,y:q.y});};
-    let data:any;if(['BezierCurve','BSpline'].includes(p.kind))data=captureCubicCreation(p.kind,p.data);else if(p.kind==='Ellipse'){const d=captureEllipseParameters(p.data);data=Object.freeze({...d,c:point(d.c)});}else if(p.kind==='Point')data=point(p.data);else if(p.kind==='Circle'){const d=captureRecord(p.data,['c','r']);if(typeof d.r!=='number'||!Number.isFinite(d.r)||d.r<=1e-9||d.r>1e8)throw Error('Invalid circle radius.');data=Object.freeze({c:point(d.c),r:d.r});}else {const d=captureRecord(p.data,p.kind==='Arc'?['a','b','c']:['a','b']);data=Object.freeze(p.kind==='Arc'?{a:point(d.a),b:point(d.b),c:point(d.c)}:{a:point(d.a),b:point(d.b)});}
+    let data:any;if(['BezierCurve','BSpline'].includes(p.kind))data=captureCubicCreation(p.kind,p.data);else if(p.kind==='Ellipse'){const d=captureEllipseParameters(p.data);data=Object.freeze({...d,c:point(d.c)});}else if(p.kind==='Point')data=point(p.data);else if(p.kind==='Circle'){const d=captureRecord(p.data,['c','r']);if(typeof d.r!=='number'||!Number.isFinite(d.r)||d.r<=1e-9||d.r>1e8)throw Error('Invalid circle radius.');data=Object.freeze({c:point(d.c),r:d.r});}else if(p.kind==='Arc'){const d=captureArcData(p.data);data=Object.freeze({a:point(d.a),b:point(d.b),c:point(d.c),branch:d.branch});}else {const d=captureRecord(p.data,['a','b']);data=Object.freeze({a:point(d.a),b:point(d.b)});}
     payload.primitive=Object.freeze({id:p.id,kind:p.kind,role:p.role,stage:p.stage,data,...(p.kind==='BSpline'?{identities:captureSplineIdentities(p.identities,data.controlPoints.length)}:{})});
   }
   const capturedOptions=captureOptions(options),captured=Object.freeze(payload);
@@ -319,7 +320,8 @@ export function verifyPrimitiveAppendCandidate(workerUrl:string,input:any,option
  else if(primitive.kind==='Point')data=point(primitive.data);
  else if(primitive.kind==='Ellipse'){const d=captureEllipseParameters(primitive.data);data=Object.freeze({...d,c:point(d.c)});}
  else if(primitive.kind==='Circle'){const d=captureRecord(primitive.data,['c','r']);if(typeof d.r!=='number'||!Number.isFinite(d.r)||d.r<=1e-9||d.r>1e8)throw Error('Invalid circle radius.');data=Object.freeze({c:point(d.c),r:d.r});}
- else{const d=captureRecord(primitive.data,primitive.kind==='Arc'?['a','b','c']:['a','b']);data=Object.freeze(primitive.kind==='Arc'?{a:point(d.a),b:point(d.b),c:point(d.c)}:{a:point(d.a),b:point(d.b)});}
+ else if(primitive.kind==='Arc'){const d=captureArcData(primitive.data);data=Object.freeze({a:point(d.a),b:point(d.b),c:point(d.c),branch:d.branch});}
+ else{const d=captureRecord(primitive.data,['a','b']);data=Object.freeze({a:point(d.a),b:point(d.b)});}
  return runSketchSolve(workerUrl,Object.freeze({task:'sketch-transition-verify-primitive',revision:a.revision,sketchJSON:a.sketchJSON,externalParameters:Object.freeze(external),primitive:Object.freeze({...primitive,data,...(primitive.kind==='BSpline'?{identities:captureSplineIdentities(primitive.identities,data.controlPoints.length)}:{})}),candidateJSON:a.candidateJSON}),captureOptions(options));
 }
 

@@ -1,4 +1,4 @@
-import {captureNewArcData} from '../shapes/arcBranch.mjs';
+import {captureArcData} from '../shapes/arcBranch.mjs';
 import {constructNativeCubic} from './cubicCurveConstruction';
 import {privateCurvePrimitiveKeys} from '../shapes/cubicCurveRecord.mjs';
 import {prepareIndependentPrimitiveAppend} from './independentPrimitiveAppend';
@@ -20,7 +20,7 @@ function primitive(input:any){const a=record(input,privateCurvePrimitiveKeys(inp
  else if(a.kind==='Segment'){const d=record(a.data,['a','b']),p=point(d.a),q=point(d.b);if(Math.hypot(q.x-p.x,q.y-p.y)<=1e-9)throw fail('DOMAIN','Segment endpoints must be distinct.');shape=new Segment(p.x,p.y,q.x,q.y,a.id);}
  else if(a.kind==='Circle'){const d=record(a.data,['c','r']),c=point(d.c);if(typeof d.r!=='number'||!Number.isFinite(d.r)||d.r<=1e-9||d.r>1e8)throw fail('DOMAIN','Circle radius must be positive and bounded.');shape=new Circle(c.x,c.y,d.r,a.id);}
  else if(a.kind==='Ellipse'){const d=captureEllipseParameters(a.data),c=point(d.c);shape=new Ellipse(c.x,c.y,d.rx,d.ry,d.rot,a.id);}
- else {const d=captureNewArcData(a.data),p=point(d.a),q=point(d.b),c=point(d.c),r=Math.hypot(p.x-c.x,p.y-c.y),r2=Math.hypot(q.x-c.x,q.y-c.y);if(r<=1e-9||r>1e8||Math.abs(r-r2)>1e-9)throw fail('DOMAIN','Arc endpoints must lie on one positive-radius circle with their declared branch.');shape=new Arc(p.x,p.y,q.x,q.y,c.x,c.y,a.id,d.branch);}
+ else {const d=captureArcData(a.data),p=point(d.a),q=point(d.b),c=point(d.c),r=Math.hypot(p.x-c.x,p.y-c.y),r2=Math.hypot(q.x-c.x,q.y-c.y);if(r<=1e-9||r>1e8||Math.abs(r-r2)>1e-9)throw fail('DOMAIN','Arc endpoints must lie on one positive-radius circle with their declared branch.');shape=new Arc(p.x,p.y,q.x,q.y,c.x,c.y,a.id,d.branch);}
  shape.role=a.role;return {shape,id:a.id,kind:a.kind,role:a.role,stage:a.stage};
 }
 

@@ -1,4 +1,5 @@
 import {lengthFamilyLocator,lengthFamilyConstants} from './lengthFamilyEnvelope.mjs';
+import {captureArcBranch} from '../shapes/arcBranch.mjs';
 import {captureTangencyInspection} from './tangencyReply.mjs';
 import {equalRadiusLocator} from './equalRadiusEnvelope.mjs';
 import {captureFixedEntityInspection} from './fixedEntityReply.mjs';
@@ -62,7 +63,9 @@ async function inspect(workerUrl:string,input:any,options:SketchSolveOptions) {
   const rawObjects=array(data.objects,10000),rawConstraints=array(data.constraints,10000),objects=[],constraints=[],ids=new Set();
   let characters=0,referenceCount=0;
   for(let i=0;i<rawObjects.length;i++){
-    const row=record(rawObjects[i],['id','type','role','stage']);text(row.id);text(row.type);integer(row.stage);if(row.stage>=data.stageCount)return invalid();
+    const kind=Object.getOwnPropertyDescriptor(rawObjects[i]||{},'type');if(!kind?.enumerable||!Object.prototype.hasOwnProperty.call(kind,'value'))return invalid();
+    const row=record(rawObjects[i],kind.value==='Arc'?['id','type','role','stage','branch']:['id','type','role','stage']);text(row.id);text(row.type);integer(row.stage);if(row.stage>=data.stageCount)return invalid();
+    if(row.type==='Arc'){row.branch=captureArcBranch(row.branch);characters+=row.branch.length;}
     if(ids.has(row.id)||row.role!==null&&(typeof row.role!=='string'||row.role.length>256))return invalid();
     characters+=row.id.length+row.type.length+(row.role?.length||0);if(characters>1048576)return invalid();ids.add(row.id);objects.push(Object.freeze(row));
     if(i%128===127){await new Promise(resolve=>setTimeout(resolve,0));current();}

@@ -1,4 +1,5 @@
 import {discoverLengthFamilyRows} from './lengthFamilyDiscovery.mjs';
+import {captureArcBranch} from '../shapes/arcBranch.mjs';
 import {inspectTangencyRows} from './tangencyInspection';
 import {discoverEqualRadiusRows} from './equalRadiusDiscovery.mjs';
 import {inspectFixedEntityRows} from './fixedEntityInspection';
@@ -25,7 +26,8 @@ export function inspectClosedSketchTransition(request:any) {
        !['origin','x','y','z'].every(key=>Array.isArray(frame[key])&&frame[key].length===3&&frame[key].every(Number.isFinite))) {
       throw Object.assign(Error('The saved sketch has no valid authored frame.'),{code:'FRAME_UNAVAILABLE'});
     }
-    const objects=sketch.objects.map(object=>({id:object.id,type:object.type,role:object.role??null,stage:object.stage??0}));
+    const objects=sketch.objects.map(object=>({id:object.id,type:object.type,role:object.role??null,stage:object.stage??0,
+      ...(object.type==='Arc'?{branch:captureArcBranch(object.data.branch)}:{})}));
     // Read-only declared native point identities, not permission to edit a
     // generated object. The edit operation independently checks real ownership.
     const pointSource={...sketch,objects:sketch.objects.filter(object=>['Point','Segment','Circle','Arc'].includes(object.type))};
