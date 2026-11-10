@@ -49,6 +49,14 @@ function workerFailure(result:any,code:string,message:string){
  if(cause){if(!cause.enumerable||!Object.prototype.hasOwnProperty.call(cause,'value'))throw Error('Invalid sketch failure cause.');Object.defineProperty(error,'cause',{value:captureAdmissionCause(cause.value),enumerable:true});}
  return error;
 }
+// These fields describe the actual coordinator phase, not caller-supplied
+// codes or message text. Preserve the original failure as the cause.
+function curveOperationFailure(error:any,layer:string,disposition:string){
+ const wrapped=Object.assign(new Error(typeof error?.message==='string'?error.message:'Curve operation failed.'),{failureLayer:layer,selectionDisposition:disposition,cause:error});
+ if(typeof error?.name==='string')wrapped.name=error.name;
+ for(const key of ['code','committed','possiblyCommitted']){const d=error&&Object.getOwnPropertyDescriptor(error,key);if(d?.enumerable&&Object.prototype.hasOwnProperty.call(d,'value'))Object.defineProperty(wrapped,key,{value:d.value,enumerable:true});}
+ return wrapped;
+}
 const lineRelationContracts=Object.freeze([
  Object.freeze({kind:'collinear',typeId:'Collinear',targets:Object.freeze(['Segment','Segment']),semantics:'infinite-supporting-lines',duplicate:'unordered-pair-noop'}),
  Object.freeze({kind:'axis-symmetry',typeId:'AxisSymmetry',targets:Object.freeze(['inspected-point','inspected-point','Segment']),semantics:'reflection-about-infinite-live-axis',duplicate:'unordered-points-same-axis-noop'})
@@ -142,7 +150,7 @@ export function createClosedSketchTransitionCommands(ctx:any,submitPreparedRepla
   const opts=options(rawOptions);if(finiteCurveCleanupFailure)throw finiteCurveCleanupFailure;
   if(finiteCurveBusy)throw Object.assign(Error('Another curve operation is in progress.'),{code:'CURVE_QUERY_BUSY'});
   const selected=finiteCurveSelection.resolve(a.queryId,a.eventId,a.faceId,a.revision),source=selected.prepared.source,domain=selected.domain;
-  if(!source.targets.some((t:any)=>t.id===target.curveId&&t.type==='Segment')||a.action==='trim'&&domain.kind!=='finite-pair'||a.action==='extend'&&(domain.kind!=='endpoint-ray'||domain.targetCurveId!==target.curveId||domain.endpoint!==target.endpoint))throw Object.assign(Error('The selected query does not match this endpoint operation.'),{code:'CURVE_QUERY_DOMAIN_MISMATCH',selectionDisposition:'retained'});
+  if(!source.targets.some((t:any)=>t.id===target.curveId&&t.type==='Segment')||a.action==='trim'&&domain.kind!=='finite-pair'||a.action==='extend'&&(domain.kind!=='endpoint-ray'||domain.targetCurveId!==target.curveId||domain.endpoint!==target.endpoint))throw Object.assign(Error('The selected query does not match this endpoint operation.'),{code:'CURVE_QUERY_DOMAIN_MISMATCH',failureLayer:'preflight',selectionDisposition:'retained'});
   finiteCurveBusy=true;let job:any,committed=false,phase='preflight';
   try{
    selected.job.current();job=captureJob(a.faceId,a.revision,opts,false,{kind:'coordinates'});
@@ -164,7 +172,13 @@ export function createClosedSketchTransitionCommands(ctx:any,submitPreparedRepla
    phase='mutation';finiteCurveSelection.clear();await new Promise<void>((yes,no)=>submitPreparedReplay(yes,no,staged.preparation,{kind:'sketch-bytes',faceId:a.faceId,before:job.source,after:staged.override.data}));
    committed=true;if(!job.alive())throw aborted(true);const latest=inspectSketchTransitions();if(!latest.ready||!job.alive())throw aborted(true);
    return Object.freeze({changed:true,revision:latest.revision,faceId:a.faceId,action:a.action,target:Object.freeze(target),point:result.point,persistence:'volatile-workspace',authoredUndo:true,manufacturingAssignments:'review-if-present'});
-  }catch(error){if(phase==='worker'||phase==='mutation'||!job?.alive())finiteCurveSelection.clear();if(committed&&!error?.committed)throw aborted(true);throw error;}
+  }catch(error){
+   let current=false;try{selected.job.current();if(job)job.current();current=true;}catch{}
+   const revoke=phase==='worker'||phase==='mutation'||!current;
+   if(revoke)finiteCurveSelection.clear();
+   const original=committed&&!error?.committed?aborted(true):error;
+   throw curveOperationFailure(original,phase==='mutation'?'mutation':phase==='worker'?'settlement':'preflight',revoke?'revoked':'retained');
+  }
   finally{job?.dispose();finiteCurveBusy=false;}
  }
  const streams=()=>[ctx.craftService.modifications$,ctx.craftService.models$,ctx.craftService.pipelineFailure$,ctx.craftService.engineCleanupFailure$,ctx.expressionService.script$,ctx.expressionService.list$,ctx.expressionService.errors$,ctx.expressionService.table$,ctx.streams.sketcher.sketchingFace,ctx.wizardService.workingRequest$,ctx.workbenchService.currentWorkbench$,ctx.assemblyService.constraints$];
