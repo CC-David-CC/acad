@@ -25,10 +25,11 @@ for(const [name,bytes]of [['selected-profile-occ-portable.js',glue],['selected-p
 const plan=fs.readFileSync(path.join(root,'modules/engine/mount/selectedProfilePlan.mjs'),'utf8').split('../extrusion/selectedArrangementDescriptor.mjs').join('./selectedArrangementDescriptor.mjs');
 fs.writeFileSync(path.join(output,'selectedProfilePlan.mjs'),plan);
 fs.copyFileSync(path.join(root,'modules/engine/extrusion/selectedArrangementDescriptor.mjs'),path.join(output,'selectedArrangementDescriptor.mjs'));
+for(const [source,name]of [["modules/engine/source/sourceProjectionIntent.mjs","sourceProjectionIntent.mjs"],["modules/engine/source/sourceFrameIntent.mjs","sourceFrameIntent.mjs"],["modules/engine/metadata/authoredFeatureIdentity.mjs","authoredFeatureIdentity.mjs"]]){const text=fs.readFileSync(path.join(root,source),'utf8').replace('../metadata/authoredFeatureIdentity.mjs','./authoredFeatureIdentity.mjs');fs.writeFileSync(path.join(output,name),text);}
 // Asset/resource does not traverse .mjs imports. Explicitly emit the complete
 // active V2 metadata graph while preserving the original plan URL contract.
 fs.writeFileSync(path.join(root,'.build/selected-profile-plan-entry.mjs'),
- "import plan from './selected-profile-assets/selectedProfilePlan.mjs';\nimport metadata from './selected-profile-assets/selectedArrangementDescriptor.mjs';\nif(plan.slice(0,plan.lastIndexOf('/')+1)!==metadata.slice(0,metadata.lastIndexOf('/')+1))throw Error('Selected-profile metadata modules are not colocated.');\nexport default plan;\n");
+ "import projectionIntent from './selected-profile-assets/sourceProjectionIntent.mjs';\nimport sourceFrameIntent from './selected-profile-assets/sourceFrameIntent.mjs';\nimport authoredIdentity from './selected-profile-assets/authoredFeatureIdentity.mjs';\nimport plan from './selected-profile-assets/selectedProfilePlan.mjs';\nimport metadata from './selected-profile-assets/selectedArrangementDescriptor.mjs';\nif([metadata,projectionIntent,sourceFrameIntent,authoredIdentity].some(p=>plan.slice(0,plan.lastIndexOf('/')+1)!==p.slice(0,p.lastIndexOf('/')+1)))throw Error('Selected-profile metadata modules are not colocated.');\nexport default plan;\n");
 console.log(JSON.stringify({bootstrapSha256:bootstrapSha,jsSha256:jsSha,wasmSha256:wasmSha,workerSha256:hash(worker),output}));
 
 fs.copyFileSync(path.join(root,'modules/engine/mount/exactMeshVolume.mjs'),path.join(output,'exactMeshVolume.mjs'));

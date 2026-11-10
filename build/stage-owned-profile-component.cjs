@@ -27,7 +27,7 @@ function stageModule(name){
  const imports=/\b(?:import|export)\s+(?:[^'";]*?\s+from\s*)?['"]([^'"]+)['"]/g;let match;
  while((match=imports.exec(text))){if(!match[1].startsWith('.'))throw Error('External component dependency');stageModule(path.relative(root,path.resolve(path.dirname(target),match[1])));}
 }
-for(const name of [constructorModule,'modules/engine/mount/exactMeshVolume.mjs',...rootModules,'modules/engine/mount/polygonProfilePlan.mjs','modules/engine/mount/ownedTopologyContract.mjs','modules/engine/mount/prismSelectionIndex.mjs','modules/engine/mount/arrangedPrismSelectionIndex.mjs'])stageModule(name);
+for(const name of ['modules/engine/source/sourceProjectionIntent.mjs','modules/engine/source/sourceFrameIntent.mjs','modules/engine/metadata/authoredFeatureIdentity.mjs',constructorModule,'modules/engine/mount/exactMeshVolume.mjs',...rootModules,'modules/engine/mount/polygonProfilePlan.mjs','modules/engine/mount/ownedTopologyContract.mjs','modules/engine/mount/prismSelectionIndex.mjs','modules/engine/mount/arrangedPrismSelectionIndex.mjs'])stageModule(name);
 write('modules/engine/mount/'+workerName,worker);write(prefix+'-occ-portable.js',glue);write(prefix+'-occ.wasm',wasm);
 const result={format,selectedRegionArrangementVersion,...(profileSourceBindingVersion===1?{profileSourceBindingVersion:1}:{}),...(circularArrangementVersion===1?{circularArrangementVersion:1}:{}),jsSha256:jsSha,wasmSha256:wasmSha,bootstrapSha256:bootstrapSha,workerSha256:sha(worker),sources,files,output};
 fs.writeFileSync(path.join(output,'component.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

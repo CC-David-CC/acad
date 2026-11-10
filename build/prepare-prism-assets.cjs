@@ -10,6 +10,8 @@ fs.rmSync(out, {recursive:true,force:true}); fs.mkdirSync(out, {recursive:true})
 const copy = (source, name) => {
  let text=fs.readFileSync(path.join(root,source),'utf8');
  // This generated legacy directory is flat; canonical source stays separate.
+ if(name==='sourceProjectionIntent.mjs')text=text.replace('../metadata/authoredFeatureIdentity.mjs','./authoredFeatureIdentity.mjs');
+ if(name==='sourceFrameIntent.mjs')text=text.replace('../metadata/authoredFeatureIdentity.mjs','./authoredFeatureIdentity.mjs');
  if(name==='authoredRegions.mjs')text=text.replace('../../../../engine/mount/polygonProfilePlan.mjs','./polygonProfilePlan.mjs');
  if(name==='polygonProfilePlan.mjs')text=text.replace('../extrusion/simplePolygon.mjs','./simplePolygon.mjs').replace('../extrusion/exactExternalVertexContact.mjs','./exactExternalVertexContact.mjs');
  if(['selectedProfilePlan.mjs','ownedTopologyContract.mjs','arrangedPrismSelectionIndex.mjs'].includes(name))text=text.split('../extrusion/selectedArrangementDescriptor.mjs').join('./selectedArrangementDescriptor.mjs');
@@ -18,6 +20,8 @@ const copy = (source, name) => {
 
 for (const name of ['exactMeshVolume.mjs','displayProjection.mjs','enclosureLabelContact.mjs','enclosureManufacturingMesh.mjs','enclosureMesh.mjs','enclosurePlan.mjs','profile-topology.mjs','centeredHolePlan.mjs','centeredHoleTopology.mjs','boundedPrismBoundary.mjs','fourCornerHolePlan.mjs','fourCornerHoleTopology.mjs','fourCornerHoleProvenance.mjs','selectedProfilePlan.mjs','polygonProfilePlan.mjs','ownedTopologyContract.mjs','arrangedPrismSelectionIndex.mjs']) copy('modules/engine/mount/'+name,name);
 for (const name of ['rectangleProfileRequest.mjs','authoredRegions.mjs','profilePlan.mjs']) copy('modules/workbenches/modeler/features/extrude/'+name,name);
+for(const name of ['sourceProjectionIntent.mjs','sourceFrameIntent.mjs'])copy('modules/engine/source/'+name,name);
+copy('modules/engine/metadata/authoredFeatureIdentity.mjs','authoredFeatureIdentity.mjs');
 copy('modules/engine/extrusion/simplePolygon.mjs','simplePolygon.mjs');
 copy('modules/engine/extrusion/exactExternalVertexContact.mjs','exactExternalVertexContact.mjs');
 copy('modules/engine/extrusion/selectedArrangementDescriptor.mjs','selectedArrangementDescriptor.mjs');
@@ -35,6 +39,7 @@ function regionDependency(name){
 }
 regionDependency('authoredRegions.mjs');
 regionDependency('arrangedPrismSelectionIndex.mjs');
+regionDependency('sourceProjectionIntent.mjs');
 const regionEntry=regionModules.map((name,i)=>`import p${i} from ${JSON.stringify('./prism-assets/'+name)};`).join('\n')+'\n'+
  `const paths=[${regionModules.map((_,i)=>'p'+i).join(',')}],directory=p0.slice(0,p0.lastIndexOf('/')+1);\n`+
  `if(paths.some(p=>p.slice(0,p.lastIndexOf('/')+1)!==directory))throw Error('Legacy region Worker modules are not colocated.');\nexport default p0;\n`;

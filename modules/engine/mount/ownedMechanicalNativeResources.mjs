@@ -1,6 +1,7 @@
 // Specific initial mechanical cohort source contract. No availability or Native
 // operation is conferred by this frozen roster; producer and factory share it.
 export const MECHANICAL_NATIVE_RESOURCE_MODULES=Object.freeze([
+ 'modules/engine/source/sourceProjectionIntent.mjs','modules/engine/source/sourceFrameIntent.mjs','modules/engine/metadata/authoredFeatureIdentity.mjs',
  'modules/engine/mount/ownedMechanicalNativeResources.mjs',
  'modules/engine/mount/ownedMechanicalNativeCandidate.mjs',
  'modules/engine/solid/ownedCountersinkIntent.mjs',
