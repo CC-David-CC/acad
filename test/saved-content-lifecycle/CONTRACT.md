@@ -74,3 +74,10 @@ archive readback bind it. The native file must match the JSON authored document
 and survive a fresh Open. This is not inferred from the rectangle .cad cases.
 Pending mutation clears only on its own acknowledged result or explicit fully
 proved refusal; successful read-only inspection cannot clear unknown custody.
+
+R7 repair acceptance: after Undo and before dirty inspection, retain complete
+original saved and current authored captures. Their values must match the
+independent native archive exactly; record whether actual history insertion
+order changed. Dirty must still be false. No coordinate tolerance or document
+field omission is added. Record key order is incidental; array order and all
+actual authored names/values/field presence remain exact comparison inputs.

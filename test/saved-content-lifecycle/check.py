@@ -52,6 +52,8 @@ def main(root,output):
    points=[(x['data'][end]['x'],x['data'][end]['y']) for x in segments for end in ('a','b')];xs=[p[0] for p in points];ys=[p[1] for p in points];expected_width=width if index==0 else 100
    need(min(xs)==index*200 and max(xs)==index*200+expected_width and min(ys)==0 and max(ys)==50,'Independent actual rectangle width/height/origin')
    need(len(set(points))==4 and all(points.count(p)==2 for p in set(points)),'Closed degree-two actual boundary')
+ undo=r['undoToSaved'];need(undo['savedLabel']=='rectangles-initial','Undo target is actual initial saved source');capture_matches(undo['before'],artifacts['rectangles-initial']['envelope']);capture_matches(undo['after'],artifacts['rectangles-initial']['envelope'])
+ before_order=json.dumps(undo['before']['native']['history'],ensure_ascii=False,separators=(',',':'));after_order=json.dumps(undo['after']['native']['history'],ensure_ascii=False,separators=(',',':'));need(undo['historyInsertionOrderChanged']==(before_order!=after_order),'Honest original versus Undo record-order observation')
  # Width change must be an authored change, not just a dirty flag transition.
  need(artifacts['rectangles-initial']['envelope']!=artifacts['rectangles-edited']['envelope'],'Edited native authored definition differs')
  unicode=r['unicode'];name='Boundary-🌐-material';need(unicode['materialName']==name,'Original public Unicode material requirement')
