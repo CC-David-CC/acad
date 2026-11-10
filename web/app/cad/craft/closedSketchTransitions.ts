@@ -1,5 +1,9 @@
 import {captureNewArcData} from '../../sketcher/shapes/arcBranch.mjs';
 import {createFiniteCurveSelectionSlot} from './finiteCurveSelection';
+import {prepareFiniteCurveQuery,CurveQueryPreparationError} from './finiteCurveQueryPreparation';
+import {CurveQueryCleanupError} from './finiteCurveQueryMount';
+import {describeFiniteCurveEvents} from './finiteCurveQueryEvents';
+import {listAvailableFiniteCurveSupportBuilds,requireAvailableFiniteCurveSupportBuild} from 'engine/mount/catalogMount';
 import {captureLengthFamilyIntent} from 'sketcher/headless/lengthFamilyEnvelope.mjs';import {verifyLengthFamilyCandidate,verifyLengthFamilyTravelBoundary} from 'sketcher/headless/transitionClient';
 import {captureOffsetIntent,captureOffsetReceipt,offsetId,captureOffsetDistance,offsetSide} from 'sketcher/generators/offsetSource.mjs';
 import {verifySketchOffsetCandidate} from 'sketcher/headless/transitionClient';
@@ -99,6 +103,37 @@ function params(table:any){const proto=table&&typeof table==='object'?Object.get
 // source strings remain private to the existing candidate replay coordinator.
 export function createClosedSketchTransitionCommands(ctx:any,submitPreparedReplay:any,cancelEpoch:(epoch:number)=>void,registerTravel?:(callback:any)=>void){
  const finiteCurveSelection=createFiniteCurveSelectionSlot();
+ let finiteCurveBusy=false,finiteCurveCleanupFailure:CurveQueryCleanupError=null;
+ function inspectClosedSketchQueryCapabilities(input:any){
+  record(input,[]);const info=inspectSketchTransitions();
+  const builds=finiteCurveCleanupFailure?[]:listAvailableFiniteCurveSupportBuilds();
+  return Object.freeze({version:1,ready:info.ready&&!finiteCurveCleanupFailure,reason:finiteCurveCleanupFailure?'Curve Worker cleanup failed.':info.reason,revision:info.revision,unit:'millimeter',candidates:Object.freeze(info.candidates.map((item:any)=>Object.freeze({faceId:item.faceId,eligibility:'needs-worker-verification'}))),engines:Object.freeze(builds.map((item:any)=>Object.freeze({engine:'occ',engineRevision:item.revision,rawSupportVersion:1,certificateVersion:1,scope:'source-query-only'}))),limits:Object.freeze({curves:2,rawPoints:8,isolatedEvents:2,overlaps:5,responseBytes:65536,properArc:'worker-verification',fullArc:'unsupported'})});
+ }
+ async function inspectClosedSketchIntersections(input:any,rawOptions?:any){
+  const a=record(input,['revision','faceId','engine','engineRevision','curveIds','domain']);revision(a.revision);faceId(a.faceId);
+  if(a.engine!=='occ'||typeof a.engineRevision!=='string'||!Array.isArray(a.curveIds)||a.curveIds.length!==2||Reflect.ownKeys(a.curveIds).length!==3)throw Error('Choose two distinct current curve identities and an explicit query engine.');
+  const ids=[0,1].map(i=>{const d=Object.getOwnPropertyDescriptor(a.curveIds,String(i));if(!d?.enumerable||!Object.prototype.hasOwnProperty.call(d,'value')||typeof d.value!=='string'||!d.value||d.value.length>256||/[\u0000-\u001f\u007f]/u.test(d.value))throw Error('Invalid curve identity.');return d.value;}).sort();
+  if(ids[0]===ids[1])throw Error('Choose two distinct curves.');
+  const kind=Object.getOwnPropertyDescriptor(a.domain||{},'kind');if(!kind?.enumerable||!Object.prototype.hasOwnProperty.call(kind,'value'))throw Error('Choose a finite curve query domain.');
+  const domain=kind.value==='finite-pair'?Object.freeze(record(a.domain,['kind'])):Object.freeze(record(a.domain,['kind','targetCurveId','endpoint']));
+  if(domain.kind!=='finite-pair'&&(domain.kind!=='endpoint-ray'||!ids.includes(domain.targetCurveId)||!['a','b'].includes(domain.endpoint)))throw Error('Choose a selected curve and endpoint ray.');
+  const opts=options(rawOptions);requireAvailableFiniteCurveSupportBuild(a.engine,a.engineRevision);
+  if(finiteCurveCleanupFailure)throw finiteCurveCleanupFailure;
+  if(finiteCurveBusy)throw Object.assign(Error('Another curve operation is in progress.'),{code:'CURVE_QUERY_BUSY'});
+  finiteCurveBusy=true;finiteCurveSelection.clear();let job:any;
+  const base={version:1,revision:a.revision,faceId:a.faceId,unit:'millimeter',engine:a.engine,engineRevision:a.engineRevision,curveIds:Object.freeze(ids),domain};
+  try{
+   job=captureJob(a.faceId,a.revision,opts,true);
+   const prepared=await prepareFiniteCurveQuery(job,workerUrl,a.engine,a.engineRevision,ids as [string,string],domain);
+   const described=describeFiniteCurveEvents(prepared.source,prepared.certificate);job.current();
+   const queryId=finiteCurveSelection.issue(job,a.faceId,a.revision,prepared,described,domain,opts.signal);
+   return Object.freeze({...base,status:described.status,reason:described.reason,queryId,support:described.support,events:described.events,overlaps:described.overlaps});
+  }catch(error){
+   if(error instanceof CurveQueryCleanupError){finiteCurveCleanupFailure=error;finiteCurveSelection.clear();throw error;}
+   if(error instanceof CurveQueryPreparationError&&error.layer==='source'&&['FINITE_CURVE_SOURCE_UNSUPPORTED_TARGET','FINITE_CURVE_SOURCE_UNCERTAIN'].includes(error.code))return Object.freeze({...base,status:error.code==='FINITE_CURVE_SOURCE_UNCERTAIN'?'uncertain':'unsupported',reason:Object.freeze({layer:'source',code:error.code,message:error.message}),queryId:null,support:null,events:Object.freeze([]),overlaps:Object.freeze([])});
+   throw error;
+  }finally{job?.dispose();finiteCurveBusy=false;}
+ }
  const streams=()=>[ctx.craftService.modifications$,ctx.craftService.models$,ctx.craftService.pipelineFailure$,ctx.craftService.engineCleanupFailure$,ctx.expressionService.script$,ctx.expressionService.list$,ctx.expressionService.errors$,ctx.expressionService.table$,ctx.streams.sketcher.sketchingFace,ctx.wizardService.workingRequest$,ctx.workbenchService.currentWorkbench$,ctx.assemblyService.constraints$];
  const services=()=>[ctx.projectService,ctx.storageService,ctx.craftService,ctx.cadRegistry,ctx.sketchStorageService,ctx.operationService,ctx.expressionService,ctx.projectManager,ctx.services.sketcher,ctx.wizardService,ctx.workbenchService,ctx.assemblyService];
  let token:string=null,prior:any[]=[];
@@ -334,5 +369,5 @@ export function createClosedSketchTransitionCommands(ctx:any,submitPreparedRepla
  async function removeClosedSketchPrimitive(input:any,rawOptions?:any){return applyTransition(primitiveRemoval(input),options(rawOptions),'sketch-transition-remove-primitive')}
  async function appendClosedSketchPrimitive(input:any,rawOptions?:any){return applyTransition(primitive(input),options(rawOptions),'sketch-transition-primitive')}
  if(registerTravel)registerTravel(async(id:string,expected:string,target:string,rawOptions:any)=>{finiteCurveSelection.clear();faceId(id);const travel=record(rawOptions,['signal','valid','committedValid']);if(typeof expected!=='string'||typeof target!=='string'||expected.length>MAX||target.length>MAX||typeof travel.valid!=='function'||typeof travel.committedValid!=='function')throw Error('Invalid private sketch travel.');const info=inspectSketchTransitions(),job=captureJob(id,info.revision,options({signal:travel.signal,valid:travel.valid}),false,ctx.expressionService.isTyped?{kind:'travel',travelSource:target}:undefined);try{if(job.source!==expected)throw aborted();await job.start();await job.inspect(expected);await job.inspect(target);job.current();const checked=await (job.typed?verifyTypedSketchTravelCandidate:verifyLengthFamilyTravelBoundary)(workerUrl,{revision:crypto.randomUUID(),sketchJSON:expected,candidateJSON:target,externalParameters:job.external},{signal:job.controller.signal,valid:()=>{try{job.current();return true}catch{return false}}});job.current();if(!checked?.ok||checked.verified!==true)throw workerFailure(checked,'INVALID_CANDIDATE',job.typed?'Typed journal travel is not a verified dimension, coordinate or Fix delta.':'Fix journal travel did not reproduce its actual original operation.');const nonce=crypto.randomUUID(),result=await runSketchTransition(workerUrl,'sketch-transition-replay',{revision:nonce,sketchJSON:target,externalParameters:job.external},{signal:job.controller.signal,valid:()=>{try{job.current();return true}catch{return false}}});job.current();if(!result?.ok||result.revision!==nonce)throw Object.assign(new Error(result?.error?.message||'Sketch travel validation failed.'),{code:result?.error?.code||'SOLVE_ERROR'});const staged=await job.prepare(target,travel.committedValid);return {preparation:staged.preparation,dispose:job.dispose};}catch(error){job.dispose();throw error;}});
- return {inspectSketchOffsets,createSketchOffset,editSketchOffset,removeSketchOffset,applyClosedSketchEqualLength,removeClosedSketchLengthRelation,editClosedSketchLengthRelation,applyClosedSketchTangency,removeClosedSketchTangency,applyClosedSketchEqualRadius,removeClosedSketchEqualRadius,applyClosedSketchPointLineDistance,applyClosedSketchFixEntity,removeClosedSketchFixEntity,applyClosedSketchCoincidence,applyClosedSketchRadius,createClosedSketchMirror,createClosedSketchSlot,editClosedSketchSlot,inspectSketchTransitions,inspectClosedSketch,inspectClosedSketchMeasurements,createClosedSketchLengthMeasurement,convertClosedSketchLengthRole,applyClosedSketchOrientation,applyClosedSketchMidpoint,applyClosedSketchAngleGroup,applyClosedSketchPointDistance,editClosedSketchDimension,removeClosedSketchDimension,applySketchLengthRelation,applySketchConcentric,inspectClosedSketchCurvePoints,editClosedSketchControlPoints,editClosedSketchEllipse,editClosedSketchPoint,editClosedSketchPoints,applySketchDiameter,applySketchSignedDistance,applySketchLineRelation,appendClosedSketchPrimitive,removeClosedSketchPrimitive};
+ return {inspectClosedSketchQueryCapabilities,inspectClosedSketchIntersections,inspectSketchOffsets,createSketchOffset,editSketchOffset,removeSketchOffset,applyClosedSketchEqualLength,removeClosedSketchLengthRelation,editClosedSketchLengthRelation,applyClosedSketchTangency,removeClosedSketchTangency,applyClosedSketchEqualRadius,removeClosedSketchEqualRadius,applyClosedSketchPointLineDistance,applyClosedSketchFixEntity,removeClosedSketchFixEntity,applyClosedSketchCoincidence,applyClosedSketchRadius,createClosedSketchMirror,createClosedSketchSlot,editClosedSketchSlot,inspectSketchTransitions,inspectClosedSketch,inspectClosedSketchMeasurements,createClosedSketchLengthMeasurement,convertClosedSketchLengthRole,applyClosedSketchOrientation,applyClosedSketchMidpoint,applyClosedSketchAngleGroup,applyClosedSketchPointDistance,editClosedSketchDimension,removeClosedSketchDimension,applySketchLengthRelation,applySketchConcentric,inspectClosedSketchCurvePoints,editClosedSketchControlPoints,editClosedSketchEllipse,editClosedSketchPoint,editClosedSketchPoints,applySketchDiameter,applySketchSignedDistance,applySketchLineRelation,appendClosedSketchPrimitive,removeClosedSketchPrimitive};
 }

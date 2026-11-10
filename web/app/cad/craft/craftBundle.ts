@@ -2311,6 +2311,8 @@ interface CraftService {
   exportSketchDXFBlob?: (input:any,options?:any) => Promise<any>;
   inspectPrimitiveCreation?: ReturnType<typeof createEmptySketchCreationCommands>['inspectPrimitiveCreation'];
   createEmptySketchPlane?: ReturnType<typeof createEmptySketchCreationCommands>['createEmptySketchPlane'];
+  inspectClosedSketchQueryCapabilities?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketchQueryCapabilities'];
+  inspectClosedSketchIntersections?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketchIntersections'];
   inspectSketchTransitions?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectSketchTransitions'];
   inspectClosedSketch?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketch'];
   inspectSketchOffsets?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectSketchOffsets'];
