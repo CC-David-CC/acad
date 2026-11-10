@@ -241,7 +241,13 @@ export function listAvailableRevolveBuilds(){return Object.freeze([...listRevolv
 export function requireAvailableSweepBuild(engine:string,revision:string){const spec=requireSweepBuild(engine,revision);if(spec.loftVersion===1)requireAvailableLoftBuild(engine,revision);return spec;}
 export function requireAvailableRevolveBuild(engine:string,revision:string){const spec=requireRevolveBuild(engine,revision);if(spec.loftVersion===1)requireAvailableLoftBuild(engine,revision);return spec;}
 export function requireAvailablePointBuild(engine:string,revision:string){const spec=requireCadEngineBuild(engine,revision);if(spec.pointObservationVersion!==1)throw Object.assign(Error('Select an exact registered native point-observation build.'),{code:'ENGINE_REVISION_MISMATCH'});if(spec===OCC_ANALYTIC_PROFILE_BUILD)analyticProfileMountOptions();else if(spec.loftVersion===1)requireAvailableLoftBuild(engine,revision);return spec;}
-export function listAvailableBoxBuilds(){return Object.freeze([...Object.values(CAD_ENGINES).map((entry:any)=>preferredCadEngineBuild(entry.id)),...listAvailableShellBuilds(),...listAvailableMechanicalNativeBuilds(),...listAvailableAnalyticProfileBuilds()]);}
+export function listAvailableBoxBuilds(){
+ // Baselines are statically installed. A distinct preferred cohort is listed
+ // only when its own optional assets are present; do not substitute a default.
+ const out:any[]=[...Object.values(CAD_ENGINES)];
+ if(booleanAssets){requireAvailableBoxBuild('occ',OCC_BOOLEAN_HISTORY_BUILD.revision);out.push(OCC_BOOLEAN_HISTORY_BUILD);}
+ return Object.freeze([...out,...listAvailableShellBuilds(),...listAvailableMechanicalNativeBuilds(),...listAvailableAnalyticProfileBuilds()]);
+}
 export function requireAvailableBoxBuild(engine:string,revision:string){
  const spec=requireCadEngineBuild(engine,revision);
  if(spec.shellVersion===1)return requireAvailableShellBuild(engine,revision);
@@ -254,7 +260,7 @@ export function requireAvailableBoxBuild(engine:string,revision:string){
 export function inspectCatalogSolidCapabilities(){
  const boxes=listAvailableBoxBuilds();
  return Object.freeze(Object.values(CAD_ENGINES).map((entry:any)=>{const spec=preferredCadEngineBuild(entry.id);return Object.freeze({id:spec.id,name:entry.name,revision:spec.revision,
-  representation:spec.representation,operations:Object.freeze({box:true,boolean:true}),
+  representation:spec.representation,defaultAvailable:boxes.includes(spec),defaultReason:boxes.includes(spec)?null:Object.freeze({code:'ENGINE_BUILD_UNAVAILABLE',message:'The declared default engine build is not staged. Select an available exact build explicitly.'}),operations:Object.freeze({box:true,boolean:true}),
   availableBuilds:Object.freeze(boxes.filter(build=>build.id===entry.id).map(build=>Object.freeze({engine:build.id,engineRevision:build.revision,boxConstructionVersion:build.boxConstructionVersion??null,shellVersion:build.shellVersion??null,drawingDetailVersion:build.drawingDetailVersion??null,drawingSectionVersion:build.drawingSectionVersion??null,drawingRequirementVersion:build.drawingRequirementVersion??null}))),
   scope:'bounded-worker-solid-v1',maxDisplayTriangles:100000,qualification:'research',
   note:spec.id==='smlib'?'Experimental patched kernel; whole multi-material results with voids retain native geometry with preview unavailable. Some partial cavity fills fail native validation. Preview winding and manufacturing remain unqualified. No automatic fallback.':spec.id==='occ'?'New parts use this declared native-evidence build. Existing parts retain their saved build. No automatic fallback, conversion or STEP export.':'Explicit kernel; no automatic fallback, conversion, STEP or arbitrary sketch extrusion.'});}));
