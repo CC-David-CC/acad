@@ -1,3 +1,4 @@
+import {materializePatternCaches} from '../generators/patternSource.mjs';
 import {materializeOffsetCaches} from '../generators/offsetSource.mjs';
 import {HeadlessSketchWorkspace} from './workspace';
 import {solveSketch} from './solve';
@@ -108,7 +109,7 @@ function editCoordinatesTransition(request:any,batch:boolean) {
   for(const currentStage of pm.stages){const sys=currentStage.solverSystem;sys.prepare();currentStage.solve(false);if(!sys.solveStatus.success||!Number.isFinite(sys.solveStatus.error))throw withAdmissionCause(fail('SOLVE_FAILED','Coordinate admission did not establish a finite solution.'),causeForSolveStatus(sys.solveStatus));for(const c of sys.allConstraints){if(sys.conflicting.has(c)&&!sys.redundant.has(c))throw withAdmissionCause(fail('COORDINATE_CONFLICT','Coordinate admission rejected an original equation.'),sys.getAdmissionCause(c));validateConstraintGeometry(c);}}
   const authored=stage.algNumSystem.allConstraints.filter(c=>!c.internal),drivers=temporaries.map((c,i)=>({index:authored.indexOf(c),intent:intents[i],status:stage.algNumSystem.redundant.has(c)?'redundant':'accepted'}));if(drivers.some(d=>d.index<0))throw fail('INTENT_CHANGED','The temporary driver disappeared.');
   const warm=JSON.parse(workspace.io.serializeSketch(before.metadata,{strict:true}));warm.boundary=structuredClone(before.boundary);removeTemporaryIntents(before,warm,stage.index,drivers);intents.forEach(intent=>verifyTarget(warm,intent));
-  const candidate=structuredClone(before);candidate.objects=applyCapturedGeometry(before,warm,scope.fields,true,'Coordinate edit');materializeOffsetCaches(candidate,name=>bindings[name]);assertCapturedGeometryScope(before,candidate,scope.fields,'Coordinate edit');intents.forEach(intent=>verifyTarget(candidate,intent));
+  const candidate=structuredClone(before);candidate.objects=applyCapturedGeometry(before,warm,scope.fields,true,'Coordinate edit');materializeOffsetCaches(candidate,name=>bindings[name]);materializePatternCaches(candidate);assertCapturedGeometryScope(before,candidate,scope.fields,'Coordinate edit');intents.forEach(intent=>verifyTarget(candidate,intent));
   const proof=coldCoordinates(revision,candidate,bindings);if(!proof.result.ok)return coordinateProofFailure(proof.result,'First coordinate cold proof',proof.stops);
   proveCoordinateGeometry(candidate,proof.result.sketch,proof.result.evidence,bindings,'First coordinate cold proof',proof.stops);
   const second=coldCoordinates(revision,proof.result.sketch,bindings);if(!second.result.ok)return coordinateProofFailure(second.result,'Independent coordinate cold replay',second.stops);

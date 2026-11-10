@@ -1,5 +1,6 @@
 import {NOOP} from "gems/func";
 import {OffsetGeneratorSchema} from './offsetGenerator';
+import {PatternGeneratorSchema} from './patternGenerator';
 import {MirrorGeneratorSchema} from "./mirrorGenerator";
 import {memoize} from "lodash/function";
 import {indexArray} from "gems/iterables";
@@ -8,6 +9,7 @@ import {PREDEFINED_LAYERS} from "../layerNames";
 const SCHEMAS = [
   MirrorGeneratorSchema,
   OffsetGeneratorSchema,
+  PatternGeneratorSchema,
 ];
 
 const SCHEMAS_INDEX = indexArray(SCHEMAS, schema => schema.id);
@@ -85,6 +87,7 @@ export class SketchGenerator {
       }
       restoredObject.generator = sketchGenerator;
       if(schema===OffsetGeneratorSchema)restoredObject.readOnly=true;
+      if(schema===PatternGeneratorSchema)restoredObject.traverse(child=>{child.readOnly=true;});
       return restoredObject;
     });
     sketchGenerator.init();

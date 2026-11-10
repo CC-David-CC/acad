@@ -1,5 +1,6 @@
 import {captureArcData,requireArcInterval,arcDataFromObject} from './shapes/arcBranch.mjs';
 import {offsetSourceRows} from './generators/offsetSource.mjs';
+import {patternSourceRows} from './generators/patternSource.mjs';
 import {tangencyConstantsValid} from './constr/tangencyDomain.mjs';
 import {slotDeclarationRows,validateSlotNativeRow,validateSlotJunctions} from './constr/straightSlotSource.mjs';
 import {captureLinearDimensionRecord} from './shapes/linearDimensionRecord.mjs';
@@ -721,6 +722,7 @@ export function validateProjectSketch(sketch: any) {
     }
   }
   offsetSourceRows(sketch);
+  patternSourceRows(sketch);
   validateSlotJunctions(sketch,index);
   if (seenGroups.size !== groupIds.size) throw new Error('Orphan rigid group');
   });

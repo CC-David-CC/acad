@@ -1,3 +1,4 @@
+import {patternDependencyGroups} from '../generators/patternGenerator';
 import {arcBranchFacts} from '../shapes/arcBranch.mjs';
 import {capturedParameterOwnership} from './capturedParameterOwnership';
 import {offsetDependencyGroups} from '../generators/offsetGenerator';
@@ -38,7 +39,7 @@ function support(sketch:any,externalParameters:any,seed?:{stage:number,index:num
    if(c===chosen)selected=true;
   }
  }
- let offsetOwnership:any=null;for(const stage of stages)for(const generator of stage.generators)for(const group of offsetDependencyGroups(generator)||[]){count(++work);if(!offsetOwnership)offsetOwnership=capturedParameterOwnership(workspace);for(const p of group){if(!offsetOwnership.geometry.has(p))fail('INVALID_SCOPE','Offset replay dependency is not an actual owned geometry Param.');const links=adjacency.get(p)||[];links.push(group);adjacency.set(p,links);}}
+ let offsetOwnership:any=null;for(const stage of stages)for(const generator of stage.generators)for(const group of patternDependencyGroups(generator)||offsetDependencyGroups(generator)||[]){count(++work);if(!offsetOwnership)offsetOwnership=capturedParameterOwnership(workspace);for(const p of group){if(!offsetOwnership.geometry.has(p))fail('INVALID_SCOPE','Offset replay dependency is not an actual owned geometry Param.');const links=adjacency.get(p)||[];links.push(group);adjacency.set(p,links);}}
  if(seed&&(!Number.isSafeInteger(seed.stage)||!Number.isSafeInteger(seed.index)||seed.stage<0||seed.index<0||!selected))fail('INTENT_CHANGED','The actual operation row is unavailable for replay support.');
  const reached=new Set(seeds),pending=[...seeds];
  for(let at=0;at<pending.length;at++)for(const group of adjacency.get(pending[at])||[])for(const p of group){count(++work);if(!reached.has(p)){reached.add(p);pending.push(p);}}

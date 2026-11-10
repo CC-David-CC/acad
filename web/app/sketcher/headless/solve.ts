@@ -1,3 +1,4 @@
+import {validatePatternCaches,patternFailureCodes} from '../generators/patternSource.mjs';
 import {validateOffsetCaches,offsetFailureCodes} from '../generators/offsetSource.mjs';
 import {admissionCause,causeForSolveStatus,failureCause} from '../constr/admissionCause.mjs';
 import {inspectStageGenerators} from './stageGeneratorPolicy.mjs';
@@ -34,6 +35,7 @@ export function solveSketch(request, onAuthoredEvidence?: (row: any) => void, on
     if(diagnostic!==undefined && (!record(diagnostic)||diagnostic.version!==1||Reflect.ownKeys(diagnostic).length!==(perStage?2:1)||perStage&&!Object.prototype.hasOwnProperty.call(diagnostic,'scope'))) fail('INVALID','Invalid local Jacobian request.');
     const sketch=request.sketch, oldBoundary=sketch.boundary;
     validateOffsetCaches(sketch,name=>external[name]);
+    validatePatternCaches(sketch);
     if (!only(sketch,['version','objects','dimensions','labels','stages','constants','metadata','boundary'])) fail('UNSUPPORTED','Unsupported sketch fields.');
     if (!oldBoundary) fail('INVALID','Saved sketch boundary is required.');
     // Bound spline constructors before independently rebuilding their
@@ -79,6 +81,7 @@ export function solveSketch(request, onAuthoredEvidence?: (row: any) => void, on
     typeIndex(solved,request.boundary);
     for(const object of solved.objects)if(object.type==='BSpline')try{validateSplineDerivedGeometry(object.id,object.data)}catch(error){fail(error?.code==='SPLINE_RESOURCE_LIMIT'?'LIMIT':error?.code==='UNSUPPORTED_SPLINE_SOURCE'?'UNSUPPORTED':'SPLINE_GEOMETRY',typeof error?.message==='string'?error.message:'Solved B-spline derived geometry is invalid or stale.',failureCause(error)||(error?.code==='UNSUPPORTED_SPLINE_SOURCE'?undefined:admissionCause(error?.code==='SPLINE_RESOURCE_LIMIT'?'resource-limit':error?.code==='SPLINE_DERIVED_MISMATCH'?'retained-validation-failure':error?.code==='NONFINITE_RESULT'?'nonfinite-result':'invalid-domain')));}
     validateOffsetCaches(solved,name=>external[name]);
+    validatePatternCaches(solved);
     try { inspectStageGenerators(solved); } catch { fail('GENERATOR_CHANGED','Generated geometry is inconsistent.'); }
     if(JSON.stringify(solved.stages.map(s=>s.generators))!==JSON.stringify(sketch.stages.map(s=>s.generators)))fail('INTENT_CHANGED','Generator intent changed during solving.');
     if(JSON.stringify(incomingIntent(solved))!==JSON.stringify(incomingIntent(sketch)))fail('INTENT_CHANGED','Constraint intent changed during solving.');
@@ -91,6 +94,6 @@ export function solveSketch(request, onAuthoredEvidence?: (row: any) => void, on
     if(onAuxiliaryWitness)onAuxiliaryWitness(captureSolvedAuxiliaryWitnesses(workspace));
     return {revision:request.revision,ok:true as const,sketch:solved,evidence,...(localJacobian?{localJacobian}:{})};
   } catch(error) {
-    return {revision:typeof request?.revision==='string'?request.revision:'',ok:false as const,error:{code:error instanceof SketchSolveError?error.code:offsetFailureCodes.includes(error?.code)?error.code:'SOLVE_ERROR',message:error instanceof Error?error.message:'Sketch solve failed.',...(failureCause(error)?{cause:failureCause(error)}:{})}};
+    return {revision:typeof request?.revision==='string'?request.revision:'',ok:false as const,error:{code:error instanceof SketchSolveError?error.code:(offsetFailureCodes.includes(error?.code)||patternFailureCodes.includes(error?.code))?error.code:'SOLVE_ERROR',message:error instanceof Error?error.message:'Sketch solve failed.',...(failureCause(error)?{cause:failureCause(error)}:{})}};
   }
 }

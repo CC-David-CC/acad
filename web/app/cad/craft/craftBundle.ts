@@ -2397,6 +2397,10 @@ interface CraftService {
   editClosedSketchEndpoint?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchEndpoint'];
   inspectSketchTransitions?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectSketchTransitions'];
   inspectClosedSketch?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketch'];
+  inspectSketchPatterns?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectSketchPatterns'];
+  createSketchPattern?: ReturnType<typeof createClosedSketchTransitionCommands>['createSketchPattern'];
+  editSketchPattern?: ReturnType<typeof createClosedSketchTransitionCommands>['editSketchPattern'];
+  removeSketchPattern?: ReturnType<typeof createClosedSketchTransitionCommands>['removeSketchPattern'];
   inspectSketchOffsets?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectSketchOffsets'];
   createSketchOffset?: ReturnType<typeof createClosedSketchTransitionCommands>['createSketchOffset'];
   editSketchOffset?: ReturnType<typeof createClosedSketchTransitionCommands>['editSketchOffset'];

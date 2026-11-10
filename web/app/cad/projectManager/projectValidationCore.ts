@@ -3,6 +3,7 @@ import {captureAuthoredCountersinkIntent} from 'engine/solid/authoredCountersink
 import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature,profileExtentFields,profileExtentDimensions,profileExtentInterval} from 'engine/solid/ownedProfileExtentFeature.mjs';
 import {requireProfileExtentBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {validateOffsetSources} from 'sketcher/headless/offsetSourceValidation';
+import {validatePatternSources} from 'sketcher/headless/patternSourceValidation';
 import {prepareTypedDependentSketch} from 'sketcher/headless/typedDependentSketch.mjs';
 import {captureAuthoredCounterboreIntent} from 'engine/solid/authoredCounterboreIntent.mjs';
 import {captureAuthoredBlindHoleIntent} from 'engine/solid/authoredBlindHoleIntent.mjs';
@@ -92,6 +93,7 @@ export function preflight(value, parameterState?: {source?: string, result?: any
     // Geometry-only native regeneration after the unchanged source preflight.
     // No authored constraint solve, source replacement, or binding conversion.
     validateMirrorSourceGeometry(data);
+    if(data.stages.some(s=>s.generators.some(g=>g.typeId==='LinearSketchPattern')))validatePatternSources(data,{});
     if(data.stages.some(s=>s.generators.some(g=>g.typeId==='Offset'))){const external=physicalValues?prepareTypedDependentSketch(data,name=>{const row=physicalValues.get(name);if(!row||row.dimension!=='length')throw Object.assign(Error('Offset requires a current typed length.'),{code:'OFFSET_DISTANCE'});return row.value;}):{};validateOffsetSources(data,external);}
   }
   validateProjectSourceFrames(project);

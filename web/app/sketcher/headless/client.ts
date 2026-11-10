@@ -1,5 +1,6 @@
 import {captureProjectionPreparationReply,captureProjectionInspectionReply} from './sourceProjectionEnvelope.mjs';
 import {captureOffsetEnvelope,captureOffsetInspectionEnvelope} from './offsetReply.mjs';
+import {capturePatternEnvelope} from './patternReply.mjs';
 import {captureFixedEntityEnvelope} from './fixedEntityReply.mjs';
 import {capturePointLineDistanceEnvelope} from './pointLineDistanceEnvelope.mjs';
 import {captureMirrorEnvelope} from './mirrorReply.mjs';
@@ -129,6 +130,7 @@ export async function runSketchSolve(workerUrl: string, request: any, options: S
               if(request.task==='sketch-finite-curve-source-extract'||request.task==='sketch-finite-curve-source-verify'){try{return finish(null,captureFiniteCurveSourceReceipt(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='sketch-finite-curve-certificate'){try{const {task,...original}=request;return finish(null,captureFiniteCurveCertificateReply(result,original));}catch(error){return finish(error);}}
               if(request.task==='sketch-finite-curve-endpoint'||request.task==='sketch-finite-curve-verify-endpoint'){try{const {task,...original}=request;return finish(null,captureFiniteCurveEndpointReply(result,original,task==='sketch-finite-curve-verify-endpoint'));}catch(error){return finish(error);}}
+              if(['sketch-pattern-change','sketch-pattern-inspect','sketch-pattern-verify','sketch-pattern-travel'].includes(request.task)){try{return finish(null,capturePatternEnvelope(result,request.revision,request.task==='sketch-pattern-inspect'?'inspect':request.task==='sketch-pattern-verify'?'verify':request.task==='sketch-pattern-travel'?'travel':'change'));}catch(error){return finish(error);}}
               if(request.task==='sketch-transition-offset'){try{return finish(null,captureOffsetEnvelope(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='sketch-offset-inspection'){try{return finish(null,captureOffsetInspectionEnvelope(result,request.revision));}catch(error){return finish(error);}}
               if(request.task==='sketch-transition-verify-offset'){try{return finish(null,captureSignedDistanceVerificationEnvelope(result,request.revision));}catch(error){return finish(error);}}

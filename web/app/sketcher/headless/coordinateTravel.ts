@@ -1,3 +1,4 @@
+import {patternGeneratedIds} from '../generators/patternSource.mjs';
 import {offsetGeneratedIds} from '../generators/offsetSource.mjs';
 import {projectRenderSketch} from './renderSketchProjection.mjs';
 import {firstCapturedGeometryDifference as difference} from './capturedGeometryScope';
@@ -5,7 +6,7 @@ import {editPointsCoordinatesTransition} from './coordinateTransition';
 import {failureCause} from '../constr/admissionCause.mjs';
 const fail=(code:string,message:string):never=>{throw Object.assign(Error(message),{code});};
 function bounded(text:any){if(typeof text!=='string'||text.length>1048576||new TextEncoder().encode(text).byteLength>1048576)fail('LIMIT','Coordinate travel source exceeds1MiB.');return text;}
-export function coordinateTravelPoints(sketch:any){const derived=offsetGeneratedIds(sketch);return projectRenderSketch({...sketch,objects:sketch.objects.filter(o=>!derived.has(o.id)&&['Point','Segment','Circle','Arc'].includes(o.type))}).objects.flatMap(o=>o.handles.map(p=>({...p,parentId:o.id,stage:o.stage})));}
+export function coordinateTravelPoints(sketch:any){const derived=new Set([...patternGeneratedIds(sketch),...offsetGeneratedIds(sketch)]);return projectRenderSketch({...sketch,objects:sketch.objects.filter(o=>!derived.has(o.id)&&['Point','Segment','Circle','Arc'].includes(o.type))}).objects.flatMap(o=>o.handles.map(p=>({...p,parentId:o.id,stage:o.stage})));}
 // Structural admission is not geometry authority: ALL non-geometry authored
 // fields stay exact. Full permitted connected geometry (including radius) is
 // proved only by reconstructing the genuine existing coordinate operation.
