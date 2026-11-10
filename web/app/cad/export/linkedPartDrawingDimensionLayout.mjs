@@ -11,6 +11,45 @@ const equal=(a,b)=>a[0]===b[0]&&a[1]===b[1];
 const boxOf=points=>({min:[0,1].map(i=>Math.min(...points.map(p=>p[i]))),max:[0,1].map(i=>Math.max(...points.map(p=>p[i])))});
 const overlap=(a,b)=>a.min[0]<b.max[0]&&a.max[0]>b.min[0]&&a.min[1]<b.max[1]&&a.max[1]>b.min[1];
 
+// Morton order is only a broad-phase index. Every node stores the conservative
+// union of ORIGINAL represented endpoint bounds; no indexed coordinate ever
+// replaces a drawing point or establishes a geometric/collision result.
+function segmentIndex(segments,charge){
+ if(!segments.length)return{some:()=>false};
+ const bounds={min:[Infinity,Infinity],max:[-Infinity,-Infinity]},rows=[];
+ for(let index=0;index<segments.length;index++){
+  charge();const segment=segments[index],b=boxOf(segment);rows.push({segment,b,index,code:0});
+  for(let k=0;k<2;k++){bounds.min[k]=Math.min(bounds.min[k],b.min[k]);bounds.max[k]=Math.max(bounds.max[k],b.max[k]);}
+ }
+ const spans=bounds.max.map((n,k)=>n-bounds.min[k]);
+ for(const row of rows){
+  const cells=[0,1].map(k=>spans[k]===0?0:Math.max(0,Math.min(255,Math.floor(255*((row.b.min[k]+row.b.max[k])/2-bounds.min[k])/spans[k]))));
+  for(let bit=0;bit<8;bit++){charge();row.code|=((cells[0]>>bit)&1)<<(2*bit);row.code|=((cells[1]>>bit)&1)<<(2*bit+1);}
+ }
+ rows.sort((a,b)=>{charge();return a.code-b.code||a.index-b.index;});
+ let nodes=0;
+ function build(first,last){
+  charge();if(++nodes>50009)resource('Dimension geometry index exceeds its bounded node census.');
+  if(last-first<=16){
+   const min=[Infinity,Infinity],max=[-Infinity,-Infinity];
+   for(let i=first;i<last;i++){charge();for(let k=0;k<2;k++){min[k]=Math.min(min[k],rows[i].b.min[k]);max[k]=Math.max(max[k],rows[i].b.max[k]);}}
+   return{min,max,first,last};
+  }
+  const mid=first+Math.floor((last-first)/2),left=build(first,mid),right=build(mid,last);
+  return{min:[0,1].map(k=>Math.min(left.min[k],right.min[k])),max:[0,1].map(k=>Math.max(left.max[k],right.max[k])),left,right};
+ }
+ const root=build(0,rows.length),meets=(b,q)=>b.max[0]>=q.min[0]&&b.min[0]<=q.max[0]&&b.max[1]>=q.min[1]&&b.min[1]<=q.max[1];
+ return{some(query,visit){
+  const pending=[root];
+  while(pending.length){
+   charge();const node=pending.pop();if(!meets(node,query))continue;
+   if(node.left){pending.push(node.right,node.left);continue;}
+   for(let i=node.first;i<node.last;i++){charge();if(meets(rows[i].b,query)&&visit(rows[i].segment))return true;}
+  }
+  return false;
+ }};
+}
+
 // Exact predicates on represented paper coordinates. Floating lengths rank
 // candidate lanes only; they never decide segment/text or line crossings.
 function predicates(budget){
@@ -71,6 +110,8 @@ function port(start,r){
 export function layoutDrawingDimensions({sheet,dimensions,labelBoxes,captionBoxes,geometrySegments,geometryBounds,existingLeaders}){
  if(!sheet||![sheet.width,sheet.height].every(finite)||!Array.isArray(dimensions)||dimensions.length>LIMIT.dimensions||!Array.isArray(labelBoxes)||!Array.isArray(captionBoxes)||labelBoxes.length+captionBoxes.length>LIMIT.boxes||![...labelBoxes,...captionBoxes].every(box)||!Array.isArray(geometrySegments)||geometrySegments.length>200024||geometrySegments.some(s=>!Array.isArray(s)||s.length!==2||!s.every(point))||!Array.isArray(geometryBounds)||geometryBounds.length>12||!geometryBounds.every(box)||!Array.isArray(existingLeaders)||existingLeaders.length>442||existingLeaders.some(s=>!Array.isArray(s)||s.length!==2||!s.every(point)))resource('Dimension layout inputs exceed their bounded paper domain.');
  const budget={used:0},exact=predicates(budget),result=new Map(),lines=[...existingLeaders],leaderStrokes=[],identities=new Set();let outputSegments=0;
+ if(!dimensions.length)return[];
+ const geometryIndex=segmentIndex(geometrySegments,exact.charge);
  const reserveStroke=segment=>{const b=boxOf(segment);leaderStrokes.push({min:b.min.map(n=>n-.25),max:b.max.map(n=>n+.25)});};
  existingLeaders.forEach(reserveStroke);
  for(const row of dimensions){
@@ -90,13 +131,9 @@ export function layoutDrawingDimensions({sheet,dimensions,labelBoxes,captionBoxe
   let labelIssue=null;
   if(row.labelBox.min.some(n=>n<.125)||row.labelBox.max.some((n,i)=>n>(i?sheet.height:sheet.width)-.125))labelIssue='DECLARED_TEXT_OUTSIDE_SHEET';
   else if(others.some(r=>overlap(row.labelBox,r)))labelIssue='DECLARED_TEXT_BOX_CONFLICT';
-  else for(const segment of geometrySegments){
-   exact.charge();const a=segment[0],b=segment[1],lo=row.labelBox.min,hi=row.labelBox.max;
-   // The cheap broad phase never certifies clearance at a near boundary.
-   // Its .25 gutter strictly contains the exact .125 stroke test for finite
-   // |paper coordinate| <=1e9, including binary64 addition rounding.
-   if(Math.min(a[0],b[0])<=hi[0]+.25&&Math.min(a[1],b[1])<=hi[1]+.25&&Math.max(a[0],b[0])>=lo[0]-.25&&Math.max(a[1],b[1])>=lo[1]-.25&&exact.rectangle(a,b,row.labelBox)){labelIssue='DECLARED_TEXT_GEOMETRY_CONFLICT';break;}
-  }
+  // This .25 broad-phase gutter contains the exact .125 stroke test even
+  // after binary64 addition rounding in the finite <=1e9 paper domain.
+  else if(geometryIndex.some({min:row.labelBox.min.map(n=>n-.25),max:row.labelBox.max.map(n=>n+.25)},segment=>exact.rectangle(segment[0],segment[1],row.labelBox)))labelIssue='DECLARED_TEXT_GEOMETRY_CONFLICT';
   if(!labelIssue&&geometryBounds.some(b=>overlap(row.labelBox,b)))labelIssue='VIEW_ENVELOPE_UNCERTAINTY';
   if(!(length>0)||!Number.isFinite(length)){uncertain('PROJECTED_SPAN_COLLAPSED');continue;}
   const u=delta.map(n=>n/length),normal=[-u[1],u[0]],center=row.labelBox.min.map((n,i)=>(n+row.labelBox.max[i])/2),desired=center.reduce((n,x,i)=>n+(x-a[i])*normal[i],0),side=desired<0?-1:1;
@@ -119,11 +156,7 @@ export function layoutDrawingDimensions({sheet,dimensions,labelBoxes,captionBoxe
    if(paths.some(p=>p.points.some(q=>!inSheet(q)))){reason='DIMENSION_LANE_OUTSIDE_SHEET';continue;}
    if(paths.some(p=>p.points.slice(1).some((q,i)=>[...others,row.labelBox].some(r=>exact.rectangle(p.points[i],q,r))))){reason='DECLARED_TEXT_STROKE_CONFLICT';continue;}
    if(paths.filter(p=>p.role==='dimension-line').some(p=>lines.some(line=>exact.crossing(p.points[0],p.points[1],line[0],line[1])))){reason='DIMENSION_LINE_CROSSING';continue;}
-   const geometryCrossing=paths.filter(p=>p.role==='dimension-line').some(p=>geometrySegments.some(segment=>{
-    exact.charge();const a=p.points[0],b=p.points[1],c=segment[0],d=segment[1];
-    if(Math.max(a[0],b[0])<Math.min(c[0],d[0])||Math.min(a[0],b[0])>Math.max(c[0],d[0])||Math.max(a[1],b[1])<Math.min(c[1],d[1])||Math.min(a[1],b[1])>Math.max(c[1],d[1]))return false;
-    return exact.crossing(a,b,c,d);
-   }));
+   const geometryCrossing=paths.filter(p=>p.role==='dimension-line').some(p=>geometryIndex.some(boxOf(p.points),segment=>exact.crossing(p.points[0],p.points[1],segment[0],segment[1])));
    if(geometryCrossing){reason='PROJECTED_GEOMETRY_LINE_CROSSING';continue;}
    const projection=center.reduce((n,x,i)=>n+(x-q0[i])*u[i],0),start=q0.map((n,i)=>n+u[i]*Math.max(0,Math.min(length,projection))),target=port(start,row.labelBox);
    if(target){
