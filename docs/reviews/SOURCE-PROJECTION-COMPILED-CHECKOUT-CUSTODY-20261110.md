@@ -1,0 +1,7 @@
+# Mixed whole compiled-source custody correction
+
+Source review only; no tests, parsers, builds, module/Native/browser execution. Frozen input: own mixed acceptance f72f90897e4f62eb1808491dcb7e827b294517d8, composed Root d16a306. The earlier roster proved actual file bytes belonged to actual HEAD/path/blob but did not bind that HEAD to pins.source/pins.desktop. A newer committed source checkout could therefore have supplied a well-formed but different producer snapshot. No executed incident is alleged.
+
+The new runner requires the actual Core and Host full HEADs to equal the exact compiled pin identities before any browser launch and before each source snapshot. Its final source check captures both HEADs again, requires exact original identity plus every original file/blob/hash check, and records FAIL on read/identity failure without skipping owned cleanup/disconnection. The after-whole independent checker validates before/after identities against pins and joins EVERY retained roster entry, including local acceptance and transitive signed harness/archive helpers, to the corresponding actual repository and compiled commit. It still independently reads each actual Git commit/path/blob and compares retained bytes. No caller flag or guessed separate acceptance commit is introduced; build a candidate containing this source before launch.
+
+Only the NEW mixed workflow driver/checker/README change. Existing standalone projection driver/evidence and runtime/product source are untouched. Runtime qualification remains open.
