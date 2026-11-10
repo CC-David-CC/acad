@@ -732,7 +732,8 @@ export function activate(ctx: ApplicationContext) {
     return Object.freeze({revision,generation:savedContentGeneration,equal:observation?.owner===archiveOwner&&archiveOwner?.available&&observation.revision===revision&&observation.generation===savedContentGeneration?observation.equal:null});
   }
   async function compareHostSavedContent(options:{signal?:AbortSignal,valid?:()=>boolean}={}){
-    const known=inspectHostSavedContent();if(known.equal!==null)return known;
+    options=captureDocumentJobOptions(options,true);const lifetime=documentJob(options);lifetime.guard();
+    const known=inspectHostSavedContent();if(known.equal!==null){lifetime.guard();return known;}
     const generation=savedContentGeneration,work=await captureHostProjectSourceJob(options,true),{job,current}=work,owner=nativeArchiveOwner(job);
     const prepared=await owner.prepareContent(work.source,{signal:work.options.signal,valid:()=>{try{job.guard();return true;}catch{return false;}}},current);
     try{

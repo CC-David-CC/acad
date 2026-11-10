@@ -7,7 +7,7 @@ export function exactSavedContent(value){
   function put(text){
     bytes+=encoder.encode(text).length;if(bytes>ARCHIVE_LIMITS.bytes)throw archiveError('CAD_ARCHIVE_RESOURCE_LIMIT','Saved-content comparison exceeds 128 MiB.');
     for(let i=0;i<text.length;){const n=Math.min(16384-pending.length,text.length-i);pending+=text.slice(i,i+n);i+=n;
-      if(pending.length===16384){parts.push(pending);pending='';}}
+      if(pending.length===16384){const last=pending.charCodeAt(pending.length-1),next=text.charCodeAt(i);if(last>=0xd800&&last<=0xdbff&&next>=0xdc00&&next<=0xdfff){parts.push(pending.slice(0,-1));pending=pending.slice(-1);}else{parts.push(pending);pending='';}}}
   }
   function string(text){put('"');for(let i=0;i<text.length;){let end=Math.min(i+4096,text.length);if(end<text.length&&text.charCodeAt(end-1)>=0xd800&&text.charCodeAt(end-1)<=0xdbff&&text.charCodeAt(end)>=0xdc00&&text.charCodeAt(end)<=0xdfff)end--;put(JSON.stringify(text.slice(i,end)).slice(1,-1));i=end;}put('"');}
   function walk(item,depth){
