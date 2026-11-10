@@ -1,0 +1,11 @@
+# Rectangle native whole checkout and outcome custody — BEFORE source review
+
+Exact reviewed input: cf0ce2ae; no tests, imports/parsers, build, browser, Native or workflow execution. Original acceptance source, historical receipts and all FIRST artifacts remain unchanged.
+
+Confirmed checkout blocker: desktop-driver.mjs authenticates listed sources against supplied Core/Host/acceptance commits and checks hashes afterward, but never observes actual checkout HEADs, Git top-level, clean tracked/untracked status or executing acceptance cwd before/after. Matching listed files cannot establish immutable compiled-checkout identities. This repeats the repaired pattern/mixed seam.
+
+Confirmed source-level outcome gap: pending tracks submitted Save only. freshOpen is awaited without its own pending/acknowledged/settled record, and call records but does not retain actual mutating errors carrying committed/possiblyCommitted. Final cleanup can therefore retire the owning context before those actual outcomes are reconciled. This is a source control-flow finding, not a demonstrated runtime failure or claim that ordinary Open is broken.
+
+Root-approved bounded repair: capture three distinct clean actual roots/HEADs equal to explicit compiled Core/Host pins and acceptance commit before/after, and bind executing acceptance cwd. Preserve all original blobs, served pins and raw retained evidence. Track real freshOpen submission/result/current context and actual post-Open state until existing source/ownership validation establishes settlement; retain uncertain contexts. Mark only actual finite mutating command errors carrying real committed/possiblyCommitted fields, without error-string inference, retry or invented outcome. Keep all geometry/phase/refusal/archive criteria unchanged.
+
+Coverage review: six ordinary native cycles plus three per-cell cycles remain, including actual Boolean atomic repair/fillet incompatibility, source/reselection/depth/creation travel and Native material/void observations. The adapter correctly returns afterSave as post-Save and after/opened as fresh-Open; whole saves[].after remains post-Save. No additional confirmed geometry/phase-interface blocker found. Independent archive and shared dyadic checks remain after-whole only.
