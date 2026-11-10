@@ -81,3 +81,11 @@ independent native archive exactly; record whether actual history insertion
 order changed. Dirty must still be false. No coordinate tolerance or document
 field omission is added. Record key order is incidental; array order and all
 actual authored names/values/field presence remain exact comparison inputs.
+
+Driver authored-value comparisons parse each captured internal sketch JSON into
+its admitted data record, matching the independent reader and production dirty
+comparison boundary. They retain sketch IDs, array ordering and all resulting
+string/numeric/field values exactly. Raw source-string observations remain
+available in evidence, without making serialization whitespace/key insertion
+order a new dirty-state requirement. No code/expression string is reparsed or
+normalized by this adjustment.
