@@ -129,7 +129,21 @@
     "web/app/cad/projectManager/exactSavedContent.mjs",
     "web/app/cad/projectManager/nativeArchiveClient.ts",
     "web/app/cad/projectManager/nativeArchiveCodec.worker.ts",
-    "web/app/cad/projectManager/projectManagerBundle.ts"
+    "web/app/cad/projectManager/projectManagerBundle.ts",
+    "web/app/sketcher/constr/ANConstraints.ts",
+    "web/app/sketcher/constr/arcLengthDomain.mjs",
+    "web/app/sketcher/constr/arcLengthSchema.ts",
+    "web/app/sketcher/constr/registeredConstraintPolicy.mjs",
+    "web/app/sketcher/headless/sketchValidation.ts",
+    "web/app/sketcher/actions/arcLengthMeasurementPreparation.js",
+    "web/app/sketcher/actions/arcLengthMeasurementRoles.js",
+    "web/app/sketcher/dxf.ts",
+    "web/app/sketcher/headless/arcLengthMeasurementClient.ts",
+    "web/app/sketcher/headless/arcLengthMeasurementIntent.mjs",
+    "web/app/sketcher/headless/arcLengthMeasurementTransition.ts",
+    "web/app/sketcher/headless/drivingDimensionTarget.mjs",
+    "web/app/sketcher/shapes/arcLengthDimension.js",
+    "web/app/sketcher/shapes/arcLengthDimensionRecord.mjs"
   ],
   "hostSources": [
     "apps/system/jsketcher/index.mjs",
@@ -142,7 +156,9 @@
     "active-system/scripts/build-public-apps.py",
     "active-system/tools/app-builder/build.mjs",
     "active-system/tools/app-builder/inventory-limits.mjs",
-    "test/agent-cad-corpus/manufacturing-shared/stage.py"
+    "test/agent-cad-corpus/manufacturing-shared/stage.py",
+    "apps/system/jsketcher/arc-length-measurement-commands.mjs",
+    "apps/system/jsketcher/examples/arc-length.mjs"
   ],
   "flatSelected": {
     "selected-profile-occ-portable.js": {
@@ -224,6 +240,21 @@
         "native-archive"
       ],
       "scope": "exact comparison implementation and emitted Worker custody; not compiler transitive inclusion or runtime qualification"
+    },
+    "arcLengthLifecycle": {
+      "sources": [
+        "web/app/sketcher/constr/arcLengthDomain.mjs",
+        "web/app/sketcher/constr/arcLengthSchema.ts",
+        "web/app/sketcher/headless/arcLengthMeasurementIntent.mjs",
+        "web/app/sketcher/headless/arcLengthMeasurementTransition.ts",
+        "web/app/sketcher/shapes/arcLengthDimensionRecord.mjs"
+      ],
+      "workerRoles": [
+        "sketch-solver",
+        "project-validator",
+        "native-archive"
+      ],
+      "scope": "actual source and Worker custody only; not transitive compiler inclusion, feature correctness or runtime qualification"
     }
   }
 }
