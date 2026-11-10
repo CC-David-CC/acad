@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "scope": "source-only next assembled contract derivation policy; no generated contract, pins or geometry authority",
+  "reviewedSourceBase": "188bd42a69b01e988fdc98b06c10fcc11aae7638",
+  "coreInnerPrefix": "node_modules/jsketcher-build/",
+  "historicalContract": "test/assembled-fixture-pins/assembled-r2-contract.json",
+  "preserveEveryInheritedLogicalPin": true,
+  "currentContractRequiresSeparateReview": true,
+  "requiredHashedWorkerRoles": [
+    "controlled-3mf",
+    "manufacturing-publication",
+    "project-validator",
+    "sketch-solver",
+    "native-archive",
+    "prism-semantic"
+  ],
+  "retainCompleteEmittedCohortPrefixes": [
+    "static/manufacturing-mesh/",
+    "static/shell/",
+    "static/circular/",
+    "static/adaptive-metrology/",
+    "static/mechanical-native/",
+    "static/finite-curve-support/",
+    "static/analytic-profile/"
+  ],
+  "componentPathsByEmittedPrefix": {
+    "static/polygon-profile/": ".build/polygon-profile-assets/component.json",
+    "static/mechanical-profile/": ".build/mechanical-profile-assets/component.json",
+    "static/boolean-history/": ".build/boolean-history-assets/component.json",
+    "static/revolve-profile/": ".build/revolve-profile-assets/component.json",
+    "static/sweep-profile/": ".build/sweep-profile-assets/component.json",
+    "static/loft-profile/": ".build/loft-profile-assets/component.json",
+    "static/adaptive-metrology/": ".build/adaptive-metrology-assets/component.json",
+    "static/step-export/": ".build/step-export-assets/component.json",
+    "static/manufacturing-mesh/": ".build/manufacturing-mesh-assets/component.json",
+    "static/shell/": ".build/shell-assets/component.json",
+    "static/circular/": ".build/circular-assets/component.json",
+    "static/mechanical-native/": ".build/mechanical-native-assets/component.json",
+    "static/finite-curve-support/": ".build/finite-curve-support-assets/component.json",
+    "static/analytic-profile/": ".build/analytic-profile-assets/component.json"
+  },
+  "verbatimChangedSourceCopies": [
+    "modules/engine/mount/ownedTopologyContract.mjs",
+    "modules/engine/mount/prismSelectionIndex.mjs",
+    "modules/engine/mount/profileExtentSelectionIndex.mjs",
+    "modules/engine/mount/selectionAncestryIndex.mjs",
+    "modules/engine/mount/selectionLineageIndex.mjs"
+  ],
+  "bundledChangedSourceRoster": [
+    "modules/engine/solid/SolidKernel.ts",
+    "web/app/cad/export/linkedPartDrawingDimensionLayout.mjs",
+    "web/app/cad/export/linkedPartDrawingRequirementForms.mjs",
+    "web/app/cad/export/linkedPartDrawingSvg.mjs"
+  ],
+  "allProjectionCopySourcePaths": [
+    "modules/engine/source/sourceProjectionIntent.mjs",
+    "modules/engine/source/sourceFrameIntent.mjs",
+    "modules/engine/metadata/authoredFeatureIdentity.mjs"
+  ],
+  "retainedHostResourcePaths": [
+    "/desktop-apps.js",
+    "/storage/browser/mirror.mjs",
+    "/storage/browser/account-context.mjs",
+    "/storage/browser/verified-content.mjs"
+  ],
+  "flatSelectedProfile": {
+    "preparedDirectory": ".build/selected-profile-assets",
+    "producerSource": "build/prepare-selected-profile-assets.cjs",
+    "componentManifest": null,
+    "association": "exact source and Native input custody plus documented literal import rewrites; no invented component or raw-source equality for rewritten files"
+  },
+  "offlineCustodyBounds": {
+    "metadataBytes": 2097152,
+    "distFileCount": 20000,
+    "individualAssetBytes": 134217728,
+    "distTotalBytes": 1073741824,
+    "streamChunkBytes": 1048576
+  }
+}
