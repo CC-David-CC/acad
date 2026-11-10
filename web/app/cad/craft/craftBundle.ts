@@ -2313,6 +2313,7 @@ interface CraftService {
   createEmptySketchPlane?: ReturnType<typeof createEmptySketchCreationCommands>['createEmptySketchPlane'];
   inspectClosedSketchQueryCapabilities?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketchQueryCapabilities'];
   inspectClosedSketchIntersections?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketchIntersections'];
+  editClosedSketchEndpoint?: ReturnType<typeof createClosedSketchTransitionCommands>['editClosedSketchEndpoint'];
   inspectSketchTransitions?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectSketchTransitions'];
   inspectClosedSketch?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketch'];
   inspectSketchOffsets?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectSketchOffsets'];
