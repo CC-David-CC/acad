@@ -1,0 +1,7 @@
+# Analytic acknowledged-refusal custody — BEFORE
+
+Source reviewed: ff7be3b69a9e7d3294fdd4c04d1c747e7e5e2c55. This is a source finding, not a reproduced transport incident. The active Root R3 run and all original evidence remain immutable.
+
+`desktop-driver.mjs` records actual delivered flag descriptors, but `settleRefusal` never requires the acknowledged own-data error envelope produced by the frozen `signed-harness.mjs` command. A direct Puppeteer `page.evaluate` transport exception may lack that envelope. The five public Arc admission controls pass `code=null`; after an unchanged-state readback their synthesized false commitment flags can therefore clear an unknown mutation outcome. The stale revision name/code checks also occur after settlement, so failure of those checks can retire a still-unestablished context.
+
+Required correction: capture the actual own-data harness error fields separately from normalized diagnostics; require that acknowledged envelope before clearing a failed mutation, and run every original name/code/layer/state assertion first. The independent checker must enforce the same trace/outcome binding. Do not change the harness, application, geometry, original expected refusals, source/checkout roster, ten native cycles, twenty artifacts, budgets or original evidence. No tests, imports, parsers, builds, browser or Native execution are authorized/performed in this lane.
