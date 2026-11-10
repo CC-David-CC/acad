@@ -22,9 +22,22 @@ import {captureWorkerReplyRecord,captureWorkerMetadata} from './workerReplyRecor
 import {validatePortableEnvelope} from './portable-topology-envelope.mjs';
 import {copyDrilledTopology} from './drilledTopologyEnvelope.mjs';
 import {captureFourCornerRequest,captureFourCornerBinding,copyFourCornerTopology} from './fourCornerMountContract.mjs';
+import {FINITE_CURVE_SUPPORT_CANDIDATE} from './ownedFiniteCurveSupportCandidate.mjs';
+import {FINITE_CURVE_SUPPORT_OPERATION,captureFiniteCurveSupportRequest,encodeFiniteCurveSupportRequest,captureFiniteCurveSupportResult,captureFiniteCurveSupportDescriptor} from './finiteCurveSupportRequest.mjs';
 const err=(code,message,...causes)=>{const failure=new EngineContractError(code,message);if(causes.length)Object.defineProperty(failure,'cause',{value:causes[0],configurable:true});return failure;};
 export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}, config) {
   const {jsSha256:JS_SHA,wasmSha256:WASM_SHA,representation,engine,mesh,profile,centeredCut=false,fourCornerCut=false,enclosure=false,selectedProfile=false,selectedProfileVersion=2,edgeTreatments=false,booleanHistory=false,throughHoles=false,blindHoles=false,counterbores=false,countersinks=false,linearHolePatterns=false,revolve=false,sweep=false,loft=false,adaptiveMetrology=false,stepExport=false,orthographicRead=false,manufacturingMesh=false,shell=false,captureManufacturingMeshRequest,captureManufacturingMeshResult,manufacturingNativeCodes=[],manufacturingRefusalCodes=[],captureOrthographicReadRequest,captureOrthographicReadResult,orthographicFrameValues,orthographicNativeCodes=[],orthographicRefusalCodes=[],captureStepExportRequest,captureStepExportResult,stepNativeCodes=[],stepRefusalCodes=[],captureSelectedProfile,captureRevolve,bindRevolve,captureSweep,bindSweep,captureLoft,loftBindingFields,captureLoftBinding,sameLoftBinding,loftNativeCodes=[],loftPreparationCodes=[]} = config;
+  const queryCandidate=FINITE_CURVE_SUPPORT_CANDIDATE;
+  const queryPair=JS_SHA===queryCandidate.jsSha256&&WASM_SHA===queryCandidate.wasmSha256;
+  const queryKeys=['engine','representation','sourceQueryOnly','finiteCurveSupportReadVersion','mesh','profile','jsSha256','wasmSha256','captureFiniteCurveSupportRequest','encodeFiniteCurveSupportRequest','captureFiniteCurveSupportResult','captureFiniteCurveSupportDescriptor','finiteCurveSupportOperation'];
+  if(queryPair||config.sourceQueryOnly!==undefined||config.finiteCurveSupportReadVersion!==undefined){
+    const keys=Reflect.ownKeys(config);
+    if(!queryPair||config.sourceQueryOnly!==true||config.finiteCurveSupportReadVersion!==1||engine!==queryCandidate.engine||representation!==queryCandidate.representation||mesh!==false||profile!==false||keys.length!==queryKeys.length||keys.some(k=>typeof k!=='string'||!queryKeys.includes(k))||queryKeys.some(k=>{const d=Object.getOwnPropertyDescriptor(config,k);return !d?.enumerable||!Object.hasOwn(d,'value');})||config.captureFiniteCurveSupportRequest!==captureFiniteCurveSupportRequest||config.encodeFiniteCurveSupportRequest!==encodeFiniteCurveSupportRequest||config.captureFiniteCurveSupportResult!==captureFiniteCurveSupportResult||config.captureFiniteCurveSupportDescriptor!==captureFiniteCurveSupportDescriptor||config.finiteCurveSupportOperation!==FINITE_CURVE_SUPPORT_OPERATION)
+      throw err('INVALID_MOUNT','Finite-curve support requires its exact shape-free pair, vocabulary and captures');
+  }
+  // Mode derives from this immutable exact-pair contract, never from a result
+  // flag or an independently synchronized lifetime state.
+  const finiteCurveSupportMode=config.finiteCurveSupportReadVersion===1;
   const {captureBlindHoleIntent:captureOwnedBlindHoleIntent,blindHoleCodes:BLIND_HOLE_CODES=[]}=config;
   const {captureCounterboreIntent:captureOwnedCounterboreIntent,counterboreCodes:COUNTERBORE_CODES=[]}=config;
   const {captureCountersinkIntent:captureNumericCountersinkIntent,countersinkCodes:COUNTERSINK_CODES=[]}=config;
@@ -85,10 +98,15 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
   if(enclosure && !(mesh ? manifoldRuntime&&representation==='manifold-mesh-worker-owned' : fourHoleRuntime&&representation==='occ-brep-worker-owned'))throw err('INVALID_MOUNT','Enclosure requires pinned engine runtime');
   if (![workerUrl,jsPath,wasmPath].every(x=>typeof x==='string'&&x.startsWith('/')&&!x.startsWith('//')) ||
       !Number.isInteger(timeoutMs)||timeoutMs<1||timeoutMs>30000) throw err('INVALID_MOUNT','Expected same-origin paths and bounded timeout');
-  const selectedTriangleBudget=selectedProfile?createSelectedResultTriangleBudget():null,maxLifetimeNames=selectedProfile?SELECTED_PROFILE_BUDGET.maxLifetimeNames:8;
+  const selectedTriangleBudget=selectedProfile?createSelectedResultTriangleBudget():null,maxLifetimeNames=finiteCurveSupportMode?0:selectedProfile?SELECTED_PROFILE_BUDGET.maxLifetimeNames:8;
   const mountId=crypto.randomUUID(), handles=new Map(), solidRecords=new Map(), portableRecords=new Map(), holeRecords=new Map(), cornerRecords=new Map(), enclosureRecords=new Map(), worker=new Worker(workerUrl);
   let next=0, seq=0, pending=null, state='initializing', readyResolve, readyReject, cleanupFailure=null;
-  const descriptor=Object.freeze({contractVersion:1,engine,mountId,generation:1,
+  const descriptor=finiteCurveSupportMode?captureFiniteCurveSupportDescriptor({
+    contractVersion:1,engine,mountId,generation:1,unit:'millimeter',representation,
+    bootstrap:'host-trusted',runtimeAssets:{jsSha256:JS_SHA,wasmSha256:WASM_SHA,verification:'worker-sha256'},
+    maxLifetimeNames:0,maxPending:1,sourceQueryOnly:true,finiteCurveSupportReadVersion:1,
+    operations:[FINITE_CURVE_SUPPORT_OPERATION]
+  }):Object.freeze({contractVersion:1,engine,mountId,generation:1,
     unit:'millimeter',representation, bootstrap:'host-trusted',
     runtimeAssets:Object.freeze({jsSha256:JS_SHA,wasmSha256:WASM_SHA,verification:'worker-sha256'}), maxLifetimeNames, maxPending:1,...(selectedProfile?{maxCumulativeResultTriangles:SELECTED_PROFILE_BUDGET.maxCumulativeResultTriangles,budgetScope:SELECTED_PROFILE_BUDGET.scope}:{}),
     ...(adaptiveMetrology?{nativeMeasurement:Object.freeze({version:1,method:'occ-adaptive-volume-properties',relativeEps:1e-10,onlyClosed:false,skipShared:false})}:{}),
@@ -160,7 +178,7 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     if(msg.error!==undefined&&typeof msg.error!=='string'){shutdown('ENGINE_FAILURE','Invalid engine Worker error field');return;}
     if (state==='initializing') {
       if (performance.now()>=initDeadline) {shutdown('TIMEOUT','Engine initialization timed out');return;}
-      if (msg?.kind==='ready') {clearTimeout(initTimer);state='ready';readyResolve();}
+      if (msg?.kind==='ready'&&(!finiteCurveSupportMode||Object.keys(msg).join(',')==='kind')) {clearTimeout(initTimer);state='ready';readyResolve();}
       else {clearTimeout(initTimer);shutdown('ENGINE_FAILURE',String(msg?.error||'Engine initialization failed'));} return;
     }
     // Derive the new substate from the ONE pending job, not another lifetime.
@@ -199,8 +217,9 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
       if(performance.now()>=p.deadline||aborted){shutdown(aborted?'CANCELLED':'TIMEOUT','STEP export expired');return;}
       p.stepBegan=true;return;
     }
-    if (state!=='ready'||!pending) return;
-    if (!msg || msg.seq!==pending.seq || !['result','step-exported','orthographic-read-result','manufacturing-mesh-result','disposed','error','unsupported','refused'].includes(msg.kind)) {shutdown('ENGINE_FAILURE','Unexpected worker response');return;}
+    if (state!=='ready'||!pending) {if(finiteCurveSupportMode)shutdown('ENGINE_FAILURE','Unexpected idle query response');return;}
+    const responseKinds=finiteCurveSupportMode?['finite-curve-support-result','error','refused']:['result','step-exported','orthographic-read-result','manufacturing-mesh-result','disposed','error','unsupported','refused'];
+    if (!msg || msg.seq!==pending.seq || !responseKinds.includes(msg.kind)) {shutdown('ENGINE_FAILURE','Unexpected worker response');return;}
     const p=pending;
     let aborted,cancellationStateFailure;
     try{aborted=p.signal?.aborted;}catch(cause){cancellationStateFailure={cause};}
@@ -211,6 +230,25 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     pending=null;clearTimeout(p.timer);
     if(!listenerRemoved||cancellationStateFailure)shutdown('ENGINE_FAILURE','Engine cancellation cleanup failed');
     if (performance.now()>=p.deadline || aborted) {p.reject(err('TIMEOUT','Engine request expired'));shutdown('MOUNT_CLOSED','Engine request expired');return;}
+    if(finiteCurveSupportMode){
+      if(!listenerRemoved||cancellationStateFailure){p.reject(err('ENGINE_FAILURE','Query cancellation cleanup failed',(cancellationStateFailure||cleanupFailure).cause));return;}
+      if(p.kind!=='finite-curve-support-read'){p.reject(err('ENGINE_FAILURE','Unexpected query operation'));shutdown('MOUNT_CLOSED','Unexpected query operation');return;}
+      if(msg.kind==='refused'||msg.kind==='error'){
+        const ordinary=['CURVE_QUERY_INVALID_REQUEST','CURVE_QUERY_UNCERTAIN','CURVE_QUERY_RESOURCE_LIMIT'];
+        const keys=Object.keys(msg).sort().join(',');
+        if(keys!=='code,error,kind,seq'||typeof msg.code!=='string'||typeof msg.error!=='string'||msg.error.length>512||msg.kind==='refused'&&!ordinary.includes(msg.code)){
+          p.reject(err('ENGINE_FAILURE','Malformed query outcome'));shutdown('MOUNT_CLOSED','Malformed query outcome');return;
+        }
+        const terminal=['CURVE_QUERY_INPUT_CHANGED','CURVE_QUERY_PUBLICATION_FAILED','CURVE_QUERY_FAILED','ENGINE_CLEANUP_FAILED','FINITE_CURVE_READ_PROTOCOL','RESOURCE_LIMIT'];
+        p.reject(err(msg.kind==='refused'||terminal.includes(msg.code)?msg.code:'ENGINE_FAILURE',msg.error));
+        if(msg.kind==='error')shutdown('MOUNT_CLOSED','Query Native owner failed');
+        return;
+      }
+      if(msg.kind!=='finite-curve-support-result'||Object.keys(msg).sort().join(',')!=='kind,observation,seq'){
+        p.reject(err('ENGINE_FAILURE','Malformed query result'));shutdown('MOUNT_CLOSED','Malformed query result');return;
+      }
+      p.resolve(msg);return;
+    }
     if(msg.kind==='error'&&countersinks&&p.kind==='solid-countersink'&&(Object.keys(msg).sort().join(',')!=='code,error,kind,seq'||typeof msg.code!=='string'||typeof msg.error!=='string'||msg.error.length>512)){p.reject(err('ENGINE_FAILURE','Malformed countersink terminal response'));shutdown('MOUNT_CLOSED','Malformed countersink terminal response');return;}
     if (msg.kind==='error') {p.reject(err(drawingRequirements&&['solid-drawing-requirement-targets','solid-drawing-requirements','solid-drawing-references'].includes(p.kind)&&['RESOURCE_LIMIT','ENGINE_CLEANUP_FAILED','MEASUREMENT_PRECISION_UNRESOLVED'].includes(msg.code)?msg.code:countersinks&&p.kind==='solid-countersink'&&[...COUNTERSINK_CODES,...COUNTERSINK_TERMINAL_CODES].includes(msg.code)?msg.code:profileExtents&&p.kind==='selected-profile-extents'&&['PROFILE_EXTENT_INPUT_CHANGED','ENGINE_CLEANUP_FAILED'].includes(msg.code)?msg.code:counterbores&&p.kind==='solid-counterbore'&&msg.code==='ENGINE_CLEANUP_FAILED'?msg.code:drawingDetails&&p.kind==='solid-drawing-derived'&&msg.code==='ENGINE_CLEANUP_FAILED'?'ENGINE_CLEANUP_FAILED':blindHoles&&p.kind==='solid-blind-hole'&&msg.code==='ENGINE_CLEANUP_FAILED'?msg.code:manufacturingMesh&&p.kind==='solid-manufacturing-mesh'&&(manufacturingNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:orthographicRead&&p.kind==='solid-orthographic-read'&&(orthographicNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:stepExport&&p.kind==='solid-step-export'&&(stepNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:circularArrangementVersion===1&&p.kind==='selected-profile-extrude'&&(circularNativeCodes.includes(msg.code)||msg.code==='ENGINE_CLEANUP_FAILED')?msg.code:msg.code==='MEASUREMENT_PRECISION_UNRESOLVED'?'MEASUREMENT_PRECISION_UNRESOLVED':msg.code==='MESH_VOLUME_NUMERIC_RANGE'?'MESH_VOLUME_NUMERIC_RANGE':loft&&p.kind==='selected-profile-loft'&&msg.code==='LOFT_INPUT_CHANGED'?'LOFT_INPUT_CHANGED':'ENGINE_FAILURE',String(msg.error)));shutdown('MOUNT_CLOSED','Engine job failed');return;}
     if (msg.kind==='refused') {
@@ -272,7 +310,19 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
       p.resolve({response:msg,progressBinding:p.loftBinding});
     }else p.resolve(msg);
   };
-  try {worker.postMessage({kind:'init',...(selectedProfile?{nativeOwnership:2,...(selectedProfileVersion===3?{selectedProfileVersion:3}:{})}:{}),...(profileSourceBindingVersion===1?{profileSourceBindingVersion:1}:{}),...(edgeTreatments?{edgeTreatments:1}:{}),...(booleanHistory?{booleanHistory:1}:{}),...(throughHoles?{throughHoles:1}:{}),...(blindHoles?{blindHoles:1}:{}),...(counterbores?{counterbores:1}:{}),...(countersinks?{countersinks:1}:{}),...(profileExtents?{profileExtents:1}:{}),...(linearHolePatterns?{linearHolePatterns:1}:{}),...(revolve?{revolve:1}:{}),...(sweep?{sweep:1}:{}),...(loft?{loft:1}:{}),...(adaptiveMetrology?{adaptiveMetrology:1}:{}),...(stepExport?{stepExport:1}:{}),...(orthographicRead?{orthographicRead:1}:{}),...(drawingReferences?{drawingReferences:1}:{}),...(drawingRequirements?{drawingRequirementVersion:1}:{}),...(manufacturingMesh?{manufacturingMesh:1}:{}),...(shell?{shell:1}:{}),...(circularArrangementVersion===1?{circularArrangementVersion:1}:{}),...(planarAttachments?{planarAttachments:1}:{}),manifest:{version:1,js:{path:jsPath,sha256:JS_SHA},wasm:{path:wasmPath,sha256:WASM_SHA}}});}catch(cause){shutdown('ENGINE_FAILURE','Engine initialization transport failed',cause);}
+  try {worker.postMessage({kind:'init',...(finiteCurveSupportMode?{finiteCurveSupportReadVersion:1}:{}),...(selectedProfile?{nativeOwnership:2,...(selectedProfileVersion===3?{selectedProfileVersion:3}:{})}:{}),...(profileSourceBindingVersion===1?{profileSourceBindingVersion:1}:{}),...(edgeTreatments?{edgeTreatments:1}:{}),...(booleanHistory?{booleanHistory:1}:{}),...(throughHoles?{throughHoles:1}:{}),...(blindHoles?{blindHoles:1}:{}),...(counterbores?{counterbores:1}:{}),...(countersinks?{countersinks:1}:{}),...(profileExtents?{profileExtents:1}:{}),...(linearHolePatterns?{linearHolePatterns:1}:{}),...(revolve?{revolve:1}:{}),...(sweep?{sweep:1}:{}),...(loft?{loft:1}:{}),...(adaptiveMetrology?{adaptiveMetrology:1}:{}),...(stepExport?{stepExport:1}:{}),...(orthographicRead?{orthographicRead:1}:{}),...(drawingReferences?{drawingReferences:1}:{}),...(drawingRequirements?{drawingRequirementVersion:1}:{}),...(manufacturingMesh?{manufacturingMesh:1}:{}),...(shell?{shell:1}:{}),...(circularArrangementVersion===1?{circularArrangementVersion:1}:{}),...(planarAttachments?{planarAttachments:1}:{}),manifest:{version:1,js:{path:jsPath,sha256:JS_SHA},wasm:{path:wasmPath,sha256:WASM_SHA}}});}catch(cause){shutdown('ENGINE_FAILURE','Engine initialization transport failed',cause);}
+  async function readFiniteCurveSupportIntersections(request,options={}) {
+    validOptions(options);
+    if(!finiteCurveSupportMode)throw err('UNSUPPORTED_OPERATION','This mount has no source-only curve query');
+    const captured=encodeFiniteCurveSupportRequest(request);
+    const response=await send({kind:'finite-curve-support-read',curves:captured.request.curves},'finite-curve-support-result',options.signal);
+    if(state!=='ready')throw err('MOUNT_CLOSED','Query owner retired before response capture');
+    try{
+      const result=captureFiniteCurveSupportResult({contractVersion:1,op:FINITE_CURVE_SUPPORT_OPERATION.id,unit:'millimeter',observation:response.observation},captured.input);
+      if(state!=='ready')throw err('MOUNT_CLOSED','Query owner changed during response capture');
+      return result;
+    }catch(cause){shutdown('ENGINE_FAILURE','Invalid source-only curve result',cause);throw err('ENGINE_FAILURE','Invalid source-only curve result',cause);}
+  }
   function owned(h) {
     if (!h || Object.keys(h).sort().join(',')!=='generation,id,mountId,representation' || h.mountId!==mountId || h.generation!==1 ||
         h.representation!==representation || !handles.has(h.id)) throw err('INVALID_HANDLE','Handle not owned by this mount');
@@ -1006,6 +1056,7 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
         version=discriminator.value;
       }
     } catch(error) { return Promise.reject(error); }
+    if(finiteCurveSupportMode)return op===FINITE_CURVE_SUPPORT_OPERATION.id?readFiniteCurveSupportIntersections(request,options):Promise.reject(err('UNSUPPORTED_OPERATION','Only source-only curve reads are bound by this mount'));
     if (op==='solid.profile.extrude.extents') return extrudeProfileExtents(request,options);
     if (op==='solid.manufacturing.mesh.read') return readManufacturingMesh(request,options);
     if (op==='solid.drawing.orthographic.read') return readOrthographic(request,options);
@@ -1045,5 +1096,6 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
     return Promise.reject(err('UNSUPPORTED_OPERATION','Operation is not bound by this mount'));
   }
   function close(){clearTimeout(initTimer);shutdown('MOUNT_CLOSED','Engine mount closed');if(cleanupFailure)throw cleanupFailure.cause;}
+  if(finiteCurveSupportMode)return Object.freeze({descriptor,ready,execute,readFiniteCurveSupportIntersections,close});
   return Object.freeze({descriptor,ready,execute,box,boolean,dispose,extrudeProfileExtents,treatSolidEdges,shellSolid,blindSolidHole,counterboreSolidHole,countersinkSolidHole,throughSolidHoles,readSolidMesh,exportSTEP,readOrthographic,readDrawingDerived,readDrawingReferences,readDrawingBores,readDrawingRequirementTargets,readDrawingRequirements,readManufacturingMesh,readSolidTopology,classifySolidPoint,readPrismSelections,readSolidSelections,assertSolidBinding,createEnclosure,readEnclosureMesh,readEnclosureManufacturingMesh,readEnclosureInterface,assertEnclosureBinding,centeredThroughHole,fourCornerThroughHoles,assertPortableBinding,assertCenteredHoleBinding,assertFourCornerBinding,close});
 }

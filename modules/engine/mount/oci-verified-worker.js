@@ -2,7 +2,8 @@
 // runtime bytes before execution and never creates window/document shims.
 // One native-runtime initializer and one asynchronous operation own the realm.
 let workerPhase = 'new';
-function closeWorker(){workerPhase='closed';self.close();}
+let finiteCurveSupportMode=false,finiteCurveNativeAPI=null,activeFiniteCurveOwner=null;
+function closeWorker(){workerPhase='closed';activeFiniteCurveOwner=null;self.close();}
 let blindHoleMode=false,counterboreMode=false,profileExtentsMode=false,profileExtentAPI=null,profileExtentNative=null;
 let countersinkMode=false,countersinkAPI=null,countersinkPolicy=null,countersinkNativeAPI=null,countersinkCodes=null;
 let maxNames = 8, nextName = 0, safeOwnedMode = false, selectedVersion = 2, edgeTreatmentMode = false, booleanHistoryMode = false, throughHoleMode = false, linearHolePatternMode = false, revolveMode = false, sweepMode = false, loftMode = false, stepExportMode = false, nativeRuntimeRevision = null;
@@ -802,6 +803,14 @@ self.onmessage = async event => {
   try {
     if (initializing) {
       if (msg?.kind!=='init' || msg.manifest?.version!==1) bad('Initialization required');
+      const finiteCurvePair=msg.manifest.js?.sha256==='479f0620b6dfe131dac05131a3798fc533e05a2bd11e8074ef240284f61bbe86'&&msg.manifest.wasm?.sha256==='746da919c8457e98daa821fae98c62c0a6c9ad1acafd1c3d5412e0207d6b6325';
+      if(finiteCurvePair||msg.finiteCurveSupportReadVersion!==undefined){
+        if(!finiteCurvePair||msg.finiteCurveSupportReadVersion!==1||Array.isArray(msg)||Reflect.ownKeys(msg).sort().join(',')!=='finiteCurveSupportReadVersion,kind,manifest'||Reflect.ownKeys(msg.manifest).sort().join(',')!=='js,version,wasm')bad('Finite-curve support requires its exact query-only initialization');
+        for(const asset of [msg.manifest.js,msg.manifest.wasm])if(!asset||Array.isArray(asset)||Reflect.ownKeys(asset).sort().join(',')!=='path,sha256')bad('Invalid finite-curve runtime manifest');
+        finiteCurveSupportMode=true;
+        finiteCurveNativeAPI=await import(new URL('./finiteCurveNativeCalls.mjs',self.location.href));
+        if(typeof finiteCurveNativeAPI.createFiniteCurveNativeCalls!=='function'||typeof finiteCurveNativeAPI.finiteCurveCallFailure!=='function')bad('Finite-curve source closure is unavailable');
+      }
       safeOwnedMode=msg.nativeOwnership===2;maxNames=safeOwnedMode?32:8;
       blindHoleMode=msg.blindHoles===1;if(msg.blindHoles!==undefined&&msg.blindHoles!==1)bad('Invalid blind-hole mode');
       counterboreMode=msg.counterbores===1;if(msg.counterbores!==undefined&&msg.counterbores!==1)bad('Invalid counterbore mode');
@@ -888,14 +897,14 @@ self.onmessage = async event => {
       if(loftMode){const codes=await import(new URL('../solid/ownedLoftIntent.mjs',self.location.href));loftRefusalCodes=codes.LOFT_NATIVE_REFUSALS;loftPreparationRefusalCodes=codes.LOFT_PREPARATION_REFUSALS;}
       nativeRuntimeRevision='sha256:'+msg.manifest.js?.sha256+':'+msg.manifest.wasm?.sha256;
       const [js,wasm] = await Promise.all([verifiedAsset(msg.manifest.js, 1048576),verifiedAsset(msg.manifest.wasm, 41943040)]);
-      self.Module = {wasmBinary:wasm, onRuntimeInitialized:() => {if(workerPhase!=='initializing')return;try {if(profileSourceBindingMode&&(!Array.isArray(profileSourceBindingAPI.MECHANICAL_NATIVE_INITIAL_PORTS)||!profileSourceBindingAPI.MECHANICAL_NATIVE_INITIAL_PORTS.every(name=>typeof Module[name]==='function')))bad('Initial mechanical Native ABI unavailable');if(countersinkMode&&!countersinkPolicy.COUNTERSINK_NATIVE_PORTS.every(name=>typeof Module[name]==='function'))bad('Countersink Native ABI unavailable');Module._InitCommands();if(circularMode&&!['_ReadCircularArrangementV1','_CreateOwnedCircularCellV1'].every(name=>typeof Module[name]==='function'))bad('Native circular arrangement ABI unavailable');if(shellMode&&(!Module._CreateOwnedBoxWithFacesV1||!Module._ApplyOwnedShellV1))bad('Native shell/box provenance unavailable');if(selectedVersion===3&&(!Module._CreateSelectedProfileV3||!Module._ReadOwnedTopologyV1))bad('Native polygon bindings unavailable');if(edgeTreatmentMode&&typeof Module._ApplyOwnedEdgeTreatmentV1!=='function')bad('Native edge treatments unavailable');if(booleanHistoryMode&&typeof Module._ApplyOwnedBooleanHistoryV1!=='function')bad('Native Boolean history unavailable');if(loftMode&&typeof Module._CreateOwnedLoftV1!=='function')bad('Native loft unavailable');if(stepExportMode&&!['_BeginOwnedStepExportV1','_ReadOwnedStepExportV1','_ReleaseOwnedStepExportV1'].every(name=>typeof Module[name]==='function'))bad('Native STEP export unavailable');if(manufacturingMeshMode&&!['_BeginOwnedManufacturingMeshV1','_ReadOwnedManufacturingMeshV1','_ReleaseOwnedManufacturingMeshV1'].every(name=>typeof Module[name]==='function'))bad('Native manufacturing mesh unavailable');if(orthographicReadMode&&!['_BeginOwnedOrthographicReadV1','_ReadOwnedOrthographicReadV1','_ReleaseOwnedOrthographicReadV1'].every(name=>typeof Module[name]==='function'))bad('Native orthographic read unavailable');if(sweepMode&&typeof Module._CreateOwnedSweepV1!=='function')bad('Native sweep unavailable');if(revolveMode&&typeof Module._CreateOwnedRevolveV1!=='function')bad('Native revolution unavailable');workerPhase='ready';self.postMessage({kind:'ready'});} catch(e) {self.postMessage({kind:'error',error:String(e)});closeWorker();}}};
+      self.Module = {wasmBinary:wasm, onRuntimeInitialized:() => {if(workerPhase!=='initializing')return;try {if(profileSourceBindingMode&&(!Array.isArray(profileSourceBindingAPI.MECHANICAL_NATIVE_INITIAL_PORTS)||!profileSourceBindingAPI.MECHANICAL_NATIVE_INITIAL_PORTS.every(name=>typeof Module[name]==='function')))bad('Initial mechanical Native ABI unavailable');if(countersinkMode&&!countersinkPolicy.COUNTERSINK_NATIVE_PORTS.every(name=>typeof Module[name]==='function'))bad('Countersink Native ABI unavailable');if(finiteCurveSupportMode){if(!['_ReadFiniteCurveIntersectionsV1','_malloc','_free'].every(name=>typeof Module[name]==='function')||!Module.asm||!['ReadFiniteCurveIntersectionsV1','malloc','free'].every(name=>typeof Module.asm[name]==='function')||!(Module.asm.memory instanceof WebAssembly.Memory)||!(Module.HEAP8 instanceof Int8Array)||Module.HEAP8.byteOffset!==0||Module.HEAP8.buffer!==Module.asm.memory.buffer||Module.HEAP8.byteLength!==Module.asm.memory.buffer.byteLength)bad('Actual finite-curve query/memory/allocator ABI unavailable');}else Module._InitCommands();if(circularMode&&!['_ReadCircularArrangementV1','_CreateOwnedCircularCellV1'].every(name=>typeof Module[name]==='function'))bad('Native circular arrangement ABI unavailable');if(shellMode&&(!Module._CreateOwnedBoxWithFacesV1||!Module._ApplyOwnedShellV1))bad('Native shell/box provenance unavailable');if(selectedVersion===3&&(!Module._CreateSelectedProfileV3||!Module._ReadOwnedTopologyV1))bad('Native polygon bindings unavailable');if(edgeTreatmentMode&&typeof Module._ApplyOwnedEdgeTreatmentV1!=='function')bad('Native edge treatments unavailable');if(booleanHistoryMode&&typeof Module._ApplyOwnedBooleanHistoryV1!=='function')bad('Native Boolean history unavailable');if(loftMode&&typeof Module._CreateOwnedLoftV1!=='function')bad('Native loft unavailable');if(stepExportMode&&!['_BeginOwnedStepExportV1','_ReadOwnedStepExportV1','_ReleaseOwnedStepExportV1'].every(name=>typeof Module[name]==='function'))bad('Native STEP export unavailable');if(manufacturingMeshMode&&!['_BeginOwnedManufacturingMeshV1','_ReadOwnedManufacturingMeshV1','_ReleaseOwnedManufacturingMeshV1'].every(name=>typeof Module[name]==='function'))bad('Native manufacturing mesh unavailable');if(orthographicReadMode&&!['_BeginOwnedOrthographicReadV1','_ReadOwnedOrthographicReadV1','_ReleaseOwnedOrthographicReadV1'].every(name=>typeof Module[name]==='function'))bad('Native orthographic read unavailable');if(sweepMode&&typeof Module._CreateOwnedSweepV1!=='function')bad('Native sweep unavailable');if(revolveMode&&typeof Module._CreateOwnedRevolveV1!=='function')bad('Native revolution unavailable');workerPhase='ready';self.postMessage({kind:'ready'});} catch(e) {self.postMessage({kind:'error',error:String(e)});closeWorker();}}};
       const blob=URL.createObjectURL(new Blob([js], {type:'text/javascript'}));
       try {importScripts(blob);} finally {URL.revokeObjectURL(blob);}
       return;
     }
-    if(safeOwnedMode){
+    if(safeOwnedMode||finiteCurveSupportMode){
       // One closed policy owns both admission and fresh-result requirements.
-      const ownedKinds=new Map([
+      const ownedKinds=finiteCurveSupportMode?new Map([['finite-curve-support-read',false]]):new Map([
         ...(countersinkMode?[["solid-countersink",true]]:[]),
         ...(counterboreMode?[["solid-counterbore",true]]:[]),
         ...[...(profileSourceBindingMode?["selected-profile-bound"]:["selected-profile-extrude"]), "box", "common", "union", "subtract"].map(kind=>[kind,true]),
@@ -921,6 +930,30 @@ self.onmessage = async event => {
       const createsResult=ownedKinds.get(msg?.kind);
       if(createsResult===undefined)bad('Unsupported selected-owned operation');
       if(createsResult&&(typeof msg.token!=='string'||!msg.token||msg.token.length>256||shapes.has(msg.token)))bad('Invalid or already owned result token');
+    }
+    if(finiteCurveSupportMode){
+      if(Array.isArray(msg)||Reflect.ownKeys(msg).sort().join(',')!=='curves,kind,seq'||!Number.isSafeInteger(msg.seq)||msg.seq<1||msg.kind!=='finite-curve-support-read')bad('Invalid source-only finite-curve request');
+      const native=Module,sequence=msg.seq,owner=Object.freeze({sequence});
+      activeFiniteCurveOwner=owner;
+      const requireCurrent=()=>{
+        if(workerPhase!=='busy'||activeFiniteCurveOwner!==owner||Module!==native||nativeRuntimeRevision!=='sha256:479f0620b6dfe131dac05131a3798fc533e05a2bd11e8074ef240284f61bbe86:746da919c8457e98daa821fae98c62c0a6c9ad1acafd1c3d5412e0207d6b6325')bad('Finite-curve Native owner changed');
+      };
+      try{
+        const adapter=finiteCurveNativeAPI.createFiniteCurveNativeCalls({Module:native,malloc:native._malloc,free:native._free,owner,requireCurrent});
+        const observation=adapter.read(msg.curves);requireCurrent();
+        try{self.postMessage({kind:'finite-curve-support-result',seq:sequence,observation});}
+        catch(cause){throw Object.assign(Error('Finite-curve result publication failed'),{code:'CURVE_QUERY_PUBLICATION_FAILED',cause});}
+        requireCurrent();return;
+      }catch(error){
+        const classification=finiteCurveNativeAPI.finiteCurveCallFailure(error);
+        if(classification?.terminal===false&&classification.invoked===true){
+          requireCurrent();
+          try{self.postMessage({kind:'refused',seq:sequence,code:error.code,error:String(error.message).slice(0,512)});}
+          catch(cause){throw Object.assign(Error('Finite-curve refusal publication failed'),{code:'CURVE_QUERY_PUBLICATION_FAILED',cause});}
+          requireCurrent();return;
+        }
+        throw error;
+      }finally{activeFiniteCurveOwner=null;}
     }
     if(msg?.kind==='solid-manufacturing-mesh'&&manufacturingMeshMode){const result=await readOwnedManufacturingMesh(msg);try{self.postMessage({kind:'manufacturing-mesh-result',seq:msg.seq,token:msg.token,...result},[result.buffer]);if(result.buffer.byteLength!==0)throw Error('Manufacturing buffer was not detached');}catch(cause){throw Object.assign(Error('Manufacturing result publication failed'),{code:'MANUFACTURING_MESH_PUBLICATION_FAILED',cause});}return;}
     if(msg?.kind==='solid-orthographic-read'&&orthographicReadMode){const result=await readOwnedOrthographic(msg);try{self.postMessage({kind:'orthographic-read-result',seq:msg.seq,...result},[result.values,result.tags]);}catch(cause){throw Object.assign(Error('Orthographic result publication failed'),{code:'ORTHOGRAPHIC_PUBLICATION_FAILED',cause});}return;}
@@ -1303,7 +1336,13 @@ self.onmessage = async event => {
     }
     if (msg?.kind==='dispose') {const name=nameFor(msg.token);if(safeOwnedMode){const before=Module._OwnedShapeNamesV2(),ptr=str2C(name);let released;try{released=Module._ReleaseOwnedShapeV2(ptr);}finally{_free(ptr);}if(released!==1||Module._OwnedShapeNamesV2()!==before-1)bad('Native owned-shape release failed');} shapes.delete(msg.token);selectedPrismProvenance.delete(msg.token);circularPrismConstruction.delete(msg.token);selectedSelectionIndices.delete(msg.token);selectedSourceProfiles.delete(msg.token);selectedExtentProfiles.delete(msg.token);selectedSourceCreationBindings.delete(msg.token);selectedHoleStates.delete(msg.token);selectedDrawingCylinders.delete(msg.token);enclosureShapes.delete(msg.token);prismProfiles.delete(msg.token);centeredResults.delete(msg.token);self.postMessage({kind:'disposed',seq:msg.seq,...(safeOwnedMode?{released:true}:{})});return;}
     bad('Unsupported request');
-  } catch(e) {if(countersinkMode&&msg?.kind==='solid-countersink'){
+  } catch(e) {
+    if(finiteCurveSupportMode&&!initializing){
+      const code=typeof e?.code==='string'?e.code:'ENGINE_FAILURE';
+      try{self.postMessage({kind:'error',seq:msg?.seq,code,error:String(e?.message||e).slice(0,512)});}finally{closeWorker();}
+      return;
+    }
+    if(countersinkMode&&msg?.kind==='solid-countersink'){
     const ownValue=key=>{try{const d=e&&(typeof e==='object'||typeof e==='function')?Object.getOwnPropertyDescriptor(e,key):null;return d&&Object.hasOwn(d,'value')?d.value:undefined;}catch{return undefined;}};
     const code=ownValue('code'),message=ownValue('message'),ordinary=[...countersinkCodes.COUNTERSINK_CODES,...countersinkPolicy.COUNTERSINK_NATIVE_REFUSALS],terminal=ownValue('terminateWorker')===true||countersinkNativeAPI.countersinkCallFailure(e)?.terminal===true;
     if(!terminal&&ordinary.includes(code)){self.postMessage({kind:'refused',seq:msg.seq,code,error:typeof message==='string'?message.slice(0,512):'Countersink request was refused'});return;}
