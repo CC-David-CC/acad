@@ -1,0 +1,5 @@
+# Rectangle acknowledged-refusal custody — BEFORE
+
+Reviewed e8f401af3369a89619d00637266a0aa7cf60f33d. `call` records delivered flags and unknown mutation outcomes, then `settleRefusal` requires exact original code/name/state proof. It does not explicitly require the acknowledged own-data error envelope from the pinned signed harness. All current expected rectangle/per-cell refusal codes are nonnull application codes; an ordinary direct Node/CDP transport error with null/nonmatching code cannot pass those existing assertions. No current false-settlement incident is claimed or reproduced.
+
+Root authorized consistent narrow hardening before the first rectangle whole: capture the same actual six-field own-data signed-harness envelope as analytic acceptance, preserve all original raw diagnostic/cause/outcome fields, and require that acknowledgment in addition to all existing exact code/name/state checks before settlement. Independent checker must bind that actual acknowledgment to the trace/outcome. No product/harness/shared fragment, source math, nine native cycles, census, geometry, refusal, tolerance or evidence changes. No tests or execution.
