@@ -1,0 +1,56 @@
+{
+  "acceptance": [
+    "test/analytic-preparation-refusals/README.md",
+    "test/analytic-preparation-refusals/public-refusals.mjs",
+    "test/analytic-preparation-refusals/check_refusals.py"
+  ],
+  "core": [
+    "test/native-cad-container/archive_oracle.py",
+    "test/library-validation/cylindrical_surface_certificate.py",
+    "test/library-validation/planar_coverage.py",
+    "test/library-validation/cgal/mesh_readonly.cpp",
+    "test/library-validation/cgal/planar_coverage.cpp",
+    "modules/engine/extrusion/selectedSketchProfile.mjs",
+    "modules/engine/extrusion/prismSemantic.worker.ts",
+    "modules/engine/extrusion/prismSemanticClient.ts",
+    "modules/engine/extrusion/analyticProfilePreparationRefusals.mjs",
+    "modules/engine/extrusion/analyticProfilePreparationRefusals.d.mts",
+    "modules/workbenches/modeler/features/workerSelectedProfile/workerSelectedProfile.operation.ts",
+    "modules/engine/extrusion/selectedRegionDescriptor.mjs",
+    "modules/engine/extrusion/authoredArcBranch.mjs",
+    "modules/engine/mount/analyticProfilePlan.mjs",
+    "modules/engine/mount/analyticProfileWorldBudget.mjs",
+    "modules/engine/mount/analyticProfileProvenance.mjs",
+    "modules/engine/mount/analyticProfileNativeContract.mjs",
+    "modules/engine/mount/ownedAnalyticProfileWorker.mjs",
+    "modules/engine/mount/engineCatalog.mjs",
+    "modules/engine/mount/catalogMount.ts",
+    "modules/engine/mount/worker-controller.mjs",
+    "modules/engine/mount/oci-verified-worker.js",
+    "modules/engine/solid/analyticProfileEvaluation.mjs",
+    "modules/engine/solid/solidLedger.mjs",
+    "web/app/cad/export/core3mf.mjs",
+    "web/app/cad/craft/workerSolidCommands.ts",
+    "web/app/cad/craft/workerSolidPointCommands.ts",
+    "web/app/cad/craft/selectedProfileCommands.ts",
+    "web/app/cad/craft/sourceFrameCommands.ts",
+    "web/app/sketcher/shapes/arc.ts",
+    "web/app/sketcher/shapes/arcBranch.mjs",
+    "web/app/sketcher/io.ts"
+  ],
+  "desktop": [
+    "test/agent-cad-corpus/sweep/signed-harness.mjs",
+    "test/agent-cad-corpus/strict-join/oracle.mjs",
+    "apps/system/jsketcher/index.mjs",
+    "apps/system/jsketcher/primitive-commands.mjs",
+    "apps/system/jsketcher/source-frame-commands.mjs",
+    "apps/system/jsketcher/selected-profile-commands.mjs",
+    "apps/system/jsketcher/solid-point-commands.mjs"
+  ],
+  "native": [
+    "shape-io/ownedAnalyticProfileV1.hpp",
+    "shape-io/selectedProfileV2.hpp",
+    "shape-io/ownedMassPropertiesV1.hpp",
+    "main.cpp"
+  ]
+}
