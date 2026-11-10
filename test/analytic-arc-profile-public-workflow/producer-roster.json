@@ -2,7 +2,10 @@
   "acceptance": [
     "test/analytic-preparation-refusals/README.md",
     "test/analytic-preparation-refusals/public-refusals.mjs",
-    "test/analytic-preparation-refusals/check_refusals.py"
+    "test/analytic-preparation-refusals/check_refusals.py",
+    "test/native-cad-container/archive_oracle.py",
+    "test/library-validation/planar_coverage.py",
+    "test/library-validation/cylindrical_surface_certificate.py"
   ],
   "core": [
     "test/native-cad-container/archive_oracle.py",

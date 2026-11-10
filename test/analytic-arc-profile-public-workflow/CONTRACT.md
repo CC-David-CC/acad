@@ -49,3 +49,12 @@ The first actual successful selection snapshot in each positive case is explicit
 Full-ccw Arc is still genuine authored full Arc with two real A/B endpoints at one seam; its selection remains EXACTLY unavailable/PROFILE_PROVENANCE_UNSUPPORTED through its original three native cycles, frame edits and travel. This follow-up does not claim periodic-seam, analytic treatment/Boolean/shell/extent or full Arc-gate qualification. Polygon/Circle compatibility is a source-preservation obligation of the product repair and affected grouped regressions, not manufactured coverage from this analytic family.
 
 All original six positive creation travels, meaningful original edits/refusals/grouped preparation refusals, original equation/50pm source and declared Native/mesh thresholds, ten .cad cycles, twenty STEP/3MF artifacts, three malformed Open controls, source/actor/write cleanup custody and independent CGAL artifact ingredients remain. The producer roster adds all six changed endpoint binding/index/strict consumer/type sources at the actual compiled Core commit; Native pair and exact Native source roster remain unchanged. No product edits, tests, parser/import/build/Native/browser execution or Arc retry is performed by this acceptance packet.
+
+R3 custody addendum: four separate actual clean acceptance/Core/Host/Native
+checkout HEADs, root/cwd and before/after bytes are mandatory. Every submitted
+mutation error is unknown until its existing exact refusal state/code proof
+settles that command. Flag absence or two synthesized false flags do not prove
+precommit. Normal fresh Open has submitted/acknowledged/settled phases and the
+same exact original source/connector/J proof; unknown Open/New/write/mutation
+outcomes retain custody and force FAIL. This adds custody requirements only;
+all original geometry, source, artifact and lifecycle criteria stay frozen.

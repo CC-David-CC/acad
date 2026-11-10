@@ -107,3 +107,23 @@ The first actual successful selection snapshot in each positive case is explicit
 Full-ccw Arc is still genuine authored full Arc with two real A/B endpoints at one seam; its selection remains EXACTLY unavailable/PROFILE_PROVENANCE_UNSUPPORTED through its original three native cycles, frame edits and travel. This follow-up does not claim periodic-seam, analytic treatment/Boolean/shell/extent or full Arc-gate qualification. Polygon/Circle compatibility is a source-preservation obligation of the product repair and affected grouped regressions, not manufactured coverage from this analytic family.
 
 All original six positive creation travels, meaningful original edits/refusals/grouped preparation refusals, original equation/50pm source and declared Native/mesh thresholds, ten .cad cycles, twenty STEP/3MF artifacts, three malformed Open controls, source/actor/write cleanup custody and independent CGAL artifact ingredients remain. The producer roster adds all six changed endpoint binding/index/strict consumer/type sources at the actual compiled Core commit; Native pair and exact Native source roster remain unchanged. No product edits, tests, parser/import/build/Native/browser execution or Arc retry is performed by this acceptance packet.
+
+Current R3 acceptance custody: use a NEW clean separate acceptance checkout and
+run from its root. Set `CODI_ACCEPTANCE_SOURCE` to its actual full HEAD; keep
+`CODI_RUNTIME_SOURCE_ROOT`/`CODI_EXPECT_SOURCE`,
+`CODI_DESKTOP_SOURCE_ROOT`/`CODI_EXPECT_DESKTOP`, and
+`CODI_NATIVE_SOURCE_ROOT`/`CODI_EXPECT_NATIVE_SOURCE` bound to three distinct
+actual clean frozen producer checkouts. Core/Host must equal the compiled pin
+identities before and after. Acceptance changes alone do not request a product
+rebuild. Keep evidence and after-whole outputs outside those checkouts.
+
+Every failed mutating public call is initially an unknown outcome, even when
+the harness delivers two false commitment flags. The exact original refusal
+proof must settle it. Unknown mutation, fresh Open/New or durable-write outcomes
+retain custody and force FAIL; never retry or close an unestablished context.
+The new Open ledger preserves the original ten real cycles and all exact
+connector identity checks. All imported acceptance helpers have their own Git
+roles. Run the after-whole wrapper from its clean explicitly named verifier
+checkout only after complete PASS; the original artifact budgets and first
+failure preservation remain unchanged. See
+`docs/reviews/ANALYTIC-R3-CHECKOUT-OUTCOME-CUSTODY-20261110.md`.
