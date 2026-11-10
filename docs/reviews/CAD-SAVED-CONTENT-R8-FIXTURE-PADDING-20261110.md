@@ -27,3 +27,11 @@ SaveAs and fresh Open requirements are retained.
 
 No test, parse, build, retry or runtime source edit was executed for this repair.
 It is an acceptance source correction only, awaiting independent source review.
+
+Custody review follow-up binds the actual Core legacy command, disposable
+solve Worker dispatcher, response client, legacy transaction, expression
+publication registry/service and Craft publication composition. Direct
+transaction imports and the headless Worker build entry are also bound.
+This is additive producer-role custody in the same existing freezeSources and
+independent exact-roster/Git-blob reader; no fallback source roots or runtime
+claims are introduced. The fixture source-only branch changes no product code.

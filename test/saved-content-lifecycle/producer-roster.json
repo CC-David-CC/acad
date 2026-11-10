@@ -68,7 +68,18 @@
     "web/app/cad/projectManager/exactSavedContent.mjs",
     "web/app/cad/projectManager/captureDocumentJobOptions.mjs",
     "modules/gems/safeExpression.mjs",
-    "web/app/cad/parameters/legacyNumericExpressions.mjs"
+    "web/app/cad/parameters/legacyNumericExpressions.mjs",
+    "web/app/cad/craft/legacyExpressionCommands.ts",
+    "web/app/sketcher/headless/solveWorker.ts",
+    "web/app/sketcher/headless/client.ts",
+    "web/app/sketcher/headless/legacyExpressionTransaction.ts",
+    "web/app/cad/parameters/expressionPublication.mjs",
+    "web/app/cad/expressions/expressionsBundle.ts",
+    "web/app/sketcher/headless/sketchTransition.ts",
+    "web/app/sketcher/headless/transitionGeometryPolicy.mjs",
+    "web/app/cad/craft/unconsumedSketchSave.mjs",
+    "web/app/sketcher/constr/booleanSketchFields.mjs",
+    "build/webpack.headless-sketch-worker.cjs"
   ],
   "desktop": [
     "test/agent-cad-corpus/sweep/signed-harness.mjs",
