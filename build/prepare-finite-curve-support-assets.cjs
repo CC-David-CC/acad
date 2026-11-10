@@ -86,7 +86,7 @@ function currentBootstrap(bindings){
  // checks additionally refuse missing/renamed roots; they are NOT a parser or
  // independent proof that arbitrary source text implements a safe mode.
  if(text.split(QUERY_IMPORT.literal).length!==2||
-    !text.includes('finiteCurveSupportReadVersion')||!text.includes('sourceQueryOnly'))
+    !text.includes('finiteCurveSupportReadVersion')||!text.includes('finiteCurveSupportMode'))
   throw Error('Approved finite-curve query-only mode/import is not composed');
  return text;
 }
