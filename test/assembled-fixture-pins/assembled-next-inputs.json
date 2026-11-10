@@ -143,7 +143,12 @@
     "web/app/sketcher/headless/arcLengthMeasurementTransition.ts",
     "web/app/sketcher/headless/drivingDimensionTarget.mjs",
     "web/app/sketcher/shapes/arcLengthDimension.js",
-    "web/app/sketcher/shapes/arcLengthDimensionRecord.mjs"
+    "web/app/sketcher/shapes/arcLengthDimensionRecord.mjs",
+    "web/app/sketcher/shapes/dimensionBase.js",
+    "web/app/sketcher/shapes/arcClass.mjs",
+    "web/app/sketcher/shapes/arc.ts",
+    "web/app/sketcher/shapes/shape.ts",
+    "web/app/sketcher/shapes/sketch-object.ts"
   ],
   "hostSources": [
     "apps/system/jsketcher/index.mjs",
@@ -255,6 +260,21 @@
         "native-archive"
       ],
       "scope": "actual source and Worker custody only; not transitive compiler inclusion, feature correctness or runtime qualification"
+    },
+    "dimensionStartup": {
+      "sources": [
+        "web/app/sketcher/shapes/dimensionBase.js",
+        "web/app/sketcher/shapes/arcClass.mjs",
+        "web/app/sketcher/shapes/arc.ts",
+        "web/app/sketcher/shapes/shape.ts",
+        "web/app/sketcher/shapes/sketch-object.ts"
+      ],
+      "workerRoles": [
+        "sketch-solver",
+        "project-validator",
+        "native-archive"
+      ],
+      "scope": "actual changed source and Worker input custody; not transitive compilation or startup qualification"
     }
   }
 }
