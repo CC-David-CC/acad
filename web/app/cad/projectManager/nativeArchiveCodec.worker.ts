@@ -123,7 +123,7 @@ async function encode(root,sketches){
     if(result.compressionMethod!==8)throw archiveError('CAD_ARCHIVE_CODEC_UNAVAILABLE','Native manifest compression is unavailable.');
     const blob=await writer.close();if(blob.size>L.bytes)throw archiveError('CAD_ARCHIVE_RESOURCE_LIMIT','Native archive exceeds 128 MiB.');
     const entries=await roster(blob);for(const entry of entries)if(owned.has(entry.path))Object.assign(owned.get(entry.path),entry);
-    cost.outerBytes=blob.size;cost.archiveVerificationBytes=blob.size;pending={blob,records:owned,manifest,sha256:await hashBlob(blob)};
+    cost.outerBytes=blob.size;cost.archiveVerificationBytes=blob.size;pending={blob,records:owned,manifest,sha256:await hashBlob(blob),content:exactSavedContent(envelope),preparation:job.seq};
     return {blob,receipt:makeReceipt(manifest,cost)};
   }catch(error){try{await writer.close();}catch{}throw error;}
 }
@@ -184,7 +184,7 @@ self.onmessage=async event=>{
   try{
     if(!message||!Number.isSafeInteger(message.seq)||message.seq<1)throw archiveError('CAD_ARCHIVE_PROTOCOL','Invalid archive sequence.');
     if(job?.running)throw archiveError('CAD_ARCHIVE_PROTOCOL','Concurrent native archive operation.');
-    if(['encode-start','decode','rebase','discard','content-start','content-adopt','content-discard'].includes(message.type)){
+    if(['encode-start','decode','rebase','discard','content-start','content-adopt','content-discard','archive-content-adopt'].includes(message.type)){
       if(message.seq<=lastSequence)throw archiveError('CAD_ARCHIVE_PROTOCOL','Replayed native archive sequence.');lastSequence=message.seq;
     }
     if(message.type==='encode-start'||message.type==='content-start'){
@@ -194,6 +194,15 @@ self.onmessage=async event=>{
     if(message.type==='decode'){
       if(job||pending||pendingContent)throw archiveError('CAD_ARCHIVE_BUSY','An archive operation is already owned.');
       job={seq:message.seq,running:true};const output=await decode(message.blob);await hydrate(output);post('decoded');job=null;return;
+    }
+    if(message.type==='archive-content-adopt'){
+      if(job||!pending||pending.preparation!==message.preparation)throw archiveError('CAD_ARCHIVE_PROTOCOL','No matching archive content preparation.');
+      job={seq:message.seq};savedContent=pending.content;post('archive-content-adopted');job=null;return;
+    }
+    if(message.type==='content-cancel'){
+      if(job?.mode==='content-start'&&job.seq===message.seq){post('content-cancelled');job=null;return;}
+      if(!job&&pendingContent?.seq===message.seq){job={seq:message.seq};pendingContent=null;post('content-cancelled');job=null;return;}
+      throw archiveError('CAD_ARCHIVE_PROTOCOL','No matching content comparison to cancel.');
     }
     if(message.type==='content-adopt'||message.type==='content-discard'){
       if(job||!pendingContent||message.preparation!==pendingContent.seq)throw archiveError('CAD_ARCHIVE_PROTOCOL','No matching saved-content preparation.');
@@ -226,8 +235,10 @@ self.onmessage=async event=>{
       if(job.sketch.hasRoot)throw archiveError('CAD_ARCHIVE_PROTOCOL','Incomplete saved-content sketch.');
       job.running=true;const root=job.root.finish();exactRecord(root,Object.hasOwn(root,'surfacing')?['model','surfacing','manufacturing','presentation','drawing']:['model','manufacturing','presentation','drawing']);
       const sketches=job.sketches.sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0),project={model:root.model,sketches:sketches.map(s=>({id:s.id,data:JSON.parse(s.raw)})),...(Object.hasOwn(root,'surfacing')?{surfacing:root.surfacing}:{})};
-      const envelope=encodeProjectEnvelope(project,root.manufacturing,root.presentation,root.drawing);preflight(envelope);
-      const value=exactSavedContent(envelope),equal=savedContent===null?null:savedContentEqual(savedContent,value);pendingContent={seq:job.seq,value};post('content-prepared',{preparation:job.seq,equal});job=null;return;
+      const envelope=encodeProjectEnvelope(project,root.manufacturing,root.presentation,root.drawing);
+      if(typeof message.forSave!=='boolean')throw archiveError('CAD_ARCHIVE_PROTOCOL','Invalid saved-content save mode.');
+      if(message.forSave){preflight(envelope);checkManufacturing(envelope);}
+      const value=exactSavedContent(envelope),equal=savedContent===null?null:savedContentEqual(savedContent,value);pendingContent={seq:job.seq,value};post('content-prepared',{preparation:job.seq,equal,...(message.forSave?{blob:new Blob(value.parts,{type:'application/json'})}:{})});job=null;return;
     }
     if(message.type==='encode-finish'){
       if(job.mode!=='encode-start')throw archiveError('CAD_ARCHIVE_PROTOCOL','Wrong archive completion.');

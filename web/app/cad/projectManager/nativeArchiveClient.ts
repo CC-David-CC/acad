@@ -83,23 +83,28 @@ export function createNativeArchiveOwner(workerUrl:string,lifetime:AbortSignal){
     return operation(options,async(exchange,check)=>{
       await exchange('encode-start','ack');let index=0;
       await streamNativeArchiveProject(source,part=>exchange('part','ack',{part,index:index++}),()=>{check();return true;});
-      const result=await exchange('encode-finish','encoded'),meta=receipt(result.receipt,result.blob),token={};prepared=token;
+      const preparation=active.seq,result=await exchange('encode-finish','encoded'),meta=receipt(result.receipt,result.blob),token={};prepared=token;
       let released=false,rebased=false;
       return Object.freeze({blob:result.blob,receipt:meta,
+        async adoptSavedContent(options){if(released||rebased||prepared!==token)throw archiveError('CAD_ARCHIVE_CLOSED','Archive preparation was released.');await operation(options,exchange=>exchange('archive-content-adopt','archive-content-adopted',{preparation}));},
         async rebase(blob,options){if(released||prepared!==token)throw archiveError('CAD_ARCHIVE_CLOSED','Archive preparation was released.');const bytes=checkBlob(blob),answer=await operation(options,exchange=>exchange('rebase','rebased',{blob}));if(prepared!==token||answer.verifiedBytes!==bytes)throw archiveError('CAD_ARCHIVE_PROTOCOL','Archive preparation changed.');prepared=null;rebased=true;return Object.freeze({verifiedBytes:bytes});},
         async release(){if(released)return;released=true;if(rebased||closed||prepared!==token)return;try{await operation({valid:()=>!aborted(lifetime)},exchange=>exchange('discard','discarded'));}finally{if(prepared===token)prepared=null;}}
       });
     });
   }
-  async function prepareContent(source,options){
+  async function prepareContent(source,options,sourceCurrent,forSave=false){
     if(prepared||preparedContent)throw archiveError('CAD_ARCHIVE_BUSY','Release the previous source preparation first.');
-    return operation(options,async(exchange,check)=>{
+    const outcome=await operation(options,async(exchange,check)=>{
       await exchange('content-start','ack');let index=0;
-      await streamNativeArchiveProject(source,part=>exchange('part','ack',{part,index:index++}),()=>{check();return true;});
-      const result=await exchange('content-finish','content-prepared');
+      try{await streamNativeArchiveProject(source,part=>exchange('part','ack',{part,index:index++}),()=>{check();return sourceCurrent();});}
+      catch(error){if(sourceCurrent())throw error;await exchange('content-cancel','content-cancelled');return {cancelled:error};}
+      if(!sourceCurrent()){await exchange('content-cancel','content-cancelled');return {cancelled:new DOMException('Project changed.','AbortError')};}
+      const result=await exchange('content-finish','content-prepared',{forSave});
+      if(!sourceCurrent()){await exchange('content-cancel','content-cancelled');return {cancelled:new DOMException('Project changed.','AbortError')};}
       if(result.preparation!==active.seq||!(result.equal===null||typeof result.equal==='boolean'))throw archiveError('CAD_ARCHIVE_PROTOCOL','Invalid saved-content preparation.');
+      if(forSave)checkBlob(result.blob);
       const token={preparation:result.preparation};preparedContent=token;let terminal:'pending'|'adopting'|'adopted'|'released'='pending';
-      return Object.freeze({equal:result.equal,
+      return Object.freeze({equal:result.equal,...(forSave?{blob:result.blob}:{}),
         async adopt(adoptionOptions){
           if(terminal==='adopted')return;
           if(terminal!=='pending'||closed||preparedContent!==token)throw archiveError('CAD_ARCHIVE_CLOSED','Saved-content preparation was released.');
@@ -114,6 +119,7 @@ export function createNativeArchiveOwner(workerUrl:string,lifetime:AbortSignal){
         }
       });
     });
+    if('cancelled' in outcome)throw outcome.cancelled;return outcome;
   }
   async function decode(blob,options){checkBlob(blob);return operation(options,async exchange=>{await exchange('decode','decoded',{blob});const result=active.receiver.finish();receipt(result.receipt,blob);return result;});}
   return Object.freeze({encode,decode,prepareContent,close,get available(){return !closed&&!cleanupFailure;}});

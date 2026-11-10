@@ -23,3 +23,29 @@ confirmation, synchronous conservative close, legacy JSON encoding disposition,
 source roster closure and grouped large-project/workflow qualification.
 This packet must not close ARC23 or CAD1. Review exact envelope equivalence,
 shared-owner lifecycle and stale publication before integration.
+
+## Coupled source continuation (not built/tested)
+
+Same native encode now retains its exact authored-envelope stream and exposes
+adoptSavedContent before rebase, so no second source capture is needed for Save.
+Legacy JSON is encoded as an intrinsic Worker Blob from the same exact stream.
+The manager caches exact observations against revision, baseline generation and
+Worker identity. A stale source comparison sends a content-cancel transaction
+that preserves the Worker baseline; physical failure remains unknown/fenced.
+Adoption is capability-local idempotent and independent of archive rebase.
+New/Open use a privately issued content preparation then adopt before candidate
+publication; abandoned frames retire their baseline when detached.
+
+Compare may inspect a settled history prefix using full authored history;
+Save still refuses history review. Custom workbench and stale typed-parameter
+results are refused explicitly without full Main snapshots. Unapplied wizard
+and sketch drafts remain separate from accepted content and keep the Host's
+synchronous close guard conservative.
+
+Host companion branch fix/cad-dirty-tracking-20261110 removes its full JSON
+snapshot/comparison path, adds async exact inspection and coalesced conservative
+idle refresh, awaits refresh before file operations, and adopts same-capture
+baselines only after known Files writes. Independent source review and grouped
+E2E remain required. Legacy prepareHostSave still exists for other internal
+callers and is not claimed globally free of copying. Cooperative capture still
+walks authored data on Main; peak memory and responsiveness require measurement.
