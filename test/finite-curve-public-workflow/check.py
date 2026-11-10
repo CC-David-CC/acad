@@ -12,7 +12,7 @@ PHASES=['runtime-start','unrelated-prism','query-roster','trim-travel','ray-both
 TRAVELS=['point-create-undo','point-create-redo','trim-undo','trim-redo','ray-six-undo','ray-four-undo','ray-four-redo','consumed-trim-undo','consumed-trim-redo','restore-right-fix','typed-definition-undo','typed-definition-redo','reopened-edit-undo','reopened-edit-redo']
 CASES=['segment-cross','segment-endpoint','finite-exclusion','separated-parallel','linear-overlap','linear-contact','segment-circle','segment-circle-tangent','segment-circle-empty','circle-circle','circle-circle-tangent','circle-near-inside','circle-near-outside','circle-coincident','circle-nested','circle-disjoint','arc-quarter','arc-major','arc-seam','arc-complementary-contact','circle-quarter-overlap','native-census-uncertainty','tiny-proper-positive','source-incidence-uncertainty','full-arc-required-open']
 REVERSE=['segment-cross','segment-circle','circle-circle','arc-quarter']
-REFUSALS={'proper-arc-collapsed':'INVALID_ARC_BRANCH','opposite-collapse':'CURVE_ENDPOINT_DEGENERATE','fixed-target-refusal':'COORDINATE_CONFLICT','unknown-query-does-not-consume':'STALE_CURVE_QUERY','wrong-action-domain':'CURVE_QUERY_DOMAIN_MISMATCH','foreign-own-face-root':'FINITE_CURVE_SOURCE_UNSUPPORTED_TARGET','open-profile-source-policy':'OPEN_OR_AMBIGUOUS_PROFILE','downstream-self-crossing-profile':'OPEN_OR_AMBIGUOUS_PROFILE','old-ticket-after-source-edit':'STALE_CURVE_QUERY','old-ticket-after-undo-restored-bytes':'STALE_CURVE_QUERY','old-ticket-after-parameter-edit':'STALE_CURVE_QUERY',**{'old-ticket-after-open-'+s:'STALE_CURVE_QUERY' for s in 'ABC'}}
+REFUSALS={'proper-arc-collapsed':'INVALID_ARC_BRANCH','opposite-collapse':'CURVE_ENDPOINT_DEGENERATE','fixed-target-refusal':'COORDINATE_CONFLICT','unknown-query-does-not-consume':'STALE_CURVE_QUERY','wrong-action-domain':'CURVE_QUERY_DOMAIN_MISMATCH','foreign-own-face-root':'FINITE_CURVE_SOURCE_UNSUPPORTED_TARGET','open-profile-source-policy':'OPEN_OR_AMBIGUOUS_PROFILE','downstream-overlapping-profile':'OPEN_OR_AMBIGUOUS_PROFILE','old-ticket-after-source-edit':'STALE_CURVE_QUERY','old-ticket-after-undo-restored-bytes':'STALE_CURVE_QUERY','old-ticket-after-parameter-edit':'STALE_CURVE_QUERY',**{'old-ticket-after-open-'+s:'STALE_CURVE_QUERY' for s in 'ABC'}}
 REFUSALS.update({'unknown-event-does-not-consume':'CURVE_QUERY_SELECTION_MISMATCH','old-ticket-after-new-query':'STALE_CURVE_QUERY'})
 LOCAL=['CONTRACT.md','README.md','cases.mjs','example.mjs','source-custody.mjs','desktop-driver.mjs','check.py','query_math.py']
 IMPORTED={('core','test/native-cad-container/archive_oracle.py'),('desktop','test/agent-cad-corpus/sweep/signed-harness.mjs'),('desktop','test/agent-cad-corpus/strict-join/oracle.mjs')}
@@ -98,14 +98,15 @@ def equations(row):
 def refusal_state(row):
     before,after=row['before'],row['after'];settled(before);settled(after)
     if not row['candidate']:require(after==before,'FULL pure-refusal state, no normalization');return
-    require(row['label']=='downstream-self-crossing-profile','only declared actual downstream candidate predicate')
+    require(row['label']=='downstream-overlapping-profile','only declared actual downstream candidate predicate')
     for s in (before,after):
+        require(s['parameters']['revision']==s['capture']['journal']['revision'],'parameter inspection binds this SAME actual journal/document token')
         require(s['host']['revision']==s['drawing']['revision'] and s['capture']['solids']['revision']==s['drawing']['geometryRevision'],'tokens bind actual current document/body');j=s['capture']['journal']['revision'];require(j.endswith(':'+s['host']['revision']) and j.startswith(str(s['lifecycle']['generation'])+':'),'same document/generation journal suffix')
     require(after['lifecycle']['epoch']==before['lifecycle']['epoch']+1 and after['host']['revision']!=before['host']['revision'] and after['capture']['solids']['revision']!=before['capture']['solids']['revision'],'exactly one attempted candidate invalidation')
     prefix=before['capture']['journal']['revision'][:-len(before['host']['revision'])];require(after['capture']['journal']['revision']==prefix+after['host']['revision'],'unchanged J revision prefix')
     a,b=copy.deepcopy(before),copy.deepcopy(after)
     for s in (a,b):
-        del s['lifecycle']['epoch'];del s['host']['revision'];del s['capture']['solids']['revision'];del s['capture']['journal']['revision'];del s['drawing']['revision'];del s['drawing']['geometryRevision']
+        del s['lifecycle']['epoch'];del s['host']['revision'];del s['capture']['solids']['revision'];del s['capture']['journal']['revision'];del s['parameters']['revision'];del s['drawing']['revision'];del s['drawing']['geometryRevision']
     require(a==b,'all source/versions/J/definitions/native bodies/resources exact after candidate refusal')
 def native_geometry(row,receipt):
     b=row['binding'];s=json_source(row['before'],b['faceId']);objects={o['id']:o for o in s['objects']};ordinary=b['body']==receipt['unrelated']['body'];shape=receipt['unrelated'] if ordinary else receipt['consumed']
@@ -168,6 +169,23 @@ def check(directory,source,host_source,acceptance):
         require(len(row['binding']['ids'])==2,'actual authored pair')
         for id,expected in zip(row['binding']['ids'],wanted):require({k:objects[id][k] for k in ('type','data')}==expected,'exact original public fixture '+label)
     require(sorted(x['label'] for x in r['refusals'])==sorted(REFUSALS),'exact negative/lifetime roster')
+    control=r['downstreamControl'];require(control['kind']=='right-top-to-fixed-bottom-left','genuine deterministic invalid profile control')
+    invalid=one([x for x in r['refusals'] if x['label']=='downstream-overlapping-profile'],'actual downstream refusal');control_source=json_source(invalid['before'],r['consumed']['faceId']);objects={o['id']:o for o in control_source['objects']};ids=r['consumed']['ids'];constraints=[c for stage in control_source['stages'] for c in stage['constraints']]
+    require([c['typeId'] for c in constraints]==['PCoincident']*4+['FixSegment'],'only actual bottom Fix and retained corner relations; other corner remains free')
+    fix=constraints[-1];require(fix['objects']==[ids[0]] and fix['constants']=={'ax':'20','ay':'0','bx':'24','by':'0','length':'4','direction':'0'},'actual source-authenticated fixed bottom A/B')
+    def owned(id,end):
+        xy=objects[id]['data'][end]
+        return one([p for p in control['inspection']['points'] if p['parentId']==id and p['x']==xy['x'] and p['y']==xy['y']],'actual inspected endpoint owner')
+    for i,id in enumerate(ids):require(any(c['typeId']=='PCoincident' and set(c['objects'])=={owned(id,'b')['id'],owned(ids[(i+1)%4],'a')['id']} for c in constraints),'actual closed-chain PC identity, not recipe proximity')
+    A,B=objects[ids[0]]['data']['a'],objects[ids[0]]['data']['b'];C=owned(ids[1],'b');require(A=={'x':20,'y':0} and B=={'x':24,'y':0} and C['x']==24 and C['y']==3,'original nondegenerate current valid source')
+    require(control['rightTop']==C and control['fixedBottomLeft']==owned(ids[0],'a'),'actual original moving/fixed point observations')
+    request=control['request'];require(request=={'revision':control['inspection']['revision'],'faceId':r['consumed']['faceId'],'id':C['id'],'x':A['x'],'y':A['y']},'actual public request places C exactly at fixed A')
+    command=r['commands'][control['commandIndex']];require(command['command']=='edit-closed-sketch-point' and command['args']==request and command['error']['code']=='OPEN_OR_AMBIGUOUS_PROFILE','actual issued downstream operation/code')
+    # Fixed AB plus exact C=A forces BC=reverse(AB). PC ties top/left through
+    # their actual shared D, so CD=reverse(DA) for every possible solved D.
+    # Thus the intended candidate has no simple positive-area boundary without
+    # assuming the free D stayed at(22,3), and no source candidate is fabricated.
+    require(dot(sub(point(B),point(A)),sub(point(B),point(A)))==16,'positive fixed base, forced exact reverse right support')
     for row in r['refusals']:
         if row.get('kind')=='source-unsupported':
             require(row['label']=='foreign-own-face-root' and row['result']['status']=='unsupported' and row['result']['reason']['code']==REFUSALS[row['label']] and row['result']['reason']['layer']=='source','actual explicit source-layer unsupported result, not an invented exception');refusal_state(row);continue
