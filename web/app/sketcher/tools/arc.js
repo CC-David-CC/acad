@@ -56,7 +56,15 @@ export class AddArcTool extends Tool {
         }
       },rollbackExtra:()=>{if(arc.layer===origin.layer)origin.layer.remove(arc);arc.stage=null;}});
     }catch(error){if(arc.layer===origin.layer)origin.layer.remove(arc);arc.stage=null;this.arc=null;this.point=null;this.snaps.clear();this.origin=null;if(this.validOrigin(origin)){this.restart();viewer.refresh();throw error;}throw Object.assign(Error('The Arc draft owner changed during rejection.'),{code:'ARC_DRAFT_STALE',cause:error});}
-    this.arc=null;this.point=null;this.snaps.clear();this.origin=null;try{pm.refresh();}catch(error){console.error('Arc was accepted, but sketch refresh failed:',error);}if(this.validOrigin(origin))viewer.toolManager.releaseControl();
+    this.arc=null;this.point=null;this.snaps.clear();this.origin=null;try{pm.refresh();}catch(error){console.error('Arc was accepted, but sketch refresh failed:',error);}if(this.validOrigin(origin)){
+      // Restore Tool.pointPicked's final-endpoint reference/notification. Write
+      // the owned reference BEFORE notifying; a subscriber may replace the
+      // document/tool synchronously, and no later write may touch its state.
+      const reference=viewer.referencePoint,x=arc.b.x,y=arc.b.y;
+      const message='picked: '+viewer.roundToPrecision(x)+' : '+viewer.roundToPrecision(y);
+      if(this.validOrigin(origin)&&viewer.referencePoint===reference){reference.x=x;reference.y=y;this.sendMessage(message);}
+      if(this.validOrigin(origin))viewer.toolManager.releaseControl();
+    }
   }
   demoSecondPoint(){const r=this.radiusOfFirstPoint(),ang=Math.atan2(this.arc.a.y-this.arc.c.y,this.arc.a.x-this.arc.c.x)+(2*Math.PI-0.3);this.arc.b.x=this.arc.c.x+r*Math.cos(ang);this.arc.b.y=this.arc.c.y+r*Math.sin(ang);}
   radiusOfFirstPoint(){return distance(this.arc.a.x,this.arc.a.y,this.arc.c.x,this.arc.c.y);}

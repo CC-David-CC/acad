@@ -153,6 +153,14 @@ export class IO {
     // hint before clearing the current sketch even in legacy/non-strict mode.
     validateSketchAdmissionHints(sketch);
     if (strict) validateStrictSketch(sketch);
+    else {
+      // Legacy reads may skip unrelated unsupported records, but an invalid
+      // authored Arc must never disappear after clearing accepted geometry.
+      validateSavedBoundaryArcBranches(sketch?.boundary);
+      if(Array.isArray(sketch?.objects))for(const object of sketch.objects){
+        if(object?.type===Arc.prototype.TYPE)captureArcData(object.data);
+      }
+    }
     // Check the incoming parameter graph and dimensional domains before
     // clearing the currently displayed sketch.
     if ((desktopFileMode || (this.viewer as any).safeExpressions) && sketch.version === 3) {
@@ -579,16 +587,21 @@ function validateSketchAdmissionHints(sketch: any) {
   }
 }
 
+// Branch/domain only: do not import the stricter analytic-only boundary
+// policy here. Genuine NURBS and unrelated legacy record domains stay intact.
+function validateSavedBoundaryArcBranches(boundary: any) {
+  if(boundary?.arcs===undefined)return;
+  if(!Array.isArray(boundary.arcs)||boundary.arcs.length>10000)throw Error('Invalid boundary Arc inventory.');
+  for(const arc of boundary.arcs)captureArcData({a:arc?.a,b:arc?.b,c:arc?.c,branch:arc?.branch});
+}
+
 export function validateStrictSketch(sketch: any) {
   validateSketchAdmissionHints(sketch);
   strictRecord(sketch, 'sketch');
   if (sketch.version !== 3) throw new Error('Unsupported sketch version: ' + String(sketch.version));
-  // Mandatory branch preflight BEFORE cleanup; keep unrelated NURBS carry and
-  // its real display/reference data, not the stricter analytic-only policy.
-  if(sketch.boundary?.arcs!==undefined){
-    if(!Array.isArray(sketch.boundary.arcs)||sketch.boundary.arcs.length>10000)throw Error('Invalid boundary Arc inventory.');
-    for(const arc of sketch.boundary.arcs)captureArcData({a:arc.a,b:arc.b,c:arc.c,branch:arc.branch});
-  }
+  // Ordinary Arcs are captured in the existing object-validation traversal;
+  // boundary Arcs share the same mandatory branch-domain preflight as legacy IO.
+  validateSavedBoundaryArcBranches(sketch.boundary);
   for (const key of ['objects', 'dimensions', 'labels', 'stages']) {
     if (!Array.isArray(sketch[key])) throw new Error('Invalid sketch ' + key);
   }
