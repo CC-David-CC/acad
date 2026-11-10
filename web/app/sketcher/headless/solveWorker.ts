@@ -200,8 +200,13 @@ self.onmessage = async event => {
           const boundary={lines:[],arcs:[],circles:[],nurbses:[]};if(!sketch.boundary||Object.keys(boundary).some(k=>!Array.isArray(sketch.boundary[k])||sketch.boundary[k].length))throw Error('Referenced sketch boundary is unsupported.');
           const definitions=request.parameterSource===''?{version:1,definitions:[]}:decodePhysicalSource(request.parameterSource);if(!definitions)throw Error('Typed parameters are required.');const result=evaluatePhysicalSource(definitions),values=new Map(result.values.map(row=>[row.name,row]));
           const external=prepareTypedDependentSketch(sketch,name=>{const row:any=values.get(name);if(!row||row.dimension!=='length')throw Error('A typed length parameter is required.');return row.value;});
-          const offsetRegenerated=request.verifyCurrent?null:require('./offsetTransition').regenerateOffsetParameterSource(revision,sketch,external);
-          const solved=offsetRegenerated||reconstructTypedRectangle({revision,sketch,boundary,externalParameters:external},{update:!request.verifyCurrent})||solveSketch({revision,sketch,boundary,externalParameters:external});if(!solved.ok){self.postMessage(solved);return;}if(request.verifyCurrent)assertVerifiedReplayGeometry(sketch,solved.sketch,solved.evidence,external);
+          const solveRequest={revision,sketch,boundary,externalParameters:external};
+          // History travel retains the recorded source bytes. Validate the
+          // captured equations at those exact coordinates as well as the cold
+          // replay, including for sketches not consumed by a solid feature.
+          const solved=request.verifyCurrent?require('./typedSelectedProfileRead').solveTypedSelectedProfile(solveRequest):
+            require('./offsetTransition').regenerateOffsetParameterSource(revision,sketch,external)||reconstructTypedRectangle(solveRequest,{update:true})||solveSketch(solveRequest);
+          if(!solved.ok){self.postMessage(solved);return;}
           const serializedSketch=JSON.stringify(solved.sketch);if(serializedSketch.length>1048576||new TextEncoder().encode(serializedSketch).byteLength>1048576)throw Error('Solved sketch exceeds limit.');self.postMessage({revision,ok:true,serializedSketch});return;
         }catch(error){const known=require('../generators/offsetSource.mjs').offsetFailureCodes.includes(error?.code);self.postMessage({revision,ok:false,error:{code:known?error.code:'TYPED_SKETCH_INVALID',message:known?String(error.message).slice(0,512):'The sketch could not be regenerated with these parameters.'}});return;}
       }
