@@ -49,3 +49,24 @@ The grouped acceptance already requires Undo-to-saved=false and native/JSON
 source persistence. Add explicit independent evidence that value equality is
 preserved even when record order differs, rather than relaxing that assertion.
 Runtime proof still requires one fresh coherent composition and grouped run.
+
+## Equality boundary clarification approved by Root
+
+The historical dirty comparator already parsed internal sketch JSON and compared
+its admitted envelope values. Serialized sketch whitespace/property insertion
+order is not a new authoring requirement. Do not add a second raw-JSON-byte
+baseline. Stored raw sketch bytes continue to be preserved by the native
+container independently; expression/source-code STRING VALUES inside the
+admitted envelope remain exact. Record-key normalization stays within that
+existing semantic boundary and creates no new geometric or physical tolerance.
+This supersedes the earlier source-plan assumption that comparator key order
+needed preservation. File JSON output still deliberately preserves its order.
+
+Read-only diagnostic SHA-256:
+`91ce4e7ed52ccd67488f49c9bb2de2c9c630d2c3f53333469032f1123a20d42b`.
+Independent archive/current-value diff SHA-256:
+`452298a36d7ff6a2956e9c014468144a1a3183880962b998dfca3bda7a288fa6`.
+The latter compares canonical archive record order with current model order;
+the32 original pre-save/current-history order differences were separately read
+from the original immutable whole receipt and the same diagnostic. No fixture,
+original whole file, model source or owning context was modified by diagnosis.
