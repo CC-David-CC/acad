@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Independent AFTER reader. No application/native code or validator import."""
-import hashlib,importlib.util,json,math,re,sys
+import hashlib,importlib.util,json,math,re,subprocess,sys
 from pathlib import Path
 sys.dont_write_bytecode=True
 sha=lambda x:hashlib.sha256(x).hexdigest()
@@ -12,7 +12,7 @@ def main(root,output):
  need(r['status']=='PASS' and r['ownedContextsRetired'] and r['pendingMutation'] is None,'Terminal settled whole')
  need(r['sourcePins']==r['sourcePinsAfter'] and r['checkoutsBefore']==r['checkoutsAfter'],'Source custody unchanged')
  for row in r['sourceSnapshots']:
-  data=(root/row['snapshot']).read_bytes();need(sha(data)==row['sha256'],'Frozen source bytes')
+  data=(root/row['snapshot']).read_bytes();need(sha(data)==row['sha256']==r['sourcePins'][row['role']+':'+row['relative']],'Frozen source bytes and before/after roster');need(len(data)<=8388608,'Bounded static producer source');blob=subprocess.run(['git','-C',row['root'],'show',row['commit']+':'+row['relative']],capture_output=True,check=True).stdout;need(blob==data,'Independent actual Git producer blob')
  need(r['workers'] and all(w['destroyed'] for w in r['workers']),'Actual observed owned codec retirement');need(not r['browserDialogs'],'No browser-native modals')
  observations={x['label']:x for x in r['observations']};expected={'Fresh empty model':False,'Authored representative project':True,'Width edit':True,'Refused stale save retains dirty content':True,'Undo returns exactly to saved content':False,'Redo restores unsaved content':True,'Fresh native Open':False,'Reopened edit':True,'Accepted New baseline':False,'Original own source restored after New':False,'Fresh Unicode JSON Open':False}
  for label,dirty in expected.items():
