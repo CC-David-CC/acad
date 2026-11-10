@@ -127,3 +127,12 @@ roles. Run the after-whole wrapper from its clean explicitly named verifier
 checkout only after complete PASS; the original artifact budgets and first
 failure preservation remain unchanged. See
 `docs/reviews/ANALYTIC-R3-CHECKOUT-OUTCOME-CUSTODY-20261110.md`.
+
+Acknowledged-refusal follow-up: a failed mutation stays unknown unless the
+actual pinned signed-harness own-data error envelope is present (including its
+`work` field), the original exact name/code/layer checks pass, and the original
+complete accepted-state/currentness proof passes. Normalized false flags or
+unchanged readback alone never settle a direct Node/CDP transport exception.
+The stale AbortError/null-code checks now precede settlement. The independent
+reader verifies the actual trace/envelope/outcome/proof binding. No original
+positive, negative, geometry, cycle, artifact, roster or budget is removed.

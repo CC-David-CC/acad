@@ -58,3 +58,12 @@ precommit. Normal fresh Open has submitted/acknowledged/settled phases and the
 same exact original source/connector/J proof; unknown Open/New/write/mutation
 outcomes retain custody and force FAIL. This adds custody requirements only;
 all original geometry, source, artifact and lifecycle criteria stay frozen.
+
+Acknowledged-refusal follow-up: a failed mutation stays unknown unless the
+actual pinned signed-harness own-data error envelope is present (including its
+`work` field), the original exact name/code/layer checks pass, and the original
+complete accepted-state/currentness proof passes. Normalized false flags or
+unchanged readback alone never settle a direct Node/CDP transport exception.
+The stale AbortError/null-code checks now precede settlement. The independent
+reader verifies the actual trace/envelope/outcome/proof binding. No original
+positive, negative, geometry, cycle, artifact, roster or budget is removed.
