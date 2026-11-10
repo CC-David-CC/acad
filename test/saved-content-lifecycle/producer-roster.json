@@ -7,7 +7,8 @@
     "check.py",
     "run-artifact-oracle.py",
     "producer-roster.json",
-    "../native-cad-container/archive_oracle.py"
+    "../native-cad-container/archive_oracle.py",
+    "unicodeBoundarySource.mjs"
   ],
   "core": [
     "test/native-cad-container/archive_oracle.py",
@@ -65,7 +66,9 @@
     "web/app/cad/projectManager/nativeArchiveClient.ts",
     "web/app/cad/projectManager/nativeArchiveCodec.worker.ts",
     "web/app/cad/projectManager/exactSavedContent.mjs",
-    "web/app/cad/projectManager/captureDocumentJobOptions.mjs"
+    "web/app/cad/projectManager/captureDocumentJobOptions.mjs",
+    "modules/gems/safeExpression.mjs",
+    "web/app/cad/parameters/legacyNumericExpressions.mjs"
   ],
   "desktop": [
     "test/agent-cad-corpus/sweep/signed-harness.mjs",

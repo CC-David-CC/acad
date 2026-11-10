@@ -89,3 +89,17 @@ string/numeric/field values exactly. Raw source-string observations remain
 available in evidence, without making serialization whitespace/key insertion
 order a new dirty-state requirement. No code/expression string is reparsed or
 normalized by this adjustment.
+
+R8 acceptance-only fixture repair: padding is an ignored whitespace-only FIRST
+LINE, followed by `pad = 1` on the second line. The real RHS is exactly two
+characters (` 1`), below the existing2048-character expression limit. There is
+one definition and two lines, below the existing256-definition/2048-line limits;
+total source stays below65536 UTF16 units and UTF8 bytes. parseMathDefinitions
+explicitly skips blank lines before evaluation. No product limit is changed.
+The actual JSON escaped newline contributes TWO code units. Both driver and
+independent reader derive the single padding length from the first actual
+saved JSON's marker position and old expression encoding length. No parser
+execution, source replay, trial save or boundary-adjustment loop is used while
+constructing the fixture. The actual second saved JSON still must place the
+astral pair at index16383 modulo16384; native SaveAs/Open scope is unchanged.
+This supersedes the earlier one-long-RHS padding construction only.
