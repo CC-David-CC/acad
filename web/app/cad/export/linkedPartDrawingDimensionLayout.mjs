@@ -1,8 +1,8 @@
-import {routeDrawingLeader} from './linkedPartDrawingRequirementForms.mjs';
+import {routeDrawingLeader,routeDrawingReferenceConnector} from './linkedPartDrawingRequirementForms.mjs';
 
 // Worker-only paper presentation. Inputs are already source-bound projected
 // anchors; this leaf neither measures the model nor changes authored labels.
-const LIMIT=Object.freeze({dimensions:16,boxes:128,candidates:17,vertices:64,pathCharacters:8192,outputSegments:256,work:8000000,integerBits:1200,numbers:16384});
+const LIMIT=Object.freeze({dimensions:16,boxes:128,candidates:36,vertices:64,pathCharacters:8192,outputSegments:256,work:8000000,integerBits:1200,numbers:16384});
 const resource=message=>{throw Object.assign(Error(message),{code:'RESOURCE_LIMIT'});};
 const finite=n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=1e9;
 const point=p=>Array.isArray(p)&&p.length===2&&p.every(finite);
@@ -141,48 +141,70 @@ export function layoutDrawingDimensions({sheet,dimensions,labelBoxes,captionBoxe
   if(!labelIssue&&geometryBounds.some(b=>overlap(row.labelBox,b)))labelIssue='VIEW_ENVELOPE_UNCERTAINTY';
   if(!(length>0)||!Number.isFinite(length)){uncertain('PROJECTED_SPAN_COLLAPSED');continue;}
   const u=delta.map(n=>n/length),normal=[-u[1],u[0]],center=row.labelBox.min.map((n,i)=>(n+row.labelBox.max[i])/2),desired=center.reduce((n,x,i)=>n+(x-a[i])*normal[i],0),side=desired<0?-1:1;
-  const first=Math.abs(desired)>=6?desired:side*6,offsets=Array.from({length:LIMIT.candidates},(_,i)=>first+side*i*6);
+  const magnitudes=[Math.max(6,Math.abs(desired)),...Array.from({length:17},(_,i)=>(i+1)*6)],offsets=[];
+  for(const magnitude of magnitudes)for(const sign of[side,-side]){const n=sign*magnitude;if(!offsets.includes(n))offsets.push(n);}
+  if(offsets.length>LIMIT.candidates)resource('Dimension lanes exceed their bounded candidate inventory.');
   let chosen=null,reason='NO_CLEAR_BOUNDED_DIMENSION_LANE';
-  for(const offset of offsets){
-   exact.charge();const q0=a.map((n,i)=>n+normal[i]*offset),q1=b.map((n,i)=>n+normal[i]*offset),paths=[];
+  const boxes=[...others,...reservedBands,row.labelBox];
+  const clear=part=>part.points.every(inSheet)&&part.points.slice(1).every((q,i)=>boxes.every(r=>!exact.rectangle(part.points[i],q,r,forms.has(r)?2.25:.125)));
+  const obstacles=()=>[...reservedBands,...[...others,row.labelBox].map(b=>forms.has(b)?{min:b.min.map(n=>n-2.25),max:b.max.map(n=>n+2.25)}:b),...leaderStrokes];
+  // Prefer complete conventional straight witness lines on EITHER side.
+  // Only then permit an explicitly marked true-anchor reference connector.
+  search:for(const witnessMode of['straight','reference']){
+  candidate:for(const offset of offsets){
+   exact.charge();const q0=a.map((n,i)=>n+normal[i]*offset),q1=b.map((n,i)=>n+normal[i]*offset),laneSide=offset<0?-1:1,paths=[];
    if(equal(q0,q1)){reason='DERIVED_SPAN_UNREPRESENTABLE';continue;}
    for(const points of textGap(q0,q1,row.labelBox))paths.push({role:'dimension-line',points});
-   for(const p of[a,b]){
-    const from=p.map((n,i)=>n+normal[i]*side*1.5),to=p.map((n,i)=>n+normal[i]*(offset+side*1.5));
-    for(const points of textGap(from,to,row.labelBox))paths.push({role:'extension-line',points});
-   }
-   // Fixed paper arrow size; short spans use outward arrows instead of
-   // reducing the text or silently shrinking the arrowheads.
    const inward=length>=8?1:-1;
    for(const [tip,direction]of[[q0,inward],[q1,-inward]]){
     const root=tip.map((n,i)=>n+u[i]*direction*2),points=[root.map((n,i)=>n+normal[i]*.65),tip,root.map((n,i)=>n-normal[i]*.65)];paths.push({role:'arrowhead',points});
    }
    if(paths.some(p=>p.points.some(q=>!inSheet(q)))){reason='DIMENSION_LANE_OUTSIDE_SHEET';continue;}
-   if(paths.some(p=>p.points.slice(1).some((q,i)=>[...others,...reservedBands,row.labelBox].some(r=>exact.rectangle(p.points[i],q,r,forms.has(r)?2.25:.125))))){reason='DECLARED_TEXT_STROKE_CONFLICT';continue;}
+   if(paths.some(p=>!clear(p))){reason='DECLARED_TEXT_STROKE_CONFLICT';continue;}
    if(paths.filter(p=>p.role==='dimension-line').some(p=>lines.some(line=>exact.crossing(p.points[0],p.points[1],line[0],line[1])))){reason='DIMENSION_LINE_CROSSING';continue;}
-   const geometryCrossing=paths.filter(p=>p.role==='dimension-line').some(p=>geometryIndex.some(boxOf(p.points),segment=>exact.crossing(p.points[0],p.points[1],segment[0],segment[1])));
-   if(geometryCrossing){reason='PROJECTED_GEOMETRY_LINE_CROSSING';continue;}
-   const projection=center.reduce((n,x,i)=>n+(x-q0[i])*u[i],0),start=q0.map((n,i)=>n+u[i]*Math.max(0,Math.min(length,projection))),target=port(start,row.labelBox);
+   if(paths.filter(p=>p.role==='dimension-line').some(p=>geometryIndex.some(boxOf(p.points),segment=>exact.crossing(p.points[0],p.points[1],segment[0],segment[1])))){reason='PROJECTED_GEOMETRY_LINE_CROSSING';continue;}
+   const references=[],referenceObstacles=[];
+   for(const [anchorIndex,anchor,tip]of[[0,a,q0],[1,b,q1]]){
+    const from=anchor.map((n,i)=>n+normal[i]*laneSide*1.5),to=tip.map((n,i)=>n+normal[i]*laneSide*1.5),straight=textGap(from,to,row.labelBox).map(points=>({role:'extension-line',anchorIndex,points}));
+    if(straight.length&&straight.every(clear)){paths.push(...straight);continue;}
+    if(witnessMode==='straight'){reason='DECLARED_TEXT_STROKE_CONFLICT';continue candidate;}
+    // A routed reference is NOT a bent conventional extension. Its exact
+    // true anchor is marked visibly; its other endpoint is the aligned tip.
+    const marks=[[[-.6,0],[.6,0]],[[0,-.6],[0,.6]]].map(deltas=>({role:'reference-anchor',anchorIndex,points:deltas.map(d=>anchor.map((n,k)=>n+d[k]))}));
+    if(marks.some(p=>!clear(p))){reason='ANCHOR_OR_PORT_BLOCKED';continue candidate;}
+    const blocked=obstacles().concat(referenceObstacles);
+    if(blocked.length>LIMIT.boxes)resource('Dimension reference obstacles exceed their bounded inventory.');
+    let points;
+    try{points=routeDrawingReferenceConnector(anchor,tip,blocked,sheet,budget);}
+    catch(error){if(error?.code==='RESOURCE_LIMIT'&&['ANCHOR_OR_PORT_BLOCKED','NO_ROUTE_IN_BOUNDED_GRAPH'].includes(error.layoutReason)){reason=error.layoutReason;continue candidate;}throw error;}
+    if(points.length>LIMIT.vertices||points.some(p=>!inSheet(p)))resource('Dimension reference exceeds its bounded output domain.');
+    const part={role:'reference-connector',anchorIndex,points};
+    if(!clear(part)||points.slice(1).some((q,i)=>paths.filter(p=>p.role==='dimension-line').some(p=>exact.crossing(points[i],q,p.points[0],p.points[1])))){reason='DIMENSION_LINE_CROSSING';continue candidate;}
+    paths.push(...marks,part);references.push(part);
+    for(let i=1;i<points.length;i++){const b=boxOf([points[i-1],points[i]]);referenceObstacles.push({min:b.min.map(n=>n-.25),max:b.max.map(n=>n+.25)});}
+   }
+   const projection=center.reduce((n,x,i)=>n+(x-q0[i])*u[i],0);let start=q0.map((n,i)=>n+u[i]*Math.max(0,Math.min(length,projection)));
+   // A label connector must touch visible span ink or a real arrow tip,
+   // never an invisible point removed by the own-label gutter.
+   if(port(start,row.labelBox)&&start.every((n,i)=>n>=row.labelBox.min[i]-1&&n<=row.labelBox.max[i]+1))start=Math.hypot(...q0.map((n,i)=>n-center[i]))<=Math.hypot(...q1.map((n,i)=>n-center[i]))?q0:q1;
+   const target=port(start,row.labelBox);
    if(target){
-    // Existing requirement-frame acceptance reserves >=2.125mm from strokes;
-    // preserve it after deferred dimension planning, with a paper gutter.
-    const obstacles=[...reservedBands,...others.map(b=>forms.has(b)?{min:b.min.map(n=>n-2.25),max:b.max.map(n=>n+2.25)}:b),...leaderStrokes];
-    if(obstacles.length+1>LIMIT.boxes)resource('Dimension leader obstacles exceed their bounded inventory.');
+    const blocked=[...reservedBands,...others.map(b=>forms.has(b)?{min:b.min.map(n=>n-2.25),max:b.max.map(n=>n+2.25)}:b),...leaderStrokes];
+    if(blocked.length+1>LIMIT.boxes)resource('Dimension leader obstacles exceed their bounded inventory.');
     try{
-     const points=routeDrawingLeader(start,target.end,row.labelBox,target.side,obstacles,sheet,budget);
+     const points=routeDrawingLeader(start,target.end,row.labelBox,target.side,blocked,sheet,budget);
      if(points.length>LIMIT.vertices||points.some(p=>!inSheet(p)))resource('Dimension connector exceeds its bounded output domain.');
+     if(points.slice(1).some((q,i)=>references.some(p=>p.points.slice(1).some((r,j)=>exact.crossing(points[i],q,p.points[j],r))))){reason='DIMENSION_LINE_CROSSING';continue;}
      paths.push({role:'label-connector',points});
     }catch(error){if(error?.code==='RESOURCE_LIMIT'&&['ANCHOR_OR_PORT_BLOCKED','NO_ROUTE_IN_BOUNDED_GRAPH'].includes(error.layoutReason)){reason=error.layoutReason;continue;}throw error;}
    }
    chosen={dimensionId:row.dimensionId,status:labelIssue?'uncertain':'available',reason:labelIssue,paths};
    outputSegments+=paths.reduce((n,p)=>n+p.points.length-1,0);if(outputSegments>LIMIT.outputSegments)resource('Dimension layout exceeds its bounded complete segment output.');
-   for(const p of paths)if(['dimension-line','label-connector'].includes(p.role))for(let i=1;i<p.points.length;i++){
-    const segment=[p.points[i-1],p.points[i]];lines.push(segment);
-    // A conservative routed-segment obstacle is explicitly a finite graph
-    // restriction, not a claim that all space inside that box contains ink.
-    reserveStroke(segment);
+   for(const p of paths)if(['dimension-line','label-connector','reference-connector','reference-anchor'].includes(p.role))for(let i=1;i<p.points.length;i++){
+    const segment=[p.points[i-1],p.points[i]];lines.push(segment);reserveStroke(segment);
    }
-   break;
+   break search;
+  }
   }
   if(chosen)result.set(row.dimensionId,chosen);else uncertain(reason);
  }

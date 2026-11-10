@@ -20,11 +20,19 @@ const ROUTE_LIMITS=Object.freeze({boxes:128,nodes:514,leaders:6,vertices:64,path
 // Visibility graph over declared paper rectangles, then deterministic Dijkstra.
 // Distances choose a route; exact dyadic predicates alone decide its legality.
 export function routeDrawingLeader(start,end,ownBox,side,otherBoxes,sheet,budget){
+ return routePaperPath(start,end,ownBox,side,otherBoxes,sheet,budget);
+}
+// Explicit derived reference connector, not a conventional extension line.
+// Both endpoints are actual already-bound paper anchors, never model input.
+export function routeDrawingReferenceConnector(start,end,otherBoxes,sheet,budget){
+ return routePaperPath(start,end,null,null,otherBoxes,sheet,budget);
+}
+function routePaperPath(start,end,ownBox,side,otherBoxes,sheet,budget){
  const charge=(n=1)=>{budget.used+=n;if(budget.used>ROUTE_LIMITS.work)resource('Requirement leader routing exceeds its bounded work domain.');};
- if(otherBoxes.length+1>ROUTE_LIMITS.boxes)resource('Requirement leader text obstacles exceed their bounded domain.');
+ if(otherBoxes.length+(ownBox?1:0)>ROUTE_LIMITS.boxes)resource('Requirement leader text obstacles exceed their bounded domain.');
  const point=p=>Array.isArray(p)&&p.length===2&&p.every(finite);
  const box=b=>b&&point(b.min)&&point(b.max)&&b.min.every((v,i)=>v<b.max[i]);
- if(!point(start)||!point(end)||!box(ownBox)||!otherBoxes.every(box)||!finite(sheet.width)||!finite(sheet.height))resource('Requirement leader paper inputs are unavailable.');
+ if(!point(start)||!point(end)||(ownBox!==null&&!box(ownBox))||!otherBoxes.every(box)||!finite(sheet.width)||!finite(sheet.height))resource('Requirement leader paper inputs are unavailable.');
  const data=new DataView(new ArrayBuffer(8)),zero=BigInt(0),one=BigInt(1),two=BigInt(2),b32=BigInt(32),b52=BigInt(52),mask32=(one<<b32)-one;
  const bits=n=>{data.setFloat64(0,n,false);return(BigInt(data.getUint32(0,false))<<b32)|BigInt(data.getUint32(4,false));};
  const number=b=>{data.setUint32(0,Number(b>>b32),false);data.setUint32(4,Number(b&mask32),false);return data.getFloat64(0,false);};
@@ -40,7 +48,7 @@ export function routeDrawingLeader(start,end,ownBox,side,otherBoxes,sheet,budget
  }
  // Outward rounding is only for NEW derived paper waypoints. Collision boxes
  // below use exact raw bounds +/- .125, not these rounded approximations.
- const allBoxes=[...otherBoxes,ownBox],corners=[];
+ const allBoxes=ownBox?[...otherBoxes,ownBox]:[...otherBoxes],corners=[];
  for(const b of allBoxes){
   const lo=b.min.map(n=>next(n-.125,false)),hi=b.max.map(n=>next(n+.125,true));
   corners.push([lo[0],lo[1]],[hi[0],lo[1]],[hi[0],hi[1]],[lo[0],hi[1]]);
@@ -50,12 +58,12 @@ export function routeDrawingLeader(start,end,ownBox,side,otherBoxes,sheet,budget
  const values=[.125,sheet.width,sheet.height,...allBoxes.flatMap(b=>[...b.min,...b.max]),...rawPoints.flat()];
  let exponent=0;for(const n of values){const p=dyadic(n);if(p.m!==zero)exponent=Math.min(exponent,p.e);}
  const exact=n=>{const p=dyadic(n),q=p.m<<BigInt(p.e-exponent);if((q<zero?-q:q)>>BigInt(ROUTE_LIMITS.integerBits))resource('Requirement paper arithmetic exceeds its bounded domain.');return q;};
- const half=exact(.125),qbox=(b,pad)=>({min:b.min.map(n=>exact(n)-pad),max:b.max.map(n=>exact(n)+pad)}),own=qbox(ownBox,zero),obstacles=otherBoxes.map(b=>qbox(b,half));
+ const half=exact(.125),qbox=(b,pad)=>({min:b.min.map(n=>exact(n)-pad),max:b.max.map(n=>exact(n)+pad)}),own=ownBox?qbox(ownBox,zero):null,obstacles=otherBoxes.map(b=>qbox(b,half));
  const lower=[half,half],upper=[exact(sheet.width)-half,exact(sheet.height)-half];
  const inside=(p,b,closed)=>p.every((n,i)=>closed?n>=b.min[i]&&n<=b.max[i]:n>b.min[i]&&n<b.max[i]);
  const inSheet=p=>p.every((n,i)=>n>=lower[i]&&n<=upper[i]);
  const vertex=p=>({p,q:p.map(exact)});
- const allowed=(n,goal=false)=>{charge();return inSheet(n.q)&&(goal||!inside(n.q,own,true))&&!obstacles.some(b=>{charge();return inside(n.q,b,false);});};
+ const allowed=(n,goal=false)=>{charge();return inSheet(n.q)&&(goal||!own||!inside(n.q,own,true))&&!obstacles.some(b=>{charge();return inside(n.q,b,false);});};
  const first=vertex(rawPoints[0]),last=vertex(rawPoints[1]);
  if(!allowed(first)||!allowed(last,true))resource('The actual requirement anchor or port has no clear supported paper domain.','ANCHOR_OR_PORT_BLOCKED');
  const orient=(a,b,p)=>{charge();return(b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]);};
@@ -67,7 +75,7 @@ export function routeDrawingLeader(start,end,ownBox,side,otherBoxes,sheet,budget
  }
  const approach=p=>side==='left'?p[0]<own.min[0]:side==='right'?p[0]>own.max[0]:side==='top'?p[1]<own.min[1]:side==='bottom'?p[1]>own.max[1]:false;
  function visible(a,b,goal){
-  charge();if(goal?!approach(a.q):intersects(a.q,b.q,own,true))return false;
+  charge();if(own&&(goal?!approach(a.q):intersects(a.q,b.q,own,true)))return false;
   return !obstacles.some(r=>intersects(a.q,b.q,r,false));
  }
  // The unchanged authored midpoint is reachable directly whenever clear.

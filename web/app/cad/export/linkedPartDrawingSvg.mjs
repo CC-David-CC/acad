@@ -166,7 +166,8 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
       paths[row.pathIndex]=placed.paths.map(part=>{
         const data='M'+part.points.map(p=>p.map(num).join(',')).join(' L');if(data.length>DRAWING_DIMENSION_LAYOUT_LIMITS.pathCharacters)throw Object.assign(Error('Dimension paper path exceeds its bounded serialization domain.'),{code:'RESOURCE_LIMIT'});
         for(let j=1;j<part.points.length;j++)stroke([part.points[j-1],part.points[j]]);
-        return `<path ${attrs} data-dimension-role="${part.role}" d="${data}" stroke="${part.role==='extension-line'?'#789':'#246'}"${part.role==='extension-line'?' stroke-width=".18"':''} stroke-linejoin="round"/>`;
+        const indexed=part.anchorIndex===undefined?'':' data-dimension-anchor-index="'+part.anchorIndex+'"',witness=['extension-line','reference-anchor','reference-connector'].includes(part.role);
+        return `<path ${attrs} data-dimension-role="${part.role}"${indexed} d="${data}" stroke="${witness?'#789':'#246'}"${['extension-line','reference-anchor'].includes(part.role)?' stroke-width=".18"':''}${part.role==='reference-connector'?' stroke-dasharray="1 1"':''} stroke-linejoin="round"/>`;
       }).join('');
     }else{
       // Preserve all original reference information, but never present a
@@ -176,6 +177,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
     }
     annotations[row.textIndex]=text(row.label,row.valueText,attrs+' fill="#124"');
   }
+  const routedReferences=dimensionLayout.reduce((n,row)=>n+(row.paths?.filter(p=>p.role==='reference-connector').length||0),0);
   const dimensionPresentation={version:1,role:'derived-paper-layout',status:dimensionLayout.some(row=>row.status==='uncertain')?'uncertain':'available',dimensions:dimensionLayout.map(({dimensionId,status,reason})=>({dimensionId,status,reason}))};
   for(const warning of layoutDrawingWarnings({sheet:d.sheet,warnings,geometryBounds,strokeBounds,labelBoxes,captionBoxes})){
     const first=warning.lines[0],spans=warning.lines.map(line=>`<tspan x="${num(line.x)}" y="${num(line.y)}" textLength="${num(line.textLength)}" lengthAdjust="spacing">${escape(line.value)}</tspan>`).join('');
@@ -185,7 +187,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
   // own search could turn an otherwise valid drawing into a refusal. Its
   // complete per-dimension reasons remain in metadata/label attributes; the
   // fixed footer visibly distinguishes them from physical reference status.
-  const title=text([8,8],d.title||d.drawingId),notice=text([8,d.sheet.height-5],`Reference drawing · ${status} · scale ${d.sheet.scale.numerator}:${d.sheet.scale.denominator}${dimensionPresentation.status==='uncertain'?' · LAYOUT UNCERTAIN ('+dimensionLayout.filter(row=>row.status==='uncertain').length+')':''}`);
+  const title=text([8,8],d.title||d.drawingId),notice=text([8,d.sheet.height-5],`Reference drawing · ${status} · scale ${d.sheet.scale.numerator}:${d.sheet.scale.denominator}${dimensionPresentation.status==='uncertain'?' · LAYOUT UNCERTAIN ('+dimensionLayout.filter(row=>row.status==='uncertain').length+')':''}${routedReferences?' · ROUTED REFERENCES ('+routedReferences+')':''}`);
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${num(d.sheet.width)}mm" height="${num(d.sheet.height)}mm" viewBox="0 0 ${num(d.sheet.width)} ${num(d.sheet.height)}"><title>${escape(d.title)}</title><metadata>${escape(JSON.stringify({version:1,drawingId:d.drawingId,revision:read.revision,geometryRevision:read.geometryRevision,quality:o.quality,status,dimensionPresentation,...(d.version>=2?{definitionVersion:d.version,viewCount:d.views.length,projection:d.views.some(v=>v.basis==='isometric')?'source-relative-isometric-v1':'source-relative-orthographic-v1'}:{}),...(d.version>=3?{annotationFacts:o.annotations,annotationRole:'derived-native-bore-reference',ordinateRole:'signed-datum-coordinate'}:{}),...(d.version===4?{datumFeatureFacts:o.datumFeatures,requirementFacts:o.requirements,manufacturingRequirementRole:'authored-manufacturing-requirement',measurementScope:'nominal-cad-reference-only'}:{}),curvePresentationTolerancePaperMm:.02,dimensionRole:'reference'}))}</metadata><defs>${patterns.join('')}</defs><rect width="100%" height="100%" fill="white"/><g fill="none" stroke="#111" stroke-width=".25">${paths.join('')}</g><g font-family="sans-serif" font-size="3">${title}${annotations.join('')}${notice}</g></svg>`;
   const bytes=new TextEncoder().encode(svg);
   if(bytes.byteLength>16*1024*1024)throw Object.assign(Error('Drawing SVG exceeds its byte budget.'),{code:'RESOURCE_LIMIT'});
