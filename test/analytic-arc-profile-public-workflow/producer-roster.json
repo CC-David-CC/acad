@@ -36,7 +36,13 @@
     "web/app/cad/craft/sourceFrameCommands.ts",
     "web/app/sketcher/shapes/arc.ts",
     "web/app/sketcher/shapes/arcBranch.mjs",
-    "web/app/sketcher/io.ts"
+    "web/app/sketcher/io.ts",
+    "modules/engine/mount/ownedTopologyContract.mjs",
+    "modules/engine/mount/prismSelectionIndex.mjs",
+    "modules/engine/mount/selectionAncestryIndex.mjs",
+    "modules/engine/mount/selectionLineageIndex.mjs",
+    "modules/engine/mount/profileExtentSelectionIndex.mjs",
+    "modules/engine/solid/SolidKernel.ts"
   ],
   "desktop": [
     "test/agent-cad-corpus/sweep/signed-harness.mjs",
