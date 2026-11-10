@@ -1,3 +1,4 @@
+import {readProjectedSourceRecord,assertProjectionSourceReadonly} from 'workbenches/modeler/features/sourceProjection/sourceProjection.operation';
 import {unchangedSketchSave} from './unchangedSketchSave.mjs';
 import {bindSketchConstants} from './sketchConstantResolver';
 import {getSketchBoundaries} from './sketchBoundaries';
@@ -53,6 +54,7 @@ export function activate(ctx) {
   }
 
   function reevaluateSketch(sketchId) {
+    const actualFace=ctx.cadRegistry.findFace(sketchId);if(actualFace&&readProjectedSourceRecord(ctx,actualFace))return;
     const savedSketch = ctx.sketchStorageService.getSketchData(sketchId);
     if (savedSketch === null) {
       return null;
@@ -111,7 +113,8 @@ export function activate(ctx) {
   })));
 
   function updateSketchForFace(mFace) {
-    const sketch = ctx.sketchStorageService.readSketch(mFace.defaultSketchId);
+    const projected=readProjectedSourceRecord(ctx,mFace);
+    const sketch = projected?projected.sketch:ctx.sketchStorageService.readSketch(mFace.defaultSketchId);
     mFace.setSketch(sketch);
     ctx.cadRegistry.reindexFace(mFace);
     streams.sketcher.update.next(mFace); // updates UI face views
@@ -124,6 +127,7 @@ export function activate(ctx) {
   }
   
   function updateSketchBoundaries(sceneFace) {
+    assertProjectionSourceReadonly(ctx,sceneFace);
     assertLegacyGeometry(sceneFace, 'Sketching on this generated face');
     
     const sketchStorageKey = ctx.projectService.sketchStorageKey(sceneFace.id);
@@ -138,6 +142,7 @@ export function activate(ctx) {
 
   const inPlaceEditor = new InPlaceSketcher(ctx);
   function sketchFace(face) {
+    assertProjectionSourceReadonly(ctx,face);
     assertLegacyGeometry(face, 'Sketching on this generated face');
     if (inPlaceEditor.inEditMode) {
       inPlaceEditor.exit();
@@ -146,6 +151,7 @@ export function activate(ctx) {
   }
   
   function sketchFace2D(face) {
+    assertProjectionSourceReadonly(ctx,face);
     assertLegacyGeometry(face, 'Sketching on this generated face');
     updateSketchBoundaries(face);
     const sketchURL = ctx.projectService.getSketchURL(face.id);

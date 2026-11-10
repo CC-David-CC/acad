@@ -21,6 +21,7 @@ export interface PreparedSketchCommand {
   readonly expressionPublication?: any;
   // Private one-use source-replay capability; never a caller/wire boolean.
   readonly nativeSourceReplay?: object;
+  readonly projectionReplay?: object;
   requireCurrent(): void;
   prepare(models: any[], history: CraftHistory): Promise<PreparedWorkspaceWrites>;
   requireCommittedCurrent(): void;

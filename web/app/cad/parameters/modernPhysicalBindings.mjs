@@ -1,3 +1,4 @@
+import {SOURCE_PROJECTION_TYPE,captureSourceProjection} from '../../../../modules/engine/source/sourceProjectionIntent.mjs';
 import {captureAuthoredCountersinkIntent} from '../../../../modules/engine/solid/authoredCountersinkIntent.mjs';
 import {captureAuthoredCounterboreIntent} from '../../../../modules/engine/solid/authoredCounterboreIntent.mjs';
 import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature} from '../../../../modules/engine/solid/ownedProfileExtentFeature.mjs';
@@ -12,7 +13,7 @@ export function captureModernPhysicalProfiles(history){
  if(historyStateVersion(history)===1)throw Object.assign(Error('Typed history controls are not integrated.'),{code:'UNSUPPORTED_PARAMETERS'});
  if(!Array.isArray(history)||history.length>256)throw Object.assign(Error('Expected bounded authored parameter history.'),{code:'UNSUPPORTED_PARAMETERS'});
  const modern=history.some(row=>AUTHORED_SOLID_KINDS.includes(row.type));if(!modern)return null;
- for(const row of history)if(row.type!=='PLANE'&&!MODERN_PHYSICAL_TYPES.includes(row.type))throw Object.assign(Error('Typed generic parts currently support only selected profiles and through holes.'),{code:'UNSUPPORTED_PARAMETERS'});
+ for(const row of history)if(row.type===SOURCE_PROJECTION_TYPE)captureSourceProjection(row.params);else if(row.type!=='PLANE'&&!MODERN_PHYSICAL_TYPES.includes(row.type))throw Object.assign(Error('Typed generic parts currently support only selected profiles and through holes.'),{code:'UNSUPPORTED_PARAMETERS'});
  const profiles=[],byFeature=new Map(),faces=new Set();
  for(let index=0;index<history.length;index++){
   const row=history[index];

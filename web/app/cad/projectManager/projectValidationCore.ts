@@ -1,3 +1,4 @@
+import {validateProjectSourceProjections} from 'sketcher/headless/sourceProjectionValidation';
 import {captureAuthoredCountersinkIntent} from 'engine/solid/authoredCountersinkIntent.mjs';
 import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature,profileExtentFields,profileExtentDimensions,profileExtentInterval} from 'engine/solid/ownedProfileExtentFeature.mjs';
 import {requireProfileExtentBuild} from 'engine/mount/selectedProfileBuildSelection.mjs';
@@ -94,5 +95,6 @@ export function preflight(value, parameterState?: {source?: string, result?: any
     if(data.stages.some(s=>s.generators.some(g=>g.typeId==='Offset'))){const external=physicalValues?prepareTypedDependentSketch(data,name=>{const row=physicalValues.get(name);if(!row||row.dimension!=='length')throw Object.assign(Error('Offset requires a current typed length.'),{code:'OFFSET_DISTANCE'});return row.value;}):{};validateOffsetSources(data,external);}
   }
   validateProjectSourceFrames(project);
+  validateProjectSourceProjections(project);
   return value;
 }

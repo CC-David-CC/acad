@@ -3,6 +3,13 @@ import {ApplicationContext} from "cad/context";
 import {createVolatileWorkspace} from './volatileWorkspace.mjs';
 
 const updateSources = new WeakMap();
+const STORAGE_LISTEN=EventTarget.prototype.addEventListener,STORAGE_UNLISTEN=EventTarget.prototype.removeEventListener;
+const preparedMergers = new WeakMap<object,(changes:WorkspaceWrite[])=>PreparedWorkspaceWrites>();
+// Internal Craft use only: possession of the ACTUAL pending storage owner is
+// required. Never published on StorageService or accepted as a host flag.
+export function mergePreparedWorkspaceWrites(owner:PreparedWorkspaceWrites,changes:WorkspaceWrite[]){
+  const merge=preparedMergers.get(owner);if(!merge)throw Error('Prepared storage owner is unavailable.');return merge(changes);
+}
 
 function updateSource(ctx) {
   let source = updateSources.get(ctx);
@@ -25,6 +32,8 @@ export function activate(ctx: ApplicationContext) {
   ctx.storageService?.dispose?.();
   let service: StorageService, active = true, timer = null;
   let pendingPreparation: PreparedWorkspaceWrites = null;
+  let failedPreparationCleanup:any=null,failedPreparationOwner:object=null;
+  const requirePreparationCustody=()=>{if(failedPreparationCleanup)throw failedPreparationCleanup;};
   const pendingUpdates = new Map<string, {timestamp: number; current: () => boolean}>();
   // An embedded desktop window must not share CAD projects with another
   // window or account at the same origin. This is a volatile workspace only;
@@ -39,9 +48,10 @@ export function activate(ctx: ApplicationContext) {
   }
 
   function write(key: string, value: string): number {
+    requirePreparationCustody();
     if (volatile) {
-      const version = workspace.set(key, value);
       pendingPreparation?.discard();
+      const version = workspace.set(key, value);
       notify(key);
       return version;
     }
@@ -77,9 +87,10 @@ export function activate(ctx: ApplicationContext) {
   }
 
   function remove(key) {
+    requirePreparationCustody();
+    pendingPreparation?.discard();
     try {
       if (volatile) workspace.remove(key); else localStorage.removeItem(key);
-      pendingPreparation?.discard();
       writeVersions.delete(key);
     } finally {
       notify(key);
@@ -137,29 +148,45 @@ export function activate(ctx: ApplicationContext) {
   if (!volatile) window.addEventListener('storage', externalStorageUpdate, false);
 
   function dispose() {
-    active = false;
-    pendingPreparation?.discard();
-    if (timer !== null) clearTimeout(timer);
-    timer = null; pendingUpdates.clear();
-    if (!volatile) window.removeEventListener('storage', externalStorageUpdate, false);
+    active=false;let failure=failedPreparationCleanup;
+    if(pendingPreparation!==failedPreparationOwner)try{pendingPreparation?.discard();}catch(error){failure=failure||error;}
+    try{if(timer!==null)clearTimeout(timer);}catch(error){failure=failure||error;}
+    timer=null;pendingUpdates.clear();
+    try{if(!volatile)window.removeEventListener('storage',externalStorageUpdate,false);}catch(error){failure=failure||error;}
+    if(failure)throw failure;
   }
   
   const addListener = listener => streams.storage.update.attach(listener);
 
   function prepareWrites(changes: WorkspaceWrite[]): PreparedWorkspaceWrites {
+    requirePreparationCustody();
     if (!volatile) throw new Error('Private preparation requires a volatile workspace.');
     const lifetime = captureLifetime();
     if (!lifetime()) throw new Error('Workspace was replaced or closed.');
     if (pendingPreparation && !pendingPreparation.isCurrent()) pendingPreparation.discard();
     const prepared = workspace.prepareWrites(changes);
-    if (!lifetime()) { prepared.discard(); throw new Error('Workspace was replaced or closed.'); }
-    const signal = ctx.projectService?.documentSignal;
-    let committed = false, notified = false;
+    let signal:AbortSignal;
+    try { if (!lifetime()) throw new Error('Workspace was replaced or closed.'); signal=ctx.projectService?.documentSignal; }
+    catch(operationError) { try { prepared.discard(); } catch(cause) { failedPreparationOwner=prepared;failedPreparationCleanup=Object.assign(Error('Prepared workspace retirement is unconfirmed; reload this CAD window.'),{code:'WORKSPACE_CLEANUP_FAILED',committed:false,cause,operationError});throw failedPreparationCleanup; } throw operationError; }
+    let committed = false, notified = false,cleanupDone=false,cleanupFailure:any=null;
     const cleanup = () => {
-      signal?.removeEventListener('abort', abort);
-      if (pendingPreparation === result) pendingPreparation = null;
+      if(cleanupDone){if(cleanupFailure)throw cleanupFailure;return;}
+      cleanupDone=true;const errors=[];
+      try{if(signal)STORAGE_UNLISTEN.call(signal,'abort',abort);}catch(error){errors.push(error);}
+      try{if(pendingPreparation===result)pendingPreparation=null;}catch(error){errors.push(error);}
+      try{preparedMergers.delete(result);}catch(error){errors.push(error);}
+      if(errors.length){cleanupFailure=Object.assign(Error('Prepared workspace cleanup is unconfirmed.'),{code:'WORKSPACE_CLEANUP_FAILED',committed,cause:errors[0],cleanupErrors:Object.freeze(errors)});throw cleanupFailure;}
     };
-    const discard = () => { const discarded = prepared.discard(); cleanup(); return discarded; };
+    const discard = () => {
+      let discarded=false,underlyingError:any=null,cleanupError:any=null;
+      try{discarded=prepared.discard();}catch(error){underlyingError=error;}
+      try{cleanup();}catch(error){cleanupError=error;}
+      if(underlyingError){
+        if(!failedPreparationCleanup)failedPreparationCleanup=Object.assign(Error('Prepared workspace retirement is unconfirmed; reload this CAD window.'),{code:'WORKSPACE_CLEANUP_FAILED',committed,cause:underlyingError,cleanupError});
+        failedPreparationOwner=result;throw failedPreparationCleanup;
+      }
+      if(cleanupError)throw cleanupError;return discarded;
+    };
     const abort = () => discard();
     function current() {
       if (!lifetime()) { discard(); return false; }
@@ -174,7 +201,16 @@ export function activate(ctx: ApplicationContext) {
       get(key) { requireCurrent(); return prepared.get(key); },
       getAllKeysFromNamespace(namespace) { requireCurrent(); return prepared.getAllKeysFromNamespace(namespace); },
       discard,
-      commit() { requireCurrent(); prepared.commit(); committed = true; cleanup(); },
+      commit() {
+        try{requirePreparationCustody();requireCurrent();cleanup();requireCurrent();prepared.commit();committed=true;}
+        catch(operationError){
+          // The actual underlying implementation performs every throwable
+          // validation/allocation BEFORE its pointer swap. Every failed path
+          // must close its own proposal even after outer cleanup ran.
+          try{discard();}catch(cause){throw Object.assign(Error('Workspace commit/cleanup failed before publication.'),{code:'WORKSPACE_CLEANUP_FAILED',committed,cause,operationError});}
+          throw operationError;
+        }
+      },
       notify(valid = () => true) {
         if (!committed || notified) throw new Error('Workspace publication is not pending notification.');
         notified = true;
@@ -183,8 +219,25 @@ export function activate(ctx: ApplicationContext) {
         }
       }
     });
+    preparedMergers.set(result,(extra)=>{
+      requireCurrent();if(pendingPreparation!==result||workspace.revision!==prepared.expectedRevision)throw Error('Prepared storage owner changed.');
+      if(!Array.isArray(extra)||!extra.length||extra.length>256||Reflect.ownKeys(extra).length!==extra.length+1)throw Error('Invalid derived source writes.');
+      const rows=prepared.keys.map(key=>({key,value:prepared.get(key)})),seen=new Set(rows.map(row=>row.key));
+      for(let i=0;i<extra.length;i++){
+        const slot=Object.getOwnPropertyDescriptor(extra,String(i)),row=slot?.value;
+        if(!slot?.enumerable||!Object.hasOwn(slot,'value')||!row||typeof row!=='object'||Array.isArray(row)||Reflect.ownKeys(row).sort().join(',')!=='key,value')throw Error('Derived source writes must be dense own data.');
+        const k=Object.getOwnPropertyDescriptor(row,'key'),v=Object.getOwnPropertyDescriptor(row,'value');
+        if(!k?.enumerable||!v?.enumerable||!Object.hasOwn(k,'value')||!Object.hasOwn(v,'value')||typeof k.value!=='string'||v.value!==null&&typeof v.value!=='string'||seen.has(k.value))throw Error('Derived source keys duplicate or conflict with the prepared owner.');
+        seen.add(k.value);rows.push({key:k.value,value:v.value});
+      }
+      requireCurrent();const expected=prepared.expectedRevision;discard();
+      // No accepted write occurred. A re-preparation refusal leaves the exact
+      // original accepted records/revision intact; the old proposal is closed.
+      if(!lifetime()||workspace.revision!==expected)throw Error('Workspace changed during derived source preparation.');
+      return prepareWrites(rows);
+    });
     pendingPreparation = result;
-    signal?.addEventListener('abort', abort, {once: true});
+    try{if(signal)STORAGE_LISTEN.call(signal,'abort',abort,{once:true});}catch(error){try{discard();}catch(cleanupError){Object.defineProperty(cleanupError,'operationError',{value:error});throw cleanupError;}throw error;}
     return result;
   }
 

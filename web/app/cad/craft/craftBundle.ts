@@ -1,3 +1,9 @@
+import {isRegisteredSourceProjection} from 'workbenches/modeler/features/sourceProjection/sourceProjection.operation';
+import {SOURCE_PROJECTION_TYPE,captureSourceProjection} from 'engine/source/sourceProjectionIntent.mjs';
+import {createSourceProjectionCommands} from './sourceProjectionCommands';
+import {hasSourceProjections,issueProjectionReplay,createSourceProjectionReplay,preparedProjectionChanges} from './sourceProjectionReplay';
+import {supplementProjectionSourceJournal,planProjectionSourceTravel} from './authoredEditJournal.mjs';
+import {mergePreparedWorkspaceWrites} from '../storage/storageBundle';
 import {createWorkerCountersinkCommands} from './workerCountersinkCommands';
 import {captureCountersinkParameters,recordCountersinkEdit,planCountersinkTravel} from './authoredEditJournal.mjs';
 import {captureAuthoredCountersinkDimensions,materializeAuthoredCountersinkDimensions,assertCountersinkBindingsPreserved} from 'engine/solid/authoredCountersinkIntent.mjs';
@@ -138,6 +144,7 @@ export function activate(ctx: ApplicationContext) {
   let sourcePlaneDepthCommands:any=null;
   let principalPlaneCommands:ReturnType<typeof createPrincipalPlanePlacementCommands>=null;
   let sourceFrameCommands:ReturnType<typeof createSourceFrameCommands>=null;
+  let sourceProjectionCommands:ReturnType<typeof createSourceProjectionCommands>=null;
   let selectedProfileSourceDimensionCommands:any=null;
   let historyControlCommands:ReturnType<typeof createWorkerHistoryControlCommands>=null;
   let legacyExpressionCommands:any = null;
@@ -465,9 +472,9 @@ export function activate(ctx: ApplicationContext) {
         if(initialFrameAppend)initialFrameJournal=oldJournal;
         const before=captureSourceFrameJournalOperation(beforeOperation),after=captureSourceFrameJournalOperation(afterOperation);
         if(!Number.isSafeInteger(index)||index<0||index>255||!Number.isSafeInteger(featureId)||featureId<1||typeof faceId!=='string'||!faceId||faceId.length>256||journal.document!==document)throw Error('Invalid source-frame journal identity.');
-        if(before===null){if(index!==captured.history.length||!after||after.type!=='SOURCE_FRAME_V1'||captured.history.some(entry=>Number(entry.params.featureId)===featureId))throw Error('Source creation is not a fresh append.');}
+        if(before===null){if(index!==captured.history.length||!after||!['SOURCE_FRAME_V1',SOURCE_PROJECTION_TYPE].includes(after.type)||captured.history.some(entry=>Number(entry.params.featureId)===featureId))throw Error('Source creation is not a fresh append.');}
         else if(JSON.stringify(captureSourceFrameJournalOperation(captured.history[index]))!==JSON.stringify(before))throw superseded();
-        if(after===null){const face=ctx.cadRegistry.findFace(faceId);if(!direction||before?.type!=='SOURCE_FRAME_V1'||index!==captured.history.length-1||!(face?.root instanceof MOpenFaceShell)||face.root.originatingOperation!==index||preparation.sketchRemovedIds?.length!==1||preparation.sketchRemovedIds[0]!==faceId)throw Error('Only the exact latest source creation can be undone.');}
+        if(after===null){const face=ctx.cadRegistry.findFace(faceId);if((!direction&&before?.type!==SOURCE_PROJECTION_TYPE)||!['SOURCE_FRAME_V1',SOURCE_PROJECTION_TYPE].includes(before?.type)||index!==captured.history.length-1||!(face?.root instanceof MOpenFaceShell)||face.root.originatingOperation!==index||preparation.sketchRemovedIds?.length!==1||preparation.sketchRemovedIds[0]!==faceId)throw Error('Only the exact latest source creation can be undone.');}
         else{if(Number(after.params.featureId)!==featureId||before&&before.type!==after.type)throw Error('Source producer identity changed.');if(before?.type==='SOURCE_FRAME_V1'&&JSON.stringify(captureSourceFrameParameters(before.params).parent)!==JSON.stringify(captureSourceFrameParameters(after.params).parent)&&(!nativeSourceReplayRepair(preparation.nativeSourceReplay)||JSON.stringify(captureSourceFrameParameters(before.params).placement)!==JSON.stringify(captureSourceFrameParameters(after.params).placement)))throw Error('Source frame editing cannot reparent outside actual explicit repair.');if(before?.type==='PLANE'){const a=captureSourcePlaneParameters(before.params),b=captureSourcePlaneParameters(after.params);if(a.featureId!==b.featureId||a.orientation!==b.orientation||a.datum!==b.datum)throw Error('Principal source identity changed.');}}
         if(!Array.isArray(sketches)||sketches.length>64)throw Error('Invalid source delta.');for(const row of sketches){if(ctx.sketchStorageService.getSketchData(row.faceId)!==row.before)throw superseded();if(row.after===null){if(after!==null||row.faceId!==faceId)throw Error('Foreign source removal.');}else if(!isNativeSourceReplay(preparation.nativeSourceReplay)&&!preparation.sketchOverrides?.some(item=>item.id===row.faceId&&item.data===row.after))throw Error('Source override differs from journal.');}
         if(before===null&&!isNativeSourceReplay(preparation.nativeSourceReplay)&&!sketches.some(row=>row.faceId===faceId&&row.before===null&&typeof row.after==='string'))throw Error('Source creation needs its actual prepared empty source.');
@@ -899,6 +906,7 @@ export function activate(ctx: ApplicationContext) {
       if(target.domain==='linked-part-drawing')return (ctx.projectManager as any).travelLinkedPartDrawingMetadata(args,options);
       throw new Error('Unsupported document metadata history domain.');
     }
+    planProjectionSourceTravel(authoredJournal$.value,args.direction,id=>ctx.sketchStorageService.getSketchData(id));
     const request={revision:args.revision,index:target.index,featureId:target.featureId,direction:args.direction};
     if(target.kind==='selected-profile-source-dimension'){
       if(!selectedProfileSourceDimensionCommands)throw Error('Combined source/region travel is unavailable.');
@@ -910,6 +918,7 @@ export function activate(ctx: ApplicationContext) {
       return selectedProfileSourceDimensionCommands.travelSelectedProfileSourceDimension(args,options,plan);
     }
     if(target.kind==='source-frame'){if(!sourceFrameCommands)throw Error('Source-frame journal is unavailable.');const journal=authoredJournal$.value,plan=planSourceFrameTravel(journal,{document:(ctx.projectService as any).documentGeneration,revision:journal.revision,direction:args.direction,history:modifications$.value.history,readSketch:id=>ctx.sketchStorageService.getSketchData(id),currentSignature:fullTipSignature,currentPointer:modifications$.value.pointer});
+      if((plan.beforeOperation||plan.afterOperation)?.type===SOURCE_PROJECTION_TYPE)return sourceProjectionCommands.travelSourceProjection(args,options,plan);
       if(plan.beforeOperation?.type==='PLANE'&&plan.afterOperation?.type==='PLANE')return principalPlaneCommands.travelPrincipalPlanePlacement(args,options,plan);
       return sourceFrameCommands.travelSourceFrame(args,options,plan);}
     if(target.kind==='source-plane-depth'){
@@ -1681,6 +1690,8 @@ export function activate(ctx: ApplicationContext) {
       retireFiniteCurveSelection=callback;
     });
   Object.assign(ctx.craftService, closedSketchCommands);
+  sourceProjectionCommands=createSourceProjectionCommands(ctx,submitPreparedReplay,epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();});
+  Object.assign(ctx.craftService,sourceProjectionCommands);
   sourceFrameCommands=createSourceFrameCommands(ctx,submitPreparedReplay,epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();});
   Object.assign(ctx.craftService,{inspectSourceFrames:sourceFrameCommands.inspectSourceFrames,createSourceFrame:sourceFrameCommands.createSourceFrame,editSourceFrame:sourceFrameCommands.editSourceFrame,repairSourceFrameParent:sourceFrameCommands.repairSourceFrameParent,inspectSourceFramePoints:sourceFrameCommands.inspectSourceFramePoints});
   sourcePlaneDepthCommands=createSourcePlaneDepthCommands(ctx,submitPreparedReplay,epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();},sourceFrameCommands.editPrincipalSourceDepth);
@@ -1823,9 +1834,11 @@ export function activate(ctx: ApplicationContext) {
       const sourceOperation=needsSourceReplay?ctx.operationService.get('SOURCE_FRAME_V1'):undefined;
       if(needsSourceReplay&&!isRegisteredSourcePlane('SOURCE_FRAME_V1',sourceOperation))throw Error('The genuine source-frame producer changed.');
       const sourceReplay=needsSourceReplay?await createNativeSourceReplay({ctx,history,owner:resources,source:staticSketchStorage,readSketch:ReadSketch,permit:observation?sourceProofPermit:preparation?.nativeSourceReplay,requireCurrent:()=>{requireCurrent(epoch,documentGeneration,service);preparation?.requireCurrent();},expectedRun:sourceOperation?.run,overrideIds:preparation?.sketchOverrides?.map(row=>row.id)||[]}):null;
-      const sketchStorage=sourceReplay?.view||staticSketchStorage;
+      const projectionReplay=await createSourceProjectionReplay({ctx,history,owner:resources,source:sourceReplay?.view||staticSketchStorage,readSketch:ReadSketch,permit:observation?undefined:preparation?.projectionReplay,requireCurrent:()=>{requireCurrent(epoch,documentGeneration,service);preparation?.requireCurrent();}});
+      const sketchStorage=projectionReplay?.view||sourceReplay?.view||staticSketchStorage;
       const registry = ctx.cadRegistry.createEvaluationRegistry(sketchStorage);
       sourceReplay?.bindRegistry(registry);
+      projectionReplay?.bindRegistry(registry);
       const sourceFrames=new Map<string,any>(),observedFrames=new Map<string,number>();
       if(preparation?.sketchSourceFrames) {
         if(!preparation.sketchOverrides||preparation.sketchSourceFrames.length!==preparation.sketchOverrides.length||preparation.sketchSourceFrames.length>64)throw Error('Invalid candidate sketch frame coverage.');
@@ -1841,7 +1854,7 @@ export function activate(ctx: ApplicationContext) {
           if(matches.length>1)throw Error('The candidate sketch plane is ambiguous.');
           if(!matches.length)continue;
           const face=matches[0],index=face.root.originatingOperation;
-          if(!(face.root instanceof MOpenFaceShell)||face.defaultSketchId!==id||registry.findFace(id)!==face||!isRegisteredSourcePlane(history[index]?.type,ctx.operationService.get(history[index]?.type))||
+          if(!(face.root instanceof MOpenFaceShell)||face.defaultSketchId!==id||registry.findFace(id)!==face||!(isRegisteredSourcePlane(history[index]?.type,ctx.operationService.get(history[index]?.type))||history[index]?.type===SOURCE_PROJECTION_TYPE&&isRegisteredSourceProjection(ctx.operationService.get(SOURCE_PROJECTION_TYPE)))||
              observedFrames.has(id)&&observedFrames.get(id)!==index||!sameSketchSaveFrame(frame,sketchBoundaryFrame(face)))throw Error('The candidate sketch source plane changed.');
           const boundary=getSketchBoundaries(face);
           if(!['lines','arcs','circles','nurbses'].every(key=>Array.isArray(boundary[key])&&boundary[key].length===0))throw Error('Referenced sketch boundaries are not supported by this edit.');
@@ -1856,6 +1869,7 @@ export function activate(ctx: ApplicationContext) {
       }
       operationContext.engineEvaluation = resources;
       operationContext.authoredEvaluationHistory = history;
+      if(projectionReplay){projectionReplay.bindExpressions(operationContext.expressionService);operationContext.prepareProjectedSource=projectionReplay.prepare;}
       if(sourceReplay)operationContext.prepareNativeAttachedSource=sourceReplay.prepare;
       const patternReplay = {requestedSeed: null, seed: null};
       operationContext.patternReplay = patternReplay;
@@ -1891,6 +1905,7 @@ export function activate(ctx: ApplicationContext) {
         if (!independentPlane) registry.flushModels();
         let operationResult;
         sourceReplay?.enter(i,operation);
+        projectionReplay?.enter(i,operation);
         try { operationResult=await runRequest(history[i], operationContext, expectedOperation); }
         catch(error) {
           if(error&&typeof error==='object'&&Object.isExtensible(error)){
@@ -1899,7 +1914,7 @@ export function activate(ctx: ApplicationContext) {
           }
           throw error;
         }
-        finally { sourceReplay?.leave(); }
+        finally { projectionReplay?.leave();sourceReplay?.leave(); }
         const {consumed, created}=operationResult;
         if (history[i].type === 'PATTERN_CUT_LINEAR') patternReplay.seed = null;
         requireCurrent(epoch, documentGeneration, service);
@@ -1926,8 +1941,9 @@ export function activate(ctx: ApplicationContext) {
       requireCurrent(epoch,documentGeneration,service);
       preparation?.requireCurrent();
       sourceReplay?.finish(endIndex);
+      const projectionChanges=projectionReplay?.finish(endIndex)||[];
       resources.seal();
-      return {models:Array.from(models).sort((a,b)=>(a.id||'').localeCompare(b.id)), resources,history,registry};
+      return {models:Array.from(models).sort((a,b)=>(a.id||'').localeCompare(b.id)), resources,history,registry,projectionChanges};
     } catch (error) {
       if(error&&typeof error==='object')failedEvaluationHistory.set(error,history);
       resources.close();
@@ -2067,12 +2083,16 @@ export function activate(ctx: ApplicationContext) {
     }
     pipelineTail=pipelineTail.catch(() => {}).then(async () => {
       let committed=false;
-      const preparation: PreparedSketchCommand = modificationCallbacks.get(curr)?.preparation;
+      let preparation: PreparedSketchCommand = modificationCallbacks.get(curr)?.preparation;
       let workspace = null;
       let result = null, previousResources = null, previousCompleteResources = null;
       try {
         requireCurrent(epoch,documentGeneration,service);
         preparation?.requireCurrent();
+        if(preparation&&(hasSourceProjections(requestedHistory)||hasSourceProjections(previousOwnedState.history))){
+          const originalPreparation=preparation,projectionReplay=issueProjectionReplay(ctx,{preparation:originalPreparation,history:requestedHistory,beforeHistory:previousOwnedState.history,requireCurrent:()=>{requireCurrent(epoch,documentGeneration,service);originalPreparation.requireCurrent();}});
+          preparation={...originalPreparation,projectionReplay};
+        }
         result=await evaluatePipeline(requestedHistory,requestedPointer,epoch,documentGeneration,service,preparation,!!(modificationCallbacks.get(curr)?.unresolvedRepairUndo || modificationCallbacks.get(curr)?.parentRepairIndex!==undefined));
         requireCurrent(epoch,documentGeneration,service);
         const evaluatedState={...requestedState,history:result.history};
@@ -2096,6 +2116,12 @@ export function activate(ctx: ApplicationContext) {
           if(workspace)throw Error('Native source propagation must share one prepared workspace.');
           if(changes.length)workspace=ctx.storageService.prepareWrites(changes.map(row=>({key:(service as any).sketchStorageKey(row.faceId),value:row.after})));
           nextJournal=supplementNativeSourceJournal(authoredJournal$.value,nextJournal,changes,nativeSourceReplayDirection(preparation.nativeSourceReplay));
+        }
+        if(preparation?.projectionReplay){
+          const changes=preparedProjectionChanges(preparation.projectionReplay),writes=changes.map(row=>({key:(service as any).sketchStorageKey(row.faceId),value:row.after}));
+          const additional=workspace?writes.filter(row=>workspace.get(row.key)!==row.value):writes;
+          if(additional.length)workspace=workspace?mergePreparedWorkspaceWrites(workspace,additional):ctx.storageService.prepareWrites(additional);
+          nextJournal=supplementProjectionSourceJournal(authoredJournal$.value,nextJournal,changes);
         }
         let nextJournalSignature=callbacks?.operationAppend?nextTipSignature:callbacks?.journalSignature;
         if (!nextJournal && authoredJournal$.value.entries.length) {
@@ -2161,6 +2187,13 @@ export function activate(ctx: ApplicationContext) {
         preparation?.requireCommittedCurrent();
         settleModification(curr);
       } catch (error) {
+        if(preparation?.projectionReplay&&workspace){
+          // Projection source and cache share this actual owner. Retire it
+          // BEFORE settling the command; a cleanup failure cannot disappear
+          // into the legacy finally logger or authorize a successful receipt.
+          const ownedWorkspace=workspace;workspace=null;
+          try{ownedWorkspace.discard();}catch(cleanupCause){error=Object.assign(Error('Projection workspace retirement is unconfirmed.'),{code:'WORKSPACE_CLEANUP_FAILED',committed,cause:cleanupCause,operationError:error});}
+        }
         const failureHistory=result?.history||(error&&typeof error==='object'?failedEvaluationHistory.get(error):null);
         if(error&&typeof error==='object')failedEvaluationHistory.delete(error);
         if (!isCurrent(epoch,documentGeneration,service)) {
@@ -2287,6 +2320,12 @@ export interface CraftHints {
 
 interface CraftService {
   inspectSourceFrameAttachments?:ReturnType<typeof createWorkerPlanarAttachmentReadCommands>['inspectSourceFrameAttachments'];
+  inspectSourceProjections?:ReturnType<typeof createSourceProjectionCommands>['inspectSourceProjections'];
+  inspectSourceProjectionRoots?:ReturnType<typeof createSourceProjectionCommands>['inspectSourceProjectionRoots'];
+  readSourceProjection?:ReturnType<typeof createSourceProjectionCommands>['readSourceProjection'];
+  createSourceProjection?:ReturnType<typeof createSourceProjectionCommands>['createSourceProjection'];
+  repairSourceProjection?:ReturnType<typeof createSourceProjectionCommands>['repairSourceProjection'];
+  removeSourceProjection?:ReturnType<typeof createSourceProjectionCommands>['removeSourceProjection'];
   inspectSourceFrames?:ReturnType<typeof createSourceFrameCommands>['inspectSourceFrames'];
   createSourceFrame?:ReturnType<typeof createSourceFrameCommands>['createSourceFrame'];
   editSourceFrame?:ReturnType<typeof createSourceFrameCommands>['editSourceFrame'];

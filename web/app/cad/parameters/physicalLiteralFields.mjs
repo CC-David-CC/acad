@@ -4,6 +4,7 @@
 const common=['featureId'];
 const generic=['version','unit','engine','engineRevision','featureId'];
 const fields=Object.freeze({
+ SOURCE_PROJECTION_V1:Object.freeze(['version','unit','featureId','source','target','outputs']),
  WORKER_CENTERED_COUNTERSINK_V1:Object.freeze([...generic,'target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId','entryFaceId','kind']),
  WORKER_CENTERED_COUNTERBORE_V1:Object.freeze([...generic,'target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId','entryFaceId','kind']),
  WORKER_CENTERED_BLIND_HOLE_V1:Object.freeze([...generic,'target','producerFeatureId','sourceFeatureId','sourceFaceId','sourceRegionId','entryFaceId','kind']),

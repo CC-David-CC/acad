@@ -1,3 +1,4 @@
+import {SOURCE_PROJECTION_TYPE,captureSourceProjection} from '../../../../modules/engine/source/sourceProjectionIntent.mjs';
 import {captureAuthoredCountersinkIntent} from '../../../../modules/engine/solid/authoredCountersinkIntent.mjs';
 import {captureAuthoredCounterboreIntent} from '../../../../modules/engine/solid/authoredCounterboreIntent.mjs';
 import {PROFILE_EXTENT_TYPE,captureOwnedProfileExtentFeature} from '../../../../modules/engine/solid/ownedProfileExtentFeature.mjs';
@@ -36,6 +37,7 @@ export function hasOnlyUnconsumedSketchHistory(history,faceId){
  const build=data=>{if(!genericCommon(data))return null;try{const spec=requireCadEngineBuild(data.engine,data.engineRevision);return spec.revision===data.engineRevision&&(!genericBuild||genericBuild.id===spec.id&&genericBuild.revision===spec.revision)?spec:null;}catch{return null;}};
  for(const item of history){if(!item||typeof item!=='object')return false;const pd=Object.getOwnPropertyDescriptor(item,'params'),td=Object.getOwnPropertyDescriptor(item,'type');if(!pd?.enumerable||!Object.hasOwn(pd,'value')||!td?.enumerable||!Object.hasOwn(td,'value')||!pd.value||typeof pd.value!=='object'||Array.isArray(pd.value))return false;const p=pd.value,fd=Object.getOwnPropertyDescriptor(p,'featureId');if(!fd?.enumerable||!Object.hasOwn(fd,'value'))return false;const id=fid(fd.value);if(!id||features.has(id))return false;
   if(item.type==='PLANE'){if(!plain(p,['featureId','orientation','depth','datum'])||p.datum!==undefined&&p.datum!==null||p.orientation!==undefined&&!['XY','XZ','ZY'].includes(p.orientation)||p.depth!==undefined&&!numberField(p.depth))return false;const sourceFace=sourcePlaneFaceId(canonicalAuthoredFeatureId(fd.value));features.set(id,{kind:'plane',sourceFace});sourceOwners.set(sourceFace,id);continue;}
+  if(item.type===SOURCE_PROJECTION_TYPE){let data;try{data=captureSourceProjection(p);}catch{return false;}const parent=features.get(String(data.source.featureId));if(!parent||parent.kind!=='plane'||parent.sourceFace!==data.source.faceId||data.source.faceId===faceId)return false;const sourceFace=sourcePlaneFaceId(data.featureId);features.set(id,{kind:'projection-source',sourceFace});sourceOwners.set(sourceFace,id);continue;}
   if(item.type==='SOURCE_FRAME_V1'){
    let data;try{data=captureSourceFrameParameters(p);}catch{return false;}
    if(data.parent?.kind==='native-planar-face'){

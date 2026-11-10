@@ -1,3 +1,4 @@
+import {SOURCE_PROJECTION_TYPE,captureSourceProjection} from '../source/sourceProjectionIntent.mjs';
 import {captureOwnedProfileExtentFeature} from '../solid/ownedProfileExtentFeature.mjs';
 import {captureSourceFrameParameters} from '../source/sourceFrameIntent.mjs';
 import {featureSuppressed} from '../solid/authoredHistoryState.mjs';
@@ -48,6 +49,7 @@ export function selectedProfileHistoryBudget(history,engineRevision){
    if(engine.value==='occ'&&revision.value===engineRevision){if(!featureSuppressed(entry))count+=cost;}
    else incompatible.push(Object.freeze({index:i,type:type.value,engine:engine.value,engineRevision:revision.value}));
   }else if(separateMountTypes.includes(type.value))separateMountFeatures++;
+  else if(type.value===SOURCE_PROJECTION_TYPE)captureSourceProjection(entry.params);
   else if(type.value==='SOURCE_FRAME_V1')captureSourceFrameParameters(entry.params);
   else if(type.value!=='PLANE')unsupported.add(type.value);
  }

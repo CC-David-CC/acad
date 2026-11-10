@@ -1,3 +1,4 @@
+import {assertProjectionSourceReadonly} from 'workbenches/modeler/features/sourceProjection/sourceProjection.operation';
 import {bindSketchConstants} from './sketchConstantResolver';
 import {DelegatingPanTool} from 'sketcher/tools/pan';
 import {Matrix4} from 'three/src/math/Matrix4';
@@ -40,6 +41,7 @@ export class InPlaceSketcher {
   
   enter(face, headless) {
     if (this.exiting) throw new Error('The previous sketch editor is still closing.');
+    assertProjectionSourceReadonly(this.ctx,face);
     assertLegacyGeometry(face, 'Sketching on this generated face');
     const viewer3d = this.ctx.services.viewer;
     const previousCameraMode = viewer3d.getCameraMode();
