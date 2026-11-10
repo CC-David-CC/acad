@@ -3,6 +3,7 @@ No OCCT/production imports; original closed oriented trims, finite half/full
 CIRCLE and LINE supports, shared topology and assigned physical units.
 """
 import collections, math, re
+from fractions import Fraction as Q
 
 def require(value, message):
     if not value: raise ValueError(message)
@@ -73,6 +74,21 @@ def inspect_step(raw,e):
     def sub(a,b):return tuple(x-y for x,y in zip(a,b))
     def dot(a,b):return math.fsum(x*y for x,y in zip(a,b))
     def cross(a,b):return(a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0])
+    # Complete curve-to-face incidence, using represented binary64 dyadics.
+    # The finite artifact domain has cardinal extrusion axes. Refuse an
+    # uncertified tilted support instead of treating endpoint samples as a
+    # certificate for the intervening analytic curve.
+    eps=Q(1e-6)
+    def qv(v):return tuple(Q(x)for x in v)
+    def qdot(a,b):return sum(x*y for x,y in zip(a,b))
+    def parallel(a,b):return cross(qv(a),qv(b))==(0,0,0)
+    def plane_point(p,o,n):
+        d=sub(qv(p),qv(o));nn=qv(n);return qdot(d,nn)**2<=eps*eps*qdot(nn,nn)
+    def radial2(p,o,n):
+        d=sub(qv(p),qv(o));nn=qv(n);return qdot(d,d)-qdot(d,nn)**2/qdot(nn,nn)
+    def radius_incident(rho2,r):
+        r=Q(r);left=rho2+r*r-eps*eps
+        return rho2>=0 and(left<=0 or left*left<=4*r*r*rho2)
     def local(p):return sub(p,e.get('origin',[0,0,0]))
     def vertex(ref):return xyz(rec(ref,'VERTEX_POINT')[1][1])
     def sense(v):require(v in (('enum','T'),('enum','F')),'actual literal orientation');return 1 if v==('enum','T') else -1
@@ -93,7 +109,7 @@ def inspect_step(raw,e):
     for face in faces:
         v=rec(face,'ADVANCED_FACE')[1];bounds=v[1];stype,sv=rec(v[2]);fs=sense(v[3]);require(stype in ('PLANE','CYLINDRICAL_SURFACE'),'actual plane/cylinder faces only');o,z,_=placement(sv[1]);ol=local(o);require(len(bounds)==1,'single finite face loop, no invented hole')
         if stype=='CYLINDRICAL_SURFACE':
-            near(abs(z[2]),1,1e-9);c=one([c for c in cylinders if abs(ol[0]-c['c'][0])<=1e-6 and abs(ol[1]-c['c'][1])<=1e-6 and abs(sv[2]-c['r'])<=1e-6],'source-authenticated cylinder support');key='wall-'+c['id'];require(fs==c['orientation'],'actual original outward/inward cylinder face sense');patches[key]+=1
+            require(z[0]==z[1]==0 and abs(z[2])==1,'actual cardinal cylinder axis, no near-axis inference');c=one([c for c in cylinders if abs(ol[0]-c['c'][0])<=1e-6 and abs(ol[1]-c['c'][1])<=1e-6 and abs(sv[2]-c['r'])<=1e-6],'source-authenticated cylinder support');key='wall-'+c['id'];require(fs==c['orientation'],'actual original outward/inward cylinder face sense');patches[key]+=1
         else:
             if abs(z[2])>1-1e-9:
                 key='bottom' if abs(ol[2])<=1e-6 else 'top';near(ol[2],0 if key=='bottom' else T);require(z[2]*fs*(-1 if key=='bottom' else 1)>0,'actual outward cap orientation')
@@ -109,9 +125,23 @@ def inspect_step(raw,e):
                 p=one([p for p in planes if finite_plane(p) and abs(dot(sub((p['a'][0],p['a'][1],0),ol),z))<=1e-6 and abs(dot(sub((p['b'][0],p['b'][1],0),ol),z))<=1e-6],'source Segment support plane');key='plane-'+p['id'];d=sub(p['b'],p['a']);require(dot(z,(d[1],-d[0],0))*fs>0,'actual outward source Segment plane')
             patches[key]+=1
         for bound in bounds:
-            bt,bv=rec(bound);require(bt in ('FACE_OUTER_BOUND','FACE_BOUND'),'actual face bound');bs=sense(bv[2]);wire=rec(bv[1],'EDGE_LOOP')[1][1];require(0<len(wire)<=512 and len(set(wire))==len(wire),'bounded original edge loop');directed=[];integral=0
+            bt,bv=rec(bound);require(bt in ('FACE_OUTER_BOUND','FACE_BOUND'),'actual face bound');bs=sense(bv[2]);wire=rec(bv[1],'EDGE_LOOP')[1][1];require(0<len(wire)<=512 and len(set(wire))==len(wire),'bounded original edge loop');directed=[];integral=0;face_curves=[]
             for oriented in wire:
-                ev=rec(oriented,'ORIENTED_EDGE')[1];es=sense(ev[4]);edge=ev[3];ee=rec(edge,'EDGE_CURVE')[1];ss=sense(ee[4]);p,q=vertex(ee[1]),vertex(ee[2]);used_vertices.update((ee[1],ee[2]));cgeom=curve(ee[3]);uses[edge].append(es*bs);p,q=(p,q)if es>0 else(q,p);pl,ql=local(p),local(q);directed.append((ee[1]if es>0 else ee[2],ee[2]if es>0 else ee[1]))
+                ev=rec(oriented,'ORIENTED_EDGE')[1];es=sense(ev[4]);edge=ev[3];ee=rec(edge,'EDGE_CURVE')[1];ss=sense(ee[4]);p,q=vertex(ee[1]),vertex(ee[2]);used_vertices.update((ee[1],ee[2]));cgeom=curve(ee[3]);uses[edge].append(es*bs);p,q=(p,q)if es>0 else(q,p);pl,ql=local(p),local(q);directed.append((ee[1]if es>0 else ee[2],ee[2]if es>0 else ee[1]));face_curves.append((cgeom['kind'],edge))
+                if stype=='PLANE':
+                    require(all(plane_point(v,o,z)for v in(p,q)),'ALL actual face vertices incident on actual support plane')
+                    if cgeom['kind']=='LINE':
+                        require(qdot(qv(cgeom['d']),qv(z))==0 and plane_point(cgeom['o'],o,z),'ENTIRE LINE support lies in actual face plane')
+                    else:
+                        require(parallel(cgeom['z'],z)and plane_point(cgeom['o'],o,z),'ENTIRE CIRCLE support plane equals actual face plane')
+                        if key in('top','bottom'):require(abs(Q(local(cgeom['o'])[2])-Q(T if key=='top'else 0))<=eps,'ENTIRE cap circle at source finite axial level')
+                elif cgeom['kind']=='LINE':
+                    require(parallel(cgeom['d'],z)and pl[:2]==ql[:2],'finite cylinder LINE is an actual generator, never a secant between on-cylinder vertices')
+                    require(radius_incident(radial2(cgeom['o'],o,z),sv[2])and all(radius_incident(radial2(v,o,z),sv[2])for v in(p,q)),'ENTIRE generator support and actual endpoints on actual cylinder')
+                else:
+                    require(parallel(cgeom['z'],z),'ENTIRE cylinder CIRCLE plane perpendicular to actual cylinder axis')
+                    allowance=eps-abs(Q(cgeom['r'])-Q(sv[2]));require(allowance>=0 and radial2(cgeom['o'],o,z)<=allowance*allowance,'ENTIRE CIRCLE radial support on actual cylinder within one existing incidence budget')
+                    require(min(abs(Q(local(cgeom['o'])[2])),abs(Q(local(cgeom['o'])[2])-Q(T)))<=eps,'actual cylinder circular trim belongs to a finite source end')
                 for point in (p,q):
                     d=sub(point,cgeom['o'])
                     if cgeom['kind']=='LINE':require(math.hypot(*cross(d,cgeom['d']))<=1e-6,'complete LINE endpoint support')
@@ -134,6 +164,10 @@ def inspect_step(raw,e):
                         if not c.get('full'):require((pp[c['halfAxis']]-c['c'][c['halfAxis']])*c['halfSign']>=-1e-6,'complete finite cylinder endpoint sector')
                 integral+=contribution
             require(all(a[1]==b[0]for a,b in zip(directed,directed[1:]+directed[:1])),'actual entity-identity closed wire; no proximity welding')
+            if stype=='CYLINDRICAL_SURFACE':
+                lines=[edge for kind,edge in face_curves if kind=='LINE'];circles=[edge for kind,edge in face_curves if kind=='CIRCLE'];require(len(face_curves)==4 and len(lines)==len(circles)==2 and len(set(circles))==2 and len(set(lines))==(1 if c.get('full')else 2),'complete finite prism cylinder trim: two end arcs and actual generator uses, no spur/extra revolution')
+            elif key in('top','bottom'):require(len(face_curves)==len(planes)+len(cylinders),'complete cap source-curve census')
+            else:require(len(face_curves)==4 and all(kind=='LINE'for kind,edge in face_curves),'complete source Segment swept rectangle')
             if key in ('top','bottom'):cap_areas[key]=integral*bs
     require(set(patches)=={'top','bottom'}|{'plane-'+p['id']for p in planes}|{'wall-'+c['id']for c in cylinders} and all(v==1 for v in patches.values()),'every original finite source patch exactly once')
     require(all(len(v)==2 and v[0]==-v[1]for v in uses.values()),'all original BRep edges exactly two opposite face uses')
