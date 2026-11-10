@@ -13,7 +13,7 @@ TRAVELS=['point-create-undo','point-create-redo','trim-undo','trim-redo','ray-si
 CASES=['segment-cross','segment-endpoint','finite-exclusion','separated-parallel','linear-overlap','linear-contact','segment-circle','segment-circle-tangent','segment-circle-empty','circle-circle','circle-circle-tangent','circle-near-inside','circle-near-outside','circle-coincident','circle-nested','circle-disjoint','arc-quarter','arc-major','arc-seam','arc-complementary-contact','circle-quarter-overlap','native-census-uncertainty','tiny-proper-positive','source-incidence-uncertainty','full-arc-required-open']
 REVERSE=['segment-cross','segment-circle','circle-circle','arc-quarter']
 REFUSALS={'proper-arc-collapsed':'INVALID_ARC_BRANCH','opposite-collapse':'CURVE_ENDPOINT_DEGENERATE','fixed-target-refusal':'COORDINATE_CONFLICT','unknown-query-does-not-consume':'STALE_CURVE_QUERY','wrong-action-domain':'CURVE_QUERY_DOMAIN_MISMATCH','foreign-own-face-root':'FINITE_CURVE_SOURCE_UNSUPPORTED_TARGET','open-profile-source-policy':'OPEN_OR_AMBIGUOUS_PROFILE','downstream-overlapping-profile':'OPEN_OR_AMBIGUOUS_PROFILE','old-ticket-after-source-edit':'STALE_CURVE_QUERY','old-ticket-after-undo-restored-bytes':'STALE_CURVE_QUERY','old-ticket-after-parameter-edit':'STALE_CURVE_QUERY',**{'old-ticket-after-open-'+s:'STALE_CURVE_QUERY' for s in 'ABC'}}
-REFUSALS.update({'unknown-event-does-not-consume':'CURVE_QUERY_SELECTION_MISMATCH','old-ticket-after-new-query':'STALE_CURVE_QUERY'})
+REFUSALS.update({'unknown-event-does-not-consume':'CURVE_QUERY_SELECTION_MISMATCH','parameter-noop-retains-query':'CURVE_QUERY_SELECTION_MISMATCH','old-ticket-after-new-query':'STALE_CURVE_QUERY'})
 LOCAL=['CONTRACT.md','README.md','cases.mjs','example.mjs','source-custody.mjs','desktop-driver.mjs','check.py','query_math.py']
 IMPORTED={('core','test/native-cad-container/archive_oracle.py'),('desktop','test/agent-cad-corpus/sweep/signed-harness.mjs'),('desktop','test/agent-cad-corpus/strict-join/oracle.mjs')}
 BUDGET=F(1,20000000)
@@ -186,13 +186,20 @@ def check(directory,source,host_source,acceptance):
     # Thus the intended candidate has no simple positive-area boundary without
     # assuming the free D stayed at(22,3), and no source candidate is fabricated.
     require(dot(sub(point(B),point(A)),sub(point(B),point(A)))==16,'positive fixed base, forced exact reverse right support')
+    noop=r['parameterNoop'];require(noop['result']['changed'] is False and noop['before']==noop['after'],'parameter no-op preserves the complete prior state')
+    typed_first=one([q for q in r['queries'] if q['label']=='typed-radius-one'],'actual typed query before no-op')
+    probe=one([x for x in r['refusals'] if x['label']=='parameter-noop-retains-query'],'actual retained query probe')
+    require(typed_first['before']==noop['before']==probe['before'],'no-op and retained probe use the actual issued query state')
+    noop_cmd=r['commands'][noop['noopCommandIndex']];probe_cmd=r['commands'][noop['probeCommandIndex']]
+    require(noop_cmd['command']=='apply-physical-bindings' and noop_cmd['args']=={'revision':noop['before']['parameters']['revision'],'changes':[],'definitions':[{'name':'boundaryR','dimension':'length','expression':'mm(1)'}]} and noop_cmd['result']==noop['result'],'actual exact no-op command and receipt')
+    require(probe_cmd['command']=='edit-closed-sketch-endpoint' and probe_cmd['args']['queryId']==typed_first['result']['queryId'] and probe_cmd['args']['eventId']=='not-an-issued-event' and all(e['eventId']!='not-an-issued-event' for e in typed_first['result']['events']) and probe_cmd['error']['code']==probe['error']['code'] and probe_cmd['error']['selectionDisposition']==probe['error']['selectionDisposition'],'probe binds actual current query and a genuinely unissued event')
     for row in r['refusals']:
         if row.get('kind')=='source-unsupported':
             require(row['label']=='foreign-own-face-root' and row['result']['status']=='unsupported' and row['result']['reason']['code']==REFUSALS[row['label']] and row['result']['reason']['layer']=='source','actual explicit source-layer unsupported result, not an invented exception');refusal_state(row);continue
         err=row['error'];require(err and err['code']==REFUSALS[row['label']] and not err['committed'] and not err['possiblyCommitted'],'actual precise noncommitted refusal');refusal_state(row)
         if row['label']=='opposite-collapse':require(err['failureLayer']=='preflight' and err['selectionDisposition']=='retained','actual pure preflight retention')
         if row['label']=='unknown-query-does-not-consume' or row['label'].startswith('old-ticket-after-'):require(err['selectionDisposition']=='unavailable','no fabricated ticket recognition after actual transaction/Open retirement')
-        if row['label']=='unknown-event-does-not-consume':require(err['selectionDisposition']=='retained','recognized current query survives an unknown event preflight')
+        if row['label'] in ('unknown-event-does-not-consume','parameter-noop-retains-query'):require(err['selectionDisposition']=='retained','recognized current query survives an unknown event preflight')
         if row['label']=='wrong-action-domain':require(err['selectionDisposition']=='retained','pure domain mismatch keeps exact still-current receipt')
     for row in r['appends']:
         before=json_source(row['before'],row['faceId']);after=json_source(row['after'],row['faceId']);id=row['result']['primitive']['id'];added=one([o for o in after['objects'] if o['id']==id],'actual new primitive');require(added['type']==row['kind'] and added['data']==row['data'] and added['role']==row['role'],'actual public append intent');after['objects']=[o for o in after['objects'] if o['id']!=id];require(after==before,'all prior source untouched by append');require(row['after']['capture']['native']['counters']==row['before']['capture']['native']['counters'],'no authored counter consumed by primitive edit')
