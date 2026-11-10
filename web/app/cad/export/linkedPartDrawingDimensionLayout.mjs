@@ -107,9 +107,10 @@ function port(start,r){
  return null;
 }
 
-export function layoutDrawingDimensions({sheet,dimensions,labelBoxes,captionBoxes,geometrySegments,geometryBounds,existingLeaders}){
+export function layoutDrawingDimensions({sheet,dimensions,labelBoxes,captionBoxes,geometrySegments,geometryBounds,existingLeaders,formBoxes}){
  if(!sheet||![sheet.width,sheet.height].every(finite)||!Array.isArray(dimensions)||dimensions.length>LIMIT.dimensions||!Array.isArray(labelBoxes)||!Array.isArray(captionBoxes)||labelBoxes.length+captionBoxes.length>LIMIT.boxes||![...labelBoxes,...captionBoxes].every(box)||!Array.isArray(geometrySegments)||geometrySegments.length>200024||geometrySegments.some(s=>!Array.isArray(s)||s.length!==2||!s.every(point))||!Array.isArray(geometryBounds)||geometryBounds.length>12||!geometryBounds.every(box)||!Array.isArray(existingLeaders)||existingLeaders.length>442||existingLeaders.some(s=>!Array.isArray(s)||s.length!==2||!s.every(point)))resource('Dimension layout inputs exceed their bounded paper domain.');
- const budget={used:0},exact=predicates(budget),result=new Map(),lines=[...existingLeaders],leaderStrokes=[],identities=new Set();let outputSegments=0;
+ if(!Array.isArray(formBoxes)||formBoxes.length>6||!formBoxes.every(b=>box(b)&&labelBoxes.includes(b)))resource('Dimension layout requires the actual already-reserved requirement frames.');
+ const budget={used:0},exact=predicates(budget),result=new Map(),lines=[...existingLeaders],leaderStrokes=[],identities=new Set(),forms=new Set(formBoxes);let outputSegments=0;
  if(!dimensions.length)return[];
  const geometryIndex=segmentIndex(geometrySegments,exact.charge);
  const reserveStroke=segment=>{const b=boxOf(segment);leaderStrokes.push({min:b.min.map(n=>n-.25),max:b.max.map(n=>n+.25)});};
@@ -154,13 +155,15 @@ export function layoutDrawingDimensions({sheet,dimensions,labelBoxes,captionBoxe
     const root=tip.map((n,i)=>n+u[i]*direction*2),points=[root.map((n,i)=>n+normal[i]*.65),tip,root.map((n,i)=>n-normal[i]*.65)];paths.push({role:'arrowhead',points});
    }
    if(paths.some(p=>p.points.some(q=>!inSheet(q)))){reason='DIMENSION_LANE_OUTSIDE_SHEET';continue;}
-   if(paths.some(p=>p.points.slice(1).some((q,i)=>[...others,row.labelBox].some(r=>exact.rectangle(p.points[i],q,r))))){reason='DECLARED_TEXT_STROKE_CONFLICT';continue;}
+   if(paths.some(p=>p.points.slice(1).some((q,i)=>[...others,row.labelBox].some(r=>exact.rectangle(p.points[i],q,r,forms.has(r)?2.25:.125))))){reason='DECLARED_TEXT_STROKE_CONFLICT';continue;}
    if(paths.filter(p=>p.role==='dimension-line').some(p=>lines.some(line=>exact.crossing(p.points[0],p.points[1],line[0],line[1])))){reason='DIMENSION_LINE_CROSSING';continue;}
    const geometryCrossing=paths.filter(p=>p.role==='dimension-line').some(p=>geometryIndex.some(boxOf(p.points),segment=>exact.crossing(p.points[0],p.points[1],segment[0],segment[1])));
    if(geometryCrossing){reason='PROJECTED_GEOMETRY_LINE_CROSSING';continue;}
    const projection=center.reduce((n,x,i)=>n+(x-q0[i])*u[i],0),start=q0.map((n,i)=>n+u[i]*Math.max(0,Math.min(length,projection))),target=port(start,row.labelBox);
    if(target){
-    const obstacles=[...others,...leaderStrokes];
+    // Existing requirement-frame acceptance reserves >=2.125mm from strokes;
+    // preserve it after deferred dimension planning, with a paper gutter.
+    const obstacles=[...others.map(b=>forms.has(b)?{min:b.min.map(n=>n-2.25),max:b.max.map(n=>n+2.25)}:b),...leaderStrokes];
     if(obstacles.length+1>LIMIT.boxes)resource('Dimension leader obstacles exceed their bounded inventory.');
     try{
      const points=routeDrawingLeader(start,target.end,row.labelBox,target.side,obstacles,sheet,budget);

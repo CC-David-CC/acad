@@ -159,7 +159,7 @@ export function renderLinkedPartDrawingSvg({definition,read}) {
   const requirementForms=renderDrawingRequirementForms({definition:d,observation:o,views:read.views,geometryBounds,strokeBounds,labelBoxes,captionBoxes});
   paths.push(...requirementForms.paths);annotations.push(...requirementForms.annotations);warnings.push(...requirementForms.warnings);strokeBounds.push(...requirementForms.strokeBounds);labelBoxes.push(...requirementForms.labelBoxes);
   if(requirementForms.warnings.length)status='unresolved';
-  const dimensionLayout=layoutDrawingDimensions({sheet:d.sheet,dimensions:dimensionRows,labelBoxes,captionBoxes,geometrySegments,geometryBounds,existingLeaders:[...annotationLeaders,...requirementForms.leaderSegments]});
+  const dimensionLayout=layoutDrawingDimensions({sheet:d.sheet,dimensions:dimensionRows,labelBoxes,captionBoxes,geometrySegments,geometryBounds,existingLeaders:[...annotationLeaders,...requirementForms.leaderSegments],formBoxes:requirementForms.labelBoxes});
   for(let i=0;i<dimensionRows.length;i++){
     const row=dimensionRows[i],placed=dimensionLayout[i],attrs=`data-dimension-id="${escape(row.dimensionId)}" data-dimension-layout="${placed.paths?'aligned-v1':'uncertain-original-v1'}" data-dimension-layout-status="${placed.status}"${placed.reason?' data-dimension-layout-reason="'+placed.reason+'"':''}`;
     if(placed.paths){
