@@ -15,6 +15,8 @@ import {runSketchSolve, SketchSolveOptions} from './client';
 import {captureDrivingDimensionIntent,captureDrivingDimensionReply} from './drivingDimensionTarget.mjs';
 import {captureEllipseParameters,captureEllipseEditIntent} from '../shapes/ellipseRecord.mjs';
 import {capturePointDistanceIntent} from './pointDistanceEnvelope.mjs';
+import {captureFiniteCurveSourceRequest,captureFiniteCurveSourceReceipt} from './finiteCurveSourceEnvelope.mjs';
+import type {FiniteCurveSourceReceipt} from './finiteCurveSourceEnvelope.mjs';
 
 let transitionOutstanding=0;
 const MAX_TRANSITIONS=2;
@@ -42,6 +44,23 @@ function captureOptions(options: SketchSolveOptions) {
   if(result.signal!==undefined)try{Object.getOwnPropertyDescriptor(AbortSignal.prototype,'aborted').get.call(result.signal)}catch{throw Error('Invalid cancellation signal.');}
   if(result.valid){const valid=result.valid;result.valid=()=>valid()===true;}
   return Object.freeze(result);
+}
+// Each call uses runSketchSolve's own newly created, single-request Worker and
+// acknowledged termination. Call twice for independent original-source proof;
+// never reuse a decoded workspace or accept these receipts as edit authority.
+export function runFiniteCurveSourceExtraction(workerUrl:string,value:unknown,options:SketchSolveOptions={}):Promise<FiniteCurveSourceReceipt>{
+ const request=captureFiniteCurveSourceRequest(value),opts=captureOptions(options);
+ return runSketchSolve(workerUrl,Object.freeze({task:'sketch-finite-curve-source-extract',...request}),opts).then(result=>{
+  if(opts.signal?.aborted||opts.valid&&opts.valid()!==true)throw new DOMException('Finite source preparation cancelled','AbortError');
+  return captureFiniteCurveSourceReceipt(result,request.revision);
+ });
+}
+export function verifyFiniteCurveSourceExtraction(workerUrl:string,value:unknown,options:SketchSolveOptions={}):Promise<FiniteCurveSourceReceipt>{
+ const request=captureFiniteCurveSourceRequest(value,true),opts=captureOptions(options);
+ return runSketchSolve(workerUrl,Object.freeze({task:'sketch-finite-curve-source-verify',...request}),opts).then(result=>{
+  if(opts.signal?.aborted||opts.valid&&opts.valid()!==true)throw new DOMException('Finite source verification cancelled','AbortError');
+  return captureFiniteCurveSourceReceipt(result,request.revision);
+ });
 }
 // Capture only bounded immutable plain data before runSketchSolve can yield or
 // queue on its shared lock. This function is internal and does not publish.

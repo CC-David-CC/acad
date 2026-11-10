@@ -17,6 +17,12 @@ self.onmessage = async event => {
   const revision = typeof request?.revision === 'string' ? request.revision : '';
   try {
     if (request && Object.prototype.hasOwnProperty.call(request, 'task')) {
+      if(request.task==='sketch-finite-curve-source-extract'||request.task==='sketch-finite-curve-source-verify'){
+        const {extractFiniteCurveSource,verifyFiniteCurveSource}=require('./finiteCurveSourceExtraction');
+        const {task,...payload}=request;
+        self.postMessage(await (task==='sketch-finite-curve-source-extract'?extractFiniteCurveSource(payload):verifyFiniteCurveSource(payload)));
+        return;
+      }
       if(['sketch-transition-offset','sketch-transition-verify-offset','sketch-offset-inspection'].includes(request.task)){const {changeSketchOffset,verifySketchOffset,inspectSketchOffsets}=require('./offsetTransition');const {task,...payload}=request;self.postMessage(task==='sketch-transition-offset'?changeSketchOffset(payload):task==='sketch-transition-verify-offset'?verifySketchOffset(payload):inspectSketchOffsets(payload));return;}
       if(request.task==='sketch-transition-tangency'||request.task==='sketch-transition-verify-tangency'||request.task==='sketch-transition-verify-tangency-travel'){const {changeTangency,verifyTangencyCandidate,verifyTangencyTravelBoundary}=require('./tangencyTransition');const {task,...payload}=request;self.postMessage(task==='sketch-transition-tangency'?changeTangency(payload):task==='sketch-transition-verify-tangency'?verifyTangencyCandidate(payload):verifyTangencyTravelBoundary(payload));return;}
       if(request.task==='sketch-transition-length-family'||request.task==='sketch-transition-verify-length-family'||request.task==='sketch-transition-verify-length-family-travel'){const {changeLengthFamily,verifyLengthFamilyCandidate,verifyLengthFamilyTravelBoundary}=require('./lengthFamilyTransition');const {task,...payload}=request;self.postMessage(task==='sketch-transition-length-family'?changeLengthFamily(payload):task==='sketch-transition-verify-length-family'?verifyLengthFamilyCandidate(payload):verifyLengthFamilyTravelBoundary(payload));return;}
