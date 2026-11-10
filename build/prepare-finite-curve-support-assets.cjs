@@ -7,7 +7,7 @@ const DEFAULT_OUTPUT=path.join(ROOT,'.build/finite-curve-support-assets');
 const DEFAULT_ENTRY=path.join(ROOT,'.build/finite-curve-support-entry.mjs');
 // Actual reviewed common query-only bootstrap; all normal cohort guards use
 // this same source identity. Native pair identities remain cohort-specific.
-const BOOTSTRAP_SHA='9254d17d4e73c83f12e3ed748c2fcabfd914faa2374b20b36eb55b093c7736f3';
+const BOOTSTRAP_SHA='982b1961d256843e81d90d74929b389c95600232c5f2188cc286d17847c1ac3a';
 const FORMAT='finite-curve-support-component/1';
 const JS_SHA='479f0620b6dfe131dac05131a3798fc533e05a2bd11e8074ef240284f61bbe86';
 const WASM_SHA='746da919c8457e98daa821fae98c62c0a6c9ad1acafd1c3d5412e0207d6b6325';

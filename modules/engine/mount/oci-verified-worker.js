@@ -839,9 +839,13 @@ self.onmessage = async event => {
       booleanHistoryMode=msg.booleanHistory===1;if(booleanHistoryMode&&!edgeTreatmentMode)bad('Boolean history requires the owned mechanical runtime');
       if(msg.throughHoles!==undefined&&msg.throughHoles!==1)bad('Unsupported through-hole version');
       throughHoleMode=msg.throughHoles===1;if(throughHoleMode&&!booleanHistoryMode)bad('Through holes require owned Boolean history');
-      const exactModule=await import(new URL('./exactMeshVolume.mjs',self.location.href));
-      if(typeof exactModule.measureExactSignedMeshVolume!=='function'||exactModule.MAX_EXACT_VOLUME_TRIANGLES!==100000)bad('Exact mesh integral module unavailable');
-      exactSignedMeshVolume=exactModule.measureExactSignedMeshVolume;
+      // Source-only curve queries never construct or measure a mesh. Their
+      // closed Worker asset graph therefore does not include the mesh helper.
+      if(!finiteCurveSupportMode){
+        const exactModule=await import(new URL('./exactMeshVolume.mjs',self.location.href));
+        if(typeof exactModule.measureExactSignedMeshVolume!=='function'||exactModule.MAX_EXACT_VOLUME_TRIANGLES!==100000)bad('Exact mesh integral module unavailable');
+        exactSignedMeshVolume=exactModule.measureExactSignedMeshVolume;
+      }
       if(msg.linearHolePatterns!==undefined&&msg.linearHolePatterns!==1)bad('Unsupported linear hole pattern version');
       linearHolePatternMode=msg.linearHolePatterns===1;if(linearHolePatternMode&&!throughHoleMode)bad('Linear patterns require the owned through-hole runtime');
       if(msg.revolve!==undefined&&msg.revolve!==1)bad('Unsupported revolution version');
