@@ -32,5 +32,5 @@ export function convertLengthMeasurementById(viewer,args,options={}){
 }
 
 // Same native preparation/checkpoint as existing human length-role gestures.
-export function createReferenceLengthMeasurement(viewer,segment,beforeCommit){if(!segment||segment.TYPE!=='Segment')throw Error('Choose a current Segment.');return perform(viewer,{action:'create',segmentId:segment.id},beforeCommit);}
+export function createReferenceLengthMeasurement(viewer,segment,beforeCommit){if(!segment||segment.TYPE!=='Segment')throw Error('Choose a current Segment.');const rows=inspectLengthMeasurementModel(viewer).filter(r=>r.segmentId===segment.id&&r.role==='reference'&&!r.reason);if(rows.length!==1)throw Error('Choose a current reference-only Segment; existing driving lengths retain their own role.');if(!rows[0].measurementId&&viewer.dimLayer.objects.length>=1024)throw Object.assign(Error('Reference ruler count exceeds1024.'),{code:'RESOURCE_LIMIT'});return perform(viewer,{action:'create',segmentId:segment.id},beforeCommit);}
 export function removeReferenceLengthMeasurement(viewer,dimension,beforeCommit){if(!dimension||dimension.TYPE!=='LinearDimension'||!viewer.dimLayer.objects.includes(dimension))throw Error('Choose a current native reference ruler.');return perform(viewer,{action:'remove',measurementId:dimension.id},beforeCommit);}
