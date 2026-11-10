@@ -17,6 +17,24 @@ self.onmessage = async event => {
   const revision = typeof request?.revision === 'string' ? request.revision : '';
   try {
     if (request && Object.prototype.hasOwnProperty.call(request, 'task')) {
+      if(request.task==='sketch-finite-curve-certificate'){
+        const {captureFiniteCurveCertificateRequest,captureFiniteCurveCertificateReply}=require('./finiteCurveCertificateEnvelope.mjs');
+        const {verifyFiniteCurveCandidates}=require('../../../../modules/engine/mount/finiteCurveFiniteCertificate.mjs');
+        const {failureCause}=require('../constr/admissionCause.mjs');
+        const {task,...payload}=request;
+        try{
+          const original=captureFiniteCurveCertificateRequest(payload);
+          const certificate=verifyFiniteCurveCandidates(original.curves,original.raw,original.domain);
+          self.postMessage(captureFiniteCurveCertificateReply({revision:original.revision,ok:true,certificate},original));
+        }catch(error){
+          const cause=failureCause(error);
+          self.postMessage({revision,ok:false,error:{
+            code:typeof error?.code==='string'&&error.code.length>0&&error.code.length<=64?error.code:'FINITE_CURVE_CERTIFICATE_FAILED',
+            message:typeof error?.message==='string'?error.message.slice(0,512):'Finite-curve mathematical verification failed.',
+            ...(cause?{cause}:{})}});
+        }
+        return;
+      }
       if(request.task==='sketch-finite-curve-source-extract'||request.task==='sketch-finite-curve-source-verify'){
         const {extractFiniteCurveSource,verifyFiniteCurveSource}=require('./finiteCurveSourceExtraction');
         const {task,...payload}=request;

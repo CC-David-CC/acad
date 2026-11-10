@@ -17,6 +17,7 @@ import {captureEllipseParameters,captureEllipseEditIntent} from '../shapes/ellip
 import {capturePointDistanceIntent} from './pointDistanceEnvelope.mjs';
 import {captureFiniteCurveSourceRequest,captureFiniteCurveSourceReceipt} from './finiteCurveSourceEnvelope.mjs';
 import type {FiniteCurveSourceReceipt} from './finiteCurveSourceEnvelope.mjs';
+import {captureFiniteCurveCertificateRequest,captureFiniteCurveCertificateReply} from './finiteCurveCertificateEnvelope.mjs';
 
 let transitionOutstanding=0;
 const MAX_TRANSITIONS=2;
@@ -60,6 +61,15 @@ export function verifyFiniteCurveSourceExtraction(workerUrl:string,value:unknown
  return runSketchSolve(workerUrl,Object.freeze({task:'sketch-finite-curve-source-verify',...request}),opts).then(result=>{
   if(opts.signal?.aborted||opts.valid&&opts.valid()!==true)throw new DOMException('Finite source verification cancelled','AbortError');
   return captureFiniteCurveSourceReceipt(result,request.revision);
+ });
+}
+// Exact rational arithmetic and candidate/domain proofs run only inside the
+// disposable Worker. Main retains/captures the original bounded tuple and reply.
+export function runFiniteCurveCertificate(workerUrl:string,value:unknown,options:SketchSolveOptions={}){
+ const original=captureFiniteCurveCertificateRequest(value),opts=captureOptions(options);
+ return runSketchSolve(workerUrl,Object.freeze({task:'sketch-finite-curve-certificate',...original}),opts).then(result=>{
+  if(opts.signal?.aborted||opts.valid&&opts.valid()!==true)throw new DOMException('Finite certificate cancelled','AbortError');
+  return captureFiniteCurveCertificateReply(result,original);
  });
 }
 // Capture only bounded immutable plain data before runSketchSolve can yield or
