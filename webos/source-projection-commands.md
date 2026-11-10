@@ -1,0 +1,7 @@
+# Associative source projection commands
+
+SOURCE ONLY, unbuilt/unexecuted. registerSourceProjectionCommands uses the existing host scope/disposer and exposes current source discovery, genuine Worker root eligibility, validated readonly references, create, same-source explicit repair and tip-only removal. No raw sketch/frame/geometry/proof flag is accepted. Full Core path/transaction owns source and cache publication; save is separate.
+
+Example: examples/associative-source-projection.mjs. It uses actual append IDs and public discovery. World XYz0 projection supports actual nongenerated Segments and parallel-plane Circles with certified50pm Euclidean error, including general in-plane rotations. Circle tilt, collapse, missing/stale/generated/unknown targets refuse. Direct projected-source editing is readonly. No Arc/Ellipse/BRep/projection-chain/consumed-profile or new Native capability is claimed.
+
+Core branch feature/associative-source-projection-20261109 contains the exact finite contract and source handoff. A complete signed whole driver and independent after-whole archive/equation/DXF oracle remain to be prepared/reviewed; this source is not qualified. Index has only the actual import and host.onDispose registration, using the existing rectangle.target(). All command descriptions are short source literals, and schemas are bounded small identity records; actual registration/build remains unexecuted.

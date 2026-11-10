@@ -1,3 +1,4 @@
+import {registerSourceProjectionCommands} from './source-projection-commands.mjs';
 import {registerProfileExtentCommands} from './profile-extent-commands.mjs';
 import {registerViewCommands} from './view-commands.mjs';
 import {registerReferenceCommands} from './reference-commands.mjs';
@@ -245,6 +246,7 @@ export function mount(host){
  if(host.commands)host.onDispose(registerSourcePlaneDepthCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerPrincipalPlanePlacementCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSourceFrameCommands(host,()=>rectangle.target()));
+ if(host.commands)host.onDispose(registerSourceProjectionCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSolidPointCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerViewCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
