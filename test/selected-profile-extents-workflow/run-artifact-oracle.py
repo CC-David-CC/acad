@@ -13,7 +13,7 @@ FILES=[
  ('run-artifact-oracle.py','check.py','mesh_oracle.py','svg_oracle.py','step_oracle.py','negative_archive.py')
 ]+['test/library-validation/'+name for name in
  ('cgal_evidence.py','cylindrical_surface_certificate.py','planar_coverage.py','planar_patch_certificate.py')
-]+['test/native-cad-container/archive_oracle.py']
+]+['test/native-cad-container/archive_oracle.py','test/drawing-dimension-oracle.py']
 
 def sha(data):return hashlib.sha256(data).hexdigest()
 def git(*args):return subprocess.run(['git','-C',str(ROOT),*args],capture_output=True,check=True).stdout
