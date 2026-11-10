@@ -7,7 +7,11 @@ export function settleScopedCommand(promise,{signal,valid}) {
  return new Promise((resolve,reject)=>{
   let done=false,timer,registrationAttempted=false;
   const current=()=>{try{return !signal.aborted&&valid()===true}catch{return false}};
-  const abort=()=>finish('rejected',new DOMException('Modeling command was cancelled or its outcome is unavailable.','AbortError'));
+  // The supplied promise was already started before this wrapper was entered.
+  // Losing the document/window lifetime cannot prove whether that operation
+  // published; callers must reconcile before retrying a possible mutation.
+  const cancellation=receipt=>{const error=new DOMException('Modeling command was cancelled or its outcome is unavailable.','AbortError');Object.defineProperty(error,ownFlag(receipt,'committed')?'committed':'possiblyCommitted',{value:true,enumerable:true});return error;};
+  const abort=()=>finish('rejected',cancellation(null));
   function finish(kind,value){
    if(done)return;done=true;let cleanup=null;
    if(timer!==undefined){const held=timer;timer=undefined;try{clearInterval(held)}catch(cause){cleanup={cause}}}
@@ -20,7 +24,7 @@ export function settleScopedCommand(promise,{signal,valid}) {
    }else if(kind==='rejected')reject(value);else resolve(value);
   }
   // Observe even a rejected input before registration invokes caller code.
-  Promise.resolve(promise).then(value=>current()?finish('fulfilled',value):abort(),value=>finish('rejected',value));
+  Promise.resolve(promise).then(value=>current()?finish('fulfilled',value):finish('rejected',cancellation(value)),value=>finish('rejected',value));
   if(!current()){abort();return}
   registrationAttempted=true;try{signal.addEventListener('abort',abort,{once:true})}catch(cause){finish('rejected',cause);return}
   // A custom registration hook can abort synchronously. Never start its timer
