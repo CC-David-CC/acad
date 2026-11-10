@@ -49,3 +49,26 @@ baselines only after known Files writes. Independent source review and grouped
 E2E remain required. Legacy prepareHostSave still exists for other internal
 callers and is not claimed globally free of copying. Cooperative capture still
 walks authored data on Main; peak memory and responsiveness require measurement.
+
+## Independent source review and explicit limitation
+
+Read-only review through Core e8185f5a and Host5c4cd6c0a reported no remaining
+confirmed source blocker. Source corrections preserve final JSON fragment
+surrogate pairs, fence cached responses after reentrant caller validity checks,
+retain accepted-source inspection beside stable wizard drafts, and inspect the
+live surfacing count without serializing the scene. This is not runtime proof.
+
+The saved-content baseline shares the document codec Worker. A physical codec
+failure (or existing Host cleanup after archive-rebase failure) loses that
+Worker's baseline. Cache owner/availability checks then report unknown/dirty;
+they never return stale clean. The known Files write remains committed.
+Reopen/resave restores the baseline. A separate persistent comparison owner or
+an archive-reuse retirement API that preserves baseline would improve liveness;
+this packet does not claim that improvement or resource-fault qualification.
+
+Grouped acceptance must additionally place astral Unicode at a final16384-unit
+JSON-fragment boundary, verify legacy JSON bytes and fresh reopen independently,
+exercise Undo-to-saved, source change during comparison, cached validity callback
+changes, wizard/history review inspect versus close/save readiness, nonempty
+surfacing count, earlier-save/newer-edit, and candidate cancellation. No cancelled
+filesystem-race or foreign-account probes are authorized by this source packet.
