@@ -41,8 +41,8 @@ export function verifyFiniteCurveCandidates(curvesValue,rawValue,domainValue={ki
   return freeze(result);
  }
  const uncertain=(reason,nativeIndex=null)=>{if(!FINITE_CURVE_CERTIFICATE_UNCERTAIN_REASONS.includes(reason))throw Error('Unknown mathematical uncertainty reason.');return finish({status:'uncertain',reason,nativeIndex});};
- // These checks refuse inherited ambiguity; they do not turn a drawing
- // threshold or atan2 into an exact equality or finite-root predicate.
+ // The prepared raw Arc tag is proper-only; these mathematical checks do not
+ // grant source-branch authority or turn atan2 into a finite-root predicate.
  for(let i=0;i<original.length;i++){
   const c=original[i],s=input.curves[i].curve,b=raw.bases[i];
   if(c.kind==='segment'){
@@ -50,7 +50,6 @@ export function verifyFiniteCurveCandidates(curvesValue,rawValue,domainValue={ki
   }else{
    if(b.x[0]!==1||b.x[1]!==0||b.y[0]!==0||b.y[1]!==1||b.direct!==true)return uncertain('NATIVE_BASIS_UNQUALIFIED');
    if(c.kind==='arc'){
-    if(Math.abs(s.a[0]-s.b[0])<1e-6&&Math.abs(s.a[1]-s.b[1])<1e-6)return uncertain('ARC_BRANCH_UNCERTAIN');
     if(!eq(norm(sub(c.a,c.c)),A.mul(c.r,c.r))||!eq(norm(sub(c.b,c.c)),A.mul(c.r,c.r)))return uncertain('ARC_ENDPOINT_INCIDENCE');
     const start=Math.atan2(s.a[1]-s.center[1],s.a[0]-s.center[0]);let end=Math.atan2(s.b[1]-s.center[1],s.b[0]-s.center[0]);if(end<=start)end+=2*Math.PI;
     if(!Object.is(start,s.startRadians)||!Object.is(end,s.endRadians))return uncertain('ARC_BRANCH_UNCERTAIN');

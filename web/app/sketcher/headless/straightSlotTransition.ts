@@ -33,7 +33,7 @@ export function inspectStraightSlotRows(original:any,replayed:any,external:any){
  captured.ownership.unchanged();return result;
 }
 
-function nativeMembers(intent:any,ids:string[]){const geometry=straightSlotGeometry(intent.a,intent.b,intent.radius);return geometry.map((g,i)=>{const o:any=i===2||i===4?new Arc(g.a.x,g.a.y,g.b.x,g.b.y,g.c.x,g.c.y,ids[i]):new Segment(g.a.x,g.a.y,g.b.x,g.b.y,ids[i]);o.role=i===0?'construction':null;return o;});}
+function nativeMembers(intent:any,ids:string[]){const geometry=straightSlotGeometry(intent.a,intent.b,intent.radius);return geometry.map((g,i)=>{const o:any=i===2||i===4?new Arc(g.a.x,g.a.y,g.b.x,g.b.y,g.c.x,g.c.y,ids[i],g.branch):new Segment(g.a.x,g.a.y,g.b.x,g.b.y,ids[i]);o.role=i===0?'construction':null;return o;});}
 export function changeStraightSlot(request:any){let revision='';try{
  const a=capture(request);revision=a.revision;const intent=a.intent,before=JSON.parse(a.sketchJSON),external=a.externalParameters,original=prove(revision,before,external),w=load(before,external);let item:any,ids:string[],stage:number;
  if(intent.action==='edit'){item=slotDeclarationRows(before).find(r=>r.row.objects[0]===intent.slotId);if(!item)fail('INVALID_TARGET','Choose an actual inspected Slot axis.');const bound=owned(w,before,item);ids=item.row.objects.slice();stage=item.stage;if(bound.objects[0].a.x===intent.a.x&&bound.objects[0].a.y===intent.a.y&&bound.objects[0].b.x===intent.b.x&&bound.objects[0].b.y===intent.b.y&&item.radius===intent.radius)return{revision,ok:true as const,changed:false,serializedSketch:a.sketchJSON,evidence:original.actual.evidence,slot:receipt(item,bound.objects)};}

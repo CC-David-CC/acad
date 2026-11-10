@@ -1,3 +1,4 @@
+import {captureArcData} from '../shapes/arcBranch.mjs';
 import {NoIcon} from "../icons/NoIcon";
 import {Arc} from "../shapes/arc";
 import {Circle} from "../shapes/circle";
@@ -49,12 +50,12 @@ export const BoundaryGeneratorSchema = {
       process(seg);
     }
     for (i = 0; i < boundary.arcs.length; ++i) {
-      const a = boundary.arcs[i];
+      const raw=boundary.arcs[i],a=captureArcData({a:raw.a,b:raw.b,c:raw.c,branch:raw.branch});
       const arc = new Arc(
         a.a.x, a.a.y,
         a.b.x, a.b.y,
         a.c.x, a.c.y,
-        'boundary/' + a.id
+        'boundary/' + raw.id, a.branch
       );
       process(arc);
     }

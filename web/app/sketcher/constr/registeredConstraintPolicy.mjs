@@ -1,3 +1,4 @@
+import {arcBranchFacts,arcDataFromObject} from '../shapes/arcBranch.mjs';
 import {admissionCause} from './admissionCause.mjs';
 import {lineCircularContact,circleCircleContact,tangencyConstantsValid} from './tangencyDomain.mjs';
 import {assertSlotBranch} from './straightSlotRecord.mjs';
@@ -15,6 +16,7 @@ const fail=()=>{throw Error('A sketch constraint has a degenerate or invalid dom
 const circle=o=>o?.c&&Number.isFinite(o.r?.get())&&o.r.get()>1e-9;
 export function assertRegisteredConstraintDomain(c){
  const id=c.schema.id,o=c.objects;
+ if(id==='ArcConsistency'){arcBranchFacts(arcDataFromObject(o[0]));if(!circle(o[0]))fail();}
  if(['FiniteTangentLC','TangentCC'].includes(id)){
   if(!tangencyConstantsValid(id,c.constants))throw Object.assign(Error('Invalid exact tangent constants.'),{code:'INVALID_TANGENCY_BRANCH'});
   if(id==='FiniteTangentLC')lineCircularContact(o[0],o[1],c.constants.inverted,true);

@@ -1,3 +1,4 @@
+import {captureNewArcData} from '../../sketcher/shapes/arcBranch.mjs';
 import {captureLengthFamilyIntent} from 'sketcher/headless/lengthFamilyEnvelope.mjs';import {verifyLengthFamilyCandidate,verifyLengthFamilyTravelBoundary} from 'sketcher/headless/transitionClient';
 import {captureOffsetIntent,captureOffsetReceipt,offsetId,captureOffsetDistance,offsetSide} from 'sketcher/generators/offsetSource.mjs';
 import {verifySketchOffsetCandidate} from 'sketcher/headless/transitionClient';
@@ -78,7 +79,8 @@ function primitive(value:any){
  else if(a.kind==='Point')a.data=point(a.data);
  else if(a.kind==='Ellipse'){const d=captureEllipseParameters(a.data);a.data=Object.freeze({...d,c:point(d.c)});}
  else if(a.kind==='Circle'){const d=record(a.data,['c','r']);if(typeof d.r!=='number'||!Number.isFinite(d.r)||d.r<=1e-9||d.r>1e8)throw Error('Invalid circle radius.');a.data=Object.freeze({c:point(d.c),r:d.r})}
- else {const d=record(a.data,a.kind==='Arc'?['a','b','c']:['a','b']);a.data=Object.freeze(a.kind==='Arc'?{a:point(d.a),b:point(d.b),c:point(d.c)}:{a:point(d.a),b:point(d.b)})}
+ else if(a.kind==='Arc'){const d=captureNewArcData(a.data);a.data=Object.freeze({a:point(d.a),b:point(d.b),c:point(d.c),branch:d.branch})}
+ else {const d=record(a.data,['a','b']);a.data=Object.freeze({a:point(d.a),b:point(d.b)})}
  return Object.freeze(a);
 }
 function coordinates(value:any){

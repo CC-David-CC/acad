@@ -1,3 +1,4 @@
+import {arcBranchFacts} from '../shapes/arcBranch.mjs';
 import {capturedParameterOwnership} from './capturedParameterOwnership';
 import {offsetDependencyGroups} from '../generators/offsetGenerator';
 import {HeadlessSketchWorkspace} from './workspace';
@@ -83,15 +84,15 @@ function branch(a:any,b:any){
  // same directed branch. Subtracting separately wrapped values falsely rejects
  // a tiny numerical crossing of that seam; the angular bound is unchanged.
  const sameDirection=(u:number,v:number)=>Number.isFinite(u)&&Number.isFinite(v)&&Math.abs(Math.atan2(Math.sin(u-v),Math.cos(u-v)))<=ANGLE;
- const radius=(p:any,c:any)=>Math.hypot(p.x-c.x,p.y-c.y),full=(d:any)=>Math.abs(d.a.x-d.b.x)<1e-6&&Math.abs(d.a.y-d.b.y)<1e-6;
+ const radius=(p:any,c:any)=>Math.hypot(p.x-c.x,p.y-c.y);
  const x=a.data,y=b.data;
  if(a.type==='Segment'){
   if(radius(x.b,x.a)<=MIN||radius(y.b,y.a)<=MIN||!sameDirection(angle(x.b,x.a),angle(y.b,y.a)))fail('CURRENT_GEOMETRY_MISMATCH','Replay changed a segment domain or directed angular branch.');
  }else if(a.type==='Circle'){
   if(!(x.r>MIN&&y.r>MIN))fail('CURRENT_GEOMETRY_MISMATCH','Replay changed a positive circle radius domain.');
  }else if(a.type==='Arc'){
-  const xf=full(x),yf=full(y),xa=angle(x.a,x.c),xb=angle(x.b,x.c),ya=angle(y.a,y.c),yb=angle(y.b,y.c),xs=xf?TAU:normalized(xb-xa),ys=yf?TAU:normalized(yb-ya);
-  if(radius(x.a,x.c)<=MIN||radius(x.b,x.c)<=MIN||radius(y.a,y.c)<=MIN||radius(y.b,y.c)<=MIN||xf!==yf||!(xs>0&&ys>0)||!sameDirection(xa,ya)||!sameDirection(xb,yb)||(xs>Math.PI)!==(ys>Math.PI)||Math.abs(xs-ys)>ANGLE)fail('CURRENT_GEOMETRY_MISMATCH','Replay changed an Arc radius, CCW interval or full-circle/major branch.');
+  const xBranch=arcBranchFacts(x),yBranch=arcBranchFacts(y),xf=xBranch.branch==='full-ccw',yf=yBranch.branch==='full-ccw',xa=angle(x.a,x.c),xb=angle(x.b,x.c),ya=angle(y.a,y.c),yb=angle(y.b,y.c),xs=xBranch.sweep,ys=yBranch.sweep;
+  if(radius(x.a,x.c)<=MIN||radius(x.b,x.c)<=MIN||radius(y.a,y.c)<=MIN||radius(y.b,y.c)<=MIN||x.branch!==y.branch||xBranch.sector!==yBranch.sector||xf!==yf||!(xs>0&&ys>0)||!sameDirection(xa,ya)||!sameDirection(xb,yb)||(xs>Math.PI)!==(ys>Math.PI)||Math.abs(xs-ys)>ANGLE)fail('CURRENT_GEOMETRY_MISMATCH','Replay changed an Arc radius, CCW interval or full-circle/major branch.');
  }
 }
 function evidence(after:any,rows:any[]){

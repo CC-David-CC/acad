@@ -1,3 +1,4 @@
+import {captureArcData,requireArcInterval,arcDataFromObject} from './shapes/arcBranch.mjs';
 import {offsetSourceRows} from './generators/offsetSource.mjs';
 import {tangencyConstantsValid} from './constr/tangencyDomain.mjs';
 import {slotDeclarationRows,validateSlotNativeRow,validateSlotJunctions} from './constr/straightSlotSource.mjs';
@@ -483,20 +484,9 @@ export class IO {
             obj.b.y,
           ]);
         } else if (obj instanceof Arc) {
-          a.set(obj.a.x - obj.c.x, obj.a.y - obj.c.y, 0);
-          b.set(obj.b.x - obj.c.x, obj.b.y - obj.c.y, 0);
-          const dir = a.cross(b).z > 0 ? 0 : 1;
-          const r = obj.r.get();
-          out.fline('<path d="M $ $ A $ $ 0 $ $ $ $" />', [
-            obj.a.x,
-            obj.a.y,
-            r,
-            r,
-            dir,
-            1,
-            obj.b.x,
-            obj.b.y,
-          ]);
+          const f=requireArcInterval(arcDataFromObject(obj)),r=obj.r.get();
+          if(f.branch==='full-ccw')out.fline('<circle cx="$" cy="$" r="$" />',[obj.c.x,obj.c.y,r]);
+          else out.fline('<path d="M $ $ A $ $ 0 $ 1 $ $" />',[obj.a.x,obj.a.y,r,r,f.sector==='major'?1:0,obj.b.x,obj.b.y]);
         } else if (obj instanceof Circle) {
           out.fline('<circle cx="$" cy="$" r="$" />', [
             obj.c.x,
@@ -593,6 +583,12 @@ export function validateStrictSketch(sketch: any) {
   validateSketchAdmissionHints(sketch);
   strictRecord(sketch, 'sketch');
   if (sketch.version !== 3) throw new Error('Unsupported sketch version: ' + String(sketch.version));
+  // Mandatory branch preflight BEFORE cleanup; keep unrelated NURBS carry and
+  // its real display/reference data, not the stricter analytic-only policy.
+  if(sketch.boundary?.arcs!==undefined){
+    if(!Array.isArray(sketch.boundary.arcs)||sketch.boundary.arcs.length>10000)throw Error('Invalid boundary Arc inventory.');
+    for(const arc of sketch.boundary.arcs)captureArcData({a:arc.a,b:arc.b,c:arc.c,branch:arc.branch});
+  }
   for (const key of ['objects', 'dimensions', 'labels', 'stages']) {
     if (!Array.isArray(sketch[key])) throw new Error('Invalid sketch ' + key);
   }
@@ -735,6 +731,7 @@ function validateStrictObject(obj: any) {
     type === Ellipse.prototype.TYPE || type === EllipticalArc.prototype.TYPE ?
       (d.ep1 ? ['ep1', 'ep2'] : ['c']).concat(type === EllipticalArc.prototype.TYPE ? ['a', 'b'] : []) : null;
   if (!pointFields) throw new Error('Unknown sketch object type: ' + type);
+  if (type === Arc.prototype.TYPE) captureArcData(d);
   if (type === EndPoint.prototype.TYPE) strictPoint(d, type);
   for (const field of pointFields) strictPoint(d[field], type + '.' + field);
   if (type === Circle.prototype.TYPE) strictNumber(d.r, type + '.r');

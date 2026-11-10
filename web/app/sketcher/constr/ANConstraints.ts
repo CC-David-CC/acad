@@ -990,7 +990,7 @@ export const ConstraintDefinitions
       arc.visitParams(callback);
     },
 
-    collectPolynomials: (polynomials, [r, ang1, ang2, ax, ay, bx, by, cx, cy]) => {
+    collectPolynomials: (polynomials, [r, ang1, ang2, ax, ay, bx, by, cx, cy], _constants, [arc]) => {
       polynomials.push(new Polynomial()
         .monomial(-1).term(ax, POW_1_FN)
         .monomial().term(cx, POW_1_FN).monomial().term(r, POW_1_FN).term(ang1, COS_FN) );
@@ -1004,6 +1004,10 @@ export const ConstraintDefinitions
       polynomials.push(new Polynomial()
         .monomial(-1).term(by, POW_1_FN)
         .monomial().term(cy, POW_1_FN).monomial().term(r, POW_1_FN).term(ang2, SIN_FN) );
+      if(arc.branch==='full-ccw'){
+        polynomials.push(new Polynomial().monomial(1).term(bx,POW_1_FN).monomial(-1).term(ax,POW_1_FN));
+        polynomials.push(new Polynomial().monomial(1).term(by,POW_1_FN).monomial(-1).term(ay,POW_1_FN));
+      }
     },
   },
 

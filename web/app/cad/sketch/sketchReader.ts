@@ -1,8 +1,9 @@
+import {requireArcInterval} from '../../sketcher/shapes/arcBranch.mjs';
 import * as sm from './sketchModel'
 import {Graph} from '../../utils/graph'
 import Joints from 'gems/joints';
 import sketchObjectGlobalId from './sketchObjectGlobalId';
-import {strictEqual2D, areEqual, TOLERANCE} from "math/equality";
+import {strictEqual2D} from "math/equality";
 import {Contour, Segment, SketchPrimitive} from "./sketchModel";
 import Vector from "math/vector";
 
@@ -83,12 +84,12 @@ export function ReadSketch(sketch, sketchId, readConstructionSegments) {
       add(new sm.Segment(getID(obj), segA, segB), 'connections');
     } else if (obj.type === 'Arc') {
       // The generic vertex factory welds within 1e-3. It must not collapse a
-      // short partial Arc or choose its sweep: native Arc/DXF use the stricter
-      // coordinate predicate below. Preserve these authored coordinates.
+      // short partial Arc or choose its sweep: native Arc/DXF retain the
+      // explicit authored branch below. Preserve these authored coordinates.
       const arcA = new Vector(data.a.x, data.a.y, 0);
       const arcB = new Vector(data.b.x, data.b.y, 0);
       const arcCenter = new Vector(data.c.x, data.c.y, 0);
-      if (areEqual(data.a.x, data.b.x, TOLERANCE) && areEqual(data.a.y, data.b.y, TOLERANCE)) {
+      if (requireArcInterval(data).branch==='full-ccw') {
         // A full sweep is a closed curve, not a zero-length trimmed arc. This
         // is derived topology only; the editable native object remains Arc.
         add(new sm.Circle(getID(obj), arcCenter, arcA.minus(arcCenter).length()), 'loops');

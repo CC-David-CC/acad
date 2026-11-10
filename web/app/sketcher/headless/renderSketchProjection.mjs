@@ -1,3 +1,4 @@
+import {arcBranchFacts} from '../shapes/arcBranch.mjs';
 // Worker-only projection of already validated native data. No live IDs or solver state.
 import {BSpline, BSplinePolynomial} from '../shapes/b-spline.ts';
 import {inspectBoundedSpline} from './splinePolicy.mjs';
@@ -61,7 +62,7 @@ function geometryFor(row,budget){
  if(row.type==='Point'){const p=point(d);return p&&{geometry:{kind:'point',...p},handles:[handle(id,p)]}}
  if(row.type==='Segment'&&a&&b)return {geometry:{kind:'segment',a,b},handles:[handle(id+':A',a),handle(id+':B',b)]};
  if(row.type==='Circle'&&c&&positive(d.r))return {geometry:{kind:'circle',c,r:d.r},handles:[handle(id+':C',c)]};
- if(row.type==='Arc'&&a&&b&&c){const r=Math.hypot(a.x-c.x,a.y-c.y),endRadius=Math.hypot(b.x-c.x,b.y-c.y);if(!positive(r)||!Number.isFinite(endRadius))return null;const start=angle(a,c),isFull=full(a,b),end=isFull?start+2*Math.PI:angle(b,c);return {geometry:{kind:'arc',c,r,start,end,fullCircle:isFull,endPoint:b,endRadius},handles:[handle(id+':A',a),handle(id+':B',b),handle(id+':C',c)]}}
+ if(row.type==='Arc'&&a&&b&&c){const r=Math.hypot(a.x-c.x,a.y-c.y),endRadius=Math.hypot(b.x-c.x,b.y-c.y);if(!positive(r)||!Number.isFinite(endRadius))return null;const f=arcBranchFacts({a,b,c,branch:d.branch});if(!f.representable)return {unsupportedReason:'arc-interval-unrepresentable'};return {geometry:{kind:'arc',c,r,start:f.branch==='full-ccw'?0:f.start,end:f.branch==='full-ccw'?2*Math.PI:f.end,fullCircle:f.branch==='full-ccw',endPoint:b,endRadius},handles:[handle(id+':A',a),handle(id+':B',b),handle(id+':C',c)]}}
  if((row.type==='Ellipse'||row.type==='EllipticalArc')&&c&&positive(d.rx)&&positive(d.ry)&&Number.isFinite(d.rot)){// Semantic Ellipse parameters are never display-clamped. Keep the existing
  // EllipticalArc projection policy separate from this ordinary ellipse slice.
  const base={c,rx:row.type==='Ellipse'?d.rx:Math.max(d.rx,1e-8),ry:row.type==='Ellipse'?d.ry:Math.max(d.ry,1e-8),rotation:d.rot};if(row.type==='Ellipse')return {geometry:{kind:'ellipse',...base},handles:[handle(id+':C',c)]};if(!a||!b)return null;const start=ellipseAngle(a,c,d.rx,d.ry,d.rot),isFull=full(a,b),end=isFull?start+2*Math.PI:ellipseAngle(b,c,d.rx,d.ry,d.rot);if(!Number.isFinite(start)||!Number.isFinite(end))return null;return {geometry:{kind:'ellipticalArc',...base,start,end,fullCircle:isFull},handles:[handle(id+':A',a),handle(id+':B',b),handle(id+':C',c)]}}

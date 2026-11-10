@@ -1,3 +1,4 @@
+import {captureArcData} from './authoredArcBranch.mjs';
 // Worker-only source membership seam. The caller supplies a real current
 // sketch-solver result and owns document lifetime. This does not solve a sketch,
 // certify a sweep, choose arc branches, weld endpoints or move either source.
@@ -77,12 +78,12 @@ export function selectCapturedSweepPath(context, rawReferences) {
     const object = inventory.get(reference.curveId);
     if (!object) fail('STALE_PATH', 'A selected path source curve is unavailable.');
     if (!['Segment','Arc'].includes(object.type)) fail('SWEEP_UNSUPPORTED_PATH', 'Select actual source Segments or open circular Arcs.');
-    const data = record(object.data, object.type === 'Segment' ? ['a','b'] : ['a','b','c']);
+    const data = record(object.data, object.type === 'Segment' ? ['a','b'] : ['a','b','c','branch']);
     data.a = point(data.a); data.b = point(data.b);
-    // Match the native document's strict per-coordinate full-Arc predicate.
-    // This selects an authored arc branch; it is not endpoint welding.
-    if (object.type === 'Arc' && Math.abs(data.a.x-data.b.x) < 1e-6 && Math.abs(data.a.y-data.b.y) < 1e-6)
-      fail('SWEEP_UNSUPPORTED_PATH', 'The selected source Arc denotes a full circle, which needs separate closed-path support.');
+    if(object.type==='Arc'){
+      try{captureArcData(data)}catch(error){if(error?.code!=='INVALID_ARC_BRANCH')throw error;fail('SWEEP_INVALID_PATH','The selected Arc has invalid authored branch or endpoint rays.');}
+      if(data.branch!=='proper-ccw')fail('SWEEP_UNSUPPORTED_PATH','The selected full Arc requires separate closed-path support.');
+    }
     if (same(data.a,data.b)) fail('SWEEP_INVALID_PATH', 'A directed Segment path needs distinct endpoints.');
     if (object.type === 'Arc') {data.c = point(data.c); if (same(data.a,data.c) || same(data.b,data.c)) fail('SWEEP_INVALID_PATH', 'An arc center cannot be its endpoint.');}
     const start = reference.reversed ? data.b : data.a, end = reference.reversed ? data.a : data.b;

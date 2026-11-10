@@ -58,7 +58,7 @@ export class FilletTool extends Tool {
     const arc = new Arc(
       point1.x, point1.y,
       point2.x, point2.y,
-      vec.x, vec.y);
+      vec.x, vec.y,undefined,'proper-ccw');
     point1.parent.layer.add(arc);
     const pm = this.viewer.parametricManager;
 

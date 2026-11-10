@@ -1,3 +1,4 @@
+import {arcDataFromObject,requireArcInterval} from '../shapes/arcBranch.mjs';
 import {projectedDirectionValid} from './projectedDistanceDomain.mjs';
 
 const MAX=1e6,MIN=1e-9,POSITION_TOLERANCE=1e-6,ANGLE_TOLERANCE=1e-8,TAU=2*Math.PI;
@@ -5,11 +6,8 @@ const literal=/^[+-]?(?:(?:\d+(?:\.\d*)?)|(?:\.\d+))(?:e[+-]?\d+)?$/i;
 const near=(a,b,tolerance=POSITION_TOLERANCE)=>Number.isFinite(a)&&Number.isFinite(b)&&Math.abs(a-b)<=tolerance;
 const angleDifference=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
 const polarAngle=(a,c)=>Math.atan2(a.y-c.y,a.x-c.x);
-function sweep(arc) {
-  // Match Arc.drawImpl's coincident-endpoint full-circle convention.
-  if(Math.abs(arc.a.x-arc.b.x)<1e-6&&Math.abs(arc.a.y-arc.b.y)<1e-6)return TAU;
-  const d=polarAngle(arc.b,arc.c)-polarAngle(arc.a,arc.c);return (d%TAU+TAU)%TAU;
-}
+function sweep(arc){return requireArcInterval(arcDataFromObject(arc)).sweep;}
+
 export function fixedSchemaFor(object) {
   return object?._class==='TCAD.TWO.Segment'?'FixSegment':object?._class==='TCAD.TWO.Circle'?'FixCircle':object?._class==='TCAD.TWO.Arc'?'FixArc':null;
 }
@@ -50,6 +48,7 @@ export function fixedEntityValid(constraint) {
   if(!fixedLiteralConstants(id,constants))return false;
   try {
     const actual=fixedGeometry(object);if(actual.schema!==id)return false;
+    if(id==='FixArc'&&((object.branch==='full-ccw')!==(Number(constants.sweep)===TAU)))return false;
     return Object.entries(actual.values).every(([key,value])=>key==='direction'?
       near(angleDifference(value,Number(constants[key])),0,ANGLE_TOLERANCE):
       near(value,Number(constants[key]),key==='sweep'?ANGLE_TOLERANCE:POSITION_TOLERANCE));

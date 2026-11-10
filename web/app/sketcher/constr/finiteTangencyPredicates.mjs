@@ -1,3 +1,4 @@
+import {arcBranchFacts,arcDataFromObject} from '../shapes/arcBranch.mjs';
 import {createExactPolarArithmetic} from './exactPolarFrameArithmetic.mjs';
 // Exact predicates over represented finite binary64 endpoints, never atan2,
 // sin/cos, proximity or rounded projected contacts. Positive S clears division.
@@ -13,6 +14,7 @@ export function classifyFiniteTangency(line,curve){
  const W=plus(scale(minus(A,C),S),scale(D,N));
  if(zero(W))throw Object.assign(Error('Finite contact has an unresolved zero radial direction.'),{code:'FINITE_CONTACT_UNCERTAIN'});
  if(curve.TYPE!=='Arc')return{inside:true,segmentAt,arcAt:null};
+ const branch=arcBranchFacts(arcDataFromObject(curve));if(branch.branch==='full-ccw')return{inside:true,segmentAt,arcAt:null};
  const U=minus(point(curve.a),C),V=minus(point(curve.b),C);
  if(zero(U)||zero(V))throw Object.assign(Error('Finite Arc contact has an unresolved zero radial direction.'),{code:'FINITE_CONTACT_UNCERTAIN'});
  const half=v=>sgn(v[1])>0||!sgn(v[1])&&sgn(v[0])>=0?0:1;
@@ -21,7 +23,6 @@ export function classifyFiniteTangency(line,curve){
  if(!uv)throw Object.assign(Error('Same-ray Arc endpoints do not certify a unique finite/full-turn branch.'),{code:'UNSUPPORTED_FINITE_ARC'});
  // Native's represented angular branch must itself remain distinguishable.
  // This is ONLY an uncertainty refusal, never sector membership authority.
- const turn=2*Math.PI,sweep=((curve.getEndAngle()-curve.getStartAngle())%turn+turn)%turn;
- if(!Number.isFinite(sweep)||!(sweep>0&&sweep<turn))throw Object.assign(Error('The actual native Arc sweep collapsed; finite contact is unqualified.'),{code:'FINITE_CONTACT_UNCERTAIN'});
+ if(!branch.representable)throw Object.assign(Error('The actual native Arc sweep collapsed; finite contact is unqualified.'),{code:'FINITE_CONTACT_UNCERTAIN'});
  return{inside:uv<0?uw<=0&&wv<=0:uw<=0||wv<=0,segmentAt,arcAt:!uw?0:!wv?1:null};
 }

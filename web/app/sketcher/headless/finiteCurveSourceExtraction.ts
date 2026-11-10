@@ -10,7 +10,7 @@ import {Circle} from '../shapes/circle';
 import {Arc} from '../shapes/arc';
 import {Param} from '../shapes/param';
 import {EndPoint} from '../shapes/point';
-import {areEqual,TOLERANCE} from 'math/equality';
+import {arcBranchFacts,arcDataFromObject} from '../shapes/arcBranch.mjs';
 import {exactFiniteCurveSourceRadiusIncidence as exactRadius} from './finiteCurveSourceArcPolicy.mjs';
 import {failureCause,withAdmissionCause} from '../constr/admissionCause.mjs';
 import {encodeFiniteCurveReadInput} from '../../../../modules/engine/mount/finiteCurveReadProtocol.mjs';
@@ -75,9 +75,9 @@ function inspectTargets(workspace:HeadlessSketchWorkspace,sketch:any,request:Fin
   }else{
    const a=point(root.a,row.data.a),b=point(root.b,row.data.b),center=point(root.c,row.data.c),radius=root.r.get(),start=root.getStartAngle(),originalEnd=root.getEndAngle();
    if(![root.r,root.ang1,root.ang2].every(p=>ownership.geometry.has(p))||![radius,start,originalEnd].every(Number.isFinite))fail('FINITE_CURVE_SOURCE_MISMATCH','Arc parameters have no genuine finite source ownership.');
-   // CAD-ARC-01: actual drawImpl uses this branch. Refuse its ambiguous full
-   // turn interpretation; never use the tolerance to join/project endpoints.
-   if(a[0]===b[0]&&a[1]===b[1]||areEqual(a[0],b[0],TOLERANCE)&&areEqual(a[1],b[1],TOLERANCE))fail('FINITE_CURVE_SOURCE_UNCERTAIN','Arc proper/full branch is ambiguous under the inherited source/render policy (CAD-ARC-01).');
+   const branch=arcBranchFacts(arcDataFromObject(root));
+   if(branch.branch!=='proper-ccw')fail('FINITE_CURVE_SOURCE_UNSUPPORTED_TARGET','The current raw Arc query supports proper-ccw only; full Arc identity is not promoted to Circle.');
+   if(!branch.representable)fail('FINITE_CURVE_SOURCE_UNCERTAIN','The declared proper Arc has an unrepresentable numeric interval.');
    if(!exactRadius(a,center,radius)||!exactRadius(b,center,radius))fail('FINITE_CURVE_SOURCE_UNCERTAIN','Arc endpoints lack exact represented-radius incidence in the initial finite query domain.');
    const end=originalEnd<=start?originalEnd+TAU:originalEnd,sweep=end-start;
    if(!Number.isFinite(end)||!(sweep>0&&sweep<TAU))fail('FINITE_CURVE_SOURCE_UNCERTAIN','Arc has no representable proper finite CCW branch.');

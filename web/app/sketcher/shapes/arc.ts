@@ -1,4 +1,3 @@
-import { makeAngle0_360 } from "math/commons";
 import Vector from "math/vector";
 import { SketchObject, SketchObjectSerializationData } from "./sketch-object";
 import { Param } from "./param";
@@ -6,7 +5,8 @@ import { AlgNumConstraint, ConstraintDefinitions } from "../constr/ANConstraints
 import { EndPoint, SketchPointSerializationData } from "./point";
 import { Viewer } from "../viewer2d";
 import { distance } from "math/distance";
-import { areEqual, TOLERANCE } from "math/equality";
+import {captureArcBranch,captureArcData,arcDataFromObject,arcBranchFacts,requireArcInterval,arcSectorContains} from './arcBranch.mjs';
+import type {ArcBranch} from './arcBranch.mjs';
 
 export class Arc extends SketchObject {
   a: EndPoint;
@@ -15,9 +15,11 @@ export class Arc extends SketchObject {
   r: Param;
   ang1: Param;
   ang2: Param;
+  readonly branch: ArcBranch;
 
-  constructor(ax: number, ay: number, bx: number, by: number, cx: number, cy: number, id?: string) {
+  constructor(ax: number, ay: number, bx: number, by: number, cx: number, cy: number, id?: string, branch: ArcBranch = 'proper-ccw') {
     super(id);
+    this.branch = captureArcBranch(branch);
     this.a = new EndPoint(ax, ay, this.id + ":A");
     this.b = new EndPoint(bx, by, this.id + ":B");
     this.c = new EndPoint(cx, cy, this.id + ":C");
@@ -90,28 +92,26 @@ export class Arc extends SketchObject {
   }
 
   get labelCenter() {
-    const mid = new Vector((this.a.x + this.b.x) / 2 - this.c.x, (this.a.y + this.b.y) / 2 - this.c.y, 0);
-    mid._normalize()._multiply(this.r.get());
-    const angle = makeAngle0_360(this.getEndAngle() - this.getStartAngle());
-    if (angle > Math.PI) {
-      mid._negate();
-    }
-    return mid._minusXYZ(-this.c.x, -this.c.y, 0);
+    const facts=arcBranchFacts(arcDataFromObject(this));
+    // An unavailable numeric chart has no invented midpoint. Keep any actual
+    // radius annotation anchored to the genuine start endpoint; drawImpl emits
+    // the explicit unavailable notice for the curve itself.
+    if(!facts.representable)return new Vector(this.a.x,this.a.y,0);
+    const angle=facts.start+facts.sweep/2;
+    return new Vector(this.c.x+this.r.get()*Math.cos(angle),this.c.y+this.r.get()*Math.sin(angle),0);
   }
 
   drawImpl(ctx: CanvasRenderingContext2D, scale: number) {
     ctx.beginPath();
     const r = this.radiusForDrawing();
-    const startAngle = makeAngle0_360(this.getStartAngle());
-    let endAngle;
-    if (areEqual(this.a.x, this.b.x, TOLERANCE) && areEqual(this.a.y, this.b.y, TOLERANCE)) {
-      endAngle = startAngle + 2 * Math.PI;
-    } else {
-      endAngle = makeAngle0_360(this.getEndAngle());
+    let facts;
+    try {facts=requireArcInterval(arcDataFromObject(this));}
+    catch (error) {
+      if(error?.code==='INVALID_ARC_BRANCH'&&!this.stage)return; // private uncommitted tool draft
+      if(error?.code!=='ARC_INTERVAL_UNREPRESENTABLE')throw error;
+      ctx.save();ctx.translate(this.c.x,this.c.y);ctx.scale(1,-1);ctx.font=(12/Math.max(scale,Number.MIN_VALUE))+'px sans-serif';ctx.fillText('Arc interval unavailable',0,0);ctx.restore();return;
     }
-    if (r > 0) {
-      ctx.arc(this.c.x, this.c.y, r, startAngle, endAngle);
-    }
+    if (r > 0) ctx.arc(this.c.x,this.c.y,r,facts.branch==='full-ccw'?0:facts.start,facts.branch==='full-ccw'?2*Math.PI:facts.end);
     const distanceB = this.distanceB();
     if (Math.abs(r - distanceB) * scale > 1) {
       const adj = r / distanceB;
@@ -127,27 +127,7 @@ export class Arc extends SketchObject {
   }
 
   isPointInsideSector(x: number, y: number) {
-    const ca = new Vector(this.a.x - this.c.x, this.a.y - this.c.y);
-    const cb = new Vector(this.b.x - this.c.x, this.b.y - this.c.y);
-    const ct = new Vector(x - this.c.x, y - this.c.y);
-
-    ca._normalize();
-    cb._normalize();
-    ct._normalize();
-    const cosAB = ca.dot(cb);
-    const cosAT = ca.dot(ct);
-
-    const isInside = cosAT >= cosAB;
-    const abInverse = ca.cross(cb).z < 0;
-    const atInverse = ca.cross(ct).z < 0;
-
-    let result;
-    if (abInverse) {
-      result = !atInverse || !isInside;
-    } else {
-      result = !atInverse && isInside;
-    }
-    return result;
+    return arcSectorContains(arcDataFromObject(this),x,y);
   }
 
   normalDistance(aim: { x: number; y: number }) {
@@ -167,10 +147,11 @@ export class Arc extends SketchObject {
   }
 
   copy(id?:string) {
-    return new Arc(this.a.x, this.a.y, this.b.x, this.b.y, this.c.x, this.c.y,id);
+    return new Arc(this.a.x, this.a.y, this.b.x, this.b.y, this.c.x, this.c.y,id,this.branch);
   }
 
   mirror(dest: Arc, mirroringFunc: (x: number, y: number) => { x: number; y: number }) {
+    if(dest.branch!==this.branch)throw Error('Mirrored Arc branch differs from its actual source.');
     this.a.mirror(dest.b, mirroringFunc);
     this.b.mirror(dest.a, mirroringFunc);
     this.c.mirror(dest.c, mirroringFunc);
@@ -182,11 +163,13 @@ export class Arc extends SketchObject {
       a: this.a.write(),
       b: this.b.write(),
       c: this.c.write(),
+      branch:this.branch,
     };
   }
 
   static read(id: string, data: SketchArcSerializationData): Arc {
-    return new Arc(data.a.x, data.a.y, data.b.x, data.b.y, data.c.x, data.c.y, id);
+    const d=captureArcData(data);
+    return new Arc(d.a.x,d.a.y,d.b.x,d.b.y,d.c.x,d.c.y,id,d.branch);
   }
 }
 
@@ -194,6 +177,7 @@ export interface SketchArcSerializationData extends SketchObjectSerializationDat
   a: SketchPointSerializationData;
   b: SketchPointSerializationData;
   c: SketchPointSerializationData;
+  branch: ArcBranch;
 }
 
 Arc.prototype.TYPE = "Arc";

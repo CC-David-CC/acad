@@ -1,3 +1,4 @@
+import {arcBranchFacts,arcDataFromObject} from '../shapes/arcBranch.mjs';
 // Data capture is not native ownership authority.
 export const slotFail=(code,message)=>{throw Object.assign(Error(message),{code});};
 export function slotRecord(v,keys){if(!v||typeof v!=='object'||Array.isArray(v)||Reflect.ownKeys(v).length!==keys.length)slotFail('INVALID_REQUEST','Invalid straight Slot record.');const out=Object.create(null);for(const k of keys){const d=Object.getOwnPropertyDescriptor(v,k);if(!d?.enumerable||!Object.hasOwn(d,'value'))slotFail('INVALID_REQUEST','Slot fields must be own data.');out[k]=d.value;}return out;}
@@ -12,12 +13,11 @@ export function straightSlotGeometry(a,b,r){
  const dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy);if(!Number.isFinite(L)||L<=1e-9||r<=1e-9||r>1e8)slotFail('UNSUPPORTED_SLOT_SCALE','Slot exceeds the existing Segment/Arc numerical envelope.');
  const nx=-dy/L,ny=dx/L,offset=(p,s)=>({x:p.x+s*r*nx,y:p.y+s*r*ny}),ap=offset(a,1),am=offset(a,-1),bp=offset(b,1),bm=offset(b,-1);
  if([a,b,ap,am,bp,bm].some(p=>![p.x,p.y].every(n=>Number.isFinite(n)&&Math.abs(n)<=1e8)))slotFail('UNSUPPORTED_SLOT_SCALE','Slot boundary exceeds existing coordinate limits.');
- if([[ap,am],[bm,bp]].some(([p,q])=>Math.abs(p.x-q.x)<1e-6&&Math.abs(p.y-q.y)<1e-6))slotFail('SLOT_UNSUPPORTED_RESOLUTION','The existing Arc encoding cannot distinguish this semicircle from a full circle.');
- return [{a,b},{a:bp,b:ap},{a:ap,b:am,c:a},{a:am,b:bm},{a:bm,b:bp,c:b}];
+ return [{a,b},{a:bp,b:ap},{a:ap,b:am,c:a,branch:'proper-ccw'},{a:am,b:bm},{a:bm,b:bp,c:b,branch:'proper-ccw'}];
 }
 export function assertSlotBranch(objects,r){
  const types=['Segment','Segment','Arc','Segment','Arc'];if(objects.length!==5||new Set(objects).size!==5||objects.some((o,i)=>!o||o.TYPE!==types[i]||o.parent))slotFail('INVALID_SLOT_SOURCE','Invalid declared Slot member types/root ownership.');
- const [axis,,start,,end]=objects;if(axis.role!=='construction'||objects.slice(1).some(o=>o.role!==null&&o.role!==undefined))slotFail('INVALID_SLOT_SOURCE','Slot axis must be construction and its boundary ordinary.');
+ const [axis,,start,,end]=objects;if([start,end].some(arc=>arcBranchFacts(arcDataFromObject(arc)).branch!=='proper-ccw'))slotFail('INVALID_SLOT_BRANCH','Slot caps must retain their actual proper Arc declaration.');if(axis.role!=='construction'||objects.slice(1).some(o=>o.role!==null&&o.role!==undefined))slotFail('INVALID_SLOT_SOURCE','Slot axis must be construction and its boundary ordinary.');
  straightSlotGeometry(axis.a,axis.b,r);
  const angle=axis.params.ang.get(),t=axis.params.t.get();if(!Number.isFinite(angle)||!Number.isFinite(t)||Math.abs(t)<=1e-9)slotFail('INVALID_SLOT_SOURCE','Slot axis has no regular physical direction.');
  const nx=-Math.sin(angle)*Math.sign(t),ny=Math.cos(angle)*Math.sign(t);

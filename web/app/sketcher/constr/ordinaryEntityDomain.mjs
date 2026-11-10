@@ -1,3 +1,4 @@
+import {arcBranchFacts} from '../shapes/arcBranch.mjs';
 // Existing ordinary sketch domains, not a profile/constraint/kernel verdict.
 // Append-specific coordinate/radius caps and its Arc branch limit stay separate.
 import {captureBezierRecord} from '../shapes/cubicCurveRecord.mjs';
@@ -10,7 +11,7 @@ export function ordinarySketchEntityDomainValid(type,data){
  if(type==='Ellipse'){try{captureEllipseRecordData(d);return true;}catch{return false;}}
  if(type==='Segment')return !!d&&point(d.a)&&point(d.b)&&Math.hypot(d.b.x-d.a.x,d.b.y-d.a.y)>min;
  if(type==='Circle')return !!d&&point(d.c)&&Number.isFinite(d.r)&&d.r>min;
- if(type==='Arc')return !!d&&point(d.a)&&point(d.b)&&point(d.c)&&Math.hypot(d.a.x-d.c.x,d.a.y-d.c.y)>min&&Math.hypot(d.b.x-d.c.x,d.b.y-d.c.y)>min;
+ if(type==='Arc'){try{arcBranchFacts(d);return point(d.a)&&point(d.b)&&point(d.c)&&Math.hypot(d.a.x-d.c.x,d.a.y-d.c.y)>min&&Math.hypot(d.b.x-d.c.x,d.b.y-d.c.y)>min;}catch{return false;}}
  throw new TypeError('Ordinary entity domain checks support only Segment, Circle, Arc, Ellipse and BezierCurve.');
 }
 export function assertOrdinarySketchEntityDomain(type,data){

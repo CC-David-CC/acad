@@ -1,3 +1,4 @@
+import {arcDataFromObject,requireArcInterval} from './shapes/arcBranch.mjs';
 import {
   ArcEntity,
   Block,
@@ -130,18 +131,19 @@ export class DxfWriterAdapter {
   }
 
   private _arc(shape: Arc) {
-    // Match Arc.drawImpl's full-sweep branch, including its coordinate tolerance.
+    // Consume the same authored branch as ordinary rendering and IO.
     // A DXF ARC start/end pair does not encode this full turn. Emit CIRCLE
     // without changing the native Arc or its endpoints.
-    if (areEqual(shape.a.x, shape.b.x, TOLERANCE) && areEqual(shape.a.y, shape.b.y, TOLERANCE)) {
+    const interval=requireArcInterval(arcDataFromObject(shape));
+    if (interval.branch==='full-ccw') {
       this.writer.addCircle(point3d(shape.c.x, shape.c.y), shape.r.get());
       return;
     }
     this.writer.addArc(
       point3d(shape.c.x, shape.c.y),
       shape.r.get(),
-      deg(shape.getStartAngle()),
-      deg(shape.getEndAngle())
+      deg(interval.start),
+      deg(interval.end)
     );
   }
 
@@ -414,6 +416,7 @@ export class DxfParserAdapter {
           const radius = (Math.hypot(curr.x - next.x, curr.y - next.y) / 2) / Math.sin(theta / 2);
           const center = polar(curr, beta + (Math.PI - theta) / 2, radius);
           const data: SketchArcSerializationData =  {
+            branch:'proper-ccw',
             a: applyTransformPoint(curr.bulge > 0 ? {x: curr.x, y: curr.y} : {x: next.x, y: next.y}, t),
             b: applyTransformPoint(curr.bulge > 0 ? {x: next.x, y: next.y} : {x: curr.x, y: curr.y}, t),
             c: applyTransformPoint(center, t),
@@ -429,6 +432,7 @@ export class DxfParserAdapter {
     this.assertPlanar(a.centerZ, a.thickness);
     const center: IPoint = {x: a.centerX, y: a.centerY};
     const data: SketchArcSerializationData =  {
+            branch:'proper-ccw',
       a: applyTransformPoint(polar(center, rad(a.startAngle), a.radius), t),
       b: applyTransformPoint(polar(center, rad(a.endAngle), a.radius), t),
       c: applyTransformPoint(center, t),

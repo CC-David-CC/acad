@@ -1,3 +1,4 @@
+import {requireArcInterval} from '../../sketcher/shapes/arcBranch.mjs';
 import BrepCurve from 'geom/curves/brepCurve';
 import NurbsCurve from 'geom/curves/nurbsCurve';
 import {makeAngle0_360} from 'math/commons'
@@ -189,13 +190,8 @@ export class Arc extends SketchPrimitive {
     const basisX = csys.x;
     const basisY = csys.y;
     
-    const startAngle = makeAngle0_360(Math.atan2(this.a.y - this.c.y, this.a.x - this.c.x));
-    const endAngle = makeAngle0_360(Math.atan2(this.b.y - this.c.y, this.b.x - this.c.x));
-
-    let angle = endAngle - startAngle;
-    if (angle < 0) {
-      angle = Math.PI * 2 + angle;
-    }
+    const interval=requireArcInterval({a:this.a,b:this.b,c:this.c,branch:'proper-ccw'});
+    const startAngle=interval.start,angle=interval.sweep;
     function pointAtAngle(angle) {
       const dx = basisX.multiply(Math.cos(angle));
       const dy = basisY.multiply(Math.sin(angle));

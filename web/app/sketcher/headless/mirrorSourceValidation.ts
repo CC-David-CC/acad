@@ -1,3 +1,4 @@
+import {arcBranchFacts,arcDataFromObject} from '../shapes/arcBranch.mjs';
 import {HeadlessSketchWorkspace} from './workspace';
 import {Segment} from '../shapes/segment';
 import {Arc} from '../shapes/arc';
@@ -11,7 +12,7 @@ const WORK=100000;
 const root=(o:any)=>{let n=0;while(o?.parent){if(++n>64)fail('MIRROR_RESOURCE_LIMIT','Mirror parent depth exceeds its bound.');o=o.parent;}return o;};
 export function mirrorNativePrimitive(o:any){return o instanceof EndPoint&&o.TYPE==='Point'||o instanceof Segment&&o.TYPE==='Segment'||o instanceof Circle&&o.TYPE==='Circle'||o instanceof Arc&&o.TYPE==='Arc';}
 export function assertMirrorAxis(o:any){if(!(o instanceof Segment)||o.TYPE!=='Segment')fail('UNSUPPORTED_MIRROR_AXIS','Choose an actual Segment reflection axis.');const dx=o.b.x-o.a.x,dy=o.b.y-o.a.y,den=dx*dx+dy*dy;if(![o.a.x,o.a.y,o.b.x,o.b.y,den].every(Number.isFinite)||den<=1e-18)fail('UNSUPPORTED_MIRROR_AXIS','Reflection requires a regular finite nonzero axis.');}
-export function assertMirrorArc(o:any){if(!(o instanceof Arc))return;const a=o.a,b=o.b,c=o.c,r=o.r.get(),rb=Math.hypot(b.x-c.x,b.y-c.y);if(![a.x,a.y,b.x,b.y,c.x,c.y,r,rb].every(Number.isFinite)||r<=1e-9||Math.abs(r-rb)>1e-9)fail('UNSUPPORTED_MIRROR_ARC','Mirror Arc must have two endpoints on its actual positive-radius circle.');if(Math.abs(a.x-b.x)<1e-6&&Math.abs(a.y-b.y)<1e-6)fail('UNSUPPORTED_MIRROR_ARC','The existing full/near-full Arc encoding is not qualified for Mirror.');}
+export function assertMirrorArc(o:any){if(!(o instanceof Arc))return;const a=o.a,b=o.b,c=o.c,r=o.r.get(),rb=Math.hypot(b.x-c.x,b.y-c.y);if(![a.x,a.y,b.x,b.y,c.x,c.y,r,rb].every(Number.isFinite)||r<=1e-9||Math.abs(r-rb)>1e-9)fail('UNSUPPORTED_MIRROR_ARC','Mirror Arc must have two endpoints on its actual positive-radius circle.');arcBranchFacts(arcDataFromObject(o));}
 export function mirrorSemanticMembers(source:any){return new Set(source.stages.flatMap(s=>s.constraints.filter(c=>c.typeId==='StraightSlot'||c.typeId==='RigidGroup').flatMap(c=>c.objects)));}
 export function assertMirrorRoot(o:any,index:any,stage:any,ownership:any){
  if(!o||o.parent||index[o.id]!==o||o.stage!==stage||!stage?.objects.has(o)||!mirrorNativePrimitive(o))fail('INVALID_MIRROR_SOURCE','Mirror references must resolve actual native primitive roots.');

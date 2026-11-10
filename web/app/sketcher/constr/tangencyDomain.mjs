@@ -1,3 +1,4 @@
+import {arcBranchFacts,arcDataFromObject} from '../shapes/arcBranch.mjs';
 import {classifyFiniteTangency} from './finiteTangencyPredicates.mjs';
 // Registered sketch semantics. No persisted frame/contact or endpoint-ID grammar.
 export const TANGENT_CC_BRANCHES=Object.freeze(['external','first-contains-second','second-contains-first']);
@@ -45,7 +46,7 @@ export function lineCircularContact(line,curve,inverted,finiteContact=false){
   q[1]=classification.segmentAt===0?line.a.y:classification.segmentAt===1?line.b.y:line.a.y+lambda*dy;
   if(curve.TYPE==='Arc'){
    if(classification.arcAt!==null)arcParameter=classification.arcAt;
-   else{const turn=2*Math.PI,start=Math.atan2(curve.a.y-curve.c.y,curve.a.x-curve.c.x),end=Math.atan2(curve.b.y-curve.c.y,curve.b.x-curve.c.x),at=Math.atan2(q[1]-curve.c.y,q[0]-curve.c.x),sweep=((end-start)%turn+turn)%turn,delta=((at-start)%turn+turn)%turn,value=delta/sweep;arcParameter=Number.isFinite(value)&&value>=0&&value<=1?value:null;}
+   else if(arcBranchFacts(arcDataFromObject(curve)).branch==='full-ccw'){arcParameter=null;}else{const turn=2*Math.PI,start=Math.atan2(curve.a.y-curve.c.y,curve.a.x-curve.c.x),end=Math.atan2(curve.b.y-curve.c.y,curve.b.x-curve.c.x),at=Math.atan2(q[1]-curve.c.y,q[0]-curve.c.x),sweep=((end-start)%turn+turn)%turn,delta=((at-start)%turn+turn)%turn,value=delta/sweep;arcParameter=Number.isFinite(value)&&value>=0&&value<=1?value:null;}
   }
  }
 
