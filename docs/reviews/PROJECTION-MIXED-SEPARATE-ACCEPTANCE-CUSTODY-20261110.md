@@ -1,0 +1,9 @@
+# Separate mixed-whole acceptance custody
+
+## BEFORE
+
+The actual mixed runner binds every acceptance file to the compiled Core checkout and requires that checkout HEAD equal pins.source. Its corrected material-review acceptance was composed as Root47a4ef4 (source counterpart e45f8725); that test-only correction does not change the immutable compiled Core0fec154c4e4d190987695c61b45cd00febc6953a or Host0fee14964910613df24df860369a22f751c6b92a. Forcing the runner/checker into the runtime checkout would require rebuilding the681MB assembled assets for a source-only acceptance edit. That coupling is an acceptance-custody limitation, not a product/geometry change or permission to substitute source identities.
+
+Follow the existing analytic whole's explicit CODI_ACCEPTANCE_SOURCE distinction. Bind the actual driver location and working directory to one separate clean accepted Git checkout/commit. Keep immutable compiled Core and Host checkouts at exact signed pin HEADs, clean tracked source before/after. Snapshot acceptance runner/example/checker/local artifact helpers/docs and the actual archive_oracle imported from that checkout at their explicit acceptance commit; keep product anchors at compiled Core and actual signed-harness/strict-join/public example at compiled Host. Each roster row has one explicit role/repo/commit/relative path/Git blob and bytes. No guessed acceptance commit, fallback to a nearby checkout or content-only proof.
+
+The independent after-whole checker must verify all three before/after checkout associations and exact role/path membership, plus actual retained blobs and actual current imported acceptance file identities. All source, geometry, state, currentness, material review, travel, refusal, Save/Open and artifact criteria remain. Source-only preparation authorizes no third complete test attempt; first two failed receipts remain frozen. No tests/build/Native/browser or fixture mutation.
