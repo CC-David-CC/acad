@@ -5,6 +5,7 @@ import {MWorkerEmpty} from 'cad/model/mworkerEmpty';
 import {captureSolidBox,captureSolidBoolean,solidBodyId} from 'engine/solid/solidIntent.mjs';
 import {selectSolidOperandBuild,selectSolidContinuationBuild} from 'engine/solid/solidOperandRuntime.mjs';
 import {OCC_BOOLEAN_HISTORY_BUILD} from 'engine/mount/engineCatalog.mjs';
+import {requireAvailableBoxBuild} from 'engine/mount/catalogMount';
 import {genericHistoryBuild,selectedProfileVersion} from 'engine/mount/selectedProfileBuildSelection.mjs';
 import {selectedProfileHistoryBudget} from 'engine/mount/selectedProfileBudget.mjs';
 import {inspectWorkerSolidSelections} from 'engine/solid/solidLedger.mjs';
@@ -73,6 +74,9 @@ export function createWorkerSolidCommands(ctx:any,submit:any,cancelEpoch:(epoch:
   const historyBuild=genericHistoryBuild(ctx.craftService.modifications$.value.history),outputBuild=selectSolidContinuationBuild(info.outputs,args.engine,build.revision);
   if(historyBuild&&historyBuild!==build||outputBuild!==build)throw Object.assign(Error('The authored generic part must retain one backend build.'),{code:'ENGINE_REVISION_MISMATCH'});
   const {revision,...authored}=args;const intent=kind==='box'?captureSolidBox({...authored,engineRevision:build.revision,featureId:1}):captureSolidBoolean({...authored,engineRevision:build.revision,featureId:1});if(kind==='box'){args.origin=intent.origin;args.dimensions=intent.dimensions;}
+  // Registration alone does not make an optional cohort available in this app.
+  // Refuse before reserving an authored identity or submitting a candidate.
+  if(kind==='box')requireAvailableBoxBuild(args.engine,build.revision);
   if(selectedProfileVersion(build)!==null){const budget=selectedProfileHistoryBudget(ctx.craftService.modifications$.value.history,build.revision);if(!budget.withinLimit||!budget.canAppend)throw Object.assign(Error('Selected evaluation cannot append another native result: '+(budget.reason||'RESOURCE_LIMIT')),{code:budget.reason==='INCOMPATIBLE_ENGINE_BUILD'?'ENGINE_REVISION_MISMATCH':budget.reason||'RESOURCE_LIMIT'});}
   const project=ctx.projectService,craft=ctx.craftService,registry=ctx.cadRegistry,storage=ctx.storageService,manager=ctx.projectManager,generation=project.documentGeneration,history=craft.modifications$.value,storageRevision=storage.revision,scope:{epoch:number|null}={epoch:null};
   const services=()=>[ctx.projectService,ctx.storageService,ctx.craftService,ctx.cadRegistry,ctx.operationService,ctx.expressionService,ctx.projectManager,ctx.services.sketcher,ctx.wizardService,ctx.workbenchService,ctx.assemblyService],streams=()=>[ctx.craftService.modifications$,ctx.craftService.models$,ctx.craftService.pipelineFailure$,ctx.craftService.engineCleanupFailure$,ctx.expressionService.script$,ctx.expressionService.list$,ctx.expressionService.errors$,ctx.streams.sketcher.sketchingFace,ctx.wizardService.workingRequest$,ctx.workbenchService.currentWorkbench$,ctx.assemblyService.constraints$],capturedServices=services(),capturedStreams=streams(),versions=capturedStreams.map(s=>s.revision);

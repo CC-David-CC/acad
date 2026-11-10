@@ -242,7 +242,15 @@ export function requireAvailableSweepBuild(engine:string,revision:string){const 
 export function requireAvailableRevolveBuild(engine:string,revision:string){const spec=requireRevolveBuild(engine,revision);if(spec.loftVersion===1)requireAvailableLoftBuild(engine,revision);return spec;}
 export function requireAvailablePointBuild(engine:string,revision:string){const spec=requireCadEngineBuild(engine,revision);if(spec.pointObservationVersion!==1)throw Object.assign(Error('Select an exact registered native point-observation build.'),{code:'ENGINE_REVISION_MISMATCH'});if(spec===OCC_ANALYTIC_PROFILE_BUILD)analyticProfileMountOptions();else if(spec.loftVersion===1)requireAvailableLoftBuild(engine,revision);return spec;}
 export function listAvailableBoxBuilds(){return Object.freeze([...Object.values(CAD_ENGINES).map((entry:any)=>preferredCadEngineBuild(entry.id)),...listAvailableShellBuilds(),...listAvailableMechanicalNativeBuilds(),...listAvailableAnalyticProfileBuilds()]);}
-export function requireAvailableBoxBuild(engine:string,revision:string){const spec=requireCadEngineBuild(engine,revision);if(spec.shellVersion===1)return requireAvailableShellBuild(engine,revision);if(spec===CAD_ENGINES[engine]||spec===preferredCadEngineBuild(engine))return spec;return requireAvailableSelectedProfileBuild(engine,revision);}
+export function requireAvailableBoxBuild(engine:string,revision:string){
+ const spec=requireCadEngineBuild(engine,revision);
+ if(spec.shellVersion===1)return requireAvailableShellBuild(engine,revision);
+ // Baseline engines keep their statically required asset admission. Preferred
+ // OCC is a distinct Boolean-history cohort owned by its optional asset entry.
+ if(spec===CAD_ENGINES[engine])return spec;
+ if(spec===preferredCadEngineBuild(engine)){requireArrangementAssets(booleanAssets,'boolean-history');return spec;}
+ return requireAvailableSelectedProfileBuild(engine,revision);
+}
 export function inspectCatalogSolidCapabilities(){
  const boxes=listAvailableBoxBuilds();
  return Object.freeze(Object.values(CAD_ENGINES).map((entry:any)=>{const spec=preferredCadEngineBuild(entry.id);return Object.freeze({id:spec.id,name:entry.name,revision:spec.revision,
