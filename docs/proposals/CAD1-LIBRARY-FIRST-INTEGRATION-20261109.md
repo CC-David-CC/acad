@@ -10,8 +10,9 @@
   authored intent/geometry/persistence evidence, not manufactured conformance.
 - Affected legacy isometric regression is QUALIFIED (whole6481/FIRST66458/six
   actual SVG reviews PASS), on unchanged producing Core82866bf / Host796c90513,
-  acceptance82866bf,293pins/MFG32e/abb. Complete reference-repair18059 is now
-  running; follow current handoff for exact job/context/write custody.
+  acceptance82866bf,293pins/MFG32e/abb. Complete reference-repair18059/FIRST60080/twelve actual visual reviews also
+  passed in their finite contract (general dimension label layout stays open).
+  Four-bore17788 is running; follow current handoff for exact job/context/write custody.
 - Native finite-support source d3b2afa compiled with static ABI custody b45d9a0.
   Private adapter10dcb60 is source only. Actual lossless portable pair
   479f0620b6dfe131dac05131a3798fc533e05a2bd11e8074ef240284f61bbe86 /
