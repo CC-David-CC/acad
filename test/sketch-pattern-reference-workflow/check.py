@@ -57,6 +57,65 @@ def inspect_source(s,b,control,inventory=None,inspection=None,measurements=None)
             require(set(dim)=={'id','type','data'} and dim['type']=='LinearDimension' and set(dim['data'])=={'a','b','offset'} and finite(dim['data']['offset']),'actual native dimension fields');a=points[dim['data']['a']];z=points[dim['data']['b']];require(a['parentId']==z['parentId'] and a['parentId'] in generated and objects[a['parentId']]['type']=='Segment','native dimension references actual generated Segment endpoint owners');segment=objects[a['parentId']];ends=[segment['data']['a'],segment['data']['b']];require({(a['x'],a['y']),(z['x'],z['y'])}=={(p['x'],p['y']) for p in ends},'real finite source endpoint support');m=one([m for m in measurements['measurements'] if m['measurementId']==dim['id']],'actual protected native ruler');require(m['segmentId']==segment['id'] and m['role']=='reference' and m['constraintId'] is None and m['reason'] is None and not m['canCreate'] and not m['canConvert'],'reference-only native authority');length=q(m['canonicalValue']);squared=(q(a['x'])-q(z['x']))**2+(q(a['y'])-q(z['y']))**2;require(length>BUDGET and (length-BUDGET)**2<=squared<=(length+BUDGET)**2,'independent Fraction reference length50pm')
     return src
 
+def original_public_sources(r,b,control):
+    # Independent frozen quantities, used only as offline truth. No expected
+    # source/ID is supplied to an authoring command or imported from example.
+    recipe=[('Point',{'x':3,'y':4}),('Segment',{'a':{'x':0,'y':0},'b':{'x':2,'y':1}}),('Circle',{'c':{'x':2,'y':8},'r':1}),('Arc',{'a':{'x':1,'y':15},'b':{'x':-1,'y':15},'c':{'x':0,'y':15},'branch':'proper-ccw'})]
+    frame={'origin':[0,0,0],'x':[1,0,0],'y':[0,1,0],'z':[0,0,1]}
+    initial=one([x for x in r['phases']if x['label']=='source-original'],'actual original source phase')['state']
+    require(b['faceId']!=control['faceId'],'two actual distinct own source faces')
+    def requested(actual,expected):
+        if type(expected)is dict:
+            require(type(actual)is dict and set(actual)==set(expected),'exact original primitive data fields')
+            for key in expected:requested(actual[key],expected[key])
+        elif type(expected)is str:require(actual==expected,'exact original authored branch')
+        else:require(abs(q(actual)-q(expected))<=BUDGET,'actual original public quantity within frozen50pm source budget')
+    bindings=[]
+    for role,face in [('source',b['faceId']),('control',control['faceId'])]:
+        src=source_at(initial,face);objects={o['id']:o for o in src['objects']};require(len(objects)==len(src['objects'])==4,'four real original roots in each own source')
+        creation=one([x for x in r['commands']if x['command']=='create-source-frame'and x.get('result',{}).get('faceId')==face],'actual '+role+' source creator')
+        args=creation['args'];require(args['unit']=='millimeter'and args['parent']is None and args['placement']=={'kind':'basis','frame':frame},'actual original source placement request')
+        require(src['metadata']['boundaryFrame']==frame,'actual saved original frame, not a fitted substitute')
+        if role=='source':require(creation['result']==b['source'],'original public source-frame receipt binding')
+        else:require(one([x for x in initial['capture']['native']['sketches']if x['id']==face],'actual control source')['source']==control['source'],'actual original control bytes')
+        appends=[x for x in r['commands']if x['command']=='append-sketch-primitive'and x['args'].get('faceId')==face]
+        require(len(appends)==4,'one genuine public append for each original primitive')
+        returned=[]
+        for command,(kind,data)in zip(appends,recipe):
+            args=command['args'];primitive=command['result']['primitive'];identity=primitive['id']
+            require(args['kind']==primitive['kind']==kind and args['role']is None and args['stage']==0,'actual requested/returned primitive class and stage')
+            require(args['data']==data,'frozen original public literal request, not observed geometry used as its own reference')
+            require(identity in objects and identity not in returned,'actual unique returned root identity')
+            original=objects[identity];require(original['type']==kind and original['role']==args['role']and original['stage']==args['stage'],'actual source root belongs to its public append')
+            requested(original['data'],data);returned.append(identity)
+        if role=='source':require(b['roots']==[{'id':identity,'type':kind}for identity,(kind,_)in zip(returned,recipe)],'exact original public root receipts/order')
+        bindings.append({'role':role,'faceId':face,'frameCommandIndex':creation['index'],'appendCommandIndices':[c['index']for c in appends],'rootIds':returned})
+    return bindings
+
+def last_reference_binding(r,b,observations):
+    seed=one([x['id']for x in b['roots']if x['type']=='Segment'],'actual original Segment source');reference=r['referenceBinding'];require(reference['sourceSegmentId']==seed,'ruler source is the actual original Segment')
+    creator=one([x for x in r['operations']if x['label']=='create-generated-reference'],'actual generated reference operation')
+    trace=r['commands'][creator['commandStart']:creator['commandEnd']]
+    command=one([x for x in trace if x['command']=='create-closed-sketch-length-measurement'],'genuine public ruler creator')
+    discovery=one([x for x in trace if x['command']=='inspect-closed-sketch-measurements'],'actual current ruler target discovery')
+    result=None
+    for label,src in observations.items():
+        if not src['dimensions']:continue
+        generator=one([g for st in src['stages']for g in st['generators']if g['typeId']=='LinearSketchPattern'],'actual source pattern of surviving ruler')
+        p=generator['params'];require(p['count']==4 and seed in p['objects'],'actual frozen four-instance original seed correspondence')
+        slot=(p['count']-2)*len(p['objects'])+p['objects'].index(seed);identity=generator['generatedObjects'][slot]
+        require(reference['segmentId']==identity,'actual LAST-instance Segment, not another generated parent')
+        dim=one(src['dimensions'],'actual surviving native ruler');observation=one([x for x in r['observations']if x['label']==label],'actual cold ruler observation');points=observation['inspection']['points'];owned=[x for x in points if x['parentId']==identity]
+        require(len(owned)==2 and len({x['id']for x in owned})==2 and {dim['data']['a'],dim['data']['b']}=={x['id']for x in owned},'native dimension references BOTH actual owned endpoints of that last Segment')
+        require(dim['id']==reference['measurementId'],'same actual ruler identity')
+        if label=='ruler-created':
+            require(command['args']['faceId']==b['faceId']and command['args']['segmentId']==identity and command['args']['revision']==discovery['result']['revision'],'genuine creator targets the actual currently discovered last instance')
+            target=one([m for m in discovery['result']['measurements']if m['segmentId']==identity],'actual public last-instance target')
+            require(target['canCreate']is True and target['canConvert']is False and target['role']=='reference','actual generated reference-only discovery')
+            measurement=command['result']['measurement'];require(command['result']==creator['result']and measurement['segmentId']==identity and measurement['measurementId']==dim['id']and measurement['role']=='reference'and measurement['canConvert']is False,'actual returned metadata matches original intent AND saved native endpoint parent')
+            result={'sourceSegmentId':seed,'segmentId':identity,'measurementId':dim['id'],'generatorSlot':slot,'creatorCommandIndex':command['index']}
+    require(result is not None,'actual created ruler is independently bound');return result
+
 def run(directory):
     d=Path(directory);raw=(d/'receipt.json').read_bytes();r=json.loads(raw);require(r['status']=='PASS' and r['qualification']=='FINITE_PATTERN_REFERENCE_DEPENDENCY_SCOPE','complete reachable whole only');require(r['requiredOpen']==[],'all required finite workflow cases present');require(not r['sourceSeeds'] and not r['privateAuthoring'] and not r['fakeReplies'] and r['totalInstancesIncludeSeed'] is True and r['sourceBudgetMm']==5e-8,'unchanged authority/budget');require(r['sourcePins']==r['sourcePinsAfter'] and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'] and not r.get('pendingOpen') and not r.get('pendingDirect') and not r.get('retainedOutcome'),'source/cleanup custody')
     require(r['pins']['source']==r['source'] and r['pins']['desktop']==r['hostSource'],'exact actual compiled pin identities')
@@ -76,7 +135,7 @@ def run(directory):
     for row in r['observations']:
         require(row['label'] not in observations and row['before']==row['after'],'unique read-only observations');observations[row['label']]=inspect_source(row['before'],b,control,row['inventory'],row['inspection'],row['measurements'])
     require(set(observations)==set(PHASES),'all required actual source phases');base=observations['source-original'];require(len(base['objects'])==4 and not base['stages'][0]['generators'],'actual four seed roots');created=observations['created-four'];require(created['stages'][0]['generators'][0]['params']['count']==4 and len(created['objects'])==16,'seed plus THREE additional copies')
-    commands=r['commands'];require([x['index'] for x in commands]==list(range(len(commands))),'ordered actual command trace');
+    commands=r['commands'];require([x['index'] for x in commands]==list(range(len(commands))),'ordered actual command trace');original_bindings=original_public_sources(r,b,control);reference_binding=last_reference_binding(r,b,observations)
     for row in r['operations']:
         inspect_source(row['before'],b,control);inspect_source(row['after'],b,control);require(row['result']['changed'] and row['result']['authoredUndo'] and row['before']['capture']['native']['counters']==row['after']['capture']['native']['counters'],'single genuine shared source mutation');trace=commands[row['commandStart']:row['commandEnd']];required='create-closed-sketch-length-measurement' if row['label']=='create-generated-reference' else 'remove-closed-sketch-length-measurement' if row['label']=='remove-generated-reference' else 'create-sketch-pattern' if row['label']=='create-count-four' else 'remove-sketch-pattern' if row['label'] in ['remove-pattern','reopened-remove'] else 'edit-sketch-pattern' if row['label'] in ['count-grow-five','count-shrink-three','count-regrow-four','pitch-diagonal-reverse','ruler-pitch-edit','released-count-shrink-three','reopened-pitch-edit'] else 'apply-closed-sketch-radius' if row['label']=='source-circle-radius' else 'edit-closed-sketch-point';command=one([x for x in trace if x['command']==required],'actual operation command');require(command['result']==row['result'],'exact public result association')
         left=source_at(row['before'],b['faceId']);right=source_at(row['after'],b['faceId']);require(left['metadata']==right['metadata'] and left['boundary']==right['boundary'],'original frame/reference intent retained')
@@ -156,5 +215,5 @@ def run(directory):
     require([x['label'] for x in r['saves']]==['A','B','C'] and [x['label'] for x in r['reopens']]==['A','B','C'] and len(r['writes'])==3,'three full native Save/freshOpen cycles');artifacts=[]
     for index,(saved,opened) in enumerate(zip(r['saves'],r['reopens'])):
         write=r['writes'][index];require(write['sequence']==saved['writeSequence']==index and write['label']==saved['label'] and write['phase']=='settled' and write['result']==saved['result'] and write['artifact']['sha256']==saved['sha256']==saved['localSha256'],'submitted own write settlement');command=commands[write['commandIndex']];require(command['command']=='save' and command['result']==write['result'] and command['windowId']==write['windowId'] and saved['result']['committed'] and saved['result']['persistence']=='browser','actual Save command/window binding');require(saved['before']['capture']==saved['after']['capture'],'Save does not author source/J');a=archive.read_archive(d/saved['savedFile']);require(a['sha256']==saved['sha256'] and a['bytes']==saved['bytes'],'actual stored native artifact');n=saved['before']['capture']['native'];model=a['envelope']['project']['model'];require(model['history']==n['history'] and model['counters']==n['counters'] and model['expressions']==n['expressions'],'exact archive H/IDs/physical intent');require(a['rawSketches']=={x['id']:x['source'] for x in n['sketches']} and a['envelope'].get('presentation')==n['presentation'],'exact raw saved source/presentation');native_equal(opened['opened'],saved['before']);require(not opened['opened']['capture']['journal']['canUndo'] and not opened['opened']['capture']['journal']['canRedo'],'fresh Open session journal reset');require(opened['path']==write['path'],'actual own settled path');artifacts.append({'file':saved['savedFile'],'sha256':a['sha256'],'designRevision':a['manifest']['designRevision']})
-    return {'status':'PASS','qualification':'PASS_FINITE_SOURCE_REFERENCE_LIFECYCLE','scope':'Reachable numeric ordinary Point/Segment/Circle/Arc associative pattern lifecycle/source50pm/native container, not Native generated-profile BRep or typed patterns','requiredOpen':r['requiredOpen'],'wholeReceiptSha256':hashlib.sha256(raw).hexdigest(),'observations':len(r['observations']),'travelDirectionsActuallyExercised':len(r['travels'])+len(direct['travels']),'artifacts':artifacts}
+    return {'status':'PASS','qualification':'PASS_FINITE_SOURCE_REFERENCE_LIFECYCLE','scope':'Reachable numeric ordinary Point/Segment/Circle/Arc associative pattern lifecycle/source50pm/native container, not Native generated-profile BRep or typed patterns','requiredOpen':r['requiredOpen'],'wholeReceiptSha256':hashlib.sha256(raw).hexdigest(),'originalSourceBindings':original_bindings,'referenceOwnership':reference_binding,'observations':len(r['observations']),'travelDirectionsActuallyExercised':len(r['travels'])+len(direct['travels']),'artifacts':artifacts}
 if __name__=='__main__':print(json.dumps(run(sys.argv[1]),indent=2))
