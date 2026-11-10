@@ -2407,6 +2407,7 @@ interface CraftService {
   removeSketchOffset?: ReturnType<typeof createClosedSketchTransitionCommands>['removeSketchOffset'];
   inspectClosedSketchMeasurements?: ReturnType<typeof createClosedSketchTransitionCommands>['inspectClosedSketchMeasurements'];
   createClosedSketchLengthMeasurement?: ReturnType<typeof createClosedSketchTransitionCommands>['createClosedSketchLengthMeasurement'];
+  removeClosedSketchLengthMeasurement?: ReturnType<typeof createClosedSketchTransitionCommands>['removeClosedSketchLengthMeasurement'];
   convertClosedSketchLengthRole?: ReturnType<typeof createClosedSketchTransitionCommands>['convertClosedSketchLengthRole'];
   applyClosedSketchOrientation?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchOrientation'];
   applyClosedSketchMidpoint?: ReturnType<typeof createClosedSketchTransitionCommands>['applyClosedSketchMidpoint'];

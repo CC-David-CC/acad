@@ -1,4 +1,4 @@
-import {convertReferenceLengthToDriving, convertDrivingLengthToReference, inspectLengthMeasurementRoles, convertLengthMeasurementById} from './lengthMeasurementRoles';
+import {createReferenceLengthMeasurement,removeReferenceLengthMeasurement,convertReferenceLengthToDriving, convertDrivingLengthToReference, inspectLengthMeasurementRoles, convertLengthMeasurementById} from './lengthMeasurementRoles';
 import {toast} from 'react-toastify';
 import {BiPencil} from "react-icons/bi";
 import {BsTextareaT} from "react-icons/bs";
@@ -7,6 +7,9 @@ import {isConstraintAnnotation} from "sketcher/constr/constraintAnnotation";
 import {editConstraint} from "sketcher/actions/constraintActions";
 
 export default [
+  {id:'CreateReferenceLengthRuler',shortName:'Reference length ruler',kind:'Misc',description:'Add a native read-only length measurement to an ordinary Segment or associative pattern output; never adds a driving equation.',icon:BiPencil,selectionMatcher:{selector:'function',match:s=>s.length===1&&s[0]?.TYPE==='Segment'},invoke:ctx=>createReferenceLengthMeasurement(ctx.viewer,ctx.viewer.selected[0])},
+  {id:'RemoveReferenceLengthRuler',shortName:'Remove reference ruler',kind:'Misc',description:'Remove a native reference ruler while preserving its actual source and generated geometry.',icon:BiPencil,selectionMatcher:{selector:'function',match:s=>s.length===1&&s[0]?.TYPE==='LinearDimension'},invoke:ctx=>removeReferenceLengthMeasurement(ctx.viewer,ctx.viewer.selected[0])},
+
   {
     id: 'LengthMeasurementRole',
     shortName: 'Toggle reference/driving length',

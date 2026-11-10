@@ -9,7 +9,7 @@ export function captureLengthMeasurementIntent(value){
  const action=Object.getOwnPropertyDescriptor(value||{},'action');if(!action?.enumerable||!Object.hasOwn(action,'value'))fail();let r;
  if(action.value==='inspect')r=measurementRecord(value,['action']);
  else if(action.value==='create'){r=measurementRecord(value,['action','segmentId']);measurementId(r.segmentId);}
- else if(action.value==='convert'){
+ else if(action.value==='remove'){r=measurementRecord(value,['action','measurementId']);measurementId(r.measurementId);} else if(action.value==='convert'){
   const role=Object.getOwnPropertyDescriptor(value,'role');if(!role?.enumerable||!Object.hasOwn(role,'value')||!['driving','reference'].includes(role.value))fail();r=measurementRecord(value,role.value==='driving'?['action','target','role','value']:['action','target','role']);
   const keys=Reflect.ownKeys(r.target||{});if(keys.length!==1||!['measurementId','constraintId'].includes(keys[0]))fail();const target=measurementRecord(r.target,keys);measurementId(target[keys[0]],keys[0]==='constraintId'?4096:256);r.target=Object.freeze(target);
   if(r.role==='driving'&&(typeof r.value!=='number'||!Number.isFinite(r.value)||r.value<=0||r.value>1e6))fail();
