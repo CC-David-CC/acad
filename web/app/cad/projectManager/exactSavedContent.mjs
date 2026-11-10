@@ -1,8 +1,11 @@
 // Worker-only exact authored-envelope comparison. Retain one baseline plus one
-// pending preparation; no digest can certify equality. Preserve JSON key order
-// and omission/number/string semantics of the historical Host comparator.
+// pending preparation; no digest can certify equality. File encoding preserves
+// JSON key order. Comparison normalizes RECORD key order only: insertion order
+// changes during history replay are not authored geometry or design intent.
+// Array order, names, field presence and JSON number/string values stay exact.
 import {ARCHIVE_LIMITS,archiveError} from './nativeArchiveFormat.mjs';
-export function exactSavedContent(value){
+export function exactSavedContent(value,sortRecordKeys=false){
+  if(typeof sortRecordKeys!=='boolean')throw archiveError('CAD_ARCHIVE_PROTOCOL','Invalid saved-content ordering mode.');
   const encoder=new TextEncoder(),parts=[];let pending='',bytes=0,nodes=0;const active=new Set();
   function put(text){
     bytes+=encoder.encode(text).length;if(bytes>ARCHIVE_LIMITS.bytes)throw archiveError('CAD_ARCHIVE_RESOURCE_LIMIT','Saved-content comparison exceeds 128 MiB.');
@@ -21,7 +24,7 @@ export function exactSavedContent(value){
     try{
       put(array?'[':'{');let first=true;
       if(array){if(keys.length!==item.length+1)throw archiveError('CAD_ARCHIVE_INVALID','Saved-content lists must be dense.');for(let i=0;i<item.length;i++){const d=Object.getOwnPropertyDescriptor(item,String(i));if(!d?.enumerable||!Object.hasOwn(d,'value'))throw archiveError('CAD_ARCHIVE_INVALID','Saved content contains a non-data element.');if(!first)put(',');first=false;walk(d.value,depth+1);}}
-      else for(const key of keys){const d=Object.getOwnPropertyDescriptor(item,key);if(!d?.enumerable||!Object.hasOwn(d,'value'))throw archiveError('CAD_ARCHIVE_INVALID','Saved content contains a non-data field.');if(d.value===undefined)continue;if(!first)put(',');first=false;string(key);put(':');walk(d.value,depth+1);}
+      else for(const key of sortRecordKeys?[...keys].sort():keys){const d=Object.getOwnPropertyDescriptor(item,key);if(!d?.enumerable||!Object.hasOwn(d,'value'))throw archiveError('CAD_ARCHIVE_INVALID','Saved content contains a non-data field.');if(d.value===undefined)continue;if(!first)put(',');first=false;string(key);put(':');walk(d.value,depth+1);}
       put(array?']':'}');
     }finally{active.delete(item);}
   }
