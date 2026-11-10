@@ -1,0 +1,13 @@
+# Box build early admission source handoff
+
+Base 03bbe610a2bebc489be97353413b512e04e6294f; BEFORE ce2c6ef4. Source only, no tests/probes/parser/build/Worker/Native/browser execution. Own isolated branch fix/box-build-preflight-20261110; Root integration untouched.
+
+Changed product:
+- workerSolidCommands.ts imports requireAvailableBoxBuild from the already Main-loaded catalogMount and calls it for box only after resolving the actual continuation build, checking explicit-request/history equality and capturing valid intent, before history budget capture, event listeners, allocator or candidate submission. Boolean behavior is unchanged.
+- catalogMount.ts retains exact baseline CAD_ENGINES singleton acceptance for OCC/Manifold/SMLib. The non-baseline preferred OCC Boolean-history build now checks its actual booleanAssets arrangement entry; all other optional builds delegate the same pre-existing selected-profile/Shell availability paths. No capability/default/pair/resource-list/Worker/bootstrap change or fallback.
+
+Empty-part unknown revision still fails requireCadEngineBuild. Existing-part explicit other revision still fails ENGINE_REVISION_MISMATCH before availability; absent explicit revision continues the actual output build, including an empty Native output. Matching supported old baseline history remains admitted exactly as before. Existing full optional mount graph/runtime/Native checks still run in the actual candidate. The repair does not claim to detect network fetch/runtime failures synchronously or roll back permanently consumed identities after a genuinely started candidate fails.
+
+Preferred assets: webpack alias codi-boolean-history-assets -> .build/boolean-history-entry.mjs; build/boolean-history-assets-entry.cjs verifies exact prepared files/closed module inventory and emits that entry; build/prepare-boolean-history-assets.cjs owns exact dd666902… / 8d5e537e… pair. requireArrangementAssets checks actual manifest capability/colocation before authoring, as already used by the corresponding factory and selected-profile availability. Baseline assets remain their existing static webpack imports; they are not reclassified as optional or forced through selected-profile admission.
+
+Regression source: test/box-build-admission/{public-refusals.mjs,check_refusals.py,README.md}. Must be composed into a complete normal signed lifecycle with one genuinely unstaged registered cohort and exact normal build custody. No standalone execution, fixture mutation, fake unavailable build, frozen historical evidence edit or claimed qualification. The full grouped run and original product workflows remain Root-owned and pending.
