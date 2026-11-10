@@ -19,7 +19,7 @@ function receipt(value,blob){
 export function createNativeArchiveOwner(workerUrl:string,lifetime:AbortSignal){
   if(cleanupFailure)throw cleanupFailure;
   aborted(lifetime);
-  let worker:Worker=null,closed=false,busy=false,sequence=0,waiting:any=null,active:any=null,prepared:any=null,ownCleanupFailure:any=null;
+  let worker:Worker=null,closed=false,busy=false,sequence=0,waiting:any=null,active:any=null,prepared:any=null,preparedContent:any=null,ownCleanupFailure:any=null;
   const failCleanup=(cause,operationError)=>{const error=archiveError('WORKER_CLEANUP_FAILED','Native archive Worker cleanup failed; reload this client module.',cause);(error as any).operationError=operationError;cleanupFailure ||= error;return error;};
   function close(...errors:any[]){
     const hasOperationError=errors.length>0,operationError=hasOperationError?errors[0]:null;
@@ -28,7 +28,7 @@ export function createNativeArchiveOwner(workerUrl:string,lifetime:AbortSignal){
     const clean=action=>{try{action();}catch(cause){failure ||= failCleanup(cause,operationError);}};
     clean(()=>unlisten(lifetime,'abort',onLifetime));
     if(worker){const own=worker;worker=null;clean(()=>unlisten(own,'message',onMessage));clean(()=>unlisten(own,'error',onError));clean(()=>unlisten(own,'messageerror',onError));clean(()=>own.terminate());}
-    const pending=waiting;waiting=null;prepared=null;
+    const pending=waiting;waiting=null;prepared=null;preparedContent=null;
     if(pending)pending.reject(failure||(hasOperationError?operationError:archiveError('CAD_ARCHIVE_CLOSED','Native archive owner closed.')));
     if(failure){ownCleanupFailure=failure;throw failure;}
   }
@@ -79,7 +79,7 @@ export function createNativeArchiveOwner(workerUrl:string,lifetime:AbortSignal){
     }
   }
   async function encode(source,options){
-    if(prepared)throw archiveError('CAD_ARCHIVE_BUSY','Release or commit the previous archive preparation first.');
+    if(prepared||preparedContent)throw archiveError('CAD_ARCHIVE_BUSY','Release or commit the previous source preparation first.');
     return operation(options,async(exchange,check)=>{
       await exchange('encode-start','ack');let index=0;
       await streamNativeArchiveProject(source,part=>exchange('part','ack',{part,index:index++}),()=>{check();return true;});
@@ -91,6 +91,30 @@ export function createNativeArchiveOwner(workerUrl:string,lifetime:AbortSignal){
       });
     });
   }
+  async function prepareContent(source,options){
+    if(prepared||preparedContent)throw archiveError('CAD_ARCHIVE_BUSY','Release the previous source preparation first.');
+    return operation(options,async(exchange,check)=>{
+      await exchange('content-start','ack');let index=0;
+      await streamNativeArchiveProject(source,part=>exchange('part','ack',{part,index:index++}),()=>{check();return true;});
+      const result=await exchange('content-finish','content-prepared');
+      if(result.preparation!==active.seq||!(result.equal===null||typeof result.equal==='boolean'))throw archiveError('CAD_ARCHIVE_PROTOCOL','Invalid saved-content preparation.');
+      const token={preparation:result.preparation};preparedContent=token;let terminal:'pending'|'adopting'|'adopted'|'released'='pending';
+      return Object.freeze({equal:result.equal,
+        async adopt(adoptionOptions){
+          if(terminal==='adopted')return;
+          if(terminal!=='pending'||closed||preparedContent!==token)throw archiveError('CAD_ARCHIVE_CLOSED','Saved-content preparation was released.');
+          terminal='adopting';
+          try{await operation(adoptionOptions,exchange=>exchange('content-adopt','content-adopted',{preparation:token.preparation}));}catch(error){terminal='released';throw error;}
+          if(preparedContent!==token)throw archiveError('CAD_ARCHIVE_PROTOCOL','Saved-content preparation changed.');preparedContent=null;terminal='adopted';
+        },
+        async release(){
+          if(terminal!=='pending')return;terminal='released';
+          if(closed||preparedContent!==token)return;
+          try{await operation({valid:()=>!aborted(lifetime)},exchange=>exchange('content-discard','content-discarded',{preparation:token.preparation}));}finally{if(preparedContent===token)preparedContent=null;}
+        }
+      });
+    });
+  }
   async function decode(blob,options){checkBlob(blob);return operation(options,async exchange=>{await exchange('decode','decoded',{blob});const result=active.receiver.finish();receipt(result.receipt,blob);return result;});}
-  return Object.freeze({encode,decode,close,get available(){return !closed&&!cleanupFailure;}});
+  return Object.freeze({encode,decode,prepareContent,close,get available(){return !closed&&!cleanupFailure;}});
 }

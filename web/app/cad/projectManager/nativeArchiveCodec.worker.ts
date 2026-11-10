@@ -3,6 +3,7 @@
 import {BlobReader,ZipReader,ZipWriter,configure} from '@zip.js/zip.js/lib/zip-core-native.js';
 import {sha256} from '@noble/hashes/sha256';
 import {ARCHIVE_LIMITS as L,ARCHIVE_FORMAT,ARCHIVE_PROFILE,ArchiveDataReceiver,archiveError,validateManifest,authoredRootRecord,exactRecord} from './nativeArchiveFormat.mjs';
+import {exactSavedContent,savedContentEqual} from './exactSavedContent.mjs';
 import {canonicalChunks} from './incrementalCanonical.mjs';
 import {streamNativeArchiveSource} from './nativeArchiveSource';
 import {encodeProjectEnvelope,decodeProjectEnvelope} from './projectEnvelope.mjs';
@@ -81,6 +82,7 @@ async function unpack(blob,entry,zipEntry){
 }
 
 let previous:any=null,pending:any=null,job:any=null,ack:any=null,lastSequence=0;
+let savedContent:any=null,pendingContent:any=null;
 function makeReceipt(manifest,cost){return {format:ARCHIVE_FORMAT,version:1,unit:'millimeter',writerProfile:ARCHIVE_PROFILE,designRevision:manifest.designRevision,entryCount:manifest.entries.length+1,...cost};}
 async function encode(root,sketches){
   sketches.sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
@@ -182,16 +184,21 @@ self.onmessage=async event=>{
   try{
     if(!message||!Number.isSafeInteger(message.seq)||message.seq<1)throw archiveError('CAD_ARCHIVE_PROTOCOL','Invalid archive sequence.');
     if(job?.running)throw archiveError('CAD_ARCHIVE_PROTOCOL','Concurrent native archive operation.');
-    if(['encode-start','decode','rebase','discard'].includes(message.type)){
+    if(['encode-start','decode','rebase','discard','content-start','content-adopt','content-discard'].includes(message.type)){
       if(message.seq<=lastSequence)throw archiveError('CAD_ARCHIVE_PROTOCOL','Replayed native archive sequence.');lastSequence=message.seq;
     }
-    if(message.type==='encode-start'){
-      if(job||pending)throw archiveError('CAD_ARCHIVE_BUSY','An archive preparation is already owned.');
-      job={seq:message.seq,root:new ArchiveDataReceiver(),sketch:new ArchiveDataReceiver(),sketches:[],part:0,sourceUnits:0};post('ack');return;
+    if(message.type==='encode-start'||message.type==='content-start'){
+      if(job||pending||pendingContent)throw archiveError('CAD_ARCHIVE_BUSY','An archive preparation is already owned.');
+      job={seq:message.seq,mode:message.type,root:new ArchiveDataReceiver(),sketch:new ArchiveDataReceiver(),sketches:[],part:0,sourceUnits:0};post('ack');return;
     }
     if(message.type==='decode'){
-      if(job||pending)throw archiveError('CAD_ARCHIVE_BUSY','An archive operation is already owned.');
+      if(job||pending||pendingContent)throw archiveError('CAD_ARCHIVE_BUSY','An archive operation is already owned.');
       job={seq:message.seq,running:true};const output=await decode(message.blob);await hydrate(output);post('decoded');job=null;return;
+    }
+    if(message.type==='content-adopt'||message.type==='content-discard'){
+      if(job||!pendingContent||message.preparation!==pendingContent.seq)throw archiveError('CAD_ARCHIVE_PROTOCOL','No matching saved-content preparation.');
+      job={seq:message.seq};if(message.type==='content-adopt')savedContent=pendingContent.value;
+      pendingContent=null;post(message.type==='content-adopt'?'content-adopted':'content-discarded');job=null;return;
     }
     if(message.type==='rebase'){
       if(job||!pending)throw archiveError('CAD_ARCHIVE_PROTOCOL','No prepared archive can be rebased.');
@@ -214,7 +221,16 @@ self.onmessage=async event=>{
       }else throw archiveError('CAD_ARCHIVE_PROTOCOL','Unknown source part.');
       post('ack',{index:message.index});return;
     }
+    if(message.type==='content-finish'){
+      if(job.mode!=='content-start')throw archiveError('CAD_ARCHIVE_PROTOCOL','Wrong saved-content completion.');
+      if(job.sketch.hasRoot)throw archiveError('CAD_ARCHIVE_PROTOCOL','Incomplete saved-content sketch.');
+      job.running=true;const root=job.root.finish();exactRecord(root,Object.hasOwn(root,'surfacing')?['model','surfacing','manufacturing','presentation','drawing']:['model','manufacturing','presentation','drawing']);
+      const sketches=job.sketches.sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0),project={model:root.model,sketches:sketches.map(s=>({id:s.id,data:JSON.parse(s.raw)})),...(Object.hasOwn(root,'surfacing')?{surfacing:root.surfacing}:{})};
+      const envelope=encodeProjectEnvelope(project,root.manufacturing,root.presentation,root.drawing);preflight(envelope);
+      const value=exactSavedContent(envelope),equal=savedContent===null?null:savedContentEqual(savedContent,value);pendingContent={seq:job.seq,value};post('content-prepared',{preparation:job.seq,equal});job=null;return;
+    }
     if(message.type==='encode-finish'){
+      if(job.mode!=='encode-start')throw archiveError('CAD_ARCHIVE_PROTOCOL','Wrong archive completion.');
       job.running=true;
       const root=job.root.finish();exactRecord(root,Object.hasOwn(root,'surfacing')?['model','surfacing','manufacturing','presentation','drawing']:['model','manufacturing','presentation','drawing']);
       const output=await encode(root,job.sketches);post('encoded',output);job=null;return;
@@ -222,6 +238,6 @@ self.onmessage=async event=>{
     throw archiveError('CAD_ARCHIVE_PROTOCOL','Unknown archive operation.');
   }catch(error){
     const seq=message?.seq;self.postMessage({seq,type:'error',code:typeof error?.code==='string'?error.code:'CAD_ARCHIVE_INVALID',message:error instanceof Error?error.message:'Native archive failed.'});
-    previous=null;pending=null;job=null;ack?.reject(error);ack=null;self.close();
+    previous=null;pending=null;savedContent=null;pendingContent=null;job=null;ack?.reject(error);ack=null;self.close();
   }
 };

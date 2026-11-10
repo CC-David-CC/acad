@@ -682,7 +682,9 @@ export function activate(ctx: ApplicationContext) {
   // This intentionally does not call snapshotCurrentProject/JSON.stringify or
   // structuredClone on the complete source. ARC23's host dirty comparator and
   // cooperative source projection/hydration remain separately disclosed costs.
-  async function prepareHostNativeArchive(options:{signal?:AbortSignal,valid?:()=>boolean}={}){
+  // One guarded, lazy authored source boundary for archive encoding and exact
+  // saved-content comparison. It never constructs the legacy JSON snapshot.
+  async function captureHostProjectSourceJob(options:{signal?:AbortSignal,valid?:()=>boolean}={}){
     options=captureDocumentJobOptions(options,true);
     if(ownsDocument(restorePending))throw Object.assign(new Error('A native archive restore is in progress.'),{code:'CAD_ARCHIVE_BUSY'});
     const job=documentJob(options),captured=capturedManufacturingJob(job,undefined,false),project=job.project;
@@ -698,15 +700,33 @@ export function activate(ctx: ApplicationContext) {
     const sketchIds=storage.getAllKeysFromNamespace(namespace).sort().map(key=>key.substring(namespace.length));
     const surfacing=ctx.surfacingService?await ctx.surfacingService.saveCooperatively(()=>{if(!current())throw new DOMException('Project changed.','AbortError');}):null;
     if(!current())throw new DOMException('Project changed.','AbortError');
+    const source={model,...(surfacing?{surfacing}:{}),manufacturing:manufacturingMetadata,presentation:presentationMetadata,drawing:drawingDefinition,sketchIds,readSketch:id=>{if(!current())throw new DOMException('Project changed.','AbortError');return storage.get(namespace+id);}};
+    return {job,source,current,options};
+  }
+
+  async function prepareHostNativeArchive(options:{signal?:AbortSignal,valid?:()=>boolean}={}){
+    const work=await captureHostProjectSourceJob(options),{job,current}=work;
     const owner=nativeArchiveOwner(job);
-    const prepared=await owner.encode({model,...(surfacing?{surfacing}:{}),manufacturing:manufacturingMetadata,presentation:presentationMetadata,drawing:drawingDefinition,sketchIds,readSketch:id=>{if(!current())throw new DOMException('Project changed.','AbortError');return storage.get(namespace+id);}},
-      {signal:options.signal,valid:current});
+    const prepared=await owner.encode(work.source,{signal:work.options.signal,valid:current});
     if(!current()){await prepared.release();throw new DOMException('Project changed.','AbortError');}
     return Object.freeze({blob:prepared.blob,receipt:prepared.receipt,isCurrent:current,
       // The host obtains this Blob from the normal verified snapshot API only
       // AFTER a committed write. Worker compares the actual complete bytes to
       // its issued output before replacing its one prior span table.
       rebase:(blob:Blob,rebaseOptions:{signal?:AbortSignal,valid?:()=>boolean}={})=>prepared.rebase(blob,rebaseOptions),
+      release:()=>prepared.release()});
+  }
+
+  // Exact content lives only in the document-owned Worker. The returned
+  // preparation is NOT a public saved flag: Host must adopt it only after a
+  // known Files commit or successful New/Open publication. Mutation revision
+  // may change before adoption; that deliberately saves the captured source.
+  async function prepareHostSavedContent(options:{signal?:AbortSignal,valid?:()=>boolean}={}){
+    const work=await captureHostProjectSourceJob(options),{job,current}=work;
+    const owner=nativeArchiveOwner(job),prepared=await owner.prepareContent(work.source,{signal:work.options.signal,valid:current});
+    if(!current()){await prepared.release();throw new DOMException('Project changed.','AbortError');}
+    return Object.freeze({equal:prepared.equal,isCurrent:current,
+      adopt:()=>prepared.adopt({signal:work.options.signal,valid:()=>{try{job.guard();return true;}catch{return false;}}}),
       release:()=>prepared.release()});
   }
 
@@ -1201,7 +1221,7 @@ export function activate(ctx: ApplicationContext) {
     get isRestoring(): boolean { return ownsDocument(restoringSnapshot); },
     listProjects, openProject, newProject, renameProject, deleteProject, importBundle,
     exists, cloneProject, exportProject, importProjectAs, importProject, loadExternalProject,
-    snapshotCurrentProject, snapshotForHostSave, prepareHostSave,prepareHostNativeArchive,restoreNativeArchiveBytesInEmptyWorkspace,closeNativeArchive, inspectDocumentRevision, inspectMaterialSurfaceRevision, inspectEnclosureMaterialRoles, assignEnclosureMaterialRoles, inspectGenericManufacturingParts, prepareGenericManufacturingAssignment,assignGenericManufacturingParts,travelManufacturingMetadata,readManufacturingPublication, restoreSnapshotInEmptyWorkspace, restoreSnapshotBytesInEmptyWorkspace, getManufacturingMetadata, hasManufacturingMetadata,inspectAuthoredManufacturingReferences, verifyParentRepairAssignments, exportCore3mfResearch,
+    snapshotCurrentProject, snapshotForHostSave, prepareHostSave,prepareHostNativeArchive,prepareHostSavedContent,restoreNativeArchiveBytesInEmptyWorkspace,closeNativeArchive, inspectDocumentRevision, inspectMaterialSurfaceRevision, inspectEnclosureMaterialRoles, assignEnclosureMaterialRoles, inspectGenericManufacturingParts, prepareGenericManufacturingAssignment,assignGenericManufacturingParts,travelManufacturingMetadata,readManufacturingPublication, restoreSnapshotInEmptyWorkspace, restoreSnapshotBytesInEmptyWorkspace, getManufacturingMetadata, hasManufacturingMetadata,inspectAuthoredManufacturingReferences, verifyParentRepairAssignments, exportCore3mfResearch,
     proposeHostManufacturingRebind, confirmHostManufacturingRebind, cancelHostManufacturingRebind, resetDocumentState
   };
 
@@ -1311,6 +1331,7 @@ interface IProjectManager {
 
   snapshotForHostSave(options?: {signal?:AbortSignal,valid?:()=>boolean}): Promise<ProjectEnvelope>;
   prepareHostSave(options?: {signal?:AbortSignal,valid?:()=>boolean}): Promise<{envelope:ProjectEnvelope,isCurrent:()=>boolean}>;
+  prepareHostSavedContent(options?:{signal?:AbortSignal,valid?:()=>boolean}):Promise<{equal:boolean|null,isCurrent:()=>boolean,adopt:()=>Promise<void>,release:()=>Promise<void>}>;
   prepareHostNativeArchive(options?:{signal?:AbortSignal,valid?:()=>boolean}):Promise<{blob:Blob,receipt:any,isCurrent:()=>boolean,rebase:(blob:Blob,options?:{signal?:AbortSignal,valid?:()=>boolean})=>Promise<{verifiedBytes:number}>,release:()=>Promise<void>}>;
   restoreNativeArchiveBytesInEmptyWorkspace(blob:Blob,options?:{signal?:AbortSignal,valid?:()=>boolean}):Promise<any>;
   closeNativeArchive():void;
