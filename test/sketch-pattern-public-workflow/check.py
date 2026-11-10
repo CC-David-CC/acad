@@ -78,7 +78,7 @@ def bind_initial_authoring(r):
     return history
 
 def run(directory):
-    d=Path(directory);raw=(d/'receipt.json').read_bytes();r=json.loads(raw);require(r['status']=='PASS' and r['qualification']=='REACHABLE_SCOPE_ONLY_REQUIRED_DEPENDENCY_OPEN','complete reachable whole only');require(r['requiredOpen']==['genuine-public-dependent-shrink'],'do not waive missing dependency workflow');require(not r['sourceSeeds'] and not r['privateAuthoring'] and not r['fakeReplies'] and r['totalInstancesIncludeSeed'] is True and r['sourceBudgetMm']==5e-8,'unchanged authority/budget');require(r['sourcePins']==r['sourcePinsAfter'] and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'] and not r.get('pendingOpen') and not r.get('pendingDirect') and not r.get('retainedOutcome'),'source/cleanup custody')
+    d=Path(directory);raw=(d/'receipt.json').read_bytes();r=json.loads(raw);require(r['status']=='PASS' and r['qualification']=='REACHABLE_SCOPE_ONLY_REQUIRED_DEPENDENCY_OPEN','complete reachable whole only');require(r['requiredOpen']==['genuine-public-dependent-shrink'],'do not waive missing dependency workflow');require(not r['sourceSeeds'] and not r['privateAuthoring'] and not r['fakeReplies'] and r['totalInstancesIncludeSeed'] is True and r['sourceBudgetMm']==5e-8,'unchanged authority/budget');require(r['sourcePins']==r['sourcePinsAfter'] and r['ownedContextsRetired'] and r['sharedBrowserDisconnectedOnly'] and not r.get('pendingOpen') and not r.get('pendingDirect') and not r.get('retainedOutcome') and not r.get('pendingMutations'),'source/cleanup custody')
     require(r['pins']['source']==r['source'] and r['pins']['desktop']==r['hostSource'],'exact actual compiled pin identities')
     before_roots=r['sourceCheckoutsBefore'];after_roots=r['sourceCheckoutsAfter']
     require(set(before_roots)=={'core','desktop','acceptance'} and before_roots==after_roots,'all three actual checkout identities before and after')
@@ -125,6 +125,12 @@ def run(directory):
         native_equal(row['after'],row['expected']);settled(row['after']);trace=commands[row['commandIndex']:];command=one([x for x in trace[:2] if x['command']=='travel-authored-edit'],'actual shared travel command');require(command['args']['direction']==row['direction'] and command['result']==row['result'],'actual travel direction/result');require(row['before']['capture']['native']['counters']==row['after']['capture']['native']['counters'],'travel highwater retained')
     for row in r['refusals']:
         require(row['before']==row['after'] and row['error'] is not None and not row['error']['committed'] and not row['error']['possiblyCommitted'],'complete pure refusal state');settled(row['after']);expected=REFUSALS[row['label']];require(row['error']['code']==expected if expected else row['error']['name']=='AbortError','actual refusal layer/code');require(any(x.get('error')==row['error'] for x in commands[row['commandStart']:row['commandEnd']]),'actual failed command binding')
+    require(len(r['mutationOutcomes'])==len(REFUSALS) and [x['refusalLabel'] for x in r['mutationOutcomes']]==list(REFUSALS),'every failed mutation has its actual frozen refusal proof')
+    for outcome in r['mutationOutcomes']:
+        require(outcome['phase']=='settled-refusal','no unknown normalized-flag outcome')
+        command=commands[outcome['commandIndex']];proof=one([x for x in r['refusals'] if x['label']==outcome['refusalLabel']],'actual expected refusal')
+        require(command['command']==outcome['command'] and command['args']==outcome['args'] and command['error']==outcome['error'] and command['commitEvidence']==outcome['commitEvidence'],'raw delivered mutation error/flag evidence')
+        require(outcome['proof']==proof and proof['commandStart']<=outcome['commandIndex']<proof['commandEnd'] and proof['before']==proof['after'],'actual full-state no-publication proof, never false flags alone')
     direct=r['directBoundary'];require([x['action'] for x in direct['calls']]==['create','edit'],'both genuine direct-Core captures')
     req=direct['originalRequest'];require(req['count']==4 and req['step']=={'x':7,'y':1} and set(req['sourceIds'])==set(x['id'] for x in b['roots']),'original direct create tuple')
     require(direct['foreignId'] not in req['sourceIds'],'actual different-source negative caller identity')
