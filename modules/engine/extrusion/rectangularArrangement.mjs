@@ -1,11 +1,29 @@
+import {captureRectangleArrangementDiagnostic} from './rectangleArrangementDiagnostic.mjs';
 // Worker-only finite arrangement of TWO real axis-aligned rectangle loops.
 // Original source is never split/rewritten. No tolerance welding or Native work.
 import {analyzeSimplePolygon,classifyPolygonPoint} from './simplePolygon.mjs';
 import {arrangementPolicy,canonicalArrangement,canonicalBoundaryCycle,sourceSpanId,arrangementRegionIdentity,captureArrangementDescriptor,captureArrangementAnalysis} from './selectedArrangementDescriptor.mjs';
 const fail=(message,code='UNSUPPORTED_REGION_TOPOLOGY')=>{throw Object.assign(Error(message),{code});},cmp=(a,b)=>a<b?-1:a>b?1:0,key=p=>JSON.stringify(p);
-function rectangle(loop){if(loop.length!==4||loop.some(c=>c.kind!=='segment'))return null;const points=loop.map(c=>c.a),xs=[...new Set(points.map(p=>p[0]))].sort((a,b)=>a-b),ys=[...new Set(points.map(p=>p[1]))].sort((a,b)=>a-b);if(xs.length!==2||ys.length!==2||loop.some(c=>!((c.a[0]===c.b[0])!==(c.a[1]===c.b[1])))||new Set(points.map(key)).size!==4)return null;return{loop,min:[xs[0],ys[0]],max:[xs[1],ys[1]]};}
+function rectangle(loop,loopIndex,onFailure){
+ // This callback observes only a real failed recognizer decision. It cannot
+ // influence eligibility or leak identifiers/absolute source coordinates.
+ const rejected=reason=>{
+  if(onFailure)try{
+   const points=loop.map(c=>c.a),first=loop.findIndex(c=>!((c.a[0]===c.b[0])!==(c.a[1]===c.b[1]))),edge=first<0?null:loop[first];
+   onFailure(captureRectangleArrangementDiagnostic({version:1,kind:'rectangle-arrangement-eligibility',phase:'source-topology',unit:'millimeter',loopCount:2,segmentCount:8,loopIndex,vertexCount:points.length,distinctX:new Set(points.map(p=>p[0])).size,distinctY:new Set(points.map(p=>p[1])).size,distinctVertices:new Set(points.map(key)).size,reason,edgeIndex:edge?first:null,equalX:edge?edge.a[0]===edge.b[0]:null,equalY:edge?edge.a[1]===edge.b[1]:null,dx:edge?edge.b[0]-edge.a[0]:null,dy:edge?edge.b[1]-edge.a[1]:null}));
+  }catch{} // Optional metadata must never replace the original result/error.
+  return null;
+ };
+ if(loop.length!==4||loop.some(c=>c.kind!=='segment'))return rejected('EDGE_COUNT');
+ const points=loop.map(c=>c.a),xs=[...new Set(points.map(p=>p[0]))].sort((a,b)=>a-b),ys=[...new Set(points.map(p=>p[1]))].sort((a,b)=>a-b);
+ if(xs.length!==2)return rejected('DISTINCT_X_COUNT');
+ if(ys.length!==2)return rejected('DISTINCT_Y_COUNT');
+ if(loop.some(c=>!((c.a[0]===c.b[0])!==(c.a[1]===c.b[1]))))return rejected('NON_AXIS_EDGE');
+ if(new Set(points.map(key)).size!==4)return rejected('REPEATED_VERTEX');
+ return{loop,min:[xs[0],ys[0]],max:[xs[1],ys[1]]};
+}
 const on=(p,c)=>c.a[0]===c.b[0]?p[0]===c.a[0]&&p[1]>=Math.min(c.a[1],c.b[1])&&p[1]<=Math.max(c.a[1],c.b[1]):p[1]===c.a[1]&&p[0]>=Math.min(c.a[0],c.b[0])&&p[0]<=Math.max(c.a[0],c.b[0]);
-export async function deriveRectangleArrangement({faceId,loops,qualifiedToLocal}){if(loops.length!==2)return null;const boxes=loops.map(rectangle);if(boxes.some(b=>!b))return null;const[a,b]=boxes,overlap=[0,1].map(i=>Math.min(a.max[i],b.max[i])-Math.max(a.min[i],b.min[i]));if(overlap.some(n=>n<=0))return null;const contains=(x,y)=>[0,1].every(i=>x.min[i]<y.min[i]&&x.max[i]>y.max[i]);if(contains(a,b)||contains(b,a))return null;
+export async function deriveRectangleArrangement({faceId,loops,qualifiedToLocal,onEligibilityFailure}){if(loops.length!==2)return null;const observe=typeof onEligibilityFailure==='function'&&loops.reduce((n,loop)=>n+loop.length,0)===8&&loops.every(loop=>loop.every(c=>c.kind==='segment'))?onEligibilityFailure:null,boxes=loops.map((loop,index)=>rectangle(loop,index,observe));if(boxes.some(b=>!b))return null;const[a,b]=boxes,overlap=[0,1].map(i=>Math.min(a.max[i],b.max[i])-Math.max(a.min[i],b.min[i]));if(overlap.some(n=>n<=0))return null;const contains=(x,y)=>[0,1].every(i=>x.min[i]<y.min[i]&&x.max[i]>y.max[i]);if(contains(a,b)||contains(b,a))return null;
  const curves=loops.flat(),local=c=>{const id=qualifiedToLocal.get(c.id);if(!id)fail('A source curve has no actual local binding.');return id;},sourceLoops=loops.map(loop=>loop.map(local).sort()).sort((x,y)=>cmp(canonicalArrangement(x),canonicalArrangement(y))),sourceIds=new Set(sourceLoops.flat());if(curves.length!==8||sourceIds.size!==8)fail('Arrangement requires two distinct authored rectangles.');
  const events=new Map(),add=p=>{if(!p.every(Number.isFinite))fail('Nonfinite source intersection.');events.set(key(p),p.slice());};for(const c of curves){add(c.a);add(c.b);}for(let i=0;i<curves.length;i++)for(let j=i+1;j<curves.length;j++){const c=curves[i],d=curves[j],cv=c.a[0]===c.b[0],dv=d.a[0]===d.b[0];if(cv!==dv){const v=cv?c:d,h=cv?d:c,p=[v.a[0],h.a[1]];if(on(p,c)&&on(p,d))add(p);}else if(cv?c.a[0]===d.a[0]:c.a[1]===d.a[1])for(const p of[c.a,c.b,d.a,d.b])if(on(p,c)&&on(p,d))add(p);}
  if(events.size>16)fail('Arrangement event bound exceeded.','RESOURCE_LIMIT');const eventRefs=new Map(),seenEvents=new Set();for(const[k,p]of events){const ref={incidentCurveIds:curves.filter(c=>on(p,c)).map(local).sort()},id=canonicalArrangement(ref);if(ref.incidentCurveIds.length<2||seenEvents.has(id))fail('Source incidence does not uniquely identify an arrangement event.');seenEvents.add(id);eventRefs.set(k,ref);}

@@ -8,6 +8,8 @@
   "core": [
     "test/native-cad-container/archive_oracle.py",
     "modules/engine/extrusion/selectedSketchProfile.mjs",
+    "modules/engine/extrusion/rectangleArrangementDiagnostic.mjs",
+    "modules/engine/extrusion/rectangleArrangementDiagnostic.d.mts",
     "modules/engine/extrusion/rectangularArrangement.mjs",
     "modules/engine/extrusion/rectangularContactArrangement.mjs",
     "modules/engine/extrusion/simplePolygon.mjs",

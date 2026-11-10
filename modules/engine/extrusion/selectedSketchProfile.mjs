@@ -1,3 +1,4 @@
+import {captureRectangleArrangementDiagnostic} from './rectangleArrangementDiagnostic.mjs';
 import {captureArcData} from './authoredArcBranch.mjs';
 import {prepareAnalyticProfileExtrusion,orderAnalyticProfileLoop} from '../mount/analyticProfilePlan.mjs';
 // Worker-only geometry preparation. This does not solve or admit constraints.
@@ -13,7 +14,7 @@ import {deriveRectangleContactArrangement} from './rectangularContactArrangement
 import {deriveCircularArrangement,prepareCircularCellExtrusion} from '../mount/circularArrangementPlan.mjs';
 import {circularRelation} from './circularTopology.mjs';
 
-const fail=(code,message)=>{throw Object.assign(new Error(message),{code});};
+const fail=(code,message,work)=>{const error=Object.assign(new Error(message),{code});if(work!==undefined)Object.defineProperty(error,'work',{value:work,enumerable:true});throw error;};
 const fields=(value,keys)=>{
  if(!value||typeof value!=='object'||Array.isArray(value)||Reflect.ownKeys(value).length!==keys.length)fail('INVALID_REQUEST','Expected exact selected-region preparation data.');
  const out={};for(const key of keys){const d=Object.getOwnPropertyDescriptor(value,key);if(!d?.enumerable||!Object.hasOwn(d,'value'))fail('INVALID_REQUEST','Preparation fields must be data.');out[key]=d.value;}return out;
@@ -115,7 +116,8 @@ async function extractSource({r,frame,faceOnly=false},allowIsolatedOpen=false){
  // A derived arrangement is a different source contract, not a relaxed
  // containment classification. Only this exact eight-Segment extrusion slice
  // qualifies; source-face consumers retain their whole-curve contracts.
- const arrangement=mixed&&!open.length&&segments.length===8?await deriveRectangleArrangement({faceId:r.faceId,loops,qualifiedToLocal}):null;
+ let arrangementDiagnostic;const onEligibilityFailure=value=>{if(arrangementDiagnostic===undefined)try{arrangementDiagnostic=captureRectangleArrangementDiagnostic(value);}catch{}};
+ const arrangement=mixed&&!open.length&&segments.length===8?await deriveRectangleArrangement({faceId:r.faceId,loops,qualifiedToLocal,onEligibilityFailure}):null;
  if(arrangement)return{r,frame,regions:arrangement.cells,byIds:new Map(),qualifiedToLocal,sketch,sourceAnalysis:arrangement.sourceAnalysis,arrangement};
  if(r.circularArrangementVersion===1&&mixed&&!open.length&&!segments.length&&loops.length===2&&loops.every(loop=>loop.length===1&&loop[0].kind==='circle')){
   const circles=loops.map(loop=>({id:qualifiedToLocal.get(loop[0].id),center:loop[0].center.slice(),radius:loop[0].radius})).sort((a,b)=>a.id<b.id?-1:1),relation=circularRelation(circles[0],circles[1]);
@@ -128,7 +130,7 @@ async function extractSource({r,frame,faceOnly=false},allowIsolatedOpen=false){
  // still needs the complete real source census. With faceOnly, mixed is false
  // and open is empty: this does not admit arrangements or open-chain repair.
  const sourceAnalysis=mixed||faceOnly?analyzeIsolatedOpenComponents({loops,profiles,open,qualifiedToLocal}):null;
- let regions;try{regions=deriveAuthoredRegions(r.faceId,loops.map(loop=>loop.map(c=>c.id)),profiles,r.profileVersion===3?3:2);}catch(error){fail('UNSUPPORTED_REGION_TOPOLOGY',error.message);}
+ let regions;try{regions=deriveAuthoredRegions(r.faceId,loops.map(loop=>loop.map(c=>c.id)),profiles,r.profileVersion===3?3:2);}catch(error){fail('UNSUPPORTED_REGION_TOPOLOGY',error.message,arrangementDiagnostic);}
  const byIds=new Map(loops.map(loop=>[JSON.stringify(loop.map(c=>c.id).sort()),loop]));
  return{r,frame,regions,byIds,qualifiedToLocal,sketch,sourceAnalysis};
 }
