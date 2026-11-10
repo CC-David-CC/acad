@@ -5,18 +5,33 @@ import {captureAuthoredBlindHoleIntent} from '../../../../modules/engine/solid/a
 import {historyStateVersion} from '../../../../modules/engine/solid/authoredHistoryState.mjs';
 import {AUTHORED_SOLID_KINDS} from '../../../../modules/engine/solid/authoredSolidKinds.mjs';
 import {captureAuthoredHoleIntent} from '../../../../modules/engine/solid/authoredLengthBinding.mjs';
+import {captureSelectedProfileDepthParameters} from '../craft/authoredEditJournal.mjs';
 export const MODERN_PHYSICAL_TYPES=Object.freeze(['WORKER_SELECTED_PROFILE_EXTRUDE_V2','WORKER_THROUGH_HOLES_V1','WORKER_CENTERED_BLIND_HOLE_V1','WORKER_CENTERED_COUNTERBORE_V1','WORKER_CENTERED_COUNTERSINK_V1',PROFILE_EXTENT_TYPE]);
 // A formula dependency document is not a geometric simultaneous-equation system.
-export function requireModernPhysicalHistory(history){
+export function captureModernPhysicalProfiles(history){
  if(historyStateVersion(history)===1)throw Object.assign(Error('Typed history controls are not integrated.'),{code:'UNSUPPORTED_PARAMETERS'});
  if(!Array.isArray(history)||history.length>256)throw Object.assign(Error('Expected bounded authored parameter history.'),{code:'UNSUPPORTED_PARAMETERS'});
- const modern=history.some(row=>AUTHORED_SOLID_KINDS.includes(row.type));if(!modern)return false;
+ const modern=history.some(row=>AUTHORED_SOLID_KINDS.includes(row.type));if(!modern)return null;
  for(const row of history)if(row.type!=='PLANE'&&!MODERN_PHYSICAL_TYPES.includes(row.type))throw Object.assign(Error('Typed generic parts currently support only selected profiles and through holes.'),{code:'UNSUPPORTED_PARAMETERS'});
- const profiles=history.filter(row=>['WORKER_SELECTED_PROFILE_EXTRUDE_V2',PROFILE_EXTENT_TYPE].includes(row.type));
- if(profiles.length!==1)throw Object.assign(Error('One unambiguous selected profile is supported by this typed transaction.'),{code:'UNSUPPORTED_PARAMETERS'});
- const profile=profiles[0].params;if(profiles[0].type===PROFILE_EXTENT_TYPE)captureOwnedProfileExtentFeature(profile);
- for(const row of history)if(['WORKER_THROUGH_HOLES_V1','WORKER_CENTERED_BLIND_HOLE_V1','WORKER_CENTERED_COUNTERBORE_V1','WORKER_CENTERED_COUNTERSINK_V1'].includes(row.type)){if(['WORKER_CENTERED_COUNTERBORE_V1','WORKER_CENTERED_COUNTERSINK_V1'].includes(row.type)&&profiles[0].type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2')throw Object.assign(Error('Counterbores and countersinks require the existing positive-depth selected-profile source.'),{code:'UNSUPPORTED_PARAMETERS'});const hole=row.type==='WORKER_CENTERED_COUNTERSINK_V1'?captureAuthoredCountersinkIntent(row.params):row.type==='WORKER_CENTERED_COUNTERBORE_V1'?captureAuthoredCounterboreIntent(row.params):row.type==='WORKER_CENTERED_BLIND_HOLE_V1'?captureAuthoredBlindHoleIntent(row.params):captureAuthoredHoleIntent(row.params);if(hole.sourceFeatureId!==profile.featureId||hole.sourceFaceId!==profile.faceId||hole.sourceRegionId!==profile.regionId||hole.engine!==profile.engine||hole.engineRevision!==profile.engineRevision)throw Object.assign(Error('The typed hole source must be the actual selected profile in the same part build.'),{code:'UNSUPPORTED_PARAMETERS'});}
- return true;
+ const profiles=[],byFeature=new Map(),faces=new Set();
+ for(let index=0;index<history.length;index++){
+  const row=history[index];
+  if(['WORKER_SELECTED_PROFILE_EXTRUDE_V2',PROFILE_EXTENT_TYPE].includes(row.type)){
+   const profile=row.type===PROFILE_EXTENT_TYPE?captureOwnedProfileExtentFeature(row.params):captureSelectedProfileDepthParameters(row.params);
+   if(byFeature.has(profile.featureId)||faces.has(profile.faceId))throw Object.assign(Error('Selected profile identity is ambiguous.'),{code:'UNSUPPORTED_PARAMETERS'});
+   const entry=Object.freeze({index,type:row.type,profile});profiles.push(entry);byFeature.set(profile.featureId,entry);faces.add(profile.faceId);
+  }else if(['WORKER_THROUGH_HOLES_V1','WORKER_CENTERED_BLIND_HOLE_V1','WORKER_CENTERED_COUNTERBORE_V1','WORKER_CENTERED_COUNTERSINK_V1'].includes(row.type)){
+   const hole=row.type==='WORKER_CENTERED_COUNTERSINK_V1'?captureAuthoredCountersinkIntent(row.params):row.type==='WORKER_CENTERED_COUNTERBORE_V1'?captureAuthoredCounterboreIntent(row.params):row.type==='WORKER_CENTERED_BLIND_HOLE_V1'?captureAuthoredBlindHoleIntent(row.params):captureAuthoredHoleIntent(row.params);
+   const source=byFeature.get(hole.sourceFeatureId),profile=source?.profile;
+   if(!source||hole.sourceFaceId!==profile.faceId||hole.sourceRegionId!==profile.regionId||hole.engine!==profile.engine||hole.engineRevision!==profile.engineRevision)throw Object.assign(Error('The typed hole source must be an earlier matching selected profile in the same part build.'),{code:'UNSUPPORTED_PARAMETERS'});
+   if(['WORKER_CENTERED_COUNTERBORE_V1','WORKER_CENTERED_COUNTERSINK_V1'].includes(row.type)&&source.type!=='WORKER_SELECTED_PROFILE_EXTRUDE_V2')throw Object.assign(Error('Counterbores and countersinks require the existing positive-depth selected-profile source.'),{code:'UNSUPPORTED_PARAMETERS'});
+  }
+ }
+ if(!profiles.length)throw Object.assign(Error('A selected profile is required by this typed transaction.'),{code:'UNSUPPORTED_PARAMETERS'});
+ return Object.freeze(profiles);
+}
+export function requireModernPhysicalHistory(history){
+ return captureModernPhysicalProfiles(history)!==null;
 }
 // Pure admission over existing authority. No facade, quantity table, ticket or
 // new lifetime state: readers retain their captured service/stream guards.
