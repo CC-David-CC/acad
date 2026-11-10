@@ -45,3 +45,15 @@ cmp "$codi_build/main.wasm" "$codi_portable/main.wasm"
 Update analyticProfileNativeContract.mjs four fields together: actual portableJS/WASM hashes, Native4510c9a1 and header SHA above. Never relabel old717767d4/47c9d4c9 as repaired. engineCatalog/occ-analytic-profile-mount/catalogMount derive exact matching from that leaf; keep old/default cohort policies. Explicit CODI_ANALYTIC_PROFILE_NATIVE_DIR stages fresh via prepare-analytic-profile-cohort.cjs, complete graph/producerSources and generated .build entry; checked-in null candidate entry stays null. No OCI source change or guard weakening required.
 
 Update ONLY after actual pair exists the two current-source acceptance literals ANALYTIC_REFUSAL_BUILD in public-refusals.mjs and BUILD in check_refusals.py. Preserve exact code/layer, full-seam unavailable selectors,50pm/Native/mesh budgets and all10cad/20artifact criteria. New expected Native HEAD must be4510; actual Core/Host must equal new compiled pins and clean HEADs, acceptance is separate with acknowledged-refusal custody. Preserve R1–R3/oldpair artifacts. Root alone later normal-builds/stages and runs ONE complete unchanged-scope whole, then independent source/archive/STEP/mesh after-whole oracle only after terminalPASS. No new pair/mount/qualification is established here.
+
+## One-use build entry follow-up
+
+Source review of496e05e found that the exclusive-directory recipe protects the
+first invocation, but re-invoking its shell helper would truncate retained build
+logs/manifests. The helper now atomically creates `.build-once` before any build
+artifact write, refuses existing known build artifacts (including symlinks),
+and keeps the claim on every exit. The two copied script inputs remain
+untouched. A failed or interrupted attempt requires a separately reviewed NEW
+output path and corresponding source helper; never delete the claim to retry.
+Compiler invocation, SDK/23archive inputs, capture/adaptation behavior and
+unknown-yet output hashes remain unchanged. No helper or build was executed.
