@@ -41,6 +41,15 @@ self.onmessage = async event => {
         self.postMessage(await (task==='sketch-finite-curve-source-extract'?extractFiniteCurveSource(payload):verifyFiniteCurveSource(payload)));
         return;
       }
+      // These private operations reconstruct the original source and certify
+      // the selected Native point in this disposable Worker. The caller must
+      // still own the current selection and publish through shared history.
+      if(request.task==='sketch-finite-curve-endpoint'||request.task==='sketch-finite-curve-verify-endpoint'){
+        const {changeFiniteCurveEndpoint,verifyFiniteCurveEndpointCandidate}=require('./finiteCurveEndpointTransition');
+        const {task,...payload}=request;
+        self.postMessage(await (task==='sketch-finite-curve-endpoint'?changeFiniteCurveEndpoint(payload):verifyFiniteCurveEndpointCandidate(payload)));
+        return;
+      }
       if(['sketch-transition-offset','sketch-transition-verify-offset','sketch-offset-inspection'].includes(request.task)){const {changeSketchOffset,verifySketchOffset,inspectSketchOffsets}=require('./offsetTransition');const {task,...payload}=request;self.postMessage(task==='sketch-transition-offset'?changeSketchOffset(payload):task==='sketch-transition-verify-offset'?verifySketchOffset(payload):inspectSketchOffsets(payload));return;}
       if(request.task==='sketch-transition-tangency'||request.task==='sketch-transition-verify-tangency'||request.task==='sketch-transition-verify-tangency-travel'){const {changeTangency,verifyTangencyCandidate,verifyTangencyTravelBoundary}=require('./tangencyTransition');const {task,...payload}=request;self.postMessage(task==='sketch-transition-tangency'?changeTangency(payload):task==='sketch-transition-verify-tangency'?verifyTangencyCandidate(payload):verifyTangencyTravelBoundary(payload));return;}
       if(request.task==='sketch-transition-length-family'||request.task==='sketch-transition-verify-length-family'||request.task==='sketch-transition-verify-length-family-travel'){const {changeLengthFamily,verifyLengthFamilyCandidate,verifyLengthFamilyTravelBoundary}=require('./lengthFamilyTransition');const {task,...payload}=request;self.postMessage(task==='sketch-transition-length-family'?changeLengthFamily(payload):task==='sketch-transition-verify-length-family'?verifyLengthFamilyCandidate(payload):verifyLengthFamilyTravelBoundary(payload));return;}
