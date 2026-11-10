@@ -110,8 +110,9 @@ function params(table:any){const proto=table&&typeof table==='object'?Object.get
 
 // Public requests contain only IDs and revisions. Prepared writes and native
 // source strings remain private to the existing candidate replay coordinator.
-export function createClosedSketchTransitionCommands(ctx:any,submitPreparedReplay:any,cancelEpoch:(epoch:number)=>void,registerTravel?:(callback:any)=>void){
+export function createClosedSketchTransitionCommands(ctx:any,submitPreparedReplay:any,cancelEpoch:(epoch:number)=>void,registerTravel?:(callback:any)=>void,registerSelectionRetirement?:(callback:()=>void)=>void){
  const finiteCurveSelection=createFiniteCurveSelectionSlot();
+ if(registerSelectionRetirement)registerSelectionRetirement(()=>finiteCurveSelection.clear());
  let finiteCurveBusy=false,finiteCurveCleanupFailure:CurveQueryCleanupError=null;
  function inspectClosedSketchQueryCapabilities(input:any){
   record(input,[]);const info=inspectSketchTransitions();

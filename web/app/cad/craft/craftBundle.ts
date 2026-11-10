@@ -134,6 +134,7 @@ export function activate(ctx: ApplicationContext) {
   let fullTipMaterialSurfaceRevision: string = null;
   let rewindBaseline: {document:number,signature:string} = null;
   let prepareSketchJournalTravel: Function = null;
+  let retireFiniteCurveSelection: (()=>void) = null;
   let sourcePlaneDepthCommands:any=null;
   let principalPlaneCommands:ReturnType<typeof createPrincipalPlanePlacementCommands>=null;
   let sourceFrameCommands:ReturnType<typeof createSourceFrameCommands>=null;
@@ -1099,7 +1100,13 @@ export function activate(ctx: ApplicationContext) {
       const nextState={history:next.history,pointer:next.history.length-1},overrides=Object.freeze(sketchChanges.map(x=>Object.freeze({id:x.faceId,data:x.after})));
       const roleSignature=(models:any[])=>{if(!Array.isArray(models)||models.length>1024)throw new Error('The model exceeds the parameter edit limit.');const roles=[],seen=new Set<string>();for(const m of models){if(typeof m.id!=='string'||!m.id.startsWith('worker-enclosure:'))continue;const version=m.id.startsWith('worker-enclosure:1:')?1:m.id.startsWith('worker-enclosure:2:')?2:0,allowed=version===1?['BODY','LID']:['BODY','LID','LABEL'];if(!version||!Number.isSafeInteger(m.featureId)||m.featureId<1||!allowed.includes(m.outputRole)||m.id!=='worker-enclosure:'+version+':'+JSON.stringify([m.featureId,m.outputRole])||seen.has(m.id))throw new Error('Enclosure output identity is unavailable.');seen.add(m.id);const tag=m.ext?.workerGeometry;if(!Number.isSafeInteger(m.originatingOperation)||m.originatingOperation<0||tag?.engine!=='occ'||tag?.representation!=='worker-owned-occ-enclosure'||tag?.featureId!==m.featureId||tag?.role!==m.outputRole||tag?.version!==version||tag?.unit!=='millimeter')throw new Error('Enclosure provenance is unavailable.');const matrix=m.location,frame=m.csys,keys=['mxx','mxy','mxz','tx','myx','myy','myz','ty','mzx','mzy','mzz','tz'],placement=keys.map(k=>matrix?.[k]),vectors=['origin','x','y','z'].flatMap(k=>[frame?.[k]?.x,frame?.[k]?.y,frame?.[k]?.z]);if([...placement,...vectors].some(v=>typeof v!=='number'||!Number.isFinite(v)))throw new Error('Enclosure placement is unavailable.');roles.push(JSON.stringify([m.id,m.originatingOperation,placement,vectors]));}return roles.sort().join('|');},oldRoles=roleSignature(models$.value);
       const preparation:PreparedSketchCommand={candidateScope:scope,sketchOverrides:overrides,...(modern&&overrides.length?{sketchSourceFrames:Object.freeze(overrides.map(row=>Object.freeze({id:row.id,frame:sketchBoundaryFrame(ctx.cadRegistry.findFace(row.id))})))}:{}),expressionPublication:participant,requireCurrent(){checkGeneric();if(!participant.isCurrent()||roleSignature(models$.value)!==oldRoles)throw superseded();},requireCommittedCurrent(){if(!alive())throw superseded(true);},async prepare(models){if((await captureAuthoredHistory(before.history,check)).signature!==captured.signature)throw superseded();check();if(roleSignature(models$.value)!==oldRoles||roleSignature(models)!==oldRoles)throw new Error('Enclosure output roles changed; review is required.');if(sketchChanges.length)workspace=storage.prepareWrites(sketchChanges.map(x=>({key:service.sketchStorageKey(x.faceId),value:x.after}))); return workspace;}};
-      check();if(pendingPipelines||pendingModifications)throw new Error('Another operation is still in progress.');await new Promise<void>((yes,no)=>{pendingModifications++;modificationCallbacks.set(nextState,{onAccepted(){accepted=true;yes();},onError:no,preparation,journalProposal:proposal,journalSignature:next.signature});modifications$.next(nextState);});
+      check();if(pendingPipelines||pendingModifications)throw new Error('Another operation is still in progress.');
+      // A real parameter transaction can change any query's source or typed
+      // values. Retire its private event selection before candidate submission;
+      // unchanged/no-op paths have already returned without retiring it.
+      if(!retireFiniteCurveSelection)throw Error('Curve selection retirement is unavailable.');
+      retireFiniteCurveSelection();check();
+      await new Promise<void>((yes,no)=>{pendingModifications++;modificationCallbacks.set(nextState,{onAccepted(){accepted=true;yes();},onError:no,preparation,journalProposal:proposal,journalSignature:next.signature});modifications$.next(nextState);});
       if(!alive())throw superseded(true);
       const primary=response.bindings.targets.find(t=>t.kind==='feature'&&t.index===input.index&&t.featureId===input.featureId);
       return Object.freeze({changed:true,revision:inspectAuthoredEdits().revision,faceId,index:input.index,featureId:input.featureId,...(primary?.type==='WORKER_RECTANGLE_EXTRUDE_V1'?{depth:primary.fields.length}:{}),manufacturingAssignments:'review-if-present'});
@@ -1669,6 +1676,9 @@ export function activate(ctx: ApplicationContext) {
     callback => {
       if (prepareSketchJournalTravel || typeof callback !== 'function') throw new Error('Sketch journal travel is already registered.');
       prepareSketchJournalTravel = callback;
+    }, callback=>{
+      if(retireFiniteCurveSelection||typeof callback!=='function')throw new Error('Curve selection retirement is already registered.');
+      retireFiniteCurveSelection=callback;
     });
   Object.assign(ctx.craftService, closedSketchCommands);
   sourceFrameCommands=createSourceFrameCommands(ctx,submitPreparedReplay,epoch=>{if(epoch===evaluationEpoch)engineResources.cancelCandidates();});
