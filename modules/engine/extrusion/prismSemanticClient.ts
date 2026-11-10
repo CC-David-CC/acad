@@ -1,3 +1,4 @@
+import {ANALYTIC_PROFILE_PREPARATION_REFUSALS,isAnalyticProfilePreparationRequest} from './analyticProfilePreparationRefusals.mjs';
 import {PROFILE_EXTENT_REFUSALS} from '../mount/ownedProfileExtentPlan.mjs';
 import {captureWorkerReplyRecord} from '../mount/workerReplyRecord.mjs';
 import {LOFT_PREPARATION_REFUSALS} from '../solid/ownedLoftIntent.mjs';
@@ -26,7 +27,7 @@ export async function runPrismSemantic(workerPath:string, request:any, options:{
    if(failedCleanup)throw failedCleanup;
    if(reason||!valid()||performance.now()>=deadline)throw reason||abortError();
    return await new Promise((resolve,reject)=>{
-    const worker=new Worker(workerPath),jobId=crypto.randomUUID();let done=false;
+    const worker=new Worker(workerPath),jobId=crypto.randomUUID();let done=false,analyticPreparation=false;
     const finish=(error:any,value?:any)=>{if(done)return;done=true;
      cleanup(()=>controller.signal.removeEventListener('abort',onStop),error);
      cleanup(()=>{worker.onmessage=null;worker.onerror=null;worker.onmessageerror=null;},error);
@@ -35,8 +36,8 @@ export async function runPrismSemantic(workerPath:string, request:any, options:{
     };
     const onStop=()=>finish(reason||abortError());controller.signal.addEventListener('abort',onStop,{once:true});
     worker.onerror=()=>finish(Error('Prism semantic Worker failed.'));worker.onmessageerror=()=>finish(Error('Prism semantic Worker message failed.'));
-    worker.onmessage=event=>{let m;try{m=captureWorkerReplyRecord(event.data);}catch{return finish(Error('Invalid prism semantic Worker reply fields.'));}if(!valid()||performance.now()>=deadline)return finish(reason||abortError());if(!m||m.jobId!==jobId||typeof m.ok!=='boolean')return finish(Error('Invalid prism semantic Worker response.'));if(!m.ok){const allowed=['PROFILE_CONSTRUCTOR_BINDING_MISMATCH','INVALID_REQUEST','UNSUPPORTED_ENGINE','INVALID_FRAME','UNSUPPORTED_FRAME','STALE_SKETCH','INVALID_SKETCH','UNSUPPORTED_SKETCH','UNSUPPORTED_CONSTRAINT','STALE_FRAME','UNSUPPORTED_PROFILE','UNSUPPORTED_REGION_TOPOLOGY','RESOURCE_LIMIT','OPEN_OR_AMBIGUOUS_PROFILE','INVALID_PROFILE','STALE_REGION','STALE_SOURCE','STALE_SEAM','STALE_AXIS','REVOLVE_INVALID_AXIS','REVOLVE_INVALID_ANGLE','PROFILE_BELOW_RESOLUTION','ZERO_LENGTH_EDGE','OVERLAPPING_EDGES','SELF_INTERSECTION','SELF_TOUCHING_BOUNDARY','ZERO_AREA_PROFILE','UNREPRESENTABLE_AREA','PRISM_VALIDATION_FAILED',...SWEEP_PREPARATION_REFUSALS,...LOFT_PREPARATION_REFUSALS,...PROFILE_EXTENT_REFUSALS];if(typeof m.error!=='string'||m.error.length>512||!allowed.includes(m.code))return finish(Error('Invalid prism semantic Worker failure.'));return finish(Object.assign(new Error('Prism semantic validation failed: '+m.error),{code:m.code}));}finish(null,m.value);};
-    if(controller.signal.aborted)return onStop();try{worker.postMessage({...request,jobId});}catch(error){finish(error)}
+    worker.onmessage=event=>{let m;try{m=captureWorkerReplyRecord(event.data);}catch{return finish(Error('Invalid prism semantic Worker reply fields.'));}if(!valid()||performance.now()>=deadline)return finish(reason||abortError());if(!m||m.jobId!==jobId||typeof m.ok!=='boolean')return finish(Error('Invalid prism semantic Worker response.'));if(!m.ok){const allowed=['PROFILE_CONSTRUCTOR_BINDING_MISMATCH','INVALID_REQUEST','UNSUPPORTED_ENGINE','INVALID_FRAME','UNSUPPORTED_FRAME','STALE_SKETCH','INVALID_SKETCH','UNSUPPORTED_SKETCH','UNSUPPORTED_CONSTRAINT','STALE_FRAME','UNSUPPORTED_PROFILE','UNSUPPORTED_REGION_TOPOLOGY','RESOURCE_LIMIT','OPEN_OR_AMBIGUOUS_PROFILE','INVALID_PROFILE','STALE_REGION','STALE_SOURCE','STALE_SEAM','STALE_AXIS','REVOLVE_INVALID_AXIS','REVOLVE_INVALID_ANGLE','PROFILE_BELOW_RESOLUTION','ZERO_LENGTH_EDGE','OVERLAPPING_EDGES','SELF_INTERSECTION','SELF_TOUCHING_BOUNDARY','ZERO_AREA_PROFILE','UNREPRESENTABLE_AREA','PRISM_VALIDATION_FAILED',...SWEEP_PREPARATION_REFUSALS,...LOFT_PREPARATION_REFUSALS,...PROFILE_EXTENT_REFUSALS,...(analyticPreparation?ANALYTIC_PROFILE_PREPARATION_REFUSALS:[])];if(typeof m.error!=='string'||m.error.length>512||!allowed.includes(m.code))return finish(Error('Invalid prism semantic Worker failure.'));return finish(Object.assign(new Error('Prism semantic validation failed: '+m.error),{code:m.code}));}finish(null,m.value);};
+    if(controller.signal.aborted)return onStop();try{const message={...request,jobId};analyticPreparation=isAnalyticProfilePreparationRequest(message);worker.postMessage(message);}catch(error){finish(error)}
    });
   });}catch(error){operationFailure=error;throw cleanupFailure||reason||error;}finally{
    clearTimeout(timer);clearInterval(poll);cleanup(()=>options.signal.removeEventListener('abort',onAbort),reason||operationFailure);outstanding--;
