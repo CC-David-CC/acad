@@ -8,7 +8,14 @@ def need(v,m):
  if not v:raise ValueError(m)
 def one(xs,m):need(len(xs)==1,'one '+m);return xs[0]
 def number(v):need(type(v) in (float,int) and math.isfinite(v),'finite original Number');return Q(v)
-def near(a,b,t=FINE):need(abs(number(a)-number(b))<=t,f'coordinate {a} differs from {b}, budget {t}')
+def expected_number(v):
+ # Internal exact arithmetic is admitted ONLY on the expectation/budget side.
+ # Actual serialized values still pass number(): no Fraction/bool/string cast.
+ return v if type(v)is Q else number(v)
+def near(a,b,t=FINE):
+ actual=number(a);expected=expected_number(b);budget=expected_number(t)
+ need(budget>=0,'nonnegative comparison budget')
+ need(abs(actual-expected)<=budget,f'coordinate {a} differs from {b}, budget {t}')
 def decimal(v):return Decimal(v.numerator)/Decimal(v.denominator) if isinstance(v,Q) else Decimal(str(v))
 def frame(e):return {'origin':e.get('origin',[0,0,0]),'x':[1,0,0],'y':[0,1,0],'z':[0,0,1]}
 def world(e,p):

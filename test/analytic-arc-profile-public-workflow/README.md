@@ -136,3 +136,10 @@ unchanged readback alone never settle a direct Node/CDP transport exception.
 The stale AbortError/null-code checks now precede settlement. The independent
 reader verifies the actual trace/envelope/outcome/proof binding. No original
 positive, negative, geometry, cycle, artifact, roster or budget is removed.
+
+R4 reader correction: actual source/cold/Native values remain strict finite
+float/int. Only expected mathematical values and budgets may additionally be
+exact Fraction; all original tolerances/comparisons remain. Retain FIRST type
+refusal and use a NEW after directory/explicit clean verifier commit for any
+later reviewed reader against the unchanged whole. No artifact PASS is claimed.
+See docs/reviews/ANALYTIC-R4-READER-DERIVED-NUMBERS-20261110.md.
