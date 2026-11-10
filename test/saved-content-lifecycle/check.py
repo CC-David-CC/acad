@@ -70,6 +70,12 @@ def main(root,output):
   saved=artifacts[opened['sourceLabel']];need(saved['sha256']==opened['artifactSha256'],'Exact source artifact selected for fresh Open');capture_matches(opened['after'],saved['envelope'])
   command=r['commands'][opened['commandIndex']];need(command['command']=='open-project' and command['args']['path']==opened['path']==labels[opened['sourceLabel']]['artifact']['path'] and command['result']==opened['result'] and command['result']['status']=='opened','Actual Open command/result/source-artifact binding')
  dialogs=r['dialogs'];need(any(x['label']=='Cancel actual New' and x['result']['status']=='cancelled' for x in dialogs),'Cancelled New');need(any(x['label']=='Cancel actual Open' and x['result']['status']=='cancelled' for x in dialogs),'Cancelled Open');need(any(x['label']=='Explicitly discard to new model' and x['result']['status']=='opened' for x in dialogs),'Explicit discard New');need(any(x['label']=='Actual dirty window close cancelled' and x['preserved'] for x in dialogs),'Dirty close cancel');need(sum(x['label']=='Actual clean close without discard dialog' and x['closed'] for x in dialogs)>=2,'Actual clean close after cache adoption')
+ for row in dialogs:
+  if row.get('command') in ('new-project','open-project'):
+   trace=r['commands'][row['commandIndex']];need(trace['command']==row['command'] and trace['result']==row['result'],'Actual dialog-triggered command/result binding')
+   if row['result']['status']=='cancelled':need(row['before']==row['after'] and row['beforeInspection']['path']==row['afterInspection']['path'] and row['beforeInspection']['documentToken']==row['afterInspection']['documentToken'],'Cancelled New/Open preserves complete source and document identity')
+   else:need(not row['after']['native']['history'] and not row['after']['native']['sketches'] and row['afterInspection']['operationCount']==0 and row['afterInspection']['sketchCount']==0 and row['beforeInspection']['documentToken']!=row['afterInspection']['documentToken'],'Accepted New creates independent empty source and baseline')
+  if row['label']=='Actual dirty window close cancelled':need(row['before']==row['after'],'Actual dirty close cancellation preserves exact source')
  need(len(r['resources'])>=4,'Representative passive resource observations')
  for row in r['resources']:
   need(row['codec'] and isinstance(row['mainUsedHeap'],(int,float)) and math.isfinite(row['mainUsedHeap']) and row['mainUsedHeap']>=0,'Actual main/codec samples')
