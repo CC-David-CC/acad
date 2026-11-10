@@ -1,5 +1,17 @@
 # Browser CAD command examples
 
+To make a current solid visible after a recipe, use the shared camera command:
+
+```js
+await agent.fitSolids();
+```
+
+This source helper inspects actual displayed solid IDs first, then fits them
+without changing the saved design. Pass an array of discovered output IDs to
+fit a subset. The helper is new and awaits combined-runtime qualification;
+the underlying explicit fit command was qualified in the scope below. This
+does not change the default camera or automatically move it during editing.
+
 [Loft creation recipe](loft-creation.mjs) is the exact qualified E15 helper
 (ACAD150f399): two unequal rectangle sections, actual creation UndoRedo,16travels,
 250Native classes and three.cad cycles. [Public adapter/usage](loft-creation.md).

@@ -66,6 +66,16 @@ export function createCadAgent({api = globalThis.codiDesktopCommands, windowId, 
     discover: () => { current(); return api.list().filter(c => c.appId === 'jsketcher' && c.windowId === windowId); },
     execute: (command, args = {}) => serial(() => call(command, args)),
     inspect: () => serial(() => call('inspect')),
+    // Fit only actual current displayed solids; this changes the camera, not
+    // the authored model. Supply IDs to select a subset in a larger project.
+    fitSolids: (bodyIds = undefined) => serial(async () => {
+      const info = await call('inspect-worker-solids');
+      if (info.ready !== true || !Array.isArray(info.outputs)) throw Error('Solid viewing is not ready.');
+      const available = info.outputs.filter(row => row.bodyId !== null && row.displayProjection?.status === 'available').map(row => row.id);
+      const selected = bodyIds === undefined ? available : bodyIds;
+      if (!Array.isArray(selected) || !selected.length || selected.length > 32 || new Set(selected).size !== selected.length || selected.some(id => typeof id !== 'string' || !available.includes(id))) throw Error('Select between one and 32 current displayed solids.');
+      return call('fit-worker-solids', {revision:info.revision, bodyIds:selected});
+    }),
     // Feature-detected: older deployed builds have no public new/open command.
     newProject: () => serial(async () => { const d = await call('inspect'); return replaceDocument('new-project', {revision: d.revision}); }),
     open: path => serial(async () => { const d = await call('inspect'); return replaceDocument('open-project', {revision: d.revision, path}); }),
