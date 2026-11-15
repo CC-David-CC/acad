@@ -25,6 +25,9 @@ Build entry points are in `package.json` and `build/`. Optional native kernels
 require their exact qualified input artifacts, documented by the corresponding
 engine notes. Dependencies and generated runtime outputs are not included in
 source Git. Never substitute arbitrary binaries for recorded build identities.
-The desktop mount, authenticated My files services, public command adapters and
-full Gate 1 checklist belong to the separate CodiServer desktop repository.
+The historical desktop mount and public command adapter source is now retained
+under `webos/` for the new WebOS assembly. Its original host/build wiring is not
+yet ported or qualified. Authenticated account/file services remain owned by the
+assembly Accounts/Storage components; prior Gate1 evidence stays attributed to
+its original frozen CodiServer composition.
 ACAD does not require an AI provider to author or evaluate a design.
