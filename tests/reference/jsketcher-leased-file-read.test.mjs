@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {acquireVersionedSnapshot} from '../apps/system/jsketcher/file-read.mjs';
+import {acquireVersionedSnapshot} from "../../webos/file-read.mjs";
 
 function fixture(){
  const data=new Blob(['{}']),meta={bytes:2,version:'v1',sha256:'a'.repeat(64),status:'synced'};

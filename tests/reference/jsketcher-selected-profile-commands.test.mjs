@@ -2,7 +2,7 @@
 // genuine Worker, native publication, browser or signed-persistence proof.
 import test from 'node:test';import assert from 'node:assert/strict';
 import {getEventListeners} from 'node:events';import {runInNewContext} from 'node:vm';
-import {registerSelectedProfileCommands} from '../apps/system/jsketcher/selected-profile-commands.mjs';
+import {registerSelectedProfileCommands} from "../../webos/selected-profile-commands.mjs";
 const build='sha256:cbd49d63d0900f50dda7fc53518d5f06183e85b1dea720522cc2994b0876adc9:a81af0b78dd585124f3f2d05d09b4a387b276bd1f655f0234002a6ab4646a637';
 const inspection=()=>({revision:'revision',faceId:'source-plane',depth:5});
 const depthEdit=()=>({revision:'authored-revision',index:1,featureId:2,depth:7.5});

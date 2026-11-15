@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerMaterialCommands} from '../apps/system/jsketcher/material-commands.mjs';
+import {registerMaterialCommands} from "../../webos/material-commands.mjs";
 const args=()=>({featureId:7,revision:'r1',roles:{BODY:{material:{id:'pla',name:'PLA'},appearance:{id:'red',name:'Red',color:'#ff0000'}},LID:{material:{id:'petg',name:'PETG'},appearance:null}}});
 function fixture(){
  const handlers=new Map(),abort=new AbortController(),state={session:{},current:true,mutations:0};

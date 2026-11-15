@@ -2,7 +2,7 @@
 // Craft replay/publication or signed file persistence is qualified here.
 import test from 'node:test';import assert from 'node:assert/strict';
 import {getEventListeners} from 'node:events';import {runInNewContext} from 'node:vm';
-import {registerEdgeTreatmentCommands} from '../apps/system/jsketcher/edge-treatment-commands.mjs';
+import {registerEdgeTreatmentCommands} from "../../webos/edge-treatment-commands.mjs";
 const build='sha256:'+ 'a'.repeat(64)+':'+ 'b'.repeat(64);
 const creation=()=>({revision:'r',version:1,unit:'millimeter',engine:'occ',engineRevision:build,bodyId:'owned-body',kind:'fillet',edgeIds:['opaque-b','opaque-a'],size:3});
 const edit=()=>({revision:'h',index:1,featureId:4,size:2});

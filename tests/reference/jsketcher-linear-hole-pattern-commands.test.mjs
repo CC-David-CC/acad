@@ -2,7 +2,7 @@
 // Craft replay/publication or signed file persistence is qualified here.
 import test from 'node:test';import assert from 'node:assert/strict';
 import {getEventListeners} from 'node:events';import {runInNewContext} from 'node:vm';
-import {registerLinearHolePatternCommands} from '../apps/system/jsketcher/linear-hole-pattern-commands.mjs';
+import {registerLinearHolePatternCommands} from "../../webos/linear-hole-pattern-commands.mjs";
 const build='sha256:'+ 'a'.repeat(64)+':'+ 'b'.repeat(64);
 const creation=()=>({revision:'r',version:1,unit:'millimeter',engine:'occ',engineRevision:build,bodyId:'owned-body',seedFeatureId:3,axis:'source-local-x-positive',count:3,spacing:20});
 const edit=()=>({revision:'h',index:1,featureId:4,count:4,spacing:15});

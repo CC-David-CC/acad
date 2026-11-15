@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createCadAgent} from '../apps/system/jsketcher/examples/cad-agent.mjs';
+import {createCadAgent} from "../../webos/examples/cad-agent.mjs";
 
 function registry({windows = ['cad-1'], execute} = {}) {
   const ids = ['inspect','inspect-rectangle-creation','create-rectangle-sketch','inspect-worker-features','create-worker-extrusion','create-worker-centered-hole','create-worker-four-corner-holes','inspect-published-worker-geometry','save','new-project','open-project'];

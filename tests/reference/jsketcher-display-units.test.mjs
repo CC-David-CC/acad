@@ -1,8 +1,8 @@
 // Adapter/metadata controls, not geometry or persistence qualification.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerDisplayUnitCommands} from '../apps/system/jsketcher/display-unit-commands.mjs';
-import {inspectedProjectIsDirty} from '../apps/system/jsketcher/inspect-state.mjs';
+import {registerDisplayUnitCommands} from "../../webos/display-unit-commands.mjs";
+import {inspectedProjectIsDirty} from "../../webos/inspect-state.mjs";
 
 const project={model:{history:[],expressions:'width = 25.4'},sketches:[]},inch=Object.freeze({version:1,lengthUnit:'inch'}),manufacture={version:1,unit:'millimeter',revision:'m0',materials:[],appearances:[],bindings:[],objects:[]};
 const envelope=(m=null,d=null)=>JSON.stringify({format:'codi-jsketcher-project',version:2,unit:'millimeter',project,...(m?{manufacturing:m}:{}),...(d?{presentation:d}:{})});

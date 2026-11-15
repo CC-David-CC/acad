@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerFeatureCommands} from '../apps/system/jsketcher/feature-commands.mjs';
-import {createRectangleController} from '../apps/system/jsketcher/rectangle-commands.mjs';
-import {registerSketchCommands} from '../apps/system/jsketcher/sketch-commands.mjs';
-import {registerDocumentSaveCommand} from '../apps/system/jsketcher/document-commands.mjs';
-import {registerMaterialCommands} from '../apps/system/jsketcher/material-commands.mjs';
+import {registerFeatureCommands} from "../../webos/feature-commands.mjs";
+import {createRectangleController} from "../../webos/rectangle-commands.mjs";
+import {registerSketchCommands} from "../../webos/sketch-commands.mjs";
+import {registerDocumentSaveCommand} from "../../webos/document-commands.mjs";
+import {registerMaterialCommands} from "../../webos/material-commands.mjs";
 const never=()=>new Promise(()=>{});
 function setup(){
  const controller=new AbortController(),handlers=new Map(),state={session:{},open:true};

@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {inspectedProjectIsDirty} from '../apps/system/jsketcher/inspect-state.mjs';
+import {inspectedProjectIsDirty} from "../../webos/inspect-state.mjs";
 const project={model:{history:[],expressions:''},sketches:[]};
 const metadata={version:1,unit:'millimeter',revision:'r',materials:[],appearances:[],bindings:[],objects:[]};
 const plain=JSON.stringify({format:'codi-jsketcher-project',version:2,unit:'millimeter',project});

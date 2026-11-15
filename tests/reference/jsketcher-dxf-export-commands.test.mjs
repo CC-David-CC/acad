@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerSketchExportCommands,validateDxfBlob} from '../apps/system/jsketcher/sketch-export-commands.mjs';
+import {registerSketchExportCommands,validateDxfBlob} from "../../webos/sketch-export-commands.mjs";
 
 test('accepts only real nonempty DXF Blobs within the 8 MiB output limit',()=>{
  const limit=8*1024*1024;

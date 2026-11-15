@@ -1,7 +1,7 @@
 {
   "name": "acad",
   "version": "0.1.0",
-  "description": "ACAD — Agent Computer-Aided Design for the browser WebOS",
+  "description": "ACAD \u2014 Agent Computer-Aided Design for the browser WebOS",
   "scripts": {
     "start": "npm run build:physical-parameters-worker && npm run build:sketch-worker && npm run build:project-worker && npm run build:native-archive-worker && npm run build:manufacturing-hash-worker && npm run build:controlled-3mf-worker && npm run build:prism-workers && node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.js --port 3000 --host 0.0.0.0",
     "pack": "npm run build:physical-parameters-worker && npm run build:sketch-worker && npm run build:project-worker && npm run build:native-archive-worker && npm run build:manufacturing-hash-worker && npm run build:controlled-3mf-worker && npm run build:prism-workers && node ./node_modules/webpack/bin/webpack.js --config webpack.config.js --progress --profile --color",
@@ -38,7 +38,8 @@
     "build:mechanical-cohort": "node build/prepare-mechanical-cohort-assets.cjs",
     "build:analytic-profile": "node build/prepare-analytic-profile-cohort.cjs",
     "build:finite-curve-support": "node build/prepare-finite-curve-support-cohort.cjs",
-    "build:native-archive-worker": "webpack --config build/webpack.native-archive-worker.cjs"
+    "build:native-archive-worker": "webpack --config build/webpack.native-archive-worker.cjs",
+    "test:reference": "node --test --test-reporter=tap tests/reference/*.test.mjs"
   },
   "repository": {
     "type": "git",

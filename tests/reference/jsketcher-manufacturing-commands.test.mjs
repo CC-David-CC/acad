@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerManufacturingCommands} from '../apps/system/jsketcher/manufacturing-commands.mjs';
+import {registerManufacturingCommands} from "../../webos/manufacturing-commands.mjs";
 
 function fixture(){
  const lifetime=new AbortController(),handlers=new Map(),calls=[];

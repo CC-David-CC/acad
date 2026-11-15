@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerSketchDiagnosticCommands} from '../apps/system/jsketcher/diagnostic-commands.mjs';
+import {registerSketchDiagnosticCommands} from "../../webos/diagnostic-commands.mjs";
 
 function fixture() {
   const commands = new Map(), controller = new AbortController();

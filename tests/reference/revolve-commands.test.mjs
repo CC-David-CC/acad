@@ -1,7 +1,7 @@
 // Host transport/admission controls only; no synthetic native geometry or UI.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerRevolveCommands} from '../apps/system/jsketcher/revolve-commands.mjs';
+import {registerRevolveCommands} from "../../webos/revolve-commands.mjs";
 const methods=['inspectWorkerRevolves','inspectWorkerRevolveRegions','createWorkerRevolve','inspectWorkerRevolveHistory','editWorkerRevolve'];
 const create=()=>({revision:'creation:1',unit:'millimeter',engine:'occ',engineRevision:'sha256:'+'a'.repeat(64)+':'+'b'.repeat(64),faceId:'source-face',regionId:'sketch-region:opaque',axisSegmentId:'source-segment',angleRadians:Math.PI,bodyPolicy:'separate'});
 function fixture(){

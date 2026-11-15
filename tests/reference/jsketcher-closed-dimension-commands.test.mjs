@@ -1,7 +1,7 @@
 // Host-adapter controls only; real solver/model qualification is separate.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerClosedSketchCommands} from '../apps/system/jsketcher/closed-sketch-commands.mjs';
+import {registerClosedSketchCommands} from "../../webos/closed-sketch-commands.mjs";
 
 function fixture() {
  const entries=new Map(),controller=new AbortController(),state={session:{},valid:true,calls:[]};

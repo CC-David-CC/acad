@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {registerSketchCommands} from '../apps/system/jsketcher/sketch-commands.mjs';
+import {registerSketchCommands} from "../../webos/sketch-commands.mjs";
 function fixture(){
  const handlers=new Map(),session={},state={session,valid:true,mutations:0,checks:0};
  const action={async inspect(ctx,options){state.checks++;assert.equal(ctx,context);assert.equal(options.valid(),true);return {revision:'token',objects:[{id:'a'},{id:'b'}]};},async invokeByIds(ctx,ids,revision,options){assert.equal(ctx,context);assert.equal(options.valid(),true);state.mutations++;return {objects:ids,status:'accepted'};}};

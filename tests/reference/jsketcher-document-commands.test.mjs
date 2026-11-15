@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {registerDocumentSaveCommand} from '../apps/system/jsketcher/document-commands.mjs';
+import {registerDocumentSaveCommand} from "../../webos/document-commands.mjs";
 
 function fixture() {
   const lifetime = new AbortController(), handlers = new Map();

@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readVersionedBytes} from '../apps/system/jsketcher/file-read.mjs';
+import {readVersionedBytes} from "../../webos/file-read.mjs";
 
 const data=new TextEncoder().encode('{}');
 const meta={bytes:data.length,version:'v1',sha256:'a'.repeat(64),status:'synced'};

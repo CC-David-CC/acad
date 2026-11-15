@@ -1,7 +1,7 @@
 // Transport/lifetime controls only. No successful native geometry is fabricated.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerLoftCommands} from '../apps/system/jsketcher/loft-commands.mjs';
+import {registerLoftCommands} from "../../webos/loft-commands.mjs";
 const build='sha256:'+'a'.repeat(64)+':'+'b'.repeat(64);
 function intent(){return{revision:'current',version:1,unit:'millimeter',engine:'occ',engineRevision:build,sections:[{faceId:'a',regionId:'sketch-region:a',seam:{kind:'vertex',pointId:'actual-point-a',reversed:false}},{faceId:'b',regionId:'sketch-region:b',seam:{kind:'vertex',pointId:'actual-point-b',reversed:false}}],construction:'ruled-solid',bodyPolicy:'separate'};}
 function fixture(){const handlers=new Map(),controller=new AbortController(),state={session:{},generation:0,targets:0,calls:[]},craft={};for(const method of['inspectWorkerLofts','inspectWorkerLoftHistory'])craft[method]=()=>({transportOnly:method});for(const method of['inspectWorkerLoftRegions','createWorkerLoft'])craft[method]=async(args,options)=>{state.calls.push({method,args,options});return{transportOnly:true};};const host={signal:controller.signal,session:()=>state.session,commands:{register(spec,run){handlers.set(spec.id,{spec,run});return()=>handlers.delete(spec.id);}}},getTarget=()=>{state.targets++;const generation=state.generation;return{craft,valid:()=>generation===state.generation};},stop=registerLoftCommands(host,getTarget);return{state,craft,host,getTarget,controller,handlers,stop,run:(id,args)=>handlers.get(id).run(args)};}

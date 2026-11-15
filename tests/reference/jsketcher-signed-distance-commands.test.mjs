@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerSketchCommands} from '../apps/system/jsketcher/sketch-commands.mjs';
+import {registerSketchCommands} from "../../webos/sketch-commands.mjs";
 function fixture(){
  const handlers=new Map(),controller=new AbortController(),state={session:{},valid:true,calls:[]},actions={};
  for(const name of ['SignedDistanceX','SignedDistanceY','ProjectedDistance','LengthRelation'])actions[name]={inspect(ctx,options){state.calls.push({name,options});return {revision:'r',objects:[]};},invokeByIds(ctx,ids,distance,revision,options){state.calls.push({name,ids,distance,revision,options});return {status:'accepted'};}};

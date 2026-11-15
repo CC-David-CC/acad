@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {settleScopedCommand} from '../apps/system/jsketcher/scoped-command.mjs';
+import {settleScopedCommand} from "../../webos/scoped-command.mjs";
 
 test('lifetime loss while a submitted command is pending reports an unknown outcome', async () => {
   const controller = new AbortController();

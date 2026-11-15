@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registerSketchCommands} from '../apps/system/jsketcher/sketch-commands.mjs';
+import {registerSketchCommands} from "../../webos/sketch-commands.mjs";
 function fixture(){
  const state={session:{},valid:true,calls:[]},controller=new AbortController(),handlers=new Map(),actions={};
  for(const name of ['CreateRigidGroup','PoseRigidGroup','DissolveRigidGroup'])actions[name]={inspect(context,options){state.calls.push({name,options});return {revision:'r',objects:[]};},invokeByIds(context,ids,revision,options){state.calls.push({name,ids,revision,options});return {id:'g',status:'accepted'};},invokeById(context,...args){state.calls.push({name,args});return {status:'accepted'};}};
