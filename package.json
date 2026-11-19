@@ -43,7 +43,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "example.invalid/srv/data/git/ACAD.git"
+    "url": "git+https://github.com/CC-David-CC/acad.git"
   },
   "keywords": [
     "parametric",

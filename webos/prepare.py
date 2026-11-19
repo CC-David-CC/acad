@@ -22,12 +22,10 @@ import xml.etree.ElementTree as ET
 HERE = Path(__file__).resolve().parent
 # Update only after reviewing the fork commit and the generated manifest.
 FORK_COMMIT = '67d3432921f2aa4256893a618cd8f11ec732aa51'
-DEFAULT_REPOSITORY = 'example.invalid:/srv/data/git/JSKetcher.git'
 ENGINE_COMMIT = '5efaf53accb45bac475155fc4d5552642c19e91e'
 ENGINE_REPOSITORY = 'https://github.com/Autodrop3d/occt-interpreter.git'
 WORKER_ENGINE_COMMIT = '8c4f30048fe65d9205c310d164b45d00d3fe77c3'
 WORKER_ENGINE_TREE = 'ef3c43d624b587a7a43d78b01b2c51aa57d760a5'
-WORKER_ENGINE_REPOSITORY = 'example.invalid:/srv/data/git/occt-interpreter-codi.git'
 WORKER_ENGINE_INPUTS = {'main.js': '81996d394b9fd2fcd7b02a0448bf7968c2decc04969d2be7ace4512cbfc5620a',
                         'main.wasm': '13617eda9a2118edfd1244b5d46523e7d9628a87ec995a0237b2b5cc58d532f2'}
 EMSCRIPTEN_RUNTIME_SOURCE_SHA256 = 'ad04773a4a30e37ece3b9ccbd3bb919d2ba531ad358ecb8623f4d6199f62c656'
@@ -339,9 +337,9 @@ def checked_archive_member(archive, name):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--repo', default=DEFAULT_REPOSITORY, help='Git source containing the pinned fork commit')
+    parser.add_argument('--repo', required=True, help='Git source containing the pinned fork commit')
     parser.add_argument('--engine-repo', default=ENGINE_REPOSITORY, help='Git source containing the pinned interpreter commit')
-    parser.add_argument('--worker-engine-repo', default=WORKER_ENGINE_REPOSITORY, help='Git source for the clean worker OCC commit')
+    parser.add_argument('--worker-engine-repo', required=True, help='Git source for the clean worker OCC commit')
     parser.add_argument('--emscripten-runtime-source', type=Path, required=True, help='Pinned curated Emscripten runtime source ZIP')
     parser.add_argument('--worker-occt-input', type=Path, required=True, help='Clean source-built worker OCC JS/WASM')
     parser.add_argument('--numeric-repo', default=NUMERIC_REPOSITORY, help='Git source containing the pinned numeric 1.2.6 commit')
