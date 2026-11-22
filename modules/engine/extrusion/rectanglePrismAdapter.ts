@@ -1,3 +1,4 @@
+import {createSourcePrismMount} from 'engine/source-occt/mount.mjs';
 import {createVerifiedOciMount} from 'engine/mount/oci-verified-mount.mjs';
 import {projectValidatedRectanglePrism} from 'engine/projection/rectanglePrismProjection';
 import {runPrismSemantic} from './prismSemanticClient';
@@ -29,7 +30,9 @@ export async function runWorkerRectangleExtrusion(input:any) {
  const waitReady=(promise:Promise<any>)=>new Promise((resolve,reject)=>{const onAbort=()=>reject(abortError());if(controller.signal.aborted)return onAbort();controller.signal.addEventListener('abort',onAbort,{once:true});promise.then(v=>{controller.signal.removeEventListener('abort',onAbort);resolve(v)},e=>{controller.signal.removeEventListener('abort',onAbort);reject(e)});});
  try{
   current();const preflight=await runPrismSemantic(assets.semanticWorkerUrl,{kind:'prepare',profile},{signal:controller.signal,valid:()=>{try{current();return true}catch{return false}},timeoutMs:Math.max(1,Math.ceil(deadline-performance.now()))});current();if(preflight!==true)throw error('Invalid prism profile preflight.','INVALID_RESPONSE');
-  mount=evaluation.getOrCreateMount('occ-prism-v1',()=>createVerifiedOciMount({workerUrl:assets.workerUrl,jsPath:assets.jsPath,wasmPath:assets.wasmPath,timeoutMs:30000}));
+  const sourceBuild=typeof __ACAD_SOURCE_OCCT__ !== 'undefined' && __ACAD_SOURCE_OCCT__;
+  const createMount=sourceBuild ? createSourcePrismMount : createVerifiedOciMount;
+  mount=evaluation.getOrCreateMount('occ-prism-v1',()=>createMount({workerUrl:assets.workerUrl,jsPath:assets.jsPath,wasmPath:assets.wasmPath,timeoutMs:30000}));
   await waitReady(mount.ready);current();
   const result=await mount.execute({op:'solid.profile.extrude',version:1,profile},{researchTopology:{version:1},signal:controller.signal});current();
   const binding={revision:profile.revision,sketchDigest:profile.sketchDigest,faceId:profile.faceId,regionId:profile.regionId};

@@ -1,3 +1,4 @@
+import {sourceEngine} from '../source-occt/pins.mjs';
 import {matchesAnalyticProfileRuntime} from './analyticProfileNativeContract.mjs';
 import {captureAnalyticProfileRequest as originalAnalyticCapture,ANALYTIC_PROFILE_NATIVE_CODES} from './analyticProfilePlan.mjs';
 import {COUNTERSINK_OPERATION,COUNTERSINK_TERMINAL_CODES} from './ownedCountersinkProtocol.mjs';
@@ -103,8 +104,10 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
   if(enclosure && !(mesh ? manifoldRuntime&&representation==='manifold-mesh-worker-owned' : fourHoleRuntime&&representation==='occ-brep-worker-owned'))throw err('INVALID_MOUNT','Enclosure requires pinned engine runtime');
   if (![workerUrl,jsPath,wasmPath].every(x=>typeof x==='string'&&x.startsWith('/')&&!x.startsWith('//')) ||
       !Number.isInteger(timeoutMs)||timeoutMs<1||timeoutMs>30000) throw err('INVALID_MOUNT','Expected same-origin paths and bounded timeout');
+  const sourceRectangle = config.sourceRectangle === true;
+  if (sourceRectangle && (JS_SHA !== sourceEngine.glue || WASM_SHA !== sourceEngine.wasm || engine !== 'libcascade-authored-rectangle' || !profile || mesh || centeredCut || fourCornerCut || selectedProfile)) throw err('INVALID_MOUNT','Invalid source rectangle engine');
   const selectedTriangleBudget=selectedProfile?createSelectedResultTriangleBudget():null,maxLifetimeNames=finiteCurveSupportMode?0:selectedProfile?SELECTED_PROFILE_BUDGET.maxLifetimeNames:8;
-  const mountId=crypto.randomUUID(), handles=new Map(), solidRecords=new Map(), portableRecords=new Map(), holeRecords=new Map(), cornerRecords=new Map(), enclosureRecords=new Map(), worker=new Worker(workerUrl);
+  const mountId=crypto.randomUUID(), handles=new Map(), solidRecords=new Map(), portableRecords=new Map(), holeRecords=new Map(), cornerRecords=new Map(), enclosureRecords=new Map(), worker=sourceRectangle ? new Worker(workerUrl,{type:'module'}) : new Worker(workerUrl);
   let next=0, seq=0, pending=null, state='initializing', readyResolve, readyReject, cleanupFailure=null;
   const descriptor=finiteCurveSupportMode?captureFiniteCurveSupportDescriptor({
     contractVersion:1,engine,mountId,generation:1,unit:'millimeter',representation,
@@ -148,7 +151,7 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
       ...(enclosure ? [Object.freeze({id:'solid.enclosure.interface',version:1,input:mesh?'manifold-enclosure-interface-v1':'oci-enclosure-interface-v1',output:'enclosure-interface-result-v1',qualification:'research'}), Object.freeze({id:'solid.enclosure.manufacturing-mesh',version:1,input:mesh?'manifold-enclosure-manufacturing-v1':'oci-enclosure-manufacturing-v1',output:'enclosure-manufacturing-result-v1',qualification:'research'}), Object.freeze({id:'solid.enclosure.mesh',version:1,input:mesh?'manifold-enclosure-mesh-v1':'oci-enclosure-mesh-v1',output:'oci-enclosure-mesh-result-v1',qualification:'research'}), Object.freeze({id:'solid.enclosure.create',version:1,input:mesh?'manifold-enclosure-v1':'oci-enclosure-v1',output:mesh?'manifold-enclosure-result-v1':'oci-enclosure-result-v1',qualification:'research'}), Object.freeze({id:'solid.enclosure.create',version:2,input:mesh?'manifold-enclosure-v2':'oci-enclosure-v2',output:'enclosure-result-v2',qualification:'research'})] : []),
       ...['common','union','subtract'].map(k=>Object.freeze({id:'solid.boolean.'+k,version:1,input:mesh?'manifold-boolean-mm-v1':booleanHistory?'oci-boolean-history-mm-v1':'oci-boolean-mm-v1',output:mesh?'manifold-shape-result-v1':'oci-shape-result-v1',qualification:mechanicalBoundRuntime?'workflow-unqualified':'scoped-browser-evidence'})),
       Object.freeze({id:'solid.dispose',version:1,input:mesh?'manifold-dispose-v1':'oci-dispose-v1',output:'empty-v1',qualification:mesh?'wrapper-delete-checked':selectedProfile?'native-owned-name-release-v2':'logical-only'})
-    ])});
+    ].filter(op => !sourceRectangle || ['solid.profile.extrude','solid.dispose'].includes(op.id)))});
   const ready=new Promise((resolve,reject)=>{readyResolve=resolve;readyReject=reject;});
   ready.catch(()=>{}); // closing before a caller awaits readiness must not leak a rejection
   function removeAbortListener(p) {
@@ -1105,5 +1108,11 @@ export function createWorkerMount({workerUrl, jsPath, wasmPath, timeoutMs=30000}
   }
   function close(){clearTimeout(initTimer);shutdown('MOUNT_CLOSED','Engine mount closed');if(cleanupFailure)throw cleanupFailure.cause;}
   if(finiteCurveSupportMode)return Object.freeze({descriptor,ready,execute,readFiniteCurveSupportIntersections,close});
+  if (sourceRectangle) return Object.freeze({descriptor,ready,dispose,assertPortableBinding,close,
+    execute(request, options) {
+      if (request?.op !== 'solid.profile.extrude' && request?.op !== 'solid.dispose') throw err('UNSUPPORTED_OPERATION','Unavailable on this source engine');
+      return execute(request, options);
+    }
+  });
   return Object.freeze({descriptor,ready,execute,box,boolean,dispose,extrudeProfileExtents,treatSolidEdges,shellSolid,blindSolidHole,counterboreSolidHole,countersinkSolidHole,throughSolidHoles,readSolidMesh,exportSTEP,readOrthographic,readDrawingDerived,readDrawingReferences,readDrawingBores,readDrawingRequirementTargets,readDrawingRequirements,readManufacturingMesh,readSolidTopology,classifySolidPoint,readPrismSelections,readSolidSelections,assertSolidBinding,createEnclosure,readEnclosureMesh,readEnclosureManufacturingMesh,readEnclosureInterface,assertEnclosureBinding,centeredThroughHole,fourCornerThroughHoles,assertPortableBinding,assertCenteredHoleBinding,assertFourCornerBinding,close});
 }

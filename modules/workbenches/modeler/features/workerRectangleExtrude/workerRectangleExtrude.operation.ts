@@ -1,3 +1,4 @@
+import {sourceEngine} from 'engine/source-occt/pins.mjs';
 import {OperationDescriptor} from 'cad/craft/operationBundle';
 import {EntityKind} from 'cad/model/entities';
 import {MOpenFaceShell} from 'cad/model/mopenFace';
@@ -88,8 +89,11 @@ export const WorkerRectangleExtrudeOperation: OperationDescriptor<any> = {
     if (!solved?.ok || solved.revision!==revision || typeof solved.serializedSketch!=='string' || solved.serializedSketch.length>65536 ||
         typeof solved.sketchDigest!=='string' || !/^[a-f0-9]{64}$/.test(solved.sketchDigest) || !Array.isArray(solved.evidence))
       throw Error(solved?.error?.message || 'The authored sketch could not be verified.');
-    const workerPath=sameOriginPath(ociWorker), directory=workerPath.slice(0,workerPath.lastIndexOf('/')+1);
-    for (const asset of [topologyModule,profileModule,regionsModule,planModule,holePlanModule,holeTopologyModule,prismBoundaryModule,cornerPlanModule,cornerTopologyModule,cornerProvenanceModule]) {
+    const sourceBuild = typeof __ACAD_SOURCE_OCCT__ !== 'undefined' && __ACAD_SOURCE_OCCT__;
+    const sourceBase = new URL('./lib-assets/source-occt/', globalThis.location.href);
+    const workerPath=sourceBuild ? sameOriginPath(new URL('modules/engine/source-occt/worker.mjs',sourceBase).href) : sameOriginPath(ociWorker);
+    const directory=workerPath.slice(0,workerPath.lastIndexOf('/')+1);
+    if (!sourceBuild) for (const asset of [topologyModule,profileModule,regionsModule,planModule,holePlanModule,holeTopologyModule,prismBoundaryModule,cornerPlanModule,cornerTopologyModule,cornerProvenanceModule]) {
       const path=sameOriginPath(asset);
       if (path.slice(0,path.lastIndexOf('/')+1)!==directory) throw Error('Prism worker modules are not colocated.');
     }
@@ -97,7 +101,7 @@ export const WorkerRectangleExtrudeOperation: OperationDescriptor<any> = {
     const profile={version:2,unit:'millimeter',engine:'occ',revision,sketchDigest:solved.sketchDigest,
       faceId:face.id,regionId,frame,depth:length,sketchJSON:solved.serializedSketch};
     const result=await runWorkerRectangleExtrusion({evaluation,featureId:String(params.featureId),profile,bodyPolicy:'separate',booleanKind:'NONE',occupiedIds,
-      assets:{workerUrl:workerPath,jsPath:sameOriginPath(occJs),wasmPath:sameOriginPath(occWasm),semanticWorkerUrl:sameOriginPath(semanticWorker)},valid,signal:evaluation.signal});
+      assets:{workerUrl:workerPath,jsPath:sourceBuild ? sameOriginPath(new URL('modules/engine/runtime/'+sourceEngine.glue+'.mjs',sourceBase).href) : sameOriginPath(occJs),wasmPath:sourceBuild ? sameOriginPath(new URL('modules/engine/runtime/'+sourceEngine.wasm+'.wasm',sourceBase).href) : sameOriginPath(occWasm),semanticWorkerUrl:sameOriginPath(semanticWorker)},valid,signal:evaluation.signal});
     result.requireCurrent(); if (!valid()) throw abort();
     return {created:[result.model],consumed:[face.root]};
   }

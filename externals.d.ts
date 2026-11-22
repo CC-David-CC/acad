@@ -22,3 +22,5 @@ declare const __DEBUG__: any;
 declare let out: any;
 
 declare module 'codi-physical-parameters-worker' { const url: string; export default url; }
+
+declare const __ACAD_SOURCE_OCCT__: boolean;

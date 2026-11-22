@@ -272,7 +272,7 @@ module.exports = {
       },
     ]
   },
-  plugins: [new webpack.NormalModuleReplacementPlugin(/^node:module$/, path.join(__dirname, 'modules/brep/operations/mesh/browserNodeModuleStub.js'))],
+  plugins: [new webpack.DefinePlugin({__ACAD_SOURCE_OCCT__: JSON.stringify(process.env.CODI_SOURCE_OCCT === '1')}), new webpack.NormalModuleReplacementPlugin(/^node:module$/, path.join(__dirname, 'modules/brep/operations/mesh/browserNodeModuleStub.js'))],
   node: {
     __dirname: true
   }

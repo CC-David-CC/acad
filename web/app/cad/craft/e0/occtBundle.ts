@@ -11,7 +11,8 @@ export interface OCCBundleContext {
 
 export function activate(ctx) {
 
-  loadWasm(ctx);
+  // This build creates its source-verified OpenCascade instance inside the modeling Worker.
+  if (typeof __ACAD_SOURCE_OCCT__ === 'undefined' || !__ACAD_SOURCE_OCCT__) loadWasm(ctx);
 
   const wasmEngine = new GenericWASMEngine_V1();
 

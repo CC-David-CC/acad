@@ -1,0 +1,10 @@
+--- a/build-configs/full.yml
++++ b/build-configs/full.yml
+@@ -4502,6 +4502,7 @@
+   emccFlags:
+   - -fwasm-exceptions
+   - -sEXPORT_ES6=1
++  - -sDYNAMIC_EXECUTION=0
+   - -sMODULARIZE
+   - -sALLOW_MEMORY_GROWTH=1
+   - -sEXPORTED_RUNTIME_METHODS=["FS","wasmMemory","getExceptionMessage","incrementExceptionRefcount","decrementExceptionRefcount"]

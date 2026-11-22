@@ -47,28 +47,20 @@ export interface MeshWithOrigins {
 // Manifold WASM
 // ============================================================================
 
-let _wasm: any = null;
-let _initPromise: Promise<any> | null = null;
+let manifold: Promise<any> | null = null;
 
-_initPromise = import('manifold-3d').then((mod: any) => {
-  return mod.default({locateFile: () => manifoldWasmUrl});
-}).then((wasm: any) => {
-  wasm.setup();
-  _wasm = wasm;
-  console.log('Manifold ready');
-  return wasm;
-}).catch((e: any) => {
-  console.error('Manifold init failed:', e);
-  return null;
-});
-
-async function ensureManifold(): Promise<any> {
-  if (_wasm) return _wasm;
-  if (_initPromise) {
-    const wasm = await _initPromise;
-    if (wasm) return wasm;
+function ensureManifold(): Promise<any> {
+  if (!manifold) {
+    manifold = import('manifold-3d').then(async library => {
+      const instance = await library.default({locateFile: () => manifoldWasmUrl});
+      instance.setup();
+      return instance;
+    }).catch(error => {
+      manifold = null;
+      throw error;
+    });
   }
-  throw new Error('Manifold is not available');
+  return manifold;
 }
 
 // ============================================================================
