@@ -11,3 +11,5 @@ artifacts listed by [webos/prepare.py](webos/prepare.py). Supply those Git sourc
 and `--worker-engine-repo` and provide the other pinned inputs accepted by the preparer. This
 checkout provides the ACAD source and the build recipe. The historical external input pins have
 independent provenance and availability requirements.
+
+The current WebOS rectangle modeler has a [source-engine build recipe](modules/engine/source-occt/README.md) and its own app-builder preparation command.
