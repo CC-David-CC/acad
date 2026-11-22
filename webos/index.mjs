@@ -72,7 +72,7 @@ const APP_NAME='CAD Modeler (JSketcher inspired)';
 
 async function readPackagedNotice(name,{signal}) {
  if(!/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(name)) throw Error('Invalid source filename.');
- const url=new URL('./node_modules/jsketcher-build/sources/'+name,import.meta.url);
+ const url=new URL('./viewer/sources/'+name,import.meta.url);
  const response=await fetch(url,{signal,redirect:'error',mode:'same-origin',credentials:'same-origin'});
  if(!response.ok)throw Error('Could not load this source file.');
  return response.blob();
@@ -152,7 +152,7 @@ export function mount(host,{sourceRectangleOnly=false}={}){
  const pause=ms=>new Promise((resolve,reject)=>{if(disposed||host.signal.aborted){reject(Error('Window closed.'));return;}const id=setTimeout(()=>{timers.delete(id);resolve();},ms);timers.set(id,reject);});
  const nativeBackings=createNativeProjectBackings();
  function detach(frame){if(!frame)return;frames.delete(frame);try{nativeBackings.close(frame);}catch(error){console.error('CAD native archive cleanup failed',error);}try{frame.contentWindow?.__CAD_APP?.projectService?.dispose?.();}catch(error){console.error('CAD document cleanup failed',error);}try{frame.src='about:blank';}catch{}frame.remove();}
- function createFrame(hidden){const frame=document.createElement('iframe');frame.title=APP_NAME;frame.sandbox='allow-scripts allow-same-origin allow-modals';frame.className='jsketcher-frame'+(hidden?' jsketcher-staging':'');frame.src=new URL('./node_modules/jsketcher-build/index-webos.html?DEFAULT&webos=1',import.meta.url).href;frames.add(frame);stage.append(frame);return frame;}
+ function createFrame(hidden){const frame=document.createElement('iframe');frame.title=APP_NAME;frame.sandbox='allow-scripts allow-same-origin allow-modals';frame.className='jsketcher-frame'+(hidden?' jsketcher-staging':'');frame.src=new URL(sourceRectangleOnly?'./viewer/index-webos.html?DEFAULT&webos=1':'./node_modules/jsketcher-build/index-webos.html?DEFAULT&webos=1',import.meta.url).href;frames.add(frame);stage.append(frame);return frame;}
  async function waitReady(frame){const deadline=Date.now()+60000;while(valid()&&frames.has(frame)){let ctx;try{ctx=frame.contentWindow?.__CAD_APP;}catch{}const failure=ctx?.streams?.lifecycle?.initializationFailure?.value;if(failure){console.error('CAD initialization failed',failure);throw Object.assign(Error(APP_NAME+' could not finish starting. Close this window and open it again.'),{cause:failure});}if(ctx?.streams?.lifecycle?.projectLoaded?.value&&ctx.projectManager?.snapshotCurrentProject&&ctx.projectManager?.restoreSnapshotInEmptyWorkspace){if(typeof ctx.projectService?.bindHostLifetime==='function'&&!ctx.projectService.hasHostLifetime)ctx.projectService.bindHostLifetime({signal:host.signal,valid:()=>valid()&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx});return ctx;}if(Date.now()>deadline)throw Error(APP_NAME+' took too long to start.');await pause(50);}throw Error('The window or account changed.');}
  function supportedEnvelope(value){
   if(value?.format!=='codi-jsketcher-project'||![2,3].includes(value.version)||value.unit!=='millimeter'||!value.project||typeof value.project!=='object'||Array.isArray(value.project))throw Error('The CAD runtime returned an unsupported project format or units.');

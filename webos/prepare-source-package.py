@@ -78,7 +78,7 @@ def collect_frontend(sources):
 def package(args):
     target=args.output.resolve()
     target.mkdir(parents=True,exist_ok=False)
-    viewer=target/'node_modules/jsketcher-build'
+    viewer=target/'viewer'
     sources=viewer/'sources'
     sources.mkdir(parents=True)
     for p in ROOT.joinpath('webos').glob('*.mjs'):
