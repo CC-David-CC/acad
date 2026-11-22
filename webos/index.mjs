@@ -436,6 +436,9 @@ export function mount(host,{sourceRectangleOnly=false}={}){
    if(selectedRevision!==undefined&&file.sha256!==selectedRevision)throw Error('The selected file revision changed. Refresh Files and select it again.');
    if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');tell('Rebuilding the selected model…');next=createFrame(true);candidate=next;const ctx=await waitReady(next);if(!current(token)||!c.valid())return interrupted();
    await settleScopedCommand(restoreNativeProjectFile(ctx.projectManager,p,file.data,{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)}),{signal:token.signal,valid:()=>current(token)&&c.valid()&&previous===active&&candidate===next&&frames.has(next)});if(!current(token)||!c.valid())return interrupted();
+   // Restore publishes geometry before the final material metadata becomes available.
+   // Bind the edit journal to the completed document while it is still private.
+   ctx.craftService.inspectAuthoredEdits();
    const restored=await adoptBaseline(next,token.signal,()=>current(token)&&c.valid()&&candidate===next),now=await c.files.stat(p);if(!current(token)||!c.valid())return interrupted();if(now.version!==file.version||now.status==='conflict')throw Error('The project changed while opening. Try again.');if(!unchanged(previous,prior))throw Error('The model changed while opening. Try again.');
    prepared=prepareActions(ctx);watchBinding=prepareWatch(c,p,file.version);const revision=ctx.projectManager.inspectDocumentRevision(),launch=Object.freeze({version:1,storage,path:p,owner});
    if(!unchanged(previous,prior)||!token.setDocument(storage+':'+p)||!current(token)||!c.valid())throw Error('The window or file changed.');
