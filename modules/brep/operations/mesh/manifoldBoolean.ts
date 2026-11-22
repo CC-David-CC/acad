@@ -51,7 +51,10 @@ let manifold: Promise<any> | null = null;
 
 function ensureManifold(): Promise<any> {
   if (!manifold) {
-    manifold = import('manifold-3d').then(async library => {
+    const library = __ACAD_SOURCE_OCCT__
+      ? Promise.reject(new Error('Mesh booleans are unavailable in this engine.'))
+      : import('manifold-3d');
+    manifold = library.then(async library => {
       const instance = await library.default({locateFile: () => manifoldWasmUrl});
       instance.setup();
       return instance;

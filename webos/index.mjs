@@ -70,6 +70,15 @@ export {createDrawingRequirementExample} from './examples/linked-drawing-require
 
 const APP_NAME='CAD Modeler (JSketcher inspired)';
 
+async function readPackagedNotice(name,{signal}) {
+ if(!/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(name)) throw Error('Invalid source filename.');
+ const url=new URL('./node_modules/jsketcher-build/sources/'+name,import.meta.url);
+ const response=await fetch(url,{signal,redirect:'error',mode:'same-origin',credentials:'same-origin'});
+ if(!response.ok)throw Error('Could not load this source file.');
+ return response.blob();
+}
+
+
 // The embedded CAD app owns only its temporary model. The host owns account
 // storage, confirmation, version checks and the lifetime of every iframe.
 export function mount(host,{sourceRectangleOnly=false}={}){
@@ -103,7 +112,7 @@ export function mount(host,{sourceRectangleOnly=false}={}){
     agentTools??=createAgentToolsPanel({host,valid,getFrame:()=>active});agentTools.open();
    }},{id:'DesktopSources',appearance:{label:'Sources & licenses'},invoke:()=>{
     if(!valid()||active?.contentWindow?.__CAD_APP!==ctx)return;
-    if(sourceOpening||sourceClose)return;sourceOpening=true;void openCadSources({read:(name,options)=>host.storage.readCadSource(owner,name,options),valid,signal:sourceLifetime.signal,onClose:()=>{sourceClose=null;}}).then(close=>{if(valid())sourceClose=close;else close();}).catch(()=>tell('Sources and licenses are unavailable.')).finally(()=>{sourceOpening=false;});
+    if(sourceOpening||sourceClose)return;sourceOpening=true;void openCadSources({read:sourceRectangleOnly?readPackagedNotice:(name,options)=>host.storage.readCadSource(owner,name,options),valid,signal:sourceLifetime.signal,onClose:()=>{sourceClose=null;}}).then(close=>{if(valid())sourceClose=close;else close();}).catch(()=>tell('Sources and licenses are unavailable.')).finally(()=>{sourceOpening=false;});
    }}]);
    const unitActions=['millimeter','inch'].map(lengthUnit=>({id:lengthUnit==='inch'?'DesktopDisplayInches':'DesktopDisplayMillimeters',appearance:{label:lengthUnit==='inch'?'Display units: inches':'Display units: millimeters'},invoke:()=>{
     if(!valid()||busy||active?.contentWindow?.__CAD_APP!==ctx)return;

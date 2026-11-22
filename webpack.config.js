@@ -283,6 +283,10 @@ module.exports = {
 // the project, sketch, unit and semantic workers are needed for these documents.
 if (process.env.CODI_SOURCE_OCCT === '1') {
   const aliases = module.exports.resolve.alias;
+  aliases['manifold-3d$'] = false;
+  aliases['manifold-3d/manifold.wasm$'] = false;
+  aliases['@icons/material/CheckIcon$'] = path.join(MODULES, 'platform/color-check.mjs');
+  aliases['@icons/material/UnfoldMoreHorizontalIcon$'] = path.join(MODULES, 'platform/color-unfold.mjs');
   const activeWorkers = new Set([
     'codi-physical-parameters-worker$', 'codi-headless-sketch-worker$',
     'codi-prism-semantic-worker$', 'codi-project-validation-worker$', 'codi-native-archive-worker$',
