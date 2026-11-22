@@ -17,7 +17,9 @@ export const BundleName = "@UIConfig";
 
 export function activate(ctx) {
   const {services, streams} = ctx;
-  streams.ui.controlBars.left.value = ['menu.file', 'menu.edit', 'menu.craft', 'menu.boolean', 'menu.primitives', 'menu.views', 'menu.viewModes'];
+  const menusLeft = ['menu.file', 'menu.edit', 'menu.craft', 'menu.primitives', 'menu.views', 'menu.viewModes'];
+  if (!__ACAD_SOURCE_OCCT__) menusLeft.splice(3, 0, 'menu.boolean');
+  streams.ui.controlBars.left.value = menusLeft;
   streams.ui.controlBars.right.value = [
     ['Info', {label: null}],
     ['RefreshSketches', {label: null}],
@@ -34,7 +36,15 @@ export function activate(ctx) {
   ctx.actionService.registerActions(createAuthoredHistoryActions(ctx));
 
   const menus = desktopFileMode ? menuConfig.map(menu => menu.id === 'file' ? {...menu, actions: ['NativeFormatImport', 'Save', 'DesktopSaveAs', 'DesktopExport3MF', 'DesktopExportSTEP', 'ExportFaceToDXF', 'EnclosureMaterials', '-', 'ReassignSketch']} : menu.id === 'craft' ? {...menu, actions: ['DesktopEditRectangleDimensions', '-', ...menu.actions]} : menu.id === 'primitives' ? {...menu, actions: ['DesktopDimensionedRectangle', '-', ...menu.actions]} : menu) : menuConfig;
-  services.menu.registerMenus(menus);
+  const sourceMenuActions = {
+    file: ['NativeFormatImport', 'Save', 'DesktopSaveAs'],
+    craft: ['DesktopEditRectangleDimensions', 'WORKER_RECTANGLE_EXTRUDE_V1'],
+    primitives: ['DesktopDimensionedRectangle', 'PLANE'],
+  };
+  services.menu.registerMenus(__ACAD_SOURCE_OCCT__
+    ? menus.filter(menu => !['boolean', 'datum'].includes(menu.id)).map(menu =>
+      sourceMenuActions[menu.id] ? {...menu, actions: sourceMenuActions[menu.id]} : menu)
+    : menus);
 
   services.ui.registerFloatView('project', Explorer, 'Model', 'cubes');
   services.ui.registerFloatView('history', OperationHistory, 'Modifications', 'history');

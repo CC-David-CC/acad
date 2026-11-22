@@ -72,7 +72,7 @@ const APP_NAME='CAD Modeler (JSketcher inspired)';
 
 // The embedded CAD app owns only its temporary model. The host owns account
 // storage, confirmation, version checks and the lifetime of every iframe.
-export function mount(host){
+export function mount(host,{sourceRectangleOnly=false}={}){
  const {w}=host,{make,textButton}=host.ui,{mirrorFileContext,signedInSubject}=host.storage;
  const owner=w.launchContext?.owner||signedInSubject(),session=host.session?.(),state=w.jsketcher??={path:null,version:null};w.ownerSub=owner;
  w.title=(typeof w.launchContext?.path==='string'?w.launchContext.path.split('/').pop()+' — ':'')+APP_NAME;
@@ -103,8 +103,8 @@ export function mount(host){
    }}));
    ctx.actionService.registerActions(unitActions);
    ctx.streams.ui.menu.all.update(menus=>menus.map(menu=>menu.id==='file'?{...menu,actions:[...menu.actions,'-','DesktopSources']}:menu.id==='viewModes'?{...menu,actions:[...menu.actions,'-',...unitActions.map(action=>action.id)]}:menu));
-   ctx.services.menu.registerMenus([{id:'agent-tools',label:'Agent tools',actions:['DesktopAgentTools']}]);
-   ctx.streams.ui.controlBars.left.update(actions=>actions.flatMap(action=>action==='menu.file'?[action,'menu.agent-tools']:[action]));
+   if(!sourceRectangleOnly)ctx.services.menu.registerMenus([{id:'agent-tools',label:'Agent tools',actions:['DesktopAgentTools']}]);
+   if(!sourceRectangleOnly)ctx.streams.ui.controlBars.left.update(actions=>actions.flatMap(action=>action==='menu.file'?[action,'menu.agent-tools']:[action]));
    sourceMenus.add(ctx);
   }
   const cleanups=[],updates=[];
@@ -247,8 +247,8 @@ export function mount(host){
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,craft=ctx?.craftService,project=ctx?.projectService,signal=project?.documentSignal,generation=project?.documentGeneration;
   return{craft,blobPrototype:frame.contentWindow.Blob.prototype,valid:()=>valid()&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.craftService===craft&&ctx?.projectService===project&&project?.documentSignal===signal&&!signal?.aborted&&project?.isDocumentCurrent(generation)===true};
  }});
- host.onDispose(stepExport.dispose);if(host.commands)host.onDispose(stepExport.register());
- if(host.commands){host.onDispose(rectangle.register());host.onDispose(registerFeatureCommands(host,()=>rectangle.target()));host.onDispose(registerClosedSketchCommands(host,()=>rectangle.target()));host.onDispose(registerPrimitiveCommands(host,()=>rectangle.target()));host.onDispose(registerSolidCommands(host,()=>rectangle.target()));host.onDispose(registerParameterCommands(host,()=>rectangle.target()));host.onDispose(registerLegacyExpressionCommands(host,()=>rectangle.target()));}
+ host.onDispose(stepExport.dispose);if(host.commands&&!sourceRectangleOnly)host.onDispose(stepExport.register());
+ if(host.commands){host.onDispose(rectangle.register());host.onDispose(registerFeatureCommands(host,()=>rectangle.target(),{sourceRectangleOnly}));host.onDispose(registerClosedSketchCommands(host,()=>rectangle.target()));if(!sourceRectangleOnly){host.onDispose(registerPrimitiveCommands(host,()=>rectangle.target()));host.onDispose(registerSolidCommands(host,()=>rectangle.target()));}host.onDispose(registerParameterCommands(host,()=>rectangle.target()));host.onDispose(registerLegacyExpressionCommands(host,()=>rectangle.target()));}
  if(host.commands)host.onDispose(registerCurveQueryCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSketchExportCommands(host,{getTarget:()=>rectangle.target(),exportDxf:args=>exportDxf(args)}));
  if(host.commands)host.onDispose(registerReferenceCommands(host,()=>rectangle.target()));
@@ -264,26 +264,26 @@ export function mount(host){
  if(host.commands)host.onDispose(registerCoincidenceCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerFixedEntityCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerFeatureHistoryCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerProfileExtentCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerSelectedProfileRegionCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerSelectedProfileSourceDimensionCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerRevolveCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerSweepCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerLoftCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerSelectedProfileCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerProfileExtentCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerSelectedProfileRegionCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerSelectedProfileSourceDimensionCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerRevolveCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerSweepCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerLoftCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSourcePlaneDepthCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerPrincipalPlanePlacementCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSourceFrameCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerSourceProjectionCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerSolidPointCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerSolidPointCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerViewCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerShellCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerThroughHoleCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerBlindHoleCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerCounterboreCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerCountersinkCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerLinearHolePatternCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerEdgeTreatmentCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerShellCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerThroughHoleCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerBlindHoleCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerCounterboreCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerCountersinkCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerLinearHolePatternCommands(host,()=>rectangle.target()));
  if(host.commands)host.onDispose(registerDisplayUnitCommands(host,()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading or saving.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
@@ -294,20 +294,20 @@ export function mount(host){
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,diagnostics=ctx?.sketchDiagnosticService;
   return {diagnostics,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.sketchDiagnosticService===diagnostics};
  }));
- if(host.commands)host.onDispose(registerMaterialCommands(host,()=>{
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerMaterialCommands(host,()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
   return {manager,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.projectManager===manager};
  }));
- if(host.commands)host.onDispose(registerDrawingBoreCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerDrawingRequirementCommands(host,()=>rectangle.target()));
- if(host.commands)host.onDispose(registerDrawingExportCommand(host,{inspect:inspectSaveTarget,exportDrawing:exportDrawingSvg}));
- if(host.commands)host.onDispose(registerDrawingCommands(host,()=>{
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerDrawingBoreCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerDrawingRequirementCommands(host,()=>rectangle.target()));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerDrawingExportCommand(host,{inspect:inspectSaveTarget,exportDrawing:exportDrawingSvg}));
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerDrawingCommands(host,()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
   return {manager,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.projectManager===manager};
  }));
- if(host.commands)host.onDispose(registerManufacturingCommands(host,{inspect:inspectSaveTarget,exportModel:args=>export3mf(args),getTarget:()=>{
+ if(host.commands&&!sourceRectangleOnly)host.onDispose(registerManufacturingCommands(host,{inspect:inspectSaveTarget,exportModel:args=>export3mf(args),getTarget:()=>{
   if(busy||!valid()||!active||baseline===null||!frames.has(active))throw Error('Wait for this modeling window to finish loading.');
   const frame=active,ctx=frame.contentWindow?.__CAD_APP,manager=ctx?.projectManager;
   return {manager,valid:()=>valid()&&!busy&&active===frame&&frames.has(frame)&&frame.contentWindow?.__CAD_APP===ctx&&ctx?.projectManager===manager};
@@ -564,7 +564,7 @@ export function mount(host){
   });
  }
 
- function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(data?.type==='rectangle-edit-dialog'&&Object.keys(data).length===1){openRectangleEditDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','export-3mf','export-dxf','export-step'].includes(data.action))return;if(data.action==='export-dxf'&&(Object.keys(data).sort().join(',')!=='action,faceId,type'||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>1024))return;if(data.action==='export-step'&&(Reflect.ownKeys(data).length!==2||!['type','action'].every(key=>{const d=Object.getOwnPropertyDescriptor(data,key);return d?.enumerable&&Object.hasOwn(d,'value')})))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='export-3mf')void export3mf();else if(data.action==='export-dxf')void exportDxf(null,data.faceId);else if(data.action==='export-step')void stepExport.open().catch(error=>tell('Could not export STEP: '+stepExportErrorMessage(error)));else void saveProject(data.action==='save-as');}
+ function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(data?.type==='rectangle-edit-dialog'&&Object.keys(data).length===1){openRectangleEditDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','export-3mf','export-dxf','export-step'].includes(data.action))return;if(sourceRectangleOnly&&['export-step','export-3mf'].includes(data.action))return;if(data.action==='export-dxf'&&(Object.keys(data).sort().join(',')!=='action,faceId,type'||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>1024))return;if(data.action==='export-step'&&(Reflect.ownKeys(data).length!==2||!['type','action'].every(key=>{const d=Object.getOwnPropertyDescriptor(data,key);return d?.enumerable&&Object.hasOwn(d,'value')})))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='export-3mf')void export3mf();else if(data.action==='export-dxf')void exportDxf(null,data.faceId);else if(data.action==='export-step')void stepExport.open().catch(error=>tell('Could not export STEP: '+stepExportErrorMessage(error)));else void saveProject(data.action==='save-as');}
  window.addEventListener('message',receive);
  const retry=textButton('Retry opening project',()=>{if(w.launchContext?.storage==='mirror'&&w.launchContext.owner===owner)void openProject(w.launchContext.path,{initial:true});});retry.hidden=true;
  const review=textButton('Review material assignments',()=>void reviewManufacturing());review.hidden=true;

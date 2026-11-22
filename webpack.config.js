@@ -32,6 +32,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      ...(process.env.CODI_SOURCE_OCCT === '1' ? {'workbenches/registry$': path.join(WEB_APP, 'cad/workbench/sourceRectangleRegistry.ts')} : {}),
       // Node's timers API is not the unrelated npm "timers" cron package.
       'timers$': path.join(MODULES, 'platform/browserTimers.js'),
       // stream's browser mapping asks for the old emitter-component name.
@@ -277,3 +278,16 @@ module.exports = {
     __dirname: true
   }
 };
+
+// Omit all foreign native providers from the source-built rectangle editor. Only
+// the project, sketch, unit and semantic workers are needed for these documents.
+if (process.env.CODI_SOURCE_OCCT === '1') {
+  const aliases = module.exports.resolve.alias;
+  const activeWorkers = new Set([
+    'codi-physical-parameters-worker$', 'codi-headless-sketch-worker$',
+    'codi-prism-semantic-worker$', 'codi-project-validation-worker$', 'codi-native-archive-worker$',
+  ]);
+  for (const name of Object.keys(aliases)) {
+    if (name.startsWith('codi-') && !activeWorkers.has(name)) aliases[name] = false;
+  }
+}

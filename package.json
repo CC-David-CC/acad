@@ -21,6 +21,7 @@
     "build:manufacturing-hash-worker": "webpack --config build/webpack.manufacturing-hash-worker.cjs && webpack --config build/webpack.manufacturing-publication-worker.cjs",
     "build:physical-parameters-worker": "webpack --config build/webpack.physical-parameters-worker.cjs",
     "build:project-worker": "node build/precompile-numeric.cjs && webpack --config build/webpack.project-validation-worker.cjs",
+    "build:webos-source": "node build/source-webos.cjs",
     "build:sketch-worker": "node build/precompile-numeric.cjs && webpack --config build/webpack.headless-sketch-worker.cjs",
     "build:selected-profile-worker": "node build/prepare-selected-profile-assets.cjs \"${CODI_SELECTED_NATIVE_DIR}\"",
     "build:prism-workers": "npm run build:selected-profile-worker && node build/prepare-prism-assets.cjs && webpack --config build/webpack.prism-semantic-worker.cjs && node build/prepare-raw-smlib-assets.cjs && npm run build:polygon-profile-worker && npm run build:mechanical-profile-worker && npm run build:boolean-history-worker && npm run build:revolve-profile && npm run build:sweep-profile && npm run build:loft-profile && npm run build:adaptive-metrology && npm run build:step-export && npm run build:manufacturing-mesh && npm run build:shell && npm run build:circular && npm run build:mechanical-cohort && npm run build:finite-curve-support && npm run build:analytic-profile",
