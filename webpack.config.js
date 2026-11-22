@@ -292,6 +292,9 @@ if (process.env.CODI_SOURCE_OCCT === '1') {
     'codi-prism-semantic-worker$', 'codi-project-validation-worker$', 'codi-native-archive-worker$',
   ]);
   for (const name of Object.keys(aliases)) {
-    if (name.startsWith('codi-') && !activeWorkers.has(name)) aliases[name] = false;
+    if (name.startsWith('codi-') && !activeWorkers.has(name)) {
+      // Optional catalogs use their default export to detect a staged provider.
+      aliases[name] = name.endsWith('-assets$') ? path.join(MODULES,'engine/mount/unavailable-loft-assets.mjs') : false;
+    }
   }
 }

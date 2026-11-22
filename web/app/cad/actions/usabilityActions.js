@@ -56,7 +56,16 @@ export default [
     id: 'FitWorkerSolids',
     appearance: {label:'Fit solids', info:'Fit current displayed Native solid outputs; source planes and authored data stay unchanged'},
     invoke: ctx => {
-      const craft=ctx.craftService,info=craft.inspectWorkerSolids();
+      const craft=ctx.craftService;
+      if (typeof __ACAD_SOURCE_OCCT__ !== 'undefined' && __ACAD_SOURCE_OCCT__) {
+        if (!craft.inspectRectangleCreation().ready) return;
+        const {bodies} = craft.inspectPublishedWorkerGeometry();
+        if (!bodies.length) return;
+        const min = [0,1,2].map(axis => Math.min(...bodies.map(body => body.bounds[axis][0])));
+        const max = [0,1,2].map(axis => Math.max(...bodies.map(body => body.bounds[axis][1])));
+        return ctx.services.viewer.sceneSetup.fitBounds({min,max});
+      }
+      const info=craft.inspectWorkerSolids();
       const bodyIds=info.outputs.filter(row=>row.bodyId!==null&&row.displayProjection?.status==='available').map(row=>row.id);
       return craft.fitWorkerSolids({revision:info.revision,bodyIds});
     }
