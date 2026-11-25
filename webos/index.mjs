@@ -99,7 +99,7 @@ export function mount(host,{sourceRectangleOnly=false}={}){
  warning.hidden=true;warning.setAttribute('role','status');status.setAttribute('aria-live','polite');stage.setAttribute('aria-label',APP_NAME+' modeling workspace');
  const operations=host.documentOperations;if(!operations)throw Error('Document operation coordination is unavailable.');
  let disposed=false,busy=operations.busy,active=null,candidate=null,baseline=null,watch=()=>{},watchRevision=0,checkRevision=0;
- let actionCleanup=()=>{};
+ let editable=false,actionCleanup=()=>{};
  const sourceMenus=new WeakSet(),sourceLifetime=new AbortController();let sourceOpening=false,sourceClose=null;
  let agentTools=null,stepExport=null;
  const abortSources=()=>sourceLifetime.abort();if(host.signal.aborted)abortSources();else host.signal.addEventListener('abort',abortSources,{once:true});
@@ -206,9 +206,18 @@ export function mount(host,{sourceRectangleOnly=false}={}){
   if(typeof revision!=='string'||!revision)throw Error('Document revision inspection is unavailable.');
   return {revision,path:state.path};
  }
- // The desktop must call this from its close guard; if the model is in an
- // unsupported intermediate state, prefer a confirmation to data loss.
- state.hasChanges=()=>{if(busy||!valid()||!active||baseline===null)return true;try{const ctx=active.contentWindow.__CAD_APP,craft=ctx.craftService;if(craft.isProcessing||craft.pipelineFailure$.value||craft.isEditingHistory||ctx.services.sketcher.inPlaceEditor.inEditMode||ctx.wizardService.workingRequest$.value)return true;return ctx.projectManager.inspectHostSavedContent().equal!==true;}catch{return true;}};
+ // Startup frames stay hidden while the initial model and baseline are prepared.
+ // Once the editor is visible, treat an uncertain document state as dirty.
+ state.hasChanges=()=>{
+  if(!editable)return false;
+  if(busy||!valid()||!active||baseline===null)return true;
+  try{
+   const ctx=active.contentWindow.__CAD_APP,craft=ctx.craftService;
+   if(craft.isProcessing||craft.pipelineFailure$.value||craft.isEditingHistory||
+      ctx.services.sketcher.inPlaceEditor.inEditMode||ctx.wizardService.workingRequest$.value)return true;
+   return ctx.projectManager.inspectHostSavedContent().equal!==true;
+  }catch{return true;}
+ };
  // One opaque token derives from the authoritative active document signal.
  // Save/path changes keep it; accepted New/Open replace the signal itself.
  const commandDocumentToken=()=>host.commands?.documentToken?.()??null;
@@ -443,7 +452,7 @@ export function mount(host,{sourceRectangleOnly=false}={}){
    prepared=prepareActions(ctx);watchBinding=prepareWatch(c,p,file.version);const revision=ctx.projectManager.inspectDocumentRevision(),launch=Object.freeze({version:1,storage,path:p,owner});
    if(!unchanged(previous,prior)||!token.setDocument(storage+':'+p)||!current(token)||!c.valid())throw Error('The window or file changed.');
    const priorWatch=watch,publishedWatch=watchBinding;watch=()=>publishedWatch.dispose();watchBinding=null;baseline=restored;state.path=p;state.version=file.version;w.launchContext=launch;w.title=p.split('/').pop()+' — '+APP_NAME;retry.hidden=true;review.hidden=true;
-   active=next;candidate=null;next=null;published=true;if(nativeProjectFormat(p)==='cad'){nativeBackings.replace(active,file);file=null;}const publishedDocumentToken=commandDocumentToken();active.classList.remove('jsketcher-staging');publishedWatch.activate();detach(previous);
+   active=next;candidate=null;next=null;published=true;if(nativeProjectFormat(p)==='cad'){nativeBackings.replace(active,file);file=null;}const publishedDocumentToken=commandDocumentToken();if(editable)active.classList.remove('jsketcher-staging');publishedWatch.activate();detach(previous);
    const binding=prepared;prepared=null;installActions(binding);priorWatch();tell('Opened '+p+'.');
    return Object.freeze({status:'opened',path:p,revision,persistence:'browser',committed:true,documentToken:publishedDocumentToken});
   }catch(e){if(published)Object.defineProperty(e,'committed',{value:true,enumerable:true});tell('Could not open project: '+e.message+(initial?'':' The current model remains open.'));if(command)throw e;}finally{prepared?.cleanup();watchBinding?.dispose();file?.release();if(next)detach(next);if(candidate===next)candidate=null;token.finish();if(command&&published&&!valid())throw Object.assign(Error('The project was opened before the window or account changed.'),{committed:true});}
@@ -586,12 +595,36 @@ export function mount(host,{sourceRectangleOnly=false}={}){
   });
  }
 
- function receive(event){if(!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(data?.type==='rectangle-edit-dialog'&&Object.keys(data).length===1){openRectangleEditDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','export-3mf','export-dxf','export-step'].includes(data.action))return;if(sourceRectangleOnly&&['export-step','export-3mf'].includes(data.action))return;if(data.action==='export-dxf'&&(Object.keys(data).sort().join(',')!=='action,faceId,type'||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>1024))return;if(data.action==='export-step'&&(Reflect.ownKeys(data).length!==2||!['type','action'].every(key=>{const d=Object.getOwnPropertyDescriptor(data,key);return d?.enumerable&&Object.hasOwn(d,'value')})))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='export-3mf')void export3mf();else if(data.action==='export-dxf')void exportDxf(null,data.faceId);else if(data.action==='export-step')void stepExport.open().catch(error=>tell('Could not export STEP: '+stepExportErrorMessage(error)));else void saveProject(data.action==='save-as');}
+ function receive(event){if(!editable||!valid()||event.origin!==location.origin||event.source!==active?.contentWindow)return;const data=event.data?.codiJSketcher;if(data?.type==='rectangle-dialog'&&Object.keys(data).length===1){openRectangleDialog();return;}if(data?.type==='rectangle-edit-dialog'&&Object.keys(data).length===1){openRectangleEditDialog();return;}if(!data||data.type!=='file-action'||!['open','save','save-as','export-3mf','export-dxf','export-step'].includes(data.action))return;if(sourceRectangleOnly&&['export-step','export-3mf'].includes(data.action))return;if(data.action==='export-dxf'&&(Object.keys(data).sort().join(',')!=='action,faceId,type'||typeof data.faceId!=='string'||!data.faceId||data.faceId.length>1024))return;if(data.action==='export-step'&&(Reflect.ownKeys(data).length!==2||!['type','action'].every(key=>{const d=Object.getOwnPropertyDescriptor(data,key);return d?.enumerable&&Object.hasOwn(d,'value')})))return;if(busy){tell('Wait for the current file operation to finish.');return;}if(data.action==='open')void openProject();else if(data.action==='export-3mf')void export3mf();else if(data.action==='export-dxf')void exportDxf(null,data.faceId);else if(data.action==='export-step')void stepExport.open().catch(error=>tell('Could not export STEP: '+stepExportErrorMessage(error)));else void saveProject(data.action==='save-as');}
  window.addEventListener('message',receive);
  const retry=textButton('Retry opening project',()=>{if(w.launchContext?.storage===storage&&w.launchContext.owner===owner)void openProject(w.launchContext.path,{initial:true});});retry.hidden=true;
  const review=textButton('Review material assignments',()=>void reviewManufacturing());review.hidden=true;
  body.append(warning,stage,status,retry,review);
  const initialToken=begin('initial-load');
- queueMicrotask(async()=>{if(!initialToken)return;try{if(!current(initialToken))return;active=createFrame(false);const ctx=await waitReady(active);if(!current(initialToken))return;bindActions(ctx);baseline=await adoptBaseline(active,initialToken.signal,()=>current(initialToken));tell('New model. Use File to open or save a project in My files.');if(w.launchContext?.storage===storage&&w.launchContext.owner===owner){await openProject(w.launchContext.path,{initial:true,token:initialToken});if(valid()&&state.path!==w.launchContext.path)retry.hidden=false;}}catch(e){tell('Could not start '+APP_NAME+': '+e.message);}finally{initialToken.finish();}});
+ queueMicrotask(async()=>{
+  if(!initialToken)return;
+  try{
+   if(!current(initialToken))return;
+   active=createFrame(true);
+   const ctx=await waitReady(active);
+   if(!current(initialToken))return;
+   bindActions(ctx);
+   baseline=await adoptBaseline(active,initialToken.signal,()=>current(initialToken));
+   tell('New model. Use File to open or save a project in My files.');
+   if(w.launchContext?.storage===storage&&w.launchContext.owner===owner){
+    await openProject(w.launchContext.path,{initial:true,token:initialToken});
+    if(valid()&&state.path!==w.launchContext.path)retry.hidden=false;
+   }
+  }catch(e){
+   tell('Could not start '+APP_NAME+': '+e.message);
+  }finally{
+   initialToken.finish();
+   if(valid()&&active&&baseline!==null){
+    editable=true;
+    active.classList.remove('jsketcher-staging');
+   }
+  }
+ });
+
  return {element:body,dispose(){if(disposed)return;disposed=true;stepExport?.dispose();stepExport=null;agentTools?.dispose();agentTools=null;abortSources();sourceClose?.();sourceClose=null;host.signal.removeEventListener('abort',abortSources);unsubscribeOperations();actionCleanup();closeRectangleDialog();closeRectangleEditDialog();watchRevision++;checkRevision++;try{watch();}catch(error){try{console.error('CAD file subscription cleanup failed; provider release is unconfirmed.',error);}catch{}}delete state.hasChanges;window.removeEventListener('message',receive);for(const [id,reject] of timers){clearTimeout(id);reject(Error('Window closed.'));}timers.clear();for(const frame of [...frames])detach(frame);candidate=null;active=null;}};
 }
