@@ -5,7 +5,7 @@ import cx from 'classnames';
 
 export default function ControlBar({left, right}) {
 
-  return <div className={cx(ls.root, 'mid-typography')}>
+  return <div className={cx(ls.root, 'mid-typography')} data-cad-control-bar>
     <div className={ls.left}>
       {left}
     </div>
@@ -17,8 +17,8 @@ export default function ControlBar({left, right}) {
 
 export function ControlBarButton({onElement, disabled, children, onClick, ...props}) {
   // mapActionBehavior
-  return <span className={cx(ls.button, 'disable-selection', {disabled})} 
-               onClick={disabled || onClick} ref={onElement} {...props}>
+  return <button type="button" className={cx(ls.button, 'disable-selection', {disabled})}
+                 disabled={disabled} onClick={onClick} ref={onElement} {...props}>
     {children}
-  </span>
+  </button>
 }

@@ -83,6 +83,7 @@ async function readPackagedNotice(name,{signal}) {
 // storage, confirmation, version checks and the lifetime of every iframe.
 export function mount(host,{sourceRectangleOnly=false}={}){
  const {w}=host,{make,textButton}=host.ui;
+ const enableTouchTyping=()=>{if(matchMedia('(pointer: coarse)').matches)host.ui.enableKeyboard?.();};
  const session=host.session?.(),temporary=session?.public?.kind==='anonymous';
  const storage=temporary?'temporary':'mirror';
  const workspaceOwner=host.storage.workspaceOwner??host.storage.signedInSubject;
@@ -361,7 +362,7 @@ export function mount(host,{sourceRectangleOnly=false}={}){
    submit.disabled=true;error.textContent='';
    try{await rectangle.create({revision:capability.revision,unit:'millimeter',origin:[values.x,values.y],width:values.width,height:values.height,depth:values.depth},target,controller.signal);closeRectangleDialog();tell('Rectangle created in the workspace. Save the project to My files to keep it.');}
    catch(e){if(!target.valid()){closeRectangleDialog();return;}error.textContent=e?.message||'Could not create rectangle.';submit.disabled=false;}
-  });dialog.showModal();
+  });enableTouchTyping();dialog.showModal();
  }
  let rectangleEditDialog=null;
  function closeRectangleEditDialog(){if(rectangleEditDialog){clearInterval(rectangleEditDialog.timer);rectangleEditDialog.controller.abort();rectangleEditDialog.dialog.remove();rectangleEditDialog=null;}}
@@ -382,7 +383,7 @@ export function mount(host,{sourceRectangleOnly=false}={}){
   form.addEventListener('submit',async e=>{e.preventDefault();if(!target.valid()){closeRectangleEditDialog();return;}const candidate=capability.candidates[Number(choice.value)],width=Number(inputs.width.value),height=Number(inputs.height.value);
    if(!candidate||!inputs.width.value.trim()||!inputs.height.value.trim()||!Number.isFinite(width)||!Number.isFinite(height)||width<=0||height<=0){error.textContent='Enter positive finite dimensions.';return;}
    submit.disabled=true;error.textContent='';try{await rectangle.edit({revision:capability.revision,faceId:candidate.faceId,width,height},target,controller.signal);closeRectangleEditDialog();tell('Rectangle updated in the workspace. Save the project to My files to keep it.');}catch(e){if(!target.valid()){closeRectangleEditDialog();return;}error.textContent=e?.message||'Could not edit rectangle.';submit.disabled=false;}
-  });dialog.showModal();
+  });enableTouchTyping();dialog.showModal();
  }
  function prepareWatch(c,path,version){
   let enabled=false,serial=null,released=false;
@@ -435,11 +436,11 @@ export function mount(host,{sourceRectangleOnly=false}={}){
   await waitDirty();
   if(command&&inspectSaveTarget().revision!==command.revision)throw Error('The model changed; inspect it before opening a project.');
   const interrupted=()=>{if(command)throw new DOMException('Project opening interrupted.','AbortError');};
-  const token=reserved||begin('open');if(!token){if(command)throw Error('Wait for the current file operation to finish.');return;}if(!current(token)||!active){token.finish();if(command)throw new DOMException('Project opening interrupted.','AbortError');return;}tell('Preparing to open a project…');let next=null,file=null,published=false,prepared=null,watchBinding=null;
+  const token=reserved||begin('open');if(!token){if(command)throw Error('Wait for the current file operation to finish.');return;}if(!current(token)||!active){token.finish();if(command)throw new DOMException('Project opening interrupted.','AbortError');return;}const previousStatus=status.textContent;tell('Preparing to open a project…');let next=null,file=null,published=false,prepared=null,watchBinding=null;
   try{
    const previous=active,prior=captureCurrent(previous);
-   if(baseline===null||await savedDirty(previous)){const accepted=await host.ui.confirm('Discard the unsaved model and open a different project?',{title:'Unsaved changes',confirmLabel:'Discard and open',cancelLabel:'Keep editing',danger:true,signal:token.signal});if(!accepted||!current(token))return command?Object.freeze({status:'cancelled',path:state.path}):undefined;if(!unchanged(previous,prior))throw Error('The model changed during confirmation. Try again.');}
-   const chosen=selected||await host.storage.pickFile({extensions:nativeProjectExtensions(previous.contentWindow?.__CAD_APP?.projectManager),signal:token.signal});if(!chosen||!current(token))return command?Object.freeze({status:'cancelled',path:state.path}):undefined;if(!unchanged(previous,prior))throw Error('The model changed while choosing a file. Try again.');
+   if(baseline===null||await savedDirty(previous)){const accepted=await host.ui.confirm('Discard the unsaved model and open a different project?',{title:'Unsaved changes',confirmLabel:'Discard and open',cancelLabel:'Keep editing',danger:true,signal:token.signal});if(!accepted||!current(token)){if(current(token))tell(previousStatus);return command?Object.freeze({status:'cancelled',path:state.path}):undefined;}if(!unchanged(previous,prior))throw Error('The model changed during confirmation. Try again.');}
+   const chosen=selected||await host.storage.pickFile({extensions:nativeProjectExtensions(previous.contentWindow?.__CAD_APP?.projectManager),signal:token.signal});if(!chosen||!current(token)){if(current(token))tell(previousStatus);return command?Object.freeze({status:'cancelled',path:state.path}):undefined;}if(!unchanged(previous,prior))throw Error('The model changed while choosing a file. Try again.');
    const c=await fileContext();if(!current(token)||!c.valid())return interrupted();const p=c.path(chosen);claim(token,p);file=await acquireVersionedSnapshot(c.files,p,{maximumBytes:128*1024*1024,valid:()=>current(token)&&c.valid()&&previous===active,signal:token.signal});if(!current(token)||!c.valid())return interrupted();
    const selectedRevision=initial?w.launchContext?.sha256:undefined;
    if(selectedRevision!==undefined&&file.sha256!==selectedRevision)throw Error('The selected file revision changed. Refresh Files and select it again.');
@@ -468,6 +469,7 @@ export function mount(host,{sourceRectangleOnly=false}={}){
     if(asCopy||!chosen){
      if(command)throw Error('An untitled project needs a My files path.');
      const extension=nativeSaveExtension(frame.contentWindow?.__CAD_APP?.projectManager,chosen);
+     enableTouchTyping();
      const entered=await host.ui.prompt('Save the project to My files:',{title:asCopy?'Save project as':'Save project',value:chosen||'/Design'+extension,confirmLabel:'Save',signal:token.signal});
      if(entered===null||!current(token))return;
      chosen=withNativeSaveExtension(entered,extension);
