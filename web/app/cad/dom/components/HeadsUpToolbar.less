@@ -33,6 +33,14 @@
     overflow-x: auto;
     overscroll-behavior-x: contain;
     pointer-events: auto;
-    & > * { flex: 0 0 auto; }
+    & > :global([data-action-id]) {
+      box-sizing: border-box;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+    }
   }
 }

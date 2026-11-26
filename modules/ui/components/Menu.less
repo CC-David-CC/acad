@@ -64,3 +64,19 @@
   }
 }
 
+
+@media (max-width: 600px) {
+  .root {
+    box-sizing: border-box;
+    max-width: calc(100vw - 12px);
+    max-height: calc(100dvh - 12px);
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+
+  .item {
+    box-sizing: border-box;
+    min-height: 44px;
+    white-space: normal;
+  }
+}

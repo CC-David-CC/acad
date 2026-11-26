@@ -7,3 +7,36 @@
 .jsketcher-step-export-dialog input[type=checkbox]{flex:none;width:20px;height:20px;margin:0}
 .jsketcher-step-export-dialog form>div{flex-wrap:wrap}
 @media (max-width:600px), (pointer:coarse){.jsketcher-step-export-dialog label,.jsketcher-step-export-dialog button{min-height:44px}}
+
+.jsketcher-app .app-status {
+  color: var(--desktop-text, #202125);
+  background: var(--desktop-surface, #f6f5f4);
+  border-color: var(--desktop-border, #c2bfbc);
+}
+
+.jsketcher-rectangle-dialog {
+  box-sizing: border-box;
+  color: var(--desktop-text, #17212a);
+  background: var(--desktop-surface, #f6f5f4);
+}
+
+.jsketcher-rectangle-dialog input,
+.jsketcher-rectangle-dialog button {
+  color: var(--desktop-text, #17212a);
+  background: var(--desktop-raised, #fff);
+  border: 1px solid var(--desktop-border, #9ca3aa);
+  border-radius: 4px;
+  padding: .35rem .55rem;
+  font: inherit;
+}
+
+.jsketcher-rectangle-dialog [role=alert] {
+  color: light-dark(#9b2525, #ffc1bc);
+}
+
+@media (max-width: 600px) {
+  .jsketcher-rectangle-dialog input,
+  .jsketcher-rectangle-dialog button {
+    min-height: 44px;
+  }
+}

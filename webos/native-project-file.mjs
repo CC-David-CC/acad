@@ -13,6 +13,17 @@ export function requireNativeArchive(manager){
 export function nativeProjectExtensions(manager){
   try{requireNativeArchive(manager);return [...NATIVE_PROJECT_EXTENSIONS];}catch{return ['.jsketcher.json'];}
 }
+export function nativeSaveExtension(manager,currentPath){
+  const extensions=nativeProjectExtensions(manager);
+  return extensions.find(extension=>currentPath?.toLowerCase().endsWith(extension))||extensions[0];
+}
+
+export function withNativeSaveExtension(path,extension){
+  const trimmed=path.trim();
+  const name=trimmed.split('/').at(-1);
+  return name&&!name.includes('.')?trimmed+extension:trimmed;
+}
+
 export async function restoreNativeProjectFile(manager,path,blob,options){
   if(nativeProjectFormat(path)==='cad'){requireNativeArchive(manager);return manager.restoreNativeArchiveBytesInEmptyWorkspace(blob,options);}
   if(typeof manager?.restoreSnapshotBytesInEmptyWorkspace!=='function')throw Error('This CAD runtime cannot validate native file snapshots.');

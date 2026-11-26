@@ -8,7 +8,7 @@ import {settleCadFileExport,fileErrorData,safeFileErrorMessage} from './file-exp
 import './style.css';
 import {settleScopedCommand} from './scoped-command.mjs';
 import {acquireVersionedSnapshot} from './file-read.mjs';
-import {nativeProjectExtensions,nativeProjectFormat,requireNativeArchive,restoreNativeProjectFile,createNativeProjectBackings,validateNativeArchivePreparation} from './native-project-file.mjs';
+import {nativeProjectExtensions,nativeProjectFormat,nativeSaveExtension,withNativeSaveExtension,requireNativeArchive,restoreNativeProjectFile,createNativeProjectBackings,validateNativeArchivePreparation} from './native-project-file.mjs';
 import {registerSketchCommands} from './sketch-commands.mjs';
 import {registerClosedSketchCommands} from './closed-sketch-commands.mjs';
 import {registerCurveQueryCommands} from './curve-query-commands.mjs';
@@ -465,7 +465,13 @@ export function mount(host,{sourceRectangleOnly=false}={}){
    const frame=active;let capture=null,rebaseFile=null;
    try{
     let chosen=state.path||command?.path;
-    if(asCopy||!chosen){if(command)throw Error('An untitled project needs a My files path.');const extension=nativeProjectExtensions(frame.contentWindow?.__CAD_APP?.projectManager)[0];chosen=await host.ui.prompt('Save the project to My files:',{title:asCopy?'Save project as':'Save project',value:chosen||'/Design'+extension,confirmLabel:'Save',signal:token.signal});if(chosen===null||!current(token))return;}
+    if(asCopy||!chosen){
+     if(command)throw Error('An untitled project needs a My files path.');
+     const extension=nativeSaveExtension(frame.contentWindow?.__CAD_APP?.projectManager,chosen);
+     const entered=await host.ui.prompt('Save the project to My files:',{title:asCopy?'Save project as':'Save project',value:chosen||'/Design'+extension,confirmLabel:'Save',signal:token.signal});
+     if(entered===null||!current(token))return;
+     chosen=withNativeSaveExtension(entered,extension);
+    }
     const c=await fileContext();if(!current(token)||!c.valid()||frame!==active)return;
     const p=c.path(chosen),format=nativeProjectFormat(p);claim(token,p);
     const manager=frame.contentWindow?.__CAD_APP?.projectManager;
