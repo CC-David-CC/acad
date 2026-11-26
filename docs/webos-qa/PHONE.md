@@ -48,3 +48,22 @@ at 820 × 1050 CSS pixels.
 - [File menu and compact controls](screenshots/s10-file-menu.png)
 - [Naming the native project](screenshots/s10-save-entry.png)
 - [Reopened project after saving the revised width](screenshots/s10-editable-project.png)
+
+## Workflow coverage
+
+| Workbench workflow | Galaxy S10+ portrait | Desktop Chromium |
+| --- | --- | --- |
+| Create a dimensioned rectangle | Pass | Pass |
+| Revise a saved rectangle and save in place | Pass | Pass |
+| Save and reopen the editable native archive | Pass | Pass |
+| Save and reopen the historical JSON project | Desktop check | Pass |
+| Extrude a rectangle, fit the solid and reopen the feature history | Desktop check | Pass |
+| Use camera presets and change displayed length units | Desktop check | Pass |
+| Step the operation history back and forward | Desktop check | Pass |
+| Edit sketches directly on the canvas with geometric constraints | Pending | Pending |
+
+The phone covered three of eight workflows. Desktop covered seven of eight.
+The hosted tests replayed the guest phone file cycle and desktop prism
+workflow. Desktop also opened the corresponding source and license list.
+The Mode menu displayed and applied both unit choices. Chromium logged
+invalid SVG size attributes for some of its icons.
